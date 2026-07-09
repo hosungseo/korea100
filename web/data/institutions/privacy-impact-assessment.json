@@ -6,7 +6,7 @@
  "priority": 10,
  "whyFirst": "공공기관 실무 수요가 있고 디지털 제도 축을 대표한다.",
  "asOfDate": "2026-07-01",
- "status": "canvas",
+ "status": "full",
  "canvas": {
   "purpose": "개인정보파일을 구축·운용·변경하기 전에 프라이버시 침해 위험요인을 미리 분석하고 개선방안을 도출한다. 사후 유출·오남용을 예방하고 시스템 설계 단계부터 개인정보 보호를 반영(privacy by design)하게 한다.",
   "stakeholders": "대상 공공기관(평가 의무자), 정보주체(개인정보 당사자), 개인정보보호위원회, 지정 평가기관(수행), 시스템 구축 사업자, 개인정보 보호책임자(CPO)",
@@ -80,6 +80,414 @@
  "fieldVerification": [
   "시행령 제35~38조 조항 배치 최신 개정 반영 재확인",
   "평가 결과 제출 후 위원회 검토·환류의 실제 운영",
-  "시스템 오픈 대비 평가 시점의 현장 관행"
- ]
+  "시스템 오픈 대비 평가 시점의 현장 관행",
+  "위원회 검토의견의 개선사항 반영·환류 실효성(운영 추정)",
+  "개선사항 미이행 시 후속 관리·재점검 실태(운영 추정)"
+ ],
+ "process": {
+  "institution_name": "개인정보 영향평가",
+  "law_name": "개인정보 보호법",
+  "lanes": [
+   "대상기관(공공기관)",
+   "지정 평가기관",
+   "개인정보보호위원회",
+   "정보시스템 부서",
+   "개인정보 보호책임자(CPO)"
+  ],
+  "stages": [
+   "G0 대상판단",
+   "G1 평가기관선정",
+   "G2 평가수행",
+   "G3 개선계획",
+   "G4 결과제출",
+   "G5 이행점검"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "영향평가 대상 여부 판단",
+    "lane": "대상기관(공공기관)",
+    "stage": "G0 대상판단",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "대상 공공기관의 장·CPO",
+    "action": "대상 여부 판정",
+    "condition": "민감·고유식별정보 5만명 이상 / 연계 50만명 이상 / 100만명 이상 파일 여부(시행령 제35조)",
+    "output_documents": [
+     "대상 판단 결과",
+     "개인정보파일 현황"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "개인정보 보호법",
+      "article": "제33조",
+      "text": "공공기관은 대통령령으로 정하는 개인정보파일 구축 전 영향평가를 하여야 한다."
+     },
+     {
+      "law": "개인정보 보호법 시행령",
+      "article": "제35조",
+      "text": "영향평가 대상 개인정보파일의 규모 요건을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "예산 확보·평가 계획 수립",
+    "lane": "대상기관(공공기관)",
+    "stage": "G0 대상판단",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "대상 공공기관",
+    "action": "예산 확보·과업 계획",
+    "output_documents": [
+     "영향평가 계획서",
+     "과업내용서"
+    ],
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "개인정보 보호법 시행령",
+      "article": "제35조, 제38조",
+      "text": "대상기관은 영향평가를 위한 계획을 수립하고 예산을 확보한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "평가기관 선정·계약",
+    "lane": "대상기관(공공기관)",
+    "stage": "G1 평가기관선정",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "대상 공공기관",
+    "receiver": "지정 평가기관",
+    "action": "지정 평가기관 선정·계약",
+    "output_documents": [
+     "용역 계약서",
+     "착수계"
+    ],
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "개인정보 보호법 시행령",
+      "article": "제37조",
+      "text": "영향평가는 보호위원회가 지정한 평가기관에 의뢰한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "착수·과업 협의",
+    "lane": "지정 평가기관",
+    "stage": "G1 평가기관선정",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "지정 평가기관",
+    "action": "착수·범위 협의",
+    "output_documents": [
+     "수행 계획서",
+     "평가 범위 협의결과"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "개인정보 영향평가에 관한 고시",
+      "article": "평가 수행절차 관련 조문",
+      "text": "평가기관은 대상 시스템과 평가 범위를 협의하여 수행계획을 수립한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "개인정보 흐름 분석",
+    "lane": "지정 평가기관",
+    "stage": "G2 평가수행",
+    "type": "task",
+    "status": "current",
+    "progress": 45,
+    "actor": "지정 평가기관",
+    "action": "개인정보 흐름 분석",
+    "output_documents": [
+     "개인정보 흐름표",
+     "흐름도"
+    ],
+    "blocker": "대상 시스템 개인정보 흐름 분석 진행 중",
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "개인정보 보호법 시행령",
+      "article": "제36조",
+      "text": "처리하는 개인정보의 종류·흐름 등 고려사항을 분석한다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "침해요인·위험 분석",
+    "lane": "지정 평가기관",
+    "stage": "G2 평가수행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지정 평가기관",
+    "action": "침해요인 분석",
+    "input_documents": [
+     "개인정보 흐름표"
+    ],
+    "output_documents": [
+     "침해요인 분석서"
+    ],
+    "confidence": 0.79,
+    "legal_basis": [
+     {
+      "law": "개인정보 보호법 시행령",
+      "article": "제36조",
+      "text": "개인정보 침해 가능성과 위험 요인을 분석한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "위험도 산정",
+    "lane": "지정 평가기관",
+    "stage": "G2 평가수행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지정 평가기관",
+    "action": "위험도 산정",
+    "output_documents": [
+     "위험도 산정표"
+    ],
+    "confidence": 0.78,
+    "legal_basis": [
+     {
+      "law": "개인정보 영향평가에 관한 고시",
+      "article": "위험도 평가기준 관련 조문",
+      "text": "침해요인별 위험도를 평가기준에 따라 산정한다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "개선방안 도출·개선계획 수립",
+    "lane": "개인정보 보호책임자(CPO)",
+    "stage": "G3 개선계획",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지정 평가기관·CPO",
+    "action": "개선방안 도출",
+    "input_documents": [
+     "위험도 산정표"
+    ],
+    "output_documents": [
+     "개선계획"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "개인정보 보호법",
+      "article": "제33조",
+      "text": "위험 요인에 대한 개선방안을 마련한다."
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "개선사항 보완·재검토",
+    "lane": "대상기관(공공기관)",
+    "stage": "G3 개선계획",
+    "type": "task",
+    "status": "loop",
+    "progress": 0,
+    "actor": "대상 공공기관·평가기관",
+    "action": "보완·재검토",
+    "input_documents": [
+     "보완 요구 사항"
+    ],
+    "output_documents": [
+     "보완 개선계획"
+    ],
+    "blocker": "위원회 보완 요구 시 회귀 단계",
+    "confidence": 0.76,
+    "legal_basis": [
+     {
+      "law": "개인정보 영향평가에 관한 고시",
+      "article": "평가서 보완 관련 조문",
+      "text": "검토 결과 보완이 필요하면 평가서를 보완하여 재작성한다."
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "영향평가서 작성",
+    "lane": "지정 평가기관",
+    "stage": "G3 개선계획",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지정 평가기관",
+    "action": "평가서 작성",
+    "output_documents": [
+     "개인정보 영향평가서"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "개인정보 영향평가에 관한 고시",
+      "article": "평가서 서식 관련 조문",
+      "text": "분석 결과와 개선계획을 담아 영향평가서를 작성한다."
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "평가 결과 제출",
+    "lane": "대상기관(공공기관)",
+    "stage": "G4 결과제출",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "대상 공공기관의 장",
+    "receiver": "개인정보보호위원회",
+    "action": "평가 결과 제출",
+    "input_documents": [
+     "개인정보 영향평가서"
+    ],
+    "output_documents": [
+     "결과 제출 공문"
+    ],
+    "deadline": "정보시스템 운영 개시 전(시행령)",
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "개인정보 보호법",
+      "article": "제33조제1항, 제33조제3항",
+      "text": "영향평가 결과를 시스템 운영 전에 보호위원회에 제출한다."
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "위원회 검토·의견 제시",
+    "lane": "개인정보보호위원회",
+    "stage": "G4 결과제출",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "개인정보보호위원회",
+    "action": "검토·의견 판단",
+    "condition": "개선사항 반영 충분 여부(보완 필요 시 회귀)",
+    "output_documents": [
+     "검토 의견서"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "개인정보 보호법",
+      "article": "제33조제3항",
+      "text": "보호위원회는 제출된 영향평가 결과에 의견을 제시할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "개선사항 시스템 반영",
+    "lane": "정보시스템 부서",
+    "stage": "G5 이행점검",
+    "type": "task",
+    "status": "risk",
+    "progress": 0,
+    "actor": "정보시스템 부서·구축 사업자",
+    "action": "개선사항 시스템 반영",
+    "input_documents": [
+     "검토 의견서",
+     "개선계획"
+    ],
+    "output_documents": [
+     "개선 반영 결과"
+    ],
+    "blocker": "시스템 오픈 일정에 쫓겨 사전평가가 사후 절차로 밀리는 관행(운영 추정)",
+    "confidence": 0.74,
+    "legal_basis": [
+     {
+      "law": "개인정보 보호법",
+      "article": "제33조",
+      "text": "영향평가 결과의 개선사항을 정보시스템에 반영한다."
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "이행점검·반영확인",
+    "lane": "개인정보 보호책임자(CPO)",
+    "stage": "G5 이행점검",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "CPO·대상 공공기관",
+    "action": "이행점검·반영 확인",
+    "output_documents": [
+     "이행점검 확인서"
+    ],
+    "confidence": 0.78,
+    "legal_basis": [
+     {
+      "law": "개인정보 영향평가에 관한 고시",
+      "article": "이행점검 관련 조문",
+      "text": "개선사항의 이행 여부를 점검하고 반영 결과를 확인한다."
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "미이행 관리·개선권고",
+    "lane": "개인정보보호위원회",
+    "stage": "G5 이행점검",
+    "type": "task",
+    "status": "risk",
+    "progress": 0,
+    "actor": "개인정보보호위원회",
+    "receiver": "대상 공공기관",
+    "action": "미이행 관리·개선권고",
+    "output_documents": [
+     "개선 권고"
+    ],
+    "blocker": "개선사항 미이행 방치 위험(운영 추정)",
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "개인정보 보호법",
+      "article": "제33조, 제61조",
+      "text": "보호위원회는 개선이 필요한 사항에 대해 개선을 권고할 수 있다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   { "id": "E01", "source": "P01", "target": "P02", "type": "sequence", "label": "대상 해당" },
+   { "id": "E02", "source": "P02", "target": "P03", "type": "sequence", "label": null },
+   { "id": "E03", "source": "P03", "target": "P04", "type": "sequence", "label": null },
+   { "id": "E04", "source": "P04", "target": "P05", "type": "sequence", "label": null },
+   { "id": "E05", "source": "P05", "target": "P06", "type": "sequence", "label": null },
+   { "id": "E06", "source": "P06", "target": "P07", "type": "sequence", "label": null },
+   { "id": "E07", "source": "P07", "target": "P08", "type": "sequence", "label": null },
+   { "id": "E08", "source": "P08", "target": "P10", "type": "sequence", "label": null },
+   { "id": "E09", "source": "P12", "target": "P13", "type": "sequence", "label": "검토의견 반영" },
+   { "id": "E10", "source": "P13", "target": "P14", "type": "sequence", "label": null },
+   { "id": "M01", "source": "P10", "target": "P11", "type": "message", "label": "평가서 인계" },
+   { "id": "M02", "source": "P11", "target": "P12", "type": "message", "label": "영향평가서 제출(시스템 오픈 전)" },
+   { "id": "M03", "source": "P12", "target": "P14", "type": "message", "label": "검토의견 통보" },
+   { "id": "M04", "source": "P14", "target": "P15", "type": "message", "label": "미이행 사항 통보" },
+   { "id": "L01", "source": "P12", "target": "P09", "type": "loop", "label": "개선 보완 요구" },
+   { "id": "L02", "source": "P09", "target": "P10", "type": "loop", "label": "보완 반영·재작성" }
+  ],
+  "warnings": []
+ }
 }

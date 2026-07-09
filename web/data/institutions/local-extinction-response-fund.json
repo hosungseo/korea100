@@ -6,7 +6,7 @@
  "priority": 4,
  "whyFirst": "지방재정365·지방의회 회의록 데이터 작업과 직접 연결되고, 재정배분형 제도의 기준 사례가 된다.",
  "asOfDate": "2026-07-01",
- "status": "canvas",
+ "status": "full",
  "canvas": {
   "purpose": "인구감소로 소멸 위기에 놓인 지역에 안정적 재원을 보장하여, 지자체 주도의 인구활력 사업(정주여건·일자리·생활인구)을 지원한다.",
   "stakeholders": "인구감소지역 89곳·관심지역 18곳(기초계정 배분 대상), 시·도(광역계정), 주민(사업 수혜), 한국지방재정공제회(기금 관리·조합)",
@@ -82,6 +82,463 @@
  ],
  "fieldVerification": [
   "평가단 구성과 평가 절차의 실제 운영",
-  "배분등급별 금액 격차의 연도별 변화"
- ]
+  "배분등급별 금액 격차의 연도별 변화",
+  "배분등급 산식과 등급별 금액 격차"
+ ],
+ "process": {
+  "lanes": [
+   "기초 지자체(시·군·구)",
+   "광역 시·도",
+   "지방의회",
+   "한국지방재정공제회(기금관리)",
+   "평가단(민간 전문가)",
+   "행정안전부"
+  ],
+  "stages": [
+   "G0 배분기준 확정",
+   "G1 투자계획 수립",
+   "G2 제출·접수",
+   "G3 투자계획 평가",
+   "G4 배분 결정·통보",
+   "G5 예산 편성·의회 심의",
+   "G6 집행",
+   "G7 성과관리·환류"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "연도 배분기준·평가지침 마련",
+    "lane": "행정안전부",
+    "stage": "G0 배분기준 확정",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "행정안전부",
+    "action": "배분기준 수립",
+    "output_documents": [
+     "기금 배분기준",
+     "투자계획 평가지침"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지방자치단체 기금관리기본법",
+      "article": "제17조의2"
+     },
+     {
+      "law": "기금 운용 관련 행정안전부 지침",
+      "article": "연도별 배분기준"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "기초계정 투자계획 수립",
+    "lane": "기초 지자체(시·군·구)",
+    "stage": "G1 투자계획 수립",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "인구감소지역·관심지역 시·군·구",
+    "action": "투자계획 작성",
+    "output_documents": [
+     "연도 투자계획서",
+     "세부사업 계획"
+    ],
+    "blocker": "평가 대비 단년도 계획 관행으로 중장기 전략사업 편성이 어렵다 (현장 검증 필요)",
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "지방자치단체 기금관리기본법",
+      "article": "제17조의2"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "광역계정 투자계획 수립",
+    "lane": "광역 시·도",
+    "stage": "G1 투자계획 수립",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "시·도",
+    "output_documents": [
+     "광역계정 투자계획서"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "지방자치단체 기금관리기본법",
+      "article": "제17조의2"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "투자계획 제출",
+    "lane": "기초 지자체(시·군·구)",
+    "stage": "G2 제출·접수",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "지자체",
+    "action": "기한 내 제출",
+    "output_documents": [
+     "제출 공문",
+     "투자계획서"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "지방자치단체 기금관리기본법 시행령",
+      "article": "기금 배분 절차"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "접수·형식 검토",
+    "lane": "한국지방재정공제회(기금관리)",
+    "stage": "G2 제출·접수",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "한국지방재정공제회",
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "지방자치단체 기금관리기본법",
+      "article": "제17조의2(조합에 관리·운용 위탁)"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "평가단 구성",
+    "lane": "평가단(민간 전문가)",
+    "stage": "G3 투자계획 평가",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "공제회·행안부",
+    "blocker": "평가단 구성·운영의 세부는 공개자료가 제한적이다 (현장 검증 필요)",
+    "confidence": 0.7,
+    "legal_basis": [
+     {
+      "law": "기금 운용 관련 행정안전부 지침",
+      "article": "평가단 운영"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "투자계획 평가(서면·발표)",
+    "lane": "평가단(민간 전문가)",
+    "stage": "G3 투자계획 평가",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "평가단",
+    "action": "사업 타당성·전략성 평가",
+    "output_documents": [
+     "평가 결과서"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "기금 운용 관련 행정안전부 지침",
+      "article": "투자계획 평가"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "보완 요구·수정 제출",
+    "lane": "기초 지자체(시·군·구)",
+    "stage": "G3 투자계획 평가",
+    "type": "task",
+    "status": "loop",
+    "progress": 0,
+    "actor": "지자체",
+    "action": "평가 지적사항 반영",
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "기금 운용 관련 행정안전부 지침",
+      "article": "평가 절차"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "배분등급·금액 결정",
+    "lane": "행정안전부",
+    "stage": "G4 배분 결정·통보",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "행정안전부",
+    "action": "평가등급별 차등 배분",
+    "output_documents": [
+     "배분 결정 내역"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "지방자치단체 기금관리기본법",
+      "article": "제17조의2"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "배분 통보",
+    "lane": "한국지방재정공제회(기금관리)",
+    "stage": "G4 배분 결정·통보",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "공제회",
+    "output_documents": [
+     "배분 통보서"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "지방자치단체 기금관리기본법 시행령",
+      "article": "기금 교부"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "기금 세입 편성·예산안 반영",
+    "lane": "기초 지자체(시·군·구)",
+    "stage": "G5 예산 편성·의회 심의",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지자체 예산부서",
+    "output_documents": [
+     "예산안(기금 재원 표시)"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지방재정법",
+      "article": "제36조(예산 편성)"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "지방의회 예산 심의·의결",
+    "lane": "지방의회",
+    "stage": "G5 예산 편성·의회 심의",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시·군·구의회",
+    "action": "기금 사업 심의",
+    "blocker": "의회 회의록에서 기금 집행률이 반복 질타 대상이다 — 심의 단계에서 사업 조정 압력",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지방자치법",
+      "article": "제47조(의결사항)"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "세부사업 집행",
+    "lane": "기초 지자체(시·군·구)",
+    "stage": "G6 집행",
+    "type": "task",
+    "status": "risk",
+    "progress": 0,
+    "actor": "사업부서",
+    "action": "계약·보조·시설 조성",
+    "output_documents": [
+     "집행 실적(지방재정365 공개)"
+    ],
+    "blocker": "부지·인허가가 필요한 하드웨어형 사업 집중으로 집행률 부진이 반복된다",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지방재정법",
+      "article": "세출 집행"
+     },
+     {
+      "law": "지방자치단체 기금관리기본법",
+      "article": "제17조의2"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "집행실적 보고·성과평가",
+    "lane": "한국지방재정공제회(기금관리)",
+    "stage": "G7 성과관리·환류",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "공제회·행안부",
+    "output_documents": [
+     "집행실적 보고",
+     "성과평가 결과"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "기금 운용 관련 행정안전부 지침",
+      "article": "성과관리"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "차년도 배분 반영",
+    "lane": "행정안전부",
+    "stage": "G7 성과관리·환류",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "행정안전부",
+    "action": "성과·집행률의 차년도 배분 환류",
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "기금 운용 관련 행정안전부 지침",
+      "article": "배분기준"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P01",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P02",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P04",
+    "target": "P05",
+    "type": "message",
+    "label": "투자계획 제출"
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L01",
+    "source": "P07",
+    "target": "P08",
+    "type": "loop",
+    "label": "보완 요구"
+   },
+   {
+    "id": "L02",
+    "source": "P08",
+    "target": "P07",
+    "type": "loop",
+    "label": "수정 제출"
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M02",
+    "source": "P10",
+    "target": "P11",
+    "type": "message",
+    "label": "배분 통보"
+   },
+   {
+    "id": "E09",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": "예산 확정"
+   },
+   {
+    "id": "M03",
+    "source": "P13",
+    "target": "P14",
+    "type": "message",
+    "label": "집행실적 보고"
+   },
+   {
+    "id": "E11",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L03",
+    "source": "P15",
+    "target": "P01",
+    "type": "loop",
+    "label": "성과 환류(차년도)"
+   }
+  ],
+  "warnings": [
+   "평가단 구성·평가 절차 세부와 배분등급 산식은 공개자료가 제한적 — 현장 검증 필요"
+  ]
+ }
 }

@@ -6,7 +6,7 @@
  "priority": 6,
  "whyFirst": "처분·청구·심리·재결 구조를 보여주는 대표 권리구제 제도다.",
  "asOfDate": "2026-07-01",
- "status": "canvas",
+ "status": "full",
  "canvas": {
   "purpose": "행정청의 위법·부당한 처분 또는 부작위로 침해된 국민의 권리를 간이·신속하게 구제한다. 행정소송보다 비용이 적고 빠르며, 위법뿐 아니라 '부당'까지 다툴 수 있는 점이 특징이다.",
   "stakeholders": "청구인(처분의 상대방 등 이해관계인), 피청구인(처분을 한 행정청), 행정심판위원회, 이해관계 있는 제3자·참가인",
@@ -80,6 +80,562 @@
  "fieldVerification": [
   "행정기본법 제36조 이의신청 조문번호 최신 재확인",
   "위원회별 평균 재결기간과 인용률",
-  "집행정지 인용 기준의 실제 운영"
- ]
+  "집행정지 인용 기준의 실제 운영",
+  "사건 증가로 재결이 법정기간(60일+30일)을 넘겨 지연되는 비율(운영 추정)",
+  "피청구인 답변서 실제 제출 소요기간(운영 추정)"
+ ],
+ "process": {
+  "institution_name": "행정심판 제도",
+  "law_name": "행정심판법",
+  "lanes": [
+   "청구인",
+   "피청구인(처분청)",
+   "행정심판위원회(사무국)",
+   "위원회 회의",
+   "법원(후속)",
+   "정보시스템"
+  ],
+  "stages": [
+   "G0 처분·청구요건",
+   "G1 심판청구",
+   "G2 답변서·보정",
+   "G3 심리",
+   "G4 재결",
+   "G5 이행·후속"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "처분·부작위 발생, 불복방법 고지",
+    "lane": "피청구인(처분청)",
+    "stage": "G0 처분·청구요건",
+    "type": "notice",
+    "status": "done",
+    "progress": 100,
+    "actor": "처분청",
+    "receiver": "청구인",
+    "action": "처분·고지",
+    "output_documents": [
+     "처분서",
+     "불복방법 고지"
+    ],
+    "deadline": "처분 시",
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "행정심판법",
+      "article": "제58조",
+      "text": "행정청은 처분을 할 때 심판청구 가능 여부·절차·청구기간을 상대방에게 고지하여야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "청구요건·청구기간 검토",
+    "lane": "청구인",
+    "stage": "G0 처분·청구요건",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "청구인",
+    "action": "요건 확인",
+    "condition": "처분성·청구인 적격·청구기간(안 날 90일, 있은 날 180일) 충족 여부",
+    "output_documents": [
+     "청구요건 검토메모"
+    ],
+    "deadline": "안 날 90일·있은 날 180일 이내",
+    "confidence": 0.86,
+    "legal_basis": [
+     {
+      "law": "행정심판법",
+      "article": "제27조",
+      "text": "심판청구는 처분이 있음을 안 날부터 90일, 처분이 있은 날부터 180일 이내에 제기하여야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "심판청구서 작성·제출",
+    "lane": "청구인",
+    "stage": "G1 심판청구",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "청구인",
+    "receiver": "행정심판위원회",
+    "action": "청구서 제출",
+    "output_documents": [
+     "행정심판 청구서"
+    ],
+    "deadline": "청구기간 내",
+    "confidence": 0.87,
+    "legal_basis": [
+     {
+      "law": "행정심판법",
+      "article": "제23조",
+      "text": "청구인은 심판청구서를 피청구인 또는 행정심판위원회에 제출한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "청구요건 심사·각하 판단",
+    "lane": "행정심판위원회(사무국)",
+    "stage": "G1 심판청구",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "행정심판위원회 사무국",
+    "action": "요건 심사",
+    "condition": "청구요건 충족 여부(부적법·보정 불가 시 각하)",
+    "input_documents": [
+     "행정심판 청구서"
+    ],
+    "output_documents": [
+     "요건심사 결과",
+     "보정요구서(해당 시)"
+    ],
+    "deadline": "접수 후 지체 없이",
+    "confidence": 0.83,
+    "legal_basis": [
+     {
+      "law": "행정심판법",
+      "article": "제43조제1항",
+      "text": "심판청구가 부적법하면 위원회는 그 심판청구를 각하한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "집행정지·임시처분 신청",
+    "lane": "청구인",
+    "stage": "G2 답변서·보정",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "청구인",
+    "receiver": "행정심판위원회",
+    "action": "집행정지 신청",
+    "output_documents": [
+     "집행정지 신청서",
+     "임시처분 신청서(해당 시)"
+    ],
+    "deadline": "재결 전까지",
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "행정심판법",
+      "article": "제30조·제31조",
+      "text": "위원회는 처분의 집행 등으로 생길 중대한 손해를 예방하기 위해 집행정지 또는 임시처분을 결정할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "집행정지·임시처분 결정",
+    "lane": "위원회 회의",
+    "stage": "G2 답변서·보정",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "행정심판위원회",
+    "action": "집행정지 결정",
+    "condition": "회복 곤란한 손해·긴급한 필요 등 요건 충족 여부",
+    "input_documents": [
+     "집행정지 신청서"
+    ],
+    "output_documents": [
+     "집행정지 결정문"
+    ],
+    "deadline": "신청 후 신속히",
+    "blocker": "집행정지 미인용 시 심리 중 처분이 그대로 집행된다",
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "행정심판법",
+      "article": "제30조",
+      "text": "위원회는 필요하다고 인정하면 처분의 효력·집행·절차의 속행을 정지할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "피청구인 답변서 제출",
+    "lane": "피청구인(처분청)",
+    "stage": "G2 답변서·보정",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "처분청",
+    "receiver": "행정심판위원회",
+    "action": "답변서 제출",
+    "input_documents": [
+     "행정심판 청구서 부본"
+    ],
+    "output_documents": [
+     "답변서",
+     "처분 관계서류"
+    ],
+    "deadline": "청구서 부본 받은 날부터 10일 이내",
+    "blocker": "답변서 제출이 지연되는 경우가 있다(운영 추정)",
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "행정심판법",
+      "article": "제24조",
+      "text": "피청구인은 청구서를 접수하거나 송부받으면 답변서를 위원회에 제출한다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "보정 요구·보정",
+    "lane": "행정심판위원회(사무국)",
+    "stage": "G2 답변서·보정",
+    "type": "task",
+    "status": "loop",
+    "progress": 100,
+    "actor": "사무국·청구인",
+    "action": "보정",
+    "input_documents": [
+     "보정요구서"
+    ],
+    "output_documents": [
+     "보정서"
+    ],
+    "deadline": "위원회가 정한 상당한 기간",
+    "blocker": "요건 흠결 보정 회귀 단계",
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "행정심판법",
+      "article": "제32조",
+      "text": "위원회는 심판청구가 부적법하나 보정할 수 있다고 인정하면 기간을 정하여 보정을 요구할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "서면·구술 심리",
+    "lane": "위원회 회의",
+    "stage": "G3 심리",
+    "type": "task",
+    "status": "current",
+    "progress": 50,
+    "actor": "행정심판위원회",
+    "action": "심리",
+    "input_documents": [
+     "청구서",
+     "답변서",
+     "보충서면"
+    ],
+    "output_documents": [
+     "심리조서"
+    ],
+    "deadline": "재결기간 내",
+    "blocker": "구술심리 기일 조율 중",
+    "confidence": 0.83,
+    "legal_basis": [
+     {
+      "law": "행정심판법",
+      "article": "제40조",
+      "text": "심리는 서면심리를 원칙으로 하되, 당사자 신청이나 위원회 직권으로 구술심리를 할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "증거조사·보충서면 제출",
+    "lane": "청구인",
+    "stage": "G3 심리",
+    "type": "task",
+    "status": "risk",
+    "progress": 30,
+    "actor": "청구인·피청구인",
+    "action": "증거조사·주장 보충",
+    "output_documents": [
+     "증거자료",
+     "보충서면"
+    ],
+    "deadline": "심리 종결 전",
+    "blocker": "증거조사·감정 등으로 심리가 장기화되는 경우가 있다(운영 추정)",
+    "confidence": 0.79,
+    "legal_basis": [
+     {
+      "law": "행정심판법",
+      "article": "제36조",
+      "text": "위원회는 사건 심리를 위해 필요하면 당사자 신청 또는 직권으로 증거조사를 할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "재결(인용·기각·각하)",
+    "lane": "위원회 회의",
+    "stage": "G4 재결",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "행정심판위원회",
+    "action": "재결",
+    "condition": "인용(취소·변경·의무이행)·기각·각하 판단",
+    "input_documents": [
+     "심리조서",
+     "증거자료"
+    ],
+    "output_documents": [
+     "재결서"
+    ],
+    "deadline": "청구 받은 날부터 60일(부득이 시 30일 연장)",
+    "confidence": 0.84,
+    "legal_basis": [
+     {
+      "law": "행정심판법",
+      "article": "제43조·제45조",
+      "text": "위원회는 재결을 하고, 재결은 청구를 받은 날부터 60일 이내에 하되 30일 범위에서 연장할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "재결서 송달",
+    "lane": "행정심판위원회(사무국)",
+    "stage": "G4 재결",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사무국",
+    "receiver": "청구인·피청구인",
+    "action": "재결서 송달",
+    "output_documents": [
+     "재결서 정본"
+    ],
+    "deadline": "재결 후 지체 없이",
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "행정심판법",
+      "article": "제48조",
+      "text": "위원회는 지체 없이 당사자에게 재결서의 정본을 송달한다."
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "재결 기속력에 따른 처분청 이행",
+    "lane": "피청구인(처분청)",
+    "stage": "G5 이행·후속",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "처분청",
+    "action": "재결 이행",
+    "input_documents": [
+     "재결서 정본"
+    ],
+    "output_documents": [
+     "이행결과 통보"
+    ],
+    "deadline": "재결 취지에 따라 지체 없이",
+    "confidence": 0.83,
+    "legal_basis": [
+     {
+      "law": "행정심판법",
+      "article": "제49조",
+      "text": "인용 재결은 피청구인과 관계 행정청을 기속하며, 처분청은 재결 취지에 따라 처분하여야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "재처분·후속 관리",
+    "lane": "피청구인(처분청)",
+    "stage": "G5 이행·후속",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "처분청",
+    "action": "재처분",
+    "output_documents": [
+     "재처분 결과"
+    ],
+    "deadline": "재결 취지에 따라",
+    "blocker": "기속력에도 처분청이 유사 처분을 반복하는 경우가 있다",
+    "confidence": 0.78,
+    "legal_basis": [
+     {
+      "law": "행정심판법",
+      "article": "제49조제2항·제3항",
+      "text": "당사자 신청을 거부하거나 부작위한 처분이 취소·확인되면 처분청은 재결 취지에 따라 다시 처분하여야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "행정소송 제기",
+    "lane": "법원(후속)",
+    "stage": "G5 이행·후속",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "청구인·법원",
+    "action": "행정소송",
+    "output_documents": [
+     "소장",
+     "판결"
+    ],
+    "deadline": "재결서 받은 날부터 90일 이내",
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "행정소송법",
+      "article": "제18조·제20조",
+      "text": "재결에 불복하는 자는 재결서를 받은 날부터 90일 이내에 취소소송 등 행정소송을 제기할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "S01",
+    "name": "온라인행정심판 진행조회·재결서 수령",
+    "lane": "정보시스템",
+    "stage": "G3 심리",
+    "type": "system",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "온라인행정심판(simpan.go.kr)",
+    "action": "진행조회·전자송달",
+    "input_documents": [
+     "청구서",
+     "재결서"
+    ],
+    "output_documents": [
+     "진행상황 조회",
+     "전자 재결서"
+    ],
+    "confidence": 0.74,
+    "legal_basis": [
+     {
+      "law": "행정심판법",
+      "article": "제52조",
+      "text": "전자정보처리조직을 통하여 심판청구·서류 제출과 송달 등을 할 수 있다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": "청구기간 내"
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": "적법 수리"
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P09",
+    "target": "P11",
+    "type": "sequence",
+    "label": "심리 종결"
+   },
+   {
+    "id": "E09",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": "인용"
+   },
+   {
+    "id": "E11",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P09",
+    "target": "P10",
+    "type": "message",
+    "label": "증거조사 요구"
+   },
+   {
+    "id": "M02",
+    "source": "P03",
+    "target": "S01",
+    "type": "message",
+    "label": "온라인 접수"
+   },
+   {
+    "id": "M03",
+    "source": "P12",
+    "target": "P15",
+    "type": "message",
+    "label": "재결 불복 안내"
+   },
+   {
+    "id": "L01",
+    "source": "P04",
+    "target": "P08",
+    "type": "loop",
+    "label": "보정 요구"
+   },
+   {
+    "id": "L02",
+    "source": "P08",
+    "target": "P04",
+    "type": "loop",
+    "label": "보정 완료 재심사"
+   }
+  ],
+  "warnings": []
+ }
 }

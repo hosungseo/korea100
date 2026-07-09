@@ -6,7 +6,7 @@
  "priority": 7,
  "whyFirst": "선정, 급여, 지자체 집행, 사각지대 논의를 한 장에 담기 좋다.",
  "asOfDate": "2026-07-01",
- "status": "canvas",
+ "status": "full",
  "canvas": {
   "purpose": "생활이 어려운 국민에게 필요한 급여를 제공해 최저생활을 보장하고 자립·자활을 지원한다. 급여별로 선정기준(기준 중위소득 대비 비율)을 달리하는 맞춤형 급여 체계로 운영된다.",
   "stakeholders": "수급(권)자 저소득 가구, 부양의무자, 신청자, 보건복지부·국토교통부·교육부(급여별 소관), 시·군·구 및 읍·면·동(집행), 중앙·지방생활보장위원회",
@@ -85,6 +85,602 @@
  "fieldVerification": [
   "제20조의2(기준 중위소득 심의) 조문번호 최신 재확인",
   "급여별 부양의무자 기준 적용 범위의 현행 기준",
-  "연도별 기준 중위소득·선정기준 수치"
- ]
+  "연도별 기준 중위소득·선정기준 수치",
+  "통합조사 실제 소요기간과 30일(연장 60일) 준수율(운영 추정)",
+  "확인조사로 인한 급여 변동·중지 발생 빈도(운영 추정)"
+ ],
+ "process": {
+  "institution_name": "국민기초생활보장 제도",
+  "law_name": "국민기초생활 보장법",
+  "lanes": [
+   "신청자(수급희망자)",
+   "읍면동(접수·상담)",
+   "시군구(통합조사·보장결정)",
+   "사회보장정보원",
+   "지방생활보장위원회",
+   "보건복지부(기준 고시)"
+  ],
+  "stages": [
+   "G0 기준 고시",
+   "G1 신청·접수",
+   "G2 조사",
+   "G3 보장 결정",
+   "G4 급여 지급",
+   "G5 확인조사·변동",
+   "G6 이의신청"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "기준 중위소득·급여별 선정기준 고시",
+    "lane": "보건복지부(기준 고시)",
+    "stage": "G0 기준 고시",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "보건복지부장관",
+    "action": "심의·고시",
+    "output_documents": [
+     "기준 중위소득 고시",
+     "급여별 선정기준·최저보장수준"
+    ],
+    "deadline": "매년 8월 1일까지 다음연도 기준 고시",
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "국민기초생활 보장법",
+      "article": "제6조·제20조의2",
+      "text": "보건복지부장관은 중앙생활보장위원회 심의를 거쳐 기준 중위소득과 급여별 선정기준·최저보장수준을 정하여 고시한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "급여 신청·상담",
+    "lane": "신청자(수급희망자)",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "본인·가구원·관계인",
+    "receiver": "읍면동",
+    "action": "급여 신청",
+    "output_documents": [
+     "급여 신청서"
+    ],
+    "deadline": "상시 신청",
+    "confidence": 0.86,
+    "legal_basis": [
+     {
+      "law": "국민기초생활 보장법",
+      "article": "제21조",
+      "text": "수급권자와 그 친족 등은 관할 시장·군수·구청장(읍·면·동 경유)에게 급여를 신청할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "신청 접수·초기상담·서식 안내",
+    "lane": "읍면동(접수·상담)",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "읍·면·동 주민센터",
+    "action": "접수·상담",
+    "input_documents": [
+     "급여 신청서"
+    ],
+    "output_documents": [
+     "접수증",
+     "구비서류 안내"
+    ],
+    "deadline": "신청 당일 접수",
+    "confidence": 0.84,
+    "legal_basis": [
+     {
+      "law": "국민기초생활 보장법",
+      "article": "제21조제2항",
+      "text": "신청을 받은 읍·면·동은 신청서를 접수하고 급여 종류와 절차를 안내한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "금융정보 제공 동의·구비서류 접수",
+    "lane": "읍면동(접수·상담)",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "읍·면·동",
+    "receiver": "시군구",
+    "action": "동의서·서류 접수·이송",
+    "input_documents": [
+     "금융정보 제공 동의서",
+     "소득·재산 신고서"
+    ],
+    "output_documents": [
+     "조사 요청 자료"
+    ],
+    "deadline": "접수 후 지체 없이 이송",
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "국민기초생활 보장법",
+      "article": "제21조제3항",
+      "text": "신청자는 금융정보 등 제공에 동의하여야 하며, 읍·면·동은 관련 서류를 보장기관에 이송한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "공적자료·금융재산 조회(행복이음)",
+    "lane": "사회보장정보원",
+    "stage": "G2 조사",
+    "type": "system",
+    "status": "current",
+    "progress": 55,
+    "actor": "사회보장정보원(행복e음)",
+    "action": "소득·재산 전산조회",
+    "input_documents": [
+     "금융정보 제공 동의서",
+     "조사 요청 자료"
+    ],
+    "output_documents": [
+     "공적자료 조회결과",
+     "금융재산 조회결과"
+    ],
+    "deadline": "조사기간 내 회신",
+    "blocker": "금융·공적자료 회신 대기 중",
+    "confidence": 0.78,
+    "legal_basis": [
+     {
+      "law": "국민기초생활 보장법",
+      "article": "제22조·제23조",
+      "text": "보장기관은 소득·재산 등을 조사하며, 사회보장정보시스템을 통해 공적자료·금융정보를 조회할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "소득인정액 산정(판정)",
+    "lane": "시군구(통합조사·보장결정)",
+    "stage": "G2 조사",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시·군·구 통합조사관리팀",
+    "action": "소득인정액 판정",
+    "condition": "소득평가액+재산의 소득환산액이 급여별 선정기준 이하인지 여부",
+    "input_documents": [
+     "공적자료 조회결과",
+     "소득·재산 신고서"
+    ],
+    "output_documents": [
+     "소득인정액 산정 결과"
+    ],
+    "deadline": "보장결정 기한 내",
+    "blocker": "소득·재산 환산 방식이 복잡해 산정·탈락 혼란이 생긴다",
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "국민기초생활 보장법",
+      "article": "제2조·제6조의3",
+      "text": "소득인정액은 개별가구의 소득평가액과 재산의 소득환산액을 합산하여 산정한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "부양의무자 기준 적용 검토",
+    "lane": "시군구(통합조사·보장결정)",
+    "stage": "G2 조사",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시·군·구",
+    "action": "부양의무자 기준 검토",
+    "condition": "급여 종류별 부양의무자 기준 존치 여부·부양능력 판정",
+    "output_documents": [
+     "부양의무자 기준 검토결과"
+    ],
+    "deadline": "보장결정 기한 내",
+    "blocker": "부양의무자 기준이 대부분 완화·폐지됐으나 의료급여 등 일부에 남아 사각지대가 발생한다(제도 축소 경과)",
+    "confidence": 0.76,
+    "legal_basis": [
+     {
+      "law": "국민기초생활 보장법",
+      "article": "제8조의2",
+      "text": "부양의무자의 부양능력 등을 고려하되, 급여별로 부양의무자 기준의 적용 범위가 단계적으로 완화·폐지되어 왔다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "통합조사(방문·실태확인)",
+    "lane": "시군구(통합조사·보장결정)",
+    "stage": "G2 조사",
+    "type": "task",
+    "status": "risk",
+    "progress": 20,
+    "actor": "시·군·구 통합조사팀",
+    "action": "방문·실태조사",
+    "output_documents": [
+     "통합조사표",
+     "실태확인 결과"
+    ],
+    "deadline": "보장결정 기한 내",
+    "blocker": "방문·실태조사 물량으로 조사가 지연되는 경우가 있다(운영 추정)",
+    "confidence": 0.77,
+    "legal_basis": [
+     {
+      "law": "국민기초생활 보장법",
+      "article": "제22조",
+      "text": "보장기관은 급여 신청이 있는 경우 소득·재산·근로능력 등을 조사하며 필요하면 현지조사를 한다."
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "보장 결정(급여종류·금액)",
+    "lane": "시군구(통합조사·보장결정)",
+    "stage": "G3 보장 결정",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시장·군수·구청장",
+    "action": "수급 결정",
+    "condition": "급여별 선정기준 대비 소득인정액·부양의무자 판정 종합",
+    "input_documents": [
+     "소득인정액 산정 결과",
+     "통합조사표"
+    ],
+    "output_documents": [
+     "보장(급여) 결정 내용"
+    ],
+    "deadline": "신청일부터 30일(부득이 시 60일) 이내",
+    "confidence": 0.83,
+    "legal_basis": [
+     {
+      "law": "국민기초생활 보장법",
+      "article": "제26조",
+      "text": "보장기관은 신청일부터 30일 이내에 급여 실시 여부와 내용을 결정하되, 부득이한 경우 60일 이내로 연장할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "지방생활보장위원회 심의(필요시)",
+    "lane": "지방생활보장위원회",
+    "stage": "G3 보장 결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지방생활보장위원회",
+    "action": "심의·의결",
+    "input_documents": [
+     "보장 결정 안건"
+    ],
+    "output_documents": [
+     "심의결과"
+    ],
+    "deadline": "결정 전 심의",
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "국민기초생활 보장법",
+      "article": "제20조",
+      "text": "생활보장사업의 기획·조사·실시 등에 관한 사항을 심의·의결하기 위하여 지방생활보장위원회를 둔다."
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "결정 통지",
+    "lane": "시군구(통합조사·보장결정)",
+    "stage": "G3 보장 결정",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시·군·구",
+    "receiver": "신청자",
+    "action": "결정 통지",
+    "output_documents": [
+     "급여 결정 통지서",
+     "이의신청 방법 안내"
+    ],
+    "deadline": "결정 후 지체 없이(제26조 기한 내)",
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "국민기초생활 보장법",
+      "article": "제26조제2항",
+      "text": "보장기관은 급여 실시 여부와 내용을 결정하면 그 이유를 구체적으로 밝혀 신청인에게 서면으로 통지한다."
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "급여 지급(생계·의료·주거·교육)",
+    "lane": "시군구(통합조사·보장결정)",
+    "stage": "G4 급여 지급",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시·군·구",
+    "receiver": "수급자",
+    "action": "급여 지급",
+    "output_documents": [
+     "생계급여 계좌입금",
+     "의료급여증",
+     "주거·교육급여 지급"
+    ],
+    "deadline": "매월 정기 지급",
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "국민기초생활 보장법",
+      "article": "제27조",
+      "text": "급여는 결정된 바에 따라 생계·의료·주거·교육급여 등으로 실시한다."
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "자활사업 참여·조건 부과",
+    "lane": "읍면동(접수·상담)",
+    "stage": "G4 급여 지급",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "읍·면·동·자활센터",
+    "receiver": "조건부수급자",
+    "action": "자활 조건 부과",
+    "output_documents": [
+     "자활사업 참여계획",
+     "조건 부과 통지"
+    ],
+    "deadline": "결정 후 자활계획 수립 시",
+    "confidence": 0.76,
+    "legal_basis": [
+     {
+      "law": "국민기초생활 보장법",
+      "article": "제9조제5항·제15조",
+      "text": "근로능력이 있는 수급자에게는 자활에 필요한 사업에 참여할 것을 조건으로 생계급여를 실시할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "정기·수시 확인조사",
+    "lane": "시군구(통합조사·보장결정)",
+    "stage": "G5 확인조사·변동",
+    "type": "task",
+    "status": "loop",
+    "progress": 0,
+    "actor": "시·군·구·사회보장정보원",
+    "action": "확인조사",
+    "output_documents": [
+     "확인조사 결과",
+     "변동 통보"
+    ],
+    "deadline": "정기(연 1~2회)·수시",
+    "blocker": "소득·재산 변동 확인 시 재산정 회귀 단계",
+    "confidence": 0.78,
+    "legal_basis": [
+     {
+      "law": "국민기초생활 보장법",
+      "article": "제23조",
+      "text": "보장기관은 수급자의 소득·재산 등 급여 요건의 변동을 확인하기 위하여 정기·수시로 확인조사를 한다."
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "자격·급여 변동 처리",
+    "lane": "시군구(통합조사·보장결정)",
+    "stage": "G5 확인조사·변동",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시·군·구",
+    "action": "급여 변경·중지 결정",
+    "condition": "소득인정액 변동에 따른 급여 변경·중지·환수 여부",
+    "input_documents": [
+     "확인조사 결과"
+    ],
+    "output_documents": [
+     "급여 변경·중지 통지",
+     "환수 결정(해당 시)"
+    ],
+    "deadline": "변동 확인 후 지체 없이",
+    "confidence": 0.79,
+    "legal_basis": [
+     {
+      "law": "국민기초생활 보장법",
+      "article": "제29조·제30조",
+      "text": "보장기관은 수급자의 소득·재산 변동에 따라 급여를 변경하거나 급여의 전부·일부를 중지할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "이의신청(시·도지사·복지부장관)",
+    "lane": "신청자(수급희망자)",
+    "stage": "G6 이의신청",
+    "type": "task",
+    "status": "loop",
+    "progress": 0,
+    "actor": "수급(권)자·신청자",
+    "receiver": "시·도지사·보건복지부장관",
+    "action": "이의신청",
+    "input_documents": [
+     "급여 결정 통지서"
+    ],
+    "output_documents": [
+     "이의신청서"
+    ],
+    "deadline": "결정 통지받은 날부터 90일 이내",
+    "blocker": "보장 결정 불복 회귀 단계",
+    "confidence": 0.81,
+    "legal_basis": [
+     {
+      "law": "국민기초생활 보장법",
+      "article": "제38조·제40조",
+      "text": "결정에 이의가 있으면 90일 이내에 시·도지사에게, 그 처분에 다시 이의가 있으면 보건복지부장관에게 이의신청할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P17",
+    "name": "이의신청 심사·재결정",
+    "lane": "지방생활보장위원회",
+    "stage": "G6 이의신청",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시·도지사·보건복지부장관",
+    "action": "이의신청 심사·처분",
+    "condition": "이의신청 인용 여부(인용 시 보장 결정 시정 회귀)",
+    "input_documents": [
+     "이의신청서"
+    ],
+    "output_documents": [
+     "이의신청 처리결과 통지"
+    ],
+    "deadline": "이의신청 받은 날부터 30일 이내(제39조)",
+    "confidence": 0.78,
+    "legal_basis": [
+     {
+      "law": "국민기초생활 보장법",
+      "article": "제39조",
+      "text": "시·도지사는 이의신청을 받으면 필요한 심사를 거쳐 처분을 변경하거나 급여를 실시하는 등의 조치를 한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P11",
+    "type": "sequence",
+    "label": "결정"
+   },
+   {
+    "id": "E10",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": "수급 결정"
+   },
+   {
+    "id": "E11",
+    "source": "P12",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P09",
+    "target": "P10",
+    "type": "message",
+    "label": "위원회 심의 요청"
+   },
+   {
+    "id": "M02",
+    "source": "P12",
+    "target": "P13",
+    "type": "message",
+    "label": "조건부수급 연계"
+   },
+   {
+    "id": "M03",
+    "source": "P05",
+    "target": "P08",
+    "type": "message",
+    "label": "전산조회 결과 연계"
+   },
+   {
+    "id": "L01",
+    "source": "P14",
+    "target": "P06",
+    "type": "loop",
+    "label": "소득·재산 변동 재산정"
+   },
+   {
+    "id": "L02",
+    "source": "P16",
+    "target": "P09",
+    "type": "loop",
+    "label": "이의신청 재결정 회귀"
+   }
+  ],
+  "warnings": []
+ }
 }
