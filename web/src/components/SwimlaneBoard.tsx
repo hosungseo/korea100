@@ -688,12 +688,36 @@ function buildEdgePaths(
         labelY = by + 14;
       }
     } else {
-      // Sequence or message: right-center → left-center bezier
-      const dx = t.left - s.right;
-      const cpX = Math.max(32, Math.abs(dx) * 0.42);
-      path = `M ${s.right} ${s.cy} C ${s.right + cpX} ${s.cy} ${t.left - cpX} ${t.cy} ${t.left} ${t.cy}`;
-      labelX = (s.right + t.left) / 2;
-      labelY = (s.cy + t.cy) / 2 - 10;
+      // Sequence/message: 방향 인식 라우팅 — 역방향·수직 연결을 S자로 꼬지 않는다
+      const clampCp = (d: number) => Math.min(80, Math.max(24, Math.abs(d) * 0.45));
+      const forwardDx = t.left - s.right;
+      const backwardDx = s.left - t.right;
+      const overlapX = forwardDx < 8 && backwardDx < 8; // 수평으로 겹침(같은 열)
+
+      if (overlapX) {
+        // 같은 열: 세로 베지어 (아래→위 또는 위→아래)
+        if (t.cy >= s.cy) {
+          const cp = clampCp(t.top - s.bottom) * 0.8;
+          path = `M ${s.cx} ${s.bottom} C ${s.cx} ${s.bottom + cp} ${t.cx} ${t.top - cp} ${t.cx} ${t.top}`;
+        } else {
+          const cp = clampCp(s.top - t.bottom) * 0.8;
+          path = `M ${s.cx} ${s.top} C ${s.cx} ${s.top - cp} ${t.cx} ${t.bottom + cp} ${t.cx} ${t.bottom}`;
+        }
+        labelX = (s.cx + t.cx) / 2 + 8;
+        labelY = (s.cy + t.cy) / 2;
+      } else if (forwardDx >= 8) {
+        // 순방향: 우측 → 좌측
+        const cpX = clampCp(forwardDx);
+        path = `M ${s.right} ${s.cy} C ${s.right + cpX} ${s.cy} ${t.left - cpX} ${t.cy} ${t.left} ${t.cy}`;
+        labelX = (s.right + t.left) / 2;
+        labelY = (s.cy + t.cy) / 2 - 10;
+      } else {
+        // 역방향: 좌측 → 우측 (거울) — orient=auto가 화살촉을 자동 회전
+        const cpX = clampCp(backwardDx);
+        path = `M ${s.left} ${s.cy} C ${s.left - cpX} ${s.cy} ${t.right + cpX} ${t.cy} ${t.right} ${t.cy}`;
+        labelX = (s.left + t.right) / 2;
+        labelY = (s.cy + t.cy) / 2 - 10;
+      }
     }
 
     return [{ edge, path, labelX, labelY }];
@@ -832,38 +856,42 @@ export default function SwimlaneBoard({ process }: { process: ProcessModel }) {
                 {/* sequence arrowhead */}
                 <marker
                   id="sw-arr-seq"
-                  markerWidth={10} markerHeight={10}
-                  refX={7} refY={3.5}
+                  markerWidth={11} markerHeight={9}
+                  refX={9} refY={4.5}
                   orient="auto"
+                  markerUnits="userSpaceOnUse"
                 >
-                  <path d="M0,0 L0,7 L9,3.5 z" fill="#55685e" />
+                  <path d="M0,0.5 L0,8.5 L10,4.5 z" fill="#55685e" />
                 </marker>
                 {/* message arrowhead */}
                 <marker
                   id="sw-arr-msg"
-                  markerWidth={10} markerHeight={10}
-                  refX={7} refY={3.5}
+                  markerWidth={11} markerHeight={9}
+                  refX={9} refY={4.5}
                   orient="auto"
+                  markerUnits="userSpaceOnUse"
                 >
-                  <path d="M0,0 L0,7 L9,3.5 z" fill="#0d8a63" />
+                  <path d="M0,0.5 L0,8.5 L10,4.5 z" fill="#0d8a63" />
                 </marker>
                 {/* loop arrowhead */}
                 <marker
                   id="sw-arr-loop"
-                  markerWidth={8} markerHeight={8}
-                  refX={6} refY={3}
+                  markerWidth={11} markerHeight={9}
+                  refX={9} refY={4.5}
                   orient="auto"
+                  markerUnits="userSpaceOnUse"
                 >
-                  <path d="M0,0 L0,6 L8,3 z" fill="#9333ea" />
+                  <path d="M0,0.5 L0,8.5 L10,4.5 z" fill="#9333ea" />
                 </marker>
                 {/* loop-reverse arrowhead (entering from right) */}
                 <marker
                   id="sw-arr-loop-r"
-                  markerWidth={8} markerHeight={8}
-                  refX={2} refY={3}
+                  markerWidth={11} markerHeight={9}
+                  refX={1} refY={4.5}
                   orient="auto"
+                  markerUnits="userSpaceOnUse"
                 >
-                  <path d="M8,0 L8,6 L0,3 z" fill="#9333ea" />
+                  <path d="M10,0.5 L10,8.5 L0,4.5 z" fill="#9333ea" />
                 </marker>
               </defs>
 
