@@ -5,7 +5,7 @@
  "type": "국가운영·통제형",
  "priority": 15,
  "whyFirst": "행정권이 누구에게 어떻게 배분되는지 정하는 가장 기본 골격으로, 다른 국가운영 제도가 모두 이 위에서 작동한다.",
- "asOfDate": "2026-07-09",
+ "asOfDate": "2026-07-10",
  "status": "full",
  "canvas": {
   "purpose": "국가행정사무를 어느 기관이 맡을지 정해 행정권을 조직화한다. 중앙행정기관의 설치·폐지·통합과 기능 배분을 법령으로 규율해 권한 중복과 사각지대를 줄이고 책임 소재를 분명히 한다.",
@@ -18,13 +18,18 @@
    },
    {
     "law": "행정기관의 조직과 정원에 관한 통칙",
-    "articles": "기구·정원 관리 기준, 직제 협의",
+    "articles": "제4조(직제), 제4조의2(직제 시행규칙), 제5조(기능배분·정원배정), 제8조(직제 제정·개정 절차), 제10조의2(정부조직관리정보시스템)",
     "kind": "대통령령"
    },
    {
     "law": "각 부처 직제",
     "articles": "개별 기관의 하부조직·분장사무·정원",
     "kind": "대통령령"
+   },
+   {
+    "law": "각 부처 직제 시행규칙",
+    "articles": "과·보좌기관의 설치와 사무분장, 직급별 정원(통칙 제4조의2 위임)",
+    "kind": "부령"
    }
   ],
   "authorities": [
@@ -162,6 +167,11 @@
       "law": "각 부처 직제",
       "article": "하부조직·분장사무·정원 관련 조문",
       "text": "각 기관의 하부조직·분장사무·정원은 해당 부처 직제(대통령령)로 정한다."
+     },
+     {
+      "law": "행정기관의 조직과 정원에 관한 통칙",
+      "article": "제4조·제4조의2(직제·직제 시행규칙)",
+      "text": "실·국 등은 직제(대통령령)로, 과·보좌기관 설치는 직제 시행규칙(부령)으로 정한다."
      }
     ]
    },
@@ -208,8 +218,14 @@
       "law": "행정기관의 조직과 정원에 관한 통칙",
       "article": "직제 협의 관련 조문",
       "text": "각 기관은 기구·정원 개편 시 행정안전부와 협의한다."
+     },
+     {
+      "law": "행정기관의 조직과 정원에 관한 통칙",
+      "article": "제8조(직제등의 제정·개정)",
+      "text": "정부조직관리지침에 따라 기구개편안·소요정원안을 작성해 행정안전부장관에게 제출한다."
      }
-    ]
+    ],
+    "deadline": "정례: 당해연도 4월말까지 소요정원안 제출(통칙 제8조②)"
    },
    {
     "id": "P05",
@@ -237,6 +253,11 @@
       "law": "행정기관의 조직과 정원에 관한 통칙",
       "article": "기구·정원 관리 기준",
       "text": "행정안전부는 기구·정원의 적정성을 심사하고 조정한다."
+     },
+     {
+      "law": "행정기관의 조직과 정원에 관한 통칙",
+      "article": "제5조(기능의 배분과 정원의 배정)",
+      "text": "행정안전부가 기능 배분과 정원 배정의 적정성을 심사·조정한다."
      }
     ]
    },
@@ -262,6 +283,11 @@
       "law": "국가공무원 총정원령",
       "article": "총정원 관리 관련 조문",
       "text": "정원 증설은 총정원 한도와 예산 범위 내에서 기획재정부와 협의한다."
+     },
+     {
+      "law": "행정기관의 조직과 정원에 관한 통칙",
+      "article": "제29조(총액인건비제의 운영에 관한 특례)",
+      "text": "정원·기구는 총액인건비 한도와 예산 범위 내에서 운영·협의한다."
      }
     ]
    },
@@ -477,6 +503,11 @@
       "law": "행정기관의 조직과 정원에 관한 통칙",
       "article": "조직·정원 관리 관련 조문",
       "text": "확정된 조직·정원 정보를 조직관리정보시스템에 등록·관리한다."
+     },
+     {
+      "law": "행정기관의 조직과 정원에 관한 통칙",
+      "article": "제10조의2(정부조직관리정보시스템의 구축·활용)",
+      "text": "행정안전부장관이 정부조직통계·기구도 등을 전자적으로 처리하는 시스템을 구축·관리한다."
      }
     ]
    },
@@ -500,29 +531,179 @@
       "law": "각 부처 직제",
       "article": "정원·분장사무 관련 조문",
       "text": "확정된 직제·정원에 따라 인력을 배치하고 사무를 이관한다."
+     },
+     {
+      "law": "행정기관의 조직과 정원에 관한 통칙",
+      "article": "제27조(정원의 운영과 통보)",
+      "text": "확정된 정원에 따라 인력을 배치·운영하고 정원 현황을 통보한다."
+     }
+    ]
+   },
+   {
+    "id": "P17",
+    "name": "직제 시행규칙 제정·발령",
+    "lane": "주관부처",
+    "stage": "G5 공포·시행",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주관부처(장관)",
+    "action": "시행규칙 발령",
+    "input_documents": [
+     "개정 직제"
+    ],
+    "output_documents": [
+     "직제 시행규칙(총리령·부령)"
+    ],
+    "confidence": 0.78,
+    "legal_basis": [
+     {
+      "law": "행정기관의 조직과 정원에 관한 통칙",
+      "article": "제4조의2(직제 시행규칙)",
+      "text": "과·보좌기관의 설치와 사무분장, 직급별 정원은 총리령·부령인 직제 시행규칙으로 정한다."
+     },
+     {
+      "law": "각 부처 직제 시행규칙",
+      "article": "하부조직·정원 관련 조문",
+      "text": "직제에서 위임한 과 단위 조직과 정원을 시행규칙으로 구체화한다."
      }
     ]
    }
   ],
   "edges": [
-   { "id": "E01", "source": "P01", "target": "P02", "type": "sequence", "label": null },
-   { "id": "E02", "source": "P02", "target": "P03", "type": "sequence", "label": null },
-   { "id": "E03", "source": "P03", "target": "P04", "type": "sequence", "label": "직제(대통령령) 개정" },
-   { "id": "E04", "source": "P04", "target": "P05", "type": "sequence", "label": null },
-   { "id": "E05", "source": "P05", "target": "P06", "type": "sequence", "label": null },
-   { "id": "E06", "source": "P06", "target": "P07", "type": "sequence", "label": null },
-   { "id": "E07", "source": "P07", "target": "P09", "type": "sequence", "label": "협의 완료" },
-   { "id": "E08", "source": "P09", "target": "P10", "type": "sequence", "label": null },
-   { "id": "E09", "source": "P10", "target": "P11", "type": "sequence", "label": null },
-   { "id": "E10", "source": "P11", "target": "P12", "type": "sequence", "label": "의결" },
-   { "id": "E11", "source": "P12", "target": "P13", "type": "sequence", "label": null },
-   { "id": "E12", "source": "P13", "target": "P15", "type": "sequence", "label": null },
-   { "id": "M01", "source": "P06", "target": "P05", "type": "message", "label": "정원·예산 협의 회신" },
-   { "id": "M02", "source": "P13", "target": "P14", "type": "message", "label": "조직정보 등록" },
-   { "id": "M03", "source": "P03", "target": "P16", "type": "message", "label": "정부조직법 개정 필요" },
-   { "id": "M04", "source": "P16", "target": "P13", "type": "message", "label": "국회 의결 후 공포" },
-   { "id": "L01", "source": "P07", "target": "P08", "type": "loop", "label": "보완 요구" },
-   { "id": "L02", "source": "P08", "target": "P05", "type": "loop", "label": "재협의" }
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": "직제(대통령령) 개정"
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P09",
+    "type": "sequence",
+    "label": "협의 완료"
+   },
+   {
+    "id": "E08",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": "의결"
+   },
+   {
+    "id": "E11",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P13",
+    "target": "P17",
+    "type": "sequence",
+    "label": "대통령령 공포"
+   },
+   {
+    "id": "M01",
+    "source": "P06",
+    "target": "P05",
+    "type": "message",
+    "label": "정원·예산 협의 회신"
+   },
+   {
+    "id": "M02",
+    "source": "P13",
+    "target": "P14",
+    "type": "message",
+    "label": "조직정보 등록"
+   },
+   {
+    "id": "M03",
+    "source": "P03",
+    "target": "P16",
+    "type": "message",
+    "label": "정부조직법 개정 필요"
+   },
+   {
+    "id": "M04",
+    "source": "P16",
+    "target": "P13",
+    "type": "message",
+    "label": "국회 의결 후 공포"
+   },
+   {
+    "id": "L01",
+    "source": "P07",
+    "target": "P08",
+    "type": "loop",
+    "label": "보완 요구"
+   },
+   {
+    "id": "L02",
+    "source": "P08",
+    "target": "P05",
+    "type": "loop",
+    "label": "재협의"
+   },
+   {
+    "id": "E13",
+    "source": "P17",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   }
   ],
   "warnings": []
  }
