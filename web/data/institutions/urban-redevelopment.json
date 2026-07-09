@@ -6,7 +6,7 @@
  "priority": 3,
  "whyFirst": "부동산 관련 제도 중 대중 수요와 절차 복잡도가 모두 커서 부동산·인허가형 기준 사례가 된다.",
  "asOfDate": "2026-07-01",
- "status": "canvas",
+ "status": "full",
  "canvas": {
   "purpose": "노후·불량 건축물이 밀집한 지역의 주거환경을 개선하고 도시 기능을 회복한다. 재개발은 기반시설이 열악한 지역을, 재건축은 기반시설은 양호하나 건물이 노후한 공동주택 단지를 대상으로 한다.",
   "stakeholders": "토지등소유자·조합원(사업 주체이자 비용 부담·이익 귀속), 세입자·상가임차인(이주 대상), 조합, 시공사(건설사), 국토교통부·시·도지사·시장·군수·구청장(인허가), 일반분양 청약자",
@@ -91,6 +91,620 @@
  "fieldVerification": [
   "단계별 인가 조문번호(제35·50·74·86조) 최신 개정 반영 재확인",
   "지자체 조례별 정비구역 지정요건 편차",
-  "조합설립·관리처분 동의율 요건의 사업유형별 차이"
- ]
+  "조합설립·관리처분 동의율 요건의 사업유형별 차이",
+  "사업시행계획인가 통합심의 실제 처리기간과 보완요구 빈도(운영 추정)",
+  "세입자·상가 이주대책 분쟁으로 인한 집행 지연·집행정지 사례(운영 추정)",
+  "공사비 급등에 따른 시공사·조합 분쟁과 공사 중단 발생 실태(운영 추정)"
+ ],
+ "process": {
+  "institution_name": "재건축·재개발 정비사업",
+  "law_name": "도시 및 주거환경정비법",
+  "lanes": [
+   "토지등소유자·추진위·조합",
+   "시장·군수·구청장(인가권자)",
+   "시·도지사(정비구역 지정)",
+   "도시계획위원회·심의기구",
+   "시공자·정비사업전문관리업자",
+   "주민·세입자"
+  ],
+  "stages": [
+   "G0 기본계획",
+   "G1 정비구역지정·정비계획",
+   "G2 조합설립",
+   "G3 사업시행계획인가",
+   "G4 관리처분계획인가",
+   "G5 이주·철거·착공",
+   "G6 준공·이전고시·청산"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "도시·주거환경정비 기본계획 수립",
+    "lane": "시·도지사(정비구역 지정)",
+    "stage": "G0 기본계획",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "특별시장·광역시장·시장",
+    "action": "기본계획 수립",
+    "output_documents": [
+     "도시·주거환경정비기본계획"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제4조, 제5조",
+      "text": "10년 단위 기본계획을 수립하고 5년마다 타당성을 검토한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "정비계획 수립·정비구역 지정 신청",
+    "lane": "토지등소유자·추진위·조합",
+    "stage": "G1 정비구역지정·정비계획",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "구청장 등 정비계획 입안권자",
+    "receiver": "시·도지사",
+    "action": "정비계획 입안",
+    "output_documents": [
+     "정비계획서",
+     "정비구역 지정 신청"
+    ],
+    "confidence": 0.83,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제8조, 제9조",
+      "text": "정비계획을 입안하여 정비구역 지정을 신청한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "재건축 안전진단",
+    "lane": "시장·군수·구청장(인가권자)",
+    "stage": "G1 정비구역지정·정비계획",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "시장·군수·구청장",
+    "action": "안전진단 실시·판정",
+    "condition": "구조안전성·주거환경·설비노후도 등 재건축 판정(재개발은 노후도 요건 확인)",
+    "output_documents": [
+     "안전진단 결과서"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제12조, 제13조",
+      "text": "재건축사업은 정비계획 입안을 위해 안전진단을 실시한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "정비구역 지정·고시",
+    "lane": "시·도지사(정비구역 지정)",
+    "stage": "G1 정비구역지정·정비계획",
+    "type": "notice",
+    "status": "done",
+    "progress": 100,
+    "actor": "시·도지사",
+    "receiver": "토지등소유자",
+    "action": "지정·고시",
+    "output_documents": [
+     "정비구역 지정 고시"
+    ],
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제16조",
+      "text": "정비계획을 결정하고 정비구역을 지정·고시한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "조합설립 추진위원회 구성·승인",
+    "lane": "토지등소유자·추진위·조합",
+    "stage": "G2 조합설립",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "토지등소유자·추진위원회",
+    "receiver": "시장·군수·구청장",
+    "action": "추진위 구성·승인신청",
+    "output_documents": [
+     "추진위원회 구성 동의서",
+     "승인 신청서"
+    ],
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제31조",
+      "text": "토지등소유자 과반수 동의로 추진위원회를 구성하고 승인을 받는다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "조합설립 동의율 확보",
+    "lane": "토지등소유자·추진위·조합",
+    "stage": "G2 조합설립",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "추진위원회",
+    "action": "동의율 확보",
+    "condition": "재건축: 각 동 과반 & 전체 구분소유자 3/4(75%) 이상 및 토지면적 3/4 이상 / 재개발: 토지등소유자 3/4 이상 & 토지면적 1/2 이상",
+    "output_documents": [
+     "조합설립 동의서",
+     "동의율 산정표"
+    ],
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제35조제2항, 제35조제3항",
+      "text": "재개발·재건축의 조합설립 법정 동의요건을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "조합설립인가",
+    "lane": "시장·군수·구청장(인가권자)",
+    "stage": "G2 조합설립",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "시장·군수·구청장",
+    "receiver": "조합",
+    "action": "인가",
+    "output_documents": [
+     "조합설립인가서",
+     "조합 정관"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제35조",
+      "text": "법정 동의요건을 갖추면 조합설립을 인가한다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "시공자 선정",
+    "lane": "토지등소유자·추진위·조합",
+    "stage": "G3 사업시행계획인가",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "조합총회",
+    "receiver": "시공자",
+    "action": "경쟁입찰·총회 선정",
+    "output_documents": [
+     "시공자 선정 총회 의결",
+     "공사도급 가계약"
+    ],
+    "confidence": 0.78,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제29조, 제32조",
+      "text": "조합설립인가 후 경쟁입찰 방법으로 시공자를 총회에서 선정한다."
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "사업시행계획 수립·총회 의결",
+    "lane": "토지등소유자·추진위·조합",
+    "stage": "G3 사업시행계획인가",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "조합(총회)",
+    "action": "계획 수립·의결",
+    "output_documents": [
+     "사업시행계획서",
+     "총회 의결서"
+    ],
+    "blocker": "조합원 간 계획 쟁점으로 총회 의결 지연 가능(운영 추정)",
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제50조, 제45조",
+      "text": "사업시행계획을 수립하고 총회 의결을 거쳐 인가를 신청한다."
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "사업시행계획인가 심의",
+    "lane": "도시계획위원회·심의기구",
+    "stage": "G3 사업시행계획인가",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 25,
+    "actor": "지방도시계획위원회·통합심의위원회",
+    "action": "심의·인가 판단",
+    "condition": "건축·경관·교통 등 통합심의 통과 및 보완 필요 여부",
+    "output_documents": [
+     "심의 결과",
+     "사업시행계획인가서"
+    ],
+    "deadline": "인가신청일부터 60일 이내 인가 여부 통보(시행령)",
+    "blocker": "통합심의 보완요구 반복 시 인가 장기화(운영 추정)",
+    "confidence": 0.76,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제50조",
+      "text": "시장·군수등은 사업시행계획인가 신청을 받아 심의를 거쳐 인가한다."
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "인가 보완·재심의",
+    "lane": "토지등소유자·추진위·조합",
+    "stage": "G3 사업시행계획인가",
+    "type": "task",
+    "status": "loop",
+    "progress": 0,
+    "actor": "조합",
+    "receiver": "시장·군수·구청장",
+    "action": "보완·재상정",
+    "input_documents": [
+     "보완요구서"
+    ],
+    "output_documents": [
+     "보완 사업시행계획서"
+    ],
+    "blocker": "조건부 회귀 단계(심의 보완요구 시)",
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제50조",
+      "text": "심의·인가 과정에서 보완요구를 받으면 보완하여 재심의를 받는다."
+     },
+     {
+      "law": "행정절차법",
+      "article": "제17조",
+      "text": "흠결 보완 요구와 보완 제출 절차를 따른다."
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "조합원 분양신청",
+    "lane": "토지등소유자·추진위·조합",
+    "stage": "G4 관리처분계획인가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "조합원",
+    "action": "분양신청",
+    "output_documents": [
+     "분양신청 현황",
+     "분양신청서"
+    ],
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제72조",
+      "text": "사업시행계획인가 고시 후 통지·공고하여 조합원 분양신청을 받는다."
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "종전·종후 자산 감정평가",
+    "lane": "토지등소유자·추진위·조합",
+    "stage": "G4 관리처분계획인가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "조합·감정평가법인",
+    "action": "감정평가",
+    "output_documents": [
+     "종전자산 감정평가서",
+     "종후자산 감정평가서"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제74조제4항",
+      "text": "종전·종후 자산 가액을 감정평가하여 관리처분계획의 근거로 삼는다."
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "관리처분계획 총회 의결",
+    "lane": "토지등소유자·추진위·조합",
+    "stage": "G4 관리처분계획인가",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "조합총회",
+    "action": "총회 의결",
+    "condition": "분담금·동호수 배정 등 관리처분계획에 대한 총회 의결정족수 충족",
+    "output_documents": [
+     "관리처분계획(안)",
+     "총회 의결서"
+    ],
+    "blocker": "분담금·동호수 배정 갈등으로 의결 지연(운영 추정)",
+    "confidence": 0.79,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제74조, 제45조",
+      "text": "관리처분계획은 총회 의결을 거쳐 수립한다."
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "관리처분계획인가",
+    "lane": "시장·군수·구청장(인가권자)",
+    "stage": "G4 관리처분계획인가",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시장·군수·구청장",
+    "receiver": "조합",
+    "action": "인가·고시",
+    "output_documents": [
+     "관리처분계획인가서",
+     "인가 고시"
+    ],
+    "confidence": 0.83,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제74조",
+      "text": "시장·군수등은 관리처분계획을 인가하고 고시한다."
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "이주·세입자대책·철거",
+    "lane": "주민·세입자",
+    "stage": "G5 이주·철거·착공",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "조합·세입자·상가임차인",
+    "action": "이주·보상·철거",
+    "output_documents": [
+     "이주대책",
+     "손실보상 내역",
+     "철거계획"
+    ],
+    "blocker": "세입자·상가 이주대책 미비 시 분쟁·집행정지 위험(운영 추정)",
+    "confidence": 0.76,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제81조, 제65조",
+      "text": "관리처분계획인가 고시 후 사용·수익이 정지되며, 손실보상은 공익사업법을 준용한다."
+     }
+    ]
+   },
+   {
+    "id": "P17",
+    "name": "착공·일반분양",
+    "lane": "시공자·정비사업전문관리업자",
+    "stage": "G5 이주·철거·착공",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시공자·조합",
+    "action": "착공·분양",
+    "output_documents": [
+     "착공신고",
+     "입주자모집공고"
+    ],
+    "blocker": "공사비 급등 시 시공사·조합 분쟁·공사 중단 위험(운영 추정)",
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제79조",
+      "text": "관리처분계획에 따라 주택 등을 공급하며 일반분양을 시행한다."
+     }
+    ]
+   },
+   {
+    "id": "P18",
+    "name": "준공인가·이전고시·청산",
+    "lane": "시장·군수·구청장(인가권자)",
+    "stage": "G6 준공·이전고시·청산",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시장·군수·구청장·조합",
+    "action": "준공·이전고시·청산",
+    "output_documents": [
+     "준공인가",
+     "이전고시",
+     "청산금 부과·징수 내역"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제83조, 제86조, 제89조",
+      "text": "준공인가와 이전고시로 소유권을 이전하고 청산금을 부과·징수한 뒤 조합을 해산한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": "적정 판정"
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": "동의율 충족"
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P10",
+    "target": "P12",
+    "type": "sequence",
+    "label": "인가 완료"
+   },
+   {
+    "id": "E11",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P15",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P16",
+    "target": "P17",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P17",
+    "target": "P18",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P04",
+    "target": "P05",
+    "type": "message",
+    "label": "정비구역 지정·고시"
+   },
+   {
+    "id": "M02",
+    "source": "P07",
+    "target": "P08",
+    "type": "message",
+    "label": "조합설립인가 통보"
+   },
+   {
+    "id": "M03",
+    "source": "P15",
+    "target": "P16",
+    "type": "message",
+    "label": "관리처분계획 인가고시"
+   },
+   {
+    "id": "L01",
+    "source": "P10",
+    "target": "P11",
+    "type": "loop",
+    "label": "인가 보완요구"
+   },
+   {
+    "id": "L02",
+    "source": "P11",
+    "target": "P09",
+    "type": "loop",
+    "label": "보완 후 재상정"
+   }
+  ],
+  "warnings": []
+ }
 }

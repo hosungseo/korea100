@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import type { ProcessModel, ProcessNode, ProcessEdge } from "@/lib/types";
+import SwimlaneBoard from "./SwimlaneBoard";
 
 interface ProcessBoardProps {
   process: ProcessModel;
@@ -1018,95 +1019,38 @@ function Legend() {
 // ── Main Component ────────────────────────────────────────────────────────────
 
 export default function ProcessBoard({ process, compact = false }: ProcessBoardProps) {
+  // Full board: delegate to the BPMN swimlane board
+  if (!compact) {
+    return <SwimlaneBoard process={process} />;
+  }
+
+  // ── Compact mode (home preview) ───────────────────────────────────────────
   const [activeNode, setActiveNode] = useState<ProcessNode | null>(null);
+  const handleNodeClick = useCallback((node: ProcessNode) => setActiveNode(node), []);
+  const handleClose     = useCallback(() => setActiveNode(null), []);
 
-  const handleNodeClick = useCallback((node: ProcessNode) => {
-    setActiveNode(node);
-  }, []);
-
-  const handleClose = useCallback(() => {
-    setActiveNode(null);
-  }, []);
-
-  // For compact mode: show only current + risk + a couple done for context
-  const displayNodes = compact
-    ? process.nodes.filter(
-        (n) =>
-          n.status === "current" ||
-          n.status === "risk" ||
-          n.status === "loop"
-      ).slice(0, 5)
-    : process.nodes;
+  const displayNodes = process.nodes
+    .filter((n) => n.status === "current" || n.status === "risk" || n.status === "loop")
+    .slice(0, 5);
 
   return (
     <div style={{ width: "100%" }}>
-      {/* Gate timeline */}
-      <div style={{ marginBottom: compact ? 16 : 24 }}>
-        <GateTimeline
-          stages={process.stages}
-          nodes={process.nodes}
-          compact={compact}
-        />
+      <div style={{ marginBottom: 16 }}>
+        <GateTimeline stages={process.stages} nodes={process.nodes} compact={true} />
       </div>
 
-      {/* Nodes */}
-      {compact ? (
-        /* Compact: flat card list */
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
-            gap: 8,
-          }}
-        >
-          {displayNodes.map((node) => (
-            <NodeCard
-              key={node.id}
-              node={node}
-              edges={process.edges}
-              onClick={handleNodeClick}
-              compact={true}
-            />
-          ))}
-        </div>
-      ) : (
-        /* Full: stage groups */
-        <div style={{ marginTop: 8 }}>
-          {process.stages.map((stage) => (
-            <StageGroup
-              key={stage}
-              stage={stage}
-              nodes={process.nodes}
-              edges={process.edges}
-              onNodeClick={handleNodeClick}
-              compact={false}
-            />
-          ))}
-          <Legend />
-        </div>
-      )}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 8 }}>
+        {displayNodes.map((node) => (
+          <NodeCard key={node.id} node={node} edges={process.edges} onClick={handleNodeClick} compact={true} />
+        ))}
+      </div>
 
-      {/* Field verification caption */}
-      {compact && (
-        <p
-          style={{
-            fontSize: 12,
-            color: "#87938d",
-            marginTop: 12,
-            fontStyle: "italic",
-          }}
-        >
-          법령상 구조 기준 · 현장 검증 필요 항목은 앰버로 표시
-        </p>
-      )}
+      <p style={{ fontSize: 12, color: "#87938d", marginTop: 12, fontStyle: "italic" }}>
+        법령상 구조 기준 · 현장 검증 필요 항목은 앰버로 표시
+      </p>
 
-      {/* Drawer */}
       {activeNode && (
-        <NodeDrawer
-          node={activeNode}
-          edges={process.edges}
-          onClose={handleClose}
-        />
+        <NodeDrawer node={activeNode} edges={process.edges} onClose={handleClose} />
       )}
     </div>
   );
