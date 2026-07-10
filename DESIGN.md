@@ -112,8 +112,9 @@ All spacing derives from 4px.
 - Section links cover summary, process, evidence, issues, and related institutions.
 - Share, PNG export, and print/PDF are explicit commands with status feedback.
 - Process defaults to a core-flow summary. Full mode and selected node are URL-addressable.
-- Below `900px`, full mode becomes a stage-ordered vertical timeline with actor filtering and stage jump controls; the desktop swimlane remains the wide-screen representation.
-- Mobile timeline nodes open the same verified detail drawer as desktop nodes, preserving legal evidence, URL state, focus trapping, and focus restoration.
+- Below `900px`, full mode defaults to the same swimlane representation inside a bounded two-axis viewport. Stage headers stay pinned to the top and actor lanes stay pinned to the left.
+- Mobile offers compact stage jumps, native touch panning and browser zoom, keyboard arrow navigation, and a vertical timeline alternative with actor filtering.
+- Both mobile representations open the same verified detail drawer as desktop nodes, preserving legal evidence, URL state, focus trapping, and focus restoration.
 
 ### Verification Queue
 

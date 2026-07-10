@@ -25,6 +25,7 @@ import {
 // ── Constants ─────────────────────────────────────────────────────────────────
 const LANE_W = 104;
 const STAGE_W = 188;
+type MobileBoardView = "swimlane" | "timeline";
 
 // 카드용 법조항 축약: 첫 근거의 첫 조문만, 괄호 설명 제거. "환경영향평가법 제24조 외 2"
 function compactLegal(
@@ -183,6 +184,39 @@ function GateTimeline({
         })}
       </div>
     </div>
+  );
+}
+
+function MobileSwimlaneStageNav({
+  stages,
+  nodes,
+  onStageClick,
+}: {
+  stages: string[];
+  nodes: ProcessNode[];
+  onStageClick: (stage: string) => void;
+}) {
+  return (
+    <nav
+      className="mobile-swimlane-stage-nav mobile-process-stage-nav"
+      aria-label="스윔레인 단계 바로가기"
+    >
+      {stages.map((stage) => {
+        const [code, ...rest] = stage.split(" ");
+        return (
+          <button
+            key={stage}
+            type="button"
+            data-status={stageStatus(stage, nodes)}
+            onClick={() => onStageClick(stage)}
+            aria-label={`${stage} 열로 이동`}
+          >
+            <span>{code}</span>
+            <strong>{rest.join(" ")}</strong>
+          </button>
+        );
+      })}
+    </nav>
   );
 }
 
@@ -1033,13 +1067,14 @@ export default function SwimlaneBoard({
   const [activeNode,    setActiveNode]    = useState<ProcessNode | null>(() =>
     nodes.find((node) => node.id === initialNodeId) ?? null
   );
+  const [mobileView, setMobileView] = useState<MobileBoardView>("swimlane");
   const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
   const [edgePaths,     setEdgePaths]     = useState<ComputedEdge[]>([]);
   const [svgH,          setSvgH]          = useState(0);
   const [svgW,          setSvgW]          = useState(0);
   const boardRef       = useRef<HTMLDivElement>(null);
+  const boardScrollRef = useRef<HTMLDivElement>(null);
   const nodeRefs       = useRef<Map<string, HTMLElement>>(new Map());
-  const stageHdrRefs   = useRef<Map<string, HTMLElement>>(new Map());
 
   const computeEdges = useCallback(() => {
     const board = boardRef.current;
@@ -1059,10 +1094,47 @@ export default function SwimlaneBoard({
     return () => ro.disconnect();
   }, [computeEdges]);
 
+  useEffect(() => {
+    if (mobileView !== "swimlane") return;
+    const frame = window.requestAnimationFrame(computeEdges);
+    return () => window.cancelAnimationFrame(frame);
+  }, [computeEdges, mobileView]);
+
   const handleStageClick = useCallback((stage: string) => {
-    const el = stageHdrRefs.current.get(stage);
-    if (el) el.scrollIntoView({ inline: "start", behavior: "smooth" });
-  }, []);
+    const stageIndex = stages.indexOf(stage);
+    const scroller = boardScrollRef.current;
+    if (stageIndex < 0 || !scroller) return;
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    scroller.scrollTo({
+      left: stageIndex * STAGE_W,
+      behavior: reducedMotion ? "auto" : "smooth",
+    });
+  }, [stages]);
+
+  const handleBoardKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLDivElement>) => {
+      const scroller = boardScrollRef.current;
+      if (!scroller) return;
+      const horizontalStep = event.shiftKey ? STAGE_W : 72;
+      const verticalStep = event.shiftKey ? 180 : 84;
+      const offset =
+        event.key === "ArrowRight"
+          ? { left: horizontalStep, top: 0 }
+          : event.key === "ArrowLeft"
+            ? { left: -horizontalStep, top: 0 }
+            : event.key === "ArrowDown"
+              ? { left: 0, top: verticalStep }
+              : event.key === "ArrowUp"
+                ? { left: 0, top: -verticalStep }
+                : null;
+      if (!offset) return;
+      event.preventDefault();
+      scroller.scrollBy({ ...offset, behavior: "auto" });
+    },
+    []
+  );
 
   const handleNodeClick = useCallback((n: ProcessNode) => {
     setActiveNode(n);
@@ -1105,19 +1177,55 @@ export default function SwimlaneBoard({
   }
 
   return (
-    <div style={{ width: "100%" }}>
+    <div
+      className="swimlane-board"
+      data-mobile-view={mobileView}
+      style={{ width: "100%" }}
+    >
       <ProcessVerificationSummaryBar process={process} verification={verification} />
 
+      <div
+        className="mobile-board-view-control"
+        role="group"
+        aria-label="모바일 구조도 보기 방식"
+      >
+        <button
+          type="button"
+          aria-pressed={mobileView === "swimlane"}
+          onClick={() => setMobileView("swimlane")}
+        >
+          스윔레인
+        </button>
+        <button
+          type="button"
+          aria-pressed={mobileView === "timeline"}
+          onClick={() => setMobileView("timeline")}
+        >
+          세로 보기
+        </button>
+      </div>
+
       <div className="swimlane-desktop-view">
+        <MobileSwimlaneStageNav
+          stages={stages}
+          nodes={nodes}
+          onStageClick={handleStageClick}
+        />
+
         {/* Gate timeline */}
-        <div style={{ marginBottom: 16 }}>
+        <div className="desktop-gate-timeline" style={{ marginBottom: 16 }}>
           <GateTimeline stages={stages} nodes={nodes} onStageClick={handleStageClick} />
         </div>
 
         {/* Horizontal scroll container */}
         <div
+          ref={boardScrollRef}
           className="process-board-scroll"
-          style={{ overflowX: "auto", overflowY: "visible", position: "relative" }}
+          role="region"
+          aria-label="업무구조도 스윔레인 탐색 영역"
+          tabIndex={0}
+          onKeyDown={handleBoardKeyDown}
+          style={{ position: "relative" }}
         >
         {/* Board grid — position:relative anchors the SVG overlay */}
         <div
@@ -1255,6 +1363,7 @@ export default function SwimlaneBoard({
 
           {/* ── Corner cell ── */}
           <div
+            className="swimlane-corner-cell"
             style={{
               gridColumn: 1, gridRow: 1,
               position: "sticky", top: 0, left: 0, zIndex: 21,
@@ -1271,7 +1380,7 @@ export default function SwimlaneBoard({
             return (
               <div
                 key={`sh-${stage}`}
-                ref={(el) => { if (el) stageHdrRefs.current.set(stage, el); else stageHdrRefs.current.delete(stage); }}
+                className="swimlane-stage-header"
                 style={{
                   gridColumn: si + 2, gridRow: 1,
                   position: "sticky", top: 0, zIndex: 10,
@@ -1317,6 +1426,7 @@ export default function SwimlaneBoard({
               // Lane header (sticky left)
               <div
                 key={`lh-${lane}`}
+                className="swimlane-lane-header"
                 style={{
                   gridColumn: 1, gridRow: rowIdx,
                   position: "sticky", left: 0, zIndex: 9,
@@ -1350,6 +1460,7 @@ export default function SwimlaneBoard({
                 return (
                   <div
                     key={cellKey}
+                    className="swimlane-stage-cell"
                     style={{
                       gridColumn: si + 2, gridRow: rowIdx,
                       borderRight: "1px solid #e8ece9",
