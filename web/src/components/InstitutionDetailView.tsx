@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { buildProcessLaneGroups } from "@/lib/process-layout.mjs";
 import type { Institution, InstitutionSummary } from "@/lib/types";
-import DetailTools from "./DetailTools";
 import InstitutionSwitcher from "./InstitutionSwitcher";
 import ProcessExplorer from "./ProcessExplorer";
 import styles from "./InstitutionDetail.module.css";
@@ -63,7 +62,6 @@ export default function InstitutionDetailView({
           </div>
 
           <div className={styles.detailActions}>
-            <DetailTools institutionName={institution.name} slug={institution.slug} />
             <Link href={`/?compare=${institution.slug}#institutions`}>
               비교 선반에 담기
             </Link>
@@ -102,15 +100,6 @@ export default function InstitutionDetailView({
                 verification={institution.verification}
                 slug={institution.slug}
                 laneGroups={buildProcessLaneGroups(process.lanes, institution.slug)}
-                exportMeta={{
-                  priority: institution.priority,
-                  name: institution.name,
-                  category: institution.category ?? "기타",
-                  type: institution.type,
-                  oneLiner: institution.oneLiner,
-                  asOfDate: institution.asOfDate,
-                  bottleneckCount: institution.canvas.bottlenecks.length,
-                }}
               />
             </Suspense>
           ) : (
