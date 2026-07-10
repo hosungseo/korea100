@@ -379,6 +379,181 @@ function SwimlaneNodeCard({
   );
 }
 
+// ── Mobile process flow ──────────────────────────────────────────────────────
+function MobileProcessFlow({
+  process,
+  verification,
+  onNodeClick,
+}: {
+  process: ProcessModel;
+  verification?: SourceVerification;
+  onNodeClick: (node: ProcessNode) => void;
+}) {
+  const { lanes, stages, nodes } = process;
+  const [laneFilter, setLaneFilter] = useState("all");
+  const stageRefs = useRef<Map<string, HTMLElement>>(new Map());
+  const visibleNodes =
+    laneFilter === "all"
+      ? nodes
+      : nodes.filter((node) => node.lane === laneFilter);
+  const visibleStages = stages.filter((stage) =>
+    visibleNodes.some((node) => node.stage === stage)
+  );
+
+  const scrollToStage = useCallback((stage: string) => {
+    const target = stageRefs.current.get(stage);
+    if (!target) return;
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    target.scrollIntoView({
+      block: "start",
+      behavior: reducedMotion ? "auto" : "smooth",
+    });
+  }, []);
+
+  return (
+    <div className="mobile-process-flow">
+      <div className="mobile-process-toolbar">
+        <p aria-live="polite">
+          <strong>{visibleNodes.length}</strong>개 업무
+          <span aria-hidden="true">·</span>
+          {visibleStages.length}단계
+        </p>
+        <label>
+          <span>행위자</span>
+          <select
+            aria-label="행위자 필터"
+            value={laneFilter}
+            onChange={(event) => setLaneFilter(event.target.value)}
+          >
+            <option value="all">전체 행위자</option>
+            {lanes.map((lane) => (
+              <option key={lane} value={lane}>
+                {lane}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      <nav className="mobile-process-stage-nav" aria-label="업무 단계 바로가기">
+        {visibleStages.map((stage) => {
+          const [code, ...rest] = stage.split(" ");
+          const status = stageStatus(stage, visibleNodes);
+          return (
+            <button
+              key={stage}
+              type="button"
+              data-status={status}
+              onClick={() => scrollToStage(stage)}
+              aria-label={`${stage} 단계로 이동`}
+            >
+              <span>{code}</span>
+              <strong>{rest.join(" ")}</strong>
+            </button>
+          );
+        })}
+      </nav>
+
+      <div className="mobile-process-timeline">
+        {visibleStages.map((stage) => {
+          const [code, ...rest] = stage.split(" ");
+          const stageNodes = visibleNodes.filter(
+            (node) => node.stage === stage
+          );
+          const status = stageStatus(stage, visibleNodes);
+
+          return (
+            <section
+              key={stage}
+              ref={(element) => {
+                if (element) stageRefs.current.set(stage, element);
+                else stageRefs.current.delete(stage);
+              }}
+              className="mobile-process-stage"
+              data-status={status}
+              aria-labelledby={`mobile-stage-${code}`}
+            >
+              <header>
+                <span className="mobile-process-stage-marker" aria-hidden="true" />
+                <div>
+                  <span className="mono">{code}</span>
+                  <h3 id={`mobile-stage-${code}`}>{rest.join(" ")}</h3>
+                </div>
+                <span>{stageNodes.length}개</span>
+              </header>
+
+              <div className="mobile-process-node-list">
+                {stageNodes.map((node) => (
+                  <MobileProcessNode
+                    key={node.id}
+                    node={node}
+                    verification={verification}
+                    onClick={onNodeClick}
+                  />
+                ))}
+              </div>
+            </section>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function MobileProcessNode({
+  node,
+  verification,
+  onClick,
+}: {
+  node: ProcessNode;
+  verification?: SourceVerification;
+  onClick: (node: ProcessNode) => void;
+}) {
+  const colors = ss(node.status);
+  const verificationResult = getNodeVerification(node, verification);
+  const legal = compactLegal(node.legal_basis);
+
+  return (
+    <button
+      type="button"
+      className="mobile-process-node"
+      data-status={node.status}
+      onClick={() => onClick(node)}
+      aria-label={`${node.name} — ${colors.label} — ${verificationResult.label}`}
+      style={
+        {
+          "--mobile-node-bg": colors.bg,
+          "--mobile-node-border": colors.border,
+          "--mobile-node-ink": colors.ink,
+          "--mobile-node-sub": colors.sub,
+        } as React.CSSProperties
+      }
+    >
+      <span className="mobile-process-node-rail" aria-hidden="true" />
+      <span className="mobile-process-node-topline">
+        <span className="mobile-process-node-status">{colors.label}</span>
+        <span className="mobile-process-node-actor">{node.actor}</span>
+        <span className="mono">{node.id}</span>
+      </span>
+      <strong>{node.name}</strong>
+      {legal && <span className="mobile-process-node-legal">§ {legal}</span>}
+      {node.blocker && (
+        <span className="mobile-process-node-blocker">⚠ {node.blocker}</span>
+      )}
+      <span className="mobile-process-node-verification">
+        <VerificationMark
+          result={verificationResult}
+          inverse={node.status === "current"}
+          compact
+        />
+        {node.status === "loop" && <span>↩ 회귀 연결</span>}
+      </span>
+    </button>
+  );
+}
+
 // ── Node Drawer ───────────────────────────────────────────────────────────────
 function NodeDrawer({
   node,
@@ -919,16 +1094,17 @@ export default function SwimlaneBoard({
     <div style={{ width: "100%" }}>
       <ProcessVerificationSummaryBar process={process} verification={verification} />
 
-      {/* Gate timeline */}
-      <div style={{ marginBottom: 16 }}>
-        <GateTimeline stages={stages} nodes={nodes} onStageClick={handleStageClick} />
-      </div>
+      <div className="swimlane-desktop-view">
+        {/* Gate timeline */}
+        <div style={{ marginBottom: 16 }}>
+          <GateTimeline stages={stages} nodes={nodes} onStageClick={handleStageClick} />
+        </div>
 
-      {/* Horizontal scroll container */}
-      <div
-        className="process-board-scroll"
-        style={{ overflowX: "auto", overflowY: "visible", position: "relative" }}
-      >
+        {/* Horizontal scroll container */}
+        <div
+          className="process-board-scroll"
+          style={{ overflowX: "auto", overflowY: "visible", position: "relative" }}
+        >
         {/* Board grid — position:relative anchors the SVG overlay */}
         <div
           ref={boardRef}
@@ -1205,10 +1381,20 @@ export default function SwimlaneBoard({
             ];
           })}
         </div>
+        </div>
+
+        {/* Legend */}
+        <Legend />
       </div>
 
-      {/* Legend */}
-      <Legend />
+      <div className="swimlane-mobile-view">
+        <MobileProcessFlow
+          process={process}
+          verification={verification}
+          onNodeClick={handleNodeClick}
+        />
+        <Legend />
+      </div>
 
       {/* Drawer */}
       {activeNode && (

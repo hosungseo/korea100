@@ -85,7 +85,7 @@ All spacing derives from 4px.
 - Max content width: `1200px` (`1248px` including shell padding)
 - Desktop catalog: compact controls above a three-column card grid
 - Detail: single reading column with sticky section tools; process boards own their horizontal overflow
-- Mobile: one-column catalog, fixed-format controls, and no document-level horizontal overflow
+- Mobile: one-column catalog, fixed-format controls, vertical process timelines, and no document-level horizontal overflow
 
 ## 5. Components
 
@@ -112,6 +112,8 @@ All spacing derives from 4px.
 - Section links cover summary, process, evidence, issues, and related institutions.
 - Share, PNG export, and print/PDF are explicit commands with status feedback.
 - Process defaults to a core-flow summary. Full mode and selected node are URL-addressable.
+- Below `900px`, full mode becomes a stage-ordered vertical timeline with actor filtering and stage jump controls; the desktop swimlane remains the wide-screen representation.
+- Mobile timeline nodes open the same verified detail drawer as desktop nodes, preserving legal evidence, URL state, focus trapping, and focus restoration.
 
 ### Verification Queue
 
