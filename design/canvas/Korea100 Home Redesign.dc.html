@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<style>
+  body { margin: 0; background: #eceeed; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+  a { color: #087452; text-decoration: none; }
+  a:hover { color: #0f9f72; text-decoration: underline; }
+</style>
+</helmet>
+
+<section data-screen-label="Turn 1 — 홈 리디자인 2안" style="display: flex; flex-direction: column; gap: 48px; padding: 48px;">
+
+  <!-- ============ OPTION 1A ============ -->
+  <div id="1a" style="display: flex; flex-direction: column; gap: 16px;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <a href="#1a" style="display: inline-flex; align-items: center; justify-content: center; min-width: 34px; height: 26px; background: #0b1410; color: #ffffff; font-size: 13px; font-weight: 700; border-radius: 4px; text-decoration: none;">1a</a>
+      <div style="font-size: 15px; font-weight: 680; color: #111714;">등록대장형 — 밀도 높은 레퍼런스 테이블</div>
+      <div style="font-size: 13px; color: #5d6b63;">카드 그리드 대신 열람용 대장. 좌측 분야 레일 + 정밀 테이블 + 비교 트레이</div>
+    </div>
+
+    <div style="display: flex; gap: 32px; align-items: flex-start;">
+      <!-- 1a DESKTOP -->
+      <div data-screen-label="1a 데스크톱" style="width: 1440px; flex: none; background: #fcfcfb; border: 1px solid #bdcbc4; box-shadow: 0 1px 3px rgba(11,20,16,0.08); display: flex; flex-direction: column; min-height: 900px;">
+
+        <!-- Top bar -->
+        <header style="display: flex; align-items: center; justify-content: space-between; padding: 14px 32px; border-bottom: 1px solid #dde5df; background: #ffffff;">
+          <div style="display: flex; align-items: baseline; gap: 14px;">
+            <div style="font-size: 18px; font-weight: 720; color: #111714; letter-spacing: 0;">대한민국 제도 100</div>
+            <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; text-transform: uppercase;">Institution Registry</div>
+          </div>
+          <nav style="display: flex; align-items: center; gap: 24px; font-size: 14px; color: #5d6b63;">
+            <span style="color: #111714; font-weight: 650; border-bottom: 2px solid #0f9f72; padding-bottom: 2px;">제도 대장</span>
+            <span>현장 검증 대장</span>
+            <span>요청하기</span>
+            <span style="font-family: 'SFMono-Regular', 'Roboto Mono', ui-monospace, monospace; font-size: 12px; color: #87938d;">기준일 2026-07-10</span>
+          </nav>
+        </header>
+
+        <!-- Stat + search band -->
+        <div style="display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; padding: 20px 32px; border-bottom: 1px solid #dde5df; background: #f5f7f6;">
+          <div style="display: flex; align-items: center; gap: 0; border: 1px solid #bdcbc4; background: #ffffff; height: 48px;">
+            <span style="display: flex; align-items: center; padding: 0 14px; height: 100%; border-right: 1px solid #dde5df; color: #87938d; font-family: ui-monospace, monospace; font-size: 14px;">검색</span>
+            <input placeholder="제도명 · 법령 · 기관 · 문서 · 병목 — 예: 환경영향평가법 제27조" style="flex: 1; border: none; outline: none; height: 100%; padding: 0 16px; font-size: 15px; color: #111714; background: transparent; font-family: inherit;">
+            <span style="display: flex; align-items: center; gap: 6px; padding: 0 14px; font-size: 12px; color: #87938d;">전체 색인 100건</span>
+          </div>
+          <div style="display: flex; gap: 28px; font-variant-numeric: tabular-nums;">
+            <div><div style="font-size: 22px; font-weight: 720; color: #111714;">100</div><div style="font-size: 12px; color: #5d6b63;">제도</div></div>
+            <div><div style="font-size: 22px; font-weight: 720; color: #111714;">1,573</div><div style="font-size: 12px; color: #5d6b63;">절차 노드</div></div>
+            <div><div style="font-size: 22px; font-weight: 720; color: #111714;">3,721</div><div style="font-size: 12px; color: #5d6b63;">조문 인용 대조</div></div>
+            <div><div style="font-size: 22px; font-weight: 720; color: #087452;">74</div><div style="font-size: 12px; color: #5d6b63;">조문 검증 완료</div></div>
+          </div>
+        </div>
+
+        <!-- Body: rail + table -->
+        <div style="display: grid; grid-template-columns: 232px 1fr; flex: 1; align-items: stretch;">
+          <!-- Left rail -->
+          <aside style="border-right: 1px solid #dde5df; background: #ffffff; padding: 20px 0;">
+            <div style="padding: 0 20px 10px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d;">분야</div>
+            <sc-for list="{{ categories }}" as="cat" hint-placeholder-count="6">
+              <div onClick="{{ cat.select }}" style="display: flex; align-items: center; justify-content: space-between; padding: 8px 20px; font-size: 14px; cursor: pointer; color: {{ cat.color }}; background: {{ cat.bg }}; border-left: 3px solid {{ cat.border }}; font-weight: {{ cat.weight }};" style-hover="background: #f5f7f6;">
+                <span style="display: flex; align-items: center; gap: 8px;"><span style="width: 8px; height: 8px; border-radius: 2px; background: {{ cat.dot }}; flex: none;"></span>{{ cat.name }}</span>
+                <span style="font-variant-numeric: tabular-nums; color: #87938d; font-size: 13px;">{{ cat.count }}</span>
+              </div>
+            </sc-for>
+            <div style="margin: 20px 20px 0; padding-top: 16px; border-top: 1px solid #dde5df;">
+              <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; margin-bottom: 10px;">검증 상태</div>
+              <div style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: #5d6b63;">
+                <label style="display: flex; align-items: center; gap: 8px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #0f9f72;"></span>조문 검증 완료 <span style="margin-left: auto; font-variant-numeric: tabular-nums;">74</span></label>
+                <label style="display: flex; align-items: center; gap: 8px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #c78116;"></span>범위 지정 필요 <span style="margin-left: auto; font-variant-numeric: tabular-nums;">26</span></label>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Table -->
+          <div style="background: #fcfcfb; display: flex; flex-direction: column;">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; border-bottom: 1px solid #dde5df;">
+              <div style="font-size: 14px; color: #5d6b63;"><strong style="color: #111714; font-weight: 680;">{{ filteredLabel }}</strong> · 우선순위순</div>
+              <div style="display: flex; gap: 0; border: 1px solid #dde5df; font-size: 13px;">
+                <span style="padding: 6px 14px; background: #0b1410; color: #ffffff; font-weight: 650;">우선순위</span>
+                <span style="padding: 6px 14px; color: #5d6b63; background: #ffffff;">가나다</span>
+              </div>
+            </div>
+            <!-- header row -->
+            <div style="display: grid; grid-template-columns: 56px 1fr 150px 130px 96px 64px 56px; gap: 0; padding: 8px 24px; border-bottom: 1px solid #bdcbc4; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; background: #ffffff;">
+              <span>NO</span><span>제도</span><span>유형</span><span>분야</span><span>조문검증</span><span style="text-align: right;">노드</span><span style="text-align: center;">비교</span>
+            </div>
+            <sc-for list="{{ rows }}" as="r" hint-placeholder-count="10">
+              <div style="display: grid; grid-template-columns: 56px 1fr 150px 130px 96px 64px 56px; align-items: center; padding: 11px 24px; border-bottom: 1px solid #dde5df; background: {{ r.bg }}; cursor: pointer;" style-hover="background: #eef8f3;">
+                <span style="font-family: ui-monospace, monospace; font-size: 12px; font-weight: 650; color: #87938d;">{{ r.no }}</span>
+                <span style="display: flex; flex-direction: column; gap: 2px; padding-right: 24px;">
+                  <span style="font-size: 15px; font-weight: 650; color: #111714;">{{ r.name }}</span>
+                  <span style="font-size: 13px; color: #5d6b63; line-height: 1.45; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ r.oneLiner }}</span>
+                </span>
+                <span style="font-size: 13px; color: #5d6b63;">{{ r.type }}</span>
+                <span style="display: flex;"><span style="font-size: 12px; font-weight: 650; color: {{ r.catColor }}; border: 1px solid {{ r.catBorder }}; padding: 2px 8px; white-space: nowrap;">{{ r.categoryShort }}</span></span>
+                <span style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: {{ r.statusColor }}; font-weight: 650;"><span style="width: 8px; height: 8px; border-radius: 50%; background: {{ r.statusColor }};"></span>{{ r.statusLabel }}</span>
+                <span style="text-align: right; font-variant-numeric: tabular-nums; font-size: 13px; color: #111714;">{{ r.nodes }}</span>
+                <span style="display: flex; justify-content: center;"><span onClick="{{ r.toggle }}" style="width: 18px; height: 18px; border: 1.5px solid {{ r.checkBorder }}; background: {{ r.checkBg }}; display: inline-flex; align-items: center; justify-content: center; color: #ffffff; font-size: 12px; font-weight: 700;">{{ r.checkMark }}</span></span>
+              </div>
+            </sc-for>
+            <div style="padding: 14px 24px; font-size: 13px; color: #87938d;">…86개 더 · 스크롤 시 12개 단위로 표시</div>
+          </div>
+        </div>
+
+        <!-- Compare tray -->
+        <div style="display: flex; align-items: center; gap: 16px; padding: 12px 32px; background: #0b1410; color: #ffffff;">
+          <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d;">비교 선반</span>
+          <sc-for list="{{ compareChips }}" as="chip" hint-placeholder-count="2">
+            <span style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid #3a463f; padding: 5px 12px; font-size: 13px;">{{ chip.name }} <span style="color: #87938d; cursor: pointer;">×</span></span>
+          </sc-for>
+          <span style="font-size: 13px; color: #87938d;">{{ compareHint }}</span>
+          <span style="margin-left: auto;"><span style="background: #0f9f72; color: #ffffff; font-size: 14px; font-weight: 650; padding: 9px 20px; cursor: pointer;" style-hover="background: #087452;">같은 기준으로 비교 →</span></span>
+        </div>
+      </div>
+
+      <!-- 1a MOBILE -->
+      <div data-screen-label="1a 모바일" style="width: 390px; flex: none; background: #fcfcfb; border: 1px solid #bdcbc4; box-shadow: 0 1px 3px rgba(11,20,16,0.08); display: flex; flex-direction: column;">
+        <header style="padding: 16px 20px 0; background: #ffffff; border-bottom: 1px solid #dde5df;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between;">
+            <div style="font-size: 17px; font-weight: 720; color: #111714;">대한민국 제도 100</div>
+            <div style="font-family: ui-monospace, monospace; font-size: 11px; color: #87938d;">2026-07-10</div>
+          </div>
+          <div style="display: flex; align-items: center; border: 1px solid #bdcbc4; background: #ffffff; height: 44px; margin: 12px 0;">
+            <input placeholder="제도·법령·기관·문서 검색" style="flex: 1; border: none; outline: none; height: 100%; padding: 0 14px; font-size: 14px; background: transparent; font-family: inherit; color: #111714;">
+          </div>
+          <div style="display: flex; gap: 8px; overflow: hidden; padding-bottom: 12px;">
+            <span style="flex: none; font-size: 13px; font-weight: 650; padding: 6px 12px; background: #0b1410; color: #ffffff;">전체 100</span>
+            <span style="flex: none; font-size: 13px; padding: 6px 12px; border: 1px solid #dde5df; color: #5d6b63; background: #ffffff;">국토·환경·안전</span>
+            <span style="flex: none; font-size: 13px; padding: 6px 12px; border: 1px solid #dde5df; color: #5d6b63; background: #ffffff;">재정과 예산</span>
+            <span style="flex: none; font-size: 13px; padding: 6px 12px; border: 1px solid #dde5df; color: #5d6b63; background: #ffffff;">복지</span>
+          </div>
+        </header>
+        <sc-for list="{{ mobileRows }}" as="m" hint-placeholder-count="6">
+          <div style="display: grid; grid-template-columns: 44px 1fr; gap: 0; padding: 14px 20px; border-bottom: 1px solid #dde5df; align-items: start;">
+            <span style="font-family: ui-monospace, monospace; font-size: 12px; font-weight: 650; color: #87938d; padding-top: 2px;">{{ m.no }}</span>
+            <span style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+                <span style="font-size: 15px; font-weight: 650; color: #111714;">{{ m.name }}</span>
+                <span style="width: 8px; height: 8px; border-radius: 50%; background: {{ m.statusColor }}; flex: none;"></span>
+              </span>
+              <span style="font-size: 13px; color: #5d6b63; line-height: 1.5;">{{ m.oneLiner }}</span>
+              <span style="display: flex; gap: 8px; font-size: 12px; color: #87938d; font-variant-numeric: tabular-nums;">{{ m.type }} · 노드 {{ m.nodes }}</span>
+            </span>
+          </div>
+        </sc-for>
+        <div style="padding: 12px 20px 60px; font-size: 13px; color: #87938d;">…94개 더</div>
+        <div style="position: sticky; bottom: 0; display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; background: #0b1410; color: #ffffff;">
+          <span style="font-size: 13px; color: #87938d;">비교 선반 2/3</span>
+          <span style="background: #0f9f72; font-size: 14px; font-weight: 650; padding: 9px 16px;">비교 →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ OPTION 1B ============ -->
+  <div id="1b" style="display: flex; flex-direction: column; gap: 16px;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <a href="#1b" style="display: inline-flex; align-items: center; justify-content: center; min-width: 34px; height: 26px; background: #0b1410; color: #ffffff; font-size: 13px; font-weight: 700; border-radius: 4px; text-decoration: none;">1b</a>
+      <div style="font-size: 15px; font-weight: 680; color: #111714;">브리핑 데스크형 — 목록 + 상시 미리보기</div>
+      <div style="font-size: 13px; color: #5d6b63;">좌측에서 제도를 고르면 우측 패널에 법적 근거·행위자·핵심 흐름이 즉시 열림</div>
+    </div>
+
+    <div style="display: flex; gap: 32px; align-items: flex-start;">
+      <!-- 1b DESKTOP -->
+      <div data-screen-label="1b 데스크톱" style="width: 1440px; flex: none; background: #fcfcfb; border: 1px solid #bdcbc4; box-shadow: 0 1px 3px rgba(11,20,16,0.08); display: flex; flex-direction: column; min-height: 900px;">
+
+        <!-- Ink header -->
+        <header style="background: #0b1410; color: #ffffff; padding: 20px 32px; display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <div style="font-size: 20px; font-weight: 720;">대한민국 제도 100</div>
+            <div style="font-size: 13px; color: #87938d;">법령 → 조직 → 절차 → 문서. 한 장의 구조도로 읽는 국가 운영 모델</div>
+          </div>
+          <div style="display: flex; gap: 0; font-variant-numeric: tabular-nums; border: 1px solid #2a352f;">
+            <div style="padding: 10px 20px; border-right: 1px solid #2a352f;"><div style="font-size: 20px; font-weight: 720;">100</div><div style="font-size: 11px; color: #87938d; letter-spacing: 0.06em;">제도</div></div>
+            <div style="padding: 10px 20px; border-right: 1px solid #2a352f;"><div style="font-size: 20px; font-weight: 720;">433</div><div style="font-size: 11px; color: #87938d; letter-spacing: 0.06em;">공식 출처</div></div>
+            <div style="padding: 10px 20px; border-right: 1px solid #2a352f;"><div style="font-size: 20px; font-weight: 720;">3,721</div><div style="font-size: 11px; color: #87938d; letter-spacing: 0.06em;">조문 대조</div></div>
+            <div style="padding: 10px 20px;"><div style="font-size: 20px; font-weight: 720; color: #4ade9d;">448</div><div style="font-size: 11px; color: #87938d; letter-spacing: 0.06em;">현장 검증 항목</div></div>
+          </div>
+        </header>
+
+        <!-- Toolbar -->
+        <div style="display: flex; align-items: center; gap: 16px; padding: 14px 32px; border-bottom: 1px solid #dde5df; background: #ffffff;">
+          <div style="display: flex; align-items: center; flex: 1; max-width: 560px; border: 1px solid #bdcbc4; height: 42px;">
+            <input placeholder="제도·법령·기관·문서·병목 검색" style="flex: 1; border: none; outline: none; height: 100%; padding: 0 14px; font-size: 14px; background: transparent; font-family: inherit; color: #111714;">
+          </div>
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            <span style="font-size: 13px; font-weight: 650; padding: 6px 12px; background: #dff5eb; color: #087452; border: 1px solid #0f9f72;">전체 100</span>
+            <span style="font-size: 13px; padding: 6px 12px; border: 1px solid #dde5df; color: #5d6b63;">국토·환경·안전 14</span>
+            <span style="font-size: 13px; padding: 6px 12px; border: 1px solid #dde5df; color: #5d6b63;">재정과 예산 11</span>
+            <span style="font-size: 13px; padding: 6px 12px; border: 1px solid #dde5df; color: #5d6b63;">복지와 사회보험 12</span>
+            <span style="font-size: 13px; padding: 6px 12px; border: 1px solid #dde5df; color: #5d6b63;">데이터·디지털 10</span>
+            <span style="font-size: 13px; padding: 6px 12px; border: 1px solid #dde5df; color: #5d6b63;">+6</span>
+          </div>
+        </div>
+
+        <!-- Split -->
+        <div style="display: grid; grid-template-columns: 460px 1fr; flex: 1;">
+          <!-- List -->
+          <div style="border-right: 1px solid #dde5df; background: #ffffff; display: flex; flex-direction: column;">
+            <div style="padding: 12px 24px; border-bottom: 1px solid #dde5df; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; display: flex; justify-content: space-between;"><span>우선순위순 · 100건</span><span>조문검증</span></div>
+            <sc-for list="{{ listRows }}" as="l" hint-placeholder-count="8">
+              <div onClick="{{ l.select }}" style="display: grid; grid-template-columns: 40px 1fr auto; align-items: center; gap: 8px; padding: 13px 24px; border-bottom: 1px solid #dde5df; cursor: pointer; background: {{ l.bg }}; border-left: 3px solid {{ l.edge }};" style-hover="background: #f5f7f6;">
+                <span style="font-family: ui-monospace, monospace; font-size: 12px; font-weight: 650; color: #87938d;">{{ l.no }}</span>
+                <span style="display: flex; flex-direction: column; gap: 2px;">
+                  <span style="font-size: 15px; font-weight: 650; color: #111714;">{{ l.name }}</span>
+                  <span style="font-size: 12px; color: #87938d;">{{ l.type }} · {{ l.categoryShort }}</span>
+                </span>
+                <span style="width: 9px; height: 9px; border-radius: 50%; background: {{ l.statusColor }};"></span>
+              </div>
+            </sc-for>
+            <div style="padding: 12px 24px; font-size: 13px; color: #87938d;">…92개 더</div>
+          </div>
+
+          <!-- Preview panel -->
+          <div style="background: #fcfcfb; padding: 28px 32px; display: flex; flex-direction: column; gap: 20px;">
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;">
+              <div style="display: flex; flex-direction: column; gap: 6px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <span style="font-family: ui-monospace, monospace; font-size: 12px; font-weight: 650; color: #87938d;">{{ sel.no }}</span>
+                  <span style="font-size: 12px; font-weight: 650; color: #087452; background: #dff5eb; padding: 2px 8px;">{{ sel.category }}</span>
+                  <span style="font-size: 12px; color: #5d6b63;">{{ sel.type }}</span>
+                </div>
+                <h2 style="margin: 0; font-size: 28px; font-weight: 680; color: #111714; line-height: 1.2;">{{ sel.name }}</h2>
+                <p style="margin: 0; font-size: 15px; color: #5d6b63; line-height: 1.65; max-width: 640px;">{{ sel.oneLiner }}</p>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 8px; flex: none;">
+                <span style="background: #0f9f72; color: #ffffff; font-size: 14px; font-weight: 650; padding: 10px 18px; text-align: center; cursor: pointer;" style-hover="background: #087452;">한 장 요약 열기 →</span>
+                <span style="border: 1px solid #bdcbc4; color: #111714; font-size: 13px; padding: 8px 18px; text-align: center; cursor: pointer; background: #ffffff;">비교 선반에 담기</span>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <div style="border: 1px solid #dde5df; background: #ffffff; padding: 18px 20px;">
+                <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; margin-bottom: 10px;">법적 근거</div>
+                <sc-for list="{{ sel.laws }}" as="law" hint-placeholder-count="3">
+                  <div style="display: flex; align-items: baseline; gap: 10px; padding: 6px 0; border-bottom: 1px solid #f5f7f6; font-size: 13px;">
+                    <span style="font-weight: 650; color: #111714; flex: none;">{{ law.name }}</span>
+                    <span style="color: #5d6b63; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ law.articles }}</span>
+                    <span style="margin-left: auto; flex: none; font-size: 11px; color: #087452; font-weight: 650;">✓ 조문 확인</span>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="border: 1px solid #dde5df; background: #ffffff; padding: 18px 20px;">
+                <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; margin-bottom: 10px;">행위 주체 6개 레인</div>
+                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                  <sc-for list="{{ sel.actors }}" as="actor" hint-placeholder-count="6">
+                    <span style="font-size: 13px; color: #111714; border: 1px solid #dde5df; background: #f5f7f6; padding: 4px 10px;">{{ actor }}</span>
+                  </sc-for>
+                </div>
+                <div style="margin-top: 14px; display: flex; gap: 20px; font-variant-numeric: tabular-nums;">
+                  <div><div style="font-size: 18px; font-weight: 720; color: #111714;">21</div><div style="font-size: 11px; color: #87938d;">절차 노드</div></div>
+                  <div><div style="font-size: 18px; font-weight: 720; color: #111714;">45일</div><div style="font-size: 11px; color: #87938d;">협의 통보 기한</div></div>
+                  <div><div style="font-size: 18px; font-weight: 720; color: #c78116;">2</div><div style="font-size: 11px; color: #87938d;">병목 구간</div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mini flow -->
+            <div style="border: 1px solid #dde5df; background: #ffffff; padding: 18px 20px;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px;">
+                <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d;">핵심 흐름</div>
+                <div style="font-size: 12px; color: #87938d;">노드 상태는 제도 흐름 설명용 편집 상태</div>
+              </div>
+              <div style="display: flex; align-items: stretch; gap: 0;">
+                <sc-for list="{{ sel.flow }}" as="step" hint-placeholder-count="5">
+                  <div style="display: flex; align-items: center; flex: 1; min-width: 0;">
+                    <div style="flex: 1; border: 1px solid {{ step.border }}; background: {{ step.bg }}; padding: 10px 12px; min-width: 0;">
+                      <div style="font-family: ui-monospace, monospace; font-size: 11px; font-weight: 650; color: {{ step.codeColor }};">{{ step.code }}</div>
+                      <div style="font-size: 13px; font-weight: 650; color: #111714; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ step.label }}</div>
+                      <div style="font-size: 11px; color: {{ step.metaColor }}; margin-top: 2px;">{{ step.meta }}</div>
+                    </div>
+                    <div style="flex: none; width: 18px; text-align: center; color: #bdcbc4; font-size: 13px;">{{ step.arrow }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1b MOBILE -->
+      <div data-screen-label="1b 모바일" style="width: 390px; flex: none; background: #fcfcfb; border: 1px solid #bdcbc4; box-shadow: 0 1px 3px rgba(11,20,16,0.08); display: flex; flex-direction: column;">
+        <header style="background: #0b1410; color: #ffffff; padding: 16px 20px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="font-size: 17px; font-weight: 720;">대한민국 제도 100</div>
+          <div style="display: flex; font-variant-numeric: tabular-nums; border: 1px solid #2a352f;">
+            <div style="flex: 1; padding: 8px 12px; border-right: 1px solid #2a352f;"><div style="font-size: 16px; font-weight: 720;">100</div><div style="font-size: 10px; color: #87938d;">제도</div></div>
+            <div style="flex: 1; padding: 8px 12px; border-right: 1px solid #2a352f;"><div style="font-size: 16px; font-weight: 720;">3,721</div><div style="font-size: 10px; color: #87938d;">조문 대조</div></div>
+            <div style="flex: 1; padding: 8px 12px;"><div style="font-size: 16px; font-weight: 720; color: #4ade9d;">448</div><div style="font-size: 10px; color: #87938d;">현장 검증</div></div>
+          </div>
+        </header>
+        <div style="padding: 12px 20px; border-bottom: 1px solid #dde5df; background: #ffffff;">
+          <div style="display: flex; align-items: center; border: 1px solid #bdcbc4; height: 44px;">
+            <input placeholder="제도·법령·기관 검색" style="flex: 1; border: none; outline: none; height: 100%; padding: 0 14px; font-size: 14px; background: transparent; font-family: inherit; color: #111714;">
+          </div>
+        </div>
+        <!-- expanded item -->
+        <div style="border-bottom: 1px solid #dde5df; background: #ffffff;">
+          <div style="display: grid; grid-template-columns: 40px 1fr auto; align-items: center; gap: 8px; padding: 14px 20px; border-left: 3px solid #0f9f72; background: #eef8f3;">
+            <span style="font-family: ui-monospace, monospace; font-size: 12px; font-weight: 650; color: #87938d;">01</span>
+            <span style="display: flex; flex-direction: column; gap: 2px;">
+              <span style="font-size: 15px; font-weight: 680; color: #111714;">환경영향평가</span>
+              <span style="font-size: 12px; color: #87938d;">협의·평가형 · 국토·환경·안전</span>
+            </span>
+            <span style="color: #087452; font-size: 13px;">▲</span>
+          </div>
+          <div style="padding: 14px 20px 18px; display: flex; flex-direction: column; gap: 12px; border-left: 3px solid #0f9f72;">
+            <p style="margin: 0; font-size: 13px; color: #5d6b63; line-height: 1.6;">개발사업이 환경에 미칠 영향을 사업 승인 전에 조사·평가하고, 협의기관과 협의해 저감방안을 사업계획에 반영시키는 제도</p>
+            <div style="display: flex; gap: 16px; font-variant-numeric: tabular-nums;">
+              <div><div style="font-size: 16px; font-weight: 720; color: #111714;">21</div><div style="font-size: 10px; color: #87938d;">절차 노드</div></div>
+              <div><div style="font-size: 16px; font-weight: 720; color: #111714;">45일</div><div style="font-size: 10px; color: #87938d;">협의 기한</div></div>
+              <div><div style="font-size: 16px; font-weight: 720; color: #c78116;">2</div><div style="font-size: 10px; color: #87938d;">병목</div></div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <span style="flex: 1; background: #0f9f72; color: #ffffff; font-size: 13px; font-weight: 650; padding: 10px 0; text-align: center;">한 장 요약 →</span>
+              <span style="flex: 1; border: 1px solid #bdcbc4; color: #111714; font-size: 13px; padding: 10px 0; text-align: center; background: #ffffff;">비교 담기</span>
+            </div>
+          </div>
+        </div>
+        <sc-for list="{{ mobileListB }}" as="mb" hint-placeholder-count="5">
+          <div style="display: grid; grid-template-columns: 40px 1fr auto; align-items: center; gap: 8px; padding: 14px 20px; border-bottom: 1px solid #dde5df; background: #ffffff; border-left: 3px solid transparent;">
+            <span style="font-family: ui-monospace, monospace; font-size: 12px; font-weight: 650; color: #87938d;">{{ mb.no }}</span>
+            <span style="display: flex; flex-direction: column; gap: 2px;">
+              <span style="font-size: 15px; font-weight: 650; color: #111714;">{{ mb.name }}</span>
+              <span style="font-size: 12px; color: #87938d;">{{ mb.type }} · {{ mb.categoryShort }}</span>
+            </span>
+            <span style="color: #bdcbc4; font-size: 13px;">▼</span>
+          </div>
+        </sc-for>
+        <div style="padding: 12px 20px 20px; font-size: 13px; color: #87938d;">…94개 더</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: &quot;3100px&quot;}, &quot;showBottleneckAmber&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;표시&quot;}}">
+class Component extends DCLogic {
+  state = { activeCategory: "전체", compare: ["environmental-impact-assessment", "preliminary-feasibility-study"], selected: 0 };
+
+  data() {
+    return [
+      { no: "01", slug: "environmental-impact-assessment", name: "환경영향평가", type: "협의·평가형", category: "국토·환경·안전", oneLiner: "개발사업의 환경 영향을 승인 전에 조사·평가하고 협의기관과 협의해 저감방안을 반영시키는 제도", nodes: 21, verified: true },
+      { no: "02", slug: "preliminary-feasibility-study", name: "예비타당성조사", type: "재정·평가형", category: "재정과 예산", oneLiner: "대규모 재정사업의 타당성을 예산 편성 전에 검증하는 재정 관문", nodes: 18, verified: true },
+      { no: "03", slug: "urban-redevelopment", name: "재건축·재개발 정비사업", type: "부동산·인허가형", category: "국토·환경·안전", oneLiner: "노후 주거지를 조합 설립부터 준공·청산까지 단계별 인가로 정비하는 절차", nodes: 24, verified: true },
+      { no: "04", slug: "local-extinction-response-fund", name: "지방소멸대응기금", type: "재정배분형", category: "재정과 예산", oneLiner: "인구감소지역에 10년간 매년 1조 원을 배분하는 재정 지원 체계", nodes: 14, verified: false },
+      { no: "05", slug: "information-disclosure", name: "정보공개청구", type: "권리구제·참여형", category: "민원·권리구제·참여", oneLiner: "누구나 공공기관 보유 정보의 공개를 청구하고 10일 내 결정을 받는 절차", nodes: 15, verified: true },
+      { no: "06", slug: "administrative-appeals", name: "행정심판", type: "권리구제형", category: "국가 운영과 권력 통제", oneLiner: "위법·부당한 처분을 법원 밖 행정심판위원회에서 다투는 구제 절차", nodes: 17, verified: true },
+      { no: "07", slug: "basic-livelihood-security", name: "국민기초생활보장", type: "복지급여형", category: "복지와 사회보험", oneLiner: "소득인정액 기준으로 생계·의료·주거·교육 급여를 지급하는 최저생활 보장 제도", nodes: 19, verified: true },
+      { no: "08", slug: "public-procurement", name: "공공조달·국가계약", type: "재정·계약형", category: "재정과 예산", oneLiner: "국가·공공기관이 입찰 공고부터 낙찰·계약·대금 지급까지 진행하는 계약 절차", nodes: 22, verified: true },
+      { no: "09", slug: "national-health-insurance", name: "국민건강보험", type: "사회보험형", category: "복지와 사회보험", oneLiner: "전 국민 의무가입 건강보험의 자격·부과·급여·심사 운영 구조", nodes: 20, verified: true },
+      { no: "10", slug: "privacy-impact-assessment", name: "개인정보 영향평가", type: "데이터·디지털형", category: "데이터·디지털·공공서비스", oneLiner: "공공기관이 개인정보파일 운용 전 침해 위험을 평가받는 사전 점검 절차", nodes: 13, verified: false },
+      { no: "11", slug: "local-government-merger", name: "지방자치단체 통합", type: "자치·구역개편형", category: "지방자치와 지역", oneLiner: "행정구역 개편을 주민 의견 수렴과 법률 제정으로 확정하는 절차", nodes: 16, verified: true },
+      { no: "12", slug: "jeonse-fraud-relief", name: "전세사기 피해지원", type: "주거·피해구제형", category: "국토·환경·안전", oneLiner: "피해자 결정부터 경·공매 지원, 우선매수권까지 이어지는 피해구제 경로", nodes: 18, verified: true },
+      { no: "13", slug: "ai-basic-act", name: "인공지능 기본법", type: "데이터·디지털형", category: "데이터·디지털·공공서비스", oneLiner: "고영향 AI의 사업자 책무와 사실조사·과태료 집행 체계를 규정하는 규제 틀", nodes: 15, verified: false },
+      { no: "14", slug: "emissions-trading", name: "온실가스 배출권거래제", type: "환경·시장기제형", category: "국토·환경·안전", oneLiner: "배출허용총량을 정해 할당·거래·제출로 감축을 유도하는 시장 기제", nodes: 17, verified: true }
+    ];
+  }
+
+  categoryMeta() {
+    return [
+      { name: "전체", count: 100, dot: "#0b1410" },
+      { name: "국토·환경·안전", count: 14, dot: "#0f9f72" },
+      { name: "재정과 예산", count: 11, dot: "#315a78" },
+      { name: "민원·권리구제·참여", count: 10, dot: "#8a5a2b" },
+      { name: "국가 운영과 권력 통제", count: 10, dot: "#4b5563" },
+      { name: "복지와 사회보험", count: 12, dot: "#b54b7b" },
+      { name: "데이터·디지털·공공서비스", count: 10, dot: "#2563eb" },
+      { name: "지방자치와 지역", count: 8, dot: "#7c3aed" },
+      { name: "노동·교육·인적자원", count: 9, dot: "#b45309" },
+      { name: "인허가·규제·산업", count: 8, dot: "#0f766e" },
+      { name: "외교·국방·치안·생활 기반", count: 8, dot: "#be123c" }
+    ];
+  }
+
+  catColors() {
+    return {
+      "국토·환경·안전": "#0f9f72", "재정과 예산": "#315a78", "민원·권리구제·참여": "#8a5a2b",
+      "국가 운영과 권력 통제": "#4b5563", "복지와 사회보험": "#b54b7b", "데이터·디지털·공공서비스": "#2563eb",
+      "지방자치와 지역": "#7c3aed", "노동·교육·인적자원": "#b45309", "인허가·규제·산업": "#0f766e",
+      "외교·국방·치안·생활 기반": "#be123c"
+    };
+  }
+
+  shortCat(c) {
+    const map = { "데이터·디지털·공공서비스": "데이터·디지털", "국가 운영과 권력 통제": "권력 통제", "민원·권리구제·참여": "권리구제·참여", "외교·국방·치안·생활 기반": "외교·국방·치안" };
+    return map[c] || c;
+  }
+
+  renderVals() {
+    const all = this.data();
+    const colors = this.catColors();
+    const active = this.state.activeCategory;
+    const compare = this.state.compare;
+
+    const categories = this.categoryMeta().map((c) => {
+      const isActive = active === c.name;
+      return {
+        name: c.name, count: c.count, dot: c.dot,
+        color: isActive ? "#111714" : "#5d6b63",
+        weight: isActive ? 680 : 450,
+        bg: isActive ? "#eef8f3" : "transparent",
+        border: isActive ? "#0f9f72" : "transparent",
+        select: () => this.setState({ activeCategory: c.name })
+      };
+    });
+
+    const filteredAll = active === "전체" ? all : all.filter((r) => r.category === active);
+
+    const rows = filteredAll.map((r, i) => {
+      const inCompare = compare.includes(r.slug);
+      return {
+        ...r,
+        categoryShort: this.shortCat(r.category),
+        catColor: colors[r.category], catBorder: colors[r.category] + "55",
+        statusColor: r.verified ? "#0f9f72" : "#c78116",
+        statusLabel: r.verified ? "검증 완료" : "범위 지정",
+        bg: i % 2 === 0 ? "#ffffff" : "#fcfcfb",
+        checkBorder: inCompare ? "#0f9f72" : "#bdcbc4",
+        checkBg: inCompare ? "#0f9f72" : "#ffffff",
+        checkMark: inCompare ? "✓" : "",
+        toggle: () => {
+          this.setState((s) => {
+            const has = s.compare.includes(r.slug);
+            if (has) return { compare: s.compare.filter((x) => x !== r.slug) };
+            if (s.compare.length >= 3) return {};
+            return { compare: [...s.compare, r.slug] };
+          });
+        }
+      };
+    });
+
+    const compareChips = all.filter((r) => compare.includes(r.slug)).map((r) => ({ name: r.name }));
+    const compareHint = compare.length >= 2 ? `${compare.length}/3 선택됨` : "2개 이상 선택하면 비교할 수 있습니다";
+
+    const mobileRows = all.slice(0, 6).map((r) => ({
+      ...r, statusColor: r.verified ? "#0f9f72" : "#c78116"
+    }));
+
+    // 1b
+    const listRows = all.slice(0, 8).map((r, i) => ({
+      ...r,
+      categoryShort: this.shortCat(r.category),
+      statusColor: r.verified ? "#0f9f72" : "#c78116",
+      bg: i === this.state.selected ? "#eef8f3" : "#ffffff",
+      edge: i === this.state.selected ? "#0f9f72" : "transparent",
+      select: () => this.setState({ selected: i })
+    }));
+
+    const s = all[this.state.selected] || all[0];
+    const eiaDetail = {
+      laws: [
+        { name: "환경영향평가법", articles: "제22~36조 · 평가, 의견 수렴, 협의, 사후관리" },
+        { name: "같은 법 시행령", articles: "제46~50조 · 평가서 작성, 협의 통보기간 45일" },
+        { name: "같은 법 시행규칙", articles: "제8조, 제9조, 제13조, 제19조" }
+      ],
+      actors: ["사업자", "평가대행자", "주민", "승인기관", "협의기관(환경부)", "전문검토기관"],
+      flow: [
+        { code: "P04", label: "평가서 초안 작성", meta: "사업자", state: "done" },
+        { code: "P05", label: "주민 의견 수렴", meta: "공람 20일+", state: "done" },
+        { code: "P09", label: "본평가서 제출·협의 요청", meta: "승인기관", state: "current" },
+        { code: "P13", label: "협의내용 통보", meta: "45일 · 병목", state: "warn" },
+        { code: "P17", label: "사업계획 반영·사후관리", meta: "승인기관", state: "todo" }
+      ]
+    };
+    const genericDetail = {
+      laws: [
+        { name: "근거 법률", articles: "핵심 조문 · 국가법령정보센터 연결" },
+        { name: "시행령", articles: "절차 세부 기준" },
+        { name: "행정규칙", articles: "운영 지침" }
+      ],
+      actors: ["신청인", "담당 부서", "심의기관", "상급기관"],
+      flow: [
+        { code: "P01", label: "신청·접수", meta: "신청인", state: "done" },
+        { code: "P04", label: "검토·심사", meta: "담당 부서", state: "current" },
+        { code: "P08", label: "심의·결정", meta: "심의기관", state: "todo" },
+        { code: "P11", label: "통보·이행", meta: "기한 내", state: "todo" }
+      ]
+    };
+    const d = this.state.selected === 0 ? eiaDetail : genericDetail;
+
+    const sel = {
+      no: s.no, name: s.name, type: s.type, category: this.shortCat(s.category), oneLiner: s.oneLiner,
+      laws: d.laws, actors: d.actors,
+      flow: d.flow.map((f, i) => ({
+        ...f,
+        arrow: i === d.flow.length - 1 ? "" : "→",
+        border: f.state === "current" ? "#0f9f72" : f.state === "warn" ? "#c78116" : "#dde5df",
+        bg: f.state === "current" ? "#dff5eb" : f.state === "warn" ? "#fdf3e3" : f.state === "done" ? "#f5f7f6" : "#ffffff",
+        codeColor: f.state === "warn" ? "#c78116" : f.state === "current" ? "#087452" : "#87938d",
+        metaColor: f.state === "warn" ? "#c78116" : "#87938d"
+      }))
+    };
+
+    const mobileListB = all.slice(1, 6).map((r) => ({ ...r, categoryShort: this.shortCat(r.category) }));
+
+    return {
+      categories, rows, compareChips, compareHint, mobileRows,
+      filteredLabel: active === "전체" ? `제도 100개 중 ${rows.length}개 표시` : `${active} · ${rows.length}개 표시`,
+      listRows, sel, mobileListB
+    };
+  }
+}
+</script>
+</body>
+</html>

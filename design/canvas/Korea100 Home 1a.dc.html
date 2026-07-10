@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+  body { margin: 0; background: #fcfcfb; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+  a { color: #087452; text-decoration: none; }
+  a:hover { color: #0f9f72; text-decoration: underline; }
+  input::placeholder { color: #87938d; }
+</style>
+</helmet>
+
+<div data-screen-label="홈 — 등록대장형" style="display: flex; flex-direction: column; min-height: 100vh; background: #fcfcfb;">
+
+  <!-- Top bar -->
+  <header style="display: flex; align-items: center; justify-content: space-between; padding: 14px 32px; border-bottom: 1px solid #dde5df; background: #ffffff; position: sticky; top: 0; z-index: 20;">
+    <div style="display: flex; align-items: baseline; gap: 14px;">
+      <div style="font-size: 18px; font-weight: 720; color: #111714;">대한민국 제도 100</div>
+      <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; text-transform: uppercase;">Institution Registry</div>
+    </div>
+    <nav style="display: flex; align-items: center; gap: 24px; font-size: 14px; color: #5d6b63;">
+      <span style="color: #111714; font-weight: 650; border-bottom: 2px solid #0f9f72; padding-bottom: 2px; cursor: pointer;">제도 대장</span>
+      <span style="cursor: pointer;" style-hover="color: #111714;">현장 검증 대장</span>
+      <span style="cursor: pointer;" style-hover="color: #111714;">요청하기</span>
+      <span style="font-family: 'SFMono-Regular', 'Roboto Mono', ui-monospace, monospace; font-size: 12px; color: #87938d;">기준일 2026-07-10</span>
+    </nav>
+  </header>
+
+  <!-- Intro + stat + search band -->
+  <div style="border-bottom: 1px solid #dde5df; background: #f5f7f6;">
+    <sc-if value="{{ showIntro }}" hint-placeholder-val="{{ true }}">
+      <div style="padding: 28px 32px 0;">
+        <h1 style="margin: 0; font-size: 30px; font-weight: 720; color: #111714; line-height: 1.15;">한 장으로 끝내는 대한민국 제도 100</h1>
+        <p style="margin: 8px 0 0; font-size: 15px; color: #5d6b63; line-height: 1.65; max-width: 720px;">법령·조직·절차·문서·병목까지, 국가 운영의 구조를 한 장의 구조도로 읽습니다. 기업에는 비즈니스 모델이 있듯이, 국가에는 제도 모델이 있습니다.</p>
+      </div>
+    </sc-if>
+    <div style="display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; padding: 20px 32px 24px;">
+      <div style="display: flex; align-items: center; border: 1px solid #bdcbc4; background: #ffffff; height: 48px;">
+        <span style="display: flex; align-items: center; padding: 0 14px; height: 100%; border-right: 1px solid #dde5df; color: #87938d; font-family: ui-monospace, monospace; font-size: 14px;">검색</span>
+        <input value="{{ query }}" onChange="{{ onQuery }}" placeholder="제도명 · 법령 · 기관 · 문서 · 병목 — 예: 환경영향평가법 제27조" style="flex: 1; border: none; outline: none; height: 100%; padding: 0 16px; font-size: 15px; color: #111714; background: transparent; font-family: inherit;">
+        <sc-if value="{{ hasQuery }}" hint-placeholder-val="{{ false }}">
+          <span onClick="{{ clearQuery }}" style="display: flex; align-items: center; padding: 0 14px; color: #87938d; cursor: pointer; font-size: 16px;">×</span>
+        </sc-if>
+      </div>
+      <div style="display: flex; gap: 28px; font-variant-numeric: tabular-nums;">
+        <div><div style="font-size: 22px; font-weight: 720; color: #111714;">100</div><div style="font-size: 12px; color: #5d6b63;">제도</div></div>
+        <div><div style="font-size: 22px; font-weight: 720; color: #111714;">1,573</div><div style="font-size: 12px; color: #5d6b63;">절차 노드</div></div>
+        <div><div style="font-size: 22px; font-weight: 720; color: #111714;">3,721</div><div style="font-size: 12px; color: #5d6b63;">조문 인용 대조</div></div>
+        <div><div style="font-size: 22px; font-weight: 720; color: #087452;">74</div><div style="font-size: 12px; color: #5d6b63;">조문 검증 완료</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Body: rail + table -->
+  <div style="display: grid; grid-template-columns: 232px 1fr; flex: 1; align-items: stretch;">
+    <!-- Left rail -->
+    <aside style="border-right: 1px solid #dde5df; background: #ffffff; padding: 20px 0;">
+      <div style="padding: 0 20px 10px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d;">분야</div>
+      <sc-for list="{{ categories }}" as="cat" hint-placeholder-count="8">
+        <div onClick="{{ cat.select }}" style="display: flex; align-items: center; justify-content: space-between; padding: 8px 20px; font-size: 14px; cursor: pointer; color: {{ cat.color }}; background: {{ cat.bg }}; border-left: 3px solid {{ cat.border }}; font-weight: {{ cat.weight }};" style-hover="background: #f5f7f6;">
+          <span style="display: flex; align-items: center; gap: 8px;"><span style="width: 8px; height: 8px; border-radius: 2px; background: {{ cat.dot }}; flex: none;"></span>{{ cat.name }}</span>
+          <span style="font-variant-numeric: tabular-nums; color: #87938d; font-size: 13px;">{{ cat.count }}</span>
+        </div>
+      </sc-for>
+
+      <div style="margin: 20px 20px 0; padding-top: 16px; border-top: 1px solid #dde5df;">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; margin-bottom: 10px;">검증 상태</div>
+        <div style="display: flex; flex-direction: column; gap: 4px; font-size: 13px;">
+          <sc-for list="{{ verificationFilters }}" as="vf" hint-placeholder-count="3">
+            <div onClick="{{ vf.select }}" style="display: flex; align-items: center; gap: 8px; padding: 6px 8px; margin: 0 -8px; cursor: pointer; color: {{ vf.color }}; background: {{ vf.bg }}; font-weight: {{ vf.weight }};" style-hover="background: #f5f7f6;">
+              <span style="width: 10px; height: 10px; border-radius: 50%; background: {{ vf.dot }}; flex: none;"></span>{{ vf.label }}
+              <span style="margin-left: auto; font-variant-numeric: tabular-nums; color: #87938d;">{{ vf.count }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="margin: 20px 20px 0; padding: 14px 16px; background: #f5f7f6; border: 1px solid #dde5df; font-size: 12px; color: #5d6b63; line-height: 1.55;">
+        노드 상태는 실시간 행정 데이터가 아니라 제도 흐름을 설명하기 위한 편집 상태입니다.
+      </div>
+    </aside>
+
+    <!-- Table -->
+    <div style="background: #fcfcfb; display: flex; flex-direction: column;">
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; border-bottom: 1px solid #dde5df;">
+        <div style="font-size: 14px; color: #5d6b63;"><strong style="color: #111714; font-weight: 680;">{{ filteredLabel }}</strong></div>
+        <div style="display: flex; gap: 0; border: 1px solid #dde5df; font-size: 13px;">
+          <span onClick="{{ sortPriority }}" style="padding: 6px 14px; background: {{ sortPrioBg }}; color: {{ sortPrioColor }}; font-weight: 650; cursor: pointer;">우선순위</span>
+          <span onClick="{{ sortName }}" style="padding: 6px 14px; background: {{ sortNameBg }}; color: {{ sortNameColor }}; font-weight: 650; cursor: pointer;">가나다</span>
+        </div>
+      </div>
+      <!-- header row -->
+      <div style="display: grid; grid-template-columns: 56px 1fr 150px 130px 96px 64px 56px; gap: 0; padding: 8px 24px; border-bottom: 1px solid #bdcbc4; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; background: #ffffff; position: sticky; top: 61px; z-index: 10;">
+        <span>NO</span><span>제도</span><span>유형</span><span>분야</span><span>조문검증</span><span style="text-align: right;">노드</span><span style="text-align: center;">비교</span>
+      </div>
+      <sc-for list="{{ rows }}" as="r" hint-placeholder-count="12">
+        <div style="display: grid; grid-template-columns: 56px 1fr 150px 130px 96px 64px 56px; align-items: center; padding: 11px 24px; border-bottom: 1px solid #dde5df; background: {{ r.bg }}; cursor: pointer;" style-hover="background: #eef8f3;">
+          <span style="font-family: ui-monospace, monospace; font-size: 12px; font-weight: 650; color: #87938d;">{{ r.no }}</span>
+          <span style="display: flex; flex-direction: column; gap: 2px; padding-right: 24px;">
+            <span style="font-size: 15px; font-weight: 650; color: #111714;">{{ r.name }}</span>
+            <span style="font-size: 13px; color: #5d6b63; line-height: 1.45; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ r.oneLiner }}</span>
+          </span>
+          <span style="font-size: 13px; color: #5d6b63;">{{ r.type }}</span>
+          <span style="display: flex;"><span style="font-size: 12px; font-weight: 650; color: {{ r.catColor }}; border: 1px solid {{ r.catBorder }}; padding: 2px 8px; white-space: nowrap;">{{ r.categoryShort }}</span></span>
+          <span style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: {{ r.statusColor }}; font-weight: 650;"><span style="width: 8px; height: 8px; border-radius: 50%; background: {{ r.statusColor }};"></span>{{ r.statusLabel }}</span>
+          <span style="text-align: right; font-variant-numeric: tabular-nums; font-size: 13px; color: #111714;">{{ r.nodes }}</span>
+          <span style="display: flex; justify-content: center;"><span onClick="{{ r.toggle }}" style="width: 18px; height: 18px; border: 1.5px solid {{ r.checkBorder }}; background: {{ r.checkBg }}; display: inline-flex; align-items: center; justify-content: center; color: #ffffff; font-size: 12px; font-weight: 700;">{{ r.checkMark }}</span></span>
+        </div>
+      </sc-for>
+      <sc-if value="{{ emptyResult }}" hint-placeholder-val="{{ false }}">
+        <div style="padding: 48px 24px; text-align: center; color: #5d6b63; font-size: 14px;">
+          조건에 맞는 제도가 없습니다. <span onClick="{{ resetAll }}" style="color: #087452; font-weight: 650; cursor: pointer; text-decoration: underline;">필터 초기화</span>
+        </div>
+      </sc-if>
+      <sc-if value="{{ hasMore }}" hint-placeholder-val="{{ true }}">
+        <div style="padding: 14px 24px 20px; display: flex; align-items: center; gap: 12px;">
+          <span onClick="{{ showMore }}" style="border: 1px solid #bdcbc4; background: #ffffff; color: #111714; font-size: 13px; font-weight: 650; padding: 8px 18px; cursor: pointer;" style-hover="background: #f5f7f6;">12개 더 보기</span>
+          <span style="font-size: 13px; color: #87938d; font-variant-numeric: tabular-nums;">{{ remainLabel }}</span>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <!-- Compare tray -->
+  <sc-if value="{{ showTray }}" hint-placeholder-val="{{ true }}">
+  <div style="display: flex; align-items: center; gap: 16px; padding: 12px 32px; background: #0b1410; color: #ffffff; position: sticky; bottom: 0; z-index: 20;">
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d;">비교 선반</span>
+    <sc-for list="{{ compareChips }}" as="chip" hint-placeholder-count="2">
+      <span style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid #3a463f; padding: 5px 12px; font-size: 13px;">{{ chip.name }} <span onClick="{{ chip.remove }}" style="color: #87938d; cursor: pointer;">×</span></span>
+    </sc-for>
+    <span style="font-size: 13px; color: #87938d;">{{ compareHint }}</span>
+    <span style="margin-left: auto;"><span style="background: {{ compareBtnBg }}; color: #ffffff; font-size: 14px; font-weight: 650; padding: 9px 20px; cursor: {{ compareBtnCursor }};" style-hover="background: #087452;">같은 기준으로 비교 →</span></span>
+  </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;compareTrayVisible&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;구성&quot;}, &quot;introVisible&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;구성&quot;}}">
+class Component extends DCLogic {
+  state = {
+    activeCategory: "전체",
+    verification: "all",
+    query: "",
+    sort: "priority",
+    visible: 12,
+    compare: ["environmental-impact-assessment", "preliminary-feasibility-study"]
+  };
+
+  data() {
+    return [
+      { no: "01", slug: "environmental-impact-assessment", name: "환경영향평가", type: "협의·평가형", category: "국토·환경·안전", oneLiner: "개발사업의 환경 영향을 승인 전에 조사·평가하고 협의기관과 협의해 저감방안을 반영시키는 제도", nodes: 21, verified: true },
+      { no: "02", slug: "preliminary-feasibility-study", name: "예비타당성조사", type: "재정·평가형", category: "재정과 예산", oneLiner: "대규모 재정사업의 타당성을 예산 편성 전에 검증하는 재정 관문", nodes: 18, verified: true },
+      { no: "03", slug: "urban-redevelopment", name: "재건축·재개발 정비사업", type: "부동산·인허가형", category: "국토·환경·안전", oneLiner: "노후 주거지를 조합 설립부터 준공·청산까지 단계별 인가로 정비하는 절차", nodes: 24, verified: true },
+      { no: "04", slug: "local-extinction-response-fund", name: "지방소멸대응기금", type: "재정배분형", category: "재정과 예산", oneLiner: "인구감소지역에 10년간 매년 1조 원을 배분하는 재정 지원 체계", nodes: 14, verified: false },
+      { no: "05", slug: "information-disclosure", name: "정보공개청구", type: "권리구제·참여형", category: "민원·권리구제·참여", oneLiner: "누구나 공공기관 보유 정보의 공개를 청구하고 10일 내 결정을 받는 절차", nodes: 15, verified: true },
+      { no: "06", slug: "administrative-appeals", name: "행정심판", type: "권리구제형", category: "국가 운영과 권력 통제", oneLiner: "위법·부당한 처분을 법원 밖 행정심판위원회에서 다투는 구제 절차", nodes: 17, verified: true },
+      { no: "07", slug: "basic-livelihood-security", name: "국민기초생활보장", type: "복지급여형", category: "복지와 사회보험", oneLiner: "소득인정액 기준으로 생계·의료·주거·교육 급여를 지급하는 최저생활 보장 제도", nodes: 19, verified: true },
+      { no: "08", slug: "public-procurement", name: "공공조달·국가계약", type: "재정·계약형", category: "재정과 예산", oneLiner: "국가·공공기관이 입찰 공고부터 낙찰·계약·대금 지급까지 진행하는 계약 절차", nodes: 22, verified: true },
+      { no: "09", slug: "national-health-insurance", name: "국민건강보험", type: "사회보험형", category: "복지와 사회보험", oneLiner: "전 국민 의무가입 건강보험의 자격·부과·급여·심사 운영 구조", nodes: 20, verified: true },
+      { no: "10", slug: "privacy-impact-assessment", name: "개인정보 영향평가", type: "데이터·디지털형", category: "데이터·디지털·공공서비스", oneLiner: "공공기관이 개인정보파일 운용 전 침해 위험을 평가받는 사전 점검 절차", nodes: 13, verified: false },
+      { no: "11", slug: "local-government-merger", name: "지방자치단체 통합", type: "자치·구역개편형", category: "지방자치와 지역", oneLiner: "행정구역 개편을 주민 의견 수렴과 법률 제정으로 확정하는 절차", nodes: 16, verified: true },
+      { no: "12", slug: "jeonse-fraud-relief", name: "전세사기 피해지원", type: "주거·피해구제형", category: "국토·환경·안전", oneLiner: "피해자 결정부터 경·공매 지원, 우선매수권까지 이어지는 피해구제 경로", nodes: 18, verified: true },
+      { no: "13", slug: "ai-basic-act", name: "인공지능 기본법", type: "데이터·디지털형", category: "데이터·디지털·공공서비스", oneLiner: "고영향 AI의 사업자 책무와 사실조사·과태료 집행 체계를 규정하는 규제 틀", nodes: 15, verified: false },
+      { no: "14", slug: "emissions-trading", name: "온실가스 배출권거래제", type: "환경·시장기제형", category: "국토·환경·안전", oneLiner: "배출허용총량을 정해 할당·거래·제출로 감축을 유도하는 시장 기제", nodes: 17, verified: true },
+      { no: "15", slug: "administrative-litigation", name: "행정소송", type: "권리구제형", category: "국가 운영과 권력 통제", oneLiner: "처분의 취소·무효를 법원에서 다투는 사법적 구제 절차", nodes: 19, verified: true },
+      { no: "16", slug: "building-permit", name: "건축허가", type: "인허가형", category: "인허가·규제·산업", oneLiner: "건축물의 설계·시공·사용승인까지 이어지는 대표 인허가 절차", nodes: 20, verified: true },
+      { no: "17", slug: "employment-insurance", name: "고용보험", type: "사회보험형", category: "노동·교육·인적자원", oneLiner: "실업급여·고용안정·직업능력개발을 아우르는 고용 안전망", nodes: 18, verified: true },
+      { no: "18", slug: "disaster-management", name: "재난안전관리", type: "안전관리형", category: "국토·환경·안전", oneLiner: "예방·대비·대응·복구 단계로 재난을 관리하는 국가 체계", nodes: 23, verified: false }
+    ];
+  }
+
+  categoryMeta() {
+    return [
+      { name: "전체", count: 100, dot: "#0b1410" },
+      { name: "국토·환경·안전", count: 14, dot: "#0f9f72" },
+      { name: "재정과 예산", count: 11, dot: "#315a78" },
+      { name: "민원·권리구제·참여", count: 10, dot: "#8a5a2b" },
+      { name: "국가 운영과 권력 통제", count: 10, dot: "#4b5563" },
+      { name: "복지와 사회보험", count: 12, dot: "#b54b7b" },
+      { name: "데이터·디지털·공공서비스", count: 10, dot: "#2563eb" },
+      { name: "지방자치와 지역", count: 8, dot: "#7c3aed" },
+      { name: "노동·교육·인적자원", count: 9, dot: "#b45309" },
+      { name: "인허가·규제·산업", count: 8, dot: "#0f766e" },
+      { name: "외교·국방·치안·생활 기반", count: 8, dot: "#be123c" }
+    ];
+  }
+
+  catColors() {
+    return {
+      "국토·환경·안전": "#0f9f72", "재정과 예산": "#315a78", "민원·권리구제·참여": "#8a5a2b",
+      "국가 운영과 권력 통제": "#4b5563", "복지와 사회보험": "#b54b7b", "데이터·디지털·공공서비스": "#2563eb",
+      "지방자치와 지역": "#7c3aed", "노동·교육·인적자원": "#b45309", "인허가·규제·산업": "#0f766e",
+      "외교·국방·치안·생활 기반": "#be123c"
+    };
+  }
+
+  shortCat(c) {
+    const map = { "데이터·디지털·공공서비스": "데이터·디지털", "국가 운영과 권력 통제": "권력 통제", "민원·권리구제·참여": "권리구제·참여", "외교·국방·치안·생활 기반": "외교·국방·치안" };
+    return map[c] || c;
+  }
+
+  renderVals() {
+    const all = this.data();
+    const colors = this.catColors();
+    const { activeCategory, verification, query, sort, visible, compare } = this.state;
+
+    const categories = this.categoryMeta().map((c) => {
+      const isActive = activeCategory === c.name;
+      return {
+        name: c.name, count: c.count, dot: c.dot,
+        color: isActive ? "#111714" : "#5d6b63",
+        weight: isActive ? 680 : 450,
+        bg: isActive ? "#eef8f3" : "transparent",
+        border: isActive ? "#0f9f72" : "transparent",
+        select: () => this.setState({ activeCategory: c.name, visible: 12 })
+      };
+    });
+
+    const verificationFilters = [
+      { key: "all", label: "전체", dot: "#0b1410", count: 100 },
+      { key: "verified", label: "조문 검증 완료", dot: "#0f9f72", count: 74 },
+      { key: "needs-scope", label: "범위 지정 필요", dot: "#c78116", count: 26 }
+    ].map((v) => {
+      const isActive = verification === v.key;
+      return {
+        ...v,
+        color: isActive ? "#111714" : "#5d6b63",
+        weight: isActive ? 680 : 450,
+        bg: isActive ? "#eef8f3" : "transparent",
+        select: () => this.setState({ verification: v.key, visible: 12 })
+      };
+    });
+
+    const q = query.trim().toLocaleLowerCase("ko");
+    let filtered = all.filter((r) => {
+      const mc = activeCategory === "전체" || r.category === activeCategory;
+      const mv = verification === "all" || (verification === "verified") === r.verified;
+      const text = [r.name, r.oneLiner, r.type, r.category].join(" ").toLocaleLowerCase("ko");
+      const mq = !q || q.split(/\s+/).every((t) => text.includes(t));
+      return mc && mv && mq;
+    });
+    filtered = filtered.sort((a, b) => sort === "name" ? a.name.localeCompare(b.name, "ko") : Number(a.no) - Number(b.no));
+
+    const shown = filtered.slice(0, visible);
+    const rows = shown.map((r, i) => {
+      const inCompare = compare.includes(r.slug);
+      return {
+        ...r,
+        categoryShort: this.shortCat(r.category),
+        catColor: colors[r.category], catBorder: colors[r.category] + "55",
+        statusColor: r.verified ? "#0f9f72" : "#c78116",
+        statusLabel: r.verified ? "검증 완료" : "범위 지정",
+        bg: i % 2 === 0 ? "#ffffff" : "#fcfcfb",
+        checkBorder: inCompare ? "#0f9f72" : "#bdcbc4",
+        checkBg: inCompare ? "#0f9f72" : "#ffffff",
+        checkMark: inCompare ? "✓" : "",
+        toggle: (e) => {
+          if (e && e.stopPropagation) e.stopPropagation();
+          this.setState((s) => {
+            const has = s.compare.includes(r.slug);
+            if (has) return { compare: s.compare.filter((x) => x !== r.slug) };
+            if (s.compare.length >= 3) return {};
+            return { compare: [...s.compare, r.slug] };
+          });
+        }
+      };
+    });
+
+    const compareChips = all.filter((r) => compare.includes(r.slug)).map((r) => ({
+      name: r.name,
+      remove: () => this.setState((s) => ({ compare: s.compare.filter((x) => x !== r.slug) }))
+    }));
+
+    const noFilter = activeCategory === "전체" && verification === "all" && !q;
+
+    return {
+      showIntro: this.props.introVisible ?? true,
+      showTray: this.props.compareTrayVisible ?? true,
+      categories, verificationFilters, rows, compareChips,
+      query,
+      hasQuery: q.length > 0,
+      onQuery: (e) => this.setState({ query: e.target.value, visible: 12 }),
+      clearQuery: () => this.setState({ query: "", visible: 12 }),
+      sortPriority: () => this.setState({ sort: "priority" }),
+      sortName: () => this.setState({ sort: "name" }),
+      sortPrioBg: sort === "priority" ? "#0b1410" : "#ffffff",
+      sortPrioColor: sort === "priority" ? "#ffffff" : "#5d6b63",
+      sortNameBg: sort === "name" ? "#0b1410" : "#ffffff",
+      sortNameColor: sort === "name" ? "#ffffff" : "#5d6b63",
+      filteredLabel: noFilter
+        ? `제도 100개 중 ${shown.length}개 표시 · 우선순위순`
+        : `${filtered.length}건 일치 · ${shown.length}개 표시`,
+      emptyResult: filtered.length === 0,
+      hasMore: visible < filtered.length,
+      showMore: () => this.setState((s) => ({ visible: s.visible + 12 })),
+      remainLabel: `남은 ${Math.max(filtered.length - visible, 0)}건`,
+      resetAll: () => this.setState({ activeCategory: "전체", verification: "all", query: "", visible: 12 }),
+      compareHint: compare.length >= 2 ? `${compare.length}/3 선택됨` : "2개 이상 선택하면 비교할 수 있습니다",
+      compareBtnBg: compare.length >= 2 ? "#0f9f72" : "#2a352f",
+      compareBtnCursor: compare.length >= 2 ? "pointer" : "default"
+    };
+  }
+}
+</script>
+</body>
+</html>

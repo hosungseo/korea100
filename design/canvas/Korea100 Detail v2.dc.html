@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+  body { margin: 0; background: #fcfcfb; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+  a { color: #087452; text-decoration: none; }
+  a:hover { color: #0f9f72; text-decoration: underline; }
+</style>
+</helmet>
+
+<div data-screen-label="제도 상세 v2 (100개 데이터 구동)" style="display: flex; flex-direction: column; min-height: 100vh; background: #fcfcfb;">
+
+  <!-- Top bar -->
+  <header style="display: flex; align-items: center; justify-content: space-between; padding: 14px 32px; border-bottom: 1px solid #dde5df; background: #ffffff; position: sticky; top: 0; z-index: 30;">
+    <div style="display: flex; align-items: baseline; gap: 14px;">
+      <div style="font-size: 18px; font-weight: 720; color: #111714;">대한민국 제도 100</div>
+      <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; text-transform: uppercase;">Institution Registry</div>
+    </div>
+    <nav style="display: flex; align-items: center; gap: 24px; font-size: 14px; color: #5d6b63;">
+      <span style="cursor: pointer;" style-hover="color: #111714;">← 제도 대장</span>
+      <span style="cursor: pointer;" style-hover="color: #111714;">현장 검증 대장</span>
+      <span style="font-family: ui-monospace, monospace; font-size: 12px; color: #87938d;">기준일 {{ asOfDate }}</span>
+    </nav>
+  </header>
+
+  <!-- Institution switcher -->
+  <div style="display: flex; align-items: center; gap: 12px; padding: 12px 32px; border-bottom: 1px solid #dde5df; background: #ffffff;">
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d;">제도 선택</span>
+    <select value="{{ slug }}" onChange="{{ onSlugChange }}" style="border: 1px solid #bdcbc4; background: #ffffff; color: #111714; font-size: 14px; padding: 7px 10px; font-family: inherit; min-width: 320px;">
+      <sc-for list="{{ manifestOptions }}" as="opt" hint-placeholder-count="3">
+        <option value="{{ opt.slug }}">{{ opt.label }}</option>
+      </sc-for>
+    </select>
+    <span onClick="{{ goPrev }}" style="border: 1px solid #bdcbc4; background: #ffffff; font-size: 13px; padding: 6px 12px; cursor: pointer; color: #111714;" style-hover="background: #f5f7f6;">← 이전</span>
+    <span onClick="{{ goNext }}" style="border: 1px solid #bdcbc4; background: #ffffff; font-size: 13px; padding: 6px 12px; cursor: pointer; color: #111714;" style-hover="background: #f5f7f6;">다음 →</span>
+    <span style="font-size: 13px; color: #87938d; font-variant-numeric: tabular-nums;">{{ positionLabel }}</span>
+  </div>
+
+  <sc-if value="{{ loaded }}" hint-placeholder-val="{{ true }}">
+
+  <!-- Title band -->
+  <div style="border-bottom: 1px solid #dde5df; background: #f5f7f6; padding: 24px 32px;">
+    <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 24px;">
+      <div style="display: flex; flex-direction: column; gap: 8px; min-width: 0;">
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <span style="font-family: ui-monospace, monospace; font-size: 13px; font-weight: 650; color: #87938d;">NO {{ priorityLabel }}</span>
+          <span style="font-size: 12px; font-weight: 650; color: #0f9f72; border: 1px solid #0f9f7255; padding: 2px 8px;">{{ category }}</span>
+          <span style="font-size: 13px; color: #5d6b63;">{{ instType }}</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 650; color: {{ badgeColor }}; background: {{ badgeBg }}; padding: 3px 10px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: {{ badgeDot }};"></span>{{ badgeLabel }}</span>
+        </div>
+        <h1 style="margin: 0; font-size: 36px; font-weight: 720; color: #111714; line-height: 1.15;">{{ instName }}</h1>
+        <p style="margin: 0; font-size: 16px; color: #5d6b63; line-height: 1.65; max-width: 760px;">{{ oneLiner }}</p>
+      </div>
+      <div style="display: flex; gap: 8px; flex: none; padding-top: 4px;">
+        <span style="border: 1px solid #bdcbc4; background: #ffffff; color: #111714; font-size: 13px; font-weight: 650; padding: 9px 16px; cursor: pointer;" style-hover="background: #f5f7f6;">PNG 내보내기</span>
+        <span style="border: 1px solid #bdcbc4; background: #ffffff; color: #111714; font-size: 13px; font-weight: 650; padding: 9px 16px; cursor: pointer;" style-hover="background: #f5f7f6;">인쇄 · PDF</span>
+        <span style="background: #0b1410; color: #ffffff; font-size: 13px; font-weight: 650; padding: 9px 16px; cursor: pointer;" style-hover="background: #2a352f;">비교 선반에 담기</span>
+      </div>
+    </div>
+    <div style="display: flex; gap: 0; margin-top: 20px; border: 1px solid #dde5df; background: #ffffff; width: fit-content; font-variant-numeric: tabular-nums;">
+      <div style="padding: 10px 20px; border-right: 1px solid #dde5df;"><div style="font-size: 20px; font-weight: 720; color: #111714;">{{ statNodes }}</div><div style="font-size: 11px; color: #87938d;">절차 노드</div></div>
+      <div style="padding: 10px 20px; border-right: 1px solid #dde5df;"><div style="font-size: 20px; font-weight: 720; color: #111714;">{{ statLanes }}</div><div style="font-size: 11px; color: #87938d;">행위 레인</div></div>
+      <div style="padding: 10px 20px; border-right: 1px solid #dde5df;"><div style="font-size: 20px; font-weight: 720; color: #111714;">{{ statStages }}</div><div style="font-size: 11px; color: #87938d;">게이트</div></div>
+      <div style="padding: 10px 20px; border-right: 1px solid #dde5df;"><div style="font-size: 20px; font-weight: 720; color: #087452;">{{ statArticles }}</div><div style="font-size: 11px; color: #87938d;">조문 확인</div></div>
+      <div style="padding: 10px 20px;"><div style="font-size: 20px; font-weight: 720; color: #c78116;">{{ statBottlenecks }}</div><div style="font-size: 11px; color: #87938d;">병목 구간</div></div>
+    </div>
+  </div>
+
+  <!-- 업무구조도 -->
+  <div style="padding: 24px 32px 8px; display: flex; align-items: center; justify-content: space-between;">
+    <div style="display: flex; align-items: baseline; gap: 12px;">
+      <h2 style="margin: 0; font-size: 22px; font-weight: 680; color: #111714;">업무구조도</h2>
+      <span style="font-size: 13px; color: #87938d;">노드 상태는 제도 흐름 설명용 편집 상태입니다</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <div style="display: flex; gap: 14px; font-size: 12px; color: #5d6b63;">
+        <span style="display: inline-flex; align-items: center; gap: 5px;"><span style="width: 9px; height: 9px; background: #dde5df; border: 1px solid #bdcbc4;"></span>완료</span>
+        <span style="display: inline-flex; align-items: center; gap: 5px;"><span style="width: 9px; height: 9px; background: #0f9f72;"></span>현재</span>
+        <span style="display: inline-flex; align-items: center; gap: 5px;"><span style="width: 9px; height: 9px; background: #c78116;"></span>위험·회귀</span>
+        <span style="display: inline-flex; align-items: center; gap: 5px;"><span style="width: 9px; height: 9px; background: #ffffff; border: 1px solid #bdcbc4;"></span>대기</span>
+      </div>
+      <div style="display: flex; border: 1px solid #dde5df; font-size: 13px;">
+        <span onClick="{{ viewCore }}" style="padding: 6px 14px; background: {{ coreBg }}; color: {{ coreColor }}; font-weight: 650; cursor: pointer;">핵심 흐름</span>
+        <span onClick="{{ viewFull }}" style="padding: 6px 14px; background: {{ fullBg }}; color: {{ fullColor }}; font-weight: 650; cursor: pointer;">전체 구조도</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 0; margin: 12px 32px 32px; border: 1px solid #bdcbc4; background: #ffffff;">
+    <div style="background: #fcfcfb;">
+      <sc-if value="{{ isFull }}" hint-placeholder-val="{{ true }}">
+        <div data-board-root="1" style="position: relative;">
+          {{ edgeOverlay }}
+          <div style="display: grid; grid-template-columns: 128px repeat({{ stageCount }}, 1fr); border-bottom: 1px solid #bdcbc4; background: #ffffff;">
+            <div style="padding: 10px 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; border-right: 1px solid #dde5df;">레인 ＼ 게이트</div>
+            <sc-for list="{{ stages }}" as="st" hint-placeholder-count="8">
+              <div style="padding: 10px 12px; border-right: 1px solid #dde5df; display: flex; flex-direction: column; gap: 1px;">
+                <span style="font-family: ui-monospace, monospace; font-size: 11px; font-weight: 700; color: #087452;">{{ st.code }}</span>
+                <span style="font-size: 12px; font-weight: 650; color: #111714;">{{ st.label }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <sc-for list="{{ laneRows }}" as="lane" hint-placeholder-count="7">
+            <div style="display: grid; grid-template-columns: 128px repeat({{ stageCount }}, 1fr); border-bottom: 1px solid #dde5df; background: {{ lane.bg }};">
+              <div style="padding: 10px 12px; border-right: 1px solid #dde5df; font-size: 12px; font-weight: 650; color: #5d6b63; line-height: 1.4; display: flex; align-items: center;">{{ lane.name }}</div>
+              <sc-for list="{{ lane.cells }}" as="cell" hint-placeholder-count="8">
+                <div style="border-right: 1px solid #eef1ef; padding: 8px 18px; display: flex; flex-direction: column; justify-content: center; gap: 6px; min-height: 52px;">
+                  <sc-for list="{{ cell.nodes }}" as="n" hint-placeholder-count="0">
+                    <div onClick="{{ n.select }}" data-node-id="{{ n.id }}" style="position: relative; z-index: 2; border: 1.5px {{ n.borderStyle }} {{ n.border }}; background: {{ n.bg }}; padding: 5px 8px; cursor: pointer; box-shadow: {{ n.ring }};" style-hover="border-color: #0f9f72;">
+                      <div style="display: flex; align-items: center; justify-content: space-between; gap: 4px;">
+                        <span style="font-family: ui-monospace, monospace; font-size: 10px; font-weight: 700; color: {{ n.codeColor }};">{{ n.id }}</span>
+                        <span style="font-size: 10px; font-weight: 650; color: {{ n.stateColor }};">{{ n.stateLabel }}</span>
+                      </div>
+                      <div style="font-size: 12px; font-weight: 650; color: #111714; line-height: 1.35; margin-top: 1px;">{{ n.name }}</div>
+                      <sc-if value="{{ n.loopLabel }}" hint-placeholder-val="{{ false }}">
+                        <div style="font-size: 10px; color: #c78116; font-weight: 650; margin-top: 2px;">↩ {{ n.loopLabel }}</div>
+                      </sc-if>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isCore }}" hint-placeholder-val="{{ false }}">
+        <div style="padding: 20px; display: flex; flex-direction: column; gap: 14px;">
+          <sc-for list="{{ coreBands }}" as="band" hint-placeholder-count="4">
+            <div style="display: grid; grid-template-columns: 132px 1fr; gap: 14px; align-items: start;">
+              <div style="padding-top: 10px;">
+                <div style="font-family: ui-monospace, monospace; font-size: 11px; font-weight: 700; color: #087452;">{{ band.code }}</div>
+                <div style="font-size: 13px; font-weight: 650; color: #111714;">{{ band.label }}</div>
+              </div>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px 0; align-items: stretch;">
+                <sc-for list="{{ band.nodes }}" as="n" hint-placeholder-count="2">
+                  <div style="display: flex; align-items: center;">
+                    <div onClick="{{ n.select }}" style="width: 190px; border: 1.5px {{ n.borderStyle }} {{ n.border }}; background: {{ n.bg }}; padding: 8px 10px; cursor: pointer; box-shadow: {{ n.ring }};" style-hover="border-color: #0f9f72;">
+                      <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <span style="font-family: ui-monospace, monospace; font-size: 10px; font-weight: 700; color: {{ n.codeColor }};">{{ n.id }}</span>
+                        <span style="font-size: 10px; font-weight: 650; color: {{ n.stateColor }};">{{ n.stateLabel }}</span>
+                      </div>
+                      <div style="font-size: 13px; font-weight: 650; color: #111714; line-height: 1.35; margin-top: 2px;">{{ n.name }}</div>
+                      <div style="font-size: 11px; color: #87938d; margin-top: 3px;">{{ n.actor }}</div>
+                      <sc-if value="{{ n.loopLabel }}" hint-placeholder-val="{{ false }}">
+                        <div style="font-size: 10px; color: #c78116; font-weight: 650; margin-top: 3px;">↩ {{ n.loopLabel }}</div>
+                      </sc-if>
+                    </div>
+                    <div style="width: 22px; text-align: center; color: #bdcbc4; font-size: 14px;">{{ n.arrow }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+
+    <!-- INSPECTOR -->
+    <aside style="border-top: 1px solid #bdcbc4; background: #ffffff; padding: 18px 24px; display: grid; grid-template-columns: 300px 260px 1fr; gap: 24px; align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d;">노드 상세</span>
+          <span style="font-family: ui-monospace, monospace; font-size: 12px; font-weight: 700; color: #087452;">{{ ins.id }}</span>
+          <span style="font-size: 11px; font-weight: 650; color: {{ ins.stateColor }}; border: 1px solid {{ ins.stateColor }}; padding: 1px 7px;">{{ ins.stateLabel }}</span>
+        </div>
+        <div style="font-size: 18px; font-weight: 680; color: #111714; line-height: 1.3;">{{ ins.name }}</div>
+        <div style="font-size: 13px; color: #5d6b63;">{{ ins.stage }} · {{ ins.lane }} · {{ ins.actor }}</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px;">
+          <sc-for list="{{ ins.docs }}" as="doc" hint-placeholder-count="2">
+            <span style="font-size: 12px; color: #111714; border: 1px solid #dde5df; background: #f5f7f6; padding: 3px 9px;">{{ doc }}</span>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div style="border: 1px solid #dde5df; padding: 9px 11px;">
+            <div style="font-size: 11px; color: #87938d; margin-bottom: 3px;">기한</div>
+            <div style="font-size: 13px; font-weight: 650; color: #111714; line-height: 1.4;">{{ ins.deadline }}</div>
+          </div>
+          <div style="border: 1px solid #dde5df; padding: 9px 11px;">
+            <div style="font-size: 11px; color: #87938d; margin-bottom: 3px;">확신도</div>
+            <div style="font-size: 13px; font-weight: 650; color: #111714; font-variant-numeric: tabular-nums;">{{ ins.confidence }}</div>
+          </div>
+        </div>
+        <sc-if value="{{ ins.blocker }}" hint-placeholder-val="{{ false }}">
+          <div style="border: 1px solid #c78116; background: #fdf3e3; padding: 9px 11px;">
+            <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.06em; color: #c78116; margin-bottom: 3px;">병목 · 블로커</div>
+            <div style="font-size: 13px; color: #111714; line-height: 1.5;">{{ ins.blocker }}</div>
+          </div>
+        </sc-if>
+      </div>
+
+      <div>
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; margin-bottom: 8px;">법적 근거</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px;">
+          <sc-for list="{{ ins.laws }}" as="law" hint-placeholder-count="2">
+            <div style="border-left: 2px solid #0f9f72; padding: 2px 0 2px 10px;">
+              <div style="font-size: 13px; font-weight: 650; color: #111714;">{{ law.law }} {{ law.article }}</div>
+              <div style="font-size: 12px; color: #5d6b63; line-height: 1.5; margin-top: 2px;">{{ law.text }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- 한 장 캔버스 -->
+  <div style="padding: 0 32px 40px;">
+    <div style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px;">
+      <h2 style="margin: 0; font-size: 22px; font-weight: 680; color: #111714;">한 장 캔버스</h2>
+      <span style="font-size: 13px; color: #87938d;">법령 · 조직 · 절차 · 예산 · 문서</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+      <div style="border: 1px solid #dde5df; background: #ffffff; padding: 18px 20px; grid-column: span 2;">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; margin-bottom: 8px;">목적</div>
+        <p style="margin: 0; font-size: 14px; color: #111714; line-height: 1.65;">{{ purpose }}</p>
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; margin: 16px 0 8px;">법적 근거</div>
+        <div style="display: flex; flex-direction: column;">
+          <sc-for list="{{ legalBasis }}" as="lb" hint-placeholder-count="3">
+            <div style="display: grid; grid-template-columns: 200px 1fr 80px; gap: 10px; padding: 7px 0; border-bottom: 1px solid #f5f7f6; font-size: 13px; align-items: baseline;">
+              <span style="font-weight: 650; color: #111714;">{{ lb.law }}</span>
+              <span style="color: #5d6b63;">{{ lb.articles }}</span>
+              <span style="font-size: 11px; color: #87938d; text-align: right;">{{ lb.kind }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="border: 1px solid #dde5df; background: #ffffff; padding: 18px 20px;">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; margin-bottom: 8px;">권한 관계</div>
+        <div style="display: flex; flex-direction: column; gap: 9px; font-size: 13px;">
+          <sc-for list="{{ authorities }}" as="auth" hint-placeholder-count="3">
+            <div><span style="font-weight: 650; color: #111714;">{{ auth.name }}</span><div style="color: #5d6b63; margin-top: 1px;">{{ auth.role }}</div></div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="border: 1px solid #dde5df; background: #ffffff; padding: 18px 20px;">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; margin-bottom: 8px;">돈의 흐름</div>
+        <p style="margin: 0; font-size: 13px; color: #5d6b63; line-height: 1.65;">{{ moneyFlow }}</p>
+      </div>
+      <div style="border: 1px solid #dde5df; background: #ffffff; padding: 18px 20px;">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; margin-bottom: 8px;">문서의 흐름</div>
+        <p style="margin: 0; font-size: 13px; color: #5d6b63; line-height: 1.65;">{{ docsFlow }}</p>
+      </div>
+      <div style="border: 1px solid #c7811655; background: #fdf9f1; padding: 18px 20px;">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #c78116; margin-bottom: 8px;">병목</div>
+        <ul style="margin: 0; padding-left: 16px; font-size: 13px; color: #111714; line-height: 1.6; display: flex; flex-direction: column; gap: 5px;">
+          <sc-for list="{{ bottlenecks }}" as="bt" hint-placeholder-count="3">
+            <li>{{ bt }}</li>
+          </sc-for>
+        </ul>
+      </div>
+      <div style="border: 1px solid #dde5df; background: #eef8f3; padding: 18px 20px; grid-column: span 2;">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #087452; margin-bottom: 8px;">개선점</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px 20px; font-size: 13px; color: #111714; line-height: 1.6;">
+          <sc-for list="{{ reformPoints }}" as="rp" hint-placeholder-count="4">
+            <div>· {{ rp }}</div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="border: 1px solid #dde5df; background: #ffffff; padding: 18px 20px;">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; margin-bottom: 8px;">관련 제도</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+          <sc-for list="{{ related }}" as="rel" hint-placeholder-count="3">
+            <span style="font-size: 13px; color: #087452; border: 1px solid #0f9f7255; padding: 4px 10px; cursor: pointer;" style-hover="background: #dff5eb;">{{ rel }}</span>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 16px 32px 32px; border-top: 1px solid #dde5df; font-size: 12px; color: #87938d; line-height: 1.6;">
+    검증: {{ verificationScope }} 이 콘텐츠는 제도 이해를 위한 참고 자료이며 법률 자문이나 정부기관의 공식 해석을 대신하지 않습니다.
+  </div>
+
+  </sc-if>
+
+  <sc-if value="{{ loading }}" hint-placeholder-val="{{ false }}">
+    <div style="padding: 80px 32px; text-align: center; color: #87938d; font-size: 14px;">제도 데이터를 불러오는 중입니다…</div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;slug&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;environmental-impact-assessment&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;데이터&quot;}, &quot;defaultView&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;full&quot;, &quot;core&quot;], &quot;default&quot;: &quot;full&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;구조도&quot;}}">
+class Component extends DCLogic {
+  state = { manifest: [], inst: null, slug: null, view: null, selected: null, edgePaths: [], boardW: 0, boardH: 0 };
+
+  currentSlug() {
+    return this.state.slug ?? this.props.slug ?? "environmental-impact-assessment";
+  }
+
+  componentDidMount() {
+    this._remeasure = () => this.measureEdges();
+    window.addEventListener("resize", this._remeasure);
+    fetch("data/institutions-manifest.json").then((r) => r.json()).then((m) => this.setState({ manifest: m }));
+    this.loadInst(this.currentSlug());
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this._remeasure);
+  }
+
+  componentDidUpdate() {
+    requestAnimationFrame(this._remeasure);
+  }
+
+  loadInst(slug) {
+    fetch("data/institutions/" + slug + ".json").then((r) => r.json()).then((inst) => {
+      const cur = inst.process.nodes.find((n) => n.status === "current");
+      this.setState({ inst, slug, selected: cur ? cur.id : inst.process.nodes[0].id, edgePaths: [] });
+      setTimeout(this._remeasure, 200);
+    });
+  }
+
+  edgeData() {
+    const p = this.state.inst?.process;
+    if (!p) return [];
+    const kindMap = { sequence: "seq", message: "msg", loop: "loop" };
+    return p.edges.map((e) => ({ s: e.source, t: e.target, kind: kindMap[e.type] || "seq", label: e.label }));
+  }
+
+  roundedPath(pts, r) {
+    if (pts.length < 2) return "";
+    let d = `M ${pts[0][0]} ${pts[0][1]}`;
+    for (let i = 1; i < pts.length - 1; i++) {
+      const [px, py] = pts[i - 1], [cx, cy] = pts[i], [nx, ny] = pts[i + 1];
+      const inLen = Math.hypot(cx - px, cy - py), outLen = Math.hypot(nx - cx, ny - cy);
+      const rr = Math.min(r, inLen / 2, outLen / 2);
+      if (rr < 1) { d += ` L ${cx} ${cy}`; continue; }
+      const ix = cx - Math.sign(cx - px) * rr * (cx !== px ? 1 : 0);
+      const iy = cy - Math.sign(cy - py) * rr * (cy !== py ? 1 : 0);
+      const ox = cx + Math.sign(nx - cx) * rr * (nx !== cx ? 1 : 0);
+      const oy = cy + Math.sign(ny - cy) * rr * (ny !== cy ? 1 : 0);
+      d += ` L ${ix} ${iy} Q ${cx} ${cy} ${ox} ${oy}`;
+    }
+    const last = pts[pts.length - 1];
+    d += ` L ${last[0]} ${last[1]}`;
+    return d;
+  }
+
+  measureEdges() {
+    const root = document.querySelector('[data-board-root]');
+    if (!root || !this.state.inst) { if (this.state.edgePaths.length) this.setState({ edgePaths: [] }); return; }
+    const rootRect = root.getBoundingClientRect();
+    const rectOf = (id) => {
+      const el = root.querySelector(`[data-node-id="${CSS.escape(id)}"]`);
+      if (!el) return null;
+      const r = el.getBoundingClientRect();
+      return { left: r.left - rootRect.left, right: r.right - rootRect.left, top: r.top - rootRect.top, bottom: r.bottom - rootRect.top, cx: r.left - rootRect.left + r.width / 2, cy: r.top - rootRect.top + r.height / 2 };
+    };
+    const paths = [];
+    const gutterUse = {};
+    const nudge = (x) => {
+      const key = Math.round(x / 8);
+      const n = gutterUse[key] || 0;
+      gutterUse[key] = n + 1;
+      return x + (n % 2 === 0 ? 1 : -1) * Math.ceil(n / 2) * 6;
+    };
+
+    const edgeList = this.edgeData().map((e) => {
+      const a = rectOf(e.s), b = rectOf(e.t);
+      if (!a || !b) return null;
+      const sameCol = Math.abs(a.left - b.left) < 8;
+      const dir = sameCol ? "same" : (b.left > a.right ? "fwd" : "back");
+      const outSide = dir === "back" ? "left" : "right";
+      const inSide = dir === "fwd" ? "left" : "right";
+      return { ...e, a, b, dir, outKey: e.s + ":" + outSide, inKey: e.t + ":" + inSide };
+    }).filter(Boolean);
+
+    const allRectsPre = {};
+    this.state.inst.process.nodes.forEach((n) => { const r = rectOf(n.id); if (r) allRectsPre[n.id] = r; });
+    const vClear = (e, cx) => {
+      const y1 = Math.min(e.a.bottom, e.b.bottom), y2 = Math.max(e.a.top, e.b.top);
+      return !Object.entries(allRectsPre).some(([id, r]) =>
+        id !== e.s && id !== e.t && r.left < cx && cx < r.right && r.top < y2 && r.bottom > y1
+      );
+    };
+    edgeList.forEach((e) => {
+      e.vertical = e.dir === "same" && e.kind !== "loop" && vClear(e, (e.b.left + e.b.right) / 2);
+    });
+
+    const sideCount = {}, sideSeen = {};
+    edgeList.forEach((e) => {
+      if (e.vertical) return;
+      sideCount[e.outKey] = (sideCount[e.outKey] || 0) + 1;
+      sideCount[e.inKey] = (sideCount[e.inKey] || 0) + 1;
+    });
+    const spread = (key, cy, boxTop, boxBottom) => {
+      const n = sideCount[key];
+      if (!n || n <= 1) return cy;
+      const i = sideSeen[key] = (sideSeen[key] ?? -1) + 1;
+      const gap = Math.min(12, (boxBottom - boxTop - 8) / n);
+      return cy + (i - (n - 1) / 2) * gap;
+    };
+
+    edgeList.forEach((e, i) => {
+      const { a, b, dir } = e;
+      if (e.vertical) {
+        const cx = (b.left + b.right) / 2;
+        const down = b.top > a.bottom;
+        const pts = down
+          ? [[cx, a.bottom], [cx, b.top - 4]]
+          : [[cx, a.top], [cx, b.bottom + 4]];
+        paths.push({ key: e.s + "-" + e.t + i, d: this.roundedPath(pts, 8), kind: e.kind, s: e.s, t: e.t });
+        return;
+      }
+      const sy = spread(e.outKey, a.cy, a.top, a.bottom);
+      const ty = spread(e.inKey, b.cy, b.top, b.bottom);
+      let pts;
+      if (dir === "same") {
+        const mx = nudge(Math.max(a.right, b.right) + 14);
+        pts = [[a.right, sy], [mx, sy], [mx, ty], [b.right + 4, ty]];
+      } else if (dir === "fwd") {
+        const mx = nudge(b.left - 10);
+        pts = Math.abs(sy - ty) < 2
+          ? [[a.right, sy], [b.left - 4, ty]]
+          : [[a.right, sy], [mx, sy], [mx, ty], [b.left - 4, ty]];
+      } else {
+        const mx = nudge(a.left - 10);
+        pts = [[a.left, sy], [mx, sy], [mx, ty], [b.right + 4, ty]];
+      }
+      paths.push({ key: e.s + "-" + e.t + i, d: this.roundedPath(pts, 8), kind: e.kind, s: e.s, t: e.t });
+    });
+
+    const w = Math.round(rootRect.width), h = Math.round(rootRect.height);
+    if (JSON.stringify(paths) !== JSON.stringify(this.state.edgePaths) || w !== this.state.boardW || h !== this.state.boardH) {
+      this.setState({ edgePaths: paths, boardW: w, boardH: h });
+    }
+  }
+
+  styleFor(status) {
+    switch (status) {
+      case "done": return { bg: "#f5f7f6", border: "#bdcbc4", borderStyle: "solid", codeColor: "#87938d", stateColor: "#5d6b63", stateLabel: "완료" };
+      case "current": return { bg: "#dff5eb", border: "#0f9f72", borderStyle: "solid", codeColor: "#087452", stateColor: "#087452", stateLabel: "현재" };
+      case "risk": return { bg: "#fdf3e3", border: "#c78116", borderStyle: "solid", codeColor: "#c78116", stateColor: "#c78116", stateLabel: "위험" };
+      case "loop": return { bg: "#fdf9f1", border: "#c78116", borderStyle: "dashed", codeColor: "#c78116", stateColor: "#c78116", stateLabel: "회귀" };
+      default: return { bg: "#ffffff", border: "#dde5df", borderStyle: "solid", codeColor: "#87938d", stateColor: "#87938d", stateLabel: "대기" };
+    }
+  }
+
+  decorate(n, loopLabelMap) {
+    const s = this.styleFor(n.status);
+    const isSel = this.state.selected === n.id;
+    return {
+      id: n.id, name: n.name, actor: n.actor || "", ...s,
+      loopLabel: loopLabelMap[n.id] || "",
+      ring: isSel ? "0 0 0 2px #0f9f72" : "none",
+      select: () => this.setState({ selected: n.id })
+    };
+  }
+
+  renderVals() {
+    const { manifest, inst } = this.state;
+    const slug = this.currentSlug();
+    const manifestOptions = manifest.map((m) => ({
+      slug: m.slug,
+      label: String(m.priority).padStart(2, "0") + " · " + m.name
+    }));
+    const idx = manifest.findIndex((m) => m.slug === slug);
+    const nav = {
+      slug,
+      onSlugChange: (e) => this.loadInst(e.target.value),
+      goPrev: () => { if (idx > 0) this.loadInst(manifest[idx - 1].slug); },
+      goNext: () => { if (idx >= 0 && idx < manifest.length - 1) this.loadInst(manifest[idx + 1].slug); },
+      positionLabel: idx >= 0 ? (idx + 1) + " / " + manifest.length : "",
+      manifestOptions
+    };
+
+    if (!inst) {
+      return { ...nav, loaded: false, loading: true, asOfDate: "—" };
+    }
+
+    const p = inst.process;
+    const view = this.state.view ?? this.props.defaultView ?? "full";
+    const manEntry = manifest.find((m) => m.slug === slug);
+
+    const stages = p.stages.map((s) => {
+      const sp = s.indexOf(" ");
+      return sp > 0 ? { full: s, code: s.slice(0, sp), label: s.slice(sp + 1) } : { full: s, code: "", label: s };
+    });
+
+    const loopLabelMap = {};
+    p.edges.filter((e) => e.type === "loop").forEach((e) => {
+      loopLabelMap[e.source] = (e.label ? e.label + " · " : "") + e.target + "로";
+    });
+
+    const laneRows = p.lanes.map((lane, li) => ({
+      name: lane,
+      bg: li % 2 === 0 ? "#fcfcfb" : "#ffffff",
+      cells: stages.map((st) => ({
+        nodes: p.nodes.filter((n) => n.lane === lane && n.stage === st.full).map((n) => this.decorate(n, loopLabelMap))
+      }))
+    }));
+
+    const coreBands = stages.map((st) => {
+      const ns = p.nodes.filter((n) => n.stage === st.full);
+      return {
+        code: st.code, label: st.label,
+        nodes: ns.map((n, i) => ({ ...this.decorate(n, loopLabelMap), arrow: i === ns.length - 1 ? "" : "→" }))
+      };
+    }).filter((b) => b.nodes.length > 0);
+
+    const raw = p.nodes.find((n) => n.id === this.state.selected) || p.nodes[0];
+    const s = this.styleFor(raw.status);
+    const stageMeta = stages.find((x) => x.full === raw.stage);
+    const ins = {
+      id: raw.id, name: raw.name, lane: raw.lane, actor: raw.actor || "—",
+      stage: stageMeta ? stageMeta.full : raw.stage,
+      stateColor: s.stateColor, stateLabel: s.stateLabel,
+      deadline: raw.deadline || "—",
+      confidence: raw.confidence != null ? Math.round(raw.confidence * 100) + "%" : "—",
+      blocker: raw.blocker || "",
+      laws: raw.legal_basis || [],
+      docs: raw.output_documents || []
+    };
+
+    const av = inst.verification?.articleVerification;
+    const verified = inst.verification?.status === "article-verified";
+    const canvas = inst.canvas || {};
+
+    const strokeFor = { seq: "#c3cfc8", msg: "#aab6af", loop: "#dcae62", hi: "#0f9f72", hiLoop: "#c78116" };
+    const dashFor = { seq: "none", msg: "2 4", loop: "5 4" };
+    const sel = this.state.selected;
+    const sorted = [...this.state.edgePaths].sort((pp, q) => {
+      const ph = pp.s === sel || pp.t === sel ? 1 : 0;
+      const qh = q.s === sel || q.t === sel ? 1 : 0;
+      return ph - qh;
+    });
+    const edgeOverlay = React.createElement(
+      "svg",
+      { width: this.state.boardW || 1300, height: this.state.boardH || 700, style: { position: "absolute", top: 0, left: 0, pointerEvents: "none", zIndex: 1 } },
+      React.createElement("defs", null,
+        [["seq", strokeFor.seq], ["msg", strokeFor.msg], ["loop", strokeFor.loop], ["hi", strokeFor.hi], ["hiloop", strokeFor.hiLoop]].map(([k, c]) =>
+          React.createElement("marker", { key: k, id: "arr-" + k, viewBox: "0 0 10 10", refX: 8.5, refY: 5, markerWidth: 8, markerHeight: 8, markerUnits: "userSpaceOnUse", orient: "auto-start-reverse" },
+            React.createElement("path", { d: "M 0 0 L 10 5 L 0 10 z", fill: c })
+          )
+        )
+      ),
+      sorted.map((pp) => {
+        const isHi = pp.s === sel || pp.t === sel;
+        const stroke = isHi ? (pp.kind === "loop" ? strokeFor.hiLoop : strokeFor.hi) : strokeFor[pp.kind];
+        const marker = isHi ? (pp.kind === "loop" ? "url(#arr-hiloop)" : "url(#arr-hi)") : `url(#arr-${pp.kind})`;
+        return React.createElement("path", { key: pp.key, d: pp.d, fill: "none", stroke, strokeWidth: isHi ? 1.8 : 1.2, strokeDasharray: dashFor[pp.kind], markerEnd: marker });
+      })
+    );
+
+    return {
+      ...nav,
+      loaded: true, loading: false,
+      asOfDate: inst.asOfDate || "—",
+      priorityLabel: String(inst.priority ?? manEntry?.priority ?? "—").padStart(2, "0"),
+      category: manEntry?.category || "",
+      instType: inst.type || "",
+      instName: inst.name,
+      oneLiner: inst.oneLiner || "",
+      badgeColor: verified ? "#087452" : "#c78116",
+      badgeBg: verified ? "#dff5eb" : "#fdf3e3",
+      badgeDot: verified ? "#0f9f72" : "#c78116",
+      badgeLabel: verified
+        ? "조문 검증 " + (av ? av.verifiedReferences + "/" + av.articleReferences : "완료") + (av?.checkedAt ? " · " + av.checkedAt : "")
+        : "출처 연결 · 범위 지정 필요",
+      statNodes: p.nodes.length,
+      statLanes: p.lanes.length,
+      statStages: p.stages.length,
+      statArticles: av ? av.verifiedReferences : "—",
+      statBottlenecks: (canvas.bottlenecks || []).length,
+      isFull: view === "full", isCore: view === "core",
+      viewFull: () => this.setState({ view: "full" }),
+      viewCore: () => this.setState({ view: "core" }),
+      fullBg: view === "full" ? "#0b1410" : "#ffffff", fullColor: view === "full" ? "#ffffff" : "#5d6b63",
+      coreBg: view === "core" ? "#0b1410" : "#ffffff", coreColor: view === "core" ? "#ffffff" : "#5d6b63",
+      stageCount: stages.length,
+      stages, laneRows, coreBands, ins, edgeOverlay,
+      purpose: canvas.purpose || "",
+      legalBasis: canvas.legalBasis || [],
+      authorities: canvas.authorities || [],
+      moneyFlow: canvas.moneyFlow || "",
+      docsFlow: canvas.docsFlow || "",
+      bottlenecks: canvas.bottlenecks || [],
+      reformPoints: canvas.reformPoints || [],
+      related: inst.related || [],
+      verificationScope: inst.verification?.scope || ""
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+  body { margin: 0; background: #fcfcfb; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+  a { color: #087452; text-decoration: none; }
+  a:hover { color: #0f9f72; text-decoration: underline; }
+</style>
+</helmet>
+
+<div data-screen-label="세로 업무구조도 (모바일·PNG)" style="width: 900px; margin: 0 auto; background: #fcfcfb; display: flex; flex-direction: column; min-height: 100vh;">
+
+  <!-- Header -->
+  <header style="background: #0b1410; color: #ffffff; padding: 22px 28px 18px; display: flex; flex-direction: column; gap: 10px;">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+      <div style="display: flex; align-items: baseline; gap: 10px;">
+        <span style="font-size: 15px; font-weight: 720;">대한민국 제도 100</span>
+        <span style="font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: #87938d;">업무구조도 · 세로판</span>
+      </div>
+      <select value="{{ slug }}" onChange="{{ onSlugChange }}" style="border: 1px solid #3a463f; background: #16211b; color: #ffffff; font-size: 12px; padding: 5px 8px; font-family: inherit; max-width: 240px;">
+        <sc-for list="{{ manifestOptions }}" as="opt" hint-placeholder-count="3">
+          <option value="{{ opt.slug }}">{{ opt.label }}</option>
+        </sc-for>
+      </select>
+    </div>
+    <sc-if value="{{ loaded }}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; align-items: baseline; gap: 12px;">
+        <span style="font-family: ui-monospace, monospace; font-size: 12px; font-weight: 650; color: #87938d;">NO {{ priorityLabel }}</span>
+        <h1 style="margin: 0; font-size: 26px; font-weight: 720; line-height: 1.2;">{{ instName }}</h1>
+      </div>
+      <div style="display: flex; align-items: center; gap: 14px; font-size: 11px; color: #87938d;">
+        <span>{{ lawName }}</span>
+        <span style="display: inline-flex; align-items: center; gap: 5px; color: {{ badgeTextColor }};"><span style="width: 7px; height: 7px; border-radius: 50%; background: {{ badgeTextColor }};"></span>{{ badgeLabel }}</span>
+        <span style="margin-left: auto; font-variant-numeric: tabular-nums;">노드 {{ statNodes }} · 레인 {{ statLanes }} · 게이트 {{ statStages }} · 기준일 {{ asOfDate }}</span>
+      </div>
+    </sc-if>
+  </header>
+
+  <sc-if value="{{ loaded }}" hint-placeholder-val="{{ true }}">
+
+  <!-- Group headers -->
+  <div style="position: sticky; top: 0; z-index: 20; background: #ffffff; border-bottom: 1px solid #bdcbc4;">
+    <div style="display: grid; grid-template-columns: 64px repeat({{ groupCount }}, 1fr) 26px;">
+      <div style="padding: 9px 10px; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; border-right: 1px solid #dde5df;">게이트</div>
+      <sc-for list="{{ groups }}" as="g" hint-placeholder-count="4">
+        <div style="padding: 7px 12px; border-right: 1px solid #dde5df; border-top: 3px solid {{ g.accent }};">
+          <div style="font-size: 12px; font-weight: 680; color: #111714;">{{ g.title }}</div>
+          <div style="font-size: 10px; color: #87938d; line-height: 1.4;">{{ g.lanesLabel }}</div>
+        </div>
+      </sc-for>
+      <div></div>
+    </div>
+  </div>
+
+  <!-- Board -->
+  <div data-mboard-root="1" style="position: relative; background: #fcfcfb;">
+    {{ edgeOverlay }}
+    <sc-for list="{{ stageRows }}" as="row" hint-placeholder-count="8">
+      <div style="display: grid; grid-template-columns: 64px repeat({{ groupCount }}, 1fr) 26px; border-bottom: 1px solid #dde5df; background: {{ row.bg }};">
+        <div style="border-right: 1px solid #dde5df; padding: 14px 10px; display: flex; flex-direction: column; gap: 2px;">
+          <span style="font-family: ui-monospace, monospace; font-size: 11px; font-weight: 700; color: #087452;">{{ row.code }}</span>
+          <span style="font-size: 11px; font-weight: 650; color: #5d6b63; line-height: 1.35;">{{ row.label }}</span>
+        </div>
+        <sc-for list="{{ row.cells }}" as="cell" hint-placeholder-count="4">
+          <div style="border-right: 1px solid #eef1ef; padding: 14px 14px; display: flex; flex-direction: column; justify-content: center; gap: 10px; min-height: 64px;">
+            <sc-for list="{{ cell.nodes }}" as="n" hint-placeholder-count="0">
+              <div onClick="{{ n.select }}" data-mnode-id="{{ n.id }}" style="position: relative; z-index: 2; border: 1.5px {{ n.borderStyle }} {{ n.border }}; background: {{ n.bg }}; padding: 7px 10px; cursor: pointer; box-shadow: {{ n.ring }};" style-hover="border-color: #0f9f72;">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 4px;">
+                  <span style="font-family: ui-monospace, monospace; font-size: 10px; font-weight: 700; color: {{ n.codeColor }};">{{ n.id }}</span>
+                  <span style="font-size: 10px; font-weight: 650; color: {{ n.stateColor }};">{{ n.stateLabel }}</span>
+                </div>
+                <div style="font-size: 13px; font-weight: 650; color: #111714; line-height: 1.35; margin-top: 2px;">{{ n.name }}</div>
+                <div style="font-size: 10px; color: #87938d; margin-top: 3px;">{{ n.laneShort }}</div>
+                <sc-if value="{{ n.loopLabel }}" hint-placeholder-val="{{ false }}">
+                  <div style="font-size: 10px; color: #c78116; font-weight: 650; margin-top: 2px;">↩ {{ n.loopLabel }}</div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </sc-for>
+        <div></div>
+      </div>
+    </sc-for>
+  </div>
+
+  <!-- Legend + note -->
+  <div style="display: flex; align-items: center; gap: 14px; padding: 12px 28px; background: #ffffff; border-bottom: 1px solid #dde5df; font-size: 11px; color: #5d6b63; flex-wrap: wrap;">
+    <span style="display: inline-flex; align-items: center; gap: 5px;"><span style="width: 9px; height: 9px; background: #dde5df; border: 1px solid #bdcbc4;"></span>완료</span>
+    <span style="display: inline-flex; align-items: center; gap: 5px;"><span style="width: 9px; height: 9px; background: #0f9f72;"></span>현재</span>
+    <span style="display: inline-flex; align-items: center; gap: 5px;"><span style="width: 9px; height: 9px; background: #c78116;"></span>위험·회귀</span>
+    <span style="display: inline-flex; align-items: center; gap: 5px;"><span style="width: 9px; height: 9px; background: #ffffff; border: 1px solid #bdcbc4;"></span>대기</span>
+    <span style="display: inline-flex; align-items: center; gap: 5px;"><span style="width: 16px; border-top: 2px dashed #dcae62;"></span>회귀 루프</span>
+    <span style="margin-left: auto; color: #87938d;">노드 상태는 제도 흐름 설명용 편집 상태</span>
+  </div>
+
+  <!-- Bottom sheet (selected node) -->
+  <div style="background: #ffffff; padding: 16px 28px 24px; display: flex; flex-direction: column; gap: 10px;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.06em; color: #87938d;">노드 상세</span>
+      <span style="font-family: ui-monospace, monospace; font-size: 12px; font-weight: 700; color: #087452;">{{ ins.id }}</span>
+      <span style="font-size: 10px; font-weight: 650; color: {{ ins.stateColor }}; border: 1px solid {{ ins.stateColor }}; padding: 1px 7px;">{{ ins.stateLabel }}</span>
+      <span style="font-size: 11px; color: #87938d;">{{ ins.stage }} · {{ ins.lane }}</span>
+    </div>
+    <div style="font-size: 16px; font-weight: 680; color: #111714;">{{ ins.name }}</div>
+    <sc-if value="{{ ins.blocker }}" hint-placeholder-val="{{ false }}">
+      <div style="border: 1px solid #c78116; background: #fdf3e3; padding: 8px 11px; font-size: 12px; color: #111714;"><strong style="color: #c78116; font-weight: 700;">병목</strong> · {{ ins.blocker }}</div>
+    </sc-if>
+    <div style="display: flex; gap: 14px; font-size: 12px; color: #5d6b63; flex-wrap: wrap;">
+      <span>기한: <strong style="color: #111714; font-weight: 650;">{{ ins.deadline }}</strong></span>
+      <span>확신도: <strong style="color: #111714; font-weight: 650;">{{ ins.confidence }}</strong></span>
+      <span>근거: <strong style="color: #111714; font-weight: 650;">{{ ins.lawSummary }}</strong></span>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+      <sc-for list="{{ ins.docs }}" as="doc" hint-placeholder-count="2">
+        <span style="font-size: 11px; color: #111714; border: 1px solid #dde5df; background: #f5f7f6; padding: 2px 8px;">{{ doc }}</span>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="padding: 12px 28px 28px; font-size: 10px; color: #87938d; line-height: 1.6; background: #ffffff; border-top: 1px solid #dde5df;">
+    hosungseo.github.io/korea100 · 이 콘텐츠는 제도 이해를 위한 참고 자료이며 법률 자문이나 정부기관의 공식 해석을 대신하지 않습니다.
+  </div>
+
+  </sc-if>
+
+  <sc-if value="{{ loading }}" hint-placeholder-val="{{ false }}">
+    <div style="padding: 80px 28px; text-align: center; color: #87938d; font-size: 13px;">제도 데이터를 불러오는 중입니다…</div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: &quot;900px&quot;, &quot;height&quot;: &quot;1200px&quot;}, &quot;slug&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;environmental-impact-assessment&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;데이터&quot;}}">
+class Component extends DCLogic {
+  state = { manifest: [], inst: null, slug: null, selected: null, edgePaths: [], boardW: 0, boardH: 0 };
+
+  currentSlug() {
+    return this.state.slug ?? this.props.slug ?? "environmental-impact-assessment";
+  }
+
+  componentDidMount() {
+    this._remeasure = () => this.measureEdges();
+    window.addEventListener("resize", this._remeasure);
+    fetch("data/institutions-manifest.json").then((r) => r.json()).then((m) => this.setState({ manifest: m }));
+    this.loadInst(this.currentSlug());
+  }
+
+  componentWillUnmount() { window.removeEventListener("resize", this._remeasure); }
+  componentDidUpdate() { requestAnimationFrame(this._remeasure); }
+
+  loadInst(slug) {
+    fetch("data/institutions/" + slug + ".json").then((r) => r.json()).then((inst) => {
+      const cur = inst.process.nodes.find((n) => n.status === "current");
+      this.setState({ inst, slug, selected: cur ? cur.id : inst.process.nodes[0].id, edgePaths: [] });
+      setTimeout(this._remeasure, 200);
+    });
+  }
+
+  // ---- lane grouping (max 4 columns), ported from process-layout.mjs ----
+  buildGroups(lanes) {
+    const ACCENTS = ["#0f9f72", "#3b82f6", "#c78116", "#0891b2"];
+    const ORDER = [2, 1, 0, 3];
+    const count = Math.min(4, lanes.length);
+    if (count === 0) return [];
+    const base = Math.floor(lanes.length / count);
+    const sizes = Array.from({ length: count }, () => base);
+    const rem = lanes.length % count;
+    const order = ORDER.filter((i) => i < count);
+    for (let i = 0; i < rem; i++) sizes[order[i] ?? i] += 1;
+    let cursor = 0;
+    return sizes.map((size, i) => {
+      const groupLanes = lanes.slice(cursor, cursor + size);
+      cursor += size;
+      return { lanes: groupLanes, accent: ACCENTS[i], title: this.groupTitle(groupLanes) };
+    });
+  }
+
+  compactLane(lane) {
+    const cleaned = lane.replace(/\([^)]*\)/g, "").replace(/\[[^\]]*\]/g, "").replaceAll("/", "·").trim();
+    if (Array.from(cleaned).length <= 9) return cleaned;
+    return cleaned.split("·")[0].trim();
+  }
+
+  groupTitle(lanes) {
+    const t = (v, n) => { const c = Array.from(v); return c.length <= n ? v : c.slice(0, n - 1).join("") + "…"; };
+    if (lanes.length === 1) return t(this.compactLane(lanes[0]), 18);
+    if (lanes.length === 2) return t(this.compactLane(lanes[0]) + "·" + this.compactLane(lanes[1]), 18);
+    return t(this.compactLane(lanes[0]), 13) + " 외 " + (lanes.length - 1);
+  }
+
+  roundedPath(pts, r) {
+    if (pts.length < 2) return "";
+    let d = `M ${pts[0][0]} ${pts[0][1]}`;
+    for (let i = 1; i < pts.length - 1; i++) {
+      const [px, py] = pts[i - 1], [cx, cy] = pts[i], [nx, ny] = pts[i + 1];
+      const inLen = Math.hypot(cx - px, cy - py), outLen = Math.hypot(nx - cx, ny - cy);
+      const rr = Math.min(r, inLen / 2, outLen / 2);
+      if (rr < 1) { d += ` L ${cx} ${cy}`; continue; }
+      const ix = cx - Math.sign(cx - px) * rr * (cx !== px ? 1 : 0);
+      const iy = cy - Math.sign(cy - py) * rr * (cy !== py ? 1 : 0);
+      const ox = cx + Math.sign(nx - cx) * rr * (nx !== cx ? 1 : 0);
+      const oy = cy + Math.sign(ny - cy) * rr * (ny !== cy ? 1 : 0);
+      d += ` L ${ix} ${iy} Q ${cx} ${cy} ${ox} ${oy}`;
+    }
+    const last = pts[pts.length - 1];
+    d += ` L ${last[0]} ${last[1]}`;
+    return d;
+  }
+
+  measureEdges() {
+    const root = document.querySelector('[data-mboard-root]');
+    const inst = this.state.inst;
+    if (!root || !inst) { if (this.state.edgePaths.length) this.setState({ edgePaths: [] }); return; }
+    const rootRect = root.getBoundingClientRect();
+    const rectOf = (id) => {
+      const el = root.querySelector(`[data-mnode-id="${CSS.escape(id)}"]`);
+      if (!el) return null;
+      const r = el.getBoundingClientRect();
+      return { left: r.left - rootRect.left, right: r.right - rootRect.left, top: r.top - rootRect.top, bottom: r.bottom - rootRect.top, cx: r.left - rootRect.left + r.width / 2, cy: r.top - rootRect.top + r.height / 2 };
+    };
+    const kindMap = { sequence: "seq", message: "msg", loop: "loop" };
+    const stageIdx = {};
+    inst.process.stages.forEach((s, i) => { stageIdx[s] = i; });
+    const nodeStage = {};
+    inst.process.nodes.forEach((n) => { nodeStage[n.id] = stageIdx[n.stage] ?? 0; });
+
+    const paths = [];
+    const gutterUse = {};
+    const nudge = (v) => {
+      const key = Math.round(v / 8);
+      const n = gutterUse[key] || 0;
+      gutterUse[key] = n + 1;
+      return v + (n % 2 === 0 ? 1 : -1) * Math.ceil(n / 2) * 6;
+    };
+    const marginUse = { n: 0 };
+
+    // spread multiple connections on the same box side
+    const edgeList = inst.process.edges.map((e) => {
+      const a = rectOf(e.source), b = rectOf(e.target);
+      if (!a || !b) return null;
+      const sa = nodeStage[e.source], sb = nodeStage[e.target];
+      const dir = sb > sa ? "down" : (sb < sa ? "up" : "side");
+      return { s: e.source, t: e.target, kind: kindMap[e.type] || "seq", a, b, dir };
+    }).filter(Boolean);
+
+    const sideCount = {}, sideSeen = {};
+    const keyOf = (e) => {
+      if (e.dir === "down") return [e.s + ":bottom", e.t + ":top"];
+      if (e.dir === "up") return [e.s + ":right", e.t + ":right"];
+      return [e.s + ":right", e.t + ":left"];
+    };
+    edgeList.forEach((e) => keyOf(e).forEach((k) => { sideCount[k] = (sideCount[k] || 0) + 1; }));
+    const spreadX = (key, cx, left, right) => {
+      const n = sideCount[key];
+      if (!n || n <= 1) return cx;
+      const i = sideSeen[key] = (sideSeen[key] ?? -1) + 1;
+      const gap = Math.min(16, (right - left - 12) / n);
+      return cx + (i - (n - 1) / 2) * gap;
+    };
+    const spreadY = (key, cy, top, bottom) => {
+      const n = sideCount[key];
+      if (!n || n <= 1) return cy;
+      const i = sideSeen[key] = (sideSeen[key] ?? -1) + 1;
+      const gap = Math.min(12, (bottom - top - 8) / n);
+      return cy + (i - (n - 1) / 2) * gap;
+    };
+
+    edgeList.forEach((e, i) => {
+      const { a, b, dir } = e;
+      const [ok, ik] = keyOf(e);
+      let pts;
+      if (dir === "down") {
+        const sx = spreadX(ok, a.cx, a.left, a.right);
+        const tx = spreadX(ik, b.cx, b.left, b.right);
+        if (Math.abs(sx - tx) < 3) {
+          pts = [[sx, a.bottom], [sx, b.top - 4]];
+        } else {
+          const my = nudge(b.top - 12);
+          pts = [[sx, a.bottom], [sx, my], [tx, my], [tx, b.top - 4]];
+        }
+      } else if (dir === "side") {
+        if (Math.abs(a.cx - b.cx) < 8 && (b.top >= a.bottom - 2 || b.bottom <= a.top + 2)) {
+          // stacked in the same group column: connect straight down/up
+          const cx = (b.left + b.right) / 2;
+          pts = b.top >= a.bottom - 2
+            ? [[cx, a.bottom], [cx, b.top - 4]]
+            : [[cx, a.top], [cx, b.bottom + 4]];
+          paths.push({ key: e.s + "-" + e.t + i, d: this.roundedPath(pts, 8), kind: e.kind, s: e.s, t: e.t });
+          return;
+        }
+        const sy = spreadY(ok, a.cy, a.top, a.bottom);
+        const ty = spreadY(ik, b.cy, b.top, b.bottom);
+        if (b.left > a.right) {
+          const mx = nudge(b.left - 10);
+          pts = Math.abs(sy - ty) < 2
+            ? [[a.right, sy], [b.left - 4, ty]]
+            : [[a.right, sy], [mx, sy], [mx, ty], [b.left - 4, ty]];
+        } else {
+          const mx = nudge(a.left - 10);
+          pts = [[a.left, sy], [mx, sy], [mx, ty], [b.right + 4, ty]];
+        }
+      } else {
+        // loop upward: run along the right margin corridor
+        const sy = spreadY(ok, a.cy, a.top, a.bottom);
+        const ty = spreadY(ik, b.cy, b.top, b.bottom);
+        marginUse.n += 1;
+        const mx = rootRect.width - 8 - (marginUse.n - 1) * 7;
+        pts = [[a.right, sy], [mx, sy], [mx, ty], [b.right + 4, ty]];
+      }
+      paths.push({ key: e.s + "-" + e.t + i, d: this.roundedPath(pts, 8), kind: e.kind, s: e.s, t: e.t });
+    });
+
+    const w = Math.round(rootRect.width), h = Math.round(rootRect.height);
+    if (JSON.stringify(paths) !== JSON.stringify(this.state.edgePaths) || w !== this.state.boardW || h !== this.state.boardH) {
+      this.setState({ edgePaths: paths, boardW: w, boardH: h });
+    }
+  }
+
+  styleFor(status) {
+    switch (status) {
+      case "done": return { bg: "#f5f7f6", border: "#bdcbc4", borderStyle: "solid", codeColor: "#87938d", stateColor: "#5d6b63", stateLabel: "완료" };
+      case "current": return { bg: "#dff5eb", border: "#0f9f72", borderStyle: "solid", codeColor: "#087452", stateColor: "#087452", stateLabel: "현재" };
+      case "risk": return { bg: "#fdf3e3", border: "#c78116", borderStyle: "solid", codeColor: "#c78116", stateColor: "#c78116", stateLabel: "위험" };
+      case "loop": return { bg: "#fdf9f1", border: "#c78116", borderStyle: "dashed", codeColor: "#c78116", stateColor: "#c78116", stateLabel: "회귀" };
+      default: return { bg: "#ffffff", border: "#dde5df", borderStyle: "solid", codeColor: "#87938d", stateColor: "#87938d", stateLabel: "대기" };
+    }
+  }
+
+  renderVals() {
+    const { manifest, inst } = this.state;
+    const slug = this.currentSlug();
+    const manifestOptions = manifest.map((m) => ({
+      slug: m.slug, label: String(m.priority).padStart(2, "0") + " · " + m.name
+    }));
+    const nav = { slug, manifestOptions, onSlugChange: (e) => this.loadInst(e.target.value) };
+    if (!inst) return { ...nav, loaded: false, loading: true };
+
+    const p = inst.process;
+    const groups = this.buildGroups(p.lanes).map((g) => ({
+      ...g, lanesLabel: g.lanes.map((l) => this.compactLane(l)).join(" · ")
+    }));
+    const laneToGroup = {};
+    groups.forEach((g, gi) => g.lanes.forEach((l) => { laneToGroup[l] = gi; }));
+
+    const loopLabelMap = {};
+    p.edges.filter((e) => e.type === "loop").forEach((e) => {
+      loopLabelMap[e.source] = (e.label ? e.label + " · " : "") + e.target + "로";
+    });
+
+    const stages = p.stages.map((s) => {
+      const sp = s.indexOf(" ");
+      return sp > 0 ? { full: s, code: s.slice(0, sp), label: s.slice(sp + 1) } : { full: s, code: "", label: s };
+    });
+
+    const stageRows = stages.map((st, si) => ({
+      code: st.code, label: st.label,
+      bg: si % 2 === 0 ? "#fcfcfb" : "#ffffff",
+      cells: groups.map((g, gi) => ({
+        nodes: p.nodes.filter((n) => n.stage === st.full && laneToGroup[n.lane] === gi).map((n) => {
+          const s = this.styleFor(n.status);
+          const isSel = this.state.selected === n.id;
+          return {
+            id: n.id, name: n.name, laneShort: this.compactLane(n.lane) + (n.actor ? " · " + n.actor : ""), ...s,
+            loopLabel: loopLabelMap[n.id] || "",
+            ring: isSel ? "0 0 0 2px #0f9f72" : "none",
+            select: () => this.setState({ selected: n.id })
+          };
+        })
+      }))
+    }));
+
+    const raw = p.nodes.find((n) => n.id === this.state.selected) || p.nodes[0];
+    const s = this.styleFor(raw.status);
+    const ins = {
+      id: raw.id, name: raw.name, lane: this.compactLane(raw.lane),
+      stage: raw.stage,
+      stateColor: s.stateColor, stateLabel: s.stateLabel,
+      deadline: raw.deadline || "—",
+      confidence: raw.confidence != null ? Math.round(raw.confidence * 100) + "%" : "—",
+      blocker: raw.blocker || "",
+      lawSummary: (raw.legal_basis || []).map((l) => l.law + " " + l.article).slice(0, 2).join(" / ") || "—",
+      docs: raw.output_documents || []
+    };
+
+    const av = inst.verification?.articleVerification;
+    const verified = inst.verification?.status === "article-verified";
+
+    const strokeFor = { seq: "#c3cfc8", msg: "#aab6af", loop: "#dcae62", hi: "#0f9f72", hiLoop: "#c78116" };
+    const dashFor = { seq: "none", msg: "2 4", loop: "5 4" };
+    const sel = this.state.selected;
+    const sorted = [...this.state.edgePaths].sort((pp, q) => ((pp.s === sel || pp.t === sel) ? 1 : 0) - ((q.s === sel || q.t === sel) ? 1 : 0));
+    const edgeOverlay = React.createElement(
+      "svg",
+      { width: this.state.boardW || 900, height: this.state.boardH || 1200, style: { position: "absolute", top: 0, left: 0, pointerEvents: "none", zIndex: 1 } },
+      React.createElement("defs", null,
+        [["seq", strokeFor.seq], ["msg", strokeFor.msg], ["loop", strokeFor.loop], ["hi", strokeFor.hi], ["hiloop", strokeFor.hiLoop]].map(([k, c]) =>
+          React.createElement("marker", { key: k, id: "marr-" + k, viewBox: "0 0 10 10", refX: 8.5, refY: 5, markerWidth: 8, markerHeight: 8, markerUnits: "userSpaceOnUse", orient: "auto-start-reverse" },
+            React.createElement("path", { d: "M 0 0 L 10 5 L 0 10 z", fill: c })
+          )
+        )
+      ),
+      sorted.map((pp) => {
+        const isHi = pp.s === sel || pp.t === sel;
+        const stroke = isHi ? (pp.kind === "loop" ? strokeFor.hiLoop : strokeFor.hi) : strokeFor[pp.kind];
+        const marker = isHi ? (pp.kind === "loop" ? "url(#marr-hiloop)" : "url(#marr-hi)") : `url(#marr-${pp.kind})`;
+        return React.createElement("path", { key: pp.key, d: pp.d, fill: "none", stroke, strokeWidth: isHi ? 1.8 : 1.2, strokeDasharray: dashFor[pp.kind], markerEnd: marker });
+      })
+    );
+
+    return {
+      ...nav,
+      loaded: true, loading: false,
+      instName: inst.name,
+      priorityLabel: String(inst.priority ?? "—").padStart(2, "0"),
+      lawName: p.law_name || "",
+      asOfDate: inst.asOfDate || "—",
+      badgeTextColor: verified ? "#4ade9d" : "#e3b35f",
+      badgeLabel: verified ? "조문 검증 " + (av ? av.verifiedReferences + "/" + av.articleReferences : "완료") : "출처 연결 · 범위 지정 필요",
+      statNodes: p.nodes.length, statLanes: p.lanes.length, statStages: p.stages.length,
+      groupCount: groups.length,
+      groups, stageRows, ins, edgeOverlay
+    };
+  }
+}
+</script>
+</body>
+</html>

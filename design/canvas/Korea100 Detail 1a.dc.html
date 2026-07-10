@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+  body { margin: 0; background: #fcfcfb; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+  a { color: #087452; text-decoration: none; }
+  a:hover { color: #0f9f72; text-decoration: underline; }
+</style>
+</helmet>
+
+<div data-screen-label="제도 상세 — 환경영향평가" style="display: flex; flex-direction: column; min-height: 100vh; background: #fcfcfb;">
+
+  <!-- Top bar -->
+  <header style="display: flex; align-items: center; justify-content: space-between; padding: 14px 32px; border-bottom: 1px solid #dde5df; background: #ffffff; position: sticky; top: 0; z-index: 30;">
+    <div style="display: flex; align-items: baseline; gap: 14px;">
+      <div style="font-size: 18px; font-weight: 720; color: #111714;">대한민국 제도 100</div>
+      <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; text-transform: uppercase;">Institution Registry</div>
+    </div>
+    <nav style="display: flex; align-items: center; gap: 24px; font-size: 14px; color: #5d6b63;">
+      <span style="cursor: pointer;" style-hover="color: #111714;">← 제도 대장</span>
+      <span style="cursor: pointer;" style-hover="color: #111714;">현장 검증 대장</span>
+      <span style="font-family: ui-monospace, monospace; font-size: 12px; color: #87938d;">기준일 2026-07-10</span>
+    </nav>
+  </header>
+
+  <!-- Title band -->
+  <div style="border-bottom: 1px solid #dde5df; background: #f5f7f6; padding: 24px 32px;">
+    <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 24px;">
+      <div style="display: flex; flex-direction: column; gap: 8px; min-width: 0;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-family: ui-monospace, monospace; font-size: 13px; font-weight: 650; color: #87938d;">NO 01</span>
+          <span style="font-size: 12px; font-weight: 650; color: #0f9f72; border: 1px solid #0f9f7255; padding: 2px 8px;">국토·환경·안전</span>
+          <span style="font-size: 13px; color: #5d6b63;">협의·평가형</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 650; color: #087452; background: #dff5eb; padding: 3px 10px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #0f9f72;"></span>조문 검증 55/55 · 2026-07-10</span>
+        </div>
+        <h1 style="margin: 0; font-size: 36px; font-weight: 720; color: #111714; line-height: 1.15;">환경영향평가</h1>
+        <p style="margin: 0; font-size: 16px; color: #5d6b63; line-height: 1.65; max-width: 760px;">개발사업이 환경에 미칠 영향을 사업 승인 전에 조사·평가하고, 협의기관과 협의해 저감방안을 사업계획에 반영시키는 제도</p>
+      </div>
+      <div style="display: flex; gap: 8px; flex: none; padding-top: 4px;">
+        <span style="border: 1px solid #bdcbc4; background: #ffffff; color: #111714; font-size: 13px; font-weight: 650; padding: 9px 16px; cursor: pointer;" style-hover="background: #f5f7f6;">PNG 내보내기</span>
+        <span style="border: 1px solid #bdcbc4; background: #ffffff; color: #111714; font-size: 13px; font-weight: 650; padding: 9px 16px; cursor: pointer;" style-hover="background: #f5f7f6;">인쇄 · PDF</span>
+        <span style="background: #0b1410; color: #ffffff; font-size: 13px; font-weight: 650; padding: 9px 16px; cursor: pointer;" style-hover="background: #2a352f;">비교 선반에 담기</span>
+      </div>
+    </div>
+    <!-- key numbers -->
+    <div style="display: flex; gap: 0; margin-top: 20px; border: 1px solid #dde5df; background: #ffffff; width: fit-content; font-variant-numeric: tabular-nums;">
+      <div style="padding: 10px 20px; border-right: 1px solid #dde5df;"><div style="font-size: 20px; font-weight: 720; color: #111714;">18</div><div style="font-size: 11px; color: #87938d;">절차 노드</div></div>
+      <div style="padding: 10px 20px; border-right: 1px solid #dde5df;"><div style="font-size: 20px; font-weight: 720; color: #111714;">9</div><div style="font-size: 11px; color: #87938d;">행위 레인</div></div>
+      <div style="padding: 10px 20px; border-right: 1px solid #dde5df;"><div style="font-size: 20px; font-weight: 720; color: #111714;">8</div><div style="font-size: 11px; color: #87938d;">게이트</div></div>
+      <div style="padding: 10px 20px; border-right: 1px solid #dde5df;"><div style="font-size: 20px; font-weight: 720; color: #111714;">45일</div><div style="font-size: 11px; color: #87938d;">협의 통보 기한</div></div>
+      <div style="padding: 10px 20px;"><div style="font-size: 20px; font-weight: 720; color: #c78116;">4</div><div style="font-size: 11px; color: #87938d;">병목 구간</div></div>
+    </div>
+  </div>
+
+  <!-- ===== 업무구조도 ===== -->
+  <div style="padding: 24px 32px 8px; display: flex; align-items: center; justify-content: space-between;">
+    <div style="display: flex; align-items: baseline; gap: 12px;">
+      <h2 style="margin: 0; font-size: 22px; font-weight: 680; color: #111714;">업무구조도</h2>
+      <span style="font-size: 13px; color: #87938d;">노드 상태는 제도 흐름 설명용 편집 상태입니다</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <div style="display: flex; gap: 14px; font-size: 12px; color: #5d6b63;">
+        <span style="display: inline-flex; align-items: center; gap: 5px;"><span style="width: 9px; height: 9px; background: #dde5df; border: 1px solid #bdcbc4;"></span>완료</span>
+        <span style="display: inline-flex; align-items: center; gap: 5px;"><span style="width: 9px; height: 9px; background: #0f9f72;"></span>현재</span>
+        <span style="display: inline-flex; align-items: center; gap: 5px;"><span style="width: 9px; height: 9px; background: #c78116;"></span>위험·회귀</span>
+        <span style="display: inline-flex; align-items: center; gap: 5px;"><span style="width: 9px; height: 9px; background: #ffffff; border: 1px solid #bdcbc4;"></span>대기</span>
+      </div>
+      <div style="display: flex; border: 1px solid #dde5df; font-size: 13px;">
+        <span onClick="{{ viewCore }}" style="padding: 6px 14px; background: {{ coreBg }}; color: {{ coreColor }}; font-weight: 650; cursor: pointer;">핵심 흐름</span>
+        <span onClick="{{ viewFull }}" style="padding: 6px 14px; background: {{ fullBg }}; color: {{ fullColor }}; font-weight: 650; cursor: pointer;">전체 구조도</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Board + inspector -->
+  <div style="display: flex; flex-direction: column; gap: 0; margin: 12px 32px 32px; border: 1px solid #bdcbc4; background: #ffffff;">
+
+    <!-- BOARD -->
+    <div style="background: #fcfcfb;">
+      <sc-if value="{{ isFull }}" hint-placeholder-val="{{ true }}">
+        <!-- swimlane grid -->
+        <div data-board-root="1" style="position: relative;">
+          {{ edgeOverlay }}
+          <!-- stage header -->
+          <div style="display: grid; grid-template-columns: 128px repeat(8, 1fr); border-bottom: 1px solid #bdcbc4; background: #ffffff;">
+            <div style="padding: 10px 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; border-right: 1px solid #dde5df;">레인 ＼ 게이트</div>
+            <sc-for list="{{ stages }}" as="st" hint-placeholder-count="8">
+              <div style="padding: 10px 12px; border-right: 1px solid #dde5df; display: flex; flex-direction: column; gap: 1px;">
+                <span style="font-family: ui-monospace, monospace; font-size: 11px; font-weight: 700; color: #087452;">{{ st.code }}</span>
+                <span style="font-size: 12px; font-weight: 650; color: #111714;">{{ st.label }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <sc-for list="{{ laneRows }}" as="lane" hint-placeholder-count="9">
+            <div style="display: grid; grid-template-columns: 128px repeat(8, 1fr); border-bottom: 1px solid #dde5df; background: {{ lane.bg }};">
+              <div style="padding: 10px 12px; border-right: 1px solid #dde5df; font-size: 12px; font-weight: 650; color: #5d6b63; line-height: 1.4; display: flex; align-items: center;">{{ lane.name }}</div>
+              <sc-for list="{{ lane.cells }}" as="cell" hint-placeholder-count="8">
+                <div style="border-right: 1px solid #eef1ef; padding: 8px 18px; display: flex; flex-direction: column; justify-content: center; gap: 6px; min-height: 52px;">
+                  <sc-for list="{{ cell.nodes }}" as="n" hint-placeholder-count="0">
+                    <div onClick="{{ n.select }}" data-node-id="{{ n.id }}" style="position: relative; z-index: 2; border: 1.5px {{ n.borderStyle }} {{ n.border }}; background: {{ n.bg }}; padding: 5px 8px; cursor: pointer; box-shadow: {{ n.ring }};" style-hover="border-color: #0f9f72;">
+                      <div style="display: flex; align-items: center; justify-content: space-between; gap: 4px;">
+                        <span style="font-family: ui-monospace, monospace; font-size: 10px; font-weight: 700; color: {{ n.codeColor }};">{{ n.id }}</span>
+                        <span style="font-size: 10px; font-weight: 650; color: {{ n.stateColor }};">{{ n.stateLabel }}</span>
+                      </div>
+                      <div style="font-size: 12px; font-weight: 650; color: #111714; line-height: 1.35; margin-top: 1px;">{{ n.name }}</div>
+                      <sc-if value="{{ n.loopLabel }}" hint-placeholder-val="{{ false }}">
+                        <div style="font-size: 10px; color: #c78116; font-weight: 650; margin-top: 2px;">↩ {{ n.loopLabel }}</div>
+                      </sc-if>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isCore }}" hint-placeholder-val="{{ false }}">
+        <!-- core flow: stage bands -->
+        <div style="padding: 20px; display: flex; flex-direction: column; gap: 14px;">
+          <sc-for list="{{ coreBands }}" as="band" hint-placeholder-count="4">
+            <div style="display: grid; grid-template-columns: 132px 1fr; gap: 14px; align-items: start;">
+              <div style="padding-top: 10px;">
+                <div style="font-family: ui-monospace, monospace; font-size: 11px; font-weight: 700; color: #087452;">{{ band.code }}</div>
+                <div style="font-size: 13px; font-weight: 650; color: #111714;">{{ band.label }}</div>
+              </div>
+              <div style="display: flex; flex-wrap: wrap; gap: 0; align-items: stretch;">
+                <sc-for list="{{ band.nodes }}" as="n" hint-placeholder-count="2">
+                  <div style="display: flex; align-items: center;">
+                    <div onClick="{{ n.select }}" style="width: 190px; border: 1.5px {{ n.borderStyle }} {{ n.border }}; background: {{ n.bg }}; padding: 8px 10px; cursor: pointer; box-shadow: {{ n.ring }};" style-hover="border-color: #0f9f72;">
+                      <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <span style="font-family: ui-monospace, monospace; font-size: 10px; font-weight: 700; color: {{ n.codeColor }};">{{ n.id }}</span>
+                        <span style="font-size: 10px; font-weight: 650; color: {{ n.stateColor }};">{{ n.stateLabel }}</span>
+                      </div>
+                      <div style="font-size: 13px; font-weight: 650; color: #111714; line-height: 1.35; margin-top: 2px;">{{ n.name }}</div>
+                      <div style="font-size: 11px; color: #87938d; margin-top: 3px;">{{ n.actor }}</div>
+                      <sc-if value="{{ n.loopLabel }}" hint-placeholder-val="{{ false }}">
+                        <div style="font-size: 10px; color: #c78116; font-weight: 650; margin-top: 3px;">↩ {{ n.loopLabel }}</div>
+                      </sc-if>
+                    </div>
+                    <div style="width: 22px; text-align: center; color: #bdcbc4; font-size: 14px;">{{ n.arrow }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+
+    <!-- INSPECTOR (below board) -->
+    <sc-if value="{{ showInspector }}" hint-placeholder-val="{{ true }}">
+    <aside style="border-top: 1px solid #bdcbc4; background: #ffffff; padding: 18px 24px; display: grid; grid-template-columns: 300px 260px 1fr; gap: 24px; align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d;">노드 상세</span>
+          <span style="font-family: ui-monospace, monospace; font-size: 12px; font-weight: 700; color: #087452;">{{ ins.id }}</span>
+          <span style="font-size: 11px; font-weight: 650; color: {{ ins.stateColor }}; border: 1px solid {{ ins.stateColor }}; padding: 1px 7px;">{{ ins.stateLabel }}</span>
+        </div>
+        <div style="font-size: 18px; font-weight: 680; color: #111714; line-height: 1.3;">{{ ins.name }}</div>
+        <div style="font-size: 13px; color: #5d6b63;">{{ ins.stage }} · {{ ins.lane }} · {{ ins.actor }}</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px;">
+          <sc-for list="{{ ins.docs }}" as="doc" hint-placeholder-count="2">
+            <span style="font-size: 12px; color: #111714; border: 1px solid #dde5df; background: #f5f7f6; padding: 3px 9px;">{{ doc }}</span>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div style="border: 1px solid #dde5df; padding: 9px 11px;">
+            <div style="font-size: 11px; color: #87938d; margin-bottom: 3px;">기한</div>
+            <div style="font-size: 13px; font-weight: 650; color: #111714; line-height: 1.4;">{{ ins.deadline }}</div>
+          </div>
+          <div style="border: 1px solid #dde5df; padding: 9px 11px;">
+            <div style="font-size: 11px; color: #87938d; margin-bottom: 3px;">확신도</div>
+            <div style="font-size: 13px; font-weight: 650; color: #111714; font-variant-numeric: tabular-nums;">{{ ins.confidence }}</div>
+          </div>
+        </div>
+        <sc-if value="{{ ins.blocker }}" hint-placeholder-val="{{ false }}">
+          <div style="border: 1px solid #c78116; background: #fdf3e3; padding: 9px 11px;">
+            <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.06em; color: #c78116; margin-bottom: 3px;">병목 · 블로커</div>
+            <div style="font-size: 13px; color: #111714; line-height: 1.5;">{{ ins.blocker }}</div>
+          </div>
+        </sc-if>
+      </div>
+
+      <div>
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; margin-bottom: 8px;">법적 근거</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px;">
+          <sc-for list="{{ ins.laws }}" as="law" hint-placeholder-count="2">
+            <div style="border-left: 2px solid #0f9f72; padding: 2px 0 2px 10px;">
+              <div style="font-size: 13px; font-weight: 650; color: #111714;">{{ law.law }} {{ law.article }}</div>
+              <div style="font-size: 12px; color: #5d6b63; line-height: 1.5; margin-top: 2px;">{{ law.text }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </aside>
+    </sc-if>
+  </div>
+
+  <!-- ===== 한 장 캔버스 ===== -->
+  <div style="padding: 0 32px 40px;">
+    <div style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px;">
+      <h2 style="margin: 0; font-size: 22px; font-weight: 680; color: #111714;">한 장 캔버스</h2>
+      <span style="font-size: 13px; color: #87938d;">법령 · 조직 · 절차 · 예산 · 문서</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+      <div style="border: 1px solid #dde5df; background: #ffffff; padding: 18px 20px; grid-column: span 2;">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; margin-bottom: 8px;">목적</div>
+        <p style="margin: 0; font-size: 14px; color: #111714; line-height: 1.65;">대규모 개발사업이 환경에 미칠 영향을 승인 전에 예측·평가하게 하여, 환경 훼손을 사전에 저감하고 지속가능한 개발을 담보한다.</p>
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; margin: 16px 0 8px;">법적 근거</div>
+        <div style="display: flex; flex-direction: column;">
+          <div style="display: grid; grid-template-columns: 180px 1fr 90px; gap: 10px; padding: 7px 0; border-bottom: 1px solid #f5f7f6; font-size: 13px; align-items: baseline;">
+            <span style="font-weight: 650; color: #111714;">환경영향평가법</span><span style="color: #5d6b63;">제22~36조 — 평가, 의견 수렴, 협의, 사후관리</span><span style="font-size: 11px; color: #087452; font-weight: 650; text-align: right;">✓ 원문 연결</span>
+          </div>
+          <div style="display: grid; grid-template-columns: 180px 1fr 90px; gap: 10px; padding: 7px 0; border-bottom: 1px solid #f5f7f6; font-size: 13px; align-items: baseline;">
+            <span style="font-weight: 650; color: #111714;">같은 법 시행령</span><span style="color: #5d6b63;">제34·46~50조 — 초안·평가서 작성, 협의 통보기간 45일</span><span style="font-size: 11px; color: #087452; font-weight: 650; text-align: right;">✓ 원문 연결</span>
+          </div>
+          <div style="display: grid; grid-template-columns: 180px 1fr 90px; gap: 10px; padding: 7px 0; font-size: 13px; align-items: baseline;">
+            <span style="font-weight: 650; color: #111714;">같은 법 시행규칙</span><span style="color: #5d6b63;">제8·9·13·19조</span><span style="font-size: 11px; color: #087452; font-weight: 650; text-align: right;">✓ 원문 연결</span>
+          </div>
+        </div>
+      </div>
+      <div style="border: 1px solid #dde5df; background: #ffffff; padding: 18px 20px;">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; margin-bottom: 8px;">권한 관계</div>
+        <div style="display: flex; flex-direction: column; gap: 9px; font-size: 13px;">
+          <div><span style="font-weight: 650; color: #111714;">협의기관(환경부·유역환경청)</span><div style="color: #5d6b63; margin-top: 1px;">평가서 협의, 보완 요구, 협의내용 통보</div></div>
+          <div><span style="font-weight: 650; color: #111714;">승인기관의 장</span><div style="color: #5d6b63; margin-top: 1px;">협의 요청, 협의내용 반영 확인</div></div>
+          <div><span style="font-weight: 650; color: #111714;">시장·군수·구청장</span><div style="color: #5d6b63; margin-top: 1px;">초안 공고·공람, 주민 의견 수렴 주관</div></div>
+          <div><span style="font-weight: 650; color: #111714;">한국환경연구원 등</span><div style="color: #5d6b63; margin-top: 1px;">전문 검토 의견</div></div>
+        </div>
+      </div>
+      <div style="border: 1px solid #dde5df; background: #ffffff; padding: 18px 20px;">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; margin-bottom: 8px;">돈의 흐름</div>
+        <p style="margin: 0; font-size: 13px; color: #5d6b63; line-height: 1.65;">평가서 작성·현황조사 비용은 사업자가 부담하고 대부분 평가대행자에게 위탁 지급된다. 협의·검토는 국가 행정비용이며, 사후환경영향조사 비용도 사업자 몫이다.</p>
+      </div>
+      <div style="border: 1px solid #dde5df; background: #ffffff; padding: 18px 20px;">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; margin-bottom: 8px;">문서의 흐름</div>
+        <p style="margin: 0; font-size: 13px; color: #5d6b63; line-height: 1.65;">평가준비서 → 평가서 초안 → 공고·공람 문서 → 주민의견 요지 → 본 평가서 → 보완서 → 협의내용 통보서 → 반영결과 통보 → 사후환경영향조사 결과. EIASS에 등록·공개된다.</p>
+      </div>
+      <div style="border: 1px solid #c7811655; background: #fdf9f1; padding: 18px 20px;">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #c78116; margin-bottom: 8px;">병목</div>
+        <ul style="margin: 0; padding-left: 16px; font-size: 13px; color: #111714; line-height: 1.6; display: flex; flex-direction: column; gap: 5px;">
+          <li>계절별 현황조사로 조사 기간이 1년 가까이 소요</li>
+          <li>보완 요구 회귀 루프 반복 시 협의 기간 급증</li>
+          <li>의견 수렴 단계의 갈등 표면화·공청회 장기화</li>
+          <li>평가대행자의 부실·거짓 작성 반복 지적</li>
+        </ul>
+      </div>
+      <div style="border: 1px solid #dde5df; background: #eef8f3; padding: 18px 20px; grid-column: span 2;">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #087452; margin-bottom: 8px;">개선점</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px 20px; font-size: 13px; color: #111714; line-height: 1.6;">
+          <div>· 스코핑 단계 쟁점 조기 확정으로 보완 루프 축소</div>
+          <div>· 평가서 표준화·데이터베이스화로 중복 조사 축소</div>
+          <div>· 거짓·부실 평가서 제재와 평가대행자 관리 강화</div>
+          <div>· 전략·소규모 평가와의 단계 연계 정비</div>
+        </div>
+      </div>
+      <div style="border: 1px solid #dde5df; background: #ffffff; padding: 18px 20px;">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #87938d; margin-bottom: 8px;">관련 제도</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+          <span style="font-size: 13px; color: #087452; border: 1px solid #0f9f7255; padding: 4px 10px; cursor: pointer;" style-hover="background: #dff5eb;">전략환경영향평가</span>
+          <span style="font-size: 13px; color: #087452; border: 1px solid #0f9f7255; padding: 4px 10px; cursor: pointer;" style-hover="background: #dff5eb;">소규모 환경영향평가</span>
+          <span style="font-size: 13px; color: #087452; border: 1px solid #0f9f7255; padding: 4px 10px; cursor: pointer;" style-hover="background: #dff5eb;">예비타당성조사</span>
+          <span style="font-size: 13px; color: #087452; border: 1px solid #0f9f7255; padding: 4px 10px; cursor: pointer;" style-hover="background: #dff5eb;">재건축·재개발 정비사업</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- footer note -->
+  <div style="padding: 16px 32px 32px; border-top: 1px solid #dde5df; font-size: 12px; color: #87938d; line-height: 1.6;">
+    검증: 국가법령정보센터 Open API 출처·조문 대조 (2026-07-10) · 법적 근거 3건 모두 공식 원문 연결, 명시 조문 55건 중 55건 확인. 이 콘텐츠는 제도 이해를 위한 참고 자료이며 법률 자문이나 정부기관의 공식 해석을 대신하지 않습니다.
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultView&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;full&quot;, &quot;core&quot;], &quot;default&quot;: &quot;full&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;구조도&quot;}, &quot;inspectorVisible&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;구조도&quot;}}">
+class Component extends DCLogic {
+  state = { view: null, selected: "P05", edgePaths: [] };
+
+  edges() {
+    return [
+      { s: "P01", t: "P02", kind: "seq" }, { s: "P02", t: "P03", kind: "seq" }, { s: "P03", t: "P04", kind: "seq" },
+      { s: "P04", t: "P05", kind: "seq" }, { s: "P05", t: "P06", kind: "seq" }, { s: "P06", t: "P07", kind: "seq" },
+      { s: "P07", t: "P08", kind: "seq" }, { s: "P08", t: "P09", kind: "seq" }, { s: "P09", t: "P10", kind: "seq" },
+      { s: "P10", t: "P11", kind: "seq" }, { s: "P11", t: "P12", kind: "seq" }, { s: "P12", t: "P14", kind: "seq" },
+      { s: "P14", t: "P15", kind: "seq" }, { s: "P15", t: "P16", kind: "seq" }, { s: "P16", t: "P17", kind: "seq" },
+      { s: "P05", t: "S01", kind: "msg" },
+      { s: "P12", t: "P13", kind: "loop" }, { s: "P13", t: "P09", kind: "loop" }
+    ];
+  }
+
+  roundedPath(pts, r) {
+    if (pts.length < 2) return "";
+    let d = `M ${pts[0][0]} ${pts[0][1]}`;
+    for (let i = 1; i < pts.length - 1; i++) {
+      const [px, py] = pts[i - 1], [cx, cy] = pts[i], [nx, ny] = pts[i + 1];
+      const inLen = Math.hypot(cx - px, cy - py), outLen = Math.hypot(nx - cx, ny - cy);
+      const rr = Math.min(r, inLen / 2, outLen / 2);
+      if (rr < 1) { d += ` L ${cx} ${cy}`; continue; }
+      const ix = cx - Math.sign(cx - px) * rr * (cx !== px ? 1 : 0);
+      const iy = cy - Math.sign(cy - py) * rr * (cy !== py ? 1 : 0);
+      const ox = cx + Math.sign(nx - cx) * rr * (nx !== cx ? 1 : 0);
+      const oy = cy + Math.sign(ny - cy) * rr * (ny !== cy ? 1 : 0);
+      d += ` L ${ix} ${iy} Q ${cx} ${cy} ${ox} ${oy}`;
+    }
+    const last = pts[pts.length - 1];
+    d += ` L ${last[0]} ${last[1]}`;
+    return d;
+  }
+
+  measureEdges() {
+    const root = document.querySelector('[data-board-root]');
+    if (!root) { if (this.state.edgePaths.length) this.setState({ edgePaths: [] }); return; }
+    const rootRect = root.getBoundingClientRect();
+    const rectOf = (id) => {
+      const el = root.querySelector(`[data-node-id="${id}"]`);
+      if (!el) return null;
+      const r = el.getBoundingClientRect();
+      return { left: r.left - rootRect.left, right: r.right - rootRect.left, top: r.top - rootRect.top, bottom: r.bottom - rootRect.top, cx: r.left - rootRect.left + r.width / 2, cy: r.top - rootRect.top + r.height / 2 };
+    };
+    const paths = [];
+    const gutterUse = {};
+    const nudge = (x) => {
+      const key = Math.round(x / 8);
+      const n = gutterUse[key] || 0;
+      gutterUse[key] = n + 1;
+      return x + (n % 2 === 0 ? 1 : -1) * Math.ceil(n / 2) * 6;
+    };
+    // classify each edge's exit/entry side, then spread multiple
+    // connections on the same side vertically so they never overlap
+    const edgeList = this.edges().map((e) => {
+      const a = rectOf(e.s), b = rectOf(e.t);
+      if (!a || !b) return null;
+      const sameCol = Math.abs(a.left - b.left) < 8;
+      const dir = sameCol ? "same" : (b.left > a.right ? "fwd" : "back");
+      const outSide = dir === "back" ? "left" : "right";
+      const inSide = dir === "fwd" ? "left" : "right";
+      return { ...e, a, b, dir, outKey: e.s + ":" + outSide, inKey: e.t + ":" + inSide };
+    }).filter(Boolean);
+
+    const allRectsPre = {};
+    this.nodes().forEach((n) => { const r = rectOf(n.id); if (r) allRectsPre[n.id] = r; });
+    const vClear = (e, cx) => {
+      const y1 = Math.min(e.a.bottom, e.b.bottom), y2 = Math.max(e.a.top, e.b.top);
+      return !Object.entries(allRectsPre).some(([id, r]) =>
+        id !== e.s && id !== e.t && r.left < cx && cx < r.right && r.top < y2 && r.bottom > y1
+      );
+    };
+    edgeList.forEach((e) => {
+      e.vertical = e.dir === "same" && e.kind !== "loop" && vClear(e, (e.b.left + e.b.right) / 2);
+    });
+
+    const sideCount = {}, sideSeen = {};
+    edgeList.forEach((e) => {
+      if (e.vertical) return;
+      sideCount[e.outKey] = (sideCount[e.outKey] || 0) + 1;
+      sideCount[e.inKey] = (sideCount[e.inKey] || 0) + 1;
+    });
+    const spread = (key, cy, boxTop, boxBottom) => {
+      const n = sideCount[key];
+      if (n <= 1) return cy;
+      const i = sideSeen[key] = (sideSeen[key] ?? -1) + 1;
+      const gap = Math.min(12, (boxBottom - boxTop - 8) / n);
+      return cy + (i - (n - 1) / 2) * gap;
+    };
+
+    edgeList.forEach((e, i) => {
+      const { a, b, dir } = e;
+      // same-column sequence: connect straight down/up through the column
+      if (e.vertical) {
+        const cx = (b.left + b.right) / 2;
+        const down = b.top > a.bottom;
+        const pts = down
+          ? [[cx, a.bottom], [cx, b.top - 4]]
+          : [[cx, a.top], [cx, b.bottom + 4]];
+        paths.push({ key: e.s + "-" + e.t + i, d: this.roundedPath(pts, 8), kind: e.kind, s: e.s, t: e.t });
+        return;
+      }
+      const sy = spread(e.outKey, a.cy, a.top, a.bottom);
+      const ty = spread(e.inKey, b.cy, b.top, b.bottom);
+      let pts;
+      if (dir === "same") {
+        const mx = nudge(Math.max(a.right, b.right) + 14);
+        pts = [[a.right, sy], [mx, sy], [mx, ty], [b.right + 4, ty]];
+      } else if (dir === "fwd") {
+        const mx = nudge(b.left - 10);
+        pts = Math.abs(sy - ty) < 2
+          ? [[a.right, sy], [b.left - 4, ty]]
+          : [[a.right, sy], [mx, sy], [mx, ty], [b.left - 4, ty]];
+      } else {
+        const mx = nudge(a.left - 10);
+        pts = [[a.left, sy], [mx, sy], [mx, ty], [b.right + 4, ty]];
+      }
+      paths.push({ key: e.s + "-" + e.t + i, d: this.roundedPath(pts, 8), kind: e.kind, s: e.s, t: e.t });
+    });
+    const w = Math.round(rootRect.width), h = Math.round(rootRect.height);
+    const next = { edgePaths: paths, boardW: w, boardH: h };
+    if (JSON.stringify(paths) !== JSON.stringify(this.state.edgePaths) || w !== this.state.boardW || h !== this.state.boardH) {
+      this.setState(next);
+    }
+  }
+
+  componentDidMount() {
+    this._remeasure = () => this.measureEdges();
+    window.addEventListener("resize", this._remeasure);
+    requestAnimationFrame(this._remeasure);
+    setTimeout(this._remeasure, 300);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this._remeasure);
+  }
+
+  componentDidUpdate() {
+    requestAnimationFrame(this._remeasure);
+  }
+
+  nodes() {
+    return [
+      { id: "P01", name: "대상사업 여부 검토", lane: "사업자/시행자", stage: "G0", status: "done", actor: "사업자", deadline: "내부 목표 7일", confidence: 0.92, docs: ["대상판정표", "인허가 매트릭스"], laws: [{ law: "환경영향평가법·하위법령", article: "대상사업 조문·별표", text: "사업유형과 규모가 환경영향평가 대상인지 검토한다." }] },
+      { id: "P02", name: "평가준비서 작성·제출", lane: "사업자/시행자", stage: "G1", status: "done", actor: "사업자 → 승인기관", deadline: "내부 목표 30일", confidence: 0.9, docs: ["평가준비서"], laws: [{ law: "환경영향평가법", article: "제24조", text: "평가항목등의 결정을 위해 평가준비서를 작성한다." }] },
+      { id: "P03", name: "평가항목·범위·방법 심의", lane: "위원회/협의회", stage: "G1", status: "done", actor: "환경영향평가협의회", deadline: "목표 30일", confidence: 0.88, docs: ["평가항목 결정내용", "심의결과"], laws: [{ law: "환경영향평가법", article: "제24조", text: "협의회 심의를 거쳐 평가 항목·범위·방법을 결정한다." }] },
+      { id: "P04", name: "현황조사·영향예측", lane: "평가대행자", stage: "G2", status: "risk", actor: "평가대행자", deadline: "목표 60일", blocker: "계절조사 1회 미완료", confidence: 0.82, docs: ["현황조사 결과", "영향예측표"], laws: [{ law: "환경영향평가법", article: "제27조", text: "평가서 작성을 위해 환경현황을 조사하고 영향을 예측한다." }, { law: "같은 법 시행령", article: "제34조", text: "초안에 조사·예측·평가 결과와 사후조사계획을 포함한다." }] },
+      { id: "P05", name: "평가서 초안 확정 총괄", lane: "사업자/시행자", stage: "G2", status: "current", actor: "사업자", deadline: "목표 45일", blocker: "수질·소음 저감방안 미확정", confidence: 0.86, docs: ["평가서 초안", "요약문", "도면"], laws: [{ law: "환경영향평가법", article: "제25조제1항", text: "결정된 평가항목에 따라 평가서 초안을 작성한다." }, { law: "같은 법 시행령", article: "제34조", text: "초안에 요약문·현황·평가결과·대안 등을 포함한다." }] },
+      { id: "P06", name: "초안 공고·공람", lane: "관할 지자체", stage: "G3", status: "waiting", actor: "시장·군수·구청장", deadline: "접수 후 10일 내 공고 / 공람 20~60일", blocker: "초안 미접수", confidence: 0.9, docs: ["공고문", "공람대장"], laws: [{ law: "환경영향평가법", article: "제25조제2항", text: "공고·공람은 관할 시장·군수·구청장이 한다." }] },
+      { id: "P07", name: "주민의견 제출·공청회 요구", lane: "주민/이해관계자", stage: "G4", status: "waiting", actor: "주민", deadline: "공람·의견제출 기간", confidence: 0.84, docs: ["주민의견서", "공청회 요구"], laws: [{ law: "환경영향평가법", article: "제25조제1·3항", text: "주민 등은 초안을 열람하고 의견을 제출할 수 있다." }] },
+      { id: "P08", name: "의견반영·본안 작성", lane: "사업자/시행자", stage: "G4", status: "waiting", actor: "사업자", deadline: "—", confidence: 0.82, docs: ["평가서 본안", "의견반영표"], laws: [{ law: "환경영향평가법", article: "제27조", text: "의견 수렴 결과를 반영하여 평가서를 작성한다." }, { law: "같은 법 시행령", article: "제46조", text: "평가서에 항목 결정내용·주민의견 검토내용을 포함한다." }] },
+      { id: "P09", name: "협의 요청 공문 발송", lane: "승인기관", stage: "G4", status: "waiting", actor: "승인기관 → 협의기관", deadline: "평가서 접수 후 10일 이내", confidence: 0.9, docs: ["협의요청 공문"], laws: [{ law: "환경영향평가법", article: "제27조제1항", text: "승인기관장등은 승인 전에 협의를 요청한다." }, { law: "같은 법 시행령", article: "제47조제3항", text: "제출받은 날부터 10일 이내에 협의를 요청한다." }] },
+      { id: "P10", name: "평가서 접수·내용검토", lane: "협의기관", stage: "G5", status: "waiting", actor: "협의기관", deadline: "협의요청 후 45일 (연장 60일)", confidence: 0.88, docs: ["검토의견"], laws: [{ law: "환경영향평가법", article: "제28조제1항", text: "의견수렴 이행 여부와 평가서 내용을 검토한다." }, { law: "같은 법 시행령", article: "제50조", text: "협의 통보기간은 45일(연장 시 60일)로 한다." }] },
+      { id: "P11", name: "전문검토서 작성", lane: "전문검토기관/관계기관", stage: "G5", status: "waiting", actor: "전문검토기관", deadline: "—", blocker: "검토의뢰 전", confidence: 0.8, docs: ["전문검토서", "관계기관 의견"], laws: [{ law: "환경영향평가법", article: "제28조제2항", text: "한국환경연구원 등 전문기관의 의견을 들어야 한다." }] },
+      { id: "P12", name: "보완·반려·재검토 판단", lane: "협의기관", stage: "G5", status: "waiting", actor: "협의기관", deadline: "—", confidence: 0.86, docs: ["보완요청서", "반려통보", "재검토 통보"], laws: [{ law: "환경영향평가법", article: "제28조제3~5항", text: "보완·조정 요청은 두 차례만 할 수 있고, 거짓 작성 시 반려할 수 있다." }] },
+      { id: "P13", name: "보완서·수정평가서 작성", lane: "사업자/시행자", stage: "G5", status: "loop", actor: "사업자/평가대행자", deadline: "—", blocker: "조건부 회귀 단계", loopLabel: "P09로 재제출", confidence: 0.78, docs: ["보완서", "수정평가서"], laws: [{ law: "환경영향평가법", article: "제28조제3항", text: "보완 요청을 받으면 보완자료를 작성하여 재제출한다." }] },
+      { id: "P14", name: "협의내용 통보", lane: "협의기관", stage: "G6", status: "waiting", actor: "협의기관 → 승인기관", deadline: "협의요청 후 45일 이내", confidence: 0.89, docs: ["협의내용 통보서"], laws: [{ law: "환경영향평가법", article: "제29조", text: "협의기관은 협의내용을 승인기관장등에게 통보한다." }] },
+      { id: "P15", name: "협의내용 반영 확인·승인", lane: "승인기관", stage: "G6", status: "waiting", actor: "승인기관", deadline: "—", confidence: 0.88, docs: ["승인서", "승인조건", "반영결과"], laws: [{ law: "환경영향평가법", article: "제30조제2·3항", text: "승인 전 협의내용 반영 여부를 확인하고 결과를 통보한다." }] },
+      { id: "P16", name: "착공 전 이행계획·관리대장", lane: "사업자/시행자", stage: "G7", status: "waiting", actor: "사업자", deadline: "착공 전", confidence: 0.8, docs: ["이행계획", "관리대장"], laws: [{ law: "환경영향평가법", article: "제35조", text: "사업자는 협의내용의 이행을 관리한다." }] },
+      { id: "P17", name: "사후환경영향조사 실시", lane: "사업자/시행자", stage: "G7", status: "waiting", actor: "사업자", deadline: "사업 기간 중", confidence: 0.84, docs: ["사후환경영향조사서", "조치결과 보고"], laws: [{ law: "환경영향평가법", article: "제36조", text: "사후환경영향조사를 실시하고 필요한 조치를 한다." }] },
+      { id: "S01", name: "초안·공람자료 공개", lane: "정보시스템", stage: "G3", status: "waiting", actor: "EIASS", deadline: "—", confidence: 0.76, docs: ["공개 게시자료"], laws: [{ law: "환경영향평가법·하위법령", article: "정보지원시스템 조문", text: "공고·공람 내용과 초안 자료를 시스템에 게시한다." }] }
+    ];
+  }
+
+  stagesMeta() {
+    return [
+      { code: "G0", label: "대상판정" }, { code: "G1", label: "착수·스코핑" }, { code: "G2", label: "조사·초안" },
+      { code: "G3", label: "공고·공람" }, { code: "G4", label: "의견수렴·본안" }, { code: "G5", label: "협의검토·보완" },
+      { code: "G6", label: "협의통보·승인" }, { code: "G7", label: "이행·사후관리" }
+    ];
+  }
+
+  lanesMeta() {
+    return ["사업자/시행자", "평가대행자", "승인기관", "관할 지자체", "협의기관", "위원회/협의회", "전문검토기관/관계기관", "주민/이해관계자", "정보시스템"];
+  }
+
+  styleFor(status) {
+    switch (status) {
+      case "done": return { bg: "#f5f7f6", border: "#bdcbc4", borderStyle: "solid", codeColor: "#87938d", stateColor: "#5d6b63", stateLabel: "완료" };
+      case "current": return { bg: "#dff5eb", border: "#0f9f72", borderStyle: "solid", codeColor: "#087452", stateColor: "#087452", stateLabel: "현재" };
+      case "risk": return { bg: "#fdf3e3", border: "#c78116", borderStyle: "solid", codeColor: "#c78116", stateColor: "#c78116", stateLabel: "위험" };
+      case "loop": return { bg: "#fdf9f1", border: "#c78116", borderStyle: "dashed", codeColor: "#c78116", stateColor: "#c78116", stateLabel: "회귀" };
+      default: return { bg: "#ffffff", border: "#dde5df", borderStyle: "solid", codeColor: "#87938d", stateColor: "#87938d", stateLabel: "대기" };
+    }
+  }
+
+  decorate(n) {
+    const s = this.styleFor(n.status);
+    const isSel = this.state.selected === n.id;
+    return {
+      ...n, ...s,
+      loopLabel: n.loopLabel || "",
+      ring: isSel ? "0 0 0 2px #0f9f72" : "none",
+      select: () => this.setState({ selected: n.id })
+    };
+  }
+
+  renderVals() {
+    const all = this.nodes();
+    const stages = this.stagesMeta();
+    const view = this.state.view ?? this.props.defaultView ?? "full";
+    const showInspector = this.props.inspectorVisible ?? true;
+
+    const laneRows = this.lanesMeta().map((lane, li) => ({
+      name: lane,
+      bg: li % 2 === 0 ? "#fcfcfb" : "#ffffff",
+      cells: stages.map((st) => ({
+        nodes: all.filter((n) => n.lane === lane && n.stage === st.code).map((n) => this.decorate(n))
+      }))
+    }));
+
+    const coreOrder = ["P01", "P02", "P03", "P04", "P05", "P06", "P07", "P08", "P09", "P10", "P11", "P12", "P13", "P14", "P15", "P16", "P17"];
+    const coreBands = stages.map((st) => {
+      const ids = coreOrder.filter((id) => all.find((n) => n.id === id).stage === st.code);
+      return {
+        ...st,
+        nodes: ids.map((id, i) => {
+          const n = this.decorate(all.find((x) => x.id === id));
+          const isLastOfBand = i === ids.length - 1;
+          return { ...n, arrow: isLastOfBand ? "" : "→" };
+        })
+      };
+    }).filter((b) => b.nodes.length > 0);
+
+    const raw = all.find((n) => n.id === this.state.selected) || all[0];
+    const s = this.styleFor(raw.status);
+    const stageMeta = stages.find((x) => x.code === raw.stage);
+    const ins = {
+      id: raw.id, name: raw.name, lane: raw.lane, actor: raw.actor,
+      stage: stageMeta ? `${stageMeta.code} ${stageMeta.label}` : raw.stage,
+      stateColor: s.stateColor, stateLabel: s.stateLabel,
+      deadline: raw.deadline || "—",
+      confidence: Math.round(raw.confidence * 100) + "%",
+      blocker: raw.blocker || "",
+      laws: raw.laws, docs: raw.docs
+    };
+
+    const strokeFor = { seq: "#c3cfc8", msg: "#aab6af", loop: "#dcae62", hi: "#0f9f72", hiLoop: "#c78116" };
+    const dashFor = { seq: "none", msg: "2 4", loop: "5 4" };
+    const sel = this.state.selected;
+    const sorted = [...this.state.edgePaths].sort((p, q) => {
+      const ph = p.s === sel || p.t === sel ? 1 : 0;
+      const qh = q.s === sel || q.t === sel ? 1 : 0;
+      return ph - qh;
+    });
+    const edgeOverlay = React.createElement(
+      "svg",
+      {
+        width: this.state.boardW || 1560, height: this.state.boardH || 800,
+        style: { position: "absolute", top: 0, left: 0, pointerEvents: "none", zIndex: 1 }
+      },
+      React.createElement("defs", null,
+        [["seq", strokeFor.seq], ["msg", strokeFor.msg], ["loop", strokeFor.loop], ["hi", strokeFor.hi], ["hiloop", strokeFor.hiLoop]].map(([k, c]) =>
+          React.createElement("marker", { key: k, id: "arr-" + k, viewBox: "0 0 10 10", refX: 8.5, refY: 5, markerWidth: 8, markerHeight: 8, markerUnits: "userSpaceOnUse", orient: "auto-start-reverse" },
+            React.createElement("path", { d: "M 0 0 L 10 5 L 0 10 z", fill: c })
+          )
+        )
+      ),
+      sorted.map((p) => {
+        const isHi = p.s === sel || p.t === sel;
+        const stroke = isHi ? (p.kind === "loop" ? strokeFor.hiLoop : strokeFor.hi) : strokeFor[p.kind];
+        const marker = isHi ? (p.kind === "loop" ? "url(#arr-hiloop)" : "url(#arr-hi)") : `url(#arr-${p.kind})`;
+        return React.createElement("path", {
+          key: p.key, d: p.d, fill: "none",
+          stroke, strokeWidth: isHi ? 1.8 : 1.2,
+          strokeDasharray: dashFor[p.kind], markerEnd: marker
+        });
+      })
+    );
+
+    return {
+      edgeOverlay,
+      showInspector,
+      boardColumns: showInspector ? "1fr 360px" : "1fr",
+      isFull: view === "full", isCore: view === "core",
+      viewFull: () => this.setState({ view: "full" }),
+      viewCore: () => this.setState({ view: "core" }),
+      fullBg: view === "full" ? "#0b1410" : "#ffffff", fullColor: view === "full" ? "#ffffff" : "#5d6b63",
+      coreBg: view === "core" ? "#0b1410" : "#ffffff", coreColor: view === "core" ? "#ffffff" : "#5d6b63",
+      stages, laneRows, coreBands, ins
+    };
+  }
+}
+</script>
+</body>
+</html>
