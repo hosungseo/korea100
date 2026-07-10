@@ -27,8 +27,13 @@
     "kind": "부령"
    },
    {
-    "law": "장기요양 등급판정기준·급여비용 고시",
-    "articles": "등급판정 점수기준·급여비용 수가",
+    "law": "장기요양등급판정기준에 관한 고시",
+    "articles": "장기요양인정점수와 등급판정 기준",
+    "kind": "고시·지침"
+   },
+   {
+    "law": "장기요양급여 제공기준 및 급여비용 산정방법 등에 관한 고시",
+    "articles": "급여 제공기준과 급여비용 산정방법",
     "kind": "고시·지침"
    }
   ],
@@ -636,28 +641,207 @@
    }
   ],
   "edges": [
-   { "id": "E01", "source": "P01", "target": "P02", "type": "sequence", "label": null },
-   { "id": "E02", "source": "P02", "target": "P03", "type": "sequence", "label": null },
-   { "id": "E03", "source": "P03", "target": "P04", "type": "sequence", "label": null },
-   { "id": "E04", "source": "P04", "target": "P05", "type": "sequence", "label": null },
-   { "id": "E05", "source": "P05", "target": "P06", "type": "sequence", "label": null },
-   { "id": "E06", "source": "P06", "target": "P07", "type": "sequence", "label": "인정점수 회부" },
-   { "id": "E07", "source": "P07", "target": "P08", "type": "sequence", "label": "등급 판정" },
-   { "id": "E08", "source": "P08", "target": "P09", "type": "sequence", "label": null },
-   { "id": "E09", "source": "P09", "target": "P10", "type": "sequence", "label": null },
-   { "id": "E10", "source": "P10", "target": "P12", "type": "sequence", "label": null },
-   { "id": "E11", "source": "P12", "target": "P13", "type": "sequence", "label": null },
-   { "id": "E12", "source": "P13", "target": "P15", "type": "sequence", "label": null },
-   { "id": "E13", "source": "P16", "target": "P17", "type": "sequence", "label": null },
-   { "id": "M01", "source": "P07", "target": "P11", "type": "message", "label": "재가·시설 이용 곤란 시 특별현금급여" },
-   { "id": "M02", "source": "P10", "target": "P14", "type": "message", "label": "기관 관리·감독 대상" },
-   { "id": "M03", "source": "P08", "target": "P16", "type": "message", "label": "등급판정 불복 시 심사청구" },
-   { "id": "L01", "source": "P15", "target": "P06", "type": "loop", "label": "갱신 재판정 회귀" },
-   { "id": "L02", "source": "P16", "target": "P07", "type": "loop", "label": "심사청구 재심의 회귀" }
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": "인정점수 회부"
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": "등급 판정"
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P10",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P13",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P16",
+    "target": "P17",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P07",
+    "target": "P11",
+    "type": "message",
+    "label": "재가·시설 이용 곤란 시 특별현금급여"
+   },
+   {
+    "id": "M02",
+    "source": "P10",
+    "target": "P14",
+    "type": "message",
+    "label": "기관 관리·감독 대상"
+   },
+   {
+    "id": "M03",
+    "source": "P08",
+    "target": "P16",
+    "type": "message",
+    "label": "등급판정 불복 시 심사청구"
+   },
+   {
+    "id": "L01",
+    "source": "P15",
+    "target": "P06",
+    "type": "loop",
+    "label": "갱신 재판정 회귀"
+   },
+   {
+    "id": "L02",
+    "source": "P16",
+    "target": "P07",
+    "type": "loop",
+    "label": "심사청구 재심의 회귀"
+   }
   ],
   "warnings": [
    "제17조 개정에 따라 '표준장기요양이용계획서'를 '개인별장기요양이용계획서'로 정정함(P08·P09·docsFlow)",
    "불복 절차 명칭을 현행 법률에 맞춰 '이의신청'에서 '심사청구'(제55조)로 정정함(P16·P17)"
   ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-10",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 5건 중 공식 원문 5건을 연결했다. 캔버스와 절차 노드의 명시 조문 79건 가운데 79건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "노인장기요양보험법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "노인장기요양보험법",
+    "lawId": "010436",
+    "mst": "286217",
+    "promulgatedOn": "2026-05-26",
+    "effectiveOn": "2026-05-26",
+    "officialUrl": "https://law.go.kr/법령/노인장기요양보험법"
+   },
+   {
+    "law": "노인장기요양보험법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "노인장기요양보험법 시행령",
+    "lawId": "010526",
+    "mst": "286011",
+    "promulgatedOn": "2026-05-12",
+    "effectiveOn": "2026-05-12",
+    "officialUrl": "https://law.go.kr/법령/노인장기요양보험법시행령"
+   },
+   {
+    "law": "노인장기요양보험법 시행규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "노인장기요양보험법 시행규칙",
+    "lawId": "010537",
+    "mst": "280315",
+    "promulgatedOn": "2025-12-12",
+    "effectiveOn": "2025-12-12",
+    "officialUrl": "https://law.go.kr/법령/노인장기요양보험법시행규칙"
+   },
+   {
+    "law": "장기요양등급판정기준에 관한 고시",
+    "kind": "고시·지침",
+    "sourceType": "admin-rule",
+    "officialName": "장기요양등급판정기준에 관한 고시",
+    "adminRuleId": "35568",
+    "adminRuleSerial": "2100000143049",
+    "promulgatedOn": "2018-07-23",
+    "officialUrl": "https://law.go.kr/행정규칙/장기요양등급판정기준에관한고시"
+   },
+   {
+    "law": "장기요양급여 제공기준 및 급여비용 산정방법 등에 관한 고시",
+    "kind": "고시·지침",
+    "sourceType": "admin-rule",
+    "officialName": "장기요양급여 제공기준 및 급여비용 산정방법 등에 관한 고시",
+    "adminRuleId": "36934",
+    "adminRuleSerial": "2100000271110",
+    "promulgatedOn": "2025-12-30",
+    "officialUrl": "https://law.go.kr/행정규칙/장기요양급여제공기준및급여비용산정방법등에관한고시"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-10",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 41,
+   "explicitCitationEntries": 39,
+   "articleReferences": 79,
+   "verifiedReferences": 79,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
  }
 }

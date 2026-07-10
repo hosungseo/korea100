@@ -112,7 +112,9 @@
     "progress": 100,
     "actor": "교육부",
     "action": "수급 산정",
-    "output_documents": ["교원 수급계획"],
+    "output_documents": [
+     "교원 수급계획"
+    ],
     "blocker": null,
     "confidence": 0.83,
     "legal_basis": [
@@ -134,7 +136,9 @@
     "actor": "시·도교육감",
     "action": "TO 확정",
     "condition": "과목·지역별 선발예정 인원",
-    "output_documents": ["선발예정 인원 확정내역"],
+    "output_documents": [
+     "선발예정 인원 확정내역"
+    ],
     "blocker": null,
     "confidence": 0.82,
     "legal_basis": [
@@ -155,7 +159,10 @@
     "progress": 100,
     "actor": "시·도교육감",
     "action": "사전예고·공고",
-    "output_documents": ["사전예고", "임용시험 공고"],
+    "output_documents": [
+     "사전예고",
+     "임용시험 공고"
+    ],
     "blocker": null,
     "confidence": 0.84,
     "legal_basis": [
@@ -176,8 +183,12 @@
     "progress": 100,
     "actor": "교육청 채용시스템",
     "action": "게시·접수 처리",
-    "input_documents": ["임용시험 공고"],
-    "output_documents": ["온라인 접수내역"],
+    "input_documents": [
+     "임용시험 공고"
+    ],
+    "output_documents": [
+     "온라인 접수내역"
+    ],
     "blocker": null,
     "confidence": 0.77,
     "legal_basis": [
@@ -198,7 +209,10 @@
     "progress": 100,
     "actor": "응시자",
     "action": "원서 접수",
-    "output_documents": ["응시원서", "교원자격증 사본"],
+    "output_documents": [
+     "응시원서",
+     "교원자격증 사본"
+    ],
     "blocker": null,
     "confidence": 0.85,
     "legal_basis": [
@@ -219,7 +233,9 @@
     "progress": 100,
     "actor": "한국교육과정평가원",
     "action": "출제·실시",
-    "output_documents": ["1차 필기 채점자료"],
+    "output_documents": [
+     "1차 필기 채점자료"
+    ],
     "blocker": null,
     "confidence": 0.83,
     "legal_basis": [
@@ -246,8 +262,12 @@
     "actor": "시·도교육감",
     "action": "1차 합격자 결정",
     "condition": "1차 합격선 충족 여부",
-    "input_documents": ["1차 필기 채점자료"],
-    "output_documents": ["1차 합격자 명단"],
+    "input_documents": [
+     "1차 필기 채점자료"
+    ],
+    "output_documents": [
+     "1차 합격자 명단"
+    ],
     "deadline": "1차 발표 예정일",
     "blocker": "1차 채점·발표 진행 중",
     "confidence": 0.82,
@@ -269,8 +289,12 @@
     "progress": 0,
     "actor": "면접·실연 심사위원회",
     "action": "수업실연·면접",
-    "input_documents": ["1차 합격자 명단"],
-    "output_documents": ["2차 평정표"],
+    "input_documents": [
+     "1차 합격자 명단"
+    ],
+    "output_documents": [
+     "2차 평정표"
+    ],
     "blocker": "1차 미확정",
     "confidence": 0.8,
     "legal_basis": [
@@ -292,8 +316,13 @@
     "actor": "시·도교육감",
     "action": "최종결정",
     "condition": "1·2차 합산 성적",
-    "input_documents": ["1차 필기 채점자료", "2차 평정표"],
-    "output_documents": ["최종 합격자 명단"],
+    "input_documents": [
+     "1차 필기 채점자료",
+     "2차 평정표"
+    ],
+    "output_documents": [
+     "최종 합격자 명단"
+    ],
     "blocker": "2차 미완료",
     "confidence": 0.82,
     "legal_basis": [
@@ -314,8 +343,12 @@
     "progress": 0,
     "actor": "시·도교육감",
     "action": "명부 등재",
-    "input_documents": ["최종 합격자 명단"],
-    "output_documents": ["임용후보자 명부"],
+    "input_documents": [
+     "최종 합격자 명단"
+    ],
+    "output_documents": [
+     "임용후보자 명부"
+    ],
     "deadline": "임용후보자명부 유효기간 1년(2년 범위 연장 가능)",
     "blocker": "최종 합격 확정 전",
     "confidence": 0.81,
@@ -337,7 +370,10 @@
     "progress": 0,
     "actor": "시·도교육감",
     "action": "결격·신원 조회",
-    "output_documents": ["결격사유 조회결과", "신원조회 회보"],
+    "output_documents": [
+     "결격사유 조회결과",
+     "신원조회 회보"
+    ],
     "blocker": "발령 대상 확정 전",
     "confidence": 0.79,
     "legal_basis": [
@@ -358,8 +394,13 @@
     "progress": 0,
     "actor": "시·도교육감",
     "action": "배정·발령",
-    "input_documents": ["임용후보자 명부"],
-    "output_documents": ["학교 배정내역", "발령 통지"],
+    "input_documents": [
+     "임용후보자 명부"
+    ],
+    "output_documents": [
+     "학교 배정내역",
+     "발령 통지"
+    ],
     "blocker": "결원·정원 확정 전",
     "confidence": 0.8,
     "legal_basis": [
@@ -385,7 +426,9 @@
     "progress": 0,
     "actor": "임용대기자",
     "action": "발령 대기",
-    "output_documents": ["임용대기자 관리"],
+    "output_documents": [
+     "임용대기자 관리"
+    ],
     "blocker": "선발규모 축소로 명부 유효기간 내 미발령·임용대기 발생(운영 추정)",
     "confidence": 0.72,
     "legal_basis": [
@@ -407,7 +450,10 @@
     "actor": "시·도교육감",
     "action": "미충원 재공고",
     "condition": "지역·과목별 충원 부족 여부",
-    "output_documents": ["미충원 현황", "추가 공고"],
+    "output_documents": [
+     "미충원 현황",
+     "추가 공고"
+    ],
     "blocker": "지역·과목별 수급 불균형에 따른 조건부 회귀 단계(운영 추정)",
     "confidence": 0.73,
     "legal_basis": [
@@ -428,8 +474,12 @@
     "progress": 0,
     "actor": "시·도교육감",
     "action": "정규 임용",
-    "input_documents": ["발령 통지"],
-    "output_documents": ["정규 임용장"],
+    "input_documents": [
+     "발령 통지"
+    ],
+    "output_documents": [
+     "정규 임용장"
+    ],
     "blocker": "발령·시보 미완료",
     "confidence": 0.81,
     "legal_basis": [
@@ -447,25 +497,184 @@
    }
   ],
   "edges": [
-   { "id": "E01", "source": "P01", "target": "P02", "type": "sequence", "label": null },
-   { "id": "E02", "source": "P02", "target": "P03", "type": "sequence", "label": null },
-   { "id": "E03", "source": "P03", "target": "P04", "type": "sequence", "label": null },
-   { "id": "E04", "source": "P04", "target": "P05", "type": "sequence", "label": null },
-   { "id": "E05", "source": "P05", "target": "P06", "type": "sequence", "label": null },
-   { "id": "E06", "source": "P06", "target": "P07", "type": "sequence", "label": null },
-   { "id": "E07", "source": "P07", "target": "P08", "type": "sequence", "label": null },
-   { "id": "E08", "source": "P08", "target": "P09", "type": "sequence", "label": null },
-   { "id": "E09", "source": "P08", "target": "P13", "type": "sequence", "label": null },
-   { "id": "E10", "source": "P09", "target": "P10", "type": "sequence", "label": null },
-   { "id": "E11", "source": "P10", "target": "P11", "type": "sequence", "label": null },
-   { "id": "E12", "source": "P11", "target": "P14", "type": "sequence", "label": null },
-   { "id": "M01", "source": "P03", "target": "S01", "type": "message", "label": "공고 게시" },
-   { "id": "M02", "source": "S01", "target": "P04", "type": "message", "label": "온라인 접수" },
-   { "id": "M03", "source": "P06", "target": "P07", "type": "message", "label": "1차 합격 통지" },
-   { "id": "M04", "source": "P11", "target": "P12", "type": "message", "label": "미발령 시 임용대기 편입" },
-   { "id": "L01", "source": "P12", "target": "P11", "type": "loop", "label": "결원 발생 시 순위대로 발령" },
-   { "id": "L02", "source": "P13", "target": "P03", "type": "loop", "label": "미충원 과목 추가 공고" }
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P11",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P03",
+    "target": "S01",
+    "type": "message",
+    "label": "공고 게시"
+   },
+   {
+    "id": "M02",
+    "source": "S01",
+    "target": "P04",
+    "type": "message",
+    "label": "온라인 접수"
+   },
+   {
+    "id": "M03",
+    "source": "P06",
+    "target": "P07",
+    "type": "message",
+    "label": "1차 합격 통지"
+   },
+   {
+    "id": "M04",
+    "source": "P11",
+    "target": "P12",
+    "type": "message",
+    "label": "미발령 시 임용대기 편입"
+   },
+   {
+    "id": "L01",
+    "source": "P12",
+    "target": "P11",
+    "type": "loop",
+    "label": "결원 발생 시 순위대로 발령"
+   },
+   {
+    "id": "L02",
+    "source": "P13",
+    "target": "P03",
+    "type": "loop",
+    "label": "미충원 과목 추가 공고"
+   }
   ],
   "warnings": []
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-10",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 3건 중 공식 원문 3건을 연결했다. 캔버스와 절차 노드의 명시 조문 27건 가운데 27건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "교육공무원법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "교육공무원법",
+    "lawId": "001616",
+    "mst": "273345",
+    "promulgatedOn": "2025-08-14",
+    "effectiveOn": "2026-02-15",
+    "officialUrl": "https://law.go.kr/법령/교육공무원법"
+   },
+   {
+    "law": "교육공무원임용령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "교육공무원임용령",
+    "lawId": "002583",
+    "mst": "273697",
+    "promulgatedOn": "2025-09-16",
+    "effectiveOn": "2025-09-19",
+    "officialUrl": "https://law.go.kr/법령/교육공무원임용령"
+   },
+   {
+    "law": "교육공무원 임용후보자 선정경쟁시험규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "교육공무원 임용후보자 선정경쟁시험규칙",
+    "lawId": "006544",
+    "mst": "244529",
+    "promulgatedOn": "2022-09-05",
+    "effectiveOn": "2025-03-01",
+    "officialUrl": "https://law.go.kr/법령/교육공무원임용후보자선정경쟁시험규칙"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-10",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 21,
+   "explicitCitationEntries": 20,
+   "articleReferences": 27,
+   "verifiedReferences": 27,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
  }
 }

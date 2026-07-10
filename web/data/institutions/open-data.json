@@ -563,29 +563,223 @@
    }
   ],
   "edges": [
-   { "id": "E01", "source": "P01", "target": "P02", "type": "sequence", "label": null },
-   { "id": "E02", "source": "P02", "target": "P03", "type": "sequence", "label": null },
-   { "id": "E03", "source": "P03", "target": "P04", "type": "sequence", "label": null },
-   { "id": "E04", "source": "P04", "target": "P05", "type": "sequence", "label": null },
-   { "id": "E05", "source": "P05", "target": "P06", "type": "sequence", "label": null },
-   { "id": "E06", "source": "P06", "target": "P07", "type": "sequence", "label": "목록에 없는 데이터" },
-   { "id": "E07", "source": "P07", "target": "P08", "type": "sequence", "label": null },
-   { "id": "E08", "source": "P08", "target": "P09", "type": "sequence", "label": null },
-   { "id": "E09", "source": "P09", "target": "P10", "type": "sequence", "label": "제공 결정" },
-   { "id": "E10", "source": "P10", "target": "P14", "type": "sequence", "label": null },
-   { "id": "E11", "source": "P14", "target": "P15", "type": "sequence", "label": null },
-   { "id": "E12", "source": "P12", "target": "P13", "type": "sequence", "label": null },
-   { "id": "E13", "source": "P13", "target": "P10", "type": "sequence", "label": "조정·개방 결정" },
-   { "id": "E14", "source": "P09", "target": "P11", "type": "sequence", "label": "제외정보 해당·거부" },
-   { "id": "M01", "source": "P02", "target": "P05", "type": "message", "label": "목록 포털 등록" },
-   { "id": "M02", "source": "P05", "target": "P06", "type": "message", "label": "데이터셋·오픈API 공개" },
-   { "id": "M03", "source": "P07", "target": "P08", "type": "message", "label": "제공신청 접수" },
-   { "id": "M04", "source": "P10", "target": "P06", "type": "message", "label": "오픈API·데이터 발급" },
-   { "id": "L01", "source": "P11", "target": "P12", "type": "loop", "label": "제공 거부 이의·분쟁조정" },
-   { "id": "L02", "source": "P15", "target": "P02", "type": "loop", "label": "개방 확대·신규 목록 등록" },
-   { "id": "E15", "source": "P11", "target": "P16", "type": "sequence", "label": "중단 시 재제공 경로" },
-   { "id": "L03", "source": "P16", "target": "P10", "type": "loop", "label": "중단사유 해소·재제공" }
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": "목록에 없는 데이터"
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": "제공 결정"
+   },
+   {
+    "id": "E10",
+    "source": "P10",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P13",
+    "target": "P10",
+    "type": "sequence",
+    "label": "조정·개방 결정"
+   },
+   {
+    "id": "E14",
+    "source": "P09",
+    "target": "P11",
+    "type": "sequence",
+    "label": "제외정보 해당·거부"
+   },
+   {
+    "id": "M01",
+    "source": "P02",
+    "target": "P05",
+    "type": "message",
+    "label": "목록 포털 등록"
+   },
+   {
+    "id": "M02",
+    "source": "P05",
+    "target": "P06",
+    "type": "message",
+    "label": "데이터셋·오픈API 공개"
+   },
+   {
+    "id": "M03",
+    "source": "P07",
+    "target": "P08",
+    "type": "message",
+    "label": "제공신청 접수"
+   },
+   {
+    "id": "M04",
+    "source": "P10",
+    "target": "P06",
+    "type": "message",
+    "label": "오픈API·데이터 발급"
+   },
+   {
+    "id": "L01",
+    "source": "P11",
+    "target": "P12",
+    "type": "loop",
+    "label": "제공 거부 이의·분쟁조정"
+   },
+   {
+    "id": "L02",
+    "source": "P15",
+    "target": "P02",
+    "type": "loop",
+    "label": "개방 확대·신규 목록 등록"
+   },
+   {
+    "id": "E15",
+    "source": "P11",
+    "target": "P16",
+    "type": "sequence",
+    "label": "중단 시 재제공 경로"
+   },
+   {
+    "id": "L03",
+    "source": "P16",
+    "target": "P10",
+    "type": "loop",
+    "label": "중단사유 해소·재제공"
+   }
   ],
   "warnings": []
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-10",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 4건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 35건 가운데 35건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "공공데이터의 제공 및 이용 활성화에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "공공데이터의 제공 및 이용 활성화에 관한 법률",
+    "lawId": "011895",
+    "mst": "251023",
+    "promulgatedOn": "2023-05-16",
+    "effectiveOn": "2023-11-17",
+    "officialUrl": "https://law.go.kr/법령/공공데이터의제공및이용활성화에관한법률"
+   },
+   {
+    "law": "공공데이터의 제공 및 이용 활성화에 관한 법률 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "공공데이터의 제공 및 이용 활성화에 관한 법률 시행령",
+    "lawId": "011928",
+    "mst": "281025",
+    "promulgatedOn": "2025-12-30",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/공공데이터의제공및이용활성화에관한법률시행령"
+   },
+   {
+    "law": "공공데이터의 제공 및 이용 활성화에 관한 법률 시행규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "공공데이터의 제공 및 이용 활성화에 관한 법률 시행규칙",
+    "lawId": "011929",
+    "mst": "255975",
+    "promulgatedOn": "2023-11-07",
+    "effectiveOn": "2023-11-17",
+    "officialUrl": "https://law.go.kr/법령/공공데이터의제공및이용활성화에관한법률시행규칙"
+   },
+   {
+    "law": "데이터기반행정 활성화에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "데이터기반행정 활성화에 관한 법률",
+    "lawId": "013792",
+    "mst": "251025",
+    "promulgatedOn": "2023-05-16",
+    "effectiveOn": "2023-11-17",
+    "officialUrl": "https://law.go.kr/법령/데이터기반행정활성화에관한법률"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-10",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 30,
+   "explicitCitationEntries": 26,
+   "articleReferences": 35,
+   "verifiedReferences": 35,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
  }
 }

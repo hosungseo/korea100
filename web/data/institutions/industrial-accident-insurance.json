@@ -119,7 +119,10 @@
     "progress": 100,
     "actor": "근로복지공단",
     "action": "당연 적용 사업 보험관계 성립·업종별 요율 부과",
-    "output_documents": ["보험관계 성립 신고", "보험료 부과 내역"],
+    "output_documents": [
+     "보험관계 성립 신고",
+     "보험료 부과 내역"
+    ],
     "confidence": 0.84,
     "legal_basis": [
      {
@@ -140,7 +143,9 @@
     "actor": "사업주",
     "receiver": "근로복지공단",
     "action": "산재보험료 전액 납부",
-    "output_documents": ["납부 확인"],
+    "output_documents": [
+     "납부 확인"
+    ],
     "confidence": 0.83,
     "legal_basis": [
      {
@@ -160,7 +165,9 @@
     "progress": 100,
     "actor": "재해근로자",
     "action": "업무 수행 중 사고·질병 발생",
-    "output_documents": ["재해 사실"],
+    "output_documents": [
+     "재해 사실"
+    ],
     "confidence": 0.82,
     "legal_basis": [
      {
@@ -181,7 +188,9 @@
     "actor": "재해근로자·유족",
     "receiver": "근로복지공단",
     "action": "요양급여 등 급여 신청",
-    "output_documents": ["요양급여 신청서"],
+    "output_documents": [
+     "요양급여 신청서"
+    ],
     "confidence": 0.84,
     "legal_basis": [
      {
@@ -207,7 +216,10 @@
     "actor": "산재보험 의료기관",
     "receiver": "근로복지공단",
     "action": "진료·의무기록·소견서 발급",
-    "output_documents": ["의무기록", "소견서"],
+    "output_documents": [
+     "의무기록",
+     "소견서"
+    ],
     "confidence": 0.82,
     "legal_basis": [
      {
@@ -228,8 +240,12 @@
     "actor": "근로복지공단",
     "receiver": "사업주(보험가입자)",
     "action": "요양급여 신청 사실 통지·의견 청취",
-    "input_documents": ["요양급여 신청서"],
-    "output_documents": ["보험가입자 의견"],
+    "input_documents": [
+     "요양급여 신청서"
+    ],
+    "output_documents": [
+     "보험가입자 의견"
+    ],
     "confidence": 0.8,
     "legal_basis": [
      {
@@ -249,8 +265,13 @@
     "progress": 50,
     "actor": "근로복지공단",
     "action": "업무 관련성·재해경위 조사",
-    "input_documents": ["요양급여 신청서", "의무기록"],
-    "output_documents": ["재해조사 복명서"],
+    "input_documents": [
+     "요양급여 신청서",
+     "의무기록"
+    ],
+    "output_documents": [
+     "재해조사 복명서"
+    ],
     "blocker": "업무 관련성 조사 진행 중",
     "confidence": 0.82,
     "legal_basis": [
@@ -276,8 +297,13 @@
     "progress": 35,
     "actor": "업무상질병판정위원회",
     "action": "업무상 질병 인과관계 심의",
-    "input_documents": ["재해조사 복명서", "의학 소견"],
-    "output_documents": ["질병판정위 심의 결과"],
+    "input_documents": [
+     "재해조사 복명서",
+     "의학 소견"
+    ],
+    "output_documents": [
+     "질병판정위 심의 결과"
+    ],
     "blocker": "인과관계 입증 곤란·판정 지연 빈발(운영 추정)",
     "deadline": "심의 의뢰받은 날부터 20일 이내(부득이한 경우 10일 연장, 시행규칙 제8조제2항)",
     "confidence": 0.75,
@@ -305,7 +331,9 @@
     "actor": "근로복지공단",
     "action": "승인·불승인 결정",
     "condition": "업무상 재해 인정 여부(승인/불승인)",
-    "output_documents": ["승인·불승인 결정 통지"],
+    "output_documents": [
+     "승인·불승인 결정 통지"
+    ],
     "confidence": 0.8,
     "legal_basis": [
      {
@@ -326,8 +354,13 @@
     "actor": "근로복지공단",
     "receiver": "재해근로자·의료기관",
     "action": "요양급여·휴업급여 지급",
-    "input_documents": ["승인 결정 통지"],
-    "output_documents": ["요양급여 지급", "휴업급여 지급 내역"],
+    "input_documents": [
+     "승인 결정 통지"
+    ],
+    "output_documents": [
+     "요양급여 지급",
+     "휴업급여 지급 내역"
+    ],
     "confidence": 0.82,
     "legal_basis": [
      {
@@ -348,7 +381,10 @@
     "actor": "근로복지공단",
     "action": "치유 후 장해등급 판정·장해급여 결정",
     "condition": "치유 후 장해 잔존 및 등급",
-    "output_documents": ["장해등급 결정", "장해급여(연금·일시금)"],
+    "output_documents": [
+     "장해등급 결정",
+     "장해급여(연금·일시금)"
+    ],
     "confidence": 0.8,
     "legal_basis": [
      {
@@ -369,8 +405,13 @@
     "actor": "근로복지공단",
     "receiver": "유족",
     "action": "사망 시 유족급여·장례비 지급",
-    "input_documents": ["승인 결정 통지"],
-    "output_documents": ["유족급여 지급", "장례비 지급 내역"],
+    "input_documents": [
+     "승인 결정 통지"
+    ],
+    "output_documents": [
+     "유족급여 지급",
+     "장례비 지급 내역"
+    ],
     "confidence": 0.82,
     "legal_basis": [
      {
@@ -396,7 +437,9 @@
     "actor": "근로복지공단",
     "receiver": "재해근로자",
     "action": "직업재활급여·직장복귀 지원",
-    "output_documents": ["직업재활 지원 내역"],
+    "output_documents": [
+     "직업재활 지원 내역"
+    ],
     "blocker": "치료 후 직업복귀·재활 지원이 충분치 않음(운영 추정)",
     "confidence": 0.77,
     "legal_basis": [
@@ -418,8 +461,13 @@
     "actor": "산재보험심사위원회·산업재해보상보험재심사위원회",
     "receiver": "청구인",
     "action": "불승인·등급 불복 심사청구·재심사청구 처리",
-    "input_documents": ["심사청구서"],
-    "output_documents": ["심사 결정", "재결"],
+    "input_documents": [
+     "심사청구서"
+    ],
+    "output_documents": [
+     "심사 결정",
+     "재결"
+    ],
     "blocker": "불승인·장해등급 불복 시 회귀 단계",
     "deadline": "심사청구는 결정을 안 날부터 90일 이내(법 제103조제3항)",
     "confidence": 0.78,
@@ -441,8 +489,14 @@
     "progress": 0,
     "actor": "고용노동부·근로복지공단",
     "action": "업종별 요율 산정·산재보험기금 관리",
-    "input_documents": ["재해율 통계", "급여 지출"],
-    "output_documents": ["업종별 요율", "기금 운용 내역"],
+    "input_documents": [
+     "재해율 통계",
+     "급여 지출"
+    ],
+    "output_documents": [
+     "업종별 요율",
+     "기금 운용 내역"
+    ],
     "confidence": 0.79,
     "legal_basis": [
      {
@@ -454,25 +508,195 @@
    }
   ],
   "edges": [
-   { "id": "E01", "source": "P01", "target": "P02", "type": "sequence", "label": null },
-   { "id": "E02", "source": "P02", "target": "P03", "type": "sequence", "label": "가입 유지" },
-   { "id": "E03", "source": "P03", "target": "P04", "type": "sequence", "label": null },
-   { "id": "E04", "source": "P04", "target": "P05", "type": "sequence", "label": null },
-   { "id": "E05", "source": "P05", "target": "P15", "type": "sequence", "label": null },
-   { "id": "E13", "source": "P15", "target": "P06", "type": "sequence", "label": "의견 청취 후 조사" },
-   { "id": "E06", "source": "P06", "target": "P07", "type": "sequence", "label": "업무상질병 의뢰" },
-   { "id": "E07", "source": "P07", "target": "P08", "type": "sequence", "label": "심의 결과" },
-   { "id": "E08", "source": "P08", "target": "P09", "type": "sequence", "label": "승인" },
-   { "id": "E09", "source": "P09", "target": "P10", "type": "sequence", "label": "치유·장해" },
-   { "id": "E10", "source": "P08", "target": "P11", "type": "sequence", "label": "사망 승인" },
-   { "id": "E11", "source": "P10", "target": "P12", "type": "sequence", "label": null },
-   { "id": "E12", "source": "P02", "target": "P14", "type": "sequence", "label": null },
-   { "id": "M01", "source": "P05", "target": "P06", "type": "message", "label": "의무기록·소견서" },
-   { "id": "M02", "source": "P07", "target": "P08", "type": "message", "label": "판정위 심의서" },
-   { "id": "M03", "source": "P09", "target": "P14", "type": "message", "label": "급여 지출 반영" },
-   { "id": "L01", "source": "P08", "target": "P13", "type": "loop", "label": "불승인 불복" },
-   { "id": "L02", "source": "P13", "target": "P08", "type": "loop", "label": "재심사·재결정" }
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": "가입 유지"
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P15",
+    "target": "P06",
+    "type": "sequence",
+    "label": "의견 청취 후 조사"
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": "업무상질병 의뢰"
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": "심의 결과"
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": "승인"
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": "치유·장해"
+   },
+   {
+    "id": "E10",
+    "source": "P08",
+    "target": "P11",
+    "type": "sequence",
+    "label": "사망 승인"
+   },
+   {
+    "id": "E11",
+    "source": "P10",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P02",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P05",
+    "target": "P06",
+    "type": "message",
+    "label": "의무기록·소견서"
+   },
+   {
+    "id": "M02",
+    "source": "P07",
+    "target": "P08",
+    "type": "message",
+    "label": "판정위 심의서"
+   },
+   {
+    "id": "M03",
+    "source": "P09",
+    "target": "P14",
+    "type": "message",
+    "label": "급여 지출 반영"
+   },
+   {
+    "id": "L01",
+    "source": "P08",
+    "target": "P13",
+    "type": "loop",
+    "label": "불승인 불복"
+   },
+   {
+    "id": "L02",
+    "source": "P13",
+    "target": "P08",
+    "type": "loop",
+    "label": "재심사·재결정"
+   }
   ],
   "warnings": []
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-10",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 4건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 31건 가운데 31건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "산업재해보상보험법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "산업재해보상보험법",
+    "lawId": "001760",
+    "mst": "283459",
+    "promulgatedOn": "2026-02-19",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/산업재해보상보험법"
+   },
+   {
+    "law": "고용보험 및 산업재해보상보험의 보험료징수 등에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "고용보험 및 산업재해보상보험의 보험료징수 등에 관한 법률",
+    "lawId": "009589",
+    "mst": "247481",
+    "promulgatedOn": "2022-12-31",
+    "effectiveOn": "2024-01-01",
+    "officialUrl": "https://law.go.kr/법령/고용보험및산업재해보상보험의보험료징수등에관한법률"
+   },
+   {
+    "law": "산업재해보상보험법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "산업재해보상보험법 시행령",
+    "lawId": "003793",
+    "mst": "287491",
+    "promulgatedOn": "2026-06-30",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/산업재해보상보험법시행령"
+   },
+   {
+    "law": "산업재해보상보험법 시행규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "산업재해보상보험법 시행규칙",
+    "lawId": "007373",
+    "mst": "283239",
+    "promulgatedOn": "2026-02-02",
+    "effectiveOn": "2026-02-02",
+    "officialUrl": "https://law.go.kr/법령/산업재해보상보험법시행규칙"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-10",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 23,
+   "explicitCitationEntries": 22,
+   "articleReferences": 31,
+   "verifiedReferences": 31,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
  }
 }

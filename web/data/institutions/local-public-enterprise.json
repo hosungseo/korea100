@@ -147,7 +147,7 @@
      },
      {
       "law": "행정안전부 지방공기업 설립·경영평가 기준",
-      "article": "설립 타당성 검토기준(시행령 제47조제1항 위임)",
+      "article": "설립 타당성 검토 세부기준",
       "text": "타당성 검토의 세부절차·검토기준은 행정안전부장관이 정하여 고시한다."
      }
     ]
@@ -633,5 +633,72 @@
   "warnings": [
    "2026-07-10 법령 검증(현행 지방공기업법, 2026-05-19 시행): 설립 타당성 검토는 제49조제3항·제4항, 설립 전 협의는 제49조제1항으로 확인·수정함(종전 제49조의2 인용은 현행 조문에 없음). 경영평가 제78조·시행령 제68조(회계감사 종료 후 4개월 내 완료), 경영진단·개선명령 제78조의2, 임원추천위 제58조는 확인됨"
   ]
+ },
+ "verification": {
+  "status": "needs-review",
+  "verifiedAt": "2026-07-10",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 5건 중 공식 원문 3건을 연결했다. 캔버스와 절차 노드의 명시 조문 32건 가운데 32건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "지방공기업법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "지방공기업법",
+    "lawId": "001648",
+    "mst": "286107",
+    "promulgatedOn": "2026-05-19",
+    "effectiveOn": "2026-05-19",
+    "officialUrl": "https://law.go.kr/법령/지방공기업법"
+   },
+   {
+    "law": "지방공기업법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "지방공기업법 시행령",
+    "lawId": "005042",
+    "mst": "285217",
+    "promulgatedOn": "2026-03-31",
+    "effectiveOn": "2026-03-31",
+    "officialUrl": "https://law.go.kr/법령/지방공기업법시행령"
+   },
+   {
+    "law": "지방공기업법 시행규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "지방공기업법 시행규칙",
+    "lawId": "008314",
+    "mst": "235341",
+    "promulgatedOn": "2021-09-07",
+    "effectiveOn": "2021-09-07",
+    "officialUrl": "https://law.go.kr/법령/지방공기업법시행규칙"
+   }
+  ],
+  "unresolved": [
+   {
+    "law": "지방직영기업·공사·공단 설치 조례",
+    "kind": "조례",
+    "reasonCode": "local-scope",
+    "reason": "적용 지역이 특정되지 않아 단일 자치법규 원문을 확정할 수 없음",
+    "nextStep": "적용할 시·도 또는 시·군·구를 지정한 뒤 해당 자치법규를 연결해야 한다."
+   },
+   {
+    "law": "행정안전부 지방공기업 설립·경영평가 기준",
+    "kind": "고시·지침",
+    "reasonCode": "external-official-document",
+    "reason": "계획·편람·업무지침으로 국가법령정보센터 식별자를 확정할 수 없음",
+    "nextStep": "소관 부처가 공개한 해당 연도 문서의 공식 URL과 발행 버전을 지정해야 한다."
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-10",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 29,
+   "explicitCitationEntries": 24,
+   "articleReferences": 32,
+   "verifiedReferences": 32,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
  }
 }

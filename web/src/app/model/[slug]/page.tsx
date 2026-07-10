@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { getAllSlugs, getInstitution } from "@/lib/data";
 import type { Institution } from "@/lib/types";
 import ProcessBoard from "@/components/ProcessBoard";
@@ -72,7 +73,7 @@ function InstitutionHeader({ institution }: { institution: Institution }) {
             flexWrap: "wrap",
           }}
         >
-          <a
+          <Link
             href="/"
             style={{
               color: "var(--color-faint)",
@@ -80,11 +81,11 @@ function InstitutionHeader({ institution }: { institution: Institution }) {
             }}
           >
             제도 100
-          </a>
+          </Link>
           {institution.category && (
             <>
               <span>›</span>
-              <a
+              <Link
                 href="/#institutions"
                 style={{
                   color: "var(--color-faint)",
@@ -92,7 +93,7 @@ function InstitutionHeader({ institution }: { institution: Institution }) {
                 }}
               >
                 {institution.category}
-              </a>
+              </Link>
             </>
           )}
           <span>›</span>
@@ -110,6 +111,9 @@ function InstitutionHeader({ institution }: { institution: Institution }) {
         >
           <TypeBadge>{institution.type}</TypeBadge>
           <StatusBadge status={institution.status} />
+          {institution.verification && (
+            <VerificationBadge verification={institution.verification} />
+          )}
           <span
             style={{
               fontSize: 12,
@@ -217,6 +221,37 @@ function StatusBadge({ status }: { status: "full" | "canvas" }) {
   );
 }
 
+function VerificationBadge({
+  verification,
+}: {
+  verification: NonNullable<Institution["verification"]>;
+}) {
+  const needsReview = verification.status === "needs-review";
+  const article = verification.articleVerification;
+  const label = article
+    ? verification.status === "article-verified"
+      ? `조문 ${article.verifiedReferences}건 확인`
+      : article.missingReferences + article.uncheckableReferences === 0
+        ? `조문 ${article.verifiedReferences}건 · 범위별 출처`
+        : `조문 ${article.verifiedReferences}/${article.articleReferences}건 확인`
+    : `원문 ${verification.sources.length}건${needsReview ? " · 범위 확인" : " 연결"}`;
+
+  return (
+    <span
+      style={{
+        fontSize: 12,
+        fontWeight: 600,
+        padding: "3px 10px",
+        borderRadius: 6,
+        background: needsReview ? "#fef6e7" : "var(--color-accent-soft)",
+        color: needsReview ? "#c78116" : "var(--color-accent-dark)",
+      }}
+    >
+      {label}
+    </span>
+  );
+}
+
 function LegalChip({
   law,
   articles,
@@ -284,7 +319,10 @@ function InstitutionCenter({ institution }: { institution: Institution }) {
     <section style={{ padding: "40px 24px" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         {institution.status === "full" && institution.process ? (
-          <FullProcessSection process={institution.process} />
+          <FullProcessSection
+            process={institution.process}
+            verification={institution.verification}
+          />
         ) : (
           <CanvasStepperSection institution={institution} />
         )}
@@ -295,8 +333,10 @@ function InstitutionCenter({ institution }: { institution: Institution }) {
 
 function FullProcessSection({
   process,
+  verification,
 }: {
   process: NonNullable<Institution["process"]>;
+  verification?: Institution["verification"];
 }) {
   return (
     <div>
@@ -309,22 +349,34 @@ function FullProcessSection({
             marginBottom: 4,
           }}
         >
-          상태 인식형 업무구조도
+          법령상 업무구조도
         </h2>
         <p style={{ fontSize: 14, color: "var(--color-muted)" }}>
-          게이트 타임라인과 노드를 클릭하면 법적 근거·산출물·병목을 볼 수 있습니다.
+          법령상 대표 절차와 노드별 공식 원문 검증 상태를 함께 표시합니다.
         </p>
       </div>
       <div
         style={{
           background: "var(--color-surface)",
-          borderRadius: 18,
-          border: "1px solid var(--color-border)",
-          padding: "28px 24px",
-          boxShadow: "0 16px 48px rgba(16,33,24,.05)",
+          borderTop: "1px solid var(--color-border)",
+          borderBottom: "1px solid var(--color-border)",
+          padding: "20px 0 4px",
         }}
       >
-        <ProcessBoard process={process} compact={false} />
+        <div
+          style={{
+            marginBottom: 18,
+            padding: "8px 12px",
+            background: "#f7f9f8",
+            borderLeft: "3px solid var(--color-border-strong)",
+            fontSize: 13,
+            lineHeight: 1.6,
+            color: "var(--color-muted)",
+          }}
+        >
+          실제 사건의 진행 현황이 아니라, 법령상 절차와 대표적인 병목을 설명하는 참고 모델입니다.
+        </div>
+        <ProcessBoard process={process} verification={verification} compact={false} />
       </div>
 
       {/* Warnings */}
@@ -458,6 +510,9 @@ function InstitutionBottom({ institution }: { institution: Institution }) {
       }}
     >
       <div style={{ maxWidth: 1200, margin: "0 auto", paddingTop: 40 }}>
+        {institution.verification && (
+          <SourceVerificationPanel verification={institution.verification} />
+        )}
         <div
           style={{
             display: "grid",
@@ -650,6 +705,162 @@ function InstitutionBottom({ institution }: { institution: Institution }) {
             ghtjd10855@gmail.com
           </a>
         </div>
+      </div>
+    </section>
+  );
+}
+
+function SourceVerificationPanel({
+  verification,
+}: {
+  verification: NonNullable<Institution["verification"]>;
+}) {
+  const article = verification.articleVerification;
+  const hasArticleIssues = Boolean(
+    article && article.missingReferences + article.uncheckableReferences > 0,
+  );
+  const needsReview = verification.status === "needs-review";
+  const statusLabel =
+    verification.status === "article-verified"
+      ? "조문 번호 확인 완료"
+      : verification.status === "source-linked"
+        ? "공식 원문 연결 완료"
+        : hasArticleIssues
+          ? "조문 재검수 필요"
+          : "조문 확인 · 범위별 출처 필요";
+  const reasonLabels: Record<string, string> = {
+    "local-scope": "지역 지정 필요",
+    "institution-scope": "적용 범위 지정 필요",
+    "internal-rule": "내부규정",
+    "external-official-document": "부처 문서",
+    "title-needs-confirmation": "공식 제명 확인 필요",
+  };
+
+  return (
+    <section
+      style={{
+        marginBottom: 24,
+        padding: "20px 0",
+        borderTop: "1px solid var(--color-border)",
+        borderBottom: "1px solid var(--color-border)",
+      }}
+      aria-labelledby="source-verification-title"
+    >
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "flex-start",
+          gap: 12,
+          flexWrap: "wrap",
+          marginBottom: 12,
+        }}
+      >
+        <div>
+          <h2
+            id="source-verification-title"
+            style={{ fontSize: 16, fontWeight: 680, color: "var(--color-ink)", margin: 0 }}
+          >
+            공식 법령 출처
+          </h2>
+          <p style={{ fontSize: 12, color: "var(--color-faint)", margin: "4px 0 0" }}>
+            {verification.method} · {verification.verifiedAt}
+          </p>
+        </div>
+        <span
+          style={{
+            fontSize: 12,
+            fontWeight: 650,
+            padding: "4px 9px",
+            color: needsReview ? "#9a650f" : "var(--color-accent-dark)",
+            background: needsReview ? "#fef6e7" : "var(--color-accent-soft)",
+            borderRadius: 6,
+          }}
+        >
+          {statusLabel}
+        </span>
+      </div>
+      <p style={{ ...bodyStyle, marginBottom: 14 }}>{verification.scope}</p>
+      {article && (
+        <p
+          style={{
+            fontSize: 12,
+            color: "var(--color-muted)",
+            lineHeight: 1.6,
+            margin: "0 0 14px",
+          }}
+        >
+          명시 조문 {article.articleReferences}건 · 확인 {article.verifiedReferences}건 · 불일치{" "}
+          {article.missingReferences}건 · 자동 검증 불가 {article.uncheckableReferences}건
+        </p>
+      )}
+      {verification.notes && verification.notes.length > 0 && (
+        <ul style={{ ...listStyle, marginBottom: 14, paddingLeft: 18 }}>
+          {verification.notes.map((note) => (
+            <li key={note} style={{ ...listItemStyle, color: "var(--color-warning)" }}>
+              {note}
+            </li>
+          ))}
+        </ul>
+      )}
+      {verification.unresolved && verification.unresolved.length > 0 && (
+        <div
+          style={{
+            marginBottom: 14,
+            padding: "10px 12px",
+            background: "#fef6e7",
+            borderLeft: "3px solid var(--color-warning)",
+          }}
+        >
+          <strong style={{ display: "block", fontSize: 12, color: "#9a650f", marginBottom: 6 }}>
+            범위·원문 지정 {verification.unresolved.length}건
+          </strong>
+          <ul style={{ ...listStyle, margin: 0, paddingLeft: 18 }}>
+            {verification.unresolved.map((item) => (
+              <li key={`${item.kind}:${item.law}`} style={{ ...listItemStyle, fontSize: 12 }}>
+                <strong>{reasonLabels[item.reasonCode] ?? item.reasonCode}</strong> · {item.law} ·{" "}
+                {item.reason}
+                <span style={{ display: "block", color: "var(--color-muted)" }}>
+                  다음 확인: {item.nextStep}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      <div>
+        {verification.sources.map((source) => (
+          <a
+            key={`${source.sourceType ?? "statute"}:${source.law}`}
+            href={source.officialUrl}
+            target="_blank"
+            rel="noreferrer"
+            style={{
+              display: "block",
+              padding: "10px 0",
+              borderTop: "1px solid var(--color-border)",
+              color: "var(--color-ink)",
+              textDecoration: "none",
+            }}
+          >
+            <strong style={{ display: "block", fontSize: 13, marginBottom: 4 }}>{source.law}</strong>
+            <span style={{ display: "block", fontSize: 11, color: "var(--color-faint)", lineHeight: 1.5 }}>
+              {source.kind}
+              {source.effectiveOn ? ` · 시행 ${source.effectiveOn}` : ""}
+              {!source.effectiveOn && source.promulgatedOn ? ` · 공포 ${source.promulgatedOn}` : ""}
+              <br />
+              {(source.sourceType ?? "statute") === "statute" && (
+                <>법령 ID {source.lawId} · MST {source.mst}</>
+              )}
+              {source.sourceType === "admin-rule" && (
+                <>행정규칙 ID {source.adminRuleId} · 일련번호 {source.adminRuleSerial}</>
+              )}
+              {source.sourceType === "treaty" && (
+                <>조약번호 {source.treatyNumber} · ID {source.treatyId}</>
+              )}
+            </span>
+          </a>
+        ))}
       </div>
     </section>
   );

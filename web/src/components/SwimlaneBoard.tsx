@@ -8,11 +8,23 @@ import {
   useCallback,
   useEffect,
 } from "react";
-import type { ProcessModel, ProcessNode, ProcessEdge } from "@/lib/types";
+import type {
+  ProcessModel,
+  ProcessNode,
+  ProcessEdge,
+  SourceVerification,
+} from "@/lib/types";
+import { getNodeVerification } from "@/lib/process-verification";
+import {
+  NodeLegalVerification,
+  ProcessVerificationSummaryBar,
+  VerificationLegend,
+  VerificationMark,
+} from "./ProcessVerification";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
-const LANE_W = 88;
-const STAGE_W = 176; // 작은 카드(132px) + 넓은 칸 여백
+const LANE_W = 104;
+const STAGE_W = 188;
 
 // 카드용 법조항 축약: 첫 근거의 첫 조문만, 괄호 설명 제거. "환경영향평가법 제24조 외 2"
 function compactLegal(
@@ -31,11 +43,11 @@ const LOOP_BELOW = 68;
 
 // ── Status styles ─────────────────────────────────────────────────────────────
 const SS: Record<string, { bg: string; border: string; dot: string; label: string; ink: string; sub: string }> = {
-  done:    { bg: "#f0fdf6", border: "#0f9f72", dot: "#0f9f72", label: "완료",  ink: "#0b3d28", sub: "#1a7a52" },
-  current: { bg: "#0f9f72", border: "#0f9f72", dot: "#fff",    label: "진행중", ink: "#ffffff", sub: "rgba(255,255,255,.8)" },
-  waiting: { bg: "#f5f7f6", border: "#dde5df", dot: "#bdcbc4", label: "대기",  ink: "#111714", sub: "#87938d" },
-  risk:    { bg: "#fffbf0", border: "#d97706", dot: "#d97706", label: "위험",  ink: "#92400e", sub: "#d97706" },
-  loop:    { bg: "#fdf4ff", border: "#9333ea", dot: "#9333ea", label: "회귀",  ink: "#6b21a8", sub: "#9333ea" },
+  done:    { bg: "#f0fdf6", border: "#0f9f72", dot: "#0f9f72", label: "선행",  ink: "#0b3d28", sub: "#1a7a52" },
+  current: { bg: "#0f9f72", border: "#0f9f72", dot: "#fff",    label: "핵심", ink: "#ffffff", sub: "rgba(255,255,255,.8)" },
+  waiting: { bg: "#f5f7f6", border: "#dde5df", dot: "#bdcbc4", label: "후속",  ink: "#111714", sub: "#87938d" },
+  risk:    { bg: "#fffbf0", border: "#d97706", dot: "#d97706", label: "병목",  ink: "#92400e", sub: "#d97706" },
+  loop:    { bg: "#eff6ff", border: "#2563eb", dot: "#2563eb", label: "회귀",  ink: "#1e3a8a", sub: "#2563eb" },
   gateway: { bg: "#f5f7f6", border: "#c4cfc8", dot: "#87938d", label: "판단",  ink: "#111714", sub: "#87938d" },
 };
 function ss(status: string) { return SS[status] ?? SS.waiting; }
@@ -61,13 +73,18 @@ function GateTimeline({
   onStageClick: (s: string) => void;
 }) {
   return (
-    <div style={{ overflowX: "auto", scrollbarWidth: "none", paddingBottom: 12 }}>
+    <div
+      style={{
+        overflowX: "auto",
+        scrollbarWidth: "none",
+        padding: "2px 0 12px",
+      }}
+    >
       <div
         style={{
           display: "flex",
-          alignItems: "center",
           minWidth: "max-content",
-          paddingLeft: LANE_W + 4,
+          paddingLeft: LANE_W,
         }}
       >
         {stages.map((stage, i) => {
@@ -82,7 +99,14 @@ function GateTimeline({
             st === "current" || st === "done" ? "#0f9f72" : st === "risk" ? "#d97706" : "#87938d";
 
           return (
-            <div key={stage} style={{ display: "flex", alignItems: "center" }}>
+            <div
+              key={stage}
+              style={{
+                position: "relative",
+                width: STAGE_W,
+                flexShrink: 0,
+              }}
+            >
               <button
                 onClick={() => onStageClick(stage)}
                 style={{
@@ -92,9 +116,12 @@ function GateTimeline({
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  gap: 5,
-                  padding: "0 2px",
-                  width: STAGE_W,
+                  gap: 6,
+                  padding: "0 12px",
+                  width: "100%",
+                  minHeight: 50,
+                  position: "relative",
+                  zIndex: 2,
                 }}
                 aria-label={`${stage} 로 이동`}
               >
@@ -138,7 +165,9 @@ function GateTimeline({
                       color: st === "current" ? "#111714" : "#87938d",
                       lineHeight: 1.25,
                       fontWeight: st === "current" ? 600 : 400,
-                      whiteSpace: "nowrap",
+                      display: "block",
+                      maxWidth: 146,
+                      wordBreak: "keep-all",
                     }}
                   >
                     {rest.join(" ")}
@@ -148,12 +177,15 @@ function GateTimeline({
               {!isLast && (
                 <div
                   style={{
-                    width: 0,
+                    position: "absolute",
+                    top: 5,
+                    left: "calc(50% + 8px)",
+                    width: "calc(100% - 16px)",
                     height: 2,
                     background:
                       st === "done" || st === "current" ? "#0f9f72" : "#dde5df",
-                    flexShrink: 0,
                     transition: "background 200ms ease",
+                    zIndex: 1,
                   }}
                 />
               )}
@@ -168,6 +200,7 @@ function GateTimeline({
 // ── Compact Node Card ─────────────────────────────────────────────────────────
 function SwimlaneNodeCard({
   node,
+  verification,
   onClick,
   highlighted,
   dimmed,
@@ -176,6 +209,7 @@ function SwimlaneNodeCard({
   setRef,
 }: {
   node: ProcessNode;
+  verification?: SourceVerification;
   onClick: (n: ProcessNode) => void;
   highlighted: boolean;
   dimmed: boolean;
@@ -188,6 +222,7 @@ function SwimlaneNodeCard({
   const isGateway = node.type === "gateway";
   const isLoop = node.status === "loop";
   const isRisk = node.status === "risk";
+  const verificationResult = getNodeVerification(node, verification);
 
   return (
     <button
@@ -196,13 +231,15 @@ function SwimlaneNodeCard({
       onClick={() => onClick(node)}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
-      aria-label={`${node.name} — ${c.label}`}
+      aria-label={`${node.name} — ${c.label} — ${verificationResult.label}`}
       style={{
-        display: "block",
+        display: "flex",
+        flexDirection: "column",
         width: "100%",
-        maxWidth: 132,
+        maxWidth: 148,
+        height: node.blocker ? 132 : 112,
         textAlign: "left",
-        padding: "6px 7px",
+        padding: "8px 9px",
         background: c.bg,
         border: `1.5px solid ${c.border}`,
         borderRadius: 8,
@@ -288,7 +325,7 @@ function SwimlaneNodeCard({
         <div
           style={{
             fontSize: 8.5,
-            color: "#87938d",
+            color: isCurrent ? "rgba(255,255,255,.72)" : "#68766f",
             marginTop: 2,
             overflow: "hidden",
             textOverflow: "ellipsis",
@@ -306,7 +343,7 @@ function SwimlaneNodeCard({
           style={{
             marginTop: 4,
             fontSize: 9,
-            color: "#d97706",
+            color: isCurrent ? "#fff0c2" : "#b86409",
             fontWeight: 600,
             overflow: "hidden",
             textOverflow: "ellipsis",
@@ -317,27 +354,37 @@ function SwimlaneNodeCard({
         </div>
       )}
 
-      {/* progress bar */}
-      {node.progress !== undefined && node.progress > 0 && (
-        <div
-          style={{
-            marginTop: 5,
-            height: 2,
-            background: isCurrent ? "rgba(255,255,255,.3)" : "#e4e9e6",
-            borderRadius: 1,
-            overflow: "hidden",
-          }}
-        >
-          <div
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 4,
+          marginTop: "auto",
+          paddingTop: 5,
+          minWidth: 0,
+        }}
+      >
+        <VerificationMark result={verificationResult} inverse={isCurrent} compact />
+        {verificationResult.lowConfidence && (
+          <span
+            title={`법령 근거 확신도 ${Math.round((node.confidence ?? 0) * 100)}%`}
             style={{
-              height: "100%",
-              width: `${node.progress}%`,
-              background: isCurrent ? "#fff" : isRisk ? "#d97706" : "#0f9f72",
-              borderRadius: 1,
+              minHeight: 16,
+              padding: "1px 4px",
+              borderRadius: 4,
+              border: `1px solid ${isCurrent ? "rgba(255,255,255,.42)" : "#ead19b"}`,
+              color: isCurrent ? "#ffffff" : "#9a650f",
+              background: isCurrent ? "rgba(255,255,255,.14)" : "#fef6e7",
+              fontSize: 8.5,
+              fontWeight: 700,
+              lineHeight: 1.4,
+              whiteSpace: "nowrap",
             }}
-          />
-        </div>
-      )}
+          >
+            현장
+          </span>
+        )}
+      </div>
 
       {/* pulse ring for current */}
       {isCurrent && (
@@ -345,7 +392,7 @@ function SwimlaneNodeCard({
           style={{
             position: "absolute",
             inset: -3,
-            borderRadius: 10,
+            borderRadius: 8,
             border: "1.5px solid #0f9f72",
             opacity: 0,
             animation: "pulse-ring 2s ease-out infinite",
@@ -361,10 +408,12 @@ function SwimlaneNodeCard({
 function NodeDrawer({
   node,
   edges,
+  verification,
   onClose,
 }: {
   node: ProcessNode;
   edges: ProcessEdge[];
+  verification?: SourceVerification;
   onClose: () => void;
 }) {
   const c = ss(node.status);
@@ -400,6 +449,7 @@ function NodeDrawer({
         aria-hidden="true"
       />
       <div
+        className="process-node-drawer"
         role="dialog"
         aria-modal="true"
         aria-label={node.name}
@@ -491,17 +541,8 @@ function NodeDrawer({
         )}
 
         {node.legal_basis && node.legal_basis.length > 0 && (
-          <DrawerSection title="법적 근거">
-            {node.legal_basis.map((lb, i) => (
-              <div key={i} style={{
-                padding: "10px 12px", background: "#f5f7f6",
-                borderRadius: 8, marginBottom: 8,
-              }}>
-                <div style={{ fontSize: 13, fontWeight: 600, color: "#111714", marginBottom: 2 }}>{lb.law}</div>
-                <div style={{ fontSize: 12, color: "#5d6b63", fontFamily: "var(--font-mono)" }}>{lb.article}</div>
-                {lb.text && <div style={{ fontSize: 13, color: "#5d6b63", marginTop: 4 }}>{lb.text}</div>}
-              </div>
-            ))}
+          <DrawerSection title="법적 근거 · 검증">
+            <NodeLegalVerification node={node} verification={verification} />
           </DrawerSection>
         )}
 
@@ -509,8 +550,8 @@ function NodeDrawer({
           <DrawerSection title="회귀 루프">
             {loopEdges.map((e) => (
               <div key={e.id} style={{
-                padding: "8px 12px", background: "#fdf4ff",
-                borderRadius: 8, fontSize: 13, color: "#9333ea",
+                padding: "8px 12px", background: "#eff6ff",
+                borderRadius: 8, fontSize: 13, color: "#2563eb",
                 marginBottom: 6, display: "flex", gap: 6, alignItems: "center",
               }}>
                 <span>↩</span>
@@ -571,56 +612,63 @@ function DrawerSection({ title, children }: { title: string; children: React.Rea
 // ── Legend ────────────────────────────────────────────────────────────────────
 function Legend() {
   const items = [
-    { status: "done", label: "완료" },
-    { status: "current", label: "진행 중" },
-    { status: "waiting", label: "대기" },
-    { status: "risk", label: "위험·병목" },
+    { status: "done", label: "선행 단계" },
+    { status: "current", label: "핵심 단계" },
+    { status: "waiting", label: "후속 단계" },
+    { status: "risk", label: "병목·위험" },
     { status: "loop", label: "보완 회귀" },
   ] as const;
 
   const edgeItems = [
     { color: "#55685e", dash: "", label: "순서 흐름" },
     { color: "#0d8a63", dash: "6 4", label: "정보 전달" },
-    { color: "#9333ea", dash: "4 3", label: "회귀 루프" },
+    { color: "#2563eb", dash: "4 3", label: "회귀 루프" },
   ];
 
   return (
-    <div style={{
-      display: "flex", flexWrap: "wrap", gap: "8px 20px",
-      padding: "12px 0", borderTop: "1px solid #dde5df", marginTop: 4,
-    }}>
-      {items.map(({ status, label }) => {
-        const c = ss(status);
-        return (
-          <div key={status} style={{ display: "flex", alignItems: "center", gap: 5 }}>
-            <span style={{
-              width: 10, height: 10, borderRadius: "50%",
-              background: c.bg, border: `1.5px solid ${c.border}`,
-            }} />
-            <span style={{ fontSize: 12, color: "#5d6b63" }}>{label}</span>
-          </div>
-        );
-      })}
-      <div style={{ width: "100%", height: 0 }} />
-      {edgeItems.map(({ color, dash, label }) => (
-        <div key={label} style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <svg width={28} height={10} style={{ flexShrink: 0 }}>
-            <line
-              x1={2} y1={5} x2={26} y2={5}
-              stroke={color} strokeWidth={1.5}
-              strokeDasharray={dash || undefined}
-            />
-            <polygon points="26,5 21,2.5 21,7.5" fill={color} />
-          </svg>
-          <span style={{ fontSize: 12, color: "#5d6b63" }}>{label}</span>
+    <div className="process-board-legend">
+      <div className="process-legend-group">
+        <strong>단계</strong>
+        <div className="process-legend-items">
+          {items.map(({ status, label }) => {
+            const c = ss(status);
+            return (
+              <span key={status}>
+                <i
+                  aria-hidden="true"
+                  style={{ background: c.bg, borderColor: c.border }}
+                />
+                {label}
+              </span>
+            );
+          })}
         </div>
-      ))}
-      <span style={{
-        fontSize: 12, color: "#87938d", marginLeft: "auto",
-        fontStyle: "italic", alignSelf: "center",
-      }}>
-        법령상 구조 기준 — 노드 클릭 시 상세 보기
-      </span>
+      </div>
+
+      <VerificationLegend />
+
+      <div className="process-legend-group">
+        <strong>연결</strong>
+        <div className="process-legend-items">
+          {edgeItems.map(({ color, dash, label }) => (
+            <span key={label}>
+              <svg width={28} height={10} style={{ flexShrink: 0 }} aria-hidden="true">
+                <line
+                  x1={2}
+                  y1={5}
+                  x2={26}
+                  y2={5}
+                  stroke={color}
+                  strokeWidth={1.5}
+                  strokeDasharray={dash || undefined}
+                />
+                <polygon points="26,5 21,2.5 21,7.5" fill={color} />
+              </svg>
+              {label}
+            </span>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
@@ -727,7 +775,7 @@ function buildEdgePaths(
 // ── Edge color / style helpers ────────────────────────────────────────────────
 // 화살표 시인성: 옅은 회녹색(#bdcbc4)은 격자 위에서 묻힌다 — 진한 색 + 굵은 선
 function edgeColor(type: string) {
-  if (type === "loop")    return "#9333ea";
+  if (type === "loop")    return "#2563eb";
   if (type === "message") return "#0d8a63";
   return "#55685e";
 }
@@ -741,7 +789,13 @@ function edgeWidth(highlighted: boolean, type: string) {
 }
 
 // ── Main SwimlaneBoard ────────────────────────────────────────────────────────
-export default function SwimlaneBoard({ process }: { process: ProcessModel }) {
+export default function SwimlaneBoard({
+  process,
+  verification,
+}: {
+  process: ProcessModel;
+  verification?: SourceVerification;
+}) {
   const { lanes, stages, nodes, edges } = process;
 
   const [activeNode,    setActiveNode]    = useState<ProcessNode | null>(null);
@@ -749,14 +803,9 @@ export default function SwimlaneBoard({ process }: { process: ProcessModel }) {
   const [edgePaths,     setEdgePaths]     = useState<ComputedEdge[]>([]);
   const [svgH,          setSvgH]          = useState(0);
   const [svgW,          setSvgW]          = useState(0);
-  const [mounted,       setMounted]       = useState(false);
-
   const boardRef       = useRef<HTMLDivElement>(null);
   const nodeRefs       = useRef<Map<string, HTMLElement>>(new Map());
   const stageHdrRefs   = useRef<Map<string, HTMLElement>>(new Map());
-
-  // Flag to avoid SSR mismatch
-  useEffect(() => { setMounted(true); }, []);
 
   const computeEdges = useCallback(() => {
     const board = boardRef.current;
@@ -770,12 +819,11 @@ export default function SwimlaneBoard({ process }: { process: ProcessModel }) {
   }, [edges, nodes, stages]);
 
   useLayoutEffect(() => {
-    if (!mounted) return;
     computeEdges();
     const ro = new ResizeObserver(computeEdges);
     if (boardRef.current) ro.observe(boardRef.current);
     return () => ro.disconnect();
-  }, [computeEdges, mounted]);
+  }, [computeEdges]);
 
   const handleStageClick = useCallback((stage: string) => {
     const el = stageHdrRefs.current.get(stage);
@@ -818,13 +866,18 @@ export default function SwimlaneBoard({ process }: { process: ProcessModel }) {
 
   return (
     <div style={{ width: "100%" }}>
+      <ProcessVerificationSummaryBar process={process} verification={verification} />
+
       {/* Gate timeline */}
       <div style={{ marginBottom: 16 }}>
         <GateTimeline stages={stages} nodes={nodes} onStageClick={handleStageClick} />
       </div>
 
       {/* Horizontal scroll container */}
-      <div style={{ overflowX: "auto", overflowY: "visible", position: "relative" }}>
+      <div
+        className="process-board-scroll"
+        style={{ overflowX: "auto", overflowY: "visible", position: "relative" }}
+      >
         {/* Board grid — position:relative anchors the SVG overlay */}
         <div
           ref={boardRef}
@@ -838,7 +891,7 @@ export default function SwimlaneBoard({ process }: { process: ProcessModel }) {
           }}
         >
           {/* ── SVG overlay ── */}
-          {mounted && svgW > 0 && (
+          {svgW > 0 && (
             <svg
               aria-hidden="true"
               style={{
@@ -881,7 +934,7 @@ export default function SwimlaneBoard({ process }: { process: ProcessModel }) {
                   orient="auto"
                   markerUnits="userSpaceOnUse"
                 >
-                  <path d="M0,0.5 L0,8.5 L10,4.5 z" fill="#9333ea" />
+                  <path d="M0,0.5 L0,8.5 L10,4.5 z" fill="#2563eb" />
                 </marker>
                 {/* loop-reverse arrowhead (entering from right) */}
                 <marker
@@ -891,7 +944,7 @@ export default function SwimlaneBoard({ process }: { process: ProcessModel }) {
                   orient="auto"
                   markerUnits="userSpaceOnUse"
                 >
-                  <path d="M10,0.5 L10,8.5 L0,4.5 z" fill="#9333ea" />
+                  <path d="M10,0.5 L10,8.5 L0,4.5 z" fill="#2563eb" />
                 </marker>
               </defs>
 
@@ -1082,6 +1135,7 @@ export default function SwimlaneBoard({ process }: { process: ProcessModel }) {
                         <SwimlaneNodeCard
                           key={node.id}
                           node={node}
+                          verification={verification}
                           onClick={handleNodeClick}
                           highlighted={isHov && (isThis || isConn)}
                           dimmed={isHov && !isThis && !isConn}
@@ -1107,7 +1161,12 @@ export default function SwimlaneBoard({ process }: { process: ProcessModel }) {
 
       {/* Drawer */}
       {activeNode && (
-        <NodeDrawer node={activeNode} edges={edges} onClose={handleClose} />
+        <NodeDrawer
+          node={activeNode}
+          edges={edges}
+          verification={verification}
+          onClose={handleClose}
+        />
       )}
     </div>
   );

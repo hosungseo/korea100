@@ -1,7 +1,78 @@
+export type LegalBasisKind =
+  | "법률"
+  | "대통령령"
+  | "총리령"
+  | "부령"
+  | "행정안전부령"
+  | "대법원규칙"
+  | "감사원규칙"
+  | "행정규칙"
+  | "고시·지침"
+  | "조례"
+  | "조례·규칙";
+
 export interface LegalBasis {
   law: string;
   articles?: string;
-  kind: "법률" | "대통령령" | "부령" | "고시·지침" | "조례";
+  kind: LegalBasisKind;
+}
+
+export type SourceVerificationStatus =
+  | "source-linked"
+  | "article-verified"
+  | "needs-review";
+
+export type LegalSourceType = "statute" | "admin-rule" | "treaty";
+
+export interface LegalSource {
+  law: string;
+  kind: LegalBasisKind;
+  sourceType?: LegalSourceType;
+  officialName?: string;
+  lawId?: string;
+  mst?: string;
+  adminRuleId?: string;
+  adminRuleSerial?: string;
+  treatyId?: string;
+  treatyNumber?: string;
+  promulgatedOn?: string;
+  effectiveOn?: string;
+  officialUrl: string;
+}
+
+export interface UnresolvedLegalSource {
+  law: string;
+  kind: LegalBasisKind;
+  reasonCode:
+    | "local-scope"
+    | "institution-scope"
+    | "internal-rule"
+    | "external-official-document"
+    | "title-needs-confirmation";
+  reason: string;
+  nextStep: string;
+}
+
+export interface ArticleVerificationSummary {
+  checkedAt: string;
+  method: string;
+  citationEntries: number;
+  explicitCitationEntries: number;
+  articleReferences: number;
+  verifiedReferences: number;
+  missingReferences: number;
+  uncheckableReferences: number;
+}
+
+export interface SourceVerification {
+  status: SourceVerificationStatus;
+  verifiedAt: string;
+  method: string;
+  scope: string;
+  notes?: string[];
+  sources: LegalSource[];
+  unresolved?: UnresolvedLegalSource[];
+  articleVerification?: ArticleVerificationSummary;
 }
 
 export interface Authority {
@@ -36,8 +107,8 @@ export interface ProcessNode {
   name: string;
   lane: string;
   stage: string;
-  type: NodeType | string;
-  status: NodeStatus | string;
+  type: NodeType;
+  status: NodeStatus;
   progress?: number;
   actor: string;
   action?: string;
@@ -79,5 +150,6 @@ export interface Institution {
   canvas: Canvas;
   related: string[];
   fieldVerification: string[];
+  verification?: SourceVerification;
   process?: ProcessModel;
 }

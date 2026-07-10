@@ -262,6 +262,16 @@ export default function InstitutionExplorer({ institutions, categoryOrder }: Pro
 
 function InstitutionCard({ institution }: { institution: Institution }) {
   const isCanvas = institution.status === "canvas";
+  const articleVerification = institution.verification?.articleVerification;
+  const verificationLabel = articleVerification
+    ? institution.verification?.status === "article-verified"
+      ? `조문 ${articleVerification.verifiedReferences}건 확인`
+      : articleVerification.missingReferences + articleVerification.uncheckableReferences === 0
+        ? `조문 ${articleVerification.verifiedReferences}건 · 범위별 출처`
+        : `조문 ${articleVerification.verifiedReferences}/${articleVerification.articleReferences}건 확인`
+    : institution.verification
+      ? `원문 ${institution.verification.sources.length}건 연결`
+      : "";
 
   return (
     <Link
@@ -272,7 +282,7 @@ function InstitutionCard({ institution }: { institution: Institution }) {
         textDecoration: "none",
         background: "var(--color-surface)",
         border: "1px solid var(--color-border)",
-        borderRadius: 12,
+        borderRadius: 8,
         padding: "16px",
         position: "relative",
         overflow: "hidden",
@@ -329,6 +339,27 @@ function InstitutionCard({ institution }: { institution: Institution }) {
             }}
           >
             업무구조도
+          </span>
+        )}
+        {institution.verification && (
+          <span
+            style={{
+              fontSize: 11,
+              fontWeight: 600,
+              padding: "2px 7px",
+              borderRadius: 4,
+              background:
+                institution.verification.status === "needs-review"
+                  ? "#fef6e7"
+                  : "var(--color-accent-soft)",
+              color:
+                institution.verification.status === "needs-review"
+                  ? "#c78116"
+                  : "var(--color-accent-dark)",
+              flexShrink: 0,
+            }}
+          >
+            {verificationLabel}
           </span>
         )}
       </div>

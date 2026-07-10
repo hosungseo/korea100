@@ -28,8 +28,28 @@
    },
    {
     "law": "각 부처 직제 시행규칙",
-    "articles": "과·보좌기관의 설치와 사무분장, 직급별 정원(통칙 제4조의2 위임)",
+    "articles": "과·보좌기관의 설치와 사무분장, 직급별 정원",
     "kind": "부령"
+   },
+   {
+    "law": "국가공무원 총정원령",
+    "articles": "국가공무원 총정원 관리",
+    "kind": "대통령령"
+   },
+   {
+    "law": "법제업무 운영규정",
+    "articles": "대통령령안 법제처 심사",
+    "kind": "대통령령"
+   },
+   {
+    "law": "차관회의 규정",
+    "articles": "국무회의 상정 전 사전심의",
+    "kind": "대통령령"
+   },
+   {
+    "law": "법령 등 공포에 관한 법률",
+    "articles": "대통령령 공포 방법과 시행일",
+    "kind": "법률"
    }
   ],
   "authorities": [
@@ -706,5 +726,105 @@
    }
   ],
   "warnings": []
+ },
+ "verification": {
+  "status": "needs-review",
+  "verifiedAt": "2026-07-10",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 8건 중 공식 원문 6건을 연결했다. 캔버스와 절차 노드의 명시 조문 24건 가운데 24건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "정부조직법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "정부조직법",
+    "lawId": "001720",
+    "mst": "276049",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/정부조직법"
+   },
+   {
+    "law": "행정기관의 조직과 정원에 관한 통칙",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "행정기관의 조직과 정원에 관한 통칙",
+    "lawId": "005617",
+    "mst": "281545",
+    "promulgatedOn": "2025-12-30",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/행정기관의조직과정원에관한통칙"
+   },
+   {
+    "law": "국가공무원 총정원령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "국가공무원총정원령",
+    "lawId": "002645",
+    "mst": "236803",
+    "promulgatedOn": "2021-11-23",
+    "effectiveOn": "2021-11-23",
+    "officialUrl": "https://law.go.kr/법령/국가공무원총정원령"
+   },
+   {
+    "law": "법제업무 운영규정",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "법제업무 운영규정",
+    "lawId": "003613",
+    "mst": "285173",
+    "promulgatedOn": "2026-03-31",
+    "effectiveOn": "2026-03-31",
+    "officialUrl": "https://law.go.kr/법령/법제업무운영규정"
+   },
+   {
+    "law": "차관회의 규정",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "차관회의 규정",
+    "lawId": "005170",
+    "mst": "281541",
+    "promulgatedOn": "2025-12-30",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/차관회의규정"
+   },
+   {
+    "law": "법령 등 공포에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "법령 등 공포에 관한 법률",
+    "lawId": "001430",
+    "mst": "204777",
+    "promulgatedOn": "2018-10-16",
+    "effectiveOn": "2018-10-16",
+    "officialUrl": "https://law.go.kr/법령/법령등공포에관한법률"
+   }
+  ],
+  "unresolved": [
+   {
+    "law": "각 부처 직제",
+    "kind": "대통령령",
+    "reasonCode": "institution-scope",
+    "reason": "적용 기관·업종·처분을 지정해야 단일 원문을 확정할 수 있음",
+    "nextStep": "구체적인 기관, 업종 또는 처분 유형을 선택해 해당 법령을 연결해야 한다."
+   },
+   {
+    "law": "각 부처 직제 시행규칙",
+    "kind": "부령",
+    "reasonCode": "institution-scope",
+    "reason": "적용 기관·업종·처분을 지정해야 단일 원문을 확정할 수 있음",
+    "nextStep": "구체적인 기관, 업종 또는 처분 유형을 선택해 해당 법령을 연결해야 한다."
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-10",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 32,
+   "explicitCitationEntries": 14,
+   "articleReferences": 24,
+   "verifiedReferences": 24,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
  }
 }

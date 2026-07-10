@@ -639,27 +639,219 @@
    }
   ],
   "edges": [
-   { "id": "E01", "source": "P01", "target": "P02", "type": "sequence", "label": null },
-   { "id": "E02", "source": "P02", "target": "P03", "type": "sequence", "label": null },
-   { "id": "E03", "source": "P03", "target": "P04", "type": "sequence", "label": null },
-   { "id": "E04", "source": "P04", "target": "P05", "type": "sequence", "label": null },
-   { "id": "E05", "source": "P05", "target": "P06", "type": "sequence", "label": null },
-   { "id": "E06", "source": "P06", "target": "P07", "type": "sequence", "label": "수급자격 인정" },
-   { "id": "E07", "source": "P07", "target": "P08", "type": "sequence", "label": "등급 결정" },
-   { "id": "E08", "source": "P08", "target": "P09", "type": "sequence", "label": null },
-   { "id": "E09", "source": "P09", "target": "P10", "type": "sequence", "label": null },
-   { "id": "E10", "source": "P10", "target": "P11", "type": "sequence", "label": null },
-   { "id": "E11", "source": "P11", "target": "P12", "type": "sequence", "label": null },
-   { "id": "E12", "source": "P13", "target": "P14", "type": "sequence", "label": null },
-   { "id": "E13", "source": "P15", "target": "P16", "type": "sequence", "label": null },
-   { "id": "M01", "source": "P04", "target": "P06", "type": "message", "label": "종합조사 결과 심의 회부" },
-   { "id": "M02", "source": "P12", "target": "P13", "type": "message", "label": "본인부담금 고지" },
-   { "id": "M03", "source": "P08", "target": "P15", "type": "message", "label": "결정 불복 시 이의신청" },
-   { "id": "M04", "source": "P04", "target": "P17", "type": "message", "label": "조사·심의 지연 시 긴급 사전지원" },
-   { "id": "M05", "source": "P17", "target": "P11", "type": "message", "label": "긴급지원 개시" },
-   { "id": "L01", "source": "P14", "target": "P05", "type": "loop", "label": "갱신 재조사 회귀" },
-   { "id": "L02", "source": "P15", "target": "P06", "type": "loop", "label": "이의신청 재심의 회귀" }
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": "수급자격 인정"
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": "등급 결정"
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P15",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P04",
+    "target": "P06",
+    "type": "message",
+    "label": "종합조사 결과 심의 회부"
+   },
+   {
+    "id": "M02",
+    "source": "P12",
+    "target": "P13",
+    "type": "message",
+    "label": "본인부담금 고지"
+   },
+   {
+    "id": "M03",
+    "source": "P08",
+    "target": "P15",
+    "type": "message",
+    "label": "결정 불복 시 이의신청"
+   },
+   {
+    "id": "M04",
+    "source": "P04",
+    "target": "P17",
+    "type": "message",
+    "label": "조사·심의 지연 시 긴급 사전지원"
+   },
+   {
+    "id": "M05",
+    "source": "P17",
+    "target": "P11",
+    "type": "message",
+    "label": "긴급지원 개시"
+   },
+   {
+    "id": "L01",
+    "source": "P14",
+    "target": "P05",
+    "type": "loop",
+    "label": "갱신 재조사 회귀"
+   },
+   {
+    "id": "L02",
+    "source": "P15",
+    "target": "P06",
+    "type": "loop",
+    "label": "이의신청 재심의 회귀"
+   }
   ],
   "warnings": []
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-10",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 5건 중 공식 원문 5건을 연결했다. 캔버스와 절차 노드의 명시 조문 71건 가운데 71건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "장애인활동 지원에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "장애인활동 지원에 관한 법률",
+    "lawId": "011330",
+    "mst": "267431",
+    "promulgatedOn": "2024-12-20",
+    "effectiveOn": "2024-12-20",
+    "officialUrl": "https://law.go.kr/법령/장애인활동지원에관한법률"
+   },
+   {
+    "law": "장애인복지법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "장애인복지법",
+    "lawId": "000187",
+    "mst": "281941",
+    "promulgatedOn": "2025-12-30",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/장애인복지법"
+   },
+   {
+    "law": "장애인활동 지원에 관한 법률 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "장애인활동 지원에 관한 법률 시행령",
+    "lawId": "011439",
+    "mst": "272519",
+    "promulgatedOn": "2025-06-20",
+    "effectiveOn": "2025-06-21",
+    "officialUrl": "https://law.go.kr/법령/장애인활동지원에관한법률시행령"
+   },
+   {
+    "law": "장애인활동 지원에 관한 법률 시행규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "장애인활동 지원에 관한 법률 시행규칙",
+    "lawId": "011446",
+    "mst": "270341",
+    "promulgatedOn": "2025-03-25",
+    "effectiveOn": "2026-03-26",
+    "officialUrl": "https://law.go.kr/법령/장애인활동지원에관한법률시행규칙"
+   },
+   {
+    "law": "장애인활동지원 급여비용 등에 관한 고시",
+    "kind": "고시·지침",
+    "sourceType": "admin-rule",
+    "officialName": "장애인활동지원 급여비용 등에 관한 고시",
+    "adminRuleId": "39472",
+    "adminRuleSerial": "2100000270528",
+    "promulgatedOn": "2025-12-26",
+    "officialUrl": "https://law.go.kr/행정규칙/장애인활동지원급여비용등에관한고시"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-10",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 39,
+   "explicitCitationEntries": 38,
+   "articleReferences": 71,
+   "verifiedReferences": 71,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
  }
 }

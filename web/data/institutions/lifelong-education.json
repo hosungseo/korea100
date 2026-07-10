@@ -120,7 +120,9 @@
     "progress": 100,
     "actor": "교육부장관",
     "action": "계획 수립",
-    "output_documents": ["평생교육진흥 기본계획"],
+    "output_documents": [
+     "평생교육진흥 기본계획"
+    ],
     "deadline": "5년 단위",
     "confidence": 0.85,
     "legal_basis": [
@@ -141,7 +143,9 @@
     "progress": 100,
     "actor": "시·도지사·교육감",
     "action": "시행계획 수립",
-    "output_documents": ["연도별 시행계획"],
+    "output_documents": [
+     "연도별 시행계획"
+    ],
     "confidence": 0.82,
     "legal_basis": [
      {
@@ -167,7 +171,9 @@
     "actor": "평생교육기관",
     "receiver": "국가평생교육진흥원",
     "action": "등록·신고",
-    "output_documents": ["기관 등록·신고 서류"],
+    "output_documents": [
+     "기관 등록·신고 서류"
+    ],
     "confidence": 0.83,
     "legal_basis": [
      {
@@ -188,7 +194,9 @@
     "actor": "국가평생교육진흥원",
     "action": "평가인정",
     "condition": "교육과정 기준 충족 여부",
-    "output_documents": ["평가인정 학습과정 목록"],
+    "output_documents": [
+     "평가인정 학습과정 목록"
+    ],
     "confidence": 0.81,
     "legal_basis": [
      {
@@ -213,7 +221,9 @@
     "progress": 55,
     "actor": "학습자",
     "action": "수강·등록",
-    "output_documents": ["수강 등록 내역"],
+    "output_documents": [
+     "수강 등록 내역"
+    ],
     "blocker": "취약계층 접근성 제약(운영 추정)",
     "confidence": 0.8,
     "legal_basis": [
@@ -234,7 +244,10 @@
     "progress": 0,
     "actor": "평생교육기관",
     "action": "이수관리",
-    "output_documents": ["이수증", "학습결과 기록"],
+    "output_documents": [
+     "이수증",
+     "학습결과 기록"
+    ],
     "confidence": 0.79,
     "legal_basis": [
      {
@@ -255,8 +268,13 @@
     "actor": "학습자",
     "receiver": "국가평생교육진흥원",
     "action": "인정 신청",
-    "input_documents": ["이수증", "학습결과 기록"],
-    "output_documents": ["학점·학력 인정 신청서"],
+    "input_documents": [
+     "이수증",
+     "학습결과 기록"
+    ],
+    "output_documents": [
+     "학점·학력 인정 신청서"
+    ],
     "confidence": 0.8,
     "legal_basis": [
      {
@@ -282,7 +300,10 @@
     "actor": "국가평생교육진흥원",
     "action": "심사·인정",
     "condition": "인정 기준 충족·보완 필요 여부",
-    "output_documents": ["학점 인정서", "보완 요구"],
+    "output_documents": [
+     "학점 인정서",
+     "보완 요구"
+    ],
     "confidence": 0.8,
     "legal_basis": [
      {
@@ -307,8 +328,12 @@
     "progress": 0,
     "actor": "학습자·평생교육기관",
     "action": "보완",
-    "input_documents": ["보완 요구"],
-    "output_documents": ["보완 자료"],
+    "input_documents": [
+     "보완 요구"
+    ],
+    "output_documents": [
+     "보완 자료"
+    ],
     "blocker": "조건부 회귀 단계",
     "confidence": 0.76,
     "legal_basis": [
@@ -329,8 +354,12 @@
     "progress": 0,
     "actor": "교육부장관·국가평생교육진흥원",
     "action": "학위수여",
-    "input_documents": ["학점 인정서"],
-    "output_documents": ["학위증"],
+    "input_documents": [
+     "학점 인정서"
+    ],
+    "output_documents": [
+     "학위증"
+    ],
     "confidence": 0.81,
     "legal_basis": [
      {
@@ -355,7 +384,10 @@
     "progress": 0,
     "actor": "시·도/지자체",
     "action": "지원 신청·집행",
-    "output_documents": ["지원사업 신청서", "바우처 집행 내역"],
+    "output_documents": [
+     "지원사업 신청서",
+     "바우처 집행 내역"
+    ],
     "confidence": 0.78,
     "legal_basis": [
      {
@@ -375,7 +407,10 @@
     "progress": 0,
     "actor": "교육부장관",
     "action": "성과 점검",
-    "output_documents": ["성과 점검 결과", "개선 환류"],
+    "output_documents": [
+     "성과 점검 결과",
+     "개선 환류"
+    ],
     "blocker": "취약계층 참여율 저조(운영 추정)",
     "confidence": 0.74,
     "legal_basis": [
@@ -396,7 +431,9 @@
     "progress": 100,
     "actor": "국가평생교육진흥원",
     "action": "자격 관리",
-    "output_documents": ["평생교육사 자격증"],
+    "output_documents": [
+     "평생교육사 자격증"
+    ],
     "confidence": 0.79,
     "legal_basis": [
      {
@@ -421,8 +458,13 @@
     "progress": 0,
     "actor": "국가평생교육진흥원 시스템",
     "action": "학습이력 관리",
-    "input_documents": ["학습결과 기록", "학점 인정서"],
-    "output_documents": ["학습이력·학점 기록"],
+    "input_documents": [
+     "학습결과 기록",
+     "학점 인정서"
+    ],
+    "output_documents": [
+     "학습이력·학점 기록"
+    ],
     "confidence": 0.75,
     "legal_basis": [
      {
@@ -434,22 +476,174 @@
    }
   ],
   "edges": [
-   { "id": "E01", "source": "P01", "target": "P02", "type": "sequence", "label": null },
-   { "id": "E02", "source": "P02", "target": "P03", "type": "sequence", "label": null },
-   { "id": "E03", "source": "P03", "target": "P04", "type": "sequence", "label": null },
-   { "id": "E04", "source": "P04", "target": "P05", "type": "sequence", "label": null },
-   { "id": "E05", "source": "P05", "target": "P06", "type": "sequence", "label": null },
-   { "id": "E06", "source": "P06", "target": "P07", "type": "sequence", "label": null },
-   { "id": "E07", "source": "P07", "target": "P08", "type": "sequence", "label": null },
-   { "id": "E08", "source": "P08", "target": "P10", "type": "sequence", "label": null },
-   { "id": "E09", "source": "P10", "target": "P11", "type": "sequence", "label": null },
-   { "id": "E10", "source": "P11", "target": "P12", "type": "sequence", "label": null },
-   { "id": "M01", "source": "P03", "target": "P13", "type": "message", "label": "평생교육사 배치" },
-   { "id": "M02", "source": "P06", "target": "S01", "type": "message", "label": "학습이력 기록" },
-   { "id": "M03", "source": "P08", "target": "S01", "type": "message", "label": "학점 인정 등록" },
-   { "id": "L01", "source": "P08", "target": "P09", "type": "loop", "label": "보완 요구" },
-   { "id": "L02", "source": "P09", "target": "P07", "type": "loop", "label": "보완 후 재신청" }
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P03",
+    "target": "P13",
+    "type": "message",
+    "label": "평생교육사 배치"
+   },
+   {
+    "id": "M02",
+    "source": "P06",
+    "target": "S01",
+    "type": "message",
+    "label": "학습이력 기록"
+   },
+   {
+    "id": "M03",
+    "source": "P08",
+    "target": "S01",
+    "type": "message",
+    "label": "학점 인정 등록"
+   },
+   {
+    "id": "L01",
+    "source": "P08",
+    "target": "P09",
+    "type": "loop",
+    "label": "보완 요구"
+   },
+   {
+    "id": "L02",
+    "source": "P09",
+    "target": "P07",
+    "type": "loop",
+    "label": "보완 후 재신청"
+   }
   ],
   "warnings": []
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-10",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 4건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 25건 가운데 25건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "평생교육법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "평생교육법",
+    "lawId": "000851",
+    "mst": "279615",
+    "promulgatedOn": "2025-11-11",
+    "effectiveOn": "2026-05-12",
+    "officialUrl": "https://law.go.kr/법령/평생교육법"
+   },
+   {
+    "law": "학점인정 등에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "학점인정 등에 관한 법률",
+    "lawId": "000891",
+    "mst": "253403",
+    "promulgatedOn": "2023-08-08",
+    "effectiveOn": "2024-05-17",
+    "officialUrl": "https://law.go.kr/법령/학점인정등에관한법률"
+   },
+   {
+    "law": "평생교육법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "평생교육법 시행령",
+    "lawId": "003751",
+    "mst": "284897",
+    "promulgatedOn": "2026-03-24",
+    "effectiveOn": "2026-03-24",
+    "officialUrl": "https://law.go.kr/법령/평생교육법시행령"
+   },
+   {
+    "law": "학점인정 등에 관한 법률 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "학점인정 등에 관한 법률 시행령",
+    "lawId": "005398",
+    "mst": "282911",
+    "promulgatedOn": "2026-01-27",
+    "effectiveOn": "2026-01-27",
+    "officialUrl": "https://law.go.kr/법령/학점인정등에관한법률시행령"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-10",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 24,
+   "explicitCitationEntries": 20,
+   "articleReferences": 25,
+   "verifiedReferences": 25,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
  }
 }

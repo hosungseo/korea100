@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "validate:data": "node scripts/validate-data.mjs",
+    "sync:sources": "node scripts/sync-verification.mjs",
+    "verify:articles": "node scripts/verify-articles.mjs",
+    "test:article-parser": "node --test scripts/article-citations.test.mjs"
   },
   "dependencies": {
     "next": "16.2.10",

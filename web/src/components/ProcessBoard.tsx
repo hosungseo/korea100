@@ -1,11 +1,23 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import type { ProcessModel, ProcessNode, ProcessEdge } from "@/lib/types";
+import type {
+  ProcessModel,
+  ProcessNode,
+  ProcessEdge,
+  SourceVerification,
+} from "@/lib/types";
+import { getNodeVerification } from "@/lib/process-verification";
+import {
+  NodeLegalVerification,
+  ProcessVerificationSummaryBar,
+  VerificationMark,
+} from "./ProcessVerification";
 import SwimlaneBoard from "./SwimlaneBoard";
 
 interface ProcessBoardProps {
   process: ProcessModel;
+  verification?: SourceVerification;
   compact?: boolean;
 }
 
@@ -48,28 +60,28 @@ const STATUS_META: Record<
   { label: string; cardBg: string; cardBorder: string; badgeBg: string; badgeText: string }
 > = {
   done: {
-    label: "완료",
+    label: "선행",
     cardBg: "#f5f7f6",
     cardBorder: "#dde5df",
     badgeBg: "#dff5eb",
     badgeText: "#087452",
   },
   current: {
-    label: "진행 중",
+    label: "핵심",
     cardBg: "#ffffff",
     cardBorder: "#0f9f72",
     badgeBg: "#0f9f72",
     badgeText: "#ffffff",
   },
   waiting: {
-    label: "대기",
+    label: "후속",
     cardBg: "#f5f7f6",
     cardBorder: "#dde5df",
     badgeBg: "#f5f7f6",
     badgeText: "#5d6b63",
   },
   risk: {
-    label: "위험",
+    label: "병목",
     cardBg: "#fffaf3",
     cardBorder: "#c78116",
     badgeBg: "#fef6e7",
@@ -273,11 +285,13 @@ function GateTimeline({
 function NodeCard({
   node,
   edges,
+  verification,
   onClick,
   compact,
 }: {
   node: ProcessNode;
   edges: ProcessEdge[];
+  verification?: SourceVerification;
   onClick: (node: ProcessNode) => void;
   compact: boolean;
 }) {
@@ -288,6 +302,7 @@ function NodeCard({
   const isCurrent = node.status === "current";
   const lowConfidence =
     node.confidence !== undefined && node.confidence < 0.8;
+  const verificationResult = getNodeVerification(node, verification);
 
   return (
     <button
@@ -300,7 +315,7 @@ function NodeCard({
         padding: compact ? "10px 12px" : "14px 16px",
         background: meta.cardBg,
         border: `1px solid ${meta.cardBorder}`,
-        borderRadius: 12,
+        borderRadius: 8,
         cursor: "pointer",
         transition: "border-color 140ms ease-out, box-shadow 140ms ease-out",
         boxShadow: isCurrent
@@ -351,7 +366,7 @@ function NodeCard({
             fontSize: 11,
             fontWeight: 600,
             padding: "2px 8px",
-            borderRadius: 9999,
+            borderRadius: 4,
             background: meta.badgeBg,
             color: meta.badgeText,
             flexShrink: 0,
@@ -364,7 +379,7 @@ function NodeCard({
             style={{
               fontSize: 11,
               padding: "2px 6px",
-              borderRadius: 9999,
+              borderRadius: 4,
               background: "#fef6e7",
               color: "#c78116",
               fontWeight: 600,
@@ -378,7 +393,7 @@ function NodeCard({
             style={{
               fontSize: 11,
               padding: "2px 6px",
-              borderRadius: 9999,
+              borderRadius: 4,
               background: "#fef6e7",
               color: "#c78116",
               fontWeight: 600,
@@ -407,6 +422,10 @@ function NodeCard({
         >
           {node.name}
         </span>
+      </div>
+
+      <div style={{ marginTop: 7 }}>
+        <VerificationMark result={verificationResult} compact />
       </div>
 
       {/* Actor */}
@@ -472,10 +491,12 @@ function NodeCard({
 function NodeDrawer({
   node,
   edges,
+  verification,
   onClose,
 }: {
   node: ProcessNode;
   edges: ProcessEdge[];
+  verification?: SourceVerification;
   onClose: () => void;
 }) {
   const meta = statusMeta(node.status);
@@ -518,6 +539,7 @@ function NodeDrawer({
 
       {/* Drawer panel */}
       <div
+        className="process-node-drawer"
         role="dialog"
         aria-modal="true"
         aria-label={node.name}
@@ -685,45 +707,9 @@ function NodeDrawer({
           </DrawerSection>
         )}
 
-        {/* Legal basis */}
         {node.legal_basis && node.legal_basis.length > 0 && (
-          <DrawerSection title="법적 근거">
-            {node.legal_basis.map((lb, i) => (
-              <div
-                key={i}
-                style={{
-                  padding: "10px 12px",
-                  background: "#f5f7f6",
-                  borderRadius: 8,
-                  marginBottom: 8,
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: 13,
-                    fontWeight: 600,
-                    color: "#111714",
-                    marginBottom: 2,
-                  }}
-                >
-                  {lb.law}
-                </div>
-                <div
-                  style={{
-                    fontSize: 12,
-                    color: "#5d6b63",
-                    fontFamily: "var(--font-mono)",
-                  }}
-                >
-                  {lb.article}
-                </div>
-                {lb.text && (
-                  <div style={{ fontSize: 13, color: "#5d6b63", marginTop: 4 }}>
-                    {lb.text}
-                  </div>
-                )}
-              </div>
-            ))}
+          <DrawerSection title="법적 근거 · 검증">
+            <NodeLegalVerification node={node} verification={verification} />
           </DrawerSection>
         )}
 
@@ -846,211 +832,63 @@ function DrawerSection({
   );
 }
 
-// ── Stage Group ───────────────────────────────────────────────────────────────
-
-function StageGroup({
-  stage,
-  nodes,
-  edges,
-  onNodeClick,
-  compact,
-}: {
-  stage: string;
-  nodes: ProcessNode[];
-  edges: ProcessEdge[];
-  onNodeClick: (node: ProcessNode) => void;
-  compact: boolean;
-}) {
-  const stageNodes = nodes.filter((n) => n.stage === stage);
-  if (stageNodes.length === 0) return null;
-  const st = getStageStatus(stage, nodes);
-  const [code, ...rest] = stage.split(" ");
-
-  const stageBorderColor =
-    st === "current"
-      ? "#0f9f72"
-      : st === "risk"
-      ? "#c78116"
-      : st === "done"
-      ? "#dff5eb"
-      : "#dde5df";
-
-  return (
-    <div
-      style={{
-        borderLeft: `3px solid ${stageBorderColor}`,
-        paddingLeft: 16,
-        marginBottom: 24,
-        transition: "border-color 220ms cubic-bezier(.2,.8,.2,1)",
-      }}
-    >
-      {/* Stage label */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 8,
-          marginBottom: 12,
-        }}
-      >
-        <span
-          className="mono"
-          style={{
-            color:
-              st === "current" || st === "done"
-                ? "#0f9f72"
-                : st === "risk"
-                ? "#c78116"
-                : "#87938d",
-          }}
-        >
-          {code}
-        </span>
-        <span
-          style={{
-            fontSize: 13,
-            fontWeight: 600,
-            color:
-              st === "current"
-                ? "#111714"
-                : st === "done"
-                ? "#5d6b63"
-                : "#87938d",
-          }}
-        >
-          {rest.join(" ")}
-        </span>
-        {st === "current" && (
-          <span
-            style={{
-              fontSize: 11,
-              padding: "2px 8px",
-              borderRadius: 9999,
-              background: "#0f9f72",
-              color: "#fff",
-              fontWeight: 600,
-              animation: "none",
-            }}
-          >
-            진행 중
-          </span>
-        )}
-      </div>
-
-      {/* Node cards grid */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-          gap: 8,
-        }}
-      >
-        {stageNodes.map((node) => (
-          <NodeCard
-            key={node.id}
-            node={node}
-            edges={edges}
-            onClick={onNodeClick}
-            compact={compact}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// ── Legend ────────────────────────────────────────────────────────────────────
-
-function Legend() {
-  const items = [
-    { status: "done", label: "완료" },
-    { status: "current", label: "진행 중" },
-    { status: "waiting", label: "대기" },
-    { status: "risk", label: "위험·병목" },
-    { status: "loop", label: "보완 회귀" },
-  ] as const;
-
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        gap: "6px 16px",
-        padding: "12px 0",
-        borderTop: "1px solid #dde5df",
-        marginTop: 8,
-      }}
-    >
-      {items.map(({ status, label }) => {
-        const meta = statusMeta(status);
-        return (
-          <div
-            key={status}
-            style={{ display: "flex", alignItems: "center", gap: 6 }}
-          >
-            <span
-              style={{
-                display: "inline-block",
-                width: 10,
-                height: 10,
-                borderRadius: "50%",
-                background: meta.badgeBg,
-                border: `1.5px solid ${meta.cardBorder}`,
-              }}
-            />
-            <span style={{ fontSize: 12, color: "#5d6b63" }}>{label}</span>
-          </div>
-        );
-      })}
-      <span
-        style={{
-          fontSize: 12,
-          color: "#87938d",
-          marginLeft: "auto",
-          fontStyle: "italic",
-        }}
-      >
-        법령상 구조 기준 — 노드 클릭 시 상세 보기
-      </span>
-    </div>
-  );
-}
-
 // ── Main Component ────────────────────────────────────────────────────────────
 
-export default function ProcessBoard({ process, compact = false }: ProcessBoardProps) {
+export default function ProcessBoard({
+  process,
+  verification,
+  compact = false,
+}: ProcessBoardProps) {
+  const [activeNode, setActiveNode] = useState<ProcessNode | null>(null);
+  const handleNodeClick = useCallback((node: ProcessNode) => setActiveNode(node), []);
+  const handleClose = useCallback(() => setActiveNode(null), []);
+
   // Full board: delegate to the BPMN swimlane board
   if (!compact) {
-    return <SwimlaneBoard process={process} />;
+    return <SwimlaneBoard process={process} verification={verification} />;
   }
 
   // ── Compact mode (home preview) ───────────────────────────────────────────
-  const [activeNode, setActiveNode] = useState<ProcessNode | null>(null);
-  const handleNodeClick = useCallback((node: ProcessNode) => setActiveNode(node), []);
-  const handleClose     = useCallback(() => setActiveNode(null), []);
-
   const displayNodes = process.nodes
     .filter((n) => n.status === "current" || n.status === "risk" || n.status === "loop")
     .slice(0, 5);
 
   return (
     <div style={{ width: "100%" }}>
+      <ProcessVerificationSummaryBar
+        process={process}
+        verification={verification}
+        compact
+      />
+
       <div style={{ marginBottom: 16 }}>
         <GateTimeline stages={process.stages} nodes={process.nodes} compact={true} />
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 8 }}>
         {displayNodes.map((node) => (
-          <NodeCard key={node.id} node={node} edges={process.edges} onClick={handleNodeClick} compact={true} />
+          <NodeCard
+            key={node.id}
+            node={node}
+            edges={process.edges}
+            verification={verification}
+            onClick={handleNodeClick}
+            compact={true}
+          />
         ))}
       </div>
 
-      <p style={{ fontSize: 12, color: "#87938d", marginTop: 12, fontStyle: "italic" }}>
-        법령상 구조 기준 · 현장 검증 필요 항목은 앰버로 표시
+      <p style={{ fontSize: 12, color: "#87938d", marginTop: 12 }}>
+        법령상 구조 기준 · 공식 원문 검증 상태 포함
       </p>
 
       {activeNode && (
-        <NodeDrawer node={activeNode} edges={process.edges} onClose={handleClose} />
+        <NodeDrawer
+          node={activeNode}
+          edges={process.edges}
+          verification={verification}
+          onClose={handleClose}
+        />
       )}
     </div>
   );

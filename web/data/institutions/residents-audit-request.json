@@ -30,6 +30,11 @@
     "law": "공공감사에 관한 법률",
     "articles": "자체감사·감사 결과 처리 연계",
     "kind": "법률"
+   },
+   {
+    "law": "해당 지방자치단체 조례",
+    "articles": "주민감사청구에 필요한 청구인 수",
+    "kind": "조례"
    }
   ],
   "authorities": [
@@ -581,5 +586,76 @@
    }
   ],
   "warnings": []
+ },
+ "verification": {
+  "status": "needs-review",
+  "verifiedAt": "2026-07-10",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 5건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 22건 가운데 22건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "지방자치법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "지방자치법",
+    "lawId": "001656",
+    "mst": "284005",
+    "promulgatedOn": "2026-03-05",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/지방자치법"
+   },
+   {
+    "law": "지방자치법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "지방자치법 시행령",
+    "lawId": "005092",
+    "mst": "287053",
+    "promulgatedOn": "2026-06-23",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/지방자치법시행령"
+   },
+   {
+    "law": "지방자치단체에 대한 행정감사규정",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "지방자치단체에 대한 행정감사규정",
+    "lawId": "005605",
+    "mst": "237963",
+    "promulgatedOn": "2021-12-16",
+    "effectiveOn": "2022-01-13",
+    "officialUrl": "https://law.go.kr/법령/지방자치단체에대한행정감사규정"
+   },
+   {
+    "law": "공공감사에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "공공감사에 관한 법률",
+    "lawId": "011170",
+    "mst": "277291",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/공공감사에관한법률"
+   }
+  ],
+  "unresolved": [
+   {
+    "law": "해당 지방자치단체 조례",
+    "kind": "조례",
+    "reasonCode": "local-scope",
+    "reason": "적용 지역이 특정되지 않아 단일 자치법규 원문을 확정할 수 없음",
+    "nextStep": "적용할 시·도 또는 시·군·구를 지정한 뒤 해당 자치법규를 연결해야 한다."
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-10",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 24,
+   "explicitCitationEntries": 20,
+   "articleReferences": 22,
+   "verifiedReferences": 22,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
  }
 }

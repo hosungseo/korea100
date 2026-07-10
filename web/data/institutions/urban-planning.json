@@ -120,11 +120,18 @@
     "progress": 100,
     "actor": "시장·군수·구청장",
     "action": "기초조사",
-    "output_documents": ["기초조사서", "토지적성평가"],
+    "output_documents": [
+     "기초조사서",
+     "토지적성평가"
+    ],
     "deadline": "내부 목표 60일",
     "confidence": 0.86,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제25조(도시·군관리계획의 입안)", "text": "인구·경제·환경·교통·재해 등을 기초조사하고 기본계획에 부합하게 입안을 준비한다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제25조(도시·군관리계획의 입안)",
+      "text": "인구·경제·환경·교통·재해 등을 기초조사하고 기본계획에 부합하게 입안을 준비한다."
+     }
     ]
    },
    {
@@ -138,12 +145,23 @@
     "actor": "토지소유자·주민",
     "receiver": "지자체 입안부서",
     "action": "입안 제안",
-    "output_documents": ["입안 제안서", "제안 반영여부 통보"],
+    "output_documents": [
+     "입안 제안서",
+     "제안 반영여부 통보"
+    ],
     "deadline": "제안일부터 45일 내 반영여부 통보",
     "confidence": 0.78,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제26조(도시·군관리계획 입안의 제안)", "text": "주민은 기반시설·지구단위계획 등에 대해 입안을 제안할 수 있고 입안권자는 반영 여부를 통보한다."},
-     {"law": "국토의 계획 및 이용에 관한 법률 시행령", "article": "제19조의2(도시·군관리계획 입안의 제안)", "text": "제안자는 기반시설·지구단위계획은 대상 토지 2/3 이상, 용도지구 대체 등은 4/5 이상 토지소유자 동의를 받아 제안한다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제26조(도시·군관리계획 입안의 제안)",
+      "text": "주민은 기반시설·지구단위계획 등에 대해 입안을 제안할 수 있고 입안권자는 반영 여부를 통보한다."
+     },
+     {
+      "law": "국토의 계획 및 이용에 관한 법률 시행령",
+      "article": "제19조의2(도시·군관리계획 입안의 제안)",
+      "text": "제안자는 기반시설·지구단위계획은 대상 토지 2/3 이상, 용도지구 대체 등은 4/5 이상 토지소유자 동의를 받아 제안한다."
+     }
     ]
    },
    {
@@ -156,13 +174,27 @@
     "progress": 100,
     "actor": "시장·군수·구청장",
     "action": "입안",
-    "input_documents": ["기초조사서", "입안 제안서"],
-    "output_documents": ["도시·군관리계획(안)", "계획도서"],
+    "input_documents": [
+     "기초조사서",
+     "입안 제안서"
+    ],
+    "output_documents": [
+     "도시·군관리계획(안)",
+     "계획도서"
+    ],
     "deadline": "내부 목표 30일",
     "confidence": 0.88,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제24조(도시·군관리계획의 입안권자)", "text": "시장·군수·구청장 등 입안권자가 관할 구역의 도시·군관리계획을 입안한다."},
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제25조(도시·군관리계획의 입안)", "text": "입안 기준과 도서·설명서 작성 기준에 따라 계획안을 작성한다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제24조(도시·군관리계획의 입안권자)",
+      "text": "시장·군수·구청장 등 입안권자가 관할 구역의 도시·군관리계획을 입안한다."
+     },
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제25조(도시·군관리계획의 입안)",
+      "text": "입안 기준과 도서·설명서 작성 기준에 따라 계획안을 작성한다."
+     }
     ]
    },
    {
@@ -175,12 +207,24 @@
     "progress": 100,
     "actor": "시장·군수·구청장",
     "action": "공람·공청회",
-    "output_documents": ["공고문", "공람대장", "공청회 회의록"],
+    "output_documents": [
+     "공고문",
+     "공람대장",
+     "공청회 회의록"
+    ],
     "deadline": "14일 이상 공람(영 제22조제2항)",
     "confidence": 0.85,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제28조(주민과 지방의회의 의견 청취)", "text": "입안 시 주민의 의견을 들어 반영하고 필요하면 공청회를 개최한다."},
-     {"law": "국토의 계획 및 이용에 관한 법률 시행령", "article": "제22조(주민 및 지방의회의 의견청취)", "text": "계획안 주요 내용을 공보·홈페이지·국토이용정보체계에 공고하고 14일 이상 일반인이 열람하게 한다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제28조(주민과 지방의회의 의견 청취)",
+      "text": "입안 시 주민의 의견을 들어 반영하고 필요하면 공청회를 개최한다."
+     },
+     {
+      "law": "국토의 계획 및 이용에 관한 법률 시행령",
+      "article": "제22조(주민 및 지방의회의 의견청취)",
+      "text": "계획안 주요 내용을 공보·홈페이지·국토이용정보체계에 공고하고 14일 이상 일반인이 열람하게 한다."
+     }
     ]
    },
    {
@@ -194,14 +238,28 @@
     "actor": "주민·토지소유자",
     "receiver": "지자체 입안부서",
     "action": "의견 제출",
-    "input_documents": ["도시·군관리계획(안)", "공고문"],
-    "output_documents": ["주민의견서", "의견검토표"],
+    "input_documents": [
+     "도시·군관리계획(안)",
+     "공고문"
+    ],
+    "output_documents": [
+     "주민의견서",
+     "의견검토표"
+    ],
     "deadline": "공람기간 내 제출",
     "blocker": "용도지역 지정에 따른 재산권 제한으로 반대의견 다수 접수",
     "confidence": 0.8,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제28조(주민과 지방의회의 의견 청취)", "text": "제출된 주민 의견을 검토해 타당한 경우 계획에 반영한다."},
-     {"law": "국토의 계획 및 이용에 관한 법률 시행령", "article": "제22조(주민 및 지방의회의 의견청취)", "text": "제출된 의견의 반영 여부를 검토하여 열람기간이 끝난 날부터 60일 이내에 제출자에게 통보한다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제28조(주민과 지방의회의 의견 청취)",
+      "text": "제출된 주민 의견을 검토해 타당한 경우 계획에 반영한다."
+     },
+     {
+      "law": "국토의 계획 및 이용에 관한 법률 시행령",
+      "article": "제22조(주민 및 지방의회의 의견청취)",
+      "text": "제출된 의견의 반영 여부를 검토하여 열람기간이 끝난 날부터 60일 이내에 제출자에게 통보한다."
+     }
     ]
    },
    {
@@ -214,14 +272,27 @@
     "progress": 55,
     "actor": "지방의회",
     "action": "의견 청취",
-    "input_documents": ["도시·군관리계획(안)", "주민의견 검토결과"],
-    "output_documents": ["지방의회 의견서"],
+    "input_documents": [
+     "도시·군관리계획(안)",
+     "주민의견 검토결과"
+    ],
+    "output_documents": [
+     "지방의회 의견서"
+    ],
     "deadline": "의견 요청 후 30일(미회신 시 이의 없음 간주)",
     "blocker": null,
     "confidence": 0.82,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제28조(주민과 지방의회의 의견 청취)", "text": "대통령령으로 정하는 사항은 지방의회의 의견을 들어야 한다."},
-     {"law": "국토의 계획 및 이용에 관한 법률 시행령", "article": "제22조(주민 및 지방의회의 의견청취)", "text": "용도지역·용도지구·용도구역 지정, 주간선도로·도시철도·대학·지방자치단체 청사 등 기반시설의 결정 등은 지방의회 의견청취 대상이다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제28조(주민과 지방의회의 의견 청취)",
+      "text": "대통령령으로 정하는 사항은 지방의회의 의견을 들어야 한다."
+     },
+     {
+      "law": "국토의 계획 및 이용에 관한 법률 시행령",
+      "article": "제22조(주민 및 지방의회의 의견청취)",
+      "text": "용도지역·용도지구·용도구역 지정, 주간선도로·도시철도·대학·지방자치단체 청사 등 기반시설의 결정 등은 지방의회 의견청취 대상이다."
+     }
     ]
    },
    {
@@ -235,12 +306,20 @@
     "actor": "관계 행정기관",
     "receiver": "지자체 입안부서",
     "action": "협의 회신",
-    "input_documents": ["도시·군관리계획(안)"],
-    "output_documents": ["협의 회신"],
+    "input_documents": [
+     "도시·군관리계획(안)"
+    ],
+    "output_documents": [
+     "협의 회신"
+    ],
     "deadline": "협의 요청 후 30일",
     "confidence": 0.82,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제30조(도시·군관리계획의 결정)", "text": "결정하려면 관계 행정기관의 장과 미리 협의하여야 한다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제30조(도시·군관리계획의 결정)",
+      "text": "결정하려면 관계 행정기관의 장과 미리 협의하여야 한다."
+     }
     ]
    },
    {
@@ -254,11 +333,21 @@
     "actor": "시장·군수·구청장",
     "receiver": "지방도시계획위원회",
     "action": "심의 상정",
-    "input_documents": ["협의 회신", "의견검토표"],
-    "output_documents": ["심의 상정서", "심의자료"],
+    "input_documents": [
+     "협의 회신",
+     "의견검토표"
+    ],
+    "output_documents": [
+     "심의 상정서",
+     "심의자료"
+    ],
     "confidence": 0.83,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제30조(도시·군관리계획의 결정)", "text": "협의 결과를 반영해 도시계획위원회 심의에 부친다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제30조(도시·군관리계획의 결정)",
+      "text": "협의 결과를 반영해 도시계획위원회 심의에 부친다."
+     }
     ]
    },
    {
@@ -271,11 +360,20 @@
     "progress": 0,
     "actor": "지방도시계획위원회",
     "action": "심의",
-    "input_documents": ["심의자료", "도시·군관리계획(안)"],
-    "output_documents": ["심의 결과"],
+    "input_documents": [
+     "심의자료",
+     "도시·군관리계획(안)"
+    ],
+    "output_documents": [
+     "심의 결과"
+    ],
     "confidence": 0.85,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제30조(도시·군관리계획의 결정)", "text": "결정하려면 지방도시계획위원회의 심의를 거쳐야 한다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제30조(도시·군관리계획의 결정)",
+      "text": "결정하려면 지방도시계획위원회의 심의를 거쳐야 한다."
+     }
     ]
    },
    {
@@ -289,10 +387,18 @@
     "actor": "지방도시계획위원회",
     "action": "판단",
     "condition": "원안의결, 조건부 의결, 재심의·보완 필요",
-    "output_documents": ["의결서", "조건부 의견", "재심의 통보"],
+    "output_documents": [
+     "의결서",
+     "조건부 의견",
+     "재심의 통보"
+    ],
     "confidence": 0.82,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제30조(도시·군관리계획의 결정)", "text": "심의 결과에 따라 원안·조건부 의결 또는 재심의를 결정한다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제30조(도시·군관리계획의 결정)",
+      "text": "심의 결과에 따라 원안·조건부 의결 또는 재심의를 결정한다."
+     }
     ]
    },
    {
@@ -305,12 +411,21 @@
     "progress": 0,
     "actor": "시장·군수·구청장",
     "action": "보완·재입안",
-    "input_documents": ["재심의 통보", "조건부 의견"],
-    "output_documents": ["보완 계획안"],
+    "input_documents": [
+     "재심의 통보",
+     "조건부 의견"
+    ],
+    "output_documents": [
+     "보완 계획안"
+    ],
     "blocker": "재심의 회귀 단계",
     "confidence": 0.75,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제30조(도시·군관리계획의 결정)", "text": "재심의·보완 요구를 받은 경우 계획안을 수정하여 다시 심의에 부친다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제30조(도시·군관리계획의 결정)",
+      "text": "재심의·보완 요구를 받은 경우 계획안을 수정하여 다시 심의에 부친다."
+     }
     ]
    },
    {
@@ -323,12 +438,25 @@
     "progress": 0,
     "actor": "시·도지사",
     "action": "결정",
-    "input_documents": ["의결서", "협의 회신"],
-    "output_documents": ["결정서"],
+    "input_documents": [
+     "의결서",
+     "협의 회신"
+    ],
+    "output_documents": [
+     "결정서"
+    ],
     "confidence": 0.85,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제30조(도시·군관리계획의 결정)", "text": "시·도지사 등이 도시·군관리계획을 결정한다."},
-     {"law": "국토의 계획 및 이용에 관한 법률 시행령", "article": "제25조(도시·군관리계획의 결정)", "text": "광역계획 관련 등 중요 계획은 국토교통부장관 협의 대상이며, 경미한 변경은 협의·심의를 생략하고 공보·홈페이지에 게재하는 방법으로 결정을 고시한다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제30조(도시·군관리계획의 결정)",
+      "text": "시·도지사 등이 도시·군관리계획을 결정한다."
+     },
+     {
+      "law": "국토의 계획 및 이용에 관한 법률 시행령",
+      "article": "제25조(도시·군관리계획의 결정)",
+      "text": "광역계획 관련 등 중요 계획은 국토교통부장관 협의 대상이며, 경미한 변경은 협의·심의를 생략하고 공보·홈페이지에 게재하는 방법으로 결정을 고시한다."
+     }
     ]
    },
    {
@@ -341,11 +469,20 @@
     "progress": 0,
     "actor": "시·도지사",
     "action": "지형도면 승인",
-    "input_documents": ["결정서", "지형도면(안)"],
-    "output_documents": ["지형도면 승인"],
+    "input_documents": [
+     "결정서",
+     "지형도면(안)"
+    ],
+    "output_documents": [
+     "지형도면 승인"
+    ],
     "confidence": 0.8,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제32조(도시·군관리계획에 관한 지형도면의 고시 등)", "text": "지형도면을 작성해 시·도지사의 승인을 받는다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제32조(도시·군관리계획에 관한 지형도면의 고시 등)",
+      "text": "지형도면을 작성해 시·도지사의 승인을 받는다."
+     }
     ]
    },
    {
@@ -358,12 +495,26 @@
     "progress": 0,
     "actor": "시장·군수·구청장",
     "action": "고시",
-    "input_documents": ["결정서", "지형도면 승인"],
-    "output_documents": ["결정·고시문", "지형도면 고시"],
+    "input_documents": [
+     "결정서",
+     "지형도면 승인"
+    ],
+    "output_documents": [
+     "결정·고시문",
+     "지형도면 고시"
+    ],
     "confidence": 0.85,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제31조(도시·군관리계획 결정의 효력)", "text": "지형도면을 고시한 날부터 도시·군관리계획 결정의 효력이 발생한다."},
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제32조(도시·군관리계획에 관한 지형도면의 고시 등)", "text": "지형도면을 고시하여야 한다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제31조(도시·군관리계획 결정의 효력)",
+      "text": "지형도면을 고시한 날부터 도시·군관리계획 결정의 효력이 발생한다."
+     },
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제32조(도시·군관리계획에 관한 지형도면의 고시 등)",
+      "text": "지형도면을 고시하여야 한다."
+     }
     ]
    },
    {
@@ -376,11 +527,20 @@
     "progress": 0,
     "actor": "토지이음(도시계획정보시스템)",
     "action": "등재·공개",
-    "input_documents": ["결정·고시문", "지형도면 고시"],
-    "output_documents": ["공개 게시자료"],
+    "input_documents": [
+     "결정·고시문",
+     "지형도면 고시"
+    ],
+    "output_documents": [
+     "공개 게시자료"
+    ],
     "confidence": 0.76,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제32조(도시·군관리계획에 관한 지형도면의 고시 등)", "text": "고시된 지형도면 등을 국토이용정보체계에 등재하여 일반에 공개한다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제32조(도시·군관리계획에 관한 지형도면의 고시 등)",
+      "text": "고시된 지형도면 등을 국토이용정보체계에 등재하여 일반에 공개한다."
+     }
     ]
    },
    {
@@ -393,34 +553,209 @@
     "progress": 0,
     "actor": "시장·군수·구청장",
     "action": "재검토",
-    "output_documents": ["재검토 결과", "정비계획"],
+    "output_documents": [
+     "재검토 결과",
+     "정비계획"
+    ],
     "deadline": "5년마다",
     "confidence": 0.78,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제34조(도시·군관리계획의 정비)", "text": "5년마다 관할 구역의 도시·군관리계획의 타당성을 전반적으로 재검토하여 정비한다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제34조(도시·군관리계획의 정비)",
+      "text": "5년마다 관할 구역의 도시·군관리계획의 타당성을 전반적으로 재검토하여 정비한다."
+     }
     ]
    }
   ],
   "edges": [
-   {"id": "E01", "source": "N01", "target": "N03", "type": "sequence", "label": null},
-   {"id": "E02", "source": "N03", "target": "N04", "type": "sequence", "label": null},
-   {"id": "E03", "source": "N04", "target": "N05", "type": "sequence", "label": null},
-   {"id": "E04", "source": "N05", "target": "N06", "type": "sequence", "label": null},
-   {"id": "E05", "source": "N06", "target": "N07", "type": "sequence", "label": null},
-   {"id": "E06", "source": "N07", "target": "N08", "type": "sequence", "label": null},
-   {"id": "E07", "source": "N08", "target": "N09", "type": "sequence", "label": null},
-   {"id": "E08", "source": "N09", "target": "N10", "type": "sequence", "label": null},
-   {"id": "E09", "source": "N10", "target": "N12", "type": "sequence", "label": null},
-   {"id": "E10", "source": "N12", "target": "N13", "type": "sequence", "label": null},
-   {"id": "E11", "source": "N13", "target": "N14", "type": "sequence", "label": null},
-   {"id": "E12", "source": "N14", "target": "N16", "type": "sequence", "label": null},
-   {"id": "M01", "source": "N02", "target": "N03", "type": "message", "label": "입안 제안"},
-   {"id": "M02", "source": "N04", "target": "N05", "type": "message", "label": "공람 공고"},
-   {"id": "M03", "source": "N08", "target": "N09", "type": "message", "label": "심의 상정"},
-   {"id": "M04", "source": "N14", "target": "N15", "type": "message", "label": "고시자료 등재"},
-   {"id": "L01", "source": "N10", "target": "N11", "type": "loop", "label": "재심의·보완 필요"},
-   {"id": "L02", "source": "N11", "target": "N09", "type": "loop", "label": "보완 후 재심의"}
+   {
+    "id": "E01",
+    "source": "N01",
+    "target": "N03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "N03",
+    "target": "N04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "N04",
+    "target": "N05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "N05",
+    "target": "N06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "N06",
+    "target": "N07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "N07",
+    "target": "N08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "N08",
+    "target": "N09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "N09",
+    "target": "N10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "N10",
+    "target": "N12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "N12",
+    "target": "N13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "N13",
+    "target": "N14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "N14",
+    "target": "N16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "N02",
+    "target": "N03",
+    "type": "message",
+    "label": "입안 제안"
+   },
+   {
+    "id": "M02",
+    "source": "N04",
+    "target": "N05",
+    "type": "message",
+    "label": "공람 공고"
+   },
+   {
+    "id": "M03",
+    "source": "N08",
+    "target": "N09",
+    "type": "message",
+    "label": "심의 상정"
+   },
+   {
+    "id": "M04",
+    "source": "N14",
+    "target": "N15",
+    "type": "message",
+    "label": "고시자료 등재"
+   },
+   {
+    "id": "L01",
+    "source": "N10",
+    "target": "N11",
+    "type": "loop",
+    "label": "재심의·보완 필요"
+   },
+   {
+    "id": "L02",
+    "source": "N11",
+    "target": "N09",
+    "type": "loop",
+    "label": "보완 후 재심의"
+   }
   ],
   "warnings": []
+ },
+ "verification": {
+  "status": "needs-review",
+  "verifiedAt": "2026-07-10",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 4건 중 공식 원문 3건을 연결했다. 캔버스와 절차 노드의 명시 조문 32건 가운데 32건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "국토의 계획 및 이용에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국토의 계획 및 이용에 관한 법률",
+    "lawId": "009294",
+    "mst": "284013",
+    "promulgatedOn": "2026-03-05",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/국토의계획및이용에관한법률"
+   },
+   {
+    "law": "국토의 계획 및 이용에 관한 법률 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "국토의 계획 및 이용에 관한 법률 시행령",
+    "lawId": "009419",
+    "mst": "287269",
+    "promulgatedOn": "2026-06-23",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/국토의계획및이용에관한법률시행령"
+   },
+   {
+    "law": "국토의 계획 및 이용에 관한 법률 시행규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "국토의 계획 및 이용에 관한 법률 시행규칙",
+    "lawId": "009469",
+    "mst": "284531",
+    "promulgatedOn": "2026-03-12",
+    "effectiveOn": "2026-03-12",
+    "officialUrl": "https://law.go.kr/법령/국토의계획및이용에관한법률시행규칙"
+   }
+  ],
+  "unresolved": [
+   {
+    "law": "도시·군계획조례",
+    "kind": "조례",
+    "reasonCode": "local-scope",
+    "reason": "적용 지역이 특정되지 않아 단일 자치법규 원문을 확정할 수 없음",
+    "nextStep": "적용할 시·도 또는 시·군·구를 지정한 뒤 해당 자치법규를 연결해야 한다."
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-10",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 27,
+   "explicitCitationEntries": 25,
+   "articleReferences": 32,
+   "verifiedReferences": 32,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
  }
 }

@@ -12,7 +12,9 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      {eia?.process && <ProcessPreview process={eia.process} />}
+      {eia?.process && (
+        <ProcessPreview process={eia.process} verification={eia.verification} />
+      )}
       <InstitutionExplorer institutions={institutions} categoryOrder={categoryOrder} />
     </>
   );
@@ -155,7 +157,13 @@ function Hero() {
 
 // ── Process Preview ───────────────────────────────────────────────────────────
 
-function ProcessPreview({ process }: { process: NonNullable<Institution["process"]> }) {
+function ProcessPreview({
+  process,
+  verification,
+}: {
+  process: NonNullable<Institution["process"]>;
+  verification?: Institution["verification"];
+}) {
   return (
     <section
       style={{
@@ -187,7 +195,7 @@ function ProcessPreview({ process }: { process: NonNullable<Institution["process
                 marginBottom: 6,
               }}
             >
-              상태 인식형 업무구조도 미리보기
+              법령상 업무구조도 미리보기
             </div>
             <h2
               style={{
@@ -197,7 +205,7 @@ function ProcessPreview({ process }: { process: NonNullable<Institution["process
                 margin: 0,
               }}
             >
-              환경영향평가 — 현재 진행 상태
+              환경영향평가 — 대표 절차와 병목
             </h2>
           </div>
           <Link
@@ -212,7 +220,7 @@ function ProcessPreview({ process }: { process: NonNullable<Institution["process
               textDecoration: "none",
               padding: "8px 16px",
               border: "1px solid var(--color-accent)",
-              borderRadius: 9999,
+              borderRadius: 6,
               background: "var(--color-surface)",
               transition: "background 140ms ease-out",
               whiteSpace: "nowrap",
@@ -226,13 +234,13 @@ function ProcessPreview({ process }: { process: NonNullable<Institution["process
         <div
           style={{
             background: "var(--color-surface)",
-            borderRadius: 18,
+            borderRadius: 8,
             border: "1px solid var(--color-border)",
             padding: "20px 24px",
-            boxShadow: "0 16px 48px rgba(16,33,24,.06)",
+            boxShadow: "0 8px 24px rgba(16,33,24,.04)",
           }}
         >
-          <ProcessBoard process={process} compact={true} />
+          <ProcessBoard process={process} verification={verification} compact={true} />
         </div>
       </div>
     </section>

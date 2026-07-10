@@ -27,8 +27,8 @@
     "kind": "부령"
    },
    {
-    "law": "선정기준액·기준연금액 고시",
-    "articles": "연도별 선정기준액과 기준연금액",
+    "law": "기초연금 지급대상자 선정기준액, 기준연금액 및 소득인정액 산정 세부기준에 관한 고시",
+    "articles": "2026년 선정기준액·기준연금액 및 소득인정액 산정 세부기준",
     "kind": "고시·지침"
    }
   ],
@@ -129,7 +129,7 @@
      },
      {
       "law": "기초연금법 시행령",
-      "article": "선정기준액 산정기준(법 제3조제4항 위임)",
+      "article": "선정기준액 산정 세부기준",
       "text": "선정기준액의 기준·고시 시기 및 적용기간 등 세부사항은 대통령령으로 정한다."
      }
     ]
@@ -158,7 +158,7 @@
      },
      {
       "law": "기초연금법 시행령",
-      "article": "지급신청 방법·절차(법 제10조제4항 위임)",
+      "article": "지급신청 방법·절차",
       "text": "기초연금 지급 신청의 방법·절차 및 자료제공 동의의 방법·절차 등에 관하여 필요한 사항은 대통령령으로 정한다."
      }
     ]
@@ -388,7 +388,7 @@
      },
      {
       "law": "기초연금법 시행규칙",
-      "article": "지급결정·통지 절차(법 제13조제4항 위임)",
+      "article": "지급결정·통지 절차",
       "text": "수급권의 발생·변경·상실 결정 절차 및 통지 등에 관하여 필요한 사항은 보건복지부령으로 정한다."
      }
     ]
@@ -527,25 +527,194 @@
    }
   ],
   "edges": [
-   { "id": "E01", "source": "P01", "target": "P02", "type": "sequence", "label": null },
-   { "id": "E02", "source": "P02", "target": "P03", "type": "sequence", "label": null },
-   { "id": "E03", "source": "P03", "target": "P04", "type": "sequence", "label": null },
-   { "id": "E04", "source": "P04", "target": "P05", "type": "sequence", "label": null },
-   { "id": "E05", "source": "P05", "target": "P06", "type": "sequence", "label": null },
-   { "id": "E06", "source": "P06", "target": "P08", "type": "sequence", "label": "소득인정액 산정" },
-   { "id": "E07", "source": "P08", "target": "P09", "type": "sequence", "label": "선정" },
-   { "id": "E08", "source": "P09", "target": "P10", "type": "sequence", "label": "지급 결정" },
-   { "id": "E09", "source": "P10", "target": "P11", "type": "sequence", "label": null },
-   { "id": "E10", "source": "P11", "target": "P12", "type": "sequence", "label": null },
-   { "id": "E11", "source": "P12", "target": "P13", "type": "sequence", "label": null },
-   { "id": "E12", "source": "P14", "target": "P15", "type": "sequence", "label": null },
-   { "id": "M01", "source": "P05", "target": "P07", "type": "message", "label": "국민연금 수급이력 연계" },
-   { "id": "M02", "source": "P07", "target": "P09", "type": "message", "label": "연계 감액 반영" },
-   { "id": "M03", "source": "P13", "target": "P10", "type": "message", "label": "급여 변동 통지" },
-   { "id": "M04", "source": "P10", "target": "P14", "type": "message", "label": "결정 불복 시" },
-   { "id": "L01", "source": "P12", "target": "P06", "type": "loop", "label": "소득변동 재산정 회귀" },
-   { "id": "L02", "source": "P14", "target": "P08", "type": "loop", "label": "이의신청 재판정 회귀" }
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P08",
+    "type": "sequence",
+    "label": "소득인정액 산정"
+   },
+   {
+    "id": "E07",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": "선정"
+   },
+   {
+    "id": "E08",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": "지급 결정"
+   },
+   {
+    "id": "E09",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P05",
+    "target": "P07",
+    "type": "message",
+    "label": "국민연금 수급이력 연계"
+   },
+   {
+    "id": "M02",
+    "source": "P07",
+    "target": "P09",
+    "type": "message",
+    "label": "연계 감액 반영"
+   },
+   {
+    "id": "M03",
+    "source": "P13",
+    "target": "P10",
+    "type": "message",
+    "label": "급여 변동 통지"
+   },
+   {
+    "id": "M04",
+    "source": "P10",
+    "target": "P14",
+    "type": "message",
+    "label": "결정 불복 시"
+   },
+   {
+    "id": "L01",
+    "source": "P12",
+    "target": "P06",
+    "type": "loop",
+    "label": "소득변동 재산정 회귀"
+   },
+   {
+    "id": "L02",
+    "source": "P14",
+    "target": "P08",
+    "type": "loop",
+    "label": "이의신청 재판정 회귀"
+   }
   ],
   "warnings": []
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-10",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 4건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 32건 가운데 32건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "기초연금법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "기초연금법",
+    "lawId": "012045",
+    "mst": "276657",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2025-10-01",
+    "officialUrl": "https://law.go.kr/법령/기초연금법"
+   },
+   {
+    "law": "기초연금법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "기초연금법 시행령",
+    "lawId": "012095",
+    "mst": "281587",
+    "promulgatedOn": "2025-12-30",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/기초연금법시행령"
+   },
+   {
+    "law": "기초연금법 시행규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "기초연금법 시행규칙",
+    "lawId": "012097",
+    "mst": "273895",
+    "promulgatedOn": "2025-09-19",
+    "effectiveOn": "2025-09-19",
+    "officialUrl": "https://law.go.kr/법령/기초연금법시행규칙"
+   },
+   {
+    "law": "기초연금 지급대상자 선정기준액, 기준연금액 및 소득인정액 산정 세부기준에 관한 고시",
+    "kind": "고시·지침",
+    "sourceType": "admin-rule",
+    "officialName": "기초연금 지급대상자 선정기준액, 기준연금액 및 소득인정액 산정 세부기준에 관한 고시",
+    "adminRuleId": "56797",
+    "adminRuleSerial": "2100000273370",
+    "promulgatedOn": "2026-01-21",
+    "officialUrl": "https://law.go.kr/행정규칙/기초연금지급대상자선정기준액,기준연금액및소득인정액산정세부기준에관한고시"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-10",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 23,
+   "explicitCitationEntries": 19,
+   "articleReferences": 32,
+   "verifiedReferences": 32,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
  }
 }

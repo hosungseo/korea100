@@ -119,12 +119,23 @@
     "progress": 100,
     "actor": "정보이용기관",
     "action": "대상정보·목적 검토",
-    "output_documents": ["대상정보 목록", "이용목적 명세"],
+    "output_documents": [
+     "대상정보 목록",
+     "이용목적 명세"
+    ],
     "deadline": "내부 목표 14일",
     "confidence": 0.85,
     "legal_basis": [
-     { "law": "전자정부법", "article": "제38조", "text": "공동이용센터를 통해 공동이용할 수 있는 행정정보(민원처리용 정보 등)의 범위에서 필요한 정보와 이용목적을 검토한다.(제1항)" },
-     { "law": "전자정부법 시행령", "article": "제43조", "text": "법 제38조에 따른 공동이용 대상 행정정보의 종류를 정하며, 이용기관은 그 범위에서 필요한 정보를 검토한다." }
+     {
+      "law": "전자정부법",
+      "article": "제38조",
+      "text": "공동이용센터를 통해 공동이용할 수 있는 행정정보(민원처리용 정보 등)의 범위에서 필요한 정보와 이용목적을 검토한다.(제1항)"
+     },
+     {
+      "law": "전자정부법 시행령",
+      "article": "제43조",
+      "text": "법 제38조에 따른 공동이용 대상 행정정보의 종류를 정하며, 이용기관은 그 범위에서 필요한 정보를 검토한다."
+     }
     ]
    },
    {
@@ -138,10 +149,16 @@
     "actor": "정보이용기관",
     "receiver": "행정안전부(공동이용센터)",
     "action": "신청서 제출",
-    "output_documents": ["공동이용 신청서"],
+    "output_documents": [
+     "공동이용 신청서"
+    ],
     "confidence": 0.86,
     "legal_basis": [
-     { "law": "전자정부법", "article": "제39조", "text": "공동이용이 필요한 행정기관은 공동이용을 신청한다." }
+     {
+      "law": "전자정부법",
+      "article": "제39조",
+      "text": "공동이용이 필요한 행정기관은 공동이용을 신청한다."
+     }
     ]
    },
    {
@@ -155,12 +172,27 @@
     "actor": "행정안전부",
     "action": "승인·대상 지정",
     "condition": "대상정보 적정성·보유기관 협의 결과",
-    "output_documents": ["승인 결정", "공동이용 대상 지정"],
+    "output_documents": [
+     "승인 결정",
+     "공동이용 대상 지정"
+    ],
     "confidence": 0.82,
     "legal_basis": [
-     { "law": "전자정부법", "article": "제39조", "text": "행정안전부장관은 공동이용 신청을 받으면 공동이용의 조건 등을 정하여 승인하되, 보유기관의 장 동의를 받아야 한다.(제2항·제3항)" },
-     { "law": "전자정부법", "article": "제38조", "text": "공동이용 대상 행정정보를 지정하며, 안전보장·비밀 정보는 대상에서 제외할 수 있다.(제2항)" },
-     { "law": "전자정부법 시행령", "article": "제44조", "text": "공동이용 신청기관은 기관명·행정정보 명칭·사무·목적·방식·안전성 확보방안 등이 포함된 공동이용신청서를 첨부자료와 함께 제출한다." }
+     {
+      "law": "전자정부법",
+      "article": "제39조",
+      "text": "행정안전부장관은 공동이용 신청을 받으면 공동이용의 조건 등을 정하여 승인하되, 보유기관의 장 동의를 받아야 한다.(제2항·제3항)"
+     },
+     {
+      "law": "전자정부법",
+      "article": "제38조",
+      "text": "공동이용 대상 행정정보를 지정하며, 안전보장·비밀 정보는 대상에서 제외할 수 있다.(제2항)"
+     },
+     {
+      "law": "전자정부법 시행령",
+      "article": "제44조",
+      "text": "공동이용 신청기관은 기관명·행정정보 명칭·사무·목적·방식·안전성 확보방안 등이 포함된 공동이용신청서를 첨부자료와 함께 제출한다."
+     }
     ]
    },
    {
@@ -173,11 +205,22 @@
     "progress": 100,
     "actor": "정보보유기관",
     "action": "제공 협의·확인",
-    "output_documents": ["제공 협의결과", "정보 정확성 확인"],
+    "output_documents": [
+     "제공 협의결과",
+     "정보 정확성 확인"
+    ],
     "confidence": 0.78,
     "legal_basis": [
-     { "law": "전자정부법", "article": "제39조", "text": "행정안전부장관은 승인 전 보유기관의 장의 동의를 받아야 하며, 보유기관은 특별한 사유가 없으면 공동이용에 협조하여야 한다.(제3항)" },
-     { "law": "전자정부법", "article": "제38조", "text": "보유기관은 공동이용되는 행정정보가 최신 정보가 되도록 하고 정확성을 유지하여야 한다.(제3항)" }
+     {
+      "law": "전자정부법",
+      "article": "제39조",
+      "text": "행정안전부장관은 승인 전 보유기관의 장의 동의를 받아야 하며, 보유기관은 특별한 사유가 없으면 공동이용에 협조하여야 한다.(제3항)"
+     },
+     {
+      "law": "전자정부법",
+      "article": "제38조",
+      "text": "보유기관은 공동이용되는 행정정보가 최신 정보가 되도록 하고 정확성을 유지하여야 한다.(제3항)"
+     }
     ]
    },
    {
@@ -190,10 +233,17 @@
     "progress": 100,
     "actor": "행정정보공동이용시스템",
     "action": "연계·보안대책 적용",
-    "output_documents": ["연계 설정", "보안대책 적용내역"],
+    "output_documents": [
+     "연계 설정",
+     "보안대책 적용내역"
+    ],
     "confidence": 0.8,
     "legal_basis": [
-     { "law": "전자정부법", "article": "제36조", "text": "행정정보를 효율적으로 관리·이용하기 위한 연계 및 보안대책을 적용한다." }
+     {
+      "law": "전자정부법",
+      "article": "제36조",
+      "text": "행정정보를 효율적으로 관리·이용하기 위한 연계 및 보안대책을 적용한다."
+     }
     ]
    },
    {
@@ -206,11 +256,22 @@
     "progress": 100,
     "actor": "행정안전부",
     "action": "접근권한 설정",
-    "output_documents": ["접근권한 대장", "연계 완료 통지"],
+    "output_documents": [
+     "접근권한 대장",
+     "연계 완료 통지"
+    ],
     "confidence": 0.76,
     "legal_basis": [
-     { "law": "전자정부법", "article": "제39조", "text": "승인을 받은 기관은 공동이용 총괄관리자·접근권한 부여권자·업무담당자를 지정하여 운영한다.(제7항)" },
-     { "law": "행정정보 공동이용 지침", "article": "접근권한 관리 실무기준", "text": "이용기관·이용자별 접근권한을 설정하고 연계를 완료한다." }
+     {
+      "law": "전자정부법",
+      "article": "제39조",
+      "text": "승인을 받은 기관은 공동이용 총괄관리자·접근권한 부여권자·업무담당자를 지정하여 운영한다.(제7항)"
+     },
+     {
+      "law": "행정정보 공동이용 지침",
+      "article": "접근권한 관리 실무기준",
+      "text": "이용기관·이용자별 접근권한을 설정하고 연계를 완료한다."
+     }
     ]
    },
    {
@@ -223,10 +284,16 @@
     "progress": 100,
     "actor": "정보이용기관",
     "action": "민원 접수",
-    "output_documents": ["민원 접수증"],
+    "output_documents": [
+     "민원 접수증"
+    ],
     "confidence": 0.72,
     "legal_basis": [
-     { "law": "전자정부법", "article": "제36조", "text": "행정기관은 민원 처리를 위하여 필요한 행정정보를 공동이용할 수 있다." }
+     {
+      "law": "전자정부법",
+      "article": "제36조",
+      "text": "행정기관은 민원 처리를 위하여 필요한 행정정보를 공동이용할 수 있다."
+     }
     ]
    },
    {
@@ -240,11 +307,18 @@
     "actor": "정보이용기관",
     "action": "사전동의 확인",
     "condition": "정보주체 사전동의 여부(동의 없으면 종이서류 제출)",
-    "output_documents": ["동의서", "동의 확인 로그"],
+    "output_documents": [
+     "동의서",
+     "동의 확인 로그"
+    ],
     "blocker": "일부 민원 건 정보주체 동의 미확인",
     "confidence": 0.82,
     "legal_basis": [
-     { "law": "전자정부법", "article": "제42조", "text": "행정정보를 공동이용할 때에는 정보주체의 사전동의를 받아야 한다." }
+     {
+      "law": "전자정부법",
+      "article": "제42조",
+      "text": "행정정보를 공동이용할 때에는 정보주체의 사전동의를 받아야 한다."
+     }
     ]
    },
    {
@@ -258,11 +332,21 @@
     "actor": "정보이용기관",
     "receiver": "정보주체(국민)",
     "action": "서류 제출 안내",
-    "output_documents": ["구비서류 제출 안내"],
+    "output_documents": [
+     "구비서류 제출 안내"
+    ],
     "confidence": 0.75,
     "legal_basis": [
-     { "law": "전자정부법", "article": "제42조", "text": "정보주체가 동의하지 아니하면 해당 정보를 공동이용하지 아니하고 서류로 확인한다." },
-     { "law": "개인정보 보호법", "article": "제3자 제공 제한 관련 조문", "text": "정보주체의 동의 없는 개인정보 제공·이용을 제한한다." }
+     {
+      "law": "전자정부법",
+      "article": "제42조",
+      "text": "정보주체가 동의하지 아니하면 해당 정보를 공동이용하지 아니하고 서류로 확인한다."
+     },
+     {
+      "law": "개인정보 보호법",
+      "article": "제3자 제공 제한 관련 조문",
+      "text": "정보주체의 동의 없는 개인정보 제공·이용을 제한한다."
+     }
     ]
    },
    {
@@ -275,12 +359,25 @@
     "progress": 0,
     "actor": "행정정보공동이용시스템",
     "action": "보유기관 정보 조회",
-    "input_documents": ["동의서", "조회 요청"],
-    "output_documents": ["조회 결과(주민등록·소득·부동산 등)"],
+    "input_documents": [
+     "동의서",
+     "조회 요청"
+    ],
+    "output_documents": [
+     "조회 결과(주민등록·소득·부동산 등)"
+    ],
     "confidence": 0.8,
     "legal_basis": [
-     { "law": "전자정부법", "article": "제38조", "text": "이용기관은 지정된 공동이용 대상 행정정보를 보유기관으로부터 온라인으로 조회한다." },
-     { "law": "전자정부법", "article": "제37조", "text": "공동이용 기관은 정당한 사유가 없으면 공동이용센터를 통하여 행정정보를 공동이용한다.(제2항)" }
+     {
+      "law": "전자정부법",
+      "article": "제38조",
+      "text": "이용기관은 지정된 공동이용 대상 행정정보를 보유기관으로부터 온라인으로 조회한다."
+     },
+     {
+      "law": "전자정부법",
+      "article": "제37조",
+      "text": "공동이용 기관은 정당한 사유가 없으면 공동이용센터를 통하여 행정정보를 공동이용한다.(제2항)"
+     }
     ]
    },
    {
@@ -293,11 +390,19 @@
     "progress": 0,
     "actor": "정보이용기관",
     "action": "민원 심사·처리",
-    "input_documents": ["조회 결과"],
-    "output_documents": ["민원 처리 결과"],
+    "input_documents": [
+     "조회 결과"
+    ],
+    "output_documents": [
+     "민원 처리 결과"
+    ],
     "confidence": 0.74,
     "legal_basis": [
-     { "law": "전자정부법", "article": "제36조", "text": "공동이용한 행정정보를 활용하여 민원을 심사·처리한다." }
+     {
+      "law": "전자정부법",
+      "article": "제36조",
+      "text": "공동이용한 행정정보를 활용하여 민원을 심사·처리한다."
+     }
     ]
    },
    {
@@ -310,10 +415,16 @@
     "progress": 0,
     "actor": "행정정보공동이용시스템",
     "action": "이용내역 기록",
-    "output_documents": ["이용내역 로그"],
+    "output_documents": [
+     "이용내역 로그"
+    ],
     "confidence": 0.79,
     "legal_basis": [
-     { "law": "전자정부법", "article": "제43조", "text": "행정안전부장관은 공동이용한 행정정보의 명칭·공동이용 횟수 등의 기록을 유지·관리하고 공개하여야 한다.(제6항)" }
+     {
+      "law": "전자정부법",
+      "article": "제43조",
+      "text": "행정안전부장관은 공동이용한 행정정보의 명칭·공동이용 횟수 등의 기록을 유지·관리하고 공개하여야 한다.(제6항)"
+     }
     ]
    },
    {
@@ -327,12 +438,20 @@
     "actor": "행정안전부",
     "receiver": "정보주체(국민)",
     "action": "이용내역 열람 제공",
-    "input_documents": ["이용내역 로그"],
-    "output_documents": ["이용내역 열람 결과"],
+    "input_documents": [
+     "이용내역 로그"
+    ],
+    "output_documents": [
+     "이용내역 열람 결과"
+    ],
     "deadline": "열람신청일부터 10일 이내 통보(정당한 사유 시 예외)",
     "confidence": 0.78,
     "legal_basis": [
-     { "law": "전자정부법", "article": "제43조", "text": "정보주체는 본인에 관한 공동이용 행정정보의 이용기관·목적·종류·시기·법적근거의 열람을 신청할 수 있고, 행정안전부장관·이용기관은 신청일부터 10일 이내에 통보하여야 한다.(제1항·제2항)" }
+     {
+      "law": "전자정부법",
+      "article": "제43조",
+      "text": "정보주체는 본인에 관한 공동이용 행정정보의 이용기관·목적·종류·시기·법적근거의 열람을 신청할 수 있고, 행정안전부장관·이용기관은 신청일부터 10일 이내에 통보하여야 한다.(제1항·제2항)"
+     }
     ]
    },
    {
@@ -341,16 +460,26 @@
     "lane": "행정안전부(공동이용센터)",
     "stage": "G6 점검·통제",
     "type": "gateway",
-    "status": "gateway",
+    "status": "waiting",
     "progress": 0,
     "actor": "행정안전부",
     "action": "목적 외 이용 판단",
     "condition": "이용목적 부합 여부·오남용 정황",
-    "output_documents": ["점검 판단 결과"],
+    "output_documents": [
+     "점검 판단 결과"
+    ],
     "confidence": 0.8,
     "legal_basis": [
-     { "law": "전자정부법", "article": "제38조", "text": "행정정보의 공동이용은 특정한 이용목적에 따라 필요한 범위에서 이루어져야 한다.(제4항)" },
-     { "law": "전자정부법", "article": "제35조", "text": "행정정보를 권한 없이 또는 권한 범위를 넘어 처리하거나 승인받지 아니한 방식으로 공동이용하는 행위 등을 금지한다." }
+     {
+      "law": "전자정부법",
+      "article": "제38조",
+      "text": "행정정보의 공동이용은 특정한 이용목적에 따라 필요한 범위에서 이루어져야 한다.(제4항)"
+     },
+     {
+      "law": "전자정부법",
+      "article": "제35조",
+      "text": "행정정보를 권한 없이 또는 권한 범위를 넘어 처리하거나 승인받지 아니한 방식으로 공동이용하는 행위 등을 금지한다."
+     }
     ]
    },
    {
@@ -363,12 +492,22 @@
     "progress": 0,
     "actor": "행정안전부",
     "action": "실태점검",
-    "output_documents": ["실태점검 결과보고"],
+    "output_documents": [
+     "실태점검 결과보고"
+    ],
     "blocker": "이용내역 감사가 형식적으로 흐를 위험(운영 추정)",
     "confidence": 0.74,
     "legal_basis": [
-     { "law": "행정정보 공동이용 지침", "article": "정기 점검 실무기준", "text": "행정안전부는 공동이용 실태를 정기적으로 점검한다." },
-     { "law": "전자정부법", "article": "제38조", "text": "공동이용이 특정 이용목적에 필요한 범위에서 이루어지는지 점검한다.(제4항)" }
+     {
+      "law": "행정정보 공동이용 지침",
+      "article": "정기 점검 실무기준",
+      "text": "행정안전부는 공동이용 실태를 정기적으로 점검한다."
+     },
+     {
+      "law": "전자정부법",
+      "article": "제38조",
+      "text": "공동이용이 특정 이용목적에 필요한 범위에서 이루어지는지 점검한다.(제4항)"
+     }
     ]
    },
    {
@@ -382,12 +521,23 @@
     "actor": "행정안전부",
     "receiver": "정보이용기관",
     "action": "시정·승인 취소",
-    "output_documents": ["시정 요구", "승인 취소 통보"],
+    "output_documents": [
+     "시정 요구",
+     "승인 취소 통보"
+    ],
     "blocker": "목적 외 이용 적발 시 회귀 단계",
     "confidence": 0.76,
     "legal_basis": [
-     { "law": "전자정부법", "article": "제41조", "text": "행정안전부장관은 이용기관이 공동이용 조건을 위반하거나 금지행위·준수의무를 위반한 경우 공동이용 승인을 철회하거나 공동이용을 일시 정지시킬 수 있다.(제1항·제2항)" },
-     { "law": "전자정부법", "article": "제35조", "text": "권한 없는 처리·승인받지 아니한 방식의 공동이용 등 금지행위 위반을 시정 대상으로 한다." }
+     {
+      "law": "전자정부법",
+      "article": "제41조",
+      "text": "행정안전부장관은 이용기관이 공동이용 조건을 위반하거나 금지행위·준수의무를 위반한 경우 공동이용 승인을 철회하거나 공동이용을 일시 정지시킬 수 있다.(제1항·제2항)"
+     },
+     {
+      "law": "전자정부법",
+      "article": "제35조",
+      "text": "권한 없는 처리·승인받지 아니한 방식의 공동이용 등 금지행위 위반을 시정 대상으로 한다."
+     }
     ]
    },
    {
@@ -400,35 +550,220 @@
     "progress": 0,
     "actor": "개인정보보호위원회",
     "action": "감독·의견 제시",
-    "output_documents": ["개선 의견"],
+    "output_documents": [
+     "개선 의견"
+    ],
     "confidence": 0.75,
     "legal_basis": [
-     { "law": "전자정부법", "article": "제39조", "text": "공동이용하려는 행정정보가 개인정보파일인 경우 행정안전부장관은 개인정보 보호위원회의 심의·의결을 거쳐 공동이용을 승인하여야 한다.(제4항)" },
-     { "law": "개인정보 보호법", "article": "개인정보 보호 감독 관련 조문", "text": "개인정보보호위원회는 공동이용에 따른 개인정보 처리에 대해 감독·의견을 제시한다." }
+     {
+      "law": "전자정부법",
+      "article": "제39조",
+      "text": "공동이용하려는 행정정보가 개인정보파일인 경우 행정안전부장관은 개인정보 보호위원회의 심의·의결을 거쳐 공동이용을 승인하여야 한다.(제4항)"
+     },
+     {
+      "law": "개인정보 보호법",
+      "article": "개인정보 보호 감독 관련 조문",
+      "text": "개인정보보호위원회는 공동이용에 따른 개인정보 처리에 대해 감독·의견을 제시한다."
+     }
     ]
    }
   ],
   "edges": [
-   { "id": "E01", "source": "P01", "target": "P02", "type": "sequence", "label": null },
-   { "id": "E02", "source": "P02", "target": "P03", "type": "sequence", "label": null },
-   { "id": "E03", "source": "P03", "target": "P05", "type": "sequence", "label": "승인" },
-   { "id": "E04", "source": "P05", "target": "P06", "type": "sequence", "label": null },
-   { "id": "E05", "source": "P06", "target": "P07", "type": "sequence", "label": null },
-   { "id": "E06", "source": "P07", "target": "P08", "type": "sequence", "label": null },
-   { "id": "E07", "source": "P08", "target": "P10", "type": "sequence", "label": "동의" },
-   { "id": "E08", "source": "P10", "target": "P11", "type": "sequence", "label": null },
-   { "id": "E09", "source": "P11", "target": "P12", "type": "sequence", "label": null },
-   { "id": "E10", "source": "P12", "target": "P13", "type": "sequence", "label": null },
-   { "id": "E11", "source": "P13", "target": "P14", "type": "sequence", "label": null },
-   { "id": "E12", "source": "P14", "target": "P15", "type": "sequence", "label": null },
-   { "id": "E13", "source": "P15", "target": "P17", "type": "sequence", "label": null },
-   { "id": "M01", "source": "P03", "target": "P04", "type": "message", "label": "대상정보 제공 협의" },
-   { "id": "M02", "source": "P08", "target": "P09", "type": "message", "label": "동의 거부 시 종이서류 안내" },
-   { "id": "M03", "source": "P10", "target": "P11", "type": "message", "label": "보유정보 조회 응답" },
-   { "id": "M04", "source": "P15", "target": "P17", "type": "message", "label": "실태점검 결과 공유" },
-   { "id": "L01", "source": "P14", "target": "P16", "type": "loop", "label": "목적 외 이용 적발" },
-   { "id": "L02", "source": "P16", "target": "P06", "type": "loop", "label": "시정 후 접근권한 재설정" }
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P05",
+    "type": "sequence",
+    "label": "승인"
+   },
+   {
+    "id": "E04",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P08",
+    "target": "P10",
+    "type": "sequence",
+    "label": "동의"
+   },
+   {
+    "id": "E08",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P15",
+    "target": "P17",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P03",
+    "target": "P04",
+    "type": "message",
+    "label": "대상정보 제공 협의"
+   },
+   {
+    "id": "M02",
+    "source": "P08",
+    "target": "P09",
+    "type": "message",
+    "label": "동의 거부 시 종이서류 안내"
+   },
+   {
+    "id": "M03",
+    "source": "P10",
+    "target": "P11",
+    "type": "message",
+    "label": "보유정보 조회 응답"
+   },
+   {
+    "id": "M04",
+    "source": "P15",
+    "target": "P17",
+    "type": "message",
+    "label": "실태점검 결과 공유"
+   },
+   {
+    "id": "L01",
+    "source": "P14",
+    "target": "P16",
+    "type": "loop",
+    "label": "목적 외 이용 적발"
+   },
+   {
+    "id": "L02",
+    "source": "P16",
+    "target": "P06",
+    "type": "loop",
+    "label": "시정 후 접근권한 재설정"
+   }
   ],
   "warnings": []
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-10",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 4건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 34건 가운데 34건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "전자정부법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "전자정부법",
+    "lawId": "009199",
+    "mst": "268103",
+    "promulgatedOn": "2025-01-07",
+    "effectiveOn": "2025-07-08",
+    "officialUrl": "https://law.go.kr/법령/전자정부법"
+   },
+   {
+    "law": "전자정부법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "전자정부법 시행령",
+    "lawId": "009213",
+    "mst": "281535",
+    "promulgatedOn": "2025-12-30",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/전자정부법시행령"
+   },
+   {
+    "law": "개인정보 보호법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "개인정보 보호법",
+    "lawId": "011357",
+    "mst": "270351",
+    "promulgatedOn": "2025-04-01",
+    "effectiveOn": "2025-10-02",
+    "officialUrl": "https://law.go.kr/법령/개인정보보호법"
+   },
+   {
+    "law": "행정정보 공동이용 지침",
+    "kind": "행정규칙",
+    "sourceType": "admin-rule",
+    "officialName": "행정정보 공동이용 지침",
+    "adminRuleId": "33445",
+    "adminRuleSerial": "2100000257028",
+    "promulgatedOn": "2025-03-26",
+    "officialUrl": "https://law.go.kr/행정규칙/행정정보공동이용지침"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-10",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 32,
+   "explicitCitationEntries": 26,
+   "articleReferences": 34,
+   "verifiedReferences": 34,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
  }
 }

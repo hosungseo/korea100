@@ -27,9 +27,14 @@
     "kind": "대통령령"
    },
    {
-    "law": "지방공무원법·지방공무원 임용령",
+    "law": "지방공무원법",
     "articles": "지방공무원 공개경쟁·경력경쟁채용",
     "kind": "법률"
+   },
+   {
+    "law": "지방공무원 임용령",
+    "articles": "지방공무원 임용과 채용후보자 관리 절차",
+    "kind": "대통령령"
    }
   ],
   "authorities": [
@@ -119,7 +124,10 @@
     "progress": 100,
     "actor": "채용기관",
     "action": "소요 인원 산정",
-    "output_documents": ["결원 현황", "채용 소요"],
+    "output_documents": [
+     "결원 현황",
+     "채용 소요"
+    ],
     "blocker": null,
     "confidence": 0.85,
     "legal_basis": [
@@ -140,7 +148,9 @@
     "progress": 100,
     "actor": "인사혁신처",
     "action": "시험계획 공고",
-    "output_documents": ["시험 시행계획 공고"],
+    "output_documents": [
+     "시험 시행계획 공고"
+    ],
     "blocker": null,
     "confidence": 0.86,
     "legal_basis": [
@@ -161,8 +171,12 @@
     "progress": 100,
     "actor": "사이버국가고시센터",
     "action": "게시·접수 처리",
-    "input_documents": ["시험 시행계획 공고"],
-    "output_documents": ["온라인 접수내역"],
+    "input_documents": [
+     "시험 시행계획 공고"
+    ],
+    "output_documents": [
+     "온라인 접수내역"
+    ],
     "blocker": null,
     "confidence": 0.78,
     "legal_basis": [
@@ -183,7 +197,9 @@
     "progress": 100,
     "actor": "응시자",
     "action": "원서 접수",
-    "output_documents": ["응시원서"],
+    "output_documents": [
+     "응시원서"
+    ],
     "blocker": null,
     "confidence": 0.85,
     "legal_basis": [
@@ -204,8 +220,12 @@
     "progress": 100,
     "actor": "인사혁신처",
     "action": "자격 확인",
-    "input_documents": ["응시원서"],
-    "output_documents": ["응시자격 확인결과"],
+    "input_documents": [
+     "응시원서"
+    ],
+    "output_documents": [
+     "응시자격 확인결과"
+    ],
     "blocker": null,
     "confidence": 0.84,
     "legal_basis": [
@@ -226,7 +246,9 @@
     "progress": 100,
     "actor": "인사혁신처",
     "action": "필기시험 실시",
-    "output_documents": ["필기 채점자료"],
+    "output_documents": [
+     "필기 채점자료"
+    ],
     "blocker": null,
     "confidence": 0.85,
     "legal_basis": [
@@ -248,7 +270,9 @@
     "actor": "인사혁신처",
     "action": "합격자 결정",
     "condition": "필기 합격선 충족 여부",
-    "output_documents": ["필기 합격자 명단"],
+    "output_documents": [
+     "필기 합격자 명단"
+    ],
     "blocker": null,
     "confidence": 0.84,
     "legal_basis": [
@@ -269,8 +293,12 @@
     "progress": 50,
     "actor": "면접위원회",
     "action": "면접 실시",
-    "input_documents": ["필기 합격자 명단"],
-    "output_documents": ["면접 평정표"],
+    "input_documents": [
+     "필기 합격자 명단"
+    ],
+    "output_documents": [
+     "면접 평정표"
+    ],
     "deadline": "면접 시행기간",
     "blocker": "면접 진행 중(최종 미확정)",
     "confidence": 0.82,
@@ -292,8 +320,14 @@
     "progress": 0,
     "actor": "인사혁신처",
     "action": "최종결정·명부 등재",
-    "input_documents": ["면접 평정표", "필기 채점자료"],
-    "output_documents": ["최종 합격자 명단", "채용후보자 명부"],
+    "input_documents": [
+     "면접 평정표",
+     "필기 채점자료"
+    ],
+    "output_documents": [
+     "최종 합격자 명단",
+     "채용후보자 명부"
+    ],
     "blocker": "면접 미완료",
     "confidence": 0.83,
     "legal_basis": [
@@ -320,8 +354,12 @@
     "actor": "인사혁신처",
     "receiver": "채용·임용기관",
     "action": "임용 추천",
-    "input_documents": ["채용후보자 명부"],
-    "output_documents": ["임용추천서"],
+    "input_documents": [
+     "채용후보자 명부"
+    ],
+    "output_documents": [
+     "임용추천서"
+    ],
     "blocker": "명부 확정 전",
     "confidence": 0.82,
     "legal_basis": [
@@ -342,7 +380,10 @@
     "progress": 0,
     "actor": "관계기관",
     "action": "신원·결격 조회",
-    "output_documents": ["신원조회 회보", "결격사유 조회결과"],
+    "output_documents": [
+     "신원조회 회보",
+     "결격사유 조회결과"
+    ],
     "blocker": "추천 전",
     "confidence": 0.8,
     "legal_basis": [
@@ -363,8 +404,13 @@
     "progress": 0,
     "actor": "채용기관",
     "action": "임용 대기",
-    "input_documents": ["임용추천서", "신원조회 회보"],
-    "output_documents": ["임용대기자 관리"],
+    "input_documents": [
+     "임용추천서",
+     "신원조회 회보"
+    ],
+    "output_documents": [
+     "임용대기자 관리"
+    ],
     "deadline": "7·9급 채용후보자는 최종합격일부터 1년 경과 시 지체 없이 임용",
     "blocker": "채용규모 축소·정원 관리로 임용 적체 발생(운영 추정)",
     "confidence": 0.72,
@@ -391,8 +437,12 @@
     "progress": 0,
     "actor": "인사혁신처",
     "action": "차순위 재추천",
-    "input_documents": ["결격·포기 통보"],
-    "output_documents": ["차순위 임용추천서"],
+    "input_documents": [
+     "결격·포기 통보"
+    ],
+    "output_documents": [
+     "차순위 임용추천서"
+    ],
     "blocker": "결격·임용포기 시 조건부 회귀 단계",
     "confidence": 0.76,
     "legal_basis": [
@@ -413,7 +463,9 @@
     "progress": 0,
     "actor": "채용기관",
     "action": "시보 임용",
-    "output_documents": ["시보임용장"],
+    "output_documents": [
+     "시보임용장"
+    ],
     "blocker": "임용대기 해소 전",
     "confidence": 0.81,
     "legal_basis": [
@@ -434,7 +486,9 @@
     "progress": 0,
     "actor": "채용기관",
     "action": "정규 임용",
-    "output_documents": ["임용장"],
+    "output_documents": [
+     "임용장"
+    ],
     "blocker": "시보기간 미경과",
     "confidence": 0.83,
     "legal_basis": [
@@ -455,8 +509,12 @@
     "progress": 0,
     "actor": "응시자(최종합격자)",
     "action": "채용후보자 등록",
-    "input_documents": ["최종 합격자 명단"],
-    "output_documents": ["채용후보자 등록내역"],
+    "input_documents": [
+     "최종 합격자 명단"
+    ],
+    "output_documents": [
+     "채용후보자 등록내역"
+    ],
     "blocker": "최종 합격 확정 전",
     "confidence": 0.8,
     "legal_basis": [
@@ -469,25 +527,206 @@
    }
   ],
   "edges": [
-   { "id": "E01", "source": "P01", "target": "P02", "type": "sequence", "label": null },
-   { "id": "E02", "source": "P02", "target": "P03", "type": "sequence", "label": null },
-   { "id": "E03", "source": "P03", "target": "P04", "type": "sequence", "label": null },
-   { "id": "E04", "source": "P04", "target": "P05", "type": "sequence", "label": null },
-   { "id": "E05", "source": "P05", "target": "P06", "type": "sequence", "label": null },
-   { "id": "E06", "source": "P06", "target": "P07", "type": "sequence", "label": null },
-   { "id": "E07", "source": "P07", "target": "P08", "type": "sequence", "label": null },
-   { "id": "E08", "source": "P08", "target": "P15", "type": "sequence", "label": null },
-   { "id": "E13", "source": "P15", "target": "P09", "type": "sequence", "label": null },
-   { "id": "E09", "source": "P09", "target": "P10", "type": "sequence", "label": null },
-   { "id": "E10", "source": "P10", "target": "P11", "type": "sequence", "label": null },
-   { "id": "E11", "source": "P11", "target": "P13", "type": "sequence", "label": null },
-   { "id": "E12", "source": "P13", "target": "P14", "type": "sequence", "label": null },
-   { "id": "M01", "source": "P02", "target": "S01", "type": "message", "label": "공고 게시" },
-   { "id": "M02", "source": "S01", "target": "P03", "type": "message", "label": "온라인 원서접수" },
-   { "id": "M03", "source": "P06", "target": "P07", "type": "message", "label": "필기합격 통지" },
-   { "id": "L01", "source": "P10", "target": "P12", "type": "loop", "label": "결격·임용포기 시 재추천" },
-   { "id": "L02", "source": "P12", "target": "P09", "type": "loop", "label": "차순위자 임용추천 회귀" }
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P15",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P11",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P02",
+    "target": "S01",
+    "type": "message",
+    "label": "공고 게시"
+   },
+   {
+    "id": "M02",
+    "source": "S01",
+    "target": "P03",
+    "type": "message",
+    "label": "온라인 원서접수"
+   },
+   {
+    "id": "M03",
+    "source": "P06",
+    "target": "P07",
+    "type": "message",
+    "label": "필기합격 통지"
+   },
+   {
+    "id": "L01",
+    "source": "P10",
+    "target": "P12",
+    "type": "loop",
+    "label": "결격·임용포기 시 재추천"
+   },
+   {
+    "id": "L02",
+    "source": "P12",
+    "target": "P09",
+    "type": "loop",
+    "label": "차순위자 임용추천 회귀"
+   }
   ],
   "warnings": []
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-10",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 5건 중 공식 원문 5건을 연결했다. 캔버스와 절차 노드의 명시 조문 29건 가운데 29건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "국가공무원법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국가공무원법",
+    "lawId": "001719",
+    "mst": "286457",
+    "promulgatedOn": "2026-06-02",
+    "effectiveOn": "2026-06-02",
+    "officialUrl": "https://law.go.kr/법령/국가공무원법"
+   },
+   {
+    "law": "공무원임용시험령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "공무원임용시험령",
+    "lawId": "002317",
+    "mst": "287531",
+    "promulgatedOn": "2026-06-30",
+    "effectiveOn": "2026-06-30",
+    "officialUrl": "https://law.go.kr/법령/공무원임용시험령"
+   },
+   {
+    "law": "공무원임용령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "공무원임용령",
+    "lawId": "002315",
+    "mst": "285403",
+    "promulgatedOn": "2026-04-07",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/공무원임용령"
+   },
+   {
+    "law": "지방공무원법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "지방공무원법",
+    "lawId": "001653",
+    "mst": "286499",
+    "promulgatedOn": "2026-06-02",
+    "effectiveOn": "2026-06-02",
+    "officialUrl": "https://law.go.kr/법령/지방공무원법"
+   },
+   {
+    "law": "지방공무원 임용령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "지방공무원 임용령",
+    "lawId": "005050",
+    "mst": "287515",
+    "promulgatedOn": "2026-06-30",
+    "effectiveOn": "2026-06-30",
+    "officialUrl": "https://law.go.kr/법령/지방공무원임용령"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-10",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 23,
+   "explicitCitationEntries": 21,
+   "articleReferences": 29,
+   "verifiedReferences": 29,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
  }
 }

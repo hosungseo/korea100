@@ -126,11 +126,17 @@
     "actor": "토지소유자·개발사업자",
     "action": "대상 확인",
     "condition": "건축·형질변경·토석채취·토지분할·물건적치 해당 여부",
-    "output_documents": ["대상 검토표"],
+    "output_documents": [
+     "대상 검토표"
+    ],
     "deadline": "내부 목표 7일",
     "confidence": 0.88,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제56조(개발행위의 허가)", "text": "건축물 건축, 토지 형질변경 등 개발행위는 허가를 받아야 함을 확인한다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제56조(개발행위의 허가)",
+      "text": "건축물 건축, 토지 형질변경 등 개발행위는 허가를 받아야 함을 확인한다."
+     }
     ]
    },
    {
@@ -144,12 +150,24 @@
     "actor": "신청인",
     "receiver": "허가청(시장·군수·구청장)",
     "action": "신청",
-    "output_documents": ["개발행위허가 신청서", "설계도서", "피해방지계획"],
+    "output_documents": [
+     "개발행위허가 신청서",
+     "설계도서",
+     "피해방지계획"
+    ],
     "deadline": "내부 목표 14일",
     "confidence": 0.87,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제57조(개발행위허가의 절차)", "text": "개발행위를 하려는 자는 설계도서 등을 갖추어 허가를 신청한다."},
-     {"law": "국토의 계획 및 이용에 관한 법률 시행규칙", "article": "제9조(개발행위허가신청서)", "text": "별지 제5호서식 신청서에 토지 사용권원, 배치도·설계도서, 공공시설 조서, 위해방지·환경오염방지 설계도서 등을 첨부하여 제출한다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제57조(개발행위허가의 절차)",
+      "text": "개발행위를 하려는 자는 설계도서 등을 갖추어 허가를 신청한다."
+     },
+     {
+      "law": "국토의 계획 및 이용에 관한 법률 시행규칙",
+      "article": "제9조(개발행위허가신청서)",
+      "text": "별지 제5호서식 신청서에 토지 사용권원, 배치도·설계도서, 공공시설 조서, 위해방지·환경오염방지 설계도서 등을 첨부하여 제출한다."
+     }
     ]
    },
    {
@@ -162,11 +180,21 @@
     "progress": 100,
     "actor": "시장·군수·구청장",
     "action": "접수·형식검토",
-    "input_documents": ["개발행위허가 신청서", "설계도서"],
-    "output_documents": ["접수증", "형식검토 결과"],
+    "input_documents": [
+     "개발행위허가 신청서",
+     "설계도서"
+    ],
+    "output_documents": [
+     "접수증",
+     "형식검토 결과"
+    ],
     "confidence": 0.85,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제57조(개발행위허가의 절차)", "text": "허가권자는 신청 내용의 적정성을 검토한다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제57조(개발행위허가의 절차)",
+      "text": "허가권자는 신청 내용의 적정성을 검토한다."
+     }
     ]
    },
    {
@@ -180,10 +208,16 @@
     "actor": "시장·군수·구청장",
     "receiver": "관계 행정기관",
     "action": "협의 요청",
-    "output_documents": ["의제 협의 요청 공문"],
+    "output_documents": [
+     "의제 협의 요청 공문"
+    ],
     "confidence": 0.84,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제61조(관련 인·허가등의 의제)", "text": "허가에 관하여 관계 행정기관의 장과 협의한 사항은 관련 인허가를 받은 것으로 본다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제61조(관련 인·허가등의 의제)",
+      "text": "허가에 관하여 관계 행정기관의 장과 협의한 사항은 관련 인허가를 받은 것으로 본다."
+     }
     ]
    },
    {
@@ -197,13 +231,23 @@
     "actor": "관계 행정기관",
     "receiver": "허가청(시장·군수·구청장)",
     "action": "협의 회신",
-    "input_documents": ["의제 협의 요청 공문", "설계도서"],
-    "output_documents": ["농지·산지 전용 협의 회신", "환경·도로 협의 회신"],
+    "input_documents": [
+     "의제 협의 요청 공문",
+     "설계도서"
+    ],
+    "output_documents": [
+     "농지·산지 전용 협의 회신",
+     "환경·도로 협의 회신"
+    ],
     "deadline": "협의 요청 후 20일(연장 가능)",
     "blocker": "농지전용·산지전용 협의 회신 지연으로 검토 대기",
     "confidence": 0.79,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제61조(관련 인·허가등의 의제)", "text": "관계 행정기관의 장은 협의 요청을 받으면 의견을 회신한다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제61조(관련 인·허가등의 의제)",
+      "text": "관계 행정기관의 장은 협의 요청을 받으면 의견을 회신한다."
+     }
     ]
    },
    {
@@ -216,14 +260,31 @@
     "progress": 55,
     "actor": "시장·군수·구청장",
     "action": "허가기준 검토",
-    "input_documents": ["설계도서", "협의 회신"],
-    "output_documents": ["허가기준 검토서"],
+    "input_documents": [
+     "설계도서",
+     "협의 회신"
+    ],
+    "output_documents": [
+     "허가기준 검토서"
+    ],
     "blocker": "경사도·연접개발 기준 적합성 추가 확인 중",
     "confidence": 0.82,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제58조(개발행위허가의 기준)", "text": "용도지역별 특성, 주변 환경·경관과의 조화, 기반시설 등을 기준으로 검토한다."},
-     {"law": "국토의 계획 및 이용에 관한 법률 시행령", "article": "제55조(개발행위허가의 규모)", "text": "형질변경 면적 상한(주거·상업·자연녹지 1만㎡ 미만, 공업 3만㎡ 미만, 보전녹지 5천㎡ 미만, 관리·농림 3만㎡ 미만 등)을 용도지역별로 정한다."},
-     {"law": "국토의 계획 및 이용에 관한 법률 시행령", "article": "제56조(개발행위허가의 기준)", "text": "허가기준은 별표 1의2와 같으며, 국토교통부장관은 세부 검토기준을 정할 수 있다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제58조(개발행위허가의 기준)",
+      "text": "용도지역별 특성, 주변 환경·경관과의 조화, 기반시설 등을 기준으로 검토한다."
+     },
+     {
+      "law": "국토의 계획 및 이용에 관한 법률 시행령",
+      "article": "제55조(개발행위허가의 규모)",
+      "text": "형질변경 면적 상한(주거·상업·자연녹지 1만㎡ 미만, 공업 3만㎡ 미만, 보전녹지 5천㎡ 미만, 관리·농림 3만㎡ 미만 등)을 용도지역별로 정한다."
+     },
+     {
+      "law": "국토의 계획 및 이용에 관한 법률 시행령",
+      "article": "제56조(개발행위허가의 기준)",
+      "text": "허가기준은 별표 1의2와 같으며, 국토교통부장관은 세부 검토기준을 정할 수 있다."
+     }
     ]
    },
    {
@@ -237,11 +298,21 @@
     "actor": "시장·군수·구청장",
     "action": "심의대상 판정",
     "condition": "일정 규모 이상 개발행위의 위원회 심의 대상 여부",
-    "output_documents": ["심의대상 판정서"],
+    "output_documents": [
+     "심의대상 판정서"
+    ],
     "confidence": 0.83,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제59조(개발행위에 대한 도시계획위원회의 심의)", "text": "대통령령으로 정하는 개발행위는 도시계획위원회의 심의를 거친다."},
-     {"law": "국토의 계획 및 이용에 관한 법률 시행령", "article": "제57조(개발행위에 대한 도시계획위원회의 심의 등)", "text": "심의 대상은 규모별로 나뉘어 면적 30만㎡ 미만은 시·군·구, 30만㎡ 이상 1㎢ 미만은 시·도, 1㎢ 이상은 중앙도시계획위원회 심의를 거친다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제59조(개발행위에 대한 도시계획위원회의 심의)",
+      "text": "대통령령으로 정하는 개발행위는 도시계획위원회의 심의를 거친다."
+     },
+     {
+      "law": "국토의 계획 및 이용에 관한 법률 시행령",
+      "article": "제57조(개발행위에 대한 도시계획위원회의 심의 등)",
+      "text": "심의 대상은 규모별로 나뉘어 면적 30만㎡ 미만은 시·군·구, 30만㎡ 이상 1㎢ 미만은 시·도, 1㎢ 이상은 중앙도시계획위원회 심의를 거친다."
+     }
     ]
    },
    {
@@ -254,11 +325,20 @@
     "progress": 0,
     "actor": "지방도시계획위원회",
     "action": "심의",
-    "input_documents": ["허가기준 검토서", "심의자료"],
-    "output_documents": ["심의 결과"],
+    "input_documents": [
+     "허가기준 검토서",
+     "심의자료"
+    ],
+    "output_documents": [
+     "심의 결과"
+    ],
     "confidence": 0.83,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제59조(개발행위에 대한 도시계획위원회의 심의)", "text": "심의 대상 개발행위는 위원회 심의를 거쳐 허가 여부를 결정한다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제59조(개발행위에 대한 도시계획위원회의 심의)",
+      "text": "심의 대상 개발행위는 위원회 심의를 거쳐 허가 여부를 결정한다."
+     }
     ]
    },
    {
@@ -272,11 +352,17 @@
     "actor": "시장·군수·구청장",
     "receiver": "신청인(토지소유자·개발사업자)",
     "action": "보완 요구",
-    "output_documents": ["보완 요구서"],
+    "output_documents": [
+     "보완 요구서"
+    ],
     "blocker": "보완 회귀 단계",
     "confidence": 0.78,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제57조(개발행위허가의 절차)", "text": "허가권자는 신청 내용의 보완을 요구할 수 있다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제57조(개발행위허가의 절차)",
+      "text": "허가권자는 신청 내용의 보완을 요구할 수 있다."
+     }
     ]
    },
    {
@@ -290,12 +376,21 @@
     "actor": "신청인",
     "receiver": "허가청(시장·군수·구청장)",
     "action": "보완 제출",
-    "input_documents": ["보완 요구서"],
-    "output_documents": ["보완서", "보완 설계도서"],
+    "input_documents": [
+     "보완 요구서"
+    ],
+    "output_documents": [
+     "보완서",
+     "보완 설계도서"
+    ],
     "blocker": "보완 회귀 단계",
     "confidence": 0.78,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제57조(개발행위허가의 절차)", "text": "신청인은 보완 요구에 따라 자료를 보완하여 재제출한다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제57조(개발행위허가의 절차)",
+      "text": "신청인은 보완 요구에 따라 자료를 보완하여 재제출한다."
+     }
     ]
    },
    {
@@ -308,12 +403,25 @@
     "progress": 0,
     "actor": "시장·군수·구청장",
     "action": "허가·조건 부과",
-    "input_documents": ["심의 결과", "허가기준 검토서"],
-    "output_documents": ["개발행위허가서(조건부)"],
+    "input_documents": [
+     "심의 결과",
+     "허가기준 검토서"
+    ],
+    "output_documents": [
+     "개발행위허가서(조건부)"
+    ],
     "confidence": 0.85,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제57조(개발행위허가의 절차)", "text": "허가에 조건을 붙일 수 있다."},
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제58조(개발행위허가의 기준)", "text": "허가기준 충족 여부에 따라 허가한다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제57조(개발행위허가의 절차)",
+      "text": "허가에 조건을 붙일 수 있다."
+     },
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제58조(개발행위허가의 기준)",
+      "text": "허가기준 충족 여부에 따라 허가한다."
+     }
     ]
    },
    {
@@ -326,11 +434,21 @@
     "progress": 0,
     "actor": "신청인",
     "action": "이행보증금 예치",
-    "output_documents": ["이행보증금 예치증서"],
+    "output_documents": [
+     "이행보증금 예치증서"
+    ],
     "confidence": 0.82,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제60조(개발행위허가의 이행 보증 등)", "text": "기반시설 훼손 방지 등을 위해 이행보증금을 예치하게 할 수 있다."},
-     {"law": "국토의 계획 및 이용에 관한 법률 시행령", "article": "제59조(개발행위허가의 이행담보 등)", "text": "이행보증금은 총공사비의 20% 이내로 산정해 현금·보증서로 예치하며, 준공검사를 받으면 즉시 반환한다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제60조(개발행위허가의 이행 보증 등)",
+      "text": "기반시설 훼손 방지 등을 위해 이행보증금을 예치하게 할 수 있다."
+     },
+     {
+      "law": "국토의 계획 및 이용에 관한 법률 시행령",
+      "article": "제59조(개발행위허가의 이행담보 등)",
+      "text": "이행보증금은 총공사비의 20% 이내로 산정해 현금·보증서로 예치하며, 준공검사를 받으면 즉시 반환한다."
+     }
     ]
    },
    {
@@ -343,11 +461,19 @@
     "progress": 0,
     "actor": "신청인",
     "action": "공사 시행",
-    "input_documents": ["개발행위허가서(조건부)"],
-    "output_documents": ["공사 착수·시행"],
+    "input_documents": [
+     "개발행위허가서(조건부)"
+    ],
+    "output_documents": [
+     "공사 착수·시행"
+    ],
     "confidence": 0.8,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제56조(개발행위의 허가)", "text": "허가받은 내용에 따라 개발행위를 시행한다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제56조(개발행위의 허가)",
+      "text": "허가받은 내용에 따라 개발행위를 시행한다."
+     }
     ]
    },
    {
@@ -361,10 +487,16 @@
     "actor": "신청인",
     "receiver": "허가청(시장·군수·구청장)",
     "action": "준공검사 신청",
-    "output_documents": ["준공검사 신청서"],
+    "output_documents": [
+     "준공검사 신청서"
+    ],
     "confidence": 0.82,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제62조(준공검사)", "text": "개발행위를 완료하면 준공검사를 받아야 한다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제62조(준공검사)",
+      "text": "개발행위를 완료하면 준공검사를 받아야 한다."
+     }
     ]
    },
    {
@@ -377,11 +509,20 @@
     "progress": 0,
     "actor": "시장·군수·구청장",
     "action": "준공검사",
-    "input_documents": ["준공검사 신청서"],
-    "output_documents": ["준공검사조서", "준공검사필증"],
+    "input_documents": [
+     "준공검사 신청서"
+    ],
+    "output_documents": [
+     "준공검사조서",
+     "준공검사필증"
+    ],
     "confidence": 0.83,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제62조(준공검사)", "text": "허가권자는 준공검사를 실시하고 적합하면 준공검사필증을 교부한다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제62조(준공검사)",
+      "text": "허가권자는 준공검사를 실시하고 적합하면 준공검사필증을 교부한다."
+     }
     ]
    },
    {
@@ -394,11 +535,19 @@
     "progress": 0,
     "actor": "공공시설 관리청",
     "action": "귀속 처리",
-    "input_documents": ["준공검사조서"],
-    "output_documents": ["공공시설 귀속조서"],
+    "input_documents": [
+     "준공검사조서"
+    ],
+    "output_documents": [
+     "공공시설 귀속조서"
+    ],
     "confidence": 0.8,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제65조(개발행위에 따른 공공시설 등의 귀속)", "text": "개발행위로 설치된 공공시설은 그 시설을 관리할 관리청에 무상 귀속된다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제65조(개발행위에 따른 공공시설 등의 귀속)",
+      "text": "개발행위로 설치된 공공시설은 그 시설을 관리할 관리청에 무상 귀속된다."
+     }
     ]
    },
    {
@@ -411,35 +560,228 @@
     "progress": 0,
     "actor": "지자체 인허가시스템·토지이음",
     "action": "기록·공개",
-    "input_documents": ["개발행위허가서(조건부)"],
-    "output_documents": ["허가 기록", "토지이음 공개자료"],
+    "input_documents": [
+     "개발행위허가서(조건부)"
+    ],
+    "output_documents": [
+     "허가 기록",
+     "토지이음 공개자료"
+    ],
     "confidence": 0.75,
     "legal_basis": [
-     {"law": "국토의 계획 및 이용에 관한 법률", "article": "제57조(개발행위허가의 절차)", "text": "허가 내용을 인허가시스템 및 국토이용정보체계에 기록·공개한다."}
+     {
+      "law": "국토의 계획 및 이용에 관한 법률",
+      "article": "제57조(개발행위허가의 절차)",
+      "text": "허가 내용을 인허가시스템 및 국토이용정보체계에 기록·공개한다."
+     }
     ]
    }
   ],
   "edges": [
-   {"id": "E01", "source": "D01", "target": "D02", "type": "sequence", "label": null},
-   {"id": "E02", "source": "D02", "target": "D03", "type": "sequence", "label": null},
-   {"id": "E03", "source": "D03", "target": "D04", "type": "sequence", "label": null},
-   {"id": "E04", "source": "D04", "target": "D05", "type": "sequence", "label": null},
-   {"id": "E05", "source": "D05", "target": "D06", "type": "sequence", "label": null},
-   {"id": "E06", "source": "D06", "target": "D07", "type": "sequence", "label": null},
-   {"id": "E07", "source": "D07", "target": "D08", "type": "sequence", "label": null},
-   {"id": "E08", "source": "D08", "target": "D11", "type": "sequence", "label": null},
-   {"id": "E09", "source": "D11", "target": "D12", "type": "sequence", "label": null},
-   {"id": "E10", "source": "D12", "target": "D13", "type": "sequence", "label": null},
-   {"id": "E11", "source": "D13", "target": "D14", "type": "sequence", "label": null},
-   {"id": "E12", "source": "D14", "target": "D15", "type": "sequence", "label": null},
-   {"id": "E13", "source": "D15", "target": "D16", "type": "sequence", "label": null},
-   {"id": "M01", "source": "D04", "target": "D05", "type": "message", "label": "의제 협의 요청"},
-   {"id": "M02", "source": "D07", "target": "D08", "type": "message", "label": "심의 상정"},
-   {"id": "M03", "source": "D11", "target": "D17", "type": "message", "label": "허가내용 등재"},
-   {"id": "M04", "source": "D09", "target": "D10", "type": "message", "label": "보완 요구서 통지"},
-   {"id": "L01", "source": "D06", "target": "D09", "type": "loop", "label": "보완 필요"},
-   {"id": "L02", "source": "D10", "target": "D06", "type": "loop", "label": "보완서 재검토"}
+   {
+    "id": "E01",
+    "source": "D01",
+    "target": "D02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "D02",
+    "target": "D03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "D03",
+    "target": "D04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "D04",
+    "target": "D05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "D05",
+    "target": "D06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "D06",
+    "target": "D07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "D07",
+    "target": "D08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "D08",
+    "target": "D11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "D11",
+    "target": "D12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "D12",
+    "target": "D13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "D13",
+    "target": "D14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "D14",
+    "target": "D15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "D15",
+    "target": "D16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "D04",
+    "target": "D05",
+    "type": "message",
+    "label": "의제 협의 요청"
+   },
+   {
+    "id": "M02",
+    "source": "D07",
+    "target": "D08",
+    "type": "message",
+    "label": "심의 상정"
+   },
+   {
+    "id": "M03",
+    "source": "D11",
+    "target": "D17",
+    "type": "message",
+    "label": "허가내용 등재"
+   },
+   {
+    "id": "M04",
+    "source": "D09",
+    "target": "D10",
+    "type": "message",
+    "label": "보완 요구서 통지"
+   },
+   {
+    "id": "L01",
+    "source": "D06",
+    "target": "D09",
+    "type": "loop",
+    "label": "보완 필요"
+   },
+   {
+    "id": "L02",
+    "source": "D10",
+    "target": "D06",
+    "type": "loop",
+    "label": "보완서 재검토"
+   }
   ],
   "warnings": []
+ },
+ "verification": {
+  "status": "needs-review",
+  "verifiedAt": "2026-07-10",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 5건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 36건 가운데 36건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "국토의 계획 및 이용에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국토의 계획 및 이용에 관한 법률",
+    "lawId": "009294",
+    "mst": "284013",
+    "promulgatedOn": "2026-03-05",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/국토의계획및이용에관한법률"
+   },
+   {
+    "law": "국토의 계획 및 이용에 관한 법률 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "국토의 계획 및 이용에 관한 법률 시행령",
+    "lawId": "009419",
+    "mst": "287269",
+    "promulgatedOn": "2026-06-23",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/국토의계획및이용에관한법률시행령"
+   },
+   {
+    "law": "국토의 계획 및 이용에 관한 법률 시행규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "국토의 계획 및 이용에 관한 법률 시행규칙",
+    "lawId": "009469",
+    "mst": "284531",
+    "promulgatedOn": "2026-03-12",
+    "effectiveOn": "2026-03-12",
+    "officialUrl": "https://law.go.kr/법령/국토의계획및이용에관한법률시행규칙"
+   },
+   {
+    "law": "개발행위허가운영지침",
+    "kind": "행정규칙",
+    "sourceType": "admin-rule",
+    "officialName": "개발행위허가운영지침",
+    "adminRuleId": "33392",
+    "adminRuleSerial": "2100000199565",
+    "promulgatedOn": "2021-03-31",
+    "officialUrl": "https://law.go.kr/행정규칙/개발행위허가운영지침"
+   }
+  ],
+  "unresolved": [
+   {
+    "law": "도시·군계획조례",
+    "kind": "조례",
+    "reasonCode": "local-scope",
+    "reason": "적용 지역이 특정되지 않아 단일 자치법규 원문을 확정할 수 없음",
+    "nextStep": "적용할 시·도 또는 시·군·구를 지정한 뒤 해당 자치법규를 연결해야 한다."
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-10",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 28,
+   "explicitCitationEntries": 26,
+   "articleReferences": 36,
+   "verifiedReferences": 36,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
  }
 }

@@ -32,8 +32,13 @@
     "kind": "부령"
    },
    {
-    "law": "민법·상법 등 실체법",
-    "articles": "계약·의사표시(전자적 방식의 성립)",
+    "law": "민법",
+    "articles": "계약·의사표시의 성립과 효력",
+    "kind": "법률"
+   },
+   {
+    "law": "상법",
+    "articles": "상행위와 전자적 의사표시의 실체법적 효력",
     "kind": "법률"
    }
   ],
@@ -126,10 +131,16 @@
     "progress": 100,
     "actor": "작성자",
     "action": "전자문서 작성",
-    "output_documents": ["전자문서"],
+    "output_documents": [
+     "전자문서"
+    ],
     "confidence": 0.85,
     "legal_basis": [
-     { "law": "전자문서 및 전자거래 기본법", "article": "제4조", "text": "전자문서는 다른 법률에 특별한 규정이 없으면 문서로서의 효력을 가진다." }
+     {
+      "law": "전자문서 및 전자거래 기본법",
+      "article": "제4조",
+      "text": "전자문서는 다른 법률에 특별한 규정이 없으면 문서로서의 효력을 가진다."
+     }
     ]
    },
    {
@@ -142,10 +153,16 @@
     "progress": 100,
     "actor": "작성자",
     "action": "전자화 변환",
-    "output_documents": ["전자화문서"],
+    "output_documents": [
+     "전자화문서"
+    ],
     "confidence": 0.8,
     "legal_basis": [
-     { "law": "전자문서 및 전자거래 기본법", "article": "제4조의2", "text": "종이문서를 전자화문서로 변환하여 보관·이용할 수 있다." }
+     {
+      "law": "전자문서 및 전자거래 기본법",
+      "article": "제4조의2",
+      "text": "종이문서를 전자화문서로 변환하여 보관·이용할 수 있다."
+     }
     ]
    },
    {
@@ -159,10 +176,16 @@
     "actor": "작성자",
     "action": "서명수단 선택",
     "condition": "공동인증서·금융인증·간편인증 등 수단 선택",
-    "output_documents": ["서명수단 선택 결과"],
+    "output_documents": [
+     "서명수단 선택 결과"
+    ],
     "confidence": 0.83,
     "legal_basis": [
-     { "law": "전자서명법", "article": "제3조", "text": "전자서명은 서명·서명날인·기명날인으로서의 효력을 가지며 당사자가 수단을 선택할 수 있다." }
+     {
+      "law": "전자서명법",
+      "article": "제3조",
+      "text": "전자서명은 서명·서명날인·기명날인으로서의 효력을 가지며 당사자가 수단을 선택할 수 있다."
+     }
     ]
    },
    {
@@ -175,13 +198,27 @@
     "progress": 100,
     "actor": "평가기관",
     "action": "운영기준 평가",
-    "output_documents": ["평가 결과서"],
+    "output_documents": [
+     "평가 결과서"
+    ],
     "deadline": "평가 신청일부터 180일 이내(시행령 제6조④, 1회 연장 가능)",
     "confidence": 0.8,
     "legal_basis": [
-     { "law": "전자서명법", "article": "제10조", "text": "평가기관은 평가를 신청한 전자서명인증사업자의 운영기준 준수 여부를 평가하고 그 결과를 인정기관에 제출한다." },
-     { "law": "전자서명법 시행령", "article": "제5조", "text": "평가기관의 선정기준·절차를 정하며, 평가항목·평가방법 등 세부사항은 과학기술정보통신부령으로 정한다." },
-     { "law": "전자서명법 시행령", "article": "제6조", "text": "평가기관은 세부 평가기준·수행지침에 따라 평가하고, 신청받은 날부터 180일 이내에 평가를 마쳐야 한다." }
+     {
+      "law": "전자서명법",
+      "article": "제10조",
+      "text": "평가기관은 평가를 신청한 전자서명인증사업자의 운영기준 준수 여부를 평가하고 그 결과를 인정기관에 제출한다."
+     },
+     {
+      "law": "전자서명법 시행령",
+      "article": "제5조",
+      "text": "평가기관의 선정기준·절차를 정하며, 평가항목·평가방법 등 세부사항은 과학기술정보통신부령으로 정한다."
+     },
+     {
+      "law": "전자서명법 시행령",
+      "article": "제6조",
+      "text": "평가기관은 세부 평가기준·수행지침에 따라 평가하고, 신청받은 날부터 180일 이내에 평가를 마쳐야 한다."
+     }
     ]
    },
    {
@@ -195,11 +232,21 @@
     "actor": "인정기관·과학기술정보통신부",
     "action": "준수사실 인정",
     "condition": "운영기준 준수 여부",
-    "output_documents": ["운영기준 준수사실 인정"],
+    "output_documents": [
+     "운영기준 준수사실 인정"
+    ],
     "confidence": 0.79,
     "legal_basis": [
-     { "law": "전자서명법", "article": "제9조", "text": "인정기관(한국인터넷진흥원)은 평가 결과와 자격을 확인하여 운영기준 준수사실의 인정 여부를 결정하고 증명서를 발급한다." },
-     { "law": "전자서명법 시행령", "article": "제4조", "text": "운영기준 준수사실 인정의 유효기간은 인정을 받은 날부터 1년으로 한다." }
+     {
+      "law": "전자서명법",
+      "article": "제9조",
+      "text": "인정기관(한국인터넷진흥원)은 평가 결과와 자격을 확인하여 운영기준 준수사실의 인정 여부를 결정하고 증명서를 발급한다."
+     },
+     {
+      "law": "전자서명법 시행령",
+      "article": "제4조",
+      "text": "운영기준 준수사실 인정의 유효기간은 인정을 받은 날부터 1년으로 한다."
+     }
     ]
    },
    {
@@ -212,10 +259,16 @@
     "progress": 100,
     "actor": "전자서명인증사업자",
     "action": "인증서 발급",
-    "output_documents": ["전자서명 인증서"],
+    "output_documents": [
+     "전자서명 인증서"
+    ],
     "confidence": 0.8,
     "legal_basis": [
-     { "law": "전자서명법", "article": "제7조", "text": "운영기준을 준수하는 인증사업자가 본인확인 후 인증서를 발급한다." }
+     {
+      "law": "전자서명법",
+      "article": "제7조",
+      "text": "운영기준을 준수하는 인증사업자가 본인확인 후 인증서를 발급한다."
+     }
     ]
    },
    {
@@ -228,11 +281,17 @@
     "progress": 50,
     "actor": "전자서명 시스템",
     "action": "전자서명 생성",
-    "output_documents": ["전자서명값"],
+    "output_documents": [
+     "전자서명값"
+    ],
     "blocker": "본인확인·서명값 생성 진행 중",
     "confidence": 0.82,
     "legal_basis": [
-     { "law": "전자서명법", "article": "제3조", "text": "본인확인을 거쳐 전자문서에 전자서명을 생성한다." }
+     {
+      "law": "전자서명법",
+      "article": "제3조",
+      "text": "본인확인을 거쳐 전자문서에 전자서명을 생성한다."
+     }
     ]
    },
    {
@@ -246,11 +305,20 @@
     "actor": "작성자",
     "receiver": "수신자/거래상대방",
     "action": "제출·전송",
-    "input_documents": ["전자문서", "전자서명값"],
-    "output_documents": ["전송 완료"],
+    "input_documents": [
+     "전자문서",
+     "전자서명값"
+    ],
+    "output_documents": [
+     "전송 완료"
+    ],
     "confidence": 0.8,
     "legal_basis": [
-     { "law": "전자문서 및 전자거래 기본법", "article": "제4조", "text": "전자문서를 상대방·기관에 제출·전송한다." }
+     {
+      "law": "전자문서 및 전자거래 기본법",
+      "article": "제4조",
+      "text": "전자문서를 상대방·기관에 제출·전송한다."
+     }
     ]
    },
    {
@@ -264,10 +332,16 @@
     "actor": "수신자",
     "action": "서명 검증",
     "condition": "작성자 확인·위변조 여부",
-    "output_documents": ["검증 결과"],
+    "output_documents": [
+     "검증 결과"
+    ],
     "confidence": 0.8,
     "legal_basis": [
-     { "law": "전자서명법", "article": "제3조", "text": "수신자는 전자서명으로 작성자와 위변조 여부를 확인한다." }
+     {
+      "law": "전자서명법",
+      "article": "제3조",
+      "text": "수신자는 전자서명으로 작성자와 위변조 여부를 확인한다."
+     }
     ]
    },
    {
@@ -280,11 +354,21 @@
     "progress": 0,
     "actor": "검증 시스템",
     "action": "검증정보 확인",
-    "output_documents": ["무결성 검증 결과"],
+    "output_documents": [
+     "무결성 검증 결과"
+    ],
     "confidence": 0.78,
     "legal_basis": [
-     { "law": "전자서명법", "article": "제3조", "text": "전자서명 검증정보로 무결성과 작성자를 확인한다." },
-     { "law": "전자서명법", "article": "제7조", "text": "검증 등 전자서명인증서비스의 절차는 과학기술정보통신부장관이 고시하는 운영기준을 따른다." }
+     {
+      "law": "전자서명법",
+      "article": "제3조",
+      "text": "전자서명 검증정보로 무결성과 작성자를 확인한다."
+     },
+     {
+      "law": "전자서명법",
+      "article": "제7조",
+      "text": "검증 등 전자서명인증서비스의 절차는 과학기술정보통신부장관이 고시하는 운영기준을 따른다."
+     }
     ]
    },
    {
@@ -297,10 +381,16 @@
     "progress": 0,
     "actor": "공인전자문서중계자",
     "action": "진본성·시점 확인",
-    "output_documents": ["시점확인 정보"],
+    "output_documents": [
+     "시점확인 정보"
+    ],
     "confidence": 0.75,
     "legal_basis": [
-     { "law": "전자문서 및 전자거래 기본법", "article": "제31조의2", "text": "공인전자문서중계자는 전자문서의 송수신 시점 등을 확인하여 공신력을 부여한다." }
+     {
+      "law": "전자문서 및 전자거래 기본법",
+      "article": "제31조의2",
+      "text": "공인전자문서중계자는 전자문서의 송수신 시점 등을 확인하여 공신력을 부여한다."
+     }
     ]
    },
    {
@@ -313,10 +403,17 @@
     "progress": 0,
     "actor": "공인전자문서보관소",
     "action": "전자문서 보관",
-    "output_documents": ["보관 전자문서", "서명값 저장"],
+    "output_documents": [
+     "보관 전자문서",
+     "서명값 저장"
+    ],
     "confidence": 0.79,
     "legal_basis": [
-     { "law": "전자문서 및 전자거래 기본법", "article": "제5조", "text": "전자문서를 요건을 갖추어 보관하면 원본 보관을 갈음할 수 있다." }
+     {
+      "law": "전자문서 및 전자거래 기본법",
+      "article": "제5조",
+      "text": "전자문서를 요건을 갖추어 보관하면 원본 보관을 갈음할 수 있다."
+     }
     ]
    },
    {
@@ -329,11 +426,17 @@
     "progress": 0,
     "actor": "공인전자문서중계자",
     "action": "유통·중계",
-    "output_documents": ["유통 이력"],
+    "output_documents": [
+     "유통 이력"
+    ],
     "blocker": "종이·대면서명을 요구하는 잔존 법령·관행으로 전자유통 제한",
     "confidence": 0.75,
     "legal_basis": [
-     { "law": "전자문서 및 전자거래 기본법", "article": "제31조의2", "text": "공인전자문서중계자를 통해 전자문서를 유통·중계한다." }
+     {
+      "law": "전자문서 및 전자거래 기본법",
+      "article": "제31조의2",
+      "text": "공인전자문서중계자를 통해 전자문서를 유통·중계한다."
+     }
     ]
    },
    {
@@ -342,16 +445,26 @@
     "lane": "수신자/거래상대방",
     "stage": "G7 분쟁·증거",
     "type": "gateway",
-    "status": "gateway",
+    "status": "waiting",
     "progress": 0,
     "actor": "수신자·거래당사자",
     "action": "분쟁 판단",
     "condition": "효력·진위 다툼 발생 여부",
-    "output_documents": ["분쟁 판단 결과"],
+    "output_documents": [
+     "분쟁 판단 결과"
+    ],
     "confidence": 0.78,
     "legal_basis": [
-     { "law": "전자문서 및 전자거래 기본법", "article": "제4조", "text": "전자문서의 효력을 증거로 판단한다." },
-     { "law": "민법·상법 등 실체법", "article": "계약·의사표시 관련 조문", "text": "전자적 방식의 의사표시 성립과 효력을 판단한다." }
+     {
+      "law": "전자문서 및 전자거래 기본법",
+      "article": "제4조",
+      "text": "전자문서의 효력을 증거로 판단한다."
+     },
+     {
+      "law": "민법·상법 등 실체법",
+      "article": "계약·의사표시 관련 조문",
+      "text": "전자적 방식의 의사표시 성립과 효력을 판단한다."
+     }
     ]
    },
    {
@@ -364,12 +477,22 @@
     "progress": 0,
     "actor": "평가·인정기관·감정인",
     "action": "감정·증거 검증",
-    "output_documents": ["감정 결과서"],
+    "output_documents": [
+     "감정 결과서"
+    ],
     "blocker": "효력 분쟁 시 감정 회귀 단계",
     "confidence": 0.75,
     "legal_basis": [
-     { "law": "전자서명법", "article": "제3조", "text": "전자서명의 진위를 감정하여 증거로 검증한다." },
-     { "law": "민법·상법 등 실체법", "article": "증거 관련 조문", "text": "분쟁 시 전자문서·서명의 증거력을 검증한다." }
+     {
+      "law": "전자서명법",
+      "article": "제3조",
+      "text": "전자서명의 진위를 감정하여 증거로 검증한다."
+     },
+     {
+      "law": "민법·상법 등 실체법",
+      "article": "증거 관련 조문",
+      "text": "분쟁 시 전자문서·서명의 증거력을 검증한다."
+     }
     ]
    },
    {
@@ -382,35 +505,243 @@
     "progress": 0,
     "actor": "수신자·거래당사자",
     "action": "효력 인정·확정",
-    "output_documents": ["효력 인정 결과"],
+    "output_documents": [
+     "효력 인정 결과"
+    ],
     "confidence": 0.78,
     "legal_basis": [
-     { "law": "전자문서 및 전자거래 기본법", "article": "제4조", "text": "전자문서의 효력을 인정하여 문서를 확정한다." },
-     { "law": "전자서명법", "article": "제3조", "text": "전자서명의 효력을 인정한다." }
+     {
+      "law": "전자문서 및 전자거래 기본법",
+      "article": "제4조",
+      "text": "전자문서의 효력을 인정하여 문서를 확정한다."
+     },
+     {
+      "law": "전자서명법",
+      "article": "제3조",
+      "text": "전자서명의 효력을 인정한다."
+     }
     ]
    }
   ],
   "edges": [
-   { "id": "E01", "source": "P01", "target": "P02", "type": "sequence", "label": null },
-   { "id": "E02", "source": "P02", "target": "P03", "type": "sequence", "label": null },
-   { "id": "E03", "source": "P03", "target": "P06", "type": "sequence", "label": "수단 선택" },
-   { "id": "E04", "source": "P06", "target": "P07", "type": "sequence", "label": null },
-   { "id": "E05", "source": "P07", "target": "P08", "type": "sequence", "label": null },
-   { "id": "E06", "source": "P08", "target": "P09", "type": "sequence", "label": null },
-   { "id": "E07", "source": "P09", "target": "P10", "type": "sequence", "label": null },
-   { "id": "E08", "source": "P10", "target": "P11", "type": "sequence", "label": null },
-   { "id": "E09", "source": "P11", "target": "P12", "type": "sequence", "label": null },
-   { "id": "E10", "source": "P12", "target": "P13", "type": "sequence", "label": null },
-   { "id": "E11", "source": "P13", "target": "P14", "type": "sequence", "label": null },
-   { "id": "E12", "source": "P14", "target": "P16", "type": "sequence", "label": "분쟁 없음" },
-   { "id": "E13", "source": "P04", "target": "P05", "type": "sequence", "label": null },
-   { "id": "M01", "source": "P03", "target": "P04", "type": "message", "label": "인정사업자 평가·인정 확인" },
-   { "id": "M02", "source": "P05", "target": "P06", "type": "message", "label": "운영기준 준수사실 인정 통보" },
-   { "id": "M03", "source": "P08", "target": "P09", "type": "message", "label": "전자문서·서명값 전송" },
-   { "id": "M04", "source": "P10", "target": "P09", "type": "message", "label": "무결성 검증 결과 응답" },
-   { "id": "L01", "source": "P14", "target": "P15", "type": "loop", "label": "효력 분쟁 제기" },
-   { "id": "L02", "source": "P15", "target": "P07", "type": "loop", "label": "재서명·재검증" }
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P06",
+    "type": "sequence",
+    "label": "수단 선택"
+   },
+   {
+    "id": "E04",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P14",
+    "target": "P16",
+    "type": "sequence",
+    "label": "분쟁 없음"
+   },
+   {
+    "id": "E13",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P03",
+    "target": "P04",
+    "type": "message",
+    "label": "인정사업자 평가·인정 확인"
+   },
+   {
+    "id": "M02",
+    "source": "P05",
+    "target": "P06",
+    "type": "message",
+    "label": "운영기준 준수사실 인정 통보"
+   },
+   {
+    "id": "M03",
+    "source": "P08",
+    "target": "P09",
+    "type": "message",
+    "label": "전자문서·서명값 전송"
+   },
+   {
+    "id": "M04",
+    "source": "P10",
+    "target": "P09",
+    "type": "message",
+    "label": "무결성 검증 결과 응답"
+   },
+   {
+    "id": "L01",
+    "source": "P14",
+    "target": "P15",
+    "type": "loop",
+    "label": "효력 분쟁 제기"
+   },
+   {
+    "id": "L02",
+    "source": "P15",
+    "target": "P07",
+    "type": "loop",
+    "label": "재서명·재검증"
+   }
   ],
   "warnings": []
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-10",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 6건 중 공식 원문 6건을 연결했다. 캔버스와 절차 노드의 명시 조문 28건 가운데 28건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "전자서명법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "전자서명법",
+    "lawId": "009413",
+    "mst": "236201",
+    "promulgatedOn": "2021-10-19",
+    "effectiveOn": "2022-10-20",
+    "officialUrl": "https://law.go.kr/법령/전자서명법"
+   },
+   {
+    "law": "전자문서 및 전자거래 기본법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "전자문서 및 전자거래 기본법",
+    "lawId": "002000",
+    "mst": "236053",
+    "promulgatedOn": "2021-10-19",
+    "effectiveOn": "2022-10-20",
+    "officialUrl": "https://law.go.kr/법령/전자문서및전자거래기본법"
+   },
+   {
+    "law": "전자서명법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "전자서명법 시행령",
+    "lawId": "004758",
+    "mst": "254745",
+    "promulgatedOn": "2023-09-12",
+    "effectiveOn": "2023-09-15",
+    "officialUrl": "https://law.go.kr/법령/전자서명법시행령"
+   },
+   {
+    "law": "전자서명법 시행규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "전자서명법 시행규칙",
+    "lawId": "008089",
+    "mst": "224075",
+    "promulgatedOn": "2020-12-10",
+    "effectiveOn": "2020-12-10",
+    "officialUrl": "https://law.go.kr/법령/전자서명법시행규칙"
+   },
+   {
+    "law": "민법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "민법",
+    "lawId": "001706",
+    "mst": "284415",
+    "promulgatedOn": "2026-03-17",
+    "effectiveOn": "2026-03-17",
+    "officialUrl": "https://law.go.kr/법령/민법"
+   },
+   {
+    "law": "상법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "상법",
+    "lawId": "001702",
+    "mst": "284143",
+    "promulgatedOn": "2026-03-06",
+    "effectiveOn": "2026-03-06",
+    "officialUrl": "https://law.go.kr/법령/상법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-10",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 29,
+   "explicitCitationEntries": 24,
+   "articleReferences": 28,
+   "verifiedReferences": 28,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
  }
 }

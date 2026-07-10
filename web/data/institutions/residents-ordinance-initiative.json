@@ -414,7 +414,7 @@
      },
      {
       "law": "지방의회 회의규칙",
-      "article": "주민청구조례안 심사 절차(법 제13조제4항 위임)",
+      "article": "주민청구조례안 심사 절차",
       "text": "심사 절차에 관하여 필요한 사항은 지방의회의 회의규칙으로 정한다."
      }
     ]
@@ -582,5 +582,61 @@
   "warnings": [
    "주민e직접 온라인 청구 이용 실태와 지자체별 서명 확인 절차 세부는 공개자료가 제한적 — 현장 검증 필요"
   ]
+ },
+ "verification": {
+  "status": "needs-review",
+  "verifiedAt": "2026-07-10",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 4건 중 공식 원문 2건을 연결했다. 캔버스와 절차 노드의 명시 조문 31건 가운데 31건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "지방자치법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "지방자치법",
+    "lawId": "001656",
+    "mst": "284005",
+    "promulgatedOn": "2026-03-05",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/지방자치법"
+   },
+   {
+    "law": "주민조례발안에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "주민조례발안에 관한 법률",
+    "lawId": "014171",
+    "mst": "253963",
+    "promulgatedOn": "2023-08-16",
+    "effectiveOn": "2024-02-17",
+    "officialUrl": "https://law.go.kr/법령/주민조례발안에관한법률"
+   }
+  ],
+  "unresolved": [
+   {
+    "law": "지방의회 회의규칙",
+    "kind": "조례·규칙",
+    "reasonCode": "local-scope",
+    "reason": "적용 지역이 특정되지 않아 단일 자치법규 원문을 확정할 수 없음",
+    "nextStep": "적용할 시·도 또는 시·군·구를 지정한 뒤 해당 자치법규를 연결해야 한다."
+   },
+   {
+    "law": "지방자치단체 주민조례청구 조례",
+    "kind": "조례·규칙",
+    "reasonCode": "local-scope",
+    "reason": "적용 지역이 특정되지 않아 단일 자치법규 원문을 확정할 수 없음",
+    "nextStep": "적용할 시·도 또는 시·군·구를 지정한 뒤 해당 자치법규를 연결해야 한다."
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-10",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 23,
+   "explicitCitationEntries": 20,
+   "articleReferences": 31,
+   "verifiedReferences": 31,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
  }
 }

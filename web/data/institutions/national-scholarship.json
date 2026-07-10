@@ -125,7 +125,10 @@
     "progress": 100,
     "actor": "교육부장관",
     "action": "정책 결정",
-    "output_documents": ["지원구간·단가 계획", "예산 배정"],
+    "output_documents": [
+     "지원구간·단가 계획",
+     "예산 배정"
+    ],
     "confidence": 0.84,
     "legal_basis": [
      {
@@ -150,7 +153,9 @@
     "progress": 100,
     "actor": "한국장학재단",
     "action": "공고",
-    "output_documents": ["신청 공고문"],
+    "output_documents": [
+     "신청 공고문"
+    ],
     "deadline": "학기별 신청기간",
     "confidence": 0.86,
     "legal_basis": [
@@ -172,7 +177,10 @@
     "actor": "학생/학부모",
     "receiver": "한국장학재단",
     "action": "신청·동의",
-    "output_documents": ["장학금 신청서", "가구원 정보제공 동의서"],
+    "output_documents": [
+     "장학금 신청서",
+     "가구원 정보제공 동의서"
+    ],
     "confidence": 0.85,
     "legal_basis": [
      {
@@ -192,7 +200,9 @@
     "progress": 100,
     "actor": "보건복지부·국세청",
     "action": "소득·재산 조사",
-    "output_documents": ["가구 소득·재산 조사자료"],
+    "output_documents": [
+     "가구 소득·재산 조사자료"
+    ],
     "confidence": 0.82,
     "legal_basis": [
      {
@@ -217,8 +227,12 @@
     "progress": 60,
     "actor": "한국장학재단",
     "action": "구간 산정",
-    "input_documents": ["가구 소득·재산 조사자료"],
-    "output_documents": ["학자금지원구간 산정 결과"],
+    "input_documents": [
+     "가구 소득·재산 조사자료"
+    ],
+    "output_documents": [
+     "학자금지원구간 산정 결과"
+    ],
     "blocker": "조사 시점과 실제 형편 불일치(운영 추정)",
     "confidence": 0.8,
     "legal_basis": [
@@ -244,8 +258,12 @@
     "progress": 0,
     "actor": "한국장학재단",
     "action": "요건 확인",
-    "input_documents": ["학사·성적 자료"],
-    "output_documents": ["지원요건 확인 결과"],
+    "input_documents": [
+     "학사·성적 자료"
+    ],
+    "output_documents": [
+     "지원요건 확인 결과"
+    ],
     "confidence": 0.81,
     "legal_basis": [
      {
@@ -266,7 +284,10 @@
     "actor": "한국장학재단",
     "action": "탈락·구제 판단",
     "condition": "성적기준 미달 시 탈락 또는 구제요건 적용",
-    "output_documents": ["탈락 통보", "구제 결정"],
+    "output_documents": [
+     "탈락 통보",
+     "구제 결정"
+    ],
     "blocker": "성적기준 미달 취약계층 사각지대",
     "confidence": 0.76,
     "legal_basis": [
@@ -287,7 +308,9 @@
     "progress": 0,
     "actor": "한국장학재단",
     "action": "지원금액 결정",
-    "output_documents": ["지원금액 결정 내역"],
+    "output_documents": [
+     "지원금액 결정 내역"
+    ],
     "confidence": 0.83,
     "legal_basis": [
      {
@@ -307,8 +330,12 @@
     "progress": 0,
     "actor": "대학",
     "action": "지급·정산",
-    "input_documents": ["지급명세"],
-    "output_documents": ["등록금 차감·환급 내역"],
+    "input_documents": [
+     "지급명세"
+    ],
+    "output_documents": [
+     "등록금 차감·환급 내역"
+    ],
     "confidence": 0.82,
     "legal_basis": [
      {
@@ -328,8 +355,13 @@
     "progress": 0,
     "actor": "한국장학재단",
     "action": "재산정",
-    "input_documents": ["이의신청서", "추가 소득·재산 자료"],
-    "output_documents": ["재산정 결과"],
+    "input_documents": [
+     "이의신청서",
+     "추가 소득·재산 자료"
+    ],
+    "output_documents": [
+     "재산정 결과"
+    ],
     "blocker": "조건부 회귀 단계",
     "confidence": 0.77,
     "legal_basis": [
@@ -350,7 +382,9 @@
     "progress": 0,
     "actor": "대학·한국장학재단",
     "action": "사후확인",
-    "output_documents": ["학사·성적 사후확인 결과"],
+    "output_documents": [
+     "학사·성적 사후확인 결과"
+    ],
     "confidence": 0.8,
     "legal_basis": [
      {
@@ -370,7 +404,9 @@
     "progress": 0,
     "actor": "학생/학부모",
     "action": "재신청",
-    "output_documents": ["차기 학기 신청서"],
+    "output_documents": [
+     "차기 학기 신청서"
+    ],
     "blocker": "신청기간 도래 대기",
     "confidence": 0.79,
     "legal_basis": [
@@ -391,7 +427,9 @@
     "progress": 0,
     "actor": "한국장학재단",
     "action": "대출 안내·실행",
-    "output_documents": ["학자금대출 약정"],
+    "output_documents": [
+     "학자금대출 약정"
+    ],
     "confidence": 0.78,
     "legal_basis": [
      {
@@ -416,7 +454,9 @@
     "progress": 0,
     "actor": "한국장학재단 포털",
     "action": "신청·조회 처리",
-    "output_documents": ["신청·심사 진행상태"],
+    "output_documents": [
+     "신청·심사 진행상태"
+    ],
     "confidence": 0.75,
     "legal_basis": [
      {
@@ -428,22 +468,185 @@
    }
   ],
   "edges": [
-   { "id": "E01", "source": "P01", "target": "P02", "type": "sequence", "label": null },
-   { "id": "E02", "source": "P02", "target": "P03", "type": "sequence", "label": null },
-   { "id": "E03", "source": "P03", "target": "P04", "type": "sequence", "label": null },
-   { "id": "E04", "source": "P04", "target": "P05", "type": "sequence", "label": null },
-   { "id": "E05", "source": "P05", "target": "P06", "type": "sequence", "label": null },
-   { "id": "E06", "source": "P06", "target": "P07", "type": "sequence", "label": null },
-   { "id": "E07", "source": "P07", "target": "P08", "type": "sequence", "label": null },
-   { "id": "E08", "source": "P08", "target": "P09", "type": "sequence", "label": null },
-   { "id": "E09", "source": "P09", "target": "P11", "type": "sequence", "label": null },
-   { "id": "M01", "source": "P02", "target": "S01", "type": "message", "label": "포털 신청·조회" },
-   { "id": "M02", "source": "P05", "target": "P13", "type": "message", "label": "부족분 대출 안내" },
-   { "id": "M03", "source": "P08", "target": "P10", "type": "message", "label": "이의신청 접수" },
-   { "id": "M04", "source": "P10", "target": "P05", "type": "message", "label": "재산정 반영" },
-   { "id": "L01", "source": "P11", "target": "P12", "type": "loop", "label": "학기 종료·재신청" },
-   { "id": "L02", "source": "P12", "target": "P03", "type": "loop", "label": "다음 학기 신청" }
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P02",
+    "target": "S01",
+    "type": "message",
+    "label": "포털 신청·조회"
+   },
+   {
+    "id": "M02",
+    "source": "P05",
+    "target": "P13",
+    "type": "message",
+    "label": "부족분 대출 안내"
+   },
+   {
+    "id": "M03",
+    "source": "P08",
+    "target": "P10",
+    "type": "message",
+    "label": "이의신청 접수"
+   },
+   {
+    "id": "M04",
+    "source": "P10",
+    "target": "P05",
+    "type": "message",
+    "label": "재산정 반영"
+   },
+   {
+    "id": "L01",
+    "source": "P11",
+    "target": "P12",
+    "type": "loop",
+    "label": "학기 종료·재신청"
+   },
+   {
+    "id": "L02",
+    "source": "P12",
+    "target": "P03",
+    "type": "loop",
+    "label": "다음 학기 신청"
+   }
   ],
   "warnings": []
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-10",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 5건 중 공식 원문 5건을 연결했다. 캔버스와 절차 노드의 명시 조문 19건 가운데 19건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "한국장학재단 설립 등에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "한국장학재단 설립 등에 관한 법률",
+    "lawId": "010909",
+    "mst": "276203",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/한국장학재단설립등에관한법률"
+   },
+   {
+    "law": "한국장학재단 설립 등에 관한 법률 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "한국장학재단 설립 등에 관한 법률 시행령",
+    "lawId": "010974",
+    "mst": "268473",
+    "promulgatedOn": "2025-01-21",
+    "effectiveOn": "2025-01-31",
+    "officialUrl": "https://law.go.kr/법령/한국장학재단설립등에관한법률시행령"
+   },
+   {
+    "law": "취업 후 학자금 상환 특별법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "취업 후 학자금 상환 특별법",
+    "lawId": "011136",
+    "mst": "283419",
+    "promulgatedOn": "2026-02-19",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/취업후학자금상환특별법"
+   },
+   {
+    "law": "취업 후 학자금 상환 특별법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "취업 후 학자금 상환 특별법 시행령",
+    "lawId": "011147",
+    "mst": "286955",
+    "promulgatedOn": "2026-06-16",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/취업후학자금상환특별법시행령"
+   },
+   {
+    "law": "고등교육법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "고등교육법",
+    "lawId": "000899",
+    "mst": "268513",
+    "promulgatedOn": "2025-01-21",
+    "effectiveOn": "2026-03-01",
+    "officialUrl": "https://law.go.kr/법령/고등교육법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-10",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 23,
+   "explicitCitationEntries": 13,
+   "articleReferences": 19,
+   "verifiedReferences": 19,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
  }
 }

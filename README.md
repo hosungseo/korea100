@@ -1,27 +1,89 @@
 # 한 장으로 끝내는 대한민국 제도 100
 
-대한민국의 주요 제도를 한 장의 구조도로 읽는 책 프로젝트입니다.
+대한민국의 주요 제도를 법령, 조직, 절차, 예산, 문서, 데이터, 권한 관계로 나누어 한 장의 구조도로 읽는 웹·출판 프로젝트입니다.
 
-## 핵심 콘셉트
+> 기업에는 비즈니스 모델이 있듯이, 국가에는 제도 모델이 있다.
 
-기업에 비즈니스 모델이 있듯이, 국가에는 제도 모델이 있다.
+## 현재 상태
 
-이 프로젝트는 법령, 조직, 절차, 예산, 문서, 데이터, 권한 관계를 하나의 표준 포맷으로 정리해 `제도가 실제로 어떻게 작동하는지` 보여주는 것을 목표로 합니다.
+- 제도 100개 모두 표준 캔버스와 상태 인식형 swimlane 업무구조도를 제공합니다.
+- 각 제도는 법적 근거, 행위자, 절차, 산출 문서, 기한, 병목, 개선점과 현장 검증 항목을 포함합니다.
+- 웹앱은 Next.js 정적 내보내기로 100개 제도 상세 페이지를 생성합니다.
+- 법령 기준일은 각 JSON의 `asOfDate`에 기록합니다.
+- 100개 제도에 공식 출처 433건을 연결했습니다. 고유 법적 근거 354건 중 325건은 국가법령정보센터 식별자와 연결되어 있습니다.
+- 캔버스와 1,573개 절차 노드의 명시 조문 인용 3,721건을 현행 원문과 대조했고, 3,721건 모두 조문 번호의 존재를 확인했습니다.
+- 74개 제도는 `article-verified`입니다. 나머지 26개는 조문 불일치가 아니라 지역·기관·내부규정·부처 문서 범위를 지정해야 하는 출처 30건을 사유별로 기록했습니다.
+- `current`, `progress` 등 노드 상태는 실시간 행정 데이터가 아니라 제도 흐름을 설명하기 위한 편집 상태입니다.
 
-## 현재 파일
+이 콘텐츠는 제도 이해를 위한 참고 자료이며 법률 자문이나 정부기관의 공식 해석을 대신하지 않습니다.
 
-- `DESIGN.md`: 홈페이지 MVP 디자인 시스템.
-- `site/index.html`: 홈페이지 MVP 정적 페이지.
-- `site/styles.css`: 홈페이지 MVP 스타일.
-- `site/app.js`: 첫 10개 제도 목록과 신청 폼 상호작용.
-- `docs/product-requirements-v0.md`: 홈페이지 우선 제품 요구사항 문서.
-- `docs/book-proposal-v0.md`: 1차 출판기획안.
-- `docs/one-page-template.md`: 제도 한 장 템플릿.
-- `docs/topic-map-v0.md`: 제도 100 후보 목차.
-- `docs/go-to-market-v0.md`: 홈페이지 우선 공개 후 오프라인 책으로 전환하는 전략.
-- `docs/pilot-environmental-impact-assessment-v1.md`: 환경영향평가 상태 인식형 업무구조도 파일럿 브리프.
-- `docs/launch-10-v0.md`: 홈페이지 첫 공개용 제도 10개 목록과 제작 순서.
-- `sources/law-to-process-mvp-2026-07-09/`: 첨부 ZIP에서 받은 법령 조문 → 상태 인식형 swimlane 생성기 MVP.
+## 실행
+
+```bash
+cd web
+npm install
+npm run dev
+```
+
+브라우저에서 `http://localhost:3000`을 엽니다.
+
+## 검증과 빌드
+
+```bash
+cd web
+npm run validate:data
+npm run test:article-parser
+npm run lint
+npm run build
+```
+
+`validate:data`는 다음 항목을 검사합니다.
+
+- 제도·manifest 100개와 우선순위 1~100
+- slug, 이름, 유형과 manifest 일치 여부
+- lane·stage·node·edge 참조 무결성
+- 노드 유형·상태와 edge 유형
+- 진행률·법령 근거 확신도 범위
+- 제도별 `current` 노드 존재 여부
+- 공식 출처와 미해결 사유 코드의 완전성
+- 제도별 조문 검증 합계와 상태 일치 여부
+
+공식 출처와 조문 보고서를 새로 생성할 때는 `LAW_OC` 환경 변수가 필요합니다.
+
+```bash
+cd web
+LAW_OC=... npm run sync:sources -- --write
+LAW_OC=... npm run verify:articles -- --write
+```
+
+- `docs/verification-coverage.json`: 제도별 공식 출처 연결 현황
+- `docs/article-verification-coverage.json`: 조문 대조 결과와 범위별 미해결 사유
+- `web/data/legal-source-registry.json`: 고유 법적 근거별 국가법령정보센터 식별자
+
+정적 산출물은 `web/out/`에 생성됩니다.
+
+## 주요 경로
+
+- `web/src/app/`: 홈, 제도 상세, 제작 요청 페이지
+- `web/src/components/SwimlaneBoard.tsx`: 전체 swimlane 업무구조도
+- `web/src/components/InstitutionExplorer.tsx`: 100개 제도 검색·분류 UI
+- `web/data/institutions/`: 제도별 정규화 JSON 100개
+- `docs/institutions-100-manifest.json`: 우선순위와 대분류 manifest
+- `docs/data-contract.md`: 콘텐츠와 화면 데이터 계약
+- `docs/verification-summary.md`: 100개 출처·조문 검증 결과와 한계
+- `docs/product-requirements-v0.md`: 초기 홈페이지 MVP 요구사항
+- `docs/book-proposal-v0.md`: 출판기획안
+- `sources/law-to-process-mvp-2026-07-09/`: 법령 조문 기반 프로세스 추출기 초기 프로토타입
+- `site/`: Next.js 전 정적 홈페이지 MVP
+
+## 데이터 모델
+
+각 제도 JSON은 두 층으로 구성됩니다.
+
+1. `canvas`: 목적, 이해관계자, 법적 근거, 기관 권한, 대표 절차, 돈·문서 흐름, 병목과 개선점
+2. `process`: 행위주체 lane, 단계 gate, 업무 node, 순서·정보·회귀 edge, 근거 조문과 확신도
+
+법령만으로 확인하기 어려운 내부 처리, 실무 관행, 시스템 단계는 `fieldVerification` 또는 낮은 `confidence`로 구분합니다.
 
 ## 관련 작업
 

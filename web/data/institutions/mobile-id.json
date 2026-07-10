@@ -133,10 +133,16 @@
     "actor": "신청인",
     "receiver": "발급기관(행정안전부·주민센터)",
     "action": "발급 신청",
-    "output_documents": ["발급 신청서"],
+    "output_documents": [
+     "발급 신청서"
+    ],
     "confidence": 0.75,
     "legal_basis": [
-     { "law": "주민등록법", "article": "제24조의2", "text": "주민등록증을 발급받은 사람은 주민등록증과 효력이 동일한 모바일 주민등록증(이동통신단말장치에 암호화된 형태로 설치)의 발급을 신청할 수 있다.(제1항)" }
+     {
+      "law": "주민등록법",
+      "article": "제24조의2",
+      "text": "주민등록증을 발급받은 사람은 주민등록증과 효력이 동일한 모바일 주민등록증(이동통신단말장치에 암호화된 형태로 설치)의 발급을 신청할 수 있다.(제1항)"
+     }
     ]
    },
    {
@@ -149,12 +155,24 @@
     "progress": 100,
     "actor": "발급기관",
     "action": "대면확인 접수",
-    "input_documents": ["실물 주민등록증·운전면허증"],
-    "output_documents": ["접수 확인"],
+    "input_documents": [
+     "실물 주민등록증·운전면허증"
+    ],
+    "output_documents": [
+     "접수 확인"
+    ],
     "confidence": 0.74,
     "legal_basis": [
-     { "law": "주민등록법", "article": "제24조의2", "text": "시장·군수·구청장은 대통령령으로 정하는 바에 따라 모바일 주민등록증 발급 신청을 접수한다.(제1항, 발급 세부는 시행령 위임)" },
-     { "law": "주민등록법 시행령", "article": "제38조", "text": "모바일 주민등록증을 발급받으려는 사람은 별지 제31호의2서식의 발급 신청서를 제출하고 주민등록증을 제시해야 한다. 다만 IC칩 내장 주민등록증 소지자는 이동통신단말장치를 통해 신청할 수 있다.(제1항)" }
+     {
+      "law": "주민등록법",
+      "article": "제24조의2",
+      "text": "시장·군수·구청장은 대통령령으로 정하는 바에 따라 모바일 주민등록증 발급 신청을 접수한다.(제1항, 발급 세부는 시행령 위임)"
+     },
+     {
+      "law": "주민등록법 시행령",
+      "article": "제38조",
+      "text": "모바일 주민등록증을 발급받으려는 사람은 별지 제31호의2서식의 발급 신청서를 제출하고 주민등록증을 제시해야 한다. 다만 IC칩 내장 주민등록증 소지자는 이동통신단말장치를 통해 신청할 수 있다.(제1항)"
+     }
     ]
    },
    {
@@ -168,11 +186,21 @@
     "actor": "발급기관",
     "action": "본인확인",
     "condition": "IC 주민등록증·대면확인 등 본인확인 성공 여부",
-    "output_documents": ["본인확인 결과"],
+    "output_documents": [
+     "본인확인 결과"
+    ],
     "confidence": 0.73,
     "legal_basis": [
-     { "law": "주민등록법", "article": "제24조의2", "text": "모바일 주민등록증은 주민등록증을 발급받은 사람에게 발급하며, 그 기재사항·표시방법은 제24조제2항·제3항을 준용한다. 발급 전 본인확인을 거친다.(제1항, 세부 시행령 위임)" },
-     { "law": "전자정부법", "article": "모바일 신분증 발급 근거 조항", "text": "모바일 신분증 발급 시 본인확인 절차를 거친다.(운영 추정)" }
+     {
+      "law": "주민등록법",
+      "article": "제24조의2",
+      "text": "모바일 주민등록증은 주민등록증을 발급받은 사람에게 발급하며, 그 기재사항·표시방법은 제24조제2항·제3항을 준용한다. 발급 전 본인확인을 거친다.(제1항, 세부 시행령 위임)"
+     },
+     {
+      "law": "전자정부법",
+      "article": "모바일 신분증 발급 근거 조항",
+      "text": "모바일 신분증 발급 시 본인확인 절차를 거친다.(운영 추정)"
+     }
     ]
    },
    {
@@ -185,10 +213,16 @@
     "progress": 100,
     "actor": "신원확인시스템",
     "action": "자격·발급정보 검증",
-    "output_documents": ["자격 검증 결과"],
+    "output_documents": [
+     "자격 검증 결과"
+    ],
     "confidence": 0.72,
     "legal_basis": [
-     { "law": "전자정부법", "article": "모바일 신분증 발급 근거 조항", "text": "발급 자격과 신원정보를 시스템으로 검증한다.(운영 추정)" }
+     {
+      "law": "전자정부법",
+      "article": "모바일 신분증 발급 근거 조항",
+      "text": "발급 자격과 신원정보를 시스템으로 검증한다.(운영 추정)"
+     }
     ]
    },
    {
@@ -201,12 +235,26 @@
     "progress": 100,
     "actor": "한국조폐공사(운영기관)",
     "action": "자격증명 발급",
-    "output_documents": ["모바일 신분증(디지털 자격증명)"],
+    "output_documents": [
+     "모바일 신분증(디지털 자격증명)"
+    ],
     "confidence": 0.72,
     "legal_basis": [
-     { "law": "주민등록법", "article": "제24조의2", "text": "시장·군수·구청장은 신청에 따라 주민등록증과 효력이 동일한 모바일 주민등록증을 발급한다.(제1항)" },
-     { "law": "전자정부법", "article": "모바일 신분증 발급 근거 조항", "text": "분산신원(DID) 기반으로 모바일 신분증을 발급한다.(운영 추정)" },
-     { "law": "주민등록법 시행령", "article": "제38조", "text": "시장·군수·구청장은 신청에 따라 모바일 주민등록증을 발급하며, 행정안전부장관은 발급에 필요한 정보시스템을 구축·운영할 수 있다.(제1항·제7항)" }
+     {
+      "law": "주민등록법",
+      "article": "제24조의2",
+      "text": "시장·군수·구청장은 신청에 따라 주민등록증과 효력이 동일한 모바일 주민등록증을 발급한다.(제1항)"
+     },
+     {
+      "law": "전자정부법",
+      "article": "모바일 신분증 발급 근거 조항",
+      "text": "분산신원(DID) 기반으로 모바일 신분증을 발급한다.(운영 추정)"
+     },
+     {
+      "law": "주민등록법 시행령",
+      "article": "제38조",
+      "text": "시장·군수·구청장은 신청에 따라 모바일 주민등록증을 발급하며, 행정안전부장관은 발급에 필요한 정보시스템을 구축·운영할 수 있다.(제1항·제7항)"
+     }
     ]
    },
    {
@@ -219,10 +267,16 @@
     "progress": 100,
     "actor": "경찰청·도로교통공단",
     "action": "운전면허증 발급",
-    "output_documents": ["모바일 운전면허증"],
+    "output_documents": [
+     "모바일 운전면허증"
+    ],
     "confidence": 0.74,
     "legal_basis": [
-     { "law": "도로교통법", "article": "모바일 운전면허증 발급 근거 조항", "text": "운전면허증을 모바일 형태로 발급한다.(운영 추정)" }
+     {
+      "law": "도로교통법",
+      "article": "모바일 운전면허증 발급 근거 조항",
+      "text": "운전면허증을 모바일 형태로 발급한다.(운영 추정)"
+     }
     ]
    },
    {
@@ -235,11 +289,17 @@
     "progress": 50,
     "actor": "신청인",
     "action": "단말 보안저장",
-    "output_documents": ["단말 저장 완료"],
+    "output_documents": [
+     "단말 저장 완료"
+    ],
     "blocker": "단말 보안영역 저장·활성화 진행 중",
     "confidence": 0.7,
     "legal_basis": [
-     { "law": "개인정보 보호법", "article": "안전조치 관련 조문", "text": "신원정보를 단말 보안영역에 안전하게 저장한다." }
+     {
+      "law": "개인정보 보호법",
+      "article": "안전조치 관련 조문",
+      "text": "신원정보를 단말 보안영역에 안전하게 저장한다."
+     }
     ]
    },
    {
@@ -253,10 +313,16 @@
     "actor": "발급기관",
     "receiver": "신청인(국민)",
     "action": "발급 완료 통지",
-    "output_documents": ["발급 완료 통지"],
+    "output_documents": [
+     "발급 완료 통지"
+    ],
     "confidence": 0.7,
     "legal_basis": [
-     { "law": "전자정부법", "article": "모바일 신분증 발급 근거 조항", "text": "발급 완료 및 활성화 사실을 통지한다.(운영 추정)" }
+     {
+      "law": "전자정부법",
+      "article": "모바일 신분증 발급 근거 조항",
+      "text": "발급 완료 및 활성화 사실을 통지한다.(운영 추정)"
+     }
     ]
    },
    {
@@ -270,10 +336,16 @@
     "actor": "신청인",
     "receiver": "검증기관",
     "action": "신원 제시",
-    "output_documents": ["제시용 QR·NFC 토큰"],
+    "output_documents": [
+     "제시용 QR·NFC 토큰"
+    ],
     "confidence": 0.72,
     "legal_basis": [
-     { "law": "전자정부법", "article": "모바일 신분증 효력 근거 조항", "text": "모바일 신분증은 실물 신분증과 동일한 효력으로 제시한다.(운영 추정)" }
+     {
+      "law": "전자정부법",
+      "article": "모바일 신분증 효력 근거 조항",
+      "text": "모바일 신분증은 실물 신분증과 동일한 효력으로 제시한다.(운영 추정)"
+     }
     ]
    },
    {
@@ -287,10 +359,16 @@
     "actor": "검증기관(관공서·금융·통신 등)",
     "action": "진위·유효성 확인",
     "condition": "진위·유효기간·효력정지 여부",
-    "output_documents": ["검증 결과"],
+    "output_documents": [
+     "검증 결과"
+    ],
     "confidence": 0.73,
     "legal_basis": [
-     { "law": "전자정부법", "article": "모바일 신분증 효력 근거 조항", "text": "검증기관은 모바일 신분증의 진위와 유효성을 확인한다.(운영 추정)" }
+     {
+      "law": "전자정부법",
+      "article": "모바일 신분증 효력 근거 조항",
+      "text": "검증기관은 모바일 신분증의 진위와 유효성을 확인한다.(운영 추정)"
+     }
     ]
    },
    {
@@ -303,10 +381,16 @@
     "progress": 0,
     "actor": "신원확인시스템",
     "action": "검증 응답",
-    "output_documents": ["검증 응답값"],
+    "output_documents": [
+     "검증 응답값"
+    ],
     "confidence": 0.72,
     "legal_basis": [
-     { "law": "전자정부법", "article": "모바일 신분증 효력 근거 조항", "text": "신원확인시스템이 진위·유효성 검증 결과를 응답한다.(운영 추정)" }
+     {
+      "law": "전자정부법",
+      "article": "모바일 신분증 효력 근거 조항",
+      "text": "신원확인시스템이 진위·유효성 검증 결과를 응답한다.(운영 추정)"
+     }
     ]
    },
    {
@@ -320,10 +404,16 @@
     "actor": "신청인",
     "receiver": "검증기관",
     "action": "선택정보 제공",
-    "output_documents": ["선택 제출 항목"],
+    "output_documents": [
+     "선택 제출 항목"
+    ],
     "confidence": 0.75,
     "legal_basis": [
-     { "law": "개인정보 보호법", "article": "최소수집 관련 조문", "text": "이용 목적에 필요한 최소 항목만 선택적으로 제공한다." }
+     {
+      "law": "개인정보 보호법",
+      "article": "최소수집 관련 조문",
+      "text": "이용 목적에 필요한 최소 항목만 선택적으로 제공한다."
+     }
     ]
    },
    {
@@ -337,12 +427,22 @@
     "actor": "신청인",
     "receiver": "발급기관(행정안전부·주민센터)",
     "action": "분실·기기변경 신고",
-    "output_documents": ["분실·변경 신고서"],
+    "output_documents": [
+     "분실·변경 신고서"
+    ],
     "blocker": "분실·기기변경 시 회귀 단계",
     "confidence": 0.7,
     "legal_basis": [
-     { "law": "주민등록법", "article": "제24조의2", "text": "모바일 주민등록증이 설치된 단말장치의 분실·훼손으로 사용이 불가능한 경우 등에는 대통령령으로 정하는 바에 따라 재발급을 신청하여야 한다.(제2항제4호)" },
-     { "law": "주민등록법 시행령", "article": "제38조", "text": "단말장치의 분실·훼손, 기기 교체, 유효기간 경과 등으로 사용이 불가능한 경우 재발급 신청서를 제출하여 재발급받는다.(제1항·제6항제5호)" }
+     {
+      "law": "주민등록법",
+      "article": "제24조의2",
+      "text": "모바일 주민등록증이 설치된 단말장치의 분실·훼손으로 사용이 불가능한 경우 등에는 대통령령으로 정하는 바에 따라 재발급을 신청하여야 한다.(제2항제4호)"
+     },
+     {
+      "law": "주민등록법 시행령",
+      "article": "제38조",
+      "text": "단말장치의 분실·훼손, 기기 교체, 유효기간 경과 등으로 사용이 불가능한 경우 재발급 신청서를 제출하여 재발급받는다.(제1항·제6항제5호)"
+     }
     ]
    },
    {
@@ -356,12 +456,22 @@
     "actor": "발급기관",
     "action": "효력정지·폐기",
     "condition": "분실·도용 위험에 따른 효력정지 여부",
-    "output_documents": ["효력정지 처리결과"],
+    "output_documents": [
+     "효력정지 처리결과"
+    ],
     "blocker": "단말 분실·해킹 시 신원 도용 위험",
     "confidence": 0.72,
     "legal_basis": [
-     { "law": "주민등록법", "article": "제24조의2", "text": "단말장치 분실·훼손 등으로 재발급 사유가 발생한 경우 대통령령으로 정하는 바에 따라 효력정지·폐기 등 조치를 한다.(제2항, 세부 시행령 위임)" },
-     { "law": "전자정부법", "article": "모바일 신분증 부정사용 처벌 근거 조항", "text": "부정사용 방지를 위해 효력정지·폐기 조치를 한다.(운영 추정)" }
+     {
+      "law": "주민등록법",
+      "article": "제24조의2",
+      "text": "단말장치 분실·훼손 등으로 재발급 사유가 발생한 경우 대통령령으로 정하는 바에 따라 효력정지·폐기 등 조치를 한다.(제2항, 세부 시행령 위임)"
+     },
+     {
+      "law": "전자정부법",
+      "article": "모바일 신분증 부정사용 처벌 근거 조항",
+      "text": "부정사용 방지를 위해 효력정지·폐기 조치를 한다.(운영 추정)"
+     }
     ]
    },
    {
@@ -374,11 +484,18 @@
     "progress": 0,
     "actor": "신청인·발급기관",
     "action": "재발급 신청·처리",
-    "output_documents": ["재발급 신청서", "재발급 결과"],
+    "output_documents": [
+     "재발급 신청서",
+     "재발급 결과"
+    ],
     "blocker": "효력정지 후 재발급 회귀 단계",
     "confidence": 0.73,
     "legal_basis": [
-     { "law": "주민등록법", "article": "제24조의2", "text": "분실·훼손 등의 경우 대통령령으로 정하는 바에 따라 모바일 주민등록증의 재발급을 신청하며, 발급·재발급 시 수수료·공과금을 징수하지 못한다.(제2항·제3항)" }
+     {
+      "law": "주민등록법",
+      "article": "제24조의2",
+      "text": "분실·훼손 등의 경우 대통령령으로 정하는 바에 따라 모바일 주민등록증의 재발급을 신청하며, 발급·재발급 시 수수료·공과금을 징수하지 못한다.(제2항·제3항)"
+     }
     ]
    },
    {
@@ -392,35 +509,243 @@
     "actor": "발급기관",
     "action": "유효기간 갱신",
     "deadline": "유효기간 3년 이내",
-    "output_documents": ["갱신 결과"],
+    "output_documents": [
+     "갱신 결과"
+    ],
     "confidence": 0.7,
     "legal_basis": [
-     { "law": "주민등록법", "article": "제24조의2", "text": "모바일 주민등록증의 발급·유효기간 등 세부사항은 대통령령으로 정하며, 유효기간 경과 시 갱신한다.(제1항 위임)" },
-     { "law": "주민등록법 시행령", "article": "제38조", "text": "모바일 주민등록증의 정보 암호화를 위해 단말장치에 설치·사용하는 전자적 정보의 유효기간은 3년으로 한다.(제3항)" }
+     {
+      "law": "주민등록법",
+      "article": "제24조의2",
+      "text": "모바일 주민등록증의 발급·유효기간 등 세부사항은 대통령령으로 정하며, 유효기간 경과 시 갱신한다.(제1항 위임)"
+     },
+     {
+      "law": "주민등록법 시행령",
+      "article": "제38조",
+      "text": "모바일 주민등록증의 정보 암호화를 위해 단말장치에 설치·사용하는 전자적 정보의 유효기간은 3년으로 한다.(제3항)"
+     }
     ]
    }
   ],
   "edges": [
-   { "id": "E01", "source": "P01", "target": "P02", "type": "sequence", "label": null },
-   { "id": "E02", "source": "P02", "target": "P03", "type": "sequence", "label": null },
-   { "id": "E03", "source": "P03", "target": "P04", "type": "sequence", "label": "본인확인 성공" },
-   { "id": "E04", "source": "P04", "target": "P05", "type": "sequence", "label": null },
-   { "id": "E05", "source": "P05", "target": "P07", "type": "sequence", "label": null },
-   { "id": "E06", "source": "P07", "target": "P08", "type": "sequence", "label": null },
-   { "id": "E07", "source": "P08", "target": "P09", "type": "sequence", "label": null },
-   { "id": "E08", "source": "P09", "target": "P10", "type": "sequence", "label": null },
-   { "id": "E09", "source": "P10", "target": "P11", "type": "sequence", "label": null },
-   { "id": "E10", "source": "P11", "target": "P12", "type": "sequence", "label": null },
-   { "id": "E11", "source": "P12", "target": "P16", "type": "sequence", "label": "정상 이용 지속" },
-   { "id": "E12", "source": "P13", "target": "P14", "type": "sequence", "label": null },
-   { "id": "E13", "source": "P14", "target": "P15", "type": "sequence", "label": null },
-   { "id": "M01", "source": "P05", "target": "P06", "type": "message", "label": "운전면허 자격증명 발급" },
-   { "id": "M02", "source": "P09", "target": "P10", "type": "message", "label": "QR·NFC 신원 제시" },
-   { "id": "M03", "source": "P11", "target": "P10", "type": "message", "label": "진위·유효성 검증 응답" },
-   { "id": "M04", "source": "P14", "target": "P11", "type": "message", "label": "효력정지 등록" },
-   { "id": "L01", "source": "P12", "target": "P13", "type": "loop", "label": "분실·훼손 발생" },
-   { "id": "L02", "source": "P15", "target": "P03", "type": "loop", "label": "재발급 본인확인 재수행" }
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": "본인확인 성공"
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P12",
+    "target": "P16",
+    "type": "sequence",
+    "label": "정상 이용 지속"
+   },
+   {
+    "id": "E12",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P05",
+    "target": "P06",
+    "type": "message",
+    "label": "운전면허 자격증명 발급"
+   },
+   {
+    "id": "M02",
+    "source": "P09",
+    "target": "P10",
+    "type": "message",
+    "label": "QR·NFC 신원 제시"
+   },
+   {
+    "id": "M03",
+    "source": "P11",
+    "target": "P10",
+    "type": "message",
+    "label": "진위·유효성 검증 응답"
+   },
+   {
+    "id": "M04",
+    "source": "P14",
+    "target": "P11",
+    "type": "message",
+    "label": "효력정지 등록"
+   },
+   {
+    "id": "L01",
+    "source": "P12",
+    "target": "P13",
+    "type": "loop",
+    "label": "분실·훼손 발생"
+   },
+   {
+    "id": "L02",
+    "source": "P15",
+    "target": "P03",
+    "type": "loop",
+    "label": "재발급 본인확인 재수행"
+   }
   ],
   "warnings": []
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-10",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 6건 중 공식 원문 6건을 연결했다. 캔버스와 절차 노드의 명시 조문 15건 가운데 15건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "전자정부법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "전자정부법",
+    "lawId": "009199",
+    "mst": "268103",
+    "promulgatedOn": "2025-01-07",
+    "effectiveOn": "2025-07-08",
+    "officialUrl": "https://law.go.kr/법령/전자정부법"
+   },
+   {
+    "law": "주민등록법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "주민등록법",
+    "lawId": "001655",
+    "mst": "268555",
+    "promulgatedOn": "2025-01-21",
+    "effectiveOn": "2025-07-22",
+    "officialUrl": "https://law.go.kr/법령/주민등록법"
+   },
+   {
+    "law": "주민등록법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "주민등록법 시행령",
+    "lawId": "004936",
+    "mst": "285733",
+    "promulgatedOn": "2026-04-28",
+    "effectiveOn": "2026-04-28",
+    "officialUrl": "https://law.go.kr/법령/주민등록법시행령"
+   },
+   {
+    "law": "주민등록법 시행규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "주민등록법 시행규칙",
+    "lawId": "008230",
+    "mst": "285757",
+    "promulgatedOn": "2026-04-28",
+    "effectiveOn": "2026-04-28",
+    "officialUrl": "https://law.go.kr/법령/주민등록법시행규칙"
+   },
+   {
+    "law": "도로교통법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "도로교통법",
+    "lawId": "001638",
+    "mst": "281875",
+    "promulgatedOn": "2025-12-30",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/도로교통법"
+   },
+   {
+    "law": "개인정보 보호법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "개인정보 보호법",
+    "lawId": "011357",
+    "mst": "270351",
+    "promulgatedOn": "2025-04-01",
+    "effectiveOn": "2025-10-02",
+    "officialUrl": "https://law.go.kr/법령/개인정보보호법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-10",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 29,
+   "explicitCitationEntries": 14,
+   "articleReferences": 15,
+   "verifiedReferences": 15,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
  }
 }

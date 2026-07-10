@@ -117,7 +117,9 @@
     "actor": "가입자",
     "receiver": "국민연금공단",
     "action": "자격 취득·상실·변동 신고",
-    "output_documents": ["자격취득 신고서"],
+    "output_documents": [
+     "자격취득 신고서"
+    ],
     "confidence": 0.85,
     "legal_basis": [
      {
@@ -138,7 +140,10 @@
     "actor": "사용자(사업장)",
     "receiver": "국민연금공단",
     "action": "사업장가입자 자격·소득 신고",
-    "output_documents": ["사업장가입 신고서", "기준소득월액 자료"],
+    "output_documents": [
+     "사업장가입 신고서",
+     "기준소득월액 자료"
+    ],
     "confidence": 0.83,
     "legal_basis": [
      {
@@ -158,8 +163,13 @@
     "progress": 100,
     "actor": "국민연금공단",
     "action": "기준소득월액에 연금보험료율 적용 산정·부과",
-    "input_documents": ["기준소득월액 자료", "소득 신고자료"],
-    "output_documents": ["보험료 산정 내역"],
+    "input_documents": [
+     "기준소득월액 자료",
+     "소득 신고자료"
+    ],
+    "output_documents": [
+     "보험료 산정 내역"
+    ],
     "confidence": 0.83,
     "legal_basis": [
      {
@@ -180,7 +190,9 @@
     "actor": "국민건강보험공단",
     "receiver": "가입자·사업장",
     "action": "4대 사회보험 보험료 통합 고지",
-    "output_documents": ["보험료 통합고지서"],
+    "output_documents": [
+     "보험료 통합고지서"
+    ],
     "confidence": 0.82,
     "legal_basis": [
      {
@@ -201,7 +213,9 @@
     "actor": "가입자·사용자",
     "receiver": "국민건강보험공단",
     "action": "보험료 납부(사업장은 노사 4.5%씩)",
-    "output_documents": ["납부 확인"],
+    "output_documents": [
+     "납부 확인"
+    ],
     "deadline": "매월 10일 납부",
     "confidence": 0.83,
     "legal_basis": [
@@ -223,7 +237,10 @@
     "actor": "국민건강보험공단",
     "action": "징수·독촉·체납처분",
     "condition": "납부 여부, 납부예외·장기체납 대상 여부",
-    "output_documents": ["독촉장", "체납처분 내역"],
+    "output_documents": [
+     "독촉장",
+     "체납처분 내역"
+    ],
     "blocker": "지역가입자 납부예외·장기체납으로 가입 사각지대 발생(운영 추정)",
     "confidence": 0.76,
     "legal_basis": [
@@ -244,7 +261,10 @@
     "progress": 100,
     "actor": "국민연금공단 전산",
     "action": "가입기간·소득이력 전산 관리",
-    "output_documents": ["가입내역", "예상연금액"],
+    "output_documents": [
+     "가입내역",
+     "예상연금액"
+    ],
     "confidence": 0.82,
     "legal_basis": [
      {
@@ -265,7 +285,9 @@
     "actor": "본인·유족",
     "receiver": "국민연금공단",
     "action": "노령·장애·사망 사유 발생 시 연금 청구",
-    "output_documents": ["급여 지급 청구서"],
+    "output_documents": [
+     "급여 지급 청구서"
+    ],
     "confidence": 0.84,
     "legal_basis": [
      {
@@ -291,7 +313,9 @@
     "actor": "국민연금공단",
     "action": "급여 종류 분기 판단",
     "condition": "노령(가입 10년·지급개시연령)·장애·유족 중 해당 급여",
-    "output_documents": ["급여종류 확인"],
+    "output_documents": [
+     "급여종류 확인"
+    ],
     "confidence": 0.8,
     "legal_basis": [
      {
@@ -316,8 +340,13 @@
     "progress": 50,
     "actor": "국민연금공단",
     "action": "수급요건 확인·연금액 산정·결정",
-    "input_documents": ["급여 지급 청구서", "가입내역"],
-    "output_documents": ["급여 결정 통지"],
+    "input_documents": [
+     "급여 지급 청구서",
+     "가입내역"
+    ],
+    "output_documents": [
+     "급여 결정 통지"
+    ],
     "blocker": "수급요건·연금액 심사 진행 중",
     "confidence": 0.82,
     "legal_basis": [
@@ -339,8 +368,12 @@
     "actor": "국민연금공단",
     "receiver": "수급자",
     "action": "매월 연금 지급",
-    "input_documents": ["급여 결정 통지"],
-    "output_documents": ["연금 지급 내역"],
+    "input_documents": [
+     "급여 결정 통지"
+    ],
+    "output_documents": [
+     "연금 지급 내역"
+    ],
     "deadline": "매월 25일 지급(법 제54조제2항, 토·공휴일이면 전날)",
     "confidence": 0.83,
     "legal_basis": [
@@ -362,7 +395,9 @@
     "actor": "국민연금공단",
     "receiver": "수급자",
     "action": "소득활동 반영·연금액 재평가 조정",
-    "output_documents": ["연금액 조정 내역"],
+    "output_documents": [
+     "연금액 조정 내역"
+    ],
     "confidence": 0.8,
     "legal_basis": [
      {
@@ -383,8 +418,13 @@
     "actor": "청구인(가입자·수급자)",
     "receiver": "국민연금공단·재심사위원회",
     "action": "결정 불복 시 심사청구·재심사청구",
-    "input_documents": ["급여 결정 통지"],
-    "output_documents": ["심사청구서", "재심사청구서"],
+    "input_documents": [
+     "급여 결정 통지"
+    ],
+    "output_documents": [
+     "심사청구서",
+     "재심사청구서"
+    ],
     "blocker": "급여 결정 불복 시 회귀 단계",
     "confidence": 0.78,
     "legal_basis": [
@@ -405,8 +445,13 @@
     "progress": 0,
     "actor": "국민연금 기금운용위원회",
     "action": "기금 적립·자산배분·운용",
-    "input_documents": ["징수 보험료"],
-    "output_documents": ["기금운용 성과", "자산배분안"],
+    "input_documents": [
+     "징수 보험료"
+    ],
+    "output_documents": [
+     "기금운용 성과",
+     "자산배분안"
+    ],
     "confidence": 0.8,
     "legal_basis": [
      {
@@ -426,7 +471,10 @@
     "progress": 0,
     "actor": "보건복지부장관",
     "action": "재정계산·종합운영계획·모수개혁 검토",
-    "output_documents": ["재정계산 결과", "종합운영계획"],
+    "output_documents": [
+     "재정계산 결과",
+     "종합운영계획"
+    ],
     "blocker": "기금 소진 전망 속 보험료율·소득대체율 조정 압박(운영 추정)",
     "confidence": 0.78,
     "legal_basis": [
@@ -439,24 +487,177 @@
    }
   ],
   "edges": [
-   { "id": "E01", "source": "P01", "target": "P03", "type": "sequence", "label": null },
-   { "id": "E02", "source": "P02", "target": "P03", "type": "sequence", "label": null },
-   { "id": "E03", "source": "P03", "target": "P04", "type": "sequence", "label": null },
-   { "id": "E04", "source": "P04", "target": "P05", "type": "sequence", "label": null },
-   { "id": "E05", "source": "P05", "target": "P06", "type": "sequence", "label": null },
-   { "id": "E06", "source": "P06", "target": "P07", "type": "sequence", "label": "징수 완료" },
-   { "id": "E07", "source": "P07", "target": "P08", "type": "sequence", "label": "가입기간 충족" },
-   { "id": "E08", "source": "P08", "target": "P09", "type": "sequence", "label": null },
-   { "id": "E09", "source": "P09", "target": "P10", "type": "sequence", "label": "청구 접수" },
-   { "id": "E10", "source": "P10", "target": "P11", "type": "sequence", "label": "수급 결정" },
-   { "id": "E11", "source": "P11", "target": "P12", "type": "sequence", "label": null },
-   { "id": "E12", "source": "P14", "target": "P15", "type": "sequence", "label": null },
-   { "id": "M01", "source": "P04", "target": "P05", "type": "message", "label": "보험료 통합고지서" },
-   { "id": "M02", "source": "P08", "target": "P10", "type": "message", "label": "연금 청구서" },
-   { "id": "M03", "source": "P06", "target": "P14", "type": "message", "label": "징수 보험료 적립" },
-   { "id": "L01", "source": "P10", "target": "P13", "type": "loop", "label": "결정 불복 심사청구" },
-   { "id": "L02", "source": "P13", "target": "P10", "type": "loop", "label": "재심사·재결정" }
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": "징수 완료"
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": "가입기간 충족"
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": "청구 접수"
+   },
+   {
+    "id": "E10",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": "수급 결정"
+   },
+   {
+    "id": "E11",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P04",
+    "target": "P05",
+    "type": "message",
+    "label": "보험료 통합고지서"
+   },
+   {
+    "id": "M02",
+    "source": "P08",
+    "target": "P10",
+    "type": "message",
+    "label": "연금 청구서"
+   },
+   {
+    "id": "M03",
+    "source": "P06",
+    "target": "P14",
+    "type": "message",
+    "label": "징수 보험료 적립"
+   },
+   {
+    "id": "L01",
+    "source": "P10",
+    "target": "P13",
+    "type": "loop",
+    "label": "결정 불복 심사청구"
+   },
+   {
+    "id": "L02",
+    "source": "P13",
+    "target": "P10",
+    "type": "loop",
+    "label": "재심사·재결정"
+   }
   ],
   "warnings": []
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-10",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 3건 중 공식 원문 3건을 연결했다. 캔버스와 절차 노드의 명시 조문 34건 가운데 34건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "국민연금법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국민연금법",
+    "lawId": "001781",
+    "mst": "280269",
+    "promulgatedOn": "2025-12-16",
+    "effectiveOn": "2026-06-17",
+    "officialUrl": "https://law.go.kr/법령/국민연금법"
+   },
+   {
+    "law": "국민연금법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "국민연금법 시행령",
+    "lawId": "002833",
+    "mst": "272577",
+    "promulgatedOn": "2025-06-25",
+    "effectiveOn": "2026-01-01",
+    "officialUrl": "https://law.go.kr/법령/국민연금법시행령"
+   },
+   {
+    "law": "국민연금법 시행규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "국민연금법 시행규칙",
+    "lawId": "006709",
+    "mst": "283561",
+    "promulgatedOn": "2026-02-13",
+    "effectiveOn": "2026-02-13",
+    "officialUrl": "https://law.go.kr/법령/국민연금법시행규칙"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-10",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 20,
+   "explicitCitationEntries": 20,
+   "articleReferences": 34,
+   "verifiedReferences": 34,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
  }
 }

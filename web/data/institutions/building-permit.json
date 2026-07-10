@@ -126,10 +126,16 @@
     "actor": "건축주",
     "receiver": "허가청(시장·군수·구청장)",
     "action": "사전결정 신청",
-    "output_documents": ["사전결정 신청서"],
+    "output_documents": [
+     "사전결정 신청서"
+    ],
     "confidence": 0.82,
     "legal_basis": [
-     {"law": "건축법", "article": "제10조(건축 관련 입지와 규모의 사전결정)", "text": "건축허가 대상 건축물을 건축하려는 자는 허가권자에게 건축 가능 여부 등의 사전결정을 신청할 수 있다."}
+     {
+      "law": "건축법",
+      "article": "제10조(건축 관련 입지와 규모의 사전결정)",
+      "text": "건축허가 대상 건축물을 건축하려는 자는 허가권자에게 건축 가능 여부 등의 사전결정을 신청할 수 있다."
+     }
     ]
    },
    {
@@ -143,11 +149,19 @@
     "actor": "시장·군수·구청장",
     "receiver": "건축주(신청인)",
     "action": "사전결정 통지",
-    "input_documents": ["사전결정 신청서"],
-    "output_documents": ["사전결정 통지서"],
+    "input_documents": [
+     "사전결정 신청서"
+    ],
+    "output_documents": [
+     "사전결정 통지서"
+    ],
     "confidence": 0.82,
     "legal_basis": [
-     {"law": "건축법", "article": "제10조(건축 관련 입지와 규모의 사전결정)", "text": "허가권자는 사전결정 신청에 대해 건축 가능 여부 등을 결정하여 통지한다."}
+     {
+      "law": "건축법",
+      "article": "제10조(건축 관련 입지와 규모의 사전결정)",
+      "text": "허가권자는 사전결정 신청에 대해 건축 가능 여부 등을 결정하여 통지한다."
+     }
     ]
    },
    {
@@ -160,10 +174,18 @@
     "progress": 100,
     "actor": "설계자",
     "action": "설계도서 작성",
-    "output_documents": ["설계도서", "구조안전확인서", "에너지절약계획서"],
+    "output_documents": [
+     "설계도서",
+     "구조안전확인서",
+     "에너지절약계획서"
+    ],
     "confidence": 0.8,
     "legal_basis": [
-     {"law": "건축법", "article": "제11조(건축허가)", "text": "허가를 받으려면 설계도서 등 관계 서류를 갖추어 신청하여야 한다."}
+     {
+      "law": "건축법",
+      "article": "제11조(건축허가)",
+      "text": "허가를 받으려면 설계도서 등 관계 서류를 갖추어 신청하여야 한다."
+     }
     ]
    },
    {
@@ -177,12 +199,25 @@
     "actor": "건축주",
     "receiver": "허가청(시장·군수·구청장)",
     "action": "허가 신청",
-    "input_documents": ["설계도서", "사전결정 통지서"],
-    "output_documents": ["건축허가 신청서"],
+    "input_documents": [
+     "설계도서",
+     "사전결정 통지서"
+    ],
+    "output_documents": [
+     "건축허가 신청서"
+    ],
     "confidence": 0.86,
     "legal_basis": [
-     {"law": "건축법", "article": "제11조(건축허가)", "text": "건축물을 건축하려는 자는 허가권자의 허가를 받아야 한다."},
-     {"law": "건축법 시행규칙", "article": "제6조(건축허가 등의 신청)", "text": "별지 제1호의4서식 신청서에 대지 범위·소유 권리 증명서류, 별표 2의 설계도서, 사전결정서 등을 첨부해 허가권자에게 제출한다."}
+     {
+      "law": "건축법",
+      "article": "제11조(건축허가)",
+      "text": "건축물을 건축하려는 자는 허가권자의 허가를 받아야 한다."
+     },
+     {
+      "law": "건축법 시행규칙",
+      "article": "제6조(건축허가 등의 신청)",
+      "text": "별지 제1호의4서식 신청서에 대지 범위·소유 권리 증명서류, 별표 2의 설계도서, 사전결정서 등을 첨부해 허가권자에게 제출한다."
+     }
     ]
    },
    {
@@ -196,12 +231,25 @@
     "actor": "특별시장·광역시장·도지사",
     "action": "사전승인",
     "condition": "일정 규모 이상 건축물 사전승인 대상 여부",
-    "input_documents": ["건축허가 신청서", "설계도서"],
-    "output_documents": ["사전승인서"],
+    "input_documents": [
+     "건축허가 신청서",
+     "설계도서"
+    ],
+    "output_documents": [
+     "사전승인서"
+    ],
     "confidence": 0.78,
     "legal_basis": [
-     {"law": "건축법", "article": "제11조(건축허가)", "text": "일정 규모 이상 건축물은 시·도지사의 사전승인을 받아야 한다."},
-     {"law": "건축법 시행령", "article": "제8조(건축허가)", "text": "층수 21층 이상이거나 연면적 합계 10만㎡ 이상인 건축물, 공동주택·숙박·위락시설 등은 시·도지사 사전승인 대상이다."}
+     {
+      "law": "건축법",
+      "article": "제11조(건축허가)",
+      "text": "일정 규모 이상 건축물은 시·도지사의 사전승인을 받아야 한다."
+     },
+     {
+      "law": "건축법 시행령",
+      "article": "제8조(건축허가)",
+      "text": "층수 21층 이상이거나 연면적 합계 10만㎡ 이상인 건축물, 공동주택·숙박·위락시설 등은 시·도지사 사전승인 대상이다."
+     }
     ]
    },
    {
@@ -214,12 +262,25 @@
     "progress": 100,
     "actor": "건축위원회",
     "action": "심의",
-    "input_documents": ["설계도서", "심의자료"],
-    "output_documents": ["심의 결과"],
+    "input_documents": [
+     "설계도서",
+     "심의자료"
+    ],
+    "output_documents": [
+     "심의 결과"
+    ],
     "confidence": 0.75,
     "legal_basis": [
-     {"law": "건축법", "article": "제4조의2(건축위원회의 건축 심의 등)", "text": "대통령령으로 정하는 건축물은 건축위원회의 심의를 거친다."},
-     {"law": "건축법 시행령", "article": "제5조의5(지방건축위원회)", "text": "다중이용 건축물·특수구조 건축물의 구조안전 등을 지방건축위원회가 심의하며, 구조안전 심의는 착공신고 전에 거친다."}
+     {
+      "law": "건축법",
+      "article": "제4조의2(건축위원회의 건축 심의 등)",
+      "text": "대통령령으로 정하는 건축물은 건축위원회의 심의를 거친다."
+     },
+     {
+      "law": "건축법 시행령",
+      "article": "제5조의5(지방건축위원회)",
+      "text": "다중이용 건축물·특수구조 건축물의 구조안전 등을 지방건축위원회가 심의하며, 구조안전 심의는 착공신고 전에 거친다."
+     }
     ]
    },
    {
@@ -233,13 +294,22 @@
     "actor": "관계 행정기관",
     "receiver": "허가청(시장·군수·구청장)",
     "action": "협의 회신",
-    "input_documents": ["설계도서", "협의 요청 공문"],
-    "output_documents": ["개발행위·소방·상하수도 협의 회신"],
+    "input_documents": [
+     "설계도서",
+     "협의 요청 공문"
+    ],
+    "output_documents": [
+     "개발행위·소방·상하수도 협의 회신"
+    ],
     "deadline": "협의 요청 후 통상 15일 내",
     "blocker": "소방·개발행위 의제 협의 회신 지연으로 심사 대기",
     "confidence": 0.79,
     "legal_basis": [
-     {"law": "건축법", "article": "제11조(건축허가)", "text": "허가 시 관계 행정기관의 장과 협의한 사항은 관련 인허가를 받은 것으로 본다."}
+     {
+      "law": "건축법",
+      "article": "제11조(건축허가)",
+      "text": "허가 시 관계 행정기관의 장과 협의한 사항은 관련 인허가를 받은 것으로 본다."
+     }
     ]
    },
    {
@@ -252,12 +322,22 @@
     "progress": 55,
     "actor": "시장·군수·구청장",
     "action": "적합 심사",
-    "input_documents": ["설계도서", "협의 회신", "심의 결과"],
-    "output_documents": ["적합 심사서"],
+    "input_documents": [
+     "설계도서",
+     "협의 회신",
+     "심의 결과"
+    ],
+    "output_documents": [
+     "적합 심사서"
+    ],
     "blocker": "구조안전·피난 기준 적합성 추가 확인 중",
     "confidence": 0.82,
     "legal_basis": [
-     {"law": "건축법", "article": "제11조(건축허가)", "text": "허가권자는 구조안전·피난·에너지 등 관계 법령 적합 여부를 심사한다."}
+     {
+      "law": "건축법",
+      "article": "제11조(건축허가)",
+      "text": "허가권자는 구조안전·피난·에너지 등 관계 법령 적합 여부를 심사한다."
+     }
     ]
    },
    {
@@ -271,11 +351,17 @@
     "actor": "시장·군수·구청장",
     "receiver": "건축주(신청인)",
     "action": "보완 요구",
-    "output_documents": ["보완 요구서"],
+    "output_documents": [
+     "보완 요구서"
+    ],
     "blocker": "보완·설계변경 회귀 단계",
     "confidence": 0.78,
     "legal_basis": [
-     {"law": "건축법", "article": "제11조(건축허가)", "text": "허가권자는 심사 결과 미비 사항에 대해 보완을 요구할 수 있다."}
+     {
+      "law": "건축법",
+      "article": "제11조(건축허가)",
+      "text": "허가권자는 심사 결과 미비 사항에 대해 보완을 요구할 수 있다."
+     }
     ]
    },
    {
@@ -289,12 +375,21 @@
     "actor": "설계자·건축주",
     "receiver": "허가청(시장·군수·구청장)",
     "action": "보완·변경 제출",
-    "input_documents": ["보완 요구서"],
-    "output_documents": ["보완 설계도서", "변경 신청서"],
+    "input_documents": [
+     "보완 요구서"
+    ],
+    "output_documents": [
+     "보완 설계도서",
+     "변경 신청서"
+    ],
     "blocker": "보완·설계변경 회귀 단계",
     "confidence": 0.78,
     "legal_basis": [
-     {"law": "건축법", "article": "제16조(허가와 신고사항의 변경)", "text": "허가·신고사항을 변경하려면 변경허가 또는 변경신고를 하여야 한다."}
+     {
+      "law": "건축법",
+      "article": "제16조(허가와 신고사항의 변경)",
+      "text": "허가·신고사항을 변경하려면 변경허가 또는 변경신고를 하여야 한다."
+     }
     ]
    },
    {
@@ -308,11 +403,20 @@
     "actor": "시장·군수·구청장",
     "receiver": "건축주(신청인)",
     "action": "허가",
-    "input_documents": ["적합 심사서", "협의 회신"],
-    "output_documents": ["건축허가서"],
+    "input_documents": [
+     "적합 심사서",
+     "협의 회신"
+    ],
+    "output_documents": [
+     "건축허가서"
+    ],
     "confidence": 0.85,
     "legal_basis": [
-     {"law": "건축법", "article": "제11조(건축허가)", "text": "심사 결과 적합하면 건축허가를 하고 허가서를 교부한다."}
+     {
+      "law": "건축법",
+      "article": "제11조(건축허가)",
+      "text": "심사 결과 적합하면 건축허가를 하고 허가서를 교부한다."
+     }
     ]
    },
    {
@@ -326,12 +430,25 @@
     "actor": "건축주",
     "receiver": "허가청(시장·군수·구청장)",
     "action": "착공신고",
-    "input_documents": ["건축허가서", "감리계약서"],
-    "output_documents": ["착공신고서"],
+    "input_documents": [
+     "건축허가서",
+     "감리계약서"
+    ],
+    "output_documents": [
+     "착공신고서"
+    ],
     "confidence": 0.84,
     "legal_basis": [
-     {"law": "건축법", "article": "제21조(착공신고 등)", "text": "허가받은 건축물의 공사를 착수하려면 허가권자에게 착공신고를 하여야 한다."},
-     {"law": "건축법", "article": "제25조(건축물의 공사감리)", "text": "건축주는 공사감리자를 지정하여 공사를 감리하게 하여야 한다."}
+     {
+      "law": "건축법",
+      "article": "제21조(착공신고 등)",
+      "text": "허가받은 건축물의 공사를 착수하려면 허가권자에게 착공신고를 하여야 한다."
+     },
+     {
+      "law": "건축법",
+      "article": "제25조(건축물의 공사감리)",
+      "text": "건축주는 공사감리자를 지정하여 공사를 감리하게 하여야 한다."
+     }
     ]
    },
    {
@@ -344,11 +461,21 @@
     "progress": 0,
     "actor": "시공자·감리자",
     "action": "시공·감리",
-    "input_documents": ["착공신고서", "설계도서"],
-    "output_documents": ["감리일지", "시공 기록"],
+    "input_documents": [
+     "착공신고서",
+     "설계도서"
+    ],
+    "output_documents": [
+     "감리일지",
+     "시공 기록"
+    ],
     "confidence": 0.8,
     "legal_basis": [
-     {"law": "건축법", "article": "제25조(건축물의 공사감리)", "text": "공사감리자는 설계도서대로 시공되는지 확인하고 감리업무를 수행한다."}
+     {
+      "law": "건축법",
+      "article": "제25조(건축물의 공사감리)",
+      "text": "공사감리자는 설계도서대로 시공되는지 확인하고 감리업무를 수행한다."
+     }
     ]
    },
    {
@@ -362,10 +489,16 @@
     "actor": "감리자",
     "receiver": "허가청(시장·군수·구청장)",
     "action": "감리완료 보고",
-    "output_documents": ["감리완료보고서"],
+    "output_documents": [
+     "감리완료보고서"
+    ],
     "confidence": 0.8,
     "legal_basis": [
-     {"law": "건축법", "article": "제25조(건축물의 공사감리)", "text": "공사감리자는 공사 완료 시 감리완료보고서를 작성·제출한다."}
+     {
+      "law": "건축법",
+      "article": "제25조(건축물의 공사감리)",
+      "text": "공사감리자는 공사 완료 시 감리완료보고서를 작성·제출한다."
+     }
     ]
    },
    {
@@ -379,11 +512,19 @@
     "actor": "건축주",
     "receiver": "허가청(시장·군수·구청장)",
     "action": "사용승인 신청",
-    "input_documents": ["감리완료보고서"],
-    "output_documents": ["사용승인 신청서"],
+    "input_documents": [
+     "감리완료보고서"
+    ],
+    "output_documents": [
+     "사용승인 신청서"
+    ],
     "confidence": 0.84,
     "legal_basis": [
-     {"law": "건축법", "article": "제22조(건축물의 사용승인)", "text": "공사를 완료한 후 건축물을 사용하려면 허가권자에게 사용승인을 신청하여야 한다."}
+     {
+      "law": "건축법",
+      "article": "제22조(건축물의 사용승인)",
+      "text": "공사를 완료한 후 건축물을 사용하려면 허가권자에게 사용승인을 신청하여야 한다."
+     }
     ]
    },
    {
@@ -397,12 +538,25 @@
     "actor": "시장·군수·구청장",
     "action": "사용승인 검사",
     "deadline": "신청서 접수 후 7일 이내 현장검사(규칙 제16조)",
-    "input_documents": ["사용승인 신청서", "감리완료보고서"],
-    "output_documents": ["사용승인서"],
+    "input_documents": [
+     "사용승인 신청서",
+     "감리완료보고서"
+    ],
+    "output_documents": [
+     "사용승인서"
+    ],
     "confidence": 0.84,
     "legal_basis": [
-     {"law": "건축법", "article": "제22조(건축물의 사용승인)", "text": "허가권자는 사용승인 검사를 실시하고 적합하면 사용승인서를 교부한다."},
-     {"law": "건축법 시행규칙", "article": "제16조(사용승인신청)", "text": "허가권자는 신청서를 받은 날부터 7일 이내에 현장검사를 실시하고 합격 시 별지 제18호서식 사용승인서를 발급한다."}
+     {
+      "law": "건축법",
+      "article": "제22조(건축물의 사용승인)",
+      "text": "허가권자는 사용승인 검사를 실시하고 적합하면 사용승인서를 교부한다."
+     },
+     {
+      "law": "건축법 시행규칙",
+      "article": "제16조(사용승인신청)",
+      "text": "허가권자는 신청서를 받은 날부터 7일 이내에 현장검사를 실시하고 합격 시 별지 제18호서식 사용승인서를 발급한다."
+     }
     ]
    },
    {
@@ -415,35 +569,232 @@
     "progress": 0,
     "actor": "건축행정시스템(세움터)",
     "action": "전자처리·대장 등재",
-    "input_documents": ["건축허가서", "사용승인서"],
-    "output_documents": ["건축물대장", "전자처리 기록"],
+    "input_documents": [
+     "건축허가서",
+     "사용승인서"
+    ],
+    "output_documents": [
+     "건축물대장",
+     "전자처리 기록"
+    ],
     "confidence": 0.75,
     "legal_basis": [
-     {"law": "건축법", "article": "제22조(건축물의 사용승인)", "text": "사용승인 내용을 건축행정시스템에 처리하고 건축물대장에 등재한다."}
+     {
+      "law": "건축법",
+      "article": "제22조(건축물의 사용승인)",
+      "text": "사용승인 내용을 건축행정시스템에 처리하고 건축물대장에 등재한다."
+     }
     ]
    }
   ],
   "edges": [
-   {"id": "E01", "source": "B01", "target": "B02", "type": "sequence", "label": null},
-   {"id": "E02", "source": "B02", "target": "B04", "type": "sequence", "label": null},
-   {"id": "E03", "source": "B03", "target": "B04", "type": "sequence", "label": null},
-   {"id": "E04", "source": "B04", "target": "B05", "type": "sequence", "label": null},
-   {"id": "E05", "source": "B05", "target": "B06", "type": "sequence", "label": null},
-   {"id": "E06", "source": "B05", "target": "B07", "type": "sequence", "label": null},
-   {"id": "E07", "source": "B06", "target": "B08", "type": "sequence", "label": null},
-   {"id": "E08", "source": "B08", "target": "B11", "type": "sequence", "label": null},
-   {"id": "E09", "source": "B11", "target": "B12", "type": "sequence", "label": null},
-   {"id": "E10", "source": "B12", "target": "B13", "type": "sequence", "label": null},
-   {"id": "E11", "source": "B13", "target": "B14", "type": "sequence", "label": null},
-   {"id": "E12", "source": "B14", "target": "B15", "type": "sequence", "label": null},
-   {"id": "E13", "source": "B15", "target": "B16", "type": "sequence", "label": null},
-   {"id": "M01", "source": "B07", "target": "B08", "type": "message", "label": "의제 협의 회신"},
-   {"id": "M02", "source": "B08", "target": "B17", "type": "message", "label": "허가심사 내역 등재"},
-   {"id": "M03", "source": "B16", "target": "B17", "type": "message", "label": "사용승인·건축물대장 등재"},
-   {"id": "M04", "source": "B09", "target": "B10", "type": "message", "label": "보완·설계변경 요구"},
-   {"id": "L01", "source": "B08", "target": "B09", "type": "loop", "label": "보완·설계변경 필요"},
-   {"id": "L02", "source": "B10", "target": "B08", "type": "loop", "label": "보완서 재심사"}
+   {
+    "id": "E01",
+    "source": "B01",
+    "target": "B02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "B02",
+    "target": "B04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "B03",
+    "target": "B04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "B04",
+    "target": "B05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "B05",
+    "target": "B06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "B05",
+    "target": "B07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "B06",
+    "target": "B08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "B08",
+    "target": "B11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "B11",
+    "target": "B12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "B12",
+    "target": "B13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "B13",
+    "target": "B14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "B14",
+    "target": "B15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "B15",
+    "target": "B16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "B07",
+    "target": "B08",
+    "type": "message",
+    "label": "의제 협의 회신"
+   },
+   {
+    "id": "M02",
+    "source": "B08",
+    "target": "B17",
+    "type": "message",
+    "label": "허가심사 내역 등재"
+   },
+   {
+    "id": "M03",
+    "source": "B16",
+    "target": "B17",
+    "type": "message",
+    "label": "사용승인·건축물대장 등재"
+   },
+   {
+    "id": "M04",
+    "source": "B09",
+    "target": "B10",
+    "type": "message",
+    "label": "보완·설계변경 요구"
+   },
+   {
+    "id": "L01",
+    "source": "B08",
+    "target": "B09",
+    "type": "loop",
+    "label": "보완·설계변경 필요"
+   },
+   {
+    "id": "L02",
+    "source": "B10",
+    "target": "B08",
+    "type": "loop",
+    "label": "보완서 재심사"
+   }
   ],
   "warnings": []
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-10",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 5건 중 공식 원문 5건을 연결했다. 캔버스와 절차 노드의 명시 조문 33건 가운데 33건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "건축법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "건축법",
+    "lawId": "001823",
+    "mst": "273437",
+    "promulgatedOn": "2025-08-26",
+    "effectiveOn": "2026-02-27",
+    "officialUrl": "https://law.go.kr/법령/건축법"
+   },
+   {
+    "law": "건축법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "건축법 시행령",
+    "lawId": "002118",
+    "mst": "273503",
+    "promulgatedOn": "2025-08-26",
+    "effectiveOn": "2026-02-27",
+    "officialUrl": "https://law.go.kr/법령/건축법시행령"
+   },
+   {
+    "law": "건축법 시행규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "건축법 시행규칙",
+    "lawId": "006191",
+    "mst": "283727",
+    "promulgatedOn": "2026-02-27",
+    "effectiveOn": "2026-02-27",
+    "officialUrl": "https://law.go.kr/법령/건축법시행규칙"
+   },
+   {
+    "law": "건축물의 구조기준 등에 관한 규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "건축물의 구조기준 등에 관한 규칙",
+    "lawId": "006187",
+    "mst": "267091",
+    "promulgatedOn": "2024-12-17",
+    "effectiveOn": "2024-12-17",
+    "officialUrl": "https://law.go.kr/법령/건축물의구조기준등에관한규칙"
+   },
+   {
+    "law": "국토의 계획 및 이용에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국토의 계획 및 이용에 관한 법률",
+    "lawId": "009294",
+    "mst": "284013",
+    "promulgatedOn": "2026-03-05",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/국토의계획및이용에관한법률"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-10",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 27,
+   "explicitCitationEntries": 25,
+   "articleReferences": 33,
+   "verifiedReferences": 33,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
  }
 }

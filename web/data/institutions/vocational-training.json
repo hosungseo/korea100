@@ -122,7 +122,10 @@
     "progress": 100,
     "actor": "훈련기관",
     "action": "인정 신청",
-    "output_documents": ["과정인정 신청서", "훈련계획서"],
+    "output_documents": [
+     "과정인정 신청서",
+     "훈련계획서"
+    ],
     "deadline": "훈련 개시 전",
     "blocker": null,
     "confidence": 0.86,
@@ -144,7 +147,10 @@
     "progress": 100,
     "actor": "직업능력심사평가원",
     "action": "심사·인정",
-    "output_documents": ["과정인정서", "심사결과"],
+    "output_documents": [
+     "과정인정서",
+     "심사결과"
+    ],
     "deadline": "내부 처리기한",
     "blocker": null,
     "confidence": 0.84,
@@ -166,8 +172,12 @@
     "progress": 100,
     "actor": "HRD-Net",
     "action": "등록·공개",
-    "input_documents": ["과정인정서"],
-    "output_documents": ["공개 과정정보"],
+    "input_documents": [
+     "과정인정서"
+    ],
+    "output_documents": [
+     "공개 과정정보"
+    ],
     "blocker": null,
     "confidence": 0.77,
     "legal_basis": [
@@ -189,7 +199,10 @@
     "actor": "훈련생",
     "receiver": "고용센터",
     "action": "발급 신청",
-    "output_documents": ["구직등록", "계좌발급 신청서"],
+    "output_documents": [
+     "구직등록",
+     "계좌발급 신청서"
+    ],
     "blocker": null,
     "confidence": 0.85,
     "legal_basis": [
@@ -210,8 +223,13 @@
     "progress": 100,
     "actor": "고용센터",
     "action": "상담·계획 수립",
-    "input_documents": ["구직등록"],
-    "output_documents": ["훈련상담 자료", "훈련계획"],
+    "input_documents": [
+     "구직등록"
+    ],
+    "output_documents": [
+     "훈련상담 자료",
+     "훈련계획"
+    ],
     "blocker": null,
     "confidence": 0.83,
     "legal_basis": [
@@ -232,7 +250,9 @@
     "progress": 100,
     "actor": "한국산업인력공단",
     "action": "계좌 발급",
-    "output_documents": ["직업능력개발계좌(내일배움카드)"],
+    "output_documents": [
+     "직업능력개발계좌(내일배움카드)"
+    ],
     "blocker": null,
     "confidence": 0.85,
     "legal_basis": [
@@ -253,8 +273,13 @@
     "progress": 100,
     "actor": "훈련생",
     "action": "수강 신청",
-    "input_documents": ["공개 과정정보", "내일배움카드"],
-    "output_documents": ["수강 신청내역"],
+    "input_documents": [
+     "공개 과정정보",
+     "내일배움카드"
+    ],
+    "output_documents": [
+     "수강 신청내역"
+    ],
     "blocker": null,
     "confidence": 0.84,
     "legal_basis": [
@@ -275,8 +300,13 @@
     "progress": 55,
     "actor": "훈련기관",
     "action": "훈련 실시",
-    "input_documents": ["수강 신청내역", "과정인정서"],
-    "output_documents": ["훈련일지"],
+    "input_documents": [
+     "수강 신청내역",
+     "과정인정서"
+    ],
+    "output_documents": [
+     "훈련일지"
+    ],
     "deadline": "인정 훈련기간",
     "blocker": "훈련 진행 중(수료 전)",
     "confidence": 0.82,
@@ -298,7 +328,10 @@
     "progress": 0,
     "actor": "훈련기관",
     "action": "출결·성과 관리",
-    "output_documents": ["출결기록", "성과기록"],
+    "output_documents": [
+     "출결기록",
+     "성과기록"
+    ],
     "blocker": "훈련 미종료",
     "confidence": 0.8,
     "legal_basis": [
@@ -319,7 +352,10 @@
     "progress": 0,
     "actor": "훈련생",
     "action": "수료·취업연계",
-    "output_documents": ["수료증", "자격취득 내역"],
+    "output_documents": [
+     "수료증",
+     "자격취득 내역"
+    ],
     "blocker": "훈련 미종료",
     "confidence": 0.78,
     "legal_basis": [
@@ -341,7 +377,10 @@
     "actor": "훈련기관",
     "receiver": "한국산업인력공단",
     "action": "비용 지원 신청",
-    "output_documents": ["비용지원 신청서", "정산 서류"],
+    "output_documents": [
+     "비용지원 신청서",
+     "정산 서류"
+    ],
     "blocker": "수료 확정 전",
     "confidence": 0.81,
     "legal_basis": [
@@ -362,8 +401,15 @@
     "progress": 0,
     "actor": "한국산업인력공단",
     "action": "정산·지급",
-    "input_documents": ["정산 서류", "출결기록", "성과기록"],
-    "output_documents": ["정산 결과", "지급 내역"],
+    "input_documents": [
+     "정산 서류",
+     "출결기록",
+     "성과기록"
+    ],
+    "output_documents": [
+     "정산 결과",
+     "지급 내역"
+    ],
     "blocker": "지원 신청 전",
     "confidence": 0.8,
     "legal_basis": [
@@ -385,7 +431,10 @@
     "actor": "한국산업인력공단",
     "action": "부정 점검",
     "condition": "허위 수강·유령 훈련생 등 부정수급 여부",
-    "output_documents": ["점검결과", "적발내역"],
+    "output_documents": [
+     "점검결과",
+     "적발내역"
+    ],
     "blocker": "부정수급 상시 모니터링 체계 미흡(운영 추정)",
     "confidence": 0.74,
     "legal_basis": [
@@ -406,8 +455,13 @@
     "progress": 0,
     "actor": "직업능력심사평가원/공단",
     "action": "인정취소·환수",
-    "input_documents": ["적발내역"],
-    "output_documents": ["인정취소 통보", "환수·지원제한 결정"],
+    "input_documents": [
+     "적발내역"
+    ],
+    "output_documents": [
+     "인정취소 통보",
+     "환수·지원제한 결정"
+    ],
     "blocker": "적발 시 조건부 회귀 단계",
     "confidence": 0.75,
     "legal_basis": [
@@ -428,7 +482,10 @@
     "progress": 0,
     "actor": "사업주",
     "action": "인정·실시·지원 신청",
-    "output_documents": ["사업주 훈련 인정서", "실시비용 지원 신청서"],
+    "output_documents": [
+     "사업주 훈련 인정서",
+     "실시비용 지원 신청서"
+    ],
     "blocker": "사업주 훈련지원 비용 산정방식 확인 필요(운영 추정)",
     "confidence": 0.72,
     "legal_basis": [
@@ -446,23 +503,181 @@
    }
   ],
   "edges": [
-   { "id": "E01", "source": "P01", "target": "P02", "type": "sequence", "label": null },
-   { "id": "E02", "source": "P02", "target": "P03", "type": "sequence", "label": null },
-   { "id": "E03", "source": "P03", "target": "P04", "type": "sequence", "label": null },
-   { "id": "E04", "source": "P04", "target": "P05", "type": "sequence", "label": null },
-   { "id": "E05", "source": "P05", "target": "P06", "type": "sequence", "label": null },
-   { "id": "E06", "source": "P06", "target": "P07", "type": "sequence", "label": null },
-   { "id": "E07", "source": "P07", "target": "P08", "type": "sequence", "label": null },
-   { "id": "E08", "source": "P08", "target": "P09", "type": "sequence", "label": null },
-   { "id": "E09", "source": "P09", "target": "P10", "type": "sequence", "label": null },
-   { "id": "E10", "source": "P10", "target": "P11", "type": "sequence", "label": null },
-   { "id": "E11", "source": "P11", "target": "P12", "type": "sequence", "label": null },
-   { "id": "M01", "source": "P02", "target": "S01", "type": "message", "label": "인정과정 등록" },
-   { "id": "M02", "source": "S01", "target": "P06", "type": "message", "label": "과정 검색·선택" },
-   { "id": "M03", "source": "P14", "target": "P11", "type": "message", "label": "사업주 훈련비 지원 신청" },
-   { "id": "L01", "source": "P12", "target": "P13", "type": "loop", "label": "부정 적발 시 제재" },
-   { "id": "L02", "source": "P13", "target": "P07", "type": "loop", "label": "인정취소·환수 후 재점검" }
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P02",
+    "target": "S01",
+    "type": "message",
+    "label": "인정과정 등록"
+   },
+   {
+    "id": "M02",
+    "source": "S01",
+    "target": "P06",
+    "type": "message",
+    "label": "과정 검색·선택"
+   },
+   {
+    "id": "M03",
+    "source": "P14",
+    "target": "P11",
+    "type": "message",
+    "label": "사업주 훈련비 지원 신청"
+   },
+   {
+    "id": "L01",
+    "source": "P12",
+    "target": "P13",
+    "type": "loop",
+    "label": "부정 적발 시 제재"
+   },
+   {
+    "id": "L02",
+    "source": "P13",
+    "target": "P07",
+    "type": "loop",
+    "label": "인정취소·환수 후 재점검"
+   }
   ],
   "warnings": []
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-10",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 4건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 33건 가운데 33건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "국민 평생 직업능력 개발법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국민 평생 직업능력 개발법",
+    "lawId": "000117",
+    "mst": "247245",
+    "promulgatedOn": "2023-01-03",
+    "effectiveOn": "2023-07-04",
+    "officialUrl": "https://law.go.kr/법령/국민평생직업능력개발법"
+   },
+   {
+    "law": "고용보험법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "고용보험법",
+    "lawId": "001761",
+    "mst": "279807",
+    "promulgatedOn": "2025-11-11",
+    "effectiveOn": "2026-05-12",
+    "officialUrl": "https://law.go.kr/법령/고용보험법"
+   },
+   {
+    "law": "국민 평생 직업능력 개발법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "국민 평생 직업능력 개발법 시행령",
+    "lawId": "003069",
+    "mst": "282937",
+    "promulgatedOn": "2026-01-27",
+    "effectiveOn": "2026-02-01",
+    "officialUrl": "https://law.go.kr/법령/국민평생직업능력개발법시행령"
+   },
+   {
+    "law": "국민 평생 직업능력 개발법 시행규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "국민 평생 직업능력 개발법 시행규칙",
+    "lawId": "006865",
+    "mst": "286973",
+    "promulgatedOn": "2026-06-17",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/국민평생직업능력개발법시행규칙"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-10",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 20,
+   "explicitCitationEntries": 19,
+   "articleReferences": 33,
+   "verifiedReferences": 33,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
  }
 }
