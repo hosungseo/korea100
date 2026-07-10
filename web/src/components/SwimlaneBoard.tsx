@@ -1056,11 +1056,13 @@ export default function SwimlaneBoard({
   verification,
   initialNodeId,
   onNodeChange,
+  showDrawer = true,
 }: {
   process: ProcessModel;
   verification?: SourceVerification;
   initialNodeId?: string;
   onNodeChange?: (nodeId: string | null) => void;
+  showDrawer?: boolean;
 }) {
   const { lanes, stages, nodes, edges } = process;
 
@@ -1522,7 +1524,7 @@ export default function SwimlaneBoard({
       </div>
 
       {/* Drawer */}
-      {activeNode && (
+      {showDrawer && activeNode && (
         <NodeDrawer
           node={activeNode}
           edges={edges}

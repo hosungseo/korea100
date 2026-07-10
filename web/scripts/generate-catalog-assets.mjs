@@ -23,13 +23,24 @@ for (const file of fs.readdirSync(DATA_DIR).filter((name) => name.endsWith(".jso
     node.actor,
     node.action ?? "",
     node.blocker ?? "",
+    ...(node.input_documents ?? []),
     ...(node.output_documents ?? []),
+    ...(node.legal_basis ?? []).flatMap((basis) => [
+      basis.law,
+      basis.article,
+      basis.text ?? "",
+    ]),
   ]);
   const authorityTerms = institution.canvas.authorities.flatMap((authority) => [
     authority.name,
     authority.role,
   ]);
   const legalBasisNames = institution.canvas.legalBasis.map((basis) => basis.law);
+  const legalBasisTerms = institution.canvas.legalBasis.flatMap((basis) => [
+    basis.law,
+    basis.articles ?? "",
+    basis.kind,
+  ]);
 
   searchIndex[institution.slug] = [
     institution.name,
@@ -40,7 +51,7 @@ for (const file of fs.readdirSync(DATA_DIR).filter((name) => name.endsWith(".jso
     institution.canvas.stakeholders,
     institution.canvas.moneyFlow,
     institution.canvas.docsFlow,
-    ...legalBasisNames,
+    ...legalBasisTerms,
     ...authorityTerms,
     ...institution.canvas.bottlenecks,
     ...institution.canvas.reformPoints,

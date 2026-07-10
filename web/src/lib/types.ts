@@ -112,6 +112,7 @@ export interface ProcessNode {
   progress?: number;
   actor: string;
   action?: string;
+  input_documents?: string[];
   output_documents?: string[];
   deadline?: string;
   blocker?: string | null;
@@ -172,12 +173,15 @@ export interface InstitutionSummary {
   processNodeCount: number;
   processStageCount: number;
   processLaneCount: number;
+  processGatewayCount: number;
   legalBasisCount: number;
   fieldVerificationCount: number;
+  bottleneckCount: number;
   verificationStatus?: SourceVerificationStatus;
   verifiedReferences: number;
   articleReferences: number;
   sourceCount: number;
+  laws: string[];
 }
 
 export interface InstitutionComparison {

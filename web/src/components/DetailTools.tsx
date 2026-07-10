@@ -69,10 +69,10 @@ export default function DetailTools({
         공유
       </button>
       <button type="button" onClick={savePng} disabled={exporting}>
-        {exporting ? "PNG 생성 중" : "PNG 저장"}
+        {exporting ? "PNG 생성 중" : "PNG 내보내기"}
       </button>
       <button type="button" onClick={printPage}>
-        인쇄·PDF
+        인쇄 · PDF
       </button>
       <span aria-live="polite">{status}</span>
     </div>

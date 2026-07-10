@@ -33,6 +33,8 @@ interface PortraitEdgePath {
 
 const STAGE_LABEL_WIDTH = 132;
 const MIN_GROUP_WIDTH = 218;
+const EMBEDDED_STAGE_LABEL_WIDTH = 84;
+const EMBEDDED_GROUP_WIDTH = 196;
 const ARROW_CLEARANCE = 7;
 
 export default function PortraitProcessBoard({
@@ -41,13 +43,21 @@ export default function PortraitProcessBoard({
   laneGroups,
   initialNodeId,
   onNodeChange,
+  embedded = false,
+  showDrawer = true,
 }: {
   process: ProcessModel;
   verification?: SourceVerification;
   laneGroups?: ProcessLaneGroup[];
   initialNodeId?: string;
   onNodeChange?: (nodeId: string | null) => void;
+  embedded?: boolean;
+  showDrawer?: boolean;
 }) {
+  const stageLabelWidth = embedded
+    ? EMBEDDED_STAGE_LABEL_WIDTH
+    : STAGE_LABEL_WIDTH;
+  const minGroupWidth = embedded ? EMBEDDED_GROUP_WIDTH : MIN_GROUP_WIDTH;
   const groups = useMemo(
     () => laneGroups?.length ? laneGroups : fallbackGroups(process.lanes),
     [laneGroups, process.lanes]
@@ -88,10 +98,11 @@ export default function PortraitProcessBoard({
         groupByLane,
         nodeRefs.current,
         stageRefs.current,
-        board
+        board,
+        stageLabelWidth,
       )
     );
-  }, [groupByLane, nodeById, process.edges, process.stages]);
+  }, [groupByLane, nodeById, process.edges, process.stages, stageLabelWidth]);
 
   useLayoutEffect(() => {
     computeEdges();
@@ -151,17 +162,19 @@ export default function PortraitProcessBoard({
     }
   }
 
-  const minGridWidth = STAGE_LABEL_WIDTH + groups.length * MIN_GROUP_WIDTH;
+  const minGridWidth = stageLabelWidth + groups.length * minGroupWidth;
 
   return (
-    <div className="portrait-process-board">
-      <ProcessVerificationSummaryBar
-        process={process}
-        verification={verification}
-      />
+    <div className="portrait-process-board" data-embedded={embedded ? "true" : undefined}>
+      {!embedded && (
+        <ProcessVerificationSummaryBar
+          process={process}
+          verification={verification}
+        />
+      )}
 
       <div className="portrait-process-desktop-view">
-        <nav className="portrait-stage-nav" aria-label="업무 단계 바로가기">
+        {!embedded && <nav className="portrait-stage-nav" aria-label="업무 단계 바로가기">
           {process.stages.map((stage) => {
             const [code, ...label] = stage.split(" ");
             return (
@@ -176,7 +189,7 @@ export default function PortraitProcessBoard({
               </button>
             );
           })}
-        </nav>
+        </nav>}
 
         <div
           ref={boardScrollRef}
@@ -190,7 +203,7 @@ export default function PortraitProcessBoard({
             ref={boardRef}
             className="portrait-process-grid"
             style={{
-              gridTemplateColumns: `${STAGE_LABEL_WIDTH}px repeat(${groups.length}, minmax(${MIN_GROUP_WIDTH}px, 1fr))`,
+              gridTemplateColumns: `${stageLabelWidth}px repeat(${groups.length}, minmax(${minGroupWidth}px, 1fr))`,
               minWidth: minGridWidth,
             }}
           >
@@ -261,8 +274,8 @@ export default function PortraitProcessBoard({
             )}
 
             <div className="portrait-corner-cell">
-              <strong>단계 ↓</strong>
-              <span>행위자 묶음 →</span>
+              <strong>{embedded ? "게이트" : "단계 ↓"}</strong>
+              <span>{embedded ? "↓" : "행위자 묶음 →"}</span>
             </div>
 
             {groups.map((group) => (
@@ -311,13 +324,14 @@ export default function PortraitProcessBoard({
                         const hoverActive = hoveredNodeId !== null;
                         const connected = connectedNodeIds.has(node.id);
                         const current = hoveredNodeId === node.id;
+                        const selected = activeNode?.id === node.id;
                         return (
                           <SwimlaneNodeCard
                             key={node.id}
                             node={node}
                             verification={verification}
                             onClick={handleNodeClick}
-                            highlighted={hoverActive && (current || connected)}
+                            highlighted={selected || (hoverActive && (current || connected))}
                             dimmed={hoverActive && !current && !connected}
                             onHover={() => setHoveredNodeId(node.id)}
                             onLeave={() => setHoveredNodeId(null)}
@@ -342,16 +356,16 @@ export default function PortraitProcessBoard({
         <Legend />
       </div>
 
-      <div className="portrait-process-mobile-view">
+      {!embedded && <div className="portrait-process-mobile-view">
         <MobileProcessFlow
           process={process}
           verification={verification}
           onNodeClick={handleNodeClick}
         />
         <Legend />
-      </div>
+      </div>}
 
-      {activeNode && (
+      {showDrawer && activeNode && (
         <NodeDrawer
           node={activeNode}
           edges={process.edges}
@@ -392,7 +406,8 @@ function buildPortraitEdgePaths(
   groupByLane: Map<string, number>,
   nodeElements: Map<string, HTMLElement>,
   stageElements: Map<string, HTMLElement>,
-  board: HTMLElement
+  board: HTMLElement,
+  stageLabelWidth: number,
 ): PortraitEdgePath[] {
   const boardRect = board.getBoundingClientRect();
   const stageIndex = new Map(stages.map((stage, index) => [stage, index]));
@@ -425,6 +440,7 @@ function buildPortraitEdgePaths(
       targetStageIndex,
       sourceGroupIndex,
       targetGroupIndex,
+      stageLabelWidth,
     });
     return [{ edge, ...route }];
   });
@@ -440,6 +456,7 @@ function portraitRoute({
   targetStageIndex,
   sourceGroupIndex,
   targetGroupIndex,
+  stageLabelWidth,
 }: {
   edge: ProcessEdge;
   source: Rect;
@@ -450,6 +467,7 @@ function portraitRoute({
   targetStageIndex: number;
   sourceGroupIndex: number;
   targetGroupIndex: number;
+  stageLabelWidth: number;
 }) {
   const sourceCenterX = source.left + source.width / 2;
   const sourceCenterY = source.top + source.height / 2;
@@ -470,8 +488,8 @@ function portraitRoute({
     return {
       path: downward
         ? `M ${round(sourceCenterX)} ${round(source.bottom)} V ${round(target.top - ARROW_CLEARANCE)}`
-        : `M ${round(source.left)} ${round(sourceCenterY)} H ${round(sourceRow.left + STAGE_LABEL_WIDTH - 12)} V ${round(targetCenterY)} H ${round(target.left - ARROW_CLEARANCE)}`,
-      labelX: downward ? source.right + 34 : sourceRow.left + STAGE_LABEL_WIDTH + 40,
+        : `M ${round(source.left)} ${round(sourceCenterY)} H ${round(sourceRow.left + stageLabelWidth - 12)} V ${round(targetCenterY)} H ${round(target.left - ARROW_CLEARANCE)}`,
+      labelX: downward ? source.right + 34 : sourceRow.left + stageLabelWidth + 40,
       labelY: (sourceCenterY + targetCenterY) / 2,
     };
   }
@@ -494,7 +512,7 @@ function portraitRoute({
     };
   }
 
-  const railX = sourceRow.left + STAGE_LABEL_WIDTH - 12;
+  const railX = sourceRow.left + stageLabelWidth - 12;
   const channelY = targetRow.bottom - 22;
   return {
     path: `M ${round(source.left)} ${round(sourceCenterY)} H ${round(railX)} V ${round(channelY)} H ${round(targetCenterX)} V ${round(target.bottom + ARROW_CLEARANCE)}`,
