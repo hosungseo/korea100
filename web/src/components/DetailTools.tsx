@@ -75,10 +75,16 @@ export default function DetailTools({
       await waitForLayout();
       await document.fonts.ready;
 
-      const exportTarget = target.querySelector<HTMLElement>(".swimlane-board");
-      if (!exportTarget) throw new Error("Landscape process board is unavailable");
+      const exportTarget = target;
       const width = Math.ceil(exportTarget.scrollWidth);
-      const height = Math.ceil(exportTarget.scrollHeight);
+      const targetTop = exportTarget.getBoundingClientRect().top;
+      const lastContent = exportTarget.querySelector<HTMLElement>(
+        ".swimlane-desktop-view > .process-board-legend",
+      );
+      const contentBottom =
+        lastContent?.getBoundingClientRect().bottom ??
+        exportTarget.getBoundingClientRect().bottom;
+      const height = Math.ceil(contentBottom - targetTop + 24);
       const { toPng } = await import("html-to-image");
       const dataUrl = await toPng(exportTarget, {
         backgroundColor: "#ffffff",
@@ -86,6 +92,12 @@ export default function DetailTools({
         pixelRatio: 2,
         width,
         height,
+        style: {
+          position: "static",
+          top: "0",
+          left: "0",
+          zIndex: "auto",
+        },
       });
       downloadFile(dataUrl, `${slug}-process-map-landscape.png`);
       setStatus("가로 업무구조도 PNG를 저장했습니다.");
