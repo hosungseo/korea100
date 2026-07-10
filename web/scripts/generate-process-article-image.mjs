@@ -25,11 +25,20 @@ const GRID_BOTTOM = 2200;
 const STAGE_BODY_TOP = GRID_TOP + GROUP_HEADER_HEIGHT;
 const STAGE_BODY_HEIGHT = GRID_BOTTOM - STAGE_BODY_TOP;
 const CARD_WIDTH = 270;
-const CARD_HEIGHT = 80;
+const CARD_HEIGHT = 90;
 const CARD_GAP = 24;
-const STAGE_VERTICAL_SPACE = 52;
-const MIN_STAGE_HEIGHT = 126;
+const STAGE_VERTICAL_SPACE = 40;
+const MIN_STAGE_HEIGHT = 130;
 const ARROW_CLEARANCE = 8;
+const CARD_TEXT_WIDTH = CARD_WIDTH - 30;
+const CARD_TITLE_SIZE = 15.5;
+const CARD_TITLE_LINE_HEIGHT = 18;
+const CARD_TITLE_DOUBLE_Y = 47;
+const CARD_TITLE_SINGLE_Y = 57;
+const CARD_FOOTER_SIZE = 11;
+const CARD_FOOTER_Y = 82;
+const EDGE_LABEL_HEIGHT = 30;
+const EDGE_LABEL_GAP = 7;
 
 const STATUS = {
   done: {
@@ -88,6 +97,15 @@ if (generated.length !== 100) {
 const eiaOutput = path.join(outputDir, "environmental-impact-assessment.png");
 await fs.copyFile(eiaOutput, legacyEiaPath);
 console.log(`세로형 업무구조도 PNG 생성: ${generated.length}개 (${WIDTH}x${HEIGHT})`);
+console.log(
+  `텍스트 레이아웃 검증: 노드 ${generated.reduce((sum, item) => sum + item.audit.nodes, 0)}개 · ` +
+    `단계 ${generated.reduce((sum, item) => sum + item.audit.stages, 0)}개 · ` +
+    `행위자 묶음 ${generated.reduce((sum, item) => sum + item.audit.groups, 0)}개`
+);
+console.log(
+  `연결 라벨 충돌 검증: ${generated.reduce((sum, item) => sum + item.audit.edgeLabels, 0)}개 · ` +
+    `재배치 ${generated.reduce((sum, item) => sum + item.audit.adjustedEdgeLabels, 0)}개`
+);
 
 async function generateInstitutionImage(file) {
   const institution = JSON.parse(await fs.readFile(path.join(dataDir, file), "utf8"));
@@ -109,7 +127,7 @@ async function generateInstitutionImage(file) {
   if (metadata.width !== WIDTH || metadata.height !== HEIGHT) {
     throw new Error(`PNG 규격 오류: ${institution.slug}`);
   }
-  return outputPath;
+  return { outputPath, audit: context.textAudit };
 }
 
 function buildLayout(institution, process, groups) {
@@ -189,7 +207,7 @@ function buildLayout(institution, process, groups) {
     throw new Error(`노드 배치 수 오류: ${institution.slug}`);
   }
 
-  return {
+  const context = {
     institution,
     process,
     groups,
@@ -200,6 +218,9 @@ function buildLayout(institution, process, groups) {
     stageTops,
     nodeLayout,
   };
+  context.edgeLabelLayout = buildEdgeLabelLayout(context);
+  context.textAudit = validateTextLayout(context);
+  return context;
 }
 
 function renderSvg(context) {
@@ -236,15 +257,25 @@ function arrowMarker(id, color) {
 }
 
 function renderHeader({ institution, process }) {
-  const titleSize = Array.from(institution.name).length > 20 ? 43 : 52;
-  const oneLiner = truncate(institution.oneLiner ?? institution.canvas?.purpose ?? "", 82);
+  const titleSize = fitFontSize(institution.name, 52, 36, WIDTH - 80);
+  const oneLiner = fitTextToWidth(
+    institution.oneLiner ?? institution.canvas?.purpose ?? "",
+    WIDTH - 80,
+    21
+  );
+  const bottleneck = fitTextToWidth(
+    (institution.canvas?.bottlenecks ?? []).slice(0, 3).join(" · ") ||
+      "제도별 병목 노드 확인",
+    820,
+    16
+  );
   return `
     <text x="40" y="50" font-size="19" font-weight="750" fill="#087452">대한민국 제도 100 · 법령 기준 업무구조도</text>
     <text x="40" y="108" font-size="${titleSize}" font-weight="800" fill="#111b16">${escapeXml(institution.name)}</text>
     <text x="40" y="154" font-size="21" font-weight="520" fill="#526159">${escapeXml(oneLiner)}</text>
     <text x="40" y="205" font-size="17" font-weight="750" fill="#18251e">${process.nodes.length}개 업무 · ${process.stages.length}단계 · ${process.lanes.length}개 행위자</text>
     <text x="520" y="205" font-size="16" fill="#67766e">법령 기준일 ${escapeXml(institution.asOfDate)}</text>
-    <text x="1760" y="205" text-anchor="end" font-size="16" font-weight="700" fill="#a65f08">핵심 병목: ${escapeXml(truncate((institution.canvas?.bottlenecks ?? []).slice(0, 3).join(" · ") || "제도별 병목 노드 확인", 52))}</text>
+    <text x="1760" y="205" text-anchor="end" font-size="16" font-weight="700" fill="#a65f08">핵심 병목: ${escapeXml(bottleneck)}</text>
     <line x1="40" y1="232" x2="1760" y2="232" stroke="#becbc4" stroke-width="2"/>
   `;
 }
@@ -280,22 +311,28 @@ function renderGrid(context) {
       `<rect x="${GRID_LEFT}" y="${round(y)}" width="${GRID_RIGHT - GRID_LEFT}" height="${round(height)}" fill="${rowFill}"/>`,
       `<rect x="${GRID_LEFT}" y="${round(y)}" width="${STAGE_LABEL_WIDTH}" height="${round(height)}" fill="${labelFill}"/>`,
       `<text x="58" y="${round(y + 32)}" class="mono" font-size="16" font-weight="800" fill="${labelInk}">${escapeXml(code)}</text>`,
-      textLines(wrapText(labelParts.join(" "), 8, 2), 58, y + 65, {
-        size: 19,
-        weight: 800,
-        fill: labelInk,
-        lineHeight: 22,
-      })
+      textLines(
+        wrapTextToWidth(labelParts.join(" "), STAGE_LABEL_WIDTH - 40, 19, 2),
+        58,
+        y + 65,
+        {
+          size: 19,
+          weight: 800,
+          fill: labelInk,
+          lineHeight: 22,
+        }
+      )
     );
   });
 
   groups.forEach((group, groupIndex) => {
     const x = GROUP_X + groupIndex * groupWidth;
+    const title = fitTextToWidth(group.title, groupWidth - 40, 20);
     result.push(
       `<rect x="${round(x)}" y="${GRID_TOP}" width="${round(groupWidth)}" height="${GROUP_HEADER_HEIGHT}" fill="#f7faf8"/>`,
       `<rect x="${round(x)}" y="${GRID_TOP}" width="${round(groupWidth)}" height="7" fill="${group.accent}"/>`,
-      `<text x="${round(x + 20)}" y="299" font-size="21" font-weight="800" fill="#17231d">${escapeXml(truncate(group.title, 18))}</text>`,
-      textLines(wrapText(group.lanes.join(" · "), 25, 2), x + 20, 329, {
+      `<text x="${round(x + 20)}" y="299" font-size="20" font-weight="800" fill="#17231d">${escapeXml(title)}</text>`,
+      textLines(wrapTextToWidth(group.lanes.join(" · "), groupWidth - 40, 13.5, 2), x + 20, 329, {
         size: 13.5,
         weight: 600,
         fill: "#68776f",
@@ -343,14 +380,125 @@ function renderEdges(context) {
       `<path d="${route.path}" fill="none" stroke="${style.color}" stroke-width="${style.width}" ${style.dash ? `stroke-dasharray="${style.dash}"` : ""} marker-end="url(#${style.marker})" stroke-linecap="round" stroke-linejoin="round" opacity="0.96"/>`
     );
     if (edge.label) {
-      const labelWidth = Math.max(96, Array.from(edge.label).length * 14 + 26);
+      const label = context.edgeLabelLayout.get(edge.id);
+      if (!label) {
+        throw new Error(`연결 라벨 배치 누락: ${context.institution.slug}/${edge.id}`);
+      }
       result.push(
-        `<rect x="${round(route.labelX - labelWidth / 2)}" y="${round(route.labelY - 15)}" width="${labelWidth}" height="30" rx="6" fill="#ffffff" stroke="${style.color}" stroke-width="1.4"/>`,
-        `<text x="${round(route.labelX)}" y="${round(route.labelY + 5)}" text-anchor="middle" font-size="14" font-weight="750" fill="${style.color}">${escapeXml(edge.label)}</text>`
+        `<rect x="${round(label.x - label.width / 2)}" y="${round(label.y - EDGE_LABEL_HEIGHT / 2)}" width="${round(label.width)}" height="${EDGE_LABEL_HEIGHT}" rx="6" fill="#ffffff" stroke="${style.color}" stroke-width="1.4"/>`,
+        `<text x="${round(label.x)}" y="${round(label.y + 5)}" text-anchor="middle" font-size="14" font-weight="750" fill="${style.color}">${escapeXml(edge.label)}</text>`
       );
     }
   }
   return result.join("\n");
+}
+
+function buildEdgeLabelLayout(context) {
+  const placements = new Map();
+  const reserved = [
+    ...Array.from(context.nodeLayout.values(), (node) =>
+      expandRect(
+        { x: node.x, y: node.y, width: node.width, height: node.height },
+        EDGE_LABEL_GAP
+      )
+    ),
+    ...context.stageTops.map((top, index) => ({
+      x: GRID_LEFT + 8,
+      y: top + 10,
+      width: STAGE_LABEL_WIDTH - 16,
+      height: Math.min(98, context.stageHeights[index] - 18),
+    })),
+  ];
+  const placed = [];
+
+  for (const edge of context.process.edges) {
+    if (!edge.label) continue;
+    const source = context.nodeLayout.get(edge.source);
+    const target = context.nodeLayout.get(edge.target);
+    if (!source || !target) continue;
+    const route = edgeRoute(edge, source, target, context);
+    const width = Math.max(96, estimatedTextWidth(edge.label, 14) + 26);
+    const placement = findFreeEdgeLabel(
+      route.labelX,
+      route.labelY,
+      width,
+      context,
+      reserved,
+      placed
+    );
+    if (!placement) {
+      throw new Error(
+        `연결 라벨 충돌을 해소할 수 없습니다: ${context.institution.slug}/${edge.id}`
+      );
+    }
+    const rect = {
+      x: placement.x - width / 2,
+      y: placement.y - EDGE_LABEL_HEIGHT / 2,
+      width,
+      height: EDGE_LABEL_HEIGHT,
+    };
+    placed.push(expandRect(rect, EDGE_LABEL_GAP));
+    placements.set(edge.id, {
+      x: placement.x,
+      y: placement.y,
+      width,
+      adjusted:
+        Math.abs(placement.x - route.labelX) > 0.1 ||
+        Math.abs(placement.y - route.labelY) > 0.1,
+    });
+  }
+  return placements;
+}
+
+function findFreeEdgeLabel(anchorX, anchorY, width, context, reserved, placed) {
+  const xOffsets = [0, -70, 70, -140, 140, -210, 210, -280, 280, -350, 350, -420, 420];
+  const yOffsets = [0, -36, 36, -72, 72, -108, 108, -144, 144, -180, 180];
+  const candidates = yOffsets
+    .flatMap((dy) => xOffsets.map((dx) => ({ x: anchorX + dx, y: anchorY + dy, dx, dy })))
+    .sort(
+      (a, b) =>
+        Math.abs(a.dx) + Math.abs(a.dy) * 1.25 -
+        (Math.abs(b.dx) + Math.abs(b.dy) * 1.25)
+    );
+
+  for (const candidate of candidates) {
+    const rect = {
+      x: candidate.x - width / 2,
+      y: candidate.y - EDGE_LABEL_HEIGHT / 2,
+      width,
+      height: EDGE_LABEL_HEIGHT,
+    };
+    if (
+      rect.x < GRID_LEFT + 5 ||
+      rect.x + rect.width > GRID_RIGHT - 5 ||
+      rect.y < STAGE_BODY_TOP + 5 ||
+      rect.y + rect.height > GRID_BOTTOM - 5
+    ) {
+      continue;
+    }
+    if (reserved.some((item) => rectsOverlap(rect, item))) continue;
+    if (placed.some((item) => rectsOverlap(rect, item))) continue;
+    return candidate;
+  }
+  return null;
+}
+
+function expandRect(rect, amount) {
+  return {
+    x: rect.x - amount,
+    y: rect.y - amount,
+    width: rect.width + amount * 2,
+    height: rect.height + amount * 2,
+  };
+}
+
+function rectsOverlap(a, b) {
+  return (
+    a.x < b.x + b.width &&
+    a.x + a.width > b.x &&
+    a.y < b.y + b.height &&
+    a.y + a.height > b.y
+  );
 }
 
 function edgeRoute(edge, source, target, context) {
@@ -422,8 +570,19 @@ function renderNode(node, context) {
   const x = position.x;
   const y = position.y;
   const statusWidth = 50;
-  const nameLines = wrapText(node.name, 12, 2);
+  const nameLines = wrapTextToWidth(
+    node.name,
+    CARD_TEXT_WIDTH,
+    CARD_TITLE_SIZE,
+    2
+  );
+  const nameY = nameLines.length === 1 ? CARD_TITLE_SINGLE_Y : CARD_TITLE_DOUBLE_Y;
   const footer = node.blocker ? `⚠ ${node.blocker}` : node.actor;
+  const fittedFooter = fitTextToWidth(
+    footer,
+    CARD_TEXT_WIDTH,
+    CARD_FOOTER_SIZE
+  );
   const footerColor = node.blocker
     ? node.status === "current"
       ? "#fff0bc"
@@ -434,16 +593,16 @@ function renderNode(node, context) {
     <g filter="url(#card-shadow)">
       <rect x="${round(x)}" y="${round(y)}" width="${CARD_WIDTH}" height="${CARD_HEIGHT}" rx="8" fill="${status.fill}" stroke="${status.border}" stroke-width="2.3"/>
       <rect x="${round(x)}" y="${round(y)}" width="6" height="${CARD_HEIGHT}" rx="3" fill="${status.border}"/>
-      <text x="${round(x + 15)}" y="${round(y + 20)}" class="mono" font-size="13.5" font-weight="750" fill="${status.sub}">${idPrefix}${escapeXml(node.id)}</text>
-      <rect x="${round(x + CARD_WIDTH - statusWidth - 10)}" y="${round(y + 8)}" width="${statusWidth}" height="24" rx="5" fill="${node.status === "current" ? "#ffffff" : status.border}" opacity="${node.status === "current" ? 0.18 : 0.14}"/>
-      <text x="${round(x + CARD_WIDTH - statusWidth / 2 - 10)}" y="${round(y + 25)}" text-anchor="middle" font-size="13" font-weight="800" fill="${status.ink}">${status.label}</text>
-      ${textLines(nameLines, x + 15, y + 43, {
-        size: 17.5,
+      <text x="${round(x + 15)}" y="${round(y + 20)}" class="mono" font-size="12.5" font-weight="750" fill="${status.sub}">${idPrefix}${escapeXml(node.id)}</text>
+      <rect x="${round(x + CARD_WIDTH - statusWidth - 10)}" y="${round(y + 7)}" width="${statusWidth}" height="24" rx="5" fill="${node.status === "current" ? "#ffffff" : status.border}" opacity="${node.status === "current" ? 0.18 : 0.14}"/>
+      <text x="${round(x + CARD_WIDTH - statusWidth / 2 - 10)}" y="${round(y + 24)}" text-anchor="middle" font-size="12" font-weight="800" fill="${status.ink}">${status.label}</text>
+      ${textLines(nameLines, x + 15, y + nameY, {
+        size: CARD_TITLE_SIZE,
         weight: 800,
         fill: status.ink,
-        lineHeight: 18.5,
+        lineHeight: CARD_TITLE_LINE_HEIGHT,
       })}
-      <text x="${round(x + 15)}" y="${round(y + 72)}" font-size="12.5" font-weight="650" fill="${footerColor}">${escapeXml(truncate(footer, 20))}</text>
+      <text x="${round(x + 15)}" y="${round(y + CARD_FOOTER_Y)}" font-size="${CARD_FOOTER_SIZE}" font-weight="650" fill="${footerColor}">${escapeXml(fittedFooter)}</text>
     </g>
   `;
 }
@@ -489,39 +648,196 @@ function textLines(lines, x, y, options = {}) {
   return `<text x="${round(x)}" y="${round(y)}" font-size="${size}" font-weight="${weight}" fill="${fill}">${tspans}</text>`;
 }
 
-function wrapText(text, maxChars, maxLines) {
-  if (Array.from(text).length <= maxChars) return [text];
-  const words = text.split(" ");
+function wrapTextToWidth(text, maxWidth, fontSize, maxLines) {
+  const normalized = String(text).trim().replace(/\s+/gu, " ");
+  if (!normalized) return [""];
+  if (estimatedTextWidth(normalized, fontSize) <= maxWidth) return [normalized];
+
+  const words = normalized.split(" ");
   const lines = [];
   let current = "";
   for (const word of words) {
     const candidate = current ? `${current} ${word}` : word;
-    if (Array.from(candidate).length <= maxChars) {
+    if (estimatedTextWidth(candidate, fontSize) <= maxWidth) {
       current = candidate;
       continue;
     }
     if (current) lines.push(current);
-    if (Array.from(word).length > maxChars) {
-      const chars = Array.from(word);
-      lines.push(chars.slice(0, maxChars).join(""));
-      current = chars.slice(maxChars).join("");
-    } else {
+    if (estimatedTextWidth(word, fontSize) <= maxWidth) {
       current = word;
+      continue;
+    }
+
+    current = "";
+    for (const char of Array.from(word)) {
+      const chunk = `${current}${char}`;
+      if (current && estimatedTextWidth(chunk, fontSize) > maxWidth) {
+        lines.push(current);
+        current = char;
+      } else {
+        current = chunk;
+      }
     }
   }
   if (current) lines.push(current);
+
   const limited = lines.slice(0, maxLines);
   if (lines.length > maxLines) {
-    limited[maxLines - 1] = `${Array.from(limited[maxLines - 1]).slice(0, maxChars - 1).join("")}…`;
+    limited[maxLines - 1] = fitTextToWidth(
+      `${limited[maxLines - 1]}…`,
+      maxWidth,
+      fontSize
+    );
   }
   return limited;
 }
 
-function truncate(text, maxChars) {
-  const chars = Array.from(String(text));
-  return chars.length <= maxChars
-    ? String(text)
-    : `${chars.slice(0, maxChars - 1).join("")}…`;
+function fitTextToWidth(text, maxWidth, fontSize) {
+  const value = String(text);
+  if (estimatedTextWidth(value, fontSize) <= maxWidth) return value;
+
+  const ellipsis = "…";
+  let fitted = "";
+  for (const char of Array.from(value)) {
+    if (estimatedTextWidth(`${fitted}${char}${ellipsis}`, fontSize) > maxWidth) {
+      break;
+    }
+    fitted += char;
+  }
+  return `${fitted.trimEnd()}${ellipsis}`;
+}
+
+function fitFontSize(text, preferredSize, minimumSize, maxWidth) {
+  const units = textWidthUnits(String(text));
+  if (units === 0) return preferredSize;
+  return round(Math.max(minimumSize, Math.min(preferredSize, maxWidth / units)));
+}
+
+function estimatedTextWidth(text, fontSize) {
+  return textWidthUnits(String(text)) * fontSize;
+}
+
+function textWidthUnits(text) {
+  return Array.from(text).reduce((sum, char) => {
+    if (/\s/u.test(char)) return sum + 0.35;
+    if (/[MW@%]/u.test(char)) return sum + 0.9;
+    if (/[A-Z]/u.test(char)) return sum + 0.72;
+    if (/[a-z0-9]/u.test(char)) return sum + 0.58;
+    if (".,:;·/()[]{}+-_!?".includes(char)) return sum + 0.5;
+    return sum + 1;
+  }, 0);
+}
+
+function validateTextLayout(context) {
+  const { institution, process, groups, groupWidth } = context;
+  const errors = [];
+  const assertFits = (lines, maxWidth, fontSize, label) => {
+    for (const line of lines) {
+      const width = estimatedTextWidth(line, fontSize);
+      if (width > maxWidth + 0.1) {
+        errors.push(`${label}: ${round(width)}/${round(maxWidth)}px`);
+      }
+    }
+  };
+
+  const titleTop = CARD_TITLE_DOUBLE_Y - CARD_TITLE_SIZE * 0.82;
+  const titleBottom =
+    CARD_TITLE_DOUBLE_Y + CARD_TITLE_LINE_HEIGHT + CARD_TITLE_SIZE * 0.2;
+  const footerTop = CARD_FOOTER_Y - CARD_FOOTER_SIZE * 0.82;
+  const footerBottom = CARD_FOOTER_Y + CARD_FOOTER_SIZE * 0.2;
+  if (titleTop <= 31 || titleBottom >= footerTop || footerBottom >= CARD_HEIGHT) {
+    errors.push("카드 세로 텍스트 영역이 겹칩니다");
+  }
+
+  for (const node of process.nodes) {
+    const nameLines = wrapTextToWidth(
+      node.name,
+      CARD_TEXT_WIDTH,
+      CARD_TITLE_SIZE,
+      2
+    );
+    assertFits(
+      nameLines,
+      CARD_TEXT_WIDTH,
+      CARD_TITLE_SIZE,
+      `${node.id} 업무명`
+    );
+    const footer = fitTextToWidth(
+      node.blocker ? `⚠ ${node.blocker}` : node.actor,
+      CARD_TEXT_WIDTH,
+      CARD_FOOTER_SIZE
+    );
+    assertFits([footer], CARD_TEXT_WIDTH, CARD_FOOTER_SIZE, `${node.id} 보조문구`);
+    const idPrefix =
+      node.type === "gateway" ? "◇ " : node.type === "system" ? "▣ " : "";
+    assertFits([`${idPrefix}${node.id}`], 180, 12.5, `${node.id} 식별자`);
+  }
+
+  for (const stage of process.stages) {
+    const label = stage.split(" ").slice(1).join(" ");
+    assertFits(
+      wrapTextToWidth(label, STAGE_LABEL_WIDTH - 40, 19, 2),
+      STAGE_LABEL_WIDTH - 40,
+      19,
+      `${stage} 단계명`
+    );
+  }
+
+  for (const group of groups) {
+    assertFits(
+      [fitTextToWidth(group.title, groupWidth - 40, 20)],
+      groupWidth - 40,
+      20,
+      `${group.id} 묶음명`
+    );
+    assertFits(
+      wrapTextToWidth(group.lanes.join(" · "), groupWidth - 40, 13.5, 2),
+      groupWidth - 40,
+      13.5,
+      `${group.id} 행위자명`
+    );
+  }
+
+  assertFits(
+    [
+      fitTextToWidth(
+        institution.oneLiner ?? institution.canvas?.purpose ?? "",
+        WIDTH - 80,
+        21
+      ),
+    ],
+    WIDTH - 80,
+    21,
+    "상단 설명"
+  );
+  assertFits(
+    [institution.name],
+    WIDTH - 80,
+    fitFontSize(institution.name, 52, 36, WIDTH - 80),
+    "제도명"
+  );
+
+  for (const edge of process.edges) {
+    if (!edge.label) continue;
+    const labelWidth = Math.max(
+      96,
+      estimatedTextWidth(edge.label, 14) + 26
+    );
+    assertFits([edge.label], labelWidth - 26, 14, `${edge.id} 연결명`);
+  }
+
+  if (errors.length > 0) {
+    throw new Error(`텍스트 레이아웃 오류: ${institution.slug}\n- ${errors.join("\n- ")}`);
+  }
+  return {
+    nodes: process.nodes.length,
+    stages: process.stages.length,
+    groups: groups.length,
+    edgeLabels: context.edgeLabelLayout.size,
+    adjustedEdgeLabels: Array.from(context.edgeLabelLayout.values()).filter(
+      (label) => label.adjusted
+    ).length,
+  };
 }
 
 function escapeXml(value) {
