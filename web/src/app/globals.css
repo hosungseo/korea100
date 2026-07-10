@@ -4391,6 +4391,65 @@ body:has(.og-card-page) > main {
   }
 }
 
+/* Full landscape PNG export, including when requested from a mobile viewport. */
+.process-desktop-board[data-exporting="true"] {
+  display: block !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: -100000px !important;
+  z-index: -1 !important;
+  width: var(--process-export-width, 1700px) !important;
+  max-width: none !important;
+  padding: 24px !important;
+  overflow: visible !important;
+  background: #ffffff !important;
+  pointer-events: none !important;
+}
+
+.process-desktop-board[data-exporting="true"] .swimlane-board {
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+}
+
+.process-desktop-board[data-exporting="true"] .swimlane-desktop-view,
+.process-desktop-board[data-exporting="true"] .desktop-gate-timeline {
+  display: block !important;
+}
+
+.process-desktop-board[data-exporting="true"] .swimlane-mobile-view,
+.process-desktop-board[data-exporting="true"] .mobile-board-view-control,
+.process-desktop-board[data-exporting="true"] .mobile-swimlane-stage-nav {
+  display: none !important;
+}
+
+.process-desktop-board[data-exporting="true"] .process-board-scroll {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  scrollbar-gutter: auto !important;
+}
+
+.process-desktop-board[data-exporting="true"] .process-verification-summary {
+  grid-template-columns: minmax(220px, 1fr) auto !important;
+  gap: 20px !important;
+}
+
+.process-desktop-board[data-exporting="true"] .process-verification-metrics {
+  grid-template-columns: repeat(4, minmax(76px, auto)) !important;
+}
+
+.process-desktop-board[data-exporting="true"] .process-verification-metric {
+  padding: 0 14px !important;
+  border-left: 1px solid var(--color-border) !important;
+}
+
+.process-desktop-board[data-exporting="true"] .process-board-legend {
+  grid-template-columns: 1.25fr 1fr 1fr !important;
+  gap: 20px !important;
+}
+
 /* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 6px;

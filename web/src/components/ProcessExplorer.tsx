@@ -13,7 +13,6 @@ import PortraitProcessBoard from "./PortraitProcessBoard";
 import ProcessBoard from "./ProcessBoard";
 
 type ProcessMode = "summary" | "full";
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 export default function ProcessExplorer({
   process,
@@ -35,7 +34,6 @@ export default function ProcessExplorer({
     searchParams.get("process") === "summary" ? "summary" : "full",
   );
   const [selectedNodeId, setSelectedNodeId] = useState(defaultNodeId);
-  const imageHref = `${BASE_PATH}/exports/process-maps/${slug}.png`;
   const selectedNode =
     process.nodes.find((node) => node.id === selectedNodeId) ?? process.nodes[0];
 
@@ -63,6 +61,7 @@ export default function ProcessExplorer({
           >
             <button
               type="button"
+              data-process-mode="summary"
               aria-pressed={mode === "summary"}
               onClick={() => selectMode("summary")}
             >
@@ -70,21 +69,13 @@ export default function ProcessExplorer({
             </button>
             <button
               type="button"
+              data-process-mode="full"
               aria-pressed={mode === "full"}
               onClick={() => selectMode("full")}
             >
               전체 구조도
             </button>
           </div>
-          <a
-            className="process-image-link"
-            href={imageHref}
-            target="_blank"
-            rel="noreferrer"
-            onClick={() => trackEvent("process_image_open", { slug })}
-          >
-            PNG 내보내기 <span aria-hidden="true">↗</span>
-          </a>
         </div>
         <p>
           {mode === "summary"
