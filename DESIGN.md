@@ -56,6 +56,7 @@ A quiet public-policy command desk. The site should feel like a trustworthy refe
 ### Rules
 
 - Korean display text uses 0 letter spacing to avoid awkward CJK texture.
+- Use platform optical sizing and tabular numerals for changing counts and status metrics.
 - Font sizes change only at explicit breakpoints; do not scale type continuously with viewport width.
 - Headings may be large only in the top product area; panels use compact heading sizes.
 - Do not place a final particle or short Korean ending alone if manual copy can avoid it.
@@ -129,14 +130,20 @@ All spacing derives from 4px.
 
 | Type | Duration | Easing | Usage |
 | --- | --- | --- | --- |
-| Micro | `140ms` | `ease-out` | Buttons and row hover |
-| Standard | `220ms` | `cubic-bezier(.2,.8,.2,1)` | Panel update |
+| Press | `120ms` | `cubic-bezier(.23,1,.32,1)` | Pointer-down feedback |
+| State | `140–180ms` | `cubic-bezier(.23,1,.32,1)` | Selection, comparison, feedback |
+| On-screen move | `180ms` | `cubic-bezier(.77,0,.175,1)` | Connected state changes |
+| Drawer | `240ms` enter / `160ms` exit | `cubic-bezier(.32,.72,0,1)` | Node detail from and to the right edge |
 
 ### Rules
 
-- Animate only `opacity` and `transform`.
-- Respect `prefers-reduced-motion`.
-- Motion signals selection or saved state only. No decorative loops.
+- Animate only `opacity` and `transform`; never use `transition: all` or animate layout dimensions.
+- Repeated operational states use static emphasis. No decorative pulse or ambient loops.
+- Gate hover effects behind `hover: hover` and `pointer: fine`.
+- `prefers-reduced-motion` keeps short color and opacity feedback but removes movement.
+- `prefers-reduced-transparency` replaces blurred sticky surfaces with solid backgrounds.
+- Drawers trap focus, restore it to the triggering node, and close immediately on Escape.
+- Motion signals spatial origin, state change, or direct feedback only.
 
 ## 7. Depth & Surface
 

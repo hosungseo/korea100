@@ -154,6 +154,7 @@ function ProcessPreview({
           </div>
           <Link
             href="/model/environmental-impact-assessment/"
+            className="btn-outline pressable-link"
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -166,7 +167,6 @@ function ProcessPreview({
               border: "1px solid var(--color-accent)",
               borderRadius: 6,
               background: "var(--color-surface)",
-              transition: "background 140ms ease-out",
               whiteSpace: "nowrap",
             }}
           >

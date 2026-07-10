@@ -137,6 +137,7 @@ export default function RequestPage() {
 
   return (
     <div
+      className="request-page"
       style={{
         maxWidth: 680,
         margin: "0 auto",
@@ -188,6 +189,7 @@ export default function RequestPage() {
               required
             >
               <input
+                className="request-input"
                 id="institutionName"
                 type="text"
                 placeholder="예: 예비타당성조사, 국민기초생활보장 등"
@@ -201,6 +203,7 @@ export default function RequestPage() {
             {/* 왜 */}
             <FormField label="왜 궁금하신가요?" htmlFor="whyInterested">
               <textarea
+                className="request-input"
                 id="whyInterested"
                 placeholder="어떤 상황에서, 어떤 정보가 필요하신지 간단히 적어주세요."
                 value={form.whyInterested}
@@ -213,6 +216,7 @@ export default function RequestPage() {
             {/* 독자 유형 */}
             <FormField label="독자 유형" htmlFor="readerType">
               <select
+                className="request-input"
                 id="readerType"
                 value={form.readerType}
                 onChange={(e) => update("readerType", e.target.value)}
@@ -230,6 +234,7 @@ export default function RequestPage() {
             {/* 헷갈리는 지점 */}
             <FormField label="가장 헷갈리는 지점" htmlFor="confusingPoint">
               <select
+                className="request-input"
                 id="confusingPoint"
                 value={form.confusingPoint}
                 onChange={(e) => update("confusingPoint", e.target.value)}
@@ -251,6 +256,7 @@ export default function RequestPage() {
               hint="결과 공유나 후속 질문 시 연락드릴 수 있습니다."
             >
               <input
+                className="request-input"
                 id="email"
                 type="email"
                 placeholder="선택 입력"
@@ -275,7 +281,8 @@ export default function RequestPage() {
                   fontSize: 15,
                   fontWeight: 600,
                   cursor: "pointer",
-                  transition: "background 140ms ease-out",
+                  transition:
+                    "background-color 140ms var(--ease-out), transform var(--duration-press) var(--ease-out)",
                   fontFamily: "inherit",
                 }}
               >
@@ -399,6 +406,7 @@ export default function RequestPage() {
             </label>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
               <input
+                className="request-input"
                 id="publication-notification-email"
                 type="email"
                 placeholder="이메일 주소"
@@ -425,7 +433,8 @@ export default function RequestPage() {
                   cursor: "pointer",
                   fontFamily: "inherit",
                   flexShrink: 0,
-                  transition: "background 140ms ease-out",
+                  transition:
+                    "background-color 140ms var(--ease-out), transform var(--duration-press) var(--ease-out)",
                 }}
               >
                 {notifyStatus === "submitting" ? "저장 중..." : "알림 신청"}
@@ -525,9 +534,9 @@ const inputStyle: React.CSSProperties = {
   background: "var(--color-surface)",
   border: "1px solid var(--color-border-strong)",
   borderRadius: 8,
-  outline: "none",
   fontFamily: "inherit",
-  transition: "border-color 140ms ease-out",
+  transition:
+    "border-color 140ms var(--ease-out), box-shadow 140ms var(--ease-out)",
   boxSizing: "border-box",
 };
 

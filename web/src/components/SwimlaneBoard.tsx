@@ -135,22 +135,10 @@ function GateTimeline({
                       border: `2px solid ${dotBorder}`,
                       boxShadow:
                         st === "current" ? "0 0 0 3px rgba(15,159,114,.2)" : "none",
-                      transition: "all 200ms ease",
+                      transition:
+                        "background-color 180ms var(--ease-in-out), border-color 180ms var(--ease-in-out), box-shadow 180ms var(--ease-in-out)",
                     }}
                   />
-                  {st === "current" && (
-                    <div
-                      style={{
-                        position: "absolute",
-                        inset: -4,
-                        borderRadius: "50%",
-                        border: "2px solid #0f9f72",
-                        opacity: 0,
-                        animation: "pulse-ring 2s ease-out infinite",
-                        pointerEvents: "none",
-                      }}
-                    />
-                  )}
                 </div>
                 <div style={{ textAlign: "center" }}>
                   <span
@@ -184,7 +172,8 @@ function GateTimeline({
                     height: 2,
                     background:
                       st === "done" || st === "current" ? "#0f9f72" : "#dde5df",
-                    transition: "background 200ms ease",
+                    transition:
+                      "background-color 180ms var(--ease-in-out)",
                     zIndex: 1,
                   }}
                 />
@@ -226,6 +215,7 @@ function SwimlaneNodeCard({
 
   return (
     <button
+      className="swimlane-node-card"
       ref={setRef as React.Ref<HTMLButtonElement>}
       data-node-id={node.id}
       onClick={() => onClick(node)}
@@ -233,6 +223,12 @@ function SwimlaneNodeCard({
       onMouseLeave={onLeave}
       aria-label={`${node.name} — ${c.label} — ${verificationResult.label}`}
       style={{
+        "--node-card-border": c.border,
+        "--node-card-shadow": isCurrent
+          ? "0 0 0 3px rgba(15,159,114,.18), 0 2px 8px rgba(11,20,16,.06)"
+          : highlighted
+          ? "0 4px 16px rgba(11,20,16,.12)"
+          : "0 1px 3px rgba(11,20,16,.05)",
         display: "flex",
         flexDirection: "column",
         width: "100%",
@@ -241,20 +237,13 @@ function SwimlaneNodeCard({
         textAlign: "left",
         padding: "8px 9px",
         background: c.bg,
-        border: `1.5px solid ${c.border}`,
         borderRadius: 8,
         cursor: "pointer",
-        transition: "opacity 140ms ease, box-shadow 140ms ease, border-color 140ms ease",
         opacity: dimmed ? 0.28 : 1,
-        boxShadow: isCurrent
-          ? "0 0 0 3px rgba(15,159,114,.18), 0 2px 8px rgba(11,20,16,.06)"
-          : highlighted
-          ? "0 4px 16px rgba(11,20,16,.12)"
-          : "0 1px 3px rgba(11,20,16,.05)",
         position: "relative",
         flexShrink: 0,
         zIndex: 4,
-      }}
+      } as React.CSSProperties}
     >
       {/* top row: status dot + type icon + id */}
       <div style={{ display: "flex", alignItems: "center", gap: 4, marginBottom: 4 }}>
@@ -386,20 +375,6 @@ function SwimlaneNodeCard({
         )}
       </div>
 
-      {/* pulse ring for current */}
-      {isCurrent && (
-        <div
-          style={{
-            position: "absolute",
-            inset: -3,
-            borderRadius: 8,
-            border: "1.5px solid #0f9f72",
-            opacity: 0,
-            animation: "pulse-ring 2s ease-out infinite",
-            pointerEvents: "none",
-          }}
-        />
-      )}
     </button>
   );
 }
@@ -424,12 +399,56 @@ function NodeDrawer({
     (e) => e.type === "message" && (e.source === node.id || e.target === node.id)
   );
   const lowConf = node.confidence !== undefined && node.confidence < 0.8;
+  const [closing, setClosing] = useState(false);
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+  const closeTimerRef = useRef<number | null>(null);
+
+  const requestClose = useCallback(
+    (immediate = false) => {
+      if (immediate) {
+        onClose();
+        return;
+      }
+      if (closing) return;
+      setClosing(true);
+      closeTimerRef.current = window.setTimeout(onClose, 160);
+    },
+    [closing, onClose]
+  );
 
   useEffect(() => {
-    const h = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    const h = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        requestClose(true);
+        return;
+      }
+      if (e.key === "Tab") {
+        keepFocusInDrawer(e, drawerRef.current);
+      }
+    };
     window.addEventListener("keydown", h);
     return () => window.removeEventListener("keydown", h);
-  }, [onClose]);
+  }, [requestClose]);
+
+  useEffect(() => {
+    previousFocusRef.current = document.activeElement as HTMLElement | null;
+    const frame = window.requestAnimationFrame(() => closeButtonRef.current?.focus());
+    return () => {
+      window.cancelAnimationFrame(frame);
+      previousFocusRef.current?.focus();
+    };
+  }, []);
+
+  useEffect(
+    () => () => {
+      if (closeTimerRef.current !== null) {
+        window.clearTimeout(closeTimerRef.current);
+      }
+    },
+    []
+  );
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -439,17 +458,20 @@ function NodeDrawer({
   return (
     <>
       <div
-        onClick={onClose}
+        className="process-node-backdrop"
+        data-closing={closing}
+        onClick={() => requestClose()}
         style={{
           position: "fixed", inset: 0,
           background: "rgba(11,20,16,.35)",
           zIndex: 100,
-          animation: "fade-in 220ms cubic-bezier(.2,.8,.2,1)",
         }}
         aria-hidden="true"
       />
       <div
+        ref={drawerRef}
         className="process-node-drawer"
+        data-closing={closing}
         role="dialog"
         aria-modal="true"
         aria-label={node.name}
@@ -461,7 +483,6 @@ function NodeDrawer({
           zIndex: 101,
           overflowY: "auto",
           padding: 28,
-          animation: "slide-in-right 220ms cubic-bezier(.2,.8,.2,1)",
           boxShadow: "-8px 0 48px rgba(11,20,16,.12)",
         }}
       >
@@ -481,7 +502,9 @@ function NodeDrawer({
             </h2>
           </div>
           <button
-            onClick={onClose}
+            ref={closeButtonRef}
+            className="process-node-close"
+            onClick={() => requestClose()}
             aria-label="닫기"
             style={{
               background: "none", border: "none", cursor: "pointer",
@@ -577,12 +600,28 @@ function NodeDrawer({
         )}
       </div>
 
-      <style>{`
-        @keyframes fade-in { from{opacity:0} to{opacity:1} }
-        @keyframes slide-in-right { from{transform:translateX(24px);opacity:0} to{transform:translateX(0);opacity:1} }
-      `}</style>
     </>
   );
+}
+
+function keepFocusInDrawer(event: KeyboardEvent, drawer: HTMLElement | null) {
+  if (!drawer) return;
+  const focusable = Array.from(
+    drawer.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )
+  ).filter((element) => element.getClientRects().length > 0);
+  if (focusable.length === 0) return;
+  const first = focusable[0];
+  const last = focusable.at(-1) ?? first;
+  const active = document.activeElement;
+  if (event.shiftKey && (active === first || !drawer.contains(active))) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && (active === last || !drawer.contains(active))) {
+    event.preventDefault();
+    first.focus();
+  }
 }
 
 function MetaItem({ label, value }: { label: string; value: string }) {
@@ -985,7 +1024,7 @@ export default function SwimlaneBoard({
                 return (
                   <g
                     key={edge.id}
-                    style={{ transition: "opacity 120ms ease" }}
+                    style={{ transition: "opacity 120ms var(--ease-out)" }}
                     opacity={isDimmed ? 0.12 : isHovered ? 1 : 0.9}
                   >
                     <path

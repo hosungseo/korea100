@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import type {
   ProcessModel,
   ProcessNode,
@@ -188,22 +188,11 @@ function GateTimeline({
                         st === "current"
                           ? "0 0 0 3px rgba(15,159,114,0.18)"
                           : "none",
-                      transition: "all 220ms cubic-bezier(.2,.8,.2,1)",
+                      transition:
+                        "background-color 180ms var(--ease-in-out), border-color 180ms var(--ease-in-out), box-shadow 180ms var(--ease-in-out)",
                       flexShrink: 0,
                     }}
                   />
-                  {st === "current" && !compact && (
-                    <div
-                      style={{
-                        position: "absolute",
-                        inset: -4,
-                        borderRadius: "50%",
-                        border: "2px solid #0f9f72",
-                        opacity: 0,
-                        animation: "pulse-ring 2s ease-out infinite",
-                      }}
-                    />
-                  )}
                 </div>
 
                 {/* Label */}
@@ -270,7 +259,8 @@ function GateTimeline({
                     background: lineColor,
                     flexShrink: 0,
                     marginBottom: compact ? 20 : 40,
-                    transition: "background 220ms cubic-bezier(.2,.8,.2,1)",
+                    transition:
+                      "background-color 180ms var(--ease-in-out)",
                   }}
                 />
               )}
@@ -308,35 +298,23 @@ function NodeCard({
 
   return (
     <button
+      className="process-node-card"
       onClick={() => onClick(node)}
       aria-label={`${node.name} — ${meta.label}`}
       style={{
+        "--node-card-border": meta.cardBorder,
+        "--node-card-shadow": isCurrent
+          ? "0 0 0 2px rgba(15,159,114,0.15)"
+          : "none",
         display: "block",
         width: "100%",
         textAlign: "left",
         padding: compact ? "10px 12px" : "14px 16px",
         background: meta.cardBg,
-        border: `1px solid ${meta.cardBorder}`,
         borderRadius: 8,
         cursor: "pointer",
-        transition: "border-color 140ms ease-out, box-shadow 140ms ease-out",
-        boxShadow: isCurrent
-          ? "0 0 0 2px rgba(15,159,114,0.15)"
-          : "none",
         position: "relative",
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLButtonElement).style.boxShadow =
-          "0 4px 12px rgba(11,20,16,0.08)";
-        (e.currentTarget as HTMLButtonElement).style.borderColor = "#bdcbc4";
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLButtonElement).style.boxShadow = isCurrent
-          ? "0 0 0 2px rgba(15,159,114,0.15)"
-          : "none";
-        (e.currentTarget as HTMLButtonElement).style.borderColor =
-          meta.cardBorder;
-      }}
+      } as React.CSSProperties}
     >
       {/* Top row: lane tag + status badge */}
       <div
@@ -479,7 +457,6 @@ function NodeCard({
               background:
                 node.status === "risk" ? "#c78116" : "#0f9f72",
               borderRadius: 2,
-              transition: "width 220ms cubic-bezier(.2,.8,.2,1)",
             }}
           />
         </div>
@@ -506,15 +483,57 @@ function NodeDrawer({
   const messageEdges = getMessageEdgesForNode(node.id, edges);
   const lowConfidence =
     node.confidence !== undefined && node.confidence < 0.8;
+  const [closing, setClosing] = useState(false);
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+  const closeTimerRef = useRef<number | null>(null);
+
+  const requestClose = useCallback(
+    (immediate = false) => {
+      if (immediate) {
+        onClose();
+        return;
+      }
+      if (closing) return;
+      setClosing(true);
+      closeTimerRef.current = window.setTimeout(onClose, 160);
+    },
+    [closing, onClose]
+  );
 
   // Close on Escape
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        requestClose(true);
+        return;
+      }
+      if (e.key === "Tab") {
+        keepFocusInDrawer(e, drawerRef.current);
+      }
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [onClose]);
+  }, [requestClose]);
+
+  useEffect(() => {
+    previousFocusRef.current = document.activeElement as HTMLElement | null;
+    const frame = window.requestAnimationFrame(() => closeButtonRef.current?.focus());
+    return () => {
+      window.cancelAnimationFrame(frame);
+      previousFocusRef.current?.focus();
+    };
+  }, []);
+
+  useEffect(
+    () => () => {
+      if (closeTimerRef.current !== null) {
+        window.clearTimeout(closeTimerRef.current);
+      }
+    },
+    []
+  );
 
   // Prevent body scroll when open
   useEffect(() => {
@@ -528,20 +547,23 @@ function NodeDrawer({
     <>
       {/* Backdrop */}
       <div
-        onClick={onClose}
+        className="process-node-backdrop"
+        data-closing={closing}
+        onClick={() => requestClose()}
         style={{
           position: "fixed",
           inset: 0,
           background: "rgba(11,20,16,0.35)",
           zIndex: 100,
-          animation: "fade-in 220ms cubic-bezier(.2,.8,.2,1)",
         }}
         aria-hidden="true"
       />
 
       {/* Drawer panel */}
       <div
+        ref={drawerRef}
         className="process-node-drawer"
+        data-closing={closing}
         role="dialog"
         aria-modal="true"
         aria-label={node.name}
@@ -556,7 +578,6 @@ function NodeDrawer({
           zIndex: 101,
           overflowY: "auto",
           padding: 28,
-          animation: "slide-in-right 220ms cubic-bezier(.2,.8,.2,1)",
           boxShadow: "-8px 0 48px rgba(11,20,16,0.12)",
         }}
       >
@@ -603,7 +624,9 @@ function NodeDrawer({
             </h2>
           </div>
           <button
-            onClick={onClose}
+            ref={closeButtonRef}
+            className="process-node-close"
+            onClick={() => requestClose()}
             aria-label="닫기"
             style={{
               background: "none",
@@ -770,18 +793,28 @@ function NodeDrawer({
         )}
       </div>
 
-      <style>{`
-        @keyframes fade-in {
-          from { opacity: 0; }
-          to   { opacity: 1; }
-        }
-        @keyframes slide-in-right {
-          from { transform: translateX(24px); opacity: 0; }
-          to   { transform: translateX(0);    opacity: 1; }
-        }
-      `}</style>
     </>
   );
+}
+
+function keepFocusInDrawer(event: KeyboardEvent, drawer: HTMLElement | null) {
+  if (!drawer) return;
+  const focusable = Array.from(
+    drawer.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )
+  ).filter((element) => element.getClientRects().length > 0);
+  if (focusable.length === 0) return;
+  const first = focusable[0];
+  const last = focusable.at(-1) ?? first;
+  const active = document.activeElement;
+  if (event.shiftKey && (active === first || !drawer.contains(active))) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && (active === last || !drawer.contains(active))) {
+    event.preventDefault();
+    first.focus();
+  }
 }
 
 function MetaItem({ label, value }: { label: string; value: string }) {
