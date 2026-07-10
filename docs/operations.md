@@ -6,7 +6,6 @@
 
 GitHub Actions variables:
 
-- `REQUEST_ENDPOINT`: 선택. 요청·출간 알림 JSON POST 수집 주소
 - `ANALYTICS_ENDPOINT`: 선택. 개인정보 없는 이벤트 수집 주소
 
 GitHub Actions secret:
@@ -15,28 +14,11 @@ GitHub Actions secret:
 
 로컬에서는 `web/.env.example`을 `web/.env.local`로 복사해 같은 값을 설정한다. 공개 클라이언트 변수에는 비밀값을 넣지 않는다. `LAW_OC`는 `NEXT_PUBLIC_` 변수로 만들지 않는다.
 
-## 요청 수집 API
+## 제도 제작 요청
 
-`NEXT_PUBLIC_REQUEST_ENDPOINT`는 `POST application/json`을 받고 성공 시 2xx를 반환해야 한다. 브라우저 요청을 받으므로 라이브 사이트 origin에 대한 CORS도 허용해야 한다.
+요청 페이지는 입력값을 서버로 전송하거나 `localStorage`·`sessionStorage`에 저장하지 않는다. 입력값은 `mailto:` 이메일 초안을 만드는 데만 사용하며 실제 발송은 사용자의 메일 앱에서 이루어진다.
 
-```json
-{
-  "kind": "institution-request",
-  "data": {
-    "institutionName": "산업단지 인허가",
-    "whyInterested": "기관별 역할을 알고 싶음",
-    "readerType": "정책연구자·컨설턴트",
-    "confusingPoint": "어느 기관이 결정권을 갖는지",
-    "email": "선택 입력"
-  },
-  "source": "korea100",
-  "submittedAt": "2026-07-10T00:00:00.000Z"
-}
-```
-
-`kind`는 `institution-request` 또는 `publication-notification`이다. 후자는 `data.email`만 보낸다. 요청 제한 시간은 10초다. 응답 본문 형식은 사용하지 않는다.
-
-폼 값은 수집 성공 전까지 해당 브라우저에 초안으로만 남는다. 운영 저장소는 보존 기간, 접근 권한, 삭제 절차를 별도로 정해야 한다.
+연락처 입력란과 출간 알림 신청란은 제공하지 않는다. 이전 버전이 브라우저에 남긴 요청·알림 초안 키는 요청 페이지 방문 시 삭제한다.
 
 ## 이벤트 수집 API
 
@@ -51,7 +33,7 @@ GitHub Actions secret:
 }
 ```
 
-검색 이벤트에는 검색어 원문을 넣지 않고 결과 수와 0건 여부만 포함한다. 엔드포인트가 없더라도 기능은 중단되지 않으며 브라우저에는 이벤트명별 로컬 합계만 남긴다.
+검색 이벤트에는 검색어 원문을 넣지 않고 결과 수와 0건 여부만 포함한다. 요청 폼 입력값은 이벤트 속성에 포함하지 않는다. 엔드포인트가 없더라도 기능은 중단되지 않으며 브라우저에는 이벤트명별 로컬 합계만 남긴다.
 
 ## 법령 최신성 점검
 
@@ -86,4 +68,4 @@ npm audit
 npm run build
 ```
 
-정적 산출물의 홈, 비교 URL, 상세 기본/전체 모드, 검증 대장, 요청 실패 대체 경로를 데스크톱과 390px 모바일에서 확인한다.
+정적 산출물의 홈, 비교 URL, 상세 기본/전체 모드, 검증 대장, 요청 메일 초안 경로를 데스크톱과 390px 모바일에서 확인한다.

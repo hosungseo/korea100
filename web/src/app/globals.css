@@ -836,7 +836,6 @@ button:not(:disabled):active {
 .site-header-cta:active,
 .explorer-request a:active,
 .related-institution-link:active,
-.request-feedback a:active,
 .pressable-link:active {
   transform: scale(0.97);
 }
@@ -1455,10 +1454,6 @@ button:not(:disabled):active {
     transform: translate(-50%, 8px) scale(0.98);
   }
 
-  .request-feedback {
-    opacity: 0;
-    transform: translateY(6px);
-  }
 }
 
 .compare-toolbar > button + button {
@@ -2000,60 +1995,6 @@ button:not(:disabled):active {
   font-weight: 720;
   letter-spacing: 0;
   line-height: 1.1;
-}
-
-.request-honeypot {
-  position: absolute;
-  left: -10000px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-
-.request-feedback {
-  padding: 14px;
-  border: 1px solid #e3b86f;
-  border-radius: 8px;
-  background: var(--color-warning-soft);
-  color: #86590f;
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 140ms var(--ease-out),
-    transform var(--duration-state) var(--ease-out);
-}
-
-.request-feedback p {
-  margin: 0 0 10px;
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-.request-feedback > div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-}
-
-.request-feedback a {
-  display: inline-flex;
-  padding: 6px 10px;
-  border: 1px solid #c78116;
-  border-radius: 5px;
-  color: #754c0a;
-  font-size: 12px;
-  font-weight: 700;
-  text-decoration: none;
-  transition: border-color 140ms var(--ease-out),
-    background-color 140ms var(--ease-out),
-    transform var(--duration-press) var(--ease-out);
-}
-
-.request-feedback small {
-  display: block;
-  margin-top: 9px;
-  color: #8b6b38;
-  font-size: 10px;
-  line-height: 1.5;
 }
 
 /* Model detail navigation and one-page export */
@@ -3141,7 +3082,6 @@ body:has(.og-card-page) > main {
   .site-header-cta:active,
   .explorer-request a:active,
   .related-institution-link:active,
-  .request-feedback a:active,
   .pressable-link:active,
   .process-node-card:active,
   .swimlane-node-card:active {
@@ -3149,7 +3089,6 @@ body:has(.og-card-page) > main {
   }
 
   .comparison-panel,
-  .request-feedback,
   .process-node-drawer {
     transform: none !important;
     transition: opacity 120ms var(--ease-out),
