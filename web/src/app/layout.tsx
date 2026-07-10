@@ -76,23 +76,16 @@ function Header() {
     <header className="site-header">
       <div className="site-header-inner">
         <Link href="/" className="site-brand">
-          제도 100
+          <strong>대한민국 제도 100</strong>
+          <span>Institution Registry</span>
         </Link>
 
         <nav className="site-nav" aria-label="주요 메뉴">
-          <NavLink href="/#institutions">제도 목록</NavLink>
-          <NavLink href="/verification/">검증 현황</NavLink>
-          <NavLink
-            href="/model/environmental-impact-assessment/"
-            className="nav-featured-link"
-          >
-            업무구조도 예시
-          </NavLink>
+          <NavLink href="/#institutions">제도 대장</NavLink>
+          <NavLink href="/verification/">현장 검증 대장</NavLink>
+          <NavLink href="/request/">요청하기</NavLink>
+          <span className="site-header-date">기준일 2026-07-10</span>
         </nav>
-
-        <Link href="/request/" className="site-header-cta">
-          제도 제안
-        </Link>
       </div>
     </header>
   );

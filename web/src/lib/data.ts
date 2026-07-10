@@ -79,6 +79,9 @@ export function toInstitutionSummary(
 ): InstitutionSummary {
   const category = institution.category ?? "기타";
   const article = institution.verification?.articleVerification;
+  const gatewayCount =
+    institution.process?.nodes.filter((node) => node.type === "gateway").length ??
+    0;
 
   return {
     slug: institution.slug,
@@ -91,12 +94,15 @@ export function toInstitutionSummary(
     processNodeCount: institution.process?.nodes.length ?? 0,
     processStageCount: institution.process?.stages.length ?? 0,
     processLaneCount: institution.process?.lanes.length ?? 0,
+    processGatewayCount: gatewayCount,
     legalBasisCount: institution.canvas.legalBasis.length,
     fieldVerificationCount: institution.fieldVerification.length,
+    bottleneckCount: institution.canvas.bottlenecks.length,
     verificationStatus: institution.verification?.status,
     verifiedReferences: article?.verifiedReferences ?? 0,
     articleReferences: article?.articleReferences ?? 0,
     sourceCount: institution.verification?.sources.length ?? 0,
+    laws: institution.canvas.legalBasis.map((basis) => basis.law),
   };
 }
 

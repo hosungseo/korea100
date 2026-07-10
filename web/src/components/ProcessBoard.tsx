@@ -25,6 +25,7 @@ interface ProcessBoardProps {
   laneGroups?: ProcessLaneGroup[];
   initialNodeId?: string;
   onNodeChange?: (nodeId: string | null) => void;
+  showDrawer?: boolean;
 }
 
 // ── helpers ──────────────────────────────────────────────────────────────────
@@ -881,6 +882,7 @@ export default function ProcessBoard({
   laneGroups,
   initialNodeId,
   onNodeChange,
+  showDrawer = true,
 }: ProcessBoardProps) {
   const [activeNode, setActiveNode] = useState<ProcessNode | null>(() =>
     process.nodes.find((node) => node.id === initialNodeId) ?? null
@@ -907,6 +909,7 @@ export default function ProcessBoard({
           laneGroups={laneGroups}
           initialNodeId={initialNodeId}
           onNodeChange={onNodeChange}
+          showDrawer={showDrawer}
         />
       );
     }
@@ -916,6 +919,7 @@ export default function ProcessBoard({
         verification={verification}
         initialNodeId={initialNodeId}
         onNodeChange={onNodeChange}
+        showDrawer={showDrawer}
       />
     );
   }
@@ -954,7 +958,7 @@ export default function ProcessBoard({
         법령상 구조 기준 · 공식 원문 검증 상태 포함
       </p>
 
-      {activeNode && (
+      {showDrawer && activeNode && (
         <NodeDrawer
           node={activeNode}
           edges={process.edges}

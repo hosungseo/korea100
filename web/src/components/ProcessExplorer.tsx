@@ -1,19 +1,18 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type {
   ProcessLaneGroup,
   ProcessModel,
+  ProcessNode,
   SourceVerification,
 } from "@/lib/types";
 import { trackEvent } from "@/lib/client-events";
+import PortraitProcessBoard from "./PortraitProcessBoard";
 import ProcessBoard from "./ProcessBoard";
 
 type ProcessMode = "summary" | "full";
-type ProcessLayout = "portrait" | "landscape";
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 export default function ProcessExplorer({
   process,
@@ -27,14 +26,16 @@ export default function ProcessExplorer({
   laneGroups?: ProcessLaneGroup[];
 }) {
   const searchParams = useSearchParams();
+  const defaultNodeId =
+    searchParams.get("node") ??
+    process.nodes.find((node) => node.status === "current")?.id ??
+    process.nodes[0]?.id;
   const [mode, setMode] = useState<ProcessMode>(() =>
-    searchParams.get("process") === "summary" ? "summary" : "full"
+    searchParams.get("process") === "summary" ? "summary" : "full",
   );
-  const [layout, setLayout] = useState<ProcessLayout>(() =>
-    searchParams.get("layout") === "landscape" ? "landscape" : "portrait"
-  );
-  const initialNodeId = searchParams.get("node") ?? undefined;
-  const imageHref = `${BASE_PATH}/exports/process-maps/${slug}.png`;
+  const [selectedNodeId, setSelectedNodeId] = useState(defaultNodeId);
+  const selectedNode =
+    process.nodes.find((node) => node.id === selectedNodeId) ?? process.nodes[0];
 
   function selectMode(nextMode: ProcessMode) {
     setMode(nextMode);
@@ -43,14 +44,10 @@ export default function ProcessExplorer({
   }
 
   function handleNodeChange(nodeId: string | null) {
-    updateDetailUrl("node", nodeId ?? "");
-    if (nodeId) trackEvent("process_node_open", { slug, node_id: nodeId });
-  }
-
-  function selectLayout(nextLayout: ProcessLayout) {
-    setLayout(nextLayout);
-    updateDetailUrl("layout", nextLayout === "landscape" ? "landscape" : "");
-    trackEvent("process_layout", { slug, layout: nextLayout });
+    if (!nodeId) return;
+    setSelectedNodeId(nodeId);
+    updateDetailUrl("node", nodeId);
+    trackEvent("process_node_open", { slug, node_id: nodeId });
   }
 
   return (
@@ -64,81 +61,27 @@ export default function ProcessExplorer({
           >
             <button
               type="button"
-              aria-pressed={mode === "full"}
-              onClick={() => selectMode("full")}
-            >
-              전체 구조도
-            </button>
-            <button
-              type="button"
+              data-process-mode="summary"
               aria-pressed={mode === "summary"}
               onClick={() => selectMode("summary")}
             >
               핵심 흐름
             </button>
-          </div>
-
-          {mode === "full" && (
-            <div
-              className="process-mode-control process-layout-control"
-              role="group"
-              aria-label="업무구조도 방향"
+            <button
+              type="button"
+              data-process-mode="full"
+              aria-pressed={mode === "full"}
+              onClick={() => selectMode("full")}
             >
-              <button
-                type="button"
-                aria-pressed={layout === "portrait"}
-                onClick={() => selectLayout("portrait")}
-              >
-                세로형
-              </button>
-              <button
-                type="button"
-                aria-pressed={layout === "landscape"}
-                onClick={() => selectLayout("landscape")}
-              >
-                가로형
-              </button>
-            </div>
-          )}
-
-          <a
-            className="process-image-link"
-            href={imageHref}
-            target="_blank"
-            rel="noreferrer"
-            onClick={() => trackEvent("process_image_open", { slug })}
-          >
-            세로형 PNG <span aria-hidden="true">↗</span>
-          </a>
+              전체 구조도
+            </button>
+          </div>
         </div>
         <p>
           {mode === "summary"
             ? "핵심·병목·회귀 노드를 먼저 표시합니다."
-            : layout === "portrait"
-              ? "단계 순서와 행위자별 책임을 세로 흐름으로 표시합니다."
-              : "원래 행위자 레인과 단계 열을 가로로 표시합니다."}
+            : "원래 행위자 레인과 게이트를 전체 표시합니다."}
         </p>
-      </div>
-
-      <div className="process-mobile-poster">
-        <a
-          className="process-mobile-poster-link"
-          href={imageHref}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={`${process.institution_name ?? "제도"} 1800×2400 세로형 업무구조도 원본 열기`}
-          onClick={() => trackEvent("process_image_open", { slug })}
-        >
-          <Image
-            className="process-mobile-poster-image"
-            src={imageHref}
-            alt={`${process.institution_name ?? "제도"} 1800×2400 세로형 업무구조도`}
-            width={1800}
-            height={2400}
-            sizes="(max-width: 900px) 100vw, 1px"
-            loading="eager"
-          />
-        </a>
       </div>
 
       <div className="process-desktop-board">
@@ -146,14 +89,104 @@ export default function ProcessExplorer({
           process={process}
           verification={verification}
           compact={mode === "summary"}
-          layout={layout}
+          layout="landscape"
           laneGroups={laneGroups}
-          initialNodeId={initialNodeId}
+          initialNodeId={defaultNodeId}
           onNodeChange={handleNodeChange}
+          showDrawer={false}
         />
       </div>
+
+      <div className="process-mobile-board">
+        <PortraitProcessBoard
+          process={process}
+          verification={verification}
+          laneGroups={laneGroups}
+          initialNodeId={defaultNodeId}
+          onNodeChange={handleNodeChange}
+          embedded
+          showDrawer={false}
+        />
+      </div>
+
+      {selectedNode && (
+        <ProcessNodeInspector node={selectedNode} />
+      )}
     </div>
   );
+}
+
+function ProcessNodeInspector({ node }: { node: ProcessNode }) {
+  const status = statusMeta(node.status);
+  const documents = [
+    ...(node.input_documents ?? []),
+    ...(node.output_documents ?? []),
+  ];
+
+  return (
+    <section className="process-node-inspector" aria-label="선택한 업무 노드 상세">
+      <div className="process-node-inspector-main">
+        <div className="process-node-inspector-label">
+          <span>노드 상세</span>
+          <strong>{node.id}</strong>
+          <i style={{ color: status.color, borderColor: status.color }}>
+            {status.label}
+          </i>
+        </div>
+        <h3>{node.name}</h3>
+        <p>{node.stage} · {node.lane} · {node.actor}</p>
+        {documents.length > 0 && (
+          <div className="process-node-documents">
+            {[...new Set(documents)].map((document) => (
+              <span key={document}>{document}</span>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="process-node-inspector-metrics">
+        <div>
+          <span>기한</span>
+          <strong>{node.deadline ?? "—"}</strong>
+        </div>
+        <div>
+          <span>확신도</span>
+          <strong>
+            {node.confidence === undefined
+              ? "—"
+              : `${Math.round(node.confidence * 100)}%`}
+          </strong>
+        </div>
+        {node.blocker && (
+          <p><strong>병목</strong> · {node.blocker}</p>
+        )}
+      </div>
+
+      <div className="process-node-inspector-laws">
+        <span>법적 근거</span>
+        <div>
+          {(node.legal_basis ?? []).map((basis) => (
+            <article key={`${basis.law}:${basis.article}`}>
+              <strong>{basis.law} {basis.article}</strong>
+              {basis.text && <p>{basis.text}</p>}
+            </article>
+          ))}
+          {!node.legal_basis?.length && <p>명시 조문 확인 필요</p>}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function statusMeta(status: ProcessNode["status"]) {
+  const meta = {
+    done: { label: "완료", color: "#5d6b63" },
+    current: { label: "현재", color: "#087452" },
+    waiting: { label: "대기", color: "#87938d" },
+    risk: { label: "위험", color: "#c78116" },
+    loop: { label: "회귀", color: "#c78116" },
+  };
+  return meta[status];
 }
 
 function updateDetailUrl(key: string, value: string) {
