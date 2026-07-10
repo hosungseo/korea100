@@ -156,10 +156,10 @@ function Footer() {
             <br />
             오류·제보:{" "}
             <a
-              href="mailto:tigercastle@korea.kr"
+              href="mailto:hosung.seo2026@gmail.com"
               style={{ color: "var(--color-accent-dark)", textDecoration: "none" }}
             >
-              tigercastle@korea.kr
+              hosung.seo2026@gmail.com
             </a>
           </p>
         </div>
