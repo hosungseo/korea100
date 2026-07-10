@@ -83,6 +83,7 @@ All spacing derives from 4px.
 ### Grid
 
 - Max content width: `1200px` (`1248px` including shell padding)
+- Home hierarchy: hero, featured process structure, then the searchable catalog
 - Desktop catalog: compact controls above a three-column card grid
 - Detail: single reading column with sticky section tools; process boards own their horizontal overflow
 - Mobile: one-column catalog, fixed-format controls, vertical process timelines, and no document-level horizontal overflow
@@ -111,7 +112,7 @@ All spacing derives from 4px.
 
 - Section links cover summary, process, evidence, issues, and related institutions.
 - Share, PNG export, and print/PDF are explicit commands with status feedback.
-- Process defaults to a core-flow summary. Full mode and selected node are URL-addressable.
+- Process is the first detail section and defaults to the full swimlane. The core-flow summary remains URL-addressable with `?process=summary`.
 - Below `900px`, full mode defaults to the same swimlane representation inside a bounded two-axis viewport. Stage headers stay pinned to the top and actor lanes stay pinned to the left.
 - Mobile offers compact stage jumps, native touch panning and browser zoom, keyboard arrow navigation, and a vertical timeline alternative with actor filtering.
 - Both mobile representations open the same verified detail drawer as desktop nodes, preserving legal evidence, URL state, focus trapping, and focus restoration.

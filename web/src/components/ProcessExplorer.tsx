@@ -19,13 +19,13 @@ export default function ProcessExplorer({
 }) {
   const searchParams = useSearchParams();
   const [mode, setMode] = useState<ProcessMode>(() =>
-    searchParams.get("process") === "full" ? "full" : "summary"
+    searchParams.get("process") === "summary" ? "summary" : "full"
   );
   const initialNodeId = searchParams.get("node") ?? undefined;
 
   function selectMode(nextMode: ProcessMode) {
     setMode(nextMode);
-    updateDetailUrl("process", nextMode === "full" ? "full" : "");
+    updateDetailUrl("process", nextMode === "summary" ? "summary" : "");
     trackEvent("process_mode", { slug, mode: nextMode });
   }
 
@@ -44,17 +44,17 @@ export default function ProcessExplorer({
         >
           <button
             type="button"
-            aria-pressed={mode === "summary"}
-            onClick={() => selectMode("summary")}
-          >
-            핵심 흐름
-          </button>
-          <button
-            type="button"
             aria-pressed={mode === "full"}
             onClick={() => selectMode("full")}
           >
             전체 구조도
+          </button>
+          <button
+            type="button"
+            aria-pressed={mode === "summary"}
+            onClick={() => selectMode("summary")}
+          >
+            핵심 흐름
           </button>
         </div>
         <p>

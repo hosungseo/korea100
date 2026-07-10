@@ -100,8 +100,8 @@ export default async function ModelPage({
       />
       <InstitutionHeader institution={institution} />
       <DetailSectionNav institution={institution} />
-      <InstitutionOnePage institution={institution} />
       <InstitutionCenter institution={institution} />
+      <InstitutionOnePage institution={institution} />
       <InstitutionBottom
         institution={institution}
         relatedSlugs={relatedSlugs}
@@ -115,8 +115,8 @@ function DetailSectionNav({ institution }: { institution: Institution }) {
     <nav className="model-subnav" aria-label="제도 상세 항목">
       <div>
         <div className="model-subnav-links">
-          <a href="#overview">핵심 요약</a>
           <a href="#process">업무구조도</a>
+          <a href="#overview">핵심 요약</a>
           <a href="#evidence">법령 근거</a>
           <a href="#issues">쟁점·개선</a>
           <a href="#related">관련 제도</a>

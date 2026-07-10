@@ -17,15 +17,15 @@ export default function HomePage() {
   return (
     <>
       <Hero institutions={institutions} />
+      {eia?.process && (
+        <ProcessPreview process={eia.process} verification={eia.verification} />
+      )}
       <Suspense fallback={<CatalogFallback />}>
         <InstitutionExplorer
           institutions={institutions}
           categoryOrder={categoryOrder}
         />
       </Suspense>
-      {eia?.process && (
-        <ProcessPreview process={eia.process} verification={eia.verification} />
-      )}
     </>
   );
 }
@@ -90,8 +90,8 @@ function Hero({ institutions }: { institutions: InstitutionSummary[] }) {
         </div>
 
         <div className="home-hero-actions">
+          <Link href="#featured-process">업무구조도 보기</Link>
           <Link href="#institutions">제도 찾기</Link>
-          <Link href="/request/">분석할 제도 제안</Link>
         </div>
       </div>
     </section>
@@ -109,6 +109,7 @@ function ProcessPreview({
 }) {
   return (
     <section
+      id="featured-process"
       style={{
         background: "#f3f7fa",
         borderBottom: "1px solid var(--color-border)",
