@@ -590,13 +590,13 @@ function buildRequestMailto(form: FormState) {
       `이메일: ${form.email}`,
     ].join("\n")
   );
-  return `mailto:ghtjd10855@gmail.com?subject=${subject}&body=${body}`;
+  return `mailto:tigercastle@korea.kr?subject=${subject}&body=${body}`;
 }
 
 function buildNotifyMailto(email: string) {
   const subject = encodeURIComponent("[제도100] 출간 알림 신청");
   const body = encodeURIComponent(`출간 알림 신청 이메일: ${email}`);
-  return `mailto:ghtjd10855@gmail.com?subject=${subject}&body=${body}`;
+  return `mailto:tigercastle@korea.kr?subject=${subject}&body=${body}`;
 }
 
 function buildPublicIssueUrl(form: FormState) {
