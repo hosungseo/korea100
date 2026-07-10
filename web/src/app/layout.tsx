@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className="h-full">
-      <body className="min-h-full flex flex-col" style={{ background: "var(--color-canvas)" }}>
+      <body className="min-h-full flex flex-col site-body">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
@@ -27,75 +27,24 @@ export default function RootLayout({
 
 function Header() {
   return (
-    <header
-      style={{
-        background: "var(--color-surface)",
-        borderBottom: "1px solid var(--color-border)",
-        position: "sticky",
-        top: 0,
-        zIndex: 50,
-        boxShadow: "0 1px 0 var(--color-border)",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: 1440,
-          margin: "0 auto",
-          padding: "0 24px",
-          height: 56,
-          display: "flex",
-          alignItems: "center",
-          gap: 32,
-        }}
-      >
-        {/* Brand */}
-        <Link
-          href="/"
-          style={{
-            fontWeight: 720,
-            fontSize: 15,
-            color: "var(--color-ink)",
-            textDecoration: "none",
-            flexShrink: 0,
-            letterSpacing: "-0.01em",
-          }}
-        >
+    <header className="site-header">
+      <div className="site-header-inner">
+        <Link href="/" className="site-brand">
           제도 100
         </Link>
 
-        {/* Nav */}
-        <nav
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 4,
-            overflowX: "auto",
-            whiteSpace: "nowrap",
-            flex: 1,
-            scrollbarWidth: "none",
-            msOverflowStyle: "none",
-          } as React.CSSProperties}
-        >
+        <nav className="site-nav" aria-label="주요 메뉴">
           <NavLink href="/#institutions">제도 목록</NavLink>
-          <NavLink href="/model/environmental-impact-assessment/">환경영향평가</NavLink>
+          <NavLink
+            href="/model/environmental-impact-assessment/"
+            className="nav-featured-link"
+          >
+            업무구조도 예시
+          </NavLink>
         </nav>
 
-        {/* CTA */}
-        <Link
-          href="/request/"
-          style={{
-            flexShrink: 0,
-            padding: "6px 14px",
-            borderRadius: 9999,
-            background: "var(--color-ink)",
-            color: "#fff",
-            fontSize: 13,
-            fontWeight: 600,
-            textDecoration: "none",
-            transition: "background 140ms ease-out",
-          }}
-        >
-          요청하기
+        <Link href="/request/" className="site-header-cta">
+          제도 제안
         </Link>
       </div>
     </header>
@@ -105,23 +54,14 @@ function Header() {
 function NavLink({
   href,
   children,
+  className = "",
 }: {
   href: string;
   children: React.ReactNode;
+  className?: string;
 }) {
   return (
-    <Link
-      href={href}
-      style={{
-        padding: "6px 10px",
-        fontSize: 14,
-        color: "var(--color-muted)",
-        textDecoration: "none",
-        borderRadius: 6,
-        transition: "color 140ms ease-out, background 140ms ease-out",
-        fontWeight: 450,
-      }}
-    >
+    <Link href={href} className={`nav-link ${className}`.trim()}>
       {children}
     </Link>
   );
@@ -129,14 +69,7 @@ function NavLink({
 
 function Footer() {
   return (
-    <footer
-      style={{
-        borderTop: "1px solid var(--color-border)",
-        background: "var(--color-surface-muted)",
-        padding: "40px 24px",
-        marginTop: 80,
-      }}
-    >
+    <footer className="site-footer">
       <div
         style={{
           maxWidth: 1440,

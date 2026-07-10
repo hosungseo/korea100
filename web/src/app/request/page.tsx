@@ -128,16 +128,7 @@ export default function RequestPage() {
         >
           독자 참여
         </div>
-        <h1
-          style={{
-            fontSize: "clamp(26px, 5vw, 36px)",
-            fontWeight: 720,
-            lineHeight: 1.1,
-            letterSpacing: "-0.01em",
-            color: "var(--color-ink)",
-            marginBottom: 12,
-          }}
-        >
+        <h1 className="request-page-title">
           다음 제도 제작 요청
         </h1>
         <p style={{ fontSize: 15, color: "var(--color-muted)", lineHeight: 1.7 }}>

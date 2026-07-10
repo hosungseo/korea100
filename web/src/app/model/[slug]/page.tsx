@@ -129,16 +129,7 @@ function InstitutionHeader({ institution }: { institution: Institution }) {
         </div>
 
         {/* Title + one-liner */}
-        <h1
-          style={{
-            fontSize: "clamp(28px, 5vw, 48px)",
-            fontWeight: 720,
-            lineHeight: 1.05,
-            letterSpacing: "-0.01em",
-            color: "var(--color-ink)",
-            marginBottom: 12,
-          }}
-        >
+        <h1 className="model-page-title">
           {institution.name}
         </h1>
         <p

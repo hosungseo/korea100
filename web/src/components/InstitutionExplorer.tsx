@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useMemo, useState, type CSSProperties } from "react";
 import Link from "next/link";
 import type { Institution } from "@/lib/types";
 
@@ -9,251 +9,209 @@ interface Props {
   categoryOrder: string[];
 }
 
+const PAGE_SIZE = 12;
+
+const categoryColors: Record<string, string> = {
+  "국토·환경·안전": "#0f9f72",
+  "재정과 예산": "#315a78",
+  "민원·권리구제·참여": "#8a5a2b",
+  "국가 운영과 권력 통제": "#4b5563",
+  "복지와 사회보험": "#b54b7b",
+  "데이터·디지털·공공서비스": "#2563eb",
+  "지방자치와 지역": "#7c3aed",
+  "노동·교육·인적자원": "#b45309",
+  "인허가·규제·산업": "#0f766e",
+  "외교·국방·치안·생활 기반": "#be123c",
+};
+
 export default function InstitutionExplorer({ institutions, categoryOrder }: Props) {
-  const [activeCategory, setActiveCategory] = useState<string>("전체");
+  const [activeCategory, setActiveCategory] = useState("전체");
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState<"priority" | "name">("priority");
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
-  const fullCount = institutions.length;
-  const boardCount = institutions.filter((i) => i.status === "full").length;
+  const categoryCounts = useMemo(() => {
+    const counts = new Map<string, number>();
+    institutions.forEach((institution) => {
+      if (!institution.category) return;
+      counts.set(institution.category, (counts.get(institution.category) ?? 0) + 1);
+    });
+    return counts;
+  }, [institutions]);
 
   const filtered = useMemo(() => {
-    let result = institutions;
+    const normalizedQuery = query.trim().toLowerCase();
+    const result = institutions.filter((institution) => {
+      const matchesCategory =
+        activeCategory === "전체" || institution.category === activeCategory;
+      const matchesQuery =
+        normalizedQuery.length === 0 ||
+        institution.name.toLowerCase().includes(normalizedQuery) ||
+        institution.oneLiner.toLowerCase().includes(normalizedQuery) ||
+        institution.canvas.legalBasis.some((basis) =>
+          basis.law.toLowerCase().includes(normalizedQuery)
+        );
 
-    if (activeCategory !== "전체") {
-      result = result.filter((inst) => inst.category === activeCategory);
-    }
+      return matchesCategory && matchesQuery;
+    });
 
-    if (query.trim()) {
-      const q = query.trim().toLowerCase();
-      result = result.filter(
-        (inst) =>
-          inst.name.toLowerCase().includes(q) ||
-          inst.oneLiner.toLowerCase().includes(q) ||
-          inst.canvas.legalBasis.some((lb) => lb.law.toLowerCase().includes(q))
-      );
-    }
-
-    if (sort === "name") {
-      result = [...result].sort((a, b) => a.name.localeCompare(b.name, "ko"));
-    }
-    // priority order is preserved from server (already sorted)
-
-    return result;
+    return result.sort((a, b) =>
+      sort === "name"
+        ? a.name.localeCompare(b.name, "ko")
+        : a.priority - b.priority
+    );
   }, [institutions, activeCategory, query, sort]);
 
+  const visibleInstitutions = filtered.slice(0, visibleCount);
+  const hasFilters = activeCategory !== "전체" || query.trim().length > 0;
+  const processCount = institutions.filter(
+    (institution) => institution.process?.nodes.length
+  ).length;
+
+  function selectCategory(category: string) {
+    setActiveCategory(category);
+    setVisibleCount(PAGE_SIZE);
+  }
+
+  function updateQuery(value: string) {
+    setQuery(value);
+    setVisibleCount(PAGE_SIZE);
+  }
+
+  function updateSort(value: "priority" | "name") {
+    setSort(value);
+    setVisibleCount(PAGE_SIZE);
+  }
+
+  function resetFilters() {
+    setActiveCategory("전체");
+    setQuery("");
+    setVisibleCount(PAGE_SIZE);
+  }
+
   return (
-    <section id="institutions" style={{ padding: "64px 24px" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        {/* Section header */}
-        <div style={{ marginBottom: 28 }}>
-          <div
-            style={{
-              fontSize: 11,
-              fontWeight: 700,
-              letterSpacing: "0.07em",
-              textTransform: "uppercase",
-              color: "var(--color-faint)",
-              marginBottom: 8,
-            }}
-          >
-            제도 목록
+    <section id="institutions" className="institution-explorer">
+      <div className="institution-explorer-inner">
+        <header className="explorer-heading">
+          <div>
+            <p>제도 카탈로그</p>
+            <h2>필요한 제도를 바로 찾아보세요</h2>
           </div>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "baseline",
-              gap: 16,
-              flexWrap: "wrap",
-            }}
-          >
-            <h2
-              style={{
-                fontSize: 28,
-                fontWeight: 680,
-                color: "var(--color-ink)",
-                margin: 0,
-              }}
-            >
-              공개된 제도 모델
-            </h2>
-            <span
-              style={{
-                fontSize: 14,
-                color: "var(--color-muted)",
-                fontWeight: 500,
-              }}
-            >
-              제도 {fullCount}개 · 업무구조도 {boardCount}개
-            </span>
-          </div>
-        </div>
+          <span>
+            제도 {institutions.length}개 · 업무구조도 {processCount}개
+          </span>
+        </header>
 
-        {/* Controls */}
-        <div
-          style={{
-            marginBottom: 24,
-            display: "flex",
-            flexDirection: "column",
-            gap: 12,
-          }}
-        >
-          {/* Search + sort toggle */}
-          <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-            <input
-              type="search"
-              placeholder="이름·설명·법령명 검색..."
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              style={{
-                flex: "1 1 200px",
-                minWidth: 180,
-                padding: "8px 16px",
-                fontSize: 14,
-                border: "1px solid var(--color-border)",
-                borderRadius: 9999,
-                background: "var(--color-surface)",
-                color: "var(--color-ink)",
-                outline: "none",
-                fontFamily: "var(--font-sans)",
-              }}
-            />
-            <button
-              onClick={() =>
-                setSort((s) => (s === "priority" ? "name" : "priority"))
-              }
-              style={{
-                padding: "8px 16px",
-                fontSize: 13,
-                fontWeight: 600,
-                border: "1px solid var(--color-border)",
-                borderRadius: 9999,
-                background: "var(--color-surface)",
-                color: "var(--color-muted)",
-                cursor: "pointer",
-                whiteSpace: "nowrap",
-                fontFamily: "var(--font-sans)",
-              }}
-            >
-              {sort === "priority" ? "우선순위순" : "이름순"}
-            </button>
-          </div>
-
-          {/* Category filter chips */}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-            {["전체", ...categoryOrder].map((cat) => {
-              const isActive = activeCategory === cat;
-              return (
+        <div className="explorer-controls">
+          <div className="explorer-search-row">
+            <div className="explorer-search">
+              <label className="sr-only" htmlFor="institution-search">
+                제도 검색
+              </label>
+              <input
+                id="institution-search"
+                type="search"
+                aria-label="제도 검색"
+                placeholder="제도명·설명·법령명 검색"
+                value={query}
+                onChange={(event) => updateQuery(event.target.value)}
+              />
+              {query && (
                 <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  style={{
-                    padding: "5px 14px",
-                    fontSize: 13,
-                    fontWeight: isActive ? 700 : 500,
-                    border: "1px solid",
-                    borderColor: isActive
-                      ? "var(--color-accent)"
-                      : "var(--color-border)",
-                    borderRadius: 9999,
-                    background: isActive
-                      ? "var(--color-accent-soft)"
-                      : "var(--color-surface)",
-                    color: isActive
-                      ? "var(--color-accent-dark)"
-                      : "var(--color-muted)",
-                    cursor: "pointer",
-                    whiteSpace: "nowrap",
-                    fontFamily: "var(--font-sans)",
-                  }}
+                  type="button"
+                  onClick={() => updateQuery("")}
+                  aria-label="검색어 지우기"
+                  title="검색어 지우기"
                 >
-                  {cat}
+                  ×
                 </button>
-              );
-            })}
+              )}
+            </div>
+
+            <div className="explorer-sort" role="group" aria-label="정렬 방식">
+              <button
+                type="button"
+                aria-pressed={sort === "priority"}
+                onClick={() => updateSort("priority")}
+              >
+                우선순위
+              </button>
+              <button
+                type="button"
+                aria-pressed={sort === "name"}
+                onClick={() => updateSort("name")}
+              >
+                가나다
+              </button>
+            </div>
+          </div>
+
+          <div className="category-tabs" role="group" aria-label="제도 분야">
+            {["전체", ...categoryOrder].map((category) => (
+              <button
+                key={category}
+                type="button"
+                aria-pressed={activeCategory === category}
+                onClick={() => selectCategory(category)}
+              >
+                <span>{category}</span>
+                <small>
+                  {category === "전체"
+                    ? institutions.length
+                    : (categoryCounts.get(category) ?? 0)}
+                </small>
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Results count when filtering */}
-        {(activeCategory !== "전체" || query.trim()) && (
-          <div
-            style={{
-              marginBottom: 16,
-              fontSize: 13,
-              color: "var(--color-faint)",
-            }}
-          >
-            {filtered.length}개 표시 중
-          </div>
-        )}
+        <div className="explorer-result" aria-live="polite">
+          <p>
+            <strong>{filtered.length}</strong>개 결과
+            {visibleInstitutions.length < filtered.length && (
+              <span> · {visibleInstitutions.length}개 표시 중</span>
+            )}
+          </p>
+          {hasFilters && (
+            <button type="button" onClick={resetFilters}>
+              필터 초기화
+            </button>
+          )}
+        </div>
 
-        {/* Empty state */}
         {filtered.length === 0 ? (
-          <div
-            style={{
-              padding: "64px 24px",
-              textAlign: "center",
-              color: "var(--color-faint)",
-              background: "var(--color-surface)",
-              borderRadius: 18,
-              border: "1px solid var(--color-border)",
-            }}
-          >
-            <div style={{ fontSize: 32, marginBottom: 12 }}>—</div>
-            <p style={{ fontSize: 15, margin: 0 }}>
-              검색 결과가 없습니다. 다른 키워드나 분야를 선택해 보세요.
-            </p>
+          <div className="explorer-empty">
+            <strong>검색 결과가 없습니다.</strong>
+            <p>검색어를 줄이거나 다른 분야를 선택해 보세요.</p>
           </div>
         ) : (
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(272px, 1fr))",
-              gap: 12,
-            }}
-          >
-            {filtered.map((inst) => (
-              <InstitutionCard key={inst.slug} institution={inst} />
+          <div className="institution-grid">
+            {visibleInstitutions.map((institution) => (
+              <InstitutionCard key={institution.slug} institution={institution} />
             ))}
           </div>
         )}
 
-        {/* Request CTA */}
-        <div
-          style={{
-            marginTop: 48,
-            padding: "32px",
-            background: "var(--color-surface)",
-            borderRadius: 18,
-            border: "1px solid var(--color-border)",
-            textAlign: "center",
-          }}
-        >
-          <p
-            style={{
-              fontSize: 16,
-              color: "var(--color-muted)",
-              marginBottom: 16,
-            }}
-          >
-            분석이 필요한 제도가 있으신가요? 다음 제작 순서에 반영합니다.
+        {visibleInstitutions.length < filtered.length && (
+          <div className="explorer-more">
+            <button
+              type="button"
+              onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
+            >
+              제도 더 보기
+              <span>
+                {visibleInstitutions.length}/{filtered.length}
+              </span>
+            </button>
+          </div>
+        )}
+
+        <div className="explorer-request">
+          <p>
+            <strong>찾는 제도가 없나요?</strong>
+            분석이 필요한 제도를 다음 제작 순서에 반영합니다.
           </p>
-          <Link
-            href="/request/"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              padding: "10px 24px",
-              background: "var(--color-accent)",
-              color: "#fff",
-              borderRadius: 9999,
-              textDecoration: "none",
-              fontSize: 14,
-              fontWeight: 600,
-            }}
-          >
-            제도 제작 요청하기
-          </Link>
+          <Link href="/request/">제도 분석 제안</Link>
         </div>
       </div>
     </section>
@@ -261,139 +219,45 @@ export default function InstitutionExplorer({ institutions, categoryOrder }: Pro
 }
 
 function InstitutionCard({ institution }: { institution: Institution }) {
-  const isCanvas = institution.status === "canvas";
   const articleVerification = institution.verification?.articleVerification;
+  const isReviewNeeded = institution.verification?.status === "needs-review";
   const verificationLabel = articleVerification
-    ? institution.verification?.status === "article-verified"
-      ? `조문 ${articleVerification.verifiedReferences}건 확인`
-      : articleVerification.missingReferences + articleVerification.uncheckableReferences === 0
-        ? `조문 ${articleVerification.verifiedReferences}건 · 범위별 출처`
-        : `조문 ${articleVerification.verifiedReferences}/${articleVerification.articleReferences}건 확인`
+    ? `조문 ${articleVerification.verifiedReferences}/${articleVerification.articleReferences}`
     : institution.verification
-      ? `원문 ${institution.verification.sources.length}건 연결`
-      : "";
+      ? `원문 ${institution.verification.sources.length}`
+      : "검증 준비 중";
+  const category = institution.category ?? "기타";
+  const categoryColor = categoryColors[category] ?? "#5d6b63";
 
   return (
     <Link
       href={`/model/${institution.slug}/`}
-      className="card-link"
-      style={{
-        display: "block",
-        textDecoration: "none",
-        background: "var(--color-surface)",
-        border: "1px solid var(--color-border)",
-        borderRadius: 8,
-        padding: "16px",
-        position: "relative",
-        overflow: "hidden",
-      }}
+      className="institution-card"
+      style={{ "--category-color": categoryColor } as CSSProperties}
     >
-      {/* Priority + type + board badge */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 6,
-          marginBottom: 8,
-          flexWrap: "wrap",
-        }}
-      >
-        <span
-          style={{
-            fontSize: 11,
-            fontWeight: 700,
-            color: "var(--color-faint)",
-            fontFamily: "var(--font-mono)",
-            letterSpacing: "0.04em",
-            flexShrink: 0,
-          }}
-        >
-          #{institution.priority.toString().padStart(2, "0")}
+      <div className="institution-card-header">
+        <div>
+          <span>#{institution.priority.toString().padStart(2, "0")}</span>
+          <span>{institution.type}</span>
+        </div>
+        <span data-review={isReviewNeeded ? "true" : undefined}>
+          {verificationLabel}
         </span>
-        <span
-          style={{
-            fontSize: 11,
-            fontWeight: 700,
-            letterSpacing: "0.04em",
-            padding: "2px 7px",
-            borderRadius: 4,
-            background: "var(--color-surface-muted)",
-            color: "var(--color-muted)",
-            border: "1px solid var(--color-border)",
-            flexShrink: 0,
-          }}
-        >
-          {institution.type}
-        </span>
-        {!isCanvas && (
-          <span
-            style={{
-              fontSize: 11,
-              fontWeight: 600,
-              padding: "2px 7px",
-              borderRadius: 4,
-              background: "var(--color-accent-soft)",
-              color: "var(--color-accent-dark)",
-              border: "1px solid rgba(15,159,114,0.2)",
-              flexShrink: 0,
-            }}
-          >
-            업무구조도
-          </span>
-        )}
-        {institution.verification && (
-          <span
-            style={{
-              fontSize: 11,
-              fontWeight: 600,
-              padding: "2px 7px",
-              borderRadius: 4,
-              background:
-                institution.verification.status === "needs-review"
-                  ? "#fef6e7"
-                  : "var(--color-accent-soft)",
-              color:
-                institution.verification.status === "needs-review"
-                  ? "#c78116"
-                  : "var(--color-accent-dark)",
-              flexShrink: 0,
-            }}
-          >
-            {verificationLabel}
-          </span>
-        )}
       </div>
 
-      {/* Name */}
-      <h3
-        style={{
-          fontSize: 15,
-          fontWeight: 680,
-          color: "var(--color-ink)",
-          marginBottom: 6,
-          lineHeight: 1.3,
-        }}
-      >
-        {institution.name}
-      </h3>
-
-      {/* One-liner — 2-line clamp */}
-      <p
-        style={
-          {
-            fontSize: 13,
-            color: "var(--color-muted)",
-            lineHeight: 1.55,
-            margin: 0,
-            display: "-webkit-box",
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
-          } as React.CSSProperties
-        }
-      >
-        {institution.oneLiner}
+      <p className="institution-card-category">
+        <i aria-hidden="true" />
+        {category}
       </p>
+
+      <h3>{institution.name}</h3>
+      <p className="institution-card-description">{institution.oneLiner}</p>
+
+      <div className="institution-card-meta">
+        <span>업무 {institution.process?.nodes.length ?? 0}</span>
+        <span>법적 근거 {institution.canvas.legalBasis.length}</span>
+        <span aria-hidden="true">→</span>
+      </div>
     </Link>
   );
 }
