@@ -23,6 +23,8 @@ jobs:
     env:
       NEXT_PUBLIC_BASE_PATH: /korea100
       NEXT_PUBLIC_SITE_URL: https://hosungseo.github.io/korea100
+      NEXT_PUBLIC_REQUEST_ENDPOINT: ${{ vars.REQUEST_ENDPOINT }}
+      NEXT_PUBLIC_ANALYTICS_ENDPOINT: ${{ vars.ANALYTICS_ENDPOINT }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

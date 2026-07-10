@@ -153,3 +153,54 @@ export interface Institution {
   verification?: SourceVerification;
   process?: ProcessModel;
 }
+
+export interface InstitutionSummary {
+  slug: string;
+  name: string;
+  oneLiner: string;
+  type: string;
+  priority: number;
+  category: string;
+  asOfDate: string;
+  processNodeCount: number;
+  processStageCount: number;
+  processLaneCount: number;
+  legalBasisCount: number;
+  fieldVerificationCount: number;
+  verificationStatus?: SourceVerificationStatus;
+  verifiedReferences: number;
+  articleReferences: number;
+  sourceCount: number;
+}
+
+export interface InstitutionComparison {
+  slug: string;
+  purpose: string;
+  stakeholders: string;
+  authorityNames: string[];
+  legalBasisNames: string[];
+  moneyFlow: string;
+  docsFlow: string;
+  keyBottlenecks: string[];
+  keyReformPoints: string[];
+}
+
+export interface FieldVerificationEntry {
+  id: string;
+  priority: number;
+  slug: string;
+  institutionName: string;
+  category: string;
+  item: string;
+  domain: string;
+  suggestedEvidence: string;
+  status: "open" | "reviewing" | "verified";
+}
+
+export interface FieldVerificationQueue {
+  sourceAsOfDate: string;
+  total: number;
+  institutions: number;
+  byDomain: Record<string, number>;
+  entries: FieldVerificationEntry[];
+}

@@ -1,6 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { trackEvent } from "@/lib/client-events";
+
+const REQUEST_ENDPOINT =
+  process.env.NEXT_PUBLIC_REQUEST_ENDPOINT?.trim() ?? "";
+const PUBLIC_ISSUE_BASE =
+  "https://github.com/hosungseo/korea100/issues/new?template=institution-request.yml";
 
 const READER_TYPES = [
   "공무원·공공기관 직원",
@@ -32,6 +38,8 @@ interface FormState {
   email: string;
 }
 
+type SubmissionStatus = "idle" | "submitting" | "success" | "error";
+
 const EMPTY: FormState = {
   institutionName: "",
   whyInterested: "",
@@ -42,69 +50,90 @@ const EMPTY: FormState = {
 
 export default function RequestPage() {
   const [form, setForm] = useState<FormState>(EMPTY);
-  const [submitted, setSubmitted] = useState(false);
+  const [requestStatus, setRequestStatus] =
+    useState<SubmissionStatus>("idle");
+  const [requestMessage, setRequestMessage] = useState("");
   const [notifyEmail, setNotifyEmail] = useState("");
-  const [notifySent, setNotifySent] = useState(false);
+  const [notifyStatus, setNotifyStatus] =
+    useState<SubmissionStatus>("idle");
+  const [notifyMessage, setNotifyMessage] = useState("");
+  const [company, setCompany] = useState("");
 
   function update(field: keyof FormState, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }));
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!form.institutionName.trim()) return;
-
-    // Build mailto body
-    const body = [
-      `[제도 제작 요청]`,
-      ``,
-      `제도명: ${form.institutionName}`,
-      `왜 궁금한지: ${form.whyInterested}`,
-      `독자 유형: ${form.readerType}`,
-      `가장 헷갈리는 지점: ${form.confusingPoint}`,
-      `이메일: ${form.email}`,
-    ].join("\n");
-
-    const subject = encodeURIComponent(
-      `[제도100] 제작 요청 — ${form.institutionName}`
-    );
-    const encodedBody = encodeURIComponent(body);
-    const mailtoUrl = `mailto:ghtjd10855@gmail.com?subject=${subject}&body=${encodedBody}`;
-
-    // localStorage backup
-    try {
-      const saved = JSON.parse(
-        localStorage.getItem("korea100_requests") ?? "[]"
-      ) as FormState[];
-      saved.push({ ...form, institutionName: form.institutionName });
-      localStorage.setItem("korea100_requests", JSON.stringify(saved));
-    } catch {
-      // ignore
+    if (company) {
+      setRequestStatus("success");
+      return;
     }
 
-    // Open mailto
-    window.location.href = mailtoUrl;
-    setSubmitted(true);
+    saveDraft("korea100_request_draft", form);
+    trackEvent("request_submit", {
+      reader_type: form.readerType || "미선택",
+      confusing_point: form.confusingPoint || "미선택",
+      has_contact: Boolean(form.email),
+    });
+
+    if (!REQUEST_ENDPOINT) {
+      setRequestStatus("error");
+      setRequestMessage(
+        "온라인 수집 주소가 아직 연결되지 않았습니다. 입력 내용은 이 브라우저에 임시 저장됐으며, 아래 대체 경로로 보낼 수 있습니다."
+      );
+      trackEvent("request_unavailable");
+      return;
+    }
+
+    setRequestStatus("submitting");
+    setRequestMessage("");
+    try {
+      await submitRequest("institution-request", form);
+      localStorage.removeItem("korea100_request_draft");
+      setRequestStatus("success");
+      trackEvent("request_success");
+    } catch {
+      setRequestStatus("error");
+      setRequestMessage(
+        "요청을 저장하지 못했습니다. 입력 내용은 이 브라우저에 임시 저장됐습니다."
+      );
+      trackEvent("request_error");
+    }
   }
 
-  function handleNotify(e: React.FormEvent) {
+  async function handleNotify(e: React.FormEvent) {
     e.preventDefault();
     if (!notifyEmail.trim()) return;
+    saveDraft("korea100_notify_draft", { email: notifyEmail });
+    trackEvent("publication_notify_submit");
 
-    const subject = encodeURIComponent("[제도100] 출간 알림 신청");
-    const body = encodeURIComponent(
-      `출간 알림 신청 이메일: ${notifyEmail}\n\n한 장으로 끝내는 대한민국 제도 100 출간 시 알려주세요.`
-    );
-    window.location.href = `mailto:ghtjd10855@gmail.com?subject=${subject}&body=${body}`;
-
-    try {
-      localStorage.setItem("korea100_notify_email", notifyEmail);
-    } catch {
-      // ignore
+    if (!REQUEST_ENDPOINT) {
+      setNotifyStatus("error");
+      setNotifyMessage(
+        "온라인 알림 신청 주소가 아직 연결되지 않았습니다. 이메일 초안을 이용해 주세요."
+      );
+      return;
     }
 
-    setNotifySent(true);
+    setNotifyStatus("submitting");
+    setNotifyMessage("");
+    try {
+      await submitRequest("publication-notification", { email: notifyEmail });
+      localStorage.removeItem("korea100_notify_draft");
+      setNotifyStatus("success");
+      trackEvent("publication_notify_success");
+    } catch {
+      setNotifyStatus("error");
+      setNotifyMessage("알림 신청을 저장하지 못했습니다. 이메일 초안을 이용해 주세요.");
+      trackEvent("publication_notify_error");
+    }
   }
+
+  const requestMailto = buildRequestMailto(form);
+  const notifyMailto = buildNotifyMailto(notifyEmail);
+  const publicIssueUrl = buildPublicIssueUrl(form);
 
   return (
     <div
@@ -133,14 +162,25 @@ export default function RequestPage() {
         </h1>
         <p style={{ fontSize: 15, color: "var(--color-muted)", lineHeight: 1.7 }}>
           알고 싶은 제도를 알려주세요. 요청 데이터를 바탕으로 다음 제작 순서와
-          책 목차 우선순위를 결정합니다. 이메일 클라이언트가 열리면 그대로 보내시면 됩니다.
+          책 목차 우선순위를 결정합니다. 제출이 완료된 경우에만 저장 완료 상태를 표시합니다.
         </p>
       </div>
 
       {/* Form */}
-      {!submitted ? (
+      {requestStatus !== "success" ? (
         <form onSubmit={handleSubmit} style={{ marginBottom: 64 }}>
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+            <div className="request-honeypot" aria-hidden="true">
+              <label htmlFor="company">회사</label>
+              <input
+                id="company"
+                type="text"
+                value={company}
+                onChange={(event) => setCompany(event.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
             {/* 제도명 */}
             <FormField
               label="알고 싶은 제도명"
@@ -224,13 +264,14 @@ export default function RequestPage() {
             <div>
               <button
                 type="submit"
+                disabled={requestStatus === "submitting"}
                 style={{
                   width: "100%",
                   padding: "13px 24px",
                   background: "var(--color-ink)",
                   color: "#fff",
                   border: "none",
-                  borderRadius: 10,
+                  borderRadius: 8,
                   fontSize: 15,
                   fontWeight: 600,
                   cursor: "pointer",
@@ -238,7 +279,7 @@ export default function RequestPage() {
                   fontFamily: "inherit",
                 }}
               >
-                이메일 앱으로 요청 보내기 →
+                {requestStatus === "submitting" ? "저장 중..." : "제도 분석 제안 제출"}
               </button>
               <p
                 style={{
@@ -248,9 +289,24 @@ export default function RequestPage() {
                   textAlign: "center",
                 }}
               >
-                이메일 앱이 열립니다. 브라우저에 임시 저장됩니다.
+                연락처는 선택사항이며 요청 처리와 결과 공유에만 사용합니다.
               </p>
             </div>
+
+            {requestStatus === "error" && (
+              <div className="request-feedback" role="alert">
+                <p>{requestMessage}</p>
+                <div>
+                  <a href={requestMailto}>이메일 초안 열기</a>
+                  <a href={publicIssueUrl} target="_blank" rel="noreferrer">
+                    GitHub 공개 제안
+                  </a>
+                </div>
+                <small>
+                  GitHub 제안은 공개됩니다. 연락처나 사건번호 등 개인정보는 포함하지 마세요.
+                </small>
+              </div>
+            )}
           </div>
         </form>
       ) : (
@@ -258,7 +314,7 @@ export default function RequestPage() {
           style={{
             padding: "28px",
             background: "var(--color-accent-soft)",
-            borderRadius: 12,
+            borderRadius: 8,
             border: "1px solid rgba(15,159,114,0.2)",
             marginBottom: 64,
           }}
@@ -271,16 +327,17 @@ export default function RequestPage() {
               marginBottom: 8,
             }}
           >
-            요청이 전송되었습니다
+            요청이 저장되었습니다
           </h2>
           <p style={{ fontSize: 14, color: "var(--color-muted)", lineHeight: 1.7 }}>
-            이메일 앱에서 보내기를 완료해 주세요. 브라우저에도 임시 저장되었습니다.
-            다음 제도 제작 순서에 반영하겠습니다.
+            요청 수집함에 정상적으로 저장됐습니다. 다음 제도 제작 순서와 책 목차
+            검토에 반영하겠습니다.
           </p>
           <button
             onClick={() => {
               setForm(EMPTY);
-              setSubmitted(false);
+              setRequestStatus("idle");
+              setRequestMessage("");
             }}
             style={{
               marginTop: 16,
@@ -326,10 +383,23 @@ export default function RequestPage() {
           이메일을 남겨주세요.
         </p>
 
-        {!notifySent ? (
+        {notifyStatus !== "success" ? (
           <form onSubmit={handleNotify}>
+            <label
+              htmlFor="publication-notification-email"
+              style={{
+                display: "block",
+                marginBottom: 8,
+                color: "var(--color-ink)",
+                fontSize: 13,
+                fontWeight: 650,
+              }}
+            >
+              이메일 주소
+            </label>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
               <input
+                id="publication-notification-email"
                 type="email"
                 placeholder="이메일 주소"
                 value={notifyEmail}
@@ -343,12 +413,13 @@ export default function RequestPage() {
               />
               <button
                 type="submit"
+                disabled={notifyStatus === "submitting"}
                 style={{
                   padding: "11px 20px",
                   background: "var(--color-accent)",
                   color: "#fff",
                   border: "none",
-                  borderRadius: 10,
+                  borderRadius: 8,
                   fontSize: 14,
                   fontWeight: 600,
                   cursor: "pointer",
@@ -357,7 +428,7 @@ export default function RequestPage() {
                   transition: "background 140ms ease-out",
                 }}
               >
-                알림 신청
+                {notifyStatus === "submitting" ? "저장 중..." : "알림 신청"}
               </button>
             </div>
             <p
@@ -367,27 +438,29 @@ export default function RequestPage() {
                 marginTop: 8,
               }}
             >
-              이메일 앱이 열립니다. 직접 문의:{" "}
-              <a
-                href="mailto:ghtjd10855@gmail.com"
-                style={{ color: "var(--color-accent-dark)" }}
-              >
-                ghtjd10855@gmail.com
-              </a>
+              신청이 완료된 경우에만 저장 완료 상태를 표시합니다.
             </p>
+            {notifyStatus === "error" && (
+              <div className="request-feedback" role="alert">
+                <p>{notifyMessage}</p>
+                <div>
+                  <a href={notifyMailto}>이메일 초안 열기</a>
+                </div>
+              </div>
+            )}
           </form>
         ) : (
           <div
             style={{
               padding: "16px 20px",
               background: "var(--color-accent-soft)",
-              borderRadius: 10,
+              borderRadius: 8,
               fontSize: 14,
               color: "var(--color-accent-dark)",
               fontWeight: 500,
             }}
           >
-            이메일 앱에서 보내기를 완료해 주세요. 감사합니다.
+            출간 알림 신청이 저장되었습니다.
           </div>
         )}
       </div>
@@ -451,9 +524,81 @@ const inputStyle: React.CSSProperties = {
   color: "var(--color-text)",
   background: "var(--color-surface)",
   border: "1px solid var(--color-border-strong)",
-  borderRadius: 10,
+  borderRadius: 8,
   outline: "none",
   fontFamily: "inherit",
   transition: "border-color 140ms ease-out",
   boxSizing: "border-box",
 };
+
+async function submitRequest(
+  kind: "institution-request" | "publication-notification",
+  data: FormState | { email: string }
+) {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), 10000);
+  try {
+    const response = await fetch(REQUEST_ENDPOINT, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        kind,
+        data,
+        source: "korea100",
+        submittedAt: new Date().toISOString(),
+      }),
+      signal: controller.signal,
+    });
+    if (!response.ok) throw new Error(`Request failed: ${response.status}`);
+  } finally {
+    window.clearTimeout(timeout);
+  }
+}
+
+function saveDraft(key: string, value: unknown) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch {
+    // Draft storage is a convenience and must not block submission.
+  }
+}
+
+function buildRequestMailto(form: FormState) {
+  const subject = encodeURIComponent(
+    `[제도100] 제작 요청 — ${form.institutionName || "제도 제안"}`
+  );
+  const body = encodeURIComponent(
+    [
+      "[제도 제작 요청]",
+      "",
+      `제도명: ${form.institutionName}`,
+      `왜 궁금한지: ${form.whyInterested}`,
+      `독자 유형: ${form.readerType}`,
+      `가장 헷갈리는 지점: ${form.confusingPoint}`,
+      `이메일: ${form.email}`,
+    ].join("\n")
+  );
+  return `mailto:ghtjd10855@gmail.com?subject=${subject}&body=${body}`;
+}
+
+function buildNotifyMailto(email: string) {
+  const subject = encodeURIComponent("[제도100] 출간 알림 신청");
+  const body = encodeURIComponent(`출간 알림 신청 이메일: ${email}`);
+  return `mailto:ghtjd10855@gmail.com?subject=${subject}&body=${body}`;
+}
+
+function buildPublicIssueUrl(form: FormState) {
+  const title = encodeURIComponent(`[제도 제안] ${form.institutionName}`);
+  const body = encodeURIComponent(
+    [
+      `## 제도명\n${form.institutionName}`,
+      `## 알고 싶은 이유\n${form.whyInterested || "미작성"}`,
+      `## 독자 유형\n${form.readerType || "미선택"}`,
+      `## 가장 헷갈리는 지점\n${form.confusingPoint || "미선택"}`,
+    ].join("\n\n")
+  );
+  return `${PUBLIC_ISSUE_BASE}&title=${title}&body=${body}`;
+}

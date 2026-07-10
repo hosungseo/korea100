@@ -1,18 +1,28 @@
 import Link from "next/link";
-import { getAllInstitutions, getInstitution, getCategoryOrder } from "@/lib/data";
-import type { Institution } from "@/lib/types";
+import { Suspense } from "react";
+import {
+  getInstitution,
+  getInstitutionSummaries,
+  getCategoryOrder,
+} from "@/lib/data";
+import type { Institution, InstitutionSummary } from "@/lib/types";
 import ProcessBoard from "@/components/ProcessBoard";
 import InstitutionExplorer from "@/components/InstitutionExplorer";
 
 export default function HomePage() {
-  const institutions = getAllInstitutions();
+  const institutions = getInstitutionSummaries();
   const categoryOrder = getCategoryOrder();
   const eia = getInstitution("environmental-impact-assessment");
 
   return (
     <>
       <Hero institutions={institutions} />
-      <InstitutionExplorer institutions={institutions} categoryOrder={categoryOrder} />
+      <Suspense fallback={<CatalogFallback />}>
+        <InstitutionExplorer
+          institutions={institutions}
+          categoryOrder={categoryOrder}
+        />
+      </Suspense>
       {eia?.process && (
         <ProcessPreview process={eia.process} verification={eia.verification} />
       )}
@@ -20,16 +30,25 @@ export default function HomePage() {
   );
 }
 
+function CatalogFallback() {
+  return (
+    <section className="institution-explorer" aria-label="제도 카탈로그 불러오는 중">
+      <div className="institution-explorer-inner explorer-loading">
+        제도 카탈로그를 불러오는 중입니다.
+      </div>
+    </section>
+  );
+}
+
 // ── Hero ──────────────────────────────────────────────────────────────────────
 
-function Hero({ institutions }: { institutions: Institution[] }) {
+function Hero({ institutions }: { institutions: InstitutionSummary[] }) {
   const stats = institutions.reduce(
     (summary, institution) => ({
-      nodes: summary.nodes + (institution.process?.nodes.length ?? 0),
+      nodes: summary.nodes + institution.processNodeCount,
       verifiedArticles:
-        summary.verifiedArticles +
-        (institution.verification?.articleVerification?.verifiedReferences ?? 0),
-      sources: summary.sources + (institution.verification?.sources.length ?? 0),
+        summary.verifiedArticles + institution.verifiedReferences,
+      sources: summary.sources + institution.sourceCount,
     }),
     { nodes: 0, verifiedArticles: 0, sources: 0 }
   );

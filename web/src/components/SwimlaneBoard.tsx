@@ -472,7 +472,7 @@ function NodeDrawer({
               <span className="mono" style={{ color: "#87938d" }}>{node.id}</span>
               <span style={{
                 fontSize: 12, fontWeight: 600, padding: "2px 8px",
-                borderRadius: 9999, background: c.bg, color: c.sub,
+                borderRadius: 4, background: c.bg, color: c.sub,
                 border: `1px solid ${c.border}`,
               }}>{c.label}</span>
             </div>
@@ -792,13 +792,19 @@ function edgeWidth(highlighted: boolean, type: string) {
 export default function SwimlaneBoard({
   process,
   verification,
+  initialNodeId,
+  onNodeChange,
 }: {
   process: ProcessModel;
   verification?: SourceVerification;
+  initialNodeId?: string;
+  onNodeChange?: (nodeId: string | null) => void;
 }) {
   const { lanes, stages, nodes, edges } = process;
 
-  const [activeNode,    setActiveNode]    = useState<ProcessNode | null>(null);
+  const [activeNode,    setActiveNode]    = useState<ProcessNode | null>(() =>
+    nodes.find((node) => node.id === initialNodeId) ?? null
+  );
   const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
   const [edgePaths,     setEdgePaths]     = useState<ComputedEdge[]>([]);
   const [svgH,          setSvgH]          = useState(0);
@@ -830,8 +836,14 @@ export default function SwimlaneBoard({
     if (el) el.scrollIntoView({ inline: "start", behavior: "smooth" });
   }, []);
 
-  const handleNodeClick = useCallback((n: ProcessNode) => setActiveNode(n), []);
-  const handleClose     = useCallback(() => setActiveNode(null), []);
+  const handleNodeClick = useCallback((n: ProcessNode) => {
+    setActiveNode(n);
+    onNodeChange?.(n.id);
+  }, [onNodeChange]);
+  const handleClose = useCallback(() => {
+    setActiveNode(null);
+    onNodeChange?.(null);
+  }, [onNodeChange]);
 
   // Hover: determine highlighted / dimmed sets
   const connectedEdgeIds   = new Set<string>();

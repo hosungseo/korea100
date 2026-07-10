@@ -1,0 +1,48 @@
+name: Check legal source freshness
+
+on:
+  schedule:
+    - cron: "17 21 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  freshness:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    env:
+      LAW_OC: ${{ secrets.LAW_OC }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - run: npm install --global korean-law-mcp@4.7.1
+      - name: Verify secret configuration
+        run: |
+          if [ -z "$LAW_OC" ]; then
+            echo "LAW_OC repository secret is required." >&2
+            exit 1
+          fi
+      - id: freshness
+        run: npm run check:freshness
+      - name: Create or update freshness issue
+        if: steps.freshness.outputs.changed_count != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create law-freshness --color C78116 --description "Official legal source changed" --force
+          issue_number="$(gh issue list --repo "$GITHUB_REPOSITORY" --label law-freshness --state open --json number --jq '.[0].number // empty')"
+          if [ -n "$issue_number" ]; then
+            gh issue edit "$issue_number" --repo "$GITHUB_REPOSITORY" --body-file freshness-summary.md
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --label law-freshness --title "법령 최신성 점검 필요" --body-file freshness-summary.md
+          fi

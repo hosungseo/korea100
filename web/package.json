@@ -3,7 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "generate:catalog": "node scripts/generate-catalog-assets.mjs",
+    "generate:verification-queue": "node scripts/generate-field-verification-queue.mjs",
+    "check:freshness": "node scripts/sync-verification.mjs --check",
+    "predev": "npm run generate:catalog && npm run generate:verification-queue",
     "dev": "next dev",
+    "prebuild": "npm run generate:catalog && npm run generate:verification-queue",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
@@ -13,6 +18,7 @@
     "test:article-parser": "node --test scripts/article-citations.test.mjs"
   },
   "dependencies": {
+    "html-to-image": "^1.11.13",
     "next": "16.2.10",
     "react": "19.2.4",
     "react-dom": "19.2.4"
@@ -26,5 +32,10 @@
     "eslint-config-next": "16.2.10",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "next": {
+      "postcss": "8.5.10"
+    }
   }
 }

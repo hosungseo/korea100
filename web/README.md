@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# korea100 web
 
-## Getting Started
+대한민국 제도 100의 Next.js 정적 웹앱이다. 원본은 `data/institutions/`의 100개 JSON이며 GitHub Pages용 `out/`을 만든다.
 
-First, run the development server:
+## 로컬 실행
 
 ```bash
+npm install
+cp .env.example .env.local # 선택 설정
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`predev`가 검색·비교 인덱스와 현장 검증 큐를 다시 생성한다. 기본 주소는 `http://localhost:3000`이다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 품질 검사
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run validate:data
+npm run test:article-parser
+npm run lint
+npm audit
+npm run build
+```
 
-## Learn More
+## 주요 명령
 
-To learn more about Next.js, take a look at the following resources:
+- `npm run generate:catalog`: 지연 로딩 검색·비교 자산 생성
+- `npm run generate:verification-queue`: 448개 현장 검증 큐 생성
+- `npm run check:freshness`: 공식 법령 원문 버전 변경 여부 확인, `LAW_OC` 필요
+- `npm run sync:sources -- --write`: 공식 출처 메타데이터 갱신, `LAW_OC` 필요
+- `npm run verify:articles -- --write`: 명시 조문 존재 여부 재검증, `LAW_OC` 필요
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+배포 환경변수와 수집 API 계약은 `../docs/operations.md`를 따른다.

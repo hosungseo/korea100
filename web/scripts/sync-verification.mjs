@@ -11,8 +11,10 @@ const REPO_DIR = path.dirname(WEB_DIR);
 const DATA_DIR = path.join(WEB_DIR, "data", "institutions");
 const REGISTRY_PATH = path.join(WEB_DIR, "data", "legal-source-registry.json");
 const REPORT_PATH = path.join(REPO_DIR, "docs", "verification-coverage.json");
+const FRESHNESS_SUMMARY_PATH = path.join(WEB_DIR, "freshness-summary.md");
 
 const WRITE = process.argv.includes("--write");
+const CHECK = process.argv.includes("--check");
 const CONCURRENCY = Number(process.env.SOURCE_SYNC_CONCURRENCY ?? 6);
 const VERIFIED_AT = process.env.SOURCE_SYNC_DATE ?? localDate("Asia/Seoul");
 const CLI = process.env.KOREAN_LAW_CLI ?? "korean-law";
@@ -407,9 +409,77 @@ const reportOutput = {
   coverage: coverage.sort((a, b) => a.priority - b.priority),
 };
 
+const previousRegistry = fs.existsSync(REGISTRY_PATH)
+  ? JSON.parse(fs.readFileSync(REGISTRY_PATH, "utf8"))
+  : { entries: [] };
+const previousByKey = new Map(
+  (previousRegistry.entries ?? []).map((entry) => [entry.key, entry]),
+);
+const freshnessChanges = resolutions.flatMap(([key, result]) => {
+  const previous = previousByKey.get(key);
+  const before = sourceVersion(previous);
+  const after = sourceVersion({ key, ...result });
+  return before === after
+    ? []
+    : [{ key, law: key.split("\u0000")[1] ?? key, before, after }];
+});
+
 if (WRITE) {
   fs.writeFileSync(REGISTRY_PATH, `${JSON.stringify(registryOutput, null, 2)}\n`);
   fs.writeFileSync(REPORT_PATH, `${JSON.stringify(reportOutput, null, 2)}\n`);
 }
 
-console.log(JSON.stringify({ write: WRITE, ...reportOutput }, null, 2));
+if (CHECK) {
+  const lines = [
+    "# 법령 최신성 점검",
+    "",
+    `점검일: ${VERIFIED_AT}`,
+    `변경 감지: ${freshnessChanges.length}건`,
+    "",
+    ...(
+      freshnessChanges.length
+        ? freshnessChanges.flatMap((change) => [
+            `## ${change.law}`,
+            `- 이전: ${change.before}`,
+            `- 현재: ${change.after}`,
+            "",
+          ])
+        : ["저장된 공식 원문 식별자와 다른 변경을 찾지 못했습니다."]
+    ),
+  ];
+  fs.writeFileSync(FRESHNESS_SUMMARY_PATH, `${lines.join("\n")}\n`);
+  if (process.env.GITHUB_OUTPUT) {
+    fs.appendFileSync(
+      process.env.GITHUB_OUTPUT,
+      `changed_count=${freshnessChanges.length}\nsummary_path=${FRESHNESS_SUMMARY_PATH}\n`,
+    );
+  }
+}
+
+console.log(
+  JSON.stringify(
+    {
+      write: WRITE,
+      check: CHECK,
+      freshnessChanges: freshnessChanges.length,
+      ...reportOutput,
+    },
+    null,
+    2,
+  ),
+);
+
+function sourceVersion(entry) {
+  if (!entry) return "기록 없음";
+  if (entry.unresolved) return `미해결:${entry.unresolved.reasonCode}`;
+  const source = entry.source;
+  if (!source) return "공식 원문 없음";
+  const sourceType = source.sourceType ?? "statute";
+  if (sourceType === "statute") {
+    return `법령:${source.mst ?? "-"}:공포 ${source.promulgatedOn ?? "-"}:시행 ${source.effectiveOn ?? "-"}`;
+  }
+  if (sourceType === "admin-rule") {
+    return `행정규칙:${source.adminRuleSerial ?? "-"}:공포 ${source.promulgatedOn ?? "-"}`;
+  }
+  return `조약:${source.treatyId ?? source.treatyNumber ?? "-"}:시행 ${source.effectiveOn ?? "-"}`;
+}

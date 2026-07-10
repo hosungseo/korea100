@@ -4,7 +4,7 @@ import type { MetadataRoute } from "next";
 import { getAllSlugs, getAllInstitutions } from "@/lib/data";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://korea-institution-100.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://hosungseo.github.io/korea100";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const slugs = getAllSlugs();
@@ -32,6 +32,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.5,
+    },
+    {
+      url: `${SITE_URL}/verification/`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.7,
     },
     ...modelPages,
   ];

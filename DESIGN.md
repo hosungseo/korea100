@@ -38,8 +38,8 @@ A quiet public-policy command desk. The site should feel like a trustworthy refe
 
 | Level | Size | Weight | Line Height | Tracking | Usage |
 | --- | --- | --- | --- | --- | --- |
-| Display | `clamp(36px, 6vw, 72px)` | 720 | 0.98 | 0 | Page title |
-| H1 | `40px` | 720 | 1.1 | 0 | Major section heading |
+| Display | `48px` desktop / `32px` mobile | 720 | 1.1 | 0 | Product title |
+| H1 | `36px` desktop / `30px` mobile | 720 | 1.15 | 0 | Detail and utility page title |
 | H2 | `28px` | 680 | 1.2 | 0 | Panel heading |
 | H3 | `20px` | 680 | 1.3 | 0 | Card title |
 | Body large | `18px` | 450 | 1.65 | 0 | Lead copy |
@@ -56,6 +56,7 @@ A quiet public-policy command desk. The site should feel like a trustworthy refe
 ### Rules
 
 - Korean display text uses 0 letter spacing to avoid awkward CJK texture.
+- Font sizes change only at explicit breakpoints; do not scale type continuously with viewport width.
 - Headings may be large only in the top product area; panels use compact heading sizes.
 - Do not place a final particle or short Korean ending alone if manual copy can avoid it.
 
@@ -80,10 +81,10 @@ All spacing derives from 4px.
 
 ### Grid
 
-- Max content width: `1440px`
-- Desktop shell: two columns, `minmax(360px, 0.78fr) minmax(560px, 1.22fr)`
-- Tablet: single-column panels with sticky nav disabled
-- Mobile: list-first layout, preview image below the selected summary
+- Max content width: `1200px` (`1248px` including shell padding)
+- Desktop catalog: compact controls above a three-column card grid
+- Detail: single reading column with sticky section tools; process boards own their horizontal overflow
+- Mobile: one-column catalog, fixed-format controls, and no document-level horizontal overflow
 
 ## 5. Components
 
@@ -93,30 +94,35 @@ All spacing derives from 4px.
 - States: hover underline, focus ring, active hash target state.
 - Accessibility: anchors remain real links.
 
-### Institution Row
+### Institution Card
 
-- Structure: index, title, type badge, one-line promise.
-- Variants: default, active, priority.
-- States: hover border tint, active accent stripe, focus outline.
-- Accessibility: implemented as buttons with `aria-pressed`.
+- Structure: priority, category, title, type, one-line promise, verification summary, compare checkbox.
+- States: hover border tint, selected comparison state, keyboard focus.
+- Twelve cards render first; additional cards load without changing control dimensions.
 
-### Evidence Panel
+### Comparison Table
 
-- Structure: title, type, legal sources, actors, status, why first.
-- Variants: standard, active launch sample.
-- States: updates when an institution row is selected.
-- Motion: opacity and transform only for the update transition.
+- Supports two or three institutions and ten shared comparison rows.
+- On mobile the table scrolls inside its own wrapper; the page itself never scrolls horizontally.
+- A fixed action bar makes selected count, clear, and compare actions predictable.
 
-### Sample Figure
+### Detail And Process Tools
 
-- Structure: image viewport, label strip, source note.
-- Variants: diagram image, future HTML preview.
-- Accessibility: descriptive `alt` text.
+- Section links cover summary, process, evidence, issues, and related institutions.
+- Share, PNG export, and print/PDF are explicit commands with status feedback.
+- Process defaults to a core-flow summary. Full mode and selected node are URL-addressable.
+
+### Verification Queue
+
+- Structure: public totals, trust definitions, search and domain filters, evidence cards.
+- Status language distinguishes article existence, scope review, and field verification.
+- Public evidence links warn against personal information and non-public internal material.
 
 ### Request Form
 
 - Structure: 제도명, 궁금한 지점, 독자 유형, submit.
-- States: default, focus, saved confirmation.
+- States: default, submitting, confirmed by HTTP success, and recoverable error.
+- When no endpoint is configured, retain a local draft and expose email and public issue alternatives.
 - Accessibility: all inputs have visible labels.
 
 ## 6. Motion & Interaction
@@ -146,5 +152,6 @@ Use mixed borders and tonal shifts. Shadows are minimal and used only for the st
 
 ### Rules
 
-- Cards use 12px radius; preview panels use 18px radius; buttons use pill radius.
+- Cards and framed tools use at most 8px radius; compact buttons use 4–6px radius.
+- Reserve circles for status dots and icon-only controls. Do not use text pills when a standard control fits.
 - Do not nest cards inside cards. Repeated items may be cards; full sections are unframed or single panels.

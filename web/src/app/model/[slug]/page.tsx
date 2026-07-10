@@ -1,9 +1,18 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getAllSlugs, getInstitution } from "@/lib/data";
+import { Suspense } from "react";
+import {
+  getAllSlugs,
+  getInstitution,
+  getInstitutionSummaries,
+} from "@/lib/data";
 import type { Institution } from "@/lib/types";
-import ProcessBoard from "@/components/ProcessBoard";
+import DetailTools from "@/components/DetailTools";
+import ProcessExplorer from "@/components/ProcessExplorer";
+
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://hosungseo.github.io/korea100";
 
 // ── Static export params ──────────────────────────────────────────────────────
 
@@ -24,8 +33,31 @@ export async function generateMetadata({
   const institution = getInstitution(slug);
   if (!institution) return { title: "제도 100" };
   return {
-    title: `${institution.name} — 한 장으로 끝내는 대한민국 제도 100`,
+    title: institution.name,
     description: institution.oneLiner,
+    alternates: {
+      canonical: `${SITE_URL}/model/${institution.slug}/`,
+    },
+    openGraph: {
+      title: `${institution.name} — 대한민국 제도 100`,
+      description: institution.oneLiner,
+      type: "article",
+      url: `${SITE_URL}/model/${institution.slug}/`,
+      images: [
+        {
+          url: `${SITE_URL}/og-default.png`,
+          width: 1200,
+          height: 630,
+          alt: "한 장으로 끝내는 대한민국 제도 100",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${institution.name} — 대한민국 제도 100`,
+      description: institution.oneLiner,
+      images: [`${SITE_URL}/og-default.png`],
+    },
   };
 }
 
@@ -39,13 +71,157 @@ export default async function ModelPage({
   const { slug } = await params;
   const institution = getInstitution(slug);
   if (!institution) notFound();
+  const relatedSlugs = new Map(
+    getInstitutionSummaries().map((item) => [item.name, item.slug])
+  );
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: institution.name,
+    description: institution.oneLiner,
+    dateModified: institution.asOfDate,
+    inLanguage: "ko-KR",
+    isPartOf: {
+      "@type": "CollectionPage",
+      name: "한 장으로 끝내는 대한민국 제도 100",
+      url: `${SITE_URL}/`,
+    },
+    about: institution.canvas.legalBasis.map((basis) => basis.law),
+    url: `${SITE_URL}/model/${institution.slug}/`,
+  };
 
   return (
     <div style={{ background: "var(--color-canvas)" }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+        }}
+      />
       <InstitutionHeader institution={institution} />
+      <DetailSectionNav institution={institution} />
+      <InstitutionOnePage institution={institution} />
       <InstitutionCenter institution={institution} />
-      <InstitutionBottom institution={institution} />
+      <InstitutionBottom
+        institution={institution}
+        relatedSlugs={relatedSlugs}
+      />
     </div>
+  );
+}
+
+function DetailSectionNav({ institution }: { institution: Institution }) {
+  return (
+    <nav className="model-subnav" aria-label="제도 상세 항목">
+      <div>
+        <div className="model-subnav-links">
+          <a href="#overview">핵심 요약</a>
+          <a href="#process">업무구조도</a>
+          <a href="#evidence">법령 근거</a>
+          <a href="#issues">쟁점·개선</a>
+          <a href="#related">관련 제도</a>
+        </div>
+        <DetailTools
+          institutionName={institution.name}
+          slug={institution.slug}
+        />
+      </div>
+    </nav>
+  );
+}
+
+function InstitutionOnePage({ institution }: { institution: Institution }) {
+  const { canvas, process, verification } = institution;
+  const article = verification?.articleVerification;
+  const leadAuthority = canvas.authorities[0]?.name ?? "기관 확인 필요";
+  const verificationText = article
+    ? `명시 조문 ${article.verifiedReferences}/${article.articleReferences}건 확인`
+    : `공식 원문 ${verification?.sources.length ?? 0}건 연결`;
+
+  return (
+    <section id="overview" className="model-overview-section">
+      <div id="institution-one-page" className="institution-one-page">
+        <header>
+          <div>
+            <p>제도 모델 한 장 요약</p>
+            <h2>{institution.name}</h2>
+            <span>{institution.oneLiner}</span>
+          </div>
+          <div>
+            <strong>{institution.asOfDate}</strong>
+            <span>법령 기준일</span>
+          </div>
+        </header>
+
+        <div className="one-page-metrics">
+          <div>
+            <span>주관 기관</span>
+            <strong>{leadAuthority}</strong>
+          </div>
+          <div>
+            <span>업무 구조</span>
+            <strong>
+              {process?.nodes.length ?? canvas.procedure.length}개 업무 · {process?.stages.length ?? canvas.procedure.length}단계
+            </strong>
+          </div>
+          <div>
+            <span>법적 근거</span>
+            <strong>{canvas.legalBasis.length}개 법령·규정</strong>
+          </div>
+          <div>
+            <span>검증 상태</span>
+            <strong>{verificationText}</strong>
+          </div>
+        </div>
+
+        <div className="one-page-grid">
+          <OnePageItem title="목적">{canvas.purpose}</OnePageItem>
+          <OnePageItem title="대상·이해관계자">{canvas.stakeholders}</OnePageItem>
+          <OnePageItem title="권한 구조">
+            {canvas.authorities
+              .slice(0, 4)
+              .map((authority) => authority.name)
+              .join(" · ")}
+          </OnePageItem>
+          <OnePageItem title="주요 법령">
+            {canvas.legalBasis
+              .slice(0, 5)
+              .map((basis) => basis.law)
+              .join(" · ")}
+          </OnePageItem>
+          <OnePageItem title="돈의 흐름">{canvas.moneyFlow}</OnePageItem>
+          <OnePageItem title="문서·데이터 흐름">{canvas.docsFlow}</OnePageItem>
+          <OnePageItem title="핵심 병목" tone="warning">
+            {canvas.bottlenecks.slice(0, 2).join(" / ")}
+          </OnePageItem>
+          <OnePageItem title="개선 포인트">
+            {canvas.reformPoints.slice(0, 2).join(" / ")}
+          </OnePageItem>
+        </div>
+
+        <footer>
+          법령상 구조와 공식 원문을 기준으로 작성한 참고 모델이며, 실제 사건의
+          진행 상태나 법률 자문을 의미하지 않습니다.
+        </footer>
+      </div>
+    </section>
+  );
+}
+
+function OnePageItem({
+  title,
+  tone,
+  children,
+}: {
+  title: string;
+  tone?: "warning";
+  children: React.ReactNode;
+}) {
+  return (
+    <section data-tone={tone}>
+      <h3>{title}</h3>
+      <p>{children}</p>
+    </section>
   );
 }
 
@@ -307,12 +483,13 @@ function LegalChip({
 
 function InstitutionCenter({ institution }: { institution: Institution }) {
   return (
-    <section style={{ padding: "40px 24px" }}>
+    <section id="process" className="model-process-section" style={{ padding: "40px 24px" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         {institution.status === "full" && institution.process ? (
           <FullProcessSection
             process={institution.process}
             verification={institution.verification}
+            slug={institution.slug}
           />
         ) : (
           <CanvasStepperSection institution={institution} />
@@ -325,9 +502,11 @@ function InstitutionCenter({ institution }: { institution: Institution }) {
 function FullProcessSection({
   process,
   verification,
+  slug,
 }: {
   process: NonNullable<Institution["process"]>;
   verification?: Institution["verification"];
+  slug: string;
 }) {
   return (
     <div>
@@ -367,7 +546,15 @@ function FullProcessSection({
         >
           실제 사건의 진행 현황이 아니라, 법령상 절차와 대표적인 병목을 설명하는 참고 모델입니다.
         </div>
-        <ProcessBoard process={process} verification={verification} compact={false} />
+        <Suspense
+          fallback={<div className="process-explorer-loading">업무구조도를 불러오는 중입니다.</div>}
+        >
+          <ProcessExplorer
+            process={process}
+            verification={verification}
+            slug={slug}
+          />
+        </Suspense>
       </div>
 
       {/* Warnings */}
@@ -410,7 +597,7 @@ function CanvasStepperSection({ institution }: { institution: Institution }) {
       <div
         style={{
           background: "var(--color-surface)",
-          borderRadius: 18,
+          borderRadius: 8,
           border: "1px solid var(--color-border)",
           padding: "28px 24px",
         }}
@@ -489,7 +676,13 @@ function CanvasStepperSection({ institution }: { institution: Institution }) {
 
 // ── Bottom 2-col Grid ─────────────────────────────────────────────────────────
 
-function InstitutionBottom({ institution }: { institution: Institution }) {
+function InstitutionBottom({
+  institution,
+  relatedSlugs,
+}: {
+  institution: Institution;
+  relatedSlugs: Map<string, string>;
+}) {
   const { canvas } = institution;
 
   return (
@@ -502,7 +695,9 @@ function InstitutionBottom({ institution }: { institution: Institution }) {
     >
       <div style={{ maxWidth: 1200, margin: "0 auto", paddingTop: 40 }}>
         {institution.verification && (
-          <SourceVerificationPanel verification={institution.verification} />
+          <div id="evidence" className="model-anchor-section">
+            <SourceVerificationPanel verification={institution.verification} />
+          </div>
         )}
         <div
           style={{
@@ -549,7 +744,7 @@ function InstitutionBottom({ institution }: { institution: Institution }) {
           </CanvasPanel>
 
           {/* Bottlenecks */}
-          <CanvasPanel title="병목과 쟁점" accent="warning">
+          <CanvasPanel id="issues" title="병목과 쟁점" accent="warning">
             <ul style={{ ...listStyle, paddingLeft: 0 }}>
               {canvas.bottlenecks.map((b, i) => (
                 <li
@@ -610,23 +805,24 @@ function InstitutionBottom({ institution }: { institution: Institution }) {
 
           {/* Related */}
           {institution.related.length > 0 && (
-            <CanvasPanel title="관련 제도">
+            <CanvasPanel id="related" title="관련 제도">
               <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                {institution.related.map((rel, i) => (
-                  <span
-                    key={i}
-                    style={{
-                      fontSize: 13,
-                      padding: "4px 10px",
-                      background: "var(--color-surface-muted)",
-                      color: "var(--color-muted)",
-                      borderRadius: 9999,
-                      border: "1px solid var(--color-border)",
-                    }}
-                  >
-                    {rel}
-                  </span>
-                ))}
+                {institution.related.map((rel) => {
+                  const relatedSlug = relatedSlugs.get(rel);
+                  return relatedSlug ? (
+                    <Link
+                      key={rel}
+                      href={`/model/${relatedSlug}/`}
+                      className="related-institution-link"
+                    >
+                      {rel}
+                    </Link>
+                  ) : (
+                    <span key={rel} className="related-institution-link is-static">
+                      {rel}
+                    </span>
+                  );
+                })}
               </div>
             </CanvasPanel>
           )}
@@ -680,7 +876,7 @@ function InstitutionBottom({ institution }: { institution: Institution }) {
             marginTop: 40,
             padding: "16px 20px",
             background: "var(--color-surface)",
-            borderRadius: 10,
+            borderRadius: 8,
             border: "1px solid var(--color-border)",
             fontSize: 13,
             color: "var(--color-muted)",
@@ -859,10 +1055,12 @@ function SourceVerificationPanel({
 
 // Shared panel styles
 function CanvasPanel({
+  id,
   title,
   accent,
   children,
 }: {
+  id?: string;
   title: string;
   accent?: "warning";
   children: React.ReactNode;
@@ -872,9 +1070,10 @@ function CanvasPanel({
 
   return (
     <div
+      id={id}
       style={{
         background: "var(--color-surface)",
-        borderRadius: 12,
+        borderRadius: 8,
         border: "1px solid var(--color-border)",
         padding: "20px",
         borderTop: `3px solid ${accentColor}`,

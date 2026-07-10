@@ -7,6 +7,7 @@ const WEB_DIR = path.dirname(SCRIPT_DIR);
 const REPO_DIR = path.dirname(WEB_DIR);
 const DATA_DIR = path.join(WEB_DIR, "data", "institutions");
 const MANIFEST_PATH = path.join(REPO_DIR, "docs", "institutions-100-manifest.json");
+const FIELD_QUEUE_PATH = path.join(REPO_DIR, "docs", "field-verification-queue.json");
 
 const NODE_STATUSES = new Set(["done", "current", "waiting", "risk", "loop"]);
 const NODE_TYPES = new Set(["task", "gateway", "notice", "system"]);
@@ -54,6 +55,7 @@ const institutions = files
   .map((file) => ({ file, data: readJson(path.join(DATA_DIR, file)) }))
   .filter(({ data }) => data !== null);
 const manifest = readJson(MANIFEST_PATH) ?? [];
+const fieldQueue = readJson(FIELD_QUEUE_PATH);
 
 if (files.length !== 100) fail("institutions", `JSON 파일이 100개여야 하지만 ${files.length}개입니다`);
 if (!Array.isArray(manifest) || manifest.length !== 100) {
@@ -253,6 +255,30 @@ for (const { file, data: institution } of institutions) {
     if (!nodeIds.has(edge.source)) fail(edgeScope, `source 노드가 없습니다 (${edge.source})`);
     if (!nodeIds.has(edge.target)) fail(edgeScope, `target 노드가 없습니다 (${edge.target})`);
     if (!EDGE_TYPES.has(edge.type)) fail(edgeScope, `지원하지 않는 type입니다 (${edge.type})`);
+  }
+}
+
+if (fieldQueue) {
+  const expectedFieldCount = institutions.reduce(
+    (sum, { data }) => sum + data.fieldVerification.length,
+    0,
+  );
+  const queueEntries = Array.isArray(fieldQueue.entries) ? fieldQueue.entries : [];
+  if (fieldQueue.total !== expectedFieldCount || queueEntries.length !== expectedFieldCount) {
+    fail(
+      "field-verification-queue",
+      `항목 수가 원본 ${expectedFieldCount}건과 일치하지 않습니다 (${fieldQueue.total}/${queueEntries.length})`,
+    );
+  }
+  const queueIds = new Set();
+  for (const entry of queueEntries) {
+    if (queueIds.has(entry.id)) fail("field-verification-queue", `id ${entry.id}가 중복됩니다`);
+    queueIds.add(entry.id);
+    if (!slugs.has(entry.slug)) fail("field-verification-queue", `slug ${entry.slug}가 없습니다`);
+    if (!entry.item?.trim()) fail(`field-verification-queue/${entry.id}`, "item이 없습니다");
+    if (!entry.suggestedEvidence?.trim()) {
+      fail(`field-verification-queue/${entry.id}`, "suggestedEvidence가 없습니다");
+    }
   }
 }
 

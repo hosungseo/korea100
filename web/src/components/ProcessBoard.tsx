@@ -19,6 +19,8 @@ interface ProcessBoardProps {
   process: ProcessModel;
   verification?: SourceVerification;
   compact?: boolean;
+  initialNodeId?: string;
+  onNodeChange?: (nodeId: string | null) => void;
 }
 
 // ── helpers ──────────────────────────────────────────────────────────────────
@@ -580,7 +582,7 @@ function NodeDrawer({
                   fontSize: 12,
                   fontWeight: 600,
                   padding: "2px 8px",
-                  borderRadius: 9999,
+                  borderRadius: 4,
                   background: meta.badgeBg,
                   color: meta.badgeText,
                 }}
@@ -838,14 +840,34 @@ export default function ProcessBoard({
   process,
   verification,
   compact = false,
+  initialNodeId,
+  onNodeChange,
 }: ProcessBoardProps) {
-  const [activeNode, setActiveNode] = useState<ProcessNode | null>(null);
-  const handleNodeClick = useCallback((node: ProcessNode) => setActiveNode(node), []);
-  const handleClose = useCallback(() => setActiveNode(null), []);
+  const [activeNode, setActiveNode] = useState<ProcessNode | null>(() =>
+    process.nodes.find((node) => node.id === initialNodeId) ?? null
+  );
+  const handleNodeClick = useCallback(
+    (node: ProcessNode) => {
+      setActiveNode(node);
+      onNodeChange?.(node.id);
+    },
+    [onNodeChange]
+  );
+  const handleClose = useCallback(() => {
+    setActiveNode(null);
+    onNodeChange?.(null);
+  }, [onNodeChange]);
 
   // Full board: delegate to the BPMN swimlane board
   if (!compact) {
-    return <SwimlaneBoard process={process} verification={verification} />;
+    return (
+      <SwimlaneBoard
+        process={process}
+        verification={verification}
+        initialNodeId={initialNodeId}
+        onNodeChange={onNodeChange}
+      />
+    );
   }
 
   // ── Compact mode (home preview) ───────────────────────────────────────────

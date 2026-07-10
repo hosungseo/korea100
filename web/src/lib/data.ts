@@ -1,9 +1,19 @@
 import fs from "fs";
 import path from "path";
-import type { Institution } from "./types";
+import type {
+  FieldVerificationQueue,
+  Institution,
+  InstitutionSummary,
+} from "./types";
 
 const DATA_DIR = path.join(process.cwd(), "data", "institutions");
 const MANIFEST_PATH = path.join(process.cwd(), "..", "docs", "institutions-100-manifest.json");
+const FIELD_QUEUE_PATH = path.join(
+  process.cwd(),
+  "..",
+  "docs",
+  "field-verification-queue.json"
+);
 
 interface ManifestEntry {
   priority: number;
@@ -64,6 +74,36 @@ export function getAllInstitutions(): Institution[] {
   return institutions.sort((a, b) => a.priority - b.priority);
 }
 
+export function toInstitutionSummary(
+  institution: Institution
+): InstitutionSummary {
+  const category = institution.category ?? "기타";
+  const article = institution.verification?.articleVerification;
+
+  return {
+    slug: institution.slug,
+    name: institution.name,
+    oneLiner: institution.oneLiner,
+    type: institution.type,
+    priority: institution.priority,
+    category,
+    asOfDate: institution.asOfDate,
+    processNodeCount: institution.process?.nodes.length ?? 0,
+    processStageCount: institution.process?.stages.length ?? 0,
+    processLaneCount: institution.process?.lanes.length ?? 0,
+    legalBasisCount: institution.canvas.legalBasis.length,
+    fieldVerificationCount: institution.fieldVerification.length,
+    verificationStatus: institution.verification?.status,
+    verifiedReferences: article?.verifiedReferences ?? 0,
+    articleReferences: article?.articleReferences ?? 0,
+    sourceCount: institution.verification?.sources.length ?? 0,
+  };
+}
+
+export function getInstitutionSummaries(): InstitutionSummary[] {
+  return getAllInstitutions().map(toInstitutionSummary);
+}
+
 export function getInstitution(slug: string): Institution | null {
   const filePath = path.join(DATA_DIR, `${slug}.json`);
   if (!fs.existsSync(filePath)) return null;
@@ -82,4 +122,8 @@ export function getAllSlugs(): string[] {
     .readdirSync(DATA_DIR)
     .filter((f) => f.endsWith(".json"))
     .map((f) => f.replace(".json", ""));
+}
+
+export function getFieldVerificationQueue(): FieldVerificationQueue {
+  return JSON.parse(fs.readFileSync(FIELD_QUEUE_PATH, "utf8")) as FieldVerificationQueue;
 }

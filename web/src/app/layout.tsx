@@ -1,12 +1,42 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Telemetry from "@/components/Telemetry";
 import "./globals.css";
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://hosungseo.github.io/korea100";
+
 export const metadata: Metadata = {
-  title: "한 장으로 끝내는 대한민국 제도 100",
+  title: {
+    default: "한 장으로 끝내는 대한민국 제도 100",
+    template: "%s | 대한민국 제도 100",
+  },
   description:
     "기업에는 비즈니스 모델이 있듯이, 국가에는 제도 모델이 있다. 대한민국 주요 제도를 법령·조직·절차·예산·문서를 한 장 구조도로 보여드립니다.",
   keywords: "대한민국 제도, 환경영향평가, 예비타당성조사, 행정, 정책, 법령",
+  alternates: { canonical: `${SITE_URL}/` },
+  openGraph: {
+    title: "한 장으로 끝내는 대한민국 제도 100",
+    description: "법령부터 실제 업무 흐름까지 한 장으로 읽는 국가 운영 카탈로그",
+    url: `${SITE_URL}/`,
+    siteName: "대한민국 제도 100",
+    locale: "ko_KR",
+    type: "website",
+    images: [
+      {
+        url: `${SITE_URL}/og-default.png`,
+        width: 1200,
+        height: 630,
+        alt: "대한민국 제도 100",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "한 장으로 끝내는 대한민국 제도 100",
+    description: "법령부터 실제 업무 흐름까지 한 장으로 읽는 국가 운영 카탈로그",
+    images: [`${SITE_URL}/og-default.png`],
+  },
 };
 
 export default function RootLayout({
@@ -17,8 +47,24 @@ export default function RootLayout({
   return (
     <html lang="ko" className="h-full">
       <body className="min-h-full flex flex-col site-body">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "CollectionPage",
+              name: "한 장으로 끝내는 대한민국 제도 100",
+              description:
+                "대한민국 주요 제도를 법령, 조직, 절차, 예산, 문서와 데이터 흐름으로 정리한 제도 모델 카탈로그",
+              inLanguage: "ko-KR",
+              url: `${SITE_URL}/`,
+              numberOfItems: 100,
+            }).replace(/</g, "\\u003c"),
+          }}
+        />
         <Header />
         <main className="flex-1">{children}</main>
+        <Telemetry />
         <Footer />
       </body>
     </html>
@@ -35,6 +81,7 @@ function Header() {
 
         <nav className="site-nav" aria-label="주요 메뉴">
           <NavLink href="/#institutions">제도 목록</NavLink>
+          <NavLink href="/verification/">검증 현황</NavLink>
           <NavLink
             href="/model/environmental-impact-assessment/"
             className="nav-featured-link"

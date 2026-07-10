@@ -1,0 +1,42 @@
+name: 제도 분석 제안
+description: 다음에 분석할 제도와 궁금한 지점을 제안합니다.
+title: "[제도 제안] "
+labels: ["institution-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        이 제안은 공개됩니다. 이메일, 전화번호, 사건번호 등 개인정보는 입력하지 마세요.
+  - type: input
+    id: institution
+    attributes:
+      label: 제도명
+      placeholder: 예) 예비타당성조사
+    validations:
+      required: true
+  - type: textarea
+    id: reason
+    attributes:
+      label: 알고 싶은 이유
+      description: 어떤 상황에서 어떤 정보가 필요한지 적어주세요.
+    validations:
+      required: true
+  - type: dropdown
+    id: confusing_point
+    attributes:
+      label: 가장 헷갈리는 지점
+      options:
+        - 결정권을 가진 기관
+        - 법령과 실제 절차의 차이
+        - 예산과 기금의 출처
+        - 제출 문서와 데이터 흐름
+        - 병목과 처리 지연
+        - 비슷한 제도와의 차이
+        - 기타
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: 공개 제안 확인
+      options:
+        - label: 개인정보를 포함하지 않았습니다.
+          required: true
