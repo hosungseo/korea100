@@ -4391,6 +4391,10 @@ body:has(.og-card-page) > main {
   }
 }
 
+.process-landscape-export-header {
+  display: none;
+}
+
 /* Full landscape PNG export, including when requested from a mobile viewport. */
 .process-desktop-board[data-exporting="true"] {
   display: block !important;
@@ -4404,6 +4408,103 @@ body:has(.og-card-page) > main {
   overflow: visible !important;
   background: #ffffff !important;
   pointer-events: none !important;
+}
+
+.process-desktop-board[data-exporting="true"]
+  .process-landscape-export-header {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 22px 32px;
+  margin-bottom: 24px;
+  padding: 26px 30px 28px;
+  border-top: 7px solid #18a87b;
+  background: #07150f;
+  color: #ffffff;
+}
+
+.process-landscape-export-brand {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  gap: 12px;
+  color: #96aaa0;
+  font-size: 12px;
+}
+
+.process-landscape-export-brand strong {
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.process-landscape-export-brand time {
+  margin-left: auto;
+}
+
+.process-landscape-export-title > div {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 12px;
+}
+
+.process-landscape-export-title > div > span {
+  padding: 4px 7px;
+  border: 1px solid #2b4438;
+  color: #b7c7bf;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.process-landscape-export-title > div > span[data-verified="true"] {
+  border-color: rgba(24, 168, 123, 0.4);
+  background: rgba(24, 168, 123, 0.12);
+  color: #6ee7b7;
+}
+
+.process-landscape-export-title h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 36px;
+  line-height: 1.15;
+}
+
+.process-landscape-export-title p {
+  max-width: 900px;
+  margin: 10px 0 0;
+  color: #b7c7bf;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.process-landscape-export-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 92px);
+  align-self: end;
+  border: 1px solid #2b4438;
+}
+
+.process-landscape-export-stats > div {
+  display: flex;
+  min-height: 68px;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px 13px;
+  border-left: 1px solid #2b4438;
+}
+
+.process-landscape-export-stats > div:first-child {
+  border-left: 0;
+}
+
+.process-landscape-export-stats strong {
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 20px;
+}
+
+.process-landscape-export-stats span {
+  color: #8fa299;
+  font-size: 9px;
 }
 
 .process-desktop-board[data-exporting="true"] .swimlane-board {
@@ -4427,7 +4528,7 @@ body:has(.og-card-page) > main {
   width: 100% !important;
   height: auto !important;
   min-height: 0 !important;
-  overflow: visible !important;
+  overflow: hidden !important;
   scrollbar-gutter: auto !important;
 }
 

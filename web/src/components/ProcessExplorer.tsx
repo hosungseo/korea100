@@ -13,17 +13,28 @@ import PortraitProcessBoard from "./PortraitProcessBoard";
 import ProcessBoard from "./ProcessBoard";
 
 type ProcessMode = "summary" | "full";
+type ProcessExportMeta = {
+  priority: number;
+  name: string;
+  category: string;
+  type: string;
+  oneLiner: string;
+  asOfDate: string;
+  bottleneckCount: number;
+};
 
 export default function ProcessExplorer({
   process,
   verification,
   slug,
   laneGroups,
+  exportMeta,
 }: {
   process: ProcessModel;
   verification?: SourceVerification;
   slug: string;
   laneGroups?: ProcessLaneGroup[];
+  exportMeta: ProcessExportMeta;
 }) {
   const searchParams = useSearchParams();
   const defaultNodeId =
@@ -85,6 +96,11 @@ export default function ProcessExplorer({
       </div>
 
       <div className="process-desktop-board">
+        <LandscapeExportHeader
+          process={process}
+          verification={verification}
+          meta={exportMeta}
+        />
         <ProcessBoard
           process={process}
           verification={verification}
@@ -113,6 +129,55 @@ export default function ProcessExplorer({
         <ProcessNodeInspector node={selectedNode} />
       )}
     </div>
+  );
+}
+
+function LandscapeExportHeader({
+  process,
+  verification,
+  meta,
+}: {
+  process: ProcessModel;
+  verification?: SourceVerification;
+  meta: ProcessExportMeta;
+}) {
+  const article = verification?.articleVerification;
+  const verificationLabel = article
+    ? `조문 검증 ${article.verifiedReferences}/${article.articleReferences}`
+    : "공식 원문 연결";
+  const stats = [
+    { label: "절차 노드", value: process.nodes.length },
+    { label: "행위 레인", value: process.lanes.length },
+    { label: "게이트", value: process.stages.length },
+    { label: "병목 구간", value: meta.bottleneckCount },
+  ];
+
+  return (
+    <header className="process-landscape-export-header">
+      <div className="process-landscape-export-brand">
+        <strong>대한민국 제도 100</strong>
+        <span>업무구조도 · 가로판</span>
+        <time dateTime={meta.asOfDate}>기준일 {meta.asOfDate}</time>
+      </div>
+      <div className="process-landscape-export-title">
+        <div>
+          <span>NO {meta.priority.toString().padStart(2, "0")}</span>
+          <span>{meta.category}</span>
+          <span>{meta.type}</span>
+          <span data-verified="true">{verificationLabel}</span>
+        </div>
+        <h2>{meta.name}</h2>
+        <p>{meta.oneLiner}</p>
+      </div>
+      <div className="process-landscape-export-stats" aria-label="가로판 구조 통계">
+        {stats.map((stat) => (
+          <div key={stat.label}>
+            <strong>{stat.value}</strong>
+            <span>{stat.label}</span>
+          </div>
+        ))}
+      </div>
+    </header>
   );
 }
 

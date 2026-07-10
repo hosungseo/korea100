@@ -102,6 +102,15 @@ export default function InstitutionDetailView({
                 verification={institution.verification}
                 slug={institution.slug}
                 laneGroups={buildProcessLaneGroups(process.lanes, institution.slug)}
+                exportMeta={{
+                  priority: institution.priority,
+                  name: institution.name,
+                  category: institution.category ?? "기타",
+                  type: institution.type,
+                  oneLiner: institution.oneLiner,
+                  asOfDate: institution.asOfDate,
+                  bottleneckCount: institution.canvas.bottlenecks.length,
+                }}
               />
             </Suspense>
           ) : (

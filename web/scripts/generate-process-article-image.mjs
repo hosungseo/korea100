@@ -7,6 +7,7 @@ import { buildProcessLaneGroups } from "../src/lib/process-layout.mjs";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const webRoot = path.resolve(__dirname, "..");
 const dataDir = path.join(webRoot, "data/institutions");
+const manifestPath = path.join(webRoot, "../docs/institutions-100-manifest.json");
 const outputDir = path.join(webRoot, "public/exports/process-maps");
 const legacyEiaPath = path.join(
   webRoot,
@@ -81,6 +82,10 @@ const STATUS = {
 const files = (await fs.readdir(dataDir))
   .filter((file) => file.endsWith(".json"))
   .sort();
+const manifest = JSON.parse(await fs.readFile(manifestPath, "utf8"));
+const categoryBySlug = new Map(
+  manifest.map((entry) => [entry.slug, entry.category])
+);
 
 await fs.mkdir(outputDir, { recursive: true });
 const generated = [];
@@ -109,6 +114,7 @@ console.log(
 
 async function generateInstitutionImage(file) {
   const institution = JSON.parse(await fs.readFile(path.join(dataDir, file), "utf8"));
+  institution.category ??= categoryBySlug.get(institution.slug) ?? "기타";
   const process = institution.process;
   const groups = buildProcessLaneGroups(process?.lanes ?? [], institution.slug);
   if (!process || !groups?.length) {
@@ -239,8 +245,9 @@ function renderSvg(context) {
         .mono { font-family: "SFMono-Regular", "Menlo", monospace; }
       </style>
     </defs>`,
-    `<rect width="${WIDTH}" height="${HEIGHT}" fill="#f6f9f7"/>`,
-    `<rect x="0" y="0" width="${WIDTH}" height="14" fill="#087452"/>`,
+    `<rect width="${WIDTH}" height="${HEIGHT}" fill="#ffffff"/>`,
+    `<rect x="0" y="0" width="${WIDTH}" height="240" fill="#07150f"/>`,
+    `<rect x="0" y="0" width="${WIDTH}" height="9" fill="#18a87b"/>`,
     renderHeader(context),
     renderGrid(context),
     renderEdges(context),
@@ -257,26 +264,31 @@ function arrowMarker(id, color) {
 }
 
 function renderHeader({ institution, process }) {
-  const titleSize = fitFontSize(institution.name, 52, 36, WIDTH - 80);
+  const titleSize = fitFontSize(institution.name, 48, 34, 1120);
   const oneLiner = fitTextToWidth(
     institution.oneLiner ?? institution.canvas?.purpose ?? "",
-    WIDTH - 80,
-    21
+    1180,
+    19
   );
-  const bottleneck = fitTextToWidth(
-    (institution.canvas?.bottlenecks ?? []).slice(0, 3).join(" · ") ||
-      "제도별 병목 노드 확인",
-    820,
-    16
-  );
+  const article = institution.verification?.articleVerification;
+  const verificationLabel = article
+    ? `조문 검증 ${article.verifiedReferences}/${article.articleReferences}`
+    : "공식 원문 연결";
+  const category = fitTextToWidth(institution.category ?? "기타", 160, 14);
+  const priority = String(institution.priority).padStart(2, "0");
   return `
-    <text x="40" y="50" font-size="19" font-weight="750" fill="#087452">대한민국 제도 100 · 법령 기준 업무구조도</text>
-    <text x="40" y="108" font-size="${titleSize}" font-weight="800" fill="#111b16">${escapeXml(institution.name)}</text>
-    <text x="40" y="154" font-size="21" font-weight="520" fill="#526159">${escapeXml(oneLiner)}</text>
-    <text x="40" y="205" font-size="17" font-weight="750" fill="#18251e">${process.nodes.length}개 업무 · ${process.stages.length}단계 · ${process.lanes.length}개 행위자</text>
-    <text x="520" y="205" font-size="16" fill="#67766e">법령 기준일 ${escapeXml(institution.asOfDate)}</text>
-    <text x="1760" y="205" text-anchor="end" font-size="16" font-weight="700" fill="#a65f08">핵심 병목: ${escapeXml(bottleneck)}</text>
-    <line x1="40" y1="232" x2="1760" y2="232" stroke="#becbc4" stroke-width="2"/>
+    <text x="40" y="45" font-size="19" font-weight="800" fill="#ffffff">대한민국 제도 100</text>
+    <text x="252" y="45" font-size="15" font-weight="650" fill="#8fa299">업무구조도 · 세로판</text>
+    <text x="1760" y="45" text-anchor="end" font-size="15" fill="#8fa299">기준일 ${escapeXml(institution.asOfDate)}</text>
+    <text x="40" y="82" font-size="14" font-weight="750" fill="#8fa299">NO ${priority}</text>
+    <text x="122" y="82" font-size="14" font-weight="750" fill="#6ee7b7">${escapeXml(category)}</text>
+    <text x="320" y="82" font-size="14" font-weight="650" fill="#b7c7bf">${escapeXml(institution.type)}</text>
+    <text x="40" y="132" font-size="${titleSize}" font-weight="850" fill="#ffffff">${escapeXml(institution.name)}</text>
+    <text x="40" y="174" font-size="19" font-weight="520" fill="#b7c7bf">${escapeXml(oneLiner)}</text>
+    <rect x="40" y="192" width="260" height="32" rx="5" fill="#0d2c20" stroke="#1f684e" stroke-width="1"/>
+    <circle cx="58" cy="208" r="5" fill="#18a87b"/>
+    <text x="72" y="214" font-size="14" font-weight="750" fill="#6ee7b7">${escapeXml(verificationLabel)}</text>
+    <text x="1760" y="214" text-anchor="end" font-size="16" font-weight="750" fill="#dce7e1">노드 ${process.nodes.length} · 레인 ${process.lanes.length} · 게이트 ${process.stages.length}</text>
   `;
 }
 
