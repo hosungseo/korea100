@@ -295,13 +295,13 @@
 }
 
 .processPanel {
-  overflow: hidden;
-  border: 1px solid #bdcbc4;
-  background: #fff;
+  overflow: visible;
+  border: 0;
+  background: transparent;
 }
 
 .processPanel :global(.process-explorer) {
-  padding: 14px 16px 12px;
+  padding: 0;
 }
 
 .processPanel :global(.process-mode-bar) {
@@ -333,6 +333,8 @@
   gap: 1px;
   margin: 0;
   padding: 16px;
+  border: 1px solid #bdcbc4;
+  background: #fff;
   list-style: none;
 }
 

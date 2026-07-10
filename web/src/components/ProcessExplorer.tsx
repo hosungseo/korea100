@@ -9,8 +9,8 @@ import type {
   SourceVerification,
 } from "@/lib/types";
 import { trackEvent } from "@/lib/client-events";
+import DesktopProcessBoard from "./DesktopProcessBoard";
 import PortraitProcessBoard from "./PortraitProcessBoard";
-import ProcessBoard from "./ProcessBoard";
 
 type ProcessMode = "summary" | "full";
 
@@ -51,8 +51,13 @@ export default function ProcessExplorer({
   }
 
   return (
-    <div className="process-explorer">
+    <div className="process-explorer process-explorer-v2">
       <div className="process-mode-bar">
+        <p>
+          {mode === "summary"
+            ? "단계별 핵심 업무를 빠르게 훑어봅니다."
+            : "행위자 레인과 게이트를 전체 표시합니다."}
+        </p>
         <div className="process-view-controls">
           <div
             className="process-mode-control"
@@ -75,23 +80,14 @@ export default function ProcessExplorer({
             </button>
           </div>
         </div>
-        <p>
-          {mode === "summary"
-            ? "핵심·병목·회귀 노드를 먼저 표시합니다."
-            : "원래 행위자 레인과 게이트를 전체 표시합니다."}
-        </p>
       </div>
 
       <div className="process-desktop-board">
-        <ProcessBoard
+        <DesktopProcessBoard
           process={process}
-          verification={verification}
           compact={mode === "summary"}
-          layout="landscape"
-          laneGroups={laneGroups}
-          initialNodeId={defaultNodeId}
+          selectedNodeId={selectedNode.id}
           onNodeChange={handleNodeChange}
-          showDrawer={false}
         />
       </div>
 

@@ -82,7 +82,7 @@ export default function InstitutionDetailView({
         <header className={styles.sectionHeading}>
           <div>
             <h2>업무구조도</h2>
-            <p>법령상 대표 절차와 노드별 공식 원문 검증 상태</p>
+            <p>노드 상태는 제도 흐름 설명용 편집 상태입니다</p>
           </div>
           <div className={styles.legend} aria-label="노드 상태 범례">
             <span><i data-tone="done" />완료</span>
