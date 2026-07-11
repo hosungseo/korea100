@@ -93,6 +93,7 @@ export default function ProcessExplorer({
 
       <div className="process-mobile-board">
         <PortraitProcessBoard
+          key={slug}
           process={process}
           verification={verification}
           laneGroups={laneGroups}

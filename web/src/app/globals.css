@@ -4074,6 +4074,17 @@ body:has(.og-card-page) > main {
 
 /* Detail v2 process inspector and mobile vertical board */
 .process-mobile-board {
+  --portrait-stage-width: 64px;
+  display: none;
+  container-type: inline-size;
+}
+
+.process-mobile-board .portrait-process-grid {
+  --portrait-group-width: 148px;
+  --portrait-group-width: clamp(128px, calc(50cqi - 32px), 196px);
+}
+
+.portrait-lane-pager {
   display: none;
 }
 
@@ -4545,6 +4556,58 @@ body:has(.og-card-page) > main {
     display: block;
   }
 
+  .process-mobile-board .portrait-lane-pager {
+    display: flex;
+    min-height: 42px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--color-border-strong);
+    background: var(--color-surface);
+  }
+
+  .process-mobile-board .portrait-lane-pager > span {
+    color: var(--color-faint);
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .process-mobile-board .portrait-lane-pager > div {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 46px;
+    gap: 3px;
+    padding: 3px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface-muted);
+  }
+
+  .process-mobile-board .portrait-lane-pager button {
+    min-width: 0;
+    min-height: 28px;
+    padding: 4px 6px;
+    border: 0;
+    background: transparent;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 750;
+    cursor: pointer;
+    transition: color 140ms var(--ease-out),
+      background-color 140ms var(--ease-out),
+      transform var(--duration-press) var(--ease-out);
+  }
+
+  .process-mobile-board .portrait-lane-pager button[aria-pressed="true"] {
+    background: var(--color-ink);
+    color: #ffffff;
+  }
+
+  .process-mobile-board .portrait-lane-pager button:active {
+    transform: scale(0.97);
+  }
+
   .process-mobile-board .portrait-process-scroll {
     overflow-x: auto;
     overflow-y: visible;
@@ -4552,8 +4615,15 @@ body:has(.og-card-page) > main {
     border-bottom: 1px solid var(--color-border-strong);
     border-radius: 0;
     scrollbar-gutter: auto;
+    scroll-padding-left: var(--portrait-stage-width);
+    scroll-snap-type: x mandatory;
     touch-action: pan-x pan-y pinch-zoom;
     -webkit-overflow-scrolling: touch;
+  }
+
+  .process-mobile-board .portrait-group-header[data-page-start="true"] {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 
   .process-mobile-board .portrait-corner-cell,
@@ -4566,16 +4636,23 @@ body:has(.og-card-page) > main {
   .process-mobile-board .portrait-corner-cell {
     left: 0;
     z-index: 12;
-    padding: 9px;
+    padding: 9px 7px;
   }
 
   .process-mobile-board .portrait-group-header {
     z-index: 10;
-    padding: 12px 10px 8px;
+    padding: 12px 8px 8px;
   }
 
   .process-mobile-board .portrait-group-header strong {
+    display: -webkit-box;
+    overflow: hidden;
     font-size: 10px;
+    line-height: 1.25;
+    text-overflow: clip;
+    white-space: normal;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
 
   .process-mobile-board .portrait-group-header span {
@@ -4588,16 +4665,17 @@ body:has(.og-card-page) > main {
   }
 
   .process-mobile-board .portrait-stage-label {
-    padding: 14px 9px;
+    padding: 14px 7px;
   }
 
   .process-mobile-board .portrait-stage-label strong {
     font-size: 10px;
+    overflow-wrap: anywhere;
   }
 
   .process-mobile-board .portrait-stage-cell {
     gap: 16px;
-    padding: 16px 14px 28px;
+    padding: 16px 7px 28px;
   }
 
   .process-mobile-board .portrait-stage-cell .swimlane-node-card {
@@ -4644,6 +4722,12 @@ body:has(.og-card-page) > main {
 
   .process-node-inspector-laws > div {
     grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (min-width: 860px) and (max-width: 900px) {
+  .process-mobile-board .portrait-lane-pager {
+    display: none;
   }
 }
 

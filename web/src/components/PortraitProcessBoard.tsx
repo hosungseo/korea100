@@ -33,8 +33,7 @@ interface PortraitEdgePath {
 
 const STAGE_LABEL_WIDTH = 132;
 const MIN_GROUP_WIDTH = 218;
-const EMBEDDED_STAGE_LABEL_WIDTH = 84;
-const EMBEDDED_GROUP_WIDTH = 196;
+const EMBEDDED_STAGE_LABEL_WIDTH = 64;
 const ARROW_CLEARANCE = 7;
 
 export default function PortraitProcessBoard({
@@ -57,11 +56,15 @@ export default function PortraitProcessBoard({
   const stageLabelWidth = embedded
     ? EMBEDDED_STAGE_LABEL_WIDTH
     : STAGE_LABEL_WIDTH;
-  const minGroupWidth = embedded ? EMBEDDED_GROUP_WIDTH : MIN_GROUP_WIDTH;
   const groups = useMemo(
     () => laneGroups?.length ? laneGroups : fallbackGroups(process.lanes),
     [laneGroups, process.lanes]
   );
+  const lanePageStarts = useMemo(() => {
+    if (groups.length === 0) return [];
+    if (groups.length <= 2) return [0];
+    return [0, groups.length - 2];
+  }, [groups.length]);
   const groupByLane = useMemo(
     () =>
       new Map(
@@ -79,10 +82,12 @@ export default function PortraitProcessBoard({
     process.nodes.find((node) => node.id === initialNodeId) ?? null
   );
   const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
+  const [activeLanePage, setActiveLanePage] = useState(0);
   const [edgePaths, setEdgePaths] = useState<PortraitEdgePath[]>([]);
   const [svgSize, setSvgSize] = useState({ width: 0, height: 0 });
   const boardRef = useRef<HTMLDivElement>(null);
   const boardScrollRef = useRef<HTMLDivElement>(null);
+  const groupHeaderRefs = useRef<Map<string, HTMLDivElement>>(new Map());
   const nodeRefs = useRef<Map<string, HTMLElement>>(new Map());
   const stageRefs = useRef<Map<string, HTMLElement>>(new Map());
 
@@ -138,16 +143,67 @@ export default function PortraitProcessBoard({
       behavior: reducedMotion ? "auto" : "smooth",
     });
   }, []);
+
+  const scrollToLanePage = useCallback(
+    (pageIndex: number) => {
+      const scroller = boardScrollRef.current;
+      if (!scroller || lanePageStarts.length === 0) return;
+      const nextPage = Math.max(
+        0,
+        Math.min(pageIndex, lanePageStarts.length - 1)
+      );
+      const group = groups[lanePageStarts[nextPage]];
+      const header = group ? groupHeaderRefs.current.get(group.id) : null;
+      if (!header) return;
+      const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+      const maxScroll = Math.max(0, scroller.scrollWidth - scroller.clientWidth);
+      scroller.scrollTo({
+        left: Math.min(
+          maxScroll,
+          Math.max(0, header.offsetLeft - stageLabelWidth)
+        ),
+        behavior: reducedMotion ? "auto" : "smooth",
+      });
+    },
+    [groups, lanePageStarts, stageLabelWidth]
+  );
+
+  const handleBoardScroll = useCallback(() => {
+    const scroller = boardScrollRef.current;
+    if (!scroller || lanePageStarts.length <= 1) return;
+    const maxScroll = Math.max(0, scroller.scrollWidth - scroller.clientWidth);
+    let nearestPage = 0;
+    let nearestDistance = Number.POSITIVE_INFINITY;
+    lanePageStarts.forEach((groupIndex, pageIndex) => {
+      const group = groups[groupIndex];
+      const header = group ? groupHeaderRefs.current.get(group.id) : null;
+      if (!header) return;
+      const target = Math.min(
+        maxScroll,
+        Math.max(0, header.offsetLeft - stageLabelWidth)
+      );
+      const distance = Math.abs(scroller.scrollLeft - target);
+      if (distance < nearestDistance) {
+        nearestDistance = distance;
+        nearestPage = pageIndex;
+      }
+    });
+    setActiveLanePage((current) =>
+      current === nearestPage ? current : nearestPage
+    );
+  }, [groups, lanePageStarts, stageLabelWidth]);
+
   const handleBoardKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
       if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
       event.preventDefault();
-      boardScrollRef.current?.scrollBy({
-        left: event.key === "ArrowRight" ? 160 : -160,
-        behavior: "auto",
-      });
+      scrollToLanePage(
+        activeLanePage + (event.key === "ArrowRight" ? 1 : -1)
+      );
     },
-    []
+    [activeLanePage, scrollToLanePage]
   );
 
   const connectedEdgeIds = new Set<string>();
@@ -162,7 +218,12 @@ export default function PortraitProcessBoard({
     }
   }
 
-  const minGridWidth = stageLabelWidth + groups.length * minGroupWidth;
+  const embeddedGroupWidthSum = groups
+    .map(() => "var(--portrait-group-width)")
+    .join(" + ");
+  const embeddedMinGridWidth = embeddedGroupWidthSum
+    ? `calc(var(--portrait-stage-width) + ${embeddedGroupWidthSum})`
+    : "var(--portrait-stage-width)";
 
   return (
     <div className="portrait-process-board" data-embedded={embedded ? "true" : undefined}>
@@ -191,6 +252,31 @@ export default function PortraitProcessBoard({
           })}
         </nav>}
 
+        {embedded && lanePageStarts.length > 1 && (
+          <nav className="portrait-lane-pager" aria-label="행위자 묶음 보기">
+            <span>행위자 묶음</span>
+            <div>
+              {lanePageStarts.map((groupIndex, pageIndex) => {
+                const pageGroups = groups.slice(groupIndex, groupIndex + 2);
+                const pageEnd = Math.min(groupIndex + 2, groups.length);
+                const pageTitle = pageGroups.map((group) => group.title).join(" · ");
+                return (
+                  <button
+                    key={groupIndex}
+                    type="button"
+                    aria-label={`${pageTitle} 보기`}
+                    aria-pressed={activeLanePage === pageIndex}
+                    title={pageTitle}
+                    onClick={() => scrollToLanePage(pageIndex)}
+                  >
+                    {groupIndex + 1}–{pageEnd}
+                  </button>
+                );
+              })}
+            </div>
+          </nav>
+        )}
+
         <div
           ref={boardScrollRef}
           className="portrait-process-scroll"
@@ -198,14 +284,23 @@ export default function PortraitProcessBoard({
           aria-label="세로형 업무구조도 탐색 영역"
           tabIndex={0}
           onKeyDown={handleBoardKeyDown}
+          onScroll={handleBoardScroll}
         >
           <div
             ref={boardRef}
             className="portrait-process-grid"
-            style={{
-              gridTemplateColumns: `${stageLabelWidth}px repeat(${groups.length}, minmax(${minGroupWidth}px, 1fr))`,
-              minWidth: minGridWidth,
-            }}
+            style={
+              embedded
+                ? ({
+                    "--portrait-stage-width": `${stageLabelWidth}px`,
+                    gridTemplateColumns: `var(--portrait-stage-width) repeat(${groups.length}, minmax(var(--portrait-group-width), 1fr))`,
+                    minWidth: embeddedMinGridWidth,
+                  } as React.CSSProperties)
+                : {
+                    gridTemplateColumns: `${stageLabelWidth}px repeat(${groups.length}, minmax(${MIN_GROUP_WIDTH}px, 1fr))`,
+                    minWidth: stageLabelWidth + groups.length * MIN_GROUP_WIDTH,
+                  }
+            }
           >
             {svgSize.width > 0 && (
               <svg
@@ -278,10 +373,17 @@ export default function PortraitProcessBoard({
               <span>{embedded ? "↓" : "행위자 묶음 →"}</span>
             </div>
 
-            {groups.map((group) => (
+            {groups.map((group, groupIndex) => (
               <div
                 key={group.id}
+                ref={(element) => {
+                  if (element) groupHeaderRefs.current.set(group.id, element);
+                  else groupHeaderRefs.current.delete(group.id);
+                }}
                 className="portrait-group-header"
+                data-page-start={
+                  lanePageStarts.includes(groupIndex) ? "true" : undefined
+                }
                 style={{ "--portrait-group-accent": group.accent } as React.CSSProperties}
               >
                 <strong>{group.title}</strong>
