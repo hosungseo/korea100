@@ -356,81 +356,162 @@
    },
    {
     "id": "P12",
-    "name": "집행잔액·이자 국고 반납",
-    "lane": "보조사업자(지자체·민간)",
+    "name": "정산 확정·초과교부액 반환명령",
+    "lane": "각 중앙관서",
     "stage": "G5 실적보고·정산",
-    "type": "task",
+    "type": "notice",
     "status": "waiting",
     "progress": 0,
-    "actor": "보조사업자",
-    "action": "집행잔액·발생이자 국고 반납",
+    "actor": "중앙관서의 장",
+    "receiver": "보조사업자",
+    "action": "정산 확정액을 초과해 교부된 보조금과 발생이자의 반환을 기한을 정해 명령",
     "output_documents": [
-     "반납 내역"
+     "정산 확정 통지",
+     "초과교부액 반환명령"
     ],
-    "confidence": 0.82,
+    "confidence": 0.87,
     "legal_basis": [
      {
       "law": "보조금 관리에 관한 법률",
-      "article": "제31조(보조금의 반환)"
+      "article": "제31조제2항",
+      "text": "중앙관서의 장은 확정된 보조금보다 이미 교부된 보조금과 이자가 많으면 초과액의 반환을 명하여야 한다."
      }
     ]
    },
    {
     "id": "P13",
-    "name": "부정수급 점검·환수·제재",
-    "lane": "감사기관",
+    "name": "사후 점검·법 위반 확인",
+    "lane": "각 중앙관서",
     "stage": "G6 검사·제재·환류",
     "type": "gateway",
     "status": "risk",
     "progress": 0,
-    "actor": "감사원·부처 감사",
-    "action": "부정수급 점검·환수·제재 판단",
+    "actor": "중앙관서의 장·소속 공무원",
+    "action": "보고를 받거나 장부·서류·재산을 검사해 법령 위반·용도 외 사용·부정교부 여부 확인",
+    "condition": "용도 외 사용, 법령·교부결정 위반 또는 거짓·부정한 방법의 교부 여부",
     "output_documents": [
-     "점검 결과",
-     "환수·제재 처분"
+     "검사 결과"
     ],
     "blocker": "부정수급이 반복되나 사후 적발·환수에 한계가 있다",
-    "deadline": "신고포상금은 반환명령 통보일부터 60일 이내 지급(영 제18조제2항)",
-    "confidence": 0.8,
+    "confidence": 0.86,
     "legal_basis": [
      {
       "law": "보조금 관리에 관한 법률",
-      "article": "제33조의2(제재부가금 및 가산금)"
+      "article": "제30조제1항",
+      "text": "용도 외 사용, 법령·교부결정 위반 또는 거짓·부정한 방법의 교부는 교부결정 취소 사유다."
      },
      {
       "law": "보조금 관리에 관한 법률",
-      "article": "제35조(보조사업자에 대한 감독)"
-     },
-     {
-      "law": "보조금 관리에 관한 법률 시행령",
-      "article": "제15조(중요재산 처분제한·반환명령 서면통지)"
-     },
-     {
-      "law": "보조금 관리에 관한 법률 시행령",
-      "article": "제18조(신고포상금 지급·기준)"
+      "article": "제36조",
+      "text": "중앙관서의 장은 적절한 집행을 위해 보조사업자 등에 보고·검사·질문을 할 수 있다."
      }
     ]
    },
    {
     "id": "P14",
-    "name": "보조사업 정정·부정수급액 반환",
+    "name": "교부결정 취소·반환명령",
+    "lane": "각 중앙관서",
+    "stage": "G6 검사·제재·환류",
+    "type": "notice",
+    "status": "risk",
+    "progress": 0,
+    "actor": "중앙관서의 장",
+    "receiver": "보조사업자·간접보조사업자",
+    "action": "법 위반·부정교부에 해당하는 보조금 교부결정을 전부 또는 일부 취소하고, 이미 교부된 보조금과 이자의 반환을 명령",
+    "output_documents": [
+     "교부결정 취소 통지",
+     "반환명령"
+    ],
+    "confidence": 0.88,
+    "legal_basis": [
+     {
+      "law": "보조금 관리에 관한 법률",
+      "article": "제30조제1항",
+      "text": "중앙관서의 장은 용도 외 사용, 법령·교부결정 위반 또는 부정교부 때 교부결정을 취소할 수 있다."
+     },
+     {
+      "law": "보조금 관리에 관한 법률",
+      "article": "제31조제1항",
+      "text": "교부결정을 취소한 부분에 이미 교부된 보조금과 이자는 기한을 정해 반환을 명하여야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P17",
+    "name": "제재부가금·가산금 부과",
+    "lane": "각 중앙관서",
+    "stage": "G6 검사·제재·환류",
+    "type": "notice",
+    "status": "risk",
+    "progress": 0,
+    "actor": "중앙관서의 장",
+    "receiver": "보조사업자등",
+    "action": "반환명령 사유에 대해 반환 대상액의 5배 이내 제재부가금을 부과하고, 납부 지연 시 가산금 징수",
+    "output_documents": [
+     "제재부가금 부과 통지",
+     "가산금 부과 통지"
+    ],
+    "confidence": 0.86,
+    "legal_basis": [
+     {
+      "law": "보조금 관리에 관한 법률",
+      "article": "제33조의2제1항·제4항",
+      "text": "중앙관서의 장은 반환명령 사유에 제재부가금을 부과·징수하고, 납부기한 내 미납 시 가산금을 징수할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P18",
+    "name": "이의신청",
     "lane": "보조사업자(지자체·민간)",
     "stage": "G6 검사·제재·환류",
     "type": "task",
     "status": "loop",
     "progress": 0,
-    "actor": "보조사업자",
-    "action": "시정·부정수급액 반환",
-    "output_documents": [
-     "시정 결과",
-     "반환 내역"
+    "actor": "처분 불복자",
+    "receiver": "중앙관서의 장",
+    "action": "교부결정 취소·반환명령·수급제한·제재부가금 등 처분에 서면 이의신청",
+    "input_documents": [
+     "이의신청서",
+     "처분 통지서"
     ],
-    "blocker": "적발 사업의 시정·반환·재정산이 반복된다 (현장 검증 필요)",
-    "confidence": 0.74,
+    "output_documents": [
+     "이의신청서"
+    ],
+    "deadline": "처분 통지 또는 처분을 받은 날부터 30일 이내",
+    "confidence": 0.87,
     "legal_basis": [
      {
       "law": "보조금 관리에 관한 법률",
-      "article": "제31조(보조금의 반환)"
+      "article": "제37조제1항·제2항",
+      "text": "보조사업자·간접보조사업자·보조금수령자는 정해진 처분에 대해 30일 이내 중앙관서의 장에게 이의신청할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P19",
+    "name": "이의신청 처리·통지",
+    "lane": "각 중앙관서",
+    "stage": "G6 검사·제재·환류",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "중앙관서의 장",
+    "action": "관계자 의견을 들은 뒤 필요한 조치를 하고 결과 통지",
+    "condition": "처분 유지·변경·취소 여부",
+    "input_documents": [
+     "이의신청서"
+    ],
+    "output_documents": [
+     "이의신청 결과 통지"
+    ],
+    "deadline": "신청일부터 14일 이내(부득이한 경우 1회 10일 이내 연장)",
+    "confidence": 0.88,
+    "legal_basis": [
+     {
+      "law": "보조금 관리에 관한 법률",
+      "article": "제37조제3항",
+      "text": "중앙관서의 장은 14일 이내 의견을 듣고 필요한 조치를 하여 통지하며, 부득이한 경우 한 차례 10일 이내 연장할 수 있다."
      }
     ]
    },
@@ -603,7 +684,7 @@
     "source": "P13",
     "target": "P15",
     "type": "sequence",
-    "label": null
+    "label": "위반 없음·점검 종료"
    },
    {
     "id": "M01",
@@ -637,15 +718,43 @@
     "id": "L01",
     "source": "P13",
     "target": "P14",
-    "type": "loop",
-    "label": "부정수급 적발·시정 요구"
+    "type": "sequence",
+    "label": "법 위반 확인"
    },
    {
     "id": "L02",
     "source": "P14",
-    "target": "P11",
+    "target": "P17",
+    "type": "sequence",
+    "label": "반환명령 사유"
+   },
+   {
+    "id": "E14",
+    "source": "P14",
+    "target": "P18",
+    "type": "sequence",
+    "label": "처분 불복"
+   },
+   {
+    "id": "E15",
+    "source": "P17",
+    "target": "P18",
+    "type": "sequence",
+    "label": "제재부가금 불복"
+   },
+   {
+    "id": "E16",
+    "source": "P18",
+    "target": "P19",
+    "type": "sequence",
+    "label": "의견청취·결과 통지"
+   },
+   {
+    "id": "L03",
+    "source": "P19",
+    "target": "P14",
     "type": "loop",
-    "label": "정정·반환 후 재정산"
+    "label": "인용·변경 시 처분 시정"
    }
   ],
   "warnings": [
@@ -656,7 +765,7 @@
   "status": "article-verified",
   "verifiedAt": "2026-07-11",
   "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
-  "scope": "법적 근거 4건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 29건 가운데 29건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "scope": "법적 근거 4건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 31건 가운데 31건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "sources": [
    {
     "law": "보조금 관리에 관한 법률",
@@ -705,10 +814,10 @@
   "articleVerification": {
    "checkedAt": "2026-07-11",
    "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
-   "citationEntries": 28,
-   "explicitCitationEntries": 24,
-   "articleReferences": 29,
-   "verifiedReferences": 29,
+   "citationEntries": 30,
+   "explicitCitationEntries": 26,
+   "articleReferences": 31,
+   "verifiedReferences": 31,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }

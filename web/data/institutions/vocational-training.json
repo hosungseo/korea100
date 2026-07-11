@@ -98,7 +98,7 @@
    "고용센터",
    "한국산업인력공단",
    "훈련기관",
-   "직업능력심사평가원",
+   "고용노동부",
    "사업주",
    "정보시스템(HRD-Net)"
   ],
@@ -140,13 +140,13 @@
    {
     "id": "P02",
     "name": "과정 심사·인정",
-    "lane": "직업능력심사평가원",
+    "lane": "고용노동부",
     "stage": "G1 인정심사",
     "type": "gateway",
     "status": "done",
     "progress": 100,
-    "actor": "직업능력심사평가원",
-    "action": "심사·인정",
+    "actor": "고용노동부장관",
+    "action": "훈련과정 요건을 심사하여 인정 결정",
     "output_documents": [
      "과정인정서",
      "심사결과"
@@ -158,7 +158,7 @@
      {
       "law": "국민 평생 직업능력 개발법",
       "article": "제24조",
-      "text": "훈련과정의 요건 충족 여부를 심사하여 인정한다."
+      "text": "직업능력개발훈련과정의 인정 권한은 고용노동부장관에게 있다."
      }
     ]
    },
@@ -422,53 +422,127 @@
    },
    {
     "id": "P12",
-    "name": "부정훈련·부정수급 점검",
-    "lane": "한국산업인력공단",
+    "name": "지도·감독·부정행위 조사",
+    "lane": "고용노동부",
     "stage": "G6 사후관리·제재",
     "type": "gateway",
     "status": "risk",
     "progress": 0,
-    "actor": "한국산업인력공단",
-    "action": "부정 점검",
+    "actor": "고용노동부장관·관계 공무원",
+    "action": "출결·시설·장비·훈련비용 관련 보고·자료를 요구하고 현장 조사",
     "condition": "허위 수강·유령 훈련생 등 부정수급 여부",
     "output_documents": [
-     "점검결과",
-     "적발내역"
+     "조사 결과",
+     "시정명령·인정취소 검토 자료"
     ],
     "blocker": "부정수급 상시 모니터링 체계 미흡(운영 추정)",
-    "confidence": 0.74,
+    "confidence": 0.86,
     "legal_basis": [
      {
       "law": "국민 평생 직업능력 개발법",
-      "article": "제55조, 제56조",
-      "text": "거짓·부정한 방법의 지원금 수급 여부를 점검한다."
+      "article": "제58조",
+      "text": "고용노동부장관은 인정받은 자와 지원·융자 대상자 등에 보고·자료제출·출입조사·질문으로 지도감독할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P17",
+    "name": "인정취소 전 청문",
+    "lane": "고용노동부",
+    "stage": "G6 사후관리·제재",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "고용노동부장관",
+    "receiver": "훈련과정 인정 대상자",
+    "action": "훈련과정 인정취소 예정 처분 전에 청문 실시",
+    "input_documents": [
+     "조사 결과",
+     "청문 통지"
+    ],
+    "output_documents": [
+     "청문조서"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국민 평생 직업능력 개발법",
+      "article": "제62조제1호",
+      "text": "고용노동부장관은 제24조제2항에 따른 훈련과정 인정취소를 하려면 청문을 실시해야 한다."
      }
     ]
    },
    {
     "id": "P13",
-    "name": "인정취소·제재·환수",
-    "lane": "직업능력심사평가원",
+    "name": "시정명령·훈련과정 인정취소",
+    "lane": "고용노동부",
     "stage": "G6 사후관리·제재",
-    "type": "task",
-    "status": "loop",
+    "type": "notice",
+    "status": "risk",
     "progress": 0,
-    "actor": "직업능력심사평가원/공단",
-    "action": "인정취소·환수",
+    "actor": "고용노동부장관",
+    "action": "훈련과정 위반에 시정을 명하거나 법정 취소 사유면 인정취소 처분",
     "input_documents": [
-     "적발내역"
+     "조사 결과",
+     "청문 결과"
     ],
     "output_documents": [
-     "인정취소 통보",
-     "환수·지원제한 결정"
+     "시정명령",
+     "훈련과정 인정취소 통지"
     ],
-    "blocker": "적발 시 조건부 회귀 단계",
-    "confidence": 0.75,
+    "confidence": 0.88,
     "legal_basis": [
      {
       "law": "국민 평생 직업능력 개발법",
-      "article": "제24조, 제55조, 제56조",
-      "text": "부정이 확인되면 과정 인정취소·지원 제한·환수 조치를 한다."
+      "article": "제24조제2항·제3항",
+      "text": "고용노동부장관은 인정과정의 위반에 시정을 명하거나 인정을 취소할 수 있고, 일정 기간 인정 제한을 할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "수강·지원·융자 제한",
+    "lane": "고용노동부",
+    "stage": "G6 사후관리·제재",
+    "type": "notice",
+    "status": "risk",
+    "progress": 0,
+    "actor": "고용노동부장관 또는 국가·지방자치단체",
+    "receiver": "훈련생·지원 또는 융자 대상자",
+    "action": "부정수급 또는 인정취소 관련 공모가 확인되면 일정 기간 수강과 지원·융자를 제한",
+    "output_documents": [
+     "수강·지원·융자 제한 통지"
+    ],
+    "confidence": 0.86,
+    "legal_basis": [
+     {
+      "law": "국민 평생 직업능력 개발법",
+      "article": "제55조제1항·제2항",
+      "text": "부정행위가 있는 훈련생·지원대상자 등에 대해 수강 또는 지원·융자를 제한할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P18",
+    "name": "부정수급액 반환명령·추가징수",
+    "lane": "고용노동부",
+    "stage": "G6 사후관리·제재",
+    "type": "notice",
+    "status": "risk",
+    "progress": 0,
+    "actor": "고용노동부장관 또는 국가·지방자치단체",
+    "receiver": "훈련생·훈련기관·사업주 등 부정수급자",
+    "action": "부정수급액의 반환을 명하고, 부정수급액의 5배 이하 범위에서 추가징수",
+    "output_documents": [
+     "반환명령",
+     "추가징수 통지"
+    ],
+    "confidence": 0.88,
+    "legal_basis": [
+     {
+      "law": "국민 평생 직업능력 개발법",
+      "article": "제56조제1항부터 제5항",
+      "text": "부정수급액은 반환을 명하고 추가징수할 수 있으며, 기한 내 미납 때에는 체납처분의 예에 따라 징수할 수 있다."
      }
     ]
    },
@@ -605,15 +679,43 @@
     "id": "L01",
     "source": "P12",
     "target": "P13",
-    "type": "loop",
-    "label": "부정 적발 시 제재"
+    "type": "sequence",
+    "label": "시정명령 사유"
    },
    {
-    "id": "L02",
+    "id": "E12",
+    "source": "P12",
+    "target": "P17",
+    "type": "sequence",
+    "label": "인정취소 예정"
+   },
+   {
+    "id": "E13",
+    "source": "P17",
+    "target": "P13",
+    "type": "sequence",
+    "label": "청문 후 처분"
+   },
+   {
+    "id": "E14",
+    "source": "P12",
+    "target": "P15",
+    "type": "sequence",
+    "label": "수강·지원 제한 사유"
+   },
+   {
+    "id": "E15",
     "source": "P13",
-    "target": "P07",
-    "type": "loop",
-    "label": "인정취소·환수 후 재점검"
+    "target": "P15",
+    "type": "sequence",
+    "label": "부정수급·공모 확인"
+   },
+   {
+    "id": "E16",
+    "source": "P15",
+    "target": "P18",
+    "type": "sequence",
+    "label": "반환명령 대상"
    }
   ],
   "warnings": []
@@ -672,8 +774,8 @@
   "articleVerification": {
    "checkedAt": "2026-07-11",
    "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
-   "citationEntries": 20,
-   "explicitCitationEntries": 19,
+   "citationEntries": 23,
+   "explicitCitationEntries": 22,
    "articleReferences": 33,
    "verifiedReferences": 33,
    "missingReferences": 0,
