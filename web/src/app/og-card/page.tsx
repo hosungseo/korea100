@@ -21,11 +21,11 @@ export default function OgCardPage() {
           <span>제도 모델</span>
         </div>
         <div>
-          <strong>1,573</strong>
+          <strong>1,574</strong>
           <span>업무 노드</span>
         </div>
         <div>
-          <strong>3,721</strong>
+          <strong>3,725</strong>
           <span>확인 조문</span>
         </div>
         <div>

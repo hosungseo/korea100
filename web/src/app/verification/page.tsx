@@ -35,7 +35,7 @@ export default function VerificationPage() {
 
       <section className="verification-stats" aria-label="검증 현황 요약">
         <div>
-          <strong>3,721/3,721</strong>
+          <strong>3,725/3,725</strong>
           <span>명시 조문 확인</span>
         </div>
         <div>
