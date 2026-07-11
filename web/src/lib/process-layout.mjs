@@ -7,6 +7,12 @@ const TITLE_OVERRIDES = {
     "협의·전문검토",
     "주민·정보공개",
   ],
+  "workplace-harassment-response": [
+    "신고·피해보호",
+    "사용자·행위자",
+    "사내조사·노동청",
+    "공무원·별도구제",
+  ],
 };
 
 export function buildProcessLaneGroups(lanes, slug) {

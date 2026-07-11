@@ -24,7 +24,9 @@ const expectedFiles = expectedSlugs.map((slug) => `${slug}.png`).sort();
 const errors = [];
 
 if (JSON.stringify(imageFiles) !== JSON.stringify(expectedFiles)) {
-  errors.push(`PNG 파일 구성이 원본 100개 slug와 다릅니다 (${imageFiles.length}/100)`);
+  errors.push(
+    `PNG 파일 구성이 원본 slug와 다릅니다 (${imageFiles.length}/${expectedFiles.length})`
+  );
 }
 
 await Promise.all(

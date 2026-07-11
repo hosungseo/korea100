@@ -1,10 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Telemetry from "@/components/Telemetry";
+import { getInstitutionSummaries } from "@/lib/data";
 import "./globals.css";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://hosungseo.github.io/korea100";
+const INSTITUTIONS = getInstitutionSummaries();
+const MODEL_COUNT = INSTITUTIONS.length;
+const LATEST_AS_OF_DATE = INSTITUTIONS.reduce(
+  (latest, institution) =>
+    institution.asOfDate > latest ? institution.asOfDate : latest,
+  "",
+);
 
 export const metadata: Metadata = {
   title: {
@@ -58,7 +66,7 @@ export default function RootLayout({
                 "대한민국 주요 제도를 법령, 조직, 절차, 예산, 문서와 데이터 흐름으로 정리한 제도 모델 카탈로그",
               inLanguage: "ko-KR",
               url: `${SITE_URL}/`,
-              numberOfItems: 100,
+              numberOfItems: MODEL_COUNT,
             }).replace(/</g, "\\u003c"),
           }}
         />
@@ -84,7 +92,7 @@ function Header() {
           <NavLink href="/#institutions">제도 대장</NavLink>
           <NavLink href="/verification/">현장 검증 대장</NavLink>
           <NavLink href="/request/">요청하기</NavLink>
-          <span className="site-header-date">기준일 2026-07-10</span>
+          <span className="site-header-date">기준일 {LATEST_AS_OF_DATE}</span>
         </nav>
       </div>
     </header>

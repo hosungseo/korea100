@@ -54,7 +54,7 @@ LAW_OC=... npm run check:freshness
 
 ## 현장 검증 큐
 
-`npm run generate:verification-queue`가 100개 제도의 `fieldVerification`에서 `docs/field-verification-queue.json`과 `.md`를 만든다. 완료 근거를 반영할 때는 원본 제도 JSON을 수정하고 큐를 재생성한다. 개인 사건 정보와 비공개 내부 자료는 저장하지 않는다.
+`npm run generate:verification-queue`가 전체 제도의 `fieldVerification`에서 `docs/field-verification-queue.json`과 `.md`를 만든다. 완료 근거를 반영할 때는 원본 제도 JSON을 수정하고 큐를 재생성한다. 개인 사건 정보와 비공개 내부 자료는 저장하지 않는다.
 
 ## 출시 전 점검
 

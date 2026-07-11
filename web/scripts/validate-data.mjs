@@ -58,9 +58,11 @@ const institutions = files
 const manifest = readJson(MANIFEST_PATH) ?? [];
 const fieldQueue = readJson(FIELD_QUEUE_PATH);
 
-if (files.length !== 100) fail("institutions", `JSON 파일이 100개여야 하지만 ${files.length}개입니다`);
-if (!Array.isArray(manifest) || manifest.length !== 100) {
-  fail("manifest", `항목이 100개여야 하지만 ${Array.isArray(manifest) ? manifest.length : 0}개입니다`);
+if (!Array.isArray(manifest) || manifest.length === 0) {
+  fail("manifest", "항목이 1개 이상이어야 합니다");
+}
+if (files.length !== manifest.length) {
+  fail("institutions", `JSON 파일 수 ${files.length}개와 manifest ${manifest.length}개가 다릅니다`);
 }
 
 const priorities = new Set();
@@ -75,7 +77,7 @@ for (const entry of Array.isArray(manifest) ? manifest : []) {
   priorities.add(entry.priority);
 }
 
-for (let priority = 1; priority <= 100; priority += 1) {
+for (let priority = 1; priority <= manifest.length; priority += 1) {
   if (!priorities.has(priority)) fail("manifest", `priority ${priority}가 없습니다`);
 }
 

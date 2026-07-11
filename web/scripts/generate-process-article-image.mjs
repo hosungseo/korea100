@@ -103,8 +103,10 @@ for (let index = 0; index < files.length; index += 4) {
   generated.push(...results);
 }
 
-if (generated.length !== 100) {
-  throw new Error(`세로형 PNG는 100개여야 합니다: ${generated.length}`);
+if (generated.length !== manifest.length) {
+  throw new Error(
+    `세로형 PNG 수 ${generated.length}개와 manifest ${manifest.length}개가 다릅니다`
+  );
 }
 
 const eiaOutput = path.join(outputDir, "environmental-impact-assessment.png");
