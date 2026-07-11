@@ -524,7 +524,7 @@
    },
    {
     "id": "P13",
-    "name": "위반 시 영업정지·취소 처분",
+    "name": "위반 사실·처분 유형 판단",
     "lane": "시·군·구청(인허가청)",
     "stage": "G6 사후관리·처분",
     "type": "gateway",
@@ -532,17 +532,142 @@
     "progress": 0,
     "actor": "시장·군수·구청장",
     "receiver": "창업자·영업자",
-    "action": "행정처분",
-    "condition": "위반 정도에 따라 시정명령·영업정지·허가취소",
+    "action": "위반 유형·정도와 법정 감경·면제 사유를 확인해 영업정지, 과징금 갈음, 허가취소·영업소 폐쇄 여부 판단",
+    "condition": "위반행위의 유형·정도와 영업정지 갈음 과징금 가능 여부",
     "output_documents": [
-     "행정처분서"
+     "처분안",
+     "처분 유형 판단서"
     ],
-    "confidence": 0.78,
+    "confidence": 0.86,
     "legal_basis": [
      {
       "law": "식품위생법",
       "article": "제75조",
-      "text": "위반 시 영업허가 취소 또는 영업정지를 명할 수 있다."
+      "text": "위반행위의 유형·정도에 따라 영업정지, 허가·등록 취소 또는 영업소 폐쇄를 명할 수 있으며 세부기준은 총리령으로 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "영업정지 처분",
+    "lane": "시·군·구청(인허가청)",
+    "stage": "G6 사후관리·처분",
+    "type": "notice",
+    "status": "risk",
+    "progress": 0,
+    "actor": "시장·군수·구청장",
+    "receiver": "영업자",
+    "action": "위반 유형과 정도에 따라 6개월 이내 영업의 전부 또는 일부 정지 명령",
+    "output_documents": [
+     "영업정지 처분서"
+    ],
+    "confidence": 0.87,
+    "legal_basis": [
+     {
+      "law": "식품위생법",
+      "article": "제75조제1항",
+      "text": "시장·군수·구청장 등은 법정 위반행위에 6개월 이내 영업의 전부 또는 일부 정지를 명할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "영업정지 갈음 과징금 부과",
+    "lane": "시·군·구청(인허가청)",
+    "stage": "G6 사후관리·처분",
+    "type": "notice",
+    "status": "risk",
+    "progress": 0,
+    "actor": "시장·군수·구청장",
+    "receiver": "영업자",
+    "action": "영업정지 처분을 갈음할 수 있는 경우 10억원 이하의 과징금 부과",
+    "output_documents": [
+     "과징금 부과 통지"
+    ],
+    "confidence": 0.87,
+    "legal_basis": [
+     {
+      "law": "식품위생법",
+      "article": "제82조제1항·제2항",
+      "text": "영업정지 처분을 갈음하여 과징금을 부과할 수 있으나, 법이 정한 중대한 위반행위에는 적용하지 않는다."
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "허가취소·영업소 폐쇄 전 청문",
+    "lane": "시·군·구청(인허가청)",
+    "stage": "G6 사후관리·처분",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시장·군수·구청장",
+    "receiver": "허가·등록 영업자",
+    "action": "허가·등록 취소 또는 영업소 폐쇄 명령 전에 청문 실시",
+    "input_documents": [
+     "처분안",
+     "청문 통지"
+    ],
+    "output_documents": [
+     "청문조서"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "식품위생법",
+      "article": "제81조제3호",
+      "text": "시장·군수·구청장은 제75조에 따른 영업허가·등록 취소 또는 영업소 폐쇄 명령 전에 청문을 해야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P17",
+    "name": "허가취소·영업소 폐쇄 명령",
+    "lane": "시·군·구청(인허가청)",
+    "stage": "G6 사후관리·처분",
+    "type": "notice",
+    "status": "risk",
+    "progress": 0,
+    "actor": "시장·군수·구청장",
+    "receiver": "영업자",
+    "action": "청문 후 법정 취소·폐쇄 사유에 해당하면 영업허가·등록을 취소하거나 영업소 폐쇄 명령",
+    "input_documents": [
+     "청문조서"
+    ],
+    "output_documents": [
+     "허가·등록 취소 처분서",
+     "영업소 폐쇄 명령서"
+    ],
+    "confidence": 0.89,
+    "legal_basis": [
+     {
+      "law": "식품위생법",
+      "article": "제75조제1항부터 제3항",
+      "text": "법정 위반, 영업정지 명령 위반 또는 장기 휴업·사실상 폐업 사유에는 허가·등록 취소나 영업소 폐쇄를 명할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P18",
+    "name": "과징금 미납 처리",
+    "lane": "시·군·구청(인허가청)",
+    "stage": "G6 사후관리·처분",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "시장·군수·구청장",
+    "action": "과징금이 기한 내 납부되지 않으면 과징금 처분을 취소해 영업정지를 하거나 체납처분으로 징수",
+    "condition": "과징금 미납과 영업정지 가능 여부",
+    "output_documents": [
+     "과징금 처분 취소 통지",
+     "영업정지 또는 체납징수 결정"
+    ],
+    "confidence": 0.86,
+    "legal_basis": [
+     {
+      "law": "식품위생법",
+      "article": "제82조제4항",
+      "text": "과징금 미납 시 과징금 처분을 취소하고 영업정지를 하거나 국세 체납처분의 예 또는 지방행정제재·부과금 징수법에 따라 징수할 수 있다."
      }
     ]
    }
@@ -616,7 +741,7 @@
     "source": "P12",
     "target": "P13",
     "type": "sequence",
-    "label": null
+    "label": "위반 사실 확인"
    },
    {
     "id": "E11",
@@ -654,11 +779,39 @@
     "label": "보완·반려"
    },
    {
-    "id": "L02",
+    "id": "E12",
     "source": "P13",
-    "target": "P12",
-    "type": "loop",
-    "label": "처분 후 재점검"
+    "target": "P14",
+    "type": "sequence",
+    "label": "영업정지 처분"
+   },
+   {
+    "id": "E13",
+    "source": "P13",
+    "target": "P15",
+    "type": "sequence",
+    "label": "과징금 갈음 가능"
+   },
+   {
+    "id": "E14",
+    "source": "P13",
+    "target": "P16",
+    "type": "sequence",
+    "label": "취소·폐쇄 예정"
+   },
+   {
+    "id": "E15",
+    "source": "P16",
+    "target": "P17",
+    "type": "sequence",
+    "label": "청문 후 처분"
+   },
+   {
+    "id": "E16",
+    "source": "P15",
+    "target": "P18",
+    "type": "sequence",
+    "label": "기한 내 미납"
    }
   ],
   "warnings": []
@@ -667,7 +820,7 @@
   "status": "needs-review",
   "verifiedAt": "2026-07-11",
   "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
-  "scope": "법적 근거 8건 중 공식 원문 7건을 연결했다. 캔버스와 절차 노드의 명시 조문 40건 가운데 40건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "scope": "법적 근거 8건 중 공식 원문 7건을 연결했다. 캔버스와 절차 노드의 명시 조문 45건 가운데 45건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "sources": [
    {
     "law": "식품위생법",
@@ -759,10 +912,10 @@
   "articleVerification": {
    "checkedAt": "2026-07-11",
    "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
-   "citationEntries": 35,
-   "explicitCitationEntries": 34,
-   "articleReferences": 40,
-   "verifiedReferences": 40,
+   "citationEntries": 40,
+   "explicitCitationEntries": 39,
+   "articleReferences": 45,
+   "verifiedReferences": 45,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }

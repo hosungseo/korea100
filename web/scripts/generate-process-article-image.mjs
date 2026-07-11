@@ -722,7 +722,15 @@ function edgeRoute(edge, source, target, context) {
       };
     }
     const downward = target.y >= sourceBottom;
-    const middleY = (sourceBottom + target.y) / 2;
+    // Fan same-cell branches out in port order before they approach their targets.
+    // This keeps a farther branch from sharing the nearer branch's target stem.
+    const middleY = Math.max(
+      sourceBottom + ARROW_CLEARANCE + 8,
+      Math.min(
+        target.y - ARROW_CLEARANCE - 8,
+        sourceBottom + 36 - slot.sourcePort * 28
+      )
+    );
     return {
       path: downward
         ? Math.abs(sourcePortX - targetPortX) < 1
