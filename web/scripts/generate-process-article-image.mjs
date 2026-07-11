@@ -2,7 +2,10 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
-import { buildProcessLaneGroups } from "../src/lib/process-layout.mjs";
+import {
+  buildProcessEdgeRouteSlots,
+  buildProcessLaneGroups,
+} from "../src/lib/process-layout.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const webRoot = path.resolve(__dirname, "..");
@@ -40,6 +43,11 @@ const CARD_FOOTER_SIZE = 11;
 const CARD_FOOTER_Y = 82;
 const EDGE_LABEL_HEIGHT = 30;
 const EDGE_LABEL_GAP = 7;
+const EDGE_PORT_GAP = 20;
+const EDGE_CHANNEL_GAP = 16;
+const EDGE_RAIL_GAP = 13;
+const EDGE_RAIL_INSET = 18;
+const MAX_COLLINEAR_EDGE_OVERLAP = 40;
 
 const STATUS = {
   done: {
@@ -110,6 +118,11 @@ console.log(
 console.log(
   `연결 라벨 충돌 검증: ${generated.reduce((sum, item) => sum + item.audit.edgeLabels, 0)}개 · ` +
     `재배치 ${generated.reduce((sum, item) => sum + item.audit.adjustedEdgeLabels, 0)}개`
+);
+console.log(
+  `연결선 분리 검증: ${generated.reduce((sum, item) => sum + item.audit.edgeRoutes, 0)}개 · ` +
+    `장거리 우회 ${generated.reduce((sum, item) => sum + item.audit.longEdgeRoutes, 0)}개 · ` +
+    "공선 겹침 0개"
 );
 
 async function generateInstitutionImage(file) {
@@ -223,7 +236,9 @@ function buildLayout(institution, process, groups) {
     stageHeights,
     stageTops,
     nodeLayout,
+    edgeRouteSlots: buildProcessEdgeRouteSlots(process.edges, nodeLayout),
   };
+  context.edgeRouteAudit = validateEdgeRouteLayout(context);
   context.edgeLabelLayout = buildEdgeLabelLayout(context);
   context.textAudit = validateTextLayout(context);
   return context;
@@ -374,7 +389,8 @@ function renderGrid(context) {
 }
 
 function renderEdges(context) {
-  const result = [];
+  const paths = [];
+  const labels = [];
   for (const edge of context.process.edges) {
     const source = context.nodeLayout.get(edge.source);
     const target = context.nodeLayout.get(edge.target);
@@ -388,7 +404,9 @@ function renderEdges(context) {
           ? { color: "#0f8a65", width: 3.4, dash: "11 8", marker: "arrow-message" }
           : { color: "#53675d", width: 3.4, dash: "", marker: "arrow-sequence" };
     const route = edgeRoute(edge, source, target, context);
-    result.push(
+    const dash = style.dash ? `stroke-dasharray="${style.dash}"` : "";
+    paths.push(
+      `<path d="${route.path}" fill="none" stroke="#ffffff" stroke-width="${style.width + 4}" ${dash} stroke-linecap="round" stroke-linejoin="round" opacity="0.94"/>`,
       `<path d="${route.path}" fill="none" stroke="${style.color}" stroke-width="${style.width}" ${style.dash ? `stroke-dasharray="${style.dash}"` : ""} marker-end="url(#${style.marker})" stroke-linecap="round" stroke-linejoin="round" opacity="0.96"/>`
     );
     if (edge.label) {
@@ -396,13 +414,13 @@ function renderEdges(context) {
       if (!label) {
         throw new Error(`연결 라벨 배치 누락: ${context.institution.slug}/${edge.id}`);
       }
-      result.push(
+      labels.push(
         `<rect x="${round(label.x - label.width / 2)}" y="${round(label.y - EDGE_LABEL_HEIGHT / 2)}" width="${round(label.width)}" height="${EDGE_LABEL_HEIGHT}" rx="6" fill="#ffffff" stroke="${style.color}" stroke-width="1.4"/>`,
         `<text x="${round(label.x)}" y="${round(label.y + 5)}" text-anchor="middle" font-size="14" font-weight="750" fill="${style.color}">${escapeXml(edge.label)}</text>`
       );
     }
   }
-  return result.join("\n");
+  return [...paths, ...labels].join("\n");
 }
 
 function buildEdgeLabelLayout(context) {
@@ -513,6 +531,104 @@ function rectsOverlap(a, b) {
   );
 }
 
+function verticalRouteBlocked(x, startY, endY, edge, context) {
+  const top = Math.min(startY, endY);
+  const bottom = Math.max(startY, endY);
+  return [...context.nodeLayout.entries()].some(([nodeId, node]) => {
+    if (nodeId === edge.source || nodeId === edge.target) return false;
+    return (
+      x > node.x - 4 &&
+      x < node.x + node.width + 4 &&
+      bottom > node.y - 4 &&
+      top < node.y + node.height + 4
+    );
+  });
+}
+
+function validateEdgeRouteLayout(context) {
+  const routes = context.process.edges.map((edge) => {
+    const source = context.nodeLayout.get(edge.source);
+    const target = context.nodeLayout.get(edge.target);
+    return {
+      edge,
+      route: edgeRoute(edge, source, target, context),
+      long: target.stageIndex - source.stageIndex > 1,
+    };
+  });
+  const overlaps = [];
+  for (let leftIndex = 0; leftIndex < routes.length; leftIndex += 1) {
+    const left = routes[leftIndex];
+    const leftSegments = orthogonalSegments(left.route.path);
+    for (let rightIndex = leftIndex + 1; rightIndex < routes.length; rightIndex += 1) {
+      const right = routes[rightIndex];
+      const rightSegments = orthogonalSegments(right.route.path);
+      let longest = 0;
+      for (const leftSegment of leftSegments) {
+        for (const rightSegment of rightSegments) {
+          longest = Math.max(longest, collinearOverlap(leftSegment, rightSegment));
+        }
+      }
+      if (longest > MAX_COLLINEAR_EDGE_OVERLAP) {
+        overlaps.push(`${left.edge.id}/${right.edge.id} ${round(longest)}px`);
+      }
+    }
+  }
+  if (overlaps.length > 0) {
+    throw new Error(
+      `연결선 공선 겹침: ${context.institution.slug}\n- ${overlaps.slice(0, 12).join("\n- ")}`
+    );
+  }
+  return {
+    routes: routes.length,
+    longRoutes: routes.filter(({ long }) => long).length,
+  };
+}
+
+function orthogonalSegments(pathData) {
+  const tokens = pathData.match(/[MHV]|-?\d+(?:\.\d+)?/g) ?? [];
+  const segments = [];
+  let x = 0;
+  let y = 0;
+  for (let index = 0; index < tokens.length; ) {
+    const command = tokens[index];
+    index += 1;
+    if (command === "M") {
+      x = Number(tokens[index]);
+      y = Number(tokens[index + 1]);
+      index += 2;
+      continue;
+    }
+    if (command === "H") {
+      const nextX = Number(tokens[index]);
+      index += 1;
+      segments.push({ orientation: "horizontal", fixed: y, start: x, end: nextX });
+      x = nextX;
+      continue;
+    }
+    if (command === "V") {
+      const nextY = Number(tokens[index]);
+      index += 1;
+      segments.push({ orientation: "vertical", fixed: x, start: y, end: nextY });
+      y = nextY;
+    }
+  }
+  return segments;
+}
+
+function collinearOverlap(left, right) {
+  if (
+    left.orientation !== right.orientation ||
+    Math.abs(left.fixed - right.fixed) > 0.1
+  ) {
+    return 0;
+  }
+  const leftStart = Math.min(left.start, left.end);
+  const leftEnd = Math.max(left.start, left.end);
+  const rightStart = Math.min(right.start, right.end);
+  const rightEnd = Math.max(right.start, right.end);
+  return Math.max(0, Math.min(leftEnd, rightEnd) - Math.max(leftStart, rightStart));
+}
+
 function edgeRoute(edge, source, target, context) {
   const sourceCenterX = source.x + source.width / 2;
   const sourceCenterY = source.y + source.height / 2;
@@ -522,55 +638,180 @@ function edgeRoute(edge, source, target, context) {
   const targetRight = target.x + target.width;
   const sourceBottom = source.y + source.height;
   const targetBottom = target.y + target.height;
-  const messageOffset = edge.type === "message" ? 20 : 0;
+  const slot = context.edgeRouteSlots.get(edge.id) ?? {
+    sourcePort: 0,
+    targetPort: 0,
+    channel: 0,
+    rail: 0,
+    railSide: 1,
+    approach: 0,
+    sourceChannel: 0,
+    targetChannel: 0,
+    backRail: 0,
+  };
+  const sourcePortX =
+    sourceCenterX +
+    slot.sourcePort * EDGE_PORT_GAP +
+    alternatingSlotOffset(slot.sourceChannel) * 6 +
+    alternatingSlotOffset(slot.channel) * 6;
+  const targetPortX =
+    targetCenterX +
+    slot.targetPort * EDGE_PORT_GAP +
+    alternatingSlotOffset(slot.targetChannel) * 6 +
+    alternatingSlotOffset(slot.channel) * 6;
 
   if (source.stageIndex === target.stageIndex && source.groupIndex === target.groupIndex) {
     if (edge.type === "message") {
-      const sideX = sourceRight + 28;
+      const sideX = sourceRight + 28 + slot.channel * EDGE_RAIL_GAP;
+      const sourceSideY =
+        sourceCenterY + sidePortOffset(slot.sourcePort, slot.sourceChannel);
+      const targetSideY =
+        targetCenterY + sidePortOffset(slot.targetPort, slot.targetChannel);
       return {
-        path: `M ${round(sourceRight)} ${round(sourceCenterY)} H ${round(sideX)} V ${round(targetCenterY)} H ${round(targetRight + ARROW_CLEARANCE)}`,
+        path: `M ${round(sourceRight)} ${round(sourceSideY)} H ${round(sideX)} V ${round(targetSideY)} H ${round(targetRight + ARROW_CLEARANCE)}`,
         labelX: sideX + 58,
-        labelY: (sourceCenterY + targetCenterY) / 2,
+        labelY: (sourceSideY + targetSideY) / 2,
       };
     }
     const downward = target.y >= sourceBottom;
+    const middleY = (sourceBottom + target.y) / 2;
     return {
       path: downward
-        ? `M ${round(sourceCenterX)} ${round(sourceBottom)} V ${round(target.y - ARROW_CLEARANCE)}`
-        : `M ${round(source.x)} ${round(sourceCenterY)} H ${round(GROUP_X - 12)} V ${round(targetCenterY)} H ${round(target.x - ARROW_CLEARANCE)}`,
+        ? Math.abs(sourcePortX - targetPortX) < 1
+          ? `M ${round(sourcePortX)} ${round(sourceBottom)} V ${round(target.y - ARROW_CLEARANCE)}`
+          : `M ${round(sourcePortX)} ${round(sourceBottom)} V ${round(middleY)} H ${round(targetPortX)} V ${round(target.y - ARROW_CLEARANCE)}`
+        : `M ${round(source.x)} ${round(sourceCenterY)} H ${round(GROUP_X - 12 - slot.backRail * EDGE_RAIL_GAP)} V ${round(targetCenterY)} H ${round(target.x - ARROW_CLEARANCE)}`,
       labelX: downward ? sourceRight + 50 : GROUP_X + 48,
       labelY: (sourceCenterY + targetCenterY) / 2,
     };
   }
 
   if (source.stageIndex === target.stageIndex) {
-    const rowBottom =
-      context.stageTops[source.stageIndex] + context.stageHeights[source.stageIndex];
-    const channelY = rowBottom - 12 - (edge.type === "message" ? 10 : 0);
+    const forward = target.groupIndex > source.groupIndex;
+    const sourceSideY =
+      sourceCenterY + sidePortOffset(slot.sourcePort, slot.sourceChannel);
+    const targetSideY =
+      targetCenterY + sidePortOffset(slot.targetPort, slot.targetChannel);
+    const channelX = forward
+      ? target.x - 28 - slot.channel * EDGE_RAIL_GAP
+      : targetRight + 28 + slot.channel * EDGE_RAIL_GAP;
     return {
-      path: `M ${round(sourceCenterX + messageOffset)} ${round(sourceBottom)} V ${round(channelY)} H ${round(targetCenterX + messageOffset)} V ${round(targetBottom + ARROW_CLEARANCE)}`,
-      labelX: (sourceCenterX + targetCenterX) / 2,
-      labelY: channelY - 17,
+      path: forward
+        ? `M ${round(sourceRight)} ${round(sourceSideY)} H ${round(channelX)} V ${round(targetSideY)} H ${round(target.x - ARROW_CLEARANCE)}`
+        : `M ${round(source.x)} ${round(sourceSideY)} H ${round(channelX)} V ${round(targetSideY)} H ${round(targetRight + ARROW_CLEARANCE)}`,
+      labelX: forward
+        ? (sourceRight + target.x) / 2
+        : (source.x + targetRight) / 2,
+      labelY: (sourceSideY + targetSideY) / 2 - 17,
     };
   }
 
   if (target.stageIndex > source.stageIndex) {
     const sourceRowBottom =
       context.stageTops[source.stageIndex] + context.stageHeights[source.stageIndex];
-    const channelY = sourceRowBottom - 12 - (edge.type === "message" ? 10 : 0);
+    const channelY = sourceRowBottom - 12 - slot.channel * EDGE_CHANNEL_GAP;
+    const sourceBlocked = verticalRouteBlocked(
+      sourcePortX,
+      sourceBottom,
+      channelY,
+      edge,
+      context
+    );
+    const sourceSide =
+      target.groupIndex > source.groupIndex
+        ? 1
+        : target.groupIndex < source.groupIndex
+          ? -1
+          : slot.railSide;
+    const sourceGroupLeft = GROUP_X + source.groupIndex * context.groupWidth;
+    const blockedRailNudge =
+      alternatingSlotOffset(slot.sourceChannel) * EDGE_RAIL_GAP;
+    const sourceRailX =
+      sourceSide < 0
+        ? sourceGroupLeft + EDGE_RAIL_INSET + blockedRailNudge
+        : sourceGroupLeft +
+          context.groupWidth -
+          EDGE_RAIL_INSET +
+          blockedRailNudge;
+    const sourcePath = sourceBlocked
+      ? sourceSide < 0
+        ? `M ${round(source.x)} ${round(sourceCenterY + sidePortOffset(slot.sourcePort, slot.sourceChannel))} H ${round(sourceRailX)} V ${round(channelY)}`
+        : `M ${round(sourceRight)} ${round(sourceCenterY + sidePortOffset(slot.sourcePort, slot.sourceChannel))} H ${round(sourceRailX)} V ${round(channelY)}`
+      : `M ${round(sourcePortX)} ${round(sourceBottom)} V ${round(channelY)}`;
+    if (target.stageIndex - source.stageIndex > 1) {
+      const targetGroupLeft = GROUP_X + target.groupIndex * context.groupWidth;
+      const routeRailNudge =
+        alternatingSlotOffset(slot.channel) * EDGE_RAIL_GAP;
+      const railX =
+        slot.railSide < 0
+          ? targetGroupLeft +
+            EDGE_RAIL_INSET +
+            slot.rail * EDGE_RAIL_GAP +
+            routeRailNudge
+          : targetGroupLeft +
+            context.groupWidth -
+            EDGE_RAIL_INSET -
+            slot.rail * EDGE_RAIL_GAP +
+            routeRailNudge;
+      const targetApproachY = target.y - 28 - slot.approach * 10;
+      const longSourcePath =
+        sourceBlocked && source.groupIndex === target.groupIndex
+          ? slot.railSide < 0
+            ? `M ${round(source.x)} ${round(sourceCenterY + sidePortOffset(slot.sourcePort, slot.sourceChannel))} H ${round(railX)} V ${round(channelY)}`
+            : `M ${round(sourceRight)} ${round(sourceCenterY + sidePortOffset(slot.sourcePort, slot.sourceChannel))} H ${round(railX)} V ${round(channelY)}`
+          : sourcePath;
+      return {
+        path: `${longSourcePath} H ${round(railX)} V ${round(targetApproachY)} H ${round(targetPortX)} V ${round(target.y - ARROW_CLEARANCE)}`,
+        labelX: railX,
+        labelY: (channelY + targetApproachY) / 2,
+      };
+    }
+    const targetBlocked = verticalRouteBlocked(
+      targetPortX,
+      channelY,
+      target.y - ARROW_CLEARANCE,
+      edge,
+      context
+    );
+    if (targetBlocked) {
+      const targetSide =
+        source.groupIndex < target.groupIndex
+          ? -1
+          : source.groupIndex > target.groupIndex
+            ? 1
+            : slot.railSide;
+      const targetGroupLeft = GROUP_X + target.groupIndex * context.groupWidth;
+      const targetRailNudge =
+        alternatingSlotOffset(slot.targetChannel) * EDGE_RAIL_GAP;
+      const targetRailX =
+        targetSide < 0
+          ? targetGroupLeft + EDGE_RAIL_INSET + targetRailNudge
+          : targetGroupLeft +
+            context.groupWidth -
+            EDGE_RAIL_INSET +
+            targetRailNudge;
+      return {
+        path:
+          targetSide < 0
+            ? `${sourcePath} H ${round(targetRailX)} V ${round(targetCenterY + sidePortOffset(slot.targetPort, slot.targetChannel))} H ${round(target.x - ARROW_CLEARANCE)}`
+            : `${sourcePath} H ${round(targetRailX)} V ${round(targetCenterY + sidePortOffset(slot.targetPort, slot.targetChannel))} H ${round(targetRight + ARROW_CLEARANCE)}`,
+        labelX: (sourcePortX + targetRailX) / 2,
+        labelY: channelY - 17,
+      };
+    }
     return {
-      path: `M ${round(sourceCenterX + messageOffset)} ${round(sourceBottom)} V ${round(channelY)} H ${round(targetCenterX + messageOffset)} V ${round(target.y - ARROW_CLEARANCE)}`,
-      labelX: (sourceCenterX + targetCenterX) / 2,
+      path: `${sourcePath} H ${round(targetPortX)} V ${round(target.y - ARROW_CLEARANCE)}`,
+      labelX: (sourcePortX + targetPortX) / 2,
       labelY: channelY - 17,
     };
   }
 
-  const railX = GROUP_X - 12;
+  const railX = GROUP_X - 12 - slot.backRail * EDGE_RAIL_GAP;
   const targetRowBottom =
     context.stageTops[target.stageIndex] + context.stageHeights[target.stageIndex];
-  const channelY = targetRowBottom - 20;
+  const channelY = targetRowBottom - 20 - slot.channel * EDGE_CHANNEL_GAP;
   return {
-    path: `M ${round(source.x)} ${round(sourceCenterY)} H ${round(railX)} V ${round(channelY)} H ${round(targetCenterX)} V ${round(targetBottom + ARROW_CLEARANCE)}`,
+    path: `M ${round(source.x)} ${round(sourceCenterY + sidePortOffset(slot.sourcePort, slot.sourceChannel))} H ${round(railX)} V ${round(channelY)} H ${round(targetPortX)} V ${round(targetBottom + ARROW_CLEARANCE)}`,
     labelX: railX + 70,
     labelY: (sourceCenterY + channelY) / 2,
   };
@@ -849,6 +1090,8 @@ function validateTextLayout(context) {
     adjustedEdgeLabels: Array.from(context.edgeLabelLayout.values()).filter(
       (label) => label.adjusted
     ).length,
+    edgeRoutes: context.edgeRouteAudit.routes,
+    longEdgeRoutes: context.edgeRouteAudit.longRoutes,
   };
 }
 
@@ -863,4 +1106,14 @@ function escapeXml(value) {
 
 function round(value) {
   return Math.round(value * 10) / 10;
+}
+
+function alternatingSlotOffset(index) {
+  if (index === 0) return 0;
+  const magnitude = Math.ceil(index / 2);
+  return index % 2 === 1 ? -magnitude : magnitude;
+}
+
+function sidePortOffset(port, channel) {
+  return port * 13 + channel * 2.5;
 }
