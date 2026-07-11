@@ -46,6 +46,13 @@ const COMPACT_LAYOUT_METRICS = Object.freeze({
   stageVerticalSpace: 16,
   minStageHeight: 124,
 });
+// Dense diagrams retain the compact card height; only their inter-card and stage padding contracts.
+const DENSE_LAYOUT_METRICS = Object.freeze({
+  cardHeight: 86,
+  cardGap: 16,
+  stageVerticalSpace: 8,
+  minStageHeight: 120,
+});
 const ARROW_CLEARANCE = 8;
 const CARD_TEXT_WIDTH = CARD_WIDTH - 30;
 const CARD_TITLE_SIZE = 15.5;
@@ -202,6 +209,14 @@ function buildLayout(institution, process, groups) {
   let desiredTotal = desiredStageHeights.reduce((sum, height) => sum + height, 0);
   if (desiredTotal > STAGE_BODY_HEIGHT) {
     layoutMetrics = COMPACT_LAYOUT_METRICS;
+    desiredStageHeights = calculateDesiredStageHeights(
+      maxCellCounts,
+      layoutMetrics
+    );
+    desiredTotal = desiredStageHeights.reduce((sum, height) => sum + height, 0);
+  }
+  if (desiredTotal > STAGE_BODY_HEIGHT) {
+    layoutMetrics = DENSE_LAYOUT_METRICS;
     desiredStageHeights = calculateDesiredStageHeights(
       maxCellCounts,
       layoutMetrics
@@ -816,7 +831,10 @@ function edgeRoute(edge, source, target, context) {
             routeRailNudge;
       const longRailX =
         sourceBlocked && source.groupIndex === target.groupIndex
-          ? sourceRailX - slot.railSide * slot.rail * EDGE_RAIL_GAP
+          // Separate long routes sharing a source rail when they fan into different target ports.
+          ? sourceRailX +
+            slot.railSide * (slot.targetChannel - slot.sourceChannel) * 8 -
+            slot.railSide * slot.rail * EDGE_RAIL_GAP
           : railX;
       const targetApproachY = target.y - 28 - slot.approach * 10;
       const longSourcePath =
