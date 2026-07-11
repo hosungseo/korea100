@@ -15,6 +15,7 @@ import type {
   ProcessNode,
   SourceVerification,
 } from "@/lib/types";
+import { buildProcessEdgeRouteSlots } from "@/lib/process-layout.mjs";
 import { ProcessVerificationSummaryBar } from "./ProcessVerification";
 import {
   Legend,
@@ -35,6 +36,10 @@ const STAGE_LABEL_WIDTH = 132;
 const MIN_GROUP_WIDTH = 218;
 const EMBEDDED_STAGE_LABEL_WIDTH = 64;
 const ARROW_CLEARANCE = 7;
+const EDGE_PORT_GAP = 14;
+const EDGE_CHANNEL_GAP = 12;
+const EDGE_RAIL_GAP = 6;
+const EDGE_RAIL_INSET = 4;
 
 export default function PortraitProcessBoard({
   process,
@@ -314,15 +319,17 @@ export default function PortraitProcessBoard({
                   <PortraitArrowMarker id="portrait-arr-message" color="#0d8a63" />
                   <PortraitArrowMarker id="portrait-arr-loop" color="#2563eb" />
                 </defs>
-                {edgePaths.map(({ edge, path, labelX, labelY }) => {
+                {edgePaths.map(({ edge, path }) => {
                   const color = edgeColor(edge.type);
                   const highlighted = hoveredNodeId
                     ? connectedEdgeIds.has(edge.id)
                     : false;
                   const dimmed = hoveredNodeId !== null && !highlighted;
-                  const labelWidth = edge.label
-                    ? Math.max(58, Array.from(edge.label).length * 7 + 16)
-                    : 0;
+                  const strokeWidth = highlighted
+                    ? 3
+                    : edge.type === "loop"
+                      ? 2.5
+                      : 2.2;
                   return (
                     <g
                       key={edge.id}
@@ -331,37 +338,63 @@ export default function PortraitProcessBoard({
                       <path
                         d={path}
                         fill="none"
+                        stroke="#ffffff"
+                        strokeWidth={strokeWidth + 3.2}
+                        strokeDasharray={edgeDash(edge.type)}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d={path}
+                        fill="none"
                         stroke={color}
-                        strokeWidth={highlighted ? 3 : edge.type === "loop" ? 2.5 : 2.2}
+                        strokeWidth={strokeWidth}
                         strokeDasharray={edgeDash(edge.type)}
                         markerEnd={`url(#portrait-arr-${edge.type})`}
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
-                      {edge.label && labelX !== undefined && labelY !== undefined && (
-                        <g>
-                          <rect
-                            x={labelX - labelWidth / 2}
-                            y={labelY - 9}
-                            width={labelWidth}
-                            height={19}
-                            rx={4}
-                            fill="#ffffff"
-                            stroke={color}
-                            strokeWidth={0.7}
-                          />
-                          <text
-                            x={labelX}
-                            y={labelY + 5}
-                            textAnchor="middle"
-                            fontSize={10}
-                            fontWeight={650}
-                            fill={color}
-                          >
-                            {edge.label}
-                          </text>
-                        </g>
-                      )}
+                    </g>
+                  );
+                })}
+                {edgePaths.map(({ edge, labelX, labelY }) => {
+                  if (!edge.label || labelX === undefined || labelY === undefined) {
+                    return null;
+                  }
+                  const color = edgeColor(edge.type);
+                  const highlighted = hoveredNodeId
+                    ? connectedEdgeIds.has(edge.id)
+                    : false;
+                  const dimmed = hoveredNodeId !== null && !highlighted;
+                  const labelWidth = Math.max(
+                    58,
+                    Array.from(edge.label).length * 7 + 16
+                  );
+                  return (
+                    <g
+                      key={`label-${edge.id}`}
+                      opacity={dimmed ? 0.12 : highlighted ? 1 : 0.96}
+                    >
+                      <rect
+                        x={labelX - labelWidth / 2}
+                        y={labelY - 9}
+                        width={labelWidth}
+                        height={19}
+                        rx={4}
+                        fill="#ffffff"
+                        stroke={color}
+                        strokeWidth={0.7}
+                      />
+                      <text
+                        x={labelX}
+                        y={labelY + 5}
+                        textAnchor="middle"
+                        fontSize={10}
+                        fontWeight={650}
+                        fill={color}
+                      >
+                        {edge.label}
+                      </text>
                     </g>
                   );
                 })}
@@ -513,6 +546,25 @@ function buildPortraitEdgePaths(
 ): PortraitEdgePath[] {
   const boardRect = board.getBoundingClientRect();
   const stageIndex = new Map(stages.map((stage, index) => [stage, index]));
+  const groupCount = Math.max(0, ...groupByLane.values()) + 1;
+  const nodeRects = new Map(
+    [...nodeElements].map(([nodeId, element]) => [
+      nodeId,
+      relativeRect(element, boardRect),
+    ])
+  );
+  const edgeRouteSlots = buildProcessEdgeRouteSlots(
+    edges,
+    new Map(
+      [...nodeById].map(([nodeId, node]) => [
+        nodeId,
+        {
+          stageIndex: stageIndex.get(node.stage) ?? 0,
+          groupIndex: groupByLane.get(node.lane) ?? 0,
+        },
+      ])
+    )
+  );
 
   return edges.flatMap((edge) => {
     const sourceNode = nodeById.get(edge.source);
@@ -521,8 +573,9 @@ function buildPortraitEdgePaths(
     const targetElement = nodeElements.get(edge.target);
     if (!sourceNode || !targetNode || !sourceElement || !targetElement) return [];
 
-    const source = relativeRect(sourceElement, boardRect);
-    const target = relativeRect(targetElement, boardRect);
+    const source = nodeRects.get(edge.source);
+    const target = nodeRects.get(edge.target);
+    if (!source || !target) return [];
     const sourceStageIndex = stageIndex.get(sourceNode.stage) ?? 0;
     const targetStageIndex = stageIndex.get(targetNode.stage) ?? 0;
     const sourceGroupIndex = groupByLane.get(sourceNode.lane) ?? 0;
@@ -534,6 +587,7 @@ function buildPortraitEdgePaths(
     const targetRow = relativeRect(targetRowElement, boardRect);
     const route = portraitRoute({
       edge,
+      slot: edgeRouteSlots.get(edge.id),
       source,
       target,
       sourceRow,
@@ -543,6 +597,9 @@ function buildPortraitEdgePaths(
       sourceGroupIndex,
       targetGroupIndex,
       stageLabelWidth,
+      groupCount,
+      boardWidth: boardRect.width,
+      nodeRects,
     });
     return [{ edge, ...route }];
   });
@@ -550,6 +607,7 @@ function buildPortraitEdgePaths(
 
 function portraitRoute({
   edge,
+  slot,
   source,
   target,
   sourceRow,
@@ -559,8 +617,22 @@ function portraitRoute({
   sourceGroupIndex,
   targetGroupIndex,
   stageLabelWidth,
+  groupCount,
+  boardWidth,
+  nodeRects,
 }: {
   edge: ProcessEdge;
+  slot?: {
+    sourcePort: number;
+    targetPort: number;
+    channel: number;
+    rail: number;
+    railSide: -1 | 1;
+    approach: number;
+    sourceChannel: number;
+    targetChannel: number;
+    backRail: number;
+  };
   source: Rect;
   target: Rect;
   sourceRow: Rect;
@@ -570,54 +642,201 @@ function portraitRoute({
   sourceGroupIndex: number;
   targetGroupIndex: number;
   stageLabelWidth: number;
+  groupCount: number;
+  boardWidth: number;
+  nodeRects: Map<string, Rect>;
 }) {
   const sourceCenterX = source.left + source.width / 2;
   const sourceCenterY = source.top + source.height / 2;
   const targetCenterX = target.left + target.width / 2;
   const targetCenterY = target.top + target.height / 2;
-  const messageOffset = edge.type === "message" ? 10 : 0;
+  const routeSlot = slot ?? {
+    sourcePort: 0,
+    targetPort: 0,
+    channel: 0,
+    rail: 0,
+    railSide: 1,
+    approach: 0,
+    sourceChannel: 0,
+    targetChannel: 0,
+    backRail: 0,
+  };
+  const sourcePortX =
+    sourceCenterX +
+    routeSlot.sourcePort * EDGE_PORT_GAP +
+    alternatingSlotOffset(routeSlot.sourceChannel) * 3 +
+    alternatingSlotOffset(routeSlot.channel) * 3;
+  const targetPortX =
+    targetCenterX +
+    routeSlot.targetPort * EDGE_PORT_GAP +
+    alternatingSlotOffset(routeSlot.targetChannel) * 3 +
+    alternatingSlotOffset(routeSlot.channel) * 3;
 
   if (sourceStageIndex === targetStageIndex && sourceGroupIndex === targetGroupIndex) {
     if (edge.type === "message") {
-      const sideX = source.right + 18;
+      const sideX = source.right + 18 + routeSlot.channel * EDGE_RAIL_GAP;
+      const sourceSideY =
+        sourceCenterY +
+        portraitSidePortOffset(routeSlot.sourcePort, routeSlot.sourceChannel);
+      const targetSideY =
+        targetCenterY +
+        portraitSidePortOffset(routeSlot.targetPort, routeSlot.targetChannel);
       return {
-        path: `M ${round(source.right)} ${round(sourceCenterY)} H ${round(sideX)} V ${round(targetCenterY)} H ${round(target.right + ARROW_CLEARANCE)}`,
+        path: `M ${round(source.right)} ${round(sourceSideY)} H ${round(sideX)} V ${round(targetSideY)} H ${round(target.right + ARROW_CLEARANCE)}`,
         labelX: sideX + 36,
-        labelY: (sourceCenterY + targetCenterY) / 2,
+        labelY: (sourceSideY + targetSideY) / 2,
       };
     }
     const downward = target.top >= source.bottom;
+    const middleY = (source.bottom + target.top) / 2;
     return {
       path: downward
-        ? `M ${round(sourceCenterX)} ${round(source.bottom)} V ${round(target.top - ARROW_CLEARANCE)}`
-        : `M ${round(source.left)} ${round(sourceCenterY)} H ${round(sourceRow.left + stageLabelWidth - 12)} V ${round(targetCenterY)} H ${round(target.left - ARROW_CLEARANCE)}`,
+        ? Math.abs(sourcePortX - targetPortX) < 1
+          ? `M ${round(sourcePortX)} ${round(source.bottom)} V ${round(target.top - ARROW_CLEARANCE)}`
+          : `M ${round(sourcePortX)} ${round(source.bottom)} V ${round(middleY)} H ${round(targetPortX)} V ${round(target.top - ARROW_CLEARANCE)}`
+        : `M ${round(source.left)} ${round(sourceCenterY)} H ${round(sourceRow.left + stageLabelWidth - 12 - routeSlot.backRail * EDGE_RAIL_GAP)} V ${round(targetCenterY)} H ${round(target.left - ARROW_CLEARANCE)}`,
       labelX: downward ? source.right + 34 : sourceRow.left + stageLabelWidth + 40,
       labelY: (sourceCenterY + targetCenterY) / 2,
     };
   }
 
   if (sourceStageIndex === targetStageIndex) {
-    const channelY = sourceRow.bottom - 19 - (edge.type === "message" ? 8 : 0);
+    const forward = targetGroupIndex > sourceGroupIndex;
+    const sourceSideY =
+      sourceCenterY +
+      portraitSidePortOffset(routeSlot.sourcePort, routeSlot.sourceChannel);
+    const targetSideY =
+      targetCenterY +
+      portraitSidePortOffset(routeSlot.targetPort, routeSlot.targetChannel);
+    const channelX = forward
+      ? target.left - 18 - routeSlot.channel * EDGE_RAIL_GAP
+      : target.right + 18 + routeSlot.channel * EDGE_RAIL_GAP;
     return {
-      path: `M ${round(sourceCenterX + messageOffset)} ${round(source.bottom)} V ${round(channelY)} H ${round(targetCenterX + messageOffset)} V ${round(target.bottom + ARROW_CLEARANCE)}`,
-      labelX: (sourceCenterX + targetCenterX) / 2,
-      labelY: channelY - 11,
+      path: forward
+        ? `M ${round(source.right)} ${round(sourceSideY)} H ${round(channelX)} V ${round(targetSideY)} H ${round(target.left - ARROW_CLEARANCE)}`
+        : `M ${round(source.left)} ${round(sourceSideY)} H ${round(channelX)} V ${round(targetSideY)} H ${round(target.right + ARROW_CLEARANCE)}`,
+      labelX: forward
+        ? (source.right + target.left) / 2
+        : (source.left + target.right) / 2,
+      labelY: (sourceSideY + targetSideY) / 2 - 11,
     };
   }
 
   if (targetStageIndex > sourceStageIndex) {
-    const channelY = sourceRow.bottom - 18 - (edge.type === "message" ? 9 : 0);
+    const channelY =
+      sourceRow.bottom - 18 - routeSlot.channel * EDGE_CHANNEL_GAP;
+    const groupWidth = (boardWidth - stageLabelWidth) / groupCount;
+    const sourceBlocked = portraitVerticalRouteBlocked(
+      sourcePortX,
+      source.bottom,
+      channelY,
+      edge,
+      nodeRects
+    );
+    const sourceSide =
+      targetGroupIndex > sourceGroupIndex
+        ? 1
+        : targetGroupIndex < sourceGroupIndex
+          ? -1
+          : routeSlot.railSide;
+    const sourceGroupLeft = stageLabelWidth + sourceGroupIndex * groupWidth;
+    const blockedRailNudge =
+      alternatingSlotOffset(routeSlot.sourceChannel) * EDGE_RAIL_GAP;
+    const sourceRailX =
+      sourceSide < 0
+        ? sourceGroupLeft + EDGE_RAIL_INSET + blockedRailNudge
+        : sourceGroupLeft +
+          groupWidth -
+          EDGE_RAIL_INSET +
+          blockedRailNudge;
+    const sourceSideY =
+      sourceCenterY +
+      portraitSidePortOffset(routeSlot.sourcePort, routeSlot.sourceChannel);
+    const sourcePath = sourceBlocked
+      ? sourceSide < 0
+        ? `M ${round(source.left)} ${round(sourceSideY)} H ${round(sourceRailX)} V ${round(channelY)}`
+        : `M ${round(source.right)} ${round(sourceSideY)} H ${round(sourceRailX)} V ${round(channelY)}`
+      : `M ${round(sourcePortX)} ${round(source.bottom)} V ${round(channelY)}`;
+    if (targetStageIndex - sourceStageIndex > 1) {
+      const targetGroupLeft = stageLabelWidth + targetGroupIndex * groupWidth;
+      const routeRailNudge =
+        alternatingSlotOffset(routeSlot.channel) * EDGE_RAIL_GAP;
+      const railX =
+        routeSlot.railSide < 0
+          ? targetGroupLeft +
+            EDGE_RAIL_INSET +
+            routeSlot.rail * EDGE_RAIL_GAP +
+            routeRailNudge
+          : targetGroupLeft +
+            groupWidth -
+            EDGE_RAIL_INSET -
+            routeSlot.rail * EDGE_RAIL_GAP +
+            routeRailNudge;
+      const targetApproachY = target.top - 20 - routeSlot.approach * 7;
+      const longSourcePath =
+        sourceBlocked && sourceGroupIndex === targetGroupIndex
+          ? routeSlot.railSide < 0
+            ? `M ${round(source.left)} ${round(sourceSideY)} H ${round(railX)} V ${round(channelY)}`
+            : `M ${round(source.right)} ${round(sourceSideY)} H ${round(railX)} V ${round(channelY)}`
+          : sourcePath;
+      return {
+        path: `${longSourcePath} H ${round(railX)} V ${round(targetApproachY)} H ${round(targetPortX)} V ${round(target.top - ARROW_CLEARANCE)}`,
+        labelX: railX,
+        labelY: (channelY + targetApproachY) / 2,
+      };
+    }
+    const targetBlocked = portraitVerticalRouteBlocked(
+      targetPortX,
+      channelY,
+      target.top - ARROW_CLEARANCE,
+      edge,
+      nodeRects
+    );
+    if (targetBlocked) {
+      const targetSide =
+        sourceGroupIndex < targetGroupIndex
+          ? -1
+          : sourceGroupIndex > targetGroupIndex
+            ? 1
+            : routeSlot.railSide;
+      const targetGroupLeft = stageLabelWidth + targetGroupIndex * groupWidth;
+      const targetRailNudge =
+        alternatingSlotOffset(routeSlot.targetChannel) * EDGE_RAIL_GAP;
+      const targetRailX =
+        targetSide < 0
+          ? targetGroupLeft + EDGE_RAIL_INSET + targetRailNudge
+          : targetGroupLeft +
+            groupWidth -
+            EDGE_RAIL_INSET +
+            targetRailNudge;
+      const targetSideY =
+        targetCenterY +
+        portraitSidePortOffset(routeSlot.targetPort, routeSlot.targetChannel);
+      return {
+        path:
+          targetSide < 0
+            ? `${sourcePath} H ${round(targetRailX)} V ${round(targetSideY)} H ${round(target.left - ARROW_CLEARANCE)}`
+            : `${sourcePath} H ${round(targetRailX)} V ${round(targetSideY)} H ${round(target.right + ARROW_CLEARANCE)}`,
+        labelX: (sourcePortX + targetRailX) / 2,
+        labelY: channelY - 11,
+      };
+    }
     return {
-      path: `M ${round(sourceCenterX + messageOffset)} ${round(source.bottom)} V ${round(channelY)} H ${round(targetCenterX + messageOffset)} V ${round(target.top - ARROW_CLEARANCE)}`,
-      labelX: (sourceCenterX + targetCenterX) / 2,
+      path: `${sourcePath} H ${round(targetPortX)} V ${round(target.top - ARROW_CLEARANCE)}`,
+      labelX: (sourcePortX + targetPortX) / 2,
       labelY: channelY - 11,
     };
   }
 
-  const railX = sourceRow.left + stageLabelWidth - 12;
-  const channelY = targetRow.bottom - 22;
+  const railX =
+    sourceRow.left +
+    stageLabelWidth -
+    12 -
+    routeSlot.backRail * EDGE_RAIL_GAP;
+  const channelY =
+    targetRow.bottom - 22 - routeSlot.channel * EDGE_CHANNEL_GAP;
   return {
-    path: `M ${round(source.left)} ${round(sourceCenterY)} H ${round(railX)} V ${round(channelY)} H ${round(targetCenterX)} V ${round(target.bottom + ARROW_CLEARANCE)}`,
+    path: `M ${round(source.left)} ${round(sourceCenterY + portraitSidePortOffset(routeSlot.sourcePort, routeSlot.sourceChannel))} H ${round(railX)} V ${round(channelY)} H ${round(targetPortX)} V ${round(target.bottom + ARROW_CLEARANCE)}`,
     labelX: railX + 42,
     labelY: (sourceCenterY + channelY) / 2,
   };
@@ -644,6 +863,26 @@ function relativeRect(element: HTMLElement, boardRect: DOMRect): Rect {
     width: rect.width,
     height: rect.height,
   };
+}
+
+function portraitVerticalRouteBlocked(
+  x: number,
+  startY: number,
+  endY: number,
+  edge: ProcessEdge,
+  nodeRects: Map<string, Rect>
+) {
+  const top = Math.min(startY, endY);
+  const bottom = Math.max(startY, endY);
+  return [...nodeRects].some(([nodeId, node]) => {
+    if (nodeId === edge.source || nodeId === edge.target) return false;
+    return (
+      x > node.left - 3 &&
+      x < node.right + 3 &&
+      bottom > node.top - 3 &&
+      top < node.bottom + 3
+    );
+  });
 }
 
 function fallbackGroups(lanes: string[]): ProcessLaneGroup[] {
@@ -684,4 +923,14 @@ function edgeDash(type: ProcessEdge["type"]) {
 
 function round(value: number) {
   return Math.round(value * 10) / 10;
+}
+
+function alternatingSlotOffset(index: number) {
+  if (index === 0) return 0;
+  const magnitude = Math.ceil(index / 2);
+  return index % 2 === 1 ? -magnitude : magnitude;
+}
+
+function portraitSidePortOffset(port: number, channel: number) {
+  return port * 8 + channel * 1.5;
 }

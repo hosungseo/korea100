@@ -201,19 +201,36 @@ function FullProcessGrid({
                   ? `${markerPrefix}-selected-loop`
                   : `${markerPrefix}-selected`
                 : `${markerPrefix}-${edge.type}`;
+              const strokeWidth = selected ? 1.8 : 1.15;
+              const strokeDasharray =
+                edge.type === "loop"
+                  ? "5 4"
+                  : edge.type === "message"
+                    ? "2 4"
+                    : undefined;
               return (
-                <path
+                <g
                   key={edge.id}
                   data-source={edge.source}
                   data-target={edge.target}
-                  d={path}
-                  fill="none"
-                  stroke={color}
-                  strokeWidth={selected ? 1.8 : 1.15}
-                  strokeDasharray={edge.type === "loop" ? "5 4" : edge.type === "message" ? "2 4" : undefined}
-                  markerEnd={`url(#${marker})`}
                   opacity={selected ? 1 : 0.9}
-                />
+                >
+                  <path
+                    d={path}
+                    fill="none"
+                    stroke="#ffffff"
+                    strokeWidth={strokeWidth + 2.8}
+                    strokeDasharray={strokeDasharray}
+                  />
+                  <path
+                    d={path}
+                    fill="none"
+                    stroke={color}
+                    strokeWidth={strokeWidth}
+                    strokeDasharray={strokeDasharray}
+                    markerEnd={`url(#${marker})`}
+                  />
+                </g>
               );
             })}
           </svg>
