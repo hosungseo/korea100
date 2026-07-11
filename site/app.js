@@ -33,7 +33,7 @@ const institutions = [
     summary: "인구감소지역 등에 재원을 배분해 지역 활력 사업을 추진하도록 하는 기금 제도입니다.",
     actors: "행정안전부, 지방자치단체, 투자계획 평가단, 지방의회, 지역 주민",
     focus: "투자계획 수립, 평가, 배분, 집행, 성과관리, 지방의회 언급과 지역정책 연계",
-    reason: "기존 지방의회ㆍ국회 API 관심사와 연결되고 홈페이지의 지역정책 독자에게 맞습니다."
+    reason: "기존 지방의회ㆍ국회 API 관심사와 연결되고 홈페이지의 지역정책 이용자에게 맞습니다."
   },
   {
     title: "정보공개청구",
@@ -78,7 +78,7 @@ const institutions = [
     summary: "국민이 보험료를 부담하고 질병ㆍ부상에 대해 보험급여를 받는 전국민 사회보험 제도입니다.",
     actors: "가입자, 사업장, 국민건강보험공단, 건강보험심사평가원, 의료기관, 보건복지부",
     focus: "자격, 보험료 부과ㆍ징수, 진료, 청구, 심사, 급여 지급, 이의신청",
-    reason: "독자 친숙도가 높고 돈의 흐름과 서비스 보장 구조를 설명하기 좋습니다."
+    reason: "이용자 친숙도가 높고 돈의 흐름과 서비스 보장 구조를 설명하기 좋습니다."
   },
   {
     title: "개인정보 영향평가",
@@ -146,9 +146,16 @@ document.querySelector(".request-form").addEventListener("submit", (event) => {
   const name = String(data.get("institution") || "").trim();
   const state = form.querySelector(".form-state");
   if (!name) {
-    state.textContent = "제도명을 입력하면 요청 초안을 저장할 수 있습니다.";
+    state.textContent = "알고 싶은 제도명을 입력해주세요.";
     return;
   }
-  state.textContent = `"${name}" 요청 초안을 이 브라우저에 저장했습니다.`;
-  localStorage.setItem("institution-request-draft", JSON.stringify(Object.fromEntries(data.entries())));
+  const subject = encodeURIComponent(`[제도100] 제작 요청 — ${name}`);
+  const body = encodeURIComponent(
+    [
+      `[제도명] ${name}`,
+      `[헷갈리는 지점] ${String(data.get("pain") || "")}`,
+      `[사용자 유형] ${String(data.get("reader") || "")}`,
+    ].join("\n"),
+  );
+  window.location.href = `mailto:hosung.seo2026@gmail.com?subject=${subject}&body=${body}`;
 });

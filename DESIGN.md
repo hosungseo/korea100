@@ -125,9 +125,9 @@ All spacing derives from 4px.
 
 ### Request Form
 
-- Structure: 제도명, 궁금한 지점, 독자 유형, submit.
-- States: default, submitting, confirmed by HTTP success, and recoverable error.
-- When no endpoint is configured, retain a local draft and expose email and public issue alternatives.
+- Structure: 제도명, 궁금한 지점, 이용자 유형, submit.
+- States: default, validation error, and mail-app handoff.
+- Build a `mailto:` draft in memory without sending form values to a server or browser storage.
 - Accessibility: all inputs have visible labels.
 
 ## 6. Motion & Interaction

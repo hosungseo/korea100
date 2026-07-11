@@ -16,7 +16,7 @@ const READER_TYPES = [
   "행정학·정책학 학생",
   "공시생",
   "로스쿨 학생",
-  "일반 독자",
+  "일반 이용자",
   "기타",
 ];
 
@@ -85,7 +85,7 @@ export default function RequestPage() {
             textTransform: "uppercase",
           }}
         >
-          독자 참여
+          이용자 참여
         </div>
         <h1 className="request-page-title">다음 제도 제작 요청</h1>
         <p
@@ -154,7 +154,7 @@ export default function RequestPage() {
             />
           </FormField>
 
-          <FormField label="독자 유형" htmlFor="readerType">
+          <FormField label="이용자 유형" htmlFor="readerType">
             <select
               className="request-input"
               id="readerType"
@@ -329,7 +329,7 @@ function buildRequestMailto(form: FormState) {
       "",
       `제도명: ${form.institutionName}`,
       `왜 궁금한지: ${form.whyInterested}`,
-      `독자 유형: ${form.readerType || "미선택"}`,
+      `이용자 유형: ${form.readerType || "미선택"}`,
       `가장 헷갈리는 지점: ${form.confusingPoint || "미선택"}`,
     ].join("\n"),
   );

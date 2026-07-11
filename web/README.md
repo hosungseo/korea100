@@ -30,4 +30,4 @@ npm run build
 - `npm run sync:sources -- --write`: 공식 출처 메타데이터 갱신, `LAW_OC` 필요
 - `npm run verify:articles -- --write`: 명시 조문 존재 여부 재검증, `LAW_OC` 필요
 
-배포 환경변수와 수집 API 계약은 `../docs/operations.md`를 따른다.
+배포 환경변수와 개인정보 미저장 요청 흐름은 `../docs/operations.md`를 따른다.
