@@ -20,74 +20,6 @@
   },
   "results": [
     {
-      "slug": "government-organization",
-      "verificationStatus": "needs-review",
-      "processWarnings": 0,
-      "findings": [
-        {
-          "rule": "article-descriptive",
-          "node": "P02",
-          "detail": "각 부처 직제 → \"하부조직·분장사무·정원 관련 조문\""
-        },
-        {
-          "rule": "article-descriptive",
-          "node": "P04",
-          "detail": "행정기관의 조직과 정원에 관한 통칙 → \"직제 협의 관련 조문\""
-        },
-        {
-          "rule": "article-descriptive",
-          "node": "P05",
-          "detail": "행정기관의 조직과 정원에 관한 통칙 → \"기구·정원 관리 기준\""
-        },
-        {
-          "rule": "article-descriptive",
-          "node": "P06",
-          "detail": "국가공무원 총정원령 → \"총정원 관리 관련 조문\""
-        },
-        {
-          "rule": "article-descriptive",
-          "node": "P07",
-          "detail": "행정기관의 조직과 정원에 관한 통칙 → \"직제 협의 관련 조문\""
-        },
-        {
-          "rule": "article-descriptive",
-          "node": "P08",
-          "detail": "행정기관의 조직과 정원에 관한 통칙 → \"직제 협의 관련 조문\""
-        },
-        {
-          "rule": "article-descriptive",
-          "node": "P09",
-          "detail": "법제업무 운영규정 → \"법령안 심사 관련 조문\""
-        },
-        {
-          "rule": "article-descriptive",
-          "node": "P10",
-          "detail": "차관회의 규정 → \"차관회의 심의 관련 조문\""
-        },
-        {
-          "rule": "article-descriptive",
-          "node": "P13",
-          "detail": "법령 등 공포에 관한 법률 → \"공포 방법·시행일 관련 조문\""
-        },
-        {
-          "rule": "article-descriptive",
-          "node": "P14",
-          "detail": "행정기관의 조직과 정원에 관한 통칙 → \"조직·정원 관리 관련 조문\""
-        },
-        {
-          "rule": "article-descriptive",
-          "node": "P15",
-          "detail": "각 부처 직제 → \"정원·분장사무 관련 조문\""
-        },
-        {
-          "rule": "article-descriptive",
-          "node": "P17",
-          "detail": "각 부처 직제 시행규칙 → \"하부조직·정원 관련 조문\""
-        }
-      ],
-      "score": 27
-    },
-    {
       "slug": "mobile-id",
       "verificationStatus": "article-verified",
       "processWarnings": 0,
@@ -153,63 +85,6 @@
         }
       ],
       "score": 24
-    },
-    {
-      "slug": "ai-basic-act",
-      "verificationStatus": "needs-review",
-      "processWarnings": 0,
-      "findings": [
-        {
-          "rule": "article-descriptive",
-          "node": "P02",
-          "detail": "인공지능 기본법 시행령·고시 → \"고영향 영역·표시방법 위임사항\""
-        },
-        {
-          "rule": "article-descriptive",
-          "node": "P07",
-          "detail": "인공지능 기본법 → \"AI안전연구소 설치·기능 조항\""
-        },
-        {
-          "rule": "article-descriptive",
-          "node": "P10",
-          "detail": "인공지능 기본법 → \"안전성·신뢰성 검·인증 조항\""
-        },
-        {
-          "rule": "article-descriptive",
-          "node": "P11",
-          "detail": "인공지능 기본법 → \"검·인증 조항\""
-        },
-        {
-          "rule": "article-descriptive",
-          "node": "P13",
-          "detail": "인공지능 기본법 → \"실태조사·사실조사 조항\""
-        },
-        {
-          "rule": "article-descriptive",
-          "node": "P14",
-          "detail": "인공지능 기본법 → \"시정명령 조항\""
-        },
-        {
-          "rule": "article-descriptive",
-          "node": "P15",
-          "detail": "인공지능 기본법 → \"시정명령 이행 조항\""
-        },
-        {
-          "rule": "article-descriptive",
-          "node": "P16",
-          "detail": "인공지능 기본법 → \"과태료 조항(3천만원 이하)\""
-        },
-        {
-          "rule": "article-descriptive",
-          "node": "P17",
-          "detail": "인공지능 기본법 → \"국가인공지능위원회 조항\""
-        },
-        {
-          "rule": "outlier",
-          "detail": "meanConfidence=0.72 (전체 평균 0.80±0.03)"
-        }
-      ],
-      "score": 23
     },
     {
       "slug": "university-funding",
@@ -1126,6 +1001,18 @@
       "score": 7
     },
     {
+      "slug": "ai-basic-act",
+      "verificationStatus": "needs-review",
+      "processWarnings": 1,
+      "findings": [
+        {
+          "rule": "outlier",
+          "detail": "meanConfidence=0.72 (전체 평균 0.80±0.03)"
+        }
+      ],
+      "score": 6
+    },
+    {
       "slug": "basic-pension",
       "verificationStatus": "article-verified",
       "processWarnings": 0,
@@ -1335,6 +1222,18 @@
           "node": "P08",
           "detail": "의약품의 품목허가·신고·심사 규정 → \"자료보완 관련 조문\""
         },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 5
+    },
+    {
+      "slug": "government-organization",
+      "verificationStatus": "needs-review",
+      "processWarnings": 1,
+      "findings": [
         {
           "rule": "no-sublaw",
           "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
