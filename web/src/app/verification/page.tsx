@@ -21,6 +21,19 @@ export default function VerificationPage() {
   const needsScopeReview = institutions.filter(
     (institution) => institution.verificationStatus === "needs-review"
   ).length;
+  const verifiedReferences = institutions.reduce(
+    (sum, institution) => sum + institution.verifiedReferences,
+    0,
+  );
+  const articleReferences = institutions.reduce(
+    (sum, institution) => sum + institution.articleReferences,
+    0,
+  );
+  const sourceCount = institutions.reduce(
+    (sum, institution) => sum + institution.sourceCount,
+    0,
+  );
+  const formatCount = (value: number) => value.toLocaleString("ko-KR");
 
   return (
     <main className="verification-page">
@@ -35,11 +48,11 @@ export default function VerificationPage() {
 
       <section className="verification-stats" aria-label="검증 현황 요약">
         <div>
-          <strong>3,725/3,725</strong>
+          <strong>{`${formatCount(verifiedReferences)}/${formatCount(articleReferences)}`}</strong>
           <span>명시 조문 확인</span>
         </div>
         <div>
-          <strong>433</strong>
+          <strong>{formatCount(sourceCount)}</strong>
           <span>공식 원문 연결</span>
         </div>
         <div>

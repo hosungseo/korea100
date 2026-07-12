@@ -90,7 +90,6 @@ function Header() {
 
         <nav className="site-nav" aria-label="주요 메뉴">
           <NavLink href="/#institutions">제도 대장</NavLink>
-          <NavLink href="/verification/">현장 검증 대장</NavLink>
           <NavLink href="/request/">요청하기</NavLink>
           <span className="site-header-date">기준일 {LATEST_AS_OF_DATE}</span>
         </nav>
@@ -162,12 +161,19 @@ function Footer() {
             <br />
             법령이 개정되면 내용이 달라질 수 있습니다.
             <br />
-            오류·제보:{" "}
-            <a
-              href="mailto:hosung.seo2026@gmail.com"
+            <Link
+              href="/verification/"
               style={{ color: "var(--color-accent-dark)", textDecoration: "none" }}
             >
-              hosung.seo2026@gmail.com
+              현장 검증 대장 보기
+            </Link>
+            <br />
+            오류·제보:{" "}
+            <a
+              href="mailto:wooseongkyun@korea.kr"
+              style={{ color: "var(--color-accent-dark)", textDecoration: "none" }}
+            >
+              wooseongkyun@korea.kr
             </a>
           </p>
         </div>

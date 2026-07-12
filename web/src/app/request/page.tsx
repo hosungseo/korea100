@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const CONTACT_EMAIL = "hosung.seo2026@gmail.com";
+const CONTACT_EMAIL = "wooseongkyun@korea.kr";
 const LEGACY_DRAFT_KEYS = [
   "korea100_request_draft",
   "korea100_notify_draft",

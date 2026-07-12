@@ -261,8 +261,8 @@ function verificationMeta(institution: Institution) {
     return {
       tone: "verified",
       label: article
-        ? `조문 검증 ${article.verifiedReferences}/${article.articleReferences}`
-        : "조문 검증 완료",
+        ? `조문 자동대조 ${article.verifiedReferences}/${article.articleReferences}`
+        : "조문 자동대조 완료",
     };
   }
   if (institution.verification?.status === "source-linked") {

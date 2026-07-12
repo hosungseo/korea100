@@ -92,7 +92,7 @@ function CompareDialog({
     { label: "행위자 레인", render: (item) => item.processLaneCount },
     { label: "판단 게이트", render: (item) => item.processGatewayCount },
     {
-      label: "조문 검증",
+      label: "조문 자동대조",
       render: (item) =>
         item.articleReferences
           ? `${item.verifiedReferences}/${item.articleReferences}건 확인`

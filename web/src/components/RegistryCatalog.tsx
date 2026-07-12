@@ -10,10 +10,7 @@ import {
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { trackEvent } from "@/lib/client-events";
-import type {
-  InstitutionSummary,
-  SourceVerificationStatus,
-} from "@/lib/types";
+import type { InstitutionSummary } from "@/lib/types";
 import CompareTray from "./CompareTray";
 import styles from "./RegistryCatalog.module.css";
 
@@ -22,8 +19,6 @@ interface RegistryCatalogProps {
   categoryOrder: string[];
 }
 
-type SortMode = "priority" | "name";
-type VerificationFilter = "all" | SourceVerificationStatus;
 type SearchIndex = Record<string, string>;
 
 const PAGE_SIZE = 12;
@@ -31,16 +26,11 @@ const MAX_COMPARE = 3;
 const CATALOG_ASSET_BASE = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/data`;
 
 const CATEGORY_COLORS: Record<string, string> = {
-  "국토·환경·안전": "#0f9f72",
-  "재정과 예산": "#315a78",
-  "민원·권리구제·참여": "#8a5a2b",
-  "국가 운영과 권력 통제": "#4b5563",
-  "복지와 사회보험": "#b54b7b",
-  "데이터·디지털·공공서비스": "#2563eb",
-  "지방자치와 지역": "#7c3aed",
-  "노동·교육·인적자원": "#b45309",
-  "인허가·규제·산업": "#0f766e",
-  "외교·국방·치안·생활 기반": "#be123c",
+  "조달시장 진입과 참여 준비": "#0f9f72",
+  "계약방법 결정과 입찰 절차": "#315a78",
+  "계약 체결과 이행 관리": "#0f766e",
+  "대금 지급과 정산": "#b45309",
+  "제재, 분쟁, 권리구제": "#be123c",
 };
 
 export default function RegistryCatalog({
@@ -52,13 +42,6 @@ export default function RegistryCatalog({
     () => new Map(institutions.map((institution) => [institution.slug, institution])),
     [institutions],
   );
-  const types = useMemo(
-    () =>
-      [...new Set(institutions.map((institution) => institution.type))].sort(
-        (left, right) => left.localeCompare(right, "ko"),
-      ),
-    [institutions],
-  );
   const categoryCounts = useMemo(() => {
     const counts = new Map<string, number>();
     institutions.forEach((institution) => {
@@ -68,8 +51,6 @@ export default function RegistryCatalog({
   }, [institutions]);
 
   const initialCategory = searchParams.get("category");
-  const initialType = searchParams.get("type");
-  const initialVerification = searchParams.get("verification");
   const initialComparison = (searchParams.get("compare") ?? "")
     .split(",")
     .filter((slug) => institutionBySlug.has(slug))
@@ -81,20 +62,6 @@ export default function RegistryCatalog({
       ? initialCategory
       : "전체",
   );
-  const [activeType, setActiveType] = useState(() =>
-    initialType && types.includes(initialType) ? initialType : "전체 유형",
-  );
-  const [verificationFilter, setVerificationFilter] =
-    useState<VerificationFilter>(() =>
-      initialVerification === "article-verified" ||
-      initialVerification === "source-linked" ||
-      initialVerification === "needs-review"
-        ? initialVerification
-        : "all",
-    );
-  const [sort, setSort] = useState<SortMode>(() =>
-    searchParams.get("sort") === "name" ? "name" : "priority",
-  );
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [selectedSlugs, setSelectedSlugs] = useState(initialComparison);
   const [searchIndex, setSearchIndex] = useState<SearchIndex | null>(null);
@@ -104,16 +71,9 @@ export default function RegistryCatalog({
     const url = new URL(window.location.href);
     updateUrlParam(url, "q", query.trim());
     updateUrlParam(url, "category", activeCategory === "전체" ? "" : activeCategory);
-    updateUrlParam(url, "type", activeType === "전체 유형" ? "" : activeType);
-    updateUrlParam(
-      url,
-      "verification",
-      verificationFilter === "all" ? "" : verificationFilter,
-    );
-    updateUrlParam(url, "sort", sort === "priority" ? "" : sort);
     updateUrlParam(url, "compare", selectedSlugs.join(","));
     window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
-  }, [activeCategory, activeType, query, selectedSlugs, sort, verificationFilter]);
+  }, [activeCategory, query, selectedSlugs]);
 
   useEffect(() => {
     if (!query.trim() || searchIndex) return;
@@ -154,26 +114,11 @@ export default function RegistryCatalog({
         const searchText = searchIndex?.[institution.slug] ?? basicText;
         return (
           (activeCategory === "전체" || institution.category === activeCategory) &&
-          (activeType === "전체 유형" || institution.type === activeType) &&
-          (verificationFilter === "all" ||
-            institution.verificationStatus === verificationFilter) &&
           tokens.every((token) => searchText.includes(token))
         );
       })
-      .sort((left, right) =>
-        sort === "name"
-          ? left.name.localeCompare(right.name, "ko")
-          : left.priority - right.priority,
-      );
-  }, [
-    activeCategory,
-    activeType,
-    institutions,
-    query,
-    searchIndex,
-    sort,
-    verificationFilter,
-  ]);
+      .sort((left, right) => left.priority - right.priority);
+  }, [activeCategory, institutions, query, searchIndex]);
 
   useEffect(() => {
     const normalizedQuery = query.trim();
@@ -228,7 +173,7 @@ export default function RegistryCatalog({
             id="registry-search"
             type="search"
             value={query}
-            placeholder="제도명 · 법령 · 기관 · 문서 · 병목"
+            placeholder="제도"
             onChange={(event) => {
               setQuery(event.target.value);
               resetVisible();
@@ -254,13 +199,13 @@ export default function RegistryCatalog({
           <RegistryStat value={institutions.length} label="제도" />
           <RegistryStat value={stats.nodes} label="절차 노드" />
           <RegistryStat value={stats.articles} label="조문 인용 대조" />
-          <RegistryStat value={stats.verified} label="조문 검증 완료" accent />
+          <RegistryStat value={stats.verified} label="조문 자동대조 완료" accent />
         </div>
       </div>
 
       <div className={styles.body}>
-        <aside className={styles.rail} aria-label="제도 필터">
-          <div className={styles.railHeading}>분야</div>
+        <aside className={styles.rail} aria-label="주제별 바로가기">
+          <div className={styles.railHeading}>주제별 바로가기</div>
           <div className={styles.railGroups}>
             {["전체", ...categoryOrder].map((category) => {
               const active = activeCategory === category;
@@ -293,56 +238,6 @@ export default function RegistryCatalog({
             })}
           </div>
 
-          <fieldset className={styles.verificationFilter}>
-            <legend>검증 상태</legend>
-            <FilterRadio
-              label="전체"
-              count={institutions.length}
-              active={verificationFilter === "all"}
-              color="#5d6b63"
-              onClick={() => {
-                setVerificationFilter("all");
-                resetVisible();
-              }}
-            />
-            <FilterRadio
-              label="조문 검증 완료"
-              count={stats.verified}
-              active={verificationFilter === "article-verified"}
-              color="#0f9f72"
-              onClick={() => {
-                setVerificationFilter("article-verified");
-                resetVisible();
-              }}
-            />
-            <FilterRadio
-              label="범위 지정 필요"
-              count={institutions.filter((item) => item.verificationStatus === "needs-review").length}
-              active={verificationFilter === "needs-review"}
-              color="#c78116"
-              onClick={() => {
-                setVerificationFilter("needs-review");
-                resetVisible();
-              }}
-            />
-          </fieldset>
-
-          <label className={styles.typeFilter}>
-            <span>제도 유형</span>
-            <select
-              value={activeType}
-              onChange={(event) => {
-                setActiveType(event.target.value);
-                resetVisible();
-                trackEvent("catalog_type", { type: event.target.value });
-              }}
-            >
-              <option>전체 유형</option>
-              {types.map((type) => (
-                <option key={type}>{type}</option>
-              ))}
-            </select>
-          </label>
         </aside>
 
         <div className={styles.tablePane}>
@@ -351,28 +246,6 @@ export default function RegistryCatalog({
               <strong>{activeCategory === "전체" ? "제도 대장" : activeCategory}</strong>
               <span> · {filtered.length}개 결과</span>
             </p>
-            <div className={styles.sortControl} role="group" aria-label="정렬 방식">
-              <button
-                type="button"
-                aria-pressed={sort === "priority"}
-                onClick={() => {
-                  setSort("priority");
-                  resetVisible();
-                }}
-              >
-                우선순위
-              </button>
-              <button
-                type="button"
-                aria-pressed={sort === "name"}
-                onClick={() => {
-                  setSort("name");
-                  resetVisible();
-                }}
-              >
-                가나다
-              </button>
-            </div>
           </div>
 
           {filtered.length === 0 ? (
@@ -389,9 +262,7 @@ export default function RegistryCatalog({
                       <th scope="col">NO</th>
                       <th scope="col">제도</th>
                       <th scope="col">유형</th>
-                      <th scope="col">분야</th>
-                      <th scope="col">조문검증</th>
-                      <th scope="col">노드</th>
+                      <th scope="col">조문 대조</th>
                       <th scope="col">비교</th>
                     </tr>
                   </thead>
@@ -472,28 +343,6 @@ function RegistryStat({
   );
 }
 
-function FilterRadio({
-  label,
-  count,
-  active,
-  color,
-  onClick,
-}: {
-  label: string;
-  count: number;
-  active: boolean;
-  color: string;
-  onClick: () => void;
-}) {
-  return (
-    <button type="button" aria-pressed={active} onClick={onClick}>
-      <i style={{ background: color }} aria-hidden="true" />
-      <span>{label}</span>
-      <strong>{count}</strong>
-    </button>
-  );
-}
-
 function RegistryRow({
   institution,
   selected,
@@ -529,15 +378,11 @@ function RegistryRow({
       </td>
       <td>{institution.type}</td>
       <td>
-        <span className={styles.categoryBadge}>{shortCategory(institution.category)}</span>
-      </td>
-      <td>
         <span className={styles.verificationLabel} data-tone={verification.tone}>
           <i aria-hidden="true" />
           {verification.label}
         </span>
       </td>
-      <td className={styles.nodeCell}>{institution.processNodeCount}</td>
       <td className={styles.compareCell}>
         <input
           type="checkbox"
@@ -576,7 +421,7 @@ function MobileRegistryRow({
         </span>
         <span className={styles.mobileDescription}>{institution.oneLiner}</span>
         <span className={styles.mobileMeta}>
-          {institution.type} · 노드 {institution.processNodeCount} · {verification.label}
+          {institution.type} · {verification.label}
         </span>
       </Link>
       <input
@@ -592,22 +437,12 @@ function MobileRegistryRow({
 
 function verificationMeta(institution: InstitutionSummary) {
   if (institution.verificationStatus === "article-verified") {
-    return { label: "검증 완료", tone: "verified" };
+    return { label: "자동대조 완료", tone: "verified" };
   }
   if (institution.verificationStatus === "source-linked") {
     return { label: "원문 연결", tone: "linked" };
   }
   return { label: "범위 지정", tone: "review" };
-}
-
-function shortCategory(category: string) {
-  const short: Record<string, string> = {
-    "데이터·디지털·공공서비스": "데이터·디지털",
-    "국가 운영과 권력 통제": "권력 통제",
-    "민원·권리구제·참여": "권리구제·참여",
-    "외교·국방·치안·생활 기반": "외교·국방·치안",
-  };
-  return short[category] ?? category;
 }
 
 function updateUrlParam(url: URL, key: string, value: string) {
