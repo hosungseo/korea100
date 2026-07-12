@@ -20,6 +20,9 @@ const WRITE = process.argv.includes("--write");
 const CONCURRENCY = Number(process.env.ARTICLE_VERIFY_CONCURRENCY ?? 6);
 const VERIFIED_AT = process.env.ARTICLE_VERIFY_DATE ?? localDate("Asia/Seoul");
 const CLI = process.env.KOREAN_LAW_CLI ?? "korean-law";
+// Windows에서는 npm 전역 CLI가 .cmd 셔틀이라 execFile로 직접 실행할 수 없다.
+// KOREAN_LAW_CLI에 JS 진입점 경로를 주면 node로 실행한다.
+const CLI_IS_SCRIPT = /\.(?:mjs|cjs|js)$/i.test(CLI);
 const ARTICLE_BATCH_SIZE = 40;
 
 if (!process.env.LAW_OC?.trim()) {
@@ -105,11 +108,15 @@ function chunks(values, size) {
 
 async function runCli(args) {
   try {
-    const { stdout } = await execFileAsync(CLI, args, {
-      env: process.env,
-      maxBuffer: 24 * 1024 * 1024,
-      timeout: 60_000,
-    });
+    const { stdout } = await execFileAsync(
+      CLI_IS_SCRIPT ? process.execPath : CLI,
+      CLI_IS_SCRIPT ? [CLI, ...args] : args,
+      {
+        env: process.env,
+        maxBuffer: 24 * 1024 * 1024,
+        timeout: 60_000,
+      },
+    );
     return { ok: true, output: stdout };
   } catch (error) {
     const output = [error.stdout, error.stderr].filter((value) => typeof value === "string").join("\n");

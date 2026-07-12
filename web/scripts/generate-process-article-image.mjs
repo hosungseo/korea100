@@ -12,11 +12,6 @@ const webRoot = path.resolve(__dirname, "..");
 const dataDir = path.join(webRoot, "data/institutions");
 const manifestPath = path.join(webRoot, "../docs/institutions-100-manifest.json");
 const outputDir = path.join(webRoot, "public/exports/process-maps");
-const legacyEiaPath = path.join(
-  webRoot,
-  "public/exports/environmental-impact-assessment-process-map.png"
-);
-
 const WIDTH = 1800;
 const HEIGHT = 2400;
 const GRID_LEFT = 38;
@@ -129,8 +124,6 @@ if (generated.length !== manifest.length) {
   );
 }
 
-const eiaOutput = path.join(outputDir, "environmental-impact-assessment.png");
-await fs.copyFile(eiaOutput, legacyEiaPath);
 console.log(`세로형 업무구조도 PNG 생성: ${generated.length}개 (${WIDTH}x${HEIGHT})`);
 console.log(
   `텍스트 레이아웃 검증: 노드 ${generated.reduce((sum, item) => sum + item.audit.nodes, 0)}개 · ` +
