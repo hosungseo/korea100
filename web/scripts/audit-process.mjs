@@ -24,7 +24,7 @@ const AUDIT_DIR = path.join(REPO_DIR, "docs", "audits");
 
 // 제12조 / 제12조의3 / 제12조제2항 / 부칙 / 별표1 / 조약 제2082호 — anything else is suspect.
 // 조약(서한교환·의정서 등)은 조문 체계가 없어 조약번호 인용이 정식 형식이다.
-const ARTICLE_OK = /(제\d+조(의\d+)?|부칙|별표\s*\d*|조약\s*제\d+호)/;
+const ARTICLE_OK = /(제\d+조(의\d+)?|부칙|별표\s*\d*|조약\s*제\d+호|일련번호\s*\d+|(예규|고시|훈령|지침|공고)\s*제[\d-]+호)/;
 
 const files = fs
   .readdirSync(DATA_DIR)
