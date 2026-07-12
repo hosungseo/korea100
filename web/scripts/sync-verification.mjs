@@ -18,6 +18,9 @@ const CHECK = process.argv.includes("--check");
 const CONCURRENCY = Number(process.env.SOURCE_SYNC_CONCURRENCY ?? 6);
 const VERIFIED_AT = process.env.SOURCE_SYNC_DATE ?? localDate("Asia/Seoul");
 const CLI = process.env.KOREAN_LAW_CLI ?? "korean-law";
+// Windows에서는 npm 전역 CLI가 .cmd 셔틀이라 execFile로 직접 실행할 수 없다.
+// KOREAN_LAW_CLI에 JS 진입점 경로를 주면 node로 실행한다.
+const CLI_IS_SCRIPT = /\.(?:mjs|cjs|js)$/i.test(CLI);
 
 if (!process.env.LAW_OC?.trim()) {
   throw new Error("LAW_OC 환경변수가 없어 출처 동기화를 중단합니다. 기존 검증 파일은 변경하지 않았습니다.");
@@ -138,11 +141,15 @@ class CliExecutionError extends Error {}
 
 async function runCli(args) {
   try {
-    const { stdout } = await execFileAsync(CLI, args, {
-      env: process.env,
-      maxBuffer: 4 * 1024 * 1024,
-      timeout: 30_000,
-    });
+    const { stdout } = await execFileAsync(
+      CLI_IS_SCRIPT ? process.execPath : CLI,
+      CLI_IS_SCRIPT ? [CLI, ...args] : args,
+      {
+        env: process.env,
+        maxBuffer: 4 * 1024 * 1024,
+        timeout: 30_000,
+      },
+    );
     return stdout;
   } catch (error) {
     const detail = [error.stdout, error.stderr]

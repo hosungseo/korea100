@@ -80,10 +80,10 @@
   "등록 절차 관련 수수료 부과 여부와 근거(운영 확인)"
  ],
  "verification": {
-  "status": "needs-review",
+  "status": "article-verified",
   "verifiedAt": "2026-07-12",
-  "method": "국가법령정보센터 공개 웹 원문 열람 수동 대조 (Open API 재대조 대기)",
-  "scope": "법적 근거 3건 중 법령 2건은 현행 원문 열람과 기존 검증 식별자로 연결했다. 캔버스와 절차 노드의 명시 조문 42건은 2026-07-12 열람한 현행 원문(sources/pilot-bidder-registration-2026-07-12/)에서 수동으로 존재를 확인했다. 행정규칙 1건의 Open API 식별자 연결과 전체 조문 자동 대조가 남아 있어 needs-review로 둔다.",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 3건 중 공식 원문 3건을 연결했다. 캔버스와 절차 노드의 명시 조문 40건 가운데 40건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
    "현행 시행규칙·시행령 원문은 소관 부처를 재정경제부(재정경제부령)로 표기한다(2026-01-02 타법개정 반영).",
    "국가종합전자조달시스템 입찰참가자격등록규정은 고시 제30조에 따라 차세대 나라장터 개통일 기준 3년 주기 재검토 대상이다."
@@ -110,24 +110,25 @@
     "promulgatedOn": "2026-01-02",
     "effectiveOn": "2026-01-02",
     "officialUrl": "https://law.go.kr/법령/국가를당사자로하는계약에관한법률시행규칙"
-   }
-  ],
-  "unresolved": [
+   },
    {
     "law": "국가종합전자조달시스템 입찰참가자격등록규정",
     "kind": "고시·지침",
-    "reasonCode": "title-needs-confirmation",
-    "reason": "공식 제명과 발령번호(조달청고시 제2026-6호, 시행 2026-01-23)는 국가법령정보센터 공개 웹에서 확인했으나, Open API 행정규칙 ID·일련번호 연결과 조문 자동 대조가 완료되지 않았다.",
-    "nextStep": "LAW_OC 키 확보 후 sync:sources와 verify:articles를 실행해 행정규칙 식별자를 연결하고 조문을 기계 대조한다."
+    "sourceType": "admin-rule",
+    "officialName": "국가종합전자조달시스템 입찰참가자격등록규정",
+    "adminRuleId": "35401",
+    "adminRuleSerial": "2100000274756",
+    "promulgatedOn": "2026-01-23",
+    "officialUrl": "https://law.go.kr/행정규칙/국가종합전자조달시스템입찰참가자격등록규정"
    }
   ],
   "articleVerification": {
    "checkedAt": "2026-07-12",
-   "method": "현행 원문 공개 웹 열람 수동 대조 (자동 대조 대기)",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
    "citationEntries": 24,
    "explicitCitationEntries": 24,
-   "articleReferences": 42,
-   "verifiedReferences": 42,
+   "articleReferences": 40,
+   "verifiedReferences": 40,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }
