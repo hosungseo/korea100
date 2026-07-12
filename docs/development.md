@@ -34,6 +34,11 @@ npm run build
 - 공식 출처와 미해결 사유 코드의 완전성
 - 현장 검증 큐의 ID, 제도 참조, 필수 필드와 집계
 
+### 검증 방법론
+
+내용 오류를 찾는 5단계 방법론(오류 유형학, L0~L4 깔때기, 판정 원칙, 실행 레시피)은
+[docs/verification-methodology.md](verification-methodology.md)에 정리돼 있다.
+
 ### 내용 감사 (audit-process.mjs)
 
 스키마 검증과 별개로, 내용 오류 후보를 기계적으로 찾는 감사 스크립트가 있습니다.
