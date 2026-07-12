@@ -1,0 +1,323 @@
+{
+ "slug": "nationality-acquisition-loss",
+ "name": "국적 취득·상실(귀화 포함)",
+ "oneLiner": "국적 취득·상실(귀화 포함)의 신청·심사·결정·사후관리 절차",
+ "type": "귀화·국적변동형",
+ "priority": 257,
+ "whyFirst": "국적 취득·상실(귀화 포함)의 행위자와 결정 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "국적 취득·상실(귀화 포함)은(는) 귀화·국적변동 요건 확인 → 신청·신고 제출 → 신원·생계·품행 조사 → 법무부 심사 → 귀화 허가 또는 국적상실 확인 → 외국국적 정리·등록 → 국적변동 통지·관리로 이어지는 공적 절차다.",
+  "stakeholders": "신청인, 출입국·외국인관서, 법무부, 관계기관",
+  "legalBasis": [
+   {
+    "law": "국적법",
+    "articles": "제5조(일반귀화), 제6조(간이귀화), 제10조(국적취득자의 외국국적 포기), 제12조(국적상실), 제14조(국적이탈)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "출입국·외국인관서",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "법무부",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "관계기관",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "귀화·국적변동 요건 확인",
+   "신청·신고 제출",
+   "신원·생계·품행 조사",
+   "법무부 심사",
+   "귀화 허가 또는 국적상실 확인",
+   "외국국적 정리·등록",
+   "국적변동 통지·관리"
+  ],
+  "moneyFlow": "수수료·복무·지원 범위는 법령과 개인의 사실관계에 따라 달라질 수 있다.",
+  "docsFlow": "신청·신고 기록 → 조사·심사 자료 → 결정·통지 → 이행·복무 기록 → 사후관리로 이어진다.",
+  "bottlenecks": [
+   "자격·사유 증빙",
+   "관계기관 자료 연계",
+   "결정 이후 변동 관리"
+  ],
+  "reformPoints": [
+   "처리상태 안내 강화",
+   "요건·기한 가독성 개선",
+   "온라인 보완 경로 명확화"
+  ]
+ },
+ "related": [
+  "체류자격 변경·허가",
+  "사증(비자) 발급·연장",
+  "외국인등록"
+ ],
+ "fieldVerification": [
+  "실제 온라인·방문 접수 경로",
+  "기관별 처리기한·서식",
+  "개별 사건별 세부 운영기준"
+ ],
+ "process": {
+  "institution_name": "국적 취득·상실(귀화 포함)",
+  "law_name": "국적법",
+  "lanes": [
+   "신청인",
+   "출입국·외국인관서",
+   "법무부",
+   "관계기관"
+  ],
+  "stages": [
+   "G0 준비",
+   "G1 신청·접수",
+   "G2 조사·심사",
+   "G3 결정",
+   "G4 이행·복무",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "귀화·국적변동 요건 확인",
+    "lane": "신청인",
+    "stage": "G0 준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "신청인",
+    "action": "귀화·국적변동 요건 확인",
+    "output_documents": [
+     "귀화·국적변동 요건 확인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국적법",
+      "article": "제5조",
+      "text": "국적법 제5조에 따른 귀화·국적변동 요건 확인 단계"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "신청·신고 제출",
+    "lane": "출입국·외국인관서",
+    "stage": "G0 준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "출입국·외국인관서",
+    "action": "신청·신고 제출",
+    "output_documents": [
+     "신청·신고 제출 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국적법",
+      "article": "제5조",
+      "text": "국적법 제5조에 따른 신청·신고 제출 단계"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "신원·생계·품행 조사",
+    "lane": "법무부",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "법무부",
+    "action": "신원·생계·품행 조사",
+    "output_documents": [
+     "신원·생계·품행 조사 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국적법",
+      "article": "제5조",
+      "text": "국적법 제5조에 따른 신원·생계·품행 조사 단계"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "법무부 심사",
+    "lane": "관계기관",
+    "stage": "G2 조사·심사",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "관계기관",
+    "action": "법무부 심사",
+    "output_documents": [
+     "법무부 심사 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "국적법",
+      "article": "제5조",
+      "text": "국적법 제5조에 따른 법무부 심사 단계"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "귀화 허가 또는 국적상실 확인",
+    "lane": "신청인",
+    "stage": "G3 결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신청인",
+    "action": "귀화 허가 또는 국적상실 확인",
+    "output_documents": [
+     "귀화 허가 또는 국적상실 확인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국적법",
+      "article": "제5조",
+      "text": "국적법 제5조에 따른 귀화 허가 또는 국적상실 확인 단계"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "외국국적 정리·등록",
+    "lane": "출입국·외국인관서",
+    "stage": "G4 이행·복무",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "출입국·외국인관서",
+    "action": "외국국적 정리·등록",
+    "output_documents": [
+     "외국국적 정리·등록 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국적법",
+      "article": "제10조",
+      "text": "국적법 제10조에 따른 외국국적 정리·등록 단계"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "국적변동 통지·관리",
+    "lane": "법무부",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "법무부",
+    "action": "국적변동 통지·관리",
+    "output_documents": [
+     "국적변동 통지·관리 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국적법",
+      "article": "제12조",
+      "text": "국적법 제12조에 따른 국적변동 통지·관리 단계"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 신청·처분의 요건·기한은 사실관계와 하위규정에 따라 달라질 수 있다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 12건 가운데 12건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "국적법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국적법",
+    "lawId": "001435",
+    "mst": "244609",
+    "promulgatedOn": "2022-09-15",
+    "effectiveOn": "2022-10-01",
+    "officialUrl": "https://law.go.kr/법령/국적법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 8,
+   "explicitCitationEntries": 8,
+   "articleReferences": 12,
+   "verifiedReferences": 12,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}
