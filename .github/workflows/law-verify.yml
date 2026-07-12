@@ -1,0 +1,79 @@
+name: Law article verification (proxy runner)
+
+# 원격 개발 환경에서 law.go.kr 접근이 차단된 경우를 위한 우회 러너.
+# Actions 러너(외부 인터넷 가용)에서 국가법령정보센터 Open API 기계 대조를 실행하고
+# --write 모드면 결과를 트리거한 브랜치에 커밋한다.
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "check = 대조만, write = 검증 결과를 institution JSON에 반영 후 커밋"
+        type: choice
+        options: [check, write]
+        default: check
+      sync_sources:
+        description: "출처 식별자 동기화(sync:sources --write)도 함께 실행"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: law-verify-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    env:
+      LAW_OC: ${{ secrets.LAW_OC || 'wooseongkyun' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - name: Install korean-law CLI
+        run: npm install -g korean-law
+      - name: Smoke-test Open API credential
+        run: |
+          set -o pipefail
+          korean-law search_law --query "국가를 당사자로 하는 계약에 관한 법률" --display 3 2>&1 | head -40
+          korean-law get_batch_articles --mst 283877 --articles '["제7조"]' 2>&1 | head -20
+      - name: Sync official source identifiers
+        if: ${{ inputs.sync_sources }}
+        run: npm run sync:sources -- --write
+      - name: Verify article citations
+        run: |
+          if [ "${{ inputs.mode }}" = "write" ]; then
+            npm run verify:articles -- --write
+          else
+            npm run verify:articles
+          fi
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: article-verification-coverage
+          path: docs/article-verification-coverage.json
+          if-no-files-found: ignore
+      - name: Commit verification results
+        if: ${{ inputs.mode == 'write' }}
+        working-directory: .
+        run: |
+          git config user.name "law-verify-bot"
+          git config user.email "actions@github.com"
+          git add web/data docs
+          if git diff --cached --quiet; then
+            echo "no changes to commit"
+          else
+            git commit -m "chore: machine article verification via Actions runner"
+            git push origin HEAD:${{ github.ref_name }}
+          fi
