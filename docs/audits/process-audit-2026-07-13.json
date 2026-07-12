@@ -563,6 +563,23 @@
       "score": 6
     },
     {
+      "slug": "real-estate-transaction-report",
+      "verificationStatus": "article-verified",
+      "processWarnings": 3,
+      "findings": [
+        {
+          "rule": "backward-sequence",
+          "edge": "E13",
+          "detail": "P06(2) → P08(1) — loop 타입이어야 할 후보"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 6
+    },
+    {
       "slug": "resale-residence-obligation",
       "verificationStatus": "needs-review",
       "processWarnings": 2,
@@ -819,23 +836,6 @@
         {
           "rule": "empty-lane",
           "detail": "관계기관"
-        },
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
-      "score": 5
-    },
-    {
-      "slug": "real-estate-transaction-report",
-      "verificationStatus": "article-verified",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "backward-sequence",
-          "edge": "E13",
-          "detail": "P06(2) → P08(1) — loop 타입이어야 할 후보"
         },
         {
           "rule": "no-sublaw",
