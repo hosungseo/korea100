@@ -2,7 +2,7 @@
  "slug": "procurement-request",
  "name": "조달요청(중앙조달)",
  "oneLiner": "수요기관이 일정 금액 이상의 물품·공사 계약을 직접 체결하지 않고 조달청에 계약체결을 요청해 대행시키는 절차로, 요청 대상 판단부터 계약방법 협의, 대금·수수료 정산까지 이어지는 중앙조달의 관문",
- "type": "요청·대행형",
+ "type": "발주",
  "priority": 4,
  "whyFirst": "수요기관 담당자가 물품·공사 조달을 시작할 때 가장 먼저 부딪히는 갈림길이며, 금액 기준에 따른 계약요청 의무와 조달수수료 부담을 조문 대조로 검증할 필요가 큰 제도다.",
  "asOfDate": "2026-07-12",
@@ -66,7 +66,7 @@
    "조달물자를 공급·이행하고, 조달청장이 대금을 지급(또는 선급받은 대금으로 대지급)한다",
    "조달청장이 조달수수료를 계약금액 등에 따라 산정해 수요기관에 납입고지·징수한다(감면 사유 해당 시 감경·면제)"
   ],
-  "applicability": "국가기관과 그 소속 기관의 수요물자·시설공사 계약 중 조달청 계약요청 의무 대상: 물품·용역은 추정가격 1억원(외국산 물품은 미화 20만달러) 이상, 종합공사는 추정가격 30억원 이상, 전문·전기·정보통신·소방시설공사 등은 3억원 이상(조달사업법 시행령 기준, 개정으로 바뀔 수 있다). 조달청장은 대행 대가로 조달수수료를 받으며 감경·면제 사유가 있다.",
+  "applicability": "국가기관과 그 소속 기관의 수요물자·시설공사 중 조달청 계약요청 의무 대상: 물품·용역 추정가격 1억원(외국산 물품 미화 20만달러) 이상, 종합공사 30억원 이상, 전문·전기·정보통신·소방시설공사 등 3억원 이상(조달사업법 시행령).",
   "submittedDocuments": [
    {
     "actor": "수요기관",
@@ -506,15 +506,48 @@
   "warnings": []
  },
  "verification": {
-  "status": "needs-review",
-  "verifiedAt": "2026-07-12",
-  "method": "공개 웹 검색(WebSearch) 교차 대조 — 국가법령정보센터 원문 기계 대조(LAW_OC) 미실시",
-  "scope": "조달사업법 제11조(계약체결의 요청)·제12조(제3자를 위한 단가계약)·제15조(대금의 지급)·제16조(수수료)의 취지와 요청 예외 사유는 CaseNote·법령 포털 검색 스니펫으로 교차 확인했다. 계약요청 의무 금액(수요물자 1억원/외국산 20만달러, 종합공사 30억원, 전문공사 등 3억원)과 공사 집행계획 1월 20일 제출 기한은 값 자체는 확인했으나 시행령·시행규칙 조문 번호가 검색 결과에서 상충해 특정하지 못했다. 조달청 시설공사 계약업무 처리규정 등 내부규정과 조달수수료 고시 요율은 원문 식별자를 연결하지 못했다. 국가법령정보센터 원문 대조로 시행령·시행규칙 조문 번호와 현행 수치를 확정하는 절차가 남아 있다.",
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 5건 중 공식 원문 5건을 연결했다. 캔버스와 절차 노드의 명시 조문 16건 가운데 16건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
    "2026년 정부조직 개편으로 계약 관계 법령의 부처 표기는 재정경제부장관으로 볼 수 있어 기획재정부장관(재정경제부장관)으로 병기했다.",
    "금액 기준은 조달사업법 시행령, 조달수수료 요율은 조달청 고시로 별도 관리되며 개정 시 수치가 바뀔 수 있다."
   ],
   "sources": [
+   {
+    "law": "조달사업에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "조달사업에 관한 법률",
+    "lawId": "000705",
+    "mst": "277155",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/조달사업에관한법률"
+   },
+   {
+    "law": "조달사업에 관한 법률 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "조달사업에 관한 법률 시행령",
+    "lawId": "004862",
+    "mst": "280891",
+    "promulgatedOn": "2025-12-30",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/조달사업에관한법률시행령"
+   },
+   {
+    "law": "조달사업에 관한 법률 시행규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "조달사업에 관한 법률 시행규칙",
+    "lawId": "008200",
+    "mst": "282675",
+    "promulgatedOn": "2026-01-02",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/조달사업에관한법률시행규칙"
+   },
    {
     "law": "국가를 당사자로 하는 계약에 관한 법률",
     "kind": "법률",
@@ -525,47 +558,27 @@
     "promulgatedOn": "2026-03-10",
     "effectiveOn": "2026-06-11",
     "officialUrl": "https://law.go.kr/법령/국가를당사자로하는계약에관한법률"
-   }
-  ],
-  "unresolved": [
-   {
-    "law": "조달사업에 관한 법률",
-    "kind": "법률",
-    "reasonCode": "title-needs-confirmation",
-    "reason": "이번 세션에서 국가법령정보센터 접근 불가로 조달사업법 제11·12·15·16조의 원문 식별자를 연결하지 못했다. 조문 취지는 웹 검색으로 교차 확인했다.",
-    "nextStep": "LAW_OC 기계 대조로 공식 제명·법령 식별자와 조문 번호를 확정한다."
-   },
-   {
-    "law": "조달사업에 관한 법률 시행령",
-    "kind": "대통령령",
-    "reasonCode": "title-needs-confirmation",
-    "reason": "이번 세션에서 국가법령정보센터 접근 불가로 계약체결 요청 기준(금액)·수수료 징수 조문 번호와 원문 식별자를 미연결했다. 검색 스니펫이 조문 번호를 상충되게 제시했다.",
-    "nextStep": "LAW_OC 기계 대조로 요청 기준·수수료 조문 번호와 현행 금액 수치를 확정한다."
-   },
-   {
-    "law": "조달사업에 관한 법률 시행규칙",
-    "kind": "부령",
-    "reasonCode": "title-needs-confirmation",
-    "reason": "이번 세션에서 국가법령정보센터 접근 불가로 공사 집행계획 제출(매년 1월 20일) 서식·조문 번호와 원문 식별자를 미연결했다.",
-    "nextStep": "LAW_OC 기계 대조로 시행규칙 조문 번호와 서식 근거를 확정한다."
    },
    {
     "law": "조달청 시설공사 계약업무 처리규정",
     "kind": "행정규칙",
-    "reasonCode": "internal-rule",
-    "reason": "조달청 내부 업무처리규정으로 요청 첨부서류·접수·기술검토 처리 근거이나 원문 식별자를 확보하지 못했다.",
-    "nextStep": "국가법령정보센터 행정규칙 전문조회로 규정명·발령번호를 확정한다."
+    "sourceType": "admin-rule",
+    "officialName": "조달청 시설공사 계약업무 처리규정",
+    "adminRuleId": "35101",
+    "adminRuleSerial": "2100000281276",
+    "promulgatedOn": "2026-06-26",
+    "officialUrl": "https://law.go.kr/행정규칙/조달청시설공사계약업무처리규정"
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-12",
-   "method": "공개 웹 검색(CaseNote·법령 포털 스니펫) 교차 확인, 원문 기계 대조 미실시",
-   "citationEntries": 13,
-   "explicitCitationEntries": 8,
-   "articleReferences": 15,
-   "verifiedReferences": 7,
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 21,
+   "explicitCitationEntries": 13,
+   "articleReferences": 16,
+   "verifiedReferences": 16,
    "missingReferences": 0,
-   "uncheckableReferences": 8
+   "uncheckableReferences": 0
   }
  }
 }

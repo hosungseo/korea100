@@ -61,7 +61,7 @@ export default function OgCardPage() {
         <i aria-hidden="true" />
         <div><span>04</span><strong>문서·예산</strong></div>
         <i aria-hidden="true" />
-        <div><span>05</span><strong>병목과 개선</strong></div>
+        <div><span>05</span><strong>유의사항과 개선</strong></div>
       </section>
 
       <footer>milkbuttercheese2.github.io/How-Did-They-Do-All-That-Procurement-</footer>

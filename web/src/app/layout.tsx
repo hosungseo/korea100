@@ -3,6 +3,7 @@ import Link from "next/link";
 import Telemetry from "@/components/Telemetry";
 import { getInstitutionSummaries } from "@/lib/data";
 import pkg from "../../package.json";
+import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
 import "./globals.css";
 
 const SITE_VERSION = pkg.version;

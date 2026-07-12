@@ -2,7 +2,7 @@
  "slug": "excellent-product-designation",
  "name": "우수조달물품 지정",
  "oneLiner": "중소·중견기업의 특허·신기술 제품을 조달청이 우수제품으로 지정해 종합쇼핑몰 수의계약(제3자단가계약)으로 연결하는 판로지원 제도로, 규격·품질 심사부터 지정·고시, 사후관리·연장까지 이어진다",
- "type": "지정·인증형",
+ "type": "등록",
  "priority": 2,
  "whyFirst": "조달업체가 공공 판로 확대를 위해 가장 먼저 도전하는 지정제도이며, 지정이 수의계약·제3자단가계약이라는 계약상 혜택으로 직결되는 대표 인증형 제도다.",
  "asOfDate": "2026-07-12",
@@ -62,7 +62,7 @@
    "지정기간 중 품질·직접생산 등을 사후점검하고, 요건 위반 시 지정을 취소한다",
    "만료 전 신청이 있으면 실적·기술 등을 심사해 지정기간을 연장한다(최대 3년 범위)"
   ],
-  "applicability": "기술·품질이 뛰어나 지정 신청 자격을 갖춘 물품(특허·신기술·인증 보유 등). 지정되면 제3자단가계약과 종합쇼핑몰 등록을 통해 각 수요기관이 직접 납품요구·대금지급할 수 있으며, 계약금액·대금 지급은 국가계약법령의 일반 절차를 따른다.",
+  "applicability": "기술·품질이 뛰어나 지정 신청 자격을 갖춘 물품(특허·신기술·인증 보유 등).",
   "submittedDocuments": [
    {
     "actor": "조달업체(신청자)",
@@ -500,15 +500,47 @@
   "warnings": []
  },
  "verification": {
-  "status": "needs-review",
-  "verifiedAt": "2026-07-12",
-  "method": "공개 웹 검색(WebSearch) 교차 대조 — 국가법령정보센터 원문 기계 대조(LAW_OC) 미실시",
-  "scope": "법적 근거 4건 중 국가법령정보센터 식별자를 보유한 국가계약법 시행령 1건만 sources로 연결했고, 조달사업법·조달사업법 시행령·우수조달물품 지정관리 규정 3건은 이번 세션에서 원문 식별자를 확보하지 못해 unresolved로 남겼다. 조달사업법 제26조, 시행령 제30조·제31조·제32조, 국가계약법 시행령 제26조제1항제3호는 검색 스니펫으로 조문 번호·제명을 교차 확인했으나, 조달청 고시의 개별 조문 번호와 심사 통과점수·연장 세부는 확인하지 못해 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 4건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 20건 가운데 20건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
    "우수조달물품 지정관리 규정은 조달청고시 제2026-29호(2026.4.23. 일부개정, 2026.4.27. 시행)로 확인되나 원문 식별자(adminRuleId/Serial) 미연결.",
    "지정 통과점수(65점+신인도 5점 이내=70점)·특허 7년/실용신안 3년·연장 최대 3년 등 수치는 규정·실무 사항으로 개정 가능성이 있어 본문에서 단정하지 않고 fieldVerification로 이관."
   ],
   "sources": [
+   {
+    "law": "조달사업에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "조달사업에 관한 법률",
+    "lawId": "000705",
+    "mst": "277155",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/조달사업에관한법률"
+   },
+   {
+    "law": "조달사업에 관한 법률 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "조달사업에 관한 법률 시행령",
+    "lawId": "004862",
+    "mst": "280891",
+    "promulgatedOn": "2025-12-30",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/조달사업에관한법률시행령"
+   },
+   {
+    "law": "우수조달물품 지정관리 규정",
+    "kind": "고시·지침",
+    "sourceType": "admin-rule",
+    "officialName": "우수조달물품 지정·관리 규정",
+    "adminRuleId": "33169",
+    "adminRuleSerial": "2100000278224",
+    "promulgatedOn": "2026-04-23",
+    "officialUrl": "https://law.go.kr/행정규칙/우수조달물품지정·관리규정"
+   },
    {
     "law": "국가를 당사자로 하는 계약에 관한 법률 시행령",
     "kind": "대통령령",
@@ -521,38 +553,15 @@
     "officialUrl": "https://law.go.kr/법령/국가를당사자로하는계약에관한법률시행령"
    }
   ],
-  "unresolved": [
-   {
-    "law": "조달사업에 관한 법률",
-    "kind": "법률",
-    "reasonCode": "title-needs-confirmation",
-    "reason": "우수조달물품 지정 근거인 제26조는 CaseNote 스니펫으로 제명·조문 번호를 확인했으나, 이번 세션에서 국가법령정보센터 접근 불가로 원문 식별자(lawId/mst)를 연결하지 못했다.",
-    "nextStep": "LAW_OC 기계 대조로 공식 제명·식별자를 확정하고 현행 조문 원문을 대조한다."
-   },
-   {
-    "law": "조달사업에 관한 법률 시행령",
-    "kind": "대통령령",
-    "reasonCode": "title-needs-confirmation",
-    "reason": "제30조(우수조달물품의 지정)·제31조(우수조달공동상표의 지정)·제32조(관리)는 검색으로 조문 번호를 확인했으나, 국가법령정보센터 접근 불가로 원문 식별자를 연결하지 못했다.",
-    "nextStep": "LAW_OC 기계 대조로 식별자를 확정하고 제30조 각 항·호의 지정기준을 대조한다."
-   },
-   {
-    "law": "우수조달물품 지정관리 규정",
-    "kind": "고시·지침",
-    "reasonCode": "internal-rule",
-    "reason": "조달청 내부 고시로 개별 조문 번호가 스니펫으로 확정되지 않았고, 국가법령정보센터 접근 불가로 원문 식별자(adminRuleId/Serial)를 연결하지 못했다.",
-    "nextStep": "LAW_OC 행정규칙 조회로 식별자와 심사·기간연장·취소 조문 위치를 확정한다."
-   }
-  ],
   "articleVerification": {
-   "checkedAt": "2026-07-12",
-   "method": "공개 웹 검색(WebSearch) 스니펫으로 조문 번호·제명 교차 확인 — 원문 기계 대조(LAW_OC) 미실시",
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
    "citationEntries": 19,
    "explicitCitationEntries": 18,
    "articleReferences": 20,
-   "verifiedReferences": 17,
+   "verifiedReferences": 20,
    "missingReferences": 0,
-   "uncheckableReferences": 3
+   "uncheckableReferences": 0
   }
  }
 }

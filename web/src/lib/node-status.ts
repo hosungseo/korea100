@@ -10,7 +10,7 @@ export const NODE_STATUS_META: Record<
   done: { label: null, color: "#87938d" },
   waiting: { label: null, color: "#87938d" },
   current: { label: "핵심", color: "#087452" },
-  risk: { label: "병목", color: "#c78116" },
+  risk: { label: "유의", color: "#c78116" },
   loop: { label: "회귀", color: "#2563eb" },
 };
 

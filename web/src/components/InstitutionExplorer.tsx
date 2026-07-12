@@ -327,7 +327,7 @@ export default function InstitutionExplorer({ institutions, categoryOrder }: Pro
                 id="institution-search"
                 type="search"
                 aria-label="제도 검색"
-                placeholder="제도·법령·기관·문서·병목 검색"
+                placeholder="제도·법령·기관·문서·유의사항 검색"
                 value={query}
                 onChange={(event) => {
                   setQuery(event.target.value);
@@ -648,7 +648,7 @@ function ComparisonPanel({
     { label: "적용 대상", render: (item) => item.applicability },
     { label: "제출서류", render: (item) => item.submittedDocuments },
     {
-      label: "핵심 병목",
+      label: "유의사항",
       render: (item) => item.keyBottlenecks.join(" / "),
     },
   ];

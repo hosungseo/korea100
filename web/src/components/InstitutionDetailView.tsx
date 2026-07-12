@@ -31,7 +31,7 @@ export default function InstitutionDetailView({
     },
     {
       value: institution.canvas.bottlenecks.length,
-      label: "병목 구간",
+      label: "유의사항",
       accent: "warning",
     },
   ];
@@ -51,7 +51,7 @@ export default function InstitutionDetailView({
                 NO {institution.priority.toString().padStart(2, "0")}
               </span>
               <span className={styles.category}>{institution.category}</span>
-              <span>{institution.type}</span>
+              {institution.type !== institution.category && <span>{institution.type}</span>}
               <span className={styles.verificationBadge} data-tone={verification.tone}>
                 <i aria-hidden="true" />
                 {verification.label}
@@ -83,11 +83,11 @@ export default function InstitutionDetailView({
         <header className={styles.sectionHeading}>
           <div>
             <h2>업무구조도</h2>
-            <p>제도의 결정적 단계와 병목·보완 구간을 강조해 표시합니다</p>
+            <p>제도의 결정적 단계와 유의사항·보완 구간을 강조해 표시합니다</p>
           </div>
           <div className={styles.legend} aria-label="노드 표시 범례">
             <span><i data-tone="current" />핵심 단계</span>
-            <span><i data-tone="risk" />병목</span>
+            <span><i data-tone="risk" />유의</span>
             <span><i data-tone="loop" />보완 회귀</span>
           </div>
         </header>
@@ -154,93 +154,87 @@ function OnePageCanvas({
       <header className={styles.sectionHeading}>
         <div>
           <h2>한 장 캔버스</h2>
-          <p>1층 절차·제출서류 · 2층 적용 대상·관련 제도·법적 근거 · 3층 현장 검증·병목</p>
+          <p>절차 · 법령 · 조직 · 적용 대상 · 제출서류</p>
         </div>
         <time dateTime={institution.asOfDate}>기준일 {institution.asOfDate}</time>
       </header>
 
-      <div className={styles.canvasFloors}>
-        <div className={styles.canvasRow} data-floor="1">
-          <CanvasBlock title="절차">
-            <ol className={styles.canvasProcedure}>
-              {canvas.procedure.map((step, index) => (
-                <li key={step}>
-                  <span>{index + 1}</span>
-                  {step}
-                </li>
-              ))}
-            </ol>
-          </CanvasBlock>
+      <div className={styles.canvasGrid}>
+        <CanvasBlock title="절차" size="wide">
+          <ol className={styles.canvasProcedure}>
+            {canvas.procedure.map((step, index) => (
+              <li key={step}>
+                <span>{index + 1}</span>
+                {step}
+              </li>
+            ))}
+          </ol>
+        </CanvasBlock>
 
-          <CanvasBlock title="제출서류">
-            <div className={styles.documentGroups}>
-              {canvas.submittedDocuments.map((group) => (
-                <div key={group.actor}>
-                  <strong>{group.actor}</strong>
-                  <ul>
-                    {group.documents.map((document) => (
-                      <li key={document}>{document}</li>
-                    ))}
-                  </ul>
+        <CanvasBlock title="적용 대상">
+          <p>{canvas.applicability}</p>
+        </CanvasBlock>
+
+        <CanvasBlock title="법적 근거" size="wide">
+          <div className={styles.legalRows}>
+            {canvas.legalBasis.map((basis) => {
+              const source = sourceByLaw.get(basis.law);
+              return (
+                <div key={`${basis.kind}:${basis.law}`}>
+                  {source ? (
+                    <a href={source.officialUrl} target="_blank" rel="noreferrer">
+                      {basis.law}
+                    </a>
+                  ) : (
+                    <strong>{basis.law}</strong>
+                  )}
+                  <span>{basis.articles ?? "적용 범위 확인 필요"}</span>
+                  <small>{basis.kind}</small>
                 </div>
-              ))}
-            </div>
-          </CanvasBlock>
-        </div>
+              );
+            })}
+          </div>
+        </CanvasBlock>
 
-        <div className={styles.canvasRow} data-floor="2">
-          <CanvasBlock title="적용 대상">
-            <p>{canvas.applicability}</p>
-          </CanvasBlock>
+        <CanvasBlock title="제출서류">
+          <div className={styles.documentGroups}>
+            {canvas.submittedDocuments.map((group) => (
+              <div key={group.actor}>
+                <strong>{group.actor}</strong>
+                <ul>
+                  {group.documents.map((document) => (
+                    <li key={document}>{document}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </CanvasBlock>
 
-          <CanvasBlock title="관련 제도">
-            <div className={styles.relatedLinks}>
-              {institution.related.map((name) => {
-                const slug = relatedSlugs.get(name);
-                return slug ? (
-                  <Link href={`/model/${slug}/`} key={name}>{name}</Link>
-                ) : (
-                  <span key={name}>{name}</span>
-                );
-              })}
-            </div>
-          </CanvasBlock>
+        <CanvasBlock title="유의사항" tone="warning">
+          <ul>
+            {canvas.bottlenecks.map((item) => <li key={item}>{item}</li>)}
+          </ul>
+        </CanvasBlock>
 
-          <CanvasBlock title="법적 근거">
-            <div className={styles.legalRows}>
-              {canvas.legalBasis.map((basis) => {
-                const source = sourceByLaw.get(basis.law);
-                return (
-                  <div key={`${basis.kind}:${basis.law}`}>
-                    {source ? (
-                      <a href={source.officialUrl} target="_blank" rel="noreferrer">
-                        {basis.law}
-                      </a>
-                    ) : (
-                      <strong>{basis.law}</strong>
-                    )}
-                    <span>{basis.articles ?? "적용 범위 확인 필요"}</span>
-                    <small>{basis.kind}</small>
-                  </div>
-                );
-              })}
-            </div>
-          </CanvasBlock>
-        </div>
+        <CanvasBlock title="관련 제도">
+          <div className={styles.relatedLinks}>
+            {institution.related.map((name) => {
+              const slug = relatedSlugs.get(name);
+              return slug ? (
+                <Link href={`/model/${slug}/`} key={name}>{name}</Link>
+              ) : (
+                <span key={name}>{name}</span>
+              );
+            })}
+          </div>
+        </CanvasBlock>
 
-        <div className={styles.canvasRow} data-floor="3">
-          <CanvasBlock title="현장 검증 필요" tone="field">
-            <ul className={styles.twoColumnList}>
-              {institution.fieldVerification.map((item) => <li key={item}>{item}</li>)}
-            </ul>
-          </CanvasBlock>
-
-          <CanvasBlock title="병목" tone="warning">
-            <ul>
-              {canvas.bottlenecks.map((item) => <li key={item}>{item}</li>)}
-            </ul>
-          </CanvasBlock>
-        </div>
+        <CanvasBlock title="현장 검증 필요" tone="field" size="wide">
+          <ul className={styles.twoColumnList}>
+            {institution.fieldVerification.map((item) => <li key={item}>{item}</li>)}
+          </ul>
+        </CanvasBlock>
       </div>
     </section>
   );
@@ -249,14 +243,16 @@ function OnePageCanvas({
 function CanvasBlock({
   title,
   tone,
+  size,
   children,
 }: {
   title: string;
   tone?: "warning" | "accent" | "field";
+  size?: "wide";
   children: React.ReactNode;
 }) {
   return (
-    <article className={styles.canvasBlock} data-tone={tone}>
+    <article className={styles.canvasBlock} data-tone={tone} data-size={size}>
       <h3>{title}</h3>
       {children}
     </article>

@@ -88,7 +88,7 @@ const STATUS_META: Record<
     badgeText: "#5d6b63",
   },
   risk: {
-    label: "병목",
+    label: "유의",
     cardBg: "#fffaf3",
     cardBorder: "#c78116",
     badgeBg: "#fef6e7",
@@ -693,7 +693,7 @@ function NodeDrawer({
 
         {/* Blocker */}
         {node.blocker && (
-          <DrawerSection title="병목">
+          <DrawerSection title="유의">
             <div
               style={{
                 padding: "10px 12px",

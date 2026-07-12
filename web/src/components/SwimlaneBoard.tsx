@@ -47,7 +47,7 @@ const SS: Record<string, { bg: string; border: string; dot: string; label: strin
   done:    { bg: "#f5f7f6", border: "#dde5df", dot: "#bdcbc4", label: "",     ink: "#111714", sub: "#87938d" },
   current: { bg: "#0f9f72", border: "#0f9f72", dot: "#fff",    label: "핵심", ink: "#ffffff", sub: "rgba(255,255,255,.8)" },
   waiting: { bg: "#f5f7f6", border: "#dde5df", dot: "#bdcbc4", label: "",     ink: "#111714", sub: "#87938d" },
-  risk:    { bg: "#fffbf0", border: "#d97706", dot: "#d97706", label: "병목",  ink: "#92400e", sub: "#d97706" },
+  risk:    { bg: "#fffbf0", border: "#d97706", dot: "#d97706", label: "유의",  ink: "#92400e", sub: "#d97706" },
   loop:    { bg: "#eff6ff", border: "#2563eb", dot: "#2563eb", label: "회귀",  ink: "#1e3a8a", sub: "#2563eb" },
   gateway: { bg: "#f5f7f6", border: "#c4cfc8", dot: "#87938d", label: "판단",  ink: "#111714", sub: "#87938d" },
 };
@@ -767,7 +767,7 @@ export function NodeDrawer({
         )}
 
         {node.blocker && (
-          <DrawerSection title="병목">
+          <DrawerSection title="유의">
             <div style={{
               padding: "10px 12px", background: "#fef6e7",
               borderRadius: 8, fontSize: 14, color: "#c78116", fontWeight: 500,
@@ -881,7 +881,7 @@ function DrawerSection({ title, children }: { title: string; children: React.Rea
 export function Legend() {
   const items = [
     { status: "current", label: "핵심 단계" },
-    { status: "risk", label: "병목·위험" },
+    { status: "risk", label: "유의·위험" },
     { status: "loop", label: "보완 회귀" },
     { status: "waiting", label: "일반 단계" },
   ] as const;

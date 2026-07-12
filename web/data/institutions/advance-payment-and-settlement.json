@@ -2,7 +2,7 @@
  "slug": "advance-payment-and-settlement",
  "name": "선금과 대가 지급",
  "oneLiner": "계약 착수 단계의 선금 지급부터 이행 완료 후 검사·검사조서, 대가 청구, 5일 이내 대가 지급, 지연이자와 선금 정산까지 이어지는 조달 대금 지급의 전 과정",
- "type": "대금지급형",
+ "type": "계약·이행",
  "priority": 16,
  "whyFirst": "조달업체의 현금흐름과 수요기관의 재정집행이 직접 맞닿는 제도로, 검사·지급 기한과 지연이자·선금 정산에서 분쟁과 감사 지적이 반복되는 실무 핵심 절차다.",
  "asOfDate": "2026-07-12",
@@ -65,7 +65,7 @@
    "계약담당공무원이 청구서의 적정 여부를 확인하고, 부당하면 사유를 붙여 반송한다",
    "지출관이 검사 후 청구받은 날부터 5일 이내에 대가를 지급하고, 늦으면 지연이자를 더한다"
   ],
-  "applicability": "국가계약 계약상대자에 대한 선금과 대가 지급 전반. 선금은 청구일부터 14일 이내 지급하며 공사는 계약금액의 100분의 70 한도(집행기준), 대가는 검사 완료 후 청구일부터 5일 이내 지급이 원칙이고 기성부분 대가는 적어도 30일마다 지급한다. 기한을 넘기면 금융기관 대출평균금리에 따른 지연이자가 붙는다(2026-07-12 기준).",
+  "applicability": "국가계약 계약상대자에 대한 선금과 대가 지급 전반.",
   "submittedDocuments": [
    {
     "actor": "조달업체(계약상대자)",
@@ -495,10 +495,10 @@
   "warnings": []
  },
  "verification": {
-  "status": "needs-review",
-  "verifiedAt": "2026-07-12",
-  "method": "공개 웹 검색(WebSearch) 교차 대조 — 국가법령정보센터 원문 기계 대조(LAW_OC) 미실시",
-  "scope": "법적 근거 5건 중 국가계약법·시행령 2건은 알려진 출처 식별자로 연결했고, 국고금 관리법·시행령·정부 입찰·계약 집행기준 3건은 원문 식별자를 확보하지 못해 unresolved로 남겼다. 검사(법 제14조, 영 제55조·제56조)·대가 지급(법 제15조, 영 제58조)·지연이자(영 제59조)의 조문 번호와 14일·5일·3천만원·70% 등 수치는 검색 스니펫으로 교차 확인했으나, 세부 항 번호와 예규·국고금관리법령 조문은 원문 대조가 필요하다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 5건 중 공식 원문 5건을 연결했다. 캔버스와 절차 노드의 명시 조문 21건 가운데 21건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
    "2026년 정부조직 개편에 따라 국가계약법령 현행 원문의 부처 표기는 재정경제부장관/재정경제부령이며, 본 문서는 기존 파일 관례에 따라 기획재정부장관(재정경제부장관)으로 병기했다.",
    "선금 70% 한도·14일 지급기한은 계약예규 및 국고금관리법 시행령 근거로, 원문 식별자 미확보 상태에서 검색 스니펫으로만 확인했다."
@@ -525,40 +525,49 @@
     "promulgatedOn": "2026-05-19",
     "effectiveOn": "2026-06-03",
     "officialUrl": "https://law.go.kr/법령/국가를당사자로하는계약에관한법률시행령"
-   }
-  ],
-  "unresolved": [
+   },
    {
     "law": "국고금 관리법",
     "kind": "법률",
-    "reasonCode": "title-needs-confirmation",
-    "reason": "선금(선급)의 상위 근거이나 이번 세션에서 국가법령정보센터 접근 불가로 원문 식별자를 연결하지 못했다.",
-    "nextStep": "LAW_OC 기계 대조로 공식 제명·식별자(제26조 선급과 개산급)를 확정한다."
+    "sourceType": "statute",
+    "officialName": "국고금 관리법",
+    "lawId": "009409",
+    "mst": "276079",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/국고금관리법"
    },
    {
     "law": "국고금 관리법 시행령",
     "kind": "대통령령",
-    "reasonCode": "title-needs-confirmation",
-    "reason": "선금 지급기한(청구받은 날부터 14일)의 근거이나 이번 세션에서 국가법령정보센터 접근 불가로 원문 식별자를 연결하지 못했다.",
-    "nextStep": "LAW_OC 기계 대조로 공식 제명·식별자(제40조 선급)를 확정한다."
+    "sourceType": "statute",
+    "officialName": "국고금 관리법 시행령",
+    "lawId": "009450",
+    "mst": "280813",
+    "promulgatedOn": "2025-12-30",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/국고금관리법시행령"
    },
    {
     "law": "(계약예규) 정부 입찰·계약 집행기준",
     "kind": "고시·지침",
-    "reasonCode": "title-needs-confirmation",
-    "reason": "선금 한도(70%)·채권확보·정산·반환의 세부 근거인 기획재정부 계약예규이나 이번 세션에서 원문 식별자를 연결하지 못했다.",
-    "nextStep": "LAW_OC 기계 대조로 행정규칙 식별자(admRulId 34470)와 선금 관련 조문을 확정한다."
+    "sourceType": "admin-rule",
+    "officialName": "(계약예규) 정부 입찰·계약 집행기준",
+    "adminRuleId": "34470",
+    "adminRuleSerial": "2100000276688",
+    "promulgatedOn": "2026-04-01",
+    "officialUrl": "https://law.go.kr/행정규칙/(계약예규)정부입찰·계약집행기준"
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-12",
-   "method": "공개 웹 검색(WebSearch) 스니펫으로 조문 번호 존재 교차 확인 — 원문 기계 대조 미실시",
-   "citationEntries": 16,
-   "explicitCitationEntries": 11,
-   "articleReferences": 16,
-   "verifiedReferences": 11,
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 21,
+   "explicitCitationEntries": 17,
+   "articleReferences": 21,
+   "verifiedReferences": 21,
    "missingReferences": 0,
-   "uncheckableReferences": 5
+   "uncheckableReferences": 0
   }
  }
 }

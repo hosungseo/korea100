@@ -165,7 +165,7 @@ function ProcessNodeInspector({
           </strong>
         </div>
         {node.blocker && (
-          <p><strong>병목</strong> · {node.blocker}</p>
+          <p><strong>유의</strong> · {node.blocker}</p>
         )}
       </div>
 

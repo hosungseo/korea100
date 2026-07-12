@@ -16,7 +16,7 @@ const STATUS_LABELS: Record<ProcessNode["status"], string> = {
   done: "완료",
   current: "핵심",
   waiting: "대기",
-  risk: "병목",
+  risk: "유의사항",
   loop: "회귀",
 };
 
@@ -67,13 +67,13 @@ export default function LawToProcessHero({
           </p>
           <h1>조달제도 100</h1>
           <p className="law-process-lead">
-            법령을 읽고 담당자, 절차, 병목으로 재구성합니다.
+            법령을 읽고 담당자, 절차, 유의사항으로 재구성합니다.
           </p>
         </header>
 
         <div
           className="law-process-scene"
-          aria-label={`${lawName} 조문 근거를 업무구조도로 변환한 대표 병목 경로`}
+          aria-label={`${lawName} 조문 근거를 업무구조도로 변환한 대표 유의사항 경로`}
         >
           <div className="law-source-panel" aria-hidden="true">
             <div className="law-source-heading">
@@ -107,7 +107,7 @@ export default function LawToProcessHero({
 
           <div className="law-map-layer">
             <div className="law-map-heading">
-              <span>환경영향평가 대표 병목 경로</span>
+              <span>환경영향평가 대표 유의사항 경로</span>
               <time dateTime={checkedAt}>기준일 {checkedAt.replaceAll("-", ".")}</time>
             </div>
 
