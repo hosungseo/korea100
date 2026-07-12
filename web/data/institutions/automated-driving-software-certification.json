@@ -784,10 +784,10 @@
     "경찰 수사와 112 신고"
   ],
   "verification": {
-    "status": "source-linked",
+    "status": "needs-review",
     "verifiedAt": "2026-07-12",
-    "method": "국가법령정보센터 현행 법령·행정규칙·조약 검색과 핵심 조문 대조, 공개 보도·통상 문서 기반 초안 작성",
-    "scope": "자동차관리법, 자동차관리법 시행규칙, 자동차안전기준 규칙, 자동차 및 자동차부품의 인증 및 조사 등에 관한 규정, 자율주행자동차법, 한미 FTA 서한교환과 2018 개정 의정서를 공식 출처로 연결했다. 국내 조문 번호는 현행 원문에서 확인했고, FTA 동등성은 미국 원산지·FMVSS 적합 차량의 안전기준 경로와 OTA 기능 변경관리의 한계를 구분해 표시했다. 2025년 이후 한미 자동차 협상 반영은 후속 현장검증 대상으로 남겼다.",
+    "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+    "scope": "법적 근거 7건 중 공식 원문 5건을 연결했다. 캔버스와 절차 노드의 명시 조문 104건 가운데 104건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
     "notes": [
       "자동차관리법은 [시행 2026. 6. 16.] [법률 제21817호, 2026. 6. 16., 일부개정] 기준으로 확인했다.",
       "자동차 및 자동차부품의 성능과 기준에 관한 규칙은 [시행 2026. 7. 10.] [국토교통부령 제1602호, 2026. 7. 10., 일부개정] 기준으로 확인했다.",
@@ -850,31 +850,27 @@
         "promulgatedOn": "2026-03-17",
         "effectiveOn": "2026-06-18",
         "officialUrl": "https://law.go.kr/법령/자율주행자동차상용화촉진및지원에관한법률"
-      },
+      }
+    ],
+    "unresolved": [
       {
         "law": "대한민국과 미합중국 간의 자유무역협정에 관한 서한교환",
         "kind": "조약",
-        "sourceType": "treaty",
-        "officialName": "대한민국과 미합중국 간의 자유무역협정에 관한 서한교환",
-        "treatyId": "5076",
-        "treatyNumber": "2082",
-        "effectiveOn": "2012-03-15",
-        "officialUrl": "https://law.go.kr/DRF/lawService.do?target=trty&ID=5076&type=HTML"
+        "reasonCode": "title-needs-confirmation",
+        "reason": "현행 법령 정확 일치 없음",
+        "nextStep": "소관 기관의 공식 제명을 확인한 뒤 국가법령정보센터에서 다시 조회해야 한다."
       },
       {
         "law": "대한민국과 미합중국 간의 자유무역협정을 개정하는 대한민국 정부와 미합중국 정부 간의 의정서",
         "kind": "조약",
-        "sourceType": "treaty",
-        "officialName": "대한민국과 미합중국 간의 자유무역협정을 개정하는 대한민국 정부와 미합중국 정부 간의 의정서",
-        "treatyId": "13721",
-        "treatyNumber": "2403",
-        "effectiveOn": "2019-01-01",
-        "officialUrl": "https://law.go.kr/DRF/lawService.do?target=trty&ID=13721&type=HTML"
+        "reasonCode": "title-needs-confirmation",
+        "reason": "현행 법령 정확 일치 없음",
+        "nextStep": "소관 기관의 공식 제명을 확인한 뒤 국가법령정보센터에서 다시 조회해야 한다."
       }
     ],
     "articleVerification": {
       "checkedAt": "2026-07-12",
-      "method": "law.go.kr 현행 법령·행정규칙 조문과 조약 검색 결과 수동 대조",
+      "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
       "citationEntries": 44,
       "explicitCitationEntries": 37,
       "articleReferences": 104,
