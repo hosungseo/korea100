@@ -53,6 +53,8 @@ for (const file of files) {
       citationCount += 1;
       if (/시행령|시행규칙/.test(ref.law ?? "")) sublawCitations += 1;
       const article = ref.article ?? "";
+      // unverified: 조문 확정 불가로 fieldVerification에 이관 문서화된 인용 — 감사 제외
+      if (ref.unverified === true) continue;
       if (!ARTICLE_OK.test(article)) {
         // 묶음 표기(제2·3조, 제17~19조)는 조문을 인용하되 도구가 못 읽는 형식,
         // 서술형("~ 관련 조문")은 조문 번호 자체가 없는 실질 위반 — 심각도 분리.
