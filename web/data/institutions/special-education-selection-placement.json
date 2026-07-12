@@ -1,0 +1,323 @@
+{
+ "slug": "special-education-selection-placement",
+ "name": "특수교육대상자 선정·배치",
+ "oneLiner": "특수교육대상자 선정·배치의 신청·조사·결정·사후관리 절차",
+ "type": "진단·선정·배치형",
+ "priority": 240,
+ "whyFirst": "특수교육대상자 선정·배치의 핵심 행위자와 결정 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "특수교육대상자 선정·배치은(는) 특수교육 필요 발견 → 진단·평가 의뢰 → 진단·평가 실시 → 운영위원회 심사 → 대상자 선정 → 학교·학급 배치 → 개별화교육계획 수립로 이어지는 절차를 정리한 제도다.",
+  "stakeholders": "보호자·학생, 학교, 특수교육지원센터, 교육청·특수교육운영위원회",
+  "legalBasis": [
+   {
+    "law": "장애인 등에 대한 특수교육법",
+    "articles": "제15조(선정), 제16조(진단·평가), 제17조(배치·교육), 제22조(개별화교육)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "학교",
+    "role": "접수·조사·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "특수교육지원센터",
+    "role": "접수·조사·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "교육청·특수교육운영위원회",
+    "role": "접수·조사·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "특수교육 필요 발견",
+   "진단·평가 의뢰",
+   "진단·평가 실시",
+   "운영위원회 심사",
+   "대상자 선정",
+   "학교·학급 배치",
+   "개별화교육계획 수립"
+  ],
+  "moneyFlow": "비용·급여·금전명령의 범위는 개별 법령과 연도별 운영기준, 사실관계에 따라 달라질 수 있다.",
+  "docsFlow": "신청·신고 기록 → 조사·심사 자료 → 결정·명령 통지 → 이행 기록 → 사후관리로 이어진다.",
+  "bottlenecks": [
+   "사실관계와 증빙 확보",
+   "기관 간 기록·정보 연계",
+   "결정 이후 이행 관리"
+  ],
+  "reformPoints": [
+   "진행상태 안내 강화",
+   "결정 근거의 설명성 개선",
+   "취약 당사자 지원 경로 명확화"
+  ]
+ },
+ "related": [
+  "장애인활동지원",
+  "학교폭력 대응",
+  "교육활동 침해 조치"
+ ],
+ "fieldVerification": [
+  "실제 접수·신청 경로",
+  "기관별 처리기한·서식",
+  "지역·기관별 세부 운영기준"
+ ],
+ "process": {
+  "institution_name": "특수교육대상자 선정·배치",
+  "law_name": "장애인 등에 대한 특수교육법",
+  "lanes": [
+   "보호자·학생",
+   "학교",
+   "특수교육지원센터",
+   "교육청·특수교육운영위원회"
+  ],
+  "stages": [
+   "G0 사안·상담",
+   "G1 신청·접수",
+   "G2 조사·심사",
+   "G3 결정·명령",
+   "G4 이행·지급",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "특수교육 필요 발견",
+    "lane": "보호자·학생",
+    "stage": "G0 사안·상담",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "보호자·학생",
+    "action": "특수교육 필요 발견",
+    "output_documents": [
+     "특수교육 필요 발견 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "장애인 등에 대한 특수교육법",
+      "article": "제15조",
+      "text": "장애인 등에 대한 특수교육법 제15조에 따른 특수교육 필요 발견 단계"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "진단·평가 의뢰",
+    "lane": "학교",
+    "stage": "G0 사안·상담",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "학교",
+    "action": "진단·평가 의뢰",
+    "output_documents": [
+     "진단·평가 의뢰 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "장애인 등에 대한 특수교육법",
+      "article": "제16조",
+      "text": "장애인 등에 대한 특수교육법 제16조에 따른 진단·평가 의뢰 단계"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "진단·평가 실시",
+    "lane": "특수교육지원센터",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "특수교육지원센터",
+    "action": "진단·평가 실시",
+    "output_documents": [
+     "진단·평가 실시 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "장애인 등에 대한 특수교육법",
+      "article": "제16조",
+      "text": "장애인 등에 대한 특수교육법 제16조에 따른 진단·평가 실시 단계"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "운영위원회 심사",
+    "lane": "교육청·특수교육운영위원회",
+    "stage": "G2 조사·심사",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "교육청·특수교육운영위원회",
+    "action": "운영위원회 심사",
+    "output_documents": [
+     "운영위원회 심사 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "장애인 등에 대한 특수교육법",
+      "article": "제15조",
+      "text": "장애인 등에 대한 특수교육법 제15조에 따른 운영위원회 심사 단계"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "대상자 선정",
+    "lane": "보호자·학생",
+    "stage": "G3 결정·명령",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보호자·학생",
+    "action": "대상자 선정",
+    "output_documents": [
+     "대상자 선정 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "장애인 등에 대한 특수교육법",
+      "article": "제15조",
+      "text": "장애인 등에 대한 특수교육법 제15조에 따른 대상자 선정 단계"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "학교·학급 배치",
+    "lane": "학교",
+    "stage": "G4 이행·지급",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "학교",
+    "action": "학교·학급 배치",
+    "output_documents": [
+     "학교·학급 배치 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "장애인 등에 대한 특수교육법",
+      "article": "제17조",
+      "text": "장애인 등에 대한 특수교육법 제17조에 따른 학교·학급 배치 단계"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "개별화교육계획 수립",
+    "lane": "특수교육지원센터",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "특수교육지원센터",
+    "action": "개별화교육계획 수립",
+    "output_documents": [
+     "개별화교육계획 수립 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "장애인 등에 대한 특수교육법",
+      "article": "제22조",
+      "text": "장애인 등에 대한 특수교육법 제22조에 따른 개별화교육계획 수립 단계"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건과 기한은 사실관계 및 하위규정에 따라 달라질 수 있다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 11건 가운데 11건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "장애인 등에 대한 특수교육법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "장애인 등에 대한 특수교육법",
+    "lawId": "010449",
+    "mst": "276191",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2025-10-01",
+    "officialUrl": "https://law.go.kr/법령/장애인등에대한특수교육법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 8,
+   "explicitCitationEntries": 8,
+   "articleReferences": 11,
+   "verifiedReferences": 11,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

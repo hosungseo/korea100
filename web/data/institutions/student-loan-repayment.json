@@ -1,0 +1,339 @@
+{
+ "slug": "student-loan-repayment",
+ "name": "학자금 대출·상환",
+ "oneLiner": "학자금 대출·상환의 신청·조사·결정·사후관리 절차",
+ "type": "대출·소득연계상환형",
+ "priority": 239,
+ "whyFirst": "학자금 대출·상환의 핵심 행위자와 결정 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "학자금 대출·상환은(는) 학자금 대출 상담 → 대출 신청·동의 → 소득·학사 정보 확인 → 대출 약정·실행 → 재학·상환 유예 관리 → 소득 발생·의무상환 → 자발 상환·정산로 이어지는 절차를 정리한 제도다.",
+  "stakeholders": "대학생·채무자, 한국장학재단, 대학·금융기관, 국세청·관계기관",
+  "legalBasis": [
+   {
+    "law": "한국장학재단 설립 등에 관한 법률",
+    "articles": "제16조(재단 사업), 제50조(학자금 지원 신청), 제51조(업무 위탁)",
+    "kind": "법률"
+   },
+   {
+    "law": "취업 후 학자금 상환 특별법",
+    "articles": "제18조(대출원리금 상환원칙)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "한국장학재단",
+    "role": "접수·조사·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "대학·금융기관",
+    "role": "접수·조사·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "국세청·관계기관",
+    "role": "접수·조사·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "학자금 대출 상담",
+   "대출 신청·동의",
+   "소득·학사 정보 확인",
+   "대출 약정·실행",
+   "재학·상환 유예 관리",
+   "소득 발생·의무상환",
+   "자발 상환·정산"
+  ],
+  "moneyFlow": "비용·급여·금전명령의 범위는 개별 법령과 연도별 운영기준, 사실관계에 따라 달라질 수 있다.",
+  "docsFlow": "신청·신고 기록 → 조사·심사 자료 → 결정·명령 통지 → 이행 기록 → 사후관리로 이어진다.",
+  "bottlenecks": [
+   "사실관계와 증빙 확보",
+   "기관 간 기록·정보 연계",
+   "결정 이후 이행 관리"
+  ],
+  "reformPoints": [
+   "진행상태 안내 강화",
+   "결정 근거의 설명성 개선",
+   "취약 당사자 지원 경로 명확화"
+  ]
+ },
+ "related": [
+  "국가장학금",
+  "개인회생",
+  "조세불복(이의·심판)"
+ ],
+ "fieldVerification": [
+  "실제 접수·신청 경로",
+  "기관별 처리기한·서식",
+  "지역·기관별 세부 운영기준"
+ ],
+ "process": {
+  "institution_name": "학자금 대출·상환",
+  "law_name": "한국장학재단 설립 등에 관한 법률·취업 후 학자금 상환 특별법",
+  "lanes": [
+   "대학생·채무자",
+   "한국장학재단",
+   "대학·금융기관",
+   "국세청·관계기관"
+  ],
+  "stages": [
+   "G0 사안·상담",
+   "G1 신청·접수",
+   "G2 조사·심사",
+   "G3 결정·명령",
+   "G4 이행·지급",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "학자금 대출 상담",
+    "lane": "대학생·채무자",
+    "stage": "G0 사안·상담",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "대학생·채무자",
+    "action": "학자금 대출 상담",
+    "output_documents": [
+     "학자금 대출 상담 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "한국장학재단 설립 등에 관한 법률",
+      "article": "제16조",
+      "text": "한국장학재단 설립 등에 관한 법률 제16조에 따른 학자금 대출 상담 단계"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "대출 신청·동의",
+    "lane": "한국장학재단",
+    "stage": "G0 사안·상담",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "한국장학재단",
+    "action": "대출 신청·동의",
+    "output_documents": [
+     "대출 신청·동의 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "한국장학재단 설립 등에 관한 법률",
+      "article": "제50조",
+      "text": "한국장학재단 설립 등에 관한 법률 제50조에 따른 대출 신청·동의 단계"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "소득·학사 정보 확인",
+    "lane": "대학·금융기관",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "대학·금융기관",
+    "action": "소득·학사 정보 확인",
+    "output_documents": [
+     "소득·학사 정보 확인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "한국장학재단 설립 등에 관한 법률",
+      "article": "제50조",
+      "text": "한국장학재단 설립 등에 관한 법률 제50조에 따른 소득·학사 정보 확인 단계"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "대출 약정·실행",
+    "lane": "국세청·관계기관",
+    "stage": "G2 조사·심사",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "국세청·관계기관",
+    "action": "대출 약정·실행",
+    "output_documents": [
+     "대출 약정·실행 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "한국장학재단 설립 등에 관한 법률",
+      "article": "제16조",
+      "text": "한국장학재단 설립 등에 관한 법률 제16조에 따른 대출 약정·실행 단계"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "재학·상환 유예 관리",
+    "lane": "대학생·채무자",
+    "stage": "G3 결정·명령",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "대학생·채무자",
+    "action": "재학·상환 유예 관리",
+    "output_documents": [
+     "재학·상환 유예 관리 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "취업 후 학자금 상환 특별법",
+      "article": "제18조",
+      "text": "취업 후 학자금 상환 특별법 제18조에 따른 재학·상환 유예 관리 단계"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "소득 발생·의무상환",
+    "lane": "한국장학재단",
+    "stage": "G4 이행·지급",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "한국장학재단",
+    "action": "소득 발생·의무상환",
+    "output_documents": [
+     "소득 발생·의무상환 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "취업 후 학자금 상환 특별법",
+      "article": "제18조",
+      "text": "취업 후 학자금 상환 특별법 제18조에 따른 소득 발생·의무상환 단계"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "자발 상환·정산",
+    "lane": "대학·금융기관",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "대학·금융기관",
+    "action": "자발 상환·정산",
+    "output_documents": [
+     "자발 상환·정산 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "취업 후 학자금 상환 특별법",
+      "article": "제18조",
+      "text": "취업 후 학자금 상환 특별법 제18조에 따른 자발 상환·정산 단계"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건과 기한은 사실관계 및 하위규정에 따라 달라질 수 있다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 2건 중 공식 원문 2건을 연결했다. 캔버스와 절차 노드의 명시 조문 11건 가운데 11건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "한국장학재단 설립 등에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "한국장학재단 설립 등에 관한 법률",
+    "lawId": "010909",
+    "mst": "276203",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/한국장학재단설립등에관한법률"
+   },
+   {
+    "law": "취업 후 학자금 상환 특별법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "취업 후 학자금 상환 특별법",
+    "lawId": "011136",
+    "mst": "283419",
+    "promulgatedOn": "2026-02-19",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/취업후학자금상환특별법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 9,
+   "explicitCitationEntries": 9,
+   "articleReferences": 11,
+   "verifiedReferences": 11,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

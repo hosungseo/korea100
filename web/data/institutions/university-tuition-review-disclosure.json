@@ -1,0 +1,323 @@
+{
+ "slug": "university-tuition-review-disclosure",
+ "name": "대학 등록금 심의·공시",
+ "oneLiner": "대학 등록금 심의·공시의 신청·조사·결정·사후관리 절차",
+ "type": "심의·공시형",
+ "priority": 242,
+ "whyFirst": "대학 등록금 심의·공시의 핵심 행위자와 결정 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "대학 등록금 심의·공시은(는) 재정·등록금 산정안 마련 → 심의위원회 구성 → 자료 제출·검토 → 등록금 심의 → 심의결과 반영·결정 → 회의록 공개 → 공시·제재 관리로 이어지는 절차를 정리한 제도다.",
+  "stakeholders": "대학 본부, 등록금심의위원회, 학생위원, 교육부·공시기관",
+  "legalBasis": [
+   {
+    "law": "고등교육법",
+    "articles": "제11조(등록금 및 등록금심의위원회)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "등록금심의위원회",
+    "role": "접수·조사·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "학생위원",
+    "role": "접수·조사·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "교육부·공시기관",
+    "role": "접수·조사·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "재정·등록금 산정안 마련",
+   "심의위원회 구성",
+   "자료 제출·검토",
+   "등록금 심의",
+   "심의결과 반영·결정",
+   "회의록 공개",
+   "공시·제재 관리"
+  ],
+  "moneyFlow": "비용·급여·금전명령의 범위는 개별 법령과 연도별 운영기준, 사실관계에 따라 달라질 수 있다.",
+  "docsFlow": "신청·신고 기록 → 조사·심사 자료 → 결정·명령 통지 → 이행 기록 → 사후관리로 이어진다.",
+  "bottlenecks": [
+   "사실관계와 증빙 확보",
+   "기관 간 기록·정보 연계",
+   "결정 이후 이행 관리"
+  ],
+  "reformPoints": [
+   "진행상태 안내 강화",
+   "결정 근거의 설명성 개선",
+   "취약 당사자 지원 경로 명확화"
+  ]
+ },
+ "related": [
+  "국가장학금",
+  "학자금 대출·상환",
+  "정보공개 청구"
+ ],
+ "fieldVerification": [
+  "실제 접수·신청 경로",
+  "기관별 처리기한·서식",
+  "지역·기관별 세부 운영기준"
+ ],
+ "process": {
+  "institution_name": "대학 등록금 심의·공시",
+  "law_name": "고등교육법",
+  "lanes": [
+   "대학 본부",
+   "등록금심의위원회",
+   "학생위원",
+   "교육부·공시기관"
+  ],
+  "stages": [
+   "G0 사안·상담",
+   "G1 신청·접수",
+   "G2 조사·심사",
+   "G3 결정·명령",
+   "G4 이행·지급",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "재정·등록금 산정안 마련",
+    "lane": "대학 본부",
+    "stage": "G0 사안·상담",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "대학 본부",
+    "action": "재정·등록금 산정안 마련",
+    "output_documents": [
+     "재정·등록금 산정안 마련 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고등교육법",
+      "article": "제11조",
+      "text": "고등교육법 제11조에 따른 재정·등록금 산정안 마련 단계"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "심의위원회 구성",
+    "lane": "등록금심의위원회",
+    "stage": "G0 사안·상담",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "등록금심의위원회",
+    "action": "심의위원회 구성",
+    "output_documents": [
+     "심의위원회 구성 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고등교육법",
+      "article": "제11조",
+      "text": "고등교육법 제11조에 따른 심의위원회 구성 단계"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "자료 제출·검토",
+    "lane": "학생위원",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "학생위원",
+    "action": "자료 제출·검토",
+    "output_documents": [
+     "자료 제출·검토 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고등교육법",
+      "article": "제11조",
+      "text": "고등교육법 제11조에 따른 자료 제출·검토 단계"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "등록금 심의",
+    "lane": "교육부·공시기관",
+    "stage": "G2 조사·심사",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "교육부·공시기관",
+    "action": "등록금 심의",
+    "output_documents": [
+     "등록금 심의 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "고등교육법",
+      "article": "제11조",
+      "text": "고등교육법 제11조에 따른 등록금 심의 단계"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "심의결과 반영·결정",
+    "lane": "대학 본부",
+    "stage": "G3 결정·명령",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "대학 본부",
+    "action": "심의결과 반영·결정",
+    "output_documents": [
+     "심의결과 반영·결정 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고등교육법",
+      "article": "제11조",
+      "text": "고등교육법 제11조에 따른 심의결과 반영·결정 단계"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "회의록 공개",
+    "lane": "등록금심의위원회",
+    "stage": "G4 이행·지급",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "등록금심의위원회",
+    "action": "회의록 공개",
+    "output_documents": [
+     "회의록 공개 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고등교육법",
+      "article": "제11조",
+      "text": "고등교육법 제11조에 따른 회의록 공개 단계"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "공시·제재 관리",
+    "lane": "학생위원",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "학생위원",
+    "action": "공시·제재 관리",
+    "output_documents": [
+     "공시·제재 관리 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고등교육법",
+      "article": "제11조",
+      "text": "고등교육법 제11조에 따른 공시·제재 관리 단계"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건과 기한은 사실관계 및 하위규정에 따라 달라질 수 있다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 8건 가운데 8건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "고등교육법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "고등교육법",
+    "lawId": "000899",
+    "mst": "268513",
+    "promulgatedOn": "2025-01-21",
+    "effectiveOn": "2026-03-01",
+    "officialUrl": "https://law.go.kr/법령/고등교육법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 8,
+   "explicitCitationEntries": 8,
+   "articleReferences": 8,
+   "verifiedReferences": 8,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}
