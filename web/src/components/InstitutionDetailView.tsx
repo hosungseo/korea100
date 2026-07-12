@@ -160,7 +160,7 @@ function OnePageCanvas({
       </header>
 
       <div className={styles.canvasGrid}>
-        <CanvasBlock title="절차와 법적 근거" size="wide">
+        <CanvasBlock title="절차" size="wide">
           <ol className={styles.canvasProcedure}>
             {canvas.procedure.map((step, index) => (
               <li key={step}>
@@ -169,6 +169,13 @@ function OnePageCanvas({
               </li>
             ))}
           </ol>
+        </CanvasBlock>
+
+        <CanvasBlock title="적용 대상">
+          <p>{canvas.applicability}</p>
+        </CanvasBlock>
+
+        <CanvasBlock title="법적 근거" size="wide">
           <div className={styles.legalRows}>
             {canvas.legalBasis.map((basis) => {
               const source = sourceByLaw.get(basis.law);
@@ -187,10 +194,6 @@ function OnePageCanvas({
               );
             })}
           </div>
-        </CanvasBlock>
-
-        <CanvasBlock title="적용 대상">
-          <p>{canvas.applicability}</p>
         </CanvasBlock>
 
         <CanvasBlock title="제출서류">
