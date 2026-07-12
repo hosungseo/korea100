@@ -110,11 +110,14 @@ const STATUS = {
 
 const ORDINANCE_COLOR = "#7c3aed";
 const ORDINANCE_INK = "#5b21b6";
+const ORDINANCE_REFERENCE_PATTERN = /조례|회의규칙|자치법규/;
+const ORDINANCE_DELEGATION_PATTERN = /조례.*(정한다|위임|상이|달리)|회의규칙|자치법규/;
 
 function ordinanceInfo(node) {
-  const refs = (node.legal_basis ?? []).filter((ref) =>
-    /조례|회의규칙/.test(ref.law ?? "")
-  );
+  const refs = (node.legal_basis ?? []).filter((ref) => {
+    const fields = [ref.kind, ref.law, ref.article, ref.text];
+    return fields.some((field) => ORDINANCE_REFERENCE_PATTERN.test(field ?? ""));
+  });
   if (refs.length === 0) return null;
   const exemplar = refs.find((ref) => (ref.article ?? "").includes("예시"));
   const law = (exemplar ?? refs[0]).law ?? "";
@@ -129,8 +132,13 @@ function ordinanceInfo(node) {
     "제주특별자치도": "제주",
   };
   const muni = muniMatch ? SHORT[muniMatch[1]] ?? muniMatch[1] : null;
+  const delegated = refs.some((ref) =>
+    ORDINANCE_DELEGATION_PATTERN.test(
+      `${ref.kind ?? ""} ${ref.law ?? ""} ${ref.article ?? ""} ${ref.text ?? ""}`
+    )
+  );
   return {
-    label: exemplar && muni ? `조례 · ${muni} 예시` : "조례 위임",
+    label: exemplar && muni ? `조례 · ${muni} 예시` : delegated ? "조례 위임" : "조례 관련",
   };
 }
 
@@ -988,7 +996,7 @@ function renderFooter({ process, groups }) {
     ${legendStatus(314, legendY - 14, "#d9901a", "병목")}
     ${legendStatus(412, legendY - 14, "#3478db", "회귀")}
     <rect x="500" y="${legendY - 26}" width="17" height="17" rx="4" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="5 4"/>
-    <text x="526" y="${legendY - 12}" font-size="14.5" fill="#526159">조례 위임</text>
+    <text x="526" y="${legendY - 12}" font-size="14.5" fill="#526159">조례 관련</text>
     <line x1="648" y1="${legendY - 8}" x2="700" y2="${legendY - 8}" stroke="#53675d" stroke-width="4" marker-end="url(#arrow-sequence)"/>
     <text x="720" y="${legendY - 2}" font-size="15" fill="#526159">절차 순서</text>
     <line x1="860" y1="${legendY - 8}" x2="912" y2="${legendY - 8}" stroke="#0f8a65" stroke-width="4" stroke-dasharray="10 8" marker-end="url(#arrow-message)"/>
