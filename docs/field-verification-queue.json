@@ -1,15 +1,17 @@
 {
- "sourceAsOfDate": "2026-07-11",
- "total": 454,
+ "sourceAsOfDate": "2026-07-12",
+ "total": 476,
  "institutions": 101,
  "byDomain": {
-  "기관·권한": 25,
+  "처리기간": 72,
+  "정보시스템": 20,
+  "운영 사실": 174,
   "문서·증빙": 8,
   "실무 관행": 127,
-  "운영 사실": 176,
+  "기관·권한": 25,
   "재정·비용": 24,
-  "정보시스템": 20,
-  "처리기간": 72
+  "법령 조문": 23,
+  "법적근거": 1
  },
  "entries": [
   {
@@ -890,17 +892,6 @@
    "item": "정부조직법 개정(법률)과 직제(대통령령) 개정의 실제 병행 처리 흐름(운영 추정)",
    "domain": "실무 관행",
    "suggestedEvidence": "복수 실무자 인터뷰와 공개 업무편람",
-   "status": "open"
-  },
-  {
-   "id": "government-organization-FV06",
-   "priority": 15,
-   "slug": "government-organization",
-   "institutionName": "정부조직 제도",
-   "category": "국가 운영과 권력 통제",
-   "item": "각 부처 직제(대통령령): P02·P15·P17 노드의 하부조직·분장사무·정원 관련 조문은 기관별로 직제령이 별개로 존재하여 단일 조문 번호 확정 불가(institution-scope). 통칙 관련 조문으로 대체 인용함.",
-   "domain": "법적 근거",
-   "suggestedEvidence": "각 부처 해당 직제(대통령령) 원문 확인",
    "status": "open"
   },
   {
@@ -3159,6 +3150,17 @@
    "status": "open"
   },
   {
+   "id": "local-government-organization-FV05",
+   "priority": 64,
+   "slug": "local-government-organization",
+   "institutionName": "지방자치단체 조직",
+   "category": "자치·조직형",
+   "item": "[unverified] 행정안전부 기준인건비 산정·통보 지침(P01 연도별 기준인건비, P06 구성·산정·자율범위 운영기준) — 훈령·고시류로 법제처 API 미제공, 조문 확인 불가",
+   "domain": "법령 조문",
+   "suggestedEvidence": "행정안전부 기준인건비 산정·통보 지침 원문 직접 열람(law.go.kr 행정규칙 또는 행안부 누리집)",
+   "status": "open"
+  },
+  {
    "id": "local-council-FV01",
    "priority": 65,
    "slug": "local-council",
@@ -3299,6 +3301,28 @@
    "item": "제안 사업의 집행·성과 실적",
    "domain": "운영 사실",
    "suggestedEvidence": "소관기관 공식 문서 또는 담당자 확인",
+   "status": "open"
+  },
+  {
+   "id": "participatory-budgeting-FV04",
+   "priority": 68,
+   "slug": "participatory-budgeting",
+   "institutionName": "주민참여예산",
+   "category": "지방자치와 지역",
+   "item": "주민참여예산제 운영 조례(P02 위원회 구성, P06 제안 보완 절차, P07 위원회 심사, P08 우선순위 심의, P09 주민총회·투표): 조례는 지자체별로 상이하여 단일 국가법령 원문 확정 불가(local-scope). 적용 지자체 지정 후 해당 자치법규 연결 필요.",
+   "domain": "법령 조문",
+   "suggestedEvidence": "적용 지자체의 주민참여예산제 운영 조례 원문 확인",
+   "status": "open"
+  },
+  {
+   "id": "participatory-budgeting-FV05",
+   "priority": 68,
+   "slug": "participatory-budgeting",
+   "institutionName": "주민참여예산",
+   "category": "지방자치와 지역",
+   "item": "행정안전부 주민참여예산제 운영 지침(P09 숙의·투표 운영, P10 결과 공개, P14 성과평가·환류): 행정규칙(지침)으로 국가법령정보센터 API 미제공(external-official-document). 소관 부처 공개 문서의 공식 URL·발행 연도 확인 필요.",
+   "domain": "법령 조문",
+   "suggestedEvidence": "행정안전부 홈페이지 또는 공식 공개 문서에서 해당 연도 지침 URL 및 발행 버전 확인",
    "status": "open"
   },
   {
@@ -4270,17 +4294,6 @@
    "status": "open"
   },
   {
-   "id": "mobile-id-FV01",
-   "priority": 88,
-   "slug": "mobile-id",
-   "institutionName": "모바일 신분증",
-   "category": "데이터·디지털·공공서비스",
-   "item": "전자정부법 모바일 신분증 조항 번호·시행일 최신 확인(주민등록증은 주민등록법 제24조의2로 확인)",
-   "domain": "운영 사실",
-   "suggestedEvidence": "소관기관 공식 문서 또는 담당자 확인",
-   "status": "open"
-  },
-  {
    "id": "mobile-id-FV02",
    "priority": 88,
    "slug": "mobile-id",
@@ -4289,17 +4302,6 @@
    "item": "모바일 주민등록증 발급·유효기간(3년)·효력정지 절차의 정확한 주민등록법 시행령·시행규칙 조문 번호 확인(법 제24조의2 위임)",
    "domain": "처리기간",
    "suggestedEvidence": "처리대장·통계 또는 담당자 인터뷰",
-   "status": "open"
-  },
-  {
-   "id": "mobile-id-FV03",
-   "priority": 88,
-   "slug": "mobile-id",
-   "institutionName": "모바일 신분증",
-   "category": "데이터·디지털·공공서비스",
-   "item": "도로교통법 모바일 운전면허증 근거 조항 번호 확인",
-   "domain": "운영 사실",
-   "suggestedEvidence": "소관기관 공식 문서 또는 담당자 확인",
    "status": "open"
   },
   {
@@ -4421,6 +4423,116 @@
    "item": "감리원 자격·독립성 관리 실무",
    "domain": "실무 관행",
    "suggestedEvidence": "복수 실무자 인터뷰와 공개 업무편람",
+   "status": "open"
+  },
+  {
+   "id": "it-audit-FV05",
+   "priority": 90,
+   "slug": "it-audit",
+   "institutionName": "정보시스템 감리",
+   "category": "데이터·디지털·공공서비스",
+   "item": "정보시스템 감리기준(행안부 고시) P01 감리기준 고시 조문 직접 확인 필요(법령정보 API 미제공)",
+   "domain": "법령 조문",
+   "suggestedEvidence": "행정안전부 고시 정보시스템 감리기준 원문(law.go.kr 행정규칙 또는 행안부 누리집) 직접 열람",
+   "status": "open"
+  },
+  {
+   "id": "it-audit-FV06",
+   "priority": 90,
+   "slug": "it-audit",
+   "institutionName": "정보시스템 감리",
+   "category": "데이터·디지털·공공서비스",
+   "item": "정보시스템 감리기준(행안부 고시) P06 감리 수행절차 조문 직접 확인 필요(법령정보 API 미제공)",
+   "domain": "법령 조문",
+   "suggestedEvidence": "행정안전부 고시 정보시스템 감리기준 원문(law.go.kr 행정규칙 또는 행안부 누리집) 직접 열람",
+   "status": "open"
+  },
+  {
+   "id": "it-audit-FV07",
+   "priority": 90,
+   "slug": "it-audit",
+   "institutionName": "정보시스템 감리",
+   "category": "데이터·디지털·공공서비스",
+   "item": "정보시스템 감리기준(행안부 고시) P07 점검항목 조문 직접 확인 필요(법령정보 API 미제공)",
+   "domain": "법령 조문",
+   "suggestedEvidence": "행정안전부 고시 정보시스템 감리기준 원문(law.go.kr 행정규칙 또는 행안부 누리집) 직접 열람",
+   "status": "open"
+  },
+  {
+   "id": "it-audit-FV08",
+   "priority": 90,
+   "slug": "it-audit",
+   "institutionName": "정보시스템 감리",
+   "category": "데이터·디지털·공공서비스",
+   "item": "정보시스템 감리기준(행안부 고시) P08 단계별 감리 조문 직접 확인 필요(법령정보 API 미제공)",
+   "domain": "법령 조문",
+   "suggestedEvidence": "행정안전부 고시 정보시스템 감리기준 원문(law.go.kr 행정규칙 또는 행안부 누리집) 직접 열람",
+   "status": "open"
+  },
+  {
+   "id": "it-audit-FV09",
+   "priority": 90,
+   "slug": "it-audit",
+   "institutionName": "정보시스템 감리",
+   "category": "데이터·디지털·공공서비스",
+   "item": "정보시스템 감리기준(행안부 고시) P09 점검·결함관리 조문 직접 확인 필요(법령정보 API 미제공)",
+   "domain": "법령 조문",
+   "suggestedEvidence": "행정안전부 고시 정보시스템 감리기준 원문(law.go.kr 행정규칙 또는 행안부 누리집) 직접 열람",
+   "status": "open"
+  },
+  {
+   "id": "it-audit-FV10",
+   "priority": 90,
+   "slug": "it-audit",
+   "institutionName": "정보시스템 감리",
+   "category": "데이터·디지털·공공서비스",
+   "item": "정보시스템 감리기준(행안부 고시) P11 시정조치 조문 직접 확인 필요(법령정보 API 미제공)",
+   "domain": "법령 조문",
+   "suggestedEvidence": "행정안전부 고시 정보시스템 감리기준 원문(law.go.kr 행정규칙 또는 행안부 누리집) 직접 열람",
+   "status": "open"
+  },
+  {
+   "id": "it-audit-FV11",
+   "priority": 90,
+   "slug": "it-audit",
+   "institutionName": "정보시스템 감리",
+   "category": "데이터·디지털·공공서비스",
+   "item": "정보시스템 감리기준(행안부 고시) P12 시정 확인 조문 직접 확인 필요(법령정보 API 미제공)",
+   "domain": "법령 조문",
+   "suggestedEvidence": "행정안전부 고시 정보시스템 감리기준 원문(law.go.kr 행정규칙 또는 행안부 누리집) 직접 열람",
+   "status": "open"
+  },
+  {
+   "id": "it-audit-FV12",
+   "priority": 90,
+   "slug": "it-audit",
+   "institutionName": "정보시스템 감리",
+   "category": "데이터·디지털·공공서비스",
+   "item": "정보시스템 감리기준(행안부 고시) P13 재점검 조문 직접 확인 필요(법령정보 API 미제공)",
+   "domain": "법령 조문",
+   "suggestedEvidence": "행정안전부 고시 정보시스템 감리기준 원문(law.go.kr 행정규칙 또는 행안부 누리집) 직접 열람",
+   "status": "open"
+  },
+  {
+   "id": "it-audit-FV13",
+   "priority": 90,
+   "slug": "it-audit",
+   "institutionName": "정보시스템 감리",
+   "category": "데이터·디지털·공공서비스",
+   "item": "정보시스템 감리기준(행안부 고시) P15 감리보고서 조문 직접 확인 필요(법령정보 API 미제공)",
+   "domain": "법령 조문",
+   "suggestedEvidence": "행정안전부 고시 정보시스템 감리기준 원문(law.go.kr 행정규칙 또는 행안부 누리집) 직접 열람",
+   "status": "open"
+  },
+  {
+   "id": "it-audit-FV14",
+   "priority": 90,
+   "slug": "it-audit",
+   "institutionName": "정보시스템 감리",
+   "category": "데이터·디지털·공공서비스",
+   "item": "정보시스템 감리기준(행안부 고시) S01 산출물 관리 조문 직접 확인 필요(법령정보 API 미제공)",
+   "domain": "법령 조문",
+   "suggestedEvidence": "행정안전부 고시 정보시스템 감리기준 원문(law.go.kr 행정규칙 또는 행안부 누리집) 직접 열람",
    "status": "open"
   },
   {
@@ -5004,6 +5116,138 @@
    "item": "P02 고영향 기준·표시방법 고시: 과기정통부 고시의 실제 제명·조문 번호 미확인 (법령정보 API 미조회 — 소관 기관 공식 제명 확인 후 재조회 필요)",
    "domain": "법적근거",
    "suggestedEvidence": "과기정통부 공식 고시 제명 확인 후 국가법령정보센터 행정규칙 검색으로 조문 번호 확정",
+   "status": "open"
+  },
+  {
+   "id": "cybersecurity-FV05",
+   "priority": 91,
+   "slug": "cybersecurity",
+   "institutionName": "사이버보안(공공부문)",
+   "category": "데이터·디지털·공공서비스",
+   "item": "국가 사이버안보 관리규정(대통령훈령) — P03 공공부문 관리체계 조문: 훈령은 국가법령정보센터 API 미제공, 조문 특정 불가(unverified 처리)",
+   "domain": "법령 조문",
+   "suggestedEvidence": "국가정보원 또는 소관기관 공식 문서로 훈령 전문 확인",
+   "status": "open"
+  },
+  {
+   "id": "cybersecurity-FV06",
+   "priority": 91,
+   "slug": "cybersecurity",
+   "institutionName": "사이버보안(공공부문)",
+   "category": "데이터·디지털·공공서비스",
+   "item": "국가 사이버안보 관리규정(대통령훈령) — P07 보안관제 조문: 동일 사유(unverified 처리)",
+   "domain": "법령 조문",
+   "suggestedEvidence": "국가정보원 또는 소관기관 공식 문서로 훈령 전문 확인",
+   "status": "open"
+  },
+  {
+   "id": "cybersecurity-FV07",
+   "priority": 91,
+   "slug": "cybersecurity",
+   "institutionName": "사이버보안(공공부문)",
+   "category": "데이터·디지털·공공서비스",
+   "item": "국가 사이버안보 관리규정(대통령훈령) — P08 정보공유 조문: 동일 사유(unverified 처리)",
+   "domain": "법령 조문",
+   "suggestedEvidence": "국가정보원 또는 소관기관 공식 문서로 훈령 전문 확인",
+   "status": "open"
+  },
+  {
+   "id": "cybersecurity-FV08",
+   "priority": 91,
+   "slug": "cybersecurity",
+   "institutionName": "사이버보안(공공부문)",
+   "category": "데이터·디지털·공공서비스",
+   "item": "국가 사이버안보 관리규정(대통령훈령) — P11 사고대응 조문: 동일 사유(unverified 처리)",
+   "domain": "법령 조문",
+   "suggestedEvidence": "국가정보원 또는 소관기관 공식 문서로 훈령 전문 확인",
+   "status": "open"
+  },
+  {
+   "id": "cybersecurity-FV09",
+   "priority": 91,
+   "slug": "cybersecurity",
+   "institutionName": "사이버보안(공공부문)",
+   "category": "데이터·디지털·공공서비스",
+   "item": "국가 사이버안보 관리규정(대통령훈령) — P12 사고조사 조문: 동일 사유(unverified 처리)",
+   "domain": "법령 조문",
+   "suggestedEvidence": "국가정보원 또는 소관기관 공식 문서로 훈령 전문 확인",
+   "status": "open"
+  },
+  {
+   "id": "cybersecurity-FV10",
+   "priority": 91,
+   "slug": "cybersecurity",
+   "institutionName": "사이버보안(공공부문)",
+   "category": "데이터·디지털·공공서비스",
+   "item": "국가 사이버안보 관리규정(대통령훈령) — P14 보안점검 조문: 동일 사유(unverified 처리)",
+   "domain": "법령 조문",
+   "suggestedEvidence": "소관기관 공식 문서 또는 담당자 확인",
+   "status": "open"
+  },
+  {
+   "id": "cybersecurity-FV11",
+   "priority": 91,
+   "slug": "cybersecurity",
+   "institutionName": "사이버보안(공공부문)",
+   "category": "데이터·디지털·공공서비스",
+   "item": "국가 사이버안보 관리규정(대통령훈령) — S01 정보시스템 연계 조문: 동일 사유(unverified 처리)",
+   "domain": "법령 조문",
+   "suggestedEvidence": "소관기관 공식 문서 또는 담당자 확인",
+   "status": "open"
+  },
+  {
+   "id": "cybersecurity-FV10",
+   "priority": 91,
+   "slug": "cybersecurity",
+   "institutionName": "사이버보안(공공부문)",
+   "category": "안전규제형",
+   "item": "국가 사이버안보 관리규정(대통령훈령) — P14 보안점검 조문: 동일 사유(unverified 처리)",
+   "domain": "법령 조문",
+   "suggestedEvidence": "국가 사이버안보 관리규정(대통령훈령) 원문 직접 열람(law.go.kr 행정규칙 또는 국가정보원 누리집)",
+   "status": "open"
+  },
+  {
+   "id": "cybersecurity-FV11",
+   "priority": 91,
+   "slug": "cybersecurity",
+   "institutionName": "사이버보안(공공부문)",
+   "category": "안전규제형",
+   "item": "국가 사이버안보 관리규정(대통령훈령) — S01 정보시스템 연계 조문: 동일 사유(unverified 처리)",
+   "domain": "법령 조문",
+   "suggestedEvidence": "국가 사이버안보 관리규정(대통령훈령) 원문 직접 열람(law.go.kr 행정규칙 또는 국가정보원 누리집)",
+   "status": "open"
+  },
+  {
+   "id": "government-organization-FV06",
+   "priority": 15,
+   "slug": "government-organization",
+   "institutionName": "정부조직 제도",
+   "category": "국가 운영과 권력 통제",
+   "item": "각 부처 직제(대통령령): P02·P15·P17 노드에서 인용한 하부조직·분장사무·정원 관련 조문은 기관별로 직제령이 따로 존재하므로 단일 조문 번호 확정 불가(institution-scope). 통칙 관련 조문으로 대체 인용함.",
+   "domain": "법령 조문",
+   "suggestedEvidence": "소관기관 공식 문서 또는 담당자 확인",
+   "status": "open"
+  },
+  {
+   "id": "mobile-id-FV07",
+   "priority": 88,
+   "slug": "mobile-id",
+   "institutionName": "모바일 신분증",
+   "category": "데이터·디지털·공공서비스",
+   "item": "전자정부법 모바일 신분증 전용 조항 미확인: 현행 전자정부법(MST 268103, 99개 조문)에 모바일 신분증 발급·효력·처벌에 관한 특정 조문 없음. P03·P04·P05·P08·P09·P10·P11·P14의 전자정부법 인용은 제10조(본인확인)·제11조(전자적 고지·통지)·주민등록법 제24조의2 등 확인된 인접 조문으로 대체 인용함. 전자정부법 개정으로 모바일 신분증 전용 조항이 신설되었을 경우 최신 조문 번호 확인 필요.",
+   "domain": "법령 조문",
+   "suggestedEvidence": "소관기관 공식 문서 또는 담당자 확인",
+   "status": "open"
+  },
+  {
+   "id": "mobile-id-FV08",
+   "priority": 88,
+   "slug": "mobile-id",
+   "institutionName": "모바일 신분증",
+   "category": "데이터·디지털·공공서비스",
+   "item": "도로교통법 제85조의2(모바일운전면허증 발급 및 운전면허증의 확인 등) 확인 완료(MST 281875). 모바일 운전면허증 이외 신분증 종류(장애인·국가보훈·외국인등록) 발급 근거 조항 확인 필요.",
+   "domain": "법령 조문",
+   "suggestedEvidence": "소관기관 공식 문서 또는 담당자 확인",
    "status": "open"
   }
  ]
