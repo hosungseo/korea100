@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: "%s | 조달제도 100",
   },
   description:
-    "기업에는 비즈니스 모델이 있듯이, 공공조달에는 계약 모델이 있다. 공공조달·계약 제도를 법령·조직·절차·돈·문서 흐름의 한 장 구조도로 보여드립니다.",
+    "입찰참가자격 등록부터 계약 체결, 대금 지급까지 — 국가계약법·시행령·계약예규에 흩어진 공공조달 제도를 누가, 무엇을, 어떤 순서로 진행하는지 보이는 한 장의 업무 흐름도로 정리합니다. 모든 근거는 국가법령정보센터 현행 법령과 조문 단위로 연결해 검증합니다.",
   keywords: "공공조달, 조달청, 나라장터, 국가계약, 입찰, 수의계약, 조달업체 등록, 법령",
   alternates: { canonical: `${SITE_URL}/` },
   openGraph: {
@@ -63,7 +63,7 @@ export default function RootLayout({
               "@type": "CollectionPage",
               name: "한 장으로 끝내는 조달제도 100",
               description:
-                "대한민국 공공조달·계약 제도를 법령, 조직, 절차, 돈, 문서와 데이터 흐름으로 정리한 계약 모델 카탈로그",
+                "대한민국 공공조달·계약 제도를 행위자, 절차, 돈, 문서 흐름과 조문 단위 법적 근거로 구조화한 업무 흐름도 카탈로그",
               inLanguage: "ko-KR",
               url: `${SITE_URL}/`,
               numberOfItems: MODEL_COUNT,
