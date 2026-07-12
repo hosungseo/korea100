@@ -1,10 +1,20 @@
+"use client";
+
 import Link from "next/link";
 import { Suspense } from "react";
 import { buildProcessLaneGroups } from "@/lib/process-layout.mjs";
-import type { Institution, InstitutionSummary } from "@/lib/types";
+import type { Institution, InstitutionSummary, Warning } from "@/lib/types";
 import InstitutionSwitcher from "./InstitutionSwitcher";
 import ProcessExplorer from "./ProcessExplorer";
 import styles from "./InstitutionDetail.module.css";
+import { useEffect } from "react";
+
+function getWarningText(warning: string | Warning | undefined): string {
+  if (!warning) return "";
+  return typeof warning === "string"
+    ? warning
+    : `${warning.date} / ${warning.content}`;
+}
 
 export default function InstitutionDetailView({
   institution,
@@ -19,13 +29,19 @@ export default function InstitutionDetailView({
   const article = institution.verification?.articleVerification;
   const verification = verificationMeta(institution);
   const stats = [
-    { value: process?.nodes.length ?? institution.canvas.procedure.length, label: "절차 노드" },
+    {
+      value: process?.nodes.length ?? institution.canvas.procedure.length,
+      label: "절차 노드",
+    },
     { value: process?.lanes.length ?? 0, label: "행위 레인" },
-    { value: process?.stages.length ?? institution.canvas.procedure.length, label: "게이트" },
+    {
+      value: process?.stages.length ?? institution.canvas.procedure.length,
+      label: "게이트",
+    },
     {
       value: article
         ? `${article.verifiedReferences}/${article.articleReferences}`
-        : institution.verification?.sources.length ?? 0,
+        : (institution.verification?.sources.length ?? 0),
       label: "조문 확인",
       accent: "verified",
     },
@@ -35,6 +51,10 @@ export default function InstitutionDetailView({
       accent: "warning",
     },
   ];
+
+  useEffect(() => {
+    console.log(process?.warnings?.at(0));
+  }, [styles.processWarning]);
 
   return (
     <div className={styles.detail}>
@@ -52,7 +72,10 @@ export default function InstitutionDetailView({
               </span>
               <span className={styles.category}>{institution.category}</span>
               <span>{institution.type}</span>
-              <span className={styles.verificationBadge} data-tone={verification.tone}>
+              <span
+                className={styles.verificationBadge}
+                data-tone={verification.tone}
+              >
                 <i aria-hidden="true" />
                 {verification.label}
               </span>
@@ -85,21 +108,42 @@ export default function InstitutionDetailView({
             <p>노드 상태는 제도 흐름 설명용 편집 상태입니다</p>
           </div>
           <div className={styles.legend} aria-label="노드 상태 범례">
-            <span><i data-tone="done" />완료</span>
-            <span><i data-tone="current" />현재</span>
-            <span><i data-tone="risk" />위험·회귀</span>
-            <span><i data-tone="waiting" />대기</span>
+            <span>
+              <i data-tone="done" />
+              완료
+            </span>
+            <span>
+              <i data-tone="current" />
+              현재
+            </span>
+            <span>
+              <i data-tone="risk" />
+              위험·회귀
+            </span>
+            <span>
+              <i data-tone="waiting" />
+              대기
+            </span>
           </div>
         </header>
 
         <div className={styles.processPanel}>
           {process ? (
-            <Suspense fallback={<div className="process-explorer-loading">업무구조도를 불러오는 중입니다.</div>}>
+            <Suspense
+              fallback={
+                <div className="process-explorer-loading">
+                  업무구조도를 불러오는 중입니다.
+                </div>
+              }
+            >
               <ProcessExplorer
                 process={process}
                 verification={institution.verification}
                 slug={institution.slug}
-                laneGroups={buildProcessLaneGroups(process.lanes, institution.slug)}
+                laneGroups={buildProcessLaneGroups(
+                  process.lanes,
+                  institution.slug,
+                )}
               />
             </Suspense>
           ) : (
@@ -115,19 +159,20 @@ export default function InstitutionDetailView({
         </div>
 
         {process?.warnings && process.warnings.length > 0 && (
-          <p className={styles.processWarning}>{process.warnings.join(" / ")}</p>
+          <p className={styles.processWarning}>
+            {getWarningText(process.warnings.at(0))}
+          </p>
         )}
       </section>
 
-      <OnePageCanvas
-        institution={institution}
-        relatedSlugs={relatedSlugs}
-      />
+      <OnePageCanvas institution={institution} relatedSlugs={relatedSlugs} />
 
       <footer className={styles.disclaimer}>
-        <strong>검증:</strong> {institution.verification?.scope ?? "공식 원문 검증 준비 중"}
+        <strong>검증:</strong>{" "}
+        {institution.verification?.scope ?? "공식 원문 검증 준비 중"}
         <span>
-          이 콘텐츠는 제도 이해를 위한 참고 자료이며 법률 자문이나 정부기관의 공식 해석을 대신하지 않습니다.
+          이 콘텐츠는 제도 이해를 위한 참고 자료이며 법률 자문이나 정부기관의
+          공식 해석을 대신하지 않습니다.
         </span>
       </footer>
     </div>
@@ -156,7 +201,9 @@ function OnePageCanvas({
           <h2>한 장 캔버스</h2>
           <p>법령 · 조직 · 절차 · 예산 · 문서</p>
         </div>
-        <time dateTime={institution.asOfDate}>기준일 {institution.asOfDate}</time>
+        <time dateTime={institution.asOfDate}>
+          기준일 {institution.asOfDate}
+        </time>
       </header>
 
       <div className={styles.canvasGrid}>
@@ -168,7 +215,11 @@ function OnePageCanvas({
               return (
                 <div key={`${basis.kind}:${basis.law}`}>
                   {source ? (
-                    <a href={source.officialUrl} target="_blank" rel="noreferrer">
+                    <a
+                      href={source.officialUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       {basis.law}
                     </a>
                   ) : (
@@ -203,13 +254,17 @@ function OnePageCanvas({
 
         <CanvasBlock title="병목" tone="warning">
           <ul>
-            {canvas.bottlenecks.map((item) => <li key={item}>{item}</li>)}
+            {canvas.bottlenecks.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
           </ul>
         </CanvasBlock>
 
         <CanvasBlock title="개선점" tone="accent" size="wide">
           <ul className={styles.twoColumnList}>
-            {canvas.reformPoints.map((item) => <li key={item}>{item}</li>)}
+            {canvas.reformPoints.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
           </ul>
         </CanvasBlock>
 
@@ -218,7 +273,9 @@ function OnePageCanvas({
             {institution.related.map((name) => {
               const slug = relatedSlugs.get(name);
               return slug ? (
-                <Link href={`/model/${slug}/`} key={name}>{name}</Link>
+                <Link href={`/model/${slug}/`} key={name}>
+                  {name}
+                </Link>
               ) : (
                 <span key={name}>{name}</span>
               );
@@ -228,7 +285,9 @@ function OnePageCanvas({
 
         <CanvasBlock title="현장 검증 필요" tone="field" size="wide">
           <ul className={styles.twoColumnList}>
-            {institution.fieldVerification.map((item) => <li key={item}>{item}</li>)}
+            {institution.fieldVerification.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
           </ul>
         </CanvasBlock>
       </div>

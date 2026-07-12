@@ -122,9 +122,7 @@
         "progress": 100,
         "actor": "재정경제부",
         "action": "내국세 산출",
-        "output_documents": [
-          "내국세 실적·전망 자료"
-        ],
+        "output_documents": ["내국세 실적·전망 자료"],
         "confidence": 0.85,
         "legal_basis": [
           {
@@ -146,9 +144,7 @@
         "receiver": "행정안전부",
         "action": "재원 확정",
         "condition": "내국세 총액의 19.24%로 교부세 총재원 확정",
-        "output_documents": [
-          "교부세 재원 규모"
-        ],
+        "output_documents": ["교부세 재원 규모"],
         "confidence": 0.88,
         "legal_basis": [
           {
@@ -168,12 +164,8 @@
         "progress": 100,
         "actor": "행정안전부",
         "action": "수요액 산정",
-        "input_documents": [
-          "교부세 재원 규모"
-        ],
-        "output_documents": [
-          "기준재정수요액 산정 자료"
-        ],
+        "input_documents": ["교부세 재원 규모"],
+        "output_documents": ["기준재정수요액 산정 자료"],
         "confidence": 0.82,
         "legal_basis": [
           {
@@ -198,9 +190,7 @@
         "progress": 100,
         "actor": "행정안전부",
         "action": "수입액 산정",
-        "output_documents": [
-          "기준재정수입액 산정 자료"
-        ],
+        "output_documents": ["기준재정수입액 산정 자료"],
         "confidence": 0.82,
         "legal_basis": [
           {
@@ -230,10 +220,7 @@
           "기준재정수요액 산정 자료",
           "기준재정수입액 산정 자료"
         ],
-        "output_documents": [
-          "재정부족액 산정 내역",
-          "불교부단체 명단"
-        ],
+        "output_documents": ["재정부족액 산정 내역", "불교부단체 명단"],
         "confidence": 0.83,
         "legal_basis": [
           {
@@ -258,13 +245,8 @@
         "progress": 0,
         "actor": "행정안전부",
         "action": "보통교부세 산정",
-        "input_documents": [
-          "재정부족액 산정 내역"
-        ],
-        "output_documents": [
-          "보통교부세 산정 내역",
-          "교부 결정"
-        ],
+        "input_documents": ["재정부족액 산정 내역"],
+        "output_documents": ["보통교부세 산정 내역", "교부 결정"],
         "confidence": 0.83,
         "legal_basis": [
           {
@@ -284,12 +266,8 @@
         "progress": 0,
         "actor": "지방자치단체",
         "action": "교부 통지·수령",
-        "input_documents": [
-          "교부 결정"
-        ],
-        "output_documents": [
-          "교부 통지서"
-        ],
+        "input_documents": ["교부 결정"],
+        "output_documents": ["교부 통지서"],
         "deadline": "매 회계연도 개시 전 교부세 총액 통지(영 제11조)",
         "confidence": 0.8,
         "legal_basis": [
@@ -316,10 +294,7 @@
         "actor": "지방자치단체",
         "receiver": "행정안전부",
         "action": "수요 신청",
-        "output_documents": [
-          "특별교부세 신청서",
-          "지역현안·재해 수요자료"
-        ],
+        "output_documents": ["특별교부세 신청서", "지역현안·재해 수요자료"],
         "confidence": 0.76,
         "legal_basis": [
           {
@@ -340,9 +315,7 @@
         "actor": "행정안전부",
         "action": "수요 심사",
         "condition": "지역현안·재해·시책 수요의 인정 여부와 교부 규모",
-        "output_documents": [
-          "특별교부세 심사 결과"
-        ],
+        "output_documents": ["특별교부세 심사 결과"],
         "blocker": "특별교부세의 재량 배분·정치적 배분 논란(운영 추정)",
         "confidence": 0.72,
         "legal_basis": [
@@ -386,12 +359,8 @@
         "progress": 0,
         "actor": "지방자치단체",
         "action": "예산편성",
-        "input_documents": [
-          "교부 통지서"
-        ],
-        "output_documents": [
-          "지자체 예산서"
-        ],
+        "input_documents": ["교부 통지서"],
+        "output_documents": ["지자체 예산서"],
         "confidence": 0.82,
         "legal_basis": [
           {
@@ -412,13 +381,8 @@
         "actor": "행정안전부",
         "action": "과부족 정산",
         "condition": "교부세 산정자료 착오 등으로 기준재정수요액·수입액 잘못 산정된 경우 확인 후 다음 연도 교부세 산정 시 가감 조치",
-        "input_documents": [
-          "지자체 예산서",
-          "결산 자료"
-        ],
-        "output_documents": [
-          "정산 결과"
-        ],
+        "input_documents": ["지자체 예산서", "결산 자료"],
+        "output_documents": ["정산 결과"],
         "confidence": 0.88,
         "legal_basis": [
           {
@@ -439,12 +403,8 @@
         "progress": 0,
         "actor": "행정안전부",
         "action": "차년도 반영",
-        "input_documents": [
-          "정산 결과"
-        ],
-        "output_documents": [
-          "차년도 산정 반영 내역"
-        ],
+        "input_documents": ["정산 결과"],
+        "output_documents": ["차년도 산정 반영 내역"],
         "blocker": "정산분 차년도 반영 절차·시점의 실무 흐름(운영 추정)",
         "confidence": 0.73,
         "legal_basis": [
@@ -466,9 +426,7 @@
         "progress": 0,
         "actor": "감사원·행정안전부",
         "action": "자체노력·감사 점검",
-        "output_documents": [
-          "자체노력 반영 점검 결과"
-        ],
+        "output_documents": ["자체노력 반영 점검 결과"],
         "blocker": "자체노력 반영(인센티브·페널티)의 실효성 검증 곤란(운영 추정)",
         "confidence": 0.71,
         "legal_basis": [
@@ -489,10 +447,7 @@
         "progress": 0,
         "actor": "행정안전부",
         "action": "측정항목·측정단위(대통령령)와 단위비용(행정안전부령)을 결정하여 수요액 산정 기준 제공",
-        "output_documents": [
-          "단위비용 고시",
-          "측정항목·측정단위 기준"
-        ],
+        "output_documents": ["단위비용 고시", "측정항목·측정단위 기준"],
         "confidence": 0.79,
         "legal_basis": [
           {
@@ -517,13 +472,8 @@
         "progress": 0,
         "actor": "재정정보 공개시스템",
         "action": "내역 공개",
-        "input_documents": [
-          "보통교부세 산정 내역",
-          "교부 결정"
-        ],
-        "output_documents": [
-          "공개 게시자료"
-        ],
+        "input_documents": ["보통교부세 산정 내역", "교부 결정"],
+        "output_documents": ["공개 게시자료"],
         "confidence": 0.72,
         "legal_basis": [
           {
@@ -544,10 +494,7 @@
         "actor": "지방자치단체장",
         "receiver": "행정안전부",
         "action": "교부세 산정자료 제출",
-        "output_documents": [
-          "교부세 산정자료",
-          "산정자료 대장"
-        ],
+        "output_documents": ["교부세 산정자료", "산정자료 대장"],
         "confidence": 0.95,
         "legal_basis": [
           {
@@ -570,9 +517,7 @@
         "receiver": "행정안전부",
         "action": "이의신청",
         "deadline": "보통교부세 결정 통지를 받은 날부터 30일 이내",
-        "output_documents": [
-          "이의신청서"
-        ],
+        "output_documents": ["이의신청서"],
         "confidence": 0.97,
         "legal_basis": [
           {
@@ -594,12 +539,8 @@
         "actor": "행정안전부",
         "action": "이의신청 심사 및 결과 통지",
         "deadline": "이의신청을 받은 날부터 30일 이내",
-        "input_documents": [
-          "이의신청서"
-        ],
-        "output_documents": [
-          "이의신청 심사 결과 통지"
-        ],
+        "input_documents": ["이의신청서"],
+        "output_documents": ["이의신청 심사 결과 통지"],
         "confidence": 0.97,
         "legal_basis": [
           {
@@ -656,9 +597,7 @@
         "receiver": "국회 소관 상임위원회",
         "action": "보통교부세 운영 결과 보고",
         "deadline": "매 회계연도 종료 후 3개월 이내",
-        "output_documents": [
-          "보통교부세 배분기준·배분내역·집행실적 보고서"
-        ],
+        "output_documents": ["보통교부세 배분기준·배분내역·집행실적 보고서"],
         "confidence": 0.97,
         "legal_basis": [
           {
@@ -857,20 +796,13 @@
         "date": "2026-07-12",
         "type": "citation-correction",
         "content": "P11: '지방재정 운용 원칙 조문' → 지방재정법 제3조(지방재정 운용의 기본원칙). P12: '정산 관련 조문' → 지방교부세법 제8조의2(산정자료의 착오 등에 대한 조치). P13: '행정안전부 보통교부세 산정 지침 정산·보정 반영 기준' → 행정규칙으로 API 미제공, unverified 처리. P14: '행정안전부 보통교부세 산정 지침 자체노력 반영 기준' → 지방교부세법 제8조의3(건전재정운영을 위한 자체노력 반영)으로 법률 조문 확인. S01: '재정공시 관련 조문' → 지방재정법 제60조(지방재정 운용상황의 공시 등).",
-        "consultedMSTs": [
-          "284101",
-          "283145"
-        ]
+        "consulted_msts": ["284101", "283145"]
       },
       {
         "date": "2026-07-12",
         "type": "L2-blind-recon-adjudication",
         "content": "2026-07-12 L2 블라인드 재구성 대조 정정: (F/C) P12 actor '지방재정부담심의' → '행정안전부'로 정정 및 lane 수정 — 지방교부세법·시행령 어디에도 '지방재정부담심의'가 교부세 과부족 정산 주체·근거인 조문 없음; 법 제8조의2는 행안부장관이 직접 착오 확인 후 조치하는 규정임(F: 비법정 기구가 법령 근거처럼 표기, C: 근거 오인용). (E) P16 신설 — 령 제3조(교부세 산정자료) 지자체장의 산정자료 제출 의무 단계 누락. (E) P17 신설 — 법 제13조①(이의신청) 보통교부세 결정 통지 후 30일 이내 이의신청권 누락. (E) P18 신설 — 법 제13조②·령 제14조(이의신청 심사) 30일 이내 심사·통지 의무 누락. (E) P19 신설 — 법 제11조(부당 교부세 시정) 반환명령·감액 조치 단계 누락. (E) P20 신설 — 법 제15조(보통교부세의 보고) 회계연도 종료 후 3개월 이내 국회 보고 의무 누락. 참조 MST: 284101(지방교부세법), 287315(지방교부세법 시행령). 법의 침묵: ① 이의신청 이후 행정심판·소송 가능 여부 및 불복 단계가 지방교부세법에 명시되지 않음. ② 산정자료 제출 기한(제출 시기)이 법령에 명시되지 않아 실무 지침에 위임됨. ③ 특별교부세 신청 후 교부 거부 시 불복 절차가 법령에 명시되지 않음.",
-        "consultedMSTs": [
-          "284101",
-          "287315",
-          "282727"
-        ]
+        "consulted_msts": ["284101", "287315", "282727"]
       },
       "2026-07-12 정리: L2 주체 정정으로 노드가 없어진 레인 '지방재정 심의·자문' 제거.",
       "2026-07-12 부처명 정정: 정부조직 개편(정부조직법 2026-01-02 시행, §23 기획예산처·§30 재정경제부)에 따라 구 기획재정부 표기 7건을 '재정경제부'로 갱신 — 근거: 정부조직법 §30(내국세제·국세청 소관=재정경제부) — 교부세 재원=내국세 연계.",

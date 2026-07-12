@@ -110,9 +110,7 @@
         "progress": 100,
         "actor": "주무부장관·시·도지사",
         "action": "감사청구 수리 후 감사 실시, 결과를 청구인 대표자·단체장에게 서면 통지·공표",
-        "output_documents": [
-          "감사 결과 통지서"
-        ],
+        "output_documents": ["감사 결과 통지서"],
         "deadline": "수리한 날부터 60일 이내(연장 가능)",
         "confidence": 0.9,
         "legal_basis": [
@@ -134,12 +132,8 @@
         "actor": "원고 주민",
         "action": "전치 요건 확인",
         "condition": "재무회계 사항에 대한 주민감사청구를 먼저 거쳤는지",
-        "input_documents": [
-          "선행 감사 결과"
-        ],
-        "output_documents": [
-          "전치 확인메모"
-        ],
+        "input_documents": ["선행 감사 결과"],
+        "output_documents": ["전치 확인메모"],
         "confidence": 0.82,
         "legal_basis": [
           {
@@ -159,9 +153,7 @@
         "progress": 100,
         "actor": "원고 주민",
         "action": "제소 사유 확인",
-        "output_documents": [
-          "제소 사유 정리"
-        ],
+        "output_documents": ["제소 사유 정리"],
         "confidence": 0.8,
         "legal_basis": [
           {
@@ -182,9 +174,7 @@
         "actor": "원고 주민",
         "action": "소송 유형 선택",
         "condition": "중지 청구·취소·위법확인·손해배상 요구 중 선택",
-        "output_documents": [
-          "소송 유형 결정"
-        ],
+        "output_documents": ["소송 유형 결정"],
         "confidence": 0.8,
         "legal_basis": [
           {
@@ -205,9 +195,7 @@
         "actor": "원고 주민",
         "receiver": "법원(행정법원·고법·대법)",
         "action": "소장 제출",
-        "output_documents": [
-          "소장"
-        ],
+        "output_documents": ["소장"],
         "deadline": "제소 사유별 90일 이내",
         "confidence": 0.8,
         "legal_basis": [
@@ -229,13 +217,8 @@
         "actor": "피고 지방자치단체의 장",
         "receiver": "법원(행정법원·고법·대법)",
         "action": "답변·자료 제출",
-        "input_documents": [
-          "소장 부본"
-        ],
-        "output_documents": [
-          "답변서",
-          "재무회계 자료"
-        ],
+        "input_documents": ["소장 부본"],
+        "output_documents": ["답변서", "재무회계 자료"],
         "deadline": "재판부가 정한 기간",
         "blocker": "재무회계 자료 정리·제출 진행 중",
         "confidence": 0.78,
@@ -267,15 +250,8 @@
         "progress": 35,
         "actor": "법원",
         "action": "심리·증거조사",
-        "input_documents": [
-          "소장",
-          "답변서",
-          "재무회계 자료"
-        ],
-        "output_documents": [
-          "변론조서",
-          "증거조사 결과"
-        ],
+        "input_documents": ["소장", "답변서", "재무회계 자료"],
+        "output_documents": ["변론조서", "증거조사 결과"],
         "blocker": "쟁점·손해액 입증으로 심리가 장기화될 수 있다(현장 검증 필요)",
         "confidence": 0.78,
         "legal_basis": [
@@ -312,13 +288,8 @@
         "actor": "법원",
         "action": "판결",
         "condition": "인용(중지·취소·위법확인·손해배상 요구)·기각·각하",
-        "input_documents": [
-          "변론조서",
-          "증거조사 결과"
-        ],
-        "output_documents": [
-          "판결서"
-        ],
+        "input_documents": ["변론조서", "증거조사 결과"],
+        "output_documents": ["판결서"],
         "confidence": 0.79,
         "legal_basis": [
           {
@@ -339,9 +310,7 @@
         "actor": "법원",
         "receiver": "원고 주민·피고 지방자치단체의 장",
         "action": "판결 확정·송달",
-        "output_documents": [
-          "확정 판결서"
-        ],
+        "output_documents": ["확정 판결서"],
         "confidence": 0.79,
         "legal_basis": [
           {
@@ -367,13 +336,8 @@
         "actor": "피고 지방자치단체의 장",
         "receiver": "책임 공무원·상대방",
         "action": "손해배상 청구·변상명령",
-        "input_documents": [
-          "확정 판결서"
-        ],
-        "output_documents": [
-          "손해배상 청구서",
-          "변상명령"
-        ],
+        "input_documents": ["확정 판결서"],
+        "output_documents": ["손해배상 청구서", "변상명령"],
         "deadline": "판결 확정된 날부터 60일 이내 지급청구/변상명령(제23조제1항·제24조제1항)",
         "confidence": 0.77,
         "legal_basis": [
@@ -400,13 +364,8 @@
         "actor": "책임 공무원·상대방",
         "receiver": "피고 지방자치단체의 장",
         "action": "배상 이행",
-        "input_documents": [
-          "손해배상 청구서",
-          "변상명령"
-        ],
-        "output_documents": [
-          "배상 이행 확인"
-        ],
+        "input_documents": ["손해배상 청구서", "변상명령"],
+        "output_documents": ["배상 이행 확인"],
         "confidence": 0.77,
         "legal_basis": [
           {
@@ -431,10 +390,7 @@
         "progress": 0,
         "actor": "피고 지방자치단체의 장·법원",
         "action": "2단계 이행소송",
-        "output_documents": [
-          "이행 소장",
-          "이행 판결"
-        ],
+        "output_documents": ["이행 소장", "이행 판결"],
         "blocker": "손해배상금을 내지 않으면 지방자치단체가 별도의 이행 소송을 제기하는 회귀 단계",
         "confidence": 0.76,
         "legal_basis": [
@@ -456,12 +412,8 @@
         "actor": "원고 주민",
         "receiver": "피고 지방자치단체의 장",
         "action": "실비 보상 청구",
-        "input_documents": [
-          "확정 판결서"
-        ],
-        "output_documents": [
-          "소송비용 보상 청구서"
-        ],
+        "input_documents": ["확정 판결서"],
+        "output_documents": ["소송비용 보상 청구서"],
         "confidence": 0.78,
         "legal_basis": [
           {
@@ -481,12 +433,8 @@
         "progress": 0,
         "actor": "원고·피고·법원",
         "action": "상소 심리",
-        "input_documents": [
-          "판결서"
-        ],
-        "output_documents": [
-          "상소심 판결서"
-        ],
+        "input_documents": ["판결서"],
+        "output_documents": ["상소심 판결서"],
         "confidence": 0.78,
         "legal_basis": [
           {
@@ -511,14 +459,8 @@
         "progress": 0,
         "actor": "전자소송 시스템",
         "action": "사건 관리·전자송달",
-        "input_documents": [
-          "소장",
-          "판결서"
-        ],
-        "output_documents": [
-          "사건 진행 기록",
-          "전자 송달"
-        ],
+        "input_documents": ["소장", "판결서"],
+        "output_documents": ["사건 진행 기록", "전자 송달"],
         "confidence": 0.72,
         "legal_basis": [
           {
@@ -663,9 +605,7 @@
         "date": "2026-07-12",
         "type": "citation-correction",
         "content": "P05·P06·P08·P13·S01의 행정소송법 인용에서 서술형 article 필드(\"심리 절차 준용\", \"심리·증거조사 준용\", \"판결 확정 준용\", \"상소 준용\", \"전자소송 준용\")를 unverified 처리. 지방자치법 제22조제18항이 행정소송법 전체를 blanket 준용하므로 특정 조문을 MCP API로 확인 시도하였으나 2026-07-12 일시 장애(502)로 조문 본문 미확인. ToC상 제8조(법적용례)·제26조(직권심리)·제46조(준용규정) 후보 확인, 조문 본문은 fieldVerification으로 이관.",
-        "consultedMSTs": [
-          "285913"
-        ]
+        "consulted_msts": ["285913"]
       },
       "2026-07-12 L3 워크스루 정정: '선행 감사기관' 레인 노드 0 — 주민소송의 전치인 감사청구 처리 노드(P14) 신설, 지방자치법 제21조⑨ 원문 대조(law.go.kr).",
       "2026-07-12 확정: 행정소송법 준용 5건 중 4건을 원문 대조로 확정 — 게이트웨이 지방자치법 제22조⑱ + 행정소송법 제8조②(민소법 준용)·제26조(직권심리) (DRF MST 284005·285913). S01 전자소송은 소관 법률명 정정 후 확정 대기."

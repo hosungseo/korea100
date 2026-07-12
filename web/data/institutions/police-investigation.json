@@ -131,9 +131,7 @@
         "status": "done",
         "progress": 100,
         "actor": "112치안종합상황실",
-        "output_documents": [
-          "신고 접수기록"
-        ],
+        "output_documents": ["신고 접수기록"],
         "deadline": "즉시",
         "confidence": 0.85,
         "legal_basis": [
@@ -159,9 +157,7 @@
         "progress": 100,
         "actor": "112치안종합상황실",
         "condition": "code0(최우선)~code4",
-        "output_documents": [
-          "신고 분류표"
-        ],
+        "output_documents": ["신고 분류표"],
         "deadline": "접수 즉시",
         "confidence": 0.8,
         "legal_basis": [
@@ -182,9 +178,7 @@
         "progress": 100,
         "actor": "112치안종합상황실",
         "receiver": "지구대·파출소",
-        "output_documents": [
-          "출동 지령"
-        ],
+        "output_documents": ["출동 지령"],
         "deadline": "분류 즉시",
         "confidence": 0.82,
         "legal_basis": [
@@ -204,10 +198,7 @@
         "status": "risk",
         "progress": 70,
         "actor": "지구대·파출소 경찰관",
-        "output_documents": [
-          "현장 조치기록",
-          "초동수사 보고"
-        ],
+        "output_documents": ["현장 조치기록", "초동수사 보고"],
         "deadline": "지령 후 즉시",
         "blocker": "현장 위치 특정 지연으로 도착 지체",
         "confidence": 0.83,
@@ -229,10 +220,7 @@
         "progress": 50,
         "actor": "사법경찰관",
         "condition": "입건/내사종결",
-        "output_documents": [
-          "입건 결정",
-          "수사 개시 보고"
-        ],
+        "output_documents": ["입건 결정", "수사 개시 보고"],
         "deadline": "초동조치 후",
         "blocker": "입건·내사 여부 판단 검토 중",
         "confidence": 0.85,
@@ -258,11 +246,7 @@
         "status": "waiting",
         "progress": 0,
         "actor": "사법경찰관",
-        "output_documents": [
-          "피의자신문조서",
-          "참고인진술조서",
-          "수사보고"
-        ],
+        "output_documents": ["피의자신문조서", "참고인진술조서", "수사보고"],
         "deadline": "수사기간 내",
         "confidence": 0.85,
         "legal_basis": [
@@ -283,9 +267,7 @@
         "progress": 0,
         "actor": "사법경찰관",
         "receiver": "검찰",
-        "output_documents": [
-          "압수·수색·체포영장 신청서"
-        ],
+        "output_documents": ["압수·수색·체포영장 신청서"],
         "deadline": "필요 시",
         "confidence": 0.72,
         "legal_basis": [
@@ -311,9 +293,7 @@
         "progress": 0,
         "actor": "검사",
         "receiver": "법원",
-        "output_documents": [
-          "영장 청구서"
-        ],
+        "output_documents": ["영장 청구서"],
         "deadline": "신청 후",
         "confidence": 0.72,
         "legal_basis": [
@@ -334,9 +314,7 @@
         "progress": 0,
         "actor": "판사",
         "condition": "발부/기각",
-        "output_documents": [
-          "영장 발부/기각 결정"
-        ],
+        "output_documents": ["영장 발부/기각 결정"],
         "deadline": "청구 후",
         "confidence": 0.72,
         "legal_basis": [
@@ -357,9 +335,7 @@
         "progress": 0,
         "actor": "사법경찰관",
         "condition": "혐의 인정(송치)/불인정(불송치)",
-        "output_documents": [
-          "수사결과 검토서"
-        ],
+        "output_documents": ["수사결과 검토서"],
         "deadline": "수사 종결 시",
         "confidence": 0.85,
         "legal_basis": [
@@ -385,10 +361,7 @@
         "progress": 0,
         "actor": "사법경찰관",
         "receiver": "검찰",
-        "output_documents": [
-          "송치서",
-          "수사기록"
-        ],
+        "output_documents": ["송치서", "수사기록"],
         "deadline": "결정 후",
         "confidence": 0.85,
         "legal_basis": [
@@ -414,10 +387,7 @@
         "progress": 0,
         "actor": "사법경찰관",
         "receiver": "신고자·시민",
-        "output_documents": [
-          "불송치 결정서",
-          "불송치 이유 통지"
-        ],
+        "output_documents": ["불송치 결정서", "불송치 이유 통지"],
         "deadline": "결정 후 7일 내",
         "confidence": 0.83,
         "legal_basis": [
@@ -442,9 +412,7 @@
         "status": "loop",
         "progress": 0,
         "actor": "고소인·피해자",
-        "output_documents": [
-          "이의신청서"
-        ],
+        "output_documents": ["이의신청서"],
         "deadline": "통지 받은 후",
         "confidence": 0.82,
         "legal_basis": [
@@ -466,9 +434,7 @@
         "actor": "검사",
         "receiver": "경찰 수사부서",
         "condition": "보완 필요/불요",
-        "output_documents": [
-          "보완수사 요구서"
-        ],
+        "output_documents": ["보완수사 요구서"],
         "deadline": "송치·이의 검토 후",
         "confidence": 0.8,
         "legal_basis": [
@@ -499,10 +465,7 @@
         "progress": 0,
         "actor": "검사",
         "condition": "기소/불기소",
-        "output_documents": [
-          "공소장",
-          "불기소 결정서"
-        ],
+        "output_documents": ["공소장", "불기소 결정서"],
         "deadline": "수사 종결 후",
         "confidence": 0.82,
         "legal_basis": [
@@ -522,10 +485,7 @@
         "status": "waiting",
         "progress": 0,
         "actor": "법원",
-        "output_documents": [
-          "공판조서",
-          "판결"
-        ],
+        "output_documents": ["공판조서", "판결"],
         "deadline": "기소 후",
         "confidence": 0.78,
         "legal_basis": [
@@ -545,12 +505,8 @@
         "status": "waiting",
         "progress": 0,
         "actor": "형사사법정보시스템",
-        "input_documents": [
-          "입건 결정"
-        ],
-        "output_documents": [
-          "사건 등록기록"
-        ],
+        "input_documents": ["입건 결정"],
+        "output_documents": ["사건 등록기록"],
         "confidence": 0.7,
         "legal_basis": [
           {
@@ -708,9 +664,7 @@
         "date": "2026-07-12",
         "type": "citation-correction",
         "content": "P01·P02·P03의 112신고의 운영 및 처리 등에 관한 법률 인용에서 서술형 article 필드(\"112치안종합상황실 신고 접수\", \"신고 대응 코드 분류\", \"긴급조치·출동 지령\")를 현행 조문 번호로 교정. P01→제6조(112치안종합상황실의 설치·운영)+제7조(112신고의 접수 등), P02→제7조(112신고의 접수 등), P03→제8조(112신고에 대한 조치). 조문 목차 및 본문은 국가법령정보센터 DRF API(MST 257787) 직접 조회로 확인.",
-        "consultedMSTs": [
-          "257787"
-        ]
+        "consulted_msts": ["257787"]
       },
       "2026-07-12 정정: 고소인 이의신청(P13)의 효과를 '경찰 재검토 루프'에서 '검사 송치'로 재배선 — 형소법 제245조의7② 원문 대조(DRF MST 281865). 이의신청은 경찰 재검토가 아니라 검사 송치를 강제함."
     ]
