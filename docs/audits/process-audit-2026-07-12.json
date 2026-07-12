@@ -2,31 +2,47 @@
   "generatedAt": "2026-07-12",
   "metricStats": {
     "nodes": {
-      "mean": 15.970297029702971,
-      "sd": 1.4103959527226828
+      "mean": 16.396039603960396,
+      "sd": 1.7065929692776667
     },
     "edgeRatio": {
-      "mean": 1.138140459080441,
-      "sd": 0.07716663417838575
+      "mean": 1.143537864698933,
+      "sd": 0.07589516885719952
     },
     "deadlineDensity": {
-      "mean": 0.42342760209066205,
-      "sd": 0.35592274980376715
+      "mean": 0.4322146943116046,
+      "sd": 0.3465485882946338
     },
     "meanConfidence": {
-      "mean": 0.7977759980462206,
-      "sd": 0.02532888821418128
+      "mean": 0.8016230525948571,
+      "sd": 0.025059690827040935
     }
   },
   "results": [
     {
-      "slug": "workplace-harassment-response",
-      "verificationStatus": "article-verified",
-      "processWarnings": 5,
+      "slug": "ai-basic-act",
+      "verificationStatus": "needs-review",
+      "processWarnings": 2,
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=20.00 (전체 평균 15.97±1.41)"
+          "detail": "nodes=20.00 (전체 평균 16.40±1.71)"
+        },
+        {
+          "rule": "outlier",
+          "detail": "meanConfidence=0.74 (전체 평균 0.80±0.03)"
+        }
+      ],
+      "score": 9
+    },
+    {
+      "slug": "workplace-harassment-response",
+      "verificationStatus": "article-verified",
+      "processWarnings": 6,
+      "findings": [
+        {
+          "rule": "outlier",
+          "detail": "nodes=20.00 (전체 평균 16.40±1.71)"
         },
         {
           "rule": "outlier",
@@ -40,13 +56,85 @@
       "score": 9
     },
     {
-      "slug": "ai-basic-act",
+      "slug": "local-public-enterprise",
+      "verificationStatus": "needs-review",
+      "processWarnings": 3,
+      "findings": [
+        {
+          "rule": "outlier",
+          "detail": "nodes=20.00 (전체 평균 16.40±1.71)"
+        }
+      ],
+      "score": 8
+    },
+    {
+      "slug": "local-share-tax",
+      "verificationStatus": "needs-review",
+      "processWarnings": 3,
+      "findings": [
+        {
+          "rule": "outlier",
+          "detail": "nodes=21.00 (전체 평균 16.40±1.71)"
+        }
+      ],
+      "score": 8
+    },
+    {
+      "slug": "emissions-trading",
+      "verificationStatus": "needs-review",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "outlier",
+          "detail": "nodes=21.00 (전체 평균 16.40±1.71)"
+        }
+      ],
+      "score": 7
+    },
+    {
+      "slug": "local-government-organization",
+      "verificationStatus": "needs-review",
+      "processWarnings": 3,
+      "findings": [
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 7
+    },
+    {
+      "slug": "residents-ordinance-initiative",
+      "verificationStatus": "needs-review",
+      "processWarnings": 3,
+      "findings": [
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 7
+    },
+    {
+      "slug": "administrative-procedure-hearing",
       "verificationStatus": "needs-review",
       "processWarnings": 1,
       "findings": [
         {
           "rule": "outlier",
-          "detail": "meanConfidence=0.72 (전체 평균 0.80±0.03)"
+          "detail": "nodes=20.00 (전체 평균 16.40±1.71)"
+        }
+      ],
+      "score": 6
+    },
+    {
+      "slug": "government-organization",
+      "verificationStatus": "needs-review",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
         }
       ],
       "score": 6
@@ -58,7 +146,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=21.00 (전체 평균 15.97±1.41)"
+          "detail": "nodes=21.00 (전체 평균 16.40±1.71)"
         },
         {
           "rule": "no-loop",
@@ -68,221 +156,135 @@
       "score": 6
     },
     {
-      "slug": "local-government-organization",
-      "verificationStatus": "needs-review",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
-      "score": 6
-    },
-    {
-      "slug": "residents-ordinance-initiative",
-      "verificationStatus": "needs-review",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
-      "score": 6
-    },
-    {
-      "slug": "government-organization",
-      "verificationStatus": "needs-review",
-      "processWarnings": 1,
-      "findings": [
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
-      "score": 5
-    },
-    {
       "slug": "local-education-grant",
       "verificationStatus": "needs-review",
-      "processWarnings": 2,
+      "processWarnings": 3,
       "findings": [],
-      "score": 5
+      "score": 6
     },
     {
       "slug": "local-extinction-response-fund",
       "verificationStatus": "needs-review",
-      "processWarnings": 2,
+      "processWarnings": 3,
       "findings": [],
-      "score": 5
-    },
-    {
-      "slug": "local-public-enterprise",
-      "verificationStatus": "needs-review",
-      "processWarnings": 2,
-      "findings": [],
-      "score": 5
+      "score": 6
     },
     {
       "slug": "ordinance-enactment",
       "verificationStatus": "needs-review",
-      "processWarnings": 2,
+      "processWarnings": 3,
       "findings": [],
-      "score": 5
+      "score": 6
     },
     {
       "slug": "participatory-budgeting",
       "verificationStatus": "needs-review",
-      "processWarnings": 2,
+      "processWarnings": 3,
       "findings": [],
-      "score": 5
+      "score": 6
     },
     {
-      "slug": "refugee-status",
-      "verificationStatus": "article-verified",
-      "processWarnings": 5,
-      "findings": [
-        {
-          "rule": "outlier",
-          "detail": "nodes=19.00 (전체 평균 15.97±1.41)"
-        }
-      ],
-      "score": 5
+      "slug": "residents-audit-request",
+      "verificationStatus": "needs-review",
+      "processWarnings": 3,
+      "findings": [],
+      "score": 6
+    },
+    {
+      "slug": "special-local-government",
+      "verificationStatus": "needs-review",
+      "processWarnings": 3,
+      "findings": [],
+      "score": 6
     },
     {
       "slug": "tax-expenditure",
       "verificationStatus": "needs-review",
-      "processWarnings": 1,
+      "processWarnings": 2,
       "findings": [
         {
           "rule": "no-sublaw",
           "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
         }
       ],
-      "score": 5
+      "score": 6
     },
     {
       "slug": "cybersecurity",
       "verificationStatus": "needs-review",
-      "processWarnings": 1,
-      "findings": [],
-      "score": 4
-    },
-    {
-      "slug": "emissions-trading",
-      "verificationStatus": "needs-review",
-      "processWarnings": 1,
-      "findings": [],
-      "score": 4
-    },
-    {
-      "slug": "fire-service",
-      "verificationStatus": "article-verified",
       "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "outlier",
-          "detail": "nodes=19.00 (전체 평균 15.97±1.41)"
-        }
-      ],
-      "score": 4
+      "findings": [],
+      "score": 5
     },
     {
       "slug": "fund-management",
       "verificationStatus": "needs-review",
-      "processWarnings": 1,
+      "processWarnings": 2,
       "findings": [],
-      "score": 4
+      "score": 5
+    },
+    {
+      "slug": "hometown-donation",
+      "verificationStatus": "needs-review",
+      "processWarnings": 2,
+      "findings": [],
+      "score": 5
     },
     {
       "slug": "legal-aid",
       "verificationStatus": "needs-review",
-      "processWarnings": 1,
+      "processWarnings": 2,
       "findings": [],
-      "score": 4
+      "score": 5
     },
     {
       "slug": "local-council",
       "verificationStatus": "needs-review",
-      "processWarnings": 1,
+      "processWarnings": 2,
       "findings": [],
-      "score": 4
-    },
-    {
-      "slug": "local-share-tax",
-      "verificationStatus": "needs-review",
-      "processWarnings": 1,
-      "findings": [],
-      "score": 4
+      "score": 5
     },
     {
       "slug": "nhrc-complaint",
       "verificationStatus": "needs-review",
-      "processWarnings": 1,
+      "processWarnings": 2,
       "findings": [],
-      "score": 4
-    },
-    {
-      "slug": "residents-audit-request",
-      "verificationStatus": "needs-review",
-      "processWarnings": 1,
-      "findings": [],
-      "score": 4
+      "score": 5
     },
     {
       "slug": "soe-evaluation",
       "verificationStatus": "needs-review",
-      "processWarnings": 1,
+      "processWarnings": 2,
       "findings": [],
-      "score": 4
-    },
-    {
-      "slug": "special-local-government",
-      "verificationStatus": "needs-review",
-      "processWarnings": 1,
-      "findings": [],
-      "score": 4
+      "score": 5
     },
     {
       "slug": "urban-redevelopment",
       "verificationStatus": "needs-review",
+      "processWarnings": 2,
+      "findings": [],
+      "score": 5
+    },
+    {
+      "slug": "business-license",
+      "verificationStatus": "needs-review",
       "processWarnings": 1,
       "findings": [],
       "score": 4
     },
     {
-      "slug": "administrative-procedure-hearing",
-      "verificationStatus": "needs-review",
-      "processWarnings": 0,
-      "findings": [],
-      "score": 3
-    },
-    {
-      "slug": "business-license",
-      "verificationStatus": "needs-review",
-      "processWarnings": 0,
-      "findings": [],
-      "score": 3
-    },
-    {
       "slug": "development-permit",
       "verificationStatus": "needs-review",
-      "processWarnings": 0,
+      "processWarnings": 1,
       "findings": [],
-      "score": 3
+      "score": 4
     },
     {
-      "slug": "environmental-impact-assessment",
-      "verificationStatus": "article-verified",
+      "slug": "urban-planning",
+      "verificationStatus": "needs-review",
       "processWarnings": 1,
-      "findings": [
-        {
-          "rule": "outlier",
-          "detail": "meanConfidence=0.85 (전체 평균 0.80±0.03)"
-        }
-      ],
-      "score": 3
+      "findings": [],
+      "score": 4
     },
     {
       "slug": "foreigner-registration",
@@ -292,29 +294,10 @@
       "score": 3
     },
     {
-      "slug": "hometown-donation",
-      "verificationStatus": "needs-review",
-      "processWarnings": 0,
-      "findings": [],
-      "score": 3
-    },
-    {
       "slug": "local-subsidy",
       "verificationStatus": "article-verified",
       "processWarnings": 3,
       "findings": [],
-      "score": 3
-    },
-    {
-      "slug": "media-review",
-      "verificationStatus": "article-verified",
-      "processWarnings": 1,
-      "findings": [
-        {
-          "rule": "outlier",
-          "detail": "nodes=13.00 (전체 평균 15.97±1.41)"
-        }
-      ],
       "score": 3
     },
     {
@@ -342,6 +325,13 @@
       "score": 3
     },
     {
+      "slug": "refugee-status",
+      "verificationStatus": "article-verified",
+      "processWarnings": 5,
+      "findings": [],
+      "score": 3
+    },
+    {
       "slug": "residents-lawsuit",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
@@ -351,13 +341,6 @@
           "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
         }
       ],
-      "score": 3
-    },
-    {
-      "slug": "urban-planning",
-      "verificationStatus": "needs-review",
-      "processWarnings": 0,
-      "findings": [],
       "score": 3
     },
     {
@@ -412,6 +395,13 @@
     },
     {
       "slug": "employment-permit",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [],
+      "score": 2
+    },
+    {
+      "slug": "fire-service",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
       "findings": [],
@@ -603,6 +593,13 @@
       "score": 1
     },
     {
+      "slug": "environmental-impact-assessment",
+      "verificationStatus": "article-verified",
+      "processWarnings": 1,
+      "findings": [],
+      "score": 1
+    },
+    {
       "slug": "fair-trade",
       "verificationStatus": "article-verified",
       "processWarnings": 1,
@@ -646,6 +643,13 @@
     },
     {
       "slug": "lifelong-education",
+      "verificationStatus": "article-verified",
+      "processWarnings": 1,
+      "findings": [],
+      "score": 1
+    },
+    {
+      "slug": "media-review",
       "verificationStatus": "article-verified",
       "processWarnings": 1,
       "findings": [],
