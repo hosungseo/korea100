@@ -1,0 +1,364 @@
+{
+ "slug": "medical-fee-confirmation-request",
+ "name": "진료비 확인신청",
+ "oneLiner": "진료비 확인신청의 신청·협의·심사·결정·사후관리 절차",
+ "type": "요양급여 확인·환불형",
+ "priority": 263,
+ "whyFirst": "진료비 확인신청의 행위자와 결정 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "진료비 확인신청은(는) 진료비 확인신청 대상·요건 확인 → 신청·신고·제안서 제출 → 접수·형식 검토 → 관계기관 자료 확인 → 검토·협의·조정 → 결정·허가·승인 통지 → 이행·운영·사후관리로 이어지는 절차다.",
+  "stakeholders": "가입자·환자, 건강보험심사평가원, 국민건강보험공단, 요양기관",
+  "legalBasis": [
+   {
+    "law": "국민건강보험법",
+    "articles": "제45조(요양급여비용의 산정 등), 제46조(약제ㆍ치료재료에 대한 요양급여비용의 산정), 제47조(요양급여비용의 청구와 지급 등), 제48조(요양급여 대상 여부의 확인 등)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "건강보험심사평가원",
+    "role": "접수·검토·결정·사후관리"
+   },
+   {
+    "name": "국민건강보험공단",
+    "role": "접수·검토·결정·사후관리"
+   },
+   {
+    "name": "요양기관",
+    "role": "접수·검토·결정·사후관리"
+   }
+  ],
+  "procedure": [
+   "진료비 확인신청 대상·요건 확인",
+   "신청·신고·제안서 제출",
+   "접수·형식 검토",
+   "관계기관 자료 확인",
+   "검토·협의·조정",
+   "결정·허가·승인 통지",
+   "이행·운영·사후관리",
+   "보완·재검토"
+  ],
+  "moneyFlow": "수수료·분담금·보상·지원금은 법령상 근거와 개별 고시·사업계획·계약 조건에 따라 달라질 수 있다.",
+  "docsFlow": "신청·신고 자료 → 접수 기록 → 검토·협의 자료 → 결정 통지 → 이행·점검 기록으로 이어진다.",
+  "bottlenecks": [
+   "소관기관 협의 지연",
+   "증빙·기술자료 보완",
+   "조건부 결정 이후 이행관리"
+  ],
+  "reformPoints": [
+   "통합 접수·보완 안내 강화",
+   "관계기관 협의 이력 공개",
+   "결정 조건과 사후관리 기준 표준화"
+  ]
+ },
+ "related": [
+  "행정심판",
+  "정보공개 청구",
+  "국민신문고"
+ ],
+ "fieldVerification": [
+  "실제 접수 시스템과 담당기관 분장",
+  "평균 처리기간과 보완 횟수",
+  "기관별 서식·첨부자료 차이"
+ ],
+ "process": {
+  "institution_name": "진료비 확인신청",
+  "law_name": "국민건강보험법",
+  "lanes": [
+   "가입자·환자",
+   "건강보험심사평가원",
+   "국민건강보험공단",
+   "요양기관"
+  ],
+  "stages": [
+   "G0 준비",
+   "G1 신청·접수",
+   "G2 자료검토",
+   "G3 협의·심사",
+   "G4 결정·통지",
+   "G5 이행·사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "진료비 확인신청 대상·요건 확인",
+    "lane": "가입자·환자",
+    "stage": "G0 준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "가입자·환자",
+    "action": "진료비 확인신청 대상·요건 확인",
+    "output_documents": [
+     "진료비 확인신청 대상·요건 확인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제45조(요양급여비용의 산정 등)",
+      "text": "국민건강보험법 제45조(요양급여비용의 산정 등) 원문 제목을 확인한 절차 근거"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "신청·신고·제안서 제출",
+    "lane": "가입자·환자",
+    "stage": "G0 준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "가입자·환자",
+    "action": "신청·신고·제안서 제출",
+    "output_documents": [
+     "신청·신고·제안서 제출 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제46조(약제ㆍ치료재료에 대한 요양급여비용의 산정)",
+      "text": "국민건강보험법 제46조(약제ㆍ치료재료에 대한 요양급여비용의 산정) 원문 제목을 확인한 절차 근거"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "접수·형식 검토",
+    "lane": "건강보험심사평가원",
+    "stage": "G1 신청·접수",
+    "type": "system",
+    "status": "done",
+    "progress": 100,
+    "actor": "건강보험심사평가원",
+    "action": "접수·형식 검토",
+    "output_documents": [
+     "접수·형식 검토 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제47조(요양급여비용의 청구와 지급 등)",
+      "text": "국민건강보험법 제47조(요양급여비용의 청구와 지급 등) 원문 제목을 확인한 절차 근거"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "관계기관 자료 확인",
+    "lane": "건강보험심사평가원",
+    "stage": "G2 자료검토",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "건강보험심사평가원",
+    "action": "관계기관 자료 확인",
+    "output_documents": [
+     "관계기관 자료 확인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제48조(요양급여 대상 여부의 확인 등)",
+      "text": "국민건강보험법 제48조(요양급여 대상 여부의 확인 등) 원문 제목을 확인한 절차 근거"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "검토·협의·조정",
+    "lane": "국민건강보험공단",
+    "stage": "G3 협의·심사",
+    "type": "gateway",
+    "status": "current",
+    "progress": 55,
+    "actor": "국민건강보험공단",
+    "action": "검토·협의·조정",
+    "output_documents": [
+     "검토·협의·조정 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.84,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제45조(요양급여비용의 산정 등)",
+      "text": "국민건강보험법 제45조(요양급여비용의 산정 등) 원문 제목을 확인한 절차 근거"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "결정·허가·승인 통지",
+    "lane": "건강보험심사평가원",
+    "stage": "G4 결정·통지",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "건강보험심사평가원",
+    "action": "결정·허가·승인 통지",
+    "output_documents": [
+     "결정·허가·승인 통지 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제46조(약제ㆍ치료재료에 대한 요양급여비용의 산정)",
+      "text": "국민건강보험법 제46조(약제ㆍ치료재료에 대한 요양급여비용의 산정) 원문 제목을 확인한 절차 근거"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "이행·운영·사후관리",
+    "lane": "요양기관",
+    "stage": "G5 이행·사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "요양기관",
+    "action": "이행·운영·사후관리",
+    "output_documents": [
+     "이행·운영·사후관리 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제47조(요양급여비용의 청구와 지급 등)",
+      "text": "국민건강보험법 제47조(요양급여비용의 청구와 지급 등) 원문 제목을 확인한 절차 근거"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "보완·재검토",
+    "lane": "가입자·환자",
+    "stage": "G2 자료검토",
+    "type": "task",
+    "status": "loop",
+    "progress": 0,
+    "actor": "가입자·환자",
+    "action": "보완·재검토",
+    "output_documents": [
+     "보완·재검토 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제48조(요양급여 대상 여부의 확인 등)",
+      "text": "국민건강보험법 제48조(요양급여 대상 여부의 확인 등) 원문 제목을 확인한 절차 근거"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L01",
+    "source": "P08",
+    "target": "P03",
+    "type": "loop",
+    "label": "보완·재검토"
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건·기한·금액은 하위규정과 사실관계에 따라 달라질 수 있다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 DRF API 현행 원문 메타데이터·조문 제목 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 12건 가운데 12건의 조문 번호·제목을 DRF 원문에서 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "notes": [
+   "국민건강보험법 공포 2025-10-01, 시행 2026-01-02 기준."
+  ],
+  "sources": [
+   {
+    "law": "국민건강보험법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국민건강보험법",
+    "lawId": "001971",
+    "mst": "276651",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/국민건강보험법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 제목 조회",
+   "citationEntries": 9,
+   "explicitCitationEntries": 9,
+   "articleReferences": 12,
+   "verifiedReferences": 12,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}
