@@ -1,638 +1,641 @@
 {
- "status": "full",
- "asOfDate": "2026-07-12",
- "priority": 109,
- "slug": "public-software-procurement",
- "name": "공공 SW 발주·제안평가·과업변경",
- "type": "디지털·조달관리형",
- "oneLiner": "공공 소프트웨어사업을 발주할 때 과업 확정, 기술성 평가, 협상계약, 제안서 보상, 하도급 제한, 과업변경 심의, 관리·감독까지 이어지는 디지털 조달 절차",
- "whyFirst": "공공 SW 사업은 일반 용역입찰보다 제안요청서, 기술성 평가, 과업심의위원회, 하도급 제한, 과업변경 조정이 핵심 쟁점이라 별도 구조도가 필요하다.",
- "canvas": {
-  "purpose": "국가기관등이 소프트웨어사업을 발주하면서 기술성 중심 평가, 과업범위 명확화, 과업변경 조정, 하도급 제한, 제안서 보상, 관리·감독을 통해 저가수주와 과업확대 문제를 줄인다. 핵심은 발주 전 과업 확정과 계약 후 변경관리다.",
-  "stakeholders": "국가기관등 발주기관, 과학기술정보통신부, 행정안전부, 조달청, 소프트웨어사업자, 제안평가위원, 과업심의위원회, 하수급인, 사용자 부서, 감사기관",
-  "legalBasis": [
-   {
-    "law": "소프트웨어 진흥법",
-    "articles": "제49조, 제50조, 제51조, 제52조, 제57조",
-    "kind": "법률"
-   },
-   {
-    "law": "소프트웨어 진흥법 시행령",
-    "articles": "소프트웨어사업 계약방식, 과업심의위원회, 하도급, 제안서 보상 세부절차",
-    "kind": "대통령령"
-   },
-   {
-    "law": "소프트웨어 진흥법 시행규칙",
-    "articles": "하도급 승인과 관리감독 세부서식",
-    "kind": "부령"
-   },
-   {
-    "law": "소프트웨어사업 계약 및 관리감독에 관한 지침",
-    "articles": "계약·관리감독 세부지침",
-    "kind": "고시·지침"
-   },
-   {
-    "law": "소프트웨어 기술성 평가기준 지침",
-    "articles": "기술성 평가항목·배점 기준",
-    "kind": "고시·지침"
-   },
-   {
-    "law": "행정기관 및 공공기관 정보시스템 구축·운영 지침",
-    "articles": "정보시스템 구축·운영 발주관리 기준",
-    "kind": "고시·지침"
-   }
+  "status": "full",
+  "asOfDate": "2026-07-12",
+  "priority": 109,
+  "slug": "public-software-procurement",
+  "name": "공공 SW 발주·제안평가·과업변경",
+  "type": "디지털·조달관리형",
+  "oneLiner": "공공 소프트웨어사업을 발주할 때 과업 확정, 기술성 평가, 협상계약, 제안서 보상, 하도급 제한, 과업변경 심의, 관리·감독까지 이어지는 디지털 조달 절차",
+  "whyFirst": "공공 SW 사업은 일반 용역입찰보다 제안요청서, 기술성 평가, 과업심의위원회, 하도급 제한, 과업변경 조정이 핵심 쟁점이라 별도 구조도가 필요하다.",
+  "canvas": {
+    "purpose": "국가기관등이 소프트웨어사업을 발주하면서 기술성 중심 평가, 과업범위 명확화, 과업변경 조정, 하도급 제한, 제안서 보상, 관리·감독을 통해 저가수주와 과업확대 문제를 줄인다. 핵심은 발주 전 과업 확정과 계약 후 변경관리다.",
+    "stakeholders": "국가기관등 발주기관, 과학기술정보통신부, 행정안전부, 조달청, 소프트웨어사업자, 제안평가위원, 과업심의위원회, 하수급인, 사용자 부서, 감사기관",
+    "legalBasis": [
+      {
+        "law": "소프트웨어 진흥법",
+        "articles": "제49조, 제50조, 제51조, 제52조, 제57조",
+        "kind": "법률"
+      },
+      {
+        "law": "소프트웨어 진흥법 시행령",
+        "articles": "소프트웨어사업 계약방식, 과업심의위원회, 하도급, 제안서 보상 세부절차",
+        "kind": "대통령령"
+      },
+      {
+        "law": "소프트웨어 진흥법 시행규칙",
+        "articles": "하도급 승인과 관리감독 세부서식",
+        "kind": "부령"
+      },
+      {
+        "law": "소프트웨어사업 계약 및 관리감독에 관한 지침",
+        "articles": "계약·관리감독 세부지침",
+        "kind": "고시·지침"
+      },
+      {
+        "law": "소프트웨어 기술성 평가기준 지침",
+        "articles": "기술성 평가항목·배점 기준",
+        "kind": "고시·지침"
+      },
+      {
+        "law": "행정기관 및 공공기관 정보시스템 구축·운영 지침",
+        "articles": "정보시스템 구축·운영 발주관리 기준",
+        "kind": "고시·지침"
+      }
+    ],
+    "authorities": [
+      {
+        "name": "국가기관등의 장",
+        "role": "소프트웨어사업을 발주하고 과업심의위원회, 계약, 하도급 승인, 관리·감독을 운영한다"
+      },
+      {
+        "name": "과학기술정보통신부장관",
+        "role": "기술성 평가 기준, 계약·관리감독 지침, 법령 준수 확인과 개선권고를 담당한다"
+      },
+      {
+        "name": "과업심의위원회",
+        "role": "과업내용 확정, 과업변경 확정, 계약금액·기간 조정 필요성을 심의한다"
+      },
+      {
+        "name": "소프트웨어사업자",
+        "role": "제안서 제출, 사업 수행, 과업변경 요청, 하도급 승인 신청과 이행관리를 담당한다"
+      }
+    ],
+    "procedure": [
+      "발주기관이 업무 요구와 정보시스템 구축·운영 기준을 반영해 사업 범위와 예산을 정한다",
+      "과업심의위원회가 과업내용을 확정하고 제안요청서, 기술성 평가 기준, 계약방식을 설계한다",
+      "공고 후 제안서 접수와 기술성 평가, 가격평가, 협상 절차를 통해 우선협상대상자와 계약상대자를 정한다",
+      "낙찰되지 않은 우수 제안자에게 제안서 작성비용 보상 여부를 검토한다",
+      "계약 후 하도급 제한과 승인, 수행장소, 보안, 산출물, 일정, 검수 기준을 관리한다",
+      "과업내용 변경이 필요하면 사업자가 과업심의위원회 개최를 요청할 수 있고, 심의결과를 계약금액·기간 조정에 반영한다",
+      "과기정통부는 법령 준수 여부를 확인하고 위반 시 개선권고와 조치결과 통보로 이어진다"
+    ],
+    "moneyFlow": "발주기관의 정보화 예산이 소프트웨어사업 계약금으로 집행되고, 선금·기성·잔금은 산출물과 검수 결과에 따라 지급된다. 과업변경이 확정되면 계약금액과 기간 조정으로 비용이 재산정되고, 제안서 보상은 낙찰되지 않은 우수 제안자에게 예산 범위에서 지급될 수 있다.",
+    "docsFlow": "사업계획·정보화 예산 → 과업심의 안건·의결 → 제안요청서·기술성 평가기준 → 입찰공고·제안서 → 평가조서·협상결과 → 계약서·보안서약·하도급계획 → 착수계·사업수행계획서 → 변경요청서·과업심의 결과 → 산출물·검수조서 → 대금청구 → 준수확인·개선권고·조치결과",
+    "bottlenecks": [
+      "발주 전 과업이 모호하면 계약 후 요구사항 변경이 무상 과업확대로 흐르기 쉽다",
+      "기술성 평가가 형식화되면 협상계약이어도 가격 중심 저가수주 문제가 남는다",
+      "하도급 제한과 재하도급 금지, 승인 절차를 놓치면 납품 책임과 품질 문제가 복잡해진다",
+      "과업심의위원회 개최 요청권은 있지만 실제로 계약금액·기간 조정에 반영되는 과정은 기관별 차이가 크다"
+    ],
+    "reformPoints": [
+      "제안요청서 공개 전 과업심의 결과와 요구사항 추적표를 표준화",
+      "기술성 평가항목과 평가위원 이해충돌 관리 정보를 공개 가능한 범위에서 구조화",
+      "과업변경 요청, 심의, 계약금액·기간 조정 결과를 사업종료 후 공개",
+      "하도급 승인·관리감독 데이터를 원도급 책임과 품질평가에 연결"
+    ]
+  },
+  "process": {
+    "institution_name": "공공 SW 발주·제안평가·과업변경",
+    "law_name": "소프트웨어 진흥법·소프트웨어사업 계약 지침",
+    "stages": [
+      "G0 사업기획",
+      "G1 과업확정",
+      "G2 공고·제안",
+      "G3 평가·계약",
+      "G4 수행·변경",
+      "G5 감독·개선"
+    ],
+    "lanes": [
+      "발주기관",
+      "과업심의위원회",
+      "입찰참가자",
+      "평가·계약",
+      "사업자·하수급인",
+      "과기정통부"
+    ],
+    "nodes": [
+      {
+        "id": "P01",
+        "name": "사업범위·예산 기획",
+        "lane": "발주기관",
+        "stage": "G0 사업기획",
+        "type": "notice",
+        "status": "done",
+        "progress": 100,
+        "actor": "국가기관등의 장",
+        "action": "업무 요구, 예산, 보안, 구축·운영 범위를 정리한다",
+        "output_documents": [
+          "사업범위·예산 기획 결과"
+        ],
+        "confidence": 0.88,
+        "legal_basis": [
+          {
+            "law": "소프트웨어 진흥법",
+            "article": "제49조"
+          }
+        ]
+      },
+      {
+        "id": "P02",
+        "name": "과업내용 초안 작성",
+        "lane": "발주기관",
+        "stage": "G0 사업기획",
+        "type": "task",
+        "status": "done",
+        "progress": 100,
+        "actor": "발주기관",
+        "action": "요구사항, 산출물, 검수기준, 수행장소 요건을 제안요청서 초안으로 만든다",
+        "output_documents": [
+          "과업내용 초안 작성 결과"
+        ],
+        "confidence": 0.88,
+        "legal_basis": [
+          {
+            "law": "소프트웨어 진흥법",
+            "article": "제49조"
+          }
+        ]
+      },
+      {
+        "id": "P03",
+        "name": "과업심의위원회 심의",
+        "lane": "과업심의위원회",
+        "stage": "G1 과업확정",
+        "type": "gateway",
+        "status": "current",
+        "progress": 70,
+        "actor": "과업심의위원회",
+        "action": "과업내용 확정과 향후 변경 기준을 심의한다",
+        "output_documents": [
+          "과업심의위원회 심의 결과"
+        ],
+        "confidence": 0.88,
+        "legal_basis": [
+          {
+            "law": "소프트웨어 진흥법",
+            "article": "제50조"
+          }
+        ]
+      },
+      {
+        "id": "P04",
+        "name": "제안요청서·평가기준 확정",
+        "lane": "발주기관",
+        "stage": "G1 과업확정",
+        "type": "task",
+        "status": "waiting",
+        "progress": 45,
+        "actor": "발주기관·계약담당",
+        "action": "기술성 평가기준과 협상계약 방식을 반영해 공고 문서를 확정한다",
+        "output_documents": [
+          "제안요청서·평가기준 확정 결과"
+        ],
+        "confidence": 0.88,
+        "legal_basis": [
+          {
+            "law": "소프트웨어 진흥법",
+            "article": "제49조"
+          },
+          {
+            "law": "소프트웨어 기술성 평가기준 지침",
+            "article": "기술성 평가항목·배점 기준",
+            "unverified": true
+          }
+        ]
+      },
+      {
+        "id": "P05",
+        "name": "입찰공고·질의응답",
+        "lane": "평가·계약",
+        "stage": "G2 공고·제안",
+        "type": "notice",
+        "status": "waiting",
+        "progress": 45,
+        "actor": "계약담당자",
+        "action": "입찰공고, 제안요청 설명, 질의응답, 제안서 제출 일정을 운영한다",
+        "output_documents": [
+          "입찰공고·질의응답 결과"
+        ],
+        "confidence": 0.88,
+        "legal_basis": [
+          {
+            "law": "소프트웨어 진흥법",
+            "article": "제49조"
+          }
+        ]
+      },
+      {
+        "id": "P06",
+        "name": "제안서 제출",
+        "lane": "입찰참가자",
+        "stage": "G2 공고·제안",
+        "type": "task",
+        "status": "waiting",
+        "progress": 45,
+        "actor": "소프트웨어사업자",
+        "action": "기술제안, 수행조직, 일정, 보안, 가격, 하도급 계획을 제출한다",
+        "output_documents": [
+          "제안서 제출 결과"
+        ],
+        "confidence": 0.88,
+        "legal_basis": [
+          {
+            "law": "소프트웨어 진흥법",
+            "article": "제49조"
+          }
+        ]
+      },
+      {
+        "id": "P07",
+        "name": "기술성 평가",
+        "lane": "평가·계약",
+        "stage": "G3 평가·계약",
+        "type": "task",
+        "status": "waiting",
+        "progress": 45,
+        "actor": "평가위원",
+        "action": "기술성 평가기준에 따라 제안서와 발표를 평가한다",
+        "output_documents": [
+          "기술성 평가 결과"
+        ],
+        "confidence": 0.88,
+        "legal_basis": [
+          {
+            "law": "소프트웨어 진흥법",
+            "article": "제49조"
+          }
+        ]
+      },
+      {
+        "id": "P08",
+        "name": "협상·계약체결",
+        "lane": "평가·계약",
+        "stage": "G3 평가·계약",
+        "type": "gateway",
+        "status": "waiting",
+        "progress": 45,
+        "actor": "발주기관·우선협상대상자",
+        "action": "기술·가격 협상으로 계약조건, 산출물, 일정, 보안, 검수 기준을 확정한다",
+        "output_documents": [
+          "협상·계약체결 결과"
+        ],
+        "confidence": 0.88,
+        "legal_basis": [
+          {
+            "law": "소프트웨어 진흥법",
+            "article": "제49조"
+          }
+        ]
+      },
+      {
+        "id": "P09",
+        "name": "제안서 보상 검토",
+        "lane": "평가·계약",
+        "stage": "G3 평가·계약",
+        "type": "task",
+        "status": "waiting",
+        "progress": 45,
+        "actor": "발주기관",
+        "action": "낙찰되지 않은 우수 제안자의 제안서 작성비용 보상 여부를 검토한다",
+        "output_documents": [
+          "제안서 보상 검토 결과"
+        ],
+        "confidence": 0.88,
+        "legal_basis": [
+          {
+            "law": "소프트웨어 진흥법",
+            "article": "제52조"
+          }
+        ]
+      },
+      {
+        "id": "P10",
+        "name": "하도급 계획·승인",
+        "lane": "사업자·하수급인",
+        "stage": "G4 수행·변경",
+        "type": "gateway",
+        "status": "waiting",
+        "progress": 45,
+        "actor": "사업자·발주기관",
+        "action": "하도급 50% 제한, 재하도급 금지, 사전승인 요건을 확인한다",
+        "output_documents": [
+          "하도급 계획·승인 결과"
+        ],
+        "confidence": 0.88,
+        "legal_basis": [
+          {
+            "law": "소프트웨어 진흥법",
+            "article": "제51조"
+          }
+        ]
+      },
+      {
+        "id": "P11",
+        "name": "착수·수행·검수",
+        "lane": "사업자·하수급인",
+        "stage": "G4 수행·변경",
+        "type": "task",
+        "status": "waiting",
+        "progress": 45,
+        "actor": "사업자",
+        "action": "사업수행계획에 따라 개발·구축·시험·교육·전환을 진행하고 검수를 받는다",
+        "output_documents": [
+          "착수·수행·검수 결과"
+        ],
+        "confidence": 0.88,
+        "legal_basis": [
+          {
+            "law": "소프트웨어 진흥법",
+            "article": "제49조"
+          }
+        ]
+      },
+      {
+        "id": "P12",
+        "name": "과업변경 요청",
+        "lane": "사업자·하수급인",
+        "stage": "G4 수행·변경",
+        "type": "gateway",
+        "status": "risk",
+        "progress": 30,
+        "actor": "소프트웨어사업자",
+        "action": "과업내용 변경으로 계약내용 변경이 필요하면 과업심의위원회 개최를 요청한다",
+        "output_documents": [
+          "과업변경 요청 결과"
+        ],
+        "confidence": 0.88,
+        "legal_basis": [
+          {
+            "law": "소프트웨어 진흥법",
+            "article": "제50조"
+          }
+        ]
+      },
+      {
+        "id": "P13",
+        "name": "변경심의·금액·기간 조정",
+        "lane": "과업심의위원회",
+        "stage": "G4 수행·변경",
+        "type": "task",
+        "status": "risk",
+        "progress": 30,
+        "actor": "과업심의위원회·발주기관",
+        "action": "과업내용 변경을 확정하고 계약금액·계약기간 조정 필요성을 심의결과에 반영한다",
+        "output_documents": [
+          "변경심의·금액·기간 조정 결과"
+        ],
+        "confidence": 0.88,
+        "legal_basis": [
+          {
+            "law": "소프트웨어 진흥법",
+            "article": "제50조"
+          }
+        ]
+      },
+      {
+        "id": "P14",
+        "name": "준수확인·개선권고",
+        "lane": "과기정통부",
+        "stage": "G5 감독·개선",
+        "type": "gateway",
+        "status": "waiting",
+        "progress": 45,
+        "actor": "과학기술정보통신부장관",
+        "action": "발주기관이 SW 법령과 관련 기준을 준수했는지 확인하고 위반 시 개선을 권고한다",
+        "output_documents": [
+          "준수확인·개선권고 결과"
+        ],
+        "confidence": 0.88,
+        "legal_basis": [
+          {
+            "law": "소프트웨어 진흥법",
+            "article": "제57조"
+          }
+        ]
+      },
+      {
+        "id": "P15",
+        "name": "조치결과 통보",
+        "lane": "발주기관",
+        "stage": "G5 감독·개선",
+        "type": "task",
+        "status": "waiting",
+        "progress": 45,
+        "actor": "국가기관등의 장",
+        "action": "개선권고를 받은 날부터 1개월 이내 조치결과를 통보한다",
+        "output_documents": [
+          "조치결과 통보 결과"
+        ],
+        "confidence": 0.88,
+        "legal_basis": [
+          {
+            "law": "소프트웨어 진흥법",
+            "article": "제57조"
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "E01",
+        "source": "P01",
+        "target": "P02",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E02",
+        "source": "P02",
+        "target": "P03",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E03",
+        "source": "P03",
+        "target": "P04",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E04",
+        "source": "P04",
+        "target": "P05",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E05",
+        "source": "P05",
+        "target": "P06",
+        "type": "message",
+        "label": "제안 요청"
+      },
+      {
+        "id": "E06",
+        "source": "P06",
+        "target": "P07",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E07",
+        "source": "P07",
+        "target": "P08",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E08",
+        "source": "P07",
+        "target": "P09",
+        "type": "message",
+        "label": "우수 제안"
+      },
+      {
+        "id": "E09",
+        "source": "P08",
+        "target": "P10",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E10",
+        "source": "P10",
+        "target": "P11",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E11",
+        "source": "P11",
+        "target": "P12",
+        "type": "message",
+        "label": "변경 필요"
+      },
+      {
+        "id": "E12",
+        "source": "P12",
+        "target": "P13",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E13",
+        "source": "P13",
+        "target": "P11",
+        "type": "loop",
+        "label": "변경 반영"
+      },
+      {
+        "id": "E14",
+        "source": "P11",
+        "target": "P14",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E15",
+        "source": "P14",
+        "target": "P15",
+        "type": "message",
+        "label": "개선권고"
+      }
+    ],
+    "warnings": [
+      "공공 SW 구조도의 핵심은 낙찰자가 아니라 과업 확정과 과업변경 심의다. 제안평가 이후 관리·감독까지 함께 봐야 한다.",
+      "2026-07-12 감사: 행정규칙(예규·고시·관리규정) 인용 1건은 법령정보 API 미제공으로 조문 확정 불가 — unverified 표기, 원문은 각 발령기관 고시 확인 필요."
+    ]
+  },
+  "fieldVerification": [
+    "제안요청서 사전검토와 과업심의위원회 개최가 실제로 어느 단계에서 이뤄지는지",
+    "기술성 평가위원 구성, 이해충돌 관리, 평가표 공개 범위",
+    "제안서 보상 대상 선정과 실제 지급 빈도",
+    "하도급 승인 신청서와 하도급 비율 산정에서 상용SW 구매금액 제외 방식",
+    "과업변경 요청이 계약금액·기간 조정으로 이어지는 실제 비율",
+    "과기정통부 개선권고와 1개월 조치결과 통보의 공개 범위",
+    "행정규칙 근거 조문 확인 필요: 소프트웨어 기술성 평가기준 지침"
   ],
-  "authorities": [
-   {
-    "name": "국가기관등의 장",
-    "role": "소프트웨어사업을 발주하고 과업심의위원회, 계약, 하도급 승인, 관리·감독을 운영한다"
-   },
-   {
-    "name": "과학기술정보통신부장관",
-    "role": "기술성 평가 기준, 계약·관리감독 지침, 법령 준수 확인과 개선권고를 담당한다"
-   },
-   {
-    "name": "과업심의위원회",
-    "role": "과업내용 확정, 과업변경 확정, 계약금액·기간 조정 필요성을 심의한다"
-   },
-   {
-    "name": "소프트웨어사업자",
-    "role": "제안서 제출, 사업 수행, 과업변경 요청, 하도급 승인 신청과 이행관리를 담당한다"
-   }
+  "related": [
+    "공공조달·국가계약",
+    "정보시스템 감리",
+    "전자정부",
+    "자동적 처분과 AI 행정",
+    "하도급 규제"
   ],
-  "procedure": [
-   "발주기관이 업무 요구와 정보시스템 구축·운영 기준을 반영해 사업 범위와 예산을 정한다",
-   "과업심의위원회가 과업내용을 확정하고 제안요청서, 기술성 평가 기준, 계약방식을 설계한다",
-   "공고 후 제안서 접수와 기술성 평가, 가격평가, 협상 절차를 통해 우선협상대상자와 계약상대자를 정한다",
-   "낙찰되지 않은 우수 제안자에게 제안서 작성비용 보상 여부를 검토한다",
-   "계약 후 하도급 제한과 승인, 수행장소, 보안, 산출물, 일정, 검수 기준을 관리한다",
-   "과업내용 변경이 필요하면 사업자가 과업심의위원회 개최를 요청할 수 있고, 심의결과를 계약금액·기간 조정에 반영한다",
-   "과기정통부는 법령 준수 여부를 확인하고 위반 시 개선권고와 조치결과 통보로 이어진다"
-  ],
-  "moneyFlow": "발주기관의 정보화 예산이 소프트웨어사업 계약금으로 집행되고, 선금·기성·잔금은 산출물과 검수 결과에 따라 지급된다. 과업변경이 확정되면 계약금액과 기간 조정으로 비용이 재산정되고, 제안서 보상은 낙찰되지 않은 우수 제안자에게 예산 범위에서 지급될 수 있다.",
-  "docsFlow": "사업계획·정보화 예산 → 과업심의 안건·의결 → 제안요청서·기술성 평가기준 → 입찰공고·제안서 → 평가조서·협상결과 → 계약서·보안서약·하도급계획 → 착수계·사업수행계획서 → 변경요청서·과업심의 결과 → 산출물·검수조서 → 대금청구 → 준수확인·개선권고·조치결과",
-  "bottlenecks": [
-   "발주 전 과업이 모호하면 계약 후 요구사항 변경이 무상 과업확대로 흐르기 쉽다",
-   "기술성 평가가 형식화되면 협상계약이어도 가격 중심 저가수주 문제가 남는다",
-   "하도급 제한과 재하도급 금지, 승인 절차를 놓치면 납품 책임과 품질 문제가 복잡해진다",
-   "과업심의위원회 개최 요청권은 있지만 실제로 계약금액·기간 조정에 반영되는 과정은 기관별 차이가 크다"
-  ],
-  "reformPoints": [
-   "제안요청서 공개 전 과업심의 결과와 요구사항 추적표를 표준화",
-   "기술성 평가항목과 평가위원 이해충돌 관리 정보를 공개 가능한 범위에서 구조화",
-   "과업변경 요청, 심의, 계약금액·기간 조정 결과를 사업종료 후 공개",
-   "하도급 승인·관리감독 데이터를 원도급 책임과 품질평가에 연결"
-  ]
- },
- "process": {
-  "institution_name": "공공 SW 발주·제안평가·과업변경",
-  "law_name": "소프트웨어 진흥법·소프트웨어사업 계약 지침",
-  "stages": [
-   "G0 사업기획",
-   "G1 과업확정",
-   "G2 공고·제안",
-   "G3 평가·계약",
-   "G4 수행·변경",
-   "G5 감독·개선"
-  ],
-  "lanes": [
-   "발주기관",
-   "과업심의위원회",
-   "입찰참가자",
-   "평가·계약",
-   "사업자·하수급인",
-   "과기정통부"
-  ],
-  "nodes": [
-   {
-    "id": "P01",
-    "name": "사업범위·예산 기획",
-    "lane": "발주기관",
-    "stage": "G0 사업기획",
-    "type": "notice",
-    "status": "done",
-    "progress": 100,
-    "actor": "국가기관등의 장",
-    "action": "업무 요구, 예산, 보안, 구축·운영 범위를 정리한다",
-    "output_documents": [
-     "사업범위·예산 기획 결과"
+  "verification": {
+    "status": "article-verified",
+    "verifiedAt": "2026-07-12",
+    "method": "국가법령정보센터 Korean Law MCP로 현행 법령·행정규칙 제명, 식별자, 핵심 명시 조문을 대조",
+    "scope": "법적 근거 6건의 공식 원문을 연결하고, 캔버스와 절차 노드에 기재한 명시 조문 20건의 조문 번호 존재를 확인했다. 행정규칙은 제명·식별자와 세부기준 연결을 중심으로 확인했으며, 세부 운영 해석은 현장검증 항목으로 남겼다.",
+    "notes": [
+      "소프트웨어 진흥법은 [시행 2025. 4. 23.] [법률 제20545호, 2024. 10. 22., 일부개정] 기준으로 확인했다.",
+      "공공 SW 사업의 세부 발주·평가 기준은 고시·지침 중심이라 기관별 제안요청서와 운영사례 대조가 필요하다."
     ],
-    "confidence": 0.88,
-    "legal_basis": [
-     {
-      "law": "소프트웨어 진흥법",
-      "article": "제49조"
-     }
-    ]
-   },
-   {
-    "id": "P02",
-    "name": "과업내용 초안 작성",
-    "lane": "발주기관",
-    "stage": "G0 사업기획",
-    "type": "task",
-    "status": "done",
-    "progress": 100,
-    "actor": "발주기관",
-    "action": "요구사항, 산출물, 검수기준, 수행장소 요건을 제안요청서 초안으로 만든다",
-    "output_documents": [
-     "과업내용 초안 작성 결과"
+    "sources": [
+      {
+        "law": "소프트웨어 진흥법",
+        "kind": "법률",
+        "sourceType": "statute",
+        "officialName": "소프트웨어 진흥법",
+        "lawId": "000751",
+        "mst": "265845",
+        "promulgatedOn": "2024-10-22",
+        "effectiveOn": "2025-04-23",
+        "officialUrl": "https://law.go.kr/법령/소프트웨어진흥법"
+      },
+      {
+        "law": "소프트웨어 진흥법 시행령",
+        "kind": "대통령령",
+        "sourceType": "statute",
+        "officialName": "소프트웨어 진흥법 시행령",
+        "lawId": "003989",
+        "mst": "286139",
+        "promulgatedOn": "2026-05-19",
+        "effectiveOn": "2026-06-03",
+        "officialUrl": "https://law.go.kr/법령/소프트웨어진흥법시행령"
+      },
+      {
+        "law": "소프트웨어 진흥법 시행규칙",
+        "kind": "부령",
+        "sourceType": "statute",
+        "officialName": "소프트웨어 진흥법 시행규칙",
+        "lawId": "007523",
+        "mst": "271031",
+        "promulgatedOn": "2025-04-30",
+        "effectiveOn": "2025-04-30",
+        "officialUrl": "https://law.go.kr/법령/소프트웨어진흥법시행규칙"
+      },
+      {
+        "law": "소프트웨어사업 계약 및 관리감독에 관한 지침",
+        "kind": "고시·지침",
+        "sourceType": "admin-rule",
+        "officialName": "소프트웨어사업 계약 및 관리감독에 관한 지침",
+        "adminRuleId": "33440",
+        "adminRuleSerial": "2100000223356",
+        "promulgatedOn": "2023-05-15",
+        "officialUrl": "https://law.go.kr/행정규칙/소프트웨어사업계약및관리감독에관한지침"
+      },
+      {
+        "law": "소프트웨어 기술성 평가기준 지침",
+        "kind": "고시·지침",
+        "sourceType": "admin-rule",
+        "officialName": "소프트웨어 기술성 평가기준 지침",
+        "adminRuleId": "33437",
+        "adminRuleSerial": "2100000258386",
+        "promulgatedOn": "2025-04-30",
+        "officialUrl": "https://law.go.kr/행정규칙/소프트웨어기술성평가기준지침"
+      },
+      {
+        "law": "행정기관 및 공공기관 정보시스템 구축·운영 지침",
+        "kind": "고시·지침",
+        "sourceType": "admin-rule",
+        "officialName": "행정기관 및 공공기관 정보시스템 구축·운영 지침",
+        "adminRuleId": "33489",
+        "adminRuleSerial": "2100000252582",
+        "promulgatedOn": "2025-01-02",
+        "officialUrl": "https://law.go.kr/행정규칙/행정기관및공공기관정보시스템구축·운영지침"
+      }
     ],
-    "confidence": 0.88,
-    "legal_basis": [
-     {
-      "law": "소프트웨어 진흥법",
-      "article": "제49조"
-     }
-    ]
-   },
-   {
-    "id": "P03",
-    "name": "과업심의위원회 심의",
-    "lane": "과업심의위원회",
-    "stage": "G1 과업확정",
-    "type": "gateway",
-    "status": "current",
-    "progress": 70,
-    "actor": "과업심의위원회",
-    "action": "과업내용 확정과 향후 변경 기준을 심의한다",
-    "output_documents": [
-     "과업심의위원회 심의 결과"
-    ],
-    "confidence": 0.88,
-    "legal_basis": [
-     {
-      "law": "소프트웨어 진흥법",
-      "article": "제50조"
-     }
-    ]
-   },
-   {
-    "id": "P04",
-    "name": "제안요청서·평가기준 확정",
-    "lane": "발주기관",
-    "stage": "G1 과업확정",
-    "type": "task",
-    "status": "waiting",
-    "progress": 45,
-    "actor": "발주기관·계약담당",
-    "action": "기술성 평가기준과 협상계약 방식을 반영해 공고 문서를 확정한다",
-    "output_documents": [
-     "제안요청서·평가기준 확정 결과"
-    ],
-    "confidence": 0.88,
-    "legal_basis": [
-     {
-      "law": "소프트웨어 진흥법",
-      "article": "제49조"
-     },
-     {
-      "law": "소프트웨어 기술성 평가기준 지침",
-      "article": "기술성 평가항목·배점 기준"
-     }
-    ]
-   },
-   {
-    "id": "P05",
-    "name": "입찰공고·질의응답",
-    "lane": "평가·계약",
-    "stage": "G2 공고·제안",
-    "type": "notice",
-    "status": "waiting",
-    "progress": 45,
-    "actor": "계약담당자",
-    "action": "입찰공고, 제안요청 설명, 질의응답, 제안서 제출 일정을 운영한다",
-    "output_documents": [
-     "입찰공고·질의응답 결과"
-    ],
-    "confidence": 0.88,
-    "legal_basis": [
-     {
-      "law": "소프트웨어 진흥법",
-      "article": "제49조"
-     }
-    ]
-   },
-   {
-    "id": "P06",
-    "name": "제안서 제출",
-    "lane": "입찰참가자",
-    "stage": "G2 공고·제안",
-    "type": "task",
-    "status": "waiting",
-    "progress": 45,
-    "actor": "소프트웨어사업자",
-    "action": "기술제안, 수행조직, 일정, 보안, 가격, 하도급 계획을 제출한다",
-    "output_documents": [
-     "제안서 제출 결과"
-    ],
-    "confidence": 0.88,
-    "legal_basis": [
-     {
-      "law": "소프트웨어 진흥법",
-      "article": "제49조"
-     }
-    ]
-   },
-   {
-    "id": "P07",
-    "name": "기술성 평가",
-    "lane": "평가·계약",
-    "stage": "G3 평가·계약",
-    "type": "task",
-    "status": "waiting",
-    "progress": 45,
-    "actor": "평가위원",
-    "action": "기술성 평가기준에 따라 제안서와 발표를 평가한다",
-    "output_documents": [
-     "기술성 평가 결과"
-    ],
-    "confidence": 0.88,
-    "legal_basis": [
-     {
-      "law": "소프트웨어 진흥법",
-      "article": "제49조"
-     }
-    ]
-   },
-   {
-    "id": "P08",
-    "name": "협상·계약체결",
-    "lane": "평가·계약",
-    "stage": "G3 평가·계약",
-    "type": "gateway",
-    "status": "waiting",
-    "progress": 45,
-    "actor": "발주기관·우선협상대상자",
-    "action": "기술·가격 협상으로 계약조건, 산출물, 일정, 보안, 검수 기준을 확정한다",
-    "output_documents": [
-     "협상·계약체결 결과"
-    ],
-    "confidence": 0.88,
-    "legal_basis": [
-     {
-      "law": "소프트웨어 진흥법",
-      "article": "제49조"
-     }
-    ]
-   },
-   {
-    "id": "P09",
-    "name": "제안서 보상 검토",
-    "lane": "평가·계약",
-    "stage": "G3 평가·계약",
-    "type": "task",
-    "status": "waiting",
-    "progress": 45,
-    "actor": "발주기관",
-    "action": "낙찰되지 않은 우수 제안자의 제안서 작성비용 보상 여부를 검토한다",
-    "output_documents": [
-     "제안서 보상 검토 결과"
-    ],
-    "confidence": 0.88,
-    "legal_basis": [
-     {
-      "law": "소프트웨어 진흥법",
-      "article": "제52조"
-     }
-    ]
-   },
-   {
-    "id": "P10",
-    "name": "하도급 계획·승인",
-    "lane": "사업자·하수급인",
-    "stage": "G4 수행·변경",
-    "type": "gateway",
-    "status": "waiting",
-    "progress": 45,
-    "actor": "사업자·발주기관",
-    "action": "하도급 50% 제한, 재하도급 금지, 사전승인 요건을 확인한다",
-    "output_documents": [
-     "하도급 계획·승인 결과"
-    ],
-    "confidence": 0.88,
-    "legal_basis": [
-     {
-      "law": "소프트웨어 진흥법",
-      "article": "제51조"
-     }
-    ]
-   },
-   {
-    "id": "P11",
-    "name": "착수·수행·검수",
-    "lane": "사업자·하수급인",
-    "stage": "G4 수행·변경",
-    "type": "task",
-    "status": "waiting",
-    "progress": 45,
-    "actor": "사업자",
-    "action": "사업수행계획에 따라 개발·구축·시험·교육·전환을 진행하고 검수를 받는다",
-    "output_documents": [
-     "착수·수행·검수 결과"
-    ],
-    "confidence": 0.88,
-    "legal_basis": [
-     {
-      "law": "소프트웨어 진흥법",
-      "article": "제49조"
-     }
-    ]
-   },
-   {
-    "id": "P12",
-    "name": "과업변경 요청",
-    "lane": "사업자·하수급인",
-    "stage": "G4 수행·변경",
-    "type": "gateway",
-    "status": "risk",
-    "progress": 30,
-    "actor": "소프트웨어사업자",
-    "action": "과업내용 변경으로 계약내용 변경이 필요하면 과업심의위원회 개최를 요청한다",
-    "output_documents": [
-     "과업변경 요청 결과"
-    ],
-    "confidence": 0.88,
-    "legal_basis": [
-     {
-      "law": "소프트웨어 진흥법",
-      "article": "제50조"
-     }
-    ]
-   },
-   {
-    "id": "P13",
-    "name": "변경심의·금액·기간 조정",
-    "lane": "과업심의위원회",
-    "stage": "G4 수행·변경",
-    "type": "task",
-    "status": "risk",
-    "progress": 30,
-    "actor": "과업심의위원회·발주기관",
-    "action": "과업내용 변경을 확정하고 계약금액·계약기간 조정 필요성을 심의결과에 반영한다",
-    "output_documents": [
-     "변경심의·금액·기간 조정 결과"
-    ],
-    "confidence": 0.88,
-    "legal_basis": [
-     {
-      "law": "소프트웨어 진흥법",
-      "article": "제50조"
-     }
-    ]
-   },
-   {
-    "id": "P14",
-    "name": "준수확인·개선권고",
-    "lane": "과기정통부",
-    "stage": "G5 감독·개선",
-    "type": "gateway",
-    "status": "waiting",
-    "progress": 45,
-    "actor": "과학기술정보통신부장관",
-    "action": "발주기관이 SW 법령과 관련 기준을 준수했는지 확인하고 위반 시 개선을 권고한다",
-    "output_documents": [
-     "준수확인·개선권고 결과"
-    ],
-    "confidence": 0.88,
-    "legal_basis": [
-     {
-      "law": "소프트웨어 진흥법",
-      "article": "제57조"
-     }
-    ]
-   },
-   {
-    "id": "P15",
-    "name": "조치결과 통보",
-    "lane": "발주기관",
-    "stage": "G5 감독·개선",
-    "type": "task",
-    "status": "waiting",
-    "progress": 45,
-    "actor": "국가기관등의 장",
-    "action": "개선권고를 받은 날부터 1개월 이내 조치결과를 통보한다",
-    "output_documents": [
-     "조치결과 통보 결과"
-    ],
-    "confidence": 0.88,
-    "legal_basis": [
-     {
-      "law": "소프트웨어 진흥법",
-      "article": "제57조"
-     }
-    ]
-   }
-  ],
-  "edges": [
-   {
-    "id": "E01",
-    "source": "P01",
-    "target": "P02",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E02",
-    "source": "P02",
-    "target": "P03",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E03",
-    "source": "P03",
-    "target": "P04",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E04",
-    "source": "P04",
-    "target": "P05",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E05",
-    "source": "P05",
-    "target": "P06",
-    "type": "message",
-    "label": "제안 요청"
-   },
-   {
-    "id": "E06",
-    "source": "P06",
-    "target": "P07",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E07",
-    "source": "P07",
-    "target": "P08",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E08",
-    "source": "P07",
-    "target": "P09",
-    "type": "message",
-    "label": "우수 제안"
-   },
-   {
-    "id": "E09",
-    "source": "P08",
-    "target": "P10",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E10",
-    "source": "P10",
-    "target": "P11",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E11",
-    "source": "P11",
-    "target": "P12",
-    "type": "message",
-    "label": "변경 필요"
-   },
-   {
-    "id": "E12",
-    "source": "P12",
-    "target": "P13",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E13",
-    "source": "P13",
-    "target": "P11",
-    "type": "loop",
-    "label": "변경 반영"
-   },
-   {
-    "id": "E14",
-    "source": "P11",
-    "target": "P14",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E15",
-    "source": "P14",
-    "target": "P15",
-    "type": "message",
-    "label": "개선권고"
-   }
-  ],
-  "warnings": [
-   "공공 SW 구조도의 핵심은 낙찰자가 아니라 과업 확정과 과업변경 심의다. 제안평가 이후 관리·감독까지 함께 봐야 한다."
-  ]
- },
- "fieldVerification": [
-  "제안요청서 사전검토와 과업심의위원회 개최가 실제로 어느 단계에서 이뤄지는지",
-  "기술성 평가위원 구성, 이해충돌 관리, 평가표 공개 범위",
-  "제안서 보상 대상 선정과 실제 지급 빈도",
-  "하도급 승인 신청서와 하도급 비율 산정에서 상용SW 구매금액 제외 방식",
-  "과업변경 요청이 계약금액·기간 조정으로 이어지는 실제 비율",
-  "과기정통부 개선권고와 1개월 조치결과 통보의 공개 범위"
- ],
- "related": [
-  "공공조달·국가계약",
-  "정보시스템 감리",
-  "전자정부",
-  "자동적 처분과 AI 행정",
-  "하도급 규제"
- ],
- "verification": {
-  "status": "article-verified",
-  "verifiedAt": "2026-07-12",
-  "method": "국가법령정보센터 Korean Law MCP로 현행 법령·행정규칙 제명, 식별자, 핵심 명시 조문을 대조",
-  "scope": "법적 근거 6건의 공식 원문을 연결하고, 캔버스와 절차 노드에 기재한 명시 조문 20건의 조문 번호 존재를 확인했다. 행정규칙은 제명·식별자와 세부기준 연결을 중심으로 확인했으며, 세부 운영 해석은 현장검증 항목으로 남겼다.",
-  "notes": [
-   "소프트웨어 진흥법은 [시행 2025. 4. 23.] [법률 제20545호, 2024. 10. 22., 일부개정] 기준으로 확인했다.",
-   "공공 SW 사업의 세부 발주·평가 기준은 고시·지침 중심이라 기관별 제안요청서와 운영사례 대조가 필요하다."
-  ],
-  "sources": [
-   {
-    "law": "소프트웨어 진흥법",
-    "kind": "법률",
-    "sourceType": "statute",
-    "officialName": "소프트웨어 진흥법",
-    "lawId": "000751",
-    "mst": "265845",
-    "promulgatedOn": "2024-10-22",
-    "effectiveOn": "2025-04-23",
-    "officialUrl": "https://law.go.kr/법령/소프트웨어진흥법"
-   },
-   {
-    "law": "소프트웨어 진흥법 시행령",
-    "kind": "대통령령",
-    "sourceType": "statute",
-    "officialName": "소프트웨어 진흥법 시행령",
-    "lawId": "003989",
-    "mst": "286139",
-    "promulgatedOn": "2026-05-19",
-    "effectiveOn": "2026-06-03",
-    "officialUrl": "https://law.go.kr/법령/소프트웨어진흥법시행령"
-   },
-   {
-    "law": "소프트웨어 진흥법 시행규칙",
-    "kind": "부령",
-    "sourceType": "statute",
-    "officialName": "소프트웨어 진흥법 시행규칙",
-    "lawId": "007523",
-    "mst": "271031",
-    "promulgatedOn": "2025-04-30",
-    "effectiveOn": "2025-04-30",
-    "officialUrl": "https://law.go.kr/법령/소프트웨어진흥법시행규칙"
-   },
-   {
-    "law": "소프트웨어사업 계약 및 관리감독에 관한 지침",
-    "kind": "고시·지침",
-    "sourceType": "admin-rule",
-    "officialName": "소프트웨어사업 계약 및 관리감독에 관한 지침",
-    "adminRuleId": "33440",
-    "adminRuleSerial": "2100000223356",
-    "promulgatedOn": "2023-05-15",
-    "officialUrl": "https://law.go.kr/행정규칙/소프트웨어사업계약및관리감독에관한지침"
-   },
-   {
-    "law": "소프트웨어 기술성 평가기준 지침",
-    "kind": "고시·지침",
-    "sourceType": "admin-rule",
-    "officialName": "소프트웨어 기술성 평가기준 지침",
-    "adminRuleId": "33437",
-    "adminRuleSerial": "2100000258386",
-    "promulgatedOn": "2025-04-30",
-    "officialUrl": "https://law.go.kr/행정규칙/소프트웨어기술성평가기준지침"
-   },
-   {
-    "law": "행정기관 및 공공기관 정보시스템 구축·운영 지침",
-    "kind": "고시·지침",
-    "sourceType": "admin-rule",
-    "officialName": "행정기관 및 공공기관 정보시스템 구축·운영 지침",
-    "adminRuleId": "33489",
-    "adminRuleSerial": "2100000252582",
-    "promulgatedOn": "2025-01-02",
-    "officialUrl": "https://law.go.kr/행정규칙/행정기관및공공기관정보시스템구축·운영지침"
-   }
-  ],
-  "articleVerification": {
-   "checkedAt": "2026-07-12",
-   "method": "law.go.kr 현행 법령 조회와 행정규칙 검색 결과 대조",
-   "citationEntries": 22,
-   "explicitCitationEntries": 16,
-   "articleReferences": 20,
-   "verifiedReferences": 20,
-   "missingReferences": 0,
-   "uncheckableReferences": 0
+    "articleVerification": {
+      "checkedAt": "2026-07-12",
+      "method": "law.go.kr 현행 법령 조회와 행정규칙 검색 결과 대조",
+      "citationEntries": 22,
+      "explicitCitationEntries": 16,
+      "articleReferences": 20,
+      "verifiedReferences": 20,
+      "missingReferences": 0,
+      "uncheckableReferences": 0
+    }
   }
- }
 }
