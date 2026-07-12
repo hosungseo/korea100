@@ -1,0 +1,354 @@
+{
+ "slug": "road-occupation-permit",
+ "name": "도로점용 허가",
+ "oneLiner": "도로점용 허가의 신청·심사·결정·사후관리 절차",
+ "type": "점용허가·원상회복형",
+ "priority": 254,
+ "whyFirst": "도로점용 허가의 핵심 행위자와 결정 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "도로점용 허가은(는) 점용 필요·계획 수립 → 점용허가 신청 → 관계기관 협의·검토 → 허가·조건 부여 → 점용료 부과·납부 → 공사·점용 관리 → 허가 변경·취소 → 원상회복·변상금로 이어지는 공적 절차다.",
+  "stakeholders": "신청인·사업시행자, 도로관리청, 관계기관·지자체, 도로 이용자",
+  "legalBasis": [
+   {
+    "law": "도로법",
+    "articles": "제61조(도로점용 허가), 제63조(허가 취소), 제66조(점용료), 제72조(변상금)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "도로관리청",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "관계기관·지자체",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "도로 이용자",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "점용 필요·계획 수립",
+   "점용허가 신청",
+   "관계기관 협의·검토",
+   "허가·조건 부여",
+   "점용료 부과·납부",
+   "공사·점용 관리",
+   "허가 변경·취소",
+   "원상회복·변상금"
+  ],
+  "moneyFlow": "수수료·과태료·점용료 등 금전부담은 법령과 개별 처분 조건에 따라 달라질 수 있다.",
+  "docsFlow": "신청·단속 기록 → 검토·심사 자료 → 결정·통지 → 이행·납부 기록 → 사후관리로 이어진다.",
+  "bottlenecks": [
+   "자격·차량·시설 기준 충족",
+   "관계기관 협의와 자료 연계",
+   "처분 이후 이행 관리"
+  ],
+  "reformPoints": [
+   "처리상태 안내 강화",
+   "요건·기한 가독성 개선",
+   "온라인 신청·보완 경로 명확화"
+  ]
+ },
+ "related": [
+  "공장설립 승인",
+  "인허가 일괄협의·의제 처리",
+  "도로 SOC 추진"
+ ],
+ "fieldVerification": [
+  "실제 온라인·방문 접수 경로",
+  "기관별 처리기한·수수료",
+  "지역별 세부 운영기준"
+ ],
+ "process": {
+  "institution_name": "도로점용 허가",
+  "law_name": "도로법",
+  "lanes": [
+   "신청인·사업시행자",
+   "도로관리청",
+   "관계기관·지자체",
+   "도로 이용자"
+  ],
+  "stages": [
+   "G0 준비",
+   "G1 신청·접수",
+   "G2 조사·검토",
+   "G3 결정",
+   "G4 이행·납부",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "점용 필요·계획 수립",
+    "lane": "신청인·사업시행자",
+    "stage": "G0 준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "신청인·사업시행자",
+    "action": "점용 필요·계획 수립",
+    "output_documents": [
+     "점용 필요·계획 수립 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도로법",
+      "article": "제61조",
+      "text": "도로법 제61조에 따른 점용 필요·계획 수립 단계"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "점용허가 신청",
+    "lane": "도로관리청",
+    "stage": "G0 준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "도로관리청",
+    "action": "점용허가 신청",
+    "output_documents": [
+     "점용허가 신청 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도로법",
+      "article": "제61조",
+      "text": "도로법 제61조에 따른 점용허가 신청 단계"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "관계기관 협의·검토",
+    "lane": "관계기관·지자체",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "관계기관·지자체",
+    "action": "관계기관 협의·검토",
+    "output_documents": [
+     "관계기관 협의·검토 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도로법",
+      "article": "제61조",
+      "text": "도로법 제61조에 따른 관계기관 협의·검토 단계"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "허가·조건 부여",
+    "lane": "도로 이용자",
+    "stage": "G2 조사·검토",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "도로 이용자",
+    "action": "허가·조건 부여",
+    "output_documents": [
+     "허가·조건 부여 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "도로법",
+      "article": "제61조",
+      "text": "도로법 제61조에 따른 허가·조건 부여 단계"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "점용료 부과·납부",
+    "lane": "신청인·사업시행자",
+    "stage": "G3 결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신청인·사업시행자",
+    "action": "점용료 부과·납부",
+    "output_documents": [
+     "점용료 부과·납부 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도로법",
+      "article": "제66조",
+      "text": "도로법 제66조에 따른 점용료 부과·납부 단계"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "공사·점용 관리",
+    "lane": "도로관리청",
+    "stage": "G3 결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "도로관리청",
+    "action": "공사·점용 관리",
+    "output_documents": [
+     "공사·점용 관리 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도로법",
+      "article": "제61조",
+      "text": "도로법 제61조에 따른 공사·점용 관리 단계"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "허가 변경·취소",
+    "lane": "관계기관·지자체",
+    "stage": "G4 이행·납부",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "관계기관·지자체",
+    "action": "허가 변경·취소",
+    "output_documents": [
+     "허가 변경·취소 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도로법",
+      "article": "제63조",
+      "text": "도로법 제63조에 따른 허가 변경·취소 단계"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "원상회복·변상금",
+    "lane": "도로 이용자",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "도로 이용자",
+    "action": "원상회복·변상금",
+    "output_documents": [
+     "원상회복·변상금 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도로법",
+      "article": "제72조",
+      "text": "도로법 제72조에 따른 원상회복·변상금 단계"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 신청·처분의 요건·기한·금액은 사실관계와 하위규정에 따라 달라질 수 있다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 12건 가운데 12건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "도로법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "도로법",
+    "lawId": "001821",
+    "mst": "280119",
+    "promulgatedOn": "2025-12-02",
+    "effectiveOn": "2026-06-03",
+    "officialUrl": "https://law.go.kr/법령/도로법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 9,
+   "explicitCitationEntries": 9,
+   "articleReferences": 12,
+   "verifiedReferences": 12,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

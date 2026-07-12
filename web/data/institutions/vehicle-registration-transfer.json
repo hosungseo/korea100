@@ -1,0 +1,323 @@
+{
+ "slug": "vehicle-registration-transfer",
+ "name": "자동차 등록·이전",
+ "oneLiner": "자동차 등록·이전의 신청·심사·결정·사후관리 절차",
+ "type": "등록·이전형",
+ "priority": 249,
+ "whyFirst": "자동차 등록·이전의 핵심 행위자와 결정 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "자동차 등록·이전은(는) 취득·양도 사유 발생 → 등록 신청서 제출 → 소유·저당·세금 자료 확인 → 이전·변경 등록 심사 → 등록증 교부 → 보험·세금 정보 연계 → 말소·변동 사후관리로 이어지는 공적 절차다.",
+  "stakeholders": "자동차 소유자, 시·군·구 차량등록관청, 매도인·매수인, 관계기관",
+  "legalBasis": [
+   {
+    "law": "자동차관리법",
+    "articles": "제8조(신규등록), 제11조(변경등록), 제12조(이전등록), 제13조(말소등록)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "시·군·구 차량등록관청",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "매도인·매수인",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "관계기관",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "취득·양도 사유 발생",
+   "등록 신청서 제출",
+   "소유·저당·세금 자료 확인",
+   "이전·변경 등록 심사",
+   "등록증 교부",
+   "보험·세금 정보 연계",
+   "말소·변동 사후관리"
+  ],
+  "moneyFlow": "수수료·과태료·점용료 등 금전부담은 법령과 개별 처분 조건에 따라 달라질 수 있다.",
+  "docsFlow": "신청·단속 기록 → 검토·심사 자료 → 결정·통지 → 이행·납부 기록 → 사후관리로 이어진다.",
+  "bottlenecks": [
+   "자격·차량·시설 기준 충족",
+   "관계기관 협의와 자료 연계",
+   "처분 이후 이행 관리"
+  ],
+  "reformPoints": [
+   "처리상태 안내 강화",
+   "요건·기한 가독성 개선",
+   "온라인 신청·보완 경로 명확화"
+  ]
+ },
+ "related": [
+  "자동차 검사",
+  "교통과태료·범칙금 부과",
+  "도로점용 허가"
+ ],
+ "fieldVerification": [
+  "실제 온라인·방문 접수 경로",
+  "기관별 처리기한·수수료",
+  "지역별 세부 운영기준"
+ ],
+ "process": {
+  "institution_name": "자동차 등록·이전",
+  "law_name": "자동차관리법",
+  "lanes": [
+   "자동차 소유자",
+   "시·군·구 차량등록관청",
+   "매도인·매수인",
+   "관계기관"
+  ],
+  "stages": [
+   "G0 준비",
+   "G1 신청·접수",
+   "G2 조사·검토",
+   "G3 결정",
+   "G4 이행·납부",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "취득·양도 사유 발생",
+    "lane": "자동차 소유자",
+    "stage": "G0 준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "자동차 소유자",
+    "action": "취득·양도 사유 발생",
+    "output_documents": [
+     "취득·양도 사유 발생 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "자동차관리법",
+      "article": "제8조",
+      "text": "자동차관리법 제8조에 따른 취득·양도 사유 발생 단계"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "등록 신청서 제출",
+    "lane": "시·군·구 차량등록관청",
+    "stage": "G0 준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "시·군·구 차량등록관청",
+    "action": "등록 신청서 제출",
+    "output_documents": [
+     "등록 신청서 제출 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "자동차관리법",
+      "article": "제12조",
+      "text": "자동차관리법 제12조에 따른 등록 신청서 제출 단계"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "소유·저당·세금 자료 확인",
+    "lane": "매도인·매수인",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "매도인·매수인",
+    "action": "소유·저당·세금 자료 확인",
+    "output_documents": [
+     "소유·저당·세금 자료 확인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "자동차관리법",
+      "article": "제12조",
+      "text": "자동차관리법 제12조에 따른 소유·저당·세금 자료 확인 단계"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "이전·변경 등록 심사",
+    "lane": "관계기관",
+    "stage": "G2 조사·검토",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "관계기관",
+    "action": "이전·변경 등록 심사",
+    "output_documents": [
+     "이전·변경 등록 심사 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "자동차관리법",
+      "article": "제12조",
+      "text": "자동차관리법 제12조에 따른 이전·변경 등록 심사 단계"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "등록증 교부",
+    "lane": "자동차 소유자",
+    "stage": "G3 결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "자동차 소유자",
+    "action": "등록증 교부",
+    "output_documents": [
+     "등록증 교부 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "자동차관리법",
+      "article": "제8조",
+      "text": "자동차관리법 제8조에 따른 등록증 교부 단계"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "보험·세금 정보 연계",
+    "lane": "시·군·구 차량등록관청",
+    "stage": "G4 이행·납부",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시·군·구 차량등록관청",
+    "action": "보험·세금 정보 연계",
+    "output_documents": [
+     "보험·세금 정보 연계 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "자동차관리법",
+      "article": "제11조",
+      "text": "자동차관리법 제11조에 따른 보험·세금 정보 연계 단계"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "말소·변동 사후관리",
+    "lane": "매도인·매수인",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "매도인·매수인",
+    "action": "말소·변동 사후관리",
+    "output_documents": [
+     "말소·변동 사후관리 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "자동차관리법",
+      "article": "제13조",
+      "text": "자동차관리법 제13조에 따른 말소·변동 사후관리 단계"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 신청·처분의 요건·기한·금액은 사실관계와 하위규정에 따라 달라질 수 있다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 11건 가운데 11건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "자동차관리법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "자동차관리법",
+    "lawId": "001747",
+    "mst": "286989",
+    "promulgatedOn": "2026-06-16",
+    "effectiveOn": "2026-06-16",
+    "officialUrl": "https://law.go.kr/법령/자동차관리법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 8,
+   "explicitCitationEntries": 8,
+   "articleReferences": 11,
+   "verifiedReferences": 11,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}
