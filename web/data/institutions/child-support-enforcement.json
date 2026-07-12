@@ -1,0 +1,416 @@
+{
+ "slug": "child-support-enforcement",
+ "name": "양육비 이행 지원",
+ "oneLiner": "양육비를 받지 못한 양육자가 이행관리원에 법률·추심·선지급 지원을 신청하는 절차",
+ "type": "청구·이행확보형",
+ "priority": 231,
+ "whyFirst": "양육비 이행 지원의 신청·결정·사후관리 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "양육비 채권자가 이행관리원에 법률지원 또는 추심을 신청하고, 채무자 이행 최고·재산조사·선지급까지 이어지는 경로를 정리한다.",
+  "stakeholders": "양육비 채권자, 양육비이행관리원, 양육비 채무자, 법원·관계기관",
+  "legalBasis": [
+   {
+    "law": "양육비 이행확보 및 지원에 관한 법률",
+    "articles": "제11조(법률지원 신청), 제15조(이행 청구 및 조사), 제16조(재산조사), 제18조(이행확보), 제21조의6(양육비 선지급 신청), 제21조의7(선지급 결정)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "양육비이행관리원",
+    "role": "접수·확인·결정 또는 서비스 연계"
+   },
+   {
+    "name": "양육비 채무자",
+    "role": "접수·확인·결정 또는 서비스 연계"
+   },
+   {
+    "name": "법원·관계기관",
+    "role": "접수·확인·결정 또는 서비스 연계"
+   }
+  ],
+  "procedure": [
+   "양육비 미지급 확인",
+   "법률·추심 지원 신청",
+   "신청 접수·집행권원 확인",
+   "채무자 이행 최고·의견 통지",
+   "이행 또는 의견 제출",
+   "소득·재산 조사",
+   "법원 절차·집행 지원",
+   "선지급 요건 신청",
+   "선지급 결정·지급",
+   "채무자 회수·사후관리"
+  ],
+  "moneyFlow": "급여·이용권·서비스 비용과 본인부담은 법령 및 연도별 운영기준에 따라 달라질 수 있다.",
+  "docsFlow": "신청·신고 기록 → 자격·사실 확인자료 → 결정·연계 통지 → 지급·이행 기록 → 사후관리 기록으로 이어진다.",
+  "bottlenecks": [
+   "사실관계와 자격 증빙",
+   "관계기관 간 정보·기록 연계",
+   "개별 상황에 따른 지원·결정 기준"
+  ],
+  "reformPoints": [
+   "신청 진행상태 안내 강화",
+   "기관 간 인계 기준의 명확화",
+   "결정 근거와 이의 경로의 가독성 개선"
+  ]
+ },
+ "related": [
+  "한부모가족 지원",
+  "가정폭력 피해자 보호·임시조치",
+  "개인회생"
+ ],
+ "fieldVerification": [
+  "실제 온라인·방문 신청 경로",
+  "연도별 지원금액·자격 기준",
+  "지자체·기관별 운영 세부기준"
+ ],
+ "process": {
+  "institution_name": "양육비 이행 지원",
+  "law_name": "양육비 이행확보 및 지원에 관한 법률",
+  "lanes": [
+   "양육비 채권자",
+   "양육비이행관리원",
+   "양육비 채무자",
+   "법원·관계기관"
+  ],
+  "stages": [
+   "G0 상황·상담",
+   "G1 신청·접수",
+   "G2 조사·확인",
+   "G3 결정·연계",
+   "G4 지급·이행",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "양육비 미지급 확인",
+    "lane": "양육비 채권자",
+    "stage": "G0 상황·상담",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "양육비 채권자",
+    "action": "양육비 미지급 확인",
+    "output_documents": [
+     "양육비 미지급 확인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "양육비 이행확보 및 지원에 관한 법률",
+      "article": "제11조",
+      "text": "양육비 이행확보 및 지원에 관한 법률 제11조에 따른 양육비 미지급 확인 단계"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "법률·추심 지원 신청",
+    "lane": "양육비 채권자",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "양육비 채권자",
+    "action": "법률·추심 지원 신청",
+    "output_documents": [
+     "법률·추심 지원 신청 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "양육비 이행확보 및 지원에 관한 법률",
+      "article": "제11조",
+      "text": "양육비 이행확보 및 지원에 관한 법률 제11조에 따른 법률·추심 지원 신청 단계"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "신청 접수·집행권원 확인",
+    "lane": "양육비이행관리원",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "양육비이행관리원",
+    "action": "신청 접수·집행권원 확인",
+    "output_documents": [
+     "신청 접수·집행권원 확인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "양육비 이행확보 및 지원에 관한 법률",
+      "article": "제11조",
+      "text": "양육비 이행확보 및 지원에 관한 법률 제11조에 따른 신청 접수·집행권원 확인 단계"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "채무자 이행 최고·의견 통지",
+    "lane": "양육비이행관리원",
+    "stage": "G2 조사·확인",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "양육비이행관리원",
+    "action": "채무자 이행 최고·의견 통지",
+    "output_documents": [
+     "채무자 이행 최고·의견 통지 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "양육비 이행확보 및 지원에 관한 법률",
+      "article": "제15조",
+      "text": "양육비 이행확보 및 지원에 관한 법률 제15조에 따른 채무자 이행 최고·의견 통지 단계"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "이행 또는 의견 제출",
+    "lane": "양육비 채무자",
+    "stage": "G2 조사·확인",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "양육비 채무자",
+    "action": "이행 또는 의견 제출",
+    "output_documents": [
+     "이행 또는 의견 제출 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "양육비 이행확보 및 지원에 관한 법률",
+      "article": "제15조",
+      "text": "양육비 이행확보 및 지원에 관한 법률 제15조에 따른 이행 또는 의견 제출 단계"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "소득·재산 조사",
+    "lane": "양육비이행관리원",
+    "stage": "G3 결정·연계",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "양육비이행관리원",
+    "action": "소득·재산 조사",
+    "output_documents": [
+     "소득·재산 조사 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "양육비 이행확보 및 지원에 관한 법률",
+      "article": "제15조",
+      "text": "양육비 이행확보 및 지원에 관한 법률 제15조에 따른 소득·재산 조사 단계"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "법원 절차·집행 지원",
+    "lane": "법원·관계기관",
+    "stage": "G3 결정·연계",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "법원·관계기관",
+    "action": "법원 절차·집행 지원",
+    "output_documents": [
+     "법원 절차·집행 지원 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "양육비 이행확보 및 지원에 관한 법률",
+      "article": "제18조",
+      "text": "양육비 이행확보 및 지원에 관한 법률 제18조에 따른 법원 절차·집행 지원 단계"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "선지급 요건 신청",
+    "lane": "양육비 채권자",
+    "stage": "G4 지급·이행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "양육비 채권자",
+    "action": "선지급 요건 신청",
+    "output_documents": [
+     "선지급 요건 신청 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "양육비 이행확보 및 지원에 관한 법률",
+      "article": "제21조의6",
+      "text": "양육비 이행확보 및 지원에 관한 법률 제21조의6에 따른 선지급 요건 신청 단계"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "선지급 결정·지급",
+    "lane": "양육비이행관리원",
+    "stage": "G4 지급·이행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "양육비이행관리원",
+    "action": "선지급 결정·지급",
+    "output_documents": [
+     "선지급 결정·지급 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "양육비 이행확보 및 지원에 관한 법률",
+      "article": "제21조의7",
+      "text": "양육비 이행확보 및 지원에 관한 법률 제21조의7에 따른 선지급 결정·지급 단계"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "채무자 회수·사후관리",
+    "lane": "양육비이행관리원",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "양육비이행관리원",
+    "action": "채무자 회수·사후관리",
+    "output_documents": [
+     "채무자 회수·사후관리 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "양육비 이행확보 및 지원에 관한 법률",
+      "article": "제18조",
+      "text": "양육비 이행확보 및 지원에 관한 법률 제18조에 따른 채무자 회수·사후관리 단계"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건·기한·지원 범위는 시행령, 고시 및 사실관계에 따라 달라질 수 있다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 16건 가운데 16건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "양육비 이행확보 및 지원에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "양육비 이행확보 및 지원에 관한 법률",
+    "lawId": "012027",
+    "mst": "285711",
+    "promulgatedOn": "2026-04-28",
+    "effectiveOn": "2026-04-28",
+    "officialUrl": "https://law.go.kr/법령/양육비이행확보및지원에관한법률"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 11,
+   "explicitCitationEntries": 11,
+   "articleReferences": 16,
+   "verifiedReferences": 16,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}
