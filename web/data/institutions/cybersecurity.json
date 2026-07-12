@@ -725,15 +725,253 @@
         "officialUrl": "https://law.go.kr/행정규칙/국가사이버안전관리규정"
       }
     ],
-    "articleVerification": {
-      "checkedAt": "2026-07-12",
-      "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
-      "citationEntries": 34,
-      "explicitCitationEntries": 24,
-      "articleReferences": 29,
-      "verifiedReferences": 29,
-      "missingReferences": 0,
-      "uncheckableReferences": 0
-    }
+    "confidence": 0.7,
+    "legal_basis": [
+     {
+      "law": "국가사이버안전관리규정",
+      "article": "제10조의2제2항(보안관제센터의 설치·운영)",
+      "text": "보안관제센터를 설치·운영하는 기관의 장은 수집·탐지한 사이버공격 정보를 국가정보원장 및 관계 기관의 장에게 제공하여야 한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": "지정"
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P12",
+    "target": "P14",
+    "type": "sequence",
+    "label": "조사 완료"
+   },
+   {
+    "id": "M01",
+    "source": "P07",
+    "target": "P08",
+    "type": "message",
+    "label": "관제 위협정보"
+   },
+   {
+    "id": "M02",
+    "source": "P08",
+    "target": "S01",
+    "type": "message",
+    "label": "관제 로그 공유"
+   },
+   {
+    "id": "M03",
+    "source": "P10",
+    "target": "P12",
+    "type": "message",
+    "label": "사고 신고·조사 연계"
+   },
+   {
+    "id": "M04",
+    "source": "P13",
+    "target": "P14",
+    "type": "message",
+    "label": "개선결과 보고"
+   },
+   {
+    "id": "L01",
+    "source": "P14",
+    "target": "P13",
+    "type": "loop",
+    "label": "개선 미흡·재수립"
+   },
+   {
+    "id": "L02",
+    "source": "P13",
+    "target": "P06",
+    "type": "loop",
+    "label": "보호대책 보강 재이행"
+   },
+   {
+    "id": "E12",
+    "source": "P06",
+    "target": "P15",
+    "type": "sequence",
+    "label": "보호대책 제출(8월 31일)"
+   },
+   {
+    "id": "E13",
+    "source": "P15",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   {
+    "date": "2026-07-12",
+    "type": "citation-correction",
+    "content": "P03·P07·P08·P11·P12·P14·S01의 '국가사이버안전관리규정' 인용 7건에 unverified:true 추가. 동 규정은 대통령훈령으로 국가법령정보센터 API 미제공 — 조문 특정 불가. 기존 article 서술명 유지, fieldVerification 7건 추가.",
+    "consultedMSTs": []
+   },
+   {
+    "date": "2026-07-12",
+    "type": "admrul-verification",
+    "content": "2026-07-12 행정규칙 검증: 국가사이버안전관리규정 admrul 대조(일련번호 2000000100482, 발령번호 제316호, 대통령훈령) — 7건 확정, 0건 미등재 유지. 소관부처: 국가정보원. 조문 전문이 admrul에 공개됨. P03→제9조제3항, P07→제10조의2, P08→제10조·제14조, P11→제12조제3항, P12→제13조, P14→제9조제4항, S01→제10조의2제2항. P05 전자정부법 제56조 unverified 유지.",
+    "consultedMSTs": []
+   },
+   {
+    "date": "2026-07-12",
+    "type": "L2 블라인드 재구성 대조 정정",
+    "content": "(C) P11 근거 오인용 정정: legal_basis 인용 조문을 제13조(침해사고의 통지)에서 제14조(복구조치)로 교체 — 제14조제1항·제4항·제5항이 관리기관의 복구·보호조치 의무 및 지원 요청권을 직접 규율하며, 제13조는 통지 의무만 규율함(MST 259005 제14조 확인). (F) P05 비법정 근거 표기 수정: 전자정부법 제56조는 행정기관의 보안대책 수립·시행 의무를 규율하며 국가정보원의 신규 시스템 보안성 검토 게이트웨이를 직접 근거하지 않음 → unverified:true 추가 및 실제 근거가 국가 사이버안보 관리규정(훈령, API 미제공)임을 명시(MST 268103 제56조 확인). (E) P15 신설(법 제5조제2항·시행령 제8조): 관리기관의 장이 매년 8월 31일까지 보호대책을 관계중앙행정기관에 제출하는 법정 필수 단계 누락 → 노드·엣지(E12·E13) 추가. (E) P16 신설(법 제5조의2·시행령 제9조의2): 과기정통부장관·국가정보원장·국방부장관이 관리기관 보호대책 이행 여부를 확인하는 법정 단계 누락 → 노드 추가. 참조 MST: 259005(정보통신기반 보호법), 280951(시행령), 268103(전자정부법). 법의 침묵: (1) 침해사고 통지 후 관계기관의 대응 조치 기한이 법령에 명시되지 않음. (2) 취약점 분석·평가 결과의 보고 형식·기한이 법령에 명시되지 않음. (3) 대책본부 운영 기간의 상한이 법령에 명시되지 않음.",
+    "consultedMSTs": [
+     "259005",
+     "280951",
+     "268103"
+    ]
+   },
+   {
+    "date": "2026-07-12",
+    "type": "official-title-correction",
+    "content": "대통령훈령의 공식 제명을 '국가사이버안전관리규정'으로 정정하고 국가법령정보센터 행정규칙일련번호 2000000100482를 확인했다. 공개 전문에서 세부 운영 조문을 특정할 수 없는 7개 서술형 근거는 unverified 상태를 유지한다.",
+    "consultedMSTs": []
+   }
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 5건 중 공식 원문 5건을 연결했다. 캔버스와 절차 노드의 명시 조문 30건 가운데 30건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "정보통신기반 보호법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "정보통신기반 보호법",
+    "lawId": "009182",
+    "mst": "259005",
+    "promulgatedOn": "2024-01-23",
+    "effectiveOn": "2025-01-24",
+    "officialUrl": "https://law.go.kr/법령/정보통신기반보호법"
+   },
+   {
+    "law": "정보통신기반 보호법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "정보통신기반 보호법 시행령",
+    "lawId": "009225",
+    "mst": "280951",
+    "promulgatedOn": "2025-12-30",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/정보통신기반보호법시행령"
+   },
+   {
+    "law": "국가정보원법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국가정보원법",
+    "lawId": "001371",
+    "mst": "277293",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/국가정보원법"
+   },
+   {
+    "law": "전자정부법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "전자정부법",
+    "lawId": "009199",
+    "mst": "268103",
+    "promulgatedOn": "2025-01-07",
+    "effectiveOn": "2025-07-08",
+    "officialUrl": "https://law.go.kr/법령/전자정부법"
+   },
+   {
+    "law": "국가사이버안전관리규정",
+    "kind": "고시·지침",
+    "sourceType": "admin-rule",
+    "officialName": "국가사이버안전관리규정",
+    "adminRuleId": "9009904",
+    "adminRuleSerial": "2000000100482",
+    "promulgatedOn": "2013-09-02",
+    "officialUrl": "https://law.go.kr/행정규칙/국가사이버안전관리규정",
+    "issueNo": "제316호",
+    "org": "국가정보원"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 27,
+   "explicitCitationEntries": 24,
+   "articleReferences": 30,
+   "verifiedReferences": 30,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
   }
 }

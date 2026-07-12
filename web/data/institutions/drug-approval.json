@@ -672,15 +672,335 @@
         "officialUrl": "https://law.go.kr/법령/국민건강보험법"
       }
     ],
-    "articleVerification": {
-      "checkedAt": "2026-07-12",
-      "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회 + admrul API 직접 조문 확인",
-      "citationEntries": 24,
-      "explicitCitationEntries": 18,
-      "articleReferences": 32,
-      "verifiedReferences": 32,
-      "missingReferences": 0,
-      "uncheckableReferences": 0
-    }
+    "blocker": null,
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "약사법",
+      "article": "제31조",
+      "text": "허가 결정에 따라 품목허가증을 발급한다."
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "시판·급여 등재 협상",
+    "lane": "제약사/신청자",
+    "stage": "G6 시판후 안전관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "제약사",
+    "action": "시판·급여 협상",
+    "output_documents": [
+     "약가 협상 결과"
+    ],
+    "blocker": "허가-급여 분리로 처방까지 지연",
+    "confidence": 0.74,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제41조의3",
+      "text": "허가 후 요양급여 등재와 약가를 협상·결정한다."
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "재심사·재평가",
+    "lane": "식품의약품안전처",
+    "stage": "G6 시판후 안전관리",
+    "type": "task",
+    "status": "loop",
+    "progress": 0,
+    "actor": "식품의약품안전처",
+    "action": "재심사·재평가",
+    "output_documents": [
+     "재심사 결과",
+     "재평가 결과"
+    ],
+    "blocker": "시판후 주기적 회귀 관리",
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "약사법",
+      "article": "제32조·제33조",
+      "text": "신약 등은 시판 후 재심사·재평가를 받는다."
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "부작용 모니터링(PV)",
+    "lane": "한국의약품안전관리원",
+    "stage": "G6 시판후 안전관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "한국의약품안전관리원",
+    "action": "부작용 수집·평가",
+    "output_documents": [
+     "부작용 보고",
+     "위해성관리계획 이행"
+    ],
+    "blocker": null,
+    "confidence": 0.76,
+    "legal_basis": [
+     {
+      "law": "약사법",
+      "article": "제37조의3·제38조",
+      "text": "제조업자·품목허가자는 시판 후 안전관리 기준에 따라 부작용을 수집·평가한다."
+     },
+     {
+      "law": "의약품 등의 안전에 관한 규칙",
+      "article": "별표4의3",
+      "text": "시판 후 안전관리 기준(별표4의3)에 따라 안전정보를 수집·평가하고 위해성관리계획을 이행한다."
+     }
+    ]
+   },
+   {
+    "id": "S01",
+    "name": "통합의약품정보시스템 등록·공개",
+    "lane": "정보시스템",
+    "stage": "G5 GMP실사·허가",
+    "type": "system",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "의약품안전나라",
+    "action": "등록·공개",
+    "input_documents": [
+     "품목허가증"
+    ],
+    "output_documents": [
+     "공개 허가정보"
+    ],
+    "blocker": null,
+    "confidence": 0.73,
+    "legal_basis": [
+     {
+      "law": "약사법",
+      "article": "제31조",
+      "text": "품목허가 정보를 정보시스템에 등록·공개한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": "허가 결정"
+   },
+   {
+    "id": "E09",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P06",
+    "target": "P07",
+    "type": "message",
+    "label": "중앙약심 자문 요청"
+   },
+   {
+    "id": "M02",
+    "source": "P07",
+    "target": "P10",
+    "type": "message",
+    "label": "자문 의견"
+   },
+   {
+    "id": "M03",
+    "source": "P11",
+    "target": "S01",
+    "type": "message",
+    "label": "허가사항 공개"
+   },
+   {
+    "id": "M04",
+    "source": "P14",
+    "target": "P13",
+    "type": "message",
+    "label": "부작용 신호 통보"
+   },
+   {
+    "id": "L01",
+    "source": "P10",
+    "target": "P08",
+    "type": "loop",
+    "label": "보완 필요"
+   },
+   {
+    "id": "L02",
+    "source": "P08",
+    "target": "P06",
+    "type": "loop",
+    "label": "보완자료 재제출"
+   }
+  ],
+  "warnings": [
+   {
+    "date": "2026-07-12",
+    "내용": "P06 '안전성·유효성·품질 심사기준' → unverified(행정규칙 고시로 DRF API 미지원); P08 '자료보완 관련 조문' → unverified(행정규칙 고시로 DRF API 미지원)",
+    "consulted_msts": []
+   },
+   {
+    "date": "2026-07-12",
+    "type": "admrul-verification",
+    "content": "2026-07-12 행정규칙 검증: 의약품의 품목허가·신고·심사 규정 admrul 대조(일련번호 2100000233584, 발령번호 2023-90) — 2건 확정(P06→제29조, P08→제55조), 0건 미등재 유지. 소관 변경사항: 없음(식품의약품안전처 현행)."
+   }
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 6건 중 공식 원문 6건을 연결했다. 캔버스와 절차 노드의 명시 조문 32건 가운데 32건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "약사법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "약사법",
+    "lawId": "001783",
+    "mst": "279725",
+    "promulgatedOn": "2025-11-11",
+    "effectiveOn": "2026-06-21",
+    "officialUrl": "https://law.go.kr/법령/약사법"
+   },
+   {
+    "law": "약사법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "약사법 시행령",
+    "lawId": "004138",
+    "mst": "286841",
+    "promulgatedOn": "2026-06-09",
+    "effectiveOn": "2026-06-21",
+    "officialUrl": "https://law.go.kr/법령/약사법시행령"
+   },
+   {
+    "law": "의약품 등의 안전에 관한 규칙",
+    "kind": "총리령",
+    "sourceType": "statute",
+    "officialName": "의약품 등의 안전에 관한 규칙",
+    "lawId": "011794",
+    "mst": "284019",
+    "promulgatedOn": "2026-03-05",
+    "effectiveOn": "2026-03-05",
+    "officialUrl": "https://law.go.kr/법령/의약품등의안전에관한규칙"
+   },
+   {
+    "law": "의약품의 품목허가·신고·심사 규정",
+    "kind": "행정규칙",
+    "sourceType": "admin-rule",
+    "officialName": "의약품의 품목허가·신고·심사 규정",
+    "adminRuleId": "24305",
+    "adminRuleSerial": "2100000233584",
+    "promulgatedOn": "2023-12-27",
+    "officialUrl": "https://law.go.kr/행정규칙/의약품의품목허가·신고·심사규정",
+    "issueNo": "2023-90",
+    "org": "식품의약품안전처"
+   },
+   {
+    "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률",
+    "lawId": "013572",
+    "mst": "279763",
+    "promulgatedOn": "2025-11-11",
+    "effectiveOn": "2026-05-12",
+    "officialUrl": "https://law.go.kr/법령/첨단재생의료및첨단바이오의약품안전및지원에관한법률"
+   },
+   {
+    "law": "국민건강보험법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국민건강보험법",
+    "lawId": "001971",
+    "mst": "276651",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/국민건강보험법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 24,
+   "explicitCitationEntries": 20,
+   "articleReferences": 32,
+   "verifiedReferences": 32,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
   }
 }

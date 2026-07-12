@@ -711,15 +711,219 @@
         "officialUrl": "https://law.go.kr/법령/소프트웨어진흥법"
       }
     ],
-    "articleVerification": {
-      "checkedAt": "2026-07-12",
-      "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
-      "citationEntries": 41,
-      "explicitCitationEntries": 29,
-      "articleReferences": 35,
-      "verifiedReferences": 35,
-      "missingReferences": 0,
-      "uncheckableReferences": 0
-    }
+    "confidence": 0.72,
+    "legal_basis": [
+     {
+      "law": "정보시스템 감리기준",
+      "article": "제20조(문서관리)",
+      "text": "발주자는 감리계약서, 감리계획서, 감리보고서 등 감리업무 관련 중요문서를 감리계약 종료일로부터 5년간 보관하여야 한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": "감리 대상"
+   },
+   {
+    "id": "E02",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P04",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P12",
+    "target": "P14",
+    "type": "sequence",
+    "label": "시정 완료"
+   },
+   {
+    "id": "E11",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P15",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P01",
+    "target": "P04",
+    "type": "message",
+    "label": "감리법인 등록부"
+   },
+   {
+    "id": "M02",
+    "source": "P05",
+    "target": "P07",
+    "type": "message",
+    "label": "감리원·기술지원"
+   },
+   {
+    "id": "M03",
+    "source": "P15",
+    "target": "P16",
+    "type": "message",
+    "label": "감리보고서 통보"
+   },
+   {
+    "id": "M04",
+    "source": "P16",
+    "target": "S01",
+    "type": "message",
+    "label": "산출물 등록"
+   },
+   {
+    "id": "L01",
+    "source": "P12",
+    "target": "P13",
+    "type": "loop",
+    "label": "시정 미흡"
+   },
+   {
+    "id": "L02",
+    "source": "P13",
+    "target": "P11",
+    "type": "loop",
+    "label": "재점검·재이행"
+   }
+  ],
+  "warnings": [
+   {
+    "date": "2026-07-12",
+    "type": "citation-correction",
+    "content": "process.nodes P01·P06·P07·P08·P09·P11·P12·P13·P15·S01의 정보시스템 감리기준 legal_basis 항목에 unverified:true 추가. 동 고시는 행안부 고시(행정규칙)로 법령정보 API가 전문 조회를 제공하지 않아 조문 번호 확인 불가. 기존 descriptive article 표기 유지하고 fieldVerification 항목 10건 추가.",
+    "consultedMSTs": []
+   },
+   {
+    "date": "2026-07-12",
+    "type": "admrul-verification",
+    "content": "2026-07-12 행정규칙 검증: 정보시스템 감리기준 admrul 대조(일련번호 2100000243290, 발령번호 2024-53) — 10건 확정, 0건 미등재 유지. 소관 변경사항 없음(행정안전부). P01→제1조(목적), P06→제7조(감리계획서 제출), P07→제7조(감리계획서 제출), P08→제9조(설계단계 감리), P09→제9조제1항, P11→제9조제3항, P12→제9조제4항, P13→제9조제4항, P15→제8조제1항·제9조제1항·제10조제1항, S01→제20조(문서관리).",
+    "consultedMSTs": []
+   }
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 4건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 37건 가운데 37건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "전자정부법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "전자정부법",
+    "lawId": "009199",
+    "mst": "268103",
+    "promulgatedOn": "2025-01-07",
+    "effectiveOn": "2025-07-08",
+    "officialUrl": "https://law.go.kr/법령/전자정부법"
+   },
+   {
+    "law": "전자정부법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "전자정부법 시행령",
+    "lawId": "009213",
+    "mst": "281535",
+    "promulgatedOn": "2025-12-30",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/전자정부법시행령"
+   },
+   {
+    "law": "정보시스템 감리기준",
+    "kind": "고시·지침",
+    "sourceType": "admin-rule",
+    "officialName": "정보시스템 감리기준",
+    "adminRuleId": "33483",
+    "adminRuleSerial": "2100000243290",
+    "promulgatedOn": "2024-06-27",
+    "officialUrl": "https://law.go.kr/행정규칙/정보시스템감리기준",
+    "issueNo": "2024-53",
+    "org": "행정안전부"
+   },
+   {
+    "law": "소프트웨어 진흥법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "소프트웨어 진흥법",
+    "lawId": "000751",
+    "mst": "265845",
+    "promulgatedOn": "2024-10-22",
+    "effectiveOn": "2025-04-23",
+    "officialUrl": "https://law.go.kr/법령/소프트웨어진흥법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 31,
+   "explicitCitationEntries": 29,
+   "articleReferences": 37,
+   "verifiedReferences": 37,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
   }
 }
