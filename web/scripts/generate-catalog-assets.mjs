@@ -49,12 +49,14 @@ for (const file of fs.readdirSync(DATA_DIR).filter((name) => name.endsWith(".jso
     category,
     institution.canvas.purpose,
     institution.canvas.stakeholders,
-    institution.canvas.moneyFlow,
-    institution.canvas.docsFlow,
+    institution.canvas.applicability,
+    ...(institution.canvas.submittedDocuments ?? []).flatMap((group) => [
+      group.actor,
+      ...group.documents,
+    ]),
     ...legalBasisTerms,
     ...authorityTerms,
     ...institution.canvas.bottlenecks,
-    ...institution.canvas.reformPoints,
     ...processTerms,
   ]
     .filter(Boolean)
@@ -67,10 +69,11 @@ for (const file of fs.readdirSync(DATA_DIR).filter((name) => name.endsWith(".jso
     stakeholders: institution.canvas.stakeholders,
     authorityNames: institution.canvas.authorities.map((authority) => authority.name),
     legalBasisNames,
-    moneyFlow: institution.canvas.moneyFlow,
-    docsFlow: institution.canvas.docsFlow,
+    applicability: institution.canvas.applicability,
+    submittedDocuments: (institution.canvas.submittedDocuments ?? [])
+      .map((group) => `${group.actor}: ${group.documents.join(" · ")}`)
+      .join(" / "),
     keyBottlenecks: institution.canvas.bottlenecks.slice(0, 3),
-    keyReformPoints: institution.canvas.reformPoints.slice(0, 3),
   };
 }
 

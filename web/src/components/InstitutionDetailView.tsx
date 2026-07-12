@@ -59,6 +59,7 @@ export default function InstitutionDetailView({
             </div>
             <h1>{institution.name}</h1>
             <p>{institution.oneLiner}</p>
+            <p className={styles.purposeLede}>{institution.canvas.purpose}</p>
           </div>
 
           <div className={styles.detailActions}>
@@ -153,14 +154,21 @@ function OnePageCanvas({
       <header className={styles.sectionHeading}>
         <div>
           <h2>한 장 캔버스</h2>
-          <p>법령 · 조직 · 절차 · 예산 · 문서</p>
+          <p>절차 · 법령 · 조직 · 적용 대상 · 제출서류</p>
         </div>
         <time dateTime={institution.asOfDate}>기준일 {institution.asOfDate}</time>
       </header>
 
       <div className={styles.canvasGrid}>
-        <CanvasBlock title="목적과 법적 근거" size="wide">
-          <p>{canvas.purpose}</p>
+        <CanvasBlock title="절차와 법적 근거" size="wide">
+          <ol className={styles.canvasProcedure}>
+            {canvas.procedure.map((step, index) => (
+              <li key={step}>
+                <span>{index + 1}</span>
+                {step}
+              </li>
+            ))}
+          </ol>
           <div className={styles.legalRows}>
             {canvas.legalBasis.map((basis) => {
               const source = sourceByLaw.get(basis.law);
@@ -181,34 +189,28 @@ function OnePageCanvas({
           </div>
         </CanvasBlock>
 
-        <CanvasBlock title="권한 관계">
-          <div className={styles.authorityList}>
-            {canvas.authorities.map((authority) => (
-              <div key={authority.name}>
-                <strong>{authority.name}</strong>
-                <span>{authority.role}</span>
+        <CanvasBlock title="적용 대상">
+          <p>{canvas.applicability}</p>
+        </CanvasBlock>
+
+        <CanvasBlock title="제출서류">
+          <div className={styles.documentGroups}>
+            {canvas.submittedDocuments.map((group) => (
+              <div key={group.actor}>
+                <strong>{group.actor}</strong>
+                <ul>
+                  {group.documents.map((document) => (
+                    <li key={document}>{document}</li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
         </CanvasBlock>
 
-        <CanvasBlock title="돈의 흐름">
-          <p>{canvas.moneyFlow}</p>
-        </CanvasBlock>
-
-        <CanvasBlock title="문서의 흐름">
-          <p>{canvas.docsFlow}</p>
-        </CanvasBlock>
-
         <CanvasBlock title="병목" tone="warning">
           <ul>
             {canvas.bottlenecks.map((item) => <li key={item}>{item}</li>)}
-          </ul>
-        </CanvasBlock>
-
-        <CanvasBlock title="개선점" tone="accent" size="wide">
-          <ul className={styles.twoColumnList}>
-            {canvas.reformPoints.map((item) => <li key={item}>{item}</li>)}
           </ul>
         </CanvasBlock>
 

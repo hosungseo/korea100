@@ -64,6 +64,7 @@ jobs:
             echo "law cache unchanged"
           else
             git commit -m "chore: refresh law full-text cache from Open API"
+            git pull --rebase origin ${{ github.ref_name }}
             git push origin HEAD:${{ github.ref_name }}
           fi
       - name: Sync official source identifiers
@@ -94,5 +95,6 @@ jobs:
             echo "no changes to commit"
           else
             git commit -m "chore: machine article verification via Actions runner"
+            git pull --rebase origin ${{ github.ref_name }}
             git push origin HEAD:${{ github.ref_name }}
           fi

@@ -232,6 +232,75 @@
 }
 
 .processSection,
+
+.purposeLede {
+  max-width: 780px;
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  border-left: 3px solid #0a8f63;
+  background: #f4faf7;
+  color: #33413a;
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+
+.canvasProcedure {
+  display: grid;
+  gap: 1px;
+  margin: 0 0 4px;
+  padding: 0;
+  list-style: none;
+}
+
+.canvasProcedure li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid #f0f2f1;
+  color: #33413a;
+  font-size: 11.5px;
+  line-height: 1.6;
+}
+
+.canvasProcedure li span {
+  display: grid;
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  place-items: center;
+  background: #dff5eb;
+  color: #087452;
+  font-family: var(--font-mono);
+  font-size: 9px;
+}
+
+.documentGroups {
+  display: grid;
+  gap: 10px;
+}
+
+.documentGroups > div > strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #111714;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.documentGroups ul {
+  margin: 0;
+  padding-left: 16px;
+  display: grid;
+  gap: 3px;
+}
+
+.documentGroups li {
+  color: #33413a;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
 .canvasSection {
   padding: 24px 32px 36px;
 }

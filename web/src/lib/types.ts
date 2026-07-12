@@ -80,16 +80,22 @@ export interface Authority {
   role: string;
 }
 
+export interface SubmittedDocumentGroup {
+  actor: string;
+  documents: string[];
+}
+
 export interface Canvas {
   purpose: string;
   stakeholders: string;
   legalBasis: LegalBasis[];
   authorities: Authority[];
   procedure: string[];
-  moneyFlow: string;
-  docsFlow: string;
+  /** 이 제도(법률)가 적용되는 대상·범위. 구 moneyFlow를 대체 */
+  applicability: string;
+  /** 담당자(수요기관·조달업체 등)별 필요 서류. 구 docsFlow를 대체 */
+  submittedDocuments: SubmittedDocumentGroup[];
   bottlenecks: string[];
-  reformPoints: string[];
 }
 
 export interface ProcessNodeLegalBasis {
@@ -190,10 +196,9 @@ export interface InstitutionComparison {
   stakeholders: string;
   authorityNames: string[];
   legalBasisNames: string[];
-  moneyFlow: string;
-  docsFlow: string;
+  applicability: string;
+  submittedDocuments: string;
   keyBottlenecks: string[];
-  keyReformPoints: string[];
 }
 
 export interface FieldVerificationEntry {

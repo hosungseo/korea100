@@ -645,15 +645,11 @@ function ComparisonPanel({
       render: (item) =>
         `${item.processNodeCount}개 업무 · ${item.processStageCount}단계 · ${item.processLaneCount}개 행위자 레인`,
     },
-    { label: "돈의 흐름", render: (item) => item.moneyFlow },
-    { label: "문서·데이터", render: (item) => item.docsFlow },
+    { label: "적용 대상", render: (item) => item.applicability },
+    { label: "제출서류", render: (item) => item.submittedDocuments },
     {
       label: "핵심 병목",
       render: (item) => item.keyBottlenecks.join(" / "),
-    },
-    {
-      label: "개선 포인트",
-      render: (item) => item.keyReformPoints.join(" / "),
     },
   ];
 
