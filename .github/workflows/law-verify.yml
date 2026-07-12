@@ -16,6 +16,10 @@ on:
         description: "출처 식별자 동기화(sync:sources --write)도 함께 실행"
         type: boolean
         default: false
+      fetch_cache:
+        description: "sources/law-cache/law-list.json의 법령·행정규칙 전문을 받아 커밋"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -41,12 +45,28 @@ jobs:
           cache-dependency-path: web/package-lock.json
       - run: npm ci
       - name: Install korean-law CLI
-        run: npm install -g korean-law
+        run: npm install -g korean-law-mcp
       - name: Smoke-test Open API credential
         run: |
           set -o pipefail
           korean-law search_law --query "국가를 당사자로 하는 계약에 관한 법률" --display 3 2>&1 | head -40
           korean-law get_batch_articles --mst 283877 --articles '["제7조"]' 2>&1 | head -20
+      - name: Fetch full-text law cache
+        if: ${{ inputs.fetch_cache }}
+        run: node scripts/fetch-law-cache.mjs
+      - name: Commit law cache
+        if: ${{ inputs.fetch_cache }}
+        working-directory: .
+        run: |
+          git config user.name "law-verify-bot"
+          git config user.email "actions@github.com"
+          git add sources/law-cache
+          if git diff --cached --quiet; then
+            echo "law cache unchanged"
+          else
+            git commit -m "chore: refresh law full-text cache from Open API"
+            git push origin HEAD:${{ github.ref_name }}
+          fi
       - name: Sync official source identifiers
         if: ${{ inputs.sync_sources }}
         run: npm run sync:sources -- --write

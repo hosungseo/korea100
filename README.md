@@ -14,7 +14,7 @@
 
 ## 현재 상태
 
-- 전환 초기 단계입니다. 파일럿 1호 `조달업체 등록(입찰참가자격 등록)`이 캔버스와 상태 인식형 업무구조도로 제작되어 있습니다.
+- 파일럿 10개 제도가 공개되어 있습니다(조달업체 등록, 수의계약, 부정당업자 제재, 적격심사낙찰제, 조달요청, 다수공급자계약, 계약방법 결정, 물가변동 계약금액 조정, 우수조달물품 지정, 선금과 대가 지급). 제도별 검증 상태는 상세 페이지 배지로 표시합니다.
 - 파일럿 1호의 조문 인용은 2026-07-12 국가법령정보센터 공개 웹 원문 열람으로 수동 대조했고, Open API 기계 대조(`LAW_OC` 필요)가 남아 있어 검증 상태는 `needs-review`입니다. 열람 원문 사본은 `sources/pilot-bidder-registration-2026-07-12/`에 있습니다.
 - korea100의 제도 101개 콘텐츠는 `legacy-korea100` 브랜치에 보존되어 있습니다. main은 조달 콘텐츠 전용입니다.
 - 계획 문서: `docs/procurement-master-plan-v0.md`(로드맵), `docs/procurement-topic-map-v0.md`(제도 후보 100 + 파일럿 10), `docs/procurement-one-page-template-v0.md`(한 장 템플릿), `docs/procurement-verification-plan-v0.md`(법령 검증 계획).
