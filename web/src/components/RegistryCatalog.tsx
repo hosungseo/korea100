@@ -26,13 +26,13 @@ const MAX_COMPARE = 3;
 const CATALOG_ASSET_BASE = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/data`;
 
 const CATEGORY_COLORS: Record<string, string> = {
-  "등록": "#0f9f72",
-  "발주": "#7c5c10",
-  "공고": "#b45309",
-  "입찰": "#315a78",
-  "심사·평가": "#5b21b6",
-  "계약·이행": "#0f766e",
-  "사후관리·제재": "#be123c",
+  "등록": "#0ea5e9",
+  "발주": "#059669",
+  "공고": "#ca8a04",
+  "입찰": "#ea580c",
+  "심사·평가": "#9333ea",
+  "계약·이행": "#2563eb",
+  "사후관리·제재": "#e11d48",
 };
 
 export default function RegistryCatalog({

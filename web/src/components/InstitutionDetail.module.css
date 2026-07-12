@@ -232,6 +232,9 @@
 }
 
 .processSection,
+.canvasSection {
+  padding: 24px 32px 36px;
+}
 
 .purposeLede {
   max-width: 780px;
@@ -245,14 +248,15 @@
 }
 
 .canvasProcedure {
-  display: grid;
-  gap: 1px;
   margin: 0 0 4px;
   padding: 0;
   list-style: none;
+  columns: 2;
+  column-gap: 28px;
 }
 
 .canvasProcedure li {
+  break-inside: avoid;
   display: flex;
   align-items: baseline;
   gap: 10px;
@@ -277,7 +281,8 @@
 
 .documentGroups {
   display: grid;
-  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px 18px;
 }
 
 .documentGroups > div > strong {
@@ -299,10 +304,6 @@
   color: #33413a;
   font-size: 11px;
   line-height: 1.55;
-}
-
-.canvasSection {
-  padding: 24px 32px 36px;
 }
 
 .sectionHeading {
