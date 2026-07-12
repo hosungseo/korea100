@@ -6,8 +6,8 @@
       "sd": 1.3736352630514554
     },
     "edgeRatio": {
-      "mean": 1.1368284282754142,
-      "sd": 0.07895822092836616
+      "mean": 1.1379932506400037,
+      "sd": 0.07779023164603516
     },
     "deadlineDensity": {
       "mean": 0.4228792196318943,
@@ -1119,54 +1119,6 @@
       "score": 8
     },
     {
-      "slug": "open-data",
-      "verificationStatus": "article-verified",
-      "processWarnings": 0,
-      "findings": [
-        {
-          "rule": "article-descriptive",
-          "node": "P04",
-          "detail": "공공데이터의 제공 및 이용 활성화에 관한 법률 시행령 → \"제공 형태·표준 관련 조문\""
-        },
-        {
-          "rule": "article-descriptive",
-          "node": "P14",
-          "detail": "공공데이터의 제공 및 이용 활성화에 관한 법률 시행령 → \"품질관리 관련 조문\""
-        },
-        {
-          "rule": "backward-sequence",
-          "edge": "E13",
-          "detail": "P13(5) → P10(4) — loop 타입이어야 할 후보"
-        },
-        {
-          "rule": "outlier",
-          "detail": "edgeRatio=1.38 (전체 평균 1.14±0.08)"
-        }
-      ],
-      "score": 8
-    },
-    {
-      "slug": "refugee-status",
-      "verificationStatus": "article-verified",
-      "processWarnings": 5,
-      "findings": [
-        {
-          "rule": "backward-sequence",
-          "edge": "E18",
-          "detail": "P16(4) → P13(3) — loop 타입이어야 할 후보"
-        },
-        {
-          "rule": "outlier",
-          "detail": "nodes=19.00 (전체 평균 15.88±1.37)"
-        },
-        {
-          "rule": "no-loop",
-          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
-        }
-      ],
-      "score": 8
-    },
-    {
       "slug": "jeonse-fraud-relief",
       "verificationStatus": "article-verified",
       "processWarnings": 0,
@@ -1387,6 +1339,28 @@
       "score": 6
     },
     {
+      "slug": "open-data",
+      "verificationStatus": "article-verified",
+      "processWarnings": 0,
+      "findings": [
+        {
+          "rule": "article-descriptive",
+          "node": "P04",
+          "detail": "공공데이터의 제공 및 이용 활성화에 관한 법률 시행령 → \"제공 형태·표준 관련 조문\""
+        },
+        {
+          "rule": "article-descriptive",
+          "node": "P14",
+          "detail": "공공데이터의 제공 및 이용 활성화에 관한 법률 시행령 → \"품질관리 관련 조문\""
+        },
+        {
+          "rule": "outlier",
+          "detail": "edgeRatio=1.38 (전체 평균 1.14±0.08)"
+        }
+      ],
+      "score": 6
+    },
+    {
       "slug": "overseas-korean-protection",
       "verificationStatus": "article-verified",
       "processWarnings": 0,
@@ -1478,6 +1452,18 @@
           "rule": "article-descriptive",
           "node": "P10",
           "detail": "국가인권위원회 조정위원회 운영 등 위원회 규칙 → \"조정위원회 구성·운영 및 조정 절차\""
+        }
+      ],
+      "score": 5
+    },
+    {
+      "slug": "refugee-status",
+      "verificationStatus": "article-verified",
+      "processWarnings": 5,
+      "findings": [
+        {
+          "rule": "outlier",
+          "detail": "nodes=19.00 (전체 평균 15.88±1.37)"
         }
       ],
       "score": 5
@@ -1767,19 +1753,6 @@
       "score": 3
     },
     {
-      "slug": "basic-livelihood-security",
-      "verificationStatus": "article-verified",
-      "processWarnings": 0,
-      "findings": [
-        {
-          "rule": "orphan-node",
-          "node": "P17",
-          "detail": "엣지가 하나도 없음"
-        }
-      ],
-      "score": 2
-    },
-    {
       "slug": "child-allowance",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
@@ -1838,19 +1811,6 @@
       "score": 2
     },
     {
-      "slug": "national-pension",
-      "verificationStatus": "article-verified",
-      "processWarnings": 0,
-      "findings": [
-        {
-          "rule": "backward-sequence",
-          "edge": "E06",
-          "detail": "P06(2) → P07(0) — loop 타입이어야 할 후보"
-        }
-      ],
-      "score": 2
-    },
-    {
       "slug": "petition",
       "verificationStatus": "article-verified",
       "processWarnings": 0,
@@ -1859,19 +1819,6 @@
           "rule": "article-descriptive",
           "node": "P06",
           "detail": "국회청원심사규칙 → \"국회청원심사규칙\""
-        }
-      ],
-      "score": 2
-    },
-    {
-      "slug": "regulatory-sandbox",
-      "verificationStatus": "article-verified",
-      "processWarnings": 0,
-      "findings": [
-        {
-          "rule": "backward-sequence",
-          "edge": "E12",
-          "detail": "P08(3) → P05(2) — loop 타입이어야 할 후보"
         }
       ],
       "score": 2
@@ -1936,6 +1883,13 @@
           "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
         }
       ],
+      "score": 1
+    },
+    {
+      "slug": "basic-livelihood-security",
+      "verificationStatus": "article-verified",
+      "processWarnings": 1,
+      "findings": [],
       "score": 1
     },
     {
@@ -2061,6 +2015,13 @@
       "score": 0
     },
     {
+      "slug": "national-pension",
+      "verificationStatus": "article-verified",
+      "processWarnings": 0,
+      "findings": [],
+      "score": 0
+    },
+    {
       "slug": "public-interest-whistleblowing",
       "verificationStatus": "article-verified",
       "processWarnings": 0,
@@ -2069,6 +2030,13 @@
     },
     {
       "slug": "public-procurement",
+      "verificationStatus": "article-verified",
+      "processWarnings": 0,
+      "findings": [],
+      "score": 0
+    },
+    {
+      "slug": "regulatory-sandbox",
       "verificationStatus": "article-verified",
       "processWarnings": 0,
       "findings": [],
