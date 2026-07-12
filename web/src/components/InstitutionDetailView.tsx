@@ -159,9 +159,11 @@ export default function InstitutionDetailView({
         </div>
 
         {process?.warnings && process.warnings.length > 0 && (
-          <p className={styles.processWarning}>
-            {getWarningText(process.warnings.at(0))}
-          </p>
+          <div className={styles.processWarning}>
+            {process.warnings.map((warning, index) => (
+              <p key={index}>{getWarningText(warning)}</p>
+            ))}
+          </div>
         )}
       </section>
 
