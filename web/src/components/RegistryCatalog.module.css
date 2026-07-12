@@ -586,8 +586,9 @@
   inset: 0;
   z-index: 90;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
+  padding: 24px;
   background: rgba(11, 20, 16, 0.58);
 }
 
@@ -595,9 +596,9 @@
   width: min(1040px, 100%);
   max-height: 88svh;
   overflow: auto;
-  border-top: 1px solid #bdcbc4;
+  border: 1px solid #bdcbc4;
   background: #fcfcfb;
-  box-shadow: 0 -8px 30px rgba(11, 20, 16, 0.22);
+  box-shadow: 0 24px 60px rgba(11, 20, 16, 0.32);
 }
 
 .compareDialog > header {
@@ -689,7 +690,8 @@
 
 .compareBottlenecks {
   margin: 0;
-  padding-left: 16px;
+  padding-left: 0;
+  list-style: none;
   display: grid;
   gap: 6px;
 }
@@ -1005,6 +1007,10 @@
     margin-left: 0;
     padding: 7px 10px;
     font-size: 10px;
+  }
+
+  .compareBackdrop {
+    padding: 12px;
   }
 
   .compareDialog {

@@ -125,11 +125,6 @@ function CompareDialog({
       label: "누가 관여하나",
       render: (item) => comparisonOf(item)?.stakeholders ?? pending,
     },
-    {
-      label: "결정 권한은 어디에",
-      render: (item) =>
-        comparisonOf(item)?.authorityNames.join(" · ") ?? pending,
-    },
     { label: "근거 법령 · 규정", render: (item) => item.laws.join(" · ") },
     {
       label: "실무에서 걸리는 곳",

@@ -29,7 +29,7 @@ interface NodeRect {
 const EDGE_COLOR: Record<EdgeKind, string> = {
   sequence: "#c3cfc8",
   message: "#aab6af",
-  loop: "#d2a65d",
+  loop: "#2563eb",
 };
 
 export default function DesktopProcessBoard({
@@ -180,13 +180,13 @@ function FullProcessGrid({
               <ArrowMarker id={`${markerPrefix}-message`} color={EDGE_COLOR.message} />
               <ArrowMarker id={`${markerPrefix}-loop`} color={EDGE_COLOR.loop} />
               <ArrowMarker id={`${markerPrefix}-selected`} color="#0f9f72" />
-              <ArrowMarker id={`${markerPrefix}-selected-loop`} color="#c78116" />
+              <ArrowMarker id={`${markerPrefix}-selected-loop`} color="#1d4ed8" />
             </defs>
             {sortedPaths.map(({ edge, path }) => {
               const selected = isSelectedEdge(edge, selectedNodeId);
               const color = selected
                 ? edge.type === "loop"
-                  ? "#c78116"
+                  ? "#1d4ed8"
                   : "#0f9f72"
                 : EDGE_COLOR[edge.type];
               const marker = selected

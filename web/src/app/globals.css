@@ -4243,9 +4243,9 @@ body:has(.og-card-page) > main {
 }
 
 .desktop-process-v2-card[data-status="loop"] {
-  border-color: var(--color-warning);
+  border-color: #2563eb;
   border-style: dashed;
-  background: #fdf9f1;
+  background: #eff6ff;
 }
 
 .desktop-process-v2-card[aria-pressed="true"] {
@@ -4282,11 +4282,14 @@ body:has(.og-card-page) > main {
 
 .desktop-process-v2-card[data-status="risk"] .desktop-process-v2-card-meta,
 .desktop-process-v2-card[data-status="risk"] .desktop-process-v2-card-meta b,
-.desktop-process-v2-card[data-status="risk"] .desktop-process-v2-card-meta i,
+.desktop-process-v2-card[data-status="risk"] .desktop-process-v2-card-meta i {
+  color: var(--color-warning);
+}
+
 .desktop-process-v2-card[data-status="loop"] .desktop-process-v2-card-meta,
 .desktop-process-v2-card[data-status="loop"] .desktop-process-v2-card-meta b,
 .desktop-process-v2-card[data-status="loop"] .desktop-process-v2-card-meta i {
-  color: var(--color-warning);
+  color: #2563eb;
 }
 
 .desktop-process-v2-card > strong {
@@ -4303,7 +4306,7 @@ body:has(.og-card-page) > main {
 .desktop-process-v2-card > small {
   display: block;
   margin-top: 3px;
-  color: var(--color-warning);
+  color: #2563eb;
   font-size: 9px;
   font-weight: 650;
   line-height: 1.35;

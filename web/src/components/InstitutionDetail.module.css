@@ -80,9 +80,9 @@
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 7px;
-  color: #5d6b63;
-  font-size: 11px;
+  margin-bottom: 8px;
+  color: #46534b;
+  font-size: 12.5px;
 }
 
 .priority {
@@ -141,11 +141,11 @@
 }
 
 .titleCopy > p {
-  max-width: 780px;
-  margin: 8px 0 0;
-  color: #5d6b63;
-  font-size: 14px;
-  line-height: 1.65;
+  max-width: 820px;
+  margin: 9px 0 0;
+  color: #46534b;
+  font-size: 16px;
+  line-height: 1.7;
 }
 
 .detailActions {
@@ -212,7 +212,7 @@
 .detailStats strong {
   display: block;
   color: #111714;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 720;
   line-height: 1.25;
 }
@@ -227,8 +227,9 @@
 
 .detailStats span {
   display: block;
-  color: #87938d;
-  font-size: 9px;
+  margin-top: 2px;
+  color: #5d6b63;
+  font-size: 11px;
 }
 
 .processSection,
@@ -237,46 +238,47 @@
 }
 
 .purposeLede {
-  max-width: 780px;
-  margin: 10px 0 0;
-  padding: 10px 12px;
-  border-left: 3px solid #0a8f63;
+  max-width: 820px;
+  margin: 12px 0 0;
+  padding: 12px 15px;
+  border-left: 4px solid #0a8f63;
   background: #f4faf7;
-  color: #33413a;
-  font-size: 12.5px;
-  line-height: 1.7;
+  color: #26312b;
+  font-size: 15px;
+  line-height: 1.75;
 }
 
 .canvasProcedure {
-  margin: 0 0 4px;
+  margin: 0;
   padding: 0;
   list-style: none;
   columns: 2;
-  column-gap: 28px;
+  column-gap: 26px;
 }
 
 .canvasProcedure li {
   break-inside: avoid;
   display: flex;
   align-items: baseline;
-  gap: 10px;
-  padding: 6px 0;
-  border-bottom: 1px solid #f0f2f1;
-  color: #33413a;
-  font-size: 11.5px;
+  gap: 11px;
+  padding: 8px 0;
+  border-bottom: 1px solid #eef1ef;
+  color: #26312b;
+  font-size: 13.5px;
   line-height: 1.6;
 }
 
 .canvasProcedure li span {
   display: grid;
   flex: 0 0 auto;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   place-items: center;
   background: #dff5eb;
-  color: #087452;
+  color: #076b4b;
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 12px;
+  font-weight: 650;
 }
 
 .documentGroups {
@@ -287,23 +289,23 @@
 
 .documentGroups > div > strong {
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   color: #111714;
-  font-size: 11px;
-  font-weight: 650;
+  font-size: 13.5px;
+  font-weight: 700;
 }
 
 .documentGroups ul {
   margin: 0;
-  padding-left: 16px;
+  padding-left: 18px;
   display: grid;
-  gap: 3px;
+  gap: 4px;
 }
 
 .documentGroups li {
   color: #33413a;
-  font-size: 11px;
-  line-height: 1.55;
+  font-size: 13.5px;
+  line-height: 1.6;
 }
 
 .sectionHeading {
@@ -317,16 +319,16 @@
 .sectionHeading h2 {
   margin: 0;
   color: #111714;
-  font-size: 21px;
-  font-weight: 680;
+  font-size: 23px;
+  font-weight: 700;
   letter-spacing: 0;
 }
 
 .sectionHeading p,
 .sectionHeading time {
-  margin: 2px 0 0;
-  color: #5d6b63;
-  font-size: 12px;
+  margin: 3px 0 0;
+  color: #46534b;
+  font-size: 13.5px;
 }
 
 .legend {
@@ -434,21 +436,34 @@
   padding-top: 0;
 }
 
-.canvasGrid {
+.canvasFloors {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
+}
+
+.canvasRow {
+  display: grid;
+  gap: 14px;
+  align-items: stretch;
+}
+
+.canvasRow[data-floor="1"] {
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+}
+
+.canvasRow[data-floor="2"] {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr) minmax(0, 1.28fr);
+}
+
+.canvasRow[data-floor="3"] {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 }
 
 .canvasBlock {
   min-width: 0;
-  padding: 17px 18px;
+  padding: 18px 20px;
   border: 1px solid #dde5df;
   background: #fff;
-}
-
-.canvasBlock[data-size="wide"] {
-  grid-column: span 2;
 }
 
 .canvasBlock[data-tone="warning"] {
@@ -467,10 +482,11 @@
 }
 
 .canvasBlock h3 {
-  margin: 0 0 8px;
-  color: #87938d;
-  font-size: 10px;
-  font-weight: 700;
+  margin: 0 0 11px;
+  color: #46534b;
+  font-size: 13px;
+  font-weight: 750;
+  letter-spacing: 0.01em;
 }
 
 .canvasBlock[data-tone="warning"] h3,
@@ -484,9 +500,9 @@
 
 .canvasBlock p,
 .canvasBlock li {
-  color: #5d6b63;
-  font-size: 11px;
-  line-height: 1.65;
+  color: #33413a;
+  font-size: 14px;
+  line-height: 1.7;
 }
 
 .canvasBlock p {
@@ -521,19 +537,25 @@
 .legalRows strong,
 .legalRows a {
   color: #111714;
-  font-size: 11px;
-  font-weight: 650;
+  font-size: 13.5px;
+  font-weight: 680;
   text-decoration: none;
 }
 
+.legalRows a {
+  color: #076b4b;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .legalRows span {
-  color: #5d6b63;
-  font-size: 10px;
+  color: #46534b;
+  font-size: 12px;
 }
 
 .legalRows small {
-  color: #87938d;
-  font-size: 9px;
+  color: #6b776f;
+  font-size: 11px;
   text-align: right;
 }
 
@@ -567,10 +589,12 @@
 
 .relatedLinks a,
 .relatedLinks span {
-  padding: 4px 8px;
-  border: 1px solid rgba(15, 159, 114, 0.32);
-  color: #087452;
-  font-size: 10px;
+  padding: 6px 11px;
+  border: 1px solid rgba(15, 159, 114, 0.42);
+  color: #076b4b;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.4;
   text-decoration: none;
 }
 
@@ -578,15 +602,15 @@
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
-  padding: 15px 32px 28px;
+  padding: 16px 32px 30px;
   border-top: 1px solid #dde5df;
-  color: #87938d;
-  font-size: 10px;
-  line-height: 1.55;
+  color: #6b776f;
+  font-size: 12px;
+  line-height: 1.6;
 }
 
 .disclaimer strong {
-  color: #5d6b63;
+  color: #46534b;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -781,15 +805,23 @@
     font-size: 18px;
   }
 
-  .canvasGrid {
+  .canvasFloors {
+    gap: 10px;
+  }
+
+  .canvasRow[data-floor="1"],
+  .canvasRow[data-floor="2"],
+  .canvasRow[data-floor="3"] {
     grid-template-columns: minmax(0, 1fr);
     gap: 10px;
   }
 
-  .canvasBlock,
-  .canvasBlock[data-size="wide"] {
-    grid-column: auto;
-    padding: 14px;
+  .canvasBlock {
+    padding: 15px 16px;
+  }
+
+  .canvasProcedure {
+    columns: 1;
   }
 
   .twoColumnList {
