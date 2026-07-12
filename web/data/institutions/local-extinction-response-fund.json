@@ -264,10 +264,7 @@
         "progress": 100,
         "actor": "행정안전부",
         "action": "배분기준 수립",
-        "output_documents": [
-          "기금 배분기준",
-          "투자계획 평가지침"
-        ],
+        "output_documents": ["기금 배분기준", "투자계획 평가지침"],
         "confidence": 0.9,
         "legal_basis": [
           {
@@ -311,10 +308,7 @@
         "progress": 100,
         "actor": "인구감소지역·관심지역 시·군·구",
         "action": "투자계획 작성",
-        "output_documents": [
-          "연도 투자계획서",
-          "세부사업 계획"
-        ],
+        "output_documents": ["연도 투자계획서", "세부사업 계획"],
         "blocker": "평가 대비 단년도 계획 관행으로 중장기 전략사업 편성이 어렵다 (현장 검증 필요)",
         "confidence": 0.85,
         "legal_basis": [
@@ -340,9 +334,7 @@
         "status": "done",
         "progress": 100,
         "actor": "시·도",
-        "output_documents": [
-          "광역계정 투자계획서"
-        ],
+        "output_documents": ["광역계정 투자계획서"],
         "confidence": 0.85,
         "legal_basis": [
           {
@@ -368,10 +360,7 @@
         "progress": 100,
         "actor": "지자체",
         "action": "기한 내 제출",
-        "output_documents": [
-          "제출 공문",
-          "투자계획서"
-        ],
+        "output_documents": ["제출 공문", "투자계획서"],
         "confidence": 0.85,
         "legal_basis": [
           {
@@ -438,9 +427,7 @@
         "progress": 55,
         "actor": "평가단",
         "action": "사업 타당성·전략성 평가",
-        "output_documents": [
-          "평가 결과서"
-        ],
+        "output_documents": ["평가 결과서"],
         "confidence": 0.8,
         "legal_basis": [
           {
@@ -489,9 +476,7 @@
         "progress": 0,
         "actor": "광역지원계정심의위원회·기초지원계정심의위원회(기금관리조합 내)",
         "action": "투자계획 심의 결과에 따른 재원 배분 결정",
-        "output_documents": [
-          "배분 결정 내역"
-        ],
+        "output_documents": ["배분 결정 내역"],
         "confidence": 0.85,
         "legal_basis": [
           {
@@ -515,9 +500,7 @@
         "status": "waiting",
         "progress": 0,
         "actor": "공제회",
-        "output_documents": [
-          "배분 통보서"
-        ],
+        "output_documents": ["배분 통보서"],
         "confidence": 0.8,
         "legal_basis": [
           {
@@ -536,9 +519,7 @@
         "status": "waiting",
         "progress": 0,
         "actor": "지자체 예산부서",
-        "output_documents": [
-          "예산안(기금 재원 표시)"
-        ],
+        "output_documents": ["예산안(기금 재원 표시)"],
         "confidence": 0.9,
         "legal_basis": [
           {
@@ -576,9 +557,7 @@
         "progress": 0,
         "actor": "사업부서",
         "action": "계약·보조·시설 조성",
-        "output_documents": [
-          "집행 실적(지방재정365 공개)"
-        ],
+        "output_documents": ["집행 실적(지방재정365 공개)"],
         "blocker": "부지·인허가가 필요한 하드웨어형 사업 집중으로 집행률 부진이 반복된다",
         "confidence": 0.9,
         "legal_basis": [
@@ -604,10 +583,7 @@
         "status": "waiting",
         "progress": 0,
         "actor": "공제회·행안부",
-        "output_documents": [
-          "집행실적 보고",
-          "성과평가 결과"
-        ],
+        "output_documents": ["집행실적 보고", "성과평가 결과"],
         "deadline": "기금관리조합→지자체 성과분석계획 통보: 해당연도 1월 31일; 시·도 성과보고서 제출: 3월 31일; 성과분석 결과 공개: 6월 30일(시행령 제24조→제18조③ 준용)",
         "confidence": 0.8,
         "legal_basis": [
@@ -657,10 +633,7 @@
         "progress": 0,
         "actor": "국가(중앙행정기관)·지자체",
         "action": "지방소멸대응투자협약 체결·이행점검",
-        "output_documents": [
-          "투자협약서",
-          "이행점검 결과"
-        ],
+        "output_documents": ["투자협약서", "이행점검 결과"],
         "confidence": 0.72,
         "legal_basis": [
           {
@@ -816,17 +789,12 @@
       {
         "date": "2026-07-12",
         "content": "article-descriptive 3건 처리: P01 기금 운용 관련 행정안전부 지침 '연도별 배분기준', P08 기금 운용 관련 행정안전부 지침 '평가 절차' → API 미제공 행정규칙으로 unverified 처리; P13 지방재정법 '세출 집행' → 지방재정법(MST 283145) 조문 목차에서 해당 조문명 확인 불가로 unverified 처리. fieldVerification 3건 추가.",
-        "consultedMSTs": [
-          "283145"
-        ]
+        "consulted_msts": ["283145"]
       },
       {
         "date": "2026-07-12",
         "content": "2026-07-12 L2 블라인드 재구성 대조 정정: (C) P13 legal_basis 제17조의2 오인용 제거 — 제17조의2는 지역상생발전기금 재원 조문으로 지방소멸대응기금과 무관; 제24조제1항으로 교체. (C) P09 actor·lane '행정안전부' 오기 — 배분 결정 주체는 기금관리조합 내 광역·기초지원계정심의위원회(법 제26조제1항); lane을 '한국지방재정공제회(기금관리)'로 수정, actor 및 legal_basis 교체. (C) P16 투자협약 당사자 '기금관리조합·지자체' 오기 — 법 제29조제1항은 '국가(중앙행정기관)와 지방자치단체'가 당사자; actor·text 수정. (D) P14 성과분석 법정 기한 누락 — 시행령 제24조(→제18조 준용): 성과분석계획 통보 1월 31일, 시·도 성과보고서 제출 3월 31일, 결과 공개 6월 30일; deadline 필드 추가. (E) 투자계획 수립 전 상호 의견 청취 단계 누락 — 시행령 제22조제2항: 시·도지사↔시장·군수·구청장 상호 의견 청취 의무; 노드 P02a 신설, 엣지 E01·E01a·E02 재배선. 참조 MST: 285437(지방기금법), 281537(시행령). 법의 침묵: ① 심의위원회의 투자계획 심의 후 지자체에 대한 배분 확정 통보 기한이 법·령에 명시되지 않음. ② 투자계획 평가 기준(배분등급 산식·가중치)이 법·령에 위임되지 않고 행정안전부 지침으로만 운영되어 법적 예측가능성이 낮음. ③ 투자협약 이행 점검 주체와 기한이 법·령에 명시되지 않음.",
-        "consultedMSTs": [
-          "285437",
-          "281537"
-        ]
+        "consulted_msts": ["285437", "281537"]
       },
       {
         "date": "2026-07-12",

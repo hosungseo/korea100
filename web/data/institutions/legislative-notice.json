@@ -1,688 +1,630 @@
 {
- "slug": "legislative-notice",
- "name": "입법예고와 행정예고",
- "oneLiner": "법령을 만들거나 정책을 시행하기 전에 그 안을 국민에게 미리 알리고 의견을 듣도록 한 사전 참여·예고 절차",
- "type": "국가운영·통제형",
- "priority": 18,
- "whyFirst": "규범과 정책이 확정되기 전 국민이 개입할 수 있는 통로로, 법령 제정 절차의 투명성과 참여를 담보한다.",
- "asOfDate": "2026-07-10",
- "status": "full",
- "canvas": {
-  "purpose": "법령·정책이 확정되기 전에 그 내용을 공개하고 의견을 수렴해 국민의 예측 가능성과 절차 참여를 보장한다. 행정의 일방성을 완화하고 규범의 수용성을 높인다.",
-  "stakeholders": "입법·정책을 예고하는 행정청, 의견을 내는 국민·이해관계자·단체, 예고를 총괄·게시하는 법제처·행정안전부, 예고 대상 규범의 수범자.",
-  "legalBasis": [
-   {
-    "law": "행정절차법",
-    "articles": "제41조(행정상 입법예고), 제42조(예고방법), 제43조(예고기간, 입법예고 40일·자치법규 20일), 제44조(의견제출·처리), 제45조(공청회), 제46조(행정예고, 20일 이상), 제47조(예고방법)",
-    "kind": "법률"
-   },
-   {
-    "law": "행정절차법 시행령",
-    "articles": "제23조(행정상 입법예고), 제24조의2(관계기관 의견청취), 제24조의3(예고내용), 제24조의4(행정예고 제출의견 처리), 제20조의2·제20조의3(온라인공청회)",
-    "kind": "대통령령"
-   },
-   {
-    "law": "행정절차법 시행규칙",
-    "articles": "제13조(행정예고 통계의 공고, 매년 3월말)",
-    "kind": "행정안전부령"
-   },
-   {
-    "law": "법제업무 운영규정",
-    "articles": "법령안 입법예고 실무",
-    "kind": "대통령령"
-   },
-   {
-    "law": "국회법",
-    "articles": "제82조의2(위원회 입법예고)",
-    "kind": "법률"
-   }
+  "slug": "legislative-notice",
+  "name": "입법예고와 행정예고",
+  "oneLiner": "법령을 만들거나 정책을 시행하기 전에 그 안을 국민에게 미리 알리고 의견을 듣도록 한 사전 참여·예고 절차",
+  "type": "국가운영·통제형",
+  "priority": 18,
+  "whyFirst": "규범과 정책이 확정되기 전 국민이 개입할 수 있는 통로로, 법령 제정 절차의 투명성과 참여를 담보한다.",
+  "asOfDate": "2026-07-10",
+  "status": "full",
+  "canvas": {
+    "purpose": "법령·정책이 확정되기 전에 그 내용을 공개하고 의견을 수렴해 국민의 예측 가능성과 절차 참여를 보장한다. 행정의 일방성을 완화하고 규범의 수용성을 높인다.",
+    "stakeholders": "입법·정책을 예고하는 행정청, 의견을 내는 국민·이해관계자·단체, 예고를 총괄·게시하는 법제처·행정안전부, 예고 대상 규범의 수범자.",
+    "legalBasis": [
+      {
+        "law": "행정절차법",
+        "articles": "제41조(행정상 입법예고), 제42조(예고방법), 제43조(예고기간, 입법예고 40일·자치법규 20일), 제44조(의견제출·처리), 제45조(공청회), 제46조(행정예고, 20일 이상), 제47조(예고방법)",
+        "kind": "법률"
+      },
+      {
+        "law": "행정절차법 시행령",
+        "articles": "제23조(행정상 입법예고), 제24조의2(관계기관 의견청취), 제24조의3(예고내용), 제24조의4(행정예고 제출의견 처리), 제20조의2·제20조의3(온라인공청회)",
+        "kind": "대통령령"
+      },
+      {
+        "law": "행정절차법 시행규칙",
+        "articles": "제13조(행정예고 통계의 공고, 매년 3월말)",
+        "kind": "행정안전부령"
+      },
+      {
+        "law": "법제업무 운영규정",
+        "articles": "법령안 입법예고 실무",
+        "kind": "대통령령"
+      },
+      {
+        "law": "국회법",
+        "articles": "제82조의2(위원회 입법예고)",
+        "kind": "법률"
+      }
+    ],
+    "authorities": [
+      {
+        "name": "입안 행정청(중앙부처·지자체)",
+        "role": "예고 실시·의견 처리"
+      },
+      {
+        "name": "법제처",
+        "role": "입법예고 총괄, 통합입법예고시스템 운영"
+      },
+      {
+        "name": "행정안전부",
+        "role": "행정예고·정책 예고 관련 지원"
+      },
+      {
+        "name": "국회 소관 위원회",
+        "role": "의원발의안 입법예고"
+      }
+    ],
+    "procedure": [
+      "행정청이 법령안·정책안 마련",
+      "예고 여부·기간 결정(원칙 입법예고 40일, 행정예고 20일)",
+      "관보·통합입법예고시스템·홈페이지 등에 예고 게시",
+      "국민·이해관계자 의견 제출 접수",
+      "필요 시 공청회·전자공청회 개최",
+      "제출 의견 검토·반영 여부 결정",
+      "처리 결과 정리(주요 의견 반영 결과)",
+      "후속 절차(법제처 심사·정책 시행)로 진행"
+    ],
+    "moneyFlow": "예고·의견수렴 자체는 무료다. 공청회·시스템 운영 비용은 행정경비로 충당한다. 별도 부담금·수수료는 없다.",
+    "docsFlow": "입법·정책 예고문 → 의견 접수 내역 → 공청회 자료·회의록 → 의견 검토·반영 결과. 통합입법예고시스템(opinion.lawmaking.go.kr)·국민참여입법센터에 게시·공개된다.",
+    "bottlenecks": [
+      "예고기간 단축·생략 사유(긴급 등)가 넓게 활용돼 실질 참여가 제한된다는 지적",
+      "제출 의견이 형식적으로 검토되고 반영 결과 통지가 미흡하다",
+      "전문적·기술적 법령안은 일반 국민이 의견 내기 어렵다",
+      "대량 법령안에 비해 의견 참여율이 낮다(운영 추정)"
+    ],
+    "reformPoints": [
+      "예고 생략·단축 사유의 엄격 적용과 사후 공개",
+      "의견 반영 결과의 개별·집단 피드백 의무화",
+      "쉬운 요약·영향 설명 제공으로 참여 문턱 완화",
+      "이해관계자 타깃 통지·참여 채널 다양화"
+    ]
+  },
+  "related": [
+    "법령 제정·개정 절차",
+    "국회 입법절차",
+    "정보공개청구",
+    "행정절차 의견제출·청문",
+    "조례 제정"
   ],
-  "authorities": [
-   {
-    "name": "입안 행정청(중앙부처·지자체)",
-    "role": "예고 실시·의견 처리"
-   },
-   {
-    "name": "법제처",
-    "role": "입법예고 총괄, 통합입법예고시스템 운영"
-   },
-   {
-    "name": "행정안전부",
-    "role": "행정예고·정책 예고 관련 지원"
-   },
-   {
-    "name": "국회 소관 위원회",
-    "role": "의원발의안 입법예고"
-   }
+  "fieldVerification": [
+    "예고 생략·긴급처리 비율(운영 추정)",
+    "제출 의견의 실제 반영률·피드백 실태(운영 추정)",
+    "통합입법예고시스템 참여 통계 상세"
   ],
-  "procedure": [
-   "행정청이 법령안·정책안 마련",
-   "예고 여부·기간 결정(원칙 입법예고 40일, 행정예고 20일)",
-   "관보·통합입법예고시스템·홈페이지 등에 예고 게시",
-   "국민·이해관계자 의견 제출 접수",
-   "필요 시 공청회·전자공청회 개최",
-   "제출 의견 검토·반영 여부 결정",
-   "처리 결과 정리(주요 의견 반영 결과)",
-   "후속 절차(법제처 심사·정책 시행)로 진행"
-  ],
-  "moneyFlow": "예고·의견수렴 자체는 무료다. 공청회·시스템 운영 비용은 행정경비로 충당한다. 별도 부담금·수수료는 없다.",
-  "docsFlow": "입법·정책 예고문 → 의견 접수 내역 → 공청회 자료·회의록 → 의견 검토·반영 결과. 통합입법예고시스템(opinion.lawmaking.go.kr)·국민참여입법센터에 게시·공개된다.",
-  "bottlenecks": [
-   "예고기간 단축·생략 사유(긴급 등)가 넓게 활용돼 실질 참여가 제한된다는 지적",
-   "제출 의견이 형식적으로 검토되고 반영 결과 통지가 미흡하다",
-   "전문적·기술적 법령안은 일반 국민이 의견 내기 어렵다",
-   "대량 법령안에 비해 의견 참여율이 낮다(운영 추정)"
-  ],
-  "reformPoints": [
-   "예고 생략·단축 사유의 엄격 적용과 사후 공개",
-   "의견 반영 결과의 개별·집단 피드백 의무화",
-   "쉬운 요약·영향 설명 제공으로 참여 문턱 완화",
-   "이해관계자 타깃 통지·참여 채널 다양화"
-  ]
- },
- "related": [
-  "법령 제정·개정 절차",
-  "국회 입법절차",
-  "정보공개청구",
-  "행정절차 의견제출·청문",
-  "조례 제정"
- ],
- "fieldVerification": [
-  "예고 생략·긴급처리 비율(운영 추정)",
-  "제출 의견의 실제 반영률·피드백 실태(운영 추정)",
-  "통합입법예고시스템 참여 통계 상세"
- ],
- "process": {
-  "institution_name": "입법예고와 행정예고 제도",
-  "law_name": "행정절차법",
-  "lanes": [
-   "입안 행정청",
-   "법제처(총괄)",
-   "국민/이해관계자",
-   "공청회",
-   "정보시스템",
-   "후속 심사기관"
-  ],
-  "stages": [
-   "G0 입안",
-   "G1 예고결정",
-   "G2 예고공고",
-   "G3 의견수렴",
-   "G4 공청회",
-   "G5 검토·반영",
-   "G6 결과·후속"
-  ],
-  "nodes": [
-   {
-    "id": "P01",
-    "name": "법령안·정책안 마련",
-    "lane": "입안 행정청",
-    "stage": "G0 입안",
-    "type": "task",
-    "status": "done",
-    "progress": 100,
-    "actor": "입안 행정청",
-    "action": "안 마련",
-    "output_documents": [
-     "법령안",
-     "정책안 초안"
+  "process": {
+    "institution_name": "입법예고와 행정예고 제도",
+    "law_name": "행정절차법",
+    "lanes": [
+      "입안 행정청",
+      "법제처(총괄)",
+      "국민/이해관계자",
+      "공청회",
+      "정보시스템",
+      "후속 심사기관"
     ],
-    "deadline": "내부 일정",
-    "blocker": null,
-    "confidence": 0.88,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제41조",
-      "text": "행정청은 법령 등을 제정·개정·폐지하려는 경우 해당 입법안을 마련한다."
-     }
+    "stages": [
+      "G0 입안",
+      "G1 예고결정",
+      "G2 예고공고",
+      "G3 의견수렴",
+      "G4 공청회",
+      "G5 검토·반영",
+      "G6 결과·후속"
+    ],
+    "nodes": [
+      {
+        "id": "P01",
+        "name": "법령안·정책안 마련",
+        "lane": "입안 행정청",
+        "stage": "G0 입안",
+        "type": "task",
+        "status": "done",
+        "progress": 100,
+        "actor": "입안 행정청",
+        "action": "안 마련",
+        "output_documents": ["법령안", "정책안 초안"],
+        "deadline": "내부 일정",
+        "blocker": null,
+        "confidence": 0.88,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제41조",
+            "text": "행정청은 법령 등을 제정·개정·폐지하려는 경우 해당 입법안을 마련한다."
+          }
+        ]
+      },
+      {
+        "id": "P02",
+        "name": "예고 여부·기간 결정",
+        "lane": "입안 행정청",
+        "stage": "G1 예고결정",
+        "type": "gateway",
+        "status": "done",
+        "progress": 100,
+        "actor": "입안 행정청",
+        "action": "예고 결정",
+        "condition": "입법예고 40일·행정예고 20일 이상, 자치법규 20일 기준 적용",
+        "output_documents": ["예고 결정", "예고기간 산정"],
+        "deadline": "입법예고 40일 / 행정예고 20일 이상",
+        "confidence": 0.87,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제43조·제46조",
+            "text": "입법예고 기간은 40일(자치법규 20일) 이상, 행정예고 기간은 20일 이상으로 한다."
+          }
+        ]
+      },
+      {
+        "id": "P03",
+        "name": "예고 생략·긴급처리 판단",
+        "lane": "입안 행정청",
+        "stage": "G1 예고결정",
+        "type": "gateway",
+        "status": "risk",
+        "progress": 100,
+        "actor": "입안 행정청",
+        "action": "생략·단축 판단",
+        "condition": "긴급·경미·상위법령 위임 등 예고 생략·단축 사유 해당 여부",
+        "output_documents": ["생략·단축 사유서"],
+        "deadline": "예고 개시 전",
+        "blocker": "예고 생략·단축 사유가 넓게 활용돼 실질 참여가 제한된다(운영 추정)",
+        "confidence": 0.78,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제41조제1항 단서",
+            "text": "긴급을 요하거나 예고가 곤란한 사유 등이 있으면 입법예고를 하지 아니할 수 있다."
+          }
+        ]
+      },
+      {
+        "id": "P04",
+        "name": "예고문 관보·홈페이지 게시",
+        "lane": "입안 행정청",
+        "stage": "G2 예고공고",
+        "type": "notice",
+        "status": "done",
+        "progress": 100,
+        "actor": "입안 행정청",
+        "action": "예고 공고",
+        "output_documents": ["입법·정책 예고문"],
+        "deadline": "예고기간 개시일",
+        "confidence": 0.86,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제42조·제47조",
+            "text": "입법·행정예고는 관보·공보나 인터넷·신문·방송 등의 방법으로 공고한다."
+          },
+          {
+            "law": "행정절차법 시행령",
+            "article": "제23조",
+            "text": "행정상 입법예고의 세부 절차와 방법을 정한다."
+          }
+        ]
+      },
+      {
+        "id": "P05",
+        "name": "통합입법예고시스템 등록·관리",
+        "lane": "법제처(총괄)",
+        "stage": "G2 예고공고",
+        "type": "task",
+        "status": "done",
+        "progress": 100,
+        "actor": "법제처",
+        "action": "등록·총괄",
+        "input_documents": ["입법·정책 예고문"],
+        "output_documents": ["통합예고 등록내역"],
+        "deadline": "예고 개시 시",
+        "confidence": 0.84,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제42조제1항제1호",
+            "text": "법령의 입법예고는 관보 및 법제처장이 구축·제공하는 정보시스템을 통하여 공고한다."
+          }
+        ]
+      },
+      {
+        "id": "S01",
+        "name": "국민참여입법센터 공개",
+        "lane": "정보시스템",
+        "stage": "G2 예고공고",
+        "type": "system",
+        "status": "done",
+        "progress": 100,
+        "actor": "통합입법예고시스템",
+        "action": "공개",
+        "input_documents": ["통합예고 등록내역"],
+        "output_documents": ["공개 게시자료"],
+        "confidence": 0.76,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제42조제1항제1호",
+            "text": "예고 내용을 법제처장이 구축·제공하는 정보시스템에 게시하여 국민이 열람·의견 제출할 수 있게 한다."
+          }
+        ]
+      },
+      {
+        "id": "P06",
+        "name": "국민·이해관계자 의견 제출",
+        "lane": "국민/이해관계자",
+        "stage": "G3 의견수렴",
+        "type": "task",
+        "status": "current",
+        "progress": 55,
+        "actor": "국민·이해관계자",
+        "action": "의견 제출",
+        "input_documents": ["입법·정책 예고문"],
+        "output_documents": ["제출 의견서"],
+        "deadline": "예고기간 내",
+        "blocker": "전문·기술적 법령안은 일반 국민이 의견 내기 어렵다",
+        "confidence": 0.83,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제44조",
+            "text": "누구든지 예고된 입법안·정책안에 대하여 의견을 제출할 수 있다."
+          }
+        ]
+      },
+      {
+        "id": "P07",
+        "name": "공청회·전자공청회 개최",
+        "lane": "공청회",
+        "stage": "G4 공청회",
+        "type": "task",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "입안 행정청",
+        "action": "공청회 개최",
+        "input_documents": ["제출 의견서"],
+        "output_documents": ["공청회 자료", "회의록"],
+        "deadline": "의견수렴 기간 중",
+        "blocker": "쟁점 법령안은 공청회가 장기화·형식화될 수 있다(운영 추정)",
+        "confidence": 0.79,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제45조",
+            "text": "행정청은 필요하면 공청회를 개최하여 의견을 수렴할 수 있다."
+          },
+          {
+            "law": "행정절차법 시행령",
+            "article": "제20조의2·제20조의3",
+            "text": "온라인공청회의 개최 통지·의제 게시 등 세부 절차를 정한다."
+          }
+        ]
+      },
+      {
+        "id": "P08",
+        "name": "제출 의견 검토·반영 여부 결정",
+        "lane": "입안 행정청",
+        "stage": "G5 검토·반영",
+        "type": "gateway",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "입안 행정청",
+        "action": "검토·반영 판단",
+        "condition": "제출 의견의 타당성·반영 여부 판단",
+        "input_documents": ["제출 의견서", "공청회 자료"],
+        "output_documents": ["의견 검토표"],
+        "deadline": "예고기간 종료 후",
+        "confidence": 0.82,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제44조제3항",
+            "text": "행정청은 제출된 의견을 존중하여 처리하여야 한다."
+          }
+        ]
+      },
+      {
+        "id": "P09",
+        "name": "예고안 수정·재예고",
+        "lane": "입안 행정청",
+        "stage": "G5 검토·반영",
+        "type": "task",
+        "status": "loop",
+        "progress": 0,
+        "actor": "입안 행정청",
+        "action": "수정·재예고",
+        "input_documents": ["의견 검토표"],
+        "output_documents": ["수정 법령안", "재예고문"],
+        "blocker": "중요 변경 시 재예고로 회귀하는 단계",
+        "confidence": 0.78,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제41조·제43조",
+            "text": "예고 후 내용이 국민에게 불리하게 변경되는 등의 경우 다시 예고할 수 있다."
+          }
+        ]
+      },
+      {
+        "id": "P10",
+        "name": "처리 결과 정리·공개",
+        "lane": "입안 행정청",
+        "stage": "G6 결과·후속",
+        "type": "task",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "입안 행정청",
+        "action": "결과 정리",
+        "input_documents": ["의견 검토표"],
+        "output_documents": ["의견 반영결과", "처리결과서"],
+        "deadline": "예고 종료 후",
+        "blocker": "제출 의견 반영 결과 통지가 미흡하다(운영 추정)",
+        "confidence": 0.8,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제44조제4항",
+            "text": "제출 의견의 처리 결과를 의견 제출자에게 통지하거나 공개하도록 한다."
+          },
+          {
+            "law": "행정절차법 시행령",
+            "article": "제23조",
+            "text": "제출의견의 처리방법과 처리결과 통지에 관한 세부 사항을 정한다."
+          }
+        ]
+      },
+      {
+        "id": "S02",
+        "name": "반영결과 시스템 공개",
+        "lane": "정보시스템",
+        "stage": "G6 결과·후속",
+        "type": "system",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "통합입법예고시스템",
+        "action": "결과 공개",
+        "input_documents": ["의견 반영결과"],
+        "output_documents": ["공개 반영결과"],
+        "confidence": 0.75,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제42조",
+            "text": "의견 처리 결과를 정보시스템에 게시하여 공개할 수 있다."
+          }
+        ]
+      },
+      {
+        "id": "P11",
+        "name": "법제처 심사 등 후속 진행",
+        "lane": "후속 심사기관",
+        "stage": "G6 결과·후속",
+        "type": "task",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "법제처·소관기관",
+        "action": "후속 심사",
+        "input_documents": ["수정 법령안", "처리결과서"],
+        "output_documents": ["심사 회부", "정책 시행 준비"],
+        "confidence": 0.8,
+        "legal_basis": [
+          {
+            "law": "법제업무 운영규정",
+            "article": "제21조(법령안 등의 심사 요청)",
+            "text": "입법예고를 마친 법령안은 법제처에 심사를 요청하여 후속 심사 절차로 진행한다."
+          }
+        ]
+      },
+      {
+        "id": "P12",
+        "name": "대통령령안 국회 소관 상임위 제출",
+        "lane": "입안 행정청",
+        "stage": "G2 예고공고",
+        "type": "task",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "입안 행정청",
+        "receiver": "국회 소관 상임위원회",
+        "action": "예고안 제출",
+        "input_documents": ["입법·정책 예고문"],
+        "output_documents": ["국회 상임위 제출본"],
+        "deadline": "대통령령 입법예고 시",
+        "confidence": 0.8,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제42조제2항",
+            "text": "행정청은 대통령령을 입법예고하는 경우 국회 소관 상임위원회에 이를 제출하여야 한다."
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "E01",
+        "source": "P01",
+        "target": "P02",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E02",
+        "source": "P02",
+        "target": "P03",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E03",
+        "source": "P03",
+        "target": "P04",
+        "type": "sequence",
+        "label": "예고 실시"
+      },
+      {
+        "id": "E04",
+        "source": "P04",
+        "target": "P05",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E05",
+        "source": "P05",
+        "target": "P06",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E06",
+        "source": "P06",
+        "target": "P08",
+        "type": "sequence",
+        "label": "의견수렴 종료"
+      },
+      {
+        "id": "E07",
+        "source": "P08",
+        "target": "P10",
+        "type": "sequence",
+        "label": "반영 결정"
+      },
+      {
+        "id": "E08",
+        "source": "P10",
+        "target": "P11",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "M01",
+        "source": "P05",
+        "target": "S01",
+        "type": "message",
+        "label": "예고문 공개"
+      },
+      {
+        "id": "M02",
+        "source": "P06",
+        "target": "P07",
+        "type": "message",
+        "label": "공청회 병행"
+      },
+      {
+        "id": "M03",
+        "source": "P07",
+        "target": "P08",
+        "type": "message",
+        "label": "공청회 결과"
+      },
+      {
+        "id": "M04",
+        "source": "P10",
+        "target": "S02",
+        "type": "message",
+        "label": "반영결과 공개"
+      },
+      {
+        "id": "L01",
+        "source": "P08",
+        "target": "P09",
+        "type": "loop",
+        "label": "수정·보완"
+      },
+      {
+        "id": "L02",
+        "source": "P09",
+        "target": "P04",
+        "type": "loop",
+        "label": "재예고"
+      },
+      {
+        "id": "M05",
+        "source": "P04",
+        "target": "P12",
+        "type": "message",
+        "label": "대통령령안 국회 제출"
+      }
+    ],
+    "warnings": [
+      {
+        "date": "2026-07-12",
+        "content": "P11 '법령안 심사 관련 규정' → 제21조(법령안 등의 심사 요청) 확정 (MST 285173 ToC 조문키 0021001 확인)",
+        "consulted_msts": ["285173"]
+      }
     ]
-   },
-   {
-    "id": "P02",
-    "name": "예고 여부·기간 결정",
-    "lane": "입안 행정청",
-    "stage": "G1 예고결정",
-    "type": "gateway",
-    "status": "done",
-    "progress": 100,
-    "actor": "입안 행정청",
-    "action": "예고 결정",
-    "condition": "입법예고 40일·행정예고 20일 이상, 자치법규 20일 기준 적용",
-    "output_documents": [
-     "예고 결정",
-     "예고기간 산정"
+  },
+  "verification": {
+    "status": "article-verified",
+    "verifiedAt": "2026-07-12",
+    "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+    "scope": "법적 근거 5건 중 공식 원문 5건을 연결했다. 캔버스와 절차 노드의 명시 조문 36건 가운데 36건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+    "sources": [
+      {
+        "law": "행정절차법",
+        "kind": "법률",
+        "sourceType": "statute",
+        "officialName": "행정절차법",
+        "lawId": "001362",
+        "mst": "239291",
+        "promulgatedOn": "2022-01-11",
+        "effectiveOn": "2023-03-24",
+        "officialUrl": "https://law.go.kr/법령/행정절차법"
+      },
+      {
+        "law": "행정절차법 시행령",
+        "kind": "대통령령",
+        "sourceType": "statute",
+        "officialName": "행정절차법 시행령",
+        "lawId": "005625",
+        "mst": "253247",
+        "promulgatedOn": "2023-08-01",
+        "effectiveOn": "2023-08-01",
+        "officialUrl": "https://law.go.kr/법령/행정절차법시행령"
+      },
+      {
+        "law": "행정절차법 시행규칙",
+        "kind": "행정안전부령",
+        "sourceType": "statute",
+        "officialName": "행정절차법 시행규칙",
+        "lawId": "008720",
+        "mst": "243859",
+        "promulgatedOn": "2022-07-11",
+        "effectiveOn": "2022-07-12",
+        "officialUrl": "https://law.go.kr/법령/행정절차법시행규칙"
+      },
+      {
+        "law": "법제업무 운영규정",
+        "kind": "대통령령",
+        "sourceType": "statute",
+        "officialName": "법제업무 운영규정",
+        "lawId": "003613",
+        "mst": "285173",
+        "promulgatedOn": "2026-03-31",
+        "effectiveOn": "2026-03-31",
+        "officialUrl": "https://law.go.kr/법령/법제업무운영규정"
+      },
+      {
+        "law": "국회법",
+        "kind": "법률",
+        "sourceType": "statute",
+        "officialName": "국회법",
+        "lawId": "001416",
+        "mst": "283173",
+        "promulgatedOn": "2026-02-10",
+        "effectiveOn": "2026-02-10",
+        "officialUrl": "https://law.go.kr/법령/국회법"
+      }
     ],
-    "deadline": "입법예고 40일 / 행정예고 20일 이상",
-    "confidence": 0.87,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제43조·제46조",
-      "text": "입법예고 기간은 40일(자치법규 20일) 이상, 행정예고 기간은 20일 이상으로 한다."
-     }
-    ]
-   },
-   {
-    "id": "P03",
-    "name": "예고 생략·긴급처리 판단",
-    "lane": "입안 행정청",
-    "stage": "G1 예고결정",
-    "type": "gateway",
-    "status": "risk",
-    "progress": 100,
-    "actor": "입안 행정청",
-    "action": "생략·단축 판단",
-    "condition": "긴급·경미·상위법령 위임 등 예고 생략·단축 사유 해당 여부",
-    "output_documents": [
-     "생략·단축 사유서"
-    ],
-    "deadline": "예고 개시 전",
-    "blocker": "예고 생략·단축 사유가 넓게 활용돼 실질 참여가 제한된다(운영 추정)",
-    "confidence": 0.78,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제41조제1항 단서",
-      "text": "긴급을 요하거나 예고가 곤란한 사유 등이 있으면 입법예고를 하지 아니할 수 있다."
-     }
-    ]
-   },
-   {
-    "id": "P04",
-    "name": "예고문 관보·홈페이지 게시",
-    "lane": "입안 행정청",
-    "stage": "G2 예고공고",
-    "type": "notice",
-    "status": "done",
-    "progress": 100,
-    "actor": "입안 행정청",
-    "action": "예고 공고",
-    "output_documents": [
-     "입법·정책 예고문"
-    ],
-    "deadline": "예고기간 개시일",
-    "confidence": 0.86,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제42조·제47조",
-      "text": "입법·행정예고는 관보·공보나 인터넷·신문·방송 등의 방법으로 공고한다."
-     },
-     {
-      "law": "행정절차법 시행령",
-      "article": "제23조",
-      "text": "행정상 입법예고의 세부 절차와 방법을 정한다."
-     }
-    ]
-   },
-   {
-    "id": "P05",
-    "name": "통합입법예고시스템 등록·관리",
-    "lane": "법제처(총괄)",
-    "stage": "G2 예고공고",
-    "type": "task",
-    "status": "done",
-    "progress": 100,
-    "actor": "법제처",
-    "action": "등록·총괄",
-    "input_documents": [
-     "입법·정책 예고문"
-    ],
-    "output_documents": [
-     "통합예고 등록내역"
-    ],
-    "deadline": "예고 개시 시",
-    "confidence": 0.84,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제42조제1항제1호",
-      "text": "법령의 입법예고는 관보 및 법제처장이 구축·제공하는 정보시스템을 통하여 공고한다."
-     }
-    ]
-   },
-   {
-    "id": "S01",
-    "name": "국민참여입법센터 공개",
-    "lane": "정보시스템",
-    "stage": "G2 예고공고",
-    "type": "system",
-    "status": "done",
-    "progress": 100,
-    "actor": "통합입법예고시스템",
-    "action": "공개",
-    "input_documents": [
-     "통합예고 등록내역"
-    ],
-    "output_documents": [
-     "공개 게시자료"
-    ],
-    "confidence": 0.76,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제42조제1항제1호",
-      "text": "예고 내용을 법제처장이 구축·제공하는 정보시스템에 게시하여 국민이 열람·의견 제출할 수 있게 한다."
-     }
-    ]
-   },
-   {
-    "id": "P06",
-    "name": "국민·이해관계자 의견 제출",
-    "lane": "국민/이해관계자",
-    "stage": "G3 의견수렴",
-    "type": "task",
-    "status": "current",
-    "progress": 55,
-    "actor": "국민·이해관계자",
-    "action": "의견 제출",
-    "input_documents": [
-     "입법·정책 예고문"
-    ],
-    "output_documents": [
-     "제출 의견서"
-    ],
-    "deadline": "예고기간 내",
-    "blocker": "전문·기술적 법령안은 일반 국민이 의견 내기 어렵다",
-    "confidence": 0.83,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제44조",
-      "text": "누구든지 예고된 입법안·정책안에 대하여 의견을 제출할 수 있다."
-     }
-    ]
-   },
-   {
-    "id": "P07",
-    "name": "공청회·전자공청회 개최",
-    "lane": "공청회",
-    "stage": "G4 공청회",
-    "type": "task",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "입안 행정청",
-    "action": "공청회 개최",
-    "input_documents": [
-     "제출 의견서"
-    ],
-    "output_documents": [
-     "공청회 자료",
-     "회의록"
-    ],
-    "deadline": "의견수렴 기간 중",
-    "blocker": "쟁점 법령안은 공청회가 장기화·형식화될 수 있다(운영 추정)",
-    "confidence": 0.79,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제45조",
-      "text": "행정청은 필요하면 공청회를 개최하여 의견을 수렴할 수 있다."
-     },
-     {
-      "law": "행정절차법 시행령",
-      "article": "제20조의2·제20조의3",
-      "text": "온라인공청회의 개최 통지·의제 게시 등 세부 절차를 정한다."
-     }
-    ]
-   },
-   {
-    "id": "P08",
-    "name": "제출 의견 검토·반영 여부 결정",
-    "lane": "입안 행정청",
-    "stage": "G5 검토·반영",
-    "type": "gateway",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "입안 행정청",
-    "action": "검토·반영 판단",
-    "condition": "제출 의견의 타당성·반영 여부 판단",
-    "input_documents": [
-     "제출 의견서",
-     "공청회 자료"
-    ],
-    "output_documents": [
-     "의견 검토표"
-    ],
-    "deadline": "예고기간 종료 후",
-    "confidence": 0.82,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제44조제3항",
-      "text": "행정청은 제출된 의견을 존중하여 처리하여야 한다."
-     }
-    ]
-   },
-   {
-    "id": "P09",
-    "name": "예고안 수정·재예고",
-    "lane": "입안 행정청",
-    "stage": "G5 검토·반영",
-    "type": "task",
-    "status": "loop",
-    "progress": 0,
-    "actor": "입안 행정청",
-    "action": "수정·재예고",
-    "input_documents": [
-     "의견 검토표"
-    ],
-    "output_documents": [
-     "수정 법령안",
-     "재예고문"
-    ],
-    "blocker": "중요 변경 시 재예고로 회귀하는 단계",
-    "confidence": 0.78,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제41조·제43조",
-      "text": "예고 후 내용이 국민에게 불리하게 변경되는 등의 경우 다시 예고할 수 있다."
-     }
-    ]
-   },
-   {
-    "id": "P10",
-    "name": "처리 결과 정리·공개",
-    "lane": "입안 행정청",
-    "stage": "G6 결과·후속",
-    "type": "task",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "입안 행정청",
-    "action": "결과 정리",
-    "input_documents": [
-     "의견 검토표"
-    ],
-    "output_documents": [
-     "의견 반영결과",
-     "처리결과서"
-    ],
-    "deadline": "예고 종료 후",
-    "blocker": "제출 의견 반영 결과 통지가 미흡하다(운영 추정)",
-    "confidence": 0.8,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제44조제4항",
-      "text": "제출 의견의 처리 결과를 의견 제출자에게 통지하거나 공개하도록 한다."
-     },
-     {
-      "law": "행정절차법 시행령",
-      "article": "제23조",
-      "text": "제출의견의 처리방법과 처리결과 통지에 관한 세부 사항을 정한다."
-     }
-    ]
-   },
-   {
-    "id": "S02",
-    "name": "반영결과 시스템 공개",
-    "lane": "정보시스템",
-    "stage": "G6 결과·후속",
-    "type": "system",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "통합입법예고시스템",
-    "action": "결과 공개",
-    "input_documents": [
-     "의견 반영결과"
-    ],
-    "output_documents": [
-     "공개 반영결과"
-    ],
-    "confidence": 0.75,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제42조",
-      "text": "의견 처리 결과를 정보시스템에 게시하여 공개할 수 있다."
-     }
-    ]
-   },
-   {
-    "id": "P11",
-    "name": "법제처 심사 등 후속 진행",
-    "lane": "후속 심사기관",
-    "stage": "G6 결과·후속",
-    "type": "task",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "법제처·소관기관",
-    "action": "후속 심사",
-    "input_documents": [
-     "수정 법령안",
-     "처리결과서"
-    ],
-    "output_documents": [
-     "심사 회부",
-     "정책 시행 준비"
-    ],
-    "confidence": 0.8,
-    "legal_basis": [
-     {
-      "law": "법제업무 운영규정",
-      "article": "제21조(법령안 등의 심사 요청)",
-      "text": "입법예고를 마친 법령안은 법제처에 심사를 요청하여 후속 심사 절차로 진행한다."
-     }
-    ]
-   },
-   {
-    "id": "P12",
-    "name": "대통령령안 국회 소관 상임위 제출",
-    "lane": "입안 행정청",
-    "stage": "G2 예고공고",
-    "type": "task",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "입안 행정청",
-    "receiver": "국회 소관 상임위원회",
-    "action": "예고안 제출",
-    "input_documents": [
-     "입법·정책 예고문"
-    ],
-    "output_documents": [
-     "국회 상임위 제출본"
-    ],
-    "deadline": "대통령령 입법예고 시",
-    "confidence": 0.8,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제42조제2항",
-      "text": "행정청은 대통령령을 입법예고하는 경우 국회 소관 상임위원회에 이를 제출하여야 한다."
-     }
-    ]
-   }
-  ],
-  "edges": [
-   {
-    "id": "E01",
-    "source": "P01",
-    "target": "P02",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E02",
-    "source": "P02",
-    "target": "P03",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E03",
-    "source": "P03",
-    "target": "P04",
-    "type": "sequence",
-    "label": "예고 실시"
-   },
-   {
-    "id": "E04",
-    "source": "P04",
-    "target": "P05",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E05",
-    "source": "P05",
-    "target": "P06",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E06",
-    "source": "P06",
-    "target": "P08",
-    "type": "sequence",
-    "label": "의견수렴 종료"
-   },
-   {
-    "id": "E07",
-    "source": "P08",
-    "target": "P10",
-    "type": "sequence",
-    "label": "반영 결정"
-   },
-   {
-    "id": "E08",
-    "source": "P10",
-    "target": "P11",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "M01",
-    "source": "P05",
-    "target": "S01",
-    "type": "message",
-    "label": "예고문 공개"
-   },
-   {
-    "id": "M02",
-    "source": "P06",
-    "target": "P07",
-    "type": "message",
-    "label": "공청회 병행"
-   },
-   {
-    "id": "M03",
-    "source": "P07",
-    "target": "P08",
-    "type": "message",
-    "label": "공청회 결과"
-   },
-   {
-    "id": "M04",
-    "source": "P10",
-    "target": "S02",
-    "type": "message",
-    "label": "반영결과 공개"
-   },
-   {
-    "id": "L01",
-    "source": "P08",
-    "target": "P09",
-    "type": "loop",
-    "label": "수정·보완"
-   },
-   {
-    "id": "L02",
-    "source": "P09",
-    "target": "P04",
-    "type": "loop",
-    "label": "재예고"
-   },
-   {
-    "id": "M05",
-    "source": "P04",
-    "target": "P12",
-    "type": "message",
-    "label": "대통령령안 국회 제출"
-   }
-  ],
-  "warnings": [
-   {
-    "date": "2026-07-12",
-    "내용": "P11 '법령안 심사 관련 규정' → 제21조(법령안 등의 심사 요청) 확정 (MST 285173 ToC 조문키 0021001 확인)",
-    "consulted_msts": [
-     "285173"
-    ]
-   }
-  ]
- },
- "verification": {
-  "status": "article-verified",
-  "verifiedAt": "2026-07-12",
-  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
-  "scope": "법적 근거 5건 중 공식 원문 5건을 연결했다. 캔버스와 절차 노드의 명시 조문 36건 가운데 36건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
-  "sources": [
-   {
-    "law": "행정절차법",
-    "kind": "법률",
-    "sourceType": "statute",
-    "officialName": "행정절차법",
-    "lawId": "001362",
-    "mst": "239291",
-    "promulgatedOn": "2022-01-11",
-    "effectiveOn": "2023-03-24",
-    "officialUrl": "https://law.go.kr/법령/행정절차법"
-   },
-   {
-    "law": "행정절차법 시행령",
-    "kind": "대통령령",
-    "sourceType": "statute",
-    "officialName": "행정절차법 시행령",
-    "lawId": "005625",
-    "mst": "253247",
-    "promulgatedOn": "2023-08-01",
-    "effectiveOn": "2023-08-01",
-    "officialUrl": "https://law.go.kr/법령/행정절차법시행령"
-   },
-   {
-    "law": "행정절차법 시행규칙",
-    "kind": "행정안전부령",
-    "sourceType": "statute",
-    "officialName": "행정절차법 시행규칙",
-    "lawId": "008720",
-    "mst": "243859",
-    "promulgatedOn": "2022-07-11",
-    "effectiveOn": "2022-07-12",
-    "officialUrl": "https://law.go.kr/법령/행정절차법시행규칙"
-   },
-   {
-    "law": "법제업무 운영규정",
-    "kind": "대통령령",
-    "sourceType": "statute",
-    "officialName": "법제업무 운영규정",
-    "lawId": "003613",
-    "mst": "285173",
-    "promulgatedOn": "2026-03-31",
-    "effectiveOn": "2026-03-31",
-    "officialUrl": "https://law.go.kr/법령/법제업무운영규정"
-   },
-   {
-    "law": "국회법",
-    "kind": "법률",
-    "sourceType": "statute",
-    "officialName": "국회법",
-    "lawId": "001416",
-    "mst": "283173",
-    "promulgatedOn": "2026-02-10",
-    "effectiveOn": "2026-02-10",
-    "officialUrl": "https://law.go.kr/법령/국회법"
-   }
-  ],
-  "articleVerification": {
-   "checkedAt": "2026-07-12",
-   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
-   "citationEntries": 22,
-   "explicitCitationEntries": 21,
-   "articleReferences": 36,
-   "verifiedReferences": 36,
-   "missingReferences": 0,
-   "uncheckableReferences": 0
+    "articleVerification": {
+      "checkedAt": "2026-07-12",
+      "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+      "citationEntries": 22,
+      "explicitCitationEntries": 21,
+      "articleReferences": 36,
+      "verifiedReferences": 36,
+      "missingReferences": 0,
+      "uncheckableReferences": 0
+    }
   }
- }
 }

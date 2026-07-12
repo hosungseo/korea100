@@ -19,9 +19,7 @@ export interface LegalBasis {
 }
 
 export type SourceVerificationStatus =
-  | "source-linked"
-  | "article-verified"
-  | "needs-review";
+  "source-linked" | "article-verified" | "needs-review";
 
 export type LegalSourceType = "statute" | "admin-rule" | "treaty";
 
@@ -143,7 +141,13 @@ export interface ProcessModel {
   stages: string[];
   nodes: ProcessNode[];
   edges: ProcessEdge[];
-  warnings?: string[];
+  warnings?: Warning[] | string[];
+}
+
+export interface Warning {
+  consulted_msts: string[];
+  content: string;
+  date: string;
 }
 
 export interface Institution {

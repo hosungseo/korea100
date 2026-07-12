@@ -233,10 +233,7 @@
         "progress": 100,
         "actor": "각 중앙관서의 장·계약담당공무원",
         "action": "사업계획 확정·예산 배정",
-        "output_documents": [
-          "사업계획서",
-          "예산 배정 내역"
-        ],
+        "output_documents": ["사업계획서", "예산 배정 내역"],
         "confidence": 0.85,
         "legal_basis": [
           {
@@ -257,10 +254,7 @@
         "actor": "계약담당공무원",
         "action": "계약방법 판단",
         "condition": "일반경쟁 / 제한·지명경쟁 / 수의계약 중 선택(경쟁계약이 원칙)",
-        "output_documents": [
-          "계약방법 결정 조서",
-          "규격서·과업지시서"
-        ],
+        "output_documents": ["계약방법 결정 조서", "규격서·과업지시서"],
         "confidence": 0.86,
         "legal_basis": [
           {
@@ -281,14 +275,8 @@
         "actor": "조달청장",
         "receiver": "수요기관",
         "action": "조달요청 접수·중앙조달 대행",
-        "input_documents": [
-          "조달요청서",
-          "규격서"
-        ],
-        "output_documents": [
-          "조달 계획",
-          "발주 검토 결과"
-        ],
+        "input_documents": ["조달요청서", "규격서"],
+        "output_documents": ["조달 계획", "발주 검토 결과"],
         "confidence": 0.83,
         "legal_basis": [
           {
@@ -313,10 +301,7 @@
         "progress": 100,
         "actor": "조달청장·계약담당공무원",
         "action": "입찰공고",
-        "output_documents": [
-          "입찰공고문",
-          "입찰유의서"
-        ],
+        "output_documents": ["입찰공고문", "입찰유의서"],
         "deadline": "입찰서 제출마감일 전 7일(재공고·긴급 5일, 협상계약 40일) 전 공고(영 제35조)",
         "confidence": 0.85,
         "legal_basis": [
@@ -347,13 +332,8 @@
         "progress": 100,
         "actor": "국가종합전자조달시스템(나라장터, G2B)",
         "action": "공고·규격 전자 게시",
-        "input_documents": [
-          "입찰공고문",
-          "규격서"
-        ],
-        "output_documents": [
-          "전자공고 게시자료"
-        ],
+        "input_documents": ["입찰공고문", "규격서"],
+        "output_documents": ["전자공고 게시자료"],
         "confidence": 0.8,
         "legal_basis": [
           {
@@ -374,11 +354,7 @@
         "actor": "입찰 참가 기업",
         "receiver": "조달청(나라장터)",
         "action": "참가자격 등록·전자입찰서 제출",
-        "output_documents": [
-          "입찰참가등록증",
-          "입찰서",
-          "제안서"
-        ],
+        "output_documents": ["입찰참가등록증", "입찰서", "제안서"],
         "confidence": 0.82,
         "legal_basis": [
           {
@@ -403,13 +379,8 @@
         "progress": 100,
         "actor": "계약담당공무원",
         "action": "개찰·유효입찰 확인",
-        "input_documents": [
-          "입찰서"
-        ],
-        "output_documents": [
-          "개찰조서",
-          "입찰집계표"
-        ],
+        "input_documents": ["입찰서"],
+        "output_documents": ["개찰조서", "입찰집계표"],
         "confidence": 0.82,
         "legal_basis": [
           {
@@ -430,9 +401,7 @@
         "actor": "계약담당공무원",
         "action": "유효입찰 성립 판단",
         "condition": "유효한 입찰이 2인 이상 성립했는지(미달 시 유찰)",
-        "output_documents": [
-          "유·무효 판단 조서"
-        ],
+        "output_documents": ["유·무효 판단 조서"],
         "confidence": 0.83,
         "legal_basis": [
           {
@@ -452,12 +421,8 @@
         "progress": 0,
         "actor": "계약담당공무원",
         "action": "재공고",
-        "input_documents": [
-          "유찰 조서"
-        ],
-        "output_documents": [
-          "재공고문"
-        ],
+        "input_documents": ["유찰 조서"],
+        "output_documents": ["재공고문"],
         "blocker": "유찰로 재공고 회귀(운영 추정)",
         "confidence": 0.8,
         "legal_basis": [
@@ -479,13 +444,8 @@
         "actor": "계약심사위원회·심사담당",
         "action": "적격심사·기술평가",
         "condition": "이행능력·가격·기술 등 심사기준 충족 여부",
-        "input_documents": [
-          "입찰서",
-          "적격심사 서류"
-        ],
-        "output_documents": [
-          "심사평가조서"
-        ],
+        "input_documents": ["입찰서", "적격심사 서류"],
+        "output_documents": ["심사평가조서"],
         "deadline": "개찰 후 심사기간(내부 기준)",
         "blocker": "저가 투찰 업체 이행능력 심사 계류",
         "confidence": 0.8,
@@ -508,10 +468,7 @@
         "actor": "계약담당공무원",
         "receiver": "낙찰자",
         "action": "낙찰자 결정·통지",
-        "output_documents": [
-          "낙찰자 결정 조서",
-          "낙찰통지서"
-        ],
+        "output_documents": ["낙찰자 결정 조서", "낙찰통지서"],
         "confidence": 0.84,
         "legal_basis": [
           {
@@ -531,10 +488,7 @@
         "progress": 0,
         "actor": "계약담당공무원·계약상대자",
         "action": "계약 체결·보증금 납부",
-        "output_documents": [
-          "계약서",
-          "계약보증금 납부서"
-        ],
+        "output_documents": ["계약서", "계약보증금 납부서"],
         "deadline": "낙찰통지 후 10일 이내 계약 체결",
         "confidence": 0.85,
         "legal_basis": [
@@ -565,10 +519,7 @@
         "progress": 0,
         "actor": "계약상대자",
         "action": "물품 납품·공사·용역 이행",
-        "output_documents": [
-          "이행 실적",
-          "준공·납품 서류"
-        ],
+        "output_documents": ["이행 실적", "준공·납품 서류"],
         "confidence": 0.82,
         "legal_basis": [
           {
@@ -588,12 +539,8 @@
         "progress": 0,
         "actor": "감독·검사공무원",
         "action": "감독·검사·검수",
-        "input_documents": [
-          "준공·납품 서류"
-        ],
-        "output_documents": [
-          "검사·검수조서"
-        ],
+        "input_documents": ["준공·납품 서류"],
+        "output_documents": ["검사·검수조서"],
         "blocker": "저가 수주에 따른 부실 시공 적발 지연 우려(운영 추정)",
         "confidence": 0.75,
         "legal_basis": [
@@ -625,14 +572,8 @@
         "actor": "계약담당공무원",
         "receiver": "계약상대자",
         "action": "대가 지급·정산",
-        "input_documents": [
-          "검사·검수조서",
-          "대금청구서"
-        ],
-        "output_documents": [
-          "대가 지급 내역",
-          "지체상금 정산"
-        ],
+        "input_documents": ["검사·검수조서", "대금청구서"],
+        "output_documents": ["대가 지급 내역", "지체상금 정산"],
         "deadline": "검사 완료 후 청구받은 날부터 5일 이내 대가 지급(영 제58조, 공휴일·토요일 제외)",
         "confidence": 0.82,
         "legal_basis": [
@@ -663,10 +604,7 @@
         "progress": 0,
         "actor": "계약담당공무원·국가계약분쟁조정위원회",
         "action": "하자보수 관리·분쟁 조정",
-        "output_documents": [
-          "하자보수보증금 내역",
-          "분쟁조정 결정"
-        ],
+        "output_documents": ["하자보수보증금 내역", "분쟁조정 결정"],
         "confidence": 0.8,
         "legal_basis": [
           {
@@ -687,9 +625,7 @@
         "actor": "각 중앙관서의 장",
         "receiver": "부정당업자",
         "action": "입찰참가자격 제한",
-        "input_documents": [
-          "담합·부실 이행 적발 자료"
-        ],
+        "input_documents": ["담합·부실 이행 적발 자료"],
         "output_documents": [
           "부정당업자 제재 처분",
           "제재 이력(나라장터 등록)"
@@ -719,13 +655,8 @@
         "progress": 0,
         "actor": "계약담당공무원·계약상대자",
         "action": "계약금액 조정",
-        "input_documents": [
-          "물가변동·설계변경 내역"
-        ],
-        "output_documents": [
-          "계약금액 조정 내역",
-          "변경계약서"
-        ],
+        "input_documents": ["물가변동·설계변경 내역"],
+        "output_documents": ["계약금액 조정 내역", "변경계약서"],
         "deadline": "조정사유 발생 시",
         "confidence": 0.78,
         "legal_basis": [
@@ -892,7 +823,10 @@
       }
     ],
     "warnings": [
-      "2026-07-12 부처명 정정: 정부조직 개편(정부조직법 2026-01-02 시행, §23 기획예산처·§30 재정경제부)에 따라 구 기획재정부 표기 2건을 '재정경제부'로 갱신 — 근거: 국가계약법 현행(재정경제부 13회) + 조달청=재정경제부 소속."
+      {
+        "date": "2026-07-12",
+        "content": "부처명 정정: 정부조직 개편(정부조직법 2026-01-02 시행, §23 기획예산처·§30 재정경제부)에 따라 구 기획재정부 표기 2건을 '재정경제부'로 갱신 — 근거: 국가계약법 현행(재정경제부 13회) + 조달청=재정경제부 소속."
+      }
     ]
   }
 }

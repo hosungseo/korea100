@@ -121,10 +121,7 @@
         "progress": 100,
         "actor": "정보이용기관",
         "action": "대상정보·목적 검토",
-        "output_documents": [
-          "대상정보 목록",
-          "이용목적 명세"
-        ],
+        "output_documents": ["대상정보 목록", "이용목적 명세"],
         "deadline": "내부 목표 14일",
         "confidence": 0.85,
         "legal_basis": [
@@ -151,9 +148,7 @@
         "actor": "정보이용기관",
         "receiver": "행정안전부(공동이용센터)",
         "action": "신청서 제출",
-        "output_documents": [
-          "공동이용 신청서"
-        ],
+        "output_documents": ["공동이용 신청서"],
         "confidence": 0.86,
         "legal_basis": [
           {
@@ -174,10 +169,7 @@
         "actor": "행정안전부",
         "action": "승인·대상 지정",
         "condition": "대상정보 적정성·보유기관 협의 결과",
-        "output_documents": [
-          "승인 결정",
-          "공동이용 대상 지정"
-        ],
+        "output_documents": ["승인 결정", "공동이용 대상 지정"],
         "confidence": 0.82,
         "legal_basis": [
           {
@@ -207,10 +199,7 @@
         "progress": 100,
         "actor": "정보보유기관",
         "action": "제공 협의·확인",
-        "output_documents": [
-          "제공 협의결과",
-          "정보 정확성 확인"
-        ],
+        "output_documents": ["제공 협의결과", "정보 정확성 확인"],
         "confidence": 0.78,
         "legal_basis": [
           {
@@ -235,10 +224,7 @@
         "progress": 100,
         "actor": "행정정보공동이용시스템",
         "action": "연계·보안대책 적용",
-        "output_documents": [
-          "연계 설정",
-          "보안대책 적용내역"
-        ],
+        "output_documents": ["연계 설정", "보안대책 적용내역"],
         "confidence": 0.8,
         "legal_basis": [
           {
@@ -258,10 +244,7 @@
         "progress": 100,
         "actor": "행정안전부",
         "action": "접근권한 설정",
-        "output_documents": [
-          "접근권한 대장",
-          "연계 완료 통지"
-        ],
+        "output_documents": ["접근권한 대장", "연계 완료 통지"],
         "confidence": 0.76,
         "legal_basis": [
           {
@@ -286,9 +269,7 @@
         "progress": 100,
         "actor": "정보이용기관",
         "action": "민원 접수",
-        "output_documents": [
-          "민원 접수증"
-        ],
+        "output_documents": ["민원 접수증"],
         "confidence": 0.72,
         "legal_basis": [
           {
@@ -308,9 +289,7 @@
         "progress": 100,
         "actor": "정보주체(민원인)",
         "action": "공동이용 목적·대상 정보·이용기관을 고지받고 사전동의 (거부 가능)",
-        "output_documents": [
-          "사전동의 의사표시"
-        ],
+        "output_documents": ["사전동의 의사표시"],
         "deadline": null,
         "confidence": 0.9,
         "legal_basis": [
@@ -332,10 +311,7 @@
         "actor": "정보이용기관",
         "action": "사전동의 확인",
         "condition": "정보주체 사전동의 여부(동의 없으면 종이서류 제출)",
-        "output_documents": [
-          "동의서",
-          "동의 확인 로그"
-        ],
+        "output_documents": ["동의서", "동의 확인 로그"],
         "blocker": "일부 민원 건 정보주체 동의 미확인",
         "confidence": 0.82,
         "legal_basis": [
@@ -357,9 +333,7 @@
         "actor": "정보이용기관",
         "receiver": "정보주체(국민)",
         "action": "서류 제출 안내",
-        "output_documents": [
-          "구비서류 제출 안내"
-        ],
+        "output_documents": ["구비서류 제출 안내"],
         "confidence": 0.75,
         "legal_basis": [
           {
@@ -384,13 +358,8 @@
         "progress": 0,
         "actor": "행정정보공동이용시스템",
         "action": "보유기관 정보 조회",
-        "input_documents": [
-          "동의서",
-          "조회 요청"
-        ],
-        "output_documents": [
-          "조회 결과(주민등록·소득·부동산 등)"
-        ],
+        "input_documents": ["동의서", "조회 요청"],
+        "output_documents": ["조회 결과(주민등록·소득·부동산 등)"],
         "confidence": 0.8,
         "legal_basis": [
           {
@@ -415,12 +384,8 @@
         "progress": 0,
         "actor": "정보이용기관",
         "action": "민원 심사·처리",
-        "input_documents": [
-          "조회 결과"
-        ],
-        "output_documents": [
-          "민원 처리 결과"
-        ],
+        "input_documents": ["조회 결과"],
+        "output_documents": ["민원 처리 결과"],
         "confidence": 0.74,
         "legal_basis": [
           {
@@ -440,9 +405,7 @@
         "progress": 0,
         "actor": "행정정보공동이용시스템",
         "action": "이용내역 기록",
-        "output_documents": [
-          "이용내역 로그"
-        ],
+        "output_documents": ["이용내역 로그"],
         "confidence": 0.79,
         "legal_basis": [
           {
@@ -463,12 +426,8 @@
         "actor": "행정안전부",
         "receiver": "정보주체(국민)",
         "action": "이용내역 열람 제공",
-        "input_documents": [
-          "이용내역 로그"
-        ],
-        "output_documents": [
-          "이용내역 열람 결과"
-        ],
+        "input_documents": ["이용내역 로그"],
+        "output_documents": ["이용내역 열람 결과"],
         "deadline": "열람신청일부터 10일 이내 통보(정당한 사유 시 예외)",
         "confidence": 0.78,
         "legal_basis": [
@@ -490,9 +449,7 @@
         "actor": "행정안전부",
         "action": "목적 외 이용 판단",
         "condition": "이용목적 부합 여부·오남용 정황",
-        "output_documents": [
-          "점검 판단 결과"
-        ],
+        "output_documents": ["점검 판단 결과"],
         "confidence": 0.8,
         "legal_basis": [
           {
@@ -517,9 +474,7 @@
         "progress": 0,
         "actor": "행정안전부",
         "action": "실태점검",
-        "output_documents": [
-          "실태점검 결과보고"
-        ],
+        "output_documents": ["실태점검 결과보고"],
         "blocker": "이용내역 감사가 형식적으로 흐를 위험(운영 추정)",
         "confidence": 0.74,
         "legal_basis": [
@@ -546,10 +501,7 @@
         "actor": "행정안전부",
         "receiver": "정보이용기관",
         "action": "시정·승인 취소",
-        "output_documents": [
-          "시정 요구",
-          "승인 취소 통보"
-        ],
+        "output_documents": ["시정 요구", "승인 취소 통보"],
         "blocker": "목적 외 이용 적발 시 회귀 단계",
         "confidence": 0.76,
         "legal_basis": [
@@ -575,9 +527,7 @@
         "progress": 0,
         "actor": "개인정보보호위원회",
         "action": "감독·의견 제시",
-        "output_documents": [
-          "개선 의견"
-        ],
+        "output_documents": ["개선 의견"],
         "confidence": 0.75,
         "legal_basis": [
           {
@@ -745,15 +695,13 @@
     "warnings": [
       {
         "date": "2026-07-12",
-        "내용": "article-descriptive 4건 처리: P09 개인정보보호법 제17조(개인정보의 제공) 확정, P17 개인정보보호법 제28조(개인정보취급자에 대한 감독) 확정, P06·P15 행정정보 공동이용 지침(행정규칙, DRF API 미제공) → unverified 처리 후 fieldVerification 추가",
-        "consultedMSTs": [
-          "270351(개인정보 보호법)"
-        ]
+        "content": "article-descriptive 4건 처리: P09 개인정보보호법 제17조(개인정보의 제공) 확정, P17 개인정보보호법 제28조(개인정보취급자에 대한 감독) 확정, P06·P15 행정정보 공동이용 지침(행정규칙, DRF API 미제공) → unverified 처리 후 fieldVerification 추가",
+        "consulted_msts": ["270351(개인정보 보호법)"]
       },
       {
         "date": "2026-07-12",
-        "내용": "2026-07-12 행정규칙 검증: 행정정보 공동이용 지침 admrul 대조(일련번호 2100000257028, 발령번호 예규 제322호) — 2건 확정, 0건 미등재 유지. 소관부처: 행정안전부. P06→제21조·제24조(접근권한의 신청·승인·관리), P15→제32조제2항제3호·제35조(실태점검·침해사고 대응).",
-        "consultedMSTs": []
+        "content": "2026-07-12 행정규칙 검증: 행정정보 공동이용 지침 admrul 대조(일련번호 2100000257028, 발령번호 예규 제322호) — 2건 확정, 0건 미등재 유지. 소관부처: 행정안전부. P06→제21조·제24조(접근권한의 신청·승인·관리), P15→제32조제2항제3호·제35조(실태점검·침해사고 대응).",
+        "consulted_msts": []
       },
       "2026-07-12 L3 워크스루 정정: '정보주체(국민)' 레인 노드 0 — 공동이용의 법적 관문인 사전동의 행위 노드(P18) 신설, 전자정부법 제42조 원문 대조(law.go.kr). 동의 거부 경로는 기존 P09와 연결됨."
     ]

@@ -1,813 +1,753 @@
 {
- "slug": "telecom-license",
- "name": "전기통신사업 허가·등록",
- "oneLiner": "통신망을 깔고 통신서비스를 제공하려는 사업자를 기간통신은 등록, 부가통신은 신고로 진입관리하고 이용자 보호 의무를 지우는 통신산업 진입규제 제도",
- "type": "인허가형",
- "priority": 53,
- "whyFirst": "국가 기간산업이자 필수 서비스의 진입 관문이다. 2019년 허가제에서 등록제로 완화된 이력과 대형 플랫폼 규제 공백 논쟁이 있어 제도 변화를 보여주기 좋다.",
- "asOfDate": "2026-07-10",
- "status": "full",
- "canvas": {
-  "purpose": "통신은 국가 기간산업이자 필수 서비스다. 사업자의 재정·기술 능력을 확인해 안정적 서비스와 이용자 보호를 담보하고, 공정경쟁을 유지하는 것이 목적이다.",
-  "stakeholders": "통신사업자(기간·부가), 이용자(국민), 과학기술정보통신부, 방송미디어통신위원회(이용자보호), 알뜰폰·플랫폼 사업자, 통신설비 제공자",
-  "legalBasis": [
-   {
-    "law": "전기통신사업법",
-    "articles": "제5조(전기통신사업의 구분), 제6조(기간통신사업의 등록), 제19조(사업의 양수·합병 등 인가), 제22조(부가통신사업의 신고 등)",
-    "kind": "법률"
-   },
-   {
-    "law": "전기통신사업법 시행령",
-    "articles": "제7조(기간통신 등록신청 서류), 제8조(등록요건), 제10조(등록증 발급·처리기간 30일), 제7조제4항(보완 10일)",
-    "kind": "대통령령"
-   },
-   {
-    "law": "전기통신사업 회계정리 및 보고에 관한 규정",
-    "articles": "회계분리와 회계정리·보고 기준",
-    "kind": "대통령령"
-   },
-   {
-    "law": "전파법",
-    "articles": "주파수 할당·전파사용(이동통신 등)",
-    "kind": "법률"
-   }
+  "slug": "telecom-license",
+  "name": "전기통신사업 허가·등록",
+  "oneLiner": "통신망을 깔고 통신서비스를 제공하려는 사업자를 기간통신은 등록, 부가통신은 신고로 진입관리하고 이용자 보호 의무를 지우는 통신산업 진입규제 제도",
+  "type": "인허가형",
+  "priority": 53,
+  "whyFirst": "국가 기간산업이자 필수 서비스의 진입 관문이다. 2019년 허가제에서 등록제로 완화된 이력과 대형 플랫폼 규제 공백 논쟁이 있어 제도 변화를 보여주기 좋다.",
+  "asOfDate": "2026-07-10",
+  "status": "full",
+  "canvas": {
+    "purpose": "통신은 국가 기간산업이자 필수 서비스다. 사업자의 재정·기술 능력을 확인해 안정적 서비스와 이용자 보호를 담보하고, 공정경쟁을 유지하는 것이 목적이다.",
+    "stakeholders": "통신사업자(기간·부가), 이용자(국민), 과학기술정보통신부, 방송미디어통신위원회(이용자보호), 알뜰폰·플랫폼 사업자, 통신설비 제공자",
+    "legalBasis": [
+      {
+        "law": "전기통신사업법",
+        "articles": "제5조(전기통신사업의 구분), 제6조(기간통신사업의 등록), 제19조(사업의 양수·합병 등 인가), 제22조(부가통신사업의 신고 등)",
+        "kind": "법률"
+      },
+      {
+        "law": "전기통신사업법 시행령",
+        "articles": "제7조(기간통신 등록신청 서류), 제8조(등록요건), 제10조(등록증 발급·처리기간 30일), 제7조제4항(보완 10일)",
+        "kind": "대통령령"
+      },
+      {
+        "law": "전기통신사업 회계정리 및 보고에 관한 규정",
+        "articles": "회계분리와 회계정리·보고 기준",
+        "kind": "대통령령"
+      },
+      {
+        "law": "전파법",
+        "articles": "주파수 할당·전파사용(이동통신 등)",
+        "kind": "법률"
+      }
+    ],
+    "authorities": [
+      {
+        "name": "과학기술정보통신부장관",
+        "role": "기간통신 등록·부가통신 신고 수리, 양수·합병 인가"
+      },
+      {
+        "name": "방송미디어통신위원회",
+        "role": "이용자보호·금지행위 규제, 과징금 부과"
+      },
+      {
+        "name": "중앙전파관리소",
+        "role": "설비·전파 감시, 불법 통신 단속"
+      },
+      {
+        "name": "통신분쟁조정위원회",
+        "role": "이용자·사업자 간 통신분쟁 조정"
+      }
+    ],
+    "procedure": [
+      "사업 유형 구분(기간통신/부가통신/특수유형)",
+      "등록·신고 요건 구비(자본금·기술인력·이용약관)",
+      "기간통신: 과기정통부에 등록 신청",
+      "요건 심사(재정·기술능력·이용자보호계획)",
+      "등록증 발급 또는 부가통신 신고 수리",
+      "주파수 필요 시 전파법상 할당 별도 진행",
+      "서비스 개시(등록·신고 후 1년 내), 이용약관 신고",
+      "이용자보호·금지행위 준수, 위반 시 시정명령·과징금"
+    ],
+    "moneyFlow": "등록·신고 수수료, 주파수 할당대가·전파사용료를 부담한다. 이용자에게 요금을 받고 보편적역무 손실보전금을 분담한다. 금지행위 위반 시 과징금은 국고로 귀속된다. 사업자 간 상호접속료가 정산된다.",
+    "docsFlow": "등록·신고 신청서·사업계획서·이용약관 → 심사조서 → 등록증·신고증 → 이용약관 신고·회계보고 → 이용자민원·시정명령 기록. 과기정통부·방통위 시스템에 관리된다.",
+    "bottlenecks": [
+      "기간·부가·특수유형 구분과 요건이 복잡하다",
+      "부가통신 신고가 형식심사에 그쳐 대형 플랫폼 규제 공백 논란이 있다",
+      "인가·심사에 시간이 걸려 M&A·구조개편이 지연된다 (현장 검증 필요)",
+      "알뜰폰·신규 사업자의 망 도매대가 협상이 불리하다 (현장 검증 필요)"
+    ],
+    "reformPoints": [
+      "진입규제 완화와 대형 부가통신(플랫폼) 이용자보호 강화 병행",
+      "도매제공 의무·대가 산정 투명화",
+      "인가·심사 기간 단축",
+      "필수설비·상호접속 제도 정비"
+    ]
+  },
+  "related": [
+    "방송통신심의",
+    "공정거래(시정조치·과징금)",
+    "규제샌드박스",
+    "마이데이터",
+    "전파·주파수 할당"
   ],
-  "authorities": [
-   {
-    "name": "과학기술정보통신부장관",
-    "role": "기간통신 등록·부가통신 신고 수리, 양수·합병 인가"
-   },
-   {
-    "name": "방송미디어통신위원회",
-    "role": "이용자보호·금지행위 규제, 과징금 부과"
-   },
-   {
-    "name": "중앙전파관리소",
-    "role": "설비·전파 감시, 불법 통신 단속"
-   },
-   {
-    "name": "통신분쟁조정위원회",
-    "role": "이용자·사업자 간 통신분쟁 조정"
-   }
+  "fieldVerification": [
+    "전기통신사업법 제6조·제22조 등 등록·신고 조문 최신 대조",
+    "기간통신 등록 심사기간·요건 실무",
+    "부가통신 신고 면제기준(자본금 1억원) 운영",
+    "인가·M&A 심사기간(운영 추정)",
+    "부가통신 신고 요건·소규모 신고의제 자본금 기준은 법 제22조제5·8항이 대통령령에 위임 — 해당 시행령 구체 조문 미확정"
   ],
-  "procedure": [
-   "사업 유형 구분(기간통신/부가통신/특수유형)",
-   "등록·신고 요건 구비(자본금·기술인력·이용약관)",
-   "기간통신: 과기정통부에 등록 신청",
-   "요건 심사(재정·기술능력·이용자보호계획)",
-   "등록증 발급 또는 부가통신 신고 수리",
-   "주파수 필요 시 전파법상 할당 별도 진행",
-   "서비스 개시(등록·신고 후 1년 내), 이용약관 신고",
-   "이용자보호·금지행위 준수, 위반 시 시정명령·과징금"
-  ],
-  "moneyFlow": "등록·신고 수수료, 주파수 할당대가·전파사용료를 부담한다. 이용자에게 요금을 받고 보편적역무 손실보전금을 분담한다. 금지행위 위반 시 과징금은 국고로 귀속된다. 사업자 간 상호접속료가 정산된다.",
-  "docsFlow": "등록·신고 신청서·사업계획서·이용약관 → 심사조서 → 등록증·신고증 → 이용약관 신고·회계보고 → 이용자민원·시정명령 기록. 과기정통부·방통위 시스템에 관리된다.",
-  "bottlenecks": [
-   "기간·부가·특수유형 구분과 요건이 복잡하다",
-   "부가통신 신고가 형식심사에 그쳐 대형 플랫폼 규제 공백 논란이 있다",
-   "인가·심사에 시간이 걸려 M&A·구조개편이 지연된다 (현장 검증 필요)",
-   "알뜰폰·신규 사업자의 망 도매대가 협상이 불리하다 (현장 검증 필요)"
-  ],
-  "reformPoints": [
-   "진입규제 완화와 대형 부가통신(플랫폼) 이용자보호 강화 병행",
-   "도매제공 의무·대가 산정 투명화",
-   "인가·심사 기간 단축",
-   "필수설비·상호접속 제도 정비"
-  ]
- },
- "related": [
-  "방송통신심의",
-  "공정거래(시정조치·과징금)",
-  "규제샌드박스",
-  "마이데이터",
-  "전파·주파수 할당"
- ],
- "fieldVerification": [
-  "전기통신사업법 제6조·제22조 등 등록·신고 조문 최신 대조",
-  "기간통신 등록 심사기간·요건 실무",
-  "부가통신 신고 면제기준(자본금 1억원) 운영",
-  "인가·M&A 심사기간(운영 추정)",
-  "부가통신 신고 요건·소규모 신고의제 자본금 기준은 법 제22조제5·8항이 대통령령에 위임 — 해당 시행령 구체 조문 미확정"
- ],
- "process": {
-  "institution_name": "전기통신사업 허가·등록 제도",
-  "law_name": "전기통신사업법",
-  "lanes": [
-   "사업자/신청자",
-   "과학기술정보통신부",
-   "전문심사·자문",
-   "방송미디어통신위원회",
-   "중앙전파관리소",
-   "정보시스템"
-  ],
-  "stages": [
-   "G0 유형구분",
-   "G1 요건구비",
-   "G2 접수",
-   "G3 요건심사",
-   "G4 등록·수리",
-   "G5 주파수·개시",
-   "G6 사후의무·제재"
-  ],
-  "nodes": [
-   {
-    "id": "P01",
-    "name": "사업 유형 구분",
-    "lane": "사업자/신청자",
-    "stage": "G0 유형구분",
-    "type": "gateway",
-    "status": "done",
-    "progress": 100,
-    "actor": "사업자",
-    "action": "유형 판정",
-    "output_documents": [
-     "사업유형 판정표"
+  "process": {
+    "institution_name": "전기통신사업 허가·등록 제도",
+    "law_name": "전기통신사업법",
+    "lanes": [
+      "사업자/신청자",
+      "과학기술정보통신부",
+      "전문심사·자문",
+      "방송미디어통신위원회",
+      "중앙전파관리소",
+      "정보시스템"
     ],
-    "deadline": "내부 목표 7일",
-    "blocker": null,
-    "confidence": 0.86,
-    "legal_basis": [
-     {
-      "law": "전기통신사업법",
-      "article": "제5조",
-      "text": "기간통신·부가통신·특수유형 부가통신 중 사업 유형을 구분한다."
-     }
+    "stages": [
+      "G0 유형구분",
+      "G1 요건구비",
+      "G2 접수",
+      "G3 요건심사",
+      "G4 등록·수리",
+      "G5 주파수·개시",
+      "G6 사후의무·제재"
+    ],
+    "nodes": [
+      {
+        "id": "P01",
+        "name": "사업 유형 구분",
+        "lane": "사업자/신청자",
+        "stage": "G0 유형구분",
+        "type": "gateway",
+        "status": "done",
+        "progress": 100,
+        "actor": "사업자",
+        "action": "유형 판정",
+        "output_documents": ["사업유형 판정표"],
+        "deadline": "내부 목표 7일",
+        "blocker": null,
+        "confidence": 0.86,
+        "legal_basis": [
+          {
+            "law": "전기통신사업법",
+            "article": "제5조",
+            "text": "기간통신·부가통신·특수유형 부가통신 중 사업 유형을 구분한다."
+          }
+        ]
+      },
+      {
+        "id": "P02",
+        "name": "등록·신고 요건 구비",
+        "lane": "사업자/신청자",
+        "stage": "G1 요건구비",
+        "type": "task",
+        "status": "done",
+        "progress": 100,
+        "actor": "사업자",
+        "action": "요건 구비",
+        "output_documents": [
+          "사업계획서",
+          "자본금·기술인력 증빙",
+          "이용약관(안)"
+        ],
+        "deadline": "내부 목표 30일",
+        "blocker": null,
+        "confidence": 0.82,
+        "legal_basis": [
+          {
+            "law": "전기통신사업법",
+            "article": "제6조",
+            "text": "기간통신 등록에 필요한 재정·기술능력과 이용자보호계획을 갖춘다."
+          },
+          {
+            "law": "전기통신사업법 시행령",
+            "article": "제7조·제8조",
+            "text": "등록신청서 첨부서류(사업계획서·정관·이용약관·이용자보호기구 운영계획서·주요설비 명세)와 등록요건을 시행령에서 정한다."
+          }
+        ]
+      },
+      {
+        "id": "P03",
+        "name": "등록 신청·신고 접수",
+        "lane": "과학기술정보통신부",
+        "stage": "G2 접수",
+        "type": "task",
+        "status": "done",
+        "progress": 100,
+        "actor": "과학기술정보통신부",
+        "action": "접수",
+        "input_documents": ["등록신청서", "사업계획서"],
+        "output_documents": ["접수증"],
+        "deadline": "즉시 접수",
+        "blocker": null,
+        "confidence": 0.84,
+        "legal_basis": [
+          {
+            "law": "전기통신사업법",
+            "article": "제6조·제22조",
+            "text": "기간통신은 등록 신청을, 부가통신은 신고를 접수한다."
+          },
+          {
+            "law": "전기통신사업법 시행령",
+            "article": "제7조",
+            "text": "기간통신 등록신청서를 접수하고 행정정보 공동이용으로 법인등기·기술자격을 확인한다."
+          }
+        ]
+      },
+      {
+        "id": "P04",
+        "name": "요건 심사",
+        "lane": "전문심사·자문",
+        "stage": "G3 요건심사",
+        "type": "task",
+        "status": "current",
+        "progress": 55,
+        "actor": "심사반",
+        "action": "재정·기술능력 심사",
+        "input_documents": ["사업계획서", "자본금·기술인력 증빙"],
+        "output_documents": ["심사조서"],
+        "deadline": "운영 목표 30~60일 (현장 검증 필요)",
+        "blocker": "이용자보호계획 보완 검토 중",
+        "confidence": 0.74,
+        "legal_basis": [
+          {
+            "law": "전기통신사업법",
+            "article": "제6조",
+            "text": "재정적·기술적 능력과 이용자보호계획의 적정성을 심사한다."
+          },
+          {
+            "law": "전기통신사업법 시행령",
+            "article": "제8조·제10조",
+            "text": "제8조의 등록요건 충족 여부를 확인하여 등록증 발급 여부를 심사한다."
+          }
+        ]
+      },
+      {
+        "id": "P05",
+        "name": "등록 여부 판정",
+        "lane": "과학기술정보통신부",
+        "stage": "G3 요건심사",
+        "type": "gateway",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "과학기술정보통신부",
+        "action": "판정",
+        "condition": "요건 충족 여부, 보완 필요성",
+        "output_documents": ["판정결과", "보완요청서"],
+        "blocker": null,
+        "confidence": 0.8,
+        "legal_basis": [
+          {
+            "law": "전기통신사업법",
+            "article": "제6조",
+            "text": "등록요건 충족 시 등록하고 미비 시 보완을 요청한다."
+          },
+          {
+            "law": "전기통신사업법 시행령",
+            "article": "제10조",
+            "text": "등록요건을 갖춘 경우 등록대장에 적고 등록증을 발급한다."
+          }
+        ]
+      },
+      {
+        "id": "P06",
+        "name": "보완 요구·재제출",
+        "lane": "사업자/신청자",
+        "stage": "G3 요건심사",
+        "type": "task",
+        "status": "loop",
+        "progress": 0,
+        "actor": "사업자",
+        "action": "보완",
+        "input_documents": ["보완요청서"],
+        "output_documents": ["보완서류"],
+        "blocker": "조건부 회귀 단계",
+        "confidence": 0.72,
+        "legal_basis": [
+          {
+            "law": "전기통신사업법",
+            "article": "제6조",
+            "text": "보완 요청을 받으면 서류를 보완하여 재제출한다."
+          },
+          {
+            "law": "전기통신사업법 시행령",
+            "article": "제7조제4항",
+            "text": "보완·보정이 필요하면 10일 이내 기간을 정해 요구하며, 그 기간은 처리기간에 산입하지 않는다."
+          }
+        ],
+        "deadline": "보완·보정 10일 이내(시행령 제7조제4항)"
+      },
+      {
+        "id": "P07",
+        "name": "등록증 발급·신고 수리",
+        "lane": "과학기술정보통신부",
+        "stage": "G4 등록·수리",
+        "type": "task",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "과학기술정보통신부",
+        "action": "발급·수리",
+        "output_documents": ["등록증", "신고수리 통지"],
+        "blocker": null,
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "전기통신사업법",
+            "article": "제6조·제22조",
+            "text": "심사를 통과하면 등록증을 발급하거나 부가통신 신고를 수리한다."
+          },
+          {
+            "law": "전기통신사업법 시행령",
+            "article": "제10조",
+            "text": "등록신청일부터 30일 이내에 등록증을 발급한다(주파수할당 등 소요기간 불산입)."
+          }
+        ],
+        "deadline": "신청일부터 30일 이내(시행령 제10조, 주파수할당·적합성평가 기간 불산입)"
+      },
+      {
+        "id": "P08",
+        "name": "주파수 할당 신청",
+        "lane": "사업자/신청자",
+        "stage": "G5 주파수·개시",
+        "type": "task",
+        "status": "risk",
+        "progress": 0,
+        "actor": "사업자",
+        "action": "주파수 할당 신청",
+        "output_documents": ["주파수 할당 신청서"],
+        "deadline": "전파법상 별도 절차",
+        "blocker": "이동통신 등 주파수 확보 지연 위험 (현장 검증 필요)",
+        "confidence": 0.7,
+        "legal_basis": [
+          {
+            "law": "전파법",
+            "article": "제10조·제11조",
+            "text": "이동통신 등 주파수가 필요한 경우 별도로 주파수 할당을 신청한다."
+          }
+        ]
+      },
+      {
+        "id": "P09",
+        "name": "이용약관 신고",
+        "lane": "사업자/신청자",
+        "stage": "G5 주파수·개시",
+        "type": "notice",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "사업자",
+        "receiver": "과학기술정보통신부",
+        "action": "약관 신고",
+        "output_documents": ["이용약관 신고서"],
+        "blocker": null,
+        "confidence": 0.8,
+        "legal_basis": [
+          {
+            "law": "전기통신사업법",
+            "article": "제28조",
+            "text": "이용약관을 신고하거나 인가받은 후 서비스에 반영한다."
+          }
+        ]
+      },
+      {
+        "id": "P10",
+        "name": "서비스 개시",
+        "lane": "사업자/신청자",
+        "stage": "G5 주파수·개시",
+        "type": "task",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "사업자",
+        "action": "서비스 개시",
+        "output_documents": ["개시 신고"],
+        "deadline": "등록·신고 후 1년 이내",
+        "blocker": null,
+        "confidence": 0.78,
+        "legal_basis": [
+          {
+            "law": "전기통신사업법",
+            "article": "제6조",
+            "text": "등록·신고 후 정당한 사유 없이 1년 내 서비스를 개시한다."
+          },
+          {
+            "law": "전기통신사업법",
+            "article": "제22조제6항",
+            "text": "부가통신은 신고·등록일부터 1년 이내에 사업을 시작한다."
+          }
+        ]
+      },
+      {
+        "id": "P11",
+        "name": "보편적역무·상호접속 의무 이행",
+        "lane": "사업자/신청자",
+        "stage": "G6 사후의무·제재",
+        "type": "task",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "사업자",
+        "action": "사후의무 이행",
+        "output_documents": ["상호접속 협정", "보편역무 손실보전 분담"],
+        "blocker": null,
+        "confidence": 0.76,
+        "legal_basis": [
+          {
+            "law": "전기통신사업법",
+            "article": "제4조·제39조",
+            "text": "보편적역무 제공·손실보전과 사업자 간 상호접속 의무를 이행한다."
+          }
+        ]
+      },
+      {
+        "id": "P12",
+        "name": "금지행위 사실조사",
+        "lane": "방송미디어통신위원회",
+        "stage": "G6 사후의무·제재",
+        "type": "task",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "방송미디어통신위원회·소속 공무원",
+        "action": "신고·인지된 금지행위에 대해 현장 출입, 장부·서류·자료 조사",
+        "output_documents": ["사실조사 결과"],
+        "blocker": null,
+        "confidence": 0.78,
+        "legal_basis": [
+          {
+            "law": "전기통신사업법",
+            "article": "제51조",
+            "text": "방송미디어통신위원회는 금지행위 위반이 있다고 인정하면 소속 공무원에게 사실조사를 하게 할 수 있다."
+          }
+        ]
+      },
+      {
+        "id": "P15",
+        "name": "조치 전 의견진술 기회 부여",
+        "lane": "방송미디어통신위원회",
+        "stage": "G6 사후의무·제재",
+        "type": "notice",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "방송미디어통신위원회",
+        "receiver": "전기통신사업자·이해관계인",
+        "action": "시정조치 예정 내용을 알리고 의견서 제출·출석 진술 기회 부여",
+        "input_documents": ["사실조사 결과", "조치 예정 통지"],
+        "output_documents": ["의견서", "진술 기록"],
+        "confidence": 0.9,
+        "legal_basis": [
+          {
+            "law": "전기통신사업법",
+            "article": "제52조제3항",
+            "text": "방송미디어통신위원회는 시정조치를 명하기 전에 당사자에게 의견진술 기회를 주어야 한다."
+          }
+        ]
+      },
+      {
+        "id": "P13",
+        "name": "시정조치 명령",
+        "lane": "방송미디어통신위원회",
+        "stage": "G6 사후의무·제재",
+        "type": "gateway",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "방송미디어통신위원회",
+        "action": "금지행위 중지, 이용약관 변경, 협정 이행, 원상회복 등 시정조치 명령",
+        "condition": "금지행위 위반 여부와 조치 유형",
+        "input_documents": ["사실조사 결과", "의견서"],
+        "output_documents": ["시정조치 명령서", "과학기술정보통신부 통보"],
+        "blocker": null,
+        "confidence": 0.88,
+        "legal_basis": [
+          {
+            "law": "전기통신사업법",
+            "article": "제52조제1항부터 제4항",
+            "text": "방송미디어통신위원회는 금지행위에 시정조치를 명하고, 그 사실을 과학기술정보통신부장관에게 통보한다."
+          }
+        ]
+      },
+      {
+        "id": "P16",
+        "name": "과징금 부과·납부 관리",
+        "lane": "방송미디어통신위원회",
+        "stage": "G6 사후의무·제재",
+        "type": "notice",
+        "status": "risk",
+        "progress": 0,
+        "actor": "방송미디어통신위원회",
+        "receiver": "전기통신사업자",
+        "action": "금지행위에 과징금을 부과하고, 납부기한 미납 시 가산금·독촉 후 체납처분으로 징수",
+        "output_documents": ["과징금 부과 통지", "가산금·독촉 통지"],
+        "confidence": 0.86,
+        "legal_basis": [
+          {
+            "law": "전기통신사업법",
+            "article": "제53조제1항·제5항·제6항",
+            "text": "방송미디어통신위원회는 금지행위에 과징금을 부과하고, 미납 시 가산금·독촉과 국세 체납처분의 예에 따른 징수를 할 수 있다."
+          }
+        ]
+      },
+      {
+        "id": "P17",
+        "name": "사업 일부 정지 명령",
+        "lane": "과학기술정보통신부",
+        "stage": "G6 사후의무·제재",
+        "type": "notice",
+        "status": "risk",
+        "progress": 0,
+        "actor": "과학기술정보통신부장관",
+        "receiver": "시정조치 불이행 전기통신사업자",
+        "action": "정해진 기간 안에 시정조치를 이행하지 않은 사업자에게 사업 일부 정지 명령",
+        "output_documents": ["사업 일부 정지 처분", "이용자 보호 조치 명령"],
+        "confidence": 0.87,
+        "legal_basis": [
+          {
+            "law": "전기통신사업법",
+            "article": "제52조제5항·제7항",
+            "text": "과학기술정보통신부장관은 시정조치 불이행 사업자에게 사업 일부 정지를 명할 수 있고, 기간통신사업자에게 이용자 보호 조치를 명할 수 있다."
+          }
+        ]
+      },
+      {
+        "id": "P14",
+        "name": "설비·전파 감시",
+        "lane": "중앙전파관리소",
+        "stage": "G6 사후의무·제재",
+        "type": "task",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "중앙전파관리소",
+        "action": "설비·전파 감시",
+        "output_documents": ["감시·단속 기록"],
+        "blocker": null,
+        "confidence": 0.75,
+        "legal_basis": [
+          {
+            "law": "전파법",
+            "article": "제49조(전파감시)",
+            "text": "과학기술정보통신부장관은 전파의 질서 유지를 위하여 전파를 감시하고 불법으로 개설된 무선국을 단속한다."
+          }
+        ]
+      },
+      {
+        "id": "S01",
+        "name": "등록사항 등록·공개",
+        "lane": "정보시스템",
+        "stage": "G4 등록·수리",
+        "type": "system",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "통합정보시스템",
+        "action": "등록·공개",
+        "input_documents": ["등록증", "신고수리 통지"],
+        "output_documents": ["공개 등록부"],
+        "blocker": null,
+        "confidence": 0.72,
+        "legal_basis": [
+          {
+            "law": "전기통신사업법",
+            "article": "제6조",
+            "text": "등록·신고 사항을 정보시스템에 관리·공개한다."
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "E01",
+        "source": "P01",
+        "target": "P02",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E02",
+        "source": "P02",
+        "target": "P03",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E03",
+        "source": "P03",
+        "target": "P04",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E04",
+        "source": "P04",
+        "target": "P05",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E05",
+        "source": "P05",
+        "target": "P07",
+        "type": "sequence",
+        "label": "등록 결정"
+      },
+      {
+        "id": "E06",
+        "source": "P07",
+        "target": "P09",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E07",
+        "source": "P09",
+        "target": "P08",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E08",
+        "source": "P08",
+        "target": "P10",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E09",
+        "source": "P10",
+        "target": "P11",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E10",
+        "source": "P11",
+        "target": "P12",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E11",
+        "source": "P12",
+        "target": "P15",
+        "type": "sequence",
+        "label": "금지행위 위반 정황"
+      },
+      {
+        "id": "E12",
+        "source": "P15",
+        "target": "P13",
+        "type": "sequence",
+        "label": "의견진술 후 시정조치"
+      },
+      {
+        "id": "E13",
+        "source": "P15",
+        "target": "P16",
+        "type": "sequence",
+        "label": "과징금 부과 판단"
+      },
+      {
+        "id": "E14",
+        "source": "P13",
+        "target": "P17",
+        "type": "sequence",
+        "label": "명령 불이행"
+      },
+      {
+        "id": "M01",
+        "source": "P07",
+        "target": "S01",
+        "type": "message",
+        "label": "등록사항 공개"
+      },
+      {
+        "id": "M02",
+        "source": "P10",
+        "target": "P12",
+        "type": "message",
+        "label": "서비스 개시 통보"
+      },
+      {
+        "id": "M03",
+        "source": "P14",
+        "target": "P13",
+        "type": "message",
+        "label": "위반 적발 통보"
+      },
+      {
+        "id": "L01",
+        "source": "P05",
+        "target": "P06",
+        "type": "loop",
+        "label": "보완 필요"
+      },
+      {
+        "id": "L02",
+        "source": "P06",
+        "target": "P04",
+        "type": "loop",
+        "label": "보완 재제출"
+      }
+    ],
+    "warnings": [
+      {
+        "date": "2026-07-12",
+        "content": "article-descriptive 1건 해소: P14 전파법 '전파감시 관련 조문' → 제49조(전파감시). 전파법(MST 276245) 원문 확인 후 반영.",
+        "consulted_msts": ["276245"]
+      }
     ]
-   },
-   {
-    "id": "P02",
-    "name": "등록·신고 요건 구비",
-    "lane": "사업자/신청자",
-    "stage": "G1 요건구비",
-    "type": "task",
-    "status": "done",
-    "progress": 100,
-    "actor": "사업자",
-    "action": "요건 구비",
-    "output_documents": [
-     "사업계획서",
-     "자본금·기술인력 증빙",
-     "이용약관(안)"
+  },
+  "verification": {
+    "status": "article-verified",
+    "verifiedAt": "2026-07-12",
+    "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+    "scope": "법적 근거 4건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 38건 가운데 38건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+    "sources": [
+      {
+        "law": "전기통신사업법",
+        "kind": "법률",
+        "sourceType": "statute",
+        "officialName": "전기통신사업법",
+        "lawId": "001733",
+        "mst": "286079",
+        "promulgatedOn": "2026-05-19",
+        "effectiveOn": "2026-05-19",
+        "officialUrl": "https://law.go.kr/법령/전기통신사업법"
+      },
+      {
+        "law": "전기통신사업법 시행령",
+        "kind": "대통령령",
+        "sourceType": "statute",
+        "officialName": "전기통신사업법 시행령",
+        "lawId": "004708",
+        "mst": "285721",
+        "promulgatedOn": "2026-04-28",
+        "effectiveOn": "2026-04-28",
+        "officialUrl": "https://law.go.kr/법령/전기통신사업법시행령"
+      },
+      {
+        "law": "전기통신사업 회계정리 및 보고에 관한 규정",
+        "kind": "대통령령",
+        "sourceType": "statute",
+        "officialName": "전기통신사업 회계정리 및 보고에 관한 규정",
+        "lawId": "010667",
+        "mst": "227801",
+        "promulgatedOn": "2021-01-05",
+        "effectiveOn": "2021-01-05",
+        "officialUrl": "https://law.go.kr/법령/전기통신사업회계정리및보고에관한규정"
+      },
+      {
+        "law": "전파법",
+        "kind": "법률",
+        "sourceType": "statute",
+        "officialName": "전파법",
+        "lawId": "001732",
+        "mst": "276245",
+        "promulgatedOn": "2025-10-01",
+        "effectiveOn": "2026-01-02",
+        "officialUrl": "https://law.go.kr/법령/전파법"
+      }
     ],
-    "deadline": "내부 목표 30일",
-    "blocker": null,
-    "confidence": 0.82,
-    "legal_basis": [
-     {
-      "law": "전기통신사업법",
-      "article": "제6조",
-      "text": "기간통신 등록에 필요한 재정·기술능력과 이용자보호계획을 갖춘다."
-     },
-     {
-      "law": "전기통신사업법 시행령",
-      "article": "제7조·제8조",
-      "text": "등록신청서 첨부서류(사업계획서·정관·이용약관·이용자보호기구 운영계획서·주요설비 명세)와 등록요건을 시행령에서 정한다."
-     }
-    ]
-   },
-   {
-    "id": "P03",
-    "name": "등록 신청·신고 접수",
-    "lane": "과학기술정보통신부",
-    "stage": "G2 접수",
-    "type": "task",
-    "status": "done",
-    "progress": 100,
-    "actor": "과학기술정보통신부",
-    "action": "접수",
-    "input_documents": [
-     "등록신청서",
-     "사업계획서"
-    ],
-    "output_documents": [
-     "접수증"
-    ],
-    "deadline": "즉시 접수",
-    "blocker": null,
-    "confidence": 0.84,
-    "legal_basis": [
-     {
-      "law": "전기통신사업법",
-      "article": "제6조·제22조",
-      "text": "기간통신은 등록 신청을, 부가통신은 신고를 접수한다."
-     },
-     {
-      "law": "전기통신사업법 시행령",
-      "article": "제7조",
-      "text": "기간통신 등록신청서를 접수하고 행정정보 공동이용으로 법인등기·기술자격을 확인한다."
-     }
-    ]
-   },
-   {
-    "id": "P04",
-    "name": "요건 심사",
-    "lane": "전문심사·자문",
-    "stage": "G3 요건심사",
-    "type": "task",
-    "status": "current",
-    "progress": 55,
-    "actor": "심사반",
-    "action": "재정·기술능력 심사",
-    "input_documents": [
-     "사업계획서",
-     "자본금·기술인력 증빙"
-    ],
-    "output_documents": [
-     "심사조서"
-    ],
-    "deadline": "운영 목표 30~60일 (현장 검증 필요)",
-    "blocker": "이용자보호계획 보완 검토 중",
-    "confidence": 0.74,
-    "legal_basis": [
-     {
-      "law": "전기통신사업법",
-      "article": "제6조",
-      "text": "재정적·기술적 능력과 이용자보호계획의 적정성을 심사한다."
-     },
-     {
-      "law": "전기통신사업법 시행령",
-      "article": "제8조·제10조",
-      "text": "제8조의 등록요건 충족 여부를 확인하여 등록증 발급 여부를 심사한다."
-     }
-    ]
-   },
-   {
-    "id": "P05",
-    "name": "등록 여부 판정",
-    "lane": "과학기술정보통신부",
-    "stage": "G3 요건심사",
-    "type": "gateway",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "과학기술정보통신부",
-    "action": "판정",
-    "condition": "요건 충족 여부, 보완 필요성",
-    "output_documents": [
-     "판정결과",
-     "보완요청서"
-    ],
-    "blocker": null,
-    "confidence": 0.8,
-    "legal_basis": [
-     {
-      "law": "전기통신사업법",
-      "article": "제6조",
-      "text": "등록요건 충족 시 등록하고 미비 시 보완을 요청한다."
-     },
-     {
-      "law": "전기통신사업법 시행령",
-      "article": "제10조",
-      "text": "등록요건을 갖춘 경우 등록대장에 적고 등록증을 발급한다."
-     }
-    ]
-   },
-   {
-    "id": "P06",
-    "name": "보완 요구·재제출",
-    "lane": "사업자/신청자",
-    "stage": "G3 요건심사",
-    "type": "task",
-    "status": "loop",
-    "progress": 0,
-    "actor": "사업자",
-    "action": "보완",
-    "input_documents": [
-     "보완요청서"
-    ],
-    "output_documents": [
-     "보완서류"
-    ],
-    "blocker": "조건부 회귀 단계",
-    "confidence": 0.72,
-    "legal_basis": [
-     {
-      "law": "전기통신사업법",
-      "article": "제6조",
-      "text": "보완 요청을 받으면 서류를 보완하여 재제출한다."
-     },
-     {
-      "law": "전기통신사업법 시행령",
-      "article": "제7조제4항",
-      "text": "보완·보정이 필요하면 10일 이내 기간을 정해 요구하며, 그 기간은 처리기간에 산입하지 않는다."
-     }
-    ],
-    "deadline": "보완·보정 10일 이내(시행령 제7조제4항)"
-   },
-   {
-    "id": "P07",
-    "name": "등록증 발급·신고 수리",
-    "lane": "과학기술정보통신부",
-    "stage": "G4 등록·수리",
-    "type": "task",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "과학기술정보통신부",
-    "action": "발급·수리",
-    "output_documents": [
-     "등록증",
-     "신고수리 통지"
-    ],
-    "blocker": null,
-    "confidence": 0.85,
-    "legal_basis": [
-     {
-      "law": "전기통신사업법",
-      "article": "제6조·제22조",
-      "text": "심사를 통과하면 등록증을 발급하거나 부가통신 신고를 수리한다."
-     },
-     {
-      "law": "전기통신사업법 시행령",
-      "article": "제10조",
-      "text": "등록신청일부터 30일 이내에 등록증을 발급한다(주파수할당 등 소요기간 불산입)."
-     }
-    ],
-    "deadline": "신청일부터 30일 이내(시행령 제10조, 주파수할당·적합성평가 기간 불산입)"
-   },
-   {
-    "id": "P08",
-    "name": "주파수 할당 신청",
-    "lane": "사업자/신청자",
-    "stage": "G5 주파수·개시",
-    "type": "task",
-    "status": "risk",
-    "progress": 0,
-    "actor": "사업자",
-    "action": "주파수 할당 신청",
-    "output_documents": [
-     "주파수 할당 신청서"
-    ],
-    "deadline": "전파법상 별도 절차",
-    "blocker": "이동통신 등 주파수 확보 지연 위험 (현장 검증 필요)",
-    "confidence": 0.7,
-    "legal_basis": [
-     {
-      "law": "전파법",
-      "article": "제10조·제11조",
-      "text": "이동통신 등 주파수가 필요한 경우 별도로 주파수 할당을 신청한다."
-     }
-    ]
-   },
-   {
-    "id": "P09",
-    "name": "이용약관 신고",
-    "lane": "사업자/신청자",
-    "stage": "G5 주파수·개시",
-    "type": "notice",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "사업자",
-    "receiver": "과학기술정보통신부",
-    "action": "약관 신고",
-    "output_documents": [
-     "이용약관 신고서"
-    ],
-    "blocker": null,
-    "confidence": 0.8,
-    "legal_basis": [
-     {
-      "law": "전기통신사업법",
-      "article": "제28조",
-      "text": "이용약관을 신고하거나 인가받은 후 서비스에 반영한다."
-     }
-    ]
-   },
-   {
-    "id": "P10",
-    "name": "서비스 개시",
-    "lane": "사업자/신청자",
-    "stage": "G5 주파수·개시",
-    "type": "task",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "사업자",
-    "action": "서비스 개시",
-    "output_documents": [
-     "개시 신고"
-    ],
-    "deadline": "등록·신고 후 1년 이내",
-    "blocker": null,
-    "confidence": 0.78,
-    "legal_basis": [
-     {
-      "law": "전기통신사업법",
-      "article": "제6조",
-      "text": "등록·신고 후 정당한 사유 없이 1년 내 서비스를 개시한다."
-     },
-     {
-      "law": "전기통신사업법",
-      "article": "제22조제6항",
-      "text": "부가통신은 신고·등록일부터 1년 이내에 사업을 시작한다."
-     }
-    ]
-   },
-   {
-    "id": "P11",
-    "name": "보편적역무·상호접속 의무 이행",
-    "lane": "사업자/신청자",
-    "stage": "G6 사후의무·제재",
-    "type": "task",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "사업자",
-    "action": "사후의무 이행",
-    "output_documents": [
-     "상호접속 협정",
-     "보편역무 손실보전 분담"
-    ],
-    "blocker": null,
-    "confidence": 0.76,
-    "legal_basis": [
-     {
-      "law": "전기통신사업법",
-      "article": "제4조·제39조",
-      "text": "보편적역무 제공·손실보전과 사업자 간 상호접속 의무를 이행한다."
-     }
-    ]
-   },
-   {
-    "id": "P12",
-    "name": "금지행위 사실조사",
-    "lane": "방송미디어통신위원회",
-    "stage": "G6 사후의무·제재",
-    "type": "task",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "방송미디어통신위원회·소속 공무원",
-    "action": "신고·인지된 금지행위에 대해 현장 출입, 장부·서류·자료 조사",
-    "output_documents": [
-     "사실조사 결과"
-    ],
-    "blocker": null,
-    "confidence": 0.78,
-    "legal_basis": [
-     {
-      "law": "전기통신사업법",
-      "article": "제51조",
-      "text": "방송미디어통신위원회는 금지행위 위반이 있다고 인정하면 소속 공무원에게 사실조사를 하게 할 수 있다."
-     }
-    ]
-   },
-   {
-    "id": "P15",
-    "name": "조치 전 의견진술 기회 부여",
-    "lane": "방송미디어통신위원회",
-    "stage": "G6 사후의무·제재",
-    "type": "notice",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "방송미디어통신위원회",
-    "receiver": "전기통신사업자·이해관계인",
-    "action": "시정조치 예정 내용을 알리고 의견서 제출·출석 진술 기회 부여",
-    "input_documents": [
-     "사실조사 결과",
-     "조치 예정 통지"
-    ],
-    "output_documents": [
-     "의견서",
-     "진술 기록"
-    ],
-    "confidence": 0.9,
-    "legal_basis": [
-     {
-      "law": "전기통신사업법",
-      "article": "제52조제3항",
-      "text": "방송미디어통신위원회는 시정조치를 명하기 전에 당사자에게 의견진술 기회를 주어야 한다."
-     }
-    ]
-   },
-   {
-    "id": "P13",
-    "name": "시정조치 명령",
-    "lane": "방송미디어통신위원회",
-    "stage": "G6 사후의무·제재",
-    "type": "gateway",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "방송미디어통신위원회",
-    "action": "금지행위 중지, 이용약관 변경, 협정 이행, 원상회복 등 시정조치 명령",
-    "condition": "금지행위 위반 여부와 조치 유형",
-    "input_documents": [
-     "사실조사 결과",
-     "의견서"
-    ],
-    "output_documents": [
-     "시정조치 명령서",
-     "과학기술정보통신부 통보"
-    ],
-    "blocker": null,
-    "confidence": 0.88,
-    "legal_basis": [
-     {
-      "law": "전기통신사업법",
-      "article": "제52조제1항부터 제4항",
-      "text": "방송미디어통신위원회는 금지행위에 시정조치를 명하고, 그 사실을 과학기술정보통신부장관에게 통보한다."
-     }
-    ]
-   },
-   {
-    "id": "P16",
-    "name": "과징금 부과·납부 관리",
-    "lane": "방송미디어통신위원회",
-    "stage": "G6 사후의무·제재",
-    "type": "notice",
-    "status": "risk",
-    "progress": 0,
-    "actor": "방송미디어통신위원회",
-    "receiver": "전기통신사업자",
-    "action": "금지행위에 과징금을 부과하고, 납부기한 미납 시 가산금·독촉 후 체납처분으로 징수",
-    "output_documents": [
-     "과징금 부과 통지",
-     "가산금·독촉 통지"
-    ],
-    "confidence": 0.86,
-    "legal_basis": [
-     {
-      "law": "전기통신사업법",
-      "article": "제53조제1항·제5항·제6항",
-      "text": "방송미디어통신위원회는 금지행위에 과징금을 부과하고, 미납 시 가산금·독촉과 국세 체납처분의 예에 따른 징수를 할 수 있다."
-     }
-    ]
-   },
-   {
-    "id": "P17",
-    "name": "사업 일부 정지 명령",
-    "lane": "과학기술정보통신부",
-    "stage": "G6 사후의무·제재",
-    "type": "notice",
-    "status": "risk",
-    "progress": 0,
-    "actor": "과학기술정보통신부장관",
-    "receiver": "시정조치 불이행 전기통신사업자",
-    "action": "정해진 기간 안에 시정조치를 이행하지 않은 사업자에게 사업 일부 정지 명령",
-    "output_documents": [
-     "사업 일부 정지 처분",
-     "이용자 보호 조치 명령"
-    ],
-    "confidence": 0.87,
-    "legal_basis": [
-     {
-      "law": "전기통신사업법",
-      "article": "제52조제5항·제7항",
-      "text": "과학기술정보통신부장관은 시정조치 불이행 사업자에게 사업 일부 정지를 명할 수 있고, 기간통신사업자에게 이용자 보호 조치를 명할 수 있다."
-     }
-    ]
-   },
-   {
-    "id": "P14",
-    "name": "설비·전파 감시",
-    "lane": "중앙전파관리소",
-    "stage": "G6 사후의무·제재",
-    "type": "task",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "중앙전파관리소",
-    "action": "설비·전파 감시",
-    "output_documents": [
-     "감시·단속 기록"
-    ],
-    "blocker": null,
-    "confidence": 0.75,
-    "legal_basis": [
-     {
-      "law": "전파법",
-      "article": "제49조(전파감시)",
-      "text": "과학기술정보통신부장관은 전파의 질서 유지를 위하여 전파를 감시하고 불법으로 개설된 무선국을 단속한다."
-     }
-    ]
-   },
-   {
-    "id": "S01",
-    "name": "등록사항 등록·공개",
-    "lane": "정보시스템",
-    "stage": "G4 등록·수리",
-    "type": "system",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "통합정보시스템",
-    "action": "등록·공개",
-    "input_documents": [
-     "등록증",
-     "신고수리 통지"
-    ],
-    "output_documents": [
-     "공개 등록부"
-    ],
-    "blocker": null,
-    "confidence": 0.72,
-    "legal_basis": [
-     {
-      "law": "전기통신사업법",
-      "article": "제6조",
-      "text": "등록·신고 사항을 정보시스템에 관리·공개한다."
-     }
-    ]
-   }
-  ],
-  "edges": [
-   {
-    "id": "E01",
-    "source": "P01",
-    "target": "P02",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E02",
-    "source": "P02",
-    "target": "P03",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E03",
-    "source": "P03",
-    "target": "P04",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E04",
-    "source": "P04",
-    "target": "P05",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E05",
-    "source": "P05",
-    "target": "P07",
-    "type": "sequence",
-    "label": "등록 결정"
-   },
-   {
-    "id": "E06",
-    "source": "P07",
-    "target": "P09",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E07",
-    "source": "P09",
-    "target": "P08",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E08",
-    "source": "P08",
-    "target": "P10",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E09",
-    "source": "P10",
-    "target": "P11",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E10",
-    "source": "P11",
-    "target": "P12",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E11",
-    "source": "P12",
-    "target": "P15",
-    "type": "sequence",
-    "label": "금지행위 위반 정황"
-   },
-   {
-    "id": "E12",
-    "source": "P15",
-    "target": "P13",
-    "type": "sequence",
-    "label": "의견진술 후 시정조치"
-   },
-   {
-    "id": "E13",
-    "source": "P15",
-    "target": "P16",
-    "type": "sequence",
-    "label": "과징금 부과 판단"
-   },
-   {
-    "id": "E14",
-    "source": "P13",
-    "target": "P17",
-    "type": "sequence",
-    "label": "명령 불이행"
-   },
-   {
-    "id": "M01",
-    "source": "P07",
-    "target": "S01",
-    "type": "message",
-    "label": "등록사항 공개"
-   },
-   {
-    "id": "M02",
-    "source": "P10",
-    "target": "P12",
-    "type": "message",
-    "label": "서비스 개시 통보"
-   },
-   {
-    "id": "M03",
-    "source": "P14",
-    "target": "P13",
-    "type": "message",
-    "label": "위반 적발 통보"
-   },
-   {
-    "id": "L01",
-    "source": "P05",
-    "target": "P06",
-    "type": "loop",
-    "label": "보완 필요"
-   },
-   {
-    "id": "L02",
-    "source": "P06",
-    "target": "P04",
-    "type": "loop",
-    "label": "보완 재제출"
-   }
-  ],
-  "warnings": [
-   {
-    "date": "2026-07-12",
-    "content": "article-descriptive 1건 해소: P14 전파법 '전파감시 관련 조문' → 제49조(전파감시). 전파법(MST 276245) 원문 확인 후 반영.",
-    "consultedMSTs": [
-     "276245"
-    ]
-   }
-  ]
- },
- "verification": {
-  "status": "article-verified",
-  "verifiedAt": "2026-07-12",
-  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
-  "scope": "법적 근거 4건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 38건 가운데 38건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
-  "sources": [
-   {
-    "law": "전기통신사업법",
-    "kind": "법률",
-    "sourceType": "statute",
-    "officialName": "전기통신사업법",
-    "lawId": "001733",
-    "mst": "286079",
-    "promulgatedOn": "2026-05-19",
-    "effectiveOn": "2026-05-19",
-    "officialUrl": "https://law.go.kr/법령/전기통신사업법"
-   },
-   {
-    "law": "전기통신사업법 시행령",
-    "kind": "대통령령",
-    "sourceType": "statute",
-    "officialName": "전기통신사업법 시행령",
-    "lawId": "004708",
-    "mst": "285721",
-    "promulgatedOn": "2026-04-28",
-    "effectiveOn": "2026-04-28",
-    "officialUrl": "https://law.go.kr/법령/전기통신사업법시행령"
-   },
-   {
-    "law": "전기통신사업 회계정리 및 보고에 관한 규정",
-    "kind": "대통령령",
-    "sourceType": "statute",
-    "officialName": "전기통신사업 회계정리 및 보고에 관한 규정",
-    "lawId": "010667",
-    "mst": "227801",
-    "promulgatedOn": "2021-01-05",
-    "effectiveOn": "2021-01-05",
-    "officialUrl": "https://law.go.kr/법령/전기통신사업회계정리및보고에관한규정"
-   },
-   {
-    "law": "전파법",
-    "kind": "법률",
-    "sourceType": "statute",
-    "officialName": "전파법",
-    "lawId": "001732",
-    "mst": "276245",
-    "promulgatedOn": "2025-10-01",
-    "effectiveOn": "2026-01-02",
-    "officialUrl": "https://law.go.kr/법령/전파법"
-   }
-  ],
-  "articleVerification": {
-   "checkedAt": "2026-07-12",
-   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
-   "citationEntries": 29,
-   "explicitCitationEntries": 27,
-   "articleReferences": 38,
-   "verifiedReferences": 38,
-   "missingReferences": 0,
-   "uncheckableReferences": 0
+    "articleVerification": {
+      "checkedAt": "2026-07-12",
+      "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+      "citationEntries": 29,
+      "explicitCitationEntries": 27,
+      "articleReferences": 38,
+      "verifiedReferences": 38,
+      "missingReferences": 0,
+      "uncheckableReferences": 0
+    }
   }
- }
 }
