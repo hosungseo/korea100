@@ -44,9 +44,9 @@ const LOOP_BELOW = 68;
 
 // ── Status styles ─────────────────────────────────────────────────────────────
 const SS: Record<string, { bg: string; border: string; dot: string; label: string; ink: string; sub: string }> = {
-  done:    { bg: "#f0fdf6", border: "#0f9f72", dot: "#0f9f72", label: "선행",  ink: "#0b3d28", sub: "#1a7a52" },
+  done:    { bg: "#f5f7f6", border: "#dde5df", dot: "#bdcbc4", label: "",     ink: "#111714", sub: "#87938d" },
   current: { bg: "#0f9f72", border: "#0f9f72", dot: "#fff",    label: "핵심", ink: "#ffffff", sub: "rgba(255,255,255,.8)" },
-  waiting: { bg: "#f5f7f6", border: "#dde5df", dot: "#bdcbc4", label: "후속",  ink: "#111714", sub: "#87938d" },
+  waiting: { bg: "#f5f7f6", border: "#dde5df", dot: "#bdcbc4", label: "",     ink: "#111714", sub: "#87938d" },
   risk:    { bg: "#fffbf0", border: "#d97706", dot: "#d97706", label: "병목",  ink: "#92400e", sub: "#d97706" },
   loop:    { bg: "#eff6ff", border: "#2563eb", dot: "#2563eb", label: "회귀",  ink: "#1e3a8a", sub: "#2563eb" },
   gateway: { bg: "#f5f7f6", border: "#c4cfc8", dot: "#87938d", label: "판단",  ink: "#111714", sub: "#87938d" },
@@ -93,11 +93,11 @@ function GateTimeline({
           const isLast = i === stages.length - 1;
           const [code, ...rest] = stage.split(" ");
           const dotBg =
-            st === "done" || st === "current" ? "#0f9f72" : st === "risk" ? "#d97706" : "transparent";
+            st === "current" ? "#0f9f72" : st === "risk" ? "#d97706" : "transparent";
           const dotBorder =
-            st === "done" || st === "current" ? "#0f9f72" : st === "risk" ? "#d97706" : "#bdcbc4";
+            st === "current" ? "#0f9f72" : st === "risk" ? "#d97706" : "#bdcbc4";
           const labelColor =
-            st === "current" || st === "done" ? "#0f9f72" : st === "risk" ? "#d97706" : "#87938d";
+            st === "current" ? "#0f9f72" : st === "risk" ? "#d97706" : "#87938d";
 
           return (
             <div
@@ -255,7 +255,9 @@ export function SwimlaneNodeCard({
       onClick={() => onClick(node)}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
-      aria-label={`${node.name} — ${c.label} — ${verificationResult.label}`}
+      aria-label={[node.name, c.label, verificationResult.label]
+        .filter(Boolean)
+        .join(" — ")}
       style={{
         "--node-card-border": c.border,
         "--node-card-shadow": isCurrent
@@ -581,7 +583,9 @@ function MobileProcessNode({
     >
       <span className="mobile-process-node-rail" aria-hidden="true" />
       <span className="mobile-process-node-topline">
-        <span className="mobile-process-node-status">{colors.label}</span>
+        {colors.label && (
+          <span className="mobile-process-node-status">{colors.label}</span>
+        )}
         <span className="mobile-process-node-actor">{node.actor}</span>
         <span className="mono">{node.id}</span>
       </span>
@@ -714,11 +718,13 @@ export function NodeDrawer({
           <div>
             <div style={{ display: "flex", gap: 6, marginBottom: 6 }}>
               <span className="mono" style={{ color: "#87938d" }}>{node.id}</span>
-              <span style={{
-                fontSize: 12, fontWeight: 600, padding: "2px 8px",
-                borderRadius: 4, background: c.bg, color: c.sub,
-                border: `1px solid ${c.border}`,
-              }}>{c.label}</span>
+              {c.label && (
+                <span style={{
+                  fontSize: 12, fontWeight: 600, padding: "2px 8px",
+                  borderRadius: 4, background: c.bg, color: c.sub,
+                  border: `1px solid ${c.border}`,
+                }}>{c.label}</span>
+              )}
             </div>
             <h2 style={{ fontSize: 20, fontWeight: 680, color: "#111714", lineHeight: 1.3, margin: 0 }}>
               {node.name}
@@ -874,11 +880,10 @@ function DrawerSection({ title, children }: { title: string; children: React.Rea
 // ── Legend ────────────────────────────────────────────────────────────────────
 export function Legend() {
   const items = [
-    { status: "done", label: "선행 단계" },
     { status: "current", label: "핵심 단계" },
-    { status: "waiting", label: "후속 단계" },
     { status: "risk", label: "병목·위험" },
     { status: "loop", label: "보완 회귀" },
+    { status: "waiting", label: "일반 단계" },
   ] as const;
 
   const edgeItems = [

@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Telemetry from "@/components/Telemetry";
 import { getInstitutionSummaries } from "@/lib/data";
+import pkg from "../../package.json";
 import "./globals.css";
+
+const SITE_VERSION = pkg.version;
+const CHANGELOG_URL =
+  "https://github.com/Milkbuttercheese2/How-Did-They-Do-All-That-Procurement-/blob/main/CHANGELOG.md";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://milkbuttercheese2.github.io/How-Did-They-Do-All-That-Procurement-";
@@ -141,6 +146,15 @@ function Footer() {
             법령 기준일 기준으로 작성된 참고자료입니다.
             <br />
             법률 자문이나 공식 유권해석이 아닙니다.
+            <br />
+            <a
+              href={CHANGELOG_URL}
+              target="_blank"
+              rel="noreferrer"
+              style={{ color: "var(--color-muted)", textDecoration: "none" }}
+            >
+              v{SITE_VERSION} · 변경 이력
+            </a>
           </p>
         </div>
         <div>

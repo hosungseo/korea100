@@ -126,6 +126,8 @@ interface ProcessNode {
   status: "done" | "current" | "waiting" | "risk" | "loop";
   // 편집 표지: done=선행, current=핵심, waiting=후속, risk=병목, loop=회귀
   // 실제 사건의 처리상태나 실시간 진행률이 아니다.
+  // 화면 규칙: current=핵심, risk=병목, loop=회귀만 강조하고 done·waiting은
+  // 배지 없이 중립으로 그린다(진행률 어휘 '완료·현재·대기' 사용 금지, web/src/lib/node-status.ts).
   progress?: number;        // 0~100 레거시 편집값, 공개 UI에서는 진행률로 표시하지 않음
   actor: string;            // 해당 단계의 주된 행위자
   action?: string;

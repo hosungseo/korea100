@@ -2,8 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import type { InstitutionSummary } from "@/lib/types";
+import type { InstitutionComparison, InstitutionSummary } from "@/lib/types";
 import styles from "./RegistryCatalog.module.css";
+
+type ComparisonIndex = Record<string, InstitutionComparison>;
+
+const COMPARE_ASSET_URL = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/data/catalog-compare.json`;
 
 interface CompareTrayProps {
   selected: InstitutionSummary[];
@@ -68,6 +72,9 @@ function CompareDialog({
   onClose: () => void;
 }) {
   const closeRef = useRef<HTMLButtonElement>(null);
+  const [comparisonIndex, setComparisonIndex] = useState<ComparisonIndex | null>(
+    null,
+  );
 
   useEffect(() => {
     closeRef.current?.focus();
@@ -83,25 +90,62 @@ function CompareDialog({
     };
   }, [onClose]);
 
+  useEffect(() => {
+    let ignore = false;
+    fetch(COMPARE_ASSET_URL)
+      .then((response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json() as Promise<ComparisonIndex>;
+      })
+      .then((index) => {
+        if (!ignore) setComparisonIndex(index);
+      })
+      .catch(() => {
+        if (!ignore) setComparisonIndex({});
+      });
+    return () => {
+      ignore = true;
+    };
+  }, []);
+
+  const comparisonOf = (item: InstitutionSummary) =>
+    comparisonIndex?.[item.slug];
+  const pending = comparisonIndex === null ? "불러오는 중…" : "—";
+
   const rows: Array<{
     label: string;
     render: (institution: InstitutionSummary) => React.ReactNode;
   }> = [
     { label: "분야 · 유형", render: (item) => `${item.category} · ${item.type}` },
-    { label: "절차 노드", render: (item) => item.processNodeCount },
-    { label: "행위자 레인", render: (item) => item.processLaneCount },
-    { label: "판단 게이트", render: (item) => item.processGatewayCount },
     {
-      label: "조문 자동대조",
-      render: (item) =>
-        item.articleReferences
-          ? `${item.verifiedReferences}/${item.articleReferences}건 확인`
-          : item.sourceCount
-            ? `공식 원문 ${item.sourceCount}건`
-            : "검증 준비 중",
+      label: "무엇을 하는 제도인가",
+      render: (item) => comparisonOf(item)?.purpose ?? pending,
     },
-    { label: "핵심 병목", render: (item) => `${item.bottleneckCount}개` },
-    { label: "법령 · 규정", render: (item) => item.laws.join(" · ") },
+    {
+      label: "누가 관여하나",
+      render: (item) => comparisonOf(item)?.stakeholders ?? pending,
+    },
+    {
+      label: "결정 권한은 어디에",
+      render: (item) =>
+        comparisonOf(item)?.authorityNames.join(" · ") ?? pending,
+    },
+    { label: "근거 법령 · 규정", render: (item) => item.laws.join(" · ") },
+    {
+      label: "실무에서 걸리는 곳",
+      render: (item) => {
+        const bottlenecks = comparisonOf(item)?.keyBottlenecks;
+        if (!bottlenecks) return pending;
+        if (bottlenecks.length === 0) return "—";
+        return (
+          <ul className={styles.compareBottlenecks}>
+            {bottlenecks.map((bottleneck) => (
+              <li key={bottleneck}>{bottleneck}</li>
+            ))}
+          </ul>
+        );
+      },
+    },
   ];
 
   return (
@@ -116,7 +160,7 @@ function CompareDialog({
         <header>
           <div>
             <span>같은 기준으로 비교</span>
-            <h2 id="compare-title">선택한 {selected.length}개 제도의 구조 지표</h2>
+            <h2 id="compare-title">선택한 {selected.length}개 제도, 무엇이 다른가</h2>
           </div>
           <button ref={closeRef} type="button" onClick={onClose} aria-label="비교 닫기">
             ×
