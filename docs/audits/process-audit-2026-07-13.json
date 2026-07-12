@@ -701,23 +701,6 @@
       "score": 5
     },
     {
-      "slug": "designated-waste-treatment",
-      "verificationStatus": "article-verified",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "backward-sequence",
-          "edge": "E04",
-          "detail": "P04(3) → P05(2) — loop 타입이어야 할 후보"
-        },
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
-      "score": 5
-    },
-    {
       "slug": "disaster-management-fund",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
@@ -1140,6 +1123,18 @@
           "rule": "no-loop",
           "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
         },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 4
+    },
+    {
+      "slug": "designated-waste-treatment",
+      "verificationStatus": "article-verified",
+      "processWarnings": 3,
+      "findings": [
         {
           "rule": "no-sublaw",
           "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
