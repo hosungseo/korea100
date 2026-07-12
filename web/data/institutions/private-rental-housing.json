@@ -1,0 +1,604 @@
+{
+ "slug": "private-rental-housing",
+ "name": "민간임대주택 등록·공급",
+ "oneLiner": "임대사업자 등록, 임대의무·임대료, 계약 신고, 말소 절차",
+ "type": "인허가형",
+ "priority": 173,
+ "whyFirst": "민간 임대 공급·혜택·말소 논쟁의 등록 제도다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "민간 임대주택을 등록·관리해 안정적 임대 공급을 도모한다.",
+  "stakeholders": "임대사업자, 임차인, 등록관청.",
+  "legalBasis": [
+   {
+    "law": "민간임대주택에 관한 특별법",
+    "articles": "제5~6·14·42~48조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "시장·군수 등",
+    "role": "등록·말소"
+   },
+   {
+    "name": "임대사업자",
+    "role": "임대"
+   }
+  ],
+  "procedure": [
+   "등록",
+   "공급",
+   "계약 신고",
+   "의무 이행",
+   "말소"
+  ],
+  "moneyFlow": "임대료, 보증 보험료, 등록 수수료.",
+  "docsFlow": "등록신청 → 등록증 → 계약·신고 → 말소.",
+  "bottlenecks": [
+   "혜택 축소",
+   "말소 매물",
+   "보증 가입"
+  ],
+  "reformPoints": [
+   "혜택·의무 균형",
+   "임차인 정보 제공",
+   "말소 예고"
+  ]
+ },
+ "related": [
+  "주택임대차 보호",
+  "전세보증금 반환보증",
+  "주택 특별공급",
+  "부동산 거래신고·임대차 신고"
+ ],
+ "fieldVerification": [
+  "등록 유형(장기·단기) 현행",
+  "세제 연계 혜택",
+  "말소 사유 목록"
+ ],
+ "process": {
+  "institution_name": "민간임대주택 등록·공급",
+  "law_name": "민간임대주택에 관한 특별법",
+  "lanes": [
+   "임대사업자",
+   "임차인",
+   "시장·군수",
+   "등록관청",
+   "보증기관",
+   "감독"
+  ],
+  "stages": [
+   "G0 요건",
+   "G1 등록",
+   "G2 공급",
+   "G3 계약",
+   "G4 의무",
+   "G5 말소"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "등록 요건·결격 확인",
+    "lane": "임대사업자",
+    "stage": "G0 요건",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "임대사업자",
+    "action": "등록 요건·결격 확인",
+    "output_documents": [
+     "요건"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제5조(임대사업자의 등록)",
+      "text": "임대사업자의 등록"
+     },
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제5조의6(임대사업자의 결격사유)",
+      "text": "임대사업자의 결격사유"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "임대사업자 등록 신청",
+    "lane": "임대사업자",
+    "stage": "G1 등록",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "임대사업자",
+    "action": "임대사업자 등록 신청",
+    "output_documents": [
+     "신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제5조(임대사업자의 등록)",
+      "text": "임대사업자의 등록"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "등록 심사",
+    "lane": "등록관청",
+    "stage": "G1 등록",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "등록관청",
+    "action": "등록 심사",
+    "output_documents": [
+     "심사"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제5조(임대사업자의 등록)",
+      "text": "임대사업자의 등록"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "보완 제출",
+    "lane": "임대사업자",
+    "stage": "G1 등록",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임대사업자",
+    "action": "보완 제출",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제5조(임대사업자의 등록)",
+      "text": "임대사업자의 등록"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "등록·부기등기",
+    "lane": "등록관청",
+    "stage": "G1 등록",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "등록관청",
+    "action": "등록·부기등기",
+    "output_documents": [
+     "등록"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제5조(임대사업자의 등록)",
+      "text": "임대사업자의 등록"
+     },
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제5조의2(등록 민간임대주택의 부기등기)",
+      "text": "등록 민간임대주택의 부기등기"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "등록 결과 수령",
+    "lane": "임대사업자",
+    "stage": "G1 등록",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임대사업자",
+    "action": "등록 결과 수령",
+    "output_documents": [
+     "등록증"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제5조(임대사업자의 등록)",
+      "text": "임대사업자의 등록"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "임차인 모집·공급",
+    "lane": "임대사업자",
+    "stage": "G2 공급",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임대사업자",
+    "action": "임차인 모집·공급",
+    "output_documents": [
+     "공급"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제42조(민간임대주택의 공급)",
+      "text": "민간임대주택의 공급"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "임대차계약·신고",
+    "lane": "임대사업자",
+    "stage": "G3 계약",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임대사업자",
+    "action": "임대차계약·신고",
+    "output_documents": [
+     "계약"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제46조(임대차계약 신고)",
+      "text": "임대차계약 신고"
+     },
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제47조(표준임대차계약서)",
+      "text": "표준임대차계약서"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "임차인 계약·설명 수령",
+    "lane": "임차인",
+    "stage": "G3 계약",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임차인",
+    "action": "임차인 계약·설명 수령",
+    "output_documents": [
+     "설명"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제48조(임대사업자의 설명의무)",
+      "text": "임대사업자의 설명의무"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "임대료·의무기간 준수",
+    "lane": "임대사업자",
+    "stage": "G4 의무",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임대사업자",
+    "action": "임대료·의무기간 준수",
+    "output_documents": [
+     "준수"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제43조(임대의무기간 및 양도 등)",
+      "text": "임대의무기간 및 양도 등"
+     },
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제44조(임대료)",
+      "text": "임대료"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "보증상품 가입",
+    "lane": "보증기관",
+    "stage": "G4 의무",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보증기관",
+    "action": "보증상품 가입",
+    "output_documents": [
+     "보증"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제14조(보증상품의 가입)",
+      "text": "보증상품의 가입"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "등록 말소",
+    "lane": "감독",
+    "stage": "G5 말소",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "감독",
+    "action": "등록 말소",
+    "output_documents": [
+     "말소"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제6조(임대사업자 등록의 말소)",
+      "text": "임대사업자 등록의 말소"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "말소 통지",
+    "lane": "임대사업자",
+    "stage": "G5 말소",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임대사업자",
+    "action": "말소 통지",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제6조(임대사업자 등록의 말소)",
+      "text": "임대사업자 등록의 말소"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "초과 임대료 반환 청구",
+    "lane": "임차인",
+    "stage": "G4 의무",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임차인",
+    "action": "초과 임대료 반환 청구",
+    "output_documents": [
+     "반환"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제44조의2(초과 임대료의 반환 청구)",
+      "text": "초과 임대료의 반환 청구"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "재신청",
+    "lane": "임대사업자",
+    "stage": "G1 등록",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임대사업자",
+    "action": "재신청",
+    "output_documents": [
+     "재신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제5조(임대사업자의 등록)",
+      "text": "임대사업자의 등록"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "주택임대관리업 연계",
+    "lane": "임대사업자",
+    "stage": "G2 공급",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임대사업자",
+    "action": "주택임대관리업 연계",
+    "output_documents": [
+     "관리업"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제7조(주택임대관리업의 등록)",
+      "text": "주택임대관리업의 등록"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P15",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P15",
+    "target": "P02",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P03",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P07",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P10",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E17",
+    "source": "P10",
+    "target": "P12",
+    "type": "sequence",
+    "label": "말소 사유"
+   }
+  ],
+  "warnings": [
+   "2026-07-12 부동산 패키지. MST 276995."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3",
+  "scope": "L3 당사자 워크스루 후 명시 조문 13건 존재 확인 13건",
+  "notes": [
+   "민간임대주택에 관한 특별법 MST 276995"
+  ],
+  "sources": [
+   {
+    "law": "민간임대주택에 관한 특별법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "민간임대주택에 관한 특별법",
+    "lawId": "000243",
+    "mst": "276995",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/민간임대주택에관한특별법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 13,
+   "explicitCitationEntries": 13,
+   "articleReferences": 13,
+   "verifiedReferences": 13,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

@@ -1,0 +1,643 @@
+{
+ "slug": "designated-waste-treatment",
+ "name": "지정폐기물 처리 허가",
+ "oneLiner": "사업장 지정폐기물의 배출·인계와 폐기물처리업·처리시설 허가·검사·전산 인계 절차",
+ "type": "인허가형",
+ "priority": 137,
+ "whyFirst": "반도체·화학 공정 가동의 필수 후방 인허가이다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "유해성이 큰 지정폐기물을 배출자 책임·처리업 허가·시설 검사·전산 인계로 안전하게 관리한다.",
+  "stakeholders": "배출 사업장, 수집·운반·처분·재활용 업체, 기후에너지환경부·지자체, 지역 주민.",
+  "legalBasis": [
+   {
+    "law": "폐기물관리법",
+    "articles": "제17·18조(사업장폐기물 배출·처리), 제25조(폐기물처리업), 제25조의3(적합성확인), 제27·28조(취소·과징금), 제29~31조(처리시설 설치·검사·관리), 제32조(의제), 제45조(인계 전산), 제46조(처리 신고)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "기후에너지환경부·지자체",
+    "role": "처리업·시설 허가·감독"
+   },
+   {
+    "name": "배출자",
+    "role": "적정 처리·인계"
+   },
+   {
+    "name": "처리업자",
+    "role": "허가 영업·시설 운영"
+   }
+  ],
+  "procedure": [
+   "폐기물 분류·지정폐기물 해당성",
+   "배출자 의무·처리계획(§17·§18)",
+   "처리업 허가 신청(§25) 또는 위탁",
+   "적합성확인·시설 설치·검사(§25의3·§29·§30)",
+   "허가·의제",
+   "인계·인수 전산(§45)",
+   "위반 시 취소·과징금·처리명령"
+  ],
+  "moneyFlow": "처리 수수료·위탁비, 허가 수수료, 과징금(§28), 반입수수료(§6).",
+  "docsFlow": "폐기물 분석 → 처리계획 → 허가신청 → 시설검사 → 허가증 → 올바로 인계.",
+  "bottlenecks": [
+   "처리시설 입지 주민 반대",
+   "허가 업종·능력 부족",
+   "전산 인계 오류",
+   "방치폐기물 책임"
+  ],
+  "reformPoints": [
+   "메가 팹 처리 능력 사전 매칭",
+   "인계 데이터 공개",
+   "적합성확인 기한"
+  ]
+ },
+ "related": [
+  "대기·수질 배출시설 허가",
+  "유해화학물질 영업·취급 허가",
+  "공장설립승인",
+  "환경영향평가"
+ ],
+ "fieldVerification": [
+  "지정폐기물 고시 목록",
+  "올바로 시스템 실무 명칭",
+  "처리업 허가 관할"
+ ],
+ "process": {
+  "institution_name": "지정폐기물 처리 허가",
+  "law_name": "폐기물관리법",
+  "lanes": [
+   "배출 사업장",
+   "처리업 신청자",
+   "환경부·지자체",
+   "시설 검사",
+   "전산 인계",
+   "지역 주민"
+  ],
+  "stages": [
+   "G0 분류",
+   "G1 배출계획",
+   "G2 허가신청",
+   "G3 시설·검사",
+   "G4 영업·인계",
+   "G5 감독"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "폐기물 분류·지정폐기물 확인",
+    "lane": "배출 사업장",
+    "stage": "G0 분류",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "배출 사업장",
+    "action": "폐기물 분류·지정폐기물 확인",
+    "output_documents": [
+     "분류"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "폐기물관리법",
+      "article": "제2조의2(폐기물의 세부분류)",
+      "text": "폐기물의 세부분류"
+     },
+     {
+      "law": "폐기물관리법",
+      "article": "제13조(폐기물의 처리 기준 등)",
+      "text": "폐기물의 처리 기준 등"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "배출자 의무·처리계획",
+    "lane": "배출 사업장",
+    "stage": "G1 배출계획",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "배출 사업장",
+    "action": "배출자 의무·처리계획",
+    "output_documents": [
+     "처리계획"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "폐기물관리법",
+      "article": "제17조(사업장폐기물배출자의 의무 등)",
+      "text": "사업장폐기물배출자의 의무 등"
+     },
+     {
+      "law": "폐기물관리법",
+      "article": "제18조(사업장폐기물의 처리)",
+      "text": "사업장폐기물의 처리"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "자체처리 vs 위탁",
+    "lane": "배출 사업장",
+    "stage": "G1 배출계획",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "배출 사업장",
+    "action": "자체처리 vs 위탁",
+    "output_documents": [
+     "경로"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "폐기물관리법",
+      "article": "제18조(사업장폐기물의 처리)",
+      "text": "사업장폐기물의 처리"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "처리업 허가 또는 위탁 계약",
+    "lane": "처리업 신청자",
+    "stage": "G2 허가신청",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "처리업 신청자",
+    "action": "폐기물처리업 허가 신청",
+    "output_documents": [
+     "신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "폐기물관리법",
+      "article": "제25조(폐기물처리업)",
+      "text": "처리업"
+     },
+     {
+      "law": "폐기물관리법",
+      "article": "제18조(사업장폐기물의 처리)",
+      "text": "처리"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "결격·적합성 심사",
+    "lane": "환경부·지자체",
+    "stage": "G2 허가신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "환경부·지자체",
+    "action": "결격·적합성 심사",
+    "output_documents": [
+     "심사"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "폐기물관리법",
+      "article": "제26조(결격 사유)",
+      "text": "결격 사유"
+     },
+     {
+      "law": "폐기물관리법",
+      "article": "제25조의3(폐기물처리업의 적합성확인)",
+      "text": "폐기물처리업의 적합성확인"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "처리시설 설치",
+    "lane": "처리업 신청자",
+    "stage": "G3 시설·검사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "처리업 신청자",
+    "action": "처리시설 설치",
+    "output_documents": [
+     "시설"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "폐기물관리법",
+      "article": "제29조(폐기물처리시설의 설치)",
+      "text": "폐기물처리시설의 설치"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "시설 검사",
+    "lane": "시설 검사",
+    "stage": "G3 시설·검사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시설 검사",
+    "action": "시설 검사",
+    "output_documents": [
+     "검사"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "폐기물관리법",
+      "article": "제30조(폐기물처리시설의 검사)",
+      "text": "폐기물처리시설의 검사"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "허가 처분·의제",
+    "lane": "환경부·지자체",
+    "stage": "G3 시설·검사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "환경부·지자체",
+    "action": "허가 처분·의제",
+    "output_documents": [
+     "허가"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "폐기물관리법",
+      "article": "제25조(폐기물처리업)",
+      "text": "폐기물처리업"
+     },
+     {
+      "law": "폐기물관리법",
+      "article": "제32조(다른 법령에 따른 허가ㆍ신고 등의 의제)",
+      "text": "다른 법령에 따른 허가ㆍ신고 등의 의제"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "보완·재신청",
+    "lane": "처리업 신청자",
+    "stage": "G2 허가신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "처리업 신청자",
+    "action": "보완·재신청",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "폐기물관리법",
+      "article": "제25조(폐기물처리업)",
+      "text": "폐기물처리업"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "인계·인수 전산 처리",
+    "lane": "전산 인계",
+    "stage": "G4 영업·인계",
+    "type": "system",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "전산 인계",
+    "action": "인계·인수 전산 처리",
+    "output_documents": [
+     "전산"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "폐기물관리법",
+      "article": "제45조(폐기물 인계ㆍ인수 내용 등의 전산 처리)",
+      "text": "폐기물 인계ㆍ인수 내용 등의 전산 처리"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "적정 처리·시설 관리",
+    "lane": "처리업 신청자",
+    "stage": "G4 영업·인계",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "처리업 신청자",
+    "action": "적정 처리·시설 관리",
+    "output_documents": [
+     "운영"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "폐기물관리법",
+      "article": "제19조(사업장폐기물처리자의 의무)",
+      "text": "사업장폐기물처리자의 의무"
+     },
+     {
+      "law": "폐기물관리법",
+      "article": "제31조(폐기물처리시설의 관리)",
+      "text": "폐기물처리시설의 관리"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "배출자 인계·확인",
+    "lane": "배출 사업장",
+    "stage": "G4 영업·인계",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "배출 사업장",
+    "action": "배출자 인계·확인",
+    "output_documents": [
+     "인계"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "폐기물관리법",
+      "article": "제18조(사업장폐기물의 처리)",
+      "text": "사업장폐기물의 처리"
+     },
+     {
+      "law": "폐기물관리법",
+      "article": "제45조(폐기물 인계ㆍ인수 내용 등의 전산 처리)",
+      "text": "폐기물 인계ㆍ인수 내용 등의 전산 처리"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "허가 취소·과징금·처리명령",
+    "lane": "환경부·지자체",
+    "stage": "G5 감독",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "환경부·지자체",
+    "action": "허가 취소·과징금·처리명령",
+    "output_documents": [
+     "처분"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "폐기물관리법",
+      "article": "제27조(허가의 취소 등)",
+      "text": "허가의 취소 등"
+     },
+     {
+      "law": "폐기물관리법",
+      "article": "제28조(폐기물처리업자에 대한 과징금 처분)",
+      "text": "폐기물처리업자에 대한 과징금 처분"
+     },
+     {
+      "law": "폐기물관리법",
+      "article": "제39조의3(폐기물처리업자 등에 대한 폐기물 처리명령)",
+      "text": "폐기물처리업자 등에 대한 폐기물 처리명령"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "처분 통지 수령",
+    "lane": "처리업 신청자",
+    "stage": "G5 감독",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "처리업 신청자",
+    "action": "처분 통지 수령",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "폐기물관리법",
+      "article": "제27조(허가의 취소 등)",
+      "text": "허가의 취소 등"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "주민 입지·안전 관심",
+    "lane": "지역 주민",
+    "stage": "G3 시설·검사",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지역 주민",
+    "action": "주민 입지·안전 관심",
+    "output_documents": [
+     "관심"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "폐기물관리법",
+      "article": "제29조(폐기물처리시설의 설치)",
+      "text": "폐기물처리시설의 설치"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "허가 결과 수령",
+    "lane": "처리업 신청자",
+    "stage": "G3 시설·검사",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "처리업 신청자",
+    "action": "허가 결과 수령",
+    "output_documents": [
+     "허가증"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "폐기물관리법",
+      "article": "제25조(폐기물처리업)",
+      "text": "폐기물처리업"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": "처리경로"
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": "허가 시"
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P05",
+    "target": "P09",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P04",
+    "type": "loop",
+    "label": "재신청"
+   },
+   {
+    "id": "E10",
+    "source": "P08",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P16",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P11",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P04",
+    "target": "P12",
+    "type": "sequence",
+    "label": "위탁 시"
+   },
+   {
+    "id": "E14",
+    "source": "P12",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P06",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P11",
+    "target": "P13",
+    "type": "sequence",
+    "label": "위반"
+   },
+   {
+    "id": "E17",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "MST 276797. 지정폐기물 고시는 fieldVerification."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3 당사자 워크스루",
+  "scope": "L3 당사자 워크스루 후 명시 조문 16건 존재 확인 16건",
+  "notes": [
+   "폐기물관리법 MST 276797"
+  ],
+  "sources": [
+   {
+    "law": "폐기물관리법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "폐기물관리법",
+    "lawId": "001771",
+    "mst": "276797",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-03-26",
+    "officialUrl": "https://law.go.kr/법령/폐기물관리법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 16,
+   "explicitCitationEntries": 16,
+   "articleReferences": 16,
+   "verifiedReferences": 16,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

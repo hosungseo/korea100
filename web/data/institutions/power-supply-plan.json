@@ -1,0 +1,600 @@
+{
+ "slug": "power-supply-plan",
+ "name": "전력수급기본계획",
+ "oneLiner": "중장기 전력수급 전망과 발전·송배전 설비 계획을 담은 전력수급기본계획 수립·확정 절차",
+ "type": "재정·평가형",
+ "priority": 153,
+ "whyFirst": "에너지고속도로·재생 전환의 상위 수급 프레임이다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "전력 수급 안정과 에너지 전환을 위해 국가 단위 중장기 설비·수요 계획을 수립한다.",
+  "stakeholders": "기후에너지환경부, 한전·발전사·거래소, 지자체·주민, 산업 수요자, 국회·시민사회.",
+  "legalBasis": [
+   {
+    "law": "전기사업법",
+    "articles": "제25조(전력수급기본계획의 수립), 제6조(보편적 공급), 제14조(공급 의무), 제47조(전력산업기반조성계획)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "기후에너지환경부",
+    "role": "계획 수립·확정"
+   },
+   {
+    "name": "전기사업자",
+    "role": "자료·이행"
+   },
+   {
+    "name": "수요·주민",
+    "role": "의견"
+   }
+  ],
+  "procedure": [
+   "수요·공급 전망",
+   "초안 작성·의견수렴",
+   "관계부처 협의",
+   "계획 확정·고시",
+   "후속 허가·투자 연계",
+   "점검·차기 계획"
+  ],
+  "moneyFlow": "설비 투자 유도, 요금·보조금 정책 연계. 계획 자체 직접 부과는 제한적.",
+  "docsFlow": "전망 자료 → 초안 → 공청·의견 → 확정본 → 고시 → 이행 점검.",
+  "bottlenecks": [
+   "전망 가정 논쟁",
+   "지역 수용성",
+   "재생 비중 vs 안정",
+   "계획-허가 단절"
+  ],
+  "reformPoints": [
+   "시나리오 공개",
+   "지역 의견 기한",
+   "허가 연계 지표"
+  ]
+ },
+ "related": [
+  "송·변전설비 건설 인허가",
+  "발전사업 허가·전력계통 접속",
+  "전기요금·공급약관 인가",
+  "해상풍력 지구·사업 선정"
+ ],
+ "fieldVerification": [
+  "최신 수급계획 차수·고시일",
+  "의견수렴 절차 지침",
+  "이행 점검 주기"
+ ],
+ "process": {
+  "institution_name": "전력수급기본계획",
+  "law_name": "전기사업법",
+  "lanes": [
+   "기후에너지환경부",
+   "전기사업자",
+   "수요 산업",
+   "지자체·주민",
+   "전문기관",
+   "국회·공개"
+  ],
+  "stages": [
+   "G0 전망",
+   "G1 초안",
+   "G2 수렴",
+   "G3 확정",
+   "G4 이행",
+   "G5 점검"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "수급 전망 착수",
+    "lane": "기후에너지환경부",
+    "stage": "G0 전망",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "기후에너지환경부",
+    "action": "수급 전망 착수",
+    "output_documents": [
+     "착수"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제25조(전력수급기본계획의 수립)",
+      "text": "전력수급기본계획의 수립"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "사업자 자료 제출",
+    "lane": "전기사업자",
+    "stage": "G0 전망",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "전기사업자",
+    "action": "사업자 자료 제출",
+    "output_documents": [
+     "자료"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제25조(전력수급기본계획의 수립)",
+      "text": "전력수급기본계획의 수립"
+     },
+     {
+      "law": "전기사업법",
+      "article": "제26조(전기설비의 시설계획 등의 신고)",
+      "text": "전기설비의 시설계획 등의 신고"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "초안 작성",
+    "lane": "전문기관",
+    "stage": "G1 초안",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "전문기관",
+    "action": "초안 작성",
+    "output_documents": [
+     "초안"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제25조(전력수급기본계획의 수립)",
+      "text": "전력수급기본계획의 수립"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "산업 수요 의견",
+    "lane": "수요 산업",
+    "stage": "G2 수렴",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "수요 산업",
+    "action": "산업 수요 의견",
+    "output_documents": [
+     "의견"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제25조(전력수급기본계획의 수립)",
+      "text": "전력수급기본계획의 수립"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "지역·주민 의견",
+    "lane": "지자체·주민",
+    "stage": "G2 수렴",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지자체·주민",
+    "action": "지역·주민 의견",
+    "output_documents": [
+     "공청"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제25조(전력수급기본계획의 수립)",
+      "text": "전력수급기본계획의 수립"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "보완 반영",
+    "lane": "기후에너지환경부",
+    "stage": "G2 수렴",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기후에너지환경부",
+    "action": "보완 반영",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제25조(전력수급기본계획의 수립)",
+      "text": "전력수급기본계획의 수립"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "재검토 요청",
+    "lane": "수요 산업",
+    "stage": "G2 수렴",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "수요 산업",
+    "action": "재검토 요청",
+    "output_documents": [
+     "재검토"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제25조(전력수급기본계획의 수립)",
+      "text": "전력수급기본계획의 수립"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "계획 확정·고시",
+    "lane": "기후에너지환경부",
+    "stage": "G3 확정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기후에너지환경부",
+    "action": "계획 확정·고시",
+    "output_documents": [
+     "고시"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제25조(전력수급기본계획의 수립)",
+      "text": "전력수급기본계획의 수립"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "확정 결과 공개",
+    "lane": "국회·공개",
+    "stage": "G3 확정",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국회·공개",
+    "action": "확정 결과 공개",
+    "output_documents": [
+     "공개"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제25조(전력수급기본계획의 수립)",
+      "text": "전력수급기본계획의 수립"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "설비·사업 이행",
+    "lane": "전기사업자",
+    "stage": "G4 이행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "전기사업자",
+    "action": "설비·사업 이행",
+    "output_documents": [
+     "이행"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제9조(전기설비의 설치 및 사업의 개시 의무)",
+      "text": "전기설비의 설치 및 사업의 개시 의무"
+     },
+     {
+      "law": "전기사업법",
+      "article": "제14조(전기공급의 의무)",
+      "text": "전기공급의 의무"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "보편적 공급 점검",
+    "lane": "기후에너지환경부",
+    "stage": "G4 이행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기후에너지환경부",
+    "action": "보편적 공급 점검",
+    "output_documents": [
+     "공급"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제6조(보편적 공급)",
+      "text": "보편적 공급"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "기반조성계획 연계",
+    "lane": "기후에너지환경부",
+    "stage": "G4 이행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기후에너지환경부",
+    "action": "기반조성계획 연계",
+    "output_documents": [
+     "기반"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제47조(전력산업기반조성계획의 수립ㆍ시행)",
+      "text": "전력산업기반조성계획의 수립ㆍ시행"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "이행 점검·차기 착수",
+    "lane": "기후에너지환경부",
+    "stage": "G5 점검",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기후에너지환경부",
+    "action": "이행 점검·차기 착수",
+    "output_documents": [
+     "점검"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제25조(전력수급기본계획의 수립)",
+      "text": "전력수급기본계획의 수립"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "주민 이의·요구",
+    "lane": "지자체·주민",
+    "stage": "G5 점검",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지자체·주민",
+    "action": "주민 이의·요구",
+    "output_documents": [
+     "이의"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제25조(전력수급기본계획의 수립)",
+      "text": "전력수급기본계획의 수립"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "초안 수정 루프",
+    "lane": "전문기관",
+    "stage": "G1 초안",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "전문기관",
+    "action": "초안 수정 루프",
+    "output_documents": [
+     "수정"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제25조(전력수급기본계획의 수립)",
+      "text": "전력수급기본계획의 수립"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "확정본 수령(사업자)",
+    "lane": "전기사업자",
+    "stage": "G3 확정",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "전기사업자",
+    "action": "확정본 수령(사업자)",
+    "output_documents": [
+     "확정본"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제25조(전력수급기본계획의 수립)",
+      "text": "전력수급기본계획의 수립"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": "추가의견"
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P15",
+    "type": "loop",
+    "label": "재작성"
+   },
+   {
+    "id": "E08",
+    "source": "P15",
+    "target": "P03",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P06",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P08",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P16",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "MST 283981 §25 중심. 세부 수립 절차는 고시 fieldVerification."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3",
+  "scope": "L3 당사자 워크스루 후 명시 조문 6건 존재 확인 6건",
+  "notes": [
+   "전기사업법 MST 283981"
+  ],
+  "sources": [
+   {
+    "law": "전기사업법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "전기사업법",
+    "lawId": "001854",
+    "mst": "283981",
+    "promulgatedOn": "2026-03-10",
+    "effectiveOn": "2026-03-10",
+    "officialUrl": "https://law.go.kr/법령/전기사업법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 6,
+   "explicitCitationEntries": 6,
+   "articleReferences": 6,
+   "verifiedReferences": 6,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

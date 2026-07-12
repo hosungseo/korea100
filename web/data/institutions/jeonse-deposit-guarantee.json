@@ -1,0 +1,617 @@
+{
+ "slug": "jeonse-deposit-guarantee",
+ "name": "전세보증금 반환보증",
+ "oneLiner": "전세보증 가입, 사고 신고, 보증금 대위변제·구상 절차",
+ "type": "권리구제형",
+ "priority": 176,
+ "whyFirst": "전세 사고 시 보증금 회수의 핵심 안전망이다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "전세보증금 미반환 위험을 보증으로 이전·완화한다.",
+  "stakeholders": "임차인, 임대인, 보증기관.",
+  "legalBasis": [
+   {
+    "law": "민간임대주택에 관한 특별법",
+    "articles": "제14조",
+    "kind": "법률"
+   },
+   {
+    "law": "주택임대차보호법",
+    "articles": "제3조의2 등",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "보증기관",
+    "role": "심사·지급"
+   },
+   {
+    "name": "임차인",
+    "role": "가입·청구"
+   }
+  ],
+  "procedure": [
+   "가입",
+   "유지",
+   "사고",
+   "지급",
+   "구상"
+  ],
+  "moneyFlow": "보증료, 대위변제금, 구상금.",
+  "docsFlow": "가입신청 → 보증서 → 사고신고 → 지급.",
+  "bottlenecks": [
+   "가입 거절",
+   "조사 지연",
+   "구상 실효"
+  ],
+  "reformPoints": [
+   "의무 가입 확대",
+   "처리 기한",
+   "상품 비교 공개"
+  ]
+ },
+ "related": [
+  "주택임대차 보호",
+  "전세사기 피해지원",
+  "민간임대주택 등록·공급",
+  "버팀목 전세자금대출"
+ ],
+ "fieldVerification": [
+  "HUG·SGI 상품 요건",
+  "가입 가능 보증금 한도",
+  "사고 접수 서류"
+ ],
+ "process": {
+  "institution_name": "전세보증금 반환보증",
+  "law_name": "민간임대주택에 관한 특별법",
+  "lanes": [
+   "임차인",
+   "임대인·사업자",
+   "보증기관",
+   "감정·조사",
+   "구상",
+   "감독"
+  ],
+  "stages": [
+   "G0 가입",
+   "G1 계약",
+   "G2 유지",
+   "G3 사고",
+   "G4 지급",
+   "G5 구상"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "보증 가입 필요성 확인",
+    "lane": "임차인",
+    "stage": "G0 가입",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "임차인",
+    "action": "보증 가입 필요성 확인",
+    "output_documents": [
+     "확인"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제14조(보증상품의 가입)",
+      "text": "보증상품의 가입"
+     },
+     {
+      "law": "주택임대차보호법",
+      "article": "제3조의2(보증금의 회수)",
+      "text": "보증금의 회수"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "보증 상품 신청",
+    "lane": "임차인",
+    "stage": "G0 가입",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "임차인",
+    "action": "보증 상품 신청",
+    "output_documents": [
+     "신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제14조(보증상품의 가입)",
+      "text": "보증상품의 가입"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "심사·가입",
+    "lane": "보증기관",
+    "stage": "G1 계약",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보증기관",
+    "action": "심사·가입",
+    "output_documents": [
+     "가입"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제14조(보증상품의 가입)",
+      "text": "보증상품의 가입"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "보완 제출",
+    "lane": "임차인",
+    "stage": "G0 가입",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임차인",
+    "action": "보완 제출",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제14조(보증상품의 가입)",
+      "text": "보증상품의 가입"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "보증서 수령",
+    "lane": "임차인",
+    "stage": "G1 계약",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임차인",
+    "action": "보증서 수령",
+    "output_documents": [
+     "보증서"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제14조(보증상품의 가입)",
+      "text": "보증상품의 가입"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "임대차 유지·갱신 통지",
+    "lane": "임차인",
+    "stage": "G2 유지",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임차인",
+    "action": "임대차 유지·갱신 통지",
+    "output_documents": [
+     "유지"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "주택임대차보호법",
+      "article": "제6조의3(계약갱신 요구 등)",
+      "text": "계약갱신 요구 등"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "사고(미반환) 발생 신고",
+    "lane": "임차인",
+    "stage": "G3 사고",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임차인",
+    "action": "사고(미반환) 발생 신고",
+    "output_documents": [
+     "사고신고"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택임대차보호법",
+      "article": "제3조의2(보증금의 회수)",
+      "text": "보증금의 회수"
+     },
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제14조(보증상품의 가입)",
+      "text": "보증상품의 가입"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "사고 조사",
+    "lane": "감정·조사",
+    "stage": "G3 사고",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "감정·조사",
+    "action": "사고 조사",
+    "output_documents": [
+     "조사"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제14조(보증상품의 가입)",
+      "text": "보증상품의 가입"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "보증금 대위 지급",
+    "lane": "보증기관",
+    "stage": "G4 지급",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보증기관",
+    "action": "보증금 대위 지급",
+    "output_documents": [
+     "지급"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제14조(보증상품의 가입)",
+      "text": "보증상품의 가입"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "지급 결과 수령",
+    "lane": "임차인",
+    "stage": "G4 지급",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임차인",
+    "action": "지급 결과 수령",
+    "output_documents": [
+     "수령"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제14조(보증상품의 가입)",
+      "text": "보증상품의 가입"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "구상권 행사",
+    "lane": "구상",
+    "stage": "G5 구상",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "구상",
+    "action": "구상권 행사",
+    "output_documents": [
+     "구상"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "주택임대차보호법",
+      "article": "제3조의2(보증금의 회수)",
+      "text": "보증금의 회수"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "임대인 변제·협의",
+    "lane": "임대인·사업자",
+    "stage": "G5 구상",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임대인·사업자",
+    "action": "임대인 변제·협의",
+    "output_documents": [
+     "변제"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택임대차보호법",
+      "article": "제3조의2(보증금의 회수)",
+      "text": "보증금의 회수"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "거절·이의",
+    "lane": "임차인",
+    "stage": "G3 사고",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임차인",
+    "action": "거절·이의",
+    "output_documents": [
+     "이의"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제14조(보증상품의 가입)",
+      "text": "보증상품의 가입"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "재신청·추가 자료",
+    "lane": "임차인",
+    "stage": "G3 사고",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임차인",
+    "action": "재신청·추가 자료",
+    "output_documents": [
+     "추가"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제14조(보증상품의 가입)",
+      "text": "보증상품의 가입"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "등록 임대 의무 가입 연계",
+    "lane": "임대인·사업자",
+    "stage": "G0 가입",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임대인·사업자",
+    "action": "등록 임대 의무 가입 연계",
+    "output_documents": [
+     "의무"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "민간임대주택에 관한 특별법",
+      "article": "제14조(보증상품의 가입)",
+      "text": "보증상품의 가입"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "전세사기 지원 연계",
+    "lane": "임차인",
+    "stage": "G4 지급",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임차인",
+    "action": "전세사기 지원 연계",
+    "output_documents": [
+     "연계"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택임대차보호법",
+      "article": "제3조의2(보증금의 회수)",
+      "text": "보증금의 회수"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P15",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E05",
+    "source": "P04",
+    "target": "P02",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P03",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P08",
+    "target": "P13",
+    "type": "sequence",
+    "label": "이의"
+   },
+   {
+    "id": "E11",
+    "source": "P13",
+    "target": "P14",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P14",
+    "target": "P08",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P10",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P09",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E17",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "2026-07-12 부동산 패키지. MST 276995."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3",
+  "scope": "L3 당사자 워크스루 후 명시 조문 3건 존재 확인 3건",
+  "notes": [
+   "민간임대주택에 관한 특별법 MST 276995"
+  ],
+  "sources": [
+   {
+    "law": "민간임대주택에 관한 특별법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "민간임대주택에 관한 특별법",
+    "lawId": "000243",
+    "mst": "276995",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/민간임대주택에관한특별법"
+   },
+   {
+    "law": "주택임대차보호법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "주택임대차보호법",
+    "lawId": "001248",
+    "mst": "276291",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/주택임대차보호법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 3,
+   "explicitCitationEntries": 3,
+   "articleReferences": 3,
+   "verifiedReferences": 3,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

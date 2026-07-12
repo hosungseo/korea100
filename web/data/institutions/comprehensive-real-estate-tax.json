@@ -1,0 +1,606 @@
+{
+ "slug": "comprehensive-real-estate-tax",
+ "name": "종합부동산세",
+ "oneLiner": "주택·토지 종부세 과세표준 산정, 부과·징수, 비과세 절차",
+ "type": "재정·예산형",
+ "priority": 181,
+ "whyFirst": "보유세·공정시장가액 논쟁의 중심 세제다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "고액 부동산 보유에 종합부동산세를 부과한다.",
+  "stakeholders": "납세자, 국세청, 지자체.",
+  "legalBasis": [
+   {
+    "law": "종합부동산세법",
+    "articles": "제3·5~6·8·11·13·16·21조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "국세청",
+    "role": "부과·징수"
+   },
+   {
+    "name": "납세자",
+    "role": "납부·불복"
+   }
+  ],
+  "procedure": [
+   "기준일",
+   "산정",
+   "부과",
+   "납부",
+   "불복"
+  ],
+  "moneyFlow": "종부세·농특세.",
+  "docsFlow": "과세자료 → 고지 → 납부 → 이의.",
+  "bottlenecks": [
+   "공시가격",
+   "다주택 판정",
+   "세 부담 급증"
+  ],
+  "reformPoints": [
+   "예측 가능성",
+   "공시 투명",
+   "실거주 차등"
+  ]
+ },
+ "related": [
+  "취득세(주택)",
+  "양도소득세(주택)",
+  "토지거래허가",
+  "투기과열지구·조정대상지역"
+ ],
+ "fieldVerification": [
+  "공정시장가액비율 현행",
+  "세율·공제 표",
+  "1세대1주택 특례"
+ ],
+ "process": {
+  "institution_name": "종합부동산세",
+  "law_name": "종합부동산세법",
+  "lanes": [
+   "납세의무자",
+   "국세청",
+   "지자체(재산세)",
+   "세무대리",
+   "이의·심판",
+   "감독"
+  ],
+  "stages": [
+   "G0 기준일",
+   "G1 자료",
+   "G2 산정",
+   "G3 부과",
+   "G4 납부",
+   "G5 불복"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "과세기준일 현황 확정",
+    "lane": "납세의무자",
+    "stage": "G0 기준일",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "납세의무자",
+    "action": "과세기준일 현황 확정",
+    "output_documents": [
+     "현황"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "종합부동산세법",
+      "article": "제3조(과세기준일)",
+      "text": "과세기준일"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "과세구분·비과세 확인",
+    "lane": "납세의무자",
+    "stage": "G0 기준일",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "납세의무자",
+    "action": "과세구분·비과세 확인",
+    "output_documents": [
+     "구분"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "종합부동산세법",
+      "article": "제5조(과세구분 및 세액)",
+      "text": "과세구분 및 세액"
+     },
+     {
+      "law": "종합부동산세법",
+      "article": "제6조(비과세 등)",
+      "text": "비과세 등"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "과세자료 연계",
+    "lane": "국세청",
+    "stage": "G1 자료",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "국세청",
+    "action": "과세자료 연계",
+    "output_documents": [
+     "자료"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "종합부동산세법",
+      "article": "제21조(과세자료의 제공)",
+      "text": "과세자료의 제공"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "과세표준 산정",
+    "lane": "국세청",
+    "stage": "G2 산정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국세청",
+    "action": "과세표준 산정",
+    "output_documents": [
+     "과표"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "종합부동산세법",
+      "article": "제8조(과세표준)",
+      "text": "과세표준"
+     },
+     {
+      "law": "종합부동산세법",
+      "article": "제13조(과세표준)",
+      "text": "과세표준"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "세액 계산",
+    "lane": "국세청",
+    "stage": "G2 산정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국세청",
+    "action": "세액 계산",
+    "output_documents": [
+     "세액"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "종합부동산세법",
+      "article": "제5조(과세구분 및 세액)",
+      "text": "과세구분 및 세액"
+     },
+     {
+      "law": "종합부동산세법",
+      "article": "제11조(과세방법)",
+      "text": "과세방법"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "부과·고지",
+    "lane": "국세청",
+    "stage": "G3 부과",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국세청",
+    "action": "부과·고지",
+    "output_documents": [
+     "고지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "종합부동산세법",
+      "article": "제16조(부과ㆍ징수 등)",
+      "text": "부과ㆍ징수 등"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "고지서 수령",
+    "lane": "납세의무자",
+    "stage": "G3 부과",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "납세의무자",
+    "action": "고지서 수령",
+    "output_documents": [
+     "고지서"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "종합부동산세법",
+      "article": "제16조(부과ㆍ징수 등)",
+      "text": "부과ㆍ징수 등"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "납부",
+    "lane": "납세의무자",
+    "stage": "G4 납부",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "납세의무자",
+    "action": "납부",
+    "output_documents": [
+     "납부"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "종합부동산세법",
+      "article": "제16조(부과ㆍ징수 등)",
+      "text": "부과ㆍ징수 등"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "이의신청",
+    "lane": "납세의무자",
+    "stage": "G5 불복",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "납세의무자",
+    "action": "이의신청",
+    "output_documents": [
+     "이의"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "종합부동산세법",
+      "article": "제16조(부과ㆍ징수 등)",
+      "text": "부과ㆍ징수 등"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "이의 재조사",
+    "lane": "국세청",
+    "stage": "G5 불복",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국세청",
+    "action": "이의 재조사",
+    "output_documents": [
+     "재조사"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "종합부동산세법",
+      "article": "제16조(부과ㆍ징수 등)",
+      "text": "부과ㆍ징수 등"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "심판·소송 검토",
+    "lane": "납세의무자",
+    "stage": "G5 불복",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "납세의무자",
+    "action": "심판·소송 검토",
+    "output_documents": [
+     "심판"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "종합부동산세법",
+      "article": "제16조(부과ㆍ징수 등)",
+      "text": "부과ㆍ징수 등"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "결과 통지",
+    "lane": "납세의무자",
+    "stage": "G5 불복",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "납세의무자",
+    "action": "결과 통지",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "종합부동산세법",
+      "article": "제16조(부과ㆍ징수 등)",
+      "text": "부과ㆍ징수 등"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "재산세 연계 확인",
+    "lane": "지자체(재산세)",
+    "stage": "G1 자료",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지자체(재산세)",
+    "action": "재산세 연계 확인",
+    "output_documents": [
+     "재산세"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "종합부동산세법",
+      "article": "제5조(과세구분 및 세액)",
+      "text": "과세구분 및 세액"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "자료 보완",
+    "lane": "납세의무자",
+    "stage": "G1 자료",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "납세의무자",
+    "action": "자료 보완",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "종합부동산세법",
+      "article": "제21조(과세자료의 제공)",
+      "text": "과세자료의 제공"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "재산정 루프",
+    "lane": "국세청",
+    "stage": "G2 산정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국세청",
+    "action": "재산정 루프",
+    "output_documents": [
+     "재산정"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "종합부동산세법",
+      "article": "제8조(과세표준)",
+      "text": "과세표준"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "대리 신고·상담",
+    "lane": "세무대리",
+    "stage": "G4 납부",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "세무대리",
+    "action": "대리 신고·상담",
+    "output_documents": [
+     "대리"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "종합부동산세법",
+      "article": "제16조(부과ㆍ징수 등)",
+      "text": "부과ㆍ징수 등"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P03",
+    "target": "P14",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E05",
+    "source": "P14",
+    "target": "P03",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P13",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P08",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P07",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P10",
+    "target": "P15",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P15",
+    "target": "P04",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E17",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "2026-07-12 부동산 패키지. MST 280417."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3",
+  "scope": "L3 당사자 워크스루 후 명시 조문 8건 존재 확인 8건",
+  "notes": [
+   "종합부동산세법 MST 280417"
+  ],
+  "sources": [
+   {
+    "law": "종합부동산세법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "종합부동산세법",
+    "lawId": "009873",
+    "mst": "280417",
+    "promulgatedOn": "2025-12-23",
+    "effectiveOn": "2026-01-01",
+    "officialUrl": "https://law.go.kr/법령/종합부동산세법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 8,
+   "explicitCitationEntries": 8,
+   "articleReferences": 8,
+   "verifiedReferences": 8,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

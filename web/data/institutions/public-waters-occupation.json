@@ -1,0 +1,642 @@
+{
+ "slug": "public-waters-occupation",
+ "name": "공유수면 점·사용 허가",
+ "oneLiner": "바다·바닷가 등 공유수면을 점용·사용하거나 매립하기 위한 허가·협의·실시계획 승인 절차",
+ "type": "인허가형",
+ "priority": 135,
+ "whyFirst": "취수·방류·항만·해저케이블·발전 입지 등 메가 인프라의 해상·연안 관문이다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "공유수면의 공공 이용과 보전을 유지하면서 산업·인프라의 점용·사용·매립을 허가·요금·원상회복으로 규율한다.",
+  "stakeholders": "점용·사용 사업자, 해양수산부·관리청, 어민·연안 주민, 환경·국방 등 협의 기관.",
+  "legalBasis": [
+   {
+    "law": "공유수면 관리 및 매립에 관한 법률",
+    "articles": "제8조(점용·사용허가), 제9조(변경신고), 제10조(협의·승인), 제11~12조(기간·기준), 제13~14조(점용료·사용료), 제17조(실시계획 승인), 제19~21조(취소·원상회복), 제28조(매립면허), 제38~39조의2(실시계획·의제)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "해양수산부·관리청",
+    "role": "점용·사용허가·매립면허"
+   },
+   {
+    "name": "사업자",
+    "role": "허가 신청·요금 납부"
+   },
+   {
+    "name": "권리자·어민",
+    "role": "손실보상·의견"
+   }
+  ],
+  "procedure": [
+   "점용·사용 목적·위치·기간 검토",
+   "점용·사용허가 신청(§8) 또는 협의·승인(§10)",
+   "허가 기준·기간 심사(§11·§12)",
+   "실시계획 승인(§17, 해당 시)",
+   "점용료·사용료 부과(§13·§14)",
+   "매립 시 면허·실시계획·의제(§28·§38·§39)",
+   "취소·공익처분·원상회복(§19~21)"
+  ],
+  "moneyFlow": "점용료·사용료(§13), 매립면허 수수료(§34). 손실보상(§32).",
+  "docsFlow": "위치도·사업계획 → 허가신청 → 실시계획 → 허가서·고시 → 요금 납부 → 준공.",
+  "bottlenecks": [
+   "어업권·연안 주민 갈등",
+   "매립 기본계획 반영 지연",
+   "다부처 협의·의제 범위",
+   "원상회복 비용"
+  ],
+  "reformPoints": [
+   "메가용 점용 사전 예약·공개",
+   "실시계획 심사 기한",
+   "요금 산정 기준 공개"
+  ]
+ },
+ "related": [
+  "공업용수·취수 허가",
+  "발전사업 허가·전력계통 접속",
+  "환경영향평가",
+  "공익사업 토지보상",
+  "산업단지 지정·개발"
+ ],
+ "fieldVerification": [
+  "관리청 위임 범위(국가/지방 관리 공유수면)",
+  "점용료 산정 고시",
+  "매립기본계획 최신 고시"
+ ],
+ "process": {
+  "institution_name": "공유수면 점·사용 허가",
+  "law_name": "공유수면 관리 및 매립에 관한 법률",
+  "lanes": [
+   "사업자",
+   "해양수산부·관리청",
+   "관계기관",
+   "어민·권리자",
+   "요금 징수",
+   "감독"
+  ],
+  "stages": [
+   "G0 계획",
+   "G1 신청",
+   "G2 심사",
+   "G3 허가·실시",
+   "G4 요금·공사",
+   "G5 사후"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "점용·사용 필요성 검토",
+    "lane": "사업자",
+    "stage": "G0 계획",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "사업자",
+    "action": "점용·사용 필요성 검토",
+    "output_documents": [
+     "계획"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공유수면 관리 및 매립에 관한 법률",
+      "article": "제2조(정의)",
+      "text": "정의"
+     },
+     {
+      "law": "공유수면 관리 및 매립에 관한 법률",
+      "article": "제5조(금지행위)",
+      "text": "금지행위"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "관리청·금지행위 확인",
+    "lane": "해양수산부·관리청",
+    "stage": "G0 계획",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "해양수산부·관리청",
+    "action": "관리청·금지행위 확인",
+    "output_documents": [
+     "관할"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공유수면 관리 및 매립에 관한 법률",
+      "article": "제4조(공유수면의 관리)",
+      "text": "공유수면의 관리"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "허가 vs 협의·승인 경로",
+    "lane": "사업자",
+    "stage": "G1 신청",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "사업자",
+    "action": "허가 vs 협의·승인 경로",
+    "output_documents": [
+     "경로"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공유수면 관리 및 매립에 관한 법률",
+      "article": "제8조(공유수면의 점용ㆍ사용허가)",
+      "text": "공유수면의 점용ㆍ사용허가"
+     },
+     {
+      "law": "공유수면 관리 및 매립에 관한 법률",
+      "article": "제10조(공유수면의 점용ㆍ사용 협의 또는 승인)",
+      "text": "공유수면의 점용ㆍ사용 협의 또는 승인"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "점용·사용허가 또는 매립 신청",
+    "lane": "사업자",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "current",
+    "progress": 35,
+    "actor": "사업자",
+    "action": "점용·사용허가 또는 매립 신청",
+    "output_documents": [
+     "신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공유수면 관리 및 매립에 관한 법률",
+      "article": "제8조(공유수면의 점용ㆍ사용허가)",
+      "text": "점용ㆍ사용허가"
+     },
+     {
+      "law": "공유수면 관리 및 매립에 관한 법률",
+      "article": "제28조(매립면허)",
+      "text": "매립면허"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "기간·기준 심사",
+    "lane": "해양수산부·관리청",
+    "stage": "G2 심사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "해양수산부·관리청",
+    "action": "기간·기준 심사",
+    "output_documents": [
+     "심사"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공유수면 관리 및 매립에 관한 법률",
+      "article": "제11조(점용ㆍ사용허가의 기간 등)",
+      "text": "점용ㆍ사용허가의 기간 등"
+     },
+     {
+      "law": "공유수면 관리 및 매립에 관한 법률",
+      "article": "제12조(점용ㆍ사용허가 등의 기준)",
+      "text": "점용ㆍ사용허가 등의 기준"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "관계기관 협의",
+    "lane": "관계기관",
+    "stage": "G2 심사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "관계기관",
+    "action": "관계기관 협의",
+    "output_documents": [
+     "협의"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공유수면 관리 및 매립에 관한 법률",
+      "article": "제10조(공유수면의 점용ㆍ사용 협의 또는 승인)",
+      "text": "공유수면의 점용ㆍ사용 협의 또는 승인"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "권리자·어민 의견·보상 협의",
+    "lane": "어민·권리자",
+    "stage": "G2 심사",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "어민·권리자",
+    "action": "권리자·어민 의견·보상 협의",
+    "output_documents": [
+     "의견"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공유수면 관리 및 매립에 관한 법률",
+      "article": "제31조(공유수면매립 관련 권리자의 범위)",
+      "text": "공유수면매립 관련 권리자의 범위"
+     },
+     {
+      "law": "공유수면 관리 및 매립에 관한 법률",
+      "article": "제32조(매립으로 인한 손실방지와 보상 등)",
+      "text": "매립으로 인한 손실방지와 보상 등"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "허가 처분",
+    "lane": "해양수산부·관리청",
+    "stage": "G3 허가·실시",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "해양수산부·관리청",
+    "action": "허가 처분",
+    "output_documents": [
+     "허가서"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공유수면 관리 및 매립에 관한 법률",
+      "article": "제8조(공유수면의 점용ㆍ사용허가)",
+      "text": "공유수면의 점용ㆍ사용허가"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "실시계획 승인",
+    "lane": "해양수산부·관리청",
+    "stage": "G3 허가·실시",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "해양수산부·관리청",
+    "action": "실시계획 승인",
+    "output_documents": [
+     "실시계획"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공유수면 관리 및 매립에 관한 법률",
+      "article": "제17조(점용ㆍ사용 실시계획의 승인 등)",
+      "text": "점용ㆍ사용 실시계획의 승인 등"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "매립실시계획·의제 협의",
+    "lane": "해양수산부·관리청",
+    "stage": "G3 허가·실시",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업자",
+    "action": "매립면허(해당 시)",
+    "output_documents": [
+     "면허"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공유수면 관리 및 매립에 관한 법률",
+      "article": "제28조(매립면허)",
+      "text": "매립면허"
+     },
+     {
+      "law": "공유수면 관리 및 매립에 관한 법률",
+      "article": "제38조(공유수면매립실시계획의 승인)",
+      "text": "공유수면매립실시계획의 승인"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "점용료·사용료 납부",
+    "lane": "요금 징수",
+    "stage": "G4 요금·공사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "요금 징수",
+    "action": "점용료·사용료 납부",
+    "output_documents": [
+     "요금"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공유수면 관리 및 매립에 관한 법률",
+      "article": "제13조(공유수면 점용료ㆍ사용료의 징수)",
+      "text": "공유수면 점용료ㆍ사용료의 징수"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "공사·점용 실시",
+    "lane": "사업자",
+    "stage": "G4 요금·공사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업자",
+    "action": "공사·점용 실시",
+    "output_documents": [
+     "공사"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공유수면 관리 및 매립에 관한 법률",
+      "article": "제17조(점용ㆍ사용 실시계획의 승인 등)",
+      "text": "점용ㆍ사용 실시계획의 승인 등"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "변경신고",
+    "lane": "사업자",
+    "stage": "G4 요금·공사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업자",
+    "action": "변경신고",
+    "output_documents": [
+     "변경"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공유수면 관리 및 매립에 관한 법률",
+      "article": "제9조(점용ㆍ사용허가 사항의 변경신고)",
+      "text": "점용ㆍ사용허가 사항의 변경신고"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "취소·원상회복",
+    "lane": "감독",
+    "stage": "G5 사후",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "감독",
+    "action": "취소·원상회복",
+    "output_documents": [
+     "처분"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공유수면 관리 및 매립에 관한 법률",
+      "article": "제19조(점용ㆍ사용허가 등의 취소 등)",
+      "text": "점용ㆍ사용허가 등의 취소 등"
+     },
+     {
+      "law": "공유수면 관리 및 매립에 관한 법률",
+      "article": "제21조(원상회복 등)",
+      "text": "원상회복 등"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "처분 통지 수령",
+    "lane": "사업자",
+    "stage": "G5 사후",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업자",
+    "action": "처분 통지 수령",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공유수면 관리 및 매립에 관한 법률",
+      "article": "제19조(점용ㆍ사용허가 등의 취소 등)",
+      "text": "점용ㆍ사용허가 등의 취소 등"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "보완·재신청",
+    "lane": "사업자",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업자",
+    "action": "보완·재신청",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공유수면 관리 및 매립에 관한 법률",
+      "article": "제12조(점용ㆍ사용허가 등의 기준)",
+      "text": "점용ㆍ사용허가 등의 기준"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": "신청"
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P05",
+    "target": "P16",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E09",
+    "source": "P16",
+    "target": "P04",
+    "type": "loop",
+    "label": "재신청"
+   },
+   {
+    "id": "E10",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": "매립 시"
+   },
+   {
+    "id": "E12",
+    "source": "P09",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": "변경 시"
+   },
+   {
+    "id": "E16",
+    "source": "P12",
+    "target": "P14",
+    "type": "sequence",
+    "label": "위반·공익"
+   },
+   {
+    "id": "E17",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E18",
+    "source": "P08",
+    "target": "P15",
+    "type": "sequence",
+    "label": "결과 통지"
+   }
+  ],
+  "warnings": [
+   "L3 MST 259903. 매립 분기는 점용과 병행 가능."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3 당사자 워크스루",
+  "scope": "L3 당사자 워크스루 후 명시 조문 16건 존재 확인 16건",
+  "notes": [
+   "공유수면법 MST 259903",
+   "매립·점용 경로 병기"
+  ],
+  "sources": [
+   {
+    "law": "공유수면 관리 및 매립에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "공유수면 관리 및 매립에 관한 법률",
+    "lawId": "011186",
+    "mst": "259903",
+    "promulgatedOn": "2024-02-06",
+    "effectiveOn": "2025-08-07",
+    "officialUrl": "https://law.go.kr/법령/공유수면관리및매립에관한법률"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 16,
+   "explicitCitationEntries": 16,
+   "articleReferences": 16,
+   "verifiedReferences": 16,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

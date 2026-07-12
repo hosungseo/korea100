@@ -1,0 +1,595 @@
+{
+ "slug": "renewable-rps-rec",
+ "name": "신재생 공급의무·REC",
+ "oneLiner": "발전사업자 등의 신·재생에너지 공급의무(RPS), 공급인증서(REC) 발급·거래, 불이행 과징금 절차",
+ "type": "인허가형",
+ "priority": 150,
+ "whyFirst": "재생에너지 대전환의 시장·의무 핵심 장치다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "의무공급비율로 신·재생 공급을 강제하고 REC 거래로 이행 비용을 분담·조정한다.",
+  "stakeholders": "공급의무자(발전사업자 등), 기후에너지환경부·산업통상부, 공급인증기관, REC 구매자, 국민.",
+  "legalBasis": [
+   {
+    "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+    "articles": "제12조의5(공급의무화), 제12조의6(과징금), 제12조의7~10(공급인증서·기관), 제24조(청문)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "기후에너지환경부·산업통상부",
+    "role": "의무·과징금·정책"
+   },
+   {
+    "name": "공급인증기관",
+    "role": "REC 발급·관리"
+   },
+   {
+    "name": "공급의무자",
+    "role": "이행·구매"
+   }
+  ],
+  "procedure": [
+   "공급의무 해당성 확인",
+   "의무량 산정·이행계획",
+   "발전·구매로 이행",
+   "REC 발급·거래",
+   "이행 실적 제출",
+   "불이행 시 과징금·청문"
+  ],
+  "moneyFlow": "REC 구매비, 과징금(§12의6), 인증 수수료.",
+  "docsFlow": "의무 고지 → 이행계획 → 발전실적 → REC → 실적보고 → 과징금 처분.",
+  "bottlenecks": [
+   "REC 가격 변동",
+   "의무비율 상향 부담",
+   "인증 지연",
+   "중소 발전 접근성"
+  ],
+  "reformPoints": [
+   "의무·가격 신호 예측 가능성",
+   "인증 처리 기한",
+   "이행 수단 다양화"
+  ]
+ },
+ "related": [
+  "발전사업 허가·전력계통 접속",
+  "전력시장 거래·정산",
+  "분산에너지사업 등록·전력거래",
+  "해상풍력 지구·사업 선정"
+ ],
+ "fieldVerification": [
+  "연도별 의무공급비율 고시",
+  "REC 현물·계약 시장 규칙",
+  "공급인증기관 지정 현황"
+ ],
+ "process": {
+  "institution_name": "신재생 공급의무·REC",
+  "law_name": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+  "lanes": [
+   "공급의무자",
+   "기후부·산업부",
+   "공급인증기관",
+   "REC 시장",
+   "검증·실적",
+   "감독·청문"
+  ],
+  "stages": [
+   "G0 의무",
+   "G1 이행계획",
+   "G2 공급·인증",
+   "G3 거래",
+   "G4 실적",
+   "G5 제재"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "공급의무 해당성 확인",
+    "lane": "공급의무자",
+    "stage": "G0 의무",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "공급의무자",
+    "action": "공급의무 해당성 확인",
+    "output_documents": [
+     "해당성"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제12조의5(신ㆍ재생에너지 공급의무화 등)",
+      "text": "신ㆍ재생에너지 공급의무화 등"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "의무량·기준 고시 확인",
+    "lane": "기후부·산업부",
+    "stage": "G0 의무",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "기후부·산업부",
+    "action": "의무량·기준 고시 확인",
+    "output_documents": [
+     "고시"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제12조의5(신ㆍ재생에너지 공급의무화 등)",
+      "text": "신ㆍ재생에너지 공급의무화 등"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "이행계획 수립",
+    "lane": "공급의무자",
+    "stage": "G1 이행계획",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "공급의무자",
+    "action": "이행계획 수립",
+    "output_documents": [
+     "계획"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제12조의5(신ㆍ재생에너지 공급의무화 등)",
+      "text": "신ㆍ재생에너지 공급의무화 등"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "발전·구매 이행",
+    "lane": "공급의무자",
+    "stage": "G2 공급·인증",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "공급의무자",
+    "action": "발전·구매 이행",
+    "output_documents": [
+     "이행"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제12조의5(신ㆍ재생에너지 공급의무화 등)",
+      "text": "신ㆍ재생에너지 공급의무화 등"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "공급인증서 발급 신청",
+    "lane": "공급의무자",
+    "stage": "G2 공급·인증",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "공급의무자",
+    "action": "공급인증서 발급 신청",
+    "output_documents": [
+     "신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제12조의7(신ㆍ재생에너지 공급인증서 등)",
+      "text": "신ㆍ재생에너지 공급인증서 등"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "REC 발급·관리",
+    "lane": "공급인증기관",
+    "stage": "G2 공급·인증",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "공급인증기관",
+    "action": "REC 발급·관리",
+    "output_documents": [
+     "REC"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제12조의8(공급인증기관의 지정 등)",
+      "text": "공급인증기관의 지정 등"
+     },
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제12조의9(공급인증기관의 업무 등)",
+      "text": "공급인증기관의 업무 등"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "보완·재신청",
+    "lane": "공급의무자",
+    "stage": "G2 공급·인증",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "공급의무자",
+    "action": "보완·재신청",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제12조의7(신ㆍ재생에너지 공급인증서 등)",
+      "text": "신ㆍ재생에너지 공급인증서 등"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "REC 거래",
+    "lane": "REC 시장",
+    "stage": "G3 거래",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "REC 시장",
+    "action": "REC 거래",
+    "output_documents": [
+     "거래"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제12조의7(신ㆍ재생에너지 공급인증서 등)",
+      "text": "신ㆍ재생에너지 공급인증서 등"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "이행 실적 제출",
+    "lane": "공급의무자",
+    "stage": "G4 실적",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "공급의무자",
+    "action": "이행 실적 제출",
+    "output_documents": [
+     "실적"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제12조의5(신ㆍ재생에너지 공급의무화 등)",
+      "text": "신ㆍ재생에너지 공급의무화 등"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "실적 확인",
+    "lane": "검증·실적",
+    "stage": "G4 실적",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "검증·실적",
+    "action": "실적 확인",
+    "output_documents": [
+     "확인"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제12조의9(공급인증기관의 업무 등)",
+      "text": "공급인증기관의 업무 등"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "이행 완료 통지",
+    "lane": "공급의무자",
+    "stage": "G4 실적",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "공급의무자",
+    "action": "이행 완료 통지",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제12조의5(신ㆍ재생에너지 공급의무화 등)",
+      "text": "신ㆍ재생에너지 공급의무화 등"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "과징금 부과",
+    "lane": "감독·청문",
+    "stage": "G5 제재",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "감독·청문",
+    "action": "과징금 부과",
+    "output_documents": [
+     "과징금"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제12조의6(신ㆍ재생에너지 공급 불이행에 대한 과징금)",
+      "text": "신ㆍ재생에너지 공급 불이행에 대한 과징금"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "청문",
+    "lane": "감독·청문",
+    "stage": "G5 제재",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "감독·청문",
+    "action": "청문",
+    "output_documents": [
+     "청문"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제24조(청문)",
+      "text": "청문"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "처분 통지 수령",
+    "lane": "공급의무자",
+    "stage": "G5 제재",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "공급의무자",
+    "action": "처분 통지 수령",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제12조의6(신ㆍ재생에너지 공급 불이행에 대한 과징금)",
+      "text": "신ㆍ재생에너지 공급 불이행에 대한 과징금"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "인증기관 지정 취소(해당)",
+    "lane": "기후부·산업부",
+    "stage": "G5 제재",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기후부·산업부",
+    "action": "인증기관 지정 취소(해당)",
+    "output_documents": [
+     "취소"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제12조의10(공급인증기관 지정의 취소 등)",
+      "text": "공급인증기관 지정의 취소 등"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "의무 불이행 판단",
+    "lane": "기후부·산업부",
+    "stage": "G4 실적",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기후부·산업부",
+    "action": "의무 불이행 판단",
+    "output_documents": [
+     "판단"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제12조의6(신ㆍ재생에너지 공급 불이행에 대한 과징금)",
+      "text": "신ㆍ재생에너지 공급 불이행에 대한 과징금"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P05",
+    "type": "loop",
+    "label": "재신청"
+   },
+   {
+    "id": "E08",
+    "source": "P06",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P10",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P16",
+    "target": "P11",
+    "type": "sequence",
+    "label": "이행"
+   },
+   {
+    "id": "E13",
+    "source": "P16",
+    "target": "P12",
+    "type": "sequence",
+    "label": "불이행"
+   },
+   {
+    "id": "E14",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P15",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "MST 268793. 에너지 대전환 패키지."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3",
+  "scope": "L3 당사자 워크스루 후 명시 조문 7건 존재 확인 7건",
+  "notes": [
+   "신재생법 MST 268793"
+  ],
+  "sources": [
+   {
+    "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+    "lawId": "000299",
+    "mst": "268793",
+    "promulgatedOn": "2025-01-31",
+    "effectiveOn": "2026-02-01",
+    "officialUrl": "https://law.go.kr/법령/신에너지및재생에너지개발·이용·보급촉진법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 7,
+   "explicitCitationEntries": 7,
+   "articleReferences": 7,
+   "verifiedReferences": 7,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

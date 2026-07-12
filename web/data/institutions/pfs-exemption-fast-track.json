@@ -1,0 +1,637 @@
+{
+ "slug": "pfs-exemption-fast-track",
+ "name": "예타 특례·신속인허가",
+ "oneLiner": "국가재정법상 예비타당성조사 면제·간소화와 산업·입지 인허가 신속 처리를 묶어 대형 투자의 행정 리드타임을 줄이는 제도군",
+ "type": "재정·평가형",
+ "priority": 130,
+ "whyFirst": "메가프로젝트 ‘속도전’의 재정·인허가 특례를 한 장에 보여준다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "시급·전략 사업의 사전 검증 부담을 조정하면서도 최소 통제를 유지하고, 인허가 병목을 단축한다.",
+  "stakeholders": "기획예산처, 주관 부처, 지자체, 사업시행자, 국회·감사 통제 주체, 주민.",
+  "legalBasis": [
+   {
+    "law": "국가재정법",
+    "articles": "제28조, 제31·32조, 제38조·제38조의2, 제50조, 제83조, 제85조의8, 제100조",
+    "kind": "법률"
+   },
+   {
+    "law": "국가재정법 시행령",
+    "articles": "제13조(예타), 제13조의2(면제 절차), 제22조(타당성재조사)",
+    "kind": "대통령령"
+   },
+   {
+    "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+    "articles": "제19조(인허가 신속처리), 제23조(민원 신속처리)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "기획예산처",
+    "role": "예타 운용·면제 협의"
+   },
+   {
+    "name": "주관 부처",
+    "role": "사업 신청·신속 인허가 창구"
+   },
+   {
+    "name": "지자체",
+    "role": "인허가 병행"
+   }
+  ],
+  "procedure": [
+   "중기사업계획·대규모 사업 해당성 검토(§28·§38·§50)",
+   "예타 실시 또는 면제 절차 선택(§38, 영 §13·§13조의2)",
+   "예타 결과 자료 공개(§38조의2)",
+   "예산요구·예산안 편성(§31·§32)",
+   "총사업비 관리(§50)",
+   "해당 시 인허가 신속처리(첨단전략산업법 §19·§23)",
+   "집행 및 성과평가(§85조의8)",
+   "국회·감사 통제·타당성재조사(§100·§50)"
+  ],
+  "moneyFlow": "예타 비용, 본사업 예산·국고 지원. 면제 시에도 사후 성과 평가 연계(현장 검증 필요).",
+  "docsFlow": "사업계획 → 예타/면제 신청 → 심의서 → 예산안 → 인허가 의제 문서 → 사후평가.",
+  "bottlenecks": [
+   "면제 요건의 확대 해석 논란",
+   "속도전 vs 재정 통제 충돌",
+   "인허가 의제 범위 불명확",
+   "사후 평가 부실"
+  ],
+  "reformPoints": [
+   "면제 사유·실적 공개",
+   "신속 처리와 환경·주민 절차 병행 규칙",
+   "사후 성과·회수 장치 강화"
+  ]
+ },
+ "related": [
+  "예비타당성조사",
+  "국가예산 편성",
+  "국가첨단전략산업 특화단지 지정·지원",
+  "국고보조금",
+  "감사원 감사"
+ ],
+ "fieldVerification": [
+  "예타 면제 법정 요건 최신 목록",
+  "첨단전략산업 인허가 의제 처리 실무 지침",
+  "사후평가 의무 여부"
+ ],
+ "process": {
+  "institution_name": "예타 특례·신속인허가",
+  "law_name": "국가재정법",
+  "lanes": [
+   "사업 주관부처",
+   "기획예산처",
+   "전문기관",
+   "사업시행자",
+   "인허가 기관·지자체",
+   "국회·국민(공개)"
+  ],
+  "stages": [
+   "G0 해당성",
+   "G1 예타·특례",
+   "G2 재정",
+   "G3 신속인허가",
+   "G4 집행",
+   "G5 사후·공개"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "중기사업계획 반영",
+    "lane": "사업 주관부처",
+    "stage": "G0 해당성",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "사업 주관부처",
+    "action": "중기사업계획 반영",
+    "output_documents": [
+     "중기계획"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국가재정법",
+      "article": "제28조(중기사업계획서의 제출)",
+      "text": "중기사업계획서의 제출"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "대규모 사업 해당성 검토",
+    "lane": "사업 주관부처",
+    "stage": "G0 해당성",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "사업 주관부처",
+    "action": "대규모 사업 해당성 검토",
+    "output_documents": [
+     "검토"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국가재정법",
+      "article": "제38조(예비타당성조사)",
+      "text": "예비타당성조사"
+     },
+     {
+      "law": "국가재정법",
+      "article": "제50조(총사업비의 관리)",
+      "text": "총사업비의 관리"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "예타 vs 면제 경로 선택",
+    "lane": "사업 주관부처",
+    "stage": "G1 예타·특례",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "사업 주관부처",
+    "action": "예타 vs 면제 경로 선택",
+    "output_documents": [
+     "경로"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국가재정법",
+      "article": "제38조(예비타당성조사)",
+      "text": "예비타당성조사"
+     },
+     {
+      "law": "국가재정법 시행령",
+      "article": "제13조의2(예비타당성조사의 면제 절차)",
+      "text": "예비타당성조사의 면제 절차"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "예타 수행",
+    "lane": "전문기관",
+    "stage": "G1 예타·특례",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "전문기관",
+    "action": "예타 수행",
+    "output_documents": [
+     "예타 보고서"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국가재정법",
+      "article": "제38조(예비타당성조사)",
+      "text": "예비타당성조사"
+     },
+     {
+      "law": "국가재정법 시행령",
+      "article": "제13조(예비타당성조사)",
+      "text": "예비타당성조사"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "예타 면제 절차",
+    "lane": "기획예산처",
+    "stage": "G1 예타·특례",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "기획예산처",
+    "action": "예타 면제 절차",
+    "output_documents": [
+     "면제 결정"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국가재정법 시행령",
+      "article": "제13조의2(예비타당성조사의 면제 절차)",
+      "text": "예비타당성조사의 면제 절차"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "예타 결과 자료 공개",
+    "lane": "국회·국민(공개)",
+    "stage": "G1 예타·특례",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국회·국민(공개)",
+    "action": "예타 결과 자료 공개",
+    "output_documents": [
+     "공개 자료"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국가재정법",
+      "article": "제38조의2(예비타당성조사 결과 관련 자료의 공개)",
+      "text": "예비타당성조사 결과 관련 자료의 공개"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "예산요구·예산안 편성",
+    "lane": "기획예산처",
+    "stage": "G2 재정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기획예산처",
+    "action": "예산요구·예산안 편성",
+    "output_documents": [
+     "예산안"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국가재정법",
+      "article": "제31조(예산요구서의 제출)",
+      "text": "예산요구서의 제출"
+     },
+     {
+      "law": "국가재정법",
+      "article": "제32조(예산안의 편성)",
+      "text": "예산안의 편성"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "총사업비 관리",
+    "lane": "기획예산처",
+    "stage": "G2 재정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기획예산처",
+    "action": "총사업비 관리",
+    "output_documents": [
+     "총사업비"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국가재정법",
+      "article": "제50조(총사업비의 관리)",
+      "text": "총사업비의 관리"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "인허가 신속처리 신청",
+    "lane": "사업시행자",
+    "stage": "G3 신속인허가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업시행자",
+    "action": "인허가 신속처리 신청",
+    "output_documents": [
+     "신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+      "article": "제19조(다른 법률에 따른 인ㆍ허가등의 신속처리 특례)",
+      "text": "다른 법률에 따른 인ㆍ허가등의 신속처리 특례"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "인허가·지자체 처리(보완 요청 가능)",
+    "lane": "인허가 기관·지자체",
+    "stage": "G3 신속인허가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "인허가 기관·지자체",
+    "action": "인허가·지자체 처리",
+    "output_documents": [
+     "인허가"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+      "article": "제19조(다른 법률에 따른 인ㆍ허가등의 신속처리 특례)",
+      "text": "다른 법률에 따른 인ㆍ허가등의 신속처리 특례"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "처리계획·결과 수령",
+    "lane": "사업시행자",
+    "stage": "G4 집행",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업시행자",
+    "action": "처리계획·결과 수령",
+    "output_documents": [
+     "통보"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+      "article": "제19조(다른 법률에 따른 인ㆍ허가등의 신속처리 특례)",
+      "text": "다른 법률에 따른 인ㆍ허가등의 신속처리 특례"
+     }
+    ],
+    "deadline": "§19: 계획 15일·결과 15일·60일 의제"
+   },
+   {
+    "id": "P13",
+    "name": "사업 집행",
+    "lane": "사업시행자",
+    "stage": "G4 집행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업시행자",
+    "action": "사업 집행",
+    "output_documents": [
+     "집행"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국가재정법",
+      "article": "제50조(총사업비의 관리)",
+      "text": "총사업비의 관리"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "성과평가",
+    "lane": "사업 주관부처",
+    "stage": "G5 사후·공개",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업 주관부처",
+    "action": "성과평가",
+    "output_documents": [
+     "성과"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국가재정법",
+      "article": "제85조의8(재정사업 성과평가)",
+      "text": "재정사업 성과평가"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "국회·감사 통제",
+    "lane": "국회·국민(공개)",
+    "stage": "G5 사후·공개",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국회·국민(공개)",
+    "action": "국회·감사 통제",
+    "output_documents": [
+     "감사"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국가재정법",
+      "article": "제100조(예산ㆍ기금의 불법지출에 대한 국민감시)",
+      "text": "예산ㆍ기금의 불법지출에 대한 국민감시"
+     },
+     {
+      "law": "국가재정법",
+      "article": "제83조(국정감사)",
+      "text": "국정감사"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "타당성재조사",
+    "lane": "기획예산처",
+    "stage": "G5 사후·공개",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기획예산처",
+    "action": "타당성재조사",
+    "output_documents": [
+     "재조사"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국가재정법",
+      "article": "제50조(총사업비의 관리)",
+      "text": "총사업비의 관리"
+     },
+     {
+      "law": "국가재정법 시행령",
+      "article": "제22조(타당성재조사)",
+      "text": "타당성재조사"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": "예타"
+   },
+   {
+    "id": "E04",
+    "source": "P03",
+    "target": "P05",
+    "type": "sequence",
+    "label": "면제"
+   },
+   {
+    "id": "E05",
+    "source": "P04",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P09",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P11",
+    "target": "P09",
+    "type": "loop",
+    "label": "보완·재신청"
+   },
+   {
+    "id": "E12",
+    "source": "P11",
+    "target": "P10",
+    "type": "sequence",
+    "label": "처리 완료"
+   },
+   {
+    "id": "E13",
+    "source": "P10",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P14",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "2026-07-12 L3: 국민·국회 페르소나로 예타 결과 공개(§38의2) 노드 분리, 사업시행자 신속처리 결과 수령·기한 명시. MSTs 286517,285795,286519.",
+   "L3 페르소나(국민): 공개·감사 레인 강화.",
+   "L3 페르소나(사업시행자): §19 회신·통보 수령을 별도 노드."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3 당사자 워크스루",
+  "scope": "L3 보강 후 명시 조문 34건 중 존재 확인 34건",
+  "notes": [
+   "L3 예타·신속: 공개·수령 권리",
+   "MSTs: 286517,285795,286519"
+  ],
+  "sources": [
+   {
+    "law": "국가재정법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국가재정법",
+    "lawId": "010301",
+    "mst": "286517",
+    "promulgatedOn": "2026-06-02",
+    "effectiveOn": "2026-06-02",
+    "officialUrl": "https://law.go.kr/법령/국가재정법"
+   },
+   {
+    "law": "국가재정법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "국가재정법 시행령",
+    "lawId": "010374",
+    "mst": "285795",
+    "promulgatedOn": "2026-05-06",
+    "effectiveOn": "2026-05-06",
+    "officialUrl": "https://law.go.kr/법령/국가재정법시행령"
+   },
+   {
+    "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+    "lawId": "014238",
+    "mst": "286519",
+    "promulgatedOn": "2026-06-02",
+    "effectiveOn": "2026-06-02",
+    "officialUrl": "https://law.go.kr/법령/국가첨단전략산업경쟁력강화및보호에관한특별조치법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차",
+   "citationEntries": 34,
+   "explicitCitationEntries": 34,
+   "articleReferences": 34,
+   "verifiedReferences": 34,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

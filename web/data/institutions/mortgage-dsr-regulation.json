@@ -1,0 +1,581 @@
+{
+ "slug": "mortgage-dsr-regulation",
+ "name": "LTV·DTI·DSR 대출규제",
+ "oneLiner": "주택담보대출 담보인정비율·총부채원리금상환비율 등 대출 한도 규제 적용 절차",
+ "type": "규제특례형",
+ "priority": 184,
+ "whyFirst": "주담대·전세대출 유동성 논쟁의 금융 규제 축이다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "가계부채와 부동산 과열을 막기 위해 주택 관련 대출 한도를 규제한다.",
+  "stakeholders": "차주, 은행, 금융당국, 국토부.",
+  "legalBasis": [
+   {
+    "law": "주택법",
+    "articles": "제63·63의2조(규제지역 연계)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "금융위·금감원",
+    "role": "규제"
+   },
+   {
+    "name": "금융회사",
+    "role": "심사"
+   }
+  ],
+  "procedure": [
+   "확인",
+   "신청",
+   "한도",
+   "실행"
+  ],
+  "moneyFlow": "대출원금·이자.",
+  "docsFlow": "신청 → 증빙 → 약정.",
+  "bottlenecks": [
+   "풍선효과",
+   "소득 증빙"
+  ],
+  "reformPoints": [
+   "규제 공개",
+   "서민 대출 분리"
+  ]
+ },
+ "related": [
+  "투기과열지구·조정대상지역",
+  "버팀목 전세자금대출",
+  "전세보증금 반환보증",
+  "주택담보·전세대출 보증"
+ ],
+ "fieldVerification": [
+  "LTV·DSR 비율 행정지도 현행",
+  "스트레스 DSR",
+  "전세대출 DSR 산입 여부"
+ ],
+ "process": {
+  "institution_name": "LTV·DTI·DSR 대출규제",
+  "law_name": "주택법",
+  "lanes": [
+   "차주",
+   "금융회사",
+   "금융위·금감원",
+   "국토부 연계",
+   "보증기관",
+   "감독"
+  ],
+  "stages": [
+   "G0 상품",
+   "G1 신청",
+   "G2 한도",
+   "G3 심사",
+   "G4 실행",
+   "G5 사후"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "규제지역·상품 확인",
+    "lane": "차주",
+    "stage": "G0 상품",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "차주",
+    "action": "규제지역·상품 확인",
+    "output_documents": [
+     "확인"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "대출 상담",
+    "lane": "금융회사",
+    "stage": "G0 상품",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "금융회사",
+    "action": "대출 상담",
+    "output_documents": [
+     "상담"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "대출 신청",
+    "lane": "차주",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "차주",
+    "action": "대출 신청",
+    "output_documents": [
+     "신청"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "LTV·DTI·DSR 한도 산정",
+    "lane": "금융회사",
+    "stage": "G2 한도",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "금융회사",
+    "action": "LTV·DTI·DSR 한도 산정",
+    "output_documents": [
+     "한도"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "소득·부채 증빙",
+    "lane": "차주",
+    "stage": "G2 한도",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "차주",
+    "action": "소득·부채 증빙",
+    "output_documents": [
+     "증빙"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "보완 제출",
+    "lane": "차주",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "차주",
+    "action": "보완 제출",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "여신 심사·승인",
+    "lane": "금융회사",
+    "stage": "G3 심사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "금융회사",
+    "action": "여신 심사·승인",
+    "output_documents": [
+     "승인"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "승인 결과 수령",
+    "lane": "차주",
+    "stage": "G3 심사",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "차주",
+    "action": "승인 결과 수령",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "약정·실행",
+    "lane": "금융회사",
+    "stage": "G4 실행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "금융회사",
+    "action": "약정·실행",
+    "output_documents": [
+     "실행"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "보증 연계",
+    "lane": "보증기관",
+    "stage": "G4 실행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보증기관",
+    "action": "보증 연계",
+    "output_documents": [
+     "보증"
+    ],
+    "confidence": 0.7,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "사후 관리",
+    "lane": "금융회사",
+    "stage": "G5 사후",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "금융회사",
+    "action": "사후 관리",
+    "output_documents": [
+     "관리"
+    ],
+    "confidence": 0.7,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "규제 변경 안내",
+    "lane": "금융위·금감원",
+    "stage": "G0 상품",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "금융위·금감원",
+    "action": "규제 변경 안내",
+    "output_documents": [
+     "안내"
+    ],
+    "confidence": 0.7,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "거절 통지",
+    "lane": "차주",
+    "stage": "G3 심사",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "차주",
+    "action": "거절 통지",
+    "output_documents": [
+     "거절"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "재신청",
+    "lane": "차주",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "차주",
+    "action": "재신청",
+    "output_documents": [
+     "재신청"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "국토부 규제지역 연계",
+    "lane": "국토부 연계",
+    "stage": "G0 상품",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국토부 연계",
+    "action": "국토부 규제지역 연계",
+    "output_documents": [
+     "연계"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조의2(조정대상지역의 지정 및 해제)",
+      "text": "조정대상지역의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "상환",
+    "lane": "차주",
+    "stage": "G5 사후",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "차주",
+    "action": "상환",
+    "output_documents": [
+     "상환"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P12",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P15",
+    "target": "P01",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E08",
+    "source": "P06",
+    "target": "P14",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P14",
+    "target": "P03",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P05",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P07",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P09",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P11",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "2026-07-12 부동산."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3",
+  "scope": "L3 당사자 워크스루 후 명시 조문 2건 존재 확인 2건",
+  "notes": [
+   "주택법"
+  ],
+  "sources": [
+   {
+    "law": "주택법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "주택법",
+    "lawId": "001809",
+    "mst": "284095",
+    "promulgatedOn": "2026-03-05",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/주택법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 2,
+   "explicitCitationEntries": 2,
+   "articleReferences": 2,
+   "verifiedReferences": 2,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

@@ -1,0 +1,619 @@
+{
+ "slug": "public-essential-medical",
+ "name": "공공·책임의료기관 지정",
+ "oneLiner": "의료취약지·거점·책임의료기관·공공전문진료센터 지정과 계획·평가·취소 절차",
+ "type": "인허가형",
+ "priority": 160,
+ "whyFirst": "지역 필수의료·공공의료 확충의 지정 체계다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "공공보건의료 공백 지역과 필수 기능을 지정·지원해 의료 접근성을 보장한다.",
+  "stakeholders": "공공·민간 의료기관, 복지부·시·도, 취약지 주민, 지원센터.",
+  "legalBasis": [
+   {
+    "law": "공공보건의료에 관한 법률",
+    "articles": "제4~9조(기본계획·기관 의무·평가), 제12~14조의2(취약지·거점·전문·책임 지정), 제18~19조(취소·청문)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "보건복지부·시·도",
+    "role": "지정·평가"
+   },
+   {
+    "name": "의료기관",
+    "role": "공공의료 수행"
+   },
+   {
+    "name": "주민",
+    "role": "이용"
+   }
+  ],
+  "procedure": [
+   "취약지·기능 확인",
+   "지정 신청·추천",
+   "지정",
+   "공공의료계획·사업",
+   "평가",
+   "취소·청문"
+  ],
+  "moneyFlow": "공공의료 사업비·지원, 평가 연동.",
+  "docsFlow": "신청 → 심사 → 지정 → 계획 → 평가 → 처분.",
+  "bottlenecks": [
+   "인력 확보",
+   "민간 참여 유인",
+   "취약지 지정 정치성"
+  ],
+  "reformPoints": [
+   "지정 기준 공개",
+   "지원 패키지 표준",
+   "평가 환류"
+  ]
+ },
+ "related": [
+  "응급의료기관 지정·운영",
+  "지역 돌봄 통합지원",
+  "의료기관 개설 허가",
+  "국민건강보험"
+ ],
+ "fieldVerification": [
+  "취약지 고시",
+  "책임의료기관 현황",
+  "지원센터"
+ ],
+ "process": {
+  "institution_name": "공공·책임의료기관 지정",
+  "law_name": "공공보건의료에 관한 법률",
+  "lanes": [
+   "의료기관",
+   "복지부·시도",
+   "취약지 주민",
+   "지원센터",
+   "평가",
+   "감독·청문"
+  ],
+  "stages": [
+   "G0 계획",
+   "G1 신청",
+   "G2 지정",
+   "G3 수행",
+   "G4 평가",
+   "G5 처분"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "공공의료 기본·지역계획 확인",
+    "lane": "복지부·시도",
+    "stage": "G0 계획",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "복지부·시도",
+    "action": "공공의료 기본·지역계획 확인",
+    "output_documents": [
+     "계획"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공공보건의료에 관한 법률",
+      "article": "제4조(공공보건의료 기본계획)",
+      "text": "공공보건의료 기본계획"
+     },
+     {
+      "law": "공공보건의료에 관한 법률",
+      "article": "제8조(공공보건의료계획의 수립)",
+      "text": "공공보건의료계획의 수립"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "취약지·기능 해당성",
+    "lane": "의료기관",
+    "stage": "G0 계획",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "의료기관",
+    "action": "취약지·기능 해당성",
+    "output_documents": [
+     "해당"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공공보건의료에 관한 법률",
+      "article": "제12조(의료취약지의 지정ㆍ고시)",
+      "text": "의료취약지의 지정ㆍ고시"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "지정 신청·추천",
+    "lane": "의료기관",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "의료기관",
+    "action": "지정 신청·추천",
+    "output_documents": [
+     "신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공공보건의료에 관한 법률",
+      "article": "제13조(의료취약지 거점의료기관의 지정)",
+      "text": "의료취약지 거점의료기관의 지정"
+     },
+     {
+      "law": "공공보건의료에 관한 법률",
+      "article": "제14조의2(책임의료기관의 지정)",
+      "text": "책임의료기관의 지정"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "심사",
+    "lane": "복지부·시도",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "복지부·시도",
+    "action": "심사",
+    "output_documents": [
+     "심사"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공공보건의료에 관한 법률",
+      "article": "제14조(공공전문진료센터의 지정)",
+      "text": "공공전문진료센터의 지정"
+     },
+     {
+      "law": "공공보건의료에 관한 법률",
+      "article": "제14조의2(책임의료기관의 지정)",
+      "text": "책임의료기관의 지정"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "보완",
+    "lane": "의료기관",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "의료기관",
+    "action": "보완",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공공보건의료에 관한 법률",
+      "article": "제13조(의료취약지 거점의료기관의 지정)",
+      "text": "의료취약지 거점의료기관의 지정"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "지정 처분",
+    "lane": "복지부·시도",
+    "stage": "G2 지정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "복지부·시도",
+    "action": "지정 처분",
+    "output_documents": [
+     "지정"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공공보건의료에 관한 법률",
+      "article": "제13조(의료취약지 거점의료기관의 지정)",
+      "text": "의료취약지 거점의료기관의 지정"
+     },
+     {
+      "law": "공공보건의료에 관한 법률",
+      "article": "제14조의2(책임의료기관의 지정)",
+      "text": "책임의료기관의 지정"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "지정 결과 수령",
+    "lane": "의료기관",
+    "stage": "G2 지정",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "의료기관",
+    "action": "지정 결과 수령",
+    "output_documents": [
+     "지정서"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공공보건의료에 관한 법률",
+      "article": "제13조(의료취약지 거점의료기관의 지정)",
+      "text": "의료취약지 거점의료기관의 지정"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "공공의료 의무 수행",
+    "lane": "의료기관",
+    "stage": "G3 수행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "의료기관",
+    "action": "공공의료 의무 수행",
+    "output_documents": [
+     "수행"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공공보건의료에 관한 법률",
+      "article": "제7조(공공보건의료기관의 의무)",
+      "text": "공공보건의료기관의 의무"
+     },
+     {
+      "law": "공공보건의료에 관한 법률",
+      "article": "제17조(공공보건의료 수행기관의 준수사항 등)",
+      "text": "공공보건의료 수행기관의 준수사항 등"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "주민 이용·접근",
+    "lane": "취약지 주민",
+    "stage": "G3 수행",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "취약지 주민",
+    "action": "주민 이용·접근",
+    "output_documents": [
+     "이용"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "공공보건의료에 관한 법률",
+      "article": "제3조(국가와 지방자치단체의 의무)",
+      "text": "국가와 지방자치단체의 의무"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "지원센터 협력",
+    "lane": "지원센터",
+    "stage": "G3 수행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지원센터",
+    "action": "지원센터 협력",
+    "output_documents": [
+     "지원"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "공공보건의료에 관한 법률",
+      "article": "제21조(공공보건의료 지원센터의 설치ㆍ운영)",
+      "text": "공공보건의료 지원센터의 설치ㆍ운영"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "사업·계획 평가",
+    "lane": "평가",
+    "stage": "G4 평가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "평가",
+    "action": "사업·계획 평가",
+    "output_documents": [
+     "평가"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공공보건의료에 관한 법률",
+      "article": "제9조(공공보건의료계획의 시행결과 평가)",
+      "text": "공공보건의료계획의 시행결과 평가"
+     },
+     {
+      "law": "공공보건의료에 관한 법률",
+      "article": "제15조(공공보건의료사업의 시행결과 평가)",
+      "text": "공공보건의료사업의 시행결과 평가"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "지정 취소",
+    "lane": "감독·청문",
+    "stage": "G5 처분",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "감독·청문",
+    "action": "지정 취소",
+    "output_documents": [
+     "취소"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공공보건의료에 관한 법률",
+      "article": "제18조(의료취약지 거점의료기관 등의 지정 취소)",
+      "text": "의료취약지 거점의료기관 등의 지정 취소"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "청문",
+    "lane": "감독·청문",
+    "stage": "G5 처분",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "감독·청문",
+    "action": "청문",
+    "output_documents": [
+     "청문"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공공보건의료에 관한 법률",
+      "article": "제19조(청문)",
+      "text": "청문"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "처분 통지",
+    "lane": "의료기관",
+    "stage": "G5 처분",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "의료기관",
+    "action": "처분 통지",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공공보건의료에 관한 법률",
+      "article": "제18조(의료취약지 거점의료기관 등의 지정 취소)",
+      "text": "의료취약지 거점의료기관 등의 지정 취소"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "평가 결과 수령",
+    "lane": "의료기관",
+    "stage": "G4 평가",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "의료기관",
+    "action": "평가 결과 수령",
+    "output_documents": [
+     "평가통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공공보건의료에 관한 법률",
+      "article": "제15조(공공보건의료사업의 시행결과 평가)",
+      "text": "공공보건의료사업의 시행결과 평가"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "업무 협력 협약",
+    "lane": "의료기관",
+    "stage": "G3 수행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "의료기관",
+    "action": "업무 협력 협약",
+    "output_documents": [
+     "협약"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "공공보건의료에 관한 법률",
+      "article": "제16조(의료기관과의 업무 협력 및 협약 체결)",
+      "text": "의료기관과의 업무 협력 및 협약 체결"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P03",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P04",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P08",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P08",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P08",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P11",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P15",
+    "target": "P12",
+    "type": "sequence",
+    "label": "미흡"
+   },
+   {
+    "id": "E15",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "MST 242991."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3",
+  "scope": "L3 당사자 워크스루 후 명시 조문 15건 존재 확인 15건",
+  "notes": [
+   "공공보건의료법 MST 242991"
+  ],
+  "sources": [
+   {
+    "law": "공공보건의료에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "공공보건의료에 관한 법률",
+    "lawId": "002019",
+    "mst": "242991",
+    "promulgatedOn": "2022-06-10",
+    "effectiveOn": "2023-06-11",
+    "officialUrl": "https://law.go.kr/법령/공공보건의료에관한법률"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 15,
+   "explicitCitationEntries": 15,
+   "articleReferences": 15,
+   "verifiedReferences": 15,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

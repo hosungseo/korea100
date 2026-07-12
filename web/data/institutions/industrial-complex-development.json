@@ -1,0 +1,760 @@
+{
+ "slug": "industrial-complex-development",
+ "name": "산업단지 지정·개발",
+ "oneLiner": "국가·일반·도시첨단 산업단지를 지정하고 개발계획·실시계획·준공까지 조성하는 산업 입지 제도",
+ "type": "국토·계획형",
+ "priority": 125,
+ "whyFirst": "팹·로봇 클러스터·데이터센터 배후 산단 조성의 기본 법적 경로다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "산업 활동을 위한 토지를 계획적으로 조성해 난개발을 막고 기업 입지와 인프라를 체계적으로 공급한다.",
+  "stakeholders": "산단 지정권자(국토부·시·도 등), 사업시행자, 입주 예정 기업, 토지 소유자·주민, 환경·교통 관계기관.",
+  "legalBasis": [
+   {
+    "law": "산업입지 및 개발에 관한 법률",
+    "articles": "제6조·제7조·제7조의2(지정), 제7조의4(고시), 제16조(시행자), 제17조·제18조(실시계획), 제22조(토지수용), 제37조(준공인가)",
+    "kind": "법률"
+   },
+   {
+    "law": "산업입지 및 개발에 관한 법률 시행령",
+    "articles": "제7조(산업단지개발계획 등), 제8조, 제9조(지정·개발계획 고시), 제13조(민간 지정요청), 제21조·제22조(실시계획), 제36조(준공인가)",
+    "kind": "대통령령"
+   },
+   {
+    "law": "국토의 계획 및 이용에 관한 법률",
+    "articles": "제36조(용도지역), 제56조(개발행위의 허가)",
+    "kind": "법률"
+   },
+   {
+    "law": "환경영향평가법",
+    "articles": "제27조(환경영향평가서 작성 및 협의 요청), 제13조(주민 의견 수렴)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "국토교통부",
+    "role": "국가산업단지 지정 등"
+   },
+   {
+    "name": "시·도지사",
+    "role": "일반산업단지 지정·개발 승인"
+   },
+   {
+    "name": "사업시행자",
+    "role": "개발·실시계획 수립·공사"
+   },
+   {
+    "name": "환경 협의기관",
+    "role": "환경영향평가 협의"
+   }
+  ],
+  "procedure": [
+   "지정 요청·입지 조사 및 관계기관 협의(영 §13·§8조의2)",
+   "국가·일반·도시첨단 산업단지 지정(법 §6·§7·§7조의2)",
+   "지정·개발계획 고시(법 §7조의4, 영 §7·§9)",
+   "환경영향평가 및 주민 의견 수렴(환경영향평가법 §25·§27)",
+   "실시계획 승인·고시(법 §17·§18 등)",
+   "토지 수용·보상·환지(법 §22·§24)",
+   "공사 및 준공인가(법 §37)",
+   "토지·시설 처분·입주기업 지원(법 §38·§39조의14)"
+  ],
+  "moneyFlow": "조성비는 사업시행자·입주 분담, 국고·지방비 기반시설 지원, 선수금·분양 대금.",
+  "docsFlow": "지정 요청서 → 지정 고시 → 개발계획 → 환경평가서 → 실시계획 → 준공 인가서.",
+  "bottlenecks": [
+   "토지 보상·수용 지연",
+   "환경·교통 영향 협의 장기화",
+   "전력·용수 인프라 선행 확보 실패",
+   "지정 후 실수요 미달·미분양"
+  ],
+  "reformPoints": [
+   "메가프로젝트 연계 산단 일정 공개 로드맵",
+   "인허가 병렬 처리·원스톱 창구",
+   "주민 참여 조기 설계"
+  ]
+ },
+ "related": [
+  "공장설립승인",
+  "환경영향평가",
+  "공익사업 토지보상",
+  "도시계획(도시·군관리계획)",
+  "개발행위허가",
+  "국가첨단전략산업 특화단지 지정·지원",
+  "농지전용 허가",
+  "공유수면 점·사용 허가"
+ ],
+ "fieldVerification": [
+  "국가/일반/도시첨단 산단 지정권자 구분 최신 조문",
+  "실시계획 승인 법정 처리기간",
+  "3대 메가 관련 신규 산단 지정 고시 목록"
+ ],
+ "process": {
+  "institution_name": "산업단지 지정·개발",
+  "law_name": "산업입지 및 개발에 관한 법률",
+  "lanes": [
+   "제안자(지자체·민간)",
+   "지정권자",
+   "사업시행자",
+   "환경·관계기관",
+   "토지소유자·주민",
+   "입주기업"
+  ],
+  "stages": [
+   "G0 입지·제안",
+   "G1 지정·고시",
+   "G2 개발계획",
+   "G3 환경·주민",
+   "G4 실시·수용",
+   "G5 공사·준공",
+   "G6 분양·입주"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "지정 요청·입지 조사",
+    "lane": "제안자(지자체·민간)",
+    "stage": "G0 입지·제안",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "제안자(지자체·민간)",
+    "action": "지정 요청·입지 조사",
+    "output_documents": [
+     "요청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업입지 및 개발에 관한 법률 시행령",
+      "article": "제13조(민간기업등의 산업단지지정요청등)",
+      "text": "민간기업등의 산업단지지정요청등"
+     },
+     {
+      "law": "산업입지 및 개발에 관한 법률",
+      "article": "제6조(국가산업단지의 지정)",
+      "text": "국가산업단지의 지정"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "지정 협의",
+    "lane": "환경·관계기관",
+    "stage": "G0 입지·제안",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "환경·관계기관",
+    "action": "지정 협의",
+    "output_documents": [
+     "협의"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업입지 및 개발에 관한 법률 시행령",
+      "article": "제8조의2(산업단지의 지정에 관한 협의)",
+      "text": "산업단지의 지정에 관한 협의"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "산업단지 지정",
+    "lane": "지정권자",
+    "stage": "G1 지정·고시",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "지정권자",
+    "action": "산업단지 지정",
+    "output_documents": [
+     "지정"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업입지 및 개발에 관한 법률",
+      "article": "제6조(국가산업단지의 지정)",
+      "text": "국가산업단지의 지정"
+     },
+     {
+      "law": "산업입지 및 개발에 관한 법률",
+      "article": "제7조(일반산업단지의 지정)",
+      "text": "일반산업단지의 지정"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "지정·개발계획 고시 열람",
+    "lane": "토지소유자·주민",
+    "stage": "G1 지정·고시",
+    "type": "notice",
+    "status": "done",
+    "progress": 100,
+    "actor": "토지소유자·주민",
+    "action": "지정·개발계획 고시 열람",
+    "output_documents": [
+     "고시 열람"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업입지 및 개발에 관한 법률",
+      "article": "제7조의4(산업단지 지정의 고시 등)",
+      "text": "산업단지 지정의 고시 등"
+     },
+     {
+      "law": "산업입지 및 개발에 관한 법률 시행령",
+      "article": "제9조(산업단지지정 또는 개발계획의 고시등)",
+      "text": "산업단지지정 또는 개발계획의 고시등"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "개발계획 수립",
+    "lane": "사업시행자",
+    "stage": "G2 개발계획",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "사업시행자",
+    "action": "개발계획 수립",
+    "output_documents": [
+     "개발계획"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업입지 및 개발에 관한 법률 시행령",
+      "article": "제7조(산업단지개발계획 등)",
+      "text": "산업단지개발계획 등"
+     },
+     {
+      "law": "산업입지 및 개발에 관한 법률",
+      "article": "제16조(산업단지개발사업의 시행자)",
+      "text": "산업단지개발사업의 시행자"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "환경영향평가서 초안·주민 의견",
+    "lane": "토지소유자·주민",
+    "stage": "G3 환경·주민",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "토지소유자·주민",
+    "action": "환경영향평가서 초안·주민 의견",
+    "output_documents": [
+     "공람",
+     "의견"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "환경영향평가법",
+      "article": "제25조(주민 등의 의견 수렴)",
+      "text": "주민 등의 의견 수렴"
+     }
+    ],
+    "deadline": "§25 20일 이상 갈음 가능"
+   },
+   {
+    "id": "P07",
+    "name": "주민 의견 재수렴 신청",
+    "lane": "토지소유자·주민",
+    "stage": "G3 환경·주민",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "토지소유자·주민",
+    "action": "주민 의견 재수렴 신청",
+    "output_documents": [
+     "재수렴"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "환경영향평가법",
+      "article": "제26조(주민 등의 의견 재수렴)",
+      "text": "주민 등의 의견 재수렴"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "환경영향평가 협의",
+    "lane": "환경·관계기관",
+    "stage": "G3 환경·주민",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "환경·관계기관",
+    "action": "환경영향평가 협의",
+    "output_documents": [
+     "협의"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "환경영향평가법",
+      "article": "제27조(환경영향평가서의 작성 및 협의 요청 등)",
+      "text": "환경영향평가서의 작성 및 협의 요청 등"
+     },
+     {
+      "law": "환경영향평가법",
+      "article": "제28조(환경영향평가서의 검토 등)",
+      "text": "환경영향평가서의 검토 등"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "보완",
+    "lane": "사업시행자",
+    "stage": "G3 환경·주민",
+    "type": "task",
+    "status": "loop",
+    "progress": 0,
+    "actor": "사업시행자",
+    "action": "보완",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "환경영향평가법",
+      "article": "제32조(재협의)",
+      "text": "재협의"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "실시계획 승인·고시",
+    "lane": "지정권자",
+    "stage": "G4 실시·수용",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지정권자",
+    "action": "실시계획 승인·고시",
+    "output_documents": [
+     "실시계획"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업입지 및 개발에 관한 법률",
+      "article": "제17조(국가산업단지개발실시계획의 승인)",
+      "text": "국가산업단지개발실시계획의 승인"
+     },
+     {
+      "law": "산업입지 및 개발에 관한 법률",
+      "article": "제18조(일반산업단지개발실시계획의 승인)",
+      "text": "일반산업단지개발실시계획의 승인"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "토지 수용·보상 협의",
+    "lane": "토지소유자·주민",
+    "stage": "G4 실시·수용",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "토지소유자·주민",
+    "action": "토지 수용·보상 협의",
+    "output_documents": [
+     "보상 협의"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업입지 및 개발에 관한 법률",
+      "article": "제22조(토지수용)",
+      "text": "토지수용"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "환지·동의",
+    "lane": "토지소유자·주민",
+    "stage": "G4 실시·수용",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "토지소유자·주민",
+    "action": "환지·동의",
+    "output_documents": [
+     "환지",
+     "동의"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업입지 및 개발에 관한 법률",
+      "article": "제24조(토지소유자에 대한 환지)",
+      "text": "토지소유자에 대한 환지"
+     },
+     {
+      "law": "산업입지 및 개발에 관한 법률",
+      "article": "제39조의8(토지소유자 등의 동의)",
+      "text": "토지소유자 등의 동의"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "사전공사 금지 준수",
+    "lane": "사업시행자",
+    "stage": "G4 실시·수용",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업시행자",
+    "action": "사전공사 금지 준수",
+    "output_documents": [
+     "착수 전 확인"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "환경영향평가법",
+      "article": "제34조(사전공사의 금지 등)",
+      "text": "사전공사의 금지 등"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "공사 시행",
+    "lane": "사업시행자",
+    "stage": "G5 공사·준공",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업시행자",
+    "action": "공사 시행",
+    "output_documents": [
+     "공사"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업입지 및 개발에 관한 법률",
+      "article": "제16조(산업단지개발사업의 시행자)",
+      "text": "산업단지개발사업의 시행자"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "준공인가",
+    "lane": "지정권자",
+    "stage": "G5 공사·준공",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지정권자",
+    "action": "준공인가",
+    "output_documents": [
+     "준공"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업입지 및 개발에 관한 법률",
+      "article": "제37조(개발사업의 준공인가)",
+      "text": "개발사업의 준공인가"
+     },
+     {
+      "law": "산업입지 및 개발에 관한 법률 시행령",
+      "article": "제36조(준공인가)",
+      "text": "준공인가"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "분양·처분",
+    "lane": "사업시행자",
+    "stage": "G6 분양·입주",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업시행자",
+    "action": "분양·처분",
+    "output_documents": [
+     "분양"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업입지 및 개발에 관한 법률",
+      "article": "제38조(개발한 토지ㆍ시설 등의 처분)",
+      "text": "개발한 토지ㆍ시설 등의 처분"
+     }
+    ]
+   },
+   {
+    "id": "P17",
+    "name": "입주·지원 신청",
+    "lane": "입주기업",
+    "stage": "G6 분양·입주",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "입주기업",
+    "action": "입주·지원 신청",
+    "output_documents": [
+     "입주"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업입지 및 개발에 관한 법률",
+      "article": "제39조의14(입주기업 지원대책)",
+      "text": "입주기업 지원대책"
+     }
+    ]
+   },
+   {
+    "id": "P18",
+    "name": "입주 지원 결과 수령",
+    "lane": "입주기업",
+    "stage": "G6 분양·입주",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "입주기업",
+    "action": "입주 지원 결과 수령",
+    "output_documents": [
+     "지원 결정"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업입지 및 개발에 관한 법률",
+      "article": "제39조의14(입주기업 지원대책)",
+      "text": "입주기업 지원대책"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": "재수렴 사유"
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P06",
+    "type": "loop",
+    "label": "재수렴"
+   },
+   {
+    "id": "E08",
+    "source": "P06",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P09",
+    "type": "loop",
+    "label": "보완"
+   },
+   {
+    "id": "E10",
+    "source": "P09",
+    "target": "P08",
+    "type": "loop",
+    "label": "재협의"
+   },
+   {
+    "id": "E11",
+    "source": "P08",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P10",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P13",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P12",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E17",
+    "source": "P15",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E18",
+    "source": "P16",
+    "target": "P17",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E19",
+    "source": "P17",
+    "target": "P18",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "2026-07-12 L3: 주민 고시 열람·EIA 재수렴·수용 협의·사전공사금지, 입주기업 지원 결과 수령 보강. MSTs 277001,281279,276833.",
+   "L3 페르소나(토지소유자): 고시 열람·보상·환지를 분리.",
+   "L3 페르소나(입주기업): 지원 결과 수령 노드."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3 당사자 워크스루",
+  "scope": "L3 보강 후 명시 조문 46건 중 존재 확인 46건",
+  "notes": [
+   "L3 산단: 주민·입주 권리",
+   "MSTs: 277001,281279,276833"
+  ],
+  "sources": [
+   {
+    "law": "산업입지 및 개발에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "산업입지 및 개발에 관한 법률",
+    "lawId": "001839",
+    "mst": "277001",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/산업입지및개발에관한법률"
+   },
+   {
+    "law": "산업입지 및 개발에 관한 법률 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "산업입지 및 개발에 관한 법률 시행령",
+    "lawId": "003788",
+    "mst": "281279",
+    "promulgatedOn": "2025-12-30",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/산업입지및개발에관한법률시행령"
+   },
+   {
+    "law": "국토의 계획 및 이용에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국토의 계획 및 이용에 관한 법률",
+    "lawId": "009294",
+    "mst": "284013",
+    "promulgatedOn": "2026-03-05",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/국토의계획및이용에관한법률"
+   },
+   {
+    "law": "환경영향평가법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "환경영향평가법",
+    "lawId": "002016",
+    "mst": "276833",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2025-10-23",
+    "officialUrl": "https://law.go.kr/법령/환경영향평가법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차",
+   "citationEntries": 46,
+   "explicitCitationEntries": 46,
+   "articleReferences": 46,
+   "verifiedReferences": 46,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

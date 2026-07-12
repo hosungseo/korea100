@@ -1,0 +1,648 @@
+{
+ "slug": "forestland-conversion",
+ "name": "산지전용 허가",
+ "oneLiner": "산지를 산림 외 용도로 쓰기 위한 전용허가·신고·일시사용과 대체산림자원조성비·복구 절차",
+ "type": "인허가형",
+ "priority": 143,
+ "whyFirst": "농지 다음으로 메가 입지·송전·DC 후보지가 임야일 때 최전방 병목이다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "산림자원 보전과 개발 수요를 산지전용 허가·타당성조사·조성비·복구로 조정한다.",
+  "stakeholders": "사업시행자, 산림청·지자체, 산주, 지역 주민, 산지관리위원회.",
+  "legalBasis": [
+   {
+    "law": "산지관리법",
+    "articles": "제9~11조(전용·일시사용제한지역), 제14~15조의2(전용허가·신고·일시사용), 제16~18조의4(효력·기간·기준·타당성조사), 제19조(대체산림자원조성비), 제20조(취소), 제38~42조(복구·준공)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "산림청·지자체",
+    "role": "전용허가·신고 수리·복구 감독"
+   },
+   {
+    "name": "사업시행자",
+    "role": "신청·조성비·복구"
+   },
+   {
+    "name": "산주·주민",
+    "role": "권리·의견"
+   }
+  ],
+  "procedure": [
+   "산지 해당성·제한지역 확인",
+   "전용허가·신고·일시사용 경로 선택(§14~15의2)",
+   "전용허가기준·타당성조사(§18·§18의2)",
+   "허가 처분",
+   "대체산림자원조성비 납부(§19)",
+   "사업 시행·복구비 예치(§38)",
+   "복구·준공검사(§39~42)",
+   "위반 시 취소·대집행(§20·§41)"
+  ],
+  "moneyFlow": "대체산림자원조성비(§19), 복구비 예치(§38), 수수료. 환급은 §19의2.",
+  "docsFlow": "사업계획·지적 → 허가신청 → 타당성조사 → 허가서 → 조성비 납부 → 복구설계 → 준공.",
+  "bottlenecks": [
+   "타당성조사 기간",
+   "제한지역 지정",
+   "조성비 규모",
+   "복구 이행 분쟁"
+  ],
+  "reformPoints": [
+   "메가 입지 사전 산지 소요 공개",
+   "타당성조사 기한 명시",
+   "조성비·복구 기준 투명화"
+  ]
+ },
+ "related": [
+  "농지전용 허가",
+  "산업단지 지정·개발",
+  "송·변전설비 건설 인허가",
+  "환경영향평가",
+  "개발행위허가"
+ ],
+ "fieldVerification": [
+  "허가 관할 면적 위임 기준",
+  "타당성조사 대행기관",
+  "조성비 단가 고시"
+ ],
+ "process": {
+  "institution_name": "산지전용 허가",
+  "law_name": "산지관리법",
+  "lanes": [
+   "사업시행자",
+   "산림청·지자체",
+   "타당성조사",
+   "산주·주민",
+   "조성비·복구",
+   "감독"
+  ],
+  "stages": [
+   "G0 해당성",
+   "G1 신청",
+   "G2 심사",
+   "G3 허가",
+   "G4 조성비·사업",
+   "G5 복구·사후"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "산지·제한지역 확인",
+    "lane": "사업시행자",
+    "stage": "G0 해당성",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "사업시행자",
+    "action": "산지·제한지역 확인",
+    "output_documents": [
+     "해당성"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산지관리법",
+      "article": "제3조(산지관리의 기본원칙)",
+      "text": "산지관리의 기본원칙"
+     },
+     {
+      "law": "산지관리법",
+      "article": "제9조(산지전용ㆍ일시사용제한지역의 지정)",
+      "text": "산지전용ㆍ일시사용제한지역의 지정"
+     },
+     {
+      "law": "산지관리법",
+      "article": "제10조(산지전용ㆍ일시사용제한지역에서의 행위제한)",
+      "text": "산지전용ㆍ일시사용제한지역에서의 행위제한"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "허가·신고·일시사용 경로",
+    "lane": "사업시행자",
+    "stage": "G0 해당성",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "사업시행자",
+    "action": "허가·신고·일시사용 경로",
+    "output_documents": [
+     "경로"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산지관리법",
+      "article": "제14조(산지전용허가)",
+      "text": "산지전용허가"
+     },
+     {
+      "law": "산지관리법",
+      "article": "제15조(산지전용신고)",
+      "text": "산지전용신고"
+     },
+     {
+      "law": "산지관리법",
+      "article": "제15조의2(산지일시사용허가ㆍ신고)",
+      "text": "산지일시사용허가ㆍ신고"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "산지전용허가 등 신청",
+    "lane": "사업시행자",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "사업시행자",
+    "action": "산지전용허가 등 신청",
+    "output_documents": [
+     "신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산지관리법",
+      "article": "제14조(산지전용허가)",
+      "text": "산지전용허가"
+     },
+     {
+      "law": "산지관리법",
+      "article": "제15조(산지전용신고)",
+      "text": "산지전용신고"
+     },
+     {
+      "law": "산지관리법",
+      "article": "제15조의2(산지일시사용허가ㆍ신고)",
+      "text": "산지일시사용허가ㆍ신고"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "허가기준·기간 심사",
+    "lane": "산림청·지자체",
+    "stage": "G2 심사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산림청·지자체",
+    "action": "허가기준·기간 심사",
+    "output_documents": [
+     "심사"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산지관리법",
+      "article": "제17조(산지전용허가 등의 기간)",
+      "text": "산지전용허가 등의 기간"
+     },
+     {
+      "law": "산지관리법",
+      "article": "제18조(산지전용허가기준 등)",
+      "text": "산지전용허가기준 등"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "산지전용타당성조사",
+    "lane": "타당성조사",
+    "stage": "G2 심사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "타당성조사",
+    "action": "산지전용타당성조사",
+    "output_documents": [
+     "타당성"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산지관리법",
+      "article": "제18조의2(산지전용타당성조사 등)",
+      "text": "산지전용타당성조사 등"
+     },
+     {
+      "law": "산지관리법",
+      "article": "제18조의3(산지전용타당성조사 결과 등의 공개)",
+      "text": "산지전용타당성조사 결과 등의 공개"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "산주·주민 의견(해당 시)",
+    "lane": "산주·주민",
+    "stage": "G2 심사",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산주·주민",
+    "action": "산주·주민 의견(해당 시)",
+    "output_documents": [
+     "의견"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "산지관리법",
+      "article": "제18조의2(산지전용타당성조사 등)",
+      "text": "산지전용타당성조사 등"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "보완·재신청",
+    "lane": "사업시행자",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업시행자",
+    "action": "보완·재신청",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산지관리법",
+      "article": "제18조의4(산지전용허가기준 등의 충족 여부 확인)",
+      "text": "산지전용허가기준 등의 충족 여부 확인"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "허가·신고 수리 처분",
+    "lane": "산림청·지자체",
+    "stage": "G3 허가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산림청·지자체",
+    "action": "허가·신고 수리 처분",
+    "output_documents": [
+     "허가서"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산지관리법",
+      "article": "제14조(산지전용허가)",
+      "text": "산지전용허가"
+     },
+     {
+      "law": "산지관리법",
+      "article": "제16조(산지전용허가 등의 효력)",
+      "text": "산지전용허가 등의 효력"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "허가 결과 수령",
+    "lane": "사업시행자",
+    "stage": "G3 허가",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업시행자",
+    "action": "허가 결과 수령",
+    "output_documents": [
+     "수령"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산지관리법",
+      "article": "제16조(산지전용허가 등의 효력)",
+      "text": "산지전용허가 등의 효력"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "대체산림자원조성비 납부",
+    "lane": "조성비·복구",
+    "stage": "G4 조성비·사업",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "조성비·복구",
+    "action": "대체산림자원조성비 납부",
+    "output_documents": [
+     "납부"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산지관리법",
+      "article": "제19조(대체산림자원조성비)",
+      "text": "대체산림자원조성비"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "복구비 예치·사업 시행",
+    "lane": "사업시행자",
+    "stage": "G4 조성비·사업",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업시행자",
+    "action": "복구비 예치·사업 시행",
+    "output_documents": [
+     "예치"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산지관리법",
+      "article": "제38조(복구비의 예치 등)",
+      "text": "복구비의 예치 등"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "복구설계·복구 시행",
+    "lane": "조성비·복구",
+    "stage": "G5 복구·사후",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "조성비·복구",
+    "action": "복구설계·복구 시행",
+    "output_documents": [
+     "복구"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산지관리법",
+      "article": "제39조(산지전용지 등의 복구)",
+      "text": "산지전용지 등의 복구"
+     },
+     {
+      "law": "산지관리법",
+      "article": "제40조(복구설계서의 승인 등)",
+      "text": "복구설계서의 승인 등"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "복구준공검사",
+    "lane": "산림청·지자체",
+    "stage": "G5 복구·사후",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산림청·지자체",
+    "action": "복구준공검사",
+    "output_documents": [
+     "준공"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산지관리법",
+      "article": "제42조(복구준공검사)",
+      "text": "복구준공검사"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "허가 취소·대집행",
+    "lane": "감독",
+    "stage": "G5 복구·사후",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "감독",
+    "action": "허가 취소·대집행",
+    "output_documents": [
+     "처분"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산지관리법",
+      "article": "제20조(산지전용허가의 취소 등)",
+      "text": "산지전용허가의 취소 등"
+     },
+     {
+      "law": "산지관리법",
+      "article": "제41조(복구의 대집행 등)",
+      "text": "복구의 대집행 등"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "처분 통지 수령",
+    "lane": "사업시행자",
+    "stage": "G5 복구·사후",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업시행자",
+    "action": "처분 통지 수령",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산지관리법",
+      "article": "제20조(산지전용허가의 취소 등)",
+      "text": "산지전용허가의 취소 등"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "결과 공개 확인",
+    "lane": "산주·주민",
+    "stage": "G2 심사",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산주·주민",
+    "action": "결과 공개 확인",
+    "output_documents": [
+     "공개"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "산지관리법",
+      "article": "제18조의3(산지전용타당성조사 결과 등의 공개)",
+      "text": "산지전용타당성조사 결과 등의 공개"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P16",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P04",
+    "target": "P07",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E09",
+    "source": "P07",
+    "target": "P03",
+    "type": "loop",
+    "label": "재신청"
+   },
+   {
+    "id": "E10",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P11",
+    "target": "P14",
+    "type": "sequence",
+    "label": "위반"
+   },
+   {
+    "id": "E16",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "2026-07-12 L3 MST 283757. 패키지 δ."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3 당사자 워크스루",
+  "scope": "L3 당사자 워크스루 후 명시 조문 19건 존재 확인 19건",
+  "notes": [
+   "산지관리법 MST 283757 (2026-02-27 공포, 2026-05-28 시행)"
+  ],
+  "sources": [
+   {
+    "law": "산지관리법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "산지관리법",
+    "lawId": "009412",
+    "mst": "283757",
+    "promulgatedOn": "2026-02-27",
+    "effectiveOn": "2026-05-28",
+    "officialUrl": "https://law.go.kr/법령/산지관리법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 19,
+   "explicitCitationEntries": 19,
+   "articleReferences": 19,
+   "verifiedReferences": 19,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

@@ -1,0 +1,649 @@
+{
+ "slug": "foreign-investment-report",
+ "name": "외국인투자 신고·등록",
+ "oneLiner": "외국인투자의 신고·허가, 사후관리, 현금지원·외국인투자지역 등 촉진 절차",
+ "type": "인허가형",
+ "priority": 139,
+ "whyFirst": "글로벌 팹·하이퍼스케일 투자의 진입 창구이다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "외국인투자를 원칙적으로 자유화하되 신고·제한업종 허가·사후관리와 지원 제도로 규율·촉진한다.",
+  "stakeholders": "외국인투자가·투자기업, 산업통상부·대한무역투자진흥공사, 지자체, 외국인투자위원회, 옴부즈만.",
+  "legalBasis": [
+   {
+    "law": "외국인투자 촉진법",
+    "articles": "제3~4조(보호·자유화), 제5조(신고), 제6조(허가), 제9조(조세감면 연계), 제14조의2(현금지원), 제15·15조의2(지원센터·옴부즈만), 제18~19조(외국인투자지역), 제21조(사후관리), 제27조(위원회)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "산업통상부",
+    "role": "신고 수리·허가·정책"
+   },
+   {
+    "name": "KOTRA·지자체",
+    "role": "유치·지원"
+   },
+   {
+    "name": "외국인투자가",
+    "role": "신고·사업 이행"
+   }
+  ],
+  "procedure": [
+   "투자 자유화·제한 여부 확인(§4)",
+   "외국인투자 신고(§5) 또는 허가(§6)",
+   "신고 수리·기업 등록 실무",
+   "현금지원·조세·입지 협의(해당 시)",
+   "외국인투자지역 지정 검토(§18)",
+   "사후관리·통계(§21·§24)",
+   "옴부즈만·애로 해소(§15의2)"
+  ],
+  "moneyFlow": "현금지원(§14의2), 조세감면(§9 연계), 입지·임대 지원. 신고 자체 수수료는 실무 확인.",
+  "docsFlow": "투자계획 → 신고서 → 수리필증 → 법인·세무 후속 → 지원 협약 → 사후보고.",
+  "bottlenecks": [
+   "제한업종·안보 심사",
+   "지원 패키지 협상 장기화",
+   "인허가 후속 병목",
+   "사후 고용·투자 이행 점검"
+  ],
+  "reformPoints": [
+   "메가 투자 원스톱 기한",
+   "허가 사유 공개",
+   "지원 조건 표준계약"
+  ]
+ },
+ "related": [
+  "국가첨단전략산업 특화단지 지정·지원",
+  "국고보조금",
+  "조세특례",
+  "공장설립승인",
+  "산업단지 지정·개발"
+ ],
+ "fieldVerification": [
+  "신고 창구(KOTRA/은행 등) 현행 위임",
+  "외국인투자기업 등록 세부 절차",
+  "현금지원 심의 기준"
+ ],
+ "process": {
+  "institution_name": "외국인투자 신고·등록",
+  "law_name": "외국인투자 촉진법",
+  "lanes": [
+   "외국인투자가",
+   "산업통상부",
+   "KOTRA·지자체",
+   "외국인투자위원회",
+   "옴부즈만",
+   "사후관리"
+  ],
+  "stages": [
+   "G0 검토",
+   "G1 신고·허가",
+   "G2 수리",
+   "G3 지원",
+   "G4 입지",
+   "G5 사후"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "투자 구조·업종 검토",
+    "lane": "외국인투자가",
+    "stage": "G0 검토",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "외국인투자가",
+    "action": "투자 구조·업종 검토",
+    "output_documents": [
+     "계획"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제4조(외국인투자의 자유화 등)",
+      "text": "외국인투자의 자유화 등"
+     },
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제3조(외국인투자의 보호 등)",
+      "text": "외국인투자의 보호 등"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "신고 vs 허가 경로",
+    "lane": "외국인투자가",
+    "stage": "G0 검토",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "외국인투자가",
+    "action": "신고 vs 허가 경로",
+    "output_documents": [
+     "경로"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제5조(외국인투자 신고)",
+      "text": "외국인투자 신고"
+     },
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제6조(외국인투자 허가 등)",
+      "text": "외국인투자 허가 등"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "외국인투자 신고·허가 신청",
+    "lane": "외국인투자가",
+    "stage": "G1 신고·허가",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "외국인투자가",
+    "action": "외국인투자 신고·허가 신청",
+    "output_documents": [
+     "신고"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제5조(외국인투자 신고)",
+      "text": "외국인투자 신고"
+     },
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제6조(외국인투자 허가 등)",
+      "text": "외국인투자 허가 등"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "제한업종 허가 추가심사",
+    "lane": "산업통상부",
+    "stage": "G2 수리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "외국인투자가",
+    "action": "제한업종 허가 추가심사",
+    "output_documents": [
+     "허가신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제6조(외국인투자 허가 등)",
+      "text": "외국인투자 허가 등"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "신고 수리·허가 심사",
+    "lane": "산업통상부",
+    "stage": "G2 수리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산업통상부",
+    "action": "신고 수리·허가 심사",
+    "output_documents": [
+     "수리"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제5조(외국인투자 신고)",
+      "text": "외국인투자 신고"
+     },
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제6조(외국인투자 허가 등)",
+      "text": "외국인투자 허가 등"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "보완 제출",
+    "lane": "외국인투자가",
+    "stage": "G1 신고·허가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "외국인투자가",
+    "action": "보완 제출",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제5조(외국인투자 신고)",
+      "text": "외국인투자 신고"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "유치·지원 상담",
+    "lane": "KOTRA·지자체",
+    "stage": "G3 지원",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "KOTRA·지자체",
+    "action": "유치·지원 상담",
+    "output_documents": [
+     "상담"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제15조(외국인투자지원센터의 설치)",
+      "text": "외국인투자지원센터의 설치"
+     },
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제14조(지방자치단체의 외국인투자유치활동에 대한 지원)",
+      "text": "지방자치단체의 외국인투자유치활동에 대한 지원"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "현금지원 검토",
+    "lane": "외국인투자위원회",
+    "stage": "G3 지원",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "외국인투자위원회",
+    "action": "현금지원 검토",
+    "output_documents": [
+     "지원"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제14조의2(외국인투자에 대한 현금지원)",
+      "text": "외국인투자에 대한 현금지원"
+     },
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제27조(외국인투자위원회)",
+      "text": "외국인투자위원회"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "외국인투자지역 지정 검토",
+    "lane": "외국인투자위원회",
+    "stage": "G4 입지",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "외국인투자위원회",
+    "action": "외국인투자지역 지정 검토",
+    "output_documents": [
+     "단지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제18조(외국인투자지역의 지정)",
+      "text": "외국인투자지역의 지정"
+     },
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제19조(외국인투자지역에 대한 지원)",
+      "text": "외국인투자지역에 대한 지원"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "수리·허가 결과 수령",
+    "lane": "외국인투자가",
+    "stage": "G2 수리",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "외국인투자가",
+    "action": "수리·허가 결과 수령",
+    "output_documents": [
+     "필증"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제5조(외국인투자 신고)",
+      "text": "외국인투자 신고"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "사후관리·보고",
+    "lane": "사후관리",
+    "stage": "G5 사후",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사후관리",
+    "action": "사후관리·보고",
+    "output_documents": [
+     "보고"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제21조(외국인투자의 사후 관리)",
+      "text": "외국인투자의 사후 관리"
+     },
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제22조(외국인투자 사후관리 협조)",
+      "text": "외국인투자 사후관리 협조"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "옴부즈만 애로 신청",
+    "lane": "옴부즈만",
+    "stage": "G5 사후",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "옴부즈만",
+    "action": "옴부즈만 애로 신청",
+    "output_documents": [
+     "애로"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제15조의2(외국인투자옴부즈만 등)",
+      "text": "외국인투자옴부즈만 등"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "투자가 이행·고용",
+    "lane": "외국인투자가",
+    "stage": "G5 사후",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "외국인투자가",
+    "action": "투자가 이행·고용",
+    "output_documents": [
+     "이행"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제21조(외국인투자의 사후 관리)",
+      "text": "외국인투자의 사후 관리"
+     },
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제4조의3(외국인투자기업 고용 실태조사)",
+      "text": "외국인투자기업 고용 실태조사"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "조세감면 연계 검토",
+    "lane": "외국인투자가",
+    "stage": "G3 지원",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "외국인투자가",
+    "action": "조세감면 연계 검토",
+    "output_documents": [
+     "조세"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제9조(외국인투자에 대한 조세감면)",
+      "text": "외국인투자에 대한 조세감면"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "지정 해제·시정(해당 시)",
+    "lane": "산업통상부",
+    "stage": "G5 사후",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산업통상부",
+    "action": "지정 해제·시정(해당 시)",
+    "output_documents": [
+     "시정"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제18조의2(외국인투자지역의 지정 해제)",
+      "text": "외국인투자지역의 지정 해제"
+     },
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제21조(외국인투자의 사후 관리)",
+      "text": "외국인투자의 사후 관리"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "처분·결과 통지",
+    "lane": "외국인투자가",
+    "stage": "G5 사후",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "외국인투자가",
+    "action": "처분·결과 통지",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "외국인투자 촉진법",
+      "article": "제6조(외국인투자 허가 등)",
+      "text": "외국인투자 허가 등"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": "신고·허가"
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P05",
+    "target": "P04",
+    "type": "sequence",
+    "label": "제한업종"
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P03",
+    "type": "loop",
+    "label": "재신청"
+   },
+   {
+    "id": "E07",
+    "source": "P05",
+    "target": "P10",
+    "type": "sequence",
+    "label": "수리"
+   },
+   {
+    "id": "E08",
+    "source": "P04",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P10",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P08",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P07",
+    "target": "P09",
+    "type": "sequence",
+    "label": "입지"
+   },
+   {
+    "id": "E13",
+    "source": "P10",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P13",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P13",
+    "target": "P12",
+    "type": "sequence",
+    "label": "애로"
+   },
+   {
+    "id": "E16",
+    "source": "P11",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E17",
+    "source": "P15",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "MST 276565. 등록 실무는 fieldVerification."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3 당사자 워크스루",
+  "scope": "L3 당사자 워크스루 후 명시 조문 16건 존재 확인 16건",
+  "notes": [
+   "외국인투자 촉진법 MST 276565"
+  ],
+  "sources": [
+   {
+    "law": "외국인투자 촉진법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "외국인투자 촉진법",
+    "lawId": "000660",
+    "mst": "276565",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/외국인투자촉진법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 16,
+   "explicitCitationEntries": 16,
+   "articleReferences": 16,
+   "verifiedReferences": 16,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

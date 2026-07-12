@@ -1,0 +1,601 @@
+{
+ "slug": "offshore-wind-zone",
+ "name": "해상풍력 지구·사업 선정",
+ "oneLiner": "해상풍력 예비·발전지구 지정, 민관협의·주민이익공유, 사업자 선정·실시계획 승인·인허가 의제 절차",
+ "type": "인허가형",
+ "priority": 151,
+ "whyFirst": "재생E 대전환·에너지고속도로의 해상 입지 속도전 특별법이다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "해상풍력 입지를 국가 주도로 발굴·지정하고 사업자 선정과 인허가 의제로 보급을 촉진한다.",
+  "stakeholders": "사업자, 기후에너지환경부, 해상풍력발전위원회, 어민·주민, 전담기관, 송전 사업자.",
+  "legalBasis": [
+   {
+    "law": "해상풍력 보급 촉진 및 산업 육성에 관한 특별법",
+    "articles": "제14~15조(예비지구), 제17~18조(민관협의·이익공유), 제19~21조(발전지구), 제24~28조(사업자·실시계획·의제·취소), 제22~23조(예타 특례)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "기후에너지환경부",
+    "role": "지구 지정·사업 선정"
+   },
+   {
+    "name": "민관협의회",
+    "role": "수용성"
+   },
+   {
+    "name": "사업자",
+    "role": "실시·건설"
+   }
+  ],
+  "procedure": [
+   "입지 조사·예비지구 지정",
+   "민관협의·이익공유",
+   "발전지구 지정·계통 연계",
+   "사업자 선정",
+   "실시계획 승인·의제",
+   "착공·건설"
+  ],
+  "moneyFlow": "조사·개발비, 주민이익공유, 점용료 특례(§42), 예타 특례.",
+  "docsFlow": "입지조사 → 예비지구 → 협의록 → 발전지구 → 선정 → 실시계획 → 착공신고.",
+  "bottlenecks": [
+   "어업·주민 갈등",
+   "계통 연계 지연",
+   "의제 범위",
+   "조사 자료 소유"
+  ],
+  "reformPoints": [
+   "이익공유 표준",
+   "계통 선행 확약",
+   "실시계획 기한"
+  ]
+ },
+ "related": [
+  "공유수면 점·사용 허가",
+  "송·변전설비 건설 인허가",
+  "환경영향평가",
+  "신재생 공급의무·REC",
+  "발전사업 허가·전력계통 접속"
+ ],
+ "fieldVerification": [
+  "예비·발전지구 지정 고시",
+  "전담기관",
+  "이익공유 가이드라인"
+ ],
+ "process": {
+  "institution_name": "해상풍력 지구·사업 선정",
+  "law_name": "해상풍력 보급 촉진 및 산업 육성에 관한 특별법",
+  "lanes": [
+   "사업 희망자",
+   "기후에너지환경부",
+   "전담기관·위원회",
+   "어민·주민",
+   "계통 사업자",
+   "감독"
+  ],
+  "stages": [
+   "G0 입지",
+   "G1 예비지구",
+   "G2 협의",
+   "G3 발전지구",
+   "G4 사업선정",
+   "G5 실시·사후"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "입지정보·조사",
+    "lane": "전담기관·위원회",
+    "stage": "G0 입지",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "전담기관·위원회",
+    "action": "입지정보·조사",
+    "output_documents": [
+     "조사"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "해상풍력 보급 촉진 및 산업 육성에 관한 특별법",
+      "article": "제12조(해상풍력입지정보망의 구축ㆍ운영)",
+      "text": "해상풍력입지정보망의 구축ㆍ운영"
+     },
+     {
+      "law": "해상풍력 보급 촉진 및 산업 육성에 관한 특별법",
+      "article": "제11조(해상풍력전담기관의 지정 등)",
+      "text": "해상풍력전담기관의 지정 등"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "예비지구 지정 검토",
+    "lane": "기후에너지환경부",
+    "stage": "G1 예비지구",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "기후에너지환경부",
+    "action": "예비지구 지정 검토",
+    "output_documents": [
+     "검토"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "해상풍력 보급 촉진 및 산업 육성에 관한 특별법",
+      "article": "제14조(예비지구의 지정 등)",
+      "text": "예비지구의 지정 등"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "예비지구 지정",
+    "lane": "기후에너지환경부",
+    "stage": "G1 예비지구",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "기후에너지환경부",
+    "action": "예비지구 지정",
+    "output_documents": [
+     "지정"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "해상풍력 보급 촉진 및 산업 육성에 관한 특별법",
+      "article": "제14조(예비지구의 지정 등)",
+      "text": "예비지구의 지정 등"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "민관협의회 운영",
+    "lane": "어민·주민",
+    "stage": "G2 협의",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "어민·주민",
+    "action": "민관협의회 운영",
+    "output_documents": [
+     "협의"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "해상풍력 보급 촉진 및 산업 육성에 관한 특별법",
+      "article": "제17조(민관협의회 구성ㆍ운영)",
+      "text": "민관협의회 구성ㆍ운영"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "주민참여 이익공유 협의",
+    "lane": "어민·주민",
+    "stage": "G2 협의",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "어민·주민",
+    "action": "주민참여 이익공유 협의",
+    "output_documents": [
+     "이익공유"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "해상풍력 보급 촉진 및 산업 육성에 관한 특별법",
+      "article": "제18조(해상풍력발전사업에 대한 주민참여 이익공유)",
+      "text": "해상풍력발전사업에 대한 주민참여 이익공유"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "발전지구 지정",
+    "lane": "기후에너지환경부",
+    "stage": "G3 발전지구",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기후에너지환경부",
+    "action": "발전지구 지정",
+    "output_documents": [
+     "지구"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "해상풍력 보급 촉진 및 산업 육성에 관한 특별법",
+      "article": "제19조(발전지구의 지정)",
+      "text": "발전지구의 지정"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "전력계통 연계 협의",
+    "lane": "계통 사업자",
+    "stage": "G3 발전지구",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "계통 사업자",
+    "action": "전력계통 연계 협의",
+    "output_documents": [
+     "계통"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "해상풍력 보급 촉진 및 산업 육성에 관한 특별법",
+      "article": "제20조(발전지구 전력계통의 연계)",
+      "text": "발전지구 전력계통의 연계"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "사업자 선정 공모·신청",
+    "lane": "사업 희망자",
+    "stage": "G4 사업선정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업 희망자",
+    "action": "사업자 선정 공모·신청",
+    "output_documents": [
+     "신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "해상풍력 보급 촉진 및 산업 육성에 관한 특별법",
+      "article": "제24조(해상풍력발전사업자의 선정 등)",
+      "text": "해상풍력발전사업자의 선정 등"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "사업자 선정 심사",
+    "lane": "기후에너지환경부",
+    "stage": "G4 사업선정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기후에너지환경부",
+    "action": "사업자 선정 심사",
+    "output_documents": [
+     "선정"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "해상풍력 보급 촉진 및 산업 육성에 관한 특별법",
+      "article": "제24조(해상풍력발전사업자의 선정 등)",
+      "text": "해상풍력발전사업자의 선정 등"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "보완·재공모",
+    "lane": "사업 희망자",
+    "stage": "G4 사업선정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업 희망자",
+    "action": "보완·재공모",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "해상풍력 보급 촉진 및 산업 육성에 관한 특별법",
+      "article": "제24조(해상풍력발전사업자의 선정 등)",
+      "text": "해상풍력발전사업자의 선정 등"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "선정 결과 수령",
+    "lane": "사업 희망자",
+    "stage": "G4 사업선정",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업 희망자",
+    "action": "선정 결과 수령",
+    "output_documents": [
+     "선정통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "해상풍력 보급 촉진 및 산업 육성에 관한 특별법",
+      "article": "제24조(해상풍력발전사업자의 선정 등)",
+      "text": "해상풍력발전사업자의 선정 등"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "실시계획 승인·의제",
+    "lane": "기후에너지환경부",
+    "stage": "G5 실시·사후",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기후에너지환경부",
+    "action": "실시계획 승인·의제",
+    "output_documents": [
+     "실시계획"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "해상풍력 보급 촉진 및 산업 육성에 관한 특별법",
+      "article": "제25조(실시계획의 승인 등)",
+      "text": "실시계획의 승인 등"
+     },
+     {
+      "law": "해상풍력 보급 촉진 및 산업 육성에 관한 특별법",
+      "article": "제27조(다른 법률에 따른 인허가등의 의제)",
+      "text": "다른 법률에 따른 인허가등의 의제"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "착공 신고·건설",
+    "lane": "사업 희망자",
+    "stage": "G5 실시·사후",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업 희망자",
+    "action": "착공 신고·건설",
+    "output_documents": [
+     "착공"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "해상풍력 보급 촉진 및 산업 육성에 관한 특별법",
+      "article": "제30조(착공 등 신고)",
+      "text": "착공 등 신고"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "승인 취소",
+    "lane": "감독",
+    "stage": "G5 실시·사후",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "감독",
+    "action": "승인 취소",
+    "output_documents": [
+     "취소"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "해상풍력 보급 촉진 및 산업 육성에 관한 특별법",
+      "article": "제28조(실시계획의 승인취소)",
+      "text": "실시계획의 승인취소"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "처분 통지",
+    "lane": "사업 희망자",
+    "stage": "G5 실시·사후",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업 희망자",
+    "action": "처분 통지",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "해상풍력 보급 촉진 및 산업 육성에 관한 특별법",
+      "article": "제28조(실시계획의 승인취소)",
+      "text": "실시계획의 승인취소"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "예타 특례 검토",
+    "lane": "기후에너지환경부",
+    "stage": "G3 발전지구",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기후에너지환경부",
+    "action": "예타 특례 검토",
+    "output_documents": [
+     "예타"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "해상풍력 보급 촉진 및 산업 육성에 관한 특별법",
+      "article": "제22조(예비타당성조사 실시에 관한 특례)",
+      "text": "예비타당성조사 실시에 관한 특례"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P16",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E11",
+    "source": "P10",
+    "target": "P08",
+    "type": "loop",
+    "label": "재신청"
+   },
+   {
+    "id": "E12",
+    "source": "P09",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": "위반"
+   },
+   {
+    "id": "E16",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "MST 285677."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3",
+  "scope": "L3 당사자 워크스루 후 명시 조문 13건 존재 확인 13건",
+  "notes": [
+   "해상풍력특별법 MST 285677"
+  ],
+  "sources": [
+   {
+    "law": "해상풍력 보급 촉진 및 산업 육성에 관한 특별법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "해상풍력 보급 촉진 및 산업 육성에 관한 특별법",
+    "lawId": "014861",
+    "mst": "285677",
+    "promulgatedOn": "2026-04-28",
+    "effectiveOn": "2026-05-17",
+    "officialUrl": "https://law.go.kr/법령/해상풍력보급촉진및산업육성에관한특별법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 13,
+   "explicitCitationEntries": 13,
+   "articleReferences": 13,
+   "verifiedReferences": 13,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

@@ -1,0 +1,614 @@
+{
+ "slug": "reconstruction-safety-diagnosis",
+ "name": "재건축 안전진단·정비 착수",
+ "oneLiner": "노후 건축물 안전진단과 정비계획 입안·정비구역 지정으로 이어지는 재건축 착수 절차",
+ "type": "인허가형",
+ "priority": 169,
+ "whyFirst": "“재건축 된다/안 된다”의 기술적·행정적 입구다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "안전·노후도를 평가해 정비사업 착수 여부를 가른다.",
+  "stakeholders": "소유자, 지자체, 진단기관, 주민.",
+  "legalBasis": [
+   {
+    "law": "도시 및 주거환경정비법",
+    "articles": "제8·13조의2·16~17·20~21·35조",
+    "kind": "법률"
+   },
+   {
+    "law": "주택법",
+    "articles": "제68조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "시장·군수·시·도",
+    "role": "입안·지정"
+   },
+   {
+    "name": "진단기관",
+    "role": "안전진단"
+   }
+  ],
+  "procedure": [
+   "요청",
+   "진단",
+   "입안",
+   "구역지정",
+   "조합 연계"
+  ],
+  "moneyFlow": "진단 비용(소유자·공공 분담 실무).",
+  "docsFlow": "요청서 → 진단보고서 → 정비계획 → 구역고시.",
+  "bottlenecks": [
+   "진단 기준",
+   "정치적 지정",
+   "비용"
+  ],
+  "reformPoints": [
+   "기준 공개",
+   "처리 기한",
+   "결과 열람"
+  ]
+ },
+ "related": [
+  "정비사업 조합 설립·인가",
+  "재건축·재개발 정비사업",
+  "건축허가"
+ ],
+ "fieldVerification": [
+  "재건축 안전진단 기준 고시",
+  "구조안전·주거환경 평가 배점",
+  "특례 완화 요건"
+ ],
+ "process": {
+  "institution_name": "재건축 안전진단·정비 착수",
+  "law_name": "도시 및 주거환경정비법",
+  "lanes": [
+   "소유자·추진주체",
+   "시장·군수",
+   "안전진단기관",
+   "주민",
+   "시·도",
+   "감독"
+  ],
+  "stages": [
+   "G0 요청",
+   "G1 진단",
+   "G2 결과",
+   "G3 입안",
+   "G4 구역",
+   "G5 사후"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "안전진단·정비 필요성 검토",
+    "lane": "소유자·추진주체",
+    "stage": "G0 요청",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "소유자·추진주체",
+    "action": "안전진단·정비 필요성 검토",
+    "output_documents": [
+     "검토"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제13조의2(정비구역의 지정을 위한 정비계획의 입안 요청 등)",
+      "text": "정비구역의 지정을 위한 정비계획의 입안 요청 등"
+     },
+     {
+      "law": "주택법",
+      "article": "제68조(증축형 리모델링의 안전진단)",
+      "text": "증축형 리모델링의 안전진단"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "진단·입안 요청",
+    "lane": "소유자·추진주체",
+    "stage": "G0 요청",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "소유자·추진주체",
+    "action": "진단·입안 요청",
+    "output_documents": [
+     "요청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제13조의2(정비구역의 지정을 위한 정비계획의 입안 요청 등)",
+      "text": "정비구역의 지정을 위한 정비계획의 입안 요청 등"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "안전진단 실시",
+    "lane": "안전진단기관",
+    "stage": "G1 진단",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "안전진단기관",
+    "action": "안전진단 실시",
+    "output_documents": [
+     "진단"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제68조(증축형 리모델링의 안전진단)",
+      "text": "증축형 리모델링의 안전진단"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "진단 결과 통지",
+    "lane": "소유자·추진주체",
+    "stage": "G2 결과",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "소유자·추진주체",
+    "action": "진단 결과 통지",
+    "output_documents": [
+     "결과"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제68조(증축형 리모델링의 안전진단)",
+      "text": "증축형 리모델링의 안전진단"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "정비계획 입안",
+    "lane": "시장·군수",
+    "stage": "G3 입안",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시장·군수",
+    "action": "정비계획 입안",
+    "output_documents": [
+     "입안"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제13조의2(정비구역의 지정을 위한 정비계획의 입안 요청 등)",
+      "text": "정비구역의 지정을 위한 정비계획의 입안 요청 등"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "주민 의견 청취",
+    "lane": "주민",
+    "stage": "G3 입안",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민",
+    "action": "주민 의견 청취",
+    "output_documents": [
+     "의견"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제16조(정비계획의 결정 및 정비구역의 지정ㆍ고시)",
+      "text": "정비계획의 결정 및 정비구역의 지정ㆍ고시"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "보완 요청",
+    "lane": "소유자·추진주체",
+    "stage": "G1 진단",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "소유자·추진주체",
+    "action": "보완 요청",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제13조의2(정비구역의 지정을 위한 정비계획의 입안 요청 등)",
+      "text": "정비구역의 지정을 위한 정비계획의 입안 요청 등"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "정비구역 지정·고시",
+    "lane": "시·도",
+    "stage": "G4 구역",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시·도",
+    "action": "정비구역 지정·고시",
+    "output_documents": [
+     "지정"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제16조(정비계획의 결정 및 정비구역의 지정ㆍ고시)",
+      "text": "정비계획의 결정 및 정비구역의 지정ㆍ고시"
+     },
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제8조(정비구역의 지정)",
+      "text": "정비구역의 지정"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "지정 효력 발생",
+    "lane": "소유자·추진주체",
+    "stage": "G4 구역",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "소유자·추진주체",
+    "action": "지정 효력 발생",
+    "output_documents": [
+     "효력"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제17조(정비구역 지정ㆍ고시의 효력 등)",
+      "text": "정비구역 지정ㆍ고시의 효력 등"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "조합 설립 연계",
+    "lane": "소유자·추진주체",
+    "stage": "G4 구역",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "소유자·추진주체",
+    "action": "조합 설립 연계",
+    "output_documents": [
+     "조합"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제35조(조합설립인가 등)",
+      "text": "조합설립인가 등"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "구역 해제(해당)",
+    "lane": "시·도",
+    "stage": "G5 사후",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시·도",
+    "action": "구역 해제(해당)",
+    "output_documents": [
+     "해제"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제20조(정비구역등의 해제)",
+      "text": "정비구역등의 해제"
+     },
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제21조(정비구역등의 직권해제)",
+      "text": "정비구역등의 직권해제"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "처분 통지",
+    "lane": "소유자·추진주체",
+    "stage": "G5 사후",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "소유자·추진주체",
+    "action": "처분 통지",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제20조(정비구역등의 해제)",
+      "text": "정비구역등의 해제"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "진단 부적합 시 종료",
+    "lane": "소유자·추진주체",
+    "stage": "G2 결과",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "소유자·추진주체",
+    "action": "진단 부적합 시 종료",
+    "output_documents": [
+     "판단"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제68조(증축형 리모델링의 안전진단)",
+      "text": "증축형 리모델링의 안전진단"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "재진단 루프",
+    "lane": "안전진단기관",
+    "stage": "G1 진단",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "안전진단기관",
+    "action": "재진단 루프",
+    "output_documents": [
+     "재진단"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제68조(증축형 리모델링의 안전진단)",
+      "text": "증축형 리모델링의 안전진단"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "시장·군수 직권 검토",
+    "lane": "시장·군수",
+    "stage": "G0 요청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시장·군수",
+    "action": "시장·군수 직권 검토",
+    "output_documents": [
+     "직권"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제13조의2(정비구역의 지정을 위한 정비계획의 입안 요청 등)",
+      "text": "정비구역의 지정을 위한 정비계획의 입안 요청 등"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "지정 결과 공개",
+    "lane": "주민",
+    "stage": "G4 구역",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민",
+    "action": "지정 결과 공개",
+    "output_documents": [
+     "공개"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "도시 및 주거환경정비법",
+      "article": "제16조(정비계획의 결정 및 정비구역의 지정ㆍ고시)",
+      "text": "정비계획의 결정 및 정비구역의 지정ㆍ고시"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P15",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P04",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P13",
+    "target": "P07",
+    "type": "sequence",
+    "label": "미흡"
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P14",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P14",
+    "target": "P03",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P13",
+    "target": "P05",
+    "type": "sequence",
+    "label": "적합"
+   },
+   {
+    "id": "E10",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P06",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P09",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "2026-07-12 부동산 패키지. MST 284065."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3",
+  "scope": "L3 당사자 워크스루 후 명시 조문 8건 존재 확인 8건",
+  "notes": [
+   "도시 및 주거환경정비법 MST 284065"
+  ],
+  "sources": [
+   {
+    "law": "도시 및 주거환경정비법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "도시 및 주거환경정비법",
+    "lawId": "009410",
+    "mst": "284065",
+    "promulgatedOn": "2026-03-05",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/도시및주거환경정비법"
+   },
+   {
+    "law": "주택법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "주택법",
+    "lawId": "001809",
+    "mst": "284095",
+    "promulgatedOn": "2026-03-05",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/주택법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 8,
+   "explicitCitationEntries": 8,
+   "articleReferences": 8,
+   "verifiedReferences": 8,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

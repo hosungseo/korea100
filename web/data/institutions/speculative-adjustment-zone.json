@@ -1,0 +1,618 @@
+{
+ "slug": "speculative-adjustment-zone",
+ "name": "투기과열지구·조정대상지역",
+ "oneLiner": "투기과열지구·조정대상지역 지정·해제와 전매·청약·대출 연계 효과",
+ "type": "규제특례형",
+ "priority": 180,
+ "whyFirst": "규제지역·풍선효과 논의의 지구 지정 제도다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "주택시장 과열 지역에 강화 규제를 적용·해제한다.",
+  "stakeholders": "국토부, 지자체, 수요자, 사업주체, 금융권.",
+  "legalBasis": [
+   {
+    "law": "주택법",
+    "articles": "제63·63의2·64·54·57의2·58조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "국토교통부",
+    "role": "지정·해제"
+   },
+   {
+    "name": "시·도",
+    "role": "의견"
+   }
+  ],
+  "procedure": [
+   "검토",
+   "의견",
+   "지정",
+   "효과",
+   "모니터링",
+   "해제"
+  ],
+  "moneyFlow": "간접(대출·세금 효과).",
+  "docsFlow": "지정안 → 고시 → 모니터링 → 해제고시.",
+  "bottlenecks": [
+   "풍선효과",
+   "정치성",
+   "지표 논쟁"
+  ],
+  "reformPoints": [
+   "기준 공개",
+   "정기 평가",
+   "금융 연계 투명화"
+  ]
+ },
+ "related": [
+  "전매제한·실거주 의무",
+  "분양가상한제",
+  "주택청약",
+  "부동산 거래신고·자금조달",
+  "LTV·DTI·DSR 대출규제"
+ ],
+ "fieldVerification": [
+  "지정 기준 지표",
+  "현행 지정 현황 고시",
+  "금융 연계 행정지도"
+ ],
+ "process": {
+  "institution_name": "투기과열지구·조정대상지역",
+  "law_name": "주택법",
+  "lanes": [
+   "국토부",
+   "시·도",
+   "주민·시장",
+   "금융·청약 연계",
+   "사업주체",
+   "감독"
+  ],
+  "stages": [
+   "G0 검토",
+   "G1 지정안",
+   "G2 지정",
+   "G3 효과",
+   "G4 모니터링",
+   "G5 해제"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "과열·안정 지표 검토",
+    "lane": "국토부",
+    "stage": "G0 검토",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "국토부",
+    "action": "과열·안정 지표 검토",
+    "output_documents": [
+     "지표"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     },
+     {
+      "law": "주택법",
+      "article": "제63조의2(조정대상지역의 지정 및 해제)",
+      "text": "조정대상지역의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "지정안 마련",
+    "lane": "국토부",
+    "stage": "G1 지정안",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "국토부",
+    "action": "지정안 마련",
+    "output_documents": [
+     "지정안"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "시·도 의견 수렴",
+    "lane": "시·도",
+    "stage": "G1 지정안",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "시·도",
+    "action": "시·도 의견 수렴",
+    "output_documents": [
+     "의견"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "주민·시장 의견",
+    "lane": "주민·시장",
+    "stage": "G1 지정안",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민·시장",
+    "action": "주민·시장 의견",
+    "output_documents": [
+     "의견"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조의2(조정대상지역의 지정 및 해제)",
+      "text": "조정대상지역의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "지정·고시",
+    "lane": "국토부",
+    "stage": "G2 지정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국토부",
+    "action": "지정·고시",
+    "output_documents": [
+     "고시"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     },
+     {
+      "law": "주택법",
+      "article": "제63조의2(조정대상지역의 지정 및 해제)",
+      "text": "조정대상지역의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "지정 결과 공표",
+    "lane": "주민·시장",
+    "stage": "G2 지정",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민·시장",
+    "action": "지정 결과 공표",
+    "output_documents": [
+     "공표"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "전매·청약 효과 적용",
+    "lane": "사업주체",
+    "stage": "G3 효과",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업주체",
+    "action": "전매·청약 효과 적용",
+    "output_documents": [
+     "적용"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제64조(주택의 전매행위 제한 등)",
+      "text": "주택의 전매행위 제한 등"
+     },
+     {
+      "law": "주택법",
+      "article": "제54조(주택의 공급)",
+      "text": "주택의 공급"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "분양가·거주 의무 연계",
+    "lane": "사업주체",
+    "stage": "G3 효과",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업주체",
+    "action": "분양가·거주 의무 연계",
+    "output_documents": [
+     "연계"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제58조(분양가상한제 적용 지역의 지정 및 해제)",
+      "text": "분양가상한제 적용 지역의 지정 및 해제"
+     },
+     {
+      "law": "주택법",
+      "article": "제57조의2(분양가상한제 적용주택 등의 입주자의 거주의무 등)",
+      "text": "분양가상한제 적용주택 등의 입주자의 거주의무 등"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "시장 모니터링",
+    "lane": "국토부",
+    "stage": "G4 모니터링",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국토부",
+    "action": "시장 모니터링",
+    "output_documents": [
+     "모니터"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "해제 검토",
+    "lane": "국토부",
+    "stage": "G5 해제",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국토부",
+    "action": "해제 검토",
+    "output_documents": [
+     "해제검토"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     },
+     {
+      "law": "주택법",
+      "article": "제63조의2(조정대상지역의 지정 및 해제)",
+      "text": "조정대상지역의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "해제·고시",
+    "lane": "국토부",
+    "stage": "G5 해제",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국토부",
+    "action": "해제·고시",
+    "output_documents": [
+     "해제"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조의2(조정대상지역의 지정 및 해제)",
+      "text": "조정대상지역의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "해제 통지·공표",
+    "lane": "주민·시장",
+    "stage": "G5 해제",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민·시장",
+    "action": "해제 통지·공표",
+    "output_documents": [
+     "공표"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "금융·대출 연계 안내",
+    "lane": "금융·청약 연계",
+    "stage": "G3 효과",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "금융·청약 연계",
+    "action": "금융·대출 연계 안내",
+    "output_documents": [
+     "대출"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "재지정 루프",
+    "lane": "국토부",
+    "stage": "G4 모니터링",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국토부",
+    "action": "재지정 루프",
+    "output_documents": [
+     "재지정"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "보완 의견 반영",
+    "lane": "시·도",
+    "stage": "G1 지정안",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시·도",
+    "action": "보완 의견 반영",
+    "output_documents": [
+     "반영"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "투기과열지구의 지정 및 해제"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "지정안 수정",
+    "lane": "국토부",
+    "stage": "G1 지정안",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국토부",
+    "action": "지정안 수정",
+    "output_documents": [
+     "수정"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조의2(조정대상지역의 지정 및 해제)",
+      "text": "조정대상지역의 지정 및 해제"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P15",
+    "target": "P16",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P16",
+    "target": "P02",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P15",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P08",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P13",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P09",
+    "target": "P14",
+    "type": "loop",
+    "label": "재지정"
+   },
+   {
+    "id": "E14",
+    "source": "P14",
+    "target": "P02",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E17",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "2026-07-12 부동산 패키지. MST 284095."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3",
+  "scope": "L3 당사자 워크스루 후 명시 조문 6건 존재 확인 6건",
+  "notes": [
+   "주택법 MST 284095"
+  ],
+  "sources": [
+   {
+    "law": "주택법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "주택법",
+    "lawId": "001809",
+    "mst": "284095",
+    "promulgatedOn": "2026-03-05",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/주택법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 6,
+   "explicitCitationEntries": 6,
+   "articleReferences": 6,
+   "verifiedReferences": 6,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

@@ -1,0 +1,594 @@
+{
+ "slug": "bootstrap-jeonse-loan",
+ "name": "버팀목 전세자금대출",
+ "oneLiner": "주택도시기금을 통한 버팀목 전세자금 대출 신청·심사·실행·사후관리 절차",
+ "type": "재정배분형",
+ "priority": 177,
+ "whyFirst": "서민 전세·정비 이주 자금의 대표 정책금융이다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "저금리 전세자금 대출로 서민 주거비 부담을 완화한다.",
+  "stakeholders": "임차인, 은행, 기금·HUG, 국토부.",
+  "legalBasis": [
+   {
+    "law": "주택도시기금법",
+    "articles": "기금 운용·지원(목적·사업)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "국토부·기금",
+    "role": "제도·한도"
+   },
+   {
+    "name": "은행",
+    "role": "심사·실행"
+   }
+  ],
+  "procedure": [
+   "자격",
+   "신청",
+   "심사",
+   "실행",
+   "상환"
+  ],
+  "moneyFlow": "대출원금·이자, 기금 재원.",
+  "docsFlow": "신청서 → 심사 → 약정 → 실행.",
+  "bottlenecks": [
+   "한도 소진",
+   "서류",
+   "보증 거절"
+  ],
+  "reformPoints": [
+   "기준 공개",
+   "온라인 원스톱",
+   "이주 특례 홍보"
+  ]
+ },
+ "related": [
+  "전세보증금 반환보증",
+  "주택임대차 보호",
+  "재건축·재개발 정비사업"
+ ],
+ "fieldVerification": [
+  "소득·자산 기준 현행",
+  "재건축 이주자 확대 요건",
+  "취급은행 목록·금리"
+ ],
+ "process": {
+  "institution_name": "버팀목 전세자금대출",
+  "law_name": "주택도시기금법",
+  "lanes": [
+   "대출 신청자",
+   "취급은행",
+   "주택도시보증공사·기금",
+   "임대인",
+   "국토부",
+   "감독"
+  ],
+  "stages": [
+   "G0 자격",
+   "G1 신청",
+   "G2 심사",
+   "G3 실행",
+   "G4 상환",
+   "G5 사후"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "소득·자산·무주택 자격 확인",
+    "lane": "대출 신청자",
+    "stage": "G0 자격",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "대출 신청자",
+    "action": "소득·자산·무주택 자격 확인",
+    "output_documents": [
+     "자격"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "대출 상담·상품 확인",
+    "lane": "취급은행",
+    "stage": "G0 자격",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "취급은행",
+    "action": "대출 상담·상품 확인",
+    "output_documents": [
+     "상담"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "대출 신청",
+    "lane": "대출 신청자",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "대출 신청자",
+    "action": "대출 신청",
+    "output_documents": [
+     "신청"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "자격·한도 심사",
+    "lane": "취급은행",
+    "stage": "G2 심사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "취급은행",
+    "action": "자격·한도 심사",
+    "output_documents": [
+     "심사"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "보완 제출",
+    "lane": "대출 신청자",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "대출 신청자",
+    "action": "보완 제출",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "보증·승인",
+    "lane": "주택도시보증공사·기금",
+    "stage": "G2 심사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주택도시보증공사·기금",
+    "action": "보증·승인",
+    "output_documents": [
+     "승인"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "승인 결과 수령",
+    "lane": "대출 신청자",
+    "stage": "G2 심사",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "대출 신청자",
+    "action": "승인 결과 수령",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "임대차계약·확정일자",
+    "lane": "대출 신청자",
+    "stage": "G3 실행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "대출 신청자",
+    "action": "임대차계약·확정일자",
+    "output_documents": [
+     "계약"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "주택임대차보호법",
+      "article": "제3조의2(보증금의 회수)",
+      "text": "보증금의 회수"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "대출 실행·입금",
+    "lane": "취급은행",
+    "stage": "G3 실행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "취급은행",
+    "action": "대출 실행·입금",
+    "output_documents": [
+     "실행"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "임대인 수령 확인",
+    "lane": "임대인",
+    "stage": "G3 실행",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임대인",
+    "action": "임대인 수령 확인",
+    "output_documents": [
+     "수령"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "주택임대차보호법",
+      "article": "제3조의2(보증금의 회수)",
+      "text": "보증금의 회수"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "상환·이자 납부",
+    "lane": "대출 신청자",
+    "stage": "G4 상환",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "대출 신청자",
+    "action": "상환·이자 납부",
+    "output_documents": [
+     "상환"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "기한이익 상실·회수",
+    "lane": "감독",
+    "stage": "G5 사후",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "감독",
+    "action": "기한이익 상실·회수",
+    "output_documents": [
+     "회수"
+    ],
+    "confidence": 0.7,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "처분 통지",
+    "lane": "대출 신청자",
+    "stage": "G5 사후",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "대출 신청자",
+    "action": "처분 통지",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.7,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "재건축 이주 특례 확인",
+    "lane": "대출 신청자",
+    "stage": "G0 자격",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "대출 신청자",
+    "action": "재건축 이주 특례 확인",
+    "output_documents": [
+     "특례"
+    ],
+    "confidence": 0.7,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "재신청",
+    "lane": "대출 신청자",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "대출 신청자",
+    "action": "재신청",
+    "output_documents": [
+     "재신청"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "정책 한도·금리 고시 확인",
+    "lane": "국토부",
+    "stage": "G0 자격",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국토부",
+    "action": "정책 한도·금리 고시 확인",
+    "output_documents": [
+     "고시"
+    ],
+    "confidence": 0.7,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P16",
+    "target": "P01",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P01",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P14",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E07",
+    "source": "P05",
+    "target": "P15",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P15",
+    "target": "P03",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P04",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P09",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "2026-07-12 부동산 패키지. MST 286599."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3",
+  "scope": "L3 당사자 워크스루 후 명시 조문 2건 존재 확인 2건",
+  "notes": [
+   "주택도시기금법 MST 286599"
+  ],
+  "sources": [
+   {
+    "law": "주택도시기금법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "주택도시기금법",
+    "lawId": "012226",
+    "mst": "286599",
+    "promulgatedOn": "2026-06-02",
+    "effectiveOn": "2026-06-02",
+    "officialUrl": "https://law.go.kr/법령/주택도시기금법"
+   },
+   {
+    "law": "주택임대차보호법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "주택임대차보호법",
+    "lawId": "001248",
+    "mst": "276291",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/주택임대차보호법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 2,
+   "explicitCitationEntries": 2,
+   "articleReferences": 2,
+   "verifiedReferences": 2,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

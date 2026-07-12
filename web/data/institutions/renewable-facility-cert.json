@@ -1,0 +1,600 @@
+{
+ "slug": "renewable-facility-cert",
+ "name": "신재생 설비인증·주민참여",
+ "oneLiner": "신·재생에너지 설비 인증, 사후관리, 발전사업 주민 참여 절차",
+ "type": "인허가형",
+ "priority": 157,
+ "whyFirst": "설비 품질·주민수용으로 RPS·발전 허가와 맞물리는 실행 장치다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "신재생 설비의 성능·안전을 인증하고 발전사업에 주민 참여 경로를 둔다.",
+  "stakeholders": "설비 제조·발전사업자, 인증기관, 주민, 기후에너지환경부·산업부.",
+  "legalBasis": [
+   {
+    "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+    "articles": "제13조(설비 인증), 제30조의4(사후관리), 제27조의2(주민 참여), 제24조(청문), 제31조(센터)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "인증기관·센터",
+    "role": "인증·사후관리"
+   },
+   {
+    "name": "사업자",
+    "role": "인증 신청·주민 참여"
+   },
+   {
+    "name": "주민",
+    "role": "참여·의견"
+   }
+  ],
+  "procedure": [
+   "인증 신청",
+   "시험·평가",
+   "인증서 발급",
+   "사후관리",
+   "주민 참여 설계",
+   "인증 취소·청문"
+  ],
+  "moneyFlow": "인증 수수료, 시험비, 주민 참여 지분·수익 배분(사업별).",
+  "docsFlow": "기술자료 → 신청 → 시험성적 → 인증서 → 사후점검 → 처분.",
+  "bottlenecks": [
+   "인증 대기",
+   "부품 변경 재인증",
+   "주민 참여 형식화"
+  ],
+  "reformPoints": [
+   "처리 기한",
+   "변경 인증 간소화",
+   "참여 표준계약"
+  ]
+ },
+ "related": [
+  "신재생 공급의무·REC",
+  "발전사업 허가·전력계통 접속",
+  "해상풍력 지구·사업 선정"
+ ],
+ "fieldVerification": [
+  "인증기관 목록",
+  "인증 대상 설비 범위",
+  "주민참여 가이드"
+ ],
+ "process": {
+  "institution_name": "신재생 설비인증·주민참여",
+  "law_name": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+  "lanes": [
+   "사업자·제조사",
+   "인증기관",
+   "주민",
+   "기후부·산업부",
+   "사후관리",
+   "감독·청문"
+  ],
+  "stages": [
+   "G0 준비",
+   "G1 신청",
+   "G2 평가",
+   "G3 인증",
+   "G4 참여·운영",
+   "G5 사후"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "설비·인증 대상 확인",
+    "lane": "사업자·제조사",
+    "stage": "G0 준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "사업자·제조사",
+    "action": "설비·인증 대상 확인",
+    "output_documents": [
+     "대상"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제13조(신ㆍ재생에너지 설비의 인증 등)",
+      "text": "신ㆍ재생에너지 설비의 인증 등"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "인증 신청",
+    "lane": "사업자·제조사",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "사업자·제조사",
+    "action": "인증 신청",
+    "output_documents": [
+     "신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제13조(신ㆍ재생에너지 설비의 인증 등)",
+      "text": "신ㆍ재생에너지 설비의 인증 등"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "시험·평가",
+    "lane": "인증기관",
+    "stage": "G2 평가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "인증기관",
+    "action": "시험·평가",
+    "output_documents": [
+     "평가"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제13조(신ㆍ재생에너지 설비의 인증 등)",
+      "text": "신ㆍ재생에너지 설비의 인증 등"
+     },
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제31조(신ㆍ재생에너지센터)",
+      "text": "신ㆍ재생에너지센터"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "보완·재시험",
+    "lane": "사업자·제조사",
+    "stage": "G2 평가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업자·제조사",
+    "action": "보완·재시험",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제13조(신ㆍ재생에너지 설비의 인증 등)",
+      "text": "신ㆍ재생에너지 설비의 인증 등"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "인증 발급",
+    "lane": "인증기관",
+    "stage": "G3 인증",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "인증기관",
+    "action": "인증 발급",
+    "output_documents": [
+     "인증서"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제13조(신ㆍ재생에너지 설비의 인증 등)",
+      "text": "신ㆍ재생에너지 설비의 인증 등"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "인증 결과 수령",
+    "lane": "사업자·제조사",
+    "stage": "G3 인증",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업자·제조사",
+    "action": "인증 결과 수령",
+    "output_documents": [
+     "수령"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제13조(신ㆍ재생에너지 설비의 인증 등)",
+      "text": "신ㆍ재생에너지 설비의 인증 등"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "주민 참여 설계",
+    "lane": "사업자·제조사",
+    "stage": "G4 참여·운영",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업자·제조사",
+    "action": "주민 참여 설계",
+    "output_documents": [
+     "참여안"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제27조의2(신ㆍ재생에너지 발전사업에 대한 주민 참여)",
+      "text": "신ㆍ재생에너지 발전사업에 대한 주민 참여"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "주민 의견·참여",
+    "lane": "주민",
+    "stage": "G4 참여·운영",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민",
+    "action": "주민 의견·참여",
+    "output_documents": [
+     "의견"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제27조의2(신ㆍ재생에너지 발전사업에 대한 주민 참여)",
+      "text": "신ㆍ재생에너지 발전사업에 대한 주민 참여"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "사후관리 점검",
+    "lane": "사후관리",
+    "stage": "G4 참여·운영",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사후관리",
+    "action": "사후관리 점검",
+    "output_documents": [
+     "점검"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제30조의4(신ㆍ재생에너지 설비에 대한 사후관리)",
+      "text": "신ㆍ재생에너지 설비에 대한 사후관리"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "인증 취소 검토",
+    "lane": "감독·청문",
+    "stage": "G5 사후",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "감독·청문",
+    "action": "인증 취소 검토",
+    "output_documents": [
+     "취소"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제13조(신ㆍ재생에너지 설비의 인증 등)",
+      "text": "신ㆍ재생에너지 설비의 인증 등"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "청문",
+    "lane": "감독·청문",
+    "stage": "G5 사후",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "감독·청문",
+    "action": "청문",
+    "output_documents": [
+     "청문"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제24조(청문)",
+      "text": "청문"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "처분 통지",
+    "lane": "사업자·제조사",
+    "stage": "G5 사후",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업자·제조사",
+    "action": "처분 통지",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제24조(청문)",
+      "text": "청문"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "정책 지원 연계",
+    "lane": "기후부·산업부",
+    "stage": "G3 인증",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기후부·산업부",
+    "action": "정책 지원 연계",
+    "output_documents": [
+     "지원"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제17조(신ㆍ재생에너지 발전 기준가격의 고시 및 차액 지원)",
+      "text": "신ㆍ재생에너지 발전 기준가격의 고시 및 차액 지원"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "지원 중단(해당)",
+    "lane": "기후부·산업부",
+    "stage": "G5 사후",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기후부·산업부",
+    "action": "지원 중단(해당)",
+    "output_documents": [
+     "중단"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제18조(지원 중단 등)",
+      "text": "지원 중단 등"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "부품 변경 신고",
+    "lane": "사업자·제조사",
+    "stage": "G4 참여·운영",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업자·제조사",
+    "action": "부품 변경 신고",
+    "output_documents": [
+     "변경"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제13조(신ㆍ재생에너지 설비의 인증 등)",
+      "text": "신ㆍ재생에너지 설비의 인증 등"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "재인증 루프",
+    "lane": "사업자·제조사",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업자·제조사",
+    "action": "재인증 루프",
+    "output_documents": [
+     "재인증"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+      "article": "제13조(신ㆍ재생에너지 설비의 인증 등)",
+      "text": "신ㆍ재생에너지 설비의 인증 등"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P02",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P03",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P06",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P09",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P15",
+    "target": "P16",
+    "type": "loop",
+    "label": "재인증"
+   },
+   {
+    "id": "E13",
+    "source": "P16",
+    "target": "P02",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E17",
+    "source": "P14",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "MST 268793."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3",
+  "scope": "L3 당사자 워크스루 후 명시 조문 7건 존재 확인 7건",
+  "notes": [
+   "신재생법 MST 268793"
+  ],
+  "sources": [
+   {
+    "law": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법",
+    "lawId": "000299",
+    "mst": "268793",
+    "promulgatedOn": "2025-01-31",
+    "effectiveOn": "2026-02-01",
+    "officialUrl": "https://law.go.kr/법령/신에너지및재생에너지개발·이용·보급촉진법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 7,
+   "explicitCitationEntries": 7,
+   "articleReferences": 7,
+   "verifiedReferences": 7,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

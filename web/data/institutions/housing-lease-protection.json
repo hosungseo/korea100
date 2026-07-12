@@ -1,0 +1,615 @@
+{
+ "slug": "housing-lease-protection",
+ "name": "주택임대차 보호",
+ "oneLiner": "계약기간·갱신요구, 보증금 회수, 확정일자, 분쟁조정 절차",
+ "type": "권리구제형",
+ "priority": 174,
+ "whyFirst": "전세·월세 계약의 기본권 보호 본체다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "주택 임차인의 주거 안정을 위해 계약·보증금·분쟁을 보호한다.",
+  "stakeholders": "임차인, 임대인, 조정위, 지자체.",
+  "legalBasis": [
+   {
+    "law": "주택임대차보호법",
+    "articles": "제3조의2~7, 제4·6~6의3·8·14·30조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "분쟁조정위원회",
+    "role": "조정"
+   },
+   {
+    "name": "임차인·임대인",
+    "role": "계약 당사자"
+   }
+  ],
+  "procedure": [
+   "계약",
+   "대항",
+   "갱신",
+   "보증금",
+   "분쟁"
+  ],
+  "moneyFlow": "보증금, 차임, 조정 비용.",
+  "docsFlow": "계약서 → 확정일자 → 갱신요구 → 조정.",
+  "bottlenecks": [
+   "갱신 거절",
+   "보증금 미반환",
+   "정보 비대칭"
+  ],
+  "reformPoints": [
+   "표준계약 강제",
+   "정보 제시 강화",
+   "조정 실효성"
+  ]
+ },
+ "related": [
+  "전세사기 피해지원",
+  "전세보증금 반환보증",
+  "부동산 거래신고·임대차 신고",
+  "민간임대주택 등록·공급"
+ ],
+ "fieldVerification": [
+  "갱신 거절 사유 목록",
+  "분쟁조정 관할",
+  "최우선변제금 고시"
+ ],
+ "process": {
+  "institution_name": "주택임대차 보호",
+  "law_name": "주택임대차보호법",
+  "lanes": [
+   "임차인",
+   "임대인",
+   "확정일자 부여기관",
+   "분쟁조정위",
+   "법원·집행",
+   "지자체"
+  ],
+  "stages": [
+   "G0 계약",
+   "G1 대항",
+   "G2 갱신",
+   "G3 종료",
+   "G4 보증금",
+   "G5 분쟁"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "임대차계약 체결",
+    "lane": "임차인",
+    "stage": "G0 계약",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "임차인",
+    "action": "임대차계약 체결",
+    "output_documents": [
+     "계약"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택임대차보호법",
+      "article": "제4조(임대차기간 등)",
+      "text": "임대차기간 등"
+     },
+     {
+      "law": "주택임대차보호법",
+      "article": "제30조(주택임대차표준계약서 사용)",
+      "text": "주택임대차표준계약서 사용"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "확정일자·대항요건",
+    "lane": "임차인",
+    "stage": "G1 대항",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "임차인",
+    "action": "확정일자·대항요건",
+    "output_documents": [
+     "확정일자"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택임대차보호법",
+      "article": "제3조의6(확정일자 부여 및 임대차 정보제공 등)",
+      "text": "확정일자 부여 및 임대차 정보제공 등"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "임대인 정보 제시",
+    "lane": "임대인",
+    "stage": "G1 대항",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "임대인",
+    "action": "임대인 정보 제시",
+    "output_documents": [
+     "정보"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택임대차보호법",
+      "article": "제3조의7(임대인의 정보 제시 의무)",
+      "text": "임대인의 정보 제시 의무"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "계약갱신 요구",
+    "lane": "임차인",
+    "stage": "G2 갱신",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "임차인",
+    "action": "계약갱신 요구",
+    "output_documents": [
+     "갱신요구"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택임대차보호법",
+      "article": "제6조의3(계약갱신 요구 등)",
+      "text": "계약갱신 요구 등"
+     },
+     {
+      "law": "주택임대차보호법",
+      "article": "제6조(계약의 갱신)",
+      "text": "계약의 갱신"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "갱신 거절·수락",
+    "lane": "임대인",
+    "stage": "G2 갱신",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임대인",
+    "action": "갱신 거절·수락",
+    "output_documents": [
+     "회신"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택임대차보호법",
+      "article": "제6조의3(계약갱신 요구 등)",
+      "text": "계약갱신 요구 등"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "묵시 갱신·해지",
+    "lane": "임차인",
+    "stage": "G2 갱신",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임차인",
+    "action": "묵시 갱신·해지",
+    "output_documents": [
+     "해지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택임대차보호법",
+      "article": "제6조의2(묵시적 갱신의 경우 계약의 해지)",
+      "text": "묵시적 갱신의 경우 계약의 해지"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "계약 종료·명도",
+    "lane": "임대인",
+    "stage": "G3 종료",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임대인",
+    "action": "계약 종료·명도",
+    "output_documents": [
+     "종료"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택임대차보호법",
+      "article": "제4조(임대차기간 등)",
+      "text": "임대차기간 등"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "보증금 반환 청구",
+    "lane": "임차인",
+    "stage": "G4 보증금",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임차인",
+    "action": "보증금 반환 청구",
+    "output_documents": [
+     "반환청구"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택임대차보호법",
+      "article": "제3조의2(보증금의 회수)",
+      "text": "보증금의 회수"
+     },
+     {
+      "law": "주택임대차보호법",
+      "article": "제8조(보증금 중 일정액의 보호)",
+      "text": "보증금 중 일정액의 보호"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "보증금 반환",
+    "lane": "임대인",
+    "stage": "G4 보증금",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임대인",
+    "action": "보증금 반환",
+    "output_documents": [
+     "반환"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택임대차보호법",
+      "article": "제3조의2(보증금의 회수)",
+      "text": "보증금의 회수"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "분쟁조정 신청",
+    "lane": "임차인",
+    "stage": "G5 분쟁",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임차인",
+    "action": "분쟁조정 신청",
+    "output_documents": [
+     "조정"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택임대차보호법",
+      "article": "제14조(주택임대차분쟁조정위원회)",
+      "text": "주택임대차분쟁조정위원회"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "조정 심리",
+    "lane": "분쟁조정위",
+    "stage": "G5 분쟁",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "분쟁조정위",
+    "action": "조정 심리",
+    "output_documents": [
+     "심리"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택임대차보호법",
+      "article": "제14조(주택임대차분쟁조정위원회)",
+      "text": "주택임대차분쟁조정위원회"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "조정 결과 수령",
+    "lane": "임차인",
+    "stage": "G5 분쟁",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임차인",
+    "action": "조정 결과 수령",
+    "output_documents": [
+     "조서"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택임대차보호법",
+      "article": "제14조(주택임대차분쟁조정위원회)",
+      "text": "주택임대차분쟁조정위원회"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "우선변제·집행",
+    "lane": "임차인",
+    "stage": "G4 보증금",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임차인",
+    "action": "우선변제·집행",
+    "output_documents": [
+     "집행"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "주택임대차보호법",
+      "article": "제3조의2(보증금의 회수)",
+      "text": "보증금의 회수"
+     },
+     {
+      "law": "주택임대차보호법",
+      "article": "제3조의4(「민법」에 따른 주택임대차등기의 효력 등)",
+      "text": "「민법」에 따른 주택임대차등기의 효력 등"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "재협의 루프",
+    "lane": "임차인",
+    "stage": "G2 갱신",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임차인",
+    "action": "재협의 루프",
+    "output_documents": [
+     "재협의"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택임대차보호법",
+      "article": "제6조의3(계약갱신 요구 등)",
+      "text": "계약갱신 요구 등"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "임대차 신고 연계",
+    "lane": "지자체",
+    "stage": "G0 계약",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지자체",
+    "action": "임대차 신고 연계",
+    "output_documents": [
+     "신고"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제6조의2(주택 임대차 계약의 신고)",
+      "text": "주택 임대차 계약의 신고"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "위원회 자문(해당)",
+    "lane": "분쟁조정위",
+    "stage": "G5 분쟁",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "분쟁조정위",
+    "action": "위원회 자문(해당)",
+    "output_documents": [
+     "자문"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "주택임대차보호법",
+      "article": "제8조의2(주택임대차위원회)",
+      "text": "주택임대차위원회"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P15",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P05",
+    "target": "P14",
+    "type": "sequence",
+    "label": "불복"
+   },
+   {
+    "id": "E07",
+    "source": "P14",
+    "target": "P04",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P08",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P08",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P11",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "2026-07-12 부동산 패키지. MST 276291."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3",
+  "scope": "L3 당사자 워크스루 후 명시 조문 13건 존재 확인 13건",
+  "notes": [
+   "주택임대차보호법 MST 276291"
+  ],
+  "sources": [
+   {
+    "law": "주택임대차보호법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "주택임대차보호법",
+    "lawId": "001248",
+    "mst": "276291",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/주택임대차보호법"
+   },
+   {
+    "law": "부동산 거래신고 등에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "부동산 거래신고 등에 관한 법률",
+    "lawId": "012480",
+    "mst": "259641",
+    "promulgatedOn": "2024-02-06",
+    "effectiveOn": "2024-05-17",
+    "officialUrl": "https://law.go.kr/법령/부동산거래신고등에관한법률"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 13,
+   "explicitCitationEntries": 13,
+   "articleReferences": 13,
+   "verifiedReferences": 13,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

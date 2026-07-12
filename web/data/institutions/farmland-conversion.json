@@ -1,0 +1,643 @@
+{
+ "slug": "farmland-conversion",
+ "name": "농지전용 허가",
+ "oneLiner": "농지를 농업 외 목적으로 쓰기 위한 전용허가·협의·신고와 농지보전부담금·원상회복 절차",
+ "type": "인허가형",
+ "priority": 134,
+ "whyFirst": "메가 입지(특화단지·IDC·산단) 후보지가 농지일 때 최전방 병목이다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "식량안보를 위한 농지 보전과 산업·인프라 입지 수요를 전용허가·부담금·원상회복 체계로 조정한다.",
+  "stakeholders": "전용 사업자·시행자, 농림축산식품부·지자체(시장·군수·구청장), 농업인·지역 주민, 환경·도시계획 협의 기관.",
+  "legalBasis": [
+   {
+    "law": "농지법",
+    "articles": "제28~32조(농업진흥지역), 제34조(전용허가·협의), 제35조(전용신고), 제36·36조의2(일시사용), 제37·37조의2(제한·적용기준), 제38조(보전부담금), 제39조(취소 등), 제40조(용도변경 승인), 제42조(원상회복), 제43조(특례), 제55조(청문), 제56조(수수료)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "농림축산식품부·지자체",
+    "role": "전용허가·협의·신고 수리"
+   },
+   {
+    "name": "사업시행자",
+    "role": "전용 신청·부담금 납부"
+   },
+   {
+    "name": "농업인·주민",
+    "role": "의견·이해관계"
+   }
+  ],
+  "procedure": [
+   "전용 목적·면적·입지 해당성 검토(진흥지역·용도)",
+   "전용허가 또는 협의 신청(§34) / 신고 해당 시 §35",
+   "제한 사유·적용기준 심사(§37·§37의2)",
+   "주민·관계기관 의견 반영(해당 시)",
+   "허가·협의 처분 및 조건 부여",
+   "농지보전부담금 부과·납부(§38)",
+   "사업 착수·용도변경 승인(§40, 해당 시)",
+   "위반 시 취소·원상회복·청문(§39·§42·§55)"
+  ],
+  "moneyFlow": "농지보전부담금(§38), 수수료(§56). 원상회복 비용은 사업자 부담.",
+  "docsFlow": "사업계획·지적 → 허가신청서 → 심사·협의서 → 허가서 → 부담금 고지·납부 → 준공·용도변경.",
+  "bottlenecks": [
+   "농업진흥지역 전용 제한",
+   "부담금 규모와 납부 시점",
+   "도시계획·환경 절차와 중복",
+   "원상회복 이행 분쟁"
+  ],
+  "reformPoints": [
+   "메가 입지 사전 농지 소요 공개",
+   "부담금·특례 요건 투명화",
+   "원스톱 협의 기한 명시"
+  ]
+ },
+ "related": [
+  "산업단지 지정·개발",
+  "국가첨단전략산업 특화단지 지정·지원",
+  "토지거래허가",
+  "개발행위허가",
+  "환경영향평가",
+  "산지전용 허가",
+  "매장유산 지표·발굴 조사"
+ ],
+ "fieldVerification": [
+  "전용허가 관할 위임 범위(면적 기준)",
+  "부담금 산정 고시 최신 단가",
+  "진흥지역 해제·변경 실무 연계"
+ ],
+ "process": {
+  "institution_name": "농지전용 허가",
+  "law_name": "농지법",
+  "lanes": [
+   "사업시행자",
+   "농식품부·지자체",
+   "관계기관(도시·환경)",
+   "농업인·주민",
+   "부담금 징수",
+   "감독·청문"
+  ],
+  "stages": [
+   "G0 입지",
+   "G1 신청",
+   "G2 심사",
+   "G3 허가",
+   "G4 부담금·착수",
+   "G5 사후·불복"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "전용 필요성·입지 검토",
+    "lane": "사업시행자",
+    "stage": "G0 입지",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "사업시행자",
+    "action": "전용 필요성·입지 검토",
+    "output_documents": [
+     "입지검토"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "농지법",
+      "article": "제32조(용도구역에서의 행위 제한)",
+      "text": "용도구역에서의 행위 제한"
+     },
+     {
+      "law": "농지법",
+      "article": "제28조(농업진흥지역의 지정)",
+      "text": "농업진흥지역의 지정"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "진흥지역·용도 해당성 확인",
+    "lane": "농식품부·지자체",
+    "stage": "G0 입지",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "농식품부·지자체",
+    "action": "진흥지역·용도 해당성 확인",
+    "output_documents": [
+     "해당성"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "농지법",
+      "article": "제29조(농업진흥지역의 지정 대상)",
+      "text": "농업진흥지역의 지정 대상"
+     },
+     {
+      "law": "농지법",
+      "article": "제37조(농지전용허가 등의 제한)",
+      "text": "농지전용허가 등의 제한"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "허가·협의 vs 신고 경로",
+    "lane": "사업시행자",
+    "stage": "G1 신청",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "사업시행자",
+    "action": "허가·협의 vs 신고 경로",
+    "output_documents": [
+     "경로"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "농지법",
+      "article": "제34조(농지의 전용허가ㆍ협의)",
+      "text": "농지의 전용허가ㆍ협의"
+     },
+     {
+      "law": "농지법",
+      "article": "제35조(농지전용신고)",
+      "text": "농지전용신고"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "전용허가·협의·신고·일시사용 신청",
+    "lane": "사업시행자",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "사업시행자",
+    "action": "전용허가·협의·신고·일시사용 신청",
+    "output_documents": [
+     "신청서"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "농지법",
+      "article": "제34조(농지의 전용허가ㆍ협의)",
+      "text": "전용허가ㆍ협의"
+     },
+     {
+      "law": "농지법",
+      "article": "제35조(농지전용신고)",
+      "text": "전용신고"
+     },
+     {
+      "law": "농지법",
+      "article": "제36조(농지의 타용도 일시사용허가 등)",
+      "text": "일시사용허가"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "신고·일시사용 해당성 확인",
+    "lane": "농식품부·지자체",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업시행자",
+    "action": "전용신고(해당 시)",
+    "output_documents": [
+     "신고서"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "농지법",
+      "article": "제35조(농지전용신고)",
+      "text": "농지전용신고"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "제한사유·적용기준 심사",
+    "lane": "농식품부·지자체",
+    "stage": "G2 심사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "농식품부·지자체",
+    "action": "제한사유·적용기준 심사",
+    "output_documents": [
+     "심사서"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "농지법",
+      "article": "제37조(농지전용허가 등의 제한)",
+      "text": "농지전용허가 등의 제한"
+     },
+     {
+      "law": "농지법",
+      "article": "제37조의2(둘 이상의 용도지역ㆍ용도지구에 걸치는 농지에 대한 전용허가 시 적용기준)",
+      "text": "둘 이상의 용도지역ㆍ용도지구에 걸치는 농지에 대한 전용허가 시 적용기준"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "관계기관 협의",
+    "lane": "관계기관(도시·환경)",
+    "stage": "G2 심사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "관계기관(도시·환경)",
+    "action": "관계기관 협의",
+    "output_documents": [
+     "협의"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "농지법",
+      "article": "제34조(농지의 전용허가ㆍ협의)",
+      "text": "농지의 전용허가ㆍ협의"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "주민·농업인 의견(해당 시)",
+    "lane": "농업인·주민",
+    "stage": "G2 심사",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "농업인·주민",
+    "action": "주민·농업인 의견(해당 시)",
+    "output_documents": [
+     "의견"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "농지법",
+      "article": "제31조의2(주민의견청취)",
+      "text": "주민의견청취"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "허가·협의 처분",
+    "lane": "농식품부·지자체",
+    "stage": "G3 허가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "농식품부·지자체",
+    "action": "허가·협의 처분",
+    "output_documents": [
+     "허가서"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "농지법",
+      "article": "제34조(농지의 전용허가ㆍ협의)",
+      "text": "농지의 전용허가ㆍ협의"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "보전부담금 부과·납부",
+    "lane": "부담금 징수",
+    "stage": "G4 부담금·착수",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "부담금 징수",
+    "action": "보전부담금 부과·납부",
+    "output_documents": [
+     "고지·납부"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "농지법",
+      "article": "제38조(농지보전부담금)",
+      "text": "농지보전부담금"
+     },
+     {
+      "law": "농지법",
+      "article": "제56조(수수료)",
+      "text": "수수료"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "사업 착수·용도변경 승인",
+    "lane": "사업시행자",
+    "stage": "G4 부담금·착수",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업시행자",
+    "action": "사업 착수·용도변경 승인",
+    "output_documents": [
+     "착수"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "농지법",
+      "article": "제40조(용도변경의 승인)",
+      "text": "용도변경의 승인"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "취소·원상회복 명령",
+    "lane": "감독·청문",
+    "stage": "G5 사후·불복",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "감독·청문",
+    "action": "취소·원상회복 명령",
+    "output_documents": [
+     "명령"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "농지법",
+      "article": "제39조(전용허가의 취소 등)",
+      "text": "전용허가의 취소 등"
+     },
+     {
+      "law": "농지법",
+      "article": "제42조(원상회복 등)",
+      "text": "원상회복 등"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "청문",
+    "lane": "감독·청문",
+    "stage": "G5 사후·불복",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "감독·청문",
+    "action": "청문",
+    "output_documents": [
+     "청문"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "농지법",
+      "article": "제55조(청문)",
+      "text": "청문"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "처분 통지 수령·불복 검토",
+    "lane": "사업시행자",
+    "stage": "G5 사후·불복",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업시행자",
+    "action": "처분 통지 수령·불복 검토",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "농지법",
+      "article": "제39조(전용허가의 취소 등)",
+      "text": "전용허가의 취소 등"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "보완·재신청",
+    "lane": "사업시행자",
+    "stage": "G2 심사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업시행자",
+    "action": "보완·재신청",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "농지법",
+      "article": "제34조(농지의 전용허가ㆍ협의)",
+      "text": "농지의 전용허가ㆍ협의"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "특례·제한 사전 검토",
+    "lane": "사업시행자",
+    "stage": "G0 입지",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "사업시행자",
+    "action": "일시사용허가(해당 시)",
+    "output_documents": [
+     "일시사용"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "농지법",
+      "article": "제43조(농지전용허가의 특례)",
+      "text": "특례"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P16",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": "신청"
+   },
+   {
+    "id": "E05",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P06",
+    "target": "P15",
+    "type": "sequence",
+    "label": "보완 요구"
+   },
+   {
+    "id": "E11",
+    "source": "P15",
+    "target": "P04",
+    "type": "loop",
+    "label": "재신청"
+   },
+   {
+    "id": "E12",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": "위반 시"
+   },
+   {
+    "id": "E15",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E17",
+    "source": "P09",
+    "target": "P14",
+    "type": "sequence",
+    "label": "결과 통지"
+   }
+  ],
+  "warnings": [
+   "2026-07-12 L3: 신청인 보완·청문·원상회복 경로. MST 286901."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3 당사자 워크스루",
+  "scope": "L3 당사자 워크스루 후 명시 조문 15건 존재 확인 15건",
+  "notes": [
+   "농지법 현행 MST 286901 (2026-06-16)",
+   "L3 페르소나: 사업시행자·농업인"
+  ],
+  "sources": [
+   {
+    "law": "농지법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "농지법",
+    "lawId": "000479",
+    "mst": "286901",
+    "promulgatedOn": "2026-06-16",
+    "effectiveOn": "2026-06-16",
+    "officialUrl": "https://law.go.kr/법령/농지법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 15,
+   "explicitCitationEntries": 15,
+   "articleReferences": 15,
+   "verifiedReferences": 15,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

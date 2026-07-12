@@ -1,0 +1,724 @@
+{
+ "slug": "industrial-water-intake-permit",
+ "name": "공업용수·취수 허가",
+ "oneLiner": "하천·댐·광역수도 등에서 공업·생활용수를 확보하기 위한 취수·사용 허가와 공급 계약 절차",
+ "type": "인허가형",
+ "priority": 128,
+ "whyFirst": "반도체·DC 냉각·용수 갈등의 제도적 핵심이다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "한정된 수자원을 허가·배분 체계로 관리해 산업·생활·환경 수요를 조정한다.",
+  "stakeholders": "취수 사업자·기업, 환경부·홍수통제, 수자원공사·지자체 상수도, 농민·하류 주민.",
+  "legalBasis": [
+   {
+    "law": "하천법",
+    "articles": "제33조(점용허가), 제34조(기득 보호), 제49조(사용·배분 원칙), 제50조(사용허가), 제50조의2(일시 신고), 제52·53조, 제69조",
+    "kind": "법률"
+   },
+   {
+    "law": "수도법",
+    "articles": "제38조(공급규정), 제48·49조(공업용수도), 제52·54조(전용수도)",
+    "kind": "법률"
+   },
+   {
+    "law": "물환경보전법",
+    "articles": "제33조(배출시설 허가·신고), 제38조(운영)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "환경부·유역청",
+    "role": "하천수 사용 허가"
+   },
+   {
+    "name": "한국수자원공사·지자체",
+    "role": "용수 공급"
+   },
+   {
+    "name": "수요 기업",
+    "role": "취수·사용 신청"
+   }
+  ],
+  "procedure": [
+   "용수 수지·공급 협의",
+   "하천수 사용허가 신청·심사(§50)",
+   "기득 보호·사용 조정·분쟁조정(§34·53·54)",
+   "허가 처분 통지",
+   "공업용수도·전용수도 인가·공급규정(수도법)",
+   "점용·시설 및 손실보상 협의(§33·35)",
+   "사용 관리·폐수 배출시설 연계",
+   "감독 처분 및 청문(§69·91)"
+  ],
+  "moneyFlow": "하천수 사용료, 광역·공업용수도 요금, 시설 분담금.",
+  "docsFlow": "수요계획 → 허가신청 → 심사서 → 허가서·계약 → 계측 보고.",
+  "bottlenecks": [
+   "가뭄·기득 수리권과 신규 수요 충돌",
+   "농민·지역 물 갈등",
+   "원수 수질·방류 규제",
+   "허가 수량과 실제 공급 불일치"
+  ],
+  "reformPoints": [
+   "산업·생활·농업 물배분 기준 공개",
+   "재이용수·절수 의무 강화",
+   "메가 수요 사전 물수지 공개"
+  ]
+ },
+ "related": [
+  "환경영향평가",
+  "공장설립승인",
+  "공유수면 점·사용 허가",
+  "지방공기업"
+ ],
+ "fieldVerification": [
+  "공업용수 전용 공급 계약 표준",
+  "하천수 사용 허가 관할(국가/지방 하천)",
+  "재이용수 의무 비율 고시"
+ ],
+ "process": {
+  "institution_name": "공업용수·취수 허가",
+  "law_name": "하천법·수도법",
+  "lanes": [
+   "수요 기업",
+   "하천관리청·환경부",
+   "공급기관(수공·지자체)",
+   "기득 사용자·하류",
+   "환경 감시",
+   "지자체"
+  ],
+  "stages": [
+   "G0 수요",
+   "G1 신청",
+   "G2 심사·조정",
+   "G3 허가·계약",
+   "G4 시설",
+   "G5 운영·불복"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "용수 수지·원수 검토",
+    "lane": "수요 기업",
+    "stage": "G0 수요",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "수요 기업",
+    "action": "용수 수지·원수 검토",
+    "output_documents": [
+     "수요계획"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "하천법",
+      "article": "제49조(하천수 사용 및 배분의 원칙)",
+      "text": "하천수 사용 및 배분의 원칙"
+     },
+     {
+      "law": "수도법",
+      "article": "제48조(국가 등이 설치하는 공업용수도)",
+      "text": "국가 등이 설치하는 공업용수도"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "공급 가능성 협의",
+    "lane": "공급기관(수공·지자체)",
+    "stage": "G0 수요",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "공급기관(수공·지자체)",
+    "action": "공급 가능성 협의",
+    "output_documents": [
+     "공급 의견"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "수도법",
+      "article": "제48조(국가 등이 설치하는 공업용수도)",
+      "text": "국가 등이 설치하는 공업용수도"
+     },
+     {
+      "law": "수도법",
+      "article": "제49조(공업용수도사업의 인가)",
+      "text": "공업용수도사업의 인가"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "하천수 사용허가 신청",
+    "lane": "수요 기업",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "수요 기업",
+    "action": "하천수 사용허가 신청",
+    "output_documents": [
+     "허가신청서"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "하천법",
+      "article": "제50조(하천수의 사용허가 등)",
+      "text": "하천수의 사용허가 등"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "일시 사용 신고(해당 시)",
+    "lane": "수요 기업",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "수요 기업",
+    "action": "일시 사용 신고(해당 시)",
+    "output_documents": [
+     "사용신고"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "하천법",
+      "article": "제50조의2(일시적 하천수의 사용신고 등)",
+      "text": "일시적 하천수의 사용신고 등"
+     }
+    ],
+    "deadline": "일시 사용 신고 관련 §50조의2"
+   },
+   {
+    "id": "P05",
+    "name": "허가 요건 심사",
+    "lane": "하천관리청·환경부",
+    "stage": "G2 심사·조정",
+    "type": "gateway",
+    "status": "current",
+    "progress": 40,
+    "actor": "하천관리청·환경부",
+    "action": "허가 요건 심사",
+    "output_documents": [
+     "심사서"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "하천법",
+      "article": "제50조(하천수의 사용허가 등)",
+      "text": "하천수의 사용허가 등"
+     },
+     {
+      "law": "하천법",
+      "article": "제52조(하천수의 사용 및 관리)",
+      "text": "하천수의 사용 및 관리"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "기득 사용자 보호·의견",
+    "lane": "기득 사용자·하류",
+    "stage": "G2 심사·조정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기득 사용자·하류",
+    "action": "기득 사용자 보호·의견",
+    "output_documents": [
+     "의견"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "하천법",
+      "article": "제34조(기득하천사용자의 보호)",
+      "text": "기득하천사용자의 보호"
+     },
+     {
+      "law": "하천법",
+      "article": "제53조(하천수 사용의 조정)",
+      "text": "하천수 사용의 조정"
+     }
+    ],
+    "blocker": "물 배분 갈등"
+   },
+   {
+    "id": "P07",
+    "name": "하천수 사용 조정",
+    "lane": "하천관리청·환경부",
+    "stage": "G2 심사·조정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "하천관리청·환경부",
+    "action": "하천수 사용 조정",
+    "output_documents": [
+     "조정"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "하천법",
+      "article": "제53조(하천수 사용의 조정)",
+      "text": "하천수 사용의 조정"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "분쟁조정 신청",
+    "lane": "기득 사용자·하류",
+    "stage": "G2 심사·조정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기득 사용자·하류",
+    "action": "분쟁조정 신청",
+    "output_documents": [
+     "분쟁조정 신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "하천법",
+      "article": "제54조(하천수 분쟁조정의 신청 등)",
+      "text": "하천수 분쟁조정의 신청 등"
+     }
+    ],
+    "deadline": "분쟁조정 관련 §54(90일·60일 등 확인)"
+   },
+   {
+    "id": "P09",
+    "name": "보완 요구·재제출",
+    "lane": "수요 기업",
+    "stage": "G2 심사·조정",
+    "type": "task",
+    "status": "loop",
+    "progress": 0,
+    "actor": "수요 기업",
+    "action": "보완 요구·재제출",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "하천법",
+      "article": "제50조(하천수의 사용허가 등)",
+      "text": "하천수의 사용허가 등"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "사용허가 처분 통지",
+    "lane": "하천관리청·환경부",
+    "stage": "G3 허가·계약",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "하천관리청·환경부",
+    "action": "사용허가 처분 통지",
+    "output_documents": [
+     "허가서·불허가"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "하천법",
+      "article": "제50조(하천수의 사용허가 등)",
+      "text": "하천수의 사용허가 등"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "공업용수도·전용수도 인가",
+    "lane": "공급기관(수공·지자체)",
+    "stage": "G3 허가·계약",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "공급기관(수공·지자체)",
+    "action": "공업용수도·전용수도 인가",
+    "output_documents": [
+     "인가·계약"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "수도법",
+      "article": "제49조(공업용수도사업의 인가)",
+      "text": "공업용수도사업의 인가"
+     },
+     {
+      "law": "수도법",
+      "article": "제52조(전용상수도 인가)",
+      "text": "전용상수도 인가"
+     },
+     {
+      "law": "수도법",
+      "article": "제54조(전용공업용수도에 관한 준용 규정)",
+      "text": "전용공업용수도에 관한 준용 규정"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "공급규정·요금 안내",
+    "lane": "공급기관(수공·지자체)",
+    "stage": "G3 허가·계약",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "공급기관(수공·지자체)",
+    "action": "공급규정·요금 안내",
+    "output_documents": [
+     "공급규정"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "수도법",
+      "article": "제38조(공급규정)",
+      "text": "공급규정"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "점용허가·시설 설치",
+    "lane": "수요 기업",
+    "stage": "G4 시설",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "수요 기업",
+    "action": "점용허가·시설 설치",
+    "output_documents": [
+     "점용·준공"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "하천법",
+      "article": "제33조(하천의 점용허가 등)",
+      "text": "하천의 점용허가 등"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "점용 손실보상 협의",
+    "lane": "기득 사용자·하류",
+    "stage": "G4 시설",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기득 사용자·하류",
+    "action": "점용 손실보상 협의",
+    "output_documents": [
+     "보상 협의"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "하천법",
+      "article": "제35조(하천점용에 대한 손실보상의 협의 등)",
+      "text": "하천점용에 대한 손실보상의 협의 등"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "사용 관리·계측 보고",
+    "lane": "수요 기업",
+    "stage": "G5 운영·불복",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "수요 기업",
+    "action": "사용 관리·계측 보고",
+    "output_documents": [
+     "사용량 보고"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "하천법",
+      "article": "제52조(하천수의 사용 및 관리)",
+      "text": "하천수의 사용 및 관리"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "폐수 배출시설 허가",
+    "lane": "환경 감시",
+    "stage": "G5 운영·불복",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "환경 감시",
+    "action": "폐수 배출시설 허가",
+    "output_documents": [
+     "배출시설 허가"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "물환경보전법",
+      "article": "제33조(배출시설의 설치 허가 및 신고)",
+      "text": "배출시설의 설치 허가 및 신고"
+     },
+     {
+      "law": "물환경보전법",
+      "article": "제38조(배출시설 및 방지시설의 운영)",
+      "text": "배출시설 및 방지시설의 운영"
+     }
+    ]
+   },
+   {
+    "id": "P17",
+    "name": "지도·점검·허가 취소 등",
+    "lane": "하천관리청·환경부",
+    "stage": "G5 운영·불복",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "하천관리청·환경부",
+    "action": "지도·점검·허가 취소 등",
+    "output_documents": [
+     "점검·처분"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "하천법",
+      "article": "제69조(법령위반자 등에 대한 처분 등)",
+      "text": "법령위반자 등에 대한 처분 등"
+     }
+    ]
+   },
+   {
+    "id": "P18",
+    "name": "허가 취소 등 청문",
+    "lane": "수요 기업",
+    "stage": "G5 운영·불복",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "수요 기업",
+    "action": "허가 취소 등 청문",
+    "output_documents": [
+     "청문 통지·진술"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "하천법",
+      "article": "제91조(청문)",
+      "text": "청문"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P02",
+    "target": "P04",
+    "type": "sequence",
+    "label": "일시"
+   },
+   {
+    "id": "E04",
+    "source": "P03",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": "분쟁 시"
+   },
+   {
+    "id": "E08",
+    "source": "P05",
+    "target": "P09",
+    "type": "loop",
+    "label": "보완"
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P05",
+    "type": "loop",
+    "label": "재심사"
+   },
+   {
+    "id": "E10",
+    "source": "P06",
+    "target": "P10",
+    "type": "sequence",
+    "label": "적합"
+   },
+   {
+    "id": "E11",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P15",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E17",
+    "source": "P16",
+    "target": "P17",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E18",
+    "source": "P17",
+    "target": "P18",
+    "type": "sequence",
+    "label": "취소 등 불이익 시"
+   }
+  ],
+  "warnings": [
+   "2026-07-12 L3: 기득 사용자 분쟁조정(§54)·점용 손실보상(§35)·허가취소 청문(§91) 추가. 수요기업 처분 통지·보완 권리 강화. MSTs 276805,276757,283441.",
+   "L3 페르소나(하류·농민): 이전 도식은 기득 보호 1노드로 압축 — 조정·분쟁조정·점용보상을 분리.",
+   "L3 페르소나(수요기업): 불이익 처분 시 청문 노드 추가.",
+   "법의 침묵: 메가 팹·DC 우선 배분은 법정 허가 경로 밖 정책·협약."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3 당사자 워크스루",
+  "scope": "L3 보강 후 명시 조문 34건 중 존재 확인 34건",
+  "notes": [
+   "L3 용수: 기득권·분쟁조정·청문 보강",
+   "MSTs: 276805,276757,283441"
+  ],
+  "sources": [
+   {
+    "law": "하천법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "하천법",
+    "lawId": "001836",
+    "mst": "276805",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2025-10-01",
+    "officialUrl": "https://law.go.kr/법령/하천법"
+   },
+   {
+    "law": "수도법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "수도법",
+    "lawId": "001818",
+    "mst": "276757",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2025-10-01",
+    "officialUrl": "https://law.go.kr/법령/수도법"
+   },
+   {
+    "law": "물환경보전법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "물환경보전법",
+    "lawId": "000166",
+    "mst": "283441",
+    "promulgatedOn": "2026-02-19",
+    "effectiveOn": "2026-02-19",
+    "officialUrl": "https://law.go.kr/법령/물환경보전법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차 존재 확인",
+   "citationEntries": 34,
+   "explicitCitationEntries": 34,
+   "articleReferences": 34,
+   "verifiedReferences": 34,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

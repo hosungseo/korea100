@@ -1,0 +1,607 @@
+{
+ "slug": "electricity-market-trading",
+ "name": "전력시장 거래·정산",
+ "oneLiner": "전력거래소를 통한 전력거래, 가격·정산, 재생에너지 거래 특례와 전기신사업 연계 절차",
+ "type": "인허가형",
+ "priority": 154,
+ "whyFirst": "발전·분산·재생 이행의 시장 정산 축이다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "전력의 거래·가격 형성·정산을 제도화해 수급 효율과 사업자 정산을 담보한다.",
+  "stakeholders": "발전·판매·신사업자, 한국전력거래소, 기후에너지환경부, 수요자.",
+  "legalBasis": [
+   {
+    "law": "전기사업법",
+    "articles": "제31조(전력거래), 제31조의2(산지 재생 거래), 제33조(가격·정산), 제7조의2(전기신사업 등록), 제16조의5(재생에너지전기공급)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "한국전력거래소",
+    "role": "시장 운영·정산"
+   },
+   {
+    "name": "기후에너지환경부",
+    "role": "감독·제도"
+   },
+   {
+    "name": "거래 회원",
+    "role": "입찰·정산"
+   }
+  ],
+  "procedure": [
+   "시장 회원·등록",
+   "입찰·거래",
+   "가격 결정",
+   "정산·결제",
+   "특례 거래(재생 등)",
+   "분쟁·감독"
+  ],
+  "moneyFlow": "전력대금 정산, 거래 수수료, 위약·정산 조정.",
+  "docsFlow": "회원 등록 → 입찰 → 체결 → 계량 → 정산서 → 결제.",
+  "bottlenecks": [
+   "가격 급변",
+   "계량 분쟁",
+   "재생 변동성",
+   "정산 지연"
+  ],
+  "reformPoints": [
+   "정산 기한 공개",
+   "재생 특례 명확화",
+   "분쟁 조정 창구"
+  ]
+ },
+ "related": [
+  "발전사업 허가·전력계통 접속",
+  "신재생 공급의무·REC",
+  "분산에너지사업 등록·전력거래",
+  "전기요금·공급약관 인가"
+ ],
+ "fieldVerification": [
+  "전력시장 운영규칙",
+  "회원 자격",
+  "정산 주기"
+ ],
+ "process": {
+  "institution_name": "전력시장 거래·정산",
+  "law_name": "전기사업법",
+  "lanes": [
+   "거래 회원",
+   "전력거래소",
+   "기후에너지환경부",
+   "계량·정산",
+   "수요·상대방",
+   "감독"
+  ],
+  "stages": [
+   "G0 가입",
+   "G1 입찰",
+   "G2 체결",
+   "G3 계량",
+   "G4 정산",
+   "G5 사후"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "시장 참여 자격 확인",
+    "lane": "거래 회원",
+    "stage": "G0 가입",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "거래 회원",
+    "action": "시장 참여 자격 확인",
+    "output_documents": [
+     "자격"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제31조(전력거래)",
+      "text": "전력거래"
+     },
+     {
+      "law": "전기사업법",
+      "article": "제7조의2(전기신사업의 등록)",
+      "text": "전기신사업의 등록"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "회원·등록 신청",
+    "lane": "거래 회원",
+    "stage": "G0 가입",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "거래 회원",
+    "action": "회원·등록 신청",
+    "output_documents": [
+     "신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제31조(전력거래)",
+      "text": "전력거래"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "등록 수리",
+    "lane": "전력거래소",
+    "stage": "G0 가입",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "전력거래소",
+    "action": "등록 수리",
+    "output_documents": [
+     "등록"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제31조(전력거래)",
+      "text": "전력거래"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "보완 제출",
+    "lane": "거래 회원",
+    "stage": "G0 가입",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "거래 회원",
+    "action": "보완 제출",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제31조(전력거래)",
+      "text": "전력거래"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "입찰·호가",
+    "lane": "거래 회원",
+    "stage": "G1 입찰",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "거래 회원",
+    "action": "입찰·호가",
+    "output_documents": [
+     "입찰"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제31조(전력거래)",
+      "text": "전력거래"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "체결·가격 결정",
+    "lane": "전력거래소",
+    "stage": "G2 체결",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "전력거래소",
+    "action": "체결·가격 결정",
+    "output_documents": [
+     "체결"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제33조(전력거래의 가격 및 정산)",
+      "text": "전력거래의 가격 및 정산"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "재생·산지 특례 거래",
+    "lane": "거래 회원",
+    "stage": "G2 체결",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "거래 회원",
+    "action": "재생·산지 특례 거래",
+    "output_documents": [
+     "특례"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제31조의2(산지에 설치되는 재생에너지 설비의 전력거래)",
+      "text": "산지에 설치되는 재생에너지 설비의 전력거래"
+     },
+     {
+      "law": "전기사업법",
+      "article": "제16조의5(재생에너지전기공급사업자 등의 전기공급)",
+      "text": "재생에너지전기공급사업자 등의 전기공급"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "계량 데이터 확정",
+    "lane": "계량·정산",
+    "stage": "G3 계량",
+    "type": "system",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "계량·정산",
+    "action": "계량 데이터 확정",
+    "output_documents": [
+     "계량"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제33조(전력거래의 가격 및 정산)",
+      "text": "전력거래의 가격 및 정산"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "정산·대금 청구",
+    "lane": "전력거래소",
+    "stage": "G4 정산",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "전력거래소",
+    "action": "정산·대금 청구",
+    "output_documents": [
+     "정산"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제33조(전력거래의 가격 및 정산)",
+      "text": "전력거래의 가격 및 정산"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "대금 수령·지급",
+    "lane": "거래 회원",
+    "stage": "G4 정산",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "거래 회원",
+    "action": "대금 수령·지급",
+    "output_documents": [
+     "결제"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제33조(전력거래의 가격 및 정산)",
+      "text": "전력거래의 가격 및 정산"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "정산 이의",
+    "lane": "거래 회원",
+    "stage": "G5 사후",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "거래 회원",
+    "action": "정산 이의",
+    "output_documents": [
+     "이의"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제33조(전력거래의 가격 및 정산)",
+      "text": "전력거래의 가격 및 정산"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "이의 심사·조정",
+    "lane": "전력거래소",
+    "stage": "G5 사후",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "전력거래소",
+    "action": "이의 심사·조정",
+    "output_documents": [
+     "조정"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제33조(전력거래의 가격 및 정산)",
+      "text": "전력거래의 가격 및 정산"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "재정산 루프",
+    "lane": "계량·정산",
+    "stage": "G4 정산",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "계량·정산",
+    "action": "재정산 루프",
+    "output_documents": [
+     "재정산"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제33조(전력거래의 가격 및 정산)",
+      "text": "전력거래의 가격 및 정산"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "감독·시정",
+    "lane": "감독",
+    "stage": "G5 사후",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "감독",
+    "action": "감독·시정",
+    "output_documents": [
+     "시정"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제12조(사업허가의 취소 등)",
+      "text": "사업허가의 취소 등"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "처분 통지",
+    "lane": "거래 회원",
+    "stage": "G5 사후",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "거래 회원",
+    "action": "처분 통지",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제12조(사업허가의 취소 등)",
+      "text": "사업허가의 취소 등"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "상대방 확인",
+    "lane": "수요·상대방",
+    "stage": "G2 체결",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "수요·상대방",
+    "action": "상대방 확인",
+    "output_documents": [
+     "확인"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "전기사업법",
+      "article": "제31조(전력거래)",
+      "text": "전력거래"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P02",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P03",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P06",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": "이의"
+   },
+   {
+    "id": "E13",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P12",
+    "target": "P13",
+    "type": "loop",
+    "label": "재정산"
+   },
+   {
+    "id": "E15",
+    "source": "P13",
+    "target": "P09",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E17",
+    "source": "P11",
+    "target": "P14",
+    "type": "sequence",
+    "label": "중대위반"
+   }
+  ],
+  "warnings": [
+   "MST 283981."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3",
+  "scope": "L3 당사자 워크스루 후 명시 조문 6건 존재 확인 6건",
+  "notes": [
+   "전기사업법 MST 283981"
+  ],
+  "sources": [
+   {
+    "law": "전기사업법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "전기사업법",
+    "lawId": "001854",
+    "mst": "283981",
+    "promulgatedOn": "2026-03-10",
+    "effectiveOn": "2026-03-10",
+    "officialUrl": "https://law.go.kr/법령/전기사업법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 6,
+   "explicitCitationEntries": 6,
+   "articleReferences": 6,
+   "verifiedReferences": 6,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

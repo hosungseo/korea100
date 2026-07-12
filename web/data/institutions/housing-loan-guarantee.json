@@ -1,0 +1,581 @@
+{
+ "slug": "housing-loan-guarantee",
+ "name": "주택담보·전세대출 보증",
+ "oneLiner": "주택 구입·전세 대출에 대한 보증 가입, 사고, 대위변제 절차",
+ "type": "재정배분형",
+ "priority": 185,
+ "whyFirst": "대출 실행의 전제 조건인 공적·민영 보증 축이다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "주택 관련 대출 위험을 보증으로 분담한다.",
+  "stakeholders": "차주, 은행, 보증기관.",
+  "legalBasis": [
+   {
+    "law": "주택도시기금법",
+    "articles": "기금 운용·보증 관련",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "보증기관",
+    "role": "보증"
+   },
+   {
+    "name": "금융회사",
+    "role": "대출"
+   }
+  ],
+  "procedure": [
+   "신청",
+   "심사",
+   "보증",
+   "대출",
+   "사고"
+  ],
+  "moneyFlow": "보증료, 대위변제.",
+  "docsFlow": "신청 → 승인 → 약정.",
+  "bottlenecks": [
+   "심사 거절",
+   "한도"
+  ],
+  "reformPoints": [
+   "상품 비교",
+   "처리 기한"
+  ]
+ },
+ "related": [
+  "LTV·DTI·DSR 대출규제",
+  "버팀목 전세자금대출",
+  "전세보증금 반환보증"
+ ],
+ "fieldVerification": [
+  "HUG·HF 보증 상품 목록",
+  "보증료율",
+  "사고 정의"
+ ],
+ "process": {
+  "institution_name": "주택담보·전세대출 보증",
+  "law_name": "주택도시기금법",
+  "lanes": [
+   "차주",
+   "금융회사",
+   "보증기관",
+   "감정",
+   "구상",
+   "감독"
+  ],
+  "stages": [
+   "G0 상담",
+   "G1 신청",
+   "G2 심사",
+   "G3 보증",
+   "G4 대출",
+   "G5 사고"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "상품 확인",
+    "lane": "차주",
+    "stage": "G0 상담",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "차주",
+    "action": "상품 확인",
+    "output_documents": [
+     "상품"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "보증 신청",
+    "lane": "차주",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "차주",
+    "action": "보증 신청",
+    "output_documents": [
+     "신청"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "적격 심사",
+    "lane": "보증기관",
+    "stage": "G2 심사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보증기관",
+    "action": "적격 심사",
+    "output_documents": [
+     "심사"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "보완",
+    "lane": "차주",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "차주",
+    "action": "보완",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "보증 승인",
+    "lane": "보증기관",
+    "stage": "G3 보증",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보증기관",
+    "action": "보증 승인",
+    "output_documents": [
+     "승인"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "보증서 수령",
+    "lane": "차주",
+    "stage": "G3 보증",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "차주",
+    "action": "보증서 수령",
+    "output_documents": [
+     "보증서"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "대출 실행",
+    "lane": "금융회사",
+    "stage": "G4 대출",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "금융회사",
+    "action": "대출 실행",
+    "output_documents": [
+     "실행"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "상환",
+    "lane": "차주",
+    "stage": "G4 대출",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "차주",
+    "action": "상환",
+    "output_documents": [
+     "상환"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "사고 접수",
+    "lane": "금융회사",
+    "stage": "G5 사고",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "금융회사",
+    "action": "사고 접수",
+    "output_documents": [
+     "사고"
+    ],
+    "confidence": 0.7,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "대위변제",
+    "lane": "보증기관",
+    "stage": "G5 사고",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보증기관",
+    "action": "대위변제",
+    "output_documents": [
+     "대위"
+    ],
+    "confidence": 0.7,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "구상",
+    "lane": "보증기관",
+    "stage": "G5 사고",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보증기관",
+    "action": "구상",
+    "output_documents": [
+     "구상"
+    ],
+    "confidence": 0.7,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "통지",
+    "lane": "차주",
+    "stage": "G5 사고",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "차주",
+    "action": "통지",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.7,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "감정",
+    "lane": "감정",
+    "stage": "G2 심사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "감정",
+    "action": "감정",
+    "output_documents": [
+     "감정"
+    ],
+    "confidence": 0.7,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "재신청",
+    "lane": "차주",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "차주",
+    "action": "재신청",
+    "output_documents": [
+     "재신청"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "유형 분기",
+    "lane": "차주",
+    "stage": "G0 상담",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "차주",
+    "action": "유형 분기",
+    "output_documents": [
+     "유형"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "정책모기지 연계",
+    "lane": "금융회사",
+    "stage": "G4 대출",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "금융회사",
+    "action": "정책모기지 연계",
+    "output_documents": [
+     "모기지"
+    ],
+    "confidence": 0.7,
+    "legal_basis": [
+     {
+      "law": "주택도시기금법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P15",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P03",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E06",
+    "source": "P04",
+    "target": "P14",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P14",
+    "target": "P02",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P03",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P07",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "기금법 목적 조항 중심, 상품 세부는 fieldVerification."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3",
+  "scope": "L3 당사자 워크스루 후 명시 조문 1건 존재 확인 1건",
+  "notes": [
+   "주택도시기금법"
+  ],
+  "sources": [
+   {
+    "law": "주택도시기금법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "주택도시기금법",
+    "lawId": "012226",
+    "mst": "286599",
+    "promulgatedOn": "2026-06-02",
+    "effectiveOn": "2026-06-02",
+    "officialUrl": "https://law.go.kr/법령/주택도시기금법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 1,
+   "explicitCitationEntries": 1,
+   "articleReferences": 1,
+   "verifiedReferences": 1,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

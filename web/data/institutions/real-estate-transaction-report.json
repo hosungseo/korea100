@@ -1,0 +1,601 @@
+{
+ "slug": "real-estate-transaction-report",
+ "name": "부동산 거래신고·자금조달",
+ "oneLiner": "부동산 매매 거래신고, 해제 신고, 자금조달·내용 검증, 토허제 연계 절차",
+ "type": "인허가형",
+ "priority": 179,
+ "whyFirst": "투기 차단·실거래 투명화의 거래 신고 본체다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "부동산 거래 가격·조건을 신고·검증해 시장 투명성과 투기 억제를 도모한다.",
+  "stakeholders": "거래 당사자, 신고관청, 중개업자.",
+  "legalBasis": [
+   {
+    "law": "부동산 거래신고 등에 관한 법률",
+    "articles": "제3·3의2·5~6·8·10~11·23·29조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "시장·군수 등",
+    "role": "접수·검증"
+   },
+   {
+    "name": "당사자",
+    "role": "신고"
+   }
+  ],
+  "procedure": [
+   "계약",
+   "신고",
+   "검증",
+   "토허 연계",
+   "제재"
+  ],
+  "moneyFlow": "과태료, 취득세 연계.",
+  "docsFlow": "계약서 → 신고서 → 자금조달 → 수리.",
+  "bottlenecks": [
+   "허위 신고",
+   "검증 지연",
+   "토허 중첩"
+  ],
+  "reformPoints": [
+   "전자 신고",
+   "검증 기준 공개",
+   "토허·신고 원스톱"
+  ]
+ },
+ "related": [
+  "토지거래허가",
+  "주택 임대차 계약 신고",
+  "투기과열지구·조정대상지역",
+  "취득세(주택)"
+ ],
+ "fieldVerification": [
+  "자금조달계획서 제출 대상(토허·투기과열)",
+  "신고 기한",
+  "실거래가 공개 범위"
+ ],
+ "process": {
+  "institution_name": "부동산 거래신고·자금조달",
+  "law_name": "부동산 거래신고 등에 관한 법률",
+  "lanes": [
+   "매도인·매수인",
+   "신고관청",
+   "검증·조사",
+   "중개업자",
+   "국세·지자체",
+   "감독"
+  ],
+  "stages": [
+   "G0 계약",
+   "G1 신고",
+   "G2 접수",
+   "G3 검증",
+   "G4 토허",
+   "G5 제재"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "매매계약 체결",
+    "lane": "매도인·매수인",
+    "stage": "G0 계약",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "매도인·매수인",
+    "action": "매매계약 체결",
+    "output_documents": [
+     "계약"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제3조(부동산 거래의 신고)",
+      "text": "부동산 거래의 신고"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "거래신고 제출",
+    "lane": "매도인·매수인",
+    "stage": "G1 신고",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "매도인·매수인",
+    "action": "거래신고 제출",
+    "output_documents": [
+     "신고"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제3조(부동산 거래의 신고)",
+      "text": "부동산 거래의 신고"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "신고 접수",
+    "lane": "신고관청",
+    "stage": "G2 접수",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신고관청",
+    "action": "신고 접수",
+    "output_documents": [
+     "접수"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제3조(부동산 거래의 신고)",
+      "text": "부동산 거래의 신고"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "보완 제출",
+    "lane": "매도인·매수인",
+    "stage": "G1 신고",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "매도인·매수인",
+    "action": "보완 제출",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제3조(부동산 거래의 신고)",
+      "text": "부동산 거래의 신고"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "신고 수리",
+    "lane": "신고관청",
+    "stage": "G2 접수",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신고관청",
+    "action": "신고 수리",
+    "output_documents": [
+     "수리"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제3조(부동산 거래의 신고)",
+      "text": "부동산 거래의 신고"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "수리 통지 수령",
+    "lane": "매도인·매수인",
+    "stage": "G2 접수",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "매도인·매수인",
+    "action": "수리 통지 수령",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제3조(부동산 거래의 신고)",
+      "text": "부동산 거래의 신고"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "자금조달·내용 검증",
+    "lane": "검증·조사",
+    "stage": "G3 검증",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "검증·조사",
+    "action": "자금조달·내용 검증",
+    "output_documents": [
+     "검증"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제5조(신고 내용의 검증)",
+      "text": "신고 내용의 검증"
+     },
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제6조(신고 내용의 조사 등)",
+      "text": "신고 내용의 조사 등"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "해제등 신고",
+    "lane": "매도인·매수인",
+    "stage": "G1 신고",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "매도인·매수인",
+    "action": "해제등 신고",
+    "output_documents": [
+     "해제"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제3조의2(부동산 거래의 해제등 신고)",
+      "text": "부동산 거래의 해제등 신고"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "토지거래허가 연계",
+    "lane": "신고관청",
+    "stage": "G4 토허",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신고관청",
+    "action": "토지거래허가 연계",
+    "output_documents": [
+     "토허"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제10조(토지거래허가구역의 지정)",
+      "text": "토지거래허가구역의 지정"
+     },
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제11조(허가구역 내 토지거래에 대한 허가)",
+      "text": "허가구역 내 토지거래에 대한 허가"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "외국인 취득 신고(해당)",
+    "lane": "매도인·매수인",
+    "stage": "G1 신고",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "매도인·매수인",
+    "action": "외국인 취득 신고(해당)",
+    "output_documents": [
+     "외국인"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제8조(외국인등의 부동산 취득ㆍ보유 신고)",
+      "text": "외국인등의 부동산 취득ㆍ보유 신고"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "과태료·청문",
+    "lane": "감독",
+    "stage": "G5 제재",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "감독",
+    "action": "과태료·청문",
+    "output_documents": [
+     "제재"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제23조(청문)",
+      "text": "청문"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "처분 통지",
+    "lane": "매도인·매수인",
+    "stage": "G5 제재",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "매도인·매수인",
+    "action": "처분 통지",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제23조(청문)",
+      "text": "청문"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "중개 확인·설명",
+    "lane": "중개업자",
+    "stage": "G0 계약",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "중개업자",
+    "action": "중개 확인·설명",
+    "output_documents": [
+     "중개"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제3조(부동산 거래의 신고)",
+      "text": "부동산 거래의 신고"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "재신고 루프",
+    "lane": "매도인·매수인",
+    "stage": "G1 신고",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "매도인·매수인",
+    "action": "재신고 루프",
+    "output_documents": [
+     "재신고"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제3조(부동산 거래의 신고)",
+      "text": "부동산 거래의 신고"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "자진 신고 감면",
+    "lane": "매도인·매수인",
+    "stage": "G5 제재",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "매도인·매수인",
+    "action": "자진 신고 감면",
+    "output_documents": [
+     "감면"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제29조(자진 신고자에 대한 감면 등)",
+      "text": "자진 신고자에 대한 감면 등"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "실거래 공개 연계",
+    "lane": "국세·지자체",
+    "stage": "G3 검증",
+    "type": "system",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국세·지자체",
+    "action": "실거래 공개 연계",
+    "output_documents": [
+     "공개"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제3조(부동산 거래의 신고)",
+      "text": "부동산 거래의 신고"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P13",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P02",
+    "target": "P10",
+    "type": "sequence",
+    "label": "외국인 해당"
+   },
+   {
+    "id": "E04",
+    "source": "P10",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E06",
+    "source": "P04",
+    "target": "P14",
+    "type": "loop",
+    "label": "재신고"
+   },
+   {
+    "id": "E07",
+    "source": "P14",
+    "target": "P02",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P03",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P07",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P07",
+    "target": "P09",
+    "type": "sequence",
+    "label": "토허"
+   },
+   {
+    "id": "E13",
+    "source": "P06",
+    "target": "P08",
+    "type": "sequence",
+    "label": "해제 시"
+   },
+   {
+    "id": "E14",
+    "source": "P07",
+    "target": "P11",
+    "type": "sequence",
+    "label": "위반"
+   },
+   {
+    "id": "E15",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P11",
+    "target": "P15",
+    "type": "sequence",
+    "label": "자진신고"
+   },
+   {
+    "id": "E17",
+    "source": "P15",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "2026-07-12 부동산 패키지. MST 259641."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3",
+  "scope": "L3 당사자 워크스루 후 명시 조문 9건 존재 확인 9건",
+  "notes": [
+   "부동산 거래신고 등에 관한 법률 MST 259641"
+  ],
+  "sources": [
+   {
+    "law": "부동산 거래신고 등에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "부동산 거래신고 등에 관한 법률",
+    "lawId": "012480",
+    "mst": "259641",
+    "promulgatedOn": "2024-02-06",
+    "effectiveOn": "2024-05-17",
+    "officialUrl": "https://law.go.kr/법령/부동산거래신고등에관한법률"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 9,
+   "explicitCitationEntries": 9,
+   "articleReferences": 9,
+   "verifiedReferences": 9,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

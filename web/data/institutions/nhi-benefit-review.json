@@ -1,0 +1,605 @@
+{
+ "slug": "nhi-benefit-review",
+ "name": "건보 요양급여 청구·심사",
+ "oneLiner": "요양급여 청구·지급, 진료심사평가, 적정성 평가, 이의신청·심판청구 절차",
+ "type": "복지급여형",
+ "priority": 163,
+ "whyFirst": "의료·돌봄 비용이 실제로 오가는 심사·정산 병목이다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "요양급여 비용을 심사·평가·지급해 급여 적정성과 재정 건전성을 유지한다.",
+  "stakeholders": "요양기관, 국민건강보험공단·심평원, 가입자·환자, 보건복지부.",
+  "legalBasis": [
+   {
+    "law": "국민건강보험법",
+    "articles": "제41·45~48조(요양급여·비용·청구·적정성), 제66조(진료심사평가위원회), 제87~88조(이의·심판)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "공단·심평원",
+    "role": "심사·지급·평가"
+   },
+   {
+    "name": "요양기관",
+    "role": "청구·소명"
+   },
+   {
+    "name": "가입자",
+    "role": "급여 이용"
+   }
+  ],
+  "procedure": [
+   "급여 제공",
+   "비용 청구",
+   "심사·지급(보류·차등)",
+   "적정성 평가",
+   "이의신청",
+   "심판청구"
+  ],
+  "moneyFlow": "요양급여비용, 본인부담, 지급 보류·환수(관련 조항), 포상금.",
+  "docsFlow": "진료기록 → 청구서 → 심사결과 → 지급 → 이의 → 재결.",
+  "bottlenecks": [
+   "심사 지연",
+   "삭감 분쟁",
+   "평가 지표",
+   "행정 소송 연계"
+  ],
+  "reformPoints": [
+   "심사 기준 공개",
+   "처리 기한",
+   "소명 절차 강화"
+  ]
+ },
+ "related": [
+  "국민건강보험",
+  "의료기관 개설 허가",
+  "응급의료기관 지정·운영",
+  "지역 돌봄 통합지원"
+ ],
+ "fieldVerification": [
+  "심평원 심사 지침",
+  "이의 처리 기간",
+  "적정성 평가 지표"
+ ],
+ "process": {
+  "institution_name": "건보 요양급여 청구·심사",
+  "law_name": "국민건강보험법",
+  "lanes": [
+   "요양기관",
+   "공단·심평원",
+   "가입자·환자",
+   "진료심사평가위",
+   "복지부",
+   "쟁송"
+  ],
+  "stages": [
+   "G0 제공",
+   "G1 청구",
+   "G2 심사",
+   "G3 지급",
+   "G4 평가",
+   "G5 불복"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "요양급여 제공",
+    "lane": "요양기관",
+    "stage": "G0 제공",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "요양기관",
+    "action": "요양급여 제공",
+    "output_documents": [
+     "제공"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제41조(요양급여)",
+      "text": "요양급여"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "본인일부부담 수납",
+    "lane": "가입자·환자",
+    "stage": "G0 제공",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "가입자·환자",
+    "action": "본인일부부담 수납",
+    "output_documents": [
+     "본인부담"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제44조(비용의 일부부담)",
+      "text": "비용의 일부부담"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "요양급여비용 청구",
+    "lane": "요양기관",
+    "stage": "G1 청구",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "요양기관",
+    "action": "요양급여비용 청구",
+    "output_documents": [
+     "청구"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제47조(요양급여비용의 청구와 지급 등)",
+      "text": "요양급여비용의 청구와 지급 등"
+     },
+     {
+      "law": "국민건강보험법",
+      "article": "제45조(요양급여비용의 산정 등)",
+      "text": "요양급여비용의 산정 등"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "심사",
+    "lane": "공단·심평원",
+    "stage": "G2 심사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "공단·심평원",
+    "action": "심사",
+    "output_documents": [
+     "심사"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제47조(요양급여비용의 청구와 지급 등)",
+      "text": "요양급여비용의 청구와 지급 등"
+     },
+     {
+      "law": "국민건강보험법",
+      "article": "제66조(진료심사평가위원회)",
+      "text": "진료심사평가위원회"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "보완·소명",
+    "lane": "요양기관",
+    "stage": "G2 심사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "요양기관",
+    "action": "보완·소명",
+    "output_documents": [
+     "소명"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제47조(요양급여비용의 청구와 지급 등)",
+      "text": "요양급여비용의 청구와 지급 등"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "지급·보류·차등",
+    "lane": "공단·심평원",
+    "stage": "G3 지급",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "공단·심평원",
+    "action": "지급·보류·차등",
+    "output_documents": [
+     "지급"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제47조의2(요양급여비용의 지급 보류)",
+      "text": "요양급여비용의 지급 보류"
+     },
+     {
+      "law": "국민건강보험법",
+      "article": "제47조의3(요양급여비용의 차등 지급)",
+      "text": "요양급여비용의 차등 지급"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "지급 결과 수령",
+    "lane": "요양기관",
+    "stage": "G3 지급",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "요양기관",
+    "action": "지급 결과 수령",
+    "output_documents": [
+     "지급통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제47조(요양급여비용의 청구와 지급 등)",
+      "text": "요양급여비용의 청구와 지급 등"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "적정성 평가",
+    "lane": "공단·심평원",
+    "stage": "G4 평가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "공단·심평원",
+    "action": "적정성 평가",
+    "output_documents": [
+     "평가"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제47조의4(요양급여의 적정성 평가)",
+      "text": "요양급여의 적정성 평가"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "평가 결과 통지",
+    "lane": "요양기관",
+    "stage": "G4 평가",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "요양기관",
+    "action": "평가 결과 통지",
+    "output_documents": [
+     "평가통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제47조의4(요양급여의 적정성 평가)",
+      "text": "요양급여의 적정성 평가"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "이의신청",
+    "lane": "요양기관",
+    "stage": "G5 불복",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "요양기관",
+    "action": "이의신청",
+    "output_documents": [
+     "이의"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제87조(이의신청)",
+      "text": "이의신청"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "이의 재결",
+    "lane": "공단·심평원",
+    "stage": "G5 불복",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "공단·심평원",
+    "action": "이의 재결",
+    "output_documents": [
+     "재결"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제87조(이의신청)",
+      "text": "이의신청"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "심판청구",
+    "lane": "쟁송",
+    "stage": "G5 불복",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "쟁송",
+    "action": "심판청구",
+    "output_documents": [
+     "심판"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제88조(심판청구)",
+      "text": "심판청구"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "심판 결과 통지",
+    "lane": "요양기관",
+    "stage": "G5 불복",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "요양기관",
+    "action": "심판 결과 통지",
+    "output_documents": [
+     "심판통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제88조(심판청구)",
+      "text": "심판청구"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "정산",
+    "lane": "공단·심평원",
+    "stage": "G3 지급",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "공단·심평원",
+    "action": "정산",
+    "output_documents": [
+     "정산"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제61조(요양급여비용의 정산)",
+      "text": "요양급여비용의 정산"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "급여대상 확인",
+    "lane": "공단·심평원",
+    "stage": "G2 심사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "공단·심평원",
+    "action": "급여대상 확인",
+    "output_documents": [
+     "확인"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제48조(요양급여 대상 여부의 확인 등)",
+      "text": "요양급여 대상 여부의 확인 등"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "재청구 루프",
+    "lane": "요양기관",
+    "stage": "G1 청구",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "요양기관",
+    "action": "재청구 루프",
+    "output_documents": [
+     "재청구"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제47조(요양급여비용의 청구와 지급 등)",
+      "text": "요양급여비용의 청구와 지급 등"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P01",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": "소명"
+   },
+   {
+    "id": "E06",
+    "source": "P05",
+    "target": "P16",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P16",
+    "target": "P03",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P04",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P06",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P07",
+    "target": "P10",
+    "type": "sequence",
+    "label": "이의"
+   },
+   {
+    "id": "E14",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": "불복"
+   },
+   {
+    "id": "E16",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "MST 276651."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3",
+  "scope": "L3 당사자 워크스루 후 명시 조문 12건 존재 확인 12건",
+  "notes": [
+   "국민건강보험법 MST 276651"
+  ],
+  "sources": [
+   {
+    "law": "국민건강보험법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국민건강보험법",
+    "lawId": "001971",
+    "mst": "276651",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/국민건강보험법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 12,
+   "explicitCitationEntries": 12,
+   "articleReferences": 12,
+   "verifiedReferences": 12,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

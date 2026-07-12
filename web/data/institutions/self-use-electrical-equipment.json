@@ -1,0 +1,623 @@
+{
+ "slug": "self-use-electrical-equipment",
+ "name": "자가용 전기설비·전기안전관리",
+ "oneLiner": "자가용전기설비의 공사계획 인가·신고, 사용전·정기검사, 전기안전관리자 선임 절차",
+ "type": "안전관리형",
+ "priority": 142,
+ "whyFirst": "대용량 수전·구내 변전을 갖춘 팹·IDC의 전기안전 관문이다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "자가용전기설비의 설계·시공·검사를 통해 전기재해를 예방하고 안전관리자 체계로 운영 안전을 유지한다.",
+  "stakeholders": "설비 소유자·점유자, 시공·감리자, 기후에너지환경부·한국전기안전공사 등 검사기관, 전기안전관리자.",
+  "legalBasis": [
+   {
+    "law": "전기안전관리법",
+    "articles": "제8조(공사계획 인가·신고), 제9조(사용전검사), 제10조(임시사용), 제11조(정기검사), 제18~20조(검사·유지·적합명령), 제22~25조(안전관리자 선임·교육), 제26조(전문업체 등록)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "기후에너지환경부·검사기관",
+    "role": "인가·검사·감독"
+   },
+   {
+    "name": "소유자·점유자",
+    "role": "공사·선임·유지"
+   },
+   {
+    "name": "전기안전관리자",
+    "role": "안전 업무"
+   }
+  ],
+  "procedure": [
+   "공사계획 인가 또는 신고(§8)",
+   "시공·감리",
+   "사용전검사(§9) / 임시사용(§10)",
+   "전기안전관리자 선임·신고(§22·§23)",
+   "사용·유지(§19)",
+   "정기검사(§11)",
+   "적합명령·개선(§20)"
+  ],
+  "moneyFlow": "검사 수수료, 안전관리 위탁 비용, 공사비. 과태료·벌칙은 위반 시.",
+  "docsFlow": "공사계획서 → 인가·신고 → 검사신청 → 합격증 → 선임신고 → 정기검사.",
+  "bottlenecks": [
+   "사용전검사 일정",
+   "안전관리자 수급",
+   "대용량 설비 기술기준 해석",
+   "임시사용 조건"
+  ],
+  "reformPoints": [
+   "메가 캠퍼스 일괄 검사",
+   "선임 대행 기준 명확화",
+   "검사 예약 공개"
+  ]
+ },
+ "related": [
+  "전기요금·공급약관 인가",
+  "발전사업 허가·전력계통 접속",
+  "건축허가",
+  "클라우드·IDC 보안인증·사업 진입"
+ ],
+ "fieldVerification": [
+  "공사계획 인가·신고 용량 기준",
+  "검사기관 지정 현황",
+  "안전관리자 선임 기준 kW"
+ ],
+ "process": {
+  "institution_name": "자가용 전기설비·전기안전관리",
+  "law_name": "전기안전관리법",
+  "lanes": [
+   "소유자·점유자",
+   "시공·감리",
+   "인가·검사기관",
+   "전기안전관리자",
+   "전문 안전관리업체",
+   "감독"
+  ],
+  "stages": [
+   "G0 계획",
+   "G1 공사계획",
+   "G2 시공",
+   "G3 검사",
+   "G4 선임·운영",
+   "G5 정기·명령"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "설비 용량·기술기준 검토",
+    "lane": "소유자·점유자",
+    "stage": "G0 계획",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "소유자·점유자",
+    "action": "설비 용량·기술기준 검토",
+    "output_documents": [
+     "검토"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기안전관리법",
+      "article": "제8조(자가용전기설비의 공사계획의 인가 또는 신고)",
+      "text": "자가용전기설비의 공사계획의 인가 또는 신고"
+     },
+     {
+      "law": "전기안전관리법",
+      "article": "제4조(다른 법률과의 관계)",
+      "text": "다른 법률과의 관계"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "인가 vs 신고 경로",
+    "lane": "소유자·점유자",
+    "stage": "G0 계획",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "소유자·점유자",
+    "action": "인가 vs 신고 경로",
+    "output_documents": [
+     "경로"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기안전관리법",
+      "article": "제8조(자가용전기설비의 공사계획의 인가 또는 신고)",
+      "text": "자가용전기설비의 공사계획의 인가 또는 신고"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "공사계획 인가·신고",
+    "lane": "소유자·점유자",
+    "stage": "G1 공사계획",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "소유자·점유자",
+    "action": "공사계획 인가·신고",
+    "output_documents": [
+     "공사계획"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기안전관리법",
+      "article": "제8조(자가용전기설비의 공사계획의 인가 또는 신고)",
+      "text": "자가용전기설비의 공사계획의 인가 또는 신고"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "인가·신고 수리",
+    "lane": "인가·검사기관",
+    "stage": "G1 공사계획",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "인가·검사기관",
+    "action": "인가·신고 수리",
+    "output_documents": [
+     "수리"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기안전관리법",
+      "article": "제8조(자가용전기설비의 공사계획의 인가 또는 신고)",
+      "text": "자가용전기설비의 공사계획의 인가 또는 신고"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "보완 제출",
+    "lane": "소유자·점유자",
+    "stage": "G1 공사계획",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "소유자·점유자",
+    "action": "보완 제출",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기안전관리법",
+      "article": "제8조(자가용전기설비의 공사계획의 인가 또는 신고)",
+      "text": "자가용전기설비의 공사계획의 인가 또는 신고"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "시공·감리",
+    "lane": "시공·감리",
+    "stage": "G2 시공",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시공·감리",
+    "action": "시공·감리",
+    "output_documents": [
+     "시공"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "전기안전관리법",
+      "article": "제8조(자가용전기설비의 공사계획의 인가 또는 신고)",
+      "text": "자가용전기설비의 공사계획의 인가 또는 신고"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "사용전검사 신청·수검",
+    "lane": "소유자·점유자",
+    "stage": "G3 검사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "소유자·점유자",
+    "action": "사용전검사 신청·수검",
+    "output_documents": [
+     "검사신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기안전관리법",
+      "article": "제9조(사용전검사)",
+      "text": "사용전검사"
+     },
+     {
+      "law": "전기안전관리법",
+      "article": "제18조(검사ㆍ점검의 방법ㆍ절차 등)",
+      "text": "검사ㆍ점검의 방법ㆍ절차 등"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "사용전검사 실시",
+    "lane": "인가·검사기관",
+    "stage": "G3 검사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "인가·검사기관",
+    "action": "사용전검사 실시",
+    "output_documents": [
+     "검사"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기안전관리법",
+      "article": "제9조(사용전검사)",
+      "text": "사용전검사"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "임시사용(해당 시)",
+    "lane": "소유자·점유자",
+    "stage": "G3 검사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "소유자·점유자",
+    "action": "임시사용(해당 시)",
+    "output_documents": [
+     "임시사용"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기안전관리법",
+      "article": "제10조(자가용전기설비의 임시사용)",
+      "text": "자가용전기설비의 임시사용"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "검사 결과 수령",
+    "lane": "소유자·점유자",
+    "stage": "G3 검사",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "소유자·점유자",
+    "action": "검사 결과 수령",
+    "output_documents": [
+     "합격"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기안전관리법",
+      "article": "제9조(사용전검사)",
+      "text": "사용전검사"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "전기안전관리자 선임·신고",
+    "lane": "전기안전관리자",
+    "stage": "G4 선임·운영",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "전기안전관리자",
+    "action": "전기안전관리자 선임·신고",
+    "output_documents": [
+     "선임"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기안전관리법",
+      "article": "제22조(전기안전관리자의 선임 등)",
+      "text": "전기안전관리자의 선임 등"
+     },
+     {
+      "law": "전기안전관리법",
+      "article": "제23조(전기안전관리자의 선임 및 해임신고 등)",
+      "text": "전기안전관리자의 선임 및 해임신고 등"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "전문업체 위탁(해당 시)",
+    "lane": "전문 안전관리업체",
+    "stage": "G4 선임·운영",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "전문 안전관리업체",
+    "action": "전문업체 위탁(해당 시)",
+    "output_documents": [
+     "위탁"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기안전관리법",
+      "article": "제26조(전기안전관리업무를 전문으로 하는 자 등의 등록)",
+      "text": "전기안전관리업무를 전문으로 하는 자 등의 등록"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "유지·성실의무",
+    "lane": "전기안전관리자",
+    "stage": "G4 선임·운영",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "전기안전관리자",
+    "action": "유지·성실의무",
+    "output_documents": [
+     "유지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기안전관리법",
+      "article": "제19조(전기설비의 유지)",
+      "text": "전기설비의 유지"
+     },
+     {
+      "law": "전기안전관리법",
+      "article": "제24조(전기안전관리자의 성실의무 등)",
+      "text": "전기안전관리자의 성실의무 등"
+     },
+     {
+      "law": "전기안전관리법",
+      "article": "제25조(전기안전관리자의 교육 등)",
+      "text": "전기안전관리자의 교육 등"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "정기검사",
+    "lane": "인가·검사기관",
+    "stage": "G5 정기·명령",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "인가·검사기관",
+    "action": "정기검사",
+    "output_documents": [
+     "정기검사"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기안전관리법",
+      "article": "제11조(정기검사)",
+      "text": "정기검사"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "적합명령",
+    "lane": "감독",
+    "stage": "G5 정기·명령",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "감독",
+    "action": "적합명령",
+    "output_documents": [
+     "명령"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기안전관리법",
+      "article": "제20조(적합명령)",
+      "text": "적합명령"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "명령 통지·이행",
+    "lane": "소유자·점유자",
+    "stage": "G5 정기·명령",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "소유자·점유자",
+    "action": "명령 통지·이행",
+    "output_documents": [
+     "이행"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "전기안전관리법",
+      "article": "제20조(적합명령)",
+      "text": "적합명령"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P03",
+    "type": "loop",
+    "label": "재신청"
+   },
+   {
+    "id": "E06",
+    "source": "P04",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": "위탁 시"
+   },
+   {
+    "id": "E13",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P11",
+    "target": "P13",
+    "type": "sequence",
+    "label": "직접 선임"
+   },
+   {
+    "id": "E15",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": "부적합"
+   },
+   {
+    "id": "E17",
+    "source": "P15",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "MST 268805."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3 당사자 워크스루",
+  "scope": "L3 당사자 워크스루 후 명시 조문 13건 존재 확인 13건",
+  "notes": [
+   "전기안전관리법 MST 268805"
+  ],
+  "sources": [
+   {
+    "law": "전기안전관리법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "전기안전관리법",
+    "lawId": "013718",
+    "mst": "268805",
+    "promulgatedOn": "2025-01-31",
+    "effectiveOn": "2026-02-01",
+    "officialUrl": "https://law.go.kr/법령/전기안전관리법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 13,
+   "explicitCitationEntries": 13,
+   "articleReferences": 13,
+   "verifiedReferences": 13,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

@@ -1,0 +1,656 @@
+{
+ "slug": "strategic-trade-export-control",
+ "name": "전략물자 수출허가",
+ "oneLiner": "전략물자·기술의 수출·중개·경유·상황허가와 자율준수무역거래자·허가 취소 절차",
+ "type": "인허가형",
+ "priority": 140,
+ "whyFirst": "반도체 장비·기술·부품 수출입 안보 통제의 실무 핵심이다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "국제 평화와 안보를 위해 전략물자 등의 수출입을 허가·상황허가·정보시스템으로 통제한다.",
+  "stakeholders": "수출자·중개자, 산업통상부, 관계 부처 협의회, 수입국 최종사용자, 자율준수기업.",
+  "legalBasis": [
+   {
+    "law": "대외무역법",
+    "articles": "제11~12조(제한·통합공고), 제19조(전략물자), 제19조의2~7(수출·상황·경유·중개허가·심사·취소), 제22·22조의2(자율준수), 제23~24조(고시·정보시스템), 제26조(협의회), 제30조(제한)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "산업통상부",
+    "role": "허가·고시·시스템"
+   },
+   {
+    "name": "수출자",
+    "role": "허가 신청·준수"
+   },
+   {
+    "name": "협의회",
+    "role": "정책 조정"
+   }
+  ],
+  "procedure": [
+   "전략물자 해당성·통합공고 확인",
+   "수출허가·상황허가 등 유형 선택(§19의2~5)",
+   "허가 신청·심사(§19의6)",
+   "허가 발급 또는 거부·보완",
+   "통관·선적·사후 관리",
+   "자율준수무역거래자 지정(해당 시)",
+   "위반 시 허가 취소·수출 제한"
+  ],
+  "moneyFlow": "허가 수수료(실무 확인), 자율준수 컨설팅 비용, 제재 시 과태료·형사(법 벌칙 조항 연계).",
+  "docsFlow": "품목·기술 분류 → 최종사용자 서류 → 허가신청 → 허가서 → 선적 → 기록 보관.",
+  "bottlenecks": [
+   "품목 분류 불확실",
+   "최종사용자 검증",
+   "다자 제재 목록 변동",
+   "허가 처리 지연"
+  ],
+  "reformPoints": [
+   "분류 사전판정 확대",
+   "메가 공급망 일괄 허가",
+   "처리 기한 공표"
+  ]
+ },
+ "related": [
+  "외국인투자 신고·등록",
+  "국가첨단전략산업 특화단지 지정·지원",
+  "공공조달·국가계약",
+  "사이버보안(공공부문)"
+ ],
+ "fieldVerification": [
+  "전략물자수출입고시 현행",
+  "Yestrade 등 시스템명",
+  "허가 처리기간 고시"
+ ],
+ "process": {
+  "institution_name": "전략물자 수출허가",
+  "law_name": "대외무역법",
+  "lanes": [
+   "수출자·중개자",
+   "산업통상부",
+   "관계부처 협의회",
+   "최종사용자 검증",
+   "자율준수",
+   "통관·사후"
+  ],
+  "stages": [
+   "G0 분류",
+   "G1 신청",
+   "G2 심사",
+   "G3 허가",
+   "G4 이행",
+   "G5 제재"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "전략물자 해당성 검토",
+    "lane": "수출자·중개자",
+    "stage": "G0 분류",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "수출자·중개자",
+    "action": "전략물자 해당성 검토",
+    "output_documents": [
+     "분류"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대외무역법",
+      "article": "제19조(전략물자)",
+      "text": "전략물자"
+     },
+     {
+      "law": "대외무역법",
+      "article": "제12조(통합 공고)",
+      "text": "통합 공고"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "허가 유형 선택",
+    "lane": "수출자·중개자",
+    "stage": "G0 분류",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "수출자·중개자",
+    "action": "허가 유형 선택",
+    "output_documents": [
+     "유형"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대외무역법",
+      "article": "제19조의2(수출허가)",
+      "text": "수출허가"
+     },
+     {
+      "law": "대외무역법",
+      "article": "제19조의3(상황허가)",
+      "text": "상황허가"
+     },
+     {
+      "law": "대외무역법",
+      "article": "제19조의4(경유 또는 환적허가)",
+      "text": "경유 또는 환적허가"
+     },
+     {
+      "law": "대외무역법",
+      "article": "제19조의5(중개허가)",
+      "text": "중개허가"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "수출·상황·중개 등 허가 신청",
+    "lane": "수출자·중개자",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "수출자·중개자",
+    "action": "수출·상황·중개 등 허가 신청",
+    "output_documents": [
+     "신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대외무역법",
+      "article": "제19조의2(수출허가)",
+      "text": "수출허가"
+     },
+     {
+      "law": "대외무역법",
+      "article": "제19조의3(상황허가)",
+      "text": "상황허가"
+     },
+     {
+      "law": "대외무역법",
+      "article": "제19조의5(중개허가)",
+      "text": "중개허가"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "허가 유형·서류 확인",
+    "lane": "수출자·중개자",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "수출자·중개자",
+    "action": "상황·중개·경유 허가 신청",
+    "output_documents": [
+     "신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대외무역법",
+      "article": "제19조의4(경유 또는 환적허가)",
+      "text": "경유 또는 환적허가"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "허가 심사",
+    "lane": "산업통상부",
+    "stage": "G2 심사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산업통상부",
+    "action": "허가 심사",
+    "output_documents": [
+     "심사"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대외무역법",
+      "article": "제19조의6(허가 심사 등)",
+      "text": "허가 심사 등"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "최종사용자·용도 검증",
+    "lane": "최종사용자 검증",
+    "stage": "G2 심사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "최종사용자 검증",
+    "action": "최종사용자·용도 검증",
+    "output_documents": [
+     "검증"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대외무역법",
+      "article": "제19조의6(허가 심사 등)",
+      "text": "허가 심사 등"
+     },
+     {
+      "law": "대외무역법",
+      "article": "제27조(수입목적확인서)",
+      "text": "수입목적확인서"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "협의회 의견(해당 시)",
+    "lane": "관계부처 협의회",
+    "stage": "G2 심사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "관계부처 협의회",
+    "action": "협의회 의견(해당 시)",
+    "output_documents": [
+     "협의"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대외무역법",
+      "article": "제26조(전략물자 수출입통제 협의회)",
+      "text": "전략물자 수출입통제 협의회"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "보완 제출",
+    "lane": "수출자·중개자",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "수출자·중개자",
+    "action": "보완 제출",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대외무역법",
+      "article": "제19조의6(허가 심사 등)",
+      "text": "허가 심사 등"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "허가 발급",
+    "lane": "산업통상부",
+    "stage": "G3 허가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산업통상부",
+    "action": "허가 발급",
+    "output_documents": [
+     "허가서"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대외무역법",
+      "article": "제19조의2(수출허가)",
+      "text": "수출허가"
+     },
+     {
+      "law": "대외무역법",
+      "article": "제19조의6(허가 심사 등)",
+      "text": "허가 심사 등"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "허가 결과 수령",
+    "lane": "수출자·중개자",
+    "stage": "G3 허가",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "수출자·중개자",
+    "action": "허가 결과 수령",
+    "output_documents": [
+     "수령"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대외무역법",
+      "article": "제19조의2(수출허가)",
+      "text": "수출허가"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "선적·통관·기록",
+    "lane": "통관·사후",
+    "stage": "G4 이행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "통관·사후",
+    "action": "선적·통관·기록",
+    "output_documents": [
+     "이행"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대외무역법",
+      "article": "제24조(전략물자 수출입관리 정보시스템)",
+      "text": "전략물자 수출입관리 정보시스템"
+     },
+     {
+      "law": "대외무역법",
+      "article": "제10조(수출입의 원칙)",
+      "text": "수출입의 원칙"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "자율준수무역거래자",
+    "lane": "자율준수",
+    "stage": "G4 이행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "자율준수",
+    "action": "자율준수무역거래자",
+    "output_documents": [
+     "CP"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대외무역법",
+      "article": "제22조(자율준수무역거래자)",
+      "text": "자율준수무역거래자"
+     },
+     {
+      "law": "대외무역법",
+      "article": "제22조의2(자율준수무역거래자 등급 조정 및 지정 취소)",
+      "text": "자율준수무역거래자 등급 조정 및 지정 취소"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "허가 취소·수출 제한",
+    "lane": "산업통상부",
+    "stage": "G5 제재",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산업통상부",
+    "action": "허가 취소·수출 제한",
+    "output_documents": [
+     "취소"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대외무역법",
+      "article": "제19조의7(허가 취소)",
+      "text": "허가 취소"
+     },
+     {
+      "law": "대외무역법",
+      "article": "제30조(전략물자등의 수출입 제한 등)",
+      "text": "전략물자등의 수출입 제한 등"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "처분 통지 수령",
+    "lane": "수출자·중개자",
+    "stage": "G5 제재",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "수출자·중개자",
+    "action": "처분 통지 수령",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대외무역법",
+      "article": "제19조의7(허가 취소)",
+      "text": "허가 취소"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "고시·정보시스템 확인",
+    "lane": "수출자·중개자",
+    "stage": "G0 분류",
+    "type": "system",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "수출자·중개자",
+    "action": "고시·정보시스템 확인",
+    "output_documents": [
+     "고시"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대외무역법",
+      "article": "제23조(전략물자수출입고시 등)",
+      "text": "전략물자수출입고시 등"
+     },
+     {
+      "law": "대외무역법",
+      "article": "제24조(전략물자 수출입관리 정보시스템)",
+      "text": "전략물자 수출입관리 정보시스템"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "수출 제한 특별조치(해당 시)",
+    "lane": "산업통상부",
+    "stage": "G5 제재",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산업통상부",
+    "action": "수출 제한 특별조치(해당 시)",
+    "output_documents": [
+     "제한"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대외무역법",
+      "article": "제5조(무역에 관한 제한 등 특별 조치)",
+      "text": "무역에 관한 제한 등 특별 조치"
+     },
+     {
+      "law": "대외무역법",
+      "article": "제11조(수출입의 제한 등)",
+      "text": "수출입의 제한 등"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P15",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": "허가신청"
+   },
+   {
+    "id": "E04",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": "유형확인"
+   },
+   {
+    "id": "E05",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P05",
+    "target": "P08",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P03",
+    "type": "loop",
+    "label": "재신청"
+   },
+   {
+    "id": "E10",
+    "source": "P07",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P11",
+    "target": "P13",
+    "type": "sequence",
+    "label": "위반"
+   },
+   {
+    "id": "E15",
+    "source": "P13",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P16",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "MST 276491. 고시·시스템은 fieldVerification."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3 당사자 워크스루",
+  "scope": "L3 당사자 워크스루 후 명시 조문 18건 존재 확인 18건",
+  "notes": [
+   "대외무역법 MST 276491"
+  ],
+  "sources": [
+   {
+    "law": "대외무역법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "대외무역법",
+    "lawId": "001467",
+    "mst": "276491",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/대외무역법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 18,
+   "explicitCitationEntries": 18,
+   "articleReferences": 18,
+   "verifiedReferences": 18,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

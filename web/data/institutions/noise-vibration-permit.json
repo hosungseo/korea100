@@ -1,0 +1,614 @@
+{
+ "slug": "noise-vibration-permit",
+ "name": "소음·진동 배출시설 허가",
+ "oneLiner": "공장 소음·진동 배출시설 설치 허가·신고, 방지시설, 특정공사 사전신고, 개선명령 절차",
+ "type": "인허가형",
+ "priority": 145,
+ "whyFirst": "팹·물류·변전·공사 단계에서 주민 갈등의 최전선 환경 규제다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "공장·생활·공사·교통 소음·진동을 배출시설 허가·방지시설·규제기준으로 관리한다.",
+  "stakeholders": "사업장·시공자, 기후에너지환경부·지자체, 인근 주민, 방지시설 업체.",
+  "legalBasis": [
+   {
+    "law": "소음ㆍ진동관리법",
+    "articles": "제7~9조(공장 기준·배출시설 허가·방지시설), 제14~15·17조(준수·개선·취소), 제21~23조(생활소음·특정공사·조치), 제5조(의제)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "기후에너지환경부·지자체",
+    "role": "허가·신고·명령"
+   },
+   {
+    "name": "사업자·시공자",
+    "role": "설치·신고·저감"
+   },
+   {
+    "name": "주민",
+    "role": "피해·신고 관심"
+   }
+  ],
+  "procedure": [
+   "배출시설 해당성·공장 허용기준 확인",
+   "설치 신고·허가 신청(§8)",
+   "방지시설 설치(§9)",
+   "허가·의제",
+   "운영·기준 준수(§14)",
+   "특정공사 사전신고(§22, 해당 시)",
+   "개선명령·취소·폐쇄(§15·§17·§18)"
+  ],
+  "moneyFlow": "허가 수수료, 방지·방음 시설비, 과태료·행정처분 비용.",
+  "docsFlow": "공정·소음 자료 → 허가·신고 → 방지시설 도서 → 허가증 → 특정공사 신고 → 측정 기록.",
+  "bottlenecks": [
+   "야간 공사 민원",
+   "측정 기준 해석",
+   "특정공사 신고 누락",
+   "생활소음과 공장규제 중첩"
+  ],
+  "reformPoints": [
+   "메가 공사 소음 관리계획 사전 공개",
+   "측정 데이터 공유",
+   "처리 기한 명시"
+  ]
+ },
+ "related": [
+  "대기·수질 배출시설 허가",
+  "환경영향평가",
+  "건축허가",
+  "공장설립승인",
+  "중대재해 처벌·예방"
+ ],
+ "fieldVerification": [
+  "배출시설 허가·신고 규모 기준",
+  "특정공사 대상 공종 고시",
+  "생활소음 규제기준 고시"
+ ],
+ "process": {
+  "institution_name": "소음·진동 배출시설 허가",
+  "law_name": "소음ㆍ진동관리법",
+  "lanes": [
+   "사업자·시공자",
+   "환경부·지자체",
+   "방지·측정",
+   "인근 주민",
+   "공사 관리",
+   "감독"
+  ],
+  "stages": [
+   "G0 해당성",
+   "G1 신청",
+   "G2 방지시설",
+   "G3 허가",
+   "G4 운영·공사",
+   "G5 처분"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "공장 소음·진동 해당성 검토",
+    "lane": "사업자·시공자",
+    "stage": "G0 해당성",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "사업자·시공자",
+    "action": "공장 소음·진동 해당성 검토",
+    "output_documents": [
+     "해당성"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소음ㆍ진동관리법",
+      "article": "제7조(공장 소음ㆍ진동배출허용기준)",
+      "text": "공장 소음ㆍ진동배출허용기준"
+     },
+     {
+      "law": "소음ㆍ진동관리법",
+      "article": "제8조(배출시설의 설치 신고 및 허가 등)",
+      "text": "배출시설의 설치 신고 및 허가 등"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "설치 신고·허가 신청",
+    "lane": "사업자·시공자",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "사업자·시공자",
+    "action": "설치 신고·허가 신청",
+    "output_documents": [
+     "신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소음ㆍ진동관리법",
+      "article": "제8조(배출시설의 설치 신고 및 허가 등)",
+      "text": "배출시설의 설치 신고 및 허가 등"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "다른 법률 허가 의제",
+    "lane": "환경부·지자체",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "환경부·지자체",
+    "action": "다른 법률 허가 의제",
+    "output_documents": [
+     "의제"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소음ㆍ진동관리법",
+      "article": "제5조(다른 법률에 따른 허가의 의제)",
+      "text": "다른 법률에 따른 허가의 의제"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "방지시설 설치",
+    "lane": "방지·측정",
+    "stage": "G2 방지시설",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "방지·측정",
+    "action": "방지시설 설치",
+    "output_documents": [
+     "방지시설"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소음ㆍ진동관리법",
+      "article": "제9조(방지시설의 설치)",
+      "text": "방지시설의 설치"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "심사·허가·신고 수리",
+    "lane": "환경부·지자체",
+    "stage": "G3 허가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "환경부·지자체",
+    "action": "심사·허가·신고 수리",
+    "output_documents": [
+     "허가"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소음ㆍ진동관리법",
+      "article": "제8조(배출시설의 설치 신고 및 허가 등)",
+      "text": "배출시설의 설치 신고 및 허가 등"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "보완·재신청",
+    "lane": "사업자·시공자",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업자·시공자",
+    "action": "보완·재신청",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소음ㆍ진동관리법",
+      "article": "제8조(배출시설의 설치 신고 및 허가 등)",
+      "text": "배출시설의 설치 신고 및 허가 등"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "허가 결과 수령",
+    "lane": "사업자·시공자",
+    "stage": "G3 허가",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업자·시공자",
+    "action": "허가 결과 수령",
+    "output_documents": [
+     "허가증"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소음ㆍ진동관리법",
+      "article": "제8조(배출시설의 설치 신고 및 허가 등)",
+      "text": "배출시설의 설치 신고 및 허가 등"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "허용기준 준수·운영",
+    "lane": "사업자·시공자",
+    "stage": "G4 운영·공사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업자·시공자",
+    "action": "허용기준 준수·운영",
+    "output_documents": [
+     "운영"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소음ㆍ진동관리법",
+      "article": "제14조(배출허용기준의 준수 의무)",
+      "text": "배출허용기준의 준수 의무"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "특정공사 사전신고",
+    "lane": "공사 관리",
+    "stage": "G4 운영·공사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "공사 관리",
+    "action": "특정공사 사전신고",
+    "output_documents": [
+     "공사신고"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소음ㆍ진동관리법",
+      "article": "제22조(특정공사의 사전신고 등)",
+      "text": "특정공사의 사전신고 등"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "생활소음·진동 규제 준수",
+    "lane": "공사 관리",
+    "stage": "G4 운영·공사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "공사 관리",
+    "action": "생활소음·진동 규제 준수",
+    "output_documents": [
+     "생활소음"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소음ㆍ진동관리법",
+      "article": "제21조(생활소음과 진동의 규제)",
+      "text": "생활소음과 진동의 규제"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "주민 피해·민원",
+    "lane": "인근 주민",
+    "stage": "G4 운영·공사",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "인근 주민",
+    "action": "주민 피해·민원",
+    "output_documents": [
+     "민원"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "소음ㆍ진동관리법",
+      "article": "제21조(생활소음과 진동의 규제)",
+      "text": "생활소음과 진동의 규제"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "개선·조치명령",
+    "lane": "환경부·지자체",
+    "stage": "G5 처분",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "환경부·지자체",
+    "action": "개선·조치명령",
+    "output_documents": [
+     "명령"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소음ㆍ진동관리법",
+      "article": "제15조(개선명령)",
+      "text": "개선명령"
+     },
+     {
+      "law": "소음ㆍ진동관리법",
+      "article": "제23조(생활소음ㆍ진동의 규제기준을 초과한 자에 대한 조치명령 등)",
+      "text": "생활소음ㆍ진동의 규제기준을 초과한 자에 대한 조치명령 등"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "허가 취소·폐쇄",
+    "lane": "감독",
+    "stage": "G5 처분",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "감독",
+    "action": "허가 취소·폐쇄",
+    "output_documents": [
+     "취소"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소음ㆍ진동관리법",
+      "article": "제17조(허가의 취소 등)",
+      "text": "허가의 취소 등"
+     },
+     {
+      "law": "소음ㆍ진동관리법",
+      "article": "제18조(위법시설에 대한 폐쇄조치 등)",
+      "text": "위법시설에 대한 폐쇄조치 등"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "명령 이행보고·확인",
+    "lane": "사업자·시공자",
+    "stage": "G5 처분",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업자·시공자",
+    "action": "명령 이행보고·확인",
+    "output_documents": [
+     "이행"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소음ㆍ진동관리법",
+      "article": "제20조(명령의 이행보고 및 확인)",
+      "text": "명령의 이행보고 및 확인"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "처분 통지 수령",
+    "lane": "사업자·시공자",
+    "stage": "G5 처분",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업자·시공자",
+    "action": "처분 통지 수령",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소음ㆍ진동관리법",
+      "article": "제17조(허가의 취소 등)",
+      "text": "허가의 취소 등"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "방음시설 설치(해당 시)",
+    "lane": "방지·측정",
+    "stage": "G2 방지시설",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "방지·측정",
+    "action": "방음시설 설치(해당 시)",
+    "output_documents": [
+     "방음"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소음ㆍ진동관리법",
+      "article": "제40조(방음시설의 성능과 설치 기준 등)",
+      "text": "방음시설의 성능과 설치 기준 등"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P16",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E07",
+    "source": "P06",
+    "target": "P02",
+    "type": "loop",
+    "label": "재신청"
+   },
+   {
+    "id": "E08",
+    "source": "P05",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": "기준 초과"
+   },
+   {
+    "id": "E14",
+    "source": "P12",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P13",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E17",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "MST 276753. 패키지 δ."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3 당사자 워크스루",
+  "scope": "L3 당사자 워크스루 후 명시 조문 13건 존재 확인 13건",
+  "notes": [
+   "소음ㆍ진동관리법 MST 276753"
+  ],
+  "sources": [
+   {
+    "law": "소음ㆍ진동관리법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "소음ㆍ진동관리법",
+    "lawId": "000167",
+    "mst": "276753",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2025-10-01",
+    "officialUrl": "https://law.go.kr/법령/소음·진동관리법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 13,
+   "explicitCitationEntries": 13,
+   "articleReferences": 13,
+   "verifiedReferences": 13,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

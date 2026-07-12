@@ -1,0 +1,797 @@
+{
+ "slug": "regulatory-sandbox-demonstration",
+ "name": "규제샌드박스 실증특례",
+ "oneLiner": "신기술·신서비스에 대해 규제를 한시 면제·유예해 제한된 구역·조건에서 실증하고 본허가·법령 정비로 연결하는 규제샌드박스 핵심 경로",
+ "type": "규제특례형",
+ "priority": 133,
+ "whyFirst": "피지컬 AI·로봇 현장 투입의 대표 행정 경로를 메가프로젝트 맥락에서 분리 설명한다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "기존 규제가 예상하지 못한 융합 신기술의 시장 출시·실증을 안전하게 시험하고, 결과를 제도 개선에 반영한다.",
+  "stakeholders": "신기술 기업, 소관 부처·위원회, 실증 지역 지자체·주민, 이용자·보험, 기존 규제 대상 업계.",
+  "legalBasis": [
+   {
+    "law": "산업융합 촉진법",
+    "articles": "제8·9조, 제10조의2~7, 제16조",
+    "kind": "법률"
+   },
+   {
+    "law": "산업융합 촉진법 시행령",
+    "articles": "제11조의2~6, 제11조의8",
+    "kind": "대통령령"
+   },
+   {
+    "law": "규제자유특구 및 지역특화발전특구에 관한 규제특례법",
+    "articles": "제5조, 제11조, 제14조, 제15조",
+    "kind": "법률"
+   },
+   {
+    "law": "정보통신 진흥 및 융합 활성화 등에 관한 특별법",
+    "articles": "제36·37조, 제38조의2·3·5",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "소관 부처·위원회",
+    "role": "특례 심의·부여"
+   },
+   {
+    "name": "전문기관",
+    "role": "신청 지원·모니터링"
+   },
+   {
+    "name": "실증 기업",
+    "role": "실증 수행·보고"
+   },
+   {
+    "name": "지자체",
+    "role": "특구·현장 협조"
+   }
+  ],
+  "procedure": [
+   "규제 신속확인 신청·30일 회신(§10조의2, ICT §36)",
+   "실증특례 신청·사전 검토(§10조의3, 영 §11조의3)",
+   "규제특례심의위원회 심의·조건 부여(§8·§10조의3)",
+   "제한 조건 실증 및 주민·보험 조치(§10조의4)",
+   "관리·감독·보고",
+   "특례 연장(§10조의5, 30일)",
+   "임시허가 전환(§10조의6) 또는 법령 개선 권고(§9)",
+   "지역형은 규제자유특구 지정 경로(특구법 §5·§11·§14)"
+  ],
+  "moneyFlow": "실증 비용은 기업 부담, 일부 지원사업 연계. 보험·공탁 조건이 붙을 수 있다.",
+  "docsFlow": "신속확인 → 특례 신청서·안전대책 → 심의서 → 특례 통지 → 실증 보고 → 정비 건의.",
+  "bottlenecks": [
+   "다부처 규제 중첩",
+   "안전 입증 자료 부담",
+   "실증 후 본허가 단절",
+   "주민 수용성"
+  ],
+  "reformPoints": [
+   "원스톱 다부처 심의",
+   "실증→본허가 패스트트랙",
+   "피지컬 AI 표준 안전 프로토콜"
+  ]
+ },
+ "related": [
+  "규제샌드박스",
+  "영업허가와 신고",
+  "자동적 처분과 AI 행정",
+  "인공지능 기본법(고영향 AI 규제)",
+  "혁신제품 지정·시범구매 절차"
+ ],
+ "fieldVerification": [
+  "산업융합·ICT·금융·지역 특구 창구 구분",
+  "실증 중 사고 시 책임·보험 요건",
+  "특례 기간·연장 횟수 상한"
+ ],
+ "process": {
+  "institution_name": "규제샌드박스 실증특례",
+  "law_name": "산업융합 촉진법",
+  "lanes": [
+   "신기술 기업",
+   "전문기관",
+   "소관 부처·심의위원회",
+   "지자체·주민",
+   "이용자·보험",
+   "법령 정비 주체"
+  ],
+  "stages": [
+   "G0 신속확인",
+   "G1 특례 신청",
+   "G2 심의",
+   "G3 실증",
+   "G4 관리·연장",
+   "G5 취소·제도화"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "규제 신속확인 신청",
+    "lane": "신기술 기업",
+    "stage": "G0 신속확인",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "신기술 기업",
+    "action": "규제 신속확인 신청",
+    "output_documents": [
+     "신청서"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업융합 촉진법",
+      "article": "제10조의2(규제 신속확인)",
+      "text": "규제 신속확인"
+     },
+     {
+      "law": "산업융합 촉진법 시행령",
+      "article": "제11조의2(규제 신속확인 신청 등)",
+      "text": "규제 신속확인 신청 등"
+     },
+     {
+      "law": "정보통신 진흥 및 융합 활성화 등에 관한 특별법",
+      "article": "제36조(신규 정보통신융합등 기술ㆍ서비스의 신속처리)",
+      "text": "신규 정보통신융합등 기술ㆍ서비스의 신속처리"
+     }
+    ],
+    "deadline": "회신 30일 — §10조의2"
+   },
+   {
+    "id": "P02",
+    "name": "신속확인 회신 수령",
+    "lane": "신기술 기업",
+    "stage": "G0 신속확인",
+    "type": "notice",
+    "status": "done",
+    "progress": 100,
+    "actor": "신기술 기업",
+    "action": "신속확인 회신 수령",
+    "output_documents": [
+     "회신"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업융합 촉진법",
+      "article": "제10조의2(규제 신속확인)",
+      "text": "규제 신속확인"
+     }
+    ],
+    "deadline": "30일"
+   },
+   {
+    "id": "P03",
+    "name": "실증특례 신청",
+    "lane": "신기술 기업",
+    "stage": "G1 특례 신청",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "신기술 기업",
+    "action": "실증특례 신청",
+    "output_documents": [
+     "특례 신청",
+     "안전대책"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업융합 촉진법",
+      "article": "제10조의3(실증을 위한 규제특례)",
+      "text": "실증을 위한 규제특례"
+     },
+     {
+      "law": "산업융합 촉진법 시행령",
+      "article": "제11조의3(실증을 위한 규제특례 신청 등)",
+      "text": "실증을 위한 규제특례 신청 등"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "사전 검토",
+    "lane": "전문기관",
+    "stage": "G1 특례 신청",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "전문기관",
+    "action": "사전 검토",
+    "output_documents": [
+     "검토"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업융합 촉진법 시행령",
+      "article": "제11조의3(실증을 위한 규제특례 신청 등)",
+      "text": "실증을 위한 규제특례 신청 등"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "지역 주민 의견·현장 협의",
+    "lane": "지자체·주민",
+    "stage": "G1 특례 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지자체·주민",
+    "action": "지역 주민 의견·현장 협의",
+    "output_documents": [
+     "의견"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "규제자유특구 및 지역특화발전특구에 관한 규제특례법",
+      "article": "제14조(특화특구지정의 효과)",
+      "text": "특화특구지정의 효과"
+     },
+     {
+      "law": "산업융합 촉진법",
+      "article": "제10조의3(실증을 위한 규제특례)",
+      "text": "실증을 위한 규제특례"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "규제특례심의위원회 심의",
+    "lane": "소관 부처·심의위원회",
+    "stage": "G2 심의",
+    "type": "gateway",
+    "status": "current",
+    "progress": 45,
+    "actor": "소관 부처·심의위원회",
+    "action": "규제특례심의위원회 심의",
+    "output_documents": [
+     "심의"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업융합 촉진법",
+      "article": "제8조(산업융합 규제특례심의위원회)",
+      "text": "산업융합 규제특례심의위원회"
+     },
+     {
+      "law": "산업융합 촉진법",
+      "article": "제10조의3(실증을 위한 규제특례)",
+      "text": "실증을 위한 규제특례"
+     }
+    ],
+    "deadline": "심의·처리 30일·90일 등 §10조의3 확인"
+   },
+   {
+    "id": "P07",
+    "name": "보완 제출",
+    "lane": "신기술 기업",
+    "stage": "G2 심의",
+    "type": "task",
+    "status": "loop",
+    "progress": 0,
+    "actor": "신기술 기업",
+    "action": "보완 제출",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업융합 촉진법",
+      "article": "제10조의3(실증을 위한 규제특례)",
+      "text": "실증을 위한 규제특례"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "특례 부여·조건 통지 수령",
+    "lane": "신기술 기업",
+    "stage": "G2 심의",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신기술 기업",
+    "action": "특례 부여·조건 통지 수령",
+    "output_documents": [
+     "특례 통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업융합 촉진법",
+      "article": "제10조의3(실증을 위한 규제특례)",
+      "text": "실증을 위한 규제특례"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "제한 조건 실증",
+    "lane": "신기술 기업",
+    "stage": "G3 실증",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신기술 기업",
+    "action": "제한 조건 실증",
+    "output_documents": [
+     "실증 로그"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업융합 촉진법",
+      "article": "제10조의3(실증을 위한 규제특례)",
+      "text": "실증을 위한 규제특례"
+     },
+     {
+      "law": "정보통신 진흥 및 융합 활성화 등에 관한 특별법",
+      "article": "제38조의2(실증을 위한 규제특례)",
+      "text": "실증을 위한 규제특례"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "보험·피해 대비",
+    "lane": "이용자·보험",
+    "stage": "G3 실증",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "이용자·보험",
+    "action": "보험·피해 대비",
+    "output_documents": [
+     "보험"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업융합 촉진법",
+      "article": "제10조의4(실증을 위한 규제특례의 관리 및 감독 등)",
+      "text": "실증을 위한 규제특례의 관리 및 감독 등"
+     },
+     {
+      "law": "산업융합 촉진법",
+      "article": "제16조(손해보장사업의 실시)",
+      "text": "손해보장사업의 실시"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "이용자 보호·정보 제공",
+    "lane": "이용자·보험",
+    "stage": "G3 실증",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "이용자·보험",
+    "action": "이용자 보호·정보 제공",
+    "output_documents": [
+     "고지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업융합 촉진법",
+      "article": "제10조의4(실증을 위한 규제특례의 관리 및 감독 등)",
+      "text": "실증을 위한 규제특례의 관리 및 감독 등"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "관리·감독·보고",
+    "lane": "전문기관",
+    "stage": "G4 관리·연장",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "전문기관",
+    "action": "관리·감독·보고",
+    "output_documents": [
+     "모니터링"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업융합 촉진법",
+      "article": "제10조의4(실증을 위한 규제특례의 관리 및 감독 등)",
+      "text": "실증을 위한 규제특례의 관리 및 감독 등"
+     },
+     {
+      "law": "산업융합 촉진법 시행령",
+      "article": "제11조의4(실증을 위한 규제특례의 관리 및 감독 등)",
+      "text": "실증을 위한 규제특례의 관리 및 감독 등"
+     },
+     {
+      "law": "정보통신 진흥 및 융합 활성화 등에 관한 특별법",
+      "article": "제38조의3(실증을 위한 규제특례의 관리ㆍ감독)",
+      "text": "실증을 위한 규제특례의 관리ㆍ감독"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "특례 연장 신청·심의",
+    "lane": "소관 부처·심의위원회",
+    "stage": "G4 관리·연장",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "소관 부처·심의위원회",
+    "action": "특례 연장 신청·심의",
+    "output_documents": [
+     "연장"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업융합 촉진법",
+      "article": "제10조의5(실증을 위한 규제특례의 연장 등)",
+      "text": "실증을 위한 규제특례의 연장 등"
+     },
+     {
+      "law": "정보통신 진흥 및 융합 활성화 등에 관한 특별법",
+      "article": "제38조의5(실증을 위한 규제특례의 연장 등)",
+      "text": "실증을 위한 규제특례의 연장 등"
+     }
+    ],
+    "deadline": "30일 — §10조의5"
+   },
+   {
+    "id": "P14",
+    "name": "임시허가 신청·심사",
+    "lane": "신기술 기업",
+    "stage": "G5 취소·제도화",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신기술 기업",
+    "action": "임시허가 신청·심사",
+    "output_documents": [
+     "임시허가"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업융합 촉진법",
+      "article": "제10조의6(임시허가)",
+      "text": "임시허가"
+     },
+     {
+      "law": "정보통신 진흥 및 융합 활성화 등에 관한 특별법",
+      "article": "제37조(임시허가)",
+      "text": "임시허가"
+     }
+    ],
+    "deadline": "§10조의6 30일·90일 등"
+   },
+   {
+    "id": "P15",
+    "name": "임시허가·특례 취소 청문",
+    "lane": "신기술 기업",
+    "stage": "G5 취소·제도화",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신기술 기업",
+    "action": "임시허가·특례 취소 청문",
+    "output_documents": [
+     "청문·진술"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업융합 촉진법",
+      "article": "제10조의7(임시허가의 취소)",
+      "text": "임시허가의 취소"
+     },
+     {
+      "law": "산업융합 촉진법",
+      "article": "제33조(청문)",
+      "text": "청문"
+     },
+     {
+      "law": "산업융합 촉진법 시행령",
+      "article": "제11조의7(임시허가의 취소 등)",
+      "text": "임시허가의 취소 등"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "적합성 인증 거부 이의(해당 시)",
+    "lane": "신기술 기업",
+    "stage": "G5 취소·제도화",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신기술 기업",
+    "action": "적합성 인증 거부 이의(해당 시)",
+    "output_documents": [
+     "이의"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업융합 촉진법",
+      "article": "제15조(적합성 인증의 거부 등에 대한 이의신청)",
+      "text": "적합성 인증의 거부 등에 대한 이의신청"
+     }
+    ],
+    "deadline": "30일 — §15"
+   },
+   {
+    "id": "P17",
+    "name": "법령 개선 권고",
+    "lane": "법령 정비 주체",
+    "stage": "G5 취소·제도화",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "법령 정비 주체",
+    "action": "법령 개선 권고",
+    "output_documents": [
+     "권고"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "산업융합 촉진법",
+      "article": "제9조(융합 신산업 관계 법령의 개선 권고 등)",
+      "text": "융합 신산업 관계 법령의 개선 권고 등"
+     }
+    ]
+   },
+   {
+    "id": "P18",
+    "name": "특구 지정 신청·고시 경로",
+    "lane": "지자체·주민",
+    "stage": "G1 특례 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지자체·주민",
+    "action": "특구 지정 신청·고시 경로",
+    "output_documents": [
+     "특구계획"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "규제자유특구 및 지역특화발전특구에 관한 규제특례법",
+      "article": "제5조(지역특화발전특구의 지정신청)",
+      "text": "지역특화발전특구의 지정신청"
+     },
+     {
+      "law": "규제자유특구 및 지역특화발전특구에 관한 규제특례법",
+      "article": "제11조(특화특구의 지정 등)",
+      "text": "특화특구의 지정 등"
+     },
+     {
+      "law": "규제자유특구 및 지역특화발전특구에 관한 규제특례법",
+      "article": "제15조(규제특례의 적용에 대한 조사, 지정해제 요청)",
+      "text": "규제특례의 적용에 대한 조사, 지정해제 요청"
+     }
+    ],
+    "deadline": "특구 지정 관련 §11(14일 등)"
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "loop",
+    "label": "보완"
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P06",
+    "type": "loop",
+    "label": "재심의"
+   },
+   {
+    "id": "E08",
+    "source": "P06",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P13",
+    "target": "P09",
+    "type": "loop",
+    "label": "연장 후 계속"
+   },
+   {
+    "id": "E15",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": "전환"
+   },
+   {
+    "id": "E16",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": "취소 시"
+   },
+   {
+    "id": "E17",
+    "source": "P14",
+    "target": "P16",
+    "type": "sequence",
+    "label": "인증 거부 시"
+   },
+   {
+    "id": "E18",
+    "source": "P14",
+    "target": "P17",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E19",
+    "source": "P03",
+    "target": "P18",
+    "type": "sequence",
+    "label": "지역특구"
+   }
+  ],
+  "warnings": [
+   "2026-07-12 L3: 기업 회신 수령·취소 청문(§10의7·§33)·이의(§15), 이용자 보호 분리, 주민·특구 경로 강화. MSTs 280047,286329,285533,281979.",
+   "L3 페르소나(신기술 기업): 불이익(취소) 시 청문·이의 노드 추가.",
+   "L3 페르소나(이용자): 보험과 정보 제공을 분리.",
+   "법의 침묵: 창구(산업/ICT/금융/지역) 선택은 운영 — 산업융합·ICT를 기본 축으로 둠."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3 당사자 워크스루",
+  "scope": "L3 보강 후 명시 조문 42건 중 존재 확인 42건",
+  "notes": [
+   "L3 실증특례: 청문·이의·이용자 권리",
+   "MSTs: 280047,286329,285533,281979"
+  ],
+  "sources": [
+   {
+    "law": "산업융합 촉진법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "산업융합 촉진법",
+    "lawId": "011372",
+    "mst": "280047",
+    "promulgatedOn": "2025-12-02",
+    "effectiveOn": "2026-06-03",
+    "officialUrl": "https://law.go.kr/법령/산업융합촉진법"
+   },
+   {
+    "law": "산업융합 촉진법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "산업융합 촉진법 시행령",
+    "lawId": "011475",
+    "mst": "286329",
+    "promulgatedOn": "2026-05-26",
+    "effectiveOn": "2026-06-03",
+    "officialUrl": "https://law.go.kr/법령/산업융합촉진법시행령"
+   },
+   {
+    "law": "규제자유특구 및 지역특화발전특구에 관한 규제특례법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "규제자유특구 및 지역특화발전특구에 관한 규제특례법",
+    "lawId": "009641",
+    "mst": "281979",
+    "promulgatedOn": "2025-12-30",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/규제자유특구및지역특화발전특구에관한규제특례법"
+   },
+   {
+    "law": "정보통신 진흥 및 융합 활성화 등에 관한 특별법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "정보통신 진흥 및 융합 활성화 등에 관한 특별법",
+    "lawId": "011902",
+    "mst": "285533",
+    "promulgatedOn": "2026-04-21",
+    "effectiveOn": "2026-04-21",
+    "officialUrl": "https://law.go.kr/법령/정보통신진흥및융합활성화등에관한특별법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차 존재 확인",
+   "citationEntries": 42,
+   "explicitCitationEntries": 42,
+   "articleReferences": 42,
+   "verifiedReferences": 42,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

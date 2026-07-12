@@ -1,0 +1,636 @@
+{
+ "slug": "chemical-safety-permit",
+ "name": "유해화학물질 영업·취급 허가",
+ "oneLiner": "유해화학물질 영업허가, 취급시설 기준, 화학사고예방관리계획, 사고 신고·영업취소 절차",
+ "type": "인허가형",
+ "priority": 138,
+ "whyFirst": "반도체 케미컬 공급·현장 취급의 핵심 안전 인허가이다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "유해화학물질의 제조·수입·판매·보관·사용을 영업허가·취급기준·사고예방계획으로 통제한다.",
+  "stakeholders": "영업자·취급자, 기후에너지환경부(화학물질안전원 등), 지자체, 근로자·인근 주민.",
+  "legalBasis": [
+   {
+    "law": "화학물질관리법",
+    "articles": "제13~16조(취급·표시), 제19조(허가물질), 제23~23조의3(사고예방계획), 제24~26조(취급시설), 제27~28조(영업 구분·허가), 제31~33조(도급·관리자·교육), 제35~36조(취소·과징금), 제43~44조(사고 신고·대응)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "기후에너지환경부",
+    "role": "영업허가·감독"
+   },
+   {
+    "name": "영업자",
+    "role": "허가 신청·기준 준수"
+   },
+   {
+    "name": "주민·근로자",
+    "role": "고지·안전"
+   }
+  ],
+  "procedure": [
+   "영업 구분·허가 해당성(§27·§28)",
+   "취급시설 기준 설계(§24)",
+   "화학사고예방관리계획서 제출(§23)",
+   "영업허가 신청·심사",
+   "관리자 선임·교육(§32·§33)",
+   "운영·자체점검·지역 고지",
+   "사고 신고·취소·과징금"
+  ],
+  "moneyFlow": "허가 수수료, 시설 투자, 과징금(§36), 교육 비용.",
+  "docsFlow": "물질 목록 → 시설 도면 → 예방계획서 → 허가신청 → 허가서 → 점검·교육 기록.",
+  "bottlenecks": [
+   "예방계획서 작성 부담",
+   "시설 이격거리·주민 수용",
+   "허가·소방·산안법 중첩",
+   "수입 허가물질 일정"
+  ],
+  "reformPoints": [
+   "메가 팹 케미컬 원스톱",
+   "예방계획 공개 표준",
+   "허가 심사 기한"
+  ]
+ },
+ "related": [
+  "지정폐기물 처리 허가",
+  "대기·수질 배출시설 허가",
+  "공장설립승인",
+  "중대재해 처벌·예방"
+ ],
+ "fieldVerification": [
+  "유해화학물질 고시 목록",
+  "영업허가 관할·처리기간",
+  "화학물질안전원 역할"
+ ],
+ "process": {
+  "institution_name": "유해화학물질 영업·취급 허가",
+  "law_name": "화학물질관리법",
+  "lanes": [
+   "영업자·취급자",
+   "환경부",
+   "취급시설·예방계획",
+   "근로자",
+   "인근 주민",
+   "감독"
+  ],
+  "stages": [
+   "G0 해당성",
+   "G1 시설·계획",
+   "G2 허가",
+   "G3 운영",
+   "G4 사고",
+   "G5 처분"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "물질·영업 구분 확인",
+    "lane": "영업자·취급자",
+    "stage": "G0 해당성",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "영업자·취급자",
+    "action": "물질·영업 구분 확인",
+    "output_documents": [
+     "해당성"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "화학물질관리법",
+      "article": "제27조(유해화학물질 영업의 구분)",
+      "text": "유해화학물질 영업의 구분"
+     },
+     {
+      "law": "화학물질관리법",
+      "article": "제2조(정의)",
+      "text": "정의"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "허가물질·수입 경로",
+    "lane": "영업자·취급자",
+    "stage": "G0 해당성",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "영업자·취급자",
+    "action": "허가물질·수입 경로",
+    "output_documents": [
+     "경로"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "화학물질관리법",
+      "article": "제19조(허가물질의 제조ㆍ수입ㆍ사용 허가 등)",
+      "text": "허가물질의 제조ㆍ수입ㆍ사용 허가 등"
+     },
+     {
+      "law": "화학물질관리법",
+      "article": "제28조(유해화학물질 영업허가 등)",
+      "text": "유해화학물질 영업허가 등"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "취급시설 배치·설치",
+    "lane": "취급시설·예방계획",
+    "stage": "G1 시설·계획",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "취급시설·예방계획",
+    "action": "취급시설 배치·설치",
+    "output_documents": [
+     "시설"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "화학물질관리법",
+      "article": "제24조(취급시설의 배치ㆍ설치 및 관리 기준 등)",
+      "text": "취급시설의 배치ㆍ설치 및 관리 기준 등"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "화학사고예방관리계획서 제출",
+    "lane": "취급시설·예방계획",
+    "stage": "G1 시설·계획",
+    "type": "task",
+    "status": "current",
+    "progress": 45,
+    "actor": "취급시설·예방계획",
+    "action": "화학사고예방관리계획서 제출",
+    "output_documents": [
+     "예방계획"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "화학물질관리법",
+      "article": "제23조(화학사고예방관리계획서의 작성ㆍ제출)",
+      "text": "화학사고예방관리계획서의 작성ㆍ제출"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "영업·허가물질 허가 신청",
+    "lane": "영업자·취급자",
+    "stage": "G2 허가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "영업자·취급자",
+    "action": "영업허가 신청",
+    "output_documents": [
+     "신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "화학물질관리법",
+      "article": "제28조(유해화학물질 영업허가 등)",
+      "text": "영업허가"
+     },
+     {
+      "law": "화학물질관리법",
+      "article": "제19조(허가물질의 제조ㆍ수입ㆍ사용 허가 등)",
+      "text": "허가물질"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "심사·허가 처분",
+    "lane": "환경부",
+    "stage": "G2 허가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "환경부",
+    "action": "심사·허가 처분",
+    "output_documents": [
+     "허가"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "화학물질관리법",
+      "article": "제28조(유해화학물질 영업허가 등)",
+      "text": "유해화학물질 영업허가 등"
+     },
+     {
+      "law": "화학물질관리법",
+      "article": "제30조(유해화학물질 영업자의 결격사유)",
+      "text": "유해화학물질 영업자의 결격사유"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "보완·재신청",
+    "lane": "영업자·취급자",
+    "stage": "G2 허가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "영업자·취급자",
+    "action": "보완·재신청",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "화학물질관리법",
+      "article": "제28조(유해화학물질 영업허가 등)",
+      "text": "유해화학물질 영업허가 등"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "관리자 선임·교육",
+    "lane": "근로자",
+    "stage": "G3 운영",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "근로자",
+    "action": "관리자 선임·교육",
+    "output_documents": [
+     "선임"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "화학물질관리법",
+      "article": "제32조(유해화학물질관리자)",
+      "text": "유해화학물질관리자"
+     },
+     {
+      "law": "화학물질관리법",
+      "article": "제33조(유해화학물질 안전교육)",
+      "text": "유해화학물질 안전교육"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "취급기준·표시·자체점검",
+    "lane": "영업자·취급자",
+    "stage": "G3 운영",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "영업자·취급자",
+    "action": "취급기준·표시·자체점검",
+    "output_documents": [
+     "운영"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "화학물질관리법",
+      "article": "제13조(유해화학물질 취급기준)",
+      "text": "유해화학물질 취급기준"
+     },
+     {
+      "law": "화학물질관리법",
+      "article": "제16조(유해화학물질의 표시 등)",
+      "text": "유해화학물질의 표시 등"
+     },
+     {
+      "law": "화학물질관리법",
+      "article": "제26조(취급시설 등의 자체 점검)",
+      "text": "취급시설 등의 자체 점검"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "지역사회 고지",
+    "lane": "인근 주민",
+    "stage": "G3 운영",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "인근 주민",
+    "action": "지역사회 고지",
+    "output_documents": [
+     "고지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "화학물질관리법",
+      "article": "제23조의3(화학사고예방관리계획서의 지역사회 고지)",
+      "text": "화학사고예방관리계획서의 지역사회 고지"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "사고 발생 신고",
+    "lane": "영업자·취급자",
+    "stage": "G4 사고",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "영업자·취급자",
+    "action": "사고 발생 신고",
+    "output_documents": [
+     "신고"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "화학물질관리법",
+      "article": "제43조(화학사고 발생신고 등)",
+      "text": "화학사고 발생신고 등"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "현장 대응·가동중지",
+    "lane": "환경부",
+    "stage": "G4 사고",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "환경부",
+    "action": "현장 대응·가동중지",
+    "output_documents": [
+     "대응"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "화학물질관리법",
+      "article": "제44조(화학사고 현장 대응)",
+      "text": "화학사고 현장 대응"
+     },
+     {
+      "law": "화학물질관리법",
+      "article": "제44조의2(화학사고 발생 시설에 대한 가동중지명령)",
+      "text": "화학사고 발생 시설에 대한 가동중지명령"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "허가 취소·과징금",
+    "lane": "감독",
+    "stage": "G5 처분",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "감독",
+    "action": "허가 취소·과징금",
+    "output_documents": [
+     "처분"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "화학물질관리법",
+      "article": "제35조(유해화학물질 영업허가의 취소 등)",
+      "text": "유해화학물질 영업허가의 취소 등"
+     },
+     {
+      "law": "화학물질관리법",
+      "article": "제36조(영업정지 처분을 갈음하여 부과하는 과징금 처분)",
+      "text": "영업정지 처분을 갈음하여 부과하는 과징금 처분"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "처분 통지 수령",
+    "lane": "영업자·취급자",
+    "stage": "G5 처분",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "영업자·취급자",
+    "action": "처분 통지 수령",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "화학물질관리법",
+      "article": "제35조(유해화학물질 영업허가의 취소 등)",
+      "text": "유해화학물질 영업허가의 취소 등"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "허가 결과 수령",
+    "lane": "영업자·취급자",
+    "stage": "G2 허가",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "영업자·취급자",
+    "action": "허가 결과 수령",
+    "output_documents": [
+     "허가증"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "화학물질관리법",
+      "article": "제28조(유해화학물질 영업허가 등)",
+      "text": "유해화학물질 영업허가 등"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "허가물질 해당성 검토",
+    "lane": "영업자·취급자",
+    "stage": "G0 해당성",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "영업자·취급자",
+    "action": "허가물질 제조·수입 허가",
+    "output_documents": [
+     "물질허가"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "화학물질관리법",
+      "article": "제19조(허가물질의 제조ㆍ수입ㆍ사용 허가 등)",
+      "text": "허가물질의 제조ㆍ수입ㆍ사용 허가 등"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P16",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E08",
+    "source": "P07",
+    "target": "P05",
+    "type": "loop",
+    "label": "재신청"
+   },
+   {
+    "id": "E09",
+    "source": "P06",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P15",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P09",
+    "target": "P11",
+    "type": "sequence",
+    "label": "사고"
+   },
+   {
+    "id": "E14",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "MST 276815."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3 당사자 워크스루",
+  "scope": "L3 당사자 워크스루 후 명시 조문 18건 존재 확인 18건",
+  "notes": [
+   "화학물질관리법 MST 276815"
+  ],
+  "sources": [
+   {
+    "law": "화학물질관리법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "화학물질관리법",
+    "lawId": "000162",
+    "mst": "276815",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2025-10-01",
+    "officialUrl": "https://law.go.kr/법령/화학물질관리법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 18,
+   "explicitCitationEntries": 18,
+   "articleReferences": 18,
+   "verifiedReferences": 18,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

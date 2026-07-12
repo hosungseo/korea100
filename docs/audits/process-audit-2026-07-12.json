@@ -2,20 +2,20 @@
   "generatedAt": "2026-07-12",
   "metricStats": {
     "nodes": {
-      "mean": 16.528455284552845,
-      "sd": 2.033560709339565
+      "mean": 16.195488721804512,
+      "sd": 2.2923824380661295
     },
     "edgeRatio": {
-      "mean": 1.1550355613577696,
-      "sd": 0.08531666653585238
+      "mean": 1.1440622792324413,
+      "sd": 0.09093211318749828
     },
     "deadlineDensity": {
-      "mean": 0.3840590969309916,
-      "sd": 0.3346952488402601
+      "mean": 0.35518247310159373,
+      "sd": 0.3374237031998806
     },
     "meanConfidence": {
-      "mean": 0.8196483187009208,
-      "sd": 0.0413291187881537
+      "mean": 0.8219830634162344,
+      "sd": 0.04052303603918558
     }
   },
   "results": [
@@ -26,7 +26,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=21.00 (전체 평균 16.53±2.03)"
+          "detail": "nodes=21.00 (전체 평균 16.20±2.29)"
         }
       ],
       "score": 8
@@ -38,7 +38,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=21.00 (전체 평균 16.53±2.03)"
+          "detail": "nodes=21.00 (전체 평균 16.20±2.29)"
         }
       ],
       "score": 8
@@ -74,7 +74,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "edgeRatio=1.45 (전체 평균 1.16±0.09)"
+          "detail": "edgeRatio=1.45 (전체 평균 1.14±0.09)"
         },
         {
           "rule": "outlier",
@@ -90,7 +90,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "edgeRatio=1.40 (전체 평균 1.16±0.09)"
+          "detail": "edgeRatio=1.40 (전체 평균 1.14±0.09)"
         },
         {
           "rule": "outlier",
@@ -120,7 +120,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=21.00 (전체 평균 16.53±2.03)"
+          "detail": "nodes=21.00 (전체 평균 16.20±2.29)"
         },
         {
           "rule": "no-loop",
@@ -143,7 +143,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "edgeRatio=1.40 (전체 평균 1.16±0.09)"
+          "detail": "edgeRatio=1.40 (전체 평균 1.14±0.09)"
         },
         {
           "rule": "outlier",
@@ -156,13 +156,6 @@
       "slug": "local-education-grant",
       "verificationStatus": "needs-review",
       "processWarnings": 5,
-      "findings": [],
-      "score": 6
-    },
-    {
-      "slug": "local-extinction-response-fund",
-      "verificationStatus": "needs-review",
-      "processWarnings": 4,
       "findings": [],
       "score": 6
     },
@@ -246,6 +239,22 @@
       "score": 5
     },
     {
+      "slug": "industrial-water-intake-permit",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "empty-lane",
+          "detail": "지자체"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 5
+    },
+    {
       "slug": "local-council",
       "verificationStatus": "needs-review",
       "processWarnings": 2,
@@ -259,7 +268,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=21.00 (전체 평균 16.53±2.03)"
+          "detail": "nodes=21.00 (전체 평균 16.20±2.29)"
         }
       ],
       "score": 5
@@ -316,7 +325,19 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=22.00 (전체 평균 16.53±2.03)"
+          "detail": "nodes=22.00 (전체 평균 16.20±2.29)"
+        }
+      ],
+      "score": 4
+    },
+    {
+      "slug": "land-transaction-permit",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "outlier",
+          "detail": "nodes=11.00 (전체 평균 16.20±2.29)"
         }
       ],
       "score": 4
@@ -326,6 +347,30 @@
       "verificationStatus": "needs-review",
       "processWarnings": 1,
       "findings": [],
+      "score": 4
+    },
+    {
+      "slug": "national-rd-agreement",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "outlier",
+          "detail": "nodes=11.00 (전체 평균 16.20±2.29)"
+        }
+      ],
+      "score": 4
+    },
+    {
+      "slug": "pfs-exemption-fast-track",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "outlier",
+          "detail": "nodes=11.00 (전체 평균 16.20±2.29)"
+        }
+      ],
       "score": 4
     },
     {
@@ -425,7 +470,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "edgeRatio=1.53 (전체 평균 1.16±0.09)"
+          "detail": "edgeRatio=1.53 (전체 평균 1.14±0.09)"
         }
       ],
       "score": 3
@@ -441,6 +486,13 @@
       "slug": "local-exam-delegation",
       "verificationStatus": "article-verified",
       "processWarnings": 3,
+      "findings": [],
+      "score": 3
+    },
+    {
+      "slug": "local-extinction-response-fund",
+      "verificationStatus": "article-verified",
+      "processWarnings": 4,
       "findings": [],
       "score": 3
     },
@@ -482,9 +534,16 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=21.00 (전체 평균 16.53±2.03)"
+          "detail": "nodes=21.00 (전체 평균 16.20±2.29)"
         }
       ],
+      "score": 3
+    },
+    {
+      "slug": "national-strategic-industry-complex",
+      "verificationStatus": "article-verified",
+      "processWarnings": 3,
+      "findings": [],
       "score": 3
     },
     {
@@ -508,7 +567,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "edgeRatio=1.38 (전체 평균 1.16±0.09)"
+          "detail": "edgeRatio=1.38 (전체 평균 1.14±0.09)"
         }
       ],
       "score": 3
@@ -555,6 +614,13 @@
     },
     {
       "slug": "civil-service-promotion",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [],
+      "score": 2
+    },
+    {
+      "slug": "cloud-idc-security-entry",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
       "findings": [],
@@ -619,6 +685,13 @@
           "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
         }
       ],
+      "score": 2
+    },
+    {
+      "slug": "industrial-complex-development",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [],
       "score": 2
     },
     {
@@ -718,7 +791,28 @@
       "score": 2
     },
     {
+      "slug": "power-generation-grid-connection",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [],
+      "score": 2
+    },
+    {
+      "slug": "power-transmission-permit",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [],
+      "score": 2
+    },
+    {
       "slug": "privacy-impact-assessment",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [],
+      "score": 2
+    },
+    {
+      "slug": "regulatory-sandbox-demonstration",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
       "findings": [],

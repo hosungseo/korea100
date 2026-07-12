@@ -1,0 +1,618 @@
+{
+ "slug": "community-integrated-care",
+ "name": "지역 돌봄 통합지원",
+ "oneLiner": "의료·요양·일상돌봄을 지자체가 신청·조사·종합판정·개인별계획으로 묶어 제공하는 통합지원 절차",
+ "type": "복지급여형",
+ "priority": 158,
+ "whyFirst": "통합돌봄 국정의 본체 법률(2026 시행)이다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "분절된 의료·요양·돌봄을 지역에서 한 창구로 연결해 살던 곳에서 삶을 유지하게 한다.",
+  "stakeholders": "돌봄 필요 주민·가족, 시·군·구, 보건의료·장기요양·돌봄 제공기관, 보건복지부, 통합지원협의체.",
+  "legalBasis": [
+   {
+    "law": "의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률",
+    "articles": "제5~6조(기본·지역계획), 제10조(신청·발굴·조사), 제12~14조(종합판정·개인별계획·제공), 제15·17~19조(보건의료·장기요양·일상돌봄·가족지원), 제20·22조(협의체·정보시스템), 제28조(비용)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "시·군·구",
+    "role": "신청 접수·판정·계획·연계"
+   },
+   {
+    "name": "제공기관",
+    "role": "서비스 제공"
+   },
+   {
+    "name": "보건복지부",
+    "role": "계획·시스템·기준"
+   }
+  ],
+  "procedure": [
+   "신청·발굴·조사",
+   "종합판정",
+   "개인별지원계획",
+   "통합지원 제공(의료·요양·일상·가족)",
+   "협의체·정보 연계",
+   "비용 부담·점검"
+  ],
+  "moneyFlow": "국고·지방비·본인부담(§28), 건보·장기요양 급여와 분담.",
+  "docsFlow": "신청서 → 조사표 → 판정 → 개인별계획 → 제공 기록 → 비용 정산.",
+  "bottlenecks": [
+   "판정 대기",
+   "기관 간 정보 단절",
+   "본인부담 복잡",
+   "제공 인력 부족"
+  ],
+  "reformPoints": [
+   "원스톱 기한",
+   "정보 연계 표준",
+   "본인부담 안내 강화"
+  ]
+ },
+ "related": [
+  "노인장기요양보험",
+  "국민건강보험",
+  "장애인활동지원",
+  "의료급여",
+  "응급의료기관 지정·운영"
+ ],
+ "fieldVerification": [
+  "시군구 전담조직",
+  "종합판정 도구",
+  "정보시스템 개통 현황"
+ ],
+ "process": {
+  "institution_name": "지역 돌봄 통합지원",
+  "law_name": "의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률",
+  "lanes": [
+   "주민·가족",
+   "시군구",
+   "보건의료 제공",
+   "요양·돌봄 제공",
+   "협의체·시스템",
+   "복지부·감독"
+  ],
+  "stages": [
+   "G0 신청",
+   "G1 조사",
+   "G2 판정",
+   "G3 계획",
+   "G4 제공",
+   "G5 점검"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "신청 또는 발굴",
+    "lane": "주민·가족",
+    "stage": "G0 신청",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "주민·가족",
+    "action": "신청 또는 발굴",
+    "output_documents": [
+     "신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률",
+      "article": "제10조(신청ㆍ발굴 및 조사 등)",
+      "text": "신청ㆍ발굴 및 조사 등"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "접수·조사",
+    "lane": "시군구",
+    "stage": "G1 조사",
+    "type": "task",
+    "status": "current",
+    "progress": 45,
+    "actor": "시군구",
+    "action": "접수·조사",
+    "output_documents": [
+     "조사"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률",
+      "article": "제10조(신청ㆍ발굴 및 조사 등)",
+      "text": "신청ㆍ발굴 및 조사 등"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "자료 보완 요청",
+    "lane": "시군구",
+    "stage": "G1 조사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시군구",
+    "action": "자료 보완 요청",
+    "output_documents": [
+     "보완요청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률",
+      "article": "제10조(신청ㆍ발굴 및 조사 등)",
+      "text": "신청ㆍ발굴 및 조사 등"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "보완 제출",
+    "lane": "주민·가족",
+    "stage": "G1 조사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민·가족",
+    "action": "보완 제출",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률",
+      "article": "제10조(신청ㆍ발굴 및 조사 등)",
+      "text": "신청ㆍ발굴 및 조사 등"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "종합판정",
+    "lane": "시군구",
+    "stage": "G2 판정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시군구",
+    "action": "종합판정",
+    "output_documents": [
+     "판정"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률",
+      "article": "제12조(종합판정 등)",
+      "text": "종합판정 등"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "판정 결과 통지",
+    "lane": "주민·가족",
+    "stage": "G2 판정",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민·가족",
+    "action": "판정 결과 통지",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률",
+      "article": "제12조(종합판정 등)",
+      "text": "종합판정 등"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "개인별지원계획 수립",
+    "lane": "시군구",
+    "stage": "G3 계획",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시군구",
+    "action": "개인별지원계획 수립",
+    "output_documents": [
+     "계획"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률",
+      "article": "제13조(개인별지원계획의 수립 등)",
+      "text": "개인별지원계획의 수립 등"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "계획 동의·수령",
+    "lane": "주민·가족",
+    "stage": "G3 계획",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민·가족",
+    "action": "계획 동의·수령",
+    "output_documents": [
+     "동의"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률",
+      "article": "제13조(개인별지원계획의 수립 등)",
+      "text": "개인별지원계획의 수립 등"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "보건의료 연계 제공",
+    "lane": "보건의료 제공",
+    "stage": "G4 제공",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보건의료 제공",
+    "action": "보건의료 연계 제공",
+    "output_documents": [
+     "의료"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률",
+      "article": "제15조(보건의료)",
+      "text": "보건의료"
+     },
+     {
+      "law": "의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률",
+      "article": "제14조(통합지원 제공 등)",
+      "text": "통합지원 제공 등"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "장기요양 연계",
+    "lane": "요양·돌봄 제공",
+    "stage": "G4 제공",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "요양·돌봄 제공",
+    "action": "장기요양 연계",
+    "output_documents": [
+     "요양"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률",
+      "article": "제17조(장기요양)",
+      "text": "장기요양"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "일상생활돌봄·가족지원",
+    "lane": "요양·돌봄 제공",
+    "stage": "G4 제공",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "요양·돌봄 제공",
+    "action": "일상생활돌봄·가족지원",
+    "output_documents": [
+     "돌봄"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률",
+      "article": "제18조(일상생활돌봄)",
+      "text": "일상생활돌봄"
+     },
+     {
+      "law": "의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률",
+      "article": "제19조(가족 등 지원)",
+      "text": "가족 등 지원"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "협의체·정보시스템 연계",
+    "lane": "협의체·시스템",
+    "stage": "G4 제공",
+    "type": "system",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "협의체·시스템",
+    "action": "협의체·정보시스템 연계",
+    "output_documents": [
+     "연계"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률",
+      "article": "제20조(통합지원협의체)",
+      "text": "통합지원협의체"
+     },
+     {
+      "law": "의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률",
+      "article": "제22조(통합지원정보시스템의 구축ㆍ운영 등)",
+      "text": "통합지원정보시스템의 구축ㆍ운영 등"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "비용 부담·지원",
+    "lane": "시군구",
+    "stage": "G5 점검",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시군구",
+    "action": "비용 부담·지원",
+    "output_documents": [
+     "비용"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률",
+      "article": "제28조(비용지원 및 부담 등)",
+      "text": "비용지원 및 부담 등"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "재조사·계획 변경",
+    "lane": "시군구",
+    "stage": "G5 점검",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시군구",
+    "action": "재조사·계획 변경",
+    "output_documents": [
+     "변경"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률",
+      "article": "제13조(개인별지원계획의 수립 등)",
+      "text": "개인별지원계획의 수립 등"
+     },
+     {
+      "law": "의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률",
+      "article": "제10조(신청ㆍ발굴 및 조사 등)",
+      "text": "신청ㆍ발굴 및 조사 등"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "변경 요청",
+    "lane": "주민·가족",
+    "stage": "G5 점검",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민·가족",
+    "action": "변경 요청",
+    "output_documents": [
+     "요청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률",
+      "article": "제13조(개인별지원계획의 수립 등)",
+      "text": "개인별지원계획의 수립 등"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "재신청 루프",
+    "lane": "주민·가족",
+    "stage": "G0 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민·가족",
+    "action": "재신청 루프",
+    "output_documents": [
+     "재신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률",
+      "article": "제10조(신청ㆍ발굴 및 조사 등)",
+      "text": "신청ㆍ발굴 및 조사 등"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P02",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P02",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P13",
+    "target": "P15",
+    "type": "sequence",
+    "label": "변경요청"
+   },
+   {
+    "id": "E15",
+    "source": "P15",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P14",
+    "target": "P07",
+    "type": "loop",
+    "label": "재계획"
+   },
+   {
+    "id": "E17",
+    "source": "P16",
+    "target": "P01",
+    "type": "loop",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "MST 265469. 통합돌봄 허브."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3",
+  "scope": "L3 당사자 워크스루 후 명시 조문 11건 존재 확인 11건",
+  "notes": [
+   "돌봄통합지원법 MST 265469 시행 2026-03-27"
+  ],
+  "sources": [
+   {
+    "law": "의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률",
+    "lawId": "014633",
+    "mst": "265469",
+    "promulgatedOn": "2024-03-26",
+    "effectiveOn": "2026-03-27",
+    "officialUrl": "https://law.go.kr/법령/의료·요양등지역돌봄의통합지원에관한법률"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 11,
+   "explicitCitationEntries": 11,
+   "articleReferences": 11,
+   "verifiedReferences": 11,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

@@ -1,0 +1,641 @@
+{
+ "slug": "distributed-energy-special",
+ "name": "분산에너지사업 등록·전력거래",
+ "oneLiner": "분산에너지사업 등록, 특화지역 지정, 분산에너지사업자 전력거래 등 RE100·직접거래 연계 절차",
+ "type": "인허가형",
+ "priority": 149,
+ "whyFirst": "AI DC·산단 RE100·자가발전·직접전력거래 스토리의 최신 특별법 축이다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "분산에너지 설치·거래를 활성화하기 위해 사업 등록, 특화지역, 전력거래 특례를 제공한다.",
+  "stakeholders": "분산에너지사업자·수요기업, 기후에너지환경부, 배전사업자, 특화지역 지자체, 전력거래 상대방.",
+  "legalBasis": [
+   {
+    "law": "분산에너지 활성화 특별법",
+    "articles": "제5~8·10조(기본계획·등록·취소), 제13조(사용량 할당), 제33~40조(특화지역), 제43조(전력거래), 제54~55조(진흥·지원센터), 제57조(금지행위), 제61조(수수료)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "기후에너지환경부",
+    "role": "등록·특화지역·감독"
+   },
+   {
+    "name": "분산에너지사업자",
+    "role": "등록·거래"
+   },
+   {
+    "name": "수요기업·DC",
+    "role": "사용·거래 계약"
+   }
+  ],
+  "procedure": [
+   "분산에너지 해당성·기본계획 확인",
+   "분산에너지사업 등록(§8)",
+   "특화지역 지정 신청·계획(§33~36, 해당 시)",
+   "배전·설비 연계",
+   "전력거래(§43)",
+   "사용량 할당 등 의무(해당 시 §13)",
+   "개선명령·등록취소(§12·§10)"
+  ],
+  "moneyFlow": "등록 수수료(§61), 설비 투자, 전력거래 대금, 기금 투자(§48 해당 시).",
+  "docsFlow": "사업계획 → 등록신청 → 등록증 → 특화지역 계획 → 거래계약 → 실적 보고.",
+  "bottlenecks": [
+   "등록 요건·업종 해석",
+   "배전 연계 지연",
+   "특화지역 지정 정치성",
+   "전기사업법과 역할 분담"
+  ],
+  "reformPoints": [
+   "DC·산단 특화지역 표준안",
+   "전력거래 표준계약",
+   "등록 처리 기한 공개"
+  ]
+ },
+ "related": [
+  "집단에너지사업 허가",
+  "발전사업 허가·전력계통 접속",
+  "전기요금·공급약관 인가",
+  "자가용 전기설비·전기안전관리",
+  "클라우드·IDC 보안인증·사업 진입",
+  "전력시장 거래·정산",
+  "신재생 공급의무·REC"
+ ],
+ "fieldVerification": [
+  "등록 대상 분산에너지 종류 고시",
+  "전력거래 세부 고시·지침",
+  "특화지역 지정 사례"
+ ],
+ "process": {
+  "institution_name": "분산에너지사업 등록·전력거래",
+  "law_name": "분산에너지 활성화 특별법",
+  "lanes": [
+   "분산에너지사업자",
+   "기후에너지환경부",
+   "수요기업·DC",
+   "배전사업자",
+   "지자체·특화지역",
+   "감독"
+  ],
+  "stages": [
+   "G0 해당성",
+   "G1 등록",
+   "G2 특화지역",
+   "G3 연계",
+   "G4 거래",
+   "G5 사후"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "분산에너지 해당성 검토",
+    "lane": "분산에너지사업자",
+    "stage": "G0 해당성",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "분산에너지사업자",
+    "action": "분산에너지 해당성 검토",
+    "output_documents": [
+     "해당성"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제1조(목적)",
+      "text": "목적"
+     },
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제5조(분산에너지 활성화 기본계획 등)",
+      "text": "분산에너지 활성화 기본계획 등"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "사업 등록 신청",
+    "lane": "분산에너지사업자",
+    "stage": "G1 등록",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "분산에너지사업자",
+    "action": "사업 등록 신청",
+    "output_documents": [
+     "신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제8조(분산에너지사업의 등록)",
+      "text": "분산에너지사업의 등록"
+     },
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제11조(결격사유)",
+      "text": "결격사유"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "등록 심사·수리",
+    "lane": "기후에너지환경부",
+    "stage": "G1 등록",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기후에너지환경부",
+    "action": "등록 심사·수리",
+    "output_documents": [
+     "등록"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제8조(분산에너지사업의 등록)",
+      "text": "분산에너지사업의 등록"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "보완·재신청",
+    "lane": "분산에너지사업자",
+    "stage": "G1 등록",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "분산에너지사업자",
+    "action": "보완·재신청",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제8조(분산에너지사업의 등록)",
+      "text": "분산에너지사업의 등록"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "등록 결과 수령",
+    "lane": "분산에너지사업자",
+    "stage": "G1 등록",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "분산에너지사업자",
+    "action": "등록 결과 수령",
+    "output_documents": [
+     "등록증"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제8조(분산에너지사업의 등록)",
+      "text": "분산에너지사업의 등록"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "특화지역 지정신청·계획",
+    "lane": "지자체·특화지역",
+    "stage": "G2 특화지역",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지자체·특화지역",
+    "action": "특화지역 지정신청·계획",
+    "output_documents": [
+     "지정"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제33조(분산에너지특화지역 지정신청)",
+      "text": "분산에너지특화지역 지정신청"
+     },
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제34조(분산에너지특화지역계획의 제안)",
+      "text": "분산에너지특화지역계획의 제안"
+     },
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제35조(분산에너지특화지역계획의 수립)",
+      "text": "분산에너지특화지역계획의 수립"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "특화지역 지정",
+    "lane": "기후에너지환경부",
+    "stage": "G2 특화지역",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기후에너지환경부",
+    "action": "특화지역 지정",
+    "output_documents": [
+     "고시"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제36조(분산에너지특화지역의 지정 등)",
+      "text": "분산에너지특화지역의 지정 등"
+     },
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제38조(분산에너지특화지역 지정의 효과 등)",
+      "text": "분산에너지특화지역 지정의 효과 등"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "배전·설비 연계",
+    "lane": "배전사업자",
+    "stage": "G3 연계",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "배전사업자",
+    "action": "배전·설비 연계",
+    "output_documents": [
+     "연계"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제16조(배전사업자의 적정설비 설치ㆍ관리 의무 등)",
+      "text": "배전사업자의 적정설비 설치ㆍ관리 의무 등"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "수요·사용 협의",
+    "lane": "수요기업·DC",
+    "stage": "G3 연계",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "수요기업·DC",
+    "action": "수요·사용 협의",
+    "output_documents": [
+     "수요"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제13조(분산에너지 사용량의 할당 등)",
+      "text": "분산에너지 사용량의 할당 등"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "전력거래 계약·이행",
+    "lane": "분산에너지사업자",
+    "stage": "G4 거래",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "분산에너지사업자",
+    "action": "전력거래 계약·이행",
+    "output_documents": [
+     "거래"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제43조(분산에너지사업자의 전력거래)",
+      "text": "분산에너지사업자의 전력거래"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "거래 상대 확인",
+    "lane": "수요기업·DC",
+    "stage": "G4 거래",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "수요기업·DC",
+    "action": "거래 상대 확인",
+    "output_documents": [
+     "계약"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제43조(분산에너지사업자의 전력거래)",
+      "text": "분산에너지사업자의 전력거래"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "금지행위 준수",
+    "lane": "분산에너지사업자",
+    "stage": "G4 거래",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "분산에너지사업자",
+    "action": "금지행위 준수",
+    "output_documents": [
+     "준수"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제57조(금지행위)",
+      "text": "금지행위"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "개선명령·등록취소",
+    "lane": "감독",
+    "stage": "G5 사후",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "감독",
+    "action": "개선명령·등록취소",
+    "output_documents": [
+     "처분"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제12조(업무방법 등의 개선명령)",
+      "text": "업무방법 등의 개선명령"
+     },
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제10조(등록의 취소 등)",
+      "text": "등록의 취소 등"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "처분 통지 수령",
+    "lane": "분산에너지사업자",
+    "stage": "G5 사후",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "분산에너지사업자",
+    "action": "처분 통지 수령",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제10조(등록의 취소 등)",
+      "text": "등록의 취소 등"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "지정 변경·해제(해당 시)",
+    "lane": "기후에너지환경부",
+    "stage": "G5 사후",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기후에너지환경부",
+    "action": "지정 변경·해제(해당 시)",
+    "output_documents": [
+     "변경"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제39조(분산에너지특화지역의 지정 등의 변경)",
+      "text": "분산에너지특화지역의 지정 등의 변경"
+     },
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제40조(분산에너지특화지역의 지정해제 등)",
+      "text": "분산에너지특화지역의 지정해제 등"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "지원센터·진흥 연계",
+    "lane": "분산에너지사업자",
+    "stage": "G0 해당성",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "분산에너지사업자",
+    "action": "지원센터·진흥 연계",
+    "output_documents": [
+     "지원"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제54조(분산에너지진흥센터의 지정 등)",
+      "text": "분산에너지진흥센터의 지정 등"
+     },
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제55조(분산에너지지원센터의 설치)",
+      "text": "분산에너지지원센터의 설치"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P16",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E05",
+    "source": "P04",
+    "target": "P02",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P03",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P05",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": "위반"
+   },
+   {
+    "id": "E16",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E17",
+    "source": "P07",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "MST 280059. 패키지 ζ. 직접전력거래 세부는 고시 fieldVerification."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3 당사자 워크스루",
+  "scope": "L3 당사자 워크스루 후 명시 조문 19건 존재 확인 19건",
+  "notes": [
+   "분산에너지 활성화 특별법 MST 280059"
+  ],
+  "sources": [
+   {
+    "law": "분산에너지 활성화 특별법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "분산에너지 활성화 특별법",
+    "lawId": "014457",
+    "mst": "280059",
+    "promulgatedOn": "2025-12-02",
+    "effectiveOn": "2026-06-03",
+    "officialUrl": "https://law.go.kr/법령/분산에너지활성화특별법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 19,
+   "explicitCitationEntries": 19,
+   "articleReferences": 19,
+   "verifiedReferences": 19,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

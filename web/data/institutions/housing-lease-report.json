@@ -1,0 +1,604 @@
+{
+ "slug": "housing-lease-report",
+ "name": "주택 임대차 계약 신고",
+ "oneLiner": "주택 임대차 계약·변경·해제 신고와 검증·의제 절차",
+ "type": "신고·보호형",
+ "priority": 175,
+ "whyFirst": "전월세 투명화·확정일자 연계의 신고 제도다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "주택 임대차 정보를 신고·검증해 투명한 임대차 시장을 만든다.",
+  "stakeholders": "당사자, 신고관청, 임차인.",
+  "legalBasis": [
+   {
+    "law": "부동산 거래신고 등에 관한 법률",
+    "articles": "제3·5~6조의5·23·25조의2·29조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "시장·군수 등",
+    "role": "접수·검증"
+   },
+   {
+    "name": "계약 당사자",
+    "role": "신고"
+   }
+  ],
+  "procedure": [
+   "계약",
+   "신고",
+   "수리",
+   "변경",
+   "제재"
+  ],
+  "moneyFlow": "과태료(미신고).",
+  "docsFlow": "계약서 → 신고 → 수리 → 변경신고.",
+  "bottlenecks": [
+   "미신고",
+   "허위 신고",
+   "검증 인력"
+  ],
+  "reformPoints": [
+   "자동 연계",
+   "기한 알림",
+   "감면 홍보"
+  ]
+ },
+ "related": [
+  "주택임대차 보호",
+  "토지거래허가",
+  "전세보증금 반환보증"
+ ],
+ "fieldVerification": [
+  "신고 기한·대상 지역",
+  "온라인 신고 채널",
+  "과태료 기준"
+ ],
+ "process": {
+  "institution_name": "주택 임대차 계약 신고",
+  "law_name": "부동산 거래신고 등에 관한 법률",
+  "lanes": [
+   "임대인·임차인",
+   "신고관청",
+   "검증",
+   "확정일자 기관",
+   "감독",
+   "포상"
+  ],
+  "stages": [
+   "G0 계약",
+   "G1 신고",
+   "G2 접수",
+   "G3 검증",
+   "G4 변경",
+   "G5 제재"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "임대차계약 체결",
+    "lane": "임대인·임차인",
+    "stage": "G0 계약",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "임대인·임차인",
+    "action": "임대차계약 체결",
+    "output_documents": [
+     "계약"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제6조의2(주택 임대차 계약의 신고)",
+      "text": "주택 임대차 계약의 신고"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "신고 의무 확인",
+    "lane": "임대인·임차인",
+    "stage": "G0 계약",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "임대인·임차인",
+    "action": "신고 의무 확인",
+    "output_documents": [
+     "의무"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제6조의2(주택 임대차 계약의 신고)",
+      "text": "주택 임대차 계약의 신고"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "임대차 계약 신고",
+    "lane": "임대인·임차인",
+    "stage": "G1 신고",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "임대인·임차인",
+    "action": "임대차 계약 신고",
+    "output_documents": [
+     "신고"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제6조의2(주택 임대차 계약의 신고)",
+      "text": "주택 임대차 계약의 신고"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "신고 접수",
+    "lane": "신고관청",
+    "stage": "G2 접수",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신고관청",
+    "action": "신고 접수",
+    "output_documents": [
+     "접수"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제6조의2(주택 임대차 계약의 신고)",
+      "text": "주택 임대차 계약의 신고"
+     },
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제6조의5(다른 법률에 따른 신고 등의 의제)",
+      "text": "다른 법률에 따른 신고 등의 의제"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "보완 요구",
+    "lane": "임대인·임차인",
+    "stage": "G1 신고",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임대인·임차인",
+    "action": "보완 요구",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제6조의2(주택 임대차 계약의 신고)",
+      "text": "주택 임대차 계약의 신고"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "신고 수리·통지",
+    "lane": "신고관청",
+    "stage": "G2 접수",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신고관청",
+    "action": "신고 수리·통지",
+    "output_documents": [
+     "수리"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제6조의2(주택 임대차 계약의 신고)",
+      "text": "주택 임대차 계약의 신고"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "수리 결과 수령",
+    "lane": "임대인·임차인",
+    "stage": "G2 접수",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임대인·임차인",
+    "action": "수리 결과 수령",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제6조의2(주택 임대차 계약의 신고)",
+      "text": "주택 임대차 계약의 신고"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "내용 검증·조사",
+    "lane": "검증",
+    "stage": "G3 검증",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "검증",
+    "action": "내용 검증·조사",
+    "output_documents": [
+     "검증"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제5조(신고 내용의 검증)",
+      "text": "신고 내용의 검증"
+     },
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제6조(신고 내용의 조사 등)",
+      "text": "신고 내용의 조사 등"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "변경·해제 신고",
+    "lane": "임대인·임차인",
+    "stage": "G4 변경",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임대인·임차인",
+    "action": "변경·해제 신고",
+    "output_documents": [
+     "변경"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제6조의3(주택 임대차 계약의 변경 및 해제 신고)",
+      "text": "주택 임대차 계약의 변경 및 해제 신고"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "매매 거래신고 연계",
+    "lane": "신고관청",
+    "stage": "G0 계약",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신고관청",
+    "action": "매매 거래신고 연계",
+    "output_documents": [
+     "매매신고"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제3조(부동산 거래의 신고)",
+      "text": "부동산 거래의 신고"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "과태료·제재",
+    "lane": "감독",
+    "stage": "G5 제재",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "감독",
+    "action": "과태료·제재",
+    "output_documents": [
+     "제재"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제23조(청문)",
+      "text": "청문"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "처분 통지",
+    "lane": "임대인·임차인",
+    "stage": "G5 제재",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임대인·임차인",
+    "action": "처분 통지",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제23조(청문)",
+      "text": "청문"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "자진 신고 감면",
+    "lane": "임대인·임차인",
+    "stage": "G5 제재",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임대인·임차인",
+    "action": "자진 신고 감면",
+    "output_documents": [
+     "감면"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제29조(자진 신고자에 대한 감면 등)",
+      "text": "자진 신고자에 대한 감면 등"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "재신고 루프",
+    "lane": "임대인·임차인",
+    "stage": "G1 신고",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임대인·임차인",
+    "action": "재신고 루프",
+    "output_documents": [
+     "재신고"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제6조의2(주택 임대차 계약의 신고)",
+      "text": "주택 임대차 계약의 신고"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "확정일자 연계",
+    "lane": "확정일자 기관",
+    "stage": "G2 접수",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "확정일자 기관",
+    "action": "확정일자 연계",
+    "output_documents": [
+     "확정일자"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "주택임대차보호법",
+      "article": "제3조의6(확정일자 부여 및 임대차 정보제공 등)",
+      "text": "확정일자 부여 및 임대차 정보제공 등"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "포상금(해당)",
+    "lane": "포상",
+    "stage": "G5 제재",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "포상",
+    "action": "포상금(해당)",
+    "output_documents": [
+     "포상"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제25조의2(신고포상금의 지급)",
+      "text": "신고포상금의 지급"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P10",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E06",
+    "source": "P05",
+    "target": "P14",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P14",
+    "target": "P03",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P04",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P07",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P07",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P08",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P13",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P16",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "2026-07-12 부동산 패키지. MST 259641."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3",
+  "scope": "L3 당사자 워크스루 후 명시 조문 10건 존재 확인 10건",
+  "notes": [
+   "부동산 거래신고 등에 관한 법률 MST 259641"
+  ],
+  "sources": [
+   {
+    "law": "부동산 거래신고 등에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "부동산 거래신고 등에 관한 법률",
+    "lawId": "012480",
+    "mst": "259641",
+    "promulgatedOn": "2024-02-06",
+    "effectiveOn": "2024-05-17",
+    "officialUrl": "https://law.go.kr/법령/부동산거래신고등에관한법률"
+   },
+   {
+    "law": "주택임대차보호법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "주택임대차보호법",
+    "lawId": "001248",
+    "mst": "276291",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/주택임대차보호법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 10,
+   "explicitCitationEntries": 10,
+   "articleReferences": 10,
+   "verifiedReferences": 10,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

@@ -1,0 +1,628 @@
+{
+ "slug": "integrated-environment-permit",
+ "name": "통합환경관리 허가",
+ "oneLiner": "대형 사업장의 대기·수질 등 환경오염시설을 통합허가·허가배출기준·최적가용기법으로 일괄 관리하는 절차",
+ "type": "인허가형",
+ "priority": 146,
+ "whyFirst": "팹급 대형 사업장에서 개별 배출허가 위에 얹히는 환경 운영 허가 상단이다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "오염매체별 인허가를 통합해 최적가용기법 기반 허가배출기준으로 사업장을 관리한다.",
+  "stakeholders": "통합허가 대상 사업장, 기후에너지환경부, 통합허가대행업, 지역 주민, 기존 매체별 인허가 기관.",
+  "legalBasis": [
+   {
+    "law": "환경오염시설의 통합관리에 관한 법률",
+    "articles": "제6~10조(통합허가·기준·배출기준·조건변경·특례), 제11조의2~7(대행업), 제21~23조(운영·취소·과징금), 제24조(최적가용기법), 제28조(시스템)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "기후에너지환경부",
+    "role": "통합허가·감독"
+   },
+   {
+    "name": "사업장",
+    "role": "허가 신청·BAT 이행"
+   },
+   {
+    "name": "통합허가대행업",
+    "role": "신청 대행(해당 시)"
+   }
+  ],
+  "procedure": [
+   "통합허가 대상 해당성 확인",
+   "최적가용기법·허가배출기준 준비(§8·§24)",
+   "통합허가 신청(§6)",
+   "심사·허가조건 부여(§7·§9)",
+   "매체별 법률 특례 적용(§10)",
+   "운영·관리(§21)",
+   "조건 변경·갱신",
+   "취소·과징금(§22·§23)"
+  ],
+  "moneyFlow": "허가 수수료, 대행 비용, 방지시설·측정 투자, 과징금(§23).",
+  "docsFlow": "사업장 현황 → BAT 자료 → 허가신청 → 허가증·조건 → 시스템 등록 → 운영 보고.",
+  "bottlenecks": [
+   "BAT 자료 부담",
+   "기존 개별허가와 전환 일정",
+   "허가 조건 협상",
+   "전문 대행 수급"
+  ],
+  "reformPoints": [
+   "메가 팹 사전 협의 창구",
+   "전환 로드맵 공개",
+   "심사 기한 공표"
+  ]
+ },
+ "related": [
+  "대기·수질 배출시설 허가",
+  "지정폐기물 처리 허가",
+  "유해화학물질 영업·취급 허가",
+  "환경영향평가",
+  "공장설립승인"
+ ],
+ "fieldVerification": [
+  "통합허가 대상 업종·규모 고시",
+  "최적가용기법 기준서 목록",
+  "전환 유예 일정"
+ ],
+ "process": {
+  "institution_name": "통합환경관리 허가",
+  "law_name": "환경오염시설의 통합관리에 관한 법률",
+  "lanes": [
+   "사업장",
+   "환경부",
+   "통합허가대행",
+   "BAT·기술",
+   "지역 주민",
+   "감독"
+  ],
+  "stages": [
+   "G0 해당성",
+   "G1 준비",
+   "G2 신청",
+   "G3 허가",
+   "G4 운영",
+   "G5 처분"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "통합허가 대상 확인",
+    "lane": "사업장",
+    "stage": "G0 해당성",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "사업장",
+    "action": "통합허가 대상 확인",
+    "output_documents": [
+     "해당성"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제6조(통합허가)",
+      "text": "통합허가"
+     },
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제1조(목적)",
+      "text": "목적"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "최적가용기법·배출기준 준비",
+    "lane": "BAT·기술",
+    "stage": "G1 준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "BAT·기술",
+    "action": "최적가용기법·배출기준 준비",
+    "output_documents": [
+     "BAT"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제24조(최적가용기법)",
+      "text": "최적가용기법"
+     },
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제8조(허가배출기준)",
+      "text": "허가배출기준"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "대행 여부 결정",
+    "lane": "사업장",
+    "stage": "G1 준비",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "사업장",
+    "action": "대행 여부 결정",
+    "output_documents": [
+     "경로"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제11조의2(통합허가대행업의 등록 등)",
+      "text": "통합허가대행업의 등록 등"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "통합허가 신청",
+    "lane": "사업장",
+    "stage": "G2 신청",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "사업장",
+    "action": "통합허가 신청",
+    "output_documents": [
+     "신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제6조(통합허가)",
+      "text": "통합허가"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "대행업 신청 지원",
+    "lane": "통합허가대행",
+    "stage": "G2 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "통합허가대행",
+    "action": "대행업 신청 지원",
+    "output_documents": [
+     "대행"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제11조의2(통합허가대행업의 등록 등)",
+      "text": "통합허가대행업의 등록 등"
+     },
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제11조의4(통합허가대행업자 등의 준수사항)",
+      "text": "통합허가대행업자 등의 준수사항"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "허가기준 심사",
+    "lane": "환경부",
+    "stage": "G3 허가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "환경부",
+    "action": "허가기준 심사",
+    "output_documents": [
+     "심사"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제7조(허가기준 등)",
+      "text": "허가기준 등"
+     },
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제8조(허가배출기준)",
+      "text": "허가배출기준"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "보완·재신청",
+    "lane": "사업장",
+    "stage": "G2 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업장",
+    "action": "보완·재신청",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제6조(통합허가)",
+      "text": "통합허가"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "허가·조건 부여",
+    "lane": "환경부",
+    "stage": "G3 허가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "환경부",
+    "action": "허가·조건 부여",
+    "output_documents": [
+     "허가"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제6조(통합허가)",
+      "text": "통합허가"
+     },
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제9조(허가조건 및 허가배출기준의 변경)",
+      "text": "허가조건 및 허가배출기준의 변경"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "허가 결과 수령",
+    "lane": "사업장",
+    "stage": "G3 허가",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업장",
+    "action": "허가 결과 수령",
+    "output_documents": [
+     "허가증"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제6조(통합허가)",
+      "text": "통합허가"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "매체별 법률 특례 적용",
+    "lane": "환경부",
+    "stage": "G3 허가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "환경부",
+    "action": "매체별 법률 특례 적용",
+    "output_documents": [
+     "특례"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제10조(통합허가에 따른 법률 적용상의 특례)",
+      "text": "통합허가에 따른 법률 적용상의 특례"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "시스템 등록·운영관리",
+    "lane": "사업장",
+    "stage": "G4 운영",
+    "type": "system",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업장",
+    "action": "시스템 등록·운영관리",
+    "output_documents": [
+     "시스템"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제28조(통합환경허가시스템 구축)",
+      "text": "통합환경허가시스템 구축"
+     },
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제21조(배출시설등 및 방지시설의 운영ㆍ관리 등)",
+      "text": "배출시설등 및 방지시설의 운영ㆍ관리 등"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "조건·배출기준 변경",
+    "lane": "환경부",
+    "stage": "G4 운영",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "환경부",
+    "action": "조건·배출기준 변경",
+    "output_documents": [
+     "변경"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제9조(허가조건 및 허가배출기준의 변경)",
+      "text": "허가조건 및 허가배출기준의 변경"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "주민 정보·관심",
+    "lane": "지역 주민",
+    "stage": "G4 운영",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지역 주민",
+    "action": "주민 정보·관심",
+    "output_documents": [
+     "관심"
+    ],
+    "confidence": 0.75,
+    "legal_basis": [
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제21조(배출시설등 및 방지시설의 운영ㆍ관리 등)",
+      "text": "배출시설등 및 방지시설의 운영ㆍ관리 등"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "허가 취소·과징금",
+    "lane": "감독",
+    "stage": "G5 처분",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "감독",
+    "action": "허가 취소·과징금",
+    "output_documents": [
+     "처분"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제22조(허가의 취소 등)",
+      "text": "허가의 취소 등"
+     },
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제23조(과징금)",
+      "text": "과징금"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "처분 통지 수령",
+    "lane": "사업장",
+    "stage": "G5 처분",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업장",
+    "action": "처분 통지 수령",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제22조(허가의 취소 등)",
+      "text": "허가의 취소 등"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "운영 이행·자가관리",
+    "lane": "사업장",
+    "stage": "G4 운영",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업장",
+    "action": "운영 이행·자가관리",
+    "output_documents": [
+     "운영"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제21조(배출시설등 및 방지시설의 운영ㆍ관리 등)",
+      "text": "배출시설등 및 방지시설의 운영ㆍ관리 등"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P05",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P04",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P04",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P06",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P10",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P09",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P11",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P16",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P16",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P16",
+    "target": "P14",
+    "type": "sequence",
+    "label": "위반"
+   },
+   {
+    "id": "E16",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "MST 287993. 패키지 ε. P03 분기는 순차(대행→신청)로 완화."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3 당사자 워크스루",
+  "scope": "L3 당사자 워크스루 후 명시 조문 13건 존재 확인 13건",
+  "notes": [
+   "통합관리법 MST 287993"
+  ],
+  "sources": [
+   {
+    "law": "환경오염시설의 통합관리에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "환경오염시설의 통합관리에 관한 법률",
+    "lawId": "012414",
+    "mst": "287993",
+    "promulgatedOn": "2026-07-07",
+    "effectiveOn": "2026-07-07",
+    "officialUrl": "https://law.go.kr/법령/환경오염시설의통합관리에관한법률"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 13,
+   "explicitCitationEntries": 13,
+   "articleReferences": 13,
+   "verifiedReferences": 13,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

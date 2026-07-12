@@ -1,0 +1,595 @@
+{
+ "slug": "carbon-neutral-transition",
+ "name": "탄소중립 계획·정의로운 전환",
+ "oneLiner": "국가·지자체 탄소중립 기본계획, 정의로운전환 특별지구, 사업전환 지원 절차",
+ "type": "재정·평가형",
+ "priority": 156,
+ "whyFirst": "에너지 대전환의 최상위 법정 계획·지역 전환 프레임이다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "탄소중립 이행 계획을 수립하고 전환 피해 지역·산업에 정의로운 전환 지원을 제공한다.",
+  "stakeholders": "기후에너지환경부·국조실, 지자체, 전환 업종 기업·노동자, 시민.",
+  "legalBasis": [
+   {
+    "law": "기후위기 대응을 위한 탄소중립ㆍ녹색성장 기본법",
+    "articles": "제10~13조(국가·지자체 계획·점검), 제48~53조(정의로운전환 지구·지원·센터), 제25조(배출권 연계), 제80조(청문)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "기후에너지환경부",
+    "role": "국가계획·지구 지정"
+   },
+   {
+    "name": "지자체",
+    "role": "지역계획"
+   },
+   {
+    "name": "기업·노동자",
+    "role": "전환 신청"
+   }
+  ],
+  "procedure": [
+   "국가 기본계획 수립",
+   "시·도·시군구 계획",
+   "추진 점검",
+   "특별지구 지정 신청",
+   "사업전환 지원",
+   "센터·지원 이행"
+  ],
+  "moneyFlow": "전환 지원금, 기금·금융 지원(§58 연계), 지구 사업비.",
+  "docsFlow": "계획안 → 확정 → 지역계획 → 지구 신청 → 지원 결정 → 이행 보고.",
+  "bottlenecks": [
+   "계획 실효성",
+   "지구 지정 정치성",
+   "지원 대상 기준",
+   "일자리 전환 체감"
+  ],
+  "reformPoints": [
+   "점검 지표 공개",
+   "지구 지정 기준 투명화",
+   "노동 전환 패키지"
+  ]
+ },
+ "related": [
+  "온실가스 배출권거래제",
+  "전력수급기본계획",
+  "신재생 공급의무·REC",
+  "산업단지 지정·개발"
+ ],
+ "fieldVerification": [
+  "최신 국가기본계획",
+  "특별지구 지정 사례",
+  "지원센터 현황"
+ ],
+ "process": {
+  "institution_name": "탄소중립 계획·정의로운 전환",
+  "law_name": "기후위기 대응을 위한 탄소중립ㆍ녹색성장 기본법",
+  "lanes": [
+   "기후에너지환경부",
+   "지자체",
+   "기업·노동자",
+   "지원센터",
+   "주민·시민",
+   "감독"
+  ],
+  "stages": [
+   "G0 국가계획",
+   "G1 지역계획",
+   "G2 점검",
+   "G3 지구",
+   "G4 지원",
+   "G5 평가"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "국가 기본계획 수립",
+    "lane": "기후에너지환경부",
+    "stage": "G0 국가계획",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "기후에너지환경부",
+    "action": "국가 기본계획 수립",
+    "output_documents": [
+     "국가계획"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "기후위기 대응을 위한 탄소중립ㆍ녹색성장 기본법",
+      "article": "제10조(국가 탄소중립 녹색성장 기본계획의 수립ㆍ시행)",
+      "text": "국가 탄소중립 녹색성장 기본계획의 수립ㆍ시행"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "시·도 계획 수립",
+    "lane": "지자체",
+    "stage": "G1 지역계획",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "지자체",
+    "action": "시·도 계획 수립",
+    "output_documents": [
+     "시도계획"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "기후위기 대응을 위한 탄소중립ㆍ녹색성장 기본법",
+      "article": "제11조(시ㆍ도 계획의 수립 등)",
+      "text": "시ㆍ도 계획의 수립 등"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "시·군·구 계획",
+    "lane": "지자체",
+    "stage": "G1 지역계획",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "지자체",
+    "action": "시·군·구 계획",
+    "output_documents": [
+     "시군구"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "기후위기 대응을 위한 탄소중립ㆍ녹색성장 기본법",
+      "article": "제12조(시ㆍ군ㆍ구 계획의 수립 등)",
+      "text": "시ㆍ군ㆍ구 계획의 수립 등"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "추진상황 점검",
+    "lane": "기후에너지환경부",
+    "stage": "G2 점검",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기후에너지환경부",
+    "action": "추진상황 점검",
+    "output_documents": [
+     "점검"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "기후위기 대응을 위한 탄소중립ㆍ녹색성장 기본법",
+      "article": "제13조(국가기본계획 등의 추진상황 점검)",
+      "text": "국가기본계획 등의 추진상황 점검"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "시민 의견",
+    "lane": "주민·시민",
+    "stage": "G2 점검",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민·시민",
+    "action": "시민 의견",
+    "output_documents": [
+     "의견"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "기후위기 대응을 위한 탄소중립ㆍ녹색성장 기본법",
+      "article": "제51조(국민참여 보장을 위한 지원)",
+      "text": "국민참여 보장을 위한 지원"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "정의로운전환 특별지구 신청",
+    "lane": "지자체",
+    "stage": "G3 지구",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지자체",
+    "action": "정의로운전환 특별지구 신청",
+    "output_documents": [
+     "신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "기후위기 대응을 위한 탄소중립ㆍ녹색성장 기본법",
+      "article": "제48조(정의로운전환 특별지구의 지정 등)",
+      "text": "정의로운전환 특별지구의 지정 등"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "특별지구 지정",
+    "lane": "기후에너지환경부",
+    "stage": "G3 지구",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기후에너지환경부",
+    "action": "특별지구 지정",
+    "output_documents": [
+     "지정"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "기후위기 대응을 위한 탄소중립ㆍ녹색성장 기본법",
+      "article": "제48조(정의로운전환 특별지구의 지정 등)",
+      "text": "정의로운전환 특별지구의 지정 등"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "보완·재신청",
+    "lane": "지자체",
+    "stage": "G3 지구",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지자체",
+    "action": "보완·재신청",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "기후위기 대응을 위한 탄소중립ㆍ녹색성장 기본법",
+      "article": "제48조(정의로운전환 특별지구의 지정 등)",
+      "text": "정의로운전환 특별지구의 지정 등"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "지정 결과 수령",
+    "lane": "지자체",
+    "stage": "G3 지구",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지자체",
+    "action": "지정 결과 수령",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "기후위기 대응을 위한 탄소중립ㆍ녹색성장 기본법",
+      "article": "제48조(정의로운전환 특별지구의 지정 등)",
+      "text": "정의로운전환 특별지구의 지정 등"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "사업전환 지원 신청",
+    "lane": "기업·노동자",
+    "stage": "G4 지원",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기업·노동자",
+    "action": "사업전환 지원 신청",
+    "output_documents": [
+     "지원신청"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "기후위기 대응을 위한 탄소중립ㆍ녹색성장 기본법",
+      "article": "제49조(사업전환 지원)",
+      "text": "사업전환 지원"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "지원 결정·이행",
+    "lane": "지원센터",
+    "stage": "G4 지원",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지원센터",
+    "action": "지원 결정·이행",
+    "output_documents": [
+     "지원"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "기후위기 대응을 위한 탄소중립ㆍ녹색성장 기본법",
+      "article": "제53조(정의로운전환 지원센터의 설립 등)",
+      "text": "정의로운전환 지원센터의 설립 등"
+     },
+     {
+      "law": "기후위기 대응을 위한 탄소중립ㆍ녹색성장 기본법",
+      "article": "제49조(사업전환 지원)",
+      "text": "사업전환 지원"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "배출권제 연계 확인",
+    "lane": "기후에너지환경부",
+    "stage": "G4 지원",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기후에너지환경부",
+    "action": "배출권제 연계 확인",
+    "output_documents": [
+     "연계"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "기후위기 대응을 위한 탄소중립ㆍ녹색성장 기본법",
+      "article": "제25조(온실가스 배출권거래제)",
+      "text": "온실가스 배출권거래제"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "이행 평가",
+    "lane": "기후에너지환경부",
+    "stage": "G5 평가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기후에너지환경부",
+    "action": "이행 평가",
+    "output_documents": [
+     "평가"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "기후위기 대응을 위한 탄소중립ㆍ녹색성장 기본법",
+      "article": "제13조(국가기본계획 등의 추진상황 점검)",
+      "text": "국가기본계획 등의 추진상황 점검"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "청문·처분(해당)",
+    "lane": "감독",
+    "stage": "G5 평가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "감독",
+    "action": "청문·처분(해당)",
+    "output_documents": [
+     "청문"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "기후위기 대응을 위한 탄소중립ㆍ녹색성장 기본법",
+      "article": "제80조(청문)",
+      "text": "청문"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "처분 통지",
+    "lane": "지자체",
+    "stage": "G5 평가",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지자체",
+    "action": "처분 통지",
+    "output_documents": [
+     "통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "기후위기 대응을 위한 탄소중립ㆍ녹색성장 기본법",
+      "article": "제80조(청문)",
+      "text": "청문"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "노동자 상담·신청",
+    "lane": "기업·노동자",
+    "stage": "G4 지원",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기업·노동자",
+    "action": "노동자 상담·신청",
+    "output_documents": [
+     "상담"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "기후위기 대응을 위한 탄소중립ㆍ녹색성장 기본법",
+      "article": "제49조(사업전환 지원)",
+      "text": "사업전환 지원"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P06",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P07",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P10",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P16",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "MST 286535."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3",
+  "scope": "L3 당사자 워크스루 후 명시 조문 10건 존재 확인 10건",
+  "notes": [
+   "탄소중립기본법 MST 286535"
+  ],
+  "sources": [
+   {
+    "law": "기후위기 대응을 위한 탄소중립ㆍ녹색성장 기본법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "기후위기 대응을 위한 탄소중립ㆍ녹색성장 기본법",
+    "lawId": "014152",
+    "mst": "286535",
+    "promulgatedOn": "2026-06-02",
+    "effectiveOn": "2026-06-02",
+    "officialUrl": "https://law.go.kr/법령/기후위기대응을위한탄소중립·녹색성장기본법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 10,
+   "explicitCitationEntries": 10,
+   "articleReferences": 10,
+   "verifiedReferences": 10,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

@@ -1,0 +1,589 @@
+{
+ "slug": "social-service-agency",
+ "name": "사회서비스원·긴급돌봄",
+ "oneLiner": "시·도 사회서비스원 설립·운영, 사회서비스 기본계획, 긴급돌봄지원단 구성 절차",
+ "type": "복지급여형",
+ "priority": 161,
+ "whyFirst": "통합돌봄 제공 인프라·긴급돌봄의 공공 공급 축이다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "사회서비스 공공성·안정 공급을 위해 서비스원을 설립·운영하고 긴급돌봄에 대응한다.",
+  "stakeholders": "시·도, 사회서비스원, 이용자·종사자, 보건복지부, 민간 제공기관.",
+  "legalBasis": [
+   {
+    "law": "사회서비스 지원 및 사회서비스원 설립ㆍ운영에 관한 법률",
+    "articles": "제5조(기본계획), 제9조(설립 타당성), 제12조(긴급돌봄지원단), 제27조(사업계획·예산), 제36조(경영평가)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "시·도",
+    "role": "설립·감독"
+   },
+   {
+    "name": "사회서비스원",
+    "role": "서비스·긴급돌봄"
+   },
+   {
+    "name": "복지부",
+    "role": "계획·평가"
+   }
+  ],
+  "procedure": [
+   "기본계획 확인",
+   "설립 타당성 검토",
+   "설립·운영",
+   "긴급돌봄지원단",
+   "사업·예산",
+   "경영평가"
+  ],
+  "moneyFlow": "출연금·사업비, 서비스 이용료(해당 시), 평가 연동.",
+  "docsFlow": "타당성 → 설립 인가 → 사업계획 → 긴급돌봄 운영 → 평가.",
+  "bottlenecks": [
+   "인력 확보",
+   "민간과 역할 분담",
+   "긴급돌봄 기준"
+  ],
+  "reformPoints": [
+   "설립 기준 공개",
+   "긴급돌봄 표준 매뉴얼",
+   "평가 환류"
+  ]
+ },
+ "related": [
+  "지역 돌봄 통합지원",
+  "노인장기요양보험",
+  "장애인활동지원",
+  "장기요양기관 지정·평가"
+ ],
+ "fieldVerification": [
+  "시·도 서비스원 설립 현황",
+  "긴급돌봄 발동 기준",
+  "경영평가 지표"
+ ],
+ "process": {
+  "institution_name": "사회서비스원·긴급돌봄",
+  "law_name": "사회서비스 지원 및 사회서비스원 설립ㆍ운영에 관한 법률",
+  "lanes": [
+   "시·도",
+   "사회서비스원",
+   "이용자",
+   "복지부",
+   "긴급돌봄지원단",
+   "평가·감독"
+  ],
+  "stages": [
+   "G0 계획",
+   "G1 설립",
+   "G2 운영",
+   "G3 긴급돌봄",
+   "G4 사업",
+   "G5 평가"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "사회서비스 기본계획 확인",
+    "lane": "복지부",
+    "stage": "G0 계획",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "복지부",
+    "action": "사회서비스 기본계획 확인",
+    "output_documents": [
+     "기본계획"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "사회서비스 지원 및 사회서비스원 설립ㆍ운영에 관한 법률",
+      "article": "제5조(사회서비스 기본계획의 수립 등)",
+      "text": "사회서비스 기본계획의 수립 등"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "설립 타당성 검토",
+    "lane": "시·도",
+    "stage": "G1 설립",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "시·도",
+    "action": "설립 타당성 검토",
+    "output_documents": [
+     "타당성"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "사회서비스 지원 및 사회서비스원 설립ㆍ운영에 관한 법률",
+      "article": "제9조(시ㆍ도 서비스원 설립ㆍ통합ㆍ해산의 타당성 검토 등)",
+      "text": "시ㆍ도 서비스원 설립ㆍ통합ㆍ해산의 타당성 검토 등"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "설립 추진",
+    "lane": "시·도",
+    "stage": "G1 설립",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "시·도",
+    "action": "설립 추진",
+    "output_documents": [
+     "설립"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "사회서비스 지원 및 사회서비스원 설립ㆍ운영에 관한 법률",
+      "article": "제9조(시ㆍ도 서비스원 설립ㆍ통합ㆍ해산의 타당성 검토 등)",
+      "text": "시ㆍ도 서비스원 설립ㆍ통합ㆍ해산의 타당성 검토 등"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "보완·재검토",
+    "lane": "시·도",
+    "stage": "G1 설립",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시·도",
+    "action": "보완·재검토",
+    "output_documents": [
+     "보완"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "사회서비스 지원 및 사회서비스원 설립ㆍ운영에 관한 법률",
+      "article": "제9조(시ㆍ도 서비스원 설립ㆍ통합ㆍ해산의 타당성 검토 등)",
+      "text": "시ㆍ도 서비스원 설립ㆍ통합ㆍ해산의 타당성 검토 등"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "서비스원 출범·운영",
+    "lane": "사회서비스원",
+    "stage": "G2 운영",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사회서비스원",
+    "action": "서비스원 출범·운영",
+    "output_documents": [
+     "운영"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "사회서비스 지원 및 사회서비스원 설립ㆍ운영에 관한 법률",
+      "article": "제27조(사업계획서 및 예산서 등의 제출)",
+      "text": "사업계획서 및 예산서 등의 제출"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "이용 신청·상담",
+    "lane": "이용자",
+    "stage": "G2 운영",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "이용자",
+    "action": "이용 신청·상담",
+    "output_documents": [
+     "상담"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "사회서비스 지원 및 사회서비스원 설립ㆍ운영에 관한 법률",
+      "article": "제5조(사회서비스 기본계획의 수립 등)",
+      "text": "사회서비스 기본계획의 수립 등"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "긴급돌봄지원단 구성",
+    "lane": "긴급돌봄지원단",
+    "stage": "G3 긴급돌봄",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "긴급돌봄지원단",
+    "action": "긴급돌봄지원단 구성",
+    "output_documents": [
+     "지원단"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "사회서비스 지원 및 사회서비스원 설립ㆍ운영에 관한 법률",
+      "article": "제12조(긴급돌봄지원단의 구성)",
+      "text": "긴급돌봄지원단의 구성"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "긴급돌봄 제공",
+    "lane": "사회서비스원",
+    "stage": "G3 긴급돌봄",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사회서비스원",
+    "action": "긴급돌봄 제공",
+    "output_documents": [
+     "긴급돌봄"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "사회서비스 지원 및 사회서비스원 설립ㆍ운영에 관한 법률",
+      "article": "제12조(긴급돌봄지원단의 구성)",
+      "text": "긴급돌봄지원단의 구성"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "긴급 요청",
+    "lane": "이용자",
+    "stage": "G3 긴급돌봄",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "이용자",
+    "action": "긴급 요청",
+    "output_documents": [
+     "요청"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "사회서비스 지원 및 사회서비스원 설립ㆍ운영에 관한 법률",
+      "article": "제12조(긴급돌봄지원단의 구성)",
+      "text": "긴급돌봄지원단의 구성"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "사업계획·예산 제출",
+    "lane": "사회서비스원",
+    "stage": "G4 사업",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사회서비스원",
+    "action": "사업계획·예산 제출",
+    "output_documents": [
+     "예산"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "사회서비스 지원 및 사회서비스원 설립ㆍ운영에 관한 법률",
+      "article": "제27조(사업계획서 및 예산서 등의 제출)",
+      "text": "사업계획서 및 예산서 등의 제출"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "승인·조정",
+    "lane": "시·도",
+    "stage": "G4 사업",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시·도",
+    "action": "승인·조정",
+    "output_documents": [
+     "승인"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "사회서비스 지원 및 사회서비스원 설립ㆍ운영에 관한 법률",
+      "article": "제27조(사업계획서 및 예산서 등의 제출)",
+      "text": "사업계획서 및 예산서 등의 제출"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "경영평가",
+    "lane": "평가·감독",
+    "stage": "G5 평가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "평가·감독",
+    "action": "경영평가",
+    "output_documents": [
+     "평가"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "사회서비스 지원 및 사회서비스원 설립ㆍ운영에 관한 법률",
+      "article": "제36조(경영평가 결과의 통합 공시)",
+      "text": "경영평가 결과의 통합 공시"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "평가 결과 수령",
+    "lane": "사회서비스원",
+    "stage": "G5 평가",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사회서비스원",
+    "action": "평가 결과 수령",
+    "output_documents": [
+     "평가통지"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "사회서비스 지원 및 사회서비스원 설립ㆍ운영에 관한 법률",
+      "article": "제36조(경영평가 결과의 통합 공시)",
+      "text": "경영평가 결과의 통합 공시"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "개선 이행",
+    "lane": "사회서비스원",
+    "stage": "G5 평가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사회서비스원",
+    "action": "개선 이행",
+    "output_documents": [
+     "개선"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "사회서비스 지원 및 사회서비스원 설립ㆍ운영에 관한 법률",
+      "article": "제36조(경영평가 결과의 통합 공시)",
+      "text": "경영평가 결과의 통합 공시"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "통합돌봄 연계",
+    "lane": "시·도",
+    "stage": "G2 운영",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시·도",
+    "action": "통합돌봄 연계",
+    "output_documents": [
+     "연계"
+    ],
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "사회서비스 지원 및 사회서비스원 설립ㆍ운영에 관한 법률",
+      "article": "제5조(사회서비스 기본계획의 수립 등)",
+      "text": "사회서비스 기본계획의 수립 등"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "재신청·재검토 루프",
+    "lane": "시·도",
+    "stage": "G1 설립",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시·도",
+    "action": "재신청·재검토 루프",
+    "output_documents": [
+     "재검토"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "사회서비스 지원 및 사회서비스원 설립ㆍ운영에 관한 법률",
+      "article": "제9조(시ㆍ도 서비스원 설립ㆍ통합ㆍ해산의 타당성 검토 등)",
+      "text": "시ㆍ도 서비스원 설립ㆍ통합ㆍ해산의 타당성 검토 등"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P16",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P16",
+    "target": "P03",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P03",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P05",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P05",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P07",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P09",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P05",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "MST 270407. 조문 수가 적어 설립·긴급·평가 중심."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-12",
+  "method": "법제처 DRF + L3",
+  "scope": "L3 당사자 워크스루 후 명시 조문 5건 존재 확인 5건",
+  "notes": [
+   "사회서비스원법 MST 270407"
+  ],
+  "sources": [
+   {
+    "law": "사회서비스 지원 및 사회서비스원 설립ㆍ운영에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "사회서비스 지원 및 사회서비스원 설립ㆍ운영에 관한 법률",
+    "lawId": "014151",
+    "mst": "270407",
+    "promulgatedOn": "2022-03-25",
+    "effectiveOn": "2025-10-02",
+    "officialUrl": "https://law.go.kr/법령/사회서비스지원및사회서비스원설립·운영에관한법률"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-12",
+   "method": "DRF 목차·조문제목 대조",
+   "citationEntries": 5,
+   "explicitCitationEntries": 5,
+   "articleReferences": 5,
+   "verifiedReferences": 5,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}
