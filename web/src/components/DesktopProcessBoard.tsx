@@ -2,6 +2,7 @@
 
 import { useId, useLayoutEffect, useMemo, useRef, useState } from "react";
 import type { ProcessEdge, ProcessModel, ProcessNode } from "@/lib/types";
+import { NODE_STATUS_META, nodeStatusAriaLabel } from "@/lib/node-status";
 
 type EdgeKind = "sequence" | "message" | "loop";
 
@@ -24,14 +25,6 @@ interface NodeRect {
   centerX: number;
   centerY: number;
 }
-
-const STATUS_META = {
-  done: { label: "완료" },
-  current: { label: "현재" },
-  waiting: { label: "대기" },
-  risk: { label: "위험" },
-  loop: { label: "회귀" },
-} as const;
 
 const EDGE_COLOR: Record<EdgeKind, string> = {
   sequence: "#c3cfc8",
@@ -349,7 +342,7 @@ function ProcessGridCard({
   onClick: () => void;
   setRef?: (element: HTMLButtonElement | null) => void;
 }) {
-  const status = STATUS_META[node.status];
+  const status = NODE_STATUS_META[node.status];
   return (
     <button
       ref={setRef}
@@ -358,12 +351,12 @@ function ProcessGridCard({
       data-node-id={node.id}
       data-status={node.status}
       aria-pressed={selected}
-      aria-label={`${node.name} — ${status.label}`}
+      aria-label={nodeStatusAriaLabel(node.name, node.status)}
       onClick={onClick}
     >
       <span className="desktop-process-v2-card-meta">
         <b>{node.id}</b>
-        <i>{status.label}</i>
+        {status.label && <i>{status.label}</i>}
       </span>
       <strong>{node.name}</strong>
       {loopLabel && <small>↩ {loopLabel}</small>}

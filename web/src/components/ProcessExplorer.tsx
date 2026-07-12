@@ -9,6 +9,7 @@ import type {
   SourceVerification,
 } from "@/lib/types";
 import { trackEvent } from "@/lib/client-events";
+import { NODE_STATUS_META } from "@/lib/node-status";
 import { getNodeVerification } from "@/lib/process-verification";
 import { VerificationMark } from "./ProcessVerification";
 import DesktopProcessBoard from "./DesktopProcessBoard";
@@ -120,7 +121,7 @@ function ProcessNodeInspector({
   node: ProcessNode;
   verification?: SourceVerification;
 }) {
-  const status = statusMeta(node.status);
+  const status = NODE_STATUS_META[node.status];
   const verificationResult = getNodeVerification(node, verification);
   const documents = [
     ...(node.input_documents ?? []),
@@ -133,9 +134,11 @@ function ProcessNodeInspector({
         <div className="process-node-inspector-label">
           <span>노드 상세</span>
           <strong>{node.id}</strong>
-          <i style={{ color: status.color, borderColor: status.color }}>
-            {status.label}
-          </i>
+          {status.label && (
+            <i style={{ color: status.color, borderColor: status.color }}>
+              {status.label}
+            </i>
+          )}
         </div>
         <h3>{node.name}</h3>
         <p>{node.stage} · {node.lane} · {node.actor}</p>
@@ -183,17 +186,6 @@ function ProcessNodeInspector({
       </div>
     </section>
   );
-}
-
-function statusMeta(status: ProcessNode["status"]) {
-  const meta = {
-    done: { label: "완료", color: "#5d6b63" },
-    current: { label: "현재", color: "#087452" },
-    waiting: { label: "대기", color: "#87938d" },
-    risk: { label: "위험", color: "#c78116" },
-    loop: { label: "회귀", color: "#c78116" },
-  };
-  return meta[status];
 }
 
 function updateDetailUrl(key: string, value: string) {

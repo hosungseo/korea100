@@ -82,13 +82,12 @@ export default function InstitutionDetailView({
         <header className={styles.sectionHeading}>
           <div>
             <h2>업무구조도</h2>
-            <p>노드 상태는 제도 흐름 설명용 편집 상태입니다</p>
+            <p>제도의 결정적 단계와 병목·보완 구간을 강조해 표시합니다</p>
           </div>
-          <div className={styles.legend} aria-label="노드 상태 범례">
-            <span><i data-tone="done" />완료</span>
-            <span><i data-tone="current" />현재</span>
-            <span><i data-tone="risk" />위험·회귀</span>
-            <span><i data-tone="waiting" />대기</span>
+          <div className={styles.legend} aria-label="노드 표시 범례">
+            <span><i data-tone="current" />핵심 단계</span>
+            <span><i data-tone="risk" />병목</span>
+            <span><i data-tone="loop" />보완 회귀</span>
           </div>
         </header>
 
