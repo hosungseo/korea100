@@ -1,0 +1,424 @@
+{
+ "slug": "reduced-working-hours-childcare",
+ "name": "육아기 근로시간 단축",
+ "oneLiner": "육아기 근로시간 단축의 사용·근로조건과 고용보험 급여를 처리하는 절차",
+ "type": "복지급여·고용지원형",
+ "priority": 228,
+ "whyFirst": "육아기 근로시간 단축의 신청·결정·사후관리 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "육아기 근로시간 단축은 육아기 근로시간 단축의 사용·근로조건과 고용보험 급여를 처리하는 절차 제도다.",
+  "stakeholders": "신청인·근로자, 사업주·지자체, 고용센터·복지기관과 관계기관이 관여한다.",
+  "legalBasis": [
+   {
+    "law": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+    "articles": "제19조의2(육아기 근로시간 단축), 제19조의3(육아기 근로시간 단축 중 근로조건 등), 제19조의4(육아휴직과 육아기 근로시간 단축의 사용형태), 제19조의6(직장복귀를 위한 사업주의 지원)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "복지기관·고용센터",
+    "role": "접수·조사·결정·지급"
+   },
+   {
+    "name": "사업주·지자체",
+    "role": "휴직·지원 확인과 협조"
+   },
+   {
+    "name": "신청인·근로자",
+    "role": "신청·자료 제출·이의"
+   }
+  ],
+  "procedure": [
+   "지원·휴직 사유 확인",
+   "신청·신고 제출",
+   "접수·확인",
+   "자격·요건 조사",
+   "보완 요구",
+   "보완 자료 제출",
+   "근로시간 단축 승인",
+   "결정 통지",
+   "급여·서비스 지급",
+   "사후 확인·변경·이의"
+  ],
+  "moneyFlow": "법정 급여·지원금의 지급·환수 기준은 개별 법령과 고용보험·지자체 기준을 따른다.",
+  "docsFlow": "신청·신고 → 조사·확인 → 결정 통지 → 급여·서비스 지급 → 사후 확인·변경으로 이어진다.",
+  "bottlenecks": [
+   "위기·자격 증빙",
+   "사업주 확인과 기관 간 자료 연계",
+   "사후조사와 환수 판단"
+  ],
+  "reformPoints": [
+   "신청·확인 서류 간소화",
+   "급여 진행상태 공개",
+   "사후조사 기준 설명 강화"
+  ]
+ },
+ "related": [
+  "국민기초생활보장",
+  "고용보험과 실업급여",
+  "아동수당",
+  "국민건강보험"
+ ],
+ "fieldVerification": [
+  "실제 신청 서식과 전산 경로",
+  "지자체별 추가지원 기준",
+  "사후조사·환수의 개별 적용"
+ ],
+ "process": {
+  "institution_name": "육아기 근로시간 단축",
+  "law_name": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+  "lanes": [
+   "신청인·근로자",
+   "사업주·지자체",
+   "고용센터·복지기관",
+   "관계기관"
+  ],
+  "stages": [
+   "G0 위기·사유",
+   "G1 신청·확인",
+   "G2 조사·검토",
+   "G3 결정",
+   "G4 지급·지원",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "지원·휴직 사유 확인",
+    "lane": "신청인·근로자",
+    "stage": "G0 위기·사유",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "신청인·근로자",
+    "action": "지원·휴직 사유 확인",
+    "output_documents": [
+     "지원·휴직 사유 확인"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+      "article": "제19조의2(육아기 근로시간 단축)",
+      "text": "육아기 근로시간 단축에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "신청·신고 제출",
+    "lane": "신청인·근로자",
+    "stage": "G1 신청·확인",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "신청인·근로자",
+    "action": "신청·신고 제출",
+    "output_documents": [
+     "신청·신고 제출"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+      "article": "제19조의2(육아기 근로시간 단축)",
+      "text": "육아기 근로시간 단축에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "접수·확인",
+    "lane": "고용센터·복지기관",
+    "stage": "G1 신청·확인",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "고용센터·복지기관",
+    "action": "접수·확인",
+    "output_documents": [
+     "접수·확인"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+      "article": "제19조의3(육아기 근로시간 단축 중 근로조건 등)",
+      "text": "육아기 근로시간 단축 중 근로조건 등에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "자격·요건 조사",
+    "lane": "사업주·지자체",
+    "stage": "G2 조사·검토",
+    "type": "task",
+    "status": "current",
+    "progress": 45,
+    "actor": "사업주·지자체",
+    "action": "자격·요건 조사",
+    "output_documents": [
+     "자격·요건 조사"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+      "article": "제19조의3(육아기 근로시간 단축 중 근로조건 등)",
+      "text": "육아기 근로시간 단축 중 근로조건 등에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "보완 요구",
+    "lane": "고용센터·복지기관",
+    "stage": "G2 조사·검토",
+    "type": "task",
+    "status": "risk",
+    "progress": 0,
+    "actor": "고용센터·복지기관",
+    "action": "보완 요구",
+    "output_documents": [
+     "보완 요구"
+    ],
+    "deadline": null,
+    "confidence": 0.78,
+    "legal_basis": [
+     {
+      "law": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+      "article": "제19조의6(직장복귀를 위한 사업주의 지원)",
+      "text": "직장복귀를 위한 사업주의 지원에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "보완 자료 제출",
+    "lane": "신청인·근로자",
+    "stage": "G2 조사·검토",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신청인·근로자",
+    "action": "보완 자료 제출",
+    "output_documents": [
+     "보완 자료 제출"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+      "article": "제19조의2(육아기 근로시간 단축)",
+      "text": "육아기 근로시간 단축에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "근로시간 단축 승인",
+    "lane": "고용센터·복지기관",
+    "stage": "G3 결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "고용센터·복지기관",
+    "action": "근로시간 단축 승인",
+    "output_documents": [
+     "근로시간 단축 승인"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+      "article": "제19조의4(육아휴직과 육아기 근로시간 단축의 사용형태)",
+      "text": "육아휴직과 육아기 근로시간 단축의 사용형태에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "결정 통지",
+    "lane": "사업주·지자체",
+    "stage": "G3 결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업주·지자체",
+    "action": "결정 통지",
+    "output_documents": [
+     "결정 통지"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+      "article": "제19조의2(육아기 근로시간 단축)",
+      "text": "육아기 근로시간 단축에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "급여·서비스 지급",
+    "lane": "고용센터·복지기관",
+    "stage": "G4 지급·지원",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "고용센터·복지기관",
+    "action": "급여·서비스 지급",
+    "output_documents": [
+     "급여·서비스 지급"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+      "article": "제19조의6(직장복귀를 위한 사업주의 지원)",
+      "text": "직장복귀를 위한 사업주의 지원에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "사후 확인·변경·이의",
+    "lane": "신청인·근로자",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신청인·근로자",
+    "action": "사후 확인·변경·이의",
+    "output_documents": [
+     "사후 확인·변경·이의"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+      "article": "제19조의6(직장복귀를 위한 사업주의 지원)",
+      "text": "직장복귀를 위한 사업주의 지원에 관한 절차를 정한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L01",
+    "source": "P05",
+    "target": "P06",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "L02",
+    "source": "P06",
+    "target": "P04",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P04",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "급여액·기간과 세부 요건은 시행령·고시 및 개인 상황에 따라 달라질 수 있다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 14건 가운데 14건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+    "lawId": "000130",
+    "mst": "276851",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2025-10-01",
+    "officialUrl": "https://law.go.kr/법령/남녀고용평등과일ㆍ가정양립지원에관한법률"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 11,
+   "explicitCitationEntries": 11,
+   "articleReferences": 14,
+   "verifiedReferences": 14,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}
