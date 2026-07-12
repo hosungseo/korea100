@@ -104,7 +104,7 @@
  ],
  "verification": {
   "status": "needs-review",
-  "verifiedAt": "2026-07-10",
+  "verifiedAt": "2026-07-12",
   "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
   "scope": "법적 근거 5건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 70건 가운데 70건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
@@ -555,7 +555,8 @@
      {
       "law": "시·도 도시 및 주거환경정비 조례",
       "article": "감정평가법인 선정",
-      "text": "감정평가법인등의 선정·절차·방법은 시·도조례로 정한다(법 제74조제4항제2호 위임)."
+      "text": "감정평가법인등의 선정·절차·방법은 시·도조례로 정한다(법 제74조제4항제2호 위임).",
+      "unverified": true
      }
     ]
    },
@@ -851,6 +852,13 @@
     "label": "보완 후 재상정"
    }
   ],
-  "warnings": []
+  "warnings": [
+   {
+    "date": "2026-07-12",
+    "type": "citation-correction",
+    "content": "P13의 '시·도 도시 및 주거환경정비 조례' 인용 article 필드(\"감정평가법인 선정\")를 unverified 처리. 조례는 지역별로 다르며 verification.unresolved에 local-scope로 이미 등록됨(법 제74조제4항제2호 위임 확인).",
+    "consultedMSTs": []
+   }
+  ]
  }
 }
