@@ -82,7 +82,7 @@ function officialUrl(section, name) {
 }
 
 function sourceTypeFor(basis) {
-  if (/협약$/.test(basis.law)) return "treaty";
+  if (basis.kind === "조약" || /협약$/.test(basis.law)) return "treaty";
   if (ADMIN_KINDS.has(basis.kind)) return "admin-rule";
   if (ORDINANCE_KINDS.has(basis.kind)) return "ordinance";
   return "statute";
