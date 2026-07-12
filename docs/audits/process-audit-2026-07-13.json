@@ -208,6 +208,27 @@
       "score": 8
     },
     {
+      "slug": "capital-gains-tax-housing",
+      "verificationStatus": "article-verified",
+      "processWarnings": 3,
+      "findings": [
+        {
+          "rule": "backward-sequence",
+          "edge": "E13",
+          "detail": "P11(4) → P16(3) — loop 타입이어야 할 후보"
+        },
+        {
+          "rule": "empty-lane",
+          "detail": "매수 연계"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 8
+    },
+    {
       "slug": "ecommerce-withdrawal-corrective-order",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
@@ -287,27 +308,6 @@
         {
           "rule": "outlier",
           "detail": "meanConfidence=0.74 (전체 평균 0.86±0.05)"
-        }
-      ],
-      "score": 7
-    },
-    {
-      "slug": "capital-gains-tax-housing",
-      "verificationStatus": "article-verified",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "backward-sequence",
-          "edge": "E13",
-          "detail": "P11(4) → P16(3) — loop 타입이어야 할 후보"
-        },
-        {
-          "rule": "empty-lane",
-          "detail": "매수 연계"
-        },
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
         }
       ],
       "score": 7
