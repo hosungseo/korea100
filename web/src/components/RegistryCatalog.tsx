@@ -32,6 +32,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   "입찰": "#ea580c",
   "심사·평가": "#9333ea",
   "계약·이행": "#2563eb",
+  "분쟁·권리구제": "#0f766e",
   "사후관리·제재": "#e11d48",
 };
 
