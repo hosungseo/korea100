@@ -22,13 +22,8 @@
     {
       "slug": "personal-data-breach-penalty",
       "verificationStatus": "article-verified",
-      "processWarnings": 2,
+      "processWarnings": 3,
       "findings": [
-        {
-          "rule": "backward-sequence",
-          "edge": "E02",
-          "detail": "P02(5) → P03(1) — loop 타입이어야 할 후보"
-        },
         {
           "rule": "empty-lane",
           "detail": "정보주체"
@@ -44,6 +39,10 @@
         {
           "rule": "empty-stage",
           "detail": "G3 협의·심사"
+        },
+        {
+          "rule": "empty-stage",
+          "detail": "G5 이행·사후관리"
         },
         {
           "rule": "outlier",
@@ -62,7 +61,7 @@
           "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
         }
       ],
-      "score": 18
+      "score": 19
     },
     {
       "slug": "pet-registration",
