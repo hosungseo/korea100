@@ -107,6 +107,33 @@ const STATUS = {
   },
 };
 
+
+const ORDINANCE_COLOR = "#7c3aed";
+const ORDINANCE_INK = "#5b21b6";
+
+function ordinanceInfo(node) {
+  const refs = (node.legal_basis ?? []).filter((ref) =>
+    /조례|회의규칙/.test(ref.law ?? "")
+  );
+  if (refs.length === 0) return null;
+  const exemplar = refs.find((ref) => (ref.article ?? "").includes("예시"));
+  const law = (exemplar ?? refs[0]).law ?? "";
+  const muniMatch = law.match(
+    /^(서울특별시|부산광역시|대구광역시|인천광역시|광주광역시|대전광역시|울산광역시|세종특별자치시|경기도|강원특별자치도|충청북도|충청남도|전북특별자치도|전라남도|경상북도|경상남도|제주특별자치도)/
+  );
+  const SHORT = {
+    "서울특별시": "서울", "부산광역시": "부산", "대구광역시": "대구", "인천광역시": "인천",
+    "광주광역시": "광주", "대전광역시": "대전", "울산광역시": "울산", "세종특별자치시": "세종",
+    "경기도": "경기", "강원특별자치도": "강원", "충청북도": "충북", "충청남도": "충남",
+    "전북특별자치도": "전북", "전라남도": "전남", "경상북도": "경북", "경상남도": "경남",
+    "제주특별자치도": "제주",
+  };
+  const muni = muniMatch ? SHORT[muniMatch[1]] ?? muniMatch[1] : null;
+  return {
+    label: exemplar && muni ? `조례 · ${muni} 예시` : "조례 위임",
+  };
+}
+
 const files = (await fs.readdir(dataDir))
   .filter((file) => file.endsWith(".json"))
   .sort();
@@ -925,11 +952,20 @@ function renderNode(node, context) {
       : "#a96008"
     : status.sub;
   const idPrefix = node.type === "gateway" ? "◇ " : node.type === "system" ? "▣ " : "";
+  const ordinance = ordinanceInfo(node);
+  const ordinanceRing = ordinance
+    ? `<rect x="${round(x - 4)}" y="${round(y - 4)}" width="${CARD_WIDTH + 8}" height="${position.height + 8}" rx="11" fill="none" stroke="${ORDINANCE_COLOR}" stroke-width="2.2" stroke-dasharray="7 5"/>`
+    : "";
+  const ordinanceTag = ordinance
+    ? `<text x="${round(x + 15 + 52)}" y="${round(y + 20)}" font-size="11.5" font-weight="800" fill="${ORDINANCE_INK}">${escapeXml(ordinance.label)}</text>`
+    : "";
   return `
     <g filter="url(#card-shadow)">
+      ${ordinanceRing}
       <rect x="${round(x)}" y="${round(y)}" width="${CARD_WIDTH}" height="${position.height}" rx="8" fill="${status.fill}" stroke="${status.border}" stroke-width="2.3"/>
       <rect x="${round(x)}" y="${round(y)}" width="6" height="${position.height}" rx="3" fill="${status.border}"/>
       <text x="${round(x + 15)}" y="${round(y + 20)}" class="mono" font-size="12.5" font-weight="750" fill="${status.sub}">${idPrefix}${escapeXml(node.id)}</text>
+      ${ordinanceTag}
       <rect x="${round(x + CARD_WIDTH - statusWidth - 10)}" y="${round(y + 7)}" width="${statusWidth}" height="24" rx="5" fill="${node.status === "current" ? "#ffffff" : status.border}" opacity="${node.status === "current" ? 0.18 : 0.14}"/>
       <text x="${round(x + CARD_WIDTH - statusWidth / 2 - 10)}" y="${round(y + 24)}" text-anchor="middle" font-size="12" font-weight="800" fill="${status.ink}">${status.label}</text>
       ${textLines(nameLines, x + 15, y + nameY, {
@@ -951,12 +987,14 @@ function renderFooter({ process, groups }) {
     ${legendStatus(216, legendY - 14, "#087452", "핵심")}
     ${legendStatus(314, legendY - 14, "#d9901a", "병목")}
     ${legendStatus(412, legendY - 14, "#3478db", "회귀")}
-    <line x1="548" y1="${legendY - 8}" x2="600" y2="${legendY - 8}" stroke="#53675d" stroke-width="4" marker-end="url(#arrow-sequence)"/>
-    <text x="620" y="${legendY - 2}" font-size="15" fill="#526159">절차 순서</text>
-    <line x1="760" y1="${legendY - 8}" x2="812" y2="${legendY - 8}" stroke="#0f8a65" stroke-width="4" stroke-dasharray="10 8" marker-end="url(#arrow-message)"/>
-    <text x="832" y="${legendY - 2}" font-size="15" fill="#526159">정보 전달</text>
-    <line x1="972" y1="${legendY - 8}" x2="1024" y2="${legendY - 8}" stroke="#3478db" stroke-width="4" stroke-dasharray="10 8" marker-end="url(#arrow-loop)"/>
-    <text x="1044" y="${legendY - 2}" font-size="15" fill="#526159">보완 회귀</text>
+    <rect x="500" y="${legendY - 26}" width="17" height="17" rx="4" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="5 4"/>
+    <text x="526" y="${legendY - 12}" font-size="14.5" fill="#526159">조례 위임</text>
+    <line x1="648" y1="${legendY - 8}" x2="700" y2="${legendY - 8}" stroke="#53675d" stroke-width="4" marker-end="url(#arrow-sequence)"/>
+    <text x="720" y="${legendY - 2}" font-size="15" fill="#526159">절차 순서</text>
+    <line x1="860" y1="${legendY - 8}" x2="912" y2="${legendY - 8}" stroke="#0f8a65" stroke-width="4" stroke-dasharray="10 8" marker-end="url(#arrow-message)"/>
+    <text x="932" y="${legendY - 2}" font-size="15" fill="#526159">정보 전달</text>
+    <line x1="1072" y1="${legendY - 8}" x2="1124" y2="${legendY - 8}" stroke="#3478db" stroke-width="4" stroke-dasharray="10 8" marker-end="url(#arrow-loop)"/>
+    <text x="1144" y="${legendY - 2}" font-size="15" fill="#526159">보완 회귀</text>
     <text x="38" y="2291" font-size="15.5" font-weight="650" fill="#56655d">단계는 위→아래, 행위자 묶음은 좌→우로 읽습니다.</text>
     <text x="38" y="2321" font-size="14.5" fill="#68776f">원래 ${process.lanes.length}개 행위자 레인을 ${groups.length}개 레이아웃 묶음으로 배치했으며, ${process.nodes.length}개 업무와 ${process.edges.length}개 연결 관계는 유지했습니다.</text>
     <text x="38" y="2361" font-size="13.5" fill="#7b8881">출처: 해당 제도의 법률·시행령·시행규칙 기반 모델 · 실제 사건의 진행 상태나 법률 자문을 의미하지 않습니다.</text>
