@@ -90,7 +90,7 @@ function Header() {
       <div className="site-header-inner">
         <Link href="/" className="site-brand">
           <strong>조달제도 100</strong>
-          <span>Procurement Registry</span>
+          <span>How Did They Do All That Procurement</span>
         </Link>
 
         <nav className="site-nav" aria-label="주요 메뉴">

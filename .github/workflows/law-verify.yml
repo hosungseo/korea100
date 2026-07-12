@@ -48,9 +48,8 @@ jobs:
         run: npm install -g korean-law-mcp
       - name: Smoke-test Open API credential
         run: |
-          set -o pipefail
-          korean-law search_law --query "국가를 당사자로 하는 계약에 관한 법률" --display 3 2>&1 | head -40
-          korean-law get_batch_articles --mst 283877 --articles '["제7조"]' 2>&1 | head -20
+          { korean-law search_law --query "국가를 당사자로 하는 계약에 관한 법률" --display 3 2>&1 || true; } | head -40
+          { korean-law get_batch_articles --mst 283877 --articles '["제7조"]' 2>&1 || true; } | head -20
       - name: Fetch full-text law cache
         if: ${{ inputs.fetch_cache }}
         run: node scripts/fetch-law-cache.mjs
@@ -65,6 +64,7 @@ jobs:
             echo "law cache unchanged"
           else
             git commit -m "chore: refresh law full-text cache from Open API"
+            git pull --rebase origin ${{ github.ref_name }}
             git push origin HEAD:${{ github.ref_name }}
           fi
       - name: Sync official source identifiers
@@ -95,5 +95,6 @@ jobs:
             echo "no changes to commit"
           else
             git commit -m "chore: machine article verification via Actions runner"
+            git pull --rebase origin ${{ github.ref_name }}
             git push origin HEAD:${{ github.ref_name }}
           fi

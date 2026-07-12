@@ -104,6 +104,23 @@ for (const { file, data: institution } of institutions) {
     if (!LEGAL_KINDS.has(basis.kind)) fail(scope, `지원하지 않는 법적 근거 종류입니다 (${basis.kind})`);
   }
 
+  if (!institution.canvas?.applicability?.trim()) {
+    fail(scope, "canvas.applicability(적용 대상)가 없습니다");
+  }
+  if (!Array.isArray(institution.canvas?.submittedDocuments) || institution.canvas.submittedDocuments.length === 0) {
+    fail(scope, "canvas.submittedDocuments(담당자별 제출서류)가 없습니다");
+  } else {
+    for (const group of institution.canvas.submittedDocuments) {
+      if (!group.actor?.trim()) fail(scope, "submittedDocuments 항목에 actor가 없습니다");
+      if (!Array.isArray(group.documents) || group.documents.length === 0) {
+        fail(scope, `submittedDocuments(${group.actor ?? "unknown"})에 documents가 없습니다`);
+      }
+    }
+  }
+  if (institution.canvas?.moneyFlow !== undefined || institution.canvas?.docsFlow !== undefined || institution.canvas?.reformPoints !== undefined) {
+    fail(scope, "구 캔버스 필드(moneyFlow/docsFlow/reformPoints)는 applicability/submittedDocuments로 이전해야 합니다");
+  }
+
   if (!institution.verification) {
     fail(scope, "verification이 없습니다");
   } else {

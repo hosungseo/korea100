@@ -44,10 +44,15 @@ interface Institution {
       name: string; role: string;
     }>;
     procedure: string[];             // 5. 절차 대표 단계 (짧은 문장 6~10개)
-    moneyFlow: string;               // 6. 돈의 흐름
-    docsFlow: string;                // 7. 문서/데이터 흐름
+    applicability: string;           // 6. (해당 법률) 적용 대상 — 사업종류·금액구간·요건 (구 moneyFlow 대체)
+    submittedDocuments: Array<{      // 7. 제출서류 — 담당자별 필요서류 (구 docsFlow 대체)
+      actor: string;                 //   "조달업체", "수요기관", "계약담당공무원" 등
+      documents: string[];
+    }>;
     bottlenecks: string[];           // 8. 어디서 막히나
-    reformPoints: string[];          // 9. 어떻게 바꿀 수 있나
+    // (2026-07-12 개편) reformPoints 삭제, purpose는 상세 페이지 제목 아래 설명으로 표시,
+    // procedure+legalBasis는 '절차와 법적 근거' 블록으로 통합, 권한 관계 블록은 화면에서 제거.
+    // 작성 4대 원칙(누가·어떤 서류·언제까지·어떤 사업종류)은 docs/content-principles.md 참조.
   };
   related: string[];                 // 관련 제도 (이름 문자열, 내부 제도면 slug와 동일 명칭)
   fieldVerification: string[];       // "현장 검증 필요" 항목 명시 (없으면 [])
