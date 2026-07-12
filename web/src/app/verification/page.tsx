@@ -3,6 +3,7 @@ import VerificationQueue from "@/components/VerificationQueue";
 import {
   getFieldVerificationQueue,
   getInstitutionSummaries,
+  getRegistryStats,
 } from "@/lib/data";
 
 const SITE_URL =
@@ -18,9 +19,9 @@ export const metadata: Metadata = {
 export default function VerificationPage() {
   const queue = getFieldVerificationQueue();
   const institutions = getInstitutionSummaries();
-  const needsScopeReview = institutions.filter(
-    (institution) => institution.verificationStatus === "needs-review"
-  ).length;
+  const stats = getRegistryStats(institutions);
+  const needsScopeReview = stats.needsReviewCount;
+  const numberFormat = new Intl.NumberFormat("ko-KR");
 
   return (
     <main className="verification-page">
@@ -35,11 +36,14 @@ export default function VerificationPage() {
 
       <section className="verification-stats" aria-label="검증 현황 요약">
         <div>
-          <strong>3,725/3,725</strong>
+          <strong>
+            {numberFormat.format(stats.verifiedReferences)}/
+            {numberFormat.format(stats.articleReferences)}
+          </strong>
           <span>명시 조문 확인</span>
         </div>
         <div>
-          <strong>433</strong>
+          <strong>{numberFormat.format(stats.sourceCount)}</strong>
           <span>공식 원문 연결</span>
         </div>
         <div>

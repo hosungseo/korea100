@@ -110,6 +110,46 @@ export function getInstitutionSummaries(): InstitutionSummary[] {
   return getAllInstitutions().map(toInstitutionSummary);
 }
 
+export interface RegistryStats {
+  modelCount: number;
+  processNodeCount: number;
+  articleReferences: number;
+  verifiedReferences: number;
+  sourceCount: number;
+  articleVerifiedCount: number;
+  needsReviewCount: number;
+}
+
+export function getRegistryStats(
+  summaries: InstitutionSummary[] = getInstitutionSummaries()
+): RegistryStats {
+  return summaries.reduce<RegistryStats>(
+    (stats, institution) => ({
+      modelCount: stats.modelCount + 1,
+      processNodeCount: stats.processNodeCount + institution.processNodeCount,
+      articleReferences: stats.articleReferences + institution.articleReferences,
+      verifiedReferences:
+        stats.verifiedReferences + institution.verifiedReferences,
+      sourceCount: stats.sourceCount + institution.sourceCount,
+      articleVerifiedCount:
+        stats.articleVerifiedCount +
+        (institution.verificationStatus === "article-verified" ? 1 : 0),
+      needsReviewCount:
+        stats.needsReviewCount +
+        (institution.verificationStatus === "needs-review" ? 1 : 0),
+    }),
+    {
+      modelCount: 0,
+      processNodeCount: 0,
+      articleReferences: 0,
+      verifiedReferences: 0,
+      sourceCount: 0,
+      articleVerifiedCount: 0,
+      needsReviewCount: 0,
+    }
+  );
+}
+
 export function getInstitution(slug: string): Institution | null {
   const filePath = path.join(DATA_DIR, `${slug}.json`);
   if (!fs.existsSync(filePath)) return null;

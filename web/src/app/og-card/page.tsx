@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getRegistryStats } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "공유 이미지",
@@ -6,6 +7,8 @@ export const metadata: Metadata = {
 };
 
 export default function OgCardPage() {
+  const stats = getRegistryStats();
+  const numberFormat = new Intl.NumberFormat("ko-KR");
   return (
     <main className="og-card-page">
       <div className="og-card-brand">
@@ -17,19 +20,19 @@ export default function OgCardPage() {
 
       <section className="og-card-metrics">
         <div>
-          <strong>100</strong>
+          <strong>{numberFormat.format(stats.modelCount)}</strong>
           <span>제도 모델</span>
         </div>
         <div>
-          <strong>1,574</strong>
+          <strong>{numberFormat.format(stats.processNodeCount)}</strong>
           <span>업무 노드</span>
         </div>
         <div>
-          <strong>3,725</strong>
+          <strong>{numberFormat.format(stats.verifiedReferences)}</strong>
           <span>확인 조문</span>
         </div>
         <div>
-          <strong>433</strong>
+          <strong>{numberFormat.format(stats.sourceCount)}</strong>
           <span>공식 원문</span>
         </div>
       </section>
