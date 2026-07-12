@@ -1,751 +1,831 @@
 {
- "slug": "administrative-procedure-hearing",
- "name": "행정절차 의견제출·청문",
- "oneLiner": "행정청이 국민에게 불이익 처분을 하기 전에 미리 알리고 의견을 듣도록 한 절차 보장 제도로, 사전통지·의견제출·청문·공청회를 통해 방어권을 보장한다",
- "type": "절차보장형",
- "priority": 76,
- "whyFirst": "처분 전 방어권 보장이라는 법치행정의 기본 절차다. 사전통지·의견청취 흐름이 명확하고, 절차 생략과 형식화라는 쟁점이 뚜렷하다.",
- "asOfDate": "2026-07-10",
- "status": "full",
- "canvas": {
-  "purpose": "행정청이 의무를 부과하거나 권익을 제한하는 처분을 하기 전에 당사자에게 미리 알리고 의견을 듣게 한다. 방어권을 보장하고 처분의 정당성과 수용성을 높여 절차적 하자로 인한 위법을 막는 것이 목적이다.",
-  "stakeholders": "불이익 처분을 받을 당사자·이해관계인, 처분을 하는 행정청, 청문을 진행하는 청문주재자, 공청회에 참여하는 이해관계인·전문가, 처분 결과의 영향을 받는 제3자",
-  "legalBasis": [
-   {
-    "law": "행정절차법",
-    "articles": "제21조(사전 통지: 청문 10일 전·의견제출기한 10일 이상·생략 예외), 제22조(의견청취 방식: 청문·공청회·의견제출), 제23조(처분 이유 제시), 제24조(처분의 방식·문서), 제27조(의견제출), 제28조(청문 주재자·자격 대통령령 위임), 제30~37조(청문 절차), 제35조의2(청문 결과의 반영), 제38~39조의2(공청회)",
-    "kind": "법률"
-   },
-   {
-    "law": "행정절차법 시행령",
-    "articles": "제13조(사전통지 생략 구체 사유), 제15조(청문주재자 자격: 교수·변호사·공인회계사 등 전문직·전직 공무원·전문지식자), 청문·공청회 운영 세부",
-    "kind": "대통령령"
-   },
-   {
-    "law": "개별 처분 근거 법령",
-    "articles": "영업정지·허가취소 등에서 청문 실시 의무를 개별 규정",
-    "kind": "법률"
-   },
-   {
-    "law": "행정소송법",
-    "articles": "제19조(취소소송의 대상), 제20조(제소기간)",
-    "kind": "법률"
-   }
+  "slug": "administrative-procedure-hearing",
+  "name": "행정절차 의견제출·청문",
+  "oneLiner": "행정청이 국민에게 불이익 처분을 하기 전에 미리 알리고 의견을 듣도록 한 절차 보장 제도로, 사전통지·의견제출·청문·공청회를 통해 방어권을 보장한다",
+  "type": "절차보장형",
+  "priority": 76,
+  "whyFirst": "처분 전 방어권 보장이라는 법치행정의 기본 절차다. 사전통지·의견청취 흐름이 명확하고, 절차 생략과 형식화라는 쟁점이 뚜렷하다.",
+  "asOfDate": "2026-07-10",
+  "status": "full",
+  "canvas": {
+    "purpose": "행정청이 의무를 부과하거나 권익을 제한하는 처분을 하기 전에 당사자에게 미리 알리고 의견을 듣게 한다. 방어권을 보장하고 처분의 정당성과 수용성을 높여 절차적 하자로 인한 위법을 막는 것이 목적이다.",
+    "stakeholders": "불이익 처분을 받을 당사자·이해관계인, 처분을 하는 행정청, 청문을 진행하는 청문주재자, 공청회에 참여하는 이해관계인·전문가, 처분 결과의 영향을 받는 제3자",
+    "legalBasis": [
+      {
+        "law": "행정절차법",
+        "articles": "제21조(사전 통지: 청문 10일 전·의견제출기한 10일 이상·생략 예외), 제22조(의견청취 방식: 청문·공청회·의견제출), 제23조(처분 이유 제시), 제24조(처분의 방식·문서), 제27조(의견제출), 제28조(청문 주재자·자격 대통령령 위임), 제30~37조(청문 절차), 제35조의2(청문 결과의 반영), 제38~39조의2(공청회)",
+        "kind": "법률"
+      },
+      {
+        "law": "행정절차법 시행령",
+        "articles": "제13조(사전통지 생략 구체 사유), 제15조(청문주재자 자격: 교수·변호사·공인회계사 등 전문직·전직 공무원·전문지식자), 청문·공청회 운영 세부",
+        "kind": "대통령령"
+      },
+      {
+        "law": "개별 처분 근거 법령",
+        "articles": "영업정지·허가취소 등에서 청문 실시 의무를 개별 규정",
+        "kind": "법률"
+      },
+      {
+        "law": "행정소송법",
+        "articles": "제19조(취소소송의 대상), 제20조(제소기간)",
+        "kind": "법률"
+      }
+    ],
+    "authorities": [
+      {
+        "name": "처분 행정청",
+        "role": "사전통지, 의견청취 실시, 처분 결정"
+      },
+      {
+        "name": "청문 주재자",
+        "role": "청문 진행·조서 작성, 청문조서·의견서 제출"
+      },
+      {
+        "name": "당사자·이해관계인",
+        "role": "의견제출·청문 출석·증거 제시"
+      },
+      {
+        "name": "행정심판위원회·법원",
+        "role": "절차 하자 등 사후 통제"
+      }
+    ],
+    "procedure": [
+      "행정청이 불이익 처분을 예정",
+      "당사자에게 사전통지(처분 내용·사유·의견제출 방법)",
+      "당사자가 의견제출 또는 청문·공청회 요청",
+      "청문 대상이면 청문 개시 10일 전까지 통지",
+      "청문 주재자가 청문 진행·조서 작성",
+      "행정청이 제출 의견·청문 결과를 검토·반영",
+      "처분 결정 및 처분서 통지(이유 제시)",
+      "불복 시 행정심판·행정소송으로 다툼"
+    ],
+    "moneyFlow": "의견제출·청문 참여에는 수수료가 없다. 청문·공청회 운영과 통지 비용은 행정청이 부담한다. 이 제도 자체는 금전 급부가 아니라 절차 보장에 관한 것이다.",
+    "docsFlow": "사전통지서 → 의견제출서 → 청문 통지서 → 청문조서·주재자 의견서 → 처분서(처분 이유·불복방법 기재). 절차 이력은 처분 기록으로 남아 사후 쟁송의 근거가 된다.",
+    "bottlenecks": [
+      "'의견청취가 현저히 곤란' 등 예외를 들어 사전통지·청문을 생략하는 사례가 있다",
+      "형식적으로 의견만 받고 실제 처분에 반영하지 않는 경우가 있다 (현장 검증 필요)",
+      "청문 주재자의 독립성·전문성이 부족하면 방어권이 형해화된다",
+      "당사자가 절차 권리를 몰라 의견제출 기회를 놓치는 정보 격차가 있다"
+    ],
+    "reformPoints": [
+      "사전통지·청문 생략 예외의 엄격 적용",
+      "청문 결과의 실질 반영 의무·근거 제시 강화",
+      "청문 주재자 독립성·전문성 제고",
+      "당사자 절차 안내 강화와 온라인 의견제출 확대"
+    ]
+  },
+  "related": [
+    "행정심판",
+    "행정소송",
+    "정보공개청구",
+    "입법예고와 행정예고",
+    "영업허가와 신고"
   ],
-  "authorities": [
-   {
-    "name": "처분 행정청",
-    "role": "사전통지, 의견청취 실시, 처분 결정"
-   },
-   {
-    "name": "청문 주재자",
-    "role": "청문 진행·조서 작성, 청문조서·의견서 제출"
-   },
-   {
-    "name": "당사자·이해관계인",
-    "role": "의견제출·청문 출석·증거 제시"
-   },
-   {
-    "name": "행정심판위원회·법원",
-    "role": "절차 하자 등 사후 통제"
-   }
+  "fieldVerification": [
+    "행정절차법 청문·의견청취 조문(제22·28조 등) 최신 대조",
+    "청문 생략·의견 미반영의 실제 관행(운영 추정)",
+    "개별 법령상 청문 의무 대상 처분의 범위",
+    "청문 주재자 지정·운영 실태(운영 추정)",
+    "P15 불복(행정심판·행정소송) 근거 조문 확정 필요 — 행정심판법 심판청구 기간, 행정소송법 제소기간"
   ],
-  "procedure": [
-   "행정청이 불이익 처분을 예정",
-   "당사자에게 사전통지(처분 내용·사유·의견제출 방법)",
-   "당사자가 의견제출 또는 청문·공청회 요청",
-   "청문 대상이면 청문 개시 10일 전까지 통지",
-   "청문 주재자가 청문 진행·조서 작성",
-   "행정청이 제출 의견·청문 결과를 검토·반영",
-   "처분 결정 및 처분서 통지(이유 제시)",
-   "불복 시 행정심판·행정소송으로 다툼"
-  ],
-  "moneyFlow": "의견제출·청문 참여에는 수수료가 없다. 청문·공청회 운영과 통지 비용은 행정청이 부담한다. 이 제도 자체는 금전 급부가 아니라 절차 보장에 관한 것이다.",
-  "docsFlow": "사전통지서 → 의견제출서 → 청문 통지서 → 청문조서·주재자 의견서 → 처분서(처분 이유·불복방법 기재). 절차 이력은 처분 기록으로 남아 사후 쟁송의 근거가 된다.",
-  "bottlenecks": [
-   "'의견청취가 현저히 곤란' 등 예외를 들어 사전통지·청문을 생략하는 사례가 있다",
-   "형식적으로 의견만 받고 실제 처분에 반영하지 않는 경우가 있다 (현장 검증 필요)",
-   "청문 주재자의 독립성·전문성이 부족하면 방어권이 형해화된다",
-   "당사자가 절차 권리를 몰라 의견제출 기회를 놓치는 정보 격차가 있다"
-  ],
-  "reformPoints": [
-   "사전통지·청문 생략 예외의 엄격 적용",
-   "청문 결과의 실질 반영 의무·근거 제시 강화",
-   "청문 주재자 독립성·전문성 제고",
-   "당사자 절차 안내 강화와 온라인 의견제출 확대"
-  ]
- },
- "related": [
-  "행정심판",
-  "행정소송",
-  "정보공개청구",
-  "입법예고와 행정예고",
-  "영업허가와 신고"
- ],
- "fieldVerification": [
-  "행정절차법 청문·의견청취 조문(제22·28조 등) 최신 대조",
-  "청문 생략·의견 미반영의 실제 관행(운영 추정)",
-  "개별 법령상 청문 의무 대상 처분의 범위",
-  "청문 주재자 지정·운영 실태(운영 추정)"
- ],
- "process": {
-  "institution_name": "행정절차 의견제출·청문 제도",
-  "law_name": "행정절차법",
-  "lanes": [
-   "처분 행정청",
-   "당사자·이해관계인",
-   "청문 주재자",
-   "공청회 참여자·전문가",
-   "행정심판위원회·법원",
-   "정보시스템"
-  ],
-  "stages": [
-   "G0 처분예정·사전통지",
-   "G1 의견청취 방식결정",
-   "G2 청문준비",
-   "G3 청문실시",
-   "G4 결과반영·처분",
-   "G5 불복"
-  ],
-  "nodes": [
-   {
-    "id": "P01",
-    "name": "불이익 처분 예정·검토",
-    "lane": "처분 행정청",
-    "stage": "G0 처분예정·사전통지",
-    "type": "task",
-    "status": "done",
-    "progress": 100,
-    "actor": "처분 행정청",
-    "action": "처분 검토",
-    "output_documents": [
-     "처분 검토안"
+  "process": {
+    "institution_name": "행정절차 의견제출·청문 제도",
+    "law_name": "행정절차법",
+    "lanes": [
+      "처분 행정청",
+      "당사자·이해관계인",
+      "청문 주재자",
+      "공청회 참여자·전문가",
+      "행정심판위원회·법원",
+      "정보시스템"
     ],
-    "confidence": 0.82,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제21조",
-      "text": "행정청은 의무를 부과하거나 권익을 제한하는 처분을 하려는 경우 사전통지를 준비한다."
-     }
+    "stages": [
+      "G0 처분예정·사전통지",
+      "G1 의견청취 방식결정",
+      "G2 청문준비",
+      "G3 청문실시",
+      "G4 결과반영·처분",
+      "G5 불복"
+    ],
+    "nodes": [
+      {
+        "id": "P01",
+        "name": "불이익 처분 예정·검토",
+        "lane": "처분 행정청",
+        "stage": "G0 처분예정·사전통지",
+        "type": "task",
+        "status": "done",
+        "progress": 100,
+        "actor": "처분 행정청",
+        "action": "처분 검토",
+        "output_documents": [
+          "처분 검토안"
+        ],
+        "confidence": 0.82,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제21조",
+            "text": "행정청은 의무를 부과하거나 권익을 제한하는 처분을 하려는 경우 사전통지를 준비한다."
+          }
+        ]
+      },
+      {
+        "id": "P17",
+        "name": "사전통지·의견청취 생략 판단",
+        "lane": "처분 행정청",
+        "stage": "G0 처분예정·사전통지",
+        "type": "gateway",
+        "status": "done",
+        "progress": 100,
+        "actor": "처분 행정청",
+        "condition": "긴급·객관적 증명·의견청취 현저 곤란 등 생략 사유 해당 여부",
+        "output_documents": [
+          "생략 여부 결정"
+        ],
+        "deadline": "사전통지 전",
+        "confidence": 0.76,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제21조",
+            "text": "제21조제4항에 따라 긴급 처분, 자격상실의 객관적 증명, 의견청취가 현저히 곤란한 경우 등에는 사전통지·의견청취를 하지 아니할 수 있다."
+          },
+          {
+            "law": "행정절차법 시행령",
+            "article": "제13조",
+            "text": "사전통지를 생략할 수 있는 구체적 사유(긴급, 객관적 증명, 현저한 곤란, 기술기준 미달 입증, 금전급부 요건 명백 등)를 정한다."
+          }
+        ]
+      },
+      {
+        "id": "P02",
+        "name": "처분 사전통지",
+        "lane": "처분 행정청",
+        "stage": "G0 처분예정·사전통지",
+        "type": "notice",
+        "status": "done",
+        "progress": 100,
+        "actor": "처분 행정청",
+        "receiver": "당사자",
+        "action": "사전통지",
+        "output_documents": [
+          "사전통지서"
+        ],
+        "deadline": "청문은 청문 시작 10일 전까지",
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제21조",
+            "text": "행정청은 처분의 제목·내용·사유와 의견제출 방법 등을 당사자에게 미리 통지하여야 한다."
+          }
+        ]
+      },
+      {
+        "id": "P03",
+        "name": "의견청취 방식 결정",
+        "lane": "처분 행정청",
+        "stage": "G1 의견청취 방식결정",
+        "type": "gateway",
+        "status": "done",
+        "progress": 100,
+        "actor": "처분 행정청",
+        "action": "방식 결정",
+        "condition": "청문·공청회·의견제출 중 선택(개별법 청문 의무 여부 포함)",
+        "output_documents": [
+          "의견청취 방식 결정"
+        ],
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제22조",
+            "text": "행정청은 청문·공청회·의견제출 중 해당하는 절차로 의견을 청취한다."
+          }
+        ]
+      },
+      {
+        "id": "P04",
+        "name": "의견제출",
+        "lane": "당사자·이해관계인",
+        "stage": "G1 의견청취 방식결정",
+        "type": "task",
+        "status": "done",
+        "progress": 100,
+        "actor": "당사자",
+        "receiver": "처분 행정청",
+        "action": "의견제출",
+        "output_documents": [
+          "의견제출서"
+        ],
+        "deadline": "의견제출기한(10일 이상)(법 제21조제3항)",
+        "confidence": 0.83,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제27조",
+            "text": "당사자등은 처분 전에 관할 행정청에 서면·말·정보통신망으로 의견을 제출할 수 있다."
+          },
+          {
+            "law": "행정절차법",
+            "article": "제21조",
+            "text": "의견제출기한은 의견제출에 필요한 기간을 10일 이상으로 고려하여 정한다(제21조제3항)."
+          },
+          {
+            "law": "행정절차법",
+            "article": "제27조의2(제출 의견의 반영 등)",
+            "text": "행정청은 제출받은 의견을 반영하도록 노력하여야 하며, 당사자등은 의견이 반영되지 아니한 처분에 대해 처분이 있음을 안 날부터 90일 이내에 이유 설명을 요청할 수 있다."
+          }
+        ]
+      },
+      {
+        "id": "P05",
+        "name": "청문 주재자 선정",
+        "lane": "처분 행정청",
+        "stage": "G2 청문준비",
+        "type": "task",
+        "status": "done",
+        "progress": 100,
+        "actor": "처분 행정청",
+        "action": "주재자 선정",
+        "output_documents": [
+          "청문 주재자 지정"
+        ],
+        "confidence": 0.83,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제28조",
+            "text": "행정청은 소속 직원 또는 대통령령으로 정하는 자격을 가진 사람 중에서 청문 주재자를 공정하게 선정한다."
+          },
+          {
+            "law": "행정절차법 시행령",
+            "article": "제15조",
+            "text": "대통령령으로 정하는 자격을 가진 자는 교수·변호사·공인회계사 등 관련 분야 전문직 종사자, 관련 분야 전직 공무원, 관련 분야 전문지식이 있는 자를 말한다."
+          },
+          {
+            "law": "행정절차법",
+            "article": "제28조(청문 주재자)",
+            "text": "행정청은 청문이 시작되는 날부터 7일 전까지 청문 주재자에게 청문과 관련한 필요한 자료를 미리 통지하여야 한다(제3항)."
+          }
+        ]
+      },
+      {
+        "id": "P06",
+        "name": "청문 통지·기일 지정",
+        "lane": "처분 행정청",
+        "stage": "G2 청문준비",
+        "type": "notice",
+        "status": "done",
+        "progress": 100,
+        "actor": "처분 행정청",
+        "receiver": "당사자",
+        "action": "청문 통지",
+        "output_documents": [
+          "청문 통지서"
+        ],
+        "deadline": "청문 시작 10일 전까지",
+        "confidence": 0.78,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제21조",
+            "text": "청문을 하려는 경우 청문 시작 10일 전까지 당사자에게 통지하여야 한다."
+          }
+        ]
+      },
+      {
+        "id": "P07",
+        "name": "청문 실시·진행",
+        "lane": "청문 주재자",
+        "stage": "G3 청문실시",
+        "type": "task",
+        "status": "current",
+        "progress": 50,
+        "actor": "청문 주재자",
+        "action": "청문 진행",
+        "input_documents": [
+          "청문 통지서"
+        ],
+        "output_documents": [
+          "진행 기록"
+        ],
+        "deadline": "지정 기일",
+        "blocker": "당사자 증거·주장 정리로 청문이 진행 중이다",
+        "confidence": 0.82,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제31조",
+            "text": "청문 주재자는 청문을 공정하게 진행하며 당사자에게 의견 진술 기회를 준다."
+          }
+        ]
+      },
+      {
+        "id": "P08",
+        "name": "증거조사",
+        "lane": "청문 주재자",
+        "stage": "G3 청문실시",
+        "type": "task",
+        "status": "risk",
+        "progress": 30,
+        "actor": "청문 주재자",
+        "action": "증거조사",
+        "output_documents": [
+          "증거조사 결과"
+        ],
+        "blocker": "감정·문서제출 요구로 증거조사가 지연되고 있다(운영 추정)",
+        "confidence": 0.8,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제33조",
+            "text": "청문 주재자는 직권 또는 당사자 신청에 따라 필요한 증거조사를 할 수 있다."
+          }
+        ]
+      },
+      {
+        "id": "P09",
+        "name": "당사자 의견·증거 제출",
+        "lane": "당사자·이해관계인",
+        "stage": "G3 청문실시",
+        "type": "task",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "당사자",
+        "receiver": "청문 주재자",
+        "action": "의견진술·증거제출",
+        "output_documents": [
+          "의견진술",
+          "증거자료"
+        ],
+        "confidence": 0.78,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제31조",
+            "text": "당사자는 청문에서 의견을 진술하고 증거를 제출할 수 있다."
+          }
+        ]
+      },
+      {
+        "id": "P18",
+        "name": "문서 열람·복사 청구",
+        "lane": "당사자·이해관계인",
+        "stage": "G3 청문실시",
+        "type": "task",
+        "status": "done",
+        "progress": 100,
+        "actor": "당사자등",
+        "action": "조사결과·처분 관련 문서의 열람·복사 요청 (행정청은 법령상 공개 제한 외 거부 불가)",
+        "output_documents": [
+          "열람·복사 요청"
+        ],
+        "deadline": "청문 통지가 있는 날부터 청문이 끝날 때까지",
+        "confidence": 0.9,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제37조(문서의 열람 및 비밀유지)",
+            "text": "당사자등은 청문의 통지가 있는 날부터 청문이 끝날 때까지 해당 사안의 조사결과 문서와 처분 관련 문서의 열람·복사를 요청할 수 있으며, 행정청은 공개 제한 사유 외에는 거부할 수 없다(제1항)."
+          }
+        ]
+      },
+      {
+        "id": "P10",
+        "name": "청문 종결·청문조서 작성",
+        "lane": "청문 주재자",
+        "stage": "G3 청문실시",
+        "type": "task",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "청문 주재자",
+        "action": "조서 작성·종결",
+        "output_documents": [
+          "청문조서"
+        ],
+        "confidence": 0.82,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제34조·제35조",
+            "text": "청문 주재자는 청문 내용을 적은 청문조서를 작성하고 청문을 마친다."
+          }
+        ]
+      },
+      {
+        "id": "P19",
+        "name": "청문조서 열람·정정 요구",
+        "lane": "당사자·이해관계인",
+        "stage": "G3 청문실시",
+        "type": "task",
+        "status": "done",
+        "progress": 100,
+        "actor": "당사자등",
+        "action": "청문조서 내용 열람·확인, 이의가 있으면 정정 요구",
+        "output_documents": [
+          "정정 요구"
+        ],
+        "deadline": null,
+        "confidence": 0.9,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제34조(청문조서)",
+            "text": "당사자등은 청문조서의 내용을 열람·확인할 수 있으며, 이의가 있을 때에는 그 정정을 요구할 수 있다(제2항)."
+          }
+        ]
+      },
+      {
+        "id": "P11",
+        "name": "주재자 의견서 제출",
+        "lane": "청문 주재자",
+        "stage": "G4 결과반영·처분",
+        "type": "task",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "청문 주재자",
+        "receiver": "처분 행정청",
+        "action": "의견서 제출",
+        "output_documents": [
+          "청문 주재자 의견서"
+        ],
+        "confidence": 0.78,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제34조의2",
+            "text": "청문 주재자는 청문조서와 함께 처분에 관한 의견서를 작성하여 행정청에 제출한다."
+          }
+        ]
+      },
+      {
+        "id": "P12",
+        "name": "공청회 개최·진행",
+        "lane": "공청회 참여자·전문가",
+        "stage": "G3 청문실시",
+        "type": "task",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "공청회 참여자·전문가",
+        "action": "공청회 진술",
+        "output_documents": [
+          "공청회 진술 요지"
+        ],
+        "confidence": 0.76,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제38조·제39조",
+            "text": "행정청은 공청회를 개최하여 당사자·전문가·일반의 의견을 널리 수렴한다."
+          }
+        ],
+        "deadline": "개최 14일 전까지 알림(변경 시 7일 전)"
+      },
+      {
+        "id": "P13",
+        "name": "청문결과 반영 판단",
+        "lane": "처분 행정청",
+        "stage": "G4 결과반영·처분",
+        "type": "gateway",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "처분 행정청",
+        "action": "반영 판단",
+        "condition": "청문·의견 결과를 처분에 반영할지 여부(재개 필요성 포함)",
+        "input_documents": [
+          "청문조서",
+          "청문 주재자 의견서"
+        ],
+        "output_documents": [
+          "반영 결과"
+        ],
+        "confidence": 0.8,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제35조의2",
+            "text": "행정청은 처분 시 청문·공청회·의견제출 결과를 충분히 반영하여야 한다."
+          }
+        ]
+      },
+      {
+        "id": "P14",
+        "name": "처분 결정·처분서 통지",
+        "lane": "처분 행정청",
+        "stage": "G4 결과반영·처분",
+        "type": "notice",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "처분 행정청",
+        "receiver": "당사자",
+        "action": "처분·통지",
+        "output_documents": [
+          "처분서(이유·불복방법 기재)"
+        ],
+        "confidence": 0.82,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제23조",
+            "text": "행정청은 처분을 하는 때에 당사자에게 그 근거와 이유를 제시하여야 한다."
+          },
+          {
+            "law": "행정절차법",
+            "article": "제26조(고지)",
+            "text": "행정청이 처분을 할 때에는 당사자에게 행정심판·행정소송 제기 가능 여부, 청구절차 및 청구기간을 알려야 한다."
+          }
+        ]
+      },
+      {
+        "id": "P15",
+        "name": "행정심판·행정소송 불복",
+        "lane": "행정심판위원회·법원",
+        "stage": "G5 불복",
+        "type": "task",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "당사자·법원",
+        "action": "불복 쟁송",
+        "output_documents": [
+          "심판청구서",
+          "소장",
+          "재결·판결"
+        ],
+        "deadline": "처분·재결 안 날부터 90일 이내",
+        "confidence": 0.78,
+        "legal_basis": [
+          {
+            "law": "행정심판법·행정소송법",
+            "article": "심판청구·제소 기간 규정(확인 필요)",
+            "unverified": true,
+            "text": "불복 기간(처분·재결을 안 날부터 90일)은 행정심판법·행정소송법 소관 — 조문 확정 필요."
+          }
+        ]
+      },
+      {
+        "id": "S01",
+        "name": "처분·청문 기록 관리",
+        "lane": "정보시스템",
+        "stage": "G4 결과반영·처분",
+        "type": "system",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "행정정보시스템",
+        "action": "기록 관리",
+        "input_documents": [
+          "처분서",
+          "청문조서"
+        ],
+        "output_documents": [
+          "처분 기록"
+        ],
+        "confidence": 0.7,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제24조",
+            "text": "행정청은 처분을 문서(전자문서 포함)로 하고 그 기록을 관리한다."
+          }
+        ]
+      },
+      {
+        "id": "P16",
+        "name": "청문 재개 준비",
+        "lane": "청문 주재자",
+        "stage": "G3 청문실시",
+        "type": "task",
+        "status": "loop",
+        "progress": 0,
+        "actor": "청문 주재자",
+        "action": "청문 재개",
+        "output_documents": [
+          "청문 재개 통지"
+        ],
+        "blocker": "새로운 사정 발견 시 청문 재개 회귀 단계",
+        "confidence": 0.78,
+        "legal_basis": [
+          {
+            "law": "행정절차법",
+            "article": "제36조",
+            "text": "행정청은 청문을 마친 후 처분 전에 새로운 사정이 발견되면 청문을 재개할 수 있다."
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "E01",
+        "source": "P01",
+        "target": "P17",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E01b",
+        "source": "P17",
+        "target": "P02",
+        "type": "sequence",
+        "label": "통지 진행"
+      },
+      {
+        "id": "E02",
+        "source": "P02",
+        "target": "P03",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E03",
+        "source": "P03",
+        "target": "P05",
+        "type": "sequence",
+        "label": "청문 실시"
+      },
+      {
+        "id": "E04",
+        "source": "P05",
+        "target": "P06",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E05",
+        "source": "P06",
+        "target": "P07",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E06",
+        "source": "P07",
+        "target": "P09",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E07",
+        "source": "P09",
+        "target": "P08",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E08",
+        "source": "P08",
+        "target": "P10",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E09",
+        "source": "P10",
+        "target": "P11",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E10",
+        "source": "P11",
+        "target": "P13",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E11",
+        "source": "P13",
+        "target": "P14",
+        "type": "sequence",
+        "label": "청문결과 반영"
+      },
+      {
+        "id": "E12",
+        "source": "P14",
+        "target": "P15",
+        "type": "sequence",
+        "label": "불복"
+      },
+      {
+        "id": "M01",
+        "source": "P02",
+        "target": "P04",
+        "type": "message",
+        "label": "의견제출 안내"
+      },
+      {
+        "id": "M02",
+        "source": "P03",
+        "target": "P12",
+        "type": "message",
+        "label": "공청회 개최"
+      },
+      {
+        "id": "M03",
+        "source": "P14",
+        "target": "S01",
+        "type": "message",
+        "label": "처분 기록 등록"
+      },
+      {
+        "id": "M04",
+        "source": "P12",
+        "target": "P13",
+        "type": "message",
+        "label": "공청회 결과 반영"
+      },
+      {
+        "id": "L01",
+        "source": "P13",
+        "target": "P16",
+        "type": "loop",
+        "label": "청문 재개 필요"
+      },
+      {
+        "id": "L02",
+        "source": "P16",
+        "target": "P07",
+        "type": "loop",
+        "label": "청문 재개 실시"
+      },
+      {
+        "id": "M90",
+        "source": "P06",
+        "target": "P18",
+        "type": "message",
+        "label": "통지 후 열람권 개시"
+      },
+      {
+        "id": "M91",
+        "source": "P10",
+        "target": "P19",
+        "type": "message",
+        "label": "조서 열람·정정 기회"
+      }
+    ],
+    "warnings": [
+      "2026-07-12 L2 블라인드 재구성 대조 정정: ① P15 불복 근거 오인용(행절법 §19·§20은 처리기간·처분기준) 제거, 행정심판법·행정소송법 조문은 확정 대기(unverified) ② P14에 불복 고지(§26) 추가 ③ 당사자 권리 2단계 신설 — 문서 열람·복사(§37①, P18)·청문조서 열람·정정(§34②, P19) ④ 주재자 자료통지 7일(§28③)·공청회 14일 알림(§38)·의견 미반영 이유설명 90일(§27조의2) 보강. §26·§34·§37은 DRF 원문 대조, §27조의2·§28③·§38은 L2 재구성(MST 239291) 검증분."
     ]
-   },
-   {
-    "id": "P17",
-    "name": "사전통지·의견청취 생략 판단",
-    "lane": "처분 행정청",
-    "stage": "G0 처분예정·사전통지",
-    "type": "gateway",
-    "status": "done",
-    "progress": 100,
-    "actor": "처분 행정청",
-    "condition": "긴급·객관적 증명·의견청취 현저 곤란 등 생략 사유 해당 여부",
-    "output_documents": [
-     "생략 여부 결정"
+  },
+  "verification": {
+    "status": "needs-review",
+    "verifiedAt": "2026-07-10",
+    "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+    "scope": "법적 근거 4건 중 공식 원문 3건을 연결했다. 캔버스와 절차 노드의 명시 조문 45건 가운데 45건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+    "sources": [
+      {
+        "law": "행정절차법",
+        "kind": "법률",
+        "sourceType": "statute",
+        "officialName": "행정절차법",
+        "lawId": "001362",
+        "mst": "239291",
+        "promulgatedOn": "2022-01-11",
+        "effectiveOn": "2023-03-24",
+        "officialUrl": "https://law.go.kr/법령/행정절차법"
+      },
+      {
+        "law": "행정절차법 시행령",
+        "kind": "대통령령",
+        "sourceType": "statute",
+        "officialName": "행정절차법 시행령",
+        "lawId": "005625",
+        "mst": "253247",
+        "promulgatedOn": "2023-08-01",
+        "effectiveOn": "2023-08-01",
+        "officialUrl": "https://law.go.kr/법령/행정절차법시행령"
+      },
+      {
+        "law": "행정소송법",
+        "kind": "법률",
+        "sourceType": "statute",
+        "officialName": "행정소송법",
+        "lawId": "001218",
+        "mst": "285913",
+        "promulgatedOn": "2026-05-12",
+        "effectiveOn": "2026-05-12",
+        "officialUrl": "https://law.go.kr/법령/행정소송법"
+      }
     ],
-    "deadline": "사전통지 전",
-    "confidence": 0.76,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제21조",
-      "text": "제21조제4항에 따라 긴급 처분, 자격상실의 객관적 증명, 의견청취가 현저히 곤란한 경우 등에는 사전통지·의견청취를 하지 아니할 수 있다."
-     },
-     {
-      "law": "행정절차법 시행령",
-      "article": "제13조",
-      "text": "사전통지를 생략할 수 있는 구체적 사유(긴급, 객관적 증명, 현저한 곤란, 기술기준 미달 입증, 금전급부 요건 명백 등)를 정한다."
-     }
-    ]
-   },
-   {
-    "id": "P02",
-    "name": "처분 사전통지",
-    "lane": "처분 행정청",
-    "stage": "G0 처분예정·사전통지",
-    "type": "notice",
-    "status": "done",
-    "progress": 100,
-    "actor": "처분 행정청",
-    "receiver": "당사자",
-    "action": "사전통지",
-    "output_documents": [
-     "사전통지서"
+    "unresolved": [
+      {
+        "law": "개별 처분 근거 법령",
+        "kind": "법률",
+        "reasonCode": "institution-scope",
+        "reason": "적용 기관·업종·처분을 지정해야 단일 원문을 확정할 수 있음",
+        "nextStep": "구체적인 기관, 업종 또는 처분 유형을 선택해 해당 법령을 연결해야 한다."
+      }
     ],
-    "deadline": "청문은 청문 시작 10일 전까지",
-    "confidence": 0.85,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제21조",
-      "text": "행정청은 처분의 제목·내용·사유와 의견제출 방법 등을 당사자에게 미리 통지하여야 한다."
-     }
-    ]
-   },
-   {
-    "id": "P03",
-    "name": "의견청취 방식 결정",
-    "lane": "처분 행정청",
-    "stage": "G1 의견청취 방식결정",
-    "type": "gateway",
-    "status": "done",
-    "progress": 100,
-    "actor": "처분 행정청",
-    "action": "방식 결정",
-    "condition": "청문·공청회·의견제출 중 선택(개별법 청문 의무 여부 포함)",
-    "output_documents": [
-     "의견청취 방식 결정"
-    ],
-    "confidence": 0.85,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제22조",
-      "text": "행정청은 청문·공청회·의견제출 중 해당하는 절차로 의견을 청취한다."
-     }
-    ]
-   },
-   {
-    "id": "P04",
-    "name": "의견제출",
-    "lane": "당사자·이해관계인",
-    "stage": "G1 의견청취 방식결정",
-    "type": "task",
-    "status": "done",
-    "progress": 100,
-    "actor": "당사자",
-    "receiver": "처분 행정청",
-    "action": "의견제출",
-    "output_documents": [
-     "의견제출서"
-    ],
-    "deadline": "의견제출기한(10일 이상)(법 제21조제3항)",
-    "confidence": 0.83,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제27조",
-      "text": "당사자등은 처분 전에 관할 행정청에 서면·말·정보통신망으로 의견을 제출할 수 있다."
-     },
-     {
-      "law": "행정절차법",
-      "article": "제21조",
-      "text": "의견제출기한은 의견제출에 필요한 기간을 10일 이상으로 고려하여 정한다(제21조제3항)."
-     }
-    ]
-   },
-   {
-    "id": "P05",
-    "name": "청문 주재자 선정",
-    "lane": "처분 행정청",
-    "stage": "G2 청문준비",
-    "type": "task",
-    "status": "done",
-    "progress": 100,
-    "actor": "처분 행정청",
-    "action": "주재자 선정",
-    "output_documents": [
-     "청문 주재자 지정"
-    ],
-    "confidence": 0.83,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제28조",
-      "text": "행정청은 소속 직원 또는 대통령령으로 정하는 자격을 가진 사람 중에서 청문 주재자를 공정하게 선정한다."
-     },
-     {
-      "law": "행정절차법 시행령",
-      "article": "제15조",
-      "text": "대통령령으로 정하는 자격을 가진 자는 교수·변호사·공인회계사 등 관련 분야 전문직 종사자, 관련 분야 전직 공무원, 관련 분야 전문지식이 있는 자를 말한다."
-     }
-    ]
-   },
-   {
-    "id": "P06",
-    "name": "청문 통지·기일 지정",
-    "lane": "처분 행정청",
-    "stage": "G2 청문준비",
-    "type": "notice",
-    "status": "done",
-    "progress": 100,
-    "actor": "처분 행정청",
-    "receiver": "당사자",
-    "action": "청문 통지",
-    "output_documents": [
-     "청문 통지서"
-    ],
-    "deadline": "청문 시작 10일 전까지",
-    "confidence": 0.78,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제21조",
-      "text": "청문을 하려는 경우 청문 시작 10일 전까지 당사자에게 통지하여야 한다."
-     }
-    ]
-   },
-   {
-    "id": "P07",
-    "name": "청문 실시·진행",
-    "lane": "청문 주재자",
-    "stage": "G3 청문실시",
-    "type": "task",
-    "status": "current",
-    "progress": 50,
-    "actor": "청문 주재자",
-    "action": "청문 진행",
-    "input_documents": [
-     "청문 통지서"
-    ],
-    "output_documents": [
-     "진행 기록"
-    ],
-    "deadline": "지정 기일",
-    "blocker": "당사자 증거·주장 정리로 청문이 진행 중이다",
-    "confidence": 0.82,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제31조",
-      "text": "청문 주재자는 청문을 공정하게 진행하며 당사자에게 의견 진술 기회를 준다."
-     }
-    ]
-   },
-   {
-    "id": "P08",
-    "name": "증거조사",
-    "lane": "청문 주재자",
-    "stage": "G3 청문실시",
-    "type": "task",
-    "status": "risk",
-    "progress": 30,
-    "actor": "청문 주재자",
-    "action": "증거조사",
-    "output_documents": [
-     "증거조사 결과"
-    ],
-    "blocker": "감정·문서제출 요구로 증거조사가 지연되고 있다(운영 추정)",
-    "confidence": 0.8,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제33조",
-      "text": "청문 주재자는 직권 또는 당사자 신청에 따라 필요한 증거조사를 할 수 있다."
-     }
-    ]
-   },
-   {
-    "id": "P09",
-    "name": "당사자 의견·증거 제출",
-    "lane": "당사자·이해관계인",
-    "stage": "G3 청문실시",
-    "type": "task",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "당사자",
-    "receiver": "청문 주재자",
-    "action": "의견진술·증거제출",
-    "output_documents": [
-     "의견진술",
-     "증거자료"
-    ],
-    "confidence": 0.78,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제31조",
-      "text": "당사자는 청문에서 의견을 진술하고 증거를 제출할 수 있다."
-     }
-    ]
-   },
-   {
-    "id": "P10",
-    "name": "청문 종결·청문조서 작성",
-    "lane": "청문 주재자",
-    "stage": "G3 청문실시",
-    "type": "task",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "청문 주재자",
-    "action": "조서 작성·종결",
-    "output_documents": [
-     "청문조서"
-    ],
-    "confidence": 0.82,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제34조·제35조",
-      "text": "청문 주재자는 청문 내용을 적은 청문조서를 작성하고 청문을 마친다."
-     }
-    ]
-   },
-   {
-    "id": "P11",
-    "name": "주재자 의견서 제출",
-    "lane": "청문 주재자",
-    "stage": "G4 결과반영·처분",
-    "type": "task",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "청문 주재자",
-    "receiver": "처분 행정청",
-    "action": "의견서 제출",
-    "output_documents": [
-     "청문 주재자 의견서"
-    ],
-    "confidence": 0.78,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제34조의2",
-      "text": "청문 주재자는 청문조서와 함께 처분에 관한 의견서를 작성하여 행정청에 제출한다."
-     }
-    ]
-   },
-   {
-    "id": "P12",
-    "name": "공청회 개최·진행",
-    "lane": "공청회 참여자·전문가",
-    "stage": "G3 청문실시",
-    "type": "task",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "공청회 참여자·전문가",
-    "action": "공청회 진술",
-    "output_documents": [
-     "공청회 진술 요지"
-    ],
-    "confidence": 0.76,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제38조·제39조",
-      "text": "행정청은 공청회를 개최하여 당사자·전문가·일반의 의견을 널리 수렴한다."
-     }
-    ]
-   },
-   {
-    "id": "P13",
-    "name": "청문결과 반영 판단",
-    "lane": "처분 행정청",
-    "stage": "G4 결과반영·처분",
-    "type": "gateway",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "처분 행정청",
-    "action": "반영 판단",
-    "condition": "청문·의견 결과를 처분에 반영할지 여부(재개 필요성 포함)",
-    "input_documents": [
-     "청문조서",
-     "청문 주재자 의견서"
-    ],
-    "output_documents": [
-     "반영 결과"
-    ],
-    "confidence": 0.8,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제35조의2",
-      "text": "행정청은 처분 시 청문·공청회·의견제출 결과를 충분히 반영하여야 한다."
-     }
-    ]
-   },
-   {
-    "id": "P14",
-    "name": "처분 결정·처분서 통지",
-    "lane": "처분 행정청",
-    "stage": "G4 결과반영·처분",
-    "type": "notice",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "처분 행정청",
-    "receiver": "당사자",
-    "action": "처분·통지",
-    "output_documents": [
-     "처분서(이유·불복방법 기재)"
-    ],
-    "confidence": 0.82,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제23조",
-      "text": "행정청은 처분을 하는 때에 당사자에게 그 근거와 이유를 제시하여야 한다."
-     }
-    ]
-   },
-   {
-    "id": "P15",
-    "name": "행정심판·행정소송 불복",
-    "lane": "행정심판위원회·법원",
-    "stage": "G5 불복",
-    "type": "task",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "당사자·법원",
-    "action": "불복 쟁송",
-    "output_documents": [
-     "심판청구서",
-     "소장",
-     "재결·판결"
-    ],
-    "deadline": "처분·재결 안 날부터 90일 이내",
-    "confidence": 0.78,
-    "legal_basis": [
-     {
-      "law": "행정소송법",
-      "article": "제19조·제20조",
-      "text": "절차 하자 등 위법한 처분에 불복하는 자는 취소소송 등 행정쟁송을 제기할 수 있다."
-     }
-    ]
-   },
-   {
-    "id": "S01",
-    "name": "처분·청문 기록 관리",
-    "lane": "정보시스템",
-    "stage": "G4 결과반영·처분",
-    "type": "system",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "행정정보시스템",
-    "action": "기록 관리",
-    "input_documents": [
-     "처분서",
-     "청문조서"
-    ],
-    "output_documents": [
-     "처분 기록"
-    ],
-    "confidence": 0.7,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제24조",
-      "text": "행정청은 처분을 문서(전자문서 포함)로 하고 그 기록을 관리한다."
-     }
-    ]
-   },
-   {
-    "id": "P16",
-    "name": "청문 재개 준비",
-    "lane": "청문 주재자",
-    "stage": "G3 청문실시",
-    "type": "task",
-    "status": "loop",
-    "progress": 0,
-    "actor": "청문 주재자",
-    "action": "청문 재개",
-    "output_documents": [
-     "청문 재개 통지"
-    ],
-    "blocker": "새로운 사정 발견 시 청문 재개 회귀 단계",
-    "confidence": 0.78,
-    "legal_basis": [
-     {
-      "law": "행정절차법",
-      "article": "제36조",
-      "text": "행정청은 청문을 마친 후 처분 전에 새로운 사정이 발견되면 청문을 재개할 수 있다."
-     }
-    ]
-   }
-  ],
-  "edges": [
-   {
-    "id": "E01",
-    "source": "P01",
-    "target": "P17",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E01b",
-    "source": "P17",
-    "target": "P02",
-    "type": "sequence",
-    "label": "통지 진행"
-   },
-   {
-    "id": "E02",
-    "source": "P02",
-    "target": "P03",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E03",
-    "source": "P03",
-    "target": "P05",
-    "type": "sequence",
-    "label": "청문 실시"
-   },
-   {
-    "id": "E04",
-    "source": "P05",
-    "target": "P06",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E05",
-    "source": "P06",
-    "target": "P07",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E06",
-    "source": "P07",
-    "target": "P09",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E07",
-    "source": "P09",
-    "target": "P08",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E08",
-    "source": "P08",
-    "target": "P10",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E09",
-    "source": "P10",
-    "target": "P11",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E10",
-    "source": "P11",
-    "target": "P13",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E11",
-    "source": "P13",
-    "target": "P14",
-    "type": "sequence",
-    "label": "청문결과 반영"
-   },
-   {
-    "id": "E12",
-    "source": "P14",
-    "target": "P15",
-    "type": "sequence",
-    "label": "불복"
-   },
-   {
-    "id": "M01",
-    "source": "P02",
-    "target": "P04",
-    "type": "message",
-    "label": "의견제출 안내"
-   },
-   {
-    "id": "M02",
-    "source": "P03",
-    "target": "P12",
-    "type": "message",
-    "label": "공청회 개최"
-   },
-   {
-    "id": "M03",
-    "source": "P14",
-    "target": "S01",
-    "type": "message",
-    "label": "처분 기록 등록"
-   },
-   {
-    "id": "M04",
-    "source": "P12",
-    "target": "P13",
-    "type": "message",
-    "label": "공청회 결과 반영"
-   },
-   {
-    "id": "L01",
-    "source": "P13",
-    "target": "P16",
-    "type": "loop",
-    "label": "청문 재개 필요"
-   },
-   {
-    "id": "L02",
-    "source": "P16",
-    "target": "P07",
-    "type": "loop",
-    "label": "청문 재개 실시"
-   }
-  ],
-  "warnings": []
- },
- "verification": {
-  "status": "needs-review",
-  "verifiedAt": "2026-07-10",
-  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
-  "scope": "법적 근거 4건 중 공식 원문 3건을 연결했다. 캔버스와 절차 노드의 명시 조문 45건 가운데 45건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
-  "sources": [
-   {
-    "law": "행정절차법",
-    "kind": "법률",
-    "sourceType": "statute",
-    "officialName": "행정절차법",
-    "lawId": "001362",
-    "mst": "239291",
-    "promulgatedOn": "2022-01-11",
-    "effectiveOn": "2023-03-24",
-    "officialUrl": "https://law.go.kr/법령/행정절차법"
-   },
-   {
-    "law": "행정절차법 시행령",
-    "kind": "대통령령",
-    "sourceType": "statute",
-    "officialName": "행정절차법 시행령",
-    "lawId": "005625",
-    "mst": "253247",
-    "promulgatedOn": "2023-08-01",
-    "effectiveOn": "2023-08-01",
-    "officialUrl": "https://law.go.kr/법령/행정절차법시행령"
-   },
-   {
-    "law": "행정소송법",
-    "kind": "법률",
-    "sourceType": "statute",
-    "officialName": "행정소송법",
-    "lawId": "001218",
-    "mst": "285913",
-    "promulgatedOn": "2026-05-12",
-    "effectiveOn": "2026-05-12",
-    "officialUrl": "https://law.go.kr/법령/행정소송법"
-   }
-  ],
-  "unresolved": [
-   {
-    "law": "개별 처분 근거 법령",
-    "kind": "법률",
-    "reasonCode": "institution-scope",
-    "reason": "적용 기관·업종·처분을 지정해야 단일 원문을 확정할 수 있음",
-    "nextStep": "구체적인 기관, 업종 또는 처분 유형을 선택해 해당 법령을 연결해야 한다."
-   }
-  ],
-  "articleVerification": {
-   "checkedAt": "2026-07-10",
-   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
-   "citationEntries": 25,
-   "explicitCitationEntries": 24,
-   "articleReferences": 45,
-   "verifiedReferences": 45,
-   "missingReferences": 0,
-   "uncheckableReferences": 0
+    "articleVerification": {
+      "checkedAt": "2026-07-10",
+      "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+      "citationEntries": 25,
+      "explicitCitationEntries": 24,
+      "articleReferences": 45,
+      "verifiedReferences": 45,
+      "missingReferences": 0,
+      "uncheckableReferences": 0
+    }
   }
- }
 }
