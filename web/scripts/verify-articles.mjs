@@ -9,6 +9,7 @@ import {
   parseArticleReferences,
 } from "./lib/article-citations.mjs";
 import { fetchAdminRuleArticleHeaders } from "./lib/admin-rule-service.mjs";
+import { fetchLawArticleHeaders } from "./lib/law-service.mjs";
 
 const execFileAsync = promisify(execFile);
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
@@ -132,25 +133,37 @@ async function verifyGroup(group) {
   const sourceType = group.source.sourceType ?? "statute";
 
   if (sourceType === "statute") {
-    for (const batch of chunks(requested, ARTICLE_BATCH_SIZE)) {
-      const result = await runCli([
-        "get_batch_articles",
-        "--mst",
-        group.source.mst,
-        "--articles",
-        JSON.stringify(batch),
-      ]);
-      const found = parseArticleHeaders(result.output);
-      for (const article of batch) {
-        statuses.set(
-          article,
-          lookupFailed(result) && found.size === 0
-            ? { status: "uncheckable", reason: "법령 조문 API 조회 실패" }
-            : found.has(article)
-              ? { status: "verified" }
-              : { status: "missing", reason: "현행 원문에서 조문 번호를 찾지 못함" },
-        );
+    let found;
+    let lookupError = null;
+    try {
+      found = await fetchLawArticleHeaders(group.source.mst, {
+        oc: process.env.LAW_OC,
+        signal: AbortSignal.timeout(60_000),
+      });
+    } catch (error) {
+      lookupError = error;
+      found = new Set();
+      for (const batch of chunks(requested, ARTICLE_BATCH_SIZE)) {
+        const result = await runCli([
+          "get_batch_articles",
+          "--mst",
+          group.source.mst,
+          "--articles",
+          JSON.stringify(batch),
+        ]);
+        for (const article of parseArticleHeaders(result.output)) found.add(article);
+        if (!lookupFailed(result) && found.size > 0) lookupError = null;
       }
+    }
+    for (const article of requested) {
+      statuses.set(
+        article,
+        lookupError && found.size === 0
+          ? { status: "uncheckable", reason: "법령 조문 API 조회 실패" }
+          : found.has(article)
+            ? { status: "verified" }
+            : { status: "missing", reason: "현행 원문에서 조문 번호를 찾지 못함" },
+      );
     }
     return statuses;
   }
