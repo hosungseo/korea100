@@ -23,6 +23,7 @@ const LEGAL_KINDS = new Set([
   "감사원규칙",
   "행정규칙",
   "고시·지침",
+  "조약",
   "조례",
   "조례·규칙",
 ]);
@@ -264,6 +265,8 @@ for (const { file, data: institution } of institutions) {
   if (currentCount !== 1) fail(scope, `current 노드는 정확히 1개여야 하지만 ${currentCount}개입니다`);
 
   const edgeIds = new Set();
+  const adjacentNodes = new Map((process.nodes ?? []).map((node) => [node.id, new Set()]));
+  const outgoingEdges = new Map((process.nodes ?? []).map((node) => [node.id, []]));
   for (const edge of process.edges ?? []) {
     const edgeScope = `${scope}#${edge.id ?? "unknown"}`;
     if (!edge.id) fail(edgeScope, "id가 없습니다");
@@ -272,6 +275,38 @@ for (const { file, data: institution } of institutions) {
     if (!nodeIds.has(edge.source)) fail(edgeScope, `source 노드가 없습니다 (${edge.source})`);
     if (!nodeIds.has(edge.target)) fail(edgeScope, `target 노드가 없습니다 (${edge.target})`);
     if (!EDGE_TYPES.has(edge.type)) fail(edgeScope, `지원하지 않는 type입니다 (${edge.type})`);
+    adjacentNodes.get(edge.source)?.add(edge.target);
+    adjacentNodes.get(edge.target)?.add(edge.source);
+    outgoingEdges.get(edge.source)?.push(edge);
+  }
+
+  for (const node of process.nodes ?? []) {
+    if (!/(이의신청|재?심사청구)$/u.test(node.name ?? "")) continue;
+    if ((outgoingEdges.get(node.id) ?? []).some((edge) => edge.type === "loop")) {
+      fail(
+        `${scope}#${node.id}`,
+        "불복 신청 노드는 심사·결정 전에 원처분으로 직접 회귀할 수 없습니다",
+      );
+    }
+  }
+
+  if (nodeIds.size > 0) {
+    const firstNode = [...nodeIds][0];
+    const visited = new Set([firstNode]);
+    const queue = [firstNode];
+    for (let cursor = 0; cursor < queue.length; cursor += 1) {
+      const nodeId = queue[cursor];
+      for (const neighbor of adjacentNodes.get(nodeId) ?? []) {
+        if (!visited.has(neighbor)) {
+          visited.add(neighbor);
+          queue.push(neighbor);
+        }
+      }
+    }
+    if (visited.size !== nodeIds.size) {
+      const disconnected = [...nodeIds].filter((nodeId) => !visited.has(nodeId));
+      fail(scope, `업무구조도에 고립된 노드가 있습니다 (${disconnected.join(", ")})`);
+    }
   }
 }
 

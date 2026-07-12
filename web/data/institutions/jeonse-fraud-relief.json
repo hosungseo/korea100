@@ -359,34 +359,67 @@
    },
    {
     "id": "P09",
-    "name": "이의신청·재심의",
+    "name": "이의신청",
     "lane": "임차인(피해자)",
     "stage": "G3 통지·이의",
     "type": "task",
     "status": "loop",
     "progress": 0,
-    "actor": "임차인·위원회",
-    "action": "이의신청",
+    "actor": "임차인",
+    "receiver": "국토교통부장관",
+    "action": "이의신청 제출",
     "input_documents": [
      "결정 통지서"
     ],
     "output_documents": [
-     "이의신청서",
-     "재심의 결과"
+     "이의신청서"
     ],
     "deadline": "통지받은 날부터 30일 이내 신청, 20일 이내 결정",
-    "blocker": "부결 사례의 재심의 회귀 구간",
-    "confidence": 0.72,
+    "blocker": "부결 결정 불복 단계",
+    "confidence": 0.82,
     "legal_basis": [
      {
       "law": "전세사기피해자 지원 및 주거안정에 관한 특별법",
       "article": "제15조",
-      "text": "결정을 송달받은 날부터 30일 이내 국토교통부장관에게 이의신청할 수 있고, 국토교통부장관은 20일 이내에 위원회 재심의를 거쳐 결정한다(그 밖의 사항은 행정기본법 제36조에 따름)."
+      "text": "결정을 송달받은 날부터 30일 이내 국토교통부장관에게 이의신청할 수 있다."
      },
      {
       "law": "전세사기피해자 지원 및 주거안정에 관한 특별법 시행규칙",
       "article": "제6조",
-      "text": "결정에 이의를 신청하려는 신청인은 별지 제7호서식의 결정 이의신청서를 국토교통부장관에게 제출하며, 이의신청 결정문 작성·송달은 제5조를 준용한다."
+      "text": "결정에 이의를 신청하려는 신청인은 별지 제7호서식의 결정 이의신청서를 국토교통부장관에게 제출한다."
+     }
+    ]
+   },
+   {
+    "id": "P17",
+    "name": "위원회 재심의·이의신청 결정",
+    "lane": "국토교통부·피해지원위원회",
+    "stage": "G3 통지·이의",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국토교통부장관·전세사기피해지원위원회",
+    "action": "재심의·이의신청 결정",
+    "condition": "이의 이유 유무",
+    "input_documents": [
+     "이의신청서",
+     "기존 결정 기록"
+    ],
+    "output_documents": [
+     "이의신청 결정문"
+    ],
+    "deadline": "이의신청을 받은 날부터 20일 이내",
+    "confidence": 0.86,
+    "legal_basis": [
+     {
+      "law": "전세사기피해자 지원 및 주거안정에 관한 특별법",
+      "article": "제15조",
+      "text": "국토교통부장관은 이의신청을 받은 날부터 20일 이내에 위원회의 재심의를 거쳐 결정해야 한다."
+     },
+     {
+      "law": "전세사기피해자 지원 및 주거안정에 관한 특별법 시행규칙",
+      "article": "제6조",
+      "text": "이의신청 결정문 작성·송달에는 결정문 작성·송달 규정을 준용한다."
      }
     ]
    },
@@ -741,11 +774,18 @@
     "label": "부결 시 이의신청"
    },
    {
-    "id": "L01",
+    "id": "E15",
     "source": "P09",
+    "target": "P17",
+    "type": "sequence",
+    "label": "이의신청 심사·재심의"
+   },
+   {
+    "id": "L01",
+    "source": "P17",
     "target": "P06",
     "type": "loop",
-    "label": "이의신청 재심의"
+    "label": "이의 인용 시 재심의"
    },
    {
     "id": "L02",
@@ -765,9 +805,9 @@
  },
  "verification": {
   "status": "article-verified",
-  "verifiedAt": "2026-07-10",
+  "verifiedAt": "2026-07-11",
   "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
-  "scope": "법적 근거 5건 중 공식 원문 5건을 연결했다. 캔버스와 절차 노드의 명시 조문 46건 가운데 46건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "scope": "법적 근거 5건 중 공식 원문 5건을 연결했다. 캔버스와 절차 노드의 명시 조문 48건 가운데 48건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "sources": [
    {
     "law": "전세사기피해자 지원 및 주거안정에 관한 특별법",
@@ -826,12 +866,12 @@
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-10",
+   "checkedAt": "2026-07-11",
    "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
-   "citationEntries": 30,
-   "explicitCitationEntries": 26,
-   "articleReferences": 46,
-   "verifiedReferences": 46,
+   "citationEntries": 32,
+   "explicitCitationEntries": 28,
+   "articleReferences": 48,
+   "verifiedReferences": 48,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }

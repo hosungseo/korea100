@@ -346,22 +346,20 @@
    },
    {
     "id": "P09",
-    "name": "의결: 시정명령·과징금·고발",
+    "name": "의결: 시정조치·과징금·고발 여부",
     "lane": "위원회(전원회의·소회의)",
     "stage": "G4 의결·처분",
     "type": "gateway",
     "status": "waiting",
     "progress": 0,
     "actor": "위원회",
-    "action": "의결",
+    "action": "사건 유형과 위반 정도에 맞는 시정조치·과징금·고발 또는 무혐의 의결",
     "condition": "시정명령·과징금·고발·무혐의 결정",
     "input_documents": [
      "심의조서"
     ],
     "output_documents": [
-     "의결서",
-     "시정명령",
-     "과징금 산정내역"
+     "의결서"
     ],
     "deadline": "심의 종결 후",
     "confidence": 0.83,
@@ -369,7 +367,7 @@
      {
       "law": "공정거래법",
       "article": "제7조·제8조·제42조·제43조·제49조·제50조",
-      "text": "위원회는 위반행위에 대해 시정조치를 명하고 과징금을 부과할 수 있다."
+      "text": "시장지배적지위 남용·부당공동행위·불공정거래 등 각 위반유형에 따라 시정조치와 과징금을 부과할 수 있다."
      },
      {
       "law": "공정거래법",
@@ -385,7 +383,7 @@
    },
    {
     "id": "P10",
-    "name": "처분 통지·과징금 납부고지",
+    "name": "처분·과징금 부과 통지",
     "lane": "공정위 사무처(심사관)",
     "stage": "G4 의결·처분",
     "type": "notice",
@@ -393,48 +391,48 @@
     "progress": 0,
     "actor": "공정위 사무처",
     "receiver": "피심인(사업자)",
-    "action": "처분 통지",
+    "action": "의결서와 시정조치·과징금 부과 처분을 송달",
     "input_documents": [
      "의결서"
     ],
     "output_documents": [
      "의결서 정본",
-     "과징금 납부고지서"
+     "과징금 부과 통지"
     ],
     "deadline": "의결 후 지체 없이",
     "confidence": 0.84,
     "legal_basis": [
      {
       "law": "공정거래법",
-      "article": "제103조",
-      "text": "공정위는 과징금 납부의무자에게 납부기한을 정해 납부를 명한다."
+      "article": "제98조, 제102조",
+      "text": "처분 문서는 행정절차법상 송달 규정을 준용하고, 과징금은 위반행위의 내용·정도·기간 등을 고려해 부과한다."
      }
     ]
    },
    {
     "id": "P11",
-    "name": "시정명령 이행 점검",
+    "name": "처분 이행·과징금 납부 관리",
     "lane": "공정위 사무처(심사관)",
     "stage": "G5 이행·불복",
     "type": "task",
     "status": "waiting",
     "progress": 0,
     "actor": "공정위 사무처·피심인",
-    "action": "이행 점검",
+    "action": "시정조치 이행과 과징금 납부 상태를 확인",
     "input_documents": [
      "시정명령"
     ],
     "output_documents": [
      "이행결과 보고",
-     "이행강제금 부과(미이행 시)"
+     "과징금 납부 확인"
     ],
     "deadline": "시정명령상 이행기한",
     "confidence": 0.8,
     "legal_basis": [
      {
       "law": "공정거래법",
-      "article": "제16조",
-      "text": "공정위는 시정조치 불이행 시 이행강제금을 부과하는 등 이행을 확보한다."
+      "article": "제101조",
+      "text": "이 법 위반 사건의 처리절차에 필요한 사항은 공정거래위원회가 정해 고시한다. 일반 시정조치에 제16조의 기업결합 이행강제금을 적용하는 것으로 표시하지 않는다."
      }
     ]
    },
@@ -647,7 +645,7 @@
     "source": "P10",
     "target": "P11",
     "type": "sequence",
-    "label": null
+    "label": "처분 이행·납부"
    },
    {
     "id": "E10",
@@ -662,6 +660,13 @@
     "target": "P14",
     "type": "sequence",
     "label": "재결 불복"
+   },
+   {
+    "id": "E12",
+    "source": "P10",
+    "target": "P14",
+    "type": "sequence",
+    "label": "직접 취소소송"
    },
    {
     "id": "M01",
@@ -688,22 +693,22 @@
     "id": "M04",
     "source": "P09",
     "target": "P15",
-    "type": "message",
-    "label": "전속고발"
+    "type": "sequence",
+    "label": "고발 의결"
    },
    {
     "id": "L01",
-    "source": "P11",
+    "source": "P10",
     "target": "P12",
     "type": "loop",
-    "label": "이의신청·불복"
+    "label": "처분 불복"
    },
    {
     "id": "L02",
     "source": "P13",
     "target": "P09",
     "type": "loop",
-    "label": "재심의 후 재의결"
+    "label": "인용·변경 시 처분 시정"
    }
   ],
   "warnings": [
@@ -712,9 +717,9 @@
  },
  "verification": {
   "status": "article-verified",
-  "verifiedAt": "2026-07-10",
+  "verifiedAt": "2026-07-11",
   "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
-  "scope": "법적 근거 4건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 41건 가운데 41건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "scope": "법적 근거 4건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 42건 가운데 42건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "sources": [
    {
     "law": "독점규제 및 공정거래에 관한 법률(공정거래법)",
@@ -761,12 +766,12 @@
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-10",
+   "checkedAt": "2026-07-11",
    "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
    "citationEntries": 27,
    "explicitCitationEntries": 23,
-   "articleReferences": 41,
-   "verifiedReferences": 41,
+   "articleReferences": 42,
+   "verifiedReferences": 42,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }

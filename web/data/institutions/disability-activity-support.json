@@ -101,7 +101,8 @@
    "시군구 수급자격심의위원회",
    "활동지원기관",
    "사회서비스 전자바우처 시스템",
-   "보건복지부(기준 고시)"
+   "보건복지부(기준 고시)",
+   "행정심판위원회"
   ],
   "stages": [
    "G0 기준 고시",
@@ -561,14 +562,14 @@
     "output_documents": [
      "이의신청서"
     ],
-    "deadline": "결정 통지받은 날부터 90일 이내",
+    "deadline": "결과 등을 통지받은 날부터 90일 이내(타당한 사유가 있으면 예외)",
     "blocker": "수급자격·등급 결정 불복 회귀 단계",
     "confidence": 0.79,
     "legal_basis": [
      {
       "law": "장애인활동 지원에 관한 법률",
       "article": "제36조",
-      "text": "수급자격·활동지원등급 결정 등에 이의가 있으면 이의신청할 수 있다."
+      "text": "수급자격 인정·활동지원등급·활동지원급여·부당지급급여 징수 처분에 이의가 있으면 결과 등을 통지받은 날부터 90일 이내에 이의신청할 수 있다."
      },
      {
       "law": "장애인활동 지원에 관한 법률 시행규칙",
@@ -586,26 +587,54 @@
     "status": "waiting",
     "progress": 0,
     "actor": "시장·군수·구청장",
-    "action": "이의신청 심사·처분",
-    "condition": "이의신청 인용 여부(인용 시 등급·급여량 시정 회귀)",
+    "action": "이의신청 검토·결정 통지",
+    "condition": "위법·부당 인정 여부와 시정·필요조치 여부",
     "input_documents": [
      "이의신청서"
     ],
     "output_documents": [
-     "이의신청 처리결과 통지"
+     "이의신청 결정 통지"
     ],
-    "deadline": "이의신청 심사 후 통지",
+    "deadline": "접수일부터 60일 이내(부득이한 경우 30일 범위 연장)",
     "confidence": 0.78,
     "legal_basis": [
      {
       "law": "장애인활동 지원에 관한 법률",
       "article": "제36조",
-      "text": "이의신청을 심사하여 결정을 변경하는 조치를 한다."
+      "text": "시장·군수·구청장은 이의신청을 받은 날부터 60일 내 검토하고 처분이 위법·부당하면 시정이나 필요한 조치를 해야 하며, 부득이한 경우 30일 범위에서 연장할 수 있다."
      },
      {
       "law": "장애인활동 지원에 관한 법률 시행규칙",
       "article": "제44조",
-      "text": "이의신청에 대한 검토·결정 및 통지 절차를 정한다."
+      "text": "결정하면 지체 없이 내용과 사유를 신청인과 이해관계인에게 서면으로 알려야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P18",
+    "name": "행정심판 청구",
+    "lane": "행정심판위원회",
+    "stage": "G6 갱신·이의신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신청자·행정심판위원회",
+    "action": "행정심판 청구",
+    "condition": "이의신청과 관계없이 직접 청구하거나, 이의신청 결과 통보 후 청구",
+    "input_documents": [
+     "행정심판 청구서",
+     "처분·이의신청 결정 통지서"
+    ],
+    "output_documents": [
+     "행정심판 재결서"
+    ],
+    "deadline": "이의신청 결과를 통보받은 경우 통보일부터 90일 이내(직접 청구는 행정심판법에 따름)",
+    "confidence": 0.86,
+    "legal_basis": [
+     {
+      "law": "장애인활동 지원에 관한 법률",
+      "article": "제36조제4항",
+      "text": "이의신청과 관계없이 행정심판을 청구할 수 있고, 이의신청 결과를 통보받은 자는 통보일부터 90일 이내에 행정심판을 청구할 수 있다."
      }
     ]
    },
@@ -731,6 +760,13 @@
     "label": null
    },
    {
+    "id": "E14",
+    "source": "P16",
+    "target": "P18",
+    "type": "sequence",
+    "label": "이의신청 결과 후 행정심판"
+   },
+   {
     "id": "M01",
     "source": "P04",
     "target": "P06",
@@ -766,6 +802,13 @@
     "label": "긴급지원 개시"
    },
    {
+    "id": "M06",
+    "source": "P08",
+    "target": "P18",
+    "type": "message",
+    "label": "이의신청 생략·직접 행정심판"
+   },
+   {
     "id": "L01",
     "source": "P14",
     "target": "P05",
@@ -774,19 +817,19 @@
    },
    {
     "id": "L02",
-    "source": "P15",
+    "source": "P16",
     "target": "P06",
     "type": "loop",
-    "label": "이의신청 재심의 회귀"
+    "label": "위법·부당 인정 시 재심의"
    }
   ],
   "warnings": []
  },
  "verification": {
   "status": "article-verified",
-  "verifiedAt": "2026-07-10",
+  "verifiedAt": "2026-07-11",
   "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
-  "scope": "법적 근거 5건 중 공식 원문 5건을 연결했다. 캔버스와 절차 노드의 명시 조문 71건 가운데 71건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "scope": "법적 근거 5건 중 공식 원문 5건을 연결했다. 캔버스와 절차 노드의 명시 조문 72건 가운데 72건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "sources": [
    {
     "law": "장애인활동 지원에 관한 법률",
@@ -844,12 +887,12 @@
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-10",
+   "checkedAt": "2026-07-11",
    "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
-   "citationEntries": 39,
-   "explicitCitationEntries": 38,
-   "articleReferences": 71,
-   "verifiedReferences": 71,
+   "citationEntries": 40,
+   "explicitCitationEntries": 39,
+   "articleReferences": 72,
+   "verifiedReferences": 72,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }

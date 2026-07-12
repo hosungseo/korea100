@@ -90,9 +90,9 @@
  ],
  "verification": {
   "status": "article-verified",
-  "verifiedAt": "2026-07-10",
+  "verifiedAt": "2026-07-11",
   "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
-  "scope": "법적 근거 3건 중 공식 원문 3건을 연결했다. 캔버스와 절차 노드의 명시 조문 48건 가운데 48건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "scope": "법적 근거 3건 중 공식 원문 3건을 연결했다. 캔버스와 절차 노드의 명시 조문 49건 가운데 49건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "sources": [
    {
     "law": "공공기관의 정보공개에 관한 법률",
@@ -129,12 +129,12 @@
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-10",
+   "checkedAt": "2026-07-11",
    "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
-   "citationEntries": 31,
-   "explicitCitationEntries": 31,
-   "articleReferences": 48,
-   "verifiedReferences": 48,
+   "citationEntries": 32,
+   "explicitCitationEntries": 32,
+   "articleReferences": 49,
+   "verifiedReferences": 49,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }
@@ -236,7 +236,7 @@
     "progress": 100,
     "actor": "처리부서",
     "action": "소관 판단",
-    "condition": "정보 보유 여부·다른 기관 소관 여부(소관이면 이송)",
+    "condition": "정보 보유·관리 여부와 다른 공공기관 소관 여부(다른 기관 소관이면 이송)",
     "output_documents": [
      "정보 검색결과",
      "이송 통지(해당 시)"
@@ -304,7 +304,7 @@
      {
       "law": "공공기관의 정보공개에 관한 법률",
       "article": "제12조",
-      "text": "공공기관은 공개 여부 등을 심의하기 위하여 정보공개심의회를 설치·운영한다."
+      "text": "정보공개심의회는 공개 여부 등을 심의하기 위해 설치·운영하며, 개별 청구의 심의 필요성은 기관 절차에 따라 구분한다."
      },
      {
       "law": "공공기관의 정보공개에 관한 법률 시행령",
@@ -549,8 +549,8 @@
     "legal_basis": [
      {
       "law": "공공기관의 정보공개에 관한 법률",
-      "article": "제18조제3항",
-      "text": "이의신청을 받은 기관은 7일 이내에 결정하고 그 결과를 청구인에게 통지한다."
+      "article": "제18조제2항~제4항",
+      "text": "국가기관 등은 원칙적으로 심의회를 개최하고, 7일 이내 결정·통지한다. 각하·기각 때에는 행정심판·행정소송 가능성을 함께 알린다."
      },
      {
       "law": "공공기관의 정보공개에 관한 법률 시행령",
@@ -633,6 +633,34 @@
       "text": "비영리 학술·공익단체, 교수·교사·학생의 연구·교육 목적 등은 수수료를 감면할 수 있으며, 신청 시 소명자료를 첨부하고 공공기관의 장은 감면비율을 정하여 공개한다."
      }
     ]
+   },
+   {
+    "id": "P16",
+    "name": "소관기관 이송·청구인 통지",
+    "lane": "공공기관(처리부서)",
+    "stage": "G1 접수·이송",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "접수 공공기관",
+    "receiver": "소관 공공기관·청구인",
+    "action": "청구 이송·통지",
+    "input_documents": [
+     "정보공개 청구서"
+    ],
+    "output_documents": [
+     "이송 통지서",
+     "이송된 청구서"
+    ],
+    "deadline": "소관이 아닌 경우 지체 없이",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "공공기관의 정보공개에 관한 법률",
+      "article": "제11조제4항",
+      "text": "다른 공공기관이 보유·관리하는 정보이면 소관 공공기관으로 이송하고 청구인에게 통지한다."
+     }
+    ]
    }
   ],
   "edges": [
@@ -655,7 +683,7 @@
     "source": "P03",
     "target": "P04",
     "type": "sequence",
-    "label": "소관 정보"
+    "label": "보유·관리 정보"
    },
    {
     "id": "E04",
@@ -688,9 +716,9 @@
    {
     "id": "E08",
     "source": "P12",
-    "target": "P13",
+    "target": "P10",
     "type": "sequence",
-    "label": "기각 시 행정심판"
+    "label": "인용·공개 결정"
    },
    {
     "id": "E09",
@@ -737,9 +765,9 @@
    {
     "id": "L02",
     "source": "P11",
-    "target": "P04",
-    "type": "loop",
-    "label": "이의신청 재검토 회귀"
+    "target": "P12",
+    "type": "sequence",
+    "label": "이의신청 심의·결정"
    },
    {
     "id": "M05",
@@ -754,6 +782,69 @@
     "target": "P10",
     "type": "message",
     "label": "감면 적용"
+   },
+   {
+    "id": "E10",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": "각하·기각 후 행정심판"
+   },
+   {
+    "id": "E11",
+    "source": "P12",
+    "target": "P14",
+    "type": "sequence",
+    "label": "각하·기각 후 행정소송"
+   },
+   {
+    "id": "E12",
+    "source": "P09",
+    "target": "P13",
+    "type": "sequence",
+    "label": "이의신청 생략·직접 행정심판"
+   },
+   {
+    "id": "E13",
+    "source": "P09",
+    "target": "P14",
+    "type": "sequence",
+    "label": "이의신청 생략·직접 행정소송"
+   },
+   {
+    "id": "E14",
+    "source": "P06",
+    "target": "P13",
+    "type": "sequence",
+    "label": "20일 경과·미결정"
+   },
+   {
+    "id": "E15",
+    "source": "P06",
+    "target": "P14",
+    "type": "sequence",
+    "label": "20일 경과·미결정"
+   },
+   {
+    "id": "E16",
+    "source": "P03",
+    "target": "P16",
+    "type": "sequence",
+    "label": "다른 기관 소관"
+   },
+   {
+    "id": "E17",
+    "source": "P16",
+    "target": "P04",
+    "type": "sequence",
+    "label": "이송기관 결정절차"
+   },
+   {
+    "id": "E18",
+    "source": "P04",
+    "target": "P06",
+    "type": "sequence",
+    "label": "심의 생략·불필요"
    }
   ],
   "warnings": []

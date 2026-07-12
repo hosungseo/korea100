@@ -111,9 +111,9 @@
  ],
  "verification": {
   "status": "article-verified",
-  "verifiedAt": "2026-07-10",
+  "verifiedAt": "2026-07-11",
   "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
-  "scope": "법적 근거 7건 중 공식 원문 7건을 연결했다. 캔버스와 절차 노드의 명시 조문 46건 가운데 46건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "scope": "법적 근거 7건 중 공식 원문 7건을 연결했다. 캔버스와 절차 노드의 명시 조문 53건 가운데 53건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
    "국민건강보험법은 2026-10-08, 2026-11-27 이후 시행예정 개정이 있다.",
    "국민건강보험법 시행규칙은 2026-08-11 시행예정 개정이 있다."
@@ -194,12 +194,12 @@
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-10",
+   "checkedAt": "2026-07-11",
    "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
-   "citationEntries": 30,
-   "explicitCitationEntries": 23,
-   "articleReferences": 46,
-   "verifiedReferences": 46,
+   "citationEntries": 36,
+   "explicitCitationEntries": 29,
+   "articleReferences": 53,
+   "verifiedReferences": 53,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }
@@ -213,7 +213,8 @@
    "국민건강보험공단",
    "요양기관(병의원·약국)",
    "건강보험심사평가원",
-   "보건복지부·건정심"
+   "보건복지부·건정심",
+   "건강보험분쟁조정위원회"
   ],
   "stages": [
    "G0 자격취득·변동",
@@ -223,7 +224,8 @@
    "G4 진료비청구",
    "G5 심사·조정",
    "G6 지급·본인부담상한",
-   "G7 수가·보험료율결정"
+   "G7 수가·보험료율결정",
+   "G8 이의·심판"
   ],
   "nodes": [
    {
@@ -543,28 +545,172 @@
    },
    {
     "id": "P13",
-    "name": "이의신청·재심사",
+    "name": "심사평가원 처분 이의신청",
     "lane": "요양기관(병의원·약국)",
-    "stage": "G5 심사·조정",
+    "stage": "G8 이의·심판",
     "type": "task",
     "status": "loop",
     "progress": 0,
     "actor": "요양기관",
     "receiver": "건강보험심사평가원",
-    "action": "이의신청·재심사 요청",
+    "action": "심사평가원 처분 이의신청",
     "input_documents": [
      "심사결정 통보서"
     ],
     "output_documents": [
      "이의신청서"
     ],
-    "blocker": "심사조정 불복 시 회귀 단계",
-    "confidence": 0.78,
+    "deadline": "처분을 안 날부터 90일 이내, 처분일부터 180일 이내(제48조 확인 처분은 통보일부터 30일 이내)",
+    "blocker": "심사·조정 처분 불복 단계",
+    "confidence": 0.84,
     "legal_basis": [
      {
       "law": "국민건강보험법",
-      "article": "제87조, 제88조",
-      "text": "처분에 이의가 있으면 이의신청·심판청구를 할 수 있다."
+      "article": "제87조제2항부터 제4항",
+      "text": "요양급여비용·적정성 평가 등에 관한 심사평가원 처분에는 공단·요양기관 등이 이의신청할 수 있고, 원칙적으로 90일·180일 기한이 적용된다."
+     }
+    ]
+   },
+   {
+    "id": "P17",
+    "name": "공단 처분 이의신청",
+    "lane": "가입자·피부양자",
+    "stage": "G8 이의·심판",
+    "type": "task",
+    "status": "loop",
+    "progress": 0,
+    "actor": "가입자·피부양자",
+    "receiver": "국민건강보험공단",
+    "action": "공단 처분 이의신청",
+    "input_documents": [
+     "자격·보험료·보험급여 처분 통지서"
+    ],
+    "output_documents": [
+     "이의신청서"
+    ],
+    "deadline": "처분을 안 날부터 90일 이내, 처분일부터 180일 이내(정당한 사유가 있으면 예외)",
+    "blocker": "자격·보험료·보험급여 처분 불복 단계",
+    "confidence": 0.84,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제87조제1항·제3항",
+      "text": "가입자·피부양자의 자격·보험료등·보험급여·보험급여비용에 관한 공단 처분에는 이의신청할 수 있고, 원칙적으로 90일·180일 기한이 적용된다."
+     }
+    ]
+   },
+   {
+    "id": "P18",
+    "name": "심사평가원 이의신청 결정·통지",
+    "lane": "건강보험심사평가원",
+    "stage": "G8 이의·심판",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "건강보험심사평가원",
+    "action": "이의신청 결정·통지",
+    "condition": "심사·조정 처분 시정 여부",
+    "input_documents": [
+     "이의신청서"
+    ],
+    "output_documents": [
+     "이의신청 결정서"
+    ],
+    "deadline": "접수일부터 60일 이내(부득이한 경우 30일 범위 연장)",
+    "confidence": 0.86,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법 시행령",
+      "article": "제57조·제58조",
+      "text": "심사평가원은 이의신청을 받은 날부터 60일 이내에 결정하고, 연장 시 7일 전 통지해야 하며 결정 뒤 지체 없이 신청인과 이해관계인에게 결정서를 송부해야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P19",
+    "name": "공단 이의신청 결정·통지",
+    "lane": "국민건강보험공단",
+    "stage": "G8 이의·심판",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국민건강보험공단",
+    "action": "이의신청 결정·통지",
+    "condition": "공단 처분 시정 여부",
+    "input_documents": [
+     "이의신청서"
+    ],
+    "output_documents": [
+     "이의신청 결정서"
+    ],
+    "deadline": "접수일부터 60일 이내(부득이한 경우 30일 범위 연장)",
+    "confidence": 0.86,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법 시행령",
+      "article": "제57조·제58조",
+      "text": "공단은 이의신청을 받은 날부터 60일 이내에 결정하고, 연장 시 7일 전 통지해야 하며 결정 뒤 지체 없이 신청인과 이해관계인에게 결정서를 송부해야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P20",
+    "name": "건강보험분쟁조정위원회 심판청구",
+    "lane": "건강보험분쟁조정위원회",
+    "stage": "G8 이의·심판",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "이의신청 결정 불복자",
+    "receiver": "건강보험분쟁조정위원회",
+    "action": "심판청구",
+    "input_documents": [
+     "심판청구서",
+     "이의신청 결정서"
+    ],
+    "output_documents": [
+     "심판청구 접수서"
+    ],
+    "deadline": "이의신청 결정에 불복한 날부터 90일 이내, 처분일부터 180일 이내",
+    "confidence": 0.86,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제88조",
+      "text": "이의신청 결정에 불복하는 자는 건강보험분쟁조정위원회에 심판청구할 수 있고, 공단·심사평가원 또는 위원회에 청구서를 제출할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P21",
+    "name": "분쟁조정위원회 심리·결정",
+    "lane": "건강보험분쟁조정위원회",
+    "stage": "G8 이의·심판",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "건강보험분쟁조정위원회",
+    "action": "심리·의결·결정 통지",
+    "condition": "심판청구 인용·기각 여부",
+    "input_documents": [
+     "심판청구서",
+     "이의신청 결정서"
+    ],
+    "output_documents": [
+     "심판 결정서"
+    ],
+    "deadline": "심판청구서 제출일부터 60일 이내(부득이한 경우 30일 범위 연장)",
+    "confidence": 0.86,
+    "legal_basis": [
+     {
+      "law": "국민건강보험법",
+      "article": "제89조",
+      "text": "심판청구를 심리·의결하기 위하여 보건복지부에 건강보험분쟁조정위원회를 둔다."
+     },
+     {
+      "law": "국민건강보험법 시행령",
+      "article": "제61조",
+      "text": "분쟁조정위원회는 심판청구서 제출일부터 60일 이내에 결정해야 하며, 부득이한 경우 30일 범위에서 연장할 수 있다."
      }
     ]
    },
@@ -778,18 +924,67 @@
     "label": "심사결정 통보"
    },
    {
-    "id": "L01",
-    "source": "P12",
-    "target": "P13",
-    "type": "loop",
-    "label": "심사조정 불복"
+    "id": "M04",
+    "source": "P04",
+    "target": "P17",
+    "type": "message",
+    "label": "공단 처분 불복"
    },
    {
-    "id": "L02",
+    "id": "E15",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": "심사평가원 처분 불복"
+   },
+   {
+    "id": "E16",
     "source": "P13",
+    "target": "P18",
+    "type": "sequence",
+    "label": "이의신청 심사·결정"
+   },
+   {
+    "id": "E17",
+    "source": "P17",
+    "target": "P19",
+    "type": "sequence",
+    "label": "이의신청 심사·결정"
+   },
+   {
+    "id": "E18",
+    "source": "P18",
+    "target": "P20",
+    "type": "sequence",
+    "label": "이의신청 결정 불복"
+   },
+   {
+    "id": "E19",
+    "source": "P19",
+    "target": "P20",
+    "type": "sequence",
+    "label": "이의신청 결정 불복"
+   },
+   {
+    "id": "E20",
+    "source": "P20",
+    "target": "P21",
+    "type": "sequence",
+    "label": "심리·의결"
+   },
+   {
+    "id": "L04",
+    "source": "P18",
     "target": "P11",
     "type": "loop",
-    "label": "재심사 요청"
+    "label": "시정 결정 시 심사 재검토"
+   },
+   {
+    "id": "L05",
+    "source": "P19",
+    "target": "P03",
+    "type": "loop",
+    "label": "시정 결정 시 자격·보험료 재검토"
    },
    {
     "id": "L03",

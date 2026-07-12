@@ -97,7 +97,8 @@
    "근로복지공단",
    "산재 의료기관",
    "업무상질병판정위원회",
-   "산재보험 심사·재심사위원회"
+   "산재보험심사위원회",
+   "산재보험재심사위원회"
   ],
   "stages": [
    "G0 보험관계·보험료",
@@ -452,30 +453,113 @@
    },
    {
     "id": "P13",
-    "name": "심사청구·재심사청구",
-    "lane": "산재보험 심사·재심사위원회",
+    "name": "심사청구",
+    "lane": "재해근로자·유족",
     "stage": "G6 심사·재심사",
     "type": "task",
     "status": "loop",
     "progress": 0,
-    "actor": "산재보험심사위원회·산업재해보상보험재심사위원회",
-    "receiver": "청구인",
-    "action": "불승인·등급 불복 심사청구·재심사청구 처리",
+    "actor": "재해근로자·유족",
+    "receiver": "근로복지공단",
+    "action": "보험급여 결정 심사청구",
     "input_documents": [
      "심사청구서"
     ],
     "output_documents": [
-     "심사 결정",
-     "재결"
+     "심사청구서"
     ],
-    "blocker": "불승인·장해등급 불복 시 회귀 단계",
-    "deadline": "심사청구는 결정을 안 날부터 90일 이내(법 제103조제3항)",
-    "confidence": 0.78,
+    "blocker": "보험급여 결정 불복 단계",
+    "deadline": "보험급여 결정등을 안 날부터 90일 이내",
+    "confidence": 0.85,
     "legal_basis": [
      {
       "law": "산업재해보상보험법",
-      "article": "제103조, 제106조",
-      "text": "보험급여 결정에 불복하면 결정을 안 날부터 90일 이내에 심사청구를, 그 결정에 불복하면 재심사청구를 할 수 있다(보험급여 결정에는 행정심판법상 행정심판을 제기할 수 없다)."
+      "article": "제103조",
+      "text": "보험급여 결정등에 불복하는 자는 처분을 한 공단 소속 기관을 거쳐 공단에 심사청구할 수 있고, 결정등을 안 날부터 90일 이내에 제기해야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "산재보험심사위원회 심사결정",
+    "lane": "산재보험심사위원회",
+    "stage": "G6 심사·재심사",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "근로복지공단·산재보험심사위원회",
+    "action": "심의·심사결정",
+    "condition": "보험급여 결정 시정 여부",
+    "input_documents": [
+     "심사청구서",
+     "소속 기관 의견서"
+    ],
+    "output_documents": [
+     "심사결정서"
+    ],
+    "deadline": "공단이 심사청구서를 받은 날부터 60일 이내(1회 20일 이내 연장 가능)",
+    "confidence": 0.86,
+    "legal_basis": [
+     {
+      "law": "산업재해보상보험법",
+      "article": "제105조제1항",
+      "text": "공단은 심사청구서를 받은 날부터 60일 이내에 심사위원회 심의를 거쳐 결정해야 하며, 부득이한 경우 한 차례 20일 이내에서 연장할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P17",
+    "name": "재심사청구",
+    "lane": "산재보험재심사위원회",
+    "stage": "G6 심사·재심사",
+    "type": "task",
+    "status": "loop",
+    "progress": 0,
+    "actor": "심사결정 불복자",
+    "receiver": "산업재해보상보험재심사위원회",
+    "action": "재심사청구",
+    "input_documents": [
+     "심사결정서",
+     "재심사청구서"
+    ],
+    "output_documents": [
+     "재심사청구 접수서"
+    ],
+    "deadline": "심사결정을 안 날부터 90일 이내(판정위원회 심의 결정은 원처분을 안 날부터 90일 이내 직접 청구 가능)",
+    "confidence": 0.86,
+    "legal_basis": [
+     {
+      "law": "산업재해보상보험법",
+      "article": "제106조",
+      "text": "심사결정에 불복하면 재심사위원회에 재심사청구할 수 있고, 판정위원회 심의를 거친 보험급여 결정은 심사청구 없이 직접 재심사청구할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P18",
+    "name": "재심사위원회 심리·재결",
+    "lane": "산재보험재심사위원회",
+    "stage": "G6 심사·재심사",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산업재해보상보험재심사위원회",
+    "action": "심리·재결",
+    "condition": "재심사청구 인용·기각 여부",
+    "input_documents": [
+     "재심사청구서",
+     "심사결정서"
+    ],
+    "output_documents": [
+     "재결서"
+    ],
+    "deadline": "재심사청구서를 받은 날부터 60일 이내(1회 20일 이내 연장 가능)",
+    "confidence": 0.86,
+    "legal_basis": [
+     {
+      "law": "산업재해보상보험법",
+      "article": "제107조·제109조",
+      "text": "고용노동부에 산업재해보상보험재심사위원회를 두고, 재심사 청구의 심리·재결에는 60일 결정기간 및 연장 규정을 준용하며 재결은 공단을 기속한다."
      }
     ]
    },
@@ -621,27 +705,55 @@
     "label": "급여 지출 반영"
    },
    {
-    "id": "L01",
+    "id": "E14",
     "source": "P08",
     "target": "P13",
-    "type": "loop",
-    "label": "불승인 불복"
+    "type": "sequence",
+    "label": "보험급여 결정 불복"
+   },
+   {
+    "id": "E15",
+    "source": "P13",
+    "target": "P16",
+    "type": "sequence",
+    "label": "심의·심사결정"
+   },
+   {
+    "id": "E16",
+    "source": "P16",
+    "target": "P17",
+    "type": "sequence",
+    "label": "심사결정 불복"
+   },
+   {
+    "id": "E17",
+    "source": "P17",
+    "target": "P18",
+    "type": "sequence",
+    "label": "재심사 심리·재결"
+   },
+   {
+    "id": "E18",
+    "source": "P08",
+    "target": "P17",
+    "type": "sequence",
+    "label": "판정위원회 심의 결정은 직접 재심사"
    },
    {
     "id": "L02",
-    "source": "P13",
+    "source": "P18",
     "target": "P08",
     "type": "loop",
-    "label": "재심사·재결정"
+    "label": "인용 재결 시 처분 시정"
    }
   ],
   "warnings": []
  },
  "verification": {
   "status": "article-verified",
-  "verifiedAt": "2026-07-10",
+  "verifiedAt": "2026-07-11",
   "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
-  "scope": "법적 근거 4건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 31건 가운데 31건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "scope": "법적 근거 4건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 34건 가운데 34건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "sources": [
    {
     "law": "산업재해보상보험법",
@@ -689,12 +801,12 @@
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-10",
+   "checkedAt": "2026-07-11",
    "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
-   "citationEntries": 23,
-   "explicitCitationEntries": 22,
-   "articleReferences": 31,
-   "verifiedReferences": 31,
+   "citationEntries": 26,
+   "explicitCitationEntries": 25,
+   "articleReferences": 34,
+   "verifiedReferences": 34,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }

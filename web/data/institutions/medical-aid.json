@@ -514,7 +514,7 @@
    },
    {
     "id": "P15",
-    "name": "이의신청·부당이득 관리",
+    "name": "시군구 처분 이의신청",
     "lane": "수급권자(이용자)",
     "stage": "G6 사례관리·이의",
     "type": "task",
@@ -522,31 +522,103 @@
     "progress": 0,
     "actor": "수급권자",
     "receiver": "시·군·구",
-    "action": "이의신청",
+    "action": "시군구 처분 이의신청",
     "input_documents": [
      "급여·자격 결정 통지"
     ],
     "output_documents": [
      "이의신청서"
     ],
-    "deadline": "처분이 있음을 안 날부터 90일 이내(법 제30조제3항)",
-    "blocker": "자격·급여 결정 불복 회귀 단계",
+    "deadline": "처분을 안 날부터 90일 이내, 처분일부터 180일 이내(정당한 사유가 있으면 예외)",
+    "blocker": "자격·의료급여·급여비용 처분 불복 단계",
     "confidence": 0.79,
     "legal_basis": [
      {
       "law": "의료급여법",
-      "article": "제30조",
-      "text": "수급권자의 자격·의료급여·급여비용에 대한 시·군·구의 처분에 이의가 있는 자는 처분이 있음을 안 날부터 90일 이내에 이의신청을 할 수 있다."
-     },
+      "article": "제30조제1항·제3항",
+      "text": "수급권자 자격·의료급여·급여비용에 관한 시장·군수·구청장 처분에 이의가 있으면 90일 이내에 문서로 이의신청할 수 있고, 처분일부터 180일이 지나면 제기하지 못한다."
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "심사·조정 처분 이의신청",
+    "lane": "의료급여기관(병·의원·약국)",
+    "stage": "G6 사례관리·이의",
+    "type": "task",
+    "status": "loop",
+    "progress": 0,
+    "actor": "보장기관·의료급여기관·수급권자",
+    "receiver": "건강보험심사평가원",
+    "action": "심사·조정 처분 이의신청",
+    "input_documents": [
+     "심사·조정 결과 통보서"
+    ],
+    "output_documents": [
+     "이의신청서"
+    ],
+    "deadline": "처분을 안 날부터 90일 이내, 처분일부터 180일 이내(제11조의3 확인 처분은 통보일부터 30일 이내)",
+    "blocker": "급여비용 심사·조정 처분 불복 단계",
+    "confidence": 0.84,
+    "legal_basis": [
+     {
+      "law": "의료급여법",
+      "article": "제30조제2항부터 제4항",
+      "text": "급여비용 심사·조정·적정성 평가 및 급여 대상 확인에 관한 급여비용심사기관 처분에는 보장기관·의료급여기관·수급권자가 이의신청할 수 있고, 원칙적으로 90일·180일 기한이 적용된다."
+     }
+    ]
+   },
+   {
+    "id": "P17",
+    "name": "시군구 이의신청 결정·통지",
+    "lane": "시군구(자격책정·기금운영)",
+    "stage": "G6 사례관리·이의",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시장·군수·구청장",
+    "action": "이의신청 결정·통지",
+    "condition": "처분 시정 여부",
+    "input_documents": [
+     "이의신청서"
+    ],
+    "output_documents": [
+     "이의신청결정서"
+    ],
+    "deadline": "접수일부터 60일 이내(부득이한 경우 30일 범위 연장)",
+    "confidence": 0.86,
+    "legal_basis": [
      {
       "law": "의료급여법 시행령",
       "article": "제17조",
-      "text": "이의신청에 대한 결정 및 통지 등 세부 절차를 정한다."
-     },
+      "text": "시장·군수·구청장은 이의신청을 받은 날부터 60일 이내에 결정해야 하며, 부득이한 경우 30일 범위에서 연장할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P18",
+    "name": "심사평가원 이의신청 결정·통지",
+    "lane": "건강보험심사평가원",
+    "stage": "G6 사례관리·이의",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "건강보험심사평가원",
+    "action": "이의신청 결정·통지",
+    "condition": "심사·조정 처분 시정 여부",
+    "input_documents": [
+     "이의신청서"
+    ],
+    "output_documents": [
+     "이의신청결정서"
+    ],
+    "deadline": "접수일부터 60일 이내(부득이한 경우 30일 범위 연장)",
+    "confidence": 0.86,
+    "legal_basis": [
      {
-      "law": "의료급여법 시행규칙",
-      "article": "제35조",
-      "text": "이의신청서 등 서식을 정한다."
+      "law": "의료급여법 시행령",
+      "article": "제17조",
+      "text": "급여비용심사기관도 이의신청을 받은 날부터 60일 이내에 결정해야 하며, 결정하면 지체 없이 청구인에게 정본과 이해관계인에게 사본을 송부해야 한다."
      }
     ]
    }
@@ -634,7 +706,21 @@
     "source": "P14",
     "target": "P15",
     "type": "sequence",
-    "label": null
+    "label": "시군구 처분 불복"
+   },
+   {
+    "id": "E13",
+    "source": "P15",
+    "target": "P17",
+    "type": "sequence",
+    "label": "이의신청 심사·결정"
+   },
+   {
+    "id": "E14",
+    "source": "P16",
+    "target": "P18",
+    "type": "sequence",
+    "label": "이의신청 심사·결정"
    },
    {
     "id": "M01",
@@ -665,6 +751,13 @@
     "label": "지급 후 본인부담 보상·상한 정산"
    },
    {
+    "id": "M05",
+    "source": "P09",
+    "target": "P16",
+    "type": "message",
+    "label": "심사·조정 처분 불복"
+   },
+   {
     "id": "L01",
     "source": "P13",
     "target": "P06",
@@ -673,10 +766,17 @@
    },
    {
     "id": "L02",
-    "source": "P15",
+    "source": "P17",
     "target": "P02",
     "type": "loop",
-    "label": "이의신청 재결정·자격 재검토 회귀"
+    "label": "시정 결정 시 자격 재검토 회귀"
+   },
+   {
+    "id": "L03",
+    "source": "P18",
+    "target": "P09",
+    "type": "loop",
+    "label": "시정 결정 시 심사 재검토 회귀"
    }
   ],
   "warnings": [
@@ -686,9 +786,9 @@
  },
  "verification": {
   "status": "article-verified",
-  "verifiedAt": "2026-07-10",
+  "verifiedAt": "2026-07-11",
   "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
-  "scope": "법적 근거 4건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 53건 가운데 53건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "scope": "법적 근거 4건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 54건 가운데 54건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "sources": [
    {
     "law": "의료급여법",
@@ -735,12 +835,12 @@
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-10",
+   "checkedAt": "2026-07-11",
    "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
-   "citationEntries": 30,
-   "explicitCitationEntries": 29,
-   "articleReferences": 53,
-   "verifiedReferences": 53,
+   "citationEntries": 31,
+   "explicitCitationEntries": 30,
+   "articleReferences": 54,
+   "verifiedReferences": 54,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }

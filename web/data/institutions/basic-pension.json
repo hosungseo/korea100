@@ -487,7 +487,7 @@
     "output_documents": [
      "이의신청서"
     ],
-    "deadline": "결정 통지받은 날부터 90일 이내",
+    "deadline": "처분을 안 날부터 90일 이내(정당한 사유가 있으면 사유 소멸일부터 60일 이내)",
     "blocker": "지급 결정 불복 회귀 단계",
     "confidence": 0.8,
     "legal_basis": [
@@ -507,21 +507,26 @@
     "status": "waiting",
     "progress": 0,
     "actor": "시장·군수·구청장",
-    "action": "이의신청 심사·처분",
-    "condition": "이의신청 인용 여부(인용 시 지급 결정 시정 회귀)",
+    "action": "이의신청 심사·결정 통지",
+    "condition": "각하·기각 또는 취소·변경 결정 여부",
     "input_documents": [
      "이의신청서"
     ],
     "output_documents": [
-     "이의신청 처리결과 통지"
+     "이의신청 결정통지서"
     ],
-    "deadline": "이의신청 심사 후 통지",
+    "deadline": "접수일부터 30일 이내 결정·통지(조사에 시일이 필요한 경우 60일 이내)",
     "confidence": 0.78,
     "legal_basis": [
      {
       "law": "기초연금법",
       "article": "제22조",
-      "text": "이의신청을 받으면 심사하여 결정을 변경하거나 급여를 지급하는 조치를 한다."
+      "text": "제13조에 따른 결정이나 그 밖의 처분에 이의가 있는 사람은 특별자치시장·특별자치도지사·시장·군수·구청장에게 이의신청을 할 수 있다."
+     },
+     {
+      "law": "기초연금법 시행규칙",
+      "article": "제14조제2항",
+      "text": "시장·군수·구청장은 접수일부터 30일 이내에 각하·기각하거나 취소·변경하는 결정을 하고 서면 통지해야 하며, 조사에 시일이 필요한 경우 60일 이내에 결정·통지할 수 있다."
      }
     ]
    }
@@ -609,7 +614,7 @@
     "source": "P14",
     "target": "P15",
     "type": "sequence",
-    "label": null
+    "label": "이의신청 접수·심사"
    },
    {
     "id": "M01",
@@ -648,10 +653,10 @@
    },
    {
     "id": "L02",
-    "source": "P14",
+    "source": "P15",
     "target": "P08",
     "type": "loop",
-    "label": "이의신청 재판정 회귀"
+    "label": "취소·변경 결정 시 재판정"
    }
   ],
   "warnings": [
@@ -664,9 +669,9 @@
  },
  "verification": {
   "status": "article-verified",
-  "verifiedAt": "2026-07-10",
+  "verifiedAt": "2026-07-11",
   "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
-  "scope": "법적 근거 4건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 32건 가운데 32건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "scope": "법적 근거 4건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 33건 가운데 33건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "sources": [
    {
     "law": "기초연금법",
@@ -713,12 +718,12 @@
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-10",
+   "checkedAt": "2026-07-11",
    "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
-   "citationEntries": 23,
-   "explicitCitationEntries": 19,
-   "articleReferences": 32,
-   "verifiedReferences": 32,
+   "citationEntries": 24,
+   "explicitCitationEntries": 20,
+   "articleReferences": 33,
+   "verifiedReferences": 33,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }

@@ -33,6 +33,26 @@ const CARD_HEIGHT = 90;
 const CARD_GAP = 24;
 const STAGE_VERTICAL_SPACE = 40;
 const MIN_STAGE_HEIGHT = 130;
+const DEFAULT_LAYOUT_METRICS = Object.freeze({
+  cardHeight: CARD_HEIGHT,
+  cardGap: CARD_GAP,
+  stageVerticalSpace: STAGE_VERTICAL_SPACE,
+  minStageHeight: MIN_STAGE_HEIGHT,
+});
+// Preserve the 1800x2400 export while keeping dense, legally complete flows readable.
+const COMPACT_LAYOUT_METRICS = Object.freeze({
+  cardHeight: 86,
+  cardGap: 20,
+  stageVerticalSpace: 16,
+  minStageHeight: 124,
+});
+// Dense diagrams retain the compact card height; only their inter-card and stage padding contracts.
+const DENSE_LAYOUT_METRICS = Object.freeze({
+  cardHeight: 86,
+  cardGap: 16,
+  stageVerticalSpace: 8,
+  minStageHeight: 120,
+});
 const ARROW_CLEARANCE = 8;
 const CARD_TEXT_WIDTH = CARD_WIDTH - 30;
 const CARD_TITLE_SIZE = 15.5;
@@ -181,13 +201,28 @@ function buildLayout(institution, process, groups) {
       )
     )
   );
-  const desiredStageHeights = maxCellCounts.map((count) =>
-    Math.max(
-      MIN_STAGE_HEIGHT,
-      count * CARD_HEIGHT + (count - 1) * CARD_GAP + STAGE_VERTICAL_SPACE
-    )
+  let layoutMetrics = DEFAULT_LAYOUT_METRICS;
+  let desiredStageHeights = calculateDesiredStageHeights(
+    maxCellCounts,
+    layoutMetrics
   );
-  const desiredTotal = desiredStageHeights.reduce((sum, height) => sum + height, 0);
+  let desiredTotal = desiredStageHeights.reduce((sum, height) => sum + height, 0);
+  if (desiredTotal > STAGE_BODY_HEIGHT) {
+    layoutMetrics = COMPACT_LAYOUT_METRICS;
+    desiredStageHeights = calculateDesiredStageHeights(
+      maxCellCounts,
+      layoutMetrics
+    );
+    desiredTotal = desiredStageHeights.reduce((sum, height) => sum + height, 0);
+  }
+  if (desiredTotal > STAGE_BODY_HEIGHT) {
+    layoutMetrics = DENSE_LAYOUT_METRICS;
+    desiredStageHeights = calculateDesiredStageHeights(
+      maxCellCounts,
+      layoutMetrics
+    );
+    desiredTotal = desiredStageHeights.reduce((sum, height) => sum + height, 0);
+  }
   if (desiredTotal > STAGE_BODY_HEIGHT) {
     throw new Error(
       `세로형 캔버스 높이 초과: ${institution.slug} (${desiredTotal}/${STAGE_BODY_HEIGHT})`
@@ -206,7 +241,8 @@ function buildLayout(institution, process, groups) {
   for (const [key, cellNodes] of nodesByCell) {
     const [rowIndex, groupIndex] = key.split(":").map(Number);
     const stackHeight =
-      cellNodes.length * CARD_HEIGHT + (cellNodes.length - 1) * CARD_GAP;
+      cellNodes.length * layoutMetrics.cardHeight +
+      (cellNodes.length - 1) * layoutMetrics.cardGap;
     const firstY = stageTops[rowIndex] + (stageHeights[rowIndex] - stackHeight) / 2;
     const x =
       GROUP_X +
@@ -215,9 +251,11 @@ function buildLayout(institution, process, groups) {
     cellNodes.forEach((node, nodeIndex) => {
       nodeLayout.set(node.id, {
         x,
-        y: firstY + nodeIndex * (CARD_HEIGHT + CARD_GAP),
+        y:
+          firstY +
+          nodeIndex * (layoutMetrics.cardHeight + layoutMetrics.cardGap),
         width: CARD_WIDTH,
-        height: CARD_HEIGHT,
+        height: layoutMetrics.cardHeight,
         stageIndex: rowIndex,
         groupIndex,
       });
@@ -237,6 +275,7 @@ function buildLayout(institution, process, groups) {
     stageIndex,
     stageHeights,
     stageTops,
+    layoutMetrics,
     nodeLayout,
     edgeRouteSlots: buildProcessEdgeRouteSlots(process.edges, nodeLayout),
   };
@@ -244,6 +283,17 @@ function buildLayout(institution, process, groups) {
   context.edgeLabelLayout = buildEdgeLabelLayout(context);
   context.textAudit = validateTextLayout(context);
   return context;
+}
+
+function calculateDesiredStageHeights(maxCellCounts, metrics) {
+  return maxCellCounts.map((count) =>
+    Math.max(
+      metrics.minStageHeight,
+      count * metrics.cardHeight +
+        (count - 1) * metrics.cardGap +
+        metrics.stageVerticalSpace
+    )
+  );
 }
 
 function renderSvg(context) {
@@ -571,13 +621,24 @@ function validateEdgeRouteLayout(context) {
         }
       }
       if (longest > MAX_COLLINEAR_EDGE_OVERLAP) {
-        overlaps.push(`${left.edge.id}/${right.edge.id} ${round(longest)}px`);
+        overlaps.push({
+          ids: `${left.edge.id}/${right.edge.id}`,
+          length: round(longest),
+          leftPath: left.route.path,
+          rightPath: right.route.path,
+        });
       }
     }
   }
   if (overlaps.length > 0) {
     throw new Error(
-      `연결선 공선 겹침: ${context.institution.slug}\n- ${overlaps.slice(0, 12).join("\n- ")}`
+      `연결선 공선 겹침: ${context.institution.slug}\n- ${overlaps
+        .slice(0, 12)
+        .map(
+          ({ ids, length, leftPath, rightPath }) =>
+            `${ids} ${length}px\n  ${leftPath}\n  ${rightPath}`
+        )
+        .join("\n- ")}`
     );
   }
   return {
@@ -676,7 +737,15 @@ function edgeRoute(edge, source, target, context) {
       };
     }
     const downward = target.y >= sourceBottom;
-    const middleY = (sourceBottom + target.y) / 2;
+    // Fan same-cell branches out in port order before they approach their targets.
+    // This keeps a farther branch from sharing the nearer branch's target stem.
+    const middleY = Math.max(
+      sourceBottom + ARROW_CLEARANCE + 8,
+      Math.min(
+        target.y - ARROW_CLEARANCE - 8,
+        sourceBottom + 36 - slot.sourcePort * 28
+      )
+    );
     return {
       path: downward
         ? Math.abs(sourcePortX - targetPortX) < 1
@@ -728,13 +797,18 @@ function edgeRoute(edge, source, target, context) {
     const sourceGroupLeft = GROUP_X + source.groupIndex * context.groupWidth;
     const blockedRailNudge =
       alternatingSlotOffset(slot.sourceChannel) * EDGE_RAIL_GAP;
-    const sourceRailX =
+    const sourceRailCandidate =
       sourceSide < 0
         ? sourceGroupLeft + EDGE_RAIL_INSET + blockedRailNudge
         : sourceGroupLeft +
           context.groupWidth -
           EDGE_RAIL_INSET +
           blockedRailNudge;
+    // Channel offsets may not pull a detour rail back through its source card.
+    const sourceRailX =
+      sourceSide < 0
+        ? Math.min(sourceRailCandidate, source.x - ARROW_CLEARANCE)
+        : Math.max(sourceRailCandidate, sourceRight + ARROW_CLEARANCE);
     const sourcePath = sourceBlocked
       ? sourceSide < 0
         ? `M ${round(source.x)} ${round(sourceCenterY + sidePortOffset(slot.sourcePort, slot.sourceChannel))} H ${round(sourceRailX)} V ${round(channelY)}`
@@ -742,8 +816,8 @@ function edgeRoute(edge, source, target, context) {
       : `M ${round(sourcePortX)} ${round(sourceBottom)} V ${round(channelY)}`;
     if (target.stageIndex - source.stageIndex > 1) {
       const targetGroupLeft = GROUP_X + target.groupIndex * context.groupWidth;
-      const routeRailNudge =
-        alternatingSlotOffset(slot.channel) * EDGE_RAIL_GAP;
+      // Keep channel offsets subordinate to the assigned rail so they cannot cancel it.
+      const routeRailNudge = alternatingSlotOffset(slot.channel) * 4;
       const railX =
         slot.railSide < 0
           ? targetGroupLeft +
@@ -755,16 +829,23 @@ function edgeRoute(edge, source, target, context) {
             EDGE_RAIL_INSET -
             slot.rail * EDGE_RAIL_GAP +
             routeRailNudge;
+      const longRailX =
+        sourceBlocked && source.groupIndex === target.groupIndex
+          // Separate long routes sharing a source rail when they fan into different target ports.
+          ? sourceRailX +
+            slot.railSide * (slot.targetChannel - slot.sourceChannel) * 8 -
+            slot.railSide * slot.rail * EDGE_RAIL_GAP
+          : railX;
       const targetApproachY = target.y - 28 - slot.approach * 10;
       const longSourcePath =
         sourceBlocked && source.groupIndex === target.groupIndex
           ? slot.railSide < 0
-            ? `M ${round(source.x)} ${round(sourceCenterY + sidePortOffset(slot.sourcePort, slot.sourceChannel))} H ${round(railX)} V ${round(channelY)}`
-            : `M ${round(sourceRight)} ${round(sourceCenterY + sidePortOffset(slot.sourcePort, slot.sourceChannel))} H ${round(railX)} V ${round(channelY)}`
+            ? `M ${round(source.x)} ${round(sourceCenterY + sidePortOffset(slot.sourcePort, slot.sourceChannel))} H ${round(longRailX)} V ${round(channelY)}`
+            : `M ${round(sourceRight)} ${round(sourceCenterY + sidePortOffset(slot.sourcePort, slot.sourceChannel))} H ${round(longRailX)} V ${round(channelY)}`
           : sourcePath;
       return {
-        path: `${longSourcePath} H ${round(railX)} V ${round(targetApproachY)} H ${round(targetPortX)} V ${round(target.y - ARROW_CLEARANCE)}`,
-        labelX: railX,
+        path: `${longSourcePath} H ${round(longRailX)} V ${round(targetApproachY)} H ${round(targetPortX)} V ${round(target.y - ARROW_CLEARANCE)}`,
+        labelX: longRailX,
         labelY: (channelY + targetApproachY) / 2,
       };
     }
@@ -846,8 +927,8 @@ function renderNode(node, context) {
   const idPrefix = node.type === "gateway" ? "◇ " : node.type === "system" ? "▣ " : "";
   return `
     <g filter="url(#card-shadow)">
-      <rect x="${round(x)}" y="${round(y)}" width="${CARD_WIDTH}" height="${CARD_HEIGHT}" rx="8" fill="${status.fill}" stroke="${status.border}" stroke-width="2.3"/>
-      <rect x="${round(x)}" y="${round(y)}" width="6" height="${CARD_HEIGHT}" rx="3" fill="${status.border}"/>
+      <rect x="${round(x)}" y="${round(y)}" width="${CARD_WIDTH}" height="${position.height}" rx="8" fill="${status.fill}" stroke="${status.border}" stroke-width="2.3"/>
+      <rect x="${round(x)}" y="${round(y)}" width="6" height="${position.height}" rx="3" fill="${status.border}"/>
       <text x="${round(x + 15)}" y="${round(y + 20)}" class="mono" font-size="12.5" font-weight="750" fill="${status.sub}">${idPrefix}${escapeXml(node.id)}</text>
       <rect x="${round(x + CARD_WIDTH - statusWidth - 10)}" y="${round(y + 7)}" width="${statusWidth}" height="24" rx="5" fill="${node.status === "current" ? "#ffffff" : status.border}" opacity="${node.status === "current" ? 0.18 : 0.14}"/>
       <text x="${round(x + CARD_WIDTH - statusWidth / 2 - 10)}" y="${round(y + 24)}" text-anchor="middle" font-size="12" font-weight="800" fill="${status.ink}">${status.label}</text>
@@ -984,7 +1065,7 @@ function textWidthUnits(text) {
 }
 
 function validateTextLayout(context) {
-  const { institution, process, groups, groupWidth } = context;
+  const { institution, process, groups, groupWidth, layoutMetrics } = context;
   const errors = [];
   const assertFits = (lines, maxWidth, fontSize, label) => {
     for (const line of lines) {
@@ -1000,7 +1081,11 @@ function validateTextLayout(context) {
     CARD_TITLE_DOUBLE_Y + CARD_TITLE_LINE_HEIGHT + CARD_TITLE_SIZE * 0.2;
   const footerTop = CARD_FOOTER_Y - CARD_FOOTER_SIZE * 0.82;
   const footerBottom = CARD_FOOTER_Y + CARD_FOOTER_SIZE * 0.2;
-  if (titleTop <= 31 || titleBottom >= footerTop || footerBottom >= CARD_HEIGHT) {
+  if (
+    titleTop <= 31 ||
+    titleBottom >= footerTop ||
+    footerBottom >= layoutMetrics.cardHeight
+  ) {
     errors.push("카드 세로 텍스트 영역이 겹칩니다");
   }
 
