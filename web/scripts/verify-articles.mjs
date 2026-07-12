@@ -8,6 +8,7 @@ import {
   parseArticleHeaders,
   parseArticleReferences,
 } from "./lib/article-citations.mjs";
+import { fetchAdminRuleArticleHeaders } from "./lib/admin-rule-service.mjs";
 
 const execFileAsync = promisify(execFile);
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
@@ -155,12 +156,23 @@ async function verifyGroup(group) {
   }
 
   if (sourceType === "admin-rule") {
-    const result = await runCli(["get_admin_rule", "--id", group.source.adminRuleSerial]);
-    const found = parseArticleHeaders(result.output);
+    let found;
+    let lookupError = null;
+    try {
+      found = await fetchAdminRuleArticleHeaders(group.source.adminRuleSerial, {
+        oc: process.env.LAW_OC,
+        signal: AbortSignal.timeout(60_000),
+      });
+    } catch (error) {
+      lookupError = error;
+      const result = await runCli(["get_admin_rule", "--id", group.source.adminRuleSerial]);
+      found = parseArticleHeaders(result.output);
+      if (!lookupFailed(result) && found.size > 0) lookupError = null;
+    }
     for (const article of requested) {
       statuses.set(
         article,
-        lookupFailed(result)
+        lookupError && found.size === 0
           ? { status: "uncheckable", reason: "행정규칙 전문 API 미지원 또는 조회 실패" }
           : found.has(article)
             ? { status: "verified" }
@@ -315,6 +327,8 @@ for (const { file, data: institution } of institutions) {
   const missingReferences = institutionOccurrences.filter((item) => item.result.status === "missing").length;
   const uncheckableReferences = institutionOccurrences.filter((item) => item.result.status === "uncheckable").length;
   const sourceUnresolved = institution.verification.unresolved?.length ?? 0;
+  const legalBasisCount = institution.canvas.legalBasis.length;
+  const sourceLinked = legalBasisCount - sourceUnresolved;
   const status =
     sourceUnresolved === 0 && missingReferences === 0 && uncheckableReferences === 0
       ? "article-verified"
@@ -324,7 +338,7 @@ for (const { file, data: institution } of institutions) {
   institution.verification.verifiedAt = VERIFIED_AT;
   institution.verification.method = "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조";
   institution.verification.scope =
-    `법적 근거 ${institution.verification.sources.length + sourceUnresolved}건 중 공식 원문 ${institution.verification.sources.length}건을 연결했다. ` +
+    `법적 근거 ${legalBasisCount}건 중 공식 원문 ${sourceLinked}건을 연결했다. ` +
     `캔버스와 절차 노드의 명시 조문 ${institutionOccurrences.length}건 가운데 ${verifiedReferences}건의 조문 번호 존재를 확인했고, ` +
     `${missingReferences}건은 불일치, ${uncheckableReferences}건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.`;
   institution.verification.articleVerification = {

@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
+import { mergeExistingSources } from "./lib/source-merging.mjs";
 
 const execFileAsync = promisify(execFile);
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
@@ -356,13 +357,15 @@ const registry = new Map(resolutions);
 const coverage = [];
 
 for (const { file, data } of institutions) {
-  const sources = [];
+  const generatedSources = [];
   const unresolved = [];
   for (const basis of data.canvas.legalBasis) {
     const result = registry.get(`${basis.kind}\u0000${basis.law}`);
-    if (result?.source) sources.push(result.source);
+    if (result?.source) generatedSources.push(result.source);
     if (result?.unresolved) unresolved.push(result.unresolved);
   }
+  const sources = mergeExistingSources(generatedSources, data.verification?.sources);
+  const linkedCount = generatedSources.length;
 
   data.verification = {
     status: unresolved.length === 0 ? "source-linked" : "needs-review",
@@ -370,8 +373,8 @@ for (const { file, data } of institutions) {
     method: "국가법령정보센터 Open API (Korean Law MCP CLI)",
     scope:
       unresolved.length === 0
-        ? `법적 근거 ${sources.length}건의 현행 공식 원문을 연결했다. 개별 인용 조문의 내용 일치 여부는 후속 검수 대상이다.`
-        : `법적 근거 ${sources.length + unresolved.length}건 중 공식 원문 ${sources.length}건을 연결했다. 단일 원문을 특정할 수 없는 ${unresolved.length}건은 적용 범위나 공식 문서 버전 지정이 필요하다.`,
+        ? `법적 근거 ${linkedCount}건의 현행 공식 원문을 연결했다. 개별 인용 조문의 내용 일치 여부는 후속 검수 대상이다.`
+        : `법적 근거 ${linkedCount + unresolved.length}건 중 공식 원문 ${linkedCount}건을 연결했다. 단일 원문을 특정할 수 없는 ${unresolved.length}건은 적용 범위나 공식 문서 버전 지정이 필요하다.`,
     ...(data.verification?.notes?.length ? { notes: data.verification.notes } : {}),
     sources,
     ...(unresolved.length ? { unresolved } : {}),
@@ -382,8 +385,8 @@ for (const { file, data } of institutions) {
     slug: data.slug,
     name: data.name,
     status: data.verification.status,
-    total: sources.length + unresolved.length,
-    linked: sources.length,
+    total: linkedCount + unresolved.length,
+    linked: linkedCount,
     unresolved: unresolved.length,
   });
 
