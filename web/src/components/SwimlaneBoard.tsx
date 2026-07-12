@@ -46,10 +46,10 @@ const LOOP_BELOW = 68;
 const SS: Record<string, { bg: string; border: string; dot: string; label: string; ink: string; sub: string }> = {
   done:    { bg: "#f0fdf6", border: "#0f9f72", dot: "#0f9f72", label: "선행",  ink: "#0b3d28", sub: "#1a7a52" },
   current: { bg: "#0f9f72", border: "#0f9f72", dot: "#fff",    label: "핵심", ink: "#ffffff", sub: "rgba(255,255,255,.8)" },
-  waiting: { bg: "#f5f7f6", border: "#dde5df", dot: "#bdcbc4", label: "후속",  ink: "#111714", sub: "#87938d" },
+  waiting: { bg: "#f5f7f6", border: "#dde5df", dot: "#bdcbc4", label: "후속",  ink: "#111714", sub: "#5d6b63" },
   risk:    { bg: "#fffbf0", border: "#d97706", dot: "#d97706", label: "병목",  ink: "#92400e", sub: "#d97706" },
   loop:    { bg: "#eff6ff", border: "#2563eb", dot: "#2563eb", label: "회귀",  ink: "#1e3a8a", sub: "#2563eb" },
-  gateway: { bg: "#f5f7f6", border: "#c4cfc8", dot: "#87938d", label: "판단",  ink: "#111714", sub: "#87938d" },
+  gateway: { bg: "#f5f7f6", border: "#c4cfc8", dot: "#5d6b63", label: "판단",  ink: "#111714", sub: "#5d6b63" },
 };
 function ss(status: string) { return SS[status] ?? SS.waiting; }
 
@@ -97,7 +97,7 @@ function GateTimeline({
           const dotBorder =
             st === "done" || st === "current" ? "#0f9f72" : st === "risk" ? "#d97706" : "#bdcbc4";
           const labelColor =
-            st === "current" || st === "done" ? "#0f9f72" : st === "risk" ? "#d97706" : "#87938d";
+            st === "current" || st === "done" ? "#0f9f72" : st === "risk" ? "#d97706" : "#5d6b63";
 
           return (
             <div
@@ -151,7 +151,7 @@ function GateTimeline({
                   <span
                     style={{
                       fontSize: 10,
-                      color: st === "current" ? "#111714" : "#87938d",
+                      color: st === "current" ? "#111714" : "#5d6b63",
                       lineHeight: 1.25,
                       fontWeight: st === "current" ? 600 : 400,
                       display: "block",
@@ -255,6 +255,8 @@ export function SwimlaneNodeCard({
       onClick={() => onClick(node)}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
+      onFocus={onHover}
+      onBlur={onLeave}
       aria-label={`${node.name} — ${c.label} — ${verificationResult.label}`}
       style={{
         "--node-card-border": c.border,
@@ -713,7 +715,7 @@ export function NodeDrawer({
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 20 }}>
           <div>
             <div style={{ display: "flex", gap: 6, marginBottom: 6 }}>
-              <span className="mono" style={{ color: "#87938d" }}>{node.id}</span>
+              <span className="mono" style={{ color: "#5d6b63" }}>{node.id}</span>
               <span style={{
                 fontSize: 12, fontWeight: 600, padding: "2px 8px",
                 borderRadius: 4, background: c.bg, color: c.sub,
@@ -731,7 +733,7 @@ export function NodeDrawer({
             aria-label="닫기"
             style={{
               background: "none", border: "none", cursor: "pointer",
-              color: "#87938d", fontSize: 22, lineHeight: 1,
+              color: "#5d6b63", fontSize: 22, lineHeight: 1,
               padding: 4, flexShrink: 0, marginLeft: 16,
             }}
           >×</button>
@@ -850,7 +852,7 @@ function keepFocusInDrawer(event: KeyboardEvent, drawer: HTMLElement | null) {
 function MetaItem({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#87938d", marginBottom: 3 }}>
+      <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#5d6b63", marginBottom: 3 }}>
         {label}
       </div>
       <div style={{ fontSize: 13, color: "#111714", fontWeight: 500 }}>{value}</div>
@@ -863,7 +865,7 @@ function DrawerSection({ title, children }: { title: string; children: React.Rea
     <div style={{ marginBottom: 20 }}>
       <div style={{
         fontSize: 11, fontWeight: 700, letterSpacing: "0.07em",
-        textTransform: "uppercase", color: "#87938d",
+        textTransform: "uppercase", color: "#5d6b63",
         marginBottom: 8, paddingBottom: 6, borderBottom: "1px solid #dde5df",
       }}>{title}</div>
       {children}
@@ -1399,7 +1401,7 @@ export default function SwimlaneBoard({
                   color: st === "current" ? "rgba(255,255,255,.85)"
                        : st === "done"    ? "#087452"
                        : st === "risk"    ? "#d97706"
-                       : "#87938d",
+                       : "#5d6b63",
                   flexShrink: 0,
                 }}>
                   {code}
@@ -1408,7 +1410,7 @@ export default function SwimlaneBoard({
                   fontSize: 11, fontWeight: 600,
                   color: st === "current" ? "#ffffff"
                        : st === "done"    ? "#5d6b63"
-                       : "#87938d",
+                       : "#5d6b63",
                   lineHeight: 1.25,
                   overflow: "hidden", display: "-webkit-box",
                   WebkitLineClamp: 2, WebkitBoxOrient: "vertical",

@@ -257,7 +257,7 @@ export function NodeLegalVerification({
           ))}
 
           {verification && sources.length === 0 && unresolved.length === 0 && (
-            <div style={{ marginTop: 7, color: "#87938d", fontSize: 11 }}>
+            <div style={{ marginTop: 7, color: "#5d6b63", fontSize: 11 }}>
               기관 단위 검증 결과에 포함 · 개별 출처명 직접 매칭 필요
             </div>
           )}
@@ -270,7 +270,7 @@ export function NodeLegalVerification({
             margin: "9px 0 0",
             paddingTop: 9,
             borderTop: "1px solid #dde5df",
-            color: "#87938d",
+            color: "#5d6b63",
             fontSize: 10.5,
             lineHeight: 1.5,
           }}
