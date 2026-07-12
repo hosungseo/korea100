@@ -1,0 +1,354 @@
+{
+ "slug": "financial-dispute-mediation",
+ "name": "금융분쟁조정",
+ "oneLiner": "금융분쟁조정의 신청·심사·결정·사후관리 절차",
+ "type": "분쟁조정형",
+ "priority": 248,
+ "whyFirst": "금융분쟁조정의 핵심 행위자와 결정 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "금융분쟁조정은(는) 분쟁 발생·자료 확보 → 분쟁조정 신청 → 사실관계 확인·자료 요청 → 금융회사 의견 제출 → 조정위원회 심의 → 조정안 제시 → 수락·조정 성립 → 불수락 시 소송·사후관리로 이어지는 공적 절차다.",
+  "stakeholders": "금융소비자, 금융회사, 금융감독원·분쟁조정기구, 금융위원회",
+  "legalBasis": [
+   {
+    "law": "금융소비자 보호에 관한 법률",
+    "articles": "제33조(분쟁조정기구), 제36조(분쟁 조정), 제37조(조정의 신청), 제38조(조정안 제시), 제39조(조정의 효력)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "금융회사",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "금융감독원·분쟁조정기구",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "금융위원회",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "분쟁 발생·자료 확보",
+   "분쟁조정 신청",
+   "사실관계 확인·자료 요청",
+   "금융회사 의견 제출",
+   "조정위원회 심의",
+   "조정안 제시",
+   "수락·조정 성립",
+   "불수락 시 소송·사후관리"
+  ],
+  "moneyFlow": "금전지급·변제·보호 범위는 법령, 개인의 거래·채무 상황 및 운영기준에 따라 달라질 수 있다.",
+  "docsFlow": "신청·신고 기록 → 조사·심사 자료 → 결정·조정 통지 → 지급·이행 기록 → 사후관리로 이어진다.",
+  "bottlenecks": [
+   "채무·거래 사실과 증빙",
+   "기관 간 자료 연계",
+   "결정·조정 이후 이행"
+  ],
+  "reformPoints": [
+   "진행상태 안내 강화",
+   "결정 근거의 설명성 개선",
+   "취약 이용자 지원 경로 명확화"
+  ]
+ },
+ "related": [
+  "금융소비자 보호",
+  "예금자 보호",
+  "신용회복 채무조정"
+ ],
+ "fieldVerification": [
+  "실제 온라인·방문 접수 경로",
+  "기관별 처리기한·서식",
+  "개별 사건별 세부 운영기준"
+ ],
+ "process": {
+  "institution_name": "금융분쟁조정",
+  "law_name": "금융소비자 보호에 관한 법률",
+  "lanes": [
+   "금융소비자",
+   "금융회사",
+   "금융감독원·분쟁조정기구",
+   "금융위원회"
+  ],
+  "stages": [
+   "G0 상황·상담",
+   "G1 신청·접수",
+   "G2 조사·심사",
+   "G3 결정·조정",
+   "G4 지급·이행",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "분쟁 발생·자료 확보",
+    "lane": "금융소비자",
+    "stage": "G0 상황·상담",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "금융소비자",
+    "action": "분쟁 발생·자료 확보",
+    "output_documents": [
+     "분쟁 발생·자료 확보 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "금융소비자 보호에 관한 법률",
+      "article": "제37조",
+      "text": "금융소비자 보호에 관한 법률 제37조에 따른 분쟁 발생·자료 확보 단계"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "분쟁조정 신청",
+    "lane": "금융회사",
+    "stage": "G0 상황·상담",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "금융회사",
+    "action": "분쟁조정 신청",
+    "output_documents": [
+     "분쟁조정 신청 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "금융소비자 보호에 관한 법률",
+      "article": "제37조",
+      "text": "금융소비자 보호에 관한 법률 제37조에 따른 분쟁조정 신청 단계"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "사실관계 확인·자료 요청",
+    "lane": "금융감독원·분쟁조정기구",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "금융감독원·분쟁조정기구",
+    "action": "사실관계 확인·자료 요청",
+    "output_documents": [
+     "사실관계 확인·자료 요청 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "금융소비자 보호에 관한 법률",
+      "article": "제36조",
+      "text": "금융소비자 보호에 관한 법률 제36조에 따른 사실관계 확인·자료 요청 단계"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "금융회사 의견 제출",
+    "lane": "금융위원회",
+    "stage": "G2 조사·심사",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "금융위원회",
+    "action": "금융회사 의견 제출",
+    "output_documents": [
+     "금융회사 의견 제출 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "금융소비자 보호에 관한 법률",
+      "article": "제36조",
+      "text": "금융소비자 보호에 관한 법률 제36조에 따른 금융회사 의견 제출 단계"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "조정위원회 심의",
+    "lane": "금융소비자",
+    "stage": "G3 결정·조정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "금융소비자",
+    "action": "조정위원회 심의",
+    "output_documents": [
+     "조정위원회 심의 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "금융소비자 보호에 관한 법률",
+      "article": "제33조",
+      "text": "금융소비자 보호에 관한 법률 제33조에 따른 조정위원회 심의 단계"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "조정안 제시",
+    "lane": "금융회사",
+    "stage": "G3 결정·조정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "금융회사",
+    "action": "조정안 제시",
+    "output_documents": [
+     "조정안 제시 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "금융소비자 보호에 관한 법률",
+      "article": "제38조",
+      "text": "금융소비자 보호에 관한 법률 제38조에 따른 조정안 제시 단계"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "수락·조정 성립",
+    "lane": "금융감독원·분쟁조정기구",
+    "stage": "G4 지급·이행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "금융감독원·분쟁조정기구",
+    "action": "수락·조정 성립",
+    "output_documents": [
+     "수락·조정 성립 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "금융소비자 보호에 관한 법률",
+      "article": "제39조",
+      "text": "금융소비자 보호에 관한 법률 제39조에 따른 수락·조정 성립 단계"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "불수락 시 소송·사후관리",
+    "lane": "금융위원회",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "금융위원회",
+    "action": "불수락 시 소송·사후관리",
+    "output_documents": [
+     "불수락 시 소송·사후관리 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "금융소비자 보호에 관한 법률",
+      "article": "제39조",
+      "text": "금융소비자 보호에 관한 법률 제39조에 따른 불수락 시 소송·사후관리 단계"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건·기한·금액은 사실관계와 하위규정에 따라 달라질 수 있다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 13건 가운데 13건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "금융소비자 보호에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "금융소비자 보호에 관한 법률",
+    "lawId": "013704",
+    "mst": "277247",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/금융소비자보호에관한법률"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 9,
+   "explicitCitationEntries": 9,
+   "articleReferences": 13,
+   "verifiedReferences": 13,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}
