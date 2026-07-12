@@ -13,7 +13,12 @@
   "legalBasis": [
    {
     "law": "지방재정법",
-    "articles": "제45조, 제46조",
+    "articles": "제40조(예산의 내용), 제45조(추가경정예산의 편성 등·성립 전 사용), 제46조(예산 불성립 시의 예산 집행), 제47조(목적 외 사용금지)",
+    "kind": "법률"
+   },
+   {
+    "law": "지방자치법",
+    "articles": "제47조(지방의회 의결사항), 제142조(예산의 편성 및 의결), 제146조(예산 불성립 시 집행)",
     "kind": "법률"
    }
   ],
@@ -194,7 +199,7 @@
     "status": "current",
     "progress": 45,
     "actor": "지방자치단체",
-    "action": "성립전 예산·추가경정예산은 적용되는 법정 기준을 검토",
+    "action": "이미 성립된 예산의 변경 필요성을 확인하고 추가경정예산 편성 기준을 검토",
     "output_documents": [
      "검토 의견"
     ],
@@ -205,7 +210,12 @@
      {
       "law": "지방재정법",
       "article": "제45조",
-      "text": "추가경정예산의 편성 등에 관한 절차와 기준을 정한다."
+      "text": "지방자치단체의 장은 이미 성립된 예산을 변경할 필요가 있을 때에는 추가경정예산을 편성할 수 있다."
+     },
+     {
+      "law": "지방재정법",
+      "article": "제40조",
+      "text": "예산은 예산총칙, 세입·세출예산, 계속비, 채무부담행위 및 명시이월비를 총칭한다."
      }
     ]
    },
@@ -314,18 +324,23 @@
     "status": "waiting",
     "progress": 0,
     "actor": "지방의회·선관위",
-    "action": "추가경정예산 확정을 공식적으로 확정",
+    "action": "지방의회가 추가경정예산안을 심의·의결하여 확정",
     "output_documents": [
-     "결정·의결서"
+     "추경예산 의결서"
     ],
     "deadline": null,
     "blocker": null,
     "confidence": 0.9,
     "legal_basis": [
      {
-      "law": "지방재정법",
-      "article": "제46조",
-      "text": "예산 불성립 시의 예산 집행에 관한 절차와 기준을 정한다."
+      "law": "지방자치법",
+      "article": "제47조제1항",
+      "text": "지방의회는 예산의 심의·확정을 의결한다."
+     },
+     {
+      "law": "지방자치법",
+      "article": "제142조",
+      "text": "지방자치단체의 장이 편성·제출한 예산안을 지방의회가 의결한다. 지방의회는 장의 동의 없이 지출예산 각 항의 금액을 증가시키거나 새로운 비용항목을 설치할 수 없다."
      }
     ]
    },
@@ -574,7 +589,7 @@
   "status": "article-verified",
   "verifiedAt": "2026-07-13",
   "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
-  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 16건 가운데 16건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "scope": "법적 근거 2건 중 공식 원문 2건을 연결했다. 캔버스와 절차 노드의 명시 조문 19건 가운데 19건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
    "[시행 2026.07.01.] 기준"
   ],
@@ -589,6 +604,17 @@
     "promulgatedOn": "2026-02-05",
     "effectiveOn": "2026-07-01",
     "officialUrl": "https://law.go.kr/법령/지방재정법"
+   },
+   {
+    "law": "지방자치법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "지방자치법",
+    "lawId": "001656",
+    "mst": "284005",
+    "promulgatedOn": "2026-03-05",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/지방자치법"
    }
   ],
   "articleVerification": {
@@ -596,8 +622,8 @@
    "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
    "citationEntries": 15,
    "explicitCitationEntries": 15,
-   "articleReferences": 16,
-   "verifiedReferences": 16,
+   "articleReferences": 19,
+   "verifiedReferences": 19,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }
