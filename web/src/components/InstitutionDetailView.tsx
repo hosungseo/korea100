@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import { buildProcessLaneGroups } from "@/lib/process-layout.mjs";
+import { formatProcessWarnings } from "@/lib/process-warnings.mjs";
 import type { Institution, InstitutionSummary } from "@/lib/types";
 import InstitutionSwitcher from "./InstitutionSwitcher";
 import ProcessExplorer from "./ProcessExplorer";
@@ -16,6 +17,7 @@ export default function InstitutionDetailView({
   relatedSlugs: Map<string, string>;
 }) {
   const process = institution.process;
+  const processWarnings = formatProcessWarnings(process?.warnings);
   const article = institution.verification?.articleVerification;
   const verification = verificationMeta(institution);
   const stats = [
@@ -114,8 +116,8 @@ export default function InstitutionDetailView({
           )}
         </div>
 
-        {process?.warnings && process.warnings.length > 0 && (
-          <p className={styles.processWarning}>{process.warnings.join(" / ")}</p>
+        {processWarnings.length > 0 && (
+          <p className={styles.processWarning}>{processWarnings.join(" / ")}</p>
         )}
       </section>
 
