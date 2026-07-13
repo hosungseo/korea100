@@ -64,7 +64,7 @@ export default function OgCardPage() {
         <div><span>05</span><strong>유의사항과 개선</strong></div>
       </section>
 
-      <footer>milkbuttercheese2.github.io/How-Did-They-Do-All-That-Procurement-</footer>
+      <footer>milkbuttercheese2.github.io/procurement-system-100</footer>
     </main>
   );
 }

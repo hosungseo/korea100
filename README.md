@@ -1,6 +1,6 @@
 # 그 많던 조달은 어떻게 했을까 — 한 장으로 끝내는 조달제도 100
 
-**🔗 라이브 사이트: <https://milkbuttercheese2.github.io/How-Did-They-Do-All-That-Procurement-/>**
+**🔗 라이브 사이트: <https://milkbuttercheese2.github.io/procurement-system-100/>**
 
 대한민국 공공조달·계약 제도를 법령, 조직, 절차, 돈, 문서, 병목 관계로 나누어 한 장의 구조도로 읽는 공개 웹서비스입니다. `한 장으로 끝내는 대한민국 제도 100`(korea100)의 조달청 버전으로, korea100의 데이터 계약·검증 파이프라인·웹앱 인프라를 승계해 콘텐츠를 조달 도메인으로 새로 만듭니다.
 
@@ -66,7 +66,7 @@ LAW_OC=... npm run check:freshness
 
 GitHub Pages로 서비스합니다. `main` 브랜치에 push되면 [`.github/workflows/pages.yml`](.github/workflows/pages.yml) 워크플로가 정적 빌드(`next build`, `output: "export"`) 후 자동 배포합니다.
 
-- 접속 주소: <https://milkbuttercheese2.github.io/How-Did-They-Do-All-That-Procurement-/>
+- 접속 주소: <https://milkbuttercheese2.github.io/procurement-system-100/>
 - 수동 배포: GitHub Actions에서 `Deploy to GitHub Pages` 워크플로를 `workflow_dispatch`로 실행
 
 ## 주요 경로

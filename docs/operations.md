@@ -79,7 +79,7 @@ npm run build
 ### 1. 서비스 개요
 
 - 대한민국 공공조달·계약 제도를 "한 장 캔버스 + 상태 인식형 업무구조도"로 보여주는 정적 웹서비스.
-- 라이브: <https://milkbuttercheese2.github.io/How-Did-They-Do-All-That-Procurement-/> (GitHub Pages, main 머지 시 `.github/workflows/pages.yml` 자동 배포)
+- 라이브: <https://milkbuttercheese2.github.io/procurement-system-100/> (GitHub Pages, main 머지 시 `.github/workflows/pages.yml` 자동 배포)
 - 제도 1건 = `web/data/institutions/{slug}.json` 1파일. 스키마 원본: `docs/data-contract.md`.
 - 분류·공개순서: `docs/institutions-100-manifest.json` (validate가 파일 수·priority 연속성·name/type 일치를 강제)
 

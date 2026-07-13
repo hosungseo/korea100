@@ -173,5 +173,5 @@ function buildVerificationIssueUrl(entry: FieldVerificationEntry) {
       `\n> 개인정보나 비공개 내부자료는 포함하지 마세요.`,
     ].join("\n\n")
   );
-  return `https://github.com/Milkbuttercheese2/How-Did-They-Do-All-That-Procurement-/issues/new?title=${title}&body=${body}&labels=field-verification`;
+  return `https://github.com/Milkbuttercheese2/procurement-system-100/issues/new?title=${title}&body=${body}&labels=field-verification`;
 }

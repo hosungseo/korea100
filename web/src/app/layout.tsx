@@ -8,10 +8,10 @@ import "./globals.css";
 
 const SITE_VERSION = pkg.version;
 const CHANGELOG_URL =
-  "https://github.com/Milkbuttercheese2/How-Did-They-Do-All-That-Procurement-/blob/main/CHANGELOG.md";
+  "https://github.com/Milkbuttercheese2/procurement-system-100/blob/main/CHANGELOG.md";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://milkbuttercheese2.github.io/How-Did-They-Do-All-That-Procurement-";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://milkbuttercheese2.github.io/procurement-system-100";
 const INSTITUTIONS = getInstitutionSummaries();
 const MODEL_COUNT = INSTITUTIONS.length;
 const LATEST_AS_OF_DATE = INSTITUTIONS.reduce(
