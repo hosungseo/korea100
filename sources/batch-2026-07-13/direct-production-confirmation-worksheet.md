@@ -33,3 +33,16 @@
 - 전기신문/퍼블릭뉴스 2024 직접생산확인제도 개편(현장조사 원칙, 네거티브 판정)
 - 중기부 SMPP 중소기업자간 경쟁제품 직접생산 확인기준
 - 신김/비즈한국 직접생산 위반 제재·집행정지, 다음뉴스 나라장터 거래정지 판결
+
+## 수정 이력 (2026-07-13, 검증 심사 반영)
+
+검증 심사자 지적 6건 반영. 대상: web/data/institutions/direct-production-confirmation.json.
+
+1. **verification 상태 원복(must-fix, schema-error)**: `status`를 `article-verified` → `needs-review`로, `method`를 `law-cache 원문 대조 + 공개 웹 검색(WebSearch) 교차 대조 — 국가법령정보센터 원문 기계 대조(LAW_OC) 미실시`로, `verifiedAt`·`articleVerification.checkedAt`을 2026-07-13 → 2026-07-12로 되돌림. 이번 배치는 원문 기계 대조 미실시 세션이므로 가이드 1·3절대로 needs-review 고정. `scope`도 실제 검증 수단(law-cache 원문 대조 + 검색 교차)에 맞게 재작성.
+2. **articleVerification 집계 수정(must-fix, schema-error)**: 조달사업법 제22조(P13) 1건을 uncheckable로 이동. `verifiedReferences` 36→35, `uncheckableReferences` 0→1(합계 36 유지). 근거: 조달사업법 캐시는 목차(TOC)만 있어 제22조 본문 원문 미대조. 이로써 needs-review 통과 요건((missing+uncheckable) ≥ 1)도 충족.
+3. **P13 legal_basis 문구 수정(should-fix, wording)**: 텍스트를 `계약상대자가 거짓 서류 제출 등 위반행위를 한 경우 2년 이내의 범위에서 나라장터 거래정지를 할 수 있다`로 교체. 제21조(불공정 조달행위 조사)와 경계를 흐리던 서술을 제22조(거래정지) 취지로 정정하고, `(본문 원문 미대조...)` 메타 주석은 text에서 제거해 scope/uncheckable 계상으로 이관. **본인 WebSearch 재확인**: 제22조 거래정지는 계약상대자의 거짓 서류 제출 등에 대해 최대 24개월(2년) 거래정지를 규정(law.go.kr, nepla.ai 검색 교차 확인).
+4. **등록규정 제14조 제명 수정(should-fix, wording)**: `제14조(등록 확인)` → `제14조(등록의 확인)`. 근거: law-cache 국가종합전자조달시스템-입찰참가자격등록규정.md 121행 원문 제명 `제14조(등록의 확인)`.
+5. **판로지원법 제10조 제명 수정(should-fix, wording)**: `제10조(이의신청 특례)` → `제10조(직접생산 확인에 대한 이의신청 특례)`. 근거: law-cache 판로지원법 목차 28행 공식 제명.
+6. **related 보정(should-fix, wording)**: 지적이 지목한 고시 제명 `중소기업자간 경쟁제품 직접생산 확인기준`은 현재 파일 related에 실재하지 않았음(현행 related 3건은 모두 유효 제도명). 지적 취지대로 manifest 제도명 `중소기업자간 경쟁제품 지정`(manifest 19행 확인)을 related에 추가(유효 항목 유지, 4건으로 확장).
+
+수정 후 `node -e JSON.parse` 파싱 통과, web/scripts/validate-data.mjs에서 본 파일 관련 오류 없음(잔여 실패는 타 파일 manifest 카운트·큐 집계 등 배치 차원 사안).

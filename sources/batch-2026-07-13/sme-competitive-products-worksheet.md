@@ -1,12 +1,12 @@
 # 중소기업자간 경쟁제품 지정 — 조사 워크시트 (2026-07-12, law-cache + WebSearch 기반)
 
-대상 slug: sme-competitive-products / type: 등록 / priority: 81
+대상 slug: sme-competitive-products / type: 지정·판로 / priority: 3 (manifest `docs/institutions-100-manifest.json` 값과 일치)
 주 이용자: 조달업체·수요기관
 
 ## 캐시 대조 상태
 - `$REPO/sources/law-cache/중소기업제품-구매촉진-및-판로지원에-관한-법률.md` : **목차(조문 제목)만** 수록. 조문 번호·제목은 캐시 원문에서 직접 확인, 조문 본문·수치는 캐시에 없어 WebSearch 교차 확인.
 - `$REPO/sources/law-cache/중소기업제품-구매촉진-및-판로지원에-관한-법률-시행령.md` : 목차만 수록(mst 287311, 공포 20260623, 시행 20260701). 조문 번호·제목만 캐시 확인.
-- registry(`web/data/legal-source-registry.json`)에는 **법률만** 연결됨(lawId 010998, mst 284097, 시행 2026-07-01). 시행령·고시는 미연결 → unresolved 처리.
+- registry(`web/data/legal-source-registry.json`) 재확인 결과 **법률·시행령·고시 3건 모두 연결됨**: 법률(lawId 010998, mst 284097), 시행령(lawId 011101, mst 287311, 공포 2026-06-23, 시행 2026-07-01), 고시(adminRuleId 36574, adminRuleSerial 2100000263518). 따라서 3건 모두 sources에 넣고 unresolved는 비운다. (기존 워크시트가 '법률만 연결'로 오기했던 부분을 정정.)
 
 ## 인용한 조문과 증거
 | 규범 | 조문 | 주장 내용 | 증거 | 확신도 |
@@ -37,7 +37,29 @@
 - 시행령 조문의 정확한 항·호 번호(예: 유효기간 3년이 몇 항인지)는 캐시가 목차만 있어 미확정 → 조문 단위(제6조)로만 인용.
 - 직접생산확인증명서 발급기관이 중소기업유통원/중소벤처기업유통원으로 이관되었다는 검색 결과는 확정 근거 부족 → 본문에서 "중소벤처기업부장관(위탁기관)" 수준으로만 서술.
 
-## sources / unresolved 분류
-- sources: 판로지원법(법률, registry 연결값 재사용).
-- unresolved(title-needs-confirmation): 판로지원법 시행령(대통령령) — registry 미연결.
-- unresolved(external-official-document): 중소기업자간 경쟁제품 및 공사용자재 직접구매 대상품목 지정내역(중소벤처기업부 고시).
+## sources / unresolved 분류 (2026-07-13 정정)
+- sources(3건, 모두 registry 연결값 재사용): 판로지원법(법률, lawId 010998), 판로지원법 시행령(대통령령, lawId 011101), 중소기업자간 경쟁제품 및 공사용자재 직접구매 대상품목 지정내역(중소벤처기업부 고시, adminRuleId 36574).
+- unresolved: 없음(빈 배열). canvas.legalBasis 3건 모두 sources에 존재하므로 unresolved 대상 없음.
+- needs-review 통과 조건은 uncheckableReferences=8(≥1)로 충족한다.
+
+## 수정 이력 (2026-07-13, 검증 심사 지적 반영)
+| 대상 | 변경 전 | 변경 후 | 사유(지적) |
+|---|---|---|---|
+| verification.status | article-verified | needs-review | 가이드 1·3절: 이번 배치는 needs-review 고정, LAW_OC 기계 대조 미실시 |
+| verification.verifiedAt / articleVerification.checkedAt | 2026-07-13 | 2026-07-12 | 가이드 3절 고정값 |
+| verification.method | 국가법령정보센터 Open API 대조 | WebSearch 교차 대조 + law-cache 목차 대조(LAW_OC 미실시) | 캐시는 목차만, 본문은 검색 확인이라 기계 대조 주장 모순 |
+| articleVerification verified/uncheckable | 26 / 0 | 18 / 8 | 조문 본문 미확인분(법 제7조의2, 시행령 제7·8·9·10조 등)을 uncheckable로 재분류, 합계 26 유지 |
+| verification.unresolved | (없음) | [] 추가 | needs-review 스키마상 명시 |
+| P03 법 제6조 text | 중앙회장 추천을 받아 지정 | 지정 권한+대통령령 위임으로 하향 | 추천 절차는 시행령 제6조제1항 소재(refuted). WebSearch(law.go.kr·LBOX) 재확인 |
+| P05 법 제6조 text/confidence | 협의 거쳐 지정·고시(0.85) | 협의 의무·지정제외 요청 존중(0.8) | 협의는 법 제6조에 실재(재검색 확인)하나 '고시'는 시행령 소관이라 삭제, 과잉확신 하향 |
+| P07 법 제6조 / 시행령 제6조 text | 법 제6조에 협의·지정·고시 귀속 | 협의·지정은 법, 추천·협의·고시는 시행령 제6조로 이관 | 고시 근거는 시행령 제6조제1항(refuted) |
+| P02 시행령 제6조 text/condition | 직접생산 중소기업 수·구매실적 요건을 시행령에 귀속 | 요건 수치는 중기부 운영요령 소관으로 이관, 시행령은 지정 근거로만 | 수치 요건은 운영요령 소재(unverifiable) |
+| P01 시행령 제6조 text | 신청 주체·자격을 시행령에 얹음 | 중앙회장 추천만 시행령, 신청 주체·자격은 운영요령으로 분리 | 신청 자격은 운영요령 소재(wording) |
+| canvas.applicability | '일정 수 이상·일정액 이상' 요건 서술(시행령 제6조) | '판로 확대 필요로 지정·고시된 품목'으로 간결화 | 요건 수치 귀속 오류 + applicability 간결성 규칙 |
+| canvas.legalBasis[1] 시행령 제7조/제9조 제명 | 경쟁입찰의 예외 / 참여자격 등 | 중소기업자간 경쟁입찰의 예외 등 / 중소기업자간 경쟁입찰의 참여자격 등 | law-cache 목차 공식 제명으로 정정(wording) |
+| canvas.authorities[1] 중소기업중앙회 role | 직접생산확인 업무 수행 | 직접생산확인 실무는 중소기업유통센터로 이관 표기 | 2022-04-25 업무 이관(mss.go.kr·정책브리핑, refuted). WebSearch 재확인 |
+
+### 재확인한 WebSearch 근거(2026-07-13)
+- 법 제6조 원문: '중소벤처기업부장관은 … 경쟁제품으로 지정할 수 있다. … 미리 관계 중앙행정기관의 장과 협의하여야 하며 … 지정에 필요한 사항은 대통령령으로 정한다' → 협의 의무는 법률 소재, 추천·고시는 시행령. (law.go.kr, LBOX 제6조, 위키문헌)
+- 시행령 제6조제1항: '중소기업중앙회의 회장의 추천을 받아 관계 중앙행정기관의 장과의 협의를 거쳐 경쟁제품을 지정하고 고시해야 한다. … 유효기간은 … 3년' (elaw.klri.re.kr, legalengine, law.go.kr lsiSeq 204186)
+- 직접생산확인 업무: 2022-04-25부터 중소기업유통센터가 수행(종전 중소기업중앙회). (mss.go.kr bcIdx 1033388, 정책브리핑 156504688, KDI 225608)
