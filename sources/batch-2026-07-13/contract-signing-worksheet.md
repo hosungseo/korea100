@@ -26,7 +26,7 @@
 
 - 계약서 작성 시 **인지세**(전자문서 포함) 부과 여부·금액: 인지세법 소관이고 금액 구간 확인 미완 → 수치 없이 fieldVerification로 처리.
 - 계약보증금 면제 대상의 구체 범위(시행령 제50조 각 항 단서): 본문 미확보로 세부 열거 생략.
-- 전자조달법 제9조의 항·호 세부 번호: 본문 확인은 되나 원문 식별자(lawId/mst) 미확보 → unresolved 처리.
+- 전자조달법 제9조의 항·호 세부 번호: 본문 확인은 되나 항·호 단위는 조문 수준으로만 인용. 다만 법령 자체의 원문 식별자(lawId 011778, mst 277153)는 legal-source-registry.json 기계 연결분과 정확히 일치하여 그대로 재사용해 sources에 수록했다(unresolved 아님).
 
 ## 수치 항목
 
@@ -39,3 +39,21 @@
 ## 캐시 대조 요약
 - 원문 전문 대조 완료: 공사계약일반조건 제3조, 물품구매(제조)계약일반조건 제3·7조, 용역계약일반조건 제4·8조.
 - 목차만 대조(본문은 WebSearch 교차): 법 제11·12조, 시행령 제48·49·50·92조의2, 시행규칙 제49·50조, 전자조달법 제9·11조.
+
+## 수정 이력 (2026-07-13, 검증 심사 반영)
+
+| 지적 | 위치 | 조치 | 사유 |
+| --- | --- | --- | --- |
+| 1 (must-fix, refuted) | process P09 영 제49조 text | 영 제49조 text를 '증거서류 제출·비치'에서 '계약서 작성 생략 사유 각호 열거'로 교체 | 영 제49조 전문(LBOX·lawnb·law.go.kr 재확인)은 3천만원 이하 등 생략 사유 열거만 규정. 증거서류 비치 의무는 규칙 제50조 소관이며 같은 노드 규칙 제50조 항목이 이미 올바르게 인용. WebSearch 재확인 완료 |
+| 2 (should-fix, unverifiable) | process P10 공사입찰유의서 article | "제19조제3항"→"제19조"로 항 번호 제거, text에 미확보 취지 부기 | 낙찰취소가 제3항이라는 항 번호가 검색 스니펫으로 확정되지 않음. 조문 수준 인용으로 하향 |
+| 3 (should-fix, wording) | verification.unresolved | 공사입찰유의서 항목 신설(kind 고시·지침, reasonCode title-needs-confirmation) | 조문 단위 인용하면서 sources/unresolved 어디에도 없어 추적성 단절. registry에도 부재 확인 |
+| 4 (should-fix, wording) | verification.method / verifiedAt / articleVerification.checkedAt·method | method를 '조문번호=캐시 목차, 본문·수치=WebSearch, 예규=캐시 원문, LAW_OC 미실시'로 정정. verifiedAt·checkedAt를 2026-07-12(asOfDate)로 통일 | 기존 method가 Open API 대조 수행처럼 과대 표시. 내부 날짜(2026-07-13)가 asOfDate와 어긋남 |
+| 5 (should-fix, wording) | canvas.applicability | 계약보증금 비율 서술 삭제, 적용대상+근거조항 수준으로 축약 | 강화규칙 5: applicability에 절차 요건(보증금 비율) 서술 금지 |
+| 6 (should-fix, wording) | process P05 legal_basis | 물품구매(제조)계약일반조건 제7조제1항 추가(용역계약일반조건 제8조 병기) | '계약체결일까지' 기한은 법 제12조·영 제50조제1항 본문에 없고 예규가 근거. law-cache 원문 대조로 확인(제7조제1항 원문 인용) |
+| 7 (should-fix, wording) | 본 워크시트 '확인 못 해 뺀 것' 전자조달법 항목 | unresolved 처리 기재를 'registry 식별자 재사용으로 sources 수록'으로 갱신 | JSON은 registry와 일치하는 식별자로 sources에 수록. 워크시트-JSON 모순 제거 |
+
+### 검증 집계 재산정 (지적 6 반영)
+- P05에 예규 조문 1건 추가 → citationEntries 24→25, explicitCitationEntries 24→25.
+- articleReferences 30→31, verifiedReferences 28→29(예규 제7조는 캐시 원문 대조 확인분), missingReferences 0, uncheckableReferences 2(공사입찰유의서 제19조 P01·P10 인용) 유지. 합계 29+0+2=31 일치.
+- unresolved 1건(공사입찰유의서) + uncheckable 2건 → needs-review 통과 조건(unresolved≥1 또는 missing+uncheckable≥1) 충족.
+- canvas.legalBasis 5개 law는 전부 sources에 수록(전자조달법 포함), 공사입찰유의서는 process 노드 전용이라 커버리지 대상 아님(unresolved에 별도 기록으로 추적성 확보).

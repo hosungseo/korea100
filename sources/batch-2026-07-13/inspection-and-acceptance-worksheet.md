@@ -1,6 +1,6 @@
 # 검사와 검수 — 조사 워크시트 (2026-07-12 기준, law-cache 원문 + WebSearch 교차)
 
-대상 제도: inspection-and-acceptance (검사와 검수) / type 계약·이행 / priority 91
+대상 제도: inspection-and-acceptance (검사와 검수) / type 이행·대금 / priority 26 (manifest 기준)
 주 이용자: 조달업체·수요기관
 
 ## 인용한 조문과 증거
@@ -25,7 +25,7 @@
 | 〃 | 제28조(인수) | 검사 완료 통지 후 서면 인수요청 시 현장인수증명서 발급·인수, 7일 내 미요청 시 발주기관이 인수 가능 | law-cache 전문 원문 대조 | 높음 |
 | 〃 | 제29조(기성부분의 인수) | 성질상 분할 가능한 완성부분 기성 인수 | law-cache 전문 원문 대조 | 높음 |
 | 〃 | 제35조(하자검사) | 하자담보책임기간 중 연 2회 이상 정기 하자검사 | law-cache 전문 원문 대조 | 높음 |
-| (계약예규) 용역계약일반조건 | 제20조(검사) | ② 통지받은 날부터 14일 이내 검사, ⑥ 검사 완료 서면 통지·재검사, ⑦ 재난 시 14일→7일 | law-cache 전문 원문 대조 | 높음 (단 registry 미등록 → unresolved) |
+| (계약예규) 용역계약일반조건 | 제20조(검사) | ② 통지받은 날부터 14일 이내 검사, ⑥ 검사 완료 서면 통지·재검사, ⑦ 재난 시 14일→7일 | law-cache 전문 원문 대조 | 높음 (registry 등록: adminRuleId 27949 → sources 대상) |
 | 〃 | 제21조(인수) | 용역 특성상 인수 필요 시 검사로 완성 확인 후 인수 | law-cache 전문 원문 대조 | 높음 |
 
 ## 확인 못 해 뺀 것 / 조문 번호 없이 쓴 것
@@ -49,5 +49,21 @@
 
 ## 출처(registry/known-source 매핑)
 
-- sources 대상(registry 등록): 국가계약법(법률), 국가계약법 시행령(대통령령), (계약예규) 물품구매(제조)계약일반조건, (계약예규) 공사계약일반조건
-- unresolved 대상(registry 미등록): (계약예규) 용역계약일반조건 → title-needs-confirmation
+- sources 대상(known-source/registry 등록): 국가계약법(법률), 국가계약법 시행령(대통령령), (계약예규) 물품구매(제조)계약일반조건(adminRuleId 27947), (계약예규) 공사계약일반조건(adminRuleId 27874), (계약예규) 용역계약일반조건(adminRuleId 27949, serial 2100000276694 — legal-source-registry.json 등록 확인), 조달물자 전문기관검사 업무규정(adminRuleId 32876, serial 2100000247640, 2024-09-30 — registry 등록)
+- unresolved 대상: 없음(canvas.legalBasis의 모든 법령이 sources에 연결됨). needs-review 요건은 articleVerification의 uncheckableReferences(법률·시행령 20건)로 충족.
+
+## 조달청 행정규칙 확인(강화규칙 3항)
+
+- 「조달물자 전문기관검사 업무규정」이 국가법령정보센터 행정규칙으로 실재함을 WebSearch로 재확인(law.go.kr 행정규칙, 조달청 고시). legal-source-registry.json에 이미 기계 연결(adminRuleId 32876, serial 2100000247640, 공포 2024-09-30)되어 있어 sources에 그대로 연결하고 canvas.legalBasis(고시·지침) 말미에 추가했다.
+- 유사 제명 「조달물자 전문기관검사 세부업무 처리기준」(admRulSeq 2100000179318)도 존재하나, registry 등록·최신 식별자가 확보된 「업무규정」을 채택했다(강화규칙 6항 현행 최신 우선). 세부 조문 번호는 원문 대조 필요로 남긴다.
+
+## 수정 이력 (2026-07-13, 검증 심사 반영)
+
+| # | 위치 | 무엇을 | 왜 |
+|---|---|---|---|
+| 1 | verification.status | article-verified → needs-review | 가이드 1절: 이번 배치 상태는 needs-review 고정, 승격은 관리자 LAW_OC 기계 대조 단계. 자가 승격 정정. |
+| 2 | verifiedAt·checkedAt / method / scope·notes | 2026-07-13 → 2026-07-12, method를 지정 문구로, scope를 '예규 전문 대조 + 법률·시행령 목차+검색'으로 재작성 | 가이드 3절 고정값. law-cache 법률·시행령은 목차(조문 제명)만 수록되어 Open API 인용 대조 주장은 과잉. |
+| 3 | articleVerification | verified 39/uncheck 0 → verified 19(예규)/uncheck 20(법률·시행령), citationEntries 27→28(조달청 규정 추가·비명시) | needs-review는 (missing+uncheckable)≥1 필요(validate 232행). 예규만 캐시 전문 대조, 법률·시행령 인용문은 검색 근거뿐이므로 uncheckable로 재분류. 합계 39 유지. |
+| 4 | process P04 영 제55조 text | '…14일 이내에 하며, 전문기관을 지정하여 검사하게 할 수 있다' → '…14일 이내에 하여야 한다' | 제55조 본문에 전문기관 지정 문언 소재를 캐시·검색으로 확정 못 함. 전문기관 지정은 같은 노드의 법 제14조제1항 단서 인용에 맡김. |
+| 5 | canvas.legalBasis / verification.sources | 「조달물자 전문기관검사 업무규정」 추가(sources 연결) | 강화규칙 3항: 제도별 조달청 행정규칙 인용. authorities에만 있던 조달청 전문기관검사 규정을 legalBasis·sources에 반영. |
+| 6 | 워크시트 헤더·출처 매핑 | type 계약·이행/91 → 이행·대금/26, 용역계약일반조건 unresolved → sources | manifest(priority 26·type 이행·대금)와 registry(용역 등록) 사실에 맞춰 워크시트-JSON 불일치 제거. |

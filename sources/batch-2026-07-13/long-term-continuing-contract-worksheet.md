@@ -15,6 +15,7 @@
 | (계약예규) 공사계약일반조건 | 제17조 | 착공 및 공정보고. 장기계속공사 1차 이후 연차계약의 착공일 협의 결정 | law-cache 원문 대조(L121, L128) | 높음 |
 | (계약예규) 공사계약일반조건 | 제25조제1항 | 지체상금은 계약금액(장기계속공사계약의 경우 연차별 계약금액)에 지체상금률을 곱하여 산출 | law-cache 원문 대조(L265) | 높음 |
 | (계약예규) 공사계약일반조건 | 제26조 | 계약기간 연장 신청. 장기계속공사는 연차별 계약기간 기준 | law-cache 원문 대조(L284, L291-292) | 높음 |
+| (계약예규) 공사계약일반조건 | 제40조제1항(제27조 검사 연계) | 준공대가 지급. 공사 완성 후 제27조 검사 합격 시 준공대가(장기계속계약은 각 차수별 준공대가) 청구 | law-cache 원문 대조(제40조 L376, 각 차수별 준공대가 L288, 검사 제27조 L294) | 높음 |
 
 ## 확인 못 해 뺀 것 / 조문 번호 없이 쓴 것
 
@@ -32,5 +33,18 @@
 
 ## sources / unresolved 정리
 
-- sources(식별자 보유): 국가계약법(000695/283877), 국가계약법 시행령(002652/285893), (계약예규) 공사계약일반조건(admin-rule 27874/2100000276690, registry 복사)
-- unresolved: 국가재정법(title-needs-confirmation — law-cache/registry에 없어 식별자 미연결)
+- sources(식별자 보유): 국가계약법(000695/283877), 국가재정법(010301/286517, legal-source-registry.json L453-464에 기계 연결 확인 — 2026-07-13 갱신), 국가계약법 시행령(002652/285893), (계약예규) 공사계약일반조건(admin-rule 27874/2100000276690, registry 복사)
+- unresolved: 없음. legalBasis 4개 법령 모두 sources에 식별자 연결됨(국가재정법 포함). 이전 기재('국가재정법 unresolved')는 registry 연결 반영해 폐기.
+
+## 수정 이력 (2026-07-13, 검증 심사 지적 반영)
+
+| # | 위치 | 조치 | 사유 |
+|---|---|---|---|
+| 1 | verification.status/method/verifiedAt/scope/articleVerification.checkedAt·method | status를 `needs-review`로, verifiedAt·checkedAt을 `2026-07-12`로 되돌리고, method를 실제 수행 내용("law-cache 원문 대조(공사계약일반조건) + WebSearch — LAW_OC 미실시")으로 교정. scope의 '21건 중 21건 확인' 단정을 '공사계약일반조건 8건만 원문 전문 대조, 나머지 13건은 WebSearch 교차 확인(uncheckable)'으로 수정 | 공용 가이드 1절: 이번 배치 status는 반드시 needs-review, verifiedAt=2026-07-12 고정. 원문 기계 대조 미실시인데 article-verified/기계대조 method는 세션 제약·워크시트 증거와 모순 |
+| 2 | verification.articleVerification 집계 | verifiedReferences 21→8, uncheckableReferences 0→13(합계 21 유지, missing 0). 법 제21조 각 항·시행령 제69조 각 항·국가재정법 제23조 등 WebSearch 전용 참조를 uncheckable로 이동 | 가이드 3절: needs-review는 (missing+uncheckable)≥1이어야 통과. 워크시트상 전문 원문 대조는 공사계약일반조건뿐이고 시행령 제69조는 캐시 TOC(L94)만 존재 |
+| 3 | process P11.legal_basis[0].text | 제69조제5항 text를 원문("계속비예산으로 집행하는 공사에 있어서는 총공사와 연차별공사에 관한 사항을 명백히 하여 계약을 체결하여야 한다")으로 교체. '총공사를 완성하여 정산한다' 삭제 | WebSearch(law.go.kr/LBOX) 재확인: 제69조제5항에 '완성하여 정산' 문구 없음. 최종 정산 서술은 노드 action(실무 서술)에만 유지 |
+| 4 | fieldVerification[3] | '(국가재정법 원문 식별자 미연결)' 괄호 삭제 → "계속비 지출 연한(원칙 5년, 예외 10년)의 사업별 적용 실무(운영 확인)" | legal-source-registry.json L453-464에 국가재정법 기계 연결(010301/286517)돼 있고 sources에도 이미 포함, '미연결' 서술은 현재 파일과 모순 |
+| 5 | process P07.legal_basis[0] | 근거를 공사계약일반조건 제25조제1항(지체상금)→제40조제1항(준공대가 지급, 장기계속계약은 각 차수별 준공대가)으로 교체. text 후단 '이행·정산은 각 차수계약 기준' 일반화 삭제 | law-cache 원문 대조(L376 제40조 준공대가 지급, L288 각 차수별 준공대가): 제25조제1항은 지체상금 산출 조항으로 준공·대가 정산의 직접 근거 아님. 준공검사는 제27조(L294), 준공대가는 제40조 |
+
+- P07 근거 변경(제25조제1항 → 제40조제1항)에 따라 인용 조문이 바뀌었으나 여전히 공사계약일반조건(law-cache 원문 대조 조문)이므로 verifiedReferences=8 집계 불변.
+- 국가재정법 제23조제5항 확인 증거: WebSearch(2026-07-13) — https://lbox.kr 제69조 본문, law.go.kr 시행령 원문. 제69조제5항 종결부가 '…계약을 체결하여야 한다'임을 재확인.
