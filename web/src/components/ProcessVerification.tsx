@@ -59,11 +59,14 @@ export function VerificationMark({
   const [open, setOpen] = useState(false);
   const visual = STATE_STYLE[result.state];
   const canOpen = result.bases.length > 0;
+  const directUrl = result.bases
+    .flatMap(({ sources }) => sources)
+    .find((source) => source?.officialUrl)?.officialUrl;
   return (
     <>
       <span
         data-verification-state={result.state}
-        title={canOpen ? `${result.detail} (눌러서 조문 보기)` : result.detail}
+        title={canOpen ? (directUrl ? `${result.detail} (국가법령정보센터 원문으로 이동)` : `${result.detail} (눌러서 조문 보기)`) : result.detail}
         role={canOpen ? "button" : undefined}
         tabIndex={canOpen ? 0 : undefined}
         aria-haspopup={canOpen ? "dialog" : undefined}
@@ -72,6 +75,10 @@ export function VerificationMark({
             ? (event) => {
                 event.stopPropagation();
                 event.preventDefault();
+                if (directUrl) {
+                  window.open(directUrl, "_blank", "noopener,noreferrer");
+                  return;
+                }
                 setOpen(true);
               }
             : undefined
