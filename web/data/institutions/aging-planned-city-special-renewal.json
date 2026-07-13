@@ -1,0 +1,379 @@
+{
+ "slug": "aging-planned-city-special-renewal",
+ "name": "노후계획도시 특별정비",
+ "oneLiner": "정비기본계획 수립 → 특별정비계획 제안·주민 의견 → 특별정비계획 검토 → 위원회 심의 → 특별정비구역 지정·고시 → 사업시행자·총괄사업관리자 지정 → 건축·도시·교통 통합심의 → 정비사업 시행·이주대책 → 주민 열람·권리 확인",
+ "type": "특별정비구역·통합심의형",
+ "priority": 320,
+ "whyFirst": "정부·지방자치단체와 관계기관의 역할을 분리해 노후계획도시 특별정비 절차를 한눈에 보여준다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "노후계획도시 특별정비은(는) 정비기본계획 수립 → 특별정비계획 제안·주민 의견 → 특별정비계획 검토 → 위원회 심의 → 특별정비구역 지정·고시 → 사업시행자·총괄사업관리자 지정 → 건축·도시·교통 통합심의 → 정비사업 시행·이주대책 → 주민 열람·권리 확인로 이어지는 공적 절차다.",
+  "stakeholders": "주민·토지등소유자, 시장·군수, 지방정비위원회, 국토교통부·사업시행자",
+  "legalBasis": [
+   {
+    "law": "노후계획도시 정비 및 지원에 관한 특별법",
+    "articles": "제4~39조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "시장·군수",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "지방정비위원회",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "국토교통부·사업시행자",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "정비기본계획 수립",
+   "특별정비계획 제안·주민 의견",
+   "특별정비계획 검토",
+   "위원회 심의",
+   "특별정비구역 지정·고시",
+   "사업시행자·총괄사업관리자 지정",
+   "건축·도시·교통 통합심의",
+   "정비사업 시행·이주대책",
+   "주민 열람·권리 확인"
+  ],
+  "moneyFlow": "지원금·수수료·사업비는 법령과 연도별 사업기준 또는 개별 결정에 따라 달라질 수 있다.",
+  "docsFlow": "정비기본계획 수립 기록 → 심사·협의 자료 → 결정·통지 → 이행·사후관리 기록으로 이어진다.",
+  "bottlenecks": [
+   "도시별 선도지구·특별정비구역 선정기준",
+   "이주단지·순환용 주택 공급시기와 공공기여 산정"
+  ],
+  "reformPoints": [
+   "처리상태와 담당기관 안내",
+   "기관 간 자료연계와 중복제출 축소",
+   "결정·변경 사유의 명확한 통지"
+  ]
+ },
+ "related": [],
+ "fieldVerification": [
+  "도시별 선도지구·특별정비구역 선정기준",
+  "이주단지·순환용 주택 공급시기와 공공기여 산정"
+ ],
+ "process": {
+  "institution_name": "노후계획도시 특별정비",
+  "law_name": "노후계획도시 정비 및 지원에 관한 특별법",
+  "lanes": [
+   "주민·토지등소유자",
+   "시장·군수",
+   "지방정비위원회",
+   "국토교통부·사업시행자"
+  ],
+  "stages": [
+   "G0 기본계획",
+   "G1 주민제안",
+   "G2 구역지정",
+   "G3 통합심의",
+   "G4 시행·이주"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "정비기본계획 수립",
+    "lane": "시장·군수",
+    "stage": "G0 기본계획",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "시장·군수",
+    "action": "노후도·기반시설·이주수요를 반영한 정비기본계획을 수립한다.",
+    "output_documents": [
+     "정비기본계획 수립 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "노후계획도시 정비 및 지원에 관한 특별법",
+      "article": "제6조·제7조",
+      "text": "노후계획도시 정비 및 지원에 관한 특별법 제6조·제7조에 따른 노후도·기반시설·이주수요를 반영한 정비기본계획을 수립한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "특별정비계획 제안·주민 의견",
+    "lane": "주민·토지등소유자",
+    "stage": "G1 주민제안",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "주민·토지등소유자",
+    "action": "특별정비계획안을 제안하고 관계 서류를 열람해 의견을 제출한다.",
+    "output_documents": [
+     "특별정비계획 제안·주민 의견 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "노후계획도시 정비 및 지원에 관한 특별법",
+      "article": "제12조·제36조",
+      "text": "노후계획도시 정비 및 지원에 관한 특별법 제12조·제36조에 따른 특별정비계획안을 제안하고 관계 서류를 열람해 의견을 제출한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "특별정비계획 검토",
+    "lane": "시장·군수",
+    "stage": "G1 주민제안",
+    "type": "gateway",
+    "status": "current",
+    "progress": 55,
+    "actor": "시장·군수",
+    "action": "정비 필요성, 기반시설, 공공기여와 이주대책을 검토한다.",
+    "output_documents": [
+     "특별정비계획 검토 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "노후계획도시 정비 및 지원에 관한 특별법",
+      "article": "제12조",
+      "text": "노후계획도시 정비 및 지원에 관한 특별법 제12조에 따른 정비 필요성, 기반시설, 공공기여와 이주대책을 검토한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "위원회 심의",
+    "lane": "지방정비위원회",
+    "stage": "G2 구역지정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지방정비위원회",
+    "action": "특별정비계획과 구역지정의 적정성을 심의한다.",
+    "output_documents": [
+     "위원회 심의 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "노후계획도시 정비 및 지원에 관한 특별법",
+      "article": "제10조·제13조",
+      "text": "노후계획도시 정비 및 지원에 관한 특별법 제10조·제13조에 따른 특별정비계획과 구역지정의 적정성을 심의한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "특별정비구역 지정·고시",
+    "lane": "시장·군수",
+    "stage": "G2 구역지정",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "시장·군수",
+    "action": "심의 결과를 반영해 특별정비구역을 지정·고시한다.",
+    "output_documents": [
+     "특별정비구역 지정·고시 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "노후계획도시 정비 및 지원에 관한 특별법",
+      "article": "제11조·제13조",
+      "text": "노후계획도시 정비 및 지원에 관한 특별법 제11조·제13조에 따른 심의 결과를 반영해 특별정비구역을 지정·고시한다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "사업시행자·총괄사업관리자 지정",
+    "lane": "국토교통부·사업시행자",
+    "stage": "G3 통합심의",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국토교통부·사업시행자",
+    "action": "사업시행자와 필요 시 총괄사업관리자를 지정한다.",
+    "output_documents": [
+     "사업시행자·총괄사업관리자 지정 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "노후계획도시 정비 및 지원에 관한 특별법",
+      "article": "제19조·제20조",
+      "text": "노후계획도시 정비 및 지원에 관한 특별법 제19조·제20조에 따른 사업시행자와 필요 시 총괄사업관리자를 지정한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "건축·도시·교통 통합심의",
+    "lane": "지방정비위원회",
+    "stage": "G3 통합심의",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지방정비위원회",
+    "action": "건축·도시계획·교통 등 관련 심의를 통합해 사업계획을 조정한다.",
+    "output_documents": [
+     "건축·도시·교통 통합심의 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "노후계획도시 정비 및 지원에 관한 특별법",
+      "article": "제24조",
+      "text": "노후계획도시 정비 및 지원에 관한 특별법 제24조에 따른 건축·도시계획·교통 등 관련 심의를 통합해 사업계획을 조정한다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "정비사업 시행·이주대책",
+    "lane": "국토교통부·사업시행자",
+    "stage": "G4 시행·이주",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국토교통부·사업시행자",
+    "action": "순환용 주택과 기반시설을 포함한 이주대책을 시행하며 정비사업을 추진한다.",
+    "output_documents": [
+     "정비사업 시행·이주대책 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "노후계획도시 정비 및 지원에 관한 특별법",
+      "article": "제31조~제33조",
+      "text": "노후계획도시 정비 및 지원에 관한 특별법 제31조~제33조에 따른 순환용 주택과 기반시설을 포함한 이주대책을 시행하며 정비사업을 추진한다."
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "주민 열람·권리 확인",
+    "lane": "주민·토지등소유자",
+    "stage": "G4 시행·이주",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민·토지등소유자",
+    "action": "사업 서류를 열람하고 분양받을 권리 산정기준일 등 권리관계를 확인한다.",
+    "output_documents": [
+     "주민 열람·권리 확인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "노후계획도시 정비 및 지원에 관한 특별법",
+      "article": "제36조·제39조",
+      "text": "노후계획도시 정비 및 지원에 관한 특별법 제36조·제39조에 따른 사업 서류를 열람하고 분양받을 권리 산정기준일 등 권리관계를 확인한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건·기한·지원 범위는 하위규정과 사실관계에 따라 달라질 수 있다.",
+   "2026-07-13 301~320 확장: 현행 법률의 실제 조문 순서와 당사자·행정기관 레인을 기준으로 신규 작성."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 53건 가운데 53건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "노후계획도시 정비 및 지원에 관한 특별법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "노후계획도시 정비 및 지원에 관한 특별법",
+    "lawId": "014554",
+    "mst": "286539",
+    "promulgatedOn": "2026-06-02",
+    "effectiveOn": "2026-06-02",
+    "officialUrl": "https://law.go.kr/법령/노후계획도시정비및지원에관한특별법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 10,
+   "explicitCitationEntries": 10,
+   "articleReferences": 53,
+   "verifiedReferences": 53,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

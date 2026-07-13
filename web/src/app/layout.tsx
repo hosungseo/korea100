@@ -16,18 +16,18 @@ const LATEST_AS_OF_DATE = INSTITUTIONS.reduce(
 
 export const metadata: Metadata = {
   title: {
-    default: "한 장으로 끝내는 대한민국 제도 100",
-    template: "%s | 대한민국 제도 100",
+    default: "한 장으로 끝내는 대한민국 제도 지도",
+    template: "%s | 대한민국 제도 지도",
   },
   description:
     "기업에는 비즈니스 모델이 있듯이, 국가에는 제도 모델이 있다. 대한민국 주요 제도를 법령·조직·절차·예산·문서를 한 장 구조도로 보여드립니다.",
   keywords: "대한민국 제도, 환경영향평가, 예비타당성조사, 행정, 정책, 법령",
   alternates: { canonical: `${SITE_URL}/` },
   openGraph: {
-    title: "한 장으로 끝내는 대한민국 제도 100",
+    title: "한 장으로 끝내는 대한민국 제도 지도",
     description: "법령부터 실제 업무 흐름까지 한 장으로 읽는 국가 운영 카탈로그",
     url: `${SITE_URL}/`,
-    siteName: "대한민국 제도 100",
+    siteName: "대한민국 제도 지도",
     locale: "ko_KR",
     type: "website",
     images: [
@@ -35,13 +35,13 @@ export const metadata: Metadata = {
         url: `${SITE_URL}/og-default.png`,
         width: 1200,
         height: 630,
-        alt: "대한민국 제도 100",
+        alt: "대한민국 제도 지도",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "한 장으로 끝내는 대한민국 제도 100",
+    title: "한 장으로 끝내는 대한민국 제도 지도",
     description: "법령부터 실제 업무 흐름까지 한 장으로 읽는 국가 운영 카탈로그",
     images: [`${SITE_URL}/og-default.png`],
   },
@@ -61,7 +61,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "CollectionPage",
-              name: "한 장으로 끝내는 대한민국 제도 100",
+              name: "한 장으로 끝내는 대한민국 제도 지도",
               description:
                 "대한민국 주요 제도를 법령, 조직, 절차, 예산, 문서와 데이터 흐름으로 정리한 제도 모델 카탈로그",
               inLanguage: "ko-KR",
@@ -84,7 +84,7 @@ function Header() {
     <header className="site-header">
       <div className="site-header-inner">
         <Link href="/" className="site-brand">
-          <strong>대한민국 제도 100</strong>
+          <strong>대한민국 제도 지도</strong>
           <span>Institution Registry</span>
         </Link>
 
@@ -136,7 +136,7 @@ function Footer() {
               marginBottom: 8,
             }}
           >
-            한 장으로 끝내는 대한민국 제도 100
+            한 장으로 끝내는 대한민국 제도 지도
           </p>
           <p style={{ fontSize: 13, color: "var(--color-muted)", lineHeight: 1.7 }}>
             법령 기준일 기준으로 작성된 참고자료입니다.

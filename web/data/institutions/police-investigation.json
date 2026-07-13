@@ -1,802 +1,802 @@
 {
-  "slug": "police-investigation",
-  "name": "경찰 수사와 112 신고",
-  "oneLiner": "112 신고와 고소·고발·인지로 시작된 사건을 경찰이 수사해 혐의가 있으면 검찰에 송치하고, 없으면 자체 종결하는 치안·수사 제도. 2020년 검경 수사권 조정으로 경찰이 1차 수사종결권을 가진다",
-  "type": "치안·수사형",
-  "priority": 94,
-  "whyFirst": "국민이 가장 먼저 만나는 형사 절차의 입구이자, 검경 수사권 조정으로 구조가 크게 바뀐 제도다.",
-  "asOfDate": "2026-07-10",
-  "status": "full",
-  "canvas": {
-    "purpose": "범죄로부터 국민의 생명·신체·재산을 보호하고, 신고·고소된 사건의 진상을 규명한다. 112 신고 대응으로 긴급 위험에 개입하고, 수사를 통해 범죄 혐의를 밝혀 형사사법 절차로 연결한다.",
-    "stakeholders": "신고자·피해자, 고소인·고발인, 피의자, 목격자·참고인, 경찰(수사부서·지구대·파출소), 검찰, 법원",
-    "legalBasis": [
-      {
-        "law": "형사소송법",
-        "articles": "제195조(검사·사법경찰관 상호협력), 제197조(사법경찰관리), 제197조의2(보완수사 요구), 제197조의3(시정조치 요구), 제245조의5(사법경찰관의 사건송치·불송치), 제245조의7(고소인 등의 이의신청)",
-        "kind": "법률"
-      },
-      {
-        "law": "검찰청법",
-        "articles": "제4조(검사의 직접 수사개시 범위: 부패·경제범죄 등)",
-        "kind": "법률"
-      },
-      {
-        "law": "국가경찰과 자치경찰의 조직 및 운영에 관한 법률",
-        "articles": "국가수사본부, 자치경찰사무·자치경찰위원회 등 경찰 조직",
-        "kind": "법률"
-      },
-      {
-        "law": "112신고의 운영 및 처리에 관한 법률",
-        "articles": "112치안종합상황실 설치·신고 접수·긴급조치",
-        "kind": "법률"
-      },
-      {
-        "law": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정",
-        "articles": "제59조(보완수사요구의 대상과 범위), 송치·보완수사·시정조치 절차",
-        "kind": "대통령령"
-      },
-      {
-        "law": "경찰관 직무집행법",
-        "articles": "제2조(직무의 범위)",
-        "kind": "법률"
-      }
-    ],
-    "authorities": [
-      {
-        "name": "경찰청(국가수사본부)",
-        "role": "수사 총괄·지휘, 전국 수사경찰 지휘체계"
-      },
-      {
-        "name": "시·도경찰청·경찰서",
-        "role": "112 신고 처리, 사건 수사·송치·불송치 결정"
-      },
-      {
-        "name": "검찰청(검사)",
-        "role": "영장 청구, 보완수사 요구, 기소·불기소 결정"
-      },
-      {
-        "name": "자치경찰위원회",
-        "role": "생활안전·교통 등 자치경찰사무 지휘·감독"
-      }
-    ],
-    "procedure": [
-      "112 신고 또는 고소·고발·경찰 인지로 사건 발생",
-      "112치안종합상황실이 신고 접수·중요도 코드 분류·순찰차 출동",
-      "현장 조치 후 입건, 수사 개시",
-      "피의자·참고인 조사, 압수·수색·체포는 검사 신청·법원 영장으로 집행",
-      "수사 결과 혐의 인정 시 검찰 송치, 불인정 시 불송치 결정",
-      "고소인·피해자는 불송치에 이의신청 가능",
-      "검사의 보완수사 요구 시 경찰이 이행",
-      "검사가 기소·불기소 결정",
-      "기소 시 법원 재판으로 이행"
-    ],
-    "moneyFlow": "수사·치안 활동은 경찰 예산(국가직 전환으로 대부분 국비)에서 충당한다. 112 신고·수사는 무료다. 피의자·피해자의 변호사 선임 비용은 개인 부담이며, 일정 요건에서 국선변호·법률구조를 받을 수 있다.",
-    "docsFlow": "신고 접수기록 → 수사보고·피의자신문조서·참고인진술조서 → 압수·수색·체포영장 신청서 → 송치서 또는 불송치 결정서 → 이의신청서. 형사사법정보시스템(KICS)으로 사건이 관리된다.",
-    "bottlenecks": [
-      "2020년 검경 수사권 조정 이후 보완수사·재수사 반복으로 사건 처리가 지연된다는 지적이 있다",
-      "경찰 불송치 결정의 품질·설명 부족과 이의신청 부담이 쟁점이다",
-      "2022년 검찰 수사개시 범위 축소(이른바 검수완박) 이후 수사 공백·중대범죄수사청 논의가 이어진다",
-      "자치경찰제의 인사·예산 독립성이 미흡해 실효성 논란이 있다(현장 검증 필요)"
-    ],
-    "reformPoints": [
-      "검경 협력·보완수사 절차 정비로 사건 처리 지연 해소",
-      "불송치 결정 이유 고지·이의신청 절차 실질화",
-      "중대범죄 수사 전담기구 등 수사구조 재설계 논의",
-      "자치경찰 이원화·재정 독립으로 지역 치안 책임성 강화"
-    ]
-  },
-  "related": [
-    "행정소송",
-    "국가인권위원회 진정",
-    "법률구조",
-    "재난안전관리",
-    "공익신고"
+ "slug": "police-investigation",
+ "name": "경찰 수사와 112 신고",
+ "oneLiner": "112 신고와 고소·고발·인지로 시작된 사건을 경찰이 수사해 혐의가 있으면 검찰에 송치하고, 없으면 자체 종결하는 치안·수사 제도. 2020년 검경 수사권 조정으로 경찰이 1차 수사종결권을 가진다",
+ "type": "치안·수사형",
+ "priority": 94,
+ "whyFirst": "국민이 가장 먼저 만나는 형사 절차의 입구이자, 검경 수사권 조정으로 구조가 크게 바뀐 제도다.",
+ "asOfDate": "2026-07-10",
+ "status": "full",
+ "canvas": {
+  "purpose": "범죄로부터 국민의 생명·신체·재산을 보호하고, 신고·고소된 사건의 진상을 규명한다. 112 신고 대응으로 긴급 위험에 개입하고, 수사를 통해 범죄 혐의를 밝혀 형사사법 절차로 연결한다.",
+  "stakeholders": "신고자·피해자, 고소인·고발인, 피의자, 목격자·참고인, 경찰(수사부서·지구대·파출소), 검찰, 법원",
+  "legalBasis": [
+   {
+    "law": "형사소송법",
+    "articles": "제195조(검사·사법경찰관 상호협력), 제197조(사법경찰관리), 제197조의2(보완수사 요구), 제197조의3(시정조치 요구), 제245조의5(사법경찰관의 사건송치·불송치), 제245조의7(고소인 등의 이의신청)",
+    "kind": "법률"
+   },
+   {
+    "law": "검찰청법",
+    "articles": "제4조(검사의 직접 수사개시 범위: 부패·경제범죄 등)",
+    "kind": "법률"
+   },
+   {
+    "law": "국가경찰과 자치경찰의 조직 및 운영에 관한 법률",
+    "articles": "국가수사본부, 자치경찰사무·자치경찰위원회 등 경찰 조직",
+    "kind": "법률"
+   },
+   {
+    "law": "112신고의 운영 및 처리에 관한 법률",
+    "articles": "112치안종합상황실 설치·신고 접수·긴급조치",
+    "kind": "법률"
+   },
+   {
+    "law": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정",
+    "articles": "제59조(보완수사요구의 대상과 범위), 송치·보완수사·시정조치 절차",
+    "kind": "대통령령"
+   },
+   {
+    "law": "경찰관 직무집행법",
+    "articles": "제2조(직무의 범위)",
+    "kind": "법률"
+   }
   ],
-  "fieldVerification": [
-    "국가경찰과 자치경찰의 조직 및 운영에 관한 법률상 자치경찰사무 조문번호 최신 확인",
-    "112신고 처리법의 정식 약칭·시행일 확인",
-    "검찰 직접수사 개시 범위(검찰청법 제4조) 최신 개정 상태",
-    "보완수사·재수사 요구로 인한 평균 사건 처리기간(운영 통계)",
-    "경찰 불송치·이의신청 인용률(운영 통계)"
+  "authorities": [
+   {
+    "name": "경찰청(국가수사본부)",
+    "role": "수사 총괄·지휘, 전국 수사경찰 지휘체계"
+   },
+   {
+    "name": "시·도경찰청·경찰서",
+    "role": "112 신고 처리, 사건 수사·송치·불송치 결정"
+   },
+   {
+    "name": "검찰청(검사)",
+    "role": "영장 청구, 보완수사 요구, 기소·불기소 결정"
+   },
+   {
+    "name": "자치경찰위원회",
+    "role": "생활안전·교통 등 자치경찰사무 지휘·감독"
+   }
   ],
-  "process": {
-    "institution_name": "경찰 수사와 112 신고 제도",
-    "law_name": "형사소송법",
-    "lanes": [
-      "신고자·시민",
-      "112치안종합상황실",
-      "지구대·파출소",
-      "경찰 수사부서",
-      "검찰",
-      "법원",
-      "형사사법정보시스템"
+  "procedure": [
+   "112 신고 또는 고소·고발·경찰 인지로 사건 발생",
+   "112치안종합상황실이 신고 접수·중요도 코드 분류·순찰차 출동",
+   "현장 조치 후 입건, 수사 개시",
+   "피의자·참고인 조사, 압수·수색·체포는 검사 신청·법원 영장으로 집행",
+   "수사 결과 혐의 인정 시 검찰 송치, 불인정 시 불송치 결정",
+   "고소인·피해자는 불송치에 이의신청 가능",
+   "검사의 보완수사 요구 시 경찰이 이행",
+   "검사가 기소·불기소 결정",
+   "기소 시 법원 재판으로 이행"
+  ],
+  "moneyFlow": "수사·치안 활동은 경찰 예산(국가직 전환으로 대부분 국비)에서 충당한다. 112 신고·수사는 무료다. 피의자·피해자의 변호사 선임 비용은 개인 부담이며, 일정 요건에서 국선변호·법률구조를 받을 수 있다.",
+  "docsFlow": "신고 접수기록 → 수사보고·피의자신문조서·참고인진술조서 → 압수·수색·체포영장 신청서 → 송치서 또는 불송치 결정서 → 이의신청서. 형사사법정보시스템(KICS)으로 사건이 관리된다.",
+  "bottlenecks": [
+   "2020년 검경 수사권 조정 이후 보완수사·재수사 반복으로 사건 처리가 지연된다는 지적이 있다",
+   "경찰 불송치 결정의 품질·설명 부족과 이의신청 부담이 쟁점이다",
+   "2022년 검찰 수사개시 범위 축소(이른바 검수완박) 이후 수사 공백·중대범죄수사청 논의가 이어진다",
+   "자치경찰제의 인사·예산 독립성이 미흡해 실효성 논란이 있다(현장 검증 필요)"
+  ],
+  "reformPoints": [
+   "검경 협력·보완수사 절차 정비로 사건 처리 지연 해소",
+   "불송치 결정 이유 고지·이의신청 절차 실질화",
+   "중대범죄 수사 전담기구 등 수사구조 재설계 논의",
+   "자치경찰 이원화·재정 독립으로 지역 치안 책임성 강화"
+  ]
+ },
+ "related": [
+  "행정소송",
+  "국가인권위원회 진정",
+  "법률구조",
+  "재난안전관리",
+  "공익신고"
+ ],
+ "fieldVerification": [
+  "국가경찰과 자치경찰의 조직 및 운영에 관한 법률상 자치경찰사무 조문번호 최신 확인",
+  "112신고 처리법의 정식 약칭·시행일 확인",
+  "검찰 직접수사 개시 범위(검찰청법 제4조) 최신 개정 상태",
+  "보완수사·재수사 요구로 인한 평균 사건 처리기간(운영 통계)",
+  "경찰 불송치·이의신청 인용률(운영 통계)"
+ ],
+ "process": {
+  "institution_name": "경찰 수사와 112 신고 제도",
+  "law_name": "형사소송법",
+  "lanes": [
+   "신고자·시민",
+   "112치안종합상황실",
+   "지구대·파출소",
+   "경찰 수사부서",
+   "검찰",
+   "법원",
+   "형사사법정보시스템"
+  ],
+  "stages": [
+   "G0 신고접수",
+   "G1 출동·초동조치",
+   "G2 입건·수사개시",
+   "G3 수사",
+   "G4 송치판단",
+   "G5 이의·보완",
+   "G6 검찰처분"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "112 신고 접수",
+    "lane": "112치안종합상황실",
+    "stage": "G0 신고접수",
+    "type": "system",
+    "status": "done",
+    "progress": 100,
+    "actor": "112치안종합상황실",
+    "output_documents": [
+     "신고 접수기록"
     ],
-    "stages": [
-      "G0 신고접수",
-      "G1 출동·초동조치",
-      "G2 입건·수사개시",
-      "G3 수사",
-      "G4 송치판단",
-      "G5 이의·보완",
-      "G6 검찰처분"
-    ],
-    "nodes": [
-      {
-        "id": "P01",
-        "name": "112 신고 접수",
-        "lane": "112치안종합상황실",
-        "stage": "G0 신고접수",
-        "type": "system",
-        "status": "done",
-        "progress": 100,
-        "actor": "112치안종합상황실",
-        "output_documents": [
-          "신고 접수기록"
-        ],
-        "deadline": "즉시",
-        "confidence": 0.85,
-        "legal_basis": [
-          {
-            "law": "112신고의 운영 및 처리 등에 관한 법률",
-            "article": "제6조(112치안종합상황실의 설치·운영)",
-            "text": "경찰청장 등은 112신고의 신속한 접수·처리와 상황관리, 현장 지휘·조정·통제 등의 업무를 수행하기 위하여 112치안종합상황실을 설치·운영하여야 한다."
-          },
-          {
-            "law": "112신고의 운영 및 처리 등에 관한 법률",
-            "article": "제7조(112신고의 접수 등)",
-            "text": "경찰청장 등은 신고를 받으면 관할 구역이나 경찰사무 구분과 무관하게 해당 112신고를 신속하게 접수하여 처리하여야 한다."
-          }
-        ]
-      },
-      {
-        "id": "P02",
-        "name": "신고 코드 분류(code0~4)",
-        "lane": "112치안종합상황실",
-        "stage": "G0 신고접수",
-        "type": "gateway",
-        "status": "done",
-        "progress": 100,
-        "actor": "112치안종합상황실",
-        "condition": "code0(최우선)~code4",
-        "output_documents": [
-          "신고 분류표"
-        ],
-        "deadline": "접수 즉시",
-        "confidence": 0.8,
-        "legal_basis": [
-          {
-            "law": "112신고의 운영 및 처리 등에 관한 법률",
-            "article": "제7조(112신고의 접수 등)",
-            "text": "경찰청장 등은 112신고를 관할 구역이나 경찰사무 구분과 무관하게 신속하게 접수하여 처리하여야 한다."
-          }
-        ]
-      },
-      {
-        "id": "P03",
-        "name": "순찰차 출동 지령",
-        "lane": "112치안종합상황실",
-        "stage": "G1 출동·초동조치",
-        "type": "task",
-        "status": "done",
-        "progress": 100,
-        "actor": "112치안종합상황실",
-        "receiver": "지구대·파출소",
-        "output_documents": [
-          "출동 지령"
-        ],
-        "deadline": "분류 즉시",
-        "confidence": 0.82,
-        "legal_basis": [
-          {
-            "law": "112신고의 운영 및 처리 등에 관한 법률",
-            "article": "제8조(112신고에 대한 조치)",
-            "text": "경찰청장 등은 신고 접수 시 경찰관을 현장에 파견하여 위험 발생의 방지, 범죄의 예방·진압, 구조 등 필요한 조치를 하여야 한다."
-          }
-        ]
-      },
-      {
-        "id": "P04",
-        "name": "현장 출동·초동조치",
-        "lane": "지구대·파출소",
-        "stage": "G1 출동·초동조치",
-        "type": "task",
-        "status": "risk",
-        "progress": 70,
-        "actor": "지구대·파출소 경찰관",
-        "output_documents": [
-          "현장 조치기록",
-          "초동수사 보고"
-        ],
-        "deadline": "지령 후 즉시",
-        "blocker": "현장 위치 특정 지연으로 도착 지체",
-        "confidence": 0.83,
-        "legal_basis": [
-          {
-            "law": "경찰관 직무집행법",
-            "article": "제2조",
-            "text": "경찰관은 범죄의 예방·진압 및 수사 직무를 수행한다."
-          }
-        ]
-      },
-      {
-        "id": "P05",
-        "name": "입건 여부 판단(수사 개시)",
-        "lane": "경찰 수사부서",
-        "stage": "G2 입건·수사개시",
-        "type": "gateway",
-        "status": "current",
-        "progress": 50,
-        "actor": "사법경찰관",
-        "condition": "입건/내사종결",
-        "output_documents": [
-          "입건 결정",
-          "수사 개시 보고"
-        ],
-        "deadline": "초동조치 후",
-        "blocker": "입건·내사 여부 판단 검토 중",
-        "confidence": 0.85,
-        "legal_basis": [
-          {
-            "law": "형사소송법",
-            "article": "제197조",
-            "text": "사법경찰관은 범죄의 혐의가 있다고 인식하는 때에는 수사한다."
-          },
-          {
-            "law": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정",
-            "article": "제16조",
-            "text": "사법경찰관은 법령에 따라 수사를 개시한다(수사의 개시)."
-          }
-        ]
-      },
-      {
-        "id": "P06",
-        "name": "피의자·참고인 조사",
-        "lane": "경찰 수사부서",
-        "stage": "G3 수사",
-        "type": "task",
-        "status": "waiting",
-        "progress": 0,
-        "actor": "사법경찰관",
-        "output_documents": [
-          "피의자신문조서",
-          "참고인진술조서",
-          "수사보고"
-        ],
-        "deadline": "수사기간 내",
-        "confidence": 0.85,
-        "legal_basis": [
-          {
-            "law": "형사소송법",
-            "article": "제197조",
-            "text": "사법경찰관은 범죄를 수사한다."
-          }
-        ]
-      },
-      {
-        "id": "P07",
-        "name": "강제수사 영장 신청",
-        "lane": "경찰 수사부서",
-        "stage": "G3 수사",
-        "type": "task",
-        "status": "waiting",
-        "progress": 0,
-        "actor": "사법경찰관",
-        "receiver": "검찰",
-        "output_documents": [
-          "압수·수색·체포영장 신청서"
-        ],
-        "deadline": "필요 시",
-        "confidence": 0.72,
-        "legal_basis": [
-          {
-            "law": "형사소송법",
-            "article": "제215조",
-            "text": "사법경찰관은 검사에게 신청하여 영장을 청구받아 압수·수색한다."
-          },
-          {
-            "law": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정",
-            "article": "제37조",
-            "text": "사법경찰관은 압수·수색 또는 검증영장을 검사에게 신청한다."
-          }
-        ]
-      },
-      {
-        "id": "P08",
-        "name": "검사 영장 청구",
-        "lane": "검찰",
-        "stage": "G3 수사",
-        "type": "task",
-        "status": "waiting",
-        "progress": 0,
-        "actor": "검사",
-        "receiver": "법원",
-        "output_documents": [
-          "영장 청구서"
-        ],
-        "deadline": "신청 후",
-        "confidence": 0.72,
-        "legal_basis": [
-          {
-            "law": "형사소송법",
-            "article": "제215조",
-            "text": "검사는 법원에 영장을 청구한다."
-          }
-        ]
-      },
-      {
-        "id": "P09",
-        "name": "법원 영장 심사·발부",
-        "lane": "법원",
-        "stage": "G3 수사",
-        "type": "gateway",
-        "status": "waiting",
-        "progress": 0,
-        "actor": "판사",
-        "condition": "발부/기각",
-        "output_documents": [
-          "영장 발부/기각 결정"
-        ],
-        "deadline": "청구 후",
-        "confidence": 0.72,
-        "legal_basis": [
-          {
-            "law": "형사소송법",
-            "article": "제201조",
-            "text": "판사는 청구가 이유 있으면 영장을 발부한다."
-          }
-        ]
-      },
-      {
-        "id": "P10",
-        "name": "송치/불송치 결정",
-        "lane": "경찰 수사부서",
-        "stage": "G4 송치판단",
-        "type": "gateway",
-        "status": "waiting",
-        "progress": 0,
-        "actor": "사법경찰관",
-        "condition": "혐의 인정(송치)/불인정(불송치)",
-        "output_documents": [
-          "수사결과 검토서"
-        ],
-        "deadline": "수사 종결 시",
-        "confidence": 0.85,
-        "legal_basis": [
-          {
-            "law": "형사소송법",
-            "article": "제245조의5",
-            "text": "사법경찰관은 혐의가 인정되면 송치하고, 그 밖의 경우 불송치한다."
-          },
-          {
-            "law": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정",
-            "article": "제51조",
-            "text": "사법경찰관은 사건을 수사한 경우 송치·불송치 등 결정을 한다(사법경찰관의 결정)."
-          }
-        ]
-      },
-      {
-        "id": "P11",
-        "name": "검찰 송치",
-        "lane": "경찰 수사부서",
-        "stage": "G4 송치판단",
-        "type": "task",
-        "status": "waiting",
-        "progress": 0,
-        "actor": "사법경찰관",
-        "receiver": "검찰",
-        "output_documents": [
-          "송치서",
-          "수사기록"
-        ],
-        "deadline": "결정 후",
-        "confidence": 0.85,
-        "legal_basis": [
-          {
-            "law": "형사소송법",
-            "article": "제245조의5",
-            "text": "혐의가 인정되면 지체 없이 사건을 검사에게 송치한다."
-          },
-          {
-            "law": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정",
-            "article": "제58조",
-            "text": "사법경찰관은 사건을 검사에게 송치한다(사법경찰관의 사건송치)."
-          }
-        ]
-      },
-      {
-        "id": "P12",
-        "name": "불송치 결정·통지",
-        "lane": "경찰 수사부서",
-        "stage": "G4 송치판단",
-        "type": "notice",
-        "status": "waiting",
-        "progress": 0,
-        "actor": "사법경찰관",
-        "receiver": "신고자·시민",
-        "output_documents": [
-          "불송치 결정서",
-          "불송치 이유 통지"
-        ],
-        "deadline": "결정 후 7일 내",
-        "confidence": 0.83,
-        "legal_basis": [
-          {
-            "law": "형사소송법",
-            "article": "제245조의6",
-            "text": "불송치한 경우 고소인 등에게 취지와 이유를 통지한다."
-          },
-          {
-            "law": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정",
-            "article": "제53조",
-            "text": "사법경찰관은 수사 결과를 고소인·고발인·피해자 등에게 통지한다(수사 결과의 통지)."
-          }
-        ]
-      },
-      {
-        "id": "P13",
-        "name": "고소인 이의신청",
-        "lane": "신고자·시민",
-        "stage": "G5 이의·보완",
-        "type": "task",
-        "status": "loop",
-        "progress": 0,
-        "actor": "고소인·피해자",
-        "output_documents": [
-          "이의신청서"
-        ],
-        "deadline": "통지 받은 후",
-        "confidence": 0.82,
-        "legal_basis": [
-          {
-            "law": "형사소송법",
-            "article": "제245조의7(고소인 등의 이의신청)",
-            "text": "불송치 통지를 받은 사람(고발인 제외)은 사법경찰관 소속 관서의 장에게 이의를 신청할 수 있고, 신청이 있는 때에는 사법경찰관은 지체 없이 검사에게 사건을 송치하고 처리결과와 이유를 신청인에게 통지하여야 한다."
-          }
-        ]
-      },
-      {
-        "id": "P14",
-        "name": "검사 보완수사 요구",
-        "lane": "검찰",
-        "stage": "G5 이의·보완",
-        "type": "gateway",
-        "status": "loop",
-        "progress": 0,
-        "actor": "검사",
-        "receiver": "경찰 수사부서",
-        "condition": "보완 필요/불요",
-        "output_documents": [
-          "보완수사 요구서"
-        ],
-        "deadline": "송치·이의 검토 후",
-        "confidence": 0.8,
-        "legal_basis": [
-          {
-            "law": "형사소송법",
-            "article": "제197조의2",
-            "text": "검사는 송치사건에 대해 보완수사를 요구할 수 있다."
-          },
-          {
-            "law": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정",
-            "article": "제59조",
-            "text": "검사는 송치받은 사건에 보완수사가 필요하면 직접 보완수사를 하거나 사법경찰관에게 보완수사를 요구할 수 있다."
-          },
-          {
-            "law": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정",
-            "article": "제60조",
-            "text": "보완수사요구는 정해진 방법과 절차에 따라 이루어진다(보완수사요구의 방법과 절차)."
-          }
-        ]
-      },
-      {
-        "id": "P15",
-        "name": "검사 기소·불기소 결정",
-        "lane": "검찰",
-        "stage": "G6 검찰처분",
-        "type": "gateway",
-        "status": "waiting",
-        "progress": 0,
-        "actor": "검사",
-        "condition": "기소/불기소",
-        "output_documents": [
-          "공소장",
-          "불기소 결정서"
-        ],
-        "deadline": "수사 종결 후",
-        "confidence": 0.82,
-        "legal_basis": [
-          {
-            "law": "검찰청법",
-            "article": "제4조",
-            "text": "검사는 공소를 제기하고 그 유지에 필요한 사항을 수행한다."
-          }
-        ]
-      },
-      {
-        "id": "P16",
-        "name": "공판(재판) 이행",
-        "lane": "법원",
-        "stage": "G6 검찰처분",
-        "type": "task",
-        "status": "waiting",
-        "progress": 0,
-        "actor": "법원",
-        "output_documents": [
-          "공판조서",
-          "판결"
-        ],
-        "deadline": "기소 후",
-        "confidence": 0.78,
-        "legal_basis": [
-          {
-            "law": "형사소송법",
-            "article": "제246조",
-            "text": "공소는 검사가 제기하여 법원 재판으로 이행한다."
-          }
-        ]
-      },
-      {
-        "id": "S01",
-        "name": "KICS 사건 등록·관리",
-        "lane": "형사사법정보시스템",
-        "stage": "G2 입건·수사개시",
-        "type": "system",
-        "status": "waiting",
-        "progress": 0,
-        "actor": "형사사법정보시스템",
-        "input_documents": [
-          "입건 결정"
-        ],
-        "output_documents": [
-          "사건 등록기록"
-        ],
-        "confidence": 0.7,
-        "legal_basis": [
-          {
-            "law": "형사소송법",
-            "article": "제196조",
-            "text": "수사 사건은 형사사법정보시스템으로 관리된다."
-          }
-        ]
-      }
-    ],
-    "edges": [
-      {
-        "id": "E01",
-        "source": "P01",
-        "target": "P02",
-        "type": "sequence",
-        "label": null
-      },
-      {
-        "id": "E02",
-        "source": "P02",
-        "target": "P03",
-        "type": "sequence",
-        "label": null
-      },
-      {
-        "id": "E03",
-        "source": "P03",
-        "target": "P04",
-        "type": "sequence",
-        "label": null
-      },
-      {
-        "id": "E04",
-        "source": "P04",
-        "target": "P05",
-        "type": "sequence",
-        "label": null
-      },
-      {
-        "id": "E05",
-        "source": "P05",
-        "target": "P06",
-        "type": "sequence",
-        "label": null
-      },
-      {
-        "id": "E06",
-        "source": "P06",
-        "target": "P07",
-        "type": "sequence",
-        "label": null
-      },
-      {
-        "id": "E07",
-        "source": "P07",
-        "target": "P08",
-        "type": "sequence",
-        "label": null
-      },
-      {
-        "id": "E08",
-        "source": "P08",
-        "target": "P09",
-        "type": "sequence",
-        "label": null
-      },
-      {
-        "id": "E09",
-        "source": "P09",
-        "target": "P10",
-        "type": "sequence",
-        "label": null
-      },
-      {
-        "id": "E10",
-        "source": "P10",
-        "target": "P11",
-        "type": "sequence",
-        "label": null
-      },
-      {
-        "id": "E11",
-        "source": "P11",
-        "target": "P14",
-        "type": "sequence",
-        "label": null
-      },
-      {
-        "id": "E12",
-        "source": "P14",
-        "target": "P15",
-        "type": "sequence",
-        "label": null
-      },
-      {
-        "id": "E13",
-        "source": "P15",
-        "target": "P16",
-        "type": "sequence",
-        "label": null
-      },
-      {
-        "id": "E14",
-        "source": "P10",
-        "target": "P12",
-        "type": "sequence",
-        "label": null
-      },
-      {
-        "id": "M01",
-        "source": "P03",
-        "target": "P04",
-        "type": "message",
-        "label": "현장 출동 지령"
-      },
-      {
-        "id": "M02",
-        "source": "P07",
-        "target": "P08",
-        "type": "message",
-        "label": "영장 신청"
-      },
-      {
-        "id": "M03",
-        "source": "P05",
-        "target": "S01",
-        "type": "message",
-        "label": "사건 입건 등록"
-      },
-      {
-        "id": "M04",
-        "source": "P12",
-        "target": "P13",
-        "type": "message",
-        "label": "불송치 통지"
-      },
-      {
-        "id": "L01",
-        "source": "P14",
-        "target": "P06",
-        "type": "loop",
-        "label": "보완수사 요구"
-      },
-      {
-        "id": "L02",
-        "source": "P13",
-        "target": "P15",
-        "type": "sequence",
-        "label": "지체 없이 검사 송치(제245조의7②)"
-      }
-    ],
-    "warnings": [
-      {
-        "date": "2026-07-12",
-        "type": "citation-correction",
-        "content": "P01·P02·P03의 112신고의 운영 및 처리 등에 관한 법률 인용에서 서술형 article 필드(\"112치안종합상황실 신고 접수\", \"신고 대응 코드 분류\", \"긴급조치·출동 지령\")를 현행 조문 번호로 교정. P01→제6조(112치안종합상황실의 설치·운영)+제7조(112신고의 접수 등), P02→제7조(112신고의 접수 등), P03→제8조(112신고에 대한 조치). 조문 목차 및 본문은 국가법령정보센터 DRF API(MST 257787) 직접 조회로 확인.",
-        "consultedMSTs": [
-          "257787"
-        ]
-      },
-      "2026-07-12 정정: 고소인 이의신청(P13)의 효과를 '경찰 재검토 루프'에서 '검사 송치'로 재배선 — 형소법 제245조의7② 원문 대조(DRF MST 281865). 이의신청은 경찰 재검토가 아니라 검사 송치를 강제함."
+    "deadline": "즉시",
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "112신고의 운영 및 처리 등에 관한 법률",
+      "article": "제6조(112치안종합상황실의 설치·운영)",
+      "text": "경찰청장 등은 112신고의 신속한 접수·처리와 상황관리, 현장 지휘·조정·통제 등의 업무를 수행하기 위하여 112치안종합상황실을 설치·운영하여야 한다."
+     },
+     {
+      "law": "112신고의 운영 및 처리 등에 관한 법률",
+      "article": "제7조(112신고의 접수 등)",
+      "text": "경찰청장 등은 신고를 받으면 관할 구역이나 경찰사무 구분과 무관하게 해당 112신고를 신속하게 접수하여 처리하여야 한다."
+     }
     ]
-  },
-  "verification": {
-    "status": "article-verified",
-    "verifiedAt": "2026-07-12",
-    "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
-    "scope": "법적 근거 6건 중 공식 원문 6건을 연결했다. 캔버스와 절차 노드의 명시 조문 34건 가운데 34건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
-    "sources": [
-      {
-        "law": "형사소송법",
-        "kind": "법률",
-        "sourceType": "statute",
-        "officialName": "형사소송법",
-        "lawId": "001671",
-        "mst": "281865",
-        "promulgatedOn": "2025-12-30",
-        "effectiveOn": "2026-07-01",
-        "officialUrl": "https://law.go.kr/법령/형사소송법"
-      },
-      {
-        "law": "검찰청법",
-        "kind": "법률",
-        "sourceType": "statute",
-        "officialName": "검찰청법",
-        "lawId": "001286",
-        "mst": "242095",
-        "promulgatedOn": "2022-05-09",
-        "effectiveOn": "2022-09-10",
-        "officialUrl": "https://law.go.kr/법령/검찰청법"
-      },
-      {
-        "law": "국가경찰과 자치경찰의 조직 및 운영에 관한 법률",
-        "kind": "법률",
-        "sourceType": "statute",
-        "officialName": "국가경찰과 자치경찰의 조직 및 운영에 관한 법률",
-        "lawId": "000992",
-        "mst": "268727",
-        "promulgatedOn": "2025-01-31",
-        "effectiveOn": "2026-02-01",
-        "officialUrl": "https://law.go.kr/법령/국가경찰과자치경찰의조직및운영에관한법률"
-      },
-      {
-        "law": "112신고의 운영 및 처리에 관한 법률",
-        "kind": "법률",
-        "sourceType": "statute",
-        "officialName": "112신고의 운영 및 처리에 관한 법률",
-        "lawId": "014565",
-        "mst": "257787",
-        "promulgatedOn": "2024-01-02",
-        "effectiveOn": "2024-07-03",
-        "officialUrl": "https://law.go.kr/법령/112신고의운영및처리에관한법률"
-      },
-      {
-        "law": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정",
-        "kind": "대통령령",
-        "sourceType": "statute",
-        "officialName": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정",
-        "lawId": "013871",
-        "mst": "287545",
-        "promulgatedOn": "2026-06-30",
-        "effectiveOn": "2026-07-01",
-        "officialUrl": "https://law.go.kr/법령/검사와사법경찰관의상호협력과일반적수사준칙에관한규정"
-      },
-      {
-        "law": "경찰관 직무집행법",
-        "kind": "법률",
-        "sourceType": "statute",
-        "officialName": "경찰관 직무집행법",
-        "lawId": "000985",
-        "mst": "282479",
-        "promulgatedOn": "2026-01-06",
-        "effectiveOn": "2026-07-07",
-        "officialUrl": "https://law.go.kr/법령/경찰관직무집행법"
-      }
+   },
+   {
+    "id": "P02",
+    "name": "신고 코드 분류(code0~4)",
+    "lane": "112치안종합상황실",
+    "stage": "G0 신고접수",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "112치안종합상황실",
+    "condition": "code0(최우선)~code4",
+    "output_documents": [
+     "신고 분류표"
     ],
-    "articleVerification": {
-      "checkedAt": "2026-07-12",
-      "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
-      "citationEntries": 31,
-      "explicitCitationEntries": 29,
-      "articleReferences": 34,
-      "verifiedReferences": 34,
-      "missingReferences": 0,
-      "uncheckableReferences": 0
-    }
+    "deadline": "접수 즉시",
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "112신고의 운영 및 처리 등에 관한 법률",
+      "article": "제7조(112신고의 접수 등)",
+      "text": "경찰청장 등은 112신고를 관할 구역이나 경찰사무 구분과 무관하게 신속하게 접수하여 처리하여야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "순찰차 출동 지령",
+    "lane": "112치안종합상황실",
+    "stage": "G1 출동·초동조치",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "112치안종합상황실",
+    "receiver": "지구대·파출소",
+    "output_documents": [
+     "출동 지령"
+    ],
+    "deadline": "분류 즉시",
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "112신고의 운영 및 처리 등에 관한 법률",
+      "article": "제8조(112신고에 대한 조치)",
+      "text": "경찰청장 등은 신고 접수 시 경찰관을 현장에 파견하여 위험 발생의 방지, 범죄의 예방·진압, 구조 등 필요한 조치를 하여야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "현장 출동·초동조치",
+    "lane": "지구대·파출소",
+    "stage": "G1 출동·초동조치",
+    "type": "task",
+    "status": "risk",
+    "progress": 70,
+    "actor": "지구대·파출소 경찰관",
+    "output_documents": [
+     "현장 조치기록",
+     "초동수사 보고"
+    ],
+    "deadline": "지령 후 즉시",
+    "blocker": "현장 위치 특정 지연으로 도착 지체",
+    "confidence": 0.83,
+    "legal_basis": [
+     {
+      "law": "경찰관 직무집행법",
+      "article": "제2조",
+      "text": "경찰관은 범죄의 예방·진압 및 수사 직무를 수행한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "입건 여부 판단(수사 개시)",
+    "lane": "경찰 수사부서",
+    "stage": "G2 입건·수사개시",
+    "type": "gateway",
+    "status": "current",
+    "progress": 50,
+    "actor": "사법경찰관",
+    "condition": "입건/내사종결",
+    "output_documents": [
+     "입건 결정",
+     "수사 개시 보고"
+    ],
+    "deadline": "초동조치 후",
+    "blocker": "입건·내사 여부 판단 검토 중",
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "형사소송법",
+      "article": "제197조",
+      "text": "사법경찰관은 범죄의 혐의가 있다고 인식하는 때에는 수사한다."
+     },
+     {
+      "law": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정",
+      "article": "제16조",
+      "text": "사법경찰관은 법령에 따라 수사를 개시한다(수사의 개시)."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "피의자·참고인 조사",
+    "lane": "경찰 수사부서",
+    "stage": "G3 수사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사법경찰관",
+    "output_documents": [
+     "피의자신문조서",
+     "참고인진술조서",
+     "수사보고"
+    ],
+    "deadline": "수사기간 내",
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "형사소송법",
+      "article": "제197조",
+      "text": "사법경찰관은 범죄를 수사한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "강제수사 영장 신청",
+    "lane": "경찰 수사부서",
+    "stage": "G3 수사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사법경찰관",
+    "receiver": "검찰",
+    "output_documents": [
+     "압수·수색·체포영장 신청서"
+    ],
+    "deadline": "필요 시",
+    "confidence": 0.72,
+    "legal_basis": [
+     {
+      "law": "형사소송법",
+      "article": "제215조",
+      "text": "사법경찰관은 검사에게 신청하여 영장을 청구받아 압수·수색한다."
+     },
+     {
+      "law": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정",
+      "article": "제37조",
+      "text": "사법경찰관은 압수·수색 또는 검증영장을 검사에게 신청한다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "검사 영장 청구",
+    "lane": "검찰",
+    "stage": "G3 수사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "검사",
+    "receiver": "법원",
+    "output_documents": [
+     "영장 청구서"
+    ],
+    "deadline": "신청 후",
+    "confidence": 0.72,
+    "legal_basis": [
+     {
+      "law": "형사소송법",
+      "article": "제215조",
+      "text": "검사는 법원에 영장을 청구한다."
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "법원 영장 심사·발부",
+    "lane": "법원",
+    "stage": "G3 수사",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "판사",
+    "condition": "발부/기각",
+    "output_documents": [
+     "영장 발부/기각 결정"
+    ],
+    "deadline": "청구 후",
+    "confidence": 0.72,
+    "legal_basis": [
+     {
+      "law": "형사소송법",
+      "article": "제201조",
+      "text": "판사는 청구가 이유 있으면 영장을 발부한다."
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "송치/불송치 결정",
+    "lane": "경찰 수사부서",
+    "stage": "G4 송치판단",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사법경찰관",
+    "condition": "혐의 인정(송치)/불인정(불송치)",
+    "output_documents": [
+     "수사결과 검토서"
+    ],
+    "deadline": "수사 종결 시",
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "형사소송법",
+      "article": "제245조의5",
+      "text": "사법경찰관은 혐의가 인정되면 송치하고, 그 밖의 경우 불송치한다."
+     },
+     {
+      "law": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정",
+      "article": "제51조",
+      "text": "사법경찰관은 사건을 수사한 경우 송치·불송치 등 결정을 한다(사법경찰관의 결정)."
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "검찰 송치",
+    "lane": "경찰 수사부서",
+    "stage": "G4 송치판단",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사법경찰관",
+    "receiver": "검찰",
+    "output_documents": [
+     "송치서",
+     "수사기록"
+    ],
+    "deadline": "결정 후",
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "형사소송법",
+      "article": "제245조의5",
+      "text": "혐의가 인정되면 지체 없이 사건을 검사에게 송치한다."
+     },
+     {
+      "law": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정",
+      "article": "제58조",
+      "text": "사법경찰관은 사건을 검사에게 송치한다(사법경찰관의 사건송치)."
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "불송치 결정·통지",
+    "lane": "경찰 수사부서",
+    "stage": "G4 송치판단",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사법경찰관",
+    "receiver": "신고자·시민",
+    "output_documents": [
+     "불송치 결정서",
+     "불송치 이유 통지"
+    ],
+    "deadline": "결정 후 7일 내",
+    "confidence": 0.83,
+    "legal_basis": [
+     {
+      "law": "형사소송법",
+      "article": "제245조의6",
+      "text": "불송치한 경우 고소인 등에게 취지와 이유를 통지한다."
+     },
+     {
+      "law": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정",
+      "article": "제53조",
+      "text": "사법경찰관은 수사 결과를 고소인·고발인·피해자 등에게 통지한다(수사 결과의 통지)."
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "고소인 이의신청",
+    "lane": "신고자·시민",
+    "stage": "G5 이의·보완",
+    "type": "task",
+    "status": "loop",
+    "progress": 0,
+    "actor": "고소인·피해자",
+    "output_documents": [
+     "이의신청서"
+    ],
+    "deadline": "통지 받은 후",
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "형사소송법",
+      "article": "제245조의7(고소인 등의 이의신청)",
+      "text": "불송치 통지를 받은 사람(고발인 제외)은 사법경찰관 소속 관서의 장에게 이의를 신청할 수 있고, 신청이 있는 때에는 사법경찰관은 지체 없이 검사에게 사건을 송치하고 처리결과와 이유를 신청인에게 통지하여야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "검사 보완수사 요구",
+    "lane": "검찰",
+    "stage": "G5 이의·보완",
+    "type": "gateway",
+    "status": "loop",
+    "progress": 0,
+    "actor": "검사",
+    "receiver": "경찰 수사부서",
+    "condition": "보완 필요/불요",
+    "output_documents": [
+     "보완수사 요구서"
+    ],
+    "deadline": "송치·이의 검토 후",
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "형사소송법",
+      "article": "제197조의2",
+      "text": "검사는 송치사건에 대해 보완수사를 요구할 수 있다."
+     },
+     {
+      "law": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정",
+      "article": "제59조",
+      "text": "검사는 송치받은 사건에 보완수사가 필요하면 직접 보완수사를 하거나 사법경찰관에게 보완수사를 요구할 수 있다."
+     },
+     {
+      "law": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정",
+      "article": "제60조",
+      "text": "보완수사요구는 정해진 방법과 절차에 따라 이루어진다(보완수사요구의 방법과 절차)."
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "검사 기소·불기소 결정",
+    "lane": "검찰",
+    "stage": "G6 검찰처분",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "검사",
+    "condition": "기소/불기소",
+    "output_documents": [
+     "공소장",
+     "불기소 결정서"
+    ],
+    "deadline": "수사 종결 후",
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "검찰청법",
+      "article": "제4조",
+      "text": "검사는 공소를 제기하고 그 유지에 필요한 사항을 수행한다."
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "공판(재판) 이행",
+    "lane": "법원",
+    "stage": "G6 검찰처분",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "법원",
+    "output_documents": [
+     "공판조서",
+     "판결"
+    ],
+    "deadline": "기소 후",
+    "confidence": 0.78,
+    "legal_basis": [
+     {
+      "law": "형사소송법",
+      "article": "제246조",
+      "text": "공소는 검사가 제기하여 법원 재판으로 이행한다."
+     }
+    ]
+   },
+   {
+    "id": "S01",
+    "name": "KICS 사건 등록·관리",
+    "lane": "형사사법정보시스템",
+    "stage": "G2 입건·수사개시",
+    "type": "system",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "형사사법정보시스템",
+    "input_documents": [
+     "입건 결정"
+    ],
+    "output_documents": [
+     "사건 등록기록"
+    ],
+    "confidence": 0.7,
+    "legal_basis": [
+     {
+      "law": "형사소송법",
+      "article": "제196조",
+      "text": "수사 사건은 형사사법정보시스템으로 관리된다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P11",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P15",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P10",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P03",
+    "target": "P04",
+    "type": "message",
+    "label": "현장 출동 지령"
+   },
+   {
+    "id": "M02",
+    "source": "P07",
+    "target": "P08",
+    "type": "message",
+    "label": "영장 신청"
+   },
+   {
+    "id": "M03",
+    "source": "P05",
+    "target": "S01",
+    "type": "message",
+    "label": "사건 입건 등록"
+   },
+   {
+    "id": "M04",
+    "source": "P12",
+    "target": "P13",
+    "type": "message",
+    "label": "불송치 통지"
+   },
+   {
+    "id": "L01",
+    "source": "P14",
+    "target": "P06",
+    "type": "loop",
+    "label": "보완수사 요구"
+   },
+   {
+    "id": "L02",
+    "source": "P13",
+    "target": "P15",
+    "type": "sequence",
+    "label": "지체 없이 검사 송치(제245조의7②)"
+   }
+  ],
+  "warnings": [
+   {
+    "date": "2026-07-12",
+    "type": "citation-correction",
+    "content": "P01·P02·P03의 112신고의 운영 및 처리 등에 관한 법률 인용에서 서술형 article 필드(\"112치안종합상황실 신고 접수\", \"신고 대응 코드 분류\", \"긴급조치·출동 지령\")를 현행 조문 번호로 교정. P01→제6조(112치안종합상황실의 설치·운영)+제7조(112신고의 접수 등), P02→제7조(112신고의 접수 등), P03→제8조(112신고에 대한 조치). 조문 목차 및 본문은 국가법령정보센터 DRF API(MST 257787) 직접 조회로 확인.",
+    "consultedMSTs": [
+     "257787"
+    ]
+   },
+   "2026-07-12 정정: 고소인 이의신청(P13)의 효과를 '경찰 재검토 루프'에서 '검사 송치'로 재배선 — 형소법 제245조의7② 원문 대조(DRF MST 281865). 이의신청은 경찰 재검토가 아니라 검사 송치를 강제함."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 6건 중 공식 원문 6건을 연결했다. 캔버스와 절차 노드의 명시 조문 34건 가운데 34건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "형사소송법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "형사소송법",
+    "lawId": "001671",
+    "mst": "281865",
+    "promulgatedOn": "2025-12-30",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/형사소송법"
+   },
+   {
+    "law": "검찰청법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "검찰청법",
+    "lawId": "001286",
+    "mst": "242095",
+    "promulgatedOn": "2022-05-09",
+    "effectiveOn": "2022-09-10",
+    "officialUrl": "https://law.go.kr/법령/검찰청법"
+   },
+   {
+    "law": "국가경찰과 자치경찰의 조직 및 운영에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국가경찰과 자치경찰의 조직 및 운영에 관한 법률",
+    "lawId": "000992",
+    "mst": "268727",
+    "promulgatedOn": "2025-01-31",
+    "effectiveOn": "2026-02-01",
+    "officialUrl": "https://law.go.kr/법령/국가경찰과자치경찰의조직및운영에관한법률"
+   },
+   {
+    "law": "112신고의 운영 및 처리에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "112신고의 운영 및 처리에 관한 법률",
+    "lawId": "014565",
+    "mst": "257787",
+    "promulgatedOn": "2024-01-02",
+    "effectiveOn": "2024-07-03",
+    "officialUrl": "https://law.go.kr/법령/112신고의운영및처리에관한법률"
+   },
+   {
+    "law": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정",
+    "lawId": "013871",
+    "mst": "287545",
+    "promulgatedOn": "2026-06-30",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/검사와사법경찰관의상호협력과일반적수사준칙에관한규정"
+   },
+   {
+    "law": "경찰관 직무집행법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "경찰관 직무집행법",
+    "lawId": "000985",
+    "mst": "282479",
+    "promulgatedOn": "2026-01-06",
+    "effectiveOn": "2026-07-07",
+    "officialUrl": "https://law.go.kr/법령/경찰관직무집행법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 31,
+   "explicitCitationEntries": 29,
+   "articleReferences": 34,
+   "verifiedReferences": 34,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
   }
+ }
 }

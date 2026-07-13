@@ -1,0 +1,379 @@
+{
+ "slug": "catastrophic-medical-expense-support",
+ "name": "재난적의료비 지원",
+ "oneLiner": "소득·재산·의료비 요건 확인 → 지급 신청·증빙 제출 → 금융·소득·진료자료 확인 → 지원대상·금액 결정 → 환자 또는 의료기관 지급 → 지급 결과·진료비 정산 확인 → 이의신청 → 부당이득 조사·징수",
+ "type": "의료비 신청·지급형",
+ "priority": 307,
+ "whyFirst": "정부·지방자치단체와 관계기관의 역할을 분리해 재난적의료비 지원 절차를 한눈에 보여준다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "재난적의료비 지원은(는) 소득·재산·의료비 요건 확인 → 지급 신청·증빙 제출 → 금융·소득·진료자료 확인 → 지원대상·금액 결정 → 환자 또는 의료기관 지급 → 지급 결과·진료비 정산 확인 → 이의신청 → 부당이득 조사·징수로 이어지는 공적 절차다.",
+  "stakeholders": "환자·대리인, 국민건강보험공단, 의료기관·금융기관, 보건복지부",
+  "legalBasis": [
+   {
+    "law": "재난적의료비 지원에 관한 법률",
+    "articles": "제8~23조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "국민건강보험공단",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "의료기관·금융기관",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "보건복지부",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "소득·재산·의료비 요건 확인",
+   "지급 신청·증빙 제출",
+   "금융·소득·진료자료 확인",
+   "지원대상·금액 결정",
+   "환자 또는 의료기관 지급",
+   "지급 결과·진료비 정산 확인",
+   "이의신청",
+   "부당이득 조사·징수",
+   "지원기준·사업성과 평가"
+  ],
+  "moneyFlow": "지원금·수수료·사업비는 법령과 연도별 사업기준 또는 개별 결정에 따라 달라질 수 있다.",
+  "docsFlow": "소득·재산·의료비 요건 확인 기록 → 심사·협의 자료 → 결정·통지 → 이행·사후관리 기록으로 이어진다.",
+  "bottlenecks": [
+   "연도별 소득·재산·의료비 기준",
+   "신청기한과 개별심사위원회 운영기준"
+  ],
+  "reformPoints": [
+   "처리상태와 담당기관 안내",
+   "기관 간 자료연계와 중복제출 축소",
+   "결정·변경 사유의 명확한 통지"
+  ]
+ },
+ "related": [],
+ "fieldVerification": [
+  "연도별 소득·재산·의료비 기준",
+  "신청기한과 개별심사위원회 운영기준"
+ ],
+ "process": {
+  "institution_name": "재난적의료비 지원",
+  "law_name": "재난적의료비 지원에 관한 법률",
+  "lanes": [
+   "환자·대리인",
+   "국민건강보험공단",
+   "의료기관·금융기관",
+   "보건복지부"
+  ],
+  "stages": [
+   "G0 요건 확인",
+   "G1 신청",
+   "G2 조사·심사",
+   "G3 결정·지급",
+   "G4 이의·환수"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "소득·재산·의료비 요건 확인",
+    "lane": "환자·대리인",
+    "stage": "G0 요건 확인",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "환자·대리인",
+    "action": "질환과 소득·재산, 본인부담 의료비가 지원기준에 해당하는지 확인한다.",
+    "output_documents": [
+     "소득·재산·의료비 요건 확인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "재난적의료비 지원에 관한 법률",
+      "article": "제8조·제9조",
+      "text": "재난적의료비 지원에 관한 법률 제8조·제9조에 따른 질환과 소득·재산, 본인부담 의료비가 지원기준에 해당하는지 확인한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "지급 신청·증빙 제출",
+    "lane": "환자·대리인",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "환자·대리인",
+    "action": "공단에 신청서와 진료비·가구·소득 관련 증빙을 제출한다.",
+    "output_documents": [
+     "지급 신청·증빙 제출 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "재난적의료비 지원에 관한 법률",
+      "article": "제10조",
+      "text": "재난적의료비 지원에 관한 법률 제10조에 따른 공단에 신청서와 진료비·가구·소득 관련 증빙을 제출한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "금융·소득·진료자료 확인",
+    "lane": "국민건강보험공단",
+    "stage": "G2 조사·심사",
+    "type": "gateway",
+    "status": "current",
+    "progress": 55,
+    "actor": "국민건강보험공단",
+    "action": "관계기관 자료와 제출서류를 확인해 지원요건을 조사한다.",
+    "output_documents": [
+     "금융·소득·진료자료 확인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "재난적의료비 지원에 관한 법률",
+      "article": "제11조·제21조·제22조",
+      "text": "재난적의료비 지원에 관한 법률 제11조·제21조·제22조에 따른 관계기관 자료와 제출서류를 확인해 지원요건을 조사한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "지원대상·금액 결정",
+    "lane": "국민건강보험공단",
+    "stage": "G2 조사·심사",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "국민건강보험공단",
+    "action": "지원 여부와 지급범위를 결정해 신청인에게 통지한다.",
+    "output_documents": [
+     "지원대상·금액 결정 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "재난적의료비 지원에 관한 법률",
+      "article": "제12조·제13조",
+      "text": "재난적의료비 지원에 관한 법률 제12조·제13조에 따른 지원 여부와 지급범위를 결정해 신청인에게 통지한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "환자 또는 의료기관 지급",
+    "lane": "국민건강보험공단",
+    "stage": "G3 결정·지급",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국민건강보험공단",
+    "action": "결정된 지원금을 환자나 의료기관에 지급한다.",
+    "output_documents": [
+     "환자 또는 의료기관 지급 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "재난적의료비 지원에 관한 법률",
+      "article": "제14조",
+      "text": "재난적의료비 지원에 관한 법률 제14조에 따른 결정된 지원금을 환자나 의료기관에 지급한다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "지급 결과·진료비 정산 확인",
+    "lane": "의료기관·금융기관",
+    "stage": "G3 결정·지급",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "의료기관·금융기관",
+    "action": "지원금 수령과 의료비 정산 내역을 확인한다.",
+    "output_documents": [
+     "지급 결과·진료비 정산 확인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "재난적의료비 지원에 관한 법률",
+      "article": "제14조",
+      "text": "재난적의료비 지원에 관한 법률 제14조에 따른 지원금 수령과 의료비 정산 내역을 확인한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "이의신청",
+    "lane": "환자·대리인",
+    "stage": "G4 이의·환수",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "환자·대리인",
+    "action": "결정에 이의가 있으면 법정 절차에 따라 이의를 신청한다.",
+    "output_documents": [
+     "이의신청 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "재난적의료비 지원에 관한 법률",
+      "article": "제23조",
+      "text": "재난적의료비 지원에 관한 법률 제23조에 따른 결정에 이의가 있으면 법정 절차에 따라 이의를 신청한다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "부당이득 조사·징수",
+    "lane": "국민건강보험공단",
+    "stage": "G4 이의·환수",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국민건강보험공단",
+    "action": "거짓이나 중복 지급을 확인해 부당이득을 징수한다.",
+    "output_documents": [
+     "부당이득 조사·징수 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "재난적의료비 지원에 관한 법률",
+      "article": "제17조·제18조",
+      "text": "재난적의료비 지원에 관한 법률 제17조·제18조에 따른 거짓이나 중복 지급을 확인해 부당이득을 징수한다."
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "지원기준·사업성과 평가",
+    "lane": "보건복지부",
+    "stage": "G4 이의·환수",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보건복지부",
+    "action": "지원 실적과 의료비 부담 완화 효과를 평가해 계획과 기준을 개선한다.",
+    "output_documents": [
+     "재난적의료비 사업평가 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "재난적의료비 지원에 관한 법률",
+      "article": "제5조·제6조",
+      "text": "보건복지부장관의 사업 주관과 계획 수립에 따른 성과평가·기준 개선 단계다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": "사업평가 반영"
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건·기한·지원 범위는 하위규정과 사실관계에 따라 달라질 수 있다.",
+   "2026-07-13 301~320 확장: 현행 법률의 실제 조문 순서와 당사자·행정기관 레인을 기준으로 신규 작성."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 31건 가운데 31건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "재난적의료비 지원에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "재난적의료비 지원에 관한 법률",
+    "lawId": "013070",
+    "mst": "249317",
+    "promulgatedOn": "2023-03-28",
+    "effectiveOn": "2023-09-29",
+    "officialUrl": "https://law.go.kr/법령/재난적의료비지원에관한법률"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 10,
+   "explicitCitationEntries": 10,
+   "articleReferences": 31,
+   "verifiedReferences": 31,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

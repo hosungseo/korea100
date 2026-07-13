@@ -23,13 +23,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const institution = getInstitution(slug);
-  if (!institution) return { title: "제도 100" };
+  if (!institution) return { title: "대한민국 제도 지도" };
   return {
     title: institution.name,
     description: institution.oneLiner,
     alternates: { canonical: `${SITE_URL}/model/${institution.slug}/` },
     openGraph: {
-      title: `${institution.name} — 대한민국 제도 100`,
+      title: `${institution.name} — 대한민국 제도 지도`,
       description: institution.oneLiner,
       type: "article",
       url: `${SITE_URL}/model/${institution.slug}/`,
@@ -38,13 +38,13 @@ export async function generateMetadata({
           url: `${SITE_URL}/og-default.png`,
           width: 1200,
           height: 630,
-          alt: "한 장으로 끝내는 대한민국 제도 100",
+          alt: "한 장으로 끝내는 대한민국 제도 지도",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${institution.name} — 대한민국 제도 100`,
+      title: `${institution.name} — 대한민국 제도 지도`,
       description: institution.oneLiner,
       images: [`${SITE_URL}/og-default.png`],
     },
@@ -73,7 +73,7 @@ export default async function ModelPage({
     inLanguage: "ko-KR",
     isPartOf: {
       "@type": "CollectionPage",
-      name: "한 장으로 끝내는 대한민국 제도 100",
+      name: "한 장으로 끝내는 대한민국 제도 지도",
       url: `${SITE_URL}/`,
     },
     about: institution.canvas.legalBasis.map((basis) => basis.law),

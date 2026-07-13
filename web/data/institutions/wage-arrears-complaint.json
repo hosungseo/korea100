@@ -75,7 +75,8 @@
    "근로자",
    "사업주",
    "고용노동부 근로감독관",
-   "수사기관"
+   "수사기관",
+   "근로복지공단"
   ],
   "stages": [
    "G0 사안·상담",
@@ -255,7 +256,7 @@
    {
     "id": "P08",
     "name": "체불 임금등 대지급금 청구·지급",
-    "lane": "고용노동부 근로감독관",
+    "lane": "근로복지공단",
     "stage": "G5 사후관리",
     "type": "task",
     "status": "waiting",
@@ -329,7 +330,7 @@
     "id": "E07",
     "source": "P06",
     "target": "P08",
-    "type": "message",
+    "type": "sequence",
     "label": "도산·미지급 확정 시 대지급금"
    },
    {
@@ -377,8 +378,8 @@
   "articleVerification": {
    "checkedAt": "2026-07-13",
    "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
-   "citationEntries": 10,
-   "explicitCitationEntries": 10,
+   "citationEntries": 11,
+   "explicitCitationEntries": 11,
    "articleReferences": 16,
    "verifiedReferences": 16,
    "missingReferences": 0,

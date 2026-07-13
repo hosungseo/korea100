@@ -15,7 +15,7 @@ export default function OgCardPage() {
         <span aria-hidden="true" />
         법령 기준 제도 모델
       </div>
-      <h1>대한민국 제도 100</h1>
+      <h1>대한민국 제도 지도</h1>
       <p>법령부터 실제 업무 흐름까지, 한 장으로 읽는 국가 운영 카탈로그</p>
 
       <section className="og-card-metrics">

@@ -1,0 +1,317 @@
+{
+ "slug": "high-risk-maternal-newborn-care-network",
+ "name": "고위험 임산부·신생아 진료협력",
+ "oneLiner": "고위험 요인 확인·진료 → 전문치료 의뢰·자료 전송 → 병상·전문의 수용 조정 → 24시간 이송·응급대응 연계 → 산모·신생아 집중치료 → 회송·산후관리 연계 → 시설 지원·협력체계 평가",
+ "type": "고위험 산모·신생아 연계형",
+ "priority": 305,
+ "whyFirst": "정부·지방자치단체와 관계기관의 역할을 분리해 고위험 임산부·신생아 진료협력 절차를 한눈에 보여준다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "고위험 임산부·신생아 진료협력은(는) 고위험 요인 확인·진료 → 전문치료 의뢰·자료 전송 → 병상·전문의 수용 조정 → 24시간 이송·응급대응 연계 → 산모·신생아 집중치료 → 회송·산후관리 연계 → 시설 지원·협력체계 평가로 이어지는 공적 절차다.",
+  "stakeholders": "임산부·보호자, 분만·신생아 의료기관, 권역모자의료센터, 보건복지부·지방자치단체",
+  "legalBasis": [
+   {
+    "law": "모자보건법",
+    "articles": "제8~10조의2, 제10조의6",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "분만·신생아 의료기관",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "권역모자의료센터",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "보건복지부·지방자치단체",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "산전 진료·위험증상 알림",
+   "고위험 판정·전문치료 의뢰",
+   "병상·전문의 수용 조정",
+   "24시간 이송·응급대응 연계",
+   "산모·신생아 집중치료",
+   "회송·산후관리 연계",
+   "시설 지원·협력체계 평가"
+  ],
+  "moneyFlow": "지원금·수수료·사업비는 법령과 연도별 사업기준 또는 개별 결정에 따라 달라질 수 있다.",
+  "docsFlow": "고위험 요인 확인·진료 기록 → 심사·협의 자료 → 결정·통지 → 이행·사후관리 기록으로 이어진다.",
+  "bottlenecks": [
+   "시범지역별 24시간 연락·전원 기준",
+   "권역센터 병상부족 시 타권역 연계 절차"
+  ],
+  "reformPoints": [
+   "처리상태와 담당기관 안내",
+   "기관 간 자료연계와 중복제출 축소",
+   "결정·변경 사유의 명확한 통지"
+  ]
+ },
+ "related": [],
+ "fieldVerification": [
+  "시범지역별 24시간 연락·전원 기준",
+  "권역센터 병상부족 시 타권역 연계 절차"
+ ],
+ "process": {
+  "institution_name": "고위험 임산부·신생아 진료협력",
+  "law_name": "모자보건법",
+  "lanes": [
+   "임산부·보호자",
+   "분만·신생아 의료기관",
+   "권역모자의료센터",
+   "보건복지부·지방자치단체"
+  ],
+  "stages": [
+   "G0 위험 확인",
+   "G1 의뢰",
+   "G2 수용조정",
+   "G3 집중치료",
+   "G4 연계·평가"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "산전 진료·위험증상 알림",
+    "lane": "임산부·보호자",
+    "stage": "G0 위험 확인",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "임산부·보호자",
+    "action": "정기 산전 진료를 받고 이상 증상과 과거력 등 위험정보를 의료진에게 알린다.",
+    "output_documents": [
+     "산전 진료·위험증상 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "모자보건법",
+      "article": "제8조·제10조",
+      "text": "모자보건법 제8조·제10조에 따른 임산부 신고와 산전·영유아 건강관리 단계다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "고위험 판정·전문치료 의뢰",
+    "lane": "분만·신생아 의료기관",
+    "stage": "G1 의뢰",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "분만·신생아 의료기관",
+    "action": "고위험 임신·신생아 상태를 판정하고 권역센터에 진료를 의뢰해 검사자료를 전달한다.",
+    "output_documents": [
+     "고위험 판정·전문치료 의뢰 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "모자보건법",
+      "article": "제10조의2",
+      "text": "모자보건법 제10조의2에 따른 집중치료가 필요하면 권역센터에 진료를 의뢰하고 검사자료를 전달한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "병상·전문의 수용 조정",
+    "lane": "권역모자의료센터",
+    "stage": "G2 수용조정",
+    "type": "gateway",
+    "status": "current",
+    "progress": 55,
+    "actor": "권역모자의료센터",
+    "action": "산모·태아·신생아 상태와 병상 여건을 확인해 수용을 조정한다.",
+    "output_documents": [
+     "병상·전문의 수용 조정 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "모자보건법",
+      "article": "제10조의2·제10조의6",
+      "text": "모자보건법 제10조의2·제10조의6에 따른 산모·태아·신생아 상태와 병상 여건을 확인해 수용을 조정한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "24시간 이송·응급대응 연계",
+    "lane": "권역모자의료센터",
+    "stage": "G2 수용조정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "권역모자의료센터",
+    "action": "응급상황이면 이송기관과 치료팀을 연결한다.",
+    "output_documents": [
+     "24시간 이송·응급대응 연계 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "모자보건법",
+      "article": "제10조의2",
+      "text": "모자보건법 제10조의2에 따른 응급상황이면 이송기관과 치료팀을 연결한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "산모·신생아 집중치료",
+    "lane": "권역모자의료센터",
+    "stage": "G3 집중치료",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "권역모자의료센터",
+    "action": "고위험 산모와 신생아에게 전문 집중치료를 제공한다.",
+    "output_documents": [
+     "산모·신생아 집중치료 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "모자보건법",
+      "article": "제10조의2",
+      "text": "모자보건법 제10조의2에 따른 고위험 산모와 신생아에게 전문 집중치료를 제공한다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "회송·산후관리 연계",
+    "lane": "분만·신생아 의료기관",
+    "stage": "G4 연계·평가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "분만·신생아 의료기관",
+    "action": "상태가 안정되면 지역 의료기관과 보건서비스로 회송·연계한다.",
+    "output_documents": [
+     "회송·산후관리 연계 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "모자보건법",
+      "article": "제10조",
+      "text": "모자보건법 제10조에 따른 상태가 안정되면 지역 의료기관과 보건서비스로 회송·연계한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "시설 지원·협력체계 평가",
+    "lane": "보건복지부·지방자치단체",
+    "stage": "G4 연계·평가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보건복지부·지방자치단체",
+    "action": "시설·인력 지원과 지역 진료협력 운영성과를 점검한다.",
+    "output_documents": [
+     "시설 지원·협력체계 평가 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "모자보건법",
+      "article": "제10조의2·제10조의6",
+      "text": "모자보건법 제10조의2·제10조의6에 따른 시설·인력 지원과 지역 진료협력 운영성과를 점검한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건·기한·지원 범위는 하위규정과 사실관계에 따라 달라질 수 있다.",
+   "2026-07-13 301~320 확장: 현행 법률의 실제 조문 순서와 당사자·행정기관 레인을 기준으로 신규 작성. 정책뉴스: https://www.korea.kr/news/policyNewsView.do?newsId=148967943"
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 13건 가운데 13건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "모자보건법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "모자보건법",
+    "lawId": "000183",
+    "mst": "270399",
+    "promulgatedOn": "2025-04-01",
+    "effectiveOn": "2025-04-01",
+    "officialUrl": "https://law.go.kr/법령/모자보건법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 8,
+   "explicitCitationEntries": 8,
+   "articleReferences": 13,
+   "verifiedReferences": 13,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

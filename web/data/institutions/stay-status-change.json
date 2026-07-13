@@ -107,13 +107,13 @@
    {
     "id": "P02",
     "name": "허가 신청",
-    "lane": "출입국·외국인관서",
+    "lane": "외국인 신청인",
     "stage": "G0 준비",
     "type": "task",
     "status": "done",
     "progress": 100,
-    "actor": "출입국·외국인관서",
-    "action": "허가 신청",
+    "actor": "외국인 신청인",
+    "action": "현재 체류기간이 끝나기 전에 체류자격 변경허가를 신청한다.",
     "output_documents": [
      "허가 신청 기록"
     ],
@@ -175,14 +175,14 @@
    },
    {
     "id": "P05",
-    "name": "보완 요구·제출",
+    "name": "보완자료 제출",
     "lane": "외국인 신청인",
     "stage": "G3 결정",
     "type": "task",
     "status": "waiting",
     "progress": 0,
     "actor": "외국인 신청인",
-    "action": "보완 요구·제출",
+    "action": "심사기관의 보완요구에 따라 추가 자료를 제출한다.",
     "output_documents": [
      "보완 요구·제출 기록"
     ],
@@ -323,9 +323,9 @@
    {
     "id": "E05",
     "source": "P05",
-    "target": "P06",
-    "type": "sequence",
-    "label": null
+    "target": "P04",
+    "type": "loop",
+    "label": "보완자료 재심사"
    },
    {
     "id": "E06",
@@ -347,6 +347,13 @@
     "target": "P09",
     "type": "sequence",
     "label": "취소·변경 시 의견청취"
+   },
+   {
+    "id": "E09",
+    "source": "P04",
+    "target": "P06",
+    "type": "sequence",
+    "label": "심사 완료"
    }
   ],
   "warnings": [
@@ -358,7 +365,7 @@
   "status": "article-verified",
   "verifiedAt": "2026-07-13",
   "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
-  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 11건 가운데 11건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 16건 가운데 16건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "sources": [
    {
     "law": "출입국관리법",
@@ -375,10 +382,10 @@
   "articleVerification": {
    "checkedAt": "2026-07-13",
    "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
-   "citationEntries": 8,
-   "explicitCitationEntries": 8,
-   "articleReferences": 11,
-   "verifiedReferences": 11,
+   "citationEntries": 10,
+   "explicitCitationEntries": 10,
+   "articleReferences": 16,
+   "verifiedReferences": 16,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }

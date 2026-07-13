@@ -52,7 +52,7 @@ for (const file of files) {
     }
     for (const ref of basis) {
       citationCount += 1;
-      if (/시행령|시행규칙|[^법]령$|령\s*\(|규정$|규정\s*\(/.test((ref.law ?? "").trim()) || /(임용령|징계령|인사규정)/.test(ref.law ?? "")) sublawCitations += 1;
+      if (/시행령|시행규칙|[^법]령$|령\s*\(|규칙$|규정$|규정\s*\(/.test((ref.law ?? "").trim()) || /(임용령|징계령|인사규정)/.test(ref.law ?? "")) sublawCitations += 1;
       const article = ref.article ?? "";
       // unverified: 조문 확정 불가로 fieldVerification에 이관 문서화된 인용 — 감사 제외
       if (ref.unverified === true) continue;

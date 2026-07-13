@@ -1,0 +1,364 @@
+{
+ "slug": "illegal-private-finance-debtor-representation",
+ "name": "불법사금융 피해 채무자대리·법률구조",
+ "oneLiner": "불법추심·고금리 피해 상담 → 불법사금융 신고·수사의뢰 → 채무자대리·법률구조 신청 → 불법계약·지원요건 검토 → 채무자대리 통지·추심 대응 → 반환청구·손해배상 소송지원 → 위기가구 긴급지원 의뢰 → 처리결과 확인·재피해 예방",
+ "type": "피해신고·법률지원형",
+ "priority": 311,
+ "whyFirst": "정부·지방자치단체와 관계기관의 역할을 분리해 불법사금융 피해 채무자대리·법률구조 절차를 한눈에 보여준다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "불법사금융 피해 채무자대리·법률구조은(는) 불법추심·고금리 피해 상담 → 불법사금융 신고·수사의뢰 → 채무자대리·법률구조 신청 → 불법계약·지원요건 검토 → 채무자대리 통지·추심 대응 → 반환청구·손해배상 소송지원 → 위기가구 긴급지원 의뢰 → 처리결과 확인·재피해 예방로 이어지는 공적 절차다.",
+  "stakeholders": "피해 채무자, 금융감독·수사기관, 대한법률구조공단, 보건복지·지방자치단체",
+  "legalBasis": [
+   {
+    "law": "대부업 등의 등록 및 금융이용자 보호에 관한 법률",
+    "articles": "제9조의4~제12조의2, 제18조",
+    "kind": "법률"
+   },
+   {
+    "law": "법률구조법",
+    "articles": "제21조·제22조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "금융감독·수사기관",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "대한법률구조공단",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "보건복지·지방자치단체",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "불법추심·고금리 피해 상담",
+   "불법사금융 신고·수사의뢰",
+   "채무자대리·법률구조 신청",
+   "불법계약·지원요건 검토",
+   "채무자대리 통지·추심 대응",
+   "반환청구·손해배상 소송지원",
+   "위기가구 긴급지원 의뢰",
+   "처리결과 확인·재피해 예방"
+  ],
+  "moneyFlow": "지원금·수수료·사업비는 법령과 연도별 사업기준 또는 개별 결정에 따라 달라질 수 있다.",
+  "docsFlow": "불법추심·고금리 피해 상담 기록 → 심사·협의 자료 → 결정·통지 → 이행·사후관리 기록으로 이어진다.",
+  "bottlenecks": [
+   "무료지원 소득요건과 연도별 사업범위",
+   "금감원·경찰·복지기관 간 실제 긴급의뢰 절차"
+  ],
+  "reformPoints": [
+   "처리상태와 담당기관 안내",
+   "기관 간 자료연계와 중복제출 축소",
+   "결정·변경 사유의 명확한 통지"
+  ]
+ },
+ "related": [],
+ "fieldVerification": [
+  "무료지원 소득요건과 연도별 사업범위",
+  "금감원·경찰·복지기관 간 실제 긴급의뢰 절차"
+ ],
+ "process": {
+  "institution_name": "불법사금융 피해 채무자대리·법률구조",
+  "law_name": "대부업 등의 등록 및 금융이용자 보호에 관한 법률·법률구조법",
+  "lanes": [
+   "피해 채무자",
+   "금융감독·수사기관",
+   "대한법률구조공단",
+   "보건복지·지방자치단체"
+  ],
+  "stages": [
+   "G0 피해 확인",
+   "G1 신고·의뢰",
+   "G2 법률검토",
+   "G3 대리·소송",
+   "G4 복지연계"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "불법추심·고금리 피해 상담",
+    "lane": "피해 채무자",
+    "stage": "G0 피해 확인",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "피해 채무자",
+    "action": "계약서·입금내역·추심기록을 확보해 피해 내용을 상담한다.",
+    "output_documents": [
+     "불법추심·고금리 피해 상담 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대부업 등의 등록 및 금융이용자 보호에 관한 법률",
+      "article": "제9조의4~제11조",
+      "text": "대부업 등의 등록 및 금융이용자 보호에 관한 법률 제9조의4~제11조에 따른 계약서·입금내역·추심기록을 확보해 피해 내용을 상담한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "불법사금융 신고·수사의뢰",
+    "lane": "금융감독·수사기관",
+    "stage": "G1 신고·의뢰",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "금융감독·수사기관",
+    "action": "위반 정황을 접수해 조사하고 필요한 경우 수사기관에 의뢰한다.",
+    "output_documents": [
+     "불법사금융 신고·수사의뢰 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대부업 등의 등록 및 금융이용자 보호에 관한 법률",
+      "article": "제12조의2",
+      "text": "대부업 등의 등록 및 금융이용자 보호에 관한 법률 제12조의2에 따른 위반 정황을 접수해 조사하고 필요한 경우 수사기관에 의뢰한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "채무자대리·법률구조 신청",
+    "lane": "피해 채무자",
+    "stage": "G1 신고·의뢰",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "피해 채무자",
+    "action": "법률구조공단에 채무자대리 또는 소송지원을 신청한다.",
+    "output_documents": [
+     "채무자대리·법률구조 신청 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "법률구조법",
+      "article": "제22조",
+      "text": "법률구조법 제22조에 따른 법률구조공단에 채무자대리 또는 소송지원을 신청한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "불법계약·지원요건 검토",
+    "lane": "대한법률구조공단",
+    "stage": "G2 법률검토",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "대한법률구조공단",
+    "action": "계약 효력, 초과이자, 추심행위와 구조요건을 검토한다.",
+    "output_documents": [
+     "불법계약·지원요건 검토 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "법률구조법",
+      "article": "제21조·제22조",
+      "text": "법률구조법 제21조·제22조에 따른 계약 효력, 초과이자, 추심행위와 구조요건을 검토한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "채무자대리 통지·추심 대응",
+    "lane": "대한법률구조공단",
+    "stage": "G3 대리·소송",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "대한법률구조공단",
+    "action": "대리인 선임을 통지하고 불법추심 중단과 반환을 요구한다.",
+    "output_documents": [
+     "채무자대리 통지·추심 대응 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "법률구조법",
+      "article": "제21조",
+      "text": "법률구조법 제21조에 따른 대리인 선임을 통지하고 불법추심 중단과 반환을 요구한다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "반환청구·손해배상 소송지원",
+    "lane": "대한법률구조공단",
+    "stage": "G3 대리·소송",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "대한법률구조공단",
+    "action": "필요하면 초과이자 반환이나 손해배상 소송을 지원한다.",
+    "output_documents": [
+     "반환청구·손해배상 소송지원 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "법률구조법",
+      "article": "제21조·제22조",
+      "text": "법률구조법 제21조·제22조에 따른 필요하면 초과이자 반환이나 손해배상 소송을 지원한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "위기가구 긴급지원 의뢰",
+    "lane": "보건복지·지방자치단체",
+    "stage": "G4 복지연계",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보건복지·지방자치단체",
+    "action": "생계·주거 위기가 확인되면 긴급복지와 지역 지원으로 연계한다.",
+    "output_documents": [
+     "위기가구 긴급지원 의뢰 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "법률구조법",
+      "article": "제2조의2",
+      "text": "법률구조법 제2조의2에 따른 생계·주거 위기가 확인되면 긴급복지와 지역 지원으로 연계한다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "처리결과 확인·재피해 예방",
+    "lane": "피해 채무자",
+    "stage": "G4 복지연계",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "피해 채무자",
+    "action": "분쟁·소송 결과를 확인하고 추가 추심 발생 여부를 점검한다.",
+    "output_documents": [
+     "처리결과 확인·재피해 예방 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대부업 등의 등록 및 금융이용자 보호에 관한 법률",
+      "article": "제18조",
+      "text": "대부업 등의 등록 및 금융이용자 보호에 관한 법률 제18조에 따른 분쟁·소송 결과를 확인하고 추가 추심 발생 여부를 점검한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건·기한·지원 범위는 하위규정과 사실관계에 따라 달라질 수 있다.",
+   "2026-07-13 301~320 확장: 현행 법률의 실제 조문 순서와 당사자·행정기관 레인을 기준으로 신규 작성. 정책뉴스: https://www.korea.kr/news/policyNewsView.do?newsId=148967879"
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 2건 중 공식 원문 2건을 연결했다. 캔버스와 절차 노드의 명시 조문 16건 가운데 16건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "대부업 등의 등록 및 금융이용자 보호에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "대부업 등의 등록 및 금융이용자 보호에 관한 법률",
+    "lawId": "009348",
+    "mst": "277259",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/대부업등의등록및금융이용자보호에관한법률"
+   },
+   {
+    "law": "법률구조법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "법률구조법",
+    "lawId": "001270",
+    "mst": "239375",
+    "promulgatedOn": "2022-01-11",
+    "effectiveOn": "2023-01-12",
+    "officialUrl": "https://law.go.kr/법령/법률구조법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 10,
+   "explicitCitationEntries": 10,
+   "articleReferences": 16,
+   "verifiedReferences": 16,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

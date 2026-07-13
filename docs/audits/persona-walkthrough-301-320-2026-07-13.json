@@ -1,0 +1,650 @@
+{
+  "generatedAt": "2026-07-13",
+  "range": {
+    "from": 301,
+    "to": 320
+  },
+  "summary": {
+    "institutions": 20,
+    "passed": 8,
+    "review": 12,
+    "high": 0,
+    "medium": 18,
+    "byRule": {
+      "persona-thin": 9,
+      "persona-no-entry-or-receipt": 4,
+      "decision-no-persona-receipt": 4,
+      "adverse-no-remedy": 1
+    }
+  },
+  "results": [
+    {
+      "priority": 301,
+      "slug": "k-pass-transit-refund",
+      "name": "K-패스 대중교통비 지원·환급",
+      "personaLanes": [
+        "이용자"
+      ],
+      "activePersonaLanes": [
+        "이용자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P03"
+          ],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 302,
+      "slug": "mobility-support-special-transport",
+      "name": "교통약자 특별교통수단·광역이동지원",
+      "personaLanes": [
+        "교통약자·보호자",
+        "운송사업자·운전원"
+      ],
+      "activePersonaLanes": [
+        "교통약자·보호자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01",
+            "P03"
+          ],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "운송사업자·운전원",
+          "nodes": [
+            "P05"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "운송사업자·운전원",
+          "nodes": [
+            "P05"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    },
+    {
+      "priority": 303,
+      "slug": "student-tailored-integrated-support",
+      "name": "학생맞춤통합지원",
+      "personaLanes": [
+        "학생·보호자"
+      ],
+      "activePersonaLanes": [
+        "학생·보호자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01"
+          ],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "학생·보호자",
+          "nodes": [
+            "P01"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P03"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 304,
+      "slug": "emergency-patient-transfer-coordination",
+      "name": "응급환자 이송·전원 조정",
+      "personaLanes": [
+        "환자·신고자"
+      ],
+      "activePersonaLanes": [
+        "환자·신고자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01"
+          ],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "환자·신고자",
+          "nodes": [
+            "P01"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P05"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 305,
+      "slug": "high-risk-maternal-newborn-care-network",
+      "name": "고위험 임산부·신생아 진료협력",
+      "personaLanes": [
+        "임산부·보호자"
+      ],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P07"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "임산부·보호자",
+          "nodes": [
+            "P01"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        }
+      ]
+    },
+    {
+      "priority": 306,
+      "slug": "physician-assistant-nurse-governance",
+      "name": "진료지원간호사 자격·업무 관리",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 307,
+      "slug": "catastrophic-medical-expense-support",
+      "name": "재난적의료비 지원",
+      "personaLanes": [
+        "환자·대리인"
+      ],
+      "activePersonaLanes": [
+        "환자·대리인"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07"
+          ],
+          "terminals": [
+            "P09"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 308,
+      "slug": "crisis-pregnancy-protected-birth",
+      "name": "위기임신 상담·보호출산",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P07"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P07"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        }
+      ]
+    },
+    {
+      "priority": 309,
+      "slug": "lonely-death-risk-prevention-support",
+      "name": "고독사 위험자 발굴·지원",
+      "personaLanes": [
+        "주민·고독사위험자"
+      ],
+      "activePersonaLanes": [
+        "주민·고독사위험자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01"
+          ],
+          "terminals": [
+            "P07"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "주민·고독사위험자",
+          "nodes": [
+            "P01"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        }
+      ]
+    },
+    {
+      "priority": 310,
+      "slug": "drug-addiction-treatment-rehabilitation",
+      "name": "마약류 중독자 치료보호·사회재활",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P07"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 311,
+      "slug": "illegal-private-finance-debtor-representation",
+      "name": "불법사금융 피해 채무자대리·법률구조",
+      "personaLanes": [
+        "피해 채무자"
+      ],
+      "activePersonaLanes": [
+        "피해 채무자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P03"
+          ],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 312,
+      "slug": "industrial-transition-employment-stability",
+      "name": "산업전환 고용안정 지원",
+      "personaLanes": [
+        "근로자·사업주"
+      ],
+      "activePersonaLanes": [
+        "근로자·사업주"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01"
+          ],
+          "terminals": [
+            "P07"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "근로자·사업주",
+          "nodes": [
+            "P01"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        }
+      ]
+    },
+    {
+      "priority": 313,
+      "slug": "regional-sme-crisis-early-response",
+      "name": "지역중소기업 위기 조기대응",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P07"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 314,
+      "slug": "foodtech-business-regulatory-improvement",
+      "name": "푸드테크사업자 신고·규제개선",
+      "personaLanes": [
+        "푸드테크사업자"
+      ],
+      "activePersonaLanes": [
+        "푸드테크사업자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01",
+            "P03",
+            "P05"
+          ],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 315,
+      "slug": "integrated-meal-management-support-center",
+      "name": "어린이·사회복지 급식관리지원센터",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P07"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 316,
+      "slug": "rural-space-restructuring-regeneration",
+      "name": "농촌공간 재구조화·재생",
+      "personaLanes": [
+        "주민·사업제안자"
+      ],
+      "activePersonaLanes": [
+        "주민·사업제안자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P06"
+          ],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P03",
+            "P05",
+            "P07"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 317,
+      "slug": "climate-adaptation-plan-implementation-review",
+      "name": "기후위기 적응대책·이행점검",
+      "personaLanes": [
+        "주민·취약계층"
+      ],
+      "activePersonaLanes": [
+        "주민·취약계층"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01"
+          ],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [
+          "P08"
+        ],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "주민·취약계층",
+          "nodes": [
+            "P01"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        }
+      ]
+    },
+    {
+      "priority": 318,
+      "slug": "urban-river-basin-flood-prevention",
+      "name": "도시하천유역 침수피해 방지",
+      "personaLanes": [
+        "주민·시설관리자"
+      ],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "주민·시설관리자",
+          "nodes": [
+            "P01"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "주민·시설관리자",
+          "nodes": [
+            "P01"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    },
+    {
+      "priority": 319,
+      "slug": "railway-underground-integrated-development",
+      "name": "철도지하화 통합개발",
+      "personaLanes": [
+        "주민·토지관계인",
+        "사업시행자·공공기관"
+      ],
+      "activePersonaLanes": [
+        "주민·토지관계인"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01"
+          ],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "주민·토지관계인",
+          "nodes": [
+            "P01"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "사업시행자·공공기관",
+          "nodes": [
+            "P06",
+            "P07"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        },
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P05"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 320,
+      "slug": "aging-planned-city-special-renewal",
+      "name": "노후계획도시 특별정비",
+      "personaLanes": [
+        "주민·토지등소유자",
+        "국토교통부·사업시행자"
+      ],
+      "activePersonaLanes": [
+        "주민·토지등소유자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02"
+          ],
+          "terminals": [
+            "P09"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "국토교통부·사업시행자",
+          "nodes": [
+            "P06",
+            "P08"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    }
+  ]
+}

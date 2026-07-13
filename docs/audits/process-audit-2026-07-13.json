@@ -2,179 +2,39 @@
   "generatedAt": "2026-07-13",
   "metricStats": {
     "nodes": {
-      "mean": 14.383333333333333,
-      "sd": 3.8716562634384544
+      "mean": 13.978125,
+      "sd": 4.068494375610594
     },
     "edgeRatio": {
-      "mean": 1.06216256617766,
-      "sd": 0.11440097023211916
+      "mean": 1.0529022817836196,
+      "sd": 0.11777190766867311
     },
     "deadlineDensity": {
-      "mean": 0.2496885977512915,
-      "sd": 0.2789027467908159
+      "mean": 0.23397021316961358,
+      "sd": 0.2767513547793196
     },
     "meanConfidence": {
-      "mean": 0.8591583495655556,
-      "sd": 0.04538320562061222
+      "mean": 0.8618969570237407,
+      "sd": 0.04503366425102132
     }
   },
   "results": [
     {
-      "slug": "personal-data-breach-penalty",
+      "slug": "organ-transplant-waiting-approval",
       "verificationStatus": "article-verified",
       "processWarnings": 3,
       "findings": [
         {
-          "rule": "empty-lane",
-          "detail": "정보주체"
-        },
-        {
-          "rule": "empty-lane",
-          "detail": "전문기관"
-        },
-        {
-          "rule": "empty-stage",
-          "detail": "G0 준비"
-        },
-        {
-          "rule": "empty-stage",
-          "detail": "G3 협의·심사"
-        },
-        {
-          "rule": "empty-stage",
-          "detail": "G5 이행·사후관리"
+          "rule": "outlier",
+          "detail": "nodes=5.00 (전체 평균 13.98±4.07)"
         },
         {
           "rule": "outlier",
-          "detail": "nodes=6.00 (전체 평균 14.38±3.87)"
-        },
-        {
-          "rule": "outlier",
-          "detail": "edgeRatio=0.83 (전체 평균 1.06±0.11)"
+          "detail": "edgeRatio=0.80 (전체 평균 1.05±0.12)"
         },
         {
           "rule": "no-loop",
           "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
-        },
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
-      "score": 19
-    },
-    {
-      "slug": "pet-registration",
-      "verificationStatus": "article-verified",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "empty-lane",
-          "detail": "동물등록대행자"
-        },
-        {
-          "rule": "empty-lane",
-          "detail": "국가동물보호정보시스템"
-        },
-        {
-          "rule": "empty-stage",
-          "detail": "G0 준비"
-        },
-        {
-          "rule": "empty-stage",
-          "detail": "G3 협의·심사"
-        },
-        {
-          "rule": "outlier",
-          "detail": "nodes=5.00 (전체 평균 14.38±3.87)"
-        },
-        {
-          "rule": "outlier",
-          "detail": "edgeRatio=0.80 (전체 평균 1.06±0.11)"
-        },
-        {
-          "rule": "no-loop",
-          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
-        }
-      ],
-      "score": 15
-    },
-    {
-      "slug": "organ-transplant-waiting-approval",
-      "verificationStatus": "article-verified",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "empty-stage",
-          "detail": "G0 준비"
-        },
-        {
-          "rule": "empty-stage",
-          "detail": "G2 자료검토"
-        },
-        {
-          "rule": "outlier",
-          "detail": "nodes=5.00 (전체 평균 14.38±3.87)"
-        },
-        {
-          "rule": "outlier",
-          "detail": "edgeRatio=0.80 (전체 평균 1.06±0.11)"
-        },
-        {
-          "rule": "no-loop",
-          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
-        },
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
-      "score": 12
-    },
-    {
-      "slug": "medical-fee-confirmation-request",
-      "verificationStatus": "article-verified",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "empty-stage",
-          "detail": "G0 준비"
-        },
-        {
-          "rule": "empty-stage",
-          "detail": "G2 자료검토"
-        },
-        {
-          "rule": "outlier",
-          "detail": "nodes=5.00 (전체 평균 14.38±3.87)"
-        },
-        {
-          "rule": "outlier",
-          "detail": "edgeRatio=0.80 (전체 평균 1.06±0.11)"
-        },
-        {
-          "rule": "no-loop",
-          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
-        }
-      ],
-      "score": 11
-    },
-    {
-      "slug": "game-rating-classification",
-      "verificationStatus": "article-verified",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "empty-stage",
-          "detail": "G0 준비"
-        },
-        {
-          "rule": "empty-stage",
-          "detail": "G2 자료검토"
-        },
-        {
-          "rule": "outlier",
-          "detail": "nodes=6.00 (전체 평균 14.38±3.87)"
         },
         {
           "rule": "no-sublaw",
@@ -184,82 +44,13 @@
       "score": 9
     },
     {
-      "slug": "broadcast-telecom-convergence-permit",
-      "verificationStatus": "article-verified",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "empty-lane",
-          "detail": "방송·통신사업자"
-        },
-        {
-          "rule": "empty-stage",
-          "detail": "G0 사업유형 분류"
-        },
-        {
-          "rule": "no-loop",
-          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
-        },
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
-      "score": 8
-    },
-    {
-      "slug": "capital-gains-tax-housing",
-      "verificationStatus": "article-verified",
-      "processWarnings": 3,
-      "findings": [
-        {
-          "rule": "backward-sequence",
-          "edge": "E13",
-          "detail": "P11(4) → P16(3) — loop 타입이어야 할 후보"
-        },
-        {
-          "rule": "empty-lane",
-          "detail": "매수 연계"
-        },
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
-      "score": 8
-    },
-    {
-      "slug": "ecommerce-withdrawal-corrective-order",
-      "verificationStatus": "article-verified",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "empty-lane",
-          "detail": "결제업자"
-        },
-        {
-          "rule": "empty-stage",
-          "detail": "G0 준비"
-        },
-        {
-          "rule": "no-loop",
-          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
-        },
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
-      "score": 8
-    },
-    {
       "slug": "legal-aid",
       "verificationStatus": "needs-review",
       "processWarnings": 4,
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=0.93 (전체 평균 0.25±0.28)"
+          "detail": "deadlineDensity=0.93 (전체 평균 0.23±0.28)"
         }
       ],
       "score": 8
@@ -271,7 +62,39 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=1.00 (전체 평균 0.25±0.28)"
+          "detail": "deadlineDensity=1.00 (전체 평균 0.23±0.28)"
+        }
+      ],
+      "score": 8
+    },
+    {
+      "slug": "local-public-enterprise",
+      "verificationStatus": "needs-review",
+      "processWarnings": 4,
+      "findings": [
+        {
+          "rule": "outlier",
+          "detail": "deadlineDensity=0.80 (전체 평균 0.23±0.28)"
+        }
+      ],
+      "score": 8
+    },
+    {
+      "slug": "medical-fee-confirmation-request",
+      "verificationStatus": "article-verified",
+      "processWarnings": 3,
+      "findings": [
+        {
+          "rule": "outlier",
+          "detail": "nodes=5.00 (전체 평균 13.98±4.07)"
+        },
+        {
+          "rule": "outlier",
+          "detail": "edgeRatio=0.80 (전체 평균 1.05±0.12)"
+        },
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
         }
       ],
       "score": 8
@@ -289,13 +112,33 @@
       "score": 8
     },
     {
+      "slug": "pet-registration",
+      "verificationStatus": "article-verified",
+      "processWarnings": 3,
+      "findings": [
+        {
+          "rule": "outlier",
+          "detail": "nodes=5.00 (전체 평균 13.98±4.07)"
+        },
+        {
+          "rule": "outlier",
+          "detail": "edgeRatio=0.80 (전체 평균 1.05±0.12)"
+        },
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        }
+      ],
+      "score": 8
+    },
+    {
       "slug": "special-local-government",
       "verificationStatus": "needs-review",
       "processWarnings": 3,
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=1.00 (전체 평균 0.25±0.28)"
+          "detail": "deadlineDensity=1.00 (전체 평균 0.23±0.28)"
         }
       ],
       "score": 8
@@ -319,31 +162,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=0.94 (전체 평균 0.25±0.28)"
-        }
-      ],
-      "score": 7
-    },
-    {
-      "slug": "one-stop-permit-consultation",
-      "verificationStatus": "needs-review",
-      "processWarnings": 3,
-      "findings": [
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
-      "score": 7
-    },
-    {
-      "slug": "residents-ordinance-initiative",
-      "verificationStatus": "needs-review",
-      "processWarnings": 5,
-      "findings": [
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+          "detail": "deadlineDensity=0.94 (전체 평균 0.23±0.28)"
         }
       ],
       "score": 7
@@ -366,33 +185,14 @@
       "score": 6
     },
     {
-      "slug": "airport-development-operation-permit",
+      "slug": "capital-gains-tax-housing",
       "verificationStatus": "article-verified",
-      "processWarnings": 3,
+      "processWarnings": 4,
       "findings": [
         {
-          "rule": "empty-lane",
-          "detail": "토지 소유자·시도지사"
-        },
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
-      "score": 6
-    },
-    {
-      "slug": "financial-dispute-mediation",
-      "verificationStatus": "article-verified",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "empty-lane",
-          "detail": "금융회사"
-        },
-        {
-          "rule": "no-loop",
-          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+          "rule": "backward-sequence",
+          "edge": "E13",
+          "detail": "P11(4) → P16(3) — loop 타입이어야 할 후보"
         },
         {
           "rule": "no-sublaw",
@@ -409,26 +209,6 @@
       "score": 6
     },
     {
-      "slug": "genetic-resource-abs",
-      "verificationStatus": "article-verified",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "empty-lane",
-          "detail": "관계 중앙행정기관"
-        },
-        {
-          "rule": "no-loop",
-          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
-        },
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
-      "score": 6
-    },
-    {
       "slug": "government-organization",
       "verificationStatus": "needs-review",
       "processWarnings": 3,
@@ -436,34 +216,7 @@
       "score": 6
     },
     {
-      "slug": "import-food-animal-plant-quarantine",
-      "verificationStatus": "article-verified",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "empty-lane",
-          "detail": "관세청"
-        },
-        {
-          "rule": "no-loop",
-          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
-        },
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
-      "score": 6
-    },
-    {
       "slug": "local-government-organization",
-      "verificationStatus": "needs-review",
-      "processWarnings": 4,
-      "findings": [],
-      "score": 6
-    },
-    {
-      "slug": "local-public-enterprise",
       "verificationStatus": "needs-review",
       "processWarnings": 4,
       "findings": [],
@@ -477,90 +230,10 @@
       "score": 6
     },
     {
-      "slug": "marine-pollution-response",
-      "verificationStatus": "article-verified",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "empty-lane",
-          "detail": "해양수산부장관"
-        },
-        {
-          "rule": "no-loop",
-          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
-        },
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
-      "score": 6
-    },
-    {
-      "slug": "medical-accident-mediation",
-      "verificationStatus": "article-verified",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "empty-stage",
-          "detail": "G0 준비"
-        },
-        {
-          "rule": "no-loop",
-          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
-        },
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
-      "score": 6
-    },
-    {
       "slug": "ordinance-enactment",
       "verificationStatus": "needs-review",
       "processWarnings": 5,
       "findings": [],
-      "score": 6
-    },
-    {
-      "slug": "personal-bankruptcy-discharge",
-      "verificationStatus": "article-verified",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "empty-lane",
-          "detail": "파산관재인"
-        },
-        {
-          "rule": "no-loop",
-          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
-        },
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
-      "score": 6
-    },
-    {
-      "slug": "personal-rehabilitation",
-      "verificationStatus": "article-verified",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "empty-lane",
-          "detail": "회생위원"
-        },
-        {
-          "rule": "no-loop",
-          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
-        },
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
       "score": 6
     },
     {
@@ -570,7 +243,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=0.90 (전체 평균 0.25±0.28)"
+          "detail": "deadlineDensity=0.90 (전체 평균 0.23±0.28)"
         },
         {
           "rule": "no-sublaw",
@@ -597,19 +270,14 @@
       "score": 6
     },
     {
-      "slug": "resale-residence-obligation",
+      "slug": "residents-audit-request",
       "verificationStatus": "needs-review",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
+      "processWarnings": 5,
+      "findings": [],
       "score": 6
     },
     {
-      "slug": "residents-audit-request",
+      "slug": "residents-ordinance-initiative",
       "verificationStatus": "needs-review",
       "processWarnings": 5,
       "findings": [],
@@ -623,66 +291,10 @@
       "score": 6
     },
     {
-      "slug": "space-launch-satellite-operation-permit",
-      "verificationStatus": "article-verified",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "empty-lane",
-          "detail": "외교부장관"
-        },
-        {
-          "rule": "empty-lane",
-          "detail": "국제연합(UN)"
-        }
-      ],
-      "score": 6
-    },
-    {
-      "slug": "spectrum-allocation-auction",
-      "verificationStatus": "article-verified",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "empty-lane",
-          "detail": "이해관계자"
-        },
-        {
-          "rule": "no-loop",
-          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
-        },
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
-      "score": 6
-    },
-    {
       "slug": "urban-redevelopment",
       "verificationStatus": "needs-review",
       "processWarnings": 5,
       "findings": [],
-      "score": 6
-    },
-    {
-      "slug": "virtual-asset-provider-protection",
-      "verificationStatus": "article-verified",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "empty-lane",
-          "detail": "이용자"
-        },
-        {
-          "rule": "no-loop",
-          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
-        },
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
       "score": 6
     },
     {
@@ -718,13 +330,13 @@
       "score": 5
     },
     {
-      "slug": "disaster-management-fund",
+      "slug": "broadcast-telecom-convergence-permit",
       "verificationStatus": "article-verified",
-      "processWarnings": 2,
+      "processWarnings": 3,
       "findings": [
         {
-          "rule": "empty-lane",
-          "detail": "관계기관·지원기관"
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
         },
         {
           "rule": "no-sublaw",
@@ -746,6 +358,54 @@
       "score": 5
     },
     {
+      "slug": "ecommerce-withdrawal-corrective-order",
+      "verificationStatus": "article-verified",
+      "processWarnings": 3,
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 5
+    },
+    {
+      "slug": "financial-dispute-mediation",
+      "verificationStatus": "article-verified",
+      "processWarnings": 3,
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 5
+    },
+    {
+      "slug": "genetic-resource-abs",
+      "verificationStatus": "article-verified",
+      "processWarnings": 3,
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 5
+    },
+    {
       "slug": "housing-loan-guarantee",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
@@ -762,35 +422,42 @@
       "score": 5
     },
     {
-      "slug": "information-disclosure",
+      "slug": "import-food-animal-plant-quarantine",
       "verificationStatus": "article-verified",
-      "processWarnings": 1,
+      "processWarnings": 3,
       "findings": [
         {
-          "rule": "outlier",
-          "detail": "edgeRatio=1.53 (전체 평균 1.06±0.11)"
-        },
-        {
-          "rule": "outlier",
-          "detail": "deadlineDensity=0.94 (전체 평균 0.25±0.28)"
-        }
-      ],
-      "score": 5
-    },
-    {
-      "slug": "inheritance-tax",
-      "verificationStatus": "article-verified",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "empty-lane",
-          "detail": "제3자·원천징수의무자"
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
         },
         {
           "rule": "no-sublaw",
           "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
         }
       ],
+      "score": 5
+    },
+    {
+      "slug": "information-disclosure",
+      "verificationStatus": "article-verified",
+      "processWarnings": 1,
+      "findings": [
+        {
+          "rule": "outlier",
+          "detail": "edgeRatio=1.53 (전체 평균 1.05±0.12)"
+        },
+        {
+          "rule": "outlier",
+          "detail": "deadlineDensity=0.94 (전체 평균 0.23±0.28)"
+        }
+      ],
+      "score": 5
+    },
+    {
+      "slug": "local-adjustment-grant",
+      "verificationStatus": "needs-review",
+      "processWarnings": 2,
+      "findings": [],
       "score": 5
     },
     {
@@ -801,13 +468,29 @@
       "score": 5
     },
     {
-      "slug": "ltc-institution-designation",
+      "slug": "marine-pollution-response",
       "verificationStatus": "article-verified",
-      "processWarnings": 2,
+      "processWarnings": 3,
       "findings": [
         {
-          "rule": "empty-lane",
-          "detail": "복지부"
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 5
+    },
+    {
+      "slug": "medical-accident-mediation",
+      "verificationStatus": "article-verified",
+      "processWarnings": 3,
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
         },
         {
           "rule": "no-sublaw",
@@ -823,19 +506,19 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=0.94 (전체 평균 0.25±0.28)"
+          "detail": "deadlineDensity=0.94 (전체 평균 0.23±0.28)"
         }
       ],
       "score": 5
     },
     {
-      "slug": "parental-leave-benefit",
+      "slug": "personal-bankruptcy-discharge",
       "verificationStatus": "article-verified",
-      "processWarnings": 2,
+      "processWarnings": 3,
       "findings": [
         {
-          "rule": "empty-lane",
-          "detail": "관계기관"
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
         },
         {
           "rule": "no-sublaw",
@@ -845,13 +528,13 @@
       "score": 5
     },
     {
-      "slug": "reconstruction-excess-profit",
+      "slug": "personal-data-breach-penalty",
       "verificationStatus": "article-verified",
-      "processWarnings": 2,
+      "processWarnings": 4,
       "findings": [
         {
-          "rule": "empty-lane",
-          "detail": "감독"
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
         },
         {
           "rule": "no-sublaw",
@@ -861,13 +544,13 @@
       "score": 5
     },
     {
-      "slug": "reduced-working-hours-childcare",
+      "slug": "personal-rehabilitation",
       "verificationStatus": "article-verified",
-      "processWarnings": 2,
+      "processWarnings": 3,
       "findings": [
         {
-          "rule": "empty-lane",
-          "detail": "관계기관"
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
         },
         {
           "rule": "no-sublaw",
@@ -877,13 +560,13 @@
       "score": 5
     },
     {
-      "slug": "spouse-childbirth-leave",
+      "slug": "spectrum-allocation-auction",
       "verificationStatus": "article-verified",
-      "processWarnings": 2,
+      "processWarnings": 3,
       "findings": [
         {
-          "rule": "empty-lane",
-          "detail": "관계기관"
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
         },
         {
           "rule": "no-sublaw",
@@ -893,29 +576,13 @@
       "score": 5
     },
     {
-      "slug": "tax-audit",
+      "slug": "virtual-asset-provider-protection",
       "verificationStatus": "article-verified",
-      "processWarnings": 2,
+      "processWarnings": 3,
       "findings": [
         {
-          "rule": "empty-lane",
-          "detail": "제3자·원천징수의무자"
-        },
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
-      "score": 5
-    },
-    {
-      "slug": "vehicle-registration-transfer",
-      "verificationStatus": "article-verified",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "empty-lane",
-          "detail": "관계기관"
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
         },
         {
           "rule": "no-sublaw",
@@ -947,7 +614,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "edgeRatio=1.45 (전체 평균 1.06±0.11)"
+          "detail": "edgeRatio=1.45 (전체 평균 1.05±0.12)"
         }
       ],
       "score": 5
@@ -976,10 +643,54 @@
       "score": 4
     },
     {
+      "slug": "aging-planned-city-special-renewal",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 4
+    },
+    {
+      "slug": "airport-development-operation-permit",
+      "verificationStatus": "article-verified",
+      "processWarnings": 4,
+      "findings": [
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 4
+    },
+    {
       "slug": "business-license",
       "verificationStatus": "needs-review",
       "processWarnings": 1,
       "findings": [],
+      "score": 4
+    },
+    {
+      "slug": "catastrophic-medical-expense-support",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
       "score": 4
     },
     {
@@ -1021,7 +732,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=1.00 (전체 평균 0.25±0.28)"
+          "detail": "deadlineDensity=1.00 (전체 평균 0.23±0.28)"
         }
       ],
       "score": 4
@@ -1065,7 +776,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "edgeRatio=1.40 (전체 평균 1.06±0.11)"
+          "detail": "edgeRatio=1.40 (전체 평균 1.05±0.12)"
         }
       ],
       "score": 4
@@ -1088,6 +799,22 @@
     },
     {
       "slug": "credit-recovery-debt-adjustment",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 4
+    },
+    {
+      "slug": "crisis-pregnancy-protected-birth",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
       "findings": [
@@ -1159,6 +886,18 @@
       "score": 4
     },
     {
+      "slug": "disaster-management-fund",
+      "verificationStatus": "article-verified",
+      "processWarnings": 3,
+      "findings": [
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 4
+    },
+    {
       "slug": "domestic-violence-protection-order",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
@@ -1176,6 +915,22 @@
     },
     {
       "slug": "driver-license-acquisition-suspension",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 4
+    },
+    {
+      "slug": "drug-addiction-treatment-rehabilitation",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
       "findings": [
@@ -1225,7 +980,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=0.94 (전체 평균 0.25±0.28)"
+          "detail": "deadlineDensity=0.94 (전체 평균 0.23±0.28)"
         }
       ],
       "score": 4
@@ -1237,7 +992,23 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=0.95 (전체 평균 0.25±0.28)"
+          "detail": "deadlineDensity=0.95 (전체 평균 0.23±0.28)"
+        }
+      ],
+      "score": 4
+    },
+    {
+      "slug": "foodtech-business-regulatory-improvement",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
         }
       ],
       "score": 4
@@ -1291,7 +1062,51 @@
       "score": 4
     },
     {
+      "slug": "game-rating-classification",
+      "verificationStatus": "article-verified",
+      "processWarnings": 3,
+      "findings": [
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 4
+    },
+    {
+      "slug": "high-risk-maternal-newborn-care-network",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 4
+    },
+    {
       "slug": "hydrogen-ammonia-cofiring-power-permit",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 4
+    },
+    {
+      "slug": "illegal-private-finance-debtor-representation",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
       "findings": [
@@ -1314,6 +1129,22 @@
         {
           "rule": "no-loop",
           "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        }
+      ],
+      "score": 4
+    },
+    {
+      "slug": "industrial-transition-employment-stability",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
         }
       ],
       "score": 4
@@ -1347,6 +1178,34 @@
       "score": 4
     },
     {
+      "slug": "inheritance-tax",
+      "verificationStatus": "article-verified",
+      "processWarnings": 3,
+      "findings": [
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 4
+    },
+    {
+      "slug": "integrated-meal-management-support-center",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 4
+    },
+    {
       "slug": "integrated-resort-casino-permit",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
@@ -1364,6 +1223,22 @@
     },
     {
       "slug": "integrated-water-management",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 4
+    },
+    {
+      "slug": "k-pass-transit-refund",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
       "findings": [
@@ -1417,7 +1292,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "edgeRatio=1.40 (전체 평균 1.06±0.11)"
+          "detail": "edgeRatio=1.40 (전체 평균 1.05±0.12)"
         }
       ],
       "score": 4
@@ -1436,7 +1311,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=0.88 (전체 평균 0.25±0.28)"
+          "detail": "deadlineDensity=0.88 (전체 평균 0.23±0.28)"
         },
         {
           "rule": "no-sublaw",
@@ -1452,7 +1327,19 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=1.00 (전체 평균 0.25±0.28)"
+          "detail": "deadlineDensity=1.00 (전체 평균 0.23±0.28)"
+        }
+      ],
+      "score": 4
+    },
+    {
+      "slug": "ltc-institution-designation",
+      "verificationStatus": "article-verified",
+      "processWarnings": 3,
+      "findings": [
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
         }
       ],
       "score": 4
@@ -1476,13 +1363,29 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=1.00 (전체 평균 0.25±0.28)"
+          "detail": "deadlineDensity=1.00 (전체 평균 0.23±0.28)"
         }
       ],
       "score": 4
     },
     {
       "slug": "medical-device-digital-health-approval-coverage",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 4
+    },
+    {
+      "slug": "mobility-support-special-transport",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
       "findings": [
@@ -1566,6 +1469,18 @@
       "score": 4
     },
     {
+      "slug": "one-stop-permit-consultation",
+      "verificationStatus": "article-verified",
+      "processWarnings": 3,
+      "findings": [
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 4
+    },
+    {
       "slug": "outdoor-advertising-permit",
       "verificationStatus": "article-verified",
       "processWarnings": 3,
@@ -1578,14 +1493,10 @@
       "score": 4
     },
     {
-      "slug": "parent-benefit-first-meeting-voucher",
+      "slug": "parental-leave-benefit",
       "verificationStatus": "article-verified",
-      "processWarnings": 2,
+      "processWarnings": 3,
       "findings": [
-        {
-          "rule": "no-loop",
-          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
-        },
         {
           "rule": "no-sublaw",
           "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
@@ -1610,13 +1521,25 @@
       "score": 4
     },
     {
+      "slug": "physician-assistant-nurse-governance",
+      "verificationStatus": "article-verified",
+      "processWarnings": 3,
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        }
+      ],
+      "score": 4
+    },
+    {
       "slug": "police-investigation",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=0.94 (전체 평균 0.25±0.28)"
+          "detail": "deadlineDensity=0.94 (전체 평균 0.23±0.28)"
         }
       ],
       "score": 4
@@ -1626,6 +1549,78 @@
       "verificationStatus": "article-verified",
       "processWarnings": 3,
       "findings": [
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 4
+    },
+    {
+      "slug": "railway-underground-integrated-development",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 4
+    },
+    {
+      "slug": "reconstruction-excess-profit",
+      "verificationStatus": "article-verified",
+      "processWarnings": 3,
+      "findings": [
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 4
+    },
+    {
+      "slug": "reduced-working-hours-childcare",
+      "verificationStatus": "article-verified",
+      "processWarnings": 3,
+      "findings": [
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 4
+    },
+    {
+      "slug": "regional-sme-crisis-early-response",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 4
+    },
+    {
+      "slug": "resale-residence-obligation",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        },
         {
           "rule": "no-sublaw",
           "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
@@ -1647,6 +1642,22 @@
     },
     {
       "slug": "road-occupation-permit",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 4
+    },
+    {
+      "slug": "rural-space-restructuring-regeneration",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
       "findings": [
@@ -1694,14 +1705,10 @@
       "score": 4
     },
     {
-      "slug": "stay-status-change",
+      "slug": "spouse-childbirth-leave",
       "verificationStatus": "article-verified",
-      "processWarnings": 2,
+      "processWarnings": 3,
       "findings": [
-        {
-          "rule": "no-loop",
-          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
-        },
         {
           "rule": "no-sublaw",
           "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
@@ -1718,6 +1725,18 @@
           "rule": "no-loop",
           "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
         },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 4
+    },
+    {
+      "slug": "tax-audit",
+      "verificationStatus": "article-verified",
+      "processWarnings": 3,
+      "findings": [
         {
           "rule": "no-sublaw",
           "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
@@ -1818,7 +1837,7 @@
       "score": 4
     },
     {
-      "slug": "vehicle-inspection",
+      "slug": "urban-river-basin-flood-prevention",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
       "findings": [
@@ -1826,6 +1845,18 @@
           "rule": "no-loop",
           "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
         },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 4
+    },
+    {
+      "slug": "vehicle-registration-transfer",
+      "verificationStatus": "article-verified",
+      "processWarnings": 3,
+      "findings": [
         {
           "rule": "no-sublaw",
           "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
@@ -1885,22 +1916,6 @@
       "score": 3
     },
     {
-      "slug": "administrative-litigation",
-      "verificationStatus": "article-verified",
-      "processWarnings": 0,
-      "findings": [
-        {
-          "rule": "outlier",
-          "detail": "deadlineDensity=0.94 (전체 평균 0.25±0.28)"
-        },
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
-      "score": 3
-    },
-    {
       "slug": "air-water-discharge-permit",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
@@ -1919,7 +1934,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=0.88 (전체 평균 0.25±0.28)"
+          "detail": "deadlineDensity=0.88 (전체 평균 0.23±0.28)"
         },
         {
           "rule": "no-sublaw",
@@ -1936,29 +1951,13 @@
       "score": 3
     },
     {
-      "slug": "bai-audit",
-      "verificationStatus": "article-verified",
-      "processWarnings": 0,
-      "findings": [
-        {
-          "rule": "outlier",
-          "detail": "deadlineDensity=0.82 (전체 평균 0.25±0.28)"
-        },
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
-      "score": 3
-    },
-    {
       "slug": "basic-livelihood-security",
       "verificationStatus": "article-verified",
       "processWarnings": 1,
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=1.00 (전체 평균 0.25±0.28)"
+          "detail": "deadlineDensity=1.00 (전체 평균 0.23±0.28)"
         }
       ],
       "score": 3
@@ -1970,7 +1969,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=1.00 (전체 평균 0.25±0.28)"
+          "detail": "deadlineDensity=1.00 (전체 평균 0.23±0.28)"
         }
       ],
       "score": 3
@@ -2001,6 +2000,18 @@
     },
     {
       "slug": "chemical-safety-permit",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 3
+    },
+    {
+      "slug": "climate-adaptation-plan-implementation-review",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
       "findings": [
@@ -2254,6 +2265,18 @@
       "score": 3
     },
     {
+      "slug": "emergency-patient-transfer-coordination",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 3
+    },
+    {
       "slug": "emergency-rescue-command",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
@@ -2413,7 +2436,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=1.00 (전체 평균 0.25±0.28)"
+          "detail": "deadlineDensity=1.00 (전체 평균 0.23±0.28)"
         }
       ],
       "score": 3
@@ -2526,6 +2549,18 @@
       "score": 3
     },
     {
+      "slug": "lonely-death-risk-prevention-support",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 3
+    },
+    {
       "slug": "medical-institution-permit",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
@@ -2568,7 +2603,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=0.94 (전체 평균 0.25±0.28)"
+          "detail": "deadlineDensity=0.94 (전체 평균 0.23±0.28)"
         }
       ],
       "score": 3
@@ -2680,7 +2715,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "edgeRatio=1.38 (전체 평균 1.06±0.11)"
+          "detail": "edgeRatio=1.38 (전체 평균 1.05±0.12)"
         }
       ],
       "score": 3
@@ -2710,13 +2745,25 @@
       "score": 3
     },
     {
+      "slug": "parent-benefit-first-meeting-voucher",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        }
+      ],
+      "score": 3
+    },
+    {
       "slug": "parliamentary-audit",
       "verificationStatus": "article-verified",
       "processWarnings": 0,
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=0.94 (전체 평균 0.25±0.28)"
+          "detail": "deadlineDensity=0.94 (전체 평균 0.23±0.28)"
         },
         {
           "rule": "no-sublaw",
@@ -3039,19 +3086,14 @@
       "score": 3
     },
     {
-      "slug": "special-disaster-area",
+      "slug": "space-launch-satellite-operation-permit",
       "verificationStatus": "article-verified",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
+      "processWarnings": 3,
+      "findings": [],
       "score": 3
     },
     {
-      "slug": "special-housing-supply",
+      "slug": "special-disaster-area",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
       "findings": [
@@ -3075,7 +3117,31 @@
       "score": 3
     },
     {
+      "slug": "stay-status-change",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 3
+    },
+    {
       "slug": "strategic-trade-export-control",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 3
+    },
+    {
+      "slug": "student-tailored-integrated-support",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
       "findings": [
@@ -3100,6 +3166,18 @@
     },
     {
       "slug": "tax-appeal",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 3
+    },
+    {
+      "slug": "vehicle-inspection",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
       "findings": [
@@ -3141,7 +3219,31 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=0.94 (전체 평균 0.25±0.28)"
+          "detail": "deadlineDensity=0.94 (전체 평균 0.23±0.28)"
+        }
+      ],
+      "score": 2
+    },
+    {
+      "slug": "administrative-litigation",
+      "verificationStatus": "article-verified",
+      "processWarnings": 0,
+      "findings": [
+        {
+          "rule": "outlier",
+          "detail": "deadlineDensity=0.94 (전체 평균 0.23±0.28)"
+        }
+      ],
+      "score": 2
+    },
+    {
+      "slug": "bai-audit",
+      "verificationStatus": "article-verified",
+      "processWarnings": 0,
+      "findings": [
+        {
+          "rule": "outlier",
+          "detail": "deadlineDensity=0.82 (전체 평균 0.23±0.28)"
         }
       ],
       "score": 2
@@ -3181,7 +3283,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=0.95 (전체 평균 0.25±0.28)"
+          "detail": "deadlineDensity=0.95 (전체 평균 0.23±0.28)"
         }
       ],
       "score": 2
@@ -3193,7 +3295,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=0.84 (전체 평균 0.25±0.28)"
+          "detail": "deadlineDensity=0.84 (전체 평균 0.23±0.28)"
         }
       ],
       "score": 2
@@ -3219,7 +3321,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=1.00 (전체 평균 0.25±0.28)"
+          "detail": "deadlineDensity=1.00 (전체 평균 0.23±0.28)"
         }
       ],
       "score": 2
@@ -3253,18 +3355,6 @@
       "score": 2
     },
     {
-      "slug": "housing-subscription",
-      "verificationStatus": "article-verified",
-      "processWarnings": 1,
-      "findings": [
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
-      "score": 2
-    },
-    {
       "slug": "infectious-disease",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
@@ -3280,13 +3370,6 @@
     },
     {
       "slug": "it-audit",
-      "verificationStatus": "article-verified",
-      "processWarnings": 2,
-      "findings": [],
-      "score": 2
-    },
-    {
-      "slug": "local-adjustment-grant",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
       "findings": [],
@@ -3388,7 +3471,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=0.94 (전체 평균 0.25±0.28)"
+          "detail": "deadlineDensity=0.94 (전체 평균 0.23±0.28)"
         }
       ],
       "score": 2
@@ -3401,13 +3484,20 @@
       "score": 2
     },
     {
+      "slug": "special-housing-supply",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [],
+      "score": 2
+    },
+    {
       "slug": "subcontracting",
       "verificationStatus": "article-verified",
       "processWarnings": 0,
       "findings": [
         {
           "rule": "outlier",
-          "detail": "deadlineDensity=0.83 (전체 평균 0.25±0.28)"
+          "detail": "deadlineDensity=0.83 (전체 평균 0.23±0.28)"
         }
       ],
       "score": 2
@@ -3456,6 +3546,13 @@
     },
     {
       "slug": "factory-establishment",
+      "verificationStatus": "article-verified",
+      "processWarnings": 1,
+      "findings": [],
+      "score": 1
+    },
+    {
+      "slug": "housing-subscription",
       "verificationStatus": "article-verified",
       "processWarnings": 1,
       "findings": [],

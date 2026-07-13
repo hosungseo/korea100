@@ -1,0 +1,6430 @@
+{
+  "generatedAt": "2026-07-13",
+  "range": {
+    "from": 124,
+    "to": 300
+  },
+  "summary": {
+    "institutions": 177,
+    "passed": 102,
+    "review": 75,
+    "high": 0,
+    "medium": 128,
+    "byRule": {
+      "persona-no-entry-or-receipt": 34,
+      "decision-no-persona-receipt": 22,
+      "operational-source-pending": 7,
+      "persona-thin": 39,
+      "adverse-no-remedy": 26
+    }
+  },
+  "results": [
+    {
+      "priority": 124,
+      "slug": "national-strategic-industry-complex",
+      "name": "국가첨단전략산업 특화단지 지정·지원",
+      "personaLanes": [
+        "신청인(기업·시·도·부처)",
+        "사업시행자·입주기관"
+      ],
+      "activePersonaLanes": [
+        "신청인(기업·시·도·부처)",
+        "사업시행자·입주기관"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P03",
+            "P06",
+            "P11",
+            "P16"
+          ],
+          "terminals": [
+            "P06",
+            "P17",
+            "P19"
+          ]
+        },
+        "correction": [
+          "P06"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 125,
+      "slug": "industrial-complex-development",
+      "name": "산업단지 지정·개발",
+      "personaLanes": [
+        "사업시행자",
+        "토지소유자·주민"
+      ],
+      "activePersonaLanes": [
+        "토지소유자·주민"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P07",
+            "P12",
+            "P19"
+          ],
+          "terminals": [
+            "P07",
+            "P09",
+            "P18"
+          ]
+        },
+        "correction": [
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "사업시행자",
+          "nodes": [
+            "P05",
+            "P09",
+            "P13",
+            "P14",
+            "P16"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    },
+    {
+      "priority": 126,
+      "slug": "power-transmission-permit",
+      "name": "송·변전설비 건설 인허가",
+      "personaLanes": [
+        "송전·전원개발사업자",
+        "주민·토지소유자·전문가"
+      ],
+      "activePersonaLanes": [
+        "송전·전원개발사업자",
+        "주민·토지소유자·전문가"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P07",
+            "P11",
+            "P14"
+          ],
+          "terminals": [
+            "P11",
+            "P13",
+            "P20",
+            "P21",
+            "P22"
+          ]
+        },
+        "correction": [
+          "P13"
+        ],
+        "adverse": [
+          "P20"
+        ]
+      },
+      "findings": []
+    },
+    {
+      "priority": 127,
+      "slug": "power-generation-grid-connection",
+      "name": "발전사업 허가·전력계통 접속",
+      "personaLanes": [
+        "발전·전원개발사업자",
+        "주민·토지소유자·전문가"
+      ],
+      "activePersonaLanes": [
+        "발전·전원개발사업자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P07",
+            "P12",
+            "P14",
+            "P20"
+          ],
+          "terminals": [
+            "P14",
+            "P19",
+            "P20"
+          ]
+        },
+        "correction": [
+          "P14"
+        ],
+        "adverse": [
+          "P19"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P03",
+            "P09",
+            "P10"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 128,
+      "slug": "industrial-water-intake-permit",
+      "name": "공업용수·취수 허가",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P04",
+            "P08",
+            "P09",
+            "P18",
+            "P20"
+          ]
+        },
+        "correction": [
+          "P09"
+        ],
+        "adverse": [
+          "P17",
+          "P18"
+        ]
+      },
+      "findings": []
+    },
+    {
+      "priority": 129,
+      "slug": "land-transaction-permit",
+      "name": "토지거래허가",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P07",
+            "P10",
+            "P11",
+            "P16"
+          ]
+        },
+        "correction": [
+          "P07"
+        ],
+        "adverse": [
+          "P08",
+          "P11",
+          "P16",
+          "P17"
+        ]
+      },
+      "findings": []
+    },
+    {
+      "priority": 130,
+      "slug": "pfs-exemption-fast-track",
+      "name": "예타 특례·신속인허가",
+      "personaLanes": [
+        "사업시행자",
+        "국회·국민(공개)"
+      ],
+      "activePersonaLanes": [
+        "사업시행자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P09"
+          ],
+          "terminals": [
+            "P15",
+            "P16"
+          ]
+        },
+        "correction": [
+          "P11"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 131,
+      "slug": "national-rd-agreement",
+      "name": "국가연구개발사업 협약·정산",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P10",
+            "P12",
+            "P15",
+            "P16",
+            "P18"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P04"
+        ]
+      },
+      "findings": []
+    },
+    {
+      "priority": 132,
+      "slug": "cloud-idc-security-entry",
+      "name": "클라우드·IDC 보안인증·사업 진입",
+      "personaLanes": [
+        "클라우드·IDC 사업자",
+        "이용자"
+      ],
+      "activePersonaLanes": [
+        "클라우드·IDC 사업자",
+        "이용자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P04",
+            "P12"
+          ],
+          "terminals": [
+            "P06",
+            "P15",
+            "P16"
+          ]
+        },
+        "correction": [
+          "P06"
+        ],
+        "adverse": [
+          "P14"
+        ]
+      },
+      "findings": []
+    },
+    {
+      "priority": 133,
+      "slug": "regulatory-sandbox-demonstration",
+      "name": "규제샌드박스 실증특례",
+      "personaLanes": [
+        "이용자·보험"
+      ],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P07",
+            "P15",
+            "P16",
+            "P17",
+            "P18"
+          ]
+        },
+        "correction": [
+          "P07"
+        ],
+        "adverse": [
+          "P15",
+          "P16"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "이용자·보험",
+          "nodes": [
+            "P10",
+            "P11"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    },
+    {
+      "priority": 134,
+      "slug": "farmland-conversion",
+      "name": "농지전용 허가",
+      "personaLanes": [
+        "사업시행자",
+        "농업인·주민"
+      ],
+      "activePersonaLanes": [
+        "사업시행자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P03",
+            "P04",
+            "P15",
+            "P16"
+          ],
+          "terminals": [
+            "P14",
+            "P15"
+          ]
+        },
+        "correction": [
+          "P15"
+        ],
+        "adverse": [
+          "P12"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "operational-source-pending",
+          "severity": "medium",
+          "node": "P08",
+          "detail": "법률 본문만으로 확정할 수 없는 운영 절차·기준의 공식 출처 확인이 남아 있다."
+        },
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "농업인·주민",
+          "nodes": [
+            "P08"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "농업인·주민",
+          "nodes": [
+            "P08"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    },
+    {
+      "priority": 135,
+      "slug": "public-waters-occupation",
+      "name": "공유수면 점·사용 허가",
+      "personaLanes": [
+        "사업자"
+      ],
+      "activePersonaLanes": [
+        "사업자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P04",
+            "P13",
+            "P16"
+          ],
+          "terminals": [
+            "P13",
+            "P15",
+            "P16",
+            "P17"
+          ]
+        },
+        "correction": [
+          "P16"
+        ],
+        "adverse": [
+          "P14"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P14"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        }
+      ]
+    },
+    {
+      "priority": 136,
+      "slug": "air-water-discharge-permit",
+      "name": "대기·수질 배출시설 허가",
+      "personaLanes": [
+        "사업자",
+        "인근 주민"
+      ],
+      "activePersonaLanes": [
+        "사업자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P03",
+            "P07",
+            "P08"
+          ],
+          "terminals": [
+            "P07",
+            "P13",
+            "P14"
+          ]
+        },
+        "correction": [
+          "P07"
+        ],
+        "adverse": [
+          "P11"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "인근 주민",
+          "nodes": [
+            "P14"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "인근 주민",
+          "nodes": [
+            "P14"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    },
+    {
+      "priority": 137,
+      "slug": "designated-waste-treatment",
+      "name": "지정폐기물 처리 허가",
+      "personaLanes": [
+        "지역 주민"
+      ],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P09",
+            "P10",
+            "P14",
+            "P15"
+          ]
+        },
+        "correction": [
+          "P09"
+        ],
+        "adverse": [
+          "P13"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "지역 주민",
+          "nodes": [
+            "P15"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "지역 주민",
+          "nodes": [
+            "P15"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        },
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P13"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        }
+      ]
+    },
+    {
+      "priority": 138,
+      "slug": "chemical-safety-permit",
+      "name": "유해화학물질 영업·취급 허가",
+      "personaLanes": [
+        "근로자",
+        "인근 주민"
+      ],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P07",
+            "P10",
+            "P14"
+          ]
+        },
+        "correction": [
+          "P07"
+        ],
+        "adverse": [
+          "P13",
+          "P17"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "근로자",
+          "nodes": [
+            "P08"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "근로자",
+          "nodes": [
+            "P08"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        },
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "인근 주민",
+          "nodes": [
+            "P10"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "인근 주민",
+          "nodes": [
+            "P10"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    },
+    {
+      "priority": 139,
+      "slug": "foreign-investment-report",
+      "name": "외국인투자 신고·등록",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P06",
+            "P09",
+            "P12",
+            "P14",
+            "P16"
+          ]
+        },
+        "correction": [
+          "P06"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 140,
+      "slug": "strategic-trade-export-control",
+      "name": "전략물자 수출허가",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P08",
+            "P12",
+            "P14"
+          ]
+        },
+        "correction": [
+          "P08"
+        ],
+        "adverse": [
+          "P13"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P13"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        }
+      ]
+    },
+    {
+      "priority": 141,
+      "slug": "electricity-tariff-special",
+      "name": "전기요금·공급약관 인가",
+      "personaLanes": [
+        "전기판매사업자",
+        "송·배전 사업자"
+      ],
+      "activePersonaLanes": [
+        "전기판매사업자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P04",
+            "P07",
+            "P10"
+          ],
+          "terminals": [
+            "P07",
+            "P13"
+          ]
+        },
+        "correction": [
+          "P07"
+        ],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "송·배전 사업자",
+          "nodes": [
+            "P02"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "송·배전 사업자",
+          "nodes": [
+            "P02"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    },
+    {
+      "priority": 142,
+      "slug": "self-use-electrical-equipment",
+      "name": "자가용 전기설비·전기안전관리",
+      "personaLanes": [
+        "소유자·점유자"
+      ],
+      "activePersonaLanes": [
+        "소유자·점유자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P03",
+            "P05",
+            "P07"
+          ],
+          "terminals": [
+            "P05",
+            "P16"
+          ]
+        },
+        "correction": [
+          "P05"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 143,
+      "slug": "forestland-conversion",
+      "name": "산지전용 허가",
+      "personaLanes": [
+        "사업시행자",
+        "산주·주민"
+      ],
+      "activePersonaLanes": [
+        "사업시행자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P03",
+            "P07"
+          ],
+          "terminals": [
+            "P07",
+            "P13",
+            "P15"
+          ]
+        },
+        "correction": [
+          "P07"
+        ],
+        "adverse": [
+          "P14",
+          "P17"
+        ]
+      },
+      "findings": []
+    },
+    {
+      "priority": 144,
+      "slug": "cultural-heritage-survey",
+      "name": "매장유산 지표·발굴 조사",
+      "personaLanes": [
+        "사업시행자",
+        "토지소유자·주민"
+      ],
+      "activePersonaLanes": [
+        "사업시행자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P07",
+            "P09"
+          ],
+          "terminals": [
+            "P09",
+            "P13",
+            "P14",
+            "P16"
+          ]
+        },
+        "correction": [
+          "P09"
+        ],
+        "adverse": [
+          "P15"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "토지소유자·주민",
+          "nodes": [
+            "P14"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        }
+      ]
+    },
+    {
+      "priority": 145,
+      "slug": "noise-vibration-permit",
+      "name": "소음·진동 배출시설 허가",
+      "personaLanes": [
+        "사업자·시공자",
+        "인근 주민"
+      ],
+      "activePersonaLanes": [
+        "사업자·시공자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P06"
+          ],
+          "terminals": [
+            "P06",
+            "P15"
+          ]
+        },
+        "correction": [
+          "P06"
+        ],
+        "adverse": [
+          "P13"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "인근 주민",
+          "nodes": [
+            "P11"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "인근 주민",
+          "nodes": [
+            "P11"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        },
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P13"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        }
+      ]
+    },
+    {
+      "priority": 146,
+      "slug": "integrated-environment-permit",
+      "name": "통합환경관리 허가",
+      "personaLanes": [
+        "지역 주민"
+      ],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P07",
+            "P12",
+            "P13",
+            "P15",
+            "P18"
+          ]
+        },
+        "correction": [
+          "P07"
+        ],
+        "adverse": [
+          "P14",
+          "P18"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "지역 주민",
+          "nodes": [
+            "P13"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "지역 주민",
+          "nodes": [
+            "P13"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        },
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P14",
+            "P18"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        }
+      ]
+    },
+    {
+      "priority": 147,
+      "slug": "soil-contamination-management",
+      "name": "토양오염 조사·정화",
+      "personaLanes": [
+        "시설자·소유자",
+        "주민"
+      ],
+      "activePersonaLanes": [
+        "시설자·소유자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P05"
+          ],
+          "terminals": [
+            "P09",
+            "P13",
+            "P15",
+            "P16"
+          ]
+        },
+        "correction": [
+          "P09"
+        ],
+        "adverse": [
+          "P14"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "주민",
+          "nodes": [
+            "P16"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "주민",
+          "nodes": [
+            "P16"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        },
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P14"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        }
+      ]
+    },
+    {
+      "priority": 148,
+      "slug": "district-energy-business",
+      "name": "집단에너지사업 허가",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P05",
+            "P12",
+            "P14",
+            "P15"
+          ]
+        },
+        "correction": [
+          "P05"
+        ],
+        "adverse": [
+          "P13"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P13"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        }
+      ]
+    },
+    {
+      "priority": 149,
+      "slug": "distributed-energy-special",
+      "name": "분산에너지사업 등록·전력거래",
+      "personaLanes": [
+        "분산에너지사업자",
+        "배전사업자"
+      ],
+      "activePersonaLanes": [
+        "분산에너지사업자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P04",
+            "P05"
+          ],
+          "terminals": [
+            "P04",
+            "P14",
+            "P15",
+            "P18"
+          ]
+        },
+        "correction": [
+          "P04",
+          "P17"
+        ],
+        "adverse": [
+          "P13"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "배전사업자",
+          "nodes": [
+            "P08"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "배전사업자",
+          "nodes": [
+            "P08"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        },
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P13"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        }
+      ]
+    },
+    {
+      "priority": 150,
+      "slug": "renewable-rps-rec",
+      "name": "신재생 공급의무·REC",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P07",
+            "P11",
+            "P14"
+          ]
+        },
+        "correction": [
+          "P07"
+        ],
+        "adverse": [
+          "P15"
+        ]
+      },
+      "findings": []
+    },
+    {
+      "priority": 151,
+      "slug": "offshore-wind-zone",
+      "name": "해상풍력 지구·사업 선정",
+      "personaLanes": [
+        "어민·주민",
+        "계통 사업자"
+      ],
+      "activePersonaLanes": [
+        "어민·주민"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P05"
+          ],
+          "terminals": [
+            "P10",
+            "P15",
+            "P18"
+          ]
+        },
+        "correction": [
+          "P10",
+          "P18"
+        ],
+        "adverse": [
+          "P14"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "계통 사업자",
+          "nodes": [
+            "P07"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "계통 사업자",
+          "nodes": [
+            "P07"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        },
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P14"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        },
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P01",
+            "P02",
+            "P03",
+            "P06",
+            "P08",
+            "P09",
+            "P11",
+            "P12",
+            "P14",
+            "P15",
+            "P18"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 152,
+      "slug": "clean-hydrogen-cert",
+      "name": "청정수소 인증·의무",
+      "personaLanes": [
+        "수소사업자"
+      ],
+      "activePersonaLanes": [
+        "수소사업자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P04",
+            "P17"
+          ],
+          "terminals": [
+            "P04",
+            "P10",
+            "P13",
+            "P15",
+            "P17",
+            "P18"
+          ]
+        },
+        "correction": [
+          "P04"
+        ],
+        "adverse": [
+          "P11"
+        ]
+      },
+      "findings": []
+    },
+    {
+      "priority": 153,
+      "slug": "power-supply-plan",
+      "name": "전력수급기본계획",
+      "personaLanes": [
+        "전기사업자"
+      ],
+      "activePersonaLanes": [
+        "전기사업자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02"
+          ],
+          "terminals": [
+            "P07",
+            "P09",
+            "P14",
+            "P15",
+            "P18"
+          ]
+        },
+        "correction": [
+          "P06",
+          "P15"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 154,
+      "slug": "electricity-market-trading",
+      "name": "전력시장 거래·정산",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P04",
+            "P12",
+            "P13",
+            "P15",
+            "P16",
+            "P17",
+            "P18"
+          ]
+        },
+        "correction": [
+          "P04"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 155,
+      "slug": "power-plant-community-support",
+      "name": "발전소 주변지역 지원",
+      "personaLanes": [
+        "발전사업자",
+        "지자체·시행자",
+        "주민"
+      ],
+      "activePersonaLanes": [
+        "지자체·시행자",
+        "주민"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P03",
+            "P09",
+            "P16",
+            "P17"
+          ],
+          "terminals": [
+            "P05",
+            "P09",
+            "P13",
+            "P15",
+            "P16",
+            "P17"
+          ]
+        },
+        "correction": [
+          "P05",
+          "P16"
+        ],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "주민",
+          "nodes": [
+            "P09"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        }
+      ]
+    },
+    {
+      "priority": 156,
+      "slug": "carbon-neutral-transition",
+      "name": "탄소중립 계획·정의로운 전환",
+      "personaLanes": [
+        "주민·시민"
+      ],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P08",
+            "P15",
+            "P18"
+          ]
+        },
+        "correction": [
+          "P08"
+        ],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "주민·시민",
+          "nodes": [
+            "P05"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "주민·시민",
+          "nodes": [
+            "P05"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    },
+    {
+      "priority": 157,
+      "slug": "renewable-facility-cert",
+      "name": "신재생 설비인증·주민참여",
+      "personaLanes": [
+        "사업자·제조사",
+        "주민"
+      ],
+      "activePersonaLanes": [
+        "사업자·제조사",
+        "주민"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P08",
+            "P15"
+          ],
+          "terminals": [
+            "P04",
+            "P12",
+            "P13",
+            "P15",
+            "P16",
+            "P17"
+          ]
+        },
+        "correction": [
+          "P04"
+        ],
+        "adverse": [
+          "P10"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "주민",
+          "nodes": [
+            "P08"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        }
+      ]
+    },
+    {
+      "priority": 158,
+      "slug": "community-integrated-care",
+      "name": "지역 돌봄 통합지원",
+      "personaLanes": [
+        "주민·가족"
+      ],
+      "activePersonaLanes": [
+        "주민·가족"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01",
+            "P04",
+            "P08",
+            "P15",
+            "P16"
+          ],
+          "terminals": [
+            "P04",
+            "P14",
+            "P16",
+            "P17",
+            "P18",
+            "P19"
+          ]
+        },
+        "correction": [
+          "P03",
+          "P04",
+          "P16"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 159,
+      "slug": "emergency-medical-center",
+      "name": "응급의료기관 지정·운영",
+      "personaLanes": [
+        "환자·보호자"
+      ],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P04",
+            "P09",
+            "P14"
+          ]
+        },
+        "correction": [
+          "P04"
+        ],
+        "adverse": [
+          "P07",
+          "P12"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "환자·보호자",
+          "nodes": [
+            "P08"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "환자·보호자",
+          "nodes": [
+            "P08"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    },
+    {
+      "priority": 160,
+      "slug": "public-essential-medical",
+      "name": "공공·책임의료기관 지정",
+      "personaLanes": [
+        "취약지 주민"
+      ],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P05",
+            "P09",
+            "P10",
+            "P14",
+            "P16"
+          ]
+        },
+        "correction": [
+          "P05"
+        ],
+        "adverse": [
+          "P12"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "취약지 주민",
+          "nodes": [
+            "P09"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "취약지 주민",
+          "nodes": [
+            "P09"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    },
+    {
+      "priority": 161,
+      "slug": "social-service-agency",
+      "name": "사회서비스원·긴급돌봄",
+      "personaLanes": [
+        "이용자"
+      ],
+      "activePersonaLanes": [
+        "이용자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P06",
+            "P09"
+          ],
+          "terminals": [
+            "P04",
+            "P06",
+            "P08",
+            "P14",
+            "P15",
+            "P16"
+          ]
+        },
+        "correction": [
+          "P04",
+          "P16"
+        ],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P11"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 162,
+      "slug": "ltc-institution-designation",
+      "name": "장기요양기관 지정·평가",
+      "personaLanes": [
+        "수급자"
+      ],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P04",
+            "P08",
+            "P12",
+            "P15",
+            "P16"
+          ]
+        },
+        "correction": [
+          "P04"
+        ],
+        "adverse": [
+          "P13"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "수급자",
+          "nodes": [
+            "P08"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "수급자",
+          "nodes": [
+            "P08"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    },
+    {
+      "priority": 163,
+      "slug": "nhi-benefit-review",
+      "name": "건보 요양급여 청구·심사",
+      "personaLanes": [
+        "가입자·환자"
+      ],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P02",
+            "P05",
+            "P09",
+            "P13",
+            "P14",
+            "P15",
+            "P16",
+            "P18"
+          ]
+        },
+        "correction": [
+          "P05"
+        ],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "가입자·환자",
+          "nodes": [
+            "P02"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "가입자·환자",
+          "nodes": [
+            "P02"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    },
+    {
+      "priority": 164,
+      "slug": "medical-institution-permit",
+      "name": "의료기관 개설 허가",
+      "personaLanes": [
+        "환자"
+      ],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P05",
+            "P09",
+            "P11",
+            "P14",
+            "P15"
+          ]
+        },
+        "correction": [
+          "P05"
+        ],
+        "adverse": [
+          "P12"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "환자",
+          "nodes": [
+            "P09"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "환자",
+          "nodes": [
+            "P09"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    },
+    {
+      "priority": 165,
+      "slug": "reconstruction-excess-profit",
+      "name": "재건축초과이익 환수",
+      "personaLanes": [
+        "조합·사업시행자"
+      ],
+      "activePersonaLanes": [
+        "조합·사업시행자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P03",
+            "P07",
+            "P08"
+          ],
+          "terminals": [
+            "P08",
+            "P12",
+            "P13",
+            "P15",
+            "P16"
+          ]
+        },
+        "correction": [
+          "P08"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 166,
+      "slug": "small-scale-housing-improvement",
+      "name": "소규모주택정비",
+      "personaLanes": [
+        "주민·토지등소유자",
+        "조합·시행자",
+        "공공시행자"
+      ],
+      "activePersonaLanes": [
+        "주민·토지등소유자",
+        "조합·시행자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P03",
+            "P05",
+            "P10"
+          ],
+          "terminals": [
+            "P05",
+            "P11",
+            "P14"
+          ]
+        },
+        "correction": [
+          "P05"
+        ],
+        "adverse": [
+          "P13"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "공공시행자",
+          "nodes": [
+            "P15"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "공공시행자",
+          "nodes": [
+            "P15"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        },
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P13"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        }
+      ]
+    },
+    {
+      "priority": 167,
+      "slug": "public-redevelopment",
+      "name": "공공재개발·공공재건축",
+      "personaLanes": [
+        "공공시행자",
+        "토지등소유자"
+      ],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P05",
+            "P13",
+            "P14",
+            "P17"
+          ]
+        },
+        "correction": [
+          "P05"
+        ],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "토지등소유자",
+          "nodes": [
+            "P04",
+            "P14"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    },
+    {
+      "priority": 168,
+      "slug": "redevelopment-association",
+      "name": "정비사업 조합 설립·인가",
+      "personaLanes": [
+        "토지등소유자"
+      ],
+      "activePersonaLanes": [
+        "토지등소유자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01"
+          ],
+          "terminals": [
+            "P05",
+            "P11",
+            "P12",
+            "P14",
+            "P16"
+          ]
+        },
+        "correction": [
+          "P05",
+          "P16"
+        ],
+        "adverse": [
+          "P13"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P13"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        },
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P02",
+            "P03",
+            "P06",
+            "P07",
+            "P13",
+            "P14"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 169,
+      "slug": "reconstruction-safety-diagnosis",
+      "name": "재건축 안전진단·정비 착수",
+      "personaLanes": [
+        "소유자·추진주체",
+        "주민"
+      ],
+      "activePersonaLanes": [
+        "소유자·추진주체"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07"
+          ],
+          "terminals": [
+            "P07",
+            "P12",
+            "P14",
+            "P16",
+            "P17"
+          ]
+        },
+        "correction": [
+          "P07"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 170,
+      "slug": "special-housing-supply",
+      "name": "주택 특별공급",
+      "personaLanes": [
+        "사업주체"
+      ],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P05",
+            "P12",
+            "P13",
+            "P15",
+            "P16"
+          ]
+        },
+        "correction": [
+          "P05",
+          "P15"
+        ],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "사업주체",
+          "nodes": [
+            "P02",
+            "P09",
+            "P10"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    },
+    {
+      "priority": 171,
+      "slug": "resale-residence-obligation",
+      "name": "전매제한·실거주 의무",
+      "personaLanes": [
+        "입주자·수분양자",
+        "사업주체"
+      ],
+      "activePersonaLanes": [
+        "입주자·수분양자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P05"
+          ],
+          "terminals": [
+            "P08",
+            "P13",
+            "P14",
+            "P15"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "사업주체",
+          "nodes": [
+            "P01"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "사업주체",
+          "nodes": [
+            "P01"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    },
+    {
+      "priority": 172,
+      "slug": "sale-price-ceiling",
+      "name": "분양가상한제",
+      "personaLanes": [
+        "사업주체",
+        "수분양자"
+      ],
+      "activePersonaLanes": [
+        "사업주체",
+        "수분양자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P03",
+            "P05"
+          ],
+          "terminals": [
+            "P05",
+            "P10",
+            "P13",
+            "P14",
+            "P15"
+          ]
+        },
+        "correction": [
+          "P05"
+        ],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "수분양자",
+          "nodes": [
+            "P09",
+            "P10"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    },
+    {
+      "priority": 173,
+      "slug": "private-rental-housing",
+      "name": "민간임대주택 등록·공급",
+      "personaLanes": [
+        "임대사업자",
+        "임차인"
+      ],
+      "activePersonaLanes": [
+        "임대사업자",
+        "임차인"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01",
+            "P02",
+            "P04",
+            "P06",
+            "P08",
+            "P14",
+            "P15"
+          ],
+          "terminals": [
+            "P04",
+            "P11",
+            "P13",
+            "P14",
+            "P15",
+            "P16",
+            "N01"
+          ]
+        },
+        "correction": [
+          "P04",
+          "P15"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 174,
+      "slug": "housing-lease-protection",
+      "name": "주택임대차 보호",
+      "personaLanes": [
+        "임차인",
+        "임대인"
+      ],
+      "activePersonaLanes": [
+        "임차인"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P08",
+            "P10"
+          ],
+          "terminals": [
+            "P09",
+            "P12",
+            "P13",
+            "P14",
+            "P16",
+            "N01",
+            "N02"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "N01",
+          "N02"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "임대인",
+          "nodes": [
+            "P03",
+            "P05",
+            "P07",
+            "P09"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    },
+    {
+      "priority": 175,
+      "slug": "housing-lease-report",
+      "name": "주택 임대차 계약 신고",
+      "personaLanes": [
+        "임대인·임차인"
+      ],
+      "activePersonaLanes": [
+        "임대인·임차인"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P03",
+            "P09",
+            "P13",
+            "P14"
+          ],
+          "terminals": [
+            "P05",
+            "P09",
+            "P12",
+            "P14",
+            "P15"
+          ]
+        },
+        "correction": [
+          "P05"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 176,
+      "slug": "jeonse-deposit-guarantee",
+      "name": "전세보증금 반환보증",
+      "personaLanes": [
+        "임차인",
+        "임대인·사업자"
+      ],
+      "activePersonaLanes": [
+        "임차인",
+        "임대인·사업자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P04",
+            "P07",
+            "P14",
+            "P15"
+          ],
+          "terminals": [
+            "P04",
+            "P12",
+            "P13",
+            "P14",
+            "P16",
+            "N01"
+          ]
+        },
+        "correction": [
+          "P04",
+          "P14"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 177,
+      "slug": "bootstrap-jeonse-loan",
+      "name": "버팀목 전세자금대출",
+      "personaLanes": [
+        "임대인"
+      ],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P05",
+            "P10",
+            "P13",
+            "P15"
+          ]
+        },
+        "correction": [
+          "P05",
+          "P15"
+        ],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "임대인",
+          "nodes": [
+            "P10"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        }
+      ]
+    },
+    {
+      "priority": 178,
+      "slug": "registered-rental-management",
+      "name": "등록임대 말소·관리",
+      "personaLanes": [
+        "임대사업자",
+        "임차인"
+      ],
+      "activePersonaLanes": [
+        "임대사업자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01",
+            "P04",
+            "P13"
+          ],
+          "terminals": [
+            "P10",
+            "P13",
+            "P14",
+            "P15",
+            "P16",
+            "N01"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "임차인",
+          "nodes": [
+            "P10"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "임차인",
+          "nodes": [
+            "P10"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    },
+    {
+      "priority": 179,
+      "slug": "real-estate-transaction-report",
+      "name": "부동산 거래신고·자금조달",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P04",
+            "P08",
+            "P09",
+            "P12",
+            "P14",
+            "P16"
+          ]
+        },
+        "correction": [
+          "P04"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 180,
+      "slug": "speculative-adjustment-zone",
+      "name": "투기과열지구·조정대상지역",
+      "personaLanes": [
+        "주민·시장",
+        "사업주체"
+      ],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P12",
+            "P14",
+            "P16"
+          ]
+        },
+        "correction": [
+          "P15",
+          "P16"
+        ],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "사업주체",
+          "nodes": [
+            "P07",
+            "P08"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    },
+    {
+      "priority": 181,
+      "slug": "comprehensive-real-estate-tax",
+      "name": "종합부동산세",
+      "personaLanes": [
+        "납세의무자"
+      ],
+      "activePersonaLanes": [
+        "납세의무자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P09",
+            "P11"
+          ],
+          "terminals": [
+            "P11",
+            "P12",
+            "P14",
+            "P15",
+            "P16",
+            "P18"
+          ]
+        },
+        "correction": [
+          "P14"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 182,
+      "slug": "capital-gains-tax-housing",
+      "name": "양도소득세(주택)",
+      "personaLanes": [
+        "양도자"
+      ],
+      "activePersonaLanes": [
+        "양도자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P07",
+            "P08",
+            "P12",
+            "P13",
+            "P15"
+          ],
+          "terminals": [
+            "P13",
+            "P14",
+            "P15",
+            "P16",
+            "P18"
+          ]
+        },
+        "correction": [
+          "P15"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 183,
+      "slug": "acquisition-tax-housing",
+      "name": "취득세(주택)",
+      "personaLanes": [
+        "취득자"
+      ],
+      "activePersonaLanes": [
+        "취득자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P03",
+            "P05",
+            "P09",
+            "P12",
+            "P14",
+            "P15"
+          ],
+          "terminals": [
+            "P05",
+            "P11",
+            "P13",
+            "P14",
+            "P16",
+            "P17",
+            "P18",
+            "P19"
+          ]
+        },
+        "correction": [
+          "P05"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 184,
+      "slug": "mortgage-dsr-regulation",
+      "name": "LTV·DTI·DSR 대출규제",
+      "personaLanes": [
+        "차주"
+      ],
+      "activePersonaLanes": [
+        "차주"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P03",
+            "P06",
+            "P14"
+          ],
+          "terminals": [
+            "P06",
+            "P10",
+            "P13",
+            "P14",
+            "P16",
+            "P17"
+          ]
+        },
+        "correction": [
+          "P06",
+          "P14"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 185,
+      "slug": "housing-loan-guarantee",
+      "name": "주택담보·전세대출 보증",
+      "personaLanes": [
+        "차주"
+      ],
+      "activePersonaLanes": [
+        "차주"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P14"
+          ],
+          "terminals": [
+            "P04",
+            "P12",
+            "P13",
+            "P14",
+            "P16",
+            "P17",
+            "P18"
+          ]
+        },
+        "correction": [
+          "P04",
+          "P14"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 186,
+      "slug": "public-housing-supply",
+      "name": "공공주택 공급·입주",
+      "personaLanes": [
+        "공공주택사업자"
+      ],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P05",
+            "P12",
+            "P13",
+            "P14",
+            "P16",
+            "P17"
+          ]
+        },
+        "correction": [
+          "P05",
+          "P14"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 187,
+      "slug": "public-housing-site",
+      "name": "공공택지·주택지구 조성",
+      "personaLanes": [
+        "공공사업자",
+        "주민·권리자",
+        "수분양자"
+      ],
+      "activePersonaLanes": [
+        "공공사업자",
+        "수분양자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P14"
+          ],
+          "terminals": [
+            "P05",
+            "P09",
+            "P12",
+            "P14",
+            "P16",
+            "P17"
+          ]
+        },
+        "correction": [
+          "P05",
+          "P14"
+        ],
+        "adverse": [
+          "P17"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "주민·권리자",
+          "nodes": [
+            "P04",
+            "P09"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        },
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P17"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        }
+      ]
+    },
+    {
+      "priority": 188,
+      "slug": "central-local-disaster-headquarters",
+      "name": "중앙·지역 재난안전대책본부",
+      "personaLanes": [
+        "주민·시설관리자"
+      ],
+      "activePersonaLanes": [
+        "주민·시설관리자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 189,
+      "slug": "disaster-emergency-declaration",
+      "name": "재난사태 선포",
+      "personaLanes": [
+        "주민·시설관리자"
+      ],
+      "activePersonaLanes": [
+        "주민·시설관리자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 190,
+      "slug": "crisis-alert-issuance",
+      "name": "위기경보 발령",
+      "personaLanes": [
+        "주민·시설관리자"
+      ],
+      "activePersonaLanes": [
+        "주민·시설관리자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14",
+            "P15"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 191,
+      "slug": "disaster-forecast-warning",
+      "name": "재난 예보·경보체계",
+      "personaLanes": [
+        "주민·시설관리자"
+      ],
+      "activePersonaLanes": [
+        "주민·시설관리자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 192,
+      "slug": "emergency-actions-evacuation-danger-zone",
+      "name": "응급조치·대피·위험구역",
+      "personaLanes": [
+        "주민·시설관리자"
+      ],
+      "activePersonaLanes": [
+        "주민·시설관리자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 193,
+      "slug": "emergency-rescue-command",
+      "name": "긴급구조(통제단·현장지휘)",
+      "personaLanes": [
+        "주민·시설관리자"
+      ],
+      "activePersonaLanes": [
+        "주민·시설관리자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 194,
+      "slug": "disaster-damage-report-survey",
+      "name": "재난피해 신고·조사",
+      "personaLanes": [
+        "주민·시설관리자"
+      ],
+      "activePersonaLanes": [
+        "주민·시설관리자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14",
+            "P15",
+            "P16"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 195,
+      "slug": "disaster-recovery-plan",
+      "name": "재난복구계획 수립·시행",
+      "personaLanes": [
+        "주민·시설관리자"
+      ],
+      "activePersonaLanes": [
+        "주민·시설관리자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14",
+            "P15",
+            "P16"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 196,
+      "slug": "special-disaster-area",
+      "name": "특별재난지역 선포·지원",
+      "personaLanes": [
+        "주민·시설관리자"
+      ],
+      "activePersonaLanes": [
+        "주민·시설관리자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14",
+            "P15",
+            "P16"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 197,
+      "slug": "disaster-national-subsidy-recovery-cost",
+      "name": "재난지역 국고보조·복구비",
+      "personaLanes": [
+        "주민·시설관리자"
+      ],
+      "activePersonaLanes": [
+        "주민·시설관리자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14",
+            "P15",
+            "P16"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 198,
+      "slug": "disaster-loss-compensation",
+      "name": "손실보상·치료·보상",
+      "personaLanes": [
+        "주민·시설관리자"
+      ],
+      "activePersonaLanes": [
+        "주민·시설관리자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14",
+            "P15",
+            "P16"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 199,
+      "slug": "disaster-management-fund",
+      "name": "재난관리기금",
+      "personaLanes": [
+        "주민·시설관리자"
+      ],
+      "activePersonaLanes": [
+        "주민·시설관리자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 200,
+      "slug": "disaster-cause-investigation",
+      "name": "재난원인조사",
+      "personaLanes": [
+        "주민·시설관리자"
+      ],
+      "activePersonaLanes": [
+        "주민·시설관리자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14",
+            "P15",
+            "P16"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 201,
+      "slug": "national-critical-infrastructure-risk-area",
+      "name": "국가핵심기반·특정관리대상지역",
+      "personaLanes": [
+        "주민·시설관리자"
+      ],
+      "activePersonaLanes": [
+        "주민·시설관리자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P11",
+            "P14"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 202,
+      "slug": "disaster-training-manual",
+      "name": "재난대비훈련·매뉴얼",
+      "personaLanes": [
+        "주민·시설관리자"
+      ],
+      "activePersonaLanes": [
+        "주민·시설관리자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14",
+            "P15"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 203,
+      "slug": "resident-vote",
+      "name": "주민투표",
+      "personaLanes": [
+        "주민·이해관계자"
+      ],
+      "activePersonaLanes": [
+        "주민·이해관계자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09",
+            "P13"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 204,
+      "slug": "resident-recall",
+      "name": "주민소환",
+      "personaLanes": [
+        "주민·이해관계자"
+      ],
+      "activePersonaLanes": [
+        "주민·이해관계자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09",
+            "P13"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 205,
+      "slug": "local-council-resolution-reconsideration",
+      "name": "지방의회 의결·재의·이송",
+      "personaLanes": [
+        "주민·이해관계자"
+      ],
+      "activePersonaLanes": [
+        "주민·이해관계자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09",
+            "P13"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 206,
+      "slug": "local-tax-exemption",
+      "name": "지방세 감면·비과세",
+      "personaLanes": [
+        "주민·이해관계자"
+      ],
+      "activePersonaLanes": [
+        "주민·이해관계자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09",
+            "P13"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 207,
+      "slug": "local-budget-formulation",
+      "name": "지방예산 편성·심의·확정",
+      "personaLanes": [
+        "주민·이해관계자"
+      ],
+      "activePersonaLanes": [
+        "주민·이해관계자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09",
+            "P13"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 208,
+      "slug": "supplementary-budget",
+      "name": "성립전 예산·추가경정예산",
+      "personaLanes": [
+        "주민·이해관계자"
+      ],
+      "activePersonaLanes": [
+        "주민·이해관계자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09",
+            "P13"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14",
+            "P15"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 209,
+      "slug": "local-bond-issuance",
+      "name": "지방채 발행",
+      "personaLanes": [
+        "주민·이해관계자"
+      ],
+      "activePersonaLanes": [
+        "주민·이해관계자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09",
+            "P13"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 210,
+      "slug": "local-property-management",
+      "name": "공유재산·물품 관리",
+      "personaLanes": [
+        "주민·이해관계자"
+      ],
+      "activePersonaLanes": [
+        "주민·이해관계자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09",
+            "P13"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14",
+            "P15"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": [
+          "P15"
+        ]
+      },
+      "findings": []
+    },
+    {
+      "priority": 211,
+      "slug": "local-adjustment-grant",
+      "name": "조정교부금(광역–기초)",
+      "personaLanes": [
+        "주민·이해관계자"
+      ],
+      "activePersonaLanes": [
+        "주민·이해관계자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09",
+            "P13"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 212,
+      "slug": "local-fiscal-crisis-management",
+      "name": "지방재정위기 관리",
+      "personaLanes": [
+        "주민·이해관계자"
+      ],
+      "activePersonaLanes": [
+        "주민·이해관계자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09",
+            "P13"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14",
+            "P15"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 213,
+      "slug": "local-delegation-entrustment",
+      "name": "인허가 대행·위임(지자체 창구)",
+      "personaLanes": [
+        "주민·이해관계자"
+      ],
+      "activePersonaLanes": [
+        "주민·이해관계자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09",
+            "P13"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 214,
+      "slug": "ordinance-hierarchy",
+      "name": "시·도 조례와 시·군·구 조례 관계",
+      "personaLanes": [
+        "주민·이해관계자"
+      ],
+      "activePersonaLanes": [
+        "주민·이해관계자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09",
+            "P13"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14",
+            "P15"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": [
+          "P15"
+        ]
+      },
+      "findings": []
+    },
+    {
+      "priority": 215,
+      "slug": "local-government-special-status",
+      "name": "특별시·광역시·특별자치시 특례",
+      "personaLanes": [
+        "주민·이해관계자"
+      ],
+      "activePersonaLanes": [
+        "주민·이해관계자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09",
+            "P13"
+          ],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08",
+            "P09",
+            "P14",
+            "P15"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 216,
+      "slug": "administrative-boundary-change",
+      "name": "행정구역 경계 변경",
+      "personaLanes": [
+        "주민·이해관계자"
+      ],
+      "activePersonaLanes": [
+        "주민·이해관계자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P07",
+            "P09",
+            "P13"
+          ],
+          "terminals": [
+            "P02",
+            "P08",
+            "P09",
+            "P14"
+          ]
+        },
+        "correction": [
+          "P08",
+          "P09"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 217,
+      "slug": "inheritance-tax",
+      "name": "상속세",
+      "personaLanes": [
+        "납세자·상속인"
+      ],
+      "activePersonaLanes": [
+        "납세자·상속인"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P06"
+          ],
+          "terminals": [
+            "P05",
+            "P06",
+            "P09",
+            "P10"
+          ]
+        },
+        "correction": [
+          "P05",
+          "P06"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 218,
+      "slug": "gift-tax",
+      "name": "증여세",
+      "personaLanes": [
+        "납세자·상속인"
+      ],
+      "activePersonaLanes": [
+        "납세자·상속인"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P06"
+          ],
+          "terminals": [
+            "P05",
+            "P06",
+            "P09",
+            "P10",
+            "P11"
+          ]
+        },
+        "correction": [
+          "P05",
+          "P06"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 219,
+      "slug": "year-end-tax-settlement",
+      "name": "연말정산",
+      "personaLanes": [
+        "납세자·상속인"
+      ],
+      "activePersonaLanes": [
+        "납세자·상속인"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P06"
+          ],
+          "terminals": [
+            "P05",
+            "P06",
+            "P09",
+            "P10",
+            "P11",
+            "P12"
+          ]
+        },
+        "correction": [
+          "P05",
+          "P06"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 220,
+      "slug": "tax-audit",
+      "name": "세무조사",
+      "personaLanes": [
+        "납세자·상속인"
+      ],
+      "activePersonaLanes": [
+        "납세자·상속인"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P06"
+          ],
+          "terminals": [
+            "P05",
+            "P06",
+            "P09",
+            "P10"
+          ]
+        },
+        "correction": [
+          "P05",
+          "P06"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 221,
+      "slug": "national-tax-arrears-collection",
+      "name": "국세 체납 징수·압류",
+      "personaLanes": [
+        "납세자·상속인"
+      ],
+      "activePersonaLanes": [
+        "납세자·상속인"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P06"
+          ],
+          "terminals": [
+            "P05",
+            "P06",
+            "P09",
+            "P10",
+            "P11",
+            "P12",
+            "P13"
+          ]
+        },
+        "correction": [
+          "P05",
+          "P06"
+        ],
+        "adverse": [
+          "P13"
+        ]
+      },
+      "findings": []
+    },
+    {
+      "priority": 222,
+      "slug": "tax-appeal",
+      "name": "조세불복(이의·심판)",
+      "personaLanes": [
+        "납세자·상속인"
+      ],
+      "activePersonaLanes": [
+        "납세자·상속인"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P06"
+          ],
+          "terminals": [
+            "P05",
+            "P06",
+            "P09",
+            "P10",
+            "P11"
+          ]
+        },
+        "correction": [
+          "P05",
+          "P06"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 223,
+      "slug": "emergency-welfare-support",
+      "name": "긴급복지지원",
+      "personaLanes": [
+        "신청인·근로자"
+      ],
+      "activePersonaLanes": [
+        "신청인·근로자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P06"
+          ],
+          "terminals": [
+            "P05",
+            "P06",
+            "P10",
+            "P11"
+          ]
+        },
+        "correction": [
+          "P05",
+          "P06"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 224,
+      "slug": "single-parent-family-support",
+      "name": "한부모가족 지원",
+      "personaLanes": [
+        "신청인·근로자"
+      ],
+      "activePersonaLanes": [
+        "신청인·근로자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P06"
+          ],
+          "terminals": [
+            "P05",
+            "P06",
+            "P10",
+            "P11"
+          ]
+        },
+        "correction": [
+          "P05",
+          "P06"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 225,
+      "slug": "welfare-benefit-fraud-recovery",
+      "name": "복지 부정수급 조사·환수",
+      "personaLanes": [
+        "신청인·근로자"
+      ],
+      "activePersonaLanes": [
+        "신청인·근로자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P06"
+          ],
+          "terminals": [
+            "P05",
+            "P06",
+            "P10",
+            "P11"
+          ]
+        },
+        "correction": [
+          "P05",
+          "P06"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 226,
+      "slug": "spouse-childbirth-leave",
+      "name": "배우자 출산휴가(급여)",
+      "personaLanes": [
+        "신청인·근로자"
+      ],
+      "activePersonaLanes": [
+        "신청인·근로자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P06"
+          ],
+          "terminals": [
+            "P05",
+            "P06",
+            "P10",
+            "P11"
+          ]
+        },
+        "correction": [
+          "P05",
+          "P06"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 227,
+      "slug": "parental-leave-benefit",
+      "name": "육아휴직 급여",
+      "personaLanes": [
+        "신청인·근로자"
+      ],
+      "activePersonaLanes": [
+        "신청인·근로자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P06"
+          ],
+          "terminals": [
+            "P05",
+            "P06",
+            "P10",
+            "P11"
+          ]
+        },
+        "correction": [
+          "P05",
+          "P06"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 228,
+      "slug": "reduced-working-hours-childcare",
+      "name": "육아기 근로시간 단축",
+      "personaLanes": [
+        "신청인·근로자"
+      ],
+      "activePersonaLanes": [
+        "신청인·근로자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P06"
+          ],
+          "terminals": [
+            "P05",
+            "P06",
+            "P10",
+            "P11"
+          ]
+        },
+        "correction": [
+          "P05",
+          "P06"
+        ],
+        "adverse": [
+          "P11"
+        ]
+      },
+      "findings": []
+    },
+    {
+      "priority": 229,
+      "slug": "child-abuse-report-protection",
+      "name": "아동학대 신고·보호조치",
+      "personaLanes": [
+        "신고자·보호자"
+      ],
+      "activePersonaLanes": [
+        "신고자·보호자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01",
+            "P11",
+            "P12"
+          ],
+          "terminals": [
+            "P10",
+            "P11",
+            "P12"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 230,
+      "slug": "domestic-violence-protection-order",
+      "name": "가정폭력 피해자 보호·임시조치",
+      "personaLanes": [
+        "피해자·신고자",
+        "법원·피해자지원기관"
+      ],
+      "activePersonaLanes": [
+        "피해자·신고자",
+        "법원·피해자지원기관"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01",
+            "P08",
+            "P11"
+          ],
+          "terminals": [
+            "P10",
+            "P11"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "법원·피해자지원기관",
+          "nodes": [
+            "P07",
+            "P09",
+            "P10"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    },
+    {
+      "priority": 231,
+      "slug": "child-support-enforcement",
+      "name": "양육비 이행 지원",
+      "personaLanes": [
+        "양육비 채권자",
+        "양육비 채무자"
+      ],
+      "activePersonaLanes": [
+        "양육비 채권자",
+        "양육비 채무자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P05",
+            "P08",
+            "P11"
+          ],
+          "terminals": [
+            "P10",
+            "P11"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "양육비 채무자",
+          "nodes": [
+            "P05"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        }
+      ]
+    },
+    {
+      "priority": 232,
+      "slug": "infertility-treatment-support",
+      "name": "난임 시술비 지원",
+      "personaLanes": [
+        "신청인"
+      ],
+      "activePersonaLanes": [
+        "신청인"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P03",
+            "P06"
+          ],
+          "terminals": [
+            "P10"
+          ]
+        },
+        "correction": [
+          "P05",
+          "P06"
+        ],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "operational-source-pending",
+          "severity": "medium",
+          "node": "P05",
+          "detail": "법률 본문만으로 확정할 수 없는 운영 절차·기준의 공식 출처 확인이 남아 있다."
+        },
+        {
+          "rule": "operational-source-pending",
+          "severity": "medium",
+          "node": "P06",
+          "detail": "법률 본문만으로 확정할 수 없는 운영 절차·기준의 공식 출처 확인이 남아 있다."
+        },
+        {
+          "rule": "operational-source-pending",
+          "severity": "medium",
+          "node": "P07",
+          "detail": "법률 본문만으로 확정할 수 없는 운영 절차·기준의 공식 출처 확인이 남아 있다."
+        },
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P07"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 233,
+      "slug": "parent-benefit-first-meeting-voucher",
+      "name": "부모급여·첫만남이용권",
+      "personaLanes": [
+        "보호자"
+      ],
+      "activePersonaLanes": [
+        "보호자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01",
+            "P02"
+          ],
+          "terminals": [
+            "P10"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P05",
+            "P06"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 234,
+      "slug": "childcare-service",
+      "name": "아이돌봄 서비스",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P10"
+          ]
+        },
+        "correction": [
+          "P05"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 235,
+      "slug": "life-sustaining-treatment-hospice",
+      "name": "연명의료 결정·호스피스",
+      "personaLanes": [
+        "환자·가족"
+      ],
+      "activePersonaLanes": [
+        "환자·가족"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P09",
+            "P11"
+          ],
+          "terminals": [
+            "P10",
+            "P11"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 236,
+      "slug": "unfair-dismissal-remedy",
+      "name": "부당해고 구제신청",
+      "personaLanes": [
+        "근로자"
+      ],
+      "activePersonaLanes": [
+        "근로자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02"
+          ],
+          "terminals": [
+            "P06",
+            "P08",
+            "P09"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 237,
+      "slug": "wage-arrears-complaint",
+      "name": "임금체불 진정·지도",
+      "personaLanes": [
+        "근로자",
+        "사업주"
+      ],
+      "activePersonaLanes": [
+        "근로자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02"
+          ],
+          "terminals": [
+            "P07",
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P04"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "사업주",
+          "nodes": [
+            "P05"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "사업주",
+          "nodes": [
+            "P05"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        },
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P04"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        }
+      ]
+    },
+    {
+      "priority": 238,
+      "slug": "workplace-sexual-harassment-remedy",
+      "name": "직장 내 성희롱 구제",
+      "personaLanes": [
+        "피해근로자·신고자",
+        "사업주·인사부서"
+      ],
+      "activePersonaLanes": [
+        "피해근로자·신고자",
+        "사업주·인사부서"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P05",
+            "P06",
+            "P08"
+          ],
+          "terminals": [
+            "P06",
+            "P07",
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P07"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P07"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        }
+      ]
+    },
+    {
+      "priority": 239,
+      "slug": "student-loan-repayment",
+      "name": "학자금 대출·상환",
+      "personaLanes": [
+        "대학생·채무자"
+      ],
+      "activePersonaLanes": [
+        "대학생·채무자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P05",
+            "P08"
+          ],
+          "terminals": [
+            "P07",
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P04"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 240,
+      "slug": "special-education-selection-placement",
+      "name": "특수교육대상자 선정·배치",
+      "personaLanes": [
+        "보호자·학생"
+      ],
+      "activePersonaLanes": [
+        "보호자·학생"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P08"
+          ],
+          "terminals": [
+            "P07",
+            "P09"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P04",
+            "P05",
+            "P09"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 241,
+      "slug": "teacher-education-activity-infringement",
+      "name": "교원 교육활동 침해 조치",
+      "personaLanes": [
+        "피해교원"
+      ],
+      "activePersonaLanes": [
+        "피해교원"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01"
+          ],
+          "terminals": [
+            "P07",
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "피해교원",
+          "nodes": [
+            "P01"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        }
+      ]
+    },
+    {
+      "priority": 242,
+      "slug": "university-tuition-review-disclosure",
+      "name": "대학 등록금 심의·공시",
+      "personaLanes": [
+        "학생위원"
+      ],
+      "activePersonaLanes": [
+        "학생위원"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P03"
+          ],
+          "terminals": [
+            "P07",
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "학생위원",
+          "nodes": [
+            "P03"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P01",
+            "P02",
+            "P04",
+            "P05",
+            "P07"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 243,
+      "slug": "personal-rehabilitation",
+      "name": "개인회생",
+      "personaLanes": [
+        "채무자",
+        "채권자"
+      ],
+      "activePersonaLanes": [
+        "채무자",
+        "채권자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P03",
+            "P05",
+            "P06"
+          ],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [
+          "P03",
+          "P05"
+        ],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "채권자",
+          "nodes": [
+            "P06"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P04",
+            "P07"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 244,
+      "slug": "personal-bankruptcy-discharge",
+      "name": "개인파산·면책",
+      "personaLanes": [
+        "채무자",
+        "채권자"
+      ],
+      "activePersonaLanes": [
+        "채무자",
+        "채권자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P03",
+            "P05"
+          ],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [
+          "P03"
+        ],
+        "adverse": [
+          "P06",
+          "P07"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "채권자",
+          "nodes": [
+            "P05"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        }
+      ]
+    },
+    {
+      "priority": 245,
+      "slug": "credit-recovery-debt-adjustment",
+      "name": "신용회복 채무조정",
+      "personaLanes": [
+        "채무자"
+      ],
+      "activePersonaLanes": [
+        "채무자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02"
+          ],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P03"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P03"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        }
+      ]
+    },
+    {
+      "priority": 246,
+      "slug": "deposit-insurance-payout",
+      "name": "예금자 보호",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P01"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P01"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        }
+      ]
+    },
+    {
+      "priority": 247,
+      "slug": "virtual-asset-provider-protection",
+      "name": "가상자산사업자 신고·이용자 보호",
+      "personaLanes": [
+        "가상자산사업자"
+      ],
+      "activePersonaLanes": [
+        "가상자산사업자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01",
+            "P02",
+            "P06"
+          ],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P08"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P08"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        }
+      ]
+    },
+    {
+      "priority": 248,
+      "slug": "financial-dispute-mediation",
+      "name": "금융분쟁조정",
+      "personaLanes": [
+        "금융소비자"
+      ],
+      "activePersonaLanes": [
+        "금융소비자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01",
+            "P02"
+          ],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 249,
+      "slug": "vehicle-registration-transfer",
+      "name": "자동차 등록·이전",
+      "personaLanes": [
+        "자동차 소유자"
+      ],
+      "activePersonaLanes": [
+        "자동차 소유자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01",
+            "P02",
+            "P07",
+            "P08"
+          ],
+          "terminals": [
+            "P07",
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P04"
+        ]
+      },
+      "findings": []
+    },
+    {
+      "priority": 250,
+      "slug": "driver-license-acquisition-suspension",
+      "name": "운전면허 취득·정지·취소",
+      "personaLanes": [
+        "응시자·운전자"
+      ],
+      "activePersonaLanes": [
+        "응시자·운전자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P08"
+          ],
+          "terminals": [
+            "P09",
+            "P10"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P07",
+          "P08"
+        ]
+      },
+      "findings": []
+    },
+    {
+      "priority": 251,
+      "slug": "vehicle-inspection",
+      "name": "자동차 검사",
+      "personaLanes": [
+        "자동차 소유자"
+      ],
+      "activePersonaLanes": [
+        "자동차 소유자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P05"
+          ],
+          "terminals": [
+            "P05",
+            "P06",
+            "P07"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 252,
+      "slug": "traffic-fine-penalty",
+      "name": "교통과태료·범칙금 부과",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P08",
+            "P09"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 253,
+      "slug": "passenger-transport-license",
+      "name": "여객자동차 운송사업 면허",
+      "personaLanes": [
+        "운송사업자"
+      ],
+      "activePersonaLanes": [
+        "운송사업자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P08"
+          ],
+          "terminals": [
+            "P09"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P07"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P07",
+            "P09"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 254,
+      "slug": "road-occupation-permit",
+      "name": "도로점용 허가",
+      "personaLanes": [
+        "신청인·사업시행자",
+        "도로 이용자"
+      ],
+      "activePersonaLanes": [
+        "신청인·사업시행자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P09"
+          ],
+          "terminals": [
+            "P08",
+            "P09",
+            "P10"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P07",
+          "P10"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "도로 이용자",
+          "nodes": [
+            "P08"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "도로 이용자",
+          "nodes": [
+            "P08"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        },
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P04",
+            "P07"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 255,
+      "slug": "visa-issuance-extension",
+      "name": "사증(비자) 발급·연장",
+      "personaLanes": [
+        "외국인 신청인"
+      ],
+      "activePersonaLanes": [
+        "외국인 신청인"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P05"
+          ],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P07",
+          "P08"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P07"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 256,
+      "slug": "stay-status-change",
+      "name": "체류자격 변경·허가",
+      "personaLanes": [
+        "외국인 신청인"
+      ],
+      "activePersonaLanes": [
+        "외국인 신청인"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P05",
+            "P08"
+          ],
+          "terminals": [
+            "P05",
+            "P08",
+            "P09"
+          ]
+        },
+        "correction": [
+          "P05"
+        ],
+        "adverse": [
+          "P06",
+          "P09"
+        ]
+      },
+      "findings": []
+    },
+    {
+      "priority": 257,
+      "slug": "nationality-acquisition-loss",
+      "name": "국적 취득·상실(귀화 포함)",
+      "personaLanes": [
+        "신청인"
+      ],
+      "activePersonaLanes": [
+        "신청인"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02"
+          ],
+          "terminals": [
+            "P08",
+            "P09"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P09"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P09"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        }
+      ]
+    },
+    {
+      "priority": 258,
+      "slug": "military-service-examination",
+      "name": "병역판정검사",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P07"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 259,
+      "slug": "military-deferment-exemption-alternative",
+      "name": "병역 연기·면제·대체복무",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P07",
+            "P11"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P08",
+          "P11"
+        ]
+      },
+      "findings": []
+    },
+    {
+      "priority": 260,
+      "slug": "commercial-lease-protection",
+      "name": "상가건물 임대차 보호",
+      "personaLanes": [
+        "임차인",
+        "임대인"
+      ],
+      "activePersonaLanes": [
+        "임차인",
+        "임대인"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P05",
+            "P06",
+            "P08"
+          ],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 261,
+      "slug": "outdoor-advertising-permit",
+      "name": "옥외광고물 표시 허가",
+      "personaLanes": [
+        "광고주·사업자"
+      ],
+      "activePersonaLanes": [
+        "광고주·사업자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P05"
+          ],
+          "terminals": [
+            "P08",
+            "P09"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P03",
+            "P04"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 262,
+      "slug": "small-business-policy-fund",
+      "name": "소상공인 정책자금",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P07"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "operational-source-pending",
+          "severity": "medium",
+          "node": "P02",
+          "detail": "법률 본문만으로 확정할 수 없는 운영 절차·기준의 공식 출처 확인이 남아 있다."
+        },
+        {
+          "rule": "operational-source-pending",
+          "severity": "medium",
+          "node": "P03",
+          "detail": "법률 본문만으로 확정할 수 없는 운영 절차·기준의 공식 출처 확인이 남아 있다."
+        },
+        {
+          "rule": "operational-source-pending",
+          "severity": "medium",
+          "node": "P04",
+          "detail": "법률 본문만으로 확정할 수 없는 운영 절차·기준의 공식 출처 확인이 남아 있다."
+        }
+      ]
+    },
+    {
+      "priority": 263,
+      "slug": "medical-fee-confirmation-request",
+      "name": "진료비 확인신청",
+      "personaLanes": [
+        "가입자·환자"
+      ],
+      "activePersonaLanes": [
+        "가입자·환자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01"
+          ],
+          "terminals": [
+            "P02",
+            "P04",
+            "P05"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P04"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "가입자·환자",
+          "nodes": [
+            "P01"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P04"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        }
+      ]
+    },
+    {
+      "priority": 264,
+      "slug": "medical-accident-mediation",
+      "name": "의료사고 감정·조정",
+      "personaLanes": [
+        "당사자(신청인·피신청인)"
+      ],
+      "activePersonaLanes": [
+        "당사자(신청인·피신청인)"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01",
+            "P03",
+            "P08"
+          ],
+          "terminals": [
+            "P02",
+            "P05",
+            "P07",
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 265,
+      "slug": "organ-transplant-waiting-approval",
+      "name": "장기등 이식 대기·승인",
+      "personaLanes": [
+        "이식 대기 신청인"
+      ],
+      "activePersonaLanes": [
+        "이식 대기 신청인"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01"
+          ],
+          "terminals": [
+            "P02",
+            "P04",
+            "P05"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "이식 대기 신청인",
+          "nodes": [
+            "P01"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P02",
+            "P03",
+            "P04",
+            "P05"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 266,
+      "slug": "pet-registration",
+      "name": "반려동물 등록",
+      "personaLanes": [
+        "소유자"
+      ],
+      "activePersonaLanes": [
+        "소유자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01",
+            "P04"
+          ],
+          "terminals": [
+            "P04",
+            "P05"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 267,
+      "slug": "ecommerce-withdrawal-corrective-order",
+      "name": "전자상거래 청약철회·시정",
+      "personaLanes": [
+        "소비자"
+      ],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P02",
+            "P03",
+            "P07"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P01",
+          "P02",
+          "P07"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "소비자",
+          "nodes": [
+            "P01",
+            "P02"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        },
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P01",
+            "P02",
+            "P07"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        }
+      ]
+    },
+    {
+      "priority": 268,
+      "slug": "personal-data-breach-penalty",
+      "name": "개인정보 유출 신고·과징금",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P03",
+            "P06"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P05"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P05"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        }
+      ]
+    },
+    {
+      "priority": 269,
+      "slug": "game-rating-classification",
+      "name": "게임물 등급분류",
+      "personaLanes": [
+        "이의신청인"
+      ],
+      "activePersonaLanes": [
+        "이의신청인"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P05"
+          ],
+          "terminals": [
+            "P04",
+            "P06"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P03",
+          "P04",
+          "P05"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "이의신청인",
+          "nodes": [
+            "P05"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P03",
+            "P04"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 270,
+      "slug": "youth-harmful-media-designation",
+      "name": "청소년유해매체물 결정",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P07",
+            "P10",
+            "P12",
+            "P13"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P08",
+          "P09",
+          "P13"
+        ]
+      },
+      "findings": []
+    },
+    {
+      "priority": 271,
+      "slug": "one-stop-permit-consultation",
+      "name": "인허가 일괄협의·의제 처리",
+      "personaLanes": [
+        "신청인"
+      ],
+      "activePersonaLanes": [
+        "신청인"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01"
+          ],
+          "terminals": [
+            "P02",
+            "P07"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 272,
+      "slug": "national-road-rail-soc",
+      "name": "국가 도로·철도 SOC 추진",
+      "personaLanes": [
+        "사업시행자",
+        "기획재정부·주민"
+      ],
+      "activePersonaLanes": [
+        "사업시행자",
+        "기획재정부·주민"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P04",
+            "P09"
+          ],
+          "terminals": [
+            "P11"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 273,
+      "slug": "airport-development-operation-permit",
+      "name": "공항 개발·운영 인허가",
+      "personaLanes": [
+        "사업시행자·공항운영자"
+      ],
+      "activePersonaLanes": [
+        "사업시행자·공항운영자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P03",
+            "P08"
+          ],
+          "terminals": [
+            "P03",
+            "P09"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 274,
+      "slug": "port-development-redevelopment",
+      "name": "항만 개발·재개발",
+      "personaLanes": [
+        "사업시행자·비관리청"
+      ],
+      "activePersonaLanes": [
+        "사업시행자·비관리청"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P03"
+          ],
+          "terminals": [
+            "P04",
+            "P08",
+            "P10"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P08"
+        ]
+      },
+      "findings": []
+    },
+    {
+      "priority": 275,
+      "slug": "nuclear-power-radioactive-waste-management",
+      "name": "원자력 발전·방사성폐기물 관리",
+      "personaLanes": [
+        "관리사업자·발생자"
+      ],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P05",
+            "P09"
+          ]
+        },
+        "correction": [
+          "P04"
+        ],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "관리사업자·발생자",
+          "nodes": [
+            "P08",
+            "P09"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    },
+    {
+      "priority": 276,
+      "slug": "defense-rnd-force-integration",
+      "name": "방위사업 연구개발·전력화",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P07"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 277,
+      "slug": "space-launch-satellite-operation-permit",
+      "name": "우주발사체·위성 발사·운용 허가",
+      "personaLanes": [
+        "우주사업자(신청인)"
+      ],
+      "activePersonaLanes": [
+        "우주사업자(신청인)"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01",
+            "P03",
+            "P07"
+          ],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [
+          "P02",
+          "P05"
+        ],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P04",
+            "P05",
+            "P06",
+            "P08"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 278,
+      "slug": "foreign-investment-national-security-review",
+      "name": "외국인투자 국가안보 심사",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P07"
+          ]
+        },
+        "correction": [
+          "P02"
+        ],
+        "adverse": [
+          "P06"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P06"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        }
+      ]
+    },
+    {
+      "priority": 279,
+      "slug": "digital-platform-cross-regulation",
+      "name": "디지털 플랫폼 교차 규제",
+      "personaLanes": [
+        "플랫폼 사업자"
+      ],
+      "activePersonaLanes": [
+        "플랫폼 사업자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01"
+          ],
+          "terminals": [
+            "P06",
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P03"
+        ]
+      },
+      "findings": []
+    },
+    {
+      "priority": 280,
+      "slug": "medical-device-digital-health-approval-coverage",
+      "name": "의료기기·디지털헬스 허가·급여",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P07",
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 281,
+      "slug": "drug-approval-nhi-listing-price",
+      "name": "신약 허가 후 건보 등재·약가",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P08"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P08"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        }
+      ]
+    },
+    {
+      "priority": 282,
+      "slug": "hydrogen-ammonia-cofiring-power-permit",
+      "name": "수소·암모니아 혼소 발전 인허가",
+      "personaLanes": [
+        "수소발전사업자"
+      ],
+      "activePersonaLanes": [
+        "수소발전사업자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01",
+            "P04"
+          ],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P08"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P08"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        },
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P02",
+            "P03",
+            "P06"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 283,
+      "slug": "opportunity-development-zone-designation",
+      "name": "기회발전특구 지정·지원",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P07",
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 284,
+      "slug": "free-economic-zone-development",
+      "name": "경제자유구역 지정·개발",
+      "personaLanes": [
+        "개발사업시행자"
+      ],
+      "activePersonaLanes": [
+        "개발사업시행자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P08",
+            "P12"
+          ],
+          "terminals": [
+            "P03",
+            "P06",
+            "P13"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P02",
+            "P04",
+            "P05",
+            "P06",
+            "P07",
+            "P09",
+            "P10"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 285,
+      "slug": "foreign-education-institution-special-zone",
+      "name": "교육국제화특구·외국교육기관",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P07",
+            "P11",
+            "P12"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P10",
+          "P11"
+        ]
+      },
+      "findings": []
+    },
+    {
+      "priority": 286,
+      "slug": "integrated-resort-casino-permit",
+      "name": "복합리조트·카지노 허가",
+      "personaLanes": [
+        "카지노사업자"
+      ],
+      "activePersonaLanes": [
+        "카지노사업자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P07"
+          ],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P08"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "카지노사업자",
+          "nodes": [
+            "P07"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P08"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        },
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P02",
+            "P03",
+            "P05",
+            "P06",
+            "P08"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 287,
+      "slug": "gambling-industry-supervision-permit",
+      "name": "사행산업 통합 감독·허가",
+      "personaLanes": [
+        "사행산업사업자",
+        "신고자·이해관계인"
+      ],
+      "activePersonaLanes": [
+        "사행산업사업자",
+        "신고자·이해관계인"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P02",
+            "P08"
+          ],
+          "terminals": [
+            "P05",
+            "P07",
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "사행산업사업자",
+          "nodes": [
+            "P02"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "신고자·이해관계인",
+          "nodes": [
+            "P08"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        }
+      ]
+    },
+    {
+      "priority": 288,
+      "slug": "broadcast-telecom-convergence-permit",
+      "name": "방송·통신 융합 사업 허가",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P01",
+            "P09",
+            "P10"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P10"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "adverse-no-remedy",
+          "severity": "medium",
+          "nodes": [
+            "P10"
+          ],
+          "detail": "불리한 결정은 있으나 의견제출·청문·불복 경로가 도식에 없다."
+        }
+      ]
+    },
+    {
+      "priority": 289,
+      "slug": "spectrum-allocation-auction",
+      "name": "주파수 할당·경매",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 290,
+      "slug": "national-rnd-security-tech-leak-prevention",
+      "name": "국가 R&D 보안·기술유출 방지",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P03",
+            "P04",
+            "P09"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 291,
+      "slug": "genetic-resource-abs",
+      "name": "유전자원 접근·이익공유(ABS)",
+      "personaLanes": [
+        "이용자/신청인"
+      ],
+      "activePersonaLanes": [
+        "이용자/신청인"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01"
+          ],
+          "terminals": [
+            "P04",
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 292,
+      "slug": "integrated-water-management",
+      "name": "통합물관리(수량·수질·재해)",
+      "personaLanes": [
+        "사업자·지자체"
+      ],
+      "activePersonaLanes": [
+        "사업자·지자체"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P06"
+          ],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 293,
+      "slug": "chemical-accident-civil-disaster-response",
+      "name": "화학사고 대응·중대시민재해 현장",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 294,
+      "slug": "livestock-epidemic-culling-movement-compensation",
+      "name": "가축전염병 살처분·이동제한·보상",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P04",
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 295,
+      "slug": "import-food-animal-plant-quarantine",
+      "name": "수입 식품·동식물 검역",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P04",
+            "P07",
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 296,
+      "slug": "smart-city-national-pilot-city",
+      "name": "스마트시티 국가시범도시",
+      "personaLanes": [
+        "사업시행자"
+      ],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P07",
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "사업시행자",
+          "nodes": [
+            "P07"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "persona-no-entry-or-receipt",
+          "severity": "medium",
+          "lane": "사업시행자",
+          "nodes": [
+            "P07"
+          ],
+          "detail": "당사자의 신청·제출 또는 결과 수령 행위가 보이지 않는다."
+        }
+      ]
+    },
+    {
+      "priority": 297,
+      "slug": "complex-logistics-hub-development",
+      "name": "복합물류단지·국가물류거점",
+      "personaLanes": [
+        "개발사업자"
+      ],
+      "activePersonaLanes": [
+        "개발사업자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01",
+            "P05"
+          ],
+          "terminals": [
+            "P08"
+          ]
+        },
+        "correction": [
+          "P08"
+        ],
+        "adverse": []
+      },
+      "findings": [
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P02",
+            "P03",
+            "P04",
+            "P07",
+            "P08"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 298,
+      "slug": "urban-regeneration-recognition-project",
+      "name": "도시재생 인정사업·총괄조정",
+      "personaLanes": [
+        "시행자·신청자"
+      ],
+      "activePersonaLanes": [
+        "시행자·신청자"
+      ],
+      "scenarios": {
+        "normal": {
+          "entries": [
+            "P01"
+          ],
+          "terminals": [
+            "P07",
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P08"
+        ]
+      },
+      "findings": [
+        {
+          "rule": "persona-thin",
+          "severity": "medium",
+          "lane": "시행자·신청자",
+          "nodes": [
+            "P01"
+          ],
+          "detail": "당사자 레인에 행위 노드가 2개 미만이다."
+        },
+        {
+          "rule": "decision-no-persona-receipt",
+          "severity": "medium",
+          "nodes": [
+            "P04",
+            "P07"
+          ],
+          "detail": "기관 결정은 있으나 당사자의 결과 수령·확인 노드가 없다."
+        }
+      ]
+    },
+    {
+      "priority": 299,
+      "slug": "national-park-protected-area-development-consultation",
+      "name": "국립공원·보호구역 안 개발 협의",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P02",
+            "P06",
+            "P08"
+          ]
+        },
+        "correction": [
+          "P06"
+        ],
+        "adverse": []
+      },
+      "findings": []
+    },
+    {
+      "priority": 300,
+      "slug": "marine-pollution-response",
+      "name": "해양오염 방제·사고 대응",
+      "personaLanes": [],
+      "activePersonaLanes": [],
+      "scenarios": {
+        "normal": {
+          "entries": [],
+          "terminals": [
+            "P05",
+            "P07",
+            "P08"
+          ]
+        },
+        "correction": [],
+        "adverse": [
+          "P08"
+        ]
+      },
+      "findings": []
+    }
+  ]
+}

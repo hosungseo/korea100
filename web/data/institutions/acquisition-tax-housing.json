@@ -12,6 +12,11 @@
   "stakeholders": "취득자, 시군구, 중개·세무.",
   "legalBasis": [
    {
+    "law": "지방세특례제한법",
+    "articles": "제3조(지방세 특례의 제한) 및 적용 대상별 개별 감면 조문",
+    "kind": "법률"
+   },
+   {
     "law": "지방세법",
     "articles": "제10조의2~7, 제11~16·20조",
     "kind": "법률"
@@ -56,7 +61,7 @@
  "fieldVerification": [
   "주택 수별 세율표",
   "중과 배제 요건",
-  "감면 특례 목록"
+  "적용하려는 감면의 지방세특례제한법 개별 조문·지자체 감면조례"
  ],
  "process": {
   "institution_name": "취득세(주택)",
@@ -300,38 +305,36 @@
    },
    {
     "id": "P10",
-    "name": "감면 신청",
+    "name": "개별 감면 근거·요건 확인",
     "lane": "취득자",
     "stage": "G4 감면",
     "type": "task",
     "status": "waiting",
     "progress": 0,
     "actor": "취득자",
-    "action": "감면 신청",
+    "action": "적용하려는 취득세 감면의 개별 법률·조례 근거와 사후요건 확인",
     "output_documents": [
-     "감면"
+     "감면 요건 확인 기록"
     ],
     "confidence": 0.85,
     "legal_basis": [
      {
       "law": "지방세특례제한법",
-      "article": "(감면 신청 근거)",
-      "text": "취득세 감면 신청 근거는 지방세특례제한법에 규정됨.",
-      "unverified": true,
-      "note": "지방세특례제한법 본문 미조회로 미검증; 지방세법 제15조(세율의 특례)는 감면과 별개"
+      "article": "제3조(지방세 특례의 제한)",
+      "text": "지방세 특례는 지방세특례제한법 등 법률·조약에 근거해야 한다. 실제 감면 대상·요건·추징사유는 적용하려는 개별 감면 조문 또는 지자체 감면조례를 별도로 확인한다."
      }
     ]
    },
    {
     "id": "P11",
-    "name": "감면·추징",
+    "name": "감면 적용·추징 사후관리",
     "lane": "시·군·구",
     "stage": "G4 감면",
     "type": "task",
     "status": "waiting",
     "progress": 0,
     "actor": "시·군·구",
-    "action": "감면·추징",
+    "action": "확인된 개별 감면 근거를 적용하고 사후요건 위반 시 추징",
     "output_documents": [
      "추징"
     ],
@@ -344,10 +347,8 @@
      },
      {
       "law": "지방세특례제한법",
-      "article": "(감면 근거)",
-      "text": "취득세 감면·추징의 실체 근거는 지방세특례제한법에 규정됨.",
-      "unverified": true,
-      "note": "지방세특례제한법 본문 미조회로 미검증; 감면 실체 근거는 동법"
+      "article": "제3조(지방세 특례의 제한)",
+      "text": "감면의 실체 요건은 지방세특례제한법의 적용 대상별 개별 조문 또는 적법한 감면조례에 따라 판단한다."
      }
     ]
    },
@@ -695,13 +696,24 @@
  },
  "verification": {
   "status": "article-verified",
-  "verifiedAt": "2026-07-12",
+  "verifiedAt": "2026-07-13",
   "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
-  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 20건 가운데 20건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "scope": "법적 근거 2건 중 공식 원문 2건을 연결했다. 캔버스와 절차 노드의 명시 조문 30건 가운데 30건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
    "지방세법"
   ],
   "sources": [
+   {
+    "law": "지방세특례제한법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "지방세특례제한법",
+    "lawId": "011178",
+    "mst": "286607",
+    "promulgatedOn": "2026-06-02",
+    "effectiveOn": "2026-06-02",
+    "officialUrl": "https://law.go.kr/법령/지방세특례제한법"
+   },
    {
     "law": "지방세법",
     "kind": "법률",
@@ -712,6 +724,17 @@
     "promulgatedOn": "2025-12-31",
     "effectiveOn": "2026-07-01",
     "officialUrl": "https://law.go.kr/법령/지방세법"
+   },
+   {
+    "law": "지방세기본법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "지방세기본법",
+    "lawId": "011177",
+    "mst": "283257",
+    "promulgatedOn": "2026-02-05",
+    "effectiveOn": "2026-02-05",
+    "officialUrl": "https://law.go.kr/법령/지방세기본법"
    },
    {
     "law": "부동산 거래신고 등에 관한 법률",
@@ -726,12 +749,12 @@
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-12",
+   "checkedAt": "2026-07-13",
    "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
-   "citationEntries": 20,
-   "explicitCitationEntries": 20,
-   "articleReferences": 20,
-   "verifiedReferences": 20,
+   "citationEntries": 30,
+   "explicitCitationEntries": 30,
+   "articleReferences": 30,
+   "verifiedReferences": 30,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }

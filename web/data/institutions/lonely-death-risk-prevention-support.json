@@ -1,0 +1,324 @@
+{
+ "slug": "lonely-death-risk-prevention-support",
+ "name": "고독사 위험자 발굴·지원",
+ "oneLiner": "도움 요청·위험신호 신고 → 위험도 확인·초기상담 → 개인별 예방지원 계획 → 안부확인·생활지원 연계 → 위기대응시스템 기록·연계 → 지원효과·위험도 재평가 → 실태조사·시행계획 개선",
+ "type": "위험자 발굴·복지연계형",
+ "priority": 309,
+ "whyFirst": "정부·지방자치단체와 관계기관의 역할을 분리해 고독사 위험자 발굴·지원 절차를 한눈에 보여준다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "고독사 위험자 발굴·지원은(는) 도움 요청·위험신호 신고 → 위험도 확인·초기상담 → 개인별 예방지원 계획 → 안부확인·생활지원 연계 → 위기대응시스템 기록·연계 → 지원효과·위험도 재평가 → 실태조사·시행계획 개선로 이어지는 공적 절차다.",
+  "stakeholders": "주민·고독사위험자, 읍면동·지방자치단체, 복지·보건·주거기관, 보건복지부",
+  "legalBasis": [
+   {
+    "law": "고독사 예방 및 관리에 관한 법률",
+    "articles": "제10~20조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "읍면동·지방자치단체",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "복지·보건·주거기관",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "보건복지부",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "도움 요청·위험신호 신고",
+   "위험도 확인·초기상담",
+   "개인별 예방지원 계획",
+   "안부확인·생활지원 연계",
+   "위기대응시스템 기록·연계",
+   "지원효과·위험도 재평가",
+   "실태조사·시행계획 개선"
+  ],
+  "moneyFlow": "지원금·수수료·사업비는 법령과 연도별 사업기준 또는 개별 결정에 따라 달라질 수 있다.",
+  "docsFlow": "도움 요청·위험신호 신고 기록 → 심사·협의 자료 → 결정·통지 → 이행·사후관리 기록으로 이어진다.",
+  "bottlenecks": [
+   "지자체별 위험도 선별도구와 대상자 동의",
+   "야간·긴급상황 현장 출동 연계"
+  ],
+  "reformPoints": [
+   "처리상태와 담당기관 안내",
+   "기관 간 자료연계와 중복제출 축소",
+   "결정·변경 사유의 명확한 통지"
+  ]
+ },
+ "related": [],
+ "fieldVerification": [
+  "지자체별 위험도 선별도구와 대상자 동의",
+  "야간·긴급상황 현장 출동 연계"
+ ],
+ "process": {
+  "institution_name": "고독사 위험자 발굴·지원",
+  "law_name": "고독사 예방 및 관리에 관한 법률",
+  "lanes": [
+   "주민·고독사위험자",
+   "읍면동·지방자치단체",
+   "복지·보건·주거기관",
+   "보건복지부"
+  ],
+  "stages": [
+   "G0 위험신호",
+   "G1 발굴·상담",
+   "G2 지원계획",
+   "G3 서비스",
+   "G4 점검"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "도움 요청·위험신호 신고",
+    "lane": "주민·고독사위험자",
+    "stage": "G0 위험신호",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "주민·고독사위험자",
+    "action": "본인 또는 이웃이 사회적 고립과 안전 위험을 상담·신고한다.",
+    "output_documents": [
+     "도움 요청·위험신호 신고 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고독사 예방 및 관리에 관한 법률",
+      "article": "제13조·제16조",
+      "text": "고독사 예방 및 관리에 관한 법률 제13조·제16조에 따른 본인 또는 이웃이 사회적 고립과 안전 위험을 상담·신고한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "위험도 확인·초기상담",
+    "lane": "읍면동·지방자치단체",
+    "stage": "G1 발굴·상담",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "읍면동·지방자치단체",
+    "action": "생활·건강·관계망을 확인해 고독사 위험과 긴급성을 판단한다.",
+    "output_documents": [
+     "위험도 확인·초기상담 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고독사 예방 및 관리에 관한 법률",
+      "article": "제13조·제16조",
+      "text": "고독사 예방 및 관리에 관한 법률 제13조·제16조에 따른 생활·건강·관계망을 확인해 고독사 위험과 긴급성을 판단한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "개인별 예방지원 계획",
+    "lane": "읍면동·지방자치단체",
+    "stage": "G2 지원계획",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "읍면동·지방자치단체",
+    "action": "안부확인, 건강, 주거, 돌봄 등 필요한 지원을 정한다.",
+    "output_documents": [
+     "개인별 예방지원 계획 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고독사 예방 및 관리에 관한 법률",
+      "article": "제13조",
+      "text": "고독사 예방 및 관리에 관한 법률 제13조에 따른 안부확인, 건강, 주거, 돌봄 등 필요한 지원을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "안부확인·생활지원 연계",
+    "lane": "복지·보건·주거기관",
+    "stage": "G3 서비스",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "복지·보건·주거기관",
+    "action": "정기 안부확인과 보건·복지·주거 서비스를 제공한다.",
+    "output_documents": [
+     "안부확인·생활지원 연계 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고독사 예방 및 관리에 관한 법률",
+      "article": "제13조",
+      "text": "고독사 예방 및 관리에 관한 법률 제13조에 따른 정기 안부확인과 보건·복지·주거 서비스를 제공한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "위기대응시스템 기록·연계",
+    "lane": "보건복지부",
+    "stage": "G3 서비스",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보건복지부",
+    "action": "법정 범위에서 위험정보와 서비스 연계 현황을 관리한다.",
+    "output_documents": [
+     "위기대응시스템 기록·연계 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고독사 예방 및 관리에 관한 법률",
+      "article": "제12조의2",
+      "text": "고독사 예방 및 관리에 관한 법률 제12조의2에 따른 법정 범위에서 위험정보와 서비스 연계 현황을 관리한다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "지원효과·위험도 재평가",
+    "lane": "읍면동·지방자치단체",
+    "stage": "G4 점검",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "읍면동·지방자치단체",
+    "action": "위험도 변화를 확인하고 지원을 조정하거나 종결한다.",
+    "output_documents": [
+     "지원효과·위험도 재평가 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고독사 예방 및 관리에 관한 법률",
+      "article": "제10조·제13조",
+      "text": "고독사 예방 및 관리에 관한 법률 제10조·제13조에 따른 위험도 변화를 확인하고 지원을 조정하거나 종결한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "실태조사·시행계획 개선",
+    "lane": "보건복지부",
+    "stage": "G4 점검",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보건복지부",
+    "action": "고독사 실태와 지원성과를 분석해 시행계획을 개선한다.",
+    "output_documents": [
+     "실태조사·시행계획 개선 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고독사 예방 및 관리에 관한 법률",
+      "article": "제7조·제10조",
+      "text": "고독사 예방 및 관리에 관한 법률 제7조·제10조에 따른 고독사 실태와 지원성과를 분석해 시행계획을 개선한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L06",
+    "source": "P06",
+    "target": "P03",
+    "type": "loop",
+    "label": "지원 조정"
+   },
+   {
+    "id": "E07",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": "종결·정책반영"
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건·기한·지원 범위는 하위규정과 사실관계에 따라 달라질 수 있다.",
+   "2026-07-13 301~320 확장: 현행 법률의 실제 조문 순서와 당사자·행정기관 레인을 기준으로 신규 작성."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 22건 가운데 22건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "고독사 예방 및 관리에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "고독사 예방 및 관리에 관한 법률",
+    "lawId": "013719",
+    "mst": "254853",
+    "promulgatedOn": "2023-09-14",
+    "effectiveOn": "2024-03-15",
+    "officialUrl": "https://law.go.kr/법령/고독사예방및관리에관한법률"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 8,
+   "explicitCitationEntries": 8,
+   "articleReferences": 22,
+   "verifiedReferences": 22,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

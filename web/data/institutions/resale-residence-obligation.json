@@ -8,43 +8,43 @@
  "asOfDate": "2026-07-12",
  "status": "full",
  "canvas": {
-  "purpose": "투기적 전매를 막고 실수요 거주를 유도한다.",
-  "stakeholders": "수분양자, 사업주체, 국토부·지자체.",
+  "purpose": "전매제한기간과 거주의무를 통해 투기적 전매를 제한하고 실수요 거주를 유도한다. 전매 예외와 거주의무 위반은 허가 처분이 아니라 법정 요건 확인 및 한국토지주택공사 매입 구조로 다룬다.",
+  "stakeholders": "수분양자, 사업주체, 한국토지주택공사(LH), 국토부·지자체.",
   "legalBasis": [
    {
     "law": "주택법",
-    "articles": "제57조의2·3, 제64·92·96조",
+    "articles": "제57조의2·3, 제64·92조",
     "kind": "법률"
    }
   ],
   "authorities": [
    {
-    "name": "국토부·지자체",
-    "role": "제한·조사·제재"
+    "name": "한국토지주택공사(LH)",
+    "role": "전매·거주의무 위반 주택의 매입 신청 접수·의견청취·매입"
    },
    {
     "name": "수분양자",
-    "role": "준수"
+    "role": "전매제한·거주의무 준수 및 LH 매입 신청"
    }
   ],
   "procedure": [
    "고지",
-   "전매 심사",
-   "거주",
-   "조사",
-   "제재"
+   "전매제한·예외사유 확인",
+   "LH 우선매입 신청·매입",
+   "거주의무 이행·조사",
+   "의견청취·LH 매입"
   ],
-  "moneyFlow": "과태료·환수(해당 시).",
-  "docsFlow": "계약 → 전매신청 → 조사 → 처분.",
+  "moneyFlow": "LH가 법정 매입을 하는 경우 납부 입주금과 1년 만기 정기예금 평균이자율을 적용한 이자를 합산한 매입비용을 지급한다.",
+  "docsFlow": "의무 고지·부기등기 → LH 매입신청 → 의견청취 기록 → LH 매입·매입비용 지급 기록 → 거주사실 확인·조사 기록으로 이어진다.",
   "bottlenecks": [
-   "예외 해석",
+   "전매제한 예외사유와 LH 우선매입 대상의 구분",
    "조사 인력",
    "전매 암시장"
   ],
   "reformPoints": [
    "의무 안내 표준",
    "조사 기준 공개",
-   "예외 최소화"
+   "LH 매입 신청·의견청취 절차와 처리현황 공개"
   ]
  },
  "related": [
@@ -64,10 +64,9 @@
   "lanes": [
    "입주자·수분양자",
    "사업주체",
-   "국토부·지자체",
+   "한국토지주택공사",
    "조사기관",
-   "전매 상대방",
-   "감독·청문"
+   "국토부·지자체"
   ],
   "stages": [
    "G0 고지",
@@ -161,16 +160,16 @@
    },
    {
     "id": "P04",
-    "name": "전매 신고·허가 신청",
+    "name": "전매제한기간·예외사유 확인",
     "lane": "입주자·수분양자",
     "stage": "G2 전매신청",
     "type": "task",
     "status": "current",
     "progress": 40,
     "actor": "입주자·수분양자",
-    "action": "전매 신고·허가 신청",
+    "action": "전매제한기간 경과 여부와 대통령령상 예외사유 해당 여부 확인",
     "output_documents": [
-     "신청"
+     "확인 기록"
     ],
     "confidence": 0.9,
     "legal_basis": [
@@ -183,84 +182,80 @@
    },
    {
     "id": "P05",
-    "name": "전매 심사",
-    "lane": "국토부·지자체",
-    "stage": "G2 전매신청",
-    "type": "task",
-    "status": "waiting",
-    "progress": 0,
-    "actor": "국토부·지자체",
-    "action": "전매 심사",
-    "output_documents": [
-     "심사"
-    ],
-    "confidence": 0.9,
-    "legal_basis": [
-     {
-      "law": "주택법",
-      "article": "제64조(주택의 전매행위 제한 등)",
-      "text": "주택법 제64조는 전매제한기간 내 전매를 원칙 금지하고 제64조제2항의 예외(생업상 사정 등 대통령령 사유)는 요건 충족 시 적용되며 LH 우선매입 구조로 처리된다. 국토부·지자체의 전매 '허가 심사' 절차는 법정되어 있지 않음 — 실제로는 제64조제2항 예외사유 확인·LH 우선매입(운영) 수준.",
-      "unverified": true
-     }
-    ],
-    "unverified": true
-   },
-   {
-    "id": "P06",
-    "name": "보완 제출",
+    "name": "LH 우선매입 신청",
     "lane": "입주자·수분양자",
     "stage": "G2 전매신청",
     "type": "task",
     "status": "waiting",
     "progress": 0,
     "actor": "입주자·수분양자",
-    "action": "보완 제출",
+    "action": "분양가상한제 적용주택의 전매 예외에 해당하는 경우 LH에 우선매입 신청",
     "output_documents": [
-     "보완"
+     "LH 매입신청서"
     ],
     "confidence": 0.9,
     "legal_basis": [
      {
       "law": "주택법",
       "article": "제64조(주택의 전매행위 제한 등)",
-      "text": "주택의 전매행위 제한 등"
+      "text": "전매가 불가피한 대통령령상 사유에는 전매제한을 적용하지 않으며, 분양가상한제 적용주택을 전매하는 경우 LH가 우선 매입할 수 있다.(제64조제2항)"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "LH 우선매입 요건 확인",
+    "lane": "한국토지주택공사",
+    "stage": "G2 전매신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "한국토지주택공사",
+    "action": "매입 신청 대상과 법정 매입금액 산정 요건 확인",
+    "output_documents": [
+     "매입 검토 기록"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제64조(주택의 전매행위 제한 등)",
+      "text": "LH가 분양가상한제 적용주택을 우선 매입하는 경우 매입금액은 분양가격·인근 주택매매가격 비율·보유기간 등을 고려해 대통령령으로 정한다.(제64조제3항)"
      }
     ]
    },
    {
     "id": "P07",
-    "name": "전매 허용·불허",
-    "lane": "국토부·지자체",
+    "name": "LH 우선매입·매입비용 지급",
+    "lane": "한국토지주택공사",
     "stage": "G2 전매신청",
     "type": "task",
     "status": "waiting",
     "progress": 0,
-    "actor": "국토부·지자체",
-    "action": "전매 허용·불허",
+    "actor": "한국토지주택공사",
+    "action": "LH 우선매입과 법정 매입비용 지급",
     "output_documents": [
-     "처분"
+     "매입·지급 기록"
     ],
     "confidence": 0.9,
     "legal_basis": [
      {
       "law": "주택법",
       "article": "제64조(주택의 전매행위 제한 등)",
-      "text": "전매 '허용·불허 처분'은 주택법 제64조에 명시된 행정처분이 아님 — 제64조제2항 예외 해당 여부 확인·LH 우선매입(제64조제2항 단서) 구조로 처리(운영).",
-      "unverified": true
+      "text": "LH가 우선 매입하는 경우 제64조제3항에 따른 매입비용 지급일에 해당 주택을 취득한 것으로 본다."
      }
-    ],
-    "unverified": true
+    ]
    },
    {
     "id": "P08",
-    "name": "결과 수령",
+    "name": "LH 매입 결과 수령",
     "lane": "입주자·수분양자",
     "stage": "G2 전매신청",
     "type": "notice",
     "status": "waiting",
     "progress": 0,
     "actor": "입주자·수분양자",
-    "action": "결과 수령",
+    "action": "LH 매입·매입비용 지급 결과 수령",
     "output_documents": [
      "통지"
     ],
@@ -269,7 +264,7 @@
      {
       "law": "주택법",
       "article": "제64조(주택의 전매행위 제한 등)",
-      "text": "주택의 전매행위 제한 등"
+      "text": "LH 우선매입과 매입금액 산정은 제64조제2항 단서와 제3항에 따른다."
      }
     ]
    },
@@ -320,63 +315,58 @@
    },
    {
     "id": "P11",
-    "name": "위반 제재·환수",
-    "lane": "감독·청문",
+    "name": "거주의무 위반 시 LH 매입 절차",
+    "lane": "한국토지주택공사",
     "stage": "G5 제재",
     "type": "task",
     "status": "waiting",
     "progress": 0,
-    "actor": "감독·청문",
-    "action": "위반 제재·환수",
+    "actor": "한국토지주택공사",
+    "action": "거주의무 위반 사실을 알게 된 경우 의견청취 절차를 거쳐 주택 매입",
     "output_documents": [
-     "제재"
+     "매입 절차 기록"
     ],
     "confidence": 0.9,
     "legal_basis": [
      {
       "law": "주택법",
       "article": "제57조의2(분양가상한제 적용주택 등의 입주자의 거주의무 등)",
-      "text": "분양가상한제 적용주택 등의 입주자의 거주의무 등"
-     },
-     {
-      "law": "주택법",
-      "article": "제96조(청문)",
-      "text": "청문"
+      "text": "LH는 거주의무 위반 사실을 알게 된 경우 의견청취 등 대통령령상 절차를 거쳐 특별한 사유가 없으면 해당 주택을 매입하여야 한다.(제57조의2제3항)"
      }
     ]
    },
    {
     "id": "P12",
-    "name": "청문",
-    "lane": "감독·청문",
+    "name": "의견청취",
+    "lane": "한국토지주택공사",
     "stage": "G5 제재",
     "type": "task",
     "status": "waiting",
     "progress": 0,
-    "actor": "감독·청문",
-    "action": "청문",
+    "actor": "한국토지주택공사",
+    "action": "거주의무 위반 사실에 대한 의견청취",
     "output_documents": [
-     "청문"
+     "의견청취 기록"
     ],
     "confidence": 0.9,
     "legal_basis": [
      {
       "law": "주택법",
-      "article": "제96조(청문)",
-      "text": "청문"
+      "article": "제57조의2(분양가상한제 적용주택 등의 입주자의 거주의무 등)",
+      "text": "LH는 거주의무 위반 사실을 알게 된 경우 의견청취 등 대통령령상 절차를 거쳐 특별한 사유가 없으면 해당 주택을 매입하여야 한다.(제57조의2제3항)"
      }
     ]
    },
    {
     "id": "P13",
-    "name": "처분 통지",
+    "name": "LH 매입·매입비용 지급 통지",
     "lane": "입주자·수분양자",
     "stage": "G5 제재",
     "type": "notice",
     "status": "waiting",
     "progress": 0,
     "actor": "입주자·수분양자",
-    "action": "처분 통지",
+    "action": "LH 매입 및 매입비용 지급 결과 통지 수령",
     "output_documents": [
      "통지"
     ],
@@ -384,23 +374,23 @@
     "legal_basis": [
      {
       "law": "주택법",
-      "article": "제96조(청문)",
-      "text": "청문"
+      "article": "제57조의2(분양가상한제 적용주택 등의 입주자의 거주의무 등)",
+      "text": "LH가 의무위반 주택을 매입하고 매입비용을 지급한 날에 LH가 해당 주택을 취득한 것으로 본다.(제57조의2제3·4항)"
      }
     ]
    },
    {
     "id": "P14",
-    "name": "전매 상대방 확인",
-    "lane": "전매 상대방",
+    "name": "전매 제한 준수",
+    "lane": "입주자·수분양자",
     "stage": "G2 전매신청",
     "type": "notice",
     "status": "waiting",
     "progress": 0,
-    "actor": "전매 상대방",
-    "action": "전매 상대방 확인",
+    "actor": "입주자·수분양자",
+    "action": "전매제한기간에는 전매·전매 알선을 하지 않음",
     "output_documents": [
-     "확인"
+     "준수 기록"
     ],
     "confidence": 0.8,
     "legal_basis": [
@@ -435,16 +425,16 @@
    },
    {
     "id": "P16",
-    "name": "재신청",
+    "name": "전매 제한 유지",
     "lane": "입주자·수분양자",
     "stage": "G2 전매신청",
     "type": "task",
     "status": "waiting",
     "progress": 0,
     "actor": "입주자·수분양자",
-    "action": "재신청",
+    "action": "대통령령상 예외사유가 없는 경우 전매제한 준수",
     "output_documents": [
-     "재신청"
+     "제한 유지 기록"
     ],
     "confidence": 0.9,
     "legal_basis": [
@@ -476,39 +466,39 @@
     "source": "P03",
     "target": "P04",
     "type": "sequence",
-    "label": "전매"
+    "label": "전매 제한 중"
    },
    {
     "id": "E04",
     "source": "P04",
     "target": "P05",
     "type": "sequence",
-    "label": null
+    "label": "분양가상한제 주택"
    },
    {
     "id": "E05",
     "source": "P05",
     "target": "P06",
     "type": "sequence",
-    "label": "보완"
+    "label": "LH 매입신청"
    },
    {
     "id": "E06",
-    "source": "P06",
+    "source": "P04",
     "target": "P16",
-    "type": "loop",
-    "label": null
+    "type": "sequence",
+    "label": "예외사유 없음"
    },
    {
     "id": "E07",
     "source": "P16",
-    "target": "P04",
-    "type": "loop",
-    "label": null
+    "target": "P14",
+    "type": "sequence",
+    "label": "제한 유지"
    },
    {
     "id": "E08",
-    "source": "P05",
+    "source": "P06",
     "target": "P07",
     "type": "sequence",
     "label": null
@@ -517,13 +507,6 @@
     "id": "E09",
     "source": "P07",
     "target": "P08",
-    "type": "sequence",
-    "label": null
-   },
-   {
-    "id": "E10",
-    "source": "P08",
-    "target": "P14",
     "type": "sequence",
     "label": null
    },
@@ -564,10 +547,10 @@
    },
    {
     "id": "E16",
-    "source": "P15",
-    "target": "P13",
-    "type": "sequence",
-    "label": null
+    "source": "P10",
+    "target": "P15",
+    "type": "message",
+    "label": "위반 신고 확인"
    }
   ],
   "warnings": [
@@ -576,10 +559,10 @@
   ]
  },
  "verification": {
-  "status": "needs-review",
-  "verifiedAt": "2026-07-12",
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
   "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
-  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 절차 노드의 명시 조문 20건 중 18건의 조문 존재를 확인했고, 2건은 비법정 절차로 unverified 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 20건 가운데 20건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
    "주택법 MST 284095"
   ],
@@ -602,9 +585,9 @@
    "citationEntries": 20,
    "explicitCitationEntries": 20,
    "articleReferences": 20,
-   "verifiedReferences": 18,
+   "verifiedReferences": 20,
    "missingReferences": 0,
-   "uncheckableReferences": 2
+   "uncheckableReferences": 0
   }
  }
 }

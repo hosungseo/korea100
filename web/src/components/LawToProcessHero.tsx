@@ -65,7 +65,7 @@ export default function LawToProcessHero({
             <span aria-hidden="true" />
             법령에서 업무로
           </p>
-          <h1>대한민국 제도 100</h1>
+          <h1>대한민국 제도 {modelCount}</h1>
           <p className="law-process-lead">
             법령을 읽고 담당자, 절차, 병목으로 재구성합니다.
           </p>

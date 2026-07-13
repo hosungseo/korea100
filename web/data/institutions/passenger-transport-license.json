@@ -9,7 +9,7 @@
  "status": "full",
  "canvas": {
   "purpose": "여객자동차 운송사업 면허은(는) 사업계획·차량 확보 → 면허 신청 → 기준·결격사유 심사 → 면허 발급 → 운송사업 개시 → 사고·운행기록 보고 → 변경·처분 관리로 이어지는 공적 절차다.",
-  "stakeholders": "운송사업자, 시·도·국토교통부, 운수종사자, 이용자·관계기관",
+  "stakeholders": "운송사업자, 시·도·국토교통부",
   "legalBasis": [
    {
     "law": "여객자동차 운수사업법",
@@ -21,14 +21,6 @@
    {
     "name": "시·도·국토교통부",
     "role": "접수·확인·결정·이행 또는 사후관리"
-   },
-   {
-    "name": "운수종사자",
-    "role": "접수·확인·결정·이행 또는 사후관리"
-   },
-   {
-    "name": "이용자·관계기관",
-    "role": "접수·확인·결정·이행 또는 사후관리"
    }
   ],
   "procedure": [
@@ -38,7 +30,9 @@
    "면허 발급",
    "운송사업 개시",
    "사고·운행기록 보고",
-   "변경·처분 관리"
+   "면허취소 등 처분 사전통지",
+   "청문에서 의견 진술",
+   "청문 후 처분 결정·통지"
   ],
   "moneyFlow": "수수료·과태료·점용료 등 금전부담은 법령과 개별 처분 조건에 따라 달라질 수 있다.",
   "docsFlow": "신청·단속 기록 → 검토·심사 자료 → 결정·통지 → 이행·납부 기록 → 사후관리로 이어진다.",
@@ -68,9 +62,7 @@
   "law_name": "여객자동차 운수사업법",
   "lanes": [
    "운송사업자",
-   "시·도·국토교통부",
-   "운수종사자",
-   "이용자·관계기관"
+   "시·도·국토교통부"
   ],
   "stages": [
    "G0 준비",
@@ -107,13 +99,13 @@
    {
     "id": "P02",
     "name": "면허 신청",
-    "lane": "시·도·국토교통부",
+    "lane": "운송사업자",
     "stage": "G0 준비",
     "type": "task",
     "status": "done",
     "progress": 100,
-    "actor": "시·도·국토교통부",
-    "action": "면허 신청",
+    "actor": "운송사업자",
+    "action": "사업계획 등 법정 서류를 갖춰 운송사업 면허를 신청한다.",
     "output_documents": [
      "면허 신청 기록"
     ],
@@ -130,12 +122,12 @@
    {
     "id": "P03",
     "name": "기준·결격사유 심사",
-    "lane": "운수종사자",
+    "lane": "시·도·국토교통부",
     "stage": "G1 신청·접수",
     "type": "task",
     "status": "current",
     "progress": 55,
-    "actor": "운수종사자",
+    "actor": "시·도·국토교통부",
     "action": "기준·결격사유 심사",
     "output_documents": [
      "기준·결격사유 심사 기록"
@@ -158,12 +150,12 @@
    {
     "id": "P04",
     "name": "면허 발급",
-    "lane": "이용자·관계기관",
+    "lane": "시·도·국토교통부",
     "stage": "G2 조사·검토",
     "type": "gateway",
     "status": "risk",
     "progress": 0,
-    "actor": "이용자·관계기관",
+    "actor": "시·도·국토교통부",
     "action": "면허 발급",
     "output_documents": [
      "면허 발급 기록"
@@ -204,12 +196,12 @@
    {
     "id": "P06",
     "name": "사고·운행기록 보고",
-    "lane": "시·도·국토교통부",
+    "lane": "운송사업자",
     "stage": "G4 이행·납부",
     "type": "task",
     "status": "waiting",
     "progress": 0,
-    "actor": "시·도·국토교통부",
+    "actor": "운송사업자",
     "action": "사고·운행기록 보고",
     "output_documents": [
      "사고·운행기록 보고 기록"
@@ -226,14 +218,14 @@
    },
    {
     "id": "P07",
-    "name": "변경·처분 관리",
-    "lane": "운수종사자",
+    "name": "면허취소 등 처분 사전통지",
+    "lane": "시·도·국토교통부",
     "stage": "G5 사후관리",
     "type": "task",
     "status": "waiting",
     "progress": 0,
-    "actor": "운수종사자",
-    "action": "변경·처분 관리",
+    "actor": "시·도·국토교통부",
+    "action": "취소·정지 사유와 예정 처분을 사업자에게 사전통지한다.",
     "output_documents": [
      "변경·처분 관리 기록"
     ],
@@ -249,14 +241,14 @@
    },
    {
     "id": "P08",
-    "name": "청문",
+    "name": "청문에서 의견 진술",
     "lane": "운송사업자",
     "stage": "G5 사후관리",
     "type": "task",
     "status": "waiting",
     "progress": 0,
     "actor": "운송사업자",
-    "action": "면허취소 처분 전 청문 의견진술",
+    "action": "사업자가 청문에 참여해 처분 사유에 관한 의견과 자료를 제출한다.",
     "output_documents": [
      "청문 조서"
     ],
@@ -267,6 +259,29 @@
       "law": "여객자동차 운수사업법",
       "article": "제86조",
       "text": "여객자동차 운수사업법 제86조(청문)에 따라 국토교통부장관 또는 시·도지사는 여객자동차운송사업 면허를 취소하려면 청문을 하여야 하며, 당사자는 청문에서 의견을 진술할 수 있다"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "청문 후 처분 결정·통지",
+    "lane": "시·도·국토교통부",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시·도·국토교통부",
+    "action": "청문 결과를 반영해 처분 여부를 결정하고 사업자에게 통지한다.",
+    "output_documents": [
+     "처분서"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "여객자동차 운수사업법",
+      "article": "제85조·제86조",
+      "text": "면허취소 등 처분과 청문 절차"
      }
     ]
    }
@@ -305,14 +320,14 @@
     "source": "P05",
     "target": "P06",
     "type": "sequence",
-    "label": null
+    "label": "사고 발생 시"
    },
    {
     "id": "E06",
     "source": "P06",
     "target": "P07",
     "type": "sequence",
-    "label": null
+    "label": "법 위반·처분 사유 발생 시"
    },
    {
     "id": "E07",
@@ -320,6 +335,13 @@
     "target": "P08",
     "type": "sequence",
     "label": "취소 처분 전 청문"
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": "청문 결과 반영"
    }
   ],
   "warnings": [
@@ -331,7 +353,7 @@
   "status": "article-verified",
   "verifiedAt": "2026-07-13",
   "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
-  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 10건 가운데 10건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 14건 가운데 14건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "sources": [
    {
     "law": "여객자동차 운수사업법",
@@ -348,10 +370,10 @@
   "articleVerification": {
    "checkedAt": "2026-07-13",
    "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
-   "citationEntries": 8,
-   "explicitCitationEntries": 8,
-   "articleReferences": 10,
-   "verifiedReferences": 10,
+   "citationEntries": 11,
+   "explicitCitationEntries": 11,
+   "articleReferences": 14,
+   "verifiedReferences": 14,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }
