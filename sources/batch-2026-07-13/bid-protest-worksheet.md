@@ -45,3 +45,30 @@
 - 정보통신신문 분쟁조정 해설 https://www.koit.co.kr/news/articleView.html?idxno=118507
 - 김·장 국가계약 분쟁조정제도 개선방안 https://www.kimchang.com/ko/insights/detail.kc?sch_section=4&idx=31825
 - 일간NTN(조정 청구 20일) https://www.intn.co.kr/news/articleView.html?idxno=2002265
+
+## 수정 이력 (2026-07-13, 검증 심사 반영)
+
+검증 심사자의 지적 10건을 반영해 아래와 같이 수정했다. 초안이 개정 전 구법 수치·서술을 인용한 것이 주 원인이며, 담당자가 WebSearch로 현행 조문(제28조 제2~4항)을 직접 재확인해 고쳤다.
+
+| # | 지적 | 판정 | 조치 | 근거 |
+|---|---|---|---|---|
+| 1 | 제도 전반을 '국제입찰 한정'으로 서술 | refuted(must-fix) | oneLiner·purpose·applicability·procedure[0]는 선반영됨. 추가로 bottlenecks[1], P01.action/condition, P01.legal_basis[0].text를 '대통령령으로 정하는 금액 이상의 정부조달계약(국제입찰=고시금액, 국내입찰=영 제110조제1항 추정가격 기준)'으로 수정. bottlenecks[1]의 '국내입찰 제외' 문구는 '그 미만 소액 사건 제외'로 교정. | 현행 법 제28조제1항 '대통령령으로 정하는 금액 이상의 정부조달계약'(WebSearch 재확인) |
+| 2 | 이의신청 기한 15일/10일 | refuted(must-fix) | bottlenecks[0], P02.deadline, P02.legal_basis text를 '있었던 날 20일 / 안 날 15일'로 수정. article도 제28조→제28조제2항으로 정밀화. | 법 제28조제2항 '20일/15일'(WebSearch electimes·lbox 재확인) |
+| 3 | 기관 심사·통지 10일 | refuted(must-fix) | procedure[3]·authorities[0]는 선반영됨. P03.deadline, P03.legal_basis text를 '받은 날부터 15일'로 수정, article 제28조→제28조제3항. | 법 제28조제3항 '15일'(WebSearch 재확인) |
+| 4 | P06·P07 조정 청구 20일 근거를 제31조로 귀속 | refuted(must-fix) | P06·P07 legal_basis article을 제31조→제28조제4항으로 수정, text도 '조정을 위한 재심 청구'로 조정. | 법 제28조제4항 '통지받은 날부터 20일 이내 재심 청구'(WebSearch 재확인). 제31조는 심사·조정 50일 조문. |
+| 5 | verification.method가 기계 대조 실시처럼 기재, scope 과장 | schema-error(must-fix) | method를 가이드 지정 문자열('공개 웹 검색 교차 대조 — LAW_OC 미실시')로 교체. articleVerification.method를 'TOC 대조 + WebSearch 교차'로 수정. 내용 미확인 조문 10건(법 제28조의2·제30조 세부, 영 제111조·제112~114조 세부)을 uncheckableReferences로 이관, verified 26→16·uncheckable 0→10으로 산식 재계산(합계 26 유지). scope를 실제 수행 내용으로 재작성. | 워크시트 자체 기록(TOC만 보유, 기계 대조 미실시) |
+| 6 | authorities[2] 기재부장관 역할 층위 혼동 | wording(should-fix) | 선반영됨(고시금액 고시=법 제4조, 최소 금액 기준=영 제110조로 분리 서술). 유지. | — |
+| 7 | 제111조 제명 축약 | wording(should-fix) | 선반영됨('제111조(국가계약분쟁조정위원회의 위원)'). 유지. | law-cache TOC |
+| 8 | P09 계약절차 중지 '의결' 단정 | unverifiable(should-fix) | P09 name/action/blocker/legal_basis text의 '의결'→'결정'으로 완화, 세부 요건·주체·예외 미확인을 명시하고 confidence 0.75→0.7로 하향. bottlenecks[2]·fieldVerification·submittedDocuments의 '중지 의결'→'중지 결정'으로 통일. | 법 제30조 존재는 TOC 확인, 구체 메커니즘 원문 미확인 |
+| 9 | verifiedAt/checkedAt 2026-07-13 | schema-error(should-fix) | verifiedAt·checkedAt을 asOfDate·가이드 3절과 일관되게 2026-07-12로 수정. | 가이드 3절 하드 규칙 |
+
+### articleVerification 산식 재확인
+- citationEntries 19(캔버스 legalBasis 3 + 프로세스 노드 legal_basis 16), explicitCitationEntries 18(고시금액 항목은 조문번호 없음) — 변동 없음.
+- articleReferences 26 = verified 16 + missing 0 + uncheckable 10.
+- uncheckable 10 내역: 캔버스 법 제28조의2·제30조, 시행령 제111조·제112조·제113조·제114조(6) + 프로세스 노드 P08(영 제112조)·P09(법 제30조)·P10(영 제113조)·P11(영 제113조)(4). 모두 TOC로 번호·제명만 확인되고 내용 미확인.
+- needs-review 통과 조건: unresolved 1건(고시금액) + (missing+uncheckable) 10건 ≥ 1 충족.
+
+### 유지(수정하지 않은 것)
+- 조정 완료 50일(연장 50일), 조정안 15일 재판상 화해 효력: WebSearch(koit·kimchang) 교차 확인되어 유지.
+- 대상 최소 금액 구체액: 원문 미확인으로 본문 수치 없이 fieldVerification 유지.
+- 고시금액 고시: known-source 목록에 없어 unresolved(title-needs-confirmation) 유지.

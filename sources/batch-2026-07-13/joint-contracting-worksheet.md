@@ -51,4 +51,19 @@ slug: joint-contracting / name: 공동수급체 구성(공동계약) / type: 입
 ## sources / unresolved 처리
 
 - sources(known/registry): 국가계약법(법률), 국가계약법 시행령(대통령령), 국가계약법 시행규칙(부령) — 가이드 §4 식별자 재사용.
-- unresolved: (계약예규) 공동계약운용요령 — 알려진 출처·registry에 없음 → title-needs-confirmation. law-cache adminRuleId 2100000275812 존재하나 registry 미연결. LAW_OC 기계 대조로 식별자 확정 필요.
+- ~~unresolved: (계약예규) 공동계약운용요령~~ → 정정(2026-07-13 검증 반영): legal-source-registry.json 8행에 `(계약예규) 공동계약운용요령`(adminRuleId 27945, adminRuleSerial 2100000275812) 이미 기계 연결됨. 가이드 §4 line 109에 따라 registry 항목을 그대로 sources에 복사한다. 따라서 unresolved 없음(sources 4건: 법·영·규칙·예규).
+
+## 수정 이력 (2026-07-13, 검증 심사 반영)
+
+검증 심사자 지적 8건 반영. 근거 대조: 예규 조문은 law-cache 공동계약운용요령.md 원문, 법 제27조제1항은 WebSearch(casenote/law.go.kr) 재확인.
+
+| # | 위치 | 조치 | 사유·근거 |
+|---|---|---|---|
+| 1 | verification.status | article-verified → **needs-review** | 가이드 §1·§3 이번 배치 고정값. 상태 승격은 통합 시 LAW_OC 기계 대조에 위임. |
+| 2 | verification.method / scope | method를 가이드 §3 고정 문구("공개 웹 검색(WebSearch) 교차 대조 — 국가법령정보센터 원문 기계 대조(LAW_OC) 미실시")로 교체. scope에 '예규=law-cache 원문 대조, 법·영·규칙 본문=캐시 목차+WebSearch 교차'를 사실대로 구분 기재. | 법·영·규칙 law-cache는 TOC만 수록(국가계약법.md 62행, 제27조가 목차 제목으로만 존재). 조문 본문 34건 전부 기계 대조했다는 서술은 과대표시. |
+| 3 | verifiedAt / articleVerification.checkedAt | 2026-07-13 → **2026-07-12** | 가이드 §3 하드 규칙 및 asOfDate와 일치. |
+| 4 | articleVerification 집계 | articleReferences 34→**35**, verified 34→**26**, uncheckable 0→**9** (missing 0 유지). | needs-review는 (missing+uncheckable)≥1 필요(validate-data.mjs 232행). 법·영·규칙 조문 9건(canvas 법1·영1·규칙1 + process 법3·영2·규칙1)은 원문 본문 기계 대조 불가 → uncheckable. 예규 26건(canvas 11 + process 15)은 law-cache 원문 대조 → verified. 합계 35 = 지적7로 canvas에 제8조 1건 추가 반영. sources 4건은 registry/known 재사용으로 unresolved 0. |
+| 5 | P04 condition / legal_basis[1](예규 제9조제5항) | "추정가격 1,000억원 이상 공사" → "**시행령 제6장·제8장에 따른 공사 중** 추정가격 1,000억원 이상인 공사"로 한정어 보완. | 제9조제5항나목 원문: "시행령 제6장 및 제8장에 따른 공사중 추정가격이 1,000억원 이상인 공사". 예외는 대형공사(제6장)·기술제안입찰(제8장) 한정. |
+| 6 | P02 legal_basis[1](예규 제9조제6항) / bottlenecks[3] | "정하고 입찰공고에 명시한다" → "**정할 수 있으며, 이를 입찰공고에 명시하여야 한다**"(재량 표현 복원). 90일 요건에 "지역업체(제9조제6항제2호)" 한정 추가. | 제9조제6항 원문 "정할 수 있으며"(재량). 제9조제7항 90일 본점소재 요건은 제6항제2호 구성원 지역업체에 한정. |
+| 7 | canvas.legalBasis[3].articles | 조문 괄호 제목을 원문 공식 제명으로 교정(제4조 공동수급체 대표자의 선임, 제5조 공동수급협정서의 작성 및 제출, 제6조 계약의 체결, 제10조 보증금의 납부, 제13조 공동수급체 구성원의 제재), **제8조(입찰공고) 추가**. | P01이 예규 제8조제2항을 인용하는데 canvas 목록에 제8조 누락 → 캔버스-프로세스 인용 불일치 해소. law-cache 공식 제명 대조. |
+| 8 | P12 legal_basis[1](법 제27조제1항) | "계약을 이행할 때 부정한 행위를 한 부정당업자에 대하여 입찰 참가자격을 제한한다" → "**경쟁의 공정한 집행 또는 계약의 적정한 이행을 해칠 염려가 있는 자 등에 해당하는 부정당업자에게 2년 이내의 범위에서 대통령령으로 정하는 바에 따라 입찰 참가자격을 제한하여야 한다**" | 법 제27조제1항 기속 규정. WebSearch(law.go.kr/casenote) 재확인: "2년 이내의 범위에서 대통령령으로 정하는 바에 따라 ... 제한하여야 한다". 축약된 '부정한 행위' 표현이 각 호 요건을 흐려 정정. |

@@ -60,3 +60,20 @@
 - unresolved: 없음(legalBasis 2건 모두 registry 존재).
 - needs-review 통과 조건: (missing+uncheckable) ≥ 1 을 uncheckableReferences 4건(시행령 제8조·제11조의2, 법 제10조·제14조의2)으로 충족.
 - articleVerification: 노드 legal_basis 15건 = verified 11 + missing 0 + uncheckable 4.
+
+## 수정 이력 (2026-07-13, 검증 지적 반영)
+
+검증 심사자 지적 10건 반영. 새로 넣은 주장은 본인이 WebSearch로 재확인함(law.go.kr/easylaw/LBOX 스니펫).
+
+1. **verification.status/method/scope (schema-error)** — status `article-verified`→`needs-review`, method를 가이드 지정 문자열 "공개 웹 검색(WebSearch) 교차 대조 — 국가법령정보센터 원문 기계 대조(LAW_OC) 미실시"로 교체, scope를 'TOC로 조문 존재 확인 + WebSearch 교차 대조, 항 번호·수치 미확정'으로 수정. notes[0]과의 자기모순 해소.
+2. **articleVerification 집계 (schema-error)** — 법 제20조·영 제16조(과태료) 인용 삭제 반영 후 재집계: articleReferences 32→29(canvas 11 + 노드 18), citationEntries 21→20, verifiedReferences 32→21, uncheckableReferences 0→8. uncheckable은 본문 문구를 검색 확인 못 한 인용의 인스턴스: 법 제14조의2(1)+영 제8조(2)+영 제10조(3)+영 제11조(2)=8. needs-review 통과조건(uncheckable≥1) 충족. method도 TOC+WebSearch 기반으로 명시.
+3. **bottlenecks[2] (refuted)** — '과태료' 삭제, '감사 지적·실적 공표 대상이나 직접 제재 규정 없어 실효성이 실적 점검·공표 의존'으로 수정.
+4. **P10.action/legal_basis (refuted)** — action에서 '실적 미제출·계획 미수립은 과태료 대상' 삭제, 법 제20조 legal_basis 항목 제거(환류 근거는 영 제10조).
+5. **P04.deadline/legal_basis[0]/fieldVerification[0] (refuted)** — 2개월 기한을 법 제8조제1항으로 귀속(WebSearch 재확인: "매 회계연도의 시작 후 2개월 이내에…수립·공표", 제8조제2항 지체없이 제출). 시행령 제10조 text는 '세부 사항을 정한다(본문 미대조)'로 하향. deadline 괄호·fieldVerification[0] 근거 표기 '법 제8조제1항'으로 수정.
+6. **canvas.legalBasis (refuted)** — 법률 배열에서 '제20조(과태료)', 시행령 배열에서 '제16조(과태료의 부과기준)' 삭제. 과태료 실제 대상 확인은 fieldVerification 유지. (WebSearch 재확인: 법 제20조는 제18조 판매장소 설치·운영 위반 300만원 이하 과태료 전용.)
+7. **procedure[1] (wording)** — '지정한다'→'지정할 수 있다(지정 시 임무는 시행령 제8조의2)'로 완화. (WebSearch 재확인: 제6조의2 "…지정할 수 있다" 임의규정.)
+8. **P05.legal_basis[1]/fieldVerification[2] (wording)** — 공식 제명 「환경기술 및 환경산업 지원법」 제17조, 「자원의 절약과 재활용촉진에 관한 법률」 제33조으로 표기. (WebSearch 재확인.)
+9. **notes[1]↔fieldVerification (wording)** — 구매실적 증감사유 확인 기준(전년 대비 50%↑/30%↓, 시행령 제11조의2) 항목을 fieldVerification에 추가해 notes 서술과 일치시킴. (WebSearch 재확인: LBOX 시행령 제11조의2 "50퍼센트 이상 증가하거나 30퍼센트 이상 감소".)
+10. **verifiedAt/checkedAt (schema-error)** — 2026-07-13→2026-07-12로 통일(asOfDate·가이드 3절 하드 규칙과 일치).
+
+검증: `node -e JSON.parse(...)` 통과, `web/scripts/validate-data.mjs`에서 green-product-purchase 관련 스키마 오류 없음(잔여 'manifest 항목 없음'은 배치 공통 미등록 이슈로 콘텐츠 무관).

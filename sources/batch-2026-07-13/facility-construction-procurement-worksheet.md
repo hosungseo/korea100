@@ -57,3 +57,30 @@
 - easylaw PQ: https://easylaw.go.kr/CSP/CnpClsMain.laf?popMenu=ov&csmSeq=519&ccfNo=2&cciNo=3&cnpClsNo=2
 - 국가계약법 시행령 제58조 lbox / 제35조 lbox
 - 조달청 시설공사 계약업무 처리규정 law.go.kr admRul 2100000247710(연혁), 레지스트리 serial 2100000281276
+
+## 수정 이력 (2026-07-13 검증 지적 반영)
+
+검증 심사자 지적 5건을 반영해 아래와 같이 수정했다.
+
+1. [must-fix / schema-error] verification 블록 정정.
+   - status "article-verified" → "needs-review". verifiedAt·articleVerification.checkedAt "2026-07-13" → "2026-07-12".
+   - method를 가이드 지정 문자열("공개 웹 검색(WebSearch) 교차 대조 — 국가법령정보센터 원문 기계 대조(LAW_OC) 미실시")로 교체. articleVerification.method도 "law-cache 원문 대조(계약예규 전문)+WebSearch 교차 대조 — LAW_OC 미실시"로 정정.
+   - 이유: law-cache의 국가계약법·조달사업법 및 각 시행령은 조문 목차(제명)만 있고 조문 본문이 없어(예: 시행령 171행이 전부 목차) 본문 취지는 WebSearch로만 확인됨. 이 세션에서 조문 본문 33건 전부 verified 판정은 재현 불가. 계약예규 3종(공사계약일반조건·입찰참가자격사전심사요령·적격심사 세부기준)만 캐시 전문으로 본문 대조 가능.
+   - 집계 재산정: 명시 조문 35건 중 계약예규 원문 대조 6건 = verifiedReferences, 목차 확인 후 본문 WebSearch만 된 국가계약법령·조달사업법령 조문 29건 = uncheckableReferences, missing 0. citationEntries 29 / explicitCitationEntries 24. needs-review 통과조건(uncheckable≥1) 충족. unresolved는 8개 법령 모두 sources 연결이라 빈 배열.
+
+2. [must-fix / refuted] 종합심사낙찰제 근거 조항 분리.
+   - 종심제 대상(추정가격 100억원 이상 공사)은 국가계약법 시행령 제42조제4항, 적격심사(100억원 미만)는 제42조제1항. 제1항을 종심제 근거로 인용한 것은 오류.
+   - WebSearch 재확인(easylaw 종합심사낙찰제 본문): "시행령 제42조제4항의 공사 = 300억↑ 일반공사 / 300억 미만 간이형 / 고난이도 공사"로 종심제 대상은 제4항이 규정함을 확인.
+   - canvas.applicability를 "…적격심사(영 제42조제1항), 100억원 이상은 종합심사낙찰제(같은 영 제42조제4항)"로 분리. P04 legal_basis를 제42조제1항(적격)·제42조제4항(종심) 두 항목으로 분리.
+
+3. [should-fix / wording] canvas.legalBasis[3] 제42조 공식 제목 정정.
+   - "제42조(적격심사·종합심사낙찰제 낙찰자 결정)"(임의 요약) → "제42조(국고의 부담이 되는 경쟁입찰에서의 낙찰자 결정)"(law-cache 시행령 목차 61행 공식 제명 확인).
+
+4. [should-fix / wording] P06 제13조 항 귀속 정정.
+   - 심사기준 요소(이행실적·기술능력·재무상태 등)는 제13조제2항 소관. article을 "제13조제1항" → "제13조제1항·제2항"으로, text를 "제1항: 입찰 전 자격 사전심사로 적격자 선정 / 제2항: 심사기준 요소 평가"로 항 구분.
+
+5. [should-fix / wording] P11 준공검사 100억원/7일 연장 근거 정정.
+   - 영 제55조는 "기획재정부장관이 정하는 경우 7일 범위 연장"만 규정. "공사금액 100억원 이상 또는 기술적 특수성 시 7일 연장"은 (계약예규) 공사계약일반조건 제27조제2항 내용(law-cache 공사계약일반조건.md 295행 원문 대조 확인).
+   - P11 legal_basis에 (계약예규) 공사계약일반조건 제27조제2항 항목을 추가해 100억원 기준의 출처를 명확히 하고, 영 제55조 text는 "기획재정부장관이 정하는 경우 7일 범위 연장"으로 정정. deadline 표기는 근거를 갖춰 유지.
+
+수정 후 validate-data.mjs 통과(해당 파일은 manifest 미등록 경고만 남으며 이는 이번 배치 전 파일 공통), article-citations.test.mjs 0 fail, JSON.parse OK.
