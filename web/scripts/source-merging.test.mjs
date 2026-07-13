@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { mergeExistingSources } from "./lib/source-merging.mjs";
+import { filterUnresolvedAgainstSources, mergeExistingSources } from "./lib/source-merging.mjs";
 
 test("preserves curated metadata while refreshing generated source fields", () => {
   const sources = mergeExistingSources(
@@ -26,4 +26,33 @@ test("keeps a manually linked supporting source", () => {
   };
 
   assert.deepEqual(mergeExistingSources([], [supporting]), [supporting]);
+});
+
+test("keeps an explicitly pinned scheduled statute version", () => {
+  const generated = [{
+    sourceType: "statute",
+    officialName: "가상법",
+    mst: "100",
+    effectiveOn: "2026-07-01",
+  }];
+  const pinned = [{
+    sourceType: "statute",
+    officialName: "가상법",
+    mst: "200",
+    effectiveOn: "2026-12-03",
+    pinnedVersion: true,
+  }];
+
+  assert.deepEqual(mergeExistingSources(generated, pinned), pinned);
+});
+
+test("drops an unresolved item when a curated source links the same title", () => {
+  const unresolved = [{ law: "간호사의 진료지원업무 수행에 관한 규칙", kind: "부령" }];
+  const sources = [{
+    sourceType: "statute",
+    officialName: "간호사의 진료지원업무 수행에 관한 규칙",
+    mst: "288085",
+  }];
+
+  assert.deepEqual(filterUnresolvedAgainstSources(unresolved, sources), []);
 });
