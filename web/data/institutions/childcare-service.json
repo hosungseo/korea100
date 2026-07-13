@@ -1,0 +1,417 @@
+{
+ "slug": "childcare-service",
+ "name": "아이돌봄 서비스",
+ "oneLiner": "가정이 아이돌봄 서비스를 신청하고 소득 수준에 따른 정부 지원을 받아 이용하는 절차",
+ "type": "서비스 이용·비용지원형",
+ "priority": 234,
+ "whyFirst": "아이돌봄 서비스의 신청·결정·사후관리 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "아이돌봄 서비스 이용 신청, 정부지원 대상 확인, 서비스 연계와 비용 정산을 이용자·제공기관·지자체 관점에서 구분한다.",
+  "stakeholders": "이용가정, 서비스 제공기관, 지자체·성평등가족부, 아이돌보미",
+  "legalBasis": [
+   {
+    "law": "아이돌봄 지원법",
+    "articles": "제11조(서비스 제공기관 지정), 제12조(보호자 서비스 안내), 제13조(제공기관의 임무), 제13조의2(우선 제공), 제20조(비용 지원), 제21조(아이돌봄서비스 이용권), 제22조(비용 지원 신청), 제24조(조사), 제27조(비용 반환)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "서비스 제공기관",
+    "role": "접수·확인·결정 또는 서비스 연계"
+   },
+   {
+    "name": "지자체·성평등가족부",
+    "role": "접수·확인·결정 또는 서비스 연계"
+   },
+   {
+    "name": "아이돌보미",
+    "role": "접수·확인·결정 또는 서비스 연계"
+   }
+  ],
+  "procedure": [
+   "돌봄 필요·서비스 탐색",
+   "서비스·비용지원 신청",
+   "신청 접수·이용자 등록",
+   "소득·가구 요건 조사",
+   "보완자료 제출",
+   "지원등급·이용 승인",
+   "아이돌보미 연계",
+   "돌봄서비스 제공",
+   "본인부담·정부지원 정산",
+   "이용 변경·부당수급 환수"
+  ],
+  "moneyFlow": "급여·이용권·서비스 비용과 본인부담은 법령 및 연도별 운영기준에 따라 달라질 수 있다.",
+  "docsFlow": "신청·신고 기록 → 자격·사실 확인자료 → 결정·연계 통지 → 지급·이행 기록 → 사후관리 기록으로 이어진다.",
+  "bottlenecks": [
+   "사실관계와 자격 증빙",
+   "관계기관 간 정보·기록 연계",
+   "개별 상황에 따른 지원·결정 기준"
+  ],
+  "reformPoints": [
+   "신청 진행상태 안내 강화",
+   "기관 간 인계 기준의 명확화",
+   "결정 근거와 이의 경로의 가독성 개선"
+  ]
+ },
+ "related": [
+  "부모급여·첫만남이용권",
+  "육아기 근로시간 단축",
+  "한부모가족 지원"
+ ],
+ "fieldVerification": [
+  "실제 온라인·방문 신청 경로",
+  "연도별 지원금액·자격 기준",
+  "지자체·기관별 운영 세부기준"
+ ],
+ "process": {
+  "institution_name": "아이돌봄 서비스",
+  "law_name": "아이돌봄 지원법",
+  "lanes": [
+   "이용가정",
+   "서비스 제공기관",
+   "지자체·성평등가족부",
+   "아이돌보미"
+  ],
+  "stages": [
+   "G0 상황·상담",
+   "G1 신청·접수",
+   "G2 조사·확인",
+   "G3 결정·연계",
+   "G4 지급·이행",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "돌봄 필요·서비스 탐색",
+    "lane": "이용가정",
+    "stage": "G0 상황·상담",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "이용가정",
+    "action": "돌봄 필요·서비스 탐색",
+    "output_documents": [
+     "돌봄 필요·서비스 탐색 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "아이돌봄 지원법",
+      "article": "제12조",
+      "text": "아이돌봄 지원법 제12조(보호자에 대한 아이돌봄 서비스 안내 등)에 따라 시·도지사·시장·군수·구청장 및 제공기관이 보호자에게 서비스 내용·인력·기관 이력을 안내하여 돌봄 필요를 탐색하는 단계"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "서비스·비용지원 신청",
+    "lane": "이용가정",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "이용가정",
+    "action": "서비스·비용지원 신청",
+    "output_documents": [
+     "서비스·비용지원 신청 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "아이돌봄 지원법",
+      "article": "제22조",
+      "text": "아이돌봄 지원법 제22조에 따른 서비스·비용지원 신청 단계"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "신청 접수·이용자 등록",
+    "lane": "서비스 제공기관",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "서비스 제공기관",
+    "action": "신청 접수·이용자 등록",
+    "output_documents": [
+     "신청 접수·이용자 등록 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "아이돌봄 지원법",
+      "article": "제13조",
+      "text": "아이돌봄 지원법 제13조에 따른 신청 접수·이용자 등록 단계"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "소득·가구 요건 조사",
+    "lane": "지자체·성평등가족부",
+    "stage": "G2 조사·확인",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "지자체·성평등가족부",
+    "action": "소득·가구 요건 조사",
+    "output_documents": [
+     "소득·가구 요건 조사 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "아이돌봄 지원법",
+      "article": "제24조",
+      "text": "아이돌봄 지원법 제24조에 따른 소득·가구 요건 조사 단계"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "보완자료 제출",
+    "lane": "이용가정",
+    "stage": "G2 조사·확인",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "이용가정",
+    "action": "보완자료 제출",
+    "output_documents": [
+     "보완자료 제출 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "아이돌봄 지원법",
+      "article": "제22조",
+      "text": "아이돌봄 지원법 제22조에 따른 보완자료 제출 단계"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "지원등급·이용 승인",
+    "lane": "지자체·성평등가족부",
+    "stage": "G3 결정·연계",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지자체·성평등가족부",
+    "action": "지원등급·이용 승인",
+    "output_documents": [
+     "지원등급·이용 승인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "아이돌봄 지원법",
+      "article": "제20조",
+      "text": "아이돌봄 지원법 제20조에 따른 지원등급·이용 승인 단계"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "아이돌보미 연계",
+    "lane": "서비스 제공기관",
+    "stage": "G3 결정·연계",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "서비스 제공기관",
+    "action": "아이돌보미 연계",
+    "output_documents": [
+     "아이돌보미 연계 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "아이돌봄 지원법",
+      "article": "제13조",
+      "text": "아이돌봄 지원법 제13조에 따른 아이돌보미 연계 단계"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "돌봄서비스 제공",
+    "lane": "아이돌보미",
+    "stage": "G4 지급·이행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "아이돌보미",
+    "action": "돌봄서비스 제공",
+    "output_documents": [
+     "돌봄서비스 제공 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "아이돌봄 지원법",
+      "article": "제13조",
+      "text": "아이돌봄 지원법 제13조에 따른 돌봄서비스 제공 단계"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "본인부담·정부지원 정산",
+    "lane": "서비스 제공기관",
+    "stage": "G4 지급·이행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "서비스 제공기관",
+    "action": "본인부담·정부지원 정산",
+    "output_documents": [
+     "본인부담·정부지원 정산 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "아이돌봄 지원법",
+      "article": "제21조",
+      "text": "아이돌봄 지원법 제21조(아이돌봄서비스 이용권)에 따라 비용 지원분을 이용권으로 지급·정산하고 보호자가 본인부담분을 부담하는 단계(제20조 비용 지원 기준 연계)"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "이용 변경·부당수급 환수",
+    "lane": "지자체·성평등가족부",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지자체·성평등가족부",
+    "action": "이용 변경·부당수급 환수",
+    "output_documents": [
+     "이용 변경·부당수급 환수 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "아이돌봄 지원법",
+      "article": "제27조",
+      "text": "아이돌봄 지원법 제27조에 따른 이용 변경·부당수급 환수 단계"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건·기한·지원 범위는 시행령, 고시 및 사실관계에 따라 달라질 수 있다.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (C) P01 '돌봄 필요·서비스 탐색' 근거를 제20조(비용 지원)에서 제12조(보호자에 대한 아이돌봄 서비스 안내 등)로 정정; (C) P05 '보완자료 제출' 근거를 제22조(비용 지원 신청)에서 제24조(조사ㆍ질문 등)로 정정; (C) P09 '본인부담·정부지원 정산' 근거를 제20조에서 제21조(아이돌봄서비스 이용권)로 정정. 대조 법령 MST: 285395(아이돌봄 지원법). 법의 침묵: 비용 지원 결정에 대한 이의신청 절차가 아이돌봄지원법에 별도 명시 없음(각하·취소는 제24조제3항 행정처분). 법의 침묵: 이용권 신청·발급 세부 절차는 제21조제3항 성평등가족부령 위임."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 19건 가운데 19건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "아이돌봄 지원법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "아이돌봄 지원법",
+    "lawId": "011537",
+    "mst": "285395",
+    "promulgatedOn": "2026-04-07",
+    "effectiveOn": "2026-04-23",
+    "officialUrl": "https://law.go.kr/법령/아이돌봄지원법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 11,
+   "explicitCitationEntries": 11,
+   "articleReferences": 19,
+   "verifiedReferences": 19,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

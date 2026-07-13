@@ -473,6 +473,54 @@
       "text": "배출시설등 및 방지시설의 운영ㆍ관리 등"
      }
     ]
+   },
+   {
+    "id": "P17",
+    "name": "가동개시 신고·현장확인·수리",
+    "lane": "환경부",
+    "stage": "G4 운영",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "환경부",
+    "receiver": "사업장",
+    "action": "가동개시 신고 접수, 15일 내 현장확인 후 수리·신고필증 발급(부적합 시 개선명령)",
+    "output_documents": [
+     "가동개시 신고필증"
+    ],
+    "deadline": "신고 접수일부터 15일(변경신고는 10일) 이내 현장확인·수리",
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제12조(가동개시 신고 및 수리)",
+      "text": "사업자는 시설 설치·변경을 완료하고 가동하려는 경우 가동개시 신고를 하여야 하고(제1항), 기후에너지환경부장관은 신고 접수일부터 15일(변경신고 10일, 시행규칙 제10조제2항) 이내에 현장확인을 실시하여 적합하면 신고를 수리하며(제2항), 부적합 시 기간을 정해 개선을 명할 수 있다(제4항)."
+     }
+    ]
+   },
+   {
+    "id": "P18",
+    "name": "허가배출기준 초과 개선명령",
+    "lane": "감독",
+    "stage": "G5 처분",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "환경부",
+    "receiver": "사업장",
+    "action": "허가배출기준 초과 시 기간 정해 개선명령, 미이행·계속초과 시 6개월 이내 조업정지·사용중지",
+    "output_documents": [
+     "개선명령서"
+    ],
+    "deadline": "미이행 시 6개월 이내 조업정지·사용중지",
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "환경오염시설의 통합관리에 관한 법률",
+      "article": "제14조(개선명령 등)",
+      "text": "기후에너지환경부장관은 오염물질등이 허가배출기준을 초과한다고 인정되는 경우 기간을 정해 개선을 명할 수 있고(제1항), 개선명령 미이행 또는 계속 초과 시 6개월 이내의 조업정지·사용중지를 명할 수 있다(제2항)."
+     }
+    ]
    }
   ],
   "edges": [
@@ -515,8 +563,8 @@
     "id": "E06",
     "source": "P06",
     "target": "P07",
-    "type": "sequence",
-    "label": "보완"
+    "type": "loop",
+    "label": "서류 수정·보완 요청(반려)"
    },
    {
     "id": "E07",
@@ -587,17 +635,46 @@
     "target": "P15",
     "type": "sequence",
     "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P09",
+    "target": "P17",
+    "type": "message",
+    "label": "설치 완료 후 가동개시 신고"
+   },
+   {
+    "id": "E17",
+    "source": "P17",
+    "target": "P11",
+    "type": "sequence",
+    "label": "신고 수리"
+   },
+   {
+    "id": "M02",
+    "source": "P16",
+    "target": "P18",
+    "type": "message",
+    "label": "허가배출기준 초과"
+   },
+   {
+    "id": "E18",
+    "source": "P18",
+    "target": "P16",
+    "type": "loop",
+    "label": "개선 완료 후 재가동"
    }
   ],
   "warnings": [
-   "MST 287993. 패키지 ε. P03 분기는 순차(대행→신청)로 완화."
+   "MST 287993. 패키지 ε. P03 분기는 순차(대행→신청)로 완화.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (E) 법정 필수단계 누락 보완 — 가동개시 신고·현장확인·수리 노드(P17, 법 제12조, 접수일부터 15일 현장확인) 및 허가배출기준 초과 개선명령 노드(P18, 법 제14조, 미이행 시 6개월 조업정지) 추가. 기존 도표는 허가 후 곧바로 운영으로 진행하여 가동개시 수리·개선명령 단계가 누락되어 있었음. (D) 법정기한 명시 — P17 현장확인 15일(시행규칙 제10조제2항), P18 조업정지 6개월(법 제14조제2항). (L0 backward-sequence 판정) E06 P06→P07을 sequence→loop로 변경: 제7조제2항 서류 수정·보완 요청은 반려·보완 회귀이며 P07→P04 재신청 loop(E07)와 짝을 이룸. 대조 MST: 통합관리법 287993, 시행령 283023, 시행규칙 282255. 법의 침묵: 통합허가 신청에 대한 장관의 허가 여부 결정 처리기한은 법령에 명시 없음. 법의 침묵: 사전협의 결과 통지 기한은 조문에 없음(후속 허가신청 기한 1년만 규정)."
   ]
  },
  "verification": {
   "status": "article-verified",
-  "verifiedAt": "2026-07-12",
-  "method": "법제처 DRF + L3 당사자 워크스루",
-  "scope": "L3 당사자 워크스루 후 명시 조문 13건 존재 확인 13건",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 36건 가운데 36건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
    "통합관리법 MST 287993"
   ],
@@ -615,12 +692,12 @@
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-12",
-   "method": "DRF 목차·조문제목 대조",
-   "citationEntries": 13,
-   "explicitCitationEntries": 13,
-   "articleReferences": 13,
-   "verifiedReferences": 13,
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 26,
+   "explicitCitationEntries": 26,
+   "articleReferences": 36,
+   "verifiedReferences": 36,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }

@@ -324,8 +324,8 @@
     "legal_basis": [
      {
       "law": "부동산 거래신고 등에 관한 법률",
-      "article": "제23조(청문)",
-      "text": "청문"
+      "article": "제28조(과태료)",
+      "text": "임대차 신고 미신고·거짓신고 과태료(제5항제3호: 제6조의2·제6조의3)"
      }
     ]
    },
@@ -473,7 +473,7 @@
     "id": "E05",
     "source": "P04",
     "target": "P05",
-    "type": "sequence",
+    "type": "loop",
     "label": "보완"
    },
    {
@@ -555,14 +555,19 @@
    }
   ],
   "warnings": [
-   "2026-07-12 부동산 패키지. MST 259641."
+   "2026-07-12 부동산 패키지. MST 259641.",
+   {
+    "date": "2026-07-13",
+    "type": "L2-blind-recon",
+    "message": "2026-07-13 L2 블라인드 재구성 대조 정정: (loop) E05 — L0 backward-sequence P04(신고 접수, G2)→P05(보완 요구, G1) 판정: 제6조의4제2·3항(제5조 검증·제6조 조사 준용)에 따라 신고관청이 접수 후 부적정 사항에 보완을 요구하고 P05→P14(재신고 루프)→P03로 재신고하는 반려·보완 회귀 구조이므로 edge type을 sequence→loop로 정정(단계 역행은 순서 오류가 아니라 보완 회귀). (C) P11 legal_basis — 과태료·제재 행위의 직접 근거는 제28조(과태료)이며 제5항제3호가 제6조의2·제6조의3 신고 위반 과태료를 규정함에도 제23조(청문)만 기재되어 있어 제28조로 정정(청문은 처분 전 절차이지 과태료 부과 근거가 아님). 참조 MST: 부동산 거래신고 등에 관한 법률 MST=259641. 법의 침묵: (1) 제6조의2제4항 신고필증 발급은 '지체 없이'로만 규정되어 구체적 처리기한이 법률에 명시되지 않음. (2) 검증·조사(제6조의4 준용) 결과 보완요구의 횟수·기한이 임대차 신고에 대해 법률에 별도로 정해져 있지 않음."
+   }
   ]
  },
  "verification": {
   "status": "article-verified",
-  "verifiedAt": "2026-07-12",
-  "method": "법제처 DRF + L3",
-  "scope": "L3 당사자 워크스루 후 명시 조문 10건 존재 확인 10건",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 18건 가운데 18건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
    "부동산 거래신고 등에 관한 법률 MST 259641"
   ],
@@ -591,12 +596,12 @@
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-12",
-   "method": "DRF 목차·조문제목 대조",
-   "citationEntries": 10,
-   "explicitCitationEntries": 10,
-   "articleReferences": 10,
-   "verifiedReferences": 10,
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 19,
+   "explicitCitationEntries": 18,
+   "articleReferences": 18,
+   "verifiedReferences": 18,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }

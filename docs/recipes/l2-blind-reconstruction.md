@@ -29,7 +29,15 @@ Now read web/data/institutions/<slug>.json and diff against your reconstruction.
 
 cd /Users/seohoseong/korea100/web && node scripts/generate-field-verification-queue.mjs && node scripts/validate-data.mjs
 Validation MUST print 검증 성공 (check exit code directly, do not pipe to tail).
-Then: git add web/data/ docs/ && git commit -m "fix: <slug> L2 blind-recon adjudication — <n> corrections"
+Then stage only the files produced by this audit. For one-institution work, use:
+
+```bash
+git add web/data/institutions/<slug>.json docs/field-verification-queue.json docs/field-verification-queue.md
+```
+
+If an audit report was intentionally updated, add that report by its exact path. Never use broad paths such as `git add web/data/ docs/`, because concurrent agents' uncommitted files can be accidentally included.
+
+Then commit with: `git commit -m "fix: <slug> L2 blind-recon adjudication — <n> corrections"`
 If commit fails on index.lock, sleep 2 and retry (max 3).
 End commit message with:
 Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>

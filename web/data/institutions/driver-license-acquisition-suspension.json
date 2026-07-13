@@ -1,0 +1,416 @@
+{
+ "slug": "driver-license-acquisition-suspension",
+ "name": "운전면허 취득·정지·취소",
+ "oneLiner": "운전면허 취득·정지·취소의 신청·심사·결정·사후관리 절차",
+ "type": "시험·행정처분형",
+ "priority": 250,
+ "whyFirst": "운전면허 취득·정지·취소의 핵심 행위자와 결정 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "운전면허 취득·정지·취소는 응시요건 확인 → 시험 신청·응시 → 면허 발급 → 갱신·적성검사와, 위반 사실 확인·사전통지 → 정지·취소 → 이의신청·심사 또는 면허증 반납으로 이어지는 공적 절차다.",
+  "stakeholders": "응시자·운전자, 운전면허시험장, 시·도경찰청, 도로교통공단",
+  "legalBasis": [
+   {
+    "law": "도로교통법",
+    "articles": "제80조(운전면허), 제83조(운전면허시험), 제87조(갱신·적성검사), 제93조(취소·정지)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "운전면허시험장",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "시·도경찰청",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "도로교통공단",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "응시·교육 요건 확인",
+   "시험 응시 신청",
+   "학과·기능·도로주행 시험",
+   "면허 발급",
+   "갱신·적성검사",
+   "위반 사실 확인·처분 사전통지",
+   "정지·취소 처분",
+   "처분 이의신청",
+   "이의심사·결과 통지"
+  ],
+  "moneyFlow": "수수료·과태료·점용료 등 금전부담은 법령과 개별 처분 조건에 따라 달라질 수 있다.",
+  "docsFlow": "신청·단속 기록 → 검토·심사 자료 → 결정·통지 → 이행·납부 기록 → 사후관리로 이어진다.",
+  "bottlenecks": [
+   "자격·차량·시설 기준 충족",
+   "관계기관 협의와 자료 연계",
+   "처분 이후 이행 관리"
+  ],
+  "reformPoints": [
+   "처리상태 안내 강화",
+   "요건·기한 가독성 개선",
+   "온라인 신청·보완 경로 명확화"
+  ]
+ },
+ "related": [
+  "교통과태료·범칙금 부과",
+  "자동차 등록·이전",
+  "모바일 신분증"
+ ],
+ "fieldVerification": [
+  "실제 온라인·방문 접수 경로",
+  "기관별 처리기한·수수료",
+  "지역별 세부 운영기준"
+ ],
+ "process": {
+  "institution_name": "운전면허 취득·정지·취소",
+  "law_name": "도로교통법",
+  "lanes": [
+   "응시자·운전자",
+   "운전면허시험장",
+   "시·도경찰청",
+   "도로교통공단"
+  ],
+  "stages": [
+   "G0 준비",
+   "G1 신청·접수",
+   "G2 조사·검토",
+   "G3 결정",
+   "G4 이행·납부",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "응시·교육 요건 확인",
+    "lane": "응시자·운전자",
+    "stage": "G0 준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "응시자·운전자",
+    "action": "응시·교육 요건 확인",
+    "output_documents": [
+     "응시·교육 요건 확인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도로교통법",
+      "article": "제80조",
+      "text": "도로교통법 제80조에 따른 응시·교육 요건 확인 단계"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "시험 응시 신청",
+    "lane": "응시자·운전자",
+    "stage": "G0 준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "응시자·운전자",
+    "action": "응시서류를 갖춰 운전면허시험에 응시한다.",
+    "output_documents": [
+     "시험 응시 신청 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도로교통법",
+      "article": "제83조",
+      "text": "도로교통법 제83조에 따른 시험 응시 신청 단계"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "학과·기능·도로주행 시험",
+    "lane": "운전면허시험장",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "운전면허시험장",
+    "action": "학과·기능·도로주행 시험",
+    "output_documents": [
+     "학과·기능·도로주행 시험 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도로교통법",
+      "article": "제83조",
+      "text": "도로교통법 제83조에 따른 학과·기능·도로주행 시험 단계"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "면허 발급",
+    "lane": "도로교통공단",
+    "stage": "G2 조사·검토",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "도로교통공단",
+    "action": "면허 발급",
+    "output_documents": [
+     "면허 발급 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "도로교통법",
+      "article": "제85조",
+      "text": "도로교통법 제85조(운전면허증의 발급 등)에 따라 시·도경찰청장은 운전면허시험 합격자에게 운전면허증을 발급하며, 면허의 효력은 발급받은 때부터 발생한다"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "갱신·적성검사",
+    "lane": "응시자·운전자",
+    "stage": "G3 결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "응시자·운전자",
+    "action": "갱신·적성검사",
+    "output_documents": [
+     "갱신·적성검사 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도로교통법",
+      "article": "제87조",
+      "text": "도로교통법 제87조에 따른 갱신·적성검사 단계"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "위반 사실 확인·처분 사전통지",
+    "lane": "시·도경찰청",
+    "stage": "G3 결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시·도경찰청",
+    "action": "처분 사유가 되는 위반 사실을 확인하고 예정 처분을 통지한다.",
+    "output_documents": [
+     "위반 사실 통지 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도로교통법",
+      "article": "제93조",
+      "text": "도로교통법 제93조에 따른 위반 사실 통지 단계"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "정지·취소 처분",
+    "lane": "시·도경찰청",
+    "stage": "G4 이행·납부",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시·도경찰청",
+    "action": "정지·취소 처분",
+    "output_documents": [
+     "정지·취소 처분 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도로교통법",
+      "article": "제93조",
+      "text": "도로교통법 제93조에 따른 정지·취소 처분 단계"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "처분 이의신청",
+    "lane": "응시자·운전자",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "응시자·운전자",
+    "action": "정지·취소 처분에 이의가 있으면 법정 기간 안에 이의를 신청한다.",
+    "output_documents": [
+     "이의·재취득 관리 기록"
+    ],
+    "deadline": "처분받은 날부터 60일 이내(이의신청)",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도로교통법",
+      "article": "제94조",
+      "text": "도로교통법 제94조(운전면허 처분에 대한 이의신청)에 따라 취소·정지처분에 이의가 있는 사람은 처분받은 날부터 60일 이내에 시·도경찰청장에게 이의를 신청할 수 있고, 이의심의위원회 심의를 거친다"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "운전면허증 반납",
+    "lane": "응시자·운전자",
+    "stage": "G4 이행·납부",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "응시자·운전자",
+    "action": "운전면허증 반납",
+    "output_documents": [
+     "운전면허증 반납 기록"
+    ],
+    "deadline": "사유 발생일부터 7일 이내",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도로교통법",
+      "article": "제95조",
+      "text": "도로교통법 제95조(운전면허증의 반납)에 따라 취소·정지처분을 받은 사람은 그 사유가 발생한 날부터 7일 이내에 주소지 관할 시·도경찰청장에게 운전면허증을 반납하여야 한다"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "이의심사·결과 통지",
+    "lane": "시·도경찰청",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시·도경찰청",
+    "action": "이의신청을 심사하고 그 결과를 신청인에게 통지한다.",
+    "output_documents": [
+     "이의신청 결정 통지"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도로교통법",
+      "article": "제94조",
+      "text": "운전면허 처분에 대한 이의신청과 심사 결과 통지"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P07",
+    "target": "P09",
+    "type": "sequence",
+    "label": "처분 후 면허증 반납"
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P10",
+    "type": "sequence",
+    "label": "이의 심사"
+   }
+  ],
+  "warnings": [
+   "개별 신청·처분의 요건·기한·금액은 사실관계와 하위규정에 따라 달라질 수 있다.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (C) P04 면허 발급 근거를 제80조→제85조(운전면허증의 발급)로 수정. (C) P08 이의·재취득 관리 근거를 제80조→제94조(이의신청, 60일)로 수정하고 기한 명시. (E) 운전면허증 반납 노드(P09, 제95조 7일) 신설·연결. 대조 법령 MST 281875(도로교통법). L0 지적: empty-lane·backward-sequence 해당 없음(4개 레인 모두 사용, 스테이지 순서 단조). 법의 침묵: 이의심의위원회 심의기한은 법률에 미규정(행정안전부령 위임). 법의 침묵: 임시운전증명서 유효기간은 법률 미규정(행정안전부령 위임)."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 14건 가운데 14건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "도로교통법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "도로교통법",
+    "lawId": "001638",
+    "mst": "281875",
+    "promulgatedOn": "2025-12-30",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/도로교통법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 11,
+   "explicitCitationEntries": 11,
+   "articleReferences": 14,
+   "verifiedReferences": 14,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

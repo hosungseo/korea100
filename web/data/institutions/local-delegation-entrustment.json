@@ -1,0 +1,613 @@
+{
+ "slug": "local-delegation-entrustment",
+ "name": "인허가 대행·위임(지자체 창구)",
+ "oneLiner": "국가·시도의 사무를 지자체 창구에 위임·위탁하고 처리·감사하는 절차",
+ "type": "위임·창구형",
+ "priority": 213,
+ "whyFirst": "인허가 대행·위임(지자체 창구)의 권한·절차·주민 참여 지점을 한 흐름으로 확인한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "인허가 대행·위임(지자체 창구)는 국가·시도의 사무를 지자체 창구에 위임·위탁하고 처리·감사하는 절차 법정 절차를 한 장에서 확인하도록 정리한 제도다.",
+  "stakeholders": "주민·이해관계자, 지방자치단체, 지방의회·선거관리기관, 행정안전부와 관계 중앙기관이 단계별로 관여한다.",
+  "legalBasis": [
+   {
+    "law": "지방자치법",
+    "articles": "제115조(국가사무의 위임), 제116조(사무 관리·집행권), 제117조(사무의 위임 등·조례·규칙 위임), 제168조(지자체 간 사무 위탁), 제185조(위임사무 지도·감독)",
+    "kind": "법률"
+   },
+   {
+    "law": "행정권한의 위임 및 위탁에 관한 규정",
+    "articles": "제3조(위임·위탁 기준), 제4조(재위임), 제5조(사무 처리), 제9조(감사), 제11조(민간위탁 기준), 제12조(민간위탁 대상기관 선정), 제13조의2(재위탁)",
+    "kind": "대통령령"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "지방자치단체",
+    "role": "접수·검토·집행과 공개"
+   },
+   {
+    "name": "지방의회·선거관리기관",
+    "role": "의결·투표 등 법정 절차 수행"
+   },
+   {
+    "name": "행정안전부·관계기관",
+    "role": "제도 총괄·협의·감독"
+   },
+   {
+    "name": "주민·이해관계자",
+    "role": "의견·청구·자료 제출과 권리 행사"
+   }
+  ],
+  "procedure": [
+   "대상·사안 인지",
+   "의견·청구 제출",
+   "접수·공고",
+   "관할·요건 확인",
+   "관계기관 협의",
+   "위임·위탁 방식 결정",
+   "결정 통지·공개",
+   "집행·사후관리"
+  ],
+  "moneyFlow": "제도별 교부금·예산·자산·세입의 세부 산정과 집행 기준은 시행령·조례·예산편성 기준을 함께 확인해야 한다.",
+  "docsFlow": "의견·청구서 → 접수·공고 → 요건 검토·협의 → 의결·결정서 → 통지·공개 → 집행 기록 → 결과보고로 이어진다.",
+  "bottlenecks": [
+   "지방자치단체별 조례·기준의 차이",
+   "주민 참여와 법정 요건 판단의 시차",
+   "관계기관 협의와 의결 일정",
+   "결정 이후 공개·집행 기록의 단절"
+  ],
+  "reformPoints": [
+   "판단 기준과 산정 근거의 공개",
+   "주민 제출 자료의 전산 연계",
+   "의결·결정·집행 이력의 연결",
+   "지자체 간 절차 안내 표준화"
+  ]
+ },
+ "related": [
+  "지방의회 운영",
+  "조례 제정",
+  "주민조례청구",
+  "주민감사청구"
+ ],
+ "fieldVerification": [
+  "해당 지자체 조례·규칙의 적용 범위와 최신 개정",
+  "실제 접수·공고·통지 서식과 전산 경로",
+  "관계기관 협의와 주민 참여의 운영 관행",
+  "사무 위임·위탁 대상은 지자체 조례·규칙 위임 — 부산광역시 사무위임 규칙(행정권한 위임·위탁 규정 제4조 근거, 시장→구청장 재위임) 예시 확인, 지자체별 상이"
+ ],
+ "process": {
+  "institution_name": "인허가 대행·위임(지자체 창구)",
+  "law_name": "행정권한의 위임 및 위탁에 관한 규정",
+  "lanes": [
+   "주민·이해관계자",
+   "지방자치단체",
+   "지방의회·선관위",
+   "중앙부처·관계기관"
+  ],
+  "stages": [
+   "G0 대상인지",
+   "G1 접수·제안",
+   "G2 요건검토",
+   "G3 심의·결정",
+   "G4 집행·공개",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "대상·사안 인지",
+    "lane": "주민·이해관계자",
+    "stage": "G0 대상인지",
+    "type": "notice",
+    "status": "done",
+    "progress": 100,
+    "actor": "주민·이해관계자",
+    "action": "제도 적용 대상과 쟁점을 확인",
+    "output_documents": [
+     "대상 확인 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "행정권한의 위임 및 위탁에 관한 규정",
+      "article": "제3조",
+      "text": "위임 및 위탁의 기준 등에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "의견·청구 제출",
+    "lane": "주민·이해관계자",
+    "stage": "G1 접수·제안",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "주민·이해관계자",
+    "action": "주민·이해관계자가 의견·청구 또는 자료를 제출",
+    "output_documents": [
+     "의견·청구서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "행정권한의 위임 및 위탁에 관한 규정",
+      "article": "제3조",
+      "text": "위임 및 위탁의 기준 등에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "접수·공고",
+    "lane": "지방자치단체",
+    "stage": "G1 접수·제안",
+    "type": "system",
+    "status": "done",
+    "progress": 100,
+    "actor": "지방자치단체",
+    "action": "접수 사실과 절차를 공고·안내",
+    "output_documents": [
+     "접수·공고 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "행정권한의 위임 및 위탁에 관한 규정",
+      "article": "제3조",
+      "text": "위임 및 위탁의 기준 등에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "관할·요건 확인",
+    "lane": "지방자치단체",
+    "stage": "G2 요건검토",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "지방자치단체",
+    "action": "관할과 법정 요건을 확인",
+    "output_documents": [
+     "요건 검토서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "행정권한의 위임 및 위탁에 관한 규정",
+      "article": "제3조",
+      "text": "위임 및 위탁의 기준 등에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "법정 기준 검토",
+    "lane": "지방자치단체",
+    "stage": "G2 요건검토",
+    "type": "gateway",
+    "status": "current",
+    "progress": 45,
+    "actor": "지방자치단체",
+    "action": "위임·위탁 대상 사무와 조례·규칙 근거를 검토(국가사무 기관위임 원칙)",
+    "output_documents": [
+     "검토 의견"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지방자치법",
+      "article": "제115조",
+      "text": "시·도와 시·군·구에서 시행하는 국가사무는 시·도지사와 시장·군수·구청장에게 위임하여 수행하는 것을 원칙으로 한다."
+     },
+     {
+      "law": "지방자치법",
+      "article": "제116조",
+      "text": "지방자치단체의 장은 그 지방자치단체의 사무와 법령에 따라 위임된 사무를 관리하고 집행한다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "관계기관 협의",
+    "lane": "중앙부처·관계기관",
+    "stage": "G3 심의·결정",
+    "type": "system",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "중앙부처·관계기관",
+    "action": "중앙행정기관의 장이 국가사무를 지자체장에게 위임하고 재위임 기준을 적용",
+    "output_documents": [
+     "협의 결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "행정권한의 위임 및 위탁에 관한 규정",
+      "article": "제3조",
+      "text": "행정기관의 장은 그 권한의 일부를 위임 또는 위탁하며, 그 기준을 정한다."
+     },
+     {
+      "law": "행정권한의 위임 및 위탁에 관한 규정",
+      "article": "제4조",
+      "text": "위임·위탁받은 사무의 일부를 하급행정기관 등에 재위임할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "주민·기관 의견 제출",
+    "lane": "주민·이해관계자",
+    "stage": "G3 심의·결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민·이해관계자",
+    "action": "의견과 사실관계 자료를 제출",
+    "output_documents": [
+     "의견서·증빙"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "행정권한의 위임 및 위탁에 관한 규정",
+      "article": "제4조",
+      "text": "재위임에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "보완 요구",
+    "lane": "지방자치단체",
+    "stage": "G2 요건검토",
+    "type": "task",
+    "status": "risk",
+    "progress": 0,
+    "actor": "지방자치단체",
+    "action": "판단에 필요한 자료 보완을 요구",
+    "output_documents": [
+     "보완 요구서"
+    ],
+    "deadline": null,
+    "blocker": "기준 적용과 사실관계 자료의 불일치",
+    "confidence": 0.78,
+    "legal_basis": [
+     {
+      "law": "행정권한의 위임 및 위탁에 관한 규정",
+      "article": "제3조",
+      "text": "위임 및 위탁의 기준 등에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "보완 자료 제출",
+    "lane": "주민·이해관계자",
+    "stage": "G2 요건검토",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민·이해관계자",
+    "action": "보완 자료를 제출해 재검토를 받음",
+    "output_documents": [
+     "보완 자료"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "행정권한의 위임 및 위탁에 관한 규정",
+      "article": "제3조",
+      "text": "위임 및 위탁의 기준 등에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "위임·위탁 방식 결정",
+    "lane": "지방의회·선관위",
+    "stage": "G3 심의·결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지방의회·선관위",
+    "action": "지방자치단체의 장이 조례·규칙으로 사무의 위임·위탁 방식을 정함(내부위임·지자체 위탁·민간위탁), 조례는 지방의회 의결",
+    "output_documents": [
+     "사무위임·위탁 조례·규칙"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지방자치법",
+      "article": "제117조제1항",
+      "text": "지방자치단체의 장은 조례나 규칙으로 정하는 바에 따라 그 권한에 속하는 사무의 일부를 보조기관·소속 행정기관·하부행정기관에 위임할 수 있다."
+     },
+     {
+      "law": "지방자치법",
+      "article": "제117조제2항",
+      "text": "지방자치단체의 장은 조례나 규칙으로 정하는 바에 따라 사무의 일부를 관할 지방자치단체나 공공단체 또는 그 기관에 위임하거나 위탁할 수 있다."
+     },
+     {
+      "law": "지방자치법",
+      "article": "제117조제3항",
+      "text": "주민의 권리·의무와 직접 관련되지 아니하는 조사·검사·검정·관리업무 등을 법인·단체·개인에게 민간위탁할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "결정 통지·공개",
+    "lane": "지방자치단체",
+    "stage": "G4 집행·공개",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지방자치단체",
+    "action": "결정과 적용 범위를 통지·공개",
+    "output_documents": [
+     "통지·공개 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "행정권한의 위임 및 위탁에 관한 규정",
+      "article": "제3조",
+      "text": "위임 및 위탁의 기준 등에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "집행·교부·관리",
+    "lane": "지방자치단체",
+    "stage": "G4 집행·공개",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지방자치단체",
+    "action": "수임·수탁 창구가 인허가 등 위임·위탁 사무를 접수·처리, 지자체 간 위탁은 협의·규약·고시로 처리",
+    "output_documents": [
+     "집행 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "행정권한의 위임 및 위탁에 관한 규정",
+      "article": "제5조",
+      "text": "위임·위탁받은 사무는 수임·수탁기관의 권한과 책임 아래 처리한다."
+     },
+     {
+      "law": "지방자치법",
+      "article": "제168조",
+      "text": "지방자치단체나 그 장은 소관 사무의 일부를 다른 지방자치단체에 위탁할 수 있고, 위탁 시 관계 지자체 협의로 규약을 정하여 고시하여야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "주민 권리·이행 확인",
+    "lane": "주민·이해관계자",
+    "stage": "G4 집행·공개",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민·이해관계자",
+    "action": "주민의 참여·권리 행사와 이행 상태를 확인",
+    "output_documents": [
+     "이행 확인"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "행정권한의 위임 및 위탁에 관한 규정",
+      "article": "제11조",
+      "text": "민간위탁은 주민의 권리·의무와 직접 관련되지 아니하는 사무에 대하여 그 기준에 따라 한다."
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "사후 공개·개선",
+    "lane": "중앙부처·관계기관",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "중앙부처·관계기관",
+    "action": "위임사무 처리에 대한 지도·감독(국가사무 1차 시도지사·2차 주무부장관) 및 감사",
+    "output_documents": [
+     "결과보고·개선안"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지방자치법",
+      "article": "제185조",
+      "text": "위임받아 처리하는 국가사무는 시·도에서 주무부장관, 시·군·구에서 1차 시·도지사·2차 주무부장관의 지도·감독을 받는다."
+     },
+     {
+      "law": "행정권한의 위임 및 위탁에 관한 규정",
+      "article": "제9조",
+      "text": "위임·위탁기관은 수임·수탁사무 처리에 대하여 감사할 수 있다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "message",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "message",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P05",
+    "target": "P08",
+    "type": "sequence",
+    "label": "자료 보완"
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P09",
+    "type": "message",
+    "label": null
+   },
+   {
+    "id": "L01",
+    "source": "P09",
+    "target": "P05",
+    "type": "loop",
+    "label": "보완 후 재검토"
+   },
+   {
+    "id": "E10",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "구조도는 법률상 대표 흐름이며 실제 절차는 지자체 조례·규칙과 사안별 기준에 따라 달라질 수 있다.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (E) 제도의 1차 법률 근거인 지방자치법 제115~117조·제168조·제185조가 전부 누락되어 대통령령만 인용하던 것을 지방자치법 본문으로 보강, (C) P10 위임·위탁 방식 결정 근거를 대통령령 제4조(재위임) 오인용에서 지방자치법 제117조1·2·3항(조례·규칙 위임)으로 정정, (C) P05·P06·P12·P14 filler를 제115·116조·대통령령 제3·4·5·9조·제168·185조 원문으로 교체, 부산광역시 사무위임 규칙 예시 명시(지자체별 상이). 참조 MST: 지방자치법 284005, 행정권한 위임·위탁 규정 287047, 부산 사무위임 규칙 2112141. L0 감사 소견: 이 제도는 findings 없음(score 1)이나 1차 법률 근거 누락을 실질 오류로 판단해 보강. empty-lane·backward-sequence 없음. 법의 침묵: 위임·위탁 대상 사무·범위는 조례·규칙 위임(제117조)으로 지자체별 상이. 법의 침묵: 민간위탁 수탁자 선정·관리 세부는 조례·운영에 위임. 법의 침묵: 국가사무 기관위임의 개별 사무 지정은 개별 법령·대통령령에 산재."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 2건 중 공식 원문 2건을 연결했다. 캔버스와 절차 노드의 명시 조문 32건 가운데 32건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "notes": [
+   "[시행 2026.07.01.] 기준"
+  ],
+  "sources": [
+   {
+    "law": "지방자치법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "지방자치법",
+    "lawId": "001656",
+    "mst": "284005",
+    "promulgatedOn": "2026-03-05",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/지방자치법"
+   },
+   {
+    "law": "행정권한의 위임 및 위탁에 관한 규정",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "행정권한의 위임 및 위탁에 관한 규정",
+    "lawId": "005612",
+    "mst": "287047",
+    "promulgatedOn": "2026-06-23",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/행정권한의위임및위탁에관한규정"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 22,
+   "explicitCitationEntries": 22,
+   "articleReferences": 32,
+   "verifiedReferences": 32,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

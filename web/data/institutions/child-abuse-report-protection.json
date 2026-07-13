@@ -1,0 +1,493 @@
+{
+ "slug": "child-abuse-report-protection",
+ "name": "아동학대 신고·보호조치",
+ "oneLiner": "아동학대 의심을 신고하고 현장조사·응급보호·사례관리로 연결하는 절차",
+ "type": "신고·보호조치형",
+ "priority": 229,
+ "whyFirst": "아동학대 신고·보호조치의 신청·결정·사후관리 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "아동학대 의심 상황에서 신고 접수부터 현장조사, 응급·보호조치와 피해아동 사례관리까지의 기관 간 경로를 분리해 보여준다.",
+  "stakeholders": "신고자·보호자, 경찰, 지자체 아동학대전담공무원, 아동보호전문기관",
+  "legalBasis": [
+   {
+    "law": "아동복지법",
+    "articles": "제22조의4(피해아동보호계획의 수립), 제15조(보호조치), 제29조(피해아동 및 그 가족 등에 대한 지원)",
+    "kind": "법률"
+   },
+   {
+    "law": "아동학대범죄의 처벌 등에 관한 특례법",
+    "articles": "제10조(신고의무와 절차), 제11조(현장출동), 제11조의2(조사), 제12조(응급조치), 제13조(긴급임시조치), 제14조·제15조(임시조치의 청구), 제16조(피해아동 변호사 선임의 특례), 제19조(임시조치)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "경찰",
+    "role": "접수·확인·결정 또는 서비스 연계"
+   },
+   {
+    "name": "지자체 아동학대전담공무원",
+    "role": "접수·확인·결정 또는 서비스 연계"
+   },
+   {
+    "name": "아동보호전문기관",
+    "role": "접수·확인·결정 또는 서비스 연계"
+   }
+  ],
+  "procedure": [
+   "학대 의심 발견·신고",
+   "112 신고 접수·출동",
+   "현장 동행·안전 확인",
+   "응급조치·긴급분리 판단",
+   "피해아동 조사",
+   "보호계획 수립·통보",
+   "일시보호·보호조치",
+   "사례관리계획 수립",
+   "상담·치료·가족 지원",
+   "재학대 위험 점검"
+  ],
+  "moneyFlow": "급여·이용권·서비스 비용과 본인부담은 법령 및 연도별 운영기준에 따라 달라질 수 있다.",
+  "docsFlow": "신청·신고 기록 → 자격·사실 확인자료 → 결정·연계 통지 → 지급·이행 기록 → 사후관리 기록으로 이어진다.",
+  "bottlenecks": [
+   "사실관계와 자격 증빙",
+   "관계기관 간 정보·기록 연계",
+   "개별 상황에 따른 지원·결정 기준"
+  ],
+  "reformPoints": [
+   "신청 진행상태 안내 강화",
+   "기관 간 인계 기준의 명확화",
+   "결정 근거와 이의 경로의 가독성 개선"
+  ]
+ },
+ "related": [
+  "가정폭력 피해자 보호·임시조치",
+  "학교폭력 대응",
+  "긴급복지지원"
+ ],
+ "fieldVerification": [
+  "실제 온라인·방문 신청 경로",
+  "연도별 지원금액·자격 기준",
+  "지자체·기관별 운영 세부기준"
+ ],
+ "process": {
+  "institution_name": "아동학대 신고·보호조치",
+  "law_name": "아동복지법·아동학대범죄의 처벌 등에 관한 특례법",
+  "lanes": [
+   "신고자·보호자",
+   "경찰",
+   "지자체 아동학대전담공무원",
+   "아동보호전문기관"
+  ],
+  "stages": [
+   "G0 상황·상담",
+   "G1 신청·접수",
+   "G2 조사·확인",
+   "G3 결정·연계",
+   "G4 지급·이행",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "학대 의심 발견·신고",
+    "lane": "신고자·보호자",
+    "stage": "G0 상황·상담",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "신고자·보호자",
+    "action": "학대 의심 발견·신고",
+    "output_documents": [
+     "학대 의심 발견·신고 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "아동학대범죄의 처벌 등에 관한 특례법",
+      "article": "제10조",
+      "text": "아동학대범죄의 처벌 등에 관한 특례법 제10조에 따른 학대 의심 발견·신고 단계"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "112 신고 접수·출동",
+    "lane": "경찰",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "경찰",
+    "action": "112 신고 접수·출동",
+    "output_documents": [
+     "112 신고 접수·출동 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "아동학대범죄의 처벌 등에 관한 특례법",
+      "article": "제10조",
+      "text": "아동학대범죄의 처벌 등에 관한 특례법 제10조에 따른 112 신고 접수·출동 단계"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "현장 동행·안전 확인",
+    "lane": "지자체 아동학대전담공무원",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "지자체 아동학대전담공무원",
+    "action": "현장 동행·안전 확인",
+    "output_documents": [
+     "현장 동행·안전 확인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "아동학대범죄의 처벌 등에 관한 특례법",
+      "article": "제11조",
+      "text": "아동학대처벌법 제11조(현장출동)에 따라 신고를 접수한 사법경찰관리·아동학대전담공무원이 지체 없이 현장에 출동하여 출입·조사·질문하는 단계"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "응급조치·긴급분리 판단",
+    "lane": "경찰",
+    "stage": "G2 조사·확인",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "경찰",
+    "action": "응급조치·긴급분리 판단",
+    "output_documents": [
+     "응급조치·긴급분리 판단 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "아동학대범죄의 처벌 등에 관한 특례법",
+      "article": "제12조",
+      "text": "아동학대범죄의 처벌 등에 관한 특례법 제12조에 따른 응급조치·긴급분리 판단 단계"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "피해아동 조사",
+    "lane": "지자체 아동학대전담공무원",
+    "stage": "G2 조사·확인",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지자체 아동학대전담공무원",
+    "action": "피해아동 조사",
+    "output_documents": [
+     "피해아동 조사 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "아동학대범죄의 처벌 등에 관한 특례법",
+      "article": "제11조의2",
+      "text": "아동학대처벌법 제11조의2(조사)에 따라 아동학대전담공무원이 피해아동 보호·사례관리를 위한 조사(출석·진술·자료제출 요구)를 하는 단계"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "보호계획 수립·통보",
+    "lane": "지자체 아동학대전담공무원",
+    "stage": "G3 결정·연계",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지자체 아동학대전담공무원",
+    "action": "보호계획 수립·통보",
+    "output_documents": [
+     "보호계획 수립·통보 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "아동복지법",
+      "article": "제22조의4",
+      "text": "아동복지법 제22조의4에 따른 보호계획 수립·통보 단계"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "일시보호·보호조치",
+    "lane": "지자체 아동학대전담공무원",
+    "stage": "G3 결정·연계",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지자체 아동학대전담공무원",
+    "action": "일시보호·보호조치",
+    "output_documents": [
+     "일시보호·보호조치 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "아동복지법",
+      "article": "제15조",
+      "text": "아동복지법 제15조에 따른 일시보호·보호조치 단계"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "사례관리계획 수립",
+    "lane": "아동보호전문기관",
+    "stage": "G4 지급·이행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "아동보호전문기관",
+    "action": "사례관리계획 수립",
+    "output_documents": [
+     "사례관리계획 수립 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "아동복지법",
+      "article": "제22조의4",
+      "text": "아동복지법 제22조의4에 따른 사례관리계획 수립 단계"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "상담·치료·가족 지원",
+    "lane": "아동보호전문기관",
+    "stage": "G4 지급·이행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "아동보호전문기관",
+    "action": "상담·치료·가족 지원",
+    "output_documents": [
+     "상담·치료·가족 지원 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "아동복지법",
+      "article": "제29조",
+      "text": "아동복지법 제29조에 따른 상담·치료·가족 지원 단계"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "재학대 위험 점검",
+    "lane": "아동보호전문기관",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "아동보호전문기관",
+    "action": "재학대 위험 점검",
+    "output_documents": [
+     "재학대 위험 점검 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "아동복지법",
+      "article": "제22조의4",
+      "text": "아동복지법 제22조의4에 따른 재학대 위험 점검 단계"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "긴급임시조치·임시조치 신청·의견진술",
+    "lane": "신고자·보호자",
+    "stage": "G2 조사·확인",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "피해아동등·법정대리인·변호사",
+    "action": "긴급임시조치 신청, 임시조치 청구 요청·의견진술",
+    "output_documents": [
+     "긴급임시조치 신청서·의견 진술 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "아동학대범죄의 처벌 등에 관한 특례법",
+      "article": "제13조",
+      "text": "아동학대처벌법 제13조제1항에 따라 피해아동등·법정대리인·변호사 등이 사법경찰관에게 긴급임시조치를 신청할 수 있고, 제14조제2항에 따라 검사·사법경찰관에게 임시조치 청구·신청을 요청하거나 의견을 진술할 수 있는 당사자 권리"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "피해아동 변호사 선임·조력",
+    "lane": "신고자·보호자",
+    "stage": "G3 결정·연계",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "피해아동·법정대리인",
+    "action": "변호사 선임(없으면 검사 국선변호사 선정), 조사참여·의견진술·서류 열람·등사",
+    "output_documents": [
+     "변호사 선임서·국선변호사 선정 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "아동학대범죄의 처벌 등에 관한 특례법",
+      "article": "제16조",
+      "text": "아동학대처벌법 제16조에 따라 피해아동·법정대리인은 변호사를 선임하여 형사·아동보호 절차에서 조력받을 수 있고, 변호사가 없는 경우 검사는 국선변호사를 선정하여야 하는 당사자 권리"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P11",
+    "target": "P04",
+    "type": "message",
+    "label": "긴급임시조치 신청·의견진술"
+   },
+   {
+    "id": "E11",
+    "source": "P12",
+    "target": "P05",
+    "type": "message",
+    "label": "변호사 조사참여·조력"
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건·기한·지원 범위는 시행령, 고시 및 사실관계에 따라 달라질 수 있다.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (C) P03 '현장 동행·안전 확인' 근거를 아동복지법 제22조의2(실제 제목 '학생등에 대한 학대 예방 및 지원 등')에서 아동학대처벌법 제11조(현장출동)로 정정; (C) P05 '피해아동 조사' 근거를 아동복지법 제22조의4(실제 제목 '피해아동보호계획의 수립 등')에서 아동학대처벌법 제11조의2(조사)로 정정; (E) 당사자(신고자·보호자) 레인 법정 권리 보강 — P11 긴급임시조치·임시조치 신청·의견진술권(제13조·제14조제2항), P12 피해아동 변호사 선임·국선·열람등사권(제16조) 추가; 캔버스 legalBasis 조문 제목 정정. 대조 법령 MST: 286059(아동학대처벌법), 281929(아동복지법). 법의 침묵: 응급조치(제12조) 후 피해아동등 의사가 격리와 배치되는 경우의 우선순위 판단 기준은 조문상 '의사 존중'과 '이익 최우선' 원칙만 제시될 뿐 구체 절차는 규정 없음. 법의 침묵: 아동보호전문기관의 사례관리계획(P08) 수립 기한은 아동학대처벌법·아동복지법 조문에 명시 없음."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 2건 중 공식 원문 2건을 연결했다. 캔버스와 절차 노드의 명시 조문 24건 가운데 24건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "아동복지법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "아동복지법",
+    "lawId": "000190",
+    "mst": "281929",
+    "promulgatedOn": "2025-12-30",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/아동복지법"
+   },
+   {
+    "law": "아동학대범죄의 처벌 등에 관한 특례법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "아동학대범죄의 처벌 등에 관한 특례법",
+    "lawId": "011997",
+    "mst": "286059",
+    "promulgatedOn": "2026-05-19",
+    "effectiveOn": "2026-05-19",
+    "officialUrl": "https://law.go.kr/법령/아동학대범죄의처벌등에관한특례법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 14,
+   "explicitCitationEntries": 14,
+   "articleReferences": 24,
+   "verifiedReferences": 24,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

@@ -1,0 +1,348 @@
+{
+ "slug": "k-pass-transit-refund",
+ "name": "K-패스 대중교통비 지원·환급",
+ "oneLiner": "지원대상·카드 확인 → 회원가입·카드 등록 → 대중교통 이용·결제 → 교통카드 데이터 수집·제출 → 이용실적·지원요건 검증 → 환급액 산정·지급 → 보조금 사용·부정수급 점검",
+ "type": "교통비 지원·환급형",
+ "priority": 301,
+ "whyFirst": "정부·지방자치단체와 관계기관의 역할을 분리해 K-패스 대중교통비 지원·환급 절차를 한눈에 보여준다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "K-패스 대중교통비 지원·환급은(는) 지원대상·카드 확인 → 회원가입·카드 등록 → 대중교통 이용·결제 → 교통카드 데이터 수집·제출 → 이용실적·지원요건 검증 → 환급액 산정·지급 → 보조금 사용·부정수급 점검로 이어지는 공적 절차다.",
+  "stakeholders": "이용자, 카드사·대중교통운영자, 국토교통부·전담기관, 지방자치단체",
+  "legalBasis": [
+   {
+    "law": "대중교통의 육성 및 이용촉진에 관한 법률",
+    "articles": "제10조의8~제10조의12, 제21조·제22조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "카드사·대중교통운영자",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "국토교통부·전담기관",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "지방자치단체",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "지원대상·카드 확인",
+   "회원가입·카드 등록",
+   "대중교통 이용·결제",
+   "교통카드 데이터 수집·제출",
+   "이용실적·지원요건 검증",
+   "환급액 산정·지급",
+   "보조금 사용·부정수급 점검",
+   "지역별 사업비 분담·성과관리"
+  ],
+  "moneyFlow": "지원금·수수료·사업비는 법령과 연도별 사업기준 또는 개별 결정에 따라 달라질 수 있다.",
+  "docsFlow": "지원대상·카드 확인 기록 → 심사·협의 자료 → 결정·통지 → 이행·사후관리 기록으로 이어진다.",
+  "bottlenecks": [
+   "연령·소득·지역별 환급률과 월 최소 이용횟수",
+   "카드사별 지급일과 누락 실적 정정 절차"
+  ],
+  "reformPoints": [
+   "처리상태와 담당기관 안내",
+   "기관 간 자료연계와 중복제출 축소",
+   "결정·변경 사유의 명확한 통지"
+  ]
+ },
+ "related": [],
+ "fieldVerification": [
+  "연령·소득·지역별 환급률과 월 최소 이용횟수",
+  "카드사별 지급일과 누락 실적 정정 절차"
+ ],
+ "process": {
+  "institution_name": "K-패스 대중교통비 지원·환급",
+  "law_name": "대중교통의 육성 및 이용촉진에 관한 법률",
+  "lanes": [
+   "이용자",
+   "카드사·대중교통운영자",
+   "국토교통부·전담기관",
+   "지방자치단체"
+  ],
+  "stages": [
+   "G0 가입",
+   "G1 이용",
+   "G2 실적 검증",
+   "G3 환급",
+   "G4 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "지원대상·카드 확인",
+    "lane": "이용자",
+    "stage": "G0 가입",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "이용자",
+    "action": "지원 대상과 사용 가능한 교통카드를 확인한다.",
+    "output_documents": [
+     "지원대상·카드 확인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대중교통의 육성 및 이용촉진에 관한 법률",
+      "article": "제10조의12",
+      "text": "대중교통의 육성 및 이용촉진에 관한 법률 제10조의12에 따른 지원 대상과 사용 가능한 교통카드를 확인한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "회원가입·카드 등록",
+    "lane": "이용자",
+    "stage": "G0 가입",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "이용자",
+    "action": "전담 시스템에 가입하고 본인 명의 카드를 등록한다.",
+    "output_documents": [
+     "회원가입·카드 등록 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대중교통의 육성 및 이용촉진에 관한 법률",
+      "article": "제10조의12",
+      "text": "대중교통의 육성 및 이용촉진에 관한 법률 제10조의12에 따른 전담 시스템에 가입하고 본인 명의 카드를 등록한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "대중교통 이용·결제",
+    "lane": "이용자",
+    "stage": "G1 이용",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "이용자",
+    "action": "등록한 카드로 버스·철도 등 대중교통을 이용한다.",
+    "output_documents": [
+     "대중교통 이용·결제 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대중교통의 육성 및 이용촉진에 관한 법률",
+      "article": "제10조의12",
+      "text": "대중교통의 육성 및 이용촉진에 관한 법률 제10조의12에 따른 등록한 카드로 버스·철도 등 대중교통을 이용한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "교통카드 데이터 수집·제출",
+    "lane": "카드사·대중교통운영자",
+    "stage": "G2 실적 검증",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "카드사·대중교통운영자",
+    "action": "이용 실적 데이터를 수집해 전담기관에 제출한다.",
+    "output_documents": [
+     "교통카드 데이터 수집·제출 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대중교통의 육성 및 이용촉진에 관한 법률",
+      "article": "제10조의8",
+      "text": "대중교통의 육성 및 이용촉진에 관한 법률 제10조의8에 따른 이용 실적 데이터를 수집해 전담기관에 제출한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "이용실적·지원요건 검증",
+    "lane": "국토교통부·전담기관",
+    "stage": "G2 실적 검증",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "국토교통부·전담기관",
+    "action": "월별 이용 횟수와 지원요건, 중복 여부를 확인한다.",
+    "output_documents": [
+     "이용실적·지원요건 검증 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대중교통의 육성 및 이용촉진에 관한 법률",
+      "article": "제10조의12",
+      "text": "대중교통의 육성 및 이용촉진에 관한 법률 제10조의12에 따른 월별 이용 횟수와 지원요건, 중복 여부를 확인한다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "환급액 산정·지급",
+    "lane": "국토교통부·전담기관",
+    "stage": "G3 환급",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국토교통부·전담기관",
+    "action": "검증된 이용 실적에 따라 환급액을 산정해 지급한다.",
+    "output_documents": [
+     "환급액 산정·지급 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대중교통의 육성 및 이용촉진에 관한 법률",
+      "article": "제10조의12",
+      "text": "대중교통의 육성 및 이용촉진에 관한 법률 제10조의12에 따른 검증된 이용 실적에 따라 환급액을 산정해 지급한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "보조금 사용·부정수급 점검",
+    "lane": "국토교통부·전담기관",
+    "stage": "G4 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국토교통부·전담기관",
+    "action": "지원금 집행과 자료를 점검하고 부정수급을 관리한다.",
+    "output_documents": [
+     "보조금 사용·부정수급 점검 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "대중교통의 육성 및 이용촉진에 관한 법률",
+      "article": "제21조·제22조",
+      "text": "대중교통의 육성 및 이용촉진에 관한 법률 제21조·제22조에 따른 지원금 집행과 자료를 점검하고 부정수급을 관리한다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "지역별 사업비 분담·성과관리",
+    "lane": "지방자치단체",
+    "stage": "G4 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지방자치단체",
+    "action": "지역별 사업비를 분담하고 가입·이용·환급 실적을 관리한다.",
+    "output_documents": [
+     "지역별 사업비·성과관리 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "대중교통의 육성 및 이용촉진에 관한 법률",
+      "article": "제10조의12·제12조",
+      "text": "국가와 지방자치단체의 대중교통비 지원·환급 사업과 재정지원에 따른 지역 집행 단계다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": "지역별 성과 집계"
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건·기한·지원 범위는 하위규정과 사실관계에 따라 달라질 수 있다.",
+   "2026-07-13 301~320 확장: 현행 법률의 실제 조문 순서와 당사자·행정기관 레인을 기준으로 신규 작성. 정책뉴스: https://www.korea.kr/news/policyNewsView.do?newsId=148967613"
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 17건 가운데 17건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "대중교통의 육성 및 이용촉진에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "대중교통의 육성 및 이용촉진에 관한 법률",
+    "lawId": "009885",
+    "mst": "268839",
+    "promulgatedOn": "2025-01-31",
+    "effectiveOn": "2025-08-01",
+    "officialUrl": "https://law.go.kr/법령/대중교통의육성및이용촉진에관한법률"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 9,
+   "explicitCitationEntries": 9,
+   "articleReferences": 17,
+   "verifiedReferences": 17,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

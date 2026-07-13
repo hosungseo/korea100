@@ -506,8 +506,8 @@
     "id": "E07",
     "source": "P06",
     "target": "P07",
-    "type": "sequence",
-    "label": "보완"
+    "type": "loop",
+    "label": "보완 요구"
    },
    {
     "id": "E08",
@@ -574,14 +574,15 @@
    }
   ],
   "warnings": [
-   "MST 283981. 특례 세부 요금은 약관·고시 fieldVerification. 명칭: 전기요금·공급약관 인가"
+   "MST 283981. 특례 세부 요금은 약관·고시 fieldVerification. 명칭: 전기요금·공급약관 인가",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: L0 backward-sequence E07(P06→P07 보완)을 인가 심사·전기위원회 심의(제16조제2항) 과정의 반려·보완 회귀로 판단하여 type을 sequence→loop로 변경. 자문 MST: 283981(전기사업법). 법의 침묵: 제16조 공급약관 인가 처리기간은 대통령령·고시 위임으로 법률 본문에 일수 미명시. 법의 침묵: no-sublaw는 직접규정형 표기이며 요금 세부·특례는 인가 약관·고시 위임."
   ]
  },
  "verification": {
   "status": "article-verified",
-  "verifiedAt": "2026-07-12",
-  "method": "법제처 DRF + L3 당사자 워크스루",
-  "scope": "L3 당사자 워크스루 후 명시 조문 7건 존재 확인 7건",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 24건 가운데 24건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
    "전기사업법 MST 283981",
    "산업용 특례는 인가 약관 수준"
@@ -600,12 +601,12 @@
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-12",
-   "method": "DRF 목차·조문제목 대조",
-   "citationEntries": 7,
-   "explicitCitationEntries": 7,
-   "articleReferences": 7,
-   "verifiedReferences": 7,
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 20,
+   "explicitCitationEntries": 20,
+   "articleReferences": 24,
+   "verifiedReferences": 24,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }

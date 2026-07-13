@@ -481,6 +481,29 @@
       "text": "허가물질의 제조ㆍ수입ㆍ사용 허가 등"
      }
     ]
+   },
+   {
+    "id": "P17",
+    "name": "취소 처분 전 청문",
+    "lane": "감독",
+    "stage": "G5 처분",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기후에너지환경부장관",
+    "receiver": "영업자",
+    "action": "청문 실시",
+    "output_documents": [
+     "청문조서"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "화학물질관리법",
+      "article": "제51조(청문)",
+      "text": "기후에너지환경부장관은 제35조에 따라 유해화학물질 영업허가를 취소할 경우 청문을 하여야 한다."
+     }
+    ]
    }
   ],
   "edges": [
@@ -592,20 +615,28 @@
    {
     "id": "E16",
     "source": "P13",
+    "target": "P17",
+    "type": "sequence",
+    "label": "취소 처분 예정"
+   },
+   {
+    "id": "E17",
+    "source": "P17",
     "target": "P14",
     "type": "sequence",
-    "label": null
+    "label": "청문 후 처분"
    }
   ],
   "warnings": [
-   "MST 276815."
+   "MST 276815.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (E) 제35조 영업허가 취소 처분 전 제51조 청문 절차(당사자 권리)가 누락되어 P17 청문 노드를 추가하고 P13→P17→P14로 재배선. 자문 MST: 276815(화학물질관리법). 법의 침묵: 제28조 영업허가 처리기간은 '기후에너지환경부령으로 정하는 기간 내'로 위임되어 법률 본문에 명시 없음. 법의 침묵: 영업허가 심사 중 보완요구·재신청 회귀(P07→P05)의 보완기간은 법률에 규정 없음(운영)."
   ]
  },
  "verification": {
   "status": "article-verified",
-  "verifiedAt": "2026-07-12",
-  "method": "법제처 DRF + L3 당사자 워크스루",
-  "scope": "L3 당사자 워크스루 후 명시 조문 18건 존재 확인 18건",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 45건 가운데 45건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
    "화학물질관리법 MST 276815"
   ],
@@ -623,12 +654,12 @@
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-12",
-   "method": "DRF 목차·조문제목 대조",
-   "citationEntries": 18,
-   "explicitCitationEntries": 18,
-   "articleReferences": 18,
-   "verifiedReferences": 18,
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 27,
+   "explicitCitationEntries": 27,
+   "articleReferences": 45,
+   "verifiedReferences": 45,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }

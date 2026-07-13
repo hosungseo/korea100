@@ -7,6 +7,7 @@
     "generate:process-image": "npm run generate:process-images",
     "generate:process-images": "node scripts/generate-process-article-image.mjs",
     "generate:verification-queue": "node scripts/generate-field-verification-queue.mjs",
+    "discover:candidates": "node scripts/discover-news-candidates.mjs",
     "check:freshness": "node scripts/sync-verification.mjs --check",
     "predev": "npm run generate:catalog && npm run generate:verification-queue && npm run generate:process-images",
     "dev": "next dev",
@@ -18,10 +19,12 @@
     "validate:process-images": "node scripts/validate-process-images.mjs",
     "sync:sources": "node scripts/sync-verification.mjs",
     "verify:articles": "node scripts/verify-articles.mjs",
-    "test:article-parser": "node --test scripts/article-citations.test.mjs scripts/admin-rule-service.test.mjs scripts/source-merging.test.mjs",
+    "test:article-parser": "node --test scripts/article-citations.test.mjs scripts/admin-rule-service.test.mjs scripts/law-service.test.mjs scripts/source-merging.test.mjs",
+    "test:news-candidates": "node --test scripts/news-candidates.test.mjs",
     "test:process-layout": "node --test scripts/process-layout.test.mjs"
   },
   "dependencies": {
+    "fast-xml-parser": "^5.10.0",
     "next": "16.2.10",
     "react": "19.2.4",
     "react-dom": "19.2.4"

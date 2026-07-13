@@ -1,0 +1,409 @@
+{
+ "slug": "nationality-acquisition-loss",
+ "name": "국적 취득·상실(귀화 포함)",
+ "oneLiner": "국적 취득·상실(귀화 포함)의 신청·심사·결정·사후관리 절차",
+ "type": "귀화·국적변동형",
+ "priority": 257,
+ "whyFirst": "국적 취득·상실(귀화 포함)의 행위자와 결정 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "국적 취득·상실(귀화 포함)은(는) 귀화·국적변동 요건 확인 → 신청·신고 제출 → 신원·생계·품행 조사 → 법무부 심사 → 귀화 허가 또는 국적상실 확인 → 외국국적 정리·등록 → 국적변동 통지·관리로 이어지는 공적 절차다.",
+  "stakeholders": "신청인, 출입국·외국인관서, 법무부, 관계기관",
+  "legalBasis": [
+   {
+    "law": "국적법",
+    "articles": "제5조(일반귀화), 제6조(간이귀화), 제10조(국적취득자의 외국국적 포기), 제12조(국적상실), 제14조(국적이탈)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "출입국·외국인관서",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "법무부",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "관계기관",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "귀화·국적변동 요건 확인",
+   "신청·신고 제출",
+   "신원·생계·품행 조사",
+   "법무부 심사",
+   "귀화 허가 또는 국적상실 확인",
+   "외국국적 정리·등록",
+   "국적변동 통지·관리"
+  ],
+  "moneyFlow": "수수료·복무·지원 범위는 법령과 개인의 사실관계에 따라 달라질 수 있다.",
+  "docsFlow": "신청·신고 기록 → 조사·심사 자료 → 결정·통지 → 이행·복무 기록 → 사후관리로 이어진다.",
+  "bottlenecks": [
+   "자격·사유 증빙",
+   "관계기관 자료 연계",
+   "결정 이후 변동 관리"
+  ],
+  "reformPoints": [
+   "처리상태 안내 강화",
+   "요건·기한 가독성 개선",
+   "온라인 보완 경로 명확화"
+  ]
+ },
+ "related": [
+  "체류자격 변경·허가",
+  "사증(비자) 발급·연장",
+  "외국인등록"
+ ],
+ "fieldVerification": [
+  "실제 온라인·방문 접수 경로",
+  "기관별 처리기한·서식",
+  "개별 사건별 세부 운영기준"
+ ],
+ "process": {
+  "institution_name": "국적 취득·상실(귀화 포함)",
+  "law_name": "국적법",
+  "lanes": [
+   "신청인",
+   "출입국·외국인관서",
+   "법무부"
+  ],
+  "stages": [
+   "G0 준비",
+   "G1 신청·접수",
+   "G2 조사·심사",
+   "G3 결정",
+   "G4 이행·복무",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "귀화·국적변동 요건 확인",
+    "lane": "신청인",
+    "stage": "G0 준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "신청인",
+    "action": "귀화·국적변동 요건 확인",
+    "output_documents": [
+     "귀화·국적변동 요건 확인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국적법",
+      "article": "제5조",
+      "text": "국적법 제5조에 따른 귀화·국적변동 요건 확인 단계"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "신청·신고 제출",
+    "lane": "신청인",
+    "stage": "G0 준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "신청인",
+    "action": "귀화허가 신청 또는 국적 변동 신고를 제출한다.",
+    "output_documents": [
+     "신청·신고 제출 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국적법",
+      "article": "제4조",
+      "text": "대한민국 국적을 취득한 사실이 없는 외국인은 법무부장관의 귀화허가를 받아 대한민국 국적을 취득할 수 있다(귀화허가의 신청). 국적회복은 제9조."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "신원·생계·품행 조사",
+    "lane": "법무부",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "법무부",
+    "action": "신원·생계·품행 조사",
+    "output_documents": [
+     "신원·생계·품행 조사 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국적법",
+      "article": "제4조",
+      "text": "법무부장관은 귀화허가 신청을 받으면 제5조부터 제7조까지의 귀화 요건을 갖추었는지를 심사한다(제4조제2항)."
+     },
+     {
+      "law": "국적법",
+      "article": "제25조",
+      "text": "법무부장관은 국적업무 수행에 필요하면 관계 기관의 장에게 자료 제출·사실 조사·신원 조회·의견 제출 등 협조를 요청할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "법무부 심사",
+    "lane": "법무부",
+    "stage": "G2 조사·심사",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "법무부",
+    "action": "법무부 심사",
+    "output_documents": [
+     "법무부 심사 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "국적법",
+      "article": "제4조",
+      "text": "법무부장관은 귀화 요건(제5조 일반·제6조 간이·제7조 특별)을 심사한 후 그 요건을 갖춘 사람에게만 귀화를 허가한다(제4조제2항)."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "귀화 허가 또는 국적상실 확인",
+    "lane": "신청인",
+    "stage": "G3 결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신청인",
+    "action": "귀화 허가 또는 국적상실 확인",
+    "output_documents": [
+     "귀화 허가 또는 국적상실 확인 기록",
+     "귀화증서·국적회복증서"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국적법",
+      "article": "제4조",
+      "text": "귀화허가를 받은 사람은 법무부장관 앞에서 국민선서를 하고 귀화증서를 수여받은 때에 대한민국 국적을 취득한다(제4조제3항). 국적회복은 제9조제3항."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "외국국적 정리·등록",
+    "lane": "출입국·외국인관서",
+    "stage": "G4 이행·복무",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "출입국·외국인관서",
+    "action": "외국국적 정리·등록",
+    "output_documents": [
+     "외국국적 정리·등록 기록"
+    ],
+    "deadline": "국적 취득일부터 1년(국적법 제10조제1항)",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국적법",
+      "article": "제10조",
+      "text": "대한민국 국적을 취득한 외국인으로서 외국 국적을 가지고 있는 자는 국적 취득일부터 1년 내에 외국 국적을 포기(또는 불행사 서약)하여야 하며, 미이행 시 그 기간이 지난 때에 대한민국 국적을 상실한다(제10조제1항·제2항·제3항)."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "국적변동 통지·관리",
+    "lane": "법무부",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "법무부",
+    "action": "국적변동 통지·관리",
+    "output_documents": [
+     "국적변동 통지·관리 기록",
+     "관보 고시"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국적법",
+      "article": "제17조",
+      "text": "법무부장관은 대한민국 국적의 취득과 상실에 관한 사항이 발생하면 그 뜻을 관보에 고시하여야 한다."
+     },
+     {
+      "law": "국적법",
+      "article": "제16조",
+      "text": "법무부장관은 국적상실의 신고·통보를 받으면 가족관계등록 관서와 주민등록 관서에 통보하여야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "국적심의위원회 심의",
+    "lane": "법무부",
+    "stage": "G2 조사·심사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국적심의위원회",
+    "action": "특별귀화(제7조제1항제3호)·국적이탈 허가(제14조의2)·국적상실 결정(제14조의4) 사전 심의",
+    "output_documents": [
+     "위원회 심의 결과"
+    ],
+    "deadline": null,
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "국적법",
+      "article": "제22조",
+      "text": "법무부장관은 특별귀화 허가·국적이탈 허가·국적상실 결정 전에 국적심의위원회의 심의를 거쳐야 한다(요건 미충족 명백 등 예외 제22조제2항 단서). 위원회 구성·운영은 제23조."
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "허가·판정 취소",
+    "lane": "법무부",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "법무부장관",
+    "action": "거짓·부정한 방법으로 받은 귀화허가·국적회복허가·이탈허가·보유판정 취소",
+    "output_documents": [
+     "취소 처분"
+    ],
+    "deadline": null,
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "국적법",
+      "article": "제21조",
+      "text": "법무부장관은 거짓이나 그 밖의 부정한 방법으로 귀화허가·국적회복허가·국적의 이탈 허가 또는 국적보유판정을 받은 자에 대하여 그 허가 또는 판정을 취소할 수 있다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P04",
+    "target": "P08",
+    "type": "message",
+    "label": "특별귀화·이탈허가·상실결정 안건 심의 요청"
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P05",
+    "type": "message",
+    "label": "심의 결과 회신"
+   },
+   {
+    "id": "E09",
+    "source": "P07",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P09",
+    "target": "P03",
+    "type": "loop",
+    "label": "허가 취소 시 재심사·회귀"
+   }
+  ],
+  "warnings": [
+   "개별 신청·처분의 요건·기한은 사실관계와 하위규정에 따라 달라질 수 있다.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (C 근거 오인용) P02 신청·신고 제출 제5조→제4조(귀화 신청)·제9조; P03 조사 제5조→제4조제2항+제25조(관계기관 협조); P04 심사 제5조→제4조제2항; P05 허가·국적취득 제5조→제4조제3항(국민선서·귀화증서 수여 시 취득). (D 기한) P06 외국국적 포기 deadline 신설: 국적 취득일부터 1년(제10조제1항). P07 통지·관리 근거 제12조→제17조(관보고시)·제16조(상실자 처리). (E 필수기구 누락) P08 국적심의위원회 심의(제22조·제23조: 특별귀화·이탈허가·상실결정 전 필수 심의) 노드 신설·message 연결. (no-loop 판정) P09 허가·판정 취소(제21조) 노드 신설·loop 엣지 E10 연결 — 사후 취소 회귀 경로 존재 확인. consulted MSTs: 국적법 244609, 국적법 시행령 246165, 국적법 시행규칙 262177. 법의 침묵: 귀화 심사 표준처리기간은 국적법 본문에 없음(시행령·내규 소관). 법의 침묵: 국적심의위원회 심의 소요기간은 제23조 위임(대통령령). 법의 침묵: 종합평가(사회통합프로그램·귀화시험) 세부는 시행령 소관."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 16건 가운데 16건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "국적법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국적법",
+    "lawId": "001435",
+    "mst": "244609",
+    "promulgatedOn": "2022-09-15",
+    "effectiveOn": "2022-10-01",
+    "officialUrl": "https://law.go.kr/법령/국적법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 12,
+   "explicitCitationEntries": 12,
+   "articleReferences": 16,
+   "verifiedReferences": 16,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

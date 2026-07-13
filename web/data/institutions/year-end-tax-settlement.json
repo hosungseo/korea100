@@ -1,0 +1,510 @@
+{
+ "slug": "year-end-tax-settlement",
+ "name": "연말정산",
+ "oneLiner": "원천징수의무자가 근로소득자의 소득공제와 세액을 연간 정산하는 절차",
+ "type": "원천징수·정산형",
+ "priority": 219,
+ "whyFirst": "연말정산의 신고·조사·납부·불복 경로를 분리해 이해할 수 있다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "연말정산은 원천징수의무자가 근로소득자의 소득공제와 세액을 연간 정산하는 절차 제도다.",
+  "stakeholders": "납세자·상속인, 세무서와 국세청, 원천징수의무자·제3자, 조세심판원이 관여한다.",
+  "legalBasis": [
+   {
+    "law": "소득세법",
+    "articles": "제20조(근로소득), 제47조(근로소득공제), 제59조(근로소득세액공제), 제70조(종합소득과세표준 확정신고), 제73조(과세표준확정신고의 예외), 제127조(원천징수의무), 제128조(원천징수세액의 납부), 제134조(근로소득에 대한 원천징수시기 및 방법), 제137조(근로소득세액의 연말정산), 제140조(근로소득자의 소득공제 등 신고), 제143조(근로소득에 대한 원천징수영수증의 발급), 제164조(지급명세서의 제출)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "세무서·국세청",
+    "role": "접수·조사·결정·징수"
+   },
+   {
+    "name": "납세자·상속인",
+    "role": "신고·납부·불복 청구"
+   },
+   {
+    "name": "조세심판원",
+    "role": "조세심판 절차"
+   }
+  ],
+  "procedure": [
+   "과세·정산 사안 확인",
+   "자료·신고서 제출",
+   "접수·자료 수집",
+   "과세표준·요건 검토",
+   "보완·조사 통지",
+   "보완 자료 제출",
+   "근로소득 연말정산",
+   "결정 통지·고지",
+   "납부·징수 또는 환급",
+   "불복·재검토"
+  ],
+  "moneyFlow": "세액 납부·환급·체납징수와 관련 비용은 세법과 징수 절차에 따른다.",
+  "docsFlow": "신고·증빙 → 접수·검토 → 결정·고지 → 납부·징수 또는 불복으로 이어진다.",
+  "bottlenecks": [
+   "재산·소득 자료의 정확성",
+   "신고기한과 보완 요구",
+   "체납처분과 제3자 권리",
+   "불복 절차의 선택"
+  ],
+  "reformPoints": [
+   "자료 제출 경로 통합",
+   "결정 근거의 설명 강화",
+   "체납·불복 진행상태 공개"
+  ]
+ },
+ "related": [
+  "행정심판",
+  "행정소송",
+  "종합부동산세",
+  "취득세(주택)"
+ ],
+ "fieldVerification": [
+  "실제 신고 서식과 전산 경로",
+  "세무서별 조사 운영",
+  "개별 사건의 기한·가산세 적용"
+ ],
+ "process": {
+  "institution_name": "연말정산",
+  "law_name": "소득세법",
+  "lanes": [
+   "납세자·상속인",
+   "세무서·과세관청",
+   "국세청·조세심판원",
+   "제3자·원천징수의무자"
+  ],
+  "stages": [
+   "G0 사안발생",
+   "G1 신고·접수",
+   "G2 검토·조사",
+   "G3 결정·통지",
+   "G4 납부·집행",
+   "G5 불복·정리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "과세·정산 사안 확인",
+    "lane": "납세자·상속인",
+    "stage": "G0 사안발생",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "납세자·상속인",
+    "action": "과세·정산 사안 확인",
+    "output_documents": [
+     "과세·정산 사안 확인"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소득세법",
+      "article": "제20조(근로소득)",
+      "text": "근로소득에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "자료·신고서 제출",
+    "lane": "납세자·상속인",
+    "stage": "G1 신고·접수",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "납세자·상속인",
+    "action": "근로소득자가 소득·세액 공제신고서를 원천징수의무자에게 제출",
+    "output_documents": [
+     "소득·세액 공제신고서"
+    ],
+    "deadline": "다음 연도 2월분 근로소득 받기 전",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소득세법",
+      "article": "제140조제1항(근로소득자의 소득공제 등 신고)",
+      "text": "근로소득자는 연말정산 시 다음 연도 2월분 근로소득을 받기 전 원천징수의무자에게 소득·세액 공제신고서를 제출한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "접수·자료 수집",
+    "lane": "세무서·과세관청",
+    "stage": "G1 신고·접수",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "세무서·과세관청",
+    "action": "접수·자료 수집",
+    "output_documents": [
+     "접수·자료 수집"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소득세법",
+      "article": "제20조(근로소득)",
+      "text": "근로소득에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "과세표준·요건 검토",
+    "lane": "세무서·과세관청",
+    "stage": "G2 검토·조사",
+    "type": "task",
+    "status": "current",
+    "progress": 45,
+    "actor": "세무서·과세관청",
+    "action": "과세표준·요건 검토",
+    "output_documents": [
+     "과세표준·요건 검토"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소득세법",
+      "article": "제47조(근로소득공제)",
+      "text": "근로소득공제에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "보완·조사 통지",
+    "lane": "세무서·과세관청",
+    "stage": "G2 검토·조사",
+    "type": "task",
+    "status": "risk",
+    "progress": 0,
+    "actor": "세무서·과세관청",
+    "action": "보완·조사 통지",
+    "output_documents": [
+     "보완·조사 통지"
+    ],
+    "deadline": null,
+    "confidence": 0.78,
+    "legal_basis": [
+     {
+      "law": "소득세법",
+      "article": "제140조제2항",
+      "text": "원천징수의무자가 세무서장에게 신고한 공제신고 사항을 세무서가 확인·보완 요구한다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "보완 자료 제출",
+    "lane": "납세자·상속인",
+    "stage": "G2 검토·조사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "납세자·상속인",
+    "action": "보완 자료 제출",
+    "output_documents": [
+     "보완 자료 제출"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소득세법",
+      "article": "제20조(근로소득)",
+      "text": "근로소득에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "근로소득 연말정산",
+    "lane": "제3자·원천징수의무자",
+    "stage": "G3 결정·통지",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "원천징수의무자(회사)",
+    "action": "다음 연도 2월분 근로소득 지급 시 연말정산으로 추가 납부세액을 원천징수(공제신고 없으면 본인 기본공제·표준세액공제만 적용)",
+    "output_documents": [
+     "연말정산 결과"
+    ],
+    "deadline": "다음 연도 2월분 급여 지급 시",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소득세법",
+      "article": "제137조(근로소득세액의 연말정산)",
+      "text": "원천징수의무자는 다음 연도 2월분 근로소득을 지급할 때 연말정산으로 추가 납부세액을 원천징수한다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "결정 통지·고지",
+    "lane": "세무서·과세관청",
+    "stage": "G3 결정·통지",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "세무서·과세관청",
+    "action": "결정 통지·고지",
+    "output_documents": [
+     "결정 통지·고지"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소득세법",
+      "article": "제140조(근로소득자의 소득공제 등 신고)",
+      "text": "근로소득자의 소득공제 등 신고에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "납부·징수 또는 환급",
+    "lane": "납세자·상속인",
+    "stage": "G4 납부·집행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "납세자·상속인",
+    "action": "근로소득자가 추가납부 또는 환급을 수령",
+    "output_documents": [
+     "납부·환급 내역"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소득세법",
+      "article": "제137조제2항",
+      "text": "공제세액 합계가 산출세액을 초과하면 그 초과액을 근로소득자에게 환급한다."
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "불복·재검토",
+    "lane": "국세청·조세심판원",
+    "stage": "G5 불복·정리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국세청·조세심판원",
+    "action": "연말정산 누락·오류 시 종합소득 확정신고로 정정(연말정산 근로소득만 있으면 확정신고 생략 가능)",
+    "output_documents": [
+     "확정신고·재검토"
+    ],
+    "deadline": "다음 연도 5.1~5.31",
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "소득세법",
+      "article": "제70조(종합소득과세표준 확정신고)",
+      "text": "종합소득이 있는 거주자는 다음 연도 5월 1일부터 5월 31일까지 관할세무서장에게 확정신고한다."
+     },
+     {
+      "law": "소득세법",
+      "article": "제73조(과세표준확정신고의 예외)",
+      "text": "연말정산 대상 근로소득만 있는 경우 등은 확정신고를 하지 아니할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "원천징수세액 납부·지급명세서 제출",
+    "lane": "제3자·원천징수의무자",
+    "stage": "G4 납부·집행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "원천징수의무자(회사)",
+    "action": "원천징수한 소득세를 징수일이 속하는 달의 다음 달 10일까지 납부하고, 지급명세서를 다음 연도 2월 말일까지 세무서장에게 제출",
+    "output_documents": [
+     "원천징수세액 납부·지급명세서"
+    ],
+    "deadline": "납부 다음 달 10일 / 지급명세서 2월 말일",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소득세법",
+      "article": "제128조제1항(원천징수세액의 납부)",
+      "text": "원천징수의무자는 원천징수한 소득세를 징수일이 속하는 달의 다음 달 10일까지 납부한다."
+     },
+     {
+      "law": "소득세법",
+      "article": "제164조(지급명세서의 제출)",
+      "text": "소득을 지급하는 자는 지급명세서를 지급일이 속하는 과세기간의 다음 연도 2월 말일까지 제출한다."
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "원천징수영수증 발급",
+    "lane": "제3자·원천징수의무자",
+    "stage": "G4 납부·집행",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "원천징수의무자(회사)",
+    "action": "다음 연도 2월 말일까지 근로소득 원천징수영수증을 근로소득자에게 발급(중도 퇴직자·일용근로자는 별도 기한)",
+    "output_documents": [
+     "원천징수영수증"
+    ],
+    "deadline": "다음 연도 2월 말일",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "소득세법",
+      "article": "제143조제1항(근로소득에 대한 원천징수영수증의 발급)",
+      "text": "근로소득을 지급하는 원천징수의무자는 다음 연도 2월 말일까지 원천징수영수증을 근로소득자에게 발급한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L01",
+    "source": "P05",
+    "target": "P06",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "L02",
+    "source": "P06",
+    "target": "P04",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P04",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P02",
+    "target": "P07",
+    "type": "message",
+    "label": "공제신고서 제출"
+   },
+   {
+    "id": "E10",
+    "source": "P07",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P07",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P12",
+    "target": "P09",
+    "type": "message",
+    "label": "영수증 교부"
+   }
+  ],
+  "warnings": [
+   "개별 세목과 사실관계에 따라 신고기한·가산세·불복 경로가 달라질 수 있다.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (E) L0 지적 '제3자·원천징수의무자' 빈 레인은 심각한 누락 — 연말정산의 정산 주체는 원천징수의무자(회사, 소득세법 제137조)다. P07 연말정산 노드를 세무서·과세관청에서 제3자·원천징수의무자 레인으로 이관하고 근거를 제140조에서 제137조로 정정. 원천징수세액 납부·지급명세서 제출(제128조·제164조) 노드 P11, 원천징수영수증 발급(제143조) 노드 P12를 원천징수의무자 레인에 추가·연결. (C) P05 보완 근거를 제143조에서 제140조제2항으로, P09 환급 근거를 제143조에서 제137조제2항으로, P10 재검토 근거를 제143조에서 제70조·제73조(확정신고)로 정정. (D) 공제신고서 제출(2월분 급여 전), 연말정산(2월분 급여 지급 시), 납부(다음 달 10일), 영수증·지급명세서(2월 말일), 확정신고(5.1~5.31) 기한 명시. 참조 MST: 소득세법 280405. 법의 침묵: 불복(심사·심판)의 실체는 국세기본법 소관이다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 26건 가운데 26건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "소득세법",
+    "lawId": "001565",
+    "mst": "280405",
+    "promulgatedOn": "2025-12-23",
+    "effectiveOn": "2026-07-01",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "소득세법",
+    "officialUrl": "https://law.go.kr/법령/소득세법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 15,
+   "explicitCitationEntries": 15,
+   "articleReferences": 26,
+   "verifiedReferences": 26,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

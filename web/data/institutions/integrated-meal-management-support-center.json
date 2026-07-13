@@ -1,0 +1,333 @@
+{
+ "slug": "integrated-meal-management-support-center",
+ "name": "어린이·사회복지 급식관리지원센터",
+ "oneLiner": "급식소 등록 신청 → 사회복지급식소 등록·등록증 발급 → 위생·영양관리 현황진단 → 식단·교육·현장지도 제공 → 개선사항 이행 → 센터 운영 감독·지도 → 전국 실태조사·정책조정",
+ "type": "급식소 등록·전문관리형",
+ "priority": 315,
+ "whyFirst": "정부·지방자치단체와 관계기관의 역할을 분리해 어린이·사회복지 급식관리지원센터 절차를 한눈에 보여준다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "어린이·사회복지 급식관리지원센터은(는) 급식소 등록 신청 → 사회복지급식소 등록·등록증 발급 → 위생·영양관리 현황진단 → 식단·교육·현장지도 제공 → 개선사항 이행 → 센터 운영 감독·지도 → 전국 실태조사·정책조정로 이어지는 공적 절차다.",
+  "stakeholders": "어린이·사회복지 급식소, 통합급식관리지원센터, 시장·군수·구청장, 식품의약품안전처",
+  "legalBasis": [
+   {
+    "law": "어린이 식생활안전관리 특별법",
+    "articles": "제21조~제21조의4",
+    "kind": "법률"
+   },
+   {
+    "law": "노인ㆍ장애인 등 사회복지시설의 급식안전 지원에 관한 법률",
+    "articles": "제5~10조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "통합급식관리지원센터",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "시장·군수·구청장",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "식품의약품안전처",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "급식소 등록 신청",
+   "사회복지급식소 등록·등록증 발급",
+   "위생·영양관리 현황진단",
+   "식단·교육·현장지도 제공",
+   "개선사항 이행",
+   "센터 운영 감독·지도",
+   "전국 실태조사·정책조정"
+  ],
+  "moneyFlow": "지원금·수수료·사업비는 법령과 연도별 사업기준 또는 개별 결정에 따라 달라질 수 있다.",
+  "docsFlow": "급식소 등록 신청 기록 → 심사·협의 자료 → 결정·통지 → 이행·사후관리 기록으로 이어진다.",
+  "bottlenecks": [
+   "통합센터 전환 지역과 등록대상 범위",
+   "방문지도 주기·위생개선 후속조치"
+  ],
+  "reformPoints": [
+   "처리상태와 담당기관 안내",
+   "기관 간 자료연계와 중복제출 축소",
+   "결정·변경 사유의 명확한 통지"
+  ]
+ },
+ "related": [],
+ "fieldVerification": [
+  "통합센터 전환 지역과 등록대상 범위",
+  "방문지도 주기·위생개선 후속조치"
+ ],
+ "process": {
+  "institution_name": "어린이·사회복지 급식관리지원센터",
+  "law_name": "어린이 식생활안전관리 특별법·노인ㆍ장애인 등 사회복지시설의 급식안전 지원에 관한 법률",
+  "lanes": [
+   "어린이·사회복지 급식소",
+   "통합급식관리지원센터",
+   "시장·군수·구청장",
+   "식품의약품안전처"
+  ],
+  "stages": [
+   "G0 등록",
+   "G1 현황진단",
+   "G2 관리지원",
+   "G3 개선",
+   "G4 감독"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "급식소 등록 신청",
+    "lane": "어린이·사회복지 급식소",
+    "stage": "G0 등록",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "어린이·사회복지 급식소",
+    "action": "영양사가 없는 급식소가 관할 지원센터에 등록을 신청한다.",
+    "output_documents": [
+     "급식소 등록 신청 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "어린이 식생활안전관리 특별법",
+      "article": "제21조의2",
+      "text": "어린이 식생활안전관리 특별법 제21조의2에 따른 영양사가 없는 급식소가 관할 지원센터에 등록을 신청한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "사회복지급식소 등록·등록증 발급",
+    "lane": "통합급식관리지원센터",
+    "stage": "G0 등록",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "통합급식관리지원센터",
+    "action": "신청사항을 확인해 급식소를 등록하고 등록증을 발급한다.",
+    "output_documents": [
+     "사회복지급식소 등록·등록증 발급 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "노인ㆍ장애인 등 사회복지시설의 급식안전 지원에 관한 법률",
+      "article": "제9조",
+      "text": "노인ㆍ장애인 등 사회복지시설의 급식안전 지원에 관한 법률 제9조에 따른 신청사항을 확인해 급식소를 등록하고 등록증을 발급한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "위생·영양관리 현황진단",
+    "lane": "통합급식관리지원센터",
+    "stage": "G1 현황진단",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "통합급식관리지원센터",
+    "action": "식단·조리환경·종사자 위생과 이용자 특성을 진단한다.",
+    "output_documents": [
+     "위생·영양관리 현황진단 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "어린이 식생활안전관리 특별법",
+      "article": "제21조·제5조",
+      "text": "어린이 식생활안전관리 특별법 제21조·제5조에 따른 식단·조리환경·종사자 위생과 이용자 특성을 진단한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "식단·교육·현장지도 제공",
+    "lane": "통합급식관리지원센터",
+    "stage": "G2 관리지원",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "통합급식관리지원센터",
+    "action": "대상별 식단, 위생교육과 현장 방문지도를 제공한다.",
+    "output_documents": [
+     "식단·교육·현장지도 제공 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "어린이 식생활안전관리 특별법",
+      "article": "제21조·제5조",
+      "text": "어린이 식생활안전관리 특별법 제21조·제5조에 따른 대상별 식단, 위생교육과 현장 방문지도를 제공한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "개선사항 이행",
+    "lane": "어린이·사회복지 급식소",
+    "stage": "G3 개선",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "어린이·사회복지 급식소",
+    "action": "센터의 지도에 따라 조리·보관·영양관리 사항을 개선한다.",
+    "output_documents": [
+     "개선사항 이행 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "어린이 식생활안전관리 특별법",
+      "article": "제21조의2·제9조",
+      "text": "어린이 식생활안전관리 특별법 제21조의2·제9조에 따른 센터의 지도에 따라 조리·보관·영양관리 사항을 개선한다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "센터 운영 감독·지도",
+    "lane": "시장·군수·구청장",
+    "stage": "G4 감독",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시장·군수·구청장",
+    "action": "센터의 인력·업무·예산 집행과 급식소 지원 실적을 감독한다.",
+    "output_documents": [
+     "센터 운영 감독·지도 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "어린이 식생활안전관리 특별법",
+      "article": "제21조의4·제7조",
+      "text": "어린이 식생활안전관리 특별법 제21조의4·제7조에 따른 센터의 인력·업무·예산 집행과 급식소 지원 실적을 감독한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "전국 실태조사·정책조정",
+    "lane": "식품의약품안전처",
+    "stage": "G4 감독",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "식품의약품안전처",
+    "action": "급식안전 실태와 센터 성과를 조사해 정책에 반영한다.",
+    "output_documents": [
+     "전국 실태조사·정책조정 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "어린이 식생활안전관리 특별법",
+      "article": "제26조의2·제8조",
+      "text": "어린이 식생활안전관리 특별법 제26조의2·제8조에 따른 급식안전 실태와 센터 성과를 조사해 정책에 반영한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건·기한·지원 범위는 하위규정과 사실관계에 따라 달라질 수 있다.",
+   "2026-07-13 301~320 확장: 현행 법률의 실제 조문 순서와 당사자·행정기관 레인을 기준으로 신규 작성. 정책뉴스: https://www.korea.kr/news/policyNewsView.do?newsId=148967862"
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 2건 중 공식 원문 2건을 연결했다. 캔버스와 절차 노드의 명시 조문 20건 가운데 20건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "어린이 식생활안전관리 특별법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "어린이 식생활안전관리 특별법",
+    "lawId": "010709",
+    "mst": "253663",
+    "promulgatedOn": "2023-08-08",
+    "effectiveOn": "2024-02-09",
+    "officialUrl": "https://law.go.kr/법령/어린이식생활안전관리특별법"
+   },
+   {
+    "law": "노인ㆍ장애인 등 사회복지시설의 급식안전 지원에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "노인ㆍ장애인 등 사회복지시설의 급식안전 지원에 관한 법률",
+    "lawId": "014127",
+    "mst": "253665",
+    "promulgatedOn": "2023-08-08",
+    "effectiveOn": "2024-02-09",
+    "officialUrl": "https://law.go.kr/법령/노인ㆍ장애인등사회복지시설의급식안전지원에관한법률"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 9,
+   "explicitCitationEntries": 9,
+   "articleReferences": 20,
+   "verifiedReferences": 20,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

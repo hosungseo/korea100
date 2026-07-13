@@ -1,0 +1,389 @@
+{
+ "slug": "wage-arrears-complaint",
+ "name": "임금체불 진정·지도",
+ "oneLiner": "임금체불 진정·지도의 신청·조사·결정·사후관리 절차",
+ "type": "진정·근로감독형",
+ "priority": 237,
+ "whyFirst": "임금체불 진정·지도의 핵심 행위자와 결정 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "임금체불 진정·지도은(는) 체불 내역·증빙 정리 → 진정 제기 → 출석·자료 제출 요구 → 사실 조사·시정지도 → 체불임금 지급 → 미지급 시 수사 송치 → 지급·종결 확인로 이어지는 절차를 정리한 제도다.",
+  "stakeholders": "근로자, 사업주, 고용노동부 근로감독관, 수사기관",
+  "legalBasis": [
+   {
+    "law": "근로기준법",
+    "articles": "제36조(금품 청산), 제43조(임금 지급), 제102조(근로감독관 권한), 제104조(감독기관 신고), 제109조(벌칙)",
+    "kind": "법률"
+   },
+   {
+    "law": "임금채권보장법",
+    "articles": "제7조(대지급금 지급), 제8조(청구권 대위·변제금 징수)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "고용노동부 근로감독관",
+    "role": "진정 접수·현장조사·심문, 시정지도, 미이행 시 형사입건·송치(§102·§104·§109)"
+   },
+   {
+    "name": "사업주",
+    "role": "체불임금 지급 의무자, 시정지시 이행"
+   },
+   {
+    "name": "수사기관·검찰",
+    "role": "송치 사건 수사·공소(반의사불벌)"
+   }
+  ],
+  "procedure": [
+   "체불 내역·증빙 정리",
+   "진정 제기",
+   "출석·자료 제출 요구",
+   "사실 조사·시정지도",
+   "체불임금 지급",
+   "미지급 시 수사 송치",
+   "지급·종결 확인"
+  ],
+  "moneyFlow": "비용·급여·금전명령의 범위는 개별 법령과 연도별 운영기준, 사실관계에 따라 달라질 수 있다.",
+  "docsFlow": "신청·신고 기록 → 조사·심사 자료 → 결정·명령 통지 → 이행 기록 → 사후관리로 이어진다.",
+  "bottlenecks": [
+   "사실관계와 증빙 확보",
+   "기관 간 기록·정보 연계",
+   "결정 이후 이행 관리"
+  ],
+  "reformPoints": [
+   "진행상태 안내 강화",
+   "결정 근거의 설명성 개선",
+   "취약 당사자 지원 경로 명확화"
+  ]
+ },
+ "related": [
+  "부당해고 구제신청",
+  "근로시간",
+  "고용보험과 실업급여"
+ ],
+ "fieldVerification": [
+  "실제 접수·신청 경로",
+  "기관별 처리기한·서식",
+  "지역·기관별 세부 운영기준"
+ ],
+ "process": {
+  "institution_name": "임금체불 진정·지도",
+  "law_name": "근로기준법",
+  "lanes": [
+   "근로자",
+   "사업주",
+   "고용노동부 근로감독관",
+   "수사기관",
+   "근로복지공단"
+  ],
+  "stages": [
+   "G0 사안·상담",
+   "G1 신청·접수",
+   "G2 조사·심사",
+   "G3 결정·명령",
+   "G4 이행·지급",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "체불 내역·증빙 정리",
+    "lane": "근로자",
+    "stage": "G0 사안·상담",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "근로자",
+    "action": "체불 내역·증빙 정리",
+    "output_documents": [
+     "체불 내역·증빙 정리 기록"
+    ],
+    "deadline": "퇴직·사망 시 금품청산 14일 경과 후 체불 확정",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "근로기준법",
+      "article": "제36조",
+      "text": "사용자는 근로자가 사망·퇴직한 경우 그 지급 사유가 발생한 때부터 14일 이내에 임금·보상금 등 모든 금품을 지급하여야 하며, 이 기간 미지급 시 체불로 확정된다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "진정 제기",
+    "lane": "근로자",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "근로자",
+    "receiver": "고용노동부 근로감독관",
+    "action": "체불 진정·신고 제기",
+    "output_documents": [
+     "진정서"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "근로기준법",
+      "article": "제104조",
+      "text": "사업장에서 이 법을 위반한 사실이 있으면 근로자는 그 사실을 고용노동부장관이나 근로감독관에게 통보할 수 있으며, 사용자는 통보를 이유로 불리한 처우를 하지 못한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "출석·자료 제출 요구",
+    "lane": "고용노동부 근로감독관",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "고용노동부 근로감독관",
+    "receiver": "사업주·근로자",
+    "action": "출석·자료 제출 요구",
+    "output_documents": [
+     "출석·자료 제출 요구서"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "근로기준법",
+      "article": "제102조",
+      "text": "근로감독관은 사업장을 현장조사하고 장부와 서류의 제출을 요구할 수 있으며 사용자와 근로자에 대하여 심문할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "사실 조사·시정지도",
+    "lane": "고용노동부 근로감독관",
+    "stage": "G2 조사·심사",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "고용노동부 근로감독관",
+    "action": "현장조사·심문·체불 확인 후 시정지시",
+    "output_documents": [
+     "조사 결과",
+     "시정지시서"
+    ],
+    "deadline": null,
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "근로기준법",
+      "article": "제102조",
+      "text": "근로감독관은 사업장을 현장조사하고 장부·서류 제출을 요구하며 사용자와 근로자를 심문할 수 있고, 체불이 확인되면 지급 시정을 지도한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "체불임금 지급",
+    "lane": "사업주",
+    "stage": "G3 결정·명령",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업주",
+    "receiver": "근로자",
+    "action": "체불임금 지급(시정 이행)",
+    "output_documents": [
+     "지급 확인서"
+    ],
+    "deadline": "시정지시 기한 내",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "근로기준법",
+      "article": "제36조",
+      "text": "사용자는 지급 사유 발생 후 14일 이내에 임금 등 모든 금품을 지급하여야 하며, 시정지시에 따라 체불임금을 지급한다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "미지급 시 수사 송치",
+    "lane": "고용노동부 근로감독관",
+    "stage": "G4 이행·지급",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "고용노동부 근로감독관",
+    "receiver": "수사기관",
+    "action": "형사입건·검찰 송치(반의사불벌)",
+    "output_documents": [
+     "범죄인지·송치 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "근로기준법",
+      "article": "제109조",
+      "text": "제36조·제43조 등 위반자는 3년 이하 징역 또는 3천만원 이하 벌금에 처하되 피해자의 명시적 의사에 반하여 공소를 제기할 수 없다(반의사불벌)."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "지급·종결 확인",
+    "lane": "고용노동부 근로감독관",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "고용노동부 근로감독관",
+    "action": "지급·종결 확인",
+    "output_documents": [
+     "종결 처리 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "근로기준법",
+      "article": "제36조",
+      "text": "체불임금이 지급되면 근로감독관은 진정 사건을 종결 처리하고 지급 여부를 확인한다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "체불 임금등 대지급금 청구·지급",
+    "lane": "근로복지공단",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "근로자·고용노동부장관",
+    "action": "대지급금 청구·지급 후 사업주 구상",
+    "output_documents": [
+     "대지급금 지급 결정",
+     "변제금 납부 통지"
+    ],
+    "deadline": null,
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "임금채권보장법",
+      "article": "제7조",
+      "text": "고용노동부장관은 도산·미지급 확정 등의 경우 퇴직·재직 근로자가 청구하면 미지급 임금등 대지급금을 사업주를 대신하여 지급한다."
+     },
+     {
+      "law": "임금채권보장법",
+      "article": "제8조",
+      "text": "고용노동부장관은 대지급금을 지급한 한도에서 근로자의 미지급 임금 청구권을 대위하여 사업주에게 변제금 납부를 통지·징수한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": "시정지시 이행"
+   },
+   {
+    "id": "E05",
+    "source": "P04",
+    "target": "P06",
+    "type": "sequence",
+    "label": "지급 거부·미이행"
+   },
+   {
+    "id": "E06",
+    "source": "P05",
+    "target": "P07",
+    "type": "sequence",
+    "label": "지급 완료"
+   },
+   {
+    "id": "E07",
+    "source": "P06",
+    "target": "P08",
+    "type": "sequence",
+    "label": "도산·미지급 확정 시 대지급금"
+   },
+   {
+    "id": "L01",
+    "source": "P05",
+    "target": "P04",
+    "type": "loop",
+    "label": "미이행 재조사·재시정"
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건과 기한은 사실관계 및 하위규정에 따라 달라질 수 있다.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (C) P02 진정 제기 주체를 사업주→근로자(§104), P04 사실조사·시정지도 주체를 수사기관→고용노동부 근로감독관(§102), P05 체불임금 지급 주체를 근로자→사업주(§36), P06 수사 송치 주체를 사업주→근로감독관(§109)으로 정정. (D) §36 금품청산 14일 기한 보강. (E) 임금채권보장법 §7·§8 대지급금 청구·구상 노드(P08) 신설. no-loop 판정: 시정지도 미이행 시 재조사·재시정 회귀가 실제 존재하여 loop 엣지(L01) 추가. no-sublaw 판정: 근로기준법은 직접규정형이나 체불구제 실효는 임금채권보장법에 위임·연계되어 동 법률을 근거로 보강(시행령 인용은 여전히 불요). 참조 MST 265959(근로기준법)·279735(임금채권보장법). 법의 침묵: 진정 처리기간 구체적 일수는 근로기준법 명문 없이 근로감독관집무규정(훈령) 영역. 법의 침묵: 화해·조정 권고 절차는 법률 명문 없이 운영규정 영역."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 2건 중 공식 원문 2건을 연결했다. 캔버스와 절차 노드의 명시 조문 16건 가운데 16건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "근로기준법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "근로기준법",
+    "lawId": "001872",
+    "mst": "265959",
+    "promulgatedOn": "2024-10-22",
+    "effectiveOn": "2025-10-23",
+    "officialUrl": "https://law.go.kr/법령/근로기준법"
+   },
+   {
+    "law": "임금채권보장법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "임금채권보장법",
+    "lawId": "000128",
+    "mst": "279735",
+    "promulgatedOn": "2025-11-11",
+    "effectiveOn": "2026-05-12",
+    "officialUrl": "https://law.go.kr/법령/임금채권보장법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 11,
+   "explicitCitationEntries": 11,
+   "articleReferences": 16,
+   "verifiedReferences": 16,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

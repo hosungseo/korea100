@@ -1,0 +1,381 @@
+{
+ "slug": "passenger-transport-license",
+ "name": "여객자동차 운송사업 면허",
+ "oneLiner": "여객자동차 운송사업 면허의 신청·심사·결정·사후관리 절차",
+ "type": "면허·운행관리형",
+ "priority": 253,
+ "whyFirst": "여객자동차 운송사업 면허의 핵심 행위자와 결정 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "여객자동차 운송사업 면허은(는) 사업계획·차량 확보 → 면허 신청 → 기준·결격사유 심사 → 면허 발급 → 운송사업 개시 → 사고·운행기록 보고 → 변경·처분 관리로 이어지는 공적 절차다.",
+  "stakeholders": "운송사업자, 시·도·국토교통부",
+  "legalBasis": [
+   {
+    "law": "여객자동차 운수사업법",
+    "articles": "제4조(면허 등), 제5조(면허 기준), 제19조(사고 시 조치)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "시·도·국토교통부",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "사업계획·차량 확보",
+   "면허 신청",
+   "기준·결격사유 심사",
+   "면허 발급",
+   "운송사업 개시",
+   "사고·운행기록 보고",
+   "면허취소 등 처분 사전통지",
+   "청문에서 의견 진술",
+   "청문 후 처분 결정·통지"
+  ],
+  "moneyFlow": "수수료·과태료·점용료 등 금전부담은 법령과 개별 처분 조건에 따라 달라질 수 있다.",
+  "docsFlow": "신청·단속 기록 → 검토·심사 자료 → 결정·통지 → 이행·납부 기록 → 사후관리로 이어진다.",
+  "bottlenecks": [
+   "자격·차량·시설 기준 충족",
+   "관계기관 협의와 자료 연계",
+   "처분 이후 이행 관리"
+  ],
+  "reformPoints": [
+   "처리상태 안내 강화",
+   "요건·기한 가독성 개선",
+   "온라인 신청·보완 경로 명확화"
+  ]
+ },
+ "related": [
+  "운전면허 취득·정지·취소",
+  "교통과태료·범칙금 부과",
+  "자동차 검사"
+ ],
+ "fieldVerification": [
+  "실제 온라인·방문 접수 경로",
+  "기관별 처리기한·수수료",
+  "지역별 세부 운영기준"
+ ],
+ "process": {
+  "institution_name": "여객자동차 운송사업 면허",
+  "law_name": "여객자동차 운수사업법",
+  "lanes": [
+   "운송사업자",
+   "시·도·국토교통부"
+  ],
+  "stages": [
+   "G0 준비",
+   "G1 신청·접수",
+   "G2 조사·검토",
+   "G3 결정",
+   "G4 이행·납부",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "사업계획·차량 확보",
+    "lane": "운송사업자",
+    "stage": "G0 준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "운송사업자",
+    "action": "사업계획·차량 확보",
+    "output_documents": [
+     "사업계획·차량 확보 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "여객자동차 운수사업법",
+      "article": "제4조",
+      "text": "여객자동차 운수사업법 제4조에 따른 사업계획·차량 확보 단계"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "면허 신청",
+    "lane": "운송사업자",
+    "stage": "G0 준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "운송사업자",
+    "action": "사업계획 등 법정 서류를 갖춰 운송사업 면허를 신청한다.",
+    "output_documents": [
+     "면허 신청 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "여객자동차 운수사업법",
+      "article": "제4조",
+      "text": "여객자동차 운수사업법 제4조에 따른 면허 신청 단계"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "기준·결격사유 심사",
+    "lane": "시·도·국토교통부",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "시·도·국토교통부",
+    "action": "기준·결격사유 심사",
+    "output_documents": [
+     "기준·결격사유 심사 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "여객자동차 운수사업법",
+      "article": "제5조",
+      "text": "여객자동차 운수사업법 제5조(면허 등의 기준)에 따라 수송수요 적합성·최저 면허기준 대수·차고·부대시설 등 면허기준을 심사한다"
+     },
+     {
+      "law": "여객자동차 운수사업법",
+      "article": "제6조",
+      "text": "여객자동차 운수사업법 제6조(결격사유)에 따라 피성년후견인·파산·형·면허취소 후 2년 미경과 등 결격사유 해당 여부를 확인한다(법인은 임원 포함)"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "면허 발급",
+    "lane": "시·도·국토교통부",
+    "stage": "G2 조사·검토",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "시·도·국토교통부",
+    "action": "면허 발급",
+    "output_documents": [
+     "면허 발급 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "여객자동차 운수사업법",
+      "article": "제4조",
+      "text": "여객자동차 운수사업법 제4조에 따른 면허 발급 단계"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "운송사업 개시",
+    "lane": "운송사업자",
+    "stage": "G3 결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "운송사업자",
+    "action": "운송사업 개시",
+    "output_documents": [
+     "운송사업 개시 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "여객자동차 운수사업법",
+      "article": "제4조",
+      "text": "여객자동차 운수사업법 제4조에 따른 운송사업 개시 단계"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "사고·운행기록 보고",
+    "lane": "운송사업자",
+    "stage": "G4 이행·납부",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "운송사업자",
+    "action": "사고·운행기록 보고",
+    "output_documents": [
+     "사고·운행기록 보고 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "여객자동차 운수사업법",
+      "article": "제19조",
+      "text": "여객자동차 운수사업법 제19조에 따른 사고·운행기록 보고 단계"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "면허취소 등 처분 사전통지",
+    "lane": "시·도·국토교통부",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시·도·국토교통부",
+    "action": "취소·정지 사유와 예정 처분을 사업자에게 사전통지한다.",
+    "output_documents": [
+     "변경·처분 관리 기록"
+    ],
+    "deadline": "위반 시 6개월 이내 사업정지 또는 면허취소",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "여객자동차 운수사업법",
+      "article": "제85조",
+      "text": "여객자동차 운수사업법 제85조(면허취소 등)에 따라 위반 시 면허·허가·등록을 취소하거나 6개월 이내 사업 전부·일부 정지, 노선폐지·감차 등 사업계획 변경을 명할 수 있다"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "청문에서 의견 진술",
+    "lane": "운송사업자",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "운송사업자",
+    "action": "사업자가 청문에 참여해 처분 사유에 관한 의견과 자료를 제출한다.",
+    "output_documents": [
+     "청문 조서"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "여객자동차 운수사업법",
+      "article": "제86조",
+      "text": "여객자동차 운수사업법 제86조(청문)에 따라 국토교통부장관 또는 시·도지사는 여객자동차운송사업 면허를 취소하려면 청문을 하여야 하며, 당사자는 청문에서 의견을 진술할 수 있다"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "청문 후 처분 결정·통지",
+    "lane": "시·도·국토교통부",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시·도·국토교통부",
+    "action": "청문 결과를 반영해 처분 여부를 결정하고 사업자에게 통지한다.",
+    "output_documents": [
+     "처분서"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "여객자동차 운수사업법",
+      "article": "제85조·제86조",
+      "text": "면허취소 등 처분과 청문 절차"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": "사고 발생 시"
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": "법 위반·처분 사유 발생 시"
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": "취소 처분 전 청문"
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": "청문 결과 반영"
+   }
+  ],
+  "warnings": [
+   "개별 신청·처분의 요건·기한·금액은 사실관계와 하위규정에 따라 달라질 수 있다.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (C) P03 기준·결격사유 심사에 제6조(결격사유) 근거 추가 — 기존은 제5조만 인용해 결격사유 근거 누락. (C) P07 변경·처분 관리 근거를 제5조→제85조(면허취소 등)로 수정하고 기한 명시. (E) 청문 노드(P08, 제86조) 신설·연결 — 면허취소 처분 전 청문은 법정 절차·당사자 의견진술권. 대조 법령 MST 286391(여객자동차 운수사업법). L0 지적: empty-lane·backward-sequence 해당 없음. 법의 침묵: 면허처분 불복 이의신청 별도 조문 없음(행정심판 일반절차). 법의 침묵: 면허 심사 처리기한은 법률 미규정(국토교통부령 위임)."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 14건 가운데 14건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "여객자동차 운수사업법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "여객자동차 운수사업법",
+    "lawId": "001749",
+    "mst": "286391",
+    "promulgatedOn": "2026-05-29",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/여객자동차운수사업법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 11,
+   "explicitCitationEntries": 11,
+   "articleReferences": 14,
+   "verifiedReferences": 14,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

@@ -1,0 +1,441 @@
+{
+ "slug": "tax-audit",
+ "name": "세무조사",
+ "oneLiner": "과세관청이 선정·통지·조사·결과통지와 과세전 구제 절차를 수행하는 제도",
+ "type": "조사·권리보호형",
+ "priority": 220,
+ "whyFirst": "세무조사의 신고·조사·납부·불복 경로를 분리해 이해할 수 있다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "세무조사은 과세관청이 선정·통지·조사·결과통지와 과세전 구제 절차를 수행하는 제도 제도다.",
+  "stakeholders": "납세자·상속인, 세무서와 국세청, 원천징수의무자·제3자, 조세심판원이 관여한다.",
+  "legalBasis": [
+   {
+    "law": "국세기본법",
+    "articles": "제81조의2(납세자권리헌장의 제정 및 교부), 제81조의4(세무조사권 남용 금지), 제81조의5(세무조사 시 조력을 받을 권리), 제81조의6(세무조사 관할 및 대상자 선정), 제81조의7(세무조사의 통지와 연기신청 등), 제81조의8(세무조사 기간), 제81조의9(세무조사 범위 확대의 제한), 제81조의11(통합조사의 원칙), 제81조의12(세무조사의 결과 통지), 제81조의15(과세전적부심사), 제81조의17(납세자의 협력의무)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "세무서·국세청",
+    "role": "접수·조사·결정·징수"
+   },
+   {
+    "name": "납세자·상속인",
+    "role": "신고·납부·불복 청구"
+   },
+   {
+    "name": "조세심판원",
+    "role": "조세심판 절차"
+   }
+  ],
+  "procedure": [
+   "과세·정산 사안 확인",
+   "자료·신고서 제출",
+   "접수·자료 수집",
+   "과세표준·요건 검토",
+   "보완·조사 통지",
+   "보완 자료 제출",
+   "세무조사 결과 통지",
+   "결정 통지·고지",
+   "납부·징수 또는 환급",
+   "불복·재검토"
+  ],
+  "moneyFlow": "세액 납부·환급·체납징수와 관련 비용은 세법과 징수 절차에 따른다.",
+  "docsFlow": "신고·증빙 → 접수·검토 → 결정·고지 → 납부·징수 또는 불복으로 이어진다.",
+  "bottlenecks": [
+   "재산·소득 자료의 정확성",
+   "신고기한과 보완 요구",
+   "체납처분과 제3자 권리",
+   "불복 절차의 선택"
+  ],
+  "reformPoints": [
+   "자료 제출 경로 통합",
+   "결정 근거의 설명 강화",
+   "체납·불복 진행상태 공개"
+  ]
+ },
+ "related": [
+  "행정심판",
+  "행정소송",
+  "종합부동산세",
+  "취득세(주택)"
+ ],
+ "fieldVerification": [
+  "실제 신고 서식과 전산 경로",
+  "세무서별 조사 운영",
+  "개별 사건의 기한·가산세 적용"
+ ],
+ "process": {
+  "institution_name": "세무조사",
+  "law_name": "국세기본법",
+  "lanes": [
+   "납세자·상속인",
+   "세무서·과세관청",
+   "국세청·조세심판원"
+  ],
+  "stages": [
+   "G0 사안발생",
+   "G1 신고·접수",
+   "G2 검토·조사",
+   "G3 결정·통지",
+   "G4 납부·집행",
+   "G5 불복·정리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "과세·정산 사안 확인",
+    "lane": "납세자·상속인",
+    "stage": "G0 사안발생",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "납세자·상속인",
+    "action": "과세·정산 사안 확인",
+    "output_documents": [
+     "과세·정산 사안 확인"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국세기본법",
+      "article": "제81조의4(세무조사권 남용 금지)",
+      "text": "세무조사권 남용 금지에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "자료·신고서 제출",
+    "lane": "납세자·상속인",
+    "stage": "G1 신고·접수",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "납세자·상속인",
+    "action": "자료·신고서 제출",
+    "output_documents": [
+     "자료·신고서 제출"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국세기본법",
+      "article": "제81조의17(납세자의 협력의무)",
+      "text": "납세자는 세무조사에 필요한 자료 제출 등 협력의무를 진다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "접수·자료 수집",
+    "lane": "세무서·과세관청",
+    "stage": "G1 신고·접수",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "세무서·과세관청",
+    "action": "접수·자료 수집",
+    "output_documents": [
+     "접수·자료 수집"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국세기본법",
+      "article": "제81조의4(세무조사권 남용 금지)",
+      "text": "세무조사권 남용 금지에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "과세표준·요건 검토",
+    "lane": "세무서·과세관청",
+    "stage": "G2 검토·조사",
+    "type": "task",
+    "status": "current",
+    "progress": 45,
+    "actor": "세무서·과세관청",
+    "action": "세무조사 실시·과세표준 검토(통합조사 원칙, 범위 확대 제한)",
+    "output_documents": [
+     "조사 진행 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국세기본법",
+      "article": "제81조의11(통합조사의 원칙)",
+      "text": "세무조사는 특정 세목만이 아니라 통합하여 실시함을 원칙으로 한다."
+     },
+     {
+      "law": "국세기본법",
+      "article": "제81조의9(세무조사 범위 확대의 제한)",
+      "text": "세무조사 범위는 조사 진행 중 함부로 확대할 수 없다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "보완·조사 통지",
+    "lane": "세무서·과세관청",
+    "stage": "G2 검토·조사",
+    "type": "task",
+    "status": "risk",
+    "progress": 0,
+    "actor": "세무서·과세관청",
+    "action": "세무조사 사전통지 및 권리헌장 교부",
+    "output_documents": [
+     "사전통지서·권리헌장"
+    ],
+    "deadline": "조사 20일 전(재조사 7일 전)",
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "국세기본법",
+      "article": "제81조의7제1항(세무조사의 통지와 연기신청 등)",
+      "text": "세무공무원은 조사를 시작하기 20일(재조사 7일) 전에 조사대상 세목·기간·사유를 사전통지한다."
+     },
+     {
+      "law": "국세기본법",
+      "article": "제81조의2(납세자권리헌장의 제정 및 교부)",
+      "text": "세무공무원은 조사 시작 시 조사원증을 제시하고 납세자권리헌장을 교부·낭독한다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "보완 자료 제출",
+    "lane": "납세자·상속인",
+    "stage": "G2 검토·조사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "납세자·상속인",
+    "action": "연기신청·자료 제출·협력",
+    "output_documents": [
+     "연기신청·제출 자료"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국세기본법",
+      "article": "제81조의7제2항",
+      "text": "사전통지를 받은 납세자는 천재지변 등 사유로 조사 연기를 신청할 수 있다."
+     },
+     {
+      "law": "국세기본법",
+      "article": "제81조의17(납세자의 협력의무)",
+      "text": "납세자는 세무조사에 성실하게 협력할 의무가 있다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "세무조사 결과 통지",
+    "lane": "세무서·과세관청",
+    "stage": "G3 결정·통지",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "세무서·과세관청",
+    "action": "세무조사 결과 통지",
+    "output_documents": [
+     "세무조사 결과 통지"
+    ],
+    "deadline": "조사 종료 후 20일(부과제척 임박 등 40일) 이내",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국세기본법",
+      "article": "제81조의12(세무조사의 결과 통지)",
+      "text": "세무공무원은 조사를 마친 날부터 20일(일정 사유 40일) 이내에 조사결과를 납세자에게 설명·서면 통지한다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "결정 통지·고지",
+    "lane": "세무서·과세관청",
+    "stage": "G3 결정·통지",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "세무서·과세관청",
+    "action": "결정 통지·고지",
+    "output_documents": [
+     "결정 통지·고지"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국세기본법",
+      "article": "제81조의12(세무조사의 결과 통지)",
+      "text": "세무조사의 결과 통지에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "납부·징수 또는 환급",
+    "lane": "납세자·상속인",
+    "stage": "G4 납부·집행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "납세자·상속인",
+    "action": "납부·징수 또는 환급",
+    "output_documents": [
+     "납부·징수 또는 환급"
+    ],
+    "deadline": null,
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "국세기본법",
+      "article": "제81조의12(세무조사의 결과 통지)",
+      "text": "조사결과 통지에 따라 고지된 세액을 납부하거나 환급받는다(고지·징수는 국세징수법 소관)."
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "불복·재검토",
+    "lane": "국세청·조세심판원",
+    "stage": "G5 불복·정리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국세청·조세심판원",
+    "action": "불복·재검토",
+    "output_documents": [
+     "불복·재검토"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국세기본법",
+      "article": "제81조의15(과세전적부심사)",
+      "text": "과세전적부심사에 관한 절차를 정한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L01",
+    "source": "P05",
+    "target": "P06",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "L02",
+    "source": "P06",
+    "target": "P04",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P04",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 세목과 사실관계에 따라 신고기한·가산세·불복 경로가 달라질 수 있다.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (C) P02 자료제출 근거를 제81조의12에서 제81조의17(협력의무)로, P04 조사 근거를 제81조의5에서 제81조의11(통합조사)·제81조의9(범위 확대 제한)로, P05 조사통지 근거를 제81조의15에서 제81조의7제1항(사전통지)·제81조의2(권리헌장)로, P06 근거를 제81조의4에서 제81조의7제2항(연기신청)·제81조의17로, P09 납부 근거를 제81조의15에서 제81조의12로 정정. (D) P05 사전통지 20일(재조사 7일) 전, P07 결과 통지 조사 종료 후 20일(40일) 기한 명시. L0 지적 '제3자·원천징수의무자' 빈 레인은 세무조사 당사자가 납세자·세무공무원이고 납세관리인은 납세자 대리 지위여서 정당한 공란으로 판단해 leave-as-is. 참조 MST: 국세기본법 280373. 법의 침묵: 조사결과 통지 후 고지·징수는 국세징수법 소관으로 국세기본법 세무조사 장에는 규정이 없다.",
+   "2026-07-13 후속 구조 정리: 실제 법정 행위 노드가 없는 빈 레인 1개를 제거하고 해당 주체는 canvas 이해관계자 설명으로만 유지했다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 24건 가운데 24건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "국세기본법",
+    "lawId": "001586",
+    "mst": "280373",
+    "promulgatedOn": "2025-12-23",
+    "effectiveOn": "2026-07-01",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국세기본법",
+    "officialUrl": "https://law.go.kr/법령/국세기본법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 14,
+   "explicitCitationEntries": 14,
+   "articleReferences": 24,
+   "verifiedReferences": 24,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

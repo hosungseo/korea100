@@ -307,7 +307,7 @@
     "status": "waiting",
     "progress": 0,
     "actor": "국토부",
-    "action": "해제 검토",
+    "action": "해제 검토 (지자체장 해제요청 시 40일 이내 심의·결정·통보)",
     "output_documents": [
      "해제검토"
     ],
@@ -316,7 +316,8 @@
      {
       "law": "주택법",
       "article": "제63조(투기과열지구의 지정 및 해제)",
-      "text": "투기과열지구의 지정 및 해제"
+      "text": "⑧ 해제를 요청받은 국토교통부장관 또는 시ㆍ도지사는 요청받은 날부터 40일 이내에 주거정책심의위원회의 심의를 거쳐 해제 여부를 결정하여 통보하여야 한다.",
+      "deadline": "40일 이내"
      },
      {
       "law": "주택법",
@@ -456,6 +457,33 @@
       "text": "조정대상지역의 지정 및 해제"
      }
     ]
+   },
+   {
+    "id": "P17",
+    "name": "반기별 지정 유지 재검토",
+    "lane": "감독",
+    "stage": "G4 모니터링",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국토부",
+    "action": "반기마다 주거정책심의위원회를 소집하여 지정 유지 여부 재검토, 해제 필요 시 지체없이 해제",
+    "output_documents": [
+     "재검토결과"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "주택법",
+      "article": "제63조(투기과열지구의 지정 및 해제)",
+      "text": "⑥ 국토교통부장관은 반기마다 주거정책심의위원회의 회의를 소집하여 투기과열지구 지정의 유지 여부를 재검토하여야 한다."
+     },
+     {
+      "law": "주택법",
+      "article": "제63조의2(조정대상지역의 지정 및 해제)",
+      "text": "⑦ 국토교통부장관은 반기마다 주거정책심의위원회의 회의를 소집하여 조정대상지역 지정의 유지 여부를 재검토하여야 한다."
+     }
+    ]
    }
   ],
   "edges": [
@@ -577,17 +605,32 @@
     "target": "P12",
     "type": "sequence",
     "label": null
+   },
+   {
+    "id": "E18",
+    "source": "P09",
+    "target": "P17",
+    "type": "message",
+    "label": "반기 재검토"
+   },
+   {
+    "id": "E19",
+    "source": "P17",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
    }
   ],
   "warnings": [
-   "2026-07-12 부동산 패키지. MST 284095."
+   "2026-07-12 부동산 패키지. MST 284095.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (E) 감독 lane 공백 해소 — 주택법 제63조⑥·제63조의2⑦의 국토부장관 반기별 지정 유지 재검토 의무를 P17 노드로 추가(감독 lane, E18 message/E19 sequence 연결). (D) P10 해제검토에 제63조⑧ 해제요청 시 40일 이내 심의·결정·통보 기한 근거 보강. 참조 MST 284095(주택법), 287309(주택법 시행령). 법의 침묵: 지정처분에 대한 이해관계인 이의·불복은 주택법에 별도 규정 없어 일반 행정쟁송에 의함. 법의 침묵: 지정 기준 구체 수치는 대통령령에 위임."
   ]
  },
  "verification": {
   "status": "article-verified",
-  "verifiedAt": "2026-07-12",
-  "method": "법제처 DRF + L3",
-  "scope": "L3 당사자 워크스루 후 명시 조문 6건 존재 확인 6건",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 23건 가운데 23건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
    "주택법 MST 284095"
   ],
@@ -605,12 +648,12 @@
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-12",
-   "method": "DRF 목차·조문제목 대조",
-   "citationEntries": 6,
-   "explicitCitationEntries": 6,
-   "articleReferences": 6,
-   "verifiedReferences": 6,
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 24,
+   "explicitCitationEntries": 23,
+   "articleReferences": 23,
+   "verifiedReferences": 23,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }

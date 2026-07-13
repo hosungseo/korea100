@@ -1,0 +1,393 @@
+{
+ "slug": "stay-status-change",
+ "name": "체류자격 변경·허가",
+ "oneLiner": "체류자격 변경·허가의 신청·심사·결정·사후관리 절차",
+ "type": "체류자격 허가형",
+ "priority": 256,
+ "whyFirst": "체류자격 변경·허가의 행위자와 결정 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "체류자격 변경·허가은(는) 변경 사유·요건 확인 → 허가 신청 → 초청·재학·고용 자료 확인 → 체류자격 심사 → 보완 요구·제출 → 허가·불허 결정 → 체류기간·활동 관리로 이어지는 공적 절차다.",
+  "stakeholders": "외국인 신청인, 출입국·외국인관서, 고용주·교육기관, 법무부",
+  "legalBasis": [
+   {
+    "law": "출입국관리법",
+    "articles": "제10조(체류자격), 제20조(체류자격 외 활동), 제21조(근무처의 변경ㆍ추가), 제23조(체류자격 부여), 제24조(체류자격 변경허가), 제31조(외국인등록), 제89조(각종 허가 등의 취소ㆍ변경)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "출입국·외국인관서",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "고용주·교육기관",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "법무부",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "변경 사유·요건 확인",
+   "허가 신청",
+   "초청·재학·고용 자료 확인",
+   "체류자격 심사",
+   "보완 요구·제출",
+   "허가·불허 결정",
+   "체류기간·활동 관리"
+  ],
+  "moneyFlow": "수수료·복무·지원 범위는 법령과 개인의 사실관계에 따라 달라질 수 있다.",
+  "docsFlow": "신청·신고 기록 → 조사·심사 자료 → 결정·통지 → 이행·복무 기록 → 사후관리로 이어진다.",
+  "bottlenecks": [
+   "자격·사유 증빙",
+   "관계기관 자료 연계",
+   "결정 이후 변동 관리"
+  ],
+  "reformPoints": [
+   "처리상태 안내 강화",
+   "요건·기한 가독성 개선",
+   "온라인 보완 경로 명확화"
+  ]
+ },
+ "related": [
+  "사증(비자) 발급·연장",
+  "외국인등록",
+  "국적 취득·상실"
+ ],
+ "fieldVerification": [
+  "실제 온라인·방문 접수 경로",
+  "기관별 처리기한·서식",
+  "개별 사건별 세부 운영기준"
+ ],
+ "process": {
+  "institution_name": "체류자격 변경·허가",
+  "law_name": "출입국관리법",
+  "lanes": [
+   "외국인 신청인",
+   "출입국·외국인관서",
+   "고용주·교육기관",
+   "법무부"
+  ],
+  "stages": [
+   "G0 준비",
+   "G1 신청·접수",
+   "G2 조사·심사",
+   "G3 결정",
+   "G4 이행·복무",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "변경 사유·요건 확인",
+    "lane": "외국인 신청인",
+    "stage": "G0 준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "외국인 신청인",
+    "action": "변경 사유·요건 확인",
+    "output_documents": [
+     "변경 사유·요건 확인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "출입국관리법",
+      "article": "제10조",
+      "text": "출입국관리법 제10조에 따른 변경 사유·요건 확인 단계"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "허가 신청",
+    "lane": "외국인 신청인",
+    "stage": "G0 준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "외국인 신청인",
+    "action": "현재 체류기간이 끝나기 전에 체류자격 변경허가를 신청한다.",
+    "output_documents": [
+     "허가 신청 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "출입국관리법",
+      "article": "제24조",
+      "text": "출입국관리법 제24조에 따른 허가 신청 단계"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "초청·재학·고용 자료 확인",
+    "lane": "고용주·교육기관",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "고용주·교육기관",
+    "action": "초청·재학·고용 자료 확인",
+    "output_documents": [
+     "초청·재학·고용 자료 확인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "출입국관리법",
+      "article": "제24조",
+      "text": "출입국관리법 제24조에 따른 초청·재학·고용 자료 확인 단계"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "체류자격 심사",
+    "lane": "법무부",
+    "stage": "G2 조사·심사",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "법무부",
+    "action": "체류자격 심사",
+    "output_documents": [
+     "체류자격 심사 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "출입국관리법",
+      "article": "제24조",
+      "text": "출입국관리법 제24조에 따른 체류자격 심사 단계"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "보완자료 제출",
+    "lane": "외국인 신청인",
+    "stage": "G3 결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "외국인 신청인",
+    "action": "심사기관의 보완요구에 따라 추가 자료를 제출한다.",
+    "output_documents": [
+     "보완 요구·제출 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "출입국관리법",
+      "article": "제24조",
+      "text": "출입국관리법 제24조에 따른 보완 요구·제출 단계"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "허가·불허 결정",
+    "lane": "출입국·외국인관서",
+    "stage": "G4 이행·복무",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "출입국·외국인관서",
+    "action": "허가·불허 결정",
+    "output_documents": [
+     "허가·불허 결정 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "출입국관리법",
+      "article": "제24조",
+      "text": "출입국관리법 제24조에 따른 허가·불허 결정 단계"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "체류기간·활동 관리",
+    "lane": "고용주·교육기관",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "고용주·교육기관",
+    "action": "체류기간·활동 관리",
+    "output_documents": [
+     "체류기간·활동 관리 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "출입국관리법",
+      "article": "제20조",
+      "text": "출입국관리법 제20조(체류자격 외 활동) 및 제21조(근무처의 변경ㆍ추가)에 따라 체류자격 범위 외 활동·근무처 변경은 미리 법무부장관의 허가를 받거나(전문인력 등은 15일 이내 신고) 관리된다"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "외국인등록",
+    "lane": "외국인 신청인",
+    "stage": "G4 이행·복무",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "외국인 신청인",
+    "action": "외국인등록 (체류자격 변경허가 받는 때)",
+    "output_documents": [
+     "외국인등록증",
+     "외국인등록번호"
+    ],
+    "deadline": "변경허가로 90일 초과 체류 시 변경허가를 받는 때",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "출입국관리법",
+      "article": "제31조",
+      "text": "출입국관리법 제31조제4항에 따라 제24조 체류자격 변경허가를 받는 사람으로서 입국한 날부터 90일을 초과하여 체류하게 되는 사람은 변경허가를 받는 때에 지방출입국·외국인관서의 장에게 외국인등록을 하여야 한다"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "허가 취소·변경 전 의견청취",
+    "lane": "외국인 신청인",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "외국인 신청인",
+    "action": "체류허가 취소·변경 전 출석·의견진술",
+    "output_documents": [
+     "출석 통지서",
+     "의견청취 기록"
+    ],
+    "deadline": "출석일 7일 전까지 사유·일시·장소 통지",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "출입국관리법",
+      "article": "제89조",
+      "text": "출입국관리법 제89조(각종 허가 등의 취소ㆍ변경)에 따라 법무부장관은 제23조·제24조 등 체류허가를 취소·변경할 수 있고, 그 전에 해당 외국인·신청인을 출석하게 하여 의견을 들을 수 있으며 출석일 7일 전까지 사유·일시·장소를 통지하여야 한다"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P04",
+    "type": "loop",
+    "label": "보완자료 재심사"
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P06",
+    "target": "P08",
+    "type": "sequence",
+    "label": "변경허가 시 외국인등록"
+   },
+   {
+    "id": "E08",
+    "source": "P07",
+    "target": "P09",
+    "type": "sequence",
+    "label": "취소·변경 시 의견청취"
+   },
+   {
+    "id": "E09",
+    "source": "P04",
+    "target": "P06",
+    "type": "sequence",
+    "label": "심사 완료"
+   }
+  ],
+  "warnings": [
+   "개별 신청·처분의 요건·기한은 사실관계와 하위규정에 따라 달라질 수 있다.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (C) 캔버스 legalBasis의 제34조(체류자격 외 활동허가로 오기재)를 제20조·제21조·제23조·제31조·제89조로 정정 — 제34조는 실제로는 외국인등록표 작성·관리. (C) P07 체류기간·활동 관리 근거를 제25조(체류기간 연장)→제20조·제21조(체류자격 외 활동·근무처 변경)로 수정. (E) 외국인등록 노드(P08, 제31조제4항 변경허가 받는 때) 신설·연결. (E) 허가 취소·변경 전 의견청취 노드(P09, 제89조 출석·7일 전 통지) 신설·연결. 대조 법령 MST 272921(출입국관리법). L0 지적: empty-lane·backward-sequence 해당 없음. 법의 침묵: 체류자격 변경·부여 심사기준은 법무부령 위임. 법의 침묵: 1차 결정권한은 법률상 법무부장관이나 시행령상 관할 출입국관서장 등에 위임."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 16건 가운데 16건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "출입국관리법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "출입국관리법",
+    "lawId": "001707",
+    "mst": "272921",
+    "promulgatedOn": "2025-07-22",
+    "effectiveOn": "2026-01-23",
+    "officialUrl": "https://law.go.kr/법령/출입국관리법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 10,
+   "explicitCitationEntries": 10,
+   "articleReferences": 16,
+   "verifiedReferences": 16,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

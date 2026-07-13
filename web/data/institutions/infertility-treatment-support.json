@@ -1,0 +1,420 @@
+{
+ "slug": "infertility-treatment-support",
+ "name": "난임 시술비 지원",
+ "oneLiner": "난임 시술을 받는 사람이 지자체 지원 기준에 따라 시술비 지원을 신청·정산받는 절차",
+ "type": "의료비 지원형",
+ "priority": 232,
+ "whyFirst": "난임 시술비 지원의 신청·결정·사후관리 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "난임 시술비 지원은 법률상 국가·지자체 지원사업을 바탕으로 지자체가 자격 확인과 비용 지원을 운영하는 구조다.",
+  "stakeholders": "신청인, 시술 의료기관, 보건소·지자체, 보건복지부·관계기관",
+  "legalBasis": [
+   {
+    "law": "모자보건법",
+    "articles": "제11조(난임ㆍ유산ㆍ사산 극복 지원사업), 제11조의2(난임치료의 기준 고시), 제11조의3(난임시술 의료기관의 지정 등), 제11조의4(난임ㆍ임산부심리상담센터의 설치ㆍ운영 등)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "시술 의료기관",
+    "role": "접수·확인·결정 또는 서비스 연계"
+   },
+   {
+    "name": "보건소·지자체",
+    "role": "접수·확인·결정 또는 서비스 연계"
+   },
+   {
+    "name": "보건복지부·관계기관",
+    "role": "접수·확인·결정 또는 서비스 연계"
+   }
+  ],
+  "procedure": [
+   "난임 진단·시술 상담",
+   "시술계획·진단서 발급",
+   "지원 신청서 제출",
+   "자격·지원기준 확인",
+   "보완자료 요청",
+   "보완자료 제출",
+   "지원 결정 통지",
+   "시술 실시",
+   "비용 지원·정산",
+   "상담·추가 지원 연계"
+  ],
+  "moneyFlow": "급여·이용권·서비스 비용과 본인부담은 법령 및 연도별 운영기준에 따라 달라질 수 있다.",
+  "docsFlow": "신청·신고 기록 → 자격·사실 확인자료 → 결정·연계 통지 → 지급·이행 기록 → 사후관리 기록으로 이어진다.",
+  "bottlenecks": [
+   "사실관계와 자격 증빙",
+   "관계기관 간 정보·기록 연계",
+   "개별 상황에 따른 지원·결정 기준"
+  ],
+  "reformPoints": [
+   "신청 진행상태 안내 강화",
+   "기관 간 인계 기준의 명확화",
+   "결정 근거와 이의 경로의 가독성 개선"
+  ]
+ },
+ "related": [
+  "부모급여·첫만남이용권",
+  "국민건강보험",
+  "긴급복지지원"
+ ],
+ "fieldVerification": [
+  "실제 온라인·방문 신청 경로",
+  "연도별 지원금액·자격 기준",
+  "지자체·기관별 운영 세부기준"
+ ],
+ "process": {
+  "institution_name": "난임 시술비 지원",
+  "law_name": "모자보건법",
+  "lanes": [
+   "신청인",
+   "시술 의료기관",
+   "보건소·지자체",
+   "보건복지부·관계기관"
+  ],
+  "stages": [
+   "G0 상황·상담",
+   "G1 신청·접수",
+   "G2 조사·확인",
+   "G3 결정·연계",
+   "G4 지급·이행",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "난임 진단·시술 상담",
+    "lane": "신청인",
+    "stage": "G0 상황·상담",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "신청인",
+    "action": "난임 진단·시술 상담",
+    "output_documents": [
+     "난임 진단·시술 상담 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "모자보건법",
+      "article": "제11조",
+      "text": "모자보건법 제11조에 따른 난임 진단·시술 상담 단계"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "시술계획·진단서 발급",
+    "lane": "시술 의료기관",
+    "stage": "G0 상황·상담",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "시술 의료기관",
+    "action": "시술계획·진단서 발급",
+    "output_documents": [
+     "시술계획·진단서 발급 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "모자보건법",
+      "article": "제11조",
+      "text": "모자보건법 제11조에 따른 시술계획·진단서 발급 단계"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "지원 신청서 제출",
+    "lane": "신청인",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "신청인",
+    "action": "지원 신청서 제출",
+    "output_documents": [
+     "지원 신청서 제출 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "모자보건법",
+      "article": "제11조",
+      "text": "모자보건법 제11조에 따른 지원 신청서 제출 단계"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "자격·지원기준 확인",
+    "lane": "보건소·지자체",
+    "stage": "G1 신청·접수",
+    "type": "gateway",
+    "status": "current",
+    "progress": 55,
+    "actor": "보건소·지자체",
+    "action": "자격·지원기준 확인",
+    "output_documents": [
+     "자격·지원기준 확인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "모자보건법",
+      "article": "제11조",
+      "text": "모자보건법 제11조에 따른 자격·지원기준 확인 단계"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "보완자료 요청",
+    "lane": "보건소·지자체",
+    "stage": "G2 조사·확인",
+    "type": "task",
+    "status": "risk",
+    "progress": 0,
+    "actor": "보건소·지자체",
+    "action": "보완자료 요청",
+    "output_documents": [
+     "보완자료 요청 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.82,
+    "unverified": true,
+    "legal_basis": [
+     {
+      "law": "모자보건법",
+      "article": "제11조",
+      "text": "모자보건법 제11조는 난임 지원사업의 수권규정으로 시술비 지원(제11조제2항제1호)의 근거이나, 보완자료 요청 등 신청 심사의 구체 절차는 법률에 없고 보건복지부령·연도별 난임부부 시술비 지원사업 안내(운영지침)에 따른다(법의 침묵)."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "보완자료 제출",
+    "lane": "신청인",
+    "stage": "G2 조사·확인",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신청인",
+    "action": "보완자료 제출",
+    "output_documents": [
+     "보완자료 제출 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "unverified": true,
+    "legal_basis": [
+     {
+      "law": "모자보건법",
+      "article": "제11조",
+      "text": "신청인의 보완자료 제출 절차는 모자보건법에 명시가 없고 지자체 난임부부 시술비 지원사업 운영지침에 따른다(법의 침묵)."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "지원 결정 통지",
+    "lane": "보건소·지자체",
+    "stage": "G3 결정·연계",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보건소·지자체",
+    "action": "지원 결정 통지",
+    "output_documents": [
+     "지원 결정 통지 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "unverified": true,
+    "legal_basis": [
+     {
+      "law": "모자보건법",
+      "article": "제11조",
+      "text": "지원 결정·통지의 기한·방식은 모자보건법에 명시가 없고 지자체 난임부부 시술비 지원사업 운영지침에 따른다(법의 침묵)."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "시술 실시",
+    "lane": "시술 의료기관",
+    "stage": "G4 지급·이행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시술 의료기관",
+    "action": "시술 실시",
+    "output_documents": [
+     "시술 실시 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "모자보건법",
+      "article": "제11조의3",
+      "text": "모자보건법 제11조의3(난임시술 의료기관의 지정 등)에 따라 지정 난임시술 의료기관이 제11조의2(난임치료의 기준 고시)의 의학적 기준에 따라 보조생식술 등 난임시술을 실시하는 단계"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "비용 지원·정산",
+    "lane": "보건소·지자체",
+    "stage": "G4 지급·이행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보건소·지자체",
+    "action": "비용 지원·정산",
+    "output_documents": [
+     "비용 지원·정산 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "모자보건법",
+      "article": "제11조",
+      "text": "모자보건법 제11조에 따른 비용 지원·정산 단계"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "상담·추가 지원 연계",
+    "lane": "보건복지부·관계기관",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보건복지부·관계기관",
+    "action": "상담·추가 지원 연계",
+    "output_documents": [
+     "상담·추가 지원 연계 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "모자보건법",
+      "article": "제11조의4",
+      "text": "모자보건법 제11조의4(난임ㆍ임산부심리상담센터의 설치ㆍ운영 등)에 따라 난임 극복 상담·교육 등을 위한 심리상담센터로 연계하는 단계(제11조의7 생식세포 동결·보존 지원 연계 포함)"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건·기한·지원 범위는 시행령, 고시 및 사실관계에 따라 달라질 수 있다.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (C) P08 '시술 실시' 근거를 모자보건법 제11조에서 제11조의3(난임시술 의료기관의 지정 등)로 정정; (C) P10 '상담·추가 지원 연계' 근거를 제11조에서 제11조의4(난임ㆍ임산부심리상담센터의 설치ㆍ운영 등)로 정정; (F) 신청 심사·결정 행정절차 노드(P05 보완자료 요청·P06 보완자료 제출·P07 지원 결정 통지)는 모자보건법 제11조(수권규정)에 구체 근거가 없어 unverified 표시 — 실제 근거는 보건복지부령·연도별 난임부부 시술비 지원사업 안내(운영지침). 대조 법령 MST: 270399(모자보건법). 법의 침묵: 시술비 지원 신청·소득기준·결정기한이 법률에 없고 부령·지자체 지침에 위임. 법의 침묵: 지원 결정 이의신청 절차가 모자보건법에 명시 없음."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 14건 가운데 14건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "모자보건법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "모자보건법",
+    "lawId": "000183",
+    "mst": "270399",
+    "promulgatedOn": "2025-04-01",
+    "effectiveOn": "2025-04-01",
+    "officialUrl": "https://law.go.kr/법령/모자보건법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 11,
+   "explicitCitationEntries": 11,
+   "articleReferences": 14,
+   "verifiedReferences": 14,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

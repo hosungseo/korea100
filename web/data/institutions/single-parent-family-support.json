@@ -1,0 +1,456 @@
+{
+ "slug": "single-parent-family-support",
+ "name": "한부모가족 지원",
+ "oneLiner": "한부모가족이 복지급여와 가족·고용 지원을 신청·결정받는 절차",
+ "type": "복지급여·고용지원형",
+ "priority": 224,
+ "whyFirst": "한부모가족 지원의 신청·결정·사후관리 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "한부모가족 지원은 한부모가족이 복지급여와 가족·고용 지원을 신청·결정받는 절차 제도다.",
+  "stakeholders": "신청인·근로자, 사업주·지자체, 고용센터·복지기관과 관계기관이 관여한다.",
+  "legalBasis": [
+   {
+    "law": "한부모가족지원법",
+    "articles": "제5조(지원대상자의 범위), 제10조(지원대상자의 조사 등), 제11조(복지 급여의 신청), 제12조(복지 급여의 내용), 제12조의2(복지 급여 사유의 확인 등), 제12조의4(복지 급여의 거절ㆍ변경 등), 제14조의2(고용지원 연계), 제17조(가족지원서비스)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "복지기관·고용센터",
+    "role": "접수·조사·결정·지급"
+   },
+   {
+    "name": "사업주·지자체",
+    "role": "휴직·지원 확인과 협조"
+   },
+   {
+    "name": "신청인·근로자",
+    "role": "신청·자료 제출·이의"
+   }
+  ],
+  "procedure": [
+   "지원·휴직 사유 확인",
+   "신청·신고 제출",
+   "접수·확인",
+   "자격·요건 조사",
+   "보완 요구",
+   "보완 자료 제출",
+   "복지급여 결정",
+   "결정 통지",
+   "급여·서비스 지급",
+   "사후 확인·변경·이의"
+  ],
+  "moneyFlow": "법정 급여·지원금의 지급·환수 기준은 개별 법령과 고용보험·지자체 기준을 따른다.",
+  "docsFlow": "신청·신고 → 조사·확인 → 결정 통지 → 급여·서비스 지급 → 사후 확인·변경으로 이어진다.",
+  "bottlenecks": [
+   "위기·자격 증빙",
+   "사업주 확인과 기관 간 자료 연계",
+   "사후조사와 환수 판단"
+  ],
+  "reformPoints": [
+   "신청·확인 서류 간소화",
+   "급여 진행상태 공개",
+   "사후조사 기준 설명 강화"
+  ]
+ },
+ "related": [
+  "국민기초생활보장",
+  "고용보험과 실업급여",
+  "아동수당",
+  "국민건강보험"
+ ],
+ "fieldVerification": [
+  "실제 신청 서식과 전산 경로",
+  "지자체별 추가지원 기준",
+  "사후조사·환수의 개별 적용"
+ ],
+ "process": {
+  "institution_name": "한부모가족 지원",
+  "law_name": "한부모가족지원법",
+  "lanes": [
+   "신청인·근로자",
+   "사업주·지자체",
+   "고용센터·복지기관",
+   "관계기관"
+  ],
+  "stages": [
+   "G0 위기·사유",
+   "G1 신청·확인",
+   "G2 조사·검토",
+   "G3 결정",
+   "G4 지급·지원",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "지원·휴직 사유 확인",
+    "lane": "신청인·근로자",
+    "stage": "G0 위기·사유",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "신청인·근로자",
+    "action": "지원·휴직 사유 확인",
+    "output_documents": [
+     "지원·휴직 사유 확인"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "한부모가족지원법",
+      "article": "제5조(지원대상자의 범위)",
+      "text": "지원대상자의 범위에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "신청·신고 제출",
+    "lane": "신청인·근로자",
+    "stage": "G1 신청·확인",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "신청인·근로자",
+    "action": "신청·신고 제출",
+    "output_documents": [
+     "신청·신고 제출"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "한부모가족지원법",
+      "article": "제5조(지원대상자의 범위)",
+      "text": "지원대상자의 범위에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "접수·확인",
+    "lane": "고용센터·복지기관",
+    "stage": "G1 신청·확인",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "고용센터·복지기관",
+    "action": "접수·확인",
+    "output_documents": [
+     "접수·확인"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "한부모가족지원법",
+      "article": "제10조(지원대상자의 조사 등)",
+      "text": "지원대상자의 조사 등에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "자격·요건 조사",
+    "lane": "사업주·지자체",
+    "stage": "G2 조사·검토",
+    "type": "task",
+    "status": "current",
+    "progress": 45,
+    "actor": "사업주·지자체",
+    "action": "자격·요건 조사",
+    "output_documents": [
+     "자격·요건 조사"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "한부모가족지원법",
+      "article": "제10조(지원대상자의 조사 등)",
+      "text": "지원대상자의 조사 등에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "보완 요구",
+    "lane": "고용센터·복지기관",
+    "stage": "G2 조사·검토",
+    "type": "task",
+    "status": "risk",
+    "progress": 0,
+    "actor": "고용센터·복지기관",
+    "action": "보완 요구",
+    "output_documents": [
+     "보완 요구"
+    ],
+    "deadline": null,
+    "confidence": 0.78,
+    "legal_basis": [
+     {
+      "law": "한부모가족지원법",
+      "article": "제12조의2(복지 급여 사유의 확인 등) 제1항",
+      "text": "급여 사유의 발생·변경·상실을 확인하기 위하여 소득·재산 등에 관한 자료의 제출을 요구할 수 있으며, 소속 공무원으로 하여금 주거 등에 출입하여 생활환경·소득자료 등을 조사하게 할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "보완 자료 제출",
+    "lane": "신청인·근로자",
+    "stage": "G2 조사·검토",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신청인·근로자",
+    "action": "보완 자료 제출",
+    "output_documents": [
+     "보완 자료 제출"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "한부모가족지원법",
+      "article": "제5조(지원대상자의 범위)",
+      "text": "지원대상자의 범위에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "복지급여 결정",
+    "lane": "고용센터·복지기관",
+    "stage": "G3 결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "고용센터·복지기관",
+    "action": "복지급여 결정",
+    "output_documents": [
+     "복지급여 결정"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "한부모가족지원법",
+      "article": "제12조(복지 급여의 내용) 제1항",
+      "text": "국가나 지방자치단체는 복지 급여의 신청이 있으면 생계비, 아동교육지원비, 아동양육비 등의 복지 급여를 실시하여야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "결정 통지",
+    "lane": "사업주·지자체",
+    "stage": "G3 결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업주·지자체",
+    "action": "결정 통지",
+    "output_documents": [
+     "결정 통지"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "한부모가족지원법",
+      "article": "제12조의4(복지 급여의 거절ㆍ변경 등) 제1항·제2항",
+      "text": "자료 제출 거부·조사 거부 시 급여 지급을 거절할 수 있고, 급여를 받고 있는 지원대상자에 대해 급여 정지·변경·중지 등의 조치를 할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "급여·서비스 지급",
+    "lane": "고용센터·복지기관",
+    "stage": "G4 지급·지원",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "고용센터·복지기관",
+    "action": "급여·서비스 지급",
+    "output_documents": [
+     "급여·서비스 지급"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "한부모가족지원법",
+      "article": "제12조(복지 급여의 내용) 제1항",
+      "text": "생계비, 아동교육지원비, 아동양육비 등의 복지 급여를 실시하며, 미혼모·34세 이하 부모 등에 대해서는 추가 급여를 실시한다."
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "사후 확인·변경·이의",
+    "lane": "신청인·근로자",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신청인·근로자",
+    "action": "사후 확인·변경·이의",
+    "output_documents": [
+     "사후 확인·변경·이의"
+    ],
+    "deadline": "심사청구는 결정 통지받은 날부터 90일 이내(복지실시기관 30일 내 결정)",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "한부모가족지원법",
+      "article": "제28조(심사 청구) 제1항·제2항",
+      "text": "복지 급여 등에 이의가 있으면 결정을 통지받은 날부터 90일 이내에 서면으로 복지실시기관에 심사를 청구할 수 있고, 복지실시기관은 30일 이내에 심사·결정하여 통보하여야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "관계기관·금융기관 자료제공 협조",
+    "lane": "관계기관",
+    "stage": "G2 조사·검토",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국세·지방세·건강보험·고용보험·국민연금·주민등록 등 관계 기관 및 금융기관등",
+    "action": "급여사유 확인용 자료 및 금융정보등 제공 — 정당한 사유 없으면 응해야 함",
+    "output_documents": [
+     "자료 회신",
+     "금융정보등"
+    ],
+    "deadline": null,
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "한부모가족지원법",
+      "article": "제12조의2(복지 급여 사유의 확인 등) 제2항, 제12조의3(금융정보등의 제공)",
+      "text": "급여사유 확인을 위한 국세·건강보험 등 자료제공 요청에 관계 기관의 장은 정당한 사유가 없으면 응하여야 하고(제12조의2제2항), 금융정보등 제공을 요청받은 금융기관등의 장은 명의인의 금융정보등을 제공하여야 한다(제12조의3)."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L01",
+    "source": "P05",
+    "target": "P06",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "L02",
+    "source": "P06",
+    "target": "P04",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P04",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P11",
+    "target": "P04",
+    "type": "message",
+    "label": "자료·금융정보 제공"
+   }
+  ],
+  "warnings": [
+   "급여액·기간과 세부 요건은 시행령·고시 및 개인 상황에 따라 달라질 수 있다.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (E) empty-lane '관계기관'에 자료·금융정보 제공 협조 노드 P11 신설(한부모가족지원법 제12조의2제2항 관계기관 자료제공, 제12조의3 금융기관 금융정보 제공의무, message edge E09). (C) P05 보완요구 제17조(가족지원서비스)→제12조의2(급여 사유 확인) 정정. (C) P07 복지급여 결정 제14조의2(고용지원 연계)→제12조(복지 급여의 내용) 정정. (C) P08 결정통지 제5조(지원대상자 범위)→제12조의4(거절·변경 등) 정정. (C) P09 급여지급 제17조→제12조 정정. (C·D) P10 사후 이의 제17조→제28조(심사 청구) 정정 및 90일/30일 기한 추가. consultedMST: 266687(한부모가족지원법). 법의 침묵: 복지급여 신청 후 결정까지의 처리기한 명문 부재. 법의 침묵: 자녀양육비 이행지원(제17조의4) 등 서비스 연계의 실시 담보 수단 미규정. 법의 침묵: 지원대상자 조사(제10조 연 1회)와 급여 재산정 주기의 정합 기준 미규정."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 20건 가운데 20건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "한부모가족지원법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "한부모가족지원법",
+    "lawId": "000184",
+    "mst": "266687",
+    "promulgatedOn": "2024-12-03",
+    "effectiveOn": "2025-12-04",
+    "officialUrl": "https://law.go.kr/법령/한부모가족지원법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 12,
+   "explicitCitationEntries": 12,
+   "articleReferences": 20,
+   "verifiedReferences": 20,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

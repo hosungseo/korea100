@@ -1,0 +1,461 @@
+{
+ "slug": "gift-tax",
+ "name": "증여세",
+ "oneLiner": "무상 이전 재산의 가액을 산정해 신고·납부하는 절차",
+ "type": "신고·과세형",
+ "priority": 218,
+ "whyFirst": "증여세의 신고·조사·납부·불복 경로를 분리해 이해할 수 있다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "증여세은 무상 이전 재산의 가액을 산정해 신고·납부하는 절차 제도다.",
+  "stakeholders": "납세자·상속인, 세무서와 국세청, 원천징수의무자·제3자, 조세심판원이 관여한다.",
+  "legalBasis": [
+   {
+    "law": "상속세 및 증여세법",
+    "articles": "제4조(증여세 과세대상), 제4조의2(증여세 납부의무), 제55조(증여세의 과세표준 및 과세최저한), 제68조(증여세 과세표준신고), 제70조(자진납부), 제76조(결정ㆍ경정), 제77조(과세표준과 세액의 결정 통지), 제79조(경정 등의 청구 특례), 제84조(질문ㆍ조사)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "세무서·국세청",
+    "role": "접수·조사·결정·징수"
+   },
+   {
+    "name": "납세자·상속인",
+    "role": "신고·납부·불복 청구"
+   },
+   {
+    "name": "조세심판원",
+    "role": "조세심판 절차"
+   }
+  ],
+  "procedure": [
+   "과세·정산 사안 확인",
+   "자료·신고서 제출",
+   "접수·자료 수집",
+   "과세표준·요건 검토",
+   "보완·조사 통지",
+   "보완 자료 제출",
+   "증여세 결정·통지",
+   "결정 통지·고지",
+   "납부·징수 또는 환급",
+   "불복·재검토"
+  ],
+  "moneyFlow": "세액 납부·환급·체납징수와 관련 비용은 세법과 징수 절차에 따른다.",
+  "docsFlow": "신고·증빙 → 접수·검토 → 결정·고지 → 납부·징수 또는 불복으로 이어진다.",
+  "bottlenecks": [
+   "재산·소득 자료의 정확성",
+   "신고기한과 보완 요구",
+   "체납처분과 제3자 권리",
+   "불복 절차의 선택"
+  ],
+  "reformPoints": [
+   "자료 제출 경로 통합",
+   "결정 근거의 설명 강화",
+   "체납·불복 진행상태 공개"
+  ]
+ },
+ "related": [
+  "행정심판",
+  "행정소송",
+  "종합부동산세",
+  "취득세(주택)"
+ ],
+ "fieldVerification": [
+  "실제 신고 서식과 전산 경로",
+  "세무서별 조사 운영",
+  "개별 사건의 기한·가산세 적용"
+ ],
+ "process": {
+  "institution_name": "증여세",
+  "law_name": "상속세 및 증여세법",
+  "lanes": [
+   "납세자·상속인",
+   "세무서·과세관청",
+   "국세청·조세심판원",
+   "제3자·원천징수의무자"
+  ],
+  "stages": [
+   "G0 사안발생",
+   "G1 신고·접수",
+   "G2 검토·조사",
+   "G3 결정·통지",
+   "G4 납부·집행",
+   "G5 불복·정리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "과세·정산 사안 확인",
+    "lane": "납세자·상속인",
+    "stage": "G0 사안발생",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "납세자·상속인",
+    "action": "과세·정산 사안 확인",
+    "output_documents": [
+     "과세·정산 사안 확인"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "상속세 및 증여세법",
+      "article": "제4조(증여세 과세대상)",
+      "text": "증여세 과세대상에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "자료·신고서 제출",
+    "lane": "납세자·상속인",
+    "stage": "G1 신고·접수",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "납세자·상속인",
+    "action": "자료·신고서 제출",
+    "output_documents": [
+     "자료·신고서 제출"
+    ],
+    "deadline": "증여받은 날이 속하는 달의 말일부터 3개월 이내",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "상속세 및 증여세법",
+      "article": "제68조(증여세 과세표준신고)",
+      "text": "증여세 납부의무자는 증여받은 날이 속하는 달의 말일부터 3개월 이내에 관할세무서장에게 과세표준을 신고한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "접수·자료 수집",
+    "lane": "세무서·과세관청",
+    "stage": "G1 신고·접수",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "세무서·과세관청",
+    "action": "접수·자료 수집",
+    "output_documents": [
+     "접수·자료 수집"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "상속세 및 증여세법",
+      "article": "제4조(증여세 과세대상)",
+      "text": "증여세 과세대상에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "과세표준·요건 검토",
+    "lane": "세무서·과세관청",
+    "stage": "G2 검토·조사",
+    "type": "task",
+    "status": "current",
+    "progress": 45,
+    "actor": "세무서·과세관청",
+    "action": "과세표준·요건 검토",
+    "output_documents": [
+     "과세표준·요건 검토"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "상속세 및 증여세법",
+      "article": "제55조(증여세의 과세표준 및 과세최저한)",
+      "text": "증여세의 과세표준 및 과세최저한에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "보완·조사 통지",
+    "lane": "세무서·과세관청",
+    "stage": "G2 검토·조사",
+    "type": "task",
+    "status": "risk",
+    "progress": 0,
+    "actor": "세무서·과세관청",
+    "action": "보완·조사 통지",
+    "output_documents": [
+     "보완·조사 통지"
+    ],
+    "deadline": null,
+    "confidence": 0.78,
+    "legal_basis": [
+     {
+      "law": "상속세 및 증여세법",
+      "article": "제84조(질문ㆍ조사)",
+      "text": "질문ㆍ조사에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "보완 자료 제출",
+    "lane": "납세자·상속인",
+    "stage": "G2 검토·조사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "납세자·상속인",
+    "action": "보완 자료 제출",
+    "output_documents": [
+     "보완 자료 제출"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "상속세 및 증여세법",
+      "article": "제84조(질문ㆍ조사)",
+      "text": "세무공무원의 질문·조사에 따라 수증자가 자료를 제출·보완한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "증여세 결정·통지",
+    "lane": "세무서·과세관청",
+    "stage": "G3 결정·통지",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "세무서·과세관청",
+    "action": "증여세 결정·통지",
+    "output_documents": [
+     "증여세 결정·통지"
+    ],
+    "deadline": "법정결정기한 이내",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "상속세 및 증여세법",
+      "article": "제76조(결정ㆍ경정)",
+      "text": "세무서장등은 신고에 따라 과세표준·세액을 결정하고, 무신고·탈루·오류 시 조사하여 결정하며 법정결정기한 내 결정한다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "결정 통지·고지",
+    "lane": "세무서·과세관청",
+    "stage": "G3 결정·통지",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "세무서·과세관청",
+    "action": "결정 통지·고지",
+    "output_documents": [
+     "결정 통지·고지"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "상속세 및 증여세법",
+      "article": "제77조(과세표준과 세액의 결정 통지)",
+      "text": "과세표준과 세액의 결정 통지에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "납부·징수 또는 환급",
+    "lane": "납세자·상속인",
+    "stage": "G4 납부·집행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "납세자·상속인",
+    "action": "납부·징수 또는 환급",
+    "output_documents": [
+     "납부·징수 또는 환급"
+    ],
+    "deadline": "신고기한까지(1천만원 초과 시 분납 2개월)",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "상속세 및 증여세법",
+      "article": "제70조(자진납부)",
+      "text": "신고자는 신고기한까지 산출세액을 자진납부하며, 1천만원 초과 시 납부기한 후 2개월 이내 분납할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "불복·재검토",
+    "lane": "국세청·조세심판원",
+    "stage": "G5 불복·정리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국세청·조세심판원",
+    "action": "불복·재검토",
+    "output_documents": [
+     "불복·재검토"
+    ],
+    "deadline": null,
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "상속세 및 증여세법",
+      "article": "제79조(경정 등의 청구 특례)",
+      "text": "수증자는 후발적 사유 등에 따라 결정·경정을 청구할 수 있다(불복 심사·심판은 국세기본법 소관)."
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "증여자 연대납부",
+    "lane": "제3자·원천징수의무자",
+    "stage": "G4 납부·집행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "증여자(연대납세의무자)",
+    "action": "수증자가 납부할 증여세를 연대하여 납부; 세무서장은 증여자에게 연대납부시킬 때 그 사유를 통지",
+    "output_documents": [
+     "연대납부 고지·사유 통지"
+    ],
+    "deadline": null,
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "상속세 및 증여세법",
+      "article": "제4조의2제6항",
+      "text": "증여자는 일정한 경우 수증자가 납부할 증여세를 연대하여 납부할 의무가 있다."
+     },
+     {
+      "law": "상속세 및 증여세법",
+      "article": "제4조의2제7항",
+      "text": "세무서장은 증여자에게 증여세를 납부하게 할 때에는 그 사유를 알려야 한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L01",
+    "source": "P05",
+    "target": "P06",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "L02",
+    "source": "P06",
+    "target": "P04",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P04",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P11",
+    "type": "message",
+    "label": "미납 시 연대납부"
+   }
+  ],
+  "warnings": [
+   "개별 세목과 사실관계에 따라 신고기한·가산세·불복 경로가 달라질 수 있다.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (C) P02 신고 근거를 제77조에서 제68조(증여세 과세표준신고)로, P07 결정 근거를 제77조에서 제76조(결정ㆍ경정)로, P09 납부 근거를 제84조에서 제70조(자진납부)로, P10 재검토 근거를 제84조에서 제79조(경정청구 특례)로, P06 보완 근거를 제4조에서 제84조로 정정. (D) P02 신고기한 3개월, P07 법정결정기한, P09 자진납부·분납 기한 명시. (E) L0 지적 '제3자·원천징수의무자' 빈 레인에 증여자 연대납부(제4조의2제6항·제7항) 노드 P11을 추가·연결 — 상속세와 달리 증여세는 증여자가 연대납세의무자(제3자)로서 법정 당사자다(원천징수의무자는 여전히 부존재). 참조 MST: 상속세 및 증여세법 276123. 법의 침묵: 불복(심사·심판)의 실체는 국세기본법 소관이다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 21건 가운데 21건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "상속세 및 증여세법",
+    "lawId": "001561",
+    "mst": "276123",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "상속세 및 증여세법",
+    "officialUrl": "https://law.go.kr/법령/상속세및증여세법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 13,
+   "explicitCitationEntries": 13,
+   "articleReferences": 21,
+   "verifiedReferences": 21,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

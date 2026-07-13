@@ -1,0 +1,317 @@
+{
+ "slug": "regional-sme-crisis-early-response",
+ "name": "지역중소기업 위기 조기대응",
+ "oneLiner": "경영위기 상담·자료 제공 → 위기징후 모니터링·기업 진단 → 특별지원지역 지정 요청 → 특별지원지역 심사·지정 → 기업별 재도약 계획 수립 → 금융·보증·고용 패키지 지원 → 회복상황 평가·지정 해제",
+ "type": "위기징후 탐지·특별지원형",
+ "priority": 313,
+ "whyFirst": "정부·지방자치단체와 관계기관의 역할을 분리해 지역중소기업 위기 조기대응 절차를 한눈에 보여준다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "지역중소기업 위기 조기대응은(는) 경영위기 상담·자료 제공 → 위기징후 모니터링·기업 진단 → 특별지원지역 지정 요청 → 특별지원지역 심사·지정 → 기업별 재도약 계획 수립 → 금융·보증·고용 패키지 지원 → 회복상황 평가·지정 해제로 이어지는 공적 절차다.",
+  "stakeholders": "지역중소기업, 지방자치단체·전담기관, 중소벤처기업부, 금융·고용·보증기관",
+  "legalBasis": [
+   {
+    "law": "지역중소기업 육성 및 혁신촉진 등에 관한 법률",
+    "articles": "제23~26조, 제30~32조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "지방자치단체·전담기관",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "중소벤처기업부",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "금융·고용·보증기관",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "경영위기 상담·자료 제공",
+   "위기징후 모니터링·기업 진단",
+   "특별지원지역 지정 요청",
+   "특별지원지역 심사·지정",
+   "기업별 재도약 계획 수립",
+   "금융·보증·고용 패키지 지원",
+   "회복상황 평가·지정 해제"
+  ],
+  "moneyFlow": "지원금·수수료·사업비는 법령과 연도별 사업기준 또는 개별 결정에 따라 달라질 수 있다.",
+  "docsFlow": "경영위기 상담·자료 제공 기록 → 심사·협의 자료 → 결정·통지 → 이행·사후관리 기록으로 이어진다.",
+  "bottlenecks": [
+   "AI 위기징후 지표와 기업 통지·이의 절차",
+   "특별지원지역 지정기간과 지원 패키지"
+  ],
+  "reformPoints": [
+   "처리상태와 담당기관 안내",
+   "기관 간 자료연계와 중복제출 축소",
+   "결정·변경 사유의 명확한 통지"
+  ]
+ },
+ "related": [],
+ "fieldVerification": [
+  "AI 위기징후 지표와 기업 통지·이의 절차",
+  "특별지원지역 지정기간과 지원 패키지"
+ ],
+ "process": {
+  "institution_name": "지역중소기업 위기 조기대응",
+  "law_name": "지역중소기업 육성 및 혁신촉진 등에 관한 법률",
+  "lanes": [
+   "지역중소기업",
+   "지방자치단체·전담기관",
+   "중소벤처기업부",
+   "금융·고용·보증기관"
+  ],
+  "stages": [
+   "G0 위기신호",
+   "G1 진단",
+   "G2 지역 지정",
+   "G3 맞춤지원",
+   "G4 점검"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "경영위기 상담·자료 제공",
+    "lane": "지역중소기업",
+    "stage": "G0 위기신호",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "지역중소기업",
+    "action": "매출·고용·자금 위기 징후를 상담하고 필요한 진단자료를 제공한다.",
+    "output_documents": [
+     "경영위기 상담·자료 제공 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지역중소기업 육성 및 혁신촉진 등에 관한 법률",
+      "article": "제26조·제30조",
+      "text": "지역중소기업 육성 및 혁신촉진 등에 관한 법률 제26조·제30조에 따른 매출·고용·자금 위기 징후를 상담하고 필요한 진단자료를 제공한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "위기징후 모니터링·기업 진단",
+    "lane": "지방자치단체·전담기관",
+    "stage": "G1 진단",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "지방자치단체·전담기관",
+    "action": "기업·산업 데이터를 분석해 위기 정도와 지원 필요성을 진단한다.",
+    "output_documents": [
+     "위기징후 모니터링·기업 진단 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지역중소기업 육성 및 혁신촉진 등에 관한 법률",
+      "article": "제26조·제30조",
+      "text": "지역중소기업 육성 및 혁신촉진 등에 관한 법률 제26조·제30조에 따른 기업·산업 데이터를 분석해 위기 정도와 지원 필요성을 진단한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "특별지원지역 지정 요청",
+    "lane": "지방자치단체·전담기관",
+    "stage": "G2 지역 지정",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "지방자치단체·전담기관",
+    "action": "지역경제 침체가 심각하면 중소기업특별지원지역 지정을 요청한다.",
+    "output_documents": [
+     "특별지원지역 지정 요청 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지역중소기업 육성 및 혁신촉진 등에 관한 법률",
+      "article": "제23조",
+      "text": "지역중소기업 육성 및 혁신촉진 등에 관한 법률 제23조에 따른 지역경제 침체가 심각하면 중소기업특별지원지역 지정을 요청한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "특별지원지역 심사·지정",
+    "lane": "중소벤처기업부",
+    "stage": "G2 지역 지정",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "중소벤처기업부",
+    "action": "지역 산업·고용 상황을 심사해 특별지원지역을 지정한다.",
+    "output_documents": [
+     "특별지원지역 심사·지정 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지역중소기업 육성 및 혁신촉진 등에 관한 법률",
+      "article": "제23조",
+      "text": "지역중소기업 육성 및 혁신촉진 등에 관한 법률 제23조에 따른 지역 산업·고용 상황을 심사해 특별지원지역을 지정한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "기업별 재도약 계획 수립",
+    "lane": "지방자치단체·전담기관",
+    "stage": "G3 맞춤지원",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지방자치단체·전담기관",
+    "action": "진단 결과에 따라 금융·사업전환·판로·고용 지원계획을 세운다.",
+    "output_documents": [
+     "기업별 재도약 계획 수립 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지역중소기업 육성 및 혁신촉진 등에 관한 법률",
+      "article": "제24조·제26조",
+      "text": "지역중소기업 육성 및 혁신촉진 등에 관한 법률 제24조·제26조에 따른 진단 결과에 따라 금융·사업전환·판로·고용 지원계획을 세운다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "금융·보증·고용 패키지 지원",
+    "lane": "금융·고용·보증기관",
+    "stage": "G3 맞춤지원",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "금융·고용·보증기관",
+    "action": "기관별 지원수단을 연계해 위기기업에 제공한다.",
+    "output_documents": [
+     "금융·보증·고용 패키지 지원 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지역중소기업 육성 및 혁신촉진 등에 관한 법률",
+      "article": "제24조",
+      "text": "지역중소기업 육성 및 혁신촉진 등에 관한 법률 제24조에 따른 기관별 지원수단을 연계해 위기기업에 제공한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "회복상황 평가·지정 해제",
+    "lane": "중소벤처기업부",
+    "stage": "G4 점검",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "중소벤처기업부",
+    "action": "지역과 기업의 회복상황을 평가하고 지원 조정·지정 해제를 결정한다.",
+    "output_documents": [
+     "회복상황 평가·지정 해제 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지역중소기업 육성 및 혁신촉진 등에 관한 법률",
+      "article": "제25조·제26조",
+      "text": "지역중소기업 육성 및 혁신촉진 등에 관한 법률 제25조·제26조에 따른 지역과 기업의 회복상황을 평가하고 지원 조정·지정 해제를 결정한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건·기한·지원 범위는 하위규정과 사실관계에 따라 달라질 수 있다.",
+   "2026-07-13 301~320 확장: 현행 법률의 실제 조문 순서와 당사자·행정기관 레인을 기준으로 신규 작성. 정책뉴스: https://www.korea.kr/news/policyNewsView.do?newsId=148967797"
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 18건 가운데 18건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "지역중소기업 육성 및 혁신촉진 등에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "지역중소기업 육성 및 혁신촉진 등에 관한 법률",
+    "lawId": "014126",
+    "mst": "258341",
+    "promulgatedOn": "2024-01-09",
+    "effectiveOn": "2024-07-10",
+    "officialUrl": "https://law.go.kr/법령/지역중소기업육성및혁신촉진등에관한법률"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 8,
+   "explicitCitationEntries": 8,
+   "articleReferences": 18,
+   "verifiedReferences": 18,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

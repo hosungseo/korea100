@@ -1,0 +1,326 @@
+{
+ "slug": "vehicle-inspection",
+ "name": "자동차 검사",
+ "oneLiner": "자동차 검사의 신청·심사·결정·사후관리 절차",
+ "type": "정기검사·시정형",
+ "priority": 251,
+ "whyFirst": "자동차 검사의 핵심 행위자와 결정 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "자동차 검사은(는) 검사 대상·기한 안내 → 검사 예약·차량 제출 → 정기·종합검사 실시 → 부적합 항목 통지 → 정비·재검사 → 검사결과 전산 등록 → 미이행 행정처분 관리로 이어지는 공적 절차다.",
+  "stakeholders": "자동차 소유자, 교통안전공단·검사소, 국토교통부·지자체",
+  "legalBasis": [
+   {
+    "law": "자동차관리법",
+    "articles": "제43조(자동차검사), 제44조(검사대행자 지정), 제44조의2(검사결과 전산관리)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "교통안전공단·검사소",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "국토교통부·지자체",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "검사 대상·기한 확인",
+   "검사 예약·차량 제출",
+   "정기·종합검사 실시",
+   "부적합 항목 통지",
+   "정비 후 재검사 신청",
+   "검사결과 전산 등록",
+   "미이행 행정처분 관리"
+  ],
+  "moneyFlow": "수수료·과태료·점용료 등 금전부담은 법령과 개별 처분 조건에 따라 달라질 수 있다.",
+  "docsFlow": "신청·단속 기록 → 검토·심사 자료 → 결정·통지 → 이행·납부 기록 → 사후관리로 이어진다.",
+  "bottlenecks": [
+   "자격·차량·시설 기준 충족",
+   "관계기관 협의와 자료 연계",
+   "처분 이후 이행 관리"
+  ],
+  "reformPoints": [
+   "처리상태 안내 강화",
+   "요건·기한 가독성 개선",
+   "온라인 신청·보완 경로 명확화"
+  ]
+ },
+ "related": [
+  "자동차 등록·이전",
+  "교통과태료·범칙금 부과",
+  "대기배출시설 허가"
+ ],
+ "fieldVerification": [
+  "실제 온라인·방문 접수 경로",
+  "기관별 처리기한·수수료",
+  "지역별 세부 운영기준"
+ ],
+ "process": {
+  "institution_name": "자동차 검사",
+  "law_name": "자동차관리법",
+  "lanes": [
+   "자동차 소유자",
+   "교통안전공단·검사소",
+   "국토교통부·지자체"
+  ],
+  "stages": [
+   "G0 준비",
+   "G1 신청·접수",
+   "G2 조사·검토",
+   "G3 결정",
+   "G4 이행·납부",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "검사 대상·기한 확인",
+    "lane": "자동차 소유자",
+    "stage": "G0 준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "자동차 소유자",
+    "action": "검사 대상과 유효기간을 확인한다.",
+    "output_documents": [
+     "검사 대상·기한 안내 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "자동차관리법",
+      "article": "제43조",
+      "text": "자동차관리법 제43조에 따른 검사 대상·기한 안내 단계"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "검사 예약·차량 제출",
+    "lane": "자동차 소유자",
+    "stage": "G0 준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "자동차 소유자",
+    "action": "검사를 예약하고 검사소에 자동차를 제시한다.",
+    "output_documents": [
+     "검사 예약·차량 제출 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "자동차관리법",
+      "article": "제43조",
+      "text": "자동차관리법 제43조에 따른 검사 예약·차량 제출 단계"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "정기·종합검사 실시",
+    "lane": "교통안전공단·검사소",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "교통안전공단·검사소",
+    "action": "검사기준에 따라 정기검사 또는 종합검사를 실시한다.",
+    "output_documents": [
+     "정기·종합검사 실시 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "자동차관리법",
+      "article": "제43조",
+      "text": "자동차관리법 제43조에 따른 정기·종합검사 실시 단계"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "부적합 항목 통지",
+    "lane": "교통안전공단·검사소",
+    "stage": "G2 조사·검토",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "교통안전공단·검사소",
+    "action": "검사 결과와 부적합 항목을 자동차 소유자에게 알린다.",
+    "output_documents": [
+     "부적합 항목 통지 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "자동차관리법",
+      "article": "제43조제2항",
+      "text": "자동차관리법 제43조제2항에 따라 국토교통부장관은 검사 결과를 자동차 소유자에게 통지하여야 하며, 부적합 시 제37조에 따른 점검·정비 명령으로 이어진다"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "정비 후 재검사 신청",
+    "lane": "자동차 소유자",
+    "stage": "G3 결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "자동차 소유자",
+    "action": "부적합 항목을 정비한 뒤 재검사를 신청한다.",
+    "output_documents": [
+     "정비·재검사 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "자동차관리법",
+      "article": "제43조",
+      "text": "자동차관리법 제43조에 따른 정비·재검사 단계"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "검사결과 전산 등록",
+    "lane": "교통안전공단·검사소",
+    "stage": "G4 이행·납부",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "교통안전공단·검사소",
+    "action": "검사결과 전산 등록",
+    "output_documents": [
+     "검사결과 전산 등록 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "자동차관리법",
+      "article": "제43조제6항",
+      "text": "자동차관리법 제43조제6항에 따라 정기검사 결과는 제69조(자동차관리업무의 전산 처리) 전산정보처리조직에 기록·보관하며, 합격 시 등록원부 기록 등 조치를 한다(제43조제3항)"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "미이행 행정처분 관리",
+    "lane": "국토교통부·지자체",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국토교통부·지자체",
+    "action": "검사 명령 미이행 여부를 확인하고 법정 처분 절차를 진행한다.",
+    "output_documents": [
+     "미이행 행정처분 관리 기록"
+    ],
+    "deadline": "명령 미이행 1년 이상 경과 시 운행정지 명령(의무)",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "자동차관리법",
+      "article": "제37조",
+      "text": "자동차관리법 제37조(점검 및 정비 명령 등)에 따라 시장·군수·구청장은 미수검·부적합 자동차에 점검·정비·검사·원상복구를 명하고 운행정지를 병행할 수 있으며, 명령 미이행 1년 이상 경과 시 운행정지를 명하여야 한다(제37조제3항)"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": "부적합"
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P03",
+    "type": "loop",
+    "label": "재검사"
+   },
+   {
+    "id": "E06",
+    "source": "P03",
+    "target": "P06",
+    "type": "sequence",
+    "label": "적합"
+   },
+   {
+    "id": "E07",
+    "source": "P04",
+    "target": "P07",
+    "type": "sequence",
+    "label": "검사·정비 명령 미이행"
+   }
+  ],
+  "warnings": [
+   "개별 신청·처분의 요건·기한·금액은 사실관계와 하위규정에 따라 달라질 수 있다.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (C) P06 검사결과 전산 등록 근거를 제44조의2→제43조제6항(제69조 전산정보처리조직 기록·보관)으로 수정 — 제44조의2는 실제로는 '자동차 종합검사대행자의 지정'이라 오인용. (C) P07 미이행 행정처분 관리 근거를 제43조→제37조(점검·정비 명령·운행정지)로 수정하고 기한 명시. (C) P04 부적합 통지 근거를 제43조→제43조제2항으로 정밀화. 대조 법령 MST 286989(자동차관리법). L0 지적: empty-lane·backward-sequence 해당 없음. 법의 침묵: 부적합 판정 후 재검사 기한·절차는 법률 미규정(국토교통부령/공동부령 위임). 법의 침묵: 자동차검사 결과 불복 이의신청 절차는 자동차관리법에 명문 없음(행정심판 일반절차)."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 10건 가운데 10건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "자동차관리법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "자동차관리법",
+    "lawId": "001747",
+    "mst": "286989",
+    "promulgatedOn": "2026-06-16",
+    "effectiveOn": "2026-06-16",
+    "officialUrl": "https://law.go.kr/법령/자동차관리법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 8,
+   "explicitCitationEntries": 8,
+   "articleReferences": 10,
+   "verifiedReferences": 10,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

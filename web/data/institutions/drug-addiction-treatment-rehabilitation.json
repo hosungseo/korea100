@@ -1,0 +1,317 @@
+{
+ "slug": "drug-addiction-treatment-rehabilitation",
+ "name": "마약류 중독자 치료보호·사회재활",
+ "oneLiner": "상담·치료 요청 → 중독 여부·치료 필요 평가 → 치료보호 의뢰·결정 → 입원·통원 치료보호 → 치료 경과·이행 결과 통보 → 사회재활 서비스 연계 → 재발위험 점검·사후관리",
+ "type": "치료보호·재활연계형",
+ "priority": 310,
+ "whyFirst": "정부·지방자치단체와 관계기관의 역할을 분리해 마약류 중독자 치료보호·사회재활 절차를 한눈에 보여준다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "마약류 중독자 치료보호·사회재활은(는) 상담·치료 요청 → 중독 여부·치료 필요 평가 → 치료보호 의뢰·결정 → 입원·통원 치료보호 → 치료 경과·이행 결과 통보 → 사회재활 서비스 연계 → 재발위험 점검·사후관리로 이어지는 공적 절차다.",
+  "stakeholders": "중독자·가족, 검찰·법원, 치료보호기관, 식품의약품안전처·재활기관",
+  "legalBasis": [
+   {
+    "law": "마약류 관리에 관한 법률",
+    "articles": "제40조~제40조의3, 제51조의2·6",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "검찰·법원",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "치료보호기관",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "식품의약품안전처·재활기관",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "상담·치료 요청",
+   "중독 여부·치료 필요 평가",
+   "치료보호 의뢰·결정",
+   "입원·통원 치료보호",
+   "치료 경과·이행 결과 통보",
+   "사회재활 서비스 연계",
+   "재발위험 점검·사후관리"
+  ],
+  "moneyFlow": "지원금·수수료·사업비는 법령과 연도별 사업기준 또는 개별 결정에 따라 달라질 수 있다.",
+  "docsFlow": "상담·치료 요청 기록 → 심사·협의 자료 → 결정·통지 → 이행·사후관리 기록으로 이어진다.",
+  "bottlenecks": [
+   "지역별 지정 치료보호기관과 대기기간",
+   "사법 의뢰·자발적 치료 간 비용·정보공유 차이"
+  ],
+  "reformPoints": [
+   "처리상태와 담당기관 안내",
+   "기관 간 자료연계와 중복제출 축소",
+   "결정·변경 사유의 명확한 통지"
+  ]
+ },
+ "related": [],
+ "fieldVerification": [
+  "지역별 지정 치료보호기관과 대기기간",
+  "사법 의뢰·자발적 치료 간 비용·정보공유 차이"
+ ],
+ "process": {
+  "institution_name": "마약류 중독자 치료보호·사회재활",
+  "law_name": "마약류 관리에 관한 법률",
+  "lanes": [
+   "중독자·가족",
+   "검찰·법원",
+   "치료보호기관",
+   "식품의약품안전처·재활기관"
+  ],
+  "stages": [
+   "G0 상담·발견",
+   "G1 평가·의뢰",
+   "G2 치료보호",
+   "G3 사법연계",
+   "G4 재활"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "상담·치료 요청",
+    "lane": "중독자·가족",
+    "stage": "G0 상담·발견",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "중독자·가족",
+    "action": "중독 문제를 상담하고 치료보호 또는 사회재활 지원을 요청한다.",
+    "output_documents": [
+     "상담·치료 요청 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "마약류 관리에 관한 법률",
+      "article": "제40조·제51조의2",
+      "text": "마약류 관리에 관한 법률 제40조·제51조의2에 따른 중독 문제를 상담하고 치료보호 또는 사회재활 지원을 요청한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "중독 여부·치료 필요 평가",
+    "lane": "치료보호기관",
+    "stage": "G1 평가·의뢰",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "치료보호기관",
+    "action": "전문 평가를 통해 치료보호 필요성과 치료계획을 판단한다.",
+    "output_documents": [
+     "중독 여부·치료 필요 평가 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "마약류 관리에 관한 법률",
+      "article": "제40조",
+      "text": "마약류 관리에 관한 법률 제40조에 따른 전문 평가를 통해 치료보호 필요성과 치료계획을 판단한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "치료보호 의뢰·결정",
+    "lane": "검찰·법원",
+    "stage": "G1 평가·의뢰",
+    "type": "gateway",
+    "status": "current",
+    "progress": 55,
+    "actor": "검찰·법원",
+    "action": "형사절차와 연계된 경우 조사 결과를 바탕으로 치료·수강명령 등을 결정한다.",
+    "output_documents": [
+     "치료보호 의뢰·결정 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "마약류 관리에 관한 법률",
+      "article": "제40조·제40조의3",
+      "text": "마약류 관리에 관한 법률 제40조·제40조의3에 따른 형사절차와 연계된 경우 조사 결과를 바탕으로 치료·수강명령 등을 결정한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "입원·통원 치료보호",
+    "lane": "치료보호기관",
+    "stage": "G2 치료보호",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "치료보호기관",
+    "action": "지정 치료보호기관이 중독 치료와 회복 프로그램을 제공한다.",
+    "output_documents": [
+     "입원·통원 치료보호 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "마약류 관리에 관한 법률",
+      "article": "제40조",
+      "text": "마약류 관리에 관한 법률 제40조에 따른 지정 치료보호기관이 중독 치료와 회복 프로그램을 제공한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "치료 경과·이행 결과 통보",
+    "lane": "치료보호기관",
+    "stage": "G3 사법연계",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "치료보호기관",
+    "action": "치료·교육 이행과 경과를 의뢰기관에 통보한다.",
+    "output_documents": [
+     "치료 경과·이행 결과 통보 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "마약류 관리에 관한 법률",
+      "article": "제40조의2·제40조의3",
+      "text": "마약류 관리에 관한 법률 제40조의2·제40조의3에 따른 치료·교육 이행과 경과를 의뢰기관에 통보한다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "사회재활 서비스 연계",
+    "lane": "식품의약품안전처·재활기관",
+    "stage": "G4 재활",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "식품의약품안전처·재활기관",
+    "action": "회복지원, 직업·가족상담과 지역사회 재활을 연계한다.",
+    "output_documents": [
+     "사회재활 서비스 연계 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "마약류 관리에 관한 법률",
+      "article": "제51조의2",
+      "text": "마약류 관리에 관한 법률 제51조의2에 따른 회복지원, 직업·가족상담과 지역사회 재활을 연계한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "재발위험 점검·사후관리",
+    "lane": "식품의약품안전처·재활기관",
+    "stage": "G4 재활",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "식품의약품안전처·재활기관",
+    "action": "재발위험과 서비스 참여를 점검하고 지속 지원한다.",
+    "output_documents": [
+     "재발위험 점검·사후관리 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "마약류 관리에 관한 법률",
+      "article": "제51조의2·제51조의6",
+      "text": "마약류 관리에 관한 법률 제51조의2·제51조의6에 따른 재발위험과 서비스 참여를 점검하고 지속 지원한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건·기한·지원 범위는 하위규정과 사실관계에 따라 달라질 수 있다.",
+   "2026-07-13 301~320 확장: 현행 법률의 실제 조문 순서와 당사자·행정기관 레인을 기준으로 신규 작성."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 14건 가운데 14건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "마약류 관리에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "마약류 관리에 관한 법률",
+    "lawId": "002025",
+    "mst": "277145",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/마약류관리에관한법률"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 8,
+   "explicitCitationEntries": 8,
+   "articleReferences": 14,
+   "verifiedReferences": 14,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

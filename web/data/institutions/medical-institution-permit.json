@@ -455,6 +455,30 @@
       "text": "의료기관 개설 특례"
      }
     ]
+   },
+   {
+    "id": "P17",
+    "name": "시정명령·이행 확인",
+    "lane": "감독·청문",
+    "stage": "G5 처분",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보건복지부장관·시장·군수·구청장",
+    "action": "시정명령",
+    "output_documents": [
+     "시정명령서"
+    ],
+    "deadline": "일정한 기간을 정하여",
+    "blocker": "시정명령 불이행 시 제64조 개설허가 취소·폐쇄로 진행",
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "의료법",
+      "article": "제63조(시정 명령 등)",
+      "text": "보건복지부장관 또는 시장ㆍ군수ㆍ구청장은 의료기관이 시설기준(제36조)ㆍ병상 등 관련 규정을 위반한 때에는 일정한 기간을 정하여 시설ㆍ장비 등의 사용 제한ㆍ금지 또는 위반사항의 시정을 명할 수 있다."
+     }
+    ]
    }
   ],
   "edges": [
@@ -545,7 +569,7 @@
    {
     "id": "E13",
     "source": "P08",
-    "target": "P12",
+    "target": "P17",
     "type": "sequence",
     "label": "위반"
    },
@@ -569,17 +593,32 @@
     "target": "P15",
     "type": "sequence",
     "label": null
+   },
+   {
+    "id": "E17",
+    "source": "P17",
+    "target": "P12",
+    "type": "sequence",
+    "label": "불이행"
+   },
+   {
+    "id": "E18",
+    "source": "P17",
+    "target": "P08",
+    "type": "loop",
+    "label": "시정 이행"
    }
   ],
   "warnings": [
-   "MST 285327."
+   "MST 285327.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (E) 제63조가 개설허가 취소(제64조 제6호는 제63조 시정명령 불이행을 취소사유로 규정)에 앞선 시정명령을 규정하므로 P17 시정명령·이행 확인 노드 신설(status waiting)하고 P08→P17→(이행 loop)/불이행→P12 취소로 재배선. 인용 조문 제목은 원문과 일치(제3·4·33·33조의2·48·51·58·58조의3·58조의4·64·84조 확인). 대조 MST: 의료법 285327, 시행령 283151, 시행규칙 286963. 법의 침묵: 개설 허가ㆍ신고 처리기한이 법률 본문에 미규정(시행규칙ㆍ운영). 법의 침묵: 병원급 허가 심의(제33조의2) 처리기간이 법률에 없음."
   ]
  },
  "verification": {
   "status": "article-verified",
-  "verifiedAt": "2026-07-12",
-  "method": "법제처 DRF + L3",
-  "scope": "L3 당사자 워크스루 후 명시 조문 13건 존재 확인 13건",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 26건 가운데 26건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
    "의료법 MST 285327"
   ],
@@ -597,12 +636,12 @@
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-12",
-   "method": "DRF 목차·조문제목 대조",
-   "citationEntries": 13,
-   "explicitCitationEntries": 13,
-   "articleReferences": 13,
-   "verifiedReferences": 13,
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 22,
+   "explicitCitationEntries": 22,
+   "articleReferences": 26,
+   "verifiedReferences": 26,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }

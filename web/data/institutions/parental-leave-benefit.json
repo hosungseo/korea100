@@ -1,0 +1,474 @@
+{
+ "slug": "parental-leave-benefit",
+ "name": "육아휴직 급여",
+ "oneLiner": "근로자의 육아휴직 사용과 확인, 고용보험 급여 지급·제한을 처리하는 절차",
+ "type": "복지급여·고용지원형",
+ "priority": 227,
+ "whyFirst": "육아휴직 급여의 신청·결정·사후관리 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "육아휴직 급여은 근로자의 육아휴직 사용과 확인, 고용보험 급여 지급·제한을 처리하는 절차 제도다.",
+  "stakeholders": "신청인·근로자, 사업주·지자체, 고용센터·복지기관과 관계기관이 관여한다.",
+  "legalBasis": [
+   {
+    "law": "고용보험법",
+    "articles": "제70조(육아휴직 급여), 제71조(육아휴직의 확인), 제73조(육아휴직 급여의 지급 제한 등)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "복지기관·고용센터",
+    "role": "접수·조사·결정·지급"
+   },
+   {
+    "name": "사업주·지자체",
+    "role": "휴직·지원 확인과 협조"
+   },
+   {
+    "name": "신청인·근로자",
+    "role": "신청·자료 제출·이의"
+   }
+  ],
+  "procedure": [
+   "지원·휴직 사유 확인",
+   "신청·신고 제출",
+   "접수·확인",
+   "자격·요건 조사",
+   "보완 요구",
+   "보완 자료 제출",
+   "육아휴직 급여 지급",
+   "결정 통지",
+   "급여·서비스 지급",
+   "사후 확인·변경·이의"
+  ],
+  "moneyFlow": "법정 급여·지원금의 지급·환수 기준은 개별 법령과 고용보험·지자체 기준을 따른다.",
+  "docsFlow": "신청·신고 → 조사·확인 → 결정 통지 → 급여·서비스 지급 → 사후 확인·변경으로 이어진다.",
+  "bottlenecks": [
+   "위기·자격 증빙",
+   "사업주 확인과 기관 간 자료 연계",
+   "사후조사와 환수 판단"
+  ],
+  "reformPoints": [
+   "신청·확인 서류 간소화",
+   "급여 진행상태 공개",
+   "사후조사 기준 설명 강화"
+  ]
+ },
+ "related": [
+  "국민기초생활보장",
+  "고용보험과 실업급여",
+  "아동수당",
+  "국민건강보험"
+ ],
+ "fieldVerification": [
+  "실제 신청 서식과 전산 경로",
+  "지자체별 추가지원 기준",
+  "사후조사·환수의 개별 적용"
+ ],
+ "process": {
+  "institution_name": "육아휴직 급여",
+  "law_name": "고용보험법",
+  "lanes": [
+   "신청인·근로자",
+   "사업주·지자체",
+   "고용센터·복지기관"
+  ],
+  "stages": [
+   "G0 위기·사유",
+   "G1 신청·확인",
+   "G2 조사·검토",
+   "G3 결정",
+   "G4 지급·지원",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "지원·휴직 사유 확인",
+    "lane": "신청인·근로자",
+    "stage": "G0 위기·사유",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "신청인·근로자",
+    "action": "지원·휴직 사유 확인",
+    "output_documents": [
+     "지원·휴직 사유 확인"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고용보험법",
+      "article": "제70조(육아휴직 급여)",
+      "text": "육아휴직 급여에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "신청·신고 제출",
+    "lane": "신청인·근로자",
+    "stage": "G1 신청·확인",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "신청인·근로자",
+    "action": "신청·신고 제출",
+    "output_documents": [
+     "신청·신고 제출"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고용보험법",
+      "article": "제70조(육아휴직 급여)",
+      "text": "육아휴직 급여에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "접수·확인",
+    "lane": "고용센터·복지기관",
+    "stage": "G1 신청·확인",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "고용센터·복지기관",
+    "action": "접수·확인",
+    "output_documents": [
+     "접수·확인"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고용보험법",
+      "article": "제70조(육아휴직 급여) 제2항",
+      "text": "육아휴직 급여를 지급받으려는 사람은 육아휴직 시작 1개월부터 종료 후 12개월 이내에 신청하며, 고용센터가 신청을 접수·확인한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "자격·요건 조사",
+    "lane": "사업주·지자체",
+    "stage": "G2 조사·검토",
+    "type": "task",
+    "status": "current",
+    "progress": 45,
+    "actor": "사업주·지자체",
+    "action": "자격·요건 조사",
+    "output_documents": [
+     "자격·요건 조사"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고용보험법",
+      "article": "제71조(육아휴직의 확인)",
+      "text": "육아휴직의 확인에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "보완 요구",
+    "lane": "고용센터·복지기관",
+    "stage": "G2 조사·검토",
+    "type": "task",
+    "status": "risk",
+    "progress": 0,
+    "actor": "고용센터·복지기관",
+    "action": "보완 요구",
+    "output_documents": [
+     "보완 요구"
+    ],
+    "deadline": null,
+    "confidence": 0.78,
+    "legal_basis": [
+     {
+      "law": "고용보험법",
+      "article": "제71조(육아휴직의 확인)",
+      "text": "사업주는 피보험자가 육아휴직 급여를 받으려는 경우 사실의 확인 등 모든 절차에 적극 협력하여야 하며, 고용센터는 확인을 위한 자료 보완을 요구할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "보완 자료 제출",
+    "lane": "신청인·근로자",
+    "stage": "G2 조사·검토",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신청인·근로자",
+    "action": "보완 자료 제출",
+    "output_documents": [
+     "보완 자료 제출"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고용보험법",
+      "article": "제70조(육아휴직 급여)",
+      "text": "육아휴직 급여에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "육아휴직 급여 지급",
+    "lane": "고용센터·복지기관",
+    "stage": "G3 결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "고용센터·복지기관",
+    "action": "육아휴직 급여 지급",
+    "output_documents": [
+     "육아휴직 급여 지급"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고용보험법",
+      "article": "제70조(육아휴직 급여) 제1항·제4항",
+      "text": "고용노동부장관은 육아휴직을 30일 이상 부여받고 피보험 단위기간 180일 이상인 피보험자에게 육아휴직 급여를 지급하며, 급여액은 대통령령으로 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "결정 통지",
+    "lane": "사업주·지자체",
+    "stage": "G3 결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업주·지자체",
+    "action": "결정 통지",
+    "output_documents": [
+     "결정 통지"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고용보험법",
+      "article": "제70조(육아휴직 급여)",
+      "text": "육아휴직 급여에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "급여·서비스 지급",
+    "lane": "고용센터·복지기관",
+    "stage": "G4 지급·지원",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "고용센터·복지기관",
+    "action": "급여·서비스 지급",
+    "output_documents": [
+     "급여·서비스 지급"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고용보험법",
+      "article": "제70조(육아휴직 급여) 제1항, 제73조(육아휴직 급여의 지급 제한 등)",
+      "text": "육아휴직 급여를 지급하되, 이직·기간 중 취업·부정수급 등의 경우에는 제73조에 따라 지급을 제한하거나 감액한다."
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "사후 확인·변경·이의",
+    "lane": "신청인·근로자",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신청인·근로자",
+    "action": "사후 확인·변경·이의",
+    "output_documents": [
+     "사후 확인·변경·이의"
+    ],
+    "deadline": "심사청구는 처분 안 날부터 90일 이내(심사관 30일 내 결정)",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고용보험법",
+      "article": "제87조(심사와 재심사) 제1항·제2항, 제89조(고용보험심사관) 제2항",
+      "text": "육아휴직 급여에 관한 처분에 이의가 있는 자는 처분 안 날부터 90일 이내에 고용보험심사관에게 심사를 청구할 수 있고, 심사관은 30일 이내에 결정한다. 결정에 이의가 있으면 심사위원회에 재심사를 청구할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "사업주 육아휴직 허용·불리한 처우 금지·복귀",
+    "lane": "사업주·지자체",
+    "stage": "G1 신청·확인",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업주(회사)",
+    "action": "육아휴직 허용(1년 이내, 요건 시 6개월 추가), 휴직 이유 해고·불리한 처우 금지 및 휴직 중 해고 금지, 휴직 후 원직 복귀, 급여 확인 절차 협력",
+    "output_documents": [
+     "육아휴직 허용",
+     "육아휴직 확인서"
+    ],
+    "deadline": null,
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+      "article": "제19조(육아휴직) 제1항·제2항·제3항·제4항",
+      "text": "사업주는 만 8세 이하 또는 초등학교 2학년 이하 자녀 양육을 위한 육아휴직 신청을 허용하여야 하고(제1항), 기간은 1년 이내(요건 시 6개월 추가, 제2항), 육아휴직을 이유로 해고 등 불리한 처우를 하거나 휴직 중 해고할 수 없으며(제3항), 휴직 후 같은 업무·임금 수준의 직무에 복귀시켜야 한다(제4항)."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L01",
+    "source": "P05",
+    "target": "P06",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "L02",
+    "source": "P06",
+    "target": "P04",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P04",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P02",
+    "target": "P11",
+    "type": "message",
+    "label": "육아휴직 신청"
+   },
+   {
+    "id": "E10",
+    "source": "P11",
+    "target": "P07",
+    "type": "message",
+    "label": "휴직 허용·확인→급여"
+   }
+  ],
+  "warnings": [
+   "급여액·기간과 세부 요건은 시행령·고시 및 개인 상황에 따라 달라질 수 있다.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (E) 사업주(회사) 법정 행위 누락 — '사업주·지자체' 레인에 육아휴직 허용·불리한 처우 금지·복귀 노드 P11 신설(남녀고용평등법 제19조제1항~제4항, message edge E09·E10). (C) P03 접수·확인 제71조(사업주 확인)→제70조제2항(급여 신청·접수) 정정. (C) P05 보완요구 제73조(지급 제한)→제71조(육아휴직의 확인) 정정. (C) P07 급여지급 제71조→제70조(육아휴직 급여) 정정. (C) P09 급여지급 제73조 단독→제70조·제73조 보강. (C·D) P10 사후 이의 제73조→제87조·제89조(심사·재심사) 정정 및 90일/30일 기한 추가. L0 empty-lane '관계기관': 별도 법정 협조 관계기관 행위자 없어(당사자·사업주·고용노동부 구성) 빈 레인 유지 정당 — 사업주 법정 행위는 '사업주·지자체' 레인 소관. consultedMST: 276851(남녀고용평등법), 279807(고용보험법). 법의 침묵: 사업주 육아휴직 미허용 시 근로자 즉시 구제절차 명문 부재. 법의 침묵: 6+6 부모 동시육아휴직 특례의 급여 산정 세부기준 대통령령 위임. 법의 침묵: 휴직 중 취업 판단기준(제70조제3항 고용노동부령)의 정성적 요소.",
+   "2026-07-13 후속 구조 정리: 실제 법정 행위 노드가 없는 빈 레인 1개를 제거하고 해당 주체는 canvas 이해관계자 설명으로만 유지했다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 16건 가운데 16건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "고용보험법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "고용보험법",
+    "lawId": "001761",
+    "mst": "279807",
+    "promulgatedOn": "2025-11-11",
+    "effectiveOn": "2026-05-12",
+    "officialUrl": "https://law.go.kr/법령/고용보험법"
+   },
+   {
+    "law": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+    "lawId": "000130",
+    "mst": "276851",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2025-10-01",
+    "officialUrl": "https://law.go.kr/법령/남녀고용평등과일ㆍ가정양립지원에관한법률"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 12,
+   "explicitCitationEntries": 12,
+   "articleReferences": 16,
+   "verifiedReferences": 16,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

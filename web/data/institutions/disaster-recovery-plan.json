@@ -1,0 +1,639 @@
+{
+ "slug": "disaster-recovery-plan",
+ "name": "재난복구계획 수립·시행",
+ "oneLiner": "피해조사 결과를 바탕으로 재난복구계획을 수립하고 복구사업을 관리하는 절차",
+ "type": "복구·계획형",
+ "priority": 195,
+ "whyFirst": "현장 수습과 중장기 복구사업 관리의 경계를 보여준다.",
+ "asOfDate": "2026-07-12",
+ "status": "full",
+ "canvas": {
+  "purpose": "재난복구계획 수립·시행은 피해조사 결과를 바탕으로 재난복구계획을 수립하고 복구사업을 관리하는 절차 법정 절차를 한 장에서 확인하도록 정리한 제도다.",
+  "stakeholders": "주민·피해자·시설관리자, 재난관리책임기관, 지방자치단체, 행정안전부와 중앙·지역 대책본부, 소방·경찰 등 관계기관이 단계별로 관여한다.",
+  "legalBasis": [
+   {
+    "law": "재난 및 안전관리 기본법",
+    "articles": "제58조(재난피해 신고 및 조사), 제59조(재난복구계획의 수립ㆍ시행), 제59조의2(재난복구계획에 따라 시행하는 사업의 관리), 제66조(재난지역에 대한 국고보조 등의 지원)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "행정안전부",
+    "role": "재난 및 안전관리 기본법상 총괄·조정 역할"
+   },
+   {
+    "name": "재난관리주관기관·재난관리책임기관",
+    "role": "유형별 대응과 현장 조치 수행"
+   },
+   {
+    "name": "시·도·시군구",
+    "role": "지역 단위 판단·집행 및 주민 보호"
+   },
+   {
+    "name": "주민·피해자·시설관리자",
+    "role": "상황 신고, 자료 제출, 보호·지원 대상"
+   }
+  ],
+  "procedure": [
+   "상황·대상 인지",
+   "초기 신고·안전조치",
+   "상황 접수·보고",
+   "적용 대상·관할 확인",
+   "법정 요건 검토",
+   "관계기관 협조",
+   "재난복구계획 확정",
+   "조치 집행",
+   "결과 기록·개선"
+  ],
+  "moneyFlow": "제도별 재정지원·보상·기금 지출 여부와 세부 집행 기준은 관련 조문 및 시행령·지자체 기준을 함께 확인해야 한다.",
+  "docsFlow": "상황 인지·신고 → 상황보고 → 요건 검토·협조 요청 → 결정·통지 → 집행 기록 → 결과보고·개선계획으로 이어진다.",
+  "bottlenecks": [
+   "재난 유형과 주관기관의 판단",
+   "현장 정보와 관계기관 자료의 불일치",
+   "지자체별 매뉴얼·조례 적용 범위",
+   "결정 이후 현장 집행과 기록의 시차"
+  ],
+  "reformPoints": [
+   "주민에게 공개되는 판단 기준 정비",
+   "기관 간 상황정보 공유 표준화",
+   "결정·통지·집행 기록의 연결",
+   "사후 조사 결과의 재발방지 환류"
+  ]
+ },
+ "related": [
+  "재난안전관리",
+  "소방과 119 신고",
+  "감염병 대응",
+  "중대재해 처벌·예방"
+ ],
+ "fieldVerification": [
+  "재난 유형별 실제 가동 기준과 내부 지휘 체계",
+  "지자체 조례·매뉴얼의 적용 범위와 최신 개정 여부",
+  "통지·보고의 실제 서식과 전산 처리 경로"
+ ],
+ "process": {
+  "institution_name": "재난복구계획 수립·시행",
+  "law_name": "재난 및 안전관리 기본법",
+  "lanes": [
+   "주민·시설관리자",
+   "재난관리책임기관",
+   "주관기관·지자체",
+   "행정안전부·대책본부",
+   "관계기관·지원기관"
+  ],
+  "stages": [
+   "G0 상황인지",
+   "G1 접수·보고",
+   "G2 요건판단",
+   "G3 협의·결정",
+   "G4 조치·집행",
+   "G5 기록·개선"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "재난 징후·대상 인지",
+    "lane": "주민·시설관리자",
+    "stage": "G0 상황인지",
+    "type": "notice",
+    "status": "done",
+    "progress": 100,
+    "actor": "주민·시설관리자",
+    "action": "재난 징후 또는 관리대상을 확인",
+    "output_documents": [
+     "상황 인지 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "재난 및 안전관리 기본법",
+      "article": "제58조(재난피해 신고 및 조사)",
+      "text": "재난피해 신고 및 조사에 관한 절차와 권한을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "초기 안전조치·신고",
+    "lane": "주민·시설관리자",
+    "stage": "G0 상황인지",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "주민·시설관리자",
+    "action": "위험 상황을 신고하고 필요한 초기 안전조치를 수행",
+    "output_documents": [
+     "신고·안전조치 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "재난 및 안전관리 기본법",
+      "article": "제58조(재난피해 신고 및 조사)",
+      "text": "재난피해 신고 및 조사에 관한 절차와 권한을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "상황 접수·보고",
+    "lane": "재난관리책임기관",
+    "stage": "G1 접수·보고",
+    "type": "system",
+    "status": "done",
+    "progress": 100,
+    "actor": "재난관리책임기관",
+    "action": "신고와 현장 정보를 접수해 관계기관에 보고",
+    "output_documents": [
+     "상황보고서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "재난 및 안전관리 기본법",
+      "article": "제58조(재난피해 신고 및 조사)",
+      "text": "재난피해 신고 및 조사에 관한 절차와 권한을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "적용 대상·관할 확인",
+    "lane": "주관기관·지자체",
+    "stage": "G1 접수·보고",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "주관기관·지자체",
+    "action": "재난 유형과 관할·주관기관을 확인",
+    "output_documents": [
+     "대상·관할 판단"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "재난 및 안전관리 기본법",
+      "article": "제58조(재난피해 신고 및 조사)",
+      "text": "재난피해 신고 및 조사에 관한 절차와 권한을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "법정 요건 검토",
+    "lane": "주관기관·지자체",
+    "stage": "G2 요건판단",
+    "type": "gateway",
+    "status": "current",
+    "progress": 45,
+    "actor": "주관기관·지자체",
+    "action": "재난복구계획 수립·시행의 법정 요건과 적용 수단을 검토",
+    "output_documents": [
+     "요건 검토서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "재난 및 안전관리 기본법",
+      "article": "제58조(재난피해 신고 및 조사)",
+      "text": "재난피해 신고 및 조사에 관한 절차와 권한을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "관계기관 협조 요청",
+    "lane": "행정안전부·대책본부",
+    "stage": "G3 협의·결정",
+    "type": "system",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "행정안전부·대책본부",
+    "action": "필요한 기관·지자체·지원기관에 협조를 요청",
+    "output_documents": [
+     "협조 요청"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "재난 및 안전관리 기본법",
+      "article": "제59조(재난복구계획의 수립ㆍ시행)",
+      "text": "재난복구계획의 수립ㆍ시행에 관한 절차와 권한을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "현장 자료·의견 제출",
+    "lane": "주민·시설관리자",
+    "stage": "G3 협의·결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민·시설관리자",
+    "action": "피해·시설·현장 자료와 필요한 의견을 제출",
+    "output_documents": [
+     "현장 자료·의견서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "재난 및 안전관리 기본법",
+      "article": "제59조(재난복구계획의 수립ㆍ시행)",
+      "text": "재난복구계획의 수립ㆍ시행에 관한 절차와 권한을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "보완 요구",
+    "lane": "주관기관·지자체",
+    "stage": "G2 요건판단",
+    "type": "task",
+    "status": "risk",
+    "progress": 0,
+    "actor": "주관기관·지자체",
+    "action": "요건 판단에 필요한 자료 보완을 요구",
+    "output_documents": [
+     "보완 요구서"
+    ],
+    "deadline": null,
+    "blocker": "현장 정보와 관계기관 자료의 불일치",
+    "confidence": 0.78,
+    "legal_basis": [
+     {
+      "law": "재난 및 안전관리 기본법",
+      "article": "제58조(재난피해 신고 및 조사)",
+      "text": "재난피해 신고 및 조사에 관한 절차와 권한을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "보완 자료 제출",
+    "lane": "주민·시설관리자",
+    "stage": "G2 요건판단",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민·시설관리자",
+    "action": "보완 자료를 제출해 요건 판단을 다시 받음",
+    "output_documents": [
+     "보완 자료"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "재난 및 안전관리 기본법",
+      "article": "제58조(재난피해 신고 및 조사)",
+      "text": "재난피해 신고 및 조사에 관한 절차와 권한을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "재난복구계획 확정",
+    "lane": "행정안전부·대책본부",
+    "stage": "G3 협의·결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "행정안전부·대책본부",
+    "action": "재난복구계획 확정에 관한 공식 결정 또는 가동 조치를 확정",
+    "output_documents": [
+     "결정서·가동 문서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "재난 및 안전관리 기본법",
+      "article": "제59조(재난복구계획의 수립ㆍ시행)",
+      "text": "재난복구계획의 수립ㆍ시행에 관한 절차와 권한을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "결정 통지·공표",
+    "lane": "행정안전부·대책본부",
+    "stage": "G3 협의·결정",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "행정안전부·대책본부",
+    "action": "결정 내용과 적용 범위를 관계기관·주민에게 통지 또는 공표",
+    "output_documents": [
+     "통지·공표 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "재난 및 안전관리 기본법",
+      "article": "제58조(재난피해 신고 및 조사)",
+      "text": "재난피해 신고 및 조사에 관한 절차와 권한을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "현장 조치·집행",
+    "lane": "재난관리책임기관",
+    "stage": "G4 조치·집행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "재난관리책임기관",
+    "action": "결정된 대응·지원·관리 조치를 집행",
+    "output_documents": [
+     "조치 결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "재난 및 안전관리 기본법",
+      "article": "제59조의2(재난복구계획에 따라 시행하는 사업의 관리)",
+      "text": "재난복구계획에 따라 시행하는 사업의 관리에 관한 절차와 권한을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "주민 지원·권리보호",
+    "lane": "주민·시설관리자",
+    "stage": "G4 조치·집행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민·시설관리자",
+    "action": "주민·피해자에게 필요한 지원과 보호 조치를 연계",
+    "output_documents": [
+     "지원·보호 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "재난 및 안전관리 기본법",
+      "article": "제66조(재난지역에 대한 국고보조 등의 지원)",
+      "text": "재난지역에 대한 국고보조 등의 지원에 관한 절차와 권한을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "결과 보고·기록·개선",
+    "lane": "주관기관·지자체",
+    "stage": "G5 기록·개선",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주관기관·지자체",
+    "action": "결과를 기록하고 사후 개선 과제를 관리",
+    "output_documents": [
+     "결과보고·개선계획"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "재난 및 안전관리 기본법",
+      "article": "제66조(재난지역에 대한 국고보조 등의 지원)",
+      "text": "재난지역에 대한 국고보조 등의 지원에 관한 절차와 권한을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "복구사업 시정명령·시정요청 이행",
+    "lane": "관계기관·지원기관",
+    "stage": "G4 조치·집행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "관계 기관의 장",
+    "receiver": "중앙대책본부장",
+    "action": "복구사업 지도·점검에 따른 시정명령·시정요청 이행",
+    "output_documents": [
+     "시정 조치 결과"
+    ],
+    "deadline": null,
+    "blocker": "정당한 사유가 없으면 시정명령·시정요청에 따라야 함(이행 의무)",
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "재난 및 안전관리 기본법",
+      "article": "제59조의2제2항",
+      "text": "중앙대책본부장은 복구사업을 지도·점검하고 필요하면 시정명령·시정요청을 할 수 있으며, 이를 받은 관계 기관의 장은 정당한 사유가 없으면 이에 따라야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "재난복구계획 협의(관계 중앙행정기관)",
+    "lane": "관계기관·지원기관",
+    "stage": "G3 협의·결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "관계 중앙행정기관의 장·수습본부장",
+    "receiver": "시·도지사·시장·군수·구청장",
+    "action": "특별재난지역 피해 재난복구계획 수립 시 협의",
+    "output_documents": [
+     "협의 결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "재난 및 안전관리 기본법",
+      "article": "제59조제2항",
+      "text": "시·도지사 또는 시장·군수·구청장은 특별재난지역 피해 재난복구계획을 수립한 후 수습본부장 및 관계 중앙행정기관의 장과 협의를 거쳐 중앙대책본부장에게 제출하여야 한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "message",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "message",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P05",
+    "target": "P08",
+    "type": "sequence",
+    "label": "자료 보완"
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P09",
+    "type": "message",
+    "label": null
+   },
+   {
+    "id": "L01",
+    "source": "P09",
+    "target": "P05",
+    "type": "loop",
+    "label": "보완 후 재검토"
+   },
+   {
+    "id": "E10",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P06",
+    "target": "P16",
+    "type": "message",
+    "label": "복구계획 협의"
+   },
+   {
+    "id": "M02",
+    "source": "P16",
+    "target": "P10",
+    "type": "message",
+    "label": "협의 결과 반영"
+   },
+   {
+    "id": "M03",
+    "source": "P12",
+    "target": "P15",
+    "type": "message",
+    "label": "시정명령·시정요청"
+   }
+  ],
+  "warnings": [
+   "구조도는 기본법상 대표 흐름이며, 재난 유형별 시행령·매뉴얼과 지자체 조례에 따라 세부 절차가 달라질 수 있다.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: '관계기관·지원기관' 빈 레인에 법정 행위 2개 노드 추가 — P15 복구사업 시정명령·시정요청 이행(재난안전법 제59조의2제2항, 정당한 사유 없으면 이행 의무), P16 재난복구계획 협의(제59조제2항, 관계 중앙행정기관·수습본부장 협의). message edge M01·M02·M03 결선. 대조 MST 283851(재난 및 안전관리 기본법). 법의 침묵: 제59조 재난복구계획 수립·확정·시행에 관한 명시적 기한 규정 없음('지체 없이'만 명시). 법의 침묵: 특별재난지역 피해 재난복구계획에 대한 주민 의견수렴·이의절차 미규정."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 20건 가운데 20건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "notes": [
+   "[시행 2026. 6. 11.] [법률 제21421호, 2026. 3. 10., 타법개정] 기준"
+  ],
+  "sources": [
+   {
+    "law": "재난 및 안전관리 기본법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "재난 및 안전관리 기본법",
+    "lawId": "009640",
+    "mst": "283851",
+    "promulgatedOn": "2026-03-10",
+    "effectiveOn": "2026-06-11",
+    "officialUrl": "https://law.go.kr/법령/재난및안전관리기본법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 17,
+   "explicitCitationEntries": 17,
+   "articleReferences": 20,
+   "verifiedReferences": 20,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

@@ -1,0 +1,473 @@
+{
+ "slug": "spouse-childbirth-leave",
+ "name": "배우자 출산휴가(급여)",
+ "oneLiner": "근로자가 배우자 출산휴가를 사용하고 사업주·고용보험 급여 지원을 연결하는 절차",
+ "type": "복지급여·고용지원형",
+ "priority": 226,
+ "whyFirst": "배우자 출산휴가(급여)의 신청·결정·사후관리 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "배우자 출산휴가(급여)은 근로자가 배우자 출산휴가를 사용하고 사업주·고용보험 급여 지원을 연결하는 절차 제도다.",
+  "stakeholders": "신청인·근로자, 사업주·지자체, 고용센터·복지기관과 관계기관이 관여한다.",
+  "legalBasis": [
+   {
+    "law": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+    "articles": "제18조의2(배우자 출산휴가)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "복지기관·고용센터",
+    "role": "접수·조사·결정·지급"
+   },
+   {
+    "name": "사업주·지자체",
+    "role": "휴직·지원 확인과 협조"
+   },
+   {
+    "name": "신청인·근로자",
+    "role": "신청·자료 제출·이의"
+   }
+  ],
+  "procedure": [
+   "지원·휴직 사유 확인",
+   "신청·신고 제출",
+   "접수·확인",
+   "자격·요건 조사",
+   "보완 요구",
+   "보완 자료 제출",
+   "배우자 출산휴가 부여",
+   "결정 통지",
+   "급여·서비스 지급",
+   "사후 확인·변경·이의"
+  ],
+  "moneyFlow": "법정 급여·지원금의 지급·환수 기준은 개별 법령과 고용보험·지자체 기준을 따른다.",
+  "docsFlow": "신청·신고 → 조사·확인 → 결정 통지 → 급여·서비스 지급 → 사후 확인·변경으로 이어진다.",
+  "bottlenecks": [
+   "위기·자격 증빙",
+   "사업주 확인과 기관 간 자료 연계",
+   "사후조사와 환수 판단"
+  ],
+  "reformPoints": [
+   "신청·확인 서류 간소화",
+   "급여 진행상태 공개",
+   "사후조사 기준 설명 강화"
+  ]
+ },
+ "related": [
+  "국민기초생활보장",
+  "고용보험과 실업급여",
+  "아동수당",
+  "국민건강보험"
+ ],
+ "fieldVerification": [
+  "실제 신청 서식과 전산 경로",
+  "지자체별 추가지원 기준",
+  "사후조사·환수의 개별 적용"
+ ],
+ "process": {
+  "institution_name": "배우자 출산휴가(급여)",
+  "law_name": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+  "lanes": [
+   "신청인·근로자",
+   "사업주·지자체",
+   "고용센터·복지기관"
+  ],
+  "stages": [
+   "G0 위기·사유",
+   "G1 신청·확인",
+   "G2 조사·검토",
+   "G3 결정",
+   "G4 지급·지원",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "지원·휴직 사유 확인",
+    "lane": "신청인·근로자",
+    "stage": "G0 위기·사유",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "신청인·근로자",
+    "action": "지원·휴직 사유 확인",
+    "output_documents": [
+     "지원·휴직 사유 확인"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+      "article": "제18조의2(배우자 출산휴가)",
+      "text": "배우자 출산휴가에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "신청·신고 제출",
+    "lane": "신청인·근로자",
+    "stage": "G1 신청·확인",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "신청인·근로자",
+    "action": "신청·신고 제출",
+    "output_documents": [
+     "신청·신고 제출"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+      "article": "제18조의2(배우자 출산휴가)",
+      "text": "배우자 출산휴가에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "접수·확인",
+    "lane": "고용센터·복지기관",
+    "stage": "G1 신청·확인",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "고용센터·복지기관",
+    "action": "접수·확인",
+    "output_documents": [
+     "접수·확인"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+      "article": "제18조의2(배우자 출산휴가)",
+      "text": "배우자 출산휴가에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "자격·요건 조사",
+    "lane": "사업주·지자체",
+    "stage": "G2 조사·검토",
+    "type": "task",
+    "status": "current",
+    "progress": 45,
+    "actor": "사업주·지자체",
+    "action": "자격·요건 조사",
+    "output_documents": [
+     "자격·요건 조사"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+      "article": "제18조의2(배우자 출산휴가)",
+      "text": "배우자 출산휴가에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "보완 요구",
+    "lane": "고용센터·복지기관",
+    "stage": "G2 조사·검토",
+    "type": "task",
+    "status": "risk",
+    "progress": 0,
+    "actor": "고용센터·복지기관",
+    "action": "보완 요구",
+    "output_documents": [
+     "보완 요구"
+    ],
+    "deadline": null,
+    "confidence": 0.78,
+    "legal_basis": [
+     {
+      "law": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+      "article": "제18조의2(배우자 출산휴가)",
+      "text": "배우자 출산휴가에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "보완 자료 제출",
+    "lane": "신청인·근로자",
+    "stage": "G2 조사·검토",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신청인·근로자",
+    "action": "보완 자료 제출",
+    "output_documents": [
+     "보완 자료 제출"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+      "article": "제18조의2(배우자 출산휴가)",
+      "text": "배우자 출산휴가에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "배우자 출산휴가 부여",
+    "lane": "고용센터·복지기관",
+    "stage": "G3 결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "고용센터·복지기관",
+    "action": "배우자 출산휴가 부여",
+    "output_documents": [
+     "배우자 출산휴가 부여"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고용보험법",
+      "article": "제75조(출산전후휴가 급여 등)",
+      "text": "고용노동부장관은 남녀고용평등법 제18조의2에 따른 배우자 출산휴가를 받은 피보험자로서 피보험 단위기간 180일 이상 등 요건을 갖춘 경우 출산전후휴가 급여등을 지급한다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "결정 통지",
+    "lane": "사업주·지자체",
+    "stage": "G3 결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업주·지자체",
+    "action": "결정 통지",
+    "output_documents": [
+     "결정 통지"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고용보험법",
+      "article": "제75조(출산전후휴가 급여 등), 제76조(지급 기간 등) 제3항",
+      "text": "출산전후휴가 급여등의 지급 결정을 신청인에게 통지하며, 신청 및 지급에 필요한 사항은 고용노동부령으로 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "급여·서비스 지급",
+    "lane": "고용센터·복지기관",
+    "stage": "G4 지급·지원",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "고용센터·복지기관",
+    "action": "급여·서비스 지급",
+    "output_documents": [
+     "급여·서비스 지급"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고용보험법",
+      "article": "제76조(지급 기간 등) 제1항 제2호·제2항",
+      "text": "배우자 출산휴가 기간(우선지원 대상기업 한정)에 대하여 통상임금에 해당하는 금액을 상·하한액 범위에서 지급한다."
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "사후 확인·변경·이의",
+    "lane": "신청인·근로자",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신청인·근로자",
+    "action": "사후 확인·변경·이의",
+    "output_documents": [
+     "사후 확인·변경·이의"
+    ],
+    "deadline": "심사청구는 처분 안 날부터 90일 이내(심사관 30일 내 결정)",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "고용보험법",
+      "article": "제87조(심사와 재심사) 제1항·제2항, 제89조(고용보험심사관) 제2항",
+      "text": "출산전후휴가 급여등에 관한 처분에 이의가 있는 자는 처분 안 날부터 90일 이내에 고용보험심사관에게 심사를 청구할 수 있고, 심사관은 30일 이내에 결정하여야 한다. 결정에 이의가 있으면 심사위원회에 재심사를 청구할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "사업주 배우자 출산휴가 부여·불리한 처우 금지",
+    "lane": "사업주·지자체",
+    "stage": "G3 결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업주(회사)",
+    "action": "배우자 출산휴가 20일 유급 부여(출산일부터 120일 내, 3회 분할), 휴가 이유 해고·불리한 처우 금지",
+    "output_documents": [
+     "배우자 출산휴가 승인"
+    ],
+    "deadline": "배우자 출산일부터 120일 이내 사용",
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+      "article": "제18조의2(배우자 출산휴가) 제1항·제3항·제4항·제5항",
+      "text": "사업주는 근로자가 배우자 출산을 이유로 휴가를 고지하면 20일의 유급휴가를 주어야 하고(제1항), 출산일부터 120일 내 3회 분할 사용할 수 있으며(제3항·제4항), 배우자 출산휴가를 이유로 해고 등 불리한 처우를 하여서는 아니 된다(제5항)."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L01",
+    "source": "P05",
+    "target": "P06",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "L02",
+    "source": "P06",
+    "target": "P04",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P04",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P02",
+    "target": "P11",
+    "type": "message",
+    "label": "휴가 고지·청구"
+   },
+   {
+    "id": "E10",
+    "source": "P11",
+    "target": "P09",
+    "type": "message",
+    "label": "유급휴가 부여→급여 연계"
+   }
+  ],
+  "warnings": [
+   "급여액·기간과 세부 요건은 시행령·고시 및 개인 상황에 따라 달라질 수 있다.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (E) 사업주(회사)의 법정 행위 누락 — '사업주·지자체' 레인에 배우자 출산휴가 20일 유급 부여·해고/불리한 처우 금지 노드 P11 신설(남녀고용평등법 제18조의2제1항·제3항·제4항·제5항, message edge E09·E10). (C) P07 배우자 출산휴가 부여 근거를 사업주 의무 제18조의2→급여 지급요건 고용보험법 제75조로 정정(고용센터 소관). (C) P09 급여지급 제18조의2→고용보험법 제76조 정정. (C) P08 결정통지 제18조의2→고용보험법 제75조·제76조 정정. (C·D) P10 사후 이의 제18조의2→고용보험법 제87조·제89조(심사·재심사) 정정 및 90일/30일 기한 추가. L0 empty-lane '관계기관': 이 제도에는 법정 협조의무를 지는 별도 관계기관 행위자가 없어(당사자·사업주·고용노동부로 구성) 빈 레인 유지가 정당 — 사업주 법정 행위는 별도 '사업주·지자체' 레인 소관으로 판정. consultedMST: 276851(남녀고용평등법), 279807(고용보험법). 법의 침묵: 배우자 출산휴가(20일)와 급여(우선지원 대상기업 한정)의 비대칭으로 대기업 근로자 급여 사각. 법의 침묵: 사업주 휴가 미부여 시 근로자 구제절차 명문 부재(과태료 외). 법의 침묵: 3회 분할 사용 시 급여 신청 기산점 불명확.",
+   "2026-07-13 후속 구조 정리: 실제 법정 행위 노드가 없는 빈 레인 1개를 제거하고 해당 주체는 canvas 이해관계자 설명으로만 유지했다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 14건 가운데 14건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률",
+    "lawId": "000130",
+    "mst": "276851",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2025-10-01",
+    "officialUrl": "https://law.go.kr/법령/남녀고용평등과일ㆍ가정양립지원에관한법률"
+   },
+   {
+    "law": "고용보험법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "고용보험법",
+    "lawId": "001761",
+    "mst": "279807",
+    "promulgatedOn": "2025-11-11",
+    "effectiveOn": "2026-05-12",
+    "officialUrl": "https://law.go.kr/법령/고용보험법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 12,
+   "explicitCitationEntries": 12,
+   "articleReferences": 14,
+   "verifiedReferences": 14,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

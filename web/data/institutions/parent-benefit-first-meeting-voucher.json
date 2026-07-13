@@ -1,0 +1,464 @@
+{
+ "slug": "parent-benefit-first-meeting-voucher",
+ "name": "부모급여·첫만남이용권",
+ "oneLiner": "출생 뒤 부모급여와 첫만남이용권을 신청해 현금·국민행복카드 이용권으로 받는 절차",
+ "type": "현금·이용권 지급형",
+ "priority": 233,
+ "whyFirst": "부모급여·첫만남이용권의 신청·결정·사후관리 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "출생신고와 연계해 영아 양육 지원을 신청하고, 부모급여와 첫만남이용권의 지급수단·사용기한을 구분하는 절차다.",
+  "stakeholders": "보호자, 읍면동·시군구, 사회보장정보원·카드사, 보건복지부",
+  "legalBasis": [
+   {
+    "law": "저출산ㆍ고령사회기본법",
+    "articles": "제10조(경제적 부담의 경감)",
+    "kind": "법률"
+   },
+   {
+    "law": "아동수당법",
+    "articles": "제4조제5항(2세 미만 추가 지급), 제6조(신청), 제9조(지급 결정), 제10조(지급)",
+    "kind": "법률"
+   },
+   {
+    "law": "아동수당법 시행령",
+    "articles": "제2조(부모급여 대상·지급액)",
+    "kind": "대통령령"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "읍면동·시군구",
+    "role": "접수·확인·결정 또는 서비스 연계"
+   },
+   {
+    "name": "사회보장정보원·카드사",
+    "role": "접수·확인·결정 또는 서비스 연계"
+   },
+   {
+    "name": "보건복지부",
+    "role": "접수·확인·결정 또는 서비스 연계"
+   }
+  ],
+  "procedure": [
+   "출생신고·지원 안내",
+   "부모급여·이용권 신청",
+   "신청 접수·관할 이송",
+   "출생·보호자·주소 확인",
+   "지급 대상·수단 결정",
+   "부모급여 지급 결정",
+   "현금 급여 지급",
+   "국민행복카드 이용권 발급",
+   "이용기한·변동 관리",
+   "기준·재원 관리"
+  ],
+  "moneyFlow": "급여·이용권·서비스 비용과 본인부담은 법령 및 연도별 운영기준에 따라 달라질 수 있다.",
+  "docsFlow": "신청·신고 기록 → 자격·사실 확인자료 → 결정·연계 통지 → 지급·이행 기록 → 사후관리 기록으로 이어진다.",
+  "bottlenecks": [
+   "사실관계와 자격 증빙",
+   "관계기관 간 정보·기록 연계",
+   "개별 상황에 따른 지원·결정 기준"
+  ],
+  "reformPoints": [
+   "신청 진행상태 안내 강화",
+   "기관 간 인계 기준의 명확화",
+   "결정 근거와 이의 경로의 가독성 개선"
+  ]
+ },
+ "related": [
+  "아동수당",
+  "난임 시술비 지원",
+  "아이돌봄 서비스"
+ ],
+ "fieldVerification": [
+  "실제 온라인·방문 신청 경로",
+  "연도별 지원금액·자격 기준",
+  "지자체·기관별 운영 세부기준"
+ ],
+ "process": {
+  "institution_name": "부모급여·첫만남이용권",
+  "law_name": "저출산ㆍ고령사회기본법·아동수당법·아동수당법 시행령",
+  "lanes": [
+   "보호자",
+   "읍면동·시군구",
+   "사회보장정보원·카드사",
+   "보건복지부"
+  ],
+  "stages": [
+   "G0 상황·상담",
+   "G1 신청·접수",
+   "G2 조사·확인",
+   "G3 결정·연계",
+   "G4 지급·이행",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "출생신고·지원 안내",
+    "lane": "보호자",
+    "stage": "G0 상황·상담",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "보호자",
+    "action": "출생신고·지원 안내",
+    "output_documents": [
+     "출생신고·지원 안내 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "저출산ㆍ고령사회기본법",
+      "article": "제10조",
+      "text": "저출산ㆍ고령사회기본법 제10조에 따른 출생신고·지원 안내 단계"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "부모급여·이용권 신청",
+    "lane": "보호자",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "보호자",
+    "action": "부모급여·이용권 신청",
+    "output_documents": [
+     "부모급여·이용권 신청 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "저출산ㆍ고령사회기본법",
+      "article": "제10조",
+      "text": "저출산ㆍ고령사회기본법 제10조제5항에 따라 보호자(또는 대리인)가 출생아동 주민등록 주소지 관할 시장·군수·구청장에게 첫만남이용권 지급을 신청하는 당사자 권리(부모급여 신청 절차는 법률 명시 없음, 대통령령·지침 위임)"
+     },
+     {
+      "law": "아동수당법",
+      "article": "제6조",
+      "text": "보호자 또는 대리인은 시장·군수·구청장에게 부모급여를 포함한 아동수당 지급을 신청할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "신청 접수·관할 이송",
+    "lane": "읍면동·시군구",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "읍면동·시군구",
+    "action": "신청 접수·관할 이송",
+    "output_documents": [
+     "신청 접수·관할 이송 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "저출산ㆍ고령사회기본법",
+      "article": "제10조",
+      "text": "저출산ㆍ고령사회기본법 제10조에 따른 신청 접수·관할 이송 단계"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "출생·보호자·주소 확인",
+    "lane": "읍면동·시군구",
+    "stage": "G2 조사·확인",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "읍면동·시군구",
+    "action": "출생·보호자·주소 확인",
+    "output_documents": [
+     "출생·보호자·주소 확인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "저출산ㆍ고령사회기본법",
+      "article": "제10조",
+      "text": "저출산ㆍ고령사회기본법 제10조에 따른 출생·보호자·주소 확인 단계"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "첫만남이용권 지급 결정",
+    "lane": "읍면동·시군구",
+    "stage": "G3 결정·연계",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "읍면동·시군구",
+    "action": "출생아동의 첫만남이용권 지급 대상과 지급 수단을 결정한다.",
+    "output_documents": [
+     "지급 대상·수단 결정 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "저출산ㆍ고령사회기본법",
+      "article": "제10조",
+      "text": "저출산ㆍ고령사회기본법 제10조에 따른 지급 대상·수단 결정 단계"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "부모급여 지급 결정",
+    "lane": "읍면동·시군구",
+    "stage": "G3 결정·연계",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "읍면동·시군구",
+    "action": "부모급여 지급 결정",
+    "output_documents": [
+     "부모급여 지급 결정 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "아동수당법",
+      "article": "제9조",
+      "text": "시장·군수·구청장은 수급권을 확인해 지급 여부를 결정하고, 결정 내용과 이유를 신청자에게 지체 없이 통지한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "현금 급여 지급",
+    "lane": "사회보장정보원·카드사",
+    "stage": "G4 지급·이행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사회보장정보원·카드사",
+    "action": "현금 급여 지급",
+    "output_documents": [
+     "현금 급여 지급 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "아동수당법",
+      "article": "제4조제5항·제10조",
+      "text": "2세 미만 아동에게 대통령령으로 정한 금액을 추가 지급하고, 지급 결정 뒤 매월 정기적으로 수급아동 또는 보호자에게 지급한다."
+     },
+     {
+      "law": "아동수당법 시행령",
+      "article": "제2조제1항",
+      "text": "추가 지급액은 1세 미만 월 100만원, 1세 이상 2세 미만 월 50만원이다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "국민행복카드 이용권 발급",
+    "lane": "사회보장정보원·카드사",
+    "stage": "G4 지급·이행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사회보장정보원·카드사",
+    "action": "국민행복카드 이용권 발급",
+    "output_documents": [
+     "국민행복카드 이용권 발급 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "저출산ㆍ고령사회기본법",
+      "article": "제10조",
+      "text": "저출산ㆍ고령사회기본법 제10조제3항에 따라 200만원 이상의 첫만남이용권을 출생아동에게 지급(국민행복카드 이용권 발급)하는 단계(대상·금액·이용기한·절차는 제10조제6항 대통령령 위임)"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "이용기한·변동 관리",
+    "lane": "사회보장정보원·카드사",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사회보장정보원·카드사",
+    "action": "이용기한·변동 관리",
+    "output_documents": [
+     "이용기한·변동 관리 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "저출산ㆍ고령사회기본법",
+      "article": "제10조",
+      "text": "저출산ㆍ고령사회기본법 제10조에 따른 이용기한·변동 관리 단계"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "기준·재원 관리",
+    "lane": "보건복지부",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보건복지부",
+    "action": "기준·재원 관리",
+    "output_documents": [
+     "기준·재원 관리 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "아동수당법",
+      "article": "제4조제5항·제10조",
+      "text": "부모급여의 지급 대상·추가 지급액과 지급 시기·방법의 법률상 근거다."
+     },
+     {
+      "law": "저출산ㆍ고령사회기본법",
+      "article": "제10조제3항·제6항",
+      "text": "첫만남이용권 지급과 대상·금액·방법 등에 관한 대통령령 위임의 근거다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건·기한·지원 범위는 시행령, 고시 및 사실관계에 따라 달라질 수 있다.",
+   "2026-07-13 L4 의미 검증: 부모급여 직접 근거를 영유아보육법에서 아동수당법 제4조제5항·제6조·제9조·제10조와 시행령 제2조로 교체했다. 보호자 신청, 지자체 지급 결정·통지, 2세 미만 추가 지급액과 현금 지급 경로를 현행 조문에 맞췄다. 첫만남이용권은 저출산·고령사회기본법 제10조 근거를 유지한다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 3건 중 공식 원문 3건을 연결했다. 캔버스와 절차 노드의 명시 조문 21건 가운데 21건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "저출산ㆍ고령사회기본법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "저출산ㆍ고령사회기본법",
+    "lawId": "009933",
+    "mst": "259255",
+    "promulgatedOn": "2024-01-23",
+    "effectiveOn": "2024-04-24",
+    "officialUrl": "https://law.go.kr/법령/저출산ㆍ고령사회기본법"
+   },
+   {
+    "law": "아동수당법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "아동수당법",
+    "lawId": "013103",
+    "mst": "284619",
+    "promulgatedOn": "2026-03-20",
+    "effectiveOn": "2026-03-27",
+    "officialUrl": "https://law.go.kr/법령/아동수당법"
+   },
+   {
+    "law": "아동수당법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "아동수당법 시행령",
+    "lawId": "013126",
+    "mst": "285049",
+    "promulgatedOn": "2026-03-27",
+    "effectiveOn": "2026-03-27",
+    "officialUrl": "https://law.go.kr/법령/아동수당법시행령"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 16,
+   "explicitCitationEntries": 16,
+   "articleReferences": 21,
+   "verifiedReferences": 21,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

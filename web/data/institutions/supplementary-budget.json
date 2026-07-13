@@ -1,0 +1,631 @@
+{
+ "slug": "supplementary-budget",
+ "name": "성립전 예산·추가경정예산",
+ "oneLiner": "예산 성립 전 집행과 추가경정예산 편성·의결의 예외 경로를 다루는 절차",
+ "type": "예산·특례형",
+ "priority": 208,
+ "whyFirst": "성립전 예산·추가경정예산의 권한·절차·주민 참여 지점을 한 흐름으로 확인한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "성립전 예산·추가경정예산은 예산 성립 전 집행과 추가경정예산 편성·의결의 예외 경로를 다루는 절차 법정 절차를 한 장에서 확인하도록 정리한 제도다.",
+  "stakeholders": "주민·이해관계자, 지방자치단체, 지방의회·선거관리기관, 행정안전부와 관계 중앙기관이 단계별로 관여한다.",
+  "legalBasis": [
+   {
+    "law": "지방재정법",
+    "articles": "제40조(예산의 내용), 제45조(추가경정예산의 편성 등·성립 전 사용), 제46조(예산 불성립 시의 예산 집행), 제47조(목적 외 사용금지)",
+    "kind": "법률"
+   },
+   {
+    "law": "지방자치법",
+    "articles": "제47조(지방의회 의결사항), 제142조(예산의 편성 및 의결), 제146조(예산 불성립 시 집행)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "지방자치단체",
+    "role": "접수·검토·집행과 공개"
+   },
+   {
+    "name": "지방의회·선거관리기관",
+    "role": "의결·투표 등 법정 절차 수행"
+   },
+   {
+    "name": "행정안전부·관계기관",
+    "role": "제도 총괄·협의·감독"
+   },
+   {
+    "name": "주민·이해관계자",
+    "role": "의견·청구·자료 제출과 권리 행사"
+   }
+  ],
+  "procedure": [
+   "대상·사안 인지",
+   "의견·청구 제출",
+   "접수·공고",
+   "관할·요건 확인",
+   "관계기관 협의",
+   "추가경정예산 확정",
+   "결정 통지·공개",
+   "집행·사후관리"
+  ],
+  "moneyFlow": "제도별 교부금·예산·자산·세입의 세부 산정과 집행 기준은 시행령·조례·예산편성 기준을 함께 확인해야 한다.",
+  "docsFlow": "의견·청구서 → 접수·공고 → 요건 검토·협의 → 의결·결정서 → 통지·공개 → 집행 기록 → 결과보고로 이어진다.",
+  "bottlenecks": [
+   "지방자치단체별 조례·기준의 차이",
+   "주민 참여와 법정 요건 판단의 시차",
+   "관계기관 협의와 의결 일정",
+   "결정 이후 공개·집행 기록의 단절"
+  ],
+  "reformPoints": [
+   "판단 기준과 산정 근거의 공개",
+   "주민 제출 자료의 전산 연계",
+   "의결·결정·집행 이력의 연결",
+   "지자체 간 절차 안내 표준화"
+  ]
+ },
+ "related": [
+  "지방의회 운영",
+  "조례 제정",
+  "주민조례청구",
+  "주민감사청구"
+ ],
+ "fieldVerification": [
+  "해당 지자체 조례·규칙의 적용 범위와 최신 개정",
+  "실제 접수·공고·통지 서식과 전산 경로",
+  "관계기관 협의와 주민 참여의 운영 관행"
+ ],
+ "process": {
+  "institution_name": "성립전 예산·추가경정예산",
+  "law_name": "지방재정법",
+  "lanes": [
+   "주민·이해관계자",
+   "지방자치단체",
+   "지방의회·선관위",
+   "중앙부처·관계기관"
+  ],
+  "stages": [
+   "G0 대상인지",
+   "G1 접수·제안",
+   "G2 요건검토",
+   "G3 심의·결정",
+   "G4 집행·공개",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "대상·사안 인지",
+    "lane": "주민·이해관계자",
+    "stage": "G0 대상인지",
+    "type": "notice",
+    "status": "done",
+    "progress": 100,
+    "actor": "주민·이해관계자",
+    "action": "제도 적용 대상과 쟁점을 확인",
+    "output_documents": [
+     "대상 확인 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지방재정법",
+      "article": "제45조",
+      "text": "추가경정예산의 편성 등에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "의견·청구 제출",
+    "lane": "주민·이해관계자",
+    "stage": "G1 접수·제안",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "주민·이해관계자",
+    "action": "주민·이해관계자가 의견·청구 또는 자료를 제출",
+    "output_documents": [
+     "의견·청구서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지방재정법",
+      "article": "제45조",
+      "text": "추가경정예산의 편성 등에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "접수·공고",
+    "lane": "지방자치단체",
+    "stage": "G1 접수·제안",
+    "type": "system",
+    "status": "done",
+    "progress": 100,
+    "actor": "지방자치단체",
+    "action": "접수 사실과 절차를 공고·안내",
+    "output_documents": [
+     "접수·공고 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지방재정법",
+      "article": "제45조",
+      "text": "추가경정예산의 편성 등에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "관할·요건 확인",
+    "lane": "지방자치단체",
+    "stage": "G2 요건검토",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "지방자치단체",
+    "action": "관할과 법정 요건을 확인",
+    "output_documents": [
+     "요건 검토서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지방재정법",
+      "article": "제45조",
+      "text": "추가경정예산의 편성 등에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "법정 기준 검토",
+    "lane": "지방자치단체",
+    "stage": "G2 요건검토",
+    "type": "gateway",
+    "status": "current",
+    "progress": 45,
+    "actor": "지방자치단체",
+    "action": "이미 성립된 예산의 변경 필요성을 확인하고 추가경정예산 편성 기준을 검토",
+    "output_documents": [
+     "검토 의견"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지방재정법",
+      "article": "제45조",
+      "text": "지방자치단체의 장은 이미 성립된 예산을 변경할 필요가 있을 때에는 추가경정예산을 편성할 수 있다."
+     },
+     {
+      "law": "지방재정법",
+      "article": "제40조",
+      "text": "예산은 예산총칙, 세입·세출예산, 계속비, 채무부담행위 및 명시이월비를 총칭한다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "관계기관 협의",
+    "lane": "중앙부처·관계기관",
+    "stage": "G3 심의·결정",
+    "type": "system",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "중앙부처·관계기관",
+    "action": "관계기관의 협의·지원 또는 감독 절차를 진행",
+    "output_documents": [
+     "협의 결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지방재정법",
+      "article": "제46조",
+      "text": "예산 불성립 시의 예산 집행에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "주민·기관 의견 제출",
+    "lane": "주민·이해관계자",
+    "stage": "G3 심의·결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민·이해관계자",
+    "action": "의견과 사실관계 자료를 제출",
+    "output_documents": [
+     "의견서·증빙"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지방재정법",
+      "article": "제46조",
+      "text": "예산 불성립 시의 예산 집행에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "보완 요구",
+    "lane": "지방자치단체",
+    "stage": "G2 요건검토",
+    "type": "task",
+    "status": "risk",
+    "progress": 0,
+    "actor": "지방자치단체",
+    "action": "판단에 필요한 자료 보완을 요구",
+    "output_documents": [
+     "보완 요구서"
+    ],
+    "deadline": null,
+    "blocker": "기준 적용과 사실관계 자료의 불일치",
+    "confidence": 0.78,
+    "legal_basis": [
+     {
+      "law": "지방재정법",
+      "article": "제45조",
+      "text": "추가경정예산의 편성 등에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "보완 자료 제출",
+    "lane": "주민·이해관계자",
+    "stage": "G2 요건검토",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민·이해관계자",
+    "action": "보완 자료를 제출해 재검토를 받음",
+    "output_documents": [
+     "보완 자료"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지방재정법",
+      "article": "제45조",
+      "text": "추가경정예산의 편성 등에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "추가경정예산 확정",
+    "lane": "지방의회·선관위",
+    "stage": "G3 심의·결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지방의회·선관위",
+    "action": "지방의회가 추가경정예산안을 심의·의결하여 확정",
+    "output_documents": [
+     "추경예산 의결서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지방자치법",
+      "article": "제47조제1항",
+      "text": "지방의회는 예산의 심의·확정을 의결한다."
+     },
+     {
+      "law": "지방자치법",
+      "article": "제142조",
+      "text": "지방자치단체의 장이 편성·제출한 예산안을 지방의회가 의결한다. 지방의회는 장의 동의 없이 지출예산 각 항의 금액을 증가시키거나 새로운 비용항목을 설치할 수 없다."
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "결정 통지·공개",
+    "lane": "지방자치단체",
+    "stage": "G4 집행·공개",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지방자치단체",
+    "action": "결정과 적용 범위를 통지·공개",
+    "output_documents": [
+     "통지·공개 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지방재정법",
+      "article": "제45조",
+      "text": "추가경정예산의 편성 등에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "집행·교부·관리",
+    "lane": "지방자치단체",
+    "stage": "G4 집행·공개",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지방자치단체",
+    "action": "결정에 따른 집행·관리 조치를 수행",
+    "output_documents": [
+     "집행 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지방재정법",
+      "article": "제46조",
+      "text": "예산 불성립 시의 예산 집행에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "주민 권리·이행 확인",
+    "lane": "주민·이해관계자",
+    "stage": "G4 집행·공개",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민·이해관계자",
+    "action": "주민의 참여·권리 행사와 이행 상태를 확인",
+    "output_documents": [
+     "이행 확인"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지방재정법",
+      "article": "제46조",
+      "text": "예산 불성립 시의 예산 집행에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "사후 공개·개선",
+    "lane": "중앙부처·관계기관",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "중앙부처·관계기관",
+    "action": "결과를 기록·공개하고 개선 과제를 관리",
+    "output_documents": [
+     "결과보고·개선안"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "지방재정법",
+      "article": "제46조",
+      "text": "예산 불성립 시의 예산 집행에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "성립전 예산 선집행·차기 추경 계상",
+    "lane": "지방자치단체",
+    "stage": "G4 집행·공개",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지방자치단체의 장",
+    "action": "용도지정·전액교부 경비 또는 재난복구계획 확정·통보 경비를 추경 성립 전 선집행하고, 같은 회계연도 차기 추가경정예산에 계상",
+    "output_documents": [
+     "성립전 사용 집행기록",
+     "차기 추경 계상서"
+    ],
+    "deadline": null,
+    "blocker": "성립전 사용은 제45조 단서 각 호 요건(용도지정+전액교부, 재난복구계획 확정·통보)을 충족해야 한다",
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "지방재정법",
+      "article": "제45조",
+      "text": "다만, 시·도는 국가로부터, 시·군·구는 국가 또는 시·도로부터 용도가 지정되고 소요 전액이 교부된 경비, 재난구호·복구와 관련하여 복구계획이 확정·통보된 경비는 추가경정예산의 성립 전에 사용할 수 있으며, 이는 같은 회계연도의 차기 추가경정예산에 계상하여야 한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "message",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "message",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P05",
+    "target": "P08",
+    "type": "sequence",
+    "label": "자료 보완"
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P09",
+    "type": "message",
+    "label": null
+   },
+   {
+    "id": "L01",
+    "source": "P09",
+    "target": "P05",
+    "type": "loop",
+    "label": "보완 후 재검토"
+   },
+   {
+    "id": "E10",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P12",
+    "target": "P15",
+    "type": "message",
+    "label": "성립전 사용 요건 충족 시"
+   },
+   {
+    "id": "M02",
+    "source": "P15",
+    "target": "P10",
+    "type": "message",
+    "label": "차기 추경 계상(사후 의결)"
+   }
+  ],
+  "warnings": [
+   "구조도는 법률상 대표 흐름이며 실제 절차는 지자체 조례·규칙과 사안별 기준에 따라 달라질 수 있다.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (C) P10 추가경정예산 확정의 근거를 지방재정법 제46조(예산 불성립) 오인용에서 지방자치법 제47조제1항·제142조(예산 심의·의결)로 정정, (C) P05 법정기준 검토의 근거 문구를 제45조·제40조 원문으로 교체, (E) 제도 명칭인 성립전 예산 선집행·차기 추경 계상(지방재정법 제45조 단서) 노드 P15 신설(M01·M02 연결), 근거 법령에 지방자치법 추가. 참조 MST: 지방재정법 283145, 지방자치법 284005. L0 감사 소견: empty-lane·backward-sequence 없음, no-sublaw(시행령 인용 0)만 표기됨 — 성립전·추경 핵심 절차는 지방재정법·지방자치법 법률 본문이 직접 규정하므로 시행령 미인용은 정상. 법의 침묵: 추가경정예산안의 지방의회 제출 시한은 제142조 본예산 기한(시·도 50일·시군구 40일 전)과 달리 법에 명시가 없다. 법의 침묵: 성립전 예산 사용에 대한 사전 의회 보고 의무는 규정되지 않고 사후 차기 추경 계상만 요구된다. 법의 침묵: 추가경정예산 편성 횟수의 상한이 없다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 2건 중 공식 원문 2건을 연결했다. 캔버스와 절차 노드의 명시 조문 24건 가운데 24건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "notes": [
+   "[시행 2026.07.01.] 기준"
+  ],
+  "sources": [
+   {
+    "law": "지방재정법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "지방재정법",
+    "lawId": "001652",
+    "mst": "283145",
+    "promulgatedOn": "2026-02-05",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/지방재정법"
+   },
+   {
+    "law": "지방자치법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "지방자치법",
+    "lawId": "001656",
+    "mst": "284005",
+    "promulgatedOn": "2026-03-05",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/지방자치법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 19,
+   "explicitCitationEntries": 19,
+   "articleReferences": 24,
+   "verifiedReferences": 24,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

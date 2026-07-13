@@ -325,8 +325,13 @@
     "legal_basis": [
      {
       "law": "부동산 거래신고 등에 관한 법률",
+      "article": "제28조(과태료)",
+      "text": "거래신고 미신고·거짓신고 등에 대한 과태료(제2·3항)"
+     },
+     {
+      "law": "부동산 거래신고 등에 관한 법률",
       "article": "제23조(청문)",
-      "text": "청문"
+      "text": "토지거래허가 취소 등 처분 전 청문"
      }
     ]
    },
@@ -474,7 +479,7 @@
     "id": "E05",
     "source": "P03",
     "target": "P04",
-    "type": "sequence",
+    "type": "loop",
     "label": "보완"
    },
    {
@@ -563,14 +568,20 @@
    }
   ],
   "warnings": [
-   "2026-07-12 부동산 패키지. MST 259641."
+   "2026-07-12 부동산 패키지. MST 259641.",
+   "2026-07-13 L0 backward-sequence 잔존 사유(E13 P06→P08): DRF 원문(MST 259641) 제3조의2제1항 재확인 — 해제등 신고는 제3조 최초 신고 후 계약 해제·무효·취소가 확정된 날부터 30일 이내 이루어지는 별도의 순방향 신고이며 반려·보완 회귀(loop)가 아니다. P08이 G1 신고 단계에 배치된 것은 '신고' 행위 성격에 따른 모델링 압축으로 순서 오류가 아니므로 sequence 유지(left-as-is).",
+   {
+    "date": "2026-07-13",
+    "type": "L2-blind-recon",
+    "message": "2026-07-13 L2 블라인드 재구성 대조 정정: (loop) E05 — L0 backward-sequence P03(신고 접수)→P04(보완 제출) 판정: 제6조제1항(신고 내용 보완 요구·자료 제출 요구)에 따라 접수 후 보완을 요구하고 P04→P14(재신고)→P02로 회귀하는 반려·보완 구조이므로 edge type을 sequence→loop로 정정. (C) P11 legal_basis — 과태료·청문 노드가 제23조(청문)만 기재하였으나 과태료 부과의 직접 근거는 제28조(과태료, 제2·3항이 제3조 거래신고 미신고·거짓신고 과태료 규정)이므로 제28조를 추가하고 제23조(청문)는 처분 전 절차로 유지. [left-as-is] E13 P06→P08(해제등 신고) — L0 backward-sequence 후보이나 제3조의2(해제등 신고)는 계약 해제·무효·취소 확정 후 30일 내 이루어지는 별도의 순방향 절차이며 반려·보완 회귀가 아니므로 sequence 유지(P08의 단계 배치는 모델링 압축이지 순서 오류 아님). 참조 MST: 부동산 거래신고 등에 관한 법률 MST=259641. 법의 침묵: (1) 신고필증 발급은 제3조제5항 '지체 없이'로만 규정되어 구체적 처리기한이 법률에 없음. (2) 자금조달계획서 제출 대상·범위가 법률 본문이 아니라 대통령령(시행령)에 위임되어 법률 침묵. (3) 검증(제5조) 결과 부적정 판정 시 후속 조치의 기한이 법률에 정해져 있지 않음."
+   }
   ]
  },
  "verification": {
   "status": "article-verified",
-  "verifiedAt": "2026-07-12",
-  "method": "법제처 DRF + L3",
-  "scope": "L3 당사자 워크스루 후 명시 조문 9건 존재 확인 9건",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 19건 가운데 19건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
    "부동산 거래신고 등에 관한 법률 MST 259641"
   ],
@@ -588,12 +599,12 @@
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-12",
-   "method": "DRF 목차·조문제목 대조",
-   "citationEntries": 9,
-   "explicitCitationEntries": 9,
-   "articleReferences": 9,
-   "verifiedReferences": 9,
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 20,
+   "explicitCitationEntries": 19,
+   "articleReferences": 19,
+   "verifiedReferences": 19,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }

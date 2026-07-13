@@ -1,0 +1,355 @@
+{
+ "slug": "student-tailored-integrated-support",
+ "name": "학생맞춤통합지원",
+ "oneLiner": "도움 요청·위기징후 발견 → 초기상담·지원 필요 확인 → 지원대상학생 선정 → 학생별 통합지원계획 수립 → 학습·복지·건강 서비스 연계 → 지원상황 점검·조정 → 지원 종결·사후관리 → 정보시스템 기록·보호",
+ "type": "학생 발굴·통합지원형",
+ "priority": 303,
+ "whyFirst": "정부·지방자치단체와 관계기관의 역할을 분리해 학생맞춤통합지원 절차를 한눈에 보여준다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "학생맞춤통합지원은(는) 도움 요청·위기징후 발견 → 초기상담·지원 필요 확인 → 지원대상학생 선정 → 학생별 통합지원계획 수립 → 학습·복지·건강 서비스 연계 → 지원상황 점검·조정 → 지원 종결·사후관리 → 정보시스템 기록·보호로 이어지는 공적 절차다.",
+  "stakeholders": "학생·보호자, 학교, 지원위원회·지원센터, 교육청·연계기관",
+  "legalBasis": [
+   {
+    "law": "학생맞춤통합지원법",
+    "articles": "제5~18조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "학교",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "지원위원회·지원센터",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "교육청·연계기관",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "도움 요청·위기징후 발견",
+   "초기상담·지원 필요 확인",
+   "지원대상학생 선정",
+   "학생별 통합지원계획 수립",
+   "학습·복지·건강 서비스 연계",
+   "지원상황 점검·조정",
+   "지원 종결·사후관리",
+   "정보시스템 기록·보호"
+  ],
+  "moneyFlow": "지원금·수수료·사업비는 법령과 연도별 사업기준 또는 개별 결정에 따라 달라질 수 있다.",
+  "docsFlow": "도움 요청·위기징후 발견 기록 → 심사·협의 자료 → 결정·통지 → 이행·사후관리 기록으로 이어진다.",
+  "bottlenecks": [
+   "학생·보호자 동의와 정보공유 범위",
+   "교육청별 지원대상 선정 세부기준"
+  ],
+  "reformPoints": [
+   "처리상태와 담당기관 안내",
+   "기관 간 자료연계와 중복제출 축소",
+   "결정·변경 사유의 명확한 통지"
+  ]
+ },
+ "related": [],
+ "fieldVerification": [
+  "학생·보호자 동의와 정보공유 범위",
+  "교육청별 지원대상 선정 세부기준"
+ ],
+ "process": {
+  "institution_name": "학생맞춤통합지원",
+  "law_name": "학생맞춤통합지원법",
+  "lanes": [
+   "학생·보호자",
+   "학교",
+   "지원위원회·지원센터",
+   "교육청·연계기관"
+  ],
+  "stages": [
+   "G0 발견·요청",
+   "G1 선정",
+   "G2 지원계획",
+   "G3 통합지원",
+   "G4 점검·종결"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "도움 요청·위기징후 발견",
+    "lane": "학생·보호자",
+    "stage": "G0 발견·요청",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "학생·보호자",
+    "action": "학생·보호자가 지원을 요청하거나 학교가 복합적 어려움을 발견한다.",
+    "output_documents": [
+     "도움 요청·위기징후 발견 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "학생맞춤통합지원법",
+      "article": "제10조",
+      "text": "학생맞춤통합지원법 제10조에 따른 학생·보호자가 지원을 요청하거나 학교가 복합적 어려움을 발견한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "초기상담·지원 필요 확인",
+    "lane": "학교",
+    "stage": "G0 발견·요청",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "학교",
+    "action": "학생 상황과 필요한 학습·복지·건강 지원을 초기 확인한다.",
+    "output_documents": [
+     "초기상담·지원 필요 확인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "학생맞춤통합지원법",
+      "article": "제10조",
+      "text": "학생맞춤통합지원법 제10조에 따른 학생 상황과 필요한 학습·복지·건강 지원을 초기 확인한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "지원대상학생 선정",
+    "lane": "지원위원회·지원센터",
+    "stage": "G1 선정",
+    "type": "gateway",
+    "status": "current",
+    "progress": 55,
+    "actor": "지원위원회·지원센터",
+    "action": "법정 기준과 학생 상황을 검토해 지원대상학생을 선정한다.",
+    "output_documents": [
+     "지원대상학생 선정 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "학생맞춤통합지원법",
+      "article": "제10조",
+      "text": "학생맞춤통합지원법 제10조에 따른 법정 기준과 학생 상황을 검토해 지원대상학생을 선정한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "학생별 통합지원계획 수립",
+    "lane": "학교",
+    "stage": "G2 지원계획",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "학교",
+    "action": "학생과 보호자의 의견을 반영해 담당자·서비스·점검계획을 정한다.",
+    "output_documents": [
+     "학생별 통합지원계획 수립 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "학생맞춤통합지원법",
+      "article": "제11조·제12조",
+      "text": "학생맞춤통합지원법 제11조·제12조에 따른 학생과 보호자의 의견을 반영해 담당자·서비스·점검계획을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "학습·복지·건강 서비스 연계",
+    "lane": "교육청·연계기관",
+    "stage": "G3 통합지원",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "교육청·연계기관",
+    "action": "교육·복지·보건기관이 필요한 서비스를 통합 제공한다.",
+    "output_documents": [
+     "학습·복지·건강 서비스 연계 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "학생맞춤통합지원법",
+      "article": "제11조·제15조",
+      "text": "학생맞춤통합지원법 제11조·제15조에 따른 교육·복지·보건기관이 필요한 서비스를 통합 제공한다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "지원상황 점검·조정",
+    "lane": "학교",
+    "stage": "G4 점검·종결",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "학교",
+    "action": "지원 효과와 학생 변화를 점검하고 계획 조정 여부를 판단한다.",
+    "output_documents": [
+     "지원상황 점검·조정 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "학생맞춤통합지원법",
+      "article": "제12조",
+      "text": "학생맞춤통합지원법 제12조에 따른 지원 효과와 학생 변화를 점검하고 계획 조정 여부를 판단한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "지원 종결·사후관리",
+    "lane": "지원위원회·지원센터",
+    "stage": "G4 점검·종결",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지원위원회·지원센터",
+    "action": "목표 달성 여부를 확인해 지원을 종결하거나 사후관리를 이어간다.",
+    "output_documents": [
+     "지원 종결·사후관리 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "학생맞춤통합지원법",
+      "article": "제12조",
+      "text": "학생맞춤통합지원법 제12조에 따른 목표 달성 여부를 확인해 지원을 종결하거나 사후관리를 이어간다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "정보시스템 기록·보호",
+    "lane": "교육청·연계기관",
+    "stage": "G4 점검·종결",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "교육청·연계기관",
+    "action": "지원 이력을 법정 범위에서 기록하고 필요한 정보만 연계한다.",
+    "output_documents": [
+     "정보시스템 기록·보호 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "학생맞춤통합지원법",
+      "article": "제17조·제18조",
+      "text": "학생맞춤통합지원법 제17조·제18조에 따른 지원 이력을 법정 범위에서 기록하고 필요한 정보만 연계한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": "지원 종결"
+   },
+   {
+    "id": "L07",
+    "source": "P06",
+    "target": "P04",
+    "type": "loop",
+    "label": "계획 조정"
+   },
+   {
+    "id": "E08",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건·기한·지원 범위는 하위규정과 사실관계에 따라 달라질 수 있다.",
+   "2026-07-13 301~320 확장: 현행 법률의 실제 조문 순서와 당사자·행정기관 레인을 기준으로 신규 작성."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 25건 가운데 25건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "학생맞춤통합지원법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "학생맞춤통합지원법",
+    "lawId": "014818",
+    "mst": "279645",
+    "promulgatedOn": "2025-11-11",
+    "effectiveOn": "2026-05-12",
+    "officialUrl": "https://law.go.kr/법령/학생맞춤통합지원법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 9,
+   "explicitCitationEntries": 9,
+   "articleReferences": 25,
+   "verifiedReferences": 25,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

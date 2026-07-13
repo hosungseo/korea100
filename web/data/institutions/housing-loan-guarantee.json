@@ -91,9 +91,9 @@
     "confidence": 0.75,
     "legal_basis": [
      {
-      "law": "주택도시기금법",
-      "article": "제1조(목적)",
-      "text": "목적"
+      "law": "한국주택금융공사법",
+      "article": "제22조(업무의 범위)",
+      "text": "공사의 신용보증 등 업무 범위 확인."
      }
     ]
    },
@@ -113,9 +113,9 @@
     "confidence": 0.75,
     "legal_basis": [
      {
-      "law": "주택도시기금법",
-      "article": "제1조(목적)",
-      "text": "목적"
+      "law": "한국주택금융공사법",
+      "article": "제37조(신용보증관계의 성립)",
+      "text": "① 공사가 신용보증을 하기로 결정한 때 신용보증을 받는 자와 채권자에게 통지한다(신청 접수)."
      }
     ]
    },
@@ -135,9 +135,9 @@
     "confidence": 0.75,
     "legal_basis": [
      {
-      "law": "주택도시기금법",
-      "article": "제1조(목적)",
-      "text": "목적"
+      "law": "한국주택금융공사법",
+      "article": "제43조(신용보증의 한도)",
+      "text": "신용보증 한도 내에서 적격성을 심사한다."
      }
     ]
    },
@@ -157,9 +157,9 @@
     "confidence": 0.75,
     "legal_basis": [
      {
-      "law": "주택도시기금법",
-      "article": "제1조(목적)",
-      "text": "목적"
+      "law": "한국주택금융공사법",
+      "article": "제37조(신용보증관계의 성립)",
+      "text": "신용보증 결정을 위한 보완 자료 제출."
      }
     ]
    },
@@ -179,9 +179,9 @@
     "confidence": 0.75,
     "legal_basis": [
      {
-      "law": "주택도시기금법",
-      "article": "제1조(목적)",
-      "text": "목적"
+      "law": "한국주택금융공사법",
+      "article": "제37조(신용보증관계의 성립)",
+      "text": "① 공사가 신용보증을 하기로 결정하고 그 뜻을 통지한다."
      }
     ]
    },
@@ -194,16 +194,17 @@
     "status": "waiting",
     "progress": 0,
     "actor": "차주",
-    "action": "보증서 수령",
+    "action": "보증서 수령 (통지날부터 60일 내 채권채무 성립)",
     "output_documents": [
      "보증서"
     ],
     "confidence": 0.75,
     "legal_basis": [
      {
-      "law": "주택도시기금법",
-      "article": "제1조(목적)",
-      "text": "목적"
+      "law": "한국주택금융공사법",
+      "article": "제37조(신용보증관계의 성립)",
+      "text": "②③ 주된 채권채무관계 성립 시 신용보증관계 성립. 통지날부터 60일 내 미성립 시 불성립.",
+      "deadline": "통지날부터 60일 이내"
      }
     ]
    },
@@ -223,9 +224,9 @@
     "confidence": 0.75,
     "legal_basis": [
      {
-      "law": "주택도시기금법",
-      "article": "제1조(목적)",
-      "text": "목적"
+      "law": "한국주택금융공사법",
+      "article": "제22조(업무의 범위)",
+      "text": "보증부 대출 실행."
      }
     ]
    },
@@ -238,16 +239,16 @@
     "status": "waiting",
     "progress": 0,
     "actor": "차주",
-    "action": "상환",
+    "action": "상환·보증료 납부",
     "output_documents": [
      "상환"
     ],
     "confidence": 0.75,
     "legal_basis": [
      {
-      "law": "주택도시기금법",
-      "article": "제1조(목적)",
-      "text": "목적"
+      "law": "한국주택금융공사법",
+      "article": "제41조(보증료 등)",
+      "text": "① 공사는 보증금액의 연 100분의 2 범위에서 보증료를 받을 수 있다."
      }
     ]
    },
@@ -260,16 +261,21 @@
     "status": "waiting",
     "progress": 0,
     "actor": "금융회사",
-    "action": "사고 접수",
+    "action": "사고 접수 (채무불이행·이행청구)",
     "output_documents": [
      "사고"
     ],
     "confidence": 0.7,
     "legal_basis": [
      {
-      "law": "주택도시기금법",
-      "article": "제1조(목적)",
-      "text": "목적"
+      "law": "한국주택금융공사법",
+      "article": "제38조(신용보증채무의 이행)",
+      "text": "① 채권자는 채무불이행 사유 발생 시 공사에 보증채무 이행을 청구할 수 있다."
+     },
+     {
+      "law": "한국주택금융공사법",
+      "article": "제40조(채권자의 의무)",
+      "text": "통지받은 채권자는 사고 사실을 공사에 지체없이 통지하여야 한다."
      }
     ]
    },
@@ -282,16 +288,17 @@
     "status": "waiting",
     "progress": 0,
     "actor": "보증기관",
-    "action": "대위변제",
+    "action": "대위변제 (보증채무 이행)",
     "output_documents": [
      "대위"
     ],
     "confidence": 0.7,
     "legal_basis": [
      {
-      "law": "주택도시기금법",
-      "article": "제1조(목적)",
-      "text": "목적"
+      "law": "한국주택금융공사법",
+      "article": "제38조(신용보증채무의 이행)",
+      "text": "② 공사는 이행청구가 있으면 주채무와 종속채무를 지체 없이 이행하여야 한다.",
+      "deadline": "이행청구 시 지체없이"
      }
     ]
    },
@@ -311,9 +318,9 @@
     "confidence": 0.7,
     "legal_basis": [
      {
-      "law": "주택도시기금법",
-      "article": "제1조(목적)",
-      "text": "목적"
+      "law": "한국주택금융공사법",
+      "article": "제39조(구상권의 행사 등)",
+      "text": "① 공사가 신용보증채무를 이행한 경우 채권자는 구상권 행사에 필요한 서류를 송부하고 협조하여야 한다. ② 공사는 구상권 사후관리 조치를 할 수 있다."
      }
     ]
    },
@@ -333,9 +340,9 @@
     "confidence": 0.7,
     "legal_basis": [
      {
-      "law": "주택도시기금법",
-      "article": "제1조(목적)",
-      "text": "목적"
+      "law": "한국주택금융공사법",
+      "article": "제40조(채권자의 의무)",
+      "text": "통지받은 채권자는 관련 사실을 공사에 지체없이 통지하여야 한다."
      }
     ]
    },
@@ -355,9 +362,9 @@
     "confidence": 0.7,
     "legal_basis": [
      {
-      "law": "주택도시기금법",
-      "article": "제1조(목적)",
-      "text": "목적"
+      "law": "한국주택금융공사법",
+      "article": "제43조(신용보증의 한도)",
+      "text": "담보가치 감정을 통한 보증한도 산정."
      }
     ]
    },
@@ -377,9 +384,9 @@
     "confidence": 0.75,
     "legal_basis": [
      {
-      "law": "주택도시기금법",
-      "article": "제1조(목적)",
-      "text": "목적"
+      "law": "한국주택금융공사법",
+      "article": "제37조(신용보증관계의 성립)",
+      "text": "보완 후 신용보증 재신청."
      }
     ]
    },
@@ -399,9 +406,9 @@
     "confidence": 0.75,
     "legal_basis": [
      {
-      "law": "주택도시기금법",
-      "article": "제1조(목적)",
-      "text": "목적"
+      "law": "한국주택금융공사법",
+      "article": "제22조(업무의 범위)",
+      "text": "주택담보·전세 등 보증 유형 분기."
      }
     ]
    },
@@ -421,9 +428,58 @@
     "confidence": 0.7,
     "legal_basis": [
      {
-      "law": "주택도시기금법",
-      "article": "제1조(목적)",
-      "text": "목적"
+      "law": "한국주택금융공사법",
+      "article": "제22조(업무의 범위)",
+      "text": "정책모기지(보금자리론 등) 연계."
+     }
+    ]
+   },
+   {
+    "id": "P17",
+    "name": "구상권 사후관리·매각",
+    "lane": "구상",
+    "stage": "G5 사고",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "한국주택금융공사",
+    "action": "대위변제 후 구상권 행사·사후관리, 유예·구상채권 매각으로 회수",
+    "output_documents": [
+     "구상관리"
+    ],
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "한국주택금융공사법",
+      "article": "제39조(구상권의 행사 등)",
+      "text": "② 공사는 취득한 구상권의 사후관리 조치를 할 수 있다. ③ 일정 사유 시 구상권 행사를 유예할 수 있다. ④ 이사회 의결로 구상채권을 매각할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P18",
+    "name": "공사 감독·검사",
+    "lane": "감독",
+    "stage": "G5 사고",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "금융위원회·금융감독원",
+    "action": "공사 경영건전성 감독·명령, 보고서 제출요구 및 장부·서류 검사",
+    "output_documents": [
+     "감독·검사"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "한국주택금융공사법",
+      "article": "제60조(감독)",
+      "text": "① 금융위원회는 경영건전성 확보를 위하여 공사 업무를 감독하고 필요한 명령을 할 수 있다. ② 국토교통부장관은 감독상 필요한 요청을 할 수 있다."
+     },
+     {
+      "law": "한국주택금융공사법",
+      "article": "제61조(보고서 제출 및 서류의 검사)",
+      "text": "① 금융위원회는 보고서 제출을 요구하거나 소속 공무원·금융감독원 직원으로 하여금 검사하게 할 수 있다."
      }
     ]
    }
@@ -461,7 +517,7 @@
     "id": "E05",
     "source": "P03",
     "target": "P04",
-    "type": "sequence",
+    "type": "loop",
     "label": "보완"
    },
    {
@@ -540,17 +596,32 @@
     "target": "P12",
     "type": "sequence",
     "label": null
+   },
+   {
+    "id": "E17",
+    "source": "P11",
+    "target": "P17",
+    "type": "message",
+    "label": "구상 사후관리"
+   },
+   {
+    "id": "E18",
+    "source": "P10",
+    "target": "P18",
+    "type": "message",
+    "label": "감독·검사"
    }
   ],
   "warnings": [
-   "기금법 목적 조항 중심, 상품 세부는 fieldVerification."
+   "기금법 목적 조항 중심, 상품 세부는 fieldVerification.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (C) 전체 16개 노드가 주택도시기금법 제1조(목적) 보일러플레이트만 인용 — 신용보증 실체 절차 근거로 정정. P01·P07·P15·P16 한국주택금융공사법 제22조(업무범위), P02·P04·P05·P14 제37조(신용보증관계 성립), P03·P13 제43조(신용보증 한도), P06 제37조②③, P08 제41조(보증료), P09 제38·40조, P10 제38조②, P11 제39조(구상), P12 제40조로 정정. (D) 신용보증관계 통지날부터 60일·대위변제 지체없이 법정기한 보강. (E) 구상 lane 공백 해소: 제39조 구상권 사후관리·매각 P17 신설(E17). (E) 감독 lane 공백 해소: 제60·61조 금융위 감독·검사 P18 신설(E18). (backward-sequence) E05 P03(G2)→P04(G1)은 심사 보완을 위한 회귀이므로 sequence→loop로 정정. 참조 MST 277275(한국주택금융공사법), 286599(주택도시기금법). 법의 침묵: 보증료율 구체 수치(연 2% 상한 내)는 대통령령 위임. 법의 침묵: 채무불이행 사유·종속채무 범위는 대통령령 위임."
   ]
  },
  "verification": {
   "status": "article-verified",
-  "verifiedAt": "2026-07-12",
-  "method": "법제처 DRF + L3",
-  "scope": "L3 당사자 워크스루 후 명시 조문 1건 존재 확인 1건",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 20건 가운데 20건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
    "주택도시기금법"
   ],
@@ -565,15 +636,26 @@
     "promulgatedOn": "2026-06-02",
     "effectiveOn": "2026-06-02",
     "officialUrl": "https://law.go.kr/법령/주택도시기금법"
+   },
+   {
+    "law": "한국주택금융공사법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "한국주택금융공사법",
+    "lawId": "009591",
+    "mst": "277275",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/법령/한국주택금융공사법"
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-12",
-   "method": "DRF 목차·조문제목 대조",
-   "citationEntries": 1,
-   "explicitCitationEntries": 1,
-   "articleReferences": 1,
-   "verifiedReferences": 1,
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 21,
+   "explicitCitationEntries": 20,
+   "articleReferences": 20,
+   "verifiedReferences": 20,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }

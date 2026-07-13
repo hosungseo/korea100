@@ -1,0 +1,566 @@
+{
+ "slug": "resident-recall",
+ "name": "주민소환",
+ "oneLiner": "주민이 선출직 지방공직자의 해임을 청구하고 투표로 결정하는 절차",
+ "type": "직접참여·책임형",
+ "priority": 204,
+ "whyFirst": "주민소환의 권한·절차·주민 참여 지점을 한 흐름으로 확인한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "주민소환은 주민이 선출직 지방공직자의 해임을 청구하고 투표로 결정하는 절차 법정 절차를 한 장에서 확인하도록 정리한 제도다.",
+  "stakeholders": "주민·이해관계자, 지방자치단체, 지방의회·선거관리기관, 행정안전부와 관계 중앙기관이 단계별로 관여한다.",
+  "legalBasis": [
+   {
+    "law": "주민소환에 관한 법률",
+    "articles": "제3조, 제4조, 제7조, 제8조, 제11조, 제12조, 제13조, 제14조, 제21조, 제22조, 제23조, 제24조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "지방자치단체",
+    "role": "접수·검토·집행과 공개"
+   },
+   {
+    "name": "지방의회·선거관리기관",
+    "role": "의결·투표 등 법정 절차 수행"
+   },
+   {
+    "name": "행정안전부·관계기관",
+    "role": "제도 총괄·협의·감독"
+   },
+   {
+    "name": "주민·이해관계자",
+    "role": "의견·청구·자료 제출과 권리 행사"
+   }
+  ],
+  "procedure": [
+   "대상·사안 인지",
+   "의견·청구 제출",
+   "접수·공고",
+   "관할·요건 확인",
+   "관계기관 협의",
+   "주민소환투표 결과 확정",
+   "결정 통지·공개",
+   "집행·사후관리"
+  ],
+  "moneyFlow": "제도별 교부금·예산·자산·세입의 세부 산정과 집행 기준은 시행령·조례·예산편성 기준을 함께 확인해야 한다.",
+  "docsFlow": "의견·청구서 → 접수·공고 → 요건 검토·협의 → 의결·결정서 → 통지·공개 → 집행 기록 → 결과보고로 이어진다.",
+  "bottlenecks": [
+   "지방자치단체별 조례·기준의 차이",
+   "주민 참여와 법정 요건 판단의 시차",
+   "관계기관 협의와 의결 일정",
+   "결정 이후 공개·집행 기록의 단절"
+  ],
+  "reformPoints": [
+   "판단 기준과 산정 근거의 공개",
+   "주민 제출 자료의 전산 연계",
+   "의결·결정·집행 이력의 연결",
+   "지자체 간 절차 안내 표준화"
+  ]
+ },
+ "related": [
+  "지방의회 운영",
+  "조례 제정",
+  "주민조례청구",
+  "주민감사청구"
+ ],
+ "fieldVerification": [
+  "해당 지자체 조례·규칙의 적용 범위와 최신 개정",
+  "실제 접수·공고·통지 서식과 전산 경로",
+  "관계기관 협의와 주민 참여의 운영 관행"
+ ],
+ "process": {
+  "institution_name": "주민소환",
+  "law_name": "주민소환에 관한 법률",
+  "lanes": [
+   "주민·이해관계자",
+   "지방자치단체",
+   "지방의회·선관위",
+   "중앙부처·관계기관"
+  ],
+  "stages": [
+   "G0 대상인지",
+   "G1 접수·제안",
+   "G2 요건검토",
+   "G3 심의·결정",
+   "G4 집행·공개",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "대상·사안 인지",
+    "lane": "주민·이해관계자",
+    "stage": "G0 대상인지",
+    "type": "notice",
+    "status": "done",
+    "progress": 100,
+    "actor": "주민·이해관계자",
+    "action": "제도 적용 대상과 쟁점을 확인",
+    "output_documents": [
+     "대상 확인 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주민소환에 관한 법률",
+      "article": "제3조",
+      "text": "주민소환투표권에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "의견·청구 제출",
+    "lane": "주민·이해관계자",
+    "stage": "G1 접수·제안",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "주민·이해관계자",
+    "action": "주민·이해관계자가 의견·청구 또는 자료를 제출",
+    "output_documents": [
+     "의견·청구서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주민소환에 관한 법률",
+      "article": "제7조(주민소환투표의 청구)",
+      "text": "주민소환투표청구권자는 선출직 지방공직자에 대하여 소환사유를 서면에 구체적으로 명시하여 관할선거관리위원회에 주민소환투표의 실시를 청구한다(제1항)."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "접수·공고",
+    "lane": "지방자치단체",
+    "stage": "G1 접수·제안",
+    "type": "system",
+    "status": "done",
+    "progress": 100,
+    "actor": "지방자치단체",
+    "action": "접수 사실과 절차를 공고·안내",
+    "output_documents": [
+     "접수·공고 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주민소환에 관한 법률",
+      "article": "제3조",
+      "text": "주민소환투표권에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "관할·요건 확인",
+    "lane": "지방자치단체",
+    "stage": "G2 요건검토",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "지방자치단체",
+    "action": "관할과 법정 요건을 확인",
+    "output_documents": [
+     "요건 검토서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주민소환에 관한 법률",
+      "article": "제3조",
+      "text": "주민소환투표권에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "법정 기준 검토",
+    "lane": "지방자치단체",
+    "stage": "G2 요건검토",
+    "type": "gateway",
+    "status": "current",
+    "progress": 45,
+    "actor": "지방자치단체",
+    "action": "주민소환은 적용되는 법정 기준을 검토",
+    "output_documents": [
+     "검토 의견"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주민소환에 관한 법률",
+      "article": "제3조",
+      "text": "주민소환투표권에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "관계기관 협의",
+    "lane": "중앙부처·관계기관",
+    "stage": "G3 심의·결정",
+    "type": "system",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "중앙부처·관계기관",
+    "action": "관계기관의 협의·지원 또는 감독 절차를 진행",
+    "output_documents": [
+     "협의 결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주민소환에 관한 법률",
+      "article": "제4조",
+      "text": "주민소환투표인명부의 작성 및 확정에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "대상자 소명서 제출",
+    "lane": "주민·이해관계자",
+    "stage": "G3 심의·결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민소환투표대상자",
+    "action": "관할선거관리위원회의 소명요청을 받은 날부터 20일 이내에 500자 이내 소명요지·소명서 제출",
+    "output_documents": [
+     "소명요지·소명서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주민소환에 관한 법률",
+      "article": "제14조(소명기회의 보장)",
+      "text": "소명요청을 받은 주민소환투표대상자는 그 요청을 받은 날부터 20일 이내에 500자 이내의 소명요지와 소명서를 관할선거관리위원회에 제출하여야 한다(제2항)."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "보완 요구",
+    "lane": "지방자치단체",
+    "stage": "G2 요건검토",
+    "type": "task",
+    "status": "risk",
+    "progress": 0,
+    "actor": "지방자치단체",
+    "action": "판단에 필요한 자료 보완을 요구",
+    "output_documents": [
+     "보완 요구서"
+    ],
+    "deadline": null,
+    "blocker": "기준 적용과 사실관계 자료의 불일치",
+    "confidence": 0.78,
+    "legal_basis": [
+     {
+      "law": "주민소환에 관한 법률",
+      "article": "제3조",
+      "text": "주민소환투표권에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "보완 자료 제출",
+    "lane": "주민·이해관계자",
+    "stage": "G2 요건검토",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민·이해관계자",
+    "action": "보완 자료를 제출해 재검토를 받음",
+    "output_documents": [
+     "보완 자료"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주민소환에 관한 법률",
+      "article": "제3조",
+      "text": "주민소환투표권에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "주민소환투표 결과 확정",
+    "lane": "지방의회·선관위",
+    "stage": "G3 심의·결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지방의회·선관위",
+    "action": "주민소환투표 결과 확정을 공식적으로 확정",
+    "output_documents": [
+     "결정·의결서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주민소환에 관한 법률",
+      "article": "제22조(주민소환투표결과의 확정)",
+      "text": "주민소환은 주민소환투표권자 총수의 3분의 1 이상의 투표와 유효투표 총수 과반수의 찬성으로 확정되며, 관할선거관리위원회는 개표가 끝난 때에는 지체 없이 그 결과를 공표한다(제1항·제3항)."
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "결정 통지·공개",
+    "lane": "지방자치단체",
+    "stage": "G4 집행·공개",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지방자치단체",
+    "action": "결정과 적용 범위를 통지·공개",
+    "output_documents": [
+     "통지·공개 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주민소환에 관한 법률",
+      "article": "제3조",
+      "text": "주민소환투표권에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "집행·교부·관리",
+    "lane": "지방자치단체",
+    "stage": "G4 집행·공개",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지방자치단체",
+    "action": "결정에 따른 집행·관리 조치를 수행",
+    "output_documents": [
+     "집행 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주민소환에 관한 법률",
+      "article": "제23조(주민소환투표의 효력)",
+      "text": "주민소환이 확정된 때에는 주민소환투표대상자는 그 결과가 공표된 시점부터 그 직을 상실한다(제1항)."
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "주민 권리·이행 확인",
+    "lane": "주민·이해관계자",
+    "stage": "G4 집행·공개",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주민·이해관계자",
+    "action": "주민의 참여·권리 행사와 이행 상태를 확인",
+    "output_documents": [
+     "이행 확인"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주민소환에 관한 법률",
+      "article": "제24조",
+      "text": "주민소환투표소송 등에 관한 절차와 기준을 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "사후 공개·개선",
+    "lane": "중앙부처·관계기관",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "중앙부처·관계기관",
+    "action": "결과를 기록·공개하고 개선 과제를 관리",
+    "output_documents": [
+     "결과보고·개선안"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "주민소환에 관한 법률",
+      "article": "제24조",
+      "text": "주민소환투표소송 등에 관한 절차와 기준을 정한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "message",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "message",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P05",
+    "target": "P08",
+    "type": "sequence",
+    "label": "자료 보완"
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P09",
+    "type": "message",
+    "label": null
+   },
+   {
+    "id": "L01",
+    "source": "P09",
+    "target": "P05",
+    "type": "loop",
+    "label": "보완 후 재검토"
+   },
+   {
+    "id": "E10",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "구조도는 법률상 대표 흐름이며 실제 절차는 지자체 조례·규칙과 사안별 기준에 따라 달라질 수 있다.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (C) P02 청구제출 노드 근거를 제3조(투표권)→제7조(주민소환투표의 청구, 관할선관위에 청구)로 정정. (C) P07을 법정 당사자 권리인 대상자 소명서 제출(제14조 제2항, 20일 이내 500자)로 정정. (C) P10 결과확정 노드 근거를 제4조(투표인명부)→제22조(주민소환투표결과의 확정, 1/3 이상 투표+과반 찬성)로 정정. (C) P12 집행 노드 근거를 제7조(청구)→제23조(주민소환투표의 효력, 직 상실)로 정정. 법의 침묵: 각하사유 판단에 대한 소환청구인 측 불복·이의절차 명문 규정 부재(제11조). 법의 침묵: 권한정지 기간 중 긴급·필수 사무 처리 예외 규정 부재(제21조). 조회 MST: 228577(주민소환에 관한 법률)."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 26건 가운데 26건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "notes": [
+   "[시행 2022.01.13.] 기준"
+  ],
+  "sources": [
+   {
+    "law": "주민소환에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "주민소환에 관한 법률",
+    "lawId": "010208",
+    "mst": "228577",
+    "promulgatedOn": "2021-01-12",
+    "effectiveOn": "2022-01-13",
+    "officialUrl": "https://law.go.kr/법령/주민소환에관한법률"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 15,
+   "explicitCitationEntries": 15,
+   "articleReferences": 26,
+   "verifiedReferences": 26,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

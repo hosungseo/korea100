@@ -1,0 +1,463 @@
+{
+ "slug": "emergency-welfare-support",
+ "name": "긴급복지지원",
+ "oneLiner": "위기상황 가구가 긴급 생계·의료 등 지원을 요청하고 사후 심사를 받는 절차",
+ "type": "복지급여·고용지원형",
+ "priority": 223,
+ "whyFirst": "긴급복지지원의 신청·결정·사후관리 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "긴급복지지원은 위기상황 가구가 긴급 생계·의료 등 지원을 요청하고 사후 심사를 받는 절차 제도다.",
+  "stakeholders": "신청인·근로자, 사업주·지자체, 고용센터·복지기관과 관계기관이 관여한다.",
+  "legalBasis": [
+   {
+    "law": "긴급복지지원법",
+    "articles": "제7조(지원요청 및 신고), 제8조(현장 확인 및 지원), 제9조(긴급지원의 종류 및 내용), 제10조(긴급지원의 기간 등), 제13조(사후조사), 제14조(긴급지원의 적정성 심사), 제15조(지원중단 또는 비용환수), 제16조(이의신청)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "복지기관·고용센터",
+    "role": "접수·조사·결정·지급"
+   },
+   {
+    "name": "사업주·지자체",
+    "role": "휴직·지원 확인과 협조"
+   },
+   {
+    "name": "신청인·근로자",
+    "role": "신청·자료 제출·이의"
+   }
+  ],
+  "procedure": [
+   "지원·휴직 사유 확인",
+   "신청·신고 제출",
+   "접수·확인",
+   "자격·요건 조사",
+   "보완 요구",
+   "보완 자료 제출",
+   "긴급지원 적정성 심사",
+   "결정 통지",
+   "급여·서비스 지급",
+   "사후 확인·변경·이의"
+  ],
+  "moneyFlow": "법정 급여·지원금의 지급·환수 기준은 개별 법령과 고용보험·지자체 기준을 따른다.",
+  "docsFlow": "신청·신고 → 조사·확인 → 결정 통지 → 급여·서비스 지급 → 사후 확인·변경으로 이어진다.",
+  "bottlenecks": [
+   "위기·자격 증빙",
+   "사업주 확인과 기관 간 자료 연계",
+   "사후조사와 환수 판단"
+  ],
+  "reformPoints": [
+   "신청·확인 서류 간소화",
+   "급여 진행상태 공개",
+   "사후조사 기준 설명 강화"
+  ]
+ },
+ "related": [
+  "국민기초생활보장",
+  "고용보험과 실업급여",
+  "아동수당",
+  "국민건강보험"
+ ],
+ "fieldVerification": [
+  "실제 신청 서식과 전산 경로",
+  "지자체별 추가지원 기준",
+  "사후조사·환수의 개별 적용"
+ ],
+ "process": {
+  "institution_name": "긴급복지지원",
+  "law_name": "긴급복지지원법",
+  "lanes": [
+   "신청인·근로자",
+   "사업주·지자체",
+   "고용센터·복지기관",
+   "관계기관"
+  ],
+  "stages": [
+   "G0 위기·사유",
+   "G1 신청·확인",
+   "G2 조사·검토",
+   "G3 결정",
+   "G4 지급·지원",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "지원·휴직 사유 확인",
+    "lane": "신청인·근로자",
+    "stage": "G0 위기·사유",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "신청인·근로자",
+    "action": "지원·휴직 사유 확인",
+    "output_documents": [
+     "지원·휴직 사유 확인"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "긴급복지지원법",
+      "article": "제7조(지원요청 및 신고)",
+      "text": "지원요청 및 신고에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "신청·신고 제출",
+    "lane": "신청인·근로자",
+    "stage": "G1 신청·확인",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "신청인·근로자",
+    "action": "신청·신고 제출",
+    "output_documents": [
+     "신청·신고 제출"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "긴급복지지원법",
+      "article": "제7조(지원요청 및 신고)",
+      "text": "지원요청 및 신고에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "접수·확인",
+    "lane": "고용센터·복지기관",
+    "stage": "G1 신청·확인",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "고용센터·복지기관",
+    "action": "접수·확인",
+    "output_documents": [
+     "접수·확인"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "긴급복지지원법",
+      "article": "제8조(현장 확인 및 지원)",
+      "text": "현장 확인 및 지원에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "자격·요건 조사",
+    "lane": "사업주·지자체",
+    "stage": "G2 조사·검토",
+    "type": "task",
+    "status": "current",
+    "progress": 45,
+    "actor": "사업주·지자체",
+    "action": "자격·요건 조사",
+    "output_documents": [
+     "자격·요건 조사"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "긴급복지지원법",
+      "article": "제8조(현장 확인 및 지원)",
+      "text": "현장 확인 및 지원에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "보완 요구",
+    "lane": "고용센터·복지기관",
+    "stage": "G2 조사·검토",
+    "type": "task",
+    "status": "risk",
+    "progress": 0,
+    "actor": "고용센터·복지기관",
+    "action": "보완 요구",
+    "output_documents": [
+     "보완 요구"
+    ],
+    "deadline": null,
+    "confidence": 0.78,
+    "legal_basis": [
+     {
+      "law": "긴급복지지원법",
+      "article": "제8조(현장 확인 및 지원) 제1항·제4항",
+      "text": "지원요청·신고를 받으면 지체 없이 긴급지원담당공무원이 거주지 등을 방문하여 위기상황을 확인하고, 조사담당자는 증표 및 조사 관련 서류를 관계인에게 내보여야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "보완 자료 제출",
+    "lane": "신청인·근로자",
+    "stage": "G2 조사·검토",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신청인·근로자",
+    "action": "보완 자료 제출",
+    "output_documents": [
+     "보완 자료 제출"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "긴급복지지원법",
+      "article": "제7조(지원요청 및 신고)",
+      "text": "지원요청 및 신고에 관한 절차를 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "긴급지원 적정성 심사",
+    "lane": "고용센터·복지기관",
+    "stage": "G3 결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "고용센터·복지기관",
+    "action": "긴급지원 적정성 심사",
+    "output_documents": [
+     "긴급지원 적정성 심사"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "긴급복지지원법",
+      "article": "제14조(긴급지원의 적정성 심사) 제1항",
+      "text": "긴급지원심의위원회는 시장·군수·구청장이 한 사후조사 결과를 참고하여 긴급지원의 적정성을 심사한다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "결정 통지",
+    "lane": "사업주·지자체",
+    "stage": "G3 결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "사업주·지자체",
+    "action": "결정 통지",
+    "output_documents": [
+     "결정 통지"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "긴급복지지원법",
+      "article": "제8조(현장 확인 및 지원) 제3항",
+      "text": "현장 확인 결과 위기상황 발생이 확인된 사람에 대하여는 지체 없이 제9조에 따른 지원의 종류 및 내용을 결정하여 지원을 하여야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "급여·서비스 지급",
+    "lane": "고용센터·복지기관",
+    "stage": "G4 지급·지원",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "고용센터·복지기관",
+    "action": "급여·서비스 지급",
+    "output_documents": [
+     "급여·서비스 지급"
+    ],
+    "deadline": "생계지원 3개월, 주거·시설·기타 1개월(연장 가능)",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "긴급복지지원법",
+      "article": "제9조(긴급지원의 종류 및 내용) 제1항, 제10조(긴급지원의 기간 등) 제1항",
+      "text": "생계·의료·주거·시설이용·교육·연료비 등 직접지원과 민간기관·단체 연계지원을 하며, 생계지원은 3개월, 주거·시설·기타 지원은 1개월간 지원한다."
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "사후 확인·변경·이의",
+    "lane": "신청인·근로자",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신청인·근로자",
+    "action": "사후 확인·변경·이의",
+    "output_documents": [
+     "사후 확인·변경·이의"
+    ],
+    "deadline": "이의신청은 처분 고지받은 날부터 30일 이내(시·도지사 15일 내 검토)",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "긴급복지지원법",
+      "article": "제16조(이의신청) 제1항·제2항",
+      "text": "지원중단·반환명령에 이의가 있는 사람은 처분을 고지받은 날부터 30일 이내에 시장·군수·구청장을 거쳐 시·도지사에게 서면으로 이의신청할 수 있고, 시·도지사는 송부받은 날부터 15일 이내에 검토하여 시정 등 조치한다."
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "관계기관 위기확인·정보제공 협조",
+    "lane": "관계기관",
+    "stage": "G2 조사·검토",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "관계 행정기관(경찰·소방)·금융·국세·건강보험 등 관계 기관",
+    "action": "위기상황 확인 협조 및 사후조사용 전산망·금융정보 제공 — 정당한 사유 없으면 응해야 함",
+    "output_documents": [
+     "협조 회신",
+     "금융정보등"
+    ],
+    "deadline": null,
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "긴급복지지원법",
+      "article": "제8조(현장 확인 및 지원) 제2항, 제13조(사후조사) 제2항·제4항",
+      "text": "시장·군수·구청장의 위기상황 확인 협조 요청에 관계 행정기관의 장은 정당한 사유가 없으면 따라야 하며(제8조제2항), 사후조사를 위한 금융·국세 등 관련 전산망 이용 및 금융정보등 제공 요청에도 응하여야 한다(제13조제2항·제4항)."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L01",
+    "source": "P05",
+    "target": "P06",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "L02",
+    "source": "P06",
+    "target": "P04",
+    "type": "loop",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P04",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P11",
+    "target": "P04",
+    "type": "message",
+    "label": "위기확인 협조"
+   },
+   {
+    "id": "E10",
+    "source": "P11",
+    "target": "P07",
+    "type": "message",
+    "label": "사후조사 정보제공"
+   }
+  ],
+  "warnings": [
+   "급여액·기간과 세부 요건은 시행령·고시 및 개인 상황에 따라 달라질 수 있다.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (E) empty-lane '관계기관'에 위기확인·정보제공 협조 노드 P11 신설(긴급복지지원법 제8조제2항 경찰·소방 협조, 제13조제2항·제4항 금융·국세 등 정보제공, message edge E09·E10). (C) P05 보완요구 근거 제16조(이의신청)→제8조(현장확인) 정정. (C) P07 적정성심사 제15조→제14조(적정성 심사) 정정. (C) P08 결정통지 제7조→제8조제3항(지원결정) 정정. (C·D) P09 급여지급 제16조→제9조·제10조 정정 및 지원기간 추가. (D) P10 이의신청 30일/시도지사 15일 기한 추가. consultedMST: 270789(긴급복지지원법). 법의 침묵: 선지원 후 사후조사(제13조)까지의 처리기한 명문 부재. 법의 침묵: 위기상황 판단기준의 정성적 요소(대통령령 위임)로 현장 재량 폭 큼. 법의 침묵: 민간기관 연계지원(제9조제1항제2호)의 이행 담보 수단 미규정."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 21건 가운데 21건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "긴급복지지원법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "긴급복지지원법",
+    "lawId": "010111",
+    "mst": "270789",
+    "promulgatedOn": "2025-04-22",
+    "effectiveOn": "2025-10-23",
+    "officialUrl": "https://law.go.kr/법령/긴급복지지원법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 12,
+   "explicitCitationEntries": 12,
+   "articleReferences": 21,
+   "verifiedReferences": 21,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

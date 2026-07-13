@@ -786,7 +786,7 @@ function edgeRoute(edge, source, target, context) {
         ? Math.abs(sourcePortX - targetPortX) < 1
           ? `M ${round(sourcePortX)} ${round(sourceBottom)} V ${round(target.y - ARROW_CLEARANCE)}`
           : `M ${round(sourcePortX)} ${round(sourceBottom)} V ${round(middleY)} H ${round(targetPortX)} V ${round(target.y - ARROW_CLEARANCE)}`
-        : `M ${round(source.x)} ${round(sourceCenterY)} H ${round(GROUP_X - 12 - slot.backRail * EDGE_RAIL_GAP)} V ${round(targetCenterY)} H ${round(target.x - ARROW_CLEARANCE)}`,
+        : `M ${round(source.x)} ${round(sourceCenterY + sidePortOffset(slot.sourcePort, slot.sourceChannel))} H ${round(GROUP_X - 12 - slot.backRail * EDGE_RAIL_GAP)} V ${round(targetCenterY + sidePortOffset(slot.targetPort, slot.targetChannel))} H ${round(target.x - ARROW_CLEARANCE)}`,
       labelX: downward ? sourceRight + 50 : GROUP_X + 48,
       labelY: (sourceCenterY + targetCenterY) / 2,
     };
@@ -868,13 +868,14 @@ function edgeRoute(edge, source, target, context) {
         sourceBlocked && source.groupIndex === target.groupIndex
           // Separate long routes sharing a source rail when they fan into different target ports.
           ? sourceRailX +
-            slot.railSide * (slot.targetChannel - slot.sourceChannel) * 8 -
-            slot.railSide * slot.rail * EDGE_RAIL_GAP
+            slot.railSide *
+              ((Math.abs(slot.targetChannel - slot.sourceChannel) + 2 + slot.rail) *
+                EDGE_RAIL_GAP)
           : railX;
       const targetApproachY = target.y - 28 - slot.approach * 10;
       const longSourcePath =
-        sourceBlocked && source.groupIndex === target.groupIndex
-          ? slot.railSide < 0
+        sourceBlocked
+          ? sourceSide < 0
             ? `M ${round(source.x)} ${round(sourceCenterY + sidePortOffset(slot.sourcePort, slot.sourceChannel))} H ${round(longRailX)} V ${round(channelY)}`
             : `M ${round(sourceRight)} ${round(sourceCenterY + sidePortOffset(slot.sourcePort, slot.sourceChannel))} H ${round(longRailX)} V ${round(channelY)}`
           : sourcePath;

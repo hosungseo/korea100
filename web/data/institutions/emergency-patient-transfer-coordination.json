@@ -1,0 +1,362 @@
+{
+ "slug": "emergency-patient-transfer-coordination",
+ "name": "응급환자 이송·전원 조정",
+ "oneLiner": "119 신고·위치 전달 → 현장 중증도 분류·응급처치 → 수용능력 확인 요청 → 수용병원 탐색·조정 → 환자 이송·진료정보 전달 → 우선 응급의료·수용 → 전원 필요성 판단·재조정 → 이송·수용 기록과 평가",
+ "type": "응급 신고·수용조정형",
+ "priority": 304,
+ "whyFirst": "정부·지방자치단체와 관계기관의 역할을 분리해 응급환자 이송·전원 조정 절차를 한눈에 보여준다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "응급환자 이송·전원 조정은(는) 119 신고·위치 전달 → 현장 중증도 분류·응급처치 → 수용능력 확인 요청 → 수용병원 탐색·조정 → 환자 이송·진료정보 전달 → 우선 응급의료·수용 → 전원 필요성 판단·재조정 → 이송·수용 기록과 평가로 이어지는 공적 절차다.",
+  "stakeholders": "환자·신고자, 119구급대, 응급의료지원센터, 수용 의료기관",
+  "legalBasis": [
+   {
+    "law": "응급의료에 관한 법률",
+    "articles": "제5조·제8조·제11조, 제15조, 제48조의2·3, 제49조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "119구급대",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "응급의료지원센터",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "수용 의료기관",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "119 신고·위치 전달",
+   "현장 중증도 분류·응급처치",
+   "수용능력 확인 요청",
+   "수용병원 탐색·조정",
+   "환자 이송·진료정보 전달",
+   "우선 응급의료·수용",
+   "전원 필요성 판단·재조정",
+   "이송·수용 기록과 평가"
+  ],
+  "moneyFlow": "지원금·수수료·사업비는 법령과 연도별 사업기준 또는 개별 결정에 따라 달라질 수 있다.",
+  "docsFlow": "119 신고·위치 전달 기록 → 심사·협의 자료 → 결정·통지 → 이행·사후관리 기록으로 이어진다.",
+  "bottlenecks": [
+   "지역별 수용병상 실시간 갱신 방식",
+   "전원조정 주체와 단계별 응답시간"
+  ],
+  "reformPoints": [
+   "처리상태와 담당기관 안내",
+   "기관 간 자료연계와 중복제출 축소",
+   "결정·변경 사유의 명확한 통지"
+  ]
+ },
+ "related": [],
+ "fieldVerification": [
+  "지역별 수용병상 실시간 갱신 방식",
+  "전원조정 주체와 단계별 응답시간"
+ ],
+ "process": {
+  "institution_name": "응급환자 이송·전원 조정",
+  "law_name": "응급의료에 관한 법률",
+  "lanes": [
+   "환자·신고자",
+   "119구급대",
+   "응급의료지원센터",
+   "수용 의료기관"
+  ],
+  "stages": [
+   "G0 신고",
+   "G1 현장처치",
+   "G2 수용조정",
+   "G3 이송·진료",
+   "G4 기록·평가"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "119 신고·위치 전달",
+    "lane": "환자·신고자",
+    "stage": "G0 신고",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "환자·신고자",
+    "action": "응급상황을 신고하고 환자 상태와 위치를 알린다.",
+    "output_documents": [
+     "119 신고·위치 전달 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "응급의료에 관한 법률",
+      "article": "제5조",
+      "text": "응급의료에 관한 법률 제5조에 따른 응급상황을 신고하고 환자 상태와 위치를 알린다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "현장 중증도 분류·응급처치",
+    "lane": "119구급대",
+    "stage": "G1 현장처치",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "119구급대",
+    "action": "환자의 중증도를 분류하고 우선 응급처치를 시행한다.",
+    "output_documents": [
+     "현장 중증도 분류·응급처치 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "응급의료에 관한 법률",
+      "article": "제8조",
+      "text": "응급의료에 관한 법률 제8조에 따른 환자의 중증도를 분류하고 우선 응급처치를 시행한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "수용능력 확인 요청",
+    "lane": "119구급대",
+    "stage": "G2 수용조정",
+    "type": "gateway",
+    "status": "current",
+    "progress": 55,
+    "actor": "119구급대",
+    "action": "응급의료 전용회선으로 의료기관의 수용능력을 확인한다.",
+    "output_documents": [
+     "수용능력 확인 요청 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "응급의료에 관한 법률",
+      "article": "제48조의2·제48조의3",
+      "text": "응급의료에 관한 법률 제48조의2·제48조의3에 따른 응급의료 전용회선으로 의료기관의 수용능력을 확인한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "수용병원 탐색·조정",
+    "lane": "응급의료지원센터",
+    "stage": "G2 수용조정",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "응급의료지원센터",
+    "action": "병상·전문의·장비 정보를 바탕으로 수용 가능한 의료기관을 조정한다.",
+    "output_documents": [
+     "수용병원 탐색·조정 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "응급의료에 관한 법률",
+      "article": "제15조·제27조",
+      "text": "응급의료에 관한 법률 제15조·제27조에 따른 병상·전문의·장비 정보를 바탕으로 수용 가능한 의료기관을 조정한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "환자 이송·진료정보 전달",
+    "lane": "119구급대",
+    "stage": "G3 이송·진료",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "119구급대",
+    "action": "선정된 의료기관으로 이송하며 처치기록과 환자정보를 전달한다.",
+    "output_documents": [
+     "환자 이송·진료정보 전달 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "응급의료에 관한 법률",
+      "article": "제11조·제49조",
+      "text": "응급의료에 관한 법률 제11조·제49조에 따른 선정된 의료기관으로 이송하며 처치기록과 환자정보를 전달한다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "우선 응급의료·수용",
+    "lane": "수용 의료기관",
+    "stage": "G3 이송·진료",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "수용 의료기관",
+    "action": "응급환자를 우선 수용해 필요한 응급의료를 제공한다.",
+    "output_documents": [
+     "우선 응급의료·수용 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "응급의료에 관한 법률",
+      "article": "제8조",
+      "text": "응급의료에 관한 법률 제8조에 따른 응급환자를 우선 수용해 필요한 응급의료를 제공한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "전원 필요성 판단·재조정",
+    "lane": "수용 의료기관",
+    "stage": "G3 이송·진료",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "수용 의료기관",
+    "action": "상급치료가 필요하면 전원 사유와 환자 상태를 알리고 재조정을 요청한다.",
+    "output_documents": [
+     "전원 필요성 판단·재조정 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "응급의료에 관한 법률",
+      "article": "제11조",
+      "text": "응급의료에 관한 법률 제11조에 따른 상급치료가 필요하면 전원 사유와 환자 상태를 알리고 재조정을 요청한다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "이송·수용 기록과 평가",
+    "lane": "응급의료지원센터",
+    "stage": "G4 기록·평가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "응급의료지원센터",
+    "action": "수용 지연과 이송 결과를 기록해 응급의료 평가에 반영한다.",
+    "output_documents": [
+     "이송·수용 기록과 평가 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "응급의료에 관한 법률",
+      "article": "제17조·제49조",
+      "text": "응급의료에 관한 법률 제17조·제49조에 따른 수용 지연과 이송 결과를 기록해 응급의료 평가에 반영한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L07",
+    "source": "P07",
+    "target": "P04",
+    "type": "loop",
+    "label": "전원 필요"
+   },
+   {
+    "id": "E08",
+    "source": "P06",
+    "target": "P08",
+    "type": "sequence",
+    "label": "진료 계속"
+   },
+   {
+    "id": "E09",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": "전원 불필요"
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건·기한·지원 범위는 하위규정과 사실관계에 따라 달라질 수 있다.",
+   "2026-07-13 301~320 확장: 현행 법률의 실제 조문 순서와 당사자·행정기관 레인을 기준으로 신규 작성. 정책뉴스: https://www.korea.kr/news/policyNewsView.do?newsId=148967267"
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 18건 가운데 18건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "응급의료에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "응급의료에 관한 법률",
+    "lawId": "000218",
+    "mst": "280429",
+    "promulgatedOn": "2025-12-23",
+    "effectiveOn": "2026-06-24",
+    "officialUrl": "https://law.go.kr/법령/응급의료에관한법률"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 9,
+   "explicitCitationEntries": 9,
+   "articleReferences": 18,
+   "verifiedReferences": 18,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

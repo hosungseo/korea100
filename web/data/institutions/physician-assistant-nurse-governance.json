@@ -1,0 +1,365 @@
+{
+ "slug": "physician-assistant-nurse-governance",
+ "name": "진료지원간호사 자격·업무 관리",
+ "oneLiner": "면허·임상경력 요건 확인 → 교육과정 이수 → 업무 가능 의료기관·인력 확인 → 운영위원회 심의·직무기술서 작성 → 진료지원업무 수행 → 공동서명·수행기록 관리 → 보수교육·역량 유지 → 지도·감독·시정",
+ "type": "간호 자격·업무관리형",
+ "priority": 306,
+ "whyFirst": "정부·지방자치단체와 관계기관의 역할을 분리해 진료지원간호사 자격·업무 관리 절차를 한눈에 보여준다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "진료지원간호사 자격·업무 관리은(는) 면허·임상경력 요건 확인 → 교육과정 이수 → 업무 가능 의료기관·인력 확인 → 운영위원회 심의·직무기술서 작성 → 진료지원업무 수행 → 공동서명·수행기록 관리 → 보수교육·역량 유지 → 지도·감독·시정로 이어지는 공적 절차다.",
+  "stakeholders": "진료지원간호사, 의료기관·운영위원회, 교육기관, 보건복지부",
+  "legalBasis": [
+   {
+    "law": "간호법",
+    "articles": "제12~14조, 제16조, 제23조",
+    "kind": "법률"
+   },
+   {
+    "law": "간호사의 진료지원업무 수행에 관한 규칙",
+    "articles": "제2~13조",
+    "kind": "부령"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "의료기관·운영위원회",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "교육기관",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "보건복지부",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "면허·임상경력 요건 확인",
+   "교육과정 이수",
+   "업무 가능 의료기관·인력 확인",
+   "운영위원회 심의·직무기술서 작성",
+   "진료지원업무 수행",
+   "공동서명·수행기록 관리",
+   "보수교육·역량 유지",
+   "지도·감독·시정"
+  ],
+  "moneyFlow": "지원금·수수료·사업비는 법령과 연도별 사업기준 또는 개별 결정에 따라 달라질 수 있다.",
+  "docsFlow": "면허·임상경력 요건 확인 기록 → 심사·협의 자료 → 결정·통지 → 이행·사후관리 기록으로 이어진다.",
+  "bottlenecks": [
+   "업무별 세부 수행행위 고시 최신 목록",
+   "의료기관별 직무기술서·공동서명 시스템 운영"
+  ],
+  "reformPoints": [
+   "처리상태와 담당기관 안내",
+   "기관 간 자료연계와 중복제출 축소",
+   "결정·변경 사유의 명확한 통지"
+  ]
+ },
+ "related": [],
+ "fieldVerification": [
+  "업무별 세부 수행행위 고시 최신 목록",
+  "의료기관별 직무기술서·공동서명 시스템 운영"
+ ],
+ "process": {
+  "institution_name": "진료지원간호사 자격·업무 관리",
+  "law_name": "간호법·간호사의 진료지원업무 수행에 관한 규칙",
+  "lanes": [
+   "진료지원간호사",
+   "의료기관·운영위원회",
+   "교육기관",
+   "보건복지부"
+  ],
+  "stages": [
+   "G0 자격 확인",
+   "G1 교육",
+   "G2 업무 지정",
+   "G3 수행·감독",
+   "G4 점검"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "면허·임상경력 요건 확인",
+    "lane": "진료지원간호사",
+    "stage": "G0 자격 확인",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "진료지원간호사",
+    "action": "간호사 면허와 진료지원업무에 필요한 임상경력 요건을 확인한다.",
+    "output_documents": [
+     "면허·임상경력 요건 확인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "간호법",
+      "article": "제14조",
+      "text": "간호법 제14조에 따른 간호사 면허와 진료지원업무에 필요한 임상경력 요건을 확인한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "교육과정 이수",
+    "lane": "교육기관",
+    "stage": "G1 교육",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "교육기관",
+    "action": "지정된 교육과정과 현장실습을 이수하고 수료증을 발급받는다.",
+    "output_documents": [
+     "교육과정 이수 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "간호사의 진료지원업무 수행에 관한 규칙",
+      "article": "제6조·제8조",
+      "text": "간호사의 진료지원업무 수행에 관한 규칙 제6조·제8조에 따른 지정된 교육과정과 현장실습을 이수하고 수료증을 발급받는다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "업무 가능 의료기관·인력 확인",
+    "lane": "의료기관·운영위원회",
+    "stage": "G2 업무 지정",
+    "type": "gateway",
+    "status": "current",
+    "progress": 55,
+    "actor": "의료기관·운영위원회",
+    "action": "인증 의료기관 여부와 간호사의 자격·경력을 확인한다.",
+    "output_documents": [
+     "업무 가능 의료기관·인력 확인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "간호사의 진료지원업무 수행에 관한 규칙",
+      "article": "제2조·제3조",
+      "text": "간호사의 진료지원업무 수행에 관한 규칙 제2조·제3조에 따른 인증 의료기관 여부와 간호사의 자격·경력을 확인한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "운영위원회 심의·직무기술서 작성",
+    "lane": "의료기관·운영위원회",
+    "stage": "G2 업무 지정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "의료기관·운영위원회",
+    "action": "수행 가능한 진료지원업무와 감독체계를 직무기술서로 정한다.",
+    "output_documents": [
+     "운영위원회 심의·직무기술서 작성 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "간호사의 진료지원업무 수행에 관한 규칙",
+      "article": "제10조·제11조",
+      "text": "간호사의 진료지원업무 수행에 관한 규칙 제10조·제11조에 따른 수행 가능한 진료지원업무와 감독체계를 직무기술서로 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "진료지원업무 수행",
+    "lane": "진료지원간호사",
+    "stage": "G3 수행·감독",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "진료지원간호사",
+    "action": "의사의 전문적 판단 뒤 지시·위임·일반적 지도와 감독 아래 업무를 수행한다.",
+    "output_documents": [
+     "진료지원업무 수행 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "간호법",
+      "article": "제14조",
+      "text": "간호법 제14조에 따른 의사의 전문적 판단 뒤 지시·위임·일반적 지도와 감독 아래 업무를 수행한다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "공동서명·수행기록 관리",
+    "lane": "의료기관·운영위원회",
+    "stage": "G3 수행·감독",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "의료기관·운영위원회",
+    "action": "처방·기록의 공동서명과 수행 이력을 관리한다.",
+    "output_documents": [
+     "공동서명·수행기록 관리 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "간호사의 진료지원업무 수행에 관한 규칙",
+      "article": "제12조",
+      "text": "간호사의 진료지원업무 수행에 관한 규칙 제12조에 따른 처방·기록의 공동서명과 수행 이력을 관리한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "보수교육·역량 유지",
+    "lane": "교육기관",
+    "stage": "G4 점검",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "교육기관",
+    "action": "전문간호사 등은 정기 보수교육으로 역량을 유지한다.",
+    "output_documents": [
+     "보수교육·역량 유지 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "간호사의 진료지원업무 수행에 관한 규칙",
+      "article": "제7조",
+      "text": "간호사의 진료지원업무 수행에 관한 규칙 제7조에 따른 전문간호사 등은 정기 보수교육으로 역량을 유지한다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "지도·감독·시정",
+    "lane": "보건복지부",
+    "stage": "G4 점검",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보건복지부",
+    "action": "법과 규칙 준수 여부를 감독하고 필요한 시정조치를 한다.",
+    "output_documents": [
+     "지도·감독·시정 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "간호법",
+      "article": "제23조",
+      "text": "간호법 제23조에 따른 법과 규칙 준수 여부를 감독하고 필요한 시정조치를 한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건·기한·지원 범위는 하위규정과 사실관계에 따라 달라질 수 있다.",
+   "2026-07-13 301~320 확장: 간호법 제14조와 2026-07-10 공포된 진료지원업무 수행 규칙을 기준으로 작성. 정책뉴스: https://www.korea.kr/news/policyNewsView.do?newsId=148967956",
+   "기준일 2026-07-13 현재 진료지원업무 수행 규칙은 공포됐으나 시행일은 2026-08-11이다. 세부 절차는 시행 예정 구조로 읽어야 한다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 2건 중 공식 원문 2건을 연결했다. 캔버스와 절차 노드의 명시 조문 28건 가운데 28건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "간호법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "간호법",
+    "lawId": "014736",
+    "mst": "265413",
+    "promulgatedOn": "2024-09-20",
+    "effectiveOn": "2025-06-21",
+    "officialUrl": "https://law.go.kr/법령/간호법"
+   },
+   {
+    "law": "간호사의 진료지원업무 수행에 관한 규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "간호사의 진료지원업무 수행에 관한 규칙",
+    "lawId": "015169",
+    "mst": "288085",
+    "promulgatedOn": "2026-07-10",
+    "effectiveOn": "2026-08-11",
+    "officialUrl": "https://law.go.kr/법령/간호사의진료지원업무수행에관한규칙"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 10,
+   "explicitCitationEntries": 10,
+   "articleReferences": 28,
+   "verifiedReferences": 28,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

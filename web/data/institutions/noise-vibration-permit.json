@@ -258,12 +258,13 @@
     "output_documents": [
      "운영"
     ],
+    "deadline": "가동개시일부터 30일 이내 배출허용기준 이하 처리",
     "confidence": 0.9,
     "legal_basis": [
      {
       "law": "소음ㆍ진동관리법",
       "article": "제14조(배출허용기준의 준수 의무)",
-      "text": "배출허용기준의 준수 의무"
+      "text": "사업자는 배출시설·방지시설 설치를 끝내고 배출시설을 가동한 때에는 기후에너지환경부령으로 정하는 기간(가동개시일부터 30일, 시행규칙 제14조제1항) 이내에 소음ㆍ진동이 배출허용기준 이하로 처리되도록 하여야 한다."
      }
     ]
    },
@@ -452,6 +453,29 @@
       "text": "방음시설의 성능과 설치 기준 등"
      }
     ]
+   },
+   {
+    "id": "P17",
+    "name": "배출시설 설치확인·소음진동검사",
+    "lane": "방지·측정",
+    "stage": "G4 운영·공사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지자체·소음진동검사기관",
+    "action": "가동 상태 점검·소음진동검사, 초과 시 개선명령",
+    "output_documents": [
+     "검사결과 통보"
+    ],
+    "deadline": "제14조 기간 지난 날부터 20일 이내 검사·통보(검사기관)",
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "소음ㆍ진동관리법 시행규칙",
+      "article": "제14조(배출시설의 설치확인 등)",
+      "text": "시장·군수·구청장은 가동개시일부터 30일이 지난 후 배출허용기준 적합 여부를 확인하기 위해 소음ㆍ진동검사를 하거나 검사기관에 의뢰할 수 있고(제2항), 검사기관은 기간이 지난 날부터 20일 이내에 검사하여 결과를 통보하며(제3항), 기준 초과 시 법 제15조 개선명령을 하여야 한다(제4항)."
+     }
+    ]
    }
   ],
   "edges": [
@@ -494,8 +518,8 @@
     "id": "E06",
     "source": "P05",
     "target": "P06",
-    "type": "sequence",
-    "label": "보완"
+    "type": "loop",
+    "label": "보완 요구(반려)"
    },
    {
     "id": "E07",
@@ -573,17 +597,32 @@
     "target": "P15",
     "type": "sequence",
     "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P08",
+    "target": "P17",
+    "type": "message",
+    "label": "가동개시 30일 후 검사"
+   },
+   {
+    "id": "E18",
+    "source": "P17",
+    "target": "P12",
+    "type": "sequence",
+    "label": "배출허용기준 초과"
    }
   ],
   "warnings": [
-   "MST 276753. 패키지 δ."
+   "MST 276753. 패키지 δ.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (E) 법정 필수단계 누락 보완 — 배출시설 설치확인·소음진동검사 노드(P17) 추가(시행규칙 제14조제2·3항, 검사기관 20일 내 검사·통보, 초과 시 제15조 개선명령). (D) 기한 누락 정정 — 허용기준 준수·운영(P08)에 가동개시일부터 30일(법 제14조, 시행규칙 제14조제1항) 명시. (L0 backward-sequence 판정) E06 P05→P06을 sequence→loop로 변경: 심사 중 보완요구는 반려·보완 회귀이며 제8조 신청 절차상 loop가 타당(보완 후 P02 재신청 L07 존재). 대조 MST: 소음ㆍ진동관리법 276753, 시행령 284785, 시행규칙 287427. 법의 침묵: 배출시설 설치신고 수리 및 설치허가 처분의 처리기한은 법·시행령·시행규칙에 명시 없음(민원처리 일반규정에 의함). 법의 침묵: 개선명령 발령 자체의 개시 시한(검사통보 후 며칠 내 명령)은 조문에 없음."
   ]
  },
  "verification": {
   "status": "article-verified",
-  "verifiedAt": "2026-07-12",
-  "method": "법제처 DRF + L3 당사자 워크스루",
-  "scope": "L3 당사자 워크스루 후 명시 조문 13건 존재 확인 13건",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 27건 가운데 27건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
    "소음ㆍ진동관리법 MST 276753"
   ],
@@ -597,16 +636,27 @@
     "mst": "276753",
     "promulgatedOn": "2025-10-01",
     "effectiveOn": "2025-10-01",
-    "officialUrl": "https://law.go.kr/법령/소음·진동관리법"
+    "officialUrl": "https://law.go.kr/법령/소음ㆍ진동관리법"
+   },
+   {
+    "law": "소음ㆍ진동관리법 시행규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "소음ㆍ진동관리법 시행규칙",
+    "lawId": "007520",
+    "mst": "287427",
+    "promulgatedOn": "2026-06-22",
+    "effectiveOn": "2026-06-22",
+    "officialUrl": "https://law.go.kr/법령/소음ㆍ진동관리법시행규칙"
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-12",
-   "method": "DRF 목차·조문제목 대조",
-   "citationEntries": 13,
-   "explicitCitationEntries": 13,
-   "articleReferences": 13,
-   "verifiedReferences": 13,
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 21,
+   "explicitCitationEntries": 21,
+   "articleReferences": 27,
+   "verifiedReferences": 27,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }

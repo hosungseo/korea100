@@ -1,0 +1,373 @@
+{
+ "slug": "military-service-examination",
+ "name": "병역판정검사",
+ "oneLiner": "병역판정검사의 신청·심사·결정·사후관리 절차",
+ "type": "신체검사·병역처분형",
+ "priority": 258,
+ "whyFirst": "병역판정검사의 행위자와 결정 경로를 분리한다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "병역판정검사은(는) 검사통지·일정 확인 → 병역판정검사 출석 → 신체·심리 검사 → 신체등급 판정 → 병역처분 결정 → 결과 통지 → 처분 변경·재검 관리로 이어지는 공적 절차다.",
+  "stakeholders": "병역의무자, 병무청, 병역판정검사장, 관계 의료기관",
+  "legalBasis": [
+   {
+    "law": "병역법",
+    "articles": "제10조(대상자 조사), 제11조(병역판정검사), 제12조(신체등급 판정), 제13조(적성 분류·결정), 제14조(병역처분), 제14조의2(재병역판정검사), 제65조(병역처분 변경 등)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "병무청",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "병역판정검사장",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "관계 의료기관",
+    "role": "접수·확인·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "검사통지·일정 확인",
+   "병역판정검사 출석",
+   "신체·심리 검사",
+   "신체등급 판정",
+   "병역처분 결정",
+   "결과 통지",
+   "처분 변경·재검 관리"
+  ],
+  "moneyFlow": "수수료·복무·지원 범위는 법령과 개인의 사실관계에 따라 달라질 수 있다.",
+  "docsFlow": "신청·신고 기록 → 조사·심사 자료 → 결정·통지 → 이행·복무 기록 → 사후관리로 이어진다.",
+  "bottlenecks": [
+   "자격·사유 증빙",
+   "관계기관 자료 연계",
+   "결정 이후 변동 관리"
+  ],
+  "reformPoints": [
+   "처리상태 안내 강화",
+   "요건·기한 가독성 개선",
+   "온라인 보완 경로 명확화"
+  ]
+ },
+ "related": [
+  "병역 연기·면제·대체복무",
+  "국적 취득·상실",
+  "행정심판"
+ ],
+ "fieldVerification": [
+  "실제 온라인·방문 접수 경로",
+  "기관별 처리기한·서식",
+  "개별 사건별 세부 운영기준"
+ ],
+ "process": {
+  "institution_name": "병역판정검사",
+  "law_name": "병역법",
+  "lanes": [
+   "병역의무자",
+   "병무청",
+   "병역판정검사장",
+   "관계 의료기관"
+  ],
+  "stages": [
+   "G0 준비",
+   "G1 신청·접수",
+   "G2 조사·심사",
+   "G3 결정",
+   "G4 이행·복무",
+   "G5 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "검사통지·일정 확인",
+    "lane": "병역의무자",
+    "stage": "G0 준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "병역의무자",
+    "action": "검사통지·일정 확인",
+    "output_documents": [
+     "검사통지·일정 확인 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "병역법",
+      "article": "제11조",
+      "text": "병역법 제11조에 따른 검사통지·일정 확인 단계"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "병역판정검사 출석",
+    "lane": "병무청",
+    "stage": "G0 준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "병무청",
+    "action": "병역판정검사 출석",
+    "output_documents": [
+     "병역판정검사 출석 기록"
+    ],
+    "deadline": "19세가 되는 해(병역법 제11조제1항)",
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "병역법",
+      "article": "제11조",
+      "text": "병역의무자는 19세가 되는 해에 지방병무청장이 지정하는 일시·장소에서 병역판정검사를 받아야 한다(일부는 20세). 미수검·연기사유 소멸 시 그 해 또는 다음 해 수검(제11조제1항·제2항)."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "신체·심리 검사",
+    "lane": "병역판정검사장",
+    "stage": "G1 신청·접수",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "병역판정검사장",
+    "action": "신체·심리 검사",
+    "output_documents": [
+     "신체·심리 검사 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "병역법",
+      "article": "제11조",
+      "text": "병역판정검사는 신체검사와 심리검사로 구분한다. 신체검사는 신체 모든 부위 검사(필요 시 임상병리·방사선·의료기관 위탁), 심리검사는 언행관찰·면담·서면검사(필요 시 정밀심리검사)(제11조제3항~제5항)."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "신체등급 판정",
+    "lane": "관계 의료기관",
+    "stage": "G2 조사·심사",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "관계 의료기관",
+    "action": "신체등급 판정",
+    "output_documents": [
+     "신체등급 판정 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "병역법",
+      "article": "제12조",
+      "text": "병역판정검사전담·전문의사 또는 파견 군의관이 신체등급(1~7급)을 판정한다. 신체등급판정 심의위원회를 둘 수 있고, 7급 판정자는 2년 내 재신체검사한다(제12조제1항~제3항). 판정기준은 국방부령."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "병역처분 결정",
+    "lane": "병역의무자",
+    "stage": "G3 결정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "병역의무자",
+    "action": "병역처분 결정",
+    "output_documents": [
+     "병역처분 결정 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "병역법",
+      "article": "제14조",
+      "text": "병역법 제14조에 따른 병역처분 결정 단계"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "결과 통지",
+    "lane": "병무청",
+    "stage": "G4 이행·복무",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "병무청",
+    "action": "결과 통지",
+    "output_documents": [
+     "결과 통지 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "병역법",
+      "article": "제6조의2",
+      "text": "지방병무청장은 병역준비역·예비역 등으로 편입되었다는 사실과 관련 절차 등을 통지하여야 한다(병역변경 등의 통지). 병역처분 자체는 제14조."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "처분 변경·재검 관리",
+    "lane": "병역판정검사장",
+    "stage": "G5 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "병역판정검사장",
+    "action": "처분 변경·재검 관리",
+    "output_documents": [
+     "처분 변경·재검 관리 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "병역법",
+      "article": "제14조의2",
+      "text": "지방병무청장은 현역병입영 대상자·보충역이 처분 다음 해부터 4년되는 해 12.31까지 미소집 시 5년되는 해에 재병역판정검사를 한다(절차·방법은 제10조~제14조 준용)."
+     },
+     {
+      "law": "병역법",
+      "article": "제65조",
+      "text": "현역병·보충역 등에 대하여 신체검사를 거쳐 보충역·전시근로역 편입 또는 병역면제 처분으로 병역처분을 변경할 수 있다(병역처분 변경 등). (구 제17조는 2020.12.22 삭제)"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "적성 분류·병과 결정",
+    "lane": "병무청",
+    "stage": "G2 조사·심사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지방병무청장·각 군 참모총장",
+    "action": "신체등급 1~4급자 적성 분류·결정 및 병과 부여",
+    "output_documents": [
+     "적성 분류·병과 부여 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "병역법",
+      "article": "제13조",
+      "text": "지방병무청장은 신체등급 1~4급 판정자에 대하여 자격·면허·전공분야 등을 고려하여 적성을 분류·결정하고, 각 군 참모총장은 적성에 적합한 병과를 부여한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P08",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P04",
+    "target": "P03",
+    "type": "loop",
+    "label": "7급 판정 시 2년 내 재신체검사(제12조제3항)"
+   },
+   {
+    "id": "E09",
+    "source": "P07",
+    "target": "P03",
+    "type": "loop",
+    "label": "재병역판정검사(제14조의2)·입영판정검사(제14조의3) 시 재검"
+   }
+  ],
+  "warnings": [
+   "개별 신청·처분의 요건·기한은 사실관계와 하위규정에 따라 달라질 수 있다.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: (C 근거 오인용) P07 처분 변경·재검 제17조(2020.12.22 삭제된 조문)→제14조의2(재병역판정검사)·제65조(병역처분 변경 등); P06 결과 통지 제11조→제6조의2(병역변경 등의 통지); 캔버스 legalBasis도 제17조 삭제·제14조 제목 정정(현역병 입영→병역처분). (D 기한) P02 병역판정검사 수검 deadline 신설: 19세가 되는 해(제11조제1항). (E 필수단계 누락) P08 적성 분류·병과 결정(제13조: 신체등급 1~4급자 적성분류·병과부여) 노드 신설·순서 재배치(P04→P08→P05). (no-loop 판정) 재신체검사(제12조제3항 7급)·재병역판정검사(제14조의2) 회귀 loop 엣지 E08·E09 신설. consulted MSTs: 병역법 286755, 병역법 시행령 281725, 병역법 시행규칙 272775. 법의 침묵: 신체등급 판정기준 세부는 국방부령(검사규칙) 위임. 법의 침묵: 현역/보충역 처분 세부기준은 병무청장 내규(제14조제3항). 법의 침묵: 신체등급판정 심의위원회 구성·운영은 병무청장 정함(제12조제5항)."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 16건 가운데 16건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "병역법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "병역법",
+    "lawId": "001622",
+    "mst": "286755",
+    "promulgatedOn": "2026-06-09",
+    "effectiveOn": "2026-06-09",
+    "officialUrl": "https://law.go.kr/법령/병역법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 10,
+   "explicitCitationEntries": 10,
+   "articleReferences": 16,
+   "verifiedReferences": 16,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

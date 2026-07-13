@@ -1,0 +1,348 @@
+{
+ "slug": "urban-river-basin-flood-prevention",
+ "name": "도시하천유역 침수피해 방지",
+ "oneLiner": "침수이력·위험정보 제공 → 특정도시하천 유역 위험분석 → 침수피해 방지 기본계획 수립 → 관계 계획 조정·기관 협의 → 연차 시행계획 수립 → 침수방지시설 설치·활용 → 도시침수예보·주민 통지 → 시설 사후관리·자료 갱신",
+ "type": "침수계획·예보·시설관리형",
+ "priority": 318,
+ "whyFirst": "정부·지방자치단체와 관계기관의 역할을 분리해 도시하천유역 침수피해 방지 절차를 한눈에 보여준다.",
+ "asOfDate": "2026-07-13",
+ "status": "full",
+ "canvas": {
+  "purpose": "도시하천유역 침수피해 방지은(는) 침수이력·위험정보 제공 → 특정도시하천 유역 위험분석 → 침수피해 방지 기본계획 수립 → 관계 계획 조정·기관 협의 → 연차 시행계획 수립 → 침수방지시설 설치·활용 → 도시침수예보·주민 통지 → 시설 사후관리·자료 갱신로 이어지는 공적 절차다.",
+  "stakeholders": "주민·시설관리자, 시장·군수·구청장, 시·도지사·관계기관, 기후에너지환경부",
+  "legalBasis": [
+   {
+    "law": "도시하천유역침수피해방지대책법",
+    "articles": "제6~19조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "시장·군수·구청장",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "시·도지사·관계기관",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   },
+   {
+    "name": "기후에너지환경부",
+    "role": "접수·검토·결정·이행 또는 사후관리"
+   }
+  ],
+  "procedure": [
+   "침수이력·위험정보 제공",
+   "특정도시하천 유역 위험분석",
+   "침수피해 방지 기본계획 수립",
+   "관계 계획 조정·기관 협의",
+   "연차 시행계획 수립",
+   "침수방지시설 설치·활용",
+   "도시침수예보·주민 통지",
+   "시설 사후관리·자료 갱신"
+  ],
+  "moneyFlow": "지원금·수수료·사업비는 법령과 연도별 사업기준 또는 개별 결정에 따라 달라질 수 있다.",
+  "docsFlow": "침수이력·위험정보 제공 기록 → 심사·협의 자료 → 결정·통지 → 이행·사후관리 기록으로 이어진다.",
+  "bottlenecks": [
+   "특정도시하천 유역 지정·계획 대상",
+   "도시침수예보 전달수단과 주민행동요령"
+  ],
+  "reformPoints": [
+   "처리상태와 담당기관 안내",
+   "기관 간 자료연계와 중복제출 축소",
+   "결정·변경 사유의 명확한 통지"
+  ]
+ },
+ "related": [],
+ "fieldVerification": [
+  "특정도시하천 유역 지정·계획 대상",
+  "도시침수예보 전달수단과 주민행동요령"
+ ],
+ "process": {
+  "institution_name": "도시하천유역 침수피해 방지",
+  "law_name": "도시하천유역침수피해방지대책법",
+  "lanes": [
+   "주민·시설관리자",
+   "시장·군수·구청장",
+   "시·도지사·관계기관",
+   "기후에너지환경부"
+  ],
+  "stages": [
+   "G0 위험분석",
+   "G1 기본계획",
+   "G2 시행계획",
+   "G3 시설·예보",
+   "G4 사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "침수이력·위험정보 제공",
+    "lane": "주민·시설관리자",
+    "stage": "G0 위험분석",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "주민·시설관리자",
+    "action": "반복 침수지와 시설 피해 정보를 지자체에 제공한다.",
+    "output_documents": [
+     "침수이력·위험정보 제공 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도시하천유역침수피해방지대책법",
+      "article": "제13조",
+      "text": "도시하천유역침수피해방지대책법 제13조에 따른 반복 침수지와 시설 피해 정보를 지자체에 제공한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "특정도시하천 유역 위험분석",
+    "lane": "기후에너지환경부",
+    "stage": "G0 위험분석",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "기후에너지환경부",
+    "action": "강우·하천·하수도·지형 자료를 통합해 침수위험을 분석한다.",
+    "output_documents": [
+     "특정도시하천 유역 위험분석 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도시하천유역침수피해방지대책법",
+      "article": "제6조",
+      "text": "도시하천유역침수피해방지대책법 제6조에 따른 강우·하천·하수도·지형 자료를 통합해 침수위험을 분석한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "침수피해 방지 기본계획 수립",
+    "lane": "기후에너지환경부",
+    "stage": "G1 기본계획",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "기후에너지환경부",
+    "action": "특정도시하천 유역의 목표와 시설·예보·투자계획을 수립한다.",
+    "output_documents": [
+     "침수피해 방지 기본계획 수립 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도시하천유역침수피해방지대책법",
+      "article": "제6조",
+      "text": "도시하천유역침수피해방지대책법 제6조에 따른 특정도시하천 유역의 목표와 시설·예보·투자계획을 수립한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "관계 계획 조정·기관 협의",
+    "lane": "시·도지사·관계기관",
+    "stage": "G1 기본계획",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시·도지사·관계기관",
+    "action": "하천·하수도·도시계획과 기본계획의 정합성을 협의한다.",
+    "output_documents": [
+     "관계 계획 조정·기관 협의 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도시하천유역침수피해방지대책법",
+      "article": "제7조",
+      "text": "도시하천유역침수피해방지대책법 제7조에 따른 하천·하수도·도시계획과 기본계획의 정합성을 협의한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "연차 시행계획 수립",
+    "lane": "시장·군수·구청장",
+    "stage": "G2 시행계획",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시장·군수·구청장",
+    "action": "시설 정비와 비구조적 대책의 연차별 시행계획을 마련한다.",
+    "output_documents": [
+     "연차 시행계획 수립 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도시하천유역침수피해방지대책법",
+      "article": "제8조",
+      "text": "도시하천유역침수피해방지대책법 제8조에 따른 시설 정비와 비구조적 대책의 연차별 시행계획을 마련한다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "침수방지시설 설치·활용",
+    "lane": "시·도지사·관계기관",
+    "stage": "G3 시설·예보",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시·도지사·관계기관",
+    "action": "강화된 설계기준으로 시설을 설치하고 기존 시설을 연계 활용한다.",
+    "output_documents": [
+     "침수방지시설 설치·활용 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도시하천유역침수피해방지대책법",
+      "article": "제9조·제10조",
+      "text": "도시하천유역침수피해방지대책법 제9조·제10조에 따른 강화된 설계기준으로 시설을 설치하고 기존 시설을 연계 활용한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "도시침수예보·주민 통지",
+    "lane": "기후에너지환경부",
+    "stage": "G3 시설·예보",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기후에너지환경부",
+    "action": "종합상황실에서 침수위험을 분석해 예보하고 관계기관·주민에게 알린다.",
+    "output_documents": [
+     "도시침수예보·주민 통지 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도시하천유역침수피해방지대책법",
+      "article": "제14조·제15조",
+      "text": "도시하천유역침수피해방지대책법 제14조·제15조에 따른 종합상황실에서 침수위험을 분석해 예보하고 관계기관·주민에게 알린다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "시설 사후관리·자료 갱신",
+    "lane": "시장·군수·구청장",
+    "stage": "G4 사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시장·군수·구청장",
+    "action": "시설 성능과 침수 결과를 점검해 정보시스템과 계획을 갱신한다.",
+    "output_documents": [
+     "시설 사후관리·자료 갱신 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "도시하천유역침수피해방지대책법",
+      "article": "제12조·제13조",
+      "text": "도시하천유역침수피해방지대책법 제12조·제13조에 따른 시설 성능과 침수 결과를 점검해 정보시스템과 계획을 갱신한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건·기한·지원 범위는 하위규정과 사실관계에 따라 달라질 수 있다.",
+   "2026-07-13 301~320 확장: 현행 법률의 실제 조문 순서와 당사자·행정기관 레인을 기준으로 신규 작성."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 25건 가운데 25건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "도시하천유역침수피해방지대책법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "도시하천유역 침수피해방지대책법",
+    "lawId": "014508",
+    "mst": "276721",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2025-10-01",
+    "officialUrl": "https://law.go.kr/법령/도시하천유역침수피해방지대책법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 9,
+   "explicitCitationEntries": 9,
+   "articleReferences": 25,
+   "verifiedReferences": 25,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

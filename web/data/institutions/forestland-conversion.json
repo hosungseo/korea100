@@ -493,6 +493,29 @@
       "text": "산지전용타당성조사 결과 등의 공개"
      }
     ]
+   },
+   {
+    "id": "P17",
+    "name": "취소·중지 처분 전 청문",
+    "lane": "감독",
+    "stage": "G5 복구·사후",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산림청장등",
+    "receiver": "사업시행자",
+    "action": "청문 실시",
+    "output_documents": [
+     "청문조서"
+    ],
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "산지관리법",
+      "article": "제49조(청문)",
+      "text": "산림청장등은 제20조에 따라 산지전용허가를 취소하거나 목적사업의 중지를 명하려는 경우 청문을 하여야 한다."
+     }
+    ]
    }
   ],
   "edges": [
@@ -549,8 +572,8 @@
     "id": "E08",
     "source": "P04",
     "target": "P07",
-    "type": "sequence",
-    "label": "보완"
+    "type": "loop",
+    "label": "보완 요구"
    },
    {
     "id": "E09",
@@ -604,20 +627,28 @@
    {
     "id": "E16",
     "source": "P14",
+    "target": "P17",
+    "type": "sequence",
+    "label": "취소 처분 예정"
+   },
+   {
+    "id": "E17",
+    "source": "P17",
     "target": "P15",
     "type": "sequence",
-    "label": null
+    "label": "청문 후 처분"
    }
   ],
   "warnings": [
-   "2026-07-12 L3 MST 283757. 패키지 δ."
+   "2026-07-12 L3 MST 283757. 패키지 δ.",
+   "2026-07-13 L2 블라인드 재구성 대조 정정: L0 backward-sequence E08(P04→P07 보완)을 허가기준 심사 중 반려·보완 회귀로 판단하여 type을 sequence→loop로 변경. (E) 제20조 산지전용허가 취소·중지 처분 전 제49조 청문 절차(당사자 권리)가 누락되어 P17 청문 노드 추가·P14→P17→P15 재배선. 자문 MST: 283757(산지관리법). 법의 침묵: 제14조 산지전용허가 처리기간은 대통령령·농림축산식품부령 위임으로 법률 본문에 일수 미명시(변경신고만 25일 규정). 법의 침묵: no-sublaw는 직접규정형 표기이며 면적 구분·조성비 단가는 시행령·고시 위임."
   ]
  },
  "verification": {
   "status": "article-verified",
-  "verifiedAt": "2026-07-12",
-  "method": "법제처 DRF + L3 당사자 워크스루",
-  "scope": "L3 당사자 워크스루 후 명시 조문 19건 존재 확인 19건",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 42건 가운데 42건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
    "산지관리법 MST 283757 (2026-02-27 공포, 2026-05-28 시행)"
   ],
@@ -635,12 +666,12 @@
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-12",
-   "method": "DRF 목차·조문제목 대조",
-   "citationEntries": 19,
-   "explicitCitationEntries": 19,
-   "articleReferences": 19,
-   "verifiedReferences": 19,
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 29,
+   "explicitCitationEntries": 29,
+   "articleReferences": 42,
+   "verifiedReferences": 42,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }
