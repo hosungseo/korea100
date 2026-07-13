@@ -57,6 +57,10 @@ export function buildProcessEdgeRouteSlots(edges, nodePositions) {
   return slots;
 }
 
+export function buildBlockedRailNudge(channel, side, gap) {
+  return side * Math.max(0, channel) * gap;
+}
+
 function assignIncidentPortSlots(records, slots) {
   const incidents = records.flatMap((record) => [
     {

@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 import {
+  buildBlockedRailNudge,
   buildProcessEdgeRouteSlots,
   buildProcessLaneGroups,
 } from "../src/lib/process-layout.mjs";
@@ -830,8 +831,11 @@ function edgeRoute(edge, source, target, context) {
           ? -1
           : slot.railSide;
     const sourceGroupLeft = GROUP_X + source.groupIndex * context.groupWidth;
-    const blockedRailNudge =
-      alternatingSlotOffset(slot.sourceChannel) * EDGE_RAIL_GAP;
+    const blockedRailNudge = buildBlockedRailNudge(
+      slot.sourceChannel,
+      sourceSide,
+      EDGE_RAIL_GAP
+    );
     const sourceRailCandidate =
       sourceSide < 0
         ? sourceGroupLeft + EDGE_RAIL_INSET + blockedRailNudge

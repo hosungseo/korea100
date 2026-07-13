@@ -1,6 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { buildProcessEdgeRouteSlots } from "../src/lib/process-layout.mjs";
+import {
+  buildBlockedRailNudge,
+  buildProcessEdgeRouteSlots,
+} from "../src/lib/process-layout.mjs";
 
 test("spreads shared ports and overlapping row channels", () => {
   const edges = [
@@ -40,4 +43,15 @@ test("routes long edges along the target rail away from their source", () => {
 
   assert.equal(slots.get("RIGHT").railSide, 1);
   assert.equal(slots.get("LEFT").railSide, -1);
+});
+
+test("fans blocked source rails monotonically away from the card", () => {
+  assert.deepEqual(
+    [0, 1, 2, 3].map((channel) => buildBlockedRailNudge(channel, 1, 13)),
+    [0, 13, 26, 39],
+  );
+  assert.deepEqual(
+    [0, 1, 2, 3].map((channel) => buildBlockedRailNudge(channel, -1, 13)),
+    [-0, -13, -26, -39],
+  );
 });
