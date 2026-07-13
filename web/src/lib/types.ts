@@ -143,7 +143,7 @@ export interface ProcessModel {
   stages: string[];
   nodes: ProcessNode[];
   edges: ProcessEdge[];
-  warnings?: string[];
+  warnings?: import("./process-warnings.mjs").ProcessWarning[];
 }
 
 export interface Institution {
