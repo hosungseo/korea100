@@ -13,6 +13,8 @@ permissions:
 jobs:
   freshness:
     runs-on: ubuntu-latest
+    # LAW_OC를 '법령정보' Environment secret으로 관리하므로 이 job이 해당 환경을 사용한다.
+    environment: 법령정보
     defaults:
       run:
         working-directory: web
