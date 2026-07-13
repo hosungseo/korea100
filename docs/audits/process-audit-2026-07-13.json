@@ -2,20 +2,20 @@
   "generatedAt": "2026-07-13",
   "metricStats": {
     "nodes": {
-      "mean": 14.012121212121212,
-      "sd": 4.032425961728588
+      "mean": 14.078549848942599,
+      "sd": 4.2032779985763105
     },
     "edgeRatio": {
-      "mean": 1.0545287822564073,
-      "sd": 0.11772392111048527
+      "mean": 1.0555389336359617,
+      "sd": 0.11896968380650398
     },
     "deadlineDensity": {
-      "mean": 0.2268802067099283,
-      "sd": 0.27546133239272186
+      "mean": 0.22686613424924035,
+      "sd": 0.27504503170793504
     },
     "meanConfidence": {
-      "mean": 0.8630621876957978,
-      "sd": 0.04482245747017712
+      "mean": 0.8632967541967252,
+      "sd": 0.04495463874832345
     }
   },
   "results": [
@@ -26,11 +26,11 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=5.00 (전체 평균 14.01±4.03)"
+          "detail": "nodes=5.00 (전체 평균 14.08±4.20)"
         },
         {
           "rule": "outlier",
-          "detail": "edgeRatio=0.80 (전체 평균 1.05±0.12)"
+          "detail": "edgeRatio=0.80 (전체 평균 1.06±0.12)"
         },
         {
           "rule": "no-loop",
@@ -86,11 +86,11 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=5.00 (전체 평균 14.01±4.03)"
+          "detail": "nodes=5.00 (전체 평균 14.08±4.20)"
         },
         {
           "rule": "outlier",
-          "detail": "edgeRatio=0.80 (전체 평균 1.05±0.12)"
+          "detail": "edgeRatio=0.80 (전체 평균 1.06±0.12)"
         },
         {
           "rule": "no-loop",
@@ -118,11 +118,11 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=5.00 (전체 평균 14.01±4.03)"
+          "detail": "nodes=5.00 (전체 평균 14.08±4.20)"
         },
         {
           "rule": "outlier",
-          "detail": "edgeRatio=0.80 (전체 평균 1.05±0.12)"
+          "detail": "edgeRatio=0.80 (전체 평균 1.06±0.12)"
         },
         {
           "rule": "no-loop",
@@ -163,6 +163,22 @@
         {
           "rule": "outlier",
           "detail": "deadlineDensity=0.94 (전체 평균 0.23±0.28)"
+        }
+      ],
+      "score": 7
+    },
+    {
+      "slug": "isms-p-certification-audit",
+      "verificationStatus": "article-verified",
+      "processWarnings": 5,
+      "findings": [
+        {
+          "rule": "outlier",
+          "detail": "nodes=36.00 (전체 평균 14.08±4.20)"
+        },
+        {
+          "rule": "outlier",
+          "detail": "edgeRatio=1.39 (전체 평균 1.06±0.12)"
         }
       ],
       "score": 7
@@ -296,22 +312,6 @@
       "processWarnings": 5,
       "findings": [],
       "score": 6
-    },
-    {
-      "slug": "appeal-review-commission",
-      "verificationStatus": "article-verified",
-      "processWarnings": 2,
-      "findings": [
-        {
-          "rule": "outlier",
-          "detail": "meanConfidence=0.95 (전체 평균 0.86±0.04)"
-        },
-        {
-          "rule": "no-sublaw",
-          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
-        }
-      ],
-      "score": 5
     },
     {
       "slug": "balanced-growth-impact-assessment",
@@ -460,7 +460,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "edgeRatio=1.53 (전체 평균 1.05±0.12)"
+          "detail": "edgeRatio=1.53 (전체 평균 1.06±0.12)"
         },
         {
           "rule": "outlier",
@@ -646,7 +646,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "edgeRatio=1.45 (전체 평균 1.05±0.12)"
+          "detail": "edgeRatio=1.45 (전체 평균 1.06±0.12)"
         }
       ],
       "score": 5
@@ -808,7 +808,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "edgeRatio=1.40 (전체 평균 1.05±0.12)"
+          "detail": "edgeRatio=1.40 (전체 평균 1.06±0.12)"
         }
       ],
       "score": 4
@@ -1324,7 +1324,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "edgeRatio=1.40 (전체 평균 1.05±0.12)"
+          "detail": "edgeRatio=1.40 (전체 평균 1.06±0.12)"
         }
       ],
       "score": 4
@@ -1949,6 +1949,18 @@
     },
     {
       "slug": "air-water-discharge-permit",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "findings": [
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 3
+    },
+    {
+      "slug": "appeal-review-commission",
       "verificationStatus": "article-verified",
       "processWarnings": 2,
       "findings": [
@@ -2747,7 +2759,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "edgeRatio=1.38 (전체 평균 1.05±0.12)"
+          "detail": "edgeRatio=1.38 (전체 평균 1.06±0.12)"
         }
       ],
       "score": 3
