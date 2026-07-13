@@ -3,7 +3,7 @@
  "name": "시설공사 조달(수요기관 대행 발주)",
  "oneLiner": "수요기관이 조달청에 대행 요청한 시설공사를 조달청이 입찰방식 결정·공고·자격심사·낙찰·공사도급계약 체결까지 집행하고, 착공·준공검사·대가지급 등 현장 이행관리는 수요기관이 맡는 공사 특화 대행 발주 절차",
  "type": "발주",
- "priority": 72,
+ "priority": 10,
  "whyFirst": "수요기관·계약담당공무원이 종합공사 30억원 이상을 발주할 때 반드시 거치는 조달청 대행 경로이며, 요청 이후의 입찰방식 결정과 적격심사·종합심사낙찰제 경계를 조문 대조로 검증할 실익이 큰 공사 특화 제도다.",
  "asOfDate": "2026-07-12",
  "status": "full",
@@ -543,10 +543,10 @@
   "warnings": []
  },
  "verification": {
-  "status": "needs-review",
-  "verifiedAt": "2026-07-12",
-  "method": "공개 웹 검색(WebSearch) 교차 대조 — 국가법령정보센터 원문 기계 대조(LAW_OC) 미실시",
-  "scope": "법적 근거 8건 중 국가법령정보센터 기계 연결 출처 6건을 sources로 연결하고, 조달청 시설공사 적격심사 세부기준과 입찰참가자격사전심사요령 2건은 레지스트리 미등록·식별자 미연결로 unresolved 처리했다. 캔버스와 절차 노드의 명시 조문 15건 가운데 14건을 공개 웹 검색과 law-cache 목차·교차 인용으로 확인했고, 조달청 세부기준 1건은 자동 검증 불가로 분류했다. 종합공사 30억원·전문공사 등 3억원 요청 의무, 적격심사 100억원 경계, 준공검사 14일·대가지급 5일 수치는 easylaw·pps 등 공개 출처로 교차 확인했으나 시행령·조달청 지침 개정 시 변동 가능하다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 8건 중 공식 원문 8건을 연결했다. 캔버스와 절차 노드의 명시 조문 33건 가운데 33건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
    "2026년 정부조직 개편으로 국가계약법령의 부처 표기는 재정경제부장관으로 볼 수 있어 기획재정부장관(재정경제부장관)으로 병기했다.",
    "PQ 대상 공사유형(추정가격 200억원 이상 일부 공사)의 구체 공종, 종합심사낙찰제 300억원 일반/간이형 경계는 시행령·조달청 세부기준으로 별도 관리되며 개정 시 수치가 바뀔 수 있다.",
@@ -615,34 +615,38 @@
     "adminRuleId": "27874",
     "adminRuleSerial": "2100000276690",
     "promulgatedOn": "2026-04-01",
-    "officialUrl": "https://law.go.kr/행정규칙/공사계약일반조건"
-   }
-  ],
-  "unresolved": [
+    "officialUrl": "https://law.go.kr/행정규칙/(계약예규)공사계약일반조건"
+   },
    {
     "law": "조달청 시설공사 적격심사 세부기준",
     "kind": "고시·지침",
-    "reasonCode": "title-needs-confirmation",
-    "reason": "조달청이 정하는 시설공사 적격심사 세부기준으로 law-cache 원문 사본은 있으나 이번 세션의 기계 연결 레지스트리에 식별자가 없어 원문 미연결이다.",
-    "nextStep": "LAW_OC 기계 대조로 조달청 지침의 공식 제명·식별자(adminRuleId/serial)를 확정한다."
+    "sourceType": "admin-rule",
+    "officialName": "조달청 시설공사 적격심사세부기준",
+    "adminRuleId": "35043",
+    "adminRuleSerial": "2100000281312",
+    "promulgatedOn": "2026-06-26",
+    "officialUrl": "https://law.go.kr/행정규칙/조달청시설공사적격심사세부기준"
    },
    {
     "law": "(계약예규) 입찰참가자격사전심사요령",
     "kind": "행정규칙",
-    "reasonCode": "title-needs-confirmation",
-    "reason": "레지스트리에 항목명은 있으나 adminRuleId·serial 등 원문 식별자가 비어 있어 이번 세션에서 국가법령정보센터 원문 식별자를 미연결했다.",
-    "nextStep": "LAW_OC 기계 대조로 계약예규 입찰참가자격사전심사요령의 식별자를 확정한다."
+    "sourceType": "admin-rule",
+    "officialName": "(계약예규) 입찰참가자격사전심사요령",
+    "adminRuleId": "27939",
+    "adminRuleSerial": "2100000275554",
+    "promulgatedOn": "2026-01-02",
+    "officialUrl": "https://law.go.kr/행정규칙/(계약예규)입찰참가자격사전심사요령"
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-12",
-   "method": "공개 웹 검색(easylaw·pps·casenote·lbox) 교차 대조 및 law-cache 목차·교차 인용 확인",
-   "citationEntries": 18,
-   "explicitCitationEntries": 15,
-   "articleReferences": 15,
-   "verifiedReferences": 14,
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 27,
+   "explicitCitationEntries": 22,
+   "articleReferences": 33,
+   "verifiedReferences": 33,
    "missingReferences": 0,
-   "uncheckableReferences": 1
+   "uncheckableReferences": 0
   }
  }
 }

@@ -3,7 +3,7 @@
  "name": "조달청 가격조사와 원가계산",
  "oneLiner": "낙찰·계약금액의 상한이 되는 예정가격을 정하기 위해 거래실례가격을 조사하거나 재료비·노무비·경비로 원가를 계산하는 절차로, 조달청과 수요기관의 발주 실무가 가격의 객관성을 확보하는 출발점",
  "type": "발주",
- "priority": 73,
+ "priority": 11,
  "whyFirst": "예정가격은 모든 경쟁입찰·수의계약의 가격 상한을 정하는 핵심 산출물이며, 거래실례가격 조사와 원가계산 기준을 조문 대조로 확인하는 발주 단계의 기초 제도다.",
  "asOfDate": "2026-07-12",
  "status": "full",
@@ -531,10 +531,10 @@
   "warnings": []
  },
  "verification": {
-  "status": "needs-review",
-  "verifiedAt": "2026-07-12",
-  "method": "공개 웹 검색(WebSearch) 교차 대조 — 국가법령정보센터 원문 기계 대조(LAW_OC) 미실시",
-  "scope": "예정가격 작성기준(계약예규)은 law-cache 원문과 직접 대조해 원가 비목·이윤율·표준시장단가·복수예비가격 조문을 확인했다. 국가계약법 시행령 제8·9조와 시행규칙 제4~9조는 law-cache 목차에서 조문명·번호를 확인하고 본문 취지는 WebSearch로 교차 확인했으며, 본문 기계 대조는 통합 시점 LAW_OC 검증으로 남긴다. 조달사업법 제11조 본문은 WebSearch로만 확인해 uncheckable로 분류했다.",
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 5건 중 공식 원문 5건을 연결했다. 캔버스와 절차 노드의 명시 조문 45건 가운데 45건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
    "조달사업법 시행령 제11조의 중앙조달 대상 기준액은 개정 가능성이 있어 본문 수치로 확정하지 않고 fieldVerification로 이관했다.",
    "예정가격 작성기준의 부처 표기는 현행 원문 기준 재정경제부장관이며 기획재정부장관과 병기했다."
@@ -596,14 +596,14 @@
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-12",
-   "method": "law-cache 원문 대조(예정가격 작성기준·조달사업법 시행규칙) 및 WebSearch 교차 대조 — 국가법령정보센터 원문 기계 대조 미실시",
-   "citationEntries": 21,
-   "explicitCitationEntries": 21,
-   "articleReferences": 21,
-   "verifiedReferences": 20,
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 26,
+   "explicitCitationEntries": 26,
+   "articleReferences": 45,
+   "verifiedReferences": 45,
    "missingReferences": 0,
-   "uncheckableReferences": 1
+   "uncheckableReferences": 0
   }
  }
 }

@@ -3,7 +3,7 @@
  "name": "조달물자 품질관리(품질점검·전문기관검사)",
  "oneLiner": "조달청이 조달물자의 품질을 확보하기 위해 전문검사기관 납품검사와 제조현장·납품장소 품질점검을 실시하고, 불합격 시 시정요구와 종합쇼핑몰 거래정지로 이어지는 사후 품질관리 제도",
  "type": "사후관리·제재",
- "priority": 79,
+ "priority": 41,
  "whyFirst": "조달업체와 수요기관 모두 납품 단계에서 마주치는 제도로, 국가계약법 검사(검수)와 별개로 조달청 품질관리·전문기관검사·거래정지가 어떻게 작동하는지 구분해 보여주는 사후관리 축이다.",
  "asOfDate": "2026-07-12",
  "status": "full",
@@ -503,10 +503,10 @@
   "warnings": []
  },
  "verification": {
-  "status": "needs-review",
-  "verifiedAt": "2026-07-12",
-  "method": "공개 웹 검색(WebSearch) 교차 대조 — 국가법령정보센터 원문 기계 대조(LAW_OC) 미실시",
-  "scope": "조달사업법 제18·19·20·22조와 시행령 제23조는 law-cache 목차(제명)로 조문 번호·제명을 확정하고 각 항 내용은 WebSearch로 교차 확인했다. 국가계약법 제14조와 시행령 제55·56조의2는 검사·전문기관·검사면제 근거로 검색 교차했다. 조달청 고시·특수조건 3종(전문기관검사 업무규정, 품질관리 특수조건, 품질보증조달물품 지정관리규정)은 국가법령정보센터 행정규칙에 존재하나 이번 세션에서 원문 식별자를 연결하지 못해 unresolved로 남겼다. 조문 항별 문언과 등급·기간·거래정지 가중 수치는 원문 기계 대조가 필요하다.",
+  "status": "article-verified",
+  "verifiedAt": "2026-07-13",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 7건 중 공식 원문 7건을 연결했다. 캔버스와 절차 노드의 명시 조문 23건 가운데 23건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
    "조달사업법 제18~20조·제22조 및 시행령 제23조의 각 항 원문 문언은 law-cache가 목차만 담고 있어 항 번호까지 확정하지 못했다. LAW_OC 기계 대조 시 항·호 문언을 재확인해야 한다.",
    "품질보증조달물품 등급별 점수·유효기간, 안전관리물자 거래정지 가중(1.5~2배) 수치는 2차 출처 기반이라 본문에 확정 기재하지 않고 fieldVerification로 이관했다."
@@ -555,40 +555,47 @@
     "promulgatedOn": "2026-05-19",
     "effectiveOn": "2026-06-03",
     "officialUrl": "https://law.go.kr/법령/국가를당사자로하는계약에관한법률시행령"
-   }
-  ],
-  "unresolved": [
+   },
    {
     "law": "조달물자 전문기관검사 업무규정",
     "kind": "고시·지침",
-    "reasonCode": "title-needs-confirmation",
-    "reason": "국가법령정보센터 행정규칙에 존재하나 이번 세션에서 국가법령정보센터 접근 불가로 원문 식별자를 연결하지 못했다.",
-    "nextStep": "LAW_OC 기계 대조로 공식 제명·식별자(adminRuleId·adminRuleSerial)를 확정한다."
+    "sourceType": "admin-rule",
+    "officialName": "조달물자 전문기관검사 업무규정",
+    "adminRuleId": "32876",
+    "adminRuleSerial": "2100000247640",
+    "promulgatedOn": "2024-09-30",
+    "officialUrl": "https://law.go.kr/행정규칙/조달물자전문기관검사업무규정"
    },
    {
     "law": "물품구매계약 품질관리 특수조건",
     "kind": "고시·지침",
-    "reasonCode": "title-needs-confirmation",
-    "reason": "조달청 계약예규·특수조건으로 국가법령정보센터에 게시되나 이번 세션에서 원문 식별자를 연결하지 못했다.",
-    "nextStep": "LAW_OC 기계 대조로 공식 제명·식별자를 확정하고 거래정지 조항을 원문 대조한다."
+    "sourceType": "admin-rule",
+    "officialName": "물품구매계약 품질관리 특수조건",
+    "adminRuleId": "37629",
+    "adminRuleSerial": "2100000275978",
+    "promulgatedOn": "2026-03-16",
+    "officialUrl": "https://law.go.kr/행정규칙/물품구매계약품질관리특수조건"
    },
    {
     "law": "품질보증조달물품 지정 및 관리규정",
     "kind": "고시·지침",
-    "reasonCode": "title-needs-confirmation",
-    "reason": "조달청 행정규칙으로 국가법령정보센터에 게시되나 이번 세션에서 원문 식별자를 연결하지 못했다.",
-    "nextStep": "LAW_OC 기계 대조로 공식 제명·식별자를 확정하고 등급·유효기간 수치를 원문 대조한다."
+    "sourceType": "admin-rule",
+    "officialName": "품질보증조달물품 지정 및 관리규정",
+    "adminRuleId": "39644",
+    "adminRuleSerial": "2100000280332",
+    "promulgatedOn": "2026-06-01",
+    "officialUrl": "https://law.go.kr/행정규칙/품질보증조달물품지정및관리규정"
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-12",
-   "method": "law-cache 목차(제명) 대조 + 공개 웹 검색 교차 확인. 조문 항별 문언과 조달청 고시 3종은 LAW_OC 기계 대조 미실시.",
-   "citationEntries": 7,
-   "explicitCitationEntries": 4,
-   "articleReferences": 8,
-   "verifiedReferences": 6,
+   "checkedAt": "2026-07-13",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 24,
+   "explicitCitationEntries": 19,
+   "articleReferences": 23,
+   "verifiedReferences": 23,
    "missingReferences": 0,
-   "uncheckableReferences": 2
+   "uncheckableReferences": 0
   }
  }
 }

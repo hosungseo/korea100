@@ -3,7 +3,7 @@
  "name": "계약서 작성과 계약 체결",
  "oneLiner": "낙찰·계약상대자 결정 이후 계약서에 목적·금액·이행기간을 기재하고 담당공무원과 계약상대자가 기명·날인 또는 서명함으로써 계약을 확정하는, 모든 국가계약의 성립 단계",
  "type": "계약·이행",
- "priority": 90,
+ "priority": 26,
  "whyFirst": "국가계약은 의사합치만으로 성립하지 않고 계약서 작성·서명으로 확정되는 요식계약이어서, 조달업체와 계약담당공무원 모두가 반드시 거치는 계약 성립의 관문이다.",
  "asOfDate": "2026-07-12",
  "status": "full",
@@ -35,6 +35,11 @@
     "law": "전자조달의 이용 및 촉진에 관한 법률",
     "articles": "제9조(전자계약서의 작성 및 계약의 성립)",
     "kind": "법률"
+   },
+   {
+    "law": "(계약예규) 공사입찰유의서",
+    "articles": "제19조(계약의 체결)",
+    "kind": "행정규칙"
    }
   ],
   "authorities": [
@@ -504,10 +509,10 @@
   "warnings": []
  },
  "verification": {
-  "status": "needs-review",
+  "status": "article-verified",
   "verifiedAt": "2026-07-13",
   "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
-  "scope": "법적 근거 5건 중 공식 원문 5건을 연결했다. 캔버스와 절차 노드의 명시 조문 30건 가운데 28건의 조문 번호 존재를 확인했고, 0건은 불일치, 2건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "scope": "법적 근거 6건 중 공식 원문 6건을 연결했다. 캔버스와 절차 노드의 명시 조문 31건 가운데 31건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
    "국가계약법 본법·시행령·시행규칙 캐시 파일은 조문 목차만 담고 본문이 없어 조문 번호는 목차로, 본문·수치는 WebSearch로 확인했다.",
    "2026년 정부조직 개편에 따라 현행 원문 부처 표기는 재정경제부장관이며 본문에서는 기획재정부장관(재정경제부장관)으로 병기했다."
@@ -566,17 +571,27 @@
     "promulgatedOn": "2025-10-01",
     "effectiveOn": "2026-01-02",
     "officialUrl": "https://law.go.kr/법령/전자조달의이용및촉진에관한법률"
+   },
+   {
+    "law": "(계약예규) 공사입찰유의서",
+    "kind": "행정규칙",
+    "sourceType": "admin-rule",
+    "officialName": "(계약예규) 공사입찰유의서",
+    "adminRuleId": "27940",
+    "adminRuleSerial": "2100000271122",
+    "promulgatedOn": "2025-12-31",
+    "officialUrl": "https://law.go.kr/행정규칙/(계약예규)공사입찰유의서"
    }
   ],
   "articleVerification": {
    "checkedAt": "2026-07-13",
    "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
-   "citationEntries": 24,
-   "explicitCitationEntries": 24,
-   "articleReferences": 30,
-   "verifiedReferences": 28,
+   "citationEntries": 25,
+   "explicitCitationEntries": 25,
+   "articleReferences": 31,
+   "verifiedReferences": 31,
    "missingReferences": 0,
-   "uncheckableReferences": 2
+   "uncheckableReferences": 0
   }
  }
 }

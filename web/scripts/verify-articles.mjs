@@ -124,6 +124,26 @@ async function runCli(args) {
   }
 }
 
+async function fetchAdminRuleFullText(serial) {
+  const oc = process.env.LAW_OC?.trim();
+  if (!oc || !serial) return null;
+  try {
+    const params = new URLSearchParams({ OC: oc, target: "admrul", type: "JSON", ID: String(serial) });
+    const response = await fetch(`https://www.law.go.kr/DRF/lawService.do?${params.toString()}`);
+    if (!response.ok) return null;
+    const data = await response.json();
+    const lines = [];
+    (function collect(node) {
+      if (typeof node === "string") lines.push(node);
+      else if (Array.isArray(node)) node.forEach(collect);
+      else if (node && typeof node === "object") Object.values(node).forEach(collect);
+    })(data);
+    return lines.length ? lines.join("\n") : null;
+  } catch {
+    return null;
+  }
+}
+
 function lookupFailed(result) {
   return (
     !result.ok ||
@@ -163,6 +183,12 @@ async function verifyGroup(group) {
 
   if (sourceType === "admin-rule") {
     const result = await runCli(["get_admin_rule", "--id", group.source.adminRuleSerial]);
+    // 대형 행정규칙은 CLI가 본문을 50,000자에서 잘라 반환해 뒷부분 조문이 missing으로 오판된다.
+    // 잘린 표식이 보이면 Open API 전문 조회로 폴백한다.
+    if (result.ok && /응답이 너무 길어/.test(result.output)) {
+      const full = await fetchAdminRuleFullText(group.source.adminRuleSerial);
+      if (full) result.output = full;
+    }
     const found = parseArticleHeaders(result.output);
     for (const article of requested) {
       statuses.set(
