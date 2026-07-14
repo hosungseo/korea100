@@ -1,0 +1,723 @@
+{
+ "slug": "drug-clinical-trial-plan-approval",
+ "name": "의약품 임상시험계획 승인·변경·안전보고",
+ "oneLiner": "개발전략·비임상자료와 임상시험계획 작성부터 식약처 승인·보완, IRB·실시기관 준비, 변경승인·보고, 안전성 보고와 완료보고까지 이어지는 절차",
+ "type": "규제승인·IRB·안전보고형",
+ "priority": 358,
+ "category": "연구개발·행정",
+ "whyFirst": "식약처 임상시험계획 승인과 기관 IRB 승인은 별도이며, 변경사항도 승인·보고·즉시조치 경로가 서로 다르다.",
+ "asOfDate": "2026-07-15",
+ "status": "full",
+ "canvas": {
+  "purpose": "시험대상자의 권리·안전을 보호하면서 의약품 임상시험의 과학적·의학적 타당성과 품질관리 계획을 사전에 승인·감독한다.",
+  "stakeholders": "의뢰자·개발사, 식품의약품안전처, 임상시험실시기관·시험책임자, IRB·중앙IRB, 시험대상자·안전관리",
+  "legalBasis": [
+   {
+    "law": "약사법",
+    "articles": "제34조",
+    "kind": "법률"
+   },
+   {
+    "law": "의약품 등의 안전에 관한 규칙",
+    "articles": "제24조·제30조·제38조의5·제84조",
+    "kind": "총리령"
+   },
+   {
+    "law": "의약품 임상시험 계획 승인에 관한 규정",
+    "articles": "제3조부터 제10조까지·제16조·제16조의2",
+    "kind": "고시·지침"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "식품의약품안전처",
+    "role": "임상시험계획·변경 승인과 안전성 감독"
+   },
+   {
+    "name": "IRB",
+    "role": "기관별 윤리·안전·동의 지속심의"
+   },
+   {
+    "name": "의뢰자·시험책임자",
+    "role": "시험품질·모니터링·안전보고·완료보고"
+   }
+  ],
+  "procedure": [
+   "개발전략·시험단계 결정",
+   "품질·비임상 근거 준비",
+   "임상시험계획서 작성",
+   "임상시험계획 승인신청",
+   "형식·기술 심사",
+   "보완자료 제출",
+   "실태조사·현장확인",
+   "승인·불승인 결정",
+   "실시기관·시험자 선정",
+   "IRB 심의·승인",
+   "개시·동의·대상자 등록",
+   "시험수행·모니터링",
+   "변경 승인·보고 판정",
+   "이상사례·안전성 신속보고",
+   "완료·조기종료 보고",
+   "결과정리·기록보존"
+  ],
+  "moneyFlow": "의뢰자가 시험약·검사·보상·보험·모니터링 비용을 부담하고 대상자 지급은 승인된 계획·동의서 범위에서 처리한다.",
+  "docsFlow": "개발계획·비임상/품질자료 → IND 신청·계획서 → 보완·승인서 → IRB 승인·계약 → 동의·등록 → 변경승인/보고 → 안전성 보고 → 완료보고·결과보고서·기록보존으로 이어진다.",
+  "bottlenecks": [
+   "품질·비임상·임상자료 버전 불일치",
+   "식약처 승인과 IRB 승인 선후관계",
+   "변경승인·변경보고 구분",
+   "중대한 이상반응의 다중 보고기한"
+  ],
+  "reformPoints": [
+   "IND·IRB 문서 공통항목 재사용",
+   "변경내용별 승인·보고 자동분류",
+   "안전성 신호 단일 사건번호",
+   "기관별 완료보고와 최종결과 자동대조"
+  ]
+ },
+ "related": [
+  "인간대상·인체유래물연구 IRB 심의",
+  "의약품 허가·건강보험 등재·약가결정",
+  "첨단재생의료 임상연구 심의·승인·안전관리"
+ ],
+ "fieldVerification": [
+  "품목·단계별 제출자료 면제범위",
+  "식약처 보완질의 대응",
+  "실시기관 계약·보험·대상자 보상",
+  "안전성 보고 전산시스템과 기한"
+ ],
+ "process": {
+  "institution_name": "의약품 임상시험계획 승인·변경·안전보고",
+  "law_name": "약사법·의약품 등의 안전에 관한 규칙·의약품 임상시험 계획 승인에 관한 규정",
+  "lanes": [
+   "의뢰자·개발사",
+   "식품의약품안전처",
+   "임상시험실시기관·시험책임자",
+   "IRB·중앙IRB",
+   "시험대상자·안전관리"
+  ],
+  "stages": [
+   "G0 개발준비",
+   "G1 계획신청",
+   "G2 심사·승인",
+   "G3 기관개시",
+   "G4 변경·안전",
+   "G5 종료·보존"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "개발전략·시험단계 결정",
+    "lane": "의뢰자·개발사",
+    "stage": "G0 개발준비",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "의뢰자·개발사",
+    "action": "개발목표·대상질환·시험단계와 국내외 개발계획을 정한다.",
+    "input_documents": [],
+    "output_documents": [],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "약사법",
+      "article": "제34조",
+      "text": "약사법 제34조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "품질·비임상 근거 준비",
+    "lane": "의뢰자·개발사",
+    "stage": "G0 개발준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "의뢰자·개발사",
+    "action": "시험약 품질, 약리·독성, 선행 임상자료와 위험관리 근거를 준비한다.",
+    "input_documents": [],
+    "output_documents": [
+     "품질자료",
+     "비임상·선행임상 자료"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "의약품 임상시험 계획 승인에 관한 규정",
+      "article": "제4조부터 제7조까지",
+      "text": "의약품 임상시험 계획 승인에 관한 규정 제4조부터 제7조까지에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "임상시험계획서 작성",
+    "lane": "의뢰자·개발사",
+    "stage": "G1 계획신청",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "의뢰자·개발사",
+    "action": "목적·설계·대상·평가변수·통계·안전관리와 시험약 관리를 작성한다.",
+    "input_documents": [],
+    "output_documents": [
+     "임상시험계획서",
+     "시험자자료집"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "의약품 등의 안전에 관한 규칙",
+      "article": "제24조",
+      "text": "의약품 등의 안전에 관한 규칙 제24조에 따른 절차"
+     },
+     {
+      "law": "의약품 임상시험 계획 승인에 관한 규정",
+      "article": "제3조",
+      "text": "의약품 임상시험 계획 승인에 관한 규정 제3조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "임상시험계획 승인신청",
+    "lane": "식품의약품안전처",
+    "stage": "G1 계획신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "식품의약품안전처",
+    "action": "계획서와 품질·비임상·임상자료를 제출하고 수수료를 납부한다.",
+    "input_documents": [],
+    "output_documents": [
+     "임상시험계획 승인신청"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "약사법",
+      "article": "제34조",
+      "text": "약사법 제34조에 따른 절차"
+     },
+     {
+      "law": "의약품 등의 안전에 관한 규칙",
+      "article": "제24조",
+      "text": "의약품 등의 안전에 관한 규칙 제24조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "형식·기술 심사",
+    "lane": "식품의약품안전처",
+    "stage": "G2 심사·승인",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "식품의약품안전처",
+    "action": "자료 완결성, 시험약 품질과 대상자 위험·과학적 타당성을 심사한다.",
+    "input_documents": [],
+    "output_documents": [
+     "심사질의"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "의약품 임상시험 계획 승인에 관한 규정",
+      "article": "제8조부터 제10조까지",
+      "text": "의약품 임상시험 계획 승인에 관한 규정 제8조부터 제10조까지에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "보완자료 제출",
+    "lane": "의뢰자·개발사",
+    "stage": "G2 심사·승인",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "의뢰자·개발사",
+    "action": "심사질의에 설명·수정계획·추가시험자료를 제출한다.",
+    "input_documents": [],
+    "output_documents": [
+     "보완답변서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "의약품 임상시험 계획 승인에 관한 규정",
+      "article": "제16조",
+      "text": "의약품 임상시험 계획 승인에 관한 규정 제16조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "실태조사·현장확인",
+    "lane": "식품의약품안전처",
+    "stage": "G2 심사·승인",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "식품의약품안전처",
+    "action": "필요하면 제출자료의 신뢰성과 제조·비임상·임상 관리체계를 확인한다.",
+    "input_documents": [],
+    "output_documents": [
+     "실태조사 결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "의약품 임상시험 계획 승인에 관한 규정",
+      "article": "제16조의2",
+      "text": "의약품 임상시험 계획 승인에 관한 규정 제16조의2에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "승인·불승인 결정",
+    "lane": "식품의약품안전처",
+    "stage": "G2 심사·승인",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "식품의약품안전처",
+    "action": "심사·보완결과에 따라 승인조건과 시험범위를 확정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "임상시험계획 승인서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "의약품 등의 안전에 관한 규칙",
+      "article": "제24조",
+      "text": "의약품 등의 안전에 관한 규칙 제24조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "실시기관·시험자 선정",
+    "lane": "의뢰자·개발사",
+    "stage": "G3 기관개시",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "의뢰자·개발사",
+    "action": "시설·인력·경험과 대상자 보호역량을 확인해 기관·시험자를 선정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "기관선정 기록",
+     "임상시험 계약"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "의약품 등의 안전에 관한 규칙",
+      "article": "제30조",
+      "text": "의약품 등의 안전에 관한 규칙 제30조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "IRB 심의·승인",
+    "lane": "IRB·중앙IRB",
+    "stage": "G3 기관개시",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "IRB·중앙IRB",
+    "action": "계획서·동의서·보상·모집·이해상충을 심의한다.",
+    "input_documents": [],
+    "output_documents": [
+     "IRB 승인서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "의약품 등의 안전에 관한 규칙",
+      "article": "제30조·제38조의5",
+      "text": "의약품 등의 안전에 관한 규칙 제30조·제38조의5에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "개시·동의·대상자 등록",
+    "lane": "시험대상자·안전관리",
+    "stage": "G3 기관개시",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시험대상자·안전관리",
+    "action": "승인문서로 동의를 받고 선정·제외기준에 따라 대상자를 등록한다.",
+    "input_documents": [],
+    "output_documents": [
+     "동의서",
+     "대상자 등록기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "의약품 등의 안전에 관한 규칙",
+      "article": "제30조",
+      "text": "의약품 등의 안전에 관한 규칙 제30조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "시험수행·모니터링",
+    "lane": "임상시험실시기관·시험책임자",
+    "stage": "G4 변경·안전",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임상시험실시기관·시험책임자",
+    "action": "계획서·임상시험관리기준에 따라 투약·관찰·자료기록과 모니터링을 수행한다.",
+    "input_documents": [],
+    "output_documents": [
+     "증례기록서",
+     "모니터링 보고서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "의약품 등의 안전에 관한 규칙",
+      "article": "제30조",
+      "text": "의약품 등의 안전에 관한 규칙 제30조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "변경 승인·보고 판정",
+    "lane": "식품의약품안전처",
+    "stage": "G4 변경·안전",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "식품의약품안전처",
+    "action": "변경의 중요도와 대상자 위험에 따라 사전승인·보고·기록 경로를 정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "변경 승인·보고 결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "의약품 등의 안전에 관한 규칙",
+      "article": "제24조",
+      "text": "의약품 등의 안전에 관한 규칙 제24조에 따른 절차"
+     },
+     {
+      "law": "의약품 임상시험 계획 승인에 관한 규정",
+      "article": "제3조",
+      "text": "의약품 임상시험 계획 승인에 관한 규정 제3조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "이상사례·안전성 신속보고",
+    "lane": "시험대상자·안전관리",
+    "stage": "G4 변경·안전",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시험대상자·안전관리",
+    "action": "중대하고 예상하지 못한 이상반응 등 안전성 정보를 평가해 식약처·IRB·시험자에게 보고한다.",
+    "input_documents": [],
+    "output_documents": [
+     "안전성 신속보고"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "의약품 등의 안전에 관한 규칙",
+      "article": "제30조·제84조",
+      "text": "의약품 등의 안전에 관한 규칙 제30조·제84조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "완료·조기종료 보고",
+    "lane": "임상시험실시기관·시험책임자",
+    "stage": "G5 종료·보존",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "임상시험실시기관·시험책임자",
+    "action": "임상시험 완료 또는 조기종료 사실과 사유·대상자 안전조치를 의뢰자와 IRB 등에 보고한다.",
+    "input_documents": [],
+    "output_documents": [
+     "임상시험 완료·조기종료 보고"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "의약품 등의 안전에 관한 규칙",
+      "article": "제30조",
+      "text": "의약품 등의 안전에 관한 규칙 제30조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "결과정리·기록보존",
+    "lane": "의뢰자·개발사",
+    "stage": "G5 종료·보존",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "의뢰자·개발사",
+    "action": "데이터를 고정·분석해 결과보고서를 작성하고 필수문서와 시험약 기록을 보존한다.",
+    "input_documents": [],
+    "output_documents": [
+     "임상시험 결과보고서",
+     "필수문서 보존기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "의약품 등의 안전에 관한 규칙",
+      "article": "제30조",
+      "text": "의약품 등의 안전에 관한 규칙 제30조에 따른 절차"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P15",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "L17",
+    "source": "P06",
+    "target": "P05",
+    "type": "loop",
+    "label": "재심사"
+   },
+   {
+    "id": "L18",
+    "source": "P08",
+    "target": "P03",
+    "type": "loop",
+    "label": "불승인 후 재설계"
+   },
+   {
+    "id": "L19",
+    "source": "P13",
+    "target": "P10",
+    "type": "loop",
+    "label": "중요변경 IRB 심의"
+   }
+  ],
+  "warnings": [
+   "법령·행정규칙의 공통 절차를 구조화했다. 기관 자체규정, 최신 공고·서식과 소관기관 전산시스템 입력 항목은 별도로 확인해야 한다.",
+   "이 구조도는 일반 의약품 임상시험의 공통 절차다. 의료기기·첨단바이오의약품·연구자임상 등은 적용자료와 추가 절차가 달라질 수 있다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-15",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 3건 중 공식 원문 3건을 연결했다. 캔버스와 절차 노드의 명시 조문 32건 가운데 32건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "notes": [
+   "기준일 현재 현행 법률·시행령·시행규칙·행정규칙 원문 대조",
+   "기관 자체규정·심사사례·전산화면은 현장 검증 대상으로 유지"
+  ],
+  "sources": [
+   {
+    "law": "약사법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "약사법",
+    "lawId": "001783",
+    "mst": "279725",
+    "promulgatedOn": "2025-11-11",
+    "effectiveOn": "2026-06-21",
+    "officialUrl": "https://law.go.kr/법령/약사법"
+   },
+   {
+    "law": "의약품 등의 안전에 관한 규칙",
+    "kind": "총리령",
+    "sourceType": "statute",
+    "officialName": "의약품 등의 안전에 관한 규칙",
+    "lawId": "011794",
+    "mst": "284019",
+    "promulgatedOn": "2026-03-05",
+    "effectiveOn": "2026-03-05",
+    "officialUrl": "https://law.go.kr/법령/의약품등의안전에관한규칙"
+   },
+   {
+    "law": "의약품 임상시험 계획 승인에 관한 규정",
+    "kind": "고시·지침",
+    "sourceType": "admin-rule",
+    "officialName": "의약품 임상시험 계획 승인에 관한 규정",
+    "adminRuleId": "24314",
+    "adminRuleSerial": "2100000263204",
+    "promulgatedOn": "2025-08-22",
+    "officialUrl": "https://law.go.kr/행정규칙/의약품임상시험계획승인에관한규정",
+    "issueNo": "식품의약품안전처고시 제2025-53호"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-15",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 22,
+   "explicitCitationEntries": 22,
+   "articleReferences": 32,
+   "verifiedReferences": 32,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

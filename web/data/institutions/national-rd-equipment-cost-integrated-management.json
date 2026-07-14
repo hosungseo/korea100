@@ -1,0 +1,770 @@
+{
+ "slug": "national-rd-equipment-cost-integrated-management",
+ "name": "국가연구개발 연구시설·장비비 통합관리",
+ "oneLiner": "통합관리기관 지정과 계정 설정부터 적립·지출·점검·개선·지정취소·잔액반납까지 관리하는 절차",
+ "type": "지정·계정·적립·점검형",
+ "priority": 343,
+ "category": "연구개발·행정",
+ "whyFirst": "과제별 장비비와 통합관리계정의 경계, 90일 이체, 적립한도, 허용 지출과 지정취소 후 반납이 한 제도 안에서 연결된다.",
+ "asOfDate": "2026-07-15",
+ "status": "full",
+ "canvas": {
+  "purpose": "과제 종료 뒤에도 연구시설장비 유지·보수 재원을 사용할 수 있도록 장비비를 기관·시설·책임자 계정에서 통합관리한다.",
+  "stakeholders": "과학기술정보통신부·전담기관, 연구개발기관, 계정책임자, 연구지원·회계시스템, 자체장비심의·점검담당",
+  "legalBasis": [
+   {
+    "law": "국가연구개발혁신법",
+    "articles": "제13조·제25조",
+    "kind": "법률"
+   },
+   {
+    "law": "국가연구개발혁신법 시행령",
+    "articles": "제20조·제52조",
+    "kind": "대통령령"
+   },
+   {
+    "law": "국가연구개발사업 연구개발비 사용 기준",
+    "articles": "제100조부터 제115조까지",
+    "kind": "고시·지침"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "과학기술정보통신부",
+    "role": "통합관리기관 지정·점검·개선·취소"
+   },
+   {
+    "name": "연구개발기관",
+    "role": "계정·내부규정·시스템·적립·지출·잔액 관리"
+   },
+   {
+    "name": "계정책임자",
+    "role": "계정 설정 요청과 장비 운영수요 관리"
+   },
+   {
+    "name": "자체장비심의·점검담당",
+    "role": "지출 적정성과 운영현황 자체점검"
+   }
+  ],
+  "procedure": [
+   "지정요건 자체점검",
+   "지정신청서·증빙 제출",
+   "서류평가·지정통보",
+   "통합관리계정 단위 설정",
+   "내부 운영규정 마련",
+   "적립액·계정별 한도 결정",
+   "적립한도 증액 신청·승인",
+   "통합관리계정 이체",
+   "지출대상 장비 적격성 확인",
+   "유지·보수·임차·이전비 지출",
+   "이자·다른 사업수입 추가관리",
+   "연 1회 이상 자체점검",
+   "자료검토·현장점검",
+   "개선요구·개선계획 제출",
+   "보완·이행 재점검",
+   "소명 후 지정취소 결정",
+   "잔액 이관·반납"
+  ],
+  "moneyFlow": "연차별 수정직접비의 10퍼센트 이내에서 적립한 장비비를 계정에 이체하고 ZEUS 등록 장비의 유지·보수, 기존 임차 연장, 이전·설치에 지출한다.",
+  "docsFlow": "지정신청서·시스템 증빙 → 지정통보 → 계정·내부규정 → 적립한도·협약금액 → 이체·지출증빙 → 자체점검·현장점검 → 개선계획·이행결과 → 취소·잔액반납으로 이어진다.",
+  "bottlenecks": [
+   "기관·공동활용시설·연구책임자 계정 선택",
+   "적립한도와 연차별 수정직접비 10퍼센트 기준",
+   "90일 이체와 연차 종료일 중 먼저 오는 기한",
+   "허용 지출과 다른 장비비 지출의 구분"
+  ],
+  "reformPoints": [
+   "협약금액과 통합계정 적립액 자동 대조",
+   "ZEUS 장비번호 기반 지출 적격성 확인",
+   "계정별 한도·잔액·이체기한 경보",
+   "개선요구부터 지정취소·반납까지 사건번호 연결"
+  ]
+ },
+ "related": [
+  "국가연구시설장비 도입심의·등록·공동활용·처분",
+  "국가연구개발비 지급·사용·정산",
+  "국가연구개발 연구지원체계평가"
+ ],
+ "fieldVerification": [
+  "기관별 내부 운영규정과 계정 개설 화면",
+  "적립한도 증액 심사 실무",
+  "장비 유지보수비 증빙 기준",
+  "지정취소 후 과제별 잔액배분 방식"
+ ],
+ "process": {
+  "institution_name": "국가연구개발 연구시설·장비비 통합관리",
+  "law_name": "국가연구개발혁신법·국가연구개발혁신법 시행령·국가연구개발사업 연구개발비 사용 기준",
+  "lanes": [
+   "과학기술정보통신부·전담기관",
+   "연구개발기관",
+   "계정책임자",
+   "연구지원·회계시스템",
+   "자체장비심의·점검담당"
+  ],
+  "stages": [
+   "G0 지정",
+   "G1 계정·규정",
+   "G2 적립",
+   "G3 지출",
+   "G4 점검·개선",
+   "G5 취소·이관"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "지정요건 자체점검",
+    "lane": "연구개발기관",
+    "stage": "G0 지정",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "연구개발기관",
+    "action": "자체장비심의위원회, 전산·연구지원시스템, 연구윤리규정과 최근 제재 여부를 점검한다.",
+    "input_documents": [],
+    "output_documents": [
+     "지정요건 점검표"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제100조제1항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제100조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "지정신청서·증빙 제출",
+    "lane": "연구개발기관",
+    "stage": "G0 지정",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "연구개발기관",
+    "action": "지정신청서와 위원회 운영실적, 시스템 연계, 연구윤리규정 자료를 제출한다.",
+    "input_documents": [],
+    "output_documents": [
+     "지정신청서",
+     "시스템·규정 증빙"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제100조제2항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제100조제2항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "서류평가·지정통보",
+    "lane": "과학기술정보통신부·전담기관",
+    "stage": "G0 지정",
+    "type": "gateway",
+    "status": "current",
+    "progress": 55,
+    "actor": "과학기술정보통신부·전담기관",
+    "action": "신청자료를 평가해 통합관리기관 지정 여부를 결정하고 통보한다.",
+    "input_documents": [
+     "지정신청 자료"
+    ],
+    "output_documents": [
+     "지정·보완 통보"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제100조제3항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제100조제3항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "통합관리계정 단위 설정",
+    "lane": "계정책임자",
+    "stage": "G1 계정·규정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "계정책임자",
+    "action": "기관·공동활용시설·연구책임자 단위 중 적합한 계정을 요청하고 기관이 적립 적절성을 검토한다.",
+    "input_documents": [],
+    "output_documents": [
+     "통합관리계정"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제101조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제101조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "내부 운영규정 마련",
+    "lane": "연구개발기관",
+    "stage": "G1 계정·규정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발기관",
+    "action": "수입·지출·잔액, 시스템, 자체심의, 이자와 다른 수입의 관리규정을 마련한다.",
+    "input_documents": [],
+    "output_documents": [
+     "장비비 통합관리 내부규정"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제102조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제102조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "적립액·계정별 한도 결정",
+    "lane": "연구개발기관",
+    "stage": "G2 적립",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발기관",
+    "action": "계정별 한도와 연차별 수정직접비 10퍼센트 이내 기준으로 협약 시 적립액을 정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "연차별 적립계획"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제103조제1항·제2항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제103조제1항·제2항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "적립한도 증액 신청·승인",
+    "lane": "과학기술정보통신부·전담기관",
+    "stage": "G2 적립",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "과학기술정보통신부·전담기관",
+    "action": "한도 초과 필요 시 최근 3년 적립·사용내역을 제출해 증액 승인을 받는다.",
+    "input_documents": [
+     "적립한도 증액신청서"
+    ],
+    "output_documents": [
+     "증액 승인·불승인"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제103조제3항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제103조제3항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "통합관리계정 이체",
+    "lane": "연구지원·회계시스템",
+    "stage": "G2 적립",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구지원·회계시스템",
+    "action": "지급·변경된 장비비를 통합관리계정으로 이체하고 연차 종료일까지 전액 반영한다.",
+    "input_documents": [],
+    "output_documents": [
+     "계정 이체내역"
+    ],
+    "deadline": "지급·변경일부터 90일 이내 또는 연차 종료일 중 먼저 도래하는 날",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제104조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제104조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "지출대상 장비 적격성 확인",
+    "lane": "자체장비심의·점검담당",
+    "stage": "G3 지출",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "자체장비심의·점검담당",
+    "action": "ZEUS 등록과 국가R&D 구축·활용 여부, 지출 용도를 확인한다.",
+    "input_documents": [
+     "ZEUS 장비정보",
+     "지출요청"
+    ],
+    "output_documents": [
+     "지출 적격성 검토"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제105조제1항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제105조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "유지·보수·임차·이전비 지출",
+    "lane": "연구지원·회계시스템",
+    "stage": "G3 지출",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구지원·회계시스템",
+    "action": "허용 용도로 지출하고 생산된 증명자료를 보존한다.",
+    "input_documents": [],
+    "output_documents": [
+     "지출내역",
+     "사용 증명자료"
+    ],
+    "deadline": "증명자료는 다음 연도 1월 1일부터 5년 보존",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제105조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제105조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "이자·다른 사업수입 추가관리",
+    "lane": "연구개발기관",
+    "stage": "G3 지출",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발기관",
+    "action": "계정 이자와 기관지원금·이용료를 내부규정에 따라 추가 적립·관리한다.",
+    "input_documents": [],
+    "output_documents": [
+     "이자·추가수입 적립내역"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제109조·제110조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제109조·제110조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "연 1회 이상 자체점검",
+    "lane": "자체장비심의·점검담당",
+    "stage": "G4 점검·개선",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "자체장비심의·점검담당",
+    "action": "용도 외 지출, 적립차이, 한도초과와 비대상비 통합관리 여부를 점검·보고한다.",
+    "input_documents": [],
+    "output_documents": [
+     "자체점검표",
+     "위반사항 보고"
+    ],
+    "deadline": "연 1회 이상",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제106조제1항·제2항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제106조제1항·제2항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "자료검토·현장점검",
+    "lane": "과학기술정보통신부·전담기관",
+    "stage": "G4 점검·개선",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "과학기술정보통신부·전담기관",
+    "action": "계정 수입·지출과 소명자료를 검토하고 필요하면 추가자료·현장점검을 실시한다.",
+    "input_documents": [],
+    "output_documents": [
+     "점검결과"
+    ],
+    "deadline": "현장점검은 원칙적으로 7일 전 문서 통지",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제106조제3항부터 제6항까지",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제106조제3항부터 제6항까지에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "개선요구·개선계획 제출",
+    "lane": "연구개발기관",
+    "stage": "G4 점검·개선",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발기관",
+    "action": "개선요구를 받으면 계획을 제출하고 정해진 기간 안에 이행결과를 보고한다.",
+    "input_documents": [],
+    "output_documents": [
+     "개선계획",
+     "이행결과"
+    ],
+    "deadline": "계획 45일 이내, 이행결과 6개월 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제107조제1항·제2항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제107조제1항·제2항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "보완·이행 재점검",
+    "lane": "과학기술정보통신부·전담기관",
+    "stage": "G4 점검·개선",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "과학기술정보통신부·전담기관",
+    "action": "개선계획과 이행결과를 검토해 보완 또는 지정유지·취소 절차를 결정한다.",
+    "input_documents": [
+     "개선계획",
+     "이행결과"
+    ],
+    "output_documents": [
+     "보완·유지·취소 검토"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제107조제3항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제107조제3항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "소명 후 지정취소 결정",
+    "lane": "과학기술정보통신부·전담기관",
+    "stage": "G5 취소·이관",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "과학기술정보통신부·전담기관",
+    "action": "부적절한 개선이나 반복 위반에 대해 기관 소명을 거쳐 지정취소 여부를 결정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "지정유지 또는 취소통보"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제107조제3항·제4항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제107조제3항·제4항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P17",
+    "name": "잔액 이관·반납",
+    "lane": "연구개발기관",
+    "stage": "G5 취소·이관",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발기관",
+    "action": "지정취소, 책임자 이동, 시설폐쇄, 과제중단 사유에 따라 잔액을 이관하거나 중앙행정기관에 반납한다.",
+    "input_documents": [],
+    "output_documents": [
+     "잔액 산정·이관·반납내역"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제107조제4항·제108조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제107조제4항·제108조에 따른 절차"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L03",
+    "source": "P03",
+    "target": "P02",
+    "type": "loop",
+    "label": "보완"
+   },
+   {
+    "id": "E04",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": "지정"
+   },
+   {
+    "id": "E05",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": "증액 필요"
+   },
+   {
+    "id": "E08",
+    "source": "P06",
+    "target": "P08",
+    "type": "sequence",
+    "label": "한도 내"
+   },
+   {
+    "id": "E09",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": "승인"
+   },
+   {
+    "id": "E10",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": "적격"
+   },
+   {
+    "id": "L12",
+    "source": "P09",
+    "target": "P08",
+    "type": "loop",
+    "label": "지출보완"
+   },
+   {
+    "id": "E13",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": "개선필요"
+   },
+   {
+    "id": "L17",
+    "source": "P13",
+    "target": "P12",
+    "type": "loop",
+    "label": "정상"
+   },
+   {
+    "id": "E18",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L19",
+    "source": "P15",
+    "target": "P14",
+    "type": "loop",
+    "label": "보완"
+   },
+   {
+    "id": "E20",
+    "source": "P15",
+    "target": "P16",
+    "type": "sequence",
+    "label": "취소검토"
+   },
+   {
+    "id": "L21",
+    "source": "P16",
+    "target": "P12",
+    "type": "loop",
+    "label": "지정유지"
+   },
+   {
+    "id": "E22",
+    "source": "P16",
+    "target": "P17",
+    "type": "sequence",
+    "label": "취소"
+   }
+  ],
+  "warnings": [
+   "법령·행정규칙의 공통 절차를 구조화했다. 기관 자체규정, 연도별 시행계획, 전담기관 업무처리규정과 전산시스템 입력 항목은 별도로 확인해야 한다.",
+   "이 구조도는 과학기술정보통신부가 지정한 비영리 통합관리기관의 특례를 중심으로 한다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-15",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 3건 중 공식 원문 3건을 연결했다. 캔버스와 절차 노드의 명시 조문 25건 가운데 25건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "notes": [
+   "기준일 현재 현행 법률·시행령·시행규칙·행정규칙 원문 대조",
+   "기준일 이후 시행 예정 조문은 경고문에 분리",
+   "전산시스템 화면과 기관 자체규정은 현장 검증 대상으로 유지"
+  ],
+  "sources": [
+   {
+    "law": "국가연구개발혁신법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국가연구개발혁신법",
+    "lawId": "013774",
+    "mst": "283849",
+    "promulgatedOn": "2026-03-10",
+    "effectiveOn": "2026-06-11",
+    "officialUrl": "https://law.go.kr/법령/국가연구개발혁신법"
+   },
+   {
+    "law": "국가연구개발혁신법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "국가연구개발혁신법 시행령",
+    "lawId": "013933",
+    "mst": "285767",
+    "promulgatedOn": "2026-05-06",
+    "effectiveOn": "2026-06-11",
+    "officialUrl": "https://law.go.kr/법령/국가연구개발혁신법시행령"
+   },
+   {
+    "law": "국가연구개발사업 연구개발비 사용 기준",
+    "kind": "고시·지침",
+    "sourceType": "admin-rule",
+    "officialName": "국가연구개발사업 연구개발비 사용 기준",
+    "adminRuleId": "75386",
+    "adminRuleSerial": "2100000278740",
+    "promulgatedOn": "2026-05-06",
+    "officialUrl": "https://law.go.kr/행정규칙/국가연구개발사업연구개발비사용기준",
+    "issueNo": "과학기술정보통신부고시 제2026-38호"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-15",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 20,
+   "explicitCitationEntries": 20,
+   "articleReferences": 25,
+   "verifiedReferences": 25,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

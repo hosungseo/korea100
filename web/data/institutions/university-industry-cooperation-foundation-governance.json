@@ -1,0 +1,757 @@
+{
+ "slug": "university-industry-cooperation-foundation-governance",
+ "name": "대학 산학협력단 설립·등기·연구비회계·결산",
+ "oneLiner": "학칙 정비와 정관작성, 법인 설립등기부터 산학협력계약·회계분리·예산·집행·결산·감사·공개까지 이어지는 운영 절차",
+ "type": "법인설립·계약·회계·결산형",
+ "priority": 354,
+ "category": "연구개발·행정",
+ "whyFirst": "대학 본부와 산학협력단의 법인·계약·회계 책임이 다르고, 연구비 계정도 학교회계와 분리해 예산·결산·감사를 거쳐야 한다.",
+ "asOfDate": "2026-07-15",
+ "status": "full",
+ "canvas": {
+  "purpose": "대학의 산학연협력과 국가R&D 계약·재산·회계를 별도 법인인 산학협력단이 투명하게 수행하도록 한다.",
+  "stakeholders": "대학의 장·학교법인, 산학협력단장·이사회, 산학협력단 연구지원부서, 연구책임자·사업부서, 감사·대학정보공시",
+  "legalBasis": [
+   {
+    "law": "산업교육진흥 및 산학연협력촉진에 관한 법률",
+    "articles": "제25조부터 제33조까지",
+    "kind": "법률"
+   },
+   {
+    "law": "산업교육진흥 및 산학연협력촉진에 관한 법률 시행령",
+    "articles": "제19조·제24조·제28조부터 제30조까지",
+    "kind": "대통령령"
+   },
+   {
+    "law": "산업교육진흥 및 산학연협력촉진에 관한 법률 시행규칙",
+    "articles": "제2조",
+    "kind": "부령"
+   },
+   {
+    "law": "산학협력단회계처리규칙",
+    "articles": "제4조부터 제40조까지",
+    "kind": "고시·지침"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "대학의 장",
+    "role": "산학협력단 설립·단장 임면·예산결산 확정"
+   },
+   {
+    "name": "산학협력단장",
+    "role": "법인 대표·계약·재산·회계와 조직 운영"
+   },
+   {
+    "name": "연구지원부서",
+    "role": "과제계정·수입지출·증빙·결산 실무"
+   }
+  ],
+  "procedure": [
+   "설립방침·업무범위 결정",
+   "학칙·정관 마련",
+   "단장·조직 구성",
+   "설립등기",
+   "직인·세무·계좌 체계 개설",
+   "산학협력계약 검토·체결",
+   "과제·사업별 계정 설정",
+   "회계 분리·내부통제 설계",
+   "연간 예산안 편성",
+   "심의·대학의 장 확정",
+   "연구비 수입·배정",
+   "지출검토·집행·증빙",
+   "자산·채권·채무 관리",
+   "회계 마감·결산서 작성",
+   "감사·오류수정",
+   "결산 확정·공개·보존"
+  ],
+  "moneyFlow": "산학협력 수입과 연구비는 산학협력단 회계에 편입해 목적별 계정으로 집행하고 잔액·간접비·자산을 결산한다.",
+  "docsFlow": "학칙·정관 → 설립등기 → 법인등기부·직인 → 산학협력계약 → 계정·예산서 → 집행증빙·자산대장 → 결산서·감사보고 → 공시자료로 이어진다.",
+  "bottlenecks": [
+   "대학 본부와 산학협력단 권한경계",
+   "과제별 제한과 법인 회계기준 동시 준수",
+   "예산변경·간접비·자산 귀속",
+   "결산 마감과 과제 정산 일정 불일치"
+  ],
+  "reformPoints": [
+   "계약·과제·회계 계정 단일 식별자",
+   "협약조건 기반 지출 사전검증",
+   "학교회계·산단회계 거래 자동대사",
+   "결산·공시 수치 자동연계"
+  ]
+ },
+ "related": [
+  "국가연구개발비 지급·사용·정산",
+  "국가연구개발 간접비고시비율 산출",
+  "산학연협력기술지주회사 설립인가·자회사 관리"
+ ],
+ "fieldVerification": [
+  "대학별 학칙·정관·위임전결",
+  "과제관리·회계시스템 계정구조",
+  "예산변경·전용 승인기준",
+  "외부감사와 대학정보공시 항목"
+ ],
+ "process": {
+  "institution_name": "대학 산학협력단 설립·등기·연구비회계·결산",
+  "law_name": "산업교육진흥 및 산학연협력촉진에 관한 법률·산업교육진흥 및 산학연협력촉진에 관한 법률 시행령·산업교육진흥 및 산학연협력촉진에 관한 법률 시행규칙·산학협력단회계처리규칙",
+  "lanes": [
+   "대학의 장·학교법인",
+   "산학협력단장·이사회",
+   "산학협력단 연구지원부서",
+   "연구책임자·사업부서",
+   "감사·대학정보공시"
+  ],
+  "stages": [
+   "G0 설립준비",
+   "G1 법인등기",
+   "G2 계약·계정",
+   "G3 예산",
+   "G4 집행",
+   "G5 결산·공개"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "설립방침·업무범위 결정",
+    "lane": "대학의 장·학교법인",
+    "stage": "G0 설립준비",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "대학의 장·학교법인",
+    "action": "산학협력단 설치와 담당 산학연협력 업무 범위를 정한다.",
+    "input_documents": [],
+    "output_documents": [],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "산업교육진흥 및 산학연협력촉진에 관한 법률",
+      "article": "제25조",
+      "text": "산업교육진흥 및 산학연협력촉진에 관한 법률 제25조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "학칙·정관 마련",
+    "lane": "대학의 장·학교법인",
+    "stage": "G0 설립준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "대학의 장·학교법인",
+    "action": "명칭·목적·조직·재산·회계·해산 등 법인 운영기준을 마련한다.",
+    "input_documents": [],
+    "output_documents": [
+     "개정 학칙",
+     "산학협력단 정관"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "산업교육진흥 및 산학연협력촉진에 관한 법률",
+      "article": "제25조·제27조",
+      "text": "산업교육진흥 및 산학연협력촉진에 관한 법률 제25조·제27조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "단장·조직 구성",
+    "lane": "대학의 장·학교법인",
+    "stage": "G0 설립준비",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "대학의 장·학교법인",
+    "action": "대표자인 단장과 연구지원·회계 조직을 구성한다.",
+    "input_documents": [],
+    "output_documents": [
+     "임명장",
+     "조직·위임전결 규정"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "산업교육진흥 및 산학연협력촉진에 관한 법률",
+      "article": "제28조",
+      "text": "산업교육진흥 및 산학연협력촉진에 관한 법률 제28조에 따른 절차"
+     },
+     {
+      "law": "산업교육진흥 및 산학연협력촉진에 관한 법률 시행령",
+      "article": "제20조부터 제23조까지",
+      "text": "산업교육진흥 및 산학연협력촉진에 관한 법률 시행령 제20조부터 제23조까지에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "설립등기",
+    "lane": "산학협력단장·이사회",
+    "stage": "G1 법인등기",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산학협력단장·이사회",
+    "action": "목적·명칭·주사무소·임원 등 법정사항을 등기해 법인을 성립시킨다.",
+    "input_documents": [],
+    "output_documents": [
+     "법인등기부"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "산업교육진흥 및 산학연협력촉진에 관한 법률",
+      "article": "제25조제2항",
+      "text": "산업교육진흥 및 산학연협력촉진에 관한 법률 제25조제2항에 따른 절차"
+     },
+     {
+      "law": "산업교육진흥 및 산학연협력촉진에 관한 법률 시행령",
+      "article": "제19조",
+      "text": "산업교육진흥 및 산학연협력촉진에 관한 법률 시행령 제19조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "직인·세무·계좌 체계 개설",
+    "lane": "산학협력단 연구지원부서",
+    "stage": "G1 법인등기",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산학협력단 연구지원부서",
+    "action": "독립 법인으로 계약·수입·지출을 처리할 기본 관리체계를 만든다.",
+    "input_documents": [],
+    "output_documents": [
+     "법인 직인",
+     "사업자·고유번호",
+     "금융계좌"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "산업교육진흥 및 산학연협력촉진에 관한 법률",
+      "article": "제25조부터 제27조까지",
+      "text": "산업교육진흥 및 산학연협력촉진에 관한 법률 제25조부터 제27조까지에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "산학협력계약 검토·체결",
+    "lane": "산학협력단장·이사회",
+    "stage": "G2 계약·계정",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산학협력단장·이사회",
+    "action": "대학을 대신해 연구·교육·기술이전 등 산학협력계약을 검토하고 체결한다.",
+    "input_documents": [],
+    "output_documents": [
+     "산학협력계약서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "산업교육진흥 및 산학연협력촉진에 관한 법률",
+      "article": "제26조·제27조",
+      "text": "산업교육진흥 및 산학연협력촉진에 관한 법률 제26조·제27조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "과제·사업별 계정 설정",
+    "lane": "산학협력단 연구지원부서",
+    "stage": "G2 계약·계정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산학협력단 연구지원부서",
+    "action": "협약·재원·목적에 따라 수입·지출 계정과 책임자를 설정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "과제·사업 계정"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "산업교육진흥 및 산학연협력촉진에 관한 법률 시행령",
+      "article": "제24조",
+      "text": "산업교육진흥 및 산학연협력촉진에 관한 법률 시행령 제24조에 따른 절차"
+     },
+     {
+      "law": "산학협력단회계처리규칙",
+      "article": "제15조부터 제20조까지",
+      "text": "산학협력단회계처리규칙 제15조부터 제20조까지에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "회계 분리·내부통제 설계",
+    "lane": "산학협력단장·이사회",
+    "stage": "G2 계약·계정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산학협력단장·이사회",
+    "action": "학교회계와 구분하고 예산·수입·지출·자산 통제기준을 정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "산학협력단 회계규정"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "산업교육진흥 및 산학연협력촉진에 관한 법률",
+      "article": "제30조부터 제32조까지",
+      "text": "산업교육진흥 및 산학연협력촉진에 관한 법률 제30조부터 제32조까지에 따른 절차"
+     },
+     {
+      "law": "산학협력단회계처리규칙",
+      "article": "제4조부터 제14조까지",
+      "text": "산학협력단회계처리규칙 제4조부터 제14조까지에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "연간 예산안 편성",
+    "lane": "산학협력단 연구지원부서",
+    "stage": "G3 예산",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산학협력단 연구지원부서",
+    "action": "사업계획과 재원별 수입·지출을 반영해 예산안을 편성한다.",
+    "input_documents": [],
+    "output_documents": [
+     "산학협력단 예산안"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "산업교육진흥 및 산학연협력촉진에 관한 법률 시행령",
+      "article": "제28조",
+      "text": "산업교육진흥 및 산학연협력촉진에 관한 법률 시행령 제28조에 따른 절차"
+     },
+     {
+      "law": "산학협력단회계처리규칙",
+      "article": "제4조부터 제14조까지",
+      "text": "산학협력단회계처리규칙 제4조부터 제14조까지에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "심의·대학의 장 확정",
+    "lane": "대학의 장·학교법인",
+    "stage": "G3 예산",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "대학의 장·학교법인",
+    "action": "심의기구 검토를 거쳐 회계연도 전 예산을 확정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "확정 예산서"
+    ],
+    "deadline": "회계연도 개시 20일 전 제출, 10일 전 확정",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "산업교육진흥 및 산학연협력촉진에 관한 법률 시행령",
+      "article": "제28조",
+      "text": "산업교육진흥 및 산학연협력촉진에 관한 법률 시행령 제28조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "연구비 수입·배정",
+    "lane": "산학협력단 연구지원부서",
+    "stage": "G4 집행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산학협력단 연구지원부서",
+    "action": "협약금·지원금·수익을 수납하고 과제계정에 배정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "수입결의",
+     "과제별 배정내역"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "산업교육진흥 및 산학연협력촉진에 관한 법률",
+      "article": "제31조",
+      "text": "산업교육진흥 및 산학연협력촉진에 관한 법률 제31조에 따른 절차"
+     },
+     {
+      "law": "산학협력단회계처리규칙",
+      "article": "제15조부터 제24조까지",
+      "text": "산학협력단회계처리규칙 제15조부터 제24조까지에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "지출검토·집행·증빙",
+    "lane": "연구책임자·사업부서",
+    "stage": "G4 집행",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "연구책임자·사업부서",
+    "action": "예산·협약·회계기준에 따라 지출을 신청하고 산학협력단이 검토·집행한다.",
+    "input_documents": [],
+    "output_documents": [
+     "지출결의",
+     "회계증빙"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "산학협력단회계처리규칙",
+      "article": "제25조부터 제35조까지",
+      "text": "산학협력단회계처리규칙 제25조부터 제35조까지에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "자산·채권·채무 관리",
+    "lane": "산학협력단 연구지원부서",
+    "stage": "G4 집행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산학협력단 연구지원부서",
+    "action": "취득자산과 미수·미지급, 잔액과 간접비를 장부에 반영한다.",
+    "input_documents": [],
+    "output_documents": [
+     "자산대장",
+     "채권·채무명세"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "산업교육진흥 및 산학연협력촉진에 관한 법률",
+      "article": "제33조",
+      "text": "산업교육진흥 및 산학연협력촉진에 관한 법률 제33조에 따른 절차"
+     },
+     {
+      "law": "산학협력단회계처리규칙",
+      "article": "제25조부터 제35조까지",
+      "text": "산학협력단회계처리규칙 제25조부터 제35조까지에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "회계 마감·결산서 작성",
+    "lane": "산학협력단 연구지원부서",
+    "stage": "G5 결산·공개",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산학협력단 연구지원부서",
+    "action": "회계연도 수입·지출·재무상태와 부속명세를 마감한다.",
+    "input_documents": [],
+    "output_documents": [
+     "산학협력단 결산서"
+    ],
+    "deadline": "회계연도 종료 후 60일 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "산업교육진흥 및 산학연협력촉진에 관한 법률 시행령",
+      "article": "제29조",
+      "text": "산업교육진흥 및 산학연협력촉진에 관한 법률 시행령 제29조에 따른 절차"
+     },
+     {
+      "law": "산학협력단회계처리규칙",
+      "article": "제36조부터 제40조까지",
+      "text": "산학협력단회계처리규칙 제36조부터 제40조까지에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "감사·오류수정",
+    "lane": "감사·대학정보공시",
+    "stage": "G5 결산·공개",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "감사·대학정보공시",
+    "action": "결산과 회계처리를 감사하고 오류·통제미비를 수정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "감사보고서",
+     "수정 결산서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "산업교육진흥 및 산학연협력촉진에 관한 법률 시행령",
+      "article": "제30조",
+      "text": "산업교육진흥 및 산학연협력촉진에 관한 법률 시행령 제30조에 따른 절차"
+     },
+     {
+      "law": "산학협력단회계처리규칙",
+      "article": "제36조부터 제40조까지",
+      "text": "산학협력단회계처리규칙 제36조부터 제40조까지에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "결산 확정·공개·보존",
+    "lane": "대학의 장·학교법인",
+    "stage": "G5 결산·공개",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "대학의 장·학교법인",
+    "action": "결산을 확정해 공개·비치하고 다음 예산과 내부통제 개선에 반영한다.",
+    "input_documents": [],
+    "output_documents": [
+     "확정·공개 결산자료"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "산업교육진흥 및 산학연협력촉진에 관한 법률 시행령",
+      "article": "제29조·제30조",
+      "text": "산업교육진흥 및 산학연협력촉진에 관한 법률 시행령 제29조·제30조에 따른 절차"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P15",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L16",
+    "source": "P12",
+    "target": "P11",
+    "type": "loop",
+    "label": "부적정 보완"
+   },
+   {
+    "id": "L17",
+    "source": "P15",
+    "target": "P14",
+    "type": "loop",
+    "label": "결산 수정"
+   }
+  ],
+  "warnings": [
+   "법령·행정규칙의 공통 절차를 구조화했다. 기관 자체규정, 최신 공고·서식과 소관기관 전산시스템 입력 항목은 별도로 확인해야 한다.",
+   "산학협력단 회계처리와 개별 국가R&D 과제의 연구개발비 사용기준을 모두 충족해야 하며, 한쪽 기준 충족이 다른 쪽 적정성을 보장하지 않는다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-15",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 4건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 48건 가운데 48건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "notes": [
+   "기준일 현재 현행 법률·시행령·시행규칙·행정규칙 원문 대조",
+   "기관 자체규정·심사사례·전산화면은 현장 검증 대상으로 유지"
+  ],
+  "sources": [
+   {
+    "law": "산업교육진흥 및 산학연협력촉진에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "산업교육진흥 및 산학연협력촉진에 관한 법률",
+    "lawId": "000865",
+    "mst": "267351",
+    "promulgatedOn": "2024-12-20",
+    "effectiveOn": "2025-06-21",
+    "officialUrl": "https://law.go.kr/법령/산업교육진흥및산학연협력촉진에관한법률"
+   },
+   {
+    "law": "산업교육진흥 및 산학연협력촉진에 관한 법률 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "산업교육진흥 및 산학연협력촉진에 관한 법률 시행령",
+    "lawId": "003777",
+    "mst": "284767",
+    "promulgatedOn": "2026-03-24",
+    "effectiveOn": "2026-03-24",
+    "officialUrl": "https://law.go.kr/법령/산업교육진흥및산학연협력촉진에관한법률시행령"
+   },
+   {
+    "law": "산업교육진흥 및 산학연협력촉진에 관한 법률 시행규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "산업교육진흥 및 산학연협력촉진에 관한 법률 시행규칙",
+    "lawId": "007354",
+    "mst": "285257",
+    "promulgatedOn": "2026-03-27",
+    "effectiveOn": "2026-03-27",
+    "officialUrl": "https://law.go.kr/법령/산업교육진흥및산학연협력촉진에관한법률시행규칙"
+   },
+   {
+    "law": "산학협력단회계처리규칙",
+    "kind": "고시·지침",
+    "sourceType": "admin-rule",
+    "officialName": "산학협력단회계처리규칙",
+    "adminRuleId": "36176",
+    "adminRuleSerial": "2100000262312",
+    "promulgatedOn": "2025-07-22",
+    "officialUrl": "https://law.go.kr/행정규칙/산학협력단회계처리규칙",
+    "issueNo": "교육부고시 제2025-21호"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-15",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 29,
+   "explicitCitationEntries": 29,
+   "articleReferences": 48,
+   "verifiedReferences": 48,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

@@ -1,0 +1,633 @@
+{
+ "slug": "national-rd-demand-survey-preplanning",
+ "name": "국가R&D 기술수요조사·사전기획·추진계획 예고",
+ "oneLiner": "정책·기술수요 수집부터 후보과제 분석, 사전기획과 보안성 검토, 연도별 사업 추진계획 예고까지 이어지는 공모 이전 절차",
+ "type": "수요조사·사전기획·계획예고형",
+ "priority": 351,
+ "category": "연구개발·행정",
+ "whyFirst": "연구자는 수요조사를 곧 공모로 오해하기 쉽지만, 수요 반영 여부와 사전기획·예산·사업 확정은 별도 단계다.",
+ "asOfDate": "2026-07-15",
+ "status": "full",
+ "canvas": {
+  "purpose": "국가R&D 신규사업과 과제의 필요성·목표·추진방식을 공모 전에 검토하고 연도별 추진계획으로 공개한다.",
+  "stakeholders": "중앙행정기관, 전문기관·기획위원회, 산학연 전문가·수요자, 보안성 검토주체, 통합정보시스템",
+  "legalBasis": [
+   {
+    "law": "국가연구개발혁신법",
+    "articles": "제9조",
+    "kind": "법률"
+   },
+   {
+    "law": "국가연구개발혁신법 시행령",
+    "articles": "제6조부터 제8조까지",
+    "kind": "대통령령"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "중앙행정기관",
+    "role": "수요조사·사전기획 및 연도별 추진계획 확정"
+   },
+   {
+    "name": "전문기관·기획위원회",
+    "role": "수요 분류·중복성·타당성·사업설계 지원"
+   },
+   {
+    "name": "보안성 검토주체",
+    "role": "보안과제 해당 가능성 검토"
+   }
+  ],
+  "procedure": [
+   "정책·투자방향 설정",
+   "정기 기술수요조사 설계",
+   "기술수요 제안·접수",
+   "긴급·보안 분야 예외 판정",
+   "수요 분류·중복성 검토",
+   "후보기술·과제군 도출",
+   "사전기획 실시 여부 결정",
+   "사업목표·추진체계 설계",
+   "타당성·중복성 재검토",
+   "보안과제 가능성 검토",
+   "예산·일정·공모방식 조정",
+   "연도별 추진계획 확정",
+   "통합정보시스템 예고",
+   "후속 공모절차 이관"
+  ],
+  "moneyFlow": "수요조사는 지원금 확정이 아니며, 선정된 후보만 예산편성·사업확정과 후속 공모 절차로 이동한다.",
+  "docsFlow": "정책방향 → 기술수요서 → 분류·중복검토표 → 후보과제 → 사전기획보고서·보안성 검토 → 연도별 추진계획 → 통합정보시스템 예고로 이어진다.",
+  "bottlenecks": [
+   "수요제안과 공모·선정의 혼동",
+   "유사사업·기존과제 중복성",
+   "기획 중 목표·성과지표 변경",
+   "계획예고와 실제 공고 간 일정·예산 변동"
+  ],
+  "reformPoints": [
+   "수요별 반영·보류·미반영 사유 공개",
+   "기존 과제·성과와 자동 중복검색",
+   "기획안 변경이력 관리",
+   "예고계획에서 실제 공고까지 식별자 연계"
+  ]
+ },
+ "related": [
+  "국가연구개발사업 공모·과제선정",
+  "국가연구개발사업 예비타당성조사",
+  "대형 국가R&D 사업계획검토"
+ ],
+ "fieldVerification": [
+  "부처별 수요조사 서식과 평가항목",
+  "기획위원 선정·제척 절차",
+  "예산당국 협의와 계획변경 이력",
+  "예고 후 공고 미실시 사유"
+ ],
+ "process": {
+  "institution_name": "국가R&D 기술수요조사·사전기획·추진계획 예고",
+  "law_name": "국가연구개발혁신법·국가연구개발혁신법 시행령",
+  "lanes": [
+   "중앙행정기관",
+   "전문기관·기획위원회",
+   "산학연 전문가·수요자",
+   "보안성 검토주체",
+   "통합정보시스템"
+  ],
+  "stages": [
+   "G0 정책방향",
+   "G1 수요조사",
+   "G2 후보분석",
+   "G3 사전기획",
+   "G4 계획확정",
+   "G5 예고·공모이관"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "정책·투자방향 설정",
+    "lane": "중앙행정기관",
+    "stage": "G0 정책방향",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "중앙행정기관",
+    "action": "국가계획과 소관분야 정책을 반영해 다음 연도 R&D 추진방향을 정한다.",
+    "input_documents": [],
+    "output_documents": [],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제9조제1항",
+      "text": "국가연구개발혁신법 제9조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "정기 기술수요조사 설계",
+    "lane": "전문기관·기획위원회",
+    "stage": "G1 수요조사",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "전문기관·기획위원회",
+    "action": "조사대상·분야·제출항목과 일정을 설계한다.",
+    "input_documents": [],
+    "output_documents": [
+     "기술수요조사 계획"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제9조제2항",
+      "text": "국가연구개발혁신법 제9조제2항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제7조",
+      "text": "국가연구개발혁신법 시행령 제7조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "기술수요 제안·접수",
+    "lane": "산학연 전문가·수요자",
+    "stage": "G1 수요조사",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "산학연 전문가·수요자",
+    "action": "산학연과 국민이 기술·사회문제 수요를 작성해 제출한다.",
+    "input_documents": [],
+    "output_documents": [
+     "기술수요서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제7조",
+      "text": "국가연구개발혁신법 시행령 제7조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "긴급·보안 분야 예외 판정",
+    "lane": "중앙행정기관",
+    "stage": "G1 수요조사",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "보안·재난·전략분야 등 정기 수요조사를 거치기 곤란한 예외를 판정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "예외사유서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제9조제2항",
+      "text": "국가연구개발혁신법 제9조제2항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "수요 분류·중복성 검토",
+    "lane": "전문기관·기획위원회",
+    "stage": "G2 후보분석",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "전문기관·기획위원회",
+    "action": "정책부합성, 기존 사업·과제와의 중복, 파급효과를 비교한다.",
+    "input_documents": [],
+    "output_documents": [
+     "수요 분류·중복검토표"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제7조",
+      "text": "국가연구개발혁신법 시행령 제7조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "후보기술·과제군 도출",
+    "lane": "전문기관·기획위원회",
+    "stage": "G2 후보분석",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "전문기관·기획위원회",
+    "action": "유사 수요를 통합하고 사전기획 대상을 정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "기획 후보목록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제9조제3항",
+      "text": "국가연구개발혁신법 제9조제3항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "사전기획 실시 여부 결정",
+    "lane": "중앙행정기관",
+    "stage": "G3 사전기획",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "사업규모·성격과 정책필요성을 고려해 사전기획 범위를 결정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "사전기획 착수결정"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제9조제3항",
+      "text": "국가연구개발혁신법 제9조제3항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제8조",
+      "text": "국가연구개발혁신법 시행령 제8조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "사업목표·추진체계 설계",
+    "lane": "전문기관·기획위원회",
+    "stage": "G3 사전기획",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "전문기관·기획위원회",
+    "action": "목표, 연구내용, 추진체계, 기간·규모와 성과활용 방안을 설계한다.",
+    "input_documents": [],
+    "output_documents": [
+     "사전기획보고서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제8조",
+      "text": "국가연구개발혁신법 시행령 제8조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "타당성·중복성 재검토",
+    "lane": "중앙행정기관",
+    "stage": "G3 사전기획",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "정책·기술·경제적 필요성과 기존 사업 차별성을 검토한다.",
+    "input_documents": [],
+    "output_documents": [
+     "기획 검토결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제8조",
+      "text": "국가연구개발혁신법 시행령 제8조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "보안과제 가능성 검토",
+    "lane": "보안성 검토주체",
+    "stage": "G3 사전기획",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보안성 검토주체",
+    "action": "국가안보·핵심기술 관련 정보의 보호 필요성과 후속 보안관리 수준을 검토한다.",
+    "input_documents": [],
+    "output_documents": [
+     "보안성 검토의견"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제8조",
+      "text": "국가연구개발혁신법 시행령 제8조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "예산·일정·공모방식 조정",
+    "lane": "중앙행정기관",
+    "stage": "G4 계획확정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "재정여건과 기획결과를 반영해 사업별 예산·일정·선정방식을 조정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "사업 추진계획안"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제9조제1항",
+      "text": "국가연구개발혁신법 제9조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "연도별 추진계획 확정",
+    "lane": "중앙행정기관",
+    "stage": "G4 계획확정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "신규·계속사업의 추진계획과 주요 일정을 확정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "연도별 국가R&D 추진계획"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제9조제1항",
+      "text": "국가연구개발혁신법 제9조제1항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제6조",
+      "text": "국가연구개발혁신법 시행령 제6조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "통합정보시스템 예고",
+    "lane": "통합정보시스템",
+    "stage": "G5 예고·공모이관",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "통합정보시스템",
+    "action": "참여자가 준비할 수 있도록 사업명·목적·일정 등 추진계획을 공개한다.",
+    "input_documents": [],
+    "output_documents": [
+     "추진계획 예고"
+    ],
+    "deadline": "원칙적으로 매년 1월 31일까지",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제6조",
+      "text": "국가연구개발혁신법 시행령 제6조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "후속 공모절차 이관",
+    "lane": "전문기관·기획위원회",
+    "stage": "G5 예고·공모이관",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "전문기관·기획위원회",
+    "action": "확정된 사업을 실제 공고·신청·선정 절차로 넘긴다.",
+    "input_documents": [],
+    "output_documents": [
+     "공모 기획자료"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제9조",
+      "text": "국가연구개발혁신법 제9조에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제6조",
+      "text": "국가연구개발혁신법 시행령 제6조에 따른 절차"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P04",
+    "target": "P06",
+    "type": "sequence",
+    "label": "예외 적용"
+   },
+   {
+    "id": "L15",
+    "source": "P05",
+    "target": "P03",
+    "type": "loop",
+    "label": "추가 수요"
+   },
+   {
+    "id": "L16",
+    "source": "P09",
+    "target": "P08",
+    "type": "loop",
+    "label": "기획 보완"
+   }
+  ],
+  "warnings": [
+   "법령·행정규칙의 공통 절차를 구조화했다. 기관 자체규정, 최신 공고·서식과 소관기관 전산시스템 입력 항목은 별도로 확인해야 한다.",
+   "기술수요 제출은 과제 신청이나 지원 확약이 아니다. 실제 참여는 후속 사업 공고와 선정절차를 따라야 한다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-15",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 2건 중 공식 원문 2건을 연결했다. 캔버스와 절차 노드의 명시 조문 21건 가운데 21건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "notes": [
+   "기준일 현재 현행 법률·시행령·시행규칙·행정규칙 원문 대조",
+   "기관 자체규정·심사사례·전산화면은 현장 검증 대상으로 유지"
+  ],
+  "sources": [
+   {
+    "law": "국가연구개발혁신법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국가연구개발혁신법",
+    "lawId": "013774",
+    "mst": "283849",
+    "promulgatedOn": "2026-03-10",
+    "effectiveOn": "2026-06-11",
+    "officialUrl": "https://law.go.kr/법령/국가연구개발혁신법"
+   },
+   {
+    "law": "국가연구개발혁신법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "국가연구개발혁신법 시행령",
+    "lawId": "013933",
+    "mst": "285767",
+    "promulgatedOn": "2026-05-06",
+    "effectiveOn": "2026-06-11",
+    "officialUrl": "https://law.go.kr/법령/국가연구개발혁신법시행령"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-15",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 20,
+   "explicitCitationEntries": 20,
+   "articleReferences": 21,
+   "verifiedReferences": 21,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

@@ -1,0 +1,779 @@
+{
+ "slug": "advanced-regenerative-clinical-research",
+ "name": "첨단재생의료 임상연구 심의·승인·안전관리",
+ "oneLiner": "실시기관 지정과 연구계획 수립부터 심의위원회 심의, 고위험 연구 식약처 승인, 대상자 동의·연구수행·모니터링·이상반응·장기추적까지 이어지는 절차",
+ "type": "기관지정·전문심의·고위험승인·추적형",
+ "priority": 359,
+ "category": "연구개발·행정",
+ "whyFirst": "실시기관 지정, 첨단재생의료 심의위원회 심의, 고위험 연구의 식약처 승인과 안전관리기관 모니터링이 연속된다.",
+ "asOfDate": "2026-07-15",
+ "status": "full",
+ "canvas": {
+  "purpose": "첨단재생의료 임상연구의 혁신 가능성을 보장하면서 연구대상자의 생명·건강과 장기 안전성을 국가가 심의·관리한다.",
+  "stakeholders": "첨단재생의료실시기관·연구자, 첨단재생의료 심의위원회, 식품의약품안전처, 안전관리기관, 연구대상자·세포처리시설",
+  "legalBasis": [
+   {
+    "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률",
+    "articles": "제10조부터 제12조까지·제19조부터 제21조까지·제39조·제41조·제42조",
+    "kind": "법률"
+   },
+   {
+    "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 시행령",
+    "articles": "제11조부터 제13조까지·제23조부터 제25조까지",
+    "kind": "대통령령"
+   },
+   {
+    "law": "첨단재생의료 안전 및 지원에 관한 규칙",
+    "articles": "제3조·제5조·제8조·제9조·제14조부터 제18조까지",
+    "kind": "부령"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "심의위원회",
+    "role": "연구계획의 과학성·윤리성·안전성 심의"
+   },
+   {
+    "name": "식품의약품안전처",
+    "role": "고위험 연구 추가 승인과 안전조치"
+   },
+   {
+    "name": "안전관리기관",
+    "role": "임상연구 정보수집·모니터링·이상반응 조사"
+   }
+  ],
+  "procedure": [
+   "실시기관 지정·범위 확인",
+   "세포처리시설·공급체계 확인",
+   "위험도 분류",
+   "연구계획·안전관리 설계",
+   "심의위원회 제출",
+   "서류검토·보완",
+   "과학성·윤리성·안전성 심의",
+   "적합·부적합 의결",
+   "고위험 연구 승인신청",
+   "고위험 안전성·품질 심사",
+   "연구개시 요건 최종확인",
+   "대상자 설명·동의·등록",
+   "세포처리·투여·기록",
+   "모니터링·변경관리",
+   "이상반응 보고·조사·안전조치",
+   "연구종료·결과보고",
+   "장기추적조사·기록보존"
+  ],
+  "moneyFlow": "실시기관은 임상연구 자체를 이유로 연구대상자에게 비용을 부담시킬 수 없으며 보험·보상과 장기추적 비용을 연구계획에 반영한다.",
+  "docsFlow": "기관지정·시설계약 → 연구계획·위험분류·동의서 → 심의결정 → 고위험 승인 → 대상자 등록·세포처리 기록 → 모니터링·이상반응 보고 → 종료·장기추적 기록으로 이어진다.",
+  "bottlenecks": [
+   "위험도 분류와 심의·승인 경로",
+   "세포처리시설과 실시기관 책임경계",
+   "대상자 비용부담 금지·보상계획",
+   "이상반응과 장기추적 자료의 기관 간 연계"
+  ],
+  "reformPoints": [
+   "위험도별 제출자료 자동안내",
+   "심의위원회·식약처 보완자료 공동사용",
+   "세포처리물 배치와 대상자 추적 식별자 연계",
+   "장기추적 이탈·안전신호 자동경보"
+  ]
+ },
+ "related": [
+  "인간대상·인체유래물연구 IRB 심의",
+  "의약품 임상시험계획 승인·변경·안전보고",
+  "의약품 허가·건강보험 등재·약가결정"
+ ],
+ "fieldVerification": [
+  "실시기관 지정범위와 시설계약",
+  "위험도별 최신 제출자료",
+  "보험·보상 기준",
+  "안전관리기관 장기추적 시스템"
+ ],
+ "process": {
+  "institution_name": "첨단재생의료 임상연구 심의·승인·안전관리",
+  "law_name": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률·첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 시행령·첨단재생의료 안전 및 지원에 관한 규칙",
+  "lanes": [
+   "첨단재생의료실시기관·연구자",
+   "첨단재생의료 심의위원회",
+   "식품의약품안전처",
+   "안전관리기관",
+   "연구대상자·세포처리시설"
+  ],
+  "stages": [
+   "G0 기관·연구준비",
+   "G1 계획제출",
+   "G2 전문심의",
+   "G3 고위험승인",
+   "G4 수행·모니터링",
+   "G5 종료·장기추적"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "실시기관 지정·범위 확인",
+    "lane": "첨단재생의료실시기관·연구자",
+    "stage": "G0 기관·연구준비",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "첨단재생의료실시기관·연구자",
+    "action": "지정된 실시기관의 시설·인력과 수행 가능한 연구범위를 확인한다.",
+    "input_documents": [],
+    "output_documents": [],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률",
+      "article": "제10조",
+      "text": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 제10조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "세포처리시설·공급체계 확인",
+    "lane": "연구대상자·세포처리시설",
+    "stage": "G0 기관·연구준비",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "연구대상자·세포처리시설",
+    "action": "적법한 세포처리시설과 인체세포등 공급·검사·추적 체계를 확보한다.",
+    "input_documents": [],
+    "output_documents": [],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률",
+      "article": "제15조부터 제18조까지",
+      "text": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 제15조부터 제18조까지에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "위험도 분류",
+    "lane": "첨단재생의료실시기관·연구자",
+    "stage": "G0 기관·연구준비",
+    "type": "gateway",
+    "status": "current",
+    "progress": 55,
+    "actor": "첨단재생의료실시기관·연구자",
+    "action": "세포종류·조작·투여방법과 위해 가능성으로 고·중·저위험을 분류한다.",
+    "input_documents": [],
+    "output_documents": [
+     "위험도 분류근거"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률",
+      "article": "제2조·제12조",
+      "text": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 제2조·제12조에 따른 절차"
+     },
+     {
+      "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 시행령",
+      "article": "제4조부터 제6조까지",
+      "text": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 시행령 제4조부터 제6조까지에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "연구계획·안전관리 설계",
+    "lane": "첨단재생의료실시기관·연구자",
+    "stage": "G1 계획제출",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "첨단재생의료실시기관·연구자",
+    "action": "목적·대상·세포처리·투여·평가·중단·보상·추적 계획을 작성한다.",
+    "input_documents": [],
+    "output_documents": [
+     "첨단재생의료 연구계획",
+     "설명문·동의서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률",
+      "article": "제11조·제12조",
+      "text": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 제11조·제12조에 따른 절차"
+     },
+     {
+      "law": "첨단재생의료 안전 및 지원에 관한 규칙",
+      "article": "제3조·제5조",
+      "text": "첨단재생의료 안전 및 지원에 관한 규칙 제3조·제5조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "심의위원회 제출",
+    "lane": "첨단재생의료 심의위원회",
+    "stage": "G1 계획제출",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "첨단재생의료 심의위원회",
+    "action": "연구계획과 위험도·제조·비임상·임상 근거를 접수한다.",
+    "input_documents": [],
+    "output_documents": [
+     "임상연구 심의신청"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 시행령",
+      "article": "제11조",
+      "text": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 시행령 제11조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "서류검토·보완",
+    "lane": "첨단재생의료 심의위원회",
+    "stage": "G2 전문심의",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "첨단재생의료 심의위원회",
+    "action": "제출자료 완결성과 위험통제 가능성을 확인해 보완을 요구한다.",
+    "input_documents": [],
+    "output_documents": [
+     "보완요구서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 시행령",
+      "article": "제11조·제12조",
+      "text": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 시행령 제11조·제12조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "과학성·윤리성·안전성 심의",
+    "lane": "첨단재생의료 심의위원회",
+    "stage": "G2 전문심의",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "첨단재생의료 심의위원회",
+    "action": "대체수단, 근거수준, 대상자 선정·동의·보상과 위험관리의 적정성을 심의한다.",
+    "input_documents": [],
+    "output_documents": [
+     "전문심의 의견"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률",
+      "article": "제12조",
+      "text": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 제12조에 따른 절차"
+     },
+     {
+      "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 시행령",
+      "article": "제12조",
+      "text": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 시행령 제12조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "적합·부적합 의결",
+    "lane": "첨단재생의료 심의위원회",
+    "stage": "G2 전문심의",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "첨단재생의료 심의위원회",
+    "action": "조건·보완사항과 위험도를 포함해 연구계획 적합 여부를 의결한다.",
+    "input_documents": [],
+    "output_documents": [
+     "심의위원회 의결서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률",
+      "article": "제12조",
+      "text": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 제12조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "고위험 연구 승인신청",
+    "lane": "식품의약품안전처",
+    "stage": "G3 고위험승인",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "식품의약품안전처",
+    "action": "고위험 연구는 적합 의결자료와 연구계획을 추가 제출한다.",
+    "input_documents": [],
+    "output_documents": [
+     "고위험 임상연구 승인신청"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률",
+      "article": "제12조제3항",
+      "text": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 제12조제3항에 따른 절차"
+     },
+     {
+      "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 시행령",
+      "article": "제13조",
+      "text": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 시행령 제13조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "고위험 안전성·품질 심사",
+    "lane": "식품의약품안전처",
+    "stage": "G3 고위험승인",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "식품의약품안전처",
+    "action": "인체세포등 품질과 임상위험·중단·추적 계획을 심사한다.",
+    "input_documents": [],
+    "output_documents": [
+     "고위험 연구 심사결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률",
+      "article": "제12조제3항",
+      "text": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 제12조제3항에 따른 절차"
+     },
+     {
+      "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 시행령",
+      "article": "제13조",
+      "text": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 시행령 제13조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "연구개시 요건 최종확인",
+    "lane": "첨단재생의료실시기관·연구자",
+    "stage": "G3 고위험승인",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "첨단재생의료실시기관·연구자",
+    "action": "적합 의결, 고위험 승인, 보험·계약·교육·세포공급 준비를 최종 확인한다.",
+    "input_documents": [],
+    "output_documents": [
+     "연구개시 확인서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률",
+      "article": "제10조부터 제12조까지",
+      "text": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 제10조부터 제12조까지에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "대상자 설명·동의·등록",
+    "lane": "연구대상자·세포처리시설",
+    "stage": "G4 수행·모니터링",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구대상자·세포처리시설",
+    "action": "위험·대안·보상·장기추적을 설명하고 서면동의 후 대상자를 등록한다.",
+    "input_documents": [],
+    "output_documents": [
+     "동의서",
+     "대상자 등록기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률",
+      "article": "제11조",
+      "text": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 제11조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "세포처리·투여·기록",
+    "lane": "첨단재생의료실시기관·연구자",
+    "stage": "G4 수행·모니터링",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "첨단재생의료실시기관·연구자",
+    "action": "승인계획대로 인체세포등을 인수·투여하고 배치·대상자·처치 기록을 연결한다.",
+    "input_documents": [],
+    "output_documents": [
+     "세포처리·투여 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률",
+      "article": "제10조·제20조",
+      "text": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 제10조·제20조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "모니터링·변경관리",
+    "lane": "안전관리기관",
+    "stage": "G4 수행·모니터링",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "안전관리기관",
+    "action": "수행현황과 안전자료를 수집하고 중요한 변경을 사전심의·승인 경로로 돌린다.",
+    "input_documents": [],
+    "output_documents": [
+     "모니터링 결과",
+     "변경관리 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률",
+      "article": "제19조·제20조",
+      "text": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 제19조·제20조에 따른 절차"
+     },
+     {
+      "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 시행령",
+      "article": "제23조·제24조",
+      "text": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 시행령 제23조·제24조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "이상반응 보고·조사·안전조치",
+    "lane": "안전관리기관",
+    "stage": "G4 수행·모니터링",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "안전관리기관",
+    "action": "중대한 이상반응을 신속 보고·조사하고 투여중지·추적강화 등 조치를 시행한다.",
+    "input_documents": [],
+    "output_documents": [
+     "이상반응 보고",
+     "안전조치 결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률",
+      "article": "제20조·제39조",
+      "text": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 제20조·제39조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "연구종료·결과보고",
+    "lane": "첨단재생의료실시기관·연구자",
+    "stage": "G5 종료·장기추적",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "첨단재생의료실시기관·연구자",
+    "action": "대상자 상태와 연구결과·중도중단·안전성 자료를 정리해 보고한다.",
+    "input_documents": [],
+    "output_documents": [
+     "임상연구 종료·결과보고"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률",
+      "article": "제10조·제20조",
+      "text": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 제10조·제20조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P17",
+    "name": "장기추적조사·기록보존",
+    "lane": "안전관리기관",
+    "stage": "G5 종료·장기추적",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "안전관리기관",
+    "action": "장기 위해 가능성이 있는 대상자의 건강상태를 추적하고 자료를 보존·평가한다.",
+    "input_documents": [],
+    "output_documents": [
+     "장기추적조사 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률",
+      "article": "제21조",
+      "text": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 제21조에 따른 절차"
+     },
+     {
+      "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 시행령",
+      "article": "제25조",
+      "text": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 시행령 제25조에 따른 절차"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P15",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P16",
+    "target": "P17",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L17",
+    "source": "P06",
+    "target": "P04",
+    "type": "loop",
+    "label": "자료보완"
+   },
+   {
+    "id": "L18",
+    "source": "P08",
+    "target": "P04",
+    "type": "loop",
+    "label": "부적합 재설계"
+   },
+   {
+    "id": "E19",
+    "source": "P08",
+    "target": "P11",
+    "type": "sequence",
+    "label": "중·저위험 적합"
+   },
+   {
+    "id": "L20",
+    "source": "P10",
+    "target": "P04",
+    "type": "loop",
+    "label": "불승인 보완"
+   },
+   {
+    "id": "L21",
+    "source": "P15",
+    "target": "P14",
+    "type": "loop",
+    "label": "안전성 변경"
+   }
+  ],
+  "warnings": [
+   "법령·행정규칙의 공통 절차를 구조화했다. 기관 자체규정, 최신 공고·서식과 소관기관 전산시스템 입력 항목은 별도로 확인해야 한다.",
+   "고위험 임상연구는 심의위원회 적합 의결만으로 시작할 수 없고 식품의약품안전처장의 추가 승인을 받아야 한다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-15",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 3건 중 공식 원문 3건을 연결했다. 캔버스와 절차 노드의 명시 조문 53건 가운데 53건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "notes": [
+   "기준일 현재 현행 법률·시행령·시행규칙·행정규칙 원문 대조",
+   "기관 자체규정·심사사례·전산화면은 현장 검증 대상으로 유지"
+  ],
+  "sources": [
+   {
+    "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률",
+    "lawId": "013572",
+    "mst": "279763",
+    "promulgatedOn": "2025-11-11",
+    "effectiveOn": "2026-05-12",
+    "officialUrl": "https://law.go.kr/법령/첨단재생의료및첨단바이오의약품안전및지원에관한법률"
+   },
+   {
+    "law": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 시행령",
+    "lawId": "013847",
+    "mst": "285813",
+    "promulgatedOn": "2026-05-06",
+    "effectiveOn": "2026-05-12",
+    "officialUrl": "https://law.go.kr/법령/첨단재생의료및첨단바이오의약품안전및지원에관한법률시행령"
+   },
+   {
+    "law": "첨단재생의료 안전 및 지원에 관한 규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "첨단재생의료 안전 및 지원에 관한 규칙",
+    "lawId": "013848",
+    "mst": "269367",
+    "promulgatedOn": "2025-02-21",
+    "effectiveOn": "2025-02-21",
+    "officialUrl": "https://law.go.kr/법령/첨단재생의료안전및지원에관한규칙"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-15",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 27,
+   "explicitCitationEntries": 27,
+   "articleReferences": 53,
+   "verifiedReferences": 53,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

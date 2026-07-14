@@ -1,0 +1,840 @@
+{
+ "slug": "national-rd-facility-equipment-lifecycle",
+ "name": "국가연구시설장비 도입심의·등록·공동활용·처분",
+ "oneLiner": "장비 수요기획과 중복성 검토부터 도입심의, 검수·자산등재, ZEUS 등록, 공동활용, 유휴·불용 판정과 처분까지 이어지는 전주기",
+ "type": "기획·심의·등록·공동활용·처분형",
+ "priority": 342,
+ "category": "연구개발·행정",
+ "whyFirst": "연구자는 장비 구매만 보지만 실제로는 사전기획, 금액별 심의, 이의신청, 검수, ZEUS 등록과 불용 처분이 서로 다른 담당부서와 기한으로 이어진다.",
+ "asOfDate": "2026-07-15",
+ "status": "full",
+ "canvas": {
+  "purpose": "국가연구개발비로 구축하는 연구시설장비의 중복투자를 줄이고 도입 이후 등록·공동활용·처분까지 전주기를 추적한다.",
+  "stakeholders": "중앙행정기관·전문기관, 연구기관·장비책임관, 장비심의위원회, 구매·검수·자산부서, ZEUS·지원기관, 이용자·양수기관",
+  "legalBasis": [
+   {
+    "law": "과학기술기본법",
+    "articles": "제28조",
+    "kind": "법률"
+   },
+   {
+    "law": "과학기술기본법 시행령",
+    "articles": "제42조",
+    "kind": "대통령령"
+   },
+   {
+    "law": "국가연구개발 시설·장비의 관리 등에 관한 표준지침",
+    "articles": "제5조부터 제43조까지",
+    "kind": "고시·지침"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "과학기술정보통신부·중앙행정기관",
+    "role": "시설장비 계획·활용체계와 심의·점검 기준 총괄"
+   },
+   {
+    "name": "연구기관",
+    "role": "기획·심의요청·구매·검수·등록·활용·처분 실행"
+   },
+   {
+    "name": "장비심의위원회",
+    "role": "도입 타당성·중복성·활용성·비용 적정성 심의"
+   },
+   {
+    "name": "지원기관·ZEUS",
+    "role": "심의지원, 종합정보 등록·예약·실적·처분정보 관리"
+   }
+  ],
+  "procedure": [
+   "시설장비 수요·활용계획 수립",
+   "고가 장비 사전기획",
+   "ZEUS 중복성 검토",
+   "심의대상·심의주체 판정",
+   "심의요청서·증빙 제출",
+   "사전검토·보완",
+   "도입 타당성 심의",
+   "심의결과 통보",
+   "이의신청",
+   "재검토 결과 통보",
+   "계약·장비 구축",
+   "기술검수·검증시험",
+   "자산등재·이력카드 작성",
+   "ZEUS 정보등록",
+   "활용범위 설정·정기 재검토",
+   "예약·이용·활용실적 등록",
+   "유휴·저활용·불용 판정",
+   "양여·해체·매각 공고",
+   "처분·이전 후 정보갱신"
+  ],
+  "moneyFlow": "도입비는 연구개발비와 기관부담 구조를 따르고, 공동활용 이용료와 매각수입은 운영유지 또는 대체장비 도입에 연결된다.",
+  "docsFlow": "수요·사전기획보고서 → 중복성검토확인서·심의요청서·비교견적 → 심의결과·이의신청 → 계약·검수기록·자산대장 → ZEUS 등록증 → 공동활용실적 → 불용심의·처분공고·이전기록으로 이어진다.",
+  "bottlenecks": [
+   "총 구축비용과 재원구성에 따른 심의 경로 구분",
+   "상시·변경심의 시점과 구매요구 시점 충돌",
+   "도입 후 30일 ZEUS 등록과 자산정보 일치",
+   "유휴·불용 장비의 공고·양여·매각 순서"
+  ],
+  "reformPoints": [
+   "예산·협약·구매·자산·ZEUS 식별자 연계",
+   "중복장비 검색결과와 심의자료 자동 결합",
+   "검수완료일부터 등록기한 자동 계산",
+   "활용률 저하 시 재배치·처분 후보 자동 알림"
+  ]
+ },
+ "related": [
+  "국가연구개발비 지급·사용·정산",
+  "국가연구개발 연구시설·장비비 통합관리",
+  "공공조달 절차"
+ ],
+ "fieldVerification": [
+  "기관별 자체장비심의위원회 운영규정",
+  "ZEUS 실제 심의·등록·예약 화면",
+  "장비별 이용료 산식과 기관 내 거래 처리",
+  "공개매각·폐기 시 기관 자산규정"
+ ],
+ "process": {
+  "institution_name": "국가연구시설장비 도입심의·등록·공동활용·처분",
+  "law_name": "과학기술기본법·과학기술기본법 시행령·국가연구개발 시설·장비의 관리 등에 관한 표준지침",
+  "lanes": [
+   "중앙행정기관·전문기관",
+   "연구기관·장비책임관",
+   "장비심의위원회",
+   "구매·검수·자산부서",
+   "ZEUS·지원기관",
+   "이용자·양수기관"
+  ],
+  "stages": [
+   "G0 수요·기획",
+   "G1 도입심의",
+   "G2 구축·검수",
+   "G3 등록",
+   "G4 운영·공동활용",
+   "G5 처분"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "시설장비 수요·활용계획 수립",
+    "lane": "연구기관·장비책임관",
+    "stage": "G0 수요·기획",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "연구기관·장비책임관",
+    "action": "연구목표, 기존 장비, 운영인력과 공동활용 수요를 바탕으로 도입계획을 만든다.",
+    "input_documents": [],
+    "output_documents": [
+     "연구시설장비 도입계획"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발 시설·장비의 관리 등에 관한 표준지침",
+      "article": "제15조",
+      "text": "국가연구개발 시설·장비의 관리 등에 관한 표준지침 제15조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "고가 장비 사전기획",
+    "lane": "연구기관·장비책임관",
+    "stage": "G0 수요·기획",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "연구기관·장비책임관",
+    "action": "총 구축비용 10억원 이상 장비는 구축 필요성·운영·활용·처분까지 포함한 사전기획을 실시한다.",
+    "input_documents": [
+     "도입계획"
+    ],
+    "output_documents": [
+     "사전기획보고서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발 시설·장비의 관리 등에 관한 표준지침",
+      "article": "제16조",
+      "text": "국가연구개발 시설·장비의 관리 등에 관한 표준지침 제16조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "ZEUS 중복성 검토",
+    "lane": "ZEUS·지원기관",
+    "stage": "G0 수요·기획",
+    "type": "gateway",
+    "status": "current",
+    "progress": 55,
+    "actor": "ZEUS·지원기관",
+    "action": "동일·유사 장비와 공동활용 가능 장비를 검색해 중복성 검토결과를 확정한다.",
+    "input_documents": [
+     "장비 사양"
+    ],
+    "output_documents": [
+     "중복성검토확인서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발 시설·장비의 관리 등에 관한 표준지침",
+      "article": "제17조",
+      "text": "국가연구개발 시설·장비의 관리 등에 관한 표준지침 제17조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "심의대상·심의주체 판정",
+    "lane": "중앙행정기관·전문기관",
+    "stage": "G1 도입심의",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "중앙행정기관·전문기관",
+    "action": "구축비용·재원과 사업유형에 따라 국가심의, 평가단 또는 자체위원회 경로를 정한다.",
+    "input_documents": [
+     "도입계획",
+     "중복성검토확인서"
+    ],
+    "output_documents": [
+     "심의경로 판정"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발 시설·장비의 관리 등에 관한 표준지침",
+      "article": "제5조부터 제7조까지·제18조",
+      "text": "국가연구개발 시설·장비의 관리 등에 관한 표준지침 제5조부터 제7조까지·제18조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "심의요청서·증빙 제출",
+    "lane": "연구기관·장비책임관",
+    "stage": "G1 도입심의",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구기관·장비책임관",
+    "action": "ZEUS로 심의요청서, 구축계획서, 견적서와 필요한 사전기획·사업 자료를 제출한다.",
+    "input_documents": [],
+    "output_documents": [
+     "심의요청서",
+     "구축계획서",
+     "비교견적서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발 시설·장비의 관리 등에 관한 표준지침",
+      "article": "제19조제1항부터 제3항까지",
+      "text": "국가연구개발 시설·장비의 관리 등에 관한 표준지침 제19조제1항부터 제3항까지에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "사전검토·보완",
+    "lane": "ZEUS·지원기관",
+    "stage": "G1 도입심의",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "ZEUS·지원기관",
+    "action": "심의대상 여부와 자료 완결성을 확인하고 심의 제외·반려 또는 보완을 요구한다.",
+    "input_documents": [
+     "심의요청 자료"
+    ],
+    "output_documents": [
+     "사전검토·보완결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발 시설·장비의 관리 등에 관한 표준지침",
+      "article": "제18조제3항·제4항",
+      "text": "국가연구개발 시설·장비의 관리 등에 관한 표준지침 제18조제3항·제4항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "도입 타당성 심의",
+    "lane": "장비심의위원회",
+    "stage": "G1 도입심의",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "장비심의위원회",
+    "action": "사업 부합성, 전략적 필요성, 중복성, 활용성, 운영계획과 구축비용을 심의한다.",
+    "input_documents": [
+     "보완된 심의자료"
+    ],
+    "output_documents": [
+     "심의의결안"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발 시설·장비의 관리 등에 관한 표준지침",
+      "article": "제20조",
+      "text": "국가연구개발 시설·장비의 관리 등에 관한 표준지침 제20조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "심의결과 통보",
+    "lane": "ZEUS·지원기관",
+    "stage": "G1 도입심의",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "ZEUS·지원기관",
+    "action": "도입인정·조건부인정·도입불인정 결과와 사유·대안을 통보한다.",
+    "input_documents": [],
+    "output_documents": [
+     "심의결과 통보"
+    ],
+    "deadline": "위원회 개최일부터 7일 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발 시설·장비의 관리 등에 관한 표준지침",
+      "article": "제21조제1항·제2항",
+      "text": "국가연구개발 시설·장비의 관리 등에 관한 표준지침 제21조제1항·제2항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "이의신청",
+    "lane": "연구기관·장비책임관",
+    "stage": "G1 도입심의",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구기관·장비책임관",
+    "action": "조건부인정 또는 불인정 결과에 대해 지정된 기간 안에 한 차례 이의를 신청한다.",
+    "input_documents": [
+     "심의결과"
+    ],
+    "output_documents": [
+     "이의신청서"
+    ],
+    "deadline": "결과통보에서 별도로 지정한 기간, 1회 한정",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발 시설·장비의 관리 등에 관한 표준지침",
+      "article": "제21조제3항",
+      "text": "국가연구개발 시설·장비의 관리 등에 관한 표준지침 제21조제3항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "재검토 결과 통보",
+    "lane": "장비심의위원회",
+    "stage": "G1 도입심의",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "장비심의위원회",
+    "action": "이의신청 내용을 재검토하고 최종 검토의견을 통보한다.",
+    "input_documents": [
+     "이의신청서"
+    ],
+    "output_documents": [
+     "재검토 결과"
+    ],
+    "deadline": "이의신청 접수마감일부터 14일 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발 시설·장비의 관리 등에 관한 표준지침",
+      "article": "제21조제4항",
+      "text": "국가연구개발 시설·장비의 관리 등에 관한 표준지침 제21조제4항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "계약·장비 구축",
+    "lane": "구매·검수·자산부서",
+    "stage": "G2 구축·검수",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "구매·검수·자산부서",
+    "action": "인정된 사양과 금액에 따라 계약을 체결하고 장비를 제조·구매·임차한다.",
+    "input_documents": [
+     "도입인정 결과"
+    ],
+    "output_documents": [
+     "계약서",
+     "납품·설치기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발 시설·장비의 관리 등에 관한 표준지침",
+      "article": "제23조·제24조",
+      "text": "국가연구개발 시설·장비의 관리 등에 관한 표준지침 제23조·제24조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "기술검수·검증시험",
+    "lane": "구매·검수·자산부서",
+    "stage": "G2 구축·검수",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "구매·검수·자산부서",
+    "action": "성능과 제반 조건을 검증하고 부적합하면 조치 후 재검증한다.",
+    "input_documents": [
+     "납품·설치기록"
+    ],
+    "output_documents": [
+     "기술검수서",
+     "검증시험 결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발 시설·장비의 관리 등에 관한 표준지침",
+      "article": "제26조",
+      "text": "국가연구개발 시설·장비의 관리 등에 관한 표준지침 제26조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "자산등재·이력카드 작성",
+    "lane": "구매·검수·자산부서",
+    "stage": "G3 등록",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "구매·검수·자산부서",
+    "action": "도입완료 장비를 기관 자산으로 등재하고 관리번호·자산비표·이력카드를 부여한다.",
+    "input_documents": [],
+    "output_documents": [
+     "자산등록번호",
+     "장비 이력카드"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발 시설·장비의 관리 등에 관한 표준지침",
+      "article": "제27조",
+      "text": "국가연구개발 시설·장비의 관리 등에 관한 표준지침 제27조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "ZEUS 정보등록",
+    "lane": "ZEUS·지원기관",
+    "stage": "G3 등록",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "ZEUS·지원기관",
+    "action": "3천만원 이상 또는 공동활용 가능한 장비를 ZEUS에 등록하고 국가등록증·식별표를 관리한다.",
+    "input_documents": [
+     "자산등록정보"
+    ],
+    "output_documents": [
+     "국가연구장비정보등록증"
+    ],
+    "deadline": "자산등재 완료 후 30일 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발 시설·장비의 관리 등에 관한 표준지침",
+      "article": "제28조",
+      "text": "국가연구개발 시설·장비의 관리 등에 관한 표준지침 제28조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "활용범위 설정·정기 재검토",
+    "lane": "연구기관·장비책임관",
+    "stage": "G4 운영·공동활용",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구기관·장비책임관",
+    "action": "공동활용서비스·허용·단독활용을 정하고 과제 종료·정기점검 때 활용범위와 재배치를 재검토한다.",
+    "input_documents": [],
+    "output_documents": [
+     "활용범위 결정",
+     "재배치 검토결과"
+    ],
+    "deadline": "연 1회 이상, 과제 종료일부터 3개월 이내 점검",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발 시설·장비의 관리 등에 관한 표준지침",
+      "article": "제37조·제38조",
+      "text": "국가연구개발 시설·장비의 관리 등에 관한 표준지침 제37조·제38조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "예약·이용·활용실적 등록",
+    "lane": "이용자·양수기관",
+    "stage": "G4 운영·공동활용",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "이용자·양수기관",
+    "action": "공동활용규정에 따라 예약·이용하고 기관은 이용실적을 ZEUS에 등록한다.",
+    "input_documents": [
+     "공동활용 신청"
+    ],
+    "output_documents": [
+     "예약·이용기록",
+     "공동활용실적"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발 시설·장비의 관리 등에 관한 표준지침",
+      "article": "제39조",
+      "text": "국가연구개발 시설·장비의 관리 등에 관한 표준지침 제39조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P17",
+    "name": "유휴·저활용·불용 판정",
+    "lane": "장비심의위원회",
+    "stage": "G5 처분",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "장비심의위원회",
+    "action": "연 1회 이상 활용상태를 점검하고 개선·재배치를 우선한 뒤 불용 여부를 결정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "불용심의 결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발 시설·장비의 관리 등에 관한 표준지침",
+      "article": "제41조",
+      "text": "국가연구개발 시설·장비의 관리 등에 관한 표준지침 제41조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P18",
+    "name": "양여·해체·매각 공고",
+    "lane": "ZEUS·지원기관",
+    "stage": "G5 처분",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "ZEUS·지원기관",
+    "action": "무상양여·해체는 ZEUS에 공고하고 신청자가 없으면 재공고하며 매각은 입찰공고한다.",
+    "input_documents": [],
+    "output_documents": [
+     "처분공고"
+    ],
+    "deadline": "1차 30일 이상, 무응찰 시 재공고 30일 이상",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발 시설·장비의 관리 등에 관한 표준지침",
+      "article": "제42조",
+      "text": "국가연구개발 시설·장비의 관리 등에 관한 표준지침 제42조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P19",
+    "name": "처분·이전 후 정보갱신",
+    "lane": "이용자·양수기관",
+    "stage": "G5 처분",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "이용자·양수기관",
+    "action": "공공성을 우선해 양여·해체·매각·폐기하고 처분자와 양수자가 ZEUS 정보를 갱신한다.",
+    "input_documents": [],
+    "output_documents": [
+     "처분완료 기록",
+     "이전장비 등록"
+    ],
+    "deadline": "처분완료 후 30일 이내, 양수기관은 이전일부터 90일 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발 시설·장비의 관리 등에 관한 표준지침",
+      "article": "제43조",
+      "text": "국가연구개발 시설·장비의 관리 등에 관한 표준지침 제43조에 따른 절차"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L06",
+    "source": "P06",
+    "target": "P05",
+    "type": "loop",
+    "label": "자료보완"
+   },
+   {
+    "id": "E07",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": "심의대상"
+   },
+   {
+    "id": "E08",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": "조건부·불인정"
+   },
+   {
+    "id": "E10",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L11",
+    "source": "P10",
+    "target": "P07",
+    "type": "loop",
+    "label": "재검토"
+   },
+   {
+    "id": "E12",
+    "source": "P08",
+    "target": "P11",
+    "type": "sequence",
+    "label": "도입인정"
+   },
+   {
+    "id": "E13",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L14",
+    "source": "P12",
+    "target": "P11",
+    "type": "loop",
+    "label": "재검증"
+   },
+   {
+    "id": "E15",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": "합격"
+   },
+   {
+    "id": "E16",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E17",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E18",
+    "source": "P15",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E19",
+    "source": "P16",
+    "target": "P17",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L20",
+    "source": "P17",
+    "target": "P15",
+    "type": "loop",
+    "label": "활용개선"
+   },
+   {
+    "id": "E21",
+    "source": "P17",
+    "target": "P18",
+    "type": "sequence",
+    "label": "불용"
+   },
+   {
+    "id": "E22",
+    "source": "P18",
+    "target": "P19",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "법령·행정규칙의 공통 절차를 구조화했다. 기관 자체규정, 연도별 시행계획, 전담기관 업무처리규정과 전산시스템 입력 항목은 별도로 확인해야 한다.",
+   "대형연구시설과 구축형 연구개발사업은 과학기술기본법상 별도 사업추진심사·계획변경심사가 추가될 수 있다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-15",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 3건 중 공식 원문 3건을 연결했다. 캔버스와 절차 노드의 명시 조문 27건 가운데 27건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "notes": [
+   "기준일 현재 현행 법률·시행령·시행규칙·행정규칙 원문 대조",
+   "기준일 이후 시행 예정 조문은 경고문에 분리",
+   "전산시스템 화면과 기관 자체규정은 현장 검증 대상으로 유지"
+  ],
+  "sources": [
+   {
+    "law": "과학기술기본법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "과학기술기본법",
+    "lawId": "009177",
+    "mst": "285191",
+    "promulgatedOn": "2026-03-31",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/과학기술기본법"
+   },
+   {
+    "law": "과학기술기본법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "과학기술기본법 시행령",
+    "lawId": "009218",
+    "mst": "285895",
+    "promulgatedOn": "2026-05-08",
+    "effectiveOn": "2026-05-11",
+    "officialUrl": "https://law.go.kr/법령/과학기술기본법시행령"
+   },
+   {
+    "law": "국가연구개발 시설·장비의 관리 등에 관한 표준지침",
+    "kind": "고시·지침",
+    "sourceType": "admin-rule",
+    "officialName": "국가연구개발 시설·장비의 관리 등에 관한 표준지침",
+    "adminRuleId": "52643",
+    "adminRuleSerial": "2100000278230",
+    "promulgatedOn": "2026-04-23",
+    "officialUrl": "https://law.go.kr/행정규칙/국가연구개발시설·장비의관리등에관한표준지침",
+    "issueNo": "과학기술정보통신부고시 제2026-25호"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-15",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 22,
+   "explicitCitationEntries": 22,
+   "articleReferences": 27,
+   "verifiedReferences": 27,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}
