@@ -1,0 +1,697 @@
+{
+ "slug": "national-rd-stage-final-evaluation-appeal",
+ "name": "국가연구개발과제 단계·최종평가·이의신청",
+ "oneLiner": "연차·단계·최종보고서를 바탕으로 평가단과 심의위원회가 결과를 확정하고 보완·중단·후속지원 또는 이의신청으로 분기하는 절차",
+ "type": "보고·평가·이의구제형",
+ "priority": 336,
+ "category": "연구개발·행정",
+ "whyFirst": "보고서 제출, 평가자료, 평가위원 이해충돌, 결과통보와 10일 이의기한이 연속되어 연구자와 행정담당자의 동시 대응이 필요하다.",
+ "asOfDate": "2026-07-14",
+ "status": "full",
+ "canvas": {
+  "purpose": "연구수행과 성과를 전문적으로 평가하고 결과에 따른 조치와 연구개발기관의 이의제기 권리를 보장한다.",
+  "stakeholders": "연구개발기관·연구책임자, 전문기관, 연구개발과제평가단, 심의위원회, 중앙행정기관",
+  "legalBasis": [
+   {
+    "law": "국가연구개발혁신법",
+    "articles": "제12조·제14조",
+    "kind": "법률"
+   },
+   {
+    "law": "국가연구개발혁신법 시행령",
+    "articles": "제16조·제17조·제18조·제27조·제28조·제29조·제30조",
+    "kind": "대통령령"
+   },
+   {
+    "law": "국가연구개발혁신법 시행규칙",
+    "articles": "제2조",
+    "kind": "부령"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "연구개발기관·책임자",
+    "role": "연차·단계·최종보고서 제출과 이의신청"
+   },
+   {
+    "name": "평가단",
+    "role": "수행과정·성과의 전문평가"
+   },
+   {
+    "name": "중앙행정기관",
+    "role": "결과 확정, 통보, 후속조치와 이의 처리"
+   }
+  ],
+  "procedure": [
+   "연차·단계·최종보고서 작성",
+   "보고서 제출·접수",
+   "평가 면제·유형 판정",
+   "평가계획·기준 통지",
+   "평가단 구성·제척 확인",
+   "단계·최종평가 실시",
+   "평가등급·의견 도출",
+   "평가결과 심의·확정",
+   "평가결과 통보",
+   "단계평가 후속조치",
+   "최종평가 후속지원·성과관리",
+   "평가결과 이의신청",
+   "관계자 의견청취·필요조치",
+   "이의처리 결과 즉시 통지"
+  ],
+  "moneyFlow": "단계평가 결과에 따라 연구개발비를 감액·증액할 수 있고, 최종평가 결과가 우수하면 후속 연구개발과제 등 추가지원으로 이어질 수 있다.",
+  "docsFlow": "연차·단계·최종보고서 → 평가계획·위원 제척확인 → 평가서·등급 → 심의의결서 → 결과통보 → 이의신청서·관계자 의견·처리결과 → 변경·중단·후속지원으로 이어진다.",
+  "bottlenecks": [
+   "보고서와 평가 증빙의 중복 작성",
+   "평가위원 전문성·제척 검토",
+   "결과통보 후 10일 이의신청 기한"
+  ],
+  "reformPoints": [
+   "보고서 항목과 평가기준을 사전 연결",
+   "평가의견별 사실오류·절차오류 이의 템플릿 제공",
+   "평가결과 후속조치를 구조화해 협약변경·중단으로 연결"
+  ]
+ },
+ "related": [
+  "국가연구개발사업 공모·과제선정",
+  "국가연구개발과제 협약변경·특별평가·중단",
+  "국가연구개발성과 소유·활용·기술료"
+ ],
+ "fieldVerification": [
+  "부처별 평가등급과 후속조치 기준",
+  "보고서 제출 세부일정",
+  "이의신청 인정범위와 재평가 운영방식"
+ ],
+ "process": {
+  "institution_name": "국가연구개발과제 단계·최종평가·이의신청",
+  "law_name": "국가연구개발혁신법·국가연구개발혁신법 시행령·국가연구개발혁신법 시행규칙",
+  "lanes": [
+   "연구개발기관·연구책임자",
+   "전문기관",
+   "연구개발과제평가단",
+   "심의위원회",
+   "중앙행정기관"
+  ],
+  "stages": [
+   "G0 보고준비",
+   "G1 평가구성",
+   "G2 단계·최종평가",
+   "G3 심의·통보",
+   "G4 이의·후속"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "연차·단계·최종보고서 작성",
+    "lane": "연구개발기관·연구책임자",
+    "stage": "G0 보고준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "연구개발기관·연구책임자",
+    "action": "수행과정, 연구성과, 연구비와 다음 단계 계획을 법정 보고서에 정리한다.",
+    "input_documents": [],
+    "output_documents": [
+     "연차보고서",
+     "단계보고서",
+     "최종보고서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제12조제4항·제5항",
+      "text": "국가연구개발혁신법 제12조제4항·제5항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제18조제1항~제3항",
+      "text": "국가연구개발혁신법 시행령 제18조제1항~제3항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행규칙",
+      "article": "제2조",
+      "text": "국가연구개발혁신법 시행규칙 제2조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "보고서 제출·접수",
+    "lane": "전문기관",
+    "stage": "G0 보고준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "전문기관",
+    "action": "해당 보고서를 정해진 시점에 제출받고 평가자료의 형식과 누락을 확인한다.",
+    "input_documents": [
+     "연차·단계·최종보고서"
+    ],
+    "output_documents": [
+     "보고서 접수확인"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제12조제4항·제5항",
+      "text": "국가연구개발혁신법 제12조제4항·제5항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제18조제4항",
+      "text": "국가연구개발혁신법 시행령 제18조제4항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "평가 면제·유형 판정",
+    "lane": "중앙행정기관",
+    "stage": "G1 평가구성",
+    "type": "gateway",
+    "status": "current",
+    "progress": 55,
+    "actor": "중앙행정기관",
+    "action": "단계평가·최종평가 대상과 법정 면제사유 해당 여부를 판정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "평가대상 확정"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제12조제2항",
+      "text": "국가연구개발혁신법 제12조제2항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제16조제3항",
+      "text": "국가연구개발혁신법 시행령 제16조제3항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "평가계획·기준 통지",
+    "lane": "전문기관",
+    "stage": "G1 평가구성",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "전문기관",
+    "action": "평가항목, 일정, 제출자료와 평가방식을 연구개발기관에 안내한다.",
+    "input_documents": [],
+    "output_documents": [
+     "평가계획",
+     "평가기준"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제14조제1항",
+      "text": "국가연구개발혁신법 제14조제1항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제16조제1항",
+      "text": "국가연구개발혁신법 시행령 제16조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "평가단 구성·제척 확인",
+    "lane": "중앙행정기관",
+    "stage": "G1 평가구성",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "후보단에서 전문위원을 선정하고 이해관계자를 제외한다.",
+    "input_documents": [],
+    "output_documents": [
+     "평가위원 명단",
+     "제척·회피 확인서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제14조제1항·제2항",
+      "text": "국가연구개발혁신법 제14조제1항·제2항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제27조",
+      "text": "국가연구개발혁신법 시행령 제27조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "단계·최종평가 실시",
+    "lane": "연구개발과제평가단",
+    "stage": "G2 단계·최종평가",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발과제평가단",
+    "action": "수행과정, 목표달성도, 성과와 활용계획을 평가한다.",
+    "input_documents": [
+     "단계·최종보고서",
+     "평가기준"
+    ],
+    "output_documents": [
+     "단계·최종평가서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제12조제2항",
+      "text": "국가연구개발혁신법 제12조제2항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제16조제1항",
+      "text": "국가연구개발혁신법 시행령 제16조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "평가등급·의견 도출",
+    "lane": "연구개발과제평가단",
+    "stage": "G2 단계·최종평가",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "연구개발과제평가단",
+    "action": "평가 결과를 등급으로 분류하고 보완·변경·중단 또는 후속지원 의견을 낸다.",
+    "input_documents": [],
+    "output_documents": [
+     "평가등급",
+     "평가의견"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제16조제2항",
+      "text": "국가연구개발혁신법 시행령 제16조제2항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "평가결과 심의·확정",
+    "lane": "심의위원회",
+    "stage": "G3 심의·통보",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "심의위원회",
+    "action": "평가단 결과와 후속조치의 적절성을 심의해 최종 결과를 확정한다.",
+    "input_documents": [
+     "평가서",
+     "평가의견"
+    ],
+    "output_documents": [
+     "심의의결서",
+     "확정 평가결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제14조제4항",
+      "text": "국가연구개발혁신법 제14조제4항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제28조",
+      "text": "국가연구개발혁신법 시행령 제28조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "평가결과 통보",
+    "lane": "중앙행정기관",
+    "stage": "G3 심의·통보",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "확정 결과와 평가의견을 연구개발기관·책임자에게 통보한다.",
+    "input_documents": [],
+    "output_documents": [
+     "평가결과 통보서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제14조제5항",
+      "text": "국가연구개발혁신법 제14조제5항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제29조",
+      "text": "국가연구개발혁신법 시행령 제29조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "단계평가 후속조치",
+    "lane": "중앙행정기관",
+    "stage": "G4 이의·후속",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "단계평가 결과에 따라 보완·변경·중단 또는 연구비 감액·증액을 결정한다.",
+    "input_documents": [
+     "확정 평가결과"
+    ],
+    "output_documents": [
+     "단계평가 후속조치 통보"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제12조제3항",
+      "text": "국가연구개발혁신법 제12조제3항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제17조",
+      "text": "국가연구개발혁신법 시행령 제17조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "최종평가 후속지원·성과관리",
+    "lane": "중앙행정기관",
+    "stage": "G4 이의·후속",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "우수성과 포상, 후속과제 연계와 성과관리 조치를 결정한다.",
+    "input_documents": [
+     "확정 평가결과"
+    ],
+    "output_documents": [
+     "후속지원·성과관리 통보"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제12조제3항",
+      "text": "국가연구개발혁신법 제12조제3항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제17조제4항",
+      "text": "국가연구개발혁신법 시행령 제17조제4항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "평가결과 이의신청",
+    "lane": "연구개발기관·연구책임자",
+    "stage": "G4 이의·후속",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발기관·연구책임자",
+    "action": "결과의 사실오류·절차상 하자 등에 대한 사유와 근거를 제출한다.",
+    "input_documents": [
+     "평가결과 통보서"
+    ],
+    "output_documents": [
+     "평가결과 이의신청서"
+    ],
+    "deadline": "통보받은 날부터 10일 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제14조제6항",
+      "text": "국가연구개발혁신법 제14조제6항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제30조",
+      "text": "국가연구개발혁신법 시행령 제30조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "관계자 의견청취·필요조치",
+    "lane": "중앙행정기관",
+    "stage": "G4 이의·후속",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "관계자의 의견을 듣고 재검토 등 필요한 조치를 한다.",
+    "input_documents": [
+     "평가결과 이의신청서"
+    ],
+    "output_documents": [
+     "이의검토 기록"
+    ],
+    "deadline": "이의신청 받은 날부터 30일 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제14조제7항",
+      "text": "국가연구개발혁신법 제14조제7항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "이의처리 결과 즉시 통지",
+    "lane": "중앙행정기관",
+    "stage": "G4 이의·후속",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "필요조치 결과를 이의신청인에게 즉시 통지하고 후속조치에 반영한다.",
+    "input_documents": [],
+    "output_documents": [
+     "이의신청 처리결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제14조제7항",
+      "text": "국가연구개발혁신법 제14조제7항에 따른 절차"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": "평가대상"
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": "단계평가"
+   },
+   {
+    "id": "E10",
+    "source": "P09",
+    "target": "P11",
+    "type": "sequence",
+    "label": "최종평가"
+   },
+   {
+    "id": "E11",
+    "source": "P09",
+    "target": "P12",
+    "type": "sequence",
+    "label": "이의"
+   },
+   {
+    "id": "E12",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L14",
+    "source": "P14",
+    "target": "P08",
+    "type": "loop",
+    "label": "필요조치"
+   }
+  ],
+  "warnings": [
+   "이 구조도는 국가연구개발혁신법의 공통 절차다. 중앙행정기관·전문기관별 사업 공고, 협약서, 자체규정과 시스템 입력 방식이 더 구체적인 요건을 둘 수 있다.",
+   "이의신청 결과의 '필요한 조치'가 항상 재평가를 뜻하는 것은 아니다. 사실·절차 검토 결과에 따라 조치가 달라진다.",
+   "기준일 이후 2026년 8월 20일·9월 11일 시행 예정인 혁신법 일부 개정사항은 시행일 도래 후 다시 검증해야 한다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-14",
+  "method": "국가법령정보센터 Open API 법령·행정규칙 원문 대조",
+  "scope": "법적 근거 3건의 공식 원문을 연결하고 캔버스와 절차 노드의 명시 조문 36건의 조문 번호 존재를 확인했다. 인용 문구의 사건별 적용 타당성은 별도 검토가 필요하다.",
+  "notes": [
+   "국가연구개발혁신법·시행령·시행규칙 현행 원문 대조",
+   "연구개발비 구조도는 과학기술정보통신부고시 제2026-38호 추가 대조",
+   "시행예정 개정은 기준일 현재 적용되는 부분과 분리"
+  ],
+  "sources": [
+   {
+    "law": "국가연구개발혁신법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국가연구개발혁신법",
+    "lawId": "013774",
+    "mst": "283849",
+    "promulgatedOn": "2026-03-10",
+    "effectiveOn": "2026-06-11",
+    "officialUrl": "https://law.go.kr/법령/국가연구개발혁신법"
+   },
+   {
+    "law": "국가연구개발혁신법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "국가연구개발혁신법 시행령",
+    "lawId": "013933",
+    "mst": "285767",
+    "promulgatedOn": "2026-05-06",
+    "effectiveOn": "2026-06-11",
+    "officialUrl": "https://law.go.kr/법령/국가연구개발혁신법시행령"
+   },
+   {
+    "law": "국가연구개발혁신법 시행규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "국가연구개발혁신법 시행규칙",
+    "lawId": "013980",
+    "mst": "286879",
+    "promulgatedOn": "2026-06-09",
+    "effectiveOn": "2026-06-11",
+    "officialUrl": "https://law.go.kr/법령/국가연구개발혁신법시행규칙"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-14",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 29,
+   "explicitCitationEntries": 29,
+   "articleReferences": 36,
+   "verifiedReferences": 36,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

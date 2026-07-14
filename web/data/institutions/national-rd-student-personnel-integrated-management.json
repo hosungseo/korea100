@@ -1,0 +1,899 @@
+{
+ "slug": "national-rd-student-personnel-integrated-management",
+ "name": "국가연구개발 학생인건비 통합관리",
+ "oneLiner": "통합관리기관 지정과 전용계정 설정부터 참여확약, 개인계좌 지급, 잔액 이관, 자체·현장점검과 지정취소까지 이어지는 절차",
+ "type": "지정·계정관리·지급·점검형",
+ "priority": 340,
+ "category": "연구개발·행정",
+ "whyFirst": "연구과제, 연구책임자, 학생의 학적과 확약기간이 서로 달라 계정 이체·지급·잔액·점검 기한을 놓치기 쉽고 학생인건비 미지급·부당회수 위험도 크다.",
+ "asOfDate": "2026-07-14",
+ "status": "full",
+ "canvas": {
+  "purpose": "여러 국가연구개발과제의 학생인건비를 통합관리하면서 학생연구자에게 안정적으로 지급하고 부당회수와 잔액 누적을 방지한다.",
+  "stakeholders": "과학기술정보통신부·전담기관, 연구개발기관·산학협력단, 연구책임자·계정책임자, 학생연구자, 전산시스템·점검담당",
+  "legalBasis": [
+   {
+    "law": "국가연구개발혁신법",
+    "articles": "제13조·제31조·제32조",
+    "kind": "법률"
+   },
+   {
+    "law": "국가연구개발사업 연구개발비 사용 기준",
+    "articles": "제7조·제33조·제40조·제49조·제86조부터 제95조까지",
+    "kind": "고시·지침"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "과학기술정보통신부",
+    "role": "통합관리기관 지정·점검·지정취소와 반납 관리"
+   },
+   {
+    "name": "연구개발기관",
+    "role": "전용계정·전산시스템·학생지원규정과 지급의 최종 관리책임"
+   },
+   {
+    "name": "연구책임자·계정책임자",
+    "role": "지급대상·지급률 협의와 계정 잔액 관리"
+   },
+   {
+    "name": "학생연구자",
+    "role": "연구참여확약 협의와 개인계좌 지급 확인"
+   }
+  ],
+  "procedure": [
+   "지정요건 자체점검·신청 준비",
+   "지정신청서·구축보고서·지원규정 제출",
+   "지정요건 평가·결과 통보",
+   "보험·시스템 연계·표준정보 조치",
+   "기관·연구책임자계정과 전용계좌 설정",
+   "학생연구자 지원규정 공개·운영",
+   "과제별 학생인건비 총액 계상",
+   "과제계정에서 통합관리계정 이체",
+   "지급대상 학생 등록",
+   "연구참여확약 협의·작성",
+   "법정사유 발생 시 확약 변경",
+   "개인계좌 지급·수령 확인",
+   "미지급·부당회수 탐지·제재 연계",
+   "연말 잔액 산정·기관계정 이체",
+   "기관·책임자 변경·중단 시 이관·반납",
+   "연 1회 이상 자체점검",
+   "지급·부당회수 비율 공개·자료 제출",
+   "서면검토·현장점검",
+   "소명·지정유지 또는 취소 결정",
+   "취소 후 잔액 제출·반납·재지정 대기"
+  ],
+  "moneyFlow": "과제별 학생인건비 총액을 연구책임자계정으로 이체해 학생 개인계좌에 지급하고, 연말 과다 잔액·기관 또는 책임자 변경·과제 중단 시 기관계정 이체나 중앙행정기관 반납으로 조정한다.",
+  "docsFlow": "지정신청서·전산시스템 구축보고서·학생지원규정 → 지정통보 → 계정·전용계좌 → 과제별 학생인건비 총액·이체내역 → 연구참여확약서·개인계좌 지급내역 → 잔액 산정·이관자료 → 자체점검표·공개자료·현장점검·소명·취소통보로 이어진다.",
+  "bottlenecks": [
+   "과제계정에서 통합관리계정으로의 90일 이체기한",
+   "학적·업무량 변동 때 확약 변경과 지급액 동기화",
+   "연구책임자계정 잔액과 기관계정 이관액 산정",
+   "학생인건비 미지급·부당회수 탐지"
+  ],
+  "reformPoints": [
+   "학적·과제·확약·지급정보 자동 대조",
+   "개인별 지급예정·실제지급 차이 알림",
+   "연말 잔액 이관과 변경·중단 시 반납액 자동 산정",
+   "부당회수 익명신고와 증거보전 연결"
+  ]
+ },
+ "related": [
+  "국가연구개발비 지급·사용·정산",
+  "국가연구개발사업 부정행위 제보·검증",
+  "국가연구개발 제재처분·재검토·사후관리"
+ ],
+ "fieldVerification": [
+  "기관별 학생연구자 지원규정과 전산시스템 화면",
+  "학적·근로계약·타기관 인건비 연계 방식",
+  "지급률·잔액 산식의 실제 시스템 구현",
+  "부당회수 신고·보호 절차"
+ ],
+ "process": {
+  "institution_name": "국가연구개발 학생인건비 통합관리",
+  "law_name": "국가연구개발혁신법·국가연구개발사업 연구개발비 사용 기준",
+  "lanes": [
+   "과학기술정보통신부·전담기관",
+   "연구개발기관·산학협력단",
+   "연구책임자·계정책임자",
+   "학생연구자",
+   "전산시스템·점검담당"
+  ],
+  "stages": [
+   "G0 지정",
+   "G1 계정·규정",
+   "G2 확약·지급",
+   "G3 잔액·변동",
+   "G4 점검·취소"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "지정요건 자체점검·신청 준비",
+    "lane": "연구개발기관·산학협력단",
+    "stage": "G0 지정",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "연구개발기관·산학협력단",
+    "action": "대학 또는 정부출연기관이 전산시스템 구축요건과 학생연구자 지원규정 구비 여부를 점검한다.",
+    "input_documents": [],
+    "output_documents": [
+     "지정요건 자체점검표"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제86조제1항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제86조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "지정신청서·구축보고서·지원규정 제출",
+    "lane": "연구개발기관·산학협력단",
+    "stage": "G0 지정",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "연구개발기관·산학협력단",
+    "action": "지정·변경 신청서, 전산시스템 구축 완료 보고서와 학생연구자 지원규정을 제출한다.",
+    "input_documents": [
+     "지정요건 자체점검표"
+    ],
+    "output_documents": [
+     "학생인건비통합관리기관 지정·변경 신청서",
+     "전산시스템 구축 완료 보고서",
+     "학생연구자 지원규정"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제86조제2항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제86조제2항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "지정요건 평가·결과 통보",
+    "lane": "과학기술정보통신부·전담기관",
+    "stage": "G0 지정",
+    "type": "gateway",
+    "status": "current",
+    "progress": 55,
+    "actor": "과학기술정보통신부·전담기관",
+    "action": "신청서류와 시스템·규정을 평가해 지정 여부를 통보한다.",
+    "input_documents": [
+     "지정신청 서류"
+    ],
+    "output_documents": [
+     "통합관리기관 지정·보완 통보"
+    ],
+    "deadline": "신청받은 날부터 2개월 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제86조제3항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제86조제3항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "보험·시스템 연계·표준정보 조치",
+    "lane": "연구개발기관·산학협력단",
+    "stage": "G0 지정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발기관·산학협력단",
+    "action": "연구실 안전보험 가입, 연구비통합관리시스템 연계와 표준정보에 따른 지급정보 관리를 이행한다.",
+    "input_documents": [
+     "통합관리기관 지정통보"
+    ],
+    "output_documents": [
+     "보험 가입확인",
+     "시스템 연계확인",
+     "표준정보 관리기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제86조제4항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제86조제4항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "기관·연구책임자계정과 전용계좌 설정",
+    "lane": "연구개발기관·산학협력단",
+    "stage": "G1 계정·규정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발기관·산학협력단",
+    "action": "기관계정과 연구책임자계정을 병행 설정하고 통합관리 학생인건비를 전용계좌에서 구분 관리한다.",
+    "input_documents": [],
+    "output_documents": [
+     "학생인건비통합관리계정",
+     "전용계좌",
+     "계정책임자 지정기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제87조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제87조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "학생연구자 지원규정 공개·운영",
+    "lane": "연구개발기관·산학협력단",
+    "stage": "G1 계정·규정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발기관·산학협력단",
+    "action": "학업·연구활동, 처우·권익, 계정, 확약, 부당회수 방지와 보험 사항을 포함한 규정을 공개·운영한다.",
+    "input_documents": [],
+    "output_documents": [
+     "공개된 학생연구자 지원규정"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제88조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제88조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "과제별 학생인건비 총액 계상",
+    "lane": "연구책임자·계정책임자",
+    "stage": "G1 계정·규정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구책임자·계정책임자",
+    "action": "통합관리 대상 과제에는 학생연구자별 금액이 아니라 학생인건비 총액만 계상한다.",
+    "input_documents": [
+     "연구개발계획서"
+    ],
+    "output_documents": [
+     "과제별 학생인건비 총액"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제89조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제89조에 따른 절차"
+     },
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제7조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제7조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "과제계정에서 통합관리계정 이체",
+    "lane": "전산시스템·점검담당",
+    "stage": "G1 계정·규정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "전산시스템·점검담당",
+    "action": "지급 또는 변경된 학생인건비를 연구책임자 통합관리계정으로 이체하고 증명자료를 보존한다.",
+    "input_documents": [
+     "과제별 학생인건비 총액",
+     "연구비 지급내역"
+    ],
+    "output_documents": [
+     "통합관리계정 이체내역",
+     "이체 증명자료"
+    ],
+    "deadline": "연구비 지급·학생인건비 변경일부터 90일 이내 또는 연차 종료일 중 먼저 도래하는 날, 연차 종료일까지 전액 이체",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제90조제1항~제4항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제90조제1항~제4항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "지급대상 학생 등록",
+    "lane": "연구책임자·계정책임자",
+    "stage": "G2 확약·지급",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구책임자·계정책임자",
+    "action": "기관·연구책임자계정 잔액을 고려해 지급할 학생연구자를 정하고 전산시스템에 등록한다.",
+    "input_documents": [
+     "계정 잔액",
+     "참여연구자 정보"
+    ],
+    "output_documents": [
+     "학생연구자 지급대상 등록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제91조제1항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제91조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "연구참여확약 협의·작성",
+    "lane": "학생연구자",
+    "stage": "G2 확약·지급",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "학생연구자",
+    "action": "기관·계정책임자와 학생연구자가 지급률·기간을 협의해 6개월 또는 12개월 단위 연구참여확약서를 작성한다.",
+    "input_documents": [
+     "지급대상 등록",
+     "계정 잔액"
+    ],
+    "output_documents": [
+     "학생연구자 연구참여확약서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제91조제2항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제91조제2항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "법정사유 발생 시 확약 변경",
+    "lane": "연구책임자·계정책임자",
+    "stage": "G2 확약·지급",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "연구책임자·계정책임자",
+    "action": "협약·학적·개인사정·수행불능·업무량 변동이 있을 때 학생과 협의해 확약을 변경한다.",
+    "input_documents": [
+     "기존 연구참여확약서",
+     "변경사유 증빙"
+    ],
+    "output_documents": [
+     "변경 연구참여확약서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제91조제3항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제91조제3항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "개인계좌 지급·수령 확인",
+    "lane": "학생연구자",
+    "stage": "G2 확약·지급",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "학생연구자",
+    "action": "확약에 따른 학생인건비가 원칙적으로 매월 본인 개인계좌에 지급됐는지 확인한다.",
+    "input_documents": [
+     "연구참여확약서"
+    ],
+    "output_documents": [
+     "개인계좌 지급내역",
+     "학생인건비 수령확인"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제91조제4항~제10항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제91조제4항~제10항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "미지급·부당회수 탐지·제재 연계",
+    "lane": "전산시스템·점검담당",
+    "stage": "G2 확약·지급",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "전산시스템·점검담당",
+    "action": "미지급 또는 지급액의 부당회수 정황을 탐지하고 자료를 보전해 조사·제재 절차로 연계한다.",
+    "input_documents": [
+     "확약서",
+     "지급내역",
+     "신고자료"
+    ],
+    "output_documents": [
+     "부당회수 의심기록",
+     "조사 연계자료"
+    ],
+    "deadline": null,
+    "blocker": "현금 반환 요구 등 시스템 밖 행위는 별도 신고·조사가 필요함",
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제33조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제33조에 따른 절차"
+     },
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제92조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제92조에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제31조·제32조",
+      "text": "국가연구개발혁신법 제31조·제32조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "연말 잔액 산정·기관계정 이체",
+    "lane": "연구개발기관·산학협력단",
+    "stage": "G3 잔액·변동",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발기관·산학협력단",
+    "action": "12월 31일 기준 산식에 따른 연구책임자계정 금액을 기관계정으로 이체·계정대체하거나 반납한다.",
+    "input_documents": [
+     "연말 계정잔액",
+     "지급실적"
+    ],
+    "output_documents": [
+     "잔액 산정내역",
+     "기관계정 이체·반납내역"
+    ],
+    "deadline": "다음 해 3월 31일까지",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제91조의2",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제91조의2에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "기관·책임자 변경·중단 시 이관·반납",
+    "lane": "연구개발기관·산학협력단",
+    "stage": "G3 잔액·변동",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "연구개발기관·산학협력단",
+    "action": "기관·연구책임자 변경, 협약 해약·과제 중단 또는 참여제한 사유에 따라 잔액을 다른 계정으로 이체하거나 반납한다.",
+    "input_documents": [
+     "변경·중단 통보",
+     "계정잔액"
+    ],
+    "output_documents": [
+     "학생인건비 이관·반납 내역"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제95조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제95조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "연 1회 이상 자체점검",
+    "lane": "전산시스템·점검담당",
+    "stage": "G4 점검·취소",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "전산시스템·점검담당",
+    "action": "운영현황을 자체점검하고 전산시스템을 변경한 경우 구축요건 점검결과를 지체 없이 제출한다.",
+    "input_documents": [],
+    "output_documents": [
+     "학생인건비통합관리 자체점검표",
+     "시스템 변경 자체점검 결과"
+    ],
+    "deadline": "운영현황 자체점검은 연 1회 이상",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제93조제1항·제2항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제93조제1항·제2항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P17",
+    "name": "지급·부당회수 비율 공개·자료 제출",
+    "lane": "연구개발기관·산학협력단",
+    "stage": "G4 점검·취소",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발기관·산학협력단",
+    "action": "평균 지급비율과 부당회수 비율을 기관 홈페이지 등에 공개하고 점검자료를 제출한다.",
+    "input_documents": [
+     "자체점검표",
+     "지급·부당회수 현황"
+    ],
+    "output_documents": [
+     "공개된 지급·부당회수 비율",
+     "운영현황 점검자료"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제93조제3항·제5항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제93조제3항·제5항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P18",
+    "name": "서면검토·현장점검",
+    "lane": "과학기술정보통신부·전담기관",
+    "stage": "G4 점검·취소",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "과학기술정보통신부·전담기관",
+    "action": "제출자료를 검토하고 필요하면 추가자료를 요구하거나 현장점검을 실시한다.",
+    "input_documents": [
+     "운영현황 점검자료"
+    ],
+    "output_documents": [
+     "자료보완 요구",
+     "현장점검 결과"
+    ],
+    "deadline": "현장점검은 원칙적으로 7일 전 문서 통지",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제93조제3항·제4항·제6항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제93조제3항·제4항·제6항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P19",
+    "name": "소명·지정유지 또는 취소 결정",
+    "lane": "과학기술정보통신부·전담기관",
+    "stage": "G4 점검·취소",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "과학기술정보통신부·전담기관",
+    "action": "부당회수, 낮은 지급실적, 시스템 미충족 등 취소사유에 대해 기관 소명을 거쳐 지정유지 또는 취소를 결정한다.",
+    "input_documents": [
+     "현장점검 결과",
+     "기관 소명자료"
+    ],
+    "output_documents": [
+     "지정유지·개선요구 또는 취소통보"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제94조제1항·제2항·제4항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제94조제1항·제2항·제4항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P20",
+    "name": "취소 후 잔액 제출·반납·재지정 대기",
+    "lane": "연구개발기관·산학협력단",
+    "stage": "G4 점검·취소",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발기관·산학협력단",
+    "action": "모든 통합관리계정 잔액을 제출하고 확정 반납액을 낸 뒤 재지정 가능시점을 관리한다.",
+    "input_documents": [
+     "지정취소 통보"
+    ],
+    "output_documents": [
+     "통합관리계정 잔액내역",
+     "반납확인",
+     "재지정 가능일"
+    ],
+    "deadline": "잔액 제출·반납은 취소통보일부터 30일 이내, 재지정 신청은 취소일부터 3년 경과 후",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제94조제5항·제7항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제94조제5항·제7항에 따른 절차"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L03",
+    "source": "P03",
+    "target": "P02",
+    "type": "loop",
+    "label": "보완"
+   },
+   {
+    "id": "E04",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": "지정"
+   },
+   {
+    "id": "E05",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P10",
+    "target": "P12",
+    "type": "sequence",
+    "label": "확약"
+   },
+   {
+    "id": "E13",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": "연말"
+   },
+   {
+    "id": "E16",
+    "source": "P13",
+    "target": "P15",
+    "type": "sequence",
+    "label": "변경·중단"
+   },
+   {
+    "id": "E17",
+    "source": "P14",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E18",
+    "source": "P15",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E19",
+    "source": "P16",
+    "target": "P17",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E20",
+    "source": "P17",
+    "target": "P18",
+    "type": "message",
+    "label": "점검대상"
+   },
+   {
+    "id": "E21",
+    "source": "P18",
+    "target": "P19",
+    "type": "sequence",
+    "label": "취소사유"
+   },
+   {
+    "id": "L22",
+    "source": "P19",
+    "target": "P17",
+    "type": "loop",
+    "label": "지정유지"
+   },
+   {
+    "id": "E23",
+    "source": "P19",
+    "target": "P20",
+    "type": "sequence",
+    "label": "지정취소"
+   }
+  ],
+  "warnings": [
+   "이 구조도는 국가연구개발혁신법 체계의 공통 기준이다. 중앙행정기관·전문기관별 사업 공고, 협약서와 연구개발기관 자체규정이 더 구체적인 절차를 둘 수 있다.",
+   "통합관리기관이 아닌 대학·정부출연기관은 과제별 학생인건비계상률 방식이 적용된다. 이 구조도는 과학기술정보통신부가 지정한 학생인건비통합관리기관의 특례를 중심으로 한다.",
+   "연구참여확약서 작성은 원칙이지만 정부출연기관이 학생연구자와 근로계약을 체결한 경우 작성하지 않을 수 있다.",
+   "기준일 이후 2026년 8월 20일·9월 11일 시행 예정인 혁신법 일부 개정사항은 시행일 도래 후 다시 검증해야 한다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-14",
+  "method": "국가법령정보센터 Open API 법령·행정규칙 원문 대조",
+  "scope": "법적 근거 2건의 공식 원문을 연결하고 캔버스와 절차 노드의 명시 조문 33건의 조문 번호 존재를 확인했다. 인용 문구의 사건별 적용 타당성은 별도 검토가 필요하다.",
+  "notes": [
+   "국가연구개발혁신법·시행령 현행 원문 대조",
+   "학생인건비 구조도는 과학기술정보통신부고시 제2026-38호 추가 대조",
+   "연구노트 구조도는 과학기술정보통신부고시 제2021-102호 추가 대조",
+   "기관 자체규정과 사업별 협약의 추가 요건은 현장 검증 대상으로 분리"
+  ],
+  "sources": [
+   {
+    "law": "국가연구개발혁신법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국가연구개발혁신법",
+    "lawId": "013774",
+    "mst": "283849",
+    "promulgatedOn": "2026-03-10",
+    "effectiveOn": "2026-06-11",
+    "officialUrl": "https://law.go.kr/법령/국가연구개발혁신법"
+   },
+   {
+    "law": "국가연구개발사업 연구개발비 사용 기준",
+    "kind": "고시·지침",
+    "sourceType": "admin-rule",
+    "officialName": "국가연구개발사업 연구개발비 사용 기준",
+    "adminRuleId": "75386",
+    "adminRuleSerial": "2100000278740",
+    "promulgatedOn": "2026-05-06",
+    "officialUrl": "https://law.go.kr/행정규칙/국가연구개발사업연구개발비사용기준",
+    "issueNo": "과학기술정보통신부고시 제2026-38호"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-14",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 25,
+   "explicitCitationEntries": 25,
+   "articleReferences": 33,
+   "verifiedReferences": 33,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}
