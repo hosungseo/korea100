@@ -168,10 +168,9 @@ function ArticlePopover({
               {sourceText ? (
                 <pre className="article-popover-source">{sourceText}</pre>
               ) : (
-                basis.text && <p>{basis.text}</p>
-              )}
-              {sourceText && basis.text && (
-                <p className="article-popover-gist">요지 · {basis.text}</p>
+                <p className="article-popover-nosource">
+                  이 조문의 현행 원문은 아직 수록되지 않았습니다. 아래 근거법령 바로가기로 국가법령정보센터 원문을 확인하세요.
+                </p>
               )}
               {(effectiveOn || result.checkedAt) && (
                 <p className="article-popover-dates">
