@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import crypto from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
@@ -13,6 +14,7 @@ const webRoot = path.resolve(__dirname, "..");
 const dataDir = path.join(webRoot, "data/institutions");
 const manifestPath = path.join(webRoot, "../docs/institutions-100-manifest.json");
 const outputDir = path.join(webRoot, "public/exports/process-maps");
+const generationManifestPath = path.join(outputDir, ".process-image-manifest.json");
 const legacyEiaPath = path.join(
   webRoot,
   "public/exports/environmental-impact-assessment-process-map.png"
@@ -20,6 +22,9 @@ const legacyEiaPath = path.join(
 
 const WIDTH = 1800;
 const HEIGHT = 2400;
+// Bump this when the SVG/layout renderer changes. Data-only changes then stay incremental.
+const RENDERER_VERSION = "portrait-process-v4";
+const forceRebuild = process.argv.includes("--all") || process.env.FORCE_PROCESS_IMAGE_REBUILD === "1";
 const GRID_LEFT = 38;
 const GRID_RIGHT = 1762;
 const GRID_TOP = 260;
@@ -146,28 +151,46 @@ function ordinanceInfo(node) {
 const files = (await fs.readdir(dataDir))
   .filter((file) => file.endsWith(".json"))
   .sort();
-const manifest = JSON.parse(await fs.readFile(manifestPath, "utf8"));
+const catalogManifest = JSON.parse(await fs.readFile(manifestPath, "utf8"));
 const categoryBySlug = new Map(
-  manifest.map((entry) => [entry.slug, entry.category])
+  catalogManifest.map((entry) => [entry.slug, entry.category])
 );
+const previousGeneration = await readGenerationManifest();
+const currentGeneration = {
+  version: 1,
+  rendererVersion: RENDERER_VERSION,
+  width: WIDTH,
+  height: HEIGHT,
+  entries: {},
+};
 
 await fs.mkdir(outputDir, { recursive: true });
 const generated = [];
+const skipped = [];
 for (let index = 0; index < files.length; index += 4) {
   const batch = files.slice(index, index + 4);
-  const results = await Promise.all(batch.map(generateInstitutionImage));
-  generated.push(...results);
+  const results = await Promise.all(batch.map(processInstitutionImage));
+  for (const result of results) {
+    currentGeneration.entries[result.slug] = result.entry;
+    if (result.generated) generated.push(result);
+    else skipped.push(result);
+  }
 }
 
-if (generated.length !== manifest.length) {
+if (files.length !== catalogManifest.length) {
   throw new Error(
-    `세로형 PNG 수 ${generated.length}개와 manifest ${manifest.length}개가 다릅니다`
+    `기관 JSON 수 ${files.length}개와 manifest ${catalogManifest.length}개가 다릅니다`
   );
 }
 
+await removeStaleProcessImages(new Set(Object.keys(currentGeneration.entries)));
+await fs.writeFile(generationManifestPath, `${JSON.stringify(currentGeneration, null, 2)}\n`);
+
 const eiaOutput = path.join(outputDir, "environmental-impact-assessment.png");
 await fs.copyFile(eiaOutput, legacyEiaPath);
-console.log(`세로형 업무구조도 PNG 생성: ${generated.length}개 (${WIDTH}x${HEIGHT})`);
+console.log(
+  `세로형 업무구조도 PNG 처리: 신규·변경 ${generated.length}개 · 재사용 ${skipped.length}개 · 전체 ${files.length}개 (${WIDTH}x${HEIGHT})`
+);
 console.log(
   `텍스트 레이아웃 검증: 노드 ${generated.reduce((sum, item) => sum + item.audit.nodes, 0)}개 · ` +
     `단계 ${generated.reduce((sum, item) => sum + item.audit.stages, 0)}개 · ` +
@@ -183,9 +206,37 @@ console.log(
     "공선 겹침 0개"
 );
 
-async function generateInstitutionImage(file) {
-  const institution = JSON.parse(await fs.readFile(path.join(dataDir, file), "utf8"));
+async function processInstitutionImage(file) {
+  const raw = await fs.readFile(path.join(dataDir, file), "utf8");
+  const institution = JSON.parse(raw);
   institution.category ??= categoryBySlug.get(institution.slug) ?? "기타";
+  const sourceHash = createSourceHash(file, raw, institution.category);
+  const outputPath = path.join(outputDir, `${institution.slug}.png`);
+  const previousEntry = previousGeneration.entries?.[institution.slug];
+  const reusable =
+    !forceRebuild &&
+    previousEntry?.sourceHash === sourceHash &&
+    previousEntry?.rendererVersion === RENDERER_VERSION &&
+    previousEntry?.width === WIDTH &&
+    previousEntry?.height === HEIGHT &&
+    (await isValidProcessImage(outputPath));
+
+  const entry = {
+    sourceFile: file,
+    sourceHash,
+    rendererVersion: RENDERER_VERSION,
+    width: WIDTH,
+    height: HEIGHT,
+  };
+  if (reusable) {
+    return { slug: institution.slug, generated: false, entry, audit: null };
+  }
+
+  const result = await generateInstitutionImage(institution);
+  return { ...result, slug: institution.slug, generated: true, entry };
+}
+
+async function generateInstitutionImage(institution) {
   const process = institution.process;
   const groups = buildProcessLaneGroups(process?.lanes ?? [], institution.slug);
   if (!process || !groups?.length) {
@@ -205,6 +256,44 @@ async function generateInstitutionImage(file) {
     throw new Error(`PNG 규격 오류: ${institution.slug}`);
   }
   return { outputPath, audit: context.textAudit };
+}
+
+async function readGenerationManifest() {
+  try {
+    const parsed = JSON.parse(await fs.readFile(generationManifestPath, "utf8"));
+    if (!parsed || typeof parsed !== "object" || typeof parsed.entries !== "object") {
+      return { entries: {} };
+    }
+    return parsed;
+  } catch {
+    return { entries: {} };
+  }
+}
+
+function createSourceHash(file, raw, category) {
+  return crypto
+    .createHash("sha256")
+    .update(`${RENDERER_VERSION}\0${file}\0${category}\0${raw}`)
+    .digest("hex");
+}
+
+async function isValidProcessImage(filePath) {
+  try {
+    const metadata = await sharp(filePath).metadata();
+    return metadata.width === WIDTH && metadata.height === HEIGHT && metadata.format === "png";
+  } catch {
+    return false;
+  }
+}
+
+async function removeStaleProcessImages(currentSlugs) {
+  const expected = new Set([...currentSlugs].map((slug) => `${slug}.png`));
+  const existing = (await fs.readdir(outputDir)).filter((file) => file.endsWith(".png"));
+  await Promise.all(
+    existing
+      .filter((file) => !expected.has(file))
+      .map((file) => fs.unlink(path.join(outputDir, file)))
+  );
 }
 
 function buildLayout(institution, process, groups) {
