@@ -73,6 +73,7 @@ function walkInstitution(institution) {
   const activePersonaNodeIds = new Set(
     process.nodes.filter((node) => activePersonaLanes.includes(node.lane)).map((node) => node.id),
   );
+  const personaEntryExpected = institution.personaAudit?.entryExpected !== false;
   const findings = [];
 
   for (const node of process.nodes.filter((item) => item.unverified || item.status === "needs-review")) {
@@ -113,7 +114,7 @@ function walkInstitution(institution) {
   const terminals = process.nodes.filter(
     (node) => !(outgoing.get(node.id) ?? []).some((edge) => edge.type === "sequence"),
   );
-  if (activePersonaLanes.length > 0 && personaEntries.length === 0) {
+  if (activePersonaLanes.length > 0 && personaEntries.length === 0 && personaEntryExpected) {
     findings.push({
       rule: "normal-no-persona-entry",
       severity: "high",
@@ -198,6 +199,7 @@ function walkInstitution(institution) {
     name: institution.name,
     personaLanes,
     activePersonaLanes,
+    personaAudit: institution.personaAudit ?? null,
     scenarios: {
       normal: {
         entries: personaEntries.map((node) => node.id),

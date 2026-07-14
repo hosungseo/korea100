@@ -114,11 +114,19 @@ for (const file of files) {
   // --- 3. backward sequence edges ------------------------------------------
   const stageIndex = new Map((proc.stages ?? []).map((s, i) => [s, i]));
   const nodeStage = new Map(nodes.map((n) => [n.id, stageIndex.get(n.stage) ?? -1]));
+  const backwardSequenceExceptions = new Set(
+    Object.keys(proc.audit_exceptions?.backwardSequence ?? {}),
+  );
   for (const edge of edges) {
     if (edge.type !== "sequence") continue;
     const from = nodeStage.get(edge.source);
     const to = nodeStage.get(edge.target);
-    if (from !== undefined && to !== undefined && to < from) {
+    if (
+      from !== undefined &&
+      to !== undefined &&
+      to < from &&
+      !backwardSequenceExceptions.has(edge.id)
+    ) {
       findings.push({
         rule: "backward-sequence",
         edge: edge.id,
@@ -158,6 +166,7 @@ for (const file of files) {
     slug,
     verificationStatus: data.verification?.status ?? "unknown",
     processWarnings: (proc.warnings ?? []).length,
+    auditExceptions: proc.audit_exceptions ?? {},
     findings,
   });
 }

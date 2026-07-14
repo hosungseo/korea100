@@ -1,7 +1,8 @@
 import { parseArticleHeaders } from "./article-citations.mjs";
 
 function articleContent(payload) {
-  const content = payload?.AdmRulService?.["조문내용"];
+  const service = payload?.AdmRulService;
+  const content = service?.["조문내용"] ?? service?.["조문"]?.["조문내용"];
   if (Array.isArray(content)) return content.filter((item) => typeof item === "string").join("\n");
   return typeof content === "string" ? content : "";
 }
