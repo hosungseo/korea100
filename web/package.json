@@ -6,6 +6,7 @@
     "generate:catalog": "node scripts/generate-catalog-assets.mjs",
     "generate:process-image": "npm run generate:process-images",
     "generate:process-images": "node scripts/generate-process-article-image.mjs",
+    "generate:process-images:all": "node scripts/generate-process-article-image.mjs --all",
     "generate:verification-queue": "node scripts/generate-field-verification-queue.mjs",
     "discover:candidates": "node scripts/discover-news-candidates.mjs",
     "check:freshness": "node scripts/sync-verification.mjs --check",

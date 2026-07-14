@@ -4,6 +4,7 @@
  "oneLiner": "인권침해나 차별을 당한 사람이 독립기구인 국가인권위원회에 진정하면, 위원회가 조사해 구제조치를 권고하고 제도 개선을 요구하는 준사법적 인권구제 제도",
  "type": "권리구제형",
  "priority": 79,
+ "category": "민원·권리구제·참여",
  "whyFirst": "법원·행정과 별개인 독립 인권구제 창구다. 진정-조사-권고 흐름과 권고의 비구속성이라는 쟁점이 뚜렷해 제도 지도로 적합하다.",
  "asOfDate": "2026-07-10",
  "status": "full",
@@ -115,14 +116,14 @@
   "nodes": [
    {
     "id": "P01",
-    "name": "인권침해·차별 피해 인지·진정 준비",
+    "name": "인권침해·차별 피해 인지·진정서 작성·제출",
     "lane": "진정인/피해자",
     "stage": "G0 진정준비",
     "type": "task",
     "status": "done",
     "progress": 100,
     "actor": "진정인",
-    "action": "진정 준비",
+    "action": "인권침해·차별 사실과 구제 요구를 정리해 진정서를 작성·제출한다",
     "output_documents": [
      "진정 요지",
      "관련 자료"
@@ -609,6 +610,41 @@
       "text": "위원회는 진정의 조사 및 조정의 내용과 처리 결과, 관계기관등에 대한 권고와 관계기관등이 한 조치 등을 공표할 수 있다."
      }
     ]
+   },
+   {
+    "id": "P18",
+    "name": "각하·결정·권고 결과 수령·확인",
+    "lane": "진정인/피해자",
+    "stage": "G6 이행·공표",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "진정인·피해자",
+    "receiver": "진정인·피해자",
+    "action": "각하 결정, 조사·조정 결과, 구제조치 권고 또는 고발·징계권고 관련 통지를 수령하고 후속 대응을 확인한다",
+    "output_documents": [
+     "처리결과 통지",
+     "결정문·권고서"
+    ],
+    "deadline": null,
+    "confidence": 0.88,
+    "legal_basis": [
+     {
+      "law": "국가인권위원회법",
+      "article": "제32조",
+      "text": "진정을 각하하거나 이송한 경우 진정인에게 그 사유를 통지한다."
+     },
+     {
+      "law": "국가인권위원회법",
+      "article": "제44조",
+      "text": "위원회는 조사 결과 인권침해나 차별행위가 인정되면 구제조치 등을 권고할 수 있다."
+     },
+     {
+      "law": "국가인권위원회법",
+      "article": "제49조의2",
+      "text": "위원회는 진정의 조사·조정 내용과 처리 결과 등을 공표할 수 있다."
+     }
+    ]
    }
   ],
   "edges": [
@@ -758,6 +794,34 @@
     "target": "P14",
     "type": "loop",
     "label": "공표·재이행 요구"
+   },
+   {
+    "id": "M04",
+    "source": "P05",
+    "target": "P18",
+    "type": "message",
+    "label": "각하 결정 통지"
+   },
+   {
+    "id": "M05",
+    "source": "P12",
+    "target": "P18",
+    "type": "message",
+    "label": "구제조치 권고 통지"
+   },
+   {
+    "id": "M06",
+    "source": "P13",
+    "target": "P18",
+    "type": "message",
+    "label": "고발·징계권고 관련 통지"
+   },
+   {
+    "id": "M07",
+    "source": "P15",
+    "target": "P18",
+    "type": "message",
+    "label": "공표·이행 결과 확인"
    }
   ],
   "warnings": [
@@ -768,9 +832,9 @@
  },
  "verification": {
   "status": "article-verified",
-  "verifiedAt": "2026-07-13",
+  "verifiedAt": "2026-07-15",
   "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
-  "scope": "법적 근거 4건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 63건 가운데 63건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "scope": "법적 근거 4건 중 공식 원문 4건을 연결했다. 캔버스와 절차 노드의 명시 조문 66건 가운데 66건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "sources": [
    {
     "law": "국가인권위원회법",
@@ -816,12 +880,12 @@
    }
   ],
   "articleVerification": {
-   "checkedAt": "2026-07-13",
+   "checkedAt": "2026-07-15",
    "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
-   "citationEntries": 29,
-   "explicitCitationEntries": 27,
-   "articleReferences": 63,
-   "verifiedReferences": 63,
+   "citationEntries": 32,
+   "explicitCitationEntries": 30,
+   "articleReferences": 66,
+   "verifiedReferences": 66,
    "missingReferences": 0,
    "uncheckableReferences": 0
   }
