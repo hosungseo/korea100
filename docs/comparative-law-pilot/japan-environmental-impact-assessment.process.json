@@ -1,0 +1,707 @@
+{
+  "slug": "japan-environmental-impact-assessment",
+  "name": "일본 환경영향평가",
+  "country": "일본",
+  "lawName": "環境影響評価法",
+  "lawId": "409AC0000000081",
+  "asOfDate": "2026-07-14",
+  "modelStatus": "pilot-source-linked",
+  "scopeNote": "일본 환경영향평가법의 일반 절차를 모델링했다. 도시계획사업·항만계획 등 특례 장은 제외하고, 제1종사업 및 판정 후 대상이 되는 제2종사업의 표준 흐름을 중심으로 정리했다.",
+  "sources": [
+    {
+      "title": "e-Gov 법령 API 환경영향평가법 XML",
+      "url": "https://elaws.e-gov.go.jp/api/1/lawdata/409AC0000000081",
+      "basis": "현행 일본 원문 조문 구조"
+    },
+    {
+      "title": "세계법제정보센터 일본 환경영향평가법",
+      "url": "https://world.moleg.go.kr/web/wli/lgslInfoReadPage.do?CTS_SEQ=2996&AST_SEQ=157",
+      "basis": "원문본·번역본·영문본 파일 목록과 법령 개요"
+    },
+    {
+      "title": "일본 e-Gov 법령검색 환경영향평가법",
+      "url": "https://laws.e-gov.go.jp/law/409AC0000000081",
+      "basis": "일본 공식 법령 페이지"
+    }
+  ],
+  "translationNote": "세계법제정보센터의 최신 원문 PDF는 2025-06-20 공포, 2026-04-01 시행본이다. 한국어·영문 번역본은 2014-06-04 개정 기준이므로 용어 확인 보조자료로만 사용했다.",
+  "process": {
+    "institution_name": "일본 환경영향평가 제도",
+    "law_name": "環境影響評価法",
+    "lanes": [
+      "사업자",
+      "주무대신·면허권자",
+      "환경대신",
+      "도도부현·시정촌",
+      "주민·일반",
+      "공고·종람·인터넷"
+    ],
+    "stages": [
+      "J0 대상·판정",
+      "J1 계획단계 배려서",
+      "J2 방법서 스코핑",
+      "J3 평가 실시",
+      "J4 준비서 의견수렴",
+      "J5 평가서 보정·공고",
+      "J6 실행·사후보고"
+    ],
+    "nodes": [
+      {
+        "id": "P01",
+        "name": "제1종·제2종 대상 확인",
+        "lane": "사업자",
+        "stage": "J0 대상·판정",
+        "type": "gateway",
+        "status": "done",
+        "actor": "사업자",
+        "action": "사업 종류·규모·구역을 기준으로 제1종사업, 제2종사업, 대상사업 해당 여부를 확인한다.",
+        "output_documents": [
+          "사업 개요",
+          "대상사업 해당성 검토"
+        ],
+        "legal_basis": [
+          {
+            "law": "環境影響評価法",
+            "article": "제2조"
+          }
+        ]
+      },
+      {
+        "id": "P02",
+        "name": "제2종사업 판정 신고",
+        "lane": "사업자",
+        "stage": "J0 대상·판정",
+        "type": "task",
+        "status": "waiting",
+        "actor": "제2종사업을 실시하려는 자",
+        "action": "제2종사업의 종류·규모·시행구역 등 개요를 주무대신 또는 면허권자에게 신고한다.",
+        "output_documents": [
+          "제2종사업 신고서",
+          "사업 개요서"
+        ],
+        "legal_basis": [
+          {
+            "law": "環境影響評価法",
+            "article": "제4조제1항"
+          }
+        ]
+      },
+      {
+        "id": "P03",
+        "name": "60일 내 필요성 판정",
+        "lane": "주무대신·면허권자",
+        "stage": "J0 대상·판정",
+        "type": "gateway",
+        "status": "risk",
+        "actor": "주무대신·면허권자",
+        "action": "도도부현지사의 의견을 구하고, 신고 후 60일 내 환경영향평가 절차 필요 여부를 판정·통지한다.",
+        "output_documents": [
+          "도도부현지사 의견",
+          "환경영향평가 필요성 판정 통지"
+        ],
+        "deadline": "신고일부터 60일 이내",
+        "legal_basis": [
+          {
+            "law": "環境影響評価法",
+            "article": "제4조제2항·제3항"
+          }
+        ]
+      },
+      {
+        "id": "P04",
+        "name": "계획단계 배려사항 검토",
+        "lane": "사업자",
+        "stage": "J1 계획단계 배려서",
+        "type": "task",
+        "status": "done",
+        "actor": "제1종사업을 실시하려는 자",
+        "action": "계획 입안 단계에서 사업구역과 환경보전 관점의 대안·배려사항을 검토한다.",
+        "output_documents": [
+          "계획단계 배려사항 검토 결과"
+        ],
+        "legal_basis": [
+          {
+            "law": "環境影響評価法",
+            "article": "제3조의2"
+          }
+        ]
+      },
+      {
+        "id": "P05",
+        "name": "배려서 작성·송부·공표",
+        "lane": "사업자",
+        "stage": "J1 계획단계 배려서",
+        "type": "task",
+        "status": "current",
+        "actor": "사업자",
+        "action": "계획단계 환경배려서를 작성하고 주무대신에게 송부하며, 배려서와 요약서를 공표한다.",
+        "output_documents": [
+          "계획단계 환경배려서",
+          "요약서"
+        ],
+        "legal_basis": [
+          {
+            "law": "環境影響評価法",
+            "article": "제3조의3·제3조의4"
+          }
+        ]
+      },
+      {
+        "id": "P06",
+        "name": "환경대신·주무대신 의견",
+        "lane": "환경대신",
+        "stage": "J1 계획단계 배려서",
+        "type": "notice",
+        "status": "waiting",
+        "actor": "환경대신·주무대신",
+        "action": "환경대신은 주무대신에게, 주무대신은 사업자에게 환경보전 관점의 서면 의견을 제시할 수 있다.",
+        "output_documents": [
+          "환경대신 의견",
+          "주무대신 의견"
+        ],
+        "legal_basis": [
+          {
+            "law": "環境影響評価法",
+            "article": "제3조의5·제3조의6"
+          }
+        ]
+      },
+      {
+        "id": "P07",
+        "name": "관계기관·일반 의견 청취",
+        "lane": "주민·일반",
+        "stage": "J1 계획단계 배려서",
+        "type": "notice",
+        "status": "waiting",
+        "actor": "관계 행정기관·일반",
+        "action": "사업자는 배려서안 또는 배려서에 대해 관계 행정기관과 일반의 환경보전 의견을 구하도록 노력한다.",
+        "output_documents": [
+          "배려서 의견"
+        ],
+        "legal_basis": [
+          {
+            "law": "環境影響評価法",
+            "article": "제3조의7"
+          }
+        ]
+      },
+      {
+        "id": "P08",
+        "name": "방법서 작성",
+        "lane": "사업자",
+        "stage": "J2 방법서 스코핑",
+        "type": "task",
+        "status": "current",
+        "actor": "사업자",
+        "action": "배려서와 주무대신 의견을 감안해 환경영향평가 항목과 조사·예측·평가 방법을 적은 방법서를 작성한다.",
+        "output_documents": [
+          "환경영향평가방법서"
+        ],
+        "legal_basis": [
+          {
+            "law": "環境影響評価法",
+            "article": "제5조"
+          }
+        ]
+      },
+      {
+        "id": "P09",
+        "name": "방법서 공고·종람·설명회",
+        "lane": "공고·종람·인터넷",
+        "stage": "J2 방법서 스코핑",
+        "type": "notice",
+        "status": "current",
+        "actor": "사업자",
+        "action": "방법서와 요약서를 지자체에 송부하고, 공고일부터 1개월간 종람·인터넷 공표하며 설명회를 개최한다.",
+        "output_documents": [
+          "방법서 공고",
+          "종람 자료",
+          "방법서 설명회"
+        ],
+        "deadline": "공고일부터 1개월 종람",
+        "legal_basis": [
+          {
+            "law": "環境影響評価法",
+            "article": "제6조·제7조·제7조의2"
+          }
+        ]
+      },
+      {
+        "id": "P10",
+        "name": "의견서·지자체 의견",
+        "lane": "도도부현·시정촌",
+        "stage": "J2 방법서 스코핑",
+        "type": "notice",
+        "status": "waiting",
+        "actor": "주민·도도부현지사·시정촌장",
+        "action": "주민은 의견서를 제출하고, 사업자는 의견 개요를 송부하며, 도도부현지사는 시정촌장 의견을 구해 사업자에게 서면 의견을 낸다.",
+        "output_documents": [
+          "방법서 의견서",
+          "의견 개요",
+          "도도부현지사 의견"
+        ],
+        "deadline": "종람 종료 다음 날부터 2주 경과일까지 의견 제출",
+        "legal_basis": [
+          {
+            "law": "環境影響評価法",
+            "article": "제8조·제9조·제10조"
+          }
+        ]
+      },
+      {
+        "id": "P11",
+        "name": "평가 항목·방법 선정",
+        "lane": "사업자",
+        "stage": "J3 평가 실시",
+        "type": "task",
+        "status": "current",
+        "actor": "사업자",
+        "action": "방법서 의견을 감안하고 주민 의견에 배려하여 환경영향평가 항목과 조사·예측·평가 방법을 확정한다.",
+        "output_documents": [
+          "평가 항목·방법 선정 결과"
+        ],
+        "legal_basis": [
+          {
+            "law": "環境影響評価法",
+            "article": "제11조"
+          }
+        ]
+      },
+      {
+        "id": "P12",
+        "name": "조사·예측·평가 실시",
+        "lane": "사업자",
+        "stage": "J3 평가 실시",
+        "type": "task",
+        "status": "current",
+        "actor": "사업자",
+        "action": "선정된 항목과 방법에 따라 환경현황 조사, 영향 예측, 평가와 환경보전조치 검토를 수행한다.",
+        "output_documents": [
+          "조사 결과",
+          "예측·평가 결과",
+          "환경보전조치"
+        ],
+        "legal_basis": [
+          {
+            "law": "環境影響評価法",
+            "article": "제12조"
+          }
+        ]
+      },
+      {
+        "id": "P13",
+        "name": "준비서 작성",
+        "lane": "사업자",
+        "stage": "J4 준비서 의견수렴",
+        "type": "task",
+        "status": "current",
+        "actor": "사업자",
+        "action": "환경영향평가 결과에 대해 의견을 듣기 위한 준비서와 요약서를 작성한다.",
+        "output_documents": [
+          "환경영향평가준비서",
+          "준비서 요약서"
+        ],
+        "legal_basis": [
+          {
+            "law": "環境影響評価法",
+            "article": "제14조"
+          }
+        ]
+      },
+      {
+        "id": "P14",
+        "name": "준비서 공고·종람·설명회",
+        "lane": "공고·종람·인터넷",
+        "stage": "J4 준비서 의견수렴",
+        "type": "notice",
+        "status": "current",
+        "actor": "사업자",
+        "action": "준비서를 관계 지자체에 송부하고, 공고일부터 1개월간 종람·인터넷 공표하며 설명회를 개최한다.",
+        "output_documents": [
+          "준비서 공고",
+          "종람 자료",
+          "준비서 설명회"
+        ],
+        "deadline": "공고일부터 1개월 종람",
+        "legal_basis": [
+          {
+            "law": "環境影響評価法",
+            "article": "제15조·제16조·제17조"
+          }
+        ]
+      },
+      {
+        "id": "P15",
+        "name": "의견·사업자 견해·지자체 의견",
+        "lane": "도도부현·시정촌",
+        "stage": "J4 준비서 의견수렴",
+        "type": "notice",
+        "status": "waiting",
+        "actor": "주민·관계 도도부현지사·시정촌장",
+        "action": "주민 의견을 받고, 사업자는 의견 개요와 견해를 송부하며, 관계 도도부현지사는 시정촌장 의견을 구해 서면 의견을 낸다.",
+        "output_documents": [
+          "준비서 의견서",
+          "의견 개요와 사업자 견해",
+          "관계 도도부현지사 의견"
+        ],
+        "deadline": "종람 종료 다음 날부터 2주 경과일까지 의견 제출",
+        "legal_basis": [
+          {
+            "law": "環境影響評価法",
+            "article": "제18조·제19조·제20조"
+          }
+        ]
+      },
+      {
+        "id": "P16",
+        "name": "평가서 작성·사업내용 수정",
+        "lane": "사업자",
+        "stage": "J5 평가서 보정·공고",
+        "type": "task",
+        "status": "current",
+        "actor": "사업자",
+        "action": "준비서 의견과 주민 의견을 반영해 평가서를 작성하고, 필요한 경우 사업내용 수정 절차를 판단한다.",
+        "output_documents": [
+          "환경영향평가서",
+          "수정 필요성 판단"
+        ],
+        "legal_basis": [
+          {
+            "law": "環境影響評価法",
+            "article": "제21조"
+          }
+        ]
+      },
+      {
+        "id": "P17",
+        "name": "면허권자 송부·환경대신 의견",
+        "lane": "주무대신·면허권자",
+        "stage": "J5 평가서 보정·공고",
+        "type": "notice",
+        "status": "waiting",
+        "actor": "면허권자·환경대신",
+        "action": "사업자는 평가서를 면허권자 등에게 송부하고, 환경대신 및 면허권자는 환경보전 관점의 의견을 제시할 수 있다.",
+        "output_documents": [
+          "평가서 송부",
+          "환경대신 의견",
+          "면허권자 의견"
+        ],
+        "legal_basis": [
+          {
+            "law": "環境影響評価法",
+            "article": "제22조·제23조·제24조"
+          }
+        ]
+      },
+      {
+        "id": "P18",
+        "name": "평가서 재검토·보정",
+        "lane": "사업자",
+        "stage": "J5 평가서 보정·공고",
+        "type": "task",
+        "status": "loop",
+        "actor": "사업자",
+        "action": "면허권자 의견을 감안하여 평가서를 재검토하고, 필요하면 보정하거나 앞 단계 절차를 다시 밟는다.",
+        "output_documents": [
+          "보정 평가서",
+          "재절차 판단"
+        ],
+        "legal_basis": [
+          {
+            "law": "環境影響評価法",
+            "article": "제25조·제28조·제29조"
+          }
+        ]
+      },
+      {
+        "id": "P19",
+        "name": "평가서 공고·종람·공표",
+        "lane": "공고·종람·인터넷",
+        "stage": "J5 평가서 보정·공고",
+        "type": "notice",
+        "status": "current",
+        "actor": "사업자",
+        "action": "평가서 작성 사실을 공고하고, 공고일부터 1개월간 평가서 등을 관계지역에서 종람하며 인터넷 등으로 공표한다.",
+        "output_documents": [
+          "평가서 공고",
+          "평가서 종람본",
+          "인터넷 공표"
+        ],
+        "deadline": "공고일부터 1개월 종람",
+        "legal_basis": [
+          {
+            "law": "環境影響評価法",
+            "article": "제27조"
+          }
+        ]
+      },
+      {
+        "id": "P20",
+        "name": "착공 제한 해제·인허가 심사",
+        "lane": "주무대신·면허권자",
+        "stage": "J6 실행·사후보고",
+        "type": "gateway",
+        "status": "risk",
+        "actor": "면허권자·특정신고 수리자·교부결정권자 등",
+        "action": "평가서 공고 전 사업 실시가 제한되며, 공고 후에는 평가서와 의견서를 근거로 환경보전 배려 여부를 심사한다.",
+        "output_documents": [
+          "인허가 심사",
+          "보조금 교부 심사",
+          "감독·확보 조치"
+        ],
+        "legal_basis": [
+          {
+            "law": "環境影響評価法",
+            "article": "제31조·제33조~제37조"
+          }
+        ]
+      },
+      {
+        "id": "P21",
+        "name": "평가서대로 사업 실시",
+        "lane": "사업자",
+        "stage": "J6 실행·사후보고",
+        "type": "task",
+        "status": "waiting",
+        "actor": "사업자",
+        "action": "사업자는 평가서 기재 내용에 따라 환경보전에 적정한 배려를 하며 대상사업을 실시한다.",
+        "output_documents": [
+          "환경보전조치 이행"
+        ],
+        "legal_basis": [
+          {
+            "law": "環境影響評価法",
+            "article": "제38조"
+          }
+        ]
+      },
+      {
+        "id": "P22",
+        "name": "환경보전조치 보고서 송부·공표",
+        "lane": "사업자",
+        "stage": "J6 실행·사후보고",
+        "type": "task",
+        "status": "waiting",
+        "actor": "사업자",
+        "action": "환경보전조치와 사후 조사 결과 등을 보고서로 작성해 평가서 수령자에게 송부하고 공표한다.",
+        "output_documents": [
+          "환경보전조치 등 보고서"
+        ],
+        "legal_basis": [
+          {
+            "law": "環境影響評価法",
+            "article": "제38조의2·제38조의3"
+          }
+        ]
+      },
+      {
+        "id": "P23",
+        "name": "보고서 의견",
+        "lane": "환경대신",
+        "stage": "J6 실행·사후보고",
+        "type": "notice",
+        "status": "waiting",
+        "actor": "환경대신·면허권자",
+        "action": "환경대신과 면허권자는 보고서에 대해 환경보전 관점의 의견을 제시할 수 있다.",
+        "output_documents": [
+          "환경대신 보고서 의견",
+          "면허권자 보고서 의견"
+        ],
+        "legal_basis": [
+          {
+            "law": "環境影響評価法",
+            "article": "제38조의4·제38조의5"
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "E01",
+        "source": "P01",
+        "target": "P02",
+        "type": "sequence",
+        "label": "제2종이면 신고"
+      },
+      {
+        "id": "E02",
+        "source": "P01",
+        "target": "P04",
+        "type": "sequence",
+        "label": "제1종은 배려서"
+      },
+      {
+        "id": "E03",
+        "source": "P02",
+        "target": "P03",
+        "type": "message",
+        "label": "신고·의견조회"
+      },
+      {
+        "id": "E04",
+        "source": "P03",
+        "target": "P04",
+        "type": "sequence",
+        "label": "필요 판정"
+      },
+      {
+        "id": "E05",
+        "source": "P04",
+        "target": "P05",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E06",
+        "source": "P05",
+        "target": "P06",
+        "type": "message",
+        "label": "송부·의견"
+      },
+      {
+        "id": "E07",
+        "source": "P05",
+        "target": "P07",
+        "type": "message",
+        "label": "의견 청취 노력"
+      },
+      {
+        "id": "E08",
+        "source": "P06",
+        "target": "P08",
+        "type": "sequence",
+        "label": "의견 반영"
+      },
+      {
+        "id": "E09",
+        "source": "P07",
+        "target": "P08",
+        "type": "sequence",
+        "label": "의견 반영"
+      },
+      {
+        "id": "E10",
+        "source": "P08",
+        "target": "P09",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E11",
+        "source": "P09",
+        "target": "P10",
+        "type": "message",
+        "label": "의견 수렴"
+      },
+      {
+        "id": "E12",
+        "source": "P10",
+        "target": "P11",
+        "type": "sequence",
+        "label": "의견 감안"
+      },
+      {
+        "id": "E13",
+        "source": "P11",
+        "target": "P12",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E14",
+        "source": "P12",
+        "target": "P13",
+        "type": "sequence",
+        "label": "결과 정리"
+      },
+      {
+        "id": "E15",
+        "source": "P13",
+        "target": "P14",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E16",
+        "source": "P14",
+        "target": "P15",
+        "type": "message",
+        "label": "의견 수렴"
+      },
+      {
+        "id": "E17",
+        "source": "P15",
+        "target": "P16",
+        "type": "sequence",
+        "label": "의견·견해 반영"
+      },
+      {
+        "id": "E18",
+        "source": "P16",
+        "target": "P17",
+        "type": "message",
+        "label": "평가서 송부"
+      },
+      {
+        "id": "E19",
+        "source": "P17",
+        "target": "P18",
+        "type": "sequence",
+        "label": "의견 감안"
+      },
+      {
+        "id": "E20",
+        "source": "P18",
+        "target": "P19",
+        "type": "sequence",
+        "label": "확정 공고"
+      },
+      {
+        "id": "E21",
+        "source": "P19",
+        "target": "P20",
+        "type": "sequence",
+        "label": "공고 후"
+      },
+      {
+        "id": "E22",
+        "source": "P20",
+        "target": "P21",
+        "type": "sequence",
+        "label": "실시 가능"
+      },
+      {
+        "id": "E23",
+        "source": "P21",
+        "target": "P22",
+        "type": "sequence",
+        "label": "사후 보고"
+      },
+      {
+        "id": "E24",
+        "source": "P22",
+        "target": "P23",
+        "type": "message",
+        "label": "보고서 의견"
+      },
+      {
+        "id": "E25",
+        "source": "P18",
+        "target": "P08",
+        "type": "loop",
+        "label": "중대 수정 시 재절차"
+      },
+      {
+        "id": "E26",
+        "source": "P20",
+        "target": "P08",
+        "type": "loop",
+        "label": "특별 사정 시 재실시"
+      }
+    ],
+    "warnings": [
+      "도시계획사업과 항만계획에 대한 특례 절차는 이번 파일럿 구조도에서 제외했다.",
+      "세계법제정보센터 번역본은 2014년 기준이므로, 최신 조문 번호와 절차는 e-Gov XML 원문을 우선했다."
+    ]
+  }
+}

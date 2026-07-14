@@ -1,0 +1,698 @@
+{
+  "slug": "vietnam-commercial-import-customs",
+  "name": "베트남 상업 수입통관",
+  "country": "베트남",
+  "lawName": "Luật Hải quan 54/2014/QH13",
+  "asOfDate": "2026-07-14",
+  "modelStatus": "pilot-source-linked",
+  "selectionReason": "베트남과의 일반 무역에서 가장 반복적으로 부딪히는 절차가 수입통관이며, 공식 Vietnam Trade Information Portal에 VNACCS 수입통관 절차와 Green/Yellow/Red 분류가 단계별로 공개되어 있어 첫 샘플로 적합하다.",
+  "scopeNote": "상업용 수입화물의 일반 VNACCS 통관 흐름을 모델링했다. 품목별 수입허가, 검역, 식품·전기전자·화학 등 전문검사 세부요건은 제도별 별도 모델로 분리해야 한다.",
+  "sources": [
+    {
+      "title": "Vietnam Trade Information Portal - 상업 수입화물 VNACCS 통관 절차",
+      "url": "https://www.vietnamtradeportal.gov.vn/index.php?id=3&r=searchProcedure%2Fview1",
+      "basis": "수입신고 IDA/IDB/IDC, Green/Yellow/Red 분류, 제출서류, 처리시간, 수수료, 통관 단계"
+    },
+    {
+      "title": "Vietnam Trade Information Portal - Customs Law 54/2014/QH13",
+      "url": "https://www.vietnamtradeportal.gov.vn/index.php?id=40&r=site%2Fdisplay",
+      "basis": "통관 원칙, 신고인 의무, 전자신고, 서류·실물검사, 통관 및 사후보관 근거"
+    },
+    {
+      "title": "Vietnam Trade Information Portal - Decree 08/2015/ND-CP",
+      "url": "https://www.vietnamtradeportal.gov.vn/index.php?id=68&r=site%2Fdisplay",
+      "basis": "Customs Law 시행 세부 절차"
+    },
+    {
+      "title": "Vietnam Trade Information Portal - Circular 38/2015/TT-BTC",
+      "url": "https://www.vietnamtradeportal.gov.vn/index.php?id=74&r=site%2Fdisplay",
+      "basis": "통관, 검사, 수출입세 및 세무관리 세부 절차"
+    }
+  ],
+  "translationNote": "베트남어 공식 절차명과 조문명을 한국어로 요약했다. 품목별 전문검사와 최신 시행령·시행규칙 개정 여부는 실제 거래 전 베트남 세관·통관사 확인이 필요하다.",
+  "process": {
+    "institution_name": "베트남 상업 수입통관 제도",
+    "law_name": "Luật Hải quan 54/2014/QH13",
+    "lanes": [
+      "수입자·통관대리인",
+      "VNACCS·세관시스템",
+      "세관공무원",
+      "전문검사·허가기관",
+      "보세구역·운송인",
+      "세금·수수료"
+    ],
+    "stages": [
+      "V0 품목·서류 준비",
+      "V1 사전신고",
+      "V2 공식신고·등록",
+      "V3 위험분류",
+      "V4 서류·실물검사",
+      "V5 세금·수수료",
+      "V6 통관·반출",
+      "V7 사후보관·정정"
+    ],
+    "nodes": [
+      {
+        "id": "P01",
+        "name": "HS·수입요건 확인",
+        "lane": "수입자·통관대리인",
+        "stage": "V0 품목·서류 준비",
+        "type": "gateway",
+        "status": "done",
+        "actor": "수입자·통관대리인",
+        "action": "품명, HS 코드, 원산지, 과세가격, 수입금지·허가·전문검사 대상 여부를 사전에 확인한다.",
+        "output_documents": [
+          "품목 검토표",
+          "HS 코드",
+          "수입요건 체크"
+        ],
+        "legal_basis": [
+          {
+            "law": "Customs Law 54/2014/QH13",
+            "article": "Article 4, Article 18"
+          }
+        ]
+      },
+      {
+        "id": "P02",
+        "name": "기본 통관서류 준비",
+        "lane": "수입자·통관대리인",
+        "stage": "V0 품목·서류 준비",
+        "type": "task",
+        "status": "done",
+        "actor": "수입자·통관대리인",
+        "action": "상업송장, 운송서류, 포장명세서, 과세가격 신고, 원산지증명, 수입허가·전문검사 서류를 준비한다.",
+        "output_documents": [
+          "Commercial invoice",
+          "Bill of lading",
+          "Packing list",
+          "Import permit",
+          "C/O"
+        ],
+        "legal_basis": [
+          {
+            "law": "Customs Law 54/2014/QH13",
+            "article": "Article 24"
+          },
+          {
+            "law": "Vietnam Trade Portal import procedure",
+            "article": "Required documents"
+          }
+        ]
+      },
+      {
+        "id": "P03",
+        "name": "허가·전문검사 해당성",
+        "lane": "전문검사·허가기관",
+        "stage": "V0 품목·서류 준비",
+        "type": "gateway",
+        "status": "risk",
+        "actor": "전문검사·허가기관",
+        "action": "품목별 수입허가, 전문검사, 면제 또는 검사결과 통지가 필요한지 판단한다.",
+        "output_documents": [
+          "수입허가",
+          "전문검사 결과",
+          "검사면제 통지"
+        ],
+        "legal_basis": [
+          {
+            "law": "Customs Law 54/2014/QH13",
+            "article": "Article 24, Article 32"
+          }
+        ],
+        "blocker": "품목별 요건"
+      },
+      {
+        "id": "P04",
+        "name": "IDA 사전신고 입력",
+        "lane": "수입자·통관대리인",
+        "stage": "V1 사전신고",
+        "type": "task",
+        "status": "current",
+        "actor": "수입자·통관대리인",
+        "action": "VNACCS에서 IDA 업무로 수입신고 정보를 사전 입력한다. 사전 정보는 7일 동안 수정 가능하다.",
+        "output_documents": [
+          "IDA 사전신고 정보"
+        ],
+        "deadline": "사전정보 7일 수정 가능",
+        "legal_basis": [
+          {
+            "law": "Vietnam Trade Portal import procedure",
+            "article": "Step 1.1"
+          }
+        ]
+      },
+      {
+        "id": "P05",
+        "name": "IDB 수정·보완",
+        "lane": "수입자·통관대리인",
+        "stage": "V1 사전신고",
+        "type": "task",
+        "status": "loop",
+        "actor": "수입자·통관대리인",
+        "action": "사전신고 정보가 바뀌면 IDB 업무로 신고 정보를 수정·보완한다.",
+        "output_documents": [
+          "수정 사전신고"
+        ],
+        "legal_basis": [
+          {
+            "law": "Vietnam Trade Portal import procedure",
+            "article": "Step 1.2"
+          }
+        ]
+      },
+      {
+        "id": "P06",
+        "name": "IDC 공식신고 전송",
+        "lane": "수입자·통관대리인",
+        "stage": "V2 공식신고·등록",
+        "type": "task",
+        "status": "current",
+        "actor": "수입자·통관대리인",
+        "action": "IDC 업무로 세관 전자처리시스템에 공식 수입신고를 전송한다.",
+        "output_documents": [
+          "전자 수입신고서"
+        ],
+        "legal_basis": [
+          {
+            "law": "Customs Law 54/2014/QH13",
+            "article": "Article 29"
+          },
+          {
+            "law": "Vietnam Trade Portal import procedure",
+            "article": "Step 1.3"
+          }
+        ]
+      },
+      {
+        "id": "P07",
+        "name": "신고 접수·등록",
+        "lane": "VNACCS·세관시스템",
+        "stage": "V2 공식신고·등록",
+        "type": "gateway",
+        "status": "risk",
+        "actor": "VNACCS·세관시스템",
+        "action": "세관 시스템이 신고를 접수·등록하거나, 등록하지 않는 경우 사유를 전자 또는 서면으로 통지한다.",
+        "output_documents": [
+          "등록 수리",
+          "등록 거절 사유"
+        ],
+        "legal_basis": [
+          {
+            "law": "Customs Law 54/2014/QH13",
+            "article": "Article 30"
+          }
+        ],
+        "blocker": "오류·요건 미충족"
+      },
+      {
+        "id": "P08",
+        "name": "위험분석·분류",
+        "lane": "VNACCS·세관시스템",
+        "stage": "V3 위험분류",
+        "type": "gateway",
+        "status": "current",
+        "actor": "VNACCS·세관시스템",
+        "action": "신고자료와 위험관리 기준에 따라 Green, Yellow, Red 경로를 분류한다.",
+        "output_documents": [
+          "분류 결과",
+          "검사 지시"
+        ],
+        "legal_basis": [
+          {
+            "law": "Customs Law 54/2014/QH13",
+            "article": "Article 17, Article 31"
+          },
+          {
+            "law": "Vietnam Trade Portal import procedure",
+            "article": "Step 2.1"
+          }
+        ]
+      },
+      {
+        "id": "P09",
+        "name": "Green 자동경로",
+        "lane": "VNACCS·세관시스템",
+        "stage": "V3 위험분류",
+        "type": "notice",
+        "status": "done",
+        "actor": "VNACCS·세관시스템",
+        "action": "Green으로 분류되면 추가 서류·실물검사 없이 세금·수수료 납부 후 통관 경로로 진행된다.",
+        "output_documents": [
+          "Green lane result"
+        ],
+        "legal_basis": [
+          {
+            "law": "Vietnam Trade Portal import procedure",
+            "article": "Step 2.1 Green"
+          }
+        ]
+      },
+      {
+        "id": "P10",
+        "name": "Yellow 서류검사",
+        "lane": "VNACCS·세관시스템",
+        "stage": "V3 위험분류",
+        "type": "notice",
+        "status": "risk",
+        "actor": "VNACCS·세관시스템",
+        "action": "Yellow로 분류되면 운송서류, 포장명세서, 과세가격 신고, 허가, 송장, 검사결과, 원산지증명 등 추가 서류 제출을 요구한다.",
+        "output_documents": [
+          "Yellow lane result",
+          "서류제출 요구"
+        ],
+        "legal_basis": [
+          {
+            "law": "Vietnam Trade Portal import procedure",
+            "article": "Step 2.1 Yellow"
+          }
+        ],
+        "blocker": "서류 확인"
+      },
+      {
+        "id": "P11",
+        "name": "Red 실물검사",
+        "lane": "VNACCS·세관시스템",
+        "stage": "V3 위험분류",
+        "type": "notice",
+        "status": "risk",
+        "actor": "VNACCS·세관시스템",
+        "action": "Red로 분류되면 Yellow 서류와 함께 화물을 제시하고 실제 검사를 받아야 한다.",
+        "output_documents": [
+          "Red lane result",
+          "실물검사 지시"
+        ],
+        "legal_basis": [
+          {
+            "law": "Vietnam Trade Portal import procedure",
+            "article": "Step 2.1 Red"
+          },
+          {
+            "law": "Customs Law 54/2014/QH13",
+            "article": "Article 33"
+          }
+        ],
+        "blocker": "실물검사"
+      },
+      {
+        "id": "P12",
+        "name": "서류 제출·보완",
+        "lane": "수입자·통관대리인",
+        "stage": "V4 서류·실물검사",
+        "type": "task",
+        "status": "current",
+        "actor": "수입자·통관대리인",
+        "action": "Yellow 또는 Red 경로에서 요구된 통관서류와 보완자료를 제출한다.",
+        "output_documents": [
+          "운송서류",
+          "송장",
+          "포장명세서",
+          "허가·검사자료",
+          "C/O"
+        ],
+        "legal_basis": [
+          {
+            "law": "Customs Law 54/2014/QH13",
+            "article": "Article 24, Article 32"
+          }
+        ]
+      },
+      {
+        "id": "P13",
+        "name": "서류검사",
+        "lane": "세관공무원",
+        "stage": "V4 서류·실물검사",
+        "type": "task",
+        "status": "risk",
+        "actor": "세관공무원",
+        "action": "신고 내용과 제출서류의 정확성, 완전성, 수입관리정책 및 과세정책 준수 여부를 확인한다.",
+        "output_documents": [
+          "서류검사 결과"
+        ],
+        "deadline": "완전한 서류 접수 후 2시간",
+        "legal_basis": [
+          {
+            "law": "Customs Law 54/2014/QH13",
+            "article": "Article 23, Article 32"
+          }
+        ],
+        "blocker": "2시간 기준"
+      },
+      {
+        "id": "P14",
+        "name": "화물 제시·실물검사",
+        "lane": "보세구역·운송인",
+        "stage": "V4 서류·실물검사",
+        "type": "task",
+        "status": "risk",
+        "actor": "수입자·보세구역·세관공무원",
+        "action": "Red 경로 또는 위험관리상 필요한 경우 화물을 제시하고 일부 또는 전부 실물검사를 받는다.",
+        "output_documents": [
+          "실물검사 결과",
+          "검사입회 기록"
+        ],
+        "deadline": "화물 제시 후 8시간, 복잡한 경우 최대 2일 연장",
+        "legal_basis": [
+          {
+            "law": "Customs Law 54/2014/QH13",
+            "article": "Article 23, Article 33"
+          }
+        ],
+        "blocker": "검사 지연"
+      },
+      {
+        "id": "P15",
+        "name": "전문검사 결과",
+        "lane": "전문검사·허가기관",
+        "stage": "V4 서류·실물검사",
+        "type": "notice",
+        "status": "waiting",
+        "actor": "전문검사·허가기관",
+        "action": "품목별 전문검사 또는 면제 통지 결과를 통관 심사에 반영한다.",
+        "output_documents": [
+          "전문검사 결과",
+          "검사면제 통지"
+        ],
+        "legal_basis": [
+          {
+            "law": "Vietnam Trade Portal import procedure",
+            "article": "Yellow/Red required documents"
+          },
+          {
+            "law": "Customs Law 54/2014/QH13",
+            "article": "Article 24, Article 37"
+          }
+        ]
+      },
+      {
+        "id": "P16",
+        "name": "세액·수수료 산정",
+        "lane": "세금·수수료",
+        "stage": "V5 세금·수수료",
+        "type": "task",
+        "status": "waiting",
+        "actor": "세관·세금시스템",
+        "action": "HS, 과세가격, 원산지, 세율을 기준으로 관세·수입세·부가세와 통관 수수료를 산정한다.",
+        "output_documents": [
+          "납부세액",
+          "통관수수료"
+        ],
+        "legal_basis": [
+          {
+            "law": "Customs Law 54/2014/QH13",
+            "article": "Article 18, Chapter IV"
+          }
+        ]
+      },
+      {
+        "id": "P17",
+        "name": "세금·20,000 VND 납부",
+        "lane": "수입자·통관대리인",
+        "stage": "V5 세금·수수료",
+        "type": "task",
+        "status": "current",
+        "actor": "수입자·통관대리인",
+        "action": "관세·세금·수수료를 납부하거나 허용되는 경우 보증을 제공한다. 공식 포털의 해당 절차 수수료는 20,000 VND다.",
+        "output_documents": [
+          "세금 납부 확인",
+          "수수료 납부 확인",
+          "보증 자료"
+        ],
+        "deadline": "통관 전 납부 또는 보증",
+        "legal_basis": [
+          {
+            "law": "Customs Law 54/2014/QH13",
+            "article": "Article 18, Article 37"
+          },
+          {
+            "law": "Vietnam Trade Portal import procedure",
+            "article": "Fee and Step 3"
+          }
+        ]
+      },
+      {
+        "id": "P18",
+        "name": "통관 결정",
+        "lane": "세관공무원",
+        "stage": "V6 통관·반출",
+        "type": "gateway",
+        "status": "current",
+        "actor": "세관공무원",
+        "action": "통관절차, 검사, 세금·수수료 또는 보증 요건이 충족되면 물품 통관을 결정한다.",
+        "output_documents": [
+          "통관정보",
+          "통관결정"
+        ],
+        "legal_basis": [
+          {
+            "law": "Customs Law 54/2014/QH13",
+            "article": "Article 37"
+          },
+          {
+            "law": "Vietnam Trade Portal import procedure",
+            "article": "Step 3"
+          }
+        ]
+      },
+      {
+        "id": "P19",
+        "name": "화물 반출",
+        "lane": "보세구역·운송인",
+        "stage": "V6 통관·반출",
+        "type": "task",
+        "status": "waiting",
+        "actor": "보세구역·운송인·수입자",
+        "action": "통관정보를 근거로 보세구역에서 화물을 반출하고 세관 감독을 종료한다.",
+        "output_documents": [
+          "반출 기록",
+          "운송 인계"
+        ],
+        "legal_basis": [
+          {
+            "law": "Customs Law 54/2014/QH13",
+            "article": "Article 16, Article 37"
+          }
+        ]
+      },
+      {
+        "id": "P20",
+        "name": "서류 5년 보관",
+        "lane": "수입자·통관대리인",
+        "stage": "V7 사후보관·정정",
+        "type": "task",
+        "status": "waiting",
+        "actor": "수입자·통관대리인",
+        "action": "통관 후 통관서류를 5년 동안 보관하고, 사후검사 요청 시 관련 자료를 제출한다.",
+        "output_documents": [
+          "보관 통관서류",
+          "회계·거래 자료"
+        ],
+        "deadline": "신고 등록일부터 5년",
+        "legal_basis": [
+          {
+            "law": "Customs Law 54/2014/QH13",
+            "article": "Article 18"
+          }
+        ]
+      },
+      {
+        "id": "P21",
+        "name": "정정·추징·불복",
+        "lane": "수입자·통관대리인",
+        "stage": "V7 사후보관·정정",
+        "type": "task",
+        "status": "loop",
+        "actor": "수입자·세관",
+        "action": "신고 오류, 세액 차이, 검사결과, 세관 요구에 따라 보정·추징·환급·불복 절차가 이어질 수 있다.",
+        "output_documents": [
+          "보정신고",
+          "세액 정산",
+          "이의제기 자료"
+        ],
+        "legal_basis": [
+          {
+            "law": "Customs Law 54/2014/QH13",
+            "article": "Article 18, Article 29, Article 32"
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "E01",
+        "source": "P01",
+        "target": "P02",
+        "type": "sequence",
+        "label": "요건 확인"
+      },
+      {
+        "id": "E02",
+        "source": "P02",
+        "target": "P03",
+        "type": "message",
+        "label": "허가·검사 확인"
+      },
+      {
+        "id": "E03",
+        "source": "P03",
+        "target": "P04",
+        "type": "sequence",
+        "label": "신고 준비"
+      },
+      {
+        "id": "E04",
+        "source": "P04",
+        "target": "P05",
+        "type": "loop",
+        "label": "변경 시"
+      },
+      {
+        "id": "E05",
+        "source": "P04",
+        "target": "P06",
+        "type": "sequence",
+        "label": "확정"
+      },
+      {
+        "id": "E06",
+        "source": "P05",
+        "target": "P06",
+        "type": "sequence",
+        "label": "보완 후"
+      },
+      {
+        "id": "E07",
+        "source": "P06",
+        "target": "P07",
+        "type": "message",
+        "label": "전자신고"
+      },
+      {
+        "id": "E08",
+        "source": "P07",
+        "target": "P08",
+        "type": "sequence",
+        "label": "등록"
+      },
+      {
+        "id": "E09",
+        "source": "P08",
+        "target": "P09",
+        "type": "sequence",
+        "label": "Green"
+      },
+      {
+        "id": "E10",
+        "source": "P08",
+        "target": "P10",
+        "type": "sequence",
+        "label": "Yellow"
+      },
+      {
+        "id": "E11",
+        "source": "P08",
+        "target": "P11",
+        "type": "sequence",
+        "label": "Red"
+      },
+      {
+        "id": "E12",
+        "source": "P10",
+        "target": "P12",
+        "type": "message",
+        "label": "서류 요구"
+      },
+      {
+        "id": "E13",
+        "source": "P11",
+        "target": "P12",
+        "type": "message",
+        "label": "서류 제출"
+      },
+      {
+        "id": "E14",
+        "source": "P12",
+        "target": "P13",
+        "type": "sequence",
+        "label": "서류검사"
+      },
+      {
+        "id": "E15",
+        "source": "P11",
+        "target": "P14",
+        "type": "message",
+        "label": "화물 제시"
+      },
+      {
+        "id": "E16",
+        "source": "P03",
+        "target": "P15",
+        "type": "message",
+        "label": "필요 시"
+      },
+      {
+        "id": "E17",
+        "source": "P14",
+        "target": "P13",
+        "type": "sequence",
+        "label": "검사결과"
+      },
+      {
+        "id": "E18",
+        "source": "P15",
+        "target": "P13",
+        "type": "message",
+        "label": "결과 반영"
+      },
+      {
+        "id": "E19",
+        "source": "P09",
+        "target": "P16",
+        "type": "sequence",
+        "label": "납부 단계"
+      },
+      {
+        "id": "E20",
+        "source": "P13",
+        "target": "P16",
+        "type": "sequence",
+        "label": "검사 통과"
+      },
+      {
+        "id": "E21",
+        "source": "P16",
+        "target": "P17",
+        "type": "message",
+        "label": "납부액"
+      },
+      {
+        "id": "E22",
+        "source": "P17",
+        "target": "P18",
+        "type": "sequence",
+        "label": "납부·보증"
+      },
+      {
+        "id": "E23",
+        "source": "P18",
+        "target": "P19",
+        "type": "sequence",
+        "label": "통관"
+      },
+      {
+        "id": "E24",
+        "source": "P19",
+        "target": "P20",
+        "type": "sequence",
+        "label": "사후관리"
+      },
+      {
+        "id": "E25",
+        "source": "P20",
+        "target": "P21",
+        "type": "loop",
+        "label": "오류·검사"
+      }
+    ]
+  }
+}
