@@ -355,7 +355,7 @@ for (const { file, data: institution } of institutions) {
 
   institution.verification.status = status;
   institution.verification.verifiedAt = VERIFIED_AT;
-  institution.verification.method = "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조";
+  institution.verification.method = "국가법령정보센터 Open API 조문 대조";
   institution.verification.scope =
     `법적 근거 ${institution.verification.sources.length + sourceUnresolved}건 중 공식 원문 ${institution.verification.sources.length}건을 연결했다. ` +
     `캔버스와 절차 노드의 명시 조문 ${institutionOccurrences.length}건 가운데 ${verifiedReferences}건의 조문 번호 존재를 확인했고, ` +

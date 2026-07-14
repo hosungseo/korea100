@@ -374,7 +374,7 @@ for (const { file, data } of institutions) {
   data.verification = {
     status: unresolved.length === 0 ? "source-linked" : "needs-review",
     verifiedAt: VERIFIED_AT,
-    method: "국가법령정보센터 Open API (Korean Law MCP CLI)",
+    method: "국가법령정보센터 Open API",
     scope:
       unresolved.length === 0
         ? `법적 근거 ${sources.length}건의 현행 공식 원문을 연결했다. 개별 인용 조문의 내용 일치 여부는 후속 검수 대상이다.`
