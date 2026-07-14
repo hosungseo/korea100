@@ -1,0 +1,690 @@
+{
+ "slug": "large-rd-project-plan-review",
+ "name": "대형 국가R&D 사업계획검토",
+ "oneLiner": "대형 신규 국가R&D 사업의 사전수요 제출부터 대상선정, 사업계획서 제출, 기술검토·사업계획검토와 예산심의 반영까지 이어지는 절차",
+ "type": "사전수요·전문검토·예산연계형",
+ "priority": 352,
+ "category": "연구개발·행정",
+ "whyFirst": "2026년 도입된 별도 절차로, 예비타당성조사와 동일하지 않으며 6월 사전수요부터 10월 사업계획서까지 준비시점이 앞선다.",
+ "asOfDate": "2026-07-15",
+ "status": "full",
+ "canvas": {
+  "purpose": "총사업비 1천억원 이상이고 국가 재정지원 5백억원 이상인 대형 신규 R&D 사업의 계획 완성도를 예산요구 전에 검토한다.",
+  "stakeholders": "중앙행정기관, 과학기술정보통신부, 검토전담기관, 기술전문위원회·검토팀, 예산당국·국가과학기술자문회의",
+  "legalBasis": [
+   {
+    "law": "과학기술기본법",
+    "articles": "제12조의2",
+    "kind": "법률"
+   },
+   {
+    "law": "대형 연구개발 사업계획검토 운영에 관한 규정",
+    "articles": "제2조부터 제15조까지",
+    "kind": "고시·지침"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "중앙행정기관",
+    "role": "후보사업 제출·사업계획 보완·예산요구 반영"
+   },
+   {
+    "name": "과학기술정보통신부",
+    "role": "대상선정·검토총괄·결과통보"
+   },
+   {
+    "name": "검토전담기관",
+    "role": "자료검토·검토팀 운영·결과보고서 작성"
+   }
+  ],
+  "procedure": [
+   "대형 신규사업 후보 발굴",
+   "사전수요서 작성",
+   "사전수요 제출",
+   "대상요건·준비도 검토",
+   "대상제외·기획보완 통지",
+   "검토대상 확정·통보",
+   "사업계획서 구체화",
+   "사업계획서 제출",
+   "기술전문위원회 검토",
+   "전문 검토팀 구성·제척",
+   "쟁점질의·자료보완",
+   "종합 사업계획검토",
+   "검토결과 보고서 작성",
+   "검토결과 확정·통보",
+   "사업계획 수정·예산요구",
+   "R&D 예산 배분·조정 반영"
+  ],
+  "moneyFlow": "검토결과는 신규사업 예산요구와 배분·조정의 기초자료가 되며 검토 자체가 예산배정 확약은 아니다.",
+  "docsFlow": "사전수요서 → 후보목록 → 대상통보 → 사업계획서 → 기술검토서 → 쟁점·보완자료 → 사업계획검토 결과보고서 → 예산요구·배분조정으로 이어진다.",
+  "bottlenecks": [
+   "대상규모·신규성 판정",
+   "사전수요와 최종 사업계획의 불일치",
+   "기술성·정책성·재정계획 동시 보완",
+   "검토결과와 예산요구 내용 불일치"
+  ],
+  "reformPoints": [
+   "예타·사업계획검토 대상 자동판정",
+   "쟁점별 보완자료 버전관리",
+   "유사사업·성과 데이터 자동연계",
+   "검토결과와 예산요구서 대조표 의무화"
+  ]
+ },
+ "related": [
+  "국가R&D 기술수요조사·사전기획·추진계획 예고",
+  "국가연구개발사업 예비타당성조사",
+  "국가연구개발사업 예산 배분·조정"
+ ],
+ "fieldVerification": [
+  "연도별 사전수요 제출서식",
+  "검토대상 제외·반려 판단기준",
+  "검토팀 이해충돌 관리",
+  "예산심의 반영결과 공개범위"
+ ],
+ "process": {
+  "institution_name": "대형 국가R&D 사업계획검토",
+  "law_name": "과학기술기본법·대형 연구개발 사업계획검토 운영에 관한 규정",
+  "lanes": [
+   "중앙행정기관",
+   "과학기술정보통신부",
+   "검토전담기관",
+   "기술전문위원회·검토팀",
+   "예산당국·국가과학기술자문회의"
+  ],
+  "stages": [
+   "G0 사전수요",
+   "G1 대상선정",
+   "G2 계획제출",
+   "G3 기술검토",
+   "G4 종합검토",
+   "G5 예산반영"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "대형 신규사업 후보 발굴",
+    "lane": "중앙행정기관",
+    "stage": "G0 사전수요",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "중앙행정기관",
+    "action": "총사업비·국가재정지원 규모와 신규성을 기준으로 후보를 발굴한다.",
+    "input_documents": [],
+    "output_documents": [],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "과학기술기본법",
+      "article": "제12조의2",
+      "text": "과학기술기본법 제12조의2에 따른 절차"
+     },
+     {
+      "law": "대형 연구개발 사업계획검토 운영에 관한 규정",
+      "article": "제2조",
+      "text": "대형 연구개발 사업계획검토 운영에 관한 규정 제2조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "사전수요서 작성",
+    "lane": "중앙행정기관",
+    "stage": "G0 사전수요",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "중앙행정기관",
+    "action": "정책필요성, 사업목표, 규모·기간과 준비현황을 작성한다.",
+    "input_documents": [],
+    "output_documents": [
+     "사업계획검토 사전수요서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "대형 연구개발 사업계획검토 운영에 관한 규정",
+      "article": "제4조",
+      "text": "대형 연구개발 사업계획검토 운영에 관한 규정 제4조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "사전수요 제출",
+    "lane": "과학기술정보통신부",
+    "stage": "G0 사전수요",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "과학기술정보통신부",
+    "action": "다음 연도 검토 후보를 취합한다.",
+    "input_documents": [],
+    "output_documents": [
+     "사전수요 접수목록"
+    ],
+    "deadline": "매년 6월 30일까지",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "대형 연구개발 사업계획검토 운영에 관한 규정",
+      "article": "제4조",
+      "text": "대형 연구개발 사업계획검토 운영에 관한 규정 제4조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "대상요건·준비도 검토",
+    "lane": "검토전담기관",
+    "stage": "G1 대상선정",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "검토전담기관",
+    "action": "규모요건, 차별성, 기획성숙도와 추진가능성을 사전 검토한다.",
+    "input_documents": [],
+    "output_documents": [
+     "대상검토 의견"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "대형 연구개발 사업계획검토 운영에 관한 규정",
+      "article": "제5조",
+      "text": "대형 연구개발 사업계획검토 운영에 관한 규정 제5조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "대상제외·기획보완 통지",
+    "lane": "과학기술정보통신부",
+    "stage": "G1 대상선정",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "과학기술정보통신부",
+    "action": "타당성이 현저히 부족하거나 차별성·준비가 미흡한 후보는 대상에서 제외하고 보완사항을 알린다.",
+    "input_documents": [],
+    "output_documents": [
+     "대상제외·기획보완 통지"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "대형 연구개발 사업계획검토 운영에 관한 규정",
+      "article": "제5조",
+      "text": "대형 연구개발 사업계획검토 운영에 관한 규정 제5조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "검토대상 확정·통보",
+    "lane": "과학기술정보통신부",
+    "stage": "G1 대상선정",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "과학기술정보통신부",
+    "action": "검토대상 사업과 후속 제출일정을 확정해 통보한다.",
+    "input_documents": [],
+    "output_documents": [
+     "검토대상 사업목록"
+    ],
+    "deadline": "매년 7월 31일까지",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "대형 연구개발 사업계획검토 운영에 관한 규정",
+      "article": "제5조",
+      "text": "대형 연구개발 사업계획검토 운영에 관한 규정 제5조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "사업계획서 구체화",
+    "lane": "중앙행정기관",
+    "stage": "G2 계획제출",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "목표·세부기술·추진체계·성과·재원·일정과 위험관리 계획을 구체화한다.",
+    "input_documents": [],
+    "output_documents": [
+     "대형 R&D 사업계획서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "대형 연구개발 사업계획검토 운영에 관한 규정",
+      "article": "제6조",
+      "text": "대형 연구개발 사업계획검토 운영에 관한 규정 제6조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "사업계획서 제출",
+    "lane": "과학기술정보통신부",
+    "stage": "G2 계획제출",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "과학기술정보통신부",
+    "action": "검토대상 사업의 확정 계획서를 접수한다.",
+    "input_documents": [],
+    "output_documents": [
+     "사업계획서 접수기록"
+    ],
+    "deadline": "매년 10월 31일까지",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "과학기술기본법",
+      "article": "제12조의2",
+      "text": "과학기술기본법 제12조의2에 따른 절차"
+     },
+     {
+      "law": "대형 연구개발 사업계획검토 운영에 관한 규정",
+      "article": "제6조",
+      "text": "대형 연구개발 사업계획검토 운영에 관한 규정 제6조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "기술전문위원회 검토",
+    "lane": "기술전문위원회·검토팀",
+    "stage": "G3 기술검토",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기술전문위원회·검토팀",
+    "action": "기술개발 필요성·수준·중복성·목표달성 가능성을 검토한다.",
+    "input_documents": [],
+    "output_documents": [
+     "기술검토 의견서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "대형 연구개발 사업계획검토 운영에 관한 규정",
+      "article": "제7조부터 제9조까지",
+      "text": "대형 연구개발 사업계획검토 운영에 관한 규정 제7조부터 제9조까지에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "전문 검토팀 구성·제척",
+    "lane": "검토전담기관",
+    "stage": "G3 기술검토",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "검토전담기관",
+    "action": "분야전문가 중심 검토팀을 구성하고 이해관계를 확인한다.",
+    "input_documents": [],
+    "output_documents": [
+     "검토팀 명단·제척기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "대형 연구개발 사업계획검토 운영에 관한 규정",
+      "article": "제8조·제9조",
+      "text": "대형 연구개발 사업계획검토 운영에 관한 규정 제8조·제9조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "쟁점질의·자료보완",
+    "lane": "중앙행정기관",
+    "stage": "G4 종합검토",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "검토팀 질의에 재정·기술·정책 자료를 보완하고 사업계획을 설명한다.",
+    "input_documents": [],
+    "output_documents": [
+     "질의답변서",
+     "보완 사업계획서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "대형 연구개발 사업계획검토 운영에 관한 규정",
+      "article": "제10조·제11조",
+      "text": "대형 연구개발 사업계획검토 운영에 관한 규정 제10조·제11조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "종합 사업계획검토",
+    "lane": "기술전문위원회·검토팀",
+    "stage": "G4 종합검토",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "기술전문위원회·검토팀",
+    "action": "정책적 필요성, 사업계획 적정성, 수행체계와 투자효율성을 종합 검토한다.",
+    "input_documents": [],
+    "output_documents": [
+     "종합 검토안"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "대형 연구개발 사업계획검토 운영에 관한 규정",
+      "article": "제10조부터 제12조까지",
+      "text": "대형 연구개발 사업계획검토 운영에 관한 규정 제10조부터 제12조까지에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "검토결과 보고서 작성",
+    "lane": "검토전담기관",
+    "stage": "G4 종합검토",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "검토전담기관",
+    "action": "쟁점별 판단, 권고사항과 조정된 사업범위를 결과보고서로 정리한다.",
+    "input_documents": [],
+    "output_documents": [
+     "사업계획검토 결과보고서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "대형 연구개발 사업계획검토 운영에 관한 규정",
+      "article": "제13조",
+      "text": "대형 연구개발 사업계획검토 운영에 관한 규정 제13조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "검토결과 확정·통보",
+    "lane": "과학기술정보통신부",
+    "stage": "G4 종합검토",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "과학기술정보통신부",
+    "action": "검토결과와 예산요구 시 반영할 보완사항을 소관부처에 통보한다.",
+    "input_documents": [],
+    "output_documents": [
+     "검토결과 통보"
+    ],
+    "deadline": "검토 착수 후 원칙적으로 5개월 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "대형 연구개발 사업계획검토 운영에 관한 규정",
+      "article": "제13조·제14조",
+      "text": "대형 연구개발 사업계획검토 운영에 관한 규정 제13조·제14조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "사업계획 수정·예산요구",
+    "lane": "중앙행정기관",
+    "stage": "G5 예산반영",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "검토결과를 사업내용·규모·일정과 예산요구서에 반영한다.",
+    "input_documents": [],
+    "output_documents": [
+     "수정 사업계획",
+     "예산요구서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "대형 연구개발 사업계획검토 운영에 관한 규정",
+      "article": "제14조·제15조",
+      "text": "대형 연구개발 사업계획검토 운영에 관한 규정 제14조·제15조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "R&D 예산 배분·조정 반영",
+    "lane": "예산당국·국가과학기술자문회의",
+    "stage": "G5 예산반영",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "예산당국·국가과학기술자문회의",
+    "action": "검토결과와 수정계획을 정부 R&D 예산 심의자료로 활용한다.",
+    "input_documents": [],
+    "output_documents": [
+     "배분·조정 결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "과학기술기본법",
+      "article": "제12조의2",
+      "text": "과학기술기본법 제12조의2에 따른 절차"
+     },
+     {
+      "law": "대형 연구개발 사업계획검토 운영에 관한 규정",
+      "article": "제15조",
+      "text": "대형 연구개발 사업계획검토 운영에 관한 규정 제15조에 따른 절차"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P15",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L16",
+    "source": "P05",
+    "target": "P02",
+    "type": "loop",
+    "label": "보완 후 재제출"
+   },
+   {
+    "id": "L17",
+    "source": "P12",
+    "target": "P11",
+    "type": "loop",
+    "label": "추가보완"
+   }
+  ],
+  "warnings": [
+   "법령·행정규칙의 공통 절차를 구조화했다. 기관 자체규정, 최신 공고·서식과 소관기관 전산시스템 입력 항목은 별도로 확인해야 한다.",
+   "사업계획검토 통과는 사업 착수나 예산 확보를 보장하지 않는다. 이후 정부 R&D 예산 배분·조정과 국회 예산절차가 남는다.",
+   "대상 제외·검토결과에 대한 별도 법정 이의신청 절차는 규정에 명시되어 있지 않으므로, 기획을 보완해 다음 제출주기에 다시 제안하는 경로로 표시했다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-15",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 2건 중 공식 원문 2건을 연결했다. 캔버스와 절차 노드의 명시 조문 28건 가운데 28건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "notes": [
+   "기준일 현재 현행 법률·시행령·시행규칙·행정규칙 원문 대조",
+   "기관 자체규정·심사사례·전산화면은 현장 검증 대상으로 유지"
+  ],
+  "sources": [
+   {
+    "law": "과학기술기본법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "과학기술기본법",
+    "lawId": "009177",
+    "mst": "285191",
+    "promulgatedOn": "2026-03-31",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/과학기술기본법"
+   },
+   {
+    "law": "대형 연구개발 사업계획검토 운영에 관한 규정",
+    "kind": "고시·지침",
+    "sourceType": "admin-rule",
+    "officialName": "대형 연구개발 사업계획검토 운영에 관한 규정",
+    "adminRuleId": "96528",
+    "adminRuleSerial": "2100000276390",
+    "promulgatedOn": "2026-03-26",
+    "officialUrl": "https://law.go.kr/행정규칙/대형연구개발사업계획검토운영에관한규정",
+    "issueNo": "과학기술정보통신부고시 제2026-15호"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-15",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 21,
+   "explicitCitationEntries": 21,
+   "articleReferences": 28,
+   "verifiedReferences": 28,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

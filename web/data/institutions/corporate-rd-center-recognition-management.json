@@ -1,0 +1,769 @@
+{
+ "slug": "corporate-rd-center-recognition-management",
+ "name": "기업부설연구소·연구개발전담부서 인정·관리",
+ "oneLiner": "연구인력·공간 요건과 증빙 준비부터 인정신청, 보완·현장조사, 인정서 발급, 변경·실적보고, 인정취소까지 이어지는 절차",
+ "type": "인정·변경신고·실적보고·취소형",
+ "priority": 347,
+ "category": "연구개발·행정",
+ "whyFirst": "2026년 2월 전용 법률이 시행되면서 기존 고시 중심 제도가 법률·시행령·시행규칙 체계로 바뀌어 인정 이후 의무와 취소절차를 함께 볼 필요가 크다.",
+ "asOfDate": "2026-07-15",
+ "status": "full",
+ "canvas": {
+  "purpose": "기업의 연구개발 전담조직을 기업부설연구소 또는 연구개발전담부서로 인정하고 인력·시설·연구활동 요건을 지속 관리한다.",
+  "stakeholders": "신청기업·대표자, 연구소장·연구개발인력, 한국산업기술진흥협회, 과학기술정보통신부, 현장조사·정보관리체계",
+  "legalBasis": [
+   {
+    "law": "기업부설연구소등의 연구개발 지원에 관한 법률",
+    "articles": "제6조부터 제10조까지·제21조",
+    "kind": "법률"
+   },
+   {
+    "law": "기업부설연구소등의 연구개발 지원에 관한 법률 시행령",
+    "articles": "제4조부터 제9조까지",
+    "kind": "대통령령"
+   },
+   {
+    "law": "기업부설연구소등의 연구개발 지원에 관한 법률 시행규칙",
+    "articles": "제3조부터 제8조까지·제12조",
+    "kind": "부령"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "과학기술정보통신부",
+    "role": "인정제도·현장조사·인정취소 총괄"
+   },
+   {
+    "name": "한국산업기술진흥협회",
+    "role": "신청접수·확인·인정서 발급 등 위탁업무"
+   },
+   {
+    "name": "신청기업",
+    "role": "연구인력·시설 구비와 변경·실적보고"
+   },
+   {
+    "name": "연구전담인력",
+    "role": "연구개발 전담과 연구실적 작성"
+   }
+  ],
+  "procedure": [
+   "연구소·전담부서 유형 선택",
+   "기업·인력 인정기준 확인",
+   "연구공간·기자재·안전요건 확인",
+   "인정신청 증빙 작성",
+   "온라인 인정신청",
+   "행정정보 공동이용 확인",
+   "서류심사·보완명령",
+   "현장조사·사실확인",
+   "인정결정·인정서 발급",
+   "연구전담·시설 준수사항 유지",
+   "연간 연구개발실적 제출",
+   "중요사항 변경신고",
+   "인정기준 유지 실태점검",
+   "취소 사전통지·청문",
+   "인정유지·취소 결정",
+   "취소 후 재신청 제한 관리"
+  ],
+  "moneyFlow": "공통 수수료는 법령에 명시되지 않으며 연구공간·기자재·안전보험·전담인력 유지비는 기업이 부담하고 인정 결과는 각종 R&D 지원요건과 연결될 수 있다.",
+  "docsFlow": "인정유형·요건 점검 → 연구활동개요·인력·기자재·도면·안전자료 → 인정신청 → 행정정보확인·보완·현장조사 → 인정서 → 변경신고·연간 실적 → 취소 사전통지·청문·취소결정으로 이어진다.",
+  "bottlenecks": [
+   "기업부설연구소와 전담부서 유형 선택",
+   "기업규모·업종별 연구전담요원 수",
+   "독립 연구공간·도면·사진과 실제 현장 일치",
+   "변경사유 30일 신고와 매년 실적제출"
+  ],
+  "reformPoints": [
+   "기업규모·업종 입력 기반 인정요건 자동판정",
+   "도면·인력·4대보험·사업자정보 자동대조",
+   "변경신고 대상·기한 알림",
+   "취소위험 요건을 상시 점검하는 셀프체크"
+  ]
+ },
+ "related": [
+  "전문연구사업자 신고·갱신",
+  "국가연구개발사업 공모·과제선정",
+  "연구실 안전관리"
+ ],
+ "fieldVerification": [
+  "인정업무 세부 고시와 온라인 신청화면",
+  "연구전담요원 자격별 증빙",
+  "현장조사 표본선정·확인항목",
+  "지원제도별 인정서 요구시점"
+ ],
+ "process": {
+  "institution_name": "기업부설연구소·연구개발전담부서 인정·관리",
+  "law_name": "기업부설연구소등의 연구개발 지원에 관한 법률·기업부설연구소등의 연구개발 지원에 관한 법률 시행령·기업부설연구소등의 연구개발 지원에 관한 법률 시행규칙",
+  "lanes": [
+   "신청기업·대표자",
+   "연구소장·연구개발인력",
+   "한국산업기술진흥협회",
+   "과학기술정보통신부",
+   "현장조사·정보관리체계"
+  ],
+  "stages": [
+   "G0 유형·요건",
+   "G1 신청",
+   "G2 확인·보완",
+   "G3 인정",
+   "G4 유지·변경",
+   "G5 조사·취소"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "연구소·전담부서 유형 선택",
+    "lane": "신청기업·대표자",
+    "stage": "G0 유형·요건",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "신청기업·대표자",
+    "action": "조직 규모와 연구기능을 기준으로 기업부설연구소 또는 연구개발전담부서 신청유형을 정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "신청유형 결정"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률",
+      "article": "제2조·제7조",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 제2조·제7조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "기업·인력 인정기준 확인",
+    "lane": "신청기업·대표자",
+    "stage": "G0 유형·요건",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "신청기업·대표자",
+    "action": "기업범위와 규모·업종별 연구전담요원 수·자격을 점검한다.",
+    "input_documents": [],
+    "output_documents": [
+     "인력요건 점검표"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률",
+      "article": "제7조제1항",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 제7조제1항에 따른 절차"
+     },
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률 시행령",
+      "article": "제3조·제4조",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 시행령 제3조·제4조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "연구공간·기자재·안전요건 확인",
+    "lane": "연구소장·연구개발인력",
+    "stage": "G0 유형·요건",
+    "type": "gateway",
+    "status": "current",
+    "progress": 55,
+    "actor": "연구소장·연구개발인력",
+    "action": "독립 연구공간, 기자재, 주소지와 안전예산·보험 해당 여부를 확인한다.",
+    "input_documents": [],
+    "output_documents": [
+     "시설·안전요건 점검표"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률",
+      "article": "제7조제1항·제9조",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 제7조제1항·제9조에 따른 절차"
+     },
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률 시행령",
+      "article": "제4조·제9조",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 시행령 제4조·제9조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "인정신청 증빙 작성",
+    "lane": "연구소장·연구개발인력",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구소장·연구개발인력",
+    "action": "연구개발활동 개요, 기자재·인력 현황, 조직도·도면·사진과 해당 안전자료를 준비한다.",
+    "input_documents": [],
+    "output_documents": [
+     "연구개발활동 개요서",
+     "인력·기자재 현황",
+     "조직도·도면"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률 시행규칙",
+      "article": "제3조·제4조",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 시행규칙 제3조·제4조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "온라인 인정신청",
+    "lane": "신청기업·대표자",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신청기업·대표자",
+    "action": "신청서와 첨부자료를 한국산업기술진흥협회에 제출한다.",
+    "input_documents": [],
+    "output_documents": [
+     "기업부설연구소 또는 전담부서 인정신청서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률 시행령",
+      "article": "제7조제1항",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 시행령 제7조제1항에 따른 절차"
+     },
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률 시행규칙",
+      "article": "제3조·제4조",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 시행규칙 제3조·제4조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "행정정보 공동이용 확인",
+    "lane": "한국산업기술진흥협회",
+    "stage": "G2 확인·보완",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "한국산업기술진흥협회",
+    "action": "사업자등록증명과 기업규모 자료를 공동이용으로 확인하고 미동의 시 제출받는다.",
+    "input_documents": [],
+    "output_documents": [
+     "행정정보 확인결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률 시행규칙",
+      "article": "제3조제2항·제4조제2항",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 시행규칙 제3조제2항·제4조제2항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "서류심사·보완명령",
+    "lane": "한국산업기술진흥협회",
+    "stage": "G2 확인·보완",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "한국산업기술진흥협회",
+    "action": "신청내용과 인정기준을 대조하고 부족한 사항의 사유·기간을 적어 보완을 명한다.",
+    "input_documents": [],
+    "output_documents": [
+     "보완명령서"
+    ],
+    "deadline": "보완기간 원칙 1개월, 신청에 따라 2개월 범위 연장",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률",
+      "article": "제7조제5항",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 제7조제5항에 따른 절차"
+     },
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률 시행령",
+      "article": "제7조제3항",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 시행령 제7조제3항에 따른 절차"
+     },
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률 시행규칙",
+      "article": "제6조",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 시행규칙 제6조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "현장조사·사실확인",
+    "lane": "현장조사·정보관리체계",
+    "stage": "G2 확인·보완",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "현장조사·정보관리체계",
+    "action": "필요한 경우 인력·연구공간·기자재와 신청내용의 일치 여부를 현장에서 확인한다.",
+    "input_documents": [],
+    "output_documents": [
+     "현장조사 결과"
+    ],
+    "deadline": "원칙적으로 조사 개시 7일 전 서면통지",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률",
+      "article": "제21조",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 제21조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "인정결정·인정서 발급",
+    "lane": "한국산업기술진흥협회",
+    "stage": "G3 인정",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "한국산업기술진흥협회",
+    "action": "인정기준 충족 여부를 결정하고 유형별 인정서를 발급한다.",
+    "input_documents": [],
+    "output_documents": [
+     "기업부설연구소·전담부서 인정서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률",
+      "article": "제7조",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 제7조에 따른 절차"
+     },
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률 시행규칙",
+      "article": "제3조제3항·제4조제3항",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 시행규칙 제3조제3항·제4조제3항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "연구전담·시설 준수사항 유지",
+    "lane": "연구소장·연구개발인력",
+    "stage": "G4 유지·변경",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구소장·연구개발인력",
+    "action": "연구전담, 적법한 연구공간, 주소·근무장소와 지원인력 요건을 지속 유지한다.",
+    "input_documents": [],
+    "output_documents": [
+     "준수사항 관리기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률",
+      "article": "제9조",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 제9조에 따른 절차"
+     },
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률 시행령",
+      "article": "제9조",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 시행령 제9조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "연간 연구개발실적 제출",
+    "lane": "신청기업·대표자",
+    "stage": "G4 유지·변경",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신청기업·대표자",
+    "action": "연구개발활동 실적을 협회에 제출한다.",
+    "input_documents": [],
+    "output_documents": [
+     "연간 연구개발실적"
+    ],
+    "deadline": "매년 4월 30일까지",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률",
+      "article": "제9조제3호",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 제9조제3호에 따른 절차"
+     },
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률 시행규칙",
+      "article": "제8조",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 시행규칙 제8조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "중요사항 변경신고",
+    "lane": "신청기업·대표자",
+    "stage": "G4 유지·변경",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신청기업·대표자",
+    "action": "기업명·소재지·대표자, 연구소명·분야·인력·공간 변경을 증빙과 함께 신고한다.",
+    "input_documents": [],
+    "output_documents": [
+     "변경신고서"
+    ],
+    "deadline": "변경사유 발생일부터 30일 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률",
+      "article": "제7조제4항",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 제7조제4항에 따른 절차"
+     },
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률 시행령",
+      "article": "제7조제2항",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 시행령 제7조제2항에 따른 절차"
+     },
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률 시행규칙",
+      "article": "제5조",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 시행규칙 제5조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "인정기준 유지 실태점검",
+    "lane": "현장조사·정보관리체계",
+    "stage": "G5 조사·취소",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "현장조사·정보관리체계",
+    "action": "정보관리체계와 현장조사를 통해 인정기준·준수사항 유지 여부를 점검한다.",
+    "input_documents": [],
+    "output_documents": [
+     "실태점검 결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률",
+      "article": "제6조·제21조",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 제6조·제21조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "취소 사전통지·청문",
+    "lane": "과학기술정보통신부",
+    "stage": "G5 조사·취소",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "과학기술정보통신부",
+    "action": "취소원인·의견제출 방법·청문일과 예정일을 통지하고 청문을 실시한다.",
+    "input_documents": [],
+    "output_documents": [
+     "취소 사전통지",
+     "청문조서"
+    ],
+    "deadline": "청문 15일 전까지 통지",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률",
+      "article": "제8조제2항·제3항",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 제8조제2항·제3항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "인정유지·취소 결정",
+    "lane": "과학기술정보통신부",
+    "stage": "G5 조사·취소",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "과학기술정보통신부",
+    "action": "거짓 인정, 미신고, 보완불이행, 준수사항 위반 등 사유에 따라 인정유지 또는 취소를 결정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "인정유지 또는 취소결정"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률",
+      "article": "제8조",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 제8조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "취소 후 재신청 제한 관리",
+    "lane": "현장조사·정보관리체계",
+    "stage": "G5 조사·취소",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "현장조사·정보관리체계",
+    "action": "거짓·부정 인정으로 취소된 기업의 재신청 제한기간을 관리한다.",
+    "input_documents": [],
+    "output_documents": [
+     "재신청 가능일"
+    ],
+    "deadline": "취소일부터 1년 경과 후",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "기업부설연구소등의 연구개발 지원에 관한 법률",
+      "article": "제8조제4항",
+      "text": "기업부설연구소등의 연구개발 지원에 관한 법률 제8조제4항에 따른 절차"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L07",
+    "source": "P07",
+    "target": "P05",
+    "type": "loop",
+    "label": "보완"
+   },
+   {
+    "id": "E08",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": "현장확인"
+   },
+   {
+    "id": "E09",
+    "source": "P07",
+    "target": "P09",
+    "type": "sequence",
+    "label": "서류충족"
+   },
+   {
+    "id": "E10",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P10",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P11",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L16",
+    "source": "P13",
+    "target": "P10",
+    "type": "loop",
+    "label": "기준유지"
+   },
+   {
+    "id": "E17",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": "취소사유"
+   },
+   {
+    "id": "E18",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L19",
+    "source": "P15",
+    "target": "P10",
+    "type": "loop",
+    "label": "인정유지"
+   },
+   {
+    "id": "E20",
+    "source": "P15",
+    "target": "P16",
+    "type": "sequence",
+    "label": "부정인정 취소"
+   }
+  ],
+  "warnings": [
+   "법령·행정규칙의 공통 절차를 구조화했다. 기관 자체규정, 연도별 시행계획, 전담기관 업무처리규정과 전산시스템 입력 항목은 별도로 확인해야 한다.",
+   "기업부설연구소와 연구개발전담부서는 인정기준·제출서류가 다르므로 신청유형을 먼저 확정해야 한다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-15",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 3건 중 공식 원문 3건을 연결했다. 캔버스와 절차 노드의 명시 조문 43건 가운데 43건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "notes": [
+   "기준일 현재 현행 법률·시행령·시행규칙·행정규칙 원문 대조",
+   "기준일 이후 시행 예정 조문은 경고문에 분리",
+   "전산시스템 화면과 기관 자체규정은 현장 검증 대상으로 유지"
+  ],
+  "sources": [
+   {
+    "law": "기업부설연구소등의 연구개발 지원에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "기업부설연구소등의 연구개발 지원에 관한 법률",
+    "lawId": "014828",
+    "mst": "282553",
+    "promulgatedOn": "2025-12-31",
+    "effectiveOn": "2026-02-01",
+    "officialUrl": "https://law.go.kr/법령/기업부설연구소등의연구개발지원에관한법률"
+   },
+   {
+    "law": "기업부설연구소등의 연구개발 지원에 관한 법률 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "기업부설연구소등의 연구개발 지원에 관한 법률 시행령",
+    "lawId": "015035",
+    "mst": "282915",
+    "promulgatedOn": "2026-01-27",
+    "effectiveOn": "2026-02-01",
+    "officialUrl": "https://law.go.kr/법령/기업부설연구소등의연구개발지원에관한법률시행령"
+   },
+   {
+    "law": "기업부설연구소등의 연구개발 지원에 관한 법률 시행규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "기업부설연구소등의 연구개발 지원에 관한 법률 시행규칙",
+    "lawId": "015041",
+    "mst": "283223",
+    "promulgatedOn": "2026-01-30",
+    "effectiveOn": "2026-02-01",
+    "officialUrl": "https://law.go.kr/법령/기업부설연구소등의연구개발지원에관한법률시행규칙"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-15",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 29,
+   "explicitCitationEntries": 29,
+   "articleReferences": 43,
+   "verifiedReferences": 43,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

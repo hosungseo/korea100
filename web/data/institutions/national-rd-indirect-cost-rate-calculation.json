@@ -1,0 +1,731 @@
+{
+ "slug": "national-rd-indirect-cost-rate-calculation",
+ "name": "국가연구개발 간접비고시비율 산출",
+ "oneLiner": "2년 주기 산출기준 공고와 기관 신청부터 회계자료·연구지원체계평가 반영, 위원회 심의와 기관별 비율 고시까지 이어지는 절차",
+ "type": "신청·산출·위원회·고시형",
+ "priority": 345,
+ "category": "연구개발·행정",
+ "whyFirst": "기관은 직전 2개 회계연도 자료, 해당 연도 연구지원체계평가와 기관유형별 적용기준을 동시에 맞춰야 하며 미산출 시 기본비율이 적용된다.",
+ "asOfDate": "2026-07-15",
+ "status": "full",
+ "canvas": {
+  "purpose": "비영리 연구개발기관의 공통 연구지원비용을 기관별 회계자료와 연구지원체계평가에 근거해 간접비고시비율로 산출한다.",
+  "stakeholders": "과학기술정보통신부, 간접비계상기준산출위원회, 산출전담기관·한국과학기술기획평가원, 비영리 연구개발기관, 연구지원체계평가",
+  "legalBasis": [
+   {
+    "law": "국가연구개발혁신법",
+    "articles": "제13조제3항·제4항·제25조제3항",
+    "kind": "법률"
+   },
+   {
+    "law": "국가연구개발혁신법 시행령",
+    "articles": "제21조부터 제23조까지",
+    "kind": "대통령령"
+   },
+   {
+    "law": "국가연구개발사업 연구개발비 사용 기준",
+    "articles": "제37조·제46조·제55조·제63조·제112조부터 제115조까지",
+    "kind": "고시·지침"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "과학기술정보통신부",
+    "role": "산출기준·위원회·기관별 비율 확정"
+   },
+   {
+    "name": "산출위원회",
+    "role": "적용대상과 산정방식 심의"
+   },
+   {
+    "name": "한국과학기술기획평가원",
+    "role": "산출자료 접수·검토와 산출업무 지원"
+   },
+   {
+    "name": "연구개발기관",
+    "role": "회계자료 제출과 연구지원체계평가 수검"
+   }
+  ],
+  "procedure": [
+   "2년 주기 산출계획 수립",
+   "산출기준안 마련",
+   "산출기준 30일 이상 공고",
+   "산출위원회 구성",
+   "위원 제척·회피 확인",
+   "신청대상·자료범위 확인",
+   "직전 2개 회계연도 자료 작성",
+   "간접비율 산출 신청",
+   "연구지원체계평가 수검·결과 연계",
+   "신청자료 검토·산출 지원",
+   "회계자료·평가결과 반영 산출",
+   "산출위원회 심의·의결",
+   "기관별 고시비율 확정·공개",
+   "미산출 기관 기본비율 적용",
+   "기관유형별 과제 간접비 계상",
+   "차기 산출주기 자료 축적"
+  ],
+  "moneyFlow": "확정된 비율은 국가R&D 직접비에 적용되어 기관의 인력지원·연구지원·성과활용 지원 등 간접비 재원 규모를 결정한다.",
+  "docsFlow": "산출기준안·30일 공고 → 신청서·직전 2개 회계연도 기초자료 → 연구지원체계평가 결과 → 산출검토서 → 위원회 심의 → 기관별 고시비율 → 과제 간접비 계상으로 이어진다.",
+  "bottlenecks": [
+   "기관유형별 회계원칙과 기초자료 매핑",
+   "직전 2개 회계연도 자료 오류",
+   "연구지원체계평가 결과와 산식 결합",
+   "고시비율 미산출 기관의 기본비율 적용"
+  ],
+  "reformPoints": [
+   "회계시스템에서 산출서식 자동 생성",
+   "평가결과 반영분과 회계자료 반영분 분리 설명",
+   "기관유형별 오류검증 규칙 공개",
+   "고시비율 변동 원인 비교표 제공"
+  ]
+ },
+ "related": [
+  "국가연구개발 연구지원체계평가",
+  "국가연구개발비 지급·사용·정산",
+  "국가연구개발 연구시설·장비비 통합관리"
+ ],
+ "fieldVerification": [
+  "산출연도별 세부 산식과 제출서식",
+  "전담기관의 자료보완·사실확인 절차",
+  "위원회 심의 전 기관 의견제출 방식",
+  "고시비율 적용 시점과 협약변경 처리"
+ ],
+ "process": {
+  "institution_name": "국가연구개발 간접비고시비율 산출",
+  "law_name": "국가연구개발혁신법·국가연구개발혁신법 시행령·국가연구개발사업 연구개발비 사용 기준",
+  "lanes": [
+   "과학기술정보통신부",
+   "간접비계상기준산출위원회",
+   "산출전담기관·한국과학기술기획평가원",
+   "비영리 연구개발기관",
+   "연구지원체계평가"
+  ],
+  "stages": [
+   "G0 기준",
+   "G1 신청",
+   "G2 검토·산출",
+   "G3 심의·확정",
+   "G4 고시·적용",
+   "G5 차기주기"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "2년 주기 산출계획 수립",
+    "lane": "과학기술정보통신부",
+    "stage": "G0 기준",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "과학기술정보통신부",
+    "action": "비영리기관 간접비고시비율 산출주기와 추진일정을 정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "간접비율 산출계획"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제112조제1항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제112조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "산출기준안 마련",
+    "lane": "산출전담기관·한국과학기술기획평가원",
+    "stage": "G0 기준",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "산출전담기관·한국과학기술기획평가원",
+    "action": "기관유형별 회계원칙과 산정기준을 반영한 기준안을 지원·작성한다.",
+    "input_documents": [],
+    "output_documents": [
+     "간접비고시비율 산출기준안"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제112조·제115조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제112조·제115조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "산출기준 30일 이상 공고",
+    "lane": "과학기술정보통신부",
+    "stage": "G0 기준",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "과학기술정보통신부",
+    "action": "신청기관이 준비할 수 있도록 산출기준을 공개한다.",
+    "input_documents": [],
+    "output_documents": [
+     "산출기준 공고"
+    ],
+    "deadline": "30일 이상",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제112조제2항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제112조제2항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "산출위원회 구성",
+    "lane": "과학기술정보통신부",
+    "stage": "G0 기준",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "과학기술정보통신부",
+    "action": "관계부처와 연구계·학계·산업계 전문가로 산출위원회를 구성한다.",
+    "input_documents": [],
+    "output_documents": [
+     "산출위원 명단"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제21조",
+      "text": "국가연구개발혁신법 시행령 제21조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "위원 제척·회피 확인",
+    "lane": "간접비계상기준산출위원회",
+    "stage": "G0 기준",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "간접비계상기준산출위원회",
+    "action": "자문·연구·재직 등 이해관계가 있는 안건에서 위원을 제척하거나 회피시킨다.",
+    "input_documents": [],
+    "output_documents": [
+     "제척·회피 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제23조",
+      "text": "국가연구개발혁신법 시행령 제23조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "신청대상·자료범위 확인",
+    "lane": "비영리 연구개발기관",
+    "stage": "G1 신청",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "비영리 연구개발기관",
+    "action": "비영리기관 여부와 신청연도 평가수검 요건, 제출할 회계자료 범위를 확인한다.",
+    "input_documents": [],
+    "output_documents": [
+     "신청요건 점검표"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제113조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제113조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "직전 2개 회계연도 자료 작성",
+    "lane": "비영리 연구개발기관",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "비영리 연구개발기관",
+    "action": "정해진 회계원칙에 따라 기초자료와 대학의 간접비 지출내역 등을 작성한다.",
+    "input_documents": [],
+    "output_documents": [
+     "간접비 산출 기초자료",
+     "간접비 지출내역서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제113조제1항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제113조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "간접비율 산출 신청",
+    "lane": "비영리 연구개발기관",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "비영리 연구개발기관",
+    "action": "신청서와 직전 2개 회계연도 기초자료를 제출한다.",
+    "input_documents": [
+     "기초자료"
+    ],
+    "output_documents": [
+     "간접비고시비율 산출 신청서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제113조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제113조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "연구지원체계평가 수검·결과 연계",
+    "lane": "연구지원체계평가",
+    "stage": "G2 검토·산출",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구지원체계평가",
+    "action": "신청연도의 연구지원체계평가를 실시하고 결과를 산출자료와 연결한다.",
+    "input_documents": [],
+    "output_documents": [
+     "연구지원체계평가 결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제25조제3항",
+      "text": "국가연구개발혁신법 제25조제3항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제113조제2항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제113조제2항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "신청자료 검토·산출 지원",
+    "lane": "산출전담기관·한국과학기술기획평가원",
+    "stage": "G2 검토·산출",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산출전담기관·한국과학기술기획평가원",
+    "action": "신청서·회계자료와 평가결과를 검토해 기관별 산출안을 작성한다.",
+    "input_documents": [
+     "신청서",
+     "기초자료",
+     "평가결과"
+    ],
+    "output_documents": [
+     "기관별 비율 산출안"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제115조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제115조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "회계자료·평가결과 반영 산출",
+    "lane": "과학기술정보통신부",
+    "stage": "G2 검토·산출",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "과학기술정보통신부",
+    "action": "기초자료와 연구지원체계평가 결과를 고려해 기관별 비율을 산출한다.",
+    "input_documents": [],
+    "output_documents": [
+     "기관별 산출결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제114조제1항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제114조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "산출위원회 심의·의결",
+    "lane": "간접비계상기준산출위원회",
+    "stage": "G3 심의·확정",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "간접비계상기준산출위원회",
+    "action": "적용대상과 산정 결과를 심의하고 출석·의결 요건에 따라 확정한다.",
+    "input_documents": [
+     "산출기준안",
+     "기관별 산출결과"
+    ],
+    "output_documents": [
+     "위원회 의결서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제22조",
+      "text": "국가연구개발혁신법 시행령 제22조에 따른 절차"
+     },
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제112조제1항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제112조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "기관별 고시비율 확정·공개",
+    "lane": "과학기술정보통신부",
+    "stage": "G4 고시·적용",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "과학기술정보통신부",
+    "action": "확정된 비영리기관별 간접비고시비율을 별표로 공개한다.",
+    "input_documents": [],
+    "output_documents": [
+     "기관별 간접비고시비율"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제114조제2항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제114조제2항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "미산출 기관 기본비율 적용",
+    "lane": "비영리 연구개발기관",
+    "stage": "G4 고시·적용",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "비영리 연구개발기관",
+    "action": "비율을 산출하지 않은 대학은 5퍼센트, 그 밖의 비영리기관 등은 17퍼센트 기준을 적용한다.",
+    "input_documents": [],
+    "output_documents": [
+     "기본 간접비율 적용기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제114조제3항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제114조제3항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "기관유형별 과제 간접비 계상",
+    "lane": "비영리 연구개발기관",
+    "stage": "G4 고시·적용",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "비영리 연구개발기관",
+    "action": "기관유형과 고시비율에 따라 과제별 간접비를 계상·관리한다.",
+    "input_documents": [
+     "고시비율"
+    ],
+    "output_documents": [
+     "과제별 간접비 계상내역"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제37조·제46조·제55조·제63조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제37조·제46조·제55조·제63조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "차기 산출주기 자료 축적",
+    "lane": "비영리 연구개발기관",
+    "stage": "G5 차기주기",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "비영리 연구개발기관",
+    "action": "회계자료와 연구지원 개선실적을 축적해 다음 2년 주기 신청을 준비한다.",
+    "input_documents": [],
+    "output_documents": [
+     "차기 산출 기초자료"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제112조부터 제114조까지",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제112조부터 제114조까지에 따른 절차"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P03",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L13",
+    "source": "P12",
+    "target": "P10",
+    "type": "loop",
+    "label": "재산출"
+   },
+   {
+    "id": "E14",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": "의결"
+   },
+   {
+    "id": "E15",
+    "source": "P13",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": "미산출 기관"
+   },
+   {
+    "id": "E17",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E18",
+    "source": "P15",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L19",
+    "source": "P16",
+    "target": "P06",
+    "type": "loop",
+    "label": "차기주기"
+   }
+  ],
+  "warnings": [
+   "법령·행정규칙의 공통 절차를 구조화했다. 기관 자체규정, 연도별 시행계획, 전담기관 업무처리규정과 전산시스템 입력 항목은 별도로 확인해야 한다.",
+   "기관별 실제 산출식과 인정·제외 항목은 해당 산출연도의 공고문·산출기준을 함께 확인해야 한다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-15",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 3건 중 공식 원문 3건을 연결했다. 캔버스와 절차 노드의 명시 조문 33건 가운데 33건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "notes": [
+   "기준일 현재 현행 법률·시행령·시행규칙·행정규칙 원문 대조",
+   "기준일 이후 시행 예정 조문은 경고문에 분리",
+   "전산시스템 화면과 기관 자체규정은 현장 검증 대상으로 유지"
+  ],
+  "sources": [
+   {
+    "law": "국가연구개발혁신법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국가연구개발혁신법",
+    "lawId": "013774",
+    "mst": "283849",
+    "promulgatedOn": "2026-03-10",
+    "effectiveOn": "2026-06-11",
+    "officialUrl": "https://law.go.kr/법령/국가연구개발혁신법"
+   },
+   {
+    "law": "국가연구개발혁신법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "국가연구개발혁신법 시행령",
+    "lawId": "013933",
+    "mst": "285767",
+    "promulgatedOn": "2026-05-06",
+    "effectiveOn": "2026-06-11",
+    "officialUrl": "https://law.go.kr/법령/국가연구개발혁신법시행령"
+   },
+   {
+    "law": "국가연구개발사업 연구개발비 사용 기준",
+    "kind": "고시·지침",
+    "sourceType": "admin-rule",
+    "officialName": "국가연구개발사업 연구개발비 사용 기준",
+    "adminRuleId": "75386",
+    "adminRuleSerial": "2100000278740",
+    "promulgatedOn": "2026-05-06",
+    "officialUrl": "https://law.go.kr/행정규칙/국가연구개발사업연구개발비사용기준",
+    "issueNo": "과학기술정보통신부고시 제2026-38호"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-15",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 21,
+   "explicitCitationEntries": 21,
+   "articleReferences": 33,
+   "verifiedReferences": 33,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

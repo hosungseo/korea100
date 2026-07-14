@@ -1,0 +1,803 @@
+{
+ "slug": "lmo-research-facility-approval",
+ "name": "LMO 연구시설 신고·허가·개발실험 승인",
+ "oneLiner": "LMO 연구시설의 안전관리등급 판정과 신고·허가, 설치·운영, 변경·폐쇄 및 고위험 개발·실험 승인·사고대응·검사까지 이어지는 절차",
+ "type": "등급판정·시설신고허가·실험승인형",
+ "priority": 360,
+ "category": "연구개발·행정",
+ "whyFirst": "시설 신고·허가와 개발·실험 승인은 별도이며 안전관리등급, LMO 특성, 실험내용 변경에 따라 관할기관과 처리경로가 달라진다.",
+ "asOfDate": "2026-07-15",
+ "status": "full",
+ "canvas": {
+  "purpose": "유전자변형생물체 연구시설과 고위험 개발·실험을 위험수준에 맞게 사전관리해 인체·환경 위해를 예방한다.",
+  "stakeholders": "연구기관·시설책임자, 생물안전위원회·관리자, 관계 중앙행정기관, 연구자·실험책임자, 검사·사고대응기관",
+  "legalBasis": [
+   {
+    "law": "유전자변형생물체의 국가간 이동 등에 관한 법률",
+    "articles": "제22조·제22조의2·제23조·제26조·제27조·제36조·제37조",
+    "kind": "법률"
+   },
+   {
+    "law": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령",
+    "articles": "제23조부터 제23조의7까지",
+    "kind": "대통령령"
+   },
+   {
+    "law": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행규칙",
+    "articles": "제14조부터 제14조의6까지",
+    "kind": "부령"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "관계 중앙행정기관",
+    "role": "시설 신고수리·허가와 고위험 개발실험 승인"
+   },
+   {
+    "name": "연구기관",
+    "role": "시설·인력·위원회·운영기준 준수와 기록"
+   },
+   {
+    "name": "생물안전위원회",
+    "role": "위험성 평가·실험검토·사고예방"
+   }
+  ],
+  "procedure": [
+   "LMO·실험 위험성 평가",
+   "시설 안전관리등급 판정",
+   "관할기관·신고허가 경로 확인",
+   "시설 신고·허가 신청",
+   "서류검토·시설검사·보완",
+   "신고확인·시설허가",
+   "안전관리체계·교육 구축",
+   "LMO 반입·보관·사용기록",
+   "개발·실험 승인대상 판정",
+   "개발·실험 승인신청",
+   "전문검토·보완",
+   "개발·실험 승인 결정",
+   "승인조건에 따른 실험수행",
+   "시설·실험 변경허가·신고",
+   "시설 폐쇄·LMO 처리",
+   "유출·사고 긴급조치·통보",
+   "검사·시정·허가취소·청문"
+  ],
+  "moneyFlow": "기관은 밀폐시설·검증·교육·보호구·폐기·비상대응 비용을 부담하고 부적합 시 개선·중지·폐쇄 비용이 추가된다.",
+  "docsFlow": "LMO·실험 위험평가 → 시설등급 판정 → 신고서/허가신청 → 시설검사·신고확인/허가서 → 운영기록 → 개발실험 승인 → 변경·폐쇄 → 사고통보·검사·시정으로 이어진다.",
+  "bottlenecks": [
+   "시설등급과 실험등급 혼동",
+   "시설 허가와 고위험 실험 승인 누락",
+   "변경허가·변경신고 구분",
+   "폐기·불활성화와 사고 즉시통보"
+  ],
+  "reformPoints": [
+   "LMO 특성 입력 기반 관할·절차 자동판정",
+   "시설번호와 실험승인번호 연결",
+   "변경항목별 허가·신고 분류",
+   "사고·폐기·재고 기록 자동대사"
+  ]
+ },
+ "related": [
+  "연구실 안전점검·정밀안전진단·사고조사",
+  "인간대상·인체유래물연구 IRB 심의",
+  "감염병 연구시설 생물안전 관리"
+ ],
+ "fieldVerification": [
+  "용도별 관할부처 최신 안내",
+  "등급별 시설·검증 세부기준",
+  "기관 생물안전위원회 심의서식",
+  "사고·비상조치 연락망과 합동조사"
+ ],
+ "process": {
+  "institution_name": "LMO 연구시설 신고·허가·개발실험 승인",
+  "law_name": "유전자변형생물체의 국가간 이동 등에 관한 법률·유전자변형생물체의 국가간 이동 등에 관한 법률 시행령·유전자변형생물체의 국가간 이동 등에 관한 법률 시행규칙",
+  "lanes": [
+   "연구기관·시설책임자",
+   "생물안전위원회·관리자",
+   "관계 중앙행정기관",
+   "연구자·실험책임자",
+   "검사·사고대응기관"
+  ],
+  "stages": [
+   "G0 위험평가",
+   "G1 시설신고·허가",
+   "G2 설치·운영",
+   "G3 실험승인",
+   "G4 변경·폐쇄",
+   "G5 사고·감독"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "LMO·실험 위험성 평가",
+    "lane": "연구자·실험책임자",
+    "stage": "G0 위험평가",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "연구자·실험책임자",
+    "action": "LMO 숙주·공여체·유전자·벡터·용도와 노출·환경방출 가능성을 평가한다.",
+    "input_documents": [],
+    "output_documents": [],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률",
+      "article": "제22조·제22조의2",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 제22조·제22조의2에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "시설 안전관리등급 판정",
+    "lane": "생물안전위원회·관리자",
+    "stage": "G0 위험평가",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "생물안전위원회·관리자",
+    "action": "위험평가와 연구용도에 따라 시설등급과 밀폐·운영기준을 정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "시설등급 판정서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령",
+      "article": "제23조",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령 제23조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "관할기관·신고허가 경로 확인",
+    "lane": "연구기관·시설책임자",
+    "stage": "G0 위험평가",
+    "type": "gateway",
+    "status": "current",
+    "progress": 55,
+    "actor": "연구기관·시설책임자",
+    "action": "용도·등급별 관계 중앙행정기관과 신고 또는 허가 경로를 확인한다.",
+    "input_documents": [],
+    "output_documents": [
+     "관할·절차 확인"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률",
+      "article": "제22조",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 제22조에 따른 절차"
+     },
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령",
+      "article": "제23조",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령 제23조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "시설 신고·허가 신청",
+    "lane": "관계 중앙행정기관",
+    "stage": "G1 시설신고·허가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "관계 중앙행정기관",
+    "action": "시설 도면·장비·운영·책임자·비상계획을 제출한다.",
+    "input_documents": [],
+    "output_documents": [
+     "연구시설 신고서·허가신청서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률",
+      "article": "제22조",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 제22조에 따른 절차"
+     },
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행규칙",
+      "article": "제14조",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행규칙 제14조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "서류검토·시설검사·보완",
+    "lane": "검사·사고대응기관",
+    "stage": "G1 시설신고·허가",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "검사·사고대응기관",
+    "action": "등급별 설치기준과 운영능력을 서류·현장으로 확인하고 보완시킨다.",
+    "input_documents": [],
+    "output_documents": [
+     "시설검사·보완 결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령",
+      "article": "제23조",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령 제23조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "신고확인·시설허가",
+    "lane": "관계 중앙행정기관",
+    "stage": "G1 시설신고·허가",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "관계 중앙행정기관",
+    "action": "요건을 충족한 시설에 신고확인서 또는 허가서를 발급한다.",
+    "input_documents": [],
+    "output_documents": [
+     "신고확인서·연구시설 허가서"
+    ],
+    "deadline": "허가·신고는 원칙적으로 60일 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령",
+      "article": "제23조",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령 제23조에 따른 절차"
+     },
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행규칙",
+      "article": "제14조",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행규칙 제14조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "안전관리체계·교육 구축",
+    "lane": "생물안전위원회·관리자",
+    "stage": "G2 설치·운영",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "생물안전위원회·관리자",
+    "action": "책임자·위원회·출입·교육·보호구·소독·폐기·비상대응 체계를 운영한다.",
+    "input_documents": [],
+    "output_documents": [
+     "시설 운영규정",
+     "교육·출입기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률",
+      "article": "제22조제6항",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 제22조제6항에 따른 절차"
+     },
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령",
+      "article": "제23조의5",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령 제23조의5에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "LMO 반입·보관·사용기록",
+    "lane": "연구기관·시설책임자",
+    "stage": "G2 설치·운영",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구기관·시설책임자",
+    "action": "LMO 입고·재고·이동·실험·보관·불활성화·폐기를 추적 기록한다.",
+    "input_documents": [],
+    "output_documents": [
+     "LMO 취급·재고대장"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률",
+      "article": "제26조",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 제26조에 따른 절차"
+     },
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령",
+      "article": "제23조의5",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령 제23조의5에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "개발·실험 승인대상 판정",
+    "lane": "생물안전위원회·관리자",
+    "stage": "G3 실험승인",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "생물안전위원회·관리자",
+    "action": "법정 고위험 LMO·유전자 또는 위해 가능 실험에 해당하는지 심의한다.",
+    "input_documents": [],
+    "output_documents": [
+     "실험 승인대상 판정"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률",
+      "article": "제22조의2",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 제22조의2에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "개발·실험 승인신청",
+    "lane": "관계 중앙행정기관",
+    "stage": "G3 실험승인",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "관계 중앙행정기관",
+    "action": "위험평가·실험계획·시설·안전관리 자료를 제출한다.",
+    "input_documents": [],
+    "output_documents": [
+     "LMO 개발·실험 승인신청서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률",
+      "article": "제22조의2",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 제22조의2에 따른 절차"
+     },
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행규칙",
+      "article": "제14조의4",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행규칙 제14조의4에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "전문검토·보완",
+    "lane": "검사·사고대응기관",
+    "stage": "G3 실험승인",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "검사·사고대응기관",
+    "action": "LMO 위해성과 시설·절차의 통제 적정성을 검토하고 필요한 자료를 보완시킨다.",
+    "input_documents": [],
+    "output_documents": [
+     "전문검토·보완 의견"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령",
+      "article": "제23조의6",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령 제23조의6에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "개발·실험 승인 결정",
+    "lane": "관계 중앙행정기관",
+    "stage": "G3 실험승인",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "관계 중앙행정기관",
+    "action": "조건·범위·기간을 정해 승인 또는 불승인한다.",
+    "input_documents": [],
+    "output_documents": [
+     "개발·실험 승인서"
+    ],
+    "deadline": "원칙적으로 60일 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령",
+      "article": "제23조의6",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령 제23조의6에 따른 절차"
+     },
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행규칙",
+      "article": "제14조의4",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행규칙 제14조의4에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "승인조건에 따른 실험수행",
+    "lane": "연구자·실험책임자",
+    "stage": "G3 실험승인",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구자·실험책임자",
+    "action": "승인된 시설·LMO·방법과 안전조건 안에서 실험하고 기록한다.",
+    "input_documents": [],
+    "output_documents": [
+     "실험·안전관리 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률",
+      "article": "제22조의2",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 제22조의2에 따른 절차"
+     },
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령",
+      "article": "제23조의5",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령 제23조의5에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "시설·실험 변경허가·신고",
+    "lane": "관계 중앙행정기관",
+    "stage": "G4 변경·폐쇄",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "관계 중앙행정기관",
+    "action": "시설·책임자·LMO·실험방법 변경의 중요도에 따라 허가·승인 또는 신고한다.",
+    "input_documents": [],
+    "output_documents": [
+     "변경허가·승인·신고 결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률",
+      "article": "제22조·제22조의2",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 제22조·제22조의2에 따른 절차"
+     },
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령",
+      "article": "제23조의2·제23조의3·제23조의7",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령 제23조의2·제23조의3·제23조의7에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "시설 폐쇄·LMO 처리",
+    "lane": "연구기관·시설책임자",
+    "stage": "G4 변경·폐쇄",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구기관·시설책임자",
+    "action": "LMO를 이전·폐기·불활성화하고 시설 폐쇄와 증빙을 신고한다.",
+    "input_documents": [],
+    "output_documents": [
+     "폐쇄신고",
+     "폐기·불활성화 증빙"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률",
+      "article": "제22조",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 제22조에 따른 절차"
+     },
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령",
+      "article": "제23조의4",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령 제23조의4에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "유출·사고 긴급조치·통보",
+    "lane": "검사·사고대응기관",
+    "stage": "G5 사고·감독",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "검사·사고대응기관",
+    "action": "유출 차단·대피·회수·소독 등 위해방지 조치를 하고 관계기관에 즉시 통보한다.",
+    "input_documents": [],
+    "output_documents": [
+     "사고통보",
+     "긴급조치 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률",
+      "article": "제27조",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 제27조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P17",
+    "name": "검사·시정·허가취소·청문",
+    "lane": "관계 중앙행정기관",
+    "stage": "G5 사고·감독",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "관계 중앙행정기관",
+    "action": "보고·출입검사로 위반과 위해를 확인하고 시정·중지·취소 전 청문을 실시한다.",
+    "input_documents": [],
+    "output_documents": [
+     "검사결과",
+     "시정·중지·취소 결정"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "유전자변형생물체의 국가간 이동 등에 관한 법률",
+      "article": "제23조·제36조·제37조",
+      "text": "유전자변형생물체의 국가간 이동 등에 관한 법률 제23조·제36조·제37조에 따른 절차"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P15",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P16",
+    "target": "P17",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L17",
+    "source": "P05",
+    "target": "P04",
+    "type": "loop",
+    "label": "시설보완"
+   },
+   {
+    "id": "E18",
+    "source": "P09",
+    "target": "P13",
+    "type": "sequence",
+    "label": "승인 비대상"
+   },
+   {
+    "id": "L19",
+    "source": "P11",
+    "target": "P10",
+    "type": "loop",
+    "label": "자료보완"
+   },
+   {
+    "id": "L20",
+    "source": "P12",
+    "target": "P09",
+    "type": "loop",
+    "label": "불승인 재설계"
+   },
+   {
+    "id": "E21",
+    "source": "P16",
+    "target": "P17",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L22",
+    "source": "P17",
+    "target": "P07",
+    "type": "loop",
+    "label": "시정 후 운영"
+   }
+  ],
+  "warnings": [
+   "법령·행정규칙의 공통 절차를 구조화했다. 기관 자체규정, 최신 공고·서식과 소관기관 전산시스템 입력 항목은 별도로 확인해야 한다.",
+   "시설 신고·허가를 받았더라도 법정 고위험 개발·실험은 별도의 승인이 필요하다. 승인 전 실험을 시작해서는 안 된다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-15",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 3건 중 공식 원문 3건을 연결했다. 캔버스와 절차 노드의 명시 조문 44건 가운데 44건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "notes": [
+   "기준일 현재 현행 법률·시행령·시행규칙·행정규칙 원문 대조",
+   "기관 자체규정·심사사례·전산화면은 현장 검증 대상으로 유지"
+  ],
+  "sources": [
+   {
+    "law": "유전자변형생물체의 국가간 이동 등에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "유전자변형생물체의 국가간 이동 등에 관한 법률",
+    "lawId": "009170",
+    "mst": "276569",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2025-10-01",
+    "officialUrl": "https://law.go.kr/법령/유전자변형생물체의국가간이동등에관한법률"
+   },
+   {
+    "law": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행령",
+    "lawId": "010038",
+    "mst": "278407",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2025-10-01",
+    "officialUrl": "https://law.go.kr/법령/유전자변형생물체의국가간이동등에관한법률시행령"
+   },
+   {
+    "law": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "유전자변형생물체의 국가간 이동 등에 관한 법률 시행규칙",
+    "lawId": "010182",
+    "mst": "278761",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2025-10-01",
+    "officialUrl": "https://law.go.kr/법령/유전자변형생물체의국가간이동등에관한법률시행규칙"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-15",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 30,
+   "explicitCitationEntries": 30,
+   "articleReferences": 44,
+   "verifiedReferences": 44,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}
