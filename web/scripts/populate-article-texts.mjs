@@ -57,6 +57,22 @@ async function fetchAdminRuleFull(serial) {
   }
 }
 
+// 본문 안에서 자기 조문이 아닌 다른 조문의 '행 시작' 헤더(제N조 …)를 만나면 그 앞에서 절단한다.
+// 문장 중간의 상호참조("법 제7조제1항 …")는 행 시작이 아니므로 절단하지 않는다.
+function truncateAtForeignArticle(body, ownKey) {
+  const lineHeader = /^제(\d+)조(?:의(\d+))?(?:\s|\(|$)/; // 행 시작 조문 헤더/목차 라인
+  const out = [];
+  for (const line of body.split("\n")) {
+    const hm = line.match(lineHeader);
+    if (hm) {
+      const key = `제${hm[1]}조${hm[2] ? `의${hm[2]}` : ""}`;
+      if (key !== ownKey) break; // 다른 조문 헤더 → 여기서 멈춘다
+    }
+    out.push(line);
+  }
+  return out.join("\n").trim();
+}
+
 // 본문 텍스트에서 "제N조(제목) …" 블록을 각 조문 단위로 분리
 function parseArticleBodies(output) {
   const map = new Map();
@@ -73,6 +89,8 @@ function parseArticleBodies(output) {
     let body = output.slice(start, end).trim();
     // JSON 잔여 구두점 정리
     body = body.replace(/\\n/g, "\n").replace(/^["\s,:]+/, "").replace(/["\s,]+$/, "").trim();
+    // 방어: 본문에 섞인 다른 조문 내용 절단(자기 조문 헤더는 이미 제거된 상태이므로 첫 이질 헤더에서 멈춤)
+    body = truncateAtForeignArticle(body, marks[i].key);
     if (!map.has(marks[i].key) && body) {
       map.set(marks[i].key, { title: marks[i].title, body });
     }
