@@ -1,0 +1,817 @@
+{
+ "slug": "national-rd-sanction-reconsideration",
+ "name": "국가연구개발 제재처분·재검토·사후관리",
+ "oneLiner": "제재사유와 수준 검토부터 사전통지, 20일 재검토 요청, 위원회 심의, 30일 결정, 등록·공개와 납부·독촉까지 이어지는 절차",
+ "type": "제재·권리구제·징수형",
+ "priority": 339,
+ "category": "연구개발·행정",
+ "whyFirst": "참여제한, 제재부가금, 환수가 병과될 수 있고 20일 재검토 요청과 30일 결정기한을 놓치면 권리구제가 어려워진다.",
+ "asOfDate": "2026-07-14",
+ "status": "full",
+ "canvas": {
+  "purpose": "국가 R&D 제재의 필요성과 수준을 독립적으로 검토하고 사전통지·재검토 기회를 보장한 뒤 집행·징수한다.",
+  "stakeholders": "중앙행정기관, 제재처분평가단, 제재대상자, 연구자권익보호위원회, 관계기관·수납기관",
+  "legalBasis": [
+   {
+    "law": "국가연구개발혁신법",
+    "articles": "제32조·제33조·제34조",
+    "kind": "법률"
+   },
+   {
+    "law": "국가연구개발혁신법 시행령",
+    "articles": "제59조·제60조·제61조·제62조·제63조",
+    "kind": "대통령령"
+   },
+   {
+    "law": "국가연구개발혁신법 시행규칙",
+    "articles": "제2조",
+    "kind": "부령"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "중앙행정기관",
+    "role": "제재 수준 산정, 사전통지, 최종결정과 사후관리"
+   },
+   {
+    "name": "제재처분평가단",
+    "role": "제재 필요성·종류·수준의 독립 검토"
+   },
+   {
+    "name": "연구자권익보호위원회",
+    "role": "재검토 의견과 제재 적절성 심의"
+   }
+  ],
+  "procedure": [
+   "제재사유·제척기간 확인",
+   "참여제한·제재부가금·환수 산정",
+   "제재처분평가단 구성·제척",
+   "제재 필요성·종류·수준 검토",
+   "제재처분 사전통지",
+   "재검토 요청 의견 제출",
+   "재검토 경로 선택",
+   "위원 제척·기피·회피 심사",
+   "재검토 심의·의견 도출",
+   "중앙행정기관 자체 재검토",
+   "제재 종류·수준 최종결정",
+   "결정 지체 없이 통보",
+   "통합정보시스템 등록·공개",
+   "참여제한 집행·관계기관 전파",
+   "제재부가금·환수금 납부",
+   "분할납부·기한연장 결정",
+   "미납 독촉장 발급",
+   "체납처분에 따른 징수"
+  ],
+  "moneyFlow": "제재부가금과 연구개발비 환수액을 통보 후 30일 이내 납부하고, 분할·연장 또는 미납 독촉 뒤 체납처분 절차로 이어진다.",
+  "docsFlow": "제재사유 조사자료 → 수준 산정표 → 평가단 검토서 → 사전통지서 → 재검토요청서·의견 → 위원회 심의서 → 최종결정·등록·공개 → 납부고지·분할신청·독촉장으로 이어진다.",
+  "bottlenecks": [
+   "개인·기관별 제재사유와 책임범위 구분",
+   "재검토 경로 선택과 위원 제척·기피",
+   "참여제한·부가금·환수의 동시 집행"
+  ],
+  "reformPoints": [
+   "제재사유별 법정 상한과 고려요소 구조화",
+   "사전통지에서 20일 재검토 마감 자동 계산",
+   "납부·분할·독촉·체납상태 통합 추적"
+  ]
+ },
+ "related": [
+  "국가연구개발사업 부정행위 제보·검증",
+  "국가연구개발비 지급·사용·정산",
+  "행정심판"
+ ],
+ "fieldVerification": [
+  "부처별 제재처분 세부 산정기준",
+  "연구자권익보호위원회 실제 접수·심의 일정",
+  "행정심판·행정소송과 정보공개 보류의 연계"
+ ],
+ "process": {
+  "institution_name": "국가연구개발 제재처분·재검토·사후관리",
+  "law_name": "국가연구개발혁신법·국가연구개발혁신법 시행령·국가연구개발혁신법 시행규칙",
+  "lanes": [
+   "중앙행정기관",
+   "제재처분평가단",
+   "제재대상자",
+   "연구자권익보호위원회",
+   "관계기관·수납기관"
+  ],
+  "stages": [
+   "G0 사유·수준",
+   "G1 평가단 검토",
+   "G2 사전통지·재검토",
+   "G3 결정·공개",
+   "G4 납부·사후관리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "제재사유·제척기간 확인",
+    "lane": "중앙행정기관",
+    "stage": "G0 사유·수준",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "중앙행정기관",
+    "action": "부정행위, 연구비 위반 등 제재사유와 처분 가능기간을 확인한다.",
+    "input_documents": [
+     "조사·검증 결과",
+     "연구비 정산자료"
+    ],
+    "output_documents": [
+     "제재사유 검토표"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제32조제1항·제5항",
+      "text": "국가연구개발혁신법 제32조제1항·제5항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "참여제한·제재부가금·환수 산정",
+    "lane": "중앙행정기관",
+    "stage": "G0 사유·수준",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "중앙행정기관",
+    "action": "중대성, 고의, 횟수와 수행단계를 고려해 대상별 제재 종류와 수준을 산정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "제재 수준 산정표",
+     "환수액 산정내역"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제32조제1항~제4항",
+      "text": "국가연구개발혁신법 제32조제1항~제4항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제59조",
+      "text": "국가연구개발혁신법 시행령 제59조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "제재처분평가단 구성·제척",
+    "lane": "중앙행정기관",
+    "stage": "G1 평가단 검토",
+    "type": "gateway",
+    "status": "current",
+    "progress": 55,
+    "actor": "중앙행정기관",
+    "action": "제재대상자와 직접 이해관계가 없는 위원으로 평가단을 구성한다.",
+    "input_documents": [],
+    "output_documents": [
+     "제재처분평가단 명단",
+     "이해관계 확인서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제33조제1항",
+      "text": "국가연구개발혁신법 제33조제1항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제60조",
+      "text": "국가연구개발혁신법 시행령 제60조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "제재 필요성·종류·수준 검토",
+    "lane": "제재처분평가단",
+    "stage": "G1 평가단 검토",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "제재처분평가단",
+    "action": "사실관계, 책임범위와 산정기준을 검토해 제재의견을 낸다.",
+    "input_documents": [
+     "제재사유 검토표",
+     "제재 수준 산정표"
+    ],
+    "output_documents": [
+     "제재처분평가단 검토결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제33조제1항",
+      "text": "국가연구개발혁신법 제33조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "제재처분 사전통지",
+    "lane": "중앙행정기관",
+    "stage": "G2 사전통지·재검토",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "평가단 결과를 고려해 처분내용, 원인사실, 법적 근거와 의견제출 방법을 미리 통지한다.",
+    "input_documents": [],
+    "output_documents": [
+     "제재처분 사전통지서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제33조제2항",
+      "text": "국가연구개발혁신법 제33조제2항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "재검토 요청 의견 제출",
+    "lane": "제재대상자",
+    "stage": "G2 사전통지·재검토",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "제재대상자",
+    "action": "통지내용에 이의가 있으면 사유와 증거를 갖춘 재검토요청서를 제출한다.",
+    "input_documents": [
+     "제재처분 사전통지서"
+    ],
+    "output_documents": [
+     "제재처분 재검토요청서",
+     "소명자료"
+    ],
+    "deadline": "통지받은 날부터 20일 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제33조제3항",
+      "text": "국가연구개발혁신법 제33조제3항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행규칙",
+      "article": "제2조",
+      "text": "국가연구개발혁신법 시행규칙 제2조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "재검토 경로 선택",
+    "lane": "중앙행정기관",
+    "stage": "G2 사전통지·재검토",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "권익보호위원회 검토 또는 제재대상자가 희망한 중앙행정기관 자체 재검토 경로를 정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "재검토 회부서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제33조제4항",
+      "text": "국가연구개발혁신법 제33조제4항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "위원 제척·기피·회피 심사",
+    "lane": "연구자권익보호위원회",
+    "stage": "G2 사전통지·재검토",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구자권익보호위원회",
+    "action": "심의 공정성을 위해 위원의 제척·기피·회피 사유를 처리한다.",
+    "input_documents": [],
+    "output_documents": [
+     "위원 구성확정",
+     "기피결정"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제61조제8항~제10항",
+      "text": "국가연구개발혁신법 시행령 제61조제8항~제10항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "재검토 심의·의견 도출",
+    "lane": "연구자권익보호위원회",
+    "stage": "G2 사전통지·재검토",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구자권익보호위원회",
+    "action": "소명, 평가단 검토와 법정 기준을 심의해 제재 적절성 의견을 낸다.",
+    "input_documents": [
+     "재검토요청서",
+     "평가단 검토결과"
+    ],
+    "output_documents": [
+     "위원회 재검토 의견"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제33조제4항",
+      "text": "국가연구개발혁신법 제33조제4항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제61조",
+      "text": "국가연구개발혁신법 시행령 제61조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "중앙행정기관 자체 재검토",
+    "lane": "중앙행정기관",
+    "stage": "G2 사전통지·재검토",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "제재대상자가 희망한 경우 중앙행정기관이 직접 통지내용을 재검토한다.",
+    "input_documents": [
+     "재검토요청서"
+    ],
+    "output_documents": [
+     "자체 재검토 결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제33조제4항",
+      "text": "국가연구개발혁신법 제33조제4항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "제재 종류·수준 최종결정",
+    "lane": "중앙행정기관",
+    "stage": "G3 결정·공개",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "위원회 의견 또는 자체 재검토 결과를 고려해 최종처분을 결정한다.",
+    "input_documents": [
+     "위원회 의견 또는 자체 재검토 결과"
+    ],
+    "output_documents": [
+     "제재처분 결정서"
+    ],
+    "deadline": "재검토 의견을 받은 날부터 30일 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제33조제5항",
+      "text": "국가연구개발혁신법 제33조제5항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "결정 지체 없이 통보",
+    "lane": "중앙행정기관",
+    "stage": "G3 결정·공개",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "제재대상자와 관계 중앙행정기관 등에 결정내용을 지체 없이 통보한다.",
+    "input_documents": [],
+    "output_documents": [
+     "제재처분 통보서"
+    ],
+    "deadline": "결정 후 지체 없이",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제33조제6항",
+      "text": "국가연구개발혁신법 제33조제6항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "통합정보시스템 등록·공개",
+    "lane": "중앙행정기관",
+    "stage": "G3 결정·공개",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "제재결정을 등록하고 법정 공개대상 정보를 공개하되 소송계류 등 예외를 확인한다.",
+    "input_documents": [],
+    "output_documents": [
+     "제재정보 등록·공개 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제33조제7항",
+      "text": "국가연구개발혁신법 제33조제7항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제62조",
+      "text": "국가연구개발혁신법 시행령 제62조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "참여제한 집행·관계기관 전파",
+    "lane": "관계기관·수납기관",
+    "stage": "G4 납부·사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "관계기관·수납기관",
+    "action": "참여제한 처분을 모든 국가연구개발활동에 지체 없이 적용한다.",
+    "input_documents": [
+     "제재처분 통보서"
+    ],
+    "output_documents": [
+     "참여제한 적용기록"
+    ],
+    "deadline": "통보 후 지체 없이",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제34조제1항",
+      "text": "국가연구개발혁신법 제34조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "제재부가금·환수금 납부",
+    "lane": "제재대상자",
+    "stage": "G4 납부·사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "제재대상자",
+    "action": "통보된 제재부가금 또는 연구개발비 환수금을 지정 수납기관에 납부한다.",
+    "input_documents": [],
+    "output_documents": [
+     "납부확인"
+    ],
+    "deadline": "처분 통보일부터 30일 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제63조제1항",
+      "text": "국가연구개발혁신법 시행령 제63조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "분할납부·기한연장 결정",
+    "lane": "중앙행정기관",
+    "stage": "G4 납부·사후관리",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "경영악화·재난 등 불가피한 사유가 있으면 분할납부 또는 기한연장을 결정한다.",
+    "input_documents": [
+     "분할·연장 신청",
+     "사유 증빙"
+    ],
+    "output_documents": [
+     "분할·연장 결정"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제63조제2항",
+      "text": "국가연구개발혁신법 시행령 제63조제2항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P17",
+    "name": "미납 독촉장 발급",
+    "lane": "관계기관·수납기관",
+    "stage": "G4 납부·사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "관계기관·수납기관",
+    "action": "납부기한이 지나면 납부액·기한·불이익을 적은 독촉장을 발급한다.",
+    "input_documents": [],
+    "output_documents": [
+     "독촉장"
+    ],
+    "deadline": "납부기한 경과 후 15일 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제34조제2항",
+      "text": "국가연구개발혁신법 제34조제2항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제63조제3항",
+      "text": "국가연구개발혁신법 시행령 제63조제3항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P18",
+    "name": "체납처분에 따른 징수",
+    "lane": "관계기관·수납기관",
+    "stage": "G4 납부·사후관리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "관계기관·수납기관",
+    "action": "독촉기한에도 미납하면 국세 체납처분의 예에 따라 징수한다.",
+    "input_documents": [
+     "독촉장"
+    ],
+    "output_documents": [
+     "체납징수 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제34조제2항",
+      "text": "국가연구개발혁신법 제34조제2항에 따른 절차"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": "재검토 요청"
+   },
+   {
+    "id": "E06",
+    "source": "P05",
+    "target": "P11",
+    "type": "sequence",
+    "label": "의견 없음"
+   },
+   {
+    "id": "E07",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": "위원회"
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P07",
+    "target": "P10",
+    "type": "sequence",
+    "label": "자체 재검토"
+   },
+   {
+    "id": "E11",
+    "source": "P09",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E15",
+    "source": "P12",
+    "target": "P14",
+    "type": "message",
+    "label": "참여제한"
+   },
+   {
+    "id": "E16",
+    "source": "P12",
+    "target": "P15",
+    "type": "message",
+    "label": "금전처분"
+   },
+   {
+    "id": "E17",
+    "source": "P15",
+    "target": "P16",
+    "type": "sequence",
+    "label": "분할·연장 요청"
+   },
+   {
+    "id": "E18",
+    "source": "P15",
+    "target": "P17",
+    "type": "sequence",
+    "label": "미납"
+   },
+   {
+    "id": "L19",
+    "source": "P16",
+    "target": "P15",
+    "type": "loop",
+    "label": "변경기한 납부"
+   },
+   {
+    "id": "E20",
+    "source": "P17",
+    "target": "P18",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "이 구조도는 국가연구개발혁신법의 공통 절차다. 중앙행정기관·전문기관별 사업 공고, 협약서, 자체규정과 시스템 입력 방식이 더 구체적인 요건을 둘 수 있다.",
+   "재검토 요청은 혁신법상 제재처분 전 의견제출 절차다. 최종처분 이후 행정심판·행정소송과는 구분해야 한다.",
+   "기준일 이후 2026년 8월 20일·9월 11일 시행 예정인 혁신법 일부 개정사항은 시행일 도래 후 다시 검증해야 한다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-14",
+  "method": "국가법령정보센터 Open API 법령·행정규칙 원문 대조",
+  "scope": "법적 근거 3건의 공식 원문을 연결하고 캔버스와 절차 노드의 명시 조문 33건의 조문 번호 존재를 확인했다. 인용 문구의 사건별 적용 타당성은 별도 검토가 필요하다.",
+  "notes": [
+   "국가연구개발혁신법·시행령·시행규칙 현행 원문 대조",
+   "연구개발비 구조도는 과학기술정보통신부고시 제2026-38호 추가 대조",
+   "시행예정 개정은 기준일 현재 적용되는 부분과 분리"
+  ],
+  "sources": [
+   {
+    "law": "국가연구개발혁신법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국가연구개발혁신법",
+    "lawId": "013774",
+    "mst": "283849",
+    "promulgatedOn": "2026-03-10",
+    "effectiveOn": "2026-06-11",
+    "officialUrl": "https://law.go.kr/법령/국가연구개발혁신법"
+   },
+   {
+    "law": "국가연구개발혁신법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "국가연구개발혁신법 시행령",
+    "lawId": "013933",
+    "mst": "285767",
+    "promulgatedOn": "2026-05-06",
+    "effectiveOn": "2026-06-11",
+    "officialUrl": "https://law.go.kr/법령/국가연구개발혁신법시행령"
+   },
+   {
+    "law": "국가연구개발혁신법 시행규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "국가연구개발혁신법 시행규칙",
+    "lawId": "013980",
+    "mst": "286879",
+    "promulgatedOn": "2026-06-09",
+    "effectiveOn": "2026-06-11",
+    "officialUrl": "https://law.go.kr/법령/국가연구개발혁신법시행규칙"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-14",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 27,
+   "explicitCitationEntries": 27,
+   "articleReferences": 33,
+   "verifiedReferences": 33,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

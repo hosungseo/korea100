@@ -1,0 +1,801 @@
+{
+ "slug": "national-rd-results-technology-fee",
+ "name": "국가연구개발성과 소유·활용·기술료",
+ "oneLiner": "연구성과의 소유권 확정과 등록·공개부터 기술실시계약, 기술료 징수·정부납부·감면·사용과 추적조사까지 이어지는 절차",
+ "type": "성과관리·기술이전·납부형",
+ "priority": 337,
+ "category": "연구개발·행정",
+ "whyFirst": "공동성과 지분, 특허출원 표시, 성과등록, 비공개, 기술료 보고·납부가 서로 다른 담당부서에 흩어져 누락되기 쉽다.",
+ "asOfDate": "2026-07-14",
+ "status": "full",
+ "canvas": {
+  "purpose": "국가 R&D 성과의 권리관계를 명확히 하고 공개·공동활용·사업화와 정부납부기술료를 투명하게 관리한다.",
+  "stakeholders": "연구자, 연구개발성과소유기관, 공동 연구개발기관·실시자, 중앙행정기관, 성과전담기관·통합정보시스템",
+  "legalBasis": [
+   {
+    "law": "국가연구개발혁신법",
+    "articles": "제16조·제17조·제18조",
+    "kind": "법률"
+   },
+   {
+    "law": "국가연구개발혁신법 시행령",
+    "articles": "제32조·제33조·제34조·제35조·제36조·제37조·제38조·제39조·제40조·제41조",
+    "kind": "대통령령"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "성과소유기관",
+    "role": "성과 권리승계, 지식재산 관리, 실시계약과 기술료 관리"
+   },
+   {
+    "name": "중앙행정기관",
+    "role": "국가소유, 비공개 승인, 정부납부기술료 고지·감면·추적"
+   },
+   {
+    "name": "성과전담기관",
+    "role": "성과 등록·기탁과 유통"
+   }
+  ],
+  "procedure": [
+   "연구개발성과·발명 신고",
+   "성과 소유·지분 확정",
+   "지식재산권 출원·과제표시",
+   "성과 등록·기탁",
+   "최종보고서·성과정보 공개",
+   "비공개 승인·연장 요청",
+   "지식재산 운영규정·유지관리",
+   "직접실시·기술이전 경로 선택",
+   "기술실시계약 체결",
+   "기술료 징수·결과보고",
+   "정부납부기술료 의무·금액 산정",
+   "납부고지·분할납부 설정",
+   "정부납부기술료 납부",
+   "직접실시 매출자료 제출·납부",
+   "기술료·납부액 감면 검토",
+   "기술료 사용·연구자 보상",
+   "성과활용보고·추적조사"
+  ],
+  "moneyFlow": "성과소유기관이 실시자로부터 기술료를 징수하고, 납부의무기관은 정부납부기술료 또는 직접실시 수익 일부를 중앙행정기관에 납부한 뒤 잔여 기술료를 법정 용도와 연구자 보상에 사용한다.",
+  "docsFlow": "성과·발명 신고 → 소유·지분 합의 → 특허출원·성과등록 → 최종보고서·성과정보 공개 또는 비공개 승인 → 기술실시계약 → 기술료·매출 보고 → 납부고지·감면·납부 → 기술료 사용·성과활용보고로 이어진다.",
+  "bottlenecks": [
+   "공동성과 소유지분·실시조건 협상",
+   "공개와 특허·보안 보호시점 조정",
+   "기술료 징수와 직접실시 수익의 서로 다른 보고·납부기한"
+  ],
+  "reformPoints": [
+   "성과 유형별 소유·등록·공개 의무 자동 분류",
+   "기술실시계약에서 납부의무와 기한 자동 생성",
+   "연구자 보상·기술료 사용내역 추적"
+  ]
+ },
+ "related": [
+  "국가연구개발과제 단계·최종평가·이의신청",
+  "국가 R&D 보안·기술유출 방지",
+  "혁신제품 지정·시범구매 절차",
+  "국가연구개발 연구노트 작성·관리"
+ ],
+ "fieldVerification": [
+  "기관 지식재산·기술이전 자체규정",
+  "부처별 기술료 납부·감면 신청 서식",
+  "성과전담기관별 등록·기탁 대상과 시스템"
+ ],
+ "process": {
+  "institution_name": "국가연구개발성과 소유·활용·기술료",
+  "law_name": "국가연구개발혁신법·국가연구개발혁신법 시행령",
+  "lanes": [
+   "연구자",
+   "연구개발성과소유기관",
+   "공동 연구개발기관·실시자",
+   "중앙행정기관",
+   "성과전담기관·통합정보시스템"
+  ],
+  "stages": [
+   "G0 성과확정",
+   "G1 소유·등록",
+   "G2 공개·보호",
+   "G3 실시·기술료",
+   "G4 납부·활용"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "연구개발성과·발명 신고",
+    "lane": "연구자",
+    "stage": "G0 성과확정",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "연구자",
+    "action": "논문, 특허, 데이터, 시제품 등 발생 성과와 기여자를 기관에 신고한다.",
+    "input_documents": [],
+    "output_documents": [
+     "연구개발성과 신고",
+     "발명신고서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제16조",
+      "text": "국가연구개발혁신법 제16조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "성과 소유·지분 확정",
+    "lane": "연구개발성과소유기관",
+    "stage": "G0 성과확정",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "연구개발성과소유기관",
+    "action": "기관 단독, 공동, 연구자 또는 국가 소유 여부와 지분을 확정한다.",
+    "input_documents": [
+     "성과 신고",
+     "협약서"
+    ],
+    "output_documents": [
+     "성과 소유·지분 결정"
+    ],
+    "deadline": null,
+    "blocker": "공동성과의 기여도·지분 증빙이 부족할 수 있음",
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제16조제1항~제3항",
+      "text": "국가연구개발혁신법 제16조제1항~제3항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제32조제1항~제4항",
+      "text": "국가연구개발혁신법 시행령 제32조제1항~제4항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "지식재산권 출원·과제표시",
+    "lane": "연구개발성과소유기관",
+    "stage": "G1 소유·등록",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "연구개발성과소유기관",
+    "action": "특허 등 출원서에 국가연구개발사업 정보와 과제 식별정보를 표시한다.",
+    "input_documents": [],
+    "output_documents": [
+     "특허 등 출원서",
+     "과제 기여 표시"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제32조제5항",
+      "text": "국가연구개발혁신법 시행령 제32조제5항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "성과 등록·기탁",
+    "lane": "성과전담기관·통합정보시스템",
+    "stage": "G1 소유·등록",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "성과전담기관·통합정보시스템",
+    "action": "성과 유형별 전담기관 절차에 따라 등록·기탁한다.",
+    "input_documents": [
+     "성과정보",
+     "성과물"
+    ],
+    "output_documents": [
+     "성과 등록·기탁 확인"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제33조제3항·제4항",
+      "text": "국가연구개발혁신법 시행령 제33조제3항·제4항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "최종보고서·성과정보 공개",
+    "lane": "성과전담기관·통합정보시스템",
+    "stage": "G2 공개·보호",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "성과전담기관·통합정보시스템",
+    "action": "최종보고서와 성과정보를 통합정보시스템에 공개한다.",
+    "input_documents": [
+     "최종보고서",
+     "성과정보"
+    ],
+    "output_documents": [
+     "성과 공개 확인"
+    ],
+    "deadline": "최종보고서 제출일부터 3개월 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제17조제2항",
+      "text": "국가연구개발혁신법 제17조제2항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제35조제1항",
+      "text": "국가연구개발혁신법 시행령 제35조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "비공개 승인·연장 요청",
+    "lane": "연구개발성과소유기관",
+    "stage": "G2 공개·보호",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발성과소유기관",
+    "action": "보안·지식재산 보호 등 사유가 있으면 비공개 또는 기간 연장을 신청한다.",
+    "input_documents": [],
+    "output_documents": [
+     "성과 비공개 승인요청",
+     "비공개 연장요청"
+    ],
+    "deadline": "연장은 승인기간 종료 3개월 전부터 전날까지",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제17조제2항",
+      "text": "국가연구개발혁신법 제17조제2항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제35조제2항~제5항",
+      "text": "국가연구개발혁신법 시행령 제35조제2항~제5항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "지식재산 운영규정·유지관리",
+    "lane": "연구개발성과소유기관",
+    "stage": "G2 공개·보호",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발성과소유기관",
+    "action": "권리 유지·포기·양도와 공동활용을 위한 운영규정을 마련해 관리한다.",
+    "input_documents": [],
+    "output_documents": [
+     "지식재산 관리 운영규정",
+     "유지·포기 검토기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제17조제1항",
+      "text": "국가연구개발혁신법 제17조제1항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제34조제4항~제6항",
+      "text": "국가연구개발혁신법 시행령 제34조제4항~제6항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "직접실시·기술이전 경로 선택",
+    "lane": "연구개발성과소유기관",
+    "stage": "G3 실시·기술료",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "연구개발성과소유기관",
+    "action": "직접 사업화하거나 실시희망자와 기술실시계약을 체결할 경로를 정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "성과활용 계획"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제17조제1항",
+      "text": "국가연구개발혁신법 제17조제1항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제34조제1항~제3항",
+      "text": "국가연구개발혁신법 시행령 제34조제1항~제3항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "기술실시계약 체결",
+    "lane": "공동 연구개발기관·실시자",
+    "stage": "G3 실시·기술료",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "공동 연구개발기관·실시자",
+    "action": "실시권 범위, 기간, 기술료와 납부방법을 합의하고 계약한다.",
+    "input_documents": [],
+    "output_documents": [
+     "기술실시계약서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제18조제1항",
+      "text": "국가연구개발혁신법 제18조제1항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제34조",
+      "text": "국가연구개발혁신법 시행령 제34조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "기술료 징수·결과보고",
+    "lane": "연구개발성과소유기관",
+    "stage": "G3 실시·기술료",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발성과소유기관",
+    "action": "계약에 따라 기술료를 징수하고 중앙행정기관에 결과를 보고한다.",
+    "input_documents": [
+     "기술실시계약서"
+    ],
+    "output_documents": [
+     "기술료 징수내역",
+     "기술료 징수 결과보고서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제18조제1항",
+      "text": "국가연구개발혁신법 제18조제1항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제38조제1항",
+      "text": "국가연구개발혁신법 시행령 제38조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "정부납부기술료 의무·금액 산정",
+    "lane": "중앙행정기관",
+    "stage": "G4 납부·활용",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "납부의무기관과 납부액·최종기한을 산정한다.",
+    "input_documents": [
+     "기술료 징수 결과보고서"
+    ],
+    "output_documents": [
+     "정부납부기술료 산정내역"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제18조제2항",
+      "text": "국가연구개발혁신법 제18조제2항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제38조제2항·제3항",
+      "text": "국가연구개발혁신법 시행령 제38조제2항·제3항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "납부고지·분할납부 설정",
+    "lane": "중앙행정기관",
+    "stage": "G4 납부·활용",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "납부액과 기한을 고지하고 필요하면 분할납부를 정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "정부납부기술료 납부고지서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제38조제4항",
+      "text": "국가연구개발혁신법 시행령 제38조제4항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "정부납부기술료 납부",
+    "lane": "연구개발성과소유기관",
+    "stage": "G4 납부·활용",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발성과소유기관",
+    "action": "고지된 금액을 납부하거나 불가피한 사유가 있으면 기한변경을 요청한다.",
+    "input_documents": [],
+    "output_documents": [
+     "정부납부기술료 납부확인"
+    ],
+    "deadline": "납부고지서를 받은 날부터 90일 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제38조제5항",
+      "text": "국가연구개발혁신법 시행령 제38조제5항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "직접실시 매출자료 제출·납부",
+    "lane": "연구개발성과소유기관",
+    "stage": "G4 납부·활용",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발성과소유기관",
+    "action": "직접실시 수익이 발생하면 매출자료를 제출하고 고지된 납부액을 낸다.",
+    "input_documents": [],
+    "output_documents": [
+     "매출액 관련 자료",
+     "직접실시 수익 납부확인"
+    ],
+    "deadline": "매출자료는 실시한 해의 다음 해 6월 30일까지, 고지 후 납부는 90일 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제18조제2항",
+      "text": "국가연구개발혁신법 제18조제2항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제39조",
+      "text": "국가연구개발혁신법 시행령 제39조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "기술료·납부액 감면 검토",
+    "lane": "중앙행정기관",
+    "stage": "G4 납부·활용",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "법정 감면사유에 따라 징수액 또는 정부납부액 감면 여부를 결정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "기술료 감면 결정"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제18조제3항·제4항",
+      "text": "국가연구개발혁신법 제18조제3항·제4항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제40조",
+      "text": "국가연구개발혁신법 시행령 제40조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "기술료 사용·연구자 보상",
+    "lane": "연구개발성과소유기관",
+    "stage": "G4 납부·활용",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발성과소유기관",
+    "action": "징수 기술료를 법정 용도에 사용하고 기여 연구자 보상기준에 따라 지급한다.",
+    "input_documents": [],
+    "output_documents": [
+     "기술료 사용내역",
+     "연구자 보상내역"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제18조제5항",
+      "text": "국가연구개발혁신법 제18조제5항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제41조",
+      "text": "국가연구개발혁신법 시행령 제41조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P17",
+    "name": "성과활용보고·추적조사",
+    "lane": "중앙행정기관",
+    "stage": "G4 납부·활용",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "종료 후 성과 활용과 사업화 실적을 보고받아 추적조사한다.",
+    "input_documents": [],
+    "output_documents": [
+     "성과활용보고서",
+     "추적조사 결과"
+    ],
+    "deadline": "요청 시 종료 다음 해부터 5년간 매년 2월 말일까지",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제17조제6항",
+      "text": "국가연구개발혁신법 제17조제6항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제37조",
+      "text": "국가연구개발혁신법 시행령 제37조에 따른 절차"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P04",
+    "target": "P06",
+    "type": "sequence",
+    "label": "비공개 필요"
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P05",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": "기술이전"
+   },
+   {
+    "id": "E10",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P08",
+    "target": "P14",
+    "type": "sequence",
+    "label": "직접실시"
+   },
+   {
+    "id": "E15",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P11",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E17",
+    "source": "P13",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E18",
+    "source": "P14",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E19",
+    "source": "P15",
+    "target": "P16",
+    "type": "sequence",
+    "label": "감면결정 반영"
+   },
+   {
+    "id": "E20",
+    "source": "P16",
+    "target": "P17",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "이 구조도는 국가연구개발혁신법의 공통 절차다. 중앙행정기관·전문기관별 사업 공고, 협약서, 자체규정과 시스템 입력 방식이 더 구체적인 요건을 둘 수 있다.",
+   "2026년 9월 11일 시행 예정인 성과 기탁 관련 혁신법 제17조 개정 부분은 기준일 현재 절차 노드에 반영하지 않았다.",
+   "기준일 이후 2026년 8월 20일·9월 11일 시행 예정인 혁신법 일부 개정사항은 시행일 도래 후 다시 검증해야 한다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-14",
+  "method": "국가법령정보센터 Open API 법령·행정규칙 원문 대조",
+  "scope": "법적 근거 2건의 공식 원문을 연결하고 캔버스와 절차 노드의 명시 조문 42건의 조문 번호 존재를 확인했다. 인용 문구의 사건별 적용 타당성은 별도 검토가 필요하다.",
+  "notes": [
+   "국가연구개발혁신법·시행령·시행규칙 현행 원문 대조",
+   "연구개발비 구조도는 과학기술정보통신부고시 제2026-38호 추가 대조",
+   "시행예정 개정은 기준일 현재 적용되는 부분과 분리"
+  ],
+  "sources": [
+   {
+    "law": "국가연구개발혁신법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국가연구개발혁신법",
+    "lawId": "013774",
+    "mst": "283849",
+    "promulgatedOn": "2026-03-10",
+    "effectiveOn": "2026-06-11",
+    "officialUrl": "https://law.go.kr/법령/국가연구개발혁신법"
+   },
+   {
+    "law": "국가연구개발혁신법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "국가연구개발혁신법 시행령",
+    "lawId": "013933",
+    "mst": "285767",
+    "promulgatedOn": "2026-05-06",
+    "effectiveOn": "2026-06-11",
+    "officialUrl": "https://law.go.kr/법령/국가연구개발혁신법시행령"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-14",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 31,
+   "explicitCitationEntries": 31,
+   "articleReferences": 42,
+   "verifiedReferences": 42,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

@@ -1,0 +1,856 @@
+{
+ "slug": "national-rd-fund-use-settlement",
+ "name": "국가연구개발비 지급·사용·정산",
+ "oneLiner": "연구개발비 산정·지급과 과제별 계정·증빙 관리부터 사용내역 보고, 정산, 이의신청과 회수까지 이어지는 절차",
+ "type": "지급·집행·정산·회수형",
+ "priority": 335,
+ "category": "연구개발·행정",
+ "whyFirst": "연구행정의 가장 큰 병목은 비용 항목마다 다른 계상·승인·입력·증빙 시점과 정산 이의기한을 놓치는 데서 발생한다.",
+ "asOfDate": "2026-07-14",
+ "status": "full",
+ "canvas": {
+  "purpose": "연구개발비를 승인된 용도와 기준에 따라 집행하고 증빙·보고·정산·회수를 일관되게 관리한다.",
+  "stakeholders": "중앙행정기관·전문기관, 연구개발기관, 연구책임자·참여연구자, 연구비통합관리시스템, 정산담당",
+  "legalBasis": [
+   {
+    "law": "국가연구개발혁신법",
+    "articles": "제13조",
+    "kind": "법률"
+   },
+   {
+    "law": "국가연구개발혁신법 시행령",
+    "articles": "제19조·제20조·제24조·제25조·제26조",
+    "kind": "대통령령"
+   },
+   {
+    "law": "국가연구개발사업 연구개발비 사용 기준",
+    "articles": "제18조·제19조·제21조·제22조·제70조·제72조·제73조·제74조·제79조·제80조·제81조·제82조·제83조·제84조·제85조",
+    "kind": "고시·지침"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "중앙행정기관·전문기관",
+    "role": "연구비 지급조건, 사전승인, 정산과 회수 결정"
+   },
+   {
+    "name": "연구개발기관",
+    "role": "과제별 계정, 카드, 사용·증빙·보고의 관리책임"
+   },
+   {
+    "name": "연구책임자",
+    "role": "직접비 지출 발의와 연구목적 적합성 책임"
+   }
+  ],
+  "procedure": [
+   "정부지원비·기관부담금 산정",
+   "연구개발비 지급·기관부담 이행",
+   "과제별 계정·카드 발급",
+   "사용계획·비목별 계상",
+   "사전승인 대상 판정",
+   "사용계획 변경 승인 신청·결정",
+   "연구개발비 사용·지출 발의",
+   "사용내역·증빙 시스템 등록",
+   "증명자료 보관",
+   "연도별 사용내역 보고",
+   "단계종료 사용실적보고서 제출",
+   "정산·상시점검",
+   "자료 정정·보완 제출",
+   "정산결과·회수금액 통보",
+   "정산 이의신청",
+   "이의검토·재정산",
+   "회수금 반납·유예"
+  ],
+  "moneyFlow": "정부지원비와 기관부담금을 과제별 계정에서 카드·계좌이체로 집행하고, 단계 종료 정산 뒤 잔액·부적정 사용액을 회수하거나 이의신청 결과에 따라 재정산한다.",
+  "docsFlow": "연구비 구성표·지급계획 → 과제별 계정·카드 → 사용계획·사전승인 → 지출증빙·시스템 입력 → 사용내역·사용실적보고서·회계감사의견 → 정산결과·이의신청·재정산·회수로 이어진다.",
+  "bottlenecks": [
+   "비목·기관유형별 상이한 인정기준",
+   "사전승인 없이 변경 집행할 위험",
+   "시스템 입력·증빙·보고 기한의 중첩"
+  ],
+  "reformPoints": [
+   "지출 전 사전승인·증빙요건 자동 판정",
+   "카드·계좌 사용내역과 증빙 누락 실시간 확인",
+   "정산 지적별 이의근거와 반납기한 통합관리"
+  ]
+ },
+ "related": [
+  "국가연구개발과제 협약 체결",
+  "국가연구개발과제 협약변경·특별평가·중단",
+  "국가연구개발 제재처분·재검토·사후관리",
+  "국가연구개발 학생인건비 통합관리"
+ ],
+ "fieldVerification": [
+  "통합Ezbaro·통합RCMS의 실제 입력·승인 화면",
+  "전문기관별 상시점검·정산 보완 횟수",
+  "기관 자체규정이 적용되는 비용항목"
+ ],
+ "process": {
+  "institution_name": "국가연구개발비 지급·사용·정산",
+  "law_name": "국가연구개발혁신법·국가연구개발혁신법 시행령·국가연구개발사업 연구개발비 사용 기준",
+  "lanes": [
+   "중앙행정기관·전문기관",
+   "연구개발기관",
+   "연구책임자·참여연구자",
+   "연구비통합관리시스템",
+   "정산담당"
+  ],
+  "stages": [
+   "G0 산정·지급",
+   "G1 집행준비",
+   "G2 사용·증빙",
+   "G3 보고·정산",
+   "G4 이의·회수"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "정부지원비·기관부담금 산정",
+    "lane": "중앙행정기관·전문기관",
+    "stage": "G0 산정·지급",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "중앙행정기관·전문기관",
+    "action": "기관유형과 과제조건에 따라 정부지원액과 현금·현물 부담액을 산정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "연구개발비 구성표"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제13조제1항",
+      "text": "국가연구개발혁신법 제13조제1항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제19조",
+      "text": "국가연구개발혁신법 시행령 제19조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "연구개발비 지급·기관부담 이행",
+    "lane": "중앙행정기관·전문기관",
+    "stage": "G0 산정·지급",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "중앙행정기관·전문기관",
+    "action": "협약의 횟수·시기·조건에 따라 연구비를 지급하고 기관부담 이행을 확인한다.",
+    "input_documents": [
+     "체결 협약서",
+     "연구개발비 구성표"
+    ],
+    "output_documents": [
+     "연구비 지급내역",
+     "기관부담 확인"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제13조제2항",
+      "text": "국가연구개발혁신법 제13조제2항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제19조제5항",
+      "text": "국가연구개발혁신법 시행령 제19조제5항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제19조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제19조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "과제별 계정·카드 발급",
+    "lane": "연구개발기관",
+    "stage": "G1 집행준비",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "연구개발기관",
+    "action": "통합정보시스템에서 과제별 계정을 만들고 연결된 연구개발비카드를 발급받는다.",
+    "input_documents": [],
+    "output_documents": [
+     "과제별 계정",
+     "연구개발비카드"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제13조제5항",
+      "text": "국가연구개발혁신법 제13조제5항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제24조제1항",
+      "text": "국가연구개발혁신법 시행령 제24조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "사용계획·비목별 계상",
+    "lane": "연구책임자·참여연구자",
+    "stage": "G1 집행준비",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구책임자·참여연구자",
+    "action": "직접비·간접비와 세부 비목을 연구목적, 기간과 계상기준에 맞춰 계획한다.",
+    "input_documents": [],
+    "output_documents": [
+     "연구개발비 사용계획"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제13조제3항·제4항",
+      "text": "국가연구개발혁신법 제13조제3항·제4항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제20조",
+      "text": "국가연구개발혁신법 시행령 제20조에 따른 절차"
+     },
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제18조·제21조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제18조·제21조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "사전승인 대상 판정",
+    "lane": "연구개발기관",
+    "stage": "G1 집행준비",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "연구개발기관",
+    "action": "연구비 총액, 간접비 증액, 고가 장비, 위탁비 등 계획변경이 사전승인 대상인지 판단한다.",
+    "input_documents": [
+     "연구개발비 사용계획",
+     "변경요청"
+    ],
+    "output_documents": [
+     "사전승인 대상 검토표"
+    ],
+    "deadline": null,
+    "blocker": "금액·비율·기관유형별 승인기준이 다름",
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제73조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제73조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "사용계획 변경 승인 신청·결정",
+    "lane": "중앙행정기관·전문기관",
+    "stage": "G1 집행준비",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "중앙행정기관·전문기관",
+    "action": "변경사유와 내용을 접수해 보완을 요구하고 승인 여부를 통보한다.",
+    "input_documents": [
+     "연구비 사용계획 변경신청"
+    ],
+    "output_documents": [
+     "사전승인 결정통보"
+    ],
+    "deadline": "접수일부터 15일 이내, 결정 곤란 시 연장 통보",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제74조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제74조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "연구개발비 사용·지출 발의",
+    "lane": "연구책임자·참여연구자",
+    "stage": "G2 사용·증빙",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구책임자·참여연구자",
+    "action": "승인된 계획과 사용기준에 따라 연구목적에 필요한 비용을 발의·지출한다.",
+    "input_documents": [
+     "연구개발비 사용계획",
+     "필요 시 사전승인 결정"
+    ],
+    "output_documents": [
+     "지출결의·발의",
+     "카드·계좌 지출내역"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제13조제4항",
+      "text": "국가연구개발혁신법 제13조제4항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제20조",
+      "text": "국가연구개발혁신법 시행령 제20조에 따른 절차"
+     },
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제22조·제70조제1항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제22조·제70조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "사용내역·증빙 시스템 등록",
+    "lane": "연구비통합관리시스템",
+    "stage": "G2 사용·증빙",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구비통합관리시스템",
+    "action": "지출방식별 기한에 맞춰 사용내역과 증명자료를 시스템에 입력한다.",
+    "input_documents": [
+     "카드·계좌 지출내역",
+     "세금계산서·계약서 등"
+    ],
+    "output_documents": [
+     "사용내역 등록",
+     "전자증빙"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제24조제2항·제3항",
+      "text": "국가연구개발혁신법 시행령 제24조제2항·제3항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제70조제2항·제3항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제70조제2항·제3항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "증명자료 보관",
+    "lane": "연구개발기관",
+    "stage": "G2 사용·증빙",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발기관",
+    "action": "연구비 사용 증명자료를 전자문서 또는 원본으로 보관한다.",
+    "input_documents": [
+     "전자증빙"
+    ],
+    "output_documents": [
+     "증빙 보관목록"
+    ],
+    "deadline": "과제 또는 해당 단계 종료 후 5년",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제72조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제72조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "연도별 사용내역 보고",
+    "lane": "연구개발기관",
+    "stage": "G3 보고·정산",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발기관",
+    "action": "연도별 사용내역을 통합정보시스템에 등록해 보고한다.",
+    "input_documents": [],
+    "output_documents": [
+     "연도별 연구개발비 사용내역"
+    ],
+    "deadline": "연도별 연구개발기간 종료 후 1개월 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제13조제7항",
+      "text": "국가연구개발혁신법 제13조제7항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제25조",
+      "text": "국가연구개발혁신법 시행령 제25조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "단계종료 사용실적보고서 제출",
+    "lane": "연구개발기관",
+    "stage": "G3 보고·정산",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발기관",
+    "action": "사용실적보고서와 자체 회계감사 의견서, 필요 시 현물부담 확인서를 제출한다.",
+    "input_documents": [],
+    "output_documents": [
+     "연구개발비 사용실적보고서",
+     "자체 회계감사 의견서",
+     "현물부담 확인서"
+    ],
+    "deadline": "각 단계 종료일부터 3개월 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제26조제1항",
+      "text": "국가연구개발혁신법 시행령 제26조제1항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제80조제7항·제8항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제80조제7항·제8항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "정산·상시점검",
+    "lane": "정산담당",
+    "stage": "G3 보고·정산",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "정산담당",
+    "action": "사용용도, 계상·인정기준, 사전승인과 증빙의 적정성을 시스템으로 검토한다.",
+    "input_documents": [
+     "사용실적보고서",
+     "시스템 사용내역·증빙"
+    ],
+    "output_documents": [
+     "정산 검토내역"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제13조제8항",
+      "text": "국가연구개발혁신법 제13조제8항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제26조제2항",
+      "text": "국가연구개발혁신법 시행령 제26조제2항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제79조·제80조·제82조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제79조·제80조·제82조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "자료 정정·보완 제출",
+    "lane": "연구개발기관",
+    "stage": "G3 보고·정산",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발기관",
+    "action": "오류·누락 또는 부적정 사용 의심 항목에 대한 자료를 정정·보완한다.",
+    "input_documents": [
+     "정산 보완요구"
+    ],
+    "output_documents": [
+     "정산 소명서",
+     "보완 증빙"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제26조제4항",
+      "text": "국가연구개발혁신법 시행령 제26조제4항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제81조제3항·제4항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제81조제3항·제4항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "정산결과·회수금액 통보",
+    "lane": "중앙행정기관·전문기관",
+    "stage": "G4 이의·회수",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "중앙행정기관·전문기관",
+    "action": "잔액·부적정 사용액 등을 회수금액으로 결정해 연구개발기관에 통보한다.",
+    "input_documents": [
+     "정산 검토내역",
+     "정산 소명서"
+    ],
+    "output_documents": [
+     "정산결과 통보",
+     "회수금액 통보"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제26조제5항",
+      "text": "국가연구개발혁신법 시행령 제26조제5항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제83조제1항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제83조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "정산 이의신청",
+    "lane": "연구개발기관",
+    "stage": "G4 이의·회수",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발기관",
+    "action": "정산결과에 이의가 있으면 1회에 한해 서식과 근거자료를 제출한다.",
+    "input_documents": [
+     "정산결과 통보"
+    ],
+    "output_documents": [
+     "정산 이의신청서"
+    ],
+    "deadline": "통보받은 날부터 1개월 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제84조제1항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제84조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "이의검토·재정산",
+    "lane": "정산담당",
+    "stage": "G4 이의·회수",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "정산담당",
+    "action": "이의가 타당하면 재정산해 회수금액을 변경하고 결과를 통보한다.",
+    "input_documents": [
+     "정산 이의신청서"
+    ],
+    "output_documents": [
+     "이의검토 결과",
+     "변경 회수금액"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제84조제2항·제3항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제84조제2항·제3항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P17",
+    "name": "회수금 반납·유예",
+    "lane": "연구개발기관",
+    "stage": "G4 이의·회수",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발기관",
+    "action": "확정 회수금을 반납하거나 불가피한 사유가 있으면 연장·분할납부를 신청한다.",
+    "input_documents": [
+     "확정 회수금액"
+    ],
+    "output_documents": [
+     "반납 확인",
+     "필요 시 유예 신청"
+    ],
+    "deadline": "회수통보일부터 1개월 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제83조제3항",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제83조제3항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "article": "제85조",
+      "text": "국가연구개발사업 연구개발비 사용 기준 제85조에 따른 절차"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": "승인 필요"
+   },
+   {
+    "id": "E06",
+    "source": "P05",
+    "target": "P07",
+    "type": "sequence",
+    "label": "승인 불필요"
+   },
+   {
+    "id": "E07",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": "승인"
+   },
+   {
+    "id": "E08",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": "보완"
+   },
+   {
+    "id": "L14",
+    "source": "P13",
+    "target": "P12",
+    "type": "loop",
+    "label": "재검토"
+   },
+   {
+    "id": "E15",
+    "source": "P12",
+    "target": "P14",
+    "type": "sequence",
+    "label": "정산완료"
+   },
+   {
+    "id": "E16",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": "이의"
+   },
+   {
+    "id": "E17",
+    "source": "P15",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L18",
+    "source": "P16",
+    "target": "P14",
+    "type": "loop",
+    "label": "회수액 변경"
+   },
+   {
+    "id": "E19",
+    "source": "P14",
+    "target": "P17",
+    "type": "sequence",
+    "label": "확정"
+   },
+   {
+    "id": "E20",
+    "source": "P16",
+    "target": "P17",
+    "type": "sequence",
+    "label": "확정"
+   }
+  ],
+  "warnings": [
+   "이 구조도는 국가연구개발혁신법의 공통 절차다. 중앙행정기관·전문기관별 사업 공고, 협약서, 자체규정과 시스템 입력 방식이 더 구체적인 요건을 둘 수 있다.",
+   "연구개발비의 구체적인 인정 여부는 기관유형, 비용항목, 협약·원래계획과 증빙 사실관계에 따라 달라진다.",
+   "기준일 이후 2026년 8월 20일·9월 11일 시행 예정인 혁신법 일부 개정사항은 시행일 도래 후 다시 검증해야 한다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-14",
+  "method": "국가법령정보센터 Open API 법령·행정규칙 원문 대조",
+  "scope": "법적 근거 3건의 공식 원문을 연결하고 캔버스와 절차 노드의 명시 조문 58건의 조문 번호 존재를 확인했다. 인용 문구의 사건별 적용 타당성은 별도 검토가 필요하다.",
+  "notes": [
+   "국가연구개발혁신법·시행령·시행규칙 현행 원문 대조",
+   "연구개발비 구조도는 과학기술정보통신부고시 제2026-38호 추가 대조",
+   "시행예정 개정은 기준일 현재 적용되는 부분과 분리"
+  ],
+  "sources": [
+   {
+    "law": "국가연구개발혁신법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국가연구개발혁신법",
+    "lawId": "013774",
+    "mst": "283849",
+    "promulgatedOn": "2026-03-10",
+    "effectiveOn": "2026-06-11",
+    "officialUrl": "https://law.go.kr/법령/국가연구개발혁신법"
+   },
+   {
+    "law": "국가연구개발혁신법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "국가연구개발혁신법 시행령",
+    "lawId": "013933",
+    "mst": "285767",
+    "promulgatedOn": "2026-05-06",
+    "effectiveOn": "2026-06-11",
+    "officialUrl": "https://law.go.kr/법령/국가연구개발혁신법시행령"
+   },
+   {
+    "law": "국가연구개발사업 연구개발비 사용 기준",
+    "kind": "고시·지침",
+    "sourceType": "admin-rule",
+    "officialName": "국가연구개발사업 연구개발비 사용 기준",
+    "adminRuleId": "75386",
+    "adminRuleSerial": "2100000278740",
+    "promulgatedOn": "2026-05-06",
+    "officialUrl": "https://law.go.kr/행정규칙/국가연구개발사업연구개발비사용기준",
+    "issueNo": "과학기술정보통신부고시 제2026-38호"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-14",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 36,
+   "explicitCitationEntries": 36,
+   "articleReferences": 58,
+   "verifiedReferences": 58,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

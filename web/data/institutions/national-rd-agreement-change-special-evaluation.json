@@ -1,0 +1,774 @@
+{
+ "slug": "national-rd-agreement-change-special-evaluation",
+ "name": "국가연구개발과제 협약변경·특별평가·중단",
+ "oneLiner": "연구목표·책임자·연구비 변경 또는 중단 사유가 생겼을 때 통보·협의·특별평가를 거쳐 협약변경, 재개, 해약과 정산으로 분기하는 절차",
+ "type": "변경·평가·중단분기형",
+ "priority": 334,
+ "category": "연구개발·행정",
+ "whyFirst": "참여기관·책임자·목표·연구비 변경은 빈번하지만 통보, 사전승인, 특별평가의 경계가 달라 가장 많은 재작업을 만든다.",
+ "asOfDate": "2026-07-14",
+ "status": "full",
+ "canvas": {
+  "purpose": "과제 수행 중 변경을 경미한 통보사항과 중요 협의사항, 특별평가 대상 사유로 구분해 무단 변경과 연구비 집행 위험을 줄인다.",
+  "stakeholders": "연구개발기관·연구책임자, 전문기관, 중앙행정기관, 연구개발과제평가단, 정산담당",
+  "legalBasis": [
+   {
+    "law": "국가연구개발혁신법",
+    "articles": "제11조·제14조·제15조",
+    "kind": "법률"
+   },
+   {
+    "law": "국가연구개발혁신법 시행령",
+    "articles": "제14조·제15조·제27조·제31조",
+    "kind": "대통령령"
+   },
+   {
+    "law": "국가연구개발혁신법 시행규칙",
+    "articles": "제2조",
+    "kind": "부령"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "연구개발기관·연구책임자",
+    "role": "변경·중단 사유 보고와 요청"
+   },
+   {
+    "name": "중앙행정기관",
+    "role": "중요 변경 협의, 특별평가와 변경·중단 결정"
+   },
+   {
+    "name": "평가단",
+    "role": "특별평가를 통한 변경·중단 필요성 판단"
+   }
+  ],
+  "procedure": [
+   "변경·중단 사유 발생",
+   "경미한 사항 여부 판정",
+   "경미사항 시스템 등록·통보",
+   "중요 변경사유·내용 사전 문서통지",
+   "상호협의·협약변경 합의",
+   "특별평가 사유 확인",
+   "특별평가 실시 사전통보",
+   "추가 연구개발비 집행중지",
+   "변경·중단 요청서와 증빙 제출",
+   "평가단 구성·특별평가",
+   "변경·중단 결정·통보",
+   "변경협약 체결·집행재개",
+   "과제중단·협약 해약",
+   "해약시점 사용내역 보고",
+   "중단과제 최종평가 여부 판단",
+   "중단과제 정산·회수"
+  ],
+  "moneyFlow": "변경 승인 전 집행 가능 여부를 구분하고, 특별평가 통보 뒤에는 결과 확정 전까지 추가 집행을 중지한다. 중단·해약 시 사용액을 정산한다.",
+  "docsFlow": "변경사유서 → 경미사항 시스템 통보 또는 중요변경 협의서 → 특별평가 통보·요청서·증빙 → 평가서·결정통보 → 변경협약서 또는 해약통보·사용내역·정산서로 이어진다.",
+  "bottlenecks": [
+   "경미한 통보사항과 사전협의 대상의 구분",
+   "특별평가 통보 뒤 연구비 집행중지 범위",
+   "중단 시 최종평가와 정산의 병행"
+  ],
+  "reformPoints": [
+   "변경유형 선택 시 필요한 승인·통보 경로 자동 분기",
+   "집행중지 시점과 허용비용 명확화",
+   "중단결정에서 해약·보고·정산 작업 자동 생성"
+  ]
+ },
+ "related": [
+  "국가연구개발과제 협약 체결",
+  "국가연구개발비 지급·사용·정산",
+  "국가연구개발과제 단계·최종평가·이의신청"
+ ],
+ "fieldVerification": [
+  "사업별 경미사항 추가 목록",
+  "특별평가 중 허용되는 불가피한 비용",
+  "전문기관별 협약변경 전자승인 절차"
+ ],
+ "process": {
+  "institution_name": "국가연구개발과제 협약변경·특별평가·중단",
+  "law_name": "국가연구개발혁신법·국가연구개발혁신법 시행령·국가연구개발혁신법 시행규칙",
+  "lanes": [
+   "연구개발기관·연구책임자",
+   "전문기관",
+   "중앙행정기관",
+   "연구개발과제평가단",
+   "정산담당"
+  ],
+  "stages": [
+   "G0 변경사유",
+   "G1 변경경로",
+   "G2 특별평가",
+   "G3 결정·통지",
+   "G4 해약·정산"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "변경·중단 사유 발생",
+    "lane": "연구개발기관·연구책임자",
+    "stage": "G0 변경사유",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "연구개발기관·연구책임자",
+    "action": "목표, 책임자, 기관, 기간, 연구비 또는 수행 가능성에 영향을 주는 사유를 식별한다.",
+    "input_documents": [],
+    "output_documents": [
+     "변경·중단 사유 검토서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제11조제2항",
+      "text": "국가연구개발혁신법 제11조제2항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제15조제2항",
+      "text": "국가연구개발혁신법 제15조제2항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "경미한 사항 여부 판정",
+    "lane": "전문기관",
+    "stage": "G1 변경경로",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "전문기관",
+    "action": "변경내용이 통보만으로 효력이 생기는 경미한 사항인지 판단한다.",
+    "input_documents": [
+     "변경·중단 사유 검토서"
+    ],
+    "output_documents": [
+     "변경유형 판정표"
+    ],
+    "deadline": null,
+    "blocker": "사업별 추가 지침과 협약조건을 함께 확인해야 함",
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제11조제3항",
+      "text": "국가연구개발혁신법 제11조제3항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제14조제2항",
+      "text": "국가연구개발혁신법 시행령 제14조제2항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "경미사항 시스템 등록·통보",
+    "lane": "연구개발기관·연구책임자",
+    "stage": "G1 변경경로",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "연구개발기관·연구책임자",
+    "action": "경미한 변경사항을 통합정보시스템에 등록해 상대방에게 통보한다.",
+    "input_documents": [
+     "변경유형 판정표"
+    ],
+    "output_documents": [
+     "경미사항 변경통보",
+     "시스템 등록확인"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제14조제3항",
+      "text": "국가연구개발혁신법 시행령 제14조제3항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "중요 변경사유·내용 사전 문서통지",
+    "lane": "연구개발기관·연구책임자",
+    "stage": "G1 변경경로",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발기관·연구책임자",
+    "action": "중요한 변경은 상대방에게 사유와 내용을 사전에 문서로 명확히 알린다.",
+    "input_documents": [],
+    "output_documents": [
+     "협약변경 요청서",
+     "변경 증빙자료"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제11조제2항",
+      "text": "국가연구개발혁신법 제11조제2항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제14조제1항",
+      "text": "국가연구개발혁신법 시행령 제14조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "상호협의·협약변경 합의",
+    "lane": "중앙행정기관",
+    "stage": "G1 변경경로",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "변경의 필요성, 범위, 연구비·기간·성과 영향을 협의해 변경 여부를 합의한다.",
+    "input_documents": [
+     "협약변경 요청서",
+     "변경 증빙자료"
+    ],
+    "output_documents": [
+     "변경협의 결과",
+     "변경협약서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제11조제2항",
+      "text": "국가연구개발혁신법 제11조제2항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제14조제1항",
+      "text": "국가연구개발혁신법 시행령 제14조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "특별평가 사유 확인",
+    "lane": "중앙행정기관",
+    "stage": "G1 변경경로",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "목표 달성 불가능, 정책·환경 변화, 기관 요청 등 법정 사유에 해당하는지 확인한다.",
+    "input_documents": [
+     "변경·중단 사유 검토서"
+    ],
+    "output_documents": [
+     "특별평가 사유 검토표"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제15조제1항·제2항",
+      "text": "국가연구개발혁신법 제15조제1항·제2항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "특별평가 실시 사전통보",
+    "lane": "중앙행정기관",
+    "stage": "G2 특별평가",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "평가 사유, 범위, 일정과 제출자료를 연구개발기관·책임자에게 통보한다.",
+    "input_documents": [],
+    "output_documents": [
+     "특별평가 실시 통보서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제15조제1항",
+      "text": "국가연구개발혁신법 제15조제1항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제31조제1항",
+      "text": "국가연구개발혁신법 시행령 제31조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "추가 연구개발비 집행중지",
+    "lane": "연구개발기관·연구책임자",
+    "stage": "G2 특별평가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발기관·연구책임자",
+    "action": "특별평가 결과가 확정될 때까지 해당 과제 연구개발비의 추가 집행을 중지한다.",
+    "input_documents": [
+     "특별평가 실시 통보서"
+    ],
+    "output_documents": [
+     "집행중지 확인",
+     "미지급·계약 현황"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제15조제1항",
+      "text": "국가연구개발혁신법 제15조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "변경·중단 요청서와 증빙 제출",
+    "lane": "연구개발기관·연구책임자",
+    "stage": "G2 특별평가",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발기관·연구책임자",
+    "action": "기관 또는 책임자가 요청하는 경우 법정 사유를 입증하는 자료를 첨부해 제출한다.",
+    "input_documents": [],
+    "output_documents": [
+     "변경·중단 요청서",
+     "사유 증빙자료"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제15조제2항",
+      "text": "국가연구개발혁신법 제15조제2항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제31조제2항",
+      "text": "국가연구개발혁신법 시행령 제31조제2항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행규칙",
+      "article": "제2조",
+      "text": "국가연구개발혁신법 시행규칙 제2조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "평가단 구성·특별평가",
+    "lane": "연구개발과제평가단",
+    "stage": "G2 특별평가",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발과제평가단",
+    "action": "기존 수행내용과 사유를 검토해 변경·중단의 필요성과 후속조치를 평가한다.",
+    "input_documents": [
+     "특별평가 자료",
+     "변경·중단 요청서"
+    ],
+    "output_documents": [
+     "특별평가서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제14조제1항·제2항",
+      "text": "국가연구개발혁신법 제14조제1항·제2항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제27조제5항",
+      "text": "국가연구개발혁신법 시행령 제27조제5항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "변경·중단 결정·통보",
+    "lane": "중앙행정기관",
+    "stage": "G3 결정·통지",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "특별평가 결과에 따라 목표·책임자 등의 변경 또는 과제 중단을 결정하고 통보한다.",
+    "input_documents": [
+     "특별평가서"
+    ],
+    "output_documents": [
+     "특별평가 결과통보"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제15조제1항",
+      "text": "국가연구개발혁신법 제15조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "변경협약 체결·집행재개",
+    "lane": "전문기관",
+    "stage": "G3 결정·통지",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "전문기관",
+    "action": "변경결정 내용을 협약과 시스템에 반영하고 연구비 집행을 재개한다.",
+    "input_documents": [
+     "특별평가 결과통보"
+    ],
+    "output_documents": [
+     "변경협약서",
+     "집행재개 통지"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제11조제2항",
+      "text": "국가연구개발혁신법 제11조제2항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "과제중단·협약 해약",
+    "lane": "중앙행정기관",
+    "stage": "G4 해약·정산",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "중단된 과제의 협약을 해약하고 보고·정산 등 후속조치를 명시한다.",
+    "input_documents": [],
+    "output_documents": [
+     "협약 해약 통보"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제11조제4항",
+      "text": "국가연구개발혁신법 제11조제4항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법",
+      "article": "제15조제1항",
+      "text": "국가연구개발혁신법 제15조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "해약시점 사용내역 보고",
+    "lane": "연구개발기관·연구책임자",
+    "stage": "G4 해약·정산",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구개발기관·연구책임자",
+    "action": "해약일까지의 연구개발비 사용내역을 중앙행정기관에 보고한다.",
+    "input_documents": [
+     "협약 해약 통보"
+    ],
+    "output_documents": [
+     "해약과제 연구개발비 사용내역"
+    ],
+    "deadline": "협약 해약일부터 3개월 이내",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제15조제1항",
+      "text": "국가연구개발혁신법 시행령 제15조제1항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "중단과제 최종평가 여부 판단",
+    "lane": "중앙행정기관",
+    "stage": "G4 해약·정산",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "중앙행정기관",
+    "action": "중단사유에 따라 최종평가를 실시해야 하는지 판단한다.",
+    "input_documents": [],
+    "output_documents": [
+     "최종평가 대상 판정"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제31조제3항",
+      "text": "국가연구개발혁신법 시행령 제31조제3항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "중단과제 정산·회수",
+    "lane": "정산담당",
+    "stage": "G4 해약·정산",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "정산담당",
+    "action": "사용실적을 정산하고 잔액·부적정 사용액 등 회수금액을 결정한다.",
+    "input_documents": [
+     "해약과제 연구개발비 사용내역"
+    ],
+    "output_documents": [
+     "정산결과",
+     "회수통보"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제15조제2항",
+      "text": "국가연구개발혁신법 시행령 제15조제2항에 따른 절차"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "article": "제26조",
+      "text": "국가연구개발혁신법 시행령 제26조에 따른 절차"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": "경미"
+   },
+   {
+    "id": "E03",
+    "source": "P02",
+    "target": "P04",
+    "type": "sequence",
+    "label": "중요"
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L05",
+    "source": "P05",
+    "target": "P04",
+    "type": "loop",
+    "label": "보완협의"
+   },
+   {
+    "id": "E06",
+    "source": "P02",
+    "target": "P06",
+    "type": "sequence",
+    "label": "특별평가 사유"
+   },
+   {
+    "id": "E07",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P01",
+    "target": "P09",
+    "type": "message",
+    "label": "기관 요청"
+   },
+   {
+    "id": "E11",
+    "source": "P09",
+    "target": "P10",
+    "type": "message",
+    "label": "요청자료"
+   },
+   {
+    "id": "E12",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": "변경"
+   },
+   {
+    "id": "E14",
+    "source": "P11",
+    "target": "P13",
+    "type": "sequence",
+    "label": "중단"
+   },
+   {
+    "id": "E15",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P13",
+    "target": "P15",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E17",
+    "source": "P14",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E18",
+    "source": "P15",
+    "target": "P16",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "이 구조도는 국가연구개발혁신법의 공통 절차다. 중앙행정기관·전문기관별 사업 공고, 협약서, 자체규정과 시스템 입력 방식이 더 구체적인 요건을 둘 수 있다.",
+   "모든 협약변경이 특별평가 대상은 아니다. 경미사항 통보, 당사자 간 협의 변경, 특별평가를 통한 변경·중단을 구분해야 한다.",
+   "기준일 이후 2026년 8월 20일·9월 11일 시행 예정인 혁신법 일부 개정사항은 시행일 도래 후 다시 검증해야 한다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-14",
+  "method": "국가법령정보센터 Open API 법령·행정규칙 원문 대조",
+  "scope": "법적 근거 3건의 공식 원문을 연결하고 캔버스와 절차 노드의 명시 조문 34건의 조문 번호 존재를 확인했다. 인용 문구의 사건별 적용 타당성은 별도 검토가 필요하다.",
+  "notes": [
+   "국가연구개발혁신법·시행령·시행규칙 현행 원문 대조",
+   "연구개발비 구조도는 과학기술정보통신부고시 제2026-38호 추가 대조",
+   "시행예정 개정은 기준일 현재 적용되는 부분과 분리"
+  ],
+  "sources": [
+   {
+    "law": "국가연구개발혁신법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국가연구개발혁신법",
+    "lawId": "013774",
+    "mst": "283849",
+    "promulgatedOn": "2026-03-10",
+    "effectiveOn": "2026-06-11",
+    "officialUrl": "https://law.go.kr/법령/국가연구개발혁신법"
+   },
+   {
+    "law": "국가연구개발혁신법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "국가연구개발혁신법 시행령",
+    "lawId": "013933",
+    "mst": "285767",
+    "promulgatedOn": "2026-05-06",
+    "effectiveOn": "2026-06-11",
+    "officialUrl": "https://law.go.kr/법령/국가연구개발혁신법시행령"
+   },
+   {
+    "law": "국가연구개발혁신법 시행규칙",
+    "kind": "부령",
+    "sourceType": "statute",
+    "officialName": "국가연구개발혁신법 시행규칙",
+    "lawId": "013980",
+    "mst": "286879",
+    "promulgatedOn": "2026-06-09",
+    "effectiveOn": "2026-06-11",
+    "officialUrl": "https://law.go.kr/법령/국가연구개발혁신법시행규칙"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-14",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 29,
+   "explicitCitationEntries": 29,
+   "articleReferences": 34,
+   "verifiedReferences": 34,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}
