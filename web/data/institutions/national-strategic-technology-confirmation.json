@@ -1,0 +1,559 @@
+{
+ "slug": "national-strategic-technology-confirmation",
+ "name": "국가전략기술 확인 신청·판정",
+ "oneLiner": "보유·관리·개발 기술의 국가전략기술 해당 여부를 신청하고 관계부처·전문가 검토와 보완을 거쳐 확인결과를 받는 절차",
+ "type": "신청·관계부처협의·기술판정형",
+ "priority": 353,
+ "category": "연구개발·행정",
+ "whyFirst": "기술명 유사성만으로 판정되지 않고 세부 범위·특성·용도와 실제 R&D·사업 자료를 제출해야 한다.",
+ "asOfDate": "2026-07-15",
+ "status": "full",
+ "canvas": {
+  "purpose": "기술개발주체가 자신의 기술이 법정 국가전략기술에 해당하는지 공식 확인받아 지원·보호 제도 적용 판단의 기초로 사용한다.",
+  "stakeholders": "기술개발주체, 과학기술정보통신부, 관계 중앙행정기관, 기술전문가·검토기관, 지원·보호제도 담당기관",
+  "legalBasis": [
+   {
+    "law": "국가전략기술 육성에 관한 특별법",
+    "articles": "제9조",
+    "kind": "법률"
+   },
+   {
+    "law": "국가전략기술 육성에 관한 특별법 시행령",
+    "articles": "제8조",
+    "kind": "대통령령"
+   },
+   {
+    "law": "국가전략기술 지정 등에 관한 고시",
+    "articles": "제3조부터 제6조까지",
+    "kind": "고시·지침"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "과학기술정보통신부",
+    "role": "확인신청 접수·검토·결과통보"
+   },
+   {
+    "name": "관계 중앙행정기관",
+    "role": "소관기술과 지정범위에 대한 의견제시"
+   },
+   {
+    "name": "기술개발주체",
+    "role": "기술범위와 실질을 입증"
+   }
+  ],
+  "procedure": [
+   "지정기술·세부범위 대조",
+   "신청주체·기술상태 확인",
+   "기술설명·증빙 작성",
+   "확인신청서 제출",
+   "형식·범위 사전검토",
+   "추가자료 요구·보완",
+   "관계부처 의견조회",
+   "전문가 기술검토",
+   "해당 여부 판정",
+   "결과통지·기록관리",
+   "후속 지원·보호제도 개별검토"
+  ],
+  "moneyFlow": "확인결과는 지원·특례·보호제도 검토의 전제가 될 수 있지만 보조금·세제·규제특례를 자동 부여하지 않는다.",
+  "docsFlow": "지정기술 범위 대조 → 확인신청서·기술설명서·증빙 → 보완자료 → 관계부처·전문가 의견 → 확인결과 통지 → 개별 지원·보호제도 신청으로 이어진다.",
+  "bottlenecks": [
+   "고시상 세부기술 범위와 신청기술 매핑",
+   "영업비밀을 포함한 기술설명 범위",
+   "관계부처 검토기간과 보완기간",
+   "확인과 개별 지원선정의 혼동"
+  ],
+  "reformPoints": [
+   "세부기술별 판정사례 익명 공개",
+   "비밀자료 분리제출·열람이력 관리",
+   "보완기간 제외일 자동 계산",
+   "확인결과와 후속 지원제도 안내 연계"
+  ]
+ },
+ "related": [
+  "국가핵심기술 수출승인·신고",
+  "국가R&D 보안과제 분류·보안관리",
+  "국가연구개발성과 소유·활용·기술료"
+ ],
+ "fieldVerification": [
+  "확인신청 최신 서식",
+  "기술분야별 전문가 검토기준",
+  "비공개자료 취급절차",
+  "비해당 후 변경기술 재신청 실무"
+ ],
+ "process": {
+  "institution_name": "국가전략기술 확인 신청·판정",
+  "law_name": "국가전략기술 육성에 관한 특별법·국가전략기술 육성에 관한 특별법 시행령·국가전략기술 지정 등에 관한 고시",
+  "lanes": [
+   "기술개발주체",
+   "과학기술정보통신부",
+   "관계 중앙행정기관",
+   "기술전문가·검토기관",
+   "지원·보호제도 담당기관"
+  ],
+  "stages": [
+   "G0 대상확인",
+   "G1 신청",
+   "G2 보완",
+   "G3 관계부처검토",
+   "G4 판정",
+   "G5 후속활용"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "지정기술·세부범위 대조",
+    "lane": "기술개발주체",
+    "stage": "G0 대상확인",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "기술개발주체",
+    "action": "보유·관리·개발 중인 기술을 현행 국가전략기술 세부범위와 대조한다.",
+    "input_documents": [],
+    "output_documents": [],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가전략기술 육성에 관한 특별법",
+      "article": "제8조",
+      "text": "국가전략기술 육성에 관한 특별법 제8조에 따른 절차"
+     },
+     {
+      "law": "국가전략기술 지정 등에 관한 고시",
+      "article": "제3조",
+      "text": "국가전략기술 지정 등에 관한 고시 제3조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "신청주체·기술상태 확인",
+    "lane": "기술개발주체",
+    "stage": "G0 대상확인",
+    "type": "gateway",
+    "status": "done",
+    "progress": 100,
+    "actor": "기술개발주체",
+    "action": "기술개발주체 해당 여부와 보유·관리·개발 상태를 확인한다.",
+    "input_documents": [],
+    "output_documents": [],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가전략기술 육성에 관한 특별법",
+      "article": "제9조",
+      "text": "국가전략기술 육성에 관한 특별법 제9조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "기술설명·증빙 작성",
+    "lane": "기술개발주체",
+    "stage": "G1 신청",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "기술개발주체",
+    "action": "기술 범위·특성·용도와 연구개발·관리·사업 증빙을 준비한다.",
+    "input_documents": [],
+    "output_documents": [
+     "기술설명서",
+     "R&D·관리·사업 증빙"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가전략기술 육성에 관한 특별법 시행령",
+      "article": "제8조제1항",
+      "text": "국가전략기술 육성에 관한 특별법 시행령 제8조제1항에 따른 절차"
+     },
+     {
+      "law": "국가전략기술 지정 등에 관한 고시",
+      "article": "제4조",
+      "text": "국가전략기술 지정 등에 관한 고시 제4조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "확인신청서 제출",
+    "lane": "과학기술정보통신부",
+    "stage": "G1 신청",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "과학기술정보통신부",
+    "action": "확인대상 기술과 증빙을 접수한다.",
+    "input_documents": [],
+    "output_documents": [
+     "국가전략기술 확인신청서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가전략기술 육성에 관한 특별법",
+      "article": "제9조",
+      "text": "국가전략기술 육성에 관한 특별법 제9조에 따른 절차"
+     },
+     {
+      "law": "국가전략기술 지정 등에 관한 고시",
+      "article": "제4조",
+      "text": "국가전략기술 지정 등에 관한 고시 제4조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "형식·범위 사전검토",
+    "lane": "기술전문가·검토기관",
+    "stage": "G2 보완",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "기술전문가·검토기관",
+    "action": "신청서 완결성과 세부기술 범위 식별 가능성을 확인한다.",
+    "input_documents": [],
+    "output_documents": [
+     "사전검토 의견"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가전략기술 육성에 관한 특별법 시행령",
+      "article": "제8조제3항",
+      "text": "국가전략기술 육성에 관한 특별법 시행령 제8조제3항에 따른 절차"
+     },
+     {
+      "law": "국가전략기술 지정 등에 관한 고시",
+      "article": "제5조",
+      "text": "국가전략기술 지정 등에 관한 고시 제5조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "추가자료 요구·보완",
+    "lane": "기술개발주체",
+    "stage": "G2 보완",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기술개발주체",
+    "action": "판정에 필요한 기술자료와 설명을 추가 제출한다.",
+    "input_documents": [],
+    "output_documents": [
+     "보완자료"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가전략기술 육성에 관한 특별법 시행령",
+      "article": "제8조제3항",
+      "text": "국가전략기술 육성에 관한 특별법 시행령 제8조제3항에 따른 절차"
+     },
+     {
+      "law": "국가전략기술 지정 등에 관한 고시",
+      "article": "제5조",
+      "text": "국가전략기술 지정 등에 관한 고시 제5조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "관계부처 의견조회",
+    "lane": "관계 중앙행정기관",
+    "stage": "G3 관계부처검토",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "관계 중앙행정기관",
+    "action": "소관분야 기술현황·지정범위와 중복 제도를 검토해 의견을 회신한다.",
+    "input_documents": [],
+    "output_documents": [
+     "관계부처 검토의견"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가전략기술 육성에 관한 특별법 시행령",
+      "article": "제8조제2항",
+      "text": "국가전략기술 육성에 관한 특별법 시행령 제8조제2항에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "전문가 기술검토",
+    "lane": "기술전문가·검토기관",
+    "stage": "G3 관계부처검토",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기술전문가·검토기관",
+    "action": "신청기술의 핵심요소가 지정된 세부기술 범위에 실질적으로 부합하는지 검토한다.",
+    "input_documents": [],
+    "output_documents": [
+     "전문가 기술검토서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가전략기술 지정 등에 관한 고시",
+      "article": "제5조",
+      "text": "국가전략기술 지정 등에 관한 고시 제5조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "해당 여부 판정",
+    "lane": "과학기술정보통신부",
+    "stage": "G4 판정",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "과학기술정보통신부",
+    "action": "관계부처와 기술검토 결과를 종합해 해당·비해당을 판정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "국가전략기술 확인결과"
+    ],
+    "deadline": "신청일부터 30일 이내(기술검토·보완기간 제외)",
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가전략기술 육성에 관한 특별법",
+      "article": "제9조",
+      "text": "국가전략기술 육성에 관한 특별법 제9조에 따른 절차"
+     },
+     {
+      "law": "국가전략기술 육성에 관한 특별법 시행령",
+      "article": "제8조",
+      "text": "국가전략기술 육성에 관한 특별법 시행령 제8조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "결과통지·기록관리",
+    "lane": "과학기술정보통신부",
+    "stage": "G4 판정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "과학기술정보통신부",
+    "action": "판정결과를 신청인에게 통지하고 신청·검토자료를 관리한다.",
+    "input_documents": [],
+    "output_documents": [
+     "확인결과 통지서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가전략기술 지정 등에 관한 고시",
+      "article": "제6조",
+      "text": "국가전략기술 지정 등에 관한 고시 제6조에 따른 절차"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "후속 지원·보호제도 개별검토",
+    "lane": "지원·보호제도 담당기관",
+    "stage": "G5 후속활용",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "지원·보호제도 담당기관",
+    "action": "확인결과를 기초로 각 제도의 별도 요건과 신청절차를 검토한다.",
+    "input_documents": [],
+    "output_documents": [
+     "후속제도 검토기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.96,
+    "legal_basis": [
+     {
+      "law": "국가전략기술 육성에 관한 특별법",
+      "article": "제9조",
+      "text": "국가전략기술 육성에 관한 특별법 제9조에 따른 절차"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": "보완 필요"
+   },
+   {
+    "id": "L12",
+    "source": "P06",
+    "target": "P05",
+    "type": "loop",
+    "label": "재검토"
+   },
+   {
+    "id": "L13",
+    "source": "P09",
+    "target": "P03",
+    "type": "loop",
+    "label": "기술변경 후 새 신청"
+   }
+  ],
+  "warnings": [
+   "법령·행정규칙의 공통 절차를 구조화했다. 기관 자체규정, 최신 공고·서식과 소관기관 전산시스템 입력 항목은 별도로 확인해야 한다.",
+   "국가전략기술 확인은 국가핵심기술 판정이나 수출승인을 대신하지 않으며, 법령에 별도 이의신청 절차가 명시되어 있지 않다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-15",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 3건 중 공식 원문 3건을 연결했다. 캔버스와 절차 노드의 명시 조문 21건 가운데 21건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "notes": [
+   "기준일 현재 현행 법률·시행령·시행규칙·행정규칙 원문 대조",
+   "기관 자체규정·심사사례·전산화면은 현장 검증 대상으로 유지"
+  ],
+  "sources": [
+   {
+    "law": "국가전략기술 육성에 관한 특별법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국가전략기술 육성에 관한 특별법",
+    "lawId": "014409",
+    "mst": "276211",
+    "promulgatedOn": "2025-10-01",
+    "effectiveOn": "2025-10-01",
+    "officialUrl": "https://law.go.kr/법령/국가전략기술육성에관한특별법"
+   },
+   {
+    "law": "국가전략기술 육성에 관한 특별법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "국가전략기술 육성에 관한 특별법 시행령",
+    "lawId": "014504",
+    "mst": "282933",
+    "promulgatedOn": "2026-01-27",
+    "effectiveOn": "2026-02-01",
+    "officialUrl": "https://law.go.kr/법령/국가전략기술육성에관한특별법시행령"
+   },
+   {
+    "law": "국가전략기술 지정 등에 관한 고시",
+    "kind": "고시·지침",
+    "sourceType": "admin-rule",
+    "officialName": "국가전략기술 지정 등에 관한 고시",
+    "adminRuleId": "88061",
+    "adminRuleSerial": "2100000236194",
+    "promulgatedOn": "2024-02-01",
+    "officialUrl": "https://law.go.kr/행정규칙/국가전략기술지정등에관한고시",
+    "issueNo": "과학기술정보통신부고시 제2024-6호"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-15",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 20,
+   "explicitCitationEntries": 20,
+   "articleReferences": 21,
+   "verifiedReferences": 21,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}
