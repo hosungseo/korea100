@@ -64,6 +64,13 @@ export interface ArticleVerificationSummary {
   uncheckableReferences: number;
 }
 
+export interface ArticleTextEntry {
+  article: string;
+  title?: string;
+  text: string;
+  effectiveOn?: string | null;
+}
+
 export interface SourceVerification {
   status: SourceVerificationStatus;
   verifiedAt: string;
@@ -73,6 +80,7 @@ export interface SourceVerification {
   sources: LegalSource[];
   unresolved?: UnresolvedLegalSource[];
   articleVerification?: ArticleVerificationSummary;
+  articleTexts?: Record<string, ArticleTextEntry>;
 }
 
 export interface Authority {

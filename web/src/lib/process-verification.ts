@@ -19,6 +19,9 @@ export interface BasisVerificationResult {
   hasExplicitArticle: boolean;
   sources: LegalSource[];
   unresolved: UnresolvedLegalSource[];
+  sourceText?: string;
+  articleTitle?: string;
+  effectiveOn?: string | null;
 }
 
 export interface NodeVerificationResult {
@@ -27,6 +30,7 @@ export interface NodeVerificationResult {
   detail: string;
   bases: BasisVerificationResult[];
   lowConfidence: boolean;
+  checkedAt?: string;
 }
 
 export interface ProcessVerificationSummary {
@@ -210,6 +214,7 @@ export function getNodeVerification(
 ): NodeVerificationResult {
   const lowConfidence = node.confidence !== undefined && node.confidence < 0.8;
   const legalBasis = node.legal_basis ?? [];
+  const checkedAt = verification?.articleVerification?.checkedAt;
 
   if (legalBasis.length === 0) {
     return {
@@ -218,6 +223,7 @@ export function getNodeVerification(
       detail: "이 노드에는 법적 근거가 기재되지 않았습니다.",
       bases: [],
       lowConfidence,
+      checkedAt,
     };
   }
 
@@ -233,16 +239,24 @@ export function getNodeVerification(
         unresolved: [],
       })),
       lowConfidence,
+      checkedAt,
     };
   }
 
   const unresolved = verification.unresolved ?? [];
-  const bases = legalBasis.map((basis) => ({
-    basis,
-    hasExplicitArticle: EXPLICIT_ARTICLE.test(basis.article),
-    sources: findSources(basis.law, verification.sources),
-    unresolved: findUnresolved(basis.law, unresolved),
-  }));
+  const articleTexts = verification.articleTexts ?? {};
+  const bases = legalBasis.map((basis) => {
+    const entry = articleTexts[`${basis.law}::${basis.article}`];
+    return {
+      basis,
+      hasExplicitArticle: EXPLICIT_ARTICLE.test(basis.article),
+      sources: findSources(basis.law, verification.sources),
+      unresolved: findUnresolved(basis.law, unresolved),
+      sourceText: entry?.text,
+      articleTitle: entry?.title,
+      effectiveOn: entry?.effectiveOn ?? null,
+    };
+  });
 
   if (bases.some((basis) => basis.unresolved.length > 0)) {
     return {
@@ -251,6 +265,7 @@ export function getNodeVerification(
       detail: "공식 원문과 함께 지역·기관·내부규정 등 적용 범위를 추가로 지정해야 합니다.",
       bases,
       lowConfidence,
+      checkedAt,
     };
   }
 
@@ -261,6 +276,7 @@ export function getNodeVerification(
       detail: "현행 공식 원문에서 이 노드가 인용한 명시 조문 번호의 존재를 확인했습니다.",
       bases,
       lowConfidence,
+      checkedAt,
     };
   }
 
@@ -271,6 +287,7 @@ export function getNodeVerification(
       detail: "이 노드의 법적 근거에 대응하는 현행 공식 원문을 연결했습니다.",
       bases,
       lowConfidence,
+      checkedAt,
     };
   }
 

@@ -158,11 +158,28 @@ function ArticlePopover({
         </header>
         <p className="article-popover-detail">{result.detail}</p>
         <div className="article-popover-list">
-          {result.bases.map(({ basis, sources }, index) => (
+          {result.bases.map(({ basis, sources, sourceText, articleTitle, effectiveOn }, index) => (
             <article key={`${basis.law}:${basis.article}:${index}`}>
               <strong>{basis.law}</strong>
-              <span className="article-popover-article">{basis.article}</span>
-              {basis.text && <p>{basis.text}</p>}
+              <span className="article-popover-article">
+                {basis.article}
+                {articleTitle ? ` (${articleTitle})` : ""}
+              </span>
+              {sourceText ? (
+                <pre className="article-popover-source">{sourceText}</pre>
+              ) : (
+                basis.text && <p>{basis.text}</p>
+              )}
+              {sourceText && basis.text && (
+                <p className="article-popover-gist">요지 · {basis.text}</p>
+              )}
+              {(effectiveOn || result.checkedAt) && (
+                <p className="article-popover-dates">
+                  {effectiveOn ? `현행 시행일 ${effectiveOn}` : ""}
+                  {effectiveOn && result.checkedAt ? " · " : ""}
+                  {result.checkedAt ? `원문 확인일 ${result.checkedAt}` : ""}
+                </p>
+              )}
               {sources[0]?.officialUrl && (
                 <a
                   className="article-popover-cta"
@@ -177,7 +194,7 @@ function ArticlePopover({
           ))}
         </div>
         <footer className="article-popover-foot">
-          인용 요지는 편집 문구이며, 정확한 내용은 현행 원문을 기준으로 합니다.
+          조문 원문은 국가법령정보센터 현행 원문의 확인일 기준 사본입니다. 최신 개정 여부는 근거법령 바로가기로 확인하세요.
         </footer>
       </section>
     </div>,
