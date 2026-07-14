@@ -23,13 +23,26 @@ function baseArticle(article) {
   return `제${m[1]}조${m[2] ? `의${m[2]}` : ""}`;
 }
 
+function stripToolNoise(s) {
+  return (s || "")
+    .split("\n")
+    .filter(
+      (line) =>
+        !/^\(node:\d+\)/.test(line) &&
+        !/UNDICI|EnvHttpProxyAgent/.test(line) &&
+        !/--trace-warnings/.test(line),
+    )
+    .join("\n");
+}
+
 function runCli(args) {
   const res = spawnSync("node", [CLI, ...args], {
     encoding: "utf8",
     env: { ...process.env },
     maxBuffer: 64 * 1024 * 1024,
   });
-  return (res.stdout || "") + (res.stderr || "");
+  // stdout만 사용한다. stderr(UNDICI 경고 등 내부 노이즈)는 조문 원문에 섞지 않는다.
+  return stripToolNoise(res.stdout || "");
 }
 
 async function fetchAdminRuleFull(serial) {
