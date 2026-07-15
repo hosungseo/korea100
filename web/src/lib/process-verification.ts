@@ -1,4 +1,5 @@
 import type {
+  ArticleTextEntry,
   LegalSource,
   ProcessModel,
   ProcessNode,
@@ -19,6 +20,7 @@ export interface BasisVerificationResult {
   hasExplicitArticle: boolean;
   sources: LegalSource[];
   unresolved: UnresolvedLegalSource[];
+  articleTexts: ArticleTextEntry[];
 }
 
 export interface NodeVerificationResult {
@@ -231,17 +233,19 @@ export function getNodeVerification(
         hasExplicitArticle: EXPLICIT_ARTICLE.test(basis.article),
         sources: [],
         unresolved: [],
+        articleTexts: [],
       })),
       lowConfidence,
     };
   }
 
   const unresolved = verification.unresolved ?? [];
-  const bases = legalBasis.map((basis) => ({
+  const bases = legalBasis.map((basis, index) => ({
     basis,
     hasExplicitArticle: EXPLICIT_ARTICLE.test(basis.article),
     sources: findSources(basis.law, verification.sources),
     unresolved: findUnresolved(basis.law, unresolved),
+    articleTexts: verification.articleTexts?.[`${node.id}:${index}`] ?? [],
   }));
 
   if (bases.some((basis) => basis.unresolved.length > 0)) {

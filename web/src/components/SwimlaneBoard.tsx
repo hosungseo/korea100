@@ -387,7 +387,7 @@ export function SwimlaneNodeCard({
           minWidth: 0,
         }}
       >
-        <VerificationMark result={verificationResult} inverse={isCurrent} compact />
+        <VerificationMark result={verificationResult} inverse={isCurrent} compact nested />
         {verificationResult.lowConfidence && (
           <span
             title={`법령 근거 확신도 ${Math.round((node.confidence ?? 0) * 100)}%`}
@@ -595,6 +595,7 @@ function MobileProcessNode({
           result={verificationResult}
           inverse={node.status === "current"}
           compact
+          nested
         />
         {node.status === "loop" && <span>↩ 회귀 연결</span>}
       </span>

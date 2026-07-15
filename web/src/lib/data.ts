@@ -1,12 +1,18 @@
 import fs from "fs";
 import path from "path";
 import type {
+  ArticleTextEntry,
   FieldVerificationQueue,
   Institution,
   InstitutionSummary,
 } from "./types";
 
 const DATA_DIR = path.join(process.cwd(), "data", "institutions");
+const ARTICLE_TEXT_REGISTRY_PATH = path.join(
+  process.cwd(),
+  "data",
+  "article-text-registry.json"
+);
 const MANIFEST_PATH = path.join(process.cwd(), "..", "docs", "institutions-100-manifest.json");
 const FIELD_QUEUE_PATH = path.join(
   process.cwd(),
@@ -21,6 +27,105 @@ interface ManifestEntry {
   name: string;
   type: string;
   category: string;
+}
+
+interface StoredArticleText {
+  article: string;
+  title?: string;
+  text: string;
+  effectiveOn?: string | null;
+  checkedAt: string;
+}
+
+interface ArticleTextReference {
+  key: string;
+  article: string;
+  citation: string;
+  paragraph: number | null;
+  item: number | null;
+  subitem: string | null;
+}
+
+interface ArticleTextRegistry {
+  articles: Record<string, StoredArticleText>;
+  institutions: Record<string, Record<string, ArticleTextReference[]>>;
+}
+
+let articleTextRegistry: ArticleTextRegistry | null | undefined;
+const CIRCLED_PARAGRAPHS = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳㉑㉒㉓㉔㉕㉖㉗㉘㉙㉚";
+
+function loadArticleTextRegistry(): ArticleTextRegistry | null {
+  if (articleTextRegistry !== undefined) return articleTextRegistry;
+  if (!fs.existsSync(ARTICLE_TEXT_REGISTRY_PATH)) {
+    articleTextRegistry = null;
+    return articleTextRegistry;
+  }
+  articleTextRegistry = JSON.parse(
+    fs.readFileSync(ARTICLE_TEXT_REGISTRY_PATH, "utf8")
+  ) as ArticleTextRegistry;
+  return articleTextRegistry;
+}
+
+function nextMarkerIndex(lines: string[], start: number, pattern: RegExp): number {
+  const next = lines.findIndex((line, index) => index > start && pattern.test(line.trim()));
+  return next === -1 ? lines.length : next;
+}
+
+function citationExcerpt(text: string, reference: ArticleTextReference): string {
+  const lines = text.split("\n").map((line) => line.trim()).filter(Boolean);
+  if (lines.length === 0) return text;
+
+  let selected = lines;
+  if (reference.paragraph) {
+    const marker = CIRCLED_PARAGRAPHS[reference.paragraph - 1];
+    const start = marker ? lines.findIndex((line) => line.startsWith(marker)) : -1;
+    if (start >= 0) {
+      const end = nextMarkerIndex(lines, start, /^[①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳㉑㉒㉓㉔㉕㉖㉗㉘㉙㉚]/);
+      selected = lines.slice(start, end);
+    }
+  }
+
+  if (reference.item) {
+    const itemPattern = new RegExp(`^${reference.item}\\.\\s*`);
+    const start = selected.findIndex((line) => itemPattern.test(line));
+    if (start >= 0) {
+      const end = nextMarkerIndex(selected, start, /^\d+\.\s*/);
+      const parent = reference.paragraph && start > 0 ? [selected[0]] : [];
+      selected = [...parent, ...selected.slice(start, end)];
+    }
+  }
+
+  return selected.join("\n");
+}
+
+function attachArticleTexts(institution: Institution): Institution {
+  if (!institution.verification || !institution.process) return institution;
+  const registry = loadArticleTextRegistry();
+  const references = registry?.institutions?.[institution.slug];
+  if (!registry || !references) return institution;
+
+  const articleTexts: Record<string, ArticleTextEntry[]> = {};
+  for (const node of institution.process.nodes) {
+    for (const [basisIndex] of (node.legal_basis ?? []).entries()) {
+      const basisKey = `${node.id}:${basisIndex}`;
+      const entries = (references[basisKey] ?? []).flatMap((reference) => {
+        const stored = registry.articles[reference.key];
+        if (!stored) return [];
+        return [{
+          ...stored,
+          sourceKey: reference.key.slice(0, reference.key.lastIndexOf("::")),
+          citation: reference.citation,
+          text: citationExcerpt(stored.text, reference),
+        }];
+      });
+      if (entries.length > 0) articleTexts[basisKey] = entries;
+    }
+  }
+
+  if (Object.keys(articleTexts).length > 0) {
+    institution.verification.articleTexts = articleTexts;
+  }
+  return institution;
 }
 
 function loadManifest(): ManifestEntry[] {
@@ -159,7 +264,7 @@ export function getInstitution(slug: string): Institution | null {
   if (!inst.category) {
     inst.category = categoryMap.get(slug) ?? "기타";
   }
-  return inst;
+  return attachArticleTexts(inst);
 }
 
 export function getAllSlugs(): string[] {

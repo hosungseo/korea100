@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   maskCrossLawReferences,
+  parseArticleCitationDetails,
   parseArticleHeaders,
   parseArticleReferences,
 } from "./lib/article-citations.mjs";
@@ -29,6 +30,34 @@ test("expands branch-article ranges", () => {
     "제5조의2",
     "제5조의3",
     "제5조의4",
+  ]);
+});
+
+test("expands Korean-language article ranges", () => {
+  assert.deepEqual(parseArticleReferences("제15조부터 제18조까지"), [
+    "제15조",
+    "제16조",
+    "제17조",
+    "제18조",
+  ]);
+});
+
+test("keeps paragraph and item detail for source excerpts", () => {
+  assert.deepEqual(parseArticleCitationDetails("제11조의3제1항제2호, 제63조"), [
+    {
+      article: "제11조의3",
+      citation: "제11조의3제1항제2호",
+      paragraph: 1,
+      item: 2,
+      subitem: null,
+    },
+    {
+      article: "제63조",
+      citation: "제63조",
+      paragraph: null,
+      item: null,
+      subitem: null,
+    },
   ]);
 });
 
