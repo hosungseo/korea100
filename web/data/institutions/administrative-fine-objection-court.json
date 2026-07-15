@@ -1,0 +1,590 @@
+{
+ "slug": "administrative-fine-objection-court",
+ "name": "과태료 이의제기·법원재판",
+ "oneLiner": "과태료 부과에 대한 이의제기와 법원 통보·재판의 신청·검토·결정·사후관리 경로",
+ "type": "이의제기·재판형",
+ "priority": 503,
+ "category": "민원·권리구제·참여",
+ "whyFirst": "과태료 부과에 대한 이의제기와 법원 통보·재판에서 당사자와 행정청, 법원·관계기관 사이의 기한·문서·분기 지점을 한 화면에 정리했다.",
+ "asOfDate": "2026-07-15",
+ "status": "full",
+ "canvas": {
+  "purpose": "과태료 부과 통지를 받은 당사자가 60일 이내 이의제기를 하고, 행정청의 법원 통보와 법원의 약식·정식재판을 거쳐 집행으로 이어지는 절차",
+  "stakeholders": "당사자, 과태료 부과 행정청, 관할 법원·검사",
+  "legalBasis": [
+   {
+    "law": "질서위반행위규제법",
+    "articles": "제17조, 제20조, 제21조, 제25조, 제31조, 제32조, 제33조, 제34조, 제35조, 제36조, 제42조, 제44조, 제45조, 제50조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "당사자",
+    "role": "부과 통지를 받은 뒤 이의제기·철회·약식재판 이의신청을 결정"
+   },
+   {
+    "name": "과태료 부과 행정청",
+    "role": "이의제기 접수, 의견·증빙 첨부, 관할 법원 통보와 통지"
+   },
+   {
+    "name": "관할 법원·검사",
+    "role": "심문·증거조사·과태료 재판과 확정재판 집행을 담당"
+   }
+  ],
+  "procedure": [
+   "부과 통지 수령",
+   "60일 이내 이의제기",
+   "행정청 의견·증빙 작성",
+   "14일 이내 법원 통보",
+   "심문·증거조사",
+   "약식·정식재판",
+   "확정·집행"
+  ],
+  "moneyFlow": "이의제기 시 과태료 부과처분은 효력을 상실하며, 확정된 과태료 재판은 검사의 명령으로 집행된다.",
+  "docsFlow": "과태료 부과서 → 이의제기서 → 행정청 의견·증빙서류 → 법원 통보·당사자 통지 → 심문·조서·결정서 → 약식재판 이의신청서·정식재판 기록 → 집행기록",
+  "bottlenecks": [
+   "과태료 부과서 송달일과 60일 이의제기 기간 계산",
+   "이의제기 접수 후 14일 법원 통보",
+   "관할 법원 판단과 행정청 증빙자료의 연결",
+   "약식재판 고지 후 7일 이의신청과 정식재판 전환"
+  ],
+  "reformPoints": [
+   "송달일·이의제기 만료일 자동 계산",
+   "행정청 의견·증빙의 법원 통보 상태 공개",
+   "약식재판 이의신청 기간을 결정서에 크게 표시",
+   "재판 확정과 집행·행정청 결과통보를 사건번호로 연결"
+  ]
+ },
+ "related": [
+  "과태료 사전통지·의견제출",
+  "과태료 자진납부·감경·전자납부",
+  "행정심판 청구·심리·재결"
+ ],
+ "fieldVerification": [
+  "기관별 이의제기 접수창구·전자제출 방식",
+  "관할 법원 결정 기준과 통보서 양식",
+  "약식재판 고지·이의신청 안내 방식",
+  "확정재판 집행과 행정청 결과통보 연계"
+ ],
+ "process": {
+  "institution_name": "과태료 이의제기·법원재판",
+  "law_name": "질서위반행위규제법",
+  "lanes": [
+   "당사자",
+   "과태료 부과 행정청",
+   "관할 법원·검사"
+  ],
+  "stages": [
+   "G0 부과통지",
+   "G1 이의제기",
+   "G2 법원통보",
+   "G3 심문·재판",
+   "G4 확정·집행"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "과태료 부과 통지 수령",
+    "lane": "당사자",
+    "stage": "G0 부과통지",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "당사자",
+    "action": "과태료 부과서의 위반사실·금액·납부기한을 확인한다.",
+    "input_documents": [],
+    "output_documents": [
+     "과태료 부과서 수령기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제17조",
+      "text": "질서위반행위규제법 제17조에 따른 과태료 부과 통지 수령"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "이의제기 기간·방식 확인",
+    "lane": "당사자",
+    "stage": "G1 이의제기",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "당사자",
+    "action": "부과 통지를 받은 날부터 60일 이내 이의제기 가능 여부와 제출방식을 확인한다.",
+    "input_documents": [],
+    "output_documents": [
+     "기간 계산표"
+    ],
+    "deadline": "부과 통지 수령일부터 60일",
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제20조",
+      "text": "질서위반행위규제법 제20조에 따른 이의제기 기간·방식 확인"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "이의제기서 제출",
+    "lane": "당사자",
+    "stage": "G1 이의제기",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "당사자",
+    "action": "과태료 부과에 불복하는 사유와 자료를 서면으로 해당 행정청에 제출한다.",
+    "input_documents": [
+     "과태료 부과서 수령기록"
+    ],
+    "output_documents": [
+     "이의제기서·증빙자료"
+    ],
+    "deadline": "부과 통지를 받은 날부터 60일 이내",
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제20조",
+      "text": "질서위반행위규제법 제20조에 따른 이의제기서 제출"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "부과처분 효력 상실 확인",
+    "lane": "과태료 부과 행정청",
+    "stage": "G1 이의제기",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "과태료 부과 행정청",
+    "action": "적법한 이의제기가 있으면 과태료 부과처분이 효력을 상실했음을 확인한다.",
+    "input_documents": [
+     "이의제기서·증빙자료"
+    ],
+    "output_documents": [
+     "이의제기 접수·효력상실 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제20조",
+      "text": "질서위반행위규제법 제20조에 따른 부과처분 효력 상실 확인"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "행정청 의견·증빙서류 작성",
+    "lane": "과태료 부과 행정청",
+    "stage": "G2 법원통보",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "과태료 부과 행정청",
+    "action": "이의제기에 대한 행정청의 의견과 증빙서류를 정리한다.",
+    "input_documents": [
+     "이의제기서·증빙자료"
+    ],
+    "output_documents": [
+     "행정청 의견서·증빙서류"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제21조",
+      "text": "질서위반행위규제법 제21조에 따른 행정청 의견·증빙서류 작성"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "관할 법원 통보",
+    "lane": "과태료 부과 행정청",
+    "stage": "G2 법원통보",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "과태료 부과 행정청",
+    "action": "이의제기를 받은 날부터 14일 이내 의견·증빙을 첨부해 관할 법원에 통보한다.",
+    "input_documents": [],
+    "output_documents": [
+     "법원 통보서·첨부자료"
+    ],
+    "deadline": "이의제기를 받은 날부터 14일 이내",
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제21조",
+      "text": "질서위반행위규제법 제21조에 따른 관할 법원 통보"
+     },
+     {
+      "law": "질서위반행위규제법",
+      "article": "제25조",
+      "text": "질서위반행위규제법 제25조에 따른 관할 법원 통보"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "통보 사실 당사자 통지",
+    "lane": "과태료 부과 행정청",
+    "stage": "G2 법원통보",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "과태료 부과 행정청",
+    "action": "법원에 통보했거나 통보하지 않은 사실을 당사자에게 즉시 알린다.",
+    "input_documents": [
+     "법원 통보서·첨부자료"
+    ],
+    "output_documents": [
+     "통보 사실 통지서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제21조",
+      "text": "질서위반행위규제법 제21조에 따른 통보 사실 당사자 통지"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "법원 심문·사실·증거조사",
+    "lane": "관할 법원·검사",
+    "stage": "G3 심문·재판",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "관할 법원·검사",
+    "action": "법원이 당사자 심문과 사실탐지·증거조사를 거쳐 재판자료를 확정한다.",
+    "input_documents": [
+     "법원 통보서·첨부자료"
+    ],
+    "output_documents": [
+     "심문조서·증거조사기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제31조",
+      "text": "질서위반행위규제법 제31조에 따른 법원 심문·사실·증거조사"
+     },
+     {
+      "law": "질서위반행위규제법",
+      "article": "제32조",
+      "text": "질서위반행위규제법 제32조에 따른 법원 심문·사실·증거조사"
+     },
+     {
+      "law": "질서위반행위규제법",
+      "article": "제33조",
+      "text": "질서위반행위규제법 제33조에 따른 법원 심문·사실·증거조사"
+     },
+     {
+      "law": "질서위반행위규제법",
+      "article": "제34조",
+      "text": "질서위반행위규제법 제34조에 따른 법원 심문·사실·증거조사"
+     },
+     {
+      "law": "질서위반행위규제법",
+      "article": "제35조",
+      "text": "질서위반행위규제법 제35조에 따른 법원 심문·사실·증거조사"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "과태료 재판 결정",
+    "lane": "관할 법원·검사",
+    "stage": "G3 심문·재판",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "관할 법원·검사",
+    "action": "법원이 이유를 붙인 결정으로 과태료 재판을 한다.",
+    "input_documents": [
+     "심문조서·증거조사기록"
+    ],
+    "output_documents": [
+     "과태료 재판 결정서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제36조",
+      "text": "질서위반행위규제법 제36조에 따른 과태료 재판 결정"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "약식재판 고지",
+    "lane": "관할 법원·검사",
+    "stage": "G3 심문·재판",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "관할 법원·검사",
+    "action": "법원이 상당하다고 인정하면 심문 없이 약식재판을 하고 결정 내용을 고지한다.",
+    "input_documents": [
+     "과태료 재판 결정서"
+    ],
+    "output_documents": [
+     "약식재판 결정 고지"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제44조",
+      "text": "질서위반행위규제법 제44조에 따른 약식재판 고지"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "약식재판 이의신청",
+    "lane": "당사자",
+    "stage": "G4 확정·집행",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "당사자",
+    "action": "약식재판 고지를 받은 날부터 7일 이내 이의신청 여부를 결정한다.",
+    "input_documents": [
+     "약식재판 결정 고지"
+    ],
+    "output_documents": [
+     "약식재판 이의신청서"
+    ],
+    "deadline": "약식재판 고지일부터 7일 이내",
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제45조",
+      "text": "질서위반행위규제법 제45조에 따른 약식재판 이의신청"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "정식재판 절차 이행",
+    "lane": "관할 법원·검사",
+    "stage": "G4 확정·집행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "관할 법원·검사",
+    "action": "적법한 이의신청이 있으면 약식재판 효력을 잃고 심문을 거쳐 다시 재판한다.",
+    "input_documents": [
+     "약식재판 이의신청서"
+    ],
+    "output_documents": [
+     "정식재판 결정서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제50조",
+      "text": "질서위반행위규제법 제50조에 따른 정식재판 절차 이행"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "재판 확정·집행 명령",
+    "lane": "관할 법원·검사",
+    "stage": "G4 확정·집행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "관할 법원·검사",
+    "action": "확정된 과태료 재판을 검사의 명령으로 집행하고 결과를 행정청에 통보한다.",
+    "input_documents": [
+     "과태료 재판 결정서",
+     "정식재판 결정서"
+    ],
+    "output_documents": [
+     "확정재판 집행기록·결과통보"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제42조",
+      "text": "질서위반행위규제법 제42조에 따른 재판 확정·집행 명령"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P03",
+    "target": "P04",
+    "type": "message",
+    "label": "이의제기서"
+   },
+   {
+    "id": "E03",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M02",
+    "source": "P06",
+    "target": "P07",
+    "type": "message",
+    "label": "법원 통보 사실"
+   },
+   {
+    "id": "M03",
+    "source": "P07",
+    "target": "P08",
+    "type": "message",
+    "label": "법원 통보자료"
+   },
+   {
+    "id": "E05",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": "약식재판 가능"
+   },
+   {
+    "id": "E07",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": "약식재판 고지"
+   },
+   {
+    "id": "E08",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": "적법한 이의신청"
+   },
+   {
+    "id": "E09",
+    "source": "P10",
+    "target": "P13",
+    "type": "sequence",
+    "label": "7일 내 이의 없음"
+   },
+   {
+    "id": "E10",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "이 구조도는 질서위반행위규제법의 공통 절차를 업무 단위로 재구성했다. 실제 과태료 부과의 위반근거·부과권자·금액·서식은 개별 법률·시행령·조례와 행정청의 최신 통지서를 별도로 확인해야 한다.",
+   "사전통지 의견제출은 10일 이상, 이의제기는 부과 통지를 받은 날부터 60일 이내, 법원 통보는 이의제기를 받은 날부터 14일 이내, 약식재판 이의신청은 고지일부터 7일 이내라는 법정 기간을 통지서·송달일과 함께 계산해야 한다.",
+   "제20조 이의제기는 행정심판과 별개의 절차이며, 이 구조도는 법원이 관할하는 과태료 재판 경로를 표시한다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-15",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 32건 가운데 32건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "notes": [
+   "질서위반행위규제법은 국가법령정보센터 현행 본문 2021년 1월 1일 시행본(MST 224847)을 기준으로 했다.",
+   "개별 과태료의 부과권자·위반행위·금액·감경기준·서식은 각 근거 법령과 대통령령·조례를 추가로 확인해야 한다."
+  ],
+  "sources": [
+   {
+    "law": "질서위반행위규제법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "질서위반행위규제법",
+    "lawId": "010592",
+    "mst": "224847",
+    "promulgatedOn": "2020-12-29",
+    "effectiveOn": "2021-01-01",
+    "officialUrl": "https://law.go.kr/법령/질서위반행위규제법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-15",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 19,
+   "explicitCitationEntries": 19,
+   "articleReferences": 32,
+   "verifiedReferences": 32,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

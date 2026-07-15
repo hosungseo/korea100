@@ -1,0 +1,455 @@
+{
+ "slug": "administrative-fine-voluntary-payment",
+ "name": "과태료 자진납부·감경·전자납부",
+ "oneLiner": "과태료 자진납부 감경과 신용카드·직불카드 납부의 신청·검토·결정·사후관리 경로",
+ "type": "자진납부·감경형",
+ "priority": 502,
+ "category": "민원·권리구제·참여",
+ "whyFirst": "과태료 자진납부 감경과 신용카드·직불카드 납부에서 당사자와 행정청, 법원·관계기관 사이의 기한·문서·분기 지점을 한 화면에 정리했다.",
+ "asOfDate": "2026-07-15",
+ "status": "full",
+ "canvas": {
+  "purpose": "사전통지 단계에서 감경된 과태료를 자진납부하거나, 과태료·가산금 등을 납부대행기관을 통해 전자 납부하고 절차를 종료하는 흐름",
+  "stakeholders": "당사자, 부과 행정청, 과태료 납부대행기관",
+  "legalBasis": [
+   {
+    "law": "질서위반행위규제법",
+    "articles": "제16조, 제17조, 제17조의2, 제18조, 제20조, 제24조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "당사자",
+    "role": "의견 제출 기한 안에 자진납부 여부를 결정하고 감경액을 납부하거나 이의제기를 선택"
+   },
+   {
+    "name": "부과 행정청",
+    "role": "감경·납부 안내, 납부 확인, 미납 시 체납 절차 연계를 담당"
+   },
+   {
+    "name": "과태료 납부대행기관",
+    "role": "신용카드·직불카드 납부를 대행하고 승인일을 기록"
+   }
+  ],
+  "procedure": [
+   "부과 전 통지 수령",
+   "감경요건 확인",
+   "자진납부액 안내",
+   "카드·직불카드 납부",
+   "납부 확인·절차 종료",
+   "미납·이의제기 분기"
+  ],
+  "moneyFlow": "의견 제출 기한 내 자진납부 시 대통령령 기준 감경이 가능하며, 카드·직불카드 납부에는 납부대행 수수료가 발생할 수 있다.",
+  "docsFlow": "사전통지서·감경 안내 → 감경액 납부서 → 카드·직불카드 승인기록 → 납부확인 → 절차종료 또는 이의제기·체납관리 자료",
+  "bottlenecks": [
+   "사전통지서 수령일과 자진납부 기한 계산",
+   "감경 전·후 금액과 납부코드 일치",
+   "카드 승인일을 법정 납부일로 기록",
+   "자진납부 완료와 이의제기·체납 절차의 중복 방지"
+  ],
+  "reformPoints": [
+   "통지서에 감경 가능 기간과 납부액을 함께 표시",
+   "납부대행 승인일·납부확인 상태 자동 연계",
+   "납부 완료 시 과태료 부과·징수 절차 종료를 즉시 알림",
+   "자진납부를 선택하지 않은 경우 이의제기·체납 경로를 분리 안내"
+  ]
+ },
+ "related": [
+  "과태료 사전통지·의견제출",
+  "과태료 이의제기·법원재판",
+  "과태료 체납·징수유예·체납제재"
+ ],
+ "fieldVerification": [
+  "개별 법령·시행령의 감경률과 납부기한",
+  "기관별 온라인 납부·카드 납부창구",
+  "납부대행 수수료와 승인일 처리 방식",
+  "납부 완료·절차 종료 통지 방식"
+ ],
+ "process": {
+  "institution_name": "과태료 자진납부·감경·전자납부",
+  "law_name": "질서위반행위규제법",
+  "lanes": [
+   "당사자",
+   "부과 행정청",
+   "과태료 납부대행기관"
+  ],
+  "stages": [
+   "G0 부과통지",
+   "G1 감경 판단",
+   "G2 납부",
+   "G3 종료·확인",
+   "G4 불복·체납"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "과태료 부과 전 통지 수령",
+    "lane": "당사자",
+    "stage": "G0 부과통지",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "당사자",
+    "action": "사전통지서에서 위반사실·의견 제출기간·자진납부 가능성을 확인한다.",
+    "input_documents": [],
+    "output_documents": [
+     "사전통지서 수령 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제16조",
+      "text": "질서위반행위규제법 제16조에 따른 과태료 부과 전 통지 수령"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "자진납부·감경 요건 확인",
+    "lane": "당사자",
+    "stage": "G1 감경 판단",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "당사자",
+    "action": "의견 제출 기한 안에 감경된 과태료를 자진납부할 수 있는지 확인한다.",
+    "input_documents": [],
+    "output_documents": [
+     "감경요건 확인표"
+    ],
+    "deadline": "의견 제출 기한 이내",
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제18조",
+      "text": "질서위반행위규제법 제18조에 따른 자진납부·감경 요건 확인"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "자진납부 의사·납부액 선택",
+    "lane": "당사자",
+    "stage": "G1 감경 판단",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "당사자",
+    "action": "감경을 적용한 자진납부를 선택할지, 이의제기 또는 일반 납부로 진행할지 결정한다.",
+    "input_documents": [
+     "감경요건 확인표"
+    ],
+    "output_documents": [
+     "자진납부 선택·납부서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제18조",
+      "text": "질서위반행위규제법 제18조에 따른 자진납부 의사·납부액 선택"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "감경액 산정·납부 안내",
+    "lane": "부과 행정청",
+    "stage": "G2 납부",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "부과 행정청",
+    "action": "대통령령 기준에 따라 감경액과 납부방법을 안내한다.",
+    "input_documents": [
+     "자진납부 선택·납부서"
+    ],
+    "output_documents": [
+     "감경액 납부 안내"
+    ],
+    "deadline": null,
+    "blocker": "개별 법령·시행령의 감경 기준 확인",
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제18조",
+      "text": "질서위반행위규제법 제18조에 따른 감경액 산정·납부 안내"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "신용카드·직불카드 납부",
+    "lane": "당사자",
+    "stage": "G2 납부",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "당사자",
+    "action": "과태료·가산금 등을 납부대행기관을 통해 신용카드·직불카드로 납부한다.",
+    "input_documents": [
+     "감경액 납부 안내"
+    ],
+    "output_documents": [
+     "카드·직불카드 납부 요청"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제17조의2",
+      "text": "질서위반행위규제법 제17조의2에 따른 신용카드·직불카드 납부"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "납부대행 승인일 기록",
+    "lane": "과태료 납부대행기관",
+    "stage": "G2 납부",
+    "type": "system",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "과태료 납부대행기관",
+    "action": "납부대행을 승인하고 승인일을 납부일로 기록한다.",
+    "input_documents": [
+     "카드·직불카드 납부 요청"
+    ],
+    "output_documents": [
+     "납부대행 승인기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제17조의2",
+      "text": "질서위반행위규제법 제17조의2에 따른 납부대행 승인일 기록"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "납부 확인·부과·징수절차 종료",
+    "lane": "부과 행정청",
+    "stage": "G3 종료·확인",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "부과 행정청",
+    "action": "감경된 과태료 납부를 확인하고 해당 질서위반행위의 과태료 부과·징수 절차를 종료한다.",
+    "input_documents": [
+     "납부대행 승인기록"
+    ],
+    "output_documents": [
+     "납부확인·절차종료 통지"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제18조",
+      "text": "질서위반행위규제법 제18조에 따른 납부 확인·부과·징수절차 종료"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "자진납부 대신 이의제기 선택",
+    "lane": "당사자",
+    "stage": "G4 불복·체납",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "당사자",
+    "action": "자진납부를 선택하지 않고 과태료 부과 통지에 대해 이의제기할지 결정한다.",
+    "input_documents": [
+     "사전통지서 수령 기록"
+    ],
+    "output_documents": [
+     "이의제기서 또는 불복 선택기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제20조",
+      "text": "질서위반행위규제법 제20조에 따른 자진납부 대신 이의제기 선택"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "납부기한 경과·체납관리 분기",
+    "lane": "당사자",
+    "stage": "G4 불복·체납",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "당사자",
+    "action": "자진납부·일반 납부를 하지 않은 경우 체납·가산금·징수절차 경로로 넘어간다.",
+    "input_documents": [
+     "감경액 납부 안내"
+    ],
+    "output_documents": [
+     "체납관리 이관기록"
+    ],
+    "deadline": null,
+    "blocker": "납부기한·이의제기 기간을 함께 확인해야 함",
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제24조",
+      "text": "질서위반행위규제법 제24조에 따른 납부기한 경과·체납관리 분기"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "체납·가산금 경로 이관",
+    "lane": "부과 행정청",
+    "stage": "G4 불복·체납",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "부과 행정청",
+    "action": "미납 사건을 가산금 징수와 체납처분 절차로 이관한다.",
+    "input_documents": [
+     "체납관리 이관기록"
+    ],
+    "output_documents": [
+     "체납관리 사건기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제24조",
+      "text": "질서위반행위규제법 제24조에 따른 체납·가산금 경로 이관"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P03",
+    "target": "P04",
+    "type": "message",
+    "label": "자진납부 선택"
+   },
+   {
+    "id": "E03",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M02",
+    "source": "P05",
+    "target": "P06",
+    "type": "message",
+    "label": "납부 요청"
+   },
+   {
+    "id": "M03",
+    "source": "P06",
+    "target": "P07",
+    "type": "message",
+    "label": "승인·납부 확인"
+   },
+   {
+    "id": "E04",
+    "source": "P03",
+    "target": "P08",
+    "type": "sequence",
+    "label": "자진납부 대신 불복"
+   },
+   {
+    "id": "E05",
+    "source": "P03",
+    "target": "P09",
+    "type": "sequence",
+    "label": "기한 내 자진납부 없음"
+   },
+   {
+    "id": "E06",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "이 구조도는 질서위반행위규제법의 공통 절차를 업무 단위로 재구성했다. 실제 과태료 부과의 위반근거·부과권자·금액·서식은 개별 법률·시행령·조례와 행정청의 최신 통지서를 별도로 확인해야 한다.",
+   "제18조의 감경 기준과 납부 방식의 세부사항은 대통령령·개별 고지에서 확인해야 한다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-15",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 16건 가운데 16건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "notes": [
+   "질서위반행위규제법은 국가법령정보센터 현행 본문 2021년 1월 1일 시행본(MST 224847)을 기준으로 했다.",
+   "개별 과태료의 부과권자·위반행위·금액·감경기준·서식은 각 근거 법령과 대통령령·조례를 추가로 확인해야 한다."
+  ],
+  "sources": [
+   {
+    "law": "질서위반행위규제법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "질서위반행위규제법",
+    "lawId": "010592",
+    "mst": "224847",
+    "promulgatedOn": "2020-12-29",
+    "effectiveOn": "2021-01-01",
+    "officialUrl": "https://law.go.kr/법령/질서위반행위규제법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-15",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 11,
+   "explicitCitationEntries": 11,
+   "articleReferences": 16,
+   "verifiedReferences": 16,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

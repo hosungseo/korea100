@@ -2,20 +2,20 @@
   "generatedAt": "2026-07-15",
   "metricStats": {
     "nodes": {
-      "mean": 13.64,
-      "sd": 3.6351616195156944
+      "mean": 13.62970297029703,
+      "sd": 3.626021045808284
     },
     "edgeRatio": {
-      "mean": 1.093056526411326,
-      "sd": 0.11175159953637044
+      "mean": 1.0932843967297425,
+      "sd": 0.11267480357049145
     },
     "deadlineDensity": {
-      "mean": 0.30119389028584076,
-      "sd": 0.25729074924468737
+      "mean": 0.29987834855849754,
+      "sd": 0.2565910579169272
     },
     "meanConfidence": {
-      "mean": 0.8793374969040635,
-      "sd": 0.0447892968577268
+      "mean": 0.8800413066958557,
+      "sd": 0.045114718649219544
     }
   },
   "results": [
@@ -31,7 +31,7 @@
         },
         {
           "rule": "outlier",
-          "detail": "meanConfidence=0.79 (전체 평균 0.88±0.04)"
+          "detail": "meanConfidence=0.79 (전체 평균 0.88±0.05)"
         }
       ],
       "score": 10
@@ -44,7 +44,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=5.00 (전체 평균 13.64±3.64)"
+          "detail": "nodes=5.00 (전체 평균 13.63±3.63)"
         },
         {
           "rule": "outlier",
@@ -69,7 +69,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=6.00 (전체 평균 13.64±3.64)"
+          "detail": "nodes=6.00 (전체 평균 13.63±3.63)"
         },
         {
           "rule": "outlier",
@@ -107,7 +107,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=21.00 (전체 평균 13.64±3.64)"
+          "detail": "nodes=21.00 (전체 평균 13.63±3.63)"
         }
       ],
       "score": 8
@@ -120,7 +120,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=5.00 (전체 평균 13.64±3.64)"
+          "detail": "nodes=5.00 (전체 평균 13.63±3.63)"
         },
         {
           "rule": "outlier",
@@ -141,7 +141,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "meanConfidence=0.76 (전체 평균 0.88±0.04)"
+          "detail": "meanConfidence=0.76 (전체 평균 0.88±0.05)"
         }
       ],
       "score": 8
@@ -154,7 +154,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=5.00 (전체 평균 13.64±3.64)"
+          "detail": "nodes=5.00 (전체 평균 13.63±3.63)"
         },
         {
           "rule": "outlier",
@@ -175,7 +175,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "meanConfidence=0.78 (전체 평균 0.88±0.04)"
+          "detail": "meanConfidence=0.78 (전체 평균 0.88±0.05)"
         }
       ],
       "score": 8
@@ -201,7 +201,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "meanConfidence=0.74 (전체 평균 0.88±0.04)"
+          "detail": "meanConfidence=0.74 (전체 평균 0.88±0.05)"
         }
       ],
       "score": 7
@@ -248,7 +248,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=36.00 (전체 평균 13.64±3.64)"
+          "detail": "nodes=36.00 (전체 평균 13.63±3.63)"
         },
         {
           "rule": "outlier",
@@ -294,7 +294,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=6.00 (전체 평균 13.64±3.64)"
+          "detail": "nodes=6.00 (전체 평균 13.63±3.63)"
         },
         {
           "rule": "no-sublaw",
@@ -340,7 +340,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=21.00 (전체 평균 13.64±3.64)"
+          "detail": "nodes=21.00 (전체 평균 13.63±3.63)"
         },
         {
           "rule": "no-loop",
@@ -403,7 +403,7 @@
         },
         {
           "rule": "outlier",
-          "detail": "meanConfidence=0.78 (전체 평균 0.88±0.04)"
+          "detail": "meanConfidence=0.78 (전체 평균 0.88±0.05)"
         },
         {
           "rule": "no-sublaw",
@@ -490,7 +490,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "meanConfidence=0.79 (전체 평균 0.88±0.04)"
+          "detail": "meanConfidence=0.79 (전체 평균 0.88±0.05)"
         },
         {
           "rule": "no-sublaw",
@@ -514,6 +514,40 @@
       "auditExceptions": {},
       "findings": [],
       "score": 6
+    },
+    {
+      "slug": "administrative-fine-arrears-relief",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "auditExceptions": {},
+      "findings": [
+        {
+          "rule": "outlier",
+          "detail": "edgeRatio=1.44 (전체 평균 1.09±0.11)"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 5
+    },
+    {
+      "slug": "administrative-fine-objection-court",
+      "verificationStatus": "article-verified",
+      "processWarnings": 3,
+      "auditExceptions": {},
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 5
     },
     {
       "slug": "balanced-growth-impact-assessment",
@@ -540,7 +574,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "meanConfidence=0.75 (전체 평균 0.88±0.04)"
+          "detail": "meanConfidence=0.75 (전체 평균 0.88±0.05)"
         },
         {
           "rule": "no-sublaw",
@@ -574,7 +608,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "meanConfidence=0.78 (전체 평균 0.88±0.04)"
+          "detail": "meanConfidence=0.78 (전체 평균 0.88±0.05)"
         }
       ],
       "score": 5
@@ -587,7 +621,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "meanConfidence=0.76 (전체 평균 0.88±0.04)"
+          "detail": "meanConfidence=0.76 (전체 평균 0.88±0.05)"
         }
       ],
       "score": 5
@@ -600,7 +634,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=21.00 (전체 평균 13.64±3.64)"
+          "detail": "nodes=21.00 (전체 평균 13.63±3.63)"
         }
       ],
       "score": 5
@@ -647,7 +681,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "meanConfidence=0.74 (전체 평균 0.88±0.04)"
+          "detail": "meanConfidence=0.74 (전체 평균 0.88±0.05)"
         },
         {
           "rule": "no-sublaw",
@@ -702,7 +736,7 @@
         },
         {
           "rule": "outlier",
-          "detail": "meanConfidence=0.79 (전체 평균 0.88±0.04)"
+          "detail": "meanConfidence=0.79 (전체 평균 0.88±0.05)"
         }
       ],
       "score": 5
@@ -731,7 +765,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=21.00 (전체 평균 13.64±3.64)"
+          "detail": "nodes=21.00 (전체 평균 13.63±3.63)"
         }
       ],
       "score": 5
@@ -795,7 +829,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=22.00 (전체 평균 13.64±3.64)"
+          "detail": "nodes=22.00 (전체 평균 13.63±3.63)"
         }
       ],
       "score": 5
@@ -825,7 +859,7 @@
         },
         {
           "rule": "outlier",
-          "detail": "meanConfidence=0.78 (전체 평균 0.88±0.04)"
+          "detail": "meanConfidence=0.78 (전체 평균 0.88±0.05)"
         }
       ],
       "score": 5
@@ -872,7 +906,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=22.00 (전체 평균 13.64±3.64)"
+          "detail": "nodes=22.00 (전체 평균 13.63±3.63)"
         }
       ],
       "score": 5
@@ -885,7 +919,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "meanConfidence=0.78 (전체 평균 0.88±0.04)"
+          "detail": "meanConfidence=0.78 (전체 평균 0.88±0.05)"
         }
       ],
       "score": 5
@@ -972,11 +1006,62 @@
       "score": 4
     },
     {
+      "slug": "administrative-fine-pre-notice-opinion",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "auditExceptions": {},
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 4
+    },
+    {
+      "slug": "administrative-fine-voluntary-payment",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "auditExceptions": {},
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
+      "score": 4
+    },
+    {
       "slug": "administrative-procedure-hearing",
       "verificationStatus": "needs-review",
       "processWarnings": 1,
       "auditExceptions": {},
       "findings": [],
+      "score": 4
+    },
+    {
+      "slug": "administrative-violation-investigation-data-request",
+      "verificationStatus": "article-verified",
+      "processWarnings": 2,
+      "auditExceptions": {},
+      "findings": [
+        {
+          "rule": "no-loop",
+          "detail": "loop 엣지 0 — 심사·보완 반려 경로가 정말 없는 제도인지 확인"
+        },
+        {
+          "rule": "no-sublaw",
+          "detail": "시행령·시행규칙 인용 0 — 직접규정형 제도인지 확인 (위임형이면 누락)"
+        }
+      ],
       "score": 4
     },
     {
@@ -1328,7 +1413,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "meanConfidence=0.77 (전체 평균 0.88±0.04)"
+          "detail": "meanConfidence=0.77 (전체 평균 0.88±0.05)"
         }
       ],
       "score": 4
@@ -1367,7 +1452,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=22.00 (전체 평균 13.64±3.64)"
+          "detail": "nodes=22.00 (전체 평균 13.63±3.63)"
         }
       ],
       "score": 4
@@ -1657,7 +1742,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "meanConfidence=0.75 (전체 평균 0.88±0.04)"
+          "detail": "meanConfidence=0.75 (전체 평균 0.88±0.05)"
         }
       ],
       "score": 4
@@ -1717,7 +1802,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "meanConfidence=0.76 (전체 평균 0.88±0.04)"
+          "detail": "meanConfidence=0.76 (전체 평균 0.88±0.05)"
         }
       ],
       "score": 4
@@ -1842,7 +1927,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "meanConfidence=0.79 (전체 평균 0.88±0.04)"
+          "detail": "meanConfidence=0.79 (전체 평균 0.88±0.05)"
         }
       ],
       "score": 4
@@ -2429,7 +2514,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "meanConfidence=0.77 (전체 평균 0.88±0.04)"
+          "detail": "meanConfidence=0.77 (전체 평균 0.88±0.05)"
         }
       ],
       "score": 3
@@ -2541,7 +2626,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "meanConfidence=0.78 (전체 평균 0.88±0.04)"
+          "detail": "meanConfidence=0.78 (전체 평균 0.88±0.05)"
         }
       ],
       "score": 3
@@ -4087,7 +4172,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "meanConfidence=0.72 (전체 평균 0.88±0.04)"
+          "detail": "meanConfidence=0.72 (전체 평균 0.88±0.05)"
         }
       ],
       "score": 3
@@ -4173,7 +4258,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "nodes=21.00 (전체 평균 13.64±3.64)"
+          "detail": "nodes=21.00 (전체 평균 13.63±3.63)"
         }
       ],
       "score": 3
@@ -4514,7 +4599,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "meanConfidence=0.77 (전체 평균 0.88±0.04)"
+          "detail": "meanConfidence=0.77 (전체 평균 0.88±0.05)"
         }
       ],
       "score": 3
@@ -4897,7 +4982,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "meanConfidence=0.77 (전체 평균 0.88±0.04)"
+          "detail": "meanConfidence=0.77 (전체 평균 0.88±0.05)"
         }
       ],
       "score": 3
@@ -5926,7 +6011,7 @@
       "findings": [
         {
           "rule": "outlier",
-          "detail": "meanConfidence=0.74 (전체 평균 0.88±0.04)"
+          "detail": "meanConfidence=0.74 (전체 평균 0.88±0.05)"
         }
       ],
       "score": 2

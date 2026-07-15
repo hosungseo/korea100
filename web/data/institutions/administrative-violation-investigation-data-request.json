@@ -1,0 +1,636 @@
+{
+ "slug": "administrative-violation-investigation-data-request",
+ "name": "질서위반행위 조사·자료제공",
+ "oneLiner": "질서위반행위의 행정조사·현장검사와 관계기관 자료제공의 신청·검토·결정·사후관리 경로",
+ "type": "조사·자료요청형",
+ "priority": 505,
+ "category": "민원·권리구제·참여",
+ "whyFirst": "질서위반행위의 행정조사·현장검사와 관계기관 자료제공에서 당사자와 행정청, 법원·관계기관 사이의 기한·문서·분기 지점을 한 화면에 정리했다.",
+ "asOfDate": "2026-07-15",
+ "status": "full",
+ "canvas": {
+  "purpose": "합리적 의심이 있는 질서위반행위를 조사하면서 필요한 자료를 관계기관에 요청하고, 사무소·영업소 검사와 사실판단을 거쳐 과태료 절차로 이관하는 흐름",
+  "stakeholders": "신고자·피조사자, 행정청 조사담당, 관계 행정기관·지자체·공공기관",
+  "legalBasis": [
+   {
+    "law": "질서위반행위규제법",
+    "articles": "제16조, 제17조, 제22조, 제23조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "신고자·피조사자",
+    "role": "조사 통지를 수령하고 조사 대상·사유·범위를 확인"
+   },
+   {
+    "name": "행정청 조사담당",
+    "role": "합리적 의심·필요성을 판단하고 자료요청·현장검사·사실판단을 담당"
+   },
+   {
+    "name": "관계 행정기관·지자체·공공기관",
+    "role": "요청받은 자료·정보를 제공하고 회신"
+   }
+  ],
+  "procedure": [
+   "위반정보 확인",
+   "조사 필요성 판단",
+   "최소범위 설계",
+   "자료요청·회신",
+   "검사 사전통지·현장검사",
+   "사실판단",
+   "종결 또는 과태료 사전통지 이관"
+  ],
+  "moneyFlow": "조사·자료제공 단계 자체에는 과태료 납부가 발생하지 않는다. 위반이 확인되면 제16조 사전통지와 제17조 부과 절차로 이관된다.",
+  "docsFlow": "신고·위반정보 → 조사계획·범위 기록 → 자료제공 요청·회신 → 검사 사전통지·증표 확인 → 장부·서류 검사기록 → 사실판단 기록 → 종결 또는 사전통지 이관자료",
+  "bottlenecks": [
+   "합리적 의심과 조사 필요성의 기록",
+   "자료요청의 필요성 소명과 기관 간 회신",
+   "검사 7일 전 사전통지와 긴급 예외의 구분",
+   "조사 결과와 과태료 사전통지 자료의 연결"
+  ],
+  "reformPoints": [
+   "조사 목적·범위·최소침해 판단을 조사계획에 기록",
+   "자료요청별 근거·요청일·회신일·사용범위 관리",
+   "검사 통지·증표 제시·검사기록을 하나의 사건으로 연결",
+   "위반 없음 종결과 사전통지 이관 결과를 분리 통지"
+  ]
+ },
+ "related": [
+  "과태료 사전통지·의견제출",
+  "교통과태료·범칙금 부과",
+  "행정처분 사전통지·의견제출·청문"
+ ],
+ "fieldVerification": [
+  "기관별 조사 개시·신고 접수 창구",
+  "자료제공 요청서의 필요성 소명 항목",
+  "현장검사 사전통지·증표 양식과 긴급 예외 처리",
+  "조사 종결·과태료 사전통지 이관 통지 방식"
+ ],
+ "process": {
+  "institution_name": "질서위반행위 조사·자료제공",
+  "law_name": "질서위반행위규제법",
+  "lanes": [
+   "신고자·피조사자",
+   "행정청 조사담당",
+   "관계 행정기관·지자체·공공기관"
+  ],
+  "stages": [
+   "G0 합리적 의심",
+   "G1 조사계획",
+   "G2 자료·현장조사",
+   "G3 사실판단",
+   "G4 절차연계"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "위반정보·신고자료 접수",
+    "lane": "행정청 조사담당",
+    "stage": "G0 합리적 의심",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "행정청 조사담당",
+    "action": "질서위반행위 발생을 의심할 수 있는 신고·자료·현장정보를 접수한다.",
+    "input_documents": [],
+    "output_documents": [
+     "위반정보·신고자료"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제22조",
+      "text": "질서위반행위규제법 제22조에 따른 위반정보·신고자료 접수"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "합리적 의심·조사 필요성 판단",
+    "lane": "행정청 조사담당",
+    "stage": "G0 합리적 의심",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "행정청 조사담당",
+    "action": "질서위반행위가 발생했다는 합리적 의심과 조사 필요성이 있는지 판단한다.",
+    "input_documents": [
+     "위반정보·신고자료"
+    ],
+    "output_documents": [
+     "조사 개시 판단기록"
+    ],
+    "deadline": null,
+    "blocker": "의심의 근거와 조사 필요성을 기록해야 함",
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제22조",
+      "text": "질서위반행위규제법 제22조에 따른 합리적 의심·조사 필요성 판단"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "최소 범위·조사방법 설계",
+    "lane": "행정청 조사담당",
+    "stage": "G1 조사계획",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "행정청 조사담당",
+    "action": "조사 목적 달성에 필요한 최소 범위로 자료요청·현장검사 방법을 정한다.",
+    "input_documents": [
+     "조사 개시 판단기록"
+    ],
+    "output_documents": [
+     "조사계획·범위 기록"
+    ],
+    "deadline": null,
+    "blocker": "필요 이상 조사·검사로 확대되지 않도록 범위 통제",
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제22조",
+      "text": "질서위반행위규제법 제22조에 따른 최소 범위·조사방법 설계"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "관계기관 자료·정보 제공 요청",
+    "lane": "행정청 조사담당",
+    "stage": "G2 자료·현장조사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "행정청 조사담당",
+    "action": "과태료 부과·징수에 필요한 자료의 필요성을 소명해 관계 행정기관 등에 제공을 요청한다.",
+    "input_documents": [
+     "조사계획·범위 기록"
+    ],
+    "output_documents": [
+     "자료제공 요청서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제23조",
+      "text": "질서위반행위규제법 제23조에 따른 관계기관 자료·정보 제공 요청"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "자료·정보 제공·회신",
+    "lane": "관계 행정기관·지자체·공공기관",
+    "stage": "G2 자료·현장조사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "관계 행정기관·지자체·공공기관",
+    "action": "특별한 사정이 없으면 요청받은 자료·정보를 제공하고 회신한다.",
+    "input_documents": [
+     "자료제공 요청서"
+    ],
+    "output_documents": [
+     "자료·정보 회신"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제23조",
+      "text": "질서위반행위규제법 제23조에 따른 자료·정보 제공·회신"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "현장검사 사전통지 작성·발송",
+    "lane": "행정청 조사담당",
+    "stage": "G2 자료·현장조사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "행정청 조사담당",
+    "action": "사무소·영업소 검사를 하려면 검사 대상·이유 등을 검사 개시 7일 전까지 통지한다.",
+    "input_documents": [
+     "조사계획·범위 기록"
+    ],
+    "output_documents": [
+     "검사 사전통지서"
+    ],
+    "deadline": "검사 개시 7일 전까지",
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제22조",
+      "text": "질서위반행위규제법 제22조에 따른 현장검사 사전통지 작성·발송"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "검사 사전통지 수령·대응자료 준비",
+    "lane": "신고자·피조사자",
+    "stage": "G2 자료·현장조사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신고자·피조사자",
+    "action": "검사 대상·이유·일시를 확인하고 검사에 대응할 자료를 준비한다.",
+    "input_documents": [
+     "검사 사전통지서"
+    ],
+    "output_documents": [
+     "검사 통지 수령·대응자료"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제22조",
+      "text": "질서위반행위규제법 제22조에 따른 검사 사전통지 수령·대응자료 준비"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "검사 직원 증표 제시",
+    "lane": "행정청 조사담당",
+    "stage": "G2 자료·현장조사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "행정청 조사담당",
+    "action": "검사에 나선 직원이 권한을 표시하는 증표를 지니고 관계인에게 제시한다.",
+    "input_documents": [
+     "검사 통지 수령기록"
+    ],
+    "output_documents": [
+     "증표 확인·검사 개시 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제22조",
+      "text": "질서위반행위규제법 제22조에 따른 검사 직원 증표 제시"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "사무소·영업소 출입·장부·서류 검사",
+    "lane": "행정청 조사담당",
+    "stage": "G2 자료·현장조사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "행정청 조사담당",
+    "action": "당사자의 사무소·영업소에 출입해 장부·서류·물건을 검사한다.",
+    "input_documents": [
+     "증표 확인·검사 개시 기록"
+    ],
+    "output_documents": [
+     "현장검사 기록·확보자료"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제22조",
+      "text": "질서위반행위규제법 제22조에 따른 사무소·영업소 출입·장부·서류 검사"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "긴급·증거인멸 우려 예외 기록",
+    "lane": "행정청 조사담당",
+    "stage": "G2 자료·현장조사",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "행정청 조사담당",
+    "action": "긴급하거나 사전통지로 검사 목적을 달성하기 어렵다고 판단한 경우 그 사유를 기록한다.",
+    "input_documents": [
+     "조사계획·범위 기록"
+    ],
+    "output_documents": [
+     "사전통지 예외 판단기록"
+    ],
+    "deadline": null,
+    "blocker": "예외 사유와 최소 범위 검사를 별도로 기록",
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제22조",
+      "text": "질서위반행위규제법 제22조에 따른 긴급·증거인멸 우려 예외 기록"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "조사자료·사실관계 정리",
+    "lane": "행정청 조사담당",
+    "stage": "G3 사실판단",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "행정청 조사담당",
+    "action": "자료 회신과 현장검사 결과를 대조해 사실관계와 위반 여부를 정리한다.",
+    "input_documents": [
+     "자료·정보 회신",
+     "현장검사 기록·확보자료"
+    ],
+    "output_documents": [
+     "조사결과·사실판단 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제22조",
+      "text": "질서위반행위규제법 제22조에 따른 조사자료·사실관계 정리"
+     },
+     {
+      "law": "질서위반행위규제법",
+      "article": "제23조",
+      "text": "질서위반행위규제법 제23조에 따른 조사자료·사실관계 정리"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "위반 없음 종결·기록",
+    "lane": "행정청 조사담당",
+    "stage": "G4 절차연계",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "행정청 조사담당",
+    "action": "위반을 확인하지 못하면 조사 결과를 기록하고 사건을 종결한다.",
+    "input_documents": [
+     "조사결과·사실판단 기록"
+    ],
+    "output_documents": [
+     "종결 통지·조사종결 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제22조",
+      "text": "질서위반행위규제법 제22조에 따른 위반 없음 종결·기록"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "위반 확인·사전통지 자료 이관",
+    "lane": "행정청 조사담당",
+    "stage": "G4 절차연계",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "행정청 조사담당",
+    "action": "위반이 확인되면 조사자료와 근거를 과태료 사전통지·의견제출 절차로 이관한다.",
+    "input_documents": [
+     "조사결과·사실판단 기록"
+    ],
+    "output_documents": [
+     "사전통지 이관자료"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제16조",
+      "text": "질서위반행위규제법 제16조에 따른 위반 확인·사전통지 자료 이관"
+     },
+     {
+      "law": "질서위반행위규제법",
+      "article": "제17조",
+      "text": "질서위반행위규제법 제17조에 따른 위반 확인·사전통지 자료 이관"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "조사결과·사전통지 수령·의견제출",
+    "lane": "신고자·피조사자",
+    "stage": "G4 절차연계",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신고자·피조사자",
+    "action": "조사 종결 또는 과태료 사전통지 이관 결과를 확인하고 필요한 의견·자료 제출을 준비한다.",
+    "input_documents": [
+     "종결 통지·조사종결 기록",
+     "사전통지 이관자료"
+    ],
+    "output_documents": [
+     "조사결과 수령·의견제출 자료"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제16조",
+      "text": "질서위반행위규제법 제16조에 따른 조사결과·사전통지 수령·의견제출"
+     },
+     {
+      "law": "질서위반행위규제법",
+      "article": "제22조",
+      "text": "질서위반행위규제법 제22조에 따른 조사결과·사전통지 수령·의견제출"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P04",
+    "target": "P05",
+    "type": "message",
+    "label": "자료제공 요청"
+   },
+   {
+    "id": "M02",
+    "source": "P05",
+    "target": "P11",
+    "type": "message",
+    "label": "자료·정보 회신"
+   },
+   {
+    "id": "E04",
+    "source": "P03",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": "사전통지 후 검사"
+   },
+   {
+    "id": "E06",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P06",
+    "target": "P10",
+    "type": "sequence",
+    "label": "긴급·증거인멸 우려"
+   },
+   {
+    "id": "E09",
+    "source": "P10",
+    "target": "P08",
+    "type": "sequence",
+    "label": "예외 사유 기록 후 검사"
+   },
+   {
+    "id": "E10",
+    "source": "P09",
+    "target": "P11",
+    "type": "sequence",
+    "label": "현장검사 결과"
+   },
+   {
+    "id": "E11",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": "위반 없음"
+   },
+   {
+    "id": "E12",
+    "source": "P11",
+    "target": "P13",
+    "type": "sequence",
+    "label": "위반 확인"
+   },
+   {
+    "id": "M03",
+    "source": "P12",
+    "target": "P14",
+    "type": "message",
+    "label": "종결 통지"
+   },
+   {
+    "id": "M04",
+    "source": "P13",
+    "target": "P14",
+    "type": "message",
+    "label": "사전통지 이관"
+   }
+  ],
+  "warnings": [
+   "이 구조도는 질서위반행위규제법의 공통 절차를 업무 단위로 재구성했다. 실제 과태료 부과의 위반근거·부과권자·금액·서식은 개별 법률·시행령·조례와 행정청의 최신 통지서를 별도로 확인해야 한다.",
+   "제22조 조사는 합리적 의심·필요성·최소침해 원칙을 전제로 하며, 실제 조사권한 범위는 개별 근거법령과 대통령령을 함께 확인해야 한다."
+  ]
+ },
+ "personaAudit": {
+  "entryExpected": false,
+  "reason": "질서위반행위 조사는 신청형 서비스가 아니라 행정청의 합리적 의심으로 개시되며, 피조사자는 검사 통지를 받아 대응한다."
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-15",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 21건 가운데 21건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "notes": [
+   "질서위반행위규제법은 국가법령정보센터 현행 본문 2021년 1월 1일 시행본(MST 224847)을 기준으로 했다.",
+   "개별 과태료의 부과권자·위반행위·금액·감경기준·서식은 각 근거 법령과 대통령령·조례를 추가로 확인해야 한다."
+  ],
+  "sources": [
+   {
+    "law": "질서위반행위규제법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "질서위반행위규제법",
+    "lawId": "010592",
+    "mst": "224847",
+    "promulgatedOn": "2020-12-29",
+    "effectiveOn": "2021-01-01",
+    "officialUrl": "https://law.go.kr/법령/질서위반행위규제법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-15",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 18,
+   "explicitCitationEntries": 18,
+   "articleReferences": 21,
+   "verifiedReferences": 21,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}
