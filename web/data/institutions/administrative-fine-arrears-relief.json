@@ -1,0 +1,731 @@
+{
+ "slug": "administrative-fine-arrears-relief",
+ "name": "과태료 체납·징수유예·체납제재",
+ "oneLiner": "과태료 체납의 가산금·징수유예·결손처분과 체납제재의 신청·검토·결정·사후관리 경로",
+ "type": "체납·징수·제재형",
+ "priority": 504,
+ "category": "민원·권리구제·참여",
+ "whyFirst": "과태료 체납의 가산금·징수유예·결손처분과 체납제재에서 당사자와 행정청, 법원·관계기관 사이의 기한·문서·분기 지점을 한 화면에 정리했다.",
+ "asOfDate": "2026-07-15",
+ "status": "full",
+ "canvas": {
+  "purpose": "납부기한을 넘긴 과태료에 가산금·체납처분을 적용하면서 분할납부·납부기일 연기, 결손처분, 관허사업 제한·신용정보 제공·자동차 번호판 영치로 이어지는 사후관리 절차",
+  "stakeholders": "과태료 당사자·체납자, 행정청 징수부서, 주무관청·신용정보기관, 법원·검사",
+  "legalBasis": [
+   {
+    "law": "질서위반행위규제법",
+    "articles": "제17조, 제20조, 제24조, 제24조의2, 제24조의3, 제24조의4, 제52조, 제53조, 제54조, 제55조, 제56조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "과태료 당사자·체납자",
+    "role": "납부·징수유예 신청·담보 제공·완납을 통해 체납제재 해제를 요청"
+   },
+   {
+    "name": "행정청 징수부서",
+    "role": "가산금·체납처분·징수유예·결손처분과 제재 연계를 담당"
+   },
+   {
+    "name": "주무관청·신용정보기관",
+    "role": "관허사업 제한 요구에 응하고, 법정 요건에 따라 체납자료를 처리"
+   },
+   {
+    "name": "법원·검사",
+    "role": "고액·상습체납 감치와 확정 재판 집행 등 사법절차를 담당"
+   }
+  ],
+  "procedure": [
+   "납부기한 확인",
+   "가산금·중가산금",
+   "체납처분",
+   "징수유예·분할납부",
+   "결손처분",
+   "관허사업·신용정보·번호판 제재",
+   "완납·제재 해제"
+  ],
+  "moneyFlow": "납부기한 경과 시 3% 가산금과 매월 1.2% 중가산금이 부과될 수 있으며, 중가산금은 60개월을 초과할 수 없다. 징수유예 중에는 유예한 금액에 대한 가산금·중가산금 징수와 체납처분이 제한된다.",
+  "docsFlow": "과태료 부과서·납부기한 → 체납·가산금 산정표 → 체납처분서 → 징수유예 신청·담보자료 → 결손처분서 → 사업제한·신용정보·번호판 영치 통지 → 완납·해제 기록",
+  "bottlenecks": [
+   "납부기한·이의제기 기간과 체납일 계산",
+   "가산금·중가산금 산정과 징수유예 기간 연결",
+   "결손처분 뒤 재산 발견 시 처분 취소·재징수",
+   "관허사업·신용정보·자동차 제재의 해제 조건과 통지"
+  ],
+  "reformPoints": [
+   "체납액·가산금·중가산금 산정근거를 한 화면에 표시",
+   "징수유예 신청·담보·승인·취소 상태를 연결",
+   "제재별 발동·해제 조건과 관할기관을 분리 표시",
+   "완납·재산발견·사업제한 철회 결과를 관계기관에 즉시 전송"
+  ]
+ },
+ "related": [
+  "과태료 자진납부·감경·전자납부",
+  "과태료 이의제기·법원재판",
+  "교통과태료·범칙금 부과"
+ ],
+ "fieldVerification": [
+  "개별 과태료의 납부기한·체납처분 창구",
+  "징수유예·분할납부 신청요건과 담보 운영",
+  "관허사업 제한·신용정보 제공의 실제 통지",
+  "자동차 번호판 영치·일시해제·납부증명서 처리"
+ ],
+ "process": {
+  "institution_name": "과태료 체납·징수유예·체납제재",
+  "law_name": "질서위반행위규제법",
+  "lanes": [
+   "과태료 당사자·체납자",
+   "행정청 징수부서",
+   "주무관청·신용정보기관",
+   "법원·검사"
+  ],
+  "stages": [
+   "G0 납부기한",
+   "G1 체납징수",
+   "G2 유예·결손",
+   "G3 체납제재",
+   "G4 납부·해제"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "납부기한·납부액 확인",
+    "lane": "과태료 당사자·체납자",
+    "stage": "G0 납부기한",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "과태료 당사자·체납자",
+    "action": "과태료 부과서의 납부기한과 금액, 이의제기 가능기간을 확인한다.",
+    "input_documents": [],
+    "output_documents": [
+     "납부기한 확인기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제17조",
+      "text": "질서위반행위규제법 제17조에 따른 납부기한·납부액 확인"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "납부기한 경과·가산금 산정",
+    "lane": "행정청 징수부서",
+    "stage": "G1 체납징수",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "행정청 징수부서",
+    "action": "납부기한까지 납부하지 않으면 경과일부터 3% 가산금을 산정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "가산금 산정표"
+    ],
+    "deadline": null,
+    "blocker": "납부일·이의제기 여부·송달일 확인",
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제24조",
+      "text": "질서위반행위규제법 제24조에 따른 납부기한 경과·가산금 산정"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "중가산금·체납상태 관리",
+    "lane": "행정청 징수부서",
+    "stage": "G1 체납징수",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "행정청 징수부서",
+    "action": "매 1개월마다 1.2% 중가산금을 가산하되 60개월 한도를 관리한다.",
+    "input_documents": [
+     "가산금 산정표"
+    ],
+    "output_documents": [
+     "체납·중가산금 관리기록"
+    ],
+    "deadline": "중가산금 기간은 60개월 이내",
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제24조",
+      "text": "질서위반행위규제법 제24조에 따른 중가산금·체납상태 관리"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "체납처분 개시",
+    "lane": "행정청 징수부서",
+    "stage": "G1 체납징수",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "행정청 징수부서",
+    "action": "이의제기 없이 가산금도 납부하지 않으면 국세·지방세 체납처분의 예에 따라 징수한다.",
+    "input_documents": [
+     "체납·중가산금 관리기록"
+    ],
+    "output_documents": [
+     "체납처분서·압류기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제24조",
+      "text": "질서위반행위규제법 제24조에 따른 체납처분 개시"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "징수유예·분할납부 신청",
+    "lane": "과태료 당사자·체납자",
+    "stage": "G2 유예·결손",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "과태료 당사자·체납자",
+    "action": "납부가 곤란한 사유가 있으면 분할납부 또는 납부기일 연기를 행정청에 신청한다.",
+    "input_documents": [
+     "체납·중가산금 관리기록"
+    ],
+    "output_documents": [
+     "징수유예 신청서·소명자료"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제24조의3",
+      "text": "질서위반행위규제법 제24조의3에 따른 징수유예·분할납부 신청"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "유예·담보·납부기한 결정",
+    "lane": "행정청 징수부서",
+    "stage": "G2 유예·결손",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "행정청 징수부서",
+    "action": "징수유예등의 기간과 담보 제공·변경 필요성을 결정한다.",
+    "input_documents": [
+     "징수유예 신청서·소명자료"
+    ],
+    "output_documents": [
+     "징수유예 결정서·담보자료"
+    ],
+    "deadline": null,
+    "blocker": "유예 사유·담보·기간 확인",
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제24조의3",
+      "text": "질서위반행위규제법 제24조의3에 따른 유예·담보·납부기한 결정"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "유예 중 징수·가산금 집행 제한",
+    "lane": "행정청 징수부서",
+    "stage": "G2 유예·결손",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "행정청 징수부서",
+    "action": "유예기간 동안 유예한 금액에 대한 가산금·중가산금 징수와 체납처분을 제한한다.",
+    "input_documents": [
+     "징수유예 결정서·담보자료"
+    ],
+    "output_documents": [
+     "유예기간 관리기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제24조의3",
+      "text": "질서위반행위규제법 제24조의3에 따른 유예 중 징수·가산금 집행 제한"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "징수유예 취소·일시징수",
+    "lane": "행정청 징수부서",
+    "stage": "G2 유예·결손",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "행정청 징수부서",
+    "action": "취소 사유가 생기면 유예를 취소하고 유예된 징수금을 한꺼번에 징수할 수 있다.",
+    "input_documents": [
+     "유예기간 관리기록"
+    ],
+    "output_documents": [
+     "유예취소·일시징수 통지"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제24조의3",
+      "text": "질서위반행위규제법 제24조의3에 따른 징수유예 취소·일시징수"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "결손처분 사유 검토·결정",
+    "lane": "행정청 징수부서",
+    "stage": "G2 유예·결손",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "행정청 징수부서",
+    "action": "법정 결손처분 사유에 해당하는지 검토하고 결손처분 여부를 결정한다.",
+    "input_documents": [
+     "체납처분서·압류기록"
+    ],
+    "output_documents": [
+     "결손처분서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제24조의4",
+      "text": "질서위반행위규제법 제24조의4에 따른 결손처분 사유 검토·결정"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "상속재산·합병법인 집행 확인",
+    "lane": "행정청 징수부서",
+    "stage": "G2 유예·결손",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "행정청 징수부서",
+    "action": "당사자 사망 또는 법인 소멸 후에도 법정 요건에 따라 상속재산·존속법인에 집행할 수 있는지 확인한다.",
+    "input_documents": [
+     "결손처분서"
+    ],
+    "output_documents": [
+     "승계집행 검토기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제24조의2",
+      "text": "질서위반행위규제법 제24조의2에 따른 상속재산·합병법인 집행 확인"
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "관허사업 정지·취소 또는 요구",
+    "lane": "주무관청·신용정보기관",
+    "stage": "G3 체납제재",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주무관청·신용정보기관",
+    "action": "법정 요건을 충족한 체납자에 대해 사업 정지·허가등 취소를 하거나 주무관청에 요구한다.",
+    "input_documents": [
+     "체납처분서·압류기록"
+    ],
+    "output_documents": [
+     "사업제한 처분·요구서"
+    ],
+    "deadline": null,
+    "blocker": "허가·인가·면허·등록 사업과 법정 체납요건 확인",
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제52조",
+      "text": "질서위반행위규제법 제52조에 따른 관허사업 정지·취소 또는 요구"
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "체납·결손처분자료 제공",
+    "lane": "주무관청·신용정보기관",
+    "stage": "G3 체납제재",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "주무관청·신용정보기관",
+    "action": "사전 고지 후 법정 요건에 따라 체납·결손처분 자료를 신용정보집중기관에 제공한다.",
+    "input_documents": [
+     "체납처분서·압류기록"
+    ],
+    "output_documents": [
+     "자료 제공 전 고지·제공기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제53조",
+      "text": "질서위반행위규제법 제53조에 따른 체납·결손처분자료 제공"
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "고액·상습체납 감치 신청·결정",
+    "lane": "법원·검사",
+    "stage": "G3 체납제재",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "법원·검사",
+    "action": "행정청 신청과 검사의 청구를 거쳐 법원이 30일 범위에서 감치 여부를 결정한다.",
+    "input_documents": [
+     "체납처분서·압류기록"
+    ],
+    "output_documents": [
+     "감치 신청·결정서"
+    ],
+    "deadline": null,
+    "blocker": "고액·상습체납과 법정 요건 확인",
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제54조",
+      "text": "질서위반행위규제법 제54조에 따른 고액·상습체납 감치 신청·결정"
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "자동차 등록번호판 영치·일시해제",
+    "lane": "행정청 징수부서",
+    "stage": "G3 체납제재",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "행정청 징수부서",
+    "action": "자동차 관련 과태료 체납 시 번호판을 영치하고 납부·생계곤란 요건에 따라 해제한다.",
+    "input_documents": [
+     "체납처분서·압류기록"
+    ],
+    "output_documents": [
+     "번호판 영치·해제 기록"
+    ],
+    "deadline": null,
+    "blocker": "대통령령상 자동차 관련 과태료와 생계유지 요건 확인",
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제55조",
+      "text": "질서위반행위규제법 제55조에 따른 자동차 등록번호판 영치·일시해제"
+     }
+    ]
+   },
+   {
+    "id": "P15",
+    "name": "자동차 납부증명서 제출·이전등록",
+    "lane": "과태료 당사자·체납자",
+    "stage": "G4 납부·해제",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "과태료 당사자·체납자",
+    "action": "체납으로 압류등록된 자동차를 이전등록하려면 관련 과태료 납부증명서를 제출한다.",
+    "input_documents": [
+     "번호판 영치·해제 기록"
+    ],
+    "output_documents": [
+     "과태료 납부증명서·이전등록 신청"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제56조",
+      "text": "질서위반행위규제법 제56조에 따른 자동차 납부증명서 제출·이전등록"
+     }
+    ]
+   },
+   {
+    "id": "P16",
+    "name": "완납·제재 해제·관계기관 통지",
+    "lane": "행정청 징수부서",
+    "stage": "G4 납부·해제",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "행정청 징수부서",
+    "action": "과태료와 가산금 등을 납부하면 체납제재를 해제하고 관계기관에 결과를 통지한다.",
+    "input_documents": [
+     "체납·중가산금 관리기록"
+    ],
+    "output_documents": [
+     "완납확인·제재 해제 통지"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제24조",
+      "text": "질서위반행위규제법 제24조에 따른 완납·제재 해제·관계기관 통지"
+     },
+     {
+      "law": "질서위반행위규제법",
+      "article": "제52조",
+      "text": "질서위반행위규제법 제52조에 따른 완납·제재 해제·관계기관 통지"
+     },
+     {
+      "law": "질서위반행위규제법",
+      "article": "제55조",
+      "text": "질서위반행위규제법 제55조에 따른 완납·제재 해제·관계기관 통지"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P03",
+    "target": "P05",
+    "type": "sequence",
+    "label": "분할·연기 신청"
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": "유예 승인"
+   },
+   {
+    "id": "L01",
+    "source": "P06",
+    "target": "P04",
+    "type": "loop",
+    "label": "유예 불승인·즉시징수"
+   },
+   {
+    "id": "L02",
+    "source": "P07",
+    "target": "P08",
+    "type": "loop",
+    "label": "취소 사유 발생"
+   },
+   {
+    "id": "L03",
+    "source": "P08",
+    "target": "P04",
+    "type": "loop",
+    "label": "유예 취소·일시징수"
+   },
+   {
+    "id": "E07",
+    "source": "P04",
+    "target": "P09",
+    "type": "sequence",
+    "label": "결손 사유 검토"
+   },
+   {
+    "id": "E08",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": "사망·법인 소멸"
+   },
+   {
+    "id": "L04",
+    "source": "P10",
+    "target": "P04",
+    "type": "loop",
+    "label": "승계재산 집행"
+   },
+   {
+    "id": "E09",
+    "source": "P04",
+    "target": "P11",
+    "type": "sequence",
+    "label": "관허사업 체납요건"
+   },
+   {
+    "id": "E10",
+    "source": "P04",
+    "target": "P12",
+    "type": "sequence",
+    "label": "신용정보 제공요건"
+   },
+   {
+    "id": "E11",
+    "source": "P04",
+    "target": "P13",
+    "type": "sequence",
+    "label": "고액·상습체납요건"
+   },
+   {
+    "id": "E12",
+    "source": "P04",
+    "target": "P14",
+    "type": "sequence",
+    "label": "자동차 관련 과태료"
+   },
+   {
+    "id": "E13",
+    "source": "P14",
+    "target": "P15",
+    "type": "sequence",
+    "label": "압류등록 차량 이전"
+   },
+   {
+    "id": "E14",
+    "source": "P04",
+    "target": "P15",
+    "type": "sequence",
+    "label": "납부증명서 제출"
+   },
+   {
+    "id": "E15",
+    "source": "P07",
+    "target": "P16",
+    "type": "sequence",
+    "label": "유예기간 이행"
+   },
+   {
+    "id": "E16",
+    "source": "P11",
+    "target": "P16",
+    "type": "sequence",
+    "label": "완납·사업제한 철회"
+   },
+   {
+    "id": "E17",
+    "source": "P12",
+    "target": "P16",
+    "type": "sequence",
+    "label": "완납·자료 처리"
+   },
+   {
+    "id": "E18",
+    "source": "P13",
+    "target": "P16",
+    "type": "sequence",
+    "label": "납부·제재 종료"
+   },
+   {
+    "id": "E19",
+    "source": "P15",
+    "target": "P16",
+    "type": "sequence",
+    "label": "납부확인"
+   }
+  ],
+  "warnings": [
+   "이 구조도는 질서위반행위규제법의 공통 절차를 업무 단위로 재구성했다. 실제 과태료 부과의 위반근거·부과권자·금액·서식은 개별 법률·시행령·조례와 행정청의 최신 통지서를 별도로 확인해야 한다.",
+   "체납제재는 모든 과태료에 일률적으로 적용되는 것이 아니라 각 조문과 대통령령이 정한 요건을 충족하는 경우에만 가능하다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-15",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 29건 가운데 29건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "notes": [
+   "질서위반행위규제법은 국가법령정보센터 현행 본문 2021년 1월 1일 시행본(MST 224847)을 기준으로 했다.",
+   "개별 과태료의 부과권자·위반행위·금액·감경기준·서식은 각 근거 법령과 대통령령·조례를 추가로 확인해야 한다."
+  ],
+  "sources": [
+   {
+    "law": "질서위반행위규제법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "질서위반행위규제법",
+    "lawId": "010592",
+    "mst": "224847",
+    "promulgatedOn": "2020-12-29",
+    "effectiveOn": "2021-01-01",
+    "officialUrl": "https://law.go.kr/법령/질서위반행위규제법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-15",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 19,
+   "explicitCitationEntries": 19,
+   "articleReferences": 29,
+   "verifiedReferences": 29,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

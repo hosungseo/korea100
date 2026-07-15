@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { parseAdminRuleArticleHeaders } from "./lib/admin-rule-service.mjs";
+import { parseAdminRuleArticleHeaders, parseAdminRuleArticles } from "./lib/admin-rule-service.mjs";
 
 test("parses article headers from admrul JSON arrays", () => {
   const found = parseAdminRuleArticleHeaders({
@@ -43,4 +43,23 @@ test("parses the nested 조문 payload returned by the current DRF response", ()
 test("returns no headers when the admrul service omits article content", () => {
   const found = parseAdminRuleArticleHeaders({ AdmRulService: { "조문내용": null } });
   assert.equal(found.size, 0);
+});
+
+test("parses exact administrative-rule article bodies and dates", () => {
+  const articles = parseAdminRuleArticles({
+    AdmRulService: {
+      행정규칙기본정보: { 시행일자: "20260326" },
+      조문내용: [
+        "제2조(정의) 용어는 다음과 같다.1. 신청인2. 처리기관",
+        "제3조의2(검토) ① 담당자는 검토한다.② 장은 결정한다.",
+      ],
+    },
+  });
+
+  assert.deepEqual(articles.get("제3조의2"), {
+    article: "제3조의2",
+    title: "검토",
+    text: "① 담당자는 검토한다.\n② 장은 결정한다.",
+    effectiveOn: "2026-03-26",
+  });
 });

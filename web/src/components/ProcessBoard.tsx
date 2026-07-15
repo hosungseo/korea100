@@ -410,7 +410,7 @@ function NodeCard({
       </div>
 
       <div style={{ marginTop: 7 }}>
-        <VerificationMark result={verificationResult} compact />
+        <VerificationMark result={verificationResult} compact nested />
       </div>
 
       {/* Actor */}
