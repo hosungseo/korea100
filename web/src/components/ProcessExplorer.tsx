@@ -9,8 +9,10 @@ import type {
   SourceVerification,
 } from "@/lib/types";
 import { trackEvent } from "@/lib/client-events";
+import { getNodeVerification } from "@/lib/process-verification";
 import DesktopProcessBoard from "./DesktopProcessBoard";
 import PortraitProcessBoard from "./PortraitProcessBoard";
+import { VerificationMark } from "./ProcessVerification";
 
 type ProcessMode = "summary" | "full";
 
@@ -105,14 +107,21 @@ export default function ProcessExplorer({
       </div>
 
       {selectedNode && (
-        <ProcessNodeInspector node={selectedNode} />
+        <ProcessNodeInspector node={selectedNode} verification={verification} />
       )}
     </div>
   );
 }
 
-function ProcessNodeInspector({ node }: { node: ProcessNode }) {
+function ProcessNodeInspector({
+  node,
+  verification,
+}: {
+  node: ProcessNode;
+  verification?: SourceVerification;
+}) {
   const status = statusMeta(node.status);
+  const verificationResult = getNodeVerification(node, verification);
   const documents = [
     ...(node.input_documents ?? []),
     ...(node.output_documents ?? []),
@@ -158,8 +167,11 @@ function ProcessNodeInspector({ node }: { node: ProcessNode }) {
       </div>
 
       <div className="process-node-inspector-laws">
-        <span>법적 근거</span>
-        <div>
+        <div className="process-node-inspector-laws-heading">
+          <span>법적 근거</span>
+          <VerificationMark result={verificationResult} />
+        </div>
+        <div className="process-node-inspector-laws-list">
           {(node.legal_basis ?? []).map((basis) => (
             <article key={`${basis.law}:${basis.article}`}>
               <strong>{basis.law} {basis.article}</strong>

@@ -19,7 +19,7 @@ export function parseArticleReferences(value) {
   const references = [];
   const seen = new Set();
   const consumedRanges = [];
-  const rangePattern = /제\s*(\d+)\s*(?:조(?:\s*의\s*(\d+))?)?\s*[~-]\s*(?:제\s*)?(\d+)\s*조(?:\s*의\s*(\d+))?/g;
+  const rangePattern = /제\s*(\d+)\s*(?:조(?:\s*의\s*(\d+))?)?\s*(?:[~-]|부터)\s*(?:제\s*)?(\d+)\s*조(?:\s*의\s*(\d+))?(?:\s*까지)?/g;
 
   for (const match of text.matchAll(rangePattern)) {
     const startArticle = Number(match[1]);
@@ -64,6 +64,45 @@ export function parseArticleReferences(value) {
   }
 
   return references;
+}
+
+export function parseArticleCitationDetails(value) {
+  if (typeof value !== "string" || !value.trim()) return [];
+
+  const normalized = value.replace(/[∼～〜–—]/g, "~");
+  const details = [];
+  const seen = new Set();
+  const tokenPattern = /제\s*(\d+)\s*조(?:\s*의\s*(\d+))?(?:\s*\([^)]*\))?(?:\s*제\s*(\d+)\s*항)?(?:\s*제\s*(\d+)\s*호)?(?:\s*([가-힣])\s*목)?/g;
+
+  for (const match of normalized.matchAll(tokenPattern)) {
+    const article = articleLabel(match[1], match[2]);
+    const paragraph = match[3] ? Number(match[3]) : null;
+    const item = match[4] ? Number(match[4]) : null;
+    const subitem = match[5] ?? null;
+    const citation = [
+      article,
+      paragraph ? `제${paragraph}항` : "",
+      item ? `제${item}호` : "",
+      subitem ? `${subitem}목` : "",
+    ].join("");
+    const key = `${article}:${paragraph ?? ""}:${item ?? ""}:${subitem ?? ""}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    details.push({ article, citation, paragraph, item, subitem });
+  }
+
+  for (const article of parseArticleReferences(normalized)) {
+    if (details.some((detail) => detail.article === article)) continue;
+    details.push({
+      article,
+      citation: article,
+      paragraph: null,
+      item: null,
+      subitem: null,
+    });
+  }
+
+  return details;
 }
 
 export function parseArticleHeaders(value) {
