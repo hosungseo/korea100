@@ -1,0 +1,487 @@
+{
+ "slug": "administrative-fine-pre-notice-opinion",
+ "name": "과태료 사전통지·의견제출",
+ "oneLiner": "과태료 부과 전 사전통지와 의견·자료 제출의 신청·검토·결정·사후관리 경로",
+ "type": "사전통지·의견형",
+ "priority": 501,
+ "category": "민원·권리구제·참여",
+ "whyFirst": "과태료 부과 전 사전통지와 의견·자료 제출에서 당사자와 행정청, 법원·관계기관 사이의 기한·문서·분기 지점을 한 화면에 정리했다.",
+ "asOfDate": "2026-07-15",
+ "status": "full",
+ "canvas": {
+  "purpose": "행정청이 과태료를 부과하기 전에 당사자에게 통지하고, 의견과 자료를 반영해 부과 여부·내용을 확정하는 절차",
+  "stakeholders": "당사자·고용주등, 부과 행정청, 관계기관·자료제공기관",
+  "legalBasis": [
+   {
+    "law": "질서위반행위규제법",
+    "articles": "제6조, 제7조, 제14조, 제15조, 제16조, 제17조, 제19조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "당사자·고용주등",
+    "role": "사전통지를 받고 의견·자료를 제출하거나 부과서 수령 후 납부·불복을 선택"
+   },
+   {
+    "name": "부과 행정청",
+    "role": "부과 전제와 기간을 확인하고 사전통지·의견검토·부과서 발급을 담당"
+   },
+   {
+    "name": "관계기관·자료제공기관",
+    "role": "부과 판단에 필요한 사실·자료를 제공"
+   }
+  ],
+  "procedure": [
+   "부과 전제·기간 확인",
+   "사전통지",
+   "의견·자료 제출",
+   "의견 검토",
+   "부과 또는 변경",
+   "결과 수령·불복 선택"
+  ],
+  "moneyFlow": "사전통지 단계에는 납부가 발생하지 않는다. 과태료 금액·감경·납부기한은 부과서와 개별 근거법령을 기준으로 확인한다.",
+  "docsFlow": "조사·부과 전제 기록 → 사전통지서 → 의견서·증빙자료 → 검토기록 → 과태료 부과서 또는 변경·미부과 통지 → 납부·이의제기 자료",
+  "bottlenecks": [
+   "위반행위의 종료일과 제척기간 계산",
+   "사전통지의 송달·의견제출 기한 관리",
+   "제출 의견이 부과 판단에 반영됐는지 확인",
+   "개별 근거법령의 과태료 조항과 공통절차 연결"
+  ],
+  "reformPoints": [
+   "통지서에 위반근거·기간·제출창구를 함께 표시",
+   "의견·증빙자료와 검토결과를 사건번호로 연결",
+   "미제출·미부과·변경 사유를 결과통지에서 분리",
+   "부과서 수령 뒤 자진납부·이의제기 경로를 바로 안내"
+  ]
+ },
+ "related": [
+  "교통과태료·범칙금 부과",
+  "주택임대차 신고",
+  "행정처분 사전통지·의견제출·청문"
+ ],
+ "fieldVerification": [
+  "개별 근거법령의 과태료 부과권자",
+  "사전통지서 필수 기재사항과 송달 방식",
+  "기관별 의견제출 접수창구·보정 안내",
+  "미제출·미부과·변경 결과 통지서 양식"
+ ],
+ "process": {
+  "institution_name": "과태료 사전통지·의견제출",
+  "law_name": "질서위반행위규제법",
+  "lanes": [
+   "당사자·고용주등",
+   "부과 행정청"
+  ],
+  "stages": [
+   "G0 위반·기간",
+   "G1 사전통지",
+   "G2 의견·자료",
+   "G3 부과·통지",
+   "G4 종료·불복"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "질서위반행위·종료일 확인",
+    "lane": "부과 행정청",
+    "stage": "G0 위반·기간",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "부과 행정청",
+    "action": "위반행위의 성립과 고의·과실, 행위가 종료된 시점을 확인한다.",
+    "input_documents": [],
+    "output_documents": [
+     "조사·부과 전제 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제6조",
+      "text": "질서위반행위규제법 제6조에 따른 질서위반행위·종료일 확인"
+     },
+     {
+      "law": "질서위반행위규제법",
+      "article": "제7조",
+      "text": "질서위반행위규제법 제7조에 따른 질서위반행위·종료일 확인"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "과태료 산정·시효·제척기간 검토",
+    "lane": "부과 행정청",
+    "stage": "G0 위반·기간",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "부과 행정청",
+    "action": "과태료 산정 기준과 부과·징수 시효, 제척기간을 검토한다.",
+    "input_documents": [],
+    "output_documents": [
+     "기간·산정 검토표"
+    ],
+    "deadline": null,
+    "blocker": "행위 종료일·개별 근거법령에 따라 기간 계산이 달라질 수 있음",
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제14조",
+      "text": "질서위반행위규제법 제14조에 따른 과태료 산정·시효·제척기간 검토"
+     },
+     {
+      "law": "질서위반행위규제법",
+      "article": "제15조",
+      "text": "질서위반행위규제법 제15조에 따른 과태료 산정·시효·제척기간 검토"
+     },
+     {
+      "law": "질서위반행위규제법",
+      "article": "제19조",
+      "text": "질서위반행위규제법 제19조에 따른 과태료 산정·시효·제척기간 검토"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "사전통지 작성·발송",
+    "lane": "부과 행정청",
+    "stage": "G1 사전통지",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "부과 행정청",
+    "action": "과태료를 부과하려는 사유와 의견제출 기한을 적어 당사자에게 미리 통지한다.",
+    "input_documents": [],
+    "output_documents": [
+     "사전통지서"
+    ],
+    "deadline": "의견 제출 기간은 10일 이상",
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제16조",
+      "text": "질서위반행위규제법 제16조에 따른 사전통지 작성·발송"
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "사전통지 수령·제출기간 확인",
+    "lane": "당사자·고용주등",
+    "stage": "G1 사전통지",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "당사자·고용주등",
+    "action": "사전통지의 위반사실·금액·제출기한과 제출방법을 확인한다.",
+    "input_documents": [
+     "사전통지서"
+    ],
+    "output_documents": [
+     "송달·수령 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제16조",
+      "text": "질서위반행위규제법 제16조에 따른 사전통지 수령·제출기간 확인"
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "의견·자료 제출",
+    "lane": "당사자·고용주등",
+    "stage": "G2 의견·자료",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "당사자·고용주등",
+    "action": "의견 제출 기한 안에 사실관계와 필요한 증빙자료를 행정청에 제출한다.",
+    "input_documents": [
+     "사전통지서"
+    ],
+    "output_documents": [
+     "의견서·증빙자료"
+    ],
+    "deadline": "사전통지서가 정한 기간(10일 이상)",
+    "blocker": "기한 내 제출이 없으면 의견이 없는 것으로 처리될 수 있음",
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제16조",
+      "text": "질서위반행위규제법 제16조에 따른 의견·자료 제출"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "제출 의견·자료 검토",
+    "lane": "부과 행정청",
+    "stage": "G2 의견·자료",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "부과 행정청",
+    "action": "제출된 의견과 자료를 검토하고 사실·법률상 이유가 있는지 판단한다.",
+    "input_documents": [
+     "의견서·증빙자료"
+    ],
+    "output_documents": [
+     "의견 검토기록"
+    ],
+    "deadline": null,
+    "blocker": "자료 부족·사실관계 다툼·개별 근거법령 확인",
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제16조",
+      "text": "질서위반행위규제법 제16조에 따른 제출 의견·자료 검토"
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "제출 의견의 상당한 이유 판단",
+    "lane": "부과 행정청",
+    "stage": "G2 의견·자료",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "부과 행정청",
+    "action": "제출된 의견에 상당한 이유가 있는지 결정한다.",
+    "input_documents": [
+     "의견 검토기록"
+    ],
+    "output_documents": [
+     "부과 판단 기록"
+    ],
+    "deadline": null,
+    "blocker": "이유 인정 여부에 따라 미부과·내용변경 또는 부과로 분기",
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제16조",
+      "text": "질서위반행위규제법 제16조에 따른 제출 의견의 상당한 이유 판단"
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "미부과 또는 통지 내용 변경 통지",
+    "lane": "부과 행정청",
+    "stage": "G3 부과·통지",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "부과 행정청",
+    "action": "상당한 이유가 있으면 과태료를 부과하지 않거나 사전통지 내용을 변경하고 결과를 알린다.",
+    "input_documents": [
+     "부과 판단 기록"
+    ],
+    "output_documents": [
+     "미부과·변경 결과통지"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제16조",
+      "text": "질서위반행위규제법 제16조에 따른 미부과 또는 통지 내용 변경 통지"
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "과태료 부과서 작성·통지",
+    "lane": "부과 행정청",
+    "stage": "G3 부과·통지",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "부과 행정청",
+    "action": "의견 제출 절차를 마친 뒤 질서위반행위와 금액을 명시한 서면으로 과태료를 부과한다.",
+    "input_documents": [
+     "부과 판단 기록"
+    ],
+    "output_documents": [
+     "과태료 부과서"
+    ],
+    "deadline": "부과서에 기재된 납부기한",
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제17조",
+      "text": "질서위반행위규제법 제17조에 따른 과태료 부과서 작성·통지"
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "결과 수령·납부 또는 이의제기 선택",
+    "lane": "당사자·고용주등",
+    "stage": "G4 종료·불복",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "당사자·고용주등",
+    "action": "미부과·변경 통지 또는 과태료 부과서를 확인하고 자진납부·납부·이의제기 경로를 선택한다.",
+    "input_documents": [
+     "미부과·변경 결과통지",
+     "과태료 부과서"
+    ],
+    "output_documents": [
+     "수령 확인·납부 또는 이의제기 자료"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.95,
+    "legal_basis": [
+     {
+      "law": "질서위반행위규제법",
+      "article": "제17조",
+      "text": "질서위반행위규제법 제17조에 따른 결과 수령·납부 또는 이의제기 선택"
+     },
+     {
+      "law": "질서위반행위규제법",
+      "article": "제20조",
+      "text": "질서위반행위규제법 제20조에 따른 결과 수령·납부 또는 이의제기 선택"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P03",
+    "target": "P04",
+    "type": "message",
+    "label": "사전통지서"
+   },
+   {
+    "id": "E03",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M02",
+    "source": "P05",
+    "target": "P06",
+    "type": "message",
+    "label": "의견서·증빙자료"
+   },
+   {
+    "id": "E04",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": "상당한 이유 있음"
+   },
+   {
+    "id": "E06",
+    "source": "P07",
+    "target": "P09",
+    "type": "sequence",
+    "label": "상당한 이유 없음"
+   },
+   {
+    "id": "E07",
+    "source": "P04",
+    "target": "P09",
+    "type": "sequence",
+    "label": "기한 내 의견 없음"
+   },
+   {
+    "id": "M03",
+    "source": "P08",
+    "target": "P10",
+    "type": "message",
+    "label": "변경·미부과 통지"
+   },
+   {
+    "id": "M04",
+    "source": "P09",
+    "target": "P10",
+    "type": "message",
+    "label": "과태료 부과서"
+   }
+  ],
+  "warnings": [
+   "이 구조도는 질서위반행위규제법의 공통 절차를 업무 단위로 재구성했다. 실제 과태료 부과의 위반근거·부과권자·금액·서식은 개별 법률·시행령·조례와 행정청의 최신 통지서를 별도로 확인해야 한다.",
+   "사전통지 의견제출은 10일 이상, 이의제기는 부과 통지를 받은 날부터 60일 이내, 법원 통보는 이의제기를 받은 날부터 14일 이내, 약식재판 이의신청은 고지일부터 7일 이내라는 법정 기간을 통지서·송달일과 함께 계산해야 한다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-15",
+  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 21건 가운데 21건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "notes": [
+   "질서위반행위규제법은 국가법령정보센터 현행 본문 2021년 1월 1일 시행본(MST 224847)을 기준으로 했다.",
+   "개별 과태료의 부과권자·위반행위·금액·감경기준·서식은 각 근거 법령과 대통령령·조례를 추가로 확인해야 한다."
+  ],
+  "sources": [
+   {
+    "law": "질서위반행위규제법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "질서위반행위규제법",
+    "lawId": "010592",
+    "mst": "224847",
+    "promulgatedOn": "2020-12-29",
+    "effectiveOn": "2021-01-01",
+    "officialUrl": "https://law.go.kr/법령/질서위반행위규제법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-15",
+   "method": "현행 법령 조문 일괄조회 및 행정규칙 전문조회",
+   "citationEntries": 15,
+   "explicitCitationEntries": 15,
+   "articleReferences": 21,
+   "verifiedReferences": 21,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}
