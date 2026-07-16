@@ -24,6 +24,7 @@ import {
   SwimlaneNodeCard,
   stageStatus,
 } from "./SwimlaneBoard";
+import { ARROW_HEAD, EDGE_TYPE_COLORS } from "@/lib/edge-style.mjs";
 
 interface PortraitEdgePath {
   edge: ProcessEdge;
@@ -274,7 +275,7 @@ export default function PortraitProcessBoard({
                     title={pageTitle}
                     onClick={() => scrollToLanePage(pageIndex)}
                   >
-                    {groupIndex + 1}–{pageEnd}
+                    행위자 {groupIndex + 1}–{pageEnd}
                   </button>
                 );
               })}
@@ -516,15 +517,15 @@ function PortraitArrowMarker({ id, color }: { id: string; color: string }) {
   return (
     <marker
       id={id}
-      markerWidth={14}
-      markerHeight={11}
-      refX={12}
-      refY={5.5}
+      markerWidth={ARROW_HEAD.width}
+      markerHeight={ARROW_HEAD.height}
+      refX={ARROW_HEAD.refX}
+      refY={ARROW_HEAD.refY}
       orient="auto"
       markerUnits="userSpaceOnUse"
     >
       <path
-        d="M1,1 L13,5.5 L1,10 Z"
+        d={ARROW_HEAD.d}
         fill={color}
         stroke="#ffffff"
         strokeWidth={1}
@@ -910,9 +911,9 @@ function fallbackGroups(lanes: string[]): ProcessLaneGroup[] {
 }
 
 function edgeColor(type: ProcessEdge["type"]) {
-  if (type === "loop") return "#2563eb";
-  if (type === "message") return "#0d8a63";
-  return "#55685e";
+  if (type === "loop") return EDGE_TYPE_COLORS.loop;
+  if (type === "message") return EDGE_TYPE_COLORS.message;
+  return EDGE_TYPE_COLORS.sequence;
 }
 
 function edgeDash(type: ProcessEdge["type"]) {

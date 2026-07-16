@@ -3,6 +3,7 @@
 import { useId, useLayoutEffect, useMemo, useRef, useState } from "react";
 import type { ProcessEdge, ProcessModel, ProcessNode } from "@/lib/types";
 import { NODE_STATUS_META, nodeStatusAriaLabel } from "@/lib/node-status";
+import { ARROW_HEAD, EDGE_TYPE_COLORS, EDGE_END_INSET } from "@/lib/edge-style.mjs";
 
 type EdgeKind = "sequence" | "message" | "loop";
 
@@ -176,9 +177,9 @@ function FullProcessGrid({
             aria-hidden="true"
           >
             <defs>
-              <ArrowMarker id={`${markerPrefix}-sequence`} color={EDGE_COLOR.sequence} />
-              <ArrowMarker id={`${markerPrefix}-message`} color={EDGE_COLOR.message} />
-              <ArrowMarker id={`${markerPrefix}-loop`} color={EDGE_COLOR.loop} />
+              <ArrowMarker id={`${markerPrefix}-sequence`} color={EDGE_TYPE_COLORS.sequence} />
+              <ArrowMarker id={`${markerPrefix}-message`} color={EDGE_TYPE_COLORS.message} />
+              <ArrowMarker id={`${markerPrefix}-loop`} color={EDGE_TYPE_COLORS.loop} />
               <ArrowMarker id={`${markerPrefix}-selected`} color="#0f9f72" />
               <ArrowMarker id={`${markerPrefix}-selected-loop`} color="#1d4ed8" />
             </defs>
@@ -368,15 +369,21 @@ function ArrowMarker({ id, color }: { id: string; color: string }) {
   return (
     <marker
       id={id}
-      viewBox="0 0 10 10"
-      refX="8.5"
-      refY="5"
-      markerWidth="8"
-      markerHeight="8"
+      viewBox={`0 0 ${ARROW_HEAD.width} ${ARROW_HEAD.height}`}
+      refX={ARROW_HEAD.refX}
+      refY={ARROW_HEAD.refY}
+      markerWidth={ARROW_HEAD.width}
+      markerHeight={ARROW_HEAD.height}
       markerUnits="userSpaceOnUse"
       orient="auto-start-reverse"
     >
-      <path d="M 0 0 L 10 5 L 0 10 z" fill={color} />
+      <path
+        d={ARROW_HEAD.d}
+        fill={color}
+        stroke={ARROW_HEAD.outline}
+        strokeWidth={ARROW_HEAD.outlineWidth}
+        strokeLinejoin="round"
+      />
     </marker>
   );
 }
@@ -449,8 +456,8 @@ function measureEdges(
     if (vertical) {
       const down = target.top > source.bottom;
       const points = down
-        ? [[target.centerX, source.bottom], [target.centerX, target.top - 4]]
-        : [[target.centerX, source.top], [target.centerX, target.bottom + 4]];
+        ? [[target.centerX, source.bottom], [target.centerX, target.top - EDGE_END_INSET]]
+        : [[target.centerX, source.top], [target.centerX, target.bottom + EDGE_END_INSET]];
       return { edge, path: roundedPath(points, 8) };
     }
 
@@ -472,15 +479,15 @@ function measureEdges(
     let points: number[][];
     if (direction === "same") {
       const channelX = nudge(Math.max(source.right, target.right) + 14);
-      points = [[source.right, sourceY], [channelX, sourceY], [channelX, targetY], [target.right + 4, targetY]];
+      points = [[source.right, sourceY], [channelX, sourceY], [channelX, targetY], [target.right + EDGE_END_INSET, targetY]];
     } else if (direction === "forward") {
       const channelX = nudge(target.left - 10);
       points = Math.abs(sourceY - targetY) < 2
-        ? [[source.right, sourceY], [target.left - 4, targetY]]
-        : [[source.right, sourceY], [channelX, sourceY], [channelX, targetY], [target.left - 4, targetY]];
+        ? [[source.right, sourceY], [target.left - EDGE_END_INSET, targetY]]
+        : [[source.right, sourceY], [channelX, sourceY], [channelX, targetY], [target.left - EDGE_END_INSET, targetY]];
     } else {
       const channelX = nudge(source.left - 10);
-      points = [[source.left, sourceY], [channelX, sourceY], [channelX, targetY], [target.right + 4, targetY]];
+      points = [[source.left, sourceY], [channelX, sourceY], [channelX, targetY], [target.right + EDGE_END_INSET, targetY]];
     }
     return { edge, path: roundedPath(points, 8) };
   });

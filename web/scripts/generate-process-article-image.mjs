@@ -6,6 +6,7 @@ import {
   buildProcessEdgeRouteSlots,
   buildProcessLaneGroups,
 } from "../src/lib/process-layout.mjs";
+import { arrowMarkerMarkup, EDGE_TYPE_COLORS } from "../src/lib/edge-style.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const webRoot = path.resolve(__dirname, "..");
@@ -297,9 +298,9 @@ function renderSvg(context) {
       <filter id="card-shadow" x="-20%" y="-25%" width="140%" height="160%">
         <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#12271e" flood-opacity="0.10"/>
       </filter>
-      ${arrowMarker("arrow-sequence", "#53675d")}
-      ${arrowMarker("arrow-message", "#0f8a65")}
-      ${arrowMarker("arrow-loop", "#3478db")}
+      ${arrowMarker("arrow-sequence", EDGE_TYPE_COLORS.sequence)}
+      ${arrowMarker("arrow-message", EDGE_TYPE_COLORS.message)}
+      ${arrowMarker("arrow-loop", EDGE_TYPE_COLORS.loop)}
       <style>
         text { font-family: "Apple SD Gothic Neo", "Noto Sans CJK KR", "Noto Sans KR", sans-serif; }
         .mono { font-family: "SFMono-Regular", "Menlo", monospace; }
@@ -318,9 +319,8 @@ function renderSvg(context) {
 }
 
 function arrowMarker(id, color) {
-  return `<marker id="${id}" markerWidth="17" markerHeight="13" refX="15" refY="6.5" orient="auto" markerUnits="userSpaceOnUse">
-    <path d="M1,1 L16,6.5 L1,12 Z" fill="${color}" stroke="#ffffff" stroke-width="1.3" stroke-linejoin="round"/>
-  </marker>`;
+  // 화살촉 규칙 단일 스펙 사용 — 고해상 이미지라 1.25배 확대
+  return arrowMarkerMarkup(id, color, 1.25);
 }
 
 function renderHeader({ institution, process }) {
@@ -444,10 +444,10 @@ function renderEdges(context) {
     }
     const style =
       edge.type === "loop"
-        ? { color: "#3478db", width: 4, dash: "10 8", marker: "arrow-loop" }
+        ? { color: EDGE_TYPE_COLORS.loop, width: 4, dash: "10 8", marker: "arrow-loop" }
         : edge.type === "message"
-          ? { color: "#0f8a65", width: 3.4, dash: "11 8", marker: "arrow-message" }
-          : { color: "#53675d", width: 3.4, dash: "", marker: "arrow-sequence" };
+          ? { color: EDGE_TYPE_COLORS.message, width: 3.4, dash: "11 8", marker: "arrow-message" }
+          : { color: EDGE_TYPE_COLORS.sequence, width: 3.4, dash: "", marker: "arrow-sequence" };
     const route = edgeRoute(edge, source, target, context);
     const dash = style.dash ? `stroke-dasharray="${style.dash}"` : "";
     paths.push(
@@ -943,7 +943,7 @@ function renderFooter({ process, groups }) {
     ${legendStatus(118, legendY - 14, "#35a77d", "선행")}
     ${legendStatus(216, legendY - 14, "#087452", "핵심")}
     ${legendStatus(314, legendY - 14, "#d9901a", "병목")}
-    ${legendStatus(412, legendY - 14, "#3478db", "회귀")}
+    ${legendStatus(412, legendY - 14, EDGE_TYPE_COLORS.loop, "회귀")}
     <line x1="548" y1="${legendY - 8}" x2="600" y2="${legendY - 8}" stroke="#53675d" stroke-width="4" marker-end="url(#arrow-sequence)"/>
     <text x="620" y="${legendY - 2}" font-size="15" fill="#526159">절차 순서</text>
     <line x1="760" y1="${legendY - 8}" x2="812" y2="${legendY - 8}" stroke="#0f8a65" stroke-width="4" stroke-dasharray="10 8" marker-end="url(#arrow-message)"/>

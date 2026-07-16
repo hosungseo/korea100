@@ -746,7 +746,7 @@
   .detailStats span {
     overflow: hidden;
     color: #87938d;
-    font-size: 7px;
+    font-size: 10px;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -837,5 +837,53 @@
 
   .canvasSection {
     padding: 0;
+  }
+}
+
+/* ── 모바일 UI 정책: 터치 타깃·긴 페이지 탐색 ── */
+.sectionJump {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  /* 상세 페이지가 세로로 매우 길어(9,000px+) 주요 섹션 점프 바를 둔다 */
+  .sectionJump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px 0 2px;
+  }
+
+  .sectionJump a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 8px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-surface);
+    color: var(--color-ink);
+    font-size: 12.5px;
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  /* 터치 타깃 확대: 관련 제도 칩, 법적 근거 링크 */
+  .relatedLinks {
+    gap: 8px;
+  }
+
+  .relatedLinks a,
+  .relatedLinks span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .legalRows a {
+    display: inline-block;
+    padding: 10px 0;
   }
 }

@@ -158,6 +158,18 @@ button:not(:disabled):active {
     transform var(--duration-press) var(--ease-out);
 }
 
+/* 모바일 터치 타깃 40px 이상 (모바일 UI 정책) */
+@media (max-width: 900px) {
+  .site-brand {
+    padding: 10px 0;
+  }
+
+  .site-footer a {
+    display: inline-block;
+    padding: 8px 0;
+  }
+}
+
 .site-header-cta {
   flex-shrink: 0;
   padding: 7px 13px;
@@ -1592,7 +1604,8 @@ button:not(:disabled):active {
   }
 
   .nav-link {
-    padding: 6px 7px;
+    /* 모바일 터치 타깃 40px 이상 (모바일 UI 정책) */
+    padding: 13px 9px;
     font-size: 13px;
   }
 
@@ -1689,7 +1702,7 @@ button:not(:disabled):active {
   }
 
   .law-map-heading time {
-    font-size: 8px;
+    font-size: 10px;
   }
 
   .law-flow-nodes {
@@ -1750,7 +1763,7 @@ button:not(:disabled):active {
 
   .law-flow-node-status {
     padding: 1px 5px;
-    font-size: 8px;
+    font-size: 10px;
   }
 
   .law-flow-node > p {
@@ -1789,7 +1802,7 @@ button:not(:disabled):active {
   }
 
   .law-verification-strip > div > span {
-    font-size: 8px;
+    font-size: 10px;
   }
 
   .law-verification-divider {
@@ -4199,8 +4212,9 @@ body:has(.og-card-page) > main {
 }
 
 .desktop-process-v2-cell {
+  /* z-index를 두면 스태킹 컨텍스트가 생겨 카드(z3)가 셀 안에 갇히고
+     연결선 SVG(z1)가 카드 위에 그려진다 — 선·화살표는 노드 뒤에 깔려야 한다 */
   position: relative;
-  z-index: 0;
   display: flex;
   min-width: 0;
   min-height: 70px;
@@ -4565,8 +4579,9 @@ body:has(.og-card-page) > main {
 
   .process-mobile-board .portrait-lane-pager button {
     min-width: 0;
-    min-height: 28px;
-    padding: 4px 6px;
+    /* 모바일 터치 타깃 40px 이상 (모바일 UI 정책) */
+    min-height: 40px;
+    padding: 8px 10px;
     border: 0;
     background: transparent;
     color: var(--color-muted);
@@ -4636,7 +4651,7 @@ body:has(.og-card-page) > main {
   }
 
   .process-mobile-board .portrait-group-header span {
-    font-size: 8px;
+    font-size: 10px;
   }
 
   .process-mobile-board .portrait-stage-label,
@@ -4677,7 +4692,7 @@ body:has(.og-card-page) > main {
 
   .process-mobile-board .process-legend-group > strong {
     margin-bottom: 4px;
-    font-size: 8px;
+    font-size: 10px;
   }
 
   .process-mobile-board .process-legend-items > span {

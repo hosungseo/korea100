@@ -70,7 +70,7 @@ export function VerificationMark({
         border: `1px solid ${inverse ? "rgba(255,255,255,.42)" : visual.border}`,
         background: inverse ? "rgba(255,255,255,.14)" : visual.background,
         color: inverse ? "#ffffff" : visual.color,
-        fontSize: compact ? 8.5 : 11,
+        fontSize: compact ? 10 : 11,
         fontWeight: 700,
         lineHeight: 1.2,
         whiteSpace: "nowrap",
@@ -102,8 +102,8 @@ export function ArticleLinkButtons({ result }: { result: NodeVerificationResult 
       {linked.map(({ basis, sources }, index) => {
         const { jo, hang } = parseArticleParts(basis.article ?? "");
         const source = sources[0];
-        const isStatute = (source.sourceType ?? "statute") === "statute";
-        const href = isStatute && jo ? `${source.officialUrl}/${jo}` : source.officialUrl;
+        const deepable = jo && /law\.go\.kr\/(법령|행정규칙)\//.test(source.officialUrl);
+        const href = deepable ? `${source.officialUrl.replace(/\/+$/, "")}/${jo}` : source.officialUrl;
         const label = jo ? `${jo}${hang ?? ""}` : "조문 확인";
         return (
           <a
