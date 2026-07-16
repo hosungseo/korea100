@@ -56,3 +56,19 @@
 - 최종 sources(registry/known-list 등재): 판로지원법(010998/284097), 판로지원법 시행령(011101/287311), 국가계약법 시행령(002652/285893), 중소기업제품 공공구매제도 운영요령(adminRuleId 30174 / serial 2100000237216 / 공포 2024-03-04).
 - 최종 unresolved(등재 없음): 판로지원법 시행규칙(부령, title-needs-confirmation), 중소기업기술개발제품 우선구매제도 운영 등에 관한 시행세칙(고시·지침, 식별자 확보했으나 등재 없음 → title-needs-confirmation).
 - 성능인증 업무 수행: 한국중소벤처기업유통원(공공구매종합정보망 SMPP) 운영. 적합성심사 7인 이내 위원회, 최고·최저 제외 평균 70점 이상 적합. 순서: 요건검토→수수료 납부→공개검증→적합성심사→공공기관 규격확인→공장심사→성능검사→인증서 발급(약 90일). 모두 운영정보 → fieldVerification.
+
+## 검증 지적 반영 수정 이력 (2026-07-16)
+
+검증 심사자 지적 6건에 대한 조치:
+
+1. [refuted, must-fix] 운영·위탁기관 명칭 오류 → **수정**. 2024-11-01 중진법 시행령 개정으로 '중소기업유통센터'가 '한국중소벤처기업유통원'으로 명칭 변경된 사실을 WebSearch로 재확인(뉴스1 '개명 성공한 中企유통센터, 내달 한국중기유통원으로', 나무위키·위키백과, SMPP 공식). JSON 전체 10곳(canvas.stakeholders, authorities[1].name, submittedDocuments[1].actor, process.lanes[1] 및 이를 참조하는 노드 P02·P06·P07·P08·P09·P12의 lane)의 '중소기업유통센터'를 '한국중소벤처기업유통원'으로 일괄 교체해 lane 정합성 유지. authorities[1].name에는 '(구 중소기업유통센터)' 병기.
+
+2. [schema-error, must-fix] manifest 항목 부재 → **수정**. docs/institutions-100-manifest.json에 {priority:70, slug:performance-certification-product, name:'성능인증제품 우선구매', type:'지정·판로', category:'지정·판로'} 추가. validate-data.mjs에서 본 slug 관련 'manifest 항목이 없습니다' 오류 해소 확인(잔여 오류는 동일 배치 타 파일 4건 및 배치 전체 priority 연속성 문제로 본 파일 범위 밖).
+
+3. [schema-error, should-fix] articleVerification 집계 → **수정**. negotiated-contract.json 관례(canvas legalBasis 엔트리 + process legal_basis 엔트리)로 재산정: citationEntries 17→23(canvas 6 + process 17), explicitCitationEntries 17→21(조번호 있는 canvas 4 + process 17; 행정규칙 2건은 조번호 없음), articleReferences 17→26(canvas 개별 조문 9 + process 17), uncheckableReferences 17→26. verified 0·missing 0 유지로 needs-review 통과(uncheckable≥1).
+
+4. [wording, should-fix] 행정규칙 2건 서술형 인용 → **fieldVerification로 이관(유지)**. 원문·조번호 미확보로 legalBasis[4]·[5]의 서술형 articles는 그대로 두되, '운영요령·시행세칙의 성능인증 심사·우선구매 지정 관련 인용 조번호 확정 필요' 항목을 fieldVerification에 추가. 통합 원문 대조 시 제N조 확정 예정.
+
+5. [unverifiable, should-fix] 심사 순서 단정 → **완화**. canvas.procedure의 '적합성심사→공장심사→성능검사' 단정 서술을 '함께 거친다(세부 순서와 공개검증 단계는 연도별 공고에 따른다)'로 완화하고, fieldVerification에 심사 단계·공개검증 순서의 연도별 공고 확인 항목 추가. process 노드 P03→P04→P05 선형 흐름은 고립 노드 방지를 위해 유지하되 순서 확정은 fieldVerification로 위임.
+
+6. [wording, should-fix] authorities[0] 우선구매 요구 권한 근거 누락 → **수정**. role 괄호 근거를 '(법 제14조·제15조·제17조)'에서 '(법 제13조·제14조·제15조·제17조)'로 수정해 우선구매 요구 권한의 근거(제13조 기술개발제품 등에 대한 우선구매)를 포함.

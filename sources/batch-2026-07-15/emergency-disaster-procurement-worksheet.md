@@ -44,3 +44,15 @@
 - 국가를 당사자로 하는 계약에 관한 법률 (법률): lawId 000695 / mst 283877 / 공포 2026-03-10 / 시행 2026-06-11
 - 국가를 당사자로 하는 계약에 관한 법률 시행령 (대통령령): lawId 002652 / mst 285893 / 공포 2026-05-19 / 시행 2026-06-03
 - (계약예규) 정부 입찰·계약 집행기준 (고시·지침, admin-rule): adminRuleId 34470 / adminRuleSerial 2100000276688 / 공포 2026-04-01
+
+## 수정 이력 (2026-07-16, 검증 심사 반영)
+
+검증 심사자 지적 3건 반영. 근거 원문은 negotiated-contract.json articleTexts(기계 대조 완료본) 재대조.
+
+1. [must-fix / schema-error] docs/institutions-100-manifest.json에 본 제도가 미등록이어서 validate-data.mjs "manifest 항목이 없습니다" 실패. → manifest 말미에 {priority:72, slug:emergency-disaster-procurement, name:재난·긴급 수의계약, type:발주, category:발주} 추가. JSON 본문의 name/type/priority/category와 정확히 일치시킴. (같은 배치 international-bidding, performance-certification-product도 동일 미등록 상태로 각 담당이 선행 등록 필요.)
+
+2. [should-fix / wording] S01 legal_basis 제30조제2항 요지가 "일정 요건의 수의계약은…"으로 일반화되어 긴급 수의에도 전자견적 의무가 적용되는 듯 읽히고 원문에 없는 표현("일정 요건의")이라 내용 대조 불일치 후보였다. → 원문 밀착으로 교체: "제26조제1항제5호가목에 따른 수의계약 중 추정가격이 2천만원(특정 소기업·소상공인 등과 계약을 체결하는 경우에는 5천만원)을 초과하는 수의계약의 경우에는 전자조달시스템을 이용하여 견적서를 제출하도록 해야 한다." 긴급 수의(제26조제1항제1호가목)는 이 의무 대상이 아님을 명확히 함. 긴급 수의 준용·실무 적용 경계는 S01 blocker와 fieldVerification #2에 그대로 유지.
+
+3. [should-fix / wording] P04·P09 legal_basis 제26조제1항 요지에 원문에 없는 의무 서술("판단과 근거를 갖추어야 한다"), 축약 서술("긴급 사유 등에 해당하는 계약을 수의계약으로 체결한다")이 섞여 대조 불일치 후보였다. → 둘 다 영 제26조제1항 원문("법 제7조제1항 단서에 따라… 천재지변, 감염병 예방 및 확산 방지, 긴급복구가 필요한 수해 등 비상재해 등 경쟁에 부칠 여유가 없거나 경쟁에 부쳐서는 계약의 목적을 달성하기 곤란하다고 판단되는 경우") 표현으로 교체. 사유서 작성·판단근거 구비 등 실무 관행은 P04 blocker 및 fieldVerification #3(사유서 서식·증빙 보존·결재 시점)에 그대로 유지(요지에는 원문 표현만).
+
+- 위 3건은 모두 legal_basis.text(요지) 문구 수정으로, 인용 조문(article)·인용 항목 수에는 변화가 없다. 따라서 verification.articleVerification 집계(citationEntries 15 = explicit 15, articleReferences 15 = verified 14 + missing 0 + uncheckable 1)와 sources/unresolved 커버리지는 그대로 유효(불변)하며 needs-review 통과 조건(uncheckable ≥ 1)도 충족.
