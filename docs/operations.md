@@ -110,7 +110,9 @@ npm run build
   npm run sync:sources -- --write         # 법령·행정규칙 공식 식별자(lawId/MST/일련번호) 연결
   npm run verify:articles -- --write      # 전 제도 조문 실존 기계 대조 → article-verified 승격
   node scripts/populate-article-texts.mjs # 인용 조문 현행 원문을 verification.articleTexts에 추출·저장(팝업 원문)
+  npm run verify:citation-content         # 요지↔원문 '내용' 기계 대조(bigram containment) → docs/citation-content-report.json
   ```
+  - 내용 대조의 배경·판정 기준·운영 방식(report-only → --strict 게이트 승격 계획)은 `docs/anti-hallucination-review.md` 참조.
   - **호스트 패치는 더 이상 불필요**: `korean-law-mcp@4.7.2`는 이미 `www.law.go.kr`을 호출한다(구버전은 `open.law.go.kr`을 써서 호스트 패치가 필요했으나 현재 버전은 불필요). `NODE_USE_ENV_PROXY=1`만 있으면 전역 설치본(`korean-law`/`korean-law-mcp`)이 프록시 환경에서 그대로 동작한다. 스크립트는 `KOREAN_LAW_CLI`로 CLI 경로를 지정하며 미지정 시 전역 `korean-law`를 쓰도록 유지한다.
   - 세션 내 실행이 불가능한 환경이면 GitHub Actions 러너 우회: `.github/workflows/law-verify.yml`을 `workflow_dispatch`로 실행 (mode=write, sync_sources, fetch_cache 입력 지원). 리포 시크릿 `LAW_OC` 우선.
 - **원문 캐시**: `sources/law-cache/`에 법령·계약예규·조달청 고시 전문 사본(33종+). 갱신: `node scripts/fetch-law-cache.mjs` (대상 목록: `sources/law-cache/law-list.json`). 주의: CLI 응답이 50,000자에서 잘리므로 대형 예규는 DRF API 직접 호출(`lawService.do?target=admrul&ID=<일련번호>&type=JSON`)로 전문을 받는다.
