@@ -91,6 +91,33 @@ function parseArticleParts(article: string): { jo: string | null; hang: string |
   return { jo, hang };
 }
 
+// 채번(라벨) 규칙: 법령명이 서로 다른 근거가 섞이므로 각 버튼·행에 법령 약칭을 붙인다.
+// 잘 알려진 약칭 맵 + "…시행령/…시행규칙" 접미 유지, 계약예규는 "(계약예규)" 접두 제거.
+const LAW_SHORT_NAMES: [RegExp, string][] = [
+  [/^국가를 당사자로 하는 계약에 관한 법률/, "국가계약법"],
+  [/^지방자치단체를 당사자로 하는 계약에 관한 법률/, "지방계약법"],
+  [/^조달사업에 관한 법률/, "조달사업법"],
+  [/^중소기업제품 구매촉진 및 판로지원에 관한 법률/, "판로지원법"],
+  [/^전자조달의 이용 및 촉진에 관한 법률/, "전자조달법"],
+  [/^하도급거래 공정화에 관한 법률/, "하도급법"],
+  [/^녹색제품 구매촉진에 관한 법률/, "녹색제품법"],
+  [/^중증장애인생산품 우선구매 특별법/, "중증장애인생산품법"],
+  [/^여성기업지원에 관한 법률/, "여성기업법"],
+  [/^장애인기업활동 촉진법/, "장애인기업법"],
+  [/^국고금 관리법/, "국고금관리법"],
+];
+
+export function shortLawName(law: string): string {
+  const cleaned = law.replace(/^\(계약예규\)\s*/, "");
+  for (const [pattern, short] of LAW_SHORT_NAMES) {
+    if (pattern.test(cleaned)) {
+      const suffix = cleaned.match(/시행령|시행규칙/)?.[0];
+      return suffix ? `${short} ${suffix}` : short;
+    }
+  }
+  return cleaned;
+}
+
 // 근거별 [조문 확인] 버튼 — 팝업 없이 법제처 해당 조문으로 바로 이동한다(운영자 지시, 2026-07-16).
 // 법령(statute)은 조 단위 딥링크(officialUrl/제N조), 행정규칙은 규칙 본문으로 이동.
 // 라벨은 조까지, 항이 있으면 항까지 표기한다.
@@ -120,6 +147,53 @@ export function ArticleLinkButtons({ result }: { result: NodeVerificationResult 
         );
       })}
     </span>
+  );
+}
+
+// 법적 근거 행 목록 — 요지 대신 **인용 단위의 원문**을 보여준다(운영자 지시, 2026-07-16).
+// 조 인용이면 조 원문, 항 인용이면 populate가 항 단위로 추출한 그 항의 원문만.
+// 라벨 채번: 법령 약칭 + 조(항) + (조문 제목). 원문 미수록이면 요약으로 대체하지 않고 안내만.
+export function ArticleBasisRows({ result }: { result: NodeVerificationResult }) {
+  if (result.bases.length === 0) return <p>명시 조문 확인 필요</p>;
+  return (
+    <div className="article-basis-rows">
+      {result.bases.map(({ basis, sources, sourceText, articleTitle }, index) => {
+        const { jo, hang } = parseArticleParts(basis.article ?? "");
+        const source = sources[0];
+        const deepable = source?.officialUrl && jo && /law\.go\.kr\/(법령|행정규칙)\//.test(source.officialUrl);
+        const href = deepable
+          ? `${source.officialUrl.replace(/\/+$/, "")}/${jo}`
+          : source?.officialUrl;
+        const label = `${shortLawName(basis.law)} ${jo ? `${jo}${hang ?? ""}` : basis.article}`;
+        return (
+          <article key={`${basis.law}:${basis.article}:${index}`} className="article-basis-row">
+            <div className="article-basis-head">
+              <strong>
+                {label}
+                {articleTitle ? <span className="article-basis-title">({articleTitle})</span> : null}
+              </strong>
+              {href && (
+                <a
+                  className="article-link-button"
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  title={`${basis.law} ${basis.article} — 국가법령정보센터 현행 원문으로 이동`}
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  원문 ↗
+                </a>
+              )}
+            </div>
+            {sourceText ? (
+              <pre className="article-basis-source">{sourceText}</pre>
+            ) : (
+              <p className="article-basis-nosource">원문 미수록 — [원문 ↗]에서 확인</p>
+            )}
+          </article>
+        );
+      })}
+    </div>
   );
 }
 
@@ -198,109 +272,29 @@ export function NodeLegalVerification({
         }}
       >
         <VerificationMark result={result} />
-        <ArticleLinkButtons result={result} />
         <p style={{ margin: 0, color: "#5d6b63", fontSize: 12, lineHeight: 1.55 }}>
           {result.detail}
         </p>
       </div>
 
-      {result.bases.map(({ basis, hasExplicitArticle, sources, unresolved }, index) => (
+      <ArticleBasisRows result={result} />
+
+      {result.bases.flatMap(({ unresolved }) => unresolved).map((item) => (
         <div
-          key={`${basis.law}:${basis.article}:${index}`}
+          key={`${item.reasonCode}:${item.law}`}
           style={{
-            padding: "11px 0",
-            borderTop: "1px solid #dde5df",
+            marginTop: 8,
+            paddingLeft: 9,
+            borderLeft: "2px solid #c78116",
+            color: "#7b5415",
+            fontSize: 11,
+            lineHeight: 1.55,
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-start",
-              gap: 10,
-              marginBottom: 3,
-            }}
-          >
-            <strong style={{ fontSize: 13, color: "#111714", lineHeight: 1.4 }}>
-              {basis.law}
-            </strong>
-            {hasExplicitArticle && result.state === "article-verified" && (
-              <span
-                style={{
-                  flexShrink: 0,
-                  color: "#087452",
-                  fontSize: 10,
-                  fontWeight: 700,
-                }}
-              >
-                조문 번호 확인
-              </span>
-            )}
-          </div>
-          <div
-            style={{
-              color: "#5d6b63",
-              fontFamily: "var(--font-mono)",
-              fontSize: 12,
-              lineHeight: 1.5,
-            }}
-          >
-            {basis.article}
-          </div>
-          {basis.text && (
-            <p style={{ margin: "5px 0 0", color: "#5d6b63", fontSize: 12, lineHeight: 1.55 }}>
-              {basis.text}
-            </p>
-          )}
-
-          {sources.map((source) => (
-            <a
-              key={source.officialUrl}
-              href={source.officialUrl}
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 4,
-                marginTop: 7,
-                marginRight: 10,
-                color: "#315a78",
-                fontSize: 11,
-                fontWeight: 650,
-                textDecoration: "none",
-              }}
-            >
-              공식 원문
-              {source.effectiveOn ? ` · 시행 ${source.effectiveOn}` : ""}
-              <span aria-hidden="true">↗</span>
-            </a>
-          ))}
-
-          {unresolved.map((item) => (
-            <div
-              key={`${item.reasonCode}:${item.law}`}
-              style={{
-                marginTop: 8,
-                paddingLeft: 9,
-                borderLeft: "2px solid #c78116",
-                color: "#7b5415",
-                fontSize: 11,
-                lineHeight: 1.55,
-              }}
-            >
-              <strong>{unresolvedReasonLabels[item.reasonCode]}</strong> · {item.law}
-              <span style={{ display: "block", color: "#5d6b63" }}>
-                다음 확인: {item.nextStep}
-              </span>
-            </div>
-          ))}
-
-          {verification && sources.length === 0 && unresolved.length === 0 && (
-            <div style={{ marginTop: 7, color: "#87938d", fontSize: 11 }}>
-              기관 단위 검증 결과에 포함 · 개별 출처명 직접 매칭 필요
-            </div>
-          )}
+          <strong>{unresolvedReasonLabels[item.reasonCode]}</strong> · {item.law}
+          <span style={{ display: "block", color: "#5d6b63" }}>
+            다음 확인: {item.nextStep}
+          </span>
         </div>
       ))}
 
