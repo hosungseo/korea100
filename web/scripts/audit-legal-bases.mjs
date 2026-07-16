@@ -56,7 +56,7 @@ function lcsLen(a, b) {
 const KIND_RANK = { "법률": 1, "대통령령": 2, "총리령·부령": 3, "부령": 3, "행정규칙": 4, "고시·지침": 4, "계약예규": 4, "조약": 0 };
 const HAS_ARTICLE = /제\s*\d+\s*조/;
 
-const findings = { deletedArticle: [], contentMismatch: [], noSourceText: [], descriptiveCitation: [], legalBasisOrder: [] };
+const findings = { deletedArticle: [], contentMismatch: [], noSourceText: [], descriptiveCitation: [], legalBasisOrder: [], emptyBasis: [] };
 let citations = 0;
 
 for (const f of fs.readdirSync(DATA).filter((x) => x.endsWith(".json")).sort()) {
@@ -64,6 +64,10 @@ for (const f of fs.readdirSync(DATA).filter((x) => x.endsWith(".json")).sort()) 
   const at = d.verification?.articleTexts ?? {};
 
   for (const node of d.process?.nodes ?? []) {
+    // F. 근거 미기재: 업무·게이트 노드인데 legal_basis가 비어 있음(시스템 노드는 제외)
+    if (!(node.legal_basis?.length) && node.type !== "system") {
+      findings.emptyBasis.push({ slug: d.slug, node: node.id, name: (node.name ?? "").slice(0, 40), type: node.type });
+    }
     for (const lb of node.legal_basis ?? []) {
       citations += 1;
       const ref = { slug: d.slug, node: node.id, law: lb.law, article: lb.article };
