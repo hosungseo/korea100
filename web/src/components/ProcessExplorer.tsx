@@ -11,7 +11,7 @@ import type {
 import { trackEvent } from "@/lib/client-events";
 import { NODE_STATUS_META } from "@/lib/node-status";
 import { getNodeVerification } from "@/lib/process-verification";
-import { VerificationMark } from "./ProcessVerification";
+import { ArticleLinkButtons, VerificationMark } from "./ProcessVerification";
 import DesktopProcessBoard from "./DesktopProcessBoard";
 import PortraitProcessBoard from "./PortraitProcessBoard";
 
@@ -170,9 +170,10 @@ function ProcessNodeInspector({
       </div>
 
       <div className="process-node-inspector-laws">
-        <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+        <span style={{ display: "inline-flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
           법적 근거
           <VerificationMark result={verificationResult} />
+          <ArticleLinkButtons result={verificationResult} />
         </span>
         <div>
           {(node.legal_basis ?? []).map((basis) => (

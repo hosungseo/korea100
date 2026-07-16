@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 import type { ProcessModel, ProcessNode, SourceVerification } from "@/lib/types";
 import {
   getNodeVerification,
@@ -56,148 +54,72 @@ export function VerificationMark({
   inverse?: boolean;
   compact?: boolean;
 }) {
-  const [open, setOpen] = useState(false);
   const visual = STATE_STYLE[result.state];
-  const canOpen = result.bases.length > 0;
   return (
-    <>
-      <span
-        data-verification-state={result.state}
-        title={canOpen ? `${result.detail} (눌러서 조문 보기)` : result.detail}
-        role={canOpen ? "button" : undefined}
-        tabIndex={canOpen ? 0 : undefined}
-        aria-haspopup={canOpen ? "dialog" : undefined}
-        onClick={
-          canOpen
-            ? (event) => {
-                event.stopPropagation();
-                event.preventDefault();
-                setOpen(true);
-              }
-            : undefined
-        }
-        onKeyDown={
-          canOpen
-            ? (event) => {
-                if (event.key === "Enter" || event.key === " ") {
-                  event.stopPropagation();
-                  event.preventDefault();
-                  setOpen(true);
-                }
-              }
-            : undefined
-        }
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: 3,
-          maxWidth: "100%",
-          minHeight: compact ? 16 : 20,
-          padding: compact ? "1px 5px" : "2px 7px",
-          borderRadius: 4,
-          border: `1px solid ${inverse ? "rgba(255,255,255,.42)" : visual.border}`,
-          background: inverse ? "rgba(255,255,255,.14)" : visual.background,
-          color: inverse ? "#ffffff" : visual.color,
-          fontSize: compact ? 8.5 : 11,
-          fontWeight: 700,
-          lineHeight: 1.2,
-          whiteSpace: "nowrap",
-          cursor: canOpen ? "pointer" : undefined,
-        }}
-      >
-        <span aria-hidden="true" style={{ flexShrink: 0 }}>
-          {visual.icon}
-        </span>
-        <span style={{ overflow: "hidden", textOverflow: "ellipsis" }}>{result.label}</span>
+    <span
+      data-verification-state={result.state}
+      title={result.detail}
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 3,
+        maxWidth: "100%",
+        minHeight: compact ? 16 : 20,
+        padding: compact ? "1px 5px" : "2px 7px",
+        borderRadius: 4,
+        border: `1px solid ${inverse ? "rgba(255,255,255,.42)" : visual.border}`,
+        background: inverse ? "rgba(255,255,255,.14)" : visual.background,
+        color: inverse ? "#ffffff" : visual.color,
+        fontSize: compact ? 8.5 : 11,
+        fontWeight: 700,
+        lineHeight: 1.2,
+        whiteSpace: "nowrap",
+      }}
+    >
+      <span aria-hidden="true" style={{ flexShrink: 0 }}>
+        {visual.icon}
       </span>
-      {open && canOpen && (
-        <ArticlePopover result={result} onClose={() => setOpen(false)} />
-      )}
-    </>
+      <span style={{ overflow: "hidden", textOverflow: "ellipsis" }}>{result.label}</span>
+    </span>
   );
 }
 
-function ArticlePopover({
-  result,
-  onClose,
-}: {
-  result: NodeVerificationResult;
-  onClose: () => void;
-}) {
-  useEffect(() => {
-    function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") onClose();
-    }
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [onClose]);
+// 인용에서 조(제N조/제N조의M)와 항(제M항)을 추출해 표시·링크에 쓴다.
+function parseArticleParts(article: string): { jo: string | null; hang: string | null } {
+  const jo = article.match(/제\s*\d+\s*조(?:의\s*\d+)?/)?.[0]?.replace(/\s+/g, "") ?? null;
+  const hang = article.match(/제\s*\d+\s*항/)?.[0]?.replace(/\s+/g, "") ?? null;
+  return { jo, hang };
+}
 
-  const visual = STATE_STYLE[result.state];
-  return createPortal(
-    <div
-      className="article-popover-backdrop"
-      onClick={(event) => {
-        event.stopPropagation();
-        onClose();
-      }}
-    >
-      <section
-        className="article-popover"
-        role="dialog"
-        aria-modal="true"
-        aria-label="인용 조문 근거"
-        onClick={(event) => event.stopPropagation()}
-      >
-        <header className="article-popover-head">
-          <span style={{ color: visual.color }}>
-            {visual.icon} {result.label}
-          </span>
-          <button type="button" onClick={onClose} aria-label="닫기">
-            ×
-          </button>
-        </header>
-        <p className="article-popover-detail">{result.detail}</p>
-        <div className="article-popover-list">
-          {result.bases.map(({ basis, sources, sourceText, articleTitle, effectiveOn }, index) => (
-            <article key={`${basis.law}:${basis.article}:${index}`}>
-              <strong>{basis.law}</strong>
-              <span className="article-popover-article">
-                {basis.article}
-                {articleTitle ? ` (${articleTitle})` : ""}
-              </span>
-              {sourceText ? (
-                <pre className="article-popover-source">{sourceText}</pre>
-              ) : (
-                <p className="article-popover-nosource">
-                  이 조문의 현행 원문은 아직 수록되지 않았습니다. 아래 근거법령 바로가기로 국가법령정보센터 원문을 확인하세요.
-                </p>
-              )}
-              {(effectiveOn || result.checkedAt) && (
-                <p className="article-popover-dates">
-                  {effectiveOn ? `현행 시행일 ${effectiveOn}` : ""}
-                  {effectiveOn && result.checkedAt ? " · " : ""}
-                  {result.checkedAt ? `원문 확인일 ${result.checkedAt}` : ""}
-                </p>
-              )}
-              {sources[0]?.officialUrl && (
-                <a
-                  className="article-popover-cta"
-                  href={sources[0].officialUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  근거법령 바로가기 ↗
-                </a>
-              )}
-            </article>
-          ))}
-        </div>
-        <footer className="article-popover-foot">
-          조문 원문은 국가법령정보센터 현행 원문의 확인일 기준 사본입니다. 최신 개정 여부는 근거법령 바로가기로 확인하세요.
-        </footer>
-      </section>
-    </div>,
-    document.body,
+// 근거별 [조문 확인] 버튼 — 팝업 없이 법제처 해당 조문으로 바로 이동한다(운영자 지시, 2026-07-16).
+// 법령(statute)은 조 단위 딥링크(officialUrl/제N조), 행정규칙은 규칙 본문으로 이동.
+// 라벨은 조까지, 항이 있으면 항까지 표기한다.
+export function ArticleLinkButtons({ result }: { result: NodeVerificationResult }) {
+  const linked = result.bases.filter(({ sources }) => sources[0]?.officialUrl);
+  if (linked.length === 0) return null;
+  return (
+    <span className="article-link-buttons">
+      {linked.map(({ basis, sources }, index) => {
+        const { jo, hang } = parseArticleParts(basis.article ?? "");
+        const source = sources[0];
+        const isStatute = (source.sourceType ?? "statute") === "statute";
+        const href = isStatute && jo ? `${source.officialUrl}/${jo}` : source.officialUrl;
+        const label = jo ? `${jo}${hang ?? ""}` : "조문 확인";
+        return (
+          <a
+            key={`${basis.law}:${basis.article}:${index}`}
+            className="article-link-button"
+            href={href}
+            target="_blank"
+            rel="noreferrer"
+            title={`${basis.law} ${basis.article} — 국가법령정보센터 현행 원문으로 이동`}
+            onClick={(event) => event.stopPropagation()}
+          >
+            ✓ {label} ↗
+          </a>
+        );
+      })}
+    </span>
   );
 }
 
@@ -276,6 +198,7 @@ export function NodeLegalVerification({
         }}
       >
         <VerificationMark result={result} />
+        <ArticleLinkButtons result={result} />
         <p style={{ margin: 0, color: "#5d6b63", fontSize: 12, lineHeight: 1.55 }}>
           {result.detail}
         </p>
