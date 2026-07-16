@@ -3881,6 +3881,9 @@ body:has(.og-card-page) > main {
 }
 
 .portrait-stage-cell .swimlane-node-card {
+  /* 화살표(.portrait-process-edges, z-index:2)가 항상 노드 '뒤'로 가도록 —
+     position 없는 z-index는 무효라 화살표가 노드 위로 그려지던 문제 수정 */
+  position: relative;
   z-index: 4;
 }
 
