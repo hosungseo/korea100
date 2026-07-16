@@ -275,7 +275,7 @@ export default function PortraitProcessBoard({
                     title={pageTitle}
                     onClick={() => scrollToLanePage(pageIndex)}
                   >
-                    {groupIndex + 1}–{pageEnd}
+                    행위자 {groupIndex + 1}–{pageEnd}
                   </button>
                 );
               })}

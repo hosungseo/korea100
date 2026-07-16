@@ -79,6 +79,13 @@ export default function InstitutionDetailView({
         </div>
       </section>
 
+      <nav className={styles.sectionJump} aria-label="페이지 내 섹션 바로가기">
+        <a href="#process">업무구조도</a>
+        <a href="#institution-one-page">한 장 캔버스</a>
+        <a href="#institution-cautions">유의사항</a>
+        <a href="#institution-field-checks">현장 검증</a>
+      </nav>
+
       <section id="process" className={styles.processSection}>
         <header className={styles.sectionHeading}>
           <div>
@@ -211,7 +218,7 @@ function OnePageCanvas({
           </div>
         </CanvasBlock>
 
-        <CanvasBlock title="유의사항" tone="warning">
+        <CanvasBlock title="유의사항" tone="warning" id="institution-cautions">
           <ul>
             {canvas.bottlenecks.map((item) => <li key={item}>{item}</li>)}
           </ul>
@@ -230,7 +237,7 @@ function OnePageCanvas({
           </div>
         </CanvasBlock>
 
-        <CanvasBlock title="현장 검증 필요" tone="field" size="wide">
+        <CanvasBlock title="현장 검증 필요" tone="field" size="wide" id="institution-field-checks">
           <ul className={styles.twoColumnList}>
             {institution.fieldVerification.map((item) => <li key={item}>{item}</li>)}
           </ul>
@@ -244,15 +251,17 @@ function CanvasBlock({
   title,
   tone,
   size,
+  id,
   children,
 }: {
   title: string;
   tone?: "warning" | "accent" | "field";
   size?: "wide";
+  id?: string;
   children: React.ReactNode;
 }) {
   return (
-    <article className={styles.canvasBlock} data-tone={tone} data-size={size}>
+    <article id={id} className={styles.canvasBlock} data-tone={tone} data-size={size}>
       <h3>{title}</h3>
       {children}
     </article>

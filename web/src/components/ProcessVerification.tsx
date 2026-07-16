@@ -98,7 +98,7 @@ export function VerificationMark({
           border: `1px solid ${inverse ? "rgba(255,255,255,.42)" : visual.border}`,
           background: inverse ? "rgba(255,255,255,.14)" : visual.background,
           color: inverse ? "#ffffff" : visual.color,
-          fontSize: compact ? 8.5 : 11,
+          fontSize: compact ? 10 : 11,
           fontWeight: 700,
           lineHeight: 1.2,
           whiteSpace: "nowrap",
