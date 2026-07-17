@@ -3,7 +3,7 @@
 import { useId, useLayoutEffect, useMemo, useRef, useState } from "react";
 import type { ProcessEdge, ProcessModel, ProcessNode } from "@/lib/types";
 import { NODE_STATUS_META, nodeStatusAriaLabel } from "@/lib/node-status";
-import { ARROW_HEAD, EDGE_TYPE_COLORS, EDGE_END_INSET } from "@/lib/edge-style.mjs";
+import { ARROW_HEAD, EDGE_TYPE_COLORS, EDGE_LINE_COLORS, EDGE_END_INSET } from "@/lib/edge-style.mjs";
 
 type EdgeKind = "sequence" | "message" | "loop";
 
@@ -27,11 +27,7 @@ interface NodeRect {
   centerY: number;
 }
 
-const EDGE_COLOR: Record<EdgeKind, string> = {
-  sequence: "#c3cfc8",
-  message: "#aab6af",
-  loop: "#2563eb",
-};
+const EDGE_COLOR: Record<EdgeKind, string> = EDGE_LINE_COLORS;
 
 export default function DesktopProcessBoard({
   process,

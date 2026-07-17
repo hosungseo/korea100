@@ -10,6 +10,13 @@ export const EDGE_TYPE_COLORS = {
   loop: "#2563eb",
 };
 
+// 보드 연결선 색(PC 기준 통일). 선은 옅게 깔리고 방향은 촉(EDGE_TYPE_COLORS)이 말한다.
+export const EDGE_LINE_COLORS = {
+  sequence: "#c3cfc8",
+  message: "#aab6af",
+  loop: "#2563eb",
+};
+
 // 유형별 대시 패턴(보드 기준). sequence는 실선.
 export const EDGE_DASH = {
   sequence: "",

@@ -24,7 +24,7 @@ import {
   SwimlaneNodeCard,
   stageStatus,
 } from "./SwimlaneBoard";
-import { ARROW_HEAD, EDGE_TYPE_COLORS } from "@/lib/edge-style.mjs";
+import { ARROW_HEAD, EDGE_TYPE_COLORS, EDGE_LINE_COLORS, EDGE_DASH } from "@/lib/edge-style.mjs";
 
 interface PortraitEdgePath {
   edge: ProcessEdge;
@@ -93,6 +93,7 @@ export default function PortraitProcessBoard({
   const [actorStrip, setActorStrip] = useState<
     { id: string; title: string; left: number; width: number }[]
   >([]);
+  const [showActorSticky, setShowActorSticky] = useState(false);
   const [edgePaths, setEdgePaths] = useState<PortraitEdgePath[]>([]);
   const [svgSize, setSvgSize] = useState({ width: 0, height: 0 });
   const boardRef = useRef<HTMLDivElement>(null);
@@ -146,8 +147,21 @@ export default function PortraitProcessBoard({
       setActorStrip(next);
     };
     measure();
+    const onScroll = () => {
+      const first = groupHeaderRefs.current.values().next().value as
+        | HTMLElement
+        | undefined;
+      if (!first) return;
+      // 원본 헤더가 사이트 헤더(52px) 아래로 완전히 지나갔을 때만 클론 표시
+      setShowActorSticky(first.getBoundingClientRect().bottom < 52);
+    };
+    onScroll();
     window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("resize", measure);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, [groups]);
 
   const handleNodeClick = useCallback(
@@ -308,15 +322,37 @@ export default function PortraitProcessBoard({
           </nav>
         )}
 
-        {actorStrip.length > 0 && (
+        {showActorSticky && actorStrip.length > 0 && (
           <div className="portrait-actor-sticky" aria-hidden="true">
-            <div className="portrait-actor-sticky-corner">행위자 →</div>
+            {/* 원본 행위자 헤더 셀의 클론 — 같은 클래스·같은 내용으로 고정 표시 */}
+            <div
+              className="portrait-corner-cell"
+              style={{ width: stageLabelWidth, flexShrink: 0 }}
+            >
+              <strong>{embedded ? "게이트" : "단계 ↓"}</strong>
+              <span>{embedded ? "↓" : "행위자 묶음 →"}</span>
+            </div>
             <div className="portrait-actor-sticky-track">
-              {actorStrip.map((g) => (
-                <span key={g.id} style={{ left: g.left - boardScrollLeft, width: g.width }}>
-                  {g.title}
-                </span>
-              ))}
+              {actorStrip.map((g) => {
+                const group = groups.find((x) => x.id === g.id);
+                if (!group) return null;
+                return (
+                  <div
+                    key={g.id}
+                    className="portrait-group-header"
+                    style={
+                      {
+                        left: g.left - stageLabelWidth - boardScrollLeft,
+                        width: g.width,
+                        "--portrait-group-accent": group.accent,
+                      } as React.CSSProperties
+                    }
+                  >
+                    <strong>{group.title}</strong>
+                    <span title={group.lanes.join(" · ")}>{group.lanes.join(" · ")}</span>
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}
@@ -364,11 +400,8 @@ export default function PortraitProcessBoard({
                     ? connectedEdgeIds.has(edge.id)
                     : false;
                   const dimmed = hoveredNodeId !== null && !highlighted;
-                  const strokeWidth = highlighted
-                    ? 3
-                    : edge.type === "loop"
-                      ? 2.5
-                      : 2.2;
+                  // 선 굵기 PC(1.15/1.8)와 통일
+                  const strokeWidth = highlighted ? 1.8 : 1.15;
                   return (
                     <g
                       key={edge.id}
@@ -378,7 +411,7 @@ export default function PortraitProcessBoard({
                         d={path}
                         fill="none"
                         stroke="#ffffff"
-                        strokeWidth={strokeWidth + 3.2}
+                        strokeWidth={strokeWidth + 2.8}
                         strokeDasharray={edgeDash(edge.type)}
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -463,6 +496,7 @@ export default function PortraitProcessBoard({
                         const selected = activeNode?.id === node.id;
                         return (
                           <SwimlaneNodeCard
+                            variant="grid"
                             key={node.id}
                             node={node}
                             verification={verification}
@@ -911,15 +945,15 @@ function fallbackGroups(lanes: string[]): ProcessLaneGroup[] {
 }
 
 function edgeColor(type: ProcessEdge["type"]) {
-  if (type === "loop") return EDGE_TYPE_COLORS.loop;
-  if (type === "message") return EDGE_TYPE_COLORS.message;
-  return EDGE_TYPE_COLORS.sequence;
+  // 선 색은 PC(데스크톱 v2)와 동일한 공유 팔레트 — 방향 강조는 화살촉이 담당
+  if (type === "loop") return EDGE_LINE_COLORS.loop;
+  if (type === "message") return EDGE_LINE_COLORS.message;
+  return EDGE_LINE_COLORS.sequence;
 }
 
 function edgeDash(type: ProcessEdge["type"]) {
-  if (type === "message") return "7 5";
-  if (type === "loop") return "6 4";
-  return undefined;
+  // 대시 패턴도 PC와 동일(공유 스펙)
+  return EDGE_DASH[type] || undefined;
 }
 
 function round(value: number) {

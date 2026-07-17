@@ -4,6 +4,12 @@ export const EDGE_TYPE_COLORS: {
   loop: string;
 };
 
+export const EDGE_LINE_COLORS: {
+  sequence: string;
+  message: string;
+  loop: string;
+};
+
 export const EDGE_DASH: {
   sequence: string;
   message: string;

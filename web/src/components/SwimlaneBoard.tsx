@@ -230,6 +230,7 @@ export function SwimlaneNodeCard({
   onHover,
   onLeave,
   setRef,
+  variant = "default",
 }: {
   node: ProcessNode;
   verification?: SourceVerification;
@@ -239,6 +240,7 @@ export function SwimlaneNodeCard({
   onHover: () => void;
   onLeave: () => void;
   setRef: (el: HTMLElement | null) => void;
+  variant?: "default" | "grid";
 }) {
   const c = ss(node.status);
   const isCurrent = node.status === "current";
@@ -246,6 +248,58 @@ export function SwimlaneNodeCard({
   const isLoop = node.status === "loop";
   const isRisk = node.status === "risk";
   const verificationResult = getNodeVerification(node, verification);
+
+  // PC(데스크톱 v2) 표기법과 통일한 간결형 카드 — id·이름·상태배지·조문확인 칩만.
+  // 행위자는 열 헤더(틀고정), 법령·기한 상세는 카드 탭 시 노드 상세에서(PC와 동일 동선).
+  if (variant === "grid") {
+    const statusBadge = isCurrent ? "핵심" : isRisk ? "유의" : isLoop ? "회귀" : null;
+    return (
+      <button
+        className="swimlane-node-card swimlane-node-card--grid"
+        ref={setRef as React.Ref<HTMLButtonElement>}
+        data-node-id={node.id}
+        data-status={node.status}
+        onClick={() => onClick(node)}
+        onMouseEnter={onHover}
+        onMouseLeave={onLeave}
+        aria-label={[node.name, c.label, verificationResult.label]
+          .filter(Boolean)
+          .join(" — ")}
+        style={{
+          background: c.bg,
+          borderColor: c.border,
+          opacity: dimmed ? 0.28 : 1,
+          boxShadow: highlighted ? "0 4px 16px rgba(11,20,16,.12)" : "none",
+        } as React.CSSProperties}
+      >
+        <span className="swimlane-node-card--grid-top">
+          <span className="mono" style={{ color: c.sub }}>{node.id}</span>
+          {isGateway && <span style={{ color: c.sub, fontSize: 10 }}>◇</span>}
+          {statusBadge && (
+            <em style={{ color: isCurrent ? "#dff5eb" : c.sub }}>{statusBadge}</em>
+          )}
+        </span>
+        <span className="swimlane-node-card--grid-name" style={{ color: c.ink }}>
+          {node.name}
+        </span>
+        <span className="swimlane-node-card--grid-foot">
+          <VerificationMark
+            result={verificationResult}
+            inverse={isCurrent}
+            compact
+            onActivate={() => {
+              onClick(node);
+              window.setTimeout(() => {
+                document
+                  .querySelector(".process-node-inspector-laws")
+                  ?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }, 80);
+            }}
+          />
+        </span>
+      </button>
+    );
+  }
 
   return (
     <button

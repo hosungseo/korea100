@@ -4977,50 +4977,85 @@ body:has(.og-card-page) > main {
   color: #5d6b63;
 }
 
-/* ── 행위자 헤더 틀고정 스트립 (모바일 세로 보드) ──
-   overflow-x 컨테이너가 sticky 기준을 가로채므로 스크롤 밖에서
-   헤더 실측 위치와 동기화해 표시한다 */
+/* ── 행위자 헤더 틀고정 (모바일 세로 보드) ──
+   overflow-x 컨테이너가 sticky 기준을 가로채므로, 원본 헤더 셀과 동일한
+   클래스·내용의 클론을 스크롤 밖에서 고정하고 가로 스크롤에 동기화한다.
+   원본 행이 화면 위로 벗어났을 때만 표시(중복 노출 방지) */
 .portrait-actor-sticky {
   position: sticky;
   top: 52px; /* .site-header 높이 */
   z-index: 9;
   display: flex;
   overflow: hidden;
-  border-bottom: 2px solid var(--color-border);
-  background: #f6f9f7;
+  box-shadow: 0 2px 6px rgba(11, 20, 16, 0.08);
 }
 
-.portrait-actor-sticky-corner {
+.portrait-actor-sticky .portrait-corner-cell {
+  position: relative;
   z-index: 1;
-  display: flex;
-  min-width: 74px;
-  align-items: center;
-  padding: 8px 10px;
-  border-right: 2px solid var(--color-border);
-  background: #f6f9f7;
-  color: var(--color-faint);
-  font-size: 10px;
-  font-weight: 700;
+  min-height: 0;
+  padding: 9px 13px;
 }
 
 .portrait-actor-sticky-track {
   position: relative;
-  min-height: 34px;
+  min-height: 58px;
   flex: 1;
+  background: #f6f9f7;
 }
 
-.portrait-actor-sticky-track span {
+.portrait-actor-sticky .portrait-group-header {
   position: absolute;
   top: 0;
   bottom: 0;
+  min-height: 0;
+  padding: 12px 15px 8px;
+}
+
+/* ── PC(데스크톱 v2) 표기법과 통일한 모바일 간결 카드 ── */
+.swimlane-node-card--grid {
   display: flex;
-  overflow: hidden;
+  width: 100%;
+  max-width: 148px;
+  min-height: 76px;
+  flex-direction: column;
+  gap: 4px;
+  padding: 7px 9px 8px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 0;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  text-align: left;
+}
+
+.swimlane-node-card--grid-top {
+  display: flex;
   align-items: center;
-  padding: 0 12px;
-  border-right: 1px solid var(--color-border);
-  color: var(--color-ink);
+  gap: 4px;
+  font-size: 9.5px;
+  letter-spacing: 0.03em;
+}
+
+.swimlane-node-card--grid-top em {
+  margin-left: auto;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 750;
+}
+
+.swimlane-node-card--grid-name {
+  overflow: hidden;
+  display: -webkit-box;
   font-size: 11.5px;
-  font-weight: 700;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-weight: 650;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.swimlane-node-card--grid-foot {
+  display: flex;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 3px;
 }
