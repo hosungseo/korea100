@@ -60,6 +60,26 @@ export default function CompareTray({ selected, onRemove }: CompareTrayProps) {
   );
 }
 
+function trapFocus(event: KeyboardEvent, container: HTMLElement | null) {
+  if (!container) return;
+  const focusable = Array.from(
+    container.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )
+  ).filter((element) => element.getClientRects().length > 0);
+  if (focusable.length === 0) return;
+  const first = focusable[0];
+  const last = focusable.at(-1) ?? first;
+  const active = document.activeElement;
+  if (event.shiftKey && (active === first || !container.contains(active))) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && (active === last || !container.contains(active))) {
+    event.preventDefault();
+    first.focus();
+  }
+}
+
 function CompareDialog({
   selected,
   onClose,
@@ -68,18 +88,27 @@ function CompareDialog({
   onClose: () => void;
 }) {
   const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    const previousFocus = document.activeElement as HTMLElement | null;
     closeRef.current?.focus();
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const handleKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
+      if (event.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (event.key === "Tab") {
+        trapFocus(event, dialogRef.current);
+      }
     };
     window.addEventListener("keydown", handleKey);
     return () => {
       window.removeEventListener("keydown", handleKey);
       document.body.style.overflow = previousOverflow;
+      previousFocus?.focus();
     };
   }, [onClose]);
 
@@ -107,6 +136,7 @@ function CompareDialog({
   return (
     <div className={styles.compareBackdrop} role="presentation" onMouseDown={onClose}>
       <section
+        ref={dialogRef}
         className={styles.compareDialog}
         role="dialog"
         aria-modal="true"

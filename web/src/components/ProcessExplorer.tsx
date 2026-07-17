@@ -189,7 +189,7 @@ function statusMeta(status: ProcessNode["status"]) {
   const meta = {
     done: { label: "완료", color: "#5d6b63" },
     current: { label: "현재", color: "#087452" },
-    waiting: { label: "대기", color: "#87938d" },
+    waiting: { label: "대기", color: "#5d6b63" },
     risk: { label: "위험", color: "#c78116" },
     loop: { label: "회귀", color: "#c78116" },
   };
