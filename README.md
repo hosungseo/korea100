@@ -76,6 +76,7 @@ GitHub Pages로 서비스합니다. `main` 브랜치에 push되면 [`.github/wor
 - `/verification/`: 현장 검증 공개 대장
 - `/request/`: 메일 앱 기반 제도 제작 요청
 - `web/data/institutions/`: 제도별 정규화 JSON
+- `docs/user-guide.md`: 사용설명서 (사이트 사용법·검증 기술 쉬운 설명·접속 QR)
 - `docs/institutions-100-manifest.json`: 우선순위와 분류 manifest
 - `docs/data-contract.md`: 콘텐츠와 화면 데이터 계약 (korea100 승계)
 - `docs/operations.md`: 배포·운영 (korea100 승계)
