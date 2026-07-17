@@ -4976,3 +4976,51 @@ body:has(.og-card-page) > main {
   line-height: 1.55;
   color: #5d6b63;
 }
+
+/* ── 행위자 헤더 틀고정 스트립 (모바일 세로 보드) ──
+   overflow-x 컨테이너가 sticky 기준을 가로채므로 스크롤 밖에서
+   헤더 실측 위치와 동기화해 표시한다 */
+.portrait-actor-sticky {
+  position: sticky;
+  top: 52px; /* .site-header 높이 */
+  z-index: 9;
+  display: flex;
+  overflow: hidden;
+  border-bottom: 2px solid var(--color-border);
+  background: #f6f9f7;
+}
+
+.portrait-actor-sticky-corner {
+  z-index: 1;
+  display: flex;
+  min-width: 74px;
+  align-items: center;
+  padding: 8px 10px;
+  border-right: 2px solid var(--color-border);
+  background: #f6f9f7;
+  color: var(--color-faint);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.portrait-actor-sticky-track {
+  position: relative;
+  min-height: 34px;
+  flex: 1;
+}
+
+.portrait-actor-sticky-track span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  padding: 0 12px;
+  border-right: 1px solid var(--color-border);
+  color: var(--color-ink);
+  font-size: 11.5px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

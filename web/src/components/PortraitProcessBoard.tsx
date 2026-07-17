@@ -89,6 +89,10 @@ export default function PortraitProcessBoard({
   );
   const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
   const [activeLanePage, setActiveLanePage] = useState(0);
+  const [boardScrollLeft, setBoardScrollLeft] = useState(0);
+  const [actorStrip, setActorStrip] = useState<
+    { id: string; title: string; left: number; width: number }[]
+  >([]);
   const [edgePaths, setEdgePaths] = useState<PortraitEdgePath[]>([]);
   const [svgSize, setSvgSize] = useState({ width: 0, height: 0 });
   const boardRef = useRef<HTMLDivElement>(null);
@@ -126,6 +130,25 @@ export default function PortraitProcessBoard({
     const frame = window.requestAnimationFrame(computeEdges);
     return () => window.cancelAnimationFrame(frame);
   }, [computeEdges]);
+
+  // 행위자 헤더 틀고정용 측정: overflow-x 스크롤 컨테이너가 sticky 기준을
+  // 가로채 세로 sticky가 무력화되므로, 스크롤 밖 스티키 스트립을
+  // 헤더 실측 위치와 동기화해 렌더한다.
+  useEffect(() => {
+    const measure = () => {
+      const next = groups
+        .map((group) => {
+          const el = groupHeaderRefs.current.get(group.id);
+          if (!el) return null;
+          return { id: group.id, title: group.title, left: el.offsetLeft, width: el.offsetWidth };
+        })
+        .filter((v): v is { id: string; title: string; left: number; width: number } => v !== null);
+      setActorStrip(next);
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [groups]);
 
   const handleNodeClick = useCallback(
     (node: ProcessNode) => {
@@ -178,7 +201,9 @@ export default function PortraitProcessBoard({
 
   const handleBoardScroll = useCallback(() => {
     const scroller = boardScrollRef.current;
-    if (!scroller || lanePageStarts.length <= 1) return;
+    if (!scroller) return;
+    setBoardScrollLeft(scroller.scrollLeft);
+    if (lanePageStarts.length <= 1) return;
     const maxScroll = Math.max(0, scroller.scrollWidth - scroller.clientWidth);
     let nearestPage = 0;
     let nearestDistance = Number.POSITIVE_INFINITY;
@@ -283,6 +308,19 @@ export default function PortraitProcessBoard({
           </nav>
         )}
 
+        {actorStrip.length > 0 && (
+          <div className="portrait-actor-sticky" aria-hidden="true">
+            <div className="portrait-actor-sticky-corner">행위자 →</div>
+            <div className="portrait-actor-sticky-track">
+              {actorStrip.map((g) => (
+                <span key={g.id} style={{ left: g.left - boardScrollLeft, width: g.width }}>
+                  {g.title}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
         <div
           ref={boardScrollRef}
           className="portrait-process-scroll"
@@ -358,47 +396,9 @@ export default function PortraitProcessBoard({
                     </g>
                   );
                 })}
-                {edgePaths.map(({ edge, labelX, labelY }) => {
-                  if (!edge.label || labelX === undefined || labelY === undefined) {
-                    return null;
-                  }
-                  const color = edgeColor(edge.type);
-                  const highlighted = hoveredNodeId
-                    ? connectedEdgeIds.has(edge.id)
-                    : false;
-                  const dimmed = hoveredNodeId !== null && !highlighted;
-                  const labelWidth = Math.max(
-                    58,
-                    Array.from(edge.label).length * 7 + 16
-                  );
-                  return (
-                    <g
-                      key={`label-${edge.id}`}
-                      opacity={dimmed ? 0.12 : highlighted ? 1 : 0.96}
-                    >
-                      <rect
-                        x={labelX - labelWidth / 2}
-                        y={labelY - 9}
-                        width={labelWidth}
-                        height={19}
-                        rx={4}
-                        fill="#ffffff"
-                        stroke={color}
-                        strokeWidth={0.7}
-                      />
-                      <text
-                        x={labelX}
-                        y={labelY + 5}
-                        textAnchor="middle"
-                        fontSize={10}
-                        fontWeight={650}
-                        fill={color}
-                      >
-                        {edge.label}
-                      </text>
-                    </g>
-                  );
-                })}
+{/* 관계 라벨은 데스크톱 보드와 동일하게 렌더하지 않는다 —
+                    모바일 밀집 레이아웃에서 카드에 가려지고 가장자리에서 잘려
+                    오히려 혼란을 준다 (2026-07-17 운영자 결정) */}
               </svg>
             )}
 
