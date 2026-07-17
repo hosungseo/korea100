@@ -18,3 +18,12 @@
 | 3 | social-enterprise-preference | 사회적기업 제품 우선구매 지침(고용노동부) | 법제처 행정규칙 검색 미등록(2026-07-16 확인) | 2026-07-16 | 고용노동부 홈페이지 현행 지침 확인, 법제처 등재 여부 주기 재확인 | 미해결 |
 
 - 2026-07-16: 위 3건은 운영자 명시 지시("출처소스를 찾을 수 없으면 못 찾는다 기록하고 일단 배포")로 article-verified 상태로 배포함(v0.17.0). 검증 게이트·validate 규칙 자체는 엄격 기준을 유지하며, 이 예외는 본 대장으로 추적한다. 다음 통합 시 validate가 이 3건을 다시 지적하면 이 대장을 확인하라.
+
+## 진행 중 작업 재개 정보 (2026-07-17, 세션 한도로 중단)
+
+전 제도 법적 근거 전수 재검토(61개 중 **약 25개 완료 + 종심제 직접 정정**). 잔여 ~36개는 세션 한도(1:50am UTC 리셋)로 중단됨. 재개 방법: 아래 runId를 resumeFromRunId로 재실행하면 완료분은 캐시 재생된다(스크립트: scratchpad/legal-recheck-wf.js — 소멸 시 이 대장의 그룹 목록으로 재작성).
+- wf_48bd5f46-423 그룹1(debarment·direct-production·total-and-unit·procurement-request·contract-method·international-bidding — 종심제는 직접 정정 완료로 제외 가능)
+- wf_b8f1d7ff-a98 (inspection-and-acceptance·qualification-screening·innovation-product·social-enterprise·designated-competitive·innovation-trial / contract-termination·subcontract·stockpile·contract-dispute·bid-announcement·long-term)
+- wf_425e29fc-812 그룹2(bidder-registration·price-survey·government-furnished·quality-inspection·price-fluctuation·bid-protest)
+- wf_0e753137-34a 그룹1(invalid-bids·design-change·performance-certification·shopping-mall·excellent-product·procurement-contract-disclosure)
+- 완료 그룹들의 Fable 검증(verify) 단계도 한도로 대부분 미실행 — 재개 시 검증 단계부터 캐시 재생됨.

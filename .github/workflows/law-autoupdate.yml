@@ -1,0 +1,68 @@
+name: Law auto-update (weekly detect & machine-verify)
+
+# 법 개정 자동 반영 1단(결정적 부분): 매주 법제처 현행본을 다시 받아
+# 원문 캐시·조문 원문(articleTexts)·기계 검증을 갱신하고, 개정으로 생긴
+# 불일치(삭제조문·내용불일치·실존실패)를 리포트로 커밋한다.
+# 2단(AI 수정·검토·배포)은 CCR Routine이 주간 세션에서 이 리포트를 읽어 수행한다.
+# (docs/operations.md '법개정 자동 반영' 절 참조)
+
+on:
+  schedule:
+    - cron: "0 21 * * 0" # 매주 월요일 06:00 KST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: law-autoupdate
+  cancel-in-progress: false
+
+jobs:
+  autoupdate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    env:
+      LAW_OC: ${{ secrets.LAW_OC || 'wooseongkyun' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - name: Install korean-law CLI
+        run: npm install -g korean-law-mcp
+      - name: Refresh full-text law cache (개정본 수신)
+        run: node scripts/fetch-law-cache.mjs
+      - name: Re-verify article existence against 현행본
+        run: npm run verify:articles -- --write
+      - name: Re-extract article texts (팝업 원문 최신화)
+        env:
+          KOREAN_LAW_CLI: korean-law
+        run: node scripts/populate-article-texts.mjs
+      - name: Full audit (개정발 불일치 검출)
+        run: |
+          node scripts/audit-legal-bases.mjs
+          node scripts/verify-citation-content.mjs
+      - name: Freshness check (개정 이력 리포트)
+        run: npm run check:freshness || true
+      - name: Commit weekly update report
+        working-directory: .
+        run: |
+          git config user.name "law-autoupdate-bot"
+          git config user.email "actions@github.com"
+          git add sources/law-cache web/data docs
+          if git diff --cached --quiet; then
+            echo "개정 변화 없음"
+          else
+            git commit -m "chore(law-autoupdate): 주간 법제처 현행본 갱신 + 기계 재검증 리포트" \
+              -m "AI 검토·배포는 주간 Routine 세션이 docs/full-audit-report.json 기준으로 수행"
+            for i in 1 2 3 4 5; do
+              git pull --rebase origin ${{ github.ref_name }} && git push origin HEAD:${{ github.ref_name }} && break
+              echo "push retry $i"; sleep 3
+            done
+          fi

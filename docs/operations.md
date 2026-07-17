@@ -156,3 +156,11 @@ npm run build
 - **워크트리 빌드**: node_modules 심볼릭 링크는 Turbopack이 거부 — 워크트리마다 npm ci.
 - **stop-hook**: 커밋 안 된 변경이 있으면 세션이 커밋·푸시를 요구함. wip 커밋으로 대응.
 - **부처명**: 2026 조직개편으로 현행 원문은 `재정경제부`. 검색 결과의 `기획재정부`와 표기 차이는 오류가 아님(병기 관례).
+
+## 법개정 자동 반영 (2026-07-17 구축)
+
+매주 2단으로 자동 실행된다:
+1. **기계 단계 — GitHub Actions `law-autoupdate.yml`** (일 21:00 UTC = 월 06:00 KST): 법제처 현행본 재수신(fetch-law-cache) → 조문 실존 재검증(verify:articles --write) → 팝업 원문 재추출(populate-article-texts) → 전수감사(audit-legal-bases, verify:citation-content) → freshness 리포트. 변화가 있으면 자동 커밋(개정으로 생긴 불일치가 리포트·verification 상태에 드러남).
+2. **AI 단계 — CCR Routine `주간 법개정 반영`** (trig_01GGyLryWdqAL2zNKurgK28g, 월 00:00 UTC = 09:00 KST, 새 세션): 1단 리포트를 읽어 영향 제도를 Opus 수정→적대 검토→기계 게이트 재통과시킨 뒤 main 머지(=Pages 배포)·푸시 알림. 개정이 없으면 조용히 종료. 미해결 대장(unresolved-followup.md) 재탐색 포함.
+
+운영 전제: CCR 환경 변수에 `LAW_OC`가 설정되어 있어야 Routine 세션이 기계 게이트를 직접 재실행할 수 있다(없으면 Actions가 커밋한 검증 상태에 의존). Routine 관리: list_triggers / update_trigger / delete_trigger.
