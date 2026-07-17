@@ -56,12 +56,31 @@ function lcsLen(a, b) {
 const KIND_RANK = { "법률": 1, "대통령령": 2, "총리령·부령": 3, "부령": 3, "행정규칙": 4, "고시·지침": 4, "계약예규": 4, "조약": 0 };
 const HAS_ARTICLE = /제\s*\d+\s*조/;
 
-const findings = { deletedArticle: [], contentMismatch: [], noSourceText: [], descriptiveCitation: [], legalBasisOrder: [], emptyBasis: [] };
+const findings = { deletedArticle: [], contentMismatch: [], noSourceText: [], descriptiveCitation: [], legalBasisOrder: [], emptyBasis: [], articleReuse: [] };
 let citations = 0;
 
 for (const f of fs.readdirSync(DATA).filter((x) => x.endsWith(".json")).sort()) {
   const d = JSON.parse(fs.readFileSync(path.join(DATA, f), "utf8"));
   const at = d.verification?.articleTexts ?? {};
+  // G. 돌려쓰기(규칙 21-c): 같은 조문(법령+조 단위)을 3개 이상 노드가 인용 —
+  //    노드들이 서로 다른 항으로 분리 인용한 경우(항 집합이 전부 상이)는 정당으로 제외
+  const joUse = new Map(); // "법령::제N조" → [{node, article}]
+  for (const node of d.process?.nodes ?? []) {
+    for (const lb of node.legal_basis ?? []) {
+      const jo = (lb.article ?? "").match(/제\s*\d+\s*조(?:의\s*\d+)?/);
+      if (!jo) continue;
+      const key = `${lb.law}::${jo[0].replace(/\s+/g, "")}`;
+      if (!joUse.has(key)) joUse.set(key, []);
+      joUse.get(key).push({ node: node.id, article: lb.article });
+    }
+  }
+  for (const [key, uses] of joUse) {
+    if (uses.length < 3) continue;
+    const hangs = uses.map((u) => u.article.replace(/\s+/g, ""));
+    const allDistinctHang = new Set(hangs).size === uses.length && hangs.every((a) => /제\d+항|제\d+호/.test(a));
+    if (allDistinctHang) continue;
+    findings.articleReuse.push({ slug: d.slug, article: key, nodes: uses.map((u) => u.node) });
+  }
 
   for (const node of d.process?.nodes ?? []) {
     // F. 근거 미기재: 업무·게이트 노드인데 legal_basis가 비어 있음(시스템 노드는 제외)
