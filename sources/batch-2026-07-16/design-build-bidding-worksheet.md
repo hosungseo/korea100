@@ -45,3 +45,36 @@
 ## sources(레지스트리 연결) / unresolved
 - sources: 국가계약법(000695/283877), 시행령(002652/285893), 시행규칙(006590/282607), (계약예규)정부 입찰·계약 집행기준(34470/2100000276688) — 전부 legal-source-registry 수록.
 - unresolved: 건설기술 진흥법(title-needs-confirmation) — 중앙건설기술심의위원회 근거법이나 known-sources·레지스트리 미수록, 원문 식별자 미연결.
+
+## 검증 지적 반영 이력 (2026-07-17)
+
+검증 심사자 지적 4건 반영.
+
+1. [must-fix / refuted] 시행규칙 제81조 공고 주체 오귀속 수정.
+   - 지적: 프로세스 P04와 canvas.procedure[3], submittedDocuments가 "계약담당공무원(발주기관)이 규칙 제81조에 따라 일괄·대안입찰 대상공사를 신문·나라장터에 공고"한다고 서술했으나, 규칙 제81조(및 영 제80조제3항)의 대상공사 공고 주체는 국토교통부장관이다. 발주기관은 공고된 입찰방법에 따라 입찰을 실시하는 주체다.
+   - 재확인: WebSearch로 법제처 생활법령정보(easylaw.go.kr, 국가 공사계약자>대형공사계약 개관) 재조회 — "국토교통부장관은 … 중앙건설기술심의위원회의 심의를 거친 때에는 심의결과에 따라 일괄입찰 또는 대안입찰의 방법으로 집행할 대형공사 등을 신문 또는 국가종합전자조달시스템에 공고해야 한다(영 제80조제3항·규칙 제81조)"로 심사자 evidence와 일치 확인. korean-law MCP get_law_text(mst 282607/285893, 제6장)은 이번에도 [NOT_FOUND]로 본문 미회신(목차만 확인 가능). law-cache 시행규칙·시행령 캐시도 제6장 구간이 목차(조번호+조제목)만 수록.
+   - 조치: 심사자 제시 방법2 채택. P04를 발주기관 자신의 입찰공고 노드로 유지하되 근거를 규칙 제81조 → 시행령 제33조(입찰공고, 일반 입찰공고 규정, law-cache 시행령 목차 52행 조제목 확인)로 교체하고 규칙 제81조 인용을 내렸다. 노드명 "대상공사 입찰공고"→"입찰공고 게시", action을 "국토교통부장관이 공고한 일괄·대안입찰 대상공사에 대해 그 입찰방법으로 입찰공고를 전자조달시스템 등에 게시"로, output_documents "대상공사 입찰공고문"→"입찰공고문"으로 수정.
+   - canvas.procedure 4번째 항목을 "국토교통부장관이 심의결과에 따라 일괄·대안입찰로 집행할 대상공사를 신문 또는 나라장터에 공고하면, 발주기관이 그 입찰방법으로 입찰공고를 하고 입찰참가자격을 심사한다"로 고쳐 국토교통부장관 대상공사 공고와 발주기관 입찰공고를 분리 서술.
+   - submittedDocuments[0](계약담당공무원) "대상공사 입찰공고문(신문·나라장터)"→"입찰공고문(전자조달시스템 게시)"로 정합화.
+   - canvas.legalBasis[3] 시행규칙 제81조 항목은 유지(조제목 "대안입찰 및 일괄입찰 대상공사의 공고"는 목차 원문과 일치하며, procedure에서 국토교통부장관 공고로 정확히 귀속). 시행령·시행규칙 모두 sources에 이미 연결되어 있어 sources/unresolved 커버리지 변동 없음.
+
+2. [must-fix / schema-error] manifest 미등록으로 인한 빌드 검증 실패 해소.
+   - 지적: docs/institutions-100-manifest.json에 design-build-bidding 항목 부재로 validate-data.mjs가 "manifest 항목이 없습니다" 및 "JSON 파일 수 65개와 manifest 61개가 다릅니다"로 실패. 같은 배치 3건(contract-deliberation-committee, provisional-price-contract, other-contract-change-adjustment)도 동일 누락.
+   - 조치: 심사자 지적대로 4건을 manifest에 등록. 단 심사자 제안 priority(81/84/85/86 유지)는 validate-data.mjs의 priority 연속성 규칙(1..manifest.length 전수 존재, 라인 80~82)과 priority 일치 규칙(manifest priority == JSON priority, 라인 95)을 동시에 만족할 수 없어(81~86은 65 초과·62~65 결번 발생) 빌드가 여전히 실패한다. 따라서 배치 통합의 정상 절차대로 4건을 기존 61개에 이어지는 연속 슬롯 62~65로 재번호했다(분류 순서 준수: 발주 contract-deliberation-committee=62, 발주 provisional-price-contract=63, 입찰 design-build-bidding=64, 이행·대금 other-contract-change-adjustment=65). 각 JSON 최상위 priority 필드도 manifest와 일치하도록 함께 수정(85→64 등). JSON 내부 하드 규칙(current 노드 1개, 고립 노드 없음, enum, articleVerification 산식, 커버리지)은 priority 정수 변경과 무관하게 그대로 통과.
+   - 결과: validate-data.mjs 실패 9건→4건. 남은 4건은 이 배치와 무관한 기존 항목(international-bidding·social-enterprise-preference·stockpile-goods의 article-verified 상태 문제, field-verification-queue 총량 348/367)으로 본 지적 범위 밖.
+
+3. [should-fix / wording] 시행령 제85조의2 조제목 축약 수정.
+   - 지적: canvas.legalBasis[2]에 "제85조의2(실시설계적격자 또는 낙찰자 결정방법 등 선택)"로 앞부분 "일괄입찰 등의"가 누락.
+   - 근거: law-cache 시행령 목차 원문 126행 "제85조의2 일괄입찰 등의 실시설계적격자 또는 낙찰자 결정방법 등 선택" 직접 확인.
+   - 조치: "제85조의2(일괄입찰 등의 실시설계적격자 또는 낙찰자 결정방법 등 선택)"로 원문 조제목 복원. 조 토큰 수 불변.
+
+4. [should-fix / wording] 계약예규 집행기준 제10조의6·8·9 조제목 개별 병기.
+   - 지적: canvas.legalBasis[4]가 "제10조의6, 제10조의8, 제10조의9(일괄입찰·기본설계 기술제안입찰로 발주된 공사의 재공고 유찰 시 수의계약)"로 세 조를 묶어 서술형 설명을 마지막 조 조제목처럼 표기.
+   - 근거: law-cache 정부-입찰-계약-집행기준.md 원문 245/258/266행 조제목 직접 확인 — 제10조의6(일괄입찰 및 기본설계 기술제안입찰로 발주된 공사의 수의계약), 제10조의8(수의계약 절차), 제10조의9(예비계약의 체결).
+   - 조치: 각 조에 원문 조제목을 개별 병기하는 형태로 수정. 조 토큰 수(3개) 불변.
+
+## articleVerification 재집계 (수정 후)
+- citationEntries 24 = canvas.legalBasis 5항목 + process 노드 legal_basis 19항목 (불변).
+- explicitCitationEntries 23 = 조번호 명시 canvas 4항목 + 노드 19항목 (불변).
+- articleReferences 34 = canvas 조 토큰 15 + 노드 조 참조 19 (불변; P04의 조 참조가 규칙 제81조→영 제33조로 1:1 교체되어 총량 불변).
+- verifiedReferences 34 = 34+0+0 산식 유지. unresolved 1건(건설기술 진흥법) 유지로 needs-review 통과 조건(unresolved≥1) 충족.
