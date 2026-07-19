@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import crypto from "node:crypto";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import sharp from "sharp";
 import {
   buildBlockedRailNudge,
@@ -20,10 +20,10 @@ const legacyEiaPath = path.join(
   "public/exports/environmental-impact-assessment-process-map.png"
 );
 
-const WIDTH = 1800;
-const HEIGHT = 2400;
+export const WIDTH = 1800;
+export const HEIGHT = 2400;
 // Bump this when the SVG/layout renderer changes. Data-only changes then stay incremental.
-const RENDERER_VERSION = "portrait-process-v4";
+const RENDERER_VERSION = "portrait-process-v5";
 const forceRebuild = process.argv.includes("--all") || process.env.FORCE_PROCESS_IMAGE_REBUILD === "1";
 const GRID_LEFT = 38;
 const GRID_RIGHT = 1762;
@@ -148,65 +148,71 @@ function ordinanceInfo(node) {
   };
 }
 
-const files = (await fs.readdir(dataDir))
-  .filter((file) => file.endsWith(".json"))
-  .sort();
-const catalogManifest = JSON.parse(await fs.readFile(manifestPath, "utf8"));
-const categoryBySlug = new Map(
-  catalogManifest.map((entry) => [entry.slug, entry.category])
-);
-const previousGeneration = await readGenerationManifest();
-const currentGeneration = {
-  version: 1,
-  rendererVersion: RENDERER_VERSION,
-  width: WIDTH,
-  height: HEIGHT,
-  entries: {},
-};
+async function main() {
+  const files = (await fs.readdir(dataDir))
+    .filter((file) => file.endsWith(".json"))
+    .sort();
+  const catalogManifest = JSON.parse(await fs.readFile(manifestPath, "utf8"));
+  const categoryBySlug = new Map(
+    catalogManifest.map((entry) => [entry.slug, entry.category])
+  );
+  const previousGeneration = await readGenerationManifest();
+  const currentGeneration = {
+    version: 1,
+    rendererVersion: RENDERER_VERSION,
+    width: WIDTH,
+    height: HEIGHT,
+    entries: {},
+  };
 
-await fs.mkdir(outputDir, { recursive: true });
-const generated = [];
-const skipped = [];
-for (let index = 0; index < files.length; index += 4) {
-  const batch = files.slice(index, index + 4);
-  const results = await Promise.all(batch.map(processInstitutionImage));
-  for (const result of results) {
-    currentGeneration.entries[result.slug] = result.entry;
-    if (result.generated) generated.push(result);
-    else skipped.push(result);
+  await fs.mkdir(outputDir, { recursive: true });
+  const generated = [];
+  const skipped = [];
+  for (let index = 0; index < files.length; index += 4) {
+    const batch = files.slice(index, index + 4);
+    const results = await Promise.all(
+      batch.map((file) =>
+        processInstitutionImage(file, previousGeneration, categoryBySlug)
+      )
+    );
+    for (const result of results) {
+      currentGeneration.entries[result.slug] = result.entry;
+      if (result.generated) generated.push(result);
+      else skipped.push(result);
+    }
   }
-}
 
-if (files.length !== catalogManifest.length) {
-  throw new Error(
-    `기관 JSON 수 ${files.length}개와 manifest ${catalogManifest.length}개가 다릅니다`
+  if (files.length !== catalogManifest.length) {
+    throw new Error(
+      `기관 JSON 수 ${files.length}개와 manifest ${catalogManifest.length}개가 다릅니다`
+    );
+  }
+
+  await removeStaleProcessImages(new Set(Object.keys(currentGeneration.entries)));
+  await fs.writeFile(generationManifestPath, `${JSON.stringify(currentGeneration, null, 2)}\n`);
+
+  const eiaOutput = path.join(outputDir, "environmental-impact-assessment.png");
+  await fs.copyFile(eiaOutput, legacyEiaPath);
+  console.log(
+    `세로형 업무구조도 PNG 처리: 신규·변경 ${generated.length}개 · 재사용 ${skipped.length}개 · 전체 ${files.length}개 (${WIDTH}x${HEIGHT})`
+  );
+  console.log(
+    `텍스트 레이아웃 검증: 노드 ${generated.reduce((sum, item) => sum + item.audit.nodes, 0)}개 · ` +
+      `단계 ${generated.reduce((sum, item) => sum + item.audit.stages, 0)}개 · ` +
+      `행위자 묶음 ${generated.reduce((sum, item) => sum + item.audit.groups, 0)}개`
+  );
+  console.log(
+    `연결 라벨 충돌 검증: ${generated.reduce((sum, item) => sum + item.audit.edgeLabels, 0)}개 · ` +
+      `재배치 ${generated.reduce((sum, item) => sum + item.audit.adjustedEdgeLabels, 0)}개`
+  );
+  console.log(
+    `연결선 분리 검증: ${generated.reduce((sum, item) => sum + item.audit.edgeRoutes, 0)}개 · ` +
+      `장거리 우회 ${generated.reduce((sum, item) => sum + item.audit.longEdgeRoutes, 0)}개 · ` +
+      "공선 겹침 0개"
   );
 }
 
-await removeStaleProcessImages(new Set(Object.keys(currentGeneration.entries)));
-await fs.writeFile(generationManifestPath, `${JSON.stringify(currentGeneration, null, 2)}\n`);
-
-const eiaOutput = path.join(outputDir, "environmental-impact-assessment.png");
-await fs.copyFile(eiaOutput, legacyEiaPath);
-console.log(
-  `세로형 업무구조도 PNG 처리: 신규·변경 ${generated.length}개 · 재사용 ${skipped.length}개 · 전체 ${files.length}개 (${WIDTH}x${HEIGHT})`
-);
-console.log(
-  `텍스트 레이아웃 검증: 노드 ${generated.reduce((sum, item) => sum + item.audit.nodes, 0)}개 · ` +
-    `단계 ${generated.reduce((sum, item) => sum + item.audit.stages, 0)}개 · ` +
-    `행위자 묶음 ${generated.reduce((sum, item) => sum + item.audit.groups, 0)}개`
-);
-console.log(
-  `연결 라벨 충돌 검증: ${generated.reduce((sum, item) => sum + item.audit.edgeLabels, 0)}개 · ` +
-    `재배치 ${generated.reduce((sum, item) => sum + item.audit.adjustedEdgeLabels, 0)}개`
-);
-console.log(
-  `연결선 분리 검증: ${generated.reduce((sum, item) => sum + item.audit.edgeRoutes, 0)}개 · ` +
-    `장거리 우회 ${generated.reduce((sum, item) => sum + item.audit.longEdgeRoutes, 0)}개 · ` +
-    "공선 겹침 0개"
-);
-
-async function processInstitutionImage(file) {
+async function processInstitutionImage(file, previousGeneration, categoryBySlug) {
   const raw = await fs.readFile(path.join(dataDir, file), "utf8");
   const institution = JSON.parse(raw);
   institution.category ??= categoryBySlug.get(institution.slug) ?? "기타";
@@ -296,7 +302,7 @@ async function removeStaleProcessImages(currentSlugs) {
   );
 }
 
-function buildLayout(institution, process, groups) {
+export function buildLayout(institution, process, groups) {
   const groupWidth = (GRID_RIGHT - GROUP_X) / groups.length;
   const stageIndex = new Map(process.stages.map((stage, index) => [stage, index]));
   const groupByLane = new Map(
@@ -421,7 +427,7 @@ function calculateDesiredStageHeights(maxCellCounts, metrics) {
   );
 }
 
-function renderSvg(context) {
+export function renderSvg(context) {
   const { process } = context;
   return [
     `<svg xmlns="http://www.w3.org/2000/svg" width="${WIDTH}" height="${HEIGHT}" viewBox="0 0 ${WIDTH} ${HEIGHT}">`,
@@ -722,6 +728,20 @@ function verticalRouteBlocked(x, startY, endY, edge, context) {
   });
 }
 
+function horizontalRouteBlocked(y, startX, endX, edge, context) {
+  const left = Math.min(startX, endX);
+  const right = Math.max(startX, endX);
+  return [...context.nodeLayout.entries()].some(([nodeId, node]) => {
+    if (nodeId === edge.source || nodeId === edge.target) return false;
+    return (
+      y > node.y - 4 &&
+      y < node.y + node.height + 4 &&
+      right > node.x - 4 &&
+      left < node.x + node.width + 4
+    );
+  });
+}
+
 function validateEdgeRouteLayout(context) {
   const routes = context.process.edges.map((edge) => {
     const source = context.nodeLayout.get(edge.source);
@@ -772,7 +792,7 @@ function validateEdgeRouteLayout(context) {
   };
 }
 
-function orthogonalSegments(pathData) {
+export function orthogonalSegments(pathData) {
   const tokens = pathData.match(/[MHV]|-?\d+(?:\.\d+)?/g) ?? [];
   const segments = [];
   let x = 0;
@@ -817,7 +837,7 @@ function collinearOverlap(left, right) {
   return Math.max(0, Math.min(leftEnd, rightEnd) - Math.max(leftStart, rightStart));
 }
 
-function edgeRoute(edge, source, target, context) {
+export function edgeRoute(edge, source, target, context) {
   const sourceCenterX = source.x + source.width / 2;
   const sourceCenterY = source.y + source.height / 2;
   const targetCenterX = target.x + target.width / 2;
@@ -891,6 +911,24 @@ function edgeRoute(edge, source, target, context) {
     const channelX = forward
       ? target.x - 28 - slot.channel * EDGE_RAIL_GAP
       : targetRight + 28 + slot.channel * EDGE_RAIL_GAP;
+    // A straight in-row connector runs at card-center height and would pass
+    // behind any card sitting between source and target. When that happens,
+    // drop into the row's bottom gutter (below all cards) and cross there so
+    // the connection stays visible instead of hiding behind a card.
+    const directStartX = forward ? sourceRight : source.x;
+    const rowBottom =
+      context.stageTops[source.stageIndex] + context.stageHeights[source.stageIndex];
+    const gutterY = rowBottom - 14 - slot.channel * EDGE_CHANNEL_GAP;
+    const blocked =
+      horizontalRouteBlocked(sourceSideY, directStartX, channelX, edge, context) &&
+      gutterY > Math.max(sourceBottom, targetBottom) + 6;
+    if (blocked) {
+      return {
+        path: `M ${round(sourcePortX)} ${round(sourceBottom)} V ${round(gutterY)} H ${round(targetPortX)} V ${round(targetBottom + ARROW_CLEARANCE)}`,
+        labelX: (sourcePortX + targetPortX) / 2,
+        labelY: gutterY - 17,
+      };
+    }
     return {
       path: forward
         ? `M ${round(sourceRight)} ${round(sourceSideY)} H ${round(channelX)} V ${round(targetSideY)} H ${round(target.x - ARROW_CLEARANCE)}`
@@ -1021,9 +1059,46 @@ function edgeRoute(edge, source, target, context) {
   const railX = GROUP_X - 12 - slot.backRail * EDGE_RAIL_GAP;
   const targetRowBottom =
     context.stageTops[target.stageIndex] + context.stageHeights[target.stageIndex];
-  const channelY = targetRowBottom - 20 - slot.channel * EDGE_CHANNEL_GAP;
+
+  const rowClearY = (stageIndex, base) => {
+    if (base >= targetRowBottom) return base;
+    const cardsBottom = Math.max(
+      ...[...context.nodeLayout.values()]
+        .filter((node) => node.stageIndex === stageIndex)
+        .map((node) => node.y + node.height)
+    );
+    const clear = cardsBottom + 12 + slot.channel * EDGE_CHANNEL_GAP;
+    return clear;
+  };
+
+  // Source leaves leftward toward the return rail at card-center height, which
+  // hides behind any card to its left in the source row. When blocked, exit the
+  // card bottom into the source-row gutter first, then run left along it.
+  const sourceExitY =
+    sourceCenterY + sidePortOffset(slot.sourcePort, slot.sourceChannel);
+  const sourceRowBottom =
+    context.stageTops[source.stageIndex] + context.stageHeights[source.stageIndex];
+  // Use the backward-edge rail slot (deconflicted among return edges) and a 7px
+  // constant offset so this gutter band can never sit collinear with the
+  // same-stage gutter bands (which key off slot.channel at rowBottom-14).
+  const sourceGutterY = sourceRowBottom - 21 - slot.backRail * EDGE_CHANNEL_GAP;
+  const useSourceGutter =
+    horizontalRouteBlocked(sourceExitY, source.x, railX, edge, context) &&
+    sourceGutterY > sourceBottom + 6 &&
+    sourceGutterY < sourceRowBottom;
+  const sourceLead = useSourceGutter
+    ? `M ${round(sourcePortX)} ${round(sourceBottom)} V ${round(sourceGutterY)} H ${round(railX)}`
+    : `M ${round(source.x)} ${round(sourceExitY)} H ${round(railX)}`;
+
+  // Return rail crosses the target row along channelY; drop it below the target
+  // row's cards when it would otherwise slice through one.
+  let channelY = targetRowBottom - 20 - slot.channel * EDGE_CHANNEL_GAP;
+  if (horizontalRouteBlocked(channelY, railX, targetPortX, edge, context)) {
+    const clearY = rowClearY(target.stageIndex, channelY);
+    if (clearY < targetRowBottom) channelY = clearY;
+  }
   return {
-    path: `M ${round(source.x)} ${round(sourceCenterY + sidePortOffset(slot.sourcePort, slot.sourceChannel))} H ${round(railX)} V ${round(channelY)} H ${round(targetPortX)} V ${round(targetBottom + ARROW_CLEARANCE)}`,
+    path: `${sourceLead} V ${round(channelY)} H ${round(targetPortX)} V ${round(targetBottom + ARROW_CLEARANCE)}`,
     labelX: railX + 70,
     labelY: (sourceCenterY + channelY) / 2,
   };
@@ -1343,4 +1418,11 @@ function alternatingSlotOffset(index) {
 
 function sidePortOffset(port, channel) {
   return port * 13 + channel * 2.5;
+}
+
+// Run the full image generation only when executed directly, so the pure
+// geometry exports (buildLayout, edgeRoute, orthogonalSegments, renderSvg)
+// can be imported by audit/motion scripts without side effects.
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  await main();
 }
