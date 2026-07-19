@@ -1,0 +1,622 @@
+{
+ "slug": "copyright-registration",
+ "name": "저작권 등록",
+ "oneLiner": "저작자 정보·창작·공표 사실과 양도·질권 등 권리변동을 한국저작권위원회 등록부에 올려 추정력·대항력을 확보하는 절차",
+ "type": "등록·공시형",
+ "priority": 509,
+ "category": "문화·콘텐츠",
+ "whyFirst": "법정손해배상 청구 전제, 제3자 대항, 침해 분쟁에서 저작자·창작일 추정의 출발점이다.",
+ "asOfDate": "2026-07-19",
+ "status": "full",
+ "canvas": {
+  "purpose": "저작자에 관한 사항과 저작재산권 양도·배타적발행권·출판권·질권 등 권리변동을 등록해 추정력과 제3자 대항력을 확보하고, 반려 시 이의·행정쟁송 경로를 제공한다.",
+  "stakeholders": "저작자·상속인·양수인·질권자, 한국저작권위원회, 이해관계 제3자",
+  "legalBasis": [
+   {
+    "law": "저작권법",
+    "articles": "제53조(저작권의 등록), 제54조(권리변동 등의 등록·효력), 제55조(등록의 절차 등), 제55조의2(착오·누락의 통지 및 직권 경정), 제55조의3(변경등록등의 신청 등), 제55조의4(직권 말소등록)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "저작자·권리자",
+    "role": "등록 신청, 변경·말소·회복, 반려 이의"
+   },
+   {
+    "name": "한국저작권위원회",
+    "role": "등록부 기록, 반려, 공보, 열람·사본, 직권 경정·말소"
+   },
+   {
+    "name": "이해관계 제3자",
+    "role": "대항 요건 확인, 경정·말소 통지 수령"
+   }
+  ],
+  "procedure": [
+   "등록 대상(저작자 사항 또는 권리변동) 선택",
+   "신청서·첨부서류 제출",
+   "위원회 심사·등록부 기록 또는 반려",
+   "반려 시 1개월 이내 이의, 위원회 1개월 이내 심사·통지",
+   "등록공보 발행·정보통신망 게시",
+   "열람·사본 발급",
+   "착오·누락 통지·직권 경정, 변경등록 신청",
+   "법정 사유 시 직권 말소(원칙적 청문)"
+  ],
+  "moneyFlow": "등록·열람·사본 수수료는 대통령령·위원회 기준에 따른다. 법정손해배상(제125조의2)을 쓰려면 침해 전 등록이 필요하다.",
+  "docsFlow": "등록신청서·첨부서류 → 반려·보정 또는 등록부 기록 → 등록공보 → 열람·사본 → 변경·경정·말소·회복 신청 → 이의·청문 기록",
+  "bottlenecks": [
+   "창작 후 1년이 지나 창작연월일을 등록하면 창작일 추정이 제한된다",
+   "권리변동 미등록 시 제3자에게 대항하지 못한다",
+   "반려 사유(비저작물·보호 제외·권한 없음·서류 불일치) 판단",
+   "직권 말소 시 청문·확정판결 예외"
+  ],
+  "reformPoints": [
+   "등록 전 체크리스트에 창작 1년 추정 제한을 경고",
+   "양도·이용허락 계약 체결과 등록 신청을 한 흐름으로 안내",
+   "반려 사유별 보정 예시 공개",
+   "등록과 법정손해배상·침해소송 연계를 한 장으로 표시"
+  ]
+ },
+ "related": [
+  "저작인격권·동일성유지권 침해 대응",
+  "저작권위원회 알선·분쟁조정",
+  "온라인 복제·전송 중단 청구"
+ ],
+ "fieldVerification": [
+  "위원회 온라인 등록 시스템 화면·수수료",
+  "프로그램등록부와 일반 저작권등록부 구분 실무",
+  "반려·이의 처리기간 준수율",
+  "등록공보 게시 방식과 열람 창구"
+ ],
+ "process": {
+  "institution_name": "저작권 등록",
+  "law_name": "저작권법",
+  "lanes": [
+   "신청인(저작자·권리자)",
+   "한국저작권위원회",
+   "이해관계 제3자"
+  ],
+  "stages": [
+   "G0 신청 준비",
+   "G1 심사·기록",
+   "G2 반려·이의",
+   "G3 공시·열람",
+   "G4 변경·말소",
+   "G5 종결"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "등록 유형 선택(저작자 사항·권리변동)",
+    "lane": "신청인(저작자·권리자)",
+    "stage": "G0 신청 준비",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "신청인(저작자·권리자)",
+    "action": "저작자·저작물 사항 등록인지 양도·배타적발행권·출판권·질권 등 권리변동 등록인지 정한다.",
+    "input_documents": [],
+    "output_documents": [
+     "등록 유형 선택표"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제53조(저작권의 등록)",
+      "text": "제53조는 저작자·저작물 사항, 제54조는 권리변동 등의 등록과 대항력을 규정한다."
+     },
+     {
+      "law": "저작권법",
+      "article": "제54조(권리변동 등의 등록·효력)",
+      "text": "제53조는 저작자·저작물 사항, 제54조는 권리변동 등의 등록과 대항력을 규정한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "신청서·증명서류 제출",
+    "lane": "신청인(저작자·권리자)",
+    "stage": "G0 신청 준비",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "신청인(저작자·권리자)",
+    "action": "문화체육관광부령 서식과 첨부서류로 위원회에 등록을 신청한다.",
+    "input_documents": [],
+    "output_documents": [
+     "등록신청서·첨부서류"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제55조(등록의 절차 등)",
+      "text": "등록은 위원회가 저작권등록부(프로그램은 프로그램등록부)에 기록함으로써 한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "등록 요건·서류 심사",
+    "lane": "한국저작권위원회",
+    "stage": "G1 심사·기록",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "한국저작권위원회",
+    "action": "저작물성, 보호 제외, 신청 권한, 서류 일치, 서식 적합성을 심사한다.",
+    "input_documents": [
+     "등록신청서·첨부서류"
+    ],
+    "output_documents": [
+     "심사 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제55조(등록의 절차 등)",
+      "text": "비저작물, 보호받지 못하는 저작물, 무권한 신청, 서류 미비·불일치, 서식 불일치 시 반려할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "저작권등록부 기록",
+    "lane": "한국저작권위원회",
+    "stage": "G1 심사·기록",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "한국저작권위원회",
+    "action": "요건을 갖추면 등록부에 기록한다.",
+    "input_documents": [],
+    "output_documents": [
+     "등록부 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제55조(등록의 절차 등)",
+      "text": "위원회가 등록부에 기록함으로써 등록이 이루어진다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "등록 신청 반려",
+    "lane": "한국저작권위원회",
+    "stage": "G2 반려·이의",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "한국저작권위원회",
+    "action": "법정 반려 사유에 해당하면 신청을 반려한다. 당일 보정 가능한 흠결은 예외다.",
+    "input_documents": [],
+    "output_documents": [
+     "반려 통지"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제55조(등록의 절차 등)",
+      "text": "흠결이 보정 가능하고 신청 당일 보정하면 반려하지 않을 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "반려 이의신청",
+    "lane": "신청인(저작자·권리자)",
+    "stage": "G2 반려·이의",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신청인(저작자·권리자)",
+    "action": "반려된 날부터 1개월 이내 위원회에 이의를 신청한다.",
+    "input_documents": [],
+    "output_documents": [
+     "이의신청서"
+    ],
+    "deadline": "반려된 날부터 1개월 이내",
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제55조(등록의 절차 등)",
+      "text": "반려된 등록 신청인은 반려일부터 1개월 이내 이의를 신청할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "이의 심사·결과 통지",
+    "lane": "한국저작권위원회",
+    "stage": "G2 반려·이의",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "한국저작권위원회",
+    "action": "이의 접수일부터 1개월 이내 심사하고 결과를 통지하며, 각하·기각 시 행정쟁송 안내를 한다.",
+    "input_documents": [],
+    "output_documents": [
+     "이의 결과 통지"
+    ],
+    "deadline": "이의 신청을 받은 날부터 1개월 이내",
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제55조(등록의 절차 등)",
+      "text": "위원회는 1개월 이내 심사·통지하고, 각하·기각 시 행정심판·소송 가능 취지를 알린다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "등록공보 발행·게시",
+    "lane": "한국저작권위원회",
+    "stage": "G3 공시·열람",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "한국저작권위원회",
+    "action": "등록 사항을 공보로 발행하거나 정보통신망에 게시한다.",
+    "input_documents": [],
+    "output_documents": [
+     "등록공보·게시"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제55조(등록의 절차 등)",
+      "text": "위원회는 등록 사항에 대해 등록공보를 발행하거나 정보통신망에 게시해야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "열람·사본 발급",
+    "lane": "신청인(저작자·권리자)",
+    "stage": "G3 공시·열람",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신청인(저작자·권리자)",
+    "action": "등록부 열람 또는 사본 발급을 신청한다.",
+    "input_documents": [],
+    "output_documents": [
+     "열람·사본"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제55조(등록의 절차 등)",
+      "text": "위원회는 열람 또는 사본 발급 신청이 있으면 열람하게 하거나 사본을 내줘야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "창작·공표·저작자 추정 효과 확인",
+    "lane": "신청인(저작자·권리자)",
+    "stage": "G3 공시·열람",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신청인(저작자·권리자)",
+    "action": "실명 등록자·등록 창작·공표일의 추정 효과와 1년 경과 등록의 제한을 확인한다.",
+    "input_documents": [],
+    "output_documents": [
+     "추정 효과 확인"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제53조(저작권의 등록)",
+      "text": "실명 등록자는 저작자로, 등록된 창작·공표일은 그 날짜에 창작·공표된 것으로 추정한다. 창작 후 1년 지난 창작일 등록은 추정하지 않는다."
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "제3자 대항 요건 확인",
+    "lane": "이해관계 제3자",
+    "stage": "G3 공시·열람",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "이해관계 제3자",
+    "action": "양도·배타적발행권·출판권·질권 등의 등록 여부를 확인해 대항력을 판단한다.",
+    "input_documents": [],
+    "output_documents": [
+     "대항력 확인"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제54조(권리변동 등의 등록·효력)",
+      "text": "제54조 사항은 등록하지 않으면 제3자에게 대항할 수 없다."
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "변경·경정·말소·회복 신청",
+    "lane": "신청인(저작자·권리자)",
+    "stage": "G4 변경·말소",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신청인(저작자·권리자)",
+    "action": "등록 사항 변경, 착오·누락 경정, 말소·회복을 신청한다.",
+    "input_documents": [],
+    "output_documents": [
+     "변경등록등 신청서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제55조의3(변경등록등의 신청 등)",
+      "text": "등록자는 변경·경정·말소·회복등록을 증명서류와 함께 신청할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "직권 경정·직권 말소",
+    "lane": "한국저작권위원회",
+    "stage": "G4 변경·말소",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "한국저작권위원회",
+    "action": "착오·누락을 경정하거나 법정 사유로 직권 말소하며 원칙적으로 청문한다.",
+    "input_documents": [],
+    "output_documents": [
+     "경정·말소 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제55조의2(착오·누락의 통지 및 직권 경정)",
+      "text": "직원 잘못 경정, 법정 사유 직권 말소(확정판결 시 청문 예외) 절차가 있다."
+     },
+     {
+      "law": "저작권법",
+      "article": "제55조의4(직권 말소등록)",
+      "text": "직원 잘못 경정, 법정 사유 직권 말소(확정판결 시 청문 예외) 절차가 있다."
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "등록 효력 활용·종결",
+    "lane": "신청인(저작자·권리자)",
+    "stage": "G5 종결",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신청인(저작자·권리자)",
+    "action": "추정·대항·법정손해 선택 등 분쟁·거래에서 등록 결과를 활용한다.",
+    "input_documents": [],
+    "output_documents": [
+     "등록증·활용 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제53조(저작권의 등록)",
+      "text": "등록은 권리 성립 요건은 아니나 추정·대항과 법정손해배상 청구 전제 등으로 활용된다."
+     },
+     {
+      "law": "저작권법",
+      "article": "제54조(권리변동 등의 등록·효력)",
+      "text": "등록은 권리 성립 요건은 아니나 추정·대항과 법정손해배상 청구 전제 등으로 활용된다."
+     },
+     {
+      "law": "저작권법",
+      "article": "제125조의2(법정손해배상의 청구)",
+      "text": "등록은 권리 성립 요건은 아니나 추정·대항과 법정손해배상 청구 전제 등으로 활용된다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P02",
+    "target": "P03",
+    "type": "message",
+    "label": "신청"
+   },
+   {
+    "id": "E02",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": "수리"
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P05",
+    "type": "sequence",
+    "label": "반려"
+   },
+   {
+    "id": "E04",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M02",
+    "source": "P06",
+    "target": "P07",
+    "type": "message",
+    "label": "이의"
+   },
+   {
+    "id": "E05",
+    "source": "P07",
+    "target": "P04",
+    "type": "sequence",
+    "label": "인용"
+   },
+   {
+    "id": "E06",
+    "source": "P07",
+    "target": "P14",
+    "type": "sequence",
+    "label": "각하·기각 후 쟁송·종결"
+   },
+   {
+    "id": "E07",
+    "source": "P04",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E11",
+    "source": "P11",
+    "target": "P12",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E12",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E13",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P04",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L01",
+    "source": "P07",
+    "target": "P02",
+    "type": "loop",
+    "label": "보정 후 재신청"
+   }
+  ],
+  "warnings": [
+   "이 구조도는 저작권법 현행 원문의 공통 절차를 업무 단위로 재구성했다. 계약·이용허락·업무상저작물·공동저작 여부와 개별 플랫폼·기관 약관은 별도 확인이 필요하다.",
+   "국가법령정보센터 본문 MST 283335은 2026년 2월 10일 공포·2026년 8월 11일 시행 개정사항이 반영된 통합본이다. 시행 전이라도 기존 조문 번호 체계로 절차를 읽되, 고액 징벌적 손해 등 신설 규정은 시행일을 확인한다.",
+   "저작권은 창작과 동시에 발생하며 등록이 성립 요건은 아니다. 등록은 추정·대항·일부 구제 선택에 의미가 있다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-19",
+  "method": "국가법령정보센터 DRF 현행 원문·조문 메타데이터 대조",
+  "scope": "저작권법 현행 원문(MST 283335, lawId 000798)을 기준으로 캔버스·절차 노드의 명시 조문 24건을 대조했다. 계약·약관·수수료 요율 등 운영 세부는 fieldVerification으로 남겼다.",
+  "notes": [
+   "저작권법은 국가법령정보센터 현행 본문(MST 283335)을 기준으로 했다. 통합본 시행일 표기는 2026년 8월 11일이다.",
+   "2026년 2월 10일 개정으로 신설·강화된 일부 규정은 시행일을 별도 확인해야 한다.",
+   "이 콘텐츠는 법률 자문이 아니다."
+  ],
+  "sources": [
+   {
+    "law": "저작권법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "저작권법",
+    "lawId": "000798",
+    "mst": "283335",
+    "promulgatedOn": "2026-02-10",
+    "effectiveOn": "2026-08-11",
+    "officialUrl": "https://law.go.kr/법령/저작권법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-19",
+   "method": "국가법령정보센터 DRF 현행 조문번호·제목 대조",
+   "citationEntries": 19,
+   "explicitCitationEntries": 19,
+   "articleReferences": 24,
+   "verifiedReferences": 24,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

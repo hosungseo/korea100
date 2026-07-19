@@ -1,0 +1,588 @@
+{
+ "slug": "online-copyright-takedown",
+ "name": "온라인 복제·전송 중단 청구",
+ "oneLiner": "온라인에 올라간 무단 복제·전송물에 대해 권리자가 OSP에 중단을 요구하고, 재개 통보·소제기, 보호원 시정권고와 문체부 삭제명령으로 이어지는 절차",
+ "type": "중단·재개·시정형",
+ "priority": 508,
+ "category": "문화·콘텐츠",
+ "whyFirst": "강의 영상·PDF·슬라이드가 플랫폼에 무단 게시되는 경우 가장 먼저 쓰는 신속 대응 경로다.",
+ "asOfDate": "2026-07-19",
+ "status": "full",
+ "canvas": {
+  "purpose": "정보통신망에서의 저작권 등 침해에 대해 권리자가 복제·전송 중단을 요구하고, OSP의 중단·재개 절차와 보호원 시정권고·문화체육관광부 시정명령을 통해 확산을 막는다.",
+  "stakeholders": "권리주장자, 복제·전송자, 온라인서비스제공자, 한국저작권보호원, 저작권보호심의위원회, 문화체육관광부",
+  "legalBasis": [
+   {
+    "law": "저작권법",
+    "articles": "제102조(온라인서비스제공자의 책임 제한), 제103조(복제·전송의 중단), 제103조의3(복제·전송자에 관한 정보 제공의 청구), 제122조의5(업무), 제133조의2(정보통신망을 통한 불법복제물등의 삭제명령 등), 제133조의3(시정권고 등)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "권리주장자",
+    "role": "침해 소명, 중단 요구, 재개 전 소제기 통보, 전송자 정보 제공 청구"
+   },
+   {
+    "name": "온라인서비스제공자",
+    "role": "수령인 공지, 즉시 중단·통보, 재개 절차, 시정 이행"
+   },
+   {
+    "name": "한국저작권보호원",
+    "role": "조사·시정권고, 문체부 명령 요청"
+   },
+   {
+    "name": "문화체육관광부",
+    "role": "삭제·전송중단·경고·계정정지 등 시정명령"
+   }
+  ],
+  "procedure": [
+   "침해 게시물 URL·캡처·권리 소명 자료 준비",
+   "OSP가 공지한 수령인에게 복제·전송 중단 요구",
+   "OSP 즉시 중단 및 권리자·전송자 통보",
+   "전송자가 정당한 권리로 재개 요구 시 재개예정일 통보",
+   "권리자가 재개 전 소제기 사실을 통보하면 재개 제한",
+   "필요 시 전송자 정보 제공 요청·문체부 명령 청구",
+   "보호원 시정권고 또는 문체부 삭제·중단 명령",
+   "OSP 조치 결과 통보·이행 확인"
+  ],
+  "moneyFlow": "권리자의 중단 요구 자체에 법정 수수료는 없다. 소송·변호사 비용, 허위 장애로 인한 손해배상 위험, OSP 준법 비용은 별도다.",
+  "docsFlow": "권리 소명자료·URL → 중단 요구서 → 중단·재개 통보 → 재개 요구서·소제기 통보 → 정보제공 청구·문체부 명령 → 시정권고·시정명령 → 조치결과 통보",
+  "bottlenecks": [
+   "수령인 미지정·공지 부실로 요구가 반려되는 경우",
+   "재개예정일 전에 소제기 통보를 못 하면 게시가 다시 살아날 수 있다",
+   "정당한 이용·공정이용 주장과 침해 주장의 대립",
+   "해외 플랫폼·거울 사이트로의 재업로드"
+  ],
+  "reformPoints": [
+   "중단 요구 표준 서식에 동일성유지권·재산권 침해 유형 체크박스 제공",
+   "재개예정일 카운트다운과 소제기 통보 안내를 권리자에게 자동 발송",
+   "보호원 시정권고와 민간 중단 요구 상태를 한 대시보드로 조회",
+   "반복 침해 계정·게시판 정지 요건을 이용자 언어로 요약"
+  ]
+ },
+ "related": [
+  "저작인격권·동일성유지권 침해 대응",
+  "저작권위원회 알선·분쟁조정",
+  "저작권 등록",
+  "정보통신망 침해사고 신고·대응"
+ ],
+ "fieldVerification": [
+  "주요 플랫폼별 저작권 침해 신고 창구·처리시간",
+  "재개예정일 산정·통보 실무",
+  "보호원 시정권고 이행률과 문체부 명령 연계",
+  "전송자 정보 제공 명령의 실제 처리 기간"
+ ],
+ "process": {
+  "institution_name": "온라인 복제·전송 중단 청구",
+  "law_name": "저작권법",
+  "lanes": [
+   "권리주장자",
+   "복제·전송자",
+   "온라인서비스제공자",
+   "한국저작권보호원",
+   "문화체육관광부"
+  ],
+  "stages": [
+   "G0 소명·요구",
+   "G1 중단·통보",
+   "G2 재개 다툼",
+   "G3 정보·시정",
+   "G4 명령·이행",
+   "G5 종결"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "침해 게시·권리 소명 자료 준비",
+    "lane": "권리주장자",
+    "stage": "G0 소명·요구",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "권리주장자",
+    "action": "URL, 캡처, 원본, 권리 관계를 모아 침해 사실을 소명할 자료를 준비한다.",
+    "input_documents": [],
+    "output_documents": [
+     "소명자료 묶음"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제103조(복제·전송의 중단)",
+      "text": "권리주장자는 침해 사실을 소명하여 중단을 요구한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "OSP 수령인 확인·중단 요구",
+    "lane": "권리주장자",
+    "stage": "G0 소명·요구",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "권리주장자",
+    "action": "OSP가 공지한 수령인에게 복제·전송 중단을 요구한다.",
+    "input_documents": [],
+    "output_documents": [
+     "복제·전송 중단 요구서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제103조(복제·전송의 중단)",
+      "text": "OSP는 중단·재개 요구를 받을 수령인을 지정·공지해야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "즉시 중단 및 권리자 통보",
+    "lane": "온라인서비스제공자",
+    "stage": "G1 중단·통보",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "온라인서비스제공자",
+    "action": "중단 요구를 받으면 즉시 복제·전송을 중단하고 권리주장자에게 통보한다.",
+    "input_documents": [
+     "복제·전송 중단 요구서"
+    ],
+    "output_documents": [
+     "중단 조치·통보"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제103조(복제·전송의 중단)",
+      "text": "OSP는 중단 요구를 받은 경우 즉시 중단시키고 권리주장자에게 그 사실을 통보해야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "복제·전송자 통보",
+    "lane": "온라인서비스제공자",
+    "stage": "G1 중단·통보",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "온라인서비스제공자",
+    "action": "해당 유형의 OSP는 복제·전송자에게도 중단 사실을 통보한다.",
+    "input_documents": [],
+    "output_documents": [
+     "전송자 통보"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제103조(복제·전송의 중단)",
+      "text": "제102조제1항제3호 유형 OSP는 복제·전송자에게도 중단 사실을 통보해야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "정당한 권리 소명·재개 요구",
+    "lane": "복제·전송자",
+    "stage": "G2 재개 다툼",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "복제·전송자",
+    "action": "자신의 복제·전송이 정당한 권리에 의한 것임을 소명하고 재개를 요구한다.",
+    "input_documents": [],
+    "output_documents": [
+     "재개 요구서·소명자료"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제103조(복제·전송의 중단)",
+      "text": "복제·전송자는 정당한 권리를 소명하여 재개를 요구할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "재개예정일 권리자 통보",
+    "lane": "온라인서비스제공자",
+    "stage": "G2 재개 다툼",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "온라인서비스제공자",
+    "action": "재개 요구 사실과 재개예정일을 권리주장자에게 지체 없이 통보한다.",
+    "input_documents": [
+     "재개 요구서·소명자료"
+    ],
+    "output_documents": [
+     "재개예정 통보"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제103조(복제·전송의 중단)",
+      "text": "OSP는 재개 요구 사실과 재개예정일을 권리주장자에게 지체 없이 통보하고 예정일에 재개한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "재개 전 소제기 사실 통보",
+    "lane": "권리주장자",
+    "stage": "G2 재개 다툼",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "권리주장자",
+    "action": "재개예정일 전에 침해 소송 제기 사실을 OSP에 통보해 재개를 막는다.",
+    "input_documents": [],
+    "output_documents": [
+     "소제기 통보"
+    ],
+    "deadline": "재개예정일 전",
+    "blocker": "기한 내 소제기 통보가 없으면 재개될 수 있음",
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제103조(복제·전송의 중단)",
+      "text": "권리주장자가 재개예정일 전에 소제기 사실을 통보하면 재개하지 않는다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "전송자 정보 제공 요청·명령 청구",
+    "lane": "권리주장자",
+    "stage": "G3 정보·시정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "권리주장자",
+    "action": "민사·형사를 위해 전송자 정보를 요청하고 거절 시 문체부에 제공 명령을 청구한다.",
+    "input_documents": [],
+    "output_documents": [
+     "정보제공 요청·청구서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제103조의3(복제·전송자에 관한 정보 제공의 청구)",
+      "text": "OSP가 정보 제공을 거절하면 문화체육관광부장관에게 제공 명령을 청구할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "보호원 조사·시정권고",
+    "lane": "한국저작권보호원",
+    "stage": "G3 정보·시정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "한국저작권보호원",
+    "action": "불법복제물 전송을 발견하면 심의위원회 심의를 거쳐 OSP에 시정을 권고한다.",
+    "input_documents": [],
+    "output_documents": [
+     "시정권고서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제122조의5(업무)",
+      "text": "보호원은 경고, 삭제·전송중단, 계정 정지, 접속차단 등을 권고할 수 있다."
+     },
+     {
+      "law": "저작권법",
+      "article": "제133조의3(시정권고 등)",
+      "text": "보호원은 경고, 삭제·전송중단, 계정 정지, 접속차단 등을 권고할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "권고 조치결과 통보",
+    "lane": "온라인서비스제공자",
+    "stage": "G3 정보·시정",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "온라인서비스제공자",
+    "action": "권고 유형별 기한 안에 조치결과를 보호원에 통보한다.",
+    "input_documents": [],
+    "output_documents": [
+     "조치결과 통보"
+    ],
+    "deadline": "경고·삭제·접속차단 권고 5일, 계정정지 권고 10일",
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제133조의3(시정권고 등)",
+      "text": "OSP는 권고 유형에 따라 5일 또는 10일 이내 조치결과를 통보해야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "문체부 시정명령 요청·발령",
+    "lane": "문화체육관광부",
+    "stage": "G4 명령·이행",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "문화체육관광부",
+    "action": "권고 불이행 시 보호원 요청으로 삭제·전송중단·경고·계정정지 등을 명할 수 있다.",
+    "input_documents": [],
+    "output_documents": [
+     "시정명령"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제133조의2(정보통신망을 통한 불법복제물등의 삭제명령 등)",
+      "text": "보호원 요청 시 문체부 명령에는 심의위원회 심의가 필요하지 않을 수 있다."
+     },
+     {
+      "law": "저작권법",
+      "article": "제133조의3(시정권고 등)",
+      "text": "보호원 요청 시 문체부 명령에는 심의위원회 심의가 필요하지 않을 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "명령 이행·접속차단 등",
+    "lane": "온라인서비스제공자",
+    "stage": "G4 명령·이행",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "온라인서비스제공자",
+    "action": "경고, 삭제·전송중단, 접속차단, 계정정지 등 명령을 이행한다.",
+    "input_documents": [
+     "시정명령"
+    ],
+    "output_documents": [
+     "명령 이행 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제133조의2(정보통신망을 통한 불법복제물등의 삭제명령 등)",
+      "text": "문체부는 심의위원회 심의를 거쳐 OSP에 경고·삭제·접속차단 등을 명할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "책임제한 요건·종결 확인",
+    "lane": "온라인서비스제공자",
+    "stage": "G5 종결",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "온라인서비스제공자",
+    "action": "공지·중단·재개 절차 준수로 책임제한 요건을 충족했는지 확인한다.",
+    "input_documents": [],
+    "output_documents": [
+     "종결·준법 점검표"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제102조(온라인서비스제공자의 책임 제한)",
+      "text": "법정 공지와 중단·재개 절차를 따른 OSP는 해당 침해에 대한 책임제한을 주장할 수 있다."
+     },
+     {
+      "law": "저작권법",
+      "article": "제103조(복제·전송의 중단)",
+      "text": "법정 공지와 중단·재개 절차를 따른 OSP는 해당 침해에 대한 책임제한을 주장할 수 있다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M01",
+    "source": "P02",
+    "target": "P03",
+    "type": "message",
+    "label": "중단 요구"
+   },
+   {
+    "id": "E02",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M02",
+    "source": "P04",
+    "target": "P05",
+    "type": "message",
+    "label": "중단 통보"
+   },
+   {
+    "id": "E03",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "M03",
+    "source": "P06",
+    "target": "P07",
+    "type": "message",
+    "label": "재개예정 통보"
+   },
+   {
+    "id": "E04",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": "분쟁 계속"
+   },
+   {
+    "id": "E05",
+    "source": "P07",
+    "target": "P13",
+    "type": "sequence",
+    "label": "소제기로 재개 차단 후 종결 관리"
+   },
+   {
+    "id": "E06",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P10",
+    "target": "P11",
+    "type": "sequence",
+    "label": "불이행·중대 침해"
+   },
+   {
+    "id": "M04",
+    "source": "P11",
+    "target": "P12",
+    "type": "message",
+    "label": "시정명령"
+   },
+   {
+    "id": "E09",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P05",
+    "target": "P13",
+    "type": "sequence",
+    "label": "재개 요구 없음"
+   },
+   {
+    "id": "L01",
+    "source": "P07",
+    "target": "P01",
+    "type": "loop",
+    "label": "추가 소명·재요구"
+   }
+  ],
+  "warnings": [
+   "이 구조도는 저작권법 현행 원문의 공통 절차를 업무 단위로 재구성했다. 계약·이용허락·업무상저작물·공동저작 여부와 개별 플랫폼·기관 약관은 별도 확인이 필요하다.",
+   "국가법령정보센터 본문 MST 283335은 2026년 2월 10일 공포·2026년 8월 11일 시행 개정사항이 반영된 통합본이다. 시행 전이라도 기존 조문 번호 체계로 절차를 읽되, 고액 징벌적 손해 등 신설 규정은 시행일을 확인한다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-19",
+  "method": "국가법령정보센터 DRF 현행 원문·조문 메타데이터 대조",
+  "scope": "저작권법 현행 원문(MST 283335, lawId 000798)을 기준으로 캔버스·절차 노드의 명시 조문 22건을 대조했다. 계약·약관·수수료 요율 등 운영 세부는 fieldVerification으로 남겼다.",
+  "notes": [
+   "저작권법은 국가법령정보센터 현행 본문(MST 283335)을 기준으로 했다. 통합본 시행일 표기는 2026년 8월 11일이다.",
+   "2026년 2월 10일 개정으로 신설·강화된 일부 규정은 시행일을 별도 확인해야 한다.",
+   "이 콘텐츠는 법률 자문이 아니다."
+  ],
+  "sources": [
+   {
+    "law": "저작권법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "저작권법",
+    "lawId": "000798",
+    "mst": "283335",
+    "promulgatedOn": "2026-02-10",
+    "effectiveOn": "2026-08-11",
+    "officialUrl": "https://law.go.kr/법령/저작권법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-19",
+   "method": "국가법령정보센터 DRF 현행 조문번호·제목 대조",
+   "citationEntries": 17,
+   "explicitCitationEntries": 17,
+   "articleReferences": 22,
+   "verifiedReferences": 22,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

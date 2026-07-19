@@ -1,0 +1,637 @@
+{
+ "slug": "copyright-commission-mediation",
+ "name": "저작권위원회 알선·분쟁조정",
+ "oneLiner": "저작권 분쟁을 소송 전에 한국저작권위원회 알선·조정으로 풀어, 합의 또는 직권조정결정·이의로 효력을 가르는 절차",
+ "type": "알선·조정형",
+ "priority": 507,
+ "category": "문화·콘텐츠",
+ "whyFirst": "동일성유지권·이용허락·온라인 게시 분쟁에서 비용 부담이 큰 소송 전에 쓸 수 있는 공식 ADR 창구다.",
+ "asOfDate": "2026-07-19",
+ "status": "full",
+ "canvas": {
+  "purpose": "저작권 및 이 법에 따라 보호되는 권리에 관한 분쟁을 한국저작권위원회가 알선·조정하여 신속·비공개로 해결하고, 성립 시 재판상 화해와 같은 효력을 부여한다.",
+  "stakeholders": "신청인·피신청인(저작자·이용자·사업자), 한국저작권위원회 알선위원·조정부, 감정 요청 시 법원·수사기관",
+  "legalBasis": [
+   {
+    "law": "저작권법",
+    "articles": "제112조(한국저작권위원회의 설립), 제113조(업무), 제113조의2(알선), 제114조(조정부), 제114조의2(조정의 신청 등), 제115조(비공개), 제116조(진술의 원용 제한), 제117조(조정의 성립), 제118조(조정비용 등), 제119조(감정)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "한국저작권위원회",
+    "role": "알선·조정·감정·등록 등 법정 업무 수행"
+   },
+   {
+    "name": "알선위원",
+    "role": "알선 진행·중단, 알선서 작성"
+   },
+   {
+    "name": "조정부",
+    "role": "분쟁조정, 직권조정결정, 이의 접수"
+   },
+   {
+    "name": "분쟁 당사자",
+    "role": "알선·조정 신청, 합의, 직권조정 이의"
+   }
+  ],
+  "procedure": [
+   "분쟁 당사자가 알선 또는 조정을 선택해 위원회에 신청",
+   "알선 신청 시 위원장이 알선위원을 지명",
+   "조정 신청 시 조정부가 신청취지·원인을 바탕으로 심리",
+   "비공개 원칙 아래 진술·자료 교환(소송 원용 제한)",
+   "필요 시 프로그램 등 감정 연계",
+   "합의 성립 시 조서 기재로 조정 성립",
+   "요건 충족 시 직권조정결정 가능, 2주 이내 이의 시 효력 상실",
+   "합의 또는 이의 없는 직권조정결정은 재판상 화해 효력"
+  ],
+  "moneyFlow": "조정비용은 신청인이 부담하는 것이 원칙이고, 조정 성립 시 특약이 없으면 당사자가 균등 부담한다. 비용 금액은 위원회가 정한다. 감정 수수료는 별도다.",
+  "docsFlow": "알선신청서·조정신청서 → 알선·조정 자료 → 비공개 심리기록 → 알선서·조정조서 또는 직권조정결정서 → 이의신청서 → 성립·불성립 통지",
+  "bottlenecks": [
+   "알선 중 조정이 신청되면 알선이 중단된다",
+   "직권조정결정 이의기간(송달일부터 2주일)을 놓치면 재판상 화해 효력이 생긴다",
+   "임의로 처분할 수 없는 사항은 재판상 화해 효력이 없다",
+   "조정 진술은 소송·중재에서 원용하지 못한다"
+  ],
+  "reformPoints": [
+   "알선·조정 선택 가이드를 권리 유형별(인격권·재산권·온라인)로 제공",
+   "직권조정 이의기간 만료일을 결정서 첫 페이지에 강조",
+   "신청 취지 작성 예시(강의안 단축, 무단 전송 등) 공개",
+   "조정 불성립 시 민사·형사·전송중단 다음 단계 체크리스트 연결"
+  ]
+ },
+ "related": [
+  "저작인격권·동일성유지권 침해 대응",
+  "온라인 복제·전송 중단 청구",
+  "저작권 등록",
+  "소비자분쟁조정"
+ ],
+ "fieldVerification": [
+  "위원회 조정비용 요율표와 납부 방법",
+  "알선 성립률·조정 처리기간 운영 통계",
+  "직권조정결정 이의 접수 창구와 서식",
+  "프로그램 감정 수수료·처리기간"
+ ],
+ "process": {
+  "institution_name": "저작권위원회 알선·분쟁조정",
+  "law_name": "저작권법",
+  "lanes": [
+   "신청인",
+   "피신청인",
+   "알선위원",
+   "조정부",
+   "위원회 사무국"
+  ],
+  "stages": [
+   "G0 신청",
+   "G1 알선",
+   "G2 조정 심리",
+   "G3 합의·직권결정",
+   "G4 이의·효력",
+   "G5 종결"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "알선 또는 조정 경로 선택",
+    "lane": "신청인",
+    "stage": "G0 신청",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "신청인",
+    "action": "분쟁 해결을 알선으로 할지 조정으로 할지 선택한다.",
+    "input_documents": [],
+    "output_documents": [
+     "경로 선택 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제113조(업무)",
+      "text": "위원회 업무에 분쟁의 알선·조정이 포함되며 각각 신청 절차가 있다."
+     },
+     {
+      "law": "저작권법",
+      "article": "제113조의2(알선)",
+      "text": "위원회 업무에 분쟁의 알선·조정이 포함되며 각각 신청 절차가 있다."
+     },
+     {
+      "law": "저작권법",
+      "article": "제114조의2(조정의 신청 등)",
+      "text": "위원회 업무에 분쟁의 알선·조정이 포함되며 각각 신청 절차가 있다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "알선신청서 제출",
+    "lane": "신청인",
+    "stage": "G0 신청",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "신청인",
+    "action": "알선신청서를 위원회에 제출한다.",
+    "input_documents": [],
+    "output_documents": [
+     "알선신청서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제113조의2(알선)",
+      "text": "알선을 받으려는 자는 알선신청서를 위원회에 제출한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "조정신청서 제출",
+    "lane": "신청인",
+    "stage": "G0 신청",
+    "type": "task",
+    "status": "current",
+    "progress": 55,
+    "actor": "신청인",
+    "action": "신청취지와 원인을 적은 조정신청서를 제출한다.",
+    "input_documents": [],
+    "output_documents": [
+     "조정신청서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제114조의2(조정의 신청 등)",
+      "text": "분쟁 조정을 받으려는 자는 신청취지와 원인을 기재한 조정신청서를 제출한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "알선위원 지명·알선 진행",
+    "lane": "알선위원",
+    "stage": "G1 알선",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "알선위원",
+    "action": "위원장이 위원 중 알선위원을 지명해 알선을 진행한다.",
+    "input_documents": [
+     "알선신청서"
+    ],
+    "output_documents": [
+     "알선 진행기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제113조의2(알선)",
+      "text": "위원회가 알선 신청을 받으면 위원장이 알선위원을 지명한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "알선 중단 또는 조정 전환",
+    "lane": "알선위원",
+    "stage": "G1 알선",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "알선위원",
+    "action": "해결 가능성이 없으면 알선을 중단하고, 조정 신청이 있으면 알선은 중단된 것으로 본다.",
+    "input_documents": [],
+    "output_documents": [
+     "알선 중단·전환 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제113조의2(알선)",
+      "text": "알선 가능성이 없으면 중단할 수 있고, 조정 신청 시 알선은 중단된 것으로 본다."
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "알선서 작성·기명",
+    "lane": "알선위원",
+    "stage": "G1 알선",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "알선위원",
+    "action": "알선 성립 시 알선서를 작성하고 당사자와 함께 기명날인 또는 서명한다.",
+    "input_documents": [],
+    "output_documents": [
+     "알선서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제113조의2(알선)",
+      "text": "알선이 성립하면 알선서를 작성해 관계 당사자와 함께 기명날인하거나 서명한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "조정부 구성·심리",
+    "lane": "조정부",
+    "stage": "G2 조정 심리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "조정부",
+    "action": "변호사 자격 위원이 포함된 조정부가 비공개를 원칙으로 심리를 진행한다.",
+    "input_documents": [
+     "조정신청서"
+    ],
+    "output_documents": [
+     "조정 심리기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제114조(조정부)",
+      "text": "조정부는 1명 또는 3명 이상(그중 1명은 변호사 자격)으로 구성되고 조정은 비공개가 원칙이다."
+     },
+     {
+      "law": "저작권법",
+      "article": "제114조의2(조정의 신청 등)",
+      "text": "조정부는 1명 또는 3명 이상(그중 1명은 변호사 자격)으로 구성되고 조정은 비공개가 원칙이다."
+     },
+     {
+      "law": "저작권법",
+      "article": "제115조(비공개)",
+      "text": "조정부는 1명 또는 3명 이상(그중 1명은 변호사 자격)으로 구성되고 조정은 비공개가 원칙이다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "진술·자료 교환(원용 제한 고지)",
+    "lane": "조정부",
+    "stage": "G2 조정 심리",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "조정부",
+    "action": "당사자 진술을 듣고 조정 진술이 소송·중재에서 원용되지 않음을 고지한다.",
+    "input_documents": [],
+    "output_documents": [
+     "진술·자료 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제116조(진술의 원용 제한)",
+      "text": "조정절차에서 한 진술은 소송 또는 중재절차에서 원용하지 못한다."
+     }
+    ]
+   },
+   {
+    "id": "P09",
+    "name": "필요 시 감정 연계",
+    "lane": "위원회 사무국",
+    "stage": "G2 조정 심리",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "위원회 사무국",
+    "action": "법원·수사 요청 또는 양 당사자 요청에 따라 프로그램 등 감정을 실시할 수 있다.",
+    "input_documents": [],
+    "output_documents": [
+     "감정 의뢰·결과"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제119조(감정)",
+      "text": "위원회는 재판·수사 또는 분쟁조정 당사자 요청 시 감정을 실시할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P10",
+    "name": "합의 성립·조서 기재",
+    "lane": "조정부",
+    "stage": "G3 합의·직권결정",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "조정부",
+    "action": "합의 사항을 조서에 기재해 조정을 성립시킨다.",
+    "input_documents": [],
+    "output_documents": [
+     "조정조서"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제117조(조정의 성립)",
+      "text": "조정은 당사자 간 합의 사항을 조서에 기재함으로써 성립한다."
+     }
+    ]
+   },
+   {
+    "id": "P11",
+    "name": "직권조정결정",
+    "lane": "조정부",
+    "stage": "G3 합의·직권결정",
+    "type": "gateway",
+    "status": "risk",
+    "progress": 0,
+    "actor": "조정부",
+    "action": "3명 이상 조정부가 요건을 갖추면 직권으로 조정을 갈음하는 결정을 할 수 있다.",
+    "input_documents": [],
+    "output_documents": [
+     "직권조정결정서"
+    ],
+    "deadline": null,
+    "blocker": "조정안 거부 또는 예정가액 1천만원 미만 등 법정 요건 확인",
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제117조(조정의 성립)",
+      "text": "3명 이상 조정부는 조정안 거부 또는 예정가액 1천만원 미만 등 요건에서 직권조정결정을 할 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P12",
+    "name": "직권조정 이의신청",
+    "lane": "신청인",
+    "stage": "G4 이의·효력",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "신청인",
+    "action": "결정서 정본 송달일부터 2주일 이내 서면으로 이의하면 결정 효력이 상실된다.",
+    "input_documents": [],
+    "output_documents": [
+     "이의신청서"
+    ],
+    "deadline": "결정서 정본 송달일부터 2주일 이내",
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제117조(조정의 성립)",
+      "text": "직권조정결정에 불복하면 송달일부터 2주일 이내 이의신청할 수 있고 결정은 효력을 상실한다."
+     }
+    ]
+   },
+   {
+    "id": "P13",
+    "name": "재판상 화해 효력 확인",
+    "lane": "조정부",
+    "stage": "G4 이의·효력",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "조정부",
+    "action": "합의 성립 또는 이의 없는 직권조정결정의 효력을 확인한다.",
+    "input_documents": [],
+    "output_documents": [
+     "효력 확인 통지"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제117조(조정의 성립)",
+      "text": "합의 성립 또는 이의 없는 직권조정결정은 재판상 화해와 동일한 효력이 있다(임의처분 가능 사항)."
+     }
+    ]
+   },
+   {
+    "id": "P14",
+    "name": "조정비용 정산·종결",
+    "lane": "위원회 사무국",
+    "stage": "G5 종결",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "위원회 사무국",
+    "action": "신청인 부담 원칙과 성립 시 균등 부담 특약 여부를 반영해 비용을 정산한다.",
+    "input_documents": [],
+    "output_documents": [
+     "비용 정산·종결 기록"
+    ],
+    "deadline": null,
+    "blocker": null,
+    "confidence": 0.92,
+    "legal_basis": [
+     {
+      "law": "저작권법",
+      "article": "제118조(조정비용 등)",
+      "text": "조정비용은 신청인이 부담하는 것이 원칙이며, 성립 시 특약이 없으면 당사자가 균등 부담한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P01",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P02",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": "알선 성립"
+   },
+   {
+    "id": "E06",
+    "source": "P05",
+    "target": "P03",
+    "type": "sequence",
+    "label": "조정 전환"
+   },
+   {
+    "id": "E07",
+    "source": "P03",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E09",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E10",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": "합의"
+   },
+   {
+    "id": "E11",
+    "source": "P09",
+    "target": "P11",
+    "type": "sequence",
+    "label": "직권결정 요건"
+   },
+   {
+    "id": "M01",
+    "source": "P11",
+    "target": "P12",
+    "type": "message",
+    "label": "결정서 송달"
+   },
+   {
+    "id": "E12",
+    "source": "P12",
+    "target": "P10",
+    "type": "sequence",
+    "label": "이의로 효력 상실 후 재협의"
+   },
+   {
+    "id": "E13",
+    "source": "P10",
+    "target": "P13",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E14",
+    "source": "P12",
+    "target": "P13",
+    "type": "sequence",
+    "label": "이의 없음"
+   },
+   {
+    "id": "E15",
+    "source": "P13",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E16",
+    "source": "P06",
+    "target": "P14",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "L01",
+    "source": "P12",
+    "target": "P08",
+    "type": "loop",
+    "label": "이의 후 재심리·재협의"
+   }
+  ],
+  "warnings": [
+   "이 구조도는 저작권법 현행 원문의 공통 절차를 업무 단위로 재구성했다. 계약·이용허락·업무상저작물·공동저작 여부와 개별 플랫폼·기관 약관은 별도 확인이 필요하다.",
+   "국가법령정보센터 본문 MST 283335은 2026년 2월 10일 공포·2026년 8월 11일 시행 개정사항이 반영된 통합본이다. 시행 전이라도 기존 조문 번호 체계로 절차를 읽되, 고액 징벌적 손해 등 신설 규정은 시행일을 확인한다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-07-19",
+  "method": "국가법령정보센터 DRF 현행 원문·조문 메타데이터 대조",
+  "scope": "저작권법 현행 원문(MST 283335, lawId 000798)을 기준으로 캔버스·절차 노드의 명시 조문 28건을 대조했다. 계약·약관·수수료 요율 등 운영 세부는 fieldVerification으로 남겼다.",
+  "notes": [
+   "저작권법은 국가법령정보센터 현행 본문(MST 283335)을 기준으로 했다. 통합본 시행일 표기는 2026년 8월 11일이다.",
+   "2026년 2월 10일 개정으로 신설·강화된 일부 규정은 시행일을 별도 확인해야 한다.",
+   "이 콘텐츠는 법률 자문이 아니다."
+  ],
+  "sources": [
+   {
+    "law": "저작권법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "저작권법",
+    "lawId": "000798",
+    "mst": "283335",
+    "promulgatedOn": "2026-02-10",
+    "effectiveOn": "2026-08-11",
+    "officialUrl": "https://law.go.kr/법령/저작권법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-19",
+   "method": "국가법령정보센터 DRF 현행 조문번호·제목 대조",
+   "citationEntries": 19,
+   "explicitCitationEntries": 19,
+   "articleReferences": 28,
+   "verifiedReferences": 28,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}
