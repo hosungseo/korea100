@@ -1,5 +1,11 @@
 # 한 장으로 끝내는 대한민국 제도 100
 
+<p align="center">
+  <strong>한국어</strong>
+  &nbsp;·&nbsp;
+  <a href="README.en.md">English</a>
+</p>
+
 > 기업에는 비즈니스 모델이 있듯이, 국가에는 제도 모델이 있다.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-0f9f72.svg)](LICENSE)
