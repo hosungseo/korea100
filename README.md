@@ -3,6 +3,12 @@
 </p>
 
 <p align="center">
+  <strong>한국어</strong>
+  &nbsp;·&nbsp;
+  <a href="README.en.md">English</a>
+</p>
+
+<p align="center">
   <a href="https://hosungseo.github.io/korea100/"><strong>서비스 열기</strong></a>
   &nbsp;·&nbsp;
   <a href="https://hosungseo.github.io/korea100/verification/"><strong>검증 대장</strong></a>
