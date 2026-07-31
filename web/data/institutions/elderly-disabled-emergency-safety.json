@@ -1,0 +1,432 @@
+{
+ "slug": "elderly-disabled-emergency-safety",
+ "name": "독거노인·장애인 응급안전안심서비스",
+ "oneLiner": "독거노인·장애인 등 취약가구에 센서·응급호출 등 안전장비를 설치하고 응급상황 모니터링·안전확인·연계를 하는 응급안전 제도",
+ "type": "복지급여형",
+ "priority": 507,
+ "category": "복지와 사회보험",
+ "whyFirst": "계획서에서 ‘안전/응급’ 니즈에 바로 붙는 후보인데, 맞춤돌봄·긴급복지와 혼동되기 쉬워 장비·관제·출동 경로를 따로 보여 줄 필요가 있다.",
+ "asOfDate": "2026-07-29",
+ "status": "full",
+ "canvas": {
+  "purpose": "홀로 살거나 응급 대응이 어려운 노인·장애인 가구의 화재·활동 공백·응급호출 상황에 빠르게 대응하고, 일상 안전확인과 필요 서비스 연계로 고독사·방치 위험을 줄인다.",
+  "stakeholders": "독거노인·등록장애인·가족, 읍·면·동, 시·군·구, 장비 설치·관제 수행기관, 소방·의료 응급기관, 보건복지부, 독거노인종합지원센터·장애인 관련 기관",
+  "legalBasis": [
+   {
+    "law": "노인복지법",
+    "articles": "제27조의2(홀로 사는 노인에 대한 지원·안전확인), 제27조의3(독거노인종합지원센터), 제4조의2(안전사고 예방), 제39조의7(응급조치의무 등·해당 시)",
+    "kind": "법률"
+   },
+   {
+    "law": "장애인복지법",
+    "articles": "장애인 안전·보호 및 지역사회 자립 지원 관련 조항(세부 조문·사업 연결은 현장 검증)",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "보건복지부",
+    "role": "사업 지침·국고 지원"
+   },
+   {
+    "name": "시·군·구",
+    "role": "대상 선정·수행기관 관리"
+   },
+   {
+    "name": "수행기관(관제·설치)",
+    "role": "장비 설치·모니터링·안전확인"
+   },
+   {
+    "name": "소방·의료기관",
+    "role": "응급 출동·이송 협력"
+   },
+   {
+    "name": "읍·면·동",
+    "role": "신청 접수·사후 돌봄 연계"
+   }
+  ],
+  "procedure": [
+   "대상 발굴·신청(독거·장애·취약 가구)",
+   "가정 환경·위험 조사 및 선정",
+   "센서·응급호출기 등 장비 설치·교육",
+   "관제센터 모니터링 및 이상 신호 확인",
+   "응급 시 연락·출동 요청·현장 대응",
+   "사후 안전확인 및 돌봄·의료 연계"
+  ],
+  "moneyFlow": "국비·지방비 사업비로 장비·통신·관제 운영비가 집행된다. 가구 본인부담 여부는 연도별 사업기준·지자체 여건에 따른다.",
+  "docsFlow": "신청·동의 → 선정 통지 → 설치 확인서 → 관제·출동 로그 → 사후 연계 기록",
+  "bottlenecks": [
+   "오탐·미탐(센서 오작동)과 야간 대응 인력",
+   "개인정보·주거 사생활과 상시 모니터링의 긴장",
+   "맞춤돌봄·긴급복지·통합지원과의 중복 안내",
+   "농촌·음영지역 통신·출동 거리"
+  ],
+  "reformPoints": [
+   "이상 신호 대응 SLA(시간) 공개",
+   "오탐 감소·이용자 설명 표준 문안",
+   "돌봄 계획서에 장비 유무·비상연락망을 필수 항목화"
+  ]
+ },
+ "related": [
+  "노인맞춤돌봄서비스",
+  "지역 돌봄 통합지원",
+  "사회서비스원·긴급돌봄",
+  "긴급복지지원",
+  "장애인활동지원"
+ ],
+ "fieldVerification": [
+  "당해 연도 응급안전안심서비스 사업안내의 대상·장비 구성·관제 기준",
+  "장애인 가구 적용 근거 조문·지침의 현행 연결",
+  "소방·지자체 비상연락 프로토콜",
+  "개인정보 수집·보관 기간과 동의 서식"
+ ],
+ "process": {
+  "institution_name": "독거노인·장애인 응급안전안심서비스",
+  "law_name": "노인복지법",
+  "lanes": [
+   "이용 가구",
+   "읍면동·시군구",
+   "설치·관제 수행기관",
+   "소방·의료",
+   "보건복지부"
+  ],
+  "stages": [
+   "G0 지침",
+   "G1 신청·선정",
+   "G2 설치",
+   "G3 관제",
+   "G4 응급대응",
+   "G5 사후연계"
+  ],
+  "nodes": [
+   {
+    "progress": 100,
+    "confidence": 0.82,
+    "output_documents": [
+     "사업안내"
+    ],
+    "id": "P01",
+    "name": "사업 지침·지원 기준 확인",
+    "lane": "보건복지부",
+    "stage": "G0 지침",
+    "type": "task",
+    "status": "done",
+    "actor": "보건복지부",
+    "action": "응급안전 사업 기준 제시",
+    "legal_basis": [
+     {
+      "law": "노인복지법",
+      "article": "제27조의2제3항",
+      "text": "서비스·보호조치의 구체적 내용은 보건복지부장관이 정한다."
+     },
+     {
+      "law": "노인복지법",
+      "article": "제4조의2",
+      "text": "안전사고 예방을 위한 국가·지자체 책무."
+     }
+    ]
+   },
+   {
+    "progress": 100,
+    "confidence": 0.82,
+    "output_documents": [
+     "신청서",
+     "동의서"
+    ],
+    "id": "P02",
+    "name": "신청·발굴",
+    "lane": "이용 가구",
+    "stage": "G1 신청·선정",
+    "type": "task",
+    "status": "done",
+    "actor": "본인·가족·이웃·유관기관",
+    "action": "서비스 신청 또는 발굴 의뢰",
+    "legal_basis": [
+     {
+      "law": "노인복지법",
+      "article": "제27조의2제1항",
+      "text": "홀로 사는 노인에 대한 안전확인 등 보호조치."
+     }
+    ]
+   },
+   {
+    "progress": 45,
+    "confidence": 0.82,
+    "output_documents": [
+     "선정 통지",
+     "가정 조사 기록"
+    ],
+    "id": "P03",
+    "name": "대상 선정·환경 조사",
+    "lane": "읍면동·시군구",
+    "stage": "G1 신청·선정",
+    "type": "gateway",
+    "status": "current",
+    "actor": "시·군·구",
+    "action": "선정 여부·우선순위 결정",
+    "blocker": "예산·장비 재고에 따른 대기 가능",
+    "legal_basis": [
+     {
+      "law": "노인복지법",
+      "article": "제27조의2제2항",
+      "text": "사업 위탁 및 비용 지원 가능."
+     },
+     {
+      "law": "장애인복지법",
+      "article": "장애인 안전·보호 관련 조항",
+      "text": "장애인 가구 적용 세부 근거는 지침·조문 대조 필요(현장 검증)."
+     }
+    ]
+   },
+   {
+    "progress": 0,
+    "confidence": 0.82,
+    "output_documents": [
+     "설치 확인서",
+     "비상연락망"
+    ],
+    "id": "P04",
+    "name": "장비 설치·이용 교육",
+    "lane": "설치·관제 수행기관",
+    "stage": "G2 설치",
+    "type": "task",
+    "status": "waiting",
+    "actor": "수행기관 기술·상담 인력",
+    "action": "화재·활동·응급호출 장비 설치 및 사용법 안내",
+    "legal_basis": [
+     {
+      "law": "노인복지법",
+      "article": "제27조의2제1항",
+      "text": "안전확인 등 보호를 위한 장비·체계 마련."
+     }
+    ]
+   },
+   {
+    "progress": 0,
+    "confidence": 0.82,
+    "output_documents": [
+     "관제 로그"
+    ],
+    "id": "P05",
+    "name": "상시 모니터링",
+    "lane": "설치·관제 수행기관",
+    "stage": "G3 관제",
+    "type": "system",
+    "status": "waiting",
+    "actor": "관제센터",
+    "action": "센서·호출 신호 감시",
+    "legal_basis": [
+     {
+      "law": "노인복지법",
+      "article": "제27조의2제1항",
+      "text": "안전확인 보호조치의 일상적 수행."
+     }
+    ]
+   },
+   {
+    "progress": 0,
+    "confidence": 0.82,
+    "output_documents": [
+     "확인 기록"
+    ],
+    "id": "P06",
+    "name": "이상 신호 확인 통화",
+    "lane": "설치·관제 수행기관",
+    "stage": "G3 관제",
+    "type": "task",
+    "status": "waiting",
+    "actor": "관제 상담원",
+    "action": "본인·비상연락망 확인",
+    "legal_basis": [
+     {
+      "law": "노인복지법",
+      "article": "제27조의2제1항",
+      "text": "안전확인."
+     }
+    ]
+   },
+   {
+    "progress": 0,
+    "confidence": 0.82,
+    "output_documents": [
+     "출동 일지"
+    ],
+    "id": "P07",
+    "name": "응급 출동·이송 요청",
+    "lane": "소방·의료",
+    "stage": "G4 응급대응",
+    "type": "task",
+    "status": "risk",
+    "actor": "소방·응급의료",
+    "action": "현장 출동·응급 조치",
+    "legal_basis": [
+     {
+      "law": "노인복지법",
+      "article": "제39조의7",
+      "text": "응급조치의무 등(해당 시설·상황 시)."
+     }
+    ]
+   },
+   {
+    "progress": 0,
+    "confidence": 0.82,
+    "output_documents": [
+     "연계 의뢰",
+     "사후 점검"
+    ],
+    "id": "P08",
+    "name": "사후 안전확인·돌봄 연계",
+    "lane": "읍면동·시군구",
+    "stage": "G5 사후연계",
+    "type": "task",
+    "status": "waiting",
+    "actor": "시·군·구·수행기관",
+    "action": "맞춤돌봄·의료·긴급복지 등 연계",
+    "legal_basis": [
+     {
+      "law": "노인복지법",
+      "article": "제27조의2",
+      "text": "보호조치 후 지속 지원 필요 시 돌봄 연계."
+     }
+    ]
+   },
+   {
+    "progress": 0,
+    "confidence": 0.82,
+    "output_documents": [
+     "변경 신청"
+    ],
+    "id": "P09",
+    "name": "이용 상태 통지·재신청",
+    "lane": "이용 가구",
+    "stage": "G5 사후연계",
+    "type": "notice",
+    "status": "waiting",
+    "actor": "본인·가족",
+    "action": "장비 상태·이전 설치·해지 요청",
+    "legal_basis": [
+     {
+      "law": "노인복지법",
+      "article": "제27조의2",
+      "text": "이용 가구에 대한 안내·변경 경로."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E20",
+    "source": "P06",
+    "target": "P05",
+    "type": "loop",
+    "label": "오탐·정상 복귀"
+   },
+   {
+    "id": "E21",
+    "source": "P08",
+    "target": "P05",
+    "type": "sequence",
+    "label": "관제 재개"
+   }
+  ]
+ },
+ "verification": {
+  "status": "source-linked",
+  "verifiedAt": "2026-07-29",
+  "method": "국가법령정보센터 DRF API(lawSearch/lawService)로 법률 원문 연결 및 핵심 조문 존재 확인",
+  "scope": "상위 법률 출처를 연결하고 핵심 조문 번호 존재를 확인했다. 연도별 사업안내·지자체 세부 기준의 해석·적용은 검증 범위에 포함하지 않는다.",
+  "notes": [
+   "서비스 공식 명칭·장비 구성은 보건복지부 사업안내를 따른다. 장애인 축의 세부 조문 매핑은 fieldVerification으로 남긴다."
+  ],
+  "sources": [
+   {
+    "law": "노인복지법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "노인복지법",
+    "lawId": "001777",
+    "mst": "259093",
+    "promulgatedOn": "2024-01-23",
+    "effectiveOn": "2026-01-24",
+    "officialUrl": "https://law.go.kr/법령/노인복지법"
+   },
+   {
+    "law": "장애인복지법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "장애인복지법",
+    "lawId": "000187",
+    "mst": "281941",
+    "promulgatedOn": "2025-12-30",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/장애인복지법"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-07-29",
+   "method": "DRF 현행 본문 XML에서 조문번호·조문제목·항내용 대조",
+   "citationEntries": 10,
+   "explicitCitationEntries": 10,
+   "articleReferences": 10,
+   "verifiedReferences": 10,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}
