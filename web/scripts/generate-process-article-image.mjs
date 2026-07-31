@@ -23,7 +23,9 @@ const legacyEiaPath = path.join(
 const WIDTH = 1800;
 const HEIGHT = 2400;
 // Bump this when the SVG/layout renderer changes. Data-only changes then stay incremental.
-const RENDERER_VERSION = "portrait-process-v4";
+const RENDERER_VERSION = "portrait-process-v5";
+// 업무명 공통 접두어를 벗길 최소 길이. 이보다 짧으면 벗기지 않는다.
+const MIN_SHARED_PREFIX = 8;
 const forceRebuild = process.argv.includes("--all") || process.env.FORCE_PROCESS_IMAGE_REBUILD === "1";
 const GRID_LEFT = 38;
 const GRID_RIGHT = 1762;
@@ -402,6 +404,7 @@ function buildLayout(institution, process, groups) {
     stageTops,
     layoutMetrics,
     nodeLayout,
+    nodeDisplayName: buildNodeDisplayNames(process),
     edgeRouteSlots: buildProcessEdgeRouteSlots(process.edges, nodeLayout),
   };
   context.edgeRouteAudit = validateEdgeRouteLayout(context);
@@ -1036,7 +1039,7 @@ function renderNode(node, context) {
   const y = position.y;
   const statusWidth = 50;
   const nameLines = wrapTextToWidth(
-    node.name,
+    context.nodeDisplayName?.get(node.id) ?? node.name,
     CARD_TEXT_WIDTH,
     CARD_TITLE_SIZE,
     2
@@ -1122,6 +1125,35 @@ function textLines(lines, x, y, options = {}) {
     )
     .join("");
   return `<text x="${round(x)}" y="${round(y)}" font-size="${size}" font-weight="${weight}" fill="${fill}">${tspans}</text>`;
+}
+
+// 한 제도 안에서 업무명이 모두 같은 접두어로 시작하는 경우가 있다.
+// 카드 제목은 2줄까지만 렌더되므로, 접두어가 길면 두 줄을 접두어가 다 차지하고
+// 정작 업무를 구별하는 뒷부분이 잘려 모든 카드가 같은 문구로 보인다.
+// 원본 데이터는 그대로 두고, 렌더에 쓸 이름에서만 공통 접두어를 벗긴다.
+function buildNodeDisplayNames(process) {
+  const names = process.nodes.map((node) => String(node.name ?? "").trim());
+  const display = new Map(process.nodes.map((node, i) => [node.id, names[i]]));
+  if (names.length < 3) return display;
+
+  let prefix = names[0];
+  for (const name of names.slice(1)) {
+    let k = 0;
+    while (k < prefix.length && k < name.length && prefix[k] === name[k]) k += 1;
+    prefix = prefix.slice(0, k);
+    if (!prefix) return display;
+  }
+
+  // 어절 중간에서 끊으면 뜻이 깨지므로 마지막 공백까지만 공통 접두어로 인정한다.
+  const cut = prefix.lastIndexOf(" ");
+  if (cut < MIN_SHARED_PREFIX) return display;
+  const shared = prefix.slice(0, cut + 1);
+
+  for (const [i, node] of process.nodes.entries()) {
+    const rest = names[i].slice(shared.length).trim();
+    if (rest) display.set(node.id, rest); // 벗기면 빈 문자열이 되는 경우는 원본 유지
+  }
+  return display;
 }
 
 function wrapTextToWidth(text, maxWidth, fontSize, maxLines) {
@@ -1231,7 +1263,7 @@ function validateTextLayout(context) {
 
   for (const node of process.nodes) {
     const nameLines = wrapTextToWidth(
-      node.name,
+      context.nodeDisplayName?.get(node.id) ?? node.name,
       CARD_TEXT_WIDTH,
       CARD_TITLE_SIZE,
       2
