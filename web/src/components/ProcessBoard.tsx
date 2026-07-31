@@ -216,7 +216,7 @@ function GateTimeline({
                             ? "#0f9f72"
                             : st === "risk"
                             ? "#c78116"
-                            : "#87938d",
+                            : "#5d6b63",
                         display: "block",
                       }}
                     >
@@ -230,7 +230,7 @@ function GateTimeline({
                             ? "#111714"
                             : st === "done"
                             ? "#5d6b63"
-                            : "#87938d",
+                            : "#5d6b63",
                         lineHeight: 1.3,
                         fontWeight: st === "current" ? 600 : 430,
                       }}
@@ -246,7 +246,7 @@ function GateTimeline({
                       color:
                         st === "current" || st === "done"
                           ? "#0f9f72"
-                          : "#87938d",
+                          : "#5d6b63",
                       fontSize: 10,
                     }}
                   >
@@ -337,7 +337,7 @@ function NodeCard({
             fontWeight: 700,
             letterSpacing: "0.05em",
             textTransform: "uppercase",
-            color: "#87938d",
+            color: "#5d6b63",
             background: "#f5f7f6",
             padding: "2px 6px",
             borderRadius: 4,
@@ -393,7 +393,7 @@ function NodeCard({
       <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
         <span
           className="mono"
-          style={{ color: "#87938d", flexShrink: 0 }}
+          style={{ color: "#5d6b63", flexShrink: 0 }}
         >
           {node.id}
         </span>
@@ -599,7 +599,7 @@ function NodeDrawer({
             <div style={{ display: "flex", gap: 6, marginBottom: 6 }}>
               <span
                 className="mono"
-                style={{ color: "#87938d" }}
+                style={{ color: "#5d6b63" }}
               >
                 {node.id}
               </span>
@@ -637,7 +637,7 @@ function NodeDrawer({
               background: "none",
               border: "none",
               cursor: "pointer",
-              color: "#87938d",
+              color: "#5d6b63",
               fontSize: 22,
               lineHeight: 1,
               padding: 4,
@@ -831,7 +831,7 @@ function MetaItem({ label, value }: { label: string; value: string }) {
           fontWeight: 700,
           letterSpacing: "0.06em",
           textTransform: "uppercase",
-          color: "#87938d",
+          color: "#5d6b63",
           marginBottom: 3,
         }}
       >
@@ -859,7 +859,7 @@ function DrawerSection({
           fontWeight: 700,
           letterSpacing: "0.07em",
           textTransform: "uppercase",
-          color: "#87938d",
+          color: "#5d6b63",
           marginBottom: 8,
           paddingBottom: 6,
           borderBottom: "1px solid #dde5df",
@@ -954,7 +954,7 @@ export default function ProcessBoard({
         ))}
       </div>
 
-      <p style={{ fontSize: 12, color: "#87938d", marginTop: 12 }}>
+      <p style={{ fontSize: 12, color: "#5d6b63", marginTop: 12 }}>
         법령상 구조 기준 · 공식 원문 검증 상태 포함
       </p>
 
