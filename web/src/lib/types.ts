@@ -108,11 +108,129 @@ export interface ProcessNodeLegalBasis {
   law: string;
   article: string;
   text?: string;
+  unverified?: boolean;
 }
 
 export type NodeStatus = "done" | "current" | "waiting" | "risk" | "loop";
 export type NodeType = "task" | "gateway" | "notice" | "system";
 export type EdgeType = "sequence" | "message" | "loop";
+export type AgentReadinessLevel = "R0" | "R1" | "R2" | "R3" | "R4";
+export type AgentMode = "reference-only" | "next-action";
+export type AgentTriggerEvent =
+  | "procedure.started"
+  | "predecessor.completed"
+  | "application.received"
+  | "approval.completed"
+  | "notice.received"
+  | "supplement.requested"
+  | "external.reply.received"
+  | "objection.filed"
+  | "inspection.completed"
+  | "manual.confirmed";
+export type AgentObligation = "required" | "conditional" | "optional" | "operational" | "unclassified";
+export type AgentBasisStatus = "citation-verified" | "source-linked" | "unverified" | "descriptive" | "none";
+export type AgentAutomationLevel = "inform-only" | "draft-with-review" | "manual-only";
+export type AgentDeadlineRuleType =
+  | "statutory"
+  | "internal-target"
+  | "document-defined"
+  | "not-specified"
+  | "needs-verification";
+
+export interface AgentNodeContract {
+  trigger_event: AgentTriggerEvent;
+  trigger_condition: string;
+  completion_condition: string;
+  obligation: AgentObligation;
+  basis_status: AgentBasisStatus;
+  automation_level: AgentAutomationLevel;
+  human_confirmation_required: true;
+  resolved_input_documents: string[];
+  completion_evidence: string[];
+  handoff_recipients: string[];
+  deadline_rule: {
+    type: AgentDeadlineRuleType;
+    expression: string | null;
+  };
+  derivation: "existing-data-and-graph";
+}
+
+export interface AgentTransitionContract {
+  condition: string;
+  transition_type: "required" | "conditional";
+  handoff: {
+    from_actor: string;
+    to_actor: string;
+    documents: string[];
+  };
+  human_confirmation_required: true;
+}
+
+export interface AgentReadinessMetrics {
+  nodes: number;
+  edges: number;
+  node_contract_coverage: number;
+  transition_contract_coverage: number;
+  explicit_basis_coverage: number;
+  output_document_coverage: number;
+  low_confidence_nodes: number;
+  template_like_nodes: number;
+  deadline_review_nodes: number;
+  field_verification_items: number;
+}
+
+export interface AgentLiveLegalCheckIssue {
+  node_id: string;
+  law: string;
+  article: string;
+  reason: string;
+}
+
+export interface AgentLiveLegalSourceResult {
+  law: string;
+  source_type: "statute" | "admin-rule";
+  source_id: string;
+  official_url: string;
+  status: "passed" | "partial" | "failed";
+  official_name?: string;
+  version_key?: string;
+  promulgated_on?: string;
+  effective_on?: string;
+  requested_articles: string[];
+  verified_articles: string[];
+  missing_articles: string[];
+  error?: string;
+}
+
+export interface AgentLiveLegalCheck {
+  checked_at: string;
+  method: "law.go.kr-DRF-direct";
+  status: "passed" | "partial" | "failed";
+  citation_fingerprint: `sha256:${string}`;
+  sources_checked: number;
+  source_failures: number;
+  article_references: number;
+  verified_references: number;
+  missing_references: AgentLiveLegalCheckIssue[];
+  uncheckable_references: AgentLiveLegalCheckIssue[];
+  verified_node_ids: string[];
+  unverified_node_ids: string[];
+  source_results: AgentLiveLegalSourceResult[];
+}
+
+export interface AgentReadiness {
+  contract_version: "1.1.0";
+  level: AgentReadinessLevel;
+  mode: AgentMode;
+  assessed_at: string;
+  assessment_method: string;
+  live_legal_check: "required-before-use";
+  last_live_check?: AgentLiveLegalCheck;
+  actionable_node_ids: string[];
+  reference_only_node_ids: string[];
+  blockers: string[];
+  metrics: AgentReadinessMetrics;
+}
 
 export interface ProcessNode {
   id: string;
@@ -123,6 +241,8 @@ export interface ProcessNode {
   status: NodeStatus;
   progress?: number;
   actor: string;
+  receiver?: string;
+  recipients?: string[];
   action?: string;
   input_documents?: string[];
   output_documents?: string[];
@@ -130,6 +250,7 @@ export interface ProcessNode {
   blocker?: string | null;
   confidence?: number;
   legal_basis?: ProcessNodeLegalBasis[];
+  agent?: AgentNodeContract;
 }
 
 export interface ProcessEdge {
@@ -138,6 +259,7 @@ export interface ProcessEdge {
   target: string;
   type: EdgeType;
   label?: string | null;
+  agent_transition?: AgentTransitionContract;
 }
 
 export interface ProcessLaneGroup {
@@ -154,6 +276,7 @@ export interface ProcessModel {
   stages: string[];
   nodes: ProcessNode[];
   edges: ProcessEdge[];
+  agent_readiness?: AgentReadiness;
   warnings?: import("./process-warnings.mjs").ProcessWarning[];
 }
 

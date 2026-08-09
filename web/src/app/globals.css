@@ -4551,6 +4551,95 @@ body:has(.og-card-page) > main {
   line-height: 1.45;
 }
 
+.process-node-inspector-agent {
+  grid-column: 1 / -1;
+  margin: 0 -18px;
+  padding: 14px 18px 16px;
+  border-top: 1px solid var(--color-border-strong);
+  background: #f7faf8;
+}
+
+.process-node-inspector-agent-heading,
+.process-node-inspector-agent-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.process-node-inspector-agent-heading > div {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.process-node-inspector-agent-heading > div > span,
+.process-node-inspector-agent-grid span {
+  color: var(--color-faint);
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.process-node-inspector-agent-heading > div > strong {
+  color: var(--color-accent-dark);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.process-node-inspector-agent-heading > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--color-muted);
+  font-size: 9px;
+  font-weight: 650;
+}
+
+.process-node-inspector-agent-heading > span i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-warning);
+}
+
+.process-node-inspector-agent-heading > span[data-status="passed"] i {
+  background: var(--color-accent);
+}
+
+.process-node-inspector-agent-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 11px;
+}
+
+.process-node-inspector-agent-grid > div {
+  min-width: 0;
+  padding-left: 9px;
+  border-left: 2px solid var(--color-border-strong);
+}
+
+.process-node-inspector-agent-grid p {
+  margin: 3px 0 0;
+  color: var(--color-text);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.process-node-inspector-agent-meta {
+  margin-top: 12px;
+  padding-top: 9px;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-muted);
+  font-size: 9px;
+}
+
+.process-node-inspector-agent-meta strong {
+  color: var(--color-warning);
+  font-size: 9px;
+  font-weight: 700;
+}
+
 .verification-mark.is-interactive {
   cursor: pointer;
   touch-action: manipulation;
@@ -5088,6 +5177,24 @@ body:has(.og-card-page) > main {
 
   .process-node-inspector-laws-list {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .process-node-inspector-agent {
+    margin: 0 -16px -18px;
+    padding: 14px 16px 18px;
+  }
+
+  .process-node-inspector-agent-heading,
+  .process-node-inspector-agent-heading > div,
+  .process-node-inspector-agent-meta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .process-node-inspector-agent-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
   }
 
   .article-popover-backdrop {

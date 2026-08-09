@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type {
+  AgentReadiness,
   ProcessLaneGroup,
   ProcessModel,
   ProcessNode,
@@ -107,7 +108,11 @@ export default function ProcessExplorer({
       </div>
 
       {selectedNode && (
-        <ProcessNodeInspector node={selectedNode} verification={verification} />
+        <ProcessNodeInspector
+          node={selectedNode}
+          verification={verification}
+          readiness={process.agent_readiness}
+        />
       )}
     </div>
   );
@@ -116,9 +121,11 @@ export default function ProcessExplorer({
 function ProcessNodeInspector({
   node,
   verification,
+  readiness,
 }: {
   node: ProcessNode;
   verification?: SourceVerification;
+  readiness?: AgentReadiness;
 }) {
   const status = statusMeta(node.status);
   const verificationResult = getNodeVerification(node, verification);
@@ -181,8 +188,58 @@ function ProcessNodeInspector({
           {!node.legal_basis?.length && <p>명시 조문 확인 필요</p>}
         </div>
       </div>
+
+      {node.agent && readiness && (
+        <div className="process-node-inspector-agent">
+          <div className="process-node-inspector-agent-heading">
+            <div>
+              <span>행정절차 에이전트 샘플</span>
+              <strong>{readiness.level} · 다음 행동 데이터</strong>
+            </div>
+            <span data-status={readiness.last_live_check?.status ?? "failed"}>
+              <i aria-hidden="true" />
+              제도 전체 조문 {readiness.last_live_check?.verified_references ?? 0}/
+              {readiness.last_live_check?.article_references ?? 0}
+            </span>
+          </div>
+
+          <div className="process-node-inspector-agent-grid">
+            <div>
+              <span>시작 조건</span>
+              <p>{node.agent.trigger_condition}</p>
+            </div>
+            <div>
+              <span>완료 기준</span>
+              <p>{node.agent.completion_condition}</p>
+            </div>
+            <div>
+              <span>다음 인계</span>
+              <p>{node.agent.handoff_recipients.join(" · ") || "동일 담당자 내부 완료"}</p>
+            </div>
+          </div>
+
+          <div className="process-node-inspector-agent-meta">
+            <span>
+              기한 · {deadlineRuleLabel(node.agent.deadline_rule.type)}
+              {node.agent.deadline_rule.expression ? ` · ${node.agent.deadline_rule.expression}` : ""}
+            </span>
+            <strong>사람 확인 필수</strong>
+          </div>
+        </div>
+      )}
     </section>
   );
+}
+
+function deadlineRuleLabel(type: NonNullable<ProcessNode["agent"]>["deadline_rule"]["type"]) {
+  const labels = {
+    statutory: "법정기한",
+    "internal-target": "내부 목표",
+    "document-defined": "개별 문서 기준",
+    "not-specified": "명시 없음",
+    "needs-verification": "추가 확인",
+  };
+  return labels[type];
 }
 
 function statusMeta(status: ProcessNode["status"]) {

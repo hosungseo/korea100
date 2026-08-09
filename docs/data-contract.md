@@ -160,6 +160,57 @@ interface ProcessNode {
 }
 ```
 
+## 행정절차 에이전트 대표 샘플
+
+`process.agent_readiness`가 있는 제도만 에이전트용 전이 계약을 사용한다. 현재는 전체 제도를 일괄 변환하지 않고 `과태료 사전통지·의견제출`, `과태료 이의제기·법원재판`, `국가연구개발비 지급·사용·정산` 세 사례에만 적용한다.
+
+```ts
+interface AgentNodeContract {
+  trigger_event: AgentTriggerEvent;
+  trigger_condition: string;
+  completion_condition: string;
+  obligation: "required" | "conditional" | "optional" | "operational" | "unclassified";
+  basis_status: "citation-verified" | "source-linked" | "unverified" | "descriptive" | "none";
+  automation_level: "inform-only" | "draft-with-review" | "manual-only";
+  human_confirmation_required: true;
+  resolved_input_documents: string[];
+  completion_evidence: string[];
+  handoff_recipients: string[];
+  deadline_rule: {
+    type: "statutory" | "internal-target" | "document-defined" | "not-specified" | "needs-verification";
+    expression: string | null;
+  };
+}
+
+interface AgentTransitionContract {
+  condition: string;
+  transition_type: "required" | "conditional";
+  handoff: {
+    from_actor: string;
+    to_actor: string;
+    documents: string[];
+  };
+  human_confirmation_required: true;
+}
+
+interface AgentLiveLegalCheck {
+  checked_at: string;
+  method: "law.go.kr-DRF-direct";
+  status: "passed" | "partial" | "failed";
+  citation_fingerprint: `sha256:${string}`;
+  verified_node_ids: string[];
+  unverified_node_ids: string[];
+}
+```
+
+- `R0`: 시각화 그래프 수준
+- `R1`: 조문 출처를 연결했지만 행동 제안은 참고용
+- `R2`: 트리거·완료조건·문서·기한·전이와 법제처 현행 원문을 대조해 `next-action` 응답 가능
+- `R3`: 현업 담당자가 업무분장·서식·인계 방식을 확인
+- `R4`: 전자결재·민원·업무시스템 이벤트와 실제 연동 검증
+
+R2 승급에는 법제처 DRF API 직접 대조가 필요하다. 법률은 법령 ID(`ID`), 행정규칙은 행정규칙 ID(`LID`)로 조회하며 인증값은 결과 데이터에 저장하지 않는다. 조문·공식 원문 식별자가 바뀌어 지문이 달라지면 기존 통과 판정은 무효가 된다. 모든 후속 행위는 담당자 확인을 요구한다.
+
 ## 작성 규칙 (one-page-template.md 요약)
 
 - 법령명 + 조문번호를 붙인다. 법률→대통령령→부령 우선.
