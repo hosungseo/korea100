@@ -108,7 +108,8 @@ cd web && node scripts/generate-field-verification-queue.mjs
 - `web/src/app/`: 홈, 상세, 검증 현황, 제작 요청 페이지
 - `web/src/components/DesktopProcessBoard.tsx`: 데스크톱 업무구조도
 - `web/src/components/InstitutionExplorer.tsx`: 제도 검색·분류 UI
-- `web/data/institutions/`: 제도별 정규화 JSON (109개)
+- `web/data/institutions/`: 제도별 정규화 JSON (505개)
+- `chrome-extension/`: 개인 초안·근거 편집용 Manifest V3 사이드패널과 배포 빌드
 - `docs/institutions-100-manifest.json`: 우선순위와 대분류 manifest
 - `docs/data-contract.md`: 콘텐츠와 화면 데이터 계약
 - `docs/field-verification-queue.json`: 현장 검증 작업 큐 (582건)

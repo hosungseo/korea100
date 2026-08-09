@@ -1,0 +1,824 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>지방소멸대응기금 확장 운영체계도 (A3) · v1.2 connectors</title>
+  <style>
+    :root {
+      --ink: #111714;
+      --muted: #5d6b63;
+      --faint: #87938d;
+      --paper: #fcfcfb;
+      --surface: #ffffff;
+      --surface-muted: #f5f7f6;
+      --border: #dde5df;
+      --border-strong: #bdcbc4;
+      --accent: #0f9f72;
+      --accent-dark: #087452;
+      --accent-soft: #dff5eb;
+      --warning: #c78116;
+      --warning-soft: #fff4df;
+      --money: #e8f7ff;
+      --money-line: #2f7ea8;
+      --data: #eef2ff;
+      --data-line: #4c63d2;
+      --dark: #0b1410;
+      --line: #55685e;
+      --edge-seq: #55685e;
+      --edge-msg: #0d8a63;
+      --edge-loop: #c78116;
+      --edge-money: #2f7ea8;
+      --edge-feed: #5d6b63;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #e8ece9;
+      color: var(--ink);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    }
+    .sheet {
+      width: 3508px;
+      height: 2480px;
+      margin: 0 auto;
+      background: var(--paper);
+      position: relative;
+      overflow: hidden;
+    }
+    .frame {
+      position: absolute;
+      inset: 28px;
+      border: 1px solid var(--border-strong);
+      background: linear-gradient(180deg, #f8fbf9 0%, var(--paper) 180px), var(--paper);
+    }
+    header {
+      position: absolute;
+      left: 36px; right: 36px; top: 28px; height: 132px;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 0.9fr;
+      gap: 18px;
+      padding-bottom: 14px;
+    }
+    .brand { display: flex; flex-direction: column; justify-content: center; gap: 8px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--accent-dark); font-size: 14px; font-weight: 750; letter-spacing: 0.04em;
+    }
+    .eyebrow::before {
+      content: ""; width: 10px; height: 10px; border-radius: 99px; background: var(--accent);
+    }
+    h1 { margin: 0; font-size: 42px; line-height: 1.1; font-weight: 780; }
+    .lead { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.45; max-width: 980px; }
+    .meta, .scope {
+      border: 1px solid var(--border); background: var(--surface);
+      border-radius: 8px; padding: 14px 16px;
+    }
+    .meta h2, .scope h2, .panel h2 {
+      margin: 0; font-size: 13px; font-weight: 750; letter-spacing: 0.04em; color: var(--faint); text-transform: uppercase;
+    }
+    .meta ul, .scope ul { margin: 10px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+    .meta li, .scope li { font-size: 15px; line-height: 1.35; }
+    .meta strong, .scope strong { color: var(--accent-dark); font-weight: 750; }
+    .stages {
+      position: absolute; left: 210px; right: 430px; top: 178px; height: 58px;
+      display: grid; grid-template-columns: repeat(10, 1fr); gap: 8px;
+    }
+    .stage {
+      border: 1px solid var(--border); background: var(--surface); border-radius: 8px;
+      padding: 8px 10px; display: flex; flex-direction: column; justify-content: center; gap: 2px;
+    }
+    .stage .code { font-size: 12px; font-weight: 750; color: var(--accent-dark); font-variant-numeric: tabular-nums; }
+    .stage .name { font-size: 14px; font-weight: 720; line-height: 1.2; }
+    .board {
+      position: absolute; left: 36px; right: 430px; top: 248px; bottom: 250px;
+      display: grid; grid-template-rows: repeat(7, 1fr); gap: 8px;
+    }
+    .lane { display: grid; grid-template-columns: 174px 1fr; gap: 8px; min-height: 0; }
+    .lane-label {
+      border: 1px solid var(--border); background: var(--surface-muted); border-radius: 8px;
+      padding: 12px; display: flex; flex-direction: column; justify-content: center; gap: 6px;
+      font-size: 16px; font-weight: 740; line-height: 1.25;
+    }
+    .lane-label small { color: var(--muted); font-size: 12px; font-weight: 600; }
+    .lane-track {
+      position: relative;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.72);
+      border-radius: 8px;
+      overflow: visible;
+    }
+    .lane-track::before {
+      content: "";
+      position: absolute; inset: 0; border-radius: 8px; pointer-events: none;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent calc(10% - 1px),
+        rgba(189, 203, 196, 0.28) calc(10% - 1px),
+        rgba(189, 203, 196, 0.28) 10%
+      );
+    }
+    .box {
+      position: absolute;
+      border: 1px solid var(--border-strong);
+      background: var(--surface);
+      border-radius: 8px;
+      padding: 10px 12px;
+      box-shadow: 0 1px 0 rgba(17, 23, 20, 0.03);
+      display: flex; flex-direction: column; gap: 5px;
+      z-index: 2;
+    }
+    .box h3 {
+      margin: 0; font-size: 15px; font-weight: 760; line-height: 1.25; color: var(--ink);
+    }
+    .box p, .box li { margin: 0; color: var(--muted); font-size: 12.5px; line-height: 1.35; }
+    .box ul { margin: 0; padding-left: 14px; }
+    .tag {
+      display: inline-flex; align-self: flex-start;
+      padding: 2px 7px; border-radius: 999px;
+      font-size: 11px; font-weight: 750; border: 1px solid transparent;
+    }
+    .tag.core { background: var(--accent-soft); color: var(--accent-dark); border-color: #bfe9d7; }
+    .tag.money { background: var(--money); color: var(--money-line); border-color: #b7dcf0; }
+    .tag.data { background: var(--data); color: var(--data-line); border-color: #c9d2ff; }
+    .tag.risk { background: var(--warning-soft); color: var(--warning); border-color: #f0d7a4; }
+    .tag.gate { background: #f3f5f4; color: #33413b; border-color: var(--border); }
+    .box.money { background: #f7fcff; border-color: #9ec9e0; }
+    .box.core { background: #f5fcf8; border-color: #8fd0b4; }
+    .box.risk { background: #fffaf0; border-color: #e2bf78; }
+    .box.gate { background: #fbfcfb; border-color: #b7c4bd; }
+    .box.data { background: #f8f9ff; border-color: #b7c2ef; }
+    #wires {
+      position: absolute;
+      left: 36px; right: 430px; top: 248px; bottom: 250px;
+      width: auto; height: auto;
+      pointer-events: none;
+      z-index: 3;
+      overflow: visible;
+    }
+    .rail {
+      position: absolute; top: 178px; right: 36px; width: 372px; bottom: 250px;
+      display: grid; grid-template-rows: 1fr 1fr 1fr 0.9fr; gap: 10px;
+    }
+    .panel {
+      border: 1px solid var(--border); background: var(--surface);
+      border-radius: 8px; padding: 14px 14px 12px; overflow: hidden;
+    }
+    .panel h2 {
+      margin: 0 0 10px; color: var(--accent-dark); text-transform: none;
+      letter-spacing: 0; font-size: 16px;
+    }
+    .panel p, .panel li { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.4; }
+    .panel ul { margin: 0; padding-left: 16px; display: grid; gap: 6px; }
+    .compare { display: grid; gap: 8px; }
+    .compare .row {
+      display: grid; grid-template-columns: 92px 1fr; gap: 8px; align-items: start;
+      padding: 8px 9px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-muted);
+    }
+    .compare .row strong { font-size: 13px; color: var(--ink); line-height: 1.3; }
+    .compare .row span { font-size: 12.5px; color: var(--muted); line-height: 1.35; }
+    .footer {
+      position: absolute; left: 36px; right: 36px; bottom: 28px; height: 198px;
+      display: grid; grid-template-columns: 1.25fr 1fr 1fr 0.9fr; gap: 12px;
+    }
+    .footer .panel h2 { margin-bottom: 8px; }
+    .kpi { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .kpi .cell {
+      border: 1px solid var(--border); border-radius: 8px; background: var(--surface-muted); padding: 10px 12px;
+    }
+    .kpi .cell b {
+      display: block; font-size: 20px; font-weight: 780; color: var(--accent-dark);
+      margin-bottom: 4px; font-variant-numeric: tabular-nums;
+    }
+    .kpi .cell span { font-size: 12.5px; color: var(--muted); line-height: 1.3; }
+    .note {
+      position: absolute; left: 36px; right: 36px; bottom: 8px;
+      color: var(--faint); font-size: 12px; display: flex; justify-content: space-between; gap: 18px;
+    }
+    .legend-inline {
+      display: flex; flex-wrap: wrap; gap: 10px 14px; margin-top: 8px;
+    }
+    .legend-inline span {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; color: var(--muted); font-weight: 650;
+    }
+    .legend-inline i {
+      width: 22px; height: 0; border-top: 2.4px solid var(--edge-seq); display: inline-block; position: relative;
+    }
+    .legend-inline i::after {
+      content: ""; position: absolute; right: -1px; top: -4px;
+      border-left: 7px solid currentColor; border-top: 3.5px solid transparent; border-bottom: 3.5px solid transparent;
+      color: inherit;
+    }
+    .legend-inline i.money { border-color: var(--edge-money); color: var(--edge-money); }
+    .legend-inline i.loop { border-color: var(--edge-loop); color: var(--edge-loop); border-top-style: dashed; }
+    .legend-inline i.feed { border-color: var(--edge-feed); color: var(--edge-feed); border-top-style: dotted; border-top-width: 2px; }
+    .legend-inline i.msg { border-color: var(--edge-msg); color: var(--edge-msg); border-top-style: dashed; border-top-width: 2px; }
+    .legend-inline i { color: var(--edge-seq); }
+  </style>
+</head>
+<body>
+  <div class="sheet" id="sheet">
+    <div class="frame">
+      <header>
+        <div class="brand">
+          <div class="eyebrow">KOREA100 · EXPANDED OPERATING MAP · A3 · v1.2 connectors</div>
+          <h1>지방소멸대응기금 확장 운영체계</h1>
+          <p class="lead">
+            인구감소지역 지정부터 국비 출연, 투자계획 평가·배분, 지방예산 편입, 세부사업 집행, 성과환류까지.
+            기존 기금 프로세스(G0–G7)를 축으로 상위 자격층과 하위 집행·책임층을 한 장에 연결. Korea100 연결선 규칙(흰 halo·채운 화살촉·선종 구분)으로 가시성 강화.
+          </p>
+        </div>
+        <div class="meta">
+          <h2>맵이 답하는 질문</h2>
+          <ul>
+            <li><strong>누가</strong> 대상이 되고</li>
+            <li><strong>어떤 계획</strong>으로 돈을 받으며</li>
+            <li><strong>어디서 집행</strong>되고</li>
+            <li><strong>무엇으로 다시 평가</strong>되는가</li>
+          </ul>
+        </div>
+        <div class="scope">
+          <h2>선 읽기</h2>
+          <div class="legend-inline">
+            <span><i></i>본류(sequence)</span>
+            <span><i class="msg"></i>제출·통보(message)</span>
+            <span><i class="money"></i>돈·배분</span>
+            <span><i class="loop"></i>보완 루프</span>
+            <span><i class="feed"></i>환류·공개</span>
+          </div>
+          <ul style="margin-top:10px;">
+            <li><strong>시작</strong> 인구감소지역 지정</li>
+            <li><strong>중심</strong> 기금 평가·배분</li>
+            <li><strong>끝</strong> 집행실적 → 차년도 배분</li>
+          </ul>
+        </div>
+      </header>
+
+      <div class="stages">
+        <div class="stage"><div class="code">S0</div><div class="name">대상 지정</div></div>
+        <div class="stage"><div class="code">S1</div><div class="name">재원 조성</div></div>
+        <div class="stage"><div class="code">G0</div><div class="name">배분기준</div></div>
+        <div class="stage"><div class="code">G1</div><div class="name">투자계획</div></div>
+        <div class="stage"><div class="code">G2–G3</div><div class="name">제출·평가</div></div>
+        <div class="stage"><div class="code">G4</div><div class="name">배분 결정</div></div>
+        <div class="stage"><div class="code">G5</div><div class="name">예산 편입</div></div>
+        <div class="stage"><div class="code">G6</div><div class="name">사업 집행</div></div>
+        <div class="stage"><div class="code">G7</div><div class="name">성과·환류</div></div>
+        <div class="stage"><div class="code">S9</div><div class="name">체감·책임</div></div>
+      </div>
+
+      <div class="board" id="board">
+        <div class="lane">
+          <div class="lane-label">중앙정부<small>기재부 · 행안부 · 국회 연결</small></div>
+          <div class="lane-track" id="lane-gov"></div>
+        </div>
+        <div class="lane">
+          <div class="lane-label">기금 운영축<small>공제회 · 평가단 · 심의위</small></div>
+          <div class="lane-track" id="lane-fund"></div>
+        </div>
+        <div class="lane">
+          <div class="lane-label">광역 시·도<small>광역계정 25%</small></div>
+          <div class="lane-track" id="lane-metro"></div>
+        </div>
+        <div class="lane">
+          <div class="lane-label">기초 시·군·구<small>기초계정 75%</small></div>
+          <div class="lane-track" id="lane-local"></div>
+        </div>
+        <div class="lane">
+          <div class="lane-label">지방의회<small>예산 심의 · 집행 통제</small></div>
+          <div class="lane-track" id="lane-council"></div>
+        </div>
+        <div class="lane">
+          <div class="lane-label">사업 현장<small>부서 · 시설 · 보조</small></div>
+          <div class="lane-track" id="lane-field"></div>
+        </div>
+        <div class="lane">
+          <div class="lane-label">주민·데이터층<small>생활인구 · 공개 · 체감</small></div>
+          <div class="lane-track" id="lane-people"></div>
+        </div>
+      </div>
+
+      <svg id="wires" xmlns="http://www.w3.org/2000/svg"></svg>
+
+      <aside class="rail">
+        <section class="panel">
+          <h2>한 줄 구조</h2>
+          <p style="margin-bottom:10px;">지정 → 출연 → 계획 → 평가 → 배분 → 예산 → 집행 → 성과 → 다음 배분</p>
+          <ul>
+            <li>기존 카드의 G0–G7을 가운데 축으로 유지</li>
+            <li>앞에 <strong>대상 지정·국비 출연</strong>을 붙임</li>
+            <li>뒤에 <strong>현장 집행·주민 체감·환류</strong>를 붙임</li>
+            <li>이번 판: <strong>연결선·화살표 명시</strong></li>
+          </ul>
+        </section>
+        <section class="panel">
+          <h2>재원 비교 레일</h2>
+          <div class="compare">
+            <div class="row"><strong>지방소멸대응기금</strong><span>평가·투자계획 기반 차등 배분. 한시 출연, 광역 25% / 기초 75%.</span></div>
+            <div class="row"><strong>지방교부세</strong><span>공식 산식 배분. 일반재원 성격이 강해 계획 평가형과 결이 다름.</span></div>
+            <div class="row"><strong>고향사랑기부금</strong><span>기부·답례·기금사업. 자발적 유입 재원으로 규모·예측가능성이 다름.</span></div>
+            <div class="row"><strong>균특/기회발전</strong><span>사업·특구 단위 지원. 기금의 ‘지역 패키지 투자’와 중첩 점검 필요.</span></div>
+          </div>
+        </section>
+        <section class="panel">
+          <h2>핵심 병목</h2>
+          <ul>
+            <li>하드웨어형 사업 편중 → 부지·인허가 지연 → 집행률 부진</li>
+            <li>단년도 계획 관행 → 중장기 전략사업 약화</li>
+            <li>유사 공모사업 중복 → 기획 부담·성과 분산</li>
+            <li>인구감소 완화 성과의 단기 입증 곤란</li>
+            <li>의회 심의에서 집행률 반복 질타</li>
+          </ul>
+        </section>
+        <section class="panel">
+          <h2>법적 앵커</h2>
+          <ul>
+            <li>지방자치단체 기금관리기본법 제22–29조</li>
+            <li>시행령 제20–25조 (제출기한·성과·협약)</li>
+            <li>인구감소지역 지원 특별법 / 지방분권균형법</li>
+            <li>지방소멸대응기금 배분 기준 고시</li>
+            <li>지방재정법 예산편성 · 지방자치법 의회 의결</li>
+          </ul>
+        </section>
+      </aside>
+
+      <footer class="footer">
+        <section class="panel">
+          <h2>주요 연결 (이번 판 강조)</h2>
+          <ul>
+            <li>지정 → 기초 자격 / 출연 → 배분기준 → 공제회 운영</li>
+            <li>광역·기초 투자계획 → 제출·평가 → (보완 루프) → 배분</li>
+            <li>배분 통보 → 세입 편성 → 의회 심의 → 현장 집행</li>
+            <li>집행실적 → 성과분석 → 차년도 배분·제도개선 환류</li>
+          </ul>
+        </section>
+        <section class="panel">
+          <h2>금액·구조 메모</h2>
+          <div class="kpi">
+            <div class="cell"><b>연 1조</b><span>정부출연금(2022–2031 한시)</span></div>
+            <div class="cell"><b>25:75</b><span>광역지원계정 : 기초지원계정</span></div>
+            <div class="cell"><b>89+18</b><span>인구감소지역 + 관심지역 프레임</span></div>
+            <div class="cell"><b>차등배분</b><span>투자계획 평가등급 반영</span></div>
+          </div>
+        </section>
+        <section class="panel">
+          <h2>말단 샘플 (연결만)</h2>
+          <ul>
+            <li>정주여건: 생활 SOC, 빈집·주거, 교통·돌봄 거점</li>
+            <li>일자리·경제: 지역산업, 로컬일자리, 청년·귀농 연계</li>
+            <li>생활인구: 관계인구, 체류·관광·원격 기반 서비스</li>
+            <li>※ 개별 인허가·계약 절차는 별도 제도 카드로 분기</li>
+          </ul>
+        </section>
+        <section class="panel">
+          <h2>읽기 가이드</h2>
+          <ul>
+            <li>초록: 기금 본류</li>
+            <li>파랑: 돈·배분 신호</li>
+            <li>호박: 병목·리스크 / 점선 루프</li>
+            <li>보라: 데이터·공개·환류</li>
+            <li>open-chevron 화살표 = 진행 방향</li>
+          </ul>
+        </section>
+      </footer>
+
+      <div class="note">
+        <span>Source: korea100 / local-extinction-response-fund.json · expanded A3 operating map v1.1</span>
+        <span>asOf reference 2026-07-10 · layout 2026-07-23 · 해석용 구조도 (개별 사업 적격·금액은 연도별 배분기준·예산서 확인)</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const boxes = {};
+
+    function addBox(laneId, id, conf) {
+      const lane = document.getElementById(laneId);
+      const el = document.createElement("div");
+      el.className = `box ${conf.tone || ""}`;
+      el.id = id;
+      el.style.left = `calc(${conf.x}% + 10px)`;
+      el.style.width = `calc(${conf.w}% - 20px)`;
+      el.style.top = conf.top || "10px";
+      el.style.bottom = conf.bottom || "10px";
+      el.innerHTML = `
+        <span class="tag ${conf.tag || "core"}">${conf.tagLabel || "CORE"}</span>
+        <h3>${conf.title}</h3>
+        ${conf.body || ""}
+      `;
+      lane.appendChild(el);
+      boxes[id] = el;
+      return el;
+    }
+
+    // Government
+    addBox("lane-gov", "g_desig", {
+      x: 0, w: 12, tone: "data", tag: "data", tagLabel: "S0 지정",
+      title: "인구감소지역·관심지역 지정",
+      body: "<p>지방분권균형법·인구감소지역 지원 특례 프레임으로 지원 대상 확정. 지정 변경 고시가 자격의 입구.</p>"
+    });
+    addBox("lane-gov", "g_fund", {
+      x: 12, w: 12, tone: "money", tag: "money", tagLabel: "S1 출연",
+      title: "국비 출연 경로",
+      body: "<p>국가 재정에서 지방소멸대응기금으로 출연. 한시 연 1조 구조. 총액·연도 조건은 배분기준과 연결.</p>"
+    });
+    addBox("lane-gov", "g_rule", {
+      x: 24, w: 12, tone: "core", tag: "core", tagLabel: "G0",
+      title: "배분기준·평가지침",
+      body: "<p>행안부: 배분총액, 광역·기초 배분기준, 투자계획 평가지침 마련.</p>"
+    });
+    addBox("lane-gov", "g_next", {
+      x: 78, w: 12, tone: "gate", tag: "gate", tagLabel: "G7 환류",
+      title: "차년도 배분 반영",
+      body: "<p>성과분석·투자협약 이행결과를 재원배분 시 반영. 단순 정산이 아니라 다음 라운드 설계.</p>"
+    });
+    addBox("lane-gov", "g_reform", {
+      x: 90, w: 10, tone: "data", tag: "data", tagLabel: "S9",
+      title: "제도 개선·기준 개정",
+      body: "<p>집행률·성과 논의를 배분기준·컨설팅·다년도 유도 장치로 환류.</p>"
+    });
+
+    // Fund ops
+    addBox("lane-fund", "f_ops", {
+      x: 24, w: 10, tone: "core", tag: "core", tagLabel: "운영",
+      title: "기금 관리·운용",
+      body: "<p>한국지방재정공제회가 접수·관리·통보·성과분석 실무 축.</p>"
+    });
+    addBox("lane-fund", "f_eval", {
+      x: 42, w: 14, tone: "core", tag: "core", tagLabel: "G2–G3",
+      title: "접수·형식검토 → 평가단 평가",
+      body: "<ul><li>서면·발표 평가</li><li>타당성·전략성 중심</li><li>필요 시 보완 루프</li></ul>"
+    });
+    addBox("lane-fund", "f_alloc", {
+      x: 56, w: 12, tone: "money", tag: "money", tagLabel: "G4",
+      title: "배분등급·금액 결정·통보",
+      body: "<p>광역·기초지원계정 심의위원회 심의. 평가결과로 최종 배분금액 확정 후 지자체 통보.</p>"
+    });
+    addBox("lane-fund", "f_perf", {
+      x: 78, w: 12, tone: "data", tag: "data", tagLabel: "G7",
+      title: "집행실적·성과분석·공개",
+      body: "<p>성과분석계획 통보 → 성과보고서 → 결과 공개. 일정은 시행령 프레임(1/3/6월 축).</p>"
+    });
+    addBox("lane-fund", "f_agree", {
+      x: 90, w: 10, tone: "gate", tag: "gate", tagLabel: "협약",
+      title: "투자협약·이행점검",
+      body: "<p>국가·지자체 공동 추진 시 사업내용·투자분담 협약. 배분 환류와 연결.</p>"
+    });
+
+    // Metro
+    addBox("lane-metro", "m_coord", {
+      x: 12, w: 12, tone: "data", tag: "data", tagLabel: "광역 역할",
+      title: "관할 기초 의견 조율",
+      body: "<p>기초 계획과의 정합성, 광역 단위 생활권·인프라 조정.</p>"
+    });
+    addBox("lane-metro", "m_plan", {
+      x: 30, w: 14, tone: "core", tag: "core", tagLabel: "G1",
+      title: "광역계정 투자계획 수립·제출",
+      body: "<p>시·도 투자계획. 제출기한: 회계연도 개시 5개월 전. 기초와 사전 상호 의견청취.</p>"
+    });
+    addBox("lane-metro", "m_recv", {
+      x: 56, w: 12, tone: "money", tag: "money", tagLabel: "수신",
+      title: "광역계정 배분 수령",
+      body: "<p>광역지원계정(25%) 배분 결과 반영. 광역 사업 패키지 집행 준비.</p>"
+    });
+    addBox("lane-metro", "m_exec", {
+      x: 68, w: 12, tone: "core", tag: "core", tagLabel: "G5–G6",
+      title: "광역 예산 반영·사업 추진",
+      body: "<p>세입 편성 후 광역 단위 사업 집행. 기초 계획과 중복·공백 점검.</p>"
+    });
+
+    // Local
+    addBox("lane-local", "l_elig", {
+      x: 0, w: 12, tone: "data", tag: "data", tagLabel: "자격",
+      title: "인구감소·관심지역 기초",
+      body: "<p>지정 여부가 기초계정 배분 대상의 출발점. 지역 진단·사업수요 축적.</p>"
+    });
+    addBox("lane-local", "l_plan", {
+      x: 30, w: 14, tone: "core", tag: "core", tagLabel: "G1",
+      title: "기초계정 투자계획 수립·제출",
+      body: "<p>연도 투자계획서·세부사업. 제출기한: 회계연도 개시 6개월 전(시·도 경유).</p>"
+    });
+    addBox("lane-local", "l_fix", {
+      x: 44, w: 12, tone: "risk", tag: "risk", tagLabel: "병목",
+      title: "보완 요구·수정 제출",
+      body: "<p>평가 지적 반영 루프. 단년도 계획 관행이면 전략성 점수에서 반복 보완.</p>"
+    });
+    addBox("lane-local", "l_budget", {
+      x: 56, w: 12, tone: "money", tag: "money", tagLabel: "G4–G5",
+      title: "배분 수신 → 기금 세입 편성",
+      body: "<p>예산안에 기금 재원 표시. 지방재정 편입 순간부터 ‘쓸 수 있는 돈’이 됨.</p>"
+    });
+    addBox("lane-local", "l_report", {
+      x: 78, w: 12, tone: "data", tag: "data", tagLabel: "보고",
+      title: "성과보고서·자료 제출",
+      body: "<p>시·도 경유 성과보고. 집행률·성과가 다음 배분 담론의 재료.</p>"
+    });
+
+    // Council
+    addBox("lane-council", "c_budget", {
+      x: 56, w: 14, tone: "gate", tag: "gate", tagLabel: "G5",
+      title: "예산 심의·의결",
+      body: "<p>지방자치법상 의결. 사업 구성·규모 조정 압력. 집행률 부진이 반복 질타 포인트.</p>"
+    });
+    addBox("lane-council", "c_oversight", {
+      x: 70, w: 14, tone: "risk", tag: "risk", tagLabel: "통제",
+      title: "집행 점검·추경·사업 조정",
+      body: "<p>연중 집행 부진 시 일정 재설계·사업 재배치 요구. 행정 집행과 정치적 책임의 접점.</p>"
+    });
+    addBox("lane-council", "c_record", {
+      x: 90, w: 10, tone: "data", tag: "data", tagLabel: "공개",
+      title: "회의록·심의 기록",
+      body: "<p>지역 내 우선순위 논쟁과 성과 해석이 남는 층.</p>"
+    });
+
+    // Field
+    addBox("lane-field", "d_pack", {
+      x: 30, w: 14, tone: "gate", tag: "gate", tagLabel: "사전",
+      title: "세부사업 패키지 설계",
+      body: "<p>정주·일자리·생활인구 등 투자계획 사업군 구성. 유사 국비·공모와 중복 점검.</p>"
+    });
+    addBox("lane-field", "d_exec", {
+      x: 68, w: 16, tone: "risk", tag: "risk", tagLabel: "G6 집행",
+      title: "계약·보조·시설 조성",
+      body: "<ul><li>하드웨어: 부지·인허가 리스크</li><li>소프트웨어: 기획·운영 역량 격차</li><li>실적은 지방재정365 등으로 추적</li></ul>"
+    });
+    addBox("lane-field", "d_out", {
+      x: 84, w: 8, tone: "core", tag: "core", tagLabel: "산출",
+      title: "시설·서비스 가동",
+      body: "<p>실제 이용 가능한 산출물. 여기부터 주민 체감과 연결.</p>"
+    });
+
+    // People
+    addBox("lane-people", "p_signal", {
+      x: 0, w: 12, tone: "data", tag: "data", tagLabel: "수요",
+      title: "지역 위기 신호",
+      body: "<p>인구·생활인구·필수의료·일자리·빈집 등 지역 진단 원천.</p>"
+    });
+    addBox("lane-people", "p_track", {
+      x: 68, w: 12, tone: "data", tag: "data", tagLabel: "추적",
+      title: "예산서 재원 구분·공개데이터",
+      body: "<p>세부사업 단위 기금 여부는 예산서 재원 구분과 지방재정 공개로 추적.</p>"
+    });
+    addBox("lane-people", "p_feel", {
+      x: 84, w: 16, tone: "data", tag: "data", tagLabel: "S9 체감",
+      title: "주민·생활인구 체감 / 다음 계획 압력",
+      body: "<p>이용·체류·정주 변화는 늦게 나타남. 단기 인구지표로만 재단하면 제도 오판 위험.</p>"
+    });
+
+    function anchor(el, where) {
+      const board = document.getElementById("board").getBoundingClientRect();
+      const r = el.getBoundingClientRect();
+      const x = r.left - board.left;
+      const y = r.top - board.top;
+      const w = r.width;
+      const h = r.height;
+      switch (where) {
+        case "l": return { x: x, y: y + h / 2 };
+        case "r": return { x: x + w, y: y + h / 2 };
+        case "t": return { x: x + w / 2, y: y };
+        case "b": return { x: x + w / 2, y: y + h };
+        case "tr": return { x: x + w * 0.8, y: y };
+        case "br": return { x: x + w * 0.8, y: y + h };
+        case "tl": return { x: x + w * 0.2, y: y };
+        case "bl": return { x: x + w * 0.2, y: y + h };
+        default: return { x: x + w / 2, y: y + h / 2 };
+      }
+    }
+
+    function drawWires() {
+      const board = document.getElementById("board");
+      const svg = document.getElementById("wires");
+      const br = board.getBoundingClientRect();
+      svg.setAttribute("width", String(br.width));
+      svg.setAttribute("height", String(br.height));
+      svg.setAttribute("viewBox", `0 0 ${br.width} ${br.height}`);
+
+      // Korea100 DesktopProcessBoard language:
+      // sequence / message / loop (+ money, feed for this expanded map)
+      // white halo underlay + filled arrowheads + stronger spine contrast
+      const mk = (id, color) => `
+        <marker id="${id}" viewBox="0 0 12 12" refX="10" refY="6"
+          markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto-start-reverse">
+          <path d="M1,1.2 L1,10.8 L11,6 z" fill="${color}" stroke="#ffffff" stroke-width="1" stroke-linejoin="round"/>
+        </marker>`;
+      svg.innerHTML = `<defs>
+        ${mk("ah-seq", "#55685e")}
+        ${mk("ah-msg", "#0d8a63")}
+        ${mk("ah-money", "#2f7ea8")}
+        ${mk("ah-loop", "#c78116")}
+        ${mk("ah-feed", "#5d6b63")}
+      </defs>`;
+
+      const edges = [
+        // main upper
+        ["g_desig", "r", "g_fund", "l", "seq", null],
+        ["g_fund", "r", "g_rule", "l", "money", "출연→기준"],
+        ["g_rule", "b", "f_ops", "t", "seq", "운영 위임"],
+        ["g_desig", "b", "l_elig", "t", "feed", "대상 자격"],
+        ["p_signal", "t", "l_elig", "b", "feed", "지역 신호"],
+
+        // planning
+        ["g_rule", "b", "m_coord", "t", "seq", null],
+        ["m_coord", "r", "m_plan", "l", "seq", "의견 조율"],
+        ["l_elig", "r", "l_plan", "l", "seq", "계획 수립"],
+        ["m_coord", "b", "l_plan", "t", "msg", "상호 의견"],
+        ["l_plan", "t", "m_plan", "b", "seq", null],
+        ["l_plan", "b", "d_pack", "t", "seq", "사업군 설계"],
+        ["m_plan", "b", "d_pack", "t", "seq", null],
+
+        // submit/eval — message edges match Korea100 institution graph
+        ["m_plan", "r", "f_eval", "l", "msg", "투자계획 제출"],
+        ["l_plan", "r", "f_eval", "l", "msg", "투자계획 제출"],
+        ["f_ops", "r", "f_eval", "l", "seq", "접수"],
+        ["f_eval", "b", "l_fix", "t", "loop", "보완 요구"],
+        ["l_fix", "t", "f_eval", "b", "loop", "수정 제출"],
+        ["f_eval", "r", "f_alloc", "l", "money", "평가→배분"],
+
+        // allocation out
+        ["f_alloc", "b", "m_recv", "t", "money", "광역 25%"],
+        ["f_alloc", "b", "l_budget", "t", "money", "기초 75%"],
+        ["m_recv", "r", "m_exec", "l", "seq", "광역 집행"],
+        ["l_budget", "b", "c_budget", "t", "seq", "예산안"],
+        ["c_budget", "r", "c_oversight", "l", "seq", "집행 통제"],
+        ["c_budget", "b", "d_exec", "t", "msg", "예산 확정"],
+        ["m_exec", "b", "d_exec", "t", "seq", null],
+        ["d_pack", "r", "d_exec", "l", "seq", "사업 착수"],
+        ["d_exec", "r", "d_out", "l", "seq", "가동"],
+        ["c_oversight", "r", "c_record", "l", "feed", "기록"],
+
+        // performance feedback
+        ["d_exec", "b", "p_track", "t", "feed", "재원 추적"],
+        ["d_out", "b", "p_feel", "t", "feed", "체감"],
+        ["p_track", "r", "p_feel", "l", "feed", null],
+        ["l_budget", "r", "l_report", "l", "msg", "집행실적 보고"],
+        ["d_exec", "t", "l_report", "b", "feed", null],
+        ["l_report", "t", "f_perf", "b", "msg", "성과 제출"],
+        ["f_perf", "t", "g_next", "b", "feed", "배분 반영"],
+        ["f_perf", "r", "f_agree", "l", "seq", "협약 점검"],
+        ["f_agree", "t", "g_next", "b", "feed", null],
+        ["g_next", "r", "g_reform", "l", "feed", "기준 개정"],
+        ["p_feel", "t", "c_record", "b", "feed", "책임 논쟁"],
+        ["g_reform", "l", "g_rule", "r", "loop", "다음 라운드"],
+      ];
+
+      // draw order: feed under, then seq/msg/money, loop on top
+      const order = { feed: 0, seq: 1, msg: 2, money: 3, loop: 4 };
+      const sorted = [...edges].sort((a, b) => (order[a[4]] ?? 1) - (order[b[4]] ?? 1));
+
+      for (const [aId, aSide, bId, bSide, kind, label] of sorted) {
+        const a = boxes[aId];
+        const b = boxes[bId];
+        if (!a || !b) continue;
+        const p1 = anchor(a, aSide);
+        const p2 = anchor(b, bSide);
+        drawEdge(svg, p1, p2, kind, label, aSide, bSide);
+      }
+    }
+
+    function edgeStyle(kind) {
+      // Align with DesktopProcessBoard + PortraitProcessBoard:
+      // white halo, filled heads, calm sequence, green message, amber loop
+      if (kind === "msg") {
+        return { color: "#0d8a63", dash: "7 5", width: 2.2, marker: "url(#ah-msg)", opacity: 0.98, halo: 3.6 };
+      }
+      if (kind === "money") {
+        return { color: "#2f7ea8", dash: "", width: 2.5, marker: "url(#ah-money)", opacity: 1, halo: 3.8 };
+      }
+      if (kind === "loop") {
+        return { color: "#c78116", dash: "6 5", width: 2.35, marker: "url(#ah-loop)", opacity: 1, halo: 3.8 };
+      }
+      if (kind === "feed") {
+        return { color: "#5d6b63", dash: "2.5 4.5", width: 1.7, marker: "url(#ah-feed)", opacity: 0.88, halo: 3.2 };
+      }
+      // sequence spine — darker and thicker than v1.1 open chevrons
+      return { color: "#55685e", dash: "", width: 2.15, marker: "url(#ah-seq)", opacity: 0.96, halo: 3.6 };
+    }
+
+    function roundedOrtho(p1, p2, aSide, bSide, kind) {
+      const r = kind === "loop" ? 14 : 10;
+      const dx = p2.x - p1.x;
+      const dy = p2.y - p1.y;
+      let points;
+
+      if (aSide === "r" && bSide === "l") {
+        const mid = p1.x + dx / 2;
+        // slight lane offset so parallel submit edges don't fully stack
+        const yBias = Math.abs(dy) < 8 ? 0 : 0;
+        points = [[p1.x, p1.y], [mid, p1.y + yBias], [mid, p2.y], [p2.x, p2.y]];
+      } else if (aSide === "b" && bSide === "t") {
+        const mid = p1.y + dy / 2;
+        points = [[p1.x, p1.y], [p1.x, mid], [p2.x, mid], [p2.x, p2.y]];
+      } else if (aSide === "t" && bSide === "b") {
+        const mid = p1.y + dy / 2;
+        points = [[p1.x, p1.y], [p1.x, mid], [p2.x, mid], [p2.x, p2.y]];
+      } else if (aSide === "l" && bSide === "r") {
+        // long reverse / next-round loop — outer rail
+        const midY = Math.min(p1.y, p2.y) - 28;
+        const left = Math.min(p1.x, p2.x) - 36;
+        points = [[p1.x, p1.y], [p1.x, midY], [left, midY], [left, p2.y], [p2.x, p2.y]];
+      } else {
+        const mid = p1.x + dx / 2;
+        points = [[p1.x, p1.y], [mid, p1.y], [mid, p2.y], [p2.x, p2.y]];
+      }
+
+      // round corners like DesktopProcessBoard roundedPath
+      if (points.length < 3) {
+        return `M ${points[0][0]} ${points[0][1]} L ${points[points.length - 1][0]} ${points[points.length - 1][1]}`;
+      }
+      let d = `M ${points[0][0].toFixed(1)} ${points[0][1].toFixed(1)}`;
+      for (let i = 1; i < points.length - 1; i++) {
+        const [px, py] = points[i - 1];
+        const [cx, cy] = points[i];
+        const [nx, ny] = points[i + 1];
+        const v1x = cx - px, v1y = cy - py;
+        const v2x = nx - cx, v2y = ny - cy;
+        const len1 = Math.hypot(v1x, v1y) || 1;
+        const len2 = Math.hypot(v2x, v2y) || 1;
+        const rr = Math.min(r, len1 / 2.2, len2 / 2.2);
+        const ix = cx - (v1x / len1) * rr;
+        const iy = cy - (v1y / len1) * rr;
+        const ox = cx + (v2x / len2) * rr;
+        const oy = cy + (v2y / len2) * rr;
+        d += ` L ${ix.toFixed(1)} ${iy.toFixed(1)} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${ox.toFixed(1)} ${oy.toFixed(1)}`;
+      }
+      const last = points[points.length - 1];
+      d += ` L ${last[0].toFixed(1)} ${last[1].toFixed(1)}`;
+      return d;
+    }
+
+    function drawEdge(svg, p1, p2, kind, label, aSide, bSide) {
+      const ns = "http://www.w3.org/2000/svg";
+      const st = edgeStyle(kind);
+      const d = roundedOrtho(p1, p2, aSide, bSide, kind);
+
+      const g = document.createElementNS(ns, "g");
+      g.setAttribute("opacity", String(st.opacity));
+
+      // white halo underlay — key Korea100 readability trick
+      const halo = document.createElementNS(ns, "path");
+      halo.setAttribute("d", d);
+      halo.setAttribute("fill", "none");
+      halo.setAttribute("stroke", "#ffffff");
+      halo.setAttribute("stroke-width", String(st.width + st.halo));
+      halo.setAttribute("stroke-linecap", "round");
+      halo.setAttribute("stroke-linejoin", "round");
+      if (st.dash) halo.setAttribute("stroke-dasharray", st.dash);
+      g.appendChild(halo);
+
+      const path = document.createElementNS(ns, "path");
+      path.setAttribute("d", d);
+      path.setAttribute("fill", "none");
+      path.setAttribute("stroke", st.color);
+      path.setAttribute("stroke-width", String(st.width));
+      path.setAttribute("stroke-linecap", "round");
+      path.setAttribute("stroke-linejoin", "round");
+      if (st.dash) path.setAttribute("stroke-dasharray", st.dash);
+      path.setAttribute("marker-end", st.marker);
+      g.appendChild(path);
+      svg.appendChild(g);
+
+      if (label) {
+        // place label near path midpoint with paper chip
+        const tx = (p1.x + p2.x) / 2;
+        const ty = (p1.y + p2.y) / 2 - (kind === "loop" ? 10 : 7);
+        const text = document.createElementNS(ns, "text");
+        text.setAttribute("x", String(tx));
+        text.setAttribute("y", String(ty));
+        text.setAttribute("text-anchor", "middle");
+        text.setAttribute("dominant-baseline", "middle");
+        text.setAttribute("font-size", kind === "money" || kind === "loop" ? "13" : "12");
+        text.setAttribute("font-weight", "750");
+        text.setAttribute("fill", st.color);
+        text.textContent = label;
+
+        const tw = Math.max(36, Array.from(label).length * 7.6 + 14);
+        const bg = document.createElementNS(ns, "rect");
+        bg.setAttribute("x", String(tx - tw / 2));
+        bg.setAttribute("y", String(ty - 10));
+        bg.setAttribute("width", String(tw));
+        bg.setAttribute("height", "20");
+        bg.setAttribute("rx", "4");
+        bg.setAttribute("fill", "#fcfcfb");
+        bg.setAttribute("stroke", st.color);
+        bg.setAttribute("stroke-width", "0.7");
+        bg.setAttribute("opacity", "0.96");
+        svg.appendChild(bg);
+        svg.appendChild(text);
+      }
+    }
+
+    // Wait for layout, then draw. Double rAF for headless chrome stability.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        drawWires();
+        // expose ready flag for screenshot timing if needed
+        document.documentElement.dataset.ready = "1";
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>지방소멸대응기금 확장 운영체계도 (A3) · v2.1 connectors fixed</title>
+<style>
+  :root {
+    --ink: #111714; --muted: #5d6b63; --faint: #87938d;
+    --paper: #fcfcfb; --surface: #ffffff; --surface-muted: #f5f7f6;
+    --border: #dde5df; --border-strong: #bdcbc4;
+    --accent: #0f9f72; --accent-dark: #087452; --accent-soft: #dff5eb;
+    --warning: #c78116; --warning-soft: #fdf3e3;
+    --money-line: #2f7ea8; --money-soft: #eaf5fb;
+    --data-line: #4c63d2; --data-soft: #eef1fb;
+    --dark: #0b1410;
+    --edge-seq: #5d6b63; --edge-msg: #0d8a63; --edge-loop: #c78116;
+    --edge-money: #2f7ea8; --edge-feed: #9aa8a0;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #e8ece9; color: var(--ink);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+  .sheet { width: 3508px; height: 2480px; margin: 0 auto; background: var(--paper); position: relative; overflow: hidden; }
+
+  /* ── Header ── */
+  header { position: absolute; left: 60px; right: 60px; top: 52px; height: 200px;
+    display: grid; grid-template-columns: 1fr 700px; gap: 48px; align-items: start;
+    border-bottom: 2px solid var(--dark); padding-bottom: 34px; }
+  .eyebrow { display: flex; align-items: center; gap: 14px; color: var(--accent-dark);
+    font-size: 22px; font-weight: 750; letter-spacing: 0.05em; margin-bottom: 14px; }
+  .eyebrow::before { content: ""; width: 16px; height: 16px; background: var(--accent); }
+  h1 { margin: 0 0 12px; font-size: 68px; line-height: 1.08; font-weight: 780; letter-spacing: -0.01em; }
+  .lead { margin: 0; color: var(--muted); font-size: 26px; line-height: 1.5; max-width: 1900px; word-break: keep-all; }
+  .lead strong { color: var(--ink); font-weight: 700; }
+  .hdr-right { display: flex; flex-direction: column; gap: 18px; padding-top: 10px; }
+  .legend { border: 1px solid var(--border-strong); background: var(--surface); padding: 20px 24px; }
+  .legend h2 { margin: 0 0 14px; font-size: 19px; font-weight: 750; letter-spacing: 0.06em; color: var(--faint); }
+  .legend-rows { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 28px; }
+  .legend-rows span { display: inline-flex; align-items: center; gap: 12px; font-size: 22px; color: var(--muted); font-weight: 650; }
+  .legend-rows i { width: 44px; height: 0; border-top: 4px solid var(--edge-seq); display: inline-block; position: relative; flex: none; }
+  .legend-rows i::after { content: ""; position: absolute; right: -2px; top: -7px;
+    border-left: 12px solid currentColor; border-top: 6px solid transparent; border-bottom: 6px solid transparent; color: inherit; }
+  .legend-rows i { color: var(--edge-seq); }
+  .legend-rows i.msg { border-color: var(--edge-msg); color: var(--edge-msg); border-top-style: dashed; }
+  .legend-rows i.money { border-color: var(--edge-money); color: var(--edge-money); }
+  .legend-rows i.loop { border-color: var(--edge-loop); color: var(--edge-loop); border-top-style: dashed; }
+  .legend-rows i.feed { border-color: var(--edge-feed); color: var(--edge-feed); border-top-style: dotted; border-top-width: 3px; }
+  .hdr-meta { display: flex; gap: 26px; font-size: 21px; color: var(--faint); font-variant-numeric: tabular-nums; }
+  .hdr-meta b { color: var(--ink); font-weight: 700; }
+
+  /* ── Stage headers ── */
+  .stages { position: absolute; left: 420px; top: 0; height: 84px; display: grid; gap: 0; }
+  .stage { border-left: 1px solid var(--border-strong); padding: 10px 18px 0;
+    display: flex; flex-direction: column; gap: 2px; }
+  .stage .code { font-size: 21px; font-weight: 780; color: var(--accent-dark); font-variant-numeric: tabular-nums; font-family: ui-monospace, "SFMono-Regular", monospace; }
+  .stage .name { font-size: 24px; font-weight: 720; line-height: 1.2; }
+
+  /* ── Board ── */
+  .board-wrap { position: absolute; left: 60px; right: 640px; top: 300px; bottom: 400px; }
+  .board { position: absolute; left: 360px; right: 0; top: 84px; bottom: 0; }
+  .colbands { position: absolute; inset: 0; pointer-events: none; }
+  .colbands .band { position: absolute; top: 0; bottom: 0; border-left: 1px solid #eef1ef; }
+  .colbands .band.tint { background: rgba(189, 203, 196, 0.07); }
+  .lanes { position: absolute; left: 0; right: 0; top: 84px; bottom: 0; }
+  .lane-sep { position: absolute; left: 0; right: 0; border-top: 1px solid var(--border); }
+  .lane-label { position: absolute; left: 0; width: 330px; display: flex; flex-direction: column; justify-content: center; gap: 6px; padding-right: 28px; }
+  .lane-label b { font-size: 27px; font-weight: 740; line-height: 1.25; }
+  .lane-label small { color: var(--faint); font-size: 20px; font-weight: 600; line-height: 1.35; }
+
+  .box { position: absolute; border: 2px solid var(--border-strong); background: var(--surface);
+    padding: 14px 20px; display: flex; flex-direction: column; gap: 7px; z-index: 2; overflow: hidden; }
+  .box h3 { margin: 0; font-size: 27px; font-weight: 760; line-height: 1.28; color: var(--ink); word-break: keep-all; }
+  .box p { margin: 0; color: var(--muted); font-size: 20px; line-height: 1.38; word-break: keep-all; }
+  .tag { display: inline-flex; align-self: flex-start; padding: 3px 12px;
+    font-size: 18px; font-weight: 750; border: 1px solid transparent; letter-spacing: 0.02em; }
+  .tag.core { background: var(--accent-soft); color: var(--accent-dark); border-color: #bfe9d7; }
+  .tag.money { background: var(--money-soft); color: var(--money-line); border-color: #b7dcf0; }
+  .tag.data { background: var(--data-soft); color: var(--data-line); border-color: #c9d2ff; }
+  .tag.risk { background: var(--warning-soft); color: var(--warning); border-color: #f0d7a4; }
+  .tag.gate { background: #f3f5f4; color: #33413b; border-color: var(--border-strong); }
+  .box.money { border-color: #9ec9e0; }
+  .box.core { border-color: #8fd0b4; }
+  .box.risk { border-color: #e2bf78; background: #fffcf5; }
+  .box.gate { border-color: #b7c4bd; }
+  .box.data { border-color: #b7c2ef; }
+
+  #wires { position: absolute; inset: 0; pointer-events: none; z-index: 3; overflow: visible; }
+
+  /* ── Right rail ── */
+  .rail { position: absolute; top: 300px; right: 60px; width: 540px; bottom: 400px;
+    display: flex; flex-direction: column; gap: 20px; }
+  .panel { border: 1px solid var(--border-strong); background: var(--surface); padding: 24px 26px; }
+  .panel h2 { margin: 0 0 16px; font-size: 20px; font-weight: 750; letter-spacing: 0.06em; color: var(--faint); }
+  .panel ul { margin: 0; padding-left: 24px; display: grid; gap: 10px; }
+  .panel li { color: var(--ink); font-size: 22px; line-height: 1.45; word-break: keep-all; }
+  .panel li small { color: var(--muted); font-size: 20px; }
+  .steps { display: flex; flex-wrap: wrap; gap: 8px 4px; align-items: center; }
+  .steps b { font-size: 22px; font-weight: 720; color: var(--ink); }
+  .steps i { font-style: normal; color: var(--border-strong); font-size: 20px; padding: 0 4px; }
+  .compare { display: grid; gap: 10px; }
+  .compare .row { display: grid; grid-template-columns: 168px 1fr; gap: 14px; align-items: start;
+    padding: 12px 14px; background: var(--surface-muted); border: 1px solid var(--border); }
+  .compare .row strong { font-size: 21px; color: var(--ink); line-height: 1.3; font-weight: 720; }
+  .compare .row span { font-size: 20px; color: var(--muted); line-height: 1.4; word-break: keep-all; }
+
+  /* ── Footer ── */
+  footer { position: absolute; left: 60px; right: 60px; bottom: 90px; height: 280px;
+    border-top: 2px solid var(--dark); padding-top: 26px;
+    display: grid; grid-template-columns: 1.15fr 1fr 1.15fr; gap: 44px; }
+  footer .panel { border: none; padding: 0; background: none; }
+  .kpi { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .kpi .cell { border: 1px solid var(--border-strong); background: var(--surface); padding: 18px 20px; }
+  .kpi .cell b { display: block; font-size: 42px; font-weight: 780; color: var(--accent-dark);
+    margin-bottom: 8px; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+  .kpi .cell span { font-size: 20px; color: var(--muted); line-height: 1.35; }
+  .note { position: absolute; left: 60px; right: 60px; bottom: 34px;
+    color: var(--faint); font-size: 19px; display: flex; justify-content: space-between; gap: 24px; }
+</style>
+</head>
+<body>
+<div class="sheet" id="sheet">
+  <header>
+    <div>
+      <div class="eyebrow">KOREA100 · 확장 운영체계도 · 지방소멸대응기금</div>
+      <h1>지방소멸대응기금 확장 운영체계</h1>
+      <p class="lead"><strong>누가</strong> 대상이 되고, <strong>어떤 계획</strong>으로 돈을 받으며, <strong>어디서 집행</strong>되고, <strong>무엇으로 다시 평가</strong>되는가 —
+        인구감소지역 지정부터 국비 출연, 투자계획 평가·배분, 지방예산 편입, 세부사업 집행, 성과환류까지 한 장으로.</p>
+    </div>
+    <div class="hdr-right">
+      <div class="legend">
+        <h2>선 읽기</h2>
+        <div class="legend-rows">
+          <span><i></i>본류 sequence</span>
+          <span><i class="msg"></i>제출·통보 message</span>
+          <span><i class="money"></i>돈·배분</span>
+          <span><i class="loop"></i>보완 루프</span>
+          <span><i class="feed"></i>환류·공개</span>
+        </div>
+      </div>
+      <div class="hdr-meta">
+        <span>시작 <b>인구감소지역 지정</b></span>
+        <span>중심 <b>평가·배분</b></span>
+        <span>끝 <b>실적 → 차년도 배분</b></span>
+      </div>
+    </div>
+  </header>
+
+  <div class="board-wrap" id="boardWrap">
+    <div class="stages" id="stages"></div>
+    <div class="board" id="board">
+      <div class="colbands" id="colbands"></div>
+    </div>
+    <svg id="wires" xmlns="http://www.w3.org/2000/svg"></svg>
+  </div>
+
+  <aside class="rail">
+    <section class="panel">
+      <h2>한 줄 구조</h2>
+      <div class="steps">
+        <b>지정</b><i>→</i><b>출연</b><i>→</i><b>계획</b><i>→</i><b>평가</b><i>→</i><b>배분</b><i>→</i><b>예산</b><i>→</i><b>집행</b><i>→</i><b>성과</b><i>→</i><b>다음 배분</b>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>재원 비교</h2>
+      <div class="compare">
+        <div class="row"><strong>지방소멸대응기금</strong><span>평가·투자계획 기반 차등 배분. 한시 출연, 광역 25 / 기초 75.</span></div>
+        <div class="row"><strong>지방교부세</strong><span>공식 산식 배분. 일반재원 성격 — 계획 평가형과 결이 다름.</span></div>
+        <div class="row"><strong>고향사랑기부금</strong><span>기부·답례·기금사업. 규모·예측가능성이 다른 자발 재원.</span></div>
+        <div class="row"><strong>균특·기회발전</strong><span>사업·특구 단위 지원. 기금의 패키지 투자와 중첩 점검.</span></div>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>핵심 병목</h2>
+      <ul>
+        <li>하드웨어 편중 → 부지·인허가 지연 → 집행률 부진</li>
+        <li>단년도 계획 관행 → 중장기 전략사업 약화</li>
+        <li>유사 공모사업 중복 → 기획 부담·성과 분산</li>
+        <li>인구 성과의 단기 입증 곤란 · 의회 반복 질타</li>
+      </ul>
+    </section>
+    <section class="panel">
+      <h2>법적 앵커</h2>
+      <ul>
+        <li>지방자치단체 기금관리기본법 제22–29조</li>
+        <li>같은 법 시행령 제20–25조 <small>제출기한·성과·협약</small></li>
+        <li>인구감소지역 지원 특별법 · 지방분권균형법</li>
+        <li>배분 기준 고시 · 지방재정법 · 지방자치법</li>
+      </ul>
+    </section>
+  </aside>
+
+  <footer>
+    <section class="panel">
+      <h2>주요 연결</h2>
+      <ul>
+        <li>지정 → 기초 자격 / 출연 → 배분기준 → 공제회 운영</li>
+        <li>광역·기초 투자계획 → 제출·평가 → (보완 루프) → 배분</li>
+        <li>배분 통보 → 세입 편성 → 의회 심의 → 현장 집행</li>
+        <li>집행실적 → 성과분석 → 차년도 배분·제도개선 환류</li>
+      </ul>
+    </section>
+    <section class="panel">
+      <h2>금액·구조</h2>
+      <div class="kpi" style="grid-template-columns: 1fr 1fr;">
+        <div class="cell"><b>연 1조</b><span>정부출연금 (2022–2031 한시)</span></div>
+        <div class="cell"><b>25 : 75</b><span>광역지원계정 : 기초지원계정</span></div>
+        <div class="cell"><b>89 + 18</b><span>인구감소지역 + 관심지역</span></div>
+        <div class="cell"><b>차등배분</b><span>투자계획 평가등급 반영</span></div>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>말단 샘플 · 연결만</h2>
+      <ul>
+        <li>정주여건 — 생활 SOC, 빈집·주거, 교통·돌봄 거점</li>
+        <li>일자리·경제 — 지역산업, 로컬일자리, 청년·귀농 연계</li>
+        <li>생활인구 — 관계인구, 체류·관광·원격 기반 서비스</li>
+        <li>개별 인허가·계약 절차는 별도 제도 카드로 분기</li>
+      </ul>
+    </section>
+  </footer>
+
+  <div class="note">
+    <span>Source: korea100 / local-extinction-response-fund.json · expanded A3 operating map v2.1 (connectors fixed)</span>
+    <span>asOf 2026-07-10 · layout 2026-07-24 · 해석용 구조도 — 개별 사업 적격·금액은 연도별 배분기준·예산서 확인</span>
+  </div>
+</div>
+
+<script>
+  // ── geometry ──────────────────────────────────────────────
+  const STAGES = [
+    ["S0", "대상 지정"], ["S1", "재원 조성"], ["G0", "배분기준"], ["G1", "투자계획"],
+    ["G2–3", "제출·평가"], ["G4", "배분 결정"], ["G5", "예산 편입"], ["G6", "사업 집행"],
+    ["G7", "성과·환류"], ["S9", "체감·책임"]
+  ];
+  const LANES = [
+    ["중앙정부", "기재부 · 행안부 · 국회"],
+    ["기금 운영축", "공제회 · 평가단 · 심의위"],
+    ["광역 시·도", "광역계정 25%"],
+    ["기초 시·군·구", "기초계정 75%"],
+    ["지방의회", "예산 심의 · 집행 통제"],
+    ["사업 현장", "부서 · 시설 · 보조"],
+    ["주민·데이터층", "생활인구 · 공개 · 체감"]
+  ];
+  const NCOL = STAGES.length, NLANE = LANES.length;
+
+  const boardWrap = document.getElementById("boardWrap");
+  const board = document.getElementById("board");
+  const boxes = {};
+
+  // boxes: [lane, colStart, colSpan, tone, tagLabel, title, body]
+  const BOXES = [
+    // 중앙정부
+    ["b_desig", 0, 0, 1, "data", "S0 지정", "인구감소·관심지역 지정", "지정·변경 고시가 자격의 입구."],
+    ["b_fund", 0, 1, 1, "money", "S1 출연", "국비 출연", "국가 재정 → 기금. 한시 연 1조."],
+    ["b_rule", 0, 2, 1, "core", "G0", "배분기준·평가지침", "행안부: 배분총액·기준·평가지침."],
+    ["b_next", 0, 8, 1, "gate", "G7 환류", "차년도 배분 반영", "성과·협약 결과를 다음 배분에 반영."],
+    ["b_reform", 0, 9, 1, "data", "S9", "제도 개선·기준 개정", "집행률·성과 논의를 기준 개정으로 환류."],
+    // 기금 운영축
+    ["f_ops", 1, 2, 1, "core", "운영", "기금 관리·운용", "공제회 — 접수·관리·통보·성과분석 축."],
+    ["f_eval", 1, 4, 1, "core", "G2–3", "접수 → 평가단 평가", "서면·발표 평가. 필요 시 보완 루프."],
+    ["f_alloc", 1, 5, 1, "money", "G4", "배분등급·금액 결정", "심의위 심의 → 금액 확정 → 통보."],
+    ["f_perf", 1, 8, 1, "data", "G7", "실적·성과분석·공개", "성과보고서 → 결과 공개 (1·3·6월 축)."],
+    ["f_agree", 1, 9, 1, "gate", "협약", "투자협약·이행점검", "공동 추진 시 협약. 배분 환류 연결."],
+    // 광역
+    ["m_coord", 2, 1, 1, "data", "역할", "관할 기초 의견 조율", "기초 계획 정합성·광역 인프라 조정."],
+    ["m_plan", 2, 3, 1, "core", "G1", "광역계정 투자계획", "개시 5개월 전 제출. 기초와 상호 의견청취."],
+    ["m_recv", 2, 5, 1, "money", "수신", "광역계정 배분 수령", "광역지원계정(25%) 반영, 집행 준비."],
+    ["m_exec", 2, 6, 1, "core", "G5–6", "광역 예산 반영·추진", "세입 편성 후 광역 사업 집행."],
+    // 기초
+    ["l_elig", 3, 0, 1, "data", "자격", "인구감소·관심지역 기초", "지정 여부가 기초계정 배분의 출발점."],
+    ["l_plan", 3, 3, 1, "core", "G1", "기초계정 투자계획", "개시 6개월 전 제출 (시·도 경유)."],
+    ["l_fix", 3, 4, 1, "risk", "병목", "보완 요구·수정 제출", "평가 지적 반영 루프."],
+    ["l_budget", 3, 5, 1, "money", "G4–5", "배분 수신 → 세입 편성", "예산안에 기금 재원 표시."],
+    ["l_report", 3, 8, 1, "data", "보고", "성과보고서 제출", "시·도 경유 보고. 다음 배분의 재료."],
+    // 의회
+    ["c_budget", 4, 5, 2, "gate", "G5", "예산 심의·의결", "지방자치법상 의결. 구성·규모 조정 압력."],
+    ["c_oversight", 4, 7, 1, "risk", "통제", "집행 점검·추경·조정", "부진 시 일정 재설계·재배치 요구."],
+    ["c_record", 4, 9, 1, "data", "공개", "회의록·심의 기록", "우선순위 논쟁·성과 해석이 남는 층."],
+    // 현장
+    ["d_pack", 5, 3, 1, "gate", "사전", "세부사업 패키지 설계", "정주·일자리·생활인구 사업군 구성."],
+    ["d_exec", 5, 6, 2, "risk", "G6 집행", "계약·보조·시설 조성", "하드웨어: 부지·인허가 리스크 / 소프트: 역량 격차."],
+    ["d_out", 5, 8, 1, "core", "산출", "시설·서비스 가동", "실제 이용 가능한 산출물."],
+    // 주민·데이터
+    ["p_signal", 6, 0, 1, "data", "수요", "지역 위기 신호", "인구·의료·일자리·빈집 진단 원천."],
+    ["p_track", 6, 7, 1, "data", "추적", "재원 구분·공개데이터", "예산서 재원 구분으로 추적."],
+    ["p_feel", 6, 9, 1, "data", "S9 체감", "주민 체감 · 다음 계획 압력", "체감 변화는 늦게 온다."]
+  ];
+
+  // edges: [from, fromSide, to, toSide, kind, label?, opts?]
+  const EDGES = [
+    ["b_desig", "r", "b_fund", "l", "seq", null],
+    ["b_fund", "r", "b_rule", "l", "money", "출연"],
+    ["b_rule", "b", "f_ops", "t", "seq", null],
+    ["b_desig", "b", "l_elig", "t", "feed", "대상 자격"],
+    ["p_signal", "t", "l_elig", "b", "feed", null],
+    ["b_rule", "b", "m_coord", "t", "seq", null, { viaXcol: 1.5 }],
+    ["m_coord", "r", "m_plan", "l", "seq", null],
+    ["l_elig", "r", "l_plan", "l", "seq", null],
+    ["m_coord", "b", "l_plan", "t", "msg", "상호 의견"],
+    ["l_plan", "t", "m_plan", "b", "seq", null],
+    ["l_plan", "b", "d_pack", "t", "seq", "사업군 설계"],
+    ["m_plan", "r", "f_eval", "l", "msg", "투자계획 제출"],
+    ["l_plan", "r", "f_eval", "l", "msg", null],
+    ["f_ops", "r", "f_eval", "l", "seq", "접수"],
+    ["f_eval", "b", "l_fix", "t", "loop", "보완 루프"],
+    ["l_fix", "t", "f_eval", "b", "loop", null],
+    ["f_eval", "r", "f_alloc", "l", "money", "평가→배분"],
+    ["f_alloc", "b", "m_recv", "t", "money", "광역 25%"],
+    ["f_alloc", "b", "l_budget", "t", "money", "기초 75%", { viaXcol: 4.85 }],
+    ["m_recv", "r", "m_exec", "l", "seq", null],
+    ["l_budget", "b", "c_budget", "t", "seq", "예산안"],
+    ["c_budget", "r", "c_oversight", "l", "seq", null],
+    ["c_budget", "b", "d_exec", "t", "msg", "예산 확정"],
+    ["m_exec", "b", "d_exec", "t", "seq", null],
+    ["d_pack", "r", "d_exec", "l", "seq", "사업 착수"],
+    ["d_exec", "r", "d_out", "l", "seq", "가동"],
+    ["c_oversight", "r", "c_record", "l", "feed", null],
+    ["d_exec", "b", "p_track", "t", "feed", "재원 추적"],
+    ["d_out", "b", "p_feel", "t", "feed", "체감"],
+    ["p_track", "r", "p_feel", "l", "feed", null],
+    ["l_budget", "r", "l_report", "l", "msg", "실적 보고"],
+    ["l_report", "t", "f_perf", "b", "msg", "성과 제출"],
+    ["f_perf", "t", "b_next", "b", "feed", "배분 반영"],
+    ["f_perf", "r", "f_agree", "l", "seq", null],
+    ["f_agree", "t", "b_next", "b", "feed", null],
+    ["b_next", "r", "b_reform", "l", "feed", null],
+    ["p_feel", "t", "c_record", "b", "feed", "책임"],
+    ["b_reform", "l", "b_rule", "r", "loop", "다음 라운드"]
+  ];
+
+  // ── build ──────────────────────────────────────────────
+  function build() {
+    const wrapR = boardWrap.getBoundingClientRect();
+    const boardR = board.getBoundingClientRect();
+    const W = boardR.width, H = boardR.height;
+    const colW = W / NCOL, laneH = H / NLANE;
+
+    // stage headers
+    const stages = document.getElementById("stages");
+    stages.style.left = (boardR.left - wrapR.left) + "px";
+    stages.style.width = W + "px";
+    stages.style.gridTemplateColumns = `repeat(${NCOL}, 1fr)`;
+    stages.innerHTML = STAGES.map(([c, n]) =>
+      `<div class="stage"><div class="code">${c}</div><div class="name">${n}</div></div>`).join("");
+
+    // column bands
+    const cb = document.getElementById("colbands");
+    cb.innerHTML = "";
+    for (let i = 0; i < NCOL; i++) {
+      const d = document.createElement("div");
+      d.className = "band" + (i % 2 === 1 ? " tint" : "");
+      d.style.left = (i * colW) + "px";
+      d.style.width = colW + "px";
+      cb.appendChild(d);
+    }
+
+    // lane labels + separators (in wrap coords, aligned to board rows)
+    const boardTop = boardR.top - wrapR.top;
+    document.querySelectorAll(".lane-label, .lane-sep").forEach((el) => el.remove());
+    for (let i = 0; i < NLANE; i++) {
+      const lbl = document.createElement("div");
+      lbl.className = "lane-label";
+      lbl.style.top = (boardTop + i * laneH) + "px";
+      lbl.style.height = laneH + "px";
+      lbl.innerHTML = `<b>${LANES[i][0]}</b><small>${LANES[i][1]}</small>`;
+      boardWrap.appendChild(lbl);
+      if (i > 0) {
+        const sep = document.createElement("div");
+        sep.className = "lane-sep";
+        sep.style.top = (boardTop + i * laneH) + "px";
+        boardWrap.appendChild(sep);
+      }
+    }
+
+    // boxes
+    const PAD_X = 14, PAD_Y = 16;
+    Object.values(boxes).forEach((el) => el.remove());
+    for (const [id, lane, col, span, tone, tag, title, body] of BOXES) {
+      const el = document.createElement("div");
+      el.className = "box " + tone;
+      el.id = id;
+      el.style.left = (col * colW + PAD_X) + "px";
+      el.style.width = (span * colW - PAD_X * 2) + "px";
+      el.style.top = (lane * laneH + PAD_Y) + "px";
+      el.style.minHeight = (laneH * 0.62) + "px";
+      el.style.maxHeight = (laneH - PAD_Y * 2) + "px";
+      el.innerHTML = `<span class="tag ${tone}">${tag}</span><h3>${title}</h3><p>${body}</p>`;
+      board.appendChild(el);
+      boxes[id] = el;
+    }
+  }
+
+  // ── wires ──────────────────────────────────────────────
+  function anchor(el, where) {
+    const b = board.getBoundingClientRect();
+    const r = el.getBoundingClientRect();
+    const x = r.left - b.left, y = r.top - b.top, w = r.width, h = r.height;
+    switch (where) {
+      case "l": return { x, y: y + h / 2 };
+      case "r": return { x: x + w, y: y + h / 2 };
+      case "t": return { x: x + w / 2, y };
+      case "b": return { x: x + w / 2, y: y + h };
+      default: return { x: x + w / 2, y: y + h / 2 };
+    }
+  }
+
+  function edgeStyle(kind) {
+    if (kind === "msg") return { color: "#0d8a63", dash: "12 9", width: 3.6, marker: "url(#ah-msg)", halo: 7 };
+    if (kind === "money") return { color: "#2f7ea8", dash: "", width: 4.4, marker: "url(#ah-money)", halo: 7.5 };
+    if (kind === "loop") return { color: "#c78116", dash: "11 8", width: 4, marker: "url(#ah-loop)", halo: 7.5 };
+    if (kind === "feed") return { color: "#9aa8a0", dash: "4 8", width: 3, marker: "url(#ah-feed)", halo: 6 };
+    return { color: "#5d6b63", dash: "", width: 3.6, marker: "url(#ah-seq)", halo: 7 };
+  }
+
+  function roundedPath(points, r) {
+    if (points.length < 3)
+      return `M ${points[0][0]} ${points[0][1]} L ${points[points.length - 1][0]} ${points[points.length - 1][1]}`;
+    let d = `M ${points[0][0].toFixed(1)} ${points[0][1].toFixed(1)}`;
+    for (let i = 1; i < points.length - 1; i++) {
+      const [px, py] = points[i - 1], [cx, cy] = points[i], [nx, ny] = points[i + 1];
+      const v1x = cx - px, v1y = cy - py, v2x = nx - cx, v2y = ny - cy;
+      const l1 = Math.hypot(v1x, v1y) || 1, l2 = Math.hypot(v2x, v2y) || 1;
+      const rr = Math.min(r, l1 / 2.2, l2 / 2.2);
+      d += ` L ${(cx - v1x / l1 * rr).toFixed(1)} ${(cy - v1y / l1 * rr).toFixed(1)}`
+         + ` Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${(cx + v2x / l2 * rr).toFixed(1)} ${(cy + v2y / l2 * rr).toFixed(1)}`;
+    }
+    const last = points[points.length - 1];
+    d += ` L ${last[0].toFixed(1)} ${last[1].toFixed(1)}`;
+    return d;
+  }
+
+  function drawWires() {
+    const svg = document.getElementById("wires");
+    const wrapR = boardWrap.getBoundingClientRect();
+    const boardR = board.getBoundingClientRect();
+    svg.setAttribute("width", wrapR.width);
+    svg.setAttribute("height", wrapR.height);
+    svg.setAttribute("viewBox", `0 0 ${wrapR.width} ${wrapR.height}`);
+    const ox = boardR.left - wrapR.left, oy = boardR.top - wrapR.top;
+    const colW = boardR.width / NCOL, laneH = boardR.height / NLANE;
+
+    const mk = (id, color) => `
+      <marker id="${id}" viewBox="0 0 12 12" refX="10" refY="6"
+        markerWidth="19" markerHeight="19" markerUnits="userSpaceOnUse" orient="auto-start-reverse">
+        <path d="M1,1.2 L1,10.8 L11,6 z" fill="${color}" stroke="#ffffff" stroke-width="1" stroke-linejoin="round"/>
+      </marker>`;
+    svg.innerHTML = `<defs>
+      ${mk("ah-seq", "#5d6b63")} ${mk("ah-msg", "#0d8a63")} ${mk("ah-money", "#2f7ea8")}
+      ${mk("ah-loop", "#c78116")} ${mk("ah-feed", "#9aa8a0")}
+    </defs>`;
+
+    // side-spread bookkeeping so multiple edges on one box side fan out
+    const sideCount = {}, sideSeen = {};
+    const sideKey = (id, side) => id + ":" + side;
+    for (const [aId, aS, bId, bS] of EDGES) {
+      sideCount[sideKey(aId, aS)] = (sideCount[sideKey(aId, aS)] || 0) + 1;
+      sideCount[sideKey(bId, bS)] = (sideCount[sideKey(bId, bS)] || 0) + 1;
+    }
+    function spread(id, side, p, el) {
+      const key = sideKey(id, side);
+      const n = sideCount[key];
+      if (!n || n <= 1) return p;
+      const i = sideSeen[key] = (sideSeen[key] ?? -1) + 1;
+      const r = el.getBoundingClientRect();
+      const off = (i - (n - 1) / 2);
+      if (side === "t" || side === "b") {
+        const gap = Math.min(56, (r.width - 40) / n);
+        return { x: p.x + off * gap, y: p.y };
+      }
+      const gap = Math.min(40, (r.height - 30) / n);
+      return { x: p.x, y: p.y + off * gap };
+    }
+
+    const gutterUse = {};
+    const nudge = (v) => {
+      const key = Math.round(v / 20);
+      const n = gutterUse[key] || 0;
+      gutterUse[key] = n + 1;
+      return v + (n % 2 === 0 ? 1 : -1) * Math.ceil(n / 2) * 16;
+    };
+
+    const order = { feed: 0, seq: 1, msg: 2, money: 3, loop: 4 };
+    const sorted = [...EDGES].sort((a, b) => (order[a[4]] ?? 1) - (order[b[4]] ?? 1));
+
+    // box rects in wrap coords, for label collision avoidance
+    const boxRects = Object.values(boxes).map((el) => {
+      const r = el.getBoundingClientRect();
+      return { l: r.left - wrapR.left, t: r.top - wrapR.top, r: r.right - wrapR.left, b: r.bottom - wrapR.top };
+    });
+
+    for (const [aId, aSide, bId, bSide, kind, label, opts] of sorted) {
+      const a = boxes[aId], b = boxes[bId];
+      if (!a || !b) continue;
+      let p1 = spread(aId, aSide, anchor(a, aSide), a);
+      let p2 = spread(bId, bSide, anchor(b, bSide), b);
+      p1 = { x: p1.x + ox, y: p1.y + oy };
+      p2 = { x: p2.x + ox, y: p2.y + oy };
+
+      let points;
+      const dx = p2.x - p1.x, dy = p2.y - p1.y;
+      if (aSide === "r" && bSide === "l") {
+        const mid = nudge(p1.x + dx / 2);
+        points = Math.abs(dy) < 4
+          ? [[p1.x, p1.y], [p2.x - 6, p2.y]]
+          : [[p1.x, p1.y], [mid, p1.y], [mid, p2.y], [p2.x - 6, p2.y]];
+      } else if ((aSide === "b" && bSide === "t") || (aSide === "t" && bSide === "b")) {
+        if (opts && opts.viaXcol != null) {
+          // detour a vertical edge into a clear column gutter so it never
+          // crosses a box sitting in the intermediate lane. Jogs ride the
+          // lane separators (horizontal corridors between rows).
+          const vx = ox + opts.viaXcol * colW;
+          const drop = aSide === "b" ? 36 : -36;
+          const rise = bSide === "t" ? -36 : 36;
+          points = [[p1.x, p1.y], [p1.x, p1.y + drop], [vx, p1.y + drop],
+                    [vx, p2.y + rise], [p2.x, p2.y + rise], [p2.x, p2.y + (bSide === "t" ? -6 : 6)]];
+        } else if (Math.abs(dx) < 4) {
+          points = [[p1.x, p1.y], [p2.x, p2.y + (aSide === "b" ? -6 : 6)]];
+        } else {
+          const mid = nudge(p1.y + dy / 2);
+          points = [[p1.x, p1.y], [p1.x, mid], [p2.x, mid], [p2.x, p2.y + (aSide === "b" ? -6 : 6)]];
+        }
+      } else if (aSide === "l" && bSide === "r") {
+        // long return loop — ride the corridor between stage headers and the first lane
+        const topY = oy + 8;
+        points = [[p1.x, p1.y], [p1.x - 40, p1.y], [p1.x - 40, topY], [p2.x + 44, topY], [p2.x + 44, p2.y], [p2.x + 6, p2.y]];
+      } else {
+        const mid = nudge(p1.x + dx / 2);
+        points = [[p1.x, p1.y], [mid, p1.y], [mid, p2.y], [p2.x, p2.y]];
+      }
+
+      drawEdge(svg, points, kind, label, boxRects);
+    }
+  }
+
+  function drawEdge(svg, points, kind, label, boxRects) {
+    const ns = "http://www.w3.org/2000/svg";
+    const st = edgeStyle(kind);
+    const d = roundedPath(points, 18);
+
+    const halo = document.createElementNS(ns, "path");
+    halo.setAttribute("d", d);
+    halo.setAttribute("fill", "none");
+    halo.setAttribute("stroke", "#fcfcfb");
+    halo.setAttribute("stroke-width", String(st.width + st.halo));
+    halo.setAttribute("stroke-linecap", "round");
+    halo.setAttribute("stroke-linejoin", "round");
+    svg.appendChild(halo);
+
+    const path = document.createElementNS(ns, "path");
+    path.setAttribute("d", d);
+    path.setAttribute("fill", "none");
+    path.setAttribute("stroke", st.color);
+    path.setAttribute("stroke-width", String(st.width));
+    path.setAttribute("stroke-linecap", "round");
+    path.setAttribute("stroke-linejoin", "round");
+    if (st.dash) path.setAttribute("stroke-dasharray", st.dash);
+    path.setAttribute("marker-end", st.marker);
+    svg.appendChild(path);
+
+    if (!label) return;
+    const L = path.getTotalLength();
+    if (L < 300) return; // adjacent-box edges: the arrow tells the story
+    const tw = Math.max(60, Array.from(label).length * 19 + 26);
+
+    // center the chip ON the path (covers only the line), scan for a spot clear of boxes
+    const chipAt = (frac) => {
+      const m = path.getPointAtLength(L * frac);
+      return { tx: m.x, ty: m.y };
+    };
+    const clear = (c) => !(boxRects || []).some((r) =>
+      c.tx + tw / 2 > r.l + 4 && c.tx - tw / 2 < r.r - 4 && c.ty + 19 > r.t + 4 && c.ty - 19 < r.b - 4);
+
+    let pos = null;
+    for (const frac of [0.5, 0.42, 0.58, 0.34, 0.66, 0.26, 0.74, 0.18, 0.82]) {
+      const c = chipAt(frac);
+      if (clear(c)) { pos = c; break; }
+    }
+    if (!pos) return; // no clean spot — omit rather than collide
+    const { tx, ty } = pos;
+
+    const bg = document.createElementNS(ns, "rect");
+    bg.setAttribute("x", tx - tw / 2); bg.setAttribute("y", ty - 19);
+    bg.setAttribute("width", tw); bg.setAttribute("height", 38);
+    bg.setAttribute("fill", "#fcfcfb");
+    bg.setAttribute("stroke", st.color); bg.setAttribute("stroke-width", "1.2");
+    svg.appendChild(bg);
+
+    const text = document.createElementNS(ns, "text");
+    text.setAttribute("x", tx); text.setAttribute("y", ty);
+    text.setAttribute("text-anchor", "middle");
+    text.setAttribute("dominant-baseline", "central");
+    text.setAttribute("font-size", "21");
+    text.setAttribute("font-weight", "740");
+    text.setAttribute("fill", st.color);
+    text.textContent = label;
+    svg.appendChild(text);
+  }
+
+  requestAnimationFrame(() => {
+    build();
+    requestAnimationFrame(() => {
+      drawWires();
+      document.documentElement.dataset.ready = "1";
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      :root { --ink:#10271d; --green:#176c50; --green-strong:#0d513b; --mint:#72d9bb; --paper:#fbfcfa; --surface:#ffffff; --surface-subtle:#f2f7f4; --border:#b9cfc4; --border-subtle:#d9e6df; --grid:#e6ece8; --line:#53675d; --blue:#3375d6; --gold:#c78116; }
+      * { box-sizing:border-box; }
+      html, body { width:1080px; height:1920px; margin:0; overflow:hidden; background:var(--paper); }
+      body { font-family:Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color:var(--ink); }
+      #root { position:relative; width:1080px; height:1920px; overflow:hidden; }
+      .ground { position:absolute; inset:0; background:var(--paper); }
+      .grid { position:absolute; inset:0; opacity:.64; background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px); background-size:72px 72px; }
+      .topbar { position:absolute; inset:0 0 auto; height:138px; padding:42px 54px; display:flex; align-items:center; justify-content:space-between; background:#103f30; color:white; }
+      .brand { font-size:34px; font-weight:840; letter-spacing:-1.6px; }
+      .brand b { color:var(--mint); }
+      .mono { font-family:"JetBrains Mono", ui-monospace, monospace; font-weight:800; letter-spacing:.07em; }
+      .topbar .mono { font-size:15px; color:#a7e8d4; }
+      .scene { position:absolute; left:54px; right:54px; opacity:0; }
+      .eyebrow { color:var(--green); font-family:"JetBrains Mono", ui-monospace, monospace; font-weight:850; font-size:18px; letter-spacing:.08em; }
+      .hero { top:230px; }
+      h1 { margin:18px 0 0; font-size:78px; line-height:1.1; letter-spacing:-4.6px; }
+      .display-line { display:block; }
+      .hero p { margin:28px 0 0; color:#53675d; font-size:31px; line-height:1.48; font-weight:520; }
+      .line { display:block; }
+      .fund-chip { display:inline-flex; align-items:center; gap:12px; margin-top:34px; padding:14px 18px; border:2px solid var(--green); border-radius:6px; background:var(--surface-subtle); color:var(--green); font-size:19px; font-weight:760; }
+      .fund-chip i { width:11px; height:11px; border-radius:50%; background:var(--green); }
+      .money-source { position:absolute; top:770px; left:105px; width:870px; min-height:390px; padding:0; border-radius:10px; border:2px solid var(--border); background:var(--surface); overflow:hidden; opacity:0; }
+      .money-source-head { display:flex; align-items:center; justify-content:space-between; min-height:80px; padding:17px 28px; background:var(--surface-subtle); border-bottom:2px solid var(--border-subtle); }
+      .money-source-head .mono { color:var(--green); font-size:15px; }
+      .agency { display:flex; align-items:center; gap:13px; color:#46564e; font-size:17px; line-height:1.2; font-weight:760; }
+      .agency img { width:112px; height:auto; object-fit:contain; }
+      .agency b { display:block; color:#10271d; font-size:19px; }
+      .money-main { padding:30px 30px 24px; }
+      .money-source strong { display:block; font-size:48px; letter-spacing:-3px; }
+      .money-source p { margin:8px 0 0; color:#64756c; font-size:21px; }
+      .fund-facts { display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:27px; border:2px solid var(--border-subtle); border-radius:6px; overflow:hidden; background:var(--surface); }
+      .fund-fact { min-height:94px; padding:17px 18px; background:var(--surface); }
+      .fund-fact + .fund-fact { border-left:2px solid var(--border-subtle); }
+      .fund-fact small { display:block; color:#687970; font-family:"JetBrains Mono", ui-monospace, monospace; font-size:12px; font-weight:850; letter-spacing:.06em; }
+      .fund-fact b { display:block; margin-top:10px; color:#176c50; font-size:21px; letter-spacing:-.8px; }
+      /* KRDS-style step indicator: numbered state, named step, one explicit direction. */
+      .rail { position:absolute; left:104px; right:104px; top:1204px; height:166px; opacity:0; }
+      .rail-track { position:absolute; left:38px; right:38px; top:31px; height:4px; background:var(--green); transform-origin:left; }
+      .rail-track::before { content:""; position:absolute; inset:-6px 0 -6px; border-top:1px solid rgba(23,108,80,.18); border-bottom:1px solid rgba(23,108,80,.18); }
+      .rail-arrow { position:absolute; right:-1px; top:-8px; width:24px; height:24px; border-top:4px solid var(--green); border-right:4px solid var(--green); transform:rotate(45deg); }
+      .rail-stage { position:absolute; top:0; display:flex; flex-direction:column; align-items:center; gap:0; color:var(--ink); white-space:nowrap; }
+      .rail-stage .step-dot { position:relative; z-index:1; display:grid; place-items:center; width:64px; height:64px; border:3px solid var(--green); border-radius:50%; background:var(--surface); color:var(--green); font-family:"JetBrains Mono", ui-monospace, monospace; font-size:21px; font-weight:900; }
+      .rail-stage span:last-child { display:block; margin-top:10px; text-align:center; }
+      .rail-stage small { display:block; margin:0 0 5px; color:#687970; font-family:"JetBrains Mono", ui-monospace, monospace; font-size:12px; font-weight:850; letter-spacing:.07em; }
+      .rail-stage b { display:block; color:var(--green-strong); font-size:20px; font-weight:850; letter-spacing:-.8px; }
+      .rail-stage.a { left:0; } .rail-stage.b { left:50%; transform:translateX(-50%); } .rail-stage.c { right:0; }
+      .rail-stage.c .step-dot { background:var(--green); color:#fff; }
+      .board { top:220px; left:35px; right:35px; height:1230px; }
+      .board-title { position:absolute; left:20px; top:0; }
+      .board-title h2 { margin:12px 0 0; font-size:57px; line-height:1.08; letter-spacing:-3.6px; }
+      .diagram { position:absolute; top:210px; left:0; width:1010px; height:875px; }
+      .lane { fill:#f6faf7; stroke:#cbd8d1; stroke-width:1.5; }
+      .lane-line { stroke:#cbd8d1; stroke-width:1.5; }
+      .lane-label { fill:#526159; font-size:15px; font-weight:820; text-anchor:middle; }
+      .step { fill:#5d6b63; font-family:"JetBrains Mono", ui-monospace, monospace; font-size:16px; font-weight:850; }
+      .node { opacity:0; }
+      .node-card { fill:#fff; stroke:#176c50; stroke-width:2.5; }
+      .node-card.gold { fill:#fff9e9; stroke:#c78116; }
+      .node-card.blue { fill:#f4f8ff; stroke:#3478db; }
+      .node-card.dark { fill:#176c50; stroke:#176c50; }
+      .node-rail { fill:#176c50; }
+      .node-rail.gold { fill:#c78116; }
+      .node-rail.blue { fill:#3478db; }
+      .node-code { fill:#176c50; font-family:"JetBrains Mono", ui-monospace, monospace; font-size:14px; font-weight:850; }
+      .node-code.light { fill:#bdebdc; }
+      .node-name { fill:#10271d; font-size:24px; font-weight:820; letter-spacing:-1.2px; }
+      .node-name.light { fill:#fff; }
+      .edge-draw-bg,.edge-final-bg { fill:none; stroke:#fff; stroke-width:8; stroke-linecap:round; stroke-linejoin:round; }
+      .edge-draw,.edge-final { fill:none; stroke:var(--line); stroke-width:3.4; stroke-linecap:round; stroke-linejoin:round; }
+      .edge-final { opacity:0; }
+      .edge-final.money { stroke:var(--blue); stroke-dasharray:10 8; }
+      .edge-final.message { stroke:var(--green); stroke-dasharray:11 8; }
+      .edge-draw.money { stroke:var(--blue); }
+      .edge-draw.message { stroke:var(--green); }
+      .edge-label { opacity:0; }
+      .edge-label rect { fill:#fff; stroke:var(--green); stroke-width:1.4; rx:6; }
+      .edge-label text { fill:var(--green); font-size:14px; font-weight:850; text-anchor:middle; }
+      .edge-label.money rect { stroke:var(--blue); }
+      .edge-label.money text { fill:var(--blue); }
+      .flow-beads { fill:none; stroke:#72d9bb; stroke-width:4; stroke-linecap:round; stroke-dasharray:2 20; opacity:0; }
+      .board-note { position:absolute; top:1100px; left:20px; right:20px; display:grid; grid-template-columns:170px 1fr; gap:20px; padding:24px 26px; border:2px solid var(--border); border-radius:8px; background:var(--surface); color:#526159; font-size:22px; line-height:1.42; }
+      .board-note b { align-self:start; padding:8px 10px; border-radius:5px; background:var(--surface-subtle); color:var(--green); font-family:"JetBrains Mono", ui-monospace, monospace; font-size:17px; letter-spacing:.06em; }
+      .board-note strong { color:var(--ink); font-weight:770; }
+      .split { top:265px; }
+      .split h2 { margin:16px 0 0; font-size:68px; line-height:1.08; letter-spacing:-4px; }
+      .split p { margin-top:20px; color:#586960; font-size:28px; line-height:1.45; }
+      .split-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:58px; }
+      .split-card { min-height:318px; padding:34px; border:2px solid var(--border); border-radius:8px; background:var(--surface); }
+      .split-card small { color:#62746b; font-family:"JetBrains Mono", ui-monospace, monospace; font-size:15px; font-weight:850; }
+      .split-card strong { display:block; margin-top:28px; font-size:76px; line-height:.9; letter-spacing:-5px; color:var(--blue); }
+      .split-card b { display:block; margin-top:22px; font-size:30px; letter-spacing:-1.5px; }
+      .split-card em { display:block; margin-top:12px; color:#687970; font-style:normal; font-size:20px; line-height:1.35; }
+      .split-flow { display:grid; grid-template-columns:1fr 46px 1fr 46px 1fr; align-items:center; margin-top:34px; padding:23px 26px; border:2px solid var(--border); border-radius:8px; background:var(--surface-subtle); }
+      .split-flow-step { color:#176c50; font-size:21px; font-weight:830; letter-spacing:-.7px; text-align:center; }
+      .split-flow-step small { display:block; margin-bottom:8px; color:#64756c; font-family:"JetBrains Mono", ui-monospace, monospace; font-size:14px; letter-spacing:.08em; }
+      .split-flow-arrow { width:21px; height:21px; border-top:4px solid #176c50; border-right:4px solid #176c50; transform:rotate(45deg); }
+      .brief-panel { margin-top:30px; padding:25px 28px 24px; border:2px solid #d9c894; border-radius:9px; background:#fff9e9; }
+      .brief-panel-head { display:flex; justify-content:space-between; align-items:center; color:#9f670e; font-family:"JetBrains Mono", ui-monospace, monospace; font-size:14px; font-weight:850; letter-spacing:.08em; }
+      .brief-panel h3 { margin:14px 0 0; color:#3b3121; font-size:28px; letter-spacing:-1.3px; }
+      .brief-stats { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:20px; }
+      .brief-stat { padding:16px 17px; border-radius:7px; background:rgba(255,255,255,.84); color:#72581f; font-size:18px; line-height:1.25; }
+      .brief-stat b { display:block; margin-bottom:6px; color:#9f670e; font-size:27px; letter-spacing:-1px; }
+      .support-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:13px; margin-top:20px; }
+      .support-card { min-height:126px; padding:17px; border:1.5px solid #cbd8d1; border-radius:8px; background:#fff; }
+      .support-card small { color:#64756c; font-family:"JetBrains Mono", ui-monospace, monospace; font-size:12px; font-weight:850; letter-spacing:.07em; }
+      .support-card b { display:block; margin-top:11px; color:#10271d; font-size:23px; letter-spacing:-1px; }
+      .support-card span { display:block; margin-top:5px; color:#687970; font-size:15px; }
+      .feedback { top:260px; }
+      .feedback h2 { margin:16px 0 0; font-size:69px; line-height:1.1; letter-spacing:-4px; }
+      .feedback p { margin:24px 0 0; color:#53675d; font-size:29px; line-height:1.48; }
+      .feedback-board { position:relative; margin-top:62px; height:730px; border:2px solid var(--border); border-radius:10px; background:var(--surface); overflow:hidden; }
+      .feedback-board-head { position:absolute; top:24px; left:28px; right:28px; display:flex; justify-content:space-between; color:#62746b; font-family:"JetBrains Mono", ui-monospace, monospace; font-size:15px; font-weight:850; letter-spacing:.07em; }
+      .feedback-node { position:absolute; width:270px; min-height:150px; padding:19px 20px; border:2px solid #176c50; border-radius:8px; background:#fff; opacity:0; }
+      .feedback-node small { display:block; color:#176c50; font-family:"JetBrains Mono", ui-monospace, monospace; font-size:14px; font-weight:850; letter-spacing:.07em; }
+      .feedback-node strong { display:block; margin-top:13px; color:#10271d; font-size:27px; line-height:1.14; letter-spacing:-1.4px; }
+      .feedback-node strong span { display:block; }
+      .feedback-node em { display:block; margin-top:8px; color:#64756c; font-size:17px; font-style:normal; line-height:1.28; }
+      .feedback-node.a { left:30px; top:96px; }
+      .feedback-node.b { left:350px; top:96px; width:280px; border-color:#c78116; background:#fff9e9; }
+      .feedback-node.b small { color:#9f670e; }
+      .feedback-node.c { right:30px; top:96px; border-color:#3478db; background:#f4f8ff; }
+      .feedback-node.c small { color:#3478db; }
+      .feedback-result { position:absolute; left:150px; right:150px; bottom:178px; padding:25px 30px; border-radius:8px; background:#176c50; color:#fff; opacity:0; }
+      .feedback-result small { color:#bdebdc; font-family:"JetBrains Mono", ui-monospace, monospace; font-size:15px; font-weight:850; letter-spacing:.07em; }
+      .feedback-result strong { display:block; margin-top:10px; font-size:30px; letter-spacing:-1.5px; }
+      .feedback-outcomes { position:absolute; left:36px; right:36px; top:566px; display:grid; grid-template-columns:repeat(3,1fr); gap:13px; opacity:0; }
+      .feedback-outcome { min-height:92px; padding:14px; border-top:3px solid #72d9bb; background:#f6faf7; }
+      .feedback-outcome small { color:#64756c; font-family:"JetBrains Mono", ui-monospace, monospace; font-size:11px; font-weight:850; letter-spacing:.06em; }
+      .feedback-outcome b { display:block; margin-top:9px; color:#10271d; font-size:19px; letter-spacing:-.8px; }
+      .feedback-route { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+      .feedback-edge-draw-bg,.feedback-edge-final-bg { fill:none; stroke:#fff; stroke-width:10; stroke-linecap:round; stroke-linejoin:round; }
+      .feedback-edge-draw,.feedback-edge-final { fill:none; stroke:#176c50; stroke-width:4; stroke-linecap:round; stroke-linejoin:round; }
+      .feedback-edge-final { opacity:0; }
+      .feedback-edge-final.blue { stroke:#3478db; stroke-dasharray:10 8; }
+      .feedback-edge-draw.blue { stroke:#3478db; }
+      .feedback-route-label { opacity:0; }
+      .feedback-route-label rect { fill:#fff; stroke:#3478db; stroke-width:1.5; rx:6; }
+      .feedback-route-label text { fill:#3478db; font-size:14px; font-weight:850; text-anchor:middle; }
+      .closing { position:absolute; left:54px; right:54px; top:442px; min-height:815px; padding:42px 42px 36px; border:2px solid var(--border); border-top:10px solid var(--green); border-radius:10px; background:var(--surface); opacity:1; }
+      #closing-content { height:100%; opacity:0; }
+      .closing h3 { margin:13px 0 0; font-size:62px; line-height:1.11; letter-spacing:-3.5px; }
+      .closing h3 span { display:block; }
+      .closing .mono { margin-top:26px; color:var(--green); font-size:17px; }
+      .closing-summary { margin-top:64px; padding:26px 28px; border-radius:8px; background:#effaf5; color:#526159; font-size:25px; line-height:1.45; }
+      .closing-summary b { color:#176c50; }
+      .closing-agency { display:flex; align-items:center; gap:24px; margin-top:56px; padding-top:26px; border-top:1px solid #cbd8d1; }
+      .closing-agency img { width:180px; height:auto; object-fit:contain; }
+      .closing-agency small { display:block; color:#687970; font-family:"JetBrains Mono", ui-monospace, monospace; font-size:13px; font-weight:850; letter-spacing:.07em; }
+      .closing-agency b { display:block; margin-top:9px; color:#10271d; font-size:25px; letter-spacing:-1px; }
+      .footer { position:absolute; left:54px; right:54px; bottom:50px; display:flex; justify-content:space-between; align-items:center; color:#64756c; font-size:18px; font-weight:760; }
+      .footer strong { color:#fff; background:#176c50; padding:17px 22px; border-radius:6px; font-size:22px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="local-extinction-fund" data-start="0" data-duration="16" data-width="1080" data-height="1920">
+      <div class="ground"></div><div class="grid"></div>
+      <header class="topbar"><div class="brand">대한민국 <b>제도100</b></div><div class="mono">LOCAL EXTINCTION FUND</div></header>
+
+      <section id="hook" class="scene hero">
+        <div class="eyebrow">LOCAL EXTINCTION RESPONSE FUND</div>
+        <h1><span class="display-line">1조 원은</span><span class="display-line">바로 내려가지</span><span class="display-line">않습니다.</span></h1>
+        <p><span class="line">지역의 계획을 평가하고,</span><span class="line">다시 다음 해의 배분에 반영합니다.</span></p>
+        <div class="fund-chip"><i></i><span>2022–2031 · 연 1조 원 구조</span></div>
+      </section>
+      <section id="source" class="money-source">
+        <div class="money-source-head"><span class="mono">POLICY OWNER · FUND FRAME</span><div class="agency"><img src=".media/images/logo_002.png" alt="행정안전부 로고"/><span>정책 주관<br/><b>균형발전국</b></span></div></div>
+        <div class="money-main"><strong>지방소멸대응기금</strong><p>지역의 정주 여건과 활력을 위한, 계획·평가 기반 재원입니다.</p><div class="fund-facts"><div class="fund-fact"><small>OPERATING TERM</small><b>2022–2031</b></div><div class="fund-fact"><small>ANNUAL SCALE</small><b>매년 1조 원</b></div><div class="fund-fact"><small>POLICY FLOW</small><b>계획 → 평가 → 환류</b></div></div></div>
+      </section>
+      <div id="rail" class="rail" aria-label="기금에서 평가와 배분으로 이어지는 세 단계"><div class="rail-track"><div class="rail-arrow"></div></div><div class="rail-stage a"><span class="step-dot">1</span><span><small>FUND</small><b>기금 조성</b></span></div><div class="rail-stage b"><span class="step-dot">2</span><span><small>PLAN</small><b>지역 투자계획</b></span></div><div class="rail-stage c"><span class="step-dot">3</span><span><small>ASSESS</small><b>평가·배분</b></span></div></div>
+
+      <section id="board" class="scene board">
+        <div class="board-title"><div class="eyebrow">HOW THE FUND MOVES</div><h2><span class="line">돈은 계획을</span><span class="line">통과합니다.</span></h2></div>
+        <svg class="diagram" viewBox="0 0 1010 840" aria-label="지방소멸대응기금 흐름">
+          <defs>
+            <marker id="seq" markerWidth="17" markerHeight="13" refX="15" refY="6.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M1,1 L16,6.5 L1,12 Z" fill="#53675d" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/></marker>
+            <marker id="message" markerWidth="17" markerHeight="13" refX="15" refY="6.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M1,1 L16,6.5 L1,12 Z" fill="#176c50" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/></marker>
+            <marker id="money" markerWidth="17" markerHeight="13" refX="15" refY="6.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M1,1 L16,6.5 L1,12 Z" fill="#3478db" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/></marker>
+          </defs>
+          <rect class="lane" x="70" y="78" width="285" height="690"/><rect class="lane" x="355" y="78" width="305" height="690"/><rect class="lane" x="660" y="78" width="280" height="690"/>
+          <line class="lane-line" x1="70" y1="132" x2="940" y2="132"/><line class="lane-line" x1="70" y1="300" x2="940" y2="300"/><line class="lane-line" x1="70" y1="468" x2="940" y2="468"/><line class="lane-line" x1="70" y1="635" x2="940" y2="635"/><line class="lane-line" x1="70" y1="768" x2="940" y2="768"/>
+          <text class="lane-label" x="213" y="111">기초 지자체 · 주민</text><text class="lane-label" x="507" y="111">행안부 · 평가단</text><text class="lane-label" x="800" y="111">광역 · 지방의회</text>
+          <text class="step" x="9" y="220">G1</text><text class="step" x="9" y="390">G2–G3</text><text class="step" x="9" y="558">G4</text><text class="step" x="9" y="708">G5–G6</text>
+
+          <g id="edge-diagnose"><path class="edge-draw-bg" d="M210 257 V340"/><path class="edge-draw" d="M210 257 V340"/><path class="edge-final-bg" d="M210 257 V340"/><path class="edge-final" d="M210 257 V340" marker-end="url(#seq)"/></g>
+          <g id="edge-plan"><path class="edge-draw-bg" d="M320 388 H405"/><path class="edge-draw" d="M320 388 H405"/><path class="edge-final-bg" d="M320 388 H405"/><path class="edge-final" d="M320 388 H405" marker-end="url(#message)"/></g>
+          <g id="edge-fix"><path class="edge-draw-bg" d="M405 436 H370 V315 H320"/><path class="edge-draw message" d="M405 436 H370 V315 H320"/><path class="edge-final-bg" d="M405 436 H370 V315 H320" stroke-dasharray="11 8"/><path class="edge-final message" d="M405 436 H370 V315 H320" marker-end="url(#message)"/></g>
+          <g id="edge-evaluate"><path class="edge-draw-bg" d="M507 436 V520"/><path class="edge-draw" d="M507 436 V520"/><path class="edge-final-bg" d="M507 436 V520"/><path class="edge-final" d="M507 436 V520" marker-end="url(#money)"/></g>
+          <g id="edge-budget"><path class="edge-draw-bg" d="M610 568 H710"/><path class="edge-draw money" d="M610 568 H710"/><path class="edge-final-bg" d="M610 568 H710" stroke-dasharray="10 8"/><path class="edge-final money" d="M610 568 H710" marker-end="url(#money)"/></g>
+          <g id="edge-exec"><path class="edge-draw-bg" d="M810 616 V660"/><path class="edge-draw" d="M810 616 V660"/><path class="edge-final-bg" d="M810 616 V660"/><path class="edge-final" d="M810 616 V660" marker-end="url(#seq)"/></g>
+          <path id="beads" class="flow-beads" d="M210 257 V340 M320 388 H405 M507 436 V520 M610 568 H710 M810 616 V660"/>
+          <g id="label-plan" class="edge-label"><rect x="328" y="340" width="70" height="32"/><text x="363" y="362">제출</text></g>
+          <g id="label-fix" class="edge-label"><rect x="278" y="278" width="108" height="32"/><text x="332" y="300">보완 요청</text></g>
+          <g id="label-money" class="edge-label money"><rect x="610" y="520" width="116" height="32"/><text x="668" y="542">평가 → 배분</text></g>
+          <g id="node-diagnose" class="node"><rect class="node-card dark" x="100" y="165" width="220" height="92" rx="8"/><text class="node-code light" x="122" y="197">P01 · 주민</text><text class="node-name light" x="122" y="228">지역 문제 진단</text><text class="node-code light" x="122" y="247">의견 수렴 · 과제 발굴</text></g>
+          <g id="node-plan" class="node"><rect class="node-card" x="100" y="340" width="220" height="96" rx="8"/><rect class="node-rail" x="100" y="340" width="6" height="96" rx="3"/><text class="node-code" x="122" y="374">P02 · 기초</text><text class="node-name" x="122" y="407">중기 투자계획</text><text class="node-code" x="122" y="426">전략 · 사업 구성</text></g>
+          <g id="node-eval" class="node"><rect class="node-card gold" x="405" y="340" width="205" height="96" rx="8"/><rect class="node-rail gold" x="405" y="340" width="6" height="96" rx="3"/><text class="node-code" x="428" y="374">G2–G3 · 평가단</text><text class="node-name" x="428" y="407">전략성 · 타당성</text><text class="node-code" x="428" y="426">필요 시 보완 요청</text></g>
+          <g id="node-alloc" class="node"><rect class="node-card blue" x="405" y="520" width="205" height="96" rx="8"/><rect class="node-rail blue" x="405" y="520" width="6" height="96" rx="3"/><text class="node-code" x="428" y="554">G4 · 배분</text><text class="node-name" x="428" y="587">평가 결과 확정</text><text class="node-code" x="428" y="606">우수 계획 차등 반영</text></g>
+          <g id="node-budget" class="node"><rect class="node-card" x="710" y="520" width="200" height="96" rx="8"/><rect class="node-rail" x="710" y="520" width="6" height="96" rx="3"/><text class="node-code" x="733" y="554">G5 · 예산</text><text class="node-name" x="733" y="587">세입 · 의회 심의</text><text class="node-code" x="733" y="606">예산 편성 확정</text></g>
+          <g id="node-exec" class="node"><rect class="node-card" x="710" y="660" width="200" height="92" rx="8"/><rect class="node-rail" x="710" y="660" width="6" height="92" rx="3"/><text class="node-code" x="733" y="692">G6 · 집행</text><text class="node-name" x="733" y="723">세부사업 추진</text><text class="node-code" x="733" y="742">성과 관리 → 다음 해</text></g>
+        </svg>
+        <aside class="board-note"><b>핵심 구조</b><strong>주민 참여로 지역 과제를 찾고, 중기 투자계획을 평가·보완해 배분합니다. 집행 결과는 다음 해 계획의 근거가 됩니다.</strong></aside>
+      </section>
+
+      <section id="split" class="scene split"><div class="eyebrow">ALLOCATION</div><h2><span class="line">평가 결과가</span><span class="line">배분을 가릅니다.</span></h2><p><span class="line">배분금은 지자체 세입으로 편성된 뒤,</span><span class="line">지방의회 심의와 세부사업 집행으로 이어집니다.</span></p><div class="split-grid"><article class="split-card"><small>광역지원계정</small><strong>25%</strong><b>광역 시·도</b><em>생활권·광역 연계와 정주 여건 사업</em></article><article class="split-card"><small>기초지원계정</small><strong>75%</strong><b>시·군·구</b><em>지역 투자계획 기반 사업</em></article></div><div class="split-flow"><div class="split-flow-step"><small>G4</small>지자체 세입 편성</div><i class="split-flow-arrow"></i><div class="split-flow-step"><small>G5</small>지방의회 심의</div><i class="split-flow-arrow"></i><div class="split-flow-step"><small>G6</small>세부사업 집행</div></div><div class="brief-panel"><div class="brief-panel-head"><span>2027 개편 방향</span><span>평가·배분체계</span></div><h3>기반시설만이 아니라 제도·프로그램 운영까지</h3><div class="brief-stats"><div class="brief-stat"><b>최대 평균의 2배</b>우수한 투자계획에는 더 두텁게 배분</div><div class="brief-stat"><b>최저 평균의 1/2</b>현저히 부실한 계획은 차등 조정</div></div></div><div class="support-grid"><div class="support-card"><small>SETTLEMENT</small><b>일자리</b><span>지역의 지속 가능한 소득</span></div><div class="support-card"><small>SETTLEMENT</small><b>주거</b><span>살고 머물 수 있는 기반</span></div><div class="support-card"><small>SETTLEMENT</small><b>돌봄·의료</b><span>일상에 필요한 생활 서비스</span></div></div></section>
+
+      <section id="feedback" class="scene feedback"><div class="eyebrow">THE NEXT YEAR</div><h2><span class="line">집행으로</span><span class="line">끝나지 않습니다.</span></h2><p><span class="line">집행 실적과 성과는 다음 해의 투자계획·평가에 반영됩니다.</span></p><div class="feedback-board"><div class="feedback-board-head"><span>올해 사업</span><span>다음 연도</span></div><svg class="feedback-route" viewBox="0 0 970 730" aria-label="성과의 다음 해 반영 흐름"><defs><marker id="feedback-seq" markerWidth="17" markerHeight="13" refX="15" refY="6.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M1,1 L16,6.5 L1,12 Z" fill="#176c50" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/></marker><marker id="feedback-blue" markerWidth="17" markerHeight="13" refX="15" refY="6.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M1,1 L16,6.5 L1,12 Z" fill="#3478db" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/></marker></defs><g id="feedback-edge-a"><path class="feedback-edge-draw-bg" d="M300 172 H350"/><path class="feedback-edge-draw" d="M300 172 H350"/><path class="feedback-edge-final-bg" d="M300 172 H350"/><path class="feedback-edge-final" d="M300 172 H350" marker-end="url(#feedback-seq)"/></g><g id="feedback-edge-b"><path class="feedback-edge-draw-bg" d="M630 172 H670"/><path class="feedback-edge-draw" d="M630 172 H670"/><path class="feedback-edge-final-bg" d="M630 172 H670"/><path class="feedback-edge-final" d="M630 172 H670" marker-end="url(#feedback-seq)"/></g><g id="feedback-edge-c"><path class="feedback-edge-draw-bg" d="M800 246 V350 H485 V458"/><path class="feedback-edge-draw blue" d="M800 246 V350 H485 V458"/><path class="feedback-edge-final-bg" d="M800 246 V350 H485 V458" stroke-dasharray="10 8"/><path class="feedback-edge-final blue" d="M800 246 V350 H485 V458" marker-end="url(#feedback-blue)"/></g><g id="feedback-label-c" class="feedback-route-label"><rect x="700" y="324" width="118" height="32"/><text x="759" y="346">다음 해 반영</text></g></svg><article id="feedback-node-a" class="feedback-node a"><small>01 · EXECUTION</small><strong><span>세부사업</span><span>집행</span></strong><em>계획한 사업을 실제로 추진</em></article><article id="feedback-node-b" class="feedback-node b"><small>02 · PERFORMANCE</small><strong><span>집행 실적</span><span>· 성과 관리</span></strong><em>집행률과 사업 성과를 확인</em></article><article id="feedback-node-c" class="feedback-node c"><small>03 · NEXT YEAR</small><strong><span>다음 해</span><span>투자계획·평가</span></strong><em>보완된 계획을 다음 평가에 반영</em></article><div id="feedback-outcomes" class="feedback-outcomes"><div class="feedback-outcome"><small>OUTCOME</small><b>정주 여건 개선</b></div><div class="feedback-outcome"><small>OUTCOME</small><b>지역 활력 회복</b></div><div class="feedback-outcome"><small>OUTCOME</small><b>인구 유입·유출 방지</b></div></div><div id="feedback-result" class="feedback-result"><small>FEEDBACK LOOP · 재투자 선순환</small><strong>성과는 다음 해 배분의 기준이 됩니다.</strong></div></div></section>
+      <section id="closing" class="clip closing" data-start="13.88" data-duration="3" data-track-index="1"><div id="closing-content"><div class="eyebrow">KOREA100 · POLICY MAP</div><h3><span>돈을 주는 제도가 아니라,</span><span>다음 선택을 바꾸는 제도.</span></h3><div class="mono">LOCAL EXTINCTION RESPONSE FUND</div><div class="closing-summary">지역이 문제를 진단하고 <b>주민과 함께 계획</b>을 세우면, 평가는 배분을 바꾸고 성과는 다시 다음 계획을 보완합니다.</div><div class="closing-agency"><img src=".media/images/logo_002.png" alt="행정안전부 로고"/><div><small>POLICY OWNER · SOURCE</small><b>균형발전국</b><small style="margin-top:10px">지방소멸대응기금 평가·배분체계 개편 브리핑 · 2026.04.14</small></div></div></div></section>
+      <footer class="footer"><span>AI-ASSISTED ADMIN LITERACY</span><strong>korea100.dev →</strong></footer>
+    </div>
+    <script>
+      const root = document.querySelector('[data-composition-id]');
+      const tl = gsap.timeline({ paused:true });
+      const show = (selector, at, from={y:28}) => tl.fromTo(selector, {opacity:0, ...from}, {opacity:1, x:0, y:0, duration:.5, ease:'power3.out', immediateRender:false}, at);
+      const hide = (selector, at) => tl.to(selector, {opacity:0, duration:.38, ease:'power2.in'}, at);
+      const draw = (selector, at, duration) => {
+        const group = document.querySelector(selector);
+        const sketch = [...group.querySelectorAll('.edge-draw-bg,.edge-draw')];
+        const final = [...group.querySelectorAll('.edge-final-bg,.edge-final')];
+        sketch.forEach(path => { const length=path.getTotalLength(); path.style.strokeDasharray=`${length} ${length}`; path.style.strokeDashoffset=length; tl.to(path,{strokeDashoffset:0,duration,ease:'power2.inOut'},at); });
+        tl.to(sketch,{opacity:0,duration:.08,ease:'none'},at+duration);
+        tl.to(final,{opacity:1,duration:.1,ease:'none'},at+duration-.02);
+      };
+      const drawFeedback = (selector, at, duration) => {
+        const group = document.querySelector(selector);
+        const sketch = [...group.querySelectorAll('.feedback-edge-draw-bg,.feedback-edge-draw')];
+        const final = [...group.querySelectorAll('.feedback-edge-final-bg,.feedback-edge-final')];
+        sketch.forEach(path => { const length=path.getTotalLength(); path.style.strokeDasharray=`${length} ${length}`; path.style.strokeDashoffset=length; tl.to(path,{strokeDashoffset:0,duration,ease:'power2.inOut'},at); });
+        tl.to(sketch,{opacity:0,duration:.08,ease:'none'},at+duration);
+        tl.to(final,{opacity:1,duration:.1,ease:'none'},at+duration-.02);
+      };
+      show('#hook', .15, {y:24});
+      show('#source', 1.25, {y:42});
+      show('#rail', 1.65, {y:14});
+      hide('#hook,#source,#rail', 2.95);
+      show('#board', 3.18, {y:24});
+      show('#node-diagnose', 3.32, {scale:.96, transformOrigin:'50% 50%'});
+      draw('#edge-diagnose',3.62,.24); show('#node-plan',3.82,{scale:.96,transformOrigin:'50% 50%'});
+      draw('#edge-plan',4.18,.24); show('#label-plan',4.3,{y:0}); show('#node-eval',4.48,{scale:.96,transformOrigin:'50% 50%'});
+      draw('#edge-fix',4.86,.26); show('#label-fix',4.98,{y:0});
+      draw('#edge-evaluate',5.18,.24); show('#node-alloc',5.4,{y:14});
+      draw('#edge-budget',5.7,.26); show('#label-money',5.82,{y:0}); show('#node-budget',5.98,{x:18});
+      draw('#edge-exec',6.28,.24); show('#node-exec',6.46,{scale:.96,transformOrigin:'50% 50%'});
+      tl.to('#beads',{opacity:.95,duration:.22,ease:'power1.out'},6.65);
+      tl.to('#beads',{strokeDashoffset:-180,duration:1.2,ease:'none'},6.65);
+      hide('#board',8.02);
+      show('#split',8.22,{y:28});
+      hide('#split',10.28);
+      show('#feedback',10.45,{y:28});
+      show('#feedback-node-a',10.96,{x:-18});
+      drawFeedback('#feedback-edge-a',11.28,.22);
+      show('#feedback-node-b',11.48,{y:18});
+      drawFeedback('#feedback-edge-b',11.8,.22);
+      show('#feedback-node-c',12.0,{x:18});
+      drawFeedback('#feedback-edge-c',12.34,.3); show('#feedback-label-c',12.5,{y:0});
+      show('#feedback-result',12.7,{y:16});
+      show('#feedback-outcomes',13.0,{y:14});
+      hide('#feedback',13.78);
+      show('#closing-content',13.94,{y:24});
+      window.__timelines=window.__timelines||{};
+      window.__timelines[root.dataset.compositionId]=tl;
+    </script>
+  </body>
+</html>

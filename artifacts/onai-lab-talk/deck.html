@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI 정부 실험실 우수사례 · 제도 100 — 멈추지 않는 행정</title>
+<style>
+  :root{
+    --ink:#111714; --muted:#5d6b63; --faint:#87938d;
+    --paper:#fcfcfb; --surface:#ffffff; --surface-muted:#f5f7f6; --tint:#eef8f3;
+    --border:#dde5df; --border-strong:#bdcbc4;
+    --accent:#0f9f72; --accent-dark:#087452; --accent-soft:#dff5eb;
+    --warning:#c2410c; --warning-soft:#fff1e8; --warning-border:#f0c4a4;
+    --dark:#0b1410;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
+    background:var(--dark); color:var(--ink);
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* ---- stage / slides ---- */
+  .deck{position:fixed;inset:0}
+  .slide{
+    position:absolute;inset:0;
+    display:none;
+    flex-direction:column;justify-content:center;
+    padding:7vh 9vw;
+    background:var(--paper);
+    opacity:0; transition:opacity .32s ease;
+  }
+  .slide.active{display:flex;opacity:1;z-index:2}
+  .slide.dark{background:var(--dark);color:#eef2ef}
+  .slide.warn{background:linear-gradient(180deg,#fff7f2 0%,var(--paper) 60%)}
+
+  /* ---- shared type ---- */
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:.6em;
+    font-size:1.7vh;font-weight:750;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--accent-dark);
+  }
+  .eyebrow::before{content:"";width:.75em;height:.75em;border-radius:99px;background:var(--accent)}
+  .dark .eyebrow{color:#5fdcae}
+  .dark .eyebrow::before{background:#3ecf96}
+  .warn .eyebrow{color:var(--warning)}
+  .warn .eyebrow::before{background:var(--warning)}
+  h1,h2,.punch,.lead,.big,.quote{word-break:keep-all;overflow-wrap:break-word}
+  h1{font-size:6.4vh;line-height:1.08;font-weight:800;letter-spacing:-.01em;margin:.4em 0}
+  h2{font-size:4.6vh;line-height:1.14;font-weight:790;letter-spacing:-.01em}
+  .lead{font-size:2.5vh;line-height:1.5;color:var(--muted);max-width:52ch;font-weight:450}
+  .dark .lead{color:#b7c6bd}
+  .big{font-size:3.4vh;line-height:1.4;font-weight:600}
+  .kicker{font-size:2.1vh;color:var(--faint);font-weight:650;margin-bottom:.4em}
+  strong,b{font-weight:800;color:inherit}
+  .accent{color:var(--accent-dark)}
+  .dark .accent{color:#5fdcae}
+  .warnc{color:var(--warning)}
+  em{font-style:normal;background:linear-gradient(transparent 55%,var(--accent-soft) 55%);padding:0 .1em;font-weight:700;font-style:normal}
+  .warn em{background:linear-gradient(transparent 55%,#ffd9c4 55%)}
+
+  /* ---- title slide ---- */
+  .title-foot{
+    position:absolute;left:9vw;bottom:6vh;right:9vw;
+    display:flex;justify-content:space-between;align-items:flex-end;
+    font-size:2vh;color:var(--muted);
+  }
+  .title-foot b{color:var(--ink);font-weight:800}
+  .dark .title-foot{color:#9fb3a8}
+  .dark .title-foot b{color:#eef2ef}
+
+  /* ---- stat row ---- */
+  .stats{display:flex;gap:5vw;margin-top:3.5vh;flex-wrap:wrap}
+  .stat .n{font-size:7vh;font-weight:820;color:var(--accent-dark);line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+  .dark .stat .n{color:#5fdcae}
+  .stat .l{font-size:2vh;color:var(--muted);margin-top:.5em;font-weight:600}
+  .dark .stat .l{color:#9fb3a8}
+
+  /* ---- pillars / cards ---- */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:2vh;margin-top:4vh}
+  .card{
+    background:var(--surface);border:1px solid var(--border);border-radius:14px;
+    padding:3vh 2.4vh;
+  }
+  .card .cn{font-size:1.7vh;font-weight:800;color:var(--accent-dark);letter-spacing:.03em}
+  .card h3{font-size:2.7vh;font-weight:790;margin:.7em 0 .5em;line-height:1.2}
+  .card p{font-size:1.95vh;color:var(--muted);line-height:1.45}
+
+  /* ---- quote ---- */
+  .quote{
+    margin-top:4vh;border-left:.5vh solid var(--accent);padding:1vh 0 1vh 2.4vh;
+    font-size:2.7vh;line-height:1.4;color:var(--ink);font-weight:600;max-width:46ch;
+  }
+  .quote small{display:block;font-size:1.8vh;color:var(--faint);font-weight:650;margin-top:.8em}
+  .dark .quote{color:#eef2ef}
+
+  /* ---- bullet list ---- */
+  .checks{margin-top:3.5vh;display:grid;gap:1.9vh;max-width:62ch}
+  .checks li{list-style:none;position:relative;padding-left:2.8vh;font-size:2.4vh;line-height:1.42}
+  .checks li::before{content:"";position:absolute;left:0;top:.62em;width:1.1vh;height:1.1vh;border-radius:99px;background:var(--accent)}
+  .warn .checks li::before{background:var(--warning)}
+  .checks li b{font-weight:800}
+  .checks li span{color:var(--muted)}
+
+  /* ---- media ---- */
+  .media-row{display:flex;gap:2vh;margin-top:3vh;align-items:stretch}
+  .shot{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface);box-shadow:0 2vh 5vh -3vh rgba(11,20,16,.4)}
+  .shot img{display:block;width:100%;height:100%;object-fit:cover}
+  .caption{font-size:1.7vh;color:var(--faint);margin-top:1.2vh;font-weight:600}
+
+  /* incident screenshot slide */
+  .incident{display:grid;grid-template-columns:1fr 1.05fr;gap:5vw;align-items:center;height:100%}
+  .incident .phone{
+    justify-self:center;max-height:82vh;border-radius:26px;overflow:hidden;
+    border:1.5vh solid #1c1c1e;box-shadow:0 3vh 7vh -3vh rgba(0,0,0,.55);background:#1c1c1e;
+  }
+  .incident .phone img{display:block;height:78vh;width:auto}
+  .badge{
+    display:inline-block;background:var(--warning-soft);color:var(--warning);
+    border:1px solid var(--warning-border);border-radius:99px;
+    padding:.4em 1em;font-size:1.8vh;font-weight:800;margin-bottom:1.5vh;letter-spacing:.02em
+  }
+
+  /* closing punch */
+  .punch{font-size:5.4vh;line-height:1.22;font-weight:800;letter-spacing:-.01em;max-width:20ch}
+  .punch .accent{color:#5fdcae}
+
+  /* ---- chrome: progress + counter + hint ---- */
+  .progress{position:fixed;left:0;bottom:0;height:.5vh;background:var(--accent);z-index:50;transition:width .32s ease}
+  .counter{position:fixed;right:2.6vw;bottom:2.4vh;font-size:1.7vh;color:var(--faint);font-weight:700;z-index:50;font-variant-numeric:tabular-nums}
+  .dark ~ .counter{color:#7d928a}
+  .brandtag{position:fixed;left:2.6vw;bottom:2.4vh;font-size:1.6vh;color:var(--faint);font-weight:750;z-index:50;letter-spacing:.02em}
+  .hint{position:fixed;left:50%;bottom:2vh;transform:translateX(-50%);font-size:1.5vh;color:var(--faint);z-index:50;opacity:.0;transition:opacity .4s;pointer-events:none}
+  body:hover .hint{opacity:.55}
+
+  @media (max-width:900px){
+    h1{font-size:6vw} h2{font-size:4.4vw} .incident{grid-template-columns:1fr}
+    .incident .phone{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- 1 · 표지 -->
+  <section class="slide dark active">
+    <div class="eyebrow">AI 정부 실험실 · 이용자 간담회 우수사례</div>
+    <h1>한 장으로 끝내는<br><span class="accent">대한민국 제도 100</span></h1>
+    <p class="lead">공무원이 AI로 직접 만든 제도 지도.<br>그리고, 이 지도가 <em>멈추지 않은</em> 이야기.</p>
+    <div class="title-foot">
+      <span><b>서호성</b> · 행정안전부 혁신기획과</span>
+      <span>2026. 7 · AI 정부 실험실 이용자 간담회</span>
+    </div>
+  </section>
+
+  <!-- 2 · 문제의식 -->
+  <section class="slide">
+    <div class="eyebrow">여는 이야기</div>
+    <h2>좋은 아이디어가 서비스가 되기까지,<br>보통 <span class="accent">몇 년</span>이 걸립니다.</h2>
+    <p class="lead" style="margin-top:3.5vh">
+      공공 정보화사업은 예산 확보 → 발주 → 구축 → 운영으로 이어집니다.
+      그 사이, 현장의 반복 업무는 <b>그 속도를 기다려주지 않습니다.</b>
+    </p>
+    <div class="quote">
+      “예산 확보부터 운영까지 장시간이 소요되어,<br>현장의 반복 업무를 제때 개선하기 어려웠다.”
+      <small>— 행정안전부, ‘AI 정부 실험실’ 추진 배경</small>
+    </div>
+  </section>
+
+  <!-- 3 · 실험실 취지 (찬양) -->
+  <section class="slide">
+    <div class="eyebrow">AI 정부 실험실이 바꾼 전제</div>
+    <h2>발주가 아니라, <span class="accent">제작</span>.</h2>
+    <p class="lead" style="margin-top:2.5vh">담당 공무원이 AI로 직접 시제품을 만들고, 현장에서 바로 검증합니다. 몇 년 걸리던 일을 담당자가 손수 합니다.</p>
+    <div class="cards">
+      <div class="card"><div class="cn">01 직접 제작</div><h3>공무원이 만든다</h3><p>AI 코딩도구·개방 데이터로 담당자가 직접 서비스를 구현합니다.</p></div>
+      <div class="card"><div class="cn">02 빠른 검증</div><h3>즉시 시험한다</h3><p>몇 년짜리 발주 대신, 시제품을 빠르게 만들고 현장에서 검증합니다.</p></div>
+      <div class="card"><div class="cn">03 공개·확산</div><h3>산출물을 남긴다</h3><p>공공 저장소에 <b>문서·소스·프롬프트</b>를 모아 우수사례를 확산합니다.</p></div>
+    </div>
+  </section>
+
+  <!-- 4 · korea100 소개 -->
+  <section class="slide">
+    <div class="eyebrow">그래서 만들었습니다</div>
+    <h2>대한민국 제도 <span class="accent">509개</span>를<br>한 장 캔버스와 업무구조도로.</h2>
+    <div class="stats">
+      <div class="stat"><div class="n">509</div><div class="l">제도 모델</div></div>
+      <div class="stat"><div class="n">6,883</div><div class="l">절차 노드</div></div>
+      <div class="stat"><div class="n">8,746</div><div class="l">법령 인용</div></div>
+      <div class="stat"><div class="n">1</div><div class="l">공무원 · AI로</div></div>
+    </div>
+    <div class="quote" style="margin-top:3.5vh">기업에 비즈니스 모델이 있듯이,<br>국가에는 <b>제도 모델</b>이 있다.</div>
+  </section>
+
+  <!-- 5 · 무엇을 보여주나 (데모) -->
+  <section class="slide">
+    <div class="eyebrow">무엇을 보여주나</div>
+    <h2>누가·언제·무엇을, <span class="accent">어떤 법조문</span>에 근거해.</h2>
+    <div class="media-row" style="height:52vh">
+      <figure class="shot" style="flex:1"><img src="assets/map-appeals.png" alt="행정심판 업무구조도"></figure>
+      <figure class="shot" style="flex:1"><img src="assets/map-disaster.png" alt="재난관리 업무구조도"></figure>
+    </div>
+    <p class="caption">업무구조도(스윔레인). 신청하는 국민, 심사하는 기관, 이의신청으로 되돌아가는 경로까지 한 흐름에 담았습니다.</p>
+  </section>
+
+  <!-- 6 · 어떻게 -->
+  <section class="slide">
+    <div class="eyebrow">어떻게 만들었나</div>
+    <h2>공무원 1인 + AI 코딩도구.<br><span class="accent">발주도, 외주 SI도 없이.</span></h2>
+    <ul class="checks">
+      <li><b>데이터 계약</b>&nbsp;<span>— 제도를 법령·기관·절차·문서·기한으로 구조화</span></li>
+      <li><b>검증 스크립트</b>&nbsp;<span>— 구조·인용·도달 가능성을 기계가 점검</span></li>
+      <li><b>렌더러</b>&nbsp;<span>— 같은 데이터에서 캔버스·구조도·PDF를 자동 생성</span></li>
+    </ul>
+    <p class="lead" style="margin-top:3.5vh">전 과정을 <em>그대로 다시</em> 돌릴 수 있습니다. 실험실이 하려던 게 바로 이겁니다.</p>
+  </section>
+
+  <!-- 7 · 신뢰: 지어내지 않기 -->
+  <section class="slide">
+    <div class="eyebrow">신뢰의 핵심</div>
+    <h2>AI는 그럴듯하게 지어냅니다.<br>그래서 <span class="accent">검증</span>이 전부입니다.</h2>
+    <ul class="checks">
+      <li><b>원문 대조</b>&nbsp;<span>— 국가법령정보센터 현행 조문과 직접 대조</span></li>
+      <li><b>다층 검증</b>&nbsp;<span>— 기계 검사 · 의미 대조 · 절차 재구성 · 당사자 워크스루</span></li>
+      <li><b>지어내지 않기</b>&nbsp;<span>— 확인 못 한 인용은 추정하지 않고 <code>unverified</code> 표기</span></li>
+      <li><b>정정 이력 공개</b>&nbsp;<span>— 고친 내역을 날짜·근거와 함께 남김</span></li>
+    </ul>
+    <div class="quote" style="margin-top:3vh">현장 검증이 필요한 <b>1,924건</b>을,<br>사유와 함께 <b>그대로 공개</b>합니다.</div>
+  </section>
+
+  <!-- 8 · 소버린 전환 질문 -->
+  <section class="slide dark">
+    <div class="eyebrow">여기서 질문 하나</div>
+    <h2>이렇게 만든 서비스,<br>정말 <span class="accent">우리 것</span>일까요?</h2>
+    <p class="lead" style="margin-top:3vh">
+      실험실이 남기는 건 완성된 화면이 아니라, 그걸 다시 만들 수 있는 <b>설계도</b>입니다.
+      <em>데이터, 코드, 그리고 프롬프트.</em><br>
+      그래서 특정 도구나 업체에 묶이지 않습니다.
+    </p>
+    <p class="big" style="margin-top:4vh;color:#9fb3a8">그 차이가 왜 중요한지, 저는 <span class="accent">며칠 전</span>에 몸으로 배웠습니다.</p>
+  </section>
+
+  <!-- 9 · 실화: 계정 정지 -->
+  <section class="slide warn">
+    <div class="incident">
+      <div>
+        <span class="badge">실화 · 2026. 7. 22</span>
+        <h2>며칠 전, 계정이 <span class="warnc">잠겼습니다.</span></h2>
+        <ul class="checks" style="margin-top:3vh">
+          <li><b>GitHub이 제 계정을 정지</b>했습니다. <span>대량 자동 커밋을 남용으로 오해한 듯합니다. 사유 통지도 없었습니다.</span></li>
+          <li><b>공개 서비스가 전부 404</b>가 됐습니다. <span>사이트도, 이미지도, 저장소도 하룻밤 사이에 전부요.</span></li>
+          <li><b>남 얘기가 아니었습니다.</b> <span>서비스를 남의 플랫폼 하나에 통째로 얹어둔 대가였습니다.</span></li>
+        </ul>
+      </div>
+      <div class="phone"><img src="assets/github-suspended.jpeg" alt="GitHub 계정 정지 화면 — Sorry. Your account was suspended (403)"></div>
+    </div>
+  </section>
+
+  <!-- 10 · 시사점: 잃은 건 없었다 -->
+  <section class="slide">
+    <div class="eyebrow">그런데 — 시사점</div>
+    <h2>잃은 것은, <span class="accent">없었습니다.</span></h2>
+    <ul class="checks">
+      <li><b>본체는 멀쩡했습니다.</b> <span>로컬의 git 이력도, 데이터도, 코드도, 프롬프트도 전부 그대로였습니다.</span></li>
+      <li><b>죽은 건 호스팅 한 곳뿐이었습니다.</b> <span>설계도가 남아 있으니 어디든 다시 올리면 됩니다.</span></li>
+      <li><b>대안도 가까이 있었습니다.</b> <span>실험실 <b>공공 GitLab(gitlab.aigov.go.kr)</b>에 미러해두면, 바깥에서 무슨 일이 나도 서비스는 살아 있습니다.</span></li>
+    </ul>
+    <div class="quote" style="margin-top:3vh">소버린 AI가 현장에서 뜻하는 건 하나입니다.<br>남의 플랫폼 하나에 <b>인질로 잡히지 않는 것.</b></div>
+  </section>
+
+  <!-- 11 · 핵심 메시지: 멈추지 않는 행정 -->
+  <section class="slide dark">
+    <div class="eyebrow">핵심 메시지</div>
+    <h2>장애가 나도, <span class="accent">행정은 멈추지 않는다.</span></h2>
+    <div class="cards">
+      <div class="card" style="background:#12211a;border-color:#26382f">
+        <div class="cn" style="color:#ff9d6e">만약 블랙박스 외주였다면</div>
+        <h3 style="color:#eef2ef">복구 불가</h3>
+        <p style="color:#9fb3a8">산출물이 벤더 안에 잠겨 있으면, 그 벤더·플랫폼이 멈추는 순간 업무도 멈춥니다.</p>
+      </div>
+      <div class="card" style="background:#12211a;border-color:#26382f">
+        <div class="cn" style="color:#5fdcae">재현 가능한 산출물이면</div>
+        <h3 style="color:#eef2ef">업무 연속</h3>
+        <p style="color:#9fb3a8">모델이 바뀌어도, 플랫폼이 죽어도, 설계도가 있으면 일은 이어집니다.</p>
+      </div>
+      <div class="card" style="background:#12211a;border-color:#26382f">
+        <div class="cn" style="color:#5fdcae">그래서 공공 저장소</div>
+        <h3 style="color:#eef2ef">연속성의 인프라</h3>
+        <p style="color:#9fb3a8">실험실이 문서·소스·프롬프트를 모으는 일 자체가 업무 연속성의 기반입니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 · 확산 -->
+  <section class="slide">
+    <div class="eyebrow">확산 — 실험실의 목표와 같은 방향</div>
+    <h2>한 사람의 사례가,<br><span class="accent">모두의 출발점</span>이 되도록.</h2>
+    <div class="cards">
+      <div class="card"><div class="cn">오픈소스</div><h3>MIT 라이선스</h3><p>데이터·코드·검증 스크립트를 공개. 누구나 포크해 이어 만듭니다.</p></div>
+      <div class="card"><div class="cn">비개발자도</div><h3>크롬 사이드패널</h3><p>제도를 검색해 개인 초안으로 복제하고 단계·근거를 편집합니다.</p></div>
+      <div class="card"><div class="cn">기관 연동</div><h3>행정절차 MCP</h3><p>전자결재 이벤트를 사람 검토용 ‘다음 행동 패킷’으로 변환합니다.</p></div>
+    </div>
+    <p class="lead" style="margin-top:3vh">다른 부처·지자체가 <em>그대로 이어받아</em> 만들 수 있습니다.</p>
+  </section>
+
+  <!-- 13 · 클로징 -->
+  <section class="slide dark">
+    <div class="eyebrow">맺으며</div>
+    <p class="punch">실험실이 연 건 도구가 아니라,<br><span class="accent">공무원도 직접 만들 수 있다</span>는 믿음이었습니다.</p>
+    <p class="lead" style="margin-top:4vh">
+      2단계에서 업무망과 내부자료(법령·지침·민원)까지 열리면,
+      현장이 직접 만들고 검증하는, 그리고 <b>어떤 장애에도 멈추지 않는</b> 행정이 가능해집니다.
+    </p>
+    <div class="title-foot">
+      <span><b>감사합니다.</b> · 서호성 · 행정안전부 혁신기획과</span>
+      <span>제도 100 · korea100</span>
+    </div>
+  </section>
+
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="counter" id="counter">1 / 13</div>
+<div class="brandtag">제도 100 · AI 정부 실험실</div>
+<div class="hint">← → 또는 Space 로 이동 · F 전체화면</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const progress = document.getElementById('progress');
+  const counter = document.getElementById('counter');
+  let i = 0;
+  function show(n){
+    i = Math.max(0, Math.min(slides.length-1, n));
+    slides.forEach((s,k)=>s.classList.toggle('active', k===i));
+    progress.style.width = ((i+1)/slides.length*100) + '%';
+    counter.textContent = (i+1) + ' / ' + slides.length;
+    // counter color adapts to dark slides
+    const dark = slides[i].classList.contains('dark');
+    counter.style.color = dark ? '#7d928a' : '';
+  }
+  function next(){ show(i+1) }
+  function prev(){ show(i-1) }
+  document.addEventListener('keydown', e=>{
+    if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){ e.preventDefault(); next(); }
+    else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){ e.preventDefault(); prev(); }
+    else if(e.key==='Home'){ show(0); }
+    else if(e.key==='End'){ show(slides.length-1); }
+    else if(e.key==='f'||e.key==='F'){ if(!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen(); }
+  });
+  // click right half = next, left quarter = prev
+  document.getElementById('deck').addEventListener('click', e=>{
+    if(e.clientX < window.innerWidth*0.25) prev(); else next();
+  });
+  show(0);
+</script>
+</body>
+</html>
