@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""org-atlas (wide) — 조직 × 제도 × 수행단계를 가로로 펼친 대형 SVG.
+"""org-atlas (wide) — 조직 × 제도 × 수행단계를 가로로 펼치고, 제도끼리의 결합을 세로로 세운 대형 SVG.
 
 열 구성 (좌→우):
-  실·본부 → 국 → 과 → 제도 → 수행 단계 스트립(프로세스 노드를 순서대로, 수행주체 색)
-       → 수행주체 구성 막대 → 지표
+  실·본부 → 국 → 과 → 제도
+       → 수행 단계 스트립(프로세스 노드를 순서대로, 색은 수행주체, 표식은 기한·병목·분기,
+         띠 아래 호는 앞 단계로 되돌아가는 회귀)
+       → 수행주체 구성 막대 → 지표 → 제도 결합 거터
 
-마지막 스트립이 이 지도의 핵심이다. 제도마다 G0→Gn 단계가 색 띠로 늘어서므로,
-"어느 제도가 어느 지점에서 국민 손을 떠나 행정으로 넘어가는가"가 가로로 읽힌다.
+가로는 한 제도 안의 시간이다. 제도마다 G0→Gn 단계가 색 띠로 늘어서므로
+"어느 제도가 어느 지점에서 국민 손을 떠나 행정으로 넘어가는가"가 읽힌다.
+세로는 제도와 제도 사이의 관계다. 맨 오른쪽 거터의 호가 카드의 related 결합이고,
+그 결합이 조직 경계를 넘을수록 밝게 그린다.
 
 사용: python3 artifacts/org-atlas/build-wide.py
 출력: artifacts/org-atlas/atlas-wide.svg
@@ -45,6 +49,7 @@ PERF = [
     ("local-gov", "지방자치단체", "#5ec8d8"),
     ("council", "의회·선관위", "#e8a33d"),
     ("committee", "위원회·심의회", "#c792ea"),
+    ("court", "법원·검찰", "#f0a868"),
     ("public-org", "공공기관·전문기관", "#d98cc0"),
     ("system", "시스템", "#4dd0c4"),
     ("public", "국민·민간", "#ef8f8f"),
@@ -64,7 +69,7 @@ MAX_CELLS = 21
 X_MIX = X_STRIP + MAX_CELLS * (CELL + CELL_GAP) + 30
 W_MIX = 260
 X_STAT = X_MIX + W_MIX + 24
-ROW, INST_ROW, PAD_TOP = 30, 30, 330
+ROW, INST_ROW, PAD_TOP = 30, 36, 330
 
 
 def esc(s):
@@ -125,6 +130,10 @@ def main():
             "slug": slug, "name": info["name"], "cat": info.get("category") or "",
             "theme": info.get("category") or "기타",
             "anchor": sum(ys) / len(ys), "nodes": nd["nodes"], "mix": mix,
+            "loops": nd.get("loops", []),
+            "related": info.get("related", []),
+            "relatedOutside": info.get("relatedOutside", []),
+            "units": {u["unit"] for u in info["units"]},
             "ratio": nd.get("internalRatio", 0), "cover": nd.get("ownerCoverage", 0),
         })
     insts.sort(key=lambda i: i["anchor"])
@@ -134,7 +143,9 @@ def main():
         iy += INST_ROW
 
     HEIGHT = max(org_bottom, iy) + 96
-    WIDTH = X_STAT + 210
+    X_REL = X_STAT + 190
+    REL_W = 200
+    WIDTH = X_REL + REL_W + 60
     max_perf = max((u["perf"] for u in units), default=1) or 1
 
     out = []
@@ -152,7 +163,8 @@ def main():
       f'제도 {len(insts)}건 · 수행 단계 {sum(len(i["nodes"]) for i in insts):,}개</text>')
     A(f'<text x="60" y="174" fill="#5d6779" font-size="12.5">'
       f'좌측 연결선 = 법제처 법령ID 조인(제도 인용 법령 ↔ 직제 소관 법령) · '
-      f'우측 띠 = 그 제도의 프로세스 단계를 순서대로 편 것, 칸 하나가 한 단계이고 색은 그 단계의 수행 주체</text>')
+      f'가운데 띠 = 한 제도의 시간, 칸 하나가 한 단계이고 색은 그 단계의 수행 주체 · '
+      f'맨 오른쪽 세로 호 = 제도와 제도 사이의 결합</text>')
 
     # 범례 — 분야
     lx = 60
@@ -173,9 +185,30 @@ def main():
         A(f'<text x="{lx+15}" y="{PAD_TOP-89}" fill="#aab4c4" font-size="12">{esc(label)}</text>')
         lx += 25 + len(label) * 12.5
 
+    # 범례 — 띠 표식
+    mx = X_STRIP
+    A(f'<text x="{mx}" y="{PAD_TOP-118}" fill="#7f8a9a" font-size="12" font-weight="800">띠 표식</text>')
+    my = PAD_TOP - 100
+    A(f'<rect x="{mx}" y="{my-9}" width="26" height="13" rx="3" fill="#5ec8d8" opacity="0.85"/>')
+    A(f'<rect x="{mx+2}" y="{my-8}" width="22" height="2.6" rx="1.3" fill="#ffd166"/>')
+    A(f'<text x="{mx+32}" y="{my}" fill="#aab4c4" font-size="12">위 노란 줄 = 기한이 걸린 단계</text>')
+    A(f'<circle cx="{mx+232}" cy="{my-3}" r="2.6" fill="#ff5d5d"/>')
+    A(f'<text x="{mx+240}" y="{my}" fill="#aab4c4" font-size="12">붉은 점 = 병목</text>')
+    A(f'<rect x="{mx+360}" y="{my-9}" width="26" height="13" rx="3" fill="#5ec8d8" opacity="0.85" '
+      f'stroke="#f0f4f9" stroke-opacity="0.75" stroke-width="1.3"/>')
+    A(f'<text x="{mx+392}" y="{my}" fill="#aab4c4" font-size="12">흰 테두리 = 분기 판단</text>')
+    A(f'<rect x="{mx+552}" y="{my-9}" width="26" height="13" rx="3" fill="#5ec8d8" opacity="0.85"/>')
+    A(f'<rect x="{mx+552}" y="{my-1}" width="26" height="3" rx="1.5" fill="#f0f4f9" opacity="0.6"/>')
+    A(f'<text x="{mx+584}" y="{my}" fill="#aab4c4" font-size="12">아래 흰 줄 = 행안부 소관 근거</text>')
+    A(f'<path d="M{mx+790},{my-2} Q{mx+812},{my+9} {mx+834},{my-2}" fill="none" stroke="#ffd166" stroke-width="1.1"/>')
+    A(f'<text x="{mx+844}" y="{my}" fill="#aab4c4" font-size="12">아래 호 = 앞 단계로 되돌아가는 회귀</text>')
+    A(f'<text x="{mx}" y="{PAD_TOP-64}" fill="#5d6779" font-size="11.5">'
+      f'세로 실선은 단계(G0~Gn) 경계다. 옅은 칸은 타 부처 소관 법령이 규율하는 단계.</text>')
+
     for x, t in ((X_BUREAU, "실 · 본부"), (X_DIV, "국"), (X_UNIT, "과 — 막대는 수행 단계 수"),
                  (X_INST, "제도"), (X_STRIP, "수행 단계 전개 — 왼쪽이 착수, 오른쪽이 종결"),
-                 (X_MIX, "수행 주체 구성"), (X_STAT, "지표")):
+                 (X_MIX, "수행 주체 구성"), (X_STAT, "지표"),
+                 (X_REL, "제도 결합")):
         A(f'<text x="{x}" y="{PAD_TOP-46}" fill="#7f8a9a" font-size="13" font-weight="800">{esc(t)}</text>')
 
     # 연결선
@@ -223,18 +256,55 @@ def main():
         A(f'<text x="{X_INST+12}" y="{y0+15}" fill="#e3e9f1" font-size="12">{esc(i["name"])}</text>')
 
         shown = i["nodes"][:MAX_CELLS]
+        CH = 20  # 셀 높이. 아래 남는 여백에 회귀 호를 그린다.
+
+        def cell_x(k):
+            return X_STRIP + k * (CELL + CELL_GAP)
+
+        prev_stage = None
         for k, n in enumerate(shown):
-            cx = X_STRIP + k * (CELL + CELL_GAP)
+            cx = cell_x(k)
             pc = PERF_COLOR.get(n["performer"], "#454f60")
             owned = bool(n["ruleOwners"])
-            A(f'<rect x="{cx}" y="{y0}" width="{CELL}" height="22" rx="4" fill="{pc}" '
-              f'opacity="{0.85 if owned else 0.34}"/>')
+            gate = n.get("type") == "gateway"
+
+            # 단계(G0~Gn)가 바뀌는 자리에 경계선을 세운다
+            if prev_stage is not None and n.get("stage") != prev_stage:
+                A(f'<rect x="{cx-3}" y="{y0-2}" width="1.4" height="{CH+4}" fill="#6f7c8c" opacity="0.55"/>')
+            prev_stage = n.get("stage")
+
+            A(f'<rect x="{cx}" y="{y0}" width="{CELL}" height="{CH}" rx="4" fill="{pc}" '
+              f'opacity="{0.85 if owned else 0.32}"'
+              + (' stroke="#f0f4f9" stroke-opacity="0.75" stroke-width="1.3"' if gate else '') + '/>')
+            if n.get("hasDeadline"):
+                A(f'<rect x="{cx+2}" y="{y0+1.5}" width="{CELL-4}" height="2.6" rx="1.3" fill="#ffd166"/>')
             if owned:
-                A(f'<rect x="{cx}" y="{y0+19}" width="{CELL}" height="3" rx="1.5" fill="#f0f4f9" opacity="0.55"/>')
-            A(f'<title>{esc(n["name"])} — {esc(n.get("lane"))} · {esc(PERF_LABEL.get(n["performer"]))}</title>')
+                A(f'<rect x="{cx}" y="{y0+CH-3}" width="{CELL}" height="3" rx="1.5" fill="#f0f4f9" opacity="0.6"/>')
+            if n.get("hasBlocker"):
+                A(f'<circle cx="{cx+CELL-4.5}" cy="{y0+CH-6}" r="2.6" fill="#ff5d5d"/>')
+            marks = []
+            if gate: marks.append("분기")
+            if n.get("hasDeadline"): marks.append(f'기한 {n.get("deadline")}')
+            if n.get("hasBlocker"): marks.append("병목")
+            tail = (" · " + " · ".join(marks)) if marks else ""
+            A(f'<title>{esc(n["name"])} — {esc(n.get("lane"))} · '
+              f'{esc(PERF_LABEL.get(n["performer"]))}{esc(tail)}</title>')
+
         if len(i["nodes"]) > MAX_CELLS:
-            cx = X_STRIP + MAX_CELLS * (CELL + CELL_GAP)
-            A(f'<text x="{cx+2}" y="{y0+15}" fill="#6f7c8c" font-size="10">+{len(i["nodes"])-MAX_CELLS}</text>')
+            cx = cell_x(MAX_CELLS)
+            A(f'<text x="{cx+2}" y="{y0+14}" fill="#6f7c8c" font-size="10">+{len(i["nodes"])-MAX_CELLS}</text>')
+
+        # 회귀(loop) 호 — 어디서 앞 단계로 되돌아가는가
+        for lp in i.get("loops", []):
+            a, b = lp["from"], lp["to"]
+            if a >= MAX_CELLS or b >= MAX_CELLS or a == b:
+                continue
+            xa, xb = cell_x(a) + CELL / 2, cell_x(b) + CELL / 2
+            depth = min(11, 4 + abs(xa - xb) / 26)
+            yb = y0 + CH + 1
+            A(f'<path d="M{xa:.1f},{yb} Q{(xa+xb)/2:.1f},{yb+depth:.1f} {xb:.1f},{yb}" '
+              f'fill="none" stroke="#ffd166" stroke-width="1.1" opacity="0.75"/>')
+            A(f'<circle cx="{xb:.1f}" cy="{yb}" r="1.9" fill="#ffd166" opacity="0.9"/>')
 
         # 수행 주체 구성 (100% 누적 막대)
         total = max(len(i["nodes"]), 1)
@@ -247,8 +317,45 @@ def main():
             A(f'<rect x="{bx:.1f}" y="{y0+3}" width="{w:.1f}" height="16" fill="{pc}" opacity="0.8"/>')
             bx += w
 
-        A(f'<text x="{X_STAT}" y="{y0+15}" fill="#6f7c8c" font-size="10.5">'
+        dl = sum(1 for n in i["nodes"] if n.get("hasDeadline"))
+        bk = sum(1 for n in i["nodes"] if n.get("hasBlocker"))
+        lp_n = len(i.get("loops", []))
+        A(f'<text x="{X_STAT}" y="{y0+9}" fill="#7f8a9a" font-size="10.5">'
           f'{len(i["nodes"])}단계 · 행안부 {round(i["ratio"]*100)}%</text>')
+        A(f'<text x="{X_STAT}" y="{y0+20}" fill="#5d6779" font-size="10">'
+          f'기한 {dl} · 병목 {bk} · 회귀 {lp_n}</text>')
+
+    # ── 제도 결합 분류. 패널과 호 렌더링이 함께 쓰므로 먼저 계산한다.
+    REL_LEVELS = [
+        ("cross-bureau", "다른 실·본부의 제도와 결합", "#ffd166"),
+        ("same-bureau", "같은 실·본부 안에서 결합", "#7bc47f"),
+        ("same-div", "같은 국 안에서 결합", "#5aa9e6"),
+        ("same-unit", "같은 과 안에서 결합", "#54607a"),
+    ]
+    REL_COLOR = {k: c for k, _, c in REL_LEVELS}
+    # path = [부처, 장관, 차관, 실·본부, 국, 과]. 결합이 어느 경계를 넘는지 판정할 소속을 뽑는다.
+    for i in insts:
+        us = xwalk["bySlug"][i["slug"]]["units"]
+        i["_bureau"] = {u["path"][3] for u in us if len(u["path"]) > 3}
+        i["_div"] = {u["path"][4] for u in us if len(u["path"]) > 4}
+
+    ipos2 = {i["slug"]: i for i in insts}
+    rel_count = defaultdict(int)
+    rel_edges = []
+    for a, b in xwalk.get("relations", []):
+        ia, ib = ipos2.get(a), ipos2.get(b)
+        if not ia or not ib:
+            continue
+        if ia["units"] & ib["units"]:
+            level = "same-unit"
+        elif ia["_div"] & ib["_div"]:
+            level = "same-div"
+        elif ia["_bureau"] & ib["_bureau"]:
+            level = "same-bureau"
+        else:
+            level = "cross-bureau"
+        rel_count[level] += 1
+        rel_edges.append((ia, ib, level))
 
     # ── 좌하단 분석 패널 (조직 트리 아래 빈 공간)
     px, pw = X_BUREAU, X_INST - X_BUREAU - 60
@@ -364,15 +471,115 @@ def main():
         A(f'<circle cx="{px+28}" cy="{fyy+5}" r="4.5" fill="{col}"/>')
         A(f'<text x="{px+44}" y="{fyy+10}" fill="#c3cddb" font-size="12.5">{esc(t)}</text>')
 
+    # 3.7) 국민 → 행정 인계 지점 분포
+    top = panel("국민의 손을 떠나는 지점",
+                "제도의 진행률을 0~100%로 놓고, 국민·민간이 수행하는 마지막 단계가 어디인지 센다", 210)
+    buckets = [0] * 10
+    never, always = 0, 0
+    for i in insts:
+        pub = [k for k, n in enumerate(i["nodes"]) if n["performer"] == "public"]
+        if not pub:
+            never += 1
+            continue
+        last = pub[-1] / max(len(i["nodes"]) - 1, 1)
+        if last >= 0.999:
+            always += 1
+        buckets[min(int(last * 10), 9)] += 1
+    mxb = max(buckets) or 1
+    bw2 = (pw - 80) / 10
+    for k, c in enumerate(buckets):
+        h = 78 * c / mxb
+        bx2 = px + 40 + k * bw2
+        A(f'<rect x="{bx2:.1f}" y="{top + 86 - h:.1f}" width="{bw2-8:.1f}" height="{h:.1f}" rx="4" '
+          f'fill="#ef8f8f" opacity="{0.5 + 0.5*c/mxb:.2f}"/>')
+        if c:
+            A(f'<text x="{bx2 + (bw2-8)/2:.1f}" y="{top + 80 - h:.1f}" fill="#c3cddb" font-size="10.5" '
+              f'text-anchor="middle">{c}</text>')
+        A(f'<text x="{bx2 + (bw2-8)/2:.1f}" y="{top + 102}" fill="#7f8a9a" font-size="10" '
+          f'text-anchor="middle">{k*10}~{k*10+10}%</text>')
+    A(f'<text x="{px+22}" y="{top + 132}" fill="#8b95a5" font-size="12.5">'
+      f'국민이 등장하지 않는 제도 {never}건 — 신청도 이의제기도 없이 행정 내부에서만 도는 절차다. '
+      f'마지막 단계까지 국민이 남는 제도 {always}건.</text>')
+
+    # 3.8) 제도 결합은 조직 경계를 넘는가
+    top = panel("제도 결합은 조직 경계를 넘는가",
+                "카드의 관련 제도를 잇고, 두 제도를 맡는 과가 같은 조직에 속하는지로 나눈다", 214)
+    tot_rel = sum(rel_count.values()) or 1
+    order = ["same-unit", "same-div", "same-bureau", "cross-bureau"]
+    labels = {k: l for k, l, _ in REL_LEVELS}
+    bx3 = px + 22
+    bw3 = pw - 44
+    for key in order:
+        c = rel_count.get(key, 0)
+        if not c:
+            continue
+        w = bw3 * c / tot_rel
+        A(f'<rect x="{bx3:.1f}" y="{top}" width="{w:.1f}" height="28" fill="{REL_COLOR[key]}" opacity="0.8"/>')
+        bx3 += w
+    ly4 = top + 54
+    lx4 = px + 22
+    for key in order:
+        c = rel_count.get(key, 0)
+        A(f'<path d="M{lx4},{ly4-9} C{lx4+14},{ly4-9} {lx4+14},{ly4-1} {lx4},{ly4-1}" '
+          f'fill="none" stroke="{REL_COLOR[key]}" stroke-width="1.4"/>')
+        A(f'<text x="{lx4+22}" y="{ly4-2}" fill="#c3cddb" font-size="12.5">{esc(labels[key])}</text>')
+        A(f'<text x="{lx4+22}" y="{ly4+16}" fill="#7f8a9a" font-size="12">{c}쌍 · {c/tot_rel*100:.1f}%</text>')
+        lx4 += 250
+        if lx4 > px + pw - 240:
+            lx4 = px + 22
+            ly4 += 44
+    outward = sum(len(i.get("relatedOutside", [])) for i in insts)
+    A(f'<text x="{px+22}" y="{top + 150}" fill="#8b95a5" font-size="12.5">'
+      f'결합 {tot_rel}쌍 가운데 {rel_count.get("same-unit",0)}쌍({rel_count.get("same-unit",0)/tot_rel*100:.0f}%)이 '
+      f'같은 과 안에서 닫힌다. 실·본부를 넘는 결합은 {rel_count.get("cross-bureau",0)}쌍뿐이다 — '
+      f'제도의 연결망이 조직도와 대체로 겹친다는 뜻이고, 그만큼 부서를 가로지르는 제도는 드물다.</text>')
+    A(f'<text x="{px+22}" y="{top + 174}" fill="#8b95a5" font-size="12.5">'
+      f'행정안전부 밖의 제도로 뻗는 결합은 {outward}건이다. 이 지도의 오른쪽 끝을 넘어가는 관계다.</text>')
+
     # 4) 읽는 법
     top = panel("읽는 법", "왼쪽에서 오른쪽으로 — 조직이 법을 맡고, 법이 제도를 만들고, 제도가 단계로 흐른다", 150)
     how = [
         "① 실·본부 → 국 → 과 : 직제 시행규칙이 규정한 계선. 과의 초록 막대는 그 과가 소관하는 수행 단계 수.",
         "② 곡선 : 법제처 법령ID로 이은 소관 관계. 한 제도가 여러 과에 걸치면 선도 여러 갈래가 된다.",
-        "③ 색 띠 : 그 제도의 프로세스를 착수→종결 순으로 편 것. 칸 색이 그 단계를 실제로 수행하는 주체.",
+        "③ 색 띠 : 그 제도의 프로세스를 착수→종결 순으로 편 것. 칸 색은 수행 주체, 칸의 표식은 그 단계의 성격(기한·병목·분기)이다.",
+        "④ 띠 아래 노란 호 : 회귀. 오른쪽에서 왼쪽으로 걸릴수록 멀리 되돌아가는 보완·재심 구조다.",
+        "⑤ 맨 오른쪽 세로 호 : 제도끼리의 결합. 가로가 한 제도의 시간이라면, 세로는 제도 사이의 관계다.",
     ]
     for k, t in enumerate(how):
         A(f'<text x="{px+22}" y="{top + k*26 + 6}" fill="#aab4c4" font-size="12.5">{esc(t)}</text>')
+
+    # ── 제도 결합 호 (세로축). 조직 경계를 넘는 결합일수록 밝게.
+    for ia, ib, level in rel_edges:
+        ya, yb = ia["y"] + 10, ib["y"] + 10
+        d = min(REL_W - 16, 26 + abs(yb - ya) * 0.34)
+        col = REL_COLOR[level]
+        op = 0.85 if level == "cross-bureau" else (0.5 if level == "same-bureau" else 0.34)
+        A(f'<path d="M{X_REL},{ya:.1f} C{X_REL+d:.1f},{ya:.1f} {X_REL+d:.1f},{yb:.1f} {X_REL},{yb:.1f}" '
+          f'fill="none" stroke="{col}" stroke-width="{1.4 if level=="cross-bureau" else 1.0}" opacity="{op}"/>')
+        for yy in (ya, yb):
+            A(f'<circle cx="{X_REL}" cy="{yy:.1f}" r="2.1" fill="{col}" opacity="{min(op+0.15,1):.2f}"/>')
+
+    # 행안부 밖 제도로 뻗는 결합은 왼쪽으로 짧게 표시한다
+    for i in insts:
+        n_out = len(i.get("relatedOutside", []))
+        if not n_out:
+            continue
+        A(f'<rect x="{X_REL-6-n_out*4}" y="{i["y"]+8.6}" width="{n_out*4}" height="2.6" rx="1.3" '
+          f'fill="#8b95a5" opacity="0.6"/>')
+
+    # 결합 범례
+    ly3 = PAD_TOP - 180
+    A(f'<text x="{X_REL}" y="{ly3-20}" fill="#7f8a9a" font-size="12" font-weight="800">'
+      f'결합이 넘는 경계</text>')
+    for k, (key, label, col) in enumerate(REL_LEVELS):
+        yy = ly3 + k * 18
+        A(f'<path d="M{X_REL},{yy-4} C{X_REL+16},{yy-4} {X_REL+16},{yy+4} {X_REL},{yy+4}" '
+          f'fill="none" stroke="{col}" stroke-width="1.3"/>')
+        A(f'<text x="{X_REL+24}" y="{yy+3}" fill="#aab4c4" font-size="11.5">{esc(label)} {rel_count[key]}</text>')
+    A(f'<text x="{X_REL}" y="{ly3 + 4*18 + 8}" fill="#5d6779" font-size="11">'
+      f'왼쪽 짧은 막대 = 행안부 밖 제도와의 결합 수</text>')
+    A(f'<text x="{X_REL}" y="{ly3 + 4*18 + 26}" fill="#5d6779" font-size="11">'
+      f'호가 길수록 멀리 떨어진 제도끼리의 결합</text>')
 
     fy = HEIGHT - 52
     A(f'<text x="60" y="{fy}" fill="#5d6779" font-size="12.5">'

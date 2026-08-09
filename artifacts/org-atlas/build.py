@@ -15,13 +15,24 @@ REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 D = os.path.join(REPO, "web", "data", "org-lineage")
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "atlas.svg")
 
+# korea100 정본 분류 14종 (web/scripts/validate-data.mjs의 CANONICAL_CATEGORIES와 같은 목록).
+# 색은 RegistryCatalog의 CATEGORY_COLORS를 어두운 배경용으로 밝힌 값이고,
+# 다른 지도(build-wide·layers·gov-wide)와 같은 팔레트를 쓴다.
 CAT_COLORS = {
-    "국토·환경·안전": "#e8a33d",
+    "지방자치와 지역": "#a78bfa",
+    "국토·환경·안전": "#34d399",
+    "데이터·디지털·공공서비스": "#60a5fa",
+    "민원·권리구제·참여": "#e8a33d",
     "재정과 예산": "#5aa9e6",
-    "민원·권리구제·참여": "#7bc47f",
-    "국가 운영과 권력 통제": "#c792ea",
-    "복지와 사회보험": "#ef8f8f",
-    "데이터·디지털·공공서비스": "#4dd0c4",
+    "인허가·규제·산업": "#2dd4bf",
+    "국가 운영과 권력 통제": "#9ca3af",
+    "노동·교육·인적자원": "#fbbf24",
+    "외교·국방·치안·생활 기반": "#fb7185",
+    "다부처·복합사업": "#8b93c8",
+    "복지와 사회보험": "#f472b6",
+    "연구개발·행정": "#22d3ee",
+    "금융·소비자": "#d4a017",
+    "문화·체육·관광": "#e879c8",
 }
 DEFAULT = "#8b95a5"
 

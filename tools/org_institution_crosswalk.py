@@ -105,6 +105,33 @@ def main():
                 "laws": [l["law"] for l in u["laws"]],
             })
 
+    # 제도 ↔ 제도 결합(카드의 related). 전개도의 세로축이 된다.
+    # 이름으로 적혀 있어 slug로 되돌린 뒤, 이 부처에 연결된 집합 안팎을 나눈다.
+    name_to_slug, related_raw = {}, {}
+    for f in files:
+        try:
+            d = json.load(open(f, encoding="utf-8"))
+        except Exception:
+            continue
+        name_to_slug[d.get("name")] = d.get("slug")
+        related_raw[d.get("slug")] = d.get("related") or []
+
+    unresolved = set()
+    for slug in by_slug:
+        inside, outside = [], []
+        for r in related_raw.get(slug, []):
+            target = name_to_slug.get(r)
+            if target is None:
+                unresolved.add(r)
+            elif target in by_slug:
+                inside.append(target)
+            else:
+                outside.append(target)
+        by_slug[slug]["related"] = sorted(set(inside))
+        by_slug[slug]["relatedOutside"] = sorted(set(outside))
+
+    pairs = sorted({tuple(sorted((s, t))) for s, v in by_slug.items() for t in v["related"]})
+
     out = {
         "meta": {
             "orgInstitution": org.get("meta", {}).get("institution"),
@@ -114,7 +141,10 @@ def main():
             "institutionCount": len(by_slug),
             "unitCount": len(by_unit),
             "joinKey": "법제처 법령ID (korea100 verification.sources[].lawId ↔ orgchart lawResponsibility.laws[].법령ID)",
+            "relationPairs": len(pairs),
+            "relationUnresolved": sorted(unresolved)[:20],
         },
+        "relations": [list(p) for p in pairs],
         "bySlug": by_slug,
         "byUnit": dict(sorted(by_unit.items())),
     }

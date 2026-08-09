@@ -19,24 +19,30 @@ import argparse, glob, json, os, re, sys
 from collections import defaultdict
 
 MINISTRY_PAT = re.compile(r"행정안전부|행안부|중앙재난안전대책본부|중앙대책본부|소방청|경찰청")
-# 앞선 규칙이 우선한다. 좁은 주체(행안부)부터 넓은 주체(민간) 순으로 배열.
+# 앞선 규칙이 우선한다. 좁은 주체부터 넓은 주체 순으로 배열하고,
+# '기관'처럼 넓게 걸리는 말은 뒤로 미뤄 구체적인 분류가 먼저 잡히게 한다.
 PERFORMER_RULES = [
+    ("court", re.compile(r"법원|검찰|검사|사법|재판부")),
     ("ministry", MINISTRY_PAT),
     ("local-gov", re.compile(
-        r"지방자치단체|지자체|시·도|시도지사|시·도지사|시장·군수|시·군·구|읍·면·동|광역|기초|보장기관|지방기관|지방의회")),
+        r"지방자치단체|지자체|시·도|시도지사|시·도지사|시장·군수|시·군·구|시군구|읍·면·동|읍면동|"
+        r"보건소|광역|기초|보장기관|지방기관|지방의회")),
     ("council", re.compile(r"의회|국회|선관위|선거관리")),
-    ("committee", re.compile(r"위원회|평가단|심의회|심의|심사위|분쟁조정|자문단")),
+    ("committee", re.compile(r"위원회|평가단|심의회|심의|심사위|분쟁조정|자문단|심판원")),
     ("system", re.compile(r"시스템|정보시스템|전산|플랫폼|포털")),
     ("public-org", re.compile(
-        r"공단|공사|공제회|진흥원|연구원|협회|재단|센터|공공기관|전문기관|검사기관|조사기관|감리법인|대행자|수행기관")),
+        r"공단|공사|공제회|진흥원|연구원|협회|재단|센터|공공기관|전문기관|검사기관|조사기관|감리법인|"
+        r"대행자|수행기관|의료기관|대학|산학협력단|연구개발기관|연구기관|교육기관|학교")),
     ("central-gov", re.compile(
         r"중앙행정기관|중앙부처|중앙관서|주관부처|관계부처|주무부처|행정청|행정기관|관계기관|책임기관|감독기관|"
         r"국무조정실|국가정보원|주관기관|소관 ?부서|담당부서|인사부서|임용권자|출동대|소방서|"
-        r"기획예산처|재정경제부|산업통상부|기후에너지환경부|보건복지부|고용노동부|국토교통부|교육부|법무부|"
-        r"기획재정부|과학기술정보통신부|인사혁신처|국세청|관세청|조달청|통계청|국가데이터처")),
+        r"과세관청|세무서|재외공관|출입국|감독|청문|허가기관|승인기관|등록기관|접수기관|처분청|"
+        r"[가-힣]{2,}(?:부|처|청)\b|기관")),
     ("public", re.compile(
         r"주민|국민|신청인|청구인|사업자|이용자|농가|당사자|민간|피해자|취득자|창업자|영업자|소유자|"
-        r"신고인|납세자|가입자|수급자|응시자|참여자|근로자|기업|법인|조합|개인")),
+        r"신고인|납세자|가입자|수급자|응시자|참여자|근로자|기업|법인|조합|개인|"
+        r"임차인|임대인|차주|양도자|양수인|채무자|채권자|저작자|신청자|매도인|매수인|"
+        r"사업주|사업시행자|사업주체|시공|발주자|수급인|고객|환자|학생|외국인")),
 ]
 
 
@@ -127,6 +133,11 @@ def main():
             annotated.append({
                 "id": nd.get("id"), "name": nd.get("name"),
                 "lane": nd.get("lane"), "actor": nd.get("actor"), "stage": nd.get("stage"),
+                "type": nd.get("type"), "status": nd.get("status"),
+                # 단계의 성격 신호 — 전개도의 띠에서 색 외의 표식으로 쓴다
+                "hasDeadline": bool(nd.get("deadline")),
+                "deadline": nd.get("deadline"),
+                "hasBlocker": bool(nd.get("blocker")),
                 "performer": performer, "performerKeyword": keyword,
                 "ruleOwners": sorted(owners.values(), key=lambda o: o["unit"]),
             })
@@ -136,10 +147,23 @@ def main():
                 totals["nodesWithOwner"] += 1
                 if performer == "ministry":
                     totals["ministryPerformedOwned"] += 1
+        # 회귀(loop) 엣지를 노드 순서상의 위치로 환산해 둔다. 전개도가 띠 아래에
+        # 되돌아가는 호를 그릴 수 있어야 "이 제도는 어디서 되돌아가는가"가 보인다.
+        idx_of = {nd.get("id"): i for i, nd in enumerate(proc.get("nodes") or [])}
+        loops = []
+        for e in proc.get("edges") or []:
+            if e.get("type") != "loop":
+                continue
+            si, ti = idx_of.get(e.get("source")), idx_of.get(e.get("target"))
+            if si is None or ti is None:
+                continue
+            loops.append({"from": si, "to": ti, "label": e.get("label")})
+
         if inst_hit:
             result[d.get("slug")] = {
                 "name": d.get("name"),
                 "nodes": annotated,
+                "loops": loops,
                 "internalRatio": round(
                     sum(1 for a in annotated if a["performer"] == "ministry") / max(len(annotated), 1), 3),
                 "ownerCoverage": round(
