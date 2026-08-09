@@ -1,6 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { parseAdminRuleArticleHeaders, parseAdminRuleArticles } from "./lib/admin-rule-service.mjs";
+import {
+  fetchCurrentAdminRuleArticleSnapshot,
+  parseAdminRuleArticleHeaders,
+  parseAdminRuleArticles,
+} from "./lib/admin-rule-service.mjs";
 
 test("parses article headers from admrul JSON arrays", () => {
   const found = parseAdminRuleArticleHeaders({
@@ -62,4 +66,35 @@ test("parses exact administrative-rule article bodies and dates", () => {
     text: "① 담당자는 검토한다.\n② 장은 결정한다.",
     effectiveOn: "2026-03-26",
   });
+});
+
+test("fetches the current administrative rule by stable LID", async () => {
+  const originalFetch = globalThis.fetch;
+  let requestedUrl;
+  globalThis.fetch = async (input) => {
+    requestedUrl = new URL(input);
+    return new Response(JSON.stringify({
+      AdmRulService: {
+        행정규칙기본정보: {
+          행정규칙명: "국가연구개발사업 연구개발비 사용 기준",
+          행정규칙ID: "75386",
+          행정규칙일련번호: "2100000278740",
+          현행여부: "Y",
+          발령일자: "20260506",
+          시행일자: "20260506",
+        },
+        조문내용: ["제80조(정산) 연구개발비를 정산한다."],
+      },
+    }), { status: 200, headers: { "content-type": "application/json" } });
+  };
+  try {
+    const snapshot = await fetchCurrentAdminRuleArticleSnapshot("75386", { oc: "test" });
+    assert.equal(requestedUrl.searchParams.get("LID"), "75386");
+    assert.equal(requestedUrl.searchParams.has("ID"), false);
+    assert.deepEqual([...snapshot.headers], ["제80조"]);
+    assert.equal(snapshot.current, "Y");
+    assert.equal(snapshot.serial, "2100000278740");
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
 });

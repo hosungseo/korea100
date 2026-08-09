@@ -64,19 +64,36 @@ export function parseAdminRuleArticleHeaders(payload) {
   return parsed.size > 0 ? new Set(parsed.keys()) : parseArticleHeaders(articleContent(payload));
 }
 
-async function fetchAdminRulePayload(serial, { oc, signal } = {}) {
-  if (!serial || !oc) throw new Error("행정규칙 일련번호와 법제처 API 인증값이 필요합니다.");
+async function fetchAdminRulePayloadBy(identifier, value, { oc, signal } = {}) {
+  if (!value || !oc) throw new Error("행정규칙 식별자와 법제처 API 인증값이 필요합니다.");
 
   const url = new URL("https://www.law.go.kr/DRF/lawService.do");
   url.searchParams.set("OC", oc);
   url.searchParams.set("target", "admrul");
-  url.searchParams.set("ID", serial);
+  url.searchParams.set(identifier, value);
   url.searchParams.set("type", "JSON");
 
   const response = await fetch(url, { signal });
   if (!response.ok) throw new Error(`행정규칙 본문 API 응답 오류: ${response.status}`);
 
   return response.json();
+}
+
+async function fetchAdminRulePayload(serial, options = {}) {
+  if (!serial) throw new Error("행정규칙 일련번호와 법제처 API 인증값이 필요합니다.");
+  return fetchAdminRulePayloadBy("ID", serial, options);
+}
+
+function adminRuleSnapshotMetadata(payload) {
+  const info = payload?.AdmRulService?.["행정규칙기본정보"] ?? {};
+  return {
+    officialName: info["행정규칙명"] ?? null,
+    adminRuleId: info["행정규칙ID"] ?? null,
+    serial: info["행정규칙일련번호"] ?? null,
+    current: info["현행여부"] ?? null,
+    promulgatedOn: normalizeDate(info["발령일자"]),
+    effectiveOn: normalizeDate(info["시행일자"]),
+  };
 }
 
 export async function fetchAdminRuleArticles(serial, options = {}) {
@@ -99,4 +116,12 @@ export async function fetchAdminRuleArticleHeaders(serial, options = {}) {
     );
   }
   return found;
+}
+
+export async function fetchCurrentAdminRuleArticleSnapshot(adminRuleId, options = {}) {
+  if (!adminRuleId) throw new Error("행정규칙 ID와 법제처 API 인증값이 필요합니다.");
+  const payload = await fetchAdminRulePayloadBy("LID", adminRuleId, options);
+  const headers = parseAdminRuleArticleHeaders(payload);
+  if (headers.size === 0) throw new Error("현행 행정규칙 JSON 본문에 조문 내용이 없습니다.");
+  return { headers, ...adminRuleSnapshotMetadata(payload) };
 }

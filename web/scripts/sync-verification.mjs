@@ -137,7 +137,9 @@ function unresolvedRecord(basis, fallbackReason) {
 
 class CliExecutionError extends Error {}
 
-async function runCli(args) {
+const CLI_MAX_RETRIES = Number(process.env.SOURCE_SYNC_RETRIES ?? 3);
+
+async function runCli(args, attempt = 0) {
   try {
     const { stdout } = await execFileAsync(CLI, args, {
       env: process.env,
@@ -152,6 +154,12 @@ async function runCli(args) {
       .trim();
     if (/\[NOT_FOUND\]|검색 결과가 없습니다|실제 데이터를 찾지 못했습니다/.test(detail)) {
       return detail;
+    }
+    // 일시적 오류(타임아웃·네트워크·레이트리밋)는 백오프 후 재시도.
+    // NOT_FOUND(정상적 "없음")는 위에서 이미 반환하므로 재시도 대상이 아니다.
+    if (attempt < CLI_MAX_RETRIES) {
+      await new Promise((resolve) => setTimeout(resolve, 800 * (attempt + 1)));
+      return runCli(args, attempt + 1);
     }
     throw new CliExecutionError(
       detail || `Korean Law CLI 실행 실패: ${args[0]}`,
@@ -347,7 +355,16 @@ for (const { data } of institutions) {
 
 const basisEntries = [...uniqueBasis.entries()].sort((a, b) => a[0].localeCompare(b[0], "ko"));
 const resolutions = await mapLimit(basisEntries, CONCURRENCY, async ([key, basis], index) => {
-  const result = await resolveBasis(basis);
+  let result;
+  try {
+    result = await resolveBasis(basis);
+  } catch (error) {
+    // 재시도 후에도 실패한 개별 조회. --check 는 전체 중단 대신 관대 처리한다
+    // (한 건의 일시적 API 오류로 577건 점검 전체가 실패하던 문제 방지).
+    // --write 는 데이터 오염을 막기 위해 기존처럼 엄격 중단한다.
+    if (!CHECK) throw error;
+    result = { error: error?.message ?? String(error) };
+  }
   process.stderr.write(`\r출처 조회 ${index + 1}/${basisEntries.length}`);
   return [key, result];
 });
@@ -419,7 +436,9 @@ const previousRegistry = fs.existsSync(REGISTRY_PATH)
 const previousByKey = new Map(
   (previousRegistry.entries ?? []).map((entry) => [entry.key, entry]),
 );
+const lookupErrors = resolutions.filter(([, result]) => result.error);
 const freshnessChanges = resolutions.flatMap(([key, result]) => {
+  if (result.error) return []; // 일시적 조회 오류는 '변경'으로 오판하지 않는다
   const previous = previousByKey.get(key);
   const before = sourceVersion(previous);
   const after = sourceVersion({ key, ...result });
@@ -439,6 +458,7 @@ if (CHECK) {
     "",
     `점검일: ${VERIFIED_AT}`,
     `변경 감지: ${freshnessChanges.length}건`,
+    `조회 오류(일시적, 재시도 후에도 실패): ${lookupErrors.length}건`,
     "",
     ...(
       freshnessChanges.length
@@ -455,8 +475,16 @@ if (CHECK) {
   if (process.env.GITHUB_OUTPUT) {
     fs.appendFileSync(
       process.env.GITHUB_OUTPUT,
-      `changed_count=${freshnessChanges.length}\nsummary_path=${FRESHNESS_SUMMARY_PATH}\n`,
+      `changed_count=${freshnessChanges.length}\nlookup_error_count=${lookupErrors.length}\nsummary_path=${FRESHNESS_SUMMARY_PATH}\n`,
     );
+  }
+  // 소수의 일시적 오류는 통과시키되, 과다(=체계적 장애)면 점검 실패로 처리한다.
+  const errorLimit = Math.max(10, Math.ceil(basisEntries.length * 0.05));
+  if (lookupErrors.length > errorLimit) {
+    console.error(
+      `조회 오류 ${lookupErrors.length}건이 허용치(${errorLimit})를 초과 — 체계적 장애로 보고 점검 실패 처리합니다.`,
+    );
+    process.exitCode = 1;
   }
 }
 
