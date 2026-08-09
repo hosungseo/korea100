@@ -41,6 +41,10 @@ const CATEGORY_COLORS: Record<string, string> = {
   "노동·교육·인적자원": "#b45309",
   "인허가·규제·산업": "#0f766e",
   "외교·국방·치안·생활 기반": "#be123c",
+  "다부처·복합사업": "#525b8a",
+  "연구개발·행정": "#1d7a8c",
+  "금융·소비자": "#8a6d1f",
+  "문화·체육·관광": "#9d4b8f",
 };
 
 export default function RegistryCatalog({

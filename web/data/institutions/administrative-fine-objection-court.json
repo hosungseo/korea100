@@ -106,7 +106,26 @@
       "article": "제17조",
       "text": "질서위반행위규제법 제17조에 따른 과태료 부과 통지 수령"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "procedure.started",
+     "trigger_condition": "해당 절차가 개시되고 '과태료 부과 통지 수령' 수행 요건이 확인될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 과태료 부과서 수령기록",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [],
+     "completion_evidence": [
+      "과태료 부과서 수령기록"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P02",
@@ -131,7 +150,28 @@
       "article": "제20조",
       "text": "질서위반행위규제법 제20조에 따른 이의제기 기간·방식 확인"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "과태료 부과 통지 수령 완료 결과가 '이의제기 기간·방식 확인' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 기간 계산표",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "과태료 부과서 수령기록"
+     ],
+     "completion_evidence": [
+      "기간 계산표"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "부과 통지 수령일부터 60일"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P03",
@@ -158,7 +198,30 @@
       "article": "제20조",
       "text": "질서위반행위규제법 제20조에 따른 이의제기서 제출"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "이의제기 기간·방식 확인 완료 결과가 '이의제기서 제출' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 이의제기서·증빙자료",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "과태료 부과서 수령기록"
+     ],
+     "completion_evidence": [
+      "이의제기서·증빙자료"
+     ],
+     "handoff_recipients": [
+      "과태료 부과 행정청"
+     ],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "부과 통지를 받은 날부터 60일 이내"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P04",
@@ -185,7 +248,28 @@
       "article": "제20조",
       "text": "질서위반행위규제법 제20조에 따른 부과처분 효력 상실 확인"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "external.reply.received",
+     "trigger_condition": "이의제기서 제출 완료 결과가 '부과처분 효력 상실 확인' 단계로 인계될 때",
+     "completion_condition": "'부과처분 효력 상실 확인' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "이의제기서·증빙자료"
+     ],
+     "completion_evidence": [
+      "이의제기 접수·효력상실 기록"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P05",
@@ -212,7 +296,28 @@
       "article": "제21조",
       "text": "질서위반행위규제법 제21조에 따른 행정청 의견·증빙서류 작성"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "부과처분 효력 상실 확인 완료 결과가 '행정청 의견·증빙서류 작성' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 행정청 의견서·증빙서류",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "이의제기서·증빙자료"
+     ],
+     "completion_evidence": [
+      "행정청 의견서·증빙서류"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P06",
@@ -242,7 +347,28 @@
       "article": "제25조",
       "text": "질서위반행위규제법 제25조에 따른 관할 법원 통보"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "행정청 의견·증빙서류 작성 완료 결과가 '관할 법원 통보' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 법원 통보서·첨부자료",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "행정청 의견서·증빙서류"
+     ],
+     "completion_evidence": [
+      "법원 통보서·첨부자료"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "이의제기를 받은 날부터 14일 이내"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P07",
@@ -269,7 +395,30 @@
       "article": "제21조",
       "text": "질서위반행위규제법 제21조에 따른 통보 사실 당사자 통지"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "external.reply.received",
+     "trigger_condition": "관할 법원 통보 완료 결과가 '통보 사실 당사자 통지' 단계로 인계될 때",
+     "completion_condition": "'통보 사실 당사자 통지' 통지와 송달·수령 기록이 남을 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "법원 통보서·첨부자료"
+     ],
+     "completion_evidence": [
+      "통보 사실 통지서"
+     ],
+     "handoff_recipients": [
+      "관할 법원·검사"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P08",
@@ -316,7 +465,28 @@
       "article": "제35조",
       "text": "질서위반행위규제법 제35조에 따른 법원 심문·사실·증거조사"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "external.reply.received",
+     "trigger_condition": "통보 사실 당사자 통지 완료 결과가 '법원 심문·사실·증거조사' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 심문조서·증거조사기록",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "법원 통보서·첨부자료"
+     ],
+     "completion_evidence": [
+      "심문조서·증거조사기록"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P09",
@@ -343,7 +513,28 @@
       "article": "제36조",
       "text": "질서위반행위규제법 제36조에 따른 과태료 재판 결정"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "법원 심문·사실·증거조사 완료 결과가 '과태료 재판 결정' 단계로 인계될 때",
+     "completion_condition": "'과태료 재판 결정' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "심문조서·증거조사기록"
+     ],
+     "completion_evidence": [
+      "과태료 재판 결정서"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P10",
@@ -370,7 +561,30 @@
       "article": "제44조",
       "text": "질서위반행위규제법 제44조에 따른 약식재판 고지"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "과태료 재판 결정 완료 결과가 '약식재판 고지' 단계로 인계될 때",
+     "completion_condition": "'약식재판 고지' 통지와 송달·수령 기록이 남을 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "과태료 재판 결정서"
+     ],
+     "completion_evidence": [
+      "약식재판 결정 고지"
+     ],
+     "handoff_recipients": [
+      "당사자"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P11",
@@ -397,7 +611,30 @@
       "article": "제45조",
       "text": "질서위반행위규제법 제45조에 따른 약식재판 이의신청"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "objection.filed",
+     "trigger_condition": "약식재판 고지 완료 결과가 '약식재판 이의신청' 단계로 인계될 때",
+     "completion_condition": "'약식재판 이의신청' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "약식재판 결정 고지"
+     ],
+     "completion_evidence": [
+      "약식재판 이의신청서"
+     ],
+     "handoff_recipients": [
+      "관할 법원·검사"
+     ],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "약식재판 고지일부터 7일 이내"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P12",
@@ -424,7 +661,28 @@
       "article": "제50조",
       "text": "질서위반행위규제법 제50조에 따른 정식재판 절차 이행"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "약식재판 이의신청 완료 결과가 '정식재판 절차 이행' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 정식재판 결정서",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "약식재판 이의신청서"
+     ],
+     "completion_evidence": [
+      "정식재판 결정서"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P13",
@@ -452,7 +710,29 @@
       "article": "제42조",
       "text": "질서위반행위규제법 제42조에 따른 재판 확정·집행 명령"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "약식재판 고지·정식재판 절차 이행 완료 결과가 '재판 확정·집행 명령' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 확정재판 집행기록·결과통보",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "과태료 재판 결정서",
+      "정식재판 결정서"
+     ],
+     "completion_evidence": [
+      "확정재판 집행기록·결과통보"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    }
   ],
   "edges": [
@@ -461,98 +741,365 @@
     "source": "P01",
     "target": "P02",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'과태료 부과 통지 수령' 완료 결과가 '이의제기 기간·방식 확인' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "당사자",
+      "to_actor": "당사자",
+      "documents": [
+       "과태료 부과서 수령기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E02",
     "source": "P02",
     "target": "P03",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'이의제기 기간·방식 확인' 완료 결과가 '이의제기서 제출' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "당사자",
+      "to_actor": "당사자",
+      "documents": [
+       "기간 계산표"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "M01",
     "source": "P03",
     "target": "P04",
     "type": "message",
-    "label": "이의제기서"
+    "label": "이의제기서",
+    "agent_transition": {
+     "condition": "이의제기서",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "당사자",
+      "to_actor": "과태료 부과 행정청",
+      "documents": [
+       "이의제기서·증빙자료"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E03",
     "source": "P04",
     "target": "P05",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'부과처분 효력 상실 확인' 완료 결과가 '행정청 의견·증빙서류 작성' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "과태료 부과 행정청",
+      "to_actor": "과태료 부과 행정청",
+      "documents": [
+       "이의제기 접수·효력상실 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E04",
     "source": "P05",
     "target": "P06",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'행정청 의견·증빙서류 작성' 완료 결과가 '관할 법원 통보' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "과태료 부과 행정청",
+      "to_actor": "과태료 부과 행정청",
+      "documents": [
+       "행정청 의견서·증빙서류"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "M02",
     "source": "P06",
     "target": "P07",
     "type": "message",
-    "label": "법원 통보 사실"
+    "label": "법원 통보 사실",
+    "agent_transition": {
+     "condition": "법원 통보 사실",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "과태료 부과 행정청",
+      "to_actor": "과태료 부과 행정청",
+      "documents": [
+       "법원 통보서·첨부자료"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "M03",
     "source": "P07",
     "target": "P08",
     "type": "message",
-    "label": "법원 통보자료"
+    "label": "법원 통보자료",
+    "agent_transition": {
+     "condition": "법원 통보자료",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "과태료 부과 행정청",
+      "to_actor": "관할 법원·검사",
+      "documents": [
+       "통보 사실 통지서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E05",
     "source": "P08",
     "target": "P09",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'법원 심문·사실·증거조사' 완료 결과가 '과태료 재판 결정' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "관할 법원·검사",
+      "to_actor": "관할 법원·검사",
+      "documents": [
+       "심문조서·증거조사기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E06",
     "source": "P09",
     "target": "P10",
     "type": "sequence",
-    "label": "약식재판 가능"
+    "label": "약식재판 가능",
+    "agent_transition": {
+     "condition": "약식재판 가능",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "관할 법원·검사",
+      "to_actor": "관할 법원·검사",
+      "documents": [
+       "과태료 재판 결정서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E07",
     "source": "P10",
     "target": "P11",
     "type": "sequence",
-    "label": "약식재판 고지"
+    "label": "약식재판 고지",
+    "agent_transition": {
+     "condition": "약식재판 고지",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "관할 법원·검사",
+      "to_actor": "당사자",
+      "documents": [
+       "약식재판 결정 고지"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E08",
     "source": "P11",
     "target": "P12",
     "type": "sequence",
-    "label": "적법한 이의신청"
+    "label": "적법한 이의신청",
+    "agent_transition": {
+     "condition": "적법한 이의신청",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "당사자",
+      "to_actor": "관할 법원·검사",
+      "documents": [
+       "약식재판 이의신청서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E09",
     "source": "P10",
     "target": "P13",
     "type": "sequence",
-    "label": "7일 내 이의 없음"
+    "label": "7일 내 이의 없음",
+    "agent_transition": {
+     "condition": "7일 내 이의 없음",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "관할 법원·검사",
+      "to_actor": "관할 법원·검사",
+      "documents": [
+       "약식재판 결정 고지"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E10",
     "source": "P12",
     "target": "P13",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'정식재판 절차 이행' 완료 결과가 '재판 확정·집행 명령' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "관할 법원·검사",
+      "to_actor": "관할 법원·검사",
+      "documents": [
+       "정식재판 결정서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    }
   ],
   "warnings": [
    "이 구조도는 질서위반행위규제법의 공통 절차를 업무 단위로 재구성했다. 실제 과태료 부과의 위반근거·부과권자·금액·서식은 개별 법률·시행령·조례와 행정청의 최신 통지서를 별도로 확인해야 한다.",
    "사전통지 의견제출은 10일 이상, 이의제기는 부과 통지를 받은 날부터 60일 이내, 법원 통보는 이의제기를 받은 날부터 14일 이내, 약식재판 이의신청은 고지일부터 7일 이내라는 법정 기간을 통지서·송달일과 함께 계산해야 한다.",
    "제20조 이의제기는 행정심판과 별개의 절차이며, 이 구조도는 법원이 관할하는 과태료 재판 경로를 표시한다."
-  ]
+  ],
+  "agent_readiness": {
+   "contract_version": "1.1.0",
+   "level": "R2",
+   "mode": "next-action",
+   "assessed_at": "2026-07-16",
+   "assessment_method": "스키마 검증·그래프 파생·전이 수동 대조·법제처 DRF API 직접 대조",
+   "live_legal_check": "required-before-use",
+   "last_live_check": {
+    "checked_at": "2026-07-16",
+    "method": "law.go.kr-DRF-direct",
+    "status": "passed",
+    "citation_fingerprint": "sha256:d65befdb27e8fd08be3919bff2813b051b24f3fd4c4aff65a7380507c8ae303f",
+    "sources_checked": 1,
+    "source_failures": 0,
+    "article_references": 18,
+    "verified_references": 18,
+    "missing_references": [],
+    "uncheckable_references": [],
+    "verified_node_ids": [
+     "P01",
+     "P02",
+     "P03",
+     "P04",
+     "P05",
+     "P06",
+     "P07",
+     "P08",
+     "P09",
+     "P10",
+     "P11",
+     "P12",
+     "P13"
+    ],
+    "unverified_node_ids": [],
+    "source_results": [
+     {
+      "law": "질서위반행위규제법",
+      "source_type": "statute",
+      "source_id": "010592",
+      "official_url": "https://law.go.kr/법령/질서위반행위규제법",
+      "requested_articles": [
+       "제17조",
+       "제20조",
+       "제21조",
+       "제25조",
+       "제31조",
+       "제32조",
+       "제33조",
+       "제34조",
+       "제35조",
+       "제36조",
+       "제42조",
+       "제44조",
+       "제45조",
+       "제50조"
+      ],
+      "verified_articles": [
+       "제17조",
+       "제20조",
+       "제21조",
+       "제25조",
+       "제31조",
+       "제32조",
+       "제33조",
+       "제34조",
+       "제35조",
+       "제36조",
+       "제42조",
+       "제44조",
+       "제45조",
+       "제50조"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "질서위반행위규제법",
+      "version_key": "0105922020122917758",
+      "promulgated_on": "2020-12-29",
+      "effective_on": "2021-01-01"
+     }
+    ]
+   },
+   "actionable_node_ids": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P08",
+    "P09",
+    "P10",
+    "P11",
+    "P12",
+    "P13"
+   ],
+   "reference_only_node_ids": [],
+   "blockers": [],
+   "metrics": {
+    "nodes": 13,
+    "edges": 13,
+    "node_contract_coverage": 1,
+    "transition_contract_coverage": 1,
+    "explicit_basis_coverage": 1,
+    "output_document_coverage": 1,
+    "low_confidence_nodes": 0,
+    "template_like_nodes": 0,
+    "deadline_review_nodes": 0,
+    "field_verification_items": 4
+   }
+  }
  },
  "verification": {
   "status": "article-verified",

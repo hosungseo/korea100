@@ -131,7 +131,26 @@
       "article": "제19조",
       "text": "국가연구개발혁신법 시행령 제19조에 따른 절차"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "procedure.started",
+     "trigger_condition": "해당 절차가 개시되고 '정부지원비·기관부담금 산정' 수행 요건이 확인될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 연구개발비 구성표",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [],
+     "completion_evidence": [
+      "연구개발비 구성표"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P02",
@@ -170,7 +189,32 @@
       "article": "제19조",
       "text": "국가연구개발사업 연구개발비 사용 기준 제19조에 따른 절차"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "정부지원비·기관부담금 산정 완료 결과가 '연구개발비 지급·기관부담 이행' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 연구비 지급내역, 기관부담 확인",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "체결 협약서",
+      "연구개발비 구성표"
+     ],
+     "completion_evidence": [
+      "연구비 지급내역",
+      "기관부담 확인"
+     ],
+     "handoff_recipients": [
+      "연구개발기관"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P03",
@@ -201,7 +245,32 @@
       "article": "제24조제1항",
       "text": "국가연구개발혁신법 시행령 제24조제1항에 따른 절차"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "연구개발비 지급·기관부담 이행 완료 결과가 '과제별 계정·카드 발급' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 과제별 계정, 연구개발비카드",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "연구비 지급내역",
+      "기관부담 확인"
+     ],
+     "completion_evidence": [
+      "과제별 계정",
+      "연구개발비카드"
+     ],
+     "handoff_recipients": [
+      "연구책임자·참여연구자"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P04",
@@ -236,7 +305,31 @@
       "article": "제18조·제21조",
       "text": "국가연구개발사업 연구개발비 사용 기준 제18조·제21조에 따른 절차"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "과제별 계정·카드 발급 완료 결과가 '사용계획·비목별 계상' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 연구개발비 사용계획",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "과제별 계정",
+      "연구개발비카드"
+     ],
+     "completion_evidence": [
+      "연구개발비 사용계획"
+     ],
+     "handoff_recipients": [
+      "연구개발기관"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P05",
@@ -264,7 +357,32 @@
       "article": "제73조",
       "text": "국가연구개발사업 연구개발비 사용 기준 제73조에 따른 절차"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "사용계획·비목별 계상 완료 결과가 '사전승인 대상 판정' 단계로 인계될 때",
+     "completion_condition": "'사전승인 대상 판정' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "연구개발비 사용계획",
+      "변경요청"
+     ],
+     "completion_evidence": [
+      "사전승인 대상 검토표"
+     ],
+     "handoff_recipients": [
+      "중앙행정기관·전문기관",
+      "연구책임자·참여연구자"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P06",
@@ -291,7 +409,30 @@
       "article": "제74조",
       "text": "국가연구개발사업 연구개발비 사용 기준 제74조에 따른 절차"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "사전승인 대상 판정 완료 결과가 '사용계획 변경 승인 신청·결정' 단계로 인계될 때",
+     "completion_condition": "'사용계획 변경 승인 신청·결정' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "연구비 사용계획 변경신청"
+     ],
+     "completion_evidence": [
+      "사전승인 결정통보"
+     ],
+     "handoff_recipients": [
+      "연구책임자·참여연구자"
+     ],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "접수일부터 15일 이내, 결정 곤란 시 연장 통보"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P07",
@@ -330,7 +471,32 @@
       "article": "제22조·제70조제1항",
       "text": "국가연구개발사업 연구개발비 사용 기준 제22조·제70조제1항에 따른 절차"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "사전승인 대상 판정·사용계획 변경 승인 신청·결정 완료 결과가 '연구개발비 사용·지출 발의' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 지출결의·발의, 카드·계좌 지출내역",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "연구개발비 사용계획",
+      "필요 시 사전승인 결정"
+     ],
+     "completion_evidence": [
+      "지출결의·발의",
+      "카드·계좌 지출내역"
+     ],
+     "handoff_recipients": [
+      "연구비통합관리시스템"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P08",
@@ -364,7 +530,32 @@
       "article": "제70조제2항·제3항",
       "text": "국가연구개발사업 연구개발비 사용 기준 제70조제2항·제3항에 따른 절차"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "연구개발비 사용·지출 발의 완료 결과가 '사용내역·증빙 시스템 등록' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 사용내역 등록, 전자증빙",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "카드·계좌 지출내역",
+      "세금계산서·계약서 등"
+     ],
+     "completion_evidence": [
+      "사용내역 등록",
+      "전자증빙"
+     ],
+     "handoff_recipients": [
+      "연구개발기관"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P09",
@@ -391,7 +582,28 @@
       "article": "제72조",
       "text": "국가연구개발사업 연구개발비 사용 기준 제72조에 따른 절차"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "사용내역·증빙 시스템 등록 완료 결과가 '증명자료 보관' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 증빙 보관목록",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "전자증빙"
+     ],
+     "completion_evidence": [
+      "증빙 보관목록"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "과제 또는 해당 단계 종료 후 5년"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P10",
@@ -421,7 +633,28 @@
       "article": "제25조",
       "text": "국가연구개발혁신법 시행령 제25조에 따른 절차"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "증명자료 보관 완료 결과가 '연도별 사용내역 보고' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 연도별 연구개발비 사용내역",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "증빙 보관목록"
+     ],
+     "completion_evidence": [
+      "연도별 연구개발비 사용내역"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "연도별 연구개발기간 종료 후 1개월 이내"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P11",
@@ -453,7 +686,32 @@
       "article": "제80조제7항·제8항",
       "text": "국가연구개발사업 연구개발비 사용 기준 제80조제7항·제8항에 따른 절차"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "연도별 사용내역 보고 완료 결과가 '단계종료 사용실적보고서 제출' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 연구개발비 사용실적보고서, 자체 회계감사 의견서, 현물부담 확인서",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "연도별 연구개발비 사용내역"
+     ],
+     "completion_evidence": [
+      "연구개발비 사용실적보고서",
+      "자체 회계감사 의견서",
+      "현물부담 확인서"
+     ],
+     "handoff_recipients": [
+      "정산담당"
+     ],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "각 단계 종료일부터 3개월 이내"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P12",
@@ -491,7 +749,32 @@
       "article": "제79조·제80조·제82조",
       "text": "국가연구개발사업 연구개발비 사용 기준 제79조·제80조·제82조에 따른 절차"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "supplement.requested",
+     "trigger_condition": "보완·재수행이 결정되어 '정산·상시점검' 단계로 회귀할 때",
+     "completion_condition": "'정산·상시점검' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "사용실적보고서",
+      "시스템 사용내역·증빙"
+     ],
+     "completion_evidence": [
+      "정산 검토내역"
+     ],
+     "handoff_recipients": [
+      "연구개발기관",
+      "중앙행정기관·전문기관"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P13",
@@ -524,7 +807,31 @@
       "article": "제81조제3항·제4항",
       "text": "국가연구개발사업 연구개발비 사용 기준 제81조제3항·제4항에 따른 절차"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "정산·상시점검 완료 결과가 '자료 정정·보완 제출' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 정산 소명서, 보완 증빙",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "정산 보완요구"
+     ],
+     "completion_evidence": [
+      "정산 소명서",
+      "보완 증빙"
+     ],
+     "handoff_recipients": [
+      "정산담당"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P14",
@@ -558,7 +865,32 @@
       "article": "제83조제1항",
       "text": "국가연구개발사업 연구개발비 사용 기준 제83조제1항에 따른 절차"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "supplement.requested",
+     "trigger_condition": "보완·재수행이 결정되어 '정산결과·회수금액 통보' 단계로 회귀할 때",
+     "completion_condition": "'정산결과·회수금액 통보' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "정산 검토내역",
+      "정산 소명서"
+     ],
+     "completion_evidence": [
+      "정산결과 통보",
+      "회수금액 통보"
+     ],
+     "handoff_recipients": [
+      "연구개발기관"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P15",
@@ -585,7 +917,30 @@
       "article": "제84조제1항",
       "text": "국가연구개발사업 연구개발비 사용 기준 제84조제1항에 따른 절차"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "objection.filed",
+     "trigger_condition": "정산결과·회수금액 통보 완료 결과가 '정산 이의신청' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 정산 이의신청서",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "정산결과 통보"
+     ],
+     "completion_evidence": [
+      "정산 이의신청서"
+     ],
+     "handoff_recipients": [
+      "정산담당"
+     ],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "통보받은 날부터 1개월 이내"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P16",
@@ -613,7 +968,32 @@
       "article": "제84조제2항·제3항",
       "text": "국가연구개발사업 연구개발비 사용 기준 제84조제2항·제3항에 따른 절차"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "정산 이의신청 완료 결과가 '이의검토·재정산' 단계로 인계될 때",
+     "completion_condition": "'이의검토·재정산' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "정산 이의신청서"
+     ],
+     "completion_evidence": [
+      "이의검토 결과",
+      "변경 회수금액"
+     ],
+     "handoff_recipients": [
+      "중앙행정기관·전문기관",
+      "연구개발기관"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P17",
@@ -646,7 +1026,29 @@
       "article": "제85조",
       "text": "국가연구개발사업 연구개발비 사용 기준 제85조에 따른 절차"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "정산결과·회수금액 통보·이의검토·재정산 완료 결과가 '회수금 반납·유예' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 반납 확인, 필요 시 유예 신청",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "확정 회수금액"
+     ],
+     "completion_evidence": [
+      "반납 확인",
+      "필요 시 유예 신청"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "회수통보일부터 1개월 이내"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    }
   ],
   "edges": [
@@ -655,147 +1057,563 @@
     "source": "P01",
     "target": "P02",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'정부지원비·기관부담금 산정' 완료 결과가 '연구개발비 지급·기관부담 이행' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "중앙행정기관·전문기관",
+      "to_actor": "중앙행정기관·전문기관",
+      "documents": [
+       "연구개발비 구성표"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E02",
     "source": "P02",
     "target": "P03",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'연구개발비 지급·기관부담 이행' 완료 결과가 '과제별 계정·카드 발급' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "중앙행정기관·전문기관",
+      "to_actor": "연구개발기관",
+      "documents": [
+       "연구비 지급내역",
+       "기관부담 확인"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E03",
     "source": "P03",
     "target": "P04",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'과제별 계정·카드 발급' 완료 결과가 '사용계획·비목별 계상' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "연구개발기관",
+      "to_actor": "연구책임자·참여연구자",
+      "documents": [
+       "과제별 계정",
+       "연구개발비카드"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E04",
     "source": "P04",
     "target": "P05",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'사용계획·비목별 계상' 완료 결과가 '사전승인 대상 판정' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "연구책임자·참여연구자",
+      "to_actor": "연구개발기관",
+      "documents": [
+       "연구개발비 사용계획"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E05",
     "source": "P05",
     "target": "P06",
     "type": "sequence",
-    "label": "승인 필요"
+    "label": "승인 필요",
+    "agent_transition": {
+     "condition": "승인 필요",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "연구개발기관",
+      "to_actor": "중앙행정기관·전문기관",
+      "documents": [
+       "사전승인 대상 검토표"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E06",
     "source": "P05",
     "target": "P07",
     "type": "sequence",
-    "label": "승인 불필요"
+    "label": "승인 불필요",
+    "agent_transition": {
+     "condition": "승인 불필요",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "연구개발기관",
+      "to_actor": "연구책임자·참여연구자",
+      "documents": [
+       "사전승인 대상 검토표"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E07",
     "source": "P06",
     "target": "P07",
     "type": "sequence",
-    "label": "승인"
+    "label": "승인",
+    "agent_transition": {
+     "condition": "승인",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "중앙행정기관·전문기관",
+      "to_actor": "연구책임자·참여연구자",
+      "documents": [
+       "사전승인 결정통보"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E08",
     "source": "P07",
     "target": "P08",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'연구개발비 사용·지출 발의' 완료 결과가 '사용내역·증빙 시스템 등록' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "연구책임자·참여연구자",
+      "to_actor": "연구비통합관리시스템",
+      "documents": [
+       "지출결의·발의",
+       "카드·계좌 지출내역"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E09",
     "source": "P08",
     "target": "P09",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'사용내역·증빙 시스템 등록' 완료 결과가 '증명자료 보관' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "연구비통합관리시스템",
+      "to_actor": "연구개발기관",
+      "documents": [
+       "사용내역 등록",
+       "전자증빙"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E10",
     "source": "P09",
     "target": "P10",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'증명자료 보관' 완료 결과가 '연도별 사용내역 보고' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "연구개발기관",
+      "to_actor": "연구개발기관",
+      "documents": [
+       "증빙 보관목록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E11",
     "source": "P10",
     "target": "P11",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'연도별 사용내역 보고' 완료 결과가 '단계종료 사용실적보고서 제출' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "연구개발기관",
+      "to_actor": "연구개발기관",
+      "documents": [
+       "연도별 연구개발비 사용내역"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E12",
     "source": "P11",
     "target": "P12",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'단계종료 사용실적보고서 제출' 완료 결과가 '정산·상시점검' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "연구개발기관",
+      "to_actor": "정산담당",
+      "documents": [
+       "연구개발비 사용실적보고서",
+       "자체 회계감사 의견서",
+       "현물부담 확인서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E13",
     "source": "P12",
     "target": "P13",
     "type": "sequence",
-    "label": "보완"
+    "label": "보완",
+    "agent_transition": {
+     "condition": "보완",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "정산담당",
+      "to_actor": "연구개발기관",
+      "documents": [
+       "정산 검토내역"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "L14",
     "source": "P13",
     "target": "P12",
     "type": "loop",
-    "label": "재검토"
+    "label": "재검토",
+    "agent_transition": {
+     "condition": "재검토",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "연구개발기관",
+      "to_actor": "정산담당",
+      "documents": [
+       "정산 소명서",
+       "보완 증빙"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E15",
     "source": "P12",
     "target": "P14",
     "type": "sequence",
-    "label": "정산완료"
+    "label": "정산완료",
+    "agent_transition": {
+     "condition": "정산완료",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "정산담당",
+      "to_actor": "중앙행정기관·전문기관",
+      "documents": [
+       "정산 검토내역"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E16",
     "source": "P14",
     "target": "P15",
     "type": "sequence",
-    "label": "이의"
+    "label": "이의",
+    "agent_transition": {
+     "condition": "이의",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "중앙행정기관·전문기관",
+      "to_actor": "연구개발기관",
+      "documents": [
+       "정산결과 통보",
+       "회수금액 통보"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E17",
     "source": "P15",
     "target": "P16",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'정산 이의신청' 완료 결과가 '이의검토·재정산' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "연구개발기관",
+      "to_actor": "정산담당",
+      "documents": [
+       "정산 이의신청서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "L18",
     "source": "P16",
     "target": "P14",
     "type": "loop",
-    "label": "회수액 변경"
+    "label": "회수액 변경",
+    "agent_transition": {
+     "condition": "회수액 변경",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "정산담당",
+      "to_actor": "중앙행정기관·전문기관",
+      "documents": [
+       "이의검토 결과",
+       "변경 회수금액"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E19",
     "source": "P14",
     "target": "P17",
     "type": "sequence",
-    "label": "확정"
+    "label": "확정",
+    "agent_transition": {
+     "condition": "확정",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "중앙행정기관·전문기관",
+      "to_actor": "연구개발기관",
+      "documents": [
+       "정산결과 통보",
+       "회수금액 통보"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E20",
     "source": "P16",
     "target": "P17",
     "type": "sequence",
-    "label": "확정"
+    "label": "확정",
+    "agent_transition": {
+     "condition": "확정",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "정산담당",
+      "to_actor": "연구개발기관",
+      "documents": [
+       "이의검토 결과",
+       "변경 회수금액"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    }
   ],
   "warnings": [
    "이 구조도는 국가연구개발혁신법의 공통 절차다. 중앙행정기관·전문기관별 사업 공고, 협약서, 자체규정과 시스템 입력 방식이 더 구체적인 요건을 둘 수 있다.",
    "연구개발비의 구체적인 인정 여부는 기관유형, 비용항목, 협약·원래계획과 증빙 사실관계에 따라 달라진다.",
    "기준일 이후 2026년 8월 20일·9월 11일 시행 예정인 혁신법 일부 개정사항은 시행일 도래 후 다시 검증해야 한다."
-  ]
+  ],
+  "agent_readiness": {
+   "contract_version": "1.1.0",
+   "level": "R2",
+   "mode": "next-action",
+   "assessed_at": "2026-07-16",
+   "assessment_method": "스키마 검증·그래프 파생·전이 수동 대조·법제처 DRF API 직접 대조",
+   "live_legal_check": "required-before-use",
+   "last_live_check": {
+    "checked_at": "2026-07-16",
+    "method": "law.go.kr-DRF-direct",
+    "status": "passed",
+    "citation_fingerprint": "sha256:bff1015339b0d0e14bb07ea669e2f87321ba7c72d1ee44796d04e00260ca43c7",
+    "sources_checked": 3,
+    "source_failures": 0,
+    "article_references": 37,
+    "verified_references": 37,
+    "missing_references": [],
+    "uncheckable_references": [],
+    "verified_node_ids": [
+     "P01",
+     "P02",
+     "P03",
+     "P04",
+     "P05",
+     "P06",
+     "P07",
+     "P08",
+     "P09",
+     "P10",
+     "P11",
+     "P12",
+     "P13",
+     "P14",
+     "P15",
+     "P16",
+     "P17"
+    ],
+    "unverified_node_ids": [],
+    "source_results": [
+     {
+      "law": "국가연구개발혁신법",
+      "source_type": "statute",
+      "source_id": "013774",
+      "official_url": "https://law.go.kr/법령/국가연구개발혁신법",
+      "requested_articles": [
+       "제13조"
+      ],
+      "verified_articles": [
+       "제13조"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "국가연구개발혁신법",
+      "version_key": "0137742026031021421",
+      "promulgated_on": "2026-03-10",
+      "effective_on": "2026-09-11"
+     },
+     {
+      "law": "국가연구개발혁신법 시행령",
+      "source_type": "statute",
+      "source_id": "013933",
+      "official_url": "https://law.go.kr/법령/국가연구개발혁신법시행령",
+      "requested_articles": [
+       "제19조",
+       "제20조",
+       "제24조",
+       "제25조",
+       "제26조"
+      ],
+      "verified_articles": [
+       "제19조",
+       "제20조",
+       "제24조",
+       "제25조",
+       "제26조"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "국가연구개발혁신법 시행령",
+      "version_key": "0139332026050636291",
+      "promulgated_on": "2026-05-06",
+      "effective_on": "2026-05-06"
+     },
+     {
+      "law": "국가연구개발사업 연구개발비 사용 기준",
+      "source_type": "admin-rule",
+      "source_id": "75386",
+      "official_url": "https://law.go.kr/행정규칙/국가연구개발사업연구개발비사용기준",
+      "requested_articles": [
+       "제18조",
+       "제19조",
+       "제21조",
+       "제22조",
+       "제70조",
+       "제72조",
+       "제73조",
+       "제74조",
+       "제79조",
+       "제80조",
+       "제81조",
+       "제82조",
+       "제83조",
+       "제84조",
+       "제85조"
+      ],
+      "verified_articles": [
+       "제18조",
+       "제19조",
+       "제21조",
+       "제22조",
+       "제70조",
+       "제72조",
+       "제73조",
+       "제74조",
+       "제79조",
+       "제80조",
+       "제81조",
+       "제82조",
+       "제83조",
+       "제84조",
+       "제85조"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "국가연구개발사업 연구개발비 사용 기준",
+      "version_key": "2100000278740",
+      "promulgated_on": "2026-05-06",
+      "effective_on": "2026-05-06"
+     }
+    ]
+   },
+   "actionable_node_ids": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P08",
+    "P09",
+    "P10",
+    "P11",
+    "P12",
+    "P13",
+    "P14",
+    "P15",
+    "P16",
+    "P17"
+   ],
+   "reference_only_node_ids": [],
+   "blockers": [],
+   "metrics": {
+    "nodes": 17,
+    "edges": 20,
+    "node_contract_coverage": 1,
+    "transition_contract_coverage": 1,
+    "explicit_basis_coverage": 1,
+    "output_document_coverage": 1,
+    "low_confidence_nodes": 0,
+    "template_like_nodes": 0,
+    "deadline_review_nodes": 0,
+    "field_verification_items": 3
+   }
+  }
  },
  "verification": {
   "status": "article-verified",

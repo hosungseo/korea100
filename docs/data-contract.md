@@ -17,6 +17,27 @@ sources/law-to-process-mvp-2026-07-09/.../data/sample_eia.json(프로세스 그�
 - `web/data/institutions/{slug}.json` — 제도 1건 1파일 (아래 Institution)
 - 로더(src/lib/data.ts)가 디렉터리 전체를 읽어 priority 순 정렬
 
+## 분류(category) 정본
+
+홈 카탈로그의 필터 칩과 색이 이 값으로 만들어진다. **자유 문자열이 아니다.**
+100개에서 532개로 확장하는 동안 배치마다 새 값이 생겨 54종까지 흩어졌고,
+색이 정의된 10종 외에는 모두 회색으로 떨어지는 문제가 있었다(2026-08-09 정리).
+
+| 분류 | 분류 | 분류 |
+| --- | --- | --- |
+| 국토·환경·안전 | 복지와 사회보험 | 인허가·규제·산업 |
+| 노동·교육·인적자원 | 지방자치와 지역 | 재정과 예산 |
+| 다부처·복합사업 | 연구개발·행정 | 데이터·디지털·공공서비스 |
+| 민원·권리구제·참여 | 외교·국방·치안·생활 기반 | 금융·소비자 |
+| 문화·체육·관광 | 국가 운영과 권력 통제 | |
+
+- 정본 목록은 `web/scripts/validate-data.mjs`의 `CANONICAL_CATEGORIES`가 강제한다.
+  목록 밖의 값이면 검증이 실패한다.
+- 색은 `web/src/components/RegistryCatalog.tsx`의 `CATEGORY_COLORS`에 같은 키로 있어야 한다.
+- 정말 새 영역이 필요하면 **세 곳(이 표·검증·색)을 함께** 고친다. 데이터만 바꾸면 검증에서 막힌다.
+- 정리 전의 세부 표기(`재정·예산·조달`, `보건·의료` 등 40종)는 `categoryDetail`에 남겼다.
+  읽기 전용 이력이며 새로 쓰지 않는다. 재적용 도구: `tools/normalize_categories.py`.
+
 ## Institution 스키마
 
 ```ts
@@ -26,6 +47,8 @@ interface Institution {
   oneLiner: string;      // 한 줄 요약
   type: string;          // "협의·평가형" 등 launch-10-v0.md의 유형
   priority: number;      // 1~manifest 항목 수 (공개 순서)
+  category: string;      // 정본 분류 14종 중 하나 (아래 표) — manifest의 category와 일치해야 한다
+  categoryDetail?: string; // 정리 전의 세부 표기 보존용. 새로 쓰지 않는다
   whyFirst: string;      // 왜 먼저 만드나
   asOfDate: string;      // 법령 기준일 "2025-10-23"
   status: "full" | "canvas";

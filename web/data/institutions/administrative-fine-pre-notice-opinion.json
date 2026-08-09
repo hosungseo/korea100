@@ -109,7 +109,26 @@
       "article": "제7조",
       "text": "질서위반행위규제법 제7조에 따른 질서위반행위·종료일 확인"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "procedure.started",
+     "trigger_condition": "해당 절차가 개시되고 '질서위반행위·종료일 확인' 수행 요건이 확인될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 조사·부과 전제 기록",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [],
+     "completion_evidence": [
+      "조사·부과 전제 기록"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P02",
@@ -144,7 +163,28 @@
       "article": "제19조",
       "text": "질서위반행위규제법 제19조에 따른 과태료 산정·시효·제척기간 검토"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "질서위반행위·종료일 확인 완료 결과가 '과태료 산정·시효·제척기간 검토' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 기간·산정 검토표",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "조사·부과 전제 기록"
+     ],
+     "completion_evidence": [
+      "기간·산정 검토표"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P03",
@@ -169,7 +209,30 @@
       "article": "제16조",
       "text": "질서위반행위규제법 제16조에 따른 사전통지 작성·발송"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "과태료 산정·시효·제척기간 검토 완료 결과가 '사전통지 작성·발송' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 사전통지서",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "기간·산정 검토표"
+     ],
+     "completion_evidence": [
+      "사전통지서"
+     ],
+     "handoff_recipients": [
+      "당사자·고용주등"
+     ],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "의견 제출 기간은 10일 이상"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P04",
@@ -196,7 +259,30 @@
       "article": "제16조",
       "text": "질서위반행위규제법 제16조에 따른 사전통지 수령·제출기간 확인"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "notice.received",
+     "trigger_condition": "사전통지 작성·발송 완료 결과가 '사전통지 수령·제출기간 확인' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 송달·수령 기록",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "사전통지서"
+     ],
+     "completion_evidence": [
+      "송달·수령 기록"
+     ],
+     "handoff_recipients": [
+      "부과 행정청"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P05",
@@ -223,7 +309,30 @@
       "article": "제16조",
       "text": "질서위반행위규제법 제16조에 따른 의견·자료 제출"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "사전통지 수령·제출기간 확인 완료 결과가 '의견·자료 제출' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 의견서·증빙자료",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "사전통지서"
+     ],
+     "completion_evidence": [
+      "의견서·증빙자료"
+     ],
+     "handoff_recipients": [
+      "부과 행정청"
+     ],
+     "deadline_rule": {
+      "type": "document-defined",
+      "expression": "사전통지서가 정한 기간(10일 이상)"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P06",
@@ -250,7 +359,28 @@
       "article": "제16조",
       "text": "질서위반행위규제법 제16조에 따른 제출 의견·자료 검토"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "external.reply.received",
+     "trigger_condition": "의견·자료 제출 완료 결과가 '제출 의견·자료 검토' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 의견 검토기록",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "의견서·증빙자료"
+     ],
+     "completion_evidence": [
+      "의견 검토기록"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P07",
@@ -277,7 +407,28 @@
       "article": "제16조",
       "text": "질서위반행위규제법 제16조에 따른 제출 의견의 상당한 이유 판단"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "제출 의견·자료 검토 완료 결과가 '제출 의견의 상당한 이유 판단' 단계로 인계될 때",
+     "completion_condition": "'제출 의견의 상당한 이유 판단' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "의견 검토기록"
+     ],
+     "completion_evidence": [
+      "부과 판단 기록"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P08",
@@ -304,7 +455,30 @@
       "article": "제16조",
       "text": "질서위반행위규제법 제16조에 따른 미부과 또는 통지 내용 변경 통지"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "제출 의견의 상당한 이유 판단 완료 결과가 '미부과 또는 통지 내용 변경 통지' 단계로 인계될 때",
+     "completion_condition": "'미부과 또는 통지 내용 변경 통지' 통지와 송달·수령 기록이 남을 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "부과 판단 기록"
+     ],
+     "completion_evidence": [
+      "미부과·변경 결과통지"
+     ],
+     "handoff_recipients": [
+      "당사자·고용주등"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P09",
@@ -331,7 +505,30 @@
       "article": "제17조",
       "text": "질서위반행위규제법 제17조에 따른 과태료 부과서 작성·통지"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "제출 의견의 상당한 이유 판단·사전통지 수령·제출기간 확인 완료 결과가 '과태료 부과서 작성·통지' 단계로 인계될 때",
+     "completion_condition": "'과태료 부과서 작성·통지' 통지와 송달·수령 기록이 남을 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "부과 판단 기록"
+     ],
+     "completion_evidence": [
+      "과태료 부과서"
+     ],
+     "handoff_recipients": [
+      "당사자·고용주등"
+     ],
+     "deadline_rule": {
+      "type": "document-defined",
+      "expression": "부과서에 기재된 납부기한"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P10",
@@ -364,7 +561,29 @@
       "article": "제20조",
       "text": "질서위반행위규제법 제20조에 따른 결과 수령·납부 또는 이의제기 선택"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "notice.received",
+     "trigger_condition": "미부과 또는 통지 내용 변경 통지·과태료 부과서 작성·통지 완료 결과가 '결과 수령·납부 또는 이의제기 선택' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 수령 확인·납부 또는 이의제기 자료",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "미부과·변경 결과통지",
+      "과태료 부과서"
+     ],
+     "completion_evidence": [
+      "수령 확인·납부 또는 이의제기 자료"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    }
   ],
   "edges": [
@@ -373,83 +592,308 @@
     "source": "P01",
     "target": "P02",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'질서위반행위·종료일 확인' 완료 결과가 '과태료 산정·시효·제척기간 검토' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "부과 행정청",
+      "to_actor": "부과 행정청",
+      "documents": [
+       "조사·부과 전제 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E02",
     "source": "P02",
     "target": "P03",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'과태료 산정·시효·제척기간 검토' 완료 결과가 '사전통지 작성·발송' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "부과 행정청",
+      "to_actor": "부과 행정청",
+      "documents": [
+       "기간·산정 검토표"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "M01",
     "source": "P03",
     "target": "P04",
     "type": "message",
-    "label": "사전통지서"
+    "label": "사전통지서",
+    "agent_transition": {
+     "condition": "사전통지서",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "부과 행정청",
+      "to_actor": "당사자·고용주등",
+      "documents": [
+       "사전통지서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E03",
     "source": "P04",
     "target": "P05",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'사전통지 수령·제출기간 확인' 완료 결과가 '의견·자료 제출' 단계로 인계될 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "당사자·고용주등",
+      "to_actor": "당사자·고용주등",
+      "documents": [
+       "송달·수령 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "M02",
     "source": "P05",
     "target": "P06",
     "type": "message",
-    "label": "의견서·증빙자료"
+    "label": "의견서·증빙자료",
+    "agent_transition": {
+     "condition": "의견서·증빙자료",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "당사자·고용주등",
+      "to_actor": "부과 행정청",
+      "documents": [
+       "의견서·증빙자료"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E04",
     "source": "P06",
     "target": "P07",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'제출 의견·자료 검토' 완료 결과가 '제출 의견의 상당한 이유 판단' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "부과 행정청",
+      "to_actor": "부과 행정청",
+      "documents": [
+       "의견 검토기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E05",
     "source": "P07",
     "target": "P08",
     "type": "sequence",
-    "label": "상당한 이유 있음"
+    "label": "상당한 이유 있음",
+    "agent_transition": {
+     "condition": "상당한 이유 있음",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "부과 행정청",
+      "to_actor": "부과 행정청",
+      "documents": [
+       "부과 판단 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E06",
     "source": "P07",
     "target": "P09",
     "type": "sequence",
-    "label": "상당한 이유 없음"
+    "label": "상당한 이유 없음",
+    "agent_transition": {
+     "condition": "상당한 이유 없음",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "부과 행정청",
+      "to_actor": "부과 행정청",
+      "documents": [
+       "부과 판단 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E07",
     "source": "P04",
     "target": "P09",
     "type": "sequence",
-    "label": "기한 내 의견 없음"
+    "label": "기한 내 의견 없음",
+    "agent_transition": {
+     "condition": "기한 내 의견 없음",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "당사자·고용주등",
+      "to_actor": "부과 행정청",
+      "documents": [
+       "송달·수령 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "M03",
     "source": "P08",
     "target": "P10",
     "type": "message",
-    "label": "변경·미부과 통지"
+    "label": "변경·미부과 통지",
+    "agent_transition": {
+     "condition": "변경·미부과 통지",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "부과 행정청",
+      "to_actor": "당사자·고용주등",
+      "documents": [
+       "미부과·변경 결과통지"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "M04",
     "source": "P09",
     "target": "P10",
     "type": "message",
-    "label": "과태료 부과서"
+    "label": "과태료 부과서",
+    "agent_transition": {
+     "condition": "과태료 부과서",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "부과 행정청",
+      "to_actor": "당사자·고용주등",
+      "documents": [
+       "과태료 부과서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    }
   ],
   "warnings": [
    "이 구조도는 질서위반행위규제법의 공통 절차를 업무 단위로 재구성했다. 실제 과태료 부과의 위반근거·부과권자·금액·서식은 개별 법률·시행령·조례와 행정청의 최신 통지서를 별도로 확인해야 한다.",
    "사전통지 의견제출은 10일 이상, 이의제기는 부과 통지를 받은 날부터 60일 이내, 법원 통보는 이의제기를 받은 날부터 14일 이내, 약식재판 이의신청은 고지일부터 7일 이내라는 법정 기간을 통지서·송달일과 함께 계산해야 한다."
-  ]
+  ],
+  "agent_readiness": {
+   "contract_version": "1.1.0",
+   "level": "R2",
+   "mode": "next-action",
+   "assessed_at": "2026-07-16",
+   "assessment_method": "스키마 검증·그래프 파생·전이 수동 대조·법제처 DRF API 직접 대조",
+   "live_legal_check": "required-before-use",
+   "last_live_check": {
+    "checked_at": "2026-07-16",
+    "method": "law.go.kr-DRF-direct",
+    "status": "passed",
+    "citation_fingerprint": "sha256:460954a2b0b6c2b1678ec70245792f0fd5a5c6d7d9160df10f1c32646a9950da",
+    "sources_checked": 1,
+    "source_failures": 0,
+    "article_references": 14,
+    "verified_references": 14,
+    "missing_references": [],
+    "uncheckable_references": [],
+    "verified_node_ids": [
+     "P01",
+     "P02",
+     "P03",
+     "P04",
+     "P05",
+     "P06",
+     "P07",
+     "P08",
+     "P09",
+     "P10"
+    ],
+    "unverified_node_ids": [],
+    "source_results": [
+     {
+      "law": "질서위반행위규제법",
+      "source_type": "statute",
+      "source_id": "010592",
+      "official_url": "https://law.go.kr/법령/질서위반행위규제법",
+      "requested_articles": [
+       "제14조",
+       "제15조",
+       "제16조",
+       "제17조",
+       "제19조",
+       "제20조",
+       "제6조",
+       "제7조"
+      ],
+      "verified_articles": [
+       "제14조",
+       "제15조",
+       "제16조",
+       "제17조",
+       "제19조",
+       "제20조",
+       "제6조",
+       "제7조"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "질서위반행위규제법",
+      "version_key": "0105922020122917758",
+      "promulgated_on": "2020-12-29",
+      "effective_on": "2021-01-01"
+     }
+    ]
+   },
+   "actionable_node_ids": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P08",
+    "P09",
+    "P10"
+   ],
+   "reference_only_node_ids": [],
+   "blockers": [],
+   "metrics": {
+    "nodes": 10,
+    "edges": 11,
+    "node_contract_coverage": 1,
+    "transition_contract_coverage": 1,
+    "explicit_basis_coverage": 1,
+    "output_document_coverage": 1,
+    "low_confidence_nodes": 0,
+    "template_like_nodes": 0,
+    "deadline_review_nodes": 0,
+    "field_verification_items": 4
+   }
+  }
  },
  "verification": {
   "status": "article-verified",

@@ -10,6 +10,26 @@ const DATA_DIR = path.join(WEB_DIR, "data", "institutions");
 const MANIFEST_PATH = path.join(REPO_DIR, "docs", "institutions-100-manifest.json");
 const FIELD_QUEUE_PATH = path.join(REPO_DIR, "docs", "field-verification-queue.json");
 
+// 정본 분류. 자유 문자열로 두었더니 확장 배치마다 값이 늘어 54종으로 흩어진 전례가 있다.
+// 새 영역이 정말 필요하면 여기와 RegistryCatalog의 CATEGORY_COLORS에 함께 추가한다.
+// 원래의 세부 표기는 institution.categoryDetail로 보존한다.
+const CANONICAL_CATEGORIES = new Set([
+  "국토·환경·안전",
+  "복지와 사회보험",
+  "인허가·규제·산업",
+  "노동·교육·인적자원",
+  "지방자치와 지역",
+  "재정과 예산",
+  "다부처·복합사업",
+  "연구개발·행정",
+  "데이터·디지털·공공서비스",
+  "민원·권리구제·참여",
+  "외교·국방·치안·생활 기반",
+  "금융·소비자",
+  "문화·체육·관광",
+  "국가 운영과 권력 통제",
+]);
+
 const NODE_STATUSES = new Set(["done", "current", "waiting", "risk", "loop"]);
 const NODE_TYPES = new Set(["task", "gateway", "notice", "system"]);
 const EDGE_TYPES = new Set(["sequence", "message", "loop"]);
@@ -72,6 +92,9 @@ const manifestBySlug = new Map();
 for (const entry of Array.isArray(manifest) ? manifest : []) {
   if (!entry.slug) fail("manifest", "slug가 없는 항목이 있습니다");
   if (!entry.category) fail(`manifest/${entry.slug ?? "unknown"}`, "category가 없습니다");
+  else if (!CANONICAL_CATEGORIES.has(entry.category)) {
+    fail(`manifest/${entry.slug ?? "unknown"}`, `category ${entry.category}는 정본 분류가 아닙니다`);
+  }
   if (manifestBySlug.has(entry.slug)) fail(`manifest/${entry.slug}`, "slug가 중복됩니다");
   if (priorities.has(entry.priority)) fail(`manifest/${entry.slug}`, `priority ${entry.priority}가 중복됩니다`);
   manifestBySlug.set(entry.slug, entry);
@@ -96,6 +119,11 @@ for (const { file, data: institution } of institutions) {
     if (manifestEntry.priority !== institution.priority) fail(scope, "manifest와 priority가 다릅니다");
     if (manifestEntry.name !== institution.name) fail(scope, "manifest와 name이 다릅니다");
     if (manifestEntry.type !== institution.type) fail(scope, "manifest와 type이 다릅니다");
+    if (manifestEntry.category !== institution.category) fail(scope, "manifest와 category가 다릅니다");
+  }
+
+  if (institution.category && !CANONICAL_CATEGORIES.has(institution.category)) {
+    fail(scope, `category ${institution.category}는 정본 분류가 아닙니다`);
   }
 
   if (institution.status !== "full") fail(scope, `현재 공개 데이터의 status는 full이어야 합니다 (${institution.status})`);
