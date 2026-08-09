@@ -1,0 +1,20 @@
+{
+  "name": "korea100-workbench-extension",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Korea100 제도를 검색하고 개인 초안과 근거를 관리하는 Chrome 사이드패널",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "validate": "node scripts/validate-dist.mjs",
+    "test": "node --test test/*.test.mjs",
+    "test:browser": "node test/browser-smoke.mjs",
+    "check": "npm run test && npm run build && npm run validate",
+    "package": "npm run check && node scripts/package.mjs"
+  },
+  "devDependencies": {
+    "lucide-static": "^0.468.0",
+    "playwright-core": "^1.57.0",
+    "sharp": "^0.34.5"
+  }
+}

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>Korea100 작업대</title>
+    <link rel="stylesheet" href="sidepanel.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="app-header">
+        <button class="brand" type="button" data-action="go-home" aria-label="내 제도로 이동">
+          <img src="assets/icon-32.png" width="28" height="28" alt="">
+          <span>
+            <strong>Korea100</strong>
+            <small>개인 작업대</small>
+          </span>
+        </button>
+        <div class="header-actions">
+          <span class="sync-state" title="즐겨찾기와 초안 목록은 Chrome 동기화 저장소를 사용합니다.">
+            <span class="sync-dot" aria-hidden="true"></span>
+            Chrome 동기화
+          </span>
+          <button class="icon-button" type="button" data-action="open-settings" aria-label="작업대 설정" title="작업대 설정">
+            <img class="icon" src="icons/settings-2.svg" alt="" aria-hidden="true">
+          </button>
+        </div>
+      </header>
+
+      <nav class="primary-tabs" aria-label="작업대 메뉴" role="tablist">
+        <button type="button" role="tab" data-tab="mine" data-action="change-tab">내 제도</button>
+        <button type="button" role="tab" data-tab="search" data-action="change-tab">찾기</button>
+        <button type="button" role="tab" data-tab="draft" data-action="change-tab">초안</button>
+      </nav>
+
+      <main id="content" class="content" tabindex="-1">
+        <div class="loading-state" aria-live="polite">
+          <span class="spinner" aria-hidden="true"></span>
+          제도 목록을 여는 중
+        </div>
+      </main>
+    </div>
+
+    <input id="import-file" type="file" accept="application/json,.json" hidden>
+    <dialog id="modal" class="modal" aria-labelledby="modal-title">
+      <div id="modal-content"></div>
+    </dialog>
+    <dialog id="confirm-dialog" class="confirm-dialog" aria-labelledby="confirm-title">
+      <form method="dialog">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow">확인</p>
+            <h2 id="confirm-title">이 작업을 진행할까요?</h2>
+          </div>
+          <button class="icon-button" value="cancel" aria-label="닫기" title="닫기">
+            <img class="icon" src="icons/x.svg" alt="" aria-hidden="true">
+          </button>
+        </div>
+        <p id="confirm-message" class="dialog-copy"></p>
+        <div class="dialog-actions">
+          <button class="button secondary" value="cancel">취소</button>
+          <button id="confirm-submit" class="button danger" value="confirm">삭제</button>
+        </div>
+      </form>
+    </dialog>
+    <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <script type="module" src="sidepanel.js"></script>
+  </body>
+</html>
