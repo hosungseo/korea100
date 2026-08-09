@@ -151,20 +151,29 @@ const specs = [
     name: "진료지원간호사 자격·업무 관리",
     type: "간호 자격·업무관리형",
     category: "보건·의료",
-    laws: [["간호법", "제12~14조, 제16조, 제23조", "법률"], ["간호사의 진료지원업무 수행에 관한 규칙", "제2~13조", "부령"]],
+    asOfDate: "2026-07-15",
+    laws: [["간호법", "제4조, 제12조, 제14조, 제16조", "법률"], ["간호사의 진료지원업무 수행에 관한 규칙", "제2~14조", "부령"]],
     lanes: ["진료지원간호사", "의료기관·운영위원회", "교육기관", "보건복지부"],
     stages: ["G0 자격 확인", "G1 교육", "G2 업무 지정", "G3 수행·감독", "G4 점검"],
     nodes: [
-      ["면허·임상경력 요건 확인", "진료지원간호사", "G0 자격 확인", "제14조", "간호사 면허와 진료지원업무에 필요한 임상경력 요건을 확인한다."],
-      ["교육과정 이수", "교육기관", "G1 교육", "제6조·제8조", "지정된 교육과정과 현장실습을 이수하고 수료증을 발급받는다.", null, 1],
-      ["업무 가능 의료기관·인력 확인", "의료기관·운영위원회", "G2 업무 지정", "제2조·제3조", "인증 의료기관 여부와 간호사의 자격·경력을 확인한다.", "gateway", 1],
-      ["운영위원회 심의·직무기술서 작성", "의료기관·운영위원회", "G2 업무 지정", "제10조·제11조", "수행 가능한 진료지원업무와 감독체계를 직무기술서로 정한다.", null, 1],
-      ["진료지원업무 수행", "진료지원간호사", "G3 수행·감독", "제14조", "의사의 전문적 판단 뒤 지시·위임·일반적 지도와 감독 아래 업무를 수행한다.", null, 0],
-      ["공동서명·수행기록 관리", "의료기관·운영위원회", "G3 수행·감독", "제12조", "처방·기록의 공동서명과 수행 이력을 관리한다.", null, 1],
-      ["보수교육·역량 유지", "교육기관", "G4 점검", "제7조", "전문간호사 등은 정기 보수교육으로 역량을 유지한다.", null, 1],
-      ["지도·감독·시정", "보건복지부", "G4 점검", "제23조", "법과 규칙 준수 여부를 감독하고 필요한 시정조치를 한다.", null, 0],
+      ["면허·수행자격 요건 확인", "진료지원간호사", "G0 자격 확인", "제4조·제14조, 규칙 제3조·제5조", "간호사 면허와 전문간호사 자격 또는 진료지원전담간호사 임상경력 요건을 확인한다.", "gateway", 0, [["간호법", "제4조·제14조"], ["간호사의 진료지원업무 수행에 관한 규칙", "제3조·제5조"]]],
+      ["교육과정 운영기관 승인 확인", "교육기관", "G1 교육", "제8조", "교육과정 운영기관의 법정 유형과 보건복지부장관의 운영 승인을 확인한다.", "gateway", 1],
+      ["교육·현장실습 이수", "진료지원간호사", "G1 교육", "제6조·제8조·제9조", "이론·실기·현장실습을 이수하고 현장실습 확인서를 발급받는다.", null, 1],
+      ["교육수료증 발급·현황 제출", "교육기관", "G1 교육", "제9조", "교육과정 운영기관이 교육수료증을 발급하고 발급 현황을 보건복지부장관에게 제출한다.", null, 1],
+      ["인증 의료기관·수행자격 확인", "의료기관·운영위원회", "G2 업무 지정", "제2조·제3조", "의료기관 인증을 받은 병원등인지, 수행자가 전문간호사 또는 요건을 갖춘 전담간호사인지 확인한다.", "gateway", 1],
+      ["운영위원회 설치·직무기술서 작성", "의료기관·운영위원회", "G2 업무 지정", "제10조·제11조", "의사·간호사가 포함된 운영위원회 심의·의결을 거쳐 직무기술서를 작성한다.", null, 1],
+      ["진료지원업무 수행", "진료지원간호사", "G3 수행·감독", "간호법 제12조·제14조, 규칙 제4조", "의사의 전문적 판단 후 일반적 지도와 위임에 따라 규칙상 진료지원업무를 수행한다. 세부 행위는 보건복지부 고시를 확인한다.", null, 0, [["간호법", "제12조·제14조"], ["간호사의 진료지원업무 수행에 관한 규칙", "제4조"]]],
+      ["공동서명시스템·수행기록 관리", "의료기관·운영위원회", "G3 수행·감독", "제4조·제12조", "기록·처방 초안은 간호사가 서명한 뒤 의사의 서명을 받고, 공동서명시스템으로 관리한다.", null, 1],
+      ["보수교육·역량 유지", "교육기관", "G4 점검", "간호법 제16조·규칙 제7조", "진료지원업무를 수행하는 전문간호사등은 진료지원업무를 포함한 보수교육을 이수한다.", null, 0, [["간호법", "제16조"], ["간호사의 진료지원업무 수행에 관한 규칙", "제7조"]]],
+      ["수행지침·규제 재검토", "보건복지부", "G4 점검", "제13조·제14조", "보건복지부장관이 수행 방법·절차 지침을 정하고 의료기관·경력·교육과정 기준을 주기적으로 재검토한다.", null, 1],
     ],
-    field: ["업무별 세부 수행행위 고시 최신 목록", "의료기관별 직무기술서·공동서명 시스템 운영"],
+    edges: [["P01", "P02"], ["P02", "P03"], ["P03", "P04"], ["P01", "P05", "sequence", "기관 요건"], ["P04", "P06"], ["P05", "P06"], ["P06", "P07"], ["P07", "P08"], ["P08", "P09"], ["P09", "P10"]],
+    field: ["규칙 제4조제3항에 따른 진료지원업무 세부 고시 최신 목록", "교육과정 운영 승인·현장실습 확인서·수료증 발급 운영", "2027-07-01 시행 예정 공동서명시스템 구축"],
+    warnings: [
+      "2026-07-15 현재 진료지원업무 수행에 관한 규칙은 2026-08-11 시행 예정이다.",
+      "규칙 제4조제3항에 따른 진료지원업무 세부 내용은 보건복지부 고시 확인이 필요하다.",
+      "규칙 제12조 공동서명시스템은 2027-07-01 시행 예정 조문이다.",
+    ],
     news: "https://www.korea.kr/news/policyNewsView.do?newsId=148967956",
   },
   {
@@ -490,6 +499,7 @@ fs.writeFileSync(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`);
 console.log(`제도 확장 생성: ${specs.length}개 (${specs[0].priority}~${specs.at(-1).priority})`);
 
 function buildInstitution(spec) {
+  const asOf = spec.asOfDate ?? AS_OF;
   const legalBasis = spec.laws.map(([law, articles, kind]) => ({ law, articles, kind }));
   const nodes = spec.nodes.map((raw, index) => buildNode(spec, raw, index));
   const edges = (spec.edges ?? spec.nodes.slice(1).map((_, index) => [`P${pad(index + 1)}`, `P${pad(index + 2)}`]))
@@ -508,8 +518,8 @@ function buildInstitution(spec) {
     officialName: basis.law,
     lawId: lawIds[basis.law],
     mst: "0",
-    promulgatedOn: AS_OF,
-    effectiveOn: AS_OF,
+    promulgatedOn: asOf,
+    effectiveOn: asOf,
     officialUrl: `https://law.go.kr/법령/${basis.law.replace(/\s+/g, "")}`,
   }));
   return {
@@ -519,7 +529,7 @@ function buildInstitution(spec) {
     type: spec.type,
     priority: spec.priority,
     whyFirst: `정부·지방자치단체와 관계기관의 역할을 분리해 ${spec.name} 절차를 한눈에 보여준다.`,
-    asOfDate: AS_OF,
+    asOfDate: asOf,
     status: "full",
     canvas: {
       purpose: `${spec.name}은(는) ${procedure.join(" → ")}로 이어지는 공적 절차다.`,
@@ -543,17 +553,18 @@ function buildInstitution(spec) {
       edges,
       warnings: [
         "개별 사건의 요건·기한·지원 범위는 하위규정과 사실관계에 따라 달라질 수 있다.",
-        `2026-07-13 301~320 확장: 현행 법률의 실제 조문 순서와 당사자·행정기관 레인을 기준으로 신규 작성.${spec.news ? ` 정책뉴스: ${spec.news}` : ""}`,
+        `${asOf} 301~320 확장: 현행 법률의 실제 조문 순서와 당사자·행정기관 레인을 기준으로 신규 작성.${spec.news ? ` 정책뉴스: ${spec.news}` : ""}`,
+        ...(spec.warnings ?? []),
       ],
     },
     verification: {
       status: "source-linked",
-      verifiedAt: AS_OF,
+      verifiedAt: asOf,
       method: "국가법령정보센터 Open API 현행 법령 조문 조회",
       scope: "신규 제도의 법적 근거를 현행 법령 원문에 연결했다. 조문 번호 일괄 검증 전 상태다.",
       sources,
       articleVerification: {
-        checkedAt: AS_OF,
+        checkedAt: asOf,
         method: "현행 법령 조문 일괄조회 예정",
         citationEntries: 0,
         explicitCitationEntries: 0,
@@ -567,8 +578,9 @@ function buildInstitution(spec) {
 }
 
 function buildNode(spec, raw, index) {
-  const [name, lane, stage, article, action, type = null, lawIndex = 0] = raw;
+  const [name, lane, stage, article, action, type = null, lawIndex = 0, legalBases = null] = raw;
   const law = spec.laws[lawIndex]?.[0] ?? spec.laws[0][0];
+  const bases = legalBases ?? [[law, article]];
   return {
     id: `P${pad(index + 1)}`,
     name,
@@ -582,7 +594,11 @@ function buildNode(spec, raw, index) {
     output_documents: [`${name} 기록`],
     deadline: null,
     confidence: 0.9,
-    legal_basis: [{ law, article, text: `${law} ${article}에 따른 ${action}` }],
+    legal_basis: bases.map(([basisLaw, basisArticle]) => ({
+      law: basisLaw,
+      article: basisArticle,
+      text: `${basisLaw} ${basisArticle}에 따른 ${action}`,
+    })),
   };
 }
 
