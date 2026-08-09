@@ -1,0 +1,20 @@
+{
+  "name": "korea100-administrative-procedure-mcp",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Read-only MCP server for agent-ready Korea100 administrative procedures",
+  "scripts": {
+    "start": "node src/server.mjs",
+    "test": "node --test test/*.test.mjs",
+    "test:unit": "node --test test/service.test.mjs",
+    "test:protocol": "node --test test/protocol.test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^4.4.3"
+  }
+}
