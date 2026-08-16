@@ -90,6 +90,9 @@ function Header() {
 
         <nav className="site-nav" aria-label="주요 메뉴">
           <NavLink href="/#institutions">제도 대장</NavLink>
+          <NavLink href="/mega-projects/gwangju-semiconductor-cluster/">
+            메가프로젝트
+          </NavLink>
           <NavLink href="/verification/">현장 검증 대장</NavLink>
           <NavLink href="/request/">요청하기</NavLink>
           <span className="site-header-date">기준일 {LATEST_AS_OF_DATE}</span>
