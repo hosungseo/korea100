@@ -1420,6 +1420,403 @@
   }
 }
 
+@media (min-width: 2560px) and (min-height: 1440px) {
+  .page {
+    grid-template-rows: 220px 180px minmax(0, 1fr) 58px;
+  }
+
+  .commandHeader {
+    grid-template-columns: minmax(980px, 1.18fr) minmax(760px, 0.8fr) minmax(980px, 0.96fr);
+  }
+
+  .identity {
+    padding: 32px 48px 28px 56px;
+  }
+
+  .kicker {
+    margin-bottom: 12px;
+    font-size: 14px;
+    gap: 16px;
+  }
+
+  .kicker span {
+    padding-left: 16px;
+  }
+
+  .identity h1 {
+    font-size: 50px;
+    line-height: 1.12;
+  }
+
+  .summary {
+    max-width: 1120px;
+    margin-top: 12px;
+    font-size: 16px;
+    line-height: 1.45;
+  }
+
+  .scopeMatrix > div {
+    padding: 18px 28px;
+    gap: 6px;
+  }
+
+  .scopeMatrix dt {
+    font-size: 12px;
+  }
+
+  .scopeMatrix dd {
+    font-size: 17px;
+  }
+
+  .statusMatrix > div {
+    gap: 18px;
+  }
+
+  .statusMatrix dt {
+    font-size: 14px;
+  }
+
+  .statusMatrix dd {
+    font-size: 60px;
+  }
+
+  .signalDeck {
+    grid-template-rows: 88px 92px;
+  }
+
+  .readyRail,
+  .branchRail {
+    grid-template-columns: 360px minmax(0, 1fr);
+  }
+
+  .railLead {
+    grid-template-columns: auto 58px;
+    grid-template-rows: 28px 24px;
+    padding: 14px 28px 14px 56px;
+    gap: 0 16px;
+  }
+
+  .railCode {
+    font-size: 14px;
+  }
+
+  .railLead strong {
+    font-size: 44px;
+  }
+
+  .railLead small {
+    font-size: 12px;
+  }
+
+  .readyList li {
+    grid-template-columns: 48px minmax(0, 1fr);
+    padding: 0 22px;
+    gap: 12px;
+  }
+
+  .readyList span {
+    font-size: 13px;
+  }
+
+  .readyList strong {
+    font-size: 15px;
+  }
+
+  .branchList article {
+    grid-template-columns: 46px minmax(0, 1fr);
+    padding: 0 24px;
+    gap: 14px;
+  }
+
+  .branchList article > span {
+    font-size: 13px;
+  }
+
+  .branchList article div {
+    gap: 4px;
+  }
+
+  .branchList strong {
+    font-size: 15px;
+  }
+
+  .branchList small {
+    font-size: 12px;
+  }
+
+  .graphCanvas {
+    --actor-axis-width: 360px;
+    grid-template-rows: 88px minmax(0, 1fr);
+    min-width: 100%;
+    background-size: 36px 36px;
+  }
+
+  .edge {
+    stroke-width: 1.8;
+  }
+
+  .edge[data-handoff="true"] {
+    stroke-width: 3;
+  }
+
+  .edge[data-conditional="true"] {
+    stroke-width: 2.6;
+  }
+
+  .axisCorner {
+    grid-template-rows: 24px 26px;
+    padding: 12px 22px 10px 28px;
+    gap: 0 16px;
+  }
+
+  .axisCorner > span {
+    font-size: 11px;
+  }
+
+  .axisCorner strong {
+    font-size: 16px;
+  }
+
+  .axisCorner small {
+    font-size: 11px;
+  }
+
+  .stageHeader {
+    grid-template-columns: 54px minmax(0, 1fr);
+    padding: 10px 16px;
+    gap: 12px;
+  }
+
+  .stageHeader > span {
+    width: 48px;
+    height: 48px;
+    font-size: 13px;
+  }
+
+  .stageHeader h2 {
+    font-size: 17px;
+  }
+
+  .stageHeader small {
+    margin-top: 4px;
+    font-size: 10px;
+  }
+
+  .actorHeader {
+    grid-template-columns: 52px minmax(0, 1fr) 46px;
+    padding: 8px 16px 8px 20px;
+    gap: 14px;
+  }
+
+  .actorCode {
+    font-size: 12px;
+  }
+
+  .actorHeader h2 {
+    font-size: 16px;
+  }
+
+  .actorHeader small {
+    margin-top: 6px;
+    font-size: 11px;
+  }
+
+  .actorHeader > strong {
+    width: 42px;
+    height: 42px;
+    font-size: 12px;
+  }
+
+  .stageCell {
+    padding: 7px 9px;
+    gap: 7px;
+  }
+
+  .node {
+    padding: 6px 8px 6px 10px;
+    border-width: 2px;
+    border-left-width: 4px;
+    box-shadow: 0 2px 6px rgba(17, 38, 27, 0.05);
+    gap: 4px;
+  }
+
+  .node[data-protection="true"]::after {
+    width: 4px;
+  }
+
+  .nodeTopline {
+    gap: 8px;
+  }
+
+  .nodeCode {
+    font-size: 12px;
+  }
+
+  .nodeTopline h3 {
+    font-size: 14px;
+  }
+
+  .nodeStatus {
+    padding: 3px 5px 2px;
+    font-size: 9px;
+  }
+
+  .nodeRoles {
+    font-size: 10.5px;
+    gap: 10px;
+  }
+
+  .nodeRoles b,
+  .nodeFlow b {
+    margin-right: 4px;
+  }
+
+  .nodeFlow {
+    font-size: 10px;
+    gap: 8px;
+  }
+
+  .successors {
+    font-size: 9.5px;
+  }
+
+  .references {
+    max-width: 100px;
+    gap: 3px;
+  }
+
+  .references a {
+    min-width: 21px;
+    height: 17px;
+    padding: 0 3px;
+    font-size: 8px;
+  }
+
+  .stageCell[data-count="1"] .node {
+    padding: 12px 14px 12px 16px;
+    gap: 8px;
+  }
+
+  .stageCell[data-count="1"] .nodeTopline h3 {
+    font-size: 19px;
+  }
+
+  .stageCell[data-count="1"] .nodeCode {
+    font-size: 15px;
+  }
+
+  .stageCell[data-count="1"] .nodeStatus {
+    font-size: 11px;
+  }
+
+  .stageCell[data-count="1"] .nodeRoles,
+  .stageCell[data-count="1"] .nodeFlow {
+    font-size: 13px;
+  }
+
+  .stageCell[data-count="1"] .successors {
+    font-size: 12px;
+  }
+
+  .stageCell[data-count="1"] .references a {
+    min-width: 24px;
+    height: 20px;
+    font-size: 9px;
+  }
+
+  .stageCell[data-count="2"] .node {
+    padding: 7px 9px 7px 11px;
+    gap: 4px;
+  }
+
+  .stageCell[data-count="2"] .nodeTopline h3 {
+    font-size: 15px;
+  }
+
+  .stageCell[data-count="2"] .nodeRoles,
+  .stageCell[data-count="2"] .nodeFlow {
+    font-size: 10.5px;
+  }
+
+  .stageCell[data-count="3"] .node {
+    padding: 4px 6px 4px 8px;
+    border-left-width: 4px;
+    box-shadow: 0 1px 4px rgba(17, 38, 27, 0.04);
+    gap: 2px;
+  }
+
+  .stageCell[data-count="3"] .nodeTopline {
+    gap: 6px;
+  }
+
+  .stageCell[data-count="3"] .nodeTopline h3 {
+    font-size: 12px;
+  }
+
+  .stageCell[data-count="3"] .nodeCode {
+    font-size: 10px;
+  }
+
+  .stageCell[data-count="3"] .nodeStatus {
+    padding: 2px 4px 1px;
+    font-size: 8px;
+  }
+
+  .stageCell[data-count="3"] .nodeRoles,
+  .stageCell[data-count="3"] .nodeFlow,
+  .stageCell[data-count="3"] .successors {
+    font-size: 8.5px;
+  }
+
+  .stageCell[data-count="3"] .nodeRoles,
+  .stageCell[data-count="3"] .nodeFlow {
+    gap: 6px;
+  }
+
+  .stageCell[data-count="3"] .references {
+    max-width: 78px;
+  }
+
+  .stageCell[data-count="3"] .references a {
+    min-width: 17px;
+    height: 14px;
+    font-size: 7px;
+  }
+
+  .readingKey {
+    padding: 0 42px 0 56px;
+    gap: 28px;
+  }
+
+  .readingKey p {
+    font-size: 12px;
+  }
+
+  .readingKey p strong {
+    margin-right: 14px;
+  }
+
+  .legend {
+    gap: 24px;
+  }
+
+  .legend span {
+    font-size: 11px;
+  }
+
+  .legend i {
+    width: 30px;
+    margin-right: 8px;
+  }
+
+  .legend b {
+    width: 22px;
+    height: 22px;
+    margin-right: 6px;
+    font-size: 10px;
+  }
+}
+
 @media (max-height: 930px) and (min-width: 1081px) {
   .page {
     grid-template-rows: 96px 100px minmax(0, 1fr) 28px;
