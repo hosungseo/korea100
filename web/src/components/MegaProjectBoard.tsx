@@ -14,6 +14,9 @@ import type {
   MegaActivationState,
   MegaArtifact,
   MegaDependency,
+  MegaDetailEdge,
+  MegaDetailNode,
+  MegaDetailTemplate,
   MegaDisplayStatus,
   MegaProject,
   MegaProjectNode,
@@ -26,6 +29,25 @@ interface MegaProjectBoardProps {
   project: MegaProject;
   artifacts: MegaArtifact[];
   templates: Record<string, string>;
+  detailTemplates: Record<string, MegaDetailTemplate>;
+}
+
+type DetailMapping = "exact" | "template" | "missing";
+
+interface DetailGroup {
+  id: string;
+  templateId?: string;
+  templateName: string;
+  mapping: DetailMapping;
+  nodes: MegaDetailNode[];
+  edges: MegaDetailEdge[];
+}
+
+interface DetailEdgeGeometry {
+  id: string;
+  path: string;
+  mapping: DetailMapping;
+  type: MegaDetailEdge["type"];
 }
 
 interface DependencyState {
@@ -43,6 +65,7 @@ interface GraphEdge {
   strength: "hard" | "soft";
   kind: MegaDependency["kind"];
   conditional: boolean;
+  handoff: boolean;
 }
 
 interface EdgeGeometry extends GraphEdge {
@@ -103,6 +126,20 @@ const RULE_LABELS: Record<string, { code: string; label: string }> = {
     code: "B03",
     label: "전력계통 검토 경로",
   },
+  RULE_HAZARDOUS_FACILITY_PATH: {
+    code: "B04",
+    label: "위험물·고압가스 경로",
+  },
+};
+
+const CONFIDENCE_META: Record<
+  MegaProjectNode["confidence"],
+  { code: string; label: string }
+> = {
+  official: { code: "OBS", label: "공식 현황 확인" },
+  statutory: { code: "LAW", label: "법령상 필수 단계" },
+  modeled: { code: "MOD", label: "분석상 프로젝트 모델" },
+  unknown: { code: "UNK", label: "공개자료 부족" },
 };
 
 const COUNT_ORDER: MegaDisplayStatus[] = [
@@ -174,10 +211,165 @@ function formatRuleValue(value: MegaRuleValue | number) {
   return String(value);
 }
 
+function formatCompactActors(actors: string[]) {
+  if (actors.length === 0) return "—";
+  return `${actors[0]}${actors.length > 1 ? ` +${actors.length - 1}` : ""}`;
+}
+
+function MegaDetailFlow({ groups }: { groups: DetailGroup[] }) {
+  const flowRef = useRef<HTMLDivElement | null>(null);
+  const detailNodeRefs = useRef(new Map<string, HTMLElement>());
+  const [geometry, setGeometry] = useState<DetailEdgeGeometry[]>([]);
+  const [size, setSize] = useState({ width: 0, height: 0 });
+
+  const updateGeometry = useCallback(() => {
+    const flow = flowRef.current;
+    if (!flow || flow.offsetParent === null) return;
+    const flowRect = flow.getBoundingClientRect();
+    const paths = groups.flatMap((group) =>
+      group.edges.flatMap((edge) => {
+        const source = detailNodeRefs.current.get(`${group.id}:${edge.source}`);
+        const target = detailNodeRefs.current.get(`${group.id}:${edge.target}`);
+        if (!source || !target) return [];
+        const sourceRect = source.getBoundingClientRect();
+        const targetRect = target.getBoundingClientRect();
+        const sourceX = sourceRect.right - flowRect.left;
+        const sourceY = sourceRect.top - flowRect.top + sourceRect.height / 2;
+        const targetX = targetRect.left - flowRect.left;
+        const targetY = targetRect.top - flowRect.top + targetRect.height / 2;
+        const sameRow = Math.abs(sourceY - targetY) < sourceRect.height * 0.65;
+        let path: string;
+        if (sameRow && targetX > sourceX) {
+          const bend = Math.max(2, (targetX - sourceX) * 0.46);
+          path = `M ${sourceX} ${sourceY} C ${sourceX + bend} ${sourceY}, ${targetX - bend} ${targetY}, ${targetX} ${targetY}`;
+        } else {
+          const sourceBottom = sourceRect.bottom - flowRect.top;
+          const targetTop = targetRect.top - flowRect.top;
+          const sourceCenter = sourceRect.left - flowRect.left + sourceRect.width / 2;
+          const targetCenter = targetRect.left - flowRect.left + targetRect.width / 2;
+          const bend = Math.max(3, Math.abs(targetTop - sourceBottom) * 0.5);
+          path = `M ${sourceCenter} ${sourceBottom} C ${sourceCenter} ${sourceBottom + bend}, ${targetCenter} ${targetTop - bend}, ${targetCenter} ${targetTop}`;
+        }
+        return [
+          {
+            id: `${group.id}:${edge.id}`,
+            path,
+            mapping: group.mapping,
+            type: edge.type,
+          },
+        ];
+      }),
+    );
+    setSize({ width: flow.clientWidth, height: flow.clientHeight });
+    setGeometry(paths);
+  }, [groups]);
+
+  useLayoutEffect(() => {
+    updateGeometry();
+    const flow = flowRef.current;
+    if (!flow) return;
+    const observer = new ResizeObserver(updateGeometry);
+    observer.observe(flow);
+    detailNodeRefs.current.forEach((node) => observer.observe(node));
+    window.addEventListener("resize", updateGeometry);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updateGeometry);
+    };
+  }, [updateGeometry]);
+
+  const setDetailNodeRef = useCallback(
+    (id: string) => (element: HTMLElement | null) => {
+      if (element) detailNodeRefs.current.set(id, element);
+      else detailNodeRefs.current.delete(id);
+    },
+    [],
+  );
+  const groupRows = groups
+    .map((group) => `${Math.max(8, group.nodes.length)}fr`)
+    .join(" ");
+
+  return (
+    <div
+      className={styles.detailFlow}
+      ref={flowRef}
+      style={{ "--detail-group-rows": groupRows } as CSSProperties}
+      aria-label="Korea100 하위 행정절차"
+    >
+      <svg
+        className={styles.detailEdgeLayer}
+        width={size.width}
+        height={size.height}
+        viewBox={`0 0 ${size.width} ${size.height}`}
+        aria-hidden="true"
+      >
+        {geometry.map((edge) => (
+          <path
+            key={edge.id}
+            className={styles.detailEdge}
+            d={edge.path}
+            data-mapping={edge.mapping}
+            data-type={edge.type}
+          />
+        ))}
+      </svg>
+      {groups.map((group) => (
+        <section
+          className={styles.detailGroup}
+          key={group.id}
+          data-mapping={group.mapping}
+        >
+          <header className={styles.detailGroupHeader}>
+            <span>
+              {group.mapping === "exact"
+                ? "MAP"
+                : group.mapping === "template"
+                  ? "TPL"
+                  : "GAP"}
+            </span>
+            {group.templateId ? (
+              <Link href={`/model/${group.templateId}/`} title={group.templateName}>
+                {group.templateName}
+              </Link>
+            ) : (
+              <strong>{group.templateName}</strong>
+            )}
+            <small>{group.nodes.length}N/{group.edges.length}E</small>
+          </header>
+          <div className={styles.detailNodes}>
+            {group.nodes.map((node) => (
+              <span
+                className={styles.detailNode}
+                key={`${group.id}:${node.id}`}
+                ref={setDetailNodeRef(`${group.id}:${node.id}`)}
+                data-mapping={group.mapping}
+                data-type={node.type}
+                title={[
+                  `${node.id} ${node.name}`,
+                  `담당 ${node.actor}`,
+                  `단계 ${node.stage}`,
+                  node.outputDocuments.length > 0
+                    ? `산출물 ${node.outputDocuments.join(" · ")}`
+                    : "산출물 미기재",
+                  `법적 근거 ${node.legalBasisCount}건`,
+                ].join(" / ")}
+              >
+                <b>{node.id}</b>
+                <i>{node.name}</i>
+              </span>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  );
+}
+
 export default function MegaProjectBoard({
   project,
   artifacts,
   templates,
+  detailTemplates,
 }: MegaProjectBoardProps) {
   const [edgeGeometry, setEdgeGeometry] = useState<EdgeGeometry[]>([]);
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
@@ -206,6 +398,161 @@ export default function MegaProjectBoard({
   const nodeOrder = useMemo(
     () => new Map(project.nodes.map((node, index) => [node.id, index])),
     [project.nodes],
+  );
+  const nodeById = useMemo(
+    () => new Map(project.nodes.map((node) => [node.id, node])),
+    [project.nodes],
+  );
+  const nodesByActorAndStage = useMemo(() => {
+    const result = new Map<string, MegaProjectNode[]>();
+    project.nodes.forEach((node) => {
+      const key = `${node.leadActor}:${node.stage}`;
+      const current = result.get(key) ?? [];
+      current.push(node);
+      result.set(key, current);
+    });
+    return result;
+  }, [project.nodes]);
+  const detailGroupsByNode = useMemo(() => {
+    const result = new Map<string, DetailGroup[]>();
+    project.nodes.forEach((projectNode) => {
+      const references = projectNode.templateRefs ?? [];
+      if (references.length === 0) {
+        result.set(projectNode.id, [
+          {
+            id: `${projectNode.id}:gap`,
+            templateName: "상세 하위절차 매핑 필요",
+            mapping: "missing",
+            nodes: [
+              {
+                id: "TBD",
+                name: "신청·검토·협의·의결·고시 단계 분해 필요",
+                actor: projectNode.authority,
+                stage: projectNode.stage,
+                type: "gateway",
+                outputDocuments: [],
+                legalBasisCount: 0,
+              },
+            ],
+            edges: [],
+          },
+        ]);
+        return;
+      }
+
+      const groups = references.map((reference, index): DetailGroup => {
+        const template = detailTemplates[reference.institution];
+        const selectedIds = reference.nodeIds
+          ? new Set(reference.nodeIds)
+          : null;
+        const selectedNodes = (template?.nodes ?? []).filter(
+          (node) => !selectedIds || selectedIds.has(node.id),
+        );
+        const selectedNodeIds = new Set(selectedNodes.map((node) => node.id));
+        const selectedEdges = (template?.edges ?? []).filter(
+          (edge) =>
+            selectedNodeIds.has(edge.source) && selectedNodeIds.has(edge.target),
+        );
+        if (!template || selectedNodes.length === 0) {
+          return {
+            id: `${projectNode.id}:${reference.institution}:${index}`,
+            templateId: reference.institution,
+            templateName:
+              templates[reference.institution] ?? reference.institution,
+            mapping: "missing",
+            nodes: [
+              {
+                id: "TBD",
+                name: "참조 템플릿의 적용 하위절차 확인 필요",
+                actor: projectNode.authority,
+                stage: projectNode.stage,
+                type: "gateway",
+                outputDocuments: [],
+                legalBasisCount: 0,
+              },
+            ],
+            edges: [],
+          };
+        }
+        return {
+          id: `${projectNode.id}:${reference.institution}:${index}`,
+          templateId: reference.institution,
+          templateName: template.name,
+          mapping:
+            reference.mappingStatus === "candidate"
+              ? "template"
+              : selectedIds
+                ? "exact"
+                : "template",
+          nodes: selectedNodes,
+          edges: selectedEdges,
+        };
+      });
+      result.set(projectNode.id, groups);
+    });
+    return result;
+  }, [detailTemplates, project.nodes, templates]);
+  const detailMappingByNode = useMemo(() => {
+    const result = new Map<
+      string,
+      DetailMapping | "mixed"
+    >();
+    detailGroupsByNode.forEach((groups, nodeId) => {
+      const mappings = new Set(groups.map((group) => group.mapping));
+      if (mappings.has("missing")) result.set(nodeId, "missing");
+      else if (mappings.size > 1) result.set(nodeId, "mixed");
+      else result.set(nodeId, groups[0]?.mapping ?? "missing");
+    });
+    return result;
+  }, [detailGroupsByNode]);
+  const detailInventory = useMemo(() => {
+    let exact = 0;
+    let template = 0;
+    let internalEdges = 0;
+    let missingMilestones = 0;
+    const uniqueTemplates = new Set<string>();
+    detailGroupsByNode.forEach((groups) => {
+      if (groups.some((group) => group.mapping === "missing")) {
+        missingMilestones += 1;
+      }
+      groups.forEach((group) => {
+        if (group.templateId) uniqueTemplates.add(group.templateId);
+        if (group.mapping === "exact") exact += group.nodes.length;
+        if (group.mapping === "template") template += group.nodes.length;
+        internalEdges += group.edges.length;
+      });
+    });
+    return {
+      exact,
+      template,
+      internalEdges,
+      missingMilestones,
+      uniqueTemplates: uniqueTemplates.size,
+    };
+  }, [detailGroupsByNode]);
+  const detailWeightByNode = useMemo(
+    () =>
+      new Map(
+        project.nodes.map((node) => {
+          const groups = detailGroupsByNode.get(node.id) ?? [];
+          const nodeCount = groups.reduce(
+            (total, group) => total + group.nodes.length,
+            0,
+          );
+          return [node.id, Math.max(12, nodeCount + groups.length * 5)];
+        }),
+      ),
+    [detailGroupsByNode, project.nodes],
+  );
+  const actorNodeCounts = useMemo(
+    () =>
+      new Map(
+        project.actors.map((actor) => [
+          actor.id,
+          project.nodes.filter((node) => node.leadActor === actor.id).length,
+        ]),
+      ),
+    [project.actors, project.nodes],
   );
   const producersByArtifact = useMemo(() => {
     const producerMap = new Map<string, string[]>();
@@ -322,6 +669,7 @@ export default function MegaProjectBoard({
         const applicable = getDependencyApplicability(dependency, ruleValues);
         if (applicable === false) return;
         (producersByArtifact.get(dependency.artifact) ?? []).forEach((sourceId) => {
+          const sourceNode = nodeById.get(sourceId);
           result.push({
             id: `${sourceId}-${targetNode.id}-${dependency.artifact}`,
             source: sourceId,
@@ -333,12 +681,18 @@ export default function MegaProjectBoard({
               applicable === "unknown" ||
               activationByNode.get(sourceId) === "unknown" ||
               activationByNode.get(targetNode.id) === "unknown",
+            handoff: sourceNode?.leadActor !== targetNode.leadActor,
           });
         });
       });
     });
     return result;
-  }, [activationByNode, producersByArtifact, project.nodes, ruleValues]);
+  }, [activationByNode, nodeById, producersByArtifact, project.nodes, ruleValues]);
+
+  const handoffCount = useMemo(
+    () => edges.filter((edge) => edge.handoff).length,
+    [edges],
+  );
 
   const downstreamByNode = useMemo(() => {
     const result = new Map<string, string[]>();
@@ -368,14 +722,28 @@ export default function MegaProjectBoard({
       if (!source || !target) return [];
       const sourceRect = source.getBoundingClientRect();
       const targetRect = target.getBoundingClientRect();
+      const sourceLeft = sourceRect.left - canvasRect.left;
       const sourceX = sourceRect.right - canvasRect.left;
       const sourceY = sourceRect.top - canvasRect.top + sourceRect.height / 2;
       const targetLeft = targetRect.left - canvasRect.left;
       const targetRight = targetRect.right - canvasRect.left;
       const targetY = targetRect.top - canvasRect.top + targetRect.height / 2;
+      const sameColumn = Math.abs(sourceLeft - targetLeft) < 12;
 
       let path: string;
-      if (targetLeft > sourceX + 18) {
+      if (sameColumn) {
+        const sourceAbove = targetY >= sourceY;
+        const anchorX = sourceLeft + sourceRect.width * 0.5;
+        const sourceAnchorY = sourceAbove
+          ? sourceRect.bottom - canvasRect.top
+          : sourceRect.top - canvasRect.top;
+        const targetAnchorY = sourceAbove
+          ? targetRect.top - canvasRect.top
+          : targetRect.bottom - canvasRect.top;
+        const bend = Math.max(8, Math.abs(targetAnchorY - sourceAnchorY) * 0.38);
+        const direction = sourceAbove ? 1 : -1;
+        path = `M ${anchorX} ${sourceAnchorY} C ${anchorX + 6} ${sourceAnchorY + bend * direction}, ${anchorX - 6} ${targetAnchorY - bend * direction}, ${anchorX} ${targetAnchorY}`;
+      } else if (targetLeft > sourceX + 18) {
         const bend = Math.max(28, (targetLeft - sourceX) * 0.42);
         path = `M ${sourceX} ${sourceY} C ${sourceX + bend} ${sourceY}, ${targetLeft - bend} ${targetY}, ${targetLeft} ${targetY}`;
       } else {
@@ -436,10 +804,27 @@ export default function MegaProjectBoard({
 
   const graphStyle = {
     "--stage-count": project.stages.length,
-  } as CSSProperties & { "--stage-count": number };
+    "--actor-count": project.actors.length,
+    "--actor-row-weights": project.actors
+      .map((actor) => {
+        const actorNodes = project.nodes.filter(
+          (node) => node.leadActor === actor.id,
+        );
+        const detailWeight = actorNodes.reduce(
+          (total, node) => total + (detailWeightByNode.get(node.id) ?? 12),
+          0,
+        );
+        return `${Math.max(54, 36 + detailWeight)}fr`;
+      })
+      .join(" "),
+  } as CSSProperties & {
+    "--stage-count": number;
+    "--actor-count": number;
+    "--actor-row-weights": string;
+  };
 
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page} mega-synoptic-page`}>
       <header className={styles.commandHeader}>
         <div className={styles.identity}>
           <p className={styles.kicker}>
@@ -483,9 +868,16 @@ export default function MegaProjectBoard({
           <div className={styles.railLead}>
             <span className={styles.railCode}>NOW OPEN</span>
             <strong>{String(readyNodes.length).padStart(2, "0")}</strong>
-            <small>군공항 이전과 동시에 돌릴 수 있는 병렬축</small>
+            <small>{handoffCount}개 기관 간 인계 · 지금 병렬 착수 가능한 축</small>
           </div>
-          <ol className={styles.readyList}>
+          <ol
+            className={styles.readyList}
+            style={
+              {
+                "--ready-count": Math.max(1, readyNodes.length),
+              } as CSSProperties
+            }
+          >
             {readyNodes.map((node) => (
               <li key={node.id}>
                 <span>{node.id}</span>
@@ -501,7 +893,14 @@ export default function MegaProjectBoard({
             <strong>{String(project.rules.length).padStart(2, "0")}</strong>
             <small>선택하지 않고 모든 조건부 경로를 함께 표시</small>
           </div>
-          <div className={styles.branchList}>
+          <div
+            className={styles.branchList}
+            style={
+              {
+                "--branch-count": Math.max(1, project.rules.length),
+              } as CSSProperties
+            }
+          >
             {project.rules.map((rule) => {
               const meta = RULE_LABELS[rule.id] ?? {
                 code: "B--",
@@ -524,7 +923,10 @@ export default function MegaProjectBoard({
         </div>
       </section>
 
-      <section className={styles.workspace} aria-label="30개 행정절차 선행조건 지도">
+      <section
+        className={styles.workspace}
+        aria-label={`${project.nodes.length}개 행정절차 선행조건 지도`}
+      >
         <div className={styles.graphViewport}>
           <div className={styles.graphCanvas} ref={canvasRef} style={graphStyle}>
             <svg
@@ -537,6 +939,17 @@ export default function MegaProjectBoard({
               <defs>
                 <marker
                   id="mega-arrow"
+                  viewBox="0 0 8 8"
+                  refX="7"
+                  refY="4"
+                  markerWidth="5"
+                  markerHeight="5"
+                  orient="auto-start-reverse"
+                >
+                  <path d="M 0 0 L 8 4 L 0 8 z" />
+                </marker>
+                <marker
+                  id="mega-arrow-handoff"
                   viewBox="0 0 8 8"
                   refX="7"
                   refY="4"
@@ -565,176 +978,256 @@ export default function MegaProjectBoard({
                   d={edge.path}
                   data-strength={edge.strength}
                   data-conditional={edge.conditional ? "true" : "false"}
+                  data-handoff={edge.handoff ? "true" : "false"}
                   data-kind={edge.kind}
                   markerEnd={
                     edge.conditional
                       ? "url(#mega-arrow-conditional)"
-                      : "url(#mega-arrow)"
+                      : edge.handoff
+                        ? "url(#mega-arrow-handoff)"
+                        : "url(#mega-arrow)"
                   }
                 />
               ))}
             </svg>
 
-            <div className={styles.stageGrid}>
+            <div className={styles.stageAxis}>
+              <div className={styles.axisCorner}>
+                <span>RESPONSIBLE ACTOR</span>
+                <strong>책임 주체 ↓</strong>
+                <small>행정 게이트 →</small>
+              </div>
               {project.stages.map((stage, stageIndex) => {
                 const stageNodes = project.nodes.filter(
                   (node) => node.stage === stage.id,
                 );
                 return (
-                  <section className={styles.stage} key={stage.id}>
-                    <header className={styles.stageHeader}>
-                      <span>{String(stageIndex + 1).padStart(2, "0")}</span>
+                  <header className={styles.stageHeader} key={stage.id}>
+                    <span>{String(stageIndex + 1).padStart(2, "0")}</span>
+                    <div>
+                      <h2>{stage.label}</h2>
+                      <small>{stageNodes.length} PROCEDURES</small>
+                    </div>
+                  </header>
+                );
+              })}
+            </div>
+
+            <div className={styles.laneGrid}>
+              {project.actors.map((actor, actorIndex) => {
+                return (
+                  <section
+                    className={styles.actorLane}
+                    key={actor.id}
+                    data-actor={actor.id}
+                    style={
+                      {
+                        "--actor-index": actorIndex,
+                      } as CSSProperties & { "--actor-index": number }
+                    }
+                  >
+                    <header className={styles.actorHeader}>
+                      <span className={styles.actorCode}>{actor.code}</span>
                       <div>
-                        <h2>{stage.label}</h2>
-                        <small>{stageNodes.length} PROCEDURES</small>
+                        <h2>{actor.label}</h2>
+                        <small>{actor.mandate}</small>
                       </div>
+                      <strong>{String(actorNodeCounts.get(actor.id) ?? 0).padStart(2, "0")}</strong>
                     </header>
 
-                    <div className={styles.stageNodes}>
-                      {stageNodes.map((node, nodeIndex) => {
-                        const status =
-                          displayStatusByNode.get(node.id) ?? "blocked";
-                        const blockers = getStartBlockers(node);
-                        const successors = downstreamByNode.get(node.id) ?? [];
-                        const activation = activationByNode.get(node.id);
-                        return (
-                          <article
-                            key={node.id}
-                            ref={setNodeRef(node.id)}
-                            className={styles.node}
-                            data-status={status}
-                            data-protection={
-                              node.classification === "protection_gate"
-                                ? "true"
-                                : "false"
-                            }
-                            aria-label={`${node.id} ${node.name}, ${STATUS_META[status].label}`}
-                            style={
-                              {
-                                "--node-index": nodeIndex + stageIndex,
-                              } as CSSProperties & { "--node-index": number }
-                            }
-                          >
-                            <div className={styles.nodeTopline}>
-                              <span className={styles.nodeCode}>{node.id}</span>
-                              <span className={styles.nodeClass}>
-                                {CLASSIFICATION_LABELS[node.classification]}
-                              </span>
-                              <span className={styles.nodeStatus} data-status={status}>
-                                {STATUS_META[status].code}
-                              </span>
-                            </div>
+                    {project.stages.map((stage, stageIndex) => {
+                      const cellNodes =
+                        nodesByActorAndStage.get(`${actor.id}:${stage.id}`) ?? [];
+                      const detailRows = cellNodes
+                        .map(
+                          (node) =>
+                            `${detailWeightByNode.get(node.id) ?? 12}fr`,
+                        )
+                        .join(" ");
+                      const nodeRows = `repeat(${Math.max(1, cellNodes.length)}, minmax(0, 1fr))`;
+                      return (
+                        <div
+                          className={styles.stageCell}
+                          key={`${actor.id}:${stage.id}`}
+                          data-count={cellNodes.length}
+                          data-crowded={cellNodes.length >= 4 ? "true" : "false"}
+                          data-stage-index={stageIndex}
+                          style={
+                            {
+                              "--detail-rows": detailRows,
+                              "--node-rows": nodeRows,
+                            } as CSSProperties
+                          }
+                        >
+                          {cellNodes.map((node) => {
+                            const status =
+                              displayStatusByNode.get(node.id) ?? "blocked";
+                            const blockers = getStartBlockers(node);
+                            const successors = downstreamByNode.get(node.id) ?? [];
+                            const activation = activationByNode.get(node.id);
+                            const blockerLabels = blockers.map((blocker) =>
+                              formatArtifactLabel(
+                                blocker.dependency.artifact,
+                                artifactMap,
+                              ),
+                            );
+                            const blockerDetail = blockers
+                              .map(
+                                (blocker) =>
+                                  `${KIND_LABELS[blocker.dependency.kind]} · ${RELATION_LABELS[blocker.dependency.relation]} · ${formatArtifactLabel(blocker.dependency.artifact, artifactMap)}${blocker.dependency.note ? ` · ${blocker.dependency.note}` : ""}`,
+                              )
+                              .join(" / ");
+                            const lockLabel =
+                              status === "completed"
+                                ? "완료·산출물 확보"
+                                : status === "active"
+                                  ? "필수조건 충족·진행 중"
+                                  : status === "ready"
+                                    ? "없음·지금 착수"
+                                    : status === "inactive"
+                                      ? "현재 경로 제외"
+                                      : activation === "unknown"
+                                        ? "? 적용 여부 미확정"
+                                        : blockerLabels.join("·") || "검토 필요";
+                            const outputLabels = node.produces.map((artifact) =>
+                              formatArtifactLabel(artifact, artifactMap),
+                            );
+                            const successorTitle = successors
+                              .map((id) => {
+                                const successor = nodeById.get(id);
+                                return successor ? `${id} ${successor.name}` : id;
+                              })
+                              .join(" · ");
+                            const roleTitle = [
+                              `주관 ${node.actorRoles.lead.join(" · ")}`,
+                              `협의 ${node.actorRoles.consult.join(" · ") || "없음"}`,
+                              `결정 ${node.actorRoles.decision.join(" · ")}`,
+                              `원문 담당 ${node.authority}`,
+                            ].join(" / ");
+                            const detailGroups =
+                              detailGroupsByNode.get(node.id) ?? [];
+                            const detailMapping =
+                              detailMappingByNode.get(node.id) ?? "missing";
 
-                            <h3>{node.name}</h3>
-                            <p className={styles.nodeAuthority} title={node.authority}>
-                              {node.authority}
-                            </p>
-
-                            <dl className={styles.nodeSignals}>
-                              <div>
-                                <dt>잠금</dt>
-                                <dd>
-                                  {status === "completed" && (
-                                    <span className={styles.clearSignal}>완료 · 산출물 확보</span>
-                                  )}
-                                  {status === "active" && (
-                                    <span className={styles.liveSignal}>필수조건 충족 · 진행 중</span>
-                                  )}
-                                  {status === "ready" && (
-                                    <span className={styles.openSignal}>없음 · 지금 착수 가능</span>
-                                  )}
-                                  {status === "inactive" && (
-                                    <span>현재 경로에서 제외</span>
-                                  )}
-                                  {activation === "unknown" && (
-                                    <span className={styles.unknownSignal}>
-                                      ? 경로 적용 여부 미확정
-                                    </span>
-                                  )}
-                                  {blockers.map((blocker, index) => (
-                                    <span
-                                      key={`${blocker.dependency.artifact}-${index}`}
-                                      className={styles.blockerSignal}
-                                      data-unknown={
-                                        blocker.applicable === "unknown"
-                                          ? "true"
-                                          : "false"
-                                      }
-                                      title={`${KIND_LABELS[blocker.dependency.kind]} · ${RELATION_LABELS[blocker.dependency.relation]}${blocker.dependency.note ? ` · ${blocker.dependency.note}` : ""}`}
-                                    >
-                                      {blocker.applicable === "unknown" ? "?" : "•"}{" "}
-                                      {formatArtifactLabel(
-                                        blocker.dependency.artifact,
-                                        artifactMap,
-                                      )}
-                                    </span>
-                                  ))}
-                                </dd>
-                              </div>
-                              <div>
-                                <dt>산출</dt>
-                                <dd title={node.produces.map((artifact) => formatArtifactLabel(artifact, artifactMap)).join(" · ")}>
-                                  {node.produces
-                                    .map((artifact) =>
-                                      formatArtifactLabel(artifact, artifactMap),
-                                    )
-                                    .join(" · ")}
-                                </dd>
-                              </div>
-                            </dl>
-
-                            <footer className={styles.nodeFooter}>
-                              <span
-                                className={styles.successors}
-                                title={successors
-                                  .map((id) => {
-                                    const successor = project.nodes.find(
-                                      (candidate) => candidate.id === id,
-                                    );
-                                    return successor ? `${id} ${successor.name}` : id;
-                                  })
-                                  .join(" · ")}
+                            return (
+                              <article
+                                key={node.id}
+                                ref={setNodeRef(node.id)}
+                                className={styles.node}
+                                data-status={status}
+                                data-confidence={node.confidence}
+                                data-protection={
+                                  node.classification === "protection_gate"
+                                    ? "true"
+                                    : "false"
+                                }
+                                aria-label={`${node.id} ${node.name}, ${actor.label} 주관, ${STATUS_META[status].label}`}
+                                style={
+                                  {
+                                    "--node-index": nodeOrder.get(node.id) ?? 0,
+                                  } as CSSProperties & { "--node-index": number }
+                                }
                               >
-                                → {successors.length > 0 ? successors.join("·") : "END"}
-                              </span>
-                              <span className={styles.references}>
-                                {node.templateRefs?.map((reference) => (
-                                  <Link
-                                    key={reference.institution}
-                                    href={`/model/${reference.institution}/`}
-                                    title={`Korea100 · ${templates[reference.institution]}`}
+                                <div className={styles.nodeTopline}>
+                                  <span className={styles.nodeCode}>{node.id}</span>
+                                  <span
+                                    className={styles.detailState}
+                                    data-mapping={detailMapping}
+                                    title={
+                                      detailMapping === "exact"
+                                        ? "광주 프로젝트 적용 하위절차가 정확히 지정됨"
+                                        : detailMapping === "mixed"
+                                          ? "정확 매핑과 템플릿 후보가 함께 연결됨"
+                                          : detailMapping === "template"
+                                            ? "연결 템플릿 전체가 적용 후보이며 선별 필요"
+                                            : "상세 하위절차 분해 필요"
+                                    }
                                   >
-                                    K
-                                  </Link>
-                                ))}
-                                {node.evidence.map((sourceId) => {
-                                  const source = sourceMap.get(sourceId);
-                                  if (!source) return null;
-                                  return (
-                                    <a
-                                      key={source.id}
-                                      href={source.url}
-                                      target="_blank"
-                                      rel="noreferrer"
-                                      title={source.title}
-                                      onClick={() =>
-                                        trackEvent("mega_project_source_opened", {
-                                          project_id: project.id,
-                                          node_id: node.id,
-                                          source_id: source.id,
-                                        })
-                                      }
-                                    >
-                                      {sourceCodeMap.get(source.id)}
-                                    </a>
-                                  );
-                                })}
-                              </span>
-                            </footer>
-                          </article>
-                        );
-                      })}
-                    </div>
+                                    {detailMapping === "exact"
+                                      ? "MAP"
+                                      : detailMapping === "mixed"
+                                        ? "MIX"
+                                        : detailMapping === "template"
+                                          ? "TPL"
+                                          : "GAP"}
+                                  </span>
+                                  <span
+                                    className={styles.confidenceState}
+                                    data-confidence={node.confidence}
+                                    title={CONFIDENCE_META[node.confidence].label}
+                                  >
+                                    {CONFIDENCE_META[node.confidence].code}
+                                  </span>
+                                  <h3 title={`${node.name} · ${CLASSIFICATION_LABELS[node.classification]}`}>
+                                    {node.name}
+                                  </h3>
+                                  <span className={styles.nodeStatus} data-status={status}>
+                                    {STATUS_META[status].code}
+                                  </span>
+                                </div>
+
+                                <p className={styles.nodeRoles} title={roleTitle}>
+                                  <span><b>주</b>{formatCompactActors(node.actorRoles.lead)}</span>
+                                  <span><b>협</b>{formatCompactActors(node.actorRoles.consult)}</span>
+                                  <span><b>결</b>{formatCompactActors(node.actorRoles.decision)}</span>
+                                </p>
+
+                                <MegaDetailFlow groups={detailGroups} />
+
+                                <footer className={styles.nodeFlow}>
+                                  <span
+                                    className={styles.nodeLock}
+                                    data-unknown={activation === "unknown" ? "true" : "false"}
+                                    title={blockerDetail || lockLabel}
+                                  >
+                                    <b>잠</b>{lockLabel}
+                                  </span>
+                                  <span className={styles.nodeOutput} title={outputLabels.join(" · ")}>
+                                    <b>산</b>{outputLabels[0]}{outputLabels.length > 1 ? ` +${outputLabels.length - 1}` : ""}
+                                  </span>
+                                  <span className={styles.successors} title={successorTitle}>
+                                    →{successors.length > 0 ? successors.join("·") : "END"}
+                                  </span>
+                                  <span className={styles.references}>
+                                    {node.templateRefs?.map((reference) => (
+                                      <Link
+                                        key={reference.institution}
+                                        href={`/model/${reference.institution}/`}
+                                        title={`Korea100 · ${templates[reference.institution]}`}
+                                      >
+                                        K
+                                      </Link>
+                                    ))}
+                                    {node.evidence.map((sourceId) => {
+                                      const source = sourceMap.get(sourceId);
+                                      if (!source) return null;
+                                      return (
+                                        <a
+                                          key={source.id}
+                                          href={source.url}
+                                          target="_blank"
+                                          rel="noreferrer"
+                                          title={source.title}
+                                          onClick={() =>
+                                            trackEvent("mega_project_source_opened", {
+                                              project_id: project.id,
+                                              node_id: node.id,
+                                              source_id: source.id,
+                                            })
+                                          }
+                                        >
+                                          {sourceCodeMap.get(source.id)}
+                                        </a>
+                                      );
+                                    })}
+                                  </span>
+                                </footer>
+                              </article>
+                            );
+                          })}
+                        </div>
+                      );
+                    })}
                   </section>
                 );
               })}
@@ -745,17 +1238,22 @@ export default function MegaProjectBoard({
 
       <footer className={styles.readingKey}>
         <p>
-          <strong>구조 임계경로</strong>
-          기간 실측이 아니라 공식 산출물의 선후관계를 표시합니다.
+          <strong>4단계 구조</strong>
+          {project.stages.length}개 게이트 → {project.nodes.length}개 마일스톤 → {detailInventory.exact + detailInventory.template}개 하위절차 → 공식 산출물
         </p>
         <div className={styles.legend} aria-label="지도 범례">
-          <span><i data-edge="hard" />필수 선행</span>
-          <span><i data-edge="soft" />병렬·완료조건</span>
+          <span><i data-edge="internal" />기관 내 선행</span>
+          <span><i data-edge="handoff" />기관 간 인계 {handoffCount}건</span>
           <span><i data-edge="conditional" />미확정 분기</span>
+          <span title="정확 매핑 / 템플릿 후보 / 상세분해 필요 마일스톤">
+            <b>D</b>{detailInventory.exact}/{detailInventory.template}/{detailInventory.missingMilestones}
+          </span>
           <span><b>K</b>Korea100</span>
           <span><b>S</b>공식 근거 {project.sources.length}건</span>
         </div>
-        <p className={styles.viewportHint}>작은 화면에서는 관제판을 좌우로 이동해 읽습니다.</p>
+        <p className={styles.viewportHint}>
+          {detailInventory.uniqueTemplates}개 제도 템플릿 · 내부선 {detailInventory.internalEdges}건
+        </p>
       </footer>
     </div>
   );

@@ -76,6 +76,20 @@ export interface MegaProjectStage {
   label: string;
 }
 
+export interface MegaProjectActor {
+  id: string;
+  code: string;
+  label: string;
+  shortLabel: string;
+  mandate: string;
+}
+
+export interface MegaActorRoles {
+  lead: string[];
+  consult: string[];
+  decision: string[];
+}
+
 export interface MegaRuleCondition {
   rule: string;
   equals: MegaRuleValue;
@@ -98,6 +112,32 @@ export interface MegaDependency {
 export interface MegaTemplateReference {
   institution: string;
   nodeIds?: string[];
+  mappingStatus?: "exact" | "candidate";
+}
+
+export interface MegaDetailNode {
+  id: string;
+  name: string;
+  actor: string;
+  stage: string;
+  type: "task" | "gateway" | "notice" | "system";
+  outputDocuments: string[];
+  legalBasisCount: number;
+  confidence?: number;
+}
+
+export interface MegaDetailEdge {
+  id: string;
+  source: string;
+  target: string;
+  type: "sequence" | "message" | "loop";
+}
+
+export interface MegaDetailTemplate {
+  id: string;
+  name: string;
+  nodes: MegaDetailNode[];
+  edges: MegaDetailEdge[];
 }
 
 export interface MegaProjectNode {
@@ -105,6 +145,8 @@ export interface MegaProjectNode {
   name: string;
   stage: string;
   authority: string;
+  leadActor: string;
+  actorRoles: MegaActorRoles;
   classification: MegaNodeClassification;
   status: MegaNodeStatus;
   confidence: MegaNodeConfidence;
@@ -131,6 +173,7 @@ export interface MegaProject {
   rules: MegaProjectRule[];
   sources: MegaProjectSource[];
   stages: MegaProjectStage[];
+  actors: MegaProjectActor[];
   nodes: MegaProjectNode[];
 }
 
@@ -138,6 +181,7 @@ export interface MegaProjectBundle {
   project: MegaProject;
   artifacts: MegaArtifact[];
   templates: Record<string, string>;
+  detailTemplates: Record<string, MegaDetailTemplate>;
 }
 
 export type MegaRuleValues = Record<string, MegaRuleValue>;

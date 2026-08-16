@@ -14,10 +14,25 @@ The overlay does not mutate or duplicate the institution source files in `data/i
 
 Each project node declares:
 
+- `leadActor`: the single responsibility lane where the node is rendered. A node is never duplicated across lanes.
+- `actorRoles`: explicit `lead`, `consult`, and `decision` institutions for the handoff. The legacy `authority` string remains descriptive evidence, not a lane-classification shortcut.
 - `requires`: artifact dependencies. Each dependency is typed by relation, strength, and basis.
 - `produces`: canonical artifact IDs emitted when the node completes.
 - `activation`: whether the node is always present or selected by a scenario rule.
 - `templateRefs`: optional references to reusable Korea100 institution process nodes.
+
+### Detail expansion states
+
+Project nodes are milestone containers rather than leaf procedures. The Gwangju audit currently separates 49 intermediate milestones, while the count may change when a new independent statutory output or cross-agency handoff is verified. On 4K displays the board expands each container with its referenced Korea100 subprocesses and marks the confidence of that expansion:
+
+- `MAP`: `templateRefs.nodeIds` explicitly selects the subprocess nodes applied to the project milestone. `mappingStatus` is omitted or set to `exact`.
+- `TPL`: the institution template is connected as an applicability candidate until project-specific law and facts are checked. Omitting `nodeIds` shows the full template; `mappingStatus: "candidate"` may be combined with `nodeIds` to show only the relevant candidate subset without claiming that it applies.
+- `MIX`: a milestone combines explicitly selected nodes and whole-template candidates.
+- `GAP`: the milestone still needs a reusable template or a project-specific subprocess decomposition.
+
+Candidate nodes must not be reported as confirmed project requirements. Counts in the UI are occurrence counts inside milestone containers; the same reusable template may appear under more than one milestone. Internal template edges are visually faint, while cross-milestone artifact handoffs remain prominent.
+
+The 2026-08-16 Gwangju expansion links 54 unique Korea100 templates across the 49 milestones. Seven project-specific reusable models were added for semiconductor-cluster designation, semiconductor infrastructure support and fast-track review, defense-facility planning and completion, military protection-zone release, national-property contribution/concession, industrial waterworks, and public wastewater treatment. Finance, urban planning, land conversion, transmission, environmental media, chemical safety, noise, and emissions-trading templates are reused as selected `TPL` candidates where public project facts are not yet sufficient to confirm applicability.
 
 Dependency relations:
 
@@ -32,6 +47,8 @@ Strengths:
 - `soft`: coordination or best-practice dependency shown as a warning, not a legal lock.
 
 Kinds distinguish `legal`, `protection`, `technical`, `policy`, and `financial` dependencies. A legal or technical prerequisite must never be inferred solely from sequence in a Korea100 diagram; it needs a source or an explicit `modeled` note.
+
+Project-level `actors` define the ordered responsibility lanes. The UI keeps stages on the horizontal axis, actors on the vertical axis, and visually strengthens edges whose producer and consumer have different `leadActor` values.
 
 ## Conditional paths
 
