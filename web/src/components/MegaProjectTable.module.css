@@ -1,0 +1,221 @@
+.page {
+  padding: 24px 20px 64px;
+  color: var(--color-text);
+}
+
+.header {
+  max-width: 1200px;
+  margin: 0 auto 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #d7ded9;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 8px;
+  color: #4b9c80;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 760;
+  letter-spacing: 0.1em;
+}
+
+.kickerLinks {
+  display: flex;
+  gap: 12px;
+  letter-spacing: normal;
+}
+
+.kickerLinks a {
+  color: #45635a;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.kickerLinks a:hover {
+  text-decoration: underline;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: clamp(20px, 2.6vw, 27px);
+  font-weight: 760;
+  letter-spacing: -0.02em;
+}
+
+.summary {
+  max-width: 760px;
+  margin: 6px 0 0;
+  color: #55655d;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.meta {
+  margin: 10px 0 0;
+  color: #7a887f;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.tableWrap {
+  max-width: 100%;
+  overflow: auto;
+  border: 1px solid #c7d0cb;
+}
+
+.table {
+  border-collapse: collapse;
+  width: max-content;
+  min-width: 100%;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.table th,
+.table td {
+  padding: 3px 6px;
+  border: 1px solid #dde3df;
+  text-align: left;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #12241c;
+  color: #d8e6de;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.groupHeadMilestone {
+  background: #12241c;
+}
+
+.groupHeadInstitution {
+  background: #1a2f26;
+}
+
+.groupHeadStep {
+  background: #22392f;
+}
+
+.table tbody tr:hover td {
+  background: #f2f7f4;
+}
+
+.milestoneCell {
+  background: #f7f9f8;
+  font-weight: 600;
+  white-space: normal;
+}
+
+.institutionCell {
+  background: #fbfcfb;
+  white-space: normal;
+}
+
+.stepCell {
+  white-space: normal;
+  color: #3d4b44;
+}
+
+.table tr[data-status="completed"] .milestoneCell {
+  background: #e6f6ee;
+}
+
+.table tr[data-status="active"] .milestoneCell {
+  background: #e6f3f6;
+}
+
+.table tr[data-status="ready"] .milestoneCell {
+  background: #e2f7ec;
+}
+
+.table tr[data-status="conditional"] .milestoneCell {
+  background: #fbf1da;
+}
+
+.table tr[data-status="inactive"] .milestoneCell {
+  background: #f0f1ef;
+  color: #8b968f;
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 1px 5px;
+  border: 1px solid #c7d0cb;
+  border-radius: 2px;
+  background: #edf1ef;
+  color: #65756c;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.statusBadge[data-status="completed"],
+.statusBadge[data-status="ready"] {
+  border-color: #7dc3a7;
+  background: #dff5eb;
+  color: #087452;
+}
+
+.statusBadge[data-status="active"] {
+  border-color: #9ecbd6;
+  background: #dff3f7;
+  color: #0a7189;
+}
+
+.statusBadge[data-status="conditional"] {
+  border-color: #d0b374;
+  background: #f7e9c8;
+  color: #8b5d0f;
+}
+
+.mappingBadge {
+  display: inline-block;
+  padding: 1px 5px;
+  border: 1px solid #c7d0cb;
+  border-radius: 2px;
+  background: #edf1ef;
+  color: #65756c;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.mappingBadge[data-mapping="MAP"] {
+  border-color: #65a98e;
+  background: #e7f5ef;
+  color: #087452;
+}
+
+.mappingBadge[data-mapping="MIX"] {
+  border-color: #79a99a;
+  background: #edf5f1;
+  color: #2b6752;
+}
+
+.mappingBadge[data-mapping="GAP"] {
+  border-color: #c5a060;
+  background: #fff3dc;
+  color: #95630e;
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 16px 10px 48px;
+  }
+
+  .table {
+    font-size: 10px;
+  }
+}

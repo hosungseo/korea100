@@ -47,7 +47,7 @@ interface DetailEdgeGeometry {
   id: string;
   path: string;
   mapping: DetailMapping;
-  type: MegaDetailEdge["type"];
+  type: MegaDetailEdge["type"] | "chain";
 }
 
 interface DependencyState {
@@ -216,7 +216,15 @@ function formatCompactActors(actors: string[]) {
   return `${actors[0]}${actors.length > 1 ? ` +${actors.length - 1}` : ""}`;
 }
 
-function MegaDetailFlow({ groups }: { groups: DetailGroup[] }) {
+function MegaDetailFlow({
+  groups,
+  registerEntryNode,
+  registerExitNode,
+}: {
+  groups: DetailGroup[];
+  registerEntryNode?: (element: HTMLElement | null) => void;
+  registerExitNode?: (element: HTMLElement | null) => void;
+}) {
   const flowRef = useRef<HTMLDivElement | null>(null);
   const detailNodeRefs = useRef(new Map<string, HTMLElement>());
   const [geometry, setGeometry] = useState<DetailEdgeGeometry[]>([]);
@@ -226,42 +234,69 @@ function MegaDetailFlow({ groups }: { groups: DetailGroup[] }) {
     const flow = flowRef.current;
     if (!flow || flow.offsetParent === null) return;
     const flowRect = flow.getBoundingClientRect();
-    const paths = groups.flatMap((group) =>
+    const buildPath = (sourceId: string, targetId: string) => {
+      const source = detailNodeRefs.current.get(sourceId);
+      const target = detailNodeRefs.current.get(targetId);
+      if (!source || !target) return null;
+      const sourceRect = source.getBoundingClientRect();
+      const targetRect = target.getBoundingClientRect();
+      const sourceX = sourceRect.right - flowRect.left;
+      const sourceY = sourceRect.top - flowRect.top + sourceRect.height / 2;
+      const targetX = targetRect.left - flowRect.left;
+      const targetY = targetRect.top - flowRect.top + targetRect.height / 2;
+      const sameRow = Math.abs(sourceY - targetY) < sourceRect.height * 0.65;
+      if (sameRow && targetX > sourceX) {
+        const bend = Math.max(2, (targetX - sourceX) * 0.46);
+        return `M ${sourceX} ${sourceY} C ${sourceX + bend} ${sourceY}, ${targetX - bend} ${targetY}, ${targetX} ${targetY}`;
+      }
+      const sourceBottom = sourceRect.bottom - flowRect.top;
+      const targetTop = targetRect.top - flowRect.top;
+      const sourceCenter = sourceRect.left - flowRect.left + sourceRect.width / 2;
+      const targetCenter = targetRect.left - flowRect.left + targetRect.width / 2;
+      const bend = Math.max(3, Math.abs(targetTop - sourceBottom) * 0.5);
+      return `M ${sourceCenter} ${sourceBottom} C ${sourceCenter} ${sourceBottom + bend}, ${targetCenter} ${targetTop - bend}, ${targetCenter} ${targetTop}`;
+    };
+
+    const withinGroup = groups.flatMap((group) =>
       group.edges.flatMap((edge) => {
-        const source = detailNodeRefs.current.get(`${group.id}:${edge.source}`);
-        const target = detailNodeRefs.current.get(`${group.id}:${edge.target}`);
-        if (!source || !target) return [];
-        const sourceRect = source.getBoundingClientRect();
-        const targetRect = target.getBoundingClientRect();
-        const sourceX = sourceRect.right - flowRect.left;
-        const sourceY = sourceRect.top - flowRect.top + sourceRect.height / 2;
-        const targetX = targetRect.left - flowRect.left;
-        const targetY = targetRect.top - flowRect.top + targetRect.height / 2;
-        const sameRow = Math.abs(sourceY - targetY) < sourceRect.height * 0.65;
-        let path: string;
-        if (sameRow && targetX > sourceX) {
-          const bend = Math.max(2, (targetX - sourceX) * 0.46);
-          path = `M ${sourceX} ${sourceY} C ${sourceX + bend} ${sourceY}, ${targetX - bend} ${targetY}, ${targetX} ${targetY}`;
-        } else {
-          const sourceBottom = sourceRect.bottom - flowRect.top;
-          const targetTop = targetRect.top - flowRect.top;
-          const sourceCenter = sourceRect.left - flowRect.left + sourceRect.width / 2;
-          const targetCenter = targetRect.left - flowRect.left + targetRect.width / 2;
-          const bend = Math.max(3, Math.abs(targetTop - sourceBottom) * 0.5);
-          path = `M ${sourceCenter} ${sourceBottom} C ${sourceCenter} ${sourceBottom + bend}, ${targetCenter} ${targetTop - bend}, ${targetCenter} ${targetTop}`;
-        }
+        const path = buildPath(
+          `${group.id}:${edge.source}`,
+          `${group.id}:${edge.target}`,
+        );
+        if (!path) return [];
         return [
           {
             id: `${group.id}:${edge.id}`,
             path,
             mapping: group.mapping,
-            type: edge.type,
+            type: edge.type as DetailEdgeGeometry["type"],
           },
         ];
       }),
     );
+
+    const chained = groups.flatMap((group, index) => {
+      const nextGroup = groups[index + 1];
+      const lastNode = group.nodes[group.nodes.length - 1];
+      const firstNode = nextGroup?.nodes[0];
+      if (!nextGroup || !lastNode || !firstNode) return [];
+      const path = buildPath(
+        `${group.id}:${lastNode.id}`,
+        `${nextGroup.id}:${firstNode.id}`,
+      );
+      if (!path) return [];
+      return [
+        {
+          id: `chain:${group.id}->${nextGroup.id}`,
+          path,
+          mapping: nextGroup.mapping,
+          type: "chain" as const,
+        },
+      ];
+    });
+
     setSize({ width: flow.clientWidth, height: flow.clientHeight });
-    setGeometry(paths);
+    setGeometry([...withinGroup, ...chained]);
   }, [groups]);
 
   useLayoutEffect(() => {
@@ -285,15 +320,21 @@ function MegaDetailFlow({ groups }: { groups: DetailGroup[] }) {
     },
     [],
   );
-  const groupRows = groups
-    .map((group) => `${Math.max(8, group.nodes.length)}fr`)
-    .join(" ");
+
+  const nonEmptyGroups = groups.filter((group) => group.nodes.length > 0);
+  const firstGroup = nonEmptyGroups[0];
+  const lastGroup = nonEmptyGroups[nonEmptyGroups.length - 1];
+  const entryKey = firstGroup
+    ? `${firstGroup.id}:${firstGroup.nodes[0].id}`
+    : undefined;
+  const exitKey = lastGroup
+    ? `${lastGroup.id}:${lastGroup.nodes[lastGroup.nodes.length - 1].id}`
+    : undefined;
 
   return (
     <div
       className={styles.detailFlow}
       ref={flowRef}
-      style={{ "--detail-group-rows": groupRows } as CSSProperties}
       aria-label="Korea100 하위 행정절차"
     >
       <svg
@@ -314,34 +355,43 @@ function MegaDetailFlow({ groups }: { groups: DetailGroup[] }) {
         ))}
       </svg>
       {groups.map((group) => (
-        <section
+        <div
           className={styles.detailGroup}
           key={group.id}
           data-mapping={group.mapping}
         >
-          <header className={styles.detailGroupHeader}>
-            <span>
+          <span
+            className={styles.detailGroupLabel}
+            title={`${group.templateName} · ${group.nodes.length}개 절차 / 내부선 ${group.edges.length}건`}
+          >
+            <b>
               {group.mapping === "exact"
                 ? "MAP"
                 : group.mapping === "template"
                   ? "TPL"
                   : "GAP"}
-            </span>
+            </b>
             {group.templateId ? (
-              <Link href={`/model/${group.templateId}/`} title={group.templateName}>
+              <Link href={`/model/${group.templateId}/`}>
                 {group.templateName}
               </Link>
             ) : (
               <strong>{group.templateName}</strong>
             )}
-            <small>{group.nodes.length}N/{group.edges.length}E</small>
-          </header>
-          <div className={styles.detailNodes}>
-            {group.nodes.map((node) => (
+            <small>{group.nodes.length}</small>
+          </span>
+          <span className={styles.detailNodes}>
+            {group.nodes.map((node) => {
+              const nodeKey = `${group.id}:${node.id}`;
+              return (
               <span
                 className={styles.detailNode}
-                key={`${group.id}:${node.id}`}
-                ref={setDetailNodeRef(`${group.id}:${node.id}`)}
+                key={nodeKey}
+                ref={(element) => {
+                  setDetailNodeRef(nodeKey)(element);
+                  if (nodeKey === entryKey) registerEntryNode?.(element);
+                  if (nodeKey === exitKey) registerExitNode?.(element);
+                }}
                 data-mapping={group.mapping}
                 data-type={node.type}
                 title={[
@@ -357,9 +407,10 @@ function MegaDetailFlow({ groups }: { groups: DetailGroup[] }) {
                 <b>{node.id}</b>
                 <i>{node.name}</i>
               </span>
-            ))}
-          </div>
-        </section>
+              );
+            })}
+          </span>
+        </div>
       ))}
     </div>
   );
@@ -375,6 +426,8 @@ export default function MegaProjectBoard({
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
   const canvasRef = useRef<HTMLDivElement | null>(null);
   const nodeRefs = useRef(new Map<string, HTMLElement>());
+  const nodeEntryRefs = useRef(new Map<string, HTMLElement>());
+  const nodeExitRefs = useRef(new Map<string, HTMLElement>());
 
   const ruleValues = useMemo(() => getInitialRuleValues(project), [project]);
   const artifactMap = useMemo(
@@ -717,8 +770,10 @@ export default function MegaProjectBoard({
     const width = canvas.scrollWidth;
     const height = canvas.scrollHeight;
     const paths = edges.flatMap((edge) => {
-      const source = nodeRefs.current.get(edge.source);
-      const target = nodeRefs.current.get(edge.target);
+      const source =
+        nodeExitRefs.current.get(edge.source) ?? nodeRefs.current.get(edge.source);
+      const target =
+        nodeEntryRefs.current.get(edge.target) ?? nodeRefs.current.get(edge.target);
       if (!source || !target) return [];
       const sourceRect = source.getBoundingClientRect();
       const targetRect = target.getBoundingClientRect();
@@ -764,6 +819,8 @@ export default function MegaProjectBoard({
     const observer = new ResizeObserver(updateEdgeGeometry);
     observer.observe(canvas);
     nodeRefs.current.forEach((node) => observer.observe(node));
+    nodeEntryRefs.current.forEach((node) => observer.observe(node));
+    nodeExitRefs.current.forEach((node) => observer.observe(node));
     window.addEventListener("resize", updateEdgeGeometry);
     return () => {
       observer.disconnect();
@@ -802,25 +859,28 @@ export default function MegaProjectBoard({
     [],
   );
 
+  const setNodeEntryRef = useCallback(
+    (id: string) => (element: HTMLElement | null) => {
+      if (element) nodeEntryRefs.current.set(id, element);
+      else nodeEntryRefs.current.delete(id);
+    },
+    [],
+  );
+
+  const setNodeExitRef = useCallback(
+    (id: string) => (element: HTMLElement | null) => {
+      if (element) nodeExitRefs.current.set(id, element);
+      else nodeExitRefs.current.delete(id);
+    },
+    [],
+  );
+
   const graphStyle = {
     "--stage-count": project.stages.length,
     "--actor-count": project.actors.length,
-    "--actor-row-weights": project.actors
-      .map((actor) => {
-        const actorNodes = project.nodes.filter(
-          (node) => node.leadActor === actor.id,
-        );
-        const detailWeight = actorNodes.reduce(
-          (total, node) => total + (detailWeightByNode.get(node.id) ?? 12),
-          0,
-        );
-        return `${Math.max(54, 36 + detailWeight)}fr`;
-      })
-      .join(" "),
   } as CSSProperties & {
     "--stage-count": number;
     "--actor-count": number;
-    "--actor-row-weights": string;
   };
 
   return (
@@ -832,6 +892,17 @@ export default function MegaProjectBoard({
           </p>
           <h1>{project.name} 행정절차 전경</h1>
           <p className={styles.summary}>{project.summary}</p>
+          <span className={styles.unfoldLinkRow}>
+            <Link className={styles.unfoldLink} href={`/mega-projects/${project.id}/unfold/`}>
+              절차 전체 펼쳐보기 →
+            </Link>
+            <Link className={styles.unfoldLink} href={`/mega-projects/${project.id}/table/`}>
+              전체표 보기 →
+            </Link>
+            <Link className={styles.unfoldLink} href={`/mega-projects/${project.id}/flow/`}>
+              절차 흐름도 →
+            </Link>
+          </span>
         </div>
 
         <dl className={styles.scopeMatrix}>
@@ -1015,6 +1086,30 @@ export default function MegaProjectBoard({
 
             <div className={styles.laneGrid}>
               {project.actors.map((actor, actorIndex) => {
+                const stageCellLists = project.stages.map(
+                  (stage) =>
+                    nodesByActorAndStage.get(`${actor.id}:${stage.id}`) ?? [],
+                );
+                const laneRows = Math.max(
+                  1,
+                  ...stageCellLists.map((list) => list.length),
+                );
+                const laneRowHeights = Array.from(
+                  { length: laneRows },
+                  (_, rowIndex) => {
+                    const weight = Math.max(
+                      0,
+                      ...stageCellLists.map((list) => {
+                        const node = list[rowIndex];
+                        return node ? (detailWeightByNode.get(node.id) ?? 12) : 0;
+                      }),
+                    );
+                    return weight > 0 ? Math.max(58, 30 + weight * 2.4) : 40;
+                  },
+                )
+                  .map((height) => `minmax(${height}px, auto)`)
+                  .join(" ");
+
                 return (
                   <section
                     className={styles.actorLane}
@@ -1023,6 +1118,7 @@ export default function MegaProjectBoard({
                     style={
                       {
                         "--actor-index": actorIndex,
+                        "--lane-row-heights": laneRowHeights,
                       } as CSSProperties & { "--actor-index": number }
                     }
                   >
@@ -1035,31 +1131,35 @@ export default function MegaProjectBoard({
                       <strong>{String(actorNodeCounts.get(actor.id) ?? 0).padStart(2, "0")}</strong>
                     </header>
 
-                    {project.stages.map((stage, stageIndex) => {
-                      const cellNodes =
-                        nodesByActorAndStage.get(`${actor.id}:${stage.id}`) ?? [];
-                      const detailRows = cellNodes
-                        .map(
-                          (node) =>
-                            `${detailWeightByNode.get(node.id) ?? 12}fr`,
-                        )
-                        .join(" ");
-                      const nodeRows = `repeat(${Math.max(1, cellNodes.length)}, minmax(0, 1fr))`;
-                      return (
-                        <div
-                          className={styles.stageCell}
-                          key={`${actor.id}:${stage.id}`}
-                          data-count={cellNodes.length}
-                          data-crowded={cellNodes.length >= 4 ? "true" : "false"}
-                          data-stage-index={stageIndex}
-                          style={
-                            {
-                              "--detail-rows": detailRows,
-                              "--node-rows": nodeRows,
-                            } as CSSProperties
-                          }
-                        >
-                          {cellNodes.map((node) => {
+                    {project.stages.flatMap((stage, stageIndex) => {
+                      const cellNodes = stageCellLists[stageIndex];
+                      return Array.from({ length: laneRows }, (_, rowIndex) => {
+                        const rowNodes = cellNodes[rowIndex]
+                          ? [cellNodes[rowIndex]]
+                          : [];
+                        const detailRows = rowNodes
+                          .map(
+                            (node) =>
+                              `${detailWeightByNode.get(node.id) ?? 12}fr`,
+                          )
+                          .join(" ");
+                        const nodeRows = `repeat(${Math.max(1, rowNodes.length)}, minmax(0, 1fr))`;
+                        return (
+                          <div
+                            className={styles.stageCell}
+                            key={`${actor.id}:${stage.id}:${rowIndex}`}
+                            data-count={rowNodes.length}
+                            data-stage-index={stageIndex}
+                            style={
+                              {
+                                gridColumn: stageIndex + 2,
+                                gridRow: rowIndex + 1,
+                                "--detail-rows": detailRows || "minmax(0, 1fr)",
+                                "--node-rows": nodeRows,
+                              } as CSSProperties
+                            }
+                          >
+                            {rowNodes.map((node) => {
                             const status =
                               displayStatusByNode.get(node.id) ?? "blocked";
                             const blockers = getStartBlockers(node);
@@ -1172,7 +1272,11 @@ export default function MegaProjectBoard({
                                   <span><b>결</b>{formatCompactActors(node.actorRoles.decision)}</span>
                                 </p>
 
-                                <MegaDetailFlow groups={detailGroups} />
+                                <MegaDetailFlow
+                                  groups={detailGroups}
+                                  registerEntryNode={setNodeEntryRef(node.id)}
+                                  registerExitNode={setNodeExitRef(node.id)}
+                                />
 
                                 <footer className={styles.nodeFlow}>
                                   <span
@@ -1227,6 +1331,7 @@ export default function MegaProjectBoard({
                           })}
                         </div>
                       );
+                      });
                     })}
                   </section>
                 );
