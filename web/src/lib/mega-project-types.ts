@@ -112,6 +112,7 @@ export interface MegaDependency {
 export interface MegaTemplateReference {
   institution: string;
   nodeIds?: string[];
+  mappingStatus?: "exact" | "candidate";
 }
 
 export interface MegaDetailNode {

@@ -478,7 +478,12 @@ export default function MegaProjectBoard({
           id: `${projectNode.id}:${reference.institution}:${index}`,
           templateId: reference.institution,
           templateName: template.name,
-          mapping: selectedIds ? "exact" : "template",
+          mapping:
+            reference.mappingStatus === "candidate"
+              ? "template"
+              : selectedIds
+                ? "exact"
+                : "template",
           nodes: selectedNodes,
           edges: selectedEdges,
         };

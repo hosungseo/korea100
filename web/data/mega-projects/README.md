@@ -25,12 +25,14 @@ Each project node declares:
 
 Project nodes are milestone containers rather than leaf procedures. The Gwangju audit currently separates 49 intermediate milestones, while the count may change when a new independent statutory output or cross-agency handoff is verified. On 4K displays the board expands each container with its referenced Korea100 subprocesses and marks the confidence of that expansion:
 
-- `MAP`: `templateRefs.nodeIds` explicitly selects the subprocess nodes applied to the project milestone.
-- `TPL`: the institution template is connected, but its complete node set is only an applicability candidate until project-specific law and facts are checked.
+- `MAP`: `templateRefs.nodeIds` explicitly selects the subprocess nodes applied to the project milestone. `mappingStatus` is omitted or set to `exact`.
+- `TPL`: the institution template is connected as an applicability candidate until project-specific law and facts are checked. Omitting `nodeIds` shows the full template; `mappingStatus: "candidate"` may be combined with `nodeIds` to show only the relevant candidate subset without claiming that it applies.
 - `MIX`: a milestone combines explicitly selected nodes and whole-template candidates.
 - `GAP`: the milestone still needs a reusable template or a project-specific subprocess decomposition.
 
 Candidate nodes must not be reported as confirmed project requirements. Counts in the UI are occurrence counts inside milestone containers; the same reusable template may appear under more than one milestone. Internal template edges are visually faint, while cross-milestone artifact handoffs remain prominent.
+
+The 2026-08-16 Gwangju expansion links 54 unique Korea100 templates across the 49 milestones. Seven project-specific reusable models were added for semiconductor-cluster designation, semiconductor infrastructure support and fast-track review, defense-facility planning and completion, military protection-zone release, national-property contribution/concession, industrial waterworks, and public wastewater treatment. Finance, urban planning, land conversion, transmission, environmental media, chemical safety, noise, and emissions-trading templates are reused as selected `TPL` candidates where public project facts are not yet sufficient to confirm applicability.
 
 Dependency relations:
 

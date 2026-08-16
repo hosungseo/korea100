@@ -291,6 +291,12 @@ for (const file of projectFiles) {
       for (const processNodeId of ref.nodeIds ?? []) {
         if (!ids.has(processNodeId)) fail(refScope, `process node ${processNodeId}가 없습니다`);
       }
+      if (ref.mappingStatus && !["exact", "candidate"].includes(ref.mappingStatus)) {
+        fail(refScope, `지원하지 않는 mappingStatus ${ref.mappingStatus}`);
+      }
+      if (ref.mappingStatus === "exact" && !Array.isArray(ref.nodeIds)) {
+        fail(refScope, "exact mappingStatus에는 nodeIds가 필요합니다");
+      }
     }
 
     if (!Array.isArray(node.requires)) fail(nodeScope, "requires가 배열이 아닙니다");
