@@ -114,6 +114,31 @@ export interface MegaTemplateReference {
   nodeIds?: string[];
 }
 
+export interface MegaDetailNode {
+  id: string;
+  name: string;
+  actor: string;
+  stage: string;
+  type: "task" | "gateway" | "notice" | "system";
+  outputDocuments: string[];
+  legalBasisCount: number;
+  confidence?: number;
+}
+
+export interface MegaDetailEdge {
+  id: string;
+  source: string;
+  target: string;
+  type: "sequence" | "message" | "loop";
+}
+
+export interface MegaDetailTemplate {
+  id: string;
+  name: string;
+  nodes: MegaDetailNode[];
+  edges: MegaDetailEdge[];
+}
+
 export interface MegaProjectNode {
   id: string;
   name: string;
@@ -155,6 +180,7 @@ export interface MegaProjectBundle {
   project: MegaProject;
   artifacts: MegaArtifact[];
   templates: Record<string, string>;
+  detailTemplates: Record<string, MegaDetailTemplate>;
 }
 
 export type MegaRuleValues = Record<string, MegaRuleValue>;

@@ -59,6 +59,7 @@ export default async function MegaProjectPage({
       project={bundle.project}
       artifacts={bundle.artifacts}
       templates={bundle.templates}
+      detailTemplates={bundle.detailTemplates}
     />
   );
 }

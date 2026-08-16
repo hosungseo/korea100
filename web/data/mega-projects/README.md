@@ -21,6 +21,17 @@ Each project node declares:
 - `activation`: whether the node is always present or selected by a scenario rule.
 - `templateRefs`: optional references to reusable Korea100 institution process nodes.
 
+### Detail expansion states
+
+The 30 project nodes are milestone containers rather than leaf procedures. On 4K displays the board expands each container with its referenced Korea100 subprocesses and marks the confidence of that expansion:
+
+- `MAP`: `templateRefs.nodeIds` explicitly selects the subprocess nodes applied to the project milestone.
+- `TPL`: the institution template is connected, but its complete node set is only an applicability candidate until project-specific law and facts are checked.
+- `MIX`: a milestone combines explicitly selected nodes and whole-template candidates.
+- `GAP`: the milestone still needs a reusable template or a project-specific subprocess decomposition.
+
+Candidate nodes must not be reported as confirmed project requirements. Counts in the UI are occurrence counts inside milestone containers; the same reusable template may appear under more than one milestone. Internal template edges are visually faint, while cross-milestone artifact handoffs remain prominent.
+
 Dependency relations:
 
 - `finish_to_start`: the producer must complete before the consumer may start.

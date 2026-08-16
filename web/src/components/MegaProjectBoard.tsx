@@ -14,6 +14,9 @@ import type {
   MegaActivationState,
   MegaArtifact,
   MegaDependency,
+  MegaDetailEdge,
+  MegaDetailNode,
+  MegaDetailTemplate,
   MegaDisplayStatus,
   MegaProject,
   MegaProjectNode,
@@ -26,6 +29,25 @@ interface MegaProjectBoardProps {
   project: MegaProject;
   artifacts: MegaArtifact[];
   templates: Record<string, string>;
+  detailTemplates: Record<string, MegaDetailTemplate>;
+}
+
+type DetailMapping = "exact" | "template" | "missing";
+
+interface DetailGroup {
+  id: string;
+  templateId?: string;
+  templateName: string;
+  mapping: DetailMapping;
+  nodes: MegaDetailNode[];
+  edges: MegaDetailEdge[];
+}
+
+interface DetailEdgeGeometry {
+  id: string;
+  path: string;
+  mapping: DetailMapping;
+  type: MegaDetailEdge["type"];
 }
 
 interface DependencyState {
@@ -180,10 +202,160 @@ function formatCompactActors(actors: string[]) {
   return `${actors[0]}${actors.length > 1 ? ` +${actors.length - 1}` : ""}`;
 }
 
+function MegaDetailFlow({ groups }: { groups: DetailGroup[] }) {
+  const flowRef = useRef<HTMLDivElement | null>(null);
+  const detailNodeRefs = useRef(new Map<string, HTMLElement>());
+  const [geometry, setGeometry] = useState<DetailEdgeGeometry[]>([]);
+  const [size, setSize] = useState({ width: 0, height: 0 });
+
+  const updateGeometry = useCallback(() => {
+    const flow = flowRef.current;
+    if (!flow || flow.offsetParent === null) return;
+    const flowRect = flow.getBoundingClientRect();
+    const paths = groups.flatMap((group) =>
+      group.edges.flatMap((edge) => {
+        const source = detailNodeRefs.current.get(`${group.id}:${edge.source}`);
+        const target = detailNodeRefs.current.get(`${group.id}:${edge.target}`);
+        if (!source || !target) return [];
+        const sourceRect = source.getBoundingClientRect();
+        const targetRect = target.getBoundingClientRect();
+        const sourceX = sourceRect.right - flowRect.left;
+        const sourceY = sourceRect.top - flowRect.top + sourceRect.height / 2;
+        const targetX = targetRect.left - flowRect.left;
+        const targetY = targetRect.top - flowRect.top + targetRect.height / 2;
+        const sameRow = Math.abs(sourceY - targetY) < sourceRect.height * 0.65;
+        let path: string;
+        if (sameRow && targetX > sourceX) {
+          const bend = Math.max(2, (targetX - sourceX) * 0.46);
+          path = `M ${sourceX} ${sourceY} C ${sourceX + bend} ${sourceY}, ${targetX - bend} ${targetY}, ${targetX} ${targetY}`;
+        } else {
+          const sourceBottom = sourceRect.bottom - flowRect.top;
+          const targetTop = targetRect.top - flowRect.top;
+          const sourceCenter = sourceRect.left - flowRect.left + sourceRect.width / 2;
+          const targetCenter = targetRect.left - flowRect.left + targetRect.width / 2;
+          const bend = Math.max(3, Math.abs(targetTop - sourceBottom) * 0.5);
+          path = `M ${sourceCenter} ${sourceBottom} C ${sourceCenter} ${sourceBottom + bend}, ${targetCenter} ${targetTop - bend}, ${targetCenter} ${targetTop}`;
+        }
+        return [
+          {
+            id: `${group.id}:${edge.id}`,
+            path,
+            mapping: group.mapping,
+            type: edge.type,
+          },
+        ];
+      }),
+    );
+    setSize({ width: flow.clientWidth, height: flow.clientHeight });
+    setGeometry(paths);
+  }, [groups]);
+
+  useLayoutEffect(() => {
+    updateGeometry();
+    const flow = flowRef.current;
+    if (!flow) return;
+    const observer = new ResizeObserver(updateGeometry);
+    observer.observe(flow);
+    detailNodeRefs.current.forEach((node) => observer.observe(node));
+    window.addEventListener("resize", updateGeometry);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updateGeometry);
+    };
+  }, [updateGeometry]);
+
+  const setDetailNodeRef = useCallback(
+    (id: string) => (element: HTMLElement | null) => {
+      if (element) detailNodeRefs.current.set(id, element);
+      else detailNodeRefs.current.delete(id);
+    },
+    [],
+  );
+  const groupRows = groups
+    .map((group) => `${Math.max(8, group.nodes.length)}fr`)
+    .join(" ");
+
+  return (
+    <div
+      className={styles.detailFlow}
+      ref={flowRef}
+      style={{ "--detail-group-rows": groupRows } as CSSProperties}
+      aria-label="Korea100 하위 행정절차"
+    >
+      <svg
+        className={styles.detailEdgeLayer}
+        width={size.width}
+        height={size.height}
+        viewBox={`0 0 ${size.width} ${size.height}`}
+        aria-hidden="true"
+      >
+        {geometry.map((edge) => (
+          <path
+            key={edge.id}
+            className={styles.detailEdge}
+            d={edge.path}
+            data-mapping={edge.mapping}
+            data-type={edge.type}
+          />
+        ))}
+      </svg>
+      {groups.map((group) => (
+        <section
+          className={styles.detailGroup}
+          key={group.id}
+          data-mapping={group.mapping}
+        >
+          <header className={styles.detailGroupHeader}>
+            <span>
+              {group.mapping === "exact"
+                ? "MAP"
+                : group.mapping === "template"
+                  ? "TPL"
+                  : "GAP"}
+            </span>
+            {group.templateId ? (
+              <Link href={`/model/${group.templateId}/`} title={group.templateName}>
+                {group.templateName}
+              </Link>
+            ) : (
+              <strong>{group.templateName}</strong>
+            )}
+            <small>{group.nodes.length}N/{group.edges.length}E</small>
+          </header>
+          <div className={styles.detailNodes}>
+            {group.nodes.map((node) => (
+              <span
+                className={styles.detailNode}
+                key={`${group.id}:${node.id}`}
+                ref={setDetailNodeRef(`${group.id}:${node.id}`)}
+                data-mapping={group.mapping}
+                data-type={node.type}
+                title={[
+                  `${node.id} ${node.name}`,
+                  `담당 ${node.actor}`,
+                  `단계 ${node.stage}`,
+                  node.outputDocuments.length > 0
+                    ? `산출물 ${node.outputDocuments.join(" · ")}`
+                    : "산출물 미기재",
+                  `법적 근거 ${node.legalBasisCount}건`,
+                ].join(" / ")}
+              >
+                <b>{node.id}</b>
+                <i>{node.name}</i>
+              </span>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  );
+}
+
 export default function MegaProjectBoard({
   project,
   artifacts,
   templates,
+  detailTemplates,
 }: MegaProjectBoardProps) {
   const [edgeGeometry, setEdgeGeometry] = useState<EdgeGeometry[]>([]);
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
@@ -227,6 +399,132 @@ export default function MegaProjectBoard({
     });
     return result;
   }, [project.nodes]);
+  const detailGroupsByNode = useMemo(() => {
+    const result = new Map<string, DetailGroup[]>();
+    project.nodes.forEach((projectNode) => {
+      const references = projectNode.templateRefs ?? [];
+      if (references.length === 0) {
+        result.set(projectNode.id, [
+          {
+            id: `${projectNode.id}:gap`,
+            templateName: "상세 하위절차 매핑 필요",
+            mapping: "missing",
+            nodes: [
+              {
+                id: "TBD",
+                name: "신청·검토·협의·의결·고시 단계 분해 필요",
+                actor: projectNode.authority,
+                stage: projectNode.stage,
+                type: "gateway",
+                outputDocuments: [],
+                legalBasisCount: 0,
+              },
+            ],
+            edges: [],
+          },
+        ]);
+        return;
+      }
+
+      const groups = references.map((reference, index): DetailGroup => {
+        const template = detailTemplates[reference.institution];
+        const selectedIds = reference.nodeIds
+          ? new Set(reference.nodeIds)
+          : null;
+        const selectedNodes = (template?.nodes ?? []).filter(
+          (node) => !selectedIds || selectedIds.has(node.id),
+        );
+        const selectedNodeIds = new Set(selectedNodes.map((node) => node.id));
+        const selectedEdges = (template?.edges ?? []).filter(
+          (edge) =>
+            selectedNodeIds.has(edge.source) && selectedNodeIds.has(edge.target),
+        );
+        if (!template || selectedNodes.length === 0) {
+          return {
+            id: `${projectNode.id}:${reference.institution}:${index}`,
+            templateId: reference.institution,
+            templateName:
+              templates[reference.institution] ?? reference.institution,
+            mapping: "missing",
+            nodes: [
+              {
+                id: "TBD",
+                name: "참조 템플릿의 적용 하위절차 확인 필요",
+                actor: projectNode.authority,
+                stage: projectNode.stage,
+                type: "gateway",
+                outputDocuments: [],
+                legalBasisCount: 0,
+              },
+            ],
+            edges: [],
+          };
+        }
+        return {
+          id: `${projectNode.id}:${reference.institution}:${index}`,
+          templateId: reference.institution,
+          templateName: template.name,
+          mapping: selectedIds ? "exact" : "template",
+          nodes: selectedNodes,
+          edges: selectedEdges,
+        };
+      });
+      result.set(projectNode.id, groups);
+    });
+    return result;
+  }, [detailTemplates, project.nodes, templates]);
+  const detailMappingByNode = useMemo(() => {
+    const result = new Map<
+      string,
+      DetailMapping | "mixed"
+    >();
+    detailGroupsByNode.forEach((groups, nodeId) => {
+      const mappings = new Set(groups.map((group) => group.mapping));
+      if (mappings.has("missing")) result.set(nodeId, "missing");
+      else if (mappings.size > 1) result.set(nodeId, "mixed");
+      else result.set(nodeId, groups[0]?.mapping ?? "missing");
+    });
+    return result;
+  }, [detailGroupsByNode]);
+  const detailInventory = useMemo(() => {
+    let exact = 0;
+    let template = 0;
+    let internalEdges = 0;
+    let missingMilestones = 0;
+    const uniqueTemplates = new Set<string>();
+    detailGroupsByNode.forEach((groups) => {
+      if (groups.some((group) => group.mapping === "missing")) {
+        missingMilestones += 1;
+      }
+      groups.forEach((group) => {
+        if (group.templateId) uniqueTemplates.add(group.templateId);
+        if (group.mapping === "exact") exact += group.nodes.length;
+        if (group.mapping === "template") template += group.nodes.length;
+        internalEdges += group.edges.length;
+      });
+    });
+    return {
+      exact,
+      template,
+      internalEdges,
+      missingMilestones,
+      uniqueTemplates: uniqueTemplates.size,
+    };
+  }, [detailGroupsByNode]);
+  const detailWeightByNode = useMemo(
+    () =>
+      new Map(
+        project.nodes.map((node) => {
+          const groups = detailGroupsByNode.get(node.id) ?? [];
+          const nodeCount = groups.reduce(
+            (total, group) => total + group.nodes.length,
+            0,
+          );
+          return [node.id, Math.max(12, nodeCount + groups.length * 5)];
+        }),
+      ),
+    [detailGroupsByNode, project.nodes],
+  );
   const actorNodeCounts = useMemo(
     () =>
       new Map(
@@ -488,13 +786,26 @@ export default function MegaProjectBoard({
   const graphStyle = {
     "--stage-count": project.stages.length,
     "--actor-count": project.actors.length,
+    "--actor-row-weights": project.actors
+      .map((actor) => {
+        const actorNodes = project.nodes.filter(
+          (node) => node.leadActor === actor.id,
+        );
+        const detailWeight = actorNodes.reduce(
+          (total, node) => total + (detailWeightByNode.get(node.id) ?? 12),
+          0,
+        );
+        return `${Math.max(54, 36 + detailWeight)}fr`;
+      })
+      .join(" "),
   } as CSSProperties & {
     "--stage-count": number;
     "--actor-count": number;
+    "--actor-row-weights": string;
   };
 
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page} mega-synoptic-page`}>
       <header className={styles.commandHeader}>
         <div className={styles.identity}>
           <p className={styles.kicker}>
@@ -691,12 +1002,23 @@ export default function MegaProjectBoard({
                     {project.stages.map((stage, stageIndex) => {
                       const cellNodes =
                         nodesByActorAndStage.get(`${actor.id}:${stage.id}`) ?? [];
+                      const detailRows = cellNodes
+                        .map(
+                          (node) =>
+                            `${detailWeightByNode.get(node.id) ?? 12}fr`,
+                        )
+                        .join(" ");
                       return (
                         <div
                           className={styles.stageCell}
                           key={`${actor.id}:${stage.id}`}
                           data-count={cellNodes.length}
                           data-stage-index={stageIndex}
+                          style={
+                            {
+                              "--detail-rows": detailRows,
+                            } as CSSProperties
+                          }
                         >
                           {cellNodes.map((node) => {
                             const status =
@@ -743,6 +1065,10 @@ export default function MegaProjectBoard({
                               `결정 ${node.actorRoles.decision.join(" · ")}`,
                               `원문 담당 ${node.authority}`,
                             ].join(" / ");
+                            const detailGroups =
+                              detailGroupsByNode.get(node.id) ?? [];
+                            const detailMapping =
+                              detailMappingByNode.get(node.id) ?? "missing";
 
                             return (
                               <article
@@ -764,6 +1090,27 @@ export default function MegaProjectBoard({
                               >
                                 <div className={styles.nodeTopline}>
                                   <span className={styles.nodeCode}>{node.id}</span>
+                                  <span
+                                    className={styles.detailState}
+                                    data-mapping={detailMapping}
+                                    title={
+                                      detailMapping === "exact"
+                                        ? "광주 프로젝트 적용 하위절차가 정확히 지정됨"
+                                        : detailMapping === "mixed"
+                                          ? "정확 매핑과 템플릿 후보가 함께 연결됨"
+                                          : detailMapping === "template"
+                                            ? "연결 템플릿 전체가 적용 후보이며 선별 필요"
+                                            : "상세 하위절차 분해 필요"
+                                    }
+                                  >
+                                    {detailMapping === "exact"
+                                      ? "MAP"
+                                      : detailMapping === "mixed"
+                                        ? "MIX"
+                                        : detailMapping === "template"
+                                          ? "TPL"
+                                          : "GAP"}
+                                  </span>
                                   <h3 title={`${node.name} · ${CLASSIFICATION_LABELS[node.classification]}`}>
                                     {node.name}
                                   </h3>
@@ -777,6 +1124,8 @@ export default function MegaProjectBoard({
                                   <span><b>협</b>{formatCompactActors(node.actorRoles.consult)}</span>
                                   <span><b>결</b>{formatCompactActors(node.actorRoles.decision)}</span>
                                 </p>
+
+                                <MegaDetailFlow groups={detailGroups} />
 
                                 <footer className={styles.nodeFlow}>
                                   <span
@@ -842,17 +1191,22 @@ export default function MegaProjectBoard({
 
       <footer className={styles.readingKey}>
         <p>
-          <strong>구조 임계경로</strong>
-          기간 실측이 아니라 공식 산출물의 선후관계를 표시합니다.
+          <strong>4단계 구조</strong>
+          8개 게이트 → 30개 마일스톤 → {detailInventory.exact + detailInventory.template}개 하위절차 → 공식 산출물
         </p>
         <div className={styles.legend} aria-label="지도 범례">
           <span><i data-edge="internal" />기관 내 선행</span>
           <span><i data-edge="handoff" />기관 간 인계 {handoffCount}건</span>
           <span><i data-edge="conditional" />미확정 분기</span>
+          <span title="정확 매핑 / 템플릿 후보 / 상세분해 필요 마일스톤">
+            <b>D</b>{detailInventory.exact}/{detailInventory.template}/{detailInventory.missingMilestones}
+          </span>
           <span><b>K</b>Korea100</span>
           <span><b>S</b>공식 근거 {project.sources.length}건</span>
         </div>
-        <p className={styles.viewportHint}>작은 화면에서는 관제판을 좌우로 이동해 읽습니다.</p>
+        <p className={styles.viewportHint}>
+          {detailInventory.uniqueTemplates}개 제도 템플릿 · 내부선 {detailInventory.internalEdges}건
+        </p>
       </footer>
     </div>
   );
