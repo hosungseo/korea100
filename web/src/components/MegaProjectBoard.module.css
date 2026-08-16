@@ -251,7 +251,7 @@
 
 .readyList {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--ready-count), minmax(0, 1fr));
   min-width: 0;
   margin: 0;
   padding: 0;
@@ -295,7 +295,7 @@
 
 .branchList {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--branch-count), minmax(0, 1fr));
   min-width: 0;
 }
 
@@ -1067,6 +1067,10 @@
   grid-template-rows: repeat(3, minmax(0, 1fr));
 }
 
+.stageCell:not([data-count="0"]) {
+  grid-template-rows: var(--node-rows);
+}
+
 .node {
   position: relative;
   z-index: 4;
@@ -1126,7 +1130,7 @@
 
 .nodeTopline {
   display: grid;
-  grid-template-columns: auto auto minmax(0, 1fr) auto;
+  grid-template-columns: auto auto auto minmax(0, 1fr) auto;
   align-items: center;
   min-width: 0;
   gap: 3px;
@@ -1182,6 +1186,41 @@
   border-color: #c5a060;
   background: #fff3dc;
   color: #95630e;
+}
+
+.confidenceState {
+  padding: 1px 2px;
+  border: 1px solid #bcc7c1;
+  background: #f6f8f7;
+  color: #687970;
+  font-family: var(--font-mono);
+  font-size: 3.8px;
+  font-weight: 820;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.confidenceState[data-confidence="official"] {
+  border-color: #78ad97;
+  background: #e6f3ed;
+  color: #126c50;
+}
+
+.confidenceState[data-confidence="statutory"] {
+  border-color: #82aebe;
+  background: #e8f2f5;
+  color: #276476;
+}
+
+.confidenceState[data-confidence="modeled"] {
+  border-style: dashed;
+  border-color: #b89962;
+  background: #fbf3e5;
+  color: #85601e;
+}
+
+.node[data-confidence="modeled"] {
+  border-top-style: dashed;
 }
 
 .nodeRoles {
@@ -1353,6 +1392,46 @@
   min-width: 7px;
   height: 6px;
   font-size: 3.5px;
+}
+
+.stageCell[data-crowded="true"] .node {
+  padding: 1px 2px 1px 3px;
+  border-left-width: 1px;
+  box-shadow: none;
+  gap: 0;
+}
+
+.stageCell[data-crowded="true"] .nodeTopline {
+  gap: 1px;
+}
+
+.stageCell[data-crowded="true"] .nodeTopline h3 {
+  font-size: 4.5px;
+}
+
+.stageCell[data-crowded="true"] .nodeCode,
+.stageCell[data-crowded="true"] .nodeRoles,
+.stageCell[data-crowded="true"] .nodeFlow,
+.stageCell[data-crowded="true"] .successors {
+  font-size: 3.7px;
+}
+
+.stageCell[data-crowded="true"] .detailState,
+.stageCell[data-crowded="true"] .confidenceState,
+.stageCell[data-crowded="true"] .nodeStatus {
+  padding: 0 1px;
+  font-size: 3.2px;
+}
+
+.stageCell[data-crowded="true"] .references {
+  max-width: 26px;
+}
+
+.stageCell[data-crowded="true"] .references a {
+  min-width: 6px;
+  height: 6px;
+  padding: 0;
+  font-size: 3px;
 }
 
 @keyframes laneReveal {
@@ -1711,6 +1790,11 @@
     font-size: 8px;
   }
 
+  .confidenceState {
+    padding: 3px 5px 2px;
+    font-size: 8px;
+  }
+
   .nodeRoles {
     font-size: 10.5px;
     gap: 10px;
@@ -1996,6 +2080,49 @@
     min-width: 17px;
     height: 14px;
     font-size: 7px;
+  }
+
+  .stageCell[data-crowded="true"] .node {
+    padding: 3px 4px 3px 6px;
+    border-left-width: 3px;
+    box-shadow: 0 1px 3px rgba(17, 38, 27, 0.035);
+    gap: 1px;
+  }
+
+  .stageCell[data-crowded="true"] .nodeTopline {
+    gap: 4px;
+  }
+
+  .stageCell[data-crowded="true"] .nodeTopline h3 {
+    font-size: 10px;
+  }
+
+  .stageCell[data-crowded="true"] .nodeCode {
+    font-size: 8px;
+  }
+
+  .stageCell[data-crowded="true"] .detailState,
+  .stageCell[data-crowded="true"] .confidenceState,
+  .stageCell[data-crowded="true"] .nodeStatus {
+    padding: 1px 3px;
+    font-size: 6.5px;
+  }
+
+  .stageCell[data-crowded="true"] .nodeRoles,
+  .stageCell[data-crowded="true"] .nodeFlow,
+  .stageCell[data-crowded="true"] .successors {
+    font-size: 7.2px;
+  }
+
+  .stageCell[data-crowded="true"] .references {
+    max-width: 70px;
+  }
+
+  .stageCell[data-crowded="true"] .references a {
+    min-width: 15px;
+    height: 13px;
+    padding: 0 2px;
+    font-size: 6px;
   }
 
   .readingKey {

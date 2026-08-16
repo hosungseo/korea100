@@ -23,7 +23,7 @@ Each project node declares:
 
 ### Detail expansion states
 
-The 30 project nodes are milestone containers rather than leaf procedures. On 4K displays the board expands each container with its referenced Korea100 subprocesses and marks the confidence of that expansion:
+Project nodes are milestone containers rather than leaf procedures. The Gwangju audit currently separates 49 intermediate milestones, while the count may change when a new independent statutory output or cross-agency handoff is verified. On 4K displays the board expands each container with its referenced Korea100 subprocesses and marks the confidence of that expansion:
 
 - `MAP`: `templateRefs.nodeIds` explicitly selects the subprocess nodes applied to the project milestone.
 - `TPL`: the institution template is connected, but its complete node set is only an applicability candidate until project-specific law and facts are checked.

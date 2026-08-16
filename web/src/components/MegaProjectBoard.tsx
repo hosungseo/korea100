@@ -126,6 +126,20 @@ const RULE_LABELS: Record<string, { code: string; label: string }> = {
     code: "B03",
     label: "전력계통 검토 경로",
   },
+  RULE_HAZARDOUS_FACILITY_PATH: {
+    code: "B04",
+    label: "위험물·고압가스 경로",
+  },
+};
+
+const CONFIDENCE_META: Record<
+  MegaProjectNode["confidence"],
+  { code: string; label: string }
+> = {
+  official: { code: "OBS", label: "공식 현황 확인" },
+  statutory: { code: "LAW", label: "법령상 필수 단계" },
+  modeled: { code: "MOD", label: "분석상 프로젝트 모델" },
+  unknown: { code: "UNK", label: "공개자료 부족" },
 };
 
 const COUNT_ORDER: MegaDisplayStatus[] = [
@@ -851,7 +865,14 @@ export default function MegaProjectBoard({
             <strong>{String(readyNodes.length).padStart(2, "0")}</strong>
             <small>{handoffCount}개 기관 간 인계 · 지금 병렬 착수 가능한 축</small>
           </div>
-          <ol className={styles.readyList}>
+          <ol
+            className={styles.readyList}
+            style={
+              {
+                "--ready-count": Math.max(1, readyNodes.length),
+              } as CSSProperties
+            }
+          >
             {readyNodes.map((node) => (
               <li key={node.id}>
                 <span>{node.id}</span>
@@ -867,7 +888,14 @@ export default function MegaProjectBoard({
             <strong>{String(project.rules.length).padStart(2, "0")}</strong>
             <small>선택하지 않고 모든 조건부 경로를 함께 표시</small>
           </div>
-          <div className={styles.branchList}>
+          <div
+            className={styles.branchList}
+            style={
+              {
+                "--branch-count": Math.max(1, project.rules.length),
+              } as CSSProperties
+            }
+          >
             {project.rules.map((rule) => {
               const meta = RULE_LABELS[rule.id] ?? {
                 code: "B--",
@@ -890,7 +918,10 @@ export default function MegaProjectBoard({
         </div>
       </section>
 
-      <section className={styles.workspace} aria-label="30개 행정절차 선행조건 지도">
+      <section
+        className={styles.workspace}
+        aria-label={`${project.nodes.length}개 행정절차 선행조건 지도`}
+      >
         <div className={styles.graphViewport}>
           <div className={styles.graphCanvas} ref={canvasRef} style={graphStyle}>
             <svg
@@ -1008,15 +1039,18 @@ export default function MegaProjectBoard({
                             `${detailWeightByNode.get(node.id) ?? 12}fr`,
                         )
                         .join(" ");
+                      const nodeRows = `repeat(${Math.max(1, cellNodes.length)}, minmax(0, 1fr))`;
                       return (
                         <div
                           className={styles.stageCell}
                           key={`${actor.id}:${stage.id}`}
                           data-count={cellNodes.length}
+                          data-crowded={cellNodes.length >= 4 ? "true" : "false"}
                           data-stage-index={stageIndex}
                           style={
                             {
                               "--detail-rows": detailRows,
+                              "--node-rows": nodeRows,
                             } as CSSProperties
                           }
                         >
@@ -1076,6 +1110,7 @@ export default function MegaProjectBoard({
                                 ref={setNodeRef(node.id)}
                                 className={styles.node}
                                 data-status={status}
+                                data-confidence={node.confidence}
                                 data-protection={
                                   node.classification === "protection_gate"
                                     ? "true"
@@ -1110,6 +1145,13 @@ export default function MegaProjectBoard({
                                         : detailMapping === "template"
                                           ? "TPL"
                                           : "GAP"}
+                                  </span>
+                                  <span
+                                    className={styles.confidenceState}
+                                    data-confidence={node.confidence}
+                                    title={CONFIDENCE_META[node.confidence].label}
+                                  >
+                                    {CONFIDENCE_META[node.confidence].code}
                                   </span>
                                   <h3 title={`${node.name} · ${CLASSIFICATION_LABELS[node.classification]}`}>
                                     {node.name}
@@ -1192,7 +1234,7 @@ export default function MegaProjectBoard({
       <footer className={styles.readingKey}>
         <p>
           <strong>4단계 구조</strong>
-          8개 게이트 → 30개 마일스톤 → {detailInventory.exact + detailInventory.template}개 하위절차 → 공식 산출물
+          {project.stages.length}개 게이트 → {project.nodes.length}개 마일스톤 → {detailInventory.exact + detailInventory.template}개 하위절차 → 공식 산출물
         </p>
         <div className={styles.legend} aria-label="지도 범례">
           <span><i data-edge="internal" />기관 내 선행</span>
