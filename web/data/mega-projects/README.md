@@ -14,6 +14,8 @@ The overlay does not mutate or duplicate the institution source files in `data/i
 
 Each project node declares:
 
+- `leadActor`: the single responsibility lane where the node is rendered. A node is never duplicated across lanes.
+- `actorRoles`: explicit `lead`, `consult`, and `decision` institutions for the handoff. The legacy `authority` string remains descriptive evidence, not a lane-classification shortcut.
 - `requires`: artifact dependencies. Each dependency is typed by relation, strength, and basis.
 - `produces`: canonical artifact IDs emitted when the node completes.
 - `activation`: whether the node is always present or selected by a scenario rule.
@@ -32,6 +34,8 @@ Strengths:
 - `soft`: coordination or best-practice dependency shown as a warning, not a legal lock.
 
 Kinds distinguish `legal`, `protection`, `technical`, `policy`, and `financial` dependencies. A legal or technical prerequisite must never be inferred solely from sequence in a Korea100 diagram; it needs a source or an explicit `modeled` note.
+
+Project-level `actors` define the ordered responsibility lanes. The UI keeps stages on the horizontal axis, actors on the vertical axis, and visually strengthens edges whose producer and consumer have different `leadActor` values.
 
 ## Conditional paths
 

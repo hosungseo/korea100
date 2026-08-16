@@ -204,6 +204,17 @@ for (const file of projectFiles) {
   }
 
   const stageMap = uniqueMap(project.stages, "id", projectScope, "stage");
+  const actorMap = uniqueMap(project.actors, "id", projectScope, "actor");
+  const actorCodeMap = uniqueMap(project.actors, "code", projectScope, "actor");
+  if (actorMap.size !== actorCodeMap.size) {
+    fail(projectScope, "actor id와 code 수가 일치하지 않습니다");
+  }
+  for (const [actorId, actor] of actorMap) {
+    const actorScope = `${projectScope}#actor:${actorId}`;
+    if (!actor.label?.trim()) fail(actorScope, "label이 없습니다");
+    if (!actor.shortLabel?.trim()) fail(actorScope, "shortLabel이 없습니다");
+    if (!actor.mandate?.trim()) fail(actorScope, "mandate가 없습니다");
+  }
   const ruleMap = uniqueMap(project.rules, "id", projectScope, "rule");
   for (const [ruleId, rule] of ruleMap) {
     const ruleScope = `${projectScope}#rule:${ruleId}`;
@@ -234,6 +245,20 @@ for (const file of projectFiles) {
     if (!node.name?.trim()) fail(nodeScope, "name이 없습니다");
     if (!stageMap.has(node.stage)) fail(nodeScope, `알 수 없는 stage ${node.stage}`);
     if (!node.authority?.trim()) fail(nodeScope, "authority가 없습니다");
+    if (!actorMap.has(node.leadActor)) fail(nodeScope, `알 수 없는 leadActor ${node.leadActor}`);
+    for (const role of ["lead", "consult", "decision"]) {
+      const values = node.actorRoles?.[role];
+      if (!Array.isArray(values)) {
+        fail(nodeScope, `actorRoles.${role}이 배열이 아닙니다`);
+        continue;
+      }
+      if (role !== "consult" && values.length === 0) {
+        fail(nodeScope, `actorRoles.${role}이 비어 있습니다`);
+      }
+      if (values.some((value) => typeof value !== "string" || !value.trim())) {
+        fail(nodeScope, `actorRoles.${role}에 빈 기관명이 있습니다`);
+      }
+    }
     if (!NODE_STATUSES.has(node.status)) fail(nodeScope, `지원하지 않는 status ${node.status}`);
     if (!NODE_CLASSES.has(node.classification)) {
       fail(nodeScope, `지원하지 않는 classification ${node.classification}`);
@@ -368,6 +393,7 @@ for (const file of projectFiles) {
 
   reports.push({
     id: project.id,
+    actors: actorMap.size,
     nodes: nodeMap.size,
     dependencies: dependencyCount,
     conditionalNodes: conditionalNodeCount,
@@ -388,7 +414,7 @@ if (errors.length > 0) {
 
 console.log(`메가프로젝트 데이터 검증 통과: artifact ${artifactMap.size}개, project ${reports.length}개`);
 for (const report of reports) {
-  console.log(`- ${report.id}: node ${report.nodes}개, dependency ${report.dependencies}개, 조건부 ${report.conditionalNodes}개`);
+  console.log(`- ${report.id}: actor ${report.actors}개, node ${report.nodes}개, dependency ${report.dependencies}개, 조건부 ${report.conditionalNodes}개`);
   console.log(`  지금 착수 가능: ${report.ready.length > 0 ? report.ready.join(", ") : "없음"}`);
   console.log(`  조건 미확정: ${report.conditionalUnknown.length > 0 ? report.conditionalUnknown.join(", ") : "없음"}`);
 }

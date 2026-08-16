@@ -219,12 +219,83 @@
       "label": "건축·가동"
     }
   ],
+  "actors": [
+    {
+      "id": "whole-government",
+      "code": "A01",
+      "label": "범정부·위원회",
+      "shortLabel": "범정부",
+      "mandate": "정책 결정·범부처 조정"
+    },
+    {
+      "id": "motie",
+      "code": "A02",
+      "label": "산업통상부",
+      "shortLabel": "산업부",
+      "mandate": "클러스터 지정·산업정책"
+    },
+    {
+      "id": "defense-airport",
+      "code": "A03",
+      "label": "국방부·군공항",
+      "shortLabel": "국방부",
+      "mandate": "군공항 이전·종전부지 인계"
+    },
+    {
+      "id": "climate-environment-energy",
+      "code": "A04",
+      "label": "기후부 환경·전력",
+      "shortLabel": "기후부",
+      "mandate": "환경 협의 / 전력·계통"
+    },
+    {
+      "id": "heritage-protection",
+      "code": "A05",
+      "label": "국가유산·보호기관",
+      "shortLabel": "국가유산",
+      "mandate": "유산영향·매장유산 조사"
+    },
+    {
+      "id": "gwangju-designation",
+      "code": "A06",
+      "label": "광주시·산단 지정권자",
+      "shortLabel": "광주시",
+      "mandate": "입지·지정·실시계획"
+    },
+    {
+      "id": "infrastructure-operators",
+      "code": "A07",
+      "label": "한전·수자원·도로",
+      "shortLabel": "기반시설",
+      "mandate": "공급협약·기반시설 이행"
+    },
+    {
+      "id": "developer-enterprise",
+      "code": "A08",
+      "label": "사업시행자·입주기업",
+      "shortLabel": "시행자",
+      "mandate": "계획·보상·건설·가동"
+    },
+    {
+      "id": "local-permit-operations",
+      "code": "A09",
+      "label": "건축·소방·산단관리",
+      "shortLabel": "인허가",
+      "mandate": "입주·개별허가·검사"
+    }
+  ],
   "nodes": [
     {
       "id": "N01",
       "name": "호남 반도체 입지 광주 군공항 부지 결정",
       "stage": "G0",
       "authority": "정부·청와대",
+      "leadActor": "whole-government",
+      "actorRoles": {
+        "lead": ["정부·청와대"],
+        "consult": ["산업통상부", "광주시"],
+        "decision": ["정부"]
+      },
       "classification": "policy",
       "status": "completed",
       "confidence": "official",
@@ -248,6 +319,12 @@
       "name": "통합 추진체계·마스터 일정 수립",
       "stage": "G0",
       "authority": "3대 메가프로젝트 전담조직·관계부처·지자체",
+      "leadActor": "whole-government",
+      "actorRoles": {
+        "lead": ["3대 메가프로젝트 전담조직"],
+        "consult": ["관계부처", "광주시"],
+        "decision": ["범정부 추진체계"]
+      },
       "classification": "governance",
       "status": "active",
       "confidence": "modeled",
@@ -279,6 +356,12 @@
       "name": "반도체클러스터 지정 신청·심의·지정",
       "stage": "G0",
       "authority": "산업통상부·반도체산업경쟁력강화특별위원회",
+      "leadActor": "motie",
+      "actorRoles": {
+        "lead": ["산업통상부"],
+        "consult": ["광주시", "관계기관"],
+        "decision": ["반도체산업경쟁력강화특별위원회"]
+      },
       "classification": "legal_gate",
       "status": "planned",
       "confidence": "statutory",
@@ -324,6 +407,12 @@
       "name": "군공항 이전 실행·재원계획 확정",
       "stage": "G1",
       "authority": "국방부·종전부지 지방자치단체·관계기관",
+      "leadActor": "defense-airport",
+      "actorRoles": {
+        "lead": ["국방부"],
+        "consult": ["종전부지 지방자치단체", "관계기관"],
+        "decision": ["국방부"]
+      },
       "classification": "legal_gate",
       "status": "unknown",
       "confidence": "modeled",
@@ -364,6 +453,12 @@
       "name": "대체 군공항 건설·기능 이전 및 종전부지 인계",
       "stage": "G1",
       "authority": "국방부·사업시행자·지방자치단체",
+      "leadActor": "defense-airport",
+      "actorRoles": {
+        "lead": ["국방부"],
+        "consult": ["사업시행자", "지방자치단체"],
+        "decision": ["국방부"]
+      },
       "classification": "delivery",
       "status": "planned",
       "confidence": "modeled",
@@ -394,6 +489,12 @@
       "name": "산업단지 지정 요청·입지 조사",
       "stage": "G2",
       "authority": "지방자치단체·사업시행자·산업단지 지정권자",
+      "leadActor": "gwangju-designation",
+      "actorRoles": {
+        "lead": ["광주시"],
+        "consult": ["사업시행자"],
+        "decision": ["산업단지 지정권자"]
+      },
       "classification": "legal_gate",
       "status": "planned",
       "confidence": "statutory",
@@ -443,6 +544,12 @@
       "name": "산업단지 개발계획 초안 작성",
       "stage": "G2",
       "authority": "사업시행자·산업단지 지정권자",
+      "leadActor": "developer-enterprise",
+      "actorRoles": {
+        "lead": ["사업시행자"],
+        "consult": ["광주시"],
+        "decision": ["산업단지 지정권자"]
+      },
       "classification": "plan",
       "status": "planned",
       "confidence": "statutory",
@@ -490,6 +597,12 @@
       "name": "산업단지 지정 공고·주민·전문가 의견청취",
       "stage": "G2",
       "authority": "산업단지 지정권자·지방자치단체",
+      "leadActor": "gwangju-designation",
+      "actorRoles": {
+        "lead": ["산업단지 지정권자"],
+        "consult": ["광주시", "주민·전문가"],
+        "decision": ["산업단지 지정권자"]
+      },
       "classification": "protection_gate",
       "status": "planned",
       "confidence": "statutory",
@@ -527,6 +640,12 @@
       "name": "전략환경영향평가·입지대안 협의",
       "stage": "G2",
       "authority": "산업단지 지정권자·환경 협의기관",
+      "leadActor": "climate-environment-energy",
+      "actorRoles": {
+        "lead": ["환경 협의기관"],
+        "consult": ["산업단지 지정권자", "광주시"],
+        "decision": ["환경 협의기관"]
+      },
       "classification": "protection_gate",
       "status": "planned",
       "confidence": "modeled",
@@ -573,6 +692,12 @@
       "name": "산업단지 지정·개발계획 고시",
       "stage": "G2",
       "authority": "산업단지 지정권자",
+      "leadActor": "gwangju-designation",
+      "actorRoles": {
+        "lead": ["산업단지 지정권자"],
+        "consult": ["광주시", "관계기관"],
+        "decision": ["산업단지 지정권자"]
+      },
       "classification": "legal_gate",
       "status": "planned",
       "confidence": "statutory",
@@ -621,6 +746,12 @@
       "name": "환경영향평가서 초안·공람·주민의견",
       "stage": "G3",
       "authority": "사업시행자·승인기관·주민",
+      "leadActor": "developer-enterprise",
+      "actorRoles": {
+        "lead": ["사업시행자"],
+        "consult": ["승인기관", "주민"],
+        "decision": ["승인기관"]
+      },
       "classification": "protection_gate",
       "status": "planned",
       "confidence": "statutory",
@@ -672,6 +803,12 @@
       "name": "환경영향평가 본안 검토·협의 완료",
       "stage": "G3",
       "authority": "승인기관·환경 협의기관·사업시행자",
+      "leadActor": "climate-environment-energy",
+      "actorRoles": {
+        "lead": ["환경 협의기관"],
+        "consult": ["승인기관", "사업시행자"],
+        "decision": ["환경 협의기관"]
+      },
       "classification": "protection_gate",
       "status": "planned",
       "confidence": "statutory",
@@ -714,6 +851,12 @@
       "name": "국가유산 영향진단·매장유산 조사 경로 해소",
       "stage": "G3",
       "authority": "국가유산청·지방자치단체·사업시행자",
+      "leadActor": "heritage-protection",
+      "actorRoles": {
+        "lead": ["국가유산청"],
+        "consult": ["광주시", "사업시행자"],
+        "decision": ["국가유산청"]
+      },
       "classification": "protection_gate",
       "status": "unknown",
       "confidence": "modeled",
@@ -755,6 +898,12 @@
       "name": "의제 대상 개별 인허가 기준·서류 취합",
       "stage": "G3",
       "authority": "사업시행자·산업단지 지정권자·관계기관",
+      "leadActor": "gwangju-designation",
+      "actorRoles": {
+        "lead": ["광주시·산업단지 지정권자"],
+        "consult": ["사업시행자", "관계 행정기관"],
+        "decision": ["산업단지 지정권자"]
+      },
       "classification": "legal_gate",
       "status": "planned",
       "confidence": "modeled",
@@ -818,6 +967,12 @@
       "name": "산업단지 실시계획 승인·인허가 의제 확정",
       "stage": "G3",
       "authority": "산업단지 지정권자·관계 행정기관",
+      "leadActor": "gwangju-designation",
+      "actorRoles": {
+        "lead": ["산업단지 지정권자"],
+        "consult": ["관계 행정기관"],
+        "decision": ["산업단지 지정권자"]
+      },
       "classification": "legal_gate",
       "status": "planned",
       "confidence": "statutory",
@@ -860,6 +1015,12 @@
       "name": "편입 사유지 보상·취득",
       "stage": "G4",
       "authority": "사업시행자·토지소유자·토지수용위원회",
+      "leadActor": "developer-enterprise",
+      "actorRoles": {
+        "lead": ["사업시행자"],
+        "consult": ["토지소유자"],
+        "decision": ["토지수용위원회"]
+      },
       "classification": "legal_gate",
       "status": "unknown",
       "confidence": "modeled",
@@ -906,6 +1067,12 @@
       "name": "종전부지·편입토지 법적 사용권 확보",
       "stage": "G4",
       "authority": "국방부·사업시행자·지방자치단체",
+      "leadActor": "defense-airport",
+      "actorRoles": {
+        "lead": ["국방부"],
+        "consult": ["사업시행자", "광주시"],
+        "decision": ["국방부·광주시"]
+      },
       "classification": "legal_gate",
       "status": "planned",
       "confidence": "modeled",
@@ -949,6 +1116,12 @@
       "name": "단계별 전력수요 확정·계통검토 경로 결정",
       "stage": "G5",
       "authority": "사업자·기후에너지환경부·한국전력·전력거래소",
+      "leadActor": "climate-environment-energy",
+      "actorRoles": {
+        "lead": ["기후에너지환경부"],
+        "consult": ["사업자", "한국전력", "전력거래소"],
+        "decision": ["기후에너지환경부"]
+      },
       "classification": "technical_gate",
       "status": "planned",
       "confidence": "modeled",
@@ -991,6 +1164,12 @@
       "name": "정식 전력계통영향평가·공급가능성 검토",
       "stage": "G5",
       "authority": "사업자·기후에너지환경부·전력정책심의회·한국전력",
+      "leadActor": "climate-environment-energy",
+      "actorRoles": {
+        "lead": ["기후에너지환경부"],
+        "consult": ["사업자", "한국전력"],
+        "decision": ["전력정책심의회"]
+      },
       "classification": "technical_gate",
       "status": "unknown",
       "confidence": "statutory",
@@ -1027,6 +1206,12 @@
       "name": "계통영향평가 면제·반도체 신속처리 및 공급검토",
       "stage": "G5",
       "authority": "국가첨단전략산업위원회·관계기관·한국전력",
+      "leadActor": "whole-government",
+      "actorRoles": {
+        "lead": ["국가첨단전략산업위원회"],
+        "consult": ["기후에너지환경부", "한국전력", "관계기관"],
+        "decision": ["국가첨단전략산업위원회"]
+      },
       "classification": "technical_gate",
       "status": "unknown",
       "confidence": "statutory",
@@ -1080,6 +1265,12 @@
       "name": "송전선로·변전소 사업계획·승인",
       "stage": "G5",
       "authority": "기후에너지환경부·한국전력·국가기간전력망확충위원회",
+      "leadActor": "climate-environment-energy",
+      "actorRoles": {
+        "lead": ["기후에너지환경부"],
+        "consult": ["한국전력"],
+        "decision": ["국가기간전력망확충위원회"]
+      },
       "classification": "technical_gate",
       "status": "planned",
       "confidence": "modeled",
@@ -1122,6 +1313,12 @@
       "name": "송변전망 공사·계통접속·공급계약 완료",
       "stage": "G5",
       "authority": "한국전력·사업자·전기안전 관계기관",
+      "leadActor": "infrastructure-operators",
+      "actorRoles": {
+        "lead": ["한국전력"],
+        "consult": ["사업자", "전기안전 관계기관"],
+        "decision": ["한국전력"]
+      },
       "classification": "delivery",
       "status": "planned",
       "confidence": "modeled",
@@ -1175,6 +1372,12 @@
       "name": "공업용수·접근도로 수요·공급계획 확정",
       "stage": "G6",
       "authority": "사업자·지방자치단체·수자원 관계기관·도로관리청",
+      "leadActor": "gwangju-designation",
+      "actorRoles": {
+        "lead": ["광주시"],
+        "consult": ["사업자", "수자원 관계기관", "도로관리청"],
+        "decision": ["광주시·관계 관리청"]
+      },
       "classification": "technical_gate",
       "status": "planned",
       "confidence": "modeled",
@@ -1219,6 +1422,12 @@
       "name": "용수 공급협약·필요 허가 및 접근도로 계획 승인",
       "stage": "G6",
       "authority": "수자원 관계기관·도로관리청·사업시행자",
+      "leadActor": "infrastructure-operators",
+      "actorRoles": {
+        "lead": ["수자원 관계기관", "도로관리청"],
+        "consult": ["사업시행자", "광주시"],
+        "decision": ["관계 관리청"]
+      },
       "classification": "legal_gate",
       "status": "planned",
       "confidence": "modeled",
@@ -1272,6 +1481,12 @@
       "name": "용수관로·접근도로 기반시설 공사 완료",
       "stage": "G6",
       "authority": "사업시행자·수자원 관계기관·도로관리청",
+      "leadActor": "infrastructure-operators",
+      "actorRoles": {
+        "lead": ["수자원 관계기관", "도로관리청"],
+        "consult": ["사업시행자"],
+        "decision": ["관계 관리청"]
+      },
       "classification": "delivery",
       "status": "planned",
       "confidence": "modeled",
@@ -1321,6 +1536,12 @@
       "name": "산업단지 입주계약·공장설립 승인",
       "stage": "G7",
       "authority": "산업단지 관리기관·지방자치단체·입주기업",
+      "leadActor": "local-permit-operations",
+      "actorRoles": {
+        "lead": ["산업단지 관리기관"],
+        "consult": ["광주시", "입주기업"],
+        "decision": ["산업단지 관리기관"]
+      },
       "classification": "legal_gate",
       "status": "planned",
       "confidence": "statutory",
@@ -1375,6 +1596,12 @@
       "name": "건축허가·소방동의·착공신고",
       "stage": "G7",
       "authority": "건축허가권자·소방관서·입주기업",
+      "leadActor": "local-permit-operations",
+      "actorRoles": {
+        "lead": ["건축허가권자"],
+        "consult": ["소방관서", "입주기업"],
+        "decision": ["건축허가권자"]
+      },
       "classification": "legal_gate",
       "status": "planned",
       "confidence": "statutory",
@@ -1424,6 +1651,12 @@
       "name": "부지조성·팹·부대시설 건설",
       "stage": "G7",
       "authority": "산업단지 사업시행자·입주기업·시공사",
+      "leadActor": "developer-enterprise",
+      "actorRoles": {
+        "lead": ["산업단지 사업시행자", "입주기업"],
+        "consult": ["시공사"],
+        "decision": ["사업시행자"]
+      },
       "classification": "delivery",
       "status": "planned",
       "confidence": "modeled",
@@ -1487,6 +1720,12 @@
       "name": "사용승인·공장등록·환경 운영허가·검사",
       "stage": "G7",
       "authority": "건축허가권자·산업단지 관리기관·환경·안전 관계기관",
+      "leadActor": "local-permit-operations",
+      "actorRoles": {
+        "lead": ["산업단지 관리기관"],
+        "consult": ["건축허가권자", "환경·안전 관계기관"],
+        "decision": ["관계 허가·검사기관"]
+      },
       "classification": "legal_gate",
       "status": "planned",
       "confidence": "statutory",
@@ -1534,6 +1773,12 @@
       "name": "시험가동·상업가동 개시",
       "stage": "G7",
       "authority": "입주기업·전력·용수 공급기관·관계 행정기관",
+      "leadActor": "developer-enterprise",
+      "actorRoles": {
+        "lead": ["입주기업"],
+        "consult": ["전력·용수 공급기관", "관계 행정기관"],
+        "decision": ["입주기업"]
+      },
       "classification": "operation",
       "status": "planned",
       "confidence": "modeled",

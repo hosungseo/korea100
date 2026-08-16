@@ -76,6 +76,20 @@ export interface MegaProjectStage {
   label: string;
 }
 
+export interface MegaProjectActor {
+  id: string;
+  code: string;
+  label: string;
+  shortLabel: string;
+  mandate: string;
+}
+
+export interface MegaActorRoles {
+  lead: string[];
+  consult: string[];
+  decision: string[];
+}
+
 export interface MegaRuleCondition {
   rule: string;
   equals: MegaRuleValue;
@@ -105,6 +119,8 @@ export interface MegaProjectNode {
   name: string;
   stage: string;
   authority: string;
+  leadActor: string;
+  actorRoles: MegaActorRoles;
   classification: MegaNodeClassification;
   status: MegaNodeStatus;
   confidence: MegaNodeConfidence;
@@ -131,6 +147,7 @@ export interface MegaProject {
   rules: MegaProjectRule[];
   sources: MegaProjectSource[];
   stages: MegaProjectStage[];
+  actors: MegaProjectActor[];
   nodes: MegaProjectNode[];
 }
 
