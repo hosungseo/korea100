@@ -1,0 +1,376 @@
+.page {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 32px 24px 80px;
+  color: var(--color-text);
+}
+
+.header {
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #d7ded9;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 8px;
+  color: #4b9c80;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 760;
+  letter-spacing: 0.1em;
+}
+
+.kickerLinks {
+  display: flex;
+  gap: 14px;
+}
+
+.kicker a {
+  color: #45635a;
+  font-weight: 700;
+  letter-spacing: normal;
+  text-decoration: none;
+}
+
+.kicker a:hover {
+  text-decoration: underline;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 760;
+  letter-spacing: -0.02em;
+}
+
+.summary {
+  max-width: 720px;
+  margin: 8px 0 0;
+  color: #55655d;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.statusMatrix {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 0;
+}
+
+.statusMatrix > div {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 5px 10px;
+  border: 1px solid #c7d0cb;
+  border-radius: 3px;
+  background: #f2f5f3;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #65756c;
+}
+
+.statusMatrix > div dt {
+  font-weight: 700;
+}
+
+.statusMatrix > div dd {
+  margin: 0;
+  font-weight: 800;
+}
+
+.statusMatrix > div[data-status="completed"],
+.statusMatrix > div[data-status="ready"] {
+  border-color: #7dc3a7;
+  background: #dff5eb;
+  color: #087452;
+}
+
+.statusMatrix > div[data-status="active"] {
+  border-color: #9ecbd6;
+  background: #dff3f7;
+  color: #0a7189;
+}
+
+.statusMatrix > div[data-status="conditional"] {
+  border-color: #d0b374;
+  background: #f7e9c8;
+  color: #8b5d0f;
+}
+
+.meta {
+  margin: 14px 0 0;
+  color: #7a887f;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.stageList {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stageSection {
+  min-width: 0;
+}
+
+.stageTitle {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0 0 14px;
+  padding: 8px 0;
+  background: var(--color-bg, #fff);
+  border-bottom: 2px solid #17573f;
+  font-size: 18px;
+  font-weight: 760;
+}
+
+.stageTitle span {
+  color: #17573f;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.stageTitle small {
+  margin-left: auto;
+  color: #8a9990;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.milestoneList {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.milestone {
+  padding: 14px 0 16px 14px;
+  border-left: 3px solid #c5ccc8;
+  border-bottom: 1px solid #e4e9e5;
+}
+
+.milestone[data-status="completed"] {
+  border-left-color: #087452;
+}
+
+.milestone[data-status="active"] {
+  border-left-color: #1689a7;
+}
+
+.milestone[data-status="ready"] {
+  border-left-color: #13a875;
+}
+
+.milestone[data-status="conditional"] {
+  border-left-color: #b47a19;
+}
+
+.milestone[data-status="inactive"] {
+  opacity: 0.55;
+}
+
+.milestone:last-child {
+  border-bottom: none;
+}
+
+.milestoneHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.nodeCode {
+  color: #45635a;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.statusBadge,
+.mappingBadge {
+  padding: 2px 6px;
+  border: 1px solid #c7d0cb;
+  border-radius: 2px;
+  background: #edf1ef;
+  color: #65756c;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.statusBadge[data-status="completed"],
+.statusBadge[data-status="ready"] {
+  border-color: #7dc3a7;
+  background: #dff5eb;
+  color: #087452;
+}
+
+.statusBadge[data-status="active"] {
+  border-color: #9ecbd6;
+  background: #dff3f7;
+  color: #0a7189;
+}
+
+.statusBadge[data-status="conditional"] {
+  border-color: #d0b374;
+  background: #f7e9c8;
+  color: #8b5d0f;
+}
+
+.mappingBadge[data-mapping="exact"] {
+  border-color: #65a98e;
+  background: #e7f5ef;
+  color: #087452;
+}
+
+.mappingBadge[data-mapping="mixed"] {
+  border-color: #79a99a;
+  background: linear-gradient(90deg, #e7f5ef 0 50%, #f0f3f1 50%);
+  color: #2b6752;
+}
+
+.mappingBadge[data-mapping="missing"] {
+  border-color: #c5a060;
+  background: #fff3dc;
+  color: #95630e;
+}
+
+.milestoneHead h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.classification {
+  color: #8a9990;
+  font-size: 11px;
+}
+
+.roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: 6px 0 0;
+  color: #55655d;
+  font-size: 11.5px;
+}
+
+.roles b {
+  margin-right: 3px;
+  color: #8a9990;
+  font-weight: 700;
+}
+
+.roles .blocked {
+  color: #95630e;
+}
+
+.institutionList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.institution {
+  padding: 6px 0 6px 12px;
+  border-left: 2px solid #d3dbd6;
+}
+
+.institution[data-mapping="exact"] {
+  border-left-color: #65a98e;
+}
+
+.institution[data-mapping="missing"] {
+  border-left-color: #c5a060;
+}
+
+.institutionHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.institutionHead b {
+  color: #8a9990;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.institutionHead a,
+.institutionHead strong {
+  color: var(--color-text);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.institutionHead a:hover {
+  text-decoration: underline;
+}
+
+.institutionHead small {
+  color: #8a9990;
+  font-size: 11px;
+}
+
+.stepList {
+  display: flex;
+  flex-direction: column;
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stepList li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  padding: 3px 0 3px 10px;
+  border-left: 1px solid #e4e9e5;
+  font-size: 12.5px;
+}
+
+.stepList b {
+  color: #a3ada6;
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.stepList small {
+  color: #96a49b;
+  font-size: 10.5px;
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 20px 14px 60px;
+  }
+
+  .milestoneHead h3 {
+    flex-basis: 100%;
+  }
+}
