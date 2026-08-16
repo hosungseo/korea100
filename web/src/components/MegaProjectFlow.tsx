@@ -314,57 +314,150 @@ export default function MegaProjectFlow({
     const canvas = canvasRef.current;
     if (!canvas) return;
     const canvasRect = canvas.getBoundingClientRect();
-    const paths = edges.flatMap((edge, index) => {
-      const source = procRefs.current.get(edge.source);
-      const target = procRefs.current.get(edge.target);
-      if (!source || !target) return [];
-      const sourceRect = source.getBoundingClientRect();
-      const targetRect = target.getBoundingClientRect();
-      const sLeft = sourceRect.left - canvasRect.left;
-      const sRight = sourceRect.right - canvasRect.left;
-      const sTop = sourceRect.top - canvasRect.top;
-      const sBottom = sourceRect.bottom - canvasRect.top;
-      const tLeft = targetRect.left - canvasRect.left;
-      const tRight = targetRect.right - canvasRect.left;
-      const tTop = targetRect.top - canvasRect.top;
-      const tBottom = targetRect.bottom - canvasRect.top;
-      const sCx = sLeft + sourceRect.width / 2;
-      const tCx = tLeft + targetRect.width / 2;
-      const sCy = sTop + sourceRect.height / 2;
-      const tCy = tTop + targetRect.height / 2;
-      // Deterministic per-edge channel offset so parallel runs do not overlap.
-      const jitter = ((index % 7) - 3) * 3;
-      const sameColumn = Math.abs(sCx - tCx) < 8;
-      const verticalOverlap = tTop < sBottom && tBottom > sTop;
-      let path: string;
-      if (sameColumn) {
-        // Straight vertical run.
-        path =
-          tTop >= sBottom
-            ? `M ${sCx} ${sBottom} L ${tCx} ${tTop}`
-            : `M ${sCx} ${sTop} L ${tCx} ${tBottom}`;
-      } else if (verticalOverlap) {
-        // Side-by-side: horizontal run with one mid channel if heights differ.
-        const goRight = tCx > sCx;
-        const sx = goRight ? sRight : sLeft;
-        const tx = goRight ? tLeft : tRight;
-        if (Math.abs(sCy - tCy) < 4) {
-          path = `M ${sx} ${sCy} L ${tx} ${tCy}`;
-        } else {
-          const midX = (sx + tx) / 2 + jitter;
-          path = `M ${sx} ${sCy} L ${midX} ${sCy} L ${midX} ${tCy} L ${tx} ${tCy}`;
-        }
-      } else if (tTop >= sBottom) {
-        // Downward: exit bottom, run a horizontal channel, enter top.
-        const midY = (sBottom + tTop) / 2 + jitter;
-        path = `M ${sCx} ${sBottom} L ${sCx} ${midY} L ${tCx} ${midY} L ${tCx} ${tTop}`;
-      } else {
-        // Upward (feedback): exit top, run a horizontal channel, enter bottom.
-        const midY = (sTop + tBottom) / 2 + jitter;
-        path = `M ${sCx} ${sTop} L ${sCx} ${midY} L ${tCx} ${midY} L ${tCx} ${tBottom}`;
-      }
-      return [{ ...edge, path }];
+
+    interface Rect {
+      left: number;
+      right: number;
+      top: number;
+      bottom: number;
+      cx: number;
+      cy: number;
+      width: number;
+      height: number;
+    }
+    const rectCache = new Map<string, Rect>();
+    const rectOf = (key: string): Rect | null => {
+      const cached = rectCache.get(key);
+      if (cached) return cached;
+      const element = procRefs.current.get(key);
+      if (!element) return null;
+      const r = element.getBoundingClientRect();
+      const rect: Rect = {
+        left: r.left - canvasRect.left,
+        right: r.right - canvasRect.left,
+        top: r.top - canvasRect.top,
+        bottom: r.bottom - canvasRect.top,
+        cx: r.left - canvasRect.left + r.width / 2,
+        cy: r.top - canvasRect.top + r.height / 2,
+        width: r.width,
+        height: r.height,
+      };
+      rectCache.set(key, rect);
+      return rect;
+    };
+
+    // Route classification per edge, so ports can be grouped by node side.
+    type RouteKind = "down" | "up" | "side";
+    interface Routed {
+      edge: FlowEdge;
+      kind: RouteKind;
+      s: Rect;
+      t: Rect;
+      goRight: boolean;
+    }
+    const routed: Routed[] = [];
+    edges.forEach((edge) => {
+      const s = rectOf(edge.source);
+      const t = rectOf(edge.target);
+      if (!s || !t) return;
+      const verticalOverlap = t.top < s.bottom && t.bottom > s.top;
+      const kind: RouteKind = verticalOverlap
+        ? "side"
+        : t.top >= s.bottom
+          ? "down"
+          : "up";
+      routed.push({ edge, kind, s, t, goRight: t.cx > s.cx });
     });
+
+    // Port assignment: spread each node's departures/arrivals along the
+    // relevant box side, ordered by where the counterpart sits, so no two
+    // edges share the same anchor point.
+    const portGroups = new Map<string, Routed[]>();
+    const groupKey = (nodeKey: string, side: string) => `${nodeKey}|${side}`;
+    const sideOfSource = (r: Routed) =>
+      r.kind === "side" ? (r.goRight ? "right" : "left") : r.kind === "down" ? "bottom" : "top";
+    const sideOfTarget = (r: Routed) =>
+      r.kind === "side" ? (r.goRight ? "left" : "right") : r.kind === "down" ? "top" : "bottom";
+    routed.forEach((r) => {
+      const sKey = groupKey(r.edge.source, `out-${sideOfSource(r)}`);
+      const tKey = groupKey(r.edge.target, `in-${sideOfTarget(r)}`);
+      (portGroups.get(sKey) ?? portGroups.set(sKey, []).get(sKey)!).push(r);
+      (portGroups.get(tKey) ?? portGroups.set(tKey, []).get(tKey)!).push(r);
+    });
+    portGroups.forEach((group, key) => {
+      const horizontal = key.endsWith("bottom") || key.endsWith("top");
+      const isOut = key.includes("|out-");
+      group.sort((a, b) => {
+        const ra = isOut ? a.t : a.s;
+        const rb = isOut ? b.t : b.s;
+        return horizontal ? ra.cx - rb.cx || ra.cy - rb.cy : ra.cy - rb.cy || ra.cx - rb.cx;
+      });
+    });
+    const portOffset = (
+      nodeKey: string,
+      side: string,
+      r: Routed,
+      rect: Rect,
+    ) => {
+      const group = portGroups.get(groupKey(nodeKey, side)) ?? [];
+      const index = group.indexOf(r);
+      const count = group.length;
+      const span = side.endsWith("bottom") || side.endsWith("top")
+        ? rect.width
+        : rect.height;
+      const usable = Math.max(8, span - 12);
+      return count <= 1
+        ? 0
+        : ((index + 1) / (count + 1) - 0.5) * usable;
+    };
+
+    // Channel assignment: horizontal runs near the same Y (or vertical runs
+    // near the same X) get successive 4px slots instead of piling up.
+    const channelSlots = new Map<string, number>();
+    const channelOffset = (axis: "h" | "v", base: number) => {
+      const key = `${axis}:${Math.round(base / 10)}`;
+      const slot = channelSlots.get(key) ?? 0;
+      channelSlots.set(key, slot + 1);
+      const step = Math.ceil(slot / 2) * 4;
+      return slot % 2 === 1 ? step : -step;
+    };
+
+    const paths = routed.map((r) => {
+      const { edge, kind, s, t, goRight } = r;
+      let path: string;
+      if (kind === "side") {
+        const sx = goRight ? s.right : s.left;
+        const tx = goRight ? t.left : t.right;
+        const sy = s.cy + portOffset(edge.source, `out-${goRight ? "right" : "left"}`, r, s);
+        const ty = t.cy + portOffset(edge.target, `in-${goRight ? "left" : "right"}`, r, t);
+        if (Math.abs(sy - ty) < 4) {
+          path = `M ${sx} ${sy} L ${tx} ${ty}`;
+        } else {
+          const midX = (sx + tx) / 2 + channelOffset("v", (sx + tx) / 2);
+          path = `M ${sx} ${sy} L ${midX} ${sy} L ${midX} ${ty} L ${tx} ${ty}`;
+        }
+      } else {
+        const down = kind === "down";
+        const sx = s.cx + portOffset(edge.source, `out-${down ? "bottom" : "top"}`, r, s);
+        const tx = t.cx + portOffset(edge.target, `in-${down ? "top" : "bottom"}`, r, t);
+        const sy = down ? s.bottom : s.top;
+        const ty = down ? t.top : t.bottom;
+        if (Math.abs(sx - tx) < 4) {
+          path = `M ${sx} ${sy} L ${tx} ${ty}`;
+        } else {
+          const gapLow = Math.min(sy, ty);
+          const gapHigh = Math.max(sy, ty);
+          const base = (sy + ty) / 2;
+          const midY = Math.min(
+            gapHigh - 3,
+            Math.max(gapLow + 3, base + channelOffset("h", base)),
+          );
+          path = `M ${sx} ${sy} L ${sx} ${midY} L ${tx} ${midY} L ${tx} ${ty}`;
+        }
+      }
+      return { ...edge, path };
+    });
+
     setSize({ width: canvas.scrollWidth, height: canvas.scrollHeight });
     setEdgePaths(paths);
   }, [edges]);
