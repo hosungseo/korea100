@@ -406,7 +406,12 @@ export default function MegaProjectFlow({
               기준일 {formatDate(project.asOfDate)} · 절차 {totalProcs}개 ·
               연결선 {edges.length}건 · 가로 {LANES.length}개 주체군 ×{" "}
               {subColumns.length}개 담당자 · 세로 {stageBands.length}개 게이트
-              × 49개 마일스톤
+              ×{" "}
+              {stageBands.reduce(
+                (total, band) => total + band.milestones.length,
+                0,
+              )}
+              개 마일스톤
             </p>
           </div>
           <nav className={styles.gateNav} aria-label="게이트 바로가기">
