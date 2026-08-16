@@ -3,9 +3,9 @@
   "id": "gwangju-semiconductor-cluster",
   "name": "광주 군공항 부지 반도체 클러스터",
   "projectFamily": "semiconductor",
-  "asOfDate": "2026-08-16",
+  "asOfDate": "2026-08-17",
   "status": "policy-announced",
-  "summary": "정책상 입지 결정 이후 군공항 이전·종전부지 개발, 반도체클러스터 지정, 재정·예타, 산단 통합심의, 토지·환경·안전, 전력·용수·폐수·도로, 건축·공장·가동까지 49개 중간 마일스톤 아래 법정 제도와 하위절차를 연결한 프로젝트 오버레이",
+  "summary": "정책상 입지 결정 이후 군공항 이전·종전부지 개발, 반도체클러스터 지정, 재정·예타, 산단 통합심의, 토지·환경·안전, 전력·용수·폐수·하수도·도로, 건축·공장·가동까지 49개 중간 마일스톤 아래 66개 법정 제도와 하위절차를 연결한 프로젝트 오버레이",
   "scope": {
     "location": "광주 군공항 종전부지 일원",
     "announcedArea": "약 250만 평",
@@ -176,6 +176,8 @@
       "id": "SRC_FACTORY_ACT",
       "type": "statute",
       "title": "산업집적활성화 및 공장설립에 관한 법률",
+      "publishedOn": "2026-06-02",
+      "effectiveOn": "2026-06-02",
       "url": "https://www.law.go.kr/법령/산업집적활성화및공장설립에관한법률"
     },
     {
@@ -402,6 +404,86 @@
       "publishedOn": "2025-10-28",
       "effectiveOn": "2026-04-29",
       "url": "https://law.go.kr/법령/온실가스배출권의할당및거래에관한법률"
+    },
+    {
+      "id": "SRC_MILITARY_NOISE_ACT",
+      "type": "statute",
+      "title": "군용비행장ㆍ군사격장 소음 방지 및 피해 보상에 관한 법률",
+      "publishedOn": "2025-10-01",
+      "effectiveOn": "2025-10-01",
+      "url": "https://law.go.kr/법령/군용비행장군사격장소음방지및피해보상에관한법률"
+    },
+    {
+      "id": "SRC_UNDERGROUND_SAFETY_ACT",
+      "type": "statute",
+      "title": "지하안전관리에 관한 특별법",
+      "publishedOn": "2025-05-27",
+      "effectiveOn": "2025-05-27",
+      "url": "https://law.go.kr/법령/지하안전관리에관한특별법"
+    },
+    {
+      "id": "SRC_CONSTRUCTION_TECH_ACT",
+      "type": "statute",
+      "title": "건설기술 진흥법",
+      "publishedOn": "2025-10-01",
+      "effectiveOn": "2025-10-01",
+      "url": "https://law.go.kr/법령/건설기술진흥법"
+    },
+    {
+      "id": "SRC_CHEMICAL_REGISTRATION_ACT",
+      "type": "statute",
+      "title": "화학물질의 등록 및 평가 등에 관한 법률",
+      "publishedOn": "2025-11-11",
+      "effectiveOn": "2026-05-12",
+      "url": "https://law.go.kr/법령/화학물질의등록및평가등에관한법률"
+    },
+    {
+      "id": "SRC_GROUNDWATER_ACT",
+      "type": "statute",
+      "title": "지하수법",
+      "publishedOn": "2025-10-01",
+      "effectiveOn": "2025-10-01",
+      "url": "https://law.go.kr/법령/지하수법"
+    },
+    {
+      "id": "SRC_SEWERAGE_ACT",
+      "type": "statute",
+      "title": "하수도법",
+      "publishedOn": "2025-10-01",
+      "effectiveOn": "2025-10-01",
+      "url": "https://law.go.kr/법령/하수도법"
+    },
+    {
+      "id": "SRC_AIR_REGION_ACT",
+      "type": "statute",
+      "title": "대기관리권역의 대기환경개선에 관한 특별법",
+      "publishedOn": "2025-10-01",
+      "effectiveOn": "2025-10-01",
+      "url": "https://law.go.kr/법령/대기관리권역의대기환경개선에관한특별법"
+    },
+    {
+      "id": "SRC_NUCLEAR_SAFETY_ACT",
+      "type": "statute",
+      "title": "원자력안전법",
+      "publishedOn": "2026-05-19",
+      "effectiveOn": "2026-05-19",
+      "url": "https://law.go.kr/법령/원자력안전법"
+    },
+    {
+      "id": "SRC_DEVELOPMENT_GAINS_ACT",
+      "type": "statute",
+      "title": "개발이익 환수에 관한 법률",
+      "publishedOn": "2026-06-02",
+      "effectiveOn": "2026-06-02",
+      "url": "https://law.go.kr/법령/개발이익환수에관한법률"
+    },
+    {
+      "id": "SRC_ROAD_ACT",
+      "type": "statute",
+      "title": "도로법",
+      "publishedOn": "2025-12-02",
+      "effectiveOn": "2026-06-03",
+      "url": "https://law.go.kr/법령/도로법"
     }
   ],
   "stages": [
@@ -832,12 +914,25 @@
             "P05",
             "P10"
           ]
+        },
+        {
+          "institution": "military-airfield-noise-measures-compensation",
+          "nodeIds": [
+            "P01",
+            "P02",
+            "P03",
+            "P04",
+            "P05"
+          ],
+          "mappingStatus": "candidate"
         }
       ],
       "evidence": [
         "SRC_MILITARY_AIRPORT_ACT",
-        "SRC_AIRPORT_RELOCATION_STATUS"
-      ]
+        "SRC_AIRPORT_RELOCATION_STATUS",
+        "SRC_MILITARY_NOISE_ACT"
+      ],
+      "note": "대체 군공항의 소음영향도·대책지역·기본계획은 입지와 운항계획 확정 후 별도 적용판정"
     },
     {
       "id": "N32",
@@ -885,10 +980,20 @@
             "P07",
             "P08"
           ]
+        },
+        {
+          "institution": "military-airfield-noise-measures-compensation",
+          "nodeIds": [
+            "P06",
+            "P07",
+            "P08"
+          ],
+          "mappingStatus": "candidate"
         }
       ],
       "evidence": [
-        "SRC_MILITARY_AIRPORT_ACT"
+        "SRC_MILITARY_AIRPORT_ACT",
+        "SRC_MILITARY_NOISE_ACT"
       ]
     },
     {
@@ -2095,13 +2200,23 @@
             "P06",
             "P08"
           ]
+        },
+        {
+          "institution": "development-charge-assessment",
+          "nodeIds": [
+            "P01",
+            "P02",
+            "P03"
+          ],
+          "mappingStatus": "candidate"
         }
       ],
       "evidence": [
         "SRC_INDUSTRIAL_SITING_ACT",
-        "SRC_INDUSTRIAL_FASTTRACK_ACT"
+        "SRC_INDUSTRIAL_FASTTRACK_ACT",
+        "SRC_DEVELOPMENT_GAINS_ACT"
       ],
-      "note": "산단계획 승인·지정과 실시계획·인허가 의제는 법적으로 같은 승인고시에 결합될 수 있다. 화면에서는 승인결정과 개별 의제조건 인계를 병렬 완료 항목으로 분리한다."
+      "note": "산단계획 승인·지정과 실시계획·인허가 의제는 법적으로 같은 승인고시에 결합될 수 있다. 화면에서는 승인결정과 개별 의제조건 인계를 병렬 완료 항목으로 분리한다. · 산단 개발부담금 대상·면제·감면 여부와 착수시점·개발비용 증빙을 선제 관리"
     },
     {
       "id": "N35",
@@ -2192,15 +2307,25 @@
             "P08"
           ],
           "mappingStatus": "candidate"
+        },
+        {
+          "institution": "development-charge-assessment",
+          "nodeIds": [
+            "P01",
+            "P02",
+            "P03"
+          ],
+          "mappingStatus": "candidate"
         }
       ],
       "evidence": [
         "SRC_AIRPORT_RELOCATION_ACT",
         "SRC_EIA_ACT",
         "SRC_TRAFFIC_IMPACT_ACT",
-        "SRC_URBAN_PLAN_ACT"
+        "SRC_URBAN_PLAN_ACT",
+        "SRC_DEVELOPMENT_GAINS_ACT"
       ],
-      "note": "도시관리계획 검토·심의·결정고시 경로를 후보로 연결"
+      "note": "도시관리계획 검토·심의·결정고시 경로를 후보로 연결 · 종전부지 개발부담금은 별도 사업유형·면적·시행자 기준으로 재판정"
     },
     {
       "id": "N41",
@@ -3087,19 +3212,28 @@
             "P04"
           ],
           "mappingStatus": "candidate"
+        },
+        {
+          "institution": "groundwater-development-use-permit",
+          "nodeIds": [
+            "P01",
+            "P02"
+          ],
+          "mappingStatus": "candidate"
         }
       ],
       "evidence": [
         "SRC_WATER_ACTS",
         "SRC_SEMICON_ACT",
         "SRC_WATERWORKS_ACT",
-        "SRC_WATER_ENV_ACT"
+        "SRC_WATER_ENV_ACT",
+        "SRC_GROUNDWATER_ACT"
       ],
       "note": "용수 공급주체·처리구역·폐수처리 방식이 미확정이므로 기반시설별 후보 절차로 표시"
     },
     {
       "id": "N24",
-      "name": "용수·폐수 비용분담·사업인가·관로 및 접근도로 승인",
+      "name": "용수·지하수·폐수·하수도·접근도로 승인·비용분담",
       "stage": "G6",
       "authority": "수자원 관계기관·도로관리청·사업시행자",
       "leadActor": "infrastructure-operators",
@@ -3176,19 +3310,52 @@
             "P07"
           ],
           "mappingStatus": "candidate"
+        },
+        {
+          "institution": "groundwater-development-use-permit",
+          "nodeIds": [
+            "P03",
+            "P04"
+          ],
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "sewer-connection-originator-charge",
+          "nodeIds": [
+            "P01",
+            "P02",
+            "P03",
+            "P06",
+            "P07"
+          ],
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "road-connection-permit",
+          "nodeIds": [
+            "P01",
+            "P02",
+            "P03",
+            "P04",
+            "P05"
+          ],
+          "mappingStatus": "candidate"
         }
       ],
       "evidence": [
         "SRC_WATER_ACTS",
         "SRC_INDUSTRIAL_SITING_ACT",
         "SRC_WATERWORKS_ACT",
-        "SRC_WATER_ENV_ACT"
+        "SRC_WATER_ENV_ACT",
+        "SRC_GROUNDWATER_ACT",
+        "SRC_SEWERAGE_ACT",
+        "SRC_ROAD_ACT"
       ],
-      "note": "공업용수도 사업인가와 공공폐수처리시설 비용부담·설계 경로를 후보로 연결"
+      "note": "공업용수도 사업인가와 공공폐수처리시설 비용부담·설계 경로를 후보로 연결 · 지하수 취수, 배수설비 연결·원인자부담금, 도로 연결허가는 확정 설계와 시설용량에 따라 적용판정"
     },
     {
       "id": "N25",
-      "name": "용수·폐수 관로·처리시설·접근도로 공사·준공",
+      "name": "용수·폐수·하수도·연결도로 공사·준공·공급개시",
       "stage": "G6",
       "authority": "사업시행자·수자원 관계기관·도로관리청",
       "leadActor": "infrastructure-operators",
@@ -3258,19 +3425,50 @@
             "P10"
           ],
           "mappingStatus": "candidate"
+        },
+        {
+          "institution": "groundwater-development-use-permit",
+          "nodeIds": [
+            "P05",
+            "P06",
+            "P07",
+            "P08"
+          ],
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "sewer-connection-originator-charge",
+          "nodeIds": [
+            "P04",
+            "P05",
+            "P08"
+          ],
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "road-connection-permit",
+          "nodeIds": [
+            "P06",
+            "P07",
+            "P08"
+          ],
+          "mappingStatus": "candidate"
         }
       ],
       "evidence": [
         "SRC_WATER_ACTS",
         "SRC_INDUSTRIAL_SITING_ACT",
         "SRC_WATERWORKS_ACT",
-        "SRC_WATER_ENV_ACT"
+        "SRC_WATER_ENV_ACT",
+        "SRC_GROUNDWATER_ACT",
+        "SRC_SEWERAGE_ACT",
+        "SRC_ROAD_ACT"
       ],
       "note": "통수·폐수처리시설 운영개시가 팹 시운전의 선행조건이 되도록 연결"
     },
     {
       "id": "N26",
-      "name": "산업단지 입주계약·공장설립 승인",
+      "name": "산단 관리기본계획·입주계약·공장설립 승인",
       "stage": "G7",
       "authority": "산업단지 관리기관·지방자치단체·입주기업",
       "leadActor": "local-permit-operations",
@@ -3328,6 +3526,17 @@
       "templateRefs": [
         {
           "institution": "factory-establishment-approval-management"
+        },
+        {
+          "institution": "industrial-complex-management-occupancy",
+          "nodeIds": [
+            "P01",
+            "P02",
+            "P03",
+            "P04",
+            "P05",
+            "P06"
+          ]
         }
       ],
       "evidence": [
@@ -3397,16 +3606,41 @@
             "P04",
             "P05"
           ]
+        },
+        {
+          "institution": "underground-safety-impact-assessment",
+          "nodeIds": [
+            "P01",
+            "P02",
+            "P03",
+            "P04",
+            "P05"
+          ],
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "construction-safety-quality-management-plan",
+          "nodeIds": [
+            "P01",
+            "P02",
+            "P03",
+            "P04",
+            "P05"
+          ],
+          "mappingStatus": "candidate"
         }
       ],
       "evidence": [
         "SRC_BUILDING_ACT",
-        "SRC_FIRE_CONSTRUCTION_ACT"
-      ]
+        "SRC_FIRE_CONSTRUCTION_ACT",
+        "SRC_UNDERGROUND_SAFETY_ACT",
+        "SRC_CONSTRUCTION_TECH_ACT"
+      ],
+      "note": "굴착깊이·공사규모·구조형식 문턱을 확인해 지하안전평가와 안전·품질관리계획을 착공 전 확정"
     },
     {
       "id": "N45",
-      "name": "통합환경·대기·수질·폐기물·화학·소음·공정안전 사전심사",
+      "name": "통합환경·총량·폐기물·화학등록·방사선·공정안전 사전심사",
       "stage": "G7",
       "authority": "환경부·고용노동부·산업안전보건공단·사업자",
       "leadActor": "local-permit-operations",
@@ -3543,6 +3777,49 @@
             "P07"
           ],
           "mappingStatus": "candidate"
+        },
+        {
+          "institution": "business-waste-generator-management",
+          "nodeIds": [
+            "P01",
+            "P02",
+            "P03",
+            "P04"
+          ],
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "chemical-registration-hazard-risk-assessment",
+          "nodeIds": [
+            "P01",
+            "P02",
+            "P03",
+            "P04",
+            "P05",
+            "P06"
+          ],
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "air-region-total-emissions-permit",
+          "nodeIds": [
+            "P01",
+            "P02",
+            "P03",
+            "P04",
+            "P05"
+          ],
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "radiation-generator-use-permit",
+          "nodeIds": [
+            "P01",
+            "P02",
+            "P03",
+            "P04"
+          ],
+          "mappingStatus": "candidate"
         }
       ],
       "evidence": [
@@ -3553,9 +3830,12 @@
         "SRC_AIR_ACT",
         "SRC_WATER_ENV_ACT",
         "SRC_WASTE_ACT",
-        "SRC_NOISE_ACT"
+        "SRC_NOISE_ACT",
+        "SRC_CHEMICAL_REGISTRATION_ACT",
+        "SRC_AIR_REGION_ACT",
+        "SRC_NUCLEAR_SAFETY_ACT"
       ],
-      "note": "각 제도의 규모·물질·공정 문턱을 먼저 판정하고, 비대상은 판정기록으로 해소한다. 대상 제도는 허가·심사결과를 시험가동 전까지 완료한다. · 통합환경허가 포함 여부와 배출·폐기물·화학물질·소음 시설별 법정 문턱이 미확정이므로 개별 허가를 후보 경로로 병렬 표시"
+      "note": "각 제도의 규모·물질·공정 문턱을 먼저 판정하고, 비대상은 판정기록으로 해소한다. 대상 제도는 허가·심사결과를 시험가동 전까지 완료한다. · 통합환경허가 포함 여부와 배출·폐기물·화학물질·소음 시설별 법정 문턱이 미확정이므로 개별 허가를 후보 경로로 병렬 표시 · 배출량·제조수입량·장치종류·물질·공정 문턱이 미확정인 신규 제도는 후보 경로로 병렬 표시"
     },
     {
       "id": "N28",
@@ -3636,12 +3916,47 @@
         },
         {
           "institution": "building-permit-use-approval"
+        },
+        {
+          "institution": "underground-safety-impact-assessment",
+          "nodeIds": [
+            "P06",
+            "P07",
+            "P08",
+            "P09"
+          ],
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "construction-safety-quality-management-plan",
+          "nodeIds": [
+            "P06",
+            "P07",
+            "P08",
+            "P09"
+          ],
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "development-charge-assessment",
+          "nodeIds": [
+            "P04",
+            "P05",
+            "P06",
+            "P07",
+            "P08",
+            "P09"
+          ],
+          "mappingStatus": "candidate"
         }
       ],
       "evidence": [
         "SRC_INDUSTRIAL_SITING_ACT",
         "SRC_BUILDING_ACT",
-        "SRC_EIA_ACT"
+        "SRC_EIA_ACT",
+        "SRC_UNDERGROUND_SAFETY_ACT",
+        "SRC_CONSTRUCTION_TECH_ACT",
+        "SRC_DEVELOPMENT_GAINS_ACT"
       ]
     },
     {
@@ -3702,11 +4017,21 @@
         },
         {
           "institution": "high-pressure-gas-facility-permit-inspection"
+        },
+        {
+          "institution": "radiation-generator-use-permit",
+          "nodeIds": [
+            "P05",
+            "P06",
+            "P07"
+          ],
+          "mappingStatus": "candidate"
         }
       ],
       "evidence": [
         "SRC_DANGEROUS_MATERIALS_ACT",
-        "SRC_HIGH_PRESSURE_GAS_ACT"
+        "SRC_HIGH_PRESSURE_GAS_ACT",
+        "SRC_NUCLEAR_SAFETY_ACT"
       ]
     },
     {
@@ -3763,6 +4088,13 @@
             "P09",
             "P10",
             "P11"
+          ]
+        },
+        {
+          "institution": "industrial-complex-management-occupancy",
+          "nodeIds": [
+            "P07",
+            "P08"
           ]
         }
       ],
@@ -3846,7 +4178,7 @@
     },
     {
       "id": "N29",
-      "name": "환경매체·화학·소음·배출권·사용승인·공장등록 운영확인",
+      "name": "환경·총량·폐기물·화학·방사선·사용승인·공장등록 운영확인",
       "stage": "G7",
       "authority": "건축허가권자·산업단지 관리기관·환경·안전 관계기관",
       "leadActor": "local-permit-operations",
@@ -4034,6 +4366,42 @@
             "P21"
           ],
           "mappingStatus": "candidate"
+        },
+        {
+          "institution": "business-waste-generator-management",
+          "nodeIds": [
+            "P05",
+            "P06",
+            "P07",
+            "P08"
+          ],
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "chemical-registration-hazard-risk-assessment",
+          "nodeIds": [
+            "P07",
+            "P08",
+            "P09"
+          ],
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "air-region-total-emissions-permit",
+          "nodeIds": [
+            "P06",
+            "P07",
+            "P08",
+            "P09"
+          ],
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "radiation-generator-use-permit",
+          "nodeIds": [
+            "P08"
+          ],
+          "mappingStatus": "candidate"
         }
       ],
       "evidence": [
@@ -4047,7 +4415,10 @@
         "SRC_WATER_ENV_ACT",
         "SRC_WASTE_ACT",
         "SRC_NOISE_ACT",
-        "SRC_EMISSIONS_TRADING_ACT"
+        "SRC_EMISSIONS_TRADING_ACT",
+        "SRC_CHEMICAL_REGISTRATION_ACT",
+        "SRC_AIR_REGION_ACT",
+        "SRC_NUCLEAR_SAFETY_ACT"
       ],
       "note": "가동 후 자가측정·변경허가·정기검사·배출권 의무는 생산능력·배출량·물질취급량 확정 전까지 후보 경로로 표시"
     },
