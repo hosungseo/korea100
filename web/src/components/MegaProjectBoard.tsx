@@ -286,7 +286,7 @@ function MegaDetailFlow({ groups }: { groups: DetailGroup[] }) {
     [],
   );
   const groupRows = groups
-    .map((group) => `${Math.max(8, group.nodes.length)}fr`)
+    .map((group) => `minmax(0, ${Math.max(8, group.nodes.length)}fr)`)
     .join(" ");
 
   return (
@@ -814,7 +814,7 @@ export default function MegaProjectBoard({
           (total, node) => total + (detailWeightByNode.get(node.id) ?? 12),
           0,
         );
-        return `${Math.max(54, 36 + detailWeight)}fr`;
+        return `minmax(0, ${Math.max(54, 36 + detailWeight)}fr)`;
       })
       .join(" "),
   } as CSSProperties & {
