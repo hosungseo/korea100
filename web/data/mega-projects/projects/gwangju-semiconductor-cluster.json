@@ -1,0 +1,1585 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "gwangju-semiconductor-cluster",
+  "name": "광주 군공항 부지 반도체 클러스터",
+  "projectFamily": "semiconductor",
+  "asOfDate": "2026-08-16",
+  "status": "policy-announced",
+  "summary": "정책상 입지 결정 이후 군공항 이전·종전부지 인계, 반도체클러스터·산업단지 지정, 환경·토지, 전력·용수, 건축·공장 승인과 가동까지의 선행조건을 연결한 최초 오버레이 모델",
+  "scope": {
+    "location": "광주 군공항 종전부지 일원",
+    "announcedArea": "약 250만 평",
+    "siteDecisionOn": "2026-07-06",
+    "boundaryStatus": "공식 사업구역 경계 미확인",
+    "implementationEntityStatus": "공개자료로 최종 확인 필요"
+  },
+  "parameters": {
+    "privateLandCompensationRequired": {
+      "value": null,
+      "status": "unknown",
+      "reason": "공식 사업구역 경계와 종전부지 밖 사유지 편입 여부가 공개되지 않음"
+    },
+    "heritageImpactDiagnosisRequired": {
+      "value": null,
+      "status": "unknown",
+      "reason": "확정 사업구역과 국가유산·매장유산 현황을 대조해야 함"
+    },
+    "powerDemandMw": {
+      "value": null,
+      "unit": "MW",
+      "status": "unknown",
+      "reason": "팹별 전력수요와 단계별 증설계획이 공개되지 않음"
+    },
+    "gridPath": {
+      "value": "unknown",
+      "status": "unknown",
+      "reason": "정식 전력계통영향평가, 국가첨단전략산업 면제 의결 또는 별도 신속검토 중 적용 경로 미확정"
+    }
+  },
+  "rules": [
+    {
+      "id": "RULE_PRIVATE_LAND_COMPENSATION",
+      "type": "boolean",
+      "parameter": "privateLandCompensationRequired",
+      "default": null,
+      "description": "종전부지 밖 사유지가 사업구역에 포함되면 별도 보상·취득 경로를 활성화한다."
+    },
+    {
+      "id": "RULE_HERITAGE_PATH",
+      "type": "boolean",
+      "parameter": "heritageImpactDiagnosisRequired",
+      "default": null,
+      "description": "확정 사업구역과 법정 대상요건에 따라 국가유산 영향진단·매장유산 조사 경로를 활성화한다."
+    },
+    {
+      "id": "RULE_POWER_GRID_PATH",
+      "type": "enum",
+      "parameter": "gridPath",
+      "default": "unknown",
+      "allowed": [
+        "formal-assessment",
+        "exempt-or-expedited",
+        "unknown"
+      ],
+      "description": "전력계통영향평가 대상·면제 결정과 반도체특별법상 신속처리 적용 여부에 따라 둘 중 한 경로를 선택한다."
+    }
+  ],
+  "sources": [
+    {
+      "id": "SRC_3MEGA_POLICY",
+      "type": "official-policy",
+      "title": "대한민국 대도약 3대 메가프로젝트",
+      "publishedOn": "2026-06-29",
+      "url": "https://www.korea.kr/multi/visualNewsView.do?newsId=148967345"
+    },
+    {
+      "id": "SRC_SITE_DECISION",
+      "type": "official-policy",
+      "title": "정부, 호남 반도체 산업단지 광주 군공항 부지 조성 결정",
+      "publishedOn": "2026-07-06",
+      "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148967685"
+    },
+    {
+      "id": "SRC_SEMICON_ACT",
+      "type": "statute",
+      "title": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+      "effectiveOn": "2026-08-11",
+      "url": "https://www.law.go.kr/LSW/lsInfoP.do?efYd=20260811&lsiSeq=283309"
+    },
+    {
+      "id": "SRC_SEMICON_DECREE_DRAFT",
+      "type": "legislative-draft",
+      "title": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령 제정안 입법예고",
+      "publishedOn": "2026-06-25",
+      "url": "https://www.moleg.go.kr/lawinfo/makingInfo.mo?lawSeq=87268&lawType=TYPE5"
+    },
+    {
+      "id": "SRC_ADVANCED_STRATEGIC_ACT",
+      "type": "statute",
+      "title": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+      "url": "https://www.law.go.kr/법령/국가첨단전략산업경쟁력강화및보호에관한특별조치법"
+    },
+    {
+      "id": "SRC_INDUSTRIAL_SITING_ACT",
+      "type": "statute",
+      "title": "산업입지 및 개발에 관한 법률",
+      "url": "https://www.law.go.kr/법령/산업입지및개발에관한법률"
+    },
+    {
+      "id": "SRC_INDUSTRIAL_FASTTRACK_ACT",
+      "type": "statute",
+      "title": "산업단지 인·허가 절차 간소화를 위한 특례법",
+      "url": "https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=260487"
+    },
+    {
+      "id": "SRC_EIA_ACT",
+      "type": "statute",
+      "title": "환경영향평가법",
+      "url": "https://www.law.go.kr/법령/환경영향평가법"
+    },
+    {
+      "id": "SRC_AIRPORT_RELOCATION_ACT",
+      "type": "statute",
+      "title": "광주 군 공항 이전 및 종전부지 개발 등에 관한 특별법",
+      "url": "https://www.law.go.kr/법령/광주군공항이전및종전부지개발등에관한특별법"
+    },
+    {
+      "id": "SRC_LAND_COMPENSATION_ACT",
+      "type": "statute",
+      "title": "공익사업을 위한 토지 등의 취득 및 보상에 관한 법률",
+      "url": "https://www.law.go.kr/법령/공익사업을위한토지등의취득및보상에관한법률"
+    },
+    {
+      "id": "SRC_HERITAGE_DIAGNOSIS_ACT",
+      "type": "statute",
+      "title": "국가유산영향진단법 및 매장유산 보호 관련 법령",
+      "url": "https://www.law.go.kr/법령/국가유산영향진단법"
+    },
+    {
+      "id": "SRC_DISTRIBUTED_ENERGY_ACT",
+      "type": "statute",
+      "title": "분산에너지 활성화 특별법",
+      "url": "https://www.law.go.kr/LSW/lsInfoP.do?efYd=20260603&lsiSeq=280059"
+    },
+    {
+      "id": "SRC_NATIONAL_GRID_ACT",
+      "type": "statute",
+      "title": "국가기간 전력망 확충 특별법",
+      "effectiveOn": "2026-07-01",
+      "url": "https://www.law.go.kr/LSW/lsInfoP.do?efYd=20260701&lsiSeq=284011"
+    },
+    {
+      "id": "SRC_ELECTRICITY_ACT",
+      "type": "statute",
+      "title": "전기사업법",
+      "url": "https://www.law.go.kr/법령/전기사업법"
+    },
+    {
+      "id": "SRC_WATER_ACTS",
+      "type": "statute-group",
+      "title": "수도법·하천법 등 공업용수 공급 관련 법령",
+      "url": "https://www.law.go.kr/법령/수도법"
+    },
+    {
+      "id": "SRC_FACTORY_ACT",
+      "type": "statute",
+      "title": "산업집적활성화 및 공장설립에 관한 법률",
+      "url": "https://www.law.go.kr/법령/산업집적활성화및공장설립에관한법률"
+    },
+    {
+      "id": "SRC_BUILDING_ACT",
+      "type": "statute",
+      "title": "건축법",
+      "url": "https://www.law.go.kr/법령/건축법"
+    },
+    {
+      "id": "SRC_FIRE_ACT",
+      "type": "statute",
+      "title": "소방시설 설치 및 관리에 관한 법률",
+      "url": "https://www.law.go.kr/법령/소방시설설치및관리에관한법률"
+    },
+    {
+      "id": "SRC_ENV_OPERATION_ACTS",
+      "type": "statute-group",
+      "title": "대기·수질 배출시설 운영 관련 법령",
+      "url": "https://www.law.go.kr/법령/대기환경보전법"
+    }
+  ],
+  "stages": [
+    {
+      "id": "G0",
+      "label": "정책·거버넌스"
+    },
+    {
+      "id": "G1",
+      "label": "군공항 이전·부지"
+    },
+    {
+      "id": "G2",
+      "label": "산업단지·계획"
+    },
+    {
+      "id": "G3",
+      "label": "환경·인허가 의제"
+    },
+    {
+      "id": "G4",
+      "label": "토지·사용권"
+    },
+    {
+      "id": "G5",
+      "label": "전력"
+    },
+    {
+      "id": "G6",
+      "label": "용수·도로"
+    },
+    {
+      "id": "G7",
+      "label": "건축·가동"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "N01",
+      "name": "호남 반도체 입지 광주 군공항 부지 결정",
+      "stage": "G0",
+      "authority": "정부·청와대",
+      "classification": "policy",
+      "status": "completed",
+      "confidence": "official",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [],
+      "produces": [
+        "project.site_policy_selected"
+      ],
+      "evidence": [
+        "SRC_SITE_DECISION"
+      ],
+      "actual": {
+        "completedOn": "2026-07-06"
+      },
+      "note": "정책상 입지 결정이며 산업단지 지정, 토지사용권 또는 착공승인은 아님"
+    },
+    {
+      "id": "N02",
+      "name": "통합 추진체계·마스터 일정 수립",
+      "stage": "G0",
+      "authority": "3대 메가프로젝트 전담조직·관계부처·지자체",
+      "classification": "governance",
+      "status": "active",
+      "confidence": "modeled",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "project.site_policy_selected",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "policy",
+          "basis": [
+            "SRC_3MEGA_POLICY",
+            "SRC_SITE_DECISION"
+          ]
+        }
+      ],
+      "produces": [
+        "project.integrated_delivery_ready"
+      ],
+      "evidence": [
+        "SRC_3MEGA_POLICY"
+      ],
+      "note": "전담체계 설치 방침은 확인되나 프로젝트 통합 기준일정과 책임분장은 공개자료로 추가 확인 필요"
+    },
+    {
+      "id": "N03",
+      "name": "반도체클러스터 지정 신청·심의·지정",
+      "stage": "G0",
+      "authority": "산업통상부·반도체산업경쟁력강화특별위원회",
+      "classification": "legal_gate",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "project.site_policy_selected",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "policy",
+          "basis": [
+            "SRC_SITE_DECISION"
+          ]
+        },
+        {
+          "artifact": "project.integrated_delivery_ready",
+          "relation": "start_to_start",
+          "strength": "soft",
+          "kind": "policy",
+          "basis": [
+            "SRC_SEMICON_ACT"
+          ]
+        }
+      ],
+      "produces": [
+        "semiconductor.cluster_designated"
+      ],
+      "templateRefs": [
+        {
+          "institution": "national-strategic-industry-complex"
+        }
+      ],
+      "evidence": [
+        "SRC_SEMICON_ACT",
+        "SRC_SEMICON_DECREE_DRAFT"
+      ],
+      "note": "반도체특별법상 클러스터와 국가첨단전략산업 특화단지의 중첩·선후관계는 실제 지정안에서 확인"
+    },
+    {
+      "id": "N04",
+      "name": "군공항 이전 실행·재원계획 확정",
+      "stage": "G1",
+      "authority": "국방부·종전부지 지방자치단체·관계기관",
+      "classification": "legal_gate",
+      "status": "unknown",
+      "confidence": "modeled",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "project.site_policy_selected",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "policy",
+          "basis": [
+            "SRC_SITE_DECISION"
+          ]
+        },
+        {
+          "artifact": "project.integrated_delivery_ready",
+          "relation": "start_to_start",
+          "strength": "soft",
+          "kind": "policy",
+          "basis": [
+            "SRC_AIRPORT_RELOCATION_ACT"
+          ]
+        }
+      ],
+      "produces": [
+        "military_airport.relocation_execution_plan_confirmed"
+      ],
+      "evidence": [
+        "SRC_AIRPORT_RELOCATION_ACT",
+        "SRC_SITE_DECISION"
+      ],
+      "note": "이전부지·사업방식·재원·종전부지 인계시점을 포함한 실행계획의 공개 확인이 필요"
+    },
+    {
+      "id": "N05",
+      "name": "대체 군공항 건설·기능 이전 및 종전부지 인계",
+      "stage": "G1",
+      "authority": "국방부·사업시행자·지방자치단체",
+      "classification": "delivery",
+      "status": "planned",
+      "confidence": "modeled",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "military_airport.relocation_execution_plan_confirmed",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "legal",
+          "basis": [
+            "SRC_AIRPORT_RELOCATION_ACT"
+          ]
+        }
+      ],
+      "produces": [
+        "site.former_airport_handed_over"
+      ],
+      "evidence": [
+        "SRC_AIRPORT_RELOCATION_ACT"
+      ],
+      "note": "반도체 사업의 최장 선행조건 후보. 설계·조사·인프라 사전협의는 완료 전 병렬 진행 가능"
+    },
+    {
+      "id": "N06",
+      "name": "산업단지 지정 요청·입지 조사",
+      "stage": "G2",
+      "authority": "지방자치단체·사업시행자·산업단지 지정권자",
+      "classification": "legal_gate",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "project.site_policy_selected",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "policy",
+          "basis": [
+            "SRC_SITE_DECISION",
+            "SRC_INDUSTRIAL_SITING_ACT"
+          ]
+        },
+        {
+          "artifact": "project.integrated_delivery_ready",
+          "relation": "start_to_start",
+          "strength": "soft",
+          "kind": "policy",
+          "basis": [
+            "SRC_INDUSTRIAL_FASTTRACK_ACT"
+          ]
+        }
+      ],
+      "produces": [
+        "industrial_complex.designation_request_submitted"
+      ],
+      "templateRefs": [
+        {
+          "institution": "industrial-complex-development",
+          "nodeIds": [
+            "P01",
+            "P02"
+          ]
+        }
+      ],
+      "evidence": [
+        "SRC_INDUSTRIAL_SITING_ACT",
+        "SRC_INDUSTRIAL_FASTTRACK_ACT"
+      ]
+    },
+    {
+      "id": "N07",
+      "name": "산업단지 개발계획 초안 작성",
+      "stage": "G2",
+      "authority": "사업시행자·산업단지 지정권자",
+      "classification": "plan",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "industrial_complex.designation_request_submitted",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "legal",
+          "basis": [
+            "SRC_INDUSTRIAL_SITING_ACT"
+          ]
+        },
+        {
+          "artifact": "military_airport.relocation_execution_plan_confirmed",
+          "relation": "start_to_start",
+          "strength": "soft",
+          "kind": "technical",
+          "basis": [
+            "SRC_AIRPORT_RELOCATION_ACT"
+          ],
+          "note": "확정 인계시점과 사용가능 범위를 계획에 반영"
+        }
+      ],
+      "produces": [
+        "industrial_complex.development_plan_draft"
+      ],
+      "templateRefs": [
+        {
+          "institution": "industrial-complex-development",
+          "nodeIds": [
+            "P05"
+          ]
+        }
+      ],
+      "evidence": [
+        "SRC_INDUSTRIAL_SITING_ACT"
+      ]
+    },
+    {
+      "id": "N08",
+      "name": "산업단지 지정 공고·주민·전문가 의견청취",
+      "stage": "G2",
+      "authority": "산업단지 지정권자·지방자치단체",
+      "classification": "protection_gate",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "industrial_complex.development_plan_draft",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "protection",
+          "basis": [
+            "SRC_INDUSTRIAL_SITING_ACT"
+          ]
+        }
+      ],
+      "produces": [
+        "participation.industrial_complex_opinion_completed"
+      ],
+      "templateRefs": [
+        {
+          "institution": "industrial-complex-development",
+          "nodeIds": [
+            "P19"
+          ]
+        }
+      ],
+      "evidence": [
+        "SRC_INDUSTRIAL_SITING_ACT"
+      ]
+    },
+    {
+      "id": "N09",
+      "name": "전략환경영향평가·입지대안 협의",
+      "stage": "G2",
+      "authority": "산업단지 지정권자·환경 협의기관",
+      "classification": "protection_gate",
+      "status": "planned",
+      "confidence": "modeled",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "industrial_complex.development_plan_draft",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "protection",
+          "basis": [
+            "SRC_EIA_ACT"
+          ]
+        },
+        {
+          "artifact": "participation.industrial_complex_opinion_completed",
+          "relation": "finish_to_finish",
+          "strength": "hard",
+          "kind": "protection",
+          "basis": [
+            "SRC_EIA_ACT",
+            "SRC_INDUSTRIAL_SITING_ACT"
+          ],
+          "note": "의견수렴과 환경협의는 일부 병렬 진행할 수 있으나 지정 전 모두 완료돼야 함"
+        }
+      ],
+      "produces": [
+        "environment.strategic_consultation_completed"
+      ],
+      "templateRefs": [
+        {
+          "institution": "environmental-impact-assessment-consultation"
+        }
+      ],
+      "evidence": [
+        "SRC_EIA_ACT"
+      ],
+      "verificationNeeded": "사업유형·면적별 전략환경영향평가 대상과 협의 시점을 확정 사업계획으로 재판정"
+    },
+    {
+      "id": "N10",
+      "name": "산업단지 지정·개발계획 고시",
+      "stage": "G2",
+      "authority": "산업단지 지정권자",
+      "classification": "legal_gate",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "participation.industrial_complex_opinion_completed",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "protection",
+          "basis": [
+            "SRC_INDUSTRIAL_SITING_ACT"
+          ]
+        },
+        {
+          "artifact": "environment.strategic_consultation_completed",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "protection",
+          "basis": [
+            "SRC_EIA_ACT"
+          ]
+        }
+      ],
+      "produces": [
+        "industrial_complex.designated"
+      ],
+      "templateRefs": [
+        {
+          "institution": "industrial-complex-development",
+          "nodeIds": [
+            "P03",
+            "P04"
+          ]
+        }
+      ],
+      "evidence": [
+        "SRC_INDUSTRIAL_SITING_ACT",
+        "SRC_INDUSTRIAL_FASTTRACK_ACT"
+      ]
+    },
+    {
+      "id": "N11",
+      "name": "환경영향평가서 초안·공람·주민의견",
+      "stage": "G3",
+      "authority": "사업시행자·승인기관·주민",
+      "classification": "protection_gate",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "industrial_complex.development_plan_draft",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "protection",
+          "basis": [
+            "SRC_EIA_ACT"
+          ]
+        },
+        {
+          "artifact": "industrial_complex.designated",
+          "relation": "start_to_start",
+          "strength": "soft",
+          "kind": "legal",
+          "basis": [
+            "SRC_EIA_ACT",
+            "SRC_INDUSTRIAL_FASTTRACK_ACT"
+          ],
+          "note": "산단계획 통합절차의 정확한 제출시점은 지정·실시계획 방식에 따라 조정"
+        }
+      ],
+      "produces": [
+        "environment.project_assessment_draft_completed"
+      ],
+      "templateRefs": [
+        {
+          "institution": "industrial-complex-development",
+          "nodeIds": [
+            "P06"
+          ]
+        },
+        {
+          "institution": "environmental-impact-assessment-consultation"
+        }
+      ],
+      "evidence": [
+        "SRC_EIA_ACT"
+      ]
+    },
+    {
+      "id": "N12",
+      "name": "환경영향평가 본안 검토·협의 완료",
+      "stage": "G3",
+      "authority": "승인기관·환경 협의기관·사업시행자",
+      "classification": "protection_gate",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "environment.project_assessment_draft_completed",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "protection",
+          "basis": [
+            "SRC_EIA_ACT"
+          ]
+        }
+      ],
+      "produces": [
+        "environment.consultation_completed"
+      ],
+      "templateRefs": [
+        {
+          "institution": "industrial-complex-development",
+          "nodeIds": [
+            "P08",
+            "P09"
+          ]
+        },
+        {
+          "institution": "environmental-impact-assessment-consultation"
+        }
+      ],
+      "evidence": [
+        "SRC_EIA_ACT"
+      ],
+      "note": "보완·재협의 루프는 예상기간 산정 때 별도 반복비용으로 반영"
+    },
+    {
+      "id": "N13",
+      "name": "국가유산 영향진단·매장유산 조사 경로 해소",
+      "stage": "G3",
+      "authority": "국가유산청·지방자치단체·사업시행자",
+      "classification": "protection_gate",
+      "status": "unknown",
+      "confidence": "modeled",
+      "activation": {
+        "mode": "rule",
+        "rule": "RULE_HERITAGE_PATH",
+        "equals": true
+      },
+      "requires": [
+        {
+          "artifact": "industrial_complex.development_plan_draft",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "protection",
+          "basis": [
+            "SRC_HERITAGE_DIAGNOSIS_ACT",
+            "SRC_SEMICON_ACT"
+          ]
+        }
+      ],
+      "produces": [
+        "heritage.impact_diagnosis_cleared"
+      ],
+      "templateRefs": [
+        {
+          "institution": "cultural-heritage-survey"
+        },
+        {
+          "institution": "buried-cultural-heritage-excavation-permit"
+        }
+      ],
+      "evidence": [
+        "SRC_HERITAGE_DIAGNOSIS_ACT",
+        "SRC_SEMICON_ACT"
+      ]
+    },
+    {
+      "id": "N14",
+      "name": "의제 대상 개별 인허가 기준·서류 취합",
+      "stage": "G3",
+      "authority": "사업시행자·산업단지 지정권자·관계기관",
+      "classification": "legal_gate",
+      "status": "planned",
+      "confidence": "modeled",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "industrial_complex.designated",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "legal",
+          "basis": [
+            "SRC_INDUSTRIAL_FASTTRACK_ACT"
+          ]
+        },
+        {
+          "artifact": "environment.consultation_completed",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "protection",
+          "basis": [
+            "SRC_EIA_ACT"
+          ]
+        },
+        {
+          "artifact": "heritage.impact_diagnosis_cleared",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "protection",
+          "basis": [
+            "SRC_HERITAGE_DIAGNOSIS_ACT",
+            "SRC_SEMICON_ACT"
+          ],
+          "whenRule": {
+            "rule": "RULE_HERITAGE_PATH",
+            "equals": true
+          }
+        }
+      ],
+      "produces": [
+        "cross_permits.requirements_compiled"
+      ],
+      "templateRefs": [
+        {
+          "institution": "development-permit"
+        },
+        {
+          "institution": "industrial-complex-development"
+        }
+      ],
+      "evidence": [
+        "SRC_SEMICON_ACT",
+        "SRC_INDUSTRIAL_FASTTRACK_ACT",
+        "SRC_EIA_ACT"
+      ],
+      "note": "인허가 의제는 개별 실체기준을 삭제하지 않으므로 기준충족·서류취합 노드를 별도로 유지"
+    },
+    {
+      "id": "N15",
+      "name": "산업단지 실시계획 승인·인허가 의제 확정",
+      "stage": "G3",
+      "authority": "산업단지 지정권자·관계 행정기관",
+      "classification": "legal_gate",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "cross_permits.requirements_compiled",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "legal",
+          "basis": [
+            "SRC_INDUSTRIAL_SITING_ACT",
+            "SRC_INDUSTRIAL_FASTTRACK_ACT",
+            "SRC_SEMICON_ACT"
+          ]
+        }
+      ],
+      "produces": [
+        "industrial_complex.implementation_plan_approved"
+      ],
+      "templateRefs": [
+        {
+          "institution": "industrial-complex-development",
+          "nodeIds": [
+            "P10"
+          ]
+        }
+      ],
+      "evidence": [
+        "SRC_INDUSTRIAL_SITING_ACT",
+        "SRC_INDUSTRIAL_FASTTRACK_ACT",
+        "SRC_SEMICON_ACT"
+      ],
+      "note": "의제 대상과 적용 조문은 실제 승인서에서 확정하고 개별 제도 노드는 satisfied-by 표시로 보존"
+    },
+    {
+      "id": "N16",
+      "name": "편입 사유지 보상·취득",
+      "stage": "G4",
+      "authority": "사업시행자·토지소유자·토지수용위원회",
+      "classification": "legal_gate",
+      "status": "unknown",
+      "confidence": "modeled",
+      "activation": {
+        "mode": "rule",
+        "rule": "RULE_PRIVATE_LAND_COMPENSATION",
+        "equals": true
+      },
+      "requires": [
+        {
+          "artifact": "industrial_complex.implementation_plan_approved",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "legal",
+          "basis": [
+            "SRC_INDUSTRIAL_SITING_ACT",
+            "SRC_LAND_COMPENSATION_ACT"
+          ]
+        }
+      ],
+      "produces": [
+        "land.compensation_completed"
+      ],
+      "templateRefs": [
+        {
+          "institution": "land-compensation",
+          "nodeIds": [
+            "P02",
+            "P04",
+            "P07",
+            "P09",
+            "P12",
+            "P13"
+          ]
+        }
+      ],
+      "evidence": [
+        "SRC_INDUSTRIAL_SITING_ACT",
+        "SRC_LAND_COMPENSATION_ACT"
+      ]
+    },
+    {
+      "id": "N17",
+      "name": "종전부지·편입토지 법적 사용권 확보",
+      "stage": "G4",
+      "authority": "국방부·사업시행자·지방자치단체",
+      "classification": "legal_gate",
+      "status": "planned",
+      "confidence": "modeled",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "site.former_airport_handed_over",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "legal",
+          "basis": [
+            "SRC_AIRPORT_RELOCATION_ACT"
+          ]
+        },
+        {
+          "artifact": "land.compensation_completed",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "legal",
+          "basis": [
+            "SRC_LAND_COMPENSATION_ACT"
+          ],
+          "whenRule": {
+            "rule": "RULE_PRIVATE_LAND_COMPENSATION",
+            "equals": true
+          }
+        }
+      ],
+      "produces": [
+        "site.legal_control_secured"
+      ],
+      "evidence": [
+        "SRC_AIRPORT_RELOCATION_ACT",
+        "SRC_LAND_COMPENSATION_ACT"
+      ]
+    },
+    {
+      "id": "N18",
+      "name": "단계별 전력수요 확정·계통검토 경로 결정",
+      "stage": "G5",
+      "authority": "사업자·기후에너지환경부·한국전력·전력거래소",
+      "classification": "technical_gate",
+      "status": "planned",
+      "confidence": "modeled",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "project.site_policy_selected",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "technical",
+          "basis": [
+            "SRC_SITE_DECISION",
+            "SRC_DISTRIBUTED_ENERGY_ACT",
+            "SRC_ELECTRICITY_ACT"
+          ]
+        }
+      ],
+      "produces": [
+        "power.grid_path_determined"
+      ],
+      "templateRefs": [
+        {
+          "institution": "power-supply-plan"
+        },
+        {
+          "institution": "distributed-energy-special"
+        }
+      ],
+      "evidence": [
+        "SRC_SEMICON_ACT",
+        "SRC_DISTRIBUTED_ENERGY_ACT",
+        "SRC_ELECTRICITY_ACT"
+      ],
+      "note": "공개되지 않은 팹별 MW와 대상지역·면제 의결 여부를 먼저 확정해야 후속 경로 선택 가능"
+    },
+    {
+      "id": "N19",
+      "name": "정식 전력계통영향평가·공급가능성 검토",
+      "stage": "G5",
+      "authority": "사업자·기후에너지환경부·전력정책심의회·한국전력",
+      "classification": "technical_gate",
+      "status": "unknown",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "rule",
+        "rule": "RULE_POWER_GRID_PATH",
+        "equals": "formal-assessment"
+      },
+      "requires": [
+        {
+          "artifact": "power.grid_path_determined",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "technical",
+          "basis": [
+            "SRC_DISTRIBUTED_ENERGY_ACT"
+          ]
+        }
+      ],
+      "produces": [
+        "power.grid_clearance_obtained"
+      ],
+      "templateRefs": [
+        {
+          "institution": "distributed-energy-special"
+        }
+      ],
+      "evidence": [
+        "SRC_DISTRIBUTED_ENERGY_ACT"
+      ]
+    },
+    {
+      "id": "N20",
+      "name": "계통영향평가 면제·반도체 신속처리 및 공급검토",
+      "stage": "G5",
+      "authority": "국가첨단전략산업위원회·관계기관·한국전력",
+      "classification": "technical_gate",
+      "status": "unknown",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "rule",
+        "rule": "RULE_POWER_GRID_PATH",
+        "equals": "exempt-or-expedited"
+      },
+      "requires": [
+        {
+          "artifact": "power.grid_path_determined",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "technical",
+          "basis": [
+            "SRC_DISTRIBUTED_ENERGY_ACT",
+            "SRC_SEMICON_ACT"
+          ]
+        },
+        {
+          "artifact": "semiconductor.cluster_designated",
+          "relation": "finish_to_start",
+          "strength": "soft",
+          "kind": "legal",
+          "basis": [
+            "SRC_SEMICON_ACT",
+            "SRC_ADVANCED_STRATEGIC_ACT"
+          ],
+          "note": "실제 면제 법적 근거가 특화단지 지정 또는 위원회 의결인지 확인"
+        }
+      ],
+      "produces": [
+        "power.grid_clearance_obtained"
+      ],
+      "templateRefs": [
+        {
+          "institution": "national-strategic-industry-complex"
+        },
+        {
+          "institution": "distributed-energy-special"
+        }
+      ],
+      "evidence": [
+        "SRC_DISTRIBUTED_ENERGY_ACT",
+        "SRC_SEMICON_ACT",
+        "SRC_ADVANCED_STRATEGIC_ACT"
+      ]
+    },
+    {
+      "id": "N21",
+      "name": "송전선로·변전소 사업계획·승인",
+      "stage": "G5",
+      "authority": "기후에너지환경부·한국전력·국가기간전력망확충위원회",
+      "classification": "technical_gate",
+      "status": "planned",
+      "confidence": "modeled",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "power.grid_clearance_obtained",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "technical",
+          "basis": [
+            "SRC_NATIONAL_GRID_ACT",
+            "SRC_ELECTRICITY_ACT"
+          ]
+        }
+      ],
+      "produces": [
+        "power.transmission_plan_approved"
+      ],
+      "templateRefs": [
+        {
+          "institution": "power-generation-grid-connection",
+          "nodeIds": [
+            "P02",
+            "P07",
+            "P09"
+          ]
+        }
+      ],
+      "evidence": [
+        "SRC_NATIONAL_GRID_ACT",
+        "SRC_ELECTRICITY_ACT"
+      ],
+      "verificationNeeded": "필요 송변전설비가 국가기간 전력망 설비 지정대상인지 실제 전력공급계획으로 판정"
+    },
+    {
+      "id": "N22",
+      "name": "송변전망 공사·계통접속·공급계약 완료",
+      "stage": "G5",
+      "authority": "한국전력·사업자·전기안전 관계기관",
+      "classification": "delivery",
+      "status": "planned",
+      "confidence": "modeled",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "power.transmission_plan_approved",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "technical",
+          "basis": [
+            "SRC_NATIONAL_GRID_ACT",
+            "SRC_ELECTRICITY_ACT"
+          ]
+        },
+        {
+          "artifact": "industrial_complex.implementation_plan_approved",
+          "relation": "start_to_start",
+          "strength": "soft",
+          "kind": "legal",
+          "basis": [
+            "SRC_INDUSTRIAL_SITING_ACT"
+          ],
+          "note": "산단 내부 전력시설과 외부 송변전 공정의 인터페이스를 병렬 조정"
+        }
+      ],
+      "produces": [
+        "power.connection_ready"
+      ],
+      "templateRefs": [
+        {
+          "institution": "power-generation-grid-connection",
+          "nodeIds": [
+            "P11",
+            "P12",
+            "P13",
+            "P15",
+            "P16"
+          ]
+        }
+      ],
+      "evidence": [
+        "SRC_NATIONAL_GRID_ACT",
+        "SRC_ELECTRICITY_ACT"
+      ]
+    },
+    {
+      "id": "N23",
+      "name": "공업용수·접근도로 수요·공급계획 확정",
+      "stage": "G6",
+      "authority": "사업자·지방자치단체·수자원 관계기관·도로관리청",
+      "classification": "technical_gate",
+      "status": "planned",
+      "confidence": "modeled",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "project.site_policy_selected",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "technical",
+          "basis": [
+            "SRC_SITE_DECISION",
+            "SRC_WATER_ACTS",
+            "SRC_SEMICON_ACT"
+          ]
+        }
+      ],
+      "produces": [
+        "water_road.demand_and_source_plan_confirmed"
+      ],
+      "templateRefs": [
+        {
+          "institution": "industrial-water-intake-permit",
+          "nodeIds": [
+            "P01",
+            "P02"
+          ]
+        },
+        {
+          "institution": "national-road-rail-soc"
+        }
+      ],
+      "evidence": [
+        "SRC_WATER_ACTS",
+        "SRC_SEMICON_ACT"
+      ]
+    },
+    {
+      "id": "N24",
+      "name": "용수 공급협약·필요 허가 및 접근도로 계획 승인",
+      "stage": "G6",
+      "authority": "수자원 관계기관·도로관리청·사업시행자",
+      "classification": "legal_gate",
+      "status": "planned",
+      "confidence": "modeled",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "water_road.demand_and_source_plan_confirmed",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "technical",
+          "basis": [
+            "SRC_WATER_ACTS"
+          ]
+        },
+        {
+          "artifact": "industrial_complex.development_plan_draft",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "legal",
+          "basis": [
+            "SRC_INDUSTRIAL_SITING_ACT",
+            "SRC_WATER_ACTS"
+          ]
+        }
+      ],
+      "produces": [
+        "water_road.approvals_secured"
+      ],
+      "templateRefs": [
+        {
+          "institution": "industrial-water-intake-permit",
+          "nodeIds": [
+            "P03",
+            "P10",
+            "P11"
+          ]
+        },
+        {
+          "institution": "road-occupation-permit"
+        }
+      ],
+      "evidence": [
+        "SRC_WATER_ACTS",
+        "SRC_INDUSTRIAL_SITING_ACT"
+      ]
+    },
+    {
+      "id": "N25",
+      "name": "용수관로·접근도로 기반시설 공사 완료",
+      "stage": "G6",
+      "authority": "사업시행자·수자원 관계기관·도로관리청",
+      "classification": "delivery",
+      "status": "planned",
+      "confidence": "modeled",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "water_road.approvals_secured",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "technical",
+          "basis": [
+            "SRC_WATER_ACTS",
+            "SRC_INDUSTRIAL_SITING_ACT"
+          ]
+        },
+        {
+          "artifact": "industrial_complex.implementation_plan_approved",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "legal",
+          "basis": [
+            "SRC_INDUSTRIAL_SITING_ACT",
+            "SRC_INDUSTRIAL_FASTTRACK_ACT"
+          ]
+        }
+      ],
+      "produces": [
+        "water_road.infrastructure_ready"
+      ],
+      "templateRefs": [
+        {
+          "institution": "industrial-water-intake-permit",
+          "nodeIds": [
+            "P13"
+          ]
+        }
+      ],
+      "evidence": [
+        "SRC_WATER_ACTS",
+        "SRC_INDUSTRIAL_SITING_ACT"
+      ]
+    },
+    {
+      "id": "N26",
+      "name": "산업단지 입주계약·공장설립 승인",
+      "stage": "G7",
+      "authority": "산업단지 관리기관·지방자치단체·입주기업",
+      "classification": "legal_gate",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "industrial_complex.designated",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "legal",
+          "basis": [
+            "SRC_FACTORY_ACT",
+            "SRC_INDUSTRIAL_SITING_ACT"
+          ]
+        },
+        {
+          "artifact": "industrial_complex.implementation_plan_approved",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "legal",
+          "basis": [
+            "SRC_INDUSTRIAL_SITING_ACT"
+          ]
+        },
+        {
+          "artifact": "site.legal_control_secured",
+          "relation": "finish_to_finish",
+          "strength": "soft",
+          "kind": "legal",
+          "basis": [
+            "SRC_FACTORY_ACT"
+          ]
+        }
+      ],
+      "produces": [
+        "factory.occupancy_and_establishment_approved"
+      ],
+      "templateRefs": [
+        {
+          "institution": "factory-establishment-approval-management"
+        }
+      ],
+      "evidence": [
+        "SRC_FACTORY_ACT",
+        "SRC_INDUSTRIAL_SITING_ACT"
+      ]
+    },
+    {
+      "id": "N27",
+      "name": "건축허가·소방동의·착공신고",
+      "stage": "G7",
+      "authority": "건축허가권자·소방관서·입주기업",
+      "classification": "legal_gate",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "industrial_complex.implementation_plan_approved",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "legal",
+          "basis": [
+            "SRC_INDUSTRIAL_SITING_ACT",
+            "SRC_BUILDING_ACT"
+          ]
+        },
+        {
+          "artifact": "factory.occupancy_and_establishment_approved",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "legal",
+          "basis": [
+            "SRC_FACTORY_ACT",
+            "SRC_BUILDING_ACT"
+          ]
+        }
+      ],
+      "produces": [
+        "construction.permits_cleared"
+      ],
+      "templateRefs": [
+        {
+          "institution": "building-permit-use-approval"
+        },
+        {
+          "institution": "fire-service"
+        }
+      ],
+      "evidence": [
+        "SRC_BUILDING_ACT",
+        "SRC_FIRE_ACT"
+      ]
+    },
+    {
+      "id": "N28",
+      "name": "부지조성·팹·부대시설 건설",
+      "stage": "G7",
+      "authority": "산업단지 사업시행자·입주기업·시공사",
+      "classification": "delivery",
+      "status": "planned",
+      "confidence": "modeled",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "site.legal_control_secured",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "legal",
+          "basis": [
+            "SRC_AIRPORT_RELOCATION_ACT",
+            "SRC_LAND_COMPENSATION_ACT"
+          ]
+        },
+        {
+          "artifact": "construction.permits_cleared",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "legal",
+          "basis": [
+            "SRC_BUILDING_ACT",
+            "SRC_FIRE_ACT"
+          ]
+        },
+        {
+          "artifact": "environment.consultation_completed",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "protection",
+          "basis": [
+            "SRC_EIA_ACT"
+          ]
+        }
+      ],
+      "produces": [
+        "facility.construction_completed"
+      ],
+      "templateRefs": [
+        {
+          "institution": "industrial-complex-development",
+          "nodeIds": [
+            "P13",
+            "P14"
+          ]
+        },
+        {
+          "institution": "building-permit-use-approval"
+        }
+      ],
+      "evidence": [
+        "SRC_INDUSTRIAL_SITING_ACT",
+        "SRC_BUILDING_ACT",
+        "SRC_EIA_ACT"
+      ]
+    },
+    {
+      "id": "N29",
+      "name": "사용승인·공장등록·환경 운영허가·검사",
+      "stage": "G7",
+      "authority": "건축허가권자·산업단지 관리기관·환경·안전 관계기관",
+      "classification": "legal_gate",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "facility.construction_completed",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "legal",
+          "basis": [
+            "SRC_BUILDING_ACT",
+            "SRC_FACTORY_ACT",
+            "SRC_ENV_OPERATION_ACTS"
+          ]
+        }
+      ],
+      "produces": [
+        "facility.operation_approvals_cleared"
+      ],
+      "templateRefs": [
+        {
+          "institution": "building-permit-use-approval"
+        },
+        {
+          "institution": "factory-establishment-approval-management"
+        },
+        {
+          "institution": "air-emission-facility-permit"
+        },
+        {
+          "institution": "water-pollution-discharge-permit"
+        }
+      ],
+      "evidence": [
+        "SRC_BUILDING_ACT",
+        "SRC_FACTORY_ACT",
+        "SRC_ENV_OPERATION_ACTS"
+      ]
+    },
+    {
+      "id": "N30",
+      "name": "시험가동·상업가동 개시",
+      "stage": "G7",
+      "authority": "입주기업·전력·용수 공급기관·관계 행정기관",
+      "classification": "operation",
+      "status": "planned",
+      "confidence": "modeled",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "facility.operation_approvals_cleared",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "legal",
+          "basis": [
+            "SRC_BUILDING_ACT",
+            "SRC_FACTORY_ACT",
+            "SRC_ENV_OPERATION_ACTS"
+          ]
+        },
+        {
+          "artifact": "power.connection_ready",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "technical",
+          "basis": [
+            "SRC_ELECTRICITY_ACT",
+            "SRC_NATIONAL_GRID_ACT"
+          ]
+        },
+        {
+          "artifact": "water_road.infrastructure_ready",
+          "relation": "finish_to_start",
+          "strength": "hard",
+          "kind": "technical",
+          "basis": [
+            "SRC_WATER_ACTS",
+            "SRC_INDUSTRIAL_SITING_ACT"
+          ]
+        }
+      ],
+      "produces": [
+        "facility.commercial_operation_started"
+      ],
+      "evidence": [
+        "SRC_3MEGA_POLICY",
+        "SRC_SEMICON_ACT"
+      ]
+    }
+  ]
+}
