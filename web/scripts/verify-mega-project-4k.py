@@ -66,7 +66,14 @@ def main() -> None:
                 horizontalScroll: document.documentElement.scrollWidth > document.documentElement.clientWidth,
                 verticalScroll: document.documentElement.scrollHeight > document.documentElement.clientHeight,
                 clippedMilestones: milestones.filter(outside).map((element) => element.getAttribute('aria-label')),
-                clippedDetailGroups: detailGroups.filter(outside).map((element) => element.querySelector('a,strong')?.textContent?.trim() || 'unknown'),
+                clippedDetailGroups: detailGroups.filter(outside).map((element) => {
+                  const rect = element.getBoundingClientRect();
+                  return {
+                    name: element.querySelector('a,strong')?.textContent?.trim() || 'unknown',
+                    milestone: element.closest('article')?.getAttribute('aria-label') || 'unknown',
+                    rect: { left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom, width: rect.width, height: rect.height },
+                  };
+                }),
                 missingTemplateGroups: detailGroups.filter((element) => element.dataset.mapping === 'missing').length,
               };
             }
