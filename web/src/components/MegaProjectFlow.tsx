@@ -68,6 +68,14 @@ const EDGE_KINDS: { kind: EdgeKind; label: string }[] = [
   { kind: "conditional", label: "미확정 분기" },
 ];
 
+const EDGE_COLORS: { kind: EdgeKind; color: string }[] = [
+  { kind: "sequence", color: "#16805e" },
+  { kind: "chain", color: "#1c6ea4" },
+  { kind: "internal", color: "#3f7a63" },
+  { kind: "handoff", color: "#0d8160" },
+  { kind: "conditional", color: "#b47a19" },
+];
+
 function laneOf(actor: string): number {
   if (/주민|토지소유|소유자|점유자|이해관계/.test(actor)) return 1;
   if (
@@ -306,43 +314,54 @@ export default function MegaProjectFlow({
     const canvas = canvasRef.current;
     if (!canvas) return;
     const canvasRect = canvas.getBoundingClientRect();
-    const paths = edges.flatMap((edge) => {
+    const paths = edges.flatMap((edge, index) => {
       const source = procRefs.current.get(edge.source);
       const target = procRefs.current.get(edge.target);
       if (!source || !target) return [];
       const sourceRect = source.getBoundingClientRect();
       const targetRect = target.getBoundingClientRect();
-      const sourceCenterX =
-        sourceRect.left - canvasRect.left + sourceRect.width / 2;
-      const targetCenterX =
-        targetRect.left - canvasRect.left + targetRect.width / 2;
-      const sameColumn =
-        Math.abs(sourceCenterX - targetCenterX) < sourceRect.width * 0.6;
+      const sLeft = sourceRect.left - canvasRect.left;
+      const sRight = sourceRect.right - canvasRect.left;
+      const sTop = sourceRect.top - canvasRect.top;
+      const sBottom = sourceRect.bottom - canvasRect.top;
+      const tLeft = targetRect.left - canvasRect.left;
+      const tRight = targetRect.right - canvasRect.left;
+      const tTop = targetRect.top - canvasRect.top;
+      const tBottom = targetRect.bottom - canvasRect.top;
+      const sCx = sLeft + sourceRect.width / 2;
+      const tCx = tLeft + targetRect.width / 2;
+      const sCy = sTop + sourceRect.height / 2;
+      const tCy = tTop + targetRect.height / 2;
+      // Deterministic per-edge channel offset so parallel runs do not overlap.
+      const jitter = ((index % 7) - 3) * 3;
+      const sameColumn = Math.abs(sCx - tCx) < 8;
+      const verticalOverlap = tTop < sBottom && tBottom > sTop;
       let path: string;
       if (sameColumn) {
-        const goDown = targetRect.top >= sourceRect.top;
-        const sourceY = goDown
-          ? sourceRect.bottom - canvasRect.top
-          : sourceRect.top - canvasRect.top;
-        const targetY = goDown
-          ? targetRect.top - canvasRect.top
-          : targetRect.bottom - canvasRect.top;
-        const bend = Math.max(4, Math.abs(targetY - sourceY) * 0.35);
-        const direction = goDown ? 1 : -1;
-        path = `M ${sourceCenterX} ${sourceY} C ${sourceCenterX + 5} ${sourceY + bend * direction}, ${targetCenterX - 5} ${targetY - bend * direction}, ${targetCenterX} ${targetY}`;
+        // Straight vertical run.
+        path =
+          tTop >= sBottom
+            ? `M ${sCx} ${sBottom} L ${tCx} ${tTop}`
+            : `M ${sCx} ${sTop} L ${tCx} ${tBottom}`;
+      } else if (verticalOverlap) {
+        // Side-by-side: horizontal run with one mid channel if heights differ.
+        const goRight = tCx > sCx;
+        const sx = goRight ? sRight : sLeft;
+        const tx = goRight ? tLeft : tRight;
+        if (Math.abs(sCy - tCy) < 4) {
+          path = `M ${sx} ${sCy} L ${tx} ${tCy}`;
+        } else {
+          const midX = (sx + tx) / 2 + jitter;
+          path = `M ${sx} ${sCy} L ${midX} ${sCy} L ${midX} ${tCy} L ${tx} ${tCy}`;
+        }
+      } else if (tTop >= sBottom) {
+        // Downward: exit bottom, run a horizontal channel, enter top.
+        const midY = (sBottom + tTop) / 2 + jitter;
+        path = `M ${sCx} ${sBottom} L ${sCx} ${midY} L ${tCx} ${midY} L ${tCx} ${tTop}`;
       } else {
-        const goRight = targetCenterX > sourceCenterX;
-        const sourceX = goRight
-          ? sourceRect.right - canvasRect.left
-          : sourceRect.left - canvasRect.left;
-        const sourceY = sourceRect.top - canvasRect.top + sourceRect.height / 2;
-        const targetX = goRight
-          ? targetRect.left - canvasRect.left
-          : targetRect.right - canvasRect.left;
-        const targetY = targetRect.top - canvasRect.top + targetRect.height / 2;
-        const dx = Math.max(18, Math.abs(targetX - sourceX) * 0.3);
-        const direction = goRight ? 1 : -1;
-        path = `M ${sourceX} ${sourceY} C ${sourceX + dx * direction} ${sourceY}, ${targetX - dx * direction} ${targetY}, ${targetX} ${targetY}`;
+        // Upward (feedback): exit top, run a horizontal channel, enter bottom.
+        const midY = (sTop + tBottom) / 2 + jitter;
+        path = `M ${sCx} ${sTop} L ${sCx} ${midY} L ${tCx} ${midY} L ${tCx} ${tBottom}`;
       }
       return [{ ...edge, path }];
     });
@@ -503,6 +522,22 @@ export default function MegaProjectFlow({
               viewBox={`0 0 ${size.width} ${size.height}`}
               aria-hidden="true"
             >
+              <defs>
+                {EDGE_COLORS.map(({ kind, color }) => (
+                  <marker
+                    key={kind}
+                    id={`flow-arrow-${kind}`}
+                    viewBox="0 0 8 8"
+                    refX="7"
+                    refY="4"
+                    markerWidth="5"
+                    markerHeight="5"
+                    orient="auto-start-reverse"
+                  >
+                    <path d="M 0 0 L 8 4 L 0 8 z" fill={color} />
+                  </marker>
+                ))}
+              </defs>
               {edgePaths
                 .filter((edge) => !hiddenKinds.has(edge.kind))
                 .map((edge) => {
@@ -519,6 +554,7 @@ export default function MegaProjectFlow({
                       data-dim={
                         hoverKey !== null && !active ? "true" : "false"
                       }
+                      markerEnd={`url(#flow-arrow-${edge.kind})`}
                     />
                   );
                 })}
