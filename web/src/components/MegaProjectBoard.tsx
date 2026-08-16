@@ -28,8 +28,6 @@ interface MegaProjectBoardProps {
   templates: Record<string, string>;
 }
 
-type BoardFilter = "all" | "ready" | "protection";
-
 interface DependencyState {
   dependency: MegaDependency;
   applicable: boolean | "unknown";
@@ -53,42 +51,28 @@ interface EdgeGeometry extends GraphEdge {
 
 const STATUS_META: Record<
   MegaDisplayStatus,
-  { label: string; shortLabel: string }
+  { label: string; code: string }
 > = {
-  completed: { label: "완료", shortLabel: "완료" },
-  active: { label: "진행 중", shortLabel: "진행" },
-  ready: { label: "지금 착수 가능", shortLabel: "가능" },
-  blocked: { label: "선행조건 대기", shortLabel: "대기" },
-  conditional: { label: "조건 확인 필요", shortLabel: "조건" },
-  inactive: { label: "현재 경로 아님", shortLabel: "제외" },
+  completed: { label: "완료", code: "DONE" },
+  active: { label: "진행 중", code: "LIVE" },
+  ready: { label: "지금 착수", code: "OPEN" },
+  blocked: { label: "선행 대기", code: "WAIT" },
+  conditional: { label: "조건 미정", code: "BRANCH" },
+  inactive: { label: "경로 제외", code: "OFF" },
 };
 
 const CLASSIFICATION_LABELS: Record<
   MegaProjectNode["classification"],
   string
 > = {
-  policy: "정책 결정",
-  governance: "추진체계",
+  policy: "정책",
+  governance: "거버넌스",
   plan: "계획",
-  legal_gate: "법적 게이트",
-  protection_gate: "보호 게이트",
-  technical_gate: "기술 게이트",
-  delivery: "사업 이행",
+  legal_gate: "법정",
+  protection_gate: "보호",
+  technical_gate: "기술",
+  delivery: "이행",
   operation: "가동",
-};
-
-const CONFIDENCE_LABELS: Record<MegaProjectNode["confidence"], string> = {
-  official: "공식 확인",
-  statutory: "법령 근거",
-  modeled: "구조 추정",
-  unknown: "추가 확인",
-};
-
-const RELATION_LABELS: Record<MegaDependency["relation"], string> = {
-  finish_to_start: "완료 후 착수",
-  start_to_start: "병렬 착수",
-  finish_to_finish: "완료 전 충족",
-  satisfied_by: "충족 필요",
 };
 
 const KIND_LABELS: Record<MegaDependency["kind"], string> = {
@@ -99,44 +83,34 @@ const KIND_LABELS: Record<MegaDependency["kind"], string> = {
   financial: "재정",
 };
 
-const RULE_CONTROLS: Array<{
-  rule: string;
-  label: string;
-  options: Array<{ label: string; value: MegaRuleValue }>;
-}> = [
-  {
-    rule: "RULE_PRIVATE_LAND_COMPENSATION",
-    label: "사유지 보상",
-    options: [
-      { label: "미확정", value: null },
-      { label: "필요", value: true },
-      { label: "불필요", value: false },
-    ],
-  },
-  {
-    rule: "RULE_HERITAGE_PATH",
-    label: "국가유산",
-    options: [
-      { label: "미확정", value: null },
-      { label: "필요", value: true },
-      { label: "불필요", value: false },
-    ],
-  },
-  {
-    rule: "RULE_POWER_GRID_PATH",
-    label: "전력계통 경로",
-    options: [
-      { label: "미확정", value: "unknown" },
-      { label: "정식 평가", value: "formal-assessment" },
-      { label: "면제·신속", value: "exempt-or-expedited" },
-    ],
-  },
-];
+const RELATION_LABELS: Record<MegaDependency["relation"], string> = {
+  finish_to_start: "완료 후 착수",
+  start_to_start: "병렬 착수",
+  finish_to_finish: "완료 전 충족",
+  satisfied_by: "충족 필요",
+};
 
-const FILTERS: Array<{ id: BoardFilter; label: string }> = [
-  { id: "all", label: "전체 경로" },
-  { id: "ready", label: "지금 가능" },
-  { id: "protection", label: "보호 절차" },
+const RULE_LABELS: Record<string, { code: string; label: string }> = {
+  RULE_PRIVATE_LAND_COMPENSATION: {
+    code: "B01",
+    label: "사유지 보상 경로",
+  },
+  RULE_HERITAGE_PATH: {
+    code: "B02",
+    label: "국가유산 조사 경로",
+  },
+  RULE_POWER_GRID_PATH: {
+    code: "B03",
+    label: "전력계통 검토 경로",
+  },
+};
+
+const COUNT_ORDER: MegaDisplayStatus[] = [
+  "completed",
+  "active",
+  "ready",
+  "conditional",
+  "blocked",
 ];
 
 function valuesEqual(left: MegaRuleValue, right: MegaRuleValue) {
@@ -181,11 +155,6 @@ function getDependencyApplicability(
   return valuesEqual(current, dependency.whenRule.equals);
 }
 
-function ruleValueKey(value: MegaRuleValue) {
-  if (value === null) return "null";
-  return String(value);
-}
-
 function formatDate(date: string) {
   const [year, month, day] = date.split("-");
   return `${year}.${month}.${day}`;
@@ -198,14 +167,11 @@ function formatArtifactLabel(
   return artifactMap.get(artifactId)?.label ?? artifactId;
 }
 
-function getClearStateMessage(status: MegaDisplayStatus) {
-  if (status === "completed") return "이 절차는 완료됐습니다.";
-  if (status === "active") return "필수 착수조건을 충족해 현재 진행 중입니다.";
-  if (status === "inactive") return "선택한 시나리오에서는 적용되지 않는 경로입니다.";
-  if (status === "conditional") {
-    return "필수 착수조건과 별개로 경로 적용 여부를 먼저 확인해야 합니다.";
-  }
-  return "필수 착수조건이 충족됐습니다. 현재 바로 착수할 수 있습니다.";
+function formatRuleValue(value: MegaRuleValue | number) {
+  if (value === null || value === "unknown") return "미확정";
+  if (value === true) return "필요";
+  if (value === false) return "불필요";
+  return String(value);
 }
 
 export default function MegaProjectBoard({
@@ -213,25 +179,12 @@ export default function MegaProjectBoard({
   artifacts,
   templates,
 }: MegaProjectBoardProps) {
-  const [selectedNodeId, setSelectedNodeId] = useState(
-    project.nodes.find((node) => node.id === "N04")?.id ??
-      project.nodes[0]?.id ??
-      "",
-  );
-  const [filter, setFilter] = useState<BoardFilter>("all");
-  const [ruleValues, setRuleValues] = useState<MegaRuleValues>(() =>
-    getInitialRuleValues(project),
-  );
   const [edgeGeometry, setEdgeGeometry] = useState<EdgeGeometry[]>([]);
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
-
   const canvasRef = useRef<HTMLDivElement | null>(null);
-  const nodeRefs = useRef(new Map<string, HTMLButtonElement>());
+  const nodeRefs = useRef(new Map<string, HTMLElement>());
 
-  const nodeMap = useMemo(
-    () => new Map(project.nodes.map((node) => [node.id, node])),
-    [project.nodes],
-  );
+  const ruleValues = useMemo(() => getInitialRuleValues(project), [project]);
   const artifactMap = useMemo(
     () => new Map(artifacts.map((artifact) => [artifact.id, artifact])),
     [artifacts],
@@ -239,6 +192,20 @@ export default function MegaProjectBoard({
   const sourceMap = useMemo(
     () => new Map(project.sources.map((source) => [source.id, source])),
     [project.sources],
+  );
+  const sourceCodeMap = useMemo(
+    () =>
+      new Map(
+        project.sources.map((source, index) => [
+          source.id,
+          `S${String(index + 1).padStart(2, "0")}`,
+        ]),
+      ),
+    [project.sources],
+  );
+  const nodeOrder = useMemo(
+    () => new Map(project.nodes.map((node, index) => [node.id, index])),
+    [project.nodes],
   );
   const producersByArtifact = useMemo(() => {
     const producerMap = new Map<string, string[]>();
@@ -291,15 +258,10 @@ export default function MegaProjectBoard({
   );
 
   const dependencyState = useCallback(
-    (
-      dependency: MegaDependency,
-      extraCompleted: Set<string> = new Set(),
-    ): DependencyState => {
+    (dependency: MegaDependency): DependencyState => {
       const applicable = getDependencyApplicability(dependency, ruleValues);
       const producerIds = producersByArtifact.get(dependency.artifact) ?? [];
-      const completed =
-        completedArtifacts.has(dependency.artifact) ||
-        extraCompleted.has(dependency.artifact);
+      const completed = completedArtifacts.has(dependency.artifact);
       const producerStarted = producerIds.some((id) => startedNodeIds.has(id));
 
       let satisfied = applicable === false;
@@ -319,9 +281,9 @@ export default function MegaProjectBoard({
   );
 
   const getStartBlockers = useCallback(
-    (node: MegaProjectNode, extraCompleted: Set<string> = new Set()) =>
+    (node: MegaProjectNode) =>
       node.requires
-        .map((dependency) => dependencyState(dependency, extraCompleted))
+        .map((dependency) => dependencyState(dependency))
         .filter(
           (state) =>
             state.dependency.strength === "hard" &&
@@ -369,13 +331,30 @@ export default function MegaProjectBoard({
             kind: dependency.kind,
             conditional:
               applicable === "unknown" ||
-              activationByNode.get(sourceId) === "unknown",
+              activationByNode.get(sourceId) === "unknown" ||
+              activationByNode.get(targetNode.id) === "unknown",
           });
         });
       });
     });
     return result;
   }, [activationByNode, producersByArtifact, project.nodes, ruleValues]);
+
+  const downstreamByNode = useMemo(() => {
+    const result = new Map<string, string[]>();
+    project.nodes.forEach((node) => result.set(node.id, []));
+    edges.forEach((edge) => {
+      const current = result.get(edge.source) ?? [];
+      if (!current.includes(edge.target)) current.push(edge.target);
+      result.set(edge.source, current);
+    });
+    result.forEach((ids) =>
+      ids.sort((left, right) =>
+        (nodeOrder.get(left) ?? 0) - (nodeOrder.get(right) ?? 0),
+      ),
+    );
+    return result;
+  }, [edges, nodeOrder, project.nodes]);
 
   const updateEdgeGeometry = useCallback(() => {
     const canvas = canvasRef.current;
@@ -396,15 +375,16 @@ export default function MegaProjectBoard({
       const targetY = targetRect.top - canvasRect.top + targetRect.height / 2;
 
       let path: string;
-      if (targetLeft > sourceX + 26) {
-        const bend = Math.max(34, (targetLeft - sourceX) * 0.46);
+      if (targetLeft > sourceX + 18) {
+        const bend = Math.max(28, (targetLeft - sourceX) * 0.42);
         path = `M ${sourceX} ${sourceY} C ${sourceX + bend} ${sourceY}, ${targetLeft - bend} ${targetY}, ${targetLeft} ${targetY}`;
       } else {
-        const loopX = Math.max(sourceX, targetRight) + 24;
+        const loopX = Math.max(sourceX, targetRight) + 18;
         path = `M ${sourceX} ${sourceY} C ${loopX} ${sourceY}, ${loopX} ${targetY}, ${targetRight} ${targetY}`;
       }
       return [{ ...edge, path }];
     });
+
     setCanvasSize({ width, height });
     setEdgeGeometry(paths);
   }, [edges]);
@@ -423,46 +403,6 @@ export default function MegaProjectBoard({
     };
   }, [updateEdgeGeometry]);
 
-  const selectedNode = nodeMap.get(selectedNodeId) ?? project.nodes[0];
-  const selectedStatus = selectedNode
-    ? (displayStatusByNode.get(selectedNode.id) ?? "blocked")
-    : "blocked";
-  const selectedDependencyStates = selectedNode
-    ? selectedNode.requires.map((dependency) => dependencyState(dependency))
-    : [];
-  const selectedBlockers = selectedDependencyStates.filter(
-    (state) =>
-      state.dependency.strength === "hard" &&
-      state.dependency.relation !== "finish_to_finish" &&
-      state.applicable !== false &&
-      !state.satisfied,
-  );
-  const finishRequirements = selectedDependencyStates.filter(
-    (state) =>
-      state.dependency.relation === "finish_to_finish" &&
-      state.applicable !== false,
-  );
-
-  const downstream = useMemo(() => {
-    if (!selectedNode) return [];
-    const produced = new Set(selectedNode.produces);
-    const directConsumers = project.nodes.filter((node) =>
-      node.requires.some((dependency) => produced.has(dependency.artifact)),
-    );
-    return directConsumers.map((node) => {
-      const blockers = getStartBlockers(node, produced);
-      const activation = activationByNode.get(node.id);
-      return {
-        node,
-        blockers,
-        opens:
-          activation === "active" &&
-          node.status !== "completed" &&
-          blockers.length === 0,
-      };
-    });
-  }, [activationByNode, getStartBlockers, project.nodes, selectedNode]);
-
   const counts = useMemo(() => {
     const initial: Record<MegaDisplayStatus, number> = {
       completed: 0,
@@ -478,55 +418,21 @@ export default function MegaProjectBoard({
     return initial;
   }, [displayStatusByNode]);
 
-  const selectedIncomingArtifacts = useMemo(
-    () => new Set(selectedNode?.requires.map((item) => item.artifact) ?? []),
-    [selectedNode],
-  );
-  const selectedOutgoingArtifacts = useMemo(
-    () => new Set(selectedNode?.produces ?? []),
-    [selectedNode],
+  const readyNodes = useMemo(
+    () =>
+      project.nodes.filter(
+        (node) => displayStatusByNode.get(node.id) === "ready",
+      ),
+    [displayStatusByNode, project.nodes],
   );
 
   const setNodeRef = useCallback(
-    (id: string) => (element: HTMLButtonElement | null) => {
+    (id: string) => (element: HTMLElement | null) => {
       if (element) nodeRefs.current.set(id, element);
       else nodeRefs.current.delete(id);
     },
     [],
   );
-
-  const handleNodeSelect = (node: MegaProjectNode) => {
-    setSelectedNodeId(node.id);
-    trackEvent("mega_project_node_selected", {
-      project_id: project.id,
-      node_id: node.id,
-      node_status: displayStatusByNode.get(node.id),
-    });
-  };
-
-  const handleRuleChange = (rule: string, value: MegaRuleValue) => {
-    setRuleValues((current) => ({ ...current, [rule]: value }));
-    trackEvent("mega_project_scenario_changed", {
-      project_id: project.id,
-      rule,
-      value: ruleValueKey(value),
-    });
-  };
-
-  const handleFilterChange = (nextFilter: BoardFilter) => {
-    setFilter(nextFilter);
-    trackEvent("mega_project_filter_changed", {
-      project_id: project.id,
-      filter: nextFilter,
-    });
-  };
-
-  const isNodeEmphasized = (node: MegaProjectNode) => {
-    if (node.id === selectedNodeId || filter === "all") return true;
-    const status = displayStatusByNode.get(node.id);
-    if (filter === "ready") return status === "ready" || status === "active";
-    return node.classification === "protection_gate";
-  };
 
   const graphStyle = {
     "--stage-count": project.stages.length,
@@ -534,459 +440,323 @@ export default function MegaProjectBoard({
 
   return (
     <div className={styles.page}>
-      <section className={styles.hero} aria-labelledby="mega-project-title">
-        <div className={styles.heroTopline}>
-          <p>MEGA / PERMIT LAB · PROJECT 01</p>
-          <span>기준일 {formatDate(project.asOfDate)}</span>
+      <header className={styles.commandHeader}>
+        <div className={styles.identity}>
+          <p className={styles.kicker}>
+            MEGA / PERMIT SYNOPTIC <span>PROJECT 01</span>
+          </p>
+          <h1>{project.name} 행정절차 전경</h1>
+          <p className={styles.summary}>{project.summary}</p>
         </div>
-        <div className={styles.heroGrid}>
-          <div>
-            <p className={styles.eyebrow}>구조 임계경로 · 선행조건 보드</p>
-            <h1 id="mega-project-title">광주 반도체, 무엇이 지금 가능한가</h1>
-            <p className={styles.summary}>{project.summary}</p>
-          </div>
-          <dl className={styles.scopeList}>
-            <div>
-              <dt>정책 입지</dt>
-              <dd>{project.scope.location}</dd>
-            </div>
-            <div>
-              <dt>발표 면적</dt>
-              <dd>{project.scope.announcedArea}</dd>
-            </div>
-            <div>
-              <dt>현재 경계</dt>
-              <dd>{project.scope.boundaryStatus}</dd>
-            </div>
-          </dl>
-        </div>
-      </section>
 
-      <section className={styles.statusStrip} aria-label="프로젝트 상태 요약">
-        <div className={styles.statusIntro}>
-          <span className={styles.liveDot} aria-hidden="true" />
-          <strong>정책 발표 이후</strong>
-          <span>30개 절차의 구조적 선후관계를 계산합니다.</span>
-        </div>
-        <dl className={styles.statusCounts}>
+        <dl className={styles.scopeMatrix}>
           <div>
-            <dt>완료</dt>
-            <dd>{counts.completed}</dd>
+            <dt>정책 입지</dt>
+            <dd>{project.scope.location}</dd>
           </div>
           <div>
-            <dt>진행</dt>
-            <dd>{counts.active}</dd>
-          </div>
-          <div className={styles.readyCount}>
-            <dt>지금 가능</dt>
-            <dd>{counts.ready}</dd>
+            <dt>발표 면적</dt>
+            <dd>{project.scope.announcedArea}</dd>
           </div>
           <div>
-            <dt>조건 미정</dt>
-            <dd>{counts.conditional}</dd>
+            <dt>경계 상태</dt>
+            <dd>{project.scope.boundaryStatus}</dd>
           </div>
           <div>
-            <dt>선행 대기</dt>
-            <dd>{counts.blocked}</dd>
+            <dt>기준일</dt>
+            <dd>{formatDate(project.asOfDate)}</dd>
           </div>
         </dl>
-      </section>
 
-      <section className={styles.controlBar} aria-label="경로 조건과 보기 설정">
-        <div className={styles.ruleControls}>
-          <div className={styles.controlLead}>
-            <span>경로 조건</span>
-            <small>공식 확인 전까지 미확정 유지</small>
-          </div>
-          {RULE_CONTROLS.map((control) => (
-            <div className={styles.ruleControl} key={control.rule}>
-              <span>{control.label}</span>
-              <div className={styles.segmented}>
-                {control.options.map((option) => {
-                  const active = valuesEqual(
-                    ruleValues[control.rule],
-                    option.value,
-                  );
-                  return (
-                    <button
-                      key={ruleValueKey(option.value)}
-                      type="button"
-                      className={active ? styles.segmentActive : undefined}
-                      aria-pressed={active}
-                      onClick={() =>
-                        handleRuleChange(control.rule, option.value)
-                      }
-                    >
-                      {option.label}
-                    </button>
-                  );
-                })}
-              </div>
+        <dl className={styles.statusMatrix} aria-label="절차 상태 집계">
+          {COUNT_ORDER.map((status) => (
+            <div key={status} data-status={status}>
+              <dt>{STATUS_META[status].label}</dt>
+              <dd>{String(counts[status]).padStart(2, "0")}</dd>
             </div>
           ))}
+        </dl>
+      </header>
+
+      <section className={styles.signalDeck} aria-label="현재 병렬축과 미확정 분기">
+        <div className={styles.readyRail}>
+          <div className={styles.railLead}>
+            <span className={styles.railCode}>NOW OPEN</span>
+            <strong>{String(readyNodes.length).padStart(2, "0")}</strong>
+            <small>군공항 이전과 동시에 돌릴 수 있는 병렬축</small>
+          </div>
+          <ol className={styles.readyList}>
+            {readyNodes.map((node) => (
+              <li key={node.id}>
+                <span>{node.id}</span>
+                <strong>{node.name}</strong>
+              </li>
+            ))}
+          </ol>
         </div>
-        <div className={styles.filterControl} aria-label="경로 강조">
-          {FILTERS.map((item) => (
-            <button
-              type="button"
-              key={item.id}
-              className={filter === item.id ? styles.filterActive : undefined}
-              aria-pressed={filter === item.id}
-              onClick={() => handleFilterChange(item.id)}
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
-      </section>
 
-      <div className={styles.workspace}>
-        <section className={styles.boardPanel} aria-labelledby="dependency-board-title">
-          <div className={styles.boardHeading}>
-            <div>
-              <p>DEPENDENCY RAIL</p>
-              <h2 id="dependency-board-title">행정절차 선행조건</h2>
-            </div>
-            <div className={styles.legend} aria-label="상태 범례">
-              {(
-                [
-                  "completed",
-                  "active",
-                  "ready",
-                  "conditional",
-                  "blocked",
-                ] as MegaDisplayStatus[]
-              ).map((status) => (
-                <span key={status} data-status={status}>
-                  <i aria-hidden="true" />
-                  {STATUS_META[status].shortLabel}
-                </span>
-              ))}
-            </div>
+        <div className={styles.branchRail}>
+          <div className={styles.railLead}>
+            <span className={styles.railCode}>OPEN BRANCH</span>
+            <strong>{String(project.rules.length).padStart(2, "0")}</strong>
+            <small>선택하지 않고 모든 조건부 경로를 함께 표시</small>
           </div>
-
-          <div className={styles.scrollHint} aria-hidden="true">
-            좌우로 이동해 8개 행정 게이트를 확인하세요 →
-          </div>
-          <div className={styles.graphViewport}>
-            <div className={styles.graphCanvas} ref={canvasRef} style={graphStyle}>
-              <svg
-                className={styles.edgeLayer}
-                width={canvasSize.width}
-                height={canvasSize.height}
-                viewBox={`0 0 ${canvasSize.width} ${canvasSize.height}`}
-                aria-hidden="true"
-              >
-                <defs>
-                  <marker
-                    id="mega-arrow"
-                    markerWidth="7"
-                    markerHeight="7"
-                    refX="6"
-                    refY="3.5"
-                    orient="auto"
-                    markerUnits="strokeWidth"
-                  >
-                    <path d="M0,0 L7,3.5 L0,7 Z" />
-                  </marker>
-                  <marker
-                    id="mega-arrow-focus"
-                    markerWidth="7"
-                    markerHeight="7"
-                    refX="6"
-                    refY="3.5"
-                    orient="auto"
-                    markerUnits="strokeWidth"
-                  >
-                    <path d="M0,0 L7,3.5 L0,7 Z" />
-                  </marker>
-                </defs>
-                {edgeGeometry.map((edge) => {
-                  const focused =
-                    edge.source === selectedNodeId ||
-                    edge.target === selectedNodeId ||
-                    selectedIncomingArtifacts.has(edge.artifact) ||
-                    selectedOutgoingArtifacts.has(edge.artifact);
-                  return (
-                    <path
-                      key={edge.id}
-                      d={edge.path}
-                      className={styles.edge}
-                      data-strength={edge.strength}
-                      data-kind={edge.kind}
-                      data-conditional={edge.conditional ? "true" : "false"}
-                      data-focused={focused ? "true" : "false"}
-                      markerEnd={
-                        focused
-                          ? "url(#mega-arrow-focus)"
-                          : "url(#mega-arrow)"
-                      }
-                    />
-                  );
-                })}
-              </svg>
-
-              <div className={styles.stageGrid}>
-                {project.stages.map((stage, stageIndex) => {
-                  const stageNodes = project.nodes.filter(
-                    (node) => node.stage === stage.id,
-                  );
-                  return (
-                    <section className={styles.stage} key={stage.id}>
-                      <header className={styles.stageHeader}>
-                        <span>{String(stageIndex + 1).padStart(2, "0")}</span>
-                        <h3>{stage.label}</h3>
-                        <small>{stageNodes.length}개 절차</small>
-                      </header>
-                      <div className={styles.stageNodes}>
-                        {stageNodes.map((node, nodeIndex) => {
-                          const status =
-                            displayStatusByNode.get(node.id) ?? "blocked";
-                          const selected = node.id === selectedNodeId;
-                          const emphasized = isNodeEmphasized(node);
-                          return (
-                            <button
-                              key={node.id}
-                              ref={setNodeRef(node.id)}
-                              type="button"
-                              className={styles.node}
-                              data-status={status}
-                              data-selected={selected ? "true" : "false"}
-                              data-emphasized={emphasized ? "true" : "false"}
-                              data-classification={node.classification}
-                              aria-pressed={selected}
-                              aria-label={`${node.name}, ${STATUS_META[status].label}`}
-                              onClick={() => handleNodeSelect(node)}
-                              style={
-                                {
-                                  "--node-index": nodeIndex,
-                                } as CSSProperties & { "--node-index": number }
-                              }
-                            >
-                              <span className={styles.nodeTopline}>
-                                <span>{node.id}</span>
-                                <span className={styles.nodeStatus}>
-                                  {STATUS_META[status].shortLabel}
-                                </span>
-                              </span>
-                              <strong>{node.name}</strong>
-                              <span className={styles.nodeAuthority}>
-                                {node.authority}
-                              </span>
-                              {node.classification === "protection_gate" && (
-                                <span className={styles.protectionLabel}>
-                                  보호절차
-                                </span>
-                              )}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </section>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-          <p className={styles.boardFootnote}>
-            실선은 필수 선행조건, 흐린 선은 병렬·완료 조건입니다. 이 화면은
-            기간 데이터가 아닌 구조상 선후관계를 계산하므로 “시간 임계경로”가
-            아니라 “구조 임계경로”입니다.
-          </p>
-        </section>
-
-        {selectedNode && (
-          <aside className={styles.inspector} aria-live="polite">
-            <div className={styles.inspectorSticky} key={selectedNode.id}>
-              <div className={styles.inspectorTopline}>
-                <span>{selectedNode.id}</span>
-                <span data-status={selectedStatus}>
-                  {STATUS_META[selectedStatus].label}
-                </span>
-              </div>
-              <h2>{selectedNode.name}</h2>
-              <p className={styles.inspectorAuthority}>
-                {selectedNode.authority}
-              </p>
-
-              <dl className={styles.nodeMeta}>
-                <div>
-                  <dt>유형</dt>
-                  <dd>
-                    {CLASSIFICATION_LABELS[selectedNode.classification]}
-                  </dd>
-                </div>
-                <div>
-                  <dt>근거 수준</dt>
-                  <dd>{CONFIDENCE_LABELS[selectedNode.confidence]}</dd>
-                </div>
-                {selectedNode.actual?.completedOn && (
+          <div className={styles.branchList}>
+            {project.rules.map((rule) => {
+              const meta = RULE_LABELS[rule.id] ?? {
+                code: "B--",
+                label: rule.id,
+              };
+              const parameter = project.parameters[rule.parameter];
+              return (
+                <article key={rule.id}>
+                  <span>{meta.code}</span>
                   <div>
-                    <dt>확인일</dt>
-                    <dd>{formatDate(selectedNode.actual.completedOn)}</dd>
+                    <strong>{meta.label}</strong>
+                    <small title={parameter?.reason}>
+                      {formatRuleValue(parameter?.value ?? rule.default)} · {parameter?.reason}
+                    </small>
                   </div>
-                )}
-              </dl>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
-              <section className={styles.inspectorSection}>
-                <h3>지금 막는 조건</h3>
-                {selectedBlockers.length === 0 ? (
-                  <p className={styles.clearState}>
-                    <span aria-hidden="true">✓</span>
-                    {getClearStateMessage(selectedStatus)}
-                  </p>
-                ) : (
-                  <ul className={styles.conditionList}>
-                    {selectedBlockers.map((state, index) => (
-                      <li key={`${state.dependency.artifact}-${index}`}>
-                        <span
-                          className={styles.conditionIcon}
-                          data-unknown={
-                            state.applicable === "unknown" ? "true" : "false"
-                          }
-                          aria-hidden="true"
-                        >
-                          {state.applicable === "unknown" ? "?" : index + 1}
-                        </span>
-                        <div>
-                          <strong>
-                            {formatArtifactLabel(
-                              state.dependency.artifact,
-                              artifactMap,
-                            )}
-                          </strong>
-                          <span>
-                            {state.applicable === "unknown"
-                              ? "경로 적용 여부부터 확인 필요"
-                              : `${KIND_LABELS[state.dependency.kind]} · ${RELATION_LABELS[state.dependency.relation]}`}
-                          </span>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                {finishRequirements.length > 0 && (
-                  <div className={styles.finishGate}>
-                    <strong>병렬 진행하되 완료 전 확인</strong>
-                    {finishRequirements.map((state) => (
-                      <span key={state.dependency.artifact}>
-                        {formatArtifactLabel(
-                          state.dependency.artifact,
-                          artifactMap,
-                        )}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </section>
+      <section className={styles.workspace} aria-label="30개 행정절차 선행조건 지도">
+        <div className={styles.graphViewport}>
+          <div className={styles.graphCanvas} ref={canvasRef} style={graphStyle}>
+            <svg
+              className={styles.edgeLayer}
+              width={canvasSize.width}
+              height={canvasSize.height}
+              viewBox={`0 0 ${canvasSize.width} ${canvasSize.height}`}
+              aria-hidden="true"
+            >
+              <defs>
+                <marker
+                  id="mega-arrow"
+                  viewBox="0 0 8 8"
+                  refX="7"
+                  refY="4"
+                  markerWidth="5"
+                  markerHeight="5"
+                  orient="auto-start-reverse"
+                >
+                  <path d="M 0 0 L 8 4 L 0 8 z" />
+                </marker>
+                <marker
+                  id="mega-arrow-conditional"
+                  viewBox="0 0 8 8"
+                  refX="7"
+                  refY="4"
+                  markerWidth="5"
+                  markerHeight="5"
+                  orient="auto-start-reverse"
+                >
+                  <path d="M 0 0 L 8 4 L 0 8 z" />
+                </marker>
+              </defs>
+              {edgeGeometry.map((edge) => (
+                <path
+                  key={edge.id}
+                  className={styles.edge}
+                  d={edge.path}
+                  data-strength={edge.strength}
+                  data-conditional={edge.conditional ? "true" : "false"}
+                  data-kind={edge.kind}
+                  markerEnd={
+                    edge.conditional
+                      ? "url(#mega-arrow-conditional)"
+                      : "url(#mega-arrow)"
+                  }
+                />
+              ))}
+            </svg>
 
-              <section className={styles.inspectorSection}>
-                <h3>완료되면 열리는 절차</h3>
-                {downstream.length === 0 ? (
-                  <p className={styles.emptyState}>직접 이어지는 후속 절차가 없습니다.</p>
-                ) : (
-                  <ul className={styles.downstreamList}>
-                    {downstream.map(({ node, blockers, opens }) => (
-                      <li key={node.id}>
-                        <button type="button" onClick={() => handleNodeSelect(node)}>
-                          <span>{node.id}</span>
-                          <strong>{node.name}</strong>
-                          <small data-opens={opens ? "true" : "false"}>
-                            {opens
-                              ? "즉시 착수 가능"
-                              : `남은 필수조건 ${blockers.length}개`}
-                          </small>
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </section>
+            <div className={styles.stageGrid}>
+              {project.stages.map((stage, stageIndex) => {
+                const stageNodes = project.nodes.filter(
+                  (node) => node.stage === stage.id,
+                );
+                return (
+                  <section className={styles.stage} key={stage.id}>
+                    <header className={styles.stageHeader}>
+                      <span>{String(stageIndex + 1).padStart(2, "0")}</span>
+                      <div>
+                        <h2>{stage.label}</h2>
+                        <small>{stageNodes.length} PROCEDURES</small>
+                      </div>
+                    </header>
 
-              {(selectedNode.note || selectedNode.verificationNeeded) && (
-                <section className={styles.inspectorSection}>
-                  <h3>판단 메모</h3>
-                  {selectedNode.note && <p>{selectedNode.note}</p>}
-                  {selectedNode.verificationNeeded && (
-                    <p className={styles.verificationNote}>
-                      <strong>추가 확인</strong>
-                      {selectedNode.verificationNeeded}
-                    </p>
-                  )}
-                </section>
-              )}
+                    <div className={styles.stageNodes}>
+                      {stageNodes.map((node, nodeIndex) => {
+                        const status =
+                          displayStatusByNode.get(node.id) ?? "blocked";
+                        const blockers = getStartBlockers(node);
+                        const successors = downstreamByNode.get(node.id) ?? [];
+                        const activation = activationByNode.get(node.id);
+                        return (
+                          <article
+                            key={node.id}
+                            ref={setNodeRef(node.id)}
+                            className={styles.node}
+                            data-status={status}
+                            data-protection={
+                              node.classification === "protection_gate"
+                                ? "true"
+                                : "false"
+                            }
+                            aria-label={`${node.id} ${node.name}, ${STATUS_META[status].label}`}
+                            style={
+                              {
+                                "--node-index": nodeIndex + stageIndex,
+                              } as CSSProperties & { "--node-index": number }
+                            }
+                          >
+                            <div className={styles.nodeTopline}>
+                              <span className={styles.nodeCode}>{node.id}</span>
+                              <span className={styles.nodeClass}>
+                                {CLASSIFICATION_LABELS[node.classification]}
+                              </span>
+                              <span className={styles.nodeStatus} data-status={status}>
+                                {STATUS_META[status].code}
+                              </span>
+                            </div>
 
-              <section className={styles.inspectorSection}>
-                <h3>생성되는 행정 산출물</h3>
-                <div className={styles.artifactList}>
-                  {selectedNode.produces.map((artifact) => (
-                    <span key={artifact}>
-                      {formatArtifactLabel(artifact, artifactMap)}
-                    </span>
-                  ))}
-                </div>
-              </section>
+                            <h3>{node.name}</h3>
+                            <p className={styles.nodeAuthority} title={node.authority}>
+                              {node.authority}
+                            </p>
 
-              {selectedNode.templateRefs && selectedNode.templateRefs.length > 0 && (
-                <section className={styles.inspectorSection}>
-                  <h3>Korea100 제도 모델</h3>
-                  <div className={styles.templateLinks}>
-                    {selectedNode.templateRefs.map((reference) => (
-                      <Link
-                        key={reference.institution}
-                        href={`/model/${reference.institution}/`}
-                      >
-                        <span>{templates[reference.institution]}</span>
-                        <small>
-                          {reference.nodeIds?.length
-                            ? `${reference.nodeIds.join(" · ")} 연결`
-                            : "전체 모델 연결"}
-                        </small>
-                        <b aria-hidden="true">↗</b>
-                      </Link>
-                    ))}
-                  </div>
-                </section>
-              )}
+                            <dl className={styles.nodeSignals}>
+                              <div>
+                                <dt>잠금</dt>
+                                <dd>
+                                  {status === "completed" && (
+                                    <span className={styles.clearSignal}>완료 · 산출물 확보</span>
+                                  )}
+                                  {status === "active" && (
+                                    <span className={styles.liveSignal}>필수조건 충족 · 진행 중</span>
+                                  )}
+                                  {status === "ready" && (
+                                    <span className={styles.openSignal}>없음 · 지금 착수 가능</span>
+                                  )}
+                                  {status === "inactive" && (
+                                    <span>현재 경로에서 제외</span>
+                                  )}
+                                  {activation === "unknown" && (
+                                    <span className={styles.unknownSignal}>
+                                      ? 경로 적용 여부 미확정
+                                    </span>
+                                  )}
+                                  {blockers.map((blocker, index) => (
+                                    <span
+                                      key={`${blocker.dependency.artifact}-${index}`}
+                                      className={styles.blockerSignal}
+                                      data-unknown={
+                                        blocker.applicable === "unknown"
+                                          ? "true"
+                                          : "false"
+                                      }
+                                      title={`${KIND_LABELS[blocker.dependency.kind]} · ${RELATION_LABELS[blocker.dependency.relation]}${blocker.dependency.note ? ` · ${blocker.dependency.note}` : ""}`}
+                                    >
+                                      {blocker.applicable === "unknown" ? "?" : "•"}{" "}
+                                      {formatArtifactLabel(
+                                        blocker.dependency.artifact,
+                                        artifactMap,
+                                      )}
+                                    </span>
+                                  ))}
+                                </dd>
+                              </div>
+                              <div>
+                                <dt>산출</dt>
+                                <dd title={node.produces.map((artifact) => formatArtifactLabel(artifact, artifactMap)).join(" · ")}>
+                                  {node.produces
+                                    .map((artifact) =>
+                                      formatArtifactLabel(artifact, artifactMap),
+                                    )
+                                    .join(" · ")}
+                                </dd>
+                              </div>
+                            </dl>
 
-              <section className={styles.inspectorSection}>
-                <h3>공식 근거</h3>
-                <ol className={styles.sourceList}>
-                  {selectedNode.evidence.map((sourceId) => {
-                    const source = sourceMap.get(sourceId);
-                    if (!source) return null;
-                    return (
-                      <li key={source.id}>
-                        <a
-                          href={source.url}
-                          target="_blank"
-                          rel="noreferrer"
-                          onClick={() =>
-                            trackEvent("mega_project_source_opened", {
-                              project_id: project.id,
-                              node_id: selectedNode.id,
-                              source_id: source.id,
-                            })
-                          }
-                        >
-                          <span>{source.title}</span>
-                          <small>
-                            {source.publishedOn
-                              ? formatDate(source.publishedOn)
-                              : source.effectiveOn
-                                ? `시행 ${formatDate(source.effectiveOn)}`
-                                : "현행 법령"}
-                          </small>
-                        </a>
-                      </li>
-                    );
-                  })}
-                </ol>
-              </section>
+                            <footer className={styles.nodeFooter}>
+                              <span
+                                className={styles.successors}
+                                title={successors
+                                  .map((id) => {
+                                    const successor = project.nodes.find(
+                                      (candidate) => candidate.id === id,
+                                    );
+                                    return successor ? `${id} ${successor.name}` : id;
+                                  })
+                                  .join(" · ")}
+                              >
+                                → {successors.length > 0 ? successors.join("·") : "END"}
+                              </span>
+                              <span className={styles.references}>
+                                {node.templateRefs?.map((reference) => (
+                                  <Link
+                                    key={reference.institution}
+                                    href={`/model/${reference.institution}/`}
+                                    title={`Korea100 · ${templates[reference.institution]}`}
+                                  >
+                                    K
+                                  </Link>
+                                ))}
+                                {node.evidence.map((sourceId) => {
+                                  const source = sourceMap.get(sourceId);
+                                  if (!source) return null;
+                                  return (
+                                    <a
+                                      key={source.id}
+                                      href={source.url}
+                                      target="_blank"
+                                      rel="noreferrer"
+                                      title={source.title}
+                                      onClick={() =>
+                                        trackEvent("mega_project_source_opened", {
+                                          project_id: project.id,
+                                          node_id: node.id,
+                                          source_id: source.id,
+                                        })
+                                      }
+                                    >
+                                      {sourceCodeMap.get(source.id)}
+                                    </a>
+                                  );
+                                })}
+                              </span>
+                            </footer>
+                          </article>
+                        );
+                      })}
+                    </div>
+                  </section>
+                );
+              })}
             </div>
-          </aside>
-        )}
-      </div>
+          </div>
+        </div>
+      </section>
+
+      <footer className={styles.readingKey}>
+        <p>
+          <strong>구조 임계경로</strong>
+          기간 실측이 아니라 공식 산출물의 선후관계를 표시합니다.
+        </p>
+        <div className={styles.legend} aria-label="지도 범례">
+          <span><i data-edge="hard" />필수 선행</span>
+          <span><i data-edge="soft" />병렬·완료조건</span>
+          <span><i data-edge="conditional" />미확정 분기</span>
+          <span><b>K</b>Korea100</span>
+          <span><b>S</b>공식 근거 {project.sources.length}건</span>
+        </div>
+        <p className={styles.viewportHint}>작은 화면에서는 관제판을 좌우로 이동해 읽습니다.</p>
+      </footer>
     </div>
   );
 }
