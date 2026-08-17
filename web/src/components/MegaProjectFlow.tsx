@@ -422,6 +422,33 @@ export default function MegaProjectFlow({
       return slot % 2 === 1 ? step : -step;
     };
 
+    // Render an orthogonal polyline with rounded corners so long routes read
+    // as flows, not empty rectangles.
+    const roundedPath = (points: [number, number][]) => {
+      if (points.length < 2) return "";
+      let d = `M ${points[0][0]} ${points[0][1]}`;
+      for (let i = 1; i < points.length - 1; i += 1) {
+        const [px, py] = points[i - 1];
+        const [cx, cy] = points[i];
+        const [nx, ny] = points[i + 1];
+        const inLen = Math.hypot(cx - px, cy - py);
+        const outLen = Math.hypot(nx - cx, ny - cy);
+        const r = Math.min(6, inLen / 2, outLen / 2);
+        if (r < 1) {
+          d += ` L ${cx} ${cy}`;
+          continue;
+        }
+        const inX = cx - ((cx - px) / inLen) * r;
+        const inY = cy - ((cy - py) / inLen) * r;
+        const outX = cx + ((nx - cx) / outLen) * r;
+        const outY = cy + ((ny - cy) / outLen) * r;
+        d += ` L ${inX} ${inY} Q ${cx} ${cy} ${outX} ${outY}`;
+      }
+      const last = points[points.length - 1];
+      d += ` L ${last[0]} ${last[1]}`;
+      return d;
+    };
+
     const paths = routed.map((r) => {
       const { edge, kind, s, t, goRight } = r;
       let path: string;
@@ -433,26 +460,54 @@ export default function MegaProjectFlow({
         if (Math.abs(sy - ty) < 4) {
           path = `M ${sx} ${sy} L ${tx} ${ty}`;
         } else {
-          const midX = (sx + tx) / 2 + channelOffset("v", (sx + tx) / 2);
-          path = `M ${sx} ${sy} L ${midX} ${sy} L ${midX} ${ty} L ${tx} ${ty}`;
+          // Vertical hop hugs the target column instead of floating mid-gap.
+          const hop = 10 + Math.abs(channelOffset("v", tx));
+          const midX = goRight
+            ? Math.max(sx + 4, tx - hop)
+            : Math.min(sx - 4, tx + hop);
+          path = roundedPath([
+            [sx, sy],
+            [midX, sy],
+            [midX, ty],
+            [tx, ty],
+          ]);
         }
       } else {
         const down = kind === "down";
-        const sx = s.cx + portOffset(edge.source, `out-${down ? "bottom" : "top"}`, r, s);
-        const tx = t.cx + portOffset(edge.target, `in-${down ? "top" : "bottom"}`, r, t);
         const sy = down ? s.bottom : s.top;
         const ty = down ? t.top : t.bottom;
-        if (Math.abs(sx - tx) < 4) {
-          path = `M ${sx} ${sy} L ${tx} ${ty}`;
-        } else {
-          const gapLow = Math.min(sy, ty);
-          const gapHigh = Math.max(sy, ty);
-          const base = (sy + ty) / 2;
-          const midY = Math.min(
-            gapHigh - 3,
-            Math.max(gapLow + 3, base + channelOffset("h", base)),
+        const overlapLeft = Math.max(s.left, t.left);
+        const overlapRight = Math.min(s.right, t.right);
+        const gap = Math.abs(ty - sy);
+        if (overlapRight - overlapLeft > 12 && gap < 22) {
+          // Neighbouring boxes in the same stack: one straight vertical stem.
+          const x = Math.min(
+            overlapRight - 6,
+            Math.max(overlapLeft + 6, (s.cx + t.cx) / 2),
           );
-          path = `M ${sx} ${sy} L ${sx} ${midY} L ${tx} ${midY} L ${tx} ${ty}`;
+          path = `M ${x} ${sy} L ${x} ${ty}`;
+        } else {
+          const sx = s.cx + portOffset(edge.source, `out-${down ? "bottom" : "top"}`, r, s);
+          const tx = t.cx + portOffset(edge.target, `in-${down ? "top" : "bottom"}`, r, t);
+          if (Math.abs(sx - tx) < 4) {
+            path = `M ${sx} ${sy} L ${tx} ${ty}`;
+          } else {
+            // Horizontal channel hugs the destination row (a few px before the
+            // target edge) instead of crossing the middle of empty space.
+            const gapLow = Math.min(sy, ty);
+            const gapHigh = Math.max(sy, ty);
+            const hug = 8 + Math.abs(channelOffset("h", ty));
+            const midY = Math.min(
+              gapHigh - 3,
+              Math.max(gapLow + 3, down ? ty - hug : ty + hug),
+            );
+            path = roundedPath([
+              [sx, sy],
+              [sx, midY],
+              [tx, midY],
+              [tx, ty],
+            ]);
+          }
         }
       }
       return { ...edge, path };
