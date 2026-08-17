@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>1,281 — 반도체 클러스터 하나에 걸린 행정절차</title>
+<meta name="description" content="광주 군공항 부지 반도체 클러스터가 완공까지 통과해야 하는 법정 절차 1,281개를 빛으로 띄웠습니다. 스크롤로 8개 게이트를 통과하세요." />
+<meta property="og:title" content="1,281 — 반도체 클러스터 하나에 걸린 행정절차" />
+<meta property="og:description" content="절차 하나가 빛 하나. 스크롤로 8개 게이트를 통과하면 1,281개의 빛이 하나의 헤일로로 모입니다." />
+<meta property="og:image" content="https://hosungseo.github.io/korea100/og/mega-gwangju-semiconductor-cluster.png" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: auto; }
+body {
+  background: #060f0a;
+  color: #e8f2ec;
+  font-family: "Apple SD Gothic Neo", "Pretendard", sans-serif;
+  overflow-x: hidden;
+}
+#stage { position: fixed; inset: 0; z-index: 0; }
+#scroller { position: relative; z-index: 1; pointer-events: none; }
+.mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+
+.panel {
+  position: fixed; inset: 0;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 0 7vw;
+  opacity: 0; pointer-events: none;
+  transition: none;
+  z-index: 2;
+}
+.panel.right { align-items: flex-end; text-align: right; }
+.panel .kicker {
+  color: #65d7ad; font-family: ui-monospace, monospace;
+  font-size: clamp(11px, 1.2vw, 14px); font-weight: 700; letter-spacing: 0.14em;
+  margin-bottom: 14px;
+}
+.panel h1 {
+  font-size: clamp(34px, 6.4vw, 84px); font-weight: 800;
+  letter-spacing: -0.03em; line-height: 1.14; word-break: keep-all;
+  text-shadow: 0 0 40px rgba(101, 215, 173, 0.25);
+}
+.panel h1 b { color: #65d7ad; }
+.panel h2 {
+  font-size: clamp(24px, 4vw, 52px); font-weight: 800;
+  letter-spacing: -0.03em; line-height: 1.2; word-break: keep-all;
+}
+.panel .sub {
+  margin-top: 16px; max-width: 560px;
+  color: #9db5aa; font-size: clamp(13px, 1.5vw, 17px); line-height: 1.6; word-break: keep-all;
+}
+.panel.right .sub { margin-left: auto; }
+.panel .stat {
+  margin-top: 10px; color: #65d7ad;
+  font-family: ui-monospace, monospace; font-size: clamp(12px, 1.4vw, 16px); font-weight: 700;
+}
+.panel .mslist {
+  margin-top: 14px; max-width: 520px;
+  color: #6f8b7d; font-size: clamp(10px, 1.1vw, 12.5px); line-height: 1.7;
+  font-family: ui-monospace, monospace;
+}
+.hint {
+  position: absolute; left: 7vw; bottom: 7vh;
+  color: #6f8b7d; font-size: 13px; letter-spacing: 0.06em;
+  animation: bob 2.2s ease-in-out infinite;
+}
+@keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(7px); } }
+
+#finale .halo-num {
+  font-family: ui-monospace, monospace;
+  font-size: clamp(64px, 14vw, 200px); font-weight: 800; letter-spacing: -0.05em;
+  color: #eafff5;
+  text-shadow: 0 0 30px rgba(101, 215, 173, 0.8), 0 0 110px rgba(101, 215, 173, 0.45);
+  line-height: 1;
+}
+#finale { align-items: center; text-align: center; }
+#finale .sub { margin-left: auto; margin-right: auto; }
+#finale a.cta {
+  pointer-events: auto;
+  margin-top: 26px; display: inline-block;
+  padding: 13px 26px; border: 1px solid rgba(101, 215, 173, 0.55); border-radius: 999px;
+  color: #65d7ad; text-decoration: none; font-weight: 700; font-size: 15px;
+  background: rgba(101, 215, 173, 0.07);
+}
+#finale a.cta:hover { background: rgba(101, 215, 173, 0.16); }
+#finale .legend {
+  margin-top: 22px; display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+  color: #9db5aa; font-size: 12px;
+}
+#finale .legend s { width: 9px; height: 9px; border-radius: 50%; display: inline-block; text-decoration: none; margin-right: 5px; }
+#finale .foot { margin-top: 26px; color: #55695f; font-size: 11.5px; }
+
+#hud {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 3;
+  padding: 12px 7vw 14px;
+  display: flex; justify-content: space-between; align-items: baseline;
+  color: #6f8b7d; font-family: ui-monospace, monospace; font-size: 11.5px;
+  pointer-events: none;
+}
+#hudbar { position: fixed; left: 0; bottom: 0; height: 2px; background: #65d7ad; width: 0; z-index: 4; }
+#brand {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 3;
+  padding: 14px 7vw;
+  display: flex; justify-content: space-between; align-items: baseline;
+  color: #9db5aa; font-size: 12.5px; pointer-events: none;
+}
+#brand b { color: #e8f2ec; font-weight: 800; }
+#brand span { font-family: ui-monospace, monospace; color: #65d7ad; font-size: 11px; letter-spacing: 0.1em; }
+@media (max-width: 640px) {
+  .panel { padding: 0 6vw; }
+  .panel .mslist { display: none; }
+}
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+<div id="scroller"></div>
+
+<div id="brand"><b>대한민국 제도 지도</b><span>MEGA PROJECT 01 / HALO</span></div>
+
+<div class="panel" id="intro">
+  <p class="kicker">GWANGJU SEMICONDUCTOR CLUSTER — PERMIT HALO</p>
+  <h1>절차 하나가, 빛 하나.<br>모두 <b>1,281개</b>입니다</h1>
+  <p class="sub">광주 군공항 부지 반도체 클러스터가 완공까지 통과해야 하는 법정 절차를 전부 세어 빛으로 띄웠습니다. 스크롤을 내려 8개 게이트를 차례로 통과하세요.</p>
+  <div class="hint">SCROLL ↓</div>
+</div>
+
+<!--GATE_PANELS-->
+
+<div class="panel" id="finale">
+  <p class="kicker">ALL GATES CLEARED</p>
+  <div class="halo-num">1,281</div>
+  <h2>이 빛이 전부 켜져야<br>공장이 돌아갑니다</h2>
+  <p class="sub">8개 게이트 · 49개 마일스톤 · 103개 법정 제도. 무엇이 끝났고 무엇이 기다리는지, 절차 단위까지 전부 펼쳐놨습니다.</p>
+  <a class="cta" href="https://hosungseo.github.io/korea100/mega-projects/gwangju-semiconductor-cluster/">1,281개 전부 펼쳐보기 →</a>
+  <div class="legend">
+    <span><s style="background:#19d494"></s>완료 2</span>
+    <span><s style="background:#3ec1e8"></s>진행 중 1</span>
+    <span><s style="background:#7dfac1"></s>지금 착수 가능 6</span>
+    <span><s style="background:#f2b13d"></s>조건 미정 5</span>
+    <span><s style="background:#5c7568"></s>선행 대기 35</span>
+  </div>
+  <p class="foot">개인 작업이며 정부 공식 입장이 아닙니다 · hosungseo.github.io/korea100</p>
+</div>
+
+<div id="hud"><span id="hud-left">INTRO</span><span id="hud-right">0 / 1,281</span></div>
+<div id="hudbar"></div>
+
+<script type="module">
+import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
+
+const DATA = /*__DATA__*/;
+
+const ST_COLOR = {
+  completed: 0x19d494, active: 0x3ec1e8, ready: 0x7dfac1,
+  conditional: 0xf2b13d, blocked: 0x5c7568, inactive: 0x40544a,
+};
+const ST_SIZE = { completed: 1.5, active: 1.5, ready: 1.35, conditional: 1.3, blocked: 1.0, inactive: 1.0 };
+
+// ---- scene ----
+const canvas = document.getElementById("stage");
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x060f0a);
+scene.fog = new THREE.FogExp2(0x060f0a, 0.028);
+const camera = new THREE.PerspectiveCamera(58, 1, 0.1, 400);
+
+// glow sprite texture
+const glowTex = (() => {
+  const c = document.createElement("canvas");
+  c.width = c.height = 64;
+  const g = c.getContext("2d");
+  const grd = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+  grd.addColorStop(0, "rgba(255,255,255,1)");
+  grd.addColorStop(0.25, "rgba(255,255,255,0.55)");
+  grd.addColorStop(1, "rgba(255,255,255,0)");
+  g.fillStyle = grd;
+  g.fillRect(0, 0, 64, 64);
+  return new THREE.CanvasTexture(c);
+})();
+
+// ---- particle layout ----
+// travel phase: one ring per milestone, stacked along -z, grouped by gate
+const MS_STEP = 3.1;
+const GATE_GAP = 7.5;
+const rings = []; // {z, gateIdx}
+let z = -12;
+const gateRanges = []; // camera z range per gate
+DATA.gates.forEach((gate, gi) => {
+  const z0 = z;
+  gate.milestones.forEach((ms) => {
+    rings.push({ ms, z, gateIdx: gi });
+    z -= MS_STEP;
+  });
+  gateRanges.push({ z0, z1: z + MS_STEP });
+  z -= GATE_GAP;
+});
+const END_Z = z;
+const FINALE_Z = END_Z - 26;
+
+const total = DATA.gates.flatMap((g) => g.milestones).reduce((a, m) => a + m.procs, 0);
+const travelPos = new Float32Array(total * 3);
+const finalePos = new Float32Array(total * 3);
+const colors = new Float32Array(total * 3);
+const sizes = new Float32Array(total);
+const seeds = new Float32Array(total);
+const cumByRing = []; // particle index ranges per ring for HUD count
+
+let pi = 0;
+const cTmp = new THREE.Color();
+rings.forEach((ring) => {
+  const P = ring.ms.procs;
+  const radius = 1.3 + Math.sqrt(P) * 0.34;
+  const start = pi;
+  for (let k = 0; k < P; k++) {
+    const a = (k / P) * Math.PI * 2 + ring.z * 0.13;
+    const jr = radius + (Math.random() - 0.5) * 0.55;
+    const jz = (Math.random() - 0.5) * 1.1;
+    travelPos[pi * 3] = Math.cos(a) * jr;
+    travelPos[pi * 3 + 1] = Math.sin(a) * jr;
+    travelPos[pi * 3 + 2] = ring.z + jz;
+    cTmp.setHex(ST_COLOR[ring.ms.st] ?? ST_COLOR.blocked);
+    colors[pi * 3] = cTmp.r; colors[pi * 3 + 1] = cTmp.g; colors[pi * 3 + 2] = cTmp.b;
+    sizes[pi] = ST_SIZE[ring.ms.st] ?? 1;
+    seeds[pi] = Math.random() * Math.PI * 2;
+    pi++;
+  }
+  cumByRing.push({ z: ring.z, end: pi, gateIdx: ring.gateIdx });
+});
+// finale: one great halo ring (torus scatter)
+for (let k = 0; k < total; k++) {
+  const a = (k / total) * Math.PI * 2;
+  const R = 9.4;
+  const tube = Math.pow(Math.random(), 0.6) * 0.95;
+  const ta = Math.random() * Math.PI * 2;
+  const r = R + Math.cos(ta) * tube;
+  finalePos[k * 3] = Math.cos(a) * r;
+  finalePos[k * 3 + 1] = Math.sin(a) * r;
+  finalePos[k * 3 + 2] = FINALE_Z + Math.sin(ta) * tube * 0.7;
+}
+
+const midPos = new Float32Array(total * 3);
+for (let k = 0; k < total; k++) {
+  const ax = travelPos[k * 3], ay = travelPos[k * 3 + 1], az = travelPos[k * 3 + 2];
+  const bx = finalePos[k * 3], by = finalePos[k * 3 + 1], bz = finalePos[k * 3 + 2];
+  const spread = 2.4 + (seeds[k] % 1) * 1.6;
+  midPos[k * 3] = ((ax + bx) / 2) * spread;
+  midPos[k * 3 + 1] = ((ay + by) / 2) * spread;
+  midPos[k * 3 + 2] = (az + bz) / 2;
+}
+
+const geo = new THREE.BufferGeometry();
+const posAttr = new THREE.BufferAttribute(travelPos.slice(), 3);
+geo.setAttribute("position", posAttr);
+geo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+const mat = new THREE.PointsMaterial({
+  size: 0.62, map: glowTex, vertexColors: true, transparent: true,
+  depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true,
+});
+const points = new THREE.Points(geo, mat);
+points.frustumCulled = false;
+scene.add(points);
+
+// faint dust
+{
+  const N = 700;
+  const dp = new Float32Array(N * 3);
+  for (let i = 0; i < N; i++) {
+    dp[i * 3] = (Math.random() - 0.5) * 90;
+    dp[i * 3 + 1] = (Math.random() - 0.5) * 90;
+    dp[i * 3 + 2] = 8 - Math.random() * (8 - FINALE_Z + 30);
+  }
+  const dg = new THREE.BufferGeometry();
+  dg.setAttribute("position", new THREE.BufferAttribute(dp, 3));
+  scene.add(new THREE.Points(dg, new THREE.PointsMaterial({
+    size: 0.2, map: glowTex, color: 0x2e5c48, transparent: true,
+    depthWrite: false, blending: THREE.AdditiveBlending, opacity: 0.5,
+  })));
+}
+
+// ---- scroll mapping ----
+const N_SECTIONS = 2 + DATA.gates.length + 2; // intro + gates + convergence + finale hold
+document.getElementById("scroller").style.height = `${N_SECTIONS * 120}vh`;
+
+const INTRO_END = 0.055;
+const TRAVEL_END = 0.84;
+const CONVERGE_END = 0.94;
+const ease = (t) => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+const lerp = (a, b, t) => a + (b - a) * t;
+const clamp01 = (v) => Math.max(0, Math.min(1, v));
+
+const panels = [document.getElementById("intro")];
+document.querySelectorAll(".panel.gate").forEach((p) => panels.push(p));
+const finalePanel = document.getElementById("finale");
+const hudL = document.getElementById("hud-left");
+const hudR = document.getElementById("hud-right");
+const hudBar = document.getElementById("hudbar");
+
+// per-gate scroll center (by camera z when mid-gate)
+const zToP = (zz) => INTRO_END + (TRAVEL_END - INTRO_END) * ((6 - zz) / (6 - (END_Z - 4)));
+const gateP = gateRanges.map((g) => zToP((g.z0 + g.z1) / 2));
+
+let scrollP = 0;
+addEventListener("scroll", () => {
+  const max = document.documentElement.scrollHeight - innerHeight;
+  scrollP = max > 0 ? scrollY / max : 0;
+}, { passive: true });
+
+function setPanelOpacity(el, o) {
+  el.style.opacity = o.toFixed(3);
+  el.style.pointerEvents = o > 0.5 ? "" : "none";
+}
+
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let t0 = performance.now();
+function frame(now) {
+  const t = (now - t0) / 1000;
+  const p = scrollP;
+
+  // camera
+  let camZ, mix = 0;
+  if (p < TRAVEL_END) {
+    const tp = clamp01((p - INTRO_END) / (TRAVEL_END - INTRO_END));
+    camZ = lerp(6, END_Z - 4, tp);
+  } else if (p < CONVERGE_END) {
+    mix = ease(clamp01((p - TRAVEL_END) / (CONVERGE_END - TRAVEL_END)));
+    camZ = lerp(END_Z - 4, FINALE_Z + 17.5, mix);
+  } else {
+    mix = 1;
+    camZ = FINALE_Z + 21;
+  }
+  camera.position.set(Math.sin(p * 14) * 0.9, Math.cos(p * 10) * 0.7, camZ);
+  camera.lookAt(0, 0, camZ - 10);
+
+  // particle positions: travel -> finale halo
+  if (mix > 0 || frame.lastMix > 0) {
+    const arr = posAttr.array;
+    const m = ease(mix);
+    const u = 1 - m;
+    const w0 = u * u, w1 = 2 * u * m, w2 = m * m;
+    for (let i = 0; i < total * 3; i++) {
+      arr[i] = w0 * travelPos[i] + w1 * midPos[i] + w2 * finalePos[i];
+    }
+    posAttr.needsUpdate = true;
+  }
+  frame.lastMix = mix;
+  mat.size = 0.62 + ease(clamp01((mix - 0.55) / 0.45)) * 0.42;
+
+  // gentle shimmer on halo
+  if (mix === 1 && !reduced) {
+    const arr = posAttr.array;
+    for (let i = 0; i < total; i++) {
+      arr[i * 3 + 2] = finalePos[i * 3 + 2] + Math.sin(t * 1.1 + seeds[i]) * 0.22;
+    }
+    posAttr.needsUpdate = true;
+  }
+
+  // overlays
+  const introO = clamp01(1 - p / INTRO_END);
+  setPanelOpacity(panels[0], introO);
+  DATA.gates.forEach((g, gi) => {
+    const d = Math.abs(p - gateP[gi]);
+    const win = 0.5 * (TRAVEL_END - INTRO_END) / DATA.gates.length;
+    setPanelOpacity(panels[gi + 1], clamp01(1 - d / win) * clamp01((TRAVEL_END + 0.02 - p) / 0.02));
+  });
+  setPanelOpacity(finalePanel, clamp01((p - CONVERGE_END + 0.03) / 0.05));
+
+  // HUD
+  let passed = 0, gateIdx = -1;
+  for (const r of cumByRing) if (camZ < r.z + 1.2) { passed = r.end; gateIdx = r.gateIdx; }
+  if (p >= TRAVEL_END) { passed = total; gateIdx = DATA.gates.length - 1; }
+  hudR.textContent = `${passed.toLocaleString()} / ${total.toLocaleString()}`;
+  hudL.textContent = p < INTRO_END ? "INTRO"
+    : p >= CONVERGE_END ? "HALO"
+    : gateIdx >= 0 ? `GATE ${String(gateIdx + 1).padStart(2, "0")} / 08 — ${DATA.gates[gateIdx].label}`
+    : "GATE 01 / 08";
+  hudBar.style.width = `${(p * 100).toFixed(2)}%`;
+
+  renderer.render(scene, camera);
+  requestAnimationFrame(frame);
+}
+frame.lastMix = 0;
+
+function resize() {
+  renderer.setSize(innerWidth, innerHeight);
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+}
+addEventListener("resize", resize);
+resize();
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
