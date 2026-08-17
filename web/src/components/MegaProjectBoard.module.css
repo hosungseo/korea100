@@ -64,6 +64,34 @@
   white-space: nowrap;
 }
 
+.heroStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin: 6px 0 0;
+}
+
+.heroStats span {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.heroStats b {
+  color: #65d7ad;
+  font-family: var(--font-mono);
+  font-size: clamp(15px, 1.4vw, 22px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.heroStats small {
+  color: #8fa199;
+  font-size: 9px;
+  font-weight: 700;
+}
+
 .summary {
   display: -webkit-box;
   max-width: 720px;
@@ -2427,5 +2455,30 @@
   .actorLane,
   .edge {
     animation: none;
+  }
+}
+
+@media (min-width: 2560px) and (min-height: 1440px) {
+  .heroStats b {
+    font-size: 38px;
+  }
+
+  .heroStats small {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .heroStats {
+    gap: 2px 14px;
+    margin-top: 8px;
+  }
+
+  .heroStats b {
+    font-size: 24px;
+  }
+
+  .heroStats small {
+    font-size: 11px;
   }
 }
