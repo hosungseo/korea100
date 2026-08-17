@@ -32,6 +32,7 @@ const MAPPING_CODE: Record<string, string> = {
 
 interface TableRow {
   rowKey: string;
+  anchorStage?: string;
   isFirstOfMilestone: boolean;
   milestoneRowSpan: number;
   stageLabel: string;
@@ -80,6 +81,7 @@ export default function MegaProjectTable({
   );
 
   const rows: TableRow[] = [];
+  const seenStages = new Set<string>();
   project.nodes.forEach((node) => {
     const groups = graph.detailGroupsByNode.get(node.id) ?? [];
     const status = graph.displayStatusByNode.get(node.id) ?? "blocked";
@@ -100,8 +102,14 @@ export default function MegaProjectTable({
     groups.forEach((group) => {
       const groupRowSpan = group.nodes.length || 1;
       group.nodes.forEach((step, stepIndex) => {
+        const anchorStage =
+          milestoneRowIndex === 0 && stepIndex === 0 && !seenStages.has(node.stage)
+            ? node.stage
+            : undefined;
+        if (anchorStage) seenStages.add(node.stage);
         rows.push({
           rowKey: `${node.id}:${group.id}:${step.id}:${stepIndex}`,
+          anchorStage,
           isFirstOfMilestone: milestoneRowIndex === 0,
           milestoneRowSpan,
           stageLabel: stageLabelById.get(node.stage) ?? node.stage,
@@ -146,15 +154,22 @@ export default function MegaProjectTable({
           게이트 · {project.nodes.length}개 마일스톤 · {rows.length}행(하위절차
           기준) · {graph.detailInventory.uniqueTemplates}개 제도 템플릿
         </p>
+        <nav className={styles.gateJump} aria-label="게이트 바로가기">
+          {project.stages.map((stage, index) => (
+            <a key={stage.id} href={`#gate-${stage.id}`}>
+              {String(index + 1).padStart(2, "0")} {stage.label}
+            </a>
+          ))}
+        </nav>
       </header>
 
       <div className={styles.tableWrap}>
         <table className={styles.table}>
           <thead>
             <tr>
-              <th className={styles.groupHeadMilestone}>단계</th>
-              <th className={styles.groupHeadMilestone}>마일스톤 ID</th>
-              <th className={styles.groupHeadMilestone}>마일스톤명</th>
+              <th className={`${styles.groupHeadMilestone} ${styles.stick1}`}>단계</th>
+              <th className={`${styles.groupHeadMilestone} ${styles.stick2}`}>마일스톤 ID</th>
+              <th className={`${styles.groupHeadMilestone} ${styles.stick3}`}>마일스톤명</th>
               <th className={styles.groupHeadMilestone}>상태</th>
               <th className={styles.groupHeadMilestone}>분류</th>
               <th className={styles.groupHeadMilestone}>신뢰도</th>
@@ -177,18 +192,22 @@ export default function MegaProjectTable({
           </thead>
           <tbody>
             {rows.map((row) => (
-              <tr key={row.rowKey} data-status={row.status}>
+              <tr
+                key={row.rowKey}
+                data-status={row.status}
+                id={row.anchorStage ? `gate-${row.anchorStage}` : undefined}
+              >
                 {row.isFirstOfMilestone && (
                   <>
-                    <td className={styles.milestoneCell} rowSpan={row.milestoneRowSpan}>
+                    <td className={`${styles.milestoneCell} ${styles.stick1}`} rowSpan={row.milestoneRowSpan}>
                       {row.stageLabel}
                     </td>
-                    <td className={styles.milestoneCell} rowSpan={row.milestoneRowSpan}>
+                    <td className={`${styles.milestoneCell} ${styles.stick2}`} rowSpan={row.milestoneRowSpan}>
                       <Link href={`/mega-projects/${project.id}/#${row.milestoneId}`}>
                         {row.milestoneId}
                       </Link>
                     </td>
-                    <td className={styles.milestoneCell} rowSpan={row.milestoneRowSpan}>
+                    <td className={`${styles.milestoneCell} ${styles.stick3}`} rowSpan={row.milestoneRowSpan}>
                       {row.milestoneName}
                     </td>
                     <td className={styles.milestoneCell} rowSpan={row.milestoneRowSpan}>

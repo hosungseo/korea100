@@ -65,6 +65,13 @@ export default function MegaProjectUnfold({
           {graph.detailInventory.exact + graph.detailInventory.template}개 하위절차 ·{" "}
           {graph.detailInventory.uniqueTemplates}개 제도 템플릿
         </p>
+        <nav className={styles.gateJump} aria-label="게이트 바로가기">
+          {project.stages.map((stage, index) => (
+            <a key={stage.id} href={`#gate-${stage.id}`}>
+              {String(index + 1).padStart(2, "0")} {stage.label}
+            </a>
+          ))}
+        </nav>
       </header>
 
       <ol className={styles.stageList}>
@@ -74,7 +81,7 @@ export default function MegaProjectUnfold({
           );
           if (stageNodes.length === 0) return null;
           return (
-            <li className={styles.stageSection} key={stage.id}>
+            <li className={styles.stageSection} key={stage.id} id={`gate-${stage.id}`}>
               <h2 className={styles.stageTitle}>
                 <span>{String(stageIndex + 1).padStart(2, "0")}</span>
                 {stage.label}

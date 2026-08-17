@@ -111,6 +111,7 @@ export default function MegaProjectFlow({
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [hoverKey, setHoverKey] = useState<string | null>(null);
   const [hiddenKinds, setHiddenKinds] = useState<Set<EdgeKind>>(new Set());
+  const [query, setQuery] = useState("");
 
   const derived = useMemo(() => {
     const graph = buildMegaProjectGraph(
@@ -602,6 +603,23 @@ export default function MegaProjectFlow({
 
   const hoverNeighbors = hoverKey ? neighborsByNode.get(hoverKey) : undefined;
 
+  const trimmedQuery = query.trim().toLowerCase();
+  const queryActive = trimmedQuery.length >= 2;
+  const matchKeys = new Set<string>();
+  if (queryActive) {
+    stageBands.forEach((band) =>
+      band.milestones.forEach((milestone) =>
+        milestone.cells.forEach((procs) =>
+          procs.forEach((proc) => {
+            const haystack =
+              `${proc.procId} ${proc.procName} ${proc.procActor} ${milestone.id} ${milestone.name}`.toLowerCase();
+            if (haystack.includes(trimmedQuery)) matchKeys.add(proc.key);
+          }),
+        ),
+      ),
+    );
+  }
+
   return (
     <div className={`${styles.page} mega-flow-page`}>
       <header className={styles.header}>
@@ -679,6 +697,16 @@ export default function MegaProjectFlow({
           ))}
           <span className={styles.legendHint}>
             절차에 마우스를 올리면 연결된 선만 강조됩니다
+          </span>
+          <span className={styles.search}>
+            <input
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="절차 검색 — 이름·담당·마일스톤"
+              aria-label="절차 검색"
+            />
+            {queryActive && <b>{matchKeys.size}건 일치</b>}
           </span>
         </p>
 
@@ -863,7 +891,12 @@ export default function MegaProjectFlow({
                       data-kind={edge.kind}
                       data-active={active ? "true" : "false"}
                       data-dim={
-                        hoverKey !== null && !active ? "true" : "false"
+                        (queryActive &&
+                          !matchKeys.has(edge.source) &&
+                          !matchKeys.has(edge.target)) ||
+                        (hoverKey !== null && !active)
+                          ? "true"
+                          : "false"
                       }
                       markerEnd={`url(#flow-arrow-${edge.kind})`}
                     />
@@ -961,9 +994,10 @@ export default function MegaProjectFlow({
                                 data-type={proc.procType}
                                 data-hover={isHovered ? "true" : "false"}
                                 data-dim={
-                                  hoverKey !== null &&
-                                  !isHovered &&
-                                  !isNeighbor
+                                  (queryActive && !matchKeys.has(proc.key)) ||
+                                  (hoverKey !== null &&
+                                    !isHovered &&
+                                    !isNeighbor)
                                     ? "true"
                                     : "false"
                                 }
