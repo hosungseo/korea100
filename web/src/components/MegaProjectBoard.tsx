@@ -892,6 +892,30 @@ export default function MegaProjectBoard({
             MEGA / PERMIT SYNOPTIC <span>PROJECT 01</span>
           </p>
           <h1>{project.name} 행정절차 전경</h1>
+          <p className={styles.heroStats} aria-label="핵심 규모">
+            <span>
+              <b>
+                {(
+                  detailInventory.exact +
+                  detailInventory.template +
+                  detailInventory.missingMilestones
+                ).toLocaleString()}
+              </b>
+              <small>행정절차</small>
+            </span>
+            <span>
+              <b>{detailInventory.uniqueTemplates}</b>
+              <small>법정 제도</small>
+            </span>
+            <span>
+              <b>{project.nodes.length}</b>
+              <small>마일스톤</small>
+            </span>
+            <span>
+              <b>{project.stages.length}</b>
+              <small>게이트</small>
+            </span>
+          </p>
           <p className={styles.summary}>{project.summary}</p>
         </div>
 
