@@ -19,6 +19,7 @@ import {
   formatDate,
   STATUS_META,
 } from "@/lib/mega-project-graph";
+import MegaViewNav from "./MegaViewNav";
 import styles from "./MegaProjectFlow.module.css";
 
 interface MegaProjectFlowProps {
@@ -604,14 +605,7 @@ export default function MegaProjectFlow({
   return (
     <div className={`${styles.page} mega-flow-page`}>
       <header className={styles.header}>
-        <p className={styles.kicker}>
-          MEGA / PERMIT GIANT SWIMLANE
-          <span className={styles.kickerLinks}>
-            <Link href={`/mega-projects/${project.id}/`}>전경</Link>
-            <Link href={`/mega-projects/${project.id}/unfold/`}>펼쳐보기</Link>
-            <Link href={`/mega-projects/${project.id}/table/`}>전체표</Link>
-          </span>
-        </p>
+        <p className={styles.kicker}>MEGA / PERMIT GIANT SWIMLANE</p>
         <div className={styles.headerRow}>
           <div>
             <h1>{project.name} 절차 스윔레인</h1>
@@ -650,18 +644,21 @@ export default function MegaProjectFlow({
               </span>
             </p>
           </div>
-          <nav className={styles.gateNav} aria-label="게이트 바로가기">
-            {stageBands.map((band) => (
-              <button
-                type="button"
-                key={band.stageId}
-                onClick={() => jumpToGate(band.stageId)}
-              >
-                {band.label.slice(0, 2)}
-                <small>{band.label.slice(3)}</small>
-              </button>
-            ))}
-          </nav>
+          <div className={styles.headerRight}>
+            <MegaViewNav projectId={project.id} active="flow" />
+            <nav className={styles.gateNav} aria-label="게이트 바로가기">
+              {stageBands.map((band) => (
+                <button
+                  type="button"
+                  key={band.stageId}
+                  onClick={() => jumpToGate(band.stageId)}
+                >
+                  {band.label.slice(0, 2)}
+                  <small>{band.label.slice(3)}</small>
+                </button>
+              ))}
+            </nav>
+          </div>
         </div>
         <p className={styles.legend}>
           {EDGE_KINDS.map(({ kind, label }) => (

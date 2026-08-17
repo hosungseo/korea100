@@ -13,6 +13,7 @@ import {
   formatDate,
   STATUS_META,
 } from "@/lib/mega-project-graph";
+import MegaViewNav from "./MegaViewNav";
 import styles from "./MegaProjectUnfold.module.css";
 
 interface MegaProjectUnfoldProps {
@@ -46,13 +47,8 @@ export default function MegaProjectUnfold({
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-        <p className={styles.kicker}>
-          MEGA / PERMIT UNFOLD
-          <span className={styles.kickerLinks}>
-            <Link href={`/mega-projects/${project.id}/`}>← 전경(포스터)으로</Link>
-            <Link href={`/mega-projects/${project.id}/table/`}>전체표 보기 →</Link>
-          </span>
-        </p>
+        <p className={styles.kicker}>MEGA / PERMIT UNFOLD</p>
+        <MegaViewNav projectId={project.id} active="unfold" />
         <h1>{project.name} 행정절차 전체 펼쳐보기</h1>
         <p className={styles.summary}>{project.summary}</p>
         <dl className={styles.statusMatrix} aria-label="절차 상태 집계">

@@ -4,7 +4,7 @@
   --synoptic-line: #cbd5cf;
   --synoptic-faint-line: rgba(71, 91, 80, 0.14);
   display: grid;
-  grid-template-rows: 112px 118px minmax(0, 1fr) 34px;
+  grid-template-rows: auto auto auto minmax(0, 1fr) auto;
   height: calc(100svh - 57px);
   min-height: 780px;
   overflow: hidden;
@@ -77,23 +77,20 @@
   -webkit-line-clamp: 2;
 }
 
-.unfoldLinkRow {
+.viewNavStrip {
   display: flex;
-  gap: 12px;
-  margin: 6px 0 0;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding: 8px 24px;
+  border-bottom: 1px solid #cbd5cf;
+  background: #eef2ef;
 }
 
-.unfoldLink {
-  display: inline-block;
-  color: #65d7ad;
-  font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.unfoldLink:hover {
-  text-decoration: underline;
+.viewNavStrip > span {
+  color: #7a887f;
+  font-size: 11.5px;
 }
 
 .scopeMatrix {
@@ -1721,7 +1718,7 @@
 
 @media (min-width: 2560px) and (min-height: 1440px) {
   .page {
-    grid-template-rows: 220px 180px minmax(0, 1fr) 58px;
+    grid-template-rows: 220px auto 180px minmax(0, 1fr) 58px;
   }
 
   .commandHeader {
@@ -2174,7 +2171,7 @@
 
 @media (max-height: 930px) and (min-width: 1081px) {
   .page {
-    grid-template-rows: 96px 100px minmax(0, 1fr) 28px;
+    grid-template-rows: auto auto auto minmax(0, 1fr) 28px;
   }
 
   .identity {
@@ -2280,7 +2277,7 @@
 
 @media (max-width: 1080px) {
   .page {
-    grid-template-rows: auto auto 660px 38px;
+    grid-template-rows: auto auto auto 660px 38px;
     height: auto;
     min-height: 0;
     overflow: visible;
@@ -2347,7 +2344,7 @@
 
 @media (max-width: 640px) {
   .page {
-    grid-template-rows: auto auto 72svh auto;
+    grid-template-rows: auto auto auto 72svh auto;
   }
 
   .commandHeader {

@@ -1,0 +1,80 @@
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.nav a {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 96px;
+  padding: 6px 12px 5px;
+  border: 1px solid #c7d0cb;
+  border-radius: 4px;
+  background: #f4f7f5;
+  text-decoration: none;
+  transition: border-color 120ms ease, background 120ms ease;
+}
+
+.nav a strong {
+  color: #2c4438;
+  font-size: 12.5px;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+}
+
+.nav a small {
+  color: #7a887f;
+  font-size: 10px;
+}
+
+.nav a:hover {
+  border-color: #4b9c80;
+  background: #e8f3ee;
+}
+
+.nav a[aria-current="page"] {
+  border-color: #0d8160;
+  background: #0d8160;
+}
+
+.nav a[aria-current="page"] strong {
+  color: #fff;
+}
+
+.nav a[aria-current="page"] small {
+  color: #bfe6d4;
+}
+
+/* Dark tone: used inside the poster's ink header */
+.nav[data-tone="dark"] a {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav[data-tone="dark"] a strong {
+  color: #d8e6de;
+}
+
+.nav[data-tone="dark"] a small {
+  color: #7d948a;
+}
+
+.nav[data-tone="dark"] a:hover {
+  border-color: #65d7ad;
+  background: rgba(101, 215, 173, 0.12);
+}
+
+.nav[data-tone="dark"] a[aria-current="page"] {
+  border-color: #65d7ad;
+  background: #65d7ad;
+}
+
+.nav[data-tone="dark"] a[aria-current="page"] strong {
+  color: #0b1a13;
+}
+
+.nav[data-tone="dark"] a[aria-current="page"] small {
+  color: #17573f;
+}
