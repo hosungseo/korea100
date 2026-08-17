@@ -164,6 +164,7 @@ export default function MegaProjectFlow({
 
     const milestoneEntryProc = new Map<string, string>();
     const milestoneExitProc = new Map<string, string>();
+    const procLaneByKey = new Map<string, number>();
     const edges: FlowEdge[] = [];
     let totalProcs = 0;
 
@@ -177,6 +178,8 @@ export default function MegaProjectFlow({
           name: string;
           status: string;
           procCount: number;
+          exactCount: number;
+          laneCounts: number[];
           cells: Map<number, ProcItem[]>;
         }[] = [];
 
@@ -191,6 +194,8 @@ export default function MegaProjectFlow({
             name: node.name,
             status: graph.displayStatusByNode.get(node.id) ?? "blocked",
             procCount: 0,
+            exactCount: 0,
+            laneCounts: LANES.map(() => 0),
             cells,
           };
           milestones.push(milestone);
@@ -208,6 +213,10 @@ export default function MegaProjectFlow({
             group.nodes.forEach((proc) => {
               totalProcs += 1;
               milestone.procCount += 1;
+              if (group.mapping === "exact") milestone.exactCount += 1;
+              const lane = laneOf(proc.actor);
+              milestone.laneCounts[lane] += 1;
+              procLaneByKey.set(`${group.id}:${proc.id}`, lane);
               const subColumn = subColumnOfActor.get(proc.actor) ?? 0;
               const cell = cells.get(subColumn) ?? [];
               cell.push({
@@ -289,6 +298,35 @@ export default function MegaProjectFlow({
       .map(() => "var(--subcol-width)")
       .join(" ")}`;
 
+    // Lane-to-lane handoff matrix for the mini sankey summary.
+    const handoffMatrix: number[][] = LANES.map(() => LANES.map(() => 0));
+    let handoffTotal = 0;
+    graph.edges.forEach((edge) => {
+      if (!edge.handoff) return;
+      const source = milestoneExitProc.get(edge.source);
+      const target = milestoneEntryProc.get(edge.target);
+      if (!source || !target) return;
+      const sourceLane = procLaneByKey.get(source);
+      const targetLane = procLaneByKey.get(target);
+      if (sourceLane === undefined || targetLane === undefined) return;
+      if (sourceLane === targetLane) return;
+      handoffMatrix[sourceLane][targetLane] += 1;
+      handoffTotal += 1;
+    });
+
+    const maxCellCount = Math.max(
+      1,
+      ...stageBands.flatMap((band) =>
+        band.milestones.flatMap((milestone) => milestone.laneCounts),
+      ),
+    );
+    const maxMilestoneProcs = Math.max(
+      1,
+      ...stageBands.flatMap((band) =>
+        band.milestones.map((milestone) => milestone.procCount),
+      ),
+    );
+
     return {
       edges,
       stageBands,
@@ -297,6 +335,10 @@ export default function MegaProjectFlow({
       totalProcs,
       neighborsByNode,
       gridTemplate,
+      handoffMatrix,
+      handoffTotal,
+      maxCellCount,
+      maxMilestoneProcs,
     };
   }, [artifacts, detailTemplates, project, templates]);
 
@@ -307,6 +349,10 @@ export default function MegaProjectFlow({
     laneSubColumnCounts,
     totalProcs,
     neighborsByNode,
+    handoffMatrix,
+    handoffTotal,
+    maxCellCount,
+    maxMilestoneProcs,
     gridTemplate,
   } = derived;
 
@@ -569,16 +615,39 @@ export default function MegaProjectFlow({
         <div className={styles.headerRow}>
           <div>
             <h1>{project.name} 절차 스윔레인</h1>
-            <p className={styles.meta}>
-              기준일 {formatDate(project.asOfDate)} · 절차 {totalProcs}개 ·
-              연결선 {edges.length}건 · 가로 {LANES.length}개 주체군 ×{" "}
-              {subColumns.length}개 담당자 · 세로 {stageBands.length}개 게이트
-              ×{" "}
-              {stageBands.reduce(
-                (total, band) => total + band.milestones.length,
-                0,
-              )}
-              개 마일스톤
+            <p className={styles.kpis}>
+              <span>
+                <b>{totalProcs}</b>
+                <small>절차</small>
+              </span>
+              <span>
+                <b>{edges.length}</b>
+                <small>연결선</small>
+              </span>
+              <span>
+                <b>{subColumns.length}</b>
+                <small>담당자 컬럼</small>
+              </span>
+              <span>
+                <b>{stageBands.length}</b>
+                <small>게이트</small>
+              </span>
+              <span>
+                <b>
+                  {stageBands.reduce(
+                    (total, band) => total + band.milestones.length,
+                    0,
+                  )}
+                </b>
+                <small>마일스톤</small>
+              </span>
+              <span>
+                <b>{handoffTotal}</b>
+                <small>기관 간 인계</small>
+              </span>
+              <span className={styles.kpiDate}>
+                기준일 {formatDate(project.asOfDate)}
+              </span>
             </p>
           </div>
           <nav className={styles.gateNav} aria-label="게이트 바로가기">
@@ -615,6 +684,103 @@ export default function MegaProjectFlow({
             절차에 마우스를 올리면 연결된 선만 강조됩니다
           </span>
         </p>
+
+        <div className={styles.summaryStrip}>
+          <div className={styles.minimap} aria-label="마일스톤×레인 밀도 미니맵">
+            <p className={styles.summaryCaption}>
+              <span>밀도 미니맵</span>
+              <small>마일스톤 × 주체군 · 클릭하면 이동</small>
+            </p>
+            <div className={styles.minimapBands}>
+              {stageBands.map((band) => (
+                <div className={styles.minimapBand} key={band.stageId}>
+                  <div className={styles.minimapGrid}>
+                    {band.milestones.map((milestone) => (
+                      <button
+                        type="button"
+                        className={styles.minimapCol}
+                        key={milestone.id}
+                        data-status={milestone.status}
+                        title={`${milestone.id} ${milestone.name} · ${milestone.procCount}개 절차`}
+                        onClick={() =>
+                          document
+                            .getElementById(milestone.id)
+                            ?.scrollIntoView({
+                              behavior: "smooth",
+                              block: "start",
+                            })
+                        }
+                      >
+                        {milestone.laneCounts.map((count, laneIndex) => (
+                          <i
+                            key={LANES[laneIndex].id}
+                            style={{
+                              opacity:
+                                count === 0
+                                  ? 0.08
+                                  : 0.25 + 0.75 * (count / maxCellCount),
+                            }}
+                          />
+                        ))}
+                      </button>
+                    ))}
+                  </div>
+                  <small>{band.label.slice(0, 2)}</small>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.sankey} aria-label="주체군 간 인계 요약">
+            <p className={styles.summaryCaption}>
+              <span>레인 간 인계</span>
+              <small>{handoffTotal}건</small>
+            </p>
+            <svg viewBox="0 0 240 120" className={styles.sankeySvg}>
+              {LANES.map((lane, index) => (
+                <text
+                  key={`l-${lane.id}`}
+                  x={2}
+                  y={index * 19 + 13}
+                  className={styles.sankeyLabel}
+                >
+                  {lane.label.split("·")[0]}
+                </text>
+              ))}
+              {LANES.map((lane, index) => (
+                <text
+                  key={`r-${lane.id}`}
+                  x={238}
+                  y={index * 19 + 13}
+                  textAnchor="end"
+                  className={styles.sankeyLabel}
+                >
+                  {lane.label.split("·")[0]}
+                </text>
+              ))}
+              {handoffMatrix.flatMap((row, sourceLane) =>
+                row.map((count, targetLane) => {
+                  if (count === 0) return null;
+                  const y1 = sourceLane * 19 + 10;
+                  const y2 = targetLane * 19 + 10;
+                  const width = Math.min(9, 1 + count * 0.7);
+                  return (
+                    <path
+                      key={`${sourceLane}-${targetLane}`}
+                      className={styles.sankeyBand}
+                      d={`M 62 ${y1} C 120 ${y1}, 120 ${y2}, 178 ${y2}`}
+                      strokeWidth={width}
+                    >
+                      <title>
+                        {`${LANES[sourceLane].label} → ${LANES[targetLane].label} · ${count}건`}
+                      </title>
+                    </path>
+                  );
+                }),
+              )}
+            </svg>
+          </div>
+        </div>
       </header>
 
       <div className={styles.viewport} ref={viewportRef}>
@@ -716,7 +882,14 @@ export default function MegaProjectFlow({
               >
                 <h2 className={styles.stageTitle}>
                   <span>{band.label}</span>
-                  <small>{band.milestones.length}개 마일스톤</small>
+                  <small>
+                    {band.milestones.length}개 마일스톤 ·{" "}
+                    {band.milestones.reduce(
+                      (total, milestone) => total + milestone.procCount,
+                      0,
+                    )}
+                    개 절차
+                  </small>
                 </h2>
                 {band.milestones.map((milestone) => (
                   <div
@@ -737,7 +910,38 @@ export default function MegaProjectFlow({
                         </small>
                       </p>
                       <span>{milestone.name}</span>
-                      <small>{milestone.procCount}개 절차</small>
+                      <span
+                        className={styles.gutterBullet}
+                        title={`절차 ${milestone.procCount}개 중 확정 매핑(MAP) ${milestone.exactCount}개`}
+                      >
+                        <i
+                          style={{
+                            width: `${(milestone.procCount / maxMilestoneProcs) * 100}%`,
+                          }}
+                        >
+                          <b
+                            style={{
+                              width: `${
+                                milestone.procCount > 0
+                                  ? (milestone.exactCount /
+                                      milestone.procCount) *
+                                    100
+                                  : 0
+                              }%`,
+                            }}
+                          />
+                        </i>
+                      </span>
+                      <small>
+                        {milestone.procCount}절차 · MAP{" "}
+                        {milestone.procCount > 0
+                          ? Math.round(
+                              (milestone.exactCount / milestone.procCount) *
+                                100,
+                            )
+                          : 0}
+                        %
+                      </small>
                     </div>
                     {[...milestone.cells.entries()].map(
                       ([subColumn, procs]) => (
