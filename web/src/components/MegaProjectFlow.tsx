@@ -68,6 +68,14 @@ const EDGE_KINDS: { kind: EdgeKind; label: string }[] = [
   { kind: "conditional", label: "미확정 분기" },
 ];
 
+const EDGE_COLORS: { kind: EdgeKind; color: string }[] = [
+  { kind: "sequence", color: "#16805e" },
+  { kind: "chain", color: "#1c6ea4" },
+  { kind: "internal", color: "#3f7a63" },
+  { kind: "handoff", color: "#0d8160" },
+  { kind: "conditional", color: "#b47a19" },
+];
+
 function laneOf(actor: string): number {
   if (/주민|토지소유|소유자|점유자|이해관계/.test(actor)) return 1;
   if (
@@ -156,6 +164,7 @@ export default function MegaProjectFlow({
 
     const milestoneEntryProc = new Map<string, string>();
     const milestoneExitProc = new Map<string, string>();
+    const procLaneByKey = new Map<string, number>();
     const edges: FlowEdge[] = [];
     let totalProcs = 0;
 
@@ -169,6 +178,8 @@ export default function MegaProjectFlow({
           name: string;
           status: string;
           procCount: number;
+          exactCount: number;
+          laneCounts: number[];
           cells: Map<number, ProcItem[]>;
         }[] = [];
 
@@ -183,6 +194,8 @@ export default function MegaProjectFlow({
             name: node.name,
             status: graph.displayStatusByNode.get(node.id) ?? "blocked",
             procCount: 0,
+            exactCount: 0,
+            laneCounts: LANES.map(() => 0),
             cells,
           };
           milestones.push(milestone);
@@ -200,6 +213,10 @@ export default function MegaProjectFlow({
             group.nodes.forEach((proc) => {
               totalProcs += 1;
               milestone.procCount += 1;
+              if (group.mapping === "exact") milestone.exactCount += 1;
+              const lane = laneOf(proc.actor);
+              milestone.laneCounts[lane] += 1;
+              procLaneByKey.set(`${group.id}:${proc.id}`, lane);
               const subColumn = subColumnOfActor.get(proc.actor) ?? 0;
               const cell = cells.get(subColumn) ?? [];
               cell.push({
@@ -281,6 +298,35 @@ export default function MegaProjectFlow({
       .map(() => "var(--subcol-width)")
       .join(" ")}`;
 
+    // Lane-to-lane handoff matrix for the mini sankey summary.
+    const handoffMatrix: number[][] = LANES.map(() => LANES.map(() => 0));
+    let handoffTotal = 0;
+    graph.edges.forEach((edge) => {
+      if (!edge.handoff) return;
+      const source = milestoneExitProc.get(edge.source);
+      const target = milestoneEntryProc.get(edge.target);
+      if (!source || !target) return;
+      const sourceLane = procLaneByKey.get(source);
+      const targetLane = procLaneByKey.get(target);
+      if (sourceLane === undefined || targetLane === undefined) return;
+      if (sourceLane === targetLane) return;
+      handoffMatrix[sourceLane][targetLane] += 1;
+      handoffTotal += 1;
+    });
+
+    const maxCellCount = Math.max(
+      1,
+      ...stageBands.flatMap((band) =>
+        band.milestones.flatMap((milestone) => milestone.laneCounts),
+      ),
+    );
+    const maxMilestoneProcs = Math.max(
+      1,
+      ...stageBands.flatMap((band) =>
+        band.milestones.map((milestone) => milestone.procCount),
+      ),
+    );
+
     return {
       edges,
       stageBands,
@@ -289,6 +335,10 @@ export default function MegaProjectFlow({
       totalProcs,
       neighborsByNode,
       gridTemplate,
+      handoffMatrix,
+      handoffTotal,
+      maxCellCount,
+      maxMilestoneProcs,
     };
   }, [artifacts, detailTemplates, project, templates]);
 
@@ -299,6 +349,10 @@ export default function MegaProjectFlow({
     laneSubColumnCounts,
     totalProcs,
     neighborsByNode,
+    handoffMatrix,
+    handoffTotal,
+    maxCellCount,
+    maxMilestoneProcs,
     gridTemplate,
   } = derived;
 
@@ -306,46 +360,205 @@ export default function MegaProjectFlow({
     const canvas = canvasRef.current;
     if (!canvas) return;
     const canvasRect = canvas.getBoundingClientRect();
-    const paths = edges.flatMap((edge) => {
-      const source = procRefs.current.get(edge.source);
-      const target = procRefs.current.get(edge.target);
-      if (!source || !target) return [];
-      const sourceRect = source.getBoundingClientRect();
-      const targetRect = target.getBoundingClientRect();
-      const sourceCenterX =
-        sourceRect.left - canvasRect.left + sourceRect.width / 2;
-      const targetCenterX =
-        targetRect.left - canvasRect.left + targetRect.width / 2;
-      const sameColumn =
-        Math.abs(sourceCenterX - targetCenterX) < sourceRect.width * 0.6;
-      let path: string;
-      if (sameColumn) {
-        const goDown = targetRect.top >= sourceRect.top;
-        const sourceY = goDown
-          ? sourceRect.bottom - canvasRect.top
-          : sourceRect.top - canvasRect.top;
-        const targetY = goDown
-          ? targetRect.top - canvasRect.top
-          : targetRect.bottom - canvasRect.top;
-        const bend = Math.max(4, Math.abs(targetY - sourceY) * 0.35);
-        const direction = goDown ? 1 : -1;
-        path = `M ${sourceCenterX} ${sourceY} C ${sourceCenterX + 5} ${sourceY + bend * direction}, ${targetCenterX - 5} ${targetY - bend * direction}, ${targetCenterX} ${targetY}`;
-      } else {
-        const goRight = targetCenterX > sourceCenterX;
-        const sourceX = goRight
-          ? sourceRect.right - canvasRect.left
-          : sourceRect.left - canvasRect.left;
-        const sourceY = sourceRect.top - canvasRect.top + sourceRect.height / 2;
-        const targetX = goRight
-          ? targetRect.left - canvasRect.left
-          : targetRect.right - canvasRect.left;
-        const targetY = targetRect.top - canvasRect.top + targetRect.height / 2;
-        const dx = Math.max(18, Math.abs(targetX - sourceX) * 0.3);
-        const direction = goRight ? 1 : -1;
-        path = `M ${sourceX} ${sourceY} C ${sourceX + dx * direction} ${sourceY}, ${targetX - dx * direction} ${targetY}, ${targetX} ${targetY}`;
-      }
-      return [{ ...edge, path }];
+
+    interface Rect {
+      left: number;
+      right: number;
+      top: number;
+      bottom: number;
+      cx: number;
+      cy: number;
+      width: number;
+      height: number;
+    }
+    const rectCache = new Map<string, Rect>();
+    const rectOf = (key: string): Rect | null => {
+      const cached = rectCache.get(key);
+      if (cached) return cached;
+      const element = procRefs.current.get(key);
+      if (!element) return null;
+      const r = element.getBoundingClientRect();
+      const rect: Rect = {
+        left: r.left - canvasRect.left,
+        right: r.right - canvasRect.left,
+        top: r.top - canvasRect.top,
+        bottom: r.bottom - canvasRect.top,
+        cx: r.left - canvasRect.left + r.width / 2,
+        cy: r.top - canvasRect.top + r.height / 2,
+        width: r.width,
+        height: r.height,
+      };
+      rectCache.set(key, rect);
+      return rect;
+    };
+
+    // Route classification per edge, so ports can be grouped by node side.
+    type RouteKind = "down" | "up" | "side";
+    interface Routed {
+      edge: FlowEdge;
+      kind: RouteKind;
+      s: Rect;
+      t: Rect;
+      goRight: boolean;
+    }
+    const routed: Routed[] = [];
+    edges.forEach((edge) => {
+      const s = rectOf(edge.source);
+      const t = rectOf(edge.target);
+      if (!s || !t) return;
+      const verticalOverlap = t.top < s.bottom && t.bottom > s.top;
+      const kind: RouteKind = verticalOverlap
+        ? "side"
+        : t.top >= s.bottom
+          ? "down"
+          : "up";
+      routed.push({ edge, kind, s, t, goRight: t.cx > s.cx });
     });
+
+    // Port assignment: spread each node's departures/arrivals along the
+    // relevant box side, ordered by where the counterpart sits, so no two
+    // edges share the same anchor point.
+    const portGroups = new Map<string, Routed[]>();
+    const groupKey = (nodeKey: string, side: string) => `${nodeKey}|${side}`;
+    const sideOfSource = (r: Routed) =>
+      r.kind === "side" ? (r.goRight ? "right" : "left") : r.kind === "down" ? "bottom" : "top";
+    const sideOfTarget = (r: Routed) =>
+      r.kind === "side" ? (r.goRight ? "left" : "right") : r.kind === "down" ? "top" : "bottom";
+    routed.forEach((r) => {
+      const sKey = groupKey(r.edge.source, `out-${sideOfSource(r)}`);
+      const tKey = groupKey(r.edge.target, `in-${sideOfTarget(r)}`);
+      (portGroups.get(sKey) ?? portGroups.set(sKey, []).get(sKey)!).push(r);
+      (portGroups.get(tKey) ?? portGroups.set(tKey, []).get(tKey)!).push(r);
+    });
+    portGroups.forEach((group, key) => {
+      const horizontal = key.endsWith("bottom") || key.endsWith("top");
+      const isOut = key.includes("|out-");
+      group.sort((a, b) => {
+        const ra = isOut ? a.t : a.s;
+        const rb = isOut ? b.t : b.s;
+        return horizontal ? ra.cx - rb.cx || ra.cy - rb.cy : ra.cy - rb.cy || ra.cx - rb.cx;
+      });
+    });
+    const portOffset = (
+      nodeKey: string,
+      side: string,
+      r: Routed,
+      rect: Rect,
+    ) => {
+      const group = portGroups.get(groupKey(nodeKey, side)) ?? [];
+      const index = group.indexOf(r);
+      const count = group.length;
+      const span = side.endsWith("bottom") || side.endsWith("top")
+        ? rect.width
+        : rect.height;
+      const usable = Math.max(8, span - 12);
+      return count <= 1
+        ? 0
+        : ((index + 1) / (count + 1) - 0.5) * usable;
+    };
+
+    // Channel assignment: horizontal runs near the same Y (or vertical runs
+    // near the same X) get successive 4px slots instead of piling up.
+    const channelSlots = new Map<string, number>();
+    const channelOffset = (axis: "h" | "v", base: number) => {
+      const key = `${axis}:${Math.round(base / 10)}`;
+      const slot = channelSlots.get(key) ?? 0;
+      channelSlots.set(key, slot + 1);
+      const step = Math.ceil(slot / 2) * 4;
+      return slot % 2 === 1 ? step : -step;
+    };
+
+    // Render an orthogonal polyline with rounded corners so long routes read
+    // as flows, not empty rectangles.
+    const roundedPath = (points: [number, number][]) => {
+      if (points.length < 2) return "";
+      let d = `M ${points[0][0]} ${points[0][1]}`;
+      for (let i = 1; i < points.length - 1; i += 1) {
+        const [px, py] = points[i - 1];
+        const [cx, cy] = points[i];
+        const [nx, ny] = points[i + 1];
+        const inLen = Math.hypot(cx - px, cy - py);
+        const outLen = Math.hypot(nx - cx, ny - cy);
+        const r = Math.min(6, inLen / 2, outLen / 2);
+        if (r < 1) {
+          d += ` L ${cx} ${cy}`;
+          continue;
+        }
+        const inX = cx - ((cx - px) / inLen) * r;
+        const inY = cy - ((cy - py) / inLen) * r;
+        const outX = cx + ((nx - cx) / outLen) * r;
+        const outY = cy + ((ny - cy) / outLen) * r;
+        d += ` L ${inX} ${inY} Q ${cx} ${cy} ${outX} ${outY}`;
+      }
+      const last = points[points.length - 1];
+      d += ` L ${last[0]} ${last[1]}`;
+      return d;
+    };
+
+    const paths = routed.map((r) => {
+      const { edge, kind, s, t, goRight } = r;
+      let path: string;
+      if (kind === "side") {
+        const sx = goRight ? s.right : s.left;
+        const tx = goRight ? t.left : t.right;
+        const sy = s.cy + portOffset(edge.source, `out-${goRight ? "right" : "left"}`, r, s);
+        const ty = t.cy + portOffset(edge.target, `in-${goRight ? "left" : "right"}`, r, t);
+        if (Math.abs(sy - ty) < 4) {
+          path = `M ${sx} ${sy} L ${tx} ${ty}`;
+        } else {
+          // Vertical hop hugs the target column instead of floating mid-gap.
+          const hop = 10 + Math.abs(channelOffset("v", tx));
+          const midX = goRight
+            ? Math.max(sx + 4, tx - hop)
+            : Math.min(sx - 4, tx + hop);
+          path = roundedPath([
+            [sx, sy],
+            [midX, sy],
+            [midX, ty],
+            [tx, ty],
+          ]);
+        }
+      } else {
+        const down = kind === "down";
+        const sy = down ? s.bottom : s.top;
+        const ty = down ? t.top : t.bottom;
+        const overlapLeft = Math.max(s.left, t.left);
+        const overlapRight = Math.min(s.right, t.right);
+        const gap = Math.abs(ty - sy);
+        if (overlapRight - overlapLeft > 12 && gap < 22) {
+          // Neighbouring boxes in the same stack: one straight vertical stem.
+          const x = Math.min(
+            overlapRight - 6,
+            Math.max(overlapLeft + 6, (s.cx + t.cx) / 2),
+          );
+          path = `M ${x} ${sy} L ${x} ${ty}`;
+        } else {
+          const sx = s.cx + portOffset(edge.source, `out-${down ? "bottom" : "top"}`, r, s);
+          const tx = t.cx + portOffset(edge.target, `in-${down ? "top" : "bottom"}`, r, t);
+          if (Math.abs(sx - tx) < 4) {
+            path = `M ${sx} ${sy} L ${tx} ${ty}`;
+          } else {
+            // Horizontal channel hugs the destination row (a few px before the
+            // target edge) instead of crossing the middle of empty space.
+            const gapLow = Math.min(sy, ty);
+            const gapHigh = Math.max(sy, ty);
+            const hug = 8 + Math.abs(channelOffset("h", ty));
+            const midY = Math.min(
+              gapHigh - 3,
+              Math.max(gapLow + 3, down ? ty - hug : ty + hug),
+            );
+            path = roundedPath([
+              [sx, sy],
+              [sx, midY],
+              [tx, midY],
+              [tx, ty],
+            ]);
+          }
+        }
+      }
+      return { ...edge, path };
+    });
+
     setSize({ width: canvas.scrollWidth, height: canvas.scrollHeight });
     setEdgePaths(paths);
   }, [edges]);
@@ -402,16 +615,39 @@ export default function MegaProjectFlow({
         <div className={styles.headerRow}>
           <div>
             <h1>{project.name} 절차 스윔레인</h1>
-            <p className={styles.meta}>
-              기준일 {formatDate(project.asOfDate)} · 절차 {totalProcs}개 ·
-              연결선 {edges.length}건 · 가로 {LANES.length}개 주체군 ×{" "}
-              {subColumns.length}개 담당자 · 세로 {stageBands.length}개 게이트
-              ×{" "}
-              {stageBands.reduce(
-                (total, band) => total + band.milestones.length,
-                0,
-              )}
-              개 마일스톤
+            <p className={styles.kpis}>
+              <span>
+                <b>{totalProcs}</b>
+                <small>절차</small>
+              </span>
+              <span>
+                <b>{edges.length}</b>
+                <small>연결선</small>
+              </span>
+              <span>
+                <b>{subColumns.length}</b>
+                <small>담당자 컬럼</small>
+              </span>
+              <span>
+                <b>{stageBands.length}</b>
+                <small>게이트</small>
+              </span>
+              <span>
+                <b>
+                  {stageBands.reduce(
+                    (total, band) => total + band.milestones.length,
+                    0,
+                  )}
+                </b>
+                <small>마일스톤</small>
+              </span>
+              <span>
+                <b>{handoffTotal}</b>
+                <small>기관 간 인계</small>
+              </span>
+              <span className={styles.kpiDate}>
+                기준일 {formatDate(project.asOfDate)}
+              </span>
             </p>
           </div>
           <nav className={styles.gateNav} aria-label="게이트 바로가기">
@@ -448,6 +684,103 @@ export default function MegaProjectFlow({
             절차에 마우스를 올리면 연결된 선만 강조됩니다
           </span>
         </p>
+
+        <div className={styles.summaryStrip}>
+          <div className={styles.minimap} aria-label="마일스톤×레인 밀도 미니맵">
+            <p className={styles.summaryCaption}>
+              <span>밀도 미니맵</span>
+              <small>마일스톤 × 주체군 · 클릭하면 이동</small>
+            </p>
+            <div className={styles.minimapBands}>
+              {stageBands.map((band) => (
+                <div className={styles.minimapBand} key={band.stageId}>
+                  <div className={styles.minimapGrid}>
+                    {band.milestones.map((milestone) => (
+                      <button
+                        type="button"
+                        className={styles.minimapCol}
+                        key={milestone.id}
+                        data-status={milestone.status}
+                        title={`${milestone.id} ${milestone.name} · ${milestone.procCount}개 절차`}
+                        onClick={() =>
+                          document
+                            .getElementById(milestone.id)
+                            ?.scrollIntoView({
+                              behavior: "smooth",
+                              block: "start",
+                            })
+                        }
+                      >
+                        {milestone.laneCounts.map((count, laneIndex) => (
+                          <i
+                            key={LANES[laneIndex].id}
+                            style={{
+                              opacity:
+                                count === 0
+                                  ? 0.08
+                                  : 0.25 + 0.75 * (count / maxCellCount),
+                            }}
+                          />
+                        ))}
+                      </button>
+                    ))}
+                  </div>
+                  <small>{band.label.slice(0, 2)}</small>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.sankey} aria-label="주체군 간 인계 요약">
+            <p className={styles.summaryCaption}>
+              <span>레인 간 인계</span>
+              <small>{handoffTotal}건</small>
+            </p>
+            <svg viewBox="0 0 240 120" className={styles.sankeySvg}>
+              {LANES.map((lane, index) => (
+                <text
+                  key={`l-${lane.id}`}
+                  x={2}
+                  y={index * 19 + 13}
+                  className={styles.sankeyLabel}
+                >
+                  {lane.label.split("·")[0]}
+                </text>
+              ))}
+              {LANES.map((lane, index) => (
+                <text
+                  key={`r-${lane.id}`}
+                  x={238}
+                  y={index * 19 + 13}
+                  textAnchor="end"
+                  className={styles.sankeyLabel}
+                >
+                  {lane.label.split("·")[0]}
+                </text>
+              ))}
+              {handoffMatrix.flatMap((row, sourceLane) =>
+                row.map((count, targetLane) => {
+                  if (count === 0) return null;
+                  const y1 = sourceLane * 19 + 10;
+                  const y2 = targetLane * 19 + 10;
+                  const width = Math.min(9, 1 + count * 0.7);
+                  return (
+                    <path
+                      key={`${sourceLane}-${targetLane}`}
+                      className={styles.sankeyBand}
+                      d={`M 62 ${y1} C 120 ${y1}, 120 ${y2}, 178 ${y2}`}
+                      strokeWidth={width}
+                    >
+                      <title>
+                        {`${LANES[sourceLane].label} → ${LANES[targetLane].label} · ${count}건`}
+                      </title>
+                    </path>
+                  );
+                }),
+              )}
+            </svg>
+          </div>
+        </div>
       </header>
 
       <div className={styles.viewport} ref={viewportRef}>
@@ -503,6 +836,22 @@ export default function MegaProjectFlow({
               viewBox={`0 0 ${size.width} ${size.height}`}
               aria-hidden="true"
             >
+              <defs>
+                {EDGE_COLORS.map(({ kind, color }) => (
+                  <marker
+                    key={kind}
+                    id={`flow-arrow-${kind}`}
+                    viewBox="0 0 8 8"
+                    refX="7"
+                    refY="4"
+                    markerWidth="5"
+                    markerHeight="5"
+                    orient="auto-start-reverse"
+                  >
+                    <path d="M 0 0 L 8 4 L 0 8 z" fill={color} />
+                  </marker>
+                ))}
+              </defs>
               {edgePaths
                 .filter((edge) => !hiddenKinds.has(edge.kind))
                 .map((edge) => {
@@ -519,6 +868,7 @@ export default function MegaProjectFlow({
                       data-dim={
                         hoverKey !== null && !active ? "true" : "false"
                       }
+                      markerEnd={`url(#flow-arrow-${edge.kind})`}
                     />
                   );
                 })}
@@ -532,7 +882,14 @@ export default function MegaProjectFlow({
               >
                 <h2 className={styles.stageTitle}>
                   <span>{band.label}</span>
-                  <small>{band.milestones.length}개 마일스톤</small>
+                  <small>
+                    {band.milestones.length}개 마일스톤 ·{" "}
+                    {band.milestones.reduce(
+                      (total, milestone) => total + milestone.procCount,
+                      0,
+                    )}
+                    개 절차
+                  </small>
                 </h2>
                 {band.milestones.map((milestone) => (
                   <div
@@ -553,7 +910,38 @@ export default function MegaProjectFlow({
                         </small>
                       </p>
                       <span>{milestone.name}</span>
-                      <small>{milestone.procCount}개 절차</small>
+                      <span
+                        className={styles.gutterBullet}
+                        title={`절차 ${milestone.procCount}개 중 확정 매핑(MAP) ${milestone.exactCount}개`}
+                      >
+                        <i
+                          style={{
+                            width: `${(milestone.procCount / maxMilestoneProcs) * 100}%`,
+                          }}
+                        >
+                          <b
+                            style={{
+                              width: `${
+                                milestone.procCount > 0
+                                  ? (milestone.exactCount /
+                                      milestone.procCount) *
+                                    100
+                                  : 0
+                              }%`,
+                            }}
+                          />
+                        </i>
+                      </span>
+                      <small>
+                        {milestone.procCount}절차 · MAP{" "}
+                        {milestone.procCount > 0
+                          ? Math.round(
+                              (milestone.exactCount / milestone.procCount) *
+                                100,
+                            )
+                          : 0}
+                        %
+                      </small>
                     </div>
                     {[...milestone.cells.entries()].map(
                       ([subColumn, procs]) => (
