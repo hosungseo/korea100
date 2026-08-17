@@ -13,6 +13,7 @@ import {
   formatDate,
   STATUS_META,
 } from "@/lib/mega-project-graph";
+import MegaViewNav from "./MegaViewNav";
 import styles from "./MegaProjectTable.module.css";
 
 interface MegaProjectTableProps {
@@ -136,13 +137,8 @@ export default function MegaProjectTable({
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-        <p className={styles.kicker}>
-          MEGA / PERMIT MASTER TABLE
-          <span className={styles.kickerLinks}>
-            <Link href={`/mega-projects/${project.id}/`}>전경(포스터)</Link>
-            <Link href={`/mega-projects/${project.id}/unfold/`}>펼쳐보기</Link>
-          </span>
-        </p>
+        <p className={styles.kicker}>MEGA / PERMIT MASTER TABLE</p>
+        <MegaViewNav projectId={project.id} active="table" />
         <h1>{project.name} 전체표</h1>
         <p className={styles.summary}>{project.summary}</p>
         <p className={styles.meta}>

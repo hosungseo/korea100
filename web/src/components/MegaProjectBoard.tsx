@@ -23,6 +23,7 @@ import type {
   MegaRuleValue,
   MegaRuleValues,
 } from "@/lib/mega-project-types";
+import MegaViewNav from "./MegaViewNav";
 import styles from "./MegaProjectBoard.module.css";
 
 interface MegaProjectBoardProps {
@@ -892,17 +893,6 @@ export default function MegaProjectBoard({
           </p>
           <h1>{project.name} 행정절차 전경</h1>
           <p className={styles.summary}>{project.summary}</p>
-          <span className={styles.unfoldLinkRow}>
-            <Link className={styles.unfoldLink} href={`/mega-projects/${project.id}/unfold/`}>
-              절차 전체 펼쳐보기 →
-            </Link>
-            <Link className={styles.unfoldLink} href={`/mega-projects/${project.id}/table/`}>
-              전체표 보기 →
-            </Link>
-            <Link className={styles.unfoldLink} href={`/mega-projects/${project.id}/flow/`}>
-              절차 흐름도 →
-            </Link>
-          </span>
         </div>
 
         <dl className={styles.scopeMatrix}>
@@ -933,6 +923,11 @@ export default function MegaProjectBoard({
           ))}
         </dl>
       </header>
+
+      <div className={styles.viewNavStrip}>
+        <MegaViewNav projectId={project.id} active="poster" />
+        <span>화면이 작으면 스윔레인·펼쳐보기가 읽기 편합니다</span>
+      </div>
 
       <section className={styles.signalDeck} aria-label="현재 병렬축과 미확정 분기">
         <div className={styles.readyRail}>
