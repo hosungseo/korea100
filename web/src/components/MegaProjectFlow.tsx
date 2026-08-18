@@ -8,6 +8,8 @@ import { useEffect, Fragment,
   useRef,
   useState,
   type CSSProperties,
+  type MouseEvent as ReactMouseEvent,
+  type PointerEvent as ReactPointerEvent,
 } from "react";
 import type {
   MegaArtifact,
@@ -50,6 +52,7 @@ interface ProcItem {
   procType: string;
   procActor: string;
   lane: number;
+  subCol: number;
   templateName: string;
   templateId?: string;
   outputs: string;
@@ -288,6 +291,7 @@ export default function MegaProjectFlow({
                 procType: proc.type,
                 procActor: proc.actor,
                 lane: subColumns[subColumn]?.lane ?? 0,
+                subCol: subColumn,
                 templateName: group.templateName,
                 templateId: group.templateId,
                 outputs: proc.outputDocuments.join(" · "),
@@ -484,6 +488,70 @@ export default function MegaProjectFlow({
         .getElementById(milestoneId)
         ?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 80);
+  }, []);
+
+  // 드래그 패닝 — 빈 캔버스를 잡고 끌어 스크롤(마우스 전용, 스크롤바 영역 제외)
+  const panState = useRef({ startX: 0, startY: 0, left: 0, top: 0, moved: false });
+  const panningRef = useRef(false);
+  const [panning, setPanning] = useState(false);
+  const onPanPointerDown = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== "mouse" || event.button !== 0) return;
+    const target = event.target as HTMLElement;
+    if (target.closest("button, a, input")) return;
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    const rect = viewport.getBoundingClientRect();
+    // clientWidth/Height는 스크롤바를 제외한다 — 스크롤바 드래그는 브라우저에 맡긴다
+    if (
+      event.clientX - rect.left > viewport.clientWidth ||
+      event.clientY - rect.top > viewport.clientHeight
+    )
+      return;
+    panState.current = {
+      startX: event.clientX,
+      startY: event.clientY,
+      left: viewport.scrollLeft,
+      top: viewport.scrollTop,
+      moved: false,
+    };
+    panningRef.current = true;
+    setPanning(true);
+    viewport.setPointerCapture(event.pointerId);
+  }, []);
+  const onPanPointerMove = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    if (!panningRef.current) return;
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    const dx = event.clientX - panState.current.startX;
+    const dy = event.clientY - panState.current.startY;
+    if (Math.abs(dx) + Math.abs(dy) > 4) panState.current.moved = true;
+    viewport.scrollLeft = panState.current.left - dx;
+    viewport.scrollTop = panState.current.top - dy;
+  }, []);
+  const onPanPointerEnd = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    if (!panningRef.current) return;
+    panningRef.current = false;
+    setPanning(false);
+    viewportRef.current?.releasePointerCapture?.(event.pointerId);
+  }, []);
+  const onPanClickCapture = useCallback((event: ReactMouseEvent<HTMLDivElement>) => {
+    if (panState.current.moved) {
+      event.preventDefault();
+      event.stopPropagation();
+      panState.current.moved = false;
+    }
+  }, []);
+
+  // 폭맞춤 — 시트 전체 폭을 뷰포트에 맞추는 줌
+  const fitWidth = useCallback(() => {
+    const viewport = viewportRef.current;
+    const canvas = canvasRef.current;
+    if (!viewport || !canvas || !canvas.offsetWidth) return;
+    const next = Math.min(
+      1,
+      Math.max(0.25, Math.floor((viewport.clientWidth / canvas.offsetWidth) * 100) / 100),
+    );
+    setZoom(next);
   }, []);
 
   const detailKey = pinnedKey ?? hoverKey;
@@ -850,6 +918,11 @@ export default function MegaProjectFlow({
 
   const hoverNeighbors = hoverKey ? neighborsByNode.get(hoverKey) : undefined;
 
+  // 호버 크로스헤어 — 호버 절차의 담당자 열·마일스톤 행을 함께 하이라이트
+  const hoverInfo = hoverKey ? procByKey.get(hoverKey) : null;
+  const hoverSubCol = hoverInfo?.proc.subCol ?? -1;
+  const hoverMilestoneId = hoverInfo?.milestoneId ?? null;
+
   const trimmedQuery = query.trim().toLowerCase();
   const queryActive = trimmedQuery.length >= 2;
   const matchKeys = new Set<string>();
@@ -1014,6 +1087,13 @@ export default function MegaProjectFlow({
               aria-label="확대"
             >
               +
+            </button>
+            <button
+              type="button"
+              onClick={fitWidth}
+              title="전체 폭을 화면에 맞춤"
+            >
+              폭맞춤
             </button>
           </span>
         </p>
@@ -1261,7 +1341,16 @@ export default function MegaProjectFlow({
           </span>
         </button>
       )}
-      <div className={styles.viewport} ref={viewportRef}>
+      <div
+        className={styles.viewport}
+        ref={viewportRef}
+        data-panning={panning ? "true" : "false"}
+        onPointerDown={onPanPointerDown}
+        onPointerMove={onPanPointerMove}
+        onPointerUp={onPanPointerEnd}
+        onPointerCancel={onPanPointerEnd}
+        onClickCapture={onPanClickCapture}
+      >
         <div
           className={styles.sheet}
           style={{ "--flow-columns": gridColumns, zoom } as CSSProperties & { zoom: number }}
@@ -1294,6 +1383,7 @@ export default function MegaProjectFlow({
                 data-lane={subColumn.lane}
                 data-hidden={hiddenLanes.has(subColumn.lane) ? "true" : "false"}
                 data-other={subColumn.isOther ? "true" : "false"}
+                data-col-hover={index === hoverSubCol ? "true" : "false"}
                 data-first={
                   index === 0 || subColumns[index - 1].lane !== subColumn.lane
                     ? "true"
@@ -1429,6 +1519,9 @@ export default function MegaProjectFlow({
                     data-gate={band.label}
                     data-gate-id={band.stageId}
                     data-ms-name={milestone.name}
+                    data-row-hover={
+                      milestone.id === hoverMilestoneId ? "true" : "false"
+                    }
                   >
                     <div className={styles.milestoneGutter}>
                       <div className={styles.gutterSticky}>
@@ -1487,6 +1580,9 @@ export default function MegaProjectFlow({
                             hiddenLanes.has(subColumns[subColumn]?.lane ?? -1)
                               ? "true"
                               : "false"
+                          }
+                          data-col-hover={
+                            subColumn === hoverSubCol ? "true" : "false"
                           }
                           style={{ gridColumn: subColumn + 2, gridRow: 1 }}
                         >

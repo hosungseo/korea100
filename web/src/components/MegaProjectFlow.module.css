@@ -1381,6 +1381,47 @@
   outline: 2px solid #17573f;
 }
 
+/* ---- 데스크톱 가독성 8차: 드래그 패닝·호버 크로스헤어·폭맞춤 ---- */
+@media (min-width: 721px) {
+  .viewport {
+    cursor: grab;
+  }
+}
+
+.viewport[data-panning="true"] {
+  cursor: grabbing;
+  user-select: none;
+}
+
+/* 호버 크로스헤어 — 열: 담당자 컬럼 전체를 옅게 칠하고 헤더를 강조 */
+.cell[data-col-hover="true"] {
+  background-image: linear-gradient(
+    rgba(13, 129, 96, 0.05),
+    rgba(13, 129, 96, 0.05)
+  );
+}
+
+.actorHeader > span[data-col-hover="true"] {
+  color: #0d5e42;
+  background-image: linear-gradient(
+    rgba(13, 129, 96, 0.13),
+    rgba(13, 129, 96, 0.13)
+  );
+  box-shadow: inset 0 -2px 0 #0d8160;
+}
+
+/* 호버 크로스헤어 — 행: 마일스톤 스트립과 거터를 함께 강조 */
+.milestoneStrip[data-row-hover="true"] {
+  background-image: linear-gradient(
+    rgba(13, 129, 96, 0.03),
+    rgba(13, 129, 96, 0.03)
+  );
+}
+
+.milestoneStrip[data-row-hover="true"] .milestoneGutter {
+  background: rgba(228, 240, 234, 0.97);
+}
+
 .floatMapRow i[data-status="completed"] { background: #0d8160; }
 .floatMapRow i[data-status="active"] { background: #1689a7; }
 .floatMapRow i[data-status="ready"] { background: #41c98f; }
