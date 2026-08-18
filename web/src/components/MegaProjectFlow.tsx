@@ -116,6 +116,9 @@ export default function MegaProjectFlow({
   const [hiddenKinds, setHiddenKinds] = useState<Set<EdgeKind>>(new Set());
   const [query, setQuery] = useState("");
   const [zoom, setZoom] = useState(1);
+  const [pinnedKey, setPinnedKey] = useState<string | null>(null);
+  const [flashKey, setFlashKey] = useState<string | null>(null);
+  const [matchIndex, setMatchIndex] = useState(0);
   const [collapsed, setCollapsed] = useState<Set<string>>(new Set());
   const [scrollPos, setScrollPos] = useState<{
     gate: string;
@@ -413,7 +416,13 @@ export default function MegaProjectFlow({
   const procByKey = useMemo(() => {
     const map = new Map<
       string,
-      { proc: ProcItem; milestoneId: string; milestoneName: string; gate: string }
+      {
+        proc: ProcItem;
+        milestoneId: string;
+        milestoneName: string;
+        gate: string;
+        stageId: string;
+      }
     >();
     for (const band of derived.stageBands) {
       for (const milestone of band.milestones) {
@@ -424,6 +433,7 @@ export default function MegaProjectFlow({
               milestoneId: milestone.id,
               milestoneName: milestone.name,
               gate: band.label,
+              stageId: band.stageId,
             });
           }
         }
@@ -431,7 +441,55 @@ export default function MegaProjectFlow({
     }
     return map;
   }, [derived]);
-  const hoverDetail = hoverKey ? procByKey.get(hoverKey) : null;
+  const detailKey = pinnedKey ?? hoverKey;
+  const hoverDetail = detailKey ? procByKey.get(detailKey) : null;
+  const detailLinks = useMemo(() => {
+    if (!detailKey) return [];
+    return derived.edges
+      .filter((edge) => edge.source === detailKey || edge.target === detailKey)
+      .map((edge) => {
+        const outgoing = edge.source === detailKey;
+        const counterpartKey = outgoing ? edge.target : edge.source;
+        const counterpart = procByKey.get(counterpartKey);
+        return counterpart
+          ? {
+              key: counterpartKey,
+              outgoing,
+              kind: edge.kind,
+              label: `${counterpart.proc.procId} ${counterpart.proc.procName}`,
+              milestoneId: counterpart.milestoneId,
+            }
+          : null;
+      })
+      .filter((item): item is NonNullable<typeof item> => item !== null);
+  }, [detailKey, derived.edges, procByKey]);
+
+  const scrollToProc = useCallback(
+    (key: string) => {
+      const info = procByKey.get(key);
+      if (info) {
+        setCollapsed((previous) => {
+          if (!previous.has(info.stageId)) return previous;
+          const next = new Set(previous);
+          next.delete(info.stageId);
+          return next;
+        });
+      }
+      setPinnedKey(key);
+      setFlashKey(key);
+      window.setTimeout(() => {
+        procRefs.current
+          .get(key)
+          ?.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+      }, 60);
+      window.setTimeout(() => setFlashKey((value) => (value === key ? null : value)), 1800);
+    },
+    [procByKey],
+  );
+
+  useEffect(() => {
+    setMatchIndex(0);
+  }, [query]);
 
   const updateGeometry = useCallback(() => {
     const canvas = canvasRef.current;
@@ -685,6 +743,7 @@ export default function MegaProjectFlow({
   const trimmedQuery = query.trim().toLowerCase();
   const queryActive = trimmedQuery.length >= 2;
   const matchKeys = new Set<string>();
+  const matchList: string[] = [];
   if (queryActive) {
     stageBands.forEach((band) =>
       band.milestones.forEach((milestone) =>
@@ -692,12 +751,21 @@ export default function MegaProjectFlow({
           procs.forEach((proc) => {
             const haystack =
               `${proc.procId} ${proc.procName} ${proc.procActor} ${milestone.id} ${milestone.name}`.toLowerCase();
-            if (haystack.includes(trimmedQuery)) matchKeys.add(proc.key);
+            if (haystack.includes(trimmedQuery)) {
+              matchKeys.add(proc.key);
+              matchList.push(proc.key);
+            }
           }),
         ),
       ),
     );
   }
+  const stepMatch = (delta: number) => {
+    if (!matchList.length) return;
+    const next = (matchIndex + delta + matchList.length) % matchList.length;
+    setMatchIndex(next);
+    scrollToProc(matchList[next]);
+  };
 
   return (
     <div className={`${styles.page} mega-flow-page`}>
@@ -785,8 +853,34 @@ export default function MegaProjectFlow({
               placeholder="절차 검색 — 이름·담당·마일스톤"
               aria-label="절차 검색"
             />
-            {queryActive && <b>{matchKeys.size}건 일치</b>}
+            {queryActive && matchList.length > 0 && (
+              <span className={styles.searchNav}>
+                <button type="button" onClick={() => stepMatch(-1)} aria-label="이전 일치">
+                  ‹
+                </button>
+                <b>
+                  {Math.min(matchIndex + 1, matchList.length)}/{matchList.length}
+                </b>
+                <button type="button" onClick={() => stepMatch(1)} aria-label="다음 일치">
+                  ›
+                </button>
+              </span>
+            )}
+            {queryActive && matchList.length === 0 && <b>일치 없음</b>}
           </span>
+          <button
+            type="button"
+            className={styles.bulkToggle}
+            onClick={() =>
+              setCollapsed((previous) =>
+                previous.size < stageBands.length
+                  ? new Set(stageBands.map((band) => band.stageId))
+                  : new Set(),
+              )
+            }
+          >
+            {collapsed.size < stageBands.length ? "모두 접기" : "모두 펼치기"}
+          </button>
           <span className={styles.zoomControl} role="group" aria-label="확대·축소">
             <button
               type="button"
@@ -919,7 +1013,21 @@ export default function MegaProjectFlow({
       </header>
 
       {hoverDetail && (
-        <aside className={styles.hoverPanel} aria-live="polite">
+        <aside
+          className={styles.hoverPanel}
+          data-pinned={pinnedKey ? "true" : "false"}
+          aria-live="polite"
+        >
+          {pinnedKey && (
+            <button
+              type="button"
+              className={styles.panelClose}
+              onClick={() => setPinnedKey(null)}
+              aria-label="고정 해제"
+            >
+              ×
+            </button>
+          )}
           <p>
             <b>{hoverDetail.proc.procId}</b> {hoverDetail.proc.procName}
           </p>
@@ -944,6 +1052,28 @@ export default function MegaProjectFlow({
               <dd>{hoverDetail.proc.legalBasis}건</dd>
             </div>
           </dl>
+          {detailLinks.length > 0 && (
+            <div className={styles.linkList}>
+              <span>
+                연결 절차 {detailLinks.length}건
+                {!pinnedKey && " — 절차를 클릭하면 따라갈 수 있습니다"}
+              </span>
+              {pinnedKey && (
+                <ul>
+                  {detailLinks.slice(0, 8).map((link) => (
+                    <li key={`${link.key}:${link.outgoing ? "o" : "i"}`}>
+                      <button type="button" onClick={() => scrollToProc(link.key)}>
+                        <em data-kind={link.kind}>{link.outgoing ? "다음 →" : "← 이전"}</em>
+                        <span>{link.label}</span>
+                        <small>{link.milestoneId}</small>
+                      </button>
+                    </li>
+                  ))}
+                  {detailLinks.length > 8 && <li className={styles.linkMore}>외 {detailLinks.length - 8}건</li>}
+                </ul>
+              )}
+            </div>
+          )}
         </aside>
       )}
       {scrollPos && (
@@ -1192,7 +1322,14 @@ export default function MegaProjectFlow({
                                     : "false"
                                 }
                                 title={proc.title}
+                                data-pinned={pinnedKey === proc.key ? "true" : "false"}
+                                data-flash={flashKey === proc.key ? "true" : "false"}
                                 onMouseEnter={() => setHoverKey(proc.key)}
+                                onClick={() =>
+                                  setPinnedKey((value) =>
+                                    value === proc.key ? null : proc.key,
+                                  )
+                                }
                               >
                                 <b>{proc.procId}</b>
                                 <i>{proc.procName}</i>

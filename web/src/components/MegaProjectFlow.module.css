@@ -964,3 +964,157 @@
   font-size: 10.5px;
   line-height: 1.4;
 }
+
+.searchNav {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: 6px;
+}
+
+.searchNav button {
+  min-width: 20px;
+  padding: 1px 5px;
+  border: 1px solid rgba(70, 96, 82, 0.35);
+  border-radius: 4px;
+  background: #fff;
+  color: #2c4438;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.searchNav button:hover {
+  background: #e2f1ea;
+}
+
+.bulkToggle {
+  margin-left: 8px;
+  padding: 4px 11px;
+  border: 1px solid rgba(70, 96, 82, 0.35);
+  border-radius: 12px;
+  background: #f0f4f1;
+  color: #2c4438;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.bulkToggle:hover {
+  border-color: #4b9c80;
+  background: #e2f1ea;
+}
+
+.proc {
+  cursor: pointer;
+}
+
+.proc[data-pinned="true"] {
+  border-color: #17573f;
+  box-shadow: 0 0 0 2px rgba(23, 87, 63, 0.35);
+}
+
+.proc[data-flash="true"] {
+  animation: proc-flash 1.6s ease-out;
+}
+
+@keyframes proc-flash {
+  0% { box-shadow: 0 0 0 6px rgba(101, 215, 173, 0.9); }
+  100% { box-shadow: 0 0 0 2px rgba(23, 87, 63, 0.35); }
+}
+
+.hoverPanel[data-pinned="true"] {
+  pointer-events: auto;
+  border-color: #17573f;
+}
+
+.panelClose {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  border: 0;
+  background: transparent;
+  color: #8a9990;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.panelClose:hover {
+  color: #17573f;
+}
+
+.linkList {
+  margin-top: 9px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(70, 96, 82, 0.3);
+}
+
+.linkList > span {
+  display: block;
+  margin-bottom: 5px;
+  color: #8a9990;
+  font-size: 9.5px;
+  font-weight: 700;
+}
+
+.linkList ul {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: 190px;
+  overflow: auto;
+}
+
+.linkList li button {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  width: 100%;
+  padding: 3px 6px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  text-align: left;
+  font-size: 10.5px;
+  color: #3d4b44;
+  cursor: pointer;
+}
+
+.linkList li button:hover {
+  background: #e9f4ee;
+}
+
+.linkList em {
+  flex: 0 0 44px;
+  color: #4b9c80;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.linkList em[data-kind="dependency"] {
+  color: #1689a7;
+}
+
+.linkList li button span {
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.linkList li button small {
+  color: #8a9990;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+}
+
+.linkMore {
+  color: #8a9990;
+  font-size: 9.5px;
+  padding: 2px 6px;
+}
