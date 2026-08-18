@@ -50,6 +50,7 @@ interface ProcItem {
   procType: string;
   procActor: string;
   templateName: string;
+  templateId?: string;
   outputs: string;
   legalBasis: number;
   title: string;
@@ -281,6 +282,7 @@ export default function MegaProjectFlow({
                 procType: proc.type,
                 procActor: proc.actor,
                 templateName: group.templateName,
+                templateId: group.templateId,
                 outputs: proc.outputDocuments.join(" · "),
                 legalBasis: proc.legalBasisCount,
                 title: [
@@ -1100,7 +1102,18 @@ export default function MegaProjectFlow({
           <p>
             <b>{hoverDetail.proc.procId}</b> {hoverDetail.proc.procName}
           </p>
-          <small>{hoverDetail.proc.templateName}</small>
+          <small>
+            {hoverDetail.proc.templateId ? (
+              <Link
+                className={styles.templateLink}
+                href={`/model/${hoverDetail.proc.templateId}/#${hoverDetail.proc.procId}`}
+              >
+                {hoverDetail.proc.templateName} — 제도 원본에서 보기 ↗
+              </Link>
+            ) : (
+              hoverDetail.proc.templateName
+            )}
+          </small>
           <dl>
             <div>
               <dt>담당</dt>
