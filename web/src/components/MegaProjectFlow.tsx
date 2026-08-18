@@ -833,15 +833,34 @@ export default function MegaProjectFlow({
     };
 
     // Channel assignment: horizontal runs near the same Y (or vertical runs
-    // near the same X) get successive 4px slots instead of piling up.
+    // near the same X) get successive 5px slots instead of piling up.
     const channelSlots = new Map<string, number>();
     const channelOffset = (axis: "h" | "v", base: number) => {
-      const key = `${axis}:${Math.round(base / 10)}`;
+      const key = `${axis}:${Math.round(base / 6)}`;
       const slot = channelSlots.get(key) ?? 0;
       channelSlots.set(key, slot + 1);
-      const step = Math.ceil(slot / 2) * 4;
+      const step = Math.ceil(slot / 2) * 5;
       return slot % 2 === 1 ? step : -step;
     };
+
+    // De-collinearising nudges: a per-kind bias keeps different edge kinds off
+    // the exact same track, and a stable per-edge jitter spreads long runs
+    // from different nodes that would otherwise share one column centre.
+    const KIND_BIAS: Record<EdgeKind, number> = {
+      sequence: 0,
+      internal: -1.5,
+      chain: 1.5,
+      handoff: 3,
+      conditional: -3,
+    };
+    const jitterOf = (id: string) => {
+      let hash = 0;
+      for (let i = 0; i < id.length; i += 1)
+        hash = (hash * 31 + id.charCodeAt(i)) | 0;
+      return (((hash % 7) + 7) % 7) - 3; // -3..3
+    };
+    const clampN = (value: number, low: number, high: number) =>
+      low > high ? (low + high) / 2 : Math.min(high, Math.max(low, value));
 
     // Render an orthogonal polyline with rounded corners so long routes read
     // as flows, not empty rectangles.
@@ -854,7 +873,7 @@ export default function MegaProjectFlow({
         const [nx, ny] = points[i + 1];
         const inLen = Math.hypot(cx - px, cy - py);
         const outLen = Math.hypot(nx - cx, ny - cy);
-        const r = Math.min(6, inLen / 2, outLen / 2);
+        const r = Math.min(11, inLen / 2.2, outLen / 2.2);
         if (r < 1) {
           d += ` L ${cx} ${cy}`;
           continue;
@@ -872,20 +891,32 @@ export default function MegaProjectFlow({
 
     const paths = routed.map((r) => {
       const { edge, kind, s, t, goRight } = r;
+      const bias = KIND_BIAS[edge.kind];
+      const jitter = jitterOf(edge.id);
       let path: string;
       if (kind === "side") {
         const sx = goRight ? s.right : s.left;
         const tx = goRight ? t.left : t.right;
-        const sy = s.cy + portOffset(edge.source, `out-${goRight ? "right" : "left"}`, r, s);
+        const sy = clampN(
+          s.cy +
+            portOffset(edge.source, `out-${goRight ? "right" : "left"}`, r, s) +
+            jitter * 0.5,
+          s.top + 5,
+          s.bottom - 5,
+        );
         const ty = t.cy + portOffset(edge.target, `in-${goRight ? "left" : "right"}`, r, t);
         if (Math.abs(sy - ty) < 4) {
           path = `M ${sx} ${sy} L ${tx} ${ty}`;
         } else {
           // Vertical hop hugs the target column instead of floating mid-gap.
           const hop = 10 + Math.abs(channelOffset("v", tx));
+          const rawMidX =
+            (goRight
+              ? Math.max(sx + 4, tx - hop)
+              : Math.min(sx - 4, tx + hop)) + bias;
           const midX = goRight
-            ? Math.max(sx + 4, tx - hop)
-            : Math.min(sx - 4, tx + hop);
+            ? clampN(rawMidX, sx + 3, tx - 4)
+            : clampN(rawMidX, tx + 4, sx - 3);
           path = roundedPath([
             [sx, sy],
             [midX, sy],
@@ -902,13 +933,22 @@ export default function MegaProjectFlow({
         const gap = Math.abs(ty - sy);
         if (overlapRight - overlapLeft > 12 && gap < 22) {
           // Neighbouring boxes in the same stack: one straight vertical stem.
-          const x = Math.min(
+          const x = clampN(
+            (s.cx + t.cx) / 2 + jitter * 0.6,
+            overlapLeft + 6,
             overlapRight - 6,
-            Math.max(overlapLeft + 6, (s.cx + t.cx) / 2),
           );
           path = `M ${x} ${sy} L ${x} ${ty}`;
         } else {
-          const sx = s.cx + portOffset(edge.source, `out-${down ? "bottom" : "top"}`, r, s);
+          // The long descent runs at the source port x — jitter spreads runs
+          // from different nodes that share the same column centre.
+          const sx = clampN(
+            s.cx +
+              portOffset(edge.source, `out-${down ? "bottom" : "top"}`, r, s) +
+              jitter,
+            s.left + 6,
+            s.right - 6,
+          );
           const tx = t.cx + portOffset(edge.target, `in-${down ? "top" : "bottom"}`, r, t);
           if (Math.abs(sx - tx) < 4) {
             path = `M ${sx} ${sy} L ${tx} ${ty}`;
@@ -918,9 +958,10 @@ export default function MegaProjectFlow({
             const gapLow = Math.min(sy, ty);
             const gapHigh = Math.max(sy, ty);
             const hug = 8 + Math.abs(channelOffset("h", ty));
-            const midY = Math.min(
+            const midY = clampN(
+              (down ? ty - hug : ty + hug) + bias * 0.8,
+              gapLow + 3,
               gapHigh - 3,
-              Math.max(gapLow + 3, down ? ty - hug : ty + hug),
             );
             path = roundedPath([
               [sx, sy],
