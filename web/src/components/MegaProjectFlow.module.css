@@ -1226,3 +1226,162 @@
     top: 54px;
   }
 }
+
+/* ---- 데스크톱 가독성: 레인 접기·틴트·플로팅 미니맵·마일스톤 칩 ---- */
+.sheet {
+  --subcol-collapsed: 14px;
+}
+
+.laneGroupHead[data-collapsed="true"] {
+  overflow: hidden;
+  color: #65d7ad;
+  text-align: center;
+}
+
+.actorHeader > span[data-hidden="true"] {
+  overflow: hidden;
+  padding: 5px 1px 4px;
+  color: transparent;
+}
+
+.cell[data-hidden="true"] {
+  overflow: hidden;
+}
+
+.cell[data-hidden="true"] > * {
+  display: none;
+}
+
+/* 주체군별 옅은 틴트 — 본문 한가운데서도 가로 위치가 읽히게 */
+.cell[data-lane="0"] { background: rgba(23, 87, 63, 0.030); }
+.cell[data-lane="1"] { background: rgba(180, 122, 25, 0.035); }
+.cell[data-lane="2"] { background: rgba(22, 137, 167, 0.030); }
+.cell[data-lane="3"] { background: rgba(93, 78, 173, 0.028); }
+.cell[data-lane="4"] { background: rgba(140, 94, 16, 0.024); }
+.cell[data-lane="5"] { background: rgba(70, 96, 82, 0.030); }
+.actorHeader > span[data-lane="0"] { background: rgba(23, 87, 63, 0.07); }
+.actorHeader > span[data-lane="1"] { background: rgba(180, 122, 25, 0.08); }
+.actorHeader > span[data-lane="2"] { background: rgba(22, 137, 167, 0.07); }
+.actorHeader > span[data-lane="3"] { background: rgba(93, 78, 173, 0.06); }
+.actorHeader > span[data-lane="4"] { background: rgba(140, 94, 16, 0.06); }
+.actorHeader > span[data-lane="5"] { background: rgba(70, 96, 82, 0.07); }
+
+/* 접힌 게이트: 마일스톤 칩 지도 */
+.collapsedChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 8px 10px 10px;
+}
+
+.collapsedChips {
+  position: sticky;
+  left: 0;
+  max-width: min(96vw, 1400px);
+}
+
+.milestoneChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px 3px 7px;
+  border: 1px solid rgba(70, 96, 82, 0.35);
+  border-radius: 12px;
+  background: #fff;
+  color: #2c4438;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.milestoneChip:hover {
+  border-color: #17573f;
+  background: #e9f4ee;
+}
+
+.milestoneChip i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #c9d2cc;
+}
+
+.milestoneChip[data-status="completed"] i { background: #0d8160; }
+.milestoneChip[data-status="active"] i { background: #1689a7; }
+.milestoneChip[data-status="ready"] i { background: #41c98f; }
+.milestoneChip[data-status="conditional"] i { background: #d99a2b; }
+
+.milestoneChip small {
+  color: #8a9990;
+  font-size: 8.5px;
+}
+
+/* 플로팅 미니맵 — 와이드 화면 우측 상시 고정 */
+.floatMap {
+  position: fixed;
+  top: 440px;
+  right: 14px;
+  z-index: 25;
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  padding: 9px 10px;
+  border: 1px solid rgba(23, 87, 63, 0.25);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 4px 14px rgba(12, 32, 21, 0.12);
+}
+
+@media (min-width: 1360px) {
+  .floatMap {
+    display: flex;
+  }
+}
+
+.floatMapRow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 1px 3px;
+  border-radius: 4px;
+}
+
+.floatMapRow[data-current="true"] {
+  background: rgba(23, 87, 63, 0.1);
+}
+
+.floatMapRow b {
+  color: #45635a;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.floatMapRow[data-current="true"] b {
+  color: #17573f;
+}
+
+.floatMapRow span {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  max-width: 96px;
+}
+
+.floatMapRow i {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: #d5dcd7;
+  cursor: pointer;
+}
+
+.floatMapRow i:hover {
+  outline: 2px solid #17573f;
+}
+
+.floatMapRow i[data-status="completed"] { background: #0d8160; }
+.floatMapRow i[data-status="active"] { background: #1689a7; }
+.floatMapRow i[data-status="ready"] { background: #41c98f; }
+.floatMapRow i[data-status="conditional"] { background: #d99a2b; }
