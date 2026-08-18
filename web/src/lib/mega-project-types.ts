@@ -123,6 +123,7 @@ export interface MegaDetailNode {
   type: "task" | "gateway" | "notice" | "system";
   outputDocuments: string[];
   legalBasisCount: number;
+  legalBasis?: { law: string; article: string }[];
   confidence?: number;
 }
 

@@ -57,8 +57,17 @@ interface ProcItem {
   templateId?: string;
   outputs: string;
   legalBasis: number;
+  legalBasisList: { law: string; article: string }[];
   title: string;
 }
+
+// law.go.kr 한글주소 — 법령명(+조번호)으로 원문 딥링크
+const lawUrlOf = (law: string, article: string) => {
+  const articleHead = article.match(/^제\d+조(의\d+)?/)?.[0];
+  return `https://law.go.kr/법령/${encodeURIComponent(law)}${
+    articleHead ? `/${encodeURIComponent(articleHead)}` : ""
+  }`;
+};
 
 const LANES = [
   { id: "applicant", label: "신청인·사업자" },
@@ -355,6 +364,7 @@ export default function MegaProjectFlow({
                 templateId: group.templateId,
                 outputs: proc.outputDocuments.join(" · "),
                 legalBasis: proc.legalBasisCount,
+                legalBasisList: proc.legalBasis ?? [],
                 title: [
                   `${node.id} ${node.name}`,
                   `${group.templateName}`,
@@ -1467,7 +1477,32 @@ export default function MegaProjectFlow({
             </div>
             <div>
               <dt>법적 근거</dt>
-              <dd>{hoverDetail.proc.legalBasis}건</dd>
+              <dd>
+                {hoverDetail.proc.legalBasisList.length > 0 ? (
+                  <ul className={styles.lawList}>
+                    {hoverDetail.proc.legalBasisList.map((basis, index) => (
+                      <li key={`${basis.law}:${basis.article}:${index}`}>
+                        {pinnedKey ? (
+                          <a
+                            href={lawUrlOf(basis.law, basis.article)}
+                            target="_blank"
+                            rel="noreferrer"
+                            title="법제처 국가법령정보센터에서 원문 보기"
+                          >
+                            <b>{basis.law}</b> {basis.article} ↗
+                          </a>
+                        ) : (
+                          <span>
+                            <b>{basis.law}</b> {basis.article}
+                          </span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  `${hoverDetail.proc.legalBasis}건`
+                )}
+              </dd>
             </div>
             {pinnedPath && (
               <div>

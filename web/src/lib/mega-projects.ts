@@ -68,6 +68,10 @@ export function getMegaProjectBundle(id: string): MegaProjectBundle | null {
           type: node.type,
           outputDocuments: node.output_documents ?? [],
           legalBasisCount: node.legal_basis?.length ?? 0,
+          legalBasis: (node.legal_basis ?? []).map((basis) => ({
+            law: basis.law,
+            article: basis.article,
+          })),
           confidence: node.confidence,
         })),
         edges: (process?.edges ?? []).map((edge) => ({
