@@ -540,10 +540,12 @@
   background: rgba(23, 87, 63, 0.045);
 }
 
-.stageTitle span,
-.stageTitle small {
+.stageTitle > span {
   position: sticky;
   left: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
 }
 
 .stageTitle span {
@@ -847,4 +849,118 @@
 
 .milestoneStrip:nth-of-type(even) {
   background: rgba(23, 87, 63, 0.022);
+}
+
+.zoomControl {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: 10px;
+  padding: 2px;
+  border: 1px solid rgba(70, 96, 82, 0.3);
+  border-radius: 6px;
+  background: #f0f4f1;
+}
+
+.zoomControl button {
+  min-width: 24px;
+  padding: 2px 6px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #2c4438;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.zoomControl button:hover {
+  background: #fff;
+}
+
+.stageTitle {
+  cursor: pointer;
+  user-select: none;
+}
+
+.stageTitle:hover {
+  background: rgba(23, 87, 63, 0.09);
+}
+
+.stageChevron {
+  margin-right: 6px;
+  color: #4b9c80;
+  font-size: 11px;
+  font-style: normal;
+}
+
+.stageTitle[data-collapsed="true"] {
+  border-bottom: 0;
+}
+
+.hoverPanel {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 30;
+  width: 300px;
+  padding: 11px 14px 12px;
+  border: 1px solid rgba(23, 87, 63, 0.4);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 6px 20px rgba(12, 32, 21, 0.18);
+  pointer-events: none;
+}
+
+.hoverPanel p {
+  margin: 0 0 2px;
+  color: #17573f;
+  font-size: 12.5px;
+  font-weight: 750;
+  line-height: 1.4;
+}
+
+.hoverPanel p b {
+  margin-right: 5px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+}
+
+.hoverPanel > small {
+  display: block;
+  margin-bottom: 7px;
+  color: #6f8a7d;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+}
+
+.hoverPanel dl {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 0;
+}
+
+.hoverPanel dl div {
+  display: flex;
+  gap: 8px;
+  font-size: 10.5px;
+  line-height: 1.45;
+}
+
+.hoverPanel dt {
+  flex: 0 0 52px;
+  color: #8a9990;
+  font-weight: 700;
+}
+
+.hoverPanel dd {
+  margin: 0;
+  color: #3d4b44;
+}
+
+.proc {
+  font-size: 10.5px;
+  line-height: 1.4;
 }
