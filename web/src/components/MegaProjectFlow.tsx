@@ -491,6 +491,69 @@ export default function MegaProjectFlow({
     setMatchIndex(0);
   }, [query]);
 
+  // 핀 절차의 전체 사슬(상류·하류) — 핀 시 경로 밖은 흐림 처리
+  const adjacency = useMemo(() => {
+    const forward = new Map<string, string[]>();
+    const backward = new Map<string, string[]>();
+    for (const edge of derived.edges) {
+      if (!forward.has(edge.source)) forward.set(edge.source, []);
+      forward.get(edge.source)!.push(edge.target);
+      if (!backward.has(edge.target)) backward.set(edge.target, []);
+      backward.get(edge.target)!.push(edge.source);
+    }
+    return { forward, backward };
+  }, [derived.edges]);
+
+  const pinnedPath = useMemo(() => {
+    if (!pinnedKey) return null;
+    const walk = (start: string, next: Map<string, string[]>) => {
+      const seen = new Set<string>();
+      const queue = [start];
+      while (queue.length) {
+        const node = queue.pop()!;
+        for (const neighbor of next.get(node) ?? []) {
+          if (!seen.has(neighbor)) {
+            seen.add(neighbor);
+            queue.push(neighbor);
+          }
+        }
+      }
+      seen.delete(start);
+      return seen;
+    };
+    const downstream = walk(pinnedKey, adjacency.forward);
+    const upstream = walk(pinnedKey, adjacency.backward);
+    const nodes = new Set<string>([pinnedKey, ...upstream, ...downstream]);
+    return { nodes, upstream: upstream.size, downstream: downstream.size };
+  }, [pinnedKey, adjacency]);
+
+  // 딥링크: ?p=<절차키> — 핀과 URL 동기화, 로드 시 자동 이동
+  const deepLinkApplied = useRef(false);
+  useEffect(() => {
+    if (deepLinkApplied.current) return;
+    deepLinkApplied.current = true;
+    const param = new URLSearchParams(window.location.search).get("p");
+    if (param && procByKey.has(param)) {
+      window.setTimeout(() => scrollToProc(param), 500);
+    }
+  }, [procByKey, scrollToProc]);
+
+  useEffect(() => {
+    if (!deepLinkApplied.current) return;
+    const url = new URL(window.location.href);
+    if (pinnedKey) url.searchParams.set("p", pinnedKey);
+    else url.searchParams.delete("p");
+    window.history.replaceState(null, "", url.toString());
+  }, [pinnedKey]);
+
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setPinnedKey(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
   const updateGeometry = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -852,6 +915,12 @@ export default function MegaProjectFlow({
               onChange={(event) => setQuery(event.target.value)}
               placeholder="절차 검색 — 이름·담당·마일스톤"
               aria-label="절차 검색"
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  event.preventDefault();
+                  stepMatch(event.shiftKey ? -1 : 1);
+                }
+              }}
             />
             {queryActive && matchList.length > 0 && (
               <span className={styles.searchNav}>
@@ -1051,7 +1120,27 @@ export default function MegaProjectFlow({
               <dt>법적 근거</dt>
               <dd>{hoverDetail.proc.legalBasis}건</dd>
             </div>
+            {pinnedPath && (
+              <div>
+                <dt>전체 사슬</dt>
+                <dd>
+                  상류 {pinnedPath.upstream} · 하류 {pinnedPath.downstream} —
+                  경로만 강조 중
+                </dd>
+              </div>
+            )}
           </dl>
+          {pinnedKey && (
+            <button
+              type="button"
+              className={styles.copyLink}
+              onClick={() => {
+                navigator.clipboard?.writeText(window.location.href);
+              }}
+            >
+              이 절차 링크 복사
+            </button>
+          )}
           {detailLinks.length > 0 && (
             <div className={styles.linkList}>
               <span>
@@ -1168,18 +1257,24 @@ export default function MegaProjectFlow({
                   const active =
                     hoverKey !== null &&
                     (edge.source === hoverKey || edge.target === hoverKey);
+                  const onPath = pinnedPath
+                    ? pinnedPath.nodes.has(edge.source) &&
+                      pinnedPath.nodes.has(edge.target)
+                    : false;
                   return (
                     <path
                       key={edge.id}
                       className={styles.edge}
                       d={edge.path}
                       data-kind={edge.kind}
-                      data-active={active ? "true" : "false"}
+                      data-active={active || onPath ? "true" : "false"}
                       data-dim={
                         (queryActive &&
                           !matchKeys.has(edge.source) &&
                           !matchKeys.has(edge.target)) ||
-                        (hoverKey !== null && !active)
+                        (pinnedPath
+                          ? !onPath
+                          : hoverKey !== null && !active)
                           ? "true"
                           : "false"
                       }
@@ -1315,9 +1410,11 @@ export default function MegaProjectFlow({
                                 data-hover={isHovered ? "true" : "false"}
                                 data-dim={
                                   (queryActive && !matchKeys.has(proc.key)) ||
-                                  (hoverKey !== null &&
-                                    !isHovered &&
-                                    !isNeighbor)
+                                  (pinnedPath
+                                    ? !pinnedPath.nodes.has(proc.key)
+                                    : hoverKey !== null &&
+                                      !isHovered &&
+                                      !isNeighbor)
                                     ? "true"
                                     : "false"
                                 }
