@@ -292,16 +292,26 @@
 }
 
 .legend button[data-kind="sequence"]::before {
-  border-top-color: #16805e;
+  height: 3px;
+  border-top: 0;
+  background: linear-gradient(
+    to right,
+    #3f8f6d 0 16.6%,
+    #c47240 16.6% 33.3%,
+    #3b93ad 33.3% 50%,
+    #8a7ac9 50% 66.6%,
+    #8a6a2a 66.6% 83.3%,
+    #5f7568 83.3% 100%
+  );
 }
 
 .legend button[data-kind="chain"]::before {
-  border-top-color: #1c6ea4;
+  border-top-color: #2168b4;
   border-top-style: dashed;
 }
 
 .legend button[data-kind="internal"]::before {
-  border-top-color: #3f7a63;
+  border-top-color: #5b7d92;
   border-top-width: 3px;
 }
 
@@ -487,14 +497,14 @@
 }
 
 .edge[data-kind="chain"] {
-  stroke: #1c6ea4;
+  stroke: #2168b4;
   stroke-width: 1.1;
   stroke-dasharray: 3 3;
   opacity: 0.6;
 }
 
 .edge[data-kind="internal"] {
-  stroke: #3f7a63;
+  stroke: #5b7d92;
   stroke-width: 1.4;
   opacity: 0.5;
 }
