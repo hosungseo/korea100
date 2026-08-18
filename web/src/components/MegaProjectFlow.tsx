@@ -50,6 +50,8 @@ interface ProcItem {
   procType: string;
   procActor: string;
   templateName: string;
+  outputs: string;
+  legalBasis: number;
   title: string;
 }
 
@@ -113,6 +115,8 @@ export default function MegaProjectFlow({
   const [hoverKey, setHoverKey] = useState<string | null>(null);
   const [hiddenKinds, setHiddenKinds] = useState<Set<EdgeKind>>(new Set());
   const [query, setQuery] = useState("");
+  const [zoom, setZoom] = useState(1);
+  const [collapsed, setCollapsed] = useState<Set<string>>(new Set());
   const [scrollPos, setScrollPos] = useState<{
     gate: string;
     gateId: string;
@@ -274,6 +278,8 @@ export default function MegaProjectFlow({
                 procType: proc.type,
                 procActor: proc.actor,
                 templateName: group.templateName,
+                outputs: proc.outputDocuments.join(" · "),
+                legalBasis: proc.legalBasisCount,
                 title: [
                   `${node.id} ${node.name}`,
                   `${group.templateName}`,
@@ -404,10 +410,36 @@ export default function MegaProjectFlow({
     gridTemplate,
   } = derived;
 
+  const procByKey = useMemo(() => {
+    const map = new Map<
+      string,
+      { proc: ProcItem; milestoneId: string; milestoneName: string; gate: string }
+    >();
+    for (const band of derived.stageBands) {
+      for (const milestone of band.milestones) {
+        for (const procs of milestone.cells.values()) {
+          for (const proc of procs) {
+            map.set(proc.key, {
+              proc,
+              milestoneId: milestone.id,
+              milestoneName: milestone.name,
+              gate: band.label,
+            });
+          }
+        }
+      }
+    }
+    return map;
+  }, [derived]);
+  const hoverDetail = hoverKey ? procByKey.get(hoverKey) : null;
+
   const updateGeometry = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const canvasRect = canvas.getBoundingClientRect();
+    // CSS zoom 상태에서 getBoundingClientRect는 확대된 px을 주므로
+    // SVG(비확대 좌표계)와 맞추려면 zoom으로 나눠 정규화한다.
+    const zoomFactor = zoom || 1;
 
     interface Rect {
       left: number;
@@ -427,14 +459,14 @@ export default function MegaProjectFlow({
       if (!element) return null;
       const r = element.getBoundingClientRect();
       const rect: Rect = {
-        left: r.left - canvasRect.left,
-        right: r.right - canvasRect.left,
-        top: r.top - canvasRect.top,
-        bottom: r.bottom - canvasRect.top,
-        cx: r.left - canvasRect.left + r.width / 2,
-        cy: r.top - canvasRect.top + r.height / 2,
-        width: r.width,
-        height: r.height,
+        left: (r.left - canvasRect.left) / zoomFactor,
+        right: (r.right - canvasRect.left) / zoomFactor,
+        top: (r.top - canvasRect.top) / zoomFactor,
+        bottom: (r.bottom - canvasRect.top) / zoomFactor,
+        cx: (r.left - canvasRect.left + r.width / 2) / zoomFactor,
+        cy: (r.top - canvasRect.top + r.height / 2) / zoomFactor,
+        width: r.width / zoomFactor,
+        height: r.height / zoomFactor,
       };
       rectCache.set(key, rect);
       return rect;
@@ -607,9 +639,10 @@ export default function MegaProjectFlow({
       return { ...edge, path };
     });
 
-    setSize({ width: canvas.scrollWidth, height: canvas.scrollHeight });
+    // scrollHeight는 절대배치 SVG(직전 크기)를 포함해 순환 잠금을 만든다 — border box 사용
+    setSize({ width: canvas.offsetWidth, height: canvas.offsetHeight });
     setEdgePaths(paths);
-  }, [edges]);
+  }, [edges, zoom]);
 
   useLayoutEffect(() => {
     updateGeometry();
@@ -754,6 +787,25 @@ export default function MegaProjectFlow({
             />
             {queryActive && <b>{matchKeys.size}건 일치</b>}
           </span>
+          <span className={styles.zoomControl} role="group" aria-label="확대·축소">
+            <button
+              type="button"
+              onClick={() => setZoom((value) => Math.max(0.7, Math.round((value - 0.1) * 10) / 10))}
+              aria-label="축소"
+            >
+              −
+            </button>
+            <button type="button" onClick={() => setZoom(1)} title="기본 크기">
+              {Math.round(zoom * 100)}%
+            </button>
+            <button
+              type="button"
+              onClick={() => setZoom((value) => Math.min(1.6, Math.round((value + 0.1) * 10) / 10))}
+              aria-label="확대"
+            >
+              +
+            </button>
+          </span>
         </p>
 
         <div className={styles.summaryStrip}>
@@ -777,14 +829,22 @@ export default function MegaProjectFlow({
                         key={milestone.id}
                         data-status={milestone.status}
                         title={`${milestone.id} ${milestone.name} · ${milestone.procCount}개 절차`}
-                        onClick={() =>
+                        onClick={() => {
+                          setCollapsed((previous) => {
+                            if (!previous.has(band.stageId)) return previous;
+                            const next = new Set(previous);
+                            next.delete(band.stageId);
+                            return next;
+                          });
+                          requestAnimationFrame(() =>
                           document
                             .getElementById(milestone.id)
                             ?.scrollIntoView({
                               behavior: "smooth",
                               block: "start",
-                            })
-                        }
+                            }),
+                          );
+                        }}
                       >
                         {milestone.laneCounts.map((count, laneIndex) => (
                           <i
@@ -858,6 +918,34 @@ export default function MegaProjectFlow({
         </div>
       </header>
 
+      {hoverDetail && (
+        <aside className={styles.hoverPanel} aria-live="polite">
+          <p>
+            <b>{hoverDetail.proc.procId}</b> {hoverDetail.proc.procName}
+          </p>
+          <small>{hoverDetail.proc.templateName}</small>
+          <dl>
+            <div>
+              <dt>담당</dt>
+              <dd>{hoverDetail.proc.procActor}</dd>
+            </div>
+            <div>
+              <dt>마일스톤</dt>
+              <dd>
+                {hoverDetail.milestoneId} {hoverDetail.milestoneName}
+              </dd>
+            </div>
+            <div>
+              <dt>산출물</dt>
+              <dd>{hoverDetail.proc.outputs || "미기재"}</dd>
+            </div>
+            <div>
+              <dt>법적 근거</dt>
+              <dd>{hoverDetail.proc.legalBasis}건</dd>
+            </div>
+          </dl>
+        </aside>
+      )}
       {scrollPos && (
         <button
           type="button"
@@ -878,7 +966,7 @@ export default function MegaProjectFlow({
       <div className={styles.viewport} ref={viewportRef}>
         <div
           className={styles.sheet}
-          style={{ "--flow-columns": gridTemplate } as CSSProperties}
+          style={{ "--flow-columns": gridTemplate, zoom } as CSSProperties & { zoom: number }}
         >
           <div className={styles.laneHeader}>
             <span className={styles.laneHeaderGate}>게이트 / 마일스톤</span>
@@ -977,18 +1065,36 @@ export default function MegaProjectFlow({
                 key={band.stageId}
                 id={`gate-${band.stageId}`}
               >
-                <h2 className={styles.stageTitle}>
-                  <span>{band.label}</span>
-                  <small>
-                    {band.milestones.length}개 마일스톤 ·{" "}
-                    {band.milestones.reduce(
-                      (total, milestone) => total + milestone.procCount,
-                      0,
-                    )}
-                    개 절차
-                  </small>
+                <h2
+                  className={styles.stageTitle}
+                  data-collapsed={collapsed.has(band.stageId) ? "true" : "false"}
+                  onClick={() =>
+                    setCollapsed((previous) => {
+                      const next = new Set(previous);
+                      if (next.has(band.stageId)) next.delete(band.stageId);
+                      else next.add(band.stageId);
+                      return next;
+                    })
+                  }
+                  title={collapsed.has(band.stageId) ? "펼치기" : "접기"}
+                >
+                  <span>
+                    <em className={styles.stageChevron} aria-hidden="true">
+                      {collapsed.has(band.stageId) ? "▸" : "▾"}
+                    </em>
+                    {band.label}
+                    <small>
+                      {band.milestones.length}개 마일스톤 ·{" "}
+                      {band.milestones.reduce(
+                        (total, milestone) => total + milestone.procCount,
+                        0,
+                      )}
+                      개 절차
+                      {collapsed.has(band.stageId) ? " · 접힘" : ""}
+                    </small>
+                  </span>
                 </h2>
-                {band.milestones.map((milestone) => (
+                {!collapsed.has(band.stageId) && band.milestones.map((milestone) => (
                   <div
                     className={styles.milestoneStrip}
                     key={milestone.id}
