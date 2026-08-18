@@ -49,6 +49,7 @@ interface ProcItem {
   procName: string;
   procType: string;
   procActor: string;
+  lane: number;
   templateName: string;
   templateId?: string;
   outputs: string;
@@ -125,6 +126,7 @@ export default function MegaProjectFlow({
   const [flashKey, setFlashKey] = useState<string | null>(null);
   const [matchIndex, setMatchIndex] = useState(0);
   const [collapsed, setCollapsed] = useState<Set<string>>(new Set());
+  const [hiddenLanes, setHiddenLanes] = useState<Set<number>>(new Set());
   const [scrollPos, setScrollPos] = useState<{
     gate: string;
     gateId: string;
@@ -285,6 +287,7 @@ export default function MegaProjectFlow({
                 procName: proc.name,
                 procType: proc.type,
                 procActor: proc.actor,
+                lane: subColumns[subColumn]?.lane ?? 0,
                 templateName: group.templateName,
                 templateId: group.templateId,
                 outputs: proc.outputDocuments.join(" · "),
@@ -447,6 +450,42 @@ export default function MegaProjectFlow({
     }
     return map;
   }, [derived]);
+  // 레인 접기: 접힌 주체군의 열은 스텁 폭으로 축소
+  const gridColumns = useMemo(
+    () =>
+      `var(--gutter-width) ${subColumns
+        .map((subColumn) =>
+          hiddenLanes.has(subColumn.lane)
+            ? "var(--subcol-collapsed)"
+            : "var(--subcol-width)",
+        )
+        .join(" ")}`,
+    [subColumns, hiddenLanes],
+  );
+
+  const toggleLane = useCallback((laneIndex: number) => {
+    setHiddenLanes((previous) => {
+      const next = new Set(previous);
+      if (next.has(laneIndex)) next.delete(laneIndex);
+      else next.add(laneIndex);
+      return next;
+    });
+  }, []);
+
+  const jumpToMilestone = useCallback((stageId: string, milestoneId: string) => {
+    setCollapsed((previous) => {
+      if (!previous.has(stageId)) return previous;
+      const next = new Set(previous);
+      next.delete(stageId);
+      return next;
+    });
+    window.setTimeout(() => {
+      document
+        .getElementById(milestoneId)
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 80);
+  }, []);
+
   const detailKey = pinnedKey ?? hoverKey;
   const hoverDetail = detailKey ? procByKey.get(detailKey) : null;
   const detailLinks = useMemo(() => {
@@ -582,6 +621,8 @@ export default function MegaProjectFlow({
     const rectOf = (key: string): Rect | null => {
       const cached = rectCache.get(key);
       if (cached) return cached;
+      const lane = procByKey.get(key)?.proc.lane;
+      if (lane !== undefined && hiddenLanes.has(lane)) return null;
       const element = procRefs.current.get(key);
       if (!element) return null;
       const r = element.getBoundingClientRect();
@@ -769,7 +810,7 @@ export default function MegaProjectFlow({
     // scrollHeight는 절대배치 SVG(직전 크기)를 포함해 순환 잠금을 만든다 — border box 사용
     setSize({ width: canvas.offsetWidth, height: canvas.offsetHeight });
     setEdgePaths(paths);
-  }, [edges, zoom]);
+  }, [edges, zoom, procByKey, hiddenLanes]);
 
   useLayoutEffect(() => {
     updateGeometry();
@@ -1182,6 +1223,27 @@ export default function MegaProjectFlow({
           )}
         </aside>
       )}
+      <nav className={styles.floatMap} aria-label="전체 지형 미니맵">
+        {stageBands.map((band) => (
+          <div
+            key={band.stageId}
+            className={styles.floatMapRow}
+            data-current={scrollPos?.gateId === band.stageId ? "true" : "false"}
+          >
+            <b>{band.label.slice(0, 2)}</b>
+            <span>
+              {band.milestones.map((milestone) => (
+                <i
+                  key={milestone.id}
+                  data-status={milestone.status}
+                  title={`${milestone.id} ${milestone.name}`}
+                  onClick={() => jumpToMilestone(band.stageId, milestone.id)}
+                />
+              ))}
+            </span>
+          </div>
+        ))}
+      </nav>
       {scrollPos && (
         <button
           type="button"
@@ -1202,7 +1264,7 @@ export default function MegaProjectFlow({
       <div className={styles.viewport} ref={viewportRef}>
         <div
           className={styles.sheet}
-          style={{ "--flow-columns": gridTemplate, zoom } as CSSProperties & { zoom: number }}
+          style={{ "--flow-columns": gridColumns, zoom } as CSSProperties & { zoom: number }}
         >
           <div className={styles.laneHeader}>
             <span className={styles.laneHeaderGate}>게이트 / 마일스톤</span>
@@ -1213,10 +1275,13 @@ export default function MegaProjectFlow({
                 <span
                   className={styles.laneGroupHead}
                   key={lane.id}
-                  style={{ gridColumn: `span ${count}` }}
+                  style={{ gridColumn: `span ${count}`, cursor: "pointer" }}
+                  data-collapsed={hiddenLanes.has(laneIndex) ? "true" : "false"}
+                  title={hiddenLanes.has(laneIndex) ? `${lane.label} 펼치기` : `${lane.label} 접기`}
+                  onClick={() => toggleLane(laneIndex)}
                 >
-                  {lane.label}
-                  <small>{count}</small>
+                  {hiddenLanes.has(laneIndex) ? "▸" : `${lane.label}`}
+                  {!hiddenLanes.has(laneIndex) && <small>{count}</small>}
                 </span>
               );
             })}
@@ -1227,6 +1292,7 @@ export default function MegaProjectFlow({
               <span
                 key={`${subColumn.lane}:${subColumn.label}`}
                 data-lane={subColumn.lane}
+                data-hidden={hiddenLanes.has(subColumn.lane) ? "true" : "false"}
                 data-other={subColumn.isOther ? "true" : "false"}
                 data-first={
                   index === 0 || subColumns[index - 1].lane !== subColumn.lane
@@ -1336,6 +1402,24 @@ export default function MegaProjectFlow({
                     </small>
                   </span>
                 </h2>
+                {collapsed.has(band.stageId) && (
+                  <div className={styles.collapsedChips}>
+                    {band.milestones.map((milestone) => (
+                      <button
+                        type="button"
+                        key={milestone.id}
+                        className={styles.milestoneChip}
+                        data-status={milestone.status}
+                        title={`${milestone.name} · ${milestone.procCount}개 절차 — 클릭하면 펼치고 이동`}
+                        onClick={() => jumpToMilestone(band.stageId, milestone.id)}
+                      >
+                        <i />
+                        {milestone.id}
+                        <small>{milestone.procCount}</small>
+                      </button>
+                    ))}
+                  </div>
+                )}
                 {!collapsed.has(band.stageId) && band.milestones.map((milestone) => (
                   <div
                     className={styles.milestoneStrip}
@@ -1399,6 +1483,11 @@ export default function MegaProjectFlow({
                           className={styles.cell}
                           key={subColumn}
                           data-lane={subColumns[subColumn]?.lane}
+                          data-hidden={
+                            hiddenLanes.has(subColumns[subColumn]?.lane ?? -1)
+                              ? "true"
+                              : "false"
+                          }
                           style={{ gridColumn: subColumn + 2, gridRow: 1 }}
                         >
                           {procs.map((proc, procIndex) => {
