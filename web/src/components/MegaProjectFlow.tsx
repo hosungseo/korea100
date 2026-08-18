@@ -79,11 +79,28 @@ const EDGE_KINDS: { kind: EdgeKind; label: string }[] = [
 
 const EDGE_COLORS: { kind: EdgeKind; color: string }[] = [
   { kind: "sequence", color: "#16805e" },
-  { kind: "chain", color: "#1c6ea4" },
-  { kind: "internal", color: "#3f7a63" },
+  { kind: "chain", color: "#2168b4" },
+  { kind: "internal", color: "#5b7d92" },
   { kind: "handoff", color: "#0d8160" },
   { kind: "conditional", color: "#b47a19" },
 ];
+
+// 제도 내 순서(sequence) 선은 출발 주체군의 레인 색을 입는다 —
+// 레인 틴트와 같은 계열의 연한 톤이라 배경과 조화되고,
+// 횡단선(제도 간·인계·분기)은 별개 색으로 도드라진다.
+const LANE_EDGE_COLORS = [
+  "#3f8f6d", // 신청인·사업자 — 초록
+  "#c47240", // 주민·이해관계자 — 테라코타
+  "#3b93ad", // 지자체 — 시안
+  "#8a7ac9", // 중앙부처 — 라벤더
+  "#8a6a2a", // 위원회·전문기관 — 브론즈
+  "#5f7568", // 행정청·집행 — 회녹
+] as const;
+
+const edgeColorOf = (kind: EdgeKind, sourceLane: number | undefined) =>
+  kind === "sequence" && sourceLane !== undefined
+    ? LANE_EDGE_COLORS[sourceLane]
+    : EDGE_COLORS.find((item) => item.kind === kind)?.color ?? "#16805e";
 
 function laneOf(actor: string): number {
   if (/주민|토지소유|소유자|점유자|이해관계/.test(actor)) return 1;
@@ -1531,10 +1548,19 @@ export default function MegaProjectFlow({
               aria-hidden="true"
             >
               <defs>
-                {EDGE_COLORS.map(({ kind, color }) => (
-                  <Fragment key={kind}>
+                {[
+                  ...EDGE_COLORS.map(({ kind, color }) => ({
+                    key: kind as string,
+                    color,
+                  })),
+                  ...LANE_EDGE_COLORS.map((color, laneIndex) => ({
+                    key: `lane${laneIndex}`,
+                    color,
+                  })),
+                ].map(({ key: markerKey, color }) => (
+                  <Fragment key={markerKey}>
                     <marker
-                      id={`flow-arrow-${kind}`}
+                      id={`flow-arrow-${markerKey}`}
                       viewBox="0 0 8 8"
                       refX="7"
                       refY="4"
@@ -1545,7 +1571,7 @@ export default function MegaProjectFlow({
                       <path d="M 0 0 L 8 4 L 0 8 z" fill={color} />
                     </marker>
                     <marker
-                      id={`flow-arrow-${kind}-on`}
+                      id={`flow-arrow-${markerKey}-on`}
                       viewBox="0 0 8 8"
                       refX="7"
                       refY="4"
@@ -1584,6 +1610,12 @@ export default function MegaProjectFlow({
                   const kindLabel =
                     EDGE_KINDS.find((item) => item.kind === edge.kind)?.label ??
                     edge.kind;
+                  const sourceLane = sourceInfo?.proc.lane;
+                  const stroke = edgeColorOf(edge.kind, sourceLane);
+                  const markerKey =
+                    edge.kind === "sequence" && sourceLane !== undefined
+                      ? `lane${sourceLane}`
+                      : edge.kind;
                   return (
                     <g key={edge.id}>
                       {/* 케이싱 겸 히트 영역 — 교차부에서 아래 선을 지워 위·아래가 읽히고, 넓은 투명 획이 호버를 받는다 */}
@@ -1609,7 +1641,8 @@ export default function MegaProjectFlow({
                         data-active={active || onPath ? "true" : "false"}
                         data-flow={onPath ? "true" : "false"}
                         data-dim={dim ? "true" : "false"}
-                        markerEnd={`url(#flow-arrow-${edge.kind}${active || onPath ? "-on" : ""})`}
+                        style={{ stroke }}
+                        markerEnd={`url(#flow-arrow-${markerKey}${active || onPath ? "-on" : ""})`}
                       />
                     </g>
                   );
