@@ -900,6 +900,22 @@ export default function MegaProjectFlow({
     const clampN = (value: number, low: number, high: number) =>
       low > high ? (low + high) / 2 : Math.min(high, Math.max(low, value));
 
+    // 거터 라우팅 재료: 긴 선은 카드 옆 세로 거터(카드 간 빈 띠)로 다니고,
+    // 가로 이동은 각 스트립 상단의 카드 없는 8px 띠에서만 한다.
+    const stripTops = new Map<string, number>();
+    canvas.querySelectorAll<HTMLElement>("[data-ms-name]").forEach((el) => {
+      stripTops.set(
+        el.id,
+        (el.getBoundingClientRect().top - canvasRect.top) / zoomFactor,
+      );
+    });
+    const gutterSlots = new Map<string, number>();
+    const gutterOffset = (key: string) => {
+      const slot = gutterSlots.get(key) ?? 0;
+      gutterSlots.set(key, slot + 1);
+      return (slot % 4) * 2 - 3; // -3, -1, 1, 3 순환
+    };
+
     // Render an orthogonal polyline with rounded corners so long routes read
     // as flows, not empty rectangles.
     const roundedPath = (points: [number, number][]) => {
@@ -988,7 +1004,42 @@ export default function MegaProjectFlow({
             s.right - 6,
           );
           const tx = t.cx + portOffset(edge.target, `in-${down ? "top" : "bottom"}`, r, t);
-          if (Math.abs(sx - tx) < 4) {
+          const dist = Math.abs(ty - sy);
+          const channelStripTop = stripTops.get(
+            down
+              ? procByKey.get(edge.target)?.milestoneId ?? ""
+              : procByKey.get(edge.source)?.milestoneId ?? "",
+          );
+          // 같은 스트립 안에서는 채널 띠가 출발점보다 위라 방향 역전이 생긴다 — 거터 라우팅 제외
+          const channelUsable =
+            channelStripTop !== undefined &&
+            (down ? channelStripTop > sy + 2 : channelStripTop < sy - 9);
+          if (dist > 44 && channelUsable) {
+            // 긴 선은 거터 라우팅: 카드 뒤를 뚫는 대신
+            // 세로는 컬럼 거터, 가로는 스트립 상단의 카드 없는 띠를 탄다.
+            const dir = tx >= sx ? 1 : -1;
+            const sEdge = dir > 0 ? s.right : s.left;
+            const tEdge = dir > 0 ? t.left : t.right;
+            const gxS = sEdge + dir * 5 + gutterOffset(`g:${Math.round(sEdge / 8)}`) + jitter * 0.3;
+            const gxT = tEdge - dir * 5 + gutterOffset(`g:${Math.round(tEdge / 8)}`) + jitter * 0.3;
+            const chY = clampN(
+              channelStripTop + 4 + channelOffset("h", channelStripTop) * 0.5,
+              channelStripTop + 1.5,
+              channelStripTop + 6.5,
+            );
+            const stub = down ? sy + 2.5 : sy - 2.5;
+            const entry = down ? ty - 2.5 : ty + 2.5;
+            path = roundedPath([
+              [sx, sy],
+              [sx, stub],
+              [gxS, stub],
+              [gxS, chY],
+              [gxT, chY],
+              [gxT, entry],
+              [tx, entry],
+              [tx, ty],
+            ]);
+          } else if (Math.abs(sx - tx) < 4) {
             path = `M ${sx} ${sy} L ${tx} ${ty}`;
           } else {
             // Horizontal channel hugs the destination row (a few px before the
