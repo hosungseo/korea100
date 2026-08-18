@@ -1151,3 +1151,78 @@
   color: #0d8160;
   border-bottom-style: solid;
 }
+
+@media (max-width: 720px) {
+  .page {
+    padding: 14px 10px 40px;
+  }
+
+  .header h1 {
+    font-size: 19px;
+  }
+
+  .kpis {
+    gap: 8px 14px;
+  }
+
+  .kpis b {
+    font-size: 16px;
+  }
+
+  /* 산키(레인 간 인계)는 좁은 화면에서 숨겨 헤더를 압축 */
+  .sankey {
+    display: none;
+  }
+
+  .summaryStrip {
+    gap: 10px;
+  }
+
+  .legendHint {
+    display: none;
+  }
+
+  .search input {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .bulkToggle,
+  .zoomControl {
+    margin-left: 0;
+  }
+
+  /* 위치 HUD: 하단 전체폭 한 줄 바 */
+  .positionHud {
+    right: 8px;
+    bottom: 8px;
+    left: 8px;
+    flex-direction: row;
+    gap: 8px;
+    align-items: baseline;
+    max-width: none;
+    padding: 7px 11px;
+  }
+
+  .positionHud span {
+    font-size: 10.5px;
+  }
+
+  /* 핀 상세 패널: HUD 위 하단 시트 */
+  .hoverPanel {
+    right: 8px;
+    bottom: 52px;
+    left: 8px;
+    width: auto;
+    max-height: 46vh;
+    overflow: auto;
+  }
+
+  .linkList ul {
+    max-height: 120px;
+  }
+
+  .gutterSticky {
+    top: 54px;
+  }
+}
