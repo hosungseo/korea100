@@ -102,6 +102,27 @@ const edgeColorOf = (kind: EdgeKind, sourceLane: number | undefined) =>
     ? LANE_EDGE_COLORS[sourceLane]
     : EDGE_COLORS.find((item) => item.kind === kind)?.color ?? "#16805e";
 
+// 화살촉 모양도 종류를 말한다 — 제도 간 연결은 열린 촉(다른 제도로 건너감),
+// 미확정 분기는 다이아몬드(게이트웨이), 나머지는 꽉 찬 삼각.
+type MarkerShape = "tri" | "open" | "diamond";
+const markerShapeOf = (key: string): MarkerShape =>
+  key === "chain" ? "open" : key === "conditional" ? "diamond" : "tri";
+const markerPath = (shape: MarkerShape, color: string) =>
+  shape === "open" ? (
+    <path
+      d="M 1 1 L 7 4 L 1 7"
+      fill="none"
+      stroke={color}
+      strokeWidth={1.6}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  ) : shape === "diamond" ? (
+    <path d="M 4 0.5 L 7.5 4 L 4 7.5 L 0.5 4 z" fill={color} />
+  ) : (
+    <path d="M 0 0 L 8 4 L 0 8 z" fill={color} />
+  );
+
 function laneOf(actor: string): number {
   if (/주민|토지소유|소유자|점유자|이해관계/.test(actor)) return 1;
   if (
@@ -1568,7 +1589,7 @@ export default function MegaProjectFlow({
                       markerHeight="5"
                       orient="auto-start-reverse"
                     >
-                      <path d="M 0 0 L 8 4 L 0 8 z" fill={color} />
+                      {markerPath(markerShapeOf(markerKey), color)}
                     </marker>
                     <marker
                       id={`flow-arrow-${markerKey}-on`}
@@ -1579,7 +1600,7 @@ export default function MegaProjectFlow({
                       markerHeight="7"
                       orient="auto-start-reverse"
                     >
-                      <path d="M 0 0 L 8 4 L 0 8 z" fill={color} />
+                      {markerPath(markerShapeOf(markerKey), color)}
                     </marker>
                   </Fragment>
                 ))}

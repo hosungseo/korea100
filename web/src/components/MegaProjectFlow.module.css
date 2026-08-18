@@ -311,8 +311,15 @@
 }
 
 .legend button[data-kind="internal"]::before {
-  border-top-color: #5b7d92;
-  border-top-width: 3px;
+  height: 3px;
+  border-top: 0;
+  background: repeating-linear-gradient(
+    to right,
+    #5b7d92 0 6px,
+    transparent 6px 8px,
+    #5b7d92 8px 10px,
+    transparent 10px 12px
+  );
 }
 
 .legend button[data-kind="handoff"]::before {
@@ -499,13 +506,14 @@
 .edge[data-kind="chain"] {
   stroke: #2168b4;
   stroke-width: 1.1;
-  stroke-dasharray: 3 3;
+  stroke-dasharray: 6 4;
   opacity: 0.6;
 }
 
 .edge[data-kind="internal"] {
   stroke: #5b7d92;
   stroke-width: 1.4;
+  stroke-dasharray: 8 3 2 3;
   opacity: 0.5;
 }
 
@@ -517,9 +525,10 @@
 
 .edge[data-kind="conditional"] {
   stroke: #b47a19;
-  stroke-width: 1.4;
-  stroke-dasharray: 4 3;
-  opacity: 0.6;
+  stroke-width: 1.6;
+  stroke-dasharray: 0.1 5;
+  stroke-linecap: round;
+  opacity: 0.65;
 }
 
 .edge[data-active="true"] {
