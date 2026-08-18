@@ -251,6 +251,7 @@ export function SwimlaneNodeCard({
     <button
       className="swimlane-node-card"
       ref={setRef as React.Ref<HTMLButtonElement>}
+      id={node.id}
       data-node-id={node.id}
       onClick={() => onClick(node)}
       onMouseEnter={onHover}
@@ -449,6 +450,32 @@ export function MobileProcessFlow({
       behavior: reducedMotion ? "auto" : "smooth",
     });
   }, []);
+
+  // 메가프로젝트 스윔레인 등에서 #P05 형태 해시로 진입하면
+  // 클라이언트 라우팅 직후 대상이 아직 배치 전이라 기본 스크롤이 무산된다.
+  // 마운트 후 한 번 직접 스크롤한다.
+  useEffect(() => {
+    const hash = window.location.hash.replace(/^#/, "");
+    if (!/^P\d+/.test(hash)) return;
+    const frame = window.setTimeout(() => {
+      // 데스크톱·모바일 보드가 함께 렌더되므로 화면에 보이는 쪽을 고른다.
+      const candidates = document.querySelectorAll<HTMLElement>(
+        `[data-node-id="${hash}"]`,
+      );
+      const target = [...candidates].find(
+        (element) => element.getBoundingClientRect().width > 0,
+      );
+      if (!target) return;
+      target.scrollIntoView({ behavior: "smooth", block: "center" });
+      target.classList.add("node-target-flash");
+      window.setTimeout(
+        () => target.classList.remove("node-target-flash"),
+        2400,
+      );
+    }, 350);
+    return () => window.clearTimeout(frame);
+  }, []);
+
 
   useEffect(() => {
     if (!filterChangeRef.current || !firstVisibleStage) return;
