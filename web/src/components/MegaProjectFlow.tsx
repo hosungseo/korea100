@@ -117,6 +117,10 @@ export default function MegaProjectFlow({
   const [hiddenKinds, setHiddenKinds] = useState<Set<EdgeKind>>(new Set());
   const [query, setQuery] = useState("");
   const [zoom, setZoom] = useState(1);
+  // 좁은 화면 기본 축소 — SSR 하이드레이션 불일치를 피해 마운트 후 적용
+  useEffect(() => {
+    if (window.innerWidth < 720) setZoom(0.8);
+  }, []);
   const [pinnedKey, setPinnedKey] = useState<string | null>(null);
   const [flashKey, setFlashKey] = useState<string | null>(null);
   const [matchIndex, setMatchIndex] = useState(0);
