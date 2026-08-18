@@ -556,7 +556,8 @@ export default function MegaProjectFlow({
   const onPanPointerDown = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
     if (event.pointerType !== "mouse" || event.button !== 0) return;
     const target = event.target as HTMLElement;
-    if (target.closest("button, a, input")) return;
+    // 절차 카드 위에서는 팬을 시작하지 않는다 — 클릭(핀)이 드래그 억제에 먹히지 않게
+    if (target.closest("button, a, input, [data-mapping]")) return;
     const viewport = viewportRef.current;
     if (!viewport) return;
     const rect = viewport.getBoundingClientRect();
@@ -583,7 +584,7 @@ export default function MegaProjectFlow({
     if (!viewport) return;
     const dx = event.clientX - panState.current.startX;
     const dy = event.clientY - panState.current.startY;
-    if (Math.abs(dx) + Math.abs(dy) > 4) panState.current.moved = true;
+    if (Math.abs(dx) + Math.abs(dy) > 8) panState.current.moved = true;
     viewport.scrollLeft = panState.current.left - dx;
     viewport.scrollTop = panState.current.top - dy;
   }, []);
@@ -1430,7 +1431,7 @@ export default function MegaProjectFlow({
             <b>{hoverDetail.proc.procId}</b> {hoverDetail.proc.procName}
           </p>
           <small>
-            {hoverDetail.proc.templateId ? (
+            {hoverDetail.proc.templateId && pinnedKey ? (
               <Link
                 className={styles.templateLink}
                 href={`/model/${hoverDetail.proc.templateId}/#${hoverDetail.proc.procId}`}
@@ -1438,7 +1439,15 @@ export default function MegaProjectFlow({
                 {hoverDetail.proc.templateName} — 제도 원본에서 보기 ↗
               </Link>
             ) : (
-              hoverDetail.proc.templateName
+              <>
+                {hoverDetail.proc.templateName}
+                {hoverDetail.proc.templateId && (
+                  <em className={styles.linkHint}>
+                    {" "}
+                    · 절차를 클릭해 고정하면 원본 링크가 열립니다
+                  </em>
+                )}
+              </>
             )}
           </small>
           <dl>
@@ -1896,11 +1905,13 @@ export default function MegaProjectFlow({
                                 data-pinned={pinnedKey === proc.key ? "true" : "false"}
                                 data-flash={flashKey === proc.key ? "true" : "false"}
                                 onMouseEnter={() => setHoverKey(proc.key)}
-                                onClick={() =>
+                                onClick={(event) => {
+                                  // 더블클릭의 두 번째 클릭이 핀을 도로 풀지 않게
+                                  if (event.detail > 1) return;
                                   setPinnedKey((value) =>
                                     value === proc.key ? null : proc.key,
-                                  )
-                                }
+                                  );
+                                }}
                               >
                                 <b>{proc.procId}</b>
                                 <i>{proc.procName}</i>
