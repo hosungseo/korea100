@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {
+import { useEffect, Fragment,
   useCallback,
   useLayoutEffect,
   useMemo,
@@ -49,6 +49,7 @@ interface ProcItem {
   procName: string;
   procType: string;
   procActor: string;
+  templateName: string;
   title: string;
 }
 
@@ -112,6 +113,50 @@ export default function MegaProjectFlow({
   const [hoverKey, setHoverKey] = useState<string | null>(null);
   const [hiddenKinds, setHiddenKinds] = useState<Set<EdgeKind>>(new Set());
   const [query, setQuery] = useState("");
+  const [scrollPos, setScrollPos] = useState<{
+    gate: string;
+    gateId: string;
+    milestoneId: string;
+    milestoneName: string;
+  } | null>(null);
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    const canvas = canvasRef.current;
+    if (!viewport || !canvas) return;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const strips = canvas.querySelectorAll<HTMLElement>("[data-ms-name]");
+      // offsetTop은 stageBand 기준 상대값이라 못 쓴다 — 캔버스 rect 기준으로 계산
+      const canvasTop = canvas.getBoundingClientRect().top;
+      const marker = viewport.getBoundingClientRect().top - canvasTop + 140;
+      let current: HTMLElement | null = null;
+      for (const strip of strips) {
+        if (strip.getBoundingClientRect().top - canvasTop <= marker) current = strip;
+        else break;
+      }
+      if (!current) {
+        setScrollPos(null);
+        return;
+      }
+      setScrollPos({
+        gate: current.dataset.gate ?? "",
+        gateId: current.dataset.gateId ?? "",
+        milestoneId: current.id,
+        milestoneName: current.dataset.msName ?? "",
+      });
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    viewport.addEventListener("scroll", onScroll, { passive: true });
+    update();
+    return () => {
+      viewport.removeEventListener("scroll", onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, []);
 
   const derived = useMemo(() => {
     const graph = buildMegaProjectGraph(
@@ -228,6 +273,7 @@ export default function MegaProjectFlow({
                 procName: proc.name,
                 procType: proc.type,
                 procActor: proc.actor,
+                templateName: group.templateName,
                 title: [
                   `${node.id} ${node.name}`,
                   `${group.templateName}`,
@@ -718,7 +764,11 @@ export default function MegaProjectFlow({
             </p>
             <div className={styles.minimapBands}>
               {stageBands.map((band) => (
-                <div className={styles.minimapBand} key={band.stageId}>
+                <div
+                  className={styles.minimapBand}
+                  key={band.stageId}
+                  data-current={scrollPos?.gateId === band.stageId ? "true" : undefined}
+                >
                   <div className={styles.minimapGrid}>
                     {band.milestones.map((milestone) => (
                       <button
@@ -808,6 +858,23 @@ export default function MegaProjectFlow({
         </div>
       </header>
 
+      {scrollPos && (
+        <button
+          type="button"
+          className={styles.positionHud}
+          onClick={() =>
+            document
+              .getElementById(scrollPos.milestoneId)
+              ?.scrollIntoView({ behavior: "smooth", block: "start" })
+          }
+          title="현재 위치 — 클릭하면 마일스톤 시작으로 이동"
+        >
+          <b>{scrollPos.gate}</b>
+          <span>
+            {scrollPos.milestoneId} {scrollPos.milestoneName}
+          </span>
+        </button>
+      )}
       <div className={styles.viewport} ref={viewportRef}>
         <div
           className={styles.sheet}
@@ -927,8 +994,12 @@ export default function MegaProjectFlow({
                     key={milestone.id}
                     id={milestone.id}
                     data-status={milestone.status}
+                    data-gate={band.label}
+                    data-gate-id={band.stageId}
+                    data-ms-name={milestone.name}
                   >
                     <div className={styles.milestoneGutter}>
+                      <div className={styles.gutterSticky}>
                       <p>
                         <b>{milestone.id}</b>
                         <small data-status={milestone.status}>
@@ -972,6 +1043,7 @@ export default function MegaProjectFlow({
                           : 0}
                         %
                       </small>
+                      </div>
                     </div>
                     {[...milestone.cells.entries()].map(
                       ([subColumn, procs]) => (
@@ -979,16 +1051,28 @@ export default function MegaProjectFlow({
                           className={styles.cell}
                           key={subColumn}
                           data-lane={subColumns[subColumn]?.lane}
-                          style={{ gridColumn: subColumn + 2 }}
+                          style={{ gridColumn: subColumn + 2, gridRow: 1 }}
                         >
-                          {procs.map((proc) => {
+                          {procs.map((proc, procIndex) => {
+                            const showTemplate =
+                              procIndex === 0 ||
+                              procs[procIndex - 1].templateName !==
+                                proc.templateName;
                             const isHovered = hoverKey === proc.key;
                             const isNeighbor =
                               hoverNeighbors?.has(proc.key) ?? false;
                             return (
+                              <Fragment key={proc.key}>
+                              {showTemplate && (
+                                <i
+                                  className={styles.procTemplate}
+                                  title={proc.templateName}
+                                >
+                                  {proc.templateName}
+                                </i>
+                              )}
                               <span
                                 className={styles.proc}
-                                key={proc.key}
                                 ref={setProcRef(proc.key)}
                                 data-mapping={proc.mapping}
                                 data-type={proc.procType}
@@ -1010,6 +1094,7 @@ export default function MegaProjectFlow({
                                   <small>{proc.procActor}</small>
                                 )}
                               </span>
+                              </Fragment>
                             );
                           })}
                         </div>

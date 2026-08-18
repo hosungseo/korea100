@@ -767,3 +767,84 @@
   word-break: keep-all;
   overflow-wrap: break-word;
 }
+
+.gutterSticky {
+  position: sticky;
+  top: 62px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.procTemplate {
+  display: block;
+  overflow: hidden;
+  margin: 7px 0 2px;
+  padding-top: 3px;
+  border-top: 1px dotted rgba(70, 96, 82, 0.35);
+  color: #6f8a7d;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-style: normal;
+  font-weight: 750;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cell > .procTemplate:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.positionHud {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: 260px;
+  padding: 8px 12px;
+  border: 1px solid rgba(23, 87, 63, 0.35);
+  border-radius: 8px;
+  background: rgba(18, 36, 28, 0.92);
+  box-shadow: 0 4px 14px rgba(12, 32, 21, 0.25);
+  color: #dff0e7;
+  text-align: left;
+  cursor: pointer;
+}
+
+.positionHud b {
+  color: #65d7ad;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.positionHud span {
+  overflow: hidden;
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.positionHud:hover {
+  border-color: #65d7ad;
+}
+
+.minimapBand[data-current="true"] {
+  border-radius: 4px;
+  outline: 2px solid #17573f;
+  outline-offset: 1px;
+}
+
+.milestoneStrip:nth-of-type(even) {
+  background: rgba(23, 87, 63, 0.022);
+}
