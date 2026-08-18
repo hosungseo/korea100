@@ -130,11 +130,14 @@ export default function MegaProjectFlow({
   const [matchIndex, setMatchIndex] = useState(0);
   const [collapsed, setCollapsed] = useState<Set<string>>(new Set());
   const [hiddenLanes, setHiddenLanes] = useState<Set<number>>(new Set());
+  const [pinnedCol, setPinnedCol] = useState<number | null>(null);
+  const [hoverEdgeId, setHoverEdgeId] = useState<string | null>(null);
   const [scrollPos, setScrollPos] = useState<{
     gate: string;
     gateId: string;
     milestoneId: string;
     milestoneName: string;
+    laneLabel: string;
   } | null>(null);
 
   useEffect(() => {
@@ -157,11 +160,29 @@ export default function MegaProjectFlow({
         setScrollPos(null);
         return;
       }
+      // 가로 위치 — 뷰포트 중앙이 지나는 담당자 컬럼의 주체군을 함께 표시
+      const viewportRect = viewport.getBoundingClientRect();
+      const centerX = viewportRect.left + viewport.clientWidth / 2;
+      let laneLabel = "";
+      const headerSpans = canvas.parentElement?.querySelectorAll<HTMLElement>(
+        '[class*="actorHeader"] > span[data-lane]',
+      );
+      if (headerSpans) {
+        for (const span of headerSpans) {
+          const rect = span.getBoundingClientRect();
+          if (rect.left <= centerX && rect.right >= centerX) {
+            const laneIndex = Number(span.dataset.lane);
+            laneLabel = LANES[laneIndex]?.label ?? "";
+            break;
+          }
+        }
+      }
       setScrollPos({
         gate: current.dataset.gate ?? "",
         gateId: current.dataset.gateId ?? "",
         milestoneId: current.id,
         milestoneName: current.dataset.msName ?? "",
+        laneLabel,
       });
     };
     const onScroll = () => {
@@ -659,13 +680,51 @@ export default function MegaProjectFlow({
     window.history.replaceState(null, "", url.toString());
   }, [pinnedKey]);
 
+  // 키보드 내비게이션 — PageDown/Up 게이트 이동, +/− 줌, 0 리셋, Esc 해제
+  const scrollPosRef = useRef(scrollPos);
+  useEffect(() => {
+    scrollPosRef.current = scrollPos;
+  }, [scrollPos]);
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setPinnedKey(null);
+      const target = event.target as HTMLElement;
+      if (
+        target.tagName === "INPUT" ||
+        target.tagName === "TEXTAREA" ||
+        target.isContentEditable
+      )
+        return;
+      if (event.key === "Escape") {
+        setPinnedKey(null);
+        setPinnedCol(null);
+        return;
+      }
+      if (event.key === "PageDown" || event.key === "PageUp") {
+        event.preventDefault();
+        const gateId = scrollPosRef.current?.gateId;
+        const index = stageBands.findIndex((band) => band.stageId === gateId);
+        const next =
+          event.key === "PageDown"
+            ? Math.min(stageBands.length - 1, index + 1)
+            : Math.max(0, index < 0 ? 0 : index - 1);
+        const band = stageBands[next];
+        if (band)
+          document
+            .getElementById(`gate-${band.stageId}`)
+            ?.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+      if (event.key === "+" || event.key === "=") {
+        setZoom((value) => Math.min(1.6, Math.round((value + 0.1) * 10) / 10));
+      } else if (event.key === "-") {
+        setZoom((value) => Math.max(0.25, Math.round((value - 0.1) * 10) / 10));
+      } else if (event.key === "0") {
+        setZoom(1);
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  }, [stageBands]);
 
   const updateGeometry = useCallback(() => {
     const canvas = canvasRef.current;
@@ -922,6 +981,19 @@ export default function MegaProjectFlow({
   const hoverInfo = hoverKey ? procByKey.get(hoverKey) : null;
   const hoverSubCol = hoverInfo?.proc.subCol ?? -1;
   const hoverMilestoneId = hoverInfo?.milestoneId ?? null;
+
+  // 엣지 호버 — 선에 마우스를 올리면 그 선과 양 끝 절차를 강조
+  const hoverEdge = hoverEdgeId
+    ? edges.find((edge) => edge.id === hoverEdgeId) ?? null
+    : null;
+  const hoverEdgeEnds = hoverEdge
+    ? new Set([hoverEdge.source, hoverEdge.target])
+    : null;
+
+  // 열 핀 — 담당자 헤더 클릭으로 그 열의 절차·연결만 남기고 흐림
+  const toggleCol = useCallback((index: number) => {
+    setPinnedCol((value) => (value === index ? null : index));
+  }, []);
 
   const trimmedQuery = query.trim().toLowerCase();
   const queryActive = trimmedQuery.length >= 2;
@@ -1339,6 +1411,9 @@ export default function MegaProjectFlow({
           <span>
             {scrollPos.milestoneId} {scrollPos.milestoneName}
           </span>
+          {scrollPos.laneLabel && (
+            <small className={styles.hudLane}>◫ {scrollPos.laneLabel}</small>
+          )}
         </button>
       )}
       <div
@@ -1369,7 +1444,7 @@ export default function MegaProjectFlow({
                   title={hiddenLanes.has(laneIndex) ? `${lane.label} 펼치기` : `${lane.label} 접기`}
                   onClick={() => toggleLane(laneIndex)}
                 >
-                  {hiddenLanes.has(laneIndex) ? "▸" : `${lane.label}`}
+                  {hiddenLanes.has(laneIndex) ? `▸ ${lane.label}` : `${lane.label}`}
                   {!hiddenLanes.has(laneIndex) && <small>{count}</small>}
                 </span>
               );
@@ -1384,12 +1459,18 @@ export default function MegaProjectFlow({
                 data-hidden={hiddenLanes.has(subColumn.lane) ? "true" : "false"}
                 data-other={subColumn.isOther ? "true" : "false"}
                 data-col-hover={index === hoverSubCol ? "true" : "false"}
+                data-col-pin={index === pinnedCol ? "true" : "false"}
                 data-first={
                   index === 0 || subColumns[index - 1].lane !== subColumn.lane
                     ? "true"
                     : "false"
                 }
-                title={subColumn.label}
+                title={
+                  index === pinnedCol
+                    ? `${subColumn.label} — 열 강조 해제`
+                    : `${subColumn.label} — 클릭하면 이 열만 강조`
+                }
+                onClick={() => toggleCol(index)}
               >
                 {subColumn.label}
               </span>
@@ -1410,49 +1491,86 @@ export default function MegaProjectFlow({
             >
               <defs>
                 {EDGE_COLORS.map(({ kind, color }) => (
-                  <marker
-                    key={kind}
-                    id={`flow-arrow-${kind}`}
-                    viewBox="0 0 8 8"
-                    refX="7"
-                    refY="4"
-                    markerWidth="5"
-                    markerHeight="5"
-                    orient="auto-start-reverse"
-                  >
-                    <path d="M 0 0 L 8 4 L 0 8 z" fill={color} />
-                  </marker>
+                  <Fragment key={kind}>
+                    <marker
+                      id={`flow-arrow-${kind}`}
+                      viewBox="0 0 8 8"
+                      refX="7"
+                      refY="4"
+                      markerWidth="5"
+                      markerHeight="5"
+                      orient="auto-start-reverse"
+                    >
+                      <path d="M 0 0 L 8 4 L 0 8 z" fill={color} />
+                    </marker>
+                    <marker
+                      id={`flow-arrow-${kind}-on`}
+                      viewBox="0 0 8 8"
+                      refX="7"
+                      refY="4"
+                      markerWidth="7"
+                      markerHeight="7"
+                      orient="auto-start-reverse"
+                    >
+                      <path d="M 0 0 L 8 4 L 0 8 z" fill={color} />
+                    </marker>
+                  </Fragment>
                 ))}
               </defs>
               {edgePaths
                 .filter((edge) => !hiddenKinds.has(edge.kind))
                 .map((edge) => {
                   const active =
-                    hoverKey !== null &&
-                    (edge.source === hoverKey || edge.target === hoverKey);
+                    hoverEdgeId === edge.id ||
+                    (hoverKey !== null &&
+                      (edge.source === hoverKey || edge.target === hoverKey));
                   const onPath = pinnedPath
                     ? pinnedPath.nodes.has(edge.source) &&
                       pinnedPath.nodes.has(edge.target)
                     : false;
+                  const colPinMiss =
+                    pinnedCol !== null &&
+                    procByKey.get(edge.source)?.proc.subCol !== pinnedCol &&
+                    procByKey.get(edge.target)?.proc.subCol !== pinnedCol;
+                  const dim =
+                    colPinMiss ||
+                    (queryActive &&
+                      !matchKeys.has(edge.source) &&
+                      !matchKeys.has(edge.target)) ||
+                    (pinnedPath ? !onPath : hoverKey !== null && !active);
+                  const sourceInfo = procByKey.get(edge.source);
+                  const targetInfo = procByKey.get(edge.target);
+                  const kindLabel =
+                    EDGE_KINDS.find((item) => item.kind === edge.kind)?.label ??
+                    edge.kind;
                   return (
-                    <path
-                      key={edge.id}
-                      className={styles.edge}
-                      d={edge.path}
-                      data-kind={edge.kind}
-                      data-active={active || onPath ? "true" : "false"}
-                      data-dim={
-                        (queryActive &&
-                          !matchKeys.has(edge.source) &&
-                          !matchKeys.has(edge.target)) ||
-                        (pinnedPath
-                          ? !onPath
-                          : hoverKey !== null && !active)
-                          ? "true"
-                          : "false"
-                      }
-                      markerEnd={`url(#flow-arrow-${edge.kind})`}
-                    />
+                    <g key={edge.id}>
+                      {/* 케이싱 겸 히트 영역 — 교차부에서 아래 선을 지워 위·아래가 읽히고, 넓은 투명 획이 호버를 받는다 */}
+                      <path
+                        className={styles.edgeHit}
+                        d={edge.path}
+                        data-dim={dim ? "true" : "false"}
+                        onMouseEnter={() => setHoverEdgeId(edge.id)}
+                        onMouseLeave={() =>
+                          setHoverEdgeId((value) =>
+                            value === edge.id ? null : value,
+                          )
+                        }
+                      >
+                        <title>
+                          {`${kindLabel} · ${sourceInfo?.proc.procId ?? ""} ${sourceInfo?.proc.procName ?? edge.source} → ${targetInfo?.proc.procId ?? ""} ${targetInfo?.proc.procName ?? edge.target}`}
+                        </title>
+                      </path>
+                      <path
+                        className={styles.edge}
+                        d={edge.path}
+                        data-kind={edge.kind}
+                        data-active={active || onPath ? "true" : "false"}
+                        data-flow={onPath ? "true" : "false"}
+                        data-dim={dim ? "true" : "false"}
+                        markerEnd={`url(#flow-arrow-${edge.kind}${active || onPath ? "-on" : ""})`}
+                      />
+                    </g>
                   );
                 })}
             </svg>
@@ -1584,6 +1702,9 @@ export default function MegaProjectFlow({
                           data-col-hover={
                             subColumn === hoverSubCol ? "true" : "false"
                           }
+                          data-col-pin={
+                            subColumn === pinnedCol ? "true" : "false"
+                          }
                           style={{ gridColumn: subColumn + 2, gridRow: 1 }}
                         >
                           {procs.map((proc, procIndex) => {
@@ -1591,9 +1712,13 @@ export default function MegaProjectFlow({
                               procIndex === 0 ||
                               procs[procIndex - 1].templateName !==
                                 proc.templateName;
-                            const isHovered = hoverKey === proc.key;
+                            const isHovered =
+                              hoverKey === proc.key ||
+                              (hoverEdgeEnds?.has(proc.key) ?? false);
                             const isNeighbor =
                               hoverNeighbors?.has(proc.key) ?? false;
+                            const colPinMiss =
+                              pinnedCol !== null && proc.subCol !== pinnedCol;
                             return (
                               <Fragment key={proc.key}>
                               {showTemplate && (
@@ -1611,6 +1736,7 @@ export default function MegaProjectFlow({
                                 data-type={proc.procType}
                                 data-hover={isHovered ? "true" : "false"}
                                 data-dim={
+                                  colPinMiss ||
                                   (queryActive && !matchKeys.has(proc.key)) ||
                                   (pinnedPath
                                     ? !pinnedPath.nodes.has(proc.key)

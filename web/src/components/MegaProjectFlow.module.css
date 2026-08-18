@@ -1422,6 +1422,76 @@
   background: rgba(228, 240, 234, 0.97);
 }
 
+/* ---- 데스크톱 가독성 9차: 엣지 케이싱·호버, 열 핀, HUD 가로 위치, 키보드 ---- */
+/* 엣지 케이싱 겸 히트 영역 — 시트 배경색 획으로 교차부의 아래 선을 지운다 */
+.edgeHit {
+  fill: none;
+  stroke: #fbfcfb;
+  stroke-width: 4;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  pointer-events: stroke;
+  cursor: pointer;
+}
+
+.edgeHit[data-dim="true"] {
+  opacity: 0;
+}
+
+/* 핀 사슬 위의 엣지: 방향 흐름 애니메이션 */
+.edge[data-flow="true"] {
+  stroke-dasharray: 7 5;
+  animation: edge-flow 0.8s linear infinite;
+}
+
+@keyframes edge-flow {
+  to {
+    stroke-dashoffset: -12;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .edge[data-flow="true"] {
+    animation: none;
+  }
+}
+
+/* 열 핀 — 담당자 헤더 클릭으로 그 열만 강조 */
+.actorHeader > span {
+  cursor: pointer;
+}
+
+.actorHeader > span:hover {
+  color: #17573f;
+}
+
+.actorHeader > span[data-col-pin="true"] {
+  color: #eafff5;
+  background: #17573f;
+  box-shadow: inset 0 -2px 0 #65d7ad;
+}
+
+.cell[data-col-pin="true"] {
+  background-image: linear-gradient(
+    rgba(23, 87, 63, 0.055),
+    rgba(23, 87, 63, 0.055)
+  );
+}
+
+/* 접힌 레인 스텁: 이름 일부라도 보이게 */
+.laneGroupHead[data-collapsed="true"] {
+  text-align: left;
+  white-space: nowrap;
+}
+
+/* HUD 가로 위치(현재 화면 중앙의 주체군) */
+.hudLane {
+  color: #9fc9b5;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+}
+
 .floatMapRow i[data-status="completed"] { background: #0d8160; }
 .floatMapRow i[data-status="active"] { background: #1689a7; }
 .floatMapRow i[data-status="ready"] { background: #41c98f; }
