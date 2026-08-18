@@ -1156,6 +1156,39 @@
   background: #cfe8db;
 }
 
+/* 법적 근거 목록 — 법령명 강조, 핀 시 law.go.kr 딥링크 */
+.lawList {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lawList li {
+  font-size: 10px;
+  line-height: 1.45;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.lawList b {
+  color: #17573f;
+  font-weight: 750;
+}
+
+.lawList a {
+  color: #3d4b44;
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(23, 87, 63, 0.45);
+}
+
+.lawList a:hover {
+  color: #0d8160;
+  border-bottom-style: solid;
+}
+
 .linkHint {
   color: #9aa8a0;
   font-style: normal;
