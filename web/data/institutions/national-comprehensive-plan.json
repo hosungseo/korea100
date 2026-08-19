@@ -1,0 +1,486 @@
+{
+  "slug": "national-comprehensive-plan",
+  "name": "국토종합계획 수립·승인·정비",
+  "oneLiner": "소관별 계획안 요청 → 계획안 조정·총괄 → 공청회 → 관계기관 협의 → 국토정책위·국무회의 심의 → 대통령 승인 → 관보 공고 → 실천계획·평가 → 5년 정비로 이어지는 국토 최상위 계획의 순환.",
+  "type": "국가 최상위 공간계획 수립·승인형",
+  "priority": 579,
+  "category": "국토·교통",
+  "whyFirst": "5극3특 국토공간 재설계의 정본 트랙 — 제5차 국토종합계획 수정계획('26~'40)이 이 절차를 그대로 탄다.",
+  "asOfDate": "2026-08-20",
+  "status": "full",
+  "canvas": {
+    "purpose": "소관별 계획안 요청 → 계획안 조정·총괄 → 공청회 → 관계기관 협의 → 국토정책위·국무회의 심의 → 대통령 승인 → 관보 공고 → 실천계획·평가 → 5년 정비로 이어지는 국토 최상위 계획의 순환.",
+    "stakeholders": "국토교통부, 중앙행정기관·시·도, 국민·전문가, 국토정책위원회·국무회의·대통령",
+    "legalBasis": [
+      {
+        "law": "국토기본법",
+        "articles": "제9조·제11조·제12조·제18조·제19조",
+        "kind": "법률"
+      }
+    ],
+    "authorities": [
+      {
+        "name": "국토교통부장관",
+        "role": "계획 수립·조정 총괄과 공고"
+      },
+      {
+        "name": "국토정책위원회·국무회의",
+        "role": "심의"
+      },
+      {
+        "name": "대통령",
+        "role": "승인"
+      }
+    ],
+    "procedure": [
+      "소관별 계획안 제출 요청",
+      "소관별 계획안 제출",
+      "국토종합계획안 조정·총괄 작성",
+      "공청회 개최·의견 반영",
+      "심의안 관계기관 협의·시·도 의견 청취",
+      "국토정책위원회 심의",
+      "국무회의 심의",
+      "대통령 승인",
+      "관보 공고·계획 송부",
+      "소관별 실천계획 수립·제출",
+      "추진 실적 제출·성과 평가",
+      "5년 주기 재검토·정비(변경 준용)"
+    ],
+    "moneyFlow": "계획 자체는 재정사업이 아니며, 실천계획과 개별 법령·예산 절차를 통해 재원이 배분된다.",
+    "docsFlow": "소관별 계획안 제출 요청서 → 소관별 계획안 → 국토종합계획안 → 공청회 개최 결과·의견 반영 내역 → 관계기관·시·도 의견서 → 국토정책위원회 심의 결과 → 국무회의 심의 결과 → 국토종합계획 승인 → 관보 공고문·계획 송부 → 소관별 실천계획 → 추진 실적서·성과 평가 결과 → 국토종합계획 정비안",
+    "bottlenecks": [
+      "소관별 계획안의 부처 간 이해 조정",
+      "심의안 의견 제시 30일 기한의 실효성"
+    ],
+    "reformPoints": [
+      "소관별 계획안·의견 제시 이력의 공개",
+      "실천계획 평가 결과와 차기 정비의 연계 공개"
+    ]
+  },
+  "related": [],
+  "fieldVerification": [
+    "제5차 수정계획('26~'40)의 승인·공고 시점",
+    "국토계획평가(제19조의2·3)와의 연계 운용"
+  ],
+  "process": {
+    "institution_name": "국토종합계획 수립·승인·정비",
+    "law_name": "국토기본법",
+    "lanes": [
+      "국토교통부",
+      "중앙행정기관·시·도",
+      "국민·전문가",
+      "국토정책위원회·국무회의·대통령"
+    ],
+    "stages": [
+      "G0 준비",
+      "G1 계획안 작성",
+      "G2 의견수렴",
+      "G3 심의·승인",
+      "G4 공고·실행",
+      "G5 평가·정비"
+    ],
+    "nodes": [
+      {
+        "id": "P01",
+        "name": "소관별 계획안 제출 요청",
+        "lane": "국토교통부",
+        "stage": "G0 준비",
+        "type": "task",
+        "status": "done",
+        "progress": 100,
+        "actor": "국토교통부장관",
+        "action": "국토종합계획에 반영되어야 할 정책·사업에 관한 소관별 계획안 제출을 중앙행정기관의 장과 시·도지사에게 요청한다.",
+        "output_documents": [
+          "소관별 계획안 제출 요청서"
+        ],
+        "deadline": null,
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "국토기본법",
+            "article": "제9조제2항",
+            "text": "국토기본법 제9조제2항에 따라 소관별 계획안 제출을 요청한다"
+          }
+        ]
+      },
+      {
+        "id": "P02",
+        "name": "소관별 계획안 제출",
+        "lane": "중앙행정기관·시·도",
+        "stage": "G0 준비",
+        "type": "task",
+        "status": "done",
+        "progress": 100,
+        "actor": "중앙행정기관의 장·시·도지사",
+        "action": "특별한 사유가 없으면 요청에 따라 소관별 계획안을 제출한다.",
+        "output_documents": [
+          "소관별 계획안"
+        ],
+        "deadline": null,
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "국토기본법",
+            "article": "제9조제2항",
+            "text": "국토기본법 제9조제2항에 따라 소관별 계획안을 제출한다"
+          }
+        ]
+      },
+      {
+        "id": "P03",
+        "name": "국토종합계획안 조정·총괄 작성",
+        "lane": "국토교통부",
+        "stage": "G1 계획안 작성",
+        "type": "task",
+        "status": "done",
+        "progress": 100,
+        "actor": "국토교통부장관",
+        "action": "소관별 계획안을 기초로 조정·총괄해 계획안을 작성하고, 추가 반영 사항은 관계 행정기관의 장과 협의한다.",
+        "output_documents": [
+          "국토종합계획안"
+        ],
+        "deadline": null,
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "국토기본법",
+            "article": "제9조제3항",
+            "text": "국토기본법 제9조제3항에 따라 소관별 계획안을 조정·총괄하여 계획안을 작성한다"
+          }
+        ]
+      },
+      {
+        "id": "P04",
+        "name": "공청회 개최·의견 반영",
+        "lane": "국민·전문가",
+        "stage": "G2 의견수렴",
+        "type": "task",
+        "status": "done",
+        "progress": 100,
+        "actor": "일반 국민·관계 전문가",
+        "action": "공청회에서 의견을 듣고 타당한 의견은 계획에 반영한다(국방상 기밀 사항 예외).",
+        "output_documents": [
+          "공청회 개최 결과·의견 반영 내역"
+        ],
+        "deadline": null,
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "국토기본법",
+            "article": "제11조제1항",
+            "text": "국토기본법 제11조제1항에 따라 공청회를 열어 국민·전문가 의견을 듣고 반영한다"
+          }
+        ]
+      },
+      {
+        "id": "P05",
+        "name": "심의안 관계기관 협의·시·도 의견 청취",
+        "lane": "중앙행정기관·시·도",
+        "stage": "G3 심의·승인",
+        "type": "task",
+        "status": "current",
+        "progress": 0,
+        "actor": "관계 중앙행정기관의 장·시·도지사",
+        "action": "심의안을 받은 날부터 30일 이내에 의견을 제시한다.",
+        "output_documents": [
+          "관계기관·시·도 의견서"
+        ],
+        "deadline": "심의안 수령 후 30일",
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "국토기본법",
+            "article": "제12조제2항·제3항",
+            "text": "국토기본법 제12조제2항·제3항에 따라 심의안에 대해 협의하고 30일 이내 의견을 제시한다"
+          }
+        ]
+      },
+      {
+        "id": "P06",
+        "name": "국토정책위원회 심의",
+        "lane": "국토정책위원회·국무회의·대통령",
+        "stage": "G3 심의·승인",
+        "type": "gateway",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "국토정책위원회",
+        "action": "국토종합계획 수립·변경 심의안을 심의한다.",
+        "output_documents": [
+          "국토정책위원회 심의 결과"
+        ],
+        "deadline": null,
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "국토기본법",
+            "article": "제12조제1항",
+            "text": "국토기본법 제12조제1항에 따라 국토정책위원회의 심의를 거친다"
+          }
+        ]
+      },
+      {
+        "id": "P07",
+        "name": "국무회의 심의",
+        "lane": "국토정책위원회·국무회의·대통령",
+        "stage": "G3 심의·승인",
+        "type": "gateway",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "국무회의",
+        "action": "국토정책위원회 심의를 거친 계획을 심의한다.",
+        "output_documents": [
+          "국무회의 심의 결과"
+        ],
+        "deadline": null,
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "국토기본법",
+            "article": "제12조제1항",
+            "text": "국토기본법 제12조제1항에 따라 국무회의의 심의를 거친다"
+          }
+        ]
+      },
+      {
+        "id": "P08",
+        "name": "대통령 승인",
+        "lane": "국토정책위원회·국무회의·대통령",
+        "stage": "G3 심의·승인",
+        "type": "gateway",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "대통령",
+        "action": "국토종합계획의 수립·변경을 승인한다.",
+        "output_documents": [
+          "국토종합계획 승인"
+        ],
+        "deadline": null,
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "국토기본법",
+            "article": "제12조제1항",
+            "text": "국토기본법 제12조제1항에 따라 대통령의 승인을 받는다"
+          }
+        ]
+      },
+      {
+        "id": "P09",
+        "name": "관보 공고·계획 송부",
+        "lane": "국토교통부",
+        "stage": "G4 공고·실행",
+        "type": "notice",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "국토교통부장관",
+        "action": "승인 즉시 주요 내용을 관보에 공고하고 관계 기관과 시·도지사, 시장·군수에게 계획을 보낸다.",
+        "output_documents": [
+          "관보 공고문·계획 송부"
+        ],
+        "deadline": null,
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "국토기본법",
+            "article": "제12조제4항",
+            "text": "국토기본법 제12조제4항에 따라 주요 내용을 관보에 공고하고 계획을 송부한다"
+          }
+        ]
+      },
+      {
+        "id": "P10",
+        "name": "소관별 실천계획 수립·제출",
+        "lane": "중앙행정기관·시·도",
+        "stage": "G4 공고·실행",
+        "type": "task",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "중앙행정기관의 장·시·도지사",
+        "action": "계획 내용을 소관 정책·계획에 반영하고 소관별 실천계획을 수립해 국토교통부장관에게 제출한다.",
+        "output_documents": [
+          "소관별 실천계획"
+        ],
+        "deadline": null,
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "국토기본법",
+            "article": "제18조제1항",
+            "text": "국토기본법 제18조제1항에 따라 소관별 실천계획을 수립해 제출한다"
+          }
+        ]
+      },
+      {
+        "id": "P11",
+        "name": "추진 실적 제출·성과 평가",
+        "lane": "국토교통부",
+        "stage": "G5 평가·정비",
+        "type": "task",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "국토교통부장관",
+        "action": "소관별 추진 실적을 종합해 계획의 성과를 정기 평가하고 국토정책 수립·집행에 반영한다.",
+        "output_documents": [
+          "추진 실적서·성과 평가 결과"
+        ],
+        "deadline": null,
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "국토기본법",
+            "article": "제18조제2항·제3항",
+            "text": "국토기본법 제18조제2항·제3항에 따라 추진 실적을 종합해 성과를 정기 평가한다"
+          }
+        ]
+      },
+      {
+        "id": "P12",
+        "name": "5년 주기 재검토·정비(변경 준용)",
+        "lane": "국토교통부",
+        "stage": "G5 평가·정비",
+        "type": "task",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "국토교통부장관",
+        "action": "평가 결과와 여건 변화를 고려해 5년마다 계획을 전반적으로 재검토·정비하며, 변경 시 수립 절차를 준용한다.",
+        "output_documents": [
+          "국토종합계획 정비안"
+        ],
+        "deadline": "5년 주기",
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "국토기본법",
+            "article": "제19조",
+            "text": "국토기본법 제19조에 따라 5년마다 계획을 재검토하고 정비한다"
+          },
+          {
+            "law": "국토기본법",
+            "article": "제9조제4항",
+            "text": "국토기본법 제9조제4항에 따라 계획 변경에 수립 절차를 준용한다"
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "E01",
+        "source": "P01",
+        "target": "P02",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E02",
+        "source": "P02",
+        "target": "P03",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E03",
+        "source": "P03",
+        "target": "P04",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E04",
+        "source": "P04",
+        "target": "P05",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E05",
+        "source": "P05",
+        "target": "P06",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E06",
+        "source": "P06",
+        "target": "P07",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E07",
+        "source": "P07",
+        "target": "P08",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E08",
+        "source": "P08",
+        "target": "P09",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E09",
+        "source": "P09",
+        "target": "P10",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E10",
+        "source": "P10",
+        "target": "P11",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E11",
+        "source": "P11",
+        "target": "P12",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E12",
+        "source": "P12",
+        "target": "P03",
+        "type": "loop",
+        "label": "5년 정비·변경 시 §9④ 준용"
+      }
+    ],
+    "warnings": [
+      "개별 사건의 요건·기한은 시행령과 사실관계에 따라 달라질 수 있다.",
+      "제5차 국토종합계획 수정계획은 액션플랜상 ~'25.12 마련 일정으로, 승인·공고 여부는 확인이 필요하다."
+    ]
+  },
+  "verification": {
+    "status": "article-verified",
+    "verifiedAt": "2026-08-20",
+    "method": "국가법령정보센터 DRF Open API(lawService.do) 조문 원문 대조",
+    "scope": "법적 근거 1건 전부 공식 원문(MST 고정판)과 연결했다. 절차 노드의 명시 조문 13건은 본 세션에서 DRF 원문으로 항 단위까지 확인했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+    "sources": [
+      {
+        "law": "국토기본법",
+        "kind": "법률",
+        "sourceType": "statute",
+        "officialName": "국토기본법",
+        "lawId": "009293",
+        "mst": "286527",
+        "promulgatedOn": "2026-06-02",
+        "effectiveOn": "2026-06-02",
+        "officialUrl": "https://law.go.kr/법령/국토기본법",
+        "pinnedVersion": true
+      }
+    ],
+    "articleVerification": {
+      "checkedAt": "2026-08-20",
+      "method": "국가법령정보센터 DRF Open API 조문 원문 전건 대조(본 세션, 항 단위)",
+      "citationEntries": 13,
+      "explicitCitationEntries": 13,
+      "articleReferences": 14,
+      "verifiedReferences": 14,
+      "missingReferences": 0,
+      "uncheckableReferences": 0
+    }
+  }
+}
