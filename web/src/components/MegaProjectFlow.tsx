@@ -29,6 +29,8 @@ interface MegaProjectFlowProps {
   artifacts: MegaArtifact[];
   templates: Record<string, string>;
   detailTemplates: Record<string, MegaDetailTemplate>;
+  // 메가프로젝트(사업)와 국가전략(5극3특 등)은 다른 종류 — 전략은 스윔레인 단일 뷰
+  variant?: "mega" | "strategy";
 }
 
 type EdgeKind = "sequence" | "chain" | "handoff" | "internal" | "conditional";
@@ -158,6 +160,7 @@ export default function MegaProjectFlow({
   artifacts,
   templates,
   detailTemplates,
+  variant = "mega",
 }: MegaProjectFlowProps) {
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLDivElement | null>(null);
@@ -1166,7 +1169,11 @@ export default function MegaProjectFlow({
   return (
     <div className={`${styles.page} mega-flow-page`}>
       <header className={styles.header}>
-        <p className={styles.kicker}>MEGA / GIANT SWIMLANE</p>
+        <p className={styles.kicker}>
+          {variant === "strategy"
+            ? "STRATEGY / GIANT SWIMLANE"
+            : "MEGA / GIANT SWIMLANE"}
+        </p>
         <div className={styles.headerRow}>
           <div>
             <h1>{project.name} 절차 스윔레인</h1>
@@ -1206,7 +1213,9 @@ export default function MegaProjectFlow({
             </p>
           </div>
           <div className={styles.headerRight}>
-            <MegaViewNav projectId={project.id} active="flow" />
+            {variant !== "strategy" && (
+              <MegaViewNav projectId={project.id} active="flow" />
+            )}
             <nav className={styles.gateNav} aria-label="게이트 바로가기">
               {stageBands.map((band) => (
                 <button

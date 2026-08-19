@@ -2,7 +2,7 @@ export const dynamic = "force-static";
 
 import type { MetadataRoute } from "next";
 import { getAllSlugs, getAllInstitutions } from "@/lib/data";
-import { getAllMegaProjectIds, getMegaProject } from "@/lib/mega-projects";
+import { getMegaProject, getMegaProjectIds } from "@/lib/mega-projects";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://hosungseo.github.io/korea100";
@@ -21,7 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     };
   });
 
-  const megaProjectPages: MetadataRoute.Sitemap = getAllMegaProjectIds().map(
+  const megaProjectPages: MetadataRoute.Sitemap = getMegaProjectIds("mega").map(
     (id) => {
       const project = getMegaProject(id);
       return {
@@ -34,6 +34,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       };
     },
   );
+
+  const strategyPages: MetadataRoute.Sitemap = getMegaProjectIds(
+    "strategy",
+  ).map((id) => {
+    const project = getMegaProject(id);
+    return {
+      url: `${SITE_URL}/strategies/${id}/flow/`,
+      lastModified: project?.asOfDate ? new Date(project.asOfDate) : new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.85,
+    };
+  });
 
   return [
     {
@@ -55,6 +67,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     ...megaProjectPages,
+    ...strategyPages,
     ...modelPages,
   ];
 }

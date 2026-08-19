@@ -26,6 +26,18 @@ export function getAllMegaProjectIds(): string[] {
     .sort();
 }
 
+// 메가프로젝트(사업 단위)와 국가전략(5극3특 등)은 다른 종류다 —
+// 같은 데이터 파이프라인을 쓰되 라우트·표기는 family로 가른다.
+const STRATEGY_FAMILY = "balanced-growth";
+
+export function getMegaProjectIds(kind: "mega" | "strategy" = "mega"): string[] {
+  return getAllMegaProjectIds().filter((id) => {
+    const project = getMegaProject(id);
+    const isStrategy = project?.projectFamily === STRATEGY_FAMILY;
+    return kind === "strategy" ? isStrategy : !isStrategy;
+  });
+}
+
 export function getMegaProject(id: string): MegaProject | null {
   const filePath = path.join(PROJECT_DIR, `${id}.json`);
   if (!fs.existsSync(filePath)) return null;
