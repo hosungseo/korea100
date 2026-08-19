@@ -584,6 +584,19 @@
   font-weight: 600;
 }
 
+/* 게이트별 중심 주체 배지 — 부처별 역할이 뚜렷한 전략에서 대각선이 읽히게 */
+.leadLane {
+  margin-left: 8px;
+  padding: 1px 7px 2px;
+  border: 1px solid rgba(23, 87, 63, 0.3);
+  border-radius: 9px;
+  background: #e9f4ee;
+  color: #17573f;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 780;
+}
+
 .milestoneStrip {
   display: grid;
   grid-template-columns: var(--flow-columns);
@@ -1317,12 +1330,14 @@
 .cell[data-lane="3"] { background: rgba(93, 78, 173, 0.028); }
 .cell[data-lane="4"] { background: rgba(140, 94, 16, 0.024); }
 .cell[data-lane="5"] { background: rgba(70, 96, 82, 0.030); }
+.cell[data-lane="6"] { background: rgba(78, 109, 128, 0.030); }
 .actorHeader > span[data-lane="0"] { background: rgba(23, 87, 63, 0.07); }
 .actorHeader > span[data-lane="1"] { background: rgba(180, 122, 25, 0.08); }
 .actorHeader > span[data-lane="2"] { background: rgba(22, 137, 167, 0.07); }
 .actorHeader > span[data-lane="3"] { background: rgba(93, 78, 173, 0.06); }
 .actorHeader > span[data-lane="4"] { background: rgba(140, 94, 16, 0.06); }
 .actorHeader > span[data-lane="5"] { background: rgba(70, 96, 82, 0.07); }
+.actorHeader > span[data-lane="6"] { background: rgba(78, 109, 128, 0.07); }
 
 /* 접힌 게이트: 마일스톤 칩 지도 */
 .collapsedChips {

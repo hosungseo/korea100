@@ -71,14 +71,25 @@ const lawUrlOf = (law: string, article: string) => {
   }`;
 };
 
-const LANES = [
+// 메가프로젝트(사업)와 국가전략은 주체 구성이 다르다 —
+// 전략은 입법이 관문이라 국회가 전용 레인을 가진다.
+const MEGA_LANES = [
   { id: "applicant", label: "신청인·사업자" },
   { id: "residents", label: "주민·이해관계자" },
   { id: "local", label: "지자체·인허가부서" },
   { id: "central", label: "중앙부처" },
   { id: "expert", label: "위원회·전문기관" },
   { id: "operator", label: "행정청·집행·시스템" },
-] as const;
+];
+const STRATEGY_LANES = [
+  { id: "applicant", label: "민간·기업·대학" },
+  { id: "residents", label: "주민·이해관계자" },
+  { id: "local", label: "지자체·시·도" },
+  { id: "assembly", label: "국회" },
+  { id: "central", label: "중앙부처" },
+  { id: "expert", label: "위원회·전문기관" },
+  { id: "operator", label: "행정청·집행·시스템" },
+];
 
 const EDGE_KINDS: { kind: EdgeKind; label: string }[] = [
   { kind: "sequence", label: "제도 내 순서" },
@@ -106,6 +117,7 @@ const LANE_EDGE_COLORS = [
   "#8a7ac9", // 중앙부처 — 라벤더
   "#8a6a2a", // 위원회·전문기관 — 브론즈
   "#5f7568", // 행정청·집행 — 회녹
+  "#4e6d80", // (전략 7레인) 행정청·집행 — 청회색
 ] as const;
 
 const edgeColorOf = (kind: EdgeKind, sourceLane: number | undefined) =>
@@ -134,7 +146,29 @@ const markerPath = (shape: MarkerShape, color: string) =>
     <path d="M 0 0 L 8 4 L 0 8 z" fill={color} />
   );
 
-function laneOf(actor: string): number {
+function laneOf(actor: string, variant: "mega" | "strategy" = "mega"): number {
+  if (variant === "strategy") {
+    // 국회 판별을 위원회보다 먼저 — '소관 상임위원회'가 위원회 패턴에 먹히지 않게
+    if (/국회|상임위|법제사법|본회의|발의자|의안|재적의원/.test(actor)) return 3;
+    if (/주민|토지소유|소유자|점유자|가족|이해관계/.test(actor)) return 1;
+    if (
+      /신청인|사업시행자|사업자|기업|대학|산학|스타트업|의료기관|보조사업자|시공|영업자|입주|수요|공급자/.test(
+        actor,
+      )
+    )
+      return 0;
+    if (/위원회|전문기관|심사|평가|심의|조사수행|검증|연구|검사기관/.test(actor))
+      return 5;
+    if (/지방자치단체|지자체|시·도|시군구|시장|군수|구청장|교육감|지방의회/.test(actor))
+      return 2;
+    if (
+      /[부처청]$|장관|기획예산처|재정경제부|중앙관서|중앙행정기관|입안 행정청|대통령|국무회의|정부|국가/.test(
+        actor,
+      )
+    )
+      return 4;
+    return 6;
+  }
   if (/주민|토지소유|소유자|점유자|이해관계/.test(actor)) return 1;
   if (
     /신청인|사업시행자|사업자|기업|시공|영업자|취급자|할당대상|사업장|입주|수요|공급자|운송자/.test(
@@ -162,6 +196,7 @@ export default function MegaProjectFlow({
   detailTemplates,
   variant = "mega",
 }: MegaProjectFlowProps) {
+  const lanes = variant === "strategy" ? STRATEGY_LANES : MEGA_LANES;
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLDivElement | null>(null);
   const procRefs = useRef(new Map<string, HTMLElement>());
@@ -222,7 +257,7 @@ export default function MegaProjectFlow({
           const rect = span.getBoundingClientRect();
           if (rect.left <= centerX && rect.right >= centerX) {
             const laneIndex = Number(span.dataset.lane);
-            laneLabel = LANES[laneIndex]?.label ?? "";
+            laneLabel = lanes[laneIndex]?.label ?? "";
             break;
           }
         }
@@ -244,7 +279,7 @@ export default function MegaProjectFlow({
       viewport.removeEventListener("scroll", onScroll);
       if (frame) cancelAnimationFrame(frame);
     };
-  }, []);
+  }, [lanes]);
 
   const derived = useMemo(() => {
     const graph = buildMegaProjectGraph(
@@ -269,16 +304,16 @@ export default function MegaProjectFlow({
     const topActors = new Set(
       sortedActors.slice(0, TOP_ACTORS).map(([actor]) => actor),
     );
-    const laneTopActors: string[][] = LANES.map(() => []);
-    const laneOtherActors: string[][] = LANES.map(() => []);
+    const laneTopActors: string[][] = lanes.map(() => []);
+    const laneOtherActors: string[][] = lanes.map(() => []);
     sortedActors.forEach(([actor]) => {
-      if (topActors.has(actor)) laneTopActors[laneOf(actor)].push(actor);
-      else laneOtherActors[laneOf(actor)].push(actor);
+      if (topActors.has(actor)) laneTopActors[laneOf(actor, variant)].push(actor);
+      else laneOtherActors[laneOf(actor, variant)].push(actor);
     });
     const subColumnOfActor = new Map<string, number>();
     const subColumns: { label: string; lane: number; isOther: boolean }[] = [];
-    const laneSubColumnCounts: number[] = LANES.map(() => 0);
-    LANES.forEach((_, laneIndex) => {
+    const laneSubColumnCounts: number[] = lanes.map(() => 0);
+    lanes.forEach((_, laneIndex) => {
       laneTopActors[laneIndex].forEach((actor) => {
         subColumnOfActor.set(actor, subColumns.length);
         subColumns.push({ label: actor, lane: laneIndex, isOther: false });
@@ -330,7 +365,7 @@ export default function MegaProjectFlow({
             status: graph.displayStatusByNode.get(node.id) ?? "blocked",
             procCount: 0,
             exactCount: 0,
-            laneCounts: LANES.map(() => 0),
+            laneCounts: lanes.map(() => 0),
             cells,
           };
           milestones.push(milestone);
@@ -349,7 +384,7 @@ export default function MegaProjectFlow({
               totalProcs += 1;
               milestone.procCount += 1;
               if (group.mapping === "exact") milestone.exactCount += 1;
-              const lane = laneOf(proc.actor);
+              const lane = laneOf(proc.actor, variant);
               milestone.laneCounts[lane] += 1;
               procLaneByKey.set(`${group.id}:${proc.id}`, lane);
               const subColumn = subColumnOfActor.get(proc.actor) ?? 0;
@@ -401,10 +436,19 @@ export default function MegaProjectFlow({
           });
         });
 
+        // 게이트별 주관 — 마일스톤 leadActor 최빈값(전략이 설계한 주관 주체)
+        const leadCounts = new Map<string, number>();
+        stageNodes.forEach((node) => {
+          leadCounts.set(node.leadActor, (leadCounts.get(node.leadActor) ?? 0) + 1);
+        });
+        const topLead = [...leadCounts.entries()].sort((a, b) => b[1] - a[1])[0]?.[0];
+        const leadLabel =
+          project.actors.find((actor) => actor.id === topLead)?.shortLabel ?? null;
         return {
           stageId: stage.id,
           label: `${String(stageIndex + 1).padStart(2, "0")} ${stage.label}`,
           shortLabel: `${String(stageIndex + 1).padStart(2, "0")} ${stage.label}`,
+          leadLaneLabel: leadLabel,
           milestones,
         };
       })
@@ -441,7 +485,7 @@ export default function MegaProjectFlow({
       .join(" ")}`;
 
     // Lane-to-lane handoff matrix for the mini sankey summary.
-    const handoffMatrix: number[][] = LANES.map(() => LANES.map(() => 0));
+    const handoffMatrix: number[][] = lanes.map(() => lanes.map(() => 0));
     let handoffTotal = 0;
     graph.edges.forEach((edge) => {
       if (!edge.handoff) return;
@@ -482,7 +526,7 @@ export default function MegaProjectFlow({
       maxCellCount,
       maxMilestoneProcs,
     };
-  }, [artifacts, detailTemplates, project, templates]);
+  }, [artifacts, detailTemplates, project, templates, variant]);
 
   const {
     edges,
@@ -1360,7 +1404,7 @@ export default function MegaProjectFlow({
                       >
                         {milestone.laneCounts.map((count, laneIndex) => (
                           <i
-                            key={LANES[laneIndex].id}
+                            key={lanes[laneIndex].id}
                             style={{
                               opacity:
                                 count === 0
@@ -1383,8 +1427,12 @@ export default function MegaProjectFlow({
               <span>레인 간 인계</span>
               <small>{handoffTotal}건</small>
             </p>
-            <svg viewBox="0 0 240 120" className={styles.sankeySvg}>
-              {LANES.map((lane, index) => (
+            <svg
+              viewBox={`0 0 240 ${lanes.length * 19 + 8}`}
+              className={styles.sankeySvg}
+              style={{ height: lanes.length * 19 + 8 }}
+            >
+              {lanes.map((lane, index) => (
                 <text
                   key={`l-${lane.id}`}
                   x={2}
@@ -1394,7 +1442,7 @@ export default function MegaProjectFlow({
                   {lane.label.split("·")[0]}
                 </text>
               ))}
-              {LANES.map((lane, index) => (
+              {lanes.map((lane, index) => (
                 <text
                   key={`r-${lane.id}`}
                   x={238}
@@ -1419,7 +1467,7 @@ export default function MegaProjectFlow({
                       strokeWidth={width}
                     >
                       <title>
-                        {`${LANES[sourceLane].label} → ${LANES[targetLane].label} · ${count}건`}
+                        {`${lanes[sourceLane].label} → ${lanes[targetLane].label} · ${count}건`}
                       </title>
                     </path>
                   );
@@ -1615,7 +1663,7 @@ export default function MegaProjectFlow({
         >
           <div className={styles.laneHeader}>
             <span className={styles.laneHeaderGate}>게이트 / 마일스톤</span>
-            {LANES.map((lane, laneIndex) => {
+            {lanes.map((lane, laneIndex) => {
               const count = laneSubColumnCounts[laneIndex];
               if (count === 0) return null;
               return (
@@ -1805,6 +1853,9 @@ export default function MegaProjectFlow({
                         0,
                       )}
                       개 절차
+                      {band.leadLaneLabel && (
+                        <i className={styles.leadLane}>주관 {band.leadLaneLabel}</i>
+                      )}
                       {collapsed.has(band.stageId) ? " · 접힘" : ""}
                     </small>
                   </span>
