@@ -1166,7 +1166,7 @@ export default function MegaProjectFlow({
   return (
     <div className={`${styles.page} mega-flow-page`}>
       <header className={styles.header}>
-        <p className={styles.kicker}>MEGA / PERMIT GIANT SWIMLANE</p>
+        <p className={styles.kicker}>MEGA / GIANT SWIMLANE</p>
         <div className={styles.headerRow}>
           <div>
             <h1>{project.name} 절차 스윔레인</h1>
