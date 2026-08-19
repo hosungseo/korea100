@@ -436,14 +436,27 @@ export default function MegaProjectFlow({
           });
         });
 
-        // 게이트별 주관 — 마일스톤 leadActor 최빈값(전략이 설계한 주관 주체)
+        // 게이트별 주관 — leadActor 최빈값. 과반이면 단독 주관,
+        // 분산돼 있으면 하나로 퉁치지 않고 '다부처'로 상위 주체를 나열한다.
         const leadCounts = new Map<string, number>();
         stageNodes.forEach((node) => {
           leadCounts.set(node.leadActor, (leadCounts.get(node.leadActor) ?? 0) + 1);
         });
-        const topLead = [...leadCounts.entries()].sort((a, b) => b[1] - a[1])[0]?.[0];
-        const leadLabel =
-          project.actors.find((actor) => actor.id === topLead)?.shortLabel ?? null;
+        const leadEntries = [...leadCounts.entries()].sort((a, b) => b[1] - a[1]);
+        const shortOf = (id: string) =>
+          project.actors.find((actor) => actor.id === id)?.shortLabel ?? id;
+        let leadLabel: string | null = null;
+        if (leadEntries.length > 0) {
+          const concentrated =
+            leadEntries.length === 1 ||
+            leadEntries[0][1] / stageNodes.length >= 0.5;
+          leadLabel = concentrated
+            ? `주관 ${shortOf(leadEntries[0][0])}`
+            : `다부처 ${leadEntries
+                .slice(0, 2)
+                .map(([id]) => shortOf(id))
+                .join("·")}${leadEntries.length > 2 ? " 외" : ""}`;
+        }
         return {
           stageId: stage.id,
           label: `${String(stageIndex + 1).padStart(2, "0")} ${stage.label}`,
@@ -1854,7 +1867,7 @@ export default function MegaProjectFlow({
                       )}
                       개 절차
                       {band.leadLaneLabel && (
-                        <i className={styles.leadLane}>주관 {band.leadLaneLabel}</i>
+                        <i className={styles.leadLane}>{band.leadLaneLabel}</i>
                       )}
                       {collapsed.has(band.stageId) ? " · 접힘" : ""}
                     </small>
