@@ -93,6 +93,9 @@ function Header() {
           <NavLink href="/mega-projects/gwangju-semiconductor-cluster/">
             메가프로젝트
           </NavLink>
+          <NavLink href="/strategies/five-poles-three-special/flow/">
+            5극3특
+          </NavLink>
           <NavLink href="/verification/">현장 검증 대장</NavLink>
           <NavLink href="/request/">요청하기</NavLink>
           <span className="site-header-date">기준일 {LATEST_AS_OF_DATE}</span>

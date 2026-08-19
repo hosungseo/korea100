@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import MegaProjectFlow from "@/components/MegaProjectFlow";
 import {
-  getAllMegaProjectIds,
+  getMegaProjectIds,
   getMegaProject,
   getMegaProjectBundle,
 } from "@/lib/mega-projects";
@@ -12,7 +12,7 @@ const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://hosungseo.github.io/korea100";
 
 export function generateStaticParams() {
-  return getAllMegaProjectIds().map((id) => ({ id }));
+  return getMegaProjectIds("mega").map((id) => ({ id }));
 }
 
 export const dynamicParams = false;

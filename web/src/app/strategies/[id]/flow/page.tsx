@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import MegaProjectUnfold from "@/components/MegaProjectUnfold";
+import MegaProjectFlow from "@/components/MegaProjectFlow";
 import {
-  getMegaProjectIds,
   getMegaProject,
   getMegaProjectBundle,
+  getMegaProjectIds,
 } from "@/lib/mega-projects";
 import { getMegaOgImage } from "@/lib/mega-project-meta";
 
@@ -12,7 +12,7 @@ const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://hosungseo.github.io/korea100";
 
 export function generateStaticParams() {
-  return getMegaProjectIds("mega").map((id) => ({ id }));
+  return getMegaProjectIds("strategy").map((id) => ({ id }));
 }
 
 export const dynamicParams = false;
@@ -24,29 +24,29 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const project = getMegaProject(id);
-  if (!project) return { title: "메가프로젝트 행정절차 펼쳐보기" };
+  if (!project) return { title: "국가전략 절차 흐름도" };
   const ogImage = getMegaOgImage(project.id);
   return {
-    title: `${project.name} 행정절차 전체 펼쳐보기`,
+    title: `${project.name} 절차 흐름도`,
     description: project.summary,
-    alternates: { canonical: `${SITE_URL}/mega-projects/${project.id}/unfold/` },
+    alternates: { canonical: `${SITE_URL}/strategies/${project.id}/flow/` },
     openGraph: {
-      title: `${project.name} 행정절차 전체 펼쳐보기`,
+      title: `${project.name} 절차 흐름도`,
       description: project.summary,
-      url: `${SITE_URL}/mega-projects/${project.id}/unfold/`,
+      url: `${SITE_URL}/strategies/${project.id}/flow/`,
       type: "website",
       images: [ogImage],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${project.name} 행정절차 전체 펼쳐보기`,
+      title: `${project.name} 절차 흐름도`,
       description: project.summary,
       images: [ogImage.url],
     },
   };
 }
 
-export default async function MegaProjectUnfoldPage({
+export default async function StrategyFlowPage({
   params,
 }: {
   params: Promise<{ id: string }>;
@@ -56,11 +56,12 @@ export default async function MegaProjectUnfoldPage({
   if (!bundle) notFound();
 
   return (
-    <MegaProjectUnfold
+    <MegaProjectFlow
       project={bundle.project}
       artifacts={bundle.artifacts}
       templates={bundle.templates}
       detailTemplates={bundle.detailTemplates}
+      variant="strategy"
     />
   );
 }
