@@ -1,0 +1,492 @@
+{
+  "slug": "public-institution-relocation",
+  "name": "공공기관 지방이전·혁신도시 이전",
+  "oneLiner": "기관별 지방이전계획 수립 → 소관 부처 검토·조정 → 지방시대위 심의 → 국토부 승인 → 혁신도시 이전 원칙(예외: 개별이전) → 이전 실행 → 종전부동산·이주직원·지역인재로 이어지는 이전 사슬.",
+  "type": "공공기관 이전계획 승인·집행형",
+  "priority": 580,
+  "category": "지방·균형성장",
+  "whyFirst": "5극3특 공공기관 2차 이전('26 계획 확정, '27 선도이전)의 법정 경로 — 어떤 서류가 어느 관문을 지나는지 보여준다.",
+  "asOfDate": "2026-08-20",
+  "status": "full",
+  "canvas": {
+    "purpose": "기관별 지방이전계획 수립 → 소관 부처 검토·조정 → 지방시대위 심의 → 국토부 승인 → 혁신도시 이전 원칙(예외: 개별이전) → 이전 실행 → 종전부동산·이주직원·지역인재로 이어지는 이전 사슬.",
+    "stakeholders": "이전공공기관, 소관 중앙행정기관, 국토교통부, 지방시대위원회, 시·도·혁신도시",
+    "legalBasis": [
+      {
+        "law": "혁신도시 조성 및 발전에 관한 특별법",
+        "articles": "제4조·제29조·제29조의2·제44조·제47조",
+        "kind": "법률"
+      }
+    ],
+    "authorities": [
+      {
+        "name": "이전공공기관의 장",
+        "role": "이전계획 수립·이행"
+      },
+      {
+        "name": "소관 중앙행정기관의 장",
+        "role": "검토·조정"
+      },
+      {
+        "name": "국토교통부장관",
+        "role": "승인·이전방식 결정"
+      },
+      {
+        "name": "지방시대위원회",
+        "role": "심의"
+      }
+    ],
+    "procedure": [
+      "지방이전계획 수립",
+      "소관 행정기관에 계획 제출",
+      "검토·조정 후 국토교통부 제출",
+      "지방시대위원회 심의",
+      "국토교통부장관 승인",
+      "혁신도시 이전 원칙 적용",
+      "개별이전 인정(예외)",
+      "개별이전 부지 수용·사용",
+      "지방이전 실행",
+      "종전부동산 매입지원",
+      "이주직원 지원",
+      "지역인재 우선 채용"
+    ],
+    "moneyFlow": "이전비용은 기관이 계획에 조달 방안을 담아 부담하고, 종전부동산 매각·매입지원으로 정산된다.",
+    "docsFlow": "지방이전계획(안) → 지방이전계획 제출 → 검토·조정된 지방이전계획 → 지방시대위원회 심의 결과 → 지방이전계획 승인 → 이전 대상 혁신도시 확인 → 개별이전 인정 → 토지 수용·사용 절차 기록 → 이전 완료 보고 → 종전부동산 처리 계획 → 이주직원 지원 내역 → 지역인재 채용 실적",
+    "bottlenecks": [
+      "2차 이전 대상기관 선정 기준의 미확정",
+      "혁신도시 원칙과 개별이전 예외의 경계"
+    ],
+    "reformPoints": [
+      "이전계획 심의·승인 사유의 공개",
+      "종전부동산 처리 진행상황의 공개"
+    ]
+  },
+  "related": [],
+  "fieldVerification": [
+    "2차 이전 대상기관 전수조사 결과('25.下 착수)와 '26년 이전계획 확정 여부",
+    "개별이전 인정 사례의 기준"
+  ],
+  "process": {
+    "institution_name": "공공기관 지방이전·혁신도시 이전",
+    "law_name": "혁신도시 조성 및 발전에 관한 특별법",
+    "lanes": [
+      "이전공공기관",
+      "소관 중앙행정기관",
+      "국토교통부",
+      "지방시대위원회",
+      "시·도·혁신도시"
+    ],
+    "stages": [
+      "G0 계획 수립",
+      "G1 검토·승인",
+      "G2 이전 방식 결정",
+      "G3 이전 실행",
+      "G4 정착·지원"
+    ],
+    "nodes": [
+      {
+        "id": "P01",
+        "name": "지방이전계획 수립",
+        "lane": "이전공공기관",
+        "stage": "G0 계획 수립",
+        "type": "task",
+        "status": "current",
+        "progress": 0,
+        "actor": "이전공공기관의 장",
+        "action": "이전의 규모·범위, 이전시기, 이전비용 조달 방안을 포함한 지방이전계획을 수립한다.",
+        "output_documents": [
+          "지방이전계획(안)"
+        ],
+        "deadline": null,
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "혁신도시 조성 및 발전에 관한 특별법",
+            "article": "제4조제1항",
+            "text": "혁신도시 조성 및 발전에 관한 특별법 제4조제1항에 따라 규모·시기·비용을 포함한 지방이전계획을 수립한다"
+          }
+        ]
+      },
+      {
+        "id": "P02",
+        "name": "소관 행정기관에 계획 제출",
+        "lane": "이전공공기관",
+        "stage": "G0 계획 수립",
+        "type": "task",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "이전공공기관의 장",
+        "action": "수립한 지방이전계획을 소관 행정기관의 장에게 제출한다. 변경하는 경우에도 같다.",
+        "output_documents": [
+          "지방이전계획 제출"
+        ],
+        "deadline": null,
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "혁신도시 조성 및 발전에 관한 특별법",
+            "article": "제4조제3항",
+            "text": "혁신도시 조성 및 발전에 관한 특별법 제4조제3항에 따라 지방이전계획을 소관 행정기관의 장에게 제출한다"
+          }
+        ]
+      },
+      {
+        "id": "P03",
+        "name": "검토·조정 후 국토교통부 제출",
+        "lane": "소관 중앙행정기관",
+        "stage": "G1 검토·승인",
+        "type": "task",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "소관 행정기관의 장",
+        "action": "제출된 지방이전계획을 검토·조정하여 국토교통부장관에게 제출한다.",
+        "output_documents": [
+          "검토·조정된 지방이전계획"
+        ],
+        "deadline": null,
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "혁신도시 조성 및 발전에 관한 특별법",
+            "article": "제4조제4항",
+            "text": "혁신도시 조성 및 발전에 관한 특별법 제4조제4항에 따라 지방이전계획을 검토·조정해 국토교통부장관에게 제출한다"
+          }
+        ]
+      },
+      {
+        "id": "P04",
+        "name": "지방시대위원회 심의",
+        "lane": "지방시대위원회",
+        "stage": "G1 검토·승인",
+        "type": "gateway",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "지방시대위원회",
+        "action": "지방이전계획을 심의한다(경미한 변경은 심의 생략).",
+        "output_documents": [
+          "지방시대위원회 심의 결과"
+        ],
+        "deadline": null,
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "혁신도시 조성 및 발전에 관한 특별법",
+            "article": "제4조제4항",
+            "text": "혁신도시 조성 및 발전에 관한 특별법 제4조제4항에 따라 지방시대위원회의 심의를 거친다"
+          }
+        ]
+      },
+      {
+        "id": "P05",
+        "name": "국토교통부장관 승인",
+        "lane": "국토교통부",
+        "stage": "G1 검토·승인",
+        "type": "gateway",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "국토교통부장관",
+        "action": "지방시대위원회 심의를 거친 지방이전계획을 승인한다.",
+        "output_documents": [
+          "지방이전계획 승인"
+        ],
+        "deadline": null,
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "혁신도시 조성 및 발전에 관한 특별법",
+            "article": "제4조제4항",
+            "text": "혁신도시 조성 및 발전에 관한 특별법 제4조제4항에 따라 지방이전계획을 승인한다"
+          }
+        ]
+      },
+      {
+        "id": "P06",
+        "name": "혁신도시 이전 원칙 적용",
+        "lane": "국토교통부",
+        "stage": "G2 이전 방식 결정",
+        "type": "gateway",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "국토교통부장관",
+        "action": "이전공공기관은 혁신도시로 이전하는 것을 원칙으로 한다.",
+        "output_documents": [
+          "이전 대상 혁신도시 확인"
+        ],
+        "deadline": null,
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "혁신도시 조성 및 발전에 관한 특별법",
+            "article": "제29조제1항",
+            "text": "혁신도시 조성 및 발전에 관한 특별법 제29조제1항에 따라 혁신도시 이전 원칙을 적용한다"
+          }
+        ]
+      },
+      {
+        "id": "P07",
+        "name": "개별이전 인정(예외)",
+        "lane": "지방시대위원회",
+        "stage": "G2 이전 방식 결정",
+        "type": "gateway",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "국토교통부장관·지방시대위원회",
+        "action": "지역 특성과 기관 특수성이 인정되면 시·도지사 의견을 듣고 지방시대위원회 심의를 거쳐 혁신도시 외 개별이전을 인정한다.",
+        "output_documents": [
+          "개별이전 인정"
+        ],
+        "deadline": null,
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "혁신도시 조성 및 발전에 관한 특별법",
+            "article": "제29조제1항",
+            "text": "혁신도시 조성 및 발전에 관한 특별법 제29조제1항에 따라 시·도지사 의견과 지방시대위원회 심의를 거쳐 개별이전을 인정한다"
+          }
+        ]
+      },
+      {
+        "id": "P08",
+        "name": "개별이전 부지 수용·사용",
+        "lane": "이전공공기관",
+        "stage": "G3 이전 실행",
+        "type": "task",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "개별이전 공공기관의 장",
+        "action": "업무시설 신축에 필요한 토지 등을 수용·사용하며, 토지보상법을 준용한다.",
+        "output_documents": [
+          "토지 수용·사용 절차 기록"
+        ],
+        "deadline": null,
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "혁신도시 조성 및 발전에 관한 특별법",
+            "article": "제29조제2항·제3항",
+            "text": "혁신도시 조성 및 발전에 관한 특별법 제29조제2항·제3항에 따라 토지 등을 수용·사용하고 토지보상법을 준용한다"
+          }
+        ]
+      },
+      {
+        "id": "P09",
+        "name": "지방이전 실행",
+        "lane": "이전공공기관",
+        "stage": "G3 이전 실행",
+        "type": "task",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "이전공공기관",
+        "action": "승인된 계획에 따라 본사·주사무소와 그 기능 조직을 지방으로 이전한다.",
+        "output_documents": [
+          "이전 완료 보고"
+        ],
+        "deadline": null,
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "혁신도시 조성 및 발전에 관한 특별법",
+            "article": "제4조제2항",
+            "text": "혁신도시 조성 및 발전에 관한 특별법 제4조제2항에 따라 본사·주사무소와 기능 조직을 지방으로 이전한다"
+          }
+        ]
+      },
+      {
+        "id": "P10",
+        "name": "종전부동산 매입지원",
+        "lane": "국토교통부",
+        "stage": "G3 이전 실행",
+        "type": "task",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "국토교통부장관 등",
+        "action": "이전에 따른 종전부동산의 처리를 매입지원 등으로 뒷받침한다.",
+        "output_documents": [
+          "종전부동산 처리 계획"
+        ],
+        "deadline": null,
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "혁신도시 조성 및 발전에 관한 특별법",
+            "article": "제44조",
+            "text": "혁신도시 조성 및 발전에 관한 특별법 제44조에 따라 종전부동산 매입지원 등을 한다"
+          }
+        ]
+      },
+      {
+        "id": "P11",
+        "name": "이주직원 지원",
+        "lane": "시·도·혁신도시",
+        "stage": "G4 정착·지원",
+        "type": "task",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "이전공공기관·지방자치단체",
+        "action": "이주직원의 정착을 위한 주거·생활 지원을 한다.",
+        "output_documents": [
+          "이주직원 지원 내역"
+        ],
+        "deadline": null,
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "혁신도시 조성 및 발전에 관한 특별법",
+            "article": "제47조",
+            "text": "혁신도시 조성 및 발전에 관한 특별법 제47조에 따라 이주직원에 대한 지원을 한다"
+          }
+        ]
+      },
+      {
+        "id": "P12",
+        "name": "지역인재 우선 채용",
+        "lane": "시·도·혁신도시",
+        "stage": "G4 정착·지원",
+        "type": "task",
+        "status": "waiting",
+        "progress": 0,
+        "actor": "이전공공기관의 장",
+        "action": "이전지역 학교 졸업자 등 지역인재를 우선 채용한다.",
+        "output_documents": [
+          "지역인재 채용 실적"
+        ],
+        "deadline": null,
+        "confidence": 0.85,
+        "legal_basis": [
+          {
+            "law": "혁신도시 조성 및 발전에 관한 특별법",
+            "article": "제29조의2",
+            "text": "혁신도시 조성 및 발전에 관한 특별법 제29조의2에 따라 이전지역 지역인재를 우선 채용한다"
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "E01",
+        "source": "P01",
+        "target": "P02",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E02",
+        "source": "P02",
+        "target": "P03",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E03",
+        "source": "P03",
+        "target": "P04",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E04",
+        "source": "P04",
+        "target": "P05",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E05",
+        "source": "P05",
+        "target": "P06",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E06",
+        "source": "P06",
+        "target": "P07",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E07",
+        "source": "P07",
+        "target": "P08",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E08",
+        "source": "P08",
+        "target": "P09",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E09",
+        "source": "P09",
+        "target": "P10",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E10",
+        "source": "P10",
+        "target": "P11",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E11",
+        "source": "P11",
+        "target": "P12",
+        "type": "sequence",
+        "label": null
+      },
+      {
+        "id": "E12",
+        "source": "P05",
+        "target": "P01",
+        "type": "loop",
+        "label": "계획 변경 시 재제출 §4③"
+      },
+      {
+        "id": "E13",
+        "source": "P06",
+        "target": "P09",
+        "type": "sequence",
+        "label": "혁신도시 이전(원칙)"
+      }
+    ],
+    "warnings": [
+      "개별 사건의 요건·기한은 시행령과 사실관계에 따라 달라질 수 있다.",
+      "2차 공공기관 이전은 '26년 이전계획 확정·'27년 선도이전 일정이 발표된 단계로, 대상기관은 미확정이다."
+    ]
+  },
+  "verification": {
+    "status": "article-verified",
+    "verifiedAt": "2026-08-20",
+    "method": "국가법령정보센터 DRF Open API(lawService.do) 조문 원문 대조",
+    "scope": "법적 근거 1건 전부 공식 원문(MST 고정판)과 연결했다. 절차 노드의 명시 조문 13건은 본 세션에서 DRF 원문으로 항 단위까지 확인했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+    "sources": [
+      {
+        "law": "혁신도시 조성 및 발전에 관한 특별법",
+        "kind": "법률",
+        "sourceType": "statute",
+        "officialName": "혁신도시 조성 및 발전에 관한 특별법",
+        "lawId": "010372",
+        "mst": "286619",
+        "promulgatedOn": "2026-06-02",
+        "effectiveOn": "2026-06-02",
+        "officialUrl": "https://law.go.kr/법령/혁신도시조성및발전에관한특별법",
+        "pinnedVersion": true
+      }
+    ],
+    "articleVerification": {
+      "checkedAt": "2026-08-20",
+      "method": "국가법령정보센터 DRF Open API 조문 원문 전건 대조(본 세션, 항 단위)",
+      "citationEntries": 12,
+      "explicitCitationEntries": 12,
+      "articleReferences": 13,
+      "verifiedReferences": 13,
+      "missingReferences": 0,
+      "uncheckableReferences": 0
+    }
+  }
+}
