@@ -60,8 +60,17 @@ interface ProcItem {
   outputs: string;
   legalBasis: number;
   legalBasisList: { law: string; article: string }[];
+  deadline: string | null;
   title: string;
 }
+
+// 기한 문자열의 지도용 압축 표기 — 도과 시 의제(간주) 기한이 있으면 그것이 헤드라인
+const deadlineShortOf = (deadline: string): string | null => {
+  const deemed = deadline.match(/(\d+\s*일)\s*의제/);
+  if (deemed) return `${deemed[1]} 의제`;
+  const first = deadline.match(/\d+\s*(?:일|개월)/);
+  return first ? first[0] : null;
+};
 
 // law.go.kr 한글주소 — 법령명(+조번호)으로 원문 딥링크
 const lawUrlOf = (law: string, article: string) => {
@@ -403,6 +412,7 @@ export default function MegaProjectFlow({
                 outputs: proc.outputDocuments.join(" · "),
                 legalBasis: proc.legalBasisCount,
                 legalBasisList: proc.legalBasis ?? [],
+                deadline: proc.deadline ?? null,
                 title: [
                   `${node.id} ${node.name}`,
                   `${group.templateName}`,
@@ -1545,6 +1555,12 @@ export default function MegaProjectFlow({
               <dt>산출물</dt>
               <dd>{hoverDetail.proc.outputs || "미기재"}</dd>
             </div>
+            {hoverDetail.proc.deadline && (
+              <div>
+                <dt>법정 기한</dt>
+                <dd className={styles.deadlineDd}>{hoverDetail.proc.deadline}</dd>
+              </div>
+            )}
             <div>
               <dt>법적 근거</dt>
               <dd>
@@ -2023,6 +2039,14 @@ export default function MegaProjectFlow({
                               >
                                 <b>{proc.procId}</b>
                                 <i>{proc.procName}</i>
+                                {proc.deadline && deadlineShortOf(proc.deadline) && (
+                                  <u
+                                    className={styles.deadlineTag}
+                                    title={`법정 기한: ${proc.deadline}`}
+                                  >
+                                    ⏱ {deadlineShortOf(proc.deadline)}
+                                  </u>
+                                )}
                                 {subColumns[subColumn]?.isOther && (
                                   <small>{proc.procActor}</small>
                                 )}
