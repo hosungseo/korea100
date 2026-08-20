@@ -84,6 +84,7 @@ export function getMegaProjectBundle(id: string): MegaProjectBundle | null {
             law: basis.law,
             article: basis.article,
           })),
+          deadline: node.deadline ?? null,
           confidence: node.confidence,
         })),
         edges: (process?.edges ?? []).map((edge) => ({

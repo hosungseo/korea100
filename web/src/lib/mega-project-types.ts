@@ -124,6 +124,7 @@ export interface MegaDetailNode {
   outputDocuments: string[];
   legalBasisCount: number;
   legalBasis?: { law: string; article: string }[];
+  deadline?: string | null;
   confidence?: number;
 }
 
