@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 93호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>휴대전화 신고 절반은 <b>기지국 위치만 뜬다</b></h1>
-  <p class="sub">119 신고의 위치 특정을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 신고와 출동은 소방기본법이 정하지만, 사투리 섞인 음성을 알아듣고 지명과 건물명을 되물어 기지국 반경 안에서 지점을 좁혀가는 과정은 규정 밖 실무입니다.</p>
+  <p class="sub">119 신고의 위치 특정을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 신고접수와 위치정보 제공 요청·통보, 동원 요청, 출동은 소방기본법과 위치정보법이 정하지만, 사투리 섞인 음성을 알아듣고 지명과 건물명을 되물어 기지국 반경 안에서 지점을 좁혀가는 과정은 규정 밖 실무입니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>6</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>7</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 10 = 규정 3 + 추론 7 · 재확인 루프 1</span>
+    <span style="color:#65d7ad">전 단계 13 = 규정 6 + 추론 7 · 재확인 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -70,34 +70,43 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-statute" id="P01" data-gate="0" data-lane="0"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P01</b><em style="background:#1f8962">규정</em></div>
-      <p>119 신고</p><small>소방기본법 제19조(화재 등의 통지)</small></div><div class="card k-statute" id="P02" data-gate="0" data-lane="2"
+      <p>119 신고</p><small>소방기본법 제19조(화재 등의 통지) 제1항 — 화재 현장이나 구조·구급이 필요한 사고 현장을 발견한 사람은 지체 없이 통지</small></div><div class="card k-statute" id="P02" data-gate="0" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P02</b><em style="background:#1f8962">규정</em></div>
-      <p>발신 위치 자동 수신</p><small>위치정보의 보호 및 이용 등에 관한 법률 제29조(긴급구조를 위한 개인위치정보의 이용) — 휴대전화 신고 절반 이상은 기지국 위치만 표시(GPS 정확도 44%)</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="1"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P03</b><em style="background:#2456d6">추론</em></div>
-      <p>신고 음성 청취·수기 기록</p><small>통화 중 요약 입력 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
+      <p>발신 위치 자동 수신</p><small>위치정보의 보호 및 이용 등에 관한 법률 제29조(긴급구조를 위한 개인위치정보의 이용) 제1항 — 긴급구조기관의 개인위치정보 제공 요청, 제5항: 측위 방식별 수집 정보 요청 — 휴대전화 신고 절반 이상은 기지국 위치만 표시(GPS 정확도 44%)</small></div><div class="card k-statute" id="P03" data-gate="1" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P03</b><em style="background:#1f8962">규정</em></div>
+      <p>신고 접수·청취 기록</p><small>소방기본법 시행규칙 제3조(종합상황실의 실장의 업무 등) 제1항제1호 — 재난상황 발생의 신고접수·기록(청취와 요약 방법은 규정 없음)</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
-      <p>지역 억양·사투리 되묻기</p><small>알아듣기 어려운 표현 재확인 — 실무</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="1"
+      <p>지역 억양·사투리 되묻기</p><small>알아듣기 어려운 지역 억양과 사투리 표현을 신고자에게 다시 물어 확인</small></div><div class="card k-inferred" id="P11" data-gate="1" data-lane="1"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P11</b><em style="background:#2456d6">추론</em></div>
+      <p>통화 유지·주변 단서 확보</p><small>통화가 끊기지 않게 붙잡아 두고 주변 소리·지형 단서를 계속 캐물음</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P05</b><em style="background:#2456d6">추론</em></div>
-      <p>지명·교차로·건물명 구두 확인</p><small>신고자에게 반복 질문 — 실무</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
+      <p>지명·교차로·건물명 구두 확인</p><small>지명·교차로·건물명을 신고자에게 반복해 물어 위치를 좁힘</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
-      <p>지도에서 후보 지점 수기 검색</p><small>기지국 반경 내 육안 탐색 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="1"
+      <p>지도에서 후보 지점 수기 검색</p><small>기지국 반경 안의 지도를 눈으로 훑어 후보 지점을 찾아냄</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P07</b><em style="background:#2456d6">추론</em></div>
-      <p>위치 확정 판단</p><small>요원 경험 판단 — 실무</small></div><div class="card k-statute" id="P08" data-gate="3" data-lane="2"
+      <p>위치 확정 판단</p><small>어느 지점으로 보낼지를 수보요원 경험으로 최종 판단</small></div><div class="card k-statute" id="P13" data-gate="3" data-lane="2"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P13</b><em style="background:#1f8962">규정</em></div>
+      <p>인력·장비 동원 요청</p><small>소방기본법 시행규칙 제3조(종합상황실의 실장의 업무 등) 제1항제2호 — 접수된 재난상황을 검토해 가까운 소방서에 인력·장비 동원 요청</small></div><div class="card k-statute" id="P08" data-gate="3" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P08</b><em style="background:#1f8962">규정</em></div>
-      <p>출동 지령</p><small>소방기본법 제16조(소방활동)</small></div><div class="card k-inferred" id="P09" data-gate="3" data-lane="3"
+      <p>출동 지령</p><small>소방기본법 제16조(소방활동) 제1항 — 화재·재난·위급상황이 발생하면 소방대를 현장에 신속하게 출동시켜야</small></div><div class="card k-inferred" id="P09" data-gate="3" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P09</b><em style="background:#2456d6">추론</em></div>
-      <p>출동대에 위치 구두 전달</p><small>무전 전달 — 실무</small></div><div class="card k-inferred" id="P10" data-gate="4" data-lane="3"
+      <p>출동대에 위치 구두 전달</p><small>무전으로 위치를 불러 주며 출동대에 구두로 전달</small></div><div class="card k-inferred" id="P10" data-gate="4" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P10</b><em style="background:#2456d6">추론</em></div>
-      <p>현장 탐색·도착</p><small>위치 미확정 시 주변 탐색 — 실무</small></div></div>
+      <p>현장 탐색·도착</p><small>위치가 확정되지 않아 출동대가 주변을 돌며 현장을 찾아냄</small></div><div class="card k-statute" id="P12" data-gate="4" data-lane="2"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
+      <p>개인위치정보 이용 사실 통보</p><small>위치정보의 보호 및 이용 등에 관한 법률 제29조(긴급구조를 위한 개인위치정보의 이용) 제6항 — 개인위치정보를 요청·제공한 사실을 정보주체에게 즉시 통보</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -123,17 +132,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 소방기본법 제19조(화재 등의 통지), 소방기본법 제16조(소방활동), 위치정보의 보호 및 이용 등에 관한 법률 제29조(긴급구조를 위한 개인위치정보의 이용). 신고자의 발신 위치를 위치정보사업자로부터 받아 쓰는 것은 위치정보법 제29조가 긴급구조기관(소방본부)에 부여한 권한입니다. 다만 받은 기지국 위치 안에서 실제 지점을 어떻게 좁히는지는 규정에 절차가 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(FPN, 2021-08 도청 119종합상황실 전국 최초 구축 — 지역 억양·사투리 300시간 이상 학습, 인식률 80~85%에서 90% 목표) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 소방기본법 제19조(화재 등의 통지) 제1항, 소방기본법 시행규칙 제3조(종합상황실의 실장의 업무 등) 제1항제1호(신고접수)·제1항제2호(인력·장비 동원 요청), 소방기본법 제16조(소방활동) 제1항, 위치정보의 보호 및 이용 등에 관한 법률 제29조(긴급구조를 위한 개인위치정보의 이용) 제1항(긴급구조기관의 제공 요청)·제5항(측위 방식별 수집)·제6항(요청·제공 사실의 즉시 통보). 발신 위치를 위치정보사업자로부터 받아 쓰는 것은 위치정보법 제29조가 긴급구조기관에 부여한 권한입니다. 다만 받은 기지국 위치 안에서 실제 지점을 어떻게 좁히는지는 규정에 절차가 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(FPN, 2021-08 도청 119종합상황실 전국 최초 구축 — 지역 억양·사투리 300시간 이상 학습, 인식률 80~85%에서 90% 목표) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10"];
+const nodes = ["P01","P02","P03","P04","P11","P05","P06","P07","P13","P08","P09","P10","P12"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","P03"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","P07"],["P07","P05","loop","위치 불명 재확인"],["P07","P08"],["P08","P09"],["P09","P10"]];
+const edges = [["P01","P02"],["P02","P03"],["P03","P04"],["P04","P11"],["P11","P05"],["P05","P06"],["P06","P07"],["P07","P05","loop","위치 불명 재확인"],["P07","P13"],["P13","P08"],["P08","P09"],["P09","P10"],["P10","P12"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

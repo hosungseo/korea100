@@ -47,15 +47,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 110호 · AI 적용</span><small>기준일 2026-08-21</small></div>
   <h1>센서가 세고 AI가 예측한다 — <b>3~4일 분석이 상시 예측으로</b></h1>
-  <p class="sub">IoT 센서가 구간별 대기 인원과 대기 시간을 상시 수집하고, AI가 시간대·구간별 혼잡을 미리 계산합니다. 담당자는 데이터를 모으는 대신 예측 결과를 검증하고 출국장 개방·동선 조정을 결정합니다. 보안검색과 출국심사라는 법정 관문은 그대로 남습니다.</p>
+  <p class="sub">IoT 센서가 구간별 대기 인원과 대기 시간을 상시 수집하고, AI가 시간대·구간별 혼잡을 미리 계산합니다. 담당자는 데이터를 모으는 대신 예측 결과를 검증하고 출국장 개방·동선 조정을 결정합니다. 보안검색·출국심사·운송정보 제공이라는 법정 관문은 그대로 남습니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>1</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>3</b></span>
     <span><i style="background:#d99a5e"></i>대체 <b>3</b></span>
     
     <span><i style="background:#d9a821"></i>간소화 <b>6</b></span>
-    <span style="color:#65d7ad">대체 3 · 간소화 6 · 소멸 0 · 자동 3 — 사람 단계 12 → 9</span>
+    <span style="color:#65d7ad">대체 3 · 간소화 6 · 소멸 0 · 자동 3 — 사람 단계 13 → 10</span>
   </p>
 </header>
 <div class="legend">
@@ -71,49 +71,52 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>출국장 도착·대기열 형성</p><small>시간대 집중 — 실무</small></div><div class="card k-auto" id="A01" data-gate="0" data-lane="4"
+      <p>출국장 도착·대기열 형성</p><small>출발 시간대가 몰리면서 특정 출국장 앞에만 줄이 길어짐</small></div><div class="card k-statute" id="P13" data-gate="0" data-lane="3"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P13</b><em style="background:#1f8962">규정</em></div>
+      <p>항공사 운송정보 제공</p><small>항공보안법 제15조(승객 등의 검색 등) 제5항 — 항공운송사업자가 승객 성명·국적·여권번호 등 운송정보를 공항운영자에게 제공</small></div><div class="card k-auto" id="A01" data-gate="0" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A01</b><em style="background:#6b3fc4">AI 자동</em></div>
-      <p>IoT 센서 상시 수집</p><small>약 663대 — 출국장·보안검색·출입국 대기 인원·시간 자동 수집</small></div><div class="card k-statute" id="P02" data-gate="0" data-lane="2"
+      <p>IoT 센서 상시 수집</p><small>약 663대 — 출국장·보안검색·출입국 구간 대기 인원과 시간을 상시 계측</small></div><div class="card k-statute" id="P02" data-gate="0" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P02</b><em style="background:#1f8962">규정</em></div>
-      <p>보안검색</p><small>항공보안법 제15조(승객 등의 검색 등)</small></div><div class="card k-statute" id="P03" data-gate="0" data-lane="2"
+      <p>보안검색</p><small>항공보안법 제15조(승객 등의 검색 등) 제1항 — 탑승자는 보안검색을 받아야 하고, 제15조제2항 공항운영자가 실시</small></div><div class="card k-statute" id="P03" data-gate="0" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P03</b><em style="background:#1f8962">규정</em></div>
-      <p>출국심사</p><small>출입국관리법 제3조(국민의 출국)</small></div><div class="card k-replaced" id="P04" data-gate="0" data-lane="1"
+      <p>출국심사</p><small>출입국관리법 제3조(국민의 출국) 제1항 — 출입국항에서 출국심사, 제3조제2항 정보화기기 심사로 갈음 가능</small></div><div class="card k-replaced" id="P04" data-gate="0" data-lane="1"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P04</b><em style="background:#d99a5e">A01로 대체</em></div>
-      <p>시스템별 데이터 개별 조회</p><small>센서 통합 수집으로 대체</small></div><div class="card k-auto" id="A02" data-gate="1" data-lane="4"
+      <p>시스템별 데이터 개별 조회</p><small>센서 통합 수집으로 대체 — 시스템을 각각 열어 볼 필요가 사라짐</small></div><div class="card k-auto" id="A02" data-gate="1" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A02</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>AI 혼잡도 예측</p><small>최근 5년 약 5억 건 학습 — 대기 인원 예측 정확도 92%</small></div><div class="card k-replaced" id="P05" data-gate="1" data-lane="1"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P05</b><em style="background:#d99a5e">A02로 대체</em></div>
-      <p>데이터 수작업 취합·정리</p><small>자동 예측으로 대체</small></div><div class="card k-replaced" id="P06" data-gate="1" data-lane="1"
+      <p>데이터 수작업 취합·정리</p><small>자동 예측으로 대체 — 3~4일 걸리던 취합 구간이 사라짐</small></div><div class="card k-replaced" id="P06" data-gate="1" data-lane="1"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P06</b><em style="background:#d99a5e">A02로 대체</em></div>
-      <p>과거 성수기 실적과 대조</p><small>학습 데이터로 대체</small></div><div class="card k-changed" id="P07" data-gate="2" data-lane="1"
+      <p>과거 성수기 실적과 대조</p><small>학습 데이터로 대체 — 지난 실적 대조가 모델에 내장</small></div><div class="card k-changed" id="P07" data-gate="2" data-lane="1"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P07</b><em style="background:#b8890e">간소화</em></div>
-      <p>혼잡 예측 결과 검증·판단</p><small>산출이 아니라 판단만 수행</small></div><div class="card k-changed" id="P08" data-gate="2" data-lane="3"
+      <p>혼잡 예측 결과 검증·판단</p><small>숫자를 산출하는 대신 예측이 맞는지 검증하고 판단만 수행</small></div><div class="card k-changed" id="P08" data-gate="2" data-lane="3"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P08</b><em style="background:#b8890e">간소화</em></div>
-      <p>출국장 여객흐름 관리 협의체</p><small>2025.2 상설 협의체로 데이터 공유 정례화</small></div><div class="card k-changed" id="P09" data-gate="3" data-lane="2"
+      <p>출국장 여객흐름 관리 협의체</p><small>2025.2 상설 협의체로 데이터 공유가 정례화</small></div><div class="card k-changed" id="P09" data-gate="3" data-lane="2"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P09</b><em style="background:#b8890e">간소화</em></div>
-      <p>예측 기반 사전 인력 배치</p><small>혼잡 발생 이전으로 시점 이동</small></div><div class="card k-changed" id="P10" data-gate="3" data-lane="1"
+      <p>예측 기반 사전 인력 배치</p><small>혼잡이 벌어진 뒤가 아니라 그 이전으로 시점이 이동</small></div><div class="card k-changed" id="P10" data-gate="3" data-lane="1"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P10</b><em style="background:#b8890e">간소화</em></div>
-      <p>카운터·출국장 조기 오픈</p><small>예측 결과에 따른 탄력 운영</small></div><div class="card k-auto" id="A03" data-gate="4" data-lane="4"
+      <p>카운터·출국장 조기 오픈</p><small>예측 결과에 따라 미리 여는 탄력 운영으로 전환</small></div><div class="card k-auto" id="A03" data-gate="4" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A03</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>대기시간 실시간 표출·개방</p><small>전광판·공항 앱과 네이버·카카오T 등 민간 플랫폼 연계 887만 건 활용</small></div><div class="card k-changed" id="P11" data-gate="4" data-lane="0"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P11</b><em style="background:#b8890e">간소화</em></div>
-      <p>출발 전 대기시간 확인</p><small>현장 도착 전에 사전 확인 가능</small></div><div class="card k-changed" id="P12" data-gate="4" data-lane="1"
+      <p>출발 전 대기시간 확인</p><small>공항에 닿기 전에 대기시간을 보고 출발 시각을 조정</small></div><div class="card k-changed" id="P12" data-gate="4" data-lane="1"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P12</b><em style="background:#b8890e">간소화</em></div>
-      <p>성수기 디브리핑</p><small>예측 오류 사례를 학습에 환류</small></div></div>
+      <p>성수기 디브리핑</p><small>예측이 빗나간 사례를 추려 학습에 환류</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -139,17 +142,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 보안검색은 항공보안법 제15조(승객 등의 검색 등), 출국심사는 출입국관리법 제3조(국민의 출국)에 따릅니다. 그러나 여객 흐름을 분석해 인력·시설을 어떻게 배치할지는 법령이 정하지 않으며, 여러 시스템 데이터를 수작업으로 취합해 3~4일 만에 결론을 내던 절차는 전적으로 운영 실무입니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실(IoT 센서 약 663대, 최근 5년 약 5억 건 학습, 대기 인원 예측 정확도 92%, 민간 플랫폼 연계 887만 건 활용, 2025.7 제1여객터미널 운영 개시)은 행안부·NIA 「AI 정부 서비스 사례집」(2026.3)과 2025 공공 AI 대전환 챌린지 왕중왕전 보도 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 항공보안법 제15조제1항(항공기에 탑승하는 사람은 신체·휴대물품·위탁수하물에 대한 보안검색을 받아야 함), 제15조제2항(공항운영자가 보안검색을 실시), 제15조제5항(항공운송사업자는 승객의 성명·국적·여권번호 등 국토교통부령으로 정하는 운송정보를 공항운영자에게 제공), 출입국관리법 제3조제1항(유효한 여권을 가지고 출입국항에서 출국심사), 제3조제2항(정보화기기에 의한 출국심사로 갈음 가능). 관문 자체와 그 관문에 들어오는 승객 정보의 흐름은 조문이 정합니다. 그러나 그 정보를 모아 혼잡을 예측하고 인력·시설을 어떻게 배치할지는 법령이 정하지 않으며, 여러 시스템 데이터를 수작업으로 취합해 3~4일 만에 결론을 내던 절차는 전적으로 운영 실무입니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실(IoT 센서 약 663대, 최근 5년 약 5억 건 학습, 대기 인원 예측 정확도 92%, 민간 플랫폼 연계 887만 건 활용, 2025.7 제1여객터미널 운영 개시)은 행안부·NIA 「AI 정부 서비스 사례집」(2026.3)과 2025 공공 AI 대전환 챌린지 왕중왕전 보도 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","A01","P02","P03","P04","A02","P05","P06","P07","P08","P09","P10","A03","P11","P12"];
+const nodes = ["P01","P13","A01","P02","P03","P04","A02","P05","P06","P07","P08","P09","P10","A03","P11","P12"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","P03"],["P01","A01","auto"],["A01","A02","auto"],["A02","P07"],["P07","P08"],["P08","P10"],["P10","P09"],["A02","A03","auto"],["A03","P11"],["P11","P12"],["P12","A02","loop","디브리핑·예측 오류 재학습"],["P04","A01","replace"],["P05","A02","replace"],["P06","A02","replace"]];
+const edges = [["P01","P02"],["P02","P03"],["P01","A01","auto"],["P13","A02","auto"],["A01","A02","auto"],["A02","P07"],["P07","P08"],["P08","P10"],["P10","P09"],["A02","A03","auto"],["A03","P11"],["P11","P12"],["P12","A02","loop","디브리핑·예측 오류 재학습"],["P04","A01","replace"],["P05","A02","replace"],["P06","A02","replace"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

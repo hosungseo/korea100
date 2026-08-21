@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 115호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>안전모 미착용을 <b>사람 눈</b>이 잡아내야 한다</h1>
-  <p class="sub">건설현장 안전감시를 규정(초록)과 실무 관행(파랑)으로 나눠 그렸습니다. 안전관리계획 수립은 건설기술 진흥법이, 위험 시 작업중지와 근로자의 조치 준수는 산업안전보건법이 정하지만, 순찰 동선을 짜고 여러 CCTV 화면을 동시에 지켜보며 위험행동을 가려내는 일은 규정 밖 실무입니다.</p>
+  <p class="sub">건설현장 안전감시를 규정(초록)과 실무 관행(파랑)으로 나눠 그렸습니다. 안전관리계획을 세우고 그 계획에 따라 안전점검을 실시하는 일은 건설기술 진흥법이, 근로자의 조치 준수와 급박한 위험 시 작업중지는 산업안전보건법이 정합니다. 그러나 순찰 동선을 짜고 여러 CCTV 화면을 동시에 지켜보며 위험행동을 가려내는 일은 규정 밖 실무입니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>4</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>9</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 12 = 규정 3 + 추론 9 · 재점검 루프 1</span>
+    <span style="color:#65d7ad">전 단계 13 = 규정 4 + 추론 9 · 재점검 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -70,40 +70,43 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-statute" id="P01" data-gate="0" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P01</b><em style="background:#1f8962">규정</em></div>
-      <p>건설공사 안전관리계획 수립</p><small>건설기술 진흥법 제62조(건설공사의 안전관리)</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="1"
+      <p>건설공사 안전관리계획 수립</p><small>건설기술 진흥법 제62조(건설공사의 안전관리) 제1항 — 안전관리계획을 수립해 착공 전 발주자에게 제출·승인</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>일일 점검계획·순찰 동선 편성</p><small>실무</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="1"
+      <p>일일 점검계획·순찰 동선 편성</p><small>그날 공정에 맞춰 어느 구역을 언제 돌지 담당자가 정함</small></div><div class="card k-statute" id="P13" data-gate="1" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P13</b><em style="background:#1f8962">규정</em></div>
+      <p>안전관리계획에 따른 안전점검</p><small>건설기술 진흥법 제62조(건설공사의 안전관리) 제4항 — 계획에 따른 안전점검 실시, 제62조제5항 결과 제출</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P03</b><em style="background:#2456d6">추론</em></div>
-      <p>현장 도보 순찰</p><small>관리자 1인이 넓은 현장 순회 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
+      <p>현장 도보 순찰</p><small>관리자 한 명이 넓은 현장을 걸어 돌며 눈으로 확인</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
-      <p>CCTV 화면 육안 확인</p><small>다수 화면 동시 관찰 — 실무</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="1"
+      <p>CCTV 화면 육안 확인</p><small>여러 화면을 한꺼번에 지켜봐야 해 놓치는 구간이 생김</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P05</b><em style="background:#2456d6">추론</em></div>
-      <p>안전모 미착용 등 위험행동 식별</p><small>육안 판별 — 실무</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
+      <p>안전모 미착용 등 위험행동 식별</p><small>화면 속 작업자의 보호구 착용 여부를 눈으로 가려냄</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
-      <p>추락·협착 위험 구역 확인</p><small>육안 판별 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="1"
+      <p>추락·협착 위험 구역 확인</p><small>개구부와 중장비 주변에 사람이 들어갔는지 살핌</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P07</b><em style="background:#2456d6">추론</em></div>
-      <p>위험 여부·수준 판단</p><small>경험 기반 판단 — 실무</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="1"
+      <p>위험 여부·수준 판단</p><small>지금 멈춰야 할 위험인지 관리자 경험으로 판단</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P08</b><em style="background:#2456d6">추론</em></div>
-      <p>현장 방송·직접 제지</p><small>관리자가 현장까지 이동 — 실무</small></div><div class="card k-statute" id="P09" data-gate="3" data-lane="0"
+      <p>현장 방송·직접 제지</p><small>방송으로 부르거나 관리자가 현장까지 직접 뛰어감</small></div><div class="card k-statute" id="P09" data-gate="3" data-lane="0"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P09</b><em style="background:#1f8962">규정</em></div>
-      <p>작업자 시정</p><small>산업안전보건법 제40조(근로자의 안전조치 및 보건조치 준수)</small></div><div class="card k-statute" id="P10" data-gate="3" data-lane="2"
+      <p>작업자 시정</p><small>산업안전보건법 제40조(근로자의 안전조치 및 보건조치 준수) — 사업주가 한 조치 중 고용노동부령으로 정하는 사항 준수</small></div><div class="card k-statute" id="P10" data-gate="3" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P10</b><em style="background:#1f8962">규정</em></div>
-      <p>미시정 시 작업중지·보고</p><small>산업안전보건법 제51조(사업주의 작업중지)</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="3"
+      <p>미시정 시 작업중지·보고</p><small>산업안전보건법 제51조(사업주의 작업중지) — 급박한 위험이 있을 때 즉시 작업 중지·근로자 대피</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P11</b><em style="background:#2456d6">추론</em></div>
-      <p>지적사항 수기 기록</p><small>점검일지 기재 — 실무</small></div><div class="card k-inferred" id="P12" data-gate="4" data-lane="2"
+      <p>지적사항 수기 기록</p><small>점검일지에 구역·시각·지적 내용을 손으로 적어 남김</small></div><div class="card k-inferred" id="P12" data-gate="4" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P12</b><em style="background:#2456d6">추론</em></div>
-      <p>재발 구역 재점검</p><small>반복 확인 루프 — 실무</small></div></div>
+      <p>재발 구역 재점검</p><small>같은 곳에서 반복되면 그 구역만 다시 돌아 확인</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -129,17 +132,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 건설기술 진흥법 제62조(건설공사의 안전관리) — 안전관리계획 수립 부분, 산업안전보건법 제40조(근로자의 안전조치 및 보건조치 준수), 제51조(사업주의 작업중지). 근로자가 사업주의 안전조치를 지켜야 한다는 것과 급박한 위험이 있을 때 즉시 작업을 중지시켜야 한다는 것은 법이 정하지만, 일일 순찰 동선·CCTV 감시 방법·지적사항 기록은 법령이 아니라 기관 사규·내규(현장 안전관리 지침)에 따르므로 파랑으로 두었습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(311개 현장 CCTV에 AI 분석 접목, 위험요소 실시간 감지·IoT 즉시 경보, 사고 263건(2024)→160건(2025)) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 건설기술 진흥법 제62조제1항(대통령령으로 정하는 건설공사는 안전관리계획을 수립해 착공 전 발주자에게 제출·승인), 제62조제4항(안전관리계획에 따른 안전점검 실시), 제62조제5항(안전점검 결과를 국토교통부장관에게 제출), 산업안전보건법 제40조(근로자는 사업주가 한 조치 중 고용노동부령으로 정하는 사항을 지켜야 함 — 항 구분이 없는 단일 조문), 제51조(산업재해가 발생할 급박한 위험이 있을 때 즉시 작업 중지·근로자 대피 — 항 구분이 없는 단일 조문). 계획을 세우고 그 계획대로 점검해 결과를 내는 뼈대, 근로자의 조치 준수와 급박한 위험 시 작업중지는 법이 정합니다. 다만 일일 순찰 동선·CCTV 감시 방법·지적사항 기록은 법령이 아니라 기관 사규·내규(현장 안전관리 지침)에 따르므로 파랑으로 두었습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(311개 현장 CCTV에 AI 분석 접목, 위험요소 실시간 감지·IoT 즉시 경보, 사고 263건(2024)→160건(2025)) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11","P12"];
+const nodes = ["P01","P02","P13","P03","P04","P05","P06","P07","P08","P09","P10","P11","P12"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","P03"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","P07"],["P07","P08"],["P08","P09"],["P09","P10"],["P10","P11"],["P11","P12"],["P12","P03","loop","재발 구역 재점검"]];
+const edges = [["P01","P02"],["P02","P13"],["P13","P03"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","P07"],["P07","P08"],["P08","P09"],["P09","P10"],["P10","P11"],["P11","P12"],["P12","P03","loop","재발 구역 재점검"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

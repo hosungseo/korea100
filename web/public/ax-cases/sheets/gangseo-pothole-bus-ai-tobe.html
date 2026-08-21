@@ -49,8 +49,8 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <h1>마을버스 <b>7개 노선</b>이 매일 도로를 훑는다</h1>
   <p class="sub">마을버스에 실린 AI 카메라가 주행 중 자동으로 촬영·탐지해 실시간 전송하고, 딥러닝이 오인식을 걸러냅니다. 발생 후 최대 1시간 내 탐지, 12시간 내 긴급보수로 이어지며 민원 접수·보수 시행·결과 통지의 법정 절차는 그대로 남습니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>1</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>4</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>0</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>2</b></span>
     <span><i style="background:#d99a5e"></i>대체 <b>4</b></span>
     
@@ -71,10 +71,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-changed" id="P01" data-gate="0" data-lane="0"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P01</b><em style="background:#b8890e">간소화</em></div>
-      <p>시민이 포트홀 발견·신고</p><small>상시 자동 탐지로 신고 의존도 감소</small></div><div class="card k-statute" id="P02" data-gate="0" data-lane="1"
+      <p>시민이 포트홀 발견·신고</p><small>상시 자동 탐지로 시민 신고에 기대는 정도가 줄어듦</small></div><div class="card k-statute" id="P02" data-gate="0" data-lane="1"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P02</b><em style="background:#1f8962">규정</em></div>
-      <p>민원 접수</p><small>민원 처리에 관한 법률 제9조(민원의 접수)</small></div><div class="card k-auto" id="A01" data-gate="0" data-lane="4"
+      <p>민원 접수</p><small>민원 처리에 관한 법률 제9조(민원의 접수) 제1항 접수 보류·거부 금지·제2항 접수증 교부</small></div><div class="card k-auto" id="A01" data-gate="0" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A01</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>마을버스 주행 중 자동 촬영·탐지</p><small>7개 노선 주행 영상 실시간 전송</small></div><div class="card k-replaced" id="P03" data-gate="0" data-lane="2"
@@ -101,13 +101,13 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>위치 재확인</p><small>탐지 좌표 자동 기록으로 축소</small></div><div class="card k-statute" id="P09" data-gate="3" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P09</b><em style="background:#1f8962">규정</em></div>
-      <p>도로 유지·보수 시행</p><small>도로법 제31조(도로공사와 도로의 유지·관리 등)</small></div><div class="card k-inferred" id="P10" data-gate="4" data-lane="3"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P10</b><em style="background:#2456d6">추론</em></div>
-      <p>보수 이력 대장 입력</p><small>실무</small></div><div class="card k-statute" id="P11" data-gate="4" data-lane="1"
+      <p>도로 유지·보수 시행</p><small>도로법 제31조(도로공사와 도로의 유지ㆍ관리 등) 제1항 — 해당 도로의 도로관리청이 도로공사와 유지·관리를 수행</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="3"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P10</b><em style="background:#1f8962">규정</em></div>
+      <p>보수 이력 대장 입력</p><small>도로법 제56조(도로대장) 제1항 작성·보관·제4항 변경 시 수정·제출, 제56조의2제3항제1호 통합관리체계 활용</small></div><div class="card k-statute" id="P11" data-gate="4" data-lane="1"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P11</b><em style="background:#1f8962">규정</em></div>
-      <p>처리결과 통지</p><small>민원 처리에 관한 법률 제27조(처리결과의 통지)</small></div></div>
+      <p>처리결과 통지</p><small>민원 처리에 관한 법률 제27조(처리결과의 통지) 제1항 문서 통지·제2항제2호 전자민원창구 신청 시 전자문서 통지</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -133,7 +133,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거 법령: 민원 처리에 관한 법률 제9조(민원의 접수)·제27조(처리결과의 통지), 도로법 제31조(도로공사와 도로의 유지·관리 등). 순찰 주기와 포트홀 선별 기준은 내부 지침 영역이어서 조문으로 특정하지 않았습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(강서구 마을버스 7개 노선 AI 영상탐지 카메라 탑재, 연간 약 1,229건 보수, 발생 후 최대 1시간 내 탐지·12시간 내 긴급보수, 2025년 8월 본격 운영, 서울 자치구 최초) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 민원 처리에 관한 법률 제9조(민원의 접수) 제1항·제2항·제27조(처리결과의 통지) 제1항·제2항제2호, 도로법 제31조(도로공사와 도로의 유지·관리 등) 제1항(도로관리청이 유지·관리 수행)·제56조(도로대장) 제1항·제4항 및 제56조의2(도로대장 통합관리체계) 제3항제1호. 접수·보수·대장 기록·통지는 이렇게 정해져 있지만, 순찰 주기와 포트홀 선별 기준은 내부 지침 영역이어서 조문으로 특정하지 않았습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(강서구 마을버스 7개 노선 AI 영상탐지 카메라 탑재, 연간 약 1,229건 보수, 발생 후 최대 1시간 내 탐지·12시간 내 긴급보수, 2025년 8월 본격 운영, 서울 자치구 최초) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>

@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 90호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>영상의학 전문의가 없는 부대에서 <b>판독은 며칠씩 밀린다</b></h1>
-  <p class="sub">군 의료영상 판독을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 진료기록 작성과 진단서 발급은 의료법이 정하지만, 전문의가 부족한 부대에서 군의관이 육안으로 영상을 훑고 판독 곤란 건을 골라 상급 병원에 넘기는 과정은 규정 밖 실무입니다.</p>
+  <p class="sub">군 의료영상 판독을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 진료기록 작성·보존과 진단서 발급은 의료법이 조문으로 정하지만, 전문의가 부족한 부대에서 군의관이 육안으로 영상을 훑고 판독 곤란 건을 골라 상급 병원에 넘기는 과정은 규정 밖 실무입니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>7</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>4</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>9</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 10 = 규정 3 + 추론 7 · 재촬영 루프 1</span>
+    <span style="color:#65d7ad">전 단계 13 = 규정 4 + 추론 9 · 재촬영 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -70,34 +70,43 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>장병 진료 신청·내원</p><small>부대 의무대 접수 — 실무</small></div><div class="card k-statute" id="P02" data-gate="0" data-lane="1"
+      <p>장병 진료 신청·내원</p><small>부대 의무대에 진료를 신청하고 군의관 진료일에 맞춰 대기</small></div><div class="card k-statute" id="P02" data-gate="0" data-lane="1"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P02</b><em style="background:#1f8962">규정</em></div>
-      <p>진찰·진료기록 작성</p><small>의료법 제22조(진료기록부 등)</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="2"
+      <p>진찰·진료기록 작성</p><small>의료법 제22조(진료기록부 등) 제1항 — 주된 증상·진단 및 치료 내용을 상세히 기록하고 서명</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P03</b><em style="background:#2456d6">추론</em></div>
-      <p>흉부 X선 촬영</p><small>의무부대 촬영 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="2" data-lane="1"
+      <p>흉부 X선 촬영</p><small>의무부대 촬영실에서 자세와 조사 조건을 잡아 흉부 X선을 찍음</small></div><div class="card k-inferred" id="P11" data-gate="1" data-lane="2"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P11</b><em style="background:#2456d6">추론</em></div>
+      <p>촬영 영상 저장·판독용 등록</p><small>찍은 영상을 판독 화면에 올려 두는 작업 — 부대마다 저장·전송 방식이 다름</small></div><div class="card k-inferred" id="P04" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
-      <p>군의관 육안 판독</p><small>영상의학 전문의 부족 부대 — 실무</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="1"
+      <p>군의관 육안 판독</p><small>영상의학 전문의가 없는 부대에서 군의관이 화면을 직접 훑어 읽음</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P05</b><em style="background:#2456d6">추론</em></div>
-      <p>정상·이상 1차 분류</p><small>판독 경험에 의존 — 실무</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
+      <p>정상·이상 1차 분류</p><small>이상 소견이 있는지를 군의관 개인의 판독 경험에 기대어 가름</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
-      <p>판독 곤란 영상 선별</p><small>재확인 필요 건 추림 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="3" data-lane="3"
+      <p>판독 곤란 영상 선별</p><small>확신이 서지 않는 영상을 따로 추려 재확인 대상으로 표시</small></div><div class="card k-inferred" id="P12" data-gate="3" data-lane="2"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P12</b><em style="background:#2456d6">추론</em></div>
+      <p>의뢰 자료 정리·전송</p><small>영상과 진료 경과를 한 건씩 묶어 상급 병원 판독용으로 보냄</small></div><div class="card k-inferred" id="P07" data-gate="3" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P07</b><em style="background:#2456d6">추론</em></div>
-      <p>상급 군병원·외부 판독 의뢰</p><small>전문의 부족으로 의뢰 — 실무</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="3"
+      <p>상급 군병원·외부 판독 의뢰</p><small>전문의가 있는 상급 군병원·외부기관에 판독을 맡김 — 부대 자체 해결 불가</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P08</b><em style="background:#2456d6">추론</em></div>
-      <p>판독 회신 대기</p><small>회신까지 지연 — 실무</small></div><div class="card k-statute" id="P09" data-gate="4" data-lane="1"
+      <p>판독 회신 대기</p><small>회신이 올 때까지 진단이 멈춰 며칠씩 밀리는 구간</small></div><div class="card k-statute" id="P09" data-gate="4" data-lane="1"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P09</b><em style="background:#1f8962">규정</em></div>
-      <p>진단·소견 확정 기록</p><small>의료법 제22조(진료기록부 등)</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="0"
+      <p>진단·소견 확정 기록</p><small>의료법 제22조(진료기록부 등) 제1항 — 확정 소견을 상세히 기록·서명, 제3항: 거짓 작성·고의 수정 금지</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="0"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P10</b><em style="background:#1f8962">규정</em></div>
-      <p>진단서·결과 통보</p><small>의료법 제17조(진단서 등)</small></div></div>
+      <p>진단서·결과 통보</p><small>의료법 제17조(진단서 등) 제1항 — 직접 진찰한 의사만 진단서 작성·교부, 제3항: 정당한 사유 없이 교부 거부 금지</small></div><div class="card k-statute" id="P13" data-gate="4" data-lane="2"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P13</b><em style="background:#1f8962">규정</em></div>
+      <p>진료기록·영상 보존</p><small>의료법 제22조(진료기록부 등) 제2항 — 진료기록부등을 보건복지부령으로 정하는 바에 따라 보존</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -123,17 +132,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 의료법 제22조(진료기록부 등), 의료법 제17조(진단서 등). <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(전자신문, 2024-12-22 — 과기정통부·국방부 330억 사업으로 구축, 흉부질환 영상 판독 의견 제시) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 의료법 제22조(진료기록부 등) 제1항(증상·진단·치료 내용의 상세 기록과 서명)·제2항(진료기록부등의 보존)·제3항(거짓 작성·고의 수정 금지), 의료법 제17조(진단서 등) 제1항(직접 진찰한 의사의 진단서 작성·교부)·제3항(정당한 사유 없는 교부 거부 금지). 기록과 진단서 발급, 보존은 의료법이 정하지만 영상을 누가 어떤 순서로 훑어 이상 여부를 가르고 어떤 건을 상급 병원에 넘길지는 조문에 절차가 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(전자신문, 2024-12-22 — 과기정통부·국방부 330억 사업으로 구축, 흉부질환 영상 판독 의견 제시) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10"];
+const nodes = ["P01","P02","P03","P11","P04","P05","P06","P12","P07","P08","P09","P10","P13"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","P03"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","P03","loop","영상 불량 시 재촬영"],["P06","P07"],["P07","P08"],["P08","P09"],["P05","P09"],["P09","P10"]];
+const edges = [["P01","P02"],["P02","P03"],["P03","P11"],["P11","P04"],["P04","P05"],["P05","P06"],["P06","P03","loop","영상 불량 시 재촬영"],["P06","P12"],["P12","P07"],["P07","P08"],["P08","P09"],["P05","P09"],["P09","P10"],["P10","P13"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

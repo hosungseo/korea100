@@ -49,13 +49,13 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <h1>검토대상만 남는다 — <b>파일은 PC 밖으로 나가지 않는다</b></h1>
   <p class="sub">엑셀을 올리면 근무유형 기준을 반영해 이상치·보류·검토대상을 요약하고, 이상 행에 검증결과와 검증사유를 붙인 엑셀을 다시 내려줍니다. 파일은 서버로 전송되지 않고 실행 중인 PC의 임시 폴더에서만 분석됩니다. 최종 복무 판단은 여전히 담당자와 부서장의 몫입니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>2</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>3</b></span>
     <span><i style="background:#d99a5e"></i>대체 <b>6</b></span>
     
     <span><i style="background:#d9a821"></i>간소화 <b>2</b></span>
-    <span style="color:#65d7ad">대체 6 · 간소화 2 · 소멸 0 · 자동 3 — 사람 단계 12 → 6</span>
+    <span style="color:#65d7ad">대체 6 · 간소화 2 · 소멸 0 · 자동 3 — 사람 단계 13 → 7</span>
   </p>
 </header>
 <div class="legend">
@@ -71,40 +71,40 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>복무시스템에서 월별 근태 엑셀 내려받기</p><small>실무</small></div><div class="card k-changed" id="P02" data-gate="0" data-lane="1"
+      <p>복무시스템에서 월별 근태 엑셀 내려받기</p><small>복무시스템에서 부서·월을 지정해 원자료를 받아 옴</small></div><div class="card k-changed" id="P02" data-gate="0" data-lane="1"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P02</b><em style="background:#b8890e">간소화</em></div>
-      <p>부서·기간별로 시트 정리</p><small>업로드 한 번으로 축소 — 열 정리 부담 감소</small></div><div class="card k-statute" id="P03" data-gate="1" data-lane="1"
+      <p>부서·기간별로 시트 정리</p><small>시트 합치기 없이 파일 업로드 한 번으로 축소</small></div><div class="card k-statute" id="P03" data-gate="1" data-lane="1"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P03</b><em style="background:#1f8962">규정</em></div>
-      <p>법정 근로시간 기준 확인</p><small>근로기준법 제50조(근로시간)</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
+      <p>법정 근로시간 기준 확인</p><small>근로기준법 제50조(근로시간) 제1항 — 1주 40시간·제2항 1일 8시간 한도</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A01</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>근무유형 기준 자동 반영</p><small>정상근무·시차출퇴근제·반차·전일휴가·출장·육아시간·익일퇴근 기준 자동 적용</small></div><div class="card k-replaced" id="P04" data-gate="1" data-lane="1"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P04</b><em style="background:#d99a5e">A01로 대체</em></div>
-      <p>시차출퇴근제·반차·전일휴가 적용분 구분</p><small>자동 기준 반영으로 대체</small></div><div class="card k-replaced" id="P05" data-gate="1" data-lane="1"
+      <p>시차출퇴근제·반차·전일휴가 적용분 구분</p><small>같은 지각 기록도 근무유형에 따라 판단이 갈려 행마다 대조</small></div><div class="card k-replaced" id="P05" data-gate="1" data-lane="1"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P05</b><em style="background:#d99a5e">A01로 대체</em></div>
-      <p>출장·육아시간·익일퇴근 예외 표시</p><small>자동 기준 반영으로 대체</small></div><div class="card k-auto" id="A02" data-gate="2" data-lane="4"
+      <p>출장·육아시간·익일퇴근 예외 표시</p><small>예외 사유가 있는 행을 찾아 색·메모로 따로 표시</small></div><div class="card k-auto" id="A02" data-gate="2" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A02</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>검토대상 자동 검출</p><small>지참·조퇴·출퇴근 누락·비근무일 기록을 이상치/보류/검토대상으로 요약</small></div><div class="card k-replaced" id="P06" data-gate="2" data-lane="1"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P06</b><em style="background:#d99a5e">A02로 대체</em></div>
-      <p>지참·조퇴 행 찾아내기</p><small>자동 검출로 대체</small></div><div class="card k-replaced" id="P07" data-gate="2" data-lane="1"
+      <p>지참·조퇴 행 찾아내기</p><small>출퇴근 시각을 기준시간과 비교해 행 단위로 눈으로 확인</small></div><div class="card k-replaced" id="P07" data-gate="2" data-lane="1"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P07</b><em style="background:#d99a5e">A02로 대체</em></div>
-      <p>출퇴근 기록 누락 행 찾아내기</p><small>자동 검출로 대체</small></div><div class="card k-replaced" id="P08" data-gate="2" data-lane="1"
+      <p>출퇴근 기록 누락 행 찾아내기</p><small>출근·퇴근 어느 한쪽이 비어 있는 행을 스크롤하며 찾음</small></div><div class="card k-replaced" id="P08" data-gate="2" data-lane="1"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P08</b><em style="background:#d99a5e">A02로 대체</em></div>
-      <p>비근무일 출퇴근 기록 확인</p><small>자동 검출로 대체</small></div><div class="card k-changed" id="P09" data-gate="3" data-lane="0"
+      <p>비근무일 출퇴근 기록 확인</p><small>휴일·휴가일에 찍힌 기록이 실제 근무인지 오기인지 판단</small></div><div class="card k-changed" id="P09" data-gate="3" data-lane="0"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P09</b><em style="background:#b8890e">간소화</em></div>
-      <p>해당 직원에게 소명 요청</p><small>검증사유가 적힌 행만 대상 — 대상 특정 부담 감소</small></div><div class="card k-statute" id="P10" data-gate="3" data-lane="0"
+      <p>해당 직원에게 소명 요청</p><small>메일·메신저로 개별 연락해 사유를 받아 옴 — 회신 대기</small></div><div class="card k-statute" id="P10" data-gate="3" data-lane="0"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P10</b><em style="background:#1f8962">규정</em></div>
-      <p>휴가 사용 여부 확인</p><small>근로기준법 제60조(연차 유급휴가)</small></div><div class="card k-auto" id="A03" data-gate="4" data-lane="4"
+      <p>휴가 사용 여부 확인</p><small>근로기준법 제60조(연차 유급휴가) 제5항 — , 근로자가 청구한 시기에 부여</small></div><div class="card k-auto" id="A03" data-gate="4" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A03</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>검증결과·사유 표기 엑셀 생성</p><small>이상 행에 검증결과·검증사유를 붙여 다운로드</small></div><div class="card k-replaced" id="P11" data-gate="4" data-lane="1"
@@ -113,7 +113,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>검증결과·사유를 엑셀에 전기</p><small>자동 표기 엑셀로 대체</small></div><div class="card k-inferred" id="P12" data-gate="4" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P12</b><em style="background:#2456d6">추론</em></div>
-      <p>부서장 확인·복무 정리</p><small>실무</small></div></div>
+      <p>부서장 확인·복무 정리</p><small>정리된 결과를 부서장이 확인하고 복무 기록에 반영</small></div><div class="card k-statute" id="P13" data-gate="4" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P13</b><em style="background:#1f8962">규정</em></div>
+      <p>휴가·근태 서류 보존</p><small>근로기준법 제42조(계약 서류의 보존) — 근로기준법 시행령 제22조제1항제6호 휴가에 관한 서류 3년</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -139,17 +142,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 근로기준법 제50조(근로시간), 같은 법 제60조(연차 유급휴가). <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다 — 근로시간과 휴가의 기준은 법에 있지만, 내려받은 엑셀에서 지참·조퇴·출퇴근 누락·비근무일 기록을 행 단위로 찾아내는 검토 절차는 규정에 없습니다. 도구 사실은 저장소 README(kyci/attendance-checker — 로컬 Flask, 파일을 서버에 올리지 않고 실행 PC 임시폴더에서만 분석, 시차출퇴근제·반차·전일휴가·출장·육아시간·익일퇴근 기준 반영, 검증결과·검증사유 표기 엑셀 내보내기) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 근로기준법 제50조제1항·제2항(1주 40시간·1일 8시간), 같은 법 제60조제5항(근로자가 청구한 시기에 연차 부여), 같은 법 제42조 및 근로기준법 시행령 제22조제1항제6호(휴가에 관한 서류 3년 보존). <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다 — 근로시간과 휴가의 기준·서류 보존기간은 법에 있지만, 내려받은 엑셀에서 지참·조퇴·출퇴근 누락·비근무일 기록을 행 단위로 찾아내는 검토 절차는 규정에 없습니다. 도구 사실은 저장소 README(kyci/attendance-checker — 로컬 Flask, 파일을 서버에 올리지 않고 실행 PC 임시폴더에서만 분석, 시차출퇴근제·반차·전일휴가·출장·육아시간·익일퇴근 기준 반영, 검증결과·검증사유 표기 엑셀 내보내기) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","P03","A01","P04","P05","A02","P06","P07","P08","P09","P10","A03","P11","P12"];
+const nodes = ["P01","P02","P03","A01","P04","P05","A02","P06","P07","P08","P09","P10","A03","P11","P12","P13"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","P03"],["P03","A01","auto"],["A01","A02","auto"],["A02","A03","auto"],["A03","P09"],["P09","P10"],["P10","P12"],["P09","A02","loop","소명 결과 재검출"],["P04","A01","replace"],["P05","A01","replace"],["P06","A02","replace"],["P07","A02","replace"],["P08","A02","replace"],["P11","A03","replace"]];
+const edges = [["P01","P02"],["P02","P03"],["P03","A01","auto"],["A01","A02","auto"],["A02","A03","auto"],["A03","P09"],["P09","P10"],["P10","P12"],["P09","A02","loop","소명 결과 재검출"],["P04","A01","replace"],["P05","A01","replace"],["P06","A02","replace"],["P07","A02","replace"],["P08","A02","replace"],["P11","A03","replace"],["P12","P13"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

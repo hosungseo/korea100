@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 66호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>듣는 동시에 <b>직접 받아 적는</b> 접수대</h1>
-  <p class="sub">119 신고 접수 과정을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 신고 의무와 종합상황실 운영, 출동지령·전파는 소방기본법과 그 시행규칙이 정하지만, 청취하며 타이핑하고 긴급도를 가늠하고 중복 신고를 골라내는 일은 사람의 숙련에 맡겨진 영역입니다.</p>
+  <p class="sub">119 신고 접수 과정을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 신고 의무와 종합상황실 운영, 접수 내용의 기록·관리, 출동지령과 상급 상황실 보고는 소방기본법과 그 시행규칙이 정하지만, 청취하며 타이핑하고 긴급도를 가늠하고 중복 신고를 골라내는 일은 사람의 숙련에 맡겨진 영역입니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>5</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>7</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 10 = 규정 3 + 추론 7 · 루프 1</span>
+    <span style="color:#65d7ad">전 단계 12 = 규정 5 + 추론 7 · 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -70,34 +70,40 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-statute" id="P01" data-gate="0" data-lane="0"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P01</b><em style="background:#1f8962">규정</em></div>
-      <p>119 신고</p><small>소방기본법 제19조(화재 등의 통지)</small></div><div class="card k-statute" id="P02" data-gate="0" data-lane="1"
+      <p>119 신고</p><small>소방기본법 제19조(화재 등의 통지) 제1항 — 현장을 발견한 사람은 지체 없이 알려야 함</small></div><div class="card k-statute" id="P02" data-gate="0" data-lane="1"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P02</b><em style="background:#1f8962">규정</em></div>
-      <p>신고 접수·회선 배정</p><small>소방기본법 제4조(119종합상황실의 설치와 운영)</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="1"
+      <p>신고 접수·회선 배정</p><small>소방기본법 제4조(119종합상황실의 설치와 운영) 제1항 — 정보의 수집·분석과 판단·전파, 상황관리</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P03</b><em style="background:#2456d6">추론</em></div>
-      <p>청취하며 직접 타이핑</p><small>1인 1회선 — 동시 접수 한계 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
+      <p>청취하며 직접 타이핑</p><small>귀로 들으면서 동시에 자판을 침 — 1인 1회선이라 대기 신고는 받지 못함</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
-      <p>위치·사고 유형 되묻기</p><small>구두 확인 반복 — 실무</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="1"
+      <p>위치·사고 유형 되묻기</p><small>위치와 사고 유형을 말로 되물어 확인 — 다급한 신고자일수록 되묻기 반복</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P05</b><em style="background:#2456d6">추론</em></div>
-      <p>신고 내용 수기 요약 입력</p><small>요약 품질이 사람마다 다름 — 실무</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
+      <p>신고 내용 수기 요약 입력</p><small>들은 내용을 접수요원이 직접 줄여 입력 — 요약 수준이 사람마다 다름</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
-      <p>긴급도 판단·중복 신고 식별</p><small>같은 사고 반복 신고 수기 판별 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="0"
+      <p>긴급도 판단·중복 신고 식별</p><small>같은 사고의 반복 신고인지 기억과 화면을 대조해 판별</small></div><div class="card k-statute" id="P11" data-gate="2" data-lane="2"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P11</b><em style="background:#1f8962">규정</em></div>
+      <p>재난상황 접수 기록·관리</p><small>소방기본법 시행규칙 제3조(종합상황실의 실장의 업무 등) 제1항제1호 — 재난상황 신고접수 및 그 내용의 기록·관리</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P07</b><em style="background:#2456d6">추론</em></div>
-      <p>대기·재신고</p><small>폭주 시 대기 후 다시 걸기 — 실무</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="2"
+      <p>대기·재신고</p><small>회선이 다 차면 신고자가 기다렸다가 다시 거는 상황</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P08</b><em style="background:#2456d6">추론</em></div>
-      <p>관할 판단·출동대 선정</p><small>지리 지식 기반 판단 — 실무</small></div><div class="card k-statute" id="P09" data-gate="3" data-lane="2"
+      <p>관할 판단·출동대 선정</p><small>지리 지식과 경험으로 관할 서·출동대를 가려 정함</small></div><div class="card k-statute" id="P09" data-gate="3" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P09</b><em style="background:#1f8962">규정</em></div>
-      <p>지령서 작성·전파</p><small>소방기본법 시행규칙 제3조(종합상황실의 실장의 업무 등)</small></div><div class="card k-inferred" id="P10" data-gate="4" data-lane="3"
+      <p>지령서 작성·전파</p><small>소방기본법 시행규칙 제3조(종합상황실의 실장의 업무 등) 제1항제3호 — 하급소방기관 출동지령·유관기관 지원요청</small></div><div class="card k-inferred" id="P10" data-gate="4" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P10</b><em style="background:#2456d6">추론</em></div>
-      <p>출동·현장 정보 무전 재확인</p><small>지령 정보 부족분 보완 — 실무</small></div></div>
+      <p>출동·현장 정보 무전 재확인</p><small>지령서에 없는 진입로·현장 상황을 무전으로 다시 물어 보완</small></div><div class="card k-statute" id="P12" data-gate="4" data-lane="2"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
+      <p>상급 종합상황실 보고</p><small>소방기본법 시행규칙 제3조(종합상황실의 실장의 업무 등) 제2항·별지 제1호서식 — 중요 재난상황을 지체 없이 상급 상황실에 보고</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -123,17 +129,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 소방기본법 제4조(119종합상황실의 설치와 운영), 소방기본법 제19조(화재 등의 통지), 소방기본법 시행규칙 제3조(종합상황실의 실장의 업무 등). 신고를 들으면서 직접 타이핑하고, 긴급도를 가늠하고, 같은 사고의 중복 신고를 알아내는 일은 조문이 아니라 접수요원의 숙련에 기대는 실무입니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실(생성형 AI 최대 40채널 동시 접수, 긴급 신고 우선 표출, 자동 요약, 중복·비긴급 분산, 2026-01 구축 완료·2월 서비스 개시)은 언론 보도(전자신문 2026-01-28) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 소방기본법 제19조(화재 등의 통지) 제1항(발견자의 지체 없는 신고) · 제4조(119종합상황실의 설치와 운영) 제1항(정보의 수집·분석과 판단·전파, 상황관리) · 소방기본법 시행규칙 제3조(종합상황실의 실장의 업무 등) 제1항제1호(신고접수·기록·관리)·제1항제2호(인력·장비 동원 요청 등 사고수습)·제1항제3호(출동지령·지원요청)·제2항 및 별지 제1호서식(상급 종합상황실 보고). 접수·지령·기록·보고라는 뼈대는 이렇게 정해져 있지만, 신고를 들으면서 직접 타이핑하고 긴급도를 가늠하고 같은 사고의 중복 신고를 알아내는 일은 접수요원의 숙련에 기대는 실무입니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실(생성형 AI 최대 40채널 동시 접수, 긴급 신고 우선 표출, 자동 요약, 중복·비긴급 분산, 2026-01 구축 완료·2월 서비스 개시)은 언론 보도(전자신문 2026-01-28) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10"];
+const nodes = ["P01","P02","P03","P04","P05","P06","P11","P07","P08","P09","P10","P12"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","P03"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","P07"],["P07","P01","loop","대기 후 재신고"],["P06","P08"],["P08","P09"],["P09","P10"]];
+const edges = [["P01","P02"],["P02","P03"],["P03","P04"],["P04","P05"],["P06","P07"],["P07","P01","loop","대기 후 재신고"],["P06","P08"],["P08","P09"],["P09","P10"],["P10","P12"],["P05","P11"],["P11","P06"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

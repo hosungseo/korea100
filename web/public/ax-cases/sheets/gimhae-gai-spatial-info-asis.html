@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 133호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>질문 하나에 <b>함수부터 익혀야</b></h1>
-  <p class="sub">공간정보를 찾는 일을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 공시지가 같은 기준값만 법이 정하고, 어떤 레이어를 열어 어떤 조건식을 쓰고 결과를 어떻게 표로 옮길지는 GIS 숙련자의 머릿속에만 있는 실무입니다. 조건이 조금만 바뀌어도 처음부터 다시 돌게 됩니다.</p>
+  <p class="sub">공간정보를 찾는 일을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 토지대장 등록사항(공간정보관리법 제71조제1항), 공유재산 대장(공유재산법 제44조제1항), 개별공시지가(부동산가격공시법 제10조제1항) 같은 기준 자료만 법이 정하고, 어떤 레이어를 열어 어떤 조건식을 쓰고 결과를 어떻게 표로 옮길지는 GIS 숙련자의 머릿속에만 있는 실무입니다. 조건이 조금만 바뀌어도 처음부터 다시 돌게 됩니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>1</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>10</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 11 = 규정 1 + 추론 10 · 재질의 루프 1</span>
+    <span style="color:#65d7ad">전 단계 13 = 규정 3 + 추론 10 · 재질의 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -73,22 +73,28 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>부서 질의 접수</p><small>"조건에 맞는 국공유지를 찾아 달라" 같은 구두 요청 — 실무</small></div><div class="card k-inferred" id="P02" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>필요한 레이어·데이터 소재 파악</p><small>어느 시스템에 있는지부터 확인 — 실무</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="2"
+      <p>필요한 레이어·데이터 소재 파악</p><small>필요한 레이어가 어느 시스템에 있는지부터 확인 — 실무</small></div><div class="card k-statute" id="P12" data-gate="1" data-lane="3"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
+      <p>토지대장·지적공부 등록사항 조회</p><small>공간정보의 구축 및 관리 등에 관한 법률 제71조(토지대장 등의 등록사항) 제1항제3호 — 지목·제4호 면적·제5호 소유자(국가·지자체 등록번호) 등록</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P03</b><em style="background:#2456d6">추론</em></div>
-      <p>GIS 전문 프로그램 실행·설정</p><small>숙련자만 조작 가능 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="2" data-lane="2"
+      <p>GIS 전문 프로그램 실행·설정</p><small>전문 GIS 프로그램은 숙련자만 열어 설정 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="2" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
-      <p>공간 질의 조건식·함수 작성</p><small>함수 숙련이 필요 — 실무</small></div><div class="card k-statute" id="P05" data-gate="2" data-lane="3"
+      <p>공간 질의 조건식·함수 작성</p><small>조건식과 공간함수를 직접 써야 결과가 나옴 — 실무</small></div><div class="card k-statute" id="P05" data-gate="2" data-lane="3"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P05</b><em style="background:#1f8962">규정</em></div>
-      <p>개별공시지가 확인</p><small>부동산 가격공시에 관한 법률 제10조(개별공시지가의 결정·공시 등)</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="2"
+      <p>개별공시지가 확인</p><small>부동산 가격공시에 관한 법률 제10조(개별공시지가의 결정ㆍ공시 등) 제1항 — 시장·군수·구청장이 매년 결정·공시해 관계 행정기관에 제공</small></div><div class="card k-statute" id="P13" data-gate="2" data-lane="3"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P13</b><em style="background:#1f8962">규정</em></div>
+      <p>공유재산 대장·실태조사 결과 대조</p><small>공유재산 및 물품 관리법 제44조(대장과 실태조사) 제1항 — 대장·도면 비치·제2항 재산관리관의 매년 실태조사 기록</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
-      <p>국공유지 여부 교차 확인</p><small>대장·도면 개별 대조 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="3" data-lane="1"
+      <p>국공유지 여부 교차 확인</p><small>공유재산 대장과 도면을 필지별로 대조 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="3" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P07</b><em style="background:#2456d6">추론</em></div>
-      <p>결과 목록 정리·표 작성</p><small>화면 값 전기 — 실무</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="1"
+      <p>결과 목록 정리·표 작성</p><small>조회 화면의 지번·면적·지가를 표로 옮겨 적음 — 실무</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P08</b><em style="background:#2456d6">추론</em></div>
       <p>출장 대상지 경로 수기 배열</p><small>지도와 검색을 오가며 순서 짜기 — 실무</small></div><div class="card k-inferred" id="P09" data-gate="3" data-lane="1"
@@ -100,7 +106,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>회신·조건 재요청</p><small>조건이 바뀌면 처음부터 — 실무</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P11</b><em style="background:#2456d6">추론</em></div>
-      <p>결과 활용(현장 확인·검토)</p><small>실무</small></div></div>
+      <p>결과 활용(현장 확인·검토)</p><small>현장 확인·검토에 결과를 그대로 활용 — 실무</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -126,17 +132,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 부동산 가격공시에 관한 법률 제10조(개별공시지가의 결정·공시 등). <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 공시지가라는 기준값은 법이 정하지만, 그 값을 어느 레이어에서 어떤 조건식으로 뽑아 국공유지 여부와 맞춰 볼지는 규정에 없고 숙련자의 조작 지식에 의존해 왔습니다. 도구 사실은 언론 보도(경남신문 2026-04-27: 일상어 질문으로 공간정보 검색, 출장경로 최적화, 통계분석 제공) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 공간정보의 구축 및 관리 등에 관한 법률 제71조(토지대장 등의 등록사항) 제1항제3호·제4호·제5호 · 공유재산 및 물품 관리법 제44조(대장과 실태조사) 제1항·제2항 · 부동산 가격공시에 관한 법률 제10조(개별공시지가의 결정ㆍ공시 등) 제1항. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 지목·면적·소유자와 공유재산 대장, 공시지가라는 기준값은 법이 정하지만, 그 값을 어느 레이어에서 어떤 조건식으로 뽑아 국공유지 여부와 맞춰 볼지는 규정에 없고 숙련자의 조작 지식에 의존해 왔습니다. 도구 사실은 언론 보도(경남신문 2026-04-27: 일상어 질문으로 공간정보 검색, 출장경로 최적화, 통계분석 제공) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11"];
+const nodes = ["P01","P02","P12","P03","P04","P05","P13","P06","P07","P08","P09","P10","P11"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","P03"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","P07"],["P07","P08"],["P08","P09"],["P09","P10"],["P10","P03","loop","조건 재설정"],["P10","P11"]];
+const edges = [["P01","P02"],["P02","P12"],["P12","P03"],["P03","P04"],["P04","P05"],["P05","P13"],["P13","P06"],["P06","P07"],["P07","P08"],["P08","P09"],["P09","P10"],["P10","P03","loop","조건 재설정"],["P10","P11"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 91호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>보급품은 <b>사람 손으로 분류하고 지게차를 직접 몬다</b></h1>
-  <p class="sub">군수품 입고에서 불출까지를 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 장부 기록과 재물조사, 불출 승인의 결재는 규정이 정하지만, 품목을 눈으로 확인해 분류하고 규격에 맞춰 포장하고 지게차를 몰아 적재하는 몸을 쓰는 단계는 규정 밖 실무입니다.</p>
+  <p class="sub">군수품 입고에서 불출까지를 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 장부 기록과 재물조사, 출납명령과 불출 승인 결재는 규정이 정하지만, 품목을 눈으로 확인해 분류하고 규격에 맞춰 포장하고 지게차를 몰아 적재하는 몸을 쓰는 단계는 규정 밖 실무입니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>4</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>8</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 11 = 규정 3 + 추론 8 · 재확인 루프 1</span>
+    <span style="color:#65d7ad">전 단계 12 = 규정 4 + 추론 8 · 재확인 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -70,37 +70,40 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>군수품 입고 통보·청구</p><small>공문·전산 요청 — 실무</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="3"
+      <p>군수품 입고 통보·청구</p><small>수요 부대가 필요 품목을 공문·전산으로 청구 — 서식과 경로가 부대마다 다름</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>입고 물량 하역</p><small>인력 하역 — 실무</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="1"
+      <p>입고 물량 하역</p><small>도착한 물량을 병력이 직접 내려 적치장에 쌓음</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P03</b><em style="background:#2456d6">추론</em></div>
-      <p>품목·수량 육안 검수</p><small>목록 대조 수기 확인 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
+      <p>품목·수량 육안 검수</p><small>청구목록과 실물을 눈으로 하나씩 대조해 품목·수량 확인</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
-      <p>품목별 수작업 분류</p><small>형상·규격을 눈으로 구분 — 실무</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="1"
+      <p>품목별 수작업 분류</p><small>형상과 규격을 눈으로 구분해 품목별로 나눠 쌓음</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P05</b><em style="background:#2456d6">추론</em></div>
-      <p>규격에 맞춰 수작업 포장</p><small>포장재 선택·작업 — 실무</small></div><div class="card k-inferred" id="P06" data-gate="3" data-lane="1"
+      <p>규격에 맞춰 수작업 포장</p><small>품목 규격에 맞는 포장재를 골라 손으로 포장</small></div><div class="card k-inferred" id="P06" data-gate="3" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
-      <p>지게차 직접 운전·적재</p><small>병력이 운전 — 실무</small></div><div class="card k-statute" id="P07" data-gate="3" data-lane="3"
+      <p>지게차 직접 운전·적재</p><small>병력이 지게차를 직접 몰아 지정 구역에 적재</small></div><div class="card k-statute" id="P07" data-gate="3" data-lane="3"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P07</b><em style="background:#1f8962">규정</em></div>
-      <p>보관 위치 수기 기록</p><small>군수품관리법 제30조(장부의 비치)</small></div><div class="card k-statute" id="P08" data-gate="4" data-lane="2"
+      <p>보관 위치 수기 기록</p><small>군수품관리법 제30조(장부의 비치) — 물품관리관·물품출납공무원·물품운용관이 국방부령에 따라 장부를 비치하고 필요한 사항을 기록</small></div><div class="card k-statute" id="P08" data-gate="4" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P08</b><em style="background:#1f8962">규정</em></div>
-      <p>불출 승인 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재)</small></div><div class="card k-statute" id="P09" data-gate="4" data-lane="1"
+      <p>불출 승인 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재) 제1항 — 행정기관의 장의 결재, 제2항: 훈령으로 정한 위임전결</small></div><div class="card k-statute" id="P12" data-gate="4" data-lane="2"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
+      <p>출납명령 하달</p><small>군수품관리법 제12조(출납) 제1항 — 물품관리관이 출납할 군수품의 내용을 명백히 하여 출납을 명함, 제2항: 명령 없이는 출납 불가</small></div><div class="card k-statute" id="P09" data-gate="4" data-lane="1"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P09</b><em style="background:#1f8962">규정</em></div>
-      <p>재고 수기 대조·수량 확인</p><small>군수품관리법 제17조(재물조사)</small></div><div class="card k-inferred" id="P10" data-gate="4" data-lane="1"
+      <p>재고 수기 대조·수량 확인</p><small>군수품관리법 제17조(재물조사) — 군수품관리법 시행령 제34조제1항: 정기 재물조사는 연 1회 이상</small></div><div class="card k-inferred" id="P10" data-gate="4" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P10</b><em style="background:#2456d6">추론</em></div>
-      <p>불출품 이송·상차</p><small>인력·지게차 이동 — 실무</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="0"
+      <p>불출품 이송·상차</p><small>불출품을 인력과 지게차로 옮겨 차량에 상차</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P11</b><em style="background:#2456d6">추론</em></div>
-      <p>수요 부대 인수 확인</p><small>인수증 확인 — 실무</small></div></div>
+      <p>수요 부대 인수 확인</p><small>수요 부대가 인수증에 서명해 수령을 확인</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -126,17 +129,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 군수품관리법 제17조(재물조사)·제30조(장부의 비치), 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 재물조사와 장부 기록 의무는 군수품관리법이 정하지만, 검수·분류·포장·적재를 어떤 방법으로 할지는 조문에 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(뉴시스, 2026-08-07 — 세종 육군종합보급창 스마트 물류센터 현장 공개, 3D 비전카메라·협동로봇·무인지게차·AGV, AI 수요예측·상태기반 정비 병행) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 군수품관리법 제12조(출납) 제1항(물품관리관의 출납명령)·제2항(명령 없는 출납 금지), 군수품관리법 제17조(재물조사)와 군수품관리법 시행령 제34조제1항(정기 재물조사 연 1회 이상), 군수품관리법 제30조(장부의 비치), 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재) 제1항·제2항. 출납명령과 장부 기록, 재물조사, 불출 승인의 결재는 규정이 정하지만 검수·분류·포장·적재를 어떤 방법으로 할지는 조문에 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(뉴시스, 2026-08-07 — 세종 육군종합보급창 스마트 물류센터 현장 공개, 3D 비전카메라·협동로봇·무인지게차·AGV, AI 수요예측·상태기반 정비 병행) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11"];
+const nodes = ["P01","P02","P03","P04","P05","P06","P07","P08","P12","P09","P10","P11"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","P03"],["P03","P01","loop","수량 불일치 재확인"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","P07"],["P07","P08"],["P08","P09"],["P09","P10"],["P10","P11"]];
+const edges = [["P01","P02"],["P02","P03"],["P03","P01","loop","수량 불일치 재확인"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","P07"],["P07","P08"],["P08","P12"],["P12","P09"],["P09","P10"],["P10","P11"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

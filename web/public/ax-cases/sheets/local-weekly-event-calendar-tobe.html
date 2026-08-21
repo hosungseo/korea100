@@ -49,13 +49,13 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <h1>PDF를 올리면 <b>모두의 캘린더가 된다</b></h1>
   <p class="sub">배포된 주간행사계획 PDF를 올리면 날짜·시간·행사명·장소가 추출되어 전 직원이 공유하는 캘린더로 바뀝니다. 다만 저장 전에 사람이 확인하는 칸이 새로 생겼습니다 — AI 파싱과 규칙 엔진의 결과가 원본 행 수와 어긋나면 그 행을 화면에 표시하고 사람이 판단하도록 만들었기 때문입니다. 담당자 단계는 조금 줄었지만, 직원 한 사람 한 사람이 매주 하던 검색·전기 세 칸이 사라진 것이 이 도구의 실제 효과입니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>1</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>5</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>4</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>3</b></span>
     <span><i style="background:#d99a5e"></i>대체 <b>3</b></span>
     
     <span><i style="background:#d9a821"></i>간소화 <b>3</b></span>
-    <span style="color:#65d7ad">대체 3 · 간소화 3 · 소멸 0 · 자동 3 — 사람 단계 11 → 9</span>
+    <span style="color:#65d7ad">대체 3 · 간소화 3 · 소멸 0 · 자동 3 — 사람 단계 12 → 10</span>
   </p>
 </header>
 <div class="legend">
@@ -71,19 +71,22 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>부서별 주간행사 자료 제출</p><small>메일·메신저로 제각각 — 실무</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="1"
+      <p>부서별 주간행사 자료 제출</p><small>부서마다 메일·메신저·구두로 제각각 보내옴 — 실무</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>제출 누락 부서 독촉</p><small>실무</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="1"
+      <p>제출 누락 부서 독촉</p><small>제출하지 않은 부서를 골라 개별 독촉 — 실무</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P03</b><em style="background:#2456d6">추론</em></div>
-      <p>행사명·일시·장소·주관 취합</p><small>표 서식에 수기 병합 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
-      <p>날짜 셀 병합·시간 표기 정리</p><small>실무</small></div><div class="card k-statute" id="P05" data-gate="1" data-lane="3"
+      <p>행사명·일시·장소·주관 취합</p><small>받은 자료를 한 표에 손으로 옮겨 붙임 — 서식 통일 없음</small></div><div class="card k-statute" id="P04" data-gate="1" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P04</b><em style="background:#1f8962">규정</em></div>
+      <p>날짜 셀 병합·시간 표기 정리</p><small>행정업무의 운영 및 혁신에 관한 규정 제7조(문서 작성의 방법) 제5항 — 날짜는 온점, 시·분은 24시각제 쌍점 표기</small></div><div class="card k-statute" id="P05" data-gate="1" data-lane="3"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P05</b><em style="background:#1f8962">규정</em></div>
-      <p>주간행사계획 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재)</small></div><div class="card k-changed" id="P06" data-gate="2" data-lane="1"
+      <p>주간행사계획 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재) — 제6조제1항 결재로 문서가 성립</small></div><div class="card k-statute" id="P13" data-gate="2" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P13</b><em style="background:#1f8962">규정</em></div>
+      <p>생산등록번호 부여·문서 등록</p><small>행정업무의 운영 및 혁신에 관한 규정 제11조(문서의 등록 등) 제1항 — 생산 즉시 등록</small></div><div class="card k-changed" id="P06" data-gate="2" data-lane="1"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P06</b><em style="background:#b8890e">간소화</em></div>
       <p>계획 파일 업로드</p><small>전 직원 배포 대신 PDF 한 번 올리기</small></div><div class="card k-auto" id="A01" data-gate="2" data-lane="4"
@@ -139,17 +142,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 주간행사계획의 작성·배포 주기와 서식은 기관 내부 지침으로 정해지므로 조문을 특정하지 않았습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 AI 정부 실험실 저장소 grory/weekly-event-calendar의 README 기반이며, README는 AI 파싱과 규칙 엔진 두 결과를 원본 행 수와 함께 대조해 세 값이 어긋나는 행을 화면에 표시하고 저장 전에 사람이 확인하도록 설계했다고 밝히고 있습니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 행정업무의 운영 및 혁신에 관한 규정 제7조제5항(날짜·시각 표기 방법), 제10조(문서의 결재)·제6조제1항(결재로 문서 성립), 제11조제1항(생산등록번호 부여·등록). 주간행사계획의 작성·배포 주기와 서식은 기관 내부 지침으로 정해지므로 조문을 특정하지 않았습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 AI 정부 실험실 저장소 grory/weekly-event-calendar의 README 기반이며, README는 AI 파싱과 규칙 엔진 두 결과를 원본 행 수와 함께 대조해 세 값이 어긋나는 행을 화면에 표시하고 저장 전에 사람이 확인하도록 설계했다고 밝히고 있습니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","P03","P04","P05","P06","A01","A02","P12","A03","P07","P08","P09","P10","P11"];
+const nodes = ["P01","P02","P03","P04","P05","P13","P06","A01","A02","P12","A03","P07","P08","P09","P10","P11"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","P01","loop","제출 독촉"],["P01","P03"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","A01","auto"],["A01","A02","auto"],["A02","P12"],["P12","A03"],["A03","P09"],["P06","P10"],["P10","A01","loop","수정본 재업로드"],["P07","A03","replace"],["P08","A03","replace"],["P11","A03","replace"]];
+const edges = [["P01","P02"],["P02","P01","loop","제출 독촉"],["P01","P03"],["P03","P04"],["P04","P05"],["P05","P13"],["P13","P06"],["P06","A01","auto"],["A01","A02","auto"],["A02","P12"],["P12","A03"],["A03","P09"],["P06","P10"],["P10","A01","loop","수정본 재업로드"],["P07","A03","replace"],["P08","A03","replace"],["P11","A03","replace"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

@@ -48,13 +48,13 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <h1>카드가 흩어진 만큼 <b>조회도 흩어집니다</b></h1>
   <p class="sub">의원 하이패스 통행료 정산을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 지급 근거와 결재는 규정이 정하지만, 개별 카드로 발생한 통행료를 한 명씩 조회해 내려받고 서식을 맞춰 합계를 내는 구간은 통째로 실무 관행입니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>9</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>4</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>8</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 11 = 규정 2 + 추론 9 · 루프 1</span>
+    <span style="color:#65d7ad">전 단계 12 = 규정 4 + 추론 8 · 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -70,37 +70,40 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-statute" id="P01" data-gate="0" data-lane="0"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P01</b><em style="background:#1f8962">규정</em></div>
-      <p>의정활동에 따른 이동</p><small>지방자치법 제40조(의원의 의정활동비 등)</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="3"
+      <p>의정활동에 따른 이동</p><small>지방자치법 제40조제1항(의정활동비·월정수당·공무 여행 여비)·제2항(조례로 금액 결정)</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>개별 카드로 통행료 발생</p><small>의원별로 내역이 흩어짐 — 실무</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="1"
+      <p>개별 카드로 통행료 발생</p><small>의원마다 다른 카드로 결제돼 내역이 흩어짐</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P03</b><em style="background:#2456d6">추론</em></div>
-      <p>카드사 내역 개별 조회</p><small>한 명씩 접속해 조회 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
+      <p>카드사 내역 개별 조회</p><small>카드사 화면에 한 명씩 접속해 기간별로 조회</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
-      <p>내역 내려받기·서식 통일</p><small>형식이 제각각이라 다시 맞춤 — 실무</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="1"
+      <p>내역 내려받기·서식 통일</p><small>내려받은 파일마다 항목·형식이 달라 서식을 다시 맞춤</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P05</b><em style="background:#2456d6">추론</em></div>
-      <p>의원별 합계 수기 집계</p><small>표에 옮겨 더함 — 실무</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
+      <p>의원별 합계 수기 집계</p><small>의원별 통행료를 표에 옮겨 적고 합계를 냄</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
-      <p>기간·중복 건 확인</p><small>월 경계와 중복 청구를 눈으로 확인 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="0"
+      <p>기간·중복 건 확인</p><small>월 경계에 걸친 건과 중복 청구 건을 눈으로 확인</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P07</b><em style="background:#2456d6">추론</em></div>
-      <p>본인 확인·이의 제기</p><small>다르다는 회신이 돌아옴 — 실무</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="1"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P08</b><em style="background:#2456d6">추론</em></div>
-      <p>정산서·지출품의 작성</p><small>서식에 값을 옮겨 적음 — 실무</small></div><div class="card k-statute" id="P09" data-gate="3" data-lane="2"
+      <p>본인 확인·이의 제기</p><small>본인 확인 결과 내역이 다르다는 회신이 돌아옴</small></div><div class="card k-statute" id="P08" data-gate="3" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P08</b><em style="background:#1f8962">규정</em></div>
+      <p>정산서·지출품의 작성</p><small>행정업무의 운영 및 혁신에 관한 규정 제8조제1항·제2항(전자문서 기안·기안문 서식)</small></div><div class="card k-statute" id="P09" data-gate="3" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P09</b><em style="background:#1f8962">규정</em></div>
-      <p>지출 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재)</small></div><div class="card k-inferred" id="P10" data-gate="4" data-lane="2"
+      <p>지출 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조제1항·제2항(결재·위임전결)</small></div><div class="card k-statute" id="P12" data-gate="4" data-lane="2"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
+      <p>지출원인행위·지급명령</p><small>지방회계법 제29조제2항(배정된 예산의 범위에서 지출원인행위)·제31조·제32조(지출 절차·지급명령)</small></div><div class="card k-inferred" id="P10" data-gate="4" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P10</b><em style="background:#2456d6">추론</em></div>
-      <p>집행·증빙 편철</p><small>출력해 묶어 보관 — 실무</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="1"
+      <p>집행·증빙 편철</p><small>정산서와 이용내역을 출력해 증빙으로 묶어 보관</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P11</b><em style="background:#2456d6">추론</em></div>
-      <p>월별 실적 관리</p><small>따로 표를 만들어 유지 — 실무</small></div></div>
+      <p>월별 실적 관리</p><small>월별 집행 실적을 별도 표로 만들어 유지</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -126,17 +129,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 지방자치법 제40조(의원의 의정활동비 등), 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 무엇을 지급하는지는 법과 조례가 정하지만, 의원마다 흩어진 카드 내역을 하나씩 조회해 서식을 맞추고 합계를 내는 과정은 규정에 절차가 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 모두의 공공AX 사례 아카이브(PAX)에 등록된 경기도의회 실무자 사례(2026-08-14, 의원별 하이패스 이용 내역을 API로 불러와 경비 정산 자동화) 기반이며, <b>현재 API 연동이 종료되어 서비스가 동작하지 않는 상태</b>입니다 — 도구가 멈추는 이유(연동 지속성)까지 함께 볼 수 있는 사례입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 지방자치법 제40조제1항·제2항(의원의 의정활동비 등), 행정업무의 운영 및 혁신에 관한 규정 제8조제1항·제2항(문서의 기안)·제10조제1항·제2항(결재·위임전결), 지방회계법 제29조제2항(지출원인행위)·제31조·제32조(지출의 절차·지급명령). 무엇을 지급하는지와 품의·결재·지출 절차의 뼈대는 법과 조례가 정하지만, 의원마다 흩어진 카드 내역을 하나씩 조회해 서식을 맞추고 합계를 내는 과정은 규정에 절차가 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 모두의 공공AX 사례 아카이브(PAX)에 등록된 경기도의회 실무자 사례(2026-08-14, 의원별 하이패스 이용 내역을 API로 불러와 경비 정산 자동화) 기반이며, <b>현재 API 연동이 종료되어 서비스가 동작하지 않는 상태</b>입니다 — 도구가 멈추는 이유(연동 지속성)까지 함께 볼 수 있는 사례입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11"];
+const nodes = ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P12","P10","P11"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","P03"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","P08"],["P08","P09"],["P09","P10"],["P10","P11"],["P06","P07"],["P07","P03","loop","내역 재확인"]];
+const edges = [["P01","P02"],["P02","P03"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","P08"],["P08","P09"],["P10","P11"],["P06","P07"],["P07","P03","loop","내역 재확인"],["P09","P12"],["P12","P10"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

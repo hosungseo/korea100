@@ -47,15 +47,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 36호 · AI 적용</span><small>기준일 2026-08-21</small></div>
   <h1>수거 내역을 넣으면 <b>의뢰서가 따라 나온다</b></h1>
-  <p class="sub">당번표를 불러오면 회차 당번이 뜨고, 시료를 입력하면 출하자·소재지가 이어 붙고, 수거증·의뢰서·청구서가 인쇄와 PDF로 바로 나옵니다. 현장에서 무엇을 어떻게 수거할지, 검사기관에 어떻게 인계할지는 그대로 사람의 일입니다.</p>
+  <p class="sub">당번표를 불러오면 회차 당번이 뜨고, 시료를 입력하면 출하자·소재지가 이어 붙고, 수거증·의뢰서·청구서가 인쇄와 PDF로 바로 나옵니다. 현장에서 목적을 고지하고 증표를 내보이는 법정 절차, 무엇을 어떻게 수거할지, 검사기관에 어떻게 인계할지는 그대로 사람의 일입니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>1</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>3</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>3</b></span>
     <span><i style="background:#d99a5e"></i>대체 <b>6</b></span>
     
     <span><i style="background:#d9a821"></i>간소화 <b>2</b></span>
-    <span style="color:#65d7ad">대체 6 · 간소화 2 · 소멸 0 · 자동 3 — 사람 단계 12 → 6</span>
+    <span style="color:#65d7ad">대체 6 · 간소화 2 · 소멸 0 · 자동 3 — 사람 단계 14 → 8</span>
   </p>
 </header>
 <div class="legend">
@@ -80,13 +80,19 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>회차별 수거 당번·수거일 확인</p><small>자동 불러오기로 대체</small></div><div class="card k-inferred" id="P03" data-gate="0" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P03</b><em style="background:#2456d6">추론</em></div>
-      <p>수거 품목·수거장소 배정</p><small>농산물·수산물 구분 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="0"
+      <p>수거 품목·수거장소 배정</p><small>농산물·수산물로 나눠 품목과 수거 시장을 배정 — 방법은 규정 밖</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
-      <p>출하자 성명·상호·소재지 현장 확인</p><small>실무</small></div><div class="card k-changed" id="P05" data-gate="1" data-lane="1"
+      <p>출하자 성명·상호·소재지 현장 확인</p><small>현장에서 출하자에게 직접 물어 성명·상호·소재지를 받아 적음</small></div><div class="card k-statute" id="P13" data-gate="1" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P13</b><em style="background:#1f8962">규정</em></div>
+      <p>조사 목적·범위 사전 고지</p><small>농수산물 품질관리법 제62조(출입ㆍ수거ㆍ조사 등) 제2항 — 목적·기간·장소와 관계 공무원 성명·직위를 미리 알리거나 현장에서 서류 제시</small></div><div class="card k-statute" id="P14" data-gate="1" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P14</b><em style="background:#1f8962">규정</em></div>
+      <p>수거 공무원 증표 제시</p><small>농수산물 품질관리법 제62조(출입ㆍ수거ㆍ조사 등) 제3항 — 권한을 나타내는 증표를 수거 대상자에게 내보임</small></div><div class="card k-changed" id="P05" data-gate="1" data-lane="1"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P05</b><em style="background:#b8890e">간소화</em></div>
-      <p>시료 수거·물량 입력</p><small>농수산물 품질관리법 제62조(출입ㆍ수거ㆍ조사 등) — 수기 메모 대신 화면에 바로 입력</small></div><div class="card k-auto" id="A02" data-gate="2" data-lane="4"
+      <p>시료 수거·물량 입력</p><small>농수산물 품질관리법 제62조(출입ㆍ수거ㆍ조사 등) 제1항제1호 — 수기 메모 대신 화면에 바로 입력</small></div><div class="card k-auto" id="A02" data-gate="2" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A02</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>시료 내역·출하자 자동 관리</p><small>입력한 시료에 출하자 연락처·소재지를 연결해 목록 유지</small></div><div class="card k-replaced" id="P06" data-gate="2" data-lane="1"
@@ -110,10 +116,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>청구서 작성</p><small>자동 생성으로 대체</small></div><div class="card k-statute" id="P11" data-gate="4" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P11</b><em style="background:#1f8962">규정</em></div>
-      <p>검사의뢰 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재)</small></div><div class="card k-inferred" id="P12" data-gate="4" data-lane="3"
+      <p>검사의뢰 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재) — 제6조제1항 결재로 문서가 성립</small></div><div class="card k-inferred" id="P12" data-gate="4" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P12</b><em style="background:#2456d6">추론</em></div>
-      <p>검사기관 시료 인계·검사 의뢰</p><small>실무</small></div></div>
+      <p>검사기관 시료 인계·검사 의뢰</p><small>시료를 검사기관까지 가져가 의뢰서와 함께 인계 — 실무</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -139,17 +145,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 농수산물 품질관리법 제62조(출입ㆍ수거ㆍ조사 등), 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 시료 수거 권한과 결재는 조문이 정하지만, 수거 계획 수립·대장 정리·의뢰서 작성의 방법은 조문에 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 AI 정부 실험실 저장소 anjs2712/sample-collection-manager의 프로젝트 설명과 단일 파일 웹앱(v5.2) 화면 구성 — 수거입력, 시료수거 당번, 연락처 정보, 당직표·당번표 엑셀 업로드, 의뢰서·청구서 인쇄 및 PDF — 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 농수산물 품질관리법 제61조제1항(안전성조사)·제62조제1항제1호(시료 무상 수거)·제62조제2항(조사 목적·기간·장소와 공무원 성명·직위 사전 고지, 긴급 시 현장 서류 제시)·제62조제3항(권한 증표 제시), 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재)·제6조제1항(결재로 문서 성립). 시료 수거 권한과 현장 고지·증표 제시, 검사의뢰 결재는 조문이 정하지만, 수거 계획 수립·대장 정리·의뢰서 작성의 방법은 조문에 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 AI 정부 실험실 저장소 anjs2712/sample-collection-manager의 프로젝트 설명과 단일 파일 웹앱(v5.2) 화면 구성 — 수거입력, 시료수거 당번, 연락처 정보, 당직표·당번표 엑셀 업로드, 의뢰서·청구서 인쇄 및 PDF — 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["A01","P01","P02","P03","P04","P05","A02","P06","P07","P08","A03","P09","P10","P11","P12"];
+const nodes = ["A01","P01","P02","P03","P04","P13","P14","P05","A02","P06","P07","P08","A03","P09","P10","P11","P12"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["A01","P03"],["P03","P04"],["P04","P05"],["P05","A02","auto"],["A02","P08"],["P08","A02","loop","목록에서 즉시 수정"],["A02","A03","auto"],["A03","P11"],["P11","P12"],["P01","A01","replace"],["P02","A01","replace"],["P06","A02","replace"],["P07","A02","replace"],["P09","A03","replace"],["P10","A03","replace"]];
+const edges = [["A01","P03"],["P03","P04"],["P04","P13"],["P13","P14"],["P14","P05"],["P05","A02","auto"],["A02","P08"],["P08","A02","loop","목록에서 즉시 수정"],["A02","A03","auto"],["A03","P11"],["P11","P12"],["P01","A01","replace"],["P02","A01","replace"],["P06","A02","replace"],["P07","A02","replace"],["P09","A03","replace"],["P10","A03","replace"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

@@ -49,13 +49,13 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <h1>자동화가 데이터를 맡아 <b>연 1,382시간 → 192시간</b></h1>
   <p class="sub">원자료 수집·정제부터 319개 노선 혼잡률 산출과 보고서 생성까지 자동으로 이어집니다. 담당자는 결과를 표본으로 확인하고 개선 요구·증차 협의라는 판단 업무에 남습니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>1</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>3</b></span>
     <span><i style="background:#d99a5e"></i>대체 <b>6</b></span>
     
     <span><i style="background:#d9a821"></i>간소화 <b>2</b></span>
-    <span style="color:#65d7ad">대체 6 · 간소화 2 · 소멸 0 · 자동 3 — 사람 단계 11 → 5</span>
+    <span style="color:#65d7ad">대체 6 · 간소화 2 · 소멸 0 · 자동 3 — 사람 단계 12 → 6</span>
   </p>
 </header>
 <div class="legend">
@@ -71,7 +71,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>교통카드·운행 원자료 적재</p><small>일 단위 축적 — 실무</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
+      <p>교통카드·운행 원자료 적재</p><small>교통카드 태그와 운행 기록이 날마다 쌓인다 — 실무</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A01</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>원자료 자동 수집·정제</p><small>노선·정류소 코드 자동 대조</small></div><div class="card k-replaced" id="P02" data-gate="0" data-lane="1"
@@ -107,10 +107,13 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>분석보고서 작성</p><small>자동 생성으로 대체</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P10</b><em style="background:#1f8962">규정</em></div>
-      <p>보고서 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재)</small></div><div class="card k-statute" id="P11" data-gate="4" data-lane="0"
+      <p>보고서 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재) 제1항 — 기관장 결재·제2항 위임전결</small></div><div class="card k-statute" id="P11" data-gate="4" data-lane="0"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P11</b><em style="background:#1f8962">규정</em></div>
-      <p>운송사업자 개선 요구·증차 협의</p><small>여객자동차 운수사업법 제23조(여객자동차운송사업의 개선명령 등)</small></div></div>
+      <p>운송사업자 개선 요구·증차 협의</p><small>여객자동차 운수사업법 제23조(여객자동차운송사업의 개선명령 등) 제1항제1호 — 사업계획의 변경·제5호 자동차 또는 운송시설의 개선</small></div><div class="card k-statute" id="P12" data-gate="4" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
+      <p>사업계획 변경 인가</p><small>여객자동차 운수사업법 제10조(사업계획의 변경) 제1항 — , 사업계획을 변경하려면 시·도지사의 인가</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -136,17 +139,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 여객자동차 운수사업법 제23조(여객자동차운송사업의 개선명령 등), 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 혼잡률 산출 방법과 엑셀 가공 절차는 규정에 정해져 있지 않아 파랑으로 두었습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도·도 공보(경기도 광역버스 319개 노선 초과탑승 분석 자동화, 연 1,382시간→192시간으로 1,190시간 절감, 2024년 말 구축, 아시아경제·경기도 브리핑 2024-11-26) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 여객자동차 운수사업법 제23조제1항제1호(사업계획의 변경)·제5호(자동차 또는 운송시설의 개선), 같은 법 제10조제1항(사업계획 변경 인가), 행정업무의 운영 및 혁신에 관한 규정 제10조제1항·제2항(문서의 결재와 위임전결). 혼잡률 산출 방법과 엑셀 가공 절차는 규정에 정해져 있지 않아 파랑으로 두었습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도·도 공보(경기도 광역버스 319개 노선 초과탑승 분석 자동화, 연 1,382시간→192시간으로 1,190시간 절감, 2024년 말 구축, 아시아경제·경기도 브리핑 2024-11-26) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","A01","P02","P03","P04","A02","P05","P06","P07","P08","A03","P09","P10","P11"];
+const nodes = ["P01","A01","P02","P03","P04","A02","P05","P06","P07","P08","A03","P09","P10","P11","P12"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","A01","auto"],["A01","A02","auto"],["A02","A03","auto"],["A02","P07"],["P07","P08"],["A03","P08"],["P08","A03","loop","수정 지시(축소)"],["P08","P10"],["P10","P11"],["P02","A01","replace"],["P03","A01","replace"],["P04","A01","replace"],["P05","A02","replace"],["P06","A02","replace"],["P09","A03","replace"]];
+const edges = [["P01","A01","auto"],["A01","A02","auto"],["A02","A03","auto"],["A02","P07"],["P07","P08"],["A03","P08"],["P08","A03","loop","수정 지시(축소)"],["P08","P10"],["P10","P11"],["P02","A01","replace"],["P03","A01","replace"],["P04","A01","replace"],["P05","A02","replace"],["P06","A02","replace"],["P09","A03","replace"],["P11","P12"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

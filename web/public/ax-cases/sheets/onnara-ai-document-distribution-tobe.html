@@ -49,13 +49,13 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <h1>업무분장 검색을 AI가 맡고, <b>확인 버튼은 사람이</b></h1>
   <p class="sub">제목·발송부서·문서구분만 범정부 AI 공통기반 RAG에 넘겨 업무분장과 최근 배부 기록을 찾고, 사이드바에서 체크된 현재 과 명단 안에서만 담당자를 추천합니다. 온나라의 접수 API를 직접 부르지 않고 기존 화면과 버튼을 보조하며, 기본값은 사람이 마지막 확인을 누르는 방식입니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>1</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>2</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>4</b></span>
     <span><i style="background:#d99a5e"></i>대체 <b>3</b></span>
     
     <span><i style="background:#d9a821"></i>간소화 <b>5</b></span>
-    <span style="color:#65d7ad">대체 3 · 간소화 5 · 소멸 0 · 자동 4 — 사람 단계 11 → 8</span>
+    <span style="color:#65d7ad">대체 3 · 간소화 5 · 소멸 0 · 자동 4 — 사람 단계 12 → 9</span>
   </p>
 </header>
 <div class="legend">
@@ -71,10 +71,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>문서 발송</p><small>타 기관·타 부서에서 보냄 — 실무</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="3"
+      <p>문서 발송</p><small>타 기관·타 부서가 공문을 보내옴</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>접수대기함 적재</p><small>과 단위 접수대기 목록에 쌓임 — 실무</small></div><div class="card k-changed" id="P03" data-gate="0" data-lane="1"
+      <p>접수대기함 적재</p><small>제목만 보이는 채로 과 단위 접수대기함에 쌓임</small></div><div class="card k-changed" id="P03" data-gate="0" data-lane="1"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P03</b><em style="background:#b8890e">간소화</em></div>
       <p>분석할 문서 선택</p><small>전수 훑기가 아니라 선택 문서만 분석</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
@@ -104,16 +104,19 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>안전검증 후 자동확인(선택 시)</p><small>문서 ID·명단·실제 성명이 모두 일치할 때만 실행</small></div><div class="card k-changed" id="P08" data-gate="3" data-lane="3"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P08</b><em style="background:#b8890e">간소화</em></div>
-      <p>접수 확정(확인)</p><small>기본은 사람 확인, 자동확인은 별도 승인 시에만 — 행정업무의 운영 및 혁신에 관한 규정 제18조(문서의 접수ㆍ처리)</small></div><div class="card k-changed" id="P09" data-gate="3" data-lane="2"
+      <p>접수 확정(확인)</p><small>기본은 사람 확인, 자동확인은 별도 승인 시에만 — 행정업무의 운영 및 혁신에 관한 규정 제18조제1항(처리과 접수 — 접수일시·접수등록번호 표시)</small></div><div class="card k-statute" id="P12" data-gate="3" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
+      <p>처리담당자 인계·공람</p><small>행정업무의 운영 및 혁신에 관한 규정 제18조제4항(접수문서의 처리담당자 인계)·제5항(결재권자의 처리기한·처리방법 지시)</small></div><div class="card k-changed" id="P09" data-gate="3" data-lane="2"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P09</b><em style="background:#b8890e">간소화</em></div>
       <p>오배부 반송·재배부</p><small>사전 대조로 반송 루프 축소</small></div><div class="card k-changed" id="P11" data-gate="4" data-lane="1"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P11</b><em style="background:#b8890e">간소화</em></div>
-      <p>배부 이력 기록</p><small>추천·실제 담당자·확인 이벤트가 로컬 감사기록에 자동 축적</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="2"
+      <p>배부 이력 기록</p><small>행정업무의 운영 및 혁신에 관한 규정 제18조제3항 — 추천·실제 담당자·확인 이벤트가 로컬 감사기록에 자동 축적</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P10</b><em style="background:#1f8962">규정</em></div>
-      <p>기안·결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재)</small></div></div>
+      <p>기안·결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조제1항(기관장 결재)·제2항(위임전결)</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -139,17 +142,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 행정업무의 운영 및 혁신에 관한 규정 제18조(문서의 접수ㆍ처리)·제10조(문서의 결재). 문서를 처리과에서 접수해 접수일시와 접수등록번호를 표시하는 행위와 기안·결재는 규정이 정하지만, 배부 자체는 법령이 아니라 기관의 업무분장에 따라 정해지므로, 접수대기함을 훑어 담당자를 고르는 구간에는 인용할 조문이 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 정부 공공 깃랩 저장소 pilddong/onnara-ai-document-distributor의 README(온나라 접수대기함의 제목·발송부서·문서구분만 읽어 범정부 AI 공통기반 RAG·생성형 AI로 담당자 추천, 문서 본문·첨부·수신문서 ID는 미전송, 기본값은 사람 최종 확인, 감사기록 90일·최대 1,000건) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 행정업무의 운영 및 혁신에 관한 규정 제18조제1항(처리과 접수·접수등록번호 표시)·제3항(접수·배부 경로의 등록정보 관리)·제4항(처리담당자 인계)·제5항(결재권자의 처리기한·처리방법 지시)·제10조제1항·제2항(결재·위임전결). 문서를 처리과에서 접수해 접수등록번호를 표시하고, 배부 경로를 등록정보로 남기고, 처리담당자에게 인계해 결재까지 가는 뼈대는 규정이 정하지만, 배부 자체는 법령이 아니라 기관의 업무분장에 따라 정해지므로, 접수대기함을 훑어 담당자를 고르는 구간에는 인용할 조문이 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 정부 공공 깃랩 저장소 pilddong/onnara-ai-document-distributor의 README(온나라 접수대기함의 제목·발송부서·문서구분만 읽어 범정부 AI 공통기반 RAG·생성형 AI로 담당자 추천, 문서 본문·첨부·수신문서 ID는 미전송, 기본값은 사람 최종 확인, 감사기록 90일·최대 1,000건) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","P03","A01","A02","P04","P05","P06","A03","P07","A04","P08","P09","P11","P10"];
+const nodes = ["P01","P02","P03","A01","A02","P04","P05","P06","A03","P07","A04","P08","P12","P09","P11","P10"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","P03"],["P03","A01","auto"],["A01","A02","auto"],["A02","P06"],["P06","A03","auto"],["A03","A04","auto"],["A04","P08"],["P08","P10"],["P08","P09"],["P08","P11"],["P09","P03","loop","오배부 반송·재배부(축소)"],["P04","A01","replace"],["P05","A01","replace"],["P07","A03","replace"]];
+const edges = [["P01","P02"],["P02","P03"],["P03","A01","auto"],["A01","A02","auto"],["A02","P06"],["P06","A03","auto"],["A03","A04","auto"],["A04","P08"],["P08","P09"],["P08","P11"],["P09","P03","loop","오배부 반송·재배부(축소)"],["P04","A01","replace"],["P05","A01","replace"],["P07","A03","replace"],["P08","P12"],["P12","P10"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

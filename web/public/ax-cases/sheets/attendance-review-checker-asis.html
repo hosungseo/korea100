@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 23호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>이상한 행은 <b>눈으로</b> 찾는다</h1>
-  <p class="sub">복무·근태 점검을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 근로시간과 연차의 기준은 법이 정하지만, 근무유형이 사람마다 달라 같은 지각 기록도 시차출퇴근제인지 반차인지에 따라 판단이 갈립니다. 그 대조를 담당자가 행마다 반복합니다.</p>
+  <p class="sub">복무·근태 점검을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 근로시간 한도와 연차 부여 시기, 휴가 서류의 보존기간은 법이 정하지만, 근무유형이 사람마다 달라 같은 지각 기록도 시차출퇴근제인지 반차인지에 따라 판단이 갈립니다. 그 대조를 담당자가 행마다 반복합니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>10</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 12 = 규정 2 + 추론 10 · 소명 루프 1</span>
+    <span style="color:#65d7ad">전 단계 13 = 규정 3 + 추론 10 · 소명 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -70,40 +70,43 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>복무시스템에서 월별 근태 엑셀 내려받기</p><small>실무</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="1"
+      <p>복무시스템에서 월별 근태 엑셀 내려받기</p><small>복무시스템에서 부서·월을 지정해 원자료를 받아 옴</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>부서·기간별로 시트 정리</p><small>열 순서 맞추기 — 실무</small></div><div class="card k-statute" id="P03" data-gate="1" data-lane="1"
+      <p>부서·기간별로 시트 정리</p><small>부서·기간별 시트를 합치고 열 순서를 손으로 맞춤</small></div><div class="card k-statute" id="P03" data-gate="1" data-lane="1"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P03</b><em style="background:#1f8962">규정</em></div>
-      <p>법정 근로시간 기준 확인</p><small>근로기준법 제50조(근로시간)</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
+      <p>법정 근로시간 기준 확인</p><small>근로기준법 제50조(근로시간) 제1항 — 1주 40시간·제2항 1일 8시간 한도</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
-      <p>시차출퇴근제·반차·전일휴가 적용분 구분</p><small>근무유형마다 기준이 달라 수기 대조 — 실무</small></div><div class="card k-inferred" id="P05" data-gate="1" data-lane="1"
+      <p>시차출퇴근제·반차·전일휴가 적용분 구분</p><small>같은 지각 기록도 근무유형에 따라 판단이 갈려 행마다 대조</small></div><div class="card k-inferred" id="P05" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P05</b><em style="background:#2456d6">추론</em></div>
-      <p>출장·육아시간·익일퇴근 예외 표시</p><small>실무</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
+      <p>출장·육아시간·익일퇴근 예외 표시</p><small>예외 사유가 있는 행을 찾아 색·메모로 따로 표시</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
-      <p>지참·조퇴 행 찾아내기</p><small>행 단위 수기 확인 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="1"
+      <p>지참·조퇴 행 찾아내기</p><small>출퇴근 시각을 기준시간과 비교해 행 단위로 눈으로 확인</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P07</b><em style="background:#2456d6">추론</em></div>
-      <p>출퇴근 기록 누락 행 찾아내기</p><small>실무</small></div><div class="card k-inferred" id="P08" data-gate="2" data-lane="1"
+      <p>출퇴근 기록 누락 행 찾아내기</p><small>출근·퇴근 어느 한쪽이 비어 있는 행을 스크롤하며 찾음</small></div><div class="card k-inferred" id="P08" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P08</b><em style="background:#2456d6">추론</em></div>
-      <p>비근무일 출퇴근 기록 확인</p><small>실무</small></div><div class="card k-inferred" id="P09" data-gate="3" data-lane="0"
+      <p>비근무일 출퇴근 기록 확인</p><small>휴일·휴가일에 찍힌 기록이 실제 근무인지 오기인지 판단</small></div><div class="card k-inferred" id="P09" data-gate="3" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P09</b><em style="background:#2456d6">추론</em></div>
-      <p>해당 직원에게 소명 요청</p><small>개별 연락 — 실무</small></div><div class="card k-statute" id="P10" data-gate="3" data-lane="0"
+      <p>해당 직원에게 소명 요청</p><small>메일·메신저로 개별 연락해 사유를 받아 옴 — 회신 대기</small></div><div class="card k-statute" id="P10" data-gate="3" data-lane="0"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P10</b><em style="background:#1f8962">규정</em></div>
-      <p>휴가 사용 여부 확인</p><small>근로기준법 제60조(연차 유급휴가)</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="1"
+      <p>휴가 사용 여부 확인</p><small>근로기준법 제60조(연차 유급휴가) 제5항 — , 근로자가 청구한 시기에 부여</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P11</b><em style="background:#2456d6">추론</em></div>
-      <p>검증결과·사유를 엑셀에 전기</p><small>행마다 손으로 적음 — 실무</small></div><div class="card k-inferred" id="P12" data-gate="4" data-lane="2"
+      <p>검증결과·사유를 엑셀에 전기</p><small>이상 행마다 검증결과와 검증사유를 손으로 적어 넣음</small></div><div class="card k-inferred" id="P12" data-gate="4" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P12</b><em style="background:#2456d6">추론</em></div>
-      <p>부서장 확인·복무 정리</p><small>실무</small></div></div>
+      <p>부서장 확인·복무 정리</p><small>정리된 결과를 부서장이 확인하고 복무 기록에 반영</small></div><div class="card k-statute" id="P13" data-gate="4" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P13</b><em style="background:#1f8962">규정</em></div>
+      <p>휴가·근태 서류 보존</p><small>근로기준법 제42조(계약 서류의 보존) — 근로기준법 시행령 제22조제1항제6호 휴가에 관한 서류 3년</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -129,17 +132,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 근로기준법 제50조(근로시간), 같은 법 제60조(연차 유급휴가). <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다 — 근로시간과 휴가의 기준은 법에 있지만, 내려받은 엑셀에서 지참·조퇴·출퇴근 누락·비근무일 기록을 행 단위로 찾아내는 검토 절차는 규정에 없습니다. 도구 사실은 저장소 README(kyci/attendance-checker — 로컬 Flask, 파일을 서버에 올리지 않고 실행 PC 임시폴더에서만 분석, 시차출퇴근제·반차·전일휴가·출장·육아시간·익일퇴근 기준 반영, 검증결과·검증사유 표기 엑셀 내보내기) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 근로기준법 제50조제1항·제2항(1주 40시간·1일 8시간), 같은 법 제60조제5항(근로자가 청구한 시기에 연차 부여), 같은 법 제42조 및 근로기준법 시행령 제22조제1항제6호(휴가에 관한 서류 3년 보존). <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다 — 근로시간과 휴가의 기준·서류 보존기간은 법에 있지만, 내려받은 엑셀에서 지참·조퇴·출퇴근 누락·비근무일 기록을 행 단위로 찾아내는 검토 절차는 규정에 없습니다. 도구 사실은 저장소 README(kyci/attendance-checker — 로컬 Flask, 파일을 서버에 올리지 않고 실행 PC 임시폴더에서만 분석, 시차출퇴근제·반차·전일휴가·출장·육아시간·익일퇴근 기준 반영, 검증결과·검증사유 표기 엑셀 내보내기) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11","P12"];
+const nodes = ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11","P12","P13"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","P03"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","P07"],["P07","P08"],["P08","P09"],["P09","P10"],["P10","P11"],["P11","P12"],["P09","P06","loop","소명 결과 재확인"]];
+const edges = [["P01","P02"],["P02","P03"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","P07"],["P07","P08"],["P08","P09"],["P09","P10"],["P10","P11"],["P11","P12"],["P09","P06","loop","소명 결과 재확인"],["P12","P13"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

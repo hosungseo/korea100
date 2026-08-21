@@ -49,13 +49,13 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <h1>매주 안부는 AI가, 사람은 <b>위기와 사례관리에</b></h1>
   <p class="sub">AI가 주 1회 이상 전화를 걸어 안부를 묻고 이전 대화를 기억해 대화를 잇습니다. 3회 미수신이나 위험 발화가 감지될 때만 사람이 개입합니다. 학대 재발 고위험군의 집에서는 AI 스피커가 '도와주세요' 같은 발화를 상시 감지해 관제센터-119·112로 이어지는 단일 대응 체계를 만듭니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>1</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>2</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>4</b></span>
     <span><i style="background:#d99a5e"></i>대체 <b>4</b></span>
     
-    <span><i style="background:#d9a821"></i>간소화 <b>5</b></span>
-    <span style="color:#65d7ad">대체 4 · 간소화 5 · 소멸 0 · 자동 4 — 사람 단계 12 → 8</span>
+    <span><i style="background:#d9a821"></i>간소화 <b>6</b></span>
+    <span style="color:#65d7ad">대체 4 · 간소화 6 · 소멸 0 · 자동 4 — 사람 단계 14 → 10</span>
   </p>
 </header>
 <div class="legend">
@@ -74,7 +74,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>읍면동 접수·자격 확인</p><small>1인가구·돌봄서비스 미이용자 등 우선순위 — 실무</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>대상자 명단 작성·배정</p><small>시군-사회서비스원 연계 — 실무</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
+      <p>대상자 명단 작성·배정</p><small>시군이 넘긴 명단을 전담인력별로 나눠 배정 — 실무</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A01</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>AI 안부전화</p><small>HyperCLOVA X 기반 클로바 케어콜 — 주 1회 이상, 하루 1,000명 이상 자동 확인</small></div><div class="card k-replaced" id="P03" data-gate="1" data-lane="1"
@@ -107,13 +107,19 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>관제센터 1차 확인 후 판단</p><small>감지 결과를 받아 판단만 수행</small></div><div class="card k-statute" id="P09" data-gate="3" data-lane="3"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P09</b><em style="background:#1f8962">규정</em></div>
-      <p>노인학대 신고·조사 의뢰</p><small>노인복지법 제39조의6(노인학대 신고의무와 절차 등)</small></div><div class="card k-changed" id="P10" data-gate="3" data-lane="2"
+      <p>노인학대 신고·조사 의뢰</p><small>노인복지법 제39조의6(노인학대 신고의무와 절차 등) — 안전확인 서비스 종사자의 즉시 신고의무는 제39조의6제2항제2호</small></div><div class="card k-statute" id="P13" data-gate="3" data-lane="3"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P13</b><em style="background:#1f8962">규정</em></div>
+      <p>노인학대 의심사례 현장조사</p><small>노인복지법 제39조의5(노인보호전문기관의 설치 등) — 신고전화 운영·사례접수는 제39조의5제2항제1호, 의심사례 현장조사는 같은 항 제2호</small></div><div class="card k-changed" id="P10" data-gate="3" data-lane="2"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P10</b><em style="background:#b8890e">간소화</em></div>
       <p>읍면동 긴급 방문 요청</p><small>위기 감지 시점에 즉시 요청</small></div><div class="card k-changed" id="P11" data-gate="4" data-lane="3"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P11</b><em style="background:#b8890e">간소화</em></div>
-      <p>심층 사례관리·전문상담 연계</p><small>상시 모니터링이 위험군을 선별 — 사례당 월 4시간 단축</small></div><div class="card k-changed" id="P12" data-gate="4" data-lane="1"
+      <p>심층 사례관리·전문상담 연계</p><small>상시 모니터링이 위험군을 선별 — 사례당 월 4시간 단축</small></div><div class="card k-changed" id="P14" data-gate="4" data-lane="3"
+      style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
+      <div class="chead"><b>P14</b><em style="background:#b8890e">간소화</em></div>
+      <p>상담·서비스 제공 기록·보관</p><small>노인복지법 제39조의5제2항제5호의 기록·보관 — 대화·감지 이력 자동 축적으로 정리 부담 축소</small></div><div class="card k-changed" id="P12" data-gate="4" data-lane="1"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P12</b><em style="background:#b8890e">간소화</em></div>
       <p>복지 자원 즉시 연계</p><small>생활 곤란 발화 기반 연계</small></div></div>
@@ -142,17 +148,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 홀로 사는 노인에 대한 안전확인 보호조치는 노인복지법 제27조의2(홀로 사는 노인에 대한 지원)가 국가·지방자치단체의 의무로 정하고, 학대 의심 사례의 신고·조사는 노인복지법 제39조의6(노인학대 신고의무와 절차 등)에 따릅니다. 그러나 그 안전확인을 어떻게 할지 — 누구에게 몇 번 전화를 걸고, 받지 않으면 몇 번 더 걸고, 언제 집으로 찾아갈지 — 는 조문이 아니라 인력과 예산이 정하던 영역입니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실(네이버클라우드 HyperCLOVA X 기반 클로바 케어콜 주 1회 이상 발신, 하루 1,000명 이상 안부 확인 자동화, 서비스 단가 월 1,100원, 만족도 4.8점·지속 희망 94.6%, 2024년 133건 자원 연계·5건 응급상황 조기 발견, 행복커넥트 E2E 음성인식 AI 스피커, 든든지키미 사례당 월 4시간 단축·110명 기준 연 5,280시간 경감)은 행안부·NIA 「AI 정부 서비스 사례집」(2026.3) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 홀로 사는 노인에 대한 안전확인 보호조치는 노인복지법 제27조의2(홀로 사는 노인에 대한 지원) 제1항이 국가·지방자치단체의 의무로 정하고 그 사업의 위탁은 같은 조 제2항에 근거가 있으며, 학대 의심 사례의 신고는 노인복지법 제39조의6(노인학대 신고의무와 절차 등) 제2항제2호(안전확인 등 서비스 종사자의 즉시 신고의무), 현장조사와 상담·서비스 기록의 보관은 같은 법 제39조의5(노인보호전문기관의 설치 등) 제2항제2호·제5호에 따릅니다. 그러나 그 안전확인을 어떻게 할지 — 누구에게 몇 번 전화를 걸고, 받지 않으면 몇 번 더 걸고, 언제 집으로 찾아갈지 — 는 조문이 아니라 인력과 예산이 정하던 영역입니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실(네이버클라우드 HyperCLOVA X 기반 클로바 케어콜 주 1회 이상 발신, 하루 1,000명 이상 안부 확인 자동화, 서비스 단가 월 1,100원, 만족도 4.8점·지속 희망 94.6%, 2024년 133건 자원 연계·5건 응급상황 조기 발견, 행복커넥트 E2E 음성인식 AI 스피커, 든든지키미 사례당 월 4시간 단축·110명 기준 연 5,280시간 경감)은 행안부·NIA 「AI 정부 서비스 사례집」(2026.3) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","A01","P03","A02","P05","P04","A03","P06","P07","A04","P08","P09","P10","P11","P12"];
+const nodes = ["P01","P02","A01","P03","A02","P05","P04","A03","P06","P07","A04","P08","P09","P13","P10","P11","P14","P12"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","A01","auto"],["A01","A02","auto"],["A02","P04"],["P04","P08"],["P02","A03","auto"],["A03","A04","auto"],["A04","P08"],["P08","P09"],["P08","P10"],["P09","P11"],["P10","P11"],["P11","P12"],["P11","A03","loop","재학대 위험군 상시 모니터링 재설정"],["P03","A01","replace"],["P05","A02","replace"],["P06","A03","replace"],["P07","A03","replace"]];
+const edges = [["P01","P02"],["P02","A01","auto"],["A01","A02","auto"],["A02","P04"],["P04","P08"],["P02","A03","auto"],["A03","A04","auto"],["A04","P08"],["P08","P09"],["P08","P10"],["P09","P11"],["P10","P11"],["P11","P12"],["P11","A03","loop","재학대 위험군 상시 모니터링 재설정"],["P03","A01","replace"],["P05","A02","replace"],["P06","A03","replace"],["P07","A03","replace"],["P09","P13"],["P13","P11"],["P11","P14"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

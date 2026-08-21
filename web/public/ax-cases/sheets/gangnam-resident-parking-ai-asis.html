@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 124호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>"단속은 했지만, <b>잠깐 사이에 또</b> 반복됩니다"</h1>
-  <p class="sub">거주자우선주차 관리를 규정과 실무 추론으로 나눠 그렸습니다. 위반이 확정된 뒤의 조치와 과태료 부과만 도로교통법이 정하고, 그 앞은 전부 파란 칸입니다. 위반 발생 → 신고 → 출동 → 처분이 반복되는 사후 구조여서 단속이 강해질수록 민원과 갈등도 함께 쌓였습니다.</p>
+  <p class="sub">거주자우선주차 관리를 규정과 실무 추론으로 나눠 그렸습니다. 부정주차의 판정 기준(주차장법 제8조의2제1항제4호), 위반 차량 조치·견인(도로교통법 제35조), 과태료 부과와 이의제기(도로교통법 제161조·질서위반행위규제법 제20조), 주차요금 징수(주차장법 제9조)는 법이 정하지만, 그 앞의 인지 과정은 파란 칸입니다. 위반 발생 → 신고 → 출동 → 처분이 반복되는 사후 구조여서 단속이 강해질수록 민원과 갈등도 함께 쌓였습니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>10</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>5</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>8</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 12 = 규정 2 + 추론 10 · 루프 2</span>
+    <span style="color:#65d7ad">전 단계 13 = 규정 5 + 추론 8 · 루프 2</span>
   </p>
 </header>
 <div class="legend">
@@ -76,34 +76,37 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>배정자·예약자 이용 실패</p><small>부정주차로 자기 자리에 못 댐 — 실무</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P03</b><em style="background:#2456d6">추론</em></div>
-      <p>민원 신고·전화</p><small>민원 반복 누적 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
+      <p>민원 신고·전화</p><small>배정자가 전화로 신고 — 같은 구역 민원이 반복 누적, 실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
-      <p>센서 기록 확인·현장 확인 요청</p><small>센서 방식의 식별 한계 — 실무</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="2"
+      <p>센서 기록 확인·현장 확인 요청</p><small>센서 방식의 식별 한계 — 실무</small></div><div class="card k-statute" id="P13" data-gate="1" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P13</b><em style="background:#1f8962">규정</em></div>
+      <p>부정주차 해당 여부 확인</p><small>주차장법 제8조의2(노상주차장에서의 주차행위 제한 등) — 지정된 주차구획 외 주차는 제8조의2제1항제4호, 제한조치 위반 주차는 같은 항 제3호</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P05</b><em style="background:#2456d6">추론</em></div>
       <p>현장 출동·차량 확인</p><small>단속 인력 직접 개입 — 실무</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
-      <p>위반 차량 번호 수기 확인</p><small>실무</small></div><div class="card k-statute" id="P07" data-gate="2" data-lane="2"
+      <p>위반 차량 번호 수기 확인</p><small>현장에서 차량 번호를 눈으로 확인해 적음 — 실무</small></div><div class="card k-statute" id="P07" data-gate="2" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P07</b><em style="background:#1f8962">규정</em></div>
-      <p>주차위반 조치·견인</p><small>도로교통법 제35조(주차위반에 대한 조치)</small></div><div class="card k-statute" id="P08" data-gate="3" data-lane="1"
+      <p>주차위반 조치·견인</p><small>도로교통법 제35조(주차위반에 대한 조치) — 시·군공무원의 이동 명령은 제35조제1항제2호, 운전자 부재 시 직접 이동은 제2항</small></div><div class="card k-statute" id="P08" data-gate="3" data-lane="1"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P08</b><em style="background:#1f8962">규정</em></div>
-      <p>행정처분·과태료 처리</p><small>도로교통법 제161조(과태료의 부과ㆍ징수 등)</small></div><div class="card k-inferred" id="P09" data-gate="3" data-lane="1"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P09</b><em style="background:#2456d6">추론</em></div>
-      <p>민원 응대·이의 처리</p><small>시민-행정 갈등 반복 — 실무</small></div><div class="card k-inferred" id="P10" data-gate="4" data-lane="1"
+      <p>행정처분·과태료 처리</p><small>도로교통법 제161조(과태료의 부과ㆍ징수 등) — 정차·주차 위반 과태료의 부과·징수 주체를 시장등으로 정한 것은 제161조제1항제3호</small></div><div class="card k-statute" id="P09" data-gate="3" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P09</b><em style="background:#1f8962">규정</em></div>
+      <p>민원 응대·이의 처리</p><small>질서위반행위규제법 제20조(이의제기) — 부과 통지를 받은 날부터 60일 이내 서면 이의제기는 제20조제1항, 이의제기에 따른 부과처분 효력 상실은 제2항</small></div><div class="card k-inferred" id="P10" data-gate="4" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P10</b><em style="background:#2456d6">추론</em></div>
-      <p>공유 시간 스케줄 수기 관리</p><small>중복 이용·주차면 사유화 관리 곤란 — 실무</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="1"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P11</b><em style="background:#2456d6">추론</em></div>
-      <p>요금 정산·확인</p><small>실무</small></div><div class="card k-inferred" id="P12" data-gate="4" data-lane="3"
+      <p>공유 시간 스케줄 수기 관리</p><small>중복 이용·주차면 사유화 관리 곤란 — 실무</small></div><div class="card k-statute" id="P11" data-gate="4" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P11</b><em style="background:#1f8962">규정</em></div>
+      <p>요금 정산·확인</p><small>주차장법 제9조(노상주차장의 주차요금 징수 등) — 주차요금 징수는 제9조제1항, 요율·징수방법의 조례 위임은 제2항</small></div><div class="card k-inferred" id="P12" data-gate="4" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P12</b><em style="background:#2456d6">추론</em></div>
-      <p>공유 예약 후 이용 실패 재신고</p><small>제도 신뢰 저하 — 실무</small></div></div>
+      <p>공유 예약 후 이용 실패 재신고</p><small>예약하고도 대지 못해 다시 신고 — 제도 신뢰 저하, 실무</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -129,17 +132,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(국가법령정보센터 DRF 원문 대조 완료): 주차위반에 대한 조치·견인은 도로교통법 제35조(주차위반에 대한 조치)에, 그에 따른 과태료 부과·징수는 도로교통법 제161조(과태료의 부과ㆍ징수 등)에 따릅니다(같은 조 제1항제3호는 정차·주차 위반 과태료의 부과·징수 주체를 시장등으로 정합니다). 그러나 그 앞의 절차 — 배정자가 못 대고 민원을 넣고, 담당자가 센서 기록을 확인해 현장 확인을 요청하고, 단속 인력이 나가 차량 번호를 눈으로 확인하던 흐름과 공유 시간 스케줄을 수기로 관리하던 일 — 은 조문 밖의 실무입니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실(전국 최초 AI 주차 관제, 차량·번호 인식으로 배정 시간·공유 시간·예약 정보를 종합 판별, 음성·시각 자동 안내, 재안내→경고→행정 연계 단계적 대응, 앱 기반 요금 자동 정산과 행정망 연계, 관·민 공동 특허 출원·확보)은 행안부·NIA 「AI 정부 서비스 사례집」(2026.3) 기반입니다.
+근거(국가법령정보센터 DRF 원문 대조 완료): 노상주차장에서 지정된 주차구획 외에 주차하거나 제한조치를 위반해 주차한 경우의 이동 명령은 주차장법 제8조의2(노상주차장에서의 주차행위 제한 등) 제1항제4호·제3호에, 주차요금 징수와 요율·징수방법의 조례 위임은 같은 법 제9조(노상주차장의 주차요금 징수 등) 제1항·제2항에 근거가 있습니다. 주차위반에 대한 조치·견인은 도로교통법 제35조(주차위반에 대한 조치) 제1항제2호·제2항에, 그에 따른 과태료 부과·징수는 도로교통법 제161조(과태료의 부과ㆍ징수 등) 제1항제3호에 따르며, 부과에 불복하는 이의제기는 질서위반행위규제법 제20조(이의제기) 제1항·제2항이 정합니다. 그러나 그 앞의 절차 — 배정자가 못 대고 민원을 넣고, 담당자가 센서 기록을 확인해 현장 확인을 요청하고, 단속 인력이 나가 차량 번호를 눈으로 확인하던 흐름과 공유 시간 스케줄을 수기로 관리하던 일 — 은 조문 밖의 실무입니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실(전국 최초 AI 주차 관제, 차량·번호 인식으로 배정 시간·공유 시간·예약 정보를 종합 판별, 음성·시각 자동 안내, 재안내→경고→행정 연계 단계적 대응, 앱 기반 요금 자동 정산과 행정망 연계, 관·민 공동 특허 출원·확보)은 행안부·NIA 「AI 정부 서비스 사례집」(2026.3) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11","P12"];
+const nodes = ["P01","P02","P03","P04","P13","P05","P06","P07","P08","P09","P10","P11","P12"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","P03"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","P07"],["P07","P08"],["P08","P09"],["P09","P05","loop","잠깐 사이 재발 — 재단속"],["P10","P11"],["P11","P12"],["P12","P03","loop","공유 이용 실패 재신고"]];
+const edges = [["P01","P02"],["P02","P03"],["P03","P04"],["P05","P06"],["P06","P07"],["P07","P08"],["P08","P09"],["P09","P05","loop","잠깐 사이 재발 — 재단속"],["P10","P11"],["P11","P12"],["P12","P03","loop","공유 이용 실패 재신고"],["P04","P13"],["P13","P05"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

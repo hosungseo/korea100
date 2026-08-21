@@ -49,13 +49,13 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <h1>3D 비전이 보고 로봇이 싸고 <b>무인지게차가 나른다</b></h1>
   <p class="sub">3D 비전카메라가 보급품의 형상과 위치를 인식하면 협동로봇이 포장하고 무인지게차·AGV가 적재와 이송을 이어받아 입고부터 불출까지가 자동으로 연결됩니다. AI 수요예측과 상태기반 정비(CBM) 전환도 함께 추진되고 있습니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>1</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>3</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>4</b></span>
     <span><i style="background:#d99a5e"></i>대체 <b>4</b></span>
     
     <span><i style="background:#d9a821"></i>간소화 <b>3</b></span>
-    <span style="color:#65d7ad">대체 4 · 간소화 3 · 소멸 0 · 자동 4 — 사람 단계 11 → 7</span>
+    <span style="color:#65d7ad">대체 4 · 간소화 3 · 소멸 0 · 자동 4 — 사람 단계 12 → 8</span>
   </p>
 </header>
 <div class="legend">
@@ -71,10 +71,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>군수품 입고 통보·청구</p><small>공문·전산 요청 — 실무</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="3"
+      <p>군수품 입고 통보·청구</p><small>수요 부대가 필요 품목을 공문·전산으로 청구 — 서식과 경로가 부대마다 다름</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>입고 물량 하역</p><small>인력 하역 — 실무</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
+      <p>입고 물량 하역</p><small>도착한 물량을 병력이 직접 내려 적치장에 쌓음</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A01</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>3D 비전 형상·위치 인식</p><small>보급품 형상과 위치를 자동 인식해 분류</small></div><div class="card k-changed" id="P03" data-gate="1" data-lane="1"
@@ -101,7 +101,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>보관 위치 기록</p><small>군수품관리법 제30조(장부의 비치) — 적재 위치가 전산에 반영돼 확인만 수행</small></div><div class="card k-statute" id="P08" data-gate="4" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P08</b><em style="background:#1f8962">규정</em></div>
-      <p>불출 승인 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재)</small></div><div class="card k-changed" id="P09" data-gate="4" data-lane="1"
+      <p>불출 승인 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재) 제1항 — 행정기관의 장의 결재, 제2항: 훈령으로 정한 위임전결</small></div><div class="card k-statute" id="P12" data-gate="4" data-lane="2"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
+      <p>출납명령 하달</p><small>군수품관리법 제12조(출납) 제1항 — 물품관리관이 출납할 군수품의 내용을 명백히 하여 출납을 명함, 제2항: 명령 없이는 출납 불가</small></div><div class="card k-changed" id="P09" data-gate="4" data-lane="1"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P09</b><em style="background:#b8890e">간소화</em></div>
       <p>재고 대조·수량 확인</p><small>군수품관리법 제17조(재물조사) — 전산 재고 확인으로 축소</small></div><div class="card k-auto" id="A04" data-gate="4" data-lane="4"
@@ -113,7 +116,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>불출품 이송·상차</p><small>무인 이송으로 대체</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P11</b><em style="background:#2456d6">추론</em></div>
-      <p>수요 부대 인수 확인</p><small>인수증 확인 — 실무</small></div></div>
+      <p>수요 부대 인수 확인</p><small>수요 부대가 인수증에 서명해 수령을 확인</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -139,17 +142,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 군수품관리법 제17조(재물조사)·제30조(장부의 비치), 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 재물조사와 장부 기록 의무는 군수품관리법이 정하지만, 검수·분류·포장·적재를 어떤 방법으로 할지는 조문에 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(뉴시스, 2026-08-07 — 세종 육군종합보급창 스마트 물류센터 현장 공개, 3D 비전카메라·협동로봇·무인지게차·AGV, AI 수요예측·상태기반 정비 병행) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 군수품관리법 제12조(출납) 제1항(물품관리관의 출납명령)·제2항(명령 없는 출납 금지), 군수품관리법 제17조(재물조사)와 군수품관리법 시행령 제34조제1항(정기 재물조사 연 1회 이상), 군수품관리법 제30조(장부의 비치), 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재) 제1항·제2항. 출납명령과 장부 기록, 재물조사, 불출 승인의 결재는 규정이 정하지만 검수·분류·포장·적재를 어떤 방법으로 할지는 조문에 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(뉴시스, 2026-08-07 — 세종 육군종합보급창 스마트 물류센터 현장 공개, 3D 비전카메라·협동로봇·무인지게차·AGV, AI 수요예측·상태기반 정비 병행) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","A01","P03","P04","A02","P05","A03","P06","P07","P08","P09","A04","P10","P11"];
+const nodes = ["P01","P02","A01","P03","P04","A02","P05","A03","P06","P07","P08","P12","P09","A04","P10","P11"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","A01","auto"],["A01","P03"],["P03","P01","loop","수량 불일치 재확인"],["P03","A02","auto"],["A02","A03","auto"],["A03","P07"],["P07","P08"],["P08","P09"],["P09","A04","auto"],["A04","P11"],["P04","A01","replace"],["P05","A02","replace"],["P06","A03","replace"],["P10","A04","replace"]];
+const edges = [["P01","P02"],["P02","A01","auto"],["A01","P03"],["P03","P01","loop","수량 불일치 재확인"],["P03","A02","auto"],["A02","A03","auto"],["A03","P07"],["P07","P08"],["P08","P12"],["P12","P09"],["P09","A04","auto"],["A04","P11"],["P04","A01","replace"],["P05","A02","replace"],["P06","A03","replace"],["P10","A04","replace"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

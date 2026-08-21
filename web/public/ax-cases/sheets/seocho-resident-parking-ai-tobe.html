@@ -47,15 +47,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 70호 · AI 적용</span><small>기준일 2026-08-21</small></div>
   <h1>출동 단계 자체가 사라졌다 — <b>인식하는 순간 경고</b></h1>
-  <p class="sub">AI가 구획에 들어온 차량의 번호판을 실시간으로 읽어 배정 차량인지 판별하고, 부정주차면 그 자리에서 음성·경광으로 경고해 이동을 유도합니다. 신고 접수와 결과 통지라는 법정 절차는 그대로 남고, 그 사이의 확인·출동·연락이 기계로 넘어갔습니다.</p>
+  <p class="sub">AI가 구획에 들어온 차량의 번호판을 실시간으로 읽어 배정 차량인지 판별하고, 부정주차면 그 자리에서 음성·경광으로 경고해 이동을 유도합니다. 이동 명령·가산금 부과·결과 통지라는 법정 절차는 그대로 남고, 그 사이의 확인·출동·연락이 기계로 넘어갔습니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>1</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>1</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>2</b></span>
     <span><i style="background:#d99a5e"></i>대체 <b>6</b></span>
     
     <span><i style="background:#d9a821"></i>간소화 <b>3</b></span>
-    <span style="color:#65d7ad">대체 6 · 간소화 3 · 소멸 0 · 자동 2 — 사람 단계 11 → 5</span>
+    <span style="color:#65d7ad">대체 6 · 간소화 3 · 소멸 0 · 자동 2 — 사람 단계 12 → 6</span>
   </p>
 </header>
 <div class="legend">
@@ -71,43 +71,46 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-changed" id="P01" data-gate="0" data-lane="0"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P01</b><em style="background:#b8890e">간소화</em></div>
-      <p>부정주차 신고</p><small>상시 무인 감지로 신고 의존도 감소</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="3"
+      <p>부정주차 신고</p><small>민원 처리에 관한 법률 제9조(민원의 접수), 서울특별시 서초구 주차장 설치 및 관리 조례 제15조제1항제2호 — 표지판의 부정주차 신고 안내</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>신고 건 접수 목록 적재</p><small>실무</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
+      <p>신고 건 접수 목록 적재</p><small>접수 순서대로 대기열에 쌓임 — 급한 건과 그렇지 않은 건이 섞임</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A01</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>번호판 실시간 인식·배정 대조</p><small>구획 배정 차량 여부 자동 판별</small></div><div class="card k-replaced" id="P03" data-gate="0" data-lane="1"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P03</b><em style="background:#d99a5e">A01로 대체</em></div>
-      <p>배정면·배정자 정보 대조</p><small>자동 대조로 대체</small></div><div class="card k-replaced" id="P04" data-gate="1" data-lane="1"
+      <p>배정면·배정자 정보 대조</p><small>구획별 배정 대장을 열어 배정면·배정자를 손으로 찾아 맞춰봄</small></div><div class="card k-replaced" id="P04" data-gate="1" data-lane="1"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P04</b><em style="background:#d99a5e">A01로 대체</em></div>
-      <p>차량번호 수기 조회</p><small>자동 인식으로 대체</small></div><div class="card k-replaced" id="P05" data-gate="1" data-lane="1"
+      <p>차량번호 수기 조회</p><small>신고 사진 속 번호판을 눈으로 읽어 배정 차량과 대조</small></div><div class="card k-replaced" id="P05" data-gate="1" data-lane="1"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P05</b><em style="background:#d99a5e">A01로 대체</em></div>
-      <p>중복·오인 신고 선별</p><small>자동 판별로 대체</small></div><div class="card k-auto" id="A02" data-gate="2" data-lane="4"
+      <p>중복·오인 신고 선별</p><small>같은 구획의 반복·오인 신고인지 앞선 접수 건과 비교해 걸러냄</small></div><div class="card k-auto" id="A02" data-gate="2" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A02</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>부정주차 즉시 음성·경광 경고</p><small>현장 출동 없이 이동 유도</small></div><div class="card k-replaced" id="P06" data-gate="2" data-lane="2"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P06</b><em style="background:#d99a5e">A02로 대체</em></div>
-      <p>현장 출동</p><small>즉시 경고로 대체</small></div><div class="card k-replaced" id="P07" data-gate="2" data-lane="2"
+      <p>현장 출동</p><small>단속원이 구획까지 이동 — 이동 시간 때문에 즉각 단속이 어려움</small></div><div class="card k-replaced" id="P07" data-gate="2" data-lane="2"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P07</b><em style="background:#d99a5e">A02로 대체</em></div>
-      <p>부정주차 여부 현장 확인·촬영</p><small>자동 인식·기록으로 대체</small></div><div class="card k-replaced" id="P08" data-gate="3" data-lane="2"
+      <p>부정주차 여부 현장 확인·촬영</p><small>현장에서 배정 차량 여부를 확인하고 위반 상태를 사진으로 남김</small></div><div class="card k-replaced" id="P08" data-gate="3" data-lane="2"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P08</b><em style="background:#d99a5e">A02로 대체</em></div>
       <p>차주 연락·이동 요청</p><small>현장 음성 안내로 대체</small></div><div class="card k-changed" id="P09" data-gate="3" data-lane="2"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P09</b><em style="background:#b8890e">간소화</em></div>
-      <p>미이동 시 현장 확인</p><small>경고 후 자진 이동으로 재출동 축소</small></div><div class="card k-changed" id="P10" data-gate="3" data-lane="3"
+      <p>미이동 시 재방문·이동조치</p><small>경고 후 자진 이동으로 재출동 축소</small></div><div class="card k-statute" id="P12" data-gate="3" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
+      <p>주차요금·가산금 부과</p><small>주차장법 제9조(노상주차장의 주차요금 징수 등) 제3항, 서울특별시 서초구 주차장 설치 및 관리 조례 제15조제4항 — 주차요금의 4배 이내 가산금 부과</small></div><div class="card k-changed" id="P10" data-gate="3" data-lane="3"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P10</b><em style="background:#b8890e">간소화</em></div>
       <p>단속 결과 기록</p><small>인식 결과 자동 기록</small></div><div class="card k-statute" id="P11" data-gate="4" data-lane="1"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P11</b><em style="background:#1f8962">규정</em></div>
-      <p>처리결과 통지</p><small>민원 처리에 관한 법률 제27조(처리결과의 통지)</small></div></div>
+      <p>처리결과 통지</p><small>민원 처리에 관한 법률 제27조(처리결과의 통지) 제1항 문서 통지·제2항제2호 전자민원창구 신청 시 전자문서 통지</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -133,17 +136,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거 법령: 민원 처리에 관한 법률 제9조(민원의 접수)·제27조(처리결과의 통지). 거주자우선주차구획의 배정·부정주차 확인과 현장 계도 절차는 지방자치단체 조례·내부 지침 영역이어서 조문으로 특정하지 않았습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(서초구 AI 무인단속, 서초3동 13면·방배4동 59면 등 72면 운영) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 민원 처리에 관한 법률 제9조(민원의 접수)·제27조(처리결과의 통지) 제1항·제2항제2호, 주차장법 제10조(노상주차장의 사용 제한 등) 제1항제3호(전용주차구획 지정)·제8조의2(노상주차장에서의 주차행위 제한 등) 제1항제4호(지정 구획 외 주차 시 이동 명령)·제2항(운전자 부재 시 이동 조치)·제9조(노상주차장의 주차요금 징수 등) 제3항(주차요금의 4배 이내 가산금), 서울특별시 서초구 주차장 설치 및 관리 조례 제15조(거주자우선주차 전용구획의 운영) 제1항제2호(부정주차 신고 안내)·제3항 및 별표 2(주차요금)·제4항(가산금 부과·견인조치). 이동 명령과 가산금까지는 조문이 정하지만, 배정 대장을 뒤져 차량을 대조하고 단속원이 현장까지 이동해 차주에게 연락하고 미이동 시 다시 찾아가는 과정은 규정 밖 실무입니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(서초구 AI 무인단속, 서초3동 13면·방배4동 59면 등 72면 운영) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","A01","P03","P04","P05","A02","P06","P07","P08","P09","P10","P11"];
+const nodes = ["P01","P02","A01","P03","P04","P05","A02","P06","P07","P08","P09","P12","P10","P11"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","A01","auto"],["A01","A02","auto"],["A02","P09"],["P09","A02","loop","미이동 재경고"],["A02","P10","auto"],["P10","P11"],["P03","A01","replace"],["P04","A01","replace"],["P05","A01","replace"],["P06","A02","replace"],["P07","A02","replace"],["P08","A02","replace"]];
+const edges = [["P01","P02"],["P02","A01","auto"],["A01","A02","auto"],["A02","P09"],["P09","A02","loop","미이동 재경고"],["A02","P10","auto"],["P10","P11"],["P03","A01","replace"],["P04","A01","replace"],["P05","A01","replace"],["P06","A02","replace"],["P07","A02","replace"],["P08","A02","replace"],["P09","P12"],["P12","P10"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

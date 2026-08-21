@@ -71,7 +71,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>한전 월별 고지서 수령</p><small>실무</small></div><div class="card k-auto" id="A01" data-gate="0" data-lane="4"
+      <p>한전 월별 고지서 수령</p><small>종이·PDF 고지서를 월마다 받아 보관 — 실무</small></div><div class="card k-auto" id="A01" data-gate="0" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A01</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>고지서 PDF·엑셀 자동 판독</p><small>PDF.js/ExcelJS로 브라우저에서 인식, 적용 전 미리보기와 수동 컬럼 매핑 제공</small></div><div class="card k-replaced" id="P02" data-gate="0" data-lane="1"
@@ -89,10 +89,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>월별 사용량·최대수요전력 추이 계산</p><small>자동 집계·차트로 대체</small></div><div class="card k-statute" id="P05" data-gate="1" data-lane="3"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P05</b><em style="background:#1f8962">규정</em></div>
-      <p>학교회계 집행 현황 확인</p><small>초ㆍ중등교육법 제30조의2(학교회계의 설치)</small></div><div class="card k-statute" id="P06" data-gate="2" data-lane="2"
+      <p>학교회계 집행 현황 확인</p><small>초ㆍ중등교육법 제30조의2(학교회계의 설치) 제3항 — , 학교 운영에 필요한 모든 경비를 세출로</small></div><div class="card k-statute" id="P06" data-gate="2" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P06</b><em style="background:#1f8962">규정</em></div>
-      <p>한전 공급약관상 요금제 확인</p><small>전기사업법 제16조(전기의 공급약관)</small></div><div class="card k-auto" id="A03" data-gate="2" data-lane="4"
+      <p>한전 공급약관상 요금제 확인</p><small>전기사업법 제16조(전기의 공급약관) 제3항 — , 전기사용자는 기본공급약관을 갈음해 선택공급약관을 고를 수 있음</small></div><div class="card k-auto" id="A03" data-gate="2" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A03</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>요금제 후보 TOP 3 자동 비교</p><small>현재 계약종별·수전전압 기준으로 비교 후 변경/유지/보류 결론과 연간 영향액 제시</small></div><div class="card k-replaced" id="P07" data-gate="2" data-lane="1"
@@ -119,7 +119,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>한전 제출 공문·변경신청서 작성</p><small>패키지 자동 생성으로 대체</small></div><div class="card k-statute" id="P12" data-gate="5" data-lane="0"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
-      <p>학교장 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재)</small></div><div class="card k-inferred" id="P13" data-gate="5" data-lane="2"
+      <p>학교장 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재) 제1항 — , 학교장 결재</small></div><div class="card k-inferred" id="P13" data-gate="5" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P13</b><em style="background:#2456d6">추론</em></div>
       <p>한전 제출·접수 확인</p><small>사업자등록증 등 실제 첨부 여부는 자동 완료 처리하지 않음 — 실무</small></div></div>
@@ -152,7 +152,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 초ㆍ중등교육법 제30조의2(학교회계의 설치), 전기사업법 제16조(전기의 공급약관), 「행정업무의 운영 및 혁신에 관한 규정」 제10조(문서의 결재). <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다 — 학교회계로 전기요금을 집행한다는 것과 한전 공급약관이 인가 대상이라는 것은 법에 있지만, 12개월 고지서를 손으로 옮겨 적고 요금제별로 다시 계산해 변경 여부를 판단하는 과정은 규정 밖 실무입니다. 도구 사실은 저장소 README(h19h19/el-bill — React 브라우저 전용 MVP, PDF.js/ExcelJS 로컬 파싱, 요금제 후보 TOP 3 비교, 변경신청 패키지 ZIP 3종, localStorage 24시간 자동 삭제)이며, README는 '공식 청구액 계산기가 아니라 학교 내부 진단용 추정'이고 '요금제 변경 신청은 원칙적으로 1년에 한 번'이라고 명시합니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 초ㆍ중등교육법 제30조의2제3항(학교회계 세출 — 학교 운영에 필요한 모든 경비), 전기사업법 제16조제1항(기본공급약관 인가)·제16조제3항(전기사용자의 선택공급약관 선택), 「행정업무의 운영 및 혁신에 관한 규정」 제10조제1항(문서의 결재). <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다 — 학교회계로 전기요금을 집행한다는 것과 한전 공급약관이 인가 대상이라는 것은 법에 있지만, 12개월 고지서를 손으로 옮겨 적고 요금제별로 다시 계산해 변경 여부를 판단하는 과정은 규정 밖 실무입니다. 도구 사실은 저장소 README(h19h19/el-bill — React 브라우저 전용 MVP, PDF.js/ExcelJS 로컬 파싱, 요금제 후보 TOP 3 비교, 변경신청 패키지 ZIP 3종, localStorage 24시간 자동 삭제)이며, README는 '공식 청구액 계산기가 아니라 학교 내부 진단용 추정'이고 '요금제 변경 신청은 원칙적으로 1년에 한 번'이라고 명시합니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
