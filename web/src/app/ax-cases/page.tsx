@@ -381,6 +381,8 @@ export default function AxCasesPage() {
 }
 
 function CaseBlock({ entry }: { entry: CaseEntry }) {
+  // PNG와 같은 이름의 HTML 시트가 sheets/ 에 있다 (예: 01-yebimon-asis.png → p01-yebimon-asis.html)
+  const sheetSlug = `p${entry.asisImg.replace("-asis.png", "")}`;
   return (
     <article className="ax-case">
       <header>
@@ -405,6 +407,14 @@ function CaseBlock({ entry }: { entry: CaseEntry }) {
           </a>
           <figcaption>
             <strong>AS-IS</strong> {entry.asisStat}
+            <a
+              className="ax-sheet-link"
+              href={`${SHEETS}/${sheetSlug}-asis.html`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              HTML 시트
+            </a>
           </figcaption>
         </figure>
         <figure>
@@ -421,6 +431,14 @@ function CaseBlock({ entry }: { entry: CaseEntry }) {
           </a>
           <figcaption>
             <strong>AI 적용</strong> {entry.tobeStat}
+            <a
+              className="ax-sheet-link"
+              href={`${SHEETS}/${sheetSlug}-tobe.html`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              HTML 시트
+            </a>
           </figcaption>
         </figure>
       </div>
