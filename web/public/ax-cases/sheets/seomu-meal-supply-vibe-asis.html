@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 34호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>본업이 아닌 일에 <b>본업 시간을 쓴다</b></h1>
-  <p class="sub">부서 서무가 매달 반복하는 특근매식비 정산과 사무용품 구매요청 절차를 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 결재만 규정이 정하고, 요청을 취합하고 재고를 대조하고 서식에 옮겨 적는 구간 전부가 규정 밖 실무입니다.</p>
+  <p class="sub">부서 서무가 매달 반복하는 특근매식비 정산과 사무용품 구매요청 절차를 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 기안·결재와 물품 출납명령만 규정이 정하고, 요청을 취합하고 재고를 대조하고 서식에 옮겨 적는 구간 전부가 규정 밖 실무입니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>1</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>10</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 11 = 규정 1 + 추론 10 · 반려 루프 1</span>
+    <span style="color:#65d7ad">전 단계 13 = 규정 3 + 추론 10 · 반려 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -70,37 +70,43 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>사무용품 수요 구두·메신저 접수</p><small>제각각 들어오는 요청 — 실무</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="1"
+      <p>사무용품 수요 구두·메신저 접수</p><small>구두·메신저로 제각각 들어오는 요청을 받아 둠 — 실무</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>요청 항목 취합·중복 정리</p><small>수기 목록화 — 실무</small></div><div class="card k-inferred" id="P03" data-gate="0" data-lane="1"
+      <p>요청 항목 취합·중복 정리</p><small>구두·메신저로 온 요청을 한 목록으로 옮겨 중복 정리 — 실무</small></div><div class="card k-inferred" id="P03" data-gate="0" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P03</b><em style="background:#2456d6">추론</em></div>
-      <p>초과근무 실적 확인</p><small>특근매식비 대상 파악 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
+      <p>초과근무 실적 확인</p><small>초과근무 실적을 확인해 특근매식비 대상을 가려냄 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
-      <p>재고·기존 보유 물품 대조</p><small>창고·대장 확인 — 실무</small></div><div class="card k-inferred" id="P05" data-gate="1" data-lane="1"
+      <p>재고·기존 보유 물품 대조</p><small>창고와 물품대장을 확인해 이미 있는 물품인지 대조 — 실무</small></div><div class="card k-inferred" id="P05" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P05</b><em style="background:#2456d6">추론</em></div>
-      <p>단가·규격 조회와 예산 잔액 확인</p><small>실무</small></div><div class="card k-inferred" id="P06" data-gate="1" data-lane="1"
+      <p>단가·규격 조회와 예산 잔액 확인</p><small>품목별 단가·규격을 찾아보고 예산 잔액과 맞춰 봄 — 실무</small></div><div class="card k-inferred" id="P06" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
-      <p>매식 인원·금액 기준 대조</p><small>실무</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="1"
+      <p>매식 인원·금액 기준 대조</p><small>매식 인원과 1인 기준금액을 대조해 정산액을 확인 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P07</b><em style="background:#2456d6">추론</em></div>
-      <p>구매요청서 서식에 수기 전기</p><small>항목별 옮겨 적기 — 실무</small></div><div class="card k-inferred" id="P08" data-gate="2" data-lane="1"
+      <p>구매요청서 서식에 수기 전기</p><small>구매요청 서식에 품목·수량·단가를 한 줄씩 옮겨 적음 — 실무</small></div><div class="card k-inferred" id="P08" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P08</b><em style="background:#2456d6">추론</em></div>
-      <p>특근매식비 정산서 작성</p><small>실무</small></div><div class="card k-statute" id="P09" data-gate="3" data-lane="3"
+      <p>특근매식비 정산서 작성</p><small>초과근무 실적과 카드 사용내역을 붙여 정산서를 작성 — 실무</small></div><div class="card k-statute" id="P12" data-gate="2" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
+      <p>구매요청·정산 기안</p><small>행정업무의 운영 및 혁신에 관한 규정 제8조(문서의 기안) 제2항 — , 관계 서식이 따로 있으면 그 서식에 기입</small></div><div class="card k-statute" id="P09" data-gate="3" data-lane="3"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P09</b><em style="background:#1f8962">규정</em></div>
-      <p>부서장 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재)</small></div><div class="card k-inferred" id="P10" data-gate="3" data-lane="2"
+      <p>부서장 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재) 제1항</small></div><div class="card k-inferred" id="P10" data-gate="3" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P10</b><em style="background:#2456d6">추론</em></div>
-      <p>반려·보완 요구</p><small>기재 오류·근거 부족 — 실무</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="2"
+      <p>반려·보완 요구</p><small>기재 오류·근거 부족으로 되돌아옴 — 실무</small></div><div class="card k-statute" id="P13" data-gate="4" data-lane="2"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P13</b><em style="background:#1f8962">규정</em></div>
+      <p>물품 출납명령·수령</p><small>물품관리법 제31조(출납명령) 제1항 — ·제2항, 출납명령이 없으면 물품을 출납할 수 없음</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P11</b><em style="background:#2456d6">추론</em></div>
-      <p>구매·지출 집행</p><small>실무</small></div></div>
+      <p>구매·지출 집행</p><small>요청 물품을 구매하고 특근매식비를 지출 — 실무</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -126,17 +132,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 물품 구매요청과 특근매식비 집행은 물품관리 관계 법령과 회계 예규를 따르나 조문을 특정하지 않았습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 개발자 본인의 공개 게시물(threads @orthodox_tauros, 2026-04-26) 기반이며, 게시물에 적힌 동기는 '서무 업무 시간을 줄여 본업인 물품관리에 집중하려는 것'입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 「행정업무의 운영 및 혁신에 관한 규정」 제8조제2항(관계 서식이 따로 있으면 그 서식에 기입)·제10조제1항(문서의 결재), 물품관리법 제31조제1항·제2항(물품관리관의 출납명령이 없으면 물품출납공무원은 출납할 수 없음). 특근매식비 집행 기준은 회계 예규를 따르나 조문을 특정하지 않았습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다 — 요청을 취합하고 재고를 대조하고 서식에 옮겨 적는 구간은 규정 밖 실무입니다. 도구 사실은 개발자 본인의 공개 게시물(threads @orthodox_tauros, 2026-04-26) 기반이며, 게시물에 적힌 동기는 '서무 업무 시간을 줄여 본업인 물품관리에 집중하려는 것'입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11"];
+const nodes = ["P01","P02","P03","P04","P05","P06","P07","P08","P12","P09","P10","P13","P11"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","P04"],["P03","P06"],["P04","P05"],["P05","P07"],["P06","P08"],["P07","P09"],["P08","P09"],["P09","P10"],["P10","P07","loop","보완 요구"],["P09","P11"]];
+const edges = [["P01","P02"],["P02","P04"],["P03","P06"],["P04","P05"],["P05","P07"],["P06","P08"],["P09","P10"],["P10","P07","loop","보완 요구"],["P07","P12"],["P08","P12"],["P12","P09"],["P09","P13"],["P13","P11"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

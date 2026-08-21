@@ -49,13 +49,13 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <h1>항목마다 <b>source_ref가 붙는다</b></h1>
   <p class="sub">공고문과 예시 양식을 넣으면 직무수행내용을 뽑아 NCS 세분류·능력단위에 연결하고, HWPX 직무기술서 초안과 KSA 근거 기반 면접질문 초안까지 이어집니다. NCS 기반 항목에는 근거(source_ref)가 붙고, 제외 업무는 결과에 다시 등장하지 않는지 검증합니다. 산출물은 항상 검토용 draft이며 채용 결정이나 면접문항 확정본이 아닙니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>4</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>2</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>4</b></span>
     <span><i style="background:#d99a5e"></i>대체 <b>6</b></span>
     
     <span><i style="background:#d9a821"></i>간소화 <b>4</b></span>
-    <span style="color:#65d7ad">대체 6 · 간소화 4 · 소멸 0 · 자동 4 — 사람 단계 14 → 8</span>
+    <span style="color:#65d7ad">대체 6 · 간소화 4 · 소멸 0 · 자동 4 — 사람 단계 16 → 10</span>
   </p>
 </header>
 <div class="legend">
@@ -71,10 +71,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>채용 수요·직무 확인</p><small>실무</small></div><div class="card k-statute" id="P02" data-gate="0" data-lane="1"
+      <p>채용 수요·직무 확인</p><small>어느 직무를 어떤 자격으로 뽑을지 부서와 협의 — 실무</small></div><div class="card k-statute" id="P02" data-gate="0" data-lane="1"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P02</b><em style="background:#1f8962">규정</em></div>
-      <p>채용일정·채용과정 고지 준비</p><small>채용절차의 공정화에 관한 법률 제8조(채용일정 및 채용과정의 고지)</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
+      <p>채용일정·채용과정 고지 준비</p><small>채용절차의 공정화에 관한 법률 제8조(채용일정 및 채용과정의 고지) — 일정·심사 지연 사실·과정 변경을 알릴 의무</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A01</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>공고문에서 직무수행내용 추출</p><small>공고문·예시 양식 업로드 → 항목 추출, 로컬 전용은 API 키·로그인 없이 결정적 규칙으로 동작</small></div><div class="card k-replaced" id="P03" data-gate="1" data-lane="1"
@@ -116,13 +116,19 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>주질문·꼬리질문·확인포인트 작성</p><small>초안 자동 생성으로 대체</small></div><div class="card k-statute" id="P12" data-gate="4" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
-      <p>블라인드 기준 검토</p><small>채용절차의 공정화에 관한 법률 제4조의3(출신지역 등 개인정보 요구 금지)</small></div><div class="card k-changed" id="P13" data-gate="5" data-lane="2"
+      <p>블라인드 기준 검토</p><small>채용절차의 공정화에 관한 법률 제4조의3(출신지역 등 개인정보 요구 금지) — 제1호 신체적 조건, 제2호 출신지역·혼인여부·재산</small></div><div class="card k-changed" id="P13" data-gate="5" data-lane="2"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P13</b><em style="background:#b8890e">간소화</em></div>
       <p>면접위원 검토·수정</p><small>백지 작성에서 초안 검토로 전환 — 최종 문항은 기관 기준에 맞게 수정</small></div><div class="card k-inferred" id="P14" data-gate="5" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P14</b><em style="background:#2456d6">추론</em></div>
-      <p>직무기술서·공고 확정</p><small>실무</small></div></div>
+      <p>직무기술서·공고 확정</p><small>수정 결과를 반영해 직무기술서와 공고문을 확정 — 실무</small></div><div class="card k-statute" id="P15" data-gate="5" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P15</b><em style="background:#1f8962">규정</em></div>
+      <p>채용공고 게시·일정 고지</p><small>채용절차의 공정화에 관한 법률 제8조(채용일정 및 채용과정의 고지) — 고지방법은 제7조제2항 준용</small></div><div class="card k-statute" id="P16" data-gate="5" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P16</b><em style="background:#1f8962">규정</em></div>
+      <p>채용광고 내용 불리 변경 금지 확인</p><small>채용절차의 공정화에 관한 법률 제4조(거짓 채용광고 등의 금지) 제2항 — , 정당한 사유 없이 불리하게 변경 금지</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -152,17 +158,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 채용절차의 공정화에 관한 법률 제8조(채용일정 및 채용과정의 고지), 같은 법 제4조의3(출신지역 등 개인정보 요구 금지). <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다 — 일정을 고지하고 블라인드 기준을 지킨다는 것은 법에 있지만, 공고문에서 직무수행내용을 뽑아 NCS 세분류·능력단위에 붙이고 KSA에서 면접 문항을 만들어 내는 과정은 담당자의 손과 눈으로만 이뤄집니다. 도구 사실은 저장소 README 2종(kyci/ncs_jd — 로컬 전용은 API 키·로그인 없이 결정적 규칙으로 동작, 읽기 전용 NCS serving DB를 MCP 경계로만 조회, 결과물은 항상 검토용 draft / kyci/ncscope — 공식 KSA 근거로 주질문·꼬리질문·확인포인트를 구조화 생성, 결과물은 공식 면접문항 확정본이 아닌 보조자료 초안) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 채용절차의 공정화에 관한 법률 제8조(채용일정 및 채용과정의 고지 — 고지방법은 제7조제2항 준용), 같은 법 제4조제2항(채용광고 내용의 불리한 변경 금지), 같은 법 제4조의3제1호·제2호(신체적 조건·출신지역 등 요구 금지). <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다 — 일정을 고지하고 블라인드 기준을 지킨다는 것은 법에 있지만, 공고문에서 직무수행내용을 뽑아 NCS 세분류·능력단위에 붙이고 KSA에서 면접 문항을 만들어 내는 과정은 담당자의 손과 눈으로만 이뤄집니다. 도구 사실은 저장소 README 2종(kyci/ncs_jd — 로컬 전용은 API 키·로그인 없이 결정적 규칙으로 동작, 읽기 전용 NCS serving DB를 MCP 경계로만 조회, 결과물은 항상 검토용 draft / kyci/ncscope — 공식 KSA 근거로 주질문·꼬리질문·확인포인트를 구조화 생성, 결과물은 공식 면접문항 확정본이 아닌 보조자료 초안) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","A01","P03","P04","A02","P05","P06","P07","A03","P08","P09","A04","P10","P11","P12","P13","P14"];
+const nodes = ["P01","P02","A01","P03","P04","A02","P05","P06","P07","A03","P08","P09","A04","P10","P11","P12","P13","P14","P15","P16"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","A01","auto"],["A01","A02","auto"],["A02","A03","auto"],["A03","A04","auto"],["A01","P04"],["P04","A02"],["A02","P07"],["P07","A03"],["A03","P09"],["P09","A04"],["A04","P12"],["P12","P13"],["P13","P14"],["P13","A04","loop","문항 재생성"],["P03","A01","replace"],["P05","A02","replace"],["P06","A02","replace"],["P08","A03","replace"],["P10","A04","replace"],["P11","A04","replace"]];
+const edges = [["P01","P02"],["P02","A01","auto"],["A01","A02","auto"],["A02","A03","auto"],["A03","A04","auto"],["A01","P04"],["P04","A02"],["A02","P07"],["P07","A03"],["A03","P09"],["P09","A04"],["A04","P12"],["P12","P13"],["P13","P14"],["P13","A04","loop","문항 재생성"],["P03","A01","replace"],["P05","A02","replace"],["P06","A02","replace"],["P08","A03","replace"],["P10","A04","replace"],["P11","A04","replace"],["P14","P15"],["P15","P16"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

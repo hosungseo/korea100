@@ -49,13 +49,13 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <h1>딥블루아이가 <b>선종·조업상태·위치를 먼저 골라낸다</b></h1>
   <p class="sub">자체 개발한 AI 모델이 채증영상에서 어선의 선종과 조업 상태, 위치를 자동 분석해 육안 판별을 보조합니다. 위법 여부의 판단과 검문검색·나포는 사람과 법이 그대로 맡습니다. 2025년 8월 전국 항공대에 코드가 배포돼 검증·매뉴얼화를 거치는 초기 단계이고, 인명구조·오염물질 식별로 확장이 예고돼 있습니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>4</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>5</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>1</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>1</b></span>
     <span><i style="background:#d99a5e"></i>대체 <b>3</b></span>
     
-    <span><i style="background:#d9a821"></i>간소화 <b>2</b></span>
-    <span style="color:#65d7ad">대체 3 · 간소화 2 · 소멸 0 · 자동 1 — 사람 단계 10 → 7</span>
+    <span><i style="background:#d9a821"></i>간소화 <b>4</b></span>
+    <span style="color:#65d7ad">대체 3 · 간소화 4 · 소멸 0 · 자동 1 — 사람 단계 13 → 10</span>
   </p>
 </header>
 <div class="legend">
@@ -71,10 +71,16 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-statute" id="P01" data-gate="0" data-lane="0"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P01</b><em style="background:#1f8962">규정</em></div>
-      <p>해역 초계비행</p><small>해양경비법 제7조(해양경비 활동의 범위) — 시속 350km 비행</small></div><div class="card k-statute" id="P02" data-gate="1" data-lane="0"
+      <p>해역 초계비행</p><small>해양경비법 제7조(해양경비 활동의 범위) 제1호·제2호 — 해양 관련 범죄 예방, 해양수산자원 보호에 관한 조치 — 시속 350km 비행</small></div><div class="card k-statute" id="P02" data-gate="1" data-lane="0"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P02</b><em style="background:#1f8962">규정</em></div>
-      <p>사진·영상 채증</p><small>해양경비법 제7조의2(해양경비정보의 수집 등) — 매 비행 사진 500장·영상 50건 이상</small></div><div class="card k-auto" id="A01" data-gate="2" data-lane="4"
+      <p>사진·영상 채증</p><small>해양경비법 제7조의2(해양경비정보의 수집 등) 제1항 — 해양경비 활동에 필요한 해양경비정보를 수집·관리·활용 — 매 비행 사진 500장·영상 50건 이상</small></div><div class="card k-changed" id="P11" data-gate="1" data-lane="0"
+      style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
+      <div class="chead"><b>P11</b><em style="background:#b8890e">간소화</em></div>
+      <p>채증영상 내려받기·정리</p><small>업로드하면 분석까지 이어져 폴더 정리 부담 축소</small></div><div class="card k-statute" id="P12" data-gate="1" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
+      <p>해양경비정보시스템 등록·관리</p><small>해양경비법 제7조의2(해양경비정보의 수집 등) 제3항 — 해양경비정보의 수집·관리 및 분석을 위한 해양경비정보시스템 구축·운영</small></div><div class="card k-auto" id="A01" data-gate="2" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A01</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>채증영상 자동 1차 분석</p><small>어선의 선종·조업상태·위치를 자동 분석</small></div><div class="card k-changed" id="P03" data-gate="2" data-lane="1"
@@ -92,16 +98,19 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>촬영 위치·좌표 대조</p><small>자동 분석으로 대체</small></div><div class="card k-changed" id="P07" data-gate="3" data-lane="1"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P07</b><em style="background:#b8890e">간소화</em></div>
-      <p>위법 요소 판단</p><small>자동 분석 보조로 누락 위험 축소</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="2"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P08</b><em style="background:#2456d6">추론</em></div>
-      <p>판독 결과 보고·자료 정리</p><small>보고서 작성 — 실무</small></div><div class="card k-statute" id="P09" data-gate="4" data-lane="2"
+      <p>위법 요소 판단</p><small>자동 분석 보조로 누락 위험 축소</small></div><div class="card k-changed" id="P08" data-gate="3" data-lane="2"
+      style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
+      <div class="chead"><b>P08</b><em style="background:#b8890e">간소화</em></div>
+      <p>판독 결과 보고·자료 정리</p><small>분석 결과가 그대로 붙어 보고서 작성 부담 축소</small></div><div class="card k-statute" id="P09" data-gate="4" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P09</b><em style="background:#1f8962">규정</em></div>
-      <p>해상검문검색</p><small>해양경비법 제12조(해상검문검색)</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="3"
+      <p>해상검문검색</p><small>해양경비법 제12조(해상검문검색) 제1항제3호 — 국내법령·조약을 위반하거나 위반이 임박했다고 의심되는 선박에 대한 해상검문검색</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="3"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P10</b><em style="background:#1f8962">규정</em></div>
-      <p>추적·나포</p><small>해양경비법 제13조(추적·나포)</small></div></div>
+      <p>추적·나포</p><small>해양경비법 제13조(추적ㆍ나포) 제1호·제2호 — 검문검색에 불응해 도주하는 선박, 법령·조약 위반이 확실시되는 선박의 추적·나포</small></div><div class="card k-inferred" id="P13" data-gate="4" data-lane="2"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P13</b><em style="background:#2456d6">추론</em></div>
+      <p>단속 결과·채증자료 편철</p><small>검문검색·나포 결과와 근거가 된 채증영상을 사건기록에 묶어 보관</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -127,17 +136,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 해양경비법 제7조(해양경비 활동의 범위), 해양경비법 제7조의2(해양경비정보의 수집 등), 해양경비법 제12조(해상검문검색), 해양경비법 제13조(추적·나포). 초계비행과 채증영상의 수집·관리·활용은 해양경비법이 정한 해양경비 활동과 해양경비정보 수집에 해당합니다. 다만 모아 온 영상을 어떤 순서로 훑고 선종·조업 상태를 어떻게 가려낼지는 규정에 절차가 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 해양경찰청 보도자료(2025-08-05 — 매 비행 사진 500장·영상 50건 이상, 자체 개발 AI 모델로 선종·조업상태·위치 분석, 전국 항공대 코드 배포 후 검증·매뉴얼화 단계) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 해양경비법 제7조(해양경비 활동의 범위) 제1호(해양 관련 범죄 예방)·제2호(해양수산자원 보호 조치), 해양경비법 제7조의2(해양경비정보의 수집 등) 제1항(수집·관리·활용)·제3항(해양경비정보시스템 구축·운영), 해양경비법 제12조(해상검문검색) 제1항제3호, 해양경비법 제13조(추적ㆍ나포) 제1호·제2호. 초계비행과 채증영상의 수집·관리·활용은 해양경비법이 정한 해양경비 활동과 해양경비정보 수집에 해당합니다. 다만 모아 온 영상을 어떤 순서로 훑고 선종·조업 상태를 어떻게 가려낼지는 규정에 절차가 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 해양경찰청 보도자료(2025-08-05 — 매 비행 사진 500장·영상 50건 이상, 자체 개발 AI 모델로 선종·조업상태·위치 분석, 전국 항공대 코드 배포 후 검증·매뉴얼화 단계) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","A01","P03","P04","P05","P06","P07","P08","P09","P10"];
+const nodes = ["P01","P02","P11","P12","A01","P03","P04","P05","P06","P07","P08","P09","P10","P13"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","A01","auto"],["A01","P03"],["P03","P07"],["P07","P03","loop","누락 의심 시 재판독(축소)"],["P07","P08"],["P08","P09"],["P09","P10"],["P04","A01","replace"],["P05","A01","replace"],["P06","A01","replace"]];
+const edges = [["P01","P02"],["P02","P11"],["P11","P12"],["P12","A01","auto"],["A01","P03"],["P03","P07"],["P07","P03","loop","누락 의심 시 재판독(축소)"],["P07","P08"],["P08","P09"],["P09","P10"],["P10","P13"],["P04","A01","replace"],["P05","A01","replace"],["P06","A01","replace"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

@@ -49,13 +49,13 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <h1>표 하나를 <b>여럿이 함께</b> 고친다</h1>
   <p class="sub">자유 셀 편집 대신 근무 배정·연가/출장·시설 백업·변경 이력 단위로 다루고, 동시에 고치면 버전 충돌을 화면에서 알려 줍니다. 시설 담당이 빠지면 critical 경고와 함께 백업 지정을 요구하고, 점심당번·저녁 데스크처럼 비워도 되는 칸은 경고를 만들지 않습니다. 근무표를 짜는 판단 자체는 여전히 담당자의 일입니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>1</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>4</b></span>
     <span><i style="background:#d99a5e"></i>대체 <b>6</b></span>
     
     <span><i style="background:#d9a821"></i>간소화 <b>3</b></span>
-    <span style="color:#65d7ad">대체 6 · 간소화 3 · 소멸 0 · 자동 4 — 사람 단계 12 → 6</span>
+    <span style="color:#65d7ad">대체 6 · 간소화 3 · 소멸 0 · 자동 4 — 사람 단계 13 → 7</span>
   </p>
 </header>
 <div class="legend">
@@ -74,10 +74,13 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>전월 근무표 엑셀 복사·요일 재조정</p><small>기존 엑셀 import 미리보기로 선택 반영</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>직원·근무유형·시설 담당 명단 정리</p><small>실무</small></div><div class="card k-statute" id="P03" data-gate="1" data-lane="1"
+      <p>직원·근무유형·시설 담당 명단 정리</p><small>직원별 근무유형과 시설 담당 여부를 표로 정리 — 실무</small></div><div class="card k-statute" id="P03" data-gate="1" data-lane="1"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P03</b><em style="background:#1f8962">규정</em></div>
-      <p>주 근로시간 한도 확인</p><small>근로기준법 제50조(근로시간)</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
+      <p>주 근로시간 한도 확인</p><small>근로기준법 제50조(근로시간) 제1항 — 1주 40시간·제2항 1일 8시간 한도</small></div><div class="card k-statute" id="P13" data-gate="1" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P13</b><em style="background:#1f8962">규정</em></div>
+      <p>주휴일·휴게시간 보장 확인</p><small>근로기준법 제55조(휴일) 제1항 — 1주 평균 1회 이상 유급휴일, 제54조제1항 휴게시간</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A01</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>근무 배정 단위 편집·동시 편집 제어</p><small>edit lock UX와 버전 충돌 모달로 여러 명이 같은 근무표를 안전하게 수정</small></div><div class="card k-replaced" id="P04" data-gate="1" data-lane="1"
@@ -89,7 +92,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>점심당번·저녁 데스크 배정</p><small>비워도 확인 필요 경고를 만들지 않고 '미배정'으로 표시</small></div><div class="card k-statute" id="P07" data-gate="2" data-lane="0"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P07</b><em style="background:#1f8962">규정</em></div>
-      <p>연가 신청</p><small>근로기준법 제60조(연차 유급휴가)</small></div><div class="card k-auto" id="A02" data-gate="2" data-lane="4"
+      <p>연가 신청</p><small>근로기준법 제60조(연차 유급휴가) 제5항 — , 근로자가 청구한 시기에 부여</small></div><div class="card k-auto" id="A02" data-gate="2" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A02</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>연가·출장 입력 시 자동 검증</p><small>시설 2명 규칙 위반은 critical 경고와 백업 지정 요구</small></div><div class="card k-replaced" id="P05" data-gate="1" data-lane="1"
@@ -142,17 +145,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 근로기준법 제50조(근로시간), 같은 법 제60조(연차 유급휴가). <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다 — 근로시간 한도와 연차는 법에 있지만, 교대 근무표를 어떻게 짜고 누가 시설을 지키며 부재가 생기면 누구를 백업으로 세울지는 기관 안의 관행으로만 정해집니다. 도구 사실은 저장소 README(h19h19/gayanglib — 기존 '★2026년 근무표(3).xlsx'의 총괄/주간표 흐름을 바탕으로 만든 Next.js 협업 웹앱, 자유 셀 편집 대신 근무 배정·연가/출장·시설 백업·변경 이력 단위 관리, 시설 2명 규칙 위반 시 critical 경고, edit lock과 버전 충돌 모달, ExcelJS 주간·월간·전체 출력) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 근로기준법 제50조제1항·제2항(1주 40시간·1일 8시간), 같은 법 제55조제1항(1주 평균 1회 이상의 유급휴일)과 제54조제1항(4시간 30분·8시간 1시간 이상 휴게), 같은 법 제60조제5항(근로자가 청구한 시기에 연차 부여). <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다 — 근로시간·휴일·연차의 한도는 법에 있지만, 교대 근무표를 어떻게 짜고 누가 시설을 지키며 부재가 생기면 누구를 백업으로 세울지는 기관 안의 관행으로만 정해집니다. 도구 사실은 저장소 README(h19h19/gayanglib — 기존 '★2026년 근무표(3).xlsx'의 총괄/주간표 흐름을 바탕으로 만든 Next.js 협업 웹앱, 자유 셀 편집 대신 근무 배정·연가/출장·시설 백업·변경 이력 단위 관리, 시설 2명 규칙 위반 시 critical 경고, edit lock과 버전 충돌 모달, ExcelJS 주간·월간·전체 출력) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","P03","A01","P04","P06","P07","A02","P05","P08","A03","P09","P10","A04","P11","P12"];
+const nodes = ["P01","P02","P03","P13","A01","P04","P06","P07","A02","P05","P08","A03","P09","P10","A04","P11","P12"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","P03"],["P03","A01","auto"],["A01","P06"],["P06","A02"],["P07","A02"],["A02","A03","auto"],["A03","A04","auto"],["A04","P12"],["A03","A01","loop","경고 발생 시 재배정"],["P04","A01","replace"],["P05","A02","replace"],["P08","A02","replace"],["P09","A03","replace"],["P10","A03","replace"],["P11","A04","replace"]];
+const edges = [["P01","P02"],["P02","P03"],["A01","P06"],["P06","A02"],["P07","A02"],["A02","A03","auto"],["A03","A04","auto"],["A04","P12"],["A03","A01","loop","경고 발생 시 재배정"],["P04","A01","replace"],["P05","A02","replace"],["P08","A02","replace"],["P09","A03","replace"],["P10","A03","replace"],["P11","A04","replace"],["P03","P13"],["P13","A01","auto"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

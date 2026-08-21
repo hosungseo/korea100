@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 59호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>야간 전화를 받으려고 <b>직원이 순번대로 밤을 샌다</b></h1>
-  <p class="sub">야간·휴일 민원전화 응대를 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 민원 접수와 처리결과 통지는 민원처리법이 정하지만, 순번 당직 편성·당직실 상주·연락망 수기 검색·안내 문자 수기 발송은 규정 밖 실무입니다.</p>
+  <p class="sub">야간·휴일 민원전화 응대를 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 기타민원의 전화 신청과 접수, 소관 기관 이송, 처리결과 통지는 민원처리법이 정하지만, 순번 당직 편성·당직실 상주·연락망 수기 검색·안내 문자 수기 발송은 규정 밖 실무입니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>9</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>4</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>7</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 11 = 규정 2 + 추론 9 · 재문의 루프 1</span>
+    <span style="color:#65d7ad">전 단계 11 = 규정 4 + 추론 7 · 재문의 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -67,40 +67,40 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <span>─→ 절차 순서 &nbsp; ┄→ 반려·보완 루프</span>
 </div>
 <div class="lanehead"><div>단계 ↓ · 행위자 →</div><div>시민</div><div>당직 공무원</div><div>소관 부서·기관</div><div>당직실</div></div>
-<div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="0"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>야간·휴일 민원전화</p><small>11개월 2만1,648건 규모 — 실무</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="1"
+<div id="pool" style="display:none"><div class="card k-statute" id="P01" data-gate="0" data-lane="0"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P01</b><em style="background:#1f8962">규정</em></div>
+      <p>야간·휴일 민원전화</p><small>민원 처리에 관한 법률 제8조(민원의 신청) — 단서, 기타민원은 구술 또는 전화로 신청할 수 있다</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>직원 순번 당직 편성</p><small>당직명령·교대 — 실무</small></div><div class="card k-inferred" id="P03" data-gate="0" data-lane="3"
+      <p>직원 순번 당직 편성</p><small>당직명령으로 순번을 정해 교대 근무 — 기관 내부 규칙 사항</small></div><div class="card k-inferred" id="P03" data-gate="0" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P03</b><em style="background:#2456d6">추론</em></div>
-      <p>당직실 상주 대기</p><small>야간 상주 근무 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
+      <p>당직실 상주 대기</p><small>밤새 당직실에 상주하며 전화를 기다린다 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
-      <p>전화 직접 응대</p><small>당직자 1인이 순차 응대 — 실무</small></div><div class="card k-statute" id="P05" data-gate="1" data-lane="1"
+      <p>전화 직접 응대</p><small>당직자 1명이 걸려온 순서대로 응대 — 동시 착신은 대기</small></div><div class="card k-statute" id="P05" data-gate="1" data-lane="1"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P05</b><em style="background:#1f8962">규정</em></div>
-      <p>민원 접수</p><small>민원 처리에 관한 법률 제9조(민원의 접수)</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
+      <p>민원 접수</p><small>민원 처리에 관한 법률 제9조(민원의 접수) 제1항 — 접수 보류·거부 금지·제2항 접수증 교부</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
-      <p>소관 부서 확인</p><small>부서 연락망 수기 검색 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="2"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P07</b><em style="background:#2456d6">추론</em></div>
-      <p>유관기관 연결·이첩</p><small>야간 연결 지연 — 실무</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="1"
+      <p>소관 부서 확인</p><small>부서 연락망 문서를 뒤져 소관 부서를 찾는다 — 실무</small></div><div class="card k-statute" id="P07" data-gate="2" data-lane="2"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P07</b><em style="background:#1f8962">규정</em></div>
+      <p>유관기관 연결·이첩</p><small>민원 처리에 관한 법률 제16조(민원문서의 이송) 제1항 — , 다른 행정기관 소관이면 지체 없이 이송</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P08</b><em style="background:#2456d6">추론</em></div>
-      <p>안내 문자 수기 발송</p><small>번호·문구 직접 입력 — 실무</small></div><div class="card k-inferred" id="P09" data-gate="3" data-lane="0"
+      <p>안내 문자 수기 발송</p><small>번호와 문구를 직접 입력해 안내 문자를 보낸다 — 실무</small></div><div class="card k-inferred" id="P09" data-gate="3" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P09</b><em style="background:#2456d6">추론</em></div>
-      <p>재문의·반복 전화</p><small>안내가 미흡할 때 반복 — 실무</small></div><div class="card k-inferred" id="P10" data-gate="4" data-lane="1"
+      <p>재문의·반복 전화</p><small>안내가 미흡하면 같은 민원이 다시 걸려온다 — 실무 루프</small></div><div class="card k-inferred" id="P10" data-gate="4" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P10</b><em style="background:#2456d6">추론</em></div>
-      <p>당직일지 작성</p><small>손기록 후 익일 인계 — 실무</small></div><div class="card k-statute" id="P11" data-gate="4" data-lane="2"
+      <p>당직일지 작성</p><small>당직일지에 손으로 적어 익일 인계 — 실무</small></div><div class="card k-statute" id="P11" data-gate="4" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P11</b><em style="background:#1f8962">규정</em></div>
-      <p>익일 처리결과 통지</p><small>민원 처리에 관한 법률 제27조(처리결과의 통지)</small></div></div>
+      <p>익일 처리결과 통지</p><small>민원 처리에 관한 법률 제27조(처리결과의 통지) 제1항 — , 처리를 완료한 때에는 결과를 문서로 통지</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -126,7 +126,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 민원 처리에 관한 법률 제9조(민원의 접수)·제27조(처리결과의 통지). 순번 당직 편성과 당직실 상주는 법률이 아니라 기관 내부 규칙·훈령 사항이라 파랑으로 두었습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(광주시 'AI 당지기' 도입과 2024.8 직원 당직제 폐지, 11개월간 2만1,648건 중 86% 자체 처리, 아시아경제 2025-07-28) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 민원 처리에 관한 법률 제8조 단서(기타민원은 구술 또는 전화로 신청), 제9조제1항·제2항(민원의 접수와 접수증), 제16조제1항(소관 기관 이송), 제27조제1항(처리결과의 문서 통지). 순번 당직 편성과 당직실 상주는 법률이 아니라 기관 내부 규칙·훈령 사항이라 파랑으로 두었습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(광주시 'AI 당지기' 도입과 2024.8 직원 당직제 폐지, 11개월간 2만1,648건 중 86% 자체 처리, 아시아경제 2025-07-28) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>

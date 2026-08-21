@@ -49,13 +49,13 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <h1>전임자 대신 <b>24시간 열려 있는 매뉴얼</b></h1>
   <p class="sub">서무 절차를 이야기 순서로 정리한 온라인 매뉴얼이 인수인계를 대신하고, AI 검색이 규정과 사례를 바로 찾아 줍니다. 사업자번호처럼 반복 조회하던 항목은 공공데이터 OPEN API가 자동으로 가져옵니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>1</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>1</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>3</b></span>
     <span><i style="background:#d99a5e"></i>대체 <b>6</b></span>
     
     <span><i style="background:#d9a821"></i>간소화 <b>3</b></span>
-    <span style="color:#65d7ad">대체 6 · 간소화 3 · 소멸 0 · 자동 3 — 사람 단계 11 → 5</span>
+    <span style="color:#65d7ad">대체 6 · 간소화 3 · 소멸 0 · 자동 3 — 사람 단계 13 → 7</span>
   </p>
 </header>
 <div class="legend">
@@ -77,7 +77,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>인사이동·업무 인계</p><small>상시 매뉴얼로 대체</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>직원 요청 접수(지출·복무 문의)</p><small>구두·메신저 요청 — 실무</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
+      <p>직원 요청 접수(지출·복무 문의)</p><small>지출·복무 문의가 구두·메신저로 수시로 들어옴 — 실무</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A01</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>24시간 AI 검색</p><small>규정·절차·사례를 질문 한 번으로 안내</small></div><div class="card k-replaced" id="P03" data-gate="1" data-lane="1"
@@ -86,31 +86,37 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>관련 규정·지침 검색</p><small>AI 검색으로 대체</small></div><div class="card k-replaced" id="P04" data-gate="1" data-lane="2"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P04</b><em style="background:#d99a5e">A01로 대체</em></div>
-      <p>선임·전임자에게 문의</p><small>AI 검색으로 대체</small></div><div class="card k-replaced" id="P05" data-gate="1" data-lane="1"
+      <p>선임·전임자에게 문의</p><small>규정에 안 적힌 처리 순서를 사람에게 물어 확인 — 실무</small></div><div class="card k-replaced" id="P05" data-gate="1" data-lane="1"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P05</b><em style="background:#d99a5e">A01로 대체</em></div>
-      <p>유사 과거 사례 문서 찾기</p><small>AI 검색으로 대체</small></div><div class="card k-auto" id="A02" data-gate="2" data-lane="4"
+      <p>유사 과거 사례 문서 찾기</p><small>부서 폴더와 기존 공문을 열어 비슷한 건을 찾음 — 실무</small></div><div class="card k-auto" id="A02" data-gate="2" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A02</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>공공데이터 OPEN API 자동 조회</p><small>사업자번호 등 반복 조회를 자동 연계</small></div><div class="card k-replaced" id="P06" data-gate="2" data-lane="3"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P06</b><em style="background:#d99a5e">A02로 대체</em></div>
-      <p>사업자번호·거래처 정보 조회</p><small>자동 조회로 대체</small></div><div class="card k-replaced" id="P07" data-gate="2" data-lane="1"
+      <p>사업자번호·거래처 정보 조회</p><small>사업자번호·거래처를 외부 사이트에서 건별로 조회 — 실무</small></div><div class="card k-replaced" id="P07" data-gate="2" data-lane="1"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P07</b><em style="background:#d99a5e">A02로 대체</em></div>
       <p>조회 결과 전기(轉記)</p><small>자동 연계로 대체</small></div><div class="card k-changed" id="P08" data-gate="3" data-lane="1"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P08</b><em style="background:#b8890e">간소화</em></div>
-      <p>지출·복무 처리 절차 수행</p><small>안내된 순서를 따라 수행 — 기억 의존 해소</small></div><div class="card k-changed" id="P09" data-gate="3" data-lane="1"
+      <p>지출·복무 처리 절차 수행</p><small>e호조·복무시스템 입력 순서를 기억에 의존 — 실무</small></div><div class="card k-changed" id="P09" data-gate="3" data-lane="1"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P09</b><em style="background:#b8890e">간소화</em></div>
-      <p>공문서 기안</p><small>매뉴얼의 서식·문구 예시 참조로 작성 부담 축소</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="3"
+      <p>공문서 기안</p><small>행정업무의 운영 및 혁신에 관한 규정 제8조(문서의 기안) 제1항 — 전자문서 기안 원칙·제2항 행정안전부령 기안문 서식</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="3"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P10</b><em style="background:#1f8962">규정</em></div>
-      <p>결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재)</small></div><div class="card k-changed" id="P11" data-gate="4" data-lane="1"
+      <p>결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재) 제1항 — 기관장 결재·제2항 위임전결</small></div><div class="card k-changed" id="P11" data-gate="4" data-lane="1"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P11</b><em style="background:#b8890e">간소화</em></div>
-      <p>반려 시 재확인·수정</p><small>근거 재검색이 즉시 — 루프 축소</small></div></div>
+      <p>반려 시 재확인·수정</p><small>근거 재검색이 즉시 — 루프 축소</small></div><div class="card k-statute" id="P12" data-gate="4" data-lane="3"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
+      <p>지출원인행위·지출 절차</p><small>지방회계법 제29조(지출원인행위)·제31조(지출의 절차) — 제29조제2항 배정된 예산의 범위에서 재무관이 원인행위</small></div><div class="card k-statute" id="P13" data-gate="4" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P13</b><em style="background:#1f8962">규정</em></div>
+      <p>생산문서 등록·생산등록번호 부여</p><small>행정업무의 운영 및 혁신에 관한 규정 제11조(문서의 등록 등) 제1항 — 문서 성립 즉시 지체 없이 등록</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -136,17 +142,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 행정업무의 운영 및 혁신에 관한 규정 제8조(문서의 기안), 제10조(문서의 결재). <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 서무 업무는 기안문 서식과 결재를 빼면 절차 대부분이 훈령·예규와 구전에 흩어져 있어, 근거를 찾고 전임자에게 묻고 조회 결과를 옮겨적는 단계는 실무로 재구성했습니다. 도구 사실은 언론 보도(세계일보 2025-09-09, 문화일보 2025-12-31: 스토리텔링형 온라인 업무매뉴얼과 24시간 AI 검색, 공공데이터 OPEN API 연계, 누적 방문 1.5만~3.5만 명, 권영 주무관 '지방행정의 달인' 선정·특별승진) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 행정업무의 운영 및 혁신에 관한 규정 제8조(문서의 기안) 제1항·제2항, 제10조(문서의 결재) 제1항·제2항, 제11조(문서의 등록 등) 제1항 · 지방회계법 제29조(지출원인행위) 제2항·제31조(지출의 절차). <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 서무 업무는 기안문 서식·결재·지출원인행위·문서 등록을 빼면 절차 대부분이 훈령·예규와 구전에 흩어져 있어, 근거를 찾고 전임자에게 묻고 조회 결과를 옮겨적는 단계는 실무로 재구성했습니다. 도구 사실은 언론 보도(세계일보 2025-09-09, 문화일보 2025-12-31: 스토리텔링형 온라인 업무매뉴얼과 24시간 AI 검색, 공공데이터 OPEN API 연계, 누적 방문 1.5만~3.5만 명, 권영 주무관 '지방행정의 달인' 선정·특별승진) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["A03","P01","P02","A01","P03","P04","P05","A02","P06","P07","P08","P09","P10","P11"];
+const nodes = ["A03","P01","P02","A01","P03","P04","P05","A02","P06","P07","P08","P09","P10","P11","P12","P13"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P02","A01","auto"],["A03","A01","auto"],["A01","A02","auto"],["A02","P08"],["P08","P09"],["P09","P10"],["P10","P11"],["P11","A01","loop","근거 재확인(축소)"],["P01","A03","replace"],["P03","A01","replace"],["P04","A01","replace"],["P05","A01","replace"],["P06","A02","replace"],["P07","A02","replace"]];
+const edges = [["P02","A01","auto"],["A03","A01","auto"],["A01","A02","auto"],["A02","P08"],["P08","P09"],["P09","P10"],["P10","P11"],["P11","A01","loop","근거 재확인(축소)"],["P01","A03","replace"],["P03","A01","replace"],["P04","A01","replace"],["P05","A01","replace"],["P06","A02","replace"],["P07","A02","replace"],["P10","P12"],["P12","P13"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

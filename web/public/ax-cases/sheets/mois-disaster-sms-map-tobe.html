@@ -49,13 +49,13 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <h1>지도가 다섯 번째 레인으로 — <b>목록에서 한 장의 그림으로</b></h1>
   <p class="sub">발송 내역을 지도 위에 올려 시·군·구별 현황과 재난 이동 경로, 담당자 연락처를 한 화면에서 봅니다. 문자 발송과 상황 보고라는 규정상 절차는 그대로 두고, 그 사이에서 사람이 하던 목록 통독·지역 분류·경로 추정이 지도로 옮겨갔습니다. 2026년 7월 3일 시범 운영으로 시작했습니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>0</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>3</b></span>
     <span><i style="background:#d99a5e"></i>대체 <b>7</b></span>
     
     <span><i style="background:#d9a821"></i>간소화 <b>2</b></span>
-    <span style="color:#65d7ad">대체 7 · 간소화 2 · 소멸 0 · 자동 3 — 사람 단계 11 → 4</span>
+    <span style="color:#65d7ad">대체 7 · 간소화 2 · 소멸 0 · 자동 3 — 사람 단계 12 → 5</span>
   </p>
 </header>
 <div class="legend">
@@ -71,7 +71,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-statute" id="P01" data-gate="0" data-lane="0"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P01</b><em style="background:#1f8962">규정</em></div>
-      <p>재난문자 발송</p><small>재난 및 안전관리 기본법 제38조의2(재난 예보ㆍ경보체계 구축ㆍ운영 등)</small></div><div class="card k-changed" id="P02" data-gate="0" data-lane="3"
+      <p>재난문자 발송</p><small>재난 및 안전관리 기본법 제38조의2(재난 예보ㆍ경보체계 구축ㆍ운영 등) 제3항제2호 — 주요 전기통신사업자에 대한 문자 송신 요청</small></div><div class="card k-changed" id="P02" data-gate="0" data-lane="3"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P02</b><em style="background:#b8890e">간소화</em></div>
       <p>발송 내역 축적</p><small>축적은 유지, 지도 입력으로 바로 활용</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
@@ -107,10 +107,13 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>지역 담당자 연락처 별도 명부에서 찾기</p><small>연락처 표시로 대체</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="1"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P10</b><em style="background:#1f8962">규정</em></div>
-      <p>재난상황 보고</p><small>재난 및 안전관리 기본법 제20조(재난상황의 보고)</small></div><div class="card k-changed" id="P11" data-gate="4" data-lane="2"
+      <p>재난상황 보고</p><small>재난 및 안전관리 기본법 제20조(재난상황의 보고) 제1항 — 재난상황은 즉시, 응급조치·수습현황은 지체 없이 보고</small></div><div class="card k-changed" id="P11" data-gate="4" data-lane="2"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P11</b><em style="background:#b8890e">간소화</em></div>
-      <p>지휘부 확인</p><small>지도에서 직접 확인 — 추가 요구 축소</small></div></div>
+      <p>지휘부 확인</p><small>지도에서 직접 확인 — 추가 요구 축소</small></div><div class="card k-statute" id="P12" data-gate="4" data-lane="0"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
+      <p>관계 재난관리책임기관 통보</p><small>재난 및 안전관리 기본법 제20조(재난상황의 보고) 제4항 — 재난 발생을 신고·통보받은 경우 관계 재난관리책임기관의 장에게 즉시 통보</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -136,17 +139,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 재난 및 안전관리 기본법 제38조의2(재난 예보ㆍ경보체계 구축ㆍ운영 등)에 따른 재난문자 발송, 같은 법 제20조(재난상황의 보고)에 따른 상황 보고. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(YTN 2026-07-27, 조원갑 과장이 1~2일 만에 개발해 2026-07-03 시범 운영을 시작한 재난문자 지도 시각화 — 시·군·구별 현황, 재난 이동 경로, 담당자 연락처 확인) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 재난 및 안전관리 기본법 제38조의2(재난 예보ㆍ경보체계 구축ㆍ운영 등) 제3항제2호(주요 전기통신사업자에 대한 문자 송신 요청), 같은 법 제20조(재난상황의 보고) 제1항(재난상황 즉시 보고)·제4항(관계 재난관리책임기관의 장에게 즉시 통보). <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(YTN 2026-07-27, 조원갑 과장이 1~2일 만에 개발해 2026-07-03 시범 운영을 시작한 재난문자 지도 시각화 — 시·군·구별 현황, 재난 이동 경로, 담당자 연락처 확인) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","A01","P03","P04","A02","P05","P06","P07","A03","P08","P09","P10","P11"];
+const nodes = ["P01","P02","A01","P03","P04","A02","P05","P06","P07","A03","P08","P09","P10","P11","P12"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","A01","auto"],["A01","A02","auto"],["A02","A03","auto"],["A03","P10"],["P10","P11"],["P11","A02","loop","지도에서 즉시 재확인"],["P03","A01","replace"],["P04","A01","replace"],["P05","A02","replace"],["P06","A02","replace"],["P07","A02","replace"],["P08","A03","replace"],["P09","A03","replace"]];
+const edges = [["P01","P02"],["P02","A01","auto"],["A01","A02","auto"],["A02","A03","auto"],["A03","P10"],["P10","P11"],["P11","A02","loop","지도에서 즉시 재확인"],["P03","A01","replace"],["P04","A01","replace"],["P05","A02","replace"],["P06","A02","replace"],["P07","A02","replace"],["P08","A03","replace"],["P09","A03","replace"],["P10","P12"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 62호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>319개 노선 혼잡률 분석에 <b>연 1,382시간</b></h1>
-  <p class="sub">광역버스 혼잡률 분석 업무를 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 분석 결과에 따른 개선 요구와 보고서 결재는 법령·규정이 정하지만, 시스템에서 원자료를 내려받아 엑셀로 가공하고 노선별 수식을 반복 적용해 검산하는 작업은 규정 밖 실무입니다.</p>
+  <p class="sub">광역버스 혼잡률 분석 업무를 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 보고서 결재와 개선 요구, 증차에 따르는 사업계획 변경 인가는 법령·규정이 정하지만, 시스템에서 원자료를 내려받아 엑셀로 가공하고 노선별 수식을 반복 적용해 검산하는 작업은 규정 밖 실무입니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>9</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 11 = 규정 2 + 추론 9 · 재작업 루프 2</span>
+    <span style="color:#65d7ad">전 단계 12 = 규정 3 + 추론 9 · 재작업 루프 2</span>
   </p>
 </header>
 <div class="legend">
@@ -70,37 +70,40 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>교통카드·운행 원자료 적재</p><small>일 단위 축적 — 실무</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="1"
+      <p>교통카드·운행 원자료 적재</p><small>교통카드 태그와 운행 기록이 날마다 쌓인다 — 실무</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>시스템에서 원자료 내려받기</p><small>노선별 개별 조회·다운로드 — 실무</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="1"
+      <p>시스템에서 원자료 내려받기</p><small>319개 노선을 하나씩 조회해 파일로 내려받는다 — 실무</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P03</b><em style="background:#2456d6">추론</em></div>
-      <p>엑셀 서식 정리·열 맞추기</p><small>수작업 가공 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
+      <p>엑셀 서식 정리·열 맞추기</p><small>노선마다 다른 서식과 열 순서를 손으로 맞춘다 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
-      <p>노선·정류소 코드 대조</p><small>코드 불일치 수기 보정 — 실무</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="1"
+      <p>노선·정류소 코드 대조</p><small>노선·정류소 코드가 어긋난 건을 찾아 고친다 — 실무</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P05</b><em style="background:#2456d6">추론</em></div>
-      <p>319개 노선 혼잡률 계산</p><small>노선별 수식 반복 적용 — 실무</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
+      <p>319개 노선 혼잡률 계산</p><small>노선별로 같은 수식을 붙여넣어 혼잡률을 낸다 — 실무</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
-      <p>초과탑승 구간 추출</p><small>기준 초과 건 수기 선별 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="3" data-lane="1"
+      <p>초과탑승 구간 추출</p><small>기준을 넘은 구간을 눈으로 골라낸다 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="3" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P07</b><em style="background:#2456d6">추론</em></div>
-      <p>계산 오류 검산·재작업</p><small>연 1,382시간 소요 — 실무</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="2"
+      <p>계산 오류 검산·재작업</p><small>계산이 틀리면 앞 단계로 돌아가 다시 — 연 1,382시간</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P08</b><em style="background:#2456d6">추론</em></div>
-      <p>결과 검토·수정 지시</p><small>보고서 반려 — 실무</small></div><div class="card k-inferred" id="P09" data-gate="4" data-lane="1"
+      <p>결과 검토·수정 지시</p><small>부서장이 보고서를 보고 고칠 곳을 지시 — 실무</small></div><div class="card k-inferred" id="P09" data-gate="4" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P09</b><em style="background:#2456d6">추론</em></div>
-      <p>분석보고서 작성</p><small>표·그래프 재작성 — 실무</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="2"
+      <p>분석보고서 작성</p><small>표와 그래프를 다시 그려 보고서를 만든다 — 실무</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P10</b><em style="background:#1f8962">규정</em></div>
-      <p>보고서 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재)</small></div><div class="card k-statute" id="P11" data-gate="4" data-lane="0"
+      <p>보고서 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재) 제1항 — 기관장 결재·제2항 위임전결</small></div><div class="card k-statute" id="P11" data-gate="4" data-lane="0"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P11</b><em style="background:#1f8962">규정</em></div>
-      <p>운송사업자 개선 요구·증차 협의</p><small>여객자동차 운수사업법 제23조(여객자동차운송사업의 개선명령 등)</small></div></div>
+      <p>운송사업자 개선 요구·증차 협의</p><small>여객자동차 운수사업법 제23조(여객자동차운송사업의 개선명령 등) 제1항제1호 — 사업계획의 변경·제5호 자동차 또는 운송시설의 개선</small></div><div class="card k-statute" id="P12" data-gate="4" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
+      <p>사업계획 변경 인가</p><small>여객자동차 운수사업법 제10조(사업계획의 변경) 제1항 — , 사업계획을 변경하려면 시·도지사의 인가</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -126,17 +129,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 여객자동차 운수사업법 제23조(여객자동차운송사업의 개선명령 등), 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 혼잡률 산출 방법과 엑셀 가공 절차는 규정에 정해져 있지 않아 파랑으로 두었습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도·도 공보(경기도 광역버스 319개 노선 초과탑승 분석 자동화, 연 1,382시간→192시간으로 1,190시간 절감, 2024년 말 구축, 아시아경제·경기도 브리핑 2024-11-26) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 여객자동차 운수사업법 제23조제1항제1호(사업계획의 변경)·제5호(자동차 또는 운송시설의 개선), 같은 법 제10조제1항(사업계획 변경 인가), 행정업무의 운영 및 혁신에 관한 규정 제10조제1항·제2항(문서의 결재와 위임전결). 혼잡률 산출 방법과 엑셀 가공 절차는 규정에 정해져 있지 않아 파랑으로 두었습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도·도 공보(경기도 광역버스 319개 노선 초과탑승 분석 자동화, 연 1,382시간→192시간으로 1,190시간 절감, 2024년 말 구축, 아시아경제·경기도 브리핑 2024-11-26) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11"];
+const nodes = ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11","P12"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","P03"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","P07"],["P07","P05","loop","검산·재계산"],["P07","P09"],["P09","P08"],["P08","P09","loop","수정 지시"],["P08","P10"],["P10","P11"]];
+const edges = [["P01","P02"],["P02","P03"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","P07"],["P07","P05","loop","검산·재계산"],["P07","P09"],["P09","P08"],["P08","P09","loop","수정 지시"],["P08","P10"],["P10","P11"],["P11","P12"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

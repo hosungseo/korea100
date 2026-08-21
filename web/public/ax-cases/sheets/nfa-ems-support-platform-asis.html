@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 94호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>받아줄 병원을 <b>한 곳씩 전화로 찾는다</b></h1>
-  <p class="sub">119 구급활동을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 신고와 출동은 소방기본법이 정하지만, 현장에서 중증도를 손으로 가르고 수용 가능한 병원을 전화로 하나씩 확인하며 이송이 끝난 뒤 활동일지를 다시 입력하는 과정은 규정 밖 실무입니다.</p>
+  <p class="sub">119 구급활동을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 신고와 출동, 중증도 분류, 수용능력 확인, 이송과 기록관리는 법이 조문으로 정합니다. 다만 그 의무를 실제로 어떻게 이행하는지 — pre-KTAS 기준을 손으로 대조하고 병원을 한 곳씩 전화로 확인하는 방식 — 는 규정 밖 실무입니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>4</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>6</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>8</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>5</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 10 = 규정 4 + 추론 6 · 수용 거부 루프 1</span>
+    <span style="color:#65d7ad">전 단계 13 = 규정 8 + 추론 5 · 수용 거부 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -70,34 +70,43 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-statute" id="P01" data-gate="0" data-lane="0"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P01</b><em style="background:#1f8962">규정</em></div>
-      <p>119 신고</p><small>소방기본법 제19조(화재 등의 통지)</small></div><div class="card k-statute" id="P02" data-gate="0" data-lane="2"
+      <p>119 신고</p><small>소방기본법 제19조(화재 등의 통지) 제1항 — 구조·구급이 필요한 사고 현장을 발견한 사람은 지체 없이 통지</small></div><div class="card k-statute" id="P02" data-gate="0" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P02</b><em style="background:#1f8962">규정</em></div>
-      <p>출동 지령</p><small>소방기본법 제16조(소방활동)</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="1"
+      <p>출동 지령</p><small>소방기본법 제16조(소방활동) 제1항 — 위급한 상황이 발생하면 소방대를 현장에 신속하게 출동시켜야</small></div><div class="card k-inferred" id="P13" data-gate="0" data-lane="1"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P13</b><em style="background:#2456d6">추론</em></div>
+      <p>출동 준비·현장 이동</p><small>지령을 받고 장비와 약제를 챙겨 구급차로 현장까지 이동</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P03</b><em style="background:#2456d6">추론</em></div>
-      <p>현장 환자 상태 평가</p><small>구급대원 경험 판단 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
-      <p>중증도 수기 분류</p><small>pre-KTAS 기준을 손으로 대조 — 실무</small></div><div class="card k-inferred" id="P05" data-gate="1" data-lane="1"
+      <p>현장 환자 상태 평가</p><small>환자의 의식·호흡·활력징후를 구급대원이 직접 살펴 상태를 가늠</small></div><div class="card k-statute" id="P04" data-gate="1" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P04</b><em style="background:#1f8962">규정</em></div>
+      <p>중증도 수기 분류</p><small>응급의료에 관한 법률 제31조의4(환자의 중증도 분류 및 감염병 의심환자 등의 선별) 제1항 — 구급차등의 운용자는 중증도를 분류(pre-KTAS 기준을 손으로 대조하는 방식은 규정 밖 실무)</small></div><div class="card k-inferred" id="P05" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P05</b><em style="background:#2456d6">추론</em></div>
-      <p>현장 소견 구두 보고</p><small>무전으로 상태 전달 — 실무</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
-      <p>수용 가능 병원 전화 확인</p><small>한 곳씩 전화 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="3"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P07</b><em style="background:#2456d6">추론</em></div>
-      <p>병원 수용 가부 회신</p><small>구두 회신 — 실무</small></div><div class="card k-inferred" id="P08" data-gate="2" data-lane="1"
+      <p>현장 소견 구두 보고</p><small>무전으로 상황실에 환자 상태를 말로 불러 전달</small></div><div class="card k-statute" id="P06" data-gate="2" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P06</b><em style="background:#1f8962">규정</em></div>
+      <p>수용 가능 병원 전화 확인</p><small>응급의료에 관한 법률 제48조의2(수용능력 확인 등) 제1항 — 이송하려는 응급의료기관의 수용 능력을 확인하고 환자 상태·응급처치 내용을 미리 통보(한 곳씩 전화로 거는 방식은 규정 밖 실무)</small></div><div class="card k-statute" id="P07" data-gate="2" data-lane="3"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P07</b><em style="background:#1f8962">규정</em></div>
+      <p>병원 수용 가부 회신</p><small>응급의료에 관한 법률 제48조의2(수용능력 확인 등) 제2항 — 응급의료기관의 장은 정당한 사유 없이 거부·기피 불가, 수용 불가 시 지체 없이 통보</small></div><div class="card k-inferred" id="P08" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P08</b><em style="background:#2456d6">추론</em></div>
-      <p>이송 병원 선정</p><small>회신을 취합해 판단 — 실무</small></div><div class="card k-statute" id="P09" data-gate="3" data-lane="1"
+      <p>이송 병원 선정</p><small>돌아온 회신을 머릿속으로 견줘 어느 병원으로 갈지 정함</small></div><div class="card k-inferred" id="P12" data-gate="3" data-lane="1"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P12</b><em style="background:#2456d6">추론</em></div>
+      <p>이송 중 처치 내용 메모</p><small>이동 중 처치 내용을 종이나 휴대전화 메모로 남겨 뒀다가 나중에 옮겨 적음</small></div><div class="card k-statute" id="P09" data-gate="3" data-lane="1"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P09</b><em style="background:#1f8962">규정</em></div>
-      <p>이송·병원 인계</p><small>119구조ㆍ구급에 관한 법률 제13조(구조ㆍ구급활동)</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="1"
+      <p>이송·병원 인계</p><small>119구조ㆍ구급에 관한 법률 제13조(구조ㆍ구급활동) 제1항 — 구조·구급대를 신속 출동시켜 인명구조·응급처치 및 구급차등의 이송</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="1"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P10</b><em style="background:#1f8962">규정</em></div>
-      <p>구급활동일지 수기 입력</p><small>119구조ㆍ구급에 관한 법률 제22조(구조ㆍ구급활동의 기록관리)</small></div></div>
+      <p>구급활동일지 수기 입력</p><small>119구조ㆍ구급에 관한 법률 제22조(구조ㆍ구급활동의 기록관리) 제1항 — 활동상황 등을 기록·보관, 제2항: 활동상황일지의 작성·보관·관리는 행정안전부령</small></div><div class="card k-statute" id="P11" data-gate="4" data-lane="2"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P11</b><em style="background:#1f8962">규정</em></div>
+      <p>이송환자 정보 요청·적절성 평가</p><small>119구조ㆍ구급에 관한 법률 제22조의2(이송환자에 대한 정보 수집 및 응급의료정보통신망의 이용) 제1항제2호 — 이송 병원에 주된 증상·사망 여부·상해 경중 등 진단·상태 정보를 요청해 응급처치 적절성 자체 평가</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -123,17 +132,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 소방기본법 제19조(화재 등의 통지), 소방기본법 제16조(소방활동), 「119구조ㆍ구급에 관한 법률」 제13조(구조ㆍ구급활동)·제22조(구조ㆍ구급활동의 기록관리). <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 소방청 R&D·세브란스 발표(1단계 R&D 완료, 통합 시제품 현장 실증, 실사용 구급대원 종합 만족도 86점) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 소방기본법 제19조(화재 등의 통지) 제1항·제16조(소방활동) 제1항, 응급의료에 관한 법률 제31조의4(환자의 중증도 분류 및 감염병 의심환자 등의 선별) 제1항, 응급의료에 관한 법률 제48조의2(수용능력 확인 등) 제1항(수용능력 확인·사전 통보)·제2항(거부·기피 금지), 119구조ㆍ구급에 관한 법률 제13조(구조ㆍ구급활동) 제1항·제22조(구조ㆍ구급활동의 기록관리) 제1항·제2항·제22조의2(이송환자에 대한 정보 수집 및 응급의료정보통신망의 이용) 제1항제2호. 중증도 분류와 수용능력 확인, 기록관리는 법정 의무이지만 그 이행 방법 — 손으로 pre-KTAS를 대조하고 병원을 한 곳씩 전화로 확인하는 것 — 은 조문에 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 소방청 R&D·세브란스 발표(1단계 R&D 완료, 통합 시제품 현장 실증, 실사용 구급대원 종합 만족도 86점) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10"];
+const nodes = ["P01","P02","P13","P03","P04","P05","P06","P07","P08","P12","P09","P10","P11"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","P03"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","P08"],["P08","P07"],["P07","P08","loop","수용 거부 시 재선정"],["P07","P09"],["P09","P10"]];
+const edges = [["P01","P02"],["P02","P13"],["P13","P03"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","P08"],["P08","P07"],["P07","P08","loop","수용 거부 시 재선정"],["P07","P12"],["P12","P09"],["P09","P10"],["P10","P11"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 111호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>검색어를 <b>추측</b>하고, 문서를 하나씩 열어본다</h1>
-  <p class="sub">직원이 사내 규정을 확인하는 과정을 사규와 실무 관행으로 나눠 그렸습니다. 규정 자체는 문서로 존재하지만, 어떤 검색어를 넣을지 고르고 결과 문서를 일일이 열어 최신 개정본인지 확인하는 일은 규정에 명문이 없는 실무입니다.</p>
+  <p class="sub">직원이 사내 규정을 확인하는 과정을 규정(초록)과 실무 관행(파랑)으로 나눠 그렸습니다. 소관 부서가 개정본을 등록·분류해 두는 일은 공공기록물법이 정하지만, 그 뒤에 남는 일 — 어떤 검색어를 넣을지 고르고 결과 문서를 일일이 열어 최신 개정본인지 확인하는 일 — 은 규정에 명문이 없는 실무입니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>0</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>1</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>12</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 12 = 규정 0 + 추론 12 · 재검색 루프 1</span>
+    <span style="color:#65d7ad">전 단계 13 = 규정 1 + 추론 12 · 재검색 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -67,43 +67,46 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <span>─→ 절차 순서 &nbsp; ┄→ 반려·보완 루프</span>
 </div>
 <div class="lanehead"><div>단계 ↓ · 행위자 →</div><div>질의 직원</div><div>업무 담당자</div><div>소관 부서</div><div>사내 문서·규정 저장소</div></div>
-<div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="0"
+<div id="pool" style="display:none"><div class="card k-statute" id="P13" data-gate="0" data-lane="2"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P13</b><em style="background:#1f8962">규정</em></div>
+      <p>사규·매뉴얼 개정본 등록·관리</p><small>공공기록물 관리에 관한 법률 제18조(기록물의 등록ㆍ분류ㆍ편철 등)·제19조제1항 — 소관 부서가 개정본을 등록하고 보존기간·접근권한을 분류</small></div><div class="card k-inferred" id="P01" data-gate="0" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>업무 중 규정 확인 필요 발생</p><small>실무</small></div><div class="card k-inferred" id="P02" data-gate="1" data-lane="1"
+      <p>업무 중 규정 확인 필요 발생</p><small>처리하던 일에서 근거를 대야 할 대목이 갑자기 나옴</small></div><div class="card k-inferred" id="P02" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>검색어 선정</p><small>용어를 추측해 입력 — 실무</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="3"
+      <p>검색어 선정</p><small>규정에 쓰인 용어를 짐작해 검색창에 넣어 봄</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P03</b><em style="background:#2456d6">추론</em></div>
-      <p>사내 시스템 키워드 검색</p><small>키워드 일치 기반 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
+      <p>사내 시스템 키워드 검색</p><small>글자가 정확히 맞아야 걸리는 방식이라 결과가 들쭉날쭉</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
-      <p>검색 결과 목록 훑기</p><small>실무</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="1"
+      <p>검색 결과 목록 훑기</p><small>제목만 보고 어느 문서가 맞는지 직접 골라내야 함</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P05</b><em style="background:#2456d6">추론</em></div>
-      <p>문서를 일일이 열어 확인</p><small>매뉴얼·법령·사규 개별 열람 — 실무</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
+      <p>문서를 일일이 열어 확인</p><small>매뉴얼·법령·사규를 각각 열어 해당 조항을 찾아 읽음</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
-      <p>개인정보보호 규정 등 교차 확인</p><small>여러 규정 대조 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="1"
+      <p>개인정보보호 규정 등 교차 확인</p><small>사규와 개인정보보호 규정이 서로 어긋나지 않는지 나란히 대조</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P07</b><em style="background:#2456d6">추론</em></div>
-      <p>최신 개정본 여부 확인</p><small>개정 이력 대조 — 실무</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="1"
+      <p>최신 개정본 여부 확인</p><small>손에 든 문서가 최신본인지 개정 이력을 되짚어 확인</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P08</b><em style="background:#2456d6">추론</em></div>
-      <p>해당 조항 해석·적용 판단</p><small>담당자 판단 — 실무</small></div><div class="card k-inferred" id="P09" data-gate="3" data-lane="2"
+      <p>해당 조항 해석·적용 판단</p><small>찾은 조항을 지금 사안에 어떻게 대입할지 담당자가 판단</small></div><div class="card k-inferred" id="P09" data-gate="3" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P09</b><em style="background:#2456d6">추론</em></div>
-      <p>소관 부서에 유선 문의</p><small>확신이 서지 않을 때 — 실무</small></div><div class="card k-inferred" id="P10" data-gate="3" data-lane="2"
+      <p>소관 부서에 유선 문의</p><small>확신이 서지 않으면 소관 부서에 전화해 물어봄</small></div><div class="card k-inferred" id="P10" data-gate="3" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P10</b><em style="background:#2456d6">추론</em></div>
-      <p>소관 부서 회신 대기</p><small>실무</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="1"
+      <p>소관 부서 회신 대기</p><small>담당자가 자리를 비우면 그만큼 업무가 멈춰 있음</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P11</b><em style="background:#2456d6">추론</em></div>
-      <p>업무 적용·결과 회신</p><small>실무</small></div><div class="card k-inferred" id="P12" data-gate="1" data-lane="1"
+      <p>업무 적용·결과 회신</p><small>확인한 내용을 근거로 처리하고 요청자에게 회신</small></div><div class="card k-inferred" id="P12" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P12</b><em style="background:#2456d6">추론</em></div>
-      <p>검색 실패 시 재검색</p><small>검색어를 바꿔 반복 — 실무</small></div></div>
+      <p>검색 실패 시 재검색</p><small>원하는 문서가 안 나오면 다른 용어로 처음부터 다시</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -129,17 +132,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-사내 매뉴얼·사규 조회 절차는 개별 법률 조문이 아니라 기관 사규·내규(문서관리·규정관리 지침)에 따르므로, 이 지도에서는 조문 인용 없이 실무 흐름으로 재구성했습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(공기업 최초 자체 개발 생성형 AI 사내 지식검색, 2025-03 운영 개시, 매뉴얼·법령·사규·개인정보보호 규정 대상) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 공공기록물 관리에 관한 법률 제18조(기록물의 등록ㆍ분류ㆍ편철 등), 제19조제1항(보존기간·공개 여부·비밀 여부·접근권한 분류 관리). 대구교통공사는 같은 법 시행령 제3조제2호(「지방공기업법」에 따른 지방공사 및 지방공단)에 해당하는 공공기관이므로, 소관 부서가 사규·매뉴얼 개정본을 등록하고 접근권한까지 분류해 관리하는 저장소 관리 자체는 법률이 정합니다. 그러나 직원이 그 저장소에서 어떤 검색어로 무엇을 찾고, 최신 개정본인지 어떻게 확인하며, 언제 소관 부서에 물어볼지는 <b>기관 사규·내규(문서관리·규정관리 지침)와 담당자 실무</b>의 영역이라 이 지도의 대부분이 파랑입니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(공기업 최초 자체 개발 생성형 AI 사내 지식검색, 2025-03 운영 개시, 매뉴얼·법령·사규·개인정보보호 규정 대상) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11","P12"];
+const nodes = ["P13","P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11","P12"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","P03"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","P07"],["P07","P08"],["P08","P09"],["P09","P10"],["P10","P11"],["P04","P12"],["P12","P02","loop","검색어 변경 후 재검색"]];
+const edges = [["P13","P03"],["P01","P02"],["P02","P03"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","P07"],["P07","P08"],["P08","P09"],["P09","P10"],["P10","P11"],["P04","P12"],["P12","P02","loop","검색어 변경 후 재검색"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

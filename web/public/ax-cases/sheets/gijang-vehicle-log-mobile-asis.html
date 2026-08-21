@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 113호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>운행일지는 <b>종이에 쓰고</b>, 다시 시스템에 친다</h1>
-  <p class="sub">공용차량 운행기록 관리를 사규와 실무 관행으로 나눠 그렸습니다. 배차와 보고 결재선은 사규가 정하지만, 계기판 숫자를 종이에 적고 그것을 다시 컴퓨터에 옮겨 치며 누락을 확인하는 과정은 규정에 명문이 없는 실무입니다.</p>
+  <p class="sub">공용차량 운행기록 관리를 규정(초록)과 실무 관행(파랑)으로 나눠 그렸습니다. 업무 과정을 기록으로 남기고 편철·보존기간을 분류해 해마다 생산현황을 통보하는 일은 공공기록물법이 항 단위로 정합니다. 그러나 계기판 숫자를 종이에 적고 그것을 다시 컴퓨터에 옮겨 치며 누락을 확인하는 방식은 규정에 명문이 없는 실무입니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>0</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>12</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>10</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 12 = 규정 0 + 추론 12 · 보완 루프 1</span>
+    <span style="color:#65d7ad">전 단계 13 = 규정 3 + 추론 10 · 보완 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -70,40 +70,43 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>차량 사용 신청</p><small>실무</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="1"
+      <p>차량 사용 신청</p><small>언제 어디에 쓸지 적어 배차를 신청하고 승인을 기다림</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>배차 확인·차량 인계</p><small>사규 차량관리 절차 — 실무</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="0"
+      <p>배차 확인·차량 인계</p><small>공단 차량관리 사규에 따라 배차를 확인하고 열쇠를 넘겨받음</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P03</b><em style="background:#2456d6">추론</em></div>
-      <p>운행 전 차량 상태 확인</p><small>실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="0"
+      <p>운행 전 차량 상태 확인</p><small>타이어·연료·외관을 눈으로 확인하고 출발</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
-      <p>운행</p><small>실무</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="0"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P05</b><em style="background:#2456d6">추론</em></div>
-      <p>운행일지 수기 작성</p><small>종이 대장 기재 — 실무</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="0"
+      <p>운행</p><small>목적지를 오가며 주행 — 중간 경유지도 기억해 둬야 함</small></div><div class="card k-statute" id="P05" data-gate="2" data-lane="0"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P05</b><em style="background:#1f8962">규정</em></div>
+      <p>운행일지 수기 작성</p><small>공공기록물 관리에 관한 법률 제16조(기록물 생산의 원칙) 제1항 — 업무의 입안부터 종결까지 전 과정을 기록물로 생산·관리</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
-      <p>주행거리·주유량 수기 기입</p><small>계기판 확인 후 옮겨 적기 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="3" data-lane="1"
+      <p>주행거리·주유량 수기 기입</p><small>계기판 숫자를 눈으로 읽어 종이 대장에 옮겨 적음</small></div><div class="card k-inferred" id="P07" data-gate="3" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P07</b><em style="background:#2456d6">추론</em></div>
-      <p>차량별 운행일지 회수</p><small>실무</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="1"
+      <p>차량별 운행일지 회수</p><small>차량마다 흩어져 있는 종이 대장을 걷어 모음</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P08</b><em style="background:#2456d6">추론</em></div>
-      <p>기록 내용 시스템 재입력</p><small>전기(轉記) — 실무</small></div><div class="card k-inferred" id="P09" data-gate="3" data-lane="1"
+      <p>기록 내용 시스템 재입력</p><small>종이에 적힌 것을 다시 컴퓨터에 쳐 넣는 두 번째 작업</small></div><div class="card k-inferred" id="P09" data-gate="3" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P09</b><em style="background:#2456d6">추론</em></div>
-      <p>누락·오기 확인 후 재작성 요청</p><small>반려 루프 — 실무</small></div><div class="card k-inferred" id="P10" data-gate="4" data-lane="1"
+      <p>누락·오기 확인 후 재작성 요청</p><small>빈칸이나 앞뒤가 맞지 않는 숫자를 찾아 운전자에게 되물음</small></div><div class="card k-inferred" id="P10" data-gate="4" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P10</b><em style="background:#2456d6">추론</em></div>
-      <p>월별 운행 집계표 작성</p><small>수기 집계 — 실무</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="2"
+      <p>월별 운행 집계표 작성</p><small>차량별 주행거리·주유량을 달 단위로 손으로 합산</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P11</b><em style="background:#2456d6">추론</em></div>
-      <p>결재·보고</p><small>기관 사규에 따른 결재 — 실무</small></div><div class="card k-inferred" id="P12" data-gate="4" data-lane="3"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P12</b><em style="background:#2456d6">추론</em></div>
-      <p>대장 보관</p><small>종이 대장 편철 — 실무</small></div></div>
+      <p>결재·보고</p><small>공단 사규 결재선에 따라 월별 집계를 올려 보고</small></div><div class="card k-statute" id="P12" data-gate="4" data-lane="3"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
+      <p>대장 등록·보존</p><small>공공기록물 관리에 관한 법률 제18조(기록물의 등록ㆍ분류ㆍ편철 등)·제19조제1항 — 등록·편철하고 보존기간·공개 여부를 분류해 관리</small></div><div class="card k-statute" id="P13" data-gate="4" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P13</b><em style="background:#1f8962">규정</em></div>
+      <p>기록물 생산현황 통보</p><small>공공기록물 관리에 관한 법률 제19조(기록물의 관리 등) 제7항 — 매년 관할 기록물관리기관에 생산현황 통보</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -129,17 +132,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-공용차량 배차와 운행일지 작성·보관은 법률 조문이 아니라 기관 사규·내규(차량관리규정)에 따르므로, 이 지도에서는 조문 인용 없이 실무 흐름으로 재구성했습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(직원이 AI를 활용해 자체 개발한 앱으로 차량 운행기록을 모바일 기록·관리, 공단 우수사례 선정) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 공공기록물 관리에 관한 법률 제16조제1항(업무의 입안단계부터 종결단계까지 업무수행의 모든 과정과 결과가 기록물로 생산·관리되도록 조치), 제18조(기록물의 등록ㆍ분류ㆍ편철 등), 제19조제1항(보존기간·공개 여부·비밀 여부·접근권한 분류 관리), 제19조제7항(매년 관할 기록물관리기관에 생산현황 통보). 기장군도시관리공단은 같은 법 시행령 제3조제2호(「지방공기업법」에 따른 지방공사 및 지방공단)에 해당하는 공공기관이므로, 운행일지를 남기고 편철·보존기간을 분류해 관리하며 생산현황을 통보하는 일은 법률이 정합니다. 다만 배차 절차와 결재선, 그리고 계기판 숫자를 종이에 적었다가 다시 시스템에 옮겨 치는 방식은 <b>기관 사규·내규(차량관리규정)와 실무 관행</b>의 영역입니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(직원이 AI를 활용해 자체 개발한 앱으로 차량 운행기록을 모바일 기록·관리, 공단 우수사례 선정) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11","P12"];
+const nodes = ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11","P12","P13"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","P03"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","P07"],["P07","P08"],["P08","P09"],["P09","P05","loop","누락·오기 보완"],["P08","P10"],["P10","P11"],["P11","P12"]];
+const edges = [["P01","P02"],["P02","P03"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","P07"],["P07","P08"],["P08","P09"],["P09","P05","loop","누락·오기 보완"],["P08","P10"],["P10","P11"],["P11","P12"],["P12","P13"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

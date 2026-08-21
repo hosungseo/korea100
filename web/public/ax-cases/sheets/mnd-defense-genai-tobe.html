@@ -49,13 +49,13 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <h1>국방망 안의 sLLM이 <b>다섯 번째 레인</b>으로</h1>
   <p class="sub">외부 상용 AI를 쓸 수 없던 자리에 국방망에서 작동하는 자체 sLLM이 들어와 내부 규정 질의응답·군사용어 특화번역·문서 요약을 맡습니다. 비밀등급 확인과 결재는 규정 그대로 사람이 합니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>5</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>1</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>3</b></span>
     <span><i style="background:#d99a5e"></i>대체 <b>4</b></span>
     
     <span><i style="background:#d9a821"></i>간소화 <b>2</b></span>
-    <span style="color:#65d7ad">대체 4 · 간소화 2 · 소멸 0 · 자동 3 — 사람 단계 10 → 6</span>
+    <span style="color:#65d7ad">대체 4 · 간소화 2 · 소멸 0 · 자동 3 — 사람 단계 12 → 8</span>
   </p>
 </header>
 <div class="legend">
@@ -71,7 +71,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>업무 질의·과업 지시 접수</p><small>공문·유선 — 실무</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
+      <p>업무 질의·과업 지시 접수</p><small>공문·유선으로 질의와 과업 지시가 들어옴</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A01</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>내부 규정 질의응답(RAG)</p><small>국방통합데이터센터·군별 자료 기반 근거 제시</small></div><div class="card k-auto" id="A02" data-gate="1" data-lane="4"
@@ -95,19 +95,25 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>장문 보고서 통독·요약</p><small>자동 요약으로 대체</small></div><div class="card k-changed" id="P06" data-gate="2" data-lane="1"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P06</b><em style="background:#b8890e">간소화</em></div>
-      <p>보고서 초안 작성</p><small>생성된 개요를 다듬는 작업으로 축소</small></div><div class="card k-statute" id="P07" data-gate="2" data-lane="1"
+      <p>보고서 초안 작성</p><small>행정업무의 운영 및 혁신에 관한 규정 제8조(문서의 기안) 제1항·제2항 — 생성된 개요를 다듬는 작업으로 축소</small></div><div class="card k-statute" id="P07" data-gate="2" data-lane="1"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P07</b><em style="background:#1f8962">규정</em></div>
-      <p>비밀등급 확인·표시</p><small>보안업무규정 제4조(비밀의 구분)</small></div><div class="card k-statute" id="P08" data-gate="3" data-lane="2"
+      <p>비밀등급 확인·표시</p><small>보안업무규정 제4조(비밀의 구분) 제3호 — Ⅲ급비밀 등 등급 구분, 제12조제1항 — 최저등급 분류 원칙</small></div><div class="card k-statute" id="P11" data-gate="3" data-lane="2"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P11</b><em style="background:#1f8962">규정</em></div>
+      <p>보조기관 검토·관련 부서 협조</p><small>행정업무의 운영 및 혁신에 관한 규정 제9조(문서의 검토 및 협조) 제1항 — 결재 전 보조기관 검토, 제2항 — 관련 부서 협조</small></div><div class="card k-statute" id="P08" data-gate="3" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P08</b><em style="background:#1f8962">규정</em></div>
-      <p>검토·결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재)</small></div><div class="card k-changed" id="P09" data-gate="3" data-lane="1"
+      <p>검토·결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재) 제1항 — 기관장 결재, 제2항 — 위임전결</small></div><div class="card k-changed" id="P09" data-gate="3" data-lane="1"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P09</b><em style="background:#b8890e">간소화</em></div>
-      <p>보완 지시에 따른 재작성</p><small>근거·요약이 붙어 반려 루프 축소</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="3"
+      <p>보완 지시에 따른 재작성</p><small>근거·요약이 붙어 반려 루프 축소</small></div><div class="card k-statute" id="P12" data-gate="4" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
+      <p>시행문 작성·발신</p><small>행정업무의 운영 및 혁신에 관한 규정 제12조(시행문의 작성) 제1항 — 결재받은 문서는 시행문으로 작성·발신</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="3"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P10</b><em style="background:#1f8962">규정</em></div>
-      <p>시행·회신 등록</p><small>행정업무의 운영 및 혁신에 관한 규정 제11조(문서의 등록 등)</small></div></div>
+      <p>시행·회신 등록</p><small>행정업무의 운영 및 혁신에 관한 규정 제11조(문서의 등록 등) 제1항 — 생산등록번호 부여·등록, 제2항 — 법규문서·지시문서·공고문서(제4조제1호부터 제3호까지)에는 별도 번호 부여</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -133,17 +139,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 보안업무규정 제4조(비밀의 구분), 행정업무의 운영 및 혁신에 관한 규정 제8조(문서의 기안)·제10조(문서의 결재)·제11조(문서의 등록 등). <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(보안뉴스, 2024-07 국방생성형 AI 시범 개통 — 국방망 자체 sLLM, RAG로 국방통합데이터센터·군별 자료 반영) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 보안업무규정 제4조(비밀의 구분) 제3호, 제12조제1항(분류원칙 — 최저등급 분류), 행정업무의 운영 및 혁신에 관한 규정 제8조(문서의 기안) 제1항·제2항, 제9조(문서의 검토 및 협조) 제1항·제2항, 제10조(문서의 결재) 제1항·제2항, 제12조(시행문의 작성) 제1항, 제11조(문서의 등록 등) 제1항·제2항. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(보안뉴스, 2024-07 국방생성형 AI 시범 개통 — 국방망 자체 sLLM, RAG로 국방통합데이터센터·군별 자료 반영) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","A01","A02","A03","P02","P03","P04","P05","P06","P07","P08","P09","P10"];
+const nodes = ["P01","A01","A02","A03","P02","P03","P04","P05","P06","P07","P11","P08","P09","P12","P10"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","A01","auto"],["A01","A02","auto"],["A02","A03","auto"],["A03","P06"],["P06","P07"],["P07","P08"],["P08","P09"],["P09","P06","loop","보완 재작성(축소)"],["P08","P10"],["P02","A01","replace"],["P04","A01","replace"],["P03","A02","replace"],["P05","A03","replace"]];
+const edges = [["P01","A01","auto"],["A01","A02","auto"],["A02","A03","auto"],["A03","P06"],["P06","P07"],["P07","P11"],["P11","P08"],["P08","P09"],["P09","P06","loop","보완 재작성(축소)"],["P08","P12"],["P12","P10"],["P02","A01","replace"],["P04","A01","replace"],["P03","A02","replace"],["P05","A03","replace"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

@@ -47,15 +47,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 64호 · AI 적용</span><small>기준일 2026-08-21</small></div>
   <h1>탐색·대조·통보가 자동 레인으로 — 담당자는 <b>판단만</b></h1>
-  <p class="sub">개정 법령과 영향 조례를 자동으로 짚어내고 조문을 대조한 뒤, 검토 사항을 소관 부서에 이메일로 보냅니다. 조례 입안과 의결·공포는 지방자치법이 정한 그대로 남고, 앞단의 검색과 대조가 기계로 넘어갑니다.</p>
+  <p class="sub">개정 법령과 영향 조례를 자동으로 짚어내고 조문을 대조한 뒤, 검토 사항을 소관 부서에 이메일로 보냅니다. 입안·입법예고·의결·공포·보고라는 법정 절차는 그대로 남고, 앞단의 검색과 대조가 기계로 넘어갑니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>5</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>1</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>3</b></span>
     <span><i style="background:#d99a5e"></i>대체 <b>5</b></span>
     
     <span><i style="background:#d9a821"></i>간소화 <b>3</b></span>
-    <span style="color:#65d7ad">대체 5 · 간소화 3 · 소멸 0 · 자동 3 — 사람 단계 11 → 6</span>
+    <span style="color:#65d7ad">대체 5 · 간소화 3 · 소멸 0 · 자동 3 — 사람 단계 14 → 9</span>
   </p>
 </header>
 <div class="legend">
@@ -71,46 +71,55 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-changed" id="P01" data-gate="0" data-lane="3"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P01</b><em style="background:#b8890e">간소화</em></div>
-      <p>개정 법령 확인</p><small>자동 수집 결과 확인으로 축소</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
+      <p>개정 법령 확인</p><small>관보·법제처 개정 목록을 주기적으로 훑어 소관 상위법을 골라냄</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A01</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>개정 법령·영향 조례 자동 탐색</p><small>위임 조문 기준으로 대상 조례 목록화</small></div><div class="card k-replaced" id="P02" data-gate="1" data-lane="1"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P02</b><em style="background:#d99a5e">A01로 대체</em></div>
-      <p>영향 받는 조례 목록 추리기</p><small>자동 탐색으로 대체</small></div><div class="card k-replaced" id="P03" data-gate="1" data-lane="1"
+      <p>영향 받는 조례 목록 추리기</p><small>제목·키워드로 조례를 검색 — 검색어를 떠올리지 못하면 그대로 누락</small></div><div class="card k-replaced" id="P03" data-gate="1" data-lane="1"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P03</b><em style="background:#d99a5e">A01로 대체</em></div>
-      <p>위임 조문 소관 부서 확인</p><small>자동 탐색으로 대체</small></div><div class="card k-auto" id="A02" data-gate="2" data-lane="4"
+      <p>위임 조문 소관 부서 확인</p><small>위임 조문마다 소관 부서를 조회해 통보 대상 담당자를 특정</small></div><div class="card k-auto" id="A02" data-gate="2" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A02</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>상위법–조례 조문 자동 대조</p><small>저촉·미반영·인용번호 변경 자동 추출</small></div><div class="card k-replaced" id="P04" data-gate="2" data-lane="1"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P04</b><em style="background:#d99a5e">A02로 대체</em></div>
-      <p>상위법 신·구 조문 대조</p><small>자동 대조로 대체</small></div><div class="card k-changed" id="P05" data-gate="2" data-lane="1"
+      <p>상위법 신·구 조문 대조</p><small>개정 전후 조문을 한 줄씩 눈으로 맞춰 바뀐 문언을 표시</small></div><div class="card k-changed" id="P05" data-gate="2" data-lane="1"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P05</b><em style="background:#b8890e">간소화</em></div>
-      <p>저촉 여부 최종 판단</p><small>자동 추출 결과 확인·판단으로 축소</small></div><div class="card k-replaced" id="P06" data-gate="2" data-lane="1"
+      <p>저촉 여부 최종 판단</p><small>저촉·미반영 판단 기준이 문서로 없어 담당자 경험에 의존</small></div><div class="card k-replaced" id="P06" data-gate="2" data-lane="1"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P06</b><em style="background:#d99a5e">A02로 대체</em></div>
-      <p>인용 조문 번호 변경 추적</p><small>자동 대조로 대체</small></div><div class="card k-auto" id="A03" data-gate="3" data-lane="4"
+      <p>인용 조문 번호 변경 추적</p><small>조문 이동·삭제로 인용 번호가 어긋난 곳을 조례별로 되짚음</small></div><div class="card k-auto" id="A03" data-gate="3" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A03</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>검토 사항 자동 통보</p><small>소관 부서에 이메일 자동 발송</small></div><div class="card k-replaced" id="P07" data-gate="3" data-lane="1"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P07</b><em style="background:#d99a5e">A03로 대체</em></div>
-      <p>검토 결과 정리·부서 통보</p><small>자동 통보로 대체</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="2"
+      <p>검토 결과 정리·부서 통보</p><small>검토 사항을 부서별로 나눠 정리한 뒤 이메일을 하나씩 발송</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P08</b><em style="background:#2456d6">추론</em></div>
-      <p>정비 필요 여부 검토·회신</p><small>법무 검토 관행 — 실무</small></div><div class="card k-statute" id="P09" data-gate="4" data-lane="0"
+      <p>정비 필요 여부 검토·회신</p><small>법무 부서가 개정 필요성과 정비 범위를 판단해 소관 부서에 회신</small></div><div class="card k-statute" id="P09" data-gate="4" data-lane="0"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P09</b><em style="background:#1f8962">규정</em></div>
-      <p>조례 개정안 입안</p><small>지방자치법 제28조(조례)</small></div><div class="card k-changed" id="P10" data-gate="4" data-lane="0"
+      <p>조례 개정안 입안</p><small>지방자치법 제28조(조례) — 법령의 범위에서 그 사무에 관한 조례를 개정</small></div><div class="card k-statute" id="P12" data-gate="4" data-lane="0"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
+      <p>조례안 입법예고</p><small>행정절차법 제41조(행정상 입법예고) — 제1항 본문에 따라 조례안 예고, 같은 항 제2호 단순 집행은 생략 가능</small></div><div class="card k-statute" id="P13" data-gate="4" data-lane="2"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P13</b><em style="background:#1f8962">규정</em></div>
+      <p>지방의회 의결</p><small>지방자치법 제47조(지방의회의 의결사항) 제1항제1호 — 조례의 제정·개정 및 폐지</small></div><div class="card k-changed" id="P10" data-gate="4" data-lane="0"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P10</b><em style="background:#b8890e">간소화</em></div>
-      <p>누락 조례 사후 정비</p><small>전수 자동 대조로 누락 감소</small></div><div class="card k-statute" id="P11" data-gate="4" data-lane="2"
+      <p>누락 조례 사후 정비</p><small>통보에서 빠진 조례를 나중에 발견해 정비 대상에 다시 올림</small></div><div class="card k-statute" id="P11" data-gate="4" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P11</b><em style="background:#1f8962">규정</em></div>
-      <p>의결·공포 절차 진행</p><small>지방자치법 제32조(조례와 규칙의 제정 절차 등)</small></div></div>
+      <p>조례 공포</p><small>지방자치법 제32조(조례와 규칙의 제정 절차 등) — 의결 후 5일 내 이송, 이송받은 날부터 20일 내 공포</small></div><div class="card k-statute" id="P14" data-gate="4" data-lane="2"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P14</b><em style="background:#1f8962">규정</em></div>
+      <p>개정 조례 보고</p><small>지방자치법 제35조(보고) — 이송된 날부터 5일 이내 행정안전부장관에게 전문 첨부 보고</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -136,17 +145,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 지방자치법 제28조(조례), 지방자치법 제32조(조례와 규칙의 제정 절차 등). 상위법이 바뀌었을 때 어느 조례가 영향을 받는지 찾아내고 조문을 한 줄씩 맞춰보는 대조 작업은 조문으로 정해져 있지 않은 실무입니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실(법률·조례 비교검토 자동 대조 후 검토 사항 이메일 발송, 당직 편성·환경오염물질 배출대장·교육훈련 실적·과태료 부과 등 8개 자동화 과제 중 하나)은 경기도 공보 브리핑(2024-11-26) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 지방자치법 제28조(조례) · 제32조(조례와 규칙의 제정 절차 등) 제1항·제2항(의결 후 5일 내 이송, 20일 내 공포) · 제35조(보고 — 이송된 날부터 5일 이내 행정안전부장관 보고) · 제47조(지방의회의 의결사항) 제1항제1호, 행정절차법 제41조(행정상 입법예고) 제1항 및 같은 항 제2호(상위 법령등의 단순한 집행은 예고 생략 가능). 입안 이후 절차는 이렇게 조문으로 짜여 있지만, 상위법이 바뀌었을 때 어느 조례가 걸리는지 찾아내고 신·구 조문을 한 줄씩 맞춰보는 앞단은 조문에 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실(법률·조례 비교검토 자동 대조 후 검토 사항 이메일 발송, 당직 편성·환경오염물질 배출대장·교육훈련 실적·과태료 부과 등 8개 자동화 과제 중 하나)은 경기도 공보 브리핑(2024-11-26) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","A01","P02","P03","A02","P04","P05","P06","A03","P07","P08","P09","P10","P11"];
+const nodes = ["P01","A01","P02","P03","A02","P04","P05","P06","A03","P07","P08","P09","P12","P13","P10","P11","P14"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","A01","auto"],["A01","A02","auto"],["A02","P05"],["P05","A03","auto"],["A03","P08"],["P08","P09"],["P09","P11"],["P09","P10"],["P10","A01","loop","누락 조례 자동 재대조"],["P02","A01","replace"],["P03","A01","replace"],["P04","A02","replace"],["P06","A02","replace"],["P07","A03","replace"]];
+const edges = [["P01","A01","auto"],["A01","A02","auto"],["A02","P05"],["P05","A03","auto"],["A03","P08"],["P08","P09"],["P09","P10"],["P10","A01","loop","누락 조례 자동 재대조"],["P02","A01","replace"],["P03","A01","replace"],["P04","A02","replace"],["P06","A02","replace"],["P07","A03","replace"],["P09","P12"],["P12","P13"],["P13","P11"],["P11","P14"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 118호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>밸브도 펌프도 <b>사람 손</b>, 점검은 <b>달력</b>대로</h1>
-  <p class="sub">정수장 운영을 규정(초록)과 실무 추론(파랑)으로 나눠 그렸더니 초록 칸이 원수 수질·수량 확인 하나만 남았습니다. 수질검사와 수량분석은 수도법이 정하지만, 그 기준을 맞추기 위해 오늘 응집제를 얼마나 넣을지, 어느 펌프를 언제 돌릴지는 숙련자의 감각이 결정했습니다. 사례집이 지적한 '휴먼 에러'는 바로 이 파란 칸에서 발생했습니다.</p>
+  <p class="sub">정수장 운영을 규정(초록)과 실무 추론(파랑)으로 나눠 그렸습니다. 수질검사·수량분석(수도법 제29조제1항), 정수처리기준 준수와 주기 검사(제28조제1항·제4항·제5항), 검사결과 기록·보존·공개(제29조제3항·제28조제6항), 정수시설운영관리사 배치(제21조제7항)까지는 법이 정합니다. 그러나 그 기준을 맞추기 위해 오늘 응집제를 얼마나 넣을지, 어느 펌프를 언제 돌릴지는 숙련자의 감각이 결정했습니다. 사례집이 지적한 '휴먼 에러'는 바로 이 파란 칸에서 발생했습니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>1</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>5</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>11</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 12 = 규정 1 + 추론 11 · 루프 2</span>
+    <span style="color:#65d7ad">전 단계 16 = 규정 5 + 추론 11 · 루프 2</span>
   </p>
 </header>
 <div class="legend">
@@ -70,40 +70,52 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-inferred" id="P12" data-gate="0" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P12</b><em style="background:#2456d6">추론</em></div>
-      <p>교대 근무 인수인계</p><small>운영 이력 구두·수기 전달 — 실무</small></div><div class="card k-statute" id="P01" data-gate="0" data-lane="0"
+      <p>교대 근무 인수인계</p><small>전 근무조의 약품 주입량·설비 이상을 구두·수기로 전달 — 실무</small></div><div class="card k-statute" id="P13" data-gate="0" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P13</b><em style="background:#1f8962">규정</em></div>
+      <p>정수시설운영관리사 배치 확인</p><small>수도법 제21조(수도시설의 관리) — 정수시설 규모에 따른 정수시설운영관리사 배치·관리는 제21조제7항</small></div><div class="card k-statute" id="P01" data-gate="0" data-lane="0"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P01</b><em style="background:#1f8962">규정</em></div>
-      <p>원수 수질·유입량 확인</p><small>수도법 제29조(수질검사와 수량분석)</small></div><div class="card k-inferred" id="P02" data-gate="1" data-lane="0"
+      <p>원수 수질·유입량 확인</p><small>수도법 제29조(수질검사와 수량분석) — 원수·정수 수질검사와 취수량·정수량·공급량 수량분석은 제29조제1항</small></div><div class="card k-statute" id="P14" data-gate="1" data-lane="0"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P14</b><em style="background:#1f8962">규정</em></div>
+      <p>정수처리기준 준수 운전</p><small>수도법 제28조(정수처리기준) — 병원성 미생물 안전성 확보 기준 준수는 제28조제1항, 탁도 기준에 맞는 정수시설 운영은 제4항</small></div><div class="card k-inferred" id="P02" data-gate="1" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>응집제 주입률 수동 산정</p><small>숙련자 감각·경험 의존 — 실무</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="0"
+      <p>응집제 주입률 수동 산정</p><small>원수 탁도를 보고 주입률을 가늠 — 숙련자 경험 의존, 실무</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P03</b><em style="background:#2456d6">추론</em></div>
-      <p>약품 주입 밸브 직접 조작</p><small>휴먼 에러 위험 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="0"
+      <p>약품 주입 밸브 직접 조작</p><small>약품 주입 밸브를 현장에서 직접 여닫음 — 휴먼 에러 위험, 실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
-      <p>펌프 ON/OFF 수동 조작</p><small>단순 반복 조작 — 실무</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="0"
+      <p>펌프 ON/OFF 수동 조작</p><small>수위·유량을 보며 펌프를 켜고 끄는 단순 반복 조작 — 실무</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P05</b><em style="background:#2456d6">추론</em></div>
-      <p>수질 결과 확인 후 재조정</p><small>사후 보정 — 실무</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
+      <p>수질 결과 확인 후 재조정</p><small>수질 결과가 나온 뒤에야 주입률을 되돌려 보정 — 실무</small></div><div class="card k-statute" id="P15" data-gate="2" data-lane="0"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P15</b><em style="background:#1f8962">규정</em></div>
+      <p>정수처리 주기 검사</p><small>수도법 제28조(정수처리기준) — 정수처리된 물의 기준 적합 여부 주기 검사는 제28조제5항, 기준 위반 시 수도시설 개선 조치는 제7항</small></div><div class="card k-statute" id="P16" data-gate="2" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P16</b><em style="background:#1f8962">규정</em></div>
+      <p>검사결과 기록·보존·공개</p><small>수도법 제29조(수질검사와 수량분석) — 기록 작성·보존과 홈페이지 공개는 제29조제3항, 정수처리 검사결과의 기록·보고는 제28조제6항</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
-      <p>전력 피크 시간대 수동 조정</p><small>비효율적 펌프 운영 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="3" data-lane="2"
+      <p>전력 피크 시간대 수동 조정</p><small>전력 피크 시간대를 피해 펌프 가동을 수동 조정 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="3" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P07</b><em style="background:#2456d6">추론</em></div>
-      <p>주기점검(TBM) 일정 수립</p><small>정기점검 의존 — 실무</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="3"
+      <p>주기점검(TBM) 일정 수립</p><small>달력에 맞춘 주기점검(TBM) 일정 수립 — 상태와 무관, 실무</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P08</b><em style="background:#2456d6">추론</em></div>
-      <p>외부업체 설비 점검</p><small>단순 육안점검 중심 — 실무</small></div><div class="card k-inferred" id="P09" data-gate="3" data-lane="2"
+      <p>외부업체 설비 점검</p><small>외부업체가 현장을 돌며 단순 육안점검 — 실무</small></div><div class="card k-inferred" id="P09" data-gate="3" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P09</b><em style="background:#2456d6">추론</em></div>
-      <p>고장 발생 후 사후 정비</p><small>고장 예방 곤란 — 실무</small></div><div class="card k-inferred" id="P10" data-gate="4" data-lane="1"
+      <p>고장 발생 후 사후 정비</p><small>고장이 난 뒤에야 정비에 착수 — 예방 곤란, 실무</small></div><div class="card k-inferred" id="P10" data-gate="4" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P10</b><em style="background:#2456d6">추론</em></div>
-      <p>CCTV 단순 모니터링</p><small>육안 감시 — 실무</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="1"
+      <p>CCTV 단순 모니터링</p><small>관제 모니터를 사람이 지켜보는 육안 감시 — 실무</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P11</b><em style="background:#2456d6">추론</em></div>
-      <p>사고 인지 후 대응 지시</p><small>골든타임 놓치기 일쑤 — 실무</small></div></div>
+      <p>사고 인지 후 대응 지시</p><small>인지 시점이 늦어 골든타임을 놓치기 일쑤 — 실무</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -129,17 +141,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 수도법 제29조(수질검사와 수량분석) — 일반수도사업자는 원수와 정수가 기준에 맞는지 수질검사를 실시하고 취수량·정수량·공급량 등에 대한 수량분석을 해야 합니다. 그러나 그 결과를 놓고 오늘 응집제를 얼마나 넣을지, 어느 펌프를 언제 돌릴지 같은 일상 조작은 법령 조문이 아니라 사업장 운영기준과 숙련자의 경험으로 굴러가던 영역입니다. 조문 번호를 확인하지 못한 근거는 초록으로 쓰지 않았습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실(AI 자율운영·EMS·PMS·지능형 영상 4개 축, 응집제 7.6%·소독제 4.1%·전력비 1.5%·점검비 35% 절감, 산재 손실 연 3.5억 원 절감, 연간 총 94억 원 절감, 2024년 말 전국 42개 광역정수장 확대, 화성정수장 WEF 글로벌 등대 선정)은 행안부·NIA 「AI 정부 서비스 사례집」(2026.3) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 수도법 제29조(수질검사와 수량분석) — 원수·정수 수질검사와 취수량·정수량·공급량 수량분석은 제29조제1항, 기록 작성·보존과 결과 공개는 제3항. 수도법 제28조(정수처리기준) — 병원성 미생물 안전성 확보 기준 준수는 제28조제1항, 탁도 기준에 맞는 정수시설 운영은 제4항, 주기적 검사는 제5항, 검사결과 기록·보고는 제6항, 기준 위반 시 개선 조치는 제7항. 수도법 제21조(수도시설의 관리) 제7항 — 정수시설운영관리사 배치. 그러나 그 기준을 지키기 위해 오늘 응집제를 얼마나 넣을지, 어느 펌프를 언제 돌릴지 같은 일상 조작은 법령 조문이 아니라 사업장 운영기준과 숙련자의 경험으로 굴러가던 영역입니다. 조문 번호를 확인하지 못한 근거는 초록으로 쓰지 않았습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실(AI 자율운영·EMS·PMS·지능형 영상 4개 축, 응집제 7.6%·소독제 4.1%·전력비 1.5%·점검비 35% 절감, 산재 손실 연 3.5억 원 절감, 연간 총 94억 원 절감, 2024년 말 전국 42개 광역정수장 확대, 화성정수장 WEF 글로벌 등대 선정)은 행안부·NIA 「AI 정부 서비스 사례집」(2026.3) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P12","P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11"];
+const nodes = ["P12","P13","P01","P14","P02","P03","P04","P05","P15","P16","P06","P07","P08","P09","P10","P11"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P12","P01"],["P01","P02"],["P02","P03"],["P03","P04"],["P04","P05"],["P05","P02","loop","수질 이탈 시 주입률 재산정"],["P05","P06"],["P06","P07"],["P07","P08"],["P08","P09"],["P09","P07","loop","고장 발생 후 점검계획 재수립"],["P09","P10"],["P10","P11"]];
+const edges = [["P12","P01"],["P02","P03"],["P03","P04"],["P04","P05"],["P05","P02","loop","수질 이탈 시 주입률 재산정"],["P06","P07"],["P07","P08"],["P08","P09"],["P09","P07","loop","고장 발생 후 점검계획 재수립"],["P09","P10"],["P10","P11"],["P13","P12"],["P01","P14"],["P14","P02"],["P05","P15"],["P15","P16"],["P16","P06"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

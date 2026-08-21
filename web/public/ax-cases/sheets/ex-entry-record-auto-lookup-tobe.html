@@ -47,7 +47,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 106호 · AI 적용</span><small>기준일 2026-08-21</small></div>
   <h1>출구에서 입구를 찾아낸다 — <b>입구정보 오류 미납 97% 개선</b></h1>
-  <p class="sub">출구 차로에서 누락된 입구정보를 자동으로 조회해 통행 구간을 확정하고 정상 요금을 그 자리에서 부과합니다. 미납 고지 자체가 생기지 않으니 그 뒤에 달려 있던 이의·소명·재산정 사슬도 함께 줄어듭니다.</p>
+  <p class="sub">출구 차로에서 누락된 입구정보를 자동으로 조회해 통행 구간을 확정하고 정상 요금을 그 자리에서 부과합니다. 최장거리 추정에 기댈 일이 사라지니 미납 고지 자체가 생기지 않고, 그 뒤에 달려 있던 이의·소명·재산정 사슬도 함께 줄어듭니다.</p>
   <p class="counts">
     <span><i style="background:#1f8962"></i>규정 근거 <b>0</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>4</b></span>
@@ -71,46 +71,46 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>하이패스 입구 통과</p><small>실무</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="3"
+      <p>하이패스 입구 통과</p><small>무정차로 입구 차로를 지나며 단말과 차로 설비가 차량을 인식</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>입구 통과 기록 저장</p><small>실무</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="3"
+      <p>입구 통과 기록 저장</p><small>차로 설비가 읽은 시각·차량번호를 요금 시스템에 저장</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P03</b><em style="background:#2456d6">추론</em></div>
-      <p>출구 차로 입구정보 대조</p><small>실무</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
+      <p>출구 차로 입구정보 대조</p><small>출구에서 입구 기록을 찾아 통행 구간을 확정</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A01</b><em style="background:#6b3fc4">AI 자동</em></div>
-      <p>출구 차로 입구정보 자동 조회</p><small>누락 기록을 즉시 찾아 구간 확정</small></div><div class="card k-replaced" id="P04" data-gate="1" data-lane="3"
+      <p>출구 차로 입구정보 자동 조회</p><small>누락된 입구 기록을 그 자리에서 찾아 통행 구간 확정</small></div><div class="card k-replaced" id="P04" data-gate="1" data-lane="3"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P04</b><em style="background:#d99a5e">A01로 대체</em></div>
-      <p>입구기록 누락 판정</p><small>자동 조회로 대체</small></div><div class="card k-auto" id="A02" data-gate="2" data-lane="4"
+      <p>입구기록 누락 판정</p><small>유료도로법 제20조제2항의 최장거리 추정에 기대지 않고 자동 조회로 대체</small></div><div class="card k-auto" id="A02" data-gate="2" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A02</b><em style="background:#6b3fc4">AI 자동</em></div>
-      <p>정상 통행요금 자동 부과</p><small>입구정보 오류 미납 97% 개선</small></div><div class="card k-replaced" id="P05" data-gate="2" data-lane="1"
+      <p>정상 통행요금 자동 부과</p><small>확정된 구간으로 즉시 부과 — 입구정보 오류 미납 97% 개선</small></div><div class="card k-replaced" id="P05" data-gate="2" data-lane="1"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P05</b><em style="background:#d99a5e">A02로 대체</em></div>
-      <p>미납 건 목록 확인</p><small>자동 부과로 대체</small></div><div class="card k-replaced" id="P06" data-gate="2" data-lane="1"
+      <p>미납 건 목록 확인</p><small>자동 부과로 대체 — 가려낼 미납 목록 자체가 축소</small></div><div class="card k-replaced" id="P06" data-gate="2" data-lane="1"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P06</b><em style="background:#d99a5e">A02로 대체</em></div>
-      <p>영상·차량번호 수기 조회</p><small>자동 조회로 대체</small></div><div class="card k-changed" id="P07" data-gate="2" data-lane="1"
+      <p>영상·차량번호 수기 조회</p><small>자동 조회로 대체 — 영상을 돌려 보는 구간이 사라짐</small></div><div class="card k-changed" id="P07" data-gate="2" data-lane="1"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P07</b><em style="background:#b8890e">간소화</em></div>
-      <p>미납통행료 고지</p><small>유료도로법 제20조(부가통행료의 부과ㆍ수납) — 입구정보 오류 건이 빠져 고지 대상 급감</small></div><div class="card k-changed" id="P08" data-gate="3" data-lane="0"
+      <p>미납통행료 고지</p><small>유료도로법 제20조(부가통행료의 부과ㆍ수납) 제1항 — 부과 권한은 그대로, 입구정보 오류 건이 빠져 고지 대상 급감</small></div><div class="card k-changed" id="P08" data-gate="3" data-lane="0"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P08</b><em style="background:#b8890e">간소화</em></div>
-      <p>고객 이의·소명 제기</p><small>유료도로법 제20조의2(부가통행료 부과에 대한 이의제기 및 처리절차 등) — 잘못된 고지가 줄어 소명 부담 축소</small></div><div class="card k-changed" id="P09" data-gate="3" data-lane="2"
+      <p>고객 이의·소명 제기</p><small>유료도로법 제20조의2(부가통행료 부과에 대한 이의제기 및 처리절차 등) 제1항 — 30일 이내 이의제기권은 유지, 소명 부담 축소</small></div><div class="card k-changed" id="P09" data-gate="3" data-lane="2"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P09</b><em style="background:#b8890e">간소화</em></div>
-      <p>소명자료 접수·확인</p><small>유료도로법 제20조의2(부가통행료 부과에 대한 이의제기 및 처리절차 등) — 처리 건수 축소</small></div><div class="card k-changed" id="P10" data-gate="3" data-lane="1"
+      <p>소명자료 접수·확인</p><small>잘못된 고지가 줄어 접수·확인 건수 축소</small></div><div class="card k-changed" id="P10" data-gate="3" data-lane="1"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P10</b><em style="background:#b8890e">간소화</em></div>
-      <p>실제 주행 구간 재산정</p><small>출구 단계에서 이미 확정</small></div><div class="card k-changed" id="P11" data-gate="4" data-lane="1"
+      <p>실제 주행 구간 재산정</p><small>출구 단계에서 이미 확정돼 재산정 대상 축소</small></div><div class="card k-changed" id="P11" data-gate="4" data-lane="1"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P11</b><em style="background:#b8890e">간소화</em></div>
-      <p>정상 요금 정정·재고지</p><small>유료도로법 제20조의2(부가통행료 부과에 대한 이의제기 및 처리절차 등) — 정정 대상 축소</small></div><div class="card k-inferred" id="P12" data-gate="4" data-lane="3"
+      <p>정상 요금 정정·재고지</p><small>유료도로법 제20조의2(부가통행료 부과에 대한 이의제기 및 처리절차 등) 제2항 — 취소 의무는 유지, 정정 대상 축소</small></div><div class="card k-inferred" id="P12" data-gate="4" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P12</b><em style="background:#2456d6">추론</em></div>
-      <p>수납 확인·종결</p><small>실무</small></div></div>
+      <p>수납 확인·종결</p><small>정정된 요금이 실제로 수납됐는지 확인하고 건을 닫음</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -136,7 +136,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 유료도로법 제20조(부가통행료의 부과ㆍ수납), 유료도로법 제20조의2(부가통행료 부과에 대한 이의제기 및 처리절차 등). 한국도로공사는 유료도로법에 따른 유료도로관리권자여서 미납 통행료의 부과·수납과 이의제기·부과 취소 절차는 조문이 정합니다. 다만 입구기록이 누락된 건을 영업소에서 어떻게 찾아내고 영상·차량번호를 어떤 순서로 대조해 통행 구간을 추정하는지는 조문이 아니라 <b>한국도로공사의 사규·내규와 영업소 실무</b>에 따릅니다.<b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(경북매일 2025-12-03: 출구 차로에서 입구정보를 자동 조회해 정상 요금 부과, 입구정보 오류 미납의 97% 개선, 사내 경진대회 대상) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 유료도로법 제20조제1항(부가통행료의 부과ㆍ수납), 제20조제2항(유료도로로 진입한 장소가 분명하지 아니할 때에는 통행료를 낼 장소에서 가장 먼 거리를 통행한 것으로 추정), 제20조제3항(고지 방법·절차는 국토교통부령), 제20조의2제1항(고지받은 날부터 30일 이내 이의제기), 제20조의2제2항(이의제기 내용이 타당하면 부과 취소), 제20조의2제3항(이의제기·처리절차는 국토교통부령). 입구기록이 없을 때 최장거리로 추정한다는 것까지 조문이 정하고 있어, 이 사례의 출발점 자체가 법정 추정 규정입니다. 다만 누락 건을 영업소에서 어떻게 찾아내고 영상·차량번호를 어떤 순서로 대조해 통행 구간을 되짚는지는 조문이 아니라 <b>한국도로공사의 사규·내규와 영업소 실무</b>에 따릅니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(경북매일 2025-12-03: 출구 차로에서 입구정보를 자동 조회해 정상 요금 부과, 입구정보 오류 미납의 97% 개선, 사내 경진대회 대상) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>

@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 95호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>매 비행 <b>사진 500장·영상 50건</b>을 눈으로 전수 판독</h1>
-  <p class="sub">해경 항공 채증영상 판독을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 초계비행과 채증, 검문검색과 추적·나포는 해양경비법이 정하지만, 시속 350km로 찍어 온 영상을 전량 눈으로 훑어 선종과 조업 상태를 가려내는 판독 과정은 규정 밖 실무이고 인지 한계로 누락이 생기는 지점입니다.</p>
+  <p class="sub">해경 항공 채증영상 판독을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 초계비행과 채증, 해양경비정보시스템 운영, 검문검색과 추적·나포는 해양경비법이 정하지만, 시속 350km로 찍어 온 영상을 전량 눈으로 훑어 선종과 조업 상태를 가려내는 판독 과정은 규정 밖 실무이고 인지 한계로 누락이 생기는 지점입니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>4</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>6</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>5</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>8</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 10 = 규정 4 + 추론 6 · 재판독 루프 1</span>
+    <span style="color:#65d7ad">전 단계 13 = 규정 5 + 추론 8 · 재판독 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -70,34 +70,43 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-statute" id="P01" data-gate="0" data-lane="0"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P01</b><em style="background:#1f8962">규정</em></div>
-      <p>해역 초계비행</p><small>해양경비법 제7조(해양경비 활동의 범위) — 시속 350km 비행</small></div><div class="card k-statute" id="P02" data-gate="1" data-lane="0"
+      <p>해역 초계비행</p><small>해양경비법 제7조(해양경비 활동의 범위) 제1호·제2호 — 해양 관련 범죄 예방, 해양수산자원 보호에 관한 조치 — 시속 350km 비행</small></div><div class="card k-statute" id="P02" data-gate="1" data-lane="0"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P02</b><em style="background:#1f8962">규정</em></div>
-      <p>사진·영상 채증</p><small>해양경비법 제7조의2(해양경비정보의 수집 등) — 매 비행 사진 500장·영상 50건 이상</small></div><div class="card k-inferred" id="P03" data-gate="2" data-lane="1"
+      <p>사진·영상 채증</p><small>해양경비법 제7조의2(해양경비정보의 수집 등) 제1항 — 해양경비 활동에 필요한 해양경비정보를 수집·관리·활용 — 매 비행 사진 500장·영상 50건 이상</small></div><div class="card k-inferred" id="P11" data-gate="1" data-lane="0"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P11</b><em style="background:#2456d6">추론</em></div>
+      <p>채증영상 내려받기·정리</p><small>비행이 끝나면 카메라에서 영상을 내려받아 날짜·항적별로 폴더에 나눠 정리</small></div><div class="card k-statute" id="P12" data-gate="1" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
+      <p>해양경비정보시스템 등록·관리</p><small>해양경비법 제7조의2(해양경비정보의 수집 등) 제3항 — 해양경비정보의 수집·관리 및 분석을 위한 해양경비정보시스템 구축·운영</small></div><div class="card k-inferred" id="P03" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P03</b><em style="background:#2456d6">추론</em></div>
-      <p>채증영상 전수 육안 판독</p><small>전량을 눈으로 확인 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="2" data-lane="1"
+      <p>채증영상 전수 육안 판독</p><small>찍어 온 사진과 영상을 한 건도 빼놓지 않고 눈으로 전부 넘겨 봄</small></div><div class="card k-inferred" id="P04" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
-      <p>어선 선종 육안 식별</p><small>형상 대조 — 실무</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="1"
+      <p>어선 선종 육안 식별</p><small>선체 형상과 어구 배치를 기억 속 선종과 견줘 어떤 배인지 가려냄</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P05</b><em style="background:#2456d6">추론</em></div>
-      <p>조업 상태 판별</p><small>어구·항적 육안 확인 — 실무</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
+      <p>조업 상태 판별</p><small>어구를 내렸는지 항적이 조업 형태인지를 화면만 보고 판별</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
-      <p>촬영 위치·좌표 대조</p><small>해도 대조 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="3" data-lane="1"
+      <p>촬영 위치·좌표 대조</p><small>촬영 지점을 해도와 맞춰 어느 수역에서 찍힌 것인지 대조</small></div><div class="card k-inferred" id="P07" data-gate="3" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P07</b><em style="background:#2456d6">추론</em></div>
-      <p>위법 요소 판단</p><small>인지 한계로 누락 발생 — 실무</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="2"
+      <p>위법 요소 판단</p><small>위법 소지가 있는지 요원이 최종 판단 — 인지 한계로 누락이 생기는 지점</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P08</b><em style="background:#2456d6">추론</em></div>
-      <p>판독 결과 보고·자료 정리</p><small>보고서 수기 작성 — 실무</small></div><div class="card k-statute" id="P09" data-gate="4" data-lane="2"
+      <p>판독 결과 보고·자료 정리</p><small>판독 결과를 보고서 형태로 손수 써서 수사·단속 부서에 넘김</small></div><div class="card k-statute" id="P09" data-gate="4" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P09</b><em style="background:#1f8962">규정</em></div>
-      <p>해상검문검색</p><small>해양경비법 제12조(해상검문검색)</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="3"
+      <p>해상검문검색</p><small>해양경비법 제12조(해상검문검색) 제1항제3호 — 국내법령·조약을 위반하거나 위반이 임박했다고 의심되는 선박에 대한 해상검문검색</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="3"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P10</b><em style="background:#1f8962">규정</em></div>
-      <p>추적·나포</p><small>해양경비법 제13조(추적·나포)</small></div></div>
+      <p>추적·나포</p><small>해양경비법 제13조(추적ㆍ나포) 제1호·제2호 — 검문검색에 불응해 도주하는 선박, 법령·조약 위반이 확실시되는 선박의 추적·나포</small></div><div class="card k-inferred" id="P13" data-gate="4" data-lane="2"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P13</b><em style="background:#2456d6">추론</em></div>
+      <p>단속 결과·채증자료 편철</p><small>검문검색·나포 결과와 근거가 된 채증영상을 사건기록에 묶어 보관</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -123,17 +132,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 해양경비법 제7조(해양경비 활동의 범위), 해양경비법 제7조의2(해양경비정보의 수집 등), 해양경비법 제12조(해상검문검색), 해양경비법 제13조(추적·나포). 초계비행과 채증영상의 수집·관리·활용은 해양경비법이 정한 해양경비 활동과 해양경비정보 수집에 해당합니다. 다만 모아 온 영상을 어떤 순서로 훑고 선종·조업 상태를 어떻게 가려낼지는 규정에 절차가 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 해양경찰청 보도자료(2025-08-05 — 매 비행 사진 500장·영상 50건 이상, 자체 개발 AI 모델로 선종·조업상태·위치 분석, 전국 항공대 코드 배포 후 검증·매뉴얼화 단계) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 해양경비법 제7조(해양경비 활동의 범위) 제1호(해양 관련 범죄 예방)·제2호(해양수산자원 보호 조치), 해양경비법 제7조의2(해양경비정보의 수집 등) 제1항(수집·관리·활용)·제3항(해양경비정보시스템 구축·운영), 해양경비법 제12조(해상검문검색) 제1항제3호, 해양경비법 제13조(추적ㆍ나포) 제1호·제2호. 초계비행과 채증영상의 수집·관리·활용은 해양경비법이 정한 해양경비 활동과 해양경비정보 수집에 해당합니다. 다만 모아 온 영상을 어떤 순서로 훑고 선종·조업 상태를 어떻게 가려낼지는 규정에 절차가 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 해양경찰청 보도자료(2025-08-05 — 매 비행 사진 500장·영상 50건 이상, 자체 개발 AI 모델로 선종·조업상태·위치 분석, 전국 항공대 코드 배포 후 검증·매뉴얼화 단계) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10"];
+const nodes = ["P01","P02","P11","P12","P03","P04","P05","P06","P07","P08","P09","P10","P13"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","P03"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","P07"],["P07","P03","loop","누락 의심 시 재판독"],["P07","P08"],["P08","P09"],["P09","P10"]];
+const edges = [["P01","P02"],["P02","P11"],["P11","P12"],["P12","P03"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","P07"],["P07","P03","loop","누락 의심 시 재판독"],["P07","P08"],["P08","P09"],["P09","P10"],["P10","P13"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();

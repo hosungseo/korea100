@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 36호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>시료 한 건마다 <b>엑셀 세 개를 오간다</b></h1>
-  <p class="sub">농수산물 안전성검사 시료를 수거해 검사기관에 의뢰하기까지의 절차를 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 시료를 수거할 수 있다는 근거와 검사의뢰 결재는 조문에 있지만, 당번표를 열어 회차를 확인하고 현장에서 적어 온 반입물량·수거수량을 대장에 옮기고 출하자 연락처를 다른 파일에서 찾아 의뢰서를 채우는 과정은 규정 밖 실무입니다.</p>
+  <p class="sub">농수산물 안전성검사 시료를 수거해 검사기관에 의뢰하기까지의 절차를 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 파고들면 현장 구간에는 생각보다 명문이 많습니다 — 시료를 무상으로 수거할 수 있다는 근거(제62조제1항제1호) 옆에 조사 목적·기간·장소를 미리 알릴 의무(제2항)와 증표를 내보일 의무(제3항)가 나란히 있습니다. 반면 당번표를 열어 회차를 확인하고 현장에서 적어 온 물량을 대장에 옮기고 연락처를 다른 파일에서 찾아 의뢰서를 채우는 과정은 규정 밖 실무입니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>4</b></span>
     <span><i style="background:#2456d6"></i>추론(암묵지) <b>10</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 12 = 규정 2 + 추론 10 · 재확인 루프 1</span>
+    <span style="color:#65d7ad">전 단계 14 = 규정 4 + 추론 10 · 재확인 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -70,40 +70,46 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>당직표·당번표 엑셀 확인</p><small>파일별로 흩어짐 — 실무</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="1"
+      <p>당직표·당번표 엑셀 확인</p><small>당직표·당번표가 파일마다 흩어져 매번 열어 대조 — 실무</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>회차별 수거 당번·수거일 확인</p><small>실무</small></div><div class="card k-inferred" id="P03" data-gate="0" data-lane="1"
+      <p>회차별 수거 당번·수거일 확인</p><small>몇 회차인지 세어 당번과 수거일을 맞춰 봄 — 실무</small></div><div class="card k-inferred" id="P03" data-gate="0" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P03</b><em style="background:#2456d6">추론</em></div>
-      <p>수거 품목·수거장소 배정</p><small>농산물·수산물 구분 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="0"
+      <p>수거 품목·수거장소 배정</p><small>농산물·수산물로 나눠 품목과 수거 시장을 배정 — 방법은 규정 밖</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
-      <p>출하자 성명·상호·소재지 현장 확인</p><small>실무</small></div><div class="card k-statute" id="P05" data-gate="1" data-lane="1"
+      <p>출하자 성명·상호·소재지 현장 확인</p><small>현장에서 출하자에게 직접 물어 성명·상호·소재지를 받아 적음</small></div><div class="card k-statute" id="P13" data-gate="1" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P13</b><em style="background:#1f8962">규정</em></div>
+      <p>조사 목적·범위 사전 고지</p><small>농수산물 품질관리법 제62조(출입ㆍ수거ㆍ조사 등) 제2항 — 목적·기간·장소와 관계 공무원 성명·직위를 미리 알리거나 현장에서 서류 제시</small></div><div class="card k-statute" id="P14" data-gate="1" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P14</b><em style="background:#1f8962">규정</em></div>
+      <p>수거 공무원 증표 제시</p><small>농수산물 품질관리법 제62조(출입ㆍ수거ㆍ조사 등) 제3항 — 권한을 나타내는 증표를 수거 대상자에게 내보임</small></div><div class="card k-statute" id="P05" data-gate="1" data-lane="1"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P05</b><em style="background:#1f8962">규정</em></div>
-      <p>시료 수거·물량 현장 기록</p><small>농수산물 품질관리법 제62조(출입ㆍ수거ㆍ조사 등)</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
+      <p>시료 수거·물량 현장 기록</p><small>농수산물 품질관리법 제62조(출입ㆍ수거ㆍ조사 등) 제1항제1호 — 제61조제1항 안전성조사를 위한 시료 무상 수거</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
-      <p>수거 내역 대장 전기</p><small>메모를 엑셀로 옮겨 적기 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="1"
+      <p>수거 내역 대장 전기</p><small>현장 메모를 엑셀 대장에 한 줄씩 옮겨 적기 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P07</b><em style="background:#2456d6">추론</em></div>
-      <p>출하자 연락처 대조</p><small>별도 연락처 엑셀 검색 — 실무</small></div><div class="card k-inferred" id="P08" data-gate="2" data-lane="1"
+      <p>출하자 연락처 대조</p><small>연락처 파일을 따로 열어 출하자 이름으로 검색 — 실무</small></div><div class="card k-inferred" id="P08" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P08</b><em style="background:#2456d6">추론</em></div>
       <p>기재 누락·오기 재확인</p><small>실무</small></div><div class="card k-inferred" id="P09" data-gate="3" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P09</b><em style="background:#2456d6">추론</em></div>
-      <p>수거증·의뢰서 수기 작성</p><small>방사능·중금속 검사항목 기재 — 실무</small></div><div class="card k-inferred" id="P10" data-gate="3" data-lane="1"
+      <p>수거증·의뢰서 수기 작성</p><small>방사능·중금속 등 검사항목을 서식에 손으로 기재 — 실무</small></div><div class="card k-inferred" id="P10" data-gate="3" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P10</b><em style="background:#2456d6">추론</em></div>
-      <p>청구서 작성</p><small>실무</small></div><div class="card k-statute" id="P11" data-gate="4" data-lane="2"
+      <p>청구서 작성</p><small>수거 건별 검사수수료를 청구서 서식에 옮겨 적기 — 실무</small></div><div class="card k-statute" id="P11" data-gate="4" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P11</b><em style="background:#1f8962">규정</em></div>
-      <p>검사의뢰 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재)</small></div><div class="card k-inferred" id="P12" data-gate="4" data-lane="3"
+      <p>검사의뢰 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재) — 제6조제1항 결재로 문서가 성립</small></div><div class="card k-inferred" id="P12" data-gate="4" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P12</b><em style="background:#2456d6">추론</em></div>
-      <p>검사기관 시료 인계·검사 의뢰</p><small>실무</small></div></div>
+      <p>검사기관 시료 인계·검사 의뢰</p><small>시료를 검사기관까지 가져가 의뢰서와 함께 인계 — 실무</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -129,17 +135,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 농수산물 품질관리법 제62조(출입ㆍ수거ㆍ조사 등), 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 시료 수거 권한과 결재는 조문이 정하지만, 수거 계획 수립·대장 정리·의뢰서 작성의 방법은 조문에 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 AI 정부 실험실 저장소 anjs2712/sample-collection-manager의 프로젝트 설명과 단일 파일 웹앱(v5.2) 화면 구성 — 수거입력, 시료수거 당번, 연락처 정보, 당직표·당번표 엑셀 업로드, 의뢰서·청구서 인쇄 및 PDF — 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 농수산물 품질관리법 제61조제1항(안전성조사)·제62조제1항제1호(시료 무상 수거)·제62조제2항(조사 목적·기간·장소와 공무원 성명·직위 사전 고지, 긴급 시 현장 서류 제시)·제62조제3항(권한 증표 제시), 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재)·제6조제1항(결재로 문서 성립). 시료 수거 권한과 현장 고지·증표 제시, 검사의뢰 결재는 조문이 정하지만, 수거 계획 수립·대장 정리·의뢰서 작성의 방법은 조문에 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 AI 정부 실험실 저장소 anjs2712/sample-collection-manager의 프로젝트 설명과 단일 파일 웹앱(v5.2) 화면 구성 — 수거입력, 시료수거 당번, 연락처 정보, 당직표·당번표 엑셀 업로드, 의뢰서·청구서 인쇄 및 PDF — 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11","P12"];
+const nodes = ["P01","P02","P03","P04","P13","P14","P05","P06","P07","P08","P09","P10","P11","P12"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","P03"],["P03","P04"],["P04","P05"],["P05","P06"],["P06","P07"],["P07","P08"],["P08","P05","loop","기재 재확인"],["P07","P09"],["P09","P10"],["P10","P11"],["P11","P12"]];
+const edges = [["P01","P02"],["P02","P03"],["P03","P04"],["P04","P13"],["P13","P14"],["P14","P05"],["P05","P06"],["P06","P07"],["P07","P08"],["P08","P05","loop","기재 재확인"],["P07","P09"],["P09","P10"],["P10","P11"],["P11","P12"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();
