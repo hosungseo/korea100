@@ -1,13 +1,65 @@
 import type { Metadata } from "next";
+import generated from "./cases.generated.json";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://hosungseo.github.io/korea100";
 const ASSET_BASE = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/ax-cases`;
+const SHEETS = `${ASSET_BASE}/sheets`;
+
+type GeneratedCase = {
+  id: number;
+  slug: string;
+  org: string;
+  work: string;
+  stage: string;
+  citizen: boolean;
+  group: string;
+  asisTitle: string;
+  tobeTitle: string;
+  asisHeadline: string;
+  tobeHeadline: string;
+  sources: string[];
+  stats: {
+    steps: number;
+    statute: number;
+    inferred: number;
+    replaced: number;
+    changed: number;
+    removed: number;
+    auto: number;
+  };
+};
+
+const GENERATED = generated as GeneratedCase[];
+
+const AGG = GENERATED.reduce(
+  (s, c) => ({
+    steps: s.steps + c.stats.steps,
+    statute: s.statute + c.stats.statute,
+    inferred: s.inferred + c.stats.inferred,
+    replaced: s.replaced + c.stats.replaced,
+    changed: s.changed + c.stats.changed,
+    removed: s.removed + c.stats.removed,
+  }),
+  { steps: 0, statute: 0, inferred: 0, replaced: 0, changed: 0, removed: 0 },
+);
+
+const GROUP_ORDER = [
+  "중앙부처",
+  "광역지자체",
+  "기초지자체",
+  "경찰·소방·군 등 특수직역",
+  "공공기관·공기업",
+  "공직자 자체 개발",
+  "정부 공공 깃랩",
+  "사례집·수상",
+  "기타",
+];
 
 export const metadata: Metadata = {
   title: "AI 행정 전후 비교",
   description:
-    "AI 도구 도입 전후의 업무 체계도를 규정·추론(탐색)·대체·간소화·소멸로 나눠 비교한 케이스 스터디 9건. 법정 관문은 사라지지 않는다 — AI가 대체하는 것은 그 사이의 암묵지와 탐색비용이다.",
+    `AI 도구 도입 전후의 업무 체계도를 규정·추론(탐색)·대체·간소화·소멸로 나눠 비교한 케이스 ${9 + GENERATED.length}건. 법정 관문은 사라지지 않는다 — AI가 대체하는 것은 그 사이의 암묵지와 탐색비용이다.`,
   alternates: { canonical: `${SITE_URL}/ax-cases/` },
 };
 
@@ -207,20 +259,20 @@ export default function AxCasesPage() {
 
       <section className="ax-cases-stats" aria-label="시리즈 요약">
         <div>
-          <strong>9</strong>
-          <span>케이스 (공무원판 7 + 시민판 2)</span>
+          <strong>{9 + GENERATED.length}</strong>
+          <span>케이스 (정밀 9 + 확장 {GENERATED.length})</span>
         </div>
         <div>
-          <strong>114 → 82</strong>
-          <span>사람이 밟는 단계 합계</span>
+          <strong>{AGG.steps.toLocaleString("ko-KR")}</strong>
+          <span>분해한 업무 단계</span>
         </div>
         <div>
-          <strong>1</strong>
-          <span>법정 관문 소멸 (9건 통틀어)</span>
+          <strong>{AGG.replaced.toLocaleString("ko-KR")}</strong>
+          <span>AI가 가져간 단계(대체)</span>
         </div>
         <div>
-          <strong>100%</strong>
-          <span>인용 조문 원문 대조</span>
+          <strong>{AGG.removed}</strong>
+          <span>절차 자체의 소멸</span>
         </div>
       </section>
 
@@ -249,15 +301,79 @@ export default function AxCasesPage() {
         ))}
       </section>
 
+      <section className="ax-cases-group" id="expanded">
+        <h2>확장 사례 {GENERATED.length}건 — 같은 문법으로 한 번에</h2>
+        <p>
+          중앙부처·지자체·공공기관·특수직역에서 실제로 쓰이는 사례를 모아 같은
+          색 문법으로 그렸습니다. 각 사례의 <b>AS-IS</b>와 <b>AI 적용</b>을 눌러
+          체계도를 펼쳐 보세요. 위 아홉 건이 조문까지 손으로 대조한 정밀판이라면,
+          여기부터는 귀납을 위한 규모 확보가 목적입니다 — 한계는 아래에 밝혔습니다.
+        </p>
+        {GROUP_ORDER.filter((g) => GENERATED.some((c) => c.group === g)).map(
+          (group) => (
+            <div key={group} className="ax-case-group-block">
+              <h3>
+                {group}{" "}
+                <small>
+                  {GENERATED.filter((c) => c.group === group).length}건
+                </small>
+              </h3>
+              <ul className="ax-case-list">
+                {GENERATED.filter((c) => c.group === group).map((c) => (
+                  <li key={c.slug}>
+                    <div className="ax-case-list-head">
+                      <strong>{c.org}</strong>
+                      <span>{c.work}</span>
+                      {c.stage ? <em>{c.stage}</em> : null}
+                    </div>
+                    <p className="ax-case-list-stat">
+                      단계 {c.stats.steps} (규정 {c.stats.statute} · 추론{" "}
+                      {c.stats.inferred}) → 대체 {c.stats.replaced} · 간소화{" "}
+                      {c.stats.changed} · 소멸 {c.stats.removed}
+                    </p>
+                    <div className="ax-case-list-links">
+                      <a href={`${SHEETS}/${c.slug}-asis.html`} target="_blank" rel="noreferrer">
+                        AS-IS 체계도
+                      </a>
+                      <a href={`${SHEETS}/${c.slug}-tobe.html`} target="_blank" rel="noreferrer">
+                        AI 적용 체계도
+                      </a>
+                      {c.sources[0] ? (
+                        <a href={c.sources[0].split(" ")[0]} target="_blank" rel="noreferrer">
+                          출처
+                        </a>
+                      ) : null}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ),
+        )}
+      </section>
+
       <section className="ax-cases-note" aria-label="방법과 한계">
         <h2>방법과 한계</h2>
         <p>
-          각 체계도의 초록 단계는 해당 법령·조례를 국가법령정보센터(DRF) 원문과
-          대조해 조문 번호까지 표기했습니다. 파란 단계는 규정에 명문이 없어
-          실무를 추론으로 재구성한 것으로, 기관에 따라 다를 수 있습니다. 도구
-          기능은 언론 보도·AI 정부 실험실 공개 저장소·공개 목록에 근거하며,
-          일부는 구상·시연 단계일 수 있습니다. 각 이미지 하단 각주에 케이스별
-          근거를 남겼습니다.
+          <b>사례 선별</b>은 네 가지를 모두 통과한 것만 실었습니다 — ① 누구의
+          무슨 일인지 지목할 수 있는가 ② 도입 전 절차를 재구성할 수 있는가 ③
+          어떤 단계가 어떻게 바뀌었는가 ④ 실제로 쓰이고 있는가. 법령 검색기나
+          문서 변환기 같은 <b>범용 도구는 업무가 아니라 도구</b>라서 제외했고,
+          계획·구상 단계도 뺐습니다.
+        </p>
+        <p>
+          <b>초록(규정) 단계</b>는 법령·조례에 명문이 있는 절차입니다. 정밀
+          아홉 건은 인용 조문을 전건 국가법령정보센터 원문과 대조했고, 확장
+          사례는 자동 대조 스크립트로 전수 검증합니다. <b>파란(추론) 단계</b>는
+          규정에 명문이 없어 실무를 재구성한 것이라 기관마다 다를 수 있습니다.
+          공공기관·공기업은 법령이 아니라 사규·내규로 움직이는 부분이 많아 파란
+          칸의 비중이 특히 높습니다 — 이는 오류가 아니라 그 조직의 성격입니다.
+        </p>
+        <p>
+          <b>도구 기능과 수치</b>는 언론 보도·정부 공공 깃랩 저장소·공식
+          사례집에 나온 것만 인용했으며, 각 체계도 하단 각주에 근거를 남겼습니다.
+          체계도는 업무의 구조를 보여주기 위한 재구성이지 기관의 공식 절차도가
+          아닙니다. 오류를 발견하시면 알려주세요.
         </p>
       </section>
     </main>

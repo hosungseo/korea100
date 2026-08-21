@@ -1,0 +1,187 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { width:1750px; background:#f4f7f5; color:#12241c; font-family:"Apple SD Gothic Neo","Pretendard",sans-serif; }
+header { background:#0b1a13; color:#f4faf7; padding:26px 48px 22px; }
+.kick { display:flex; justify-content:space-between; color:#65d7ad; font-family:ui-monospace,monospace; font-size:14px; font-weight:700; letter-spacing:.1em; margin-bottom:10px; }
+.kick small { color:#7d948a; }
+h1 { font-size:34px; font-weight:800; letter-spacing:-0.02em; }
+h1 b { color:#65d7ad; }
+.sub { margin-top:8px; color:#a8bcb2; font-size:14.5px; line-height:1.5; word-break:keep-all; max-width:1100px; }
+.counts { display:flex; gap:22px; margin-top:13px; font-size:13px; color:#cfe0d8; }
+.counts span { display:inline-flex; align-items:center; gap:6px; }
+.counts i { width:11px; height:11px; border-radius:3px; display:inline-block; }
+.counts b { font-family:ui-monospace,monospace; font-weight:800; }
+.lanehead { display:grid; grid-template-columns:150px repeat(5, 1fr); background:#fff; border-bottom:2px solid #17573f; }
+.lanehead div { padding:11px 12px 9px; font-size:13.5px; font-weight:800; color:#17573f; border-left:1px solid #e2e8e4; }
+.lanehead div:first-child { color:#8a9990; font-family:ui-monospace,monospace; font-size:11px; font-weight:700; border-left:0; }
+.lanehead div:last-child { color:#5230a0; background:#f3eefc; border-left:2px solid #7c56c9; }
+.cell[data-l="4"] { background:rgba(124,86,201,.05); border-left:2px solid rgba(124,86,201,.35); }
+.grid { position:relative; }
+.gate { display:grid; grid-template-columns:150px repeat(5, 1fr); border-bottom:2px solid #17573f; background:#fbfcfb; }
+.gate:nth-child(even) { background:#f6f9f7; }
+.glabel { padding:14px 12px; border-right:1px solid #e2e8e4; }
+.glabel b { display:block; color:#17573f; font-family:ui-monospace,monospace; font-size:13px; font-weight:800; }
+.glabel span { color:#45635a; font-size:12px; font-weight:700; word-break:keep-all; line-height:1.35; }
+.cell { min-height:64px; padding:12px 10px; border-left:1px dotted #d5ddd8; display:flex; flex-direction:column; gap:10px; }
+.card { position:relative; z-index:2; border:1.6px solid; border-radius:8px; padding:8px 10px 8px; box-shadow:0 1px 3px rgba(17,38,27,.07); background:#fff; }
+.card .chead { display:flex; justify-content:space-between; align-items:center; margin-bottom:3px; }
+.card b { font-family:ui-monospace,monospace; font-size:10.5px; font-weight:800; opacity:.75; }
+.card em { color:#fff; font-style:normal; font-size:9px; font-weight:800; padding:1px 7px 2px; border-radius:8px; }
+.card p { font-size:13px; font-weight:750; line-height:1.35; word-break:keep-all; }
+.card small { display:block; margin-top:3px; font-size:10px; line-height:1.35; color:inherit; opacity:.75; word-break:keep-all; }
+.card.k-inferred { border-style:solid; box-shadow:0 1px 3px rgba(36,86,214,.14); }
+.card.k-auto { box-shadow:0 0 0 2px rgba(13,129,96,.18), 0 1px 3px rgba(17,38,27,.08); }
+.card.k-replaced p, .card.k-removed p { text-decoration:line-through; }
+.card.k-replaced, .card.k-removed { border-style:dashed; opacity:.62; }
+.card.k-changed { border-style:solid; }
+svg.edges { position:absolute; inset:0; z-index:1; pointer-events:none; overflow:visible; }
+footer { display:flex; justify-content:space-between; align-items:center; background:#0b1a13; color:#a8bcb2; padding:13px 48px; font-size:13px; }
+footer b { color:#f4faf7; font-weight:800; font-size:14px; }
+footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
+.legend { display:flex; gap:18px; align-items:center; padding:10px 48px; background:#fff; border-bottom:1px solid #e2e8e4; font-size:12px; color:#45564d; }
+.legend span { display:inline-flex; gap:6px; align-items:center; }
+.legend i { width:13px; height:13px; border-radius:3px; border:1.6px solid; display:inline-block; }
+.note { padding:12px 48px 16px; background:#fbfcfb; color:#7a887f; font-size:11.5px; line-height:1.6; word-break:keep-all; }
+.note b { color:#45635a; }
+</style></head><body>
+<header>
+  <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 133호 · AI 적용</span><small>기준일 2026-08-21</small></div>
+  <h1>"부원동 일대 공시지가 20만 원 넘는 국공유지 찾아줘"</h1>
+  <p class="sub">일상어로 물으면 AI가 조건을 해석해 검색하고, 출장경로와 통계까지 정리해 줍니다. 조건이 바뀌면 다시 물으면 되므로, 숙련자에게 요청을 넘기고 기다리던 구간이 사라집니다.</p>
+  <p class="counts">
+    <span><i style="background:#1f8962"></i>규정 근거 <b>1</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>2</b></span>
+    <span><i style="background:#6b3fc4"></i>AI 자동 <b>3</b></span>
+    <span><i style="background:#d99a5e"></i>대체 <b>6</b></span>
+    
+    <span><i style="background:#d9a821"></i>간소화 <b>2</b></span>
+    <span style="color:#65d7ad">대체 6 · 간소화 2 · 소멸 0 · 자동 3 — 사람 단계 11 → 5</span>
+  </p>
+</header>
+<div class="legend">
+  <span><i style="background:#eef8f2;border-color:#1f8962"></i>규정 근거(조문 표기)</span>
+  <span><i style="background:#e9f0ff;border-color:#2456d6"></i>추론 — 규정에 없는 암묵지·실무 관행</span>
+  <span><i style="background:#f3eefc;border-color:#7c56c9"></i>AI 자동 처리(보라 — AI 행위자)</span>
+  <span><i style="background:#fdf6ee;border-color:#e5b58a"></i>대체(주황, 흐림·취소선) — ┄→ 승계 화살표가 AI 단계로</span>
+  <span><i style="background:#fdf0f0;border-color:#e0a3a3"></i>소멸(빨강, 흐림)</span>
+  <span><i style="background:#fdf8e3;border-color:#d9a821"></i>간소화(노랑) — 남되 부담 축소</span>
+  <span>─→ 절차 순서 &nbsp; ┄→ 반려·보완 루프</span>
+</div>
+<div class="lanehead"><div>단계 ↓ · 행위자 →</div><div>요청 부서</div><div>담당자</div><div>GIS 숙련자</div><div>공간정보 시스템</div><div>G-AI 공간정보 서비스</div></div>
+<div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="0"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
+      <p>부서 질의 접수</p><small>일상어 문장 그대로 입력 — 실무</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
+      style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
+      <div class="chead"><b>A01</b><em style="background:#6b3fc4">AI 자동</em></div>
+      <p>일상어 질의 해석</p><small>레이어 선택과 데이터 소재 파악을 자동 수행</small></div><div class="card k-replaced" id="P02" data-gate="1" data-lane="1"
+      style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
+      <div class="chead"><b>P02</b><em style="background:#d99a5e">A01로 대체</em></div>
+      <p>필요한 레이어·데이터 소재 파악</p><small>질의 자동 해석으로 대체</small></div><div class="card k-replaced" id="P03" data-gate="1" data-lane="2"
+      style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
+      <div class="chead"><b>P03</b><em style="background:#d99a5e">A01로 대체</em></div>
+      <p>GIS 전문 프로그램 실행·설정</p><small>질의 자동 해석으로 대체</small></div><div class="card k-auto" id="A02" data-gate="2" data-lane="4"
+      style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
+      <div class="chead"><b>A02</b><em style="background:#6b3fc4">AI 자동</em></div>
+      <p>조건 자동 검색·교차 확인</p><small>조건식 작성 없이 결과 산출</small></div><div class="card k-replaced" id="P04" data-gate="2" data-lane="2"
+      style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
+      <div class="chead"><b>P04</b><em style="background:#d99a5e">A02로 대체</em></div>
+      <p>공간 질의 조건식·함수 작성</p><small>자동 검색으로 대체</small></div><div class="card k-replaced" id="P06" data-gate="2" data-lane="2"
+      style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
+      <div class="chead"><b>P06</b><em style="background:#d99a5e">A02로 대체</em></div>
+      <p>국공유지 여부 교차 확인</p><small>자동 교차 확인으로 대체</small></div><div class="card k-statute" id="P05" data-gate="2" data-lane="3"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P05</b><em style="background:#1f8962">규정</em></div>
+      <p>개별공시지가 확인</p><small>부동산 가격공시에 관한 법률 제10조(개별공시지가의 결정·공시 등)</small></div><div class="card k-auto" id="A03" data-gate="3" data-lane="4"
+      style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
+      <div class="chead"><b>A03</b><em style="background:#6b3fc4">AI 자동</em></div>
+      <p>경로 최적화·통계 자동 정리</p><small>출장경로와 통계분석 결과를 바로 제시</small></div><div class="card k-replaced" id="P08" data-gate="3" data-lane="1"
+      style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
+      <div class="chead"><b>P08</b><em style="background:#d99a5e">A03로 대체</em></div>
+      <p>출장 대상지 경로 수기 배열</p><small>경로 최적화로 대체</small></div><div class="card k-replaced" id="P09" data-gate="3" data-lane="1"
+      style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
+      <div class="chead"><b>P09</b><em style="background:#d99a5e">A03로 대체</em></div>
+      <p>통계 집계·그래프 작성</p><small>자동 통계로 대체</small></div><div class="card k-changed" id="P07" data-gate="3" data-lane="1"
+      style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
+      <div class="chead"><b>P07</b><em style="background:#b8890e">간소화</em></div>
+      <p>결과 확인</p><small>표 전기 대신 산출 결과 확인</small></div><div class="card k-changed" id="P10" data-gate="4" data-lane="0"
+      style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
+      <div class="chead"><b>P10</b><em style="background:#b8890e">간소화</em></div>
+      <p>조건 재질의</p><small>숙련자 대기 없이 다시 물어 즉시 재검색</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="0"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P11</b><em style="background:#2456d6">추론</em></div>
+      <p>결과 활용(현장 확인·검토)</p><small>실무</small></div></div>
+<div class="grid" id="grid">
+  <svg class="edges" id="edgeLayer"></svg>
+  
+    <div class="gate" data-g="0">
+      <div class="glabel"><b>G0</b><span>질의 발생</span></div>
+      <div class="cell" data-g="0" data-l="0"></div><div class="cell" data-g="0" data-l="1"></div><div class="cell" data-g="0" data-l="2"></div><div class="cell" data-g="0" data-l="3"></div><div class="cell" data-g="0" data-l="4"></div>
+    </div>
+    <div class="gate" data-g="1">
+      <div class="glabel"><b>G1</b><span>자료 탐색</span></div>
+      <div class="cell" data-g="1" data-l="0"></div><div class="cell" data-g="1" data-l="1"></div><div class="cell" data-g="1" data-l="2"></div><div class="cell" data-g="1" data-l="3"></div><div class="cell" data-g="1" data-l="4"></div>
+    </div>
+    <div class="gate" data-g="2">
+      <div class="glabel"><b>G2</b><span>조건 조회</span></div>
+      <div class="cell" data-g="2" data-l="0"></div><div class="cell" data-g="2" data-l="1"></div><div class="cell" data-g="2" data-l="2"></div><div class="cell" data-g="2" data-l="3"></div><div class="cell" data-g="2" data-l="4"></div>
+    </div>
+    <div class="gate" data-g="3">
+      <div class="glabel"><b>G3</b><span>분석·정리</span></div>
+      <div class="cell" data-g="3" data-l="0"></div><div class="cell" data-g="3" data-l="1"></div><div class="cell" data-g="3" data-l="2"></div><div class="cell" data-g="3" data-l="3"></div><div class="cell" data-g="3" data-l="4"></div>
+    </div>
+    <div class="gate" data-g="4">
+      <div class="glabel"><b>G4</b><span>회신·활용</span></div>
+      <div class="cell" data-g="4" data-l="0"></div><div class="cell" data-g="4" data-l="1"></div><div class="cell" data-g="4" data-l="2"></div><div class="cell" data-g="4" data-l="3"></div><div class="cell" data-g="4" data-l="4"></div>
+    </div>
+</div>
+<div class="note">
+근거(인용 법령 — 법제처 원문 대조 대기): 부동산 가격공시에 관한 법률 제10조(개별공시지가의 결정·공시 등). <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 공시지가라는 기준값은 법이 정하지만, 그 값을 어느 레이어에서 어떤 조건식으로 뽑아 국공유지 여부와 맞춰 볼지는 규정에 없고 숙련자의 조작 지식에 의존해 왔습니다. 도구 사실은 언론 보도(경남신문 2026-04-27: 일상어 질문으로 공간정보 검색, 출장경로 최적화, 통계분석 제공) 기반입니다.
+</div>
+<footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
+<script>
+const nodes = ["P01","A01","P02","P03","A02","P04","P06","P05","A03","P08","P09","P07","P10","P11"];
+nodes.forEach((id) => {
+  const el = document.getElementById(id);
+  const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
+  cell.appendChild(el);
+});
+const edges = [["P01","A01","auto"],["A01","A02","auto"],["A02","P05"],["P05","A03"],["A03","P07"],["P07","P10"],["P10","A01","loop","조건 재질의(즉시)"],["P10","P11"],["P02","A01","replace"],["P03","A01","replace"],["P04","A02","replace"],["P06","A02","replace"],["P08","A03","replace"],["P09","A03","replace"]];
+const grid = document.getElementById("grid");
+const svg = document.getElementById("edgeLayer");
+const g = grid.getBoundingClientRect();
+svg.setAttribute("width", g.width); svg.setAttribute("height", grid.scrollHeight);
+svg.innerHTML = '<defs>' +
+  '<marker id="a1" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#4a6157"/></marker>' +
+  '<marker id="a2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#2456d6"/></marker>' +
+  '<marker id="a3" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#0d8160"/></marker>' + '<marker id="a4" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#dda76f"/></marker></defs>';
+const R = (el) => { const r = el.getBoundingClientRect(); return { l:r.left-g.left, r:r.right-g.left, t:r.top-g.top, b:r.bottom-g.top, cx:r.left-g.left+r.width/2, cy:r.top-g.top+r.height/2 }; };
+edges.forEach(([s, t, kind, label]) => {
+  const S = R(document.getElementById(s)), T = R(document.getElementById(t));
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  let d;
+  const loop = kind === "loop";
+  const auto = kind === "auto";
+  const repl = kind === "replace";
+  if (Math.abs(S.cx - T.cx) < 30 && T.t >= S.b) { d = `M ${S.cx} ${S.b} L ${T.cx} ${T.t}`; }
+  else if (T.t >= S.b - 4) { const my = S.b + Math.max(8, (T.t - S.b) / 2); d = `M ${S.cx} ${S.b} L ${S.cx} ${my} L ${T.cx} ${my} L ${T.cx} ${T.t}`; }
+  else if (S.t >= T.b - 4) { const my = T.b + Math.max(8, (S.t - T.b) / 2); d = `M ${S.cx} ${S.t} L ${S.cx} ${my} L ${T.cx} ${my} L ${T.cx} ${T.b}`; }
+  else { const sx = S.cx < T.cx ? S.r : S.l, tx = S.cx < T.cx ? T.l : T.r; const mx = (sx + tx) / 2; d = `M ${sx} ${S.cy} L ${mx} ${S.cy} L ${mx} ${T.cy} L ${tx} ${T.cy}`; }
+  path.setAttribute("d", d);
+  path.setAttribute("fill", "none");
+  path.setAttribute("stroke", loop ? "#2456d6" : auto ? "#7c56c9" : repl ? "#dda76f" : "#4a6157");
+  path.setAttribute("stroke-width", auto ? "2.2" : "1.6");
+  if (loop || repl) path.setAttribute("stroke-dasharray", "5 4");
+  path.setAttribute("marker-end", loop ? "url(#a2)" : auto ? "url(#a3)" : repl ? "url(#a4)" : "url(#a1)");
+  svg.appendChild(path);
+  if (label) {
+    const pt = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    pt.textContent = label;
+    pt.setAttribute("x", (S.cx + T.cx) / 2); pt.setAttribute("y", Math.min(S.cy, T.cy) - 6);
+    pt.setAttribute("fill", "#2456d6"); pt.setAttribute("font-size", "10"); pt.setAttribute("font-weight", "800");
+    pt.setAttribute("text-anchor", "middle");
+    svg.appendChild(pt);
+  }
+});
+</script>
+</body></html>

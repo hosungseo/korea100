@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { width:1750px; background:#f4f7f5; color:#12241c; font-family:"Apple SD Gothic Neo","Pretendard",sans-serif; }
+header { background:#0b1a13; color:#f4faf7; padding:26px 48px 22px; }
+.kick { display:flex; justify-content:space-between; color:#65d7ad; font-family:ui-monospace,monospace; font-size:14px; font-weight:700; letter-spacing:.1em; margin-bottom:10px; }
+.kick small { color:#7d948a; }
+h1 { font-size:34px; font-weight:800; letter-spacing:-0.02em; }
+h1 b { color:#65d7ad; }
+.sub { margin-top:8px; color:#a8bcb2; font-size:14.5px; line-height:1.5; word-break:keep-all; max-width:1100px; }
+.counts { display:flex; gap:22px; margin-top:13px; font-size:13px; color:#cfe0d8; }
+.counts span { display:inline-flex; align-items:center; gap:6px; }
+.counts i { width:11px; height:11px; border-radius:3px; display:inline-block; }
+.counts b { font-family:ui-monospace,monospace; font-weight:800; }
+.lanehead { display:grid; grid-template-columns:150px repeat(5, 1fr); background:#fff; border-bottom:2px solid #17573f; }
+.lanehead div { padding:11px 12px 9px; font-size:13.5px; font-weight:800; color:#17573f; border-left:1px solid #e2e8e4; }
+.lanehead div:first-child { color:#8a9990; font-family:ui-monospace,monospace; font-size:11px; font-weight:700; border-left:0; }
+.lanehead div:last-child { color:#5230a0; background:#f3eefc; border-left:2px solid #7c56c9; }
+.cell[data-l="4"] { background:rgba(124,86,201,.05); border-left:2px solid rgba(124,86,201,.35); }
+.grid { position:relative; }
+.gate { display:grid; grid-template-columns:150px repeat(5, 1fr); border-bottom:2px solid #17573f; background:#fbfcfb; }
+.gate:nth-child(even) { background:#f6f9f7; }
+.glabel { padding:14px 12px; border-right:1px solid #e2e8e4; }
+.glabel b { display:block; color:#17573f; font-family:ui-monospace,monospace; font-size:13px; font-weight:800; }
+.glabel span { color:#45635a; font-size:12px; font-weight:700; word-break:keep-all; line-height:1.35; }
+.cell { min-height:64px; padding:12px 10px; border-left:1px dotted #d5ddd8; display:flex; flex-direction:column; gap:10px; }
+.card { position:relative; z-index:2; border:1.6px solid; border-radius:8px; padding:8px 10px 8px; box-shadow:0 1px 3px rgba(17,38,27,.07); background:#fff; }
+.card .chead { display:flex; justify-content:space-between; align-items:center; margin-bottom:3px; }
+.card b { font-family:ui-monospace,monospace; font-size:10.5px; font-weight:800; opacity:.75; }
+.card em { color:#fff; font-style:normal; font-size:9px; font-weight:800; padding:1px 7px 2px; border-radius:8px; }
+.card p { font-size:13px; font-weight:750; line-height:1.35; word-break:keep-all; }
+.card small { display:block; margin-top:3px; font-size:10px; line-height:1.35; color:inherit; opacity:.75; word-break:keep-all; }
+.card.k-inferred { border-style:solid; box-shadow:0 1px 3px rgba(36,86,214,.14); }
+.card.k-auto { box-shadow:0 0 0 2px rgba(13,129,96,.18), 0 1px 3px rgba(17,38,27,.08); }
+.card.k-replaced p, .card.k-removed p { text-decoration:line-through; }
+.card.k-replaced, .card.k-removed { border-style:dashed; opacity:.62; }
+.card.k-changed { border-style:solid; }
+svg.edges { position:absolute; inset:0; z-index:1; pointer-events:none; overflow:visible; }
+footer { display:flex; justify-content:space-between; align-items:center; background:#0b1a13; color:#a8bcb2; padding:13px 48px; font-size:13px; }
+footer b { color:#f4faf7; font-weight:800; font-size:14px; }
+footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
+.legend { display:flex; gap:18px; align-items:center; padding:10px 48px; background:#fff; border-bottom:1px solid #e2e8e4; font-size:12px; color:#45564d; }
+.legend span { display:inline-flex; gap:6px; align-items:center; }
+.legend i { width:13px; height:13px; border-radius:3px; border:1.6px solid; display:inline-block; }
+.note { padding:12px 48px 16px; background:#fbfcfb; color:#7a887f; font-size:11.5px; line-height:1.6; word-break:keep-all; }
+.note b { color:#45635a; }
+</style></head><body>
+<header>
+  <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 20호 · AI 적용</span><small>기준일 2026-08-21</small></div>
+  <h1>흩어진 통행료를 <b>한 번에 불러와</b> 합칩니다 — 연동이 살아 있는 동안</h1>
+  <p class="sub">의원별 이용 내역을 API로 직접 불러와 합계와 중복·기간 오류를 점검하고 정산 내역 표를 만듭니다. 다만 이 사례는 지금 API 연동이 끝나 서비스가 멈춰 있습니다. 도구가 무엇을 대신했는지만큼, 무엇에 의존해 서 있었는지도 함께 보여 주는 지도입니다.</p>
+  <p class="counts">
+    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>2</b></span>
+    <span><i style="background:#6b3fc4"></i>AI 자동 <b>4</b></span>
+    <span><i style="background:#d99a5e"></i>대체 <b>4</b></span>
+    
+    <span><i style="background:#d9a821"></i>간소화 <b>3</b></span>
+    <span style="color:#65d7ad">대체 4 · 간소화 3 · 소멸 0 · 자동 4 — 사람 단계 11 → 7</span>
+  </p>
+</header>
+<div class="legend">
+  <span><i style="background:#eef8f2;border-color:#1f8962"></i>규정 근거(조문 표기)</span>
+  <span><i style="background:#e9f0ff;border-color:#2456d6"></i>추론 — 규정에 없는 암묵지·실무 관행</span>
+  <span><i style="background:#f3eefc;border-color:#7c56c9"></i>AI 자동 처리(보라 — AI 행위자)</span>
+  <span><i style="background:#fdf6ee;border-color:#e5b58a"></i>대체(주황, 흐림·취소선) — ┄→ 승계 화살표가 AI 단계로</span>
+  <span><i style="background:#fdf0f0;border-color:#e0a3a3"></i>소멸(빨강, 흐림)</span>
+  <span><i style="background:#fdf8e3;border-color:#d9a821"></i>간소화(노랑) — 남되 부담 축소</span>
+  <span>─→ 절차 순서 &nbsp; ┄→ 반려·보완 루프</span>
+</div>
+<div class="lanehead"><div>단계 ↓ · 행위자 →</div><div>의원</div><div>사무처 정산 담당</div><div>회계 담당</div><div>카드사·이용내역</div><div>하이패스 정산 자동화</div></div>
+<div id="pool" style="display:none"><div class="card k-statute" id="P01" data-gate="0" data-lane="0"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P01</b><em style="background:#1f8962">규정</em></div>
+      <p>의정활동에 따른 이동</p><small>지방자치법 제40조(의원의 의정활동비 등)</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="3"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
+      <p>개별 카드로 통행료 발생</p><small>의원별로 내역이 흩어짐 — 실무</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
+      style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
+      <div class="chead"><b>A01</b><em style="background:#6b3fc4">AI 자동</em></div>
+      <p>이용 내역 API 자동 수집</p><small>의원별 통행료를 한 번에 불러와 서식 통일</small></div><div class="card k-replaced" id="P03" data-gate="1" data-lane="1"
+      style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
+      <div class="chead"><b>P03</b><em style="background:#d99a5e">A01로 대체</em></div>
+      <p>카드사 내역 개별 조회</p><small>API 자동 수집으로 대체</small></div><div class="card k-replaced" id="P04" data-gate="1" data-lane="1"
+      style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
+      <div class="chead"><b>P04</b><em style="background:#d99a5e">A01로 대체</em></div>
+      <p>내역 내려받기·서식 통일</p><small>API 자동 수집으로 대체</small></div><div class="card k-auto" id="A02" data-gate="2" data-lane="4"
+      style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
+      <div class="chead"><b>A02</b><em style="background:#6b3fc4">AI 자동</em></div>
+      <p>의원별 합계 자동 집계</p><small>표 옮겨 적기 없이 바로 합산</small></div><div class="card k-auto" id="A03" data-gate="2" data-lane="4"
+      style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
+      <div class="chead"><b>A03</b><em style="background:#6b3fc4">AI 자동</em></div>
+      <p>기간·중복 건 자동 점검</p><small>월 경계·중복 청구를 걸러 표시</small></div><div class="card k-replaced" id="P05" data-gate="2" data-lane="1"
+      style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
+      <div class="chead"><b>P05</b><em style="background:#d99a5e">A02로 대체</em></div>
+      <p>의원별 합계 수기 집계</p><small>자동 집계로 대체</small></div><div class="card k-replaced" id="P06" data-gate="2" data-lane="1"
+      style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
+      <div class="chead"><b>P06</b><em style="background:#d99a5e">A03로 대체</em></div>
+      <p>기간·중복 건 확인</p><small>자동 점검으로 대체</small></div><div class="card k-changed" id="P07" data-gate="2" data-lane="0"
+      style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
+      <div class="chead"><b>P07</b><em style="background:#b8890e">간소화</em></div>
+      <p>본인 확인·이의 제기</p><small>확인 대상이 표시된 건으로 좁혀짐</small></div><div class="card k-auto" id="A04" data-gate="3" data-lane="4"
+      style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
+      <div class="chead"><b>A04</b><em style="background:#6b3fc4">AI 자동</em></div>
+      <p>정산 내역 표 자동 생성</p><small>품의에 붙일 내역을 그대로 산출</small></div><div class="card k-changed" id="P08" data-gate="3" data-lane="1"
+      style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
+      <div class="chead"><b>P08</b><em style="background:#b8890e">간소화</em></div>
+      <p>지출품의 작성</p><small>자동 생성된 내역을 붙여 품의</small></div><div class="card k-statute" id="P09" data-gate="3" data-lane="2"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P09</b><em style="background:#1f8962">규정</em></div>
+      <p>지출 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재)</small></div><div class="card k-inferred" id="P10" data-gate="4" data-lane="2"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P10</b><em style="background:#2456d6">추론</em></div>
+      <p>집행·증빙 편철</p><small>출력해 묶어 보관 — 실무</small></div><div class="card k-changed" id="P11" data-gate="4" data-lane="1"
+      style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
+      <div class="chead"><b>P11</b><em style="background:#b8890e">간소화</em></div>
+      <p>월별 실적 관리</p><small>수집된 내역에서 자동 집계</small></div></div>
+<div class="grid" id="grid">
+  <svg class="edges" id="edgeLayer"></svg>
+  
+    <div class="gate" data-g="0">
+      <div class="glabel"><b>G0</b><span>이용</span></div>
+      <div class="cell" data-g="0" data-l="0"></div><div class="cell" data-g="0" data-l="1"></div><div class="cell" data-g="0" data-l="2"></div><div class="cell" data-g="0" data-l="3"></div><div class="cell" data-g="0" data-l="4"></div>
+    </div>
+    <div class="gate" data-g="1">
+      <div class="glabel"><b>G1</b><span>내역 수집</span></div>
+      <div class="cell" data-g="1" data-l="0"></div><div class="cell" data-g="1" data-l="1"></div><div class="cell" data-g="1" data-l="2"></div><div class="cell" data-g="1" data-l="3"></div><div class="cell" data-g="1" data-l="4"></div>
+    </div>
+    <div class="gate" data-g="2">
+      <div class="glabel"><b>G2</b><span>대사·확인</span></div>
+      <div class="cell" data-g="2" data-l="0"></div><div class="cell" data-g="2" data-l="1"></div><div class="cell" data-g="2" data-l="2"></div><div class="cell" data-g="2" data-l="3"></div><div class="cell" data-g="2" data-l="4"></div>
+    </div>
+    <div class="gate" data-g="3">
+      <div class="glabel"><b>G3</b><span>지급 결의</span></div>
+      <div class="cell" data-g="3" data-l="0"></div><div class="cell" data-g="3" data-l="1"></div><div class="cell" data-g="3" data-l="2"></div><div class="cell" data-g="3" data-l="3"></div><div class="cell" data-g="3" data-l="4"></div>
+    </div>
+    <div class="gate" data-g="4">
+      <div class="glabel"><b>G4</b><span>집행·보관</span></div>
+      <div class="cell" data-g="4" data-l="0"></div><div class="cell" data-g="4" data-l="1"></div><div class="cell" data-g="4" data-l="2"></div><div class="cell" data-g="4" data-l="3"></div><div class="cell" data-g="4" data-l="4"></div>
+    </div>
+</div>
+<div class="note">
+근거(인용 법령 — 법제처 원문 대조 대기): 지방자치법 제40조(의원의 의정활동비 등), 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 무엇을 지급하는지는 법과 조례가 정하지만, 의원마다 흩어진 카드 내역을 하나씩 조회해 서식을 맞추고 합계를 내는 과정은 규정에 절차가 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 모두의 공공AX 사례 아카이브(PAX)에 등록된 경기도의회 실무자 사례(2026-08-14, 의원별 하이패스 이용 내역을 API로 불러와 경비 정산 자동화) 기반이며, <b>현재 API 연동이 종료되어 서비스가 동작하지 않는 상태</b>입니다 — 도구가 멈추는 이유(연동 지속성)까지 함께 볼 수 있는 사례입니다.
+</div>
+<footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
+<script>
+const nodes = ["P01","P02","A01","P03","P04","A02","A03","P05","P06","P07","A04","P08","P09","P10","P11"];
+nodes.forEach((id) => {
+  const el = document.getElementById(id);
+  const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
+  cell.appendChild(el);
+});
+const edges = [["P01","P02"],["P02","A01","auto"],["A01","A02","auto"],["A02","A03","auto"],["A03","A04","auto"],["A04","P08"],["P08","P09"],["P09","P10"],["P10","P11"],["A03","P07"],["P07","A01","loop","내역 재확인·재수집"],["P03","A01","replace"],["P04","A01","replace"],["P05","A02","replace"],["P06","A03","replace"]];
+const grid = document.getElementById("grid");
+const svg = document.getElementById("edgeLayer");
+const g = grid.getBoundingClientRect();
+svg.setAttribute("width", g.width); svg.setAttribute("height", grid.scrollHeight);
+svg.innerHTML = '<defs>' +
+  '<marker id="a1" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#4a6157"/></marker>' +
+  '<marker id="a2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#2456d6"/></marker>' +
+  '<marker id="a3" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#0d8160"/></marker>' + '<marker id="a4" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#dda76f"/></marker></defs>';
+const R = (el) => { const r = el.getBoundingClientRect(); return { l:r.left-g.left, r:r.right-g.left, t:r.top-g.top, b:r.bottom-g.top, cx:r.left-g.left+r.width/2, cy:r.top-g.top+r.height/2 }; };
+edges.forEach(([s, t, kind, label]) => {
+  const S = R(document.getElementById(s)), T = R(document.getElementById(t));
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  let d;
+  const loop = kind === "loop";
+  const auto = kind === "auto";
+  const repl = kind === "replace";
+  if (Math.abs(S.cx - T.cx) < 30 && T.t >= S.b) { d = `M ${S.cx} ${S.b} L ${T.cx} ${T.t}`; }
+  else if (T.t >= S.b - 4) { const my = S.b + Math.max(8, (T.t - S.b) / 2); d = `M ${S.cx} ${S.b} L ${S.cx} ${my} L ${T.cx} ${my} L ${T.cx} ${T.t}`; }
+  else if (S.t >= T.b - 4) { const my = T.b + Math.max(8, (S.t - T.b) / 2); d = `M ${S.cx} ${S.t} L ${S.cx} ${my} L ${T.cx} ${my} L ${T.cx} ${T.b}`; }
+  else { const sx = S.cx < T.cx ? S.r : S.l, tx = S.cx < T.cx ? T.l : T.r; const mx = (sx + tx) / 2; d = `M ${sx} ${S.cy} L ${mx} ${S.cy} L ${mx} ${T.cy} L ${tx} ${T.cy}`; }
+  path.setAttribute("d", d);
+  path.setAttribute("fill", "none");
+  path.setAttribute("stroke", loop ? "#2456d6" : auto ? "#7c56c9" : repl ? "#dda76f" : "#4a6157");
+  path.setAttribute("stroke-width", auto ? "2.2" : "1.6");
+  if (loop || repl) path.setAttribute("stroke-dasharray", "5 4");
+  path.setAttribute("marker-end", loop ? "url(#a2)" : auto ? "url(#a3)" : repl ? "url(#a4)" : "url(#a1)");
+  svg.appendChild(path);
+  if (label) {
+    const pt = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    pt.textContent = label;
+    pt.setAttribute("x", (S.cx + T.cx) / 2); pt.setAttribute("y", Math.min(S.cy, T.cy) - 6);
+    pt.setAttribute("fill", "#2456d6"); pt.setAttribute("font-size", "10"); pt.setAttribute("font-weight", "800");
+    pt.setAttribute("text-anchor", "middle");
+    svg.appendChild(pt);
+  }
+});
+</script>
+</body></html>

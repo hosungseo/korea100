@@ -1,0 +1,160 @@
+const KIND = {
+  statute:  { bg: "#eef8f2", border: "#1f8962", tagBg: "#1f8962", tag: "규정",   text: "#17573f" },
+  inferred: { bg: "#e9f0ff", border: "#2456d6", tagBg: "#2456d6", tag: "추론",   text: "#1c3d8f" },
+  auto:     { bg: "#f3eefc", border: "#7c56c9", tagBg: "#6b3fc4", tag: "AI 자동", text: "#5230a0" },
+  replaced: { bg: "#fdf6ee", border: "#e5b58a", tagBg: "#d99a5e", tag: "대체", text: "#c08a55" },
+  removed:  { bg: "#fdf0f0", border: "#e0a3a3", tagBg: "#d47f7f", tag: "소멸", text: "#c47575" },
+  changed:  { bg: "#fdf8e3", border: "#d9a821", tagBg: "#b8890e", tag: "간소화", text: "#8a6a0a" },
+};
+
+function stats(nodes) {
+  const c = { statute: 0, inferred: 0, auto: 0, replaced: 0, removed: 0, changed: 0 };
+  nodes.forEach((n) => c[n.kind]++);
+  return c;
+}
+
+function sheet({ variant, title, subtitle, nodes, edges, headline, lanes, gates, width = 1500, basisNote = "", toolLane = false }) {
+  const c = stats(nodes);
+  const cards = nodes.map((n) => {
+    const k = KIND[n.kind];
+    return `<div class="card k-${n.kind}" id="${n.id}" data-gate="${n.gate}" data-lane="${n.lane}"
+      style="background:${k.bg};border-color:${k.border};color:${k.text}">
+      <div class="chead"><b>${n.id}</b><em style="background:${k.tagBg}">${n.tag ?? k.tag}</em></div>
+      <p>${n.name}</p><small>${n.sub}</small></div>`;
+  }).join("");
+
+  const gateRows = gates.map((g, gi) => `
+    <div class="gate" data-g="${gi}">
+      <div class="glabel"><b>${g.slice(0, 2)}</b><span>${g.slice(3)}</span></div>
+      ${lanes.map((_, li) => `<div class="cell" data-g="${gi}" data-l="${li}"></div>`).join("")}
+    </div>`).join("");
+
+  const edgesJson = JSON.stringify(edges);
+
+  return `<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { width:${width}px; background:#f4f7f5; color:#12241c; font-family:"Apple SD Gothic Neo","Pretendard",sans-serif; }
+header { background:#0b1a13; color:#f4faf7; padding:26px 48px 22px; }
+.kick { display:flex; justify-content:space-between; color:#65d7ad; font-family:ui-monospace,monospace; font-size:14px; font-weight:700; letter-spacing:.1em; margin-bottom:10px; }
+.kick small { color:#7d948a; }
+h1 { font-size:34px; font-weight:800; letter-spacing:-0.02em; }
+h1 b { color:#65d7ad; }
+.sub { margin-top:8px; color:#a8bcb2; font-size:14.5px; line-height:1.5; word-break:keep-all; max-width:1100px; }
+.counts { display:flex; gap:22px; margin-top:13px; font-size:13px; color:#cfe0d8; }
+.counts span { display:inline-flex; align-items:center; gap:6px; }
+.counts i { width:11px; height:11px; border-radius:3px; display:inline-block; }
+.counts b { font-family:ui-monospace,monospace; font-weight:800; }
+.lanehead { display:grid; grid-template-columns:150px repeat(${lanes.length}, 1fr); background:#fff; border-bottom:2px solid #17573f; }
+.lanehead div { padding:11px 12px 9px; font-size:13.5px; font-weight:800; color:#17573f; border-left:1px solid #e2e8e4; }
+.lanehead div:first-child { color:#8a9990; font-family:ui-monospace,monospace; font-size:11px; font-weight:700; border-left:0; }
+${toolLane ? `.lanehead div:last-child { color:#5230a0; background:#f3eefc; border-left:2px solid #7c56c9; }
+.cell[data-l="${lanes.length - 1}"] { background:rgba(124,86,201,.05); border-left:2px solid rgba(124,86,201,.35); }` : ""}
+.grid { position:relative; }
+.gate { display:grid; grid-template-columns:150px repeat(${lanes.length}, 1fr); border-bottom:2px solid #17573f; background:#fbfcfb; }
+.gate:nth-child(even) { background:#f6f9f7; }
+.glabel { padding:14px 12px; border-right:1px solid #e2e8e4; }
+.glabel b { display:block; color:#17573f; font-family:ui-monospace,monospace; font-size:13px; font-weight:800; }
+.glabel span { color:#45635a; font-size:12px; font-weight:700; word-break:keep-all; line-height:1.35; }
+.cell { min-height:64px; padding:12px 10px; border-left:1px dotted #d5ddd8; display:flex; flex-direction:column; gap:10px; }
+.card { position:relative; z-index:2; border:1.6px solid; border-radius:8px; padding:8px 10px 8px; box-shadow:0 1px 3px rgba(17,38,27,.07); background:#fff; }
+.card .chead { display:flex; justify-content:space-between; align-items:center; margin-bottom:3px; }
+.card b { font-family:ui-monospace,monospace; font-size:10.5px; font-weight:800; opacity:.75; }
+.card em { color:#fff; font-style:normal; font-size:9px; font-weight:800; padding:1px 7px 2px; border-radius:8px; }
+.card p { font-size:13px; font-weight:750; line-height:1.35; word-break:keep-all; }
+.card small { display:block; margin-top:3px; font-size:10px; line-height:1.35; color:inherit; opacity:.75; word-break:keep-all; }
+.card.k-inferred { border-style:solid; box-shadow:0 1px 3px rgba(36,86,214,.14); }
+.card.k-auto { box-shadow:0 0 0 2px rgba(13,129,96,.18), 0 1px 3px rgba(17,38,27,.08); }
+.card.k-replaced p, .card.k-removed p { text-decoration:line-through; }
+.card.k-replaced, .card.k-removed { border-style:dashed; opacity:.62; }
+.card.k-changed { border-style:solid; }
+svg.edges { position:absolute; inset:0; z-index:1; pointer-events:none; overflow:visible; }
+footer { display:flex; justify-content:space-between; align-items:center; background:#0b1a13; color:#a8bcb2; padding:13px 48px; font-size:13px; }
+footer b { color:#f4faf7; font-weight:800; font-size:14px; }
+footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
+.legend { display:flex; gap:18px; align-items:center; padding:10px 48px; background:#fff; border-bottom:1px solid #e2e8e4; font-size:12px; color:#45564d; }
+.legend span { display:inline-flex; gap:6px; align-items:center; }
+.legend i { width:13px; height:13px; border-radius:3px; border:1.6px solid; display:inline-block; }
+.note { padding:12px 48px 16px; background:#fbfcfb; color:#7a887f; font-size:11.5px; line-height:1.6; word-break:keep-all; }
+.note b { color:#45635a; }
+</style></head><body>
+<header>
+  <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 ${variant}</span><small>기준일 2026-08-21</small></div>
+  <h1>${title}</h1>
+  <p class="sub">${subtitle}</p>
+  <p class="counts">
+    <span><i style="background:#1f8962"></i>규정 근거 <b>${c.statute}</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>${c.inferred}</b></span>
+    ${c.auto ? `<span><i style="background:#6b3fc4"></i>AI 자동 <b>${c.auto}</b></span>` : ""}
+    ${c.replaced ? `<span><i style="background:#d99a5e"></i>대체 <b>${c.replaced}</b></span>` : ""}
+    ${c.removed ? `<span><i style="background:#d47f7f"></i>소멸 <b>${c.removed}</b></span>` : ""}
+    ${c.changed ? `<span><i style="background:#d9a821"></i>간소화 <b>${c.changed}</b></span>` : ""}
+    <span style="color:#65d7ad">${headline}</span>
+  </p>
+</header>
+<div class="legend">
+  <span><i style="background:#eef8f2;border-color:#1f8962"></i>규정 근거(조문 표기)</span>
+  <span><i style="background:#e9f0ff;border-color:#2456d6"></i>추론 — 규정에 없는 암묵지·실무 관행</span>
+  <span><i style="background:#f3eefc;border-color:#7c56c9"></i>AI 자동 처리(보라 — AI 행위자)</span>
+  <span><i style="background:#fdf6ee;border-color:#e5b58a"></i>대체(주황, 흐림·취소선) — ┄→ 승계 화살표가 AI 단계로</span>
+  <span><i style="background:#fdf0f0;border-color:#e0a3a3"></i>소멸(빨강, 흐림)</span>
+  <span><i style="background:#fdf8e3;border-color:#d9a821"></i>간소화(노랑) — 남되 부담 축소</span>
+  <span>─→ 절차 순서 &nbsp; ┄→ 반려·보완 루프</span>
+</div>
+<div class="lanehead"><div>단계 ↓ · 행위자 →</div>${lanes.map((l) => `<div>${l}</div>`).join("")}</div>
+<div id="pool" style="display:none">${cards}</div>
+<div class="grid" id="grid">
+  <svg class="edges" id="edgeLayer"></svg>
+  ${gateRows}
+</div>
+<div class="note">
+${basisNote}
+</div>
+<footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
+<script>
+const nodes = ${JSON.stringify(nodes.map((n) => n.id))};
+nodes.forEach((id) => {
+  const el = document.getElementById(id);
+  const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
+  cell.appendChild(el);
+});
+const edges = ${edgesJson};
+const grid = document.getElementById("grid");
+const svg = document.getElementById("edgeLayer");
+const g = grid.getBoundingClientRect();
+svg.setAttribute("width", g.width); svg.setAttribute("height", grid.scrollHeight);
+svg.innerHTML = '<defs>' +
+  '<marker id="a1" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#4a6157"/></marker>' +
+  '<marker id="a2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#2456d6"/></marker>' +
+  '<marker id="a3" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#0d8160"/></marker>' + '<marker id="a4" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#dda76f"/></marker></defs>';
+const R = (el) => { const r = el.getBoundingClientRect(); return { l:r.left-g.left, r:r.right-g.left, t:r.top-g.top, b:r.bottom-g.top, cx:r.left-g.left+r.width/2, cy:r.top-g.top+r.height/2 }; };
+edges.forEach(([s, t, kind, label]) => {
+  const S = R(document.getElementById(s)), T = R(document.getElementById(t));
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  let d;
+  const loop = kind === "loop";
+  const auto = kind === "auto";
+  const repl = kind === "replace";
+  if (Math.abs(S.cx - T.cx) < 30 && T.t >= S.b) { d = \`M \${S.cx} \${S.b} L \${T.cx} \${T.t}\`; }
+  else if (T.t >= S.b - 4) { const my = S.b + Math.max(8, (T.t - S.b) / 2); d = \`M \${S.cx} \${S.b} L \${S.cx} \${my} L \${T.cx} \${my} L \${T.cx} \${T.t}\`; }
+  else if (S.t >= T.b - 4) { const my = T.b + Math.max(8, (S.t - T.b) / 2); d = \`M \${S.cx} \${S.t} L \${S.cx} \${my} L \${T.cx} \${my} L \${T.cx} \${T.b}\`; }
+  else { const sx = S.cx < T.cx ? S.r : S.l, tx = S.cx < T.cx ? T.l : T.r; const mx = (sx + tx) / 2; d = \`M \${sx} \${S.cy} L \${mx} \${S.cy} L \${mx} \${T.cy} L \${tx} \${T.cy}\`; }
+  path.setAttribute("d", d);
+  path.setAttribute("fill", "none");
+  path.setAttribute("stroke", loop ? "#2456d6" : auto ? "#7c56c9" : repl ? "#dda76f" : "#4a6157");
+  path.setAttribute("stroke-width", auto ? "2.2" : "1.6");
+  if (loop || repl) path.setAttribute("stroke-dasharray", "5 4");
+  path.setAttribute("marker-end", loop ? "url(#a2)" : auto ? "url(#a3)" : repl ? "url(#a4)" : "url(#a1)");
+  svg.appendChild(path);
+  if (label) {
+    const pt = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    pt.textContent = label;
+    pt.setAttribute("x", (S.cx + T.cx) / 2); pt.setAttribute("y", Math.min(S.cy, T.cy) - 6);
+    pt.setAttribute("fill", "#2456d6"); pt.setAttribute("font-size", "10"); pt.setAttribute("font-weight", "800");
+    pt.setAttribute("text-anchor", "middle");
+    svg.appendChild(pt);
+  }
+});
+</script>
+</body></html>`;
+}
+
