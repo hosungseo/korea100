@@ -49,8 +49,8 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <h1>망 안에 둔 로컬 LLM이 <b>의견서 초안</b>까지, 판단은 감사자가</h1>
   <p class="sub">여러 의뢰 문서를 한 번에 읽어 대상 여부를 판정하고, 지방자치단체를 당사자로 하는 계약에 관한 법률령 등 실제 조문을 근거로 인용해 유형별 체크리스트가 붙은 의견서 초안을 hwpx로 만듭니다. 자료가 확인되지 않은 항목은 '적정'으로 쓰지 않고 '확인필요'와 필요 자료를 제시하며, 최종 판단과 책임은 감사자에게 남습니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>3</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>4</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>1</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>4</b></span>
     <span><i style="background:#d99a5e"></i>대체 <b>4</b></span>
     
@@ -68,10 +68,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <span>─→ 절차 순서 &nbsp; ┄→ 반려·보완 루프</span>
 </div>
 <div class="lanehead"><div>단계 ↓ · 행위자 →</div><div>의뢰 부서</div><div>감사담당(일상감사·계약심사)</div><div>감사부서장</div><div>처리대장 시스템</div><div>일상감사 검토 AI(온프레미스)</div></div>
-<div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="0"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>일상감사·계약심사 의뢰</p><small>의뢰서와 붙임자료 제출 — 실무</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="3"
+<div id="pool" style="display:none"><div class="card k-statute" id="P01" data-gate="0" data-lane="0"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P01</b><em style="background:#1f8962">규정</em></div>
+      <p>일상감사·계약심사 의뢰</p><small>공공감사에 관한 법률 시행령 제13조(일상감사)</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
       <p>처리대장 등재</p><small>접수일·의뢰금액을 대장에 입력 — 실무</small></div><div class="card k-changed" id="P03" data-gate="0" data-lane="1"
@@ -113,10 +113,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>자료 보완 요구</p><small>'확인필요' 항목과 필요 자료를 도구가 먼저 제시</small></div><div class="card k-statute" id="P11" data-gate="3" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P11</b><em style="background:#1f8962">규정</em></div>
-      <p>의견서 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재)</small></div><div class="card k-inferred" id="P12" data-gate="4" data-lane="0"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P12</b><em style="background:#2456d6">추론</em></div>
-      <p>의견 통보·조치</p><small>의뢰부서가 반영해 계약 진행 — 실무</small></div><div class="card k-changed" id="P13" data-gate="4" data-lane="3"
+      <p>의견서 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재)</small></div><div class="card k-statute" id="P12" data-gate="4" data-lane="0"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
+      <p>의견 통보·조치</p><small>공공감사에 관한 법률 시행령 제13조(일상감사)</small></div><div class="card k-changed" id="P13" data-gate="4" data-lane="3"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P13</b><em style="background:#b8890e">간소화</em></div>
       <p>실적·절감액 집계</p><small>기간 필터로 건수·조정률·평균 처리기간 자동 집계</small></div></div>
@@ -145,7 +145,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 공공감사에 관한 법률 제22조(일상감사), 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 무엇을 일상감사 대상으로 볼지, 유형별로 무엇을 점검할지는 기관 내부 기준(붙임2 범위·붙임6 체크리스트)에 담겨 있어 법령에는 절차가 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 정부 공공 깃랩 저장소 darkvodun/my-auditSystem-project의 README(처리대장 웹앱 .NET 8 + 온프레미스 로컬 LLM 검토 AI, 처리기간 자동계산, 지방자치단체를 당사자로 하는 계약에 관한 법률령 등 RAG 인용, 유형별 체크리스트, hwpx 의견서 자동 작성, 감사자료 외부 전송 없음, 최종 판단·책임은 감사자) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 공공감사에 관한 법률 제22조(일상감사), 공공감사에 관한 법률 시행령 제13조(일상감사), 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 계약업무를 하기 전에 감사기구의 장에게 일상감사를 의뢰해야 한다는 것(시행령 제13조제2항제2호)과 감사기구의 장이 그 의견을 집행부서의 장에게 통보하고 집행부서가 조치결과를 회신해야 한다는 것(같은 조 제3항·제4항)은 조문이 정합니다. 다만 무엇을 일상감사 대상으로 볼지, 유형별로 무엇을 점검할지는 기관 내부 기준(붙임2 범위·붙임6 체크리스트)에 담겨 있어 법령에는 절차가 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 정부 공공 깃랩 저장소 darkvodun/my-auditSystem-project의 README(처리대장 웹앱 .NET 8 + 온프레미스 로컬 LLM 검토 AI, 처리기간 자동계산, 지방자치단체를 당사자로 하는 계약에 관한 법률령 등 RAG 인용, 유형별 체크리스트, hwpx 의견서 자동 작성, 감사자료 외부 전송 없음, 최종 판단·책임은 감사자) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>

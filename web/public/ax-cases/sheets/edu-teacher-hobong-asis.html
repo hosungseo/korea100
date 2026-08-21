@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 10호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>기준표는 법에 있는데, <b>경력을 읽어내는 일</b>은 규정 밖에 있습니다</h1>
-  <p class="sub">교원 호봉 획정을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 초임호봉 획정과 재획정은 공무원보수규정이 정하지만, 경력증명서·자격증·학위증명서를 눈으로 읽어 기간·기관·직종을 옮겨 적고 중복을 대조해 인정 여부를 판단하는 구간은 규정에 절차가 없습니다.</p>
+  <p class="sub">교원 호봉 획정을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 초임호봉 획정과 재획정, 전력조회·경력 심의는 공무원보수규정이 정하지만, 경력증명서·자격증·학위증명서를 눈으로 읽어 기간·기관·직종을 옮겨 적고 중복을 대조해 환산율을 적용하는 구간은 규정에 절차가 없습니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>11</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>10</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 13 = 규정 2 + 추론 11 · 루프 1</span>
+    <span style="color:#65d7ad">전 단계 13 = 규정 3 + 추론 10 · 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -82,10 +82,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>주당 시수 확인(시간강사)</p><small>환산의 전제가 되는 값 확인 — 실무</small></div><div class="card k-inferred" id="P05" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P05</b><em style="background:#2456d6">추론</em></div>
-      <p>중복 경력 대조·병합</p><small>기관 간 기간 겹침을 수기 확인 — 실무</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
-      <p>경력 인정 여부 판단</p><small>공·사립, 임면보고, 자격-학교급 일치 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="1"
+      <p>중복 경력 대조·병합</p><small>기관 간 기간 겹침을 수기 확인 — 실무</small></div><div class="card k-statute" id="P06" data-gate="2" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P06</b><em style="background:#1f8962">규정</em></div>
+      <p>경력 인정 여부 판단</p><small>공무원보수규정 제10조(전력조회 및 경력의 심의)</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P07</b><em style="background:#2456d6">추론</em></div>
       <p>환산율 적용·기간 합산</p><small>기준표를 찾아 손으로 적용 — 실무</small></div><div class="card k-statute" id="P08" data-gate="3" data-lane="1"
@@ -132,7 +132,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 공무원보수규정 제8조(초임호봉의 획정)·제9조(호봉의 재획정). 호봉 기준표 자체는 법령에 있지만, 증명서를 눈으로 읽어 경력을 구조화하고 인정 여부를 판단하는 과정은 규정에 절차가 적혀 있지 않습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 정부 공공 깃랩 저장소 dovakin/teacher-hobong-local의 README(로컬 OCR·경력 구조화·환산율 추천·Excel/PDF 출력, 법령 스냅샷과 결정형 규칙 엔진으로 추천 근거 표시, 최종 결정은 담당자) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 공무원보수규정 제8조(초임호봉의 획정)·제9조(호봉의 재획정)·제10조(전력조회 및 경력의 심의). 호봉 기준표와 경력 심의 절차는 법령에 있지만, 증명서를 눈으로 읽어 경력을 구조화하고 환산율을 찾아 적용하는 과정은 규정에 절차가 적혀 있지 않습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 정부 공공 깃랩 저장소 dovakin/teacher-hobong-local의 README(로컬 OCR·경력 구조화·환산율 추천·Excel/PDF 출력, 법령 스냅샷과 결정형 규칙 엔진으로 추천 근거 표시, 최종 결정은 담당자) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>

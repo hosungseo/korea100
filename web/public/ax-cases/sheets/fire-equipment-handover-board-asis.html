@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 16호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>교대할 때마다 <b>말로 넘기고 수첩에 적습니다</b></h1>
-  <p class="sub">소방 장비서무의 교대 인수인계를 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 결재를 빼면 인용할 조문이 사실상 없고, 미완료 업무를 파악하고 팀별 확인 여부를 맞추고 반납 기한을 찾는 일이 모두 개인 메모와 기억에 의존합니다.</p>
+  <p class="sub">소방 장비서무의 교대 인수인계를 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 장비 기록과 결재를 빼면 인용할 조문이 사실상 없고, 미완료 업무를 파악하고 팀별 확인 여부를 맞추고 반납 기한을 찾는 일이 모두 개인 메모와 기억에 의존합니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>1</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>11</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>9</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 12 = 규정 1 + 추론 11 · 루프 1</span>
+    <span style="color:#65d7ad">전 단계 12 = 규정 3 + 추론 9 · 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -82,10 +82,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>팀별 확인 여부 대조</p><small>세 팀이 다 봤는지 일일이 확인 — 실무</small></div><div class="card k-inferred" id="P05" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P05</b><em style="background:#2456d6">추론</em></div>
-      <p>기한 임박 업무 확인</p><small>달력과 메모를 맞춰 봄 — 실무</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="3"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
-      <p>장비 대여·반납 수기 기록</p><small>대장에 손으로 적음 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="1"
+      <p>기한 임박 업무 확인</p><small>달력과 메모를 맞춰 봄 — 실무</small></div><div class="card k-statute" id="P06" data-gate="2" data-lane="3"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P06</b><em style="background:#1f8962">규정</em></div>
+      <p>장비 대여·반납 수기 기록</p><small>소방장비관리법 제26조(소방장비의 관리기록)</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P07</b><em style="background:#2456d6">추론</em></div>
       <p>반납 초과·점검 기한 확인</p><small>대장을 훑어 찾아냄 — 실무</small></div><div class="card k-inferred" id="P08" data-gate="2" data-lane="1"
@@ -100,10 +100,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>월보 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재)</small></div><div class="card k-inferred" id="P11" data-gate="3" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P11</b><em style="background:#2456d6">추론</em></div>
-      <p>제출 누락 발견·소급 처리</p><small>지나고 나서야 알게 됨 — 실무</small></div><div class="card k-inferred" id="P12" data-gate="4" data-lane="1"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P12</b><em style="background:#2456d6">추론</em></div>
-      <p>처리자·변경 이력 기록</p><small>누가 무엇을 했는지 남지 않음 — 실무</small></div></div>
+      <p>제출 누락 발견·소급 처리</p><small>지나고 나서야 알게 됨 — 실무</small></div><div class="card k-statute" id="P12" data-gate="4" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
+      <p>처리자·변경 이력 기록</p><small>소방장비관리법 제26조(소방장비의 관리기록)</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -129,7 +129,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 교대 근무자 사이에 무엇을 어떻게 넘겨야 하는지는 법령에 절차가 없어, 인계 메모·구두 전달·개인 수첩이라는 관행이 그 자리를 대신합니다. 이 지도에서 초록이 한 칸뿐인 것이 곧 이 업무의 성격입니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 정부 공공 깃랩 저장소 tenmoo/sobang-EMD의 README(3교대 공용 Windows PC 한 대에서 세 사용자가 쓰는 인수인계 대시보드, 업무 관제판·세 팀 확인·월보 추적기·장비대장·대여반납·필요소모품 칸반·자동 장비이력, 로컬 SQLite만 사용하고 업무 데이터는 외부로 올리지 않음, 최근 30일 자동 백업) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 소방장비관리법 제26조(소방장비의 관리기록), 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 소방장비의 현황과 관리에 관한 사항을 기록해 관리해야 한다는 의무와 월보 결재는 조문이 정합니다(같은 조 제2항은 전산입력으로 서류 기록을 갈음할 수 있게 합니다). 그러나 교대 근무자 사이에 무엇을 어떻게 넘겨야 하는지는 법령에 절차가 없어, 인계 메모·구두 전달·개인 수첩이라는 관행이 그 자리를 대신합니다.<b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 정부 공공 깃랩 저장소 tenmoo/sobang-EMD의 README(3교대 공용 Windows PC 한 대에서 세 사용자가 쓰는 인수인계 대시보드, 업무 관제판·세 팀 확인·월보 추적기·장비대장·대여반납·필요소모품 칸반·자동 장비이력, 로컬 SQLite만 사용하고 업무 데이터는 외부로 올리지 않음, 최근 30일 자동 백업) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>

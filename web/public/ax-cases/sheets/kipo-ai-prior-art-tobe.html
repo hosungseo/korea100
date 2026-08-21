@@ -49,8 +49,8 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <h1>AI가 <b>검색식을 대신 쓰고</b> 유사 이미지를 줄 세운다</h1>
   <p class="sub">AI가 심사대상 문서에서 키워드와 핵심문장을 자동으로 뽑아 유사 선행문헌을 추천하고(특허문헌 약 500만 건 학습), 상표·디자인은 이미지 유사도순으로 자동 정렬해 보여줍니다. 심사관은 추천된 문헌 가운데 인용할 것을 고르는 판단에 남고, 신규성·진보성 판단과 거절이유 통지·특허결정은 그대로 심사관의 법정 권한입니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>5</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>3</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>7</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>1</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>3</b></span>
     <span><i style="background:#d99a5e"></i>대체 <b>3</b></span>
     
@@ -89,10 +89,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>유사 선행문헌 자동 추천</p><small>특허문헌 약 500만 건 학습</small></div><div class="card k-replaced" id="P05" data-gate="2" data-lane="1"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P05</b><em style="background:#d99a5e">A02로 대체</em></div>
-      <p>검색 결과 반복 조정·재검색</p><small>자동 추천으로 대체</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="2"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
-      <p>전문기관 선행기술조사 의뢰</p><small>실무</small></div><div class="card k-auto" id="A03" data-gate="2" data-lane="4"
+      <p>검색 결과 반복 조정·재검색</p><small>자동 추천으로 대체</small></div><div class="card k-statute" id="P06" data-gate="2" data-lane="2"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P06</b><em style="background:#1f8962">규정</em></div>
+      <p>전문기관 선행기술조사 의뢰</p><small>특허법 제58조(전문기관의 등록 등)</small></div><div class="card k-auto" id="A03" data-gate="2" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A03</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>상표·디자인 이미지 유사도순 자동 정렬</p><small>수천 건을 유사한 순서로 배열</small></div><div class="card k-replaced" id="P07" data-gate="2" data-lane="1"
@@ -107,10 +107,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>인용문헌 선별·거절이유 정리</p><small>추천 문헌 중에서 선별 — 검색 부담 축소</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="1"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P10</b><em style="background:#1f8962">규정</em></div>
-      <p>거절이유 통지</p><small>특허법 제63조(거절이유통지)</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="0"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P11</b><em style="background:#2456d6">추론</em></div>
-      <p>의견서·보정서 제출</p><small>루프 — 실무</small></div><div class="card k-statute" id="P12" data-gate="4" data-lane="1"
+      <p>거절이유 통지</p><small>특허법 제63조(거절이유통지)</small></div><div class="card k-statute" id="P11" data-gate="4" data-lane="0"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P11</b><em style="background:#1f8962">규정</em></div>
+      <p>의견서·보정서 제출</p><small>특허법 제47조(특허출원의 보정)</small></div><div class="card k-statute" id="P12" data-gate="4" data-lane="1"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
       <p>특허결정</p><small>특허법 제66조(특허결정)</small></div></div>
@@ -139,7 +139,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 특허법 제42조(특허출원), 제57조(심사관에 의한 심사), 제29조(특허요건), 제63조(거절이유통지), 제66조(특허결정). 심사의 주체와 요건·통지는 특허법이 정하지만, 심사관이 검색 키워드를 어떻게 조합하고 검색식을 몇 번 고쳐 돌리는지, 상표·디자인 이미지 수천 건을 어떤 순서로 눈으로 훑는지는 규정에 정해져 있지 않습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 세계일보(2025-09-01)·KDI 정책자료·IT비즈뉴스 보도(심사대상 문서에서 키워드·핵심문장 자동 추출해 유사 선행문헌 추천, 특허문헌 약 500만 건 학습, 상표·디자인 이미지 유사도순 자동 정렬, 2026년 AI 특허행정 예산 55% 증액) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 특허법 제42조(특허출원), 제57조(심사관에 의한 심사), 제58조(전문기관의 등록 등), 제29조(특허요건), 제63조(거절이유통지), 제47조(특허출원의 보정), 제66조(특허결정). 심사의 주체와 요건·통지, 전문기관에 대한 선행기술조사 의뢰, 출원인의 보정은 특허법이 정하지만, 심사관이 검색 키워드를 어떻게 조합하고 검색식을 몇 번 고쳐 돌리는지, 상표·디자인 이미지 수천 건을 어떤 순서로 눈으로 훑는지는 규정에 정해져 있지 않습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 세계일보(2025-09-01)·KDI 정책자료·IT비즈뉴스 보도(심사대상 문서에서 키워드·핵심문장 자동 추출해 유사 선행문헌 추천, 특허문헌 약 500만 건 학습, 상표·디자인 이미지 유사도순 자동 정렬, 2026년 AI 특허행정 예산 55% 증액) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>

@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 36호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>시료 한 건마다 <b>엑셀 세 개를 오간다</b></h1>
-  <p class="sub">농수산물 안전성검사 시료를 수거해 검사기관에 의뢰하기까지의 절차를 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 안전성조사를 하라는 근거는 법에 있지만, 당번표를 열어 회차를 확인하고 현장에서 적어 온 반입물량·수거수량을 대장에 옮기고 출하자 연락처를 다른 파일에서 찾아 의뢰서를 채우는 과정은 규정 밖 실무입니다.</p>
+  <p class="sub">농수산물 안전성검사 시료를 수거해 검사기관에 의뢰하기까지의 절차를 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 시료를 수거할 수 있다는 근거와 검사의뢰 결재는 조문에 있지만, 당번표를 열어 회차를 확인하고 현장에서 적어 온 반입물량·수거수량을 대장에 옮기고 출하자 연락처를 다른 파일에서 찾아 의뢰서를 채우는 과정은 규정 밖 실무입니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>1</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>11</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>10</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 12 = 규정 1 + 추론 11 · 재확인 루프 1</span>
+    <span style="color:#65d7ad">전 단계 12 = 규정 2 + 추론 10 · 재확인 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -79,10 +79,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>수거 품목·수거장소 배정</p><small>농산물·수산물 구분 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
-      <p>출하자 성명·상호·소재지 현장 확인</p><small>실무</small></div><div class="card k-inferred" id="P05" data-gate="1" data-lane="1"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P05</b><em style="background:#2456d6">추론</em></div>
-      <p>시료 수거·물량 현장 기록</p><small>반입물량·수거수량·단위중량 수기 메모 — 실무</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
+      <p>출하자 성명·상호·소재지 현장 확인</p><small>실무</small></div><div class="card k-statute" id="P05" data-gate="1" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P05</b><em style="background:#1f8962">규정</em></div>
+      <p>시료 수거·물량 현장 기록</p><small>농수산물 품질관리법 제62조(출입ㆍ수거ㆍ조사 등)</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
       <p>수거 내역 대장 전기</p><small>메모를 엑셀로 옮겨 적기 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="1"
@@ -129,7 +129,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 안전성조사의 실시 근거는 농수산물 품질관리법에 있으나 조문을 특정하지 않아 초록으로 칠하지 않았습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 AI 정부 실험실 저장소 anjs2712/sample-collection-manager의 프로젝트 설명과 단일 파일 웹앱(v5.2) 화면 구성 — 수거입력, 시료수거 당번, 연락처 정보, 당직표·당번표 엑셀 업로드, 의뢰서·청구서 인쇄 및 PDF — 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 농수산물 품질관리법 제62조(출입ㆍ수거ㆍ조사 등), 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 시료 수거 권한과 결재는 조문이 정하지만, 수거 계획 수립·대장 정리·의뢰서 작성의 방법은 조문에 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 AI 정부 실험실 저장소 anjs2712/sample-collection-manager의 프로젝트 설명과 단일 파일 웹앱(v5.2) 화면 구성 — 수거입력, 시료수거 당번, 연락처 정보, 당직표·당번표 엑셀 업로드, 의뢰서·청구서 인쇄 및 PDF — 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>

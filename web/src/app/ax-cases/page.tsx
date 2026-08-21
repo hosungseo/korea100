@@ -31,6 +31,8 @@ type GeneratedCase = {
 };
 
 const GENERATED = generated as GeneratedCase[];
+// 정밀 9건은 위쪽 상세 블록에서 이미 다루므로 목록에서는 제외한다(데이터·집계에는 포함)
+const EXPANDED = GENERATED.filter((c) => c.group !== "정밀 사례");
 
 const AGG = GENERATED.reduce(
   (s, c) => ({
@@ -59,7 +61,7 @@ const GROUP_ORDER = [
 export const metadata: Metadata = {
   title: "AI 행정 전후 비교",
   description:
-    `AI 도구 도입 전후의 업무 체계도를 규정·추론(탐색)·대체·간소화·소멸로 나눠 비교한 케이스 ${9 + GENERATED.length}건. 법정 관문은 사라지지 않는다 — AI가 대체하는 것은 그 사이의 암묵지와 탐색비용이다.`,
+    `AI 도구 도입 전후의 업무 체계도를 규정·추론(탐색)·대체·간소화·소멸로 나눠 비교한 케이스 ${GENERATED.length}건. 법정 관문은 사라지지 않는다 — AI가 대체하는 것은 그 사이의 암묵지와 탐색비용이다.`,
   alternates: { canonical: `${SITE_URL}/ax-cases/` },
 };
 
@@ -207,9 +209,9 @@ export default function AxCasesPage() {
         <h1>법정 관문은 사라지지 않는다 — AI가 대체하는 것은 그 사이다</h1>
         <span>
           AI 도구 도입 전(AS-IS)과 후(TO-BE)의 업무 체계도를 같은 문법으로
-          그려 비교합니다. 케이스 9건 전체에서 법으로 정해진 절차의 소멸은 단
-          1개(여비몬의 반려 루프)였습니다. AI가 통째로 가져간 것은 규정
-          사이사이의 암묵지(공무원판)와 탐색비용(시민판)입니다.
+          그려 비교합니다. 137건에서 업무 단계 1,575개를 분해했더니, AI가 가져간
+          573개 중 <b>97.4%가 규정 밖 실무</b>였고 절차 자체의 소멸은 4개(0.25%)뿐
+          이었습니다. 법이 이행 방법까지 정해 둔 곳에서만 규정 단계도 넘어갑니다.
         </span>
       </header>
 
@@ -259,8 +261,8 @@ export default function AxCasesPage() {
 
       <section className="ax-cases-stats" aria-label="시리즈 요약">
         <div>
-          <strong>{9 + GENERATED.length}</strong>
-          <span>케이스 (정밀 9 + 확장 {GENERATED.length})</span>
+          <strong>{GENERATED.length}</strong>
+          <span>케이스 (정밀 9 + 확장 {EXPANDED.length})</span>
         </div>
         <div>
           <strong>{AGG.steps.toLocaleString("ko-KR")}</strong>
@@ -302,24 +304,24 @@ export default function AxCasesPage() {
       </section>
 
       <section className="ax-cases-group" id="expanded">
-        <h2>확장 사례 {GENERATED.length}건 — 같은 문법으로 한 번에</h2>
+        <h2>확장 사례 {EXPANDED.length}건 — 같은 문법으로 한 번에</h2>
         <p>
           중앙부처·지자체·공공기관·특수직역에서 실제로 쓰이는 사례를 모아 같은
           색 문법으로 그렸습니다. 각 사례의 <b>AS-IS</b>와 <b>AI 적용</b>을 눌러
           체계도를 펼쳐 보세요. 위 아홉 건이 조문까지 손으로 대조한 정밀판이라면,
           여기부터는 귀납을 위한 규모 확보가 목적입니다 — 한계는 아래에 밝혔습니다.
         </p>
-        {GROUP_ORDER.filter((g) => GENERATED.some((c) => c.group === g)).map(
+        {GROUP_ORDER.filter((g) => EXPANDED.some((c) => c.group === g)).map(
           (group) => (
             <div key={group} className="ax-case-group-block">
               <h3>
                 {group}{" "}
                 <small>
-                  {GENERATED.filter((c) => c.group === group).length}건
+                  {EXPANDED.filter((c) => c.group === group).length}건
                 </small>
               </h3>
               <ul className="ax-case-list">
-                {GENERATED.filter((c) => c.group === group).map((c) => (
+                {EXPANDED.filter((c) => c.group === group).map((c) => (
                   <li key={c.slug}>
                     <div className="ax-case-list-head">
                       <strong>{c.org}</strong>

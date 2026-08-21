@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 98호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>단순한 건까지 전부 자문에 올린다 — <b>자문의 80%가 단순 확인</b></h1>
-  <p class="sub">요양 연장 여부를 정하는 급여 결정은 산업재해보상보험법이 정하지만, 어떤 건을 의학자문에 올릴지는 규정이 아니라 내부 관행입니다. 상근의사 20여 명과 위촉 자문의사 1,300여 명이 붙는 자문에 평균 6~8일이 걸렸고, 그중 약 80%는 단순 확인이었습니다.</p>
+  <p class="sub">주치의의 진료계획 제출과 요양 연장 여부를 정하는 급여 결정은 산업재해보상보험법이 정하지만, 어떤 건을 의학자문에 올릴지는 규정이 아니라 내부 관행입니다. 상근의사 20여 명과 위촉 자문의사 1,300여 명이 붙는 자문에 평균 6~8일이 걸렸고, 그중 약 80%는 단순 확인이었습니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>1</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>9</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>8</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 10 = 규정 1 + 추론 9 · 재자문 루프 1</span>
+    <span style="color:#65d7ad">전 단계 10 = 규정 2 + 추론 8 · 재자문 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -67,10 +67,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <span>─→ 절차 순서 &nbsp; ┄→ 반려·보완 루프</span>
 </div>
 <div class="lanehead"><div>단계 ↓ · 행위자 →</div><div>재해노동자·산재보험 의료기관</div><div>요양 심사 담당자</div><div>자문의사</div><div>산재보상 시스템</div></div>
-<div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="0"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>요양 연장 진료계획서 제출</p><small>주치의 작성 — 실무</small></div><div class="card k-inferred" id="P02" data-gate="1" data-lane="3"
+<div id="pool" style="display:none"><div class="card k-statute" id="P01" data-gate="0" data-lane="0"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P01</b><em style="background:#1f8962">규정</em></div>
+      <p>요양 연장 진료계획서 제출</p><small>산업재해보상보험법 제47조(진료계획의 제출)</small></div><div class="card k-inferred" id="P02" data-gate="1" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
       <p>진료계획서 접수·대기열 편성</p><small>실무</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="1"
@@ -123,7 +123,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 산업재해보상보험법 제40조(요양급여)에 따른 요양급여 지급 결정. 진료계획서 검토 절차, 의학자문 의뢰 대상·범위, 통상 요양기간 판단 기준은 법령에 명문 규정이 없고 근로복지공단 사규·내규(의학자문 운영 관련 내부 지침)와 실무 관행에 따릅니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(세이프티퍼스트뉴스·다음뉴스 2026-03-25: 상근의사 20여 명과 위촉 자문의사 1,300여 명이 참여하는 의학자문에 평균 6~8일 소요, 약 80%가 단순 자문, 재해자 800만 건 학습, 진료계획서 처리 6일→2일) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 산업재해보상보험법 제40조(요양급여)에 따른 요양급여 지급 결정, 산업재해보상보험법 제47조(진료계획의 제출). 요양기간을 연장할 필요가 있을 때 산재보험 의료기관이 진료계획을 공단에 제출하도록 한 것은 제47조가 정합니다. 진료계획서 검토 절차, 의학자문 의뢰 대상·범위, 통상 요양기간 판단 기준은 법령에 명문 규정이 없고 근로복지공단 사규·내규(의학자문 운영 관련 내부 지침)와 실무 관행에 따릅니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(세이프티퍼스트뉴스·다음뉴스 2026-03-25: 상근의사 20여 명과 위촉 자문의사 1,300여 명이 참여하는 의학자문에 평균 6~8일 소요, 약 80%가 단순 자문, 재해자 800만 건 학습, 진료계획서 처리 6일→2일) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>

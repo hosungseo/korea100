@@ -49,8 +49,8 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <h1>건당 180분이 <b>15분</b>으로 — 대조는 도구가 한다</h1>
   <p class="sub">AI 검증 도구가 15만 건의 과세자료를 자동으로 대조하고 오류 의심 건을 골라 결과표까지 만듭니다. 소명 요구와 팀장 검토, 과세 반영 결재는 사람의 절차로 그대로 남고, 그 앞의 반복 대조와 전기(轉記)가 기계로 넘어갔습니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>1</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>3</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>2</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>2</b></span>
     <span><i style="background:#d99a5e"></i>대체 <b>5</b></span>
     
@@ -68,10 +68,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <span>─→ 절차 순서 &nbsp; ┄→ 반려·보완 루프</span>
 </div>
 <div class="lanehead"><div>단계 ↓ · 행위자 →</div><div>과세자료 제출기관</div><div>세무조사팀 담당자</div><div>조사팀장</div><div>세무정보시스템</div><div>AI 과세자료 검증</div></div>
-<div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="0"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>유관기관 과세자료 제출</p><small>실무</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="3"
+<div id="pool" style="display:none"><div class="card k-statute" id="P01" data-gate="0" data-lane="0"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P01</b><em style="background:#1f8962">규정</em></div>
+      <p>유관기관 과세자료 제출</p><small>지방세기본법 제129조(과세자료의 제출방법)</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
       <p>자료 형식·항목 제각각 적재</p><small>실무</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
@@ -98,7 +98,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>검증 결과 엑셀 전기(轉記)</p><small>결과표 자동 생성으로 대체</small></div><div class="card k-changed" id="P08" data-gate="3" data-lane="1"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P08</b><em style="background:#b8890e">간소화</em></div>
-      <p>납세자 소명 요구·확인</p><small>선별된 건에 한정되어 대상 축소</small></div><div class="card k-changed" id="P09" data-gate="3" data-lane="2"
+      <p>납세자 소명 요구·확인</p><small>지방세기본법 제140조(세무공무원의 질문ㆍ검사권) — 선별된 건에 한정되어 대상 축소</small></div><div class="card k-changed" id="P09" data-gate="3" data-lane="2"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P09</b><em style="background:#b8890e">간소화</em></div>
       <p>조사팀장 검토·재확인</p><small>검증 근거가 함께 제시되어 확인 부담 축소</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="2"
@@ -133,7 +133,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거 법령: 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 과세자료의 수집·조사 절차는 지방세 관계 법령에 근거가 있으나 조문 원문 대조 전이므로 초록으로 표시하지 않고 실무 단계로 두었습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(안양시 세정과 김유리 조사팀장이 AI 자동 검증 도구를 개발, 과세자료 15만 건, 건당 180분에서 15분으로 단축, 전 직원 AI 경진대회 수상) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 지방세기본법 제129조(과세자료의 제출방법)·제140조(세무공무원의 질문ㆍ검사권), 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 자료를 받고 묻고 결재하는 틀은 법이 정하지만, 받은 자료를 어떻게 대조하고 어떤 건을 오류로 선별하는지는 조문에 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(안양시 세정과 김유리 조사팀장이 AI 자동 검증 도구를 개발, 과세자료 15만 건, 건당 180분에서 15분으로 단축, 전 직원 AI 경진대회 수상) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>

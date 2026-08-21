@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 48호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>모델 결과를 <b>2시간 넘게</b> 뜯어봐야 특보가 나온다</h1>
-  <p class="sub">예보관의 특보 판단과 초단기예보 생산을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 기상특보 발표는 기상법이 정하지만, 수치모델 결과를 손으로 분석하고 모델별 편차를 경험으로 보정하며 강수 시나리오를 작성하는 과정은 규정 밖 실무입니다. 위험기상은 이 분석 시간만큼 늦게 알려집니다.</p>
+  <p class="sub">예보관의 특보 판단과 초단기예보 생산을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 수치예보시스템 운영·예보관의 감시분석 업무·기상특보 발표와 통보는 기상법이 정하지만, 수치모델 결과를 손으로 분석하고 모델별 편차를 경험으로 보정하며 강수 시나리오를 작성하는 과정은 규정 밖 실무입니다. 위험기상은 이 분석 시간만큼 늦게 알려집니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>1</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>10</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>4</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>7</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 11 = 규정 1 + 추론 10 · 루프 1</span>
+    <span style="color:#65d7ad">전 단계 11 = 규정 4 + 추론 7 · 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -70,10 +70,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>관측자료 수집·품질 확인</p><small>실무</small></div><div class="card k-inferred" id="P02" data-gate="1" data-lane="2"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>한국형 수치모델 실행</p><small>슈퍼컴퓨터 산출 — 실무</small></div><div class="card k-inferred" id="P03" data-gate="2" data-lane="1"
+      <p>관측자료 수집·품질 확인</p><small>실무</small></div><div class="card k-statute" id="P02" data-gate="1" data-lane="2"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P02</b><em style="background:#1f8962">규정</em></div>
+      <p>한국형 수치모델 실행</p><small>기상법 제17조의2(수치예보시스템의 개발 및 운영)</small></div><div class="card k-inferred" id="P03" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P03</b><em style="background:#2456d6">추론</em></div>
       <p>수치모델 결과 수기 분석</p><small>2시간 이상 소요 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="2" data-lane="1"
@@ -85,19 +85,19 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>여러 모델 결과 비교·대조</p><small>실무</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
-      <p>강수 시나리오 작성</p><small>3시간 소요 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="3" data-lane="1"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P07</b><em style="background:#2456d6">추론</em></div>
-      <p>특보 발령 기준 대조·판단</p><small>실무</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="2"
+      <p>강수 시나리오 작성</p><small>3시간 소요 — 실무</small></div><div class="card k-statute" id="P07" data-gate="3" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P07</b><em style="background:#1f8962">규정</em></div>
+      <p>특보 발령 기준 대조·판단</p><small>기상법 제17조의3(예보관의 자격 및 업무)</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P08</b><em style="background:#2456d6">추론</em></div>
       <p>예보 브리핑·내부 협의</p><small>실무</small></div><div class="card k-statute" id="P09" data-gate="4" data-lane="1"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P09</b><em style="background:#1f8962">규정</em></div>
-      <p>기상특보 발표</p><small>기상법 제14조(기상예보 및 기상특보)</small></div><div class="card k-inferred" id="P10" data-gate="4" data-lane="3"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P10</b><em style="background:#2456d6">추론</em></div>
-      <p>유관기관·국민 전파</p><small>실무</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="0"
+      <p>기상특보 발표</p><small>기상법 제13조의2(특보)</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="3"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P10</b><em style="background:#1f8962">규정</em></div>
+      <p>유관기관·국민 전파</p><small>기상법 제15조(특보의 통보)</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P11</b><em style="background:#2456d6">추론</em></div>
       <p>상황 변동 시 수정 요구 대응</p><small>예보 수정 루프 — 실무</small></div></div>
@@ -126,7 +126,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 기상법 제14조(기상예보 및 기상특보). 예보·특보를 발표한다는 권한과 의무는 기상법이 정하지만, 슈퍼컴퓨터 수치모델 결과를 예보관이 어떤 순서로 분석하고 모델 편차를 경험으로 어떻게 보정하며 강수 시나리오를 몇 시간에 걸쳐 만드는지는 규정에 정해져 있지 않습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 테크42·한국경제 보도(2025-12-18 — 한국형 수치모델에 AI를 접목해 예측·보정을 5분 이내로 단축한 가이던스 제공, 이 체계로 2026-07-12 경북 경산·포항에 사상 첫 폭염중대경보 발령, AI 예보지원 '알파웨더'가 3시간 걸리던 강수 시나리오를 40여 초에 생산) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 기상법 제17조의2(수치예보시스템의 개발 및 운영), 제17조의3(예보관의 자격 및 업무), 제13조의2(특보), 제15조(특보의 통보). 수치예보시스템의 운영, 예보관의 감시·분석 업무, 특보의 발표와 유관기관 통보는 기상법이 정하지만, 슈퍼컴퓨터 수치모델 결과를 예보관이 어떤 순서로 분석하고 모델 편차를 경험으로 어떻게 보정하며 강수 시나리오를 몇 시간에 걸쳐 만드는지는 규정에 정해져 있지 않습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 테크42·한국경제 보도(2025-12-18 — 한국형 수치모델에 AI를 접목해 예측·보정을 5분 이내로 단축한 가이던스 제공, 이 체계로 2026-07-12 경북 경산·포항에 사상 첫 폭염중대경보 발령, AI 예보지원 '알파웨더'가 3시간 걸리던 강수 시나리오를 40여 초에 생산) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>

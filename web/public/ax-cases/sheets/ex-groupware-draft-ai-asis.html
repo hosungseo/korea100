@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 104호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>결재 한 건 초안에 <b>약 1시간</b>, 품질은 사람마다 다르다</h1>
-  <p class="sub">공기업의 기안과 결재는 법령이 아니라 공사 사규·내규가 정하는 영역이고, 양식을 찾고 과거 문서를 뒤지고 첨부를 통독해 요약하는 일은 그 안에서도 명문 없이 담당자 몫이었습니다. 그래서 이 지도는 초록 없이 파랑으로만 그려집니다.</p>
+  <p class="sub">공기업의 기안과 결재는 법령이 아니라 공사 사규·내규가 정하는 영역이고, 양식을 찾고 과거 문서를 뒤지고 첨부를 통독해 요약하는 일은 그 안에서도 명문 없이 담당자 몫이었습니다. 초록은 문서를 등록하고 보존기간을 분류해 관리해야 한다는 공공기록물법 두 칸뿐입니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>0</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>12</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>10</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 12 = 규정 0 + 추론 12 · 반려 루프 1</span>
+    <span style="color:#65d7ad">전 단계 12 = 규정 2 + 추론 10 · 반려 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -97,13 +97,13 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>반려·수정 지시</p><small>형식·내용 보완 요구 — 실무</small></div><div class="card k-inferred" id="P10" data-gate="3" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P10</b><em style="background:#2456d6">추론</em></div>
-      <p>결재</p><small>공사 문서관리 사규·내규</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="3"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P11</b><em style="background:#2456d6">추론</em></div>
-      <p>시행·문서 등록</p><small>실무</small></div><div class="card k-inferred" id="P12" data-gate="4" data-lane="3"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P12</b><em style="background:#2456d6">추론</em></div>
-      <p>문서 보존·검색 색인</p><small>실무</small></div></div>
+      <p>결재</p><small>공사 문서관리 사규·내규</small></div><div class="card k-statute" id="P11" data-gate="4" data-lane="3"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P11</b><em style="background:#1f8962">규정</em></div>
+      <p>시행·문서 등록</p><small>공공기록물 관리에 관한 법률 제18조(기록물의 등록ㆍ분류ㆍ편철 등)</small></div><div class="card k-statute" id="P12" data-gate="4" data-lane="3"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
+      <p>문서 보존·검색 색인</p><small>공공기록물 관리에 관한 법률 제19조(기록물의 관리 등)</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -129,7 +129,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거로 인용할 법령 조문이 없습니다. 한국도로공사는 공기업이어서 문서 기안·결재·보존은 행정기관에 적용되는 대통령령이 아니라 <b>공사의 사규·내규(문서관리 규정)</b>에 따라 운영되며, 어떤 양식을 쓰고 첨부문서를 어디까지 읽고 요약할지는 그마저도 명문화되어 있지 않은 담당자 실무입니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 도입 사례 자료와 언론 보도(폴라리스오피스 AI 그룹웨어 사례 2025, 뉴스핌 2025-12-03: 사내 양식 HWPX 초안 자동 생성, 첨부문서 1페이지 자동 요약, 결재 초안 1건 약 1시간 소요, 생성형 AI '로디'로 확장) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 공공기록물 관리에 관한 법률 제18조(기록물의 등록ㆍ분류ㆍ편철 등), 공공기록물 관리에 관한 법률 제19조(기록물의 관리 등). 한국도로공사는 같은 법 시행령 제3조제1호에 따른 공공기관이어서 생산·접수한 문서의 등록과 보존기간 분류·관리는 법률이 정합니다. 다만 기안과 결재는 행정기관에 적용되는 대통령령이 아니라 <b>공사의 사규·내규(문서관리 규정)</b>에 따르고, 어떤 양식을 쓰고 첨부문서를 어디까지 읽고 요약할지는 그마저도 명문화되어 있지 않은 담당자 실무입니다.<b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 도입 사례 자료와 언론 보도(폴라리스오피스 AI 그룹웨어 사례 2025, 뉴스핌 2025-12-03: 사내 양식 HWPX 초안 자동 생성, 첨부문서 1페이지 자동 요약, 결재 초안 1건 약 1시간 소요, 생성형 AI '로디'로 확장) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
