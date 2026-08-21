@@ -5462,3 +5462,75 @@ body:has(.og-card-page) > main {
     grid-template-columns: 1fr;
   }
 }
+
+/* /ax-cases/ 확장 사례 목록 */
+.ax-case-group-block { margin-bottom: 26px; }
+.ax-case-group-block h3 {
+  font-size: 1rem;
+  color: var(--color-ink);
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--color-accent-soft);
+  margin-bottom: 12px;
+}
+.ax-case-group-block h3 small {
+  font-weight: 600;
+  color: var(--color-muted);
+  margin-left: 8px;
+  font-size: 0.82rem;
+}
+.ax-case-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 12px;
+}
+.ax-case-list li {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.ax-case-list-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 8px;
+  margin-bottom: 6px;
+}
+.ax-case-list-head strong { color: var(--color-ink); font-size: 0.95rem; }
+.ax-case-list-head span {
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  word-break: keep-all;
+  flex: 1 1 100%;
+}
+.ax-case-list-head em {
+  font-style: normal;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-accent-dark);
+  background: var(--color-accent-soft);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.ax-case-list-stat {
+  font-size: 0.8rem;
+  color: var(--color-faint);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 10px;
+  word-break: keep-all;
+}
+.ax-case-list-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.ax-case-list-links a {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-accent-dark);
+  background: var(--color-surface-tint);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 5px 10px;
+  text-decoration: none;
+}
+.ax-case-list-links a:hover { background: var(--color-accent-soft); }

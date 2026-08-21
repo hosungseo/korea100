@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { width:1750px; background:#f4f7f5; color:#12241c; font-family:"Apple SD Gothic Neo","Pretendard",sans-serif; }
+header { background:#0b1a13; color:#f4faf7; padding:26px 48px 22px; }
+.kick { display:flex; justify-content:space-between; color:#65d7ad; font-family:ui-monospace,monospace; font-size:14px; font-weight:700; letter-spacing:.1em; margin-bottom:10px; }
+.kick small { color:#7d948a; }
+h1 { font-size:34px; font-weight:800; letter-spacing:-0.02em; }
+h1 b { color:#65d7ad; }
+.sub { margin-top:8px; color:#a8bcb2; font-size:14.5px; line-height:1.5; word-break:keep-all; max-width:1100px; }
+.counts { display:flex; gap:22px; margin-top:13px; font-size:13px; color:#cfe0d8; }
+.counts span { display:inline-flex; align-items:center; gap:6px; }
+.counts i { width:11px; height:11px; border-radius:3px; display:inline-block; }
+.counts b { font-family:ui-monospace,monospace; font-weight:800; }
+.lanehead { display:grid; grid-template-columns:150px repeat(5, 1fr); background:#fff; border-bottom:2px solid #17573f; }
+.lanehead div { padding:11px 12px 9px; font-size:13.5px; font-weight:800; color:#17573f; border-left:1px solid #e2e8e4; }
+.lanehead div:first-child { color:#8a9990; font-family:ui-monospace,monospace; font-size:11px; font-weight:700; border-left:0; }
+.lanehead div:last-child { color:#5230a0; background:#f3eefc; border-left:2px solid #7c56c9; }
+.cell[data-l="4"] { background:rgba(124,86,201,.05); border-left:2px solid rgba(124,86,201,.35); }
+.grid { position:relative; }
+.gate { display:grid; grid-template-columns:150px repeat(5, 1fr); border-bottom:2px solid #17573f; background:#fbfcfb; }
+.gate:nth-child(even) { background:#f6f9f7; }
+.glabel { padding:14px 12px; border-right:1px solid #e2e8e4; }
+.glabel b { display:block; color:#17573f; font-family:ui-monospace,monospace; font-size:13px; font-weight:800; }
+.glabel span { color:#45635a; font-size:12px; font-weight:700; word-break:keep-all; line-height:1.35; }
+.cell { min-height:64px; padding:12px 10px; border-left:1px dotted #d5ddd8; display:flex; flex-direction:column; gap:10px; }
+.card { position:relative; z-index:2; border:1.6px solid; border-radius:8px; padding:8px 10px 8px; box-shadow:0 1px 3px rgba(17,38,27,.07); background:#fff; }
+.card .chead { display:flex; justify-content:space-between; align-items:center; margin-bottom:3px; }
+.card b { font-family:ui-monospace,monospace; font-size:10.5px; font-weight:800; opacity:.75; }
+.card em { color:#fff; font-style:normal; font-size:9px; font-weight:800; padding:1px 7px 2px; border-radius:8px; }
+.card p { font-size:13px; font-weight:750; line-height:1.35; word-break:keep-all; }
+.card small { display:block; margin-top:3px; font-size:10px; line-height:1.35; color:inherit; opacity:.75; word-break:keep-all; }
+.card.k-inferred { border-style:solid; box-shadow:0 1px 3px rgba(36,86,214,.14); }
+.card.k-auto { box-shadow:0 0 0 2px rgba(13,129,96,.18), 0 1px 3px rgba(17,38,27,.08); }
+.card.k-replaced p, .card.k-removed p { text-decoration:line-through; }
+.card.k-replaced, .card.k-removed { border-style:dashed; opacity:.62; }
+.card.k-changed { border-style:solid; }
+svg.edges { position:absolute; inset:0; z-index:1; pointer-events:none; overflow:visible; }
+footer { display:flex; justify-content:space-between; align-items:center; background:#0b1a13; color:#a8bcb2; padding:13px 48px; font-size:13px; }
+footer b { color:#f4faf7; font-weight:800; font-size:14px; }
+footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
+.legend { display:flex; gap:18px; align-items:center; padding:10px 48px; background:#fff; border-bottom:1px solid #e2e8e4; font-size:12px; color:#45564d; }
+.legend span { display:inline-flex; gap:6px; align-items:center; }
+.legend i { width:13px; height:13px; border-radius:3px; border:1.6px solid; display:inline-block; }
+.note { padding:12px 48px 16px; background:#fbfcfb; color:#7a887f; font-size:11.5px; line-height:1.6; word-break:keep-all; }
+.note b { color:#45635a; }
+</style></head><body>
+<header>
+  <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 11호 · AI 적용</span><small>기준일 2026-08-21</small></div>
+  <h1>업무분장 검색을 AI가 맡고, <b>확인 버튼은 사람이</b></h1>
+  <p class="sub">제목·발송부서·문서구분만 범정부 AI 공통기반 RAG에 넘겨 업무분장과 최근 배부 기록을 찾고, 사이드바에서 체크된 현재 과 명단 안에서만 담당자를 추천합니다. 온나라의 접수 API를 직접 부르지 않고 기존 화면과 버튼을 보조하며, 기본값은 사람이 마지막 확인을 누르는 방식입니다.</p>
+  <p class="counts">
+    <span><i style="background:#1f8962"></i>규정 근거 <b>1</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>2</b></span>
+    <span><i style="background:#6b3fc4"></i>AI 자동 <b>4</b></span>
+    <span><i style="background:#d99a5e"></i>대체 <b>3</b></span>
+    
+    <span><i style="background:#d9a821"></i>간소화 <b>5</b></span>
+    <span style="color:#65d7ad">대체 3 · 간소화 5 · 소멸 0 · 자동 4 — 사람 단계 11 → 8</span>
+  </p>
+</header>
+<div class="legend">
+  <span><i style="background:#eef8f2;border-color:#1f8962"></i>규정 근거(조문 표기)</span>
+  <span><i style="background:#e9f0ff;border-color:#2456d6"></i>추론 — 규정에 없는 암묵지·실무 관행</span>
+  <span><i style="background:#f3eefc;border-color:#7c56c9"></i>AI 자동 처리(보라 — AI 행위자)</span>
+  <span><i style="background:#fdf6ee;border-color:#e5b58a"></i>대체(주황, 흐림·취소선) — ┄→ 승계 화살표가 AI 단계로</span>
+  <span><i style="background:#fdf0f0;border-color:#e0a3a3"></i>소멸(빨강, 흐림)</span>
+  <span><i style="background:#fdf8e3;border-color:#d9a821"></i>간소화(노랑) — 남되 부담 축소</span>
+  <span>─→ 절차 순서 &nbsp; ┄→ 반려·보완 루프</span>
+</div>
+<div class="lanehead"><div>단계 ↓ · 행위자 →</div><div>발송기관·발송부서</div><div>문서 접수 담당(과 서무)</div><div>업무담당자</div><div>온나라 2.0</div><div>AI 문서배부 사이드바</div></div>
+<div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="0"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
+      <p>문서 발송</p><small>타 기관·타 부서에서 보냄 — 실무</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="3"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
+      <p>접수대기함 적재</p><small>과 단위 접수대기 목록에 쌓임 — 실무</small></div><div class="card k-changed" id="P03" data-gate="0" data-lane="1"
+      style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
+      <div class="chead"><b>P03</b><em style="background:#b8890e">간소화</em></div>
+      <p>분석할 문서 선택</p><small>전수 훑기가 아니라 선택 문서만 분석</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
+      style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
+      <div class="chead"><b>A01</b><em style="background:#6b3fc4">AI 자동</em></div>
+      <p>업무분장·배부기록 RAG 검색</p><small>최대 10개 컬렉션에서 근거 청크 검색</small></div><div class="card k-auto" id="A02" data-gate="1" data-lane="4"
+      style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
+      <div class="chead"><b>A02</b><em style="background:#6b3fc4">AI 자동</em></div>
+      <p>담당자 추천·신뢰도·근거 표시</p><small>체크된 과 명단 안의 후보만 생성형 AI에 전달</small></div><div class="card k-replaced" id="P04" data-gate="1" data-lane="1"
+      style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
+      <div class="chead"><b>P04</b><em style="background:#d99a5e">A01로 대체</em></div>
+      <p>업무분장표 대조</p><small>RAG 검색으로 대체</small></div><div class="card k-replaced" id="P05" data-gate="1" data-lane="1"
+      style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
+      <div class="chead"><b>P05</b><em style="background:#d99a5e">A01로 대체</em></div>
+      <p>과거 배부 기록 검색</p><small>RAG 검색으로 대체</small></div><div class="card k-changed" id="P06" data-gate="1" data-lane="1"
+      style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
+      <div class="chead"><b>P06</b><em style="background:#b8890e">간소화</em></div>
+      <p>배부 가능 명단 관리</p><small>체크 해제한 사람은 후보·최종 검증에서 모두 차단</small></div><div class="card k-auto" id="A03" data-gate="2" data-lane="4"
+      style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
+      <div class="chead"><b>A03</b><em style="background:#6b3fc4">AI 자동</em></div>
+      <p>추천 담당자 선택·추가 보조</p><small>담당지정 팝업에서 추천자를 찾아 선택</small></div><div class="card k-replaced" id="P07" data-gate="2" data-lane="1"
+      style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
+      <div class="chead"><b>P07</b><em style="background:#d99a5e">A03로 대체</em></div>
+      <p>일괄접수·담당지정 조작</p><small>선택·추가 보조로 대체</small></div><div class="card k-auto" id="A04" data-gate="3" data-lane="4"
+      style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
+      <div class="chead"><b>A04</b><em style="background:#6b3fc4">AI 자동</em></div>
+      <p>안전검증 후 자동확인(선택 시)</p><small>문서 ID·명단·실제 성명이 모두 일치할 때만 실행</small></div><div class="card k-changed" id="P08" data-gate="3" data-lane="3"
+      style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
+      <div class="chead"><b>P08</b><em style="background:#b8890e">간소화</em></div>
+      <p>접수 확정(확인)</p><small>기본은 사람 확인, 자동확인은 별도 승인 시에만</small></div><div class="card k-changed" id="P09" data-gate="3" data-lane="2"
+      style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
+      <div class="chead"><b>P09</b><em style="background:#b8890e">간소화</em></div>
+      <p>오배부 반송·재배부</p><small>사전 대조로 반송 루프 축소</small></div><div class="card k-changed" id="P11" data-gate="4" data-lane="1"
+      style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
+      <div class="chead"><b>P11</b><em style="background:#b8890e">간소화</em></div>
+      <p>배부 이력 기록</p><small>추천·실제 담당자·확인 이벤트가 로컬 감사기록에 자동 축적</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="2"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P10</b><em style="background:#1f8962">규정</em></div>
+      <p>기안·결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재)</small></div></div>
+<div class="grid" id="grid">
+  <svg class="edges" id="edgeLayer"></svg>
+  
+    <div class="gate" data-g="0">
+      <div class="glabel"><b>G0</b><span>접수대기</span></div>
+      <div class="cell" data-g="0" data-l="0"></div><div class="cell" data-g="0" data-l="1"></div><div class="cell" data-g="0" data-l="2"></div><div class="cell" data-g="0" data-l="3"></div><div class="cell" data-g="0" data-l="4"></div>
+    </div>
+    <div class="gate" data-g="1">
+      <div class="glabel"><b>G1</b><span>배부 판단</span></div>
+      <div class="cell" data-g="1" data-l="0"></div><div class="cell" data-g="1" data-l="1"></div><div class="cell" data-g="1" data-l="2"></div><div class="cell" data-g="1" data-l="3"></div><div class="cell" data-g="1" data-l="4"></div>
+    </div>
+    <div class="gate" data-g="2">
+      <div class="glabel"><b>G2</b><span>담당 지정</span></div>
+      <div class="cell" data-g="2" data-l="0"></div><div class="cell" data-g="2" data-l="1"></div><div class="cell" data-g="2" data-l="2"></div><div class="cell" data-g="2" data-l="3"></div><div class="cell" data-g="2" data-l="4"></div>
+    </div>
+    <div class="gate" data-g="3">
+      <div class="glabel"><b>G3</b><span>접수 확정</span></div>
+      <div class="cell" data-g="3" data-l="0"></div><div class="cell" data-g="3" data-l="1"></div><div class="cell" data-g="3" data-l="2"></div><div class="cell" data-g="3" data-l="3"></div><div class="cell" data-g="3" data-l="4"></div>
+    </div>
+    <div class="gate" data-g="4">
+      <div class="glabel"><b>G4</b><span>처리</span></div>
+      <div class="cell" data-g="4" data-l="0"></div><div class="cell" data-g="4" data-l="1"></div><div class="cell" data-g="4" data-l="2"></div><div class="cell" data-g="4" data-l="3"></div><div class="cell" data-g="4" data-l="4"></div>
+    </div>
+</div>
+<div class="note">
+근거(인용 법령 — 법제처 원문 대조 대기): 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 배부 자체는 법령이 아니라 기관의 업무분장에 따라 정해지므로, 접수대기함을 훑어 담당자를 고르는 구간에는 인용할 조문이 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 정부 공공 깃랩 저장소 pilddong/onnara-ai-document-distributor의 README(온나라 접수대기함의 제목·발송부서·문서구분만 읽어 범정부 AI 공통기반 RAG·생성형 AI로 담당자 추천, 문서 본문·첨부·수신문서 ID는 미전송, 기본값은 사람 최종 확인, 감사기록 90일·최대 1,000건) 기반입니다.
+</div>
+<footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
+<script>
+const nodes = ["P01","P02","P03","A01","A02","P04","P05","P06","A03","P07","A04","P08","P09","P11","P10"];
+nodes.forEach((id) => {
+  const el = document.getElementById(id);
+  const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
+  cell.appendChild(el);
+});
+const edges = [["P01","P02"],["P02","P03"],["P03","A01","auto"],["A01","A02","auto"],["A02","P06"],["P06","A03","auto"],["A03","A04","auto"],["A04","P08"],["P08","P10"],["P08","P09"],["P08","P11"],["P09","P03","loop","오배부 반송·재배부(축소)"],["P04","A01","replace"],["P05","A01","replace"],["P07","A03","replace"]];
+const grid = document.getElementById("grid");
+const svg = document.getElementById("edgeLayer");
+const g = grid.getBoundingClientRect();
+svg.setAttribute("width", g.width); svg.setAttribute("height", grid.scrollHeight);
+svg.innerHTML = '<defs>' +
+  '<marker id="a1" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#4a6157"/></marker>' +
+  '<marker id="a2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#2456d6"/></marker>' +
+  '<marker id="a3" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#0d8160"/></marker>' + '<marker id="a4" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#dda76f"/></marker></defs>';
+const R = (el) => { const r = el.getBoundingClientRect(); return { l:r.left-g.left, r:r.right-g.left, t:r.top-g.top, b:r.bottom-g.top, cx:r.left-g.left+r.width/2, cy:r.top-g.top+r.height/2 }; };
+edges.forEach(([s, t, kind, label]) => {
+  const S = R(document.getElementById(s)), T = R(document.getElementById(t));
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  let d;
+  const loop = kind === "loop";
+  const auto = kind === "auto";
+  const repl = kind === "replace";
+  if (Math.abs(S.cx - T.cx) < 30 && T.t >= S.b) { d = `M ${S.cx} ${S.b} L ${T.cx} ${T.t}`; }
+  else if (T.t >= S.b - 4) { const my = S.b + Math.max(8, (T.t - S.b) / 2); d = `M ${S.cx} ${S.b} L ${S.cx} ${my} L ${T.cx} ${my} L ${T.cx} ${T.t}`; }
+  else if (S.t >= T.b - 4) { const my = T.b + Math.max(8, (S.t - T.b) / 2); d = `M ${S.cx} ${S.t} L ${S.cx} ${my} L ${T.cx} ${my} L ${T.cx} ${T.b}`; }
+  else { const sx = S.cx < T.cx ? S.r : S.l, tx = S.cx < T.cx ? T.l : T.r; const mx = (sx + tx) / 2; d = `M ${sx} ${S.cy} L ${mx} ${S.cy} L ${mx} ${T.cy} L ${tx} ${T.cy}`; }
+  path.setAttribute("d", d);
+  path.setAttribute("fill", "none");
+  path.setAttribute("stroke", loop ? "#2456d6" : auto ? "#7c56c9" : repl ? "#dda76f" : "#4a6157");
+  path.setAttribute("stroke-width", auto ? "2.2" : "1.6");
+  if (loop || repl) path.setAttribute("stroke-dasharray", "5 4");
+  path.setAttribute("marker-end", loop ? "url(#a2)" : auto ? "url(#a3)" : repl ? "url(#a4)" : "url(#a1)");
+  svg.appendChild(path);
+  if (label) {
+    const pt = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    pt.textContent = label;
+    pt.setAttribute("x", (S.cx + T.cx) / 2); pt.setAttribute("y", Math.min(S.cy, T.cy) - 6);
+    pt.setAttribute("fill", "#2456d6"); pt.setAttribute("font-size", "10"); pt.setAttribute("font-weight", "800");
+    pt.setAttribute("text-anchor", "middle");
+    svg.appendChild(pt);
+  }
+});
+</script>
+</body></html>

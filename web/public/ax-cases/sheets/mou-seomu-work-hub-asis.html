@@ -1,0 +1,186 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { width:1460px; background:#f4f7f5; color:#12241c; font-family:"Apple SD Gothic Neo","Pretendard",sans-serif; }
+header { background:#0b1a13; color:#f4faf7; padding:26px 48px 22px; }
+.kick { display:flex; justify-content:space-between; color:#65d7ad; font-family:ui-monospace,monospace; font-size:14px; font-weight:700; letter-spacing:.1em; margin-bottom:10px; }
+.kick small { color:#7d948a; }
+h1 { font-size:34px; font-weight:800; letter-spacing:-0.02em; }
+h1 b { color:#65d7ad; }
+.sub { margin-top:8px; color:#a8bcb2; font-size:14.5px; line-height:1.5; word-break:keep-all; max-width:1100px; }
+.counts { display:flex; gap:22px; margin-top:13px; font-size:13px; color:#cfe0d8; }
+.counts span { display:inline-flex; align-items:center; gap:6px; }
+.counts i { width:11px; height:11px; border-radius:3px; display:inline-block; }
+.counts b { font-family:ui-monospace,monospace; font-weight:800; }
+.lanehead { display:grid; grid-template-columns:150px repeat(4, 1fr); background:#fff; border-bottom:2px solid #17573f; }
+.lanehead div { padding:11px 12px 9px; font-size:13.5px; font-weight:800; color:#17573f; border-left:1px solid #e2e8e4; }
+.lanehead div:first-child { color:#8a9990; font-family:ui-monospace,monospace; font-size:11px; font-weight:700; border-left:0; }
+
+.grid { position:relative; }
+.gate { display:grid; grid-template-columns:150px repeat(4, 1fr); border-bottom:2px solid #17573f; background:#fbfcfb; }
+.gate:nth-child(even) { background:#f6f9f7; }
+.glabel { padding:14px 12px; border-right:1px solid #e2e8e4; }
+.glabel b { display:block; color:#17573f; font-family:ui-monospace,monospace; font-size:13px; font-weight:800; }
+.glabel span { color:#45635a; font-size:12px; font-weight:700; word-break:keep-all; line-height:1.35; }
+.cell { min-height:64px; padding:12px 10px; border-left:1px dotted #d5ddd8; display:flex; flex-direction:column; gap:10px; }
+.card { position:relative; z-index:2; border:1.6px solid; border-radius:8px; padding:8px 10px 8px; box-shadow:0 1px 3px rgba(17,38,27,.07); background:#fff; }
+.card .chead { display:flex; justify-content:space-between; align-items:center; margin-bottom:3px; }
+.card b { font-family:ui-monospace,monospace; font-size:10.5px; font-weight:800; opacity:.75; }
+.card em { color:#fff; font-style:normal; font-size:9px; font-weight:800; padding:1px 7px 2px; border-radius:8px; }
+.card p { font-size:13px; font-weight:750; line-height:1.35; word-break:keep-all; }
+.card small { display:block; margin-top:3px; font-size:10px; line-height:1.35; color:inherit; opacity:.75; word-break:keep-all; }
+.card.k-inferred { border-style:solid; box-shadow:0 1px 3px rgba(36,86,214,.14); }
+.card.k-auto { box-shadow:0 0 0 2px rgba(13,129,96,.18), 0 1px 3px rgba(17,38,27,.08); }
+.card.k-replaced p, .card.k-removed p { text-decoration:line-through; }
+.card.k-replaced, .card.k-removed { border-style:dashed; opacity:.62; }
+.card.k-changed { border-style:solid; }
+svg.edges { position:absolute; inset:0; z-index:1; pointer-events:none; overflow:visible; }
+footer { display:flex; justify-content:space-between; align-items:center; background:#0b1a13; color:#a8bcb2; padding:13px 48px; font-size:13px; }
+footer b { color:#f4faf7; font-weight:800; font-size:14px; }
+footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
+.legend { display:flex; gap:18px; align-items:center; padding:10px 48px; background:#fff; border-bottom:1px solid #e2e8e4; font-size:12px; color:#45564d; }
+.legend span { display:inline-flex; gap:6px; align-items:center; }
+.legend i { width:13px; height:13px; border-radius:3px; border:1.6px solid; display:inline-block; }
+.note { padding:12px 48px 16px; background:#fbfcfb; color:#7a887f; font-size:11.5px; line-height:1.6; word-break:keep-all; }
+.note b { color:#45635a; }
+</style></head><body>
+<header>
+  <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 41호 · AS-IS</span><small>기준일 2026-08-21</small></div>
+  <h1>서무는 <b>업무가 아니라 업무 묶음</b>이다</h1>
+  <p class="sub">한 사람이 맡는 서무 업무 전체를 한 장에 폈습니다. 급여·계좌·물품·수합·여비·특근매식비가 각각 다른 자료에서 출발해 결재 한 칸으로 모입니다. 초록이 결재뿐인 것은 이 일에 규정이 없어서가 아니라, 무엇을 어디서 받아 무엇과 맞춰 어느 서식에 옮길지가 어느 규정에도 절차로 적혀 있지 않기 때문입니다.</p>
+  <p class="counts">
+    <span><i style="background:#1f8962"></i>규정 근거 <b>1</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>13</b></span>
+    
+    
+    
+    
+    <span style="color:#65d7ad">전 단계 14 = 규정 1 + 추론 13 · 재작성 루프 1</span>
+  </p>
+</header>
+<div class="legend">
+  <span><i style="background:#eef8f2;border-color:#1f8962"></i>규정 근거(조문 표기)</span>
+  <span><i style="background:#e9f0ff;border-color:#2456d6"></i>추론 — 규정에 없는 암묵지·실무 관행</span>
+  <span><i style="background:#f3eefc;border-color:#7c56c9"></i>AI 자동 처리(보라 — AI 행위자)</span>
+  <span><i style="background:#fdf6ee;border-color:#e5b58a"></i>대체(주황, 흐림·취소선) — ┄→ 승계 화살표가 AI 단계로</span>
+  <span><i style="background:#fdf0f0;border-color:#e0a3a3"></i>소멸(빨강, 흐림)</span>
+  <span><i style="background:#fdf8e3;border-color:#d9a821"></i>간소화(노랑) — 남되 부담 축소</span>
+  <span>─→ 절차 순서 &nbsp; ┄→ 반려·보완 루프</span>
+</div>
+<div class="lanehead"><div>단계 ↓ · 행위자 →</div><div>부서 직원·공무직</div><div>서무 담당자</div><div>회계·급여 담당</div><div>부서장</div></div>
+<div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="1"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
+      <p>월별 반복 업무 일정 기억·수첩 관리</p><small>빠뜨리면 되돌릴 수 없음 — 실무</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="0"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
+      <p>직원 제출자료 수합</p><small>명단·서류 개별 독촉 — 실무</small></div><div class="card k-inferred" id="P03" data-gate="0" data-lane="1"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P03</b><em style="background:#2456d6">추론</em></div>
+      <p>전월 급여자료 찾아 복사</p><small>실무</small></div><div class="card k-inferred" id="P04" data-gate="0" data-lane="1"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
+      <p>사무용품 견적·요청 취합</p><small>실무</small></div><div class="card k-inferred" id="P05" data-gate="0" data-lane="1"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P05</b><em style="background:#2456d6">추론</em></div>
+      <p>출장 내역·초과근무 자료 내려받기</p><small>실무</small></div><div class="card k-inferred" id="P06" data-gate="1" data-lane="1"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
+      <p>공무직 보수 세액 수기 계산·검증</p><small>실무</small></div><div class="card k-inferred" id="P07" data-gate="1" data-lane="1"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P07</b><em style="background:#2456d6">추론</em></div>
+      <p>기관계좌 입출금 장부 대조</p><small>영수증 짝맞춤 — 실무</small></div><div class="card k-inferred" id="P08" data-gate="1" data-lane="1"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P08</b><em style="background:#2456d6">추론</em></div>
+      <p>근무지 내·외 출장 구분 판단</p><small>실무</small></div><div class="card k-inferred" id="P09" data-gate="1" data-lane="1"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P09</b><em style="background:#2456d6">추론</em></div>
+      <p>매식 내역과 근무시간 대조</p><small>실무</small></div><div class="card k-inferred" id="P10" data-gate="2" data-lane="1"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P10</b><em style="background:#2456d6">추론</em></div>
+      <p>지급내역·정산서·주문목록 작성</p><small>서식마다 다시 옮겨 적기 — 실무</small></div><div class="card k-inferred" id="P11" data-gate="2" data-lane="1"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P11</b><em style="background:#2456d6">추론</em></div>
+      <p>급여자료를 대상 시스템에 수기 입력</p><small>반복 타이핑 — 실무</small></div><div class="card k-inferred" id="P12" data-gate="2" data-lane="1"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P12</b><em style="background:#2456d6">추론</em></div>
+      <p>오류 발견 시 재작성</p><small>실무</small></div><div class="card k-statute" id="P13" data-gate="3" data-lane="3"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P13</b><em style="background:#1f8962">규정</em></div>
+      <p>결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재)</small></div><div class="card k-inferred" id="P14" data-gate="4" data-lane="2"
+      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
+      <div class="chead"><b>P14</b><em style="background:#2456d6">추론</em></div>
+      <p>지급·집행 및 결과 보관</p><small>실무</small></div></div>
+<div class="grid" id="grid">
+  <svg class="edges" id="edgeLayer"></svg>
+  
+    <div class="gate" data-g="0">
+      <div class="glabel"><b>G0</b><span>자료 수집</span></div>
+      <div class="cell" data-g="0" data-l="0"></div><div class="cell" data-g="0" data-l="1"></div><div class="cell" data-g="0" data-l="2"></div><div class="cell" data-g="0" data-l="3"></div>
+    </div>
+    <div class="gate" data-g="1">
+      <div class="glabel"><b>G1</b><span>대조·검증</span></div>
+      <div class="cell" data-g="1" data-l="0"></div><div class="cell" data-g="1" data-l="1"></div><div class="cell" data-g="1" data-l="2"></div><div class="cell" data-g="1" data-l="3"></div>
+    </div>
+    <div class="gate" data-g="2">
+      <div class="glabel"><b>G2</b><span>문서 작성</span></div>
+      <div class="cell" data-g="2" data-l="0"></div><div class="cell" data-g="2" data-l="1"></div><div class="cell" data-g="2" data-l="2"></div><div class="cell" data-g="2" data-l="3"></div>
+    </div>
+    <div class="gate" data-g="3">
+      <div class="glabel"><b>G3</b><span>결재</span></div>
+      <div class="cell" data-g="3" data-l="0"></div><div class="cell" data-g="3" data-l="1"></div><div class="cell" data-g="3" data-l="2"></div><div class="cell" data-g="3" data-l="3"></div>
+    </div>
+    <div class="gate" data-g="4">
+      <div class="glabel"><b>G4</b><span>집행·기록</span></div>
+      <div class="cell" data-g="4" data-l="0"></div><div class="cell" data-g="4" data-l="1"></div><div class="cell" data-g="4" data-l="2"></div><div class="cell" data-g="4" data-l="3"></div>
+    </div>
+</div>
+<div class="note">
+근거(인용 법령 — 법제처 원문 대조 대기): 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 공무직 보수·기관계좌·물품·여비·특근매식비의 처리 기준은 각각의 회계 예규와 기관 지침으로 흩어져 있어 조문을 특정하지 않았습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 공개된 허브 화면 기재 내용 — 업무수첩(달력·칸반·필드별 업무)과 도구 7종(공무직 보수 지급내역, 기관계좌 관리, 사무용품 주문목록, 수합명단 체크리스트, 급여 RPA 브라우저 확장, 여비 정산, 특근매식비 정산), 자료는 브라우저에 저장하고 통합백업으로 보관 — 기반입니다.
+</div>
+<footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
+<script>
+const nodes = ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11","P12","P13","P14"];
+nodes.forEach((id) => {
+  const el = document.getElementById(id);
+  const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
+  cell.appendChild(el);
+});
+const edges = [["P01","P02"],["P02","P03"],["P03","P06"],["P04","P10"],["P05","P08"],["P05","P09"],["P06","P07"],["P07","P10"],["P08","P10"],["P09","P10"],["P10","P11"],["P11","P12"],["P12","P10","loop","정산서 재작성"],["P11","P13"],["P13","P14"]];
+const grid = document.getElementById("grid");
+const svg = document.getElementById("edgeLayer");
+const g = grid.getBoundingClientRect();
+svg.setAttribute("width", g.width); svg.setAttribute("height", grid.scrollHeight);
+svg.innerHTML = '<defs>' +
+  '<marker id="a1" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#4a6157"/></marker>' +
+  '<marker id="a2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#2456d6"/></marker>' +
+  '<marker id="a3" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#0d8160"/></marker>' + '<marker id="a4" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#dda76f"/></marker></defs>';
+const R = (el) => { const r = el.getBoundingClientRect(); return { l:r.left-g.left, r:r.right-g.left, t:r.top-g.top, b:r.bottom-g.top, cx:r.left-g.left+r.width/2, cy:r.top-g.top+r.height/2 }; };
+edges.forEach(([s, t, kind, label]) => {
+  const S = R(document.getElementById(s)), T = R(document.getElementById(t));
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  let d;
+  const loop = kind === "loop";
+  const auto = kind === "auto";
+  const repl = kind === "replace";
+  if (Math.abs(S.cx - T.cx) < 30 && T.t >= S.b) { d = `M ${S.cx} ${S.b} L ${T.cx} ${T.t}`; }
+  else if (T.t >= S.b - 4) { const my = S.b + Math.max(8, (T.t - S.b) / 2); d = `M ${S.cx} ${S.b} L ${S.cx} ${my} L ${T.cx} ${my} L ${T.cx} ${T.t}`; }
+  else if (S.t >= T.b - 4) { const my = T.b + Math.max(8, (S.t - T.b) / 2); d = `M ${S.cx} ${S.t} L ${S.cx} ${my} L ${T.cx} ${my} L ${T.cx} ${T.b}`; }
+  else { const sx = S.cx < T.cx ? S.r : S.l, tx = S.cx < T.cx ? T.l : T.r; const mx = (sx + tx) / 2; d = `M ${sx} ${S.cy} L ${mx} ${S.cy} L ${mx} ${T.cy} L ${tx} ${T.cy}`; }
+  path.setAttribute("d", d);
+  path.setAttribute("fill", "none");
+  path.setAttribute("stroke", loop ? "#2456d6" : auto ? "#7c56c9" : repl ? "#dda76f" : "#4a6157");
+  path.setAttribute("stroke-width", auto ? "2.2" : "1.6");
+  if (loop || repl) path.setAttribute("stroke-dasharray", "5 4");
+  path.setAttribute("marker-end", loop ? "url(#a2)" : auto ? "url(#a3)" : repl ? "url(#a4)" : "url(#a1)");
+  svg.appendChild(path);
+  if (label) {
+    const pt = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    pt.textContent = label;
+    pt.setAttribute("x", (S.cx + T.cx) / 2); pt.setAttribute("y", Math.min(S.cy, T.cy) - 6);
+    pt.setAttribute("fill", "#2456d6"); pt.setAttribute("font-size", "10"); pt.setAttribute("font-weight", "800");
+    pt.setAttribute("text-anchor", "middle");
+    svg.appendChild(pt);
+  }
+});
+</script>
+</body></html>
