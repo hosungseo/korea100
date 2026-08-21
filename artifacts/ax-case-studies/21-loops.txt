@@ -1,0 +1,83 @@
+AS-IS 루프 160개 → TO-BE 루프 134개 (개수 기준 83.8%)
+
+【0】 개수는 유지돼도 '같은 루프'는 아니다 — AS-IS 루프의 운명
+  그대로 유지    52 (32.5%)  ███████
+  재정착         76 (47.5%)  ██████████   ← 그중 AI 레인으로 73개
+  소멸           32 (20.0%)  ████
+
+  TO-BE 루프 134개의 착지점: 사람 56 · AI 78 (58.2%)
+
+【1】 되돌아가 착지하는 단계가 법정 절차인가 — 이것이 존속을 가른다
+  법정 절차(초록)에 착지           43개 — 유지  60.5% · 소멸  27.9%
+  규정 밖 실무(파랑)에 착지        117개 — 유지  22.2% · 소멸  17.1%
+
+【2】 루프 성격별 운명
+  성격          개수   유지     재정착    소멸
+  기타            66   27.3%   42.4%   30.3%
+  보완·반려         42   52.4%   38.1%    9.5%
+  재작성·수정        22   22.7%   59.1%   18.2%
+  재탐색·재조회       19   10.5%   78.9%   10.5%
+  독려·재요청         9   33.3%   44.4%   22.2%
+  이의·불복          2  100.0%    0.0%    0.0%
+
+【3】 기관 유형별 루프 존속(유지+재정착)
+  깃랩        36개 — 존속  91.7% · 소멸   8.3%
+  공공기관      19개 — 존속  94.7% · 소멸   5.3%
+  사례집       18개 — 존속  44.4% · 소멸  55.6%
+  광역        17개 — 존속  76.5% · 소멸  23.5%
+  특수직역      16개 — 존속  75.0% · 소멸  25.0%
+  중앙부처      14개 — 존속 100.0% · 소멸   0.0%
+  자체개발      14개 — 존속 100.0% · 소멸   0.0%
+  정밀        13개 — 존속  46.2% · 소멸  53.8%
+  기초        13개 — 존속  76.9% · 소멸  23.1%
+
+【4】 AI 레인으로 재정착한 루프 — 사람에게 돌아가던 고리가 기계로
+  jbdc-document-distribution — "오배부 재배부" : 내용 확인·소관 부서 판단 → AI 소관 분류·자동배부
+  mohw-byeori-guideline — "이의 시 재검색" : 법령·고시·사업지침 수기 검색 → 법령·고시·지침 근거 답변
+  mygwangyang-citizen — "뒤늦은 신청(기한 내면)" : 그 밖의 지원이 뭔지 알아내기 → 내 상황 기반 통합 검색
+  edu-teacher-hobong — "증빙 보완·경력 재확인" : 근무기간·기관·직종 전기(轉記) → 문서 OCR·경력 구조화
+  records-mgmt-automation — "의견 반영·목록 재추출" : 보존기간 만료 목록 추출 → 만료 대상 목록 자동 추출
+  regulation-diff-table-draft — "초안 보완" : 신구대비표 서식에 전기(轉記) → A·B 문서 자동 비교
+  regulation-diff-table-draft — "의견 반영본 재대조" : 두 판본 눈으로 대조 → A·B 문서 자동 비교
+  fire-equipment-handover-board — "누락 회차 소급" : 정기업무(월보) 회차 관리 → 월보 회차 추적·제출 3일 전 알림
+  predecessor-file-handover-recovery — "다시 물어보고 다시 추측" : 내 업무가 무엇인지 추측 → 문서 인제스트·업무 자동 클러스터링
+  minwon-report-screener — "오분류 반송·재판별" : 신고 해당 여부 수기 판단 → 신고 해당 가능성 규칙 판정
+  fire-tech-minwon-answer — "재질의·쟁점 재정리" : 질의요지 재정리 → 질의요지·법적 쟁점 구조화
+  ggc-hipass-expense-settlement — "내역 재확인" : 카드사 내역 개별 조회 → 이용 내역 API 자동 수집
+  nars-kid-privacy-masking — "가림 누락 보완" : 마스킹 사본 수기 제작 → 마스킹 사본 PDF 생성
+  attendance-review-checker — "소명 결과 재확인" : 지참·조퇴 행 찾아내기 → 검토대상 자동 검출
+  gangwon-patent-annuity — "담당 아님 회신 → 재추정" : 발명인(공무원) 이름으로 소속 과 추정 → 출원인 기준 담당부서 자동지정
+
+【5】 완전히 사라진 루프
+  [보완·반려] yebimon-travel-expense — "보완 요구" → 보완·재작성 요구
+  [재작성·수정] yebimon-travel-expense — "재작성" → 정산 신청 — 계산서·증거서류 제출 (법정 착지)
+  [보완·반려] yebimon-travel-expense — "반려" → 지출품의 문서 기안 (법정 착지)
+  [기타] sejong-siren-disaster — "상황 변화 시 재판단" → 재난 유형·심각성 판단 (법정 착지)
+  [재작성·수정] acrc-minwon-answer-ai — "이의 시 재검토" → 답변 초안 수기 작성
+  [재작성·수정] gunpo-application-helper — "재작성" → 신청서 작성(문서 신청) (법정 착지)
+  [재탐색·재조회] minwoncall-citizen — "다시 탐색" → 소관기관 추측·인터넷 검색
+  [기타] seoul-edu-travel-route-map — "사례 확인 후 재판단" → 근무지 내 출장인지 근무지 외 출장인지 판단 (법정 착지)
+  [기타] library-shift-schedule-board — "미배정·중복 재배정" → 주말·주중 구분 표에 근무자 배정
+  [기타] hwaseong-newcomer-kb — "선임 대기" → 선임에게 물어보기
+  [기타] incheon-complan-ai — "자료 재수집" → 인구·토지·산업 통계 수집 (법정 착지)
+  [기타] jeonnam-gwangju-negotiated-contract — "검산·재계산" → 평점 집계·엑셀 계산
+  [기타] gyeonggi-bus-congestion-analysis — "검산·재계산" → 319개 노선 혼잡률 계산
+  [기타] seoul-smart-wellness-call — "미수신 재통화" → 가구별 안부 전화 걸기
+  [기타] gimhae-ai-duty-assistant — "매뉴얼에 없는 상황" → 종이 당직 매뉴얼 검색
+  [재탐색·재조회] jeju-wildfire-cctv-ai — "화면 재확인" → 상황실 다중 화면 육안 확인
+  [독려·재요청] seongnam-doc-automation — "자료 재요청" → 공사·용역 계약·집행 자료 개별 조회
+  [독려·재요청] seoul-police-cctv-missing-person — "인접 구역 영상 재요청" → CCTV 영상 열람·제공 협조 (법정 착지)
+  [재작성·수정] correction-smart-surveillance — "배정 재검토" → 이송 대상자 개별처우급 수작업 검토
+  [기타] mnd-military-radiology-ai — "영상 불량 시 재촬영" → 흉부 X선 촬영
+  [기타] seoul-fire-119-ai-callbot — "위치 불명 재청취" → 신고 순차 접수·청취 (법정 착지)
+  [기타] korail-auto-inspection — "미점검 구간 다음 야간으로 이월" → 점검 주기·구간 배정 (법정 착지)
+  [기타] incheon-airport-pax-flow — "혼잡 재발 시 재취합·재분석" → 데이터 수작업 취합·정리
+  [기타] kwater-smart-water-plant — "고장 발생 후 점검계획 재수립" → 주기점검(TBM) 일정 수립
+  [보완·반려] moel-labor-inspector-ai — "진정 내용 보완 요청" → 진정 제기 (법정 착지)
+  [기타] mohw-welfare-crisis-ai-intake — "미수신 재발신" → 대상자에게 직접 전화
+  [기타] gyeonggi-360-ai-care — "미수신 재시도" → 인력이 직접 안부 전화 (법정 착지)
+  [기타] nfs-deepfake-forensics — "분석 기준 재적용" → 메타데이터·압축정보 비교
+  [기타] nfs-deepfake-forensics — "대조 파일 재확보 요청" → 대조 원본 파일 확보 시도
+  [보완·반려] yongsan-multilingual-ai-interpretation — "서류 보완 재방문" → 민원 신청·방문 (법정 착지)
+  [기타] gangnam-resident-parking-ai — "공유 이용 실패 재신고" → 민원 신고·전화
+  [기타] yangsan-odor-forecast-ai — "소산 후 재출동" → 현장 출동 준비·배차

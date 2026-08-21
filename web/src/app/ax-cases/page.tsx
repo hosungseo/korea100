@@ -340,6 +340,14 @@ export default function AxCasesPage() {
                       <a href={`${SHEETS}/${c.slug}-tobe.html`} target="_blank" rel="noreferrer">
                         AI 적용 체계도
                       </a>
+                      <a
+                        href={`${ASSET_BASE}/correct/${c.slug}.html`}
+                        target="_blank"
+                        rel="noreferrer"
+                        title="담당자가 틀린 곳만 고치면 되는 인쇄용 교정 시트"
+                      >
+                        교정 시트
+                      </a>
                       {c.sources[0] ? (
                         <a href={c.sources[0].split(" ")[0]} target="_blank" rel="noreferrer">
                           출처
@@ -378,6 +386,24 @@ export default function AxCasesPage() {
           사례집에 나온 것만 인용했으며, 각 체계도 하단 각주에 근거를 남겼습니다.
           체계도는 업무의 구조를 보여주기 위한 재구성이지 기관의 공식 절차도가
           아닙니다. 오류를 발견하시면 알려주세요.
+        </p>
+        <p>
+          <b>방법의 위치.</b> 업무를 단계로 분해하는 연구는 세 갈래가
+          있습니다 — 시스템 로그에서 절차를 캐는 프로세스 마이닝, 화면·입력
+          기록에서 과업을 유도하는 태스크 마이닝, 직업 분류를 잘게 쪼개 AI
+          노출도를 재는 노동경제학. 그런데 행정업무에서 자동화 여지가 가장 큰
+          구간(수기 검색·대조·구전 인수인계)은 <b>어느 기록에도 남지
+          않습니다</b>. 그래서 여기서는 공개 법령을 뼈대로 삼아 실무를 추정해
+          그리고, 담당자가 틀린 곳만 고치는 방식을 택했습니다. 계층은
+          과업분석(HTA)의 문법을 따르되 — 사례가 Process, 단계 묶음이
+          Activity, 각 칸이 Task — 분해는 <b>&ldquo;규정이 방법을 정하지 않은
+          지점&rdquo;에서 멈춥니다</b>. 그 아래는 도구의 층위이기 때문입니다.
+        </p>
+        <p>
+          <b>교정 시트.</b> 각 사례 카드의 &lsquo;교정 시트&rsquo;는 담당자용
+          인쇄 서식입니다. 백지에 업무를 쓰는 것이 아니라 <b>이미 그려진
+          지도에서 틀린 칸만 고치고</b>, 문서로는 알 수 없는 빈도·소요시간을
+          표시하게 되어 있습니다. 파란 칸의 검증은 이 방법으로만 가능합니다.
         </p>
       </section>
     </main>

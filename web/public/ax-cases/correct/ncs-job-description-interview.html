@@ -1,0 +1,181 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>업무 지도 교정 — 공공기관 인사·채용 담당 부서 채용공고 기반 직무기술서 작성과 NCS 근거 면접질문 초안 준비</title>
+<style>
+* { box-sizing: border-box; margin: 0; }
+body { font-family: "Apple SD Gothic Neo", Pretendard, sans-serif; color: #12241c; max-width: 960px; margin: 0 auto; padding: 32px 20px 60px; line-height: 1.5; }
+h1 { font-size: 21px; margin-bottom: 4px; }
+.sub { color: #5d6b63; font-size: 13.5px; margin-bottom: 14px; }
+.intro { background: #eef8f2; border: 1px solid #bfe3d2; border-radius: 10px; padding: 14px 16px; font-size: 13.5px; margin-bottom: 18px; word-break: keep-all; }
+.intro b { color: #087452; }
+table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+th { background: #f0f4f2; border: 1px solid #cdd8d2; padding: 7px 6px; font-size: 12px; }
+td { border: 1px solid #cdd8d2; padding: 7px 6px; vertical-align: top; }
+tr.st td.name small.g { color: #17573f; }
+tr.inf { background: #f4f8ff; }
+tr.inf td.name small.b { color: #1c3d8f; }
+td.id { font-family: ui-monospace, monospace; font-size: 11px; color: #667; width: 34px; }
+td.lane { width: 84px; font-size: 11.5px; color: #445; }
+td.chk { width: 92px; font-size: 11.5px; white-space: nowrap; }
+td.write { width: 200px; min-height: 40px; }
+td.freq { width: 108px; font-size: 11px; white-space: nowrap; }
+.mini { color: #778; }
+h2 { font-size: 15px; margin: 22px 0 8px; }
+ol.loops { padding-left: 20px; font-size: 13px; }
+ol.loops li { margin-bottom: 10px; word-break: keep-all; }
+.tail { margin-top: 22px; font-size: 13px; background: #fbfcfb; border: 1px dashed #cdd8d2; border-radius: 10px; padding: 12px 16px; }
+.tail p { margin-bottom: 8px; }
+.blank { display: inline-block; border-bottom: 1px solid #99a; min-width: 240px; }
+@media print { body { padding: 0; } .noprint { display: none; } }
+.noprint { margin-bottom: 16px; }
+.noprint a { color: #087452; font-weight: 700; font-size: 13px; }
+</style></head><body>
+<div class="noprint"><a href="../">← AI 행정 전후 비교로 돌아가기</a> · 이 페이지는 인쇄해서 쓰도록 만들어졌습니다 (⌘P)</div>
+<h1>업무 지도 교정 요청 — 채용공고 기반 직무기술서 작성과 NCS 근거 면접질문 초안 준비</h1>
+<div class="sub">공공기관 인사·채용 담당 부서 · 사례 29호 · 전 16단계(규정 4 + 추론 12)</div>
+<div class="intro">
+공개된 법령과 자료로 이 업무의 지도를 <b>미리 그려 두었습니다</b>. 백지에 쓰시는 것이 아니라,
+<b>틀린 곳만 고쳐 주시면 됩니다</b>. 초록(규정) 단계는 조문을 원문 대조했고,
+파란(추론) 단계는 규정에 없어 실무를 추정한 것입니다 — <b>파란 칸이 실제와 맞는지가 가장 궁금한 부분입니다.</b>
+빈도와 소요시간은 문서로 알 수 없어 여쭙습니다.
+</div>
+<table>
+<thead><tr><th></th><th>담당</th><th>단계 (근거)</th><th>판정</th><th>다르다면, 실제로는</th><th>빈도·소요</th></tr></thead>
+<tbody>
+<tr class="inf">
+      <td class="id">P01</td>
+      <td class="lane">채용 주관 부서</td>
+      <td class="name"><b>채용 수요·직무 확인</b><br><small class="b">추론(추정) 어느 직무를 어떤 자격으로 뽑을지 부서와 협의 — 실무</small></td>
+      <td class="chk">☐ 맞음<br>☐ 다름<br>☐ 이 단계 없음</td>
+      <td class="write"></td>
+      <td class="freq">☐일 ☐주 ☐월<br>☐연 ☐건별<br><span class="mini">회당 약 ___분</span></td>
+    </tr>
+<tr class="st">
+      <td class="id">P02</td>
+      <td class="lane">인사 담당자</td>
+      <td class="name"><b>채용일정·채용과정 고지 준비</b><br><small class="g">규정 채용절차의 공정화에 관한 법률 제8조(채용일정 및 채용과정의 고지) — 일정·심사 지연 사실·과정 변경을 알릴 의무</small></td>
+      <td class="chk">☐ 맞음<br>☐ 다름<br>☐ 이 단계 없음</td>
+      <td class="write"></td>
+      <td class="freq">☐일 ☐주 ☐월<br>☐연 ☐건별<br><span class="mini">회당 약 ___분</span></td>
+    </tr>
+<tr class="inf">
+      <td class="id">P03</td>
+      <td class="lane">인사 담당자</td>
+      <td class="name"><b>공고문에서 직무수행내용 추출</b><br><small class="b">추론(추정) 공고문 문장을 읽어 수행내용 항목으로 쪼갬 — 실무</small></td>
+      <td class="chk">☐ 맞음<br>☐ 다름<br>☐ 이 단계 없음</td>
+      <td class="write"></td>
+      <td class="freq">☐일 ☐주 ☐월<br>☐연 ☐건별<br><span class="mini">회당 약 ___분</span></td>
+    </tr>
+<tr class="inf">
+      <td class="id">P04</td>
+      <td class="lane">인사 담당자</td>
+      <td class="name"><b>기존 유사 공고·직무기술서 찾아 참고</b><br><small class="b">추론(추정) 전임자가 남긴 공고·직무기술서 파일을 뒤져 참고 — 실무</small></td>
+      <td class="chk">☐ 맞음<br>☐ 다름<br>☐ 이 단계 없음</td>
+      <td class="write"></td>
+      <td class="freq">☐일 ☐주 ☐월<br>☐연 ☐건별<br><span class="mini">회당 약 ___분</span></td>
+    </tr>
+<tr class="inf">
+      <td class="id">P05</td>
+      <td class="lane">NCS 자료</td>
+      <td class="name"><b>NCS 세분류 검색</b><br><small class="b">추론(추정) 대분류부터 세분류까지 훑어 해당 코드를 찾음 — 실무</small></td>
+      <td class="chk">☐ 맞음<br>☐ 다름<br>☐ 이 단계 없음</td>
+      <td class="write"></td>
+      <td class="freq">☐일 ☐주 ☐월<br>☐연 ☐건별<br><span class="mini">회당 약 ___분</span></td>
+    </tr>
+<tr class="inf">
+      <td class="id">P06</td>
+      <td class="lane">인사 담당자</td>
+      <td class="name"><b>능력단위·수행준거 확인</b><br><small class="b">추론(추정) 능력단위 PDF를 내려받아 수행준거를 한 줄씩 대조 — 실무</small></td>
+      <td class="chk">☐ 맞음<br>☐ 다름<br>☐ 이 단계 없음</td>
+      <td class="write"></td>
+      <td class="freq">☐일 ☐주 ☐월<br>☐연 ☐건별<br><span class="mini">회당 약 ___분</span></td>
+    </tr>
+<tr class="inf">
+      <td class="id">P07</td>
+      <td class="lane">인사 담당자</td>
+      <td class="name"><b>직무와 NCS 근거 연결·판단</b><br><small class="b">추론(추정) 어느 능력단위를 근거로 삼았는지 따로 메모 — 실무</small></td>
+      <td class="chk">☐ 맞음<br>☐ 다름<br>☐ 이 단계 없음</td>
+      <td class="write"></td>
+      <td class="freq">☐일 ☐주 ☐월<br>☐연 ☐건별<br><span class="mini">회당 약 ___분</span></td>
+    </tr>
+<tr class="inf">
+      <td class="id">P08</td>
+      <td class="lane">인사 담당자</td>
+      <td class="name"><b>기관 양식(HWPX)에 맞춰 직무기술서 작성</b><br><small class="b">추론(추정) 기관 HWPX 표 서식에 항목을 손으로 맞춰 넣음 — 실무</small></td>
+      <td class="chk">☐ 맞음<br>☐ 다름<br>☐ 이 단계 없음</td>
+      <td class="write"></td>
+      <td class="freq">☐일 ☐주 ☐월<br>☐연 ☐건별<br><span class="mini">회당 약 ___분</span></td>
+    </tr>
+<tr class="inf">
+      <td class="id">P09</td>
+      <td class="lane">인사 담당자</td>
+      <td class="name"><b>제외 업무(비해당 범위) 정리</b><br><small class="b">추론(추정) 이 직무에 해당하지 않는 업무 범위를 따로 적어 둠 — 실무</small></td>
+      <td class="chk">☐ 맞음<br>☐ 다름<br>☐ 이 단계 없음</td>
+      <td class="write"></td>
+      <td class="freq">☐일 ☐주 ☐월<br>☐연 ☐건별<br><span class="mini">회당 약 ___분</span></td>
+    </tr>
+<tr class="inf">
+      <td class="id">P10</td>
+      <td class="lane">인사 담당자</td>
+      <td class="name"><b>직무기술서에서 KSA 뽑아내기</b><br><small class="b">추론(추정) 직무기술서에서 지식·기술·태도를 뽑아 정리 — 실무</small></td>
+      <td class="chk">☐ 맞음<br>☐ 다름<br>☐ 이 단계 없음</td>
+      <td class="write"></td>
+      <td class="freq">☐일 ☐주 ☐월<br>☐연 ☐건별<br><span class="mini">회당 약 ___분</span></td>
+    </tr>
+<tr class="inf">
+      <td class="id">P11</td>
+      <td class="lane">인사 담당자</td>
+      <td class="name"><b>주질문·꼬리질문·확인포인트 작성</b><br><small class="b">추론(추정) 주질문과 꼬리질문을 문항마다 손으로 작성 — 실무</small></td>
+      <td class="chk">☐ 맞음<br>☐ 다름<br>☐ 이 단계 없음</td>
+      <td class="write"></td>
+      <td class="freq">☐일 ☐주 ☐월<br>☐연 ☐건별<br><span class="mini">회당 약 ___분</span></td>
+    </tr>
+<tr class="st">
+      <td class="id">P12</td>
+      <td class="lane">면접위원</td>
+      <td class="name"><b>블라인드 기준 검토</b><br><small class="g">규정 채용절차의 공정화에 관한 법률 제4조의3(출신지역 등 개인정보 요구 금지) — 제1호 신체적 조건, 제2호 출신지역·혼인여부·재산</small></td>
+      <td class="chk">☐ 맞음<br>☐ 다름<br>☐ 이 단계 없음</td>
+      <td class="write"></td>
+      <td class="freq">☐일 ☐주 ☐월<br>☐연 ☐건별<br><span class="mini">회당 약 ___분</span></td>
+    </tr>
+<tr class="inf">
+      <td class="id">P13</td>
+      <td class="lane">면접위원</td>
+      <td class="name"><b>면접위원 검토·수정</b><br><small class="b">추론(추정) 면접위원이 문항을 읽고 고쳐 달라고 되돌려 보냄 — 실무</small></td>
+      <td class="chk">☐ 맞음<br>☐ 다름<br>☐ 이 단계 없음</td>
+      <td class="write"></td>
+      <td class="freq">☐일 ☐주 ☐월<br>☐연 ☐건별<br><span class="mini">회당 약 ___분</span></td>
+    </tr>
+<tr class="inf">
+      <td class="id">P14</td>
+      <td class="lane">채용 주관 부서</td>
+      <td class="name"><b>직무기술서·공고 확정</b><br><small class="b">추론(추정) 수정 결과를 반영해 직무기술서와 공고문을 확정 — 실무</small></td>
+      <td class="chk">☐ 맞음<br>☐ 다름<br>☐ 이 단계 없음</td>
+      <td class="write"></td>
+      <td class="freq">☐일 ☐주 ☐월<br>☐연 ☐건별<br><span class="mini">회당 약 ___분</span></td>
+    </tr>
+<tr class="st">
+      <td class="id">P15</td>
+      <td class="lane">인사 담당자</td>
+      <td class="name"><b>채용공고 게시·일정 고지</b><br><small class="g">규정 채용절차의 공정화에 관한 법률 제8조(채용일정 및 채용과정의 고지) — 고지방법은 제7조제2항 준용</small></td>
+      <td class="chk">☐ 맞음<br>☐ 다름<br>☐ 이 단계 없음</td>
+      <td class="write"></td>
+      <td class="freq">☐일 ☐주 ☐월<br>☐연 ☐건별<br><span class="mini">회당 약 ___분</span></td>
+    </tr>
+<tr class="st">
+      <td class="id">P16</td>
+      <td class="lane">인사 담당자</td>
+      <td class="name"><b>채용광고 내용 불리 변경 금지 확인</b><br><small class="g">규정 채용절차의 공정화에 관한 법률 제4조(거짓 채용광고 등의 금지) 제2항 — 정당한 사유 없이 불리하게 변경 금지</small></td>
+      <td class="chk">☐ 맞음<br>☐ 다름<br>☐ 이 단계 없음</td>
+      <td class="write"></td>
+      <td class="freq">☐일 ☐주 ☐월<br>☐연 ☐건별<br><span class="mini">회당 약 ___분</span></td>
+    </tr>
+</tbody></table>
+<h2>되돌아가는 고리(반려·재작업)</h2><ol class="loops"><li>"문항 수정 요청" — <b>면접위원 검토·수정</b> 에서 <b>주질문·꼬리질문·확인포인트 작성</b> 로 되돌아간다고 그렸습니다.
+     실제로 이런 되돌림이 있습니까? ☐ 있음(대략 ___%가 되돌아옴) ☐ 없음 ☐ 다른 지점으로: ______________</li></ol>
+<div class="tail">
+<p><b>빠진 단계가 있습니까?</b> 이 지도에 없는데 실제로 하시는 일: <span class="blank"></span></p>
+<p><b>이 업무에서 가장 품이 드는 단계 하나</b>를 꼽는다면: <span class="blank"></span></p>
+<p style="color:#5d6b63; font-size:12px; margin-bottom:0">교정해 주신 내용은 업무 체계도에 반영되며, 인사·평가 목적이 아닙니다. 지도가 정확해질수록 자동화 검토가 엉뚱한 곳을 겨냥하지 않게 됩니다.</p>
+</div>
+</body></html>
