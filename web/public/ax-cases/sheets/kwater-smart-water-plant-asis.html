@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 118호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>밸브도 펌프도 <b>사람 손</b>, 점검은 <b>달력</b>대로</h1>
-  <p class="sub">정수장 운영을 규정과 실무 추론으로 나눠 그렸더니 초록 칸이 하나도 남지 않았습니다. 수질 기준은 법이 정하지만, 그 기준을 맞추기 위해 오늘 응집제를 얼마나 넣을지, 어느 펌프를 언제 돌릴지는 숙련자의 감각이 결정했습니다. 사례집이 지적한 '휴먼 에러'는 바로 이 파란 칸에서 발생했습니다.</p>
+  <p class="sub">정수장 운영을 규정(초록)과 실무 추론(파랑)으로 나눠 그렸더니 초록 칸이 원수 수질·수량 확인 하나만 남았습니다. 수질검사와 수량분석은 수도법이 정하지만, 그 기준을 맞추기 위해 오늘 응집제를 얼마나 넣을지, 어느 펌프를 언제 돌릴지는 숙련자의 감각이 결정했습니다. 사례집이 지적한 '휴먼 에러'는 바로 이 파란 칸에서 발생했습니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>0</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>12</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>1</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>11</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 12 = 규정 0 + 추론 12 · 루프 2</span>
+    <span style="color:#65d7ad">전 단계 12 = 규정 1 + 추론 11 · 루프 2</span>
   </p>
 </header>
 <div class="legend">
@@ -70,10 +70,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-inferred" id="P12" data-gate="0" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P12</b><em style="background:#2456d6">추론</em></div>
-      <p>교대 근무 인수인계</p><small>운영 이력 구두·수기 전달 — 실무</small></div><div class="card k-inferred" id="P01" data-gate="0" data-lane="0"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>원수 수질·유입량 확인</p><small>계기 판독과 경험 판단 — 실무</small></div><div class="card k-inferred" id="P02" data-gate="1" data-lane="0"
+      <p>교대 근무 인수인계</p><small>운영 이력 구두·수기 전달 — 실무</small></div><div class="card k-statute" id="P01" data-gate="0" data-lane="0"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P01</b><em style="background:#1f8962">규정</em></div>
+      <p>원수 수질·유입량 확인</p><small>수도법 제29조(수질검사와 수량분석)</small></div><div class="card k-inferred" id="P02" data-gate="1" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
       <p>응집제 주입률 수동 산정</p><small>숙련자 감각·경험 의존 — 실무</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="0"
@@ -129,7 +129,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 이 사례의 AS-IS에는 초록(규정) 칸이 없습니다. 정수장 운영자의 약품 주입률 산정·밸브 조작·펌프 기동 같은 일상 조작은 법령 조문이 아니라 사업장 운영기준과 숙련자의 경험으로 굴러가던 영역이기 때문입니다. 조문 번호를 확인하지 못한 근거는 초록으로 쓰지 않았습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실(AI 자율운영·EMS·PMS·지능형 영상 4개 축, 응집제 7.6%·소독제 4.1%·전력비 1.5%·점검비 35% 절감, 산재 손실 연 3.5억 원 절감, 연간 총 94억 원 절감, 2024년 말 전국 42개 광역정수장 확대, 화성정수장 WEF 글로벌 등대 선정)은 행안부·NIA 「AI 정부 서비스 사례집」(2026.3) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 수도법 제29조(수질검사와 수량분석) — 일반수도사업자는 원수와 정수가 기준에 맞는지 수질검사를 실시하고 취수량·정수량·공급량 등에 대한 수량분석을 해야 합니다. 그러나 그 결과를 놓고 오늘 응집제를 얼마나 넣을지, 어느 펌프를 언제 돌릴지 같은 일상 조작은 법령 조문이 아니라 사업장 운영기준과 숙련자의 경험으로 굴러가던 영역입니다. 조문 번호를 확인하지 못한 근거는 초록으로 쓰지 않았습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실(AI 자율운영·EMS·PMS·지능형 영상 4개 축, 응집제 7.6%·소독제 4.1%·전력비 1.5%·점검비 35% 절감, 산재 손실 연 3.5억 원 절감, 연간 총 94억 원 절감, 2024년 말 전국 42개 광역정수장 확대, 화성정수장 WEF 글로벌 등대 선정)은 행안부·NIA 「AI 정부 서비스 사례집」(2026.3) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>

@@ -49,8 +49,8 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <h1><b>여섯 개 질문</b>에 답하면 자격과 일정이 바로 나온다</h1>
   <p class="sub">AI 자가진단이 6개 질문으로 지원자격을 판정하고 지급 일정까지 즉시 산출합니다. 신청 접수와 지급 결정 결재라는 법정 절차는 그대로 남고, 그 앞의 요건 대조·지침 확인·시기 계산이 기계로 넘어가면서 자격 산정 오류 0건으로 보고되었습니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>1</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>0</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>2</b></span>
     <span><i style="background:#d99a5e"></i>대체 <b>5</b></span>
     
@@ -71,7 +71,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-changed" id="P01" data-gate="0" data-lane="0"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P01</b><em style="background:#b8890e">간소화</em></div>
-      <p>시민 문의</p><small>자가진단으로 먼저 확인 후 필요한 경우만 문의</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
+      <p>시민 문의</p><small>민원 처리에 관한 법률 제8조(민원의 신청) — 자가진단으로 먼저 확인 후 필요한 경우만 문의</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A01</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>6개 질문 자가진단으로 자격 자동 판정</p><small>요건 대조와 지침 확인을 자동 수행</small></div><div class="card k-replaced" id="P02" data-gate="0" data-lane="1"
@@ -104,10 +104,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>지원금 신청(민원 접수)</p><small>민원 처리에 관한 법률 제9조(민원의 접수)</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P10</b><em style="background:#1f8962">규정</em></div>
-      <p>지급 결정 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재)</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="3"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P11</b><em style="background:#2456d6">추론</em></div>
-      <p>지급 대상 등록·집행</p><small>실무</small></div></div>
+      <p>지급 결정 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재)</small></div><div class="card k-statute" id="P11" data-gate="4" data-lane="3"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P11</b><em style="background:#1f8962">규정</em></div>
+      <p>지급 대상 등록·집행</p><small>안양시 출산 지원에 관한 조례 제6조(지원절차 및 지급시기)</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
@@ -133,7 +133,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거 법령: 민원 처리에 관한 법률 제9조(민원의 접수), 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 출산지원금의 지급 요건·시기는 지방자치단체 조례·지침 영역이어서 조문으로 특정하지 않았습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(안양시 동안구보건소 9급 안지민 주무관이 6개 질문 자가진단 서비스를 개발, 종전 전화 응대 연 450시간, 자격 산정 오류 0건, 제1회 전 직원 AI 경진대회 최우수상) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 민원 처리에 관한 법률 제8조(민원의 신청)·제9조(민원의 접수), 안양시 출산 지원에 관한 조례 제6조(지원절차 및 지급시기), 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 조례는 지원대상·지급시기를 정하지만, 상담 단계에서 자격을 대조하고 차수를 계산하는 방법은 정하지 않습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(안양시 동안구보건소 9급 안지민 주무관이 6개 질문 자가진단 서비스를 개발, 종전 전화 응대 연 450시간, 자격 산정 오류 0건, 제1회 전 직원 AI 경진대회 최우수상) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>

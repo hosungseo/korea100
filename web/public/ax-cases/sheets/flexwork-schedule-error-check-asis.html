@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 13호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>규정을 어기려던 사람은 없는데, <b>지정 한 칸이 틀려</b> 복무위반이 됩니다</h1>
-  <p class="sub">유연근무 출퇴근 지정을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 근무 의무와 위반 시 처리는 법률이 정하지만, 신청한 시간대가 근무시간·공휴일·출장 일정과 맞는지 확인하는 대조 작업은 규정에 절차가 없어 담당자가 눈으로 훑습니다.</p>
+  <p class="sub">유연근무 출퇴근 지정을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 유연근무 신청과 승인, 근무 의무와 위반 시 처리는 규정이 정하지만, 신청한 시간대가 근무시간·공휴일·출장 일정과 맞는지 확인하는 대조 작업은 규정에 절차가 없어 담당자가 눈으로 훑습니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>9</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>4</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>8</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 12 = 규정 3 + 추론 9 · 루프 1</span>
+    <span style="color:#65d7ad">전 단계 12 = 규정 4 + 추론 8 · 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -67,10 +67,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <span>─→ 절차 순서 &nbsp; ┄→ 반려·보완 루프</span>
 </div>
 <div class="lanehead"><div>단계 ↓ · 행위자 →</div><div>신청 공무원</div><div>복무담당(부서 서무)</div><div>부서장</div><div>복무시스템</div></div>
-<div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="0"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>유연근무 신청</p><small>근무유형·시간대를 골라 신청 — 실무</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="1"
+<div id="pool" style="display:none"><div class="card k-statute" id="P01" data-gate="0" data-lane="0"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P01</b><em style="background:#1f8962">규정</em></div>
+      <p>유연근무 신청</p><small>국가공무원 복무규정 제10조(근무시간 등의 변경)</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
       <p>신청 내용 확인</p><small>부서 운영·업무 공백을 함께 살핌 — 실무</small></div><div class="card k-statute" id="P03" data-gate="1" data-lane="2"
@@ -129,7 +129,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 국가공무원법 제56조(성실 의무)·제78조(징계 사유), 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 유연근무 근무유형과 시간대를 어떻게 지정하고 무엇을 점검할지는 인사 지침·기관 운영기준에 담겨 있어 법률에 절차가 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 정부 공공 깃랩 저장소 yacsoc02/dbdus.profect의 프로젝트 설명(공직자 유연근무 실시에 따른 출퇴근 지정 오류를 검증해 단순 실수에 의한 복무위반을 사전 방지) 한 줄이며, 저장소 README에는 기능 설명이 없어 그 이상의 구현 내용은 확인하지 못했습니다. (저장소에 기관이 표기되지 않아 공무원 복무 법령을 적용 대상으로 보고 그렸습니다. 공공기관이라면 근거는 근로기준법·취업규칙 계열로 바뀝니다.)
+근거(인용 법령 — 법제처 원문 대조 완료): 국가공무원 복무규정 제10조(근무시간 등의 변경), 국가공무원법 제56조(성실 의무)·제78조(징계 사유), 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 유연근무를 신청할 수 있다는 것은 복무규정이 정하지만, 근무유형과 시간대를 어떻게 지정하고 무엇을 점검할지는 인사 지침·기관 운영기준에 담겨 있어 법령에 절차가 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 정부 공공 깃랩 저장소 yacsoc02/dbdus.profect의 프로젝트 설명(공직자 유연근무 실시에 따른 출퇴근 지정 오류를 검증해 단순 실수에 의한 복무위반을 사전 방지) 한 줄이며, 저장소 README에는 기능 설명이 없어 그 이상의 구현 내용은 확인하지 못했습니다. (저장소에 기관이 표기되지 않아 공무원 복무 법령을 적용 대상으로 보고 그렸습니다. 공공기관이라면 근거는 근로기준법·취업규칙 계열로 바뀝니다.)
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>

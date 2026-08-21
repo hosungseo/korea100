@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 11호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>누구 일인지 정하는 데 <b>인용할 조문이 없습니다</b></h1>
-  <p class="sub">온나라 접수 문서 배부를 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 문서를 받아 처리하고 결재하는 것은 규정이 정하지만, 제목만 보고 업무분장표와 과거 배부 기록을 뒤져 담당자를 고르는 판단은 기관 업무분장에 맡겨져 있어 규정에 절차가 없습니다.</p>
+  <p class="sub">온나라 접수 문서 배부를 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 문서를 처리과에서 접수해 등록하고 결재하는 것은 규정이 정하지만, 제목만 보고 업무분장표와 과거 배부 기록을 뒤져 담당자를 고르는 판단은 기관 업무분장에 맡겨져 있어 규정에 절차가 없습니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>1</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>10</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>9</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 11 = 규정 1 + 추론 10 · 루프 1</span>
+    <span style="color:#65d7ad">전 단계 11 = 규정 2 + 추론 9 · 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -88,10 +88,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>부재자·겸직 여부 확인</p><small>휴가·전보·겸직을 따로 확인 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P07</b><em style="background:#2456d6">추론</em></div>
-      <p>일괄접수·담당지정 조작</p><small>명단에서 담당자를 찾아 선택·추가 — 실무</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="3"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P08</b><em style="background:#2456d6">추론</em></div>
-      <p>접수 확정(확인)</p><small>확인 버튼이 곧 실제 접수 — 실무</small></div><div class="card k-inferred" id="P09" data-gate="3" data-lane="2"
+      <p>일괄접수·담당지정 조작</p><small>명단에서 담당자를 찾아 선택·추가 — 실무</small></div><div class="card k-statute" id="P08" data-gate="3" data-lane="3"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P08</b><em style="background:#1f8962">규정</em></div>
+      <p>접수 확정(확인)</p><small>행정업무의 운영 및 혁신에 관한 규정 제18조(문서의 접수ㆍ처리)</small></div><div class="card k-inferred" id="P09" data-gate="3" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P09</b><em style="background:#2456d6">추론</em></div>
       <p>오배부 반송·재배부</p><small>내 일이 아니라며 돌아옴 — 실무</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="1"
@@ -126,7 +126,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). 배부 자체는 법령이 아니라 기관의 업무분장에 따라 정해지므로, 접수대기함을 훑어 담당자를 고르는 구간에는 인용할 조문이 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 정부 공공 깃랩 저장소 pilddong/onnara-ai-document-distributor의 README(온나라 접수대기함의 제목·발송부서·문서구분만 읽어 범정부 AI 공통기반 RAG·생성형 AI로 담당자 추천, 문서 본문·첨부·수신문서 ID는 미전송, 기본값은 사람 최종 확인, 감사기록 90일·최대 1,000건) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 행정업무의 운영 및 혁신에 관한 규정 제18조(문서의 접수ㆍ처리)·제10조(문서의 결재). 문서를 처리과에서 접수해 접수일시와 접수등록번호를 표시하는 행위와 기안·결재는 규정이 정하지만, 배부 자체는 법령이 아니라 기관의 업무분장에 따라 정해지므로, 접수대기함을 훑어 담당자를 고르는 구간에는 인용할 조문이 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 정부 공공 깃랩 저장소 pilddong/onnara-ai-document-distributor의 README(온나라 접수대기함의 제목·발송부서·문서구분만 읽어 범정부 AI 공통기반 RAG·생성형 AI로 담당자 추천, 문서 본문·첨부·수신문서 ID는 미전송, 기본값은 사람 최종 확인, 감사기록 90일·최대 1,000건) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>

@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 49호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>사람이 <b>화면을 계속 지켜봐야</b> 연기를 본다</h1>
-  <p class="sub">산불 CCTV 감시를 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 산불 발생을 보고하는 단계는 재난안전법이 정하지만, 그 앞의 상시 육안 감시와 연기·안개 구분, 카메라 조작 재확인은 규정 밖 실무입니다. 감시원의 집중력이 곧 탐지 성능이 되는 구조여서 밤과 교대 시간이 취약해집니다.</p>
+  <p class="sub">산불 CCTV 감시를 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 카메라 운영과 주민 신고 접수, 산불 발생 보고 단계는 법이 정하지만, 그 앞의 상시 육안 감시와 연기·안개 구분, 카메라 조작 재확인은 규정 밖 실무입니다. 감시원의 집중력이 곧 탐지 성능이 되는 구조여서 밤과 교대 시간이 취약해집니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>1</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>10</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>8</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 11 = 규정 1 + 추론 10 · 루프 1</span>
+    <span style="color:#65d7ad">전 단계 11 = 규정 3 + 추론 8 · 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -70,19 +70,19 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>관제센터 CCTV 화면 상시 주시</p><small>교대 육안 감시 — 실무</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="3"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>CCTV 영상 실시간 송출</p><small>실무</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="1"
+      <p>관제센터 CCTV 화면 상시 주시</p><small>교대 육안 감시 — 실무</small></div><div class="card k-statute" id="P02" data-gate="0" data-lane="3"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P02</b><em style="background:#1f8962">규정</em></div>
+      <p>CCTV 영상 실시간 송출</p><small>산림재난방지법 제71조(산림재난방지 영상정보처리기기의 설치ㆍ운영)</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P03</b><em style="background:#2456d6">추론</em></div>
       <p>연기·불꽃 여부 육안 판단</p><small>감시원 경험·집중력 의존 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
-      <p>안개·연무 등 오인 요소 구분</p><small>실무</small></div><div class="card k-inferred" id="P05" data-gate="1" data-lane="0"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P05</b><em style="background:#2456d6">추론</em></div>
-      <p>주민 신고 접수</p><small>실무</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
+      <p>안개·연무 등 오인 요소 구분</p><small>실무</small></div><div class="card k-statute" id="P05" data-gate="1" data-lane="0"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P05</b><em style="background:#1f8962">규정</em></div>
+      <p>주민 신고 접수</p><small>산림재난방지법 제31조(산불 신고)</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
       <p>카메라 방향·확대 조작 후 재확인</p><small>실무</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="2"
@@ -126,7 +126,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 재난 및 안전관리 기본법 제20조(재난상황의 보고). 산불이 확인된 뒤의 보고·전파는 법이 정하지만, 그전에 관제센터 화면을 몇 시간씩 눈으로 지켜보고 연기인지 안개인지 경험으로 가르며 카메라를 돌려 다시 확인하는 감시 과정 자체는 규정에 절차가 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 에너지경제(2024-03-13)·전자신문 보도(CCTV 영상의 연기·불꽃을 AI가 24시간 자동 감지·판독해 관제센터에 경보 전송, 동해안 10개소에서 경북·강원 등 30개소로 확대) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 재난 및 안전관리 기본법 제20조(재난상황의 보고), 산림재난방지법 제71조(산림재난방지 영상정보처리기기의 설치ㆍ운영), 산림재난방지법 제31조(산불 신고). 산불감시 CCTV의 설치·운영과 개별 기관 영상의 연계·통합 활용은 2026년 5월 시행된 산림재난방지법 제71조가, 발견자의 신고 의무와 접수 기관의 통보는 같은 법 제31조가 직접 정합니다. 산불이 확인된 뒤의 보고·전파도 법이 정하지만, 그전에 관제센터 화면을 몇 시간씩 눈으로 지켜보고 연기인지 안개인지 경험으로 가르며 카메라를 돌려 다시 확인하는 감시 과정 자체는 규정에 절차가 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 에너지경제(2024-03-13)·전자신문 보도(CCTV 영상의 연기·불꽃을 AI가 24시간 자동 감지·판독해 관제센터에 경보 전송, 동해안 10개소에서 경북·강원 등 30개소로 확대) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>

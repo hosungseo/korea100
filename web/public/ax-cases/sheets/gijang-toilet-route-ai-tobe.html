@@ -49,8 +49,8 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <h1>AI 노선 분석이 다섯 번째 레인으로 — <b>경험칙</b>을 운행 데이터로 대체</h1>
   <p class="sub">위치와 차량 운행자료를 AI로 분석해 점검 노선과 관리 인력을 다시 짰습니다. 현장에서 확인하고 청소하는 일은 그대로 사람의 몫이고, 어디를 어떤 순서로 돌지 정하는 판단이 데이터 기반으로 바뀐 구조입니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>1</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>5</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>3</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>3</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>2</b></span>
     <span><i style="background:#d99a5e"></i>대체 <b>2</b></span>
     
@@ -89,13 +89,13 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>담당 구역·노선 배정 수령</p><small>실무</small></div><div class="card k-changed" id="P05" data-gate="2" data-lane="1"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P05</b><em style="background:#b8890e">간소화</em></div>
-      <p>차량 이동·순회</p><small>재편성 노선으로 이동 중복 축소</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
-      <p>현장 도착·상태 확인</p><small>실무</small></div><div class="card k-inferred" id="P07" data-gate="3" data-lane="1"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P07</b><em style="background:#2456d6">추론</em></div>
-      <p>청소·소모품 보충</p><small>실무</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="1"
+      <p>차량 이동·순회</p><small>재편성 노선으로 이동 중복 축소</small></div><div class="card k-statute" id="P06" data-gate="2" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P06</b><em style="background:#1f8962">규정</em></div>
+      <p>현장 도착·상태 확인</p><small>공중화장실 등에 관한 법률 제12조(시설 점검)</small></div><div class="card k-statute" id="P07" data-gate="3" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P07</b><em style="background:#1f8962">규정</em></div>
+      <p>청소·소모품 보충</p><small>공중화장실 등에 관한 법률 제8조(공중화장실의 관리)</small></div><div class="card k-inferred" id="P08" data-gate="3" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P08</b><em style="background:#2456d6">추론</em></div>
       <p>고장·파손 발견 시 조치 요청</p><small>실무</small></div><div class="card k-statute" id="P09" data-gate="3" data-lane="0"
@@ -136,7 +136,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 민원 처리에 관한 법률 제9조(민원의 접수) — 시민 불편 신고 접수 부분. 공중화장실 순회 점검의 주기·동선·인력 배치는 법령이 아니라 기관 사규·내규(시설관리 지침)에 따르므로 조문 인용 없이 실무 흐름으로 재구성했습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(위치·차량 운행자료 AI 분석으로 점검 노선·관리 인력 재편성, 공단 사내 공모전 우수사례, 노하우북으로 전국 지방공기업 배포) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 민원 처리에 관한 법률 제9조(민원의 접수) — 시민 불편 신고 접수 부분, 공중화장실 등에 관한 법률 제8조(공중화장실의 관리)·제12조(시설 점검). 공중화장실을 관리인을 지정해 관리기준에 따라 관리해야 한다는 것과 연 2회 이상 정기점검·필요시 수시점검을 해야 한다는 것은 법률이 정하고, 공단은 기장군을 대신해 이 관리·점검을 수행합니다. 다만 110곳을 어느 순서로 돌지·몇 명을 어디에 둘지 하는 주기·동선·인력 배치는 법령이 아니라 기관 사규·내규(시설관리 지침)에 따르므로 파랑으로 두었습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(위치·차량 운행자료 AI 분석으로 점검 노선·관리 인력 재편성, 공단 사내 공모전 우수사례, 노하우북으로 전국 지방공기업 배포) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>

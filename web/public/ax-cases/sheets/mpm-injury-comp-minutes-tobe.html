@@ -49,8 +49,8 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <h1>녹취·요약·초안을 기계가 — <b>4~5시간 → 1시간 이내</b></h1>
   <p class="sub">음성회의록 시스템이 발언을 전사하고 쟁점별로 요약해 결정문 초안까지 만들어 줍니다. 이유를 무엇으로 적을지 판단하고 확정하는 일은 담당자에게 그대로 남습니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>5</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>4</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>3</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>3</b></span>
     <span><i style="background:#d99a5e"></i>대체 <b>3</b></span>
     
@@ -68,10 +68,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <span>─→ 절차 순서 &nbsp; ┄→ 반려·보완 루프</span>
 </div>
 <div class="lanehead"><div>단계 ↓ · 행위자 →</div><div>청구인</div><div>재해보상 심사 담당자</div><div>심의 위원</div><div>기록·결재 라인</div><div>AI 음성회의록·요약</div></div>
-<div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="0"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>재해보상 급여 청구·증빙 제출</p><small>청구서와 첨부 서류 제출 — 실무</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="1"
+<div id="pool" style="display:none"><div class="card k-statute" id="P01" data-gate="0" data-lane="0"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P01</b><em style="background:#1f8962">규정</em></div>
+      <p>재해보상 급여 청구·증빙 제출</p><small>공무원 재해보상법 제9조(급여의 청구 및 결정)</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
       <p>접수·사건 기록 편성</p><small>건별 서류철 구성 — 실무</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="1"
@@ -80,10 +80,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>쟁점 정리·요약자료 작성</p><small>심의 전 수기 정리 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="3"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
-      <p>심의 안건 배포</p><small>위원 사전 검토용 자료 송부 — 실무</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="2"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P05</b><em style="background:#2456d6">추론</em></div>
-      <p>심의회 논의</p><small>위원 발언 진행 — 실무</small></div><div class="card k-auto" id="A01" data-gate="2" data-lane="4"
+      <p>심의 안건 배포</p><small>위원 사전 검토용 자료 송부 — 실무</small></div><div class="card k-statute" id="P05" data-gate="2" data-lane="2"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P05</b><em style="background:#1f8962">규정</em></div>
+      <p>심의회 논의</p><small>공무원 재해보상법 제6조(공무원재해보상심의회)</small></div><div class="card k-auto" id="A01" data-gate="2" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A01</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>회의 음성 자동 전사</p><small>발언을 실시간으로 기록</small></div><div class="card k-replaced" id="P06" data-gate="2" data-lane="1"
@@ -139,7 +139,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 행정절차법 제23조(처분의 이유 제시)·제24조(처분의 방식), 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 결정문을 문서로 이유를 붙여 통지하라는 것은 법에 있지만, 심의회 발언을 받아적고 녹취를 되감아 쟁점별로 재배열하는 과정은 규정 밖 실무입니다. 도구 사실은 언론 보도(한국경제 2025-03-20, 심사 1건당 4~5시간 → 1시간 이내) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 공무원 재해보상법 제9조(급여의 청구 및 결정)·제6조(공무원재해보상심의회), 행정절차법 제23조(처분의 이유 제시)·제24조(처분의 방식), 행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재). <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 결정문을 문서로 이유를 붙여 통지하라는 것은 법에 있지만, 심의회 발언을 받아적고 녹취를 되감아 쟁점별로 재배열하는 과정은 규정 밖 실무입니다. 도구 사실은 언론 보도(한국경제 2025-03-20, 심사 1건당 4~5시간 → 1시간 이내) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>

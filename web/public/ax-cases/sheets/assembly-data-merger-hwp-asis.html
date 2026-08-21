@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 22호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>자료는 <b>파일 이름으로</b> 정리된다</h1>
-  <p class="sub">국정감사 요구자료 취합을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 제출 요구와 결재는 국회법·행정업무규정이 정하지만, 과별로 흩어진 HWP 파일을 이름만 보고 의원·정당·요구일·요구번호로 판독해 묶고 이어붙이는 일은 어디에도 적혀 있지 않습니다.</p>
+  <p class="sub">국정감사 요구자료 취합을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 제출 요구와 문서 접수·배부, 결재는 국회법·행정업무규정이 정하지만, 과별로 흩어진 HWP 파일을 이름만 보고 의원·정당·요구일·요구번호로 판독해 묶고 이어붙이는 일은 어디에도 적혀 있지 않습니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>10</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>4</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>8</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 12 = 규정 2 + 추론 10 · 보완 루프 1</span>
+    <span style="color:#65d7ad">전 단계 12 = 규정 4 + 추론 8 · 보완 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -70,13 +70,13 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-statute" id="P01" data-gate="0" data-lane="0"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P01</b><em style="background:#1f8962">규정</em></div>
-      <p>국회 요구자료 제출 요구</p><small>국회법 제128조(보고·서류 등의 제출 요구)</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="1"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>요구서 접수·요구번호 대장 기재</p><small>엑셀 대장에 손으로 적음 — 실무</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="1"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P03</b><em style="background:#2456d6">추론</em></div>
-      <p>소관 과 분류·배부</p><small>제목만 보고 소관을 판단 — 실무</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="2"
+      <p>국회 요구자료 제출 요구</p><small>국회법 제128조(보고·서류 등의 제출 요구)</small></div><div class="card k-statute" id="P02" data-gate="0" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P02</b><em style="background:#1f8962">규정</em></div>
+      <p>요구서 접수·요구번호 대장 기재</p><small>행정업무의 운영 및 혁신에 관한 규정 제18조(문서의 접수ㆍ처리)</small></div><div class="card k-statute" id="P03" data-gate="1" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P03</b><em style="background:#1f8962">규정</em></div>
+      <p>소관 과 분류·배부</p><small>행정업무의 운영 및 혁신에 관한 규정 제18조(문서의 접수ㆍ처리)</small></div><div class="card k-inferred" id="P04" data-gate="1" data-lane="2"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P04</b><em style="background:#2456d6">추론</em></div>
       <p>과별 답변 HWP 작성</p><small>과마다 개별 파일로 회신 — 실무</small></div><div class="card k-inferred" id="P05" data-gate="2" data-lane="1"
@@ -129,7 +129,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 국회법 제128조(보고·서류 등의 제출 요구), 「행정업무의 운영 및 혁신에 관한 규정」 제10조(문서의 결재). <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다 — 자료를 내라는 근거는 법에 있지만, 과별 HWP 파일을 파일명으로 판독해 의원별·날짜별로 묶고 질의순서에 맞춰 합본을 만드는 과정은 규정 밖 실무입니다. 도구 사실은 저장소 README(jinskysung/assembly-data-merger — Windows·한컴오피스 COM 자동화, 파일명 파싱, 질의순서 XLSX 정렬, 표지·목차·속지 생성) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 국회법 제128조(보고·서류 등의 제출 요구), 「행정업무의 운영 및 혁신에 관한 규정」 제18조(문서의 접수ㆍ처리)·제10조(문서의 결재). <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다 — 자료를 내라는 근거와 문서를 접수해 소관 과에 배부하라는 근거는 있지만, 과별 HWP 파일을 파일명으로 판독해 의원별·날짜별로 묶고 질의순서에 맞춰 합본을 만드는 과정은 규정 밖 실무입니다. 도구 사실은 저장소 README(jinskysung/assembly-data-merger — Windows·한컴오피스 COM 자동화, 파일명 파싱, 질의순서 XLSX 정렬, 표지·목차·속지 생성) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>

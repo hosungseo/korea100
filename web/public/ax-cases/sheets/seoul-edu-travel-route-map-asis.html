@@ -46,15 +46,15 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <header>
   <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 26호 · AS-IS</span><small>기준일 2026-08-21</small></div>
   <h1>근무지 안인지 밖인지, <b>매번 다시 검색한다</b></h1>
-  <p class="sub">출장 여비 판단을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 출장 명령과 정산 결재는 규정이 정하지만, 출발지가 학교·소속기관이라 지도 검색을 매번 처음부터 다시 해야 하고, 근무지 내외 구분은 규정 해석과 관행이 섞여 사람마다 답이 갈립니다.</p>
+  <p class="sub">출장 여비 판단을 규정(초록)과 추론(파랑)으로 나눠 그렸습니다. 출장 명령과 결과보고·정산, 여비의 종류와 근무지 내 출장의 범위(같은 시·군 안 또는 12킬로미터 미만)까지는 규정이 정합니다. 그런데 그 기준에 넣을 실제 경로와 거리를 확인하는 방법은 규정 밖이어서, 출발지가 학교·소속기관이면 지도 검색을 매번 처음부터 다시 해야 합니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>10</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>5</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>7</b></span>
     
     
     
     
-    <span style="color:#65d7ad">전 단계 12 = 규정 2 + 추론 10 · 반려 루프 1</span>
+    <span style="color:#65d7ad">전 단계 12 = 규정 5 + 추론 7 · 반려 루프 1</span>
   </p>
 </header>
 <div class="legend">
@@ -70,7 +70,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 <div id="pool" style="display:none"><div class="card k-statute" id="P01" data-gate="0" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
       <div class="chead"><b>P01</b><em style="background:#1f8962">규정</em></div>
-      <p>출장 명령</p><small>국가공무원 복무규정 제6조(출장 공무원)</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="0"
+      <p>출장 명령</p><small>국가공무원 복무규정 제6조(출장공무원)</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
       <p>출장지 주소·기관명 확인</p><small>실무</small></div><div class="card k-inferred" id="P03" data-gate="1" data-lane="3"
@@ -82,22 +82,22 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p>최단시간·최단거리·최저비용 경로 비교</p><small>조건을 바꿔 여러 번 검색해 손으로 비교 — 실무</small></div><div class="card k-inferred" id="P05" data-gate="1" data-lane="0"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P05</b><em style="background:#2456d6">추론</em></div>
-      <p>왕복거리·예상 이동시간 메모</p><small>실무</small></div><div class="card k-inferred" id="P06" data-gate="2" data-lane="1"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P06</b><em style="background:#2456d6">추론</em></div>
-      <p>근무지 내 출장인지 근무지 외 출장인지 판단</p><small>규정 해석과 관행이 섞인 판단 — 실무</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="1"
+      <p>왕복거리·예상 이동시간 메모</p><small>실무</small></div><div class="card k-statute" id="P06" data-gate="2" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P06</b><em style="background:#1f8962">규정</em></div>
+      <p>근무지 내 출장인지 근무지 외 출장인지 판단</p><small>공무원 여비 규정 제18조(근무지 내 국내 출장 시의 여비)</small></div><div class="card k-inferred" id="P07" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P07</b><em style="background:#2456d6">추론</em></div>
       <p>신분·적용 여비규정 확인</p><small>교육공무원·지방공무원 등 신분에 따라 기준이 갈림 — 실무</small></div><div class="card k-inferred" id="P08" data-gate="2" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P08</b><em style="background:#2456d6">추론</em></div>
-      <p>선배·담당자에게 사례 문의</p><small>판단이 갈리면 물어봄 — 실무</small></div><div class="card k-inferred" id="P09" data-gate="3" data-lane="1"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P09</b><em style="background:#2456d6">추론</em></div>
-      <p>운임·일비·식비 산정</p><small>실무</small></div><div class="card k-inferred" id="P10" data-gate="4" data-lane="0"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P10</b><em style="background:#2456d6">추론</em></div>
-      <p>출장 결과보고·정산 청구 작성</p><small>실무</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="1"
+      <p>선배·담당자에게 사례 문의</p><small>판단이 갈리면 물어봄 — 실무</small></div><div class="card k-statute" id="P09" data-gate="3" data-lane="1"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P09</b><em style="background:#1f8962">규정</em></div>
+      <p>운임·일비·식비 산정</p><small>공무원 여비 규정 제9조(운임의 구분)·제16조(일비ㆍ숙박비ㆍ식비의 지급)</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="0"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P10</b><em style="background:#1f8962">규정</em></div>
+      <p>출장 결과보고·정산 청구 작성</p><small>공무원 여비 규정 제8조의2(여비의 결제와 정산 등)</small></div><div class="card k-inferred" id="P11" data-gate="4" data-lane="1"
       style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
       <div class="chead"><b>P11</b><em style="background:#2456d6">추론</em></div>
       <p>청구 내역 검토·반려</p><small>거리·구분이 안 맞으면 반려 — 실무</small></div><div class="card k-statute" id="P12" data-gate="4" data-lane="2"
@@ -129,7 +129,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 국가공무원 복무규정 제6조(출장 공무원), 「행정업무의 운영 및 혁신에 관한 규정」 제10조(문서의 결재). <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다 — 출장을 명하고 정산을 결재한다는 골격은 규정에 있지만, 학교·소속기관에서 출장지까지 실제로 어느 경로로 얼마나 가는지, 그래서 근무지 내 출장인지 근무지 외 출장인지를 가르는 판단은 담당자가 지도를 몇 번씩 검색해 스스로 내려 왔습니다. 도구 사실은 저장소 README(h19h19/seoul-education-travel-map — 로그인 없는 공개 웹 MVP, 서울교육청 소속기관·국공사립 학교·유치원 출발지 지원, 최단시간·최단거리·최저비용 경로 비교, 서울 행정경계와 12km 지도 지원영역 표시, 기관 위치와 사용자의 신분·적용 여비규정을 분리) 기반이며, 조문 번호가 특정되지 않는 여비 기준 판단은 파란 칸으로 두었습니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 국가공무원 복무규정 제6조(출장공무원), 공무원 여비 규정 제18조(근무지 내 국내 출장 시의 여비), 공무원 여비 규정 제9조(운임의 구분), 공무원 여비 규정 제16조(일비ㆍ숙박비ㆍ식비의 지급), 공무원 여비 규정 제8조의2(여비의 결제와 정산 등), 「행정업무의 운영 및 혁신에 관한 규정」 제10조(문서의 결재). 근무지 내 국내 출장의 범위(같은 시·군 안 또는 여행거리 12킬로미터 미만)는 공무원 여비 규정 제18조제2항이 직접 정하고 있어 판정 기준 자체는 초록입니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다 — 기준은 규정에 있어도, 학교·소속기관에서 출장지까지 실제로 어느 경로로 얼마나 가는지를 확인하는 방법은 어디에도 정해져 있지 않아 담당자가 지도를 몇 번씩 검색해 스스로 판단해 왔습니다. 도구 사실은 저장소 README(h19h19/seoul-education-travel-map — 로그인 없는 공개 웹 MVP, 서울교육청 소속기관·국공사립 학교·유치원 출발지 지원, 최단시간·최단거리·최저비용 경로 비교, 서울 행정경계와 12km 지도 지원영역 표시, 기관 위치와 사용자의 신분·적용 여비규정을 분리) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>

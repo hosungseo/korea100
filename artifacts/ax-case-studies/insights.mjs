@@ -110,7 +110,7 @@ const GROUP = {
   "13-sweep-central.md": "중앙부처", "13-sweep-metro.md": "광역", "13-sweep-basic.md": "기초",
   "13-sweep-special.md": "특수직역", "13-sweep-public-org.md": "공공기관", "13-sweep-awards.md": "사례집",
   "13-sweep-community.md": "자체개발", "14-master-pool.md": "깃랩",
-  "11-axboard-internal-work-shortlist.md": "깃랩", "10-pax-internal-work-shortlist.md": "깃랩",
+  "11-axboard-internal-work-shortlist.md": "깃랩", "10-pax-internal-work-shortlist.md": "깃랩", "정밀 9건": "정밀 사례",
 };
 const g = {};
 for (const c of cases) {

@@ -49,8 +49,8 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <h1>딥블루아이가 <b>선종·조업상태·위치를 먼저 골라낸다</b></h1>
   <p class="sub">자체 개발한 AI 모델이 채증영상에서 어선의 선종과 조업 상태, 위치를 자동 분석해 육안 판별을 보조합니다. 위법 여부의 판단과 검문검색·나포는 사람과 법이 그대로 맡습니다. 2025년 8월 전국 항공대에 코드가 배포돼 검증·매뉴얼화를 거치는 초기 단계이고, 인명구조·오염물질 식별로 확장이 예고돼 있습니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>3</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>4</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>1</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>1</b></span>
     <span><i style="background:#d99a5e"></i>대체 <b>3</b></span>
     
@@ -68,13 +68,13 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <span>─→ 절차 순서 &nbsp; ┄→ 반려·보완 루프</span>
 </div>
 <div class="lanehead"><div>단계 ↓ · 행위자 →</div><div>항공대 조종·촬영</div><div>채증영상 판독 요원</div><div>해양경찰서 수사·단속</div><div>함정·현장 단속팀</div><div>딥블루아이(AI 영상분석)</div></div>
-<div id="pool" style="display:none"><div class="card k-inferred" id="P01" data-gate="0" data-lane="0"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P01</b><em style="background:#2456d6">추론</em></div>
-      <p>해역 초계비행</p><small>시속 350km 비행 — 실무</small></div><div class="card k-inferred" id="P02" data-gate="1" data-lane="0"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>사진·영상 채증</p><small>매 비행 사진 500장·영상 50건 이상 — 실무</small></div><div class="card k-auto" id="A01" data-gate="2" data-lane="4"
+<div id="pool" style="display:none"><div class="card k-statute" id="P01" data-gate="0" data-lane="0"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P01</b><em style="background:#1f8962">규정</em></div>
+      <p>해역 초계비행</p><small>해양경비법 제7조(해양경비 활동의 범위) — 시속 350km 비행</small></div><div class="card k-statute" id="P02" data-gate="1" data-lane="0"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P02</b><em style="background:#1f8962">규정</em></div>
+      <p>사진·영상 채증</p><small>해양경비법 제7조의2(해양경비정보의 수집 등) — 매 비행 사진 500장·영상 50건 이상</small></div><div class="card k-auto" id="A01" data-gate="2" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A01</b><em style="background:#6b3fc4">AI 자동</em></div>
       <p>채증영상 자동 1차 분석</p><small>어선의 선종·조업상태·위치를 자동 분석</small></div><div class="card k-changed" id="P03" data-gate="2" data-lane="1"
@@ -127,7 +127,7 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 해양경비법 제12조(해상검문검색), 해양경비법 제13조(추적·나포). <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 해양경찰청 보도자료(2025-08-05 — 매 비행 사진 500장·영상 50건 이상, 자체 개발 AI 모델로 선종·조업상태·위치 분석, 전국 항공대 코드 배포 후 검증·매뉴얼화 단계) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 완료): 해양경비법 제7조(해양경비 활동의 범위), 해양경비법 제7조의2(해양경비정보의 수집 등), 해양경비법 제12조(해상검문검색), 해양경비법 제13조(추적·나포). 초계비행과 채증영상의 수집·관리·활용은 해양경비법이 정한 해양경비 활동과 해양경비정보 수집에 해당합니다. 다만 모아 온 영상을 어떤 순서로 훑고 선종·조업 상태를 어떻게 가려낼지는 규정에 절차가 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 해양경찰청 보도자료(2025-08-05 — 매 비행 사진 500장·영상 50건 이상, 자체 개발 AI 모델로 선종·조업상태·위치 분석, 전국 항공대 코드 배포 후 검증·매뉴얼화 단계) 기반입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
