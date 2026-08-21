@@ -5242,3 +5242,223 @@ body:has(.og-card-page) > main {
   outline: 2px solid #0f9f72;
   outline-offset: 2px;
 }
+
+/* AI 행정 전후 비교 케이스 스터디 (/ax-cases/) */
+.ax-cases-page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.ax-cases-hero p {
+  color: var(--color-accent-dark);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+
+.ax-cases-hero h1 {
+  font-size: clamp(1.6rem, 3.4vw, 2.2rem);
+  line-height: 1.25;
+  color: var(--color-ink);
+  margin-bottom: 14px;
+  word-break: keep-all;
+}
+
+.ax-cases-hero span {
+  display: block;
+  color: var(--color-muted);
+  line-height: 1.65;
+  max-width: 760px;
+  word-break: keep-all;
+}
+
+.ax-cases-method {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 26px 28px;
+}
+
+.ax-cases-method h2,
+.ax-cases-group h2,
+.ax-cases-note h2 {
+  font-size: 1.15rem;
+  color: var(--color-ink);
+  margin-bottom: 12px;
+}
+
+.ax-cases-method ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.ax-cases-method li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  color: var(--color-muted);
+  line-height: 1.55;
+  word-break: keep-all;
+}
+
+.ax-cases-method li strong {
+  color: var(--color-text);
+}
+
+.ax-cases-method .swatch {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  margin-top: 3px;
+  border-radius: 4px;
+  border: 1.6px solid;
+}
+
+.sw-statute { background: #eef8f2; border-color: #1f8962; }
+.sw-inferred { background: #e9f0ff; border-color: #2456d6; }
+.sw-auto { background: #f3eefc; border-color: #7c56c9; }
+.sw-replaced { background: #fdf6ee; border-color: #e5b58a; }
+.sw-removed { background: #fdf0f0; border-color: #e0a3a3; }
+
+.ax-cases-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.ax-cases-stats div {
+  background: var(--color-surface-tint);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+
+.ax-cases-stats strong {
+  display: block;
+  font-size: 1.5rem;
+  color: var(--color-accent-dark);
+  font-variant-numeric: tabular-nums;
+}
+
+.ax-cases-stats span {
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  word-break: keep-all;
+}
+
+.ax-cases-group > p {
+  color: var(--color-muted);
+  line-height: 1.65;
+  max-width: 760px;
+  margin-bottom: 22px;
+  word-break: keep-all;
+}
+
+.ax-case {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 24px 26px;
+  margin-bottom: 22px;
+}
+
+.ax-case header {
+  margin-bottom: 14px;
+}
+
+.ax-case-no {
+  display: inline-block;
+  background: var(--color-accent-soft);
+  color: var(--color-accent-dark);
+  font-weight: 800;
+  font-size: 0.78rem;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+
+.ax-case h3 {
+  font-size: 1.2rem;
+  color: var(--color-ink);
+  word-break: keep-all;
+}
+
+.ax-case h3 small {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-muted);
+  margin-left: 8px;
+}
+
+.ax-case header p {
+  color: var(--color-faint);
+  font-size: 0.88rem;
+  margin-top: 4px;
+}
+
+.ax-case-sheets {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.ax-case-sheets figure {
+  margin: 0;
+}
+
+.ax-case-sheets img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+
+.ax-case-sheets figcaption {
+  margin-top: 8px;
+  font-size: 0.82rem;
+  color: var(--color-muted);
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+.ax-case-sheets figcaption strong {
+  color: var(--color-accent-dark);
+  margin-right: 6px;
+}
+
+.ax-case-point {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--color-border);
+  color: var(--color-text);
+  line-height: 1.6;
+  word-break: keep-all;
+}
+
+.ax-cases-note {
+  background: var(--color-warning-soft);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 24px 26px;
+}
+
+.ax-cases-note p {
+  color: var(--color-muted);
+  line-height: 1.65;
+  word-break: keep-all;
+}
+
+@media (max-width: 720px) {
+  .ax-case-sheets {
+    grid-template-columns: 1fr;
+  }
+}
