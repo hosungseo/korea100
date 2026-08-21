@@ -64,6 +64,7 @@ async function drfSearch(name) {
   const hit = cacheGet(key);
   if (hit !== null) return hit ? JSON.parse(hit) : null;
   const targets = ["law", "ordin", "admrul"];
+  let sawValidXml = false; // 유효 응답을 한 번이라도 받았는지 — 실패를 '없음'으로 캐시하지 않기 위함
   for (const target of targets) {
     const url = `${DRF}/lawSearch.do?OC=${OC}&target=${target}&type=XML&display=30&query=${encodeURIComponent(name)}`;
     let xml = "";
@@ -72,7 +73,9 @@ async function drfSearch(name) {
       xml = await r.text();
     } catch { continue; }
     if (isMaintenance(xml)) { MAINTENANCE = true; return null; }
-    const recs = xml.match(/<(law|ordin|admrul)>[\s\S]*?<\/\1>/g) || [];
+    if (!/<resultMsg>\s*success/i.test(xml)) { await sleep(300); continue; }
+    sawValidXml = true;
+    const recs = xml.match(/<(law|ordin|admrul)[^>]*>[\s\S]*?<\/\1>/g) || [];
     for (const rec of recs) {
       const nm =
         /<법령명한글><!\[CDATA\[(.*?)\]\]>/.exec(rec) ||
@@ -83,7 +86,9 @@ async function drfSearch(name) {
         /<자치법규일련번호>(\d+)/.exec(rec) ||
         /<행정규칙일련번호>(\d+)/.exec(rec);
       if (!nm || !mst) continue;
-      if (nm[1].replace(/\s/g, "") === name.replace(/\s/g, "")) {
+      // 가운뎃점 표기(· ㆍ ･)와 공백 차이를 흡수해 비교한다
+      const norm = (s) => s.replace(/[·ㆍ･‧]/g, "·").replace(/\s/g, "");
+      if (norm(nm[1]) === norm(name)) {
         const val = { target, mst: mst[1], name: nm[1] };
         cacheSet(key, JSON.stringify(val));
         await sleep(120);
@@ -92,7 +97,8 @@ async function drfSearch(name) {
     }
     await sleep(120);
   }
-  cacheSet(key, "");
+  // 유효 응답을 한 번도 못 받았으면 '없음'으로 캐시하지 않는다 (일시 장애를 오탐으로 굳히지 않기 위함)
+  if (sawValidXml) cacheSet(key, "");
   return null;
 }
 
