@@ -10,6 +10,8 @@ const VIEWS: { key: MegaViewKey; href: string; label: string; hint: string }[] =
   { key: "table", href: "table/", label: "전체표", hint: "스프레드시트" },
 ];
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export default function MegaViewNav({
   projectId,
   active,
@@ -31,6 +33,11 @@ export default function MegaViewNav({
           <small>{view.hint}</small>
         </Link>
       ))}
+      {/* 같은 데이터를 3D로 보는 관제 화면. public/ 정적 페이지라 Next 라우터 밖이다 */}
+      <a href={`${BASE_PATH}/warroom/?p=${projectId}`}>
+        <strong>종합상황판</strong>
+        <small>3D 관제·일정</small>
+      </a>
     </nav>
   );
 }
