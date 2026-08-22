@@ -340,6 +340,29 @@ body.route-closed #route-body { display: none; }
 #route .note { margin-top: 9px; font-size: 8.5px; color: var(--muted); line-height: 1.6; }
 @media (max-width: 900px) { #route { display: none; } }
 
+/* ── gazette precedent ── */
+#d-gaz {
+  margin-top: 12px; padding-top: 10px; display: none;
+  border-top: 1px dashed rgba(95,123,144,0.35);
+  font-family: var(--mono); font-size: 10px; color: var(--muted); line-height: 1.65;
+}
+#d-gaz .hd { color: var(--green); letter-spacing: 0.08em; }
+#d-gaz .ex { margin-top: 5px; color: #93a9bb; word-break: keep-all; }
+.gaz-list { display: grid; gap: 8px; }
+.gaz-item {
+  padding: 9px 11px; background: rgba(9,18,28,0.8);
+  border: 1px solid rgba(56,198,244,0.16); border-left: 3px solid var(--green);
+}
+.gaz-item .m1 { font-family: var(--mono); font-size: 9.5px; color: var(--muted); letter-spacing: 0.06em; }
+.gaz-item .m2 { margin-top: 5px; font-size: 12px; font-weight: 600; line-height: 1.45; word-break: keep-all; }
+.gaz-item a { color: var(--cyan); text-decoration: none; }
+.gaz-item a:hover { color: var(--amber); }
+.gaz-item.direct { border-left-color: var(--amber); background: rgba(255,176,32,0.06); }
+#daily h3 {
+  margin: 22px 0 10px; font-size: 15px; font-weight: 800; letter-spacing: -0.01em;
+}
+#daily h3 small { font-family: var(--mono); font-size: 10px; color: var(--muted); font-weight: 400; margin-left: 8px; letter-spacing: 0.05em; }
+
 /* ── daily board — per-ministry frontier ±2 ── */
 #daily {
   position: fixed; inset: 0; z-index: 16; display: none; overflow-y: auto;
@@ -450,6 +473,7 @@ body.daily-open #daily { display: block; }
   <div class="d-row"><span>연결 절차 PROCEDURES</span><b id="d-procs"></b></div>
   <span class="d-st" id="d-st"></span>
   <div id="d-eta" style="margin-top:12px;font-family:var(--mono);font-size:10.5px;color:#c9a96a;line-height:1.6;display:none"></div>
+  <div id="d-gaz"></div>
   <a class="d-link" id="d-link" href="../mega-projects/gwangju-semiconductor-cluster/unfold/">→ 전체 절차 펼쳐보기</a>
 </div>
 
@@ -490,6 +514,7 @@ body.daily-open #daily { display: block; }
     <button id="daily-close">✕ 닫기 ESC</button>
   </div>
   <div id="daily-rows"></div>
+  <div id="daily-gaz"></div>
 </div>
 
 <div id="tour-scroller"></div>
@@ -972,6 +997,33 @@ loadDaily();
 document.getElementById("daily-btn").addEventListener("click", () => setDaily(true));
 document.getElementById("daily-close").addEventListener("click", () => setDaily(false));
 
+/* ══ gazette precedent watch — the same statutes executing elsewhere now ══ */
+const gazData = await fetchJson([PBASE + "gazette.json", "./gazette.json"]);
+const fmtDay = (d) => `${d.slice(4, 6)}-${d.slice(6, 8)}`;
+if (gazData) {
+  const wrap = document.getElementById("daily-gaz");
+  const card = (n, cls = "") => `<div class="gaz-item ${cls}">
+      <div class="m1">${fmtDay(n.day)} · ${n.inst || "—"} · ${n.law || "근거 미표기"}</div>
+      <div class="m2">${n.pdf ? `<a href="${n.pdf}" target="_blank" rel="noopener">${n.title}</a>` : n.title}</div>
+    </div>`;
+  let html = `<h3>📡 관보 감시 <small>최근 ${gazData.windowDays}일 · 총 ${gazData.totalNotices.toLocaleString()}건 스캔 · 스캔일 ${gazData.scannedAt}</small></h3>`;
+  html += `<div style="font-family:var(--mono);font-size:10.5px;color:var(--muted);line-height:1.7;margin-bottom:12px">
+      이 프로젝트 마일스톤 <b style="color:var(--text)">${gazData.milestonesCovered}개</b>의 근거 법령으로
+      전국에서 <b style="color:var(--green)">${gazData.precedentTotal}건</b>이 집행됐습니다 —
+      절차는 대기 중이어도 제도는 지금 작동하고 있습니다.<br>
+      상위 법령: ${gazData.topLaws.slice(0, 5).map(l => `${l.law} ${l.n}`).join(" · ")}
+    </div>`;
+  if (gazData.direct.length) {
+    html += `<h3>⚠ 이 사업 직접 게재 <small>상태 갱신 후보 — 확인 필요</small></h3>
+      <div class="gaz-list">${gazData.direct.slice(0, 8).map(n => card(n, "direct")).join("")}</div>`;
+  }
+  if (gazData.peer.length) {
+    html += `<h3>동종 사업 <small>다른 지역에서 진행 중인 같은 종류의 절차</small></h3>
+      <div class="gaz-list">${gazData.peer.slice(0, 8).map(n => card(n)).join("")}</div>`;
+  }
+  wrap.innerHTML = html;
+}
+
 /* ══ route & scenario — CPM critical path drawn onto the wall ══ */
 const routeData = await fetchJson([PBASE + "path.json", "./path.json"]);
 const RULE_LABELS = {
@@ -1117,6 +1169,17 @@ function showDetail(gi, m) {
   } else {
     etaEl.style.display = "none";
   }
+  const gazEl = document.getElementById("d-gaz");
+  const g = gazData?.milestones?.[m.id];
+  if (g) {
+    const ex = g.recent[0];
+    gazEl.innerHTML = `<div class="hd">📡 관보 ${gazData.windowDays}일 · 동일 법령 집행 ${g.count}건</div>`
+      + `<div class="ex">${g.laws.slice(0, 2).map(l => `${l.law} ${l.n}`).join(" · ")}</div>`
+      + (ex ? `<div class="ex">최근: ${fmtDay(ex.day)} ${ex.title}</div>` : "");
+    gazEl.style.display = "block";
+  } else {
+    gazEl.style.display = "none";
+  }
   detail.classList.remove("show");
   void detail.offsetWidth;   // restart stagger animation
   detail.classList.add("show");
@@ -1162,6 +1225,16 @@ const brief = document.getElementById("brief");
   addChip("ready",
     `준비 <b class="n" style="color:${ST.ready.css}">${(byStatus.ready || []).length}건</b> · ${sum("ready")}절차`);
   brief.title = "클릭하면 해당 마일스톤으로 이동합니다 (반복 클릭 = 다음 건)";
+  if (gazData) {
+    const b = document.createElement("button");
+    b.className = "chip";
+    b.innerHTML = `<i style="background:${ST.completed.css};box-shadow:0 0 8px ${ST.completed.css}"></i>`
+      + `관보 <b class="n" style="color:${ST.completed.css}">${gazData.precedentTotal}건</b> 선례`
+      + (gazData.direct.length ? ` · <b class="n" style="color:${ST.active.css}">직접 ${gazData.direct.length}</b>` : "");
+    b.title = `최근 ${gazData.windowDays}일 관보에서 이 프로젝트 마일스톤과 같은 법령으로 집행된 건 (클릭 = 관제 보드)`;
+    b.addEventListener("click", () => setDaily(true));
+    brief.appendChild(b);
+  }
 }
 
 /* ══ boot sequence ══ */
