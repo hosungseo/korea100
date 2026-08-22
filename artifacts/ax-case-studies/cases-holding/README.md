@@ -4,4 +4,4 @@
 
 - `violation-building-ledger.json` — 저장소가 초기 템플릿 상태여서 프로젝트명 외에 기능 근거가 없음. TO-BE의 AI 기능은 창작에 해당해 제외.
 - `rra-work-macro.json` — 화면·입력 기록 재현 매크로로, 근거 자료에서 AI 요소가 확인되지 않음. AI 사례로 분류하기 어려워 제외.
-- `gwangju-ai-press-release.json` — '광주광역시 AI 대변인'으로 정리했으나, 근거 URL(kyeonggi.com/article/20251106580477)을 직접 확인한 결과 **경기도 광주시의 GeniusGov·RPA 기사**였음. 기관·서비스가 모두 불일치해 제외. 광주광역시 AI 대변인의 1차 출처를 확보하면 복귀 대상.
+- `gwangju-ai-press-release.json` — '광주광역시 AI 대변인'으로 정리했으나, 근거 URL(kyeonggi.com/article/20251106580477)을 직접 확인한 결과 **경기도 광주시의 GeniusGov·RPA 기사**였음. 기관·서비스가 모두 불일치해 제외. **2026-08-22 사용자 결정으로 AI 대변인 복귀 추적 포기**(1차 출처 재검색·복귀 후보에서 내림). 파일은 감사 이력용으로만 보관.
