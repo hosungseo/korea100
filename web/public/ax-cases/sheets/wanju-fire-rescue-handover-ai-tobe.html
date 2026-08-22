@@ -45,17 +45,17 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 .note b { color:#45635a; }
 </style></head><body>
 <header>
-  <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 26호 · AI 적용</span><small>기준일 2026-08-21</small></div>
-  <h1>출발지를 고르면 <b>경로 셋과 판정이 한 화면에</b></h1>
-  <p class="sub">서울교육청 소속기관과 국·공·사립 학교·유치원을 출발지로 고르면 최단시간·최단거리·최저비용 경로를 함께 비교하고, 일반적인 실제 경로의 왕복거리와 출장시간을 기준으로 근무지 내외를 판정합니다. 기관 위치와 사용자의 신분·적용 여비규정을 분리해 두어, 같은 학교라도 신분이 다르면 다른 기준이 적용됩니다.</p>
+  <div class="kick"><span>대한민국 제도 지도 / AI 행정 전후 비교 141호 · AI 적용</span><small>기준일 2026-08-21</small></div>
+  <h1>업무를 데이터로 남기고 <b>AI가 요약·검색</b>합니다</h1>
+  <p class="sub">구조 업무 기록을 공통 형식으로 쌓아 두고, 생성형 AI가 교대 인수 요약과 미결·유사사례 검색을 먼저 합니다. 사람은 요약을 확인하고 출동 판단을 하며, 결재와 공식 인계 기록은 그대로 남습니다. 출처에 없는 절감 시간·건수는 적지 않았습니다.</p>
   <p class="counts">
-    <span><i style="background:#1f8962"></i>규정 근거 <b>4</b></span>
-    <span><i style="background:#2456d6"></i>추론(암묵지) <b>1</b></span>
+    <span><i style="background:#1f8962"></i>규정 근거 <b>2</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>0</b></span>
     <span><i style="background:#6b3fc4"></i>AI 자동 <b>3</b></span>
-    <span><i style="background:#d99a5e"></i>대체 <b>4</b></span>
+    <span><i style="background:#d99a5e"></i>대체 <b>5</b></span>
     
-    <span><i style="background:#d9a821"></i>간소화 <b>3</b></span>
-    <span style="color:#65d7ad">대체 4 · 간소화 3 · 소멸 0 · 자동 3 — 사람 단계 12 → 8</span>
+    <span><i style="background:#d9a821"></i>간소화 <b>4</b></span>
+    <span style="color:#65d7ad">대체 5 · 간소화 4 · 소멸 0 · 자동 3 — 사람 단계 11 → 6</span>
   </p>
 </header>
 <div class="legend">
@@ -67,89 +67,86 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
   <span><i style="background:#fdf8e3;border-color:#d9a821"></i>간소화(노랑) — 남되 부담 축소</span>
   <span>─→ 절차 순서 &nbsp; ┄→ 반려·보완 루프</span>
 </div>
-<div class="lanehead"><div>단계 ↓ · 행위자 →</div><div>출장자</div><div>여비 담당자</div><div>부서장</div><div>지도·경로 자료</div><div>출장 경로·여비 판단 지도</div></div>
-<div id="pool" style="display:none"><div class="card k-statute" id="P01" data-gate="0" data-lane="2"
-      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
-      <div class="chead"><b>P01</b><em style="background:#1f8962">규정</em></div>
-      <p>출장 명령</p><small>국가공무원 복무규정 제6조(출장공무원) 제1항 — 상사의 명을 받아 출장</small></div><div class="card k-inferred" id="P02" data-gate="0" data-lane="0"
-      style="background:#e9f0ff;border-color:#2456d6;color:#1c3d8f">
-      <div class="chead"><b>P02</b><em style="background:#2456d6">추론</em></div>
-      <p>출장지 주소·기관명 확인</p><small>출장 통보서의 기관명으로 실제 주소를 찾아 확인 — 실무</small></div><div class="card k-auto" id="A01" data-gate="1" data-lane="4"
+<div class="lanehead"><div>단계 ↓ · 행위자 →</div><div>당번 구조대원</div><div>교대 인수 구조대원</div><div>구조대장·팀장</div><div>근무일지·공유PC</div><div>생성형 AI 업무관리</div></div>
+<div id="pool" style="display:none"><div class="card k-changed" id="P01" data-gate="0" data-lane="0"
+      style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
+      <div class="chead"><b>P01</b><em style="background:#b8890e">간소화</em></div>
+      <p>교대 시 핵심 구두 확인</p><small>AI 요약 확인 후 빠진 말만 보완</small></div><div class="card k-replaced" id="P02" data-gate="0" data-lane="0"
+      style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
+      <div class="chead"><b>P02</b><em style="background:#d99a5e">A01로 대체</em></div>
+      <p>개인 수첩·쪽지 작성</p><small>공통 업무기록 등록으로 대체</small></div><div class="card k-auto" id="A01" data-gate="0" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A01</b><em style="background:#6b3fc4">AI 자동</em></div>
-      <p>소속기관 출발지 선택·복수 경로 산출</p><small>서울교육청 소속기관·국공사립 학교·유치원을 출발지로 지원, 최단시간·최단거리·최저비용 동시 비교</small></div><div class="card k-replaced" id="P03" data-gate="1" data-lane="3"
-      style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
-      <div class="chead"><b>P03</b><em style="background:#d99a5e">A01로 대체</em></div>
-      <p>포털 지도에서 경로 검색</p><small>출발지 선택·복수 경로 산출로 대체</small></div><div class="card k-replaced" id="P04" data-gate="1" data-lane="0"
-      style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
-      <div class="chead"><b>P04</b><em style="background:#d99a5e">A01로 대체</em></div>
-      <p>최단시간·최단거리·최저비용 경로 비교</p><small>복수 경로 동시 비교로 대체</small></div><div class="card k-auto" id="A02" data-gate="1" data-lane="4"
+      <p>업무기록 데이터 등록·누적</p><small>교대·출동·미결을 공통 형식으로 저장</small></div><div class="card k-statute" id="P03" data-gate="0" data-lane="2"
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
+      <div class="chead"><b>P03</b><em style="background:#1f8962">규정</em></div>
+      <p>사무 인계·인수 기록</p><small>행정업무의 운영 및 혁신에 관한 규정 제61조(사무의 인계ㆍ인수) 제1항 — 업무관리시스템·전자문서시스템을 이용한 인계·인수</small></div><div class="card k-auto" id="A02" data-gate="1" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A02</b><em style="background:#6b3fc4">AI 자동</em></div>
-      <p>이동시간·거리·비용 자동 표시</p><small>서울 행정경계와 12km 지도 지원영역을 함께 표시</small></div><div class="card k-replaced" id="P05" data-gate="1" data-lane="0"
+      <p>교대 인수 요약 생성</p><small>생성형 AI가 직전 근무 기록을 인수 요점으로 정리</small></div><div class="card k-replaced" id="P04" data-gate="1" data-lane="1"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
-      <div class="chead"><b>P05</b><em style="background:#d99a5e">A02로 대체</em></div>
-      <p>왕복거리·예상 이동시간 메모</p><small>자동 표시로 대체</small></div><div class="card k-auto" id="A03" data-gate="2" data-lane="4"
+      <div class="chead"><b>P04</b><em style="background:#d99a5e">A02로 대체</em></div>
+      <p>진행 중 구조·협조 건 파악</p><small>인수 요약으로 대체</small></div><div class="card k-changed" id="P05" data-gate="1" data-lane="1"
+      style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
+      <div class="chead"><b>P05</b><em style="background:#b8890e">간소화</em></div>
+      <p>장비·인원 특이사항 확인</p><small>요약에 올라온 특이사항을 확인·보완</small></div><div class="card k-auto" id="A03" data-gate="2" data-lane="4"
       style="background:#f3eefc;border-color:#7c56c9;color:#5230a0">
       <div class="chead"><b>A03</b><em style="background:#6b3fc4">AI 자동</em></div>
-      <p>근무지 내외 판정 표시</p><small>일반적인 실제 경로의 왕복거리와 출장시간을 기준으로 판정</small></div><div class="card k-replaced" id="P06" data-gate="2" data-lane="1"
+      <p>미결·유사 구조 기록 검색</p><small>생성형 AI 검색으로 미결과 과거 유사 건을 먼저 제시</small></div><div class="card k-replaced" id="P06" data-gate="2" data-lane="1"
       style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
       <div class="chead"><b>P06</b><em style="background:#d99a5e">A03로 대체</em></div>
-      <p>근무지 내 출장인지 근무지 외 출장인지 판단</p><small>공무원 여비 규정 제18조(근무지 내 국내 출장 시의 여비) 제2항제1호 — 같은 시·군 안, 제2호 여행거리 12킬로미터 미만</small></div><div class="card k-changed" id="P07" data-gate="2" data-lane="1"
-      style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
-      <div class="chead"><b>P07</b><em style="background:#b8890e">간소화</em></div>
-      <p>신분·적용 여비규정 확인</p><small>기관 위치와 분리되어, 신분을 고르면 판정에 반영</small></div><div class="card k-changed" id="P08" data-gate="2" data-lane="1"
+      <p>미결 지시·요청 추적</p><small>AI 검색으로 대체</small></div><div class="card k-replaced" id="P07" data-gate="2" data-lane="1"
+      style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
+      <div class="chead"><b>P07</b><em style="background:#d99a5e">A03로 대체</em></div>
+      <p>과거 유사 구조 기록 수기 검색</p><small>AI 검색으로 대체</small></div><div class="card k-changed" id="P08" data-gate="3" data-lane="1"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
       <div class="chead"><b>P08</b><em style="background:#b8890e">간소화</em></div>
-      <p>선배·담당자에게 사례 문의</p><small>판정 근거가 화면에 남아 문의 범위 축소</small></div><div class="card k-statute" id="P09" data-gate="3" data-lane="1"
-      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
-      <div class="chead"><b>P09</b><em style="background:#1f8962">규정</em></div>
-      <p>운임·일비·식비 산정</p><small>공무원 여비 규정 제9조(운임의 구분)·제16조(일비ㆍ숙박비ㆍ식비의 지급) 제1항 및 별표 2에 따른 지급액</small></div><div class="card k-statute" id="P10" data-gate="4" data-lane="0"
-      style="background:#eef8f2;border-color:#1f8962;color:#17573f">
-      <div class="chead"><b>P10</b><em style="background:#1f8962">규정</em></div>
-      <p>출장 결과보고·정산 청구 작성</p><small>공무원 여비 규정 제8조의2(여비의 결제와 정산 등) 제2항 — 여행을 마친 날의 다음 날부터 2주 이내 정산 신청</small></div><div class="card k-changed" id="P11" data-gate="4" data-lane="1"
+      <p>출동 전 인수 공백 점검</p><small>요약·검색 결과를 보고 공백이 있을 때만 보완</small></div><div class="card k-changed" id="P09" data-gate="3" data-lane="2"
       style="background:#fdf8e3;border-color:#d9a821;color:#8a6a0a">
-      <div class="chead"><b>P11</b><em style="background:#b8890e">간소화</em></div>
-      <p>청구 내역 검토·반려</p><small>거리·구분 불일치가 줄어 반려 루프 축소</small></div><div class="card k-statute" id="P12" data-gate="4" data-lane="2"
+      <div class="chead"><b>P09</b><em style="background:#b8890e">간소화</em></div>
+      <p>팀장 확인·추가 지시</p><small>요약본을 기준으로 짧은 확인</small></div><div class="card k-replaced" id="P10" data-gate="4" data-lane="0"
+      style="background:#fdf6ee;border-color:#e5b58a;color:#c08a55">
+      <div class="chead"><b>P10</b><em style="background:#d99a5e">A01로 대체</em></div>
+      <p>근무 중 메모 추가 기록</p><small>공통 업무기록 등록으로 대체</small></div><div class="card k-statute" id="P11" data-gate="4" data-lane="2"
       style="background:#eef8f2;border-color:#1f8962;color:#17573f">
-      <div class="chead"><b>P12</b><em style="background:#1f8962">규정</em></div>
-      <p>정산 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재) 제1항</small></div></div>
+      <div class="chead"><b>P11</b><em style="background:#1f8962">규정</em></div>
+      <p>보고·기록 결재</p><small>행정업무의 운영 및 혁신에 관한 규정 제10조(문서의 결재) 제1항·제2항(결재·위임전결)</small></div></div>
 <div class="grid" id="grid">
   <svg class="edges" id="edgeLayer"></svg>
   
     <div class="gate" data-g="0">
-      <div class="glabel"><b>G0</b><span>출장 명령</span></div>
+      <div class="glabel"><b>G0</b><span>교대 인계</span></div>
       <div class="cell" data-g="0" data-l="0"></div><div class="cell" data-g="0" data-l="1"></div><div class="cell" data-g="0" data-l="2"></div><div class="cell" data-g="0" data-l="3"></div><div class="cell" data-g="0" data-l="4"></div>
     </div>
     <div class="gate" data-g="1">
-      <div class="glabel"><b>G1</b><span>경로 확인</span></div>
+      <div class="glabel"><b>G1</b><span>상황 파악</span></div>
       <div class="cell" data-g="1" data-l="0"></div><div class="cell" data-g="1" data-l="1"></div><div class="cell" data-g="1" data-l="2"></div><div class="cell" data-g="1" data-l="3"></div><div class="cell" data-g="1" data-l="4"></div>
     </div>
     <div class="gate" data-g="2">
-      <div class="glabel"><b>G2</b><span>근무지 내외 판단</span></div>
+      <div class="glabel"><b>G2</b><span>미결·특이사항</span></div>
       <div class="cell" data-g="2" data-l="0"></div><div class="cell" data-g="2" data-l="1"></div><div class="cell" data-g="2" data-l="2"></div><div class="cell" data-g="2" data-l="3"></div><div class="cell" data-g="2" data-l="4"></div>
     </div>
     <div class="gate" data-g="3">
-      <div class="glabel"><b>G3</b><span>여비 산정</span></div>
+      <div class="glabel"><b>G3</b><span>출동 대비</span></div>
       <div class="cell" data-g="3" data-l="0"></div><div class="cell" data-g="3" data-l="1"></div><div class="cell" data-g="3" data-l="2"></div><div class="cell" data-g="3" data-l="3"></div><div class="cell" data-g="3" data-l="4"></div>
     </div>
     <div class="gate" data-g="4">
-      <div class="glabel"><b>G4</b><span>정산·결재</span></div>
+      <div class="glabel"><b>G4</b><span>기록·보존</span></div>
       <div class="cell" data-g="4" data-l="0"></div><div class="cell" data-g="4" data-l="1"></div><div class="cell" data-g="4" data-l="2"></div><div class="cell" data-g="4" data-l="3"></div><div class="cell" data-g="4" data-l="4"></div>
     </div>
 </div>
 <div class="note">
-근거(인용 법령 — 법제처 원문 대조 완료): 국가공무원 복무규정 제6조제1항(출장공무원), 공무원 여비 규정 제18조제1항(근무지 내 출장 4시간 기준 2만원·1만원)·제18조제2항제1호·제2호(같은 시·군 안 또는 여행거리 12킬로미터 미만), 같은 규정 제9조제1항(운임의 구분), 제16조제1항 및 별표 2(일비ㆍ숙박비ㆍ식비), 제8조의2제2항(여행 종료 다음 날부터 2주 이내 정산 신청), 「행정업무의 운영 및 혁신에 관한 규정」 제10조제1항(문서의 결재). 근무지 내 국내 출장의 범위는 공무원 여비 규정 제18조제2항이 호로 직접 정하고 있어 판정 기준 자체는 초록입니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다 — 기준은 규정에 있어도, 학교·소속기관에서 출장지까지 실제로 어느 경로로 얼마나 가는지를 확인하는 방법은 어디에도 정해져 있지 않아 담당자가 지도를 몇 번씩 검색해 스스로 판단해 왔습니다. 도구 사실은 저장소 README(h19h19/seoul-education-travel-map — 로그인 없는 공개 웹 MVP, 서울교육청 소속기관·국공사립 학교·유치원 출발지 지원, 최단시간·최단거리·최저비용 경로 비교, 서울 행정경계와 12km 지도 지원영역 표시, 기관 위치와 사용자의 신분·적용 여비규정을 분리) 기반입니다.
+근거(인용 법령 — 법제처 원문 대조 대상): 행정업무의 운영 및 혁신에 관한 규정 제61조(사무의 인계ㆍ인수) 제1항(업무관리시스템·전자문서시스템을 이용한 인계·인수), 제10조(문서의 결재) 제1항·제2항(결재·위임전결). 사무 인계·인수와 보고 결재의 뼈대는 이렇게 조문이 있으나, 3조 1교대 구조 현장에서 무엇을 어떻게 넘겨 미결 사건·장비 특이사항·협조 요청을 빠짐없이 이어갈지는 규정에 방법이 없습니다. <b>파란 칸은 규정에 명문이 없어 실무를 추론으로 재구성한 영역</b>입니다. 도구 사실은 언론 보도(완주소방서 119구조대가 3조 1교대 인수인계 공백을 줄이려고 업무 기록을 데이터화하고 생성형 AI 요약·검색을 넣은 맞춤형 업무관리체계를 자체 구축, 전북 2026 상반기 적극행정 장려상) 기반입니다. 장비서무 대시보드 사례(fire-equipment-handover-board)와 달리, 이 건은 구조 현장 업무 기록의 요약·검색에 생성형 AI가 들어간 점이 핵심입니다.
 </div>
 <footer><span><b>대한민국 제도 지도</b> · AI 행정 전후 비교</span><span class="url">hosungseo.github.io/korea100</span></footer>
 <script>
-const nodes = ["P01","P02","A01","P03","P04","A02","P05","A03","P06","P07","P08","P09","P10","P11","P12"];
+const nodes = ["P01","P02","A01","P03","A02","P04","P05","A03","P06","P07","P08","P09","P10","P11"];
 nodes.forEach((id) => {
   const el = document.getElementById(id);
   const cell = document.querySelector('.cell[data-g="' + el.dataset.gate + '"][data-l="' + el.dataset.lane + '"]');
   cell.appendChild(el);
 });
-const edges = [["P01","P02"],["P02","A01","auto"],["A01","A02","auto"],["A02","A03","auto"],["A03","P07"],["P07","P08"],["P08","P09"],["P09","P10"],["P10","P11"],["P11","P12"],["P11","P10","loop","반려(축소)"],["P03","A01","replace"],["P04","A01","replace"],["P05","A02","replace"],["P06","A03","replace"]];
+const edges = [["P01","A01","auto"],["A01","P03"],["P03","A02","auto"],["A02","P05"],["P05","A03","auto"],["A03","P08"],["P08","P09"],["P09","P11"],["P02","A01","replace"],["P04","A02","replace"],["P06","A03","replace"],["P07","A03","replace"],["P10","A01","replace"],["P08","P01","loop","요약 공백 시 구두 보완(축소)"]];
 const grid = document.getElementById("grid");
 const svg = document.getElementById("edgeLayer");
 const g = grid.getBoundingClientRect();
