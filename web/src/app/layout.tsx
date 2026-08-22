@@ -6,6 +6,7 @@ import "./globals.css";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://hosungseo.github.io/korea100";
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const INSTITUTIONS = getInstitutionSummaries();
 const MODEL_COUNT = INSTITUTIONS.length;
 const LATEST_AS_OF_DATE = INSTITUTIONS.reduce(
@@ -97,6 +98,10 @@ function Header() {
             5극3특
           </NavLink>
           <NavLink href="/ax-cases/">AI 전후 비교</NavLink>
+          {/* public/ 아래 정적 페이지라 Next 라우터를 태우지 않는다 */}
+          <a className="nav-link" href={`${BASE_PATH}/warroom/`}>
+            종합상황판
+          </a>
           <NavLink href="/verification/">현장 검증 대장</NavLink>
           <NavLink href="/request/">요청하기</NavLink>
           <span className="site-header-date">기준일 {LATEST_AS_OF_DATE}</span>
