@@ -262,7 +262,7 @@ body {
 #tour-scroller { display: none; position: relative; z-index: 1; pointer-events: none; }
 body.touring { overflow-y: auto; }
 body.touring #tour-scroller { display: block; }
-body.touring #rail, body.touring #detail, body.touring #brief, body.touring #hud-bottom { display: none; }
+body.touring #rail, body.touring #detail, body.touring #brief, body.touring #hud-bottom, body.touring #route { display: none; }
 #tour-cap {
   position: fixed; left: 0; bottom: 0; z-index: 11;
   padding: 22vh 12vw 11vh 7vw;
@@ -294,6 +294,51 @@ body.touring #rail, body.touring #detail, body.touring #brief, body.touring #hud
 }
 #tour-exit:hover { color: var(--amber); border-color: var(--amber); }
 body.touring #tour-exit { display: block; }
+
+/* ── project switcher ── */
+#proj-switch { margin-top: 12px; display: flex; gap: 6px; pointer-events: auto; }
+#proj-switch a {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+  color: var(--muted); text-decoration: none;
+  padding: 3px 10px; border: 1px solid var(--line);
+}
+#proj-switch a.on { color: var(--amber); border-color: var(--amber); }
+#proj-switch a:hover { color: var(--text); }
+
+/* ── route & scenario panel (CPM) ── */
+#route {
+  position: fixed; right: 26px; bottom: 96px; z-index: 9;
+  width: 288px; background: var(--panel); border: 1px solid var(--line);
+  backdrop-filter: blur(6px); font-family: var(--mono);
+}
+#route-head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 9px 13px; cursor: pointer; border-bottom: 1px solid var(--line);
+}
+#route-head .t { font-size: 10.5px; font-weight: 700; letter-spacing: 0.18em; color: #ffd76a; }
+#route-head .arrow { color: var(--muted); font-size: 10px; }
+#route-body { padding: 11px 13px 13px; }
+body.route-closed #route-body { display: none; }
+#route .eta-big {
+  font-size: 21px; font-weight: 700; color: #ffd76a; letter-spacing: -0.01em;
+  text-shadow: 0 0 18px rgba(255,215,106,0.4);
+}
+#route .eta-sub { margin-top: 3px; font-size: 9.5px; color: var(--muted); line-height: 1.6; letter-spacing: 0.03em; }
+#route .crit { margin-top: 8px; font-size: 9px; color: #c9a96a; line-height: 1.7; word-break: break-all; }
+#route .rules { margin-top: 10px; border-top: 1px dashed rgba(95,123,144,0.35); padding-top: 9px; display: grid; gap: 6px; }
+#route .rules label {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 10px; color: var(--text); cursor: pointer; letter-spacing: 0.04em;
+}
+#route .rules input { accent-color: #ffd76a; cursor: pointer; }
+#route .rules .enum { display: flex; gap: 4px; flex-wrap: wrap; }
+#route .rules .enum button {
+  all: unset; cursor: pointer; font-family: var(--mono); font-size: 9.5px;
+  padding: 2px 8px; border: 1px solid var(--line); color: var(--muted);
+}
+#route .rules .enum button.on { color: #ffd76a; border-color: #ffd76a; }
+#route .note { margin-top: 9px; font-size: 8.5px; color: var(--muted); line-height: 1.6; }
+@media (max-width: 900px) { #route { display: none; } }
 
 /* ── daily board — per-ministry frontier ±2 ── */
 #daily {
@@ -386,6 +431,7 @@ body.daily-open #daily { display: block; }
     <div class="sys mono"><span class="dot"></span>K100 · WARROOM — LIVE MODEL</div>
     <h1>반도체 클러스터<br /><em>종합상황판</em></h1>
     <div class="asof" id="asof">GWANGJU SEMICONDUCTOR CLUSTER · SITUATION BOARD · 기준일 2026-08-17</div>
+    <div id="proj-switch"></div>
     <div id="brief"></div>
   </div>
   <div id="counter">
@@ -403,6 +449,7 @@ body.daily-open #daily { display: block; }
   <div class="d-name" id="d-name"></div>
   <div class="d-row"><span>연결 절차 PROCEDURES</span><b id="d-procs"></b></div>
   <span class="d-st" id="d-st"></span>
+  <div id="d-eta" style="margin-top:12px;font-family:var(--mono);font-size:10.5px;color:#c9a96a;line-height:1.6;display:none"></div>
   <a class="d-link" id="d-link" href="../mega-projects/gwangju-semiconductor-cluster/unfold/">→ 전체 절차 펼쳐보기</a>
 </div>
 
@@ -418,6 +465,19 @@ body.daily-open #daily { display: block; }
       <button id="tour-btn">▸ 투어 TOUR</button>
     </div>
     <div class="hint">게이트 클릭 = 접근 · ESC = 전체 화면 복귀</div>
+  </div>
+</div>
+
+<div class="hud" id="route" style="display:none">
+  <div id="route-head">
+    <span class="t">경로 ROUTE · CPM</span><span class="arrow">▾</span>
+  </div>
+  <div id="route-body">
+    <div class="eta-big" id="route-eta"></div>
+    <div class="eta-sub" id="route-eta-sub"></div>
+    <div class="crit" id="route-crit"></div>
+    <div class="rules" id="route-rules"></div>
+    <div class="note">법정기한+동종추정 합성 · 역일 단순환산 모델 — 실적 예측 아님</div>
   </div>
 </div>
 
@@ -461,16 +521,37 @@ const ST = {
   conditional: { label: "조건부", en: "COND",   color: 0x9d86f5, css: "#9d86f5", pulse: 0.7 },
   blocked:     { label: "대기",  en: "HOLD",    color: 0x2f6390, css: "#35618a", pulse: 0 },
 };
-try {
-  const r = await fetch("./data.json", { cache: "no-store" });
-  if (r.ok) {
-    const j = await r.json();
-    if (Array.isArray(j.gates) && j.gates.length) GATES = j.gates;
-    if (j.asOf) AS_OF = j.asOf;
+const PID = new URLSearchParams(location.search).get("p") || "gwangju-semiconductor-cluster";
+const PBASE = `./p/${PID}/`;
+let PROJECT = { id: PID, name: "광주 군공항 부지 반도체 클러스터", short: "반도체 클러스터" };
+async function fetchJson(urls) {
+  for (const u of urls) {
+    try {
+      const r = await fetch(u, { cache: "no-store" });
+      if (r.ok) return await r.json();
+    } catch { /* try next */ }
   }
-} catch { /* file:// or offline — inline fallback */ }
+  return null;
+}
+{
+  const wall = await fetchJson([PBASE + "data.json", "./data.json"]);
+  if (wall?.gates?.length) {
+    GATES = wall.gates;
+    AS_OF = wall.asOf;
+    if (wall.project) PROJECT = wall.project;
+  }
+}
+document.querySelector("#brand h1").innerHTML = `${PROJECT.short}<br /><em>종합상황판</em>`;
 document.getElementById("asof").textContent =
-  "GWANGJU SEMICONDUCTOR CLUSTER · SITUATION BOARD · 기준일 " + AS_OF;
+  `${PROJECT.name} · SITUATION BOARD · 기준일 ${AS_OF}`;
+fetchJson(["./p/index.json"]).then((idx) => {
+  if (!idx?.projects || idx.projects.length < 2) return;
+  const sw = document.getElementById("proj-switch");
+  idx.projects.forEach((p) => {
+    sw.insertAdjacentHTML("beforeend",
+      `<a href="?p=${p.id}" class="${p.id === PID ? "on" : ""}">${p.short}</a>`);
+  });
+});
 
 const TOTAL = GATES.reduce((a, g) => a + g.milestones.reduce((b, m) => b + m.procs, 0), 0);
 
@@ -578,6 +659,7 @@ scene.add(glows);
 
 const inst = [];            // per-tile: {st, phase, boot}
 const panels = [];          // raycast targets
+const panelByMs = new Map(); // milestone id → panel mesh (route drawing)
 const gateInfo = [];        // camera focus per gate
 const dummy = new THREE.Object3D();
 const col = new THREE.Color();
@@ -600,9 +682,10 @@ GATES.forEach((g, gi) => {
     const mat = new THREE.MeshBasicMaterial({ map: panelTexture(m, wPx, hPx, LABEL_H / ph), transparent: true, toneMapped: false });
     const panel = new THREE.Mesh(new THREE.PlaneGeometry(PANEL_W, ph), mat);
     panel.position.set(0, y + ph / 2, 0);
-    panel.userData = { gate: gi, m };
+    panel.userData = { gate: gi, m, ph };
     grp.add(panel);
     panels.push(panel);
+    panelByMs.set(m.id, panel);
 
     const usedCols = Math.min(m.procs, COLS);
     const x0 = -(usedCols - 1) * PITCH / 2;
@@ -832,11 +915,7 @@ function setDaily(on) {
   document.body.classList.toggle("daily-open", on);
 }
 async function loadDaily() {
-  let d = null;
-  try {
-    const r = await fetch("./daily.json", { cache: "no-store" });
-    if (r.ok) d = await r.json();
-  } catch { /* offline */ }
+  const d = await fetchJson([PBASE + "daily.json", "./daily.json"]);
   if (!d) { document.getElementById("daily-btn").style.display = "none"; return; }
   const anchorMs = d.anchor?.date
     ? new Date(d.anchor.date + "T00:00:00+09:00").getTime()
@@ -893,6 +972,111 @@ loadDaily();
 document.getElementById("daily-btn").addEventListener("click", () => setDaily(true));
 document.getElementById("daily-close").addEventListener("click", () => setDaily(false));
 
+/* ══ route & scenario — CPM critical path drawn onto the wall ══ */
+const routeData = await fetchJson([PBASE + "path.json", "./path.json"]);
+const RULE_LABELS = {
+  RULE_PRIVATE_LAND_COMPENSATION: "사유지 보상",
+  RULE_HERITAGE_PATH: "유산 진단",
+  RULE_POWER_GRID_PATH: "전력 경로",
+  RULE_HAZARDOUS_FACILITY_PATH: "위험물 허가",
+  RULE_INVEST_CORP_ACT: "투자공사법 제정",
+  RULE_SLG_ESTABLISHED: "특별지자체 설립",
+};
+const ENUM_LABELS = { "formal-assessment": "정식평가", "exempt-or-expedited": "면제·신속" };
+let scenario = null;
+const ruleVals = {};
+const routeObjs = [];
+const dateBase = routeData?.anchor || AS_OF;
+function fmtDate(days) {
+  const d = new Date(new Date(dateBase + "T00:00:00+09:00").getTime() + days * 864e5);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+}
+function clearRoute() {
+  routeObjs.forEach(o => { scene.remove(o); o.geometry?.dispose(); o.material?.dispose(); });
+  routeObjs.length = 0;
+}
+function drawRoute() {
+  clearRoute();
+  const included = new Set(Object.keys(scenario.eta));
+  panels.forEach(p => {
+    if (p.userData.m) p.material.opacity = included.has(p.userData.m.id) ? 1 : 0.25;
+  });
+  const pts = scenario.critical
+    .map(id => panelByMs.get(id)).filter(Boolean)
+    .map(p => {
+      const pos = p.getWorldPosition(new THREE.Vector3());
+      const n = new THREE.Vector3(0, 0, 1).applyQuaternion(p.getWorldQuaternion(new THREE.Quaternion()));
+      return pos.add(n.multiplyScalar(0.35));
+    });
+  if (pts.length >= 2) {
+    const curve = new THREE.CatmullRomCurve3(pts, false, "catmullrom", 0.15);
+    const tube = new THREE.Mesh(
+      new THREE.TubeGeometry(curve, Math.max(32, pts.length * 10), 0.05, 6, false),
+      new THREE.MeshBasicMaterial({
+        color: 0xffd76a, transparent: true, opacity: 0.85,
+        blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false,
+      }));
+    scene.add(tube);
+    routeObjs.push(tube);
+  }
+  pts.forEach(pt => {
+    const s = new THREE.Sprite(new THREE.SpriteMaterial({
+      map: glowTex, color: 0xffd76a, transparent: true,
+      blending: THREE.AdditiveBlending, depthWrite: false,
+    }));
+    s.position.copy(pt);
+    s.scale.setScalar(1.15);
+    scene.add(s);
+    routeObjs.push(s);
+  });
+}
+function updateRouteHud() {
+  const totals = routeData.scenarios.map(s => s.totalDays);
+  document.getElementById("route-eta").textContent =
+    `D+${scenario.totalDays.toLocaleString()}일 ≈ ${fmtDate(scenario.totalDays)}`;
+  document.getElementById("route-eta-sub").textContent =
+    `기점 ${dateBase}${routeData.anchor ? "" : " (기준일)"} · 시나리오 ${routeData.scenarios.length}개 폭 ${Math.min(...totals).toLocaleString()}~${Math.max(...totals).toLocaleString()}일`;
+  document.getElementById("route-crit").textContent =
+    `크리티컬 ${scenario.critical.length}개: ${scenario.critical.join("→")}`;
+}
+function applyScenario() {
+  scenario = routeData.scenarios.find(s =>
+    routeData.rules.every(r => s.params[r.id] === ruleVals[r.id]),
+  ) ?? routeData.scenarios[0];
+  drawRoute();
+  updateRouteHud();
+}
+if (routeData?.scenarios?.length) {
+  document.getElementById("route").style.display = "";
+  const wrap = document.getElementById("route-rules");
+  routeData.rules.forEach(r => {
+    ruleVals[r.id] = r.options[0];
+    if (r.type === "boolean") {
+      wrap.insertAdjacentHTML("beforeend",
+        `<label title="${r.description}"><input type="checkbox" data-rule="${r.id}" ${ruleVals[r.id] === true ? "checked" : ""}/> ${RULE_LABELS[r.id] ?? r.id}</label>`);
+    } else {
+      wrap.insertAdjacentHTML("beforeend",
+        `<label title="${r.description}">${RULE_LABELS[r.id] ?? r.id}<span class="enum">${r.options.map(o =>
+          `<button data-rule="${r.id}" data-val="${o}" class="${o === ruleVals[r.id] ? "on" : ""}">${ENUM_LABELS[o] ?? o}</button>`).join("")}</span></label>`);
+    }
+  });
+  wrap.addEventListener("change", e => {
+    const el = e.target;
+    if (el.dataset.rule) { ruleVals[el.dataset.rule] = el.checked; applyScenario(); }
+  });
+  wrap.addEventListener("click", e => {
+    const b = e.target.closest("button[data-rule]");
+    if (!b) return;
+    ruleVals[b.dataset.rule] = b.dataset.val;
+    wrap.querySelectorAll(`button[data-rule="${b.dataset.rule}"]`).forEach(x =>
+      x.classList.toggle("on", x === b));
+    applyScenario();
+  });
+  document.getElementById("route-head").addEventListener("click", () =>
+    document.body.classList.toggle("route-closed"));
+  applyScenario();
+}
+
 /* ══ picking ══ */
 const ray = new THREE.Raycaster();
 const ndc = new THREE.Vector2();
@@ -921,6 +1105,18 @@ function showDetail(gi, m) {
   stEl.style.color = s.css;
   stEl.style.border = "1px solid " + s.css;
   stEl.style.boxShadow = "0 0 12px " + s.css + "44";
+  const etaEl = document.getElementById("d-eta");
+  const eta = scenario?.eta?.[m.id];
+  if (eta) {
+    const crit = scenario.critical.includes(m.id);
+    etaEl.innerHTML = `예상 구간 D+${eta[0].toLocaleString()}~${eta[1].toLocaleString()} · ${fmtDate(eta[0])} ~ ${fmtDate(eta[1])}${crit ? ' · <b style="color:#ffd76a">크리티컬 패스</b>' : ""}`;
+    etaEl.style.display = "";
+  } else if (scenario) {
+    etaEl.textContent = "현 시나리오에서 미적용 경로";
+    etaEl.style.display = "";
+  } else {
+    etaEl.style.display = "none";
+  }
   detail.classList.remove("show");
   void detail.offsetWidth;   // restart stagger animation
   detail.classList.add("show");
@@ -974,8 +1170,8 @@ const bootLog = document.getElementById("boot-log");
 const bignum = document.getElementById("bignum");
 const MS_TOTAL = GATES.reduce((a, g) => a + g.milestones.length, 0);
 const BOOT_LINES = [
-  "> K100 WARROOM v1.1 — 관제 시스템 초기화",
-  "> 데이터 링크: mega-projects/gwangju-semiconductor-cluster",
+  "> K100 WARROOM v2.0 — 관제 시스템 초기화",
+  `> 데이터 링크: ${PID}`,
   `> 기준일 ${AS_OF} · 게이트 ${GATES.length} · 마일스톤 ${MS_TOTAL}`,
   `> 법정 절차 ${TOTAL.toLocaleString()}건 적재 완료`,
   "> 상황판 점등 개시…",
