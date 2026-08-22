@@ -25,6 +25,28 @@ const write = (p, v) => {
   writeFileSync(path.join(ROOT, p), JSON.stringify(v, null, 0));
 };
 
+// Empirical durations measured from open.go.kr 원문공개 결재문서
+// (~/open-go-corpus, 큐레이션 54.8만 건, 2026-08-23). Each figure is the
+// median span from a project's first document to its last within that
+// procedure family — i.e. how long the whole family actually takes, not how
+// long one procedure takes. So it maps to a milestone, never to a single
+// procedure. Statutory deadlines for the same families run 15~60 days.
+const EMPIRICAL = [
+  { family: "산업단지계획", days: 334, n: 302, re: /산업단지계획|산업단지\s*(개발|지정)|특화단지/ },
+  { family: "도시관리계획", days: 319, n: 1170, re: /도시관리계획|지구단위계획|도시계획\s*결정|도시·군관리계획/ },
+  { family: "개발제한·용도", days: 286, n: 243, re: /개발제한구역|용도지역|용도폐지|형질변경|보호구역\s*해제/ },
+  { family: "실시계획", days: 210, n: 988, re: /실시계획/ },
+  { family: "공장설립·건축", days: 206, n: 1441, re: /공장설립|건축허가|사용승인|준공검사|공장등록|착공/ },
+  { family: "환경영향평가", days: 193, n: 1304, re: /환경영향평가|전략환경|기후변화영향/ },
+  { family: "사업인정·보상", days: 190, n: 201, re: /사업인정|보상|수용재결|취득/ },
+  { family: "교통영향평가", days: 189, n: 359, re: /교통영향평가|광역교통/ },
+  { family: "전력·에너지", days: 189, n: 17, re: /전원개발|송전|변전소|전력계통|집단에너지|에너지사용계획/ },
+  { family: "용수·하수", days: 173, n: 394, re: /공업용수|수도|하수|폐수|재이용/ },
+  { family: "국유재산·부지", days: 154, n: 328, re: /국유재산|공유재산|기부\s*대\s*양여|종전부지|용도폐지/ },
+  { family: "재해영향평가", days: 88, n: 431, re: /재해영향평가|사전재해/ },
+];
+const empiricalOf = (text) => EMPIRICAL.find((e) => e.re.test(text)) ?? null;
+
 const PROJECTS = [
   { id: "gwangju-semiconductor-cluster", short: "광주 반도체", anchorKey: "siteDecisionOn", anchorLabel: "입지 결정", root: true },
   { id: "five-poles-three-special", short: "5극3특", anchorKey: null, anchorLabel: null, root: false },
@@ -159,14 +181,28 @@ function build(cfg) {
   }
   const dayOf = (p) => p.dl?.days ?? estimate(p)?.days ?? globalMedian;
 
-  /* milestone duration: parallel ref groups, sequential within a group */
+  /* milestone duration, two bases.
+     statutory — statute deadlines plus same-kind medians (the legal picture)
+     empirical — measured family spans from the disclosure corpus, matched on
+                 the milestone name and the institutions it references.
+     A milestone with no family match keeps its statutory duration, so the
+     empirical schedule is a floor, not a fabricated number. */
   const durOf = new Map();
+  const empOf = new Map();
+  const empHit = new Map();
   orderedNodes.forEach((ms) => {
     const groups = new Map();
-    procs.filter((p) => p.ms === ms.id).forEach((p) => {
+    const mine = procs.filter((p) => p.ms === ms.id);
+    mine.forEach((p) => {
       groups.set(p.ref, (groups.get(p.ref) ?? 0) + dayOf(p));
     });
-    durOf.set(ms.id, Math.max(0, ...groups.values()));
+    const statutory = Math.max(0, ...groups.values());
+    durOf.set(ms.id, statutory);
+
+    const haystack = `${ms.name} ${[...new Set(mine.map((p) => p.tpl).filter(Boolean))].join(" ")}`;
+    const emp = empiricalOf(haystack);
+    empOf.set(ms.id, emp ? Math.max(emp.days, statutory) : statutory);
+    if (emp) empHit.set(ms.id, { family: emp.family, days: emp.days, n: emp.n });
   });
 
   /* wall data.json */
@@ -235,7 +271,7 @@ function build(cfg) {
     [{}],
   );
 
-  function schedule(ruleValues) {
+  function schedule(ruleValues, dur = durOf) {
     const included = new Set(
       project.nodes
         .filter((n) => n.activation?.mode !== "rule" || ruleValues[n.activation.rule] === n.activation.equals)
@@ -255,13 +291,13 @@ function build(cfg) {
         let start = 0, from = null;
         deps.forEach(({ q, p }) => {
           const t = q.relation === "start_to_start" ? es.get(p)
-            : q.relation === "finish_to_finish" ? ef.get(p) - (durOf.get(n.id) ?? 0)
+            : q.relation === "finish_to_finish" ? ef.get(p) - (dur.get(n.id) ?? 0)
             : ef.get(p);
           if (t > start) { start = t; from = p; }
         });
         if (n.status === "completed") { es.set(n.id, 0); ef.set(n.id, 0); }
-        else if (n.status === "active") { es.set(n.id, 0); ef.set(n.id, durOf.get(n.id) ?? 0); }
-        else { es.set(n.id, start); ef.set(n.id, start + (durOf.get(n.id) ?? 0)); }
+        else if (n.status === "active") { es.set(n.id, 0); ef.set(n.id, dur.get(n.id) ?? 0); }
+        else { es.set(n.id, start); ef.set(n.id, start + (dur.get(n.id) ?? 0)); }
         pick.set(n.id, from);
         done.add(n.id);
       });
@@ -284,8 +320,12 @@ function build(cfg) {
     rules: usedRules.map((r) => ({
       id: r.id, type: r.type, options: optionsOf(r), description: r.description ?? "",
     })),
-    scenarios: combos.map(schedule),
-    note: "법정기한+동종추정 합성, 역일 단순환산 모델 — 실적 예측 아님",
+    // Two schedules over the same scenario space: what the law allows, and
+    // what comparable projects actually took.
+    scenarios: combos.map((c) => schedule(c, durOf)),
+    empiricalScenarios: combos.map((c) => schedule(c, empOf)),
+    empiricalCoverage: [...empHit.entries()].map(([id, e]) => ({ ms: id, ...e })),
+    note: "statutory=법정기한+동종추정 · empirical=정보공개 원문공개 결재문서에서 측정한 절차군 생애주기 중앙값(개별 절차가 아니라 마일스톤 단위). 역일 단순환산 모델 — 실적 예측 아님",
   };
 
   /* emit */

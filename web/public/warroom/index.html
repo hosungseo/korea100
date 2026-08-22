@@ -337,6 +337,18 @@ body.route-closed #route-body { display: none; }
   padding: 2px 8px; border: 1px solid var(--line); color: var(--muted);
 }
 #route .rules .enum button.on { color: #ffd76a; border-color: #ffd76a; }
+#route .basis {
+  display: flex; gap: 5px; margin-bottom: 9px;
+}
+#route .basis button {
+  all: unset; cursor: pointer; flex: 1; text-align: center;
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.06em;
+  padding: 4px 0; border: 1px solid var(--line); color: var(--muted);
+}
+#route .basis button.on { color: #ffd76a; border-color: #ffd76a; background: rgba(255,215,106,0.08); }
+#route .gap {
+  margin-top: 6px; font-size: 9.5px; color: #ff9d6b; letter-spacing: 0.03em; line-height: 1.5;
+}
 #route .note { margin-top: 9px; font-size: 8.5px; color: var(--muted); line-height: 1.6; }
 @media (max-width: 900px) { #route { display: none; } }
 
@@ -497,11 +509,13 @@ body.daily-open #daily { display: block; }
     <span class="t">경로 ROUTE · CPM</span><span class="arrow">▾</span>
   </div>
   <div id="route-body">
+    <div class="basis" id="route-basis"></div>
     <div class="eta-big" id="route-eta"></div>
     <div class="eta-sub" id="route-eta-sub"></div>
+    <div class="gap" id="route-gap"></div>
     <div class="crit" id="route-crit"></div>
     <div class="rules" id="route-rules"></div>
-    <div class="note">법정기한+동종추정 합성 · 역일 단순환산 모델 — 실적 예측 아님</div>
+    <div class="note" id="route-note">법정기한+동종추정 합성 · 역일 단순환산 모델 — 실적 예측 아님</div>
   </div>
 </div>
 
@@ -1082,24 +1096,61 @@ function drawRoute() {
     routeObjs.push(s);
   });
 }
+// Two schedules over the same graph: the deadlines the law sets, and the
+// spans comparable projects actually took (measured from disclosed approval
+// documents). The gap between them is the point of the panel.
+let basis = "statutory";
+const scenarioSet = () =>
+  basis === "empirical" && routeData.empiricalScenarios?.length
+    ? routeData.empiricalScenarios : routeData.scenarios;
+
 function updateRouteHud() {
-  const totals = routeData.scenarios.map(s => s.totalDays);
+  const totals = scenarioSet().map(s => s.totalDays);
   document.getElementById("route-eta").textContent =
     `D+${scenario.totalDays.toLocaleString()}일 ≈ ${fmtDate(scenario.totalDays)}`;
+  const span = Math.min(...totals) === Math.max(...totals)
+    ? `${Math.min(...totals).toLocaleString()}일 고정`
+    : `폭 ${Math.min(...totals).toLocaleString()}~${Math.max(...totals).toLocaleString()}일`;
   document.getElementById("route-eta-sub").textContent =
-    `기점 ${dateBase}${routeData.anchor ? "" : " (기준일)"} · 시나리오 ${routeData.scenarios.length}개 폭 ${Math.min(...totals).toLocaleString()}~${Math.max(...totals).toLocaleString()}일`;
+    `기점 ${dateBase}${routeData.anchor ? "" : " (기준일)"} · 시나리오 ${scenarioSet().length}개 ${span} · ${(scenario.totalDays / 365).toFixed(1)}년`;
+
+  const gapEl = document.getElementById("route-gap");
+  const emp = routeData.empiricalScenarios?.length;
+  if (emp) {
+    const st = routeData.scenarios[0].totalDays;
+    const ep = routeData.empiricalScenarios[0].totalDays;
+    gapEl.textContent = `법정 ${(st / 365).toFixed(1)}년 → 실측 ${(ep / 365).toFixed(1)}년 (+${((ep - st) / 365).toFixed(1)}년) · 실측 매칭 마일스톤 ${routeData.empiricalCoverage?.length ?? 0}개`;
+    gapEl.style.display = "";
+  } else gapEl.style.display = "none";
+
+  document.getElementById("route-note").textContent = basis === "empirical"
+    ? "정보공개 원문공개 결재문서에서 측정한 절차군 생애주기 중앙값 · 마일스톤 단위 적용"
+    : "법정기한+동종추정 합성 · 역일 단순환산 모델 — 실적 예측 아님";
   document.getElementById("route-crit").textContent =
     `크리티컬 ${scenario.critical.length}개: ${scenario.critical.join("→")}`;
 }
 function applyScenario() {
-  scenario = routeData.scenarios.find(s =>
+  const set = scenarioSet();
+  scenario = set.find(s =>
     routeData.rules.every(r => s.params[r.id] === ruleVals[r.id]),
-  ) ?? routeData.scenarios[0];
+  ) ?? set[0];
   drawRoute();
   updateRouteHud();
 }
 if (routeData?.scenarios?.length) {
   document.getElementById("route").style.display = "";
+  if (routeData.empiricalScenarios?.length) {
+    const bw = document.getElementById("route-basis");
+    bw.innerHTML = `<button data-basis="statutory" class="on">법정 기준</button>`
+      + `<button data-basis="empirical">실측 기준</button>`;
+    bw.addEventListener("click", e => {
+      const b = e.target.closest("button[data-basis]");
+      if (!b) return;
+      basis = b.dataset.basis;
+      bw.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b));
+      applyScenario();
+    });
+  }
   const wrap = document.getElementById("route-rules");
   routeData.rules.forEach(r => {
     ruleVals[r.id] = r.options[0];
