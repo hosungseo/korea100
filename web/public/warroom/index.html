@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>종합상황판 — 반도체 클러스터 1,281 절차 관제</title>
+<meta name="description" content="광주 군공항 부지 반도체 클러스터의 법정 절차 1,281개를 관제센터 상황판으로 띄웠습니다. 8개 게이트 · 49개 마일스톤 실시간 점등." />
+<meta property="og:title" content="종합상황판 — 반도체 클러스터 1,281 절차 관제" />
+<meta property="og:description" content="절차 하나가 타일 하나. 8개 게이트 · 49개 마일스톤 · 1,281개의 불빛으로 세운 거대한 행정 상황판." />
+<meta property="og:image" content="https://hosungseo.github.io/korea100/og/mega-gwangju-semiconductor-cluster.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg: #04070c;
+  --panel: rgba(9, 18, 28, 0.82);
+  --line: rgba(56, 198, 244, 0.22);
+  --text: #d7e6f2;
+  --muted: #5f7b90;
+  --amber: #ffb020;
+  --cyan: #38c6f4;
+  --green: #2ee6a8;
+  --violet: #9d86f5;
+  --slate: #35618a;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --sans: "Apple SD Gothic Neo", "Pretendard", sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  overflow: hidden;
+  cursor: crosshair;
+}
+#stage { position: fixed; inset: 0; z-index: 0; }
+.mono { font-family: var(--mono); }
+
+/* ── CRT atmosphere overlays ─────────────────────────── */
+#scanlines {
+  position: fixed; inset: 0; z-index: 5; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,0.14) 0 1px, transparent 1px 3px);
+  mix-blend-mode: multiply;
+}
+#vignette {
+  position: fixed; inset: 0; z-index: 5; pointer-events: none;
+  background: radial-gradient(ellipse 120% 90% at 50% 42%, transparent 55%, rgba(2,5,9,0.85) 100%);
+}
+#grain {
+  position: fixed; inset: -50%; z-index: 5; pointer-events: none; opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 0.9s steps(4) infinite;
+}
+@keyframes grain {
+  0% { transform: translate(0,0); } 25% { transform: translate(-2%,3%); }
+  50% { transform: translate(3%,-2%); } 75% { transform: translate(-3%,-3%); } 100% { transform: translate(0,0); }
+}
+
+/* ── HUD chrome ──────────────────────────────────────── */
+.hud { position: fixed; z-index: 10; }
+#hud-top {
+  top: 0; left: 0; right: 0;
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding: 20px 26px 0;
+  pointer-events: none;
+}
+#brand { max-width: 46vw; }
+#brand .sys {
+  font-family: var(--mono); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.22em; color: var(--cyan);
+  display: flex; align-items: center; gap: 10px;
+}
+#brand .sys .dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--green); box-shadow: 0 0 10px var(--green);
+  animation: blink 1.6s ease-in-out infinite;
+}
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
+#brand h1 {
+  margin-top: 8px;
+  font-size: clamp(20px, 2.6vw, 34px); font-weight: 800;
+  letter-spacing: -0.02em; line-height: 1.16; word-break: keep-all;
+  text-shadow: 0 0 34px rgba(56, 198, 244, 0.35);
+}
+#brand h1 em { font-style: normal; color: var(--amber); text-shadow: 0 0 26px rgba(255,176,32,0.5); }
+#brand .asof {
+  margin-top: 7px; font-family: var(--mono); font-size: 11px;
+  color: var(--muted); letter-spacing: 0.08em;
+}
+#counter { text-align: right; }
+#counter .num {
+  font-family: var(--mono); font-weight: 700;
+  font-size: clamp(38px, 5.6vw, 74px); line-height: 0.95;
+  letter-spacing: -0.02em; color: var(--amber);
+  text-shadow: 0 0 40px rgba(255,176,32,0.45);
+  font-variant-numeric: tabular-nums;
+}
+#counter .cap {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em;
+  color: var(--muted); margin-top: 4px;
+}
+#legend {
+  margin-top: 12px; display: flex; gap: 12px; justify-content: flex-end; flex-wrap: wrap;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; color: var(--muted);
+}
+#legend span { display: inline-flex; align-items: center; gap: 5px; }
+#legend i {
+  width: 8px; height: 8px; display: inline-block; border-radius: 1px;
+}
+
+/* left gate rail */
+#rail {
+  left: 0; top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 14px 12px 14px 16px;
+  background: linear-gradient(90deg, rgba(4,7,12,0.9), rgba(4,7,12,0.55) 80%, transparent);
+  border-right: 1px solid var(--line);
+}
+.gatebtn {
+  all: unset; cursor: pointer; display: block;
+  padding: 7px 12px 8px 10px; border-left: 2px solid transparent;
+  transition: border-color 0.2s, background 0.2s;
+}
+.gatebtn:hover, .gatebtn.on { border-left-color: var(--amber); background: rgba(56,198,244,0.06); }
+.gatebtn .gl {
+  font-family: var(--mono); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.06em; color: var(--text); white-space: nowrap;
+}
+.gatebtn .gn { color: var(--cyan); margin-right: 7px; }
+.gatebtn .bar {
+  margin-top: 5px; height: 3px; width: 148px; display: flex;
+  background: rgba(56,198,244,0.1); overflow: hidden;
+}
+.gatebtn .bar i { height: 100%; display: block; }
+.gatebtn .gp {
+  font-family: var(--mono); font-size: 9px; color: var(--muted); margin-top: 3px;
+  letter-spacing: 0.04em;
+}
+
+/* detail card */
+#detail {
+  right: 26px; top: 50%; transform: translateY(-50%) translateX(24px);
+  width: min(330px, 78vw);
+  background: var(--panel); border: 1px solid var(--line);
+  padding: 18px 18px 16px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.28s, transform 0.28s;
+  backdrop-filter: blur(6px);
+}
+#detail.show { opacity: 1; pointer-events: auto; transform: translateY(-50%) translateX(0); }
+#detail::before, #detail::after {
+  content: ""; position: absolute; width: 14px; height: 14px; pointer-events: none;
+}
+#detail::before { top: -1px; left: -1px; border-top: 2px solid var(--amber); border-left: 2px solid var(--amber); }
+#detail::after { bottom: -1px; right: -1px; border-bottom: 2px solid var(--amber); border-right: 2px solid var(--amber); }
+#detail .d-gate {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; color: var(--cyan);
+}
+#detail .d-name {
+  margin-top: 8px; font-size: 17px; font-weight: 800; line-height: 1.35; word-break: keep-all;
+}
+#detail .d-row {
+  margin-top: 14px; display: flex; justify-content: space-between; align-items: baseline;
+  font-family: var(--mono); font-size: 11px; color: var(--muted);
+  border-top: 1px dashed rgba(95,123,144,0.35); padding-top: 10px;
+}
+#detail .d-row b { font-size: 22px; color: var(--amber); font-weight: 700; }
+#detail .d-st {
+  display: inline-block; margin-top: 12px; padding: 3px 9px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; font-weight: 600;
+}
+#detail .d-link {
+  display: block; margin-top: 14px;
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em;
+  color: var(--cyan); text-decoration: none;
+}
+#detail .d-link:hover { color: var(--amber); }
+#detail .d-close {
+  position: absolute; top: 8px; right: 10px; all: unset; position: absolute;
+  cursor: pointer; color: var(--muted); font-family: var(--mono); font-size: 13px; padding: 4px;
+}
+#detail .d-close:hover { color: var(--text); }
+
+/* bottom ticker + nav */
+#hud-bottom {
+  left: 0; right: 0; bottom: 0;
+  border-top: 1px solid var(--line);
+  background: linear-gradient(0deg, rgba(4,7,12,0.92), rgba(4,7,12,0.6));
+  pointer-events: none;
+}
+#ticker {
+  overflow: hidden; white-space: nowrap; padding: 8px 0 7px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.05em; color: var(--muted);
+  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+}
+#ticker .strip { display: inline-block; animation: tick 90s linear infinite; }
+@keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+#ticker b { color: var(--text); font-weight: 600; }
+#ticker .t-st { margin: 0 6px 0 8px; }
+#nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 7px 26px 10px; pointer-events: auto;
+}
+#nav .links { display: flex; gap: 18px; }
+#nav a {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em;
+  color: var(--muted); text-decoration: none;
+}
+#nav a:hover { color: var(--amber); }
+#nav .hint { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.08em; }
+
+/* ── boot overlay ────────────────────────────────────── */
+#boot {
+  position: fixed; inset: 0; z-index: 20;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.9s ease;
+}
+#boot.done { opacity: 0; pointer-events: none; }
+#boot pre {
+  font-family: var(--mono); font-size: clamp(11px, 1.4vw, 14px);
+  color: var(--green); line-height: 2; letter-spacing: 0.04em;
+  text-shadow: 0 0 14px rgba(46,230,168,0.5);
+}
+#boot pre .dim { color: var(--muted); text-shadow: none; }
+#boot .cur { display: inline-block; width: 0.6em; background: var(--green); animation: blink 0.8s steps(1) infinite; }
+
+/* ── brief strip (worldmonitor: synthesized priority signals) ── */
+#brief { margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap; pointer-events: auto; }
+.chip {
+  all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 7px;
+  padding: 5px 11px; border: 1px solid var(--line); background: rgba(9,18,28,0.72);
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.05em; color: var(--text);
+  opacity: 0; transform: translateY(7px);
+  transition: border-color 0.2s, background 0.2s, opacity 0.55s cubic-bezier(0.2,0.7,0.2,1), transform 0.55s cubic-bezier(0.2,0.7,0.2,1);
+}
+#brief.lit .chip { opacity: 1; transform: none; }
+.chip:hover { border-color: var(--amber); background: rgba(255,176,32,0.08); }
+.chip i { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+.chip .n { font-weight: 700; }
+
+/* rail bars power on after boot */
+.gatebtn .bar i { transform: scaleX(0); transform-origin: left; transition: transform 0.9s cubic-bezier(0.2,0.7,0.15,1); }
+#rail.lit .bar i { transform: scaleX(1); }
+
+/* detail card staggered reveal */
+@keyframes rise { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: none; } }
+#detail.show .d-gate  { animation: rise 0.38s cubic-bezier(0.2,0.7,0.2,1) both; }
+#detail.show .d-name  { animation: rise 0.38s cubic-bezier(0.2,0.7,0.2,1) 0.05s both; }
+#detail.show .d-row   { animation: rise 0.38s cubic-bezier(0.2,0.7,0.2,1) 0.1s both; }
+#detail.show .d-st    { animation: rise 0.38s cubic-bezier(0.2,0.7,0.2,1) 0.15s both; }
+#detail.show .d-link  { animation: rise 0.38s cubic-bezier(0.2,0.7,0.2,1) 0.2s both; }
+
+/* ── cinematic tour (kage: scroll-synced camera patrol) ── */
+#nav button {
+  all: unset; cursor: pointer; font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.1em; color: var(--amber); font-weight: 600;
+}
+#nav button:hover { color: var(--text); }
+#tour-scroller { display: none; position: relative; z-index: 1; pointer-events: none; }
+body.touring { overflow-y: auto; }
+body.touring #tour-scroller { display: block; }
+body.touring #rail, body.touring #detail, body.touring #brief, body.touring #hud-bottom { display: none; }
+#tour-cap {
+  position: fixed; left: 0; bottom: 0; z-index: 11;
+  padding: 22vh 12vw 11vh 7vw;
+  max-width: 720px; opacity: 0; pointer-events: none;
+  background: radial-gradient(ellipse 100% 100% at 0% 100%, rgba(4,7,12,0.88) 30%, transparent 72%);
+}
+#tour-cap .tc-kicker {
+  font-family: var(--mono); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.22em; color: var(--amber); margin-bottom: 10px;
+}
+#tour-cap h2 {
+  font-size: clamp(30px, 4.8vw, 58px); font-weight: 800;
+  letter-spacing: -0.03em; line-height: 1.13; word-break: keep-all;
+  text-shadow: 0 0 36px rgba(56, 198, 244, 0.3);
+}
+#tour-cap .tc-sub {
+  margin-top: 13px; font-family: var(--mono); font-size: 12.5px;
+  color: var(--muted); line-height: 1.7; letter-spacing: 0.03em;
+}
+#tour-progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0;
+  background: var(--amber); box-shadow: 0 0 12px var(--amber); z-index: 12;
+}
+#tour-exit {
+  all: unset; position: fixed; right: 26px; bottom: 11vh; z-index: 30;
+  display: none; cursor: pointer; padding: 7px 14px;
+  border: 1px solid var(--line); background: rgba(9,18,28,0.8);
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; color: var(--muted);
+}
+#tour-exit:hover { color: var(--amber); border-color: var(--amber); }
+body.touring #tour-exit { display: block; }
+
+/* ── daily board — per-ministry frontier ±2 ── */
+#daily {
+  position: fixed; inset: 0; z-index: 16; display: none; overflow-y: auto;
+  background: linear-gradient(180deg, rgba(4,7,12,0.97), rgba(4,7,12,0.92));
+  backdrop-filter: blur(5px);
+  padding: 26px 4vw 60px;
+}
+body.daily-open #daily { display: block; }
+#daily-head {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 18px;
+}
+#daily-head h2 { font-size: clamp(20px, 2.6vw, 30px); font-weight: 800; letter-spacing: -0.02em; word-break: keep-all; }
+#daily-head h2 em { font-style: normal; color: var(--amber); }
+#daily-head .sub { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-top: 7px; letter-spacing: 0.05em; }
+#daily-close {
+  all: unset; cursor: pointer; flex: none; margin-left: 16px;
+  font-family: var(--mono); color: var(--muted); font-size: 12px;
+  padding: 6px 12px; border: 1px solid var(--line); letter-spacing: 0.1em;
+}
+#daily-close:hover { color: var(--amber); border-color: var(--amber); }
+#daily-rows { overflow-x: auto; }
+.drow {
+  display: grid; grid-template-columns: 150px repeat(5, minmax(136px, 1fr));
+  gap: 8px; margin-bottom: 10px; min-width: 870px;
+}
+.drow-h {
+  padding: 10px 12px; border-left: 2px solid var(--cyan);
+  background: rgba(56,198,244,0.05);
+}
+.drow-h b { font-size: 14.5px; font-weight: 800; display: block; word-break: keep-all; }
+.drow-h .m { font-family: var(--mono); font-size: 9.5px; color: var(--muted); margin-top: 6px; line-height: 1.7; letter-spacing: 0.03em; }
+.drow-h .m i { font-style: normal; }
+.dcell {
+  position: relative; padding: 9px 10px 8px;
+  background: rgba(9,18,28,0.82); border: 1px solid rgba(56,198,244,0.14);
+  border-left-width: 3px; cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.dcell:hover { border-color: var(--amber); }
+.dcell.now {
+  border-color: var(--amber); background: rgba(255,176,32,0.06);
+  box-shadow: 0 0 18px rgba(255,176,32,0.16);
+}
+.dcell.empty {
+  border-style: dashed; opacity: 0.22; cursor: default;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted); font-family: var(--mono);
+}
+.dcell .top {
+  display: flex; justify-content: space-between; gap: 6px;
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.08em;
+  color: var(--muted); margin-bottom: 6px;
+}
+.dcell .nm {
+  font-size: 12px; font-weight: 600; line-height: 1.42; word-break: keep-all;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden; min-height: 2.84em;
+}
+.dcell .who {
+  margin-top: 7px; font-family: var(--mono); font-size: 9.5px; color: var(--muted);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.dcell .dl {
+  margin-top: 6px; font-family: var(--mono); font-size: 9.5px;
+  color: #c9a96a; letter-spacing: 0.03em;
+}
+.dcell .dl .est { color: #8fa8bd; }
+.dcell .tags { margin-top: 6px; display: flex; gap: 4px; flex-wrap: wrap; }
+.dcell .tags span {
+  font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.06em;
+  padding: 1px 5px; border: 1px solid rgba(56,198,244,0.22); color: var(--muted);
+}
+.dcell .tags span.rh { border-color: rgba(157,134,245,0.35); color: #a99ce0; }
+
+@media (max-width: 760px) {
+  #rail { display: none; }
+  #legend { display: none; }
+  #brand { max-width: 60vw; }
+  #nav .hint { display: none; }
+}
+</style>
+</head>
+<body>
+<div id="stage"></div>
+
+<div class="hud" id="hud-top">
+  <div id="brand">
+    <div class="sys mono"><span class="dot"></span>K100 · WARROOM — LIVE MODEL</div>
+    <h1>반도체 클러스터<br /><em>종합상황판</em></h1>
+    <div class="asof" id="asof">GWANGJU SEMICONDUCTOR CLUSTER · SITUATION BOARD · 기준일 2026-08-17</div>
+    <div id="brief"></div>
+  </div>
+  <div id="counter">
+    <div class="num" id="bignum">0</div>
+    <div class="cap">법정 절차 STATUTORY PROCEDURES</div>
+    <div id="legend"></div>
+  </div>
+</div>
+
+<div class="hud" id="rail"></div>
+
+<div class="hud" id="detail">
+  <button class="d-close" id="d-close">✕</button>
+  <div class="d-gate" id="d-gate"></div>
+  <div class="d-name" id="d-name"></div>
+  <div class="d-row"><span>연결 절차 PROCEDURES</span><b id="d-procs"></b></div>
+  <span class="d-st" id="d-st"></span>
+  <a class="d-link" id="d-link" href="../mega-projects/gwangju-semiconductor-cluster/unfold/">→ 전체 절차 펼쳐보기</a>
+</div>
+
+<div class="hud" id="hud-bottom">
+  <div id="ticker"><span class="strip" id="ticker-strip"></span></div>
+  <div id="nav">
+    <div class="links">
+      <a href="../mega-projects/gwangju-semiconductor-cluster/">개요 OVERVIEW</a>
+      <a href="../mega-projects/gwangju-semiconductor-cluster/flow/">흐름도 FLOW</a>
+      <a href="../mega-projects/gwangju-semiconductor-cluster/table/">전체표 TABLE</a>
+      <a href="../halo/">헤일로 HALO</a>
+      <button id="daily-btn">▦ 오늘 DAILY</button>
+      <button id="tour-btn">▸ 투어 TOUR</button>
+    </div>
+    <div class="hint">게이트 클릭 = 접근 · ESC = 전체 화면 복귀</div>
+  </div>
+</div>
+
+<div id="daily">
+  <div id="daily-head">
+    <div>
+      <h2>오늘의 관제 — <em>부처별 진행 위치</em></h2>
+      <div class="sub" id="daily-sub"></div>
+    </div>
+    <button id="daily-close">✕ 닫기 ESC</button>
+  </div>
+  <div id="daily-rows"></div>
+</div>
+
+<div id="tour-scroller"></div>
+<div id="tour-cap">
+  <div class="tc-kicker" id="tc-kicker"></div>
+  <h2 id="tc-head"></h2>
+  <div class="tc-sub" id="tc-sub"></div>
+</div>
+<div id="tour-progress"></div>
+<button id="tour-exit">✕ 투어 종료 ESC</button>
+
+<div id="boot"><pre id="boot-log"></pre></div>
+
+<div id="scanlines"></div>
+<div id="vignette"></div>
+<div id="grain"></div>
+
+<script type="module">
+import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
+
+/* ══ DATA — inline fallback; ./data.json (from web/tools/halo-data.json) wins when present ══ */
+let AS_OF = "2026-08-17";
+let GATES = [{"label":"01 정책·거버넌스","milestones":[{"id":"N01","name":"호남 반도체 입지 광주 군공항 부지 결정","procs":1,"st":"completed"},{"id":"N02","name":"통합 추진체계·재정심사·예타·마스터 일정 수립","procs":47,"st":"active"},{"id":"N03","name":"반도체클러스터 지정 신청·심의·지정","procs":27,"st":"ready"}]},{"label":"02 군공항 이전·부지","milestones":[{"id":"N04","name":"군공항 이전건의·예비이전후보지 선정","procs":3,"st":"completed"},{"id":"N31","name":"이전후보지·종전부지·지원계획 심의·공고","procs":8,"st":"ready"},{"id":"N32","name":"주민투표·유치신청·최종 군공항 이전부지 선정","procs":6,"st":"blocked"},{"id":"N33","name":"사업시행자·기부 대 양여·재원·지원사업 확정","procs":27,"st":"blocked"},{"id":"N34","name":"종전부지 개발사업시행자·개발계획·도시계획 입안","procs":7,"st":"blocked"},{"id":"N05","name":"대체 군공항 사업계획·실시계획·건설·준공·기능이전","procs":22,"st":"blocked"}]},{"label":"03 산업단지·계획","milestones":[{"id":"N06","name":"산업단지 투자의향·지정요청·입지조사","procs":3,"st":"ready"},{"id":"N07","name":"산업단지 개발계획 초안 작성","procs":2,"st":"blocked"},{"id":"N36","name":"산업단지계획 승인신청·평가 첨부자료 접수","procs":1,"st":"blocked"},{"id":"N08","name":"산업단지계획 공고·공람·주민·전문가 의견청취","procs":2,"st":"blocked"},{"id":"N09","name":"전략환경영향평가·입지대안 협의","procs":12,"st":"blocked"},{"id":"N38","name":"재해영향평가등 협의·계획반영","procs":20,"st":"blocked"},{"id":"N37","name":"동시협의·통합조정·기술검토·산단계획 통합심의","procs":12,"st":"blocked"},{"id":"N10","name":"산업단지계획 승인·지정 고시","procs":4,"st":"blocked"}]},{"label":"04 환경·인허가 의제","milestones":[{"id":"N11","name":"환경영향평가서 초안·공람·주민의견","procs":13,"st":"blocked"},{"id":"N12","name":"환경영향평가 본안 검토·협의 완료","procs":14,"st":"blocked"},{"id":"N13","name":"국가유산 영향진단·매장유산 조사 경로 해소","procs":28,"st":"conditional"},{"id":"N39","name":"교통영향평가·광역교통개선대책 심의·반영","procs":15,"st":"blocked"},{"id":"N40","name":"에너지사용계획 협의·설계 반영","procs":19,"st":"blocked"},{"id":"N14","name":"의제 인허가 실체요건·농지·산지·공유수면 자료 취합","procs":73,"st":"blocked"},{"id":"N15","name":"산단 실시계획·의제 인허가 승인조건 확정","procs":16,"st":"blocked"},{"id":"N35","name":"종전부지 실시계획·도시계획 결정·인허가 의제","procs":23,"st":"blocked"}]},{"label":"05 토지·사용권","milestones":[{"id":"N41","name":"종전 군공항 건축물·석면 해체·토양오염 조사·정화·검증","procs":24,"st":"ready"},{"id":"N16","name":"편입 사유지 보상·취득","procs":15,"st":"conditional"},{"id":"N42","name":"국유재산 용도폐지·기부 대 양여·종전부지 권리이전","procs":35,"st":"blocked"},{"id":"N17","name":"보호구역 해제·종전부지 및 편입토지 사용권 확보","procs":34,"st":"blocked"}]},{"label":"06 전력","milestones":[{"id":"N18","name":"단계별 전력수요 확정·계통검토 경로 결정","procs":36,"st":"ready"},{"id":"N19","name":"정식 전력계통영향평가·공급가능성 검토","procs":18,"st":"conditional"},{"id":"N20","name":"계통영향평가 면제·예타특례·반도체 신속처리","procs":45,"st":"conditional"},{"id":"N21","name":"송전선로·변전소 사업계획·실시계획 승인","procs":19,"st":"blocked"},{"id":"N43","name":"전력 공급·이용계약·자가용설비 공사계획 승인","procs":9,"st":"blocked"},{"id":"N22","name":"송변전망 공사·계통접속 완료","procs":10,"st":"blocked"},{"id":"N44","name":"전기 사용전검사·계통 병입·가압","procs":5,"st":"blocked"}]},{"label":"07 용수·도로","milestones":[{"id":"N23","name":"공업용수·공공폐수·접근도로 수요·공급계획 확정","procs":28,"st":"ready"},{"id":"N24","name":"용수·재이용·전용수도·폐수·하수도·접근도로 승인·비용분담","procs":40,"st":"blocked"},{"id":"N25","name":"용수·재이용·전용수도·폐수·하수도·연결도로 공사·준공·공급개시","procs":24,"st":"blocked"}]},{"label":"08 건축·가동","milestones":[{"id":"N26","name":"산단 관리기본계획·입주계약·공장설립 승인","procs":32,"st":"blocked"},{"id":"N27","name":"건축허가·공사환경·설비설계 사전확인·착공신고","procs":46,"st":"blocked"},{"id":"N45","name":"통합환경·총량·폐기물·화학·보험·악취·방사선·공정안전 사전심사","procs":112,"st":"blocked"},{"id":"N28","name":"부지조성·팹·부대시설 건설·공정환경 관리","procs":71,"st":"blocked"},{"id":"N46","name":"위험물·고압가스 설치허가·중간·완공검사","procs":21,"st":"conditional"},{"id":"N47","name":"공장설립 완료신고·지적확정·현장확인·공장등록","procs":16,"st":"blocked"},{"id":"N48","name":"건축물 사용승인·소방·기계·정보통신·승강기 검사","procs":21,"st":"blocked"},{"id":"N29","name":"환경·총량·폐기물·화학·보험·악취·설비·사용승인·공장등록 운영확인","procs":84,"st":"blocked"},{"id":"N49","name":"시험가동·설비성능·기계·통신·열사용기기 안전·수율 검증","procs":10,"st":"blocked"},{"id":"N30","name":"상업생산 개시·산업안전·핵심기술·투자·수출·보안 운영","procs":121,"st":"blocked"}]}];
+
+const ST = {
+  completed:   { label: "완료",  en: "DONE",    color: 0x2ee6a8, css: "#2ee6a8", pulse: 0 },
+  active:      { label: "진행",  en: "ACTIVE",  color: 0xffb020, css: "#ffb020", pulse: 2.6 },
+  ready:       { label: "준비",  en: "READY",   color: 0x38c6f4, css: "#38c6f4", pulse: 1.3 },
+  conditional: { label: "조건부", en: "COND",   color: 0x9d86f5, css: "#9d86f5", pulse: 0.7 },
+  blocked:     { label: "대기",  en: "HOLD",    color: 0x2f6390, css: "#35618a", pulse: 0 },
+};
+try {
+  const r = await fetch("./data.json", { cache: "no-store" });
+  if (r.ok) {
+    const j = await r.json();
+    if (Array.isArray(j.gates) && j.gates.length) GATES = j.gates;
+    if (j.asOf) AS_OF = j.asOf;
+  }
+} catch { /* file:// or offline — inline fallback */ }
+document.getElementById("asof").textContent =
+  "GWANGJU SEMICONDUCTOR CLUSTER · SITUATION BOARD · 기준일 " + AS_OF;
+
+const TOTAL = GATES.reduce((a, g) => a + g.milestones.reduce((b, m) => b + m.procs, 0), 0);
+
+/* ══ layout constants ══ */
+const COLS = 14, PITCH = 0.29, TILE = 0.26;
+const PANEL_W = COLS * PITCH + 0.5;          // 4.56
+const LABEL_H = 0.52, PANEL_PAD = 0.16, PANEL_GAP = 0.22;
+const GATE_STEP = PANEL_W + 0.8;
+const R = 30, BASE_Y = 0.35;
+
+/* ══ scene ══ */
+const stage = document.getElementById("stage");
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+stage.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x04070c);
+scene.fog = new THREE.Fog(0x04070c, 30, 115);
+
+const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.1, 200);
+
+/* ══ canvas-texture helpers (threeui-style shader-panel chrome, drawn in 2D) ══ */
+function panelTexture(m, wPx, hPx, labelFrac) {
+  const c = document.createElement("canvas");
+  c.width = wPx; c.height = hPx;
+  const x = c.getContext("2d");
+  const s = ST[m.st];
+  x.fillStyle = "rgba(8,16,26,0.94)"; x.fillRect(0, 0, wPx, hPx);
+  const grad = x.createLinearGradient(0, 0, 0, hPx);
+  grad.addColorStop(0, "rgba(56,198,244,0.10)"); grad.addColorStop(0.25, "rgba(56,198,244,0)");
+  x.fillStyle = grad; x.fillRect(0, 0, wPx, hPx);
+  x.strokeStyle = "rgba(56,198,244,0.35)"; x.lineWidth = 2;
+  x.strokeRect(1, 1, wPx - 2, hPx - 2);
+  x.strokeStyle = s.css; x.lineWidth = 4;
+  const k = 26;
+  x.beginPath();
+  x.moveTo(1, k); x.lineTo(1, 1); x.lineTo(k, 1);
+  x.moveTo(wPx - k, hPx - 1); x.lineTo(wPx - 1, hPx - 1); x.lineTo(wPx - 1, hPx - k);
+  x.stroke();
+  const lh = hPx * labelFrac;
+  x.fillStyle = "rgba(56,198,244,0.07)"; x.fillRect(2, 2, wPx - 4, lh - 6);
+  x.font = "600 26px 'IBM Plex Mono', monospace";
+  x.fillStyle = s.css; x.fillText(m.id, 20, lh * 0.62);
+  x.font = "700 27px 'Apple SD Gothic Neo', Pretendard, sans-serif";
+  x.fillStyle = "#d7e6f2";
+  let name = m.name;
+  while (x.measureText(name).width > wPx - 320 && name.length > 4) name = name.slice(0, -1);
+  if (name !== m.name) name += "…";
+  x.fillText(name, 105, lh * 0.62);
+  x.font = "700 30px 'IBM Plex Mono', monospace";
+  x.textAlign = "right";
+  x.fillStyle = "#ffb020"; x.fillText(String(m.procs), wPx - 88, lh * 0.63);
+  x.font = "600 17px 'IBM Plex Mono', monospace";
+  x.fillStyle = s.css; x.fillText(s.en, wPx - 20, lh * 0.6);
+  x.textAlign = "left";
+  const t = new THREE.CanvasTexture(c);
+  t.anisotropy = 4; t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+}
+function headerTexture(g, done, act) {
+  const c = document.createElement("canvas");
+  c.width = 1024; c.height = 148;
+  const x = c.getContext("2d");
+  x.fillStyle = "rgba(10,20,32,0.96)"; x.fillRect(0, 0, 1024, 148);
+  x.fillStyle = "rgba(255,176,32,0.9)"; x.fillRect(0, 138, 1024, 10);
+  x.font = "700 64px 'IBM Plex Mono', monospace";
+  x.fillStyle = "#ffb020"; x.fillText(g.label.slice(0, 2), 26, 92);
+  x.font = "800 58px 'Apple SD Gothic Neo', Pretendard, sans-serif";
+  x.fillStyle = "#e8f4fd"; x.fillText(g.label.slice(3), 128, 92);
+  const total = g.milestones.reduce((a, m) => a + m.procs, 0);
+  x.font = "600 34px 'IBM Plex Mono', monospace"; x.textAlign = "right";
+  x.fillStyle = "#38c6f4"; x.fillText(total + " PROC", 1000, 90);
+  x.textAlign = "left";
+  const t = new THREE.CanvasTexture(c);
+  t.anisotropy = 4; t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+}
+
+/* ══ build the wall ══ */
+const tileGeo = new THREE.PlaneGeometry(TILE, TILE);
+const tileMat = new THREE.MeshBasicMaterial({ toneMapped: false });
+const tiles = new THREE.InstancedMesh(tileGeo, tileMat, TOTAL);
+tiles.instanceColor = new THREE.InstancedBufferAttribute(new Float32Array(TOTAL * 3), 3);
+scene.add(tiles);
+
+const glowGeo = new THREE.PlaneGeometry(TILE * 3.4, TILE * 3.4);
+const glowCanvas = document.createElement("canvas");
+glowCanvas.width = glowCanvas.height = 64;
+{
+  const gx = glowCanvas.getContext("2d");
+  const rg = gx.createRadialGradient(32, 32, 2, 32, 32, 30);
+  rg.addColorStop(0, "rgba(255,255,255,0.9)"); rg.addColorStop(1, "rgba(255,255,255,0)");
+  gx.fillStyle = rg; gx.fillRect(0, 0, 64, 64);
+}
+const glowTex = new THREE.CanvasTexture(glowCanvas);
+const glowMat = new THREE.MeshBasicMaterial({
+  map: glowTex, transparent: true,
+  blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false,
+});
+const glows = new THREE.InstancedMesh(glowGeo, glowMat, TOTAL);
+glows.instanceColor = new THREE.InstancedBufferAttribute(new Float32Array(TOTAL * 3), 3);
+scene.add(glows);
+
+const inst = [];            // per-tile: {st, phase, boot}
+const panels = [];          // raycast targets
+const gateInfo = [];        // camera focus per gate
+const dummy = new THREE.Object3D();
+const col = new THREE.Color();
+let idx = 0, bootOrder = 0;
+
+GATES.forEach((g, gi) => {
+  const ang = (gi - (GATES.length - 1) / 2) * (GATE_STEP / R);
+  const grp = new THREE.Group();
+  grp.position.set(Math.sin(ang) * R, 0, -Math.cos(ang) * R);
+  grp.rotation.y = -ang;
+  scene.add(grp);
+  grp.updateMatrixWorld(true);
+
+  let y = BASE_Y;
+  g.milestones.forEach((m) => {
+    const rows = Math.ceil(m.procs / COLS);
+    const tilesH = rows * PITCH;
+    const ph = LABEL_H + tilesH + PANEL_PAD * 2;
+    const wPx = 1024, hPx = Math.max(96, Math.round((ph / PANEL_W) * 1024));
+    const mat = new THREE.MeshBasicMaterial({ map: panelTexture(m, wPx, hPx, LABEL_H / ph), transparent: true, toneMapped: false });
+    const panel = new THREE.Mesh(new THREE.PlaneGeometry(PANEL_W, ph), mat);
+    panel.position.set(0, y + ph / 2, 0);
+    panel.userData = { gate: gi, m };
+    grp.add(panel);
+    panels.push(panel);
+
+    const usedCols = Math.min(m.procs, COLS);
+    const x0 = -(usedCols - 1) * PITCH / 2;
+    const yTop = y + ph - LABEL_H - PANEL_PAD - PITCH / 2;
+    for (let p = 0; p < m.procs; p++) {
+      const r = Math.floor(p / COLS), c = p % COLS;
+      const rowCount = (r === rows - 1) ? (m.procs - r * COLS) : COLS;
+      const rx0 = -(rowCount - 1) * PITCH / 2;
+      dummy.position.set((r === rows - 1 ? rx0 : x0) + c * PITCH, yTop - r * PITCH, 0.012);
+      dummy.rotation.set(0, 0, 0);
+      dummy.updateMatrix();
+      dummy.matrix.premultiply(grp.matrixWorld);
+      tiles.setMatrixAt(idx, dummy.matrix);
+      glows.setMatrixAt(idx, dummy.matrix);
+      inst.push({ st: m.st, phase: Math.random() * Math.PI * 2, boot: bootOrder++ });
+      idx++;
+    }
+    y += ph + PANEL_GAP;
+  });
+
+  const header = new THREE.Mesh(
+    new THREE.PlaneGeometry(PANEL_W, PANEL_W * 148 / 1024),
+    new THREE.MeshBasicMaterial({ map: headerTexture(g), transparent: true, toneMapped: false })
+  );
+  header.position.set(0, y + 0.36, 0);
+  header.userData = { gate: gi, header: true };
+  grp.add(header);
+  panels.push(header);
+
+  const center = new THREE.Vector3(Math.sin(ang) * R, y * 0.48, -Math.cos(ang) * R);
+  const fd = Math.max(8, (y + 2.5) / 0.9);   // fit whole gate height in fov 50
+  gateInfo.push({
+    ang, topY: y,
+    focusPos: new THREE.Vector3(Math.sin(ang) * (R - fd), y * 0.48 + 0.6, -Math.cos(ang) * (R - fd)),
+    focusTgt: center,
+  });
+
+  // floor pool of light under each gate
+  const pool = new THREE.Mesh(
+    new THREE.PlaneGeometry(PANEL_W * 1.5, 3.4),
+    new THREE.MeshBasicMaterial({ map: glowTex, color: 0x11405e, transparent: true, opacity: 0.55, blending: THREE.AdditiveBlending, depthWrite: false })
+  );
+  pool.rotation.x = -Math.PI / 2;
+  pool.position.set(Math.sin(ang) * (R - 1.2), 0.01, -Math.cos(ang) * (R - 1.2));
+  scene.add(pool);
+});
+
+/* hover outline */
+const hover = new THREE.Mesh(
+  new THREE.PlaneGeometry(1, 1),
+  new THREE.MeshBasicMaterial({ color: 0xffb020, transparent: true, opacity: 0, side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthWrite: false })
+);
+scene.add(hover);
+
+/* floor grid */
+{
+  const c = document.createElement("canvas");
+  c.width = c.height = 512;
+  const x = c.getContext("2d");
+  x.fillStyle = "#04070c"; x.fillRect(0, 0, 512, 512);
+  x.strokeStyle = "rgba(56,198,244,0.10)"; x.lineWidth = 1;
+  for (let i = 0; i <= 512; i += 32) {
+    x.beginPath(); x.moveTo(i, 0); x.lineTo(i, 512); x.stroke();
+    x.beginPath(); x.moveTo(0, i); x.lineTo(512, i); x.stroke();
+  }
+  const t = new THREE.CanvasTexture(c);
+  t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(30, 30);
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(240, 240), new THREE.MeshBasicMaterial({ map: t }));
+  floor.rotation.x = -Math.PI / 2;
+  scene.add(floor);
+}
+
+/* dust particles */
+{
+  const n = 700, pos = new Float32Array(n * 3);
+  for (let i = 0; i < n; i++) {
+    pos[i * 3] = (Math.random() - 0.5) * 70;
+    pos[i * 3 + 1] = Math.random() * 16;
+    pos[i * 3 + 2] = -Math.random() * 40 + 6;
+  }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  const pts = new THREE.Points(geo, new THREE.PointsMaterial({
+    color: 0x38c6f4, size: 0.045, transparent: true, opacity: 0.35,
+    blending: THREE.AdditiveBlending, depthWrite: false,
+  }));
+  scene.add(pts);
+}
+
+/* ══ HUD build ══ */
+const legendEl = document.getElementById("legend");
+{
+  const byStProcs = {};
+  GATES.forEach(g => g.milestones.forEach(m => byStProcs[m.st] = (byStProcs[m.st] || 0) + m.procs));
+  ["completed", "active", "ready", "conditional", "blocked"].forEach(k => {
+    const s = ST[k];
+    legendEl.insertAdjacentHTML("beforeend",
+      `<span><i style="background:${s.css};box-shadow:0 0 6px ${s.css}"></i>${s.label} ${byStProcs[k] || 0}</span>`);
+  });
+}
+const rail = document.getElementById("rail");
+GATES.forEach((g, gi) => {
+  const total = g.milestones.reduce((a, m) => a + m.procs, 0);
+  const segs = ["completed", "active", "ready", "conditional", "blocked"].map(k => {
+    const n = g.milestones.filter(m => m.st === k).reduce((a, m) => a + m.procs, 0);
+    return n ? `<i style="width:${(n / total * 100).toFixed(1)}%;background:${ST[k].css}"></i>` : "";
+  }).join("");
+  rail.insertAdjacentHTML("beforeend",
+    `<button class="gatebtn" data-g="${gi}">
+       <span class="gl"><span class="gn">${g.label.slice(0, 2)}</span>${g.label.slice(3)}</span>
+       <span class="bar">${segs}</span>
+       <span class="gp">${g.milestones.length} MS · ${total} PROC</span>
+     </button>`);
+});
+const strip = document.getElementById("ticker-strip");
+{
+  const items = [];
+  GATES.forEach(g => g.milestones.forEach(m => {
+    const s = ST[m.st];
+    items.push(`<b>${m.id}</b> ${m.name} <span class="t-st" style="color:${s.css}">[${s.en} ${m.procs}]</span> ▚`);
+  }));
+  strip.innerHTML = (items.join(" ") + " ").repeat(2);
+}
+
+/* ══ camera rig ══ */
+const overview = {
+  pos: new THREE.Vector3(-2.4, 8.5, 26),
+  tgt: new THREE.Vector3(-2.4, 6.6, -R),
+};
+function fitOverview() {
+  const a = innerWidth / innerHeight;
+  overview.pos.z = a >= 1.2 ? 26 : 26 + (1.2 - a) * 26;   // pull back on narrow screens
+  overview.pos.x = overview.tgt.x = a >= 1.2 ? -2.4 : 0;
+}
+fitOverview();
+let camPos = overview.pos.clone(), camTgt = overview.tgt.clone();
+let wantPos = overview.pos.clone(), wantTgt = overview.tgt.clone();
+let focused = -1;
+const mouse = { x: 0, y: 0 };
+
+function focusGate(gi) {
+  focused = gi;
+  document.querySelectorAll(".gatebtn").forEach((b, i) => b.classList.toggle("on", i === gi));
+  if (gi < 0) { wantPos.copy(overview.pos); wantTgt.copy(overview.tgt); return; }
+  wantPos.copy(gateInfo[gi].focusPos);
+  wantTgt.copy(gateInfo[gi].focusTgt);
+}
+rail.addEventListener("click", e => {
+  const b = e.target.closest(".gatebtn");
+  if (b) focusGate(+b.dataset.g === focused ? -1 : +b.dataset.g);
+});
+addEventListener("keydown", e => {
+  if (e.key === "Escape") {
+    if (dailyOpen) setDaily(false);
+    else if (touring) setTour(false);
+    else { focusGate(-1); hideDetail(); }
+  }
+  if (e.key === "t" || e.key === "T") setTour(!touring);
+  if (e.key === "d" || e.key === "D") setDaily(!dailyOpen);
+});
+
+/* ══ cinematic tour — scroll-synced camera patrol (kage pattern) ══ */
+let touring = false, capIdx = -1;
+const tourKF = [];
+{
+  tourKF.push({
+    pos: new THREE.Vector3(0, 7.5, 36), tgt: new THREE.Vector3(0, 6.2, -R),
+    cap: { k: "CONTROL ROOM PATROL", h: "불빛 하나가<br>법정 절차 하나",
+           s: TOTAL.toLocaleString() + "개의 절차가 8개 게이트에 걸려 있습니다 — 스크롤로 순찰을 시작하세요" },
+  });
+  GATES.forEach((g, gi) => {
+    const gf = gateInfo[gi];
+    const side = gi % 2 ? 1 : -1;
+    const pos = gf.focusPos.clone();
+    pos.x += Math.cos(gf.ang) * side * 2.4;    // tangential drift for a cinematic angle
+    pos.z += Math.sin(gf.ang) * side * 2.4;
+    const total = g.milestones.reduce((a, m) => a + m.procs, 0);
+    const stc = {};
+    g.milestones.forEach(m => stc[m.st] = (stc[m.st] || 0) + 1);
+    const sum = Object.keys(ST).filter(k => stc[k]).map(k => ST[k].label + " " + stc[k]).join(" · ");
+    tourKF.push({
+      pos, tgt: gf.focusTgt.clone(),
+      cap: { k: `GATE ${String(gi + 1).padStart(2, "0")} / ${String(GATES.length).padStart(2, "0")}`,
+             h: g.label.slice(3),
+             s: `마일스톤 ${g.milestones.length} · 절차 ${total} — ${sum}` },
+    });
+  });
+  tourKF.push({
+    pos: new THREE.Vector3(0, 13.5, 42), tgt: new THREE.Vector3(0, 7.5, -R),
+    cap: { k: "END OF PATROL", h: TOTAL.toLocaleString(),
+           s: "완공까지 이 불빛을 전부 통과해야 합니다 — ESC 또는 ✕로 관제 화면 복귀" },
+  });
+}
+const scroller = document.getElementById("tour-scroller");
+const capEl = document.getElementById("tour-cap");
+const progEl = document.getElementById("tour-progress");
+const tcK = document.getElementById("tc-kicker");
+const tcH = document.getElementById("tc-head");
+const tcS = document.getElementById("tc-sub");
+function setTour(on) {
+  touring = on;
+  capIdx = -1;
+  document.body.classList.toggle("touring", on);
+  hideDetail();
+  if (on) {
+    focused = -1;
+    document.querySelectorAll(".gatebtn").forEach(b => b.classList.remove("on"));
+    scroller.style.height = (tourKF.length * 110) + "vh";
+    scrollTo(0, 0);
+  } else {
+    scrollTo(0, 0);
+    capEl.style.opacity = 0;
+    progEl.style.width = "0";
+    wantPos.copy(overview.pos);
+    wantTgt.copy(overview.tgt);
+  }
+}
+document.getElementById("tour-btn").addEventListener("click", () => setTour(true));
+document.getElementById("tour-exit").addEventListener("click", () => setTour(false));
+
+/* ══ daily board — per-ministry frontier ±2 (panels decomposed to cells) ══ */
+let dailyOpen = false;
+const REL_LABEL = { "-2": "이전", "-1": "이전", "0": "NOW", "1": "다음", "2": "다음" };
+function setDaily(on) {
+  if (on && touring) setTour(false);
+  dailyOpen = on;
+  document.body.classList.toggle("daily-open", on);
+}
+async function loadDaily() {
+  let d = null;
+  try {
+    const r = await fetch("./daily.json", { cache: "no-store" });
+    if (r.ok) d = await r.json();
+  } catch { /* offline */ }
+  if (!d) { document.getElementById("daily-btn").style.display = "none"; return; }
+  const anchorMs = d.anchor?.date
+    ? new Date(d.anchor.date + "T00:00:00+09:00").getTime()
+    : null;
+  document.getElementById("daily-sub").textContent =
+    `주체가 오늘 움직일 수 있는 지점 ±2단계 · 절차 ${d.totalProcs.toLocaleString()}개 중 10개 주체 · 기준일 ${d.asOf} · 칸 클릭 = 해당 마일스톤 관제`
+    + (anchorMs ? ` · ⏱ = 법정 처리기한(실적 평균 아님, 명문 ${d.totalWithDeadline}건) · ≈ = 동종 절차 중앙값 추정(제도→유형→전체 스케일 전파) · 경과일 = ${d.anchor.label} ${d.anchor.date} 기준, 진행 중 절차만` : "");
+  const wrap = document.getElementById("daily-rows");
+  d.rows.forEach(row => {
+    const el = document.createElement("div");
+    el.className = "drow";
+    const s = ST[row.nowSt];
+    const cells = [-2, -1, 0, 1, 2].map(rel => {
+      const c = row.window.find(w => w.rel === rel);
+      if (!c) return `<div class="dcell empty">—</div>`;
+      const cs = ST[c.st];
+      const relTag = rel === 0
+        ? `<b style="color:${ST[c.st].css}">● NOW</b>`
+        : `<span>${REL_LABEL[rel]}</span>`;
+      const dlParts = [];
+      if (c.dl) dlParts.push(`법정 ${c.dl.label}`);
+      else if (c.est) dlParts.push(
+        `<span class="est" title="동종 절차 법정기한 중앙값 (${c.est.basis} 스케일, 표본 ${c.est.n}건) — 실적 아님">≈${c.est.days}일·${c.est.basis}추정</span>`);
+      if (c.st === "active" && anchorMs) {
+        const elapsed = Math.floor((Date.now() - anchorMs) / 864e5) + 1;
+        const over = c.dl?.days != null && elapsed > c.dl.days;
+        dlParts.push(`<b style="color:${over ? "#ff6b57" : "var(--cyan)"}">경과 ${elapsed}일째${over ? " 초과" : ""}</b>`);
+      }
+      const dlLine = dlParts.length ? `<div class="dl">⏱ ${dlParts.join(" · ")}</div>` : "";
+      const tags = `<div class="tags"><span>${c.type}</span>${c.rhythm ? `<span class="rh">${c.rhythm}</span>` : ""}</div>`;
+      return `<div class="dcell${rel === 0 ? " now" : ""}" data-gate="${c.gate}" data-ms="${c.ms}" title="${c.tpl ?? ""}">
+        <div class="top"><span style="color:${cs.css}">${c.pid} · ${c.ms}</span>${relTag}</div>
+        <div class="nm">${c.name}</div>
+        <div class="who">${c.who}</div>${dlLine}${tags}
+      </div>`;
+    }).join("");
+    el.innerHTML = `<div class="drow-h" style="border-left-color:${s.css}">
+        <b>${row.short}</b>
+        <div class="m">${row.actor}<br>절차 <i style="color:var(--text)">${row.total}</i> · 지금 <i style="color:${s.css}">${row.nowPos}번째 ${s.label}</i><br>기한 명문 ${row.dlHave}건</div>
+      </div>${cells}`;
+    wrap.appendChild(el);
+  });
+  wrap.addEventListener("click", e => {
+    e.stopPropagation();   // keep the window click handler from hiding the card
+    const cell = e.target.closest(".dcell[data-ms]");
+    if (!cell) return;
+    const gi = +cell.dataset.gate;
+    const m = GATES[gi]?.milestones.find(x => x.id === cell.dataset.ms);
+    setDaily(false);
+    if (m) { focusGate(gi); showDetail(gi, m); }
+  });
+}
+loadDaily();
+document.getElementById("daily-btn").addEventListener("click", () => setDaily(true));
+document.getElementById("daily-close").addEventListener("click", () => setDaily(false));
+
+/* ══ picking ══ */
+const ray = new THREE.Raycaster();
+const ndc = new THREE.Vector2();
+const detail = document.getElementById("detail");
+function hideDetail() { detail.classList.remove("show"); }
+document.getElementById("d-close").addEventListener("click", hideDetail);
+
+let hovered = null;
+addEventListener("pointermove", e => {
+  mouse.x = (e.clientX / innerWidth) * 2 - 1;
+  mouse.y = (e.clientY / innerHeight) * 2 - 1;
+  if (touring || dailyOpen) { hovered = null; return; }
+  ndc.set(mouse.x, -mouse.y);
+  ray.setFromCamera(ndc, camera);
+  const hit = ray.intersectObjects(panels, false)[0];
+  hovered = hit ? hit.object : null;
+  document.body.style.cursor = hovered ? "pointer" : "crosshair";
+});
+function showDetail(gi, m) {
+  const s = ST[m.st];
+  document.getElementById("d-gate").textContent = "GATE " + GATES[gi].label;
+  document.getElementById("d-name").textContent = m.id + " · " + m.name;
+  document.getElementById("d-procs").textContent = m.procs;
+  const stEl = document.getElementById("d-st");
+  stEl.textContent = s.en + " · " + s.label;
+  stEl.style.color = s.css;
+  stEl.style.border = "1px solid " + s.css;
+  stEl.style.boxShadow = "0 0 12px " + s.css + "44";
+  detail.classList.remove("show");
+  void detail.offsetWidth;   // restart stagger animation
+  detail.classList.add("show");
+}
+addEventListener("click", e => {
+  if (touring || dailyOpen || e.target.closest(".hud")) return;
+  if (!hovered) { hideDetail(); return; }
+  const u = hovered.userData;
+  if (u.header) { focusGate(u.gate === focused ? -1 : u.gate); return; }
+  focusGate(u.gate);
+  showDetail(u.gate, u.m);
+});
+
+/* ══ brief strip — synthesized priority signals ══ */
+const brief = document.getElementById("brief");
+{
+  const byStatus = {};
+  GATES.forEach((g, gi) => g.milestones.forEach(m => {
+    (byStatus[m.st] = byStatus[m.st] || []).push({ gi, m });
+  }));
+  const cycle = {};
+  function addChip(st, html) {
+    const list = byStatus[st];
+    if (!list || !list.length) return;
+    const s = ST[st];
+    const b = document.createElement("button");
+    b.className = "chip";
+    b.innerHTML = `<i style="background:${s.css};box-shadow:0 0 8px ${s.css}"></i>${html}`;
+    b.addEventListener("click", () => {
+      cycle[st] = ((cycle[st] ?? -1) + 1) % list.length;
+      const { gi, m } = list[cycle[st]];
+      focusGate(gi);
+      showDetail(gi, m);
+    });
+    brief.appendChild(b);
+  }
+  const sum = st => (byStatus[st] || []).reduce((a, x) => a + x.m.procs, 0);
+  const act = (byStatus.active || [])[0];
+  if (act) addChip("active",
+    `진행 <b class="n" style="color:${ST.active.css}">${act.m.id}</b> · ${act.m.procs}절차`);
+  addChip("conditional",
+    `조건부 <b class="n" style="color:${ST.conditional.css}">${(byStatus.conditional || []).length}건</b> · ${sum("conditional")}절차`);
+  addChip("ready",
+    `준비 <b class="n" style="color:${ST.ready.css}">${(byStatus.ready || []).length}건</b> · ${sum("ready")}절차`);
+  brief.title = "클릭하면 해당 마일스톤으로 이동합니다 (반복 클릭 = 다음 건)";
+}
+
+/* ══ boot sequence ══ */
+const bootEl = document.getElementById("boot");
+const bootLog = document.getElementById("boot-log");
+const bignum = document.getElementById("bignum");
+const MS_TOTAL = GATES.reduce((a, g) => a + g.milestones.length, 0);
+const BOOT_LINES = [
+  "> K100 WARROOM v1.1 — 관제 시스템 초기화",
+  "> 데이터 링크: mega-projects/gwangju-semiconductor-cluster",
+  `> 기준일 ${AS_OF} · 게이트 ${GATES.length} · 마일스톤 ${MS_TOTAL}`,
+  `> 법정 절차 ${TOTAL.toLocaleString()}건 적재 완료`,
+  "> 상황판 점등 개시…",
+];
+let bootT0 = null;
+(async () => {
+  for (const line of BOOT_LINES) {
+    for (let i = 0; i <= line.length; i += 3) {
+      bootLog.innerHTML = bootLog.dataset.done + '<span>' + line.slice(0, i) + '</span><span class="cur"> </span>';
+      await new Promise(r => setTimeout(r, 8));
+    }
+    bootLog.dataset.done = (bootLog.dataset.done || "") + '<span class="dim">' + line + "</span>\n";
+    await new Promise(r => setTimeout(r, 120));
+  }
+  await new Promise(r => setTimeout(r, 250));
+  bootEl.classList.add("done");
+  bootT0 = performance.now();
+  setTimeout(() => {
+    rail.classList.add("lit");
+    brief.classList.add("lit");
+  }, BOOT_DUR * 0.55);
+})();
+bootLog.dataset.done = "";
+
+/* ══ animate ══ */
+const BOOT_DUR = 3400;
+const clock = new THREE.Clock();
+const tmp = new THREE.Color();
+let lastCount = -1;
+
+function setTileColor(i, c, glowScale) {
+  tiles.instanceColor.setXYZ(i, c.r, c.g, c.b);
+  glows.instanceColor.setXYZ(i, c.r * glowScale, c.g * glowScale, c.b * glowScale);
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
+  const bootP = bootT0 === null ? 0 : Math.min(1, (performance.now() - bootT0) / BOOT_DUR);
+  const litCount = Math.floor(bootP * TOTAL);
+
+  if (Math.floor(litCount) !== lastCount) {
+    bignum.textContent = litCount.toLocaleString();
+    lastCount = litCount;
+  }
+
+  for (let i = 0; i < TOTAL; i++) {
+    const d = inst[i];
+    const s = ST[d.st];
+    if (d.boot >= litCount) {
+      tmp.setScalar(0.012);
+      setTileColor(i, tmp, 0);
+      continue;
+    }
+    tmp.setHex(s.color);
+    let g = 0.5;
+    if (s.pulse > 0) {
+      const w = 0.72 + 0.38 * Math.sin(t * s.pulse + d.phase);
+      tmp.multiplyScalar(w);
+      g = 0.95 * w;
+    } else if (d.st === "blocked") {
+      const w = 0.85 + 0.15 * Math.sin(t * 0.4 + d.phase);
+      tmp.multiplyScalar(w);
+      g = 0.45;
+    } else {
+      g = 0.8;
+    }
+    if (d.boot > litCount - 60 && bootP < 1) tmp.lerp(new THREE.Color(0xffffff), 0.7);
+    setTileColor(i, tmp, g);
+  }
+  tiles.instanceColor.needsUpdate = true;
+  glows.instanceColor.needsUpdate = true;
+
+  if (hovered) {
+    hover.position.copy(hovered.getWorldPosition(new THREE.Vector3()));
+    hover.quaternion.copy(hovered.getWorldQuaternion(new THREE.Quaternion()));
+    hover.position.add(new THREE.Vector3(0, 0, 0.02).applyQuaternion(hover.quaternion));
+    const p = hovered.geometry.parameters;
+    hover.scale.set(p.width * 1.015, p.height * 1.03, 1);
+    hover.material.opacity = Math.min(0.16, hover.material.opacity + 0.02);
+  } else {
+    hover.material.opacity = Math.max(0, hover.material.opacity - 0.03);
+  }
+
+  if (touring) {
+    const max = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+    const p = Math.min(1, Math.max(0, scrollY / max));
+    progEl.style.width = (p * 100).toFixed(2) + "%";
+    const x = p * (tourKF.length - 1);
+    const i = Math.min(tourKF.length - 2, Math.floor(x));
+    let f = x - i;
+    f = f * f * (3 - 2 * f);
+    camPos.lerp(tourKF[i].pos.clone().lerp(tourKF[i + 1].pos, f), 0.09);
+    camTgt.lerp(tourKF[i].tgt.clone().lerp(tourKF[i + 1].tgt, f), 0.09);
+    const c = Math.round(x);
+    if (c !== capIdx) {
+      capIdx = c;
+      const k = tourKF[c].cap;
+      tcK.textContent = k.k;
+      tcH.innerHTML = k.h;
+      tcS.textContent = k.s;
+    }
+    capEl.style.opacity = Math.max(0, 1 - Math.abs(x - c) * 2.4).toFixed(2);
+  } else {
+    const drift = focused < 0 ? Math.sin(t * 0.1) * 0.9 : 0;
+    const px = wantPos.x + drift + mouse.x * 0.9;
+    const py = wantPos.y + mouse.y * -0.5;
+    camPos.x += (px - camPos.x) * 0.045;
+    camPos.y += (py - camPos.y) * 0.045;
+    camPos.z += (wantPos.z - camPos.z) * 0.045;
+    camTgt.lerp(wantTgt, 0.05);
+  }
+  camera.position.copy(camPos);
+  camera.lookAt(camTgt);
+
+  renderer.render(scene, camera);
+}
+animate();
+
+addEventListener("resize", () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+  fitOverview();
+  if (focused < 0) { wantPos.copy(overview.pos); wantTgt.copy(overview.tgt); }
+});
+</script>
+</body>
+</html>
