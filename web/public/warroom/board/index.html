@@ -180,6 +180,46 @@ body::before {
 .ho .n { color: var(--gold); font-weight: 700; white-space: nowrap; }
 .ho em { font-style: normal; font-size: 8.5px; letter-spacing: 0.08em; color: var(--muted); display: block; }
 
+/* ── simulated schedule ── */
+#t-warn {
+  margin-top: 11px; border: 1px solid rgba(157,134,245,0.45);
+  background: rgba(157,134,245,0.08); padding: 9px 12px;
+  font-size: 11.5px; line-height: 1.65; color: #c3b8ea;
+}
+#t-warn b { color: var(--violet); font-family: var(--mono); letter-spacing: 0.1em; }
+#t-switch { display: flex; gap: 6px; margin-top: 11px; flex-wrap: wrap; }
+#t-switch button {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; cursor: pointer;
+  padding: 5px 12px; border: 1px solid var(--line); background: transparent; color: var(--muted);
+}
+#t-switch button.on { color: var(--gold); border-color: var(--gold); background: rgba(255,215,106,0.08); }
+#t-head { margin-top: 11px; display: flex; gap: 8px; flex-wrap: wrap; align-items: stretch; }
+#t-head .th {
+  border: 1px solid var(--line); background: var(--panel); padding: 8px 11px; min-width: 132px;
+}
+#t-head .th .l { font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; color: var(--muted); }
+#t-head .th .v { font-family: var(--mono); font-size: 17px; font-weight: 700; margin-top: 2px; }
+#t-head .th .v small { font-size: 10px; color: var(--muted); font-weight: 400; }
+#t-head .th.gap { border-color: rgba(255,176,32,0.45); background: rgba(255,176,32,0.07); }
+#t-head .th.gap .v { color: var(--amber); }
+#gantt { margin-top: 12px; display: grid; gap: 3px; }
+.gr { display: grid; grid-template-columns: minmax(0, 15ch) 1fr minmax(0, 15ch); gap: 9px; align-items: center; cursor: pointer; }
+.gr:hover .gt { background: rgba(56,198,244,0.09); }
+.gr .gn { font-family: var(--mono); font-size: 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gr .gd { font-family: var(--mono); font-size: 9px; color: var(--muted); text-align: right; white-space: nowrap; }
+.gt { position: relative; height: 15px; background: rgba(53,97,138,0.13); border: 1px solid rgba(53,97,138,0.2); }
+.gt i { position: absolute; top: 2px; bottom: 2px; border-radius: 1px; min-width: 2px; }
+.gt i.ministry { background: var(--cyan); }
+.gt i.local { background: var(--green); }
+.gt i.committee { background: var(--gold); }
+.gt i.public { background: #7fb2d9; }
+.gt i.private { background: var(--violet); }
+.gt i.role { background: var(--rose); }
+.gt .yr { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(95,123,144,0.22); }
+#gantt .axis { display: grid; grid-template-columns: minmax(0, 15ch) 1fr minmax(0, 15ch); gap: 9px; margin-top: 4px; }
+#gantt .axis .ax { position: relative; height: 13px; font-family: var(--mono); font-size: 8.5px; color: var(--muted); }
+#gantt .axis .ax span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+
 /* ── whole picture map ── */
 #map { display: grid; grid-template-columns: repeat(auto-fit, minmax(178px, 1fr)); gap: 8px; margin-top: 11px; }
 .gate { border: 1px solid var(--line); background: var(--panel); padding: 9px 10px; }
@@ -259,6 +299,15 @@ body::before {
   .ho .f { text-align: left; }
   .ho .ar { display: none; }
   #map { grid-template-columns: 1fr 1fr; }
+  /* the bar needs the room more than the date label does */
+  .gr { grid-template-columns: minmax(0, 11ch) 1fr; grid-template-areas: "n t" "d d"; row-gap: 1px; }
+  .gr .gn { grid-area: n; }
+  .gr .gt { grid-area: t; }
+  .gr .gd { grid-area: d; text-align: left; padding-left: 2px; font-size: 8.5px; }
+  #gantt { gap: 7px; }
+  #gantt .axis { grid-template-columns: minmax(0, 11ch) 1fr; }
+  #gantt .axis > div:last-child { display: none; }
+  #t-head .th { flex: 1 1 44%; min-width: 0; }
 }
 </style>
 </head>
@@ -294,6 +343,14 @@ body::before {
   <div class="sec">
     <h2>막힌 인계 BLOCKED HANDOFFS <span>공급 주체가 끝내지 못해 수요 주체가 착수하지 못하는 관계 · 걸린 절차 수 순</span></h2>
     <div id="handoffs"></div>
+  </div>
+
+  <div class="sec">
+    <h2>모의 일정 SIMULATED SCHEDULE <span id="t-cap"></span></h2>
+    <div id="t-warn"></div>
+    <div id="t-switch"></div>
+    <div id="t-head"></div>
+    <div id="gantt"></div>
   </div>
 
   <div class="sec">
@@ -450,6 +507,80 @@ $("#handoffs").addEventListener("click", (e) => {
   if (r) openDrill(r.dataset.from);
 });
 
+/* ══ simulated schedule ══
+   Labelled as a model everywhere it appears. The scenario spread is printed
+   rather than hidden: if 16 rule combinations move the answer by 33 days and
+   the empirical run by 0, the reader should know the toggles are not levers. */
+const TL = actorsJson.timeline;
+let basis = "statutory";
+const bKeys = Object.keys(TL.bases);
+const dayLabel = (d) => TL.anchored
+  ? new Date(Date.parse(`${TL.anchor}T00:00:00Z`) + d * 86400000).toISOString().slice(0, 7)
+  : `D+${d}`;
+
+$("#t-cap").textContent = TL.anchored
+  ? `기점 ${TL.anchor} · 주체가 잡고 있는 구간 · 모의 계산`
+  : `기점 미정 — 달력 날짜 없이 상대 일수만`;
+
+$("#t-warn").innerHTML =
+  `<b>모의 MODEL</b> — 이 구간은 실적이 아니라 계산입니다. `
+  + `법정기한과 절차군 실측 중앙값을 역일로 단순환산한 CPM 결과이며, 착수 지연과 재협의 루프를 반영하지 않습니다. `
+  + `규칙 조합 ${TL.bases.statutory.scenarioCount}개를 모두 돌려도 결과 폭은 `
+  + `법정 ${TL.bases.statutory.spreadDays}일 · 실측 ${TL.bases.empirical.spreadDays}일에 그칩니다 — `
+  + `조합을 바꾸는 것으로는 일정이 움직이지 않는다는 뜻입니다.`;
+
+$("#t-switch").innerHTML = bKeys.map((k) =>
+  `<button data-b="${k}"${k === basis ? ' class="on"' : ""}>${esc(TL.bases[k].label)}</button>`).join("");
+$("#t-switch").addEventListener("click", (e) => {
+  const b = e.target.closest("button");
+  if (!b) return;
+  basis = b.dataset.b;
+  $("#t-switch").querySelectorAll("button").forEach((x) => x.classList.toggle("on", x.dataset.b === basis));
+  renderGantt();
+});
+
+function renderGantt() {
+  const B = TL.bases[basis];
+  const span = Math.max(...bKeys.map((k) => TL.bases[k].totalDays)); // shared scale so bases compare
+  $("#t-head").innerHTML =
+    `<div class="th"><div class="l">${esc(B.label)} 총기간</div><div class="v">${B.years}<small>년</small></div>`
+    + `<div class="l" style="margin-top:3px">${nf(B.totalDays)}일</div></div>`
+    + (B.end ? `<div class="th"><div class="l">모의 종료</div><div class="v">${esc(B.end.slice(0, 7))}</div>`
+      + `<div class="l" style="margin-top:3px">상업생산 개시 기준</div></div>` : "")
+    + `<div class="th gap"><div class="l">법정 대비 실측 격차</div><div class="v">+${TL.gapYears}<small>년</small></div>`
+    + `<div class="l" style="margin-top:3px">${nf(TL.gapDays)}일</div></div>`
+    + `<div class="th"><div class="l">시나리오 ${B.scenarioCount}개 폭</div><div class="v">${B.spreadDays}<small>일</small></div>`
+    + `<div class="l" style="margin-top:3px">규칙 조합 전체</div></div>`;
+
+  const rows = actors.filter((a) => a.timeline?.[basis]).map((a) => ({ a, t: a.timeline[basis] }))
+    .sort((x, y) => x.t.es - y.t.es || y.a.procs - x.a.procs);
+  const years = [];
+  for (let d = 0; d <= span; d += 365.25 * 2) years.push(d);
+  const g = $("#gantt");
+  g.innerHTML = rows.map(({ a, t }) => {
+    const left = (t.es / span * 100).toFixed(2), w = Math.max(0.4, (t.days / span * 100)).toFixed(2);
+    const when = t.start ? `${t.start.slice(0, 7)}~${t.end.slice(0, 7)}` : `D+${t.es}~${t.ef}`;
+    return `<div class="gr" data-actor="${esc(a.name)}" title="${esc(a.name)} · ${esc(when)} · ${t.span}년">`
+      + `<div class="gn">${esc(a.name)}</div>`
+      + `<div class="gt">${years.map((d) => `<span class="yr" style="left:${(d / span * 100).toFixed(2)}%"></span>`).join("")}`
+      + `<i class="${a.type}" style="left:${left}%;width:${w}%"></i></div>`
+      + `<div class="gd">${esc(when)}</div></div>`;
+  }).join("")
+    + `<div class="axis"><div></div><div class="ax">`
+    + years.map((d) => {
+        const lab = TL.anchored
+          ? new Date(Date.parse(`${TL.anchor}T00:00:00Z`) + d * 86400000).getUTCFullYear()
+          : `D+${Math.round(d)}`;
+        return `<span style="left:${(d / span * 100).toFixed(2)}%">${lab}</span>`;
+      }).join("")
+    + `</div><div></div></div>`;
+}
+$("#gantt").addEventListener("click", (e) => {
+  const r = e.target.closest(".gr");
+  if (r) openDrill(r.dataset.actor);
+});
+renderGantt();
+
 /* ══ whole picture ══ */
 $("#m-cap").textContent = `게이트 ${dataJson.gates.length} · 마일스톤 ${totalMs} · 절차 ${nf(totalProcs)} · 주체를 고르면 담당 구간이 강조됩니다`;
 $("#map").innerHTML = dataJson.gates.map((g) =>
@@ -482,8 +613,15 @@ function openDrill(name) {
     const m = ms.get(id);
     if (!m) return "";
     const w = waitOf.get(id);
+    const tw = a.timeline?.[basis]?.windows.find((x) => x.ms === id);
+    const twTxt = tw
+      ? (TL.anchored
+          ? `모의 ${dayLabel(tw.es)}~${dayLabel(tw.ef)}`
+          : `모의 D+${tw.es}~${tw.ef}`) + ` (${tw.ef - tw.es}일)`
+      : "모의 구간 없음 — 이 시나리오 미포함";
     return `<div class="mi ${m.st}"><div class="mt">${esc(m.name)}</div>`
       + `<div class="mm">${esc(id)} · ${esc(m.gateLabel)} · ${nf(m.procs)}절차 · ${ST_LABEL[m.st]}</div>`
+      + `<div class="mm" style="color:var(--violet)">${esc(twTxt)}</div>`
       + (w ? `<div class="wait">기다리는 것 — ` + w.needs.map((n) =>
           `<b>${esc(n.name)}</b> <u>(${esc(n.actors.join(", ") || "주관 미기재")})</u>`).join(", ") + `</div>` : "")
       + `</div>`;
@@ -529,7 +667,10 @@ $("#note").innerHTML =
   + `<b>담당기관 미확정.</b> "산업단지 지정권자"처럼 법령이 역할로 지정한 주체는 실제 담당기관을 임의로 특정하지 않았습니다. `
   + `지정 경로가 확정되어야 정해지는 사항이며, 데이터 누락이 아닙니다.<br />`
   + `<b>진척.</b> 완료 ${stTotals.completed}건 · 진행 ${stTotals.active}건으로 사업 초기입니다. 대부분 주체의 수행 이력이 비어 있는 것은 실제 상태이며 표시 오류가 아닙니다.<br />`
-  + `<b>막는 절차 수.</b> 해당 주체가 끝내지 못해 착수하지 못하는 후속 마일스톤의 절차 합입니다. 지연 일수가 아니라 물량이며, 일정 추정은 이 화면의 범위가 아닙니다.`;
+  + `<b>막는 절차 수.</b> 해당 주체가 끝내지 못해 착수하지 못하는 후속 마일스톤의 절차 합입니다. 지연 일수가 아니라 물량입니다.<br />`
+  + `<b>모의 일정.</b> ${esc(TL.note)} `
+  + (TL.anchored ? `기점은 입지 결정일 ${esc(TL.anchor)}이며 ` : `기점이 정해지지 않아 달력 날짜 대신 상대 일수로 표시하며 `)
+  + `주체 구간은 그 주체가 맡은 마일스톤의 최초 착수부터 최종 종료까지입니다. 중간의 대기 구간도 포함되므로 실제 작업량과 다릅니다.`;
 
 renderActors();
 </script>

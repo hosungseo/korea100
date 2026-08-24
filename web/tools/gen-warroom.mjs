@@ -132,6 +132,7 @@ const ACTOR_ALIAS = { "한전": "한국전력" };
 // many single actor names legitimately contain "·" (e.g. "정부·청와대").
 const ACTOR_COMPOUND = { "전남광주시·산업단지 지정권자": ["전남광주시", "산업단지 지정권자"] };
 const actorSlug = (name) => "a" + [...name].reduce((h, c) => (h * 31 + c.codePointAt(0)) % 0xfffffff, 7).toString(36);
+const actorsOfRegistry = (reg) => [...reg.values()];
 const classifyActor = (name) => (ACTOR_CLASS.find(([re]) => re.test(name)) ?? [null, "role"])[1];
 
 /* Normalised lead actors of one node: alias-folded, compound-split. */
@@ -487,6 +488,58 @@ function build(cfg) {
     });
   });
 
+  /* ── simulated time axis ──
+     A model, not a forecast. Two CPM runs over the same graph: statutory
+     deadlines, and medians measured from disclosed approval documents. Both
+     convert statutory days to calendar days naively. Scenario 0 stands in for
+     the whole scenario space because the spread across all rule combinations
+     is tiny (recorded below so the board can state it rather than hide it). */
+  // A project without a decided anchor (no site decision yet) has no calendar
+  // to hang the model on. Day offsets are still meaningful relative to project
+  // start; calendar dates are not, so they stay null rather than invented.
+  const anchorMs = anchorDate ? Date.parse(`${anchorDate}T00:00:00Z`) : NaN;
+  const anchored = Number.isFinite(anchorMs);
+  const dayToDate = (d) => (anchored ? new Date(anchorMs + d * 86400000).toISOString().slice(0, 10) : null);
+  const BASES = [
+    { key: "statutory", label: "법정 기준", scenarios: pathJson.scenarios },
+    { key: "empirical", label: "실측 기준", scenarios: pathJson.empiricalScenarios },
+  ];
+  const timelineMeta = { anchor: anchorDate, anchored, bases: {} };
+  BASES.forEach((b) => {
+    const totals = b.scenarios.map((s) => s.totalDays);
+    const lo = Math.min(...totals), hi = Math.max(...totals);
+    timelineMeta.bases[b.key] = {
+      label: b.label,
+      totalDays: b.scenarios[0].totalDays,
+      end: dayToDate(b.scenarios[0].totalDays),
+      years: +(b.scenarios[0].totalDays / 365.25).toFixed(1),
+      scenarioCount: b.scenarios.length,
+      spreadDays: hi - lo,
+      critical: b.scenarios[0].critical,
+    };
+  });
+  timelineMeta.gapDays = timelineMeta.bases.empirical.totalDays - timelineMeta.bases.statutory.totalDays;
+  timelineMeta.gapYears = +(timelineMeta.gapDays / 365.25).toFixed(1);
+  timelineMeta.note = "모의 일정 — 법정기한과 절차군 실측 중앙값을 역일로 단순환산한 CPM 모델. 실적 예측이 아니며 착수 지연·재협의 루프를 반영하지 않는다.";
+
+  actorsOfRegistry(reg).forEach((a) => {
+    a.timeline = {};
+    BASES.forEach((b) => {
+      const eta = b.scenarios[0].eta;
+      const win = a.milestones.filter((id) => eta[id]).map((id) => ({ ms: id, es: eta[id][0], ef: eta[id][1] }));
+      const off = a.milestones.filter((id) => !eta[id]);
+      if (!win.length) { a.timeline[b.key] = null; return; }
+      const es = Math.min(...win.map((w) => w.es)), ef = Math.max(...win.map((w) => w.ef));
+      a.timeline[b.key] = {
+        es, ef, days: ef - es,
+        start: dayToDate(es), end: dayToDate(ef),
+        span: +((ef - es) / 365.25).toFixed(1),
+        windows: win.sort((x, y) => x.es - y.es),
+        excluded: off, // milestones outside this scenario (rule-conditional)
+      };
+    });
+  });
+
   const actors = [...reg.values()].sort((a, b) => b.procs - a.procs);
   const typeCount = {};
   actors.forEach((a) => { typeCount[a.typeLabel] = (typeCount[a.typeLabel] ?? 0) + 1; });
@@ -496,6 +549,7 @@ function build(cfg) {
     asOf: project.asOfDate,
     project: { id: project.id, name: project.name, short: cfg.short },
     types: ACTOR_TYPES,
+    timeline: timelineMeta,
     actors,
     summary: {
       actorCount: actors.length,
