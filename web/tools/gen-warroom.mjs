@@ -94,6 +94,60 @@ function inst(slug) {
   return instCache.get(slug);
 }
 
+/* ══ actor axis (prime-minister situation board) ══
+   The source graph names who leads each milestone in actorRoles.lead, but the
+   strings mix real institutions ("국방부", "전남광주시") with statutory role
+   names whose holder is not yet fixed ("산업단지 지정권자", "환경 협의기관").
+   We normalise and classify, but we never guess a ministry behind a role name:
+   "산업단지 지정권자" is the 시·도지사 or 국토부 depending on the case, and
+   asserting one would be a fabricated fact on a board meant for decisions.
+   Role-name actors are kept as their own type so the board can surface them as
+   what they are — work whose responsible body is still undetermined. */
+const ACTOR_TYPES = {
+  ministry: { label: "중앙부처", steerable: true, named: true },
+  committee: { label: "위원회·전담조직", steerable: true, named: true },
+  local: { label: "지방자치단체", steerable: true, named: true },
+  public: { label: "공공기관", steerable: true, named: true },
+  private: { label: "민간", steerable: false, named: true },
+  // Not missing data: these nodes carry confidence "statutory", i.e. the law
+  // itself designates the actor by role ("산업단지 지정권자"), and which body
+  // holds it follows from the designation route once that is fixed.
+  role: { label: "법정 역할 · 담당기관 미확정", steerable: false, named: false },
+};
+// Explicit classification. Anything unmatched falls to `role` and is reported,
+// so an unclassified string is visible rather than silently mistyped.
+const ACTOR_CLASS = [
+  [/^(국방부|산업통상부|기후에너지환경부|환경부|국토교통부|행정안전부|기획재정부|과학기술정보통신부|문화체육관광부|농림축산식품부|해양수산부|고용노동부)$/, "ministry"],
+  [/^(국가유산청|산림청|소방청|경찰청|병무청|조달청)$/, "ministry"],
+  [/위원회$|전담조직$|^정부·청와대$|^정부$/, "committee"],
+  [/^(전남광주시|광주광역시|전라남도|전남도|무안군|함평군|이전지역 지방자치단체|지방자치단체)$/, "local"],
+  [/^(한국전력|한전|한국수자원공사|한국도로공사|한국가스공사|한국환경공단|국가철도공단)$/, "public"],
+  [/^(사업시행자|개발사업시행자|산업단지 사업시행자|사업자|입주기업|건축주|감리자|정화책임자|신청인|신청인\(당사자\))$/, "private"],
+];
+// Merged only where the two strings denote the same body beyond doubt.
+// 사업시행자 / 개발사업시행자 / 산업단지 사업시행자 are NOT merged: they are
+// distinct legal positions under different statutes and may be different firms.
+const ACTOR_ALIAS = { "한전": "한국전력" };
+// Compound lead strings that name two actors at once. Listed explicitly because
+// many single actor names legitimately contain "·" (e.g. "정부·청와대").
+const ACTOR_COMPOUND = { "전남광주시·산업단지 지정권자": ["전남광주시", "산업단지 지정권자"] };
+const actorSlug = (name) => "a" + [...name].reduce((h, c) => (h * 31 + c.codePointAt(0)) % 0xfffffff, 7).toString(36);
+const actorsOfRegistry = (reg) => [...reg.values()];
+const classifyActor = (name) => (ACTOR_CLASS.find(([re]) => re.test(name)) ?? [null, "role"])[1];
+
+/* Normalised lead actors of one node: alias-folded, compound-split. */
+function leadActorsOf(node) {
+  const raw = (node.actorRoles?.lead ?? []).filter(Boolean);
+  const out = [];
+  raw.forEach((s) => {
+    (ACTOR_COMPOUND[s] ?? [s]).forEach((part) => {
+      const name = ACTOR_ALIAS[part] ?? part;
+      if (!out.includes(name)) out.push(name);
+    });
+  });
+  return out;
+}
+
 /* ── per-project build ── */
 function build(cfg) {
   const project = read(`data/mega-projects/projects/${cfg.id}.json`);
@@ -328,8 +382,202 @@ function build(cfg) {
     note: "statutory=법정기한+동종추정 · empirical=정보공개 원문공개 결재문서에서 측정한 절차군 생애주기 중앙값(개별 절차가 아니라 마일스톤 단위). 역일 단순환산 모델 — 실적 예측 아님",
   };
 
+  /* ── actor axis: registry + handoff graph ── */
+  const msProcs = new Map(), msName = new Map(), msGate = new Map();
+  dataJson.gates.forEach((g, gi) => g.milestones.forEach((m) => {
+    msProcs.set(m.id, m.procs); msName.set(m.id, m.name); msGate.set(m.id, gi);
+  }));
+  const leadOf = new Map(project.nodes.map((n) => [n.id, leadActorsOf(n)]));
+
+  // Registry keyed by normalised display name.
+  const reg = new Map();
+  const actorOf = (name) => {
+    if (!reg.has(name)) {
+      const type = classifyActor(name);
+      reg.set(name, {
+        id: actorSlug(name), name, type, typeLabel: ACTOR_TYPES[type].label,
+        steerable: ACTOR_TYPES[type].steerable, named: ACTOR_TYPES[type].named,
+        milestones: [], msCount: 0, procs: 0,
+        status: { completed: 0, active: 0, ready: 0, conditional: 0, blocked: 0 },
+        now: [], waitingOn: [], blocking: { procs: 0, targets: [] },
+        aliases: [], roleHint: null, confidence: {},
+      });
+    }
+    return reg.get(name);
+  };
+  Object.entries(ACTOR_ALIAS).forEach(([from, to]) => {
+    if ([...leadOf.values()].some((l) => l.includes(to))) actorOf(to).aliases.push(from);
+  });
+  project.nodes.forEach((n) => {
+    const st = stOf.get(n.id);
+    leadOf.get(n.id).forEach((name) => {
+      const a = actorOf(name);
+      a.milestones.push(n.id);
+      a.msCount += 1;
+      a.procs += msProcs.get(n.id) ?? 0;
+      a.status[st] = (a.status[st] ?? 0) + 1;
+      const cf = n.confidence ?? "unknown";
+      a.confidence[cf] = (a.confidence[cf] ?? 0) + 1;
+      if (st === "active" || st === "ready") a.now.push(n.id);
+    });
+  });
+  // A compound lead ("전남광주시·산업단지 지정권자") is the only evidence in the
+  // graph about who a role name might be. Surface it as a hint, never as fact.
+  Object.entries(ACTOR_COMPOUND).forEach(([, parts]) => {
+    const named = parts.find((p) => ACTOR_TYPES[classifyActor(p)].named);
+    const role = parts.find((p) => !ACTOR_TYPES[classifyActor(p)].named);
+    if (!named || !role || !reg.has(role)) return;
+    const where = project.nodes.filter((n) => (n.actorRoles?.lead ?? []).some((s) => ACTOR_COMPOUND[s])).map((n) => n.id);
+    reg.get(role).roleHint = { likely: named, evidence: where, note: `${where.join(",")} 에서 ${named}과 병기됨 — 확정 아님` };
+  });
+
+  // Handoff edges: a hard requirement satisfied by another node's output.
+  const edges = [];
+  project.nodes.forEach((n) => {
+    (n.requires ?? []).filter((q) => q.strength === "hard").forEach((q) => {
+      (producers.get(q.artifact) ?? []).forEach((p) => {
+        if (p === n.id) return;
+        const from = leadOf.get(p) ?? [], to = leadOf.get(n.id) ?? [];
+        const cross = from.some((f) => !to.includes(f)) || to.some((t) => !from.includes(t));
+        edges.push({
+          fromMs: p, toMs: n.id, artifact: q.artifact,
+          fromActors: from, toActors: to, cross,
+          blocked: stOf.get(p) !== "completed",
+          procs: msProcs.get(n.id) ?? 0,
+        });
+      });
+    });
+  });
+  // Actor-pair rollup: how much downstream work sits behind each handoff.
+  const pairKey = (f, t) => `${f} ${t}`;
+  const pairs = new Map();
+  edges.forEach((e) => {
+    e.fromActors.forEach((f) => e.toActors.forEach((t) => {
+      if (f === t) return;
+      const k = pairKey(f, t);
+      if (!pairs.has(k)) pairs.set(k, { from: f, to: t, procs: 0, edges: 0, blockedEdges: 0, ms: [] });
+      const g = pairs.get(k);
+      g.edges += 1;
+      if (e.blocked) {
+        g.blockedEdges += 1;
+        if (!g.ms.includes(e.toMs)) { g.ms.push(e.toMs); g.procs += e.procs; }
+      }
+    }));
+  });
+  const byPair = [...pairs.values()].filter((g) => g.blockedEdges > 0).sort((a, b) => b.procs - a.procs);
+  byPair.forEach((g) => {
+    const a = reg.get(g.from);
+    if (!a) return;
+    a.blocking.procs += g.procs;
+    a.blocking.targets.push({ actor: g.to, procs: g.procs });
+  });
+  // What each actor is waiting for, and who owes it.
+  project.nodes.forEach((n) => {
+    if (stOf.get(n.id) !== "blocked") return;
+    const needs = [];
+    (n.requires ?? []).filter((q) => q.strength === "hard").forEach((q) => {
+      (producers.get(q.artifact) ?? []).forEach((p) => {
+        if (p === n.id || nodeById.get(p)?.status === "completed") return;
+        if (!needs.some((x) => x.ms === p)) needs.push({ ms: p, name: msName.get(p), actors: leadOf.get(p) ?? [] });
+      });
+    });
+    if (!needs.length) return;
+    leadOf.get(n.id).forEach((name) => {
+      const a = reg.get(name);
+      if (a) a.waitingOn.push({ ms: n.id, name: msName.get(n.id), procs: msProcs.get(n.id) ?? 0, needs });
+    });
+  });
+
+  /* ── simulated time axis ──
+     A model, not a forecast. Two CPM runs over the same graph: statutory
+     deadlines, and medians measured from disclosed approval documents. Both
+     convert statutory days to calendar days naively. Scenario 0 stands in for
+     the whole scenario space because the spread across all rule combinations
+     is tiny (recorded below so the board can state it rather than hide it). */
+  // A project without a decided anchor (no site decision yet) has no calendar
+  // to hang the model on. Day offsets are still meaningful relative to project
+  // start; calendar dates are not, so they stay null rather than invented.
+  const anchorMs = anchorDate ? Date.parse(`${anchorDate}T00:00:00Z`) : NaN;
+  const anchored = Number.isFinite(anchorMs);
+  const dayToDate = (d) => (anchored ? new Date(anchorMs + d * 86400000).toISOString().slice(0, 10) : null);
+  const BASES = [
+    { key: "statutory", label: "법정 기준", scenarios: pathJson.scenarios },
+    { key: "empirical", label: "실측 기준", scenarios: pathJson.empiricalScenarios },
+  ];
+  const timelineMeta = { anchor: anchorDate, anchored, bases: {} };
+  BASES.forEach((b) => {
+    const totals = b.scenarios.map((s) => s.totalDays);
+    const lo = Math.min(...totals), hi = Math.max(...totals);
+    timelineMeta.bases[b.key] = {
+      label: b.label,
+      totalDays: b.scenarios[0].totalDays,
+      end: dayToDate(b.scenarios[0].totalDays),
+      years: +(b.scenarios[0].totalDays / 365.25).toFixed(1),
+      scenarioCount: b.scenarios.length,
+      spreadDays: hi - lo,
+      critical: b.scenarios[0].critical,
+    };
+  });
+  timelineMeta.gapDays = timelineMeta.bases.empirical.totalDays - timelineMeta.bases.statutory.totalDays;
+  timelineMeta.gapYears = +(timelineMeta.gapDays / 365.25).toFixed(1);
+  timelineMeta.note = "모의 일정 — 법정기한과 절차군 실측 중앙값을 역일로 단순환산한 CPM 모델. 실적 예측이 아니며 착수 지연·재협의 루프를 반영하지 않는다.";
+
+  actorsOfRegistry(reg).forEach((a) => {
+    a.timeline = {};
+    BASES.forEach((b) => {
+      const eta = b.scenarios[0].eta;
+      const win = a.milestones.filter((id) => eta[id]).map((id) => ({ ms: id, es: eta[id][0], ef: eta[id][1] }));
+      const off = a.milestones.filter((id) => !eta[id]);
+      if (!win.length) { a.timeline[b.key] = null; return; }
+      const es = Math.min(...win.map((w) => w.es)), ef = Math.max(...win.map((w) => w.ef));
+      a.timeline[b.key] = {
+        es, ef, days: ef - es,
+        start: dayToDate(es), end: dayToDate(ef),
+        span: +((ef - es) / 365.25).toFixed(1),
+        windows: win.sort((x, y) => x.es - y.es),
+        excluded: off, // milestones outside this scenario (rule-conditional)
+      };
+    });
+  });
+
+  const actors = [...reg.values()].sort((a, b) => b.procs - a.procs);
+  const typeCount = {};
+  actors.forEach((a) => { typeCount[a.typeLabel] = (typeCount[a.typeLabel] ?? 0) + 1; });
+  const rawStrings = new Set();
+  project.nodes.forEach((n) => (n.actorRoles?.lead ?? []).forEach((s) => rawStrings.add(s)));
+  const actorsJson = {
+    asOf: project.asOfDate,
+    project: { id: project.id, name: project.name, short: cfg.short },
+    types: ACTOR_TYPES,
+    timeline: timelineMeta,
+    actors,
+    summary: {
+      actorCount: actors.length,
+      rawStringCount: rawStrings.size,
+      byType: typeCount,
+      unnamedRoleCount: actors.filter((a) => !a.named).length,
+      unnamedRoleProcs: actors.filter((a) => !a.named).reduce((s, a) => s + a.procs, 0),
+    },
+  };
+  const handoffsJson = {
+    asOf: project.asOfDate,
+    edges,
+    byPair,
+    summary: {
+      total: edges.length,
+      cross: edges.filter((e) => e.cross).length,
+      blockedCross: edges.filter((e) => e.cross && e.blocked).length,
+    },
+  };
+
   /* emit */
   const dir = `public/warroom/p/${project.id}`;
+  write(`${dir}/actors.json`, actorsJson);
+  write(`${dir}/handoffs.json`, handoffsJson);
+  if (cfg.root) {
+    write("public/warroom/actors.json", actorsJson);
+    write("public/warroom/handoffs.json", handoffsJson);
+  }
   write(`${dir}/data.json`, dataJson);
   write(`${dir}/daily.json`, dailyJson);
   write(`${dir}/path.json`, pathJson);
@@ -338,7 +586,7 @@ function build(cfg) {
     write("public/warroom/daily.json", dailyJson);
     write("public/warroom/path.json", pathJson);
   }
-  return { project, procs, stOf, pathJson, dataJson };
+  return { project, procs, stOf, pathJson, dataJson, actorsJson, handoffsJson };
 }
 
 /* ── run + validation ── */
@@ -351,6 +599,13 @@ for (const cfg of PROJECTS) {
     `${cfg.short}: procs ${r.procs.length}, scenarios ${r.pathJson.scenarios.length}, ` +
     `scenario0 total ${s0.totalDays}일, critical ${s0.critical.join("→")}` +
     (s0.unresolved.length ? ` | UNRESOLVED: ${s0.unresolved.join(",")}` : ""),
+  );
+  const as = r.actorsJson.summary, hs = r.handoffsJson.summary;
+  console.log(
+    `  주체 ${as.actorCount} (원문 ${as.rawStringCount}문자열 → ` +
+    Object.entries(as.byType).map(([k, v]) => `${k} ${v}`).join(", ") +
+    `) | 실명 미특정 역할 ${as.unnamedRoleCount}종 ${as.unnamedRoleProcs}절차` +
+    ` | 인계 ${hs.total} 중 주체간 ${hs.cross} (막힘 ${hs.blockedCross})`,
   );
   if (cfg.id === "gwangju-semiconductor-cluster") {
     try {

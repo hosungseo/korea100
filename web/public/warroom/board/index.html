@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>주체별 종합상황판 — 광주 반도체 클러스터</title>
+<meta name="description" content="광주 군공항 부지 반도체 클러스터를 수행 주체 축으로 세운 상황판. 어느 부처와 지자체가 어디까지 했고, 지금 무엇을 하고 있고, 누가 누구를 막고 있는지." />
+<meta property="og:title" content="주체별 종합상황판 — 광주 반도체 클러스터" />
+<meta property="og:description" content="23개 주체 · 49개 마일스톤 · 1,281개 법정 절차. 누가 공을 쥐고 있고 어디를 조정해야 하는가." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg: #04070c;
+  --panel: rgba(9, 18, 28, 0.82);
+  --panel2: rgba(12, 23, 34, 0.92);
+  --line: rgba(56, 198, 244, 0.22);
+  --text: #d7e6f2;
+  --muted: #5f7b90;
+  --amber: #ffb020;
+  --gold: #ffd76a;
+  --cyan: #38c6f4;
+  --green: #2ee6a8;
+  --violet: #9d86f5;
+  --rose: #ff6b8a;
+  --slate: #35618a;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --sans: "Apple SD Gothic Neo", "Pretendard", sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { height: 100%; }
+body {
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.mono { font-family: var(--mono); }
+a { color: inherit; }
+
+/* ── ambient control-room chrome ── */
+#scanlines, #vignette, #grain { position: fixed; inset: 0; pointer-events: none; z-index: 90; }
+#scanlines {
+  background: repeating-linear-gradient(180deg, rgba(56,198,244,0.035) 0 1px, transparent 1px 3px);
+  mix-blend-mode: screen; opacity: 0.5;
+}
+#vignette { background: radial-gradient(ellipse at 50% 40%, transparent 45%, rgba(0,0,0,0.72) 100%); }
+#grain { opacity: 0.05; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/></filter><rect width='120' height='120' filter='url(%23n)' opacity='0.55'/></svg>"); }
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: -1;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(56,198,244,0.10), transparent 45%),
+    radial-gradient(circle at 82% 78%, rgba(157,134,245,0.08), transparent 50%);
+}
+
+/* ── layout ── */
+#wrap { max-width: 1680px; margin: 0 auto; padding: 18px 22px 60px; position: relative; z-index: 1; }
+
+/* ── masthead ── */
+#top { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; }
+#brand .sys {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em;
+  color: var(--cyan); display: flex; align-items: center; gap: 7px;
+}
+#brand .sys .dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--green);
+  box-shadow: 0 0 8px var(--green); animation: blink 2.4s ease-in-out infinite;
+}
+@keyframes blink { 0%,100% { opacity: 1 } 50% { opacity: 0.35 } }
+#brand h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; margin-top: 6px; line-height: 1.16; }
+#brand h1 em { font-style: normal; color: var(--amber); display: block; }
+#brand .asof { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.06em; margin-top: 7px; }
+#views { display: flex; gap: 6px; margin-top: 10px; }
+#views a {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-decoration: none;
+  padding: 4px 10px; border: 1px solid var(--line); color: var(--muted);
+}
+#views a.on { color: var(--gold); border-color: var(--gold); background: rgba(255,215,106,0.08); }
+
+/* ── verdict ── */
+#verdict {
+  margin-top: 16px; border: 1px solid rgba(255,176,32,0.4);
+  background: linear-gradient(180deg, rgba(255,176,32,0.10), rgba(9,18,28,0.6));
+  padding: 14px 16px;
+}
+#verdict .k { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.2em; color: var(--amber); }
+#verdict .h { font-size: 19px; font-weight: 800; line-height: 1.42; margin-top: 7px; letter-spacing: -0.01em; }
+#verdict .h b { color: var(--gold); }
+#verdict .sub { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+#verdict .sub .c {
+  font-family: var(--mono); font-size: 10.5px; padding: 5px 9px;
+  border: 1px solid var(--line); background: rgba(4,7,12,0.5);
+}
+#verdict .sub .c b { color: var(--text); font-weight: 700; }
+#verdict .sub .c i { font-style: normal; color: var(--rose); }
+#verdict .sub .c u { text-decoration: none; color: var(--muted); }
+#verdict .ask { margin-top: 10px; font-size: 12.5px; color: #c9d9e6; }
+#verdict .ask b { color: var(--gold); }
+
+/* ── overview strip ── */
+#overview { margin-top: 14px; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+.ov {
+  border: 1px solid var(--line); background: var(--panel); padding: 9px 11px;
+}
+.ov .l { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; color: var(--muted); }
+.ov .v { font-family: var(--mono); font-size: 21px; font-weight: 700; margin-top: 3px; letter-spacing: -0.01em; }
+.ov .v small { font-size: 11px; color: var(--muted); font-weight: 400; margin-left: 3px; }
+
+/* ── section heads ── */
+.sec { margin-top: 26px; }
+.sec > h2 {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.2em; color: var(--cyan);
+  display: flex; align-items: baseline; gap: 9px; padding-bottom: 7px;
+  border-bottom: 1px solid var(--line);
+}
+.sec > h2 span { color: var(--muted); letter-spacing: 0.06em; font-size: 9.5px; }
+
+/* ── filter chips ── */
+#filters { display: flex; gap: 6px; flex-wrap: wrap; margin: 11px 0 12px; }
+#filters button {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; cursor: pointer;
+  padding: 5px 10px; border: 1px solid var(--line); background: transparent; color: var(--muted);
+}
+#filters button.on { color: var(--gold); border-color: var(--gold); background: rgba(255,215,106,0.08); }
+#filters button:hover { color: var(--text); }
+
+/* ── actor grid ── */
+#actors { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 9px; }
+.actor {
+  border: 1px solid var(--line); background: var(--panel); padding: 11px 12px;
+  cursor: pointer; position: relative; transition: border-color 0.14s, background 0.14s;
+}
+.actor:hover { border-color: rgba(56,198,244,0.5); background: var(--panel2); }
+.actor.sel { border-color: var(--gold); background: rgba(255,215,106,0.07); }
+.actor .hd { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.actor .nm { font-size: 14px; font-weight: 700; letter-spacing: -0.01em; }
+.actor .sz { font-family: var(--mono); font-size: 10px; color: var(--muted); white-space: nowrap; }
+.actor .badges { display: flex; gap: 5px; margin-top: 6px; flex-wrap: wrap; }
+.actor .bd {
+  font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.08em;
+  padding: 2px 6px; border: 1px solid var(--line); color: var(--muted);
+}
+.actor .bd.t-ministry { color: var(--cyan); border-color: rgba(56,198,244,0.5); }
+.actor .bd.t-local { color: var(--green); border-color: rgba(46,230,168,0.5); }
+.actor .bd.t-committee { color: var(--gold); border-color: rgba(255,215,106,0.5); }
+.actor .bd.t-public { color: #7fb2d9; border-color: rgba(127,178,217,0.45); }
+.actor .bd.t-private { color: var(--violet); border-color: rgba(157,134,245,0.5); }
+.actor .bd.t-role { color: var(--rose); border-color: rgba(255,107,138,0.55); }
+.actor .bd.steer-no { color: var(--muted); }
+/* status bar */
+.bar { display: flex; height: 6px; margin-top: 9px; background: rgba(53,97,138,0.18); overflow: hidden; }
+.bar i { display: block; height: 100%; }
+.bar i.completed { background: var(--green); }
+.bar i.active { background: var(--amber); }
+.bar i.ready { background: var(--cyan); }
+.bar i.conditional { background: var(--violet); }
+.bar i.blocked { background: rgba(53,97,138,0.5); }
+.actor .line { font-family: var(--mono); font-size: 10px; margin-top: 8px; color: var(--muted); line-height: 1.6; }
+.actor .line b { color: var(--text); font-weight: 600; }
+.actor .now { color: var(--cyan); }
+.actor .idle { color: var(--muted); }
+.actor .blk { color: var(--rose); }
+.actor .hint { color: var(--gold); }
+
+/* ── handoffs ── */
+#handoffs { display: grid; gap: 5px; margin-top: 11px; }
+.ho {
+  display: grid; grid-template-columns: minmax(0, 22ch) auto minmax(0, 22ch) 1fr;
+  gap: 12px; align-items: center;
+  border: 1px solid var(--line); background: var(--panel); padding: 8px 11px;
+  font-family: var(--mono); font-size: 11px; cursor: pointer;
+}
+.ho:hover { border-color: rgba(255,107,138,0.5); }
+.ho .f, .ho .t { text-align: left; }
+.ho .n { text-align: right; }
+.ho .ar { color: var(--rose); }
+.ho .n { color: var(--gold); font-weight: 700; white-space: nowrap; }
+.ho em { font-style: normal; font-size: 8.5px; letter-spacing: 0.08em; color: var(--muted); display: block; }
+
+/* ── simulated schedule ── */
+#t-warn {
+  margin-top: 11px; border: 1px solid rgba(157,134,245,0.45);
+  background: rgba(157,134,245,0.08); padding: 9px 12px;
+  font-size: 11.5px; line-height: 1.65; color: #c3b8ea;
+}
+#t-warn b { color: var(--violet); font-family: var(--mono); letter-spacing: 0.1em; }
+#t-switch { display: flex; gap: 6px; margin-top: 11px; flex-wrap: wrap; }
+#t-switch button {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; cursor: pointer;
+  padding: 5px 12px; border: 1px solid var(--line); background: transparent; color: var(--muted);
+}
+#t-switch button.on { color: var(--gold); border-color: var(--gold); background: rgba(255,215,106,0.08); }
+#t-head { margin-top: 11px; display: flex; gap: 8px; flex-wrap: wrap; align-items: stretch; }
+#t-head .th {
+  border: 1px solid var(--line); background: var(--panel); padding: 8px 11px; min-width: 132px;
+}
+#t-head .th .l { font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; color: var(--muted); }
+#t-head .th .v { font-family: var(--mono); font-size: 17px; font-weight: 700; margin-top: 2px; }
+#t-head .th .v small { font-size: 10px; color: var(--muted); font-weight: 400; }
+#t-head .th.gap { border-color: rgba(255,176,32,0.45); background: rgba(255,176,32,0.07); }
+#t-head .th.gap .v { color: var(--amber); }
+#gantt { margin-top: 12px; display: grid; gap: 3px; }
+.gr { display: grid; grid-template-columns: minmax(0, 15ch) 1fr minmax(0, 15ch); gap: 9px; align-items: center; cursor: pointer; }
+.gr:hover .gt { background: rgba(56,198,244,0.09); }
+.gr .gn { font-family: var(--mono); font-size: 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gr .gd { font-family: var(--mono); font-size: 9px; color: var(--muted); text-align: right; white-space: nowrap; }
+.gt { position: relative; height: 15px; background: rgba(53,97,138,0.13); border: 1px solid rgba(53,97,138,0.2); }
+.gt i { position: absolute; top: 2px; bottom: 2px; border-radius: 1px; min-width: 2px; }
+.gt i.ministry { background: var(--cyan); }
+.gt i.local { background: var(--green); }
+.gt i.committee { background: var(--gold); }
+.gt i.public { background: #7fb2d9; }
+.gt i.private { background: var(--violet); }
+.gt i.role { background: var(--rose); }
+.gt .yr { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(95,123,144,0.22); }
+#gantt .axis { display: grid; grid-template-columns: minmax(0, 15ch) 1fr minmax(0, 15ch); gap: 9px; margin-top: 4px; }
+#gantt .axis .ax { position: relative; height: 13px; font-family: var(--mono); font-size: 8.5px; color: var(--muted); }
+#gantt .axis .ax span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+
+/* ── whole picture map ── */
+#map { display: grid; grid-template-columns: repeat(auto-fit, minmax(178px, 1fr)); gap: 8px; margin-top: 11px; }
+.gate { border: 1px solid var(--line); background: var(--panel); padding: 9px 10px; }
+.gate .gl { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.1em; color: var(--cyan); }
+.gate .gm { font-family: var(--mono); font-size: 8.5px; color: var(--muted); margin-top: 2px; }
+.gate .cells { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 8px; }
+.cell {
+  width: 100%; max-width: 30px; height: 15px; flex: 1 1 22px;
+  border: 1px solid transparent; position: relative;
+  font-family: var(--mono); font-size: 7px; color: rgba(0,0,0,0.55);
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.cell.completed { background: var(--green); }
+.cell.active { background: var(--amber); }
+.cell.ready { background: var(--cyan); }
+.cell.conditional { background: var(--violet); }
+.cell.blocked { background: rgba(53,97,138,0.34); color: var(--muted); }
+.cell.dim { opacity: 0.14; }
+.cell.hl { outline: 1.5px solid var(--gold); outline-offset: 1px; z-index: 2; }
+
+/* ── drilldown ── */
+#drill {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(460px, 94vw);
+  background: rgba(6,12,19,0.97); border-left: 1px solid var(--line);
+  z-index: 80; overflow-y: auto; padding: 18px 18px 40px;
+  transform: translateX(100%); transition: transform 0.2s ease; box-shadow: -18px 0 48px rgba(0,0,0,0.6);
+}
+#drill.open { transform: none; }
+#drill .dh { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+#drill h3 { font-size: 19px; font-weight: 800; letter-spacing: -0.01em; }
+#drill .dclose {
+  background: transparent; border: 1px solid var(--line); color: var(--muted);
+  font-family: var(--mono); font-size: 11px; padding: 3px 9px; cursor: pointer;
+}
+#drill .dmeta { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-top: 6px; line-height: 1.7; }
+#drill .dmeta b { color: var(--text); }
+#drill .dnote {
+  margin-top: 10px; padding: 8px 10px; border: 1px dashed rgba(255,215,106,0.4);
+  font-size: 11px; color: var(--gold); line-height: 1.6;
+}
+#drill h4 {
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--cyan);
+  margin-top: 20px; padding-bottom: 5px; border-bottom: 1px solid var(--line);
+}
+#drill h4 span { color: var(--muted); letter-spacing: 0.04em; }
+.mi { border-left: 2px solid var(--slate); padding: 8px 0 8px 10px; margin-top: 8px; }
+.mi.completed { border-color: var(--green); }
+.mi.active { border-color: var(--amber); }
+.mi.ready { border-color: var(--cyan); }
+.mi.conditional { border-color: var(--violet); }
+.mi .mt { font-size: 12.5px; font-weight: 600; line-height: 1.45; }
+.mi .mm { font-family: var(--mono); font-size: 9.5px; color: var(--muted); margin-top: 3px; }
+.mi .wait { font-size: 11px; color: var(--muted); margin-top: 5px; line-height: 1.6; }
+.mi .wait b { color: var(--rose); font-weight: 600; }
+.mi .wait u { text-decoration: none; color: #93a9bb; }
+.empty { font-family: var(--mono); font-size: 10.5px; color: var(--muted); margin-top: 9px; }
+
+/* ── footnote ── */
+#note {
+  margin-top: 28px; padding-top: 12px; border-top: 1px solid var(--line);
+  font-family: var(--mono); font-size: 9.5px; color: var(--muted); line-height: 1.85;
+}
+#note b { color: #93a9bb; font-weight: 600; }
+
+#shade {
+  position: fixed; inset: 0; background: rgba(2,5,9,0.55); z-index: 79;
+  opacity: 0; pointer-events: none; transition: opacity 0.2s;
+}
+#shade.on { opacity: 1; pointer-events: auto; }
+
+@media (max-width: 720px) {
+  #wrap { padding: 14px 13px 48px; }
+  #brand h1 { font-size: 21px; }
+  #verdict .h { font-size: 15.5px; }
+  #actors { grid-template-columns: 1fr; }
+  .ho { grid-template-columns: 1fr auto; row-gap: 3px; }
+  .ho .f { text-align: left; }
+  .ho .ar { display: none; }
+  #map { grid-template-columns: 1fr 1fr; }
+  /* the bar needs the room more than the date label does */
+  .gr { grid-template-columns: minmax(0, 11ch) 1fr; grid-template-areas: "n t" "d d"; row-gap: 1px; }
+  .gr .gn { grid-area: n; }
+  .gr .gt { grid-area: t; }
+  .gr .gd { grid-area: d; text-align: left; padding-left: 2px; font-size: 8.5px; }
+  #gantt { gap: 7px; }
+  #gantt .axis { grid-template-columns: minmax(0, 11ch) 1fr; }
+  #gantt .axis > div:last-child { display: none; }
+  #t-head .th { flex: 1 1 44%; min-width: 0; }
+}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <div id="top">
+    <div id="brand">
+      <div class="sys mono"><span class="dot"></span>K100 · WARROOM — 주체 축 ACTOR AXIS</div>
+      <h1>광주 반도체 클러스터<br /><em>주체별 종합상황판</em></h1>
+      <div class="asof" id="asof">불러오는 중…</div>
+      <div id="views">
+        <a href="../" >전체 지도 MAP</a>
+        <a href="./" class="on">주체별 ACTORS</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="verdict">
+    <div class="k">판정 VERDICT</div>
+    <div class="h" id="v-head">…</div>
+    <div class="sub" id="v-sub"></div>
+    <div class="ask" id="v-ask"></div>
+  </div>
+
+  <div id="overview"></div>
+
+  <div class="sec">
+    <h2>주체 ACTORS <span id="a-count"></span></h2>
+    <div id="filters"></div>
+    <div id="actors"></div>
+  </div>
+
+  <div class="sec">
+    <h2>막힌 인계 BLOCKED HANDOFFS <span>공급 주체가 끝내지 못해 수요 주체가 착수하지 못하는 관계 · 걸린 절차 수 순</span></h2>
+    <div id="handoffs"></div>
+  </div>
+
+  <div class="sec">
+    <h2>모의 일정 SIMULATED SCHEDULE <span id="t-cap"></span></h2>
+    <div id="t-warn"></div>
+    <div id="t-switch"></div>
+    <div id="t-head"></div>
+    <div id="gantt"></div>
+  </div>
+
+  <div class="sec">
+    <h2>전체 큰 그림 WHOLE PICTURE <span id="m-cap"></span></h2>
+    <div id="map"></div>
+  </div>
+
+  <div id="note"></div>
+</div>
+
+<div id="shade"></div>
+<aside id="drill" aria-hidden="true"></aside>
+
+<div id="scanlines"></div><div id="vignette"></div><div id="grain"></div>
+
+<script type="module">
+const $ = (s) => document.querySelector(s);
+const el = (t, c, h) => { const n = document.createElement(t); if (c) n.className = c; if (h != null) n.innerHTML = h; return n; };
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[m]));
+const nf = (n) => Number(n ?? 0).toLocaleString("ko-KR");
+
+const ST_LABEL = { completed: "완료", active: "진행", ready: "착수가능", conditional: "조건부", blocked: "대기" };
+const ST_ORDER = ["completed", "active", "ready", "conditional", "blocked"];
+
+const [actorsJson, handoffsJson, dataJson] = await Promise.all(
+  ["actors.json", "handoffs.json", "data.json"].map((f) => fetch(`../${f}`).then((r) => r.json())),
+);
+
+const actors = actorsJson.actors;
+const byName = new Map(actors.map((a) => [a.name, a]));
+const ms = new Map();
+dataJson.gates.forEach((g, gi) => g.milestones.forEach((m) => ms.set(m.id, { ...m, gate: gi, gateLabel: g.label })));
+const totalProcs = [...ms.values()].reduce((s, m) => s + m.procs, 0);
+const totalMs = ms.size;
+
+/* ══ verdict — derived, never hardcoded ══ */
+const blockers = [...actors].sort((a, b) => b.blocking.procs - a.blocking.procs).filter((a) => a.blocking.procs > 0);
+const top3 = blockers.slice(0, 3);
+const unsteerableTop = top3.filter((a) => !a.steerable);
+const roleTop = top3.filter((a) => a.type === "role");
+
+$("#asof").textContent =
+  `${actorsJson.project.name} · 주체 축 상황판 · 기준일 ${actorsJson.asOf}`;
+
+$("#v-head").innerHTML = roleTop.length
+  ? `판을 막고 있는 상위 ${top3.length}개 주체 가운데 <b>${roleTop.length}곳은 담당기관이 아직 확정되지 않았고</b>, `
+    + `${unsteerableTop.length}곳은 정부가 직접 지시할 수 있는 상대가 아닙니다.`
+  : `판을 막고 있는 상위 ${top3.length}개 주체 가운데 <b>${unsteerableTop.length}곳이 정부 지시 대상이 아닙니다.</b>`;
+
+$("#v-sub").innerHTML = top3.map((a) =>
+  `<span class="c"><b>${esc(a.name)}</b> <i>${nf(a.blocking.procs)}절차</i> `
+  + `<u>${esc(a.typeLabel)}${a.steerable ? "" : " · 지시불가"}</u></span>`).join("");
+
+$("#v-ask").innerHTML = roleTop.length
+  ? `그래서 먼저 필요한 결정은 재촉이 아니라 <b>담당기관 확정</b>입니다 — `
+    + roleTop.map((a) => esc(a.name)).join(", ")
+    + `가 누구인지는 지정 경로가 정해져야 따라옵니다.`
+  : `조정 여지는 지시 가능한 주체에 몰려 있습니다.`;
+
+/* ══ overview ══ */
+const stTotals = {};
+ST_ORDER.forEach((k) => { stTotals[k] = [...ms.values()].filter((m) => m.st === k).length; });
+const steer = actors.filter((a) => a.steerable);
+const unsteer = actors.filter((a) => !a.steerable);
+const sumProcs = (list) => list.reduce((s, a) => s + a.procs, 0);
+const ovRows = [
+  ["사업 전체", `${nf(totalProcs)}<small>절차</small>`, `마일스톤 ${totalMs} · 게이트 ${dataJson.gates.length}`],
+  ["진척", `${stTotals.completed}<small>/${totalMs} 완료</small>`, `진행 ${stTotals.active} · 착수가능 ${stTotals.ready} · 대기 ${stTotals.blocked}`],
+  ["주체", `${actors.length}<small>곳</small>`, `원문 ${actorsJson.summary.rawStringCount}문자열 정규화`],
+  ["정부 지시 가능", `${steer.length}<small>곳</small>`, `담당 ${nf(sumProcs(steer))}절차`],
+  ["지시 대상 아님", `${unsteer.length}<small>곳</small>`, `담당 ${nf(sumProcs(unsteer))}절차`],
+  ["담당기관 미확정", `${actorsJson.summary.unnamedRoleCount}<small>역할</small>`, `담당 ${nf(actorsJson.summary.unnamedRoleProcs)}절차`],
+];
+$("#overview").innerHTML = ovRows.map(([l, v, s]) =>
+  `<div class="ov"><div class="l">${esc(l)}</div><div class="v mono">${v}</div><div class="l" style="margin-top:4px">${esc(s)}</div></div>`).join("");
+
+/* ══ filters ══ */
+let filter = "all";
+const TYPES = [...new Set(actors.map((a) => a.type))];
+const FILTERS = [
+  ["all", `전체 ${actors.length}`],
+  ["steer", `지시 가능 ${steer.length}`],
+  ["now", `지금 착수 가능 ${actors.filter((a) => a.now.length).length}`],
+  ["blocking", `남을 막는 중 ${blockers.length}`],
+  ...TYPES.map((t) => [`t:${t}`, `${actorsJson.types[t].label} ${actors.filter((a) => a.type === t).length}`]),
+];
+$("#filters").innerHTML = FILTERS.map(([k, l]) =>
+  `<button data-f="${esc(k)}"${k === filter ? ' class="on"' : ""}>${esc(l)}</button>`).join("");
+$("#filters").addEventListener("click", (e) => {
+  const b = e.target.closest("button");
+  if (!b) return;
+  filter = b.dataset.f;
+  $("#filters").querySelectorAll("button").forEach((x) => x.classList.toggle("on", x.dataset.f === filter));
+  renderActors();
+});
+const passes = (a) =>
+  filter === "all" ? true
+  : filter === "steer" ? a.steerable
+  : filter === "now" ? a.now.length > 0
+  : filter === "blocking" ? a.blocking.procs > 0
+  : filter.startsWith("t:") ? a.type === filter.slice(2)
+  : true;
+
+/* ══ actor cards ══ */
+let selected = null;
+function renderActors() {
+  const list = actors.filter(passes);
+  $("#a-count").textContent = `${list.length}곳 표시 · 담당 절차 순 · 공동주관은 각 주체에 중복 계상`;
+  const box = $("#actors");
+  box.innerHTML = "";
+  list.forEach((a) => {
+    const card = el("div", "actor" + (selected === a.name ? " sel" : ""));
+    card.dataset.actor = a.name;
+    const segs = ST_ORDER.filter((k) => a.status[k])
+      .map((k) => `<i class="${k}" style="width:${(a.status[k] / a.msCount * 100).toFixed(1)}%" title="${ST_LABEL[k]} ${a.status[k]}"></i>`).join("");
+    const nowNames = a.now.map((id) => ms.get(id)?.name ?? id);
+    const nowLine = a.now.length
+      ? `<span class="now">지금 ${a.now.length}건</span> · ${esc(nowNames[0])}${a.now.length > 1 ? ` 외 ${a.now.length - 1}` : ""}`
+      : `<span class="idle">지금 착수 가능한 일 없음</span>${a.waitingOn.length ? ` · ${a.waitingOn.length}건 대기` : ""}`;
+    const blkLine = a.blocking.procs
+      ? `<span class="blk">막는 중 ${nf(a.blocking.procs)}절차</span> → ${esc(a.blocking.targets.slice(0, 2).map((t) => t.actor).join(", "))}${a.blocking.targets.length > 2 ? ` 외 ${a.blocking.targets.length - 2}` : ""}`
+      : `<span class="idle">막고 있는 후속 없음</span>`;
+    card.innerHTML =
+      `<div class="hd"><div class="nm">${esc(a.name)}</div>`
+      + `<div class="sz mono">${a.msCount}MS · ${nf(a.procs)}절차</div></div>`
+      + `<div class="badges"><span class="bd t-${a.type}">${esc(a.typeLabel)}</span>`
+      + `<span class="bd ${a.steerable ? "" : "steer-no"}">${a.steerable ? "정부 지시 가능" : "지시 대상 아님"}</span>`
+      + (a.aliases.length ? `<span class="bd">${esc(a.aliases.join("/"))} 통합</span>` : "")
+      + `</div>`
+      + `<div class="bar">${segs}</div>`
+      + `<div class="line">${nowLine}</div>`
+      + `<div class="line">${blkLine}</div>`
+      + (a.roleHint ? `<div class="line hint">이 사업에선 ${esc(a.roleHint.likely)}일 가능성 — ${esc(a.roleHint.evidence.join(","))} 병기, 확정 아님</div>` : "");
+    box.appendChild(card);
+  });
+}
+$("#actors").addEventListener("click", (e) => {
+  const c = e.target.closest(".actor");
+  if (c) openDrill(c.dataset.actor);
+});
+
+/* ══ handoffs ══ */
+const pairs = handoffsJson.byPair.slice(0, 12);
+$("#handoffs").innerHTML = pairs.map((g) => {
+  const f = byName.get(g.from), t = byName.get(g.to);
+  return `<div class="ho" data-from="${esc(g.from)}">`
+    + `<div class="f">${esc(g.from)}<em>${esc(f?.typeLabel ?? "")}${f && !f.steerable ? " · 지시불가" : ""}</em></div>`
+    + `<div class="ar">→</div>`
+    + `<div class="t">${esc(g.to)}<em>${esc(t?.typeLabel ?? "")}</em></div>`
+    + `<div class="n">${nf(g.procs)}절차</div></div>`;
+}).join("");
+$("#handoffs").addEventListener("click", (e) => {
+  const r = e.target.closest(".ho");
+  if (r) openDrill(r.dataset.from);
+});
+
+/* ══ simulated schedule ══
+   Labelled as a model everywhere it appears. The scenario spread is printed
+   rather than hidden: if 16 rule combinations move the answer by 33 days and
+   the empirical run by 0, the reader should know the toggles are not levers. */
+const TL = actorsJson.timeline;
+let basis = "statutory";
+const bKeys = Object.keys(TL.bases);
+const dayLabel = (d) => TL.anchored
+  ? new Date(Date.parse(`${TL.anchor}T00:00:00Z`) + d * 86400000).toISOString().slice(0, 7)
+  : `D+${d}`;
+
+$("#t-cap").textContent = TL.anchored
+  ? `기점 ${TL.anchor} · 주체가 잡고 있는 구간 · 모의 계산`
+  : `기점 미정 — 달력 날짜 없이 상대 일수만`;
+
+$("#t-warn").innerHTML =
+  `<b>모의 MODEL</b> — 이 구간은 실적이 아니라 계산입니다. `
+  + `법정기한과 절차군 실측 중앙값을 역일로 단순환산한 CPM 결과이며, 착수 지연과 재협의 루프를 반영하지 않습니다. `
+  + `규칙 조합 ${TL.bases.statutory.scenarioCount}개를 모두 돌려도 결과 폭은 `
+  + `법정 ${TL.bases.statutory.spreadDays}일 · 실측 ${TL.bases.empirical.spreadDays}일에 그칩니다 — `
+  + `조합을 바꾸는 것으로는 일정이 움직이지 않는다는 뜻입니다.`;
+
+$("#t-switch").innerHTML = bKeys.map((k) =>
+  `<button data-b="${k}"${k === basis ? ' class="on"' : ""}>${esc(TL.bases[k].label)}</button>`).join("");
+$("#t-switch").addEventListener("click", (e) => {
+  const b = e.target.closest("button");
+  if (!b) return;
+  basis = b.dataset.b;
+  $("#t-switch").querySelectorAll("button").forEach((x) => x.classList.toggle("on", x.dataset.b === basis));
+  renderGantt();
+});
+
+function renderGantt() {
+  const B = TL.bases[basis];
+  const span = Math.max(...bKeys.map((k) => TL.bases[k].totalDays)); // shared scale so bases compare
+  $("#t-head").innerHTML =
+    `<div class="th"><div class="l">${esc(B.label)} 총기간</div><div class="v">${B.years}<small>년</small></div>`
+    + `<div class="l" style="margin-top:3px">${nf(B.totalDays)}일</div></div>`
+    + (B.end ? `<div class="th"><div class="l">모의 종료</div><div class="v">${esc(B.end.slice(0, 7))}</div>`
+      + `<div class="l" style="margin-top:3px">상업생산 개시 기준</div></div>` : "")
+    + `<div class="th gap"><div class="l">법정 대비 실측 격차</div><div class="v">+${TL.gapYears}<small>년</small></div>`
+    + `<div class="l" style="margin-top:3px">${nf(TL.gapDays)}일</div></div>`
+    + `<div class="th"><div class="l">시나리오 ${B.scenarioCount}개 폭</div><div class="v">${B.spreadDays}<small>일</small></div>`
+    + `<div class="l" style="margin-top:3px">규칙 조합 전체</div></div>`;
+
+  const rows = actors.filter((a) => a.timeline?.[basis]).map((a) => ({ a, t: a.timeline[basis] }))
+    .sort((x, y) => x.t.es - y.t.es || y.a.procs - x.a.procs);
+  const years = [];
+  for (let d = 0; d <= span; d += 365.25 * 2) years.push(d);
+  const g = $("#gantt");
+  g.innerHTML = rows.map(({ a, t }) => {
+    const left = (t.es / span * 100).toFixed(2), w = Math.max(0.4, (t.days / span * 100)).toFixed(2);
+    const when = t.start ? `${t.start.slice(0, 7)}~${t.end.slice(0, 7)}` : `D+${t.es}~${t.ef}`;
+    return `<div class="gr" data-actor="${esc(a.name)}" title="${esc(a.name)} · ${esc(when)} · ${t.span}년">`
+      + `<div class="gn">${esc(a.name)}</div>`
+      + `<div class="gt">${years.map((d) => `<span class="yr" style="left:${(d / span * 100).toFixed(2)}%"></span>`).join("")}`
+      + `<i class="${a.type}" style="left:${left}%;width:${w}%"></i></div>`
+      + `<div class="gd">${esc(when)}</div></div>`;
+  }).join("")
+    + `<div class="axis"><div></div><div class="ax">`
+    + years.map((d) => {
+        const lab = TL.anchored
+          ? new Date(Date.parse(`${TL.anchor}T00:00:00Z`) + d * 86400000).getUTCFullYear()
+          : `D+${Math.round(d)}`;
+        return `<span style="left:${(d / span * 100).toFixed(2)}%">${lab}</span>`;
+      }).join("")
+    + `</div><div></div></div>`;
+}
+$("#gantt").addEventListener("click", (e) => {
+  const r = e.target.closest(".gr");
+  if (r) openDrill(r.dataset.actor);
+});
+renderGantt();
+
+/* ══ whole picture ══ */
+$("#m-cap").textContent = `게이트 ${dataJson.gates.length} · 마일스톤 ${totalMs} · 절차 ${nf(totalProcs)} · 주체를 고르면 담당 구간이 강조됩니다`;
+$("#map").innerHTML = dataJson.gates.map((g) =>
+  `<div class="gate"><div class="gl">${esc(g.label)}</div>`
+  + `<div class="gm">${g.milestones.length}MS · ${nf(g.milestones.reduce((s, m) => s + m.procs, 0))}절차</div>`
+  + `<div class="cells">`
+  + g.milestones.map((m) => `<div class="cell ${m.st}" data-ms="${m.id}" title="${esc(m.id)} ${esc(m.name)} · ${ST_LABEL[m.st]} · ${m.procs}절차">${esc(m.id.replace(/^N/, ""))}</div>`).join("")
+  + `</div></div>`).join("");
+
+function highlightMap(actorName) {
+  const own = actorName ? new Set(byName.get(actorName)?.milestones ?? []) : null;
+  $("#map").querySelectorAll(".cell").forEach((c) => {
+    const mine = own ? own.has(c.dataset.ms) : false;
+    c.classList.toggle("hl", mine);
+    c.classList.toggle("dim", !!own && !mine);
+  });
+}
+
+/* ══ drilldown ══ */
+function openDrill(name) {
+  const a = byName.get(name);
+  if (!a) return;
+  selected = name;
+  renderActors();
+  highlightMap(name);
+  const group = (keys) => a.milestones.filter((id) => keys.includes(ms.get(id)?.st));
+  const done = group(["completed"]), now = group(["active", "ready"]), later = group(["conditional", "blocked"]);
+  const waitOf = new Map(a.waitingOn.map((w) => [w.ms, w]));
+  const card = (id) => {
+    const m = ms.get(id);
+    if (!m) return "";
+    const w = waitOf.get(id);
+    const tw = a.timeline?.[basis]?.windows.find((x) => x.ms === id);
+    const twTxt = tw
+      ? (TL.anchored
+          ? `모의 ${dayLabel(tw.es)}~${dayLabel(tw.ef)}`
+          : `모의 D+${tw.es}~${tw.ef}`) + ` (${tw.ef - tw.es}일)`
+      : "모의 구간 없음 — 이 시나리오 미포함";
+    return `<div class="mi ${m.st}"><div class="mt">${esc(m.name)}</div>`
+      + `<div class="mm">${esc(id)} · ${esc(m.gateLabel)} · ${nf(m.procs)}절차 · ${ST_LABEL[m.st]}</div>`
+      + `<div class="mm" style="color:var(--violet)">${esc(twTxt)}</div>`
+      + (w ? `<div class="wait">기다리는 것 — ` + w.needs.map((n) =>
+          `<b>${esc(n.name)}</b> <u>(${esc(n.actors.join(", ") || "주관 미기재")})</u>`).join(", ") + `</div>` : "")
+      + `</div>`;
+  };
+  const conf = Object.entries(a.confidence).map(([k, v]) => `${k} ${v}`).join(" · ");
+  $("#drill").innerHTML =
+    `<div class="dh"><h3>${esc(a.name)}</h3><button class="dclose mono">닫기 ESC</button></div>`
+    + `<div class="dmeta">${esc(a.typeLabel)} · ${a.steerable ? "정부 지시 가능" : "지시 대상 아님"}<br />`
+    + `담당 <b>${a.msCount}</b>개 마일스톤 · <b>${nf(a.procs)}</b>절차<br />`
+    + `막는 중 <b>${nf(a.blocking.procs)}</b>절차`
+    + (a.blocking.targets.length ? ` → ${esc(a.blocking.targets.map((t) => `${t.actor} ${nf(t.procs)}`).join(" · "))}` : "")
+    + `<br />근거 등급 ${esc(conf || "—")}</div>`
+    + (a.roleHint
+        ? `<div class="dnote">법령이 역할로만 지정한 주체입니다. ${esc(a.roleHint.note)} 담당기관은 지정 경로가 확정되어야 특정됩니다.</div>`
+        : a.type === "role"
+          ? `<div class="dnote">법령이 역할로만 지정한 주체입니다. 담당기관은 지정 경로가 확정되어야 특정됩니다.</div>` : "")
+    + `<h4>수행 완료 <span>${done.length}건</span></h4>`
+    + (done.length ? done.map(card).join("") : `<div class="empty">아직 없음</div>`)
+    + `<h4>지금 단계 <span>${now.length}건</span></h4>`
+    + (now.length ? now.map(card).join("") : `<div class="empty">지금 착수 가능한 일이 없습니다 — 아래 항목의 선행조건을 기다리는 중</div>`)
+    + `<h4>앞으로 할 일 <span>${later.length}건</span></h4>`
+    + (later.length ? later.map(card).join("") : `<div class="empty">없음</div>`);
+  $("#drill").classList.add("open");
+  $("#drill").setAttribute("aria-hidden", "false");
+  $("#shade").classList.add("on");
+}
+function closeDrill() {
+  selected = null;
+  $("#drill").classList.remove("open");
+  $("#drill").setAttribute("aria-hidden", "true");
+  $("#shade").classList.remove("on");
+  highlightMap(null);
+  renderActors();
+}
+$("#drill").addEventListener("click", (e) => { if (e.target.closest(".dclose")) closeDrill(); });
+$("#shade").addEventListener("click", closeDrill);
+addEventListener("keydown", (e) => { if (e.key === "Escape") closeDrill(); });
+
+/* ══ footnote — the caveats a decision board owes its reader ══ */
+$("#note").innerHTML =
+  `<b>읽는 법.</b> 주체는 원천 그래프의 주관(actorRoles.lead) ${actorsJson.summary.rawStringCount}개 문자열을 정규화한 ${actors.length}곳입니다. `
+  + `한 마일스톤을 여러 주체가 공동주관하면 각 주체에 중복 계상되므로, 주체별 절차 수의 합은 사업 총계 ${nf(totalProcs)}절차보다 큽니다.<br />`
+  + `<b>담당기관 미확정.</b> "산업단지 지정권자"처럼 법령이 역할로 지정한 주체는 실제 담당기관을 임의로 특정하지 않았습니다. `
+  + `지정 경로가 확정되어야 정해지는 사항이며, 데이터 누락이 아닙니다.<br />`
+  + `<b>진척.</b> 완료 ${stTotals.completed}건 · 진행 ${stTotals.active}건으로 사업 초기입니다. 대부분 주체의 수행 이력이 비어 있는 것은 실제 상태이며 표시 오류가 아닙니다.<br />`
+  + `<b>막는 절차 수.</b> 해당 주체가 끝내지 못해 착수하지 못하는 후속 마일스톤의 절차 합입니다. 지연 일수가 아니라 물량입니다.<br />`
+  + `<b>모의 일정.</b> ${esc(TL.note)} `
+  + (TL.anchored ? `기점은 입지 결정일 ${esc(TL.anchor)}이며 ` : `기점이 정해지지 않아 달력 날짜 대신 상대 일수로 표시하며 `)
+  + `주체 구간은 그 주체가 맡은 마일스톤의 최초 착수부터 최종 종료까지입니다. 중간의 대기 구간도 포함되므로 실제 작업량과 다릅니다.`;
+
+renderActors();
+</script>
+</body>
+</html>
