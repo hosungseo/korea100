@@ -1,0 +1,267 @@
+.page {
+  padding: 24px 20px 64px;
+  color: var(--color-text);
+}
+
+.header {
+  max-width: 1200px;
+  margin: 0 auto 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #d7ded9;
+}
+
+.kicker {
+  margin: 0 0 8px;
+  color: #4b9c80;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 760;
+  letter-spacing: 0.1em;
+}
+
+.header > nav {
+  margin: 4px 0 12px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: clamp(20px, 2.6vw, 27px);
+  font-weight: 760;
+  letter-spacing: -0.02em;
+}
+
+.summary {
+  max-width: 760px;
+  margin: 6px 0 0;
+  color: #55655d;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.meta {
+  margin: 10px 0 0;
+  color: #7a887f;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.tierStrip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.tierStrip button {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 7px 12px;
+  border: 1px solid #c7d0cb;
+  border-radius: 3px;
+  background: #f6f8f7;
+  color: #3d4b44;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.tierStrip button:hover {
+  border-color: #7fb59e;
+  background: #eef5f1;
+}
+
+.tierStrip button[data-active] {
+  border-color: #12241c;
+  background: #12241c;
+  color: #e7f1ec;
+}
+
+.tierStrip button strong {
+  font-size: 12px;
+  font-weight: 760;
+  letter-spacing: -0.01em;
+}
+
+.tierStrip button small {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #7a887f;
+}
+
+.tierStrip button[data-active] small {
+  color: #9db8ab;
+}
+
+.decisionToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  color: #45635a;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.decisionToggle input {
+  accent-color: #0f7a56;
+}
+
+.resultLine {
+  margin: 0;
+  padding: 6px 10px;
+  border-bottom: 1px solid #dde3df;
+  background: #f7f9f8;
+  color: #45635a;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.tableWrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: auto;
+  border: 1px solid #c7d0cb;
+}
+
+.table {
+  border-collapse: collapse;
+  width: max-content;
+  min-width: 100%;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.table th,
+.table td {
+  padding: 3px 6px;
+  border: 1px solid #dde3df;
+  text-align: left;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #12241c;
+  color: #d8e6de;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.table tbody tr:hover td {
+  background: #f2f7f4;
+}
+
+.stageCell {
+  background: #f7f9f8;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #55655d;
+}
+
+.milestoneCell,
+.templateCell,
+.nameCell,
+.actorCell,
+.authorityCell,
+.outputCell {
+  max-width: 300px;
+  white-space: normal;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.nameCell {
+  font-weight: 600;
+}
+
+.actorCell,
+.authorityCell {
+  color: #3d4b44;
+}
+
+.outputCell {
+  color: #55655d;
+}
+
+.countCell {
+  text-align: right;
+  font-family: var(--font-mono);
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 1px 5px;
+  border: 1px solid #c7d0cb;
+  border-radius: 2px;
+  background: #edf1ef;
+  color: #65756c;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.statusBadge[data-status="completed"],
+.statusBadge[data-status="ready"] {
+  border-color: #7dc3a7;
+  background: #dff5eb;
+  color: #087452;
+}
+
+.statusBadge[data-status="active"] {
+  border-color: #9ecbd6;
+  background: #dff3f7;
+  color: #0a7189;
+}
+
+.statusBadge[data-status="conditional"] {
+  border-color: #d0b374;
+  background: #f7e9c8;
+  color: #8b5d0f;
+}
+
+.decisionBadge {
+  display: inline-block;
+  padding: 1px 5px;
+  border: 1px solid #c7d0cb;
+  border-radius: 2px;
+  background: #edf1ef;
+  color: #65756c;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.decisionBadge[data-decision] {
+  border-color: #65a98e;
+  background: #e7f5ef;
+  color: #087452;
+}
+
+.tierBadge {
+  display: inline-block;
+  padding: 1px 5px;
+  border: 1px solid #c7d0cb;
+  border-radius: 2px;
+  background: #f6f8f7;
+  color: #45635a;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 16px 10px 48px;
+  }
+
+  .table {
+    font-size: 10px;
+  }
+}
