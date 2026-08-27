@@ -72,8 +72,35 @@ header .links a:hover { color: var(--cyan); border-color: var(--cyan); }
 .chip:hover { color: var(--text); border-color: var(--text); }
 .chip.sel { color: #0a0f14; background: var(--amber); border-color: var(--amber); font-weight: 700; }
 .chip.sel.chip-risk { background: var(--rose); border-color: var(--rose); }
-.chip.chip-pm { border-color: rgba(255,215,106,0.55); color: var(--gold); }
-.chip.sel.chip-pm { background: var(--gold); border-color: var(--gold); color: #1a1204; }
+.chip.chip-pm {
+  border-color: rgba(255,215,106,0.65); color: var(--gold); font-weight: 700;
+  padding: 4px 14px; letter-spacing: 0.02em;
+  background: linear-gradient(180deg, rgba(255,215,106,0.14), rgba(255,215,106,0.03));
+  animation: pmglow 2.6s ease-in-out infinite;
+}
+.chip.chip-pm:hover { color: #1a1204; background: var(--gold); border-color: var(--gold); animation: none; }
+.chip.sel.chip-pm {
+  background: linear-gradient(180deg, #ffe9a8, var(--gold));
+  border-color: #ffe9a8; color: #1a1204; animation: none;
+  box-shadow: 0 0 18px rgba(255,215,106,0.55);
+}
+@keyframes pmglow {
+  0%, 100% { box-shadow: 0 0 5px rgba(255,215,106,0.15); }
+  50% { box-shadow: 0 0 15px rgba(255,215,106,0.5); }
+}
+body.mode-pm .node.on {
+  border-color: rgba(255,215,106,0.7);
+  box-shadow: 0 0 0 1px rgba(255,215,106,0.45), 0 0 16px rgba(255,215,106,0.15);
+}
+body.mode-pm #edges path.e.on {
+  stroke: var(--gold);
+  filter: drop-shadow(0 0 5px rgba(255,215,106,0.6));
+}
+body.mode-pm #narration {
+  border-color: rgba(255,215,106,0.5);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 26px rgba(255,215,106,0.14);
+}
+body.mode-pm #narration ol li::before { border-color: var(--gold); color: var(--gold); }
 #narration .pmsec {
   font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
   color: var(--gold); margin: 9px 0 3px; text-transform: uppercase;
@@ -230,6 +257,9 @@ body.mode-risk #narration ol li::before { border-color: var(--rose); color: var(
       <marker id="arr-risk" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
         <path d="M0 0.5 L7.5 4 L0 7.5 Z" fill="#ff6b8a"/>
       </marker>
+      <marker id="arr-gold" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0 0.5 L7.5 4 L0 7.5 Z" fill="#ffd76a"/>
+      </marker>
     </defs>
     <g id="epaths"></g>
   </svg>
@@ -272,7 +302,7 @@ const SCENARIOS = [
      상단 칩을 누르면 그 목표까지 거쳐야 하는 관문과 경로만 켜집니다.
      노드에 올리면 오른쪽에 상세가, 클릭하면 그 관문의 상·하류가 켜집니다.<br/>
      <span class="mono">정책상 입지 결정(N01)과 예비이전후보지 선정(N04)만 완료 — 나머지 47개 관문이 앞에 있습니다.</span></div>` },
-  { id: "pmbrief", label: "총리 브리핑", pmbrief: true },
+  { id: "pmbrief", label: "★ 총리 브리핑", pmbrief: true },
   { id: "site", label: "부지 확보", target: "N17", stages: ["G1", "G4"], steps: [
     ["군공항 이전건의 → 이전후보지 공고 → 주민투표·최종 선정", "N04,N31,N32"],
     ["사업시행자·기부 대 양여·재원 확정", "N33"],
@@ -467,6 +497,7 @@ function render() {
   document.querySelectorAll(".chip:not(.lvl)").forEach((c) => c.classList.toggle("sel", c.dataset.id === current));
   document.querySelectorAll(".chip.lvl").forEach((c) => c.classList.toggle("sel", c.dataset.level === currentLevel));
   document.body.classList.toggle("mode-risk", !!sc.risk && !currentLevel);
+  document.body.classList.toggle("mode-pm", !!sc.pmbrief);
   let set = null, ext = new Set();
   if (sc.pmbrief) {
     const cab = DATA.nodes.filter((n) => n.level === "cabinet").map((n) => n.id);
@@ -555,7 +586,7 @@ function renderLevelNarration(sc, set) {
 
 function focusNode(id) {
   document.querySelectorAll(".chip").forEach((c) => c.classList.remove("sel"));
-  document.body.classList.remove("mode-risk");
+  document.body.classList.remove("mode-risk", "mode-pm");
   const set = new Set([...ancestors(id), ...descendants(id)]);
   applyHighlight(set, id, false);
   const n = nodeById[id];
@@ -588,7 +619,8 @@ function applyHighlight(set, target, risk, ext) {
     const riskOn = !!(dim && risk && (set.has(from) || set.has(to)));
     p.classList.toggle("on", on);
     p.classList.toggle("risk-on", riskOn);
-    p.setAttribute("marker-end", on ? "url(#arr-hot)" : riskOn ? "url(#arr-risk)" : "url(#arr-dim)");
+    const hot = document.body.classList.contains("mode-pm") ? "url(#arr-gold)" : "url(#arr-hot)";
+    p.setAttribute("marker-end", on ? hot : riskOn ? "url(#arr-risk)" : "url(#arr-dim)");
   }
 }
 
