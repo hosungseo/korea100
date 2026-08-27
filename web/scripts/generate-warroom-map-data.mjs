@@ -91,6 +91,33 @@ function nodeLevel(n) {
   return best;
 }
 
+// 결정주체 문자열에서 소관 부처를 뽑는다 — "기후에너지환경부"가 "환경부"보다
+// 먼저 오도록 부분 문자열 포함 순서를 지킨다
+const MINISTRY_CANON = [
+  ["기후에너지환경부", "기후에너지환경부"],
+  ["국방부", "국방부"],
+  ["행정안전부", "행정안전부"],
+  ["산업통상자원부", "산업통상부"],
+  ["산업통상부", "산업통상부"],
+  ["고용노동부", "고용노동부"],
+  ["환경부", "환경부"],
+  ["국가유산청", "국가유산청"],
+];
+function nodeMinistries(n) {
+  const decision = n.actorRoles?.decision ?? [];
+  const actors = decision.length ? decision : n.actorRoles?.lead ?? [];
+  const out = [];
+  for (const a of actors) {
+    for (const [token, canon] of MINISTRY_CANON) {
+      if (a.includes(token)) {
+        if (!out.includes(canon)) out.push(canon);
+        break;
+      }
+    }
+  }
+  return out;
+}
+
 const nodes = project.nodes.map((n) => ({
   id: n.id,
   name: n.name,
@@ -99,6 +126,7 @@ const nodes = project.nodes.map((n) => ({
   lead: n.actorRoles?.lead ?? [],
   decision: n.actorRoles?.decision ?? [],
   level: nodeLevel(n),
+  ministries: nodeMinistries(n),
   classification: n.classification ?? "",
   status: n.status ?? "planned",
   confidence: n.confidence ?? "",
