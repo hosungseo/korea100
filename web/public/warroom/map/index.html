@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>관문 의존 지도 — 광주 반도체 클러스터</title>
+<meta name="description" content="광주 군공항 부지 반도체 클러스터의 49개 관문과 94개 의존관계를 한 장의 지도로. 트랙을 고르면 그 목표까지의 경로만 켜집니다." />
+<meta property="og:title" content="관문 의존 지도 — 광주 반도체 클러스터" />
+<meta property="og:description" content="8개 스테이지 · 49개 관문 · 94개 의존관계. 부지·산단·전력·용수·착공·상업생산 — 어떤 트랙이 어디에 걸려 있는가." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg: #04070c;
+  --panel: rgba(9, 18, 28, 0.86);
+  --panel2: rgba(12, 23, 34, 0.94);
+  --line: rgba(56, 198, 244, 0.22);
+  --text: #d7e6f2;
+  --muted: #5f7b90;
+  --amber: #ffb020;
+  --gold: #ffd76a;
+  --cyan: #38c6f4;
+  --green: #2ee6a8;
+  --violet: #9d86f5;
+  --rose: #ff6b8a;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --sans: "Apple SD Gothic Neo", "Pretendard", sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { height: 100%; }
+body {
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+.mono { font-family: var(--mono); }
+a { color: inherit; }
+
+#scanlines, #vignette { position: fixed; inset: 0; pointer-events: none; z-index: 90; }
+#scanlines {
+  background: repeating-linear-gradient(180deg, rgba(56,198,244,0.03) 0 1px, transparent 1px 3px);
+  mix-blend-mode: screen; opacity: 0.5;
+}
+#vignette { background: radial-gradient(ellipse at 50% 40%, transparent 50%, rgba(0,0,0,0.7) 100%); }
+
+/* ── header ── */
+header {
+  position: sticky; top: 0; z-index: 40;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px;
+  padding: 12px 20px 10px;
+  background: linear-gradient(180deg, rgba(4,7,12,0.98) 70%, rgba(4,7,12,0));
+  border-bottom: 1px solid rgba(56,198,244,0.12);
+}
+header h1 { font-size: 16px; font-weight: 700; letter-spacing: -0.2px; white-space: nowrap; }
+header .sub { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.08em; }
+header .links { margin-left: auto; display: flex; gap: 10px; font-family: var(--mono); font-size: 10px; }
+header .links a { color: var(--muted); text-decoration: none; border: 1px solid rgba(95,123,144,0.35); border-radius: 4px; padding: 3px 8px; }
+header .links a:hover { color: var(--cyan); border-color: var(--cyan); }
+
+#chips { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; }
+.chip {
+  font-family: var(--mono); font-size: 11px; cursor: pointer;
+  color: var(--muted); background: transparent;
+  border: 1px solid rgba(95,123,144,0.4); border-radius: 999px;
+  padding: 4px 12px; transition: all 0.15s;
+}
+.chip:hover { color: var(--text); border-color: var(--text); }
+.chip.sel { color: #0a0f14; background: var(--amber); border-color: var(--amber); font-weight: 700; }
+.chip.sel.chip-risk { background: var(--rose); border-color: var(--rose); }
+.chip.chip-pm {
+  border-color: rgba(255,215,106,0.65); color: var(--gold); font-weight: 700;
+  padding: 4px 14px; letter-spacing: 0.02em;
+  background: linear-gradient(180deg, rgba(255,215,106,0.14), rgba(255,215,106,0.03));
+  animation: pmglow 2.6s ease-in-out infinite;
+}
+.chip.chip-pm:hover { color: #1a1204; background: var(--gold); border-color: var(--gold); animation: none; }
+.chip.sel.chip-pm {
+  background: linear-gradient(180deg, #ffe9a8, var(--gold));
+  border-color: #ffe9a8; color: #1a1204; animation: none;
+  box-shadow: 0 0 18px rgba(255,215,106,0.55);
+}
+@keyframes pmglow {
+  0%, 100% { box-shadow: 0 0 5px rgba(255,215,106,0.15); }
+  50% { box-shadow: 0 0 15px rgba(255,215,106,0.5); }
+}
+body.mode-pm .node.on {
+  border-color: rgba(255,215,106,0.7);
+  box-shadow: 0 0 0 1px rgba(255,215,106,0.45), 0 0 16px rgba(255,215,106,0.15);
+}
+body.mode-pm #edges path.e.on {
+  stroke: var(--gold);
+  filter: drop-shadow(0 0 5px rgba(255,215,106,0.6));
+}
+body.mode-pm #narration {
+  border-color: rgba(255,215,106,0.5);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 26px rgba(255,215,106,0.14);
+}
+body.mode-pm #narration ol li::before { border-color: var(--gold); color: var(--gold); }
+#narration .pmsec {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+  color: var(--gold); margin: 9px 0 3px; text-transform: uppercase;
+}
+#narration .pmsec:first-of-type { margin-top: 2px; }
+#levelchips { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; align-items: center; }
+#levelchips .rowlabel { font-family: var(--mono); font-size: 9px; color: var(--muted); letter-spacing: 0.14em; margin-right: 2px; }
+.chip.lvl.sel { color: #04121c; background: var(--cyan); border-color: var(--cyan); }
+#legend { display: flex; flex-wrap: wrap; gap: 14px; font-family: var(--mono); font-size: 9.5px; color: var(--muted); align-items: center; }
+#legend .sw { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
+#legend .ln { display: inline-block; width: 18px; height: 0; border-top: 2px solid var(--muted); margin-right: 4px; vertical-align: 3px; }
+#legend .ln.soft { border-top-style: dashed; }
+#wargame-btn { margin-left: auto; }
+#wargame-btn.on { background: var(--green); border-color: var(--green); color: #04140d; font-weight: 700; }
+.node.sim { border-color: rgba(46,230,168,0.85); border-style: dashed; }
+.node.sim::after {
+  content: "가정완료"; position: absolute; top: 6px; right: 8px;
+  font-family: var(--mono); font-size: 8px; color: var(--green);
+}
+.node.sim .dot { background: var(--green); }
+body.wargame .node { cursor: crosshair; }
+body.wargame .node.on, body.wargame #edges path.e.on, body.wargame #edges path.epulse.on {
+  animation-delay: 0s, 0s;
+}
+
+/* ── canvas ── */
+#viewport { position: relative; overflow: auto; padding: 8px 0 40px; }
+#canvas { position: relative; transform-origin: 0 0; }
+#edges { position: absolute; inset: 0; overflow: visible; z-index: 1; }
+#edges path { fill: none; transition: opacity 0.25s, stroke 0.25s; }
+#edges path.e { stroke: rgba(56,198,244,0.16); stroke-width: 1.1; }
+#edges path.e.soft { stroke-dasharray: 4 4; }
+#edges path.e.on { stroke: var(--amber); stroke-width: 1.7; opacity: 1; filter: drop-shadow(0 0 4px rgba(255,176,32,0.5)); }
+#edges path.e.risk-on { stroke: var(--rose); stroke-width: 1.7; filter: drop-shadow(0 0 4px rgba(255,107,138,0.5)); }
+body.dimmed #edges path.e:not(.on):not(.risk-on) { opacity: 0.06; }
+/* 순서 점등 — 하이라이트된 경로가 상류부터 차례로 켜진다 */
+#edges path.e.on { animation: edgein 0.35s ease both; animation-delay: calc(var(--d, 0) * 0.16s); }
+.node.on { animation: nodein 0.4s ease both; animation-delay: calc(var(--d, 0) * 0.16s); }
+@keyframes edgein { from { opacity: 0; } to { opacity: 1; } }
+@keyframes nodein {
+  from { opacity: 0.25; box-shadow: 0 0 0 0 rgba(255,215,106,0); }
+  60% { box-shadow: 0 0 0 4px rgba(255,215,106,0.35), 0 0 24px rgba(255,215,106,0.3); }
+  to { opacity: 1; }
+}
+/* 흐름 펄스 — 선 위를 이동하는 빛 점(출발→도착 방향) */
+#edges path.epulse {
+  stroke: transparent; stroke-width: 2.8; stroke-linecap: round;
+  stroke-dasharray: 0.1 14; opacity: 0; pointer-events: none;
+}
+#edges path.epulse.on {
+  stroke: var(--gold); opacity: 0.95;
+  animation: edgein 0.35s ease both, dotflow 1.1s linear infinite;
+  animation-delay: calc(var(--d, 0) * 0.16s + 0.2s), calc(var(--d, 0) * 0.16s + 0.2s);
+  filter: drop-shadow(0 0 3px rgba(255,215,106,0.8));
+}
+#edges path.epulse.risk-on {
+  stroke: #ffb3c2; opacity: 0.95;
+  animation: dotflow 1.1s linear infinite;
+  filter: drop-shadow(0 0 3px rgba(255,107,138,0.8));
+}
+body.mode-pm #edges path.epulse.on { stroke: #fff3cf; }
+@keyframes dotflow { to { stroke-dashoffset: -14.1; } }
+@media (prefers-reduced-motion: reduce) {
+  #edges path.e.on, #edges path.epulse.on, #edges path.epulse.risk-on, .node.on { animation: none; }
+  #edges path.epulse.on, #edges path.epulse.risk-on { opacity: 0.5; }
+}
+
+.group {
+  position: absolute; z-index: 2;
+  border: 1px dashed rgba(95,123,144,0.45);
+  border-radius: 10px;
+  padding: 30px 13px 13px;
+  width: 278px;
+  transition: opacity 0.25s;
+}
+.group .glabel {
+  position: absolute; top: 9px; left: 14px;
+  font-family: var(--mono); font-size: 10px; font-weight: 600;
+  letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase;
+}
+.group .gcount { position: absolute; top: 9px; right: 12px; font-family: var(--mono); font-size: 9px; color: rgba(95,123,144,0.7); }
+.group .gprog {
+  position: absolute; top: 24px; left: 14px; right: 12px; height: 2px;
+  background: rgba(95,123,144,0.22); border-radius: 1px; overflow: hidden; display: flex;
+}
+.group .gprog i { display: block; height: 100%; }
+body.dimmed .group.on { border-color: rgba(255,176,32,0.4); }
+body.dimmed .group.on .glabel { color: var(--gold); }
+.nodes { display: flex; flex-direction: column; gap: 8px; }
+
+.node {
+  position: relative; z-index: 3;
+  background: var(--panel);
+  border: 1px solid rgba(95,123,144,0.5);
+  border-radius: 7px;
+  padding: 7px 9px 6px;
+  cursor: pointer;
+  transition: opacity 0.25s, border-color 0.15s, box-shadow 0.15s;
+}
+.node:hover { border-color: var(--cyan); box-shadow: 0 0 0 1px rgba(56,198,244,0.3); }
+.node .nid { font-family: var(--mono); font-size: 8.5px; color: var(--muted); letter-spacing: 0.08em; }
+.node .nname { font-size: 11.5px; font-weight: 600; line-height: 1.32; margin: 1px 0 2px; }
+.node .nmeta { font-family: var(--mono); font-size: 8.5px; color: var(--muted); display: flex; gap: 6px; align-items: center; }
+.node .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--muted); flex: none; }
+
+.node.st-completed { border-color: rgba(46,230,168,0.55); }
+.node.st-completed .dot { background: var(--green); }
+.node.st-completed .nid { color: var(--green); }
+.node.st-active { border-color: rgba(255,176,32,0.7); }
+.node.st-active .dot { background: var(--amber); animation: pulse 1.6s infinite; }
+.node.st-active .nid { color: var(--amber); }
+.node.st-unknown { border-style: dashed; border-color: rgba(255,107,138,0.6); }
+.node.st-unknown .dot { background: var(--rose); }
+@keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,176,32,0.5); } 50% { box-shadow: 0 0 0 5px rgba(255,176,32,0); } }
+
+body.dimmed .node:not(.on):not(.ext) { opacity: 0.15; }
+body.dimmed .group:not(.on) { opacity: 0.35; }
+.node.on { box-shadow: 0 0 0 1px rgba(255,176,32,0.35), 0 0 14px rgba(255,176,32,0.12); }
+body.dimmed .node.ext { opacity: 0.62; border-style: dashed; border-color: rgba(255,176,32,0.55); }
+.node.on.target { border-color: var(--amber); box-shadow: 0 0 0 2px var(--amber), 0 0 20px rgba(255,176,32,0.35); }
+body.mode-risk .node.on { box-shadow: 0 0 0 2px var(--rose), 0 0 16px rgba(255,107,138,0.3); }
+.node.flash { border-color: var(--gold) !important; box-shadow: 0 0 0 2px var(--gold) !important; }
+
+/* ── cards ── */
+.card {
+  position: fixed; bottom: 16px; z-index: 50;
+  background: var(--panel2);
+  border: 1px solid rgba(56,198,244,0.25);
+  border-radius: 10px;
+  padding: 12px 14px;
+  width: 340px; max-width: calc(50vw - 24px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+  max-height: 44vh; overflow: auto;
+}
+#narration { left: 16px; }
+#detail { right: 16px; display: none; }
+.card h3 { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 7px; }
+#narration h3 { color: var(--amber); }
+body.mode-risk #narration h3 { color: var(--rose); }
+#detail h3 { color: var(--cyan); }
+#narration ol { list-style: none; counter-reset: s; }
+#narration ol li {
+  counter-increment: s; position: relative;
+  padding: 3px 0 3px 24px; font-size: 11.5px; color: var(--text); cursor: default;
+}
+#narration ol li::before {
+  content: counter(s); position: absolute; left: 0; top: 4px;
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 1px solid var(--amber); color: var(--amber);
+  font-family: var(--mono); font-size: 9px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+body.mode-risk #narration ol li::before { border-color: var(--rose); color: var(--rose); }
+#narration ol li:hover { color: var(--gold); }
+#narration .free { font-size: 11.5px; color: var(--text); }
+#narration .free .mono { color: var(--muted); font-size: 10px; }
+#detail .dname { font-size: 12.5px; font-weight: 700; margin-bottom: 4px; }
+#detail dl { display: grid; grid-template-columns: 62px 1fr; gap: 2px 8px; font-size: 10.5px; }
+#detail dt { font-family: var(--mono); font-size: 9px; color: var(--muted); letter-spacing: 0.05em; padding-top: 1px; }
+#detail dd { color: var(--text); }
+#detail .note { margin-top: 7px; padding-top: 7px; border-top: 1px dashed rgba(95,123,144,0.4); font-size: 10.5px; color: var(--muted); }
+
+.cbtn {
+  position: absolute; top: 7px; right: 8px; z-index: 2;
+  width: 20px; height: 20px; line-height: 18px; text-align: center;
+  font-family: var(--mono); font-size: 12px; cursor: pointer;
+  color: var(--muted); background: transparent;
+  border: 1px solid rgba(95,123,144,0.35); border-radius: 4px;
+}
+.cbtn:hover { color: var(--text); border-color: var(--text); }
+#narration.collapsed #narr-body { display: none; }
+#narration.collapsed { width: auto; min-width: 150px; }
+
+#zoomctl {
+  position: fixed; right: 10px; top: 50%; transform: translateY(-50%);
+  z-index: 60; display: flex; flex-direction: column; gap: 6px;
+}
+#zoomctl button {
+  width: 26px; height: 26px; cursor: pointer;
+  font-family: var(--mono); font-size: 12px;
+  color: var(--muted); background: var(--panel);
+  border: 1px solid rgba(95,123,144,0.4); border-radius: 5px;
+}
+#zoomctl button:hover { color: var(--cyan); border-color: var(--cyan); }
+
+.chip:focus-visible, .cbtn:focus-visible, #zoomctl button:focus-visible, .links a:focus-visible {
+  outline: 2px solid var(--cyan); outline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+  .card { position: static; width: auto; max-width: none; margin: 10px 14px; max-height: none; }
+  #detail { display: block; }
+  #zoomctl { display: none; }
+}
+</style>
+</head>
+<body>
+<div id="scanlines"></div><div id="vignette"></div>
+
+<header>
+  <div>
+    <h1>관문 의존 지도 <span style="color:var(--muted);font-weight:400">— 광주 반도체 클러스터</span></h1>
+    <div class="sub" id="subline">LOADING…</div>
+  </div>
+  <nav class="links">
+    <a href="../board/">주체별 상황판</a>
+    <a href="../../mega-projects/gwangju-semiconductor-cluster/">프로젝트 4뷰</a>
+    <a href="../">워룸</a>
+  </nav>
+  <div id="chips"></div>
+  <div id="levelchips"><span class="rowlabel">보는 급</span></div>
+  <div id="legend">
+    <span><span class="sw" style="background:var(--green)"></span>완료</span>
+    <span><span class="sw" style="background:var(--amber)"></span>진행중</span>
+    <span><span class="sw" style="background:var(--muted)"></span>예정</span>
+    <span><span class="sw" style="background:var(--rose)"></span>미확정</span>
+    <span><span class="ln"></span>필수 의존</span>
+    <span><span class="ln soft"></span>참조 의존</span>
+    <span id="hint" style="opacity:.7">노드 클릭 = 상·하류 고정 · ESC/배경 = 해제 · 숫자키 1~9 = 칩 전환 · W = 워게임</span>
+    <button id="wargame-btn" class="chip" title="관문을 클릭해 '풀렸다고 가정'을 켜고 끄면 전선·진행률·브리핑이 실시간 재계산됩니다">⚔ 워게임</button>
+    <span id="wg-status" class="mono" hidden>가정 완료 <b id="wg-count" style="color:var(--green)">0</b>건
+      <button id="wg-reset" class="chip" style="padding:2px 8px">초기화</button></span>
+  </div>
+</header>
+
+<div id="viewport"><div id="canvas">
+  <svg id="edges">
+    <defs>
+      <marker id="arr-dim" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0 0.5 L7.5 4 L0 7.5 Z" fill="rgba(56,198,244,0.3)"/>
+      </marker>
+      <marker id="arr-hot" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0 0.5 L7.5 4 L0 7.5 Z" fill="#ffb020"/>
+      </marker>
+      <marker id="arr-risk" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0 0.5 L7.5 4 L0 7.5 Z" fill="#ff6b8a"/>
+      </marker>
+      <marker id="arr-gold" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0 0.5 L7.5 4 L0 7.5 Z" fill="#ffd76a"/>
+      </marker>
+    </defs>
+    <g id="epaths"></g>
+  </svg>
+</div></div>
+
+<aside id="narration" class="card">
+  <button class="cbtn" id="narr-toggle" title="접기/펼치기" aria-label="내레이션 접기/펼치기">–</button>
+  <div id="narr-body"></div>
+</aside>
+<aside id="detail" class="card">
+  <button class="cbtn" id="detail-close" title="닫기" aria-label="상세 닫기">×</button>
+  <div id="detail-body"></div>
+</aside>
+
+<div id="zoomctl">
+  <button id="zoom-in" title="확대">+</button>
+  <button id="zoom-fit" title="화면 맞춤">◱</button>
+  <button id="zoom-out" title="축소">−</button>
+</div>
+
+<script>
+const COL = [40, 380, 720, 1060, 1400];
+const LAYOUT = {
+  G0: { x: COL[0], y: 20 },
+  G1: { x: COL[0], y: 320 },
+  G2: { x: COL[1], y: 20 },
+  G3: { x: COL[2], y: 20 },
+  G4: { x: COL[2], y: 750 },
+  G5: { x: COL[3], y: 20 },
+  G6: { x: COL[3], y: 660 },
+  G7: { x: COL[4], y: 20 },
+};
+const CANVAS_W = 1720, CANVAS_H = 1190;
+
+const STATUS_KO = { completed: "완료", active: "진행중", planned: "예정", unknown: "미확정" };
+const LEVELS = [
+  { id: "cabinet", label: "총리·국무회의" },
+  { id: "minister", label: "부처 장관" },
+  { id: "local", label: "지자체장" },
+  { id: "committee", label: "위원회·전문기관" },
+  { id: "field", label: "실무·사업자·기타" },
+];
+const LEVEL_KO = Object.fromEntries(LEVELS.map((l) => [l.id, l.label]));
+const CLASS_KO = {
+  legal_gate: "법정 관문", protection_gate: "보호 관문", technical_gate: "기술 관문",
+  delivery: "이행", plan: "계획", operation: "운영", policy: "정책", governance: "거버넌스",
+};
+
+const SCENARIOS = [
+  { id: "all", label: "전체", html:
+    `<div class="free">8개 스테이지 · 49개 관문 · 94개 의존관계.<br/>
+     상단 칩을 누르면 그 목표까지 거쳐야 하는 관문과 경로만 켜집니다.
+     노드에 올리면 오른쪽에 상세가, 클릭하면 그 관문의 상·하류가 켜집니다.<br/>
+     <span class="mono">정책상 입지 결정(N01)과 예비이전후보지 선정(N04)만 완료 — 나머지 47개 관문이 앞에 있습니다.</span></div>` },
+  { id: "pmbrief", label: "★ 총리 브리핑", pmbrief: true },
+  { id: "site", label: "부지 확보", target: "N17", stages: ["G1", "G4"], steps: [
+    ["군공항 이전건의 → 이전후보지 공고 → 주민투표·최종 선정", "N04,N31,N32"],
+    ["사업시행자·기부 대 양여·재원 확정", "N33"],
+    ["종전 군공항 석면 해체·토양 정화 + 편입 사유지 보상", "N41,N16"],
+    ["국유재산 용도폐지·종전부지 권리이전", "N42"],
+    ["보호구역 해제·사용권 확보 — 이후 모든 공사의 전제", "N17"],
+  ]},
+  { id: "plan", label: "산단·인허가", target: "N15", stages: ["G2", "G3"], steps: [
+    ["투자의향·지정요청 → 개발계획 초안", "N06,N07"],
+    ["공고·공람·주민 의견 + 전략환경영향평가", "N08,N09"],
+    ["재해영향·기술검토 → 산단계획 통합심의 → 지정 고시", "N38,N37,N10"],
+    ["환경영향평가 초안·본안 협의 완료", "N11,N12"],
+    ["의제 인허가 실체요건 취합 → 실시계획·승인조건 확정", "N14,N15"],
+  ]},
+  { id: "power", label: "전력", target: "N44", stages: ["G5"], steps: [
+    ["단계별 수요 확정·계통 경로 결정", "N18"],
+    ["정식 계통영향평가 ∥ 면제·특례 — 두 갈래 모두 미확정", "N19,N20"],
+    ["송전선로·변전소 실시계획 승인", "N21"],
+    ["공급·이용계약 → 송변전망 공사·계통접속", "N43,N22"],
+    ["사용전검사·계통 병입·가압", "N44"],
+  ]},
+  { id: "water", label: "용수·도로", target: "N25", stages: ["G6"], steps: [
+    ["공업용수·폐수·접근도로 수요·공급계획 확정", "N23"],
+    ["용수·재이용·폐수·하수도·도로 승인·비용분담", "N24"],
+    ["공사·준공·공급개시", "N25"],
+  ]},
+  { id: "start", label: "착공", target: "N27", stages: ["G7"], steps: [
+    ["실시계획 확정(산단·인허가 트랙) + 부지 사용권(부지 트랙)이 전제", "N15,N17"],
+    ["관리기본계획·입주계약·공장설립 승인", "N26"],
+    ["건축허가·설비설계 사전확인 → 착공신고", "N27"],
+  ]},
+  { id: "prod", label: "상업생산", target: "N30", stages: ["G7"], steps: [
+    ["착공 후 부지조성·팹 건설", "N28"],
+    ["위험물·고압가스 허가·검사 + 통합환경 등 사전심사", "N46,N45"],
+    ["공장등록·건축물 사용승인", "N47,N48"],
+    ["운영 인허가 확인 → 시험가동·수율 검증", "N29,N49"],
+    ["상업생산 개시 — 사실상 전 그래프가 이 관문의 선행조건", "N30"],
+  ]},
+  { id: "risk", label: "미확정 리스크", risk: true, steps: [
+    ["국가유산 영향진단·매장유산 조사 — 경로 자체가 미해소", "N13"],
+    ["편입 사유지 보상·취득 — 대상·규모 미확정", "N16"],
+    ["정식 전력계통영향평가 — 통과 여부·기간 미확정", "N19"],
+    ["계통영향평가 면제·특례 — 법적 근거 확인 필요", "N20"],
+  ]},
+  { id: "critical", label: "최장 사슬", critical: true },
+  { id: "bottleneck", label: "병목 랭킹", bottleneck: true },
+];
+
+const $ = (s) => document.querySelector(s);
+let DATA, nodeById = {}, fwd = {}, rev = {}, revHard = {}, fwdHard = {}, edgeEls = [], scale = 1;
+// wargame: gate ids assumed completed ("풀렸다고 가정") — pure what-if, not data
+const sim = new Set();
+let wargame = false;
+const eff = (id) => (sim.has(id) ? "completed" : nodeById[id].status);
+const effLabel = (id) => (sim.has(id) ? "가정완료" : STATUS_KO[nodeById[id].status]);
+
+fetch("./data.json").then((r) => r.json()).then((d) => { DATA = d; build(); });
+
+function build() {
+  nodeById = Object.fromEntries(DATA.nodes.map((n) => [n.id, n]));
+  DATA.edges.forEach((e) => {
+    (fwd[e.from] ||= []).push(e.to);
+    (rev[e.to] ||= []).push(e.from);
+    if (e.strength === "hard") {
+      (revHard[e.to] ||= []).push(e.from);
+      (fwdHard[e.from] ||= []).push(e.to);
+    }
+  });
+  updateStats();
+
+  const canvas = $("#canvas");
+  canvas.style.width = CANVAS_W + "px";
+  canvas.style.height = CANVAS_H + "px";
+
+  for (const s of DATA.stages) {
+    const g = document.createElement("section");
+    g.className = "group"; g.id = "grp-" + s.id;
+    g.style.left = LAYOUT[s.id].x + "px";
+    g.style.top = LAYOUT[s.id].y + "px";
+    const nodes = DATA.nodes.filter((n) => n.stage === s.id);
+    const done = nodes.filter((n) => n.status === "completed").length;
+    const act = nodes.filter((n) => n.status === "active").length;
+    g.innerHTML = `<span class="glabel">${s.id} ${s.label}</span><span class="gcount">${done}/${nodes.length}</span>
+      <span class="gprog"><i style="width:${(done / nodes.length) * 100}%;background:var(--green)"></i><i style="width:${(act / nodes.length) * 100}%;background:var(--amber)"></i></span>
+      <div class="nodes"></div>`;
+    const wrap = g.querySelector(".nodes");
+    for (const n of nodes) {
+      const el = document.createElement("article");
+      el.className = "node st-" + n.status; el.id = "nd-" + n.id;
+      el.innerHTML = `<div class="nid">${n.id} · ${(CLASS_KO[n.classification] || n.classification)}</div>
+        <div class="nname">${n.name}</div>
+        <div class="nmeta"><span class="dot"></span><span>${n.authority || "-"}</span><span style="margin-left:auto">${STATUS_KO[n.status]}</span></div>`;
+      el.addEventListener("mouseenter", () => { if (!pinnedId) showDetail(n); });
+      el.addEventListener("click", (ev) => {
+        ev.stopPropagation();
+        if (wargame) toggleSim(n.id);
+        else focusNode(n.id);
+      });
+      wrap.appendChild(el);
+    }
+    canvas.appendChild(g);
+  }
+
+  const chips = $("#chips");
+  for (const sc of SCENARIOS) {
+    const b = document.createElement("button");
+    b.className = "chip" + (sc.risk ? " chip-risk" : "") + (sc.pmbrief ? " chip-pm" : "");
+    b.textContent = sc.label; b.dataset.id = sc.id;
+    b.addEventListener("click", () => selectScenario(sc.id));
+    chips.appendChild(b);
+  }
+  const lchips = $("#levelchips");
+  for (const lv of LEVELS) {
+    const n = DATA.nodes.filter((x) => x.level === lv.id).length;
+    const b = document.createElement("button");
+    b.className = "chip lvl"; b.textContent = `${lv.label} ${n}`; b.dataset.level = lv.id;
+    b.addEventListener("click", () => toggleLevel(lv.id));
+    lchips.appendChild(b);
+  }
+
+  fit();
+  drawEdges();
+  // deep link: #view=<scenario>&level=<tier> restores a shared screen
+  const h = new URLSearchParams(location.hash.slice(1));
+  if (SCENARIOS.some((s) => s.id === h.get("view"))) current = h.get("view");
+  if (LEVELS.some((l) => l.id === h.get("level"))) currentLevel = h.get("level");
+  render();
+  $("#viewport").addEventListener("click", () => { pinnedId = null; selectScenario(current); });
+  window.addEventListener("resize", () => { fit(); drawEdges(); });
+  $("#narr-toggle").addEventListener("click", function () {
+    const c = $("#narration").classList.toggle("collapsed");
+    this.textContent = c ? "+" : "–";
+  });
+  $("#detail-close").addEventListener("click", () => { pinnedId = null; $("#detail").style.display = "none"; });
+  $("#zoom-in").addEventListener("click", () => zoom(userScale + 0.15));
+  $("#zoom-out").addEventListener("click", () => zoom(userScale - 0.15));
+  $("#zoom-fit").addEventListener("click", () => zoom(1));
+  $("#wargame-btn").addEventListener("click", toggleWargame);
+  $("#wg-reset").addEventListener("click", () => {
+    sim.clear();
+    document.querySelectorAll(".node.sim").forEach((el) => el.classList.remove("sim"));
+    updateStats(); updateProgress(); render();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+    if (e.key === "Escape") { pinnedId = null; $("#detail").style.display = "none"; selectScenario(current); return; }
+    if (e.key === "w" || e.key === "W") { toggleWargame(); return; }
+    const idx = "123456789".indexOf(e.key);
+    if (idx >= 0 && SCENARIOS[idx]) selectScenario(SCENARIOS[idx].id);
+  });
+}
+
+function toggleWargame() {
+  wargame = !wargame;
+  document.body.classList.toggle("wargame", wargame);
+  $("#wargame-btn").classList.toggle("on", wargame);
+  $("#wg-status").hidden = !wargame;
+  $("#hint").textContent = wargame
+    ? "워게임: 노드 클릭 = 풀렸다고 가정 켜고 끄기 — 전선·진행률·브리핑이 즉시 재계산 · W = 종료"
+    : "노드 클릭 = 상·하류 고정 · ESC/배경 = 해제 · 숫자키 1~9 = 칩 전환 · W = 워게임";
+}
+
+function toggleSim(id) {
+  if (nodeById[id].status === "completed") return;
+  if (sim.has(id)) sim.delete(id); else sim.add(id);
+  document.getElementById("nd-" + id).classList.toggle("sim", sim.has(id));
+  $("#wg-count").textContent = sim.size;
+  updateStats(); updateProgress(); render();
+}
+
+function updateStats() {
+  const st = { completed: 0, active: 0, planned: 0, unknown: 0 };
+  DATA.nodes.forEach((n) => st[n.status]++);
+  const simTag = sim.size ? `+가정 ${sim.size}` : "";
+  $("#subline").textContent =
+    `${DATA.stages.length} STAGES · ${DATA.nodes.length} GATES · ${DATA.edges.length} DEPS · ` +
+    `완료 ${st.completed}${simTag} 진행 ${st.active} 미확정 ${st.unknown} · AS OF ${DATA.meta.asOfDate}`;
+}
+
+function updateProgress() {
+  for (const s of DATA.stages) {
+    const nodes = DATA.nodes.filter((n) => n.stage === s.id);
+    const done = nodes.filter((n) => eff(n.id) === "completed").length;
+    const act = nodes.filter((n) => eff(n.id) === "active").length;
+    const g = document.getElementById("grp-" + s.id);
+    g.querySelector(".gcount").textContent = `${done}/${nodes.length}`;
+    const bars = g.querySelectorAll(".gprog i");
+    bars[0].style.width = (done / nodes.length) * 100 + "%";
+    bars[1].style.width = (act / nodes.length) * 100 + "%";
+  }
+}
+
+let userScale = 1;
+function zoom(v) { userScale = Math.min(1.8, Math.max(0.5, v)); fit(); }
+function fit() {
+  const base = Math.min(1, Math.max(0.42, (window.innerWidth - 24) / CANVAS_W));
+  scale = base * userScale;
+  const c = $("#canvas");
+  c.style.transform = `scale(${scale})`;
+  $("#viewport").style.height = Math.min(CANVAS_H * scale, CANVAS_H) + 20 + "px";
+}
+
+function rect(id) {
+  const el = document.getElementById("nd-" + id);
+  const r = el.getBoundingClientRect();
+  const cr = $("#canvas").getBoundingClientRect();
+  return {
+    left: (r.left - cr.left) / scale, right: (r.right - cr.left) / scale,
+    top: (r.top - cr.top) / scale, bottom: (r.bottom - cr.top) / scale,
+    cx: (r.left + r.width / 2 - cr.left) / scale, cy: (r.top + r.height / 2 - cr.top) / scale,
+  };
+}
+
+function drawEdges() {
+  const g = $("#epaths");
+  g.innerHTML = ""; edgeEls = [];
+  for (const e of DATA.edges) {
+    const s = rect(e.from), t = rect(e.to);
+    let d;
+    const dx = t.left - s.right;
+    const sameStage = nodeById[e.from].stage === nodeById[e.to].stage;
+    if (sameStage) {
+      if (t.top >= s.bottom && t.top - s.bottom < 44) {
+        const vh = Math.max(10, (t.top - s.bottom) * 0.6);
+        d = `M ${s.cx} ${s.bottom} C ${s.cx} ${s.bottom + vh}, ${t.cx} ${t.top - vh}, ${t.cx} ${t.top - 4}`;
+      } else {
+        const off = 30;
+        d = `M ${s.left} ${s.cy} C ${s.left - off} ${s.cy}, ${t.left - off} ${t.cy}, ${t.left - 4} ${t.cy}`;
+      }
+    } else if (dx > 20) {
+      const h = Math.min(120, Math.max(36, dx * 0.5));
+      d = `M ${s.right} ${s.cy} C ${s.right + h} ${s.cy}, ${t.left - h} ${t.cy}, ${t.left - 4} ${t.cy}`;
+    } else if (Math.abs(t.cx - s.cx) < 340) {
+      if (t.top >= s.bottom) {
+        const vh = Math.min(60, Math.max(18, (t.top - s.bottom) * 0.6));
+        d = `M ${s.cx} ${s.bottom} C ${s.cx} ${s.bottom + vh}, ${t.cx} ${t.top - vh}, ${t.cx} ${t.top - 4}`;
+      } else if (s.top >= t.bottom) {
+        const vh = Math.min(60, Math.max(18, (s.top - t.bottom) * 0.6));
+        d = `M ${s.cx} ${s.top} C ${s.cx} ${s.top - vh}, ${t.cx} ${t.bottom + vh}, ${t.cx} ${t.bottom + 4}`;
+      } else {
+        const off = 30;
+        d = `M ${s.left} ${s.cy} C ${s.left - off} ${s.cy}, ${t.left - off} ${t.cy}, ${t.left - 4} ${t.cy}`;
+      }
+    } else {
+      d = `M ${s.left} ${s.cy} C ${s.left - 60} ${s.cy}, ${t.right + 60} ${t.cy}, ${t.right + 4} ${t.cy}`;
+    }
+    const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    p.setAttribute("d", d);
+    p.setAttribute("class", "e" + (e.strength === "soft" ? " soft" : ""));
+    p.setAttribute("marker-end", "url(#arr-dim)");
+    p.dataset.from = e.from; p.dataset.to = e.to;
+    g.appendChild(p);
+    const pulse = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    pulse.setAttribute("d", d);
+    pulse.setAttribute("class", "epulse");
+    g.appendChild(pulse);
+    p._pulse = pulse;
+    edgeEls.push(p);
+  }
+}
+
+function ancestors(id) {
+  const out = new Set([id]), q = [id];
+  while (q.length) for (const p of rev[q.pop()] || []) if (!out.has(p)) { out.add(p); q.push(p); }
+  return out;
+}
+function descendants(id) {
+  const out = new Set([id]), q = [id];
+  while (q.length) for (const c of fwd[q.pop()] || []) if (!out.has(c)) { out.add(c); q.push(c); }
+  return out;
+}
+
+let current = "all", currentLevel = null, pinnedId = null;
+function selectScenario(id) { current = id; pinnedId = null; render(); }
+function toggleLevel(id) { currentLevel = currentLevel === id ? null : id; render(); }
+
+function syncHash() {
+  const parts = [];
+  if (current !== "all") parts.push("view=" + current);
+  if (currentLevel) parts.push("level=" + currentLevel);
+  history.replaceState(null, "", parts.length ? "#" + parts.join("&") : location.pathname + location.search);
+}
+
+function render() {
+  syncHash();
+  const sc = SCENARIOS.find((s) => s.id === current);
+  document.querySelectorAll(".chip:not(.lvl)").forEach((c) => c.classList.toggle("sel", c.dataset.id === current));
+  document.querySelectorAll(".chip.lvl").forEach((c) => c.classList.toggle("sel", c.dataset.level === currentLevel));
+  document.body.classList.toggle("mode-risk", !!sc.risk && !currentLevel);
+  document.body.classList.toggle("mode-pm", !!sc.pmbrief);
+  let set = null, ext = new Set();
+  if (sc.pmbrief) {
+    const cab = DATA.nodes.filter((n) => n.level === "cabinet").map((n) => n.id);
+    const front = frontier();
+    const risky = DATA.nodes.filter((n) => eff(n.id) === "unknown").map((n) => n.id);
+    set = new Set([...cab, ...front, ...risky]);
+    if (currentLevel) set = new Set([...set].filter((id) => nodeById[id].level === currentLevel));
+    applyHighlight(set, null, false, ext);
+    renderPmNarration(cab, front, risky, set);
+    return;
+  }
+  if (sc.critical) {
+    const path = longestPath();
+    set = new Set(path);
+    if (currentLevel) set = new Set([...set].filter((id) => nodeById[id].level === currentLevel));
+    const pathEdges = new Set();
+    for (let i = 0; i < path.length - 1; i++) pathEdges.add(path[i] + ">" + path[i + 1]);
+    applyHighlight(set, path[path.length - 1], false, ext, pathEdges);
+    renderChainNarration(path, set);
+    return;
+  }
+  if (sc.bottleneck) {
+    const top = blockers().filter((b) => b.blocked > 0).slice(0, 8);
+    set = new Set(top.map((b) => b.id));
+    if (currentLevel) set = new Set([...set].filter((id) => nodeById[id].level === currentLevel));
+    applyHighlight(set, null, false, ext);
+    renderBlockerNarration(top, set);
+    return;
+  }
+  if (sc.target) {
+    const anc = ancestors(sc.target);
+    if (sc.stages) {
+      set = new Set([...anc].filter((id) => sc.stages.includes(nodeById[id].stage)));
+      set.add(sc.target);
+      for (const id of set)
+        for (const p of rev[id] || []) if (anc.has(p) && !set.has(p)) ext.add(p);
+    } else set = anc;
+  } else if (sc.risk) {
+    set = new Set(DATA.nodes.filter((n) => n.status === "unknown").map((n) => n.id));
+  }
+  if (currentLevel) {
+    // level view over a track = the target's FULL ancestor cone, so upstream
+    // gates held at that level (other ministries, etc.) are not hidden
+    const base = sc.target ? ancestors(sc.target)
+      : set ? new Set([...set, ...ext]) : new Set(DATA.nodes.map((n) => n.id));
+    set = new Set([...base].filter((id) => nodeById[id].level === currentLevel));
+    ext = new Set();
+  }
+  const target = sc.target && set && set.has(sc.target) ? sc.target : null;
+  applyHighlight(set, target, sc.risk && !currentLevel, ext);
+  if (currentLevel) renderLevelNarration(sc, set);
+  else renderNarration(sc);
+}
+
+// gates whose hard prerequisites are all completed = where work can and
+// should be moving right now (wargame assumptions count as completed)
+function frontier() {
+  return DATA.nodes
+    .filter((n) => eff(n.id) !== "completed")
+    .filter((n) => (revHard[n.id] || []).every((p) => eff(p) === "completed"))
+    .map((n) => n.id);
+}
+
+// longest chain of hard dependencies — the structural lower bound on the
+// project: no schedule can be shorter than this gate sequence
+function longestPath() {
+  const memo = {}, next = {};
+  const dfs = (id) => {
+    if (id in memo) return memo[id];
+    memo[id] = 0;
+    let best = 0, bnext = null;
+    for (const c of fwdHard[id] || []) {
+      const v = dfs(c) + 1;
+      if (v > best) { best = v; bnext = c; }
+    }
+    memo[id] = best; next[id] = bnext;
+    return best;
+  };
+  let start = null, len = -1;
+  for (const n of DATA.nodes) { const v = dfs(n.id); if (v > len) { len = v; start = n.id; } }
+  const path = [];
+  for (let c = start; c; c = next[c]) path.push(c);
+  return path;
+}
+
+// how many gates stall if this one stalls — hard-dependency descendants only
+// (soft references do not block), completed ones excluded
+function blockers() {
+  const hardDescendants = (id) => {
+    const out = new Set([id]), q = [id];
+    while (q.length) for (const c of fwdHard[q.pop()] || []) if (!out.has(c)) { out.add(c); q.push(c); }
+    return out;
+  };
+  return DATA.nodes
+    .filter((n) => eff(n.id) !== "completed")
+    .map((n) => {
+      const blocked = [...hardDescendants(n.id)].filter((d) => d !== n.id && eff(d) !== "completed").length;
+      return { id: n.id, blocked };
+    })
+    .sort((a, b) => b.blocked - a.blocked);
+}
+
+function renderPmNarration(cab, front, risky, set) {
+  const n = $("#narr-body");
+  const li = (id) => {
+    const x = nodeById[id];
+    return `<li data-nodes="${id}">${x.name} <span class="mono" style="color:var(--muted);font-size:9px">${id} · ${effLabel(id)}${x.level === "cabinet" ? "" : ` · ${LEVEL_KO[x.level]}`}</span></li>`;
+  };
+  const sec = (title, ids) => ids.length
+    ? `<div class="pmsec">${title} · ${ids.length}건</div><ol>${ids.map(li).join("")}</ol>` : "";
+  const f = (ids) => ids.filter((id) => set.has(id));
+  n.innerHTML = `<h3 style="color:var(--gold)">총리 브리핑</h3>
+    ${sec("결정 — 총리·국무회의 테이블", f(cab))}
+    ${sec("지금 열린 전선 — 선행 관문 완료, 즉시 착수 대상", f(front.filter((id) => !cab.includes(id))))}
+    ${sec("미확정 리스크 — 경로·근거 확인 필요", f(risky.filter((id) => !cab.includes(id) && !front.includes(id))))}`;
+  n.querySelectorAll("li").forEach((el) => {
+    const ids = el.dataset.nodes.split(",");
+    el.addEventListener("mouseenter", () => ids.forEach((i) => document.getElementById("nd-" + i)?.classList.add("flash")));
+    el.addEventListener("mouseleave", () => ids.forEach((i) => document.getElementById("nd-" + i)?.classList.remove("flash")));
+  });
+}
+
+function renderLevelNarration(sc, set) {
+  const n = $("#narr-body");
+  const scoped = sc.id !== "all" ? ` × ${sc.label}` : "";
+  const ids = DATA.nodes.filter((x) => set.has(x.id)).map((x) => x.id);
+  if (!ids.length) {
+    n.innerHTML = `<h3>보는 급 — ${LEVEL_KO[currentLevel]}${scoped}</h3>
+      <div class="free">이 범위에서 ${LEVEL_KO[currentLevel]} 결정 관문이 없습니다.</div>`;
+    return;
+  }
+  const items = ids.map((id) => {
+    const x = nodeById[id];
+    return `<li data-nodes="${id}">${x.name} <span class="mono" style="color:var(--muted);font-size:9px">${id} · ${effLabel(id)}</span></li>`;
+  }).join("");
+  n.innerHTML = `<h3>보는 급 — ${LEVEL_KO[currentLevel]}${scoped} · ${ids.length}건</h3><ol>${items}</ol>`;
+  n.querySelectorAll("li").forEach((li) => {
+    const lids = li.dataset.nodes.split(",");
+    li.addEventListener("mouseenter", () => lids.forEach((i) => document.getElementById("nd-" + i)?.classList.add("flash")));
+    li.addEventListener("mouseleave", () => lids.forEach((i) => document.getElementById("nd-" + i)?.classList.remove("flash")));
+  });
+}
+
+function focusNode(id) {
+  pinnedId = id;
+  document.querySelectorAll(".chip").forEach((c) => c.classList.remove("sel"));
+  document.body.classList.remove("mode-risk", "mode-pm");
+  const set = new Set([...ancestors(id), ...descendants(id)]);
+  applyHighlight(set, id, false);
+  const n = nodeById[id];
+  const up = ancestors(id).size - 1, down = descendants(id).size - 1;
+  $("#narr-body").innerHTML = `<h3>관문 초점 — ${id}</h3>
+    <div class="free"><b>${n.name}</b><br/>
+    이 관문 앞에 <b>${up}개</b>의 선행 관문, 뒤에 <b>${down}개</b>의 후속 관문이 걸려 있습니다.<br/>
+    <span class="mono">배경을 클릭하면 이전 화면으로 돌아갑니다.</span></div>`;
+  showDetail(n);
+}
+
+// cascade order: longest dependency depth within the highlighted subgraph,
+// so paths light up from their upstream roots toward the target
+function cascadeDepths(members) {
+  const depth = {};
+  const visit = (id, trail) => {
+    if (id in depth) return depth[id];
+    if (trail.has(id)) return 0;
+    trail.add(id);
+    let d = 0;
+    for (const p of rev[id] || []) if (members.has(p)) d = Math.max(d, visit(p, trail) + 1);
+    trail.delete(id);
+    depth[id] = d;
+    return d;
+  };
+  for (const id of members) visit(id, new Set());
+  return depth;
+}
+
+function bindFlash(root) {
+  root.querySelectorAll("li[data-nodes]").forEach((li) => {
+    const ids = li.dataset.nodes.split(",");
+    li.addEventListener("mouseenter", () => ids.forEach((i) => document.getElementById("nd-" + i)?.classList.add("flash")));
+    li.addEventListener("mouseleave", () => ids.forEach((i) => document.getElementById("nd-" + i)?.classList.remove("flash")));
+  });
+}
+
+function renderChainNarration(path, set) {
+  const n = $("#narr-body");
+  const items = path.map((id) => {
+    const x = nodeById[id];
+    return `<li data-nodes="${id}">${x.name} <span class="mono" style="color:var(--muted);font-size:9px">${id} · ${x.stage} · ${effLabel(id)}</span></li>`;
+  }).join("");
+  n.innerHTML = `<h3>최장 사슬 — 하드 의존 ${path.length}개 관문</h3>
+    <div class="free" style="margin-bottom:6px">끊을 수 없는 필수 선후관계만 이어 붙인 가장 긴 줄.
+    어떤 일정도 이 사슬보다 짧아질 수 없습니다 — 단축하려면 이 줄 위의 관문을 병렬화하거나 특례로 접어야 합니다.</div>
+    <ol>${items}</ol>`;
+  bindFlash(n);
+}
+
+function renderBlockerNarration(top, set) {
+  const n = $("#narr-body");
+  const items = top.map((b) => {
+    const x = nodeById[b.id];
+    return `<li data-nodes="${b.id}">${x.name} <span class="mono" style="color:var(--rose);font-size:9px">지연 시 ${b.blocked}개 정지</span> <span class="mono" style="color:var(--muted);font-size:9px">${b.id} · ${effLabel(b.id)}</span></li>`;
+  }).join("");
+  n.innerHTML = `<h3>병목 랭킹 — 막히면 가장 많이 세우는 관문</h3>
+    <div class="free" style="margin-bottom:6px">미완료 관문을 "이 관문이 지연되면 뒤에서 몇 개가 못 움직이는가"로 순위 매김.</div>
+    <ol>${items}</ol>`;
+  bindFlash(n);
+}
+
+function applyHighlight(set, target, risk, ext, pathEdges) {
+  ext = ext || new Set();
+  const dim = !!set;
+  const members = dim ? new Set([...set, ...ext]) : new Set();
+  const depth = dim ? cascadeDepths(members) : {};
+  // strip then force reflow so the cascade replays on every selection
+  document.querySelectorAll(".node.on").forEach((el) => el.classList.remove("on"));
+  for (const p of edgeEls) { p.classList.remove("on"); p._pulse.classList.remove("on"); }
+  void document.body.offsetWidth;
+  document.body.classList.toggle("dimmed", dim);
+  document.querySelectorAll(".node").forEach((el) => {
+    const id = el.id.slice(3);
+    el.classList.toggle("on", !!(dim && set.has(id)));
+    el.classList.toggle("ext", !!(dim && ext.has(id)));
+    el.classList.toggle("target", !!(dim && id === target));
+    if (dim && members.has(id)) el.style.setProperty("--d", depth[id] || 0);
+    else el.style.removeProperty("--d");
+  });
+  document.querySelectorAll(".group").forEach((el) => {
+    const sid = el.id.slice(4);
+    const has = dim && DATA.nodes.some((n) => n.stage === sid && set.has(n.id));
+    el.classList.toggle("on", !!has);
+  });
+  for (const p of edgeEls) {
+    const from = p.dataset.from, to = p.dataset.to;
+    const on = pathEdges
+      ? pathEdges.has(from + ">" + to)
+      : !!(dim && !risk && set.has(to) && (set.has(from) || ext.has(from)));
+    const riskOn = !!(dim && risk && (set.has(from) || set.has(to)));
+    p.classList.toggle("on", on);
+    p.classList.toggle("risk-on", riskOn);
+    p._pulse.classList.toggle("on", on);
+    p._pulse.classList.toggle("risk-on", riskOn);
+    if (on) {
+      const d = depth[from] || 0;
+      p.style.setProperty("--d", d);
+      p._pulse.style.setProperty("--d", d);
+    } else {
+      p.style.removeProperty("--d");
+      p._pulse.style.removeProperty("--d");
+    }
+    const hot = document.body.classList.contains("mode-pm") ? "url(#arr-gold)" : "url(#arr-hot)";
+    p.setAttribute("marker-end", on ? hot : riskOn ? "url(#arr-risk)" : "url(#arr-dim)");
+  }
+}
+
+function renderNarration(sc) {
+  const n = $("#narr-body");
+  if (sc.html) { n.innerHTML = `<h3>${sc.label}</h3>${sc.html}`; return; }
+  const items = sc.steps.map(([txt, ids]) =>
+    `<li data-nodes="${ids}">${txt} <span class="mono" style="color:var(--muted);font-size:9px">${ids.replaceAll(",", " ")}</span></li>`).join("");
+  n.innerHTML = `<h3>${sc.risk ? "" : "트랙 — "}${sc.label}</h3><ol>${items}</ol>`;
+  n.querySelectorAll("li").forEach((li) => {
+    const ids = li.dataset.nodes.split(",");
+    li.addEventListener("mouseenter", () => ids.forEach((i) => document.getElementById("nd-" + i)?.classList.add("flash")));
+    li.addEventListener("mouseleave", () => ids.forEach((i) => document.getElementById("nd-" + i)?.classList.remove("flash")));
+  });
+}
+
+function showDetail(n) {
+  $("#detail").style.display = "block";
+  const d = $("#detail-body");
+  const stage = DATA.stages.find((s) => s.id === n.stage);
+  const up = (rev[n.id] || []).length, down = (fwd[n.id] || []).length;
+  d.innerHTML = `<h3>${n.id} · ${stage.id} ${stage.label}</h3>
+    <div class="dname">${n.name}</div>
+    <dl>
+      <dt>소관</dt><dd>${n.authority || "-"}</dd>
+      <dt>주도</dt><dd>${(n.lead || []).join(", ") || "-"}</dd>
+      <dt>성격</dt><dd>${CLASS_KO[n.classification] || n.classification}</dd>
+      <dt>결정 급</dt><dd>${LEVEL_KO[n.level] || "-"}${(n.decision || []).length ? ` — ${n.decision.join(", ")}` : ""}</dd>
+      <dt>상태</dt><dd>${STATUS_KO[n.status]}${n.completedOn ? ` (${n.completedOn})` : ""}</dd>
+      <dt>의존</dt><dd>선행 ${up} · 후속 ${down}</dd>
+    </dl>
+    ${n.note ? `<div class="note">${n.note}</div>` : ""}`;
+}
+</script>
+</body>
+</html>
