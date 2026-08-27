@@ -170,6 +170,13 @@ body.mode-pm #edges path.epulse.on { stroke: #fff3cf; }
   letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase;
 }
 .group .gcount { position: absolute; top: 9px; right: 12px; font-family: var(--mono); font-size: 9px; color: rgba(95,123,144,0.7); }
+.group .gprog {
+  position: absolute; top: 24px; left: 14px; right: 12px; height: 2px;
+  background: rgba(95,123,144,0.22); border-radius: 1px; overflow: hidden; display: flex;
+}
+.group .gprog i { display: block; height: 100%; }
+body.dimmed .group.on { border-color: rgba(255,176,32,0.4); }
+body.dimmed .group.on .glabel { color: var(--gold); }
 .nodes { display: flex; flex-direction: column; gap: 8px; }
 
 .node {
@@ -244,9 +251,37 @@ body.mode-risk #narration ol li::before { border-color: var(--rose); color: var(
 #detail dd { color: var(--text); }
 #detail .note { margin-top: 7px; padding-top: 7px; border-top: 1px dashed rgba(95,123,144,0.4); font-size: 10.5px; color: var(--muted); }
 
+.cbtn {
+  position: absolute; top: 7px; right: 8px; z-index: 2;
+  width: 20px; height: 20px; line-height: 18px; text-align: center;
+  font-family: var(--mono); font-size: 12px; cursor: pointer;
+  color: var(--muted); background: transparent;
+  border: 1px solid rgba(95,123,144,0.35); border-radius: 4px;
+}
+.cbtn:hover { color: var(--text); border-color: var(--text); }
+#narration.collapsed #narr-body { display: none; }
+#narration.collapsed { width: auto; min-width: 150px; }
+
+#zoomctl {
+  position: fixed; right: 10px; top: 50%; transform: translateY(-50%);
+  z-index: 60; display: flex; flex-direction: column; gap: 6px;
+}
+#zoomctl button {
+  width: 26px; height: 26px; cursor: pointer;
+  font-family: var(--mono); font-size: 12px;
+  color: var(--muted); background: var(--panel);
+  border: 1px solid rgba(95,123,144,0.4); border-radius: 5px;
+}
+#zoomctl button:hover { color: var(--cyan); border-color: var(--cyan); }
+
+.chip:focus-visible, .cbtn:focus-visible, #zoomctl button:focus-visible, .links a:focus-visible {
+  outline: 2px solid var(--cyan); outline-offset: 2px;
+}
+
 @media (max-width: 900px) {
   .card { position: static; width: auto; max-width: none; margin: 10px 14px; max-height: none; }
   #detail { display: block; }
+  #zoomctl { display: none; }
 }
 </style>
 </head>
@@ -272,7 +307,7 @@ body.mode-risk #narration ol li::before { border-color: var(--rose); color: var(
     <span><span class="sw" style="background:var(--rose)"></span>미확정</span>
     <span><span class="ln"></span>필수 의존</span>
     <span><span class="ln soft"></span>참조 의존</span>
-    <span style="opacity:.7">노드 클릭 = 그 관문의 상·하류 · 배경 클릭 = 해제</span>
+    <span style="opacity:.7">노드 클릭 = 상·하류 고정 · ESC/배경 = 해제 · 숫자키 1~9 = 칩 전환</span>
   </div>
 </header>
 
@@ -296,8 +331,20 @@ body.mode-risk #narration ol li::before { border-color: var(--rose); color: var(
   </svg>
 </div></div>
 
-<aside id="narration" class="card"></aside>
-<aside id="detail" class="card"></aside>
+<aside id="narration" class="card">
+  <button class="cbtn" id="narr-toggle" title="접기/펼치기" aria-label="내레이션 접기/펼치기">–</button>
+  <div id="narr-body"></div>
+</aside>
+<aside id="detail" class="card">
+  <button class="cbtn" id="detail-close" title="닫기" aria-label="상세 닫기">×</button>
+  <div id="detail-body"></div>
+</aside>
+
+<div id="zoomctl">
+  <button id="zoom-in" title="확대">+</button>
+  <button id="zoom-fit" title="화면 맞춤">◱</button>
+  <button id="zoom-out" title="축소">−</button>
+</div>
 
 <script>
 const COL = [40, 380, 720, 1060, 1400];
@@ -408,7 +455,11 @@ function build() {
     g.style.left = LAYOUT[s.id].x + "px";
     g.style.top = LAYOUT[s.id].y + "px";
     const nodes = DATA.nodes.filter((n) => n.stage === s.id);
-    g.innerHTML = `<span class="glabel">${s.id} ${s.label}</span><span class="gcount">${nodes.length}</span><div class="nodes"></div>`;
+    const done = nodes.filter((n) => n.status === "completed").length;
+    const act = nodes.filter((n) => n.status === "active").length;
+    g.innerHTML = `<span class="glabel">${s.id} ${s.label}</span><span class="gcount">${done}/${nodes.length}</span>
+      <span class="gprog"><i style="width:${(done / nodes.length) * 100}%;background:var(--green)"></i><i style="width:${(act / nodes.length) * 100}%;background:var(--amber)"></i></span>
+      <div class="nodes"></div>`;
     const wrap = g.querySelector(".nodes");
     for (const n of nodes) {
       const el = document.createElement("article");
@@ -416,7 +467,7 @@ function build() {
       el.innerHTML = `<div class="nid">${n.id} · ${(CLASS_KO[n.classification] || n.classification)}</div>
         <div class="nname">${n.name}</div>
         <div class="nmeta"><span class="dot"></span><span>${n.authority || "-"}</span><span style="margin-left:auto">${STATUS_KO[n.status]}</span></div>`;
-      el.addEventListener("mouseenter", () => showDetail(n));
+      el.addEventListener("mouseenter", () => { if (!pinnedId) showDetail(n); });
       el.addEventListener("click", (ev) => { ev.stopPropagation(); focusNode(n.id); });
       wrap.appendChild(el);
     }
@@ -442,16 +493,37 @@ function build() {
 
   fit();
   drawEdges();
-  selectScenario("all");
-  $("#viewport").addEventListener("click", () => selectScenario(current));
+  // deep link: #view=<scenario>&level=<tier> restores a shared screen
+  const h = new URLSearchParams(location.hash.slice(1));
+  if (SCENARIOS.some((s) => s.id === h.get("view"))) current = h.get("view");
+  if (LEVELS.some((l) => l.id === h.get("level"))) currentLevel = h.get("level");
+  render();
+  $("#viewport").addEventListener("click", () => { pinnedId = null; selectScenario(current); });
   window.addEventListener("resize", () => { fit(); drawEdges(); });
+  $("#narr-toggle").addEventListener("click", function () {
+    const c = $("#narration").classList.toggle("collapsed");
+    this.textContent = c ? "+" : "–";
+  });
+  $("#detail-close").addEventListener("click", () => { pinnedId = null; $("#detail").style.display = "none"; });
+  $("#zoom-in").addEventListener("click", () => zoom(userScale + 0.15));
+  $("#zoom-out").addEventListener("click", () => zoom(userScale - 0.15));
+  $("#zoom-fit").addEventListener("click", () => zoom(1));
+  document.addEventListener("keydown", (e) => {
+    if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+    if (e.key === "Escape") { pinnedId = null; $("#detail").style.display = "none"; selectScenario(current); return; }
+    const idx = "123456789".indexOf(e.key);
+    if (idx >= 0 && SCENARIOS[idx]) selectScenario(SCENARIOS[idx].id);
+  });
 }
 
+let userScale = 1;
+function zoom(v) { userScale = Math.min(1.8, Math.max(0.5, v)); fit(); }
 function fit() {
-  scale = Math.min(1, Math.max(0.42, (window.innerWidth - 24) / CANVAS_W));
+  const base = Math.min(1, Math.max(0.42, (window.innerWidth - 24) / CANVAS_W));
+  scale = base * userScale;
   const c = $("#canvas");
   c.style.transform = `scale(${scale})`;
-  $("#viewport").style.height = CANVAS_H * scale + 20 + "px";
+  $("#viewport").style.height = Math.min(CANVAS_H * scale, CANVAS_H) + 20 + "px";
 }
 
 function rect(id) {
@@ -524,11 +596,19 @@ function descendants(id) {
   return out;
 }
 
-let current = "all", currentLevel = null;
-function selectScenario(id) { current = id; render(); }
+let current = "all", currentLevel = null, pinnedId = null;
+function selectScenario(id) { current = id; pinnedId = null; render(); }
 function toggleLevel(id) { currentLevel = currentLevel === id ? null : id; render(); }
 
+function syncHash() {
+  const parts = [];
+  if (current !== "all") parts.push("view=" + current);
+  if (currentLevel) parts.push("level=" + currentLevel);
+  history.replaceState(null, "", parts.length ? "#" + parts.join("&") : location.pathname + location.search);
+}
+
 function render() {
+  syncHash();
   const sc = SCENARIOS.find((s) => s.id === current);
   document.querySelectorAll(".chip:not(.lvl)").forEach((c) => c.classList.toggle("sel", c.dataset.id === current));
   document.querySelectorAll(".chip.lvl").forEach((c) => c.classList.toggle("sel", c.dataset.level === currentLevel));
@@ -580,7 +660,7 @@ function frontier() {
 }
 
 function renderPmNarration(cab, front, risky, set) {
-  const n = $("#narration");
+  const n = $("#narr-body");
   const li = (id) => {
     const x = nodeById[id];
     return `<li data-nodes="${id}">${x.name} <span class="mono" style="color:var(--muted);font-size:9px">${id} · ${STATUS_KO[x.status]}${x.level === "cabinet" ? "" : ` · ${LEVEL_KO[x.level]}`}</span></li>`;
@@ -600,7 +680,7 @@ function renderPmNarration(cab, front, risky, set) {
 }
 
 function renderLevelNarration(sc, set) {
-  const n = $("#narration");
+  const n = $("#narr-body");
   const scoped = sc.id !== "all" ? ` × ${sc.label}` : "";
   const ids = DATA.nodes.filter((x) => set.has(x.id)).map((x) => x.id);
   if (!ids.length) {
@@ -621,13 +701,14 @@ function renderLevelNarration(sc, set) {
 }
 
 function focusNode(id) {
+  pinnedId = id;
   document.querySelectorAll(".chip").forEach((c) => c.classList.remove("sel"));
   document.body.classList.remove("mode-risk", "mode-pm");
   const set = new Set([...ancestors(id), ...descendants(id)]);
   applyHighlight(set, id, false);
   const n = nodeById[id];
   const up = ancestors(id).size - 1, down = descendants(id).size - 1;
-  $("#narration").innerHTML = `<h3>관문 초점 — ${id}</h3>
+  $("#narr-body").innerHTML = `<h3>관문 초점 — ${id}</h3>
     <div class="free"><b>${n.name}</b><br/>
     이 관문 앞에 <b>${up}개</b>의 선행 관문, 뒤에 <b>${down}개</b>의 후속 관문이 걸려 있습니다.<br/>
     <span class="mono">배경을 클릭하면 이전 화면으로 돌아갑니다.</span></div>`;
@@ -697,7 +778,7 @@ function applyHighlight(set, target, risk, ext) {
 }
 
 function renderNarration(sc) {
-  const n = $("#narration");
+  const n = $("#narr-body");
   if (sc.html) { n.innerHTML = `<h3>${sc.label}</h3>${sc.html}`; return; }
   const items = sc.steps.map(([txt, ids]) =>
     `<li data-nodes="${ids}">${txt} <span class="mono" style="color:var(--muted);font-size:9px">${ids.replaceAll(",", " ")}</span></li>`).join("");
@@ -710,8 +791,8 @@ function renderNarration(sc) {
 }
 
 function showDetail(n) {
-  const d = $("#detail");
-  d.style.display = "block";
+  $("#detail").style.display = "block";
+  const d = $("#detail-body");
   const stage = DATA.stages.find((s) => s.id === n.stage);
   const up = (rev[n.id] || []).length, down = (fwd[n.id] || []).length;
   d.innerHTML = `<h3>${n.id} · ${stage.id} ${stage.label}</h3>
