@@ -124,6 +124,37 @@ body.mode-pm #narration ol li::before { border-color: var(--gold); color: var(--
 #edges path.e.on { stroke: var(--amber); stroke-width: 1.7; opacity: 1; filter: drop-shadow(0 0 4px rgba(255,176,32,0.5)); }
 #edges path.e.risk-on { stroke: var(--rose); stroke-width: 1.7; filter: drop-shadow(0 0 4px rgba(255,107,138,0.5)); }
 body.dimmed #edges path.e:not(.on):not(.risk-on) { opacity: 0.06; }
+/* 순서 점등 — 하이라이트된 경로가 상류부터 차례로 켜진다 */
+#edges path.e.on { animation: edgein 0.35s ease both; animation-delay: calc(var(--d, 0) * 0.16s); }
+.node.on { animation: nodein 0.4s ease both; animation-delay: calc(var(--d, 0) * 0.16s); }
+@keyframes edgein { from { opacity: 0; } to { opacity: 1; } }
+@keyframes nodein {
+  from { opacity: 0.25; box-shadow: 0 0 0 0 rgba(255,215,106,0); }
+  60% { box-shadow: 0 0 0 4px rgba(255,215,106,0.35), 0 0 24px rgba(255,215,106,0.3); }
+  to { opacity: 1; }
+}
+/* 흐름 펄스 — 선 위를 이동하는 빛 점(출발→도착 방향) */
+#edges path.epulse {
+  stroke: transparent; stroke-width: 2.8; stroke-linecap: round;
+  stroke-dasharray: 0.1 14; opacity: 0; pointer-events: none;
+}
+#edges path.epulse.on {
+  stroke: var(--gold); opacity: 0.95;
+  animation: edgein 0.35s ease both, dotflow 1.1s linear infinite;
+  animation-delay: calc(var(--d, 0) * 0.16s + 0.2s), calc(var(--d, 0) * 0.16s + 0.2s);
+  filter: drop-shadow(0 0 3px rgba(255,215,106,0.8));
+}
+#edges path.epulse.risk-on {
+  stroke: #ffb3c2; opacity: 0.95;
+  animation: dotflow 1.1s linear infinite;
+  filter: drop-shadow(0 0 3px rgba(255,107,138,0.8));
+}
+body.mode-pm #edges path.epulse.on { stroke: #fff3cf; }
+@keyframes dotflow { to { stroke-dashoffset: -14.1; } }
+@media (prefers-reduced-motion: reduce) {
+  #edges path.e.on, #edges path.epulse.on, #edges path.epulse.risk-on, .node.on { animation: none; }
+  #edges path.epulse.on, #edges path.epulse.risk-on { opacity: 0.5; }
+}
 
 .group {
   position: absolute; z-index: 2;
@@ -473,6 +504,11 @@ function drawEdges() {
     p.setAttribute("marker-end", "url(#arr-dim)");
     p.dataset.from = e.from; p.dataset.to = e.to;
     g.appendChild(p);
+    const pulse = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    pulse.setAttribute("d", d);
+    pulse.setAttribute("class", "epulse");
+    g.appendChild(pulse);
+    p._pulse = pulse;
     edgeEls.push(p);
   }
 }
@@ -598,15 +634,41 @@ function focusNode(id) {
   showDetail(n);
 }
 
+// cascade order: longest dependency depth within the highlighted subgraph,
+// so paths light up from their upstream roots toward the target
+function cascadeDepths(members) {
+  const depth = {};
+  const visit = (id, trail) => {
+    if (id in depth) return depth[id];
+    if (trail.has(id)) return 0;
+    trail.add(id);
+    let d = 0;
+    for (const p of rev[id] || []) if (members.has(p)) d = Math.max(d, visit(p, trail) + 1);
+    trail.delete(id);
+    depth[id] = d;
+    return d;
+  };
+  for (const id of members) visit(id, new Set());
+  return depth;
+}
+
 function applyHighlight(set, target, risk, ext) {
   ext = ext || new Set();
   const dim = !!set;
+  const members = dim ? new Set([...set, ...ext]) : new Set();
+  const depth = dim ? cascadeDepths(members) : {};
+  // strip then force reflow so the cascade replays on every selection
+  document.querySelectorAll(".node.on").forEach((el) => el.classList.remove("on"));
+  for (const p of edgeEls) { p.classList.remove("on"); p._pulse.classList.remove("on"); }
+  void document.body.offsetWidth;
   document.body.classList.toggle("dimmed", dim);
   document.querySelectorAll(".node").forEach((el) => {
     const id = el.id.slice(3);
     el.classList.toggle("on", !!(dim && set.has(id)));
     el.classList.toggle("ext", !!(dim && ext.has(id)));
     el.classList.toggle("target", !!(dim && id === target));
+    if (dim && members.has(id)) el.style.setProperty("--d", depth[id] || 0);
+    else el.style.removeProperty("--d");
   });
   document.querySelectorAll(".group").forEach((el) => {
     const sid = el.id.slice(4);
@@ -619,6 +681,16 @@ function applyHighlight(set, target, risk, ext) {
     const riskOn = !!(dim && risk && (set.has(from) || set.has(to)));
     p.classList.toggle("on", on);
     p.classList.toggle("risk-on", riskOn);
+    p._pulse.classList.toggle("on", on);
+    p._pulse.classList.toggle("risk-on", riskOn);
+    if (on) {
+      const d = depth[from] || 0;
+      p.style.setProperty("--d", d);
+      p._pulse.style.setProperty("--d", d);
+    } else {
+      p.style.removeProperty("--d");
+      p._pulse.style.removeProperty("--d");
+    }
     const hot = document.body.classList.contains("mode-pm") ? "url(#arr-gold)" : "url(#arr-hot)";
     p.setAttribute("marker-end", on ? hot : riskOn ? "url(#arr-risk)" : "url(#arr-dim)");
   }
