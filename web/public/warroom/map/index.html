@@ -72,6 +72,13 @@ header .links a:hover { color: var(--cyan); border-color: var(--cyan); }
 .chip:hover { color: var(--text); border-color: var(--text); }
 .chip.sel { color: #0a0f14; background: var(--amber); border-color: var(--amber); font-weight: 700; }
 .chip.sel.chip-risk { background: var(--rose); border-color: var(--rose); }
+.chip.chip-pm { border-color: rgba(255,215,106,0.55); color: var(--gold); }
+.chip.sel.chip-pm { background: var(--gold); border-color: var(--gold); color: #1a1204; }
+#narration .pmsec {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+  color: var(--gold); margin: 9px 0 3px; text-transform: uppercase;
+}
+#narration .pmsec:first-of-type { margin-top: 2px; }
 #levelchips { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; align-items: center; }
 #levelchips .rowlabel { font-family: var(--mono); font-size: 9px; color: var(--muted); letter-spacing: 0.14em; margin-right: 2px; }
 .chip.lvl.sel { color: #04121c; background: var(--cyan); border-color: var(--cyan); }
@@ -265,6 +272,7 @@ const SCENARIOS = [
      상단 칩을 누르면 그 목표까지 거쳐야 하는 관문과 경로만 켜집니다.
      노드에 올리면 오른쪽에 상세가, 클릭하면 그 관문의 상·하류가 켜집니다.<br/>
      <span class="mono">정책상 입지 결정(N01)과 예비이전후보지 선정(N04)만 완료 — 나머지 47개 관문이 앞에 있습니다.</span></div>` },
+  { id: "pmbrief", label: "총리 브리핑", pmbrief: true },
   { id: "site", label: "부지 확보", target: "N17", stages: ["G1", "G4"], steps: [
     ["군공항 이전건의 → 이전후보지 공고 → 주민투표·최종 선정", "N04,N31,N32"],
     ["사업시행자·기부 대 양여·재원 확정", "N33"],
@@ -312,7 +320,7 @@ const SCENARIOS = [
 ];
 
 const $ = (s) => document.querySelector(s);
-let DATA, nodeById = {}, fwd = {}, rev = {}, edgeEls = [], scale = 1;
+let DATA, nodeById = {}, fwd = {}, rev = {}, revHard = {}, edgeEls = [], scale = 1;
 
 fetch("./data.json").then((r) => r.json()).then((d) => { DATA = d; build(); });
 
@@ -321,6 +329,7 @@ function build() {
   DATA.edges.forEach((e) => {
     (fwd[e.from] ||= []).push(e.to);
     (rev[e.to] ||= []).push(e.from);
+    if (e.strength === "hard") (revHard[e.to] ||= []).push(e.from);
   });
   const st = { completed: 0, active: 0, planned: 0, unknown: 0 };
   DATA.nodes.forEach((n) => st[n.status]++);
@@ -356,7 +365,8 @@ function build() {
   const chips = $("#chips");
   for (const sc of SCENARIOS) {
     const b = document.createElement("button");
-    b.className = "chip" + (sc.risk ? " chip-risk" : ""); b.textContent = sc.label; b.dataset.id = sc.id;
+    b.className = "chip" + (sc.risk ? " chip-risk" : "") + (sc.pmbrief ? " chip-pm" : "");
+    b.textContent = sc.label; b.dataset.id = sc.id;
     b.addEventListener("click", () => selectScenario(sc.id));
     chips.appendChild(b);
   }
@@ -458,6 +468,16 @@ function render() {
   document.querySelectorAll(".chip.lvl").forEach((c) => c.classList.toggle("sel", c.dataset.level === currentLevel));
   document.body.classList.toggle("mode-risk", !!sc.risk && !currentLevel);
   let set = null, ext = new Set();
+  if (sc.pmbrief) {
+    const cab = DATA.nodes.filter((n) => n.level === "cabinet").map((n) => n.id);
+    const front = frontier();
+    const risky = DATA.nodes.filter((n) => n.status === "unknown").map((n) => n.id);
+    set = new Set([...cab, ...front, ...risky]);
+    if (currentLevel) set = new Set([...set].filter((id) => nodeById[id].level === currentLevel));
+    applyHighlight(set, null, false, ext);
+    renderPmNarration(cab, front, risky, set);
+    return;
+  }
   if (sc.target) {
     const anc = ancestors(sc.target);
     if (sc.stages) {
@@ -481,6 +501,35 @@ function render() {
   applyHighlight(set, target, sc.risk && !currentLevel, ext);
   if (currentLevel) renderLevelNarration(sc, set);
   else renderNarration(sc);
+}
+
+// gates whose hard prerequisites are all completed = where work can and
+// should be moving right now
+function frontier() {
+  return DATA.nodes
+    .filter((n) => n.status !== "completed")
+    .filter((n) => (revHard[n.id] || []).every((p) => nodeById[p].status === "completed"))
+    .map((n) => n.id);
+}
+
+function renderPmNarration(cab, front, risky, set) {
+  const n = $("#narration");
+  const li = (id) => {
+    const x = nodeById[id];
+    return `<li data-nodes="${id}">${x.name} <span class="mono" style="color:var(--muted);font-size:9px">${id} · ${STATUS_KO[x.status]}${x.level === "cabinet" ? "" : ` · ${LEVEL_KO[x.level]}`}</span></li>`;
+  };
+  const sec = (title, ids) => ids.length
+    ? `<div class="pmsec">${title} · ${ids.length}건</div><ol>${ids.map(li).join("")}</ol>` : "";
+  const f = (ids) => ids.filter((id) => set.has(id));
+  n.innerHTML = `<h3 style="color:var(--gold)">총리 브리핑</h3>
+    ${sec("결정 — 총리·국무회의 테이블", f(cab))}
+    ${sec("지금 열린 전선 — 선행 관문 완료, 즉시 착수 대상", f(front.filter((id) => !cab.includes(id))))}
+    ${sec("미확정 리스크 — 경로·근거 확인 필요", f(risky.filter((id) => !cab.includes(id) && !front.includes(id))))}`;
+  n.querySelectorAll("li").forEach((el) => {
+    const ids = el.dataset.nodes.split(",");
+    el.addEventListener("mouseenter", () => ids.forEach((i) => document.getElementById("nd-" + i)?.classList.add("flash")));
+    el.addEventListener("mouseleave", () => ids.forEach((i) => document.getElementById("nd-" + i)?.classList.remove("flash")));
+  });
 }
 
 function renderLevelNarration(sc, set) {
