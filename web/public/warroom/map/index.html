@@ -113,6 +113,18 @@ body.mode-pm #narration ol li::before { border-color: var(--gold); color: var(--
 #legend .sw { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
 #legend .ln { display: inline-block; width: 18px; height: 0; border-top: 2px solid var(--muted); margin-right: 4px; vertical-align: 3px; }
 #legend .ln.soft { border-top-style: dashed; }
+#wargame-btn { margin-left: auto; }
+#wargame-btn.on { background: var(--green); border-color: var(--green); color: #04140d; font-weight: 700; }
+.node.sim { border-color: rgba(46,230,168,0.85); border-style: dashed; }
+.node.sim::after {
+  content: "가정완료"; position: absolute; top: 6px; right: 8px;
+  font-family: var(--mono); font-size: 8px; color: var(--green);
+}
+.node.sim .dot { background: var(--green); }
+body.wargame .node { cursor: crosshair; }
+body.wargame .node.on, body.wargame #edges path.e.on, body.wargame #edges path.epulse.on {
+  animation-delay: 0s, 0s;
+}
 
 /* ── canvas ── */
 #viewport { position: relative; overflow: auto; padding: 8px 0 40px; }
@@ -307,7 +319,10 @@ body.mode-risk #narration ol li::before { border-color: var(--rose); color: var(
     <span><span class="sw" style="background:var(--rose)"></span>미확정</span>
     <span><span class="ln"></span>필수 의존</span>
     <span><span class="ln soft"></span>참조 의존</span>
-    <span style="opacity:.7">노드 클릭 = 상·하류 고정 · ESC/배경 = 해제 · 숫자키 1~9 = 칩 전환</span>
+    <span id="hint" style="opacity:.7">노드 클릭 = 상·하류 고정 · ESC/배경 = 해제 · 숫자키 1~9 = 칩 전환 · W = 워게임</span>
+    <button id="wargame-btn" class="chip" title="관문을 클릭해 '풀렸다고 가정'을 켜고 끄면 전선·진행률·브리핑이 실시간 재계산됩니다">⚔ 워게임</button>
+    <span id="wg-status" class="mono" hidden>가정 완료 <b id="wg-count" style="color:var(--green)">0</b>건
+      <button id="wg-reset" class="chip" style="padding:2px 8px">초기화</button></span>
   </div>
 </header>
 
@@ -425,10 +440,17 @@ const SCENARIOS = [
     ["정식 전력계통영향평가 — 통과 여부·기간 미확정", "N19"],
     ["계통영향평가 면제·특례 — 법적 근거 확인 필요", "N20"],
   ]},
+  { id: "critical", label: "최장 사슬", critical: true },
+  { id: "bottleneck", label: "병목 랭킹", bottleneck: true },
 ];
 
 const $ = (s) => document.querySelector(s);
-let DATA, nodeById = {}, fwd = {}, rev = {}, revHard = {}, edgeEls = [], scale = 1;
+let DATA, nodeById = {}, fwd = {}, rev = {}, revHard = {}, fwdHard = {}, edgeEls = [], scale = 1;
+// wargame: gate ids assumed completed ("풀렸다고 가정") — pure what-if, not data
+const sim = new Set();
+let wargame = false;
+const eff = (id) => (sim.has(id) ? "completed" : nodeById[id].status);
+const effLabel = (id) => (sim.has(id) ? "가정완료" : STATUS_KO[nodeById[id].status]);
 
 fetch("./data.json").then((r) => r.json()).then((d) => { DATA = d; build(); });
 
@@ -437,13 +459,12 @@ function build() {
   DATA.edges.forEach((e) => {
     (fwd[e.from] ||= []).push(e.to);
     (rev[e.to] ||= []).push(e.from);
-    if (e.strength === "hard") (revHard[e.to] ||= []).push(e.from);
+    if (e.strength === "hard") {
+      (revHard[e.to] ||= []).push(e.from);
+      (fwdHard[e.from] ||= []).push(e.to);
+    }
   });
-  const st = { completed: 0, active: 0, planned: 0, unknown: 0 };
-  DATA.nodes.forEach((n) => st[n.status]++);
-  $("#subline").textContent =
-    `${DATA.stages.length} STAGES · ${DATA.nodes.length} GATES · ${DATA.edges.length} DEPS · ` +
-    `완료 ${st.completed} 진행 ${st.active} 미확정 ${st.unknown} · AS OF ${DATA.meta.asOfDate}`;
+  updateStats();
 
   const canvas = $("#canvas");
   canvas.style.width = CANVAS_W + "px";
@@ -468,7 +489,11 @@ function build() {
         <div class="nname">${n.name}</div>
         <div class="nmeta"><span class="dot"></span><span>${n.authority || "-"}</span><span style="margin-left:auto">${STATUS_KO[n.status]}</span></div>`;
       el.addEventListener("mouseenter", () => { if (!pinnedId) showDetail(n); });
-      el.addEventListener("click", (ev) => { ev.stopPropagation(); focusNode(n.id); });
+      el.addEventListener("click", (ev) => {
+        ev.stopPropagation();
+        if (wargame) toggleSim(n.id);
+        else focusNode(n.id);
+      });
       wrap.appendChild(el);
     }
     canvas.appendChild(g);
@@ -508,12 +533,59 @@ function build() {
   $("#zoom-in").addEventListener("click", () => zoom(userScale + 0.15));
   $("#zoom-out").addEventListener("click", () => zoom(userScale - 0.15));
   $("#zoom-fit").addEventListener("click", () => zoom(1));
+  $("#wargame-btn").addEventListener("click", toggleWargame);
+  $("#wg-reset").addEventListener("click", () => {
+    sim.clear();
+    document.querySelectorAll(".node.sim").forEach((el) => el.classList.remove("sim"));
+    updateStats(); updateProgress(); render();
+  });
   document.addEventListener("keydown", (e) => {
     if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
     if (e.key === "Escape") { pinnedId = null; $("#detail").style.display = "none"; selectScenario(current); return; }
+    if (e.key === "w" || e.key === "W") { toggleWargame(); return; }
     const idx = "123456789".indexOf(e.key);
     if (idx >= 0 && SCENARIOS[idx]) selectScenario(SCENARIOS[idx].id);
   });
+}
+
+function toggleWargame() {
+  wargame = !wargame;
+  document.body.classList.toggle("wargame", wargame);
+  $("#wargame-btn").classList.toggle("on", wargame);
+  $("#wg-status").hidden = !wargame;
+  $("#hint").textContent = wargame
+    ? "워게임: 노드 클릭 = 풀렸다고 가정 켜고 끄기 — 전선·진행률·브리핑이 즉시 재계산 · W = 종료"
+    : "노드 클릭 = 상·하류 고정 · ESC/배경 = 해제 · 숫자키 1~9 = 칩 전환 · W = 워게임";
+}
+
+function toggleSim(id) {
+  if (nodeById[id].status === "completed") return;
+  if (sim.has(id)) sim.delete(id); else sim.add(id);
+  document.getElementById("nd-" + id).classList.toggle("sim", sim.has(id));
+  $("#wg-count").textContent = sim.size;
+  updateStats(); updateProgress(); render();
+}
+
+function updateStats() {
+  const st = { completed: 0, active: 0, planned: 0, unknown: 0 };
+  DATA.nodes.forEach((n) => st[n.status]++);
+  const simTag = sim.size ? `+가정 ${sim.size}` : "";
+  $("#subline").textContent =
+    `${DATA.stages.length} STAGES · ${DATA.nodes.length} GATES · ${DATA.edges.length} DEPS · ` +
+    `완료 ${st.completed}${simTag} 진행 ${st.active} 미확정 ${st.unknown} · AS OF ${DATA.meta.asOfDate}`;
+}
+
+function updateProgress() {
+  for (const s of DATA.stages) {
+    const nodes = DATA.nodes.filter((n) => n.stage === s.id);
+    const done = nodes.filter((n) => eff(n.id) === "completed").length;
+    const act = nodes.filter((n) => eff(n.id) === "active").length;
+    const g = document.getElementById("grp-" + s.id);
+    g.querySelector(".gcount").textContent = `${done}/${nodes.length}`;
+    const bars = g.querySelectorAll(".gprog i");
+    bars[0].style.width = (done / nodes.length) * 100 + "%";
+    bars[1].style.width = (act / nodes.length) * 100 + "%";
+  }
 }
 
 let userScale = 1;
@@ -618,11 +690,29 @@ function render() {
   if (sc.pmbrief) {
     const cab = DATA.nodes.filter((n) => n.level === "cabinet").map((n) => n.id);
     const front = frontier();
-    const risky = DATA.nodes.filter((n) => n.status === "unknown").map((n) => n.id);
+    const risky = DATA.nodes.filter((n) => eff(n.id) === "unknown").map((n) => n.id);
     set = new Set([...cab, ...front, ...risky]);
     if (currentLevel) set = new Set([...set].filter((id) => nodeById[id].level === currentLevel));
     applyHighlight(set, null, false, ext);
     renderPmNarration(cab, front, risky, set);
+    return;
+  }
+  if (sc.critical) {
+    const path = longestPath();
+    set = new Set(path);
+    if (currentLevel) set = new Set([...set].filter((id) => nodeById[id].level === currentLevel));
+    const pathEdges = new Set();
+    for (let i = 0; i < path.length - 1; i++) pathEdges.add(path[i] + ">" + path[i + 1]);
+    applyHighlight(set, path[path.length - 1], false, ext, pathEdges);
+    renderChainNarration(path, set);
+    return;
+  }
+  if (sc.bottleneck) {
+    const top = blockers().filter((b) => b.blocked > 0).slice(0, 8);
+    set = new Set(top.map((b) => b.id));
+    if (currentLevel) set = new Set([...set].filter((id) => nodeById[id].level === currentLevel));
+    applyHighlight(set, null, false, ext);
+    renderBlockerNarration(top, set);
     return;
   }
   if (sc.target) {
@@ -651,19 +741,58 @@ function render() {
 }
 
 // gates whose hard prerequisites are all completed = where work can and
-// should be moving right now
+// should be moving right now (wargame assumptions count as completed)
 function frontier() {
   return DATA.nodes
-    .filter((n) => n.status !== "completed")
-    .filter((n) => (revHard[n.id] || []).every((p) => nodeById[p].status === "completed"))
+    .filter((n) => eff(n.id) !== "completed")
+    .filter((n) => (revHard[n.id] || []).every((p) => eff(p) === "completed"))
     .map((n) => n.id);
+}
+
+// longest chain of hard dependencies — the structural lower bound on the
+// project: no schedule can be shorter than this gate sequence
+function longestPath() {
+  const memo = {}, next = {};
+  const dfs = (id) => {
+    if (id in memo) return memo[id];
+    memo[id] = 0;
+    let best = 0, bnext = null;
+    for (const c of fwdHard[id] || []) {
+      const v = dfs(c) + 1;
+      if (v > best) { best = v; bnext = c; }
+    }
+    memo[id] = best; next[id] = bnext;
+    return best;
+  };
+  let start = null, len = -1;
+  for (const n of DATA.nodes) { const v = dfs(n.id); if (v > len) { len = v; start = n.id; } }
+  const path = [];
+  for (let c = start; c; c = next[c]) path.push(c);
+  return path;
+}
+
+// how many gates stall if this one stalls — hard-dependency descendants only
+// (soft references do not block), completed ones excluded
+function blockers() {
+  const hardDescendants = (id) => {
+    const out = new Set([id]), q = [id];
+    while (q.length) for (const c of fwdHard[q.pop()] || []) if (!out.has(c)) { out.add(c); q.push(c); }
+    return out;
+  };
+  return DATA.nodes
+    .filter((n) => eff(n.id) !== "completed")
+    .map((n) => {
+      const blocked = [...hardDescendants(n.id)].filter((d) => d !== n.id && eff(d) !== "completed").length;
+      return { id: n.id, blocked };
+    })
+    .sort((a, b) => b.blocked - a.blocked);
 }
 
 function renderPmNarration(cab, front, risky, set) {
   const n = $("#narr-body");
   const li = (id) => {
     const x = nodeById[id];
-    return `<li data-nodes="${id}">${x.name} <span class="mono" style="color:var(--muted);font-size:9px">${id} · ${STATUS_KO[x.status]}${x.level === "cabinet" ? "" : ` · ${LEVEL_KO[x.level]}`}</span></li>`;
+    return `<li data-nodes="${id}">${x.name} <span class="mono" style="color:var(--muted);font-size:9px">${id} · ${effLabel(id)}${x.level === "cabinet" ? "" : ` · ${LEVEL_KO[x.level]}`}</span></li>`;
   };
   const sec = (title, ids) => ids.length
     ? `<div class="pmsec">${title} · ${ids.length}건</div><ol>${ids.map(li).join("")}</ol>` : "";
@@ -690,7 +819,7 @@ function renderLevelNarration(sc, set) {
   }
   const items = ids.map((id) => {
     const x = nodeById[id];
-    return `<li data-nodes="${id}">${x.name} <span class="mono" style="color:var(--muted);font-size:9px">${id} · ${STATUS_KO[x.status]}</span></li>`;
+    return `<li data-nodes="${id}">${x.name} <span class="mono" style="color:var(--muted);font-size:9px">${id} · ${effLabel(id)}</span></li>`;
   }).join("");
   n.innerHTML = `<h3>보는 급 — ${LEVEL_KO[currentLevel]}${scoped} · ${ids.length}건</h3><ol>${items}</ol>`;
   n.querySelectorAll("li").forEach((li) => {
@@ -733,7 +862,40 @@ function cascadeDepths(members) {
   return depth;
 }
 
-function applyHighlight(set, target, risk, ext) {
+function bindFlash(root) {
+  root.querySelectorAll("li[data-nodes]").forEach((li) => {
+    const ids = li.dataset.nodes.split(",");
+    li.addEventListener("mouseenter", () => ids.forEach((i) => document.getElementById("nd-" + i)?.classList.add("flash")));
+    li.addEventListener("mouseleave", () => ids.forEach((i) => document.getElementById("nd-" + i)?.classList.remove("flash")));
+  });
+}
+
+function renderChainNarration(path, set) {
+  const n = $("#narr-body");
+  const items = path.map((id) => {
+    const x = nodeById[id];
+    return `<li data-nodes="${id}">${x.name} <span class="mono" style="color:var(--muted);font-size:9px">${id} · ${x.stage} · ${effLabel(id)}</span></li>`;
+  }).join("");
+  n.innerHTML = `<h3>최장 사슬 — 하드 의존 ${path.length}개 관문</h3>
+    <div class="free" style="margin-bottom:6px">끊을 수 없는 필수 선후관계만 이어 붙인 가장 긴 줄.
+    어떤 일정도 이 사슬보다 짧아질 수 없습니다 — 단축하려면 이 줄 위의 관문을 병렬화하거나 특례로 접어야 합니다.</div>
+    <ol>${items}</ol>`;
+  bindFlash(n);
+}
+
+function renderBlockerNarration(top, set) {
+  const n = $("#narr-body");
+  const items = top.map((b) => {
+    const x = nodeById[b.id];
+    return `<li data-nodes="${b.id}">${x.name} <span class="mono" style="color:var(--rose);font-size:9px">지연 시 ${b.blocked}개 정지</span> <span class="mono" style="color:var(--muted);font-size:9px">${b.id} · ${effLabel(b.id)}</span></li>`;
+  }).join("");
+  n.innerHTML = `<h3>병목 랭킹 — 막히면 가장 많이 세우는 관문</h3>
+    <div class="free" style="margin-bottom:6px">미완료 관문을 "이 관문이 지연되면 뒤에서 몇 개가 못 움직이는가"로 순위 매김.</div>
+    <ol>${items}</ol>`;
+  bindFlash(n);
+}
+
+function applyHighlight(set, target, risk, ext, pathEdges) {
   ext = ext || new Set();
   const dim = !!set;
   const members = dim ? new Set([...set, ...ext]) : new Set();
@@ -758,7 +920,9 @@ function applyHighlight(set, target, risk, ext) {
   });
   for (const p of edgeEls) {
     const from = p.dataset.from, to = p.dataset.to;
-    const on = !!(dim && !risk && set.has(to) && (set.has(from) || ext.has(from)));
+    const on = pathEdges
+      ? pathEdges.has(from + ">" + to)
+      : !!(dim && !risk && set.has(to) && (set.has(from) || ext.has(from)));
     const riskOn = !!(dim && risk && (set.has(from) || set.has(to)));
     p.classList.toggle("on", on);
     p.classList.toggle("risk-on", riskOn);
