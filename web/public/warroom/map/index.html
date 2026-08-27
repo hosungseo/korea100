@@ -109,6 +109,11 @@ body.mode-pm #narration ol li::before { border-color: var(--gold); color: var(--
 #levelchips { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; align-items: center; }
 #levelchips .rowlabel { font-family: var(--mono); font-size: 9px; color: var(--muted); letter-spacing: 0.14em; margin-right: 2px; }
 .chip.lvl.sel { color: #04121c; background: var(--cyan); border-color: var(--cyan); }
+#ministrychips { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; align-items: center; }
+#ministrychips[hidden] { display: none; }
+#ministrychips .rowlabel { font-family: var(--mono); font-size: 9px; color: var(--muted); letter-spacing: 0.14em; margin-right: 2px; }
+.chip.min { font-size: 10px; padding: 3px 10px; }
+.chip.min.sel { color: #04121c; background: var(--cyan); border-color: var(--cyan); }
 #legend { display: flex; flex-wrap: wrap; gap: 14px; font-family: var(--mono); font-size: 9.5px; color: var(--muted); align-items: center; }
 #legend .sw { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
 #legend .ln { display: inline-block; width: 18px; height: 0; border-top: 2px solid var(--muted); margin-right: 4px; vertical-align: 3px; }
@@ -312,6 +317,7 @@ body.mode-risk #narration ol li::before { border-color: var(--rose); color: var(
   </nav>
   <div id="chips"></div>
   <div id="levelchips"><span class="rowlabel">보는 급</span></div>
+  <div id="ministrychips" hidden><span class="rowlabel">부처</span></div>
   <div id="legend">
     <span><span class="sw" style="background:var(--green)"></span>완료</span>
     <span><span class="sw" style="background:var(--amber)"></span>진행중</span>
@@ -515,6 +521,17 @@ function build() {
     b.addEventListener("click", () => toggleLevel(lv.id));
     lchips.appendChild(b);
   }
+  const minCount = {};
+  for (const n of DATA.nodes)
+    if (n.level === "minister")
+      for (const m of n.ministries || []) minCount[m] = (minCount[m] ?? 0) + 1;
+  const mchips = $("#ministrychips");
+  for (const [m, cnt] of Object.entries(minCount).sort((a, b) => b[1] - a[1])) {
+    const b = document.createElement("button");
+    b.className = "chip min"; b.textContent = `${m} ${cnt}`; b.dataset.ministry = m;
+    b.addEventListener("click", () => toggleMinistry(m));
+    mchips.appendChild(b);
+  }
 
   fit();
   drawEdges();
@@ -522,6 +539,7 @@ function build() {
   const h = new URLSearchParams(location.hash.slice(1));
   if (SCENARIOS.some((s) => s.id === h.get("view"))) current = h.get("view");
   if (LEVELS.some((l) => l.id === h.get("level"))) currentLevel = h.get("level");
+  if (currentLevel === "minister" && MIN_BY_ID[h.get("min")]) currentMinistry = MIN_BY_ID[h.get("min")];
   render();
   $("#viewport").addEventListener("click", () => { pinnedId = null; selectScenario(current); });
   window.addEventListener("resize", () => { fit(); drawEdges(); });
@@ -668,14 +686,33 @@ function descendants(id) {
   return out;
 }
 
-let current = "all", currentLevel = null, pinnedId = null;
+let current = "all", currentLevel = null, currentMinistry = null, pinnedId = null;
+const MIN_ID = {
+  "국방부": "defense", "행정안전부": "mois", "산업통상부": "motie",
+  "기후에너지환경부": "cee", "환경부": "env", "고용노동부": "moel", "국가유산청": "khs",
+};
+const MIN_BY_ID = Object.fromEntries(Object.entries(MIN_ID).map(([k, v]) => [v, k]));
 function selectScenario(id) { current = id; pinnedId = null; render(); }
-function toggleLevel(id) { currentLevel = currentLevel === id ? null : id; render(); }
+function toggleLevel(id) {
+  currentLevel = currentLevel === id ? null : id;
+  if (currentLevel !== "minister") currentMinistry = null;
+  render();
+}
+function toggleMinistry(name) { currentMinistry = currentMinistry === name ? null : name; render(); }
+
+// active level(+ministry) filter over a candidate set
+function tierFilter(s) {
+  let r = new Set([...s].filter((id) => nodeById[id].level === currentLevel));
+  if (currentMinistry)
+    r = new Set([...r].filter((id) => (nodeById[id].ministries || []).includes(currentMinistry)));
+  return r;
+}
 
 function syncHash() {
   const parts = [];
   if (current !== "all") parts.push("view=" + current);
   if (currentLevel) parts.push("level=" + currentLevel);
+  if (currentMinistry) parts.push("min=" + MIN_ID[currentMinistry]);
   history.replaceState(null, "", parts.length ? "#" + parts.join("&") : location.pathname + location.search);
 }
 
@@ -684,6 +721,8 @@ function render() {
   const sc = SCENARIOS.find((s) => s.id === current);
   document.querySelectorAll(".chip:not(.lvl)").forEach((c) => c.classList.toggle("sel", c.dataset.id === current));
   document.querySelectorAll(".chip.lvl").forEach((c) => c.classList.toggle("sel", c.dataset.level === currentLevel));
+  $("#ministrychips").hidden = currentLevel !== "minister";
+  document.querySelectorAll(".chip.min").forEach((c) => c.classList.toggle("sel", c.dataset.ministry === currentMinistry));
   document.body.classList.toggle("mode-risk", !!sc.risk && !currentLevel);
   document.body.classList.toggle("mode-pm", !!sc.pmbrief);
   let set = null, ext = new Set();
@@ -692,7 +731,7 @@ function render() {
     const front = frontier();
     const risky = DATA.nodes.filter((n) => eff(n.id) === "unknown").map((n) => n.id);
     set = new Set([...cab, ...front, ...risky]);
-    if (currentLevel) set = new Set([...set].filter((id) => nodeById[id].level === currentLevel));
+    if (currentLevel) set = tierFilter(set);
     applyHighlight(set, null, false, ext);
     renderPmNarration(cab, front, risky, set);
     return;
@@ -700,7 +739,7 @@ function render() {
   if (sc.critical) {
     const path = longestPath();
     set = new Set(path);
-    if (currentLevel) set = new Set([...set].filter((id) => nodeById[id].level === currentLevel));
+    if (currentLevel) set = tierFilter(set);
     const pathEdges = new Set();
     for (let i = 0; i < path.length - 1; i++) pathEdges.add(path[i] + ">" + path[i + 1]);
     applyHighlight(set, path[path.length - 1], false, ext, pathEdges);
@@ -710,7 +749,7 @@ function render() {
   if (sc.bottleneck) {
     const top = blockers().filter((b) => b.blocked > 0).slice(0, 8);
     set = new Set(top.map((b) => b.id));
-    if (currentLevel) set = new Set([...set].filter((id) => nodeById[id].level === currentLevel));
+    if (currentLevel) set = tierFilter(set);
     applyHighlight(set, null, false, ext);
     renderBlockerNarration(top, set);
     return;
@@ -731,7 +770,7 @@ function render() {
     // gates held at that level (other ministries, etc.) are not hidden
     const base = sc.target ? ancestors(sc.target)
       : set ? new Set([...set, ...ext]) : new Set(DATA.nodes.map((n) => n.id));
-    set = new Set([...base].filter((id) => nodeById[id].level === currentLevel));
+    set = tierFilter(base);
     ext = new Set();
   }
   const target = sc.target && set && set.has(sc.target) ? sc.target : null;
@@ -811,17 +850,18 @@ function renderPmNarration(cab, front, risky, set) {
 function renderLevelNarration(sc, set) {
   const n = $("#narr-body");
   const scoped = sc.id !== "all" ? ` × ${sc.label}` : "";
+  const who = LEVEL_KO[currentLevel] + (currentMinistry ? ` · ${currentMinistry}` : "");
   const ids = DATA.nodes.filter((x) => set.has(x.id)).map((x) => x.id);
   if (!ids.length) {
-    n.innerHTML = `<h3>보는 급 — ${LEVEL_KO[currentLevel]}${scoped}</h3>
-      <div class="free">이 범위에서 ${LEVEL_KO[currentLevel]} 결정 관문이 없습니다.</div>`;
+    n.innerHTML = `<h3>보는 급 — ${who}${scoped}</h3>
+      <div class="free">이 범위에서 ${who} 결정 관문이 없습니다.</div>`;
     return;
   }
   const items = ids.map((id) => {
     const x = nodeById[id];
     return `<li data-nodes="${id}">${x.name} <span class="mono" style="color:var(--muted);font-size:9px">${id} · ${effLabel(id)}</span></li>`;
   }).join("");
-  n.innerHTML = `<h3>보는 급 — ${LEVEL_KO[currentLevel]}${scoped} · ${ids.length}건</h3><ol>${items}</ol>`;
+  n.innerHTML = `<h3>보는 급 — ${who}${scoped} · ${ids.length}건</h3><ol>${items}</ol>`;
   n.querySelectorAll("li").forEach((li) => {
     const lids = li.dataset.nodes.split(",");
     li.addEventListener("mouseenter", () => lids.forEach((i) => document.getElementById("nd-" + i)?.classList.add("flash")));
