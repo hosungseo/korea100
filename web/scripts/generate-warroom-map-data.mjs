@@ -13,6 +13,7 @@ const srcPath = join(
 );
 const outDir = join(root, "public/warroom/map");
 const outPath = join(outDir, "data.json");
+const procPath = join(outDir, "procedures.json");
 
 const project = JSON.parse(readFileSync(srcPath, "utf8"));
 
@@ -170,8 +171,45 @@ const data = {
   edges,
 };
 
+// 관문별 내부 절차 체인 — templateRefs가 가리키는 제도 프로세스 노드를
+// (nodeIds 부분매핑 존중) 지도 우측 패널용으로 펼친다. 지연 로드용 별도 파일.
+const byGate = {};
+for (const n of project.nodes) {
+  const insts = [];
+  for (const ref of n.templateRefs ?? []) {
+    try {
+      const inst = JSON.parse(
+        readFileSync(join(root, `data/institutions/${ref.institution}.json`), "utf8"),
+      );
+      let pnodes = inst.process?.nodes ?? [];
+      if (Array.isArray(ref.nodeIds)) {
+        const want = new Set(ref.nodeIds);
+        pnodes = pnodes.filter((p) => want.has(p.id));
+      }
+      insts.push({
+        slug: ref.institution,
+        name: inst.name,
+        mapping: ref.mappingStatus ?? "linked",
+        steps: pnodes.map((p) => ({
+          id: p.id,
+          name: p.name,
+          actor: p.actor ?? "",
+          stage: p.stage ?? "",
+          type: p.type ?? "task",
+          basis: p.legal_basis?.[0]
+            ? `${p.legal_basis[0].law} ${p.legal_basis[0].article ?? ""}`.trim()
+            : "",
+          deadline: p.deadline ?? null,
+        })),
+      });
+    } catch { /* validator가 실재를 보장 — 여기선 조용히 건너뜀 */ }
+  }
+  if (insts.length) byGate[n.id] = insts;
+}
+
 mkdirSync(outDir, { recursive: true });
 writeFileSync(outPath, `${JSON.stringify(data, null, 1)}\n`);
+writeFileSync(procPath, `${JSON.stringify({ generatedAt: data.meta.asOfDate, byGate }, null, 0)}\n`);
 const levelCount = {};
 for (const n of nodes) levelCount[n.level] = (levelCount[n.level] ?? 0) + 1;
 console.log(

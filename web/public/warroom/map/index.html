@@ -147,8 +147,47 @@ body.wargame .node.on, body.wargame #edges path.e.on, body.wargame #edges path.e
   animation-delay: 0s, 0s;
 }
 
+/* ── split: 좌=큰 그림, 우=관문 내부 절차 ── */
+#split { display: flex; align-items: flex-start; }
+#viewport { position: relative; overflow: auto; padding: 8px 0 40px; flex: 1; min-width: 0; }
+#procpanel {
+  width: 430px; flex: none;
+  position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  border-left: 1px solid rgba(56,198,244,0.15);
+  background: rgba(6,11,18,0.6);
+  padding: 14px 16px 40px;
+}
+#proc-head { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; color: var(--cyan); padding-bottom: 8px; border-bottom: 1px solid rgba(56,198,244,0.15); }
+#proc-gate { margin-top: 10px; }
+#proc-gate .gname { font-size: 14px; font-weight: 700; line-height: 1.35; }
+#proc-gate .gmeta { font-family: var(--mono); font-size: 9.5px; color: var(--muted); margin-top: 3px; }
+#proc-gate .gsum { font-size: 11px; color: var(--gold); margin-top: 5px; }
+.proc-empty { color: var(--muted); font-size: 12px; margin-top: 16px; line-height: 1.7; }
+.pinst { margin-top: 14px; }
+.pinst-h { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding: 6px 0; border-bottom: 1px dashed rgba(95,123,144,0.35); }
+.pinst-h a { color: var(--green); font-weight: 700; font-size: 12.5px; text-decoration: none; border-bottom: 1px dotted rgba(46,230,168,0.5); }
+.pinst-h a:hover { color: #7df0c4; }
+.pinst-h .mono { font-size: 9px; color: var(--muted); white-space: nowrap; }
+.pstage { font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.12em; color: var(--violet); margin: 10px 0 2px 2px; }
+.pstep { display: flex; gap: 9px; padding: 5px 0 5px 2px; position: relative; }
+.pstep::before { content: ""; position: absolute; left: 10px; top: 24px; bottom: -6px; width: 1px; background: rgba(95,123,144,0.3); }
+.pstep:last-child::before { display: none; }
+.pnum {
+  flex: none; width: 17px; height: 17px; border-radius: 50%; margin-top: 1px;
+  border: 1px solid rgba(56,198,244,0.5); color: var(--cyan);
+  font-family: var(--mono); font-size: 8.5px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg); position: relative; z-index: 1;
+}
+.pstep.t-gateway .pnum { border-color: var(--amber); color: var(--amber); border-radius: 3px; }
+.pbody { min-width: 0; }
+.pname { font-size: 11.5px; font-weight: 600; line-height: 1.35; }
+.pmeta { font-family: var(--mono); font-size: 8.5px; color: var(--muted); margin-top: 1px; }
+.pmeta .ddl { color: var(--amber); }
+.pbasis { font-family: var(--mono); font-size: 8px; color: rgba(95,123,144,0.85); margin-top: 1px; }
+@media (max-width: 1100px) { #procpanel { display: none; } #zoomctl { right: 10px; } }
+
 /* ── canvas ── */
-#viewport { position: relative; overflow: auto; padding: 8px 0 40px; }
 #canvas { position: relative; transform-origin: 0 0; }
 #edges { position: absolute; inset: 0; overflow: visible; z-index: 1; }
 #edges path { fill: none; transition: opacity 0.25s, stroke 0.25s; }
@@ -246,18 +285,21 @@ body.mode-risk .node.on { box-shadow: 0 0 0 2px var(--rose), 0 0 16px rgba(255,1
 .node.flash { border-color: var(--gold) !important; box-shadow: 0 0 0 2px var(--gold) !important; }
 
 /* ── cards ── */
+#cards-left {
+  position: fixed; left: 16px; bottom: 16px; z-index: 50;
+  display: flex; flex-direction: column; gap: 10px;
+  width: 340px; max-width: calc(50vw - 24px);
+}
 .card {
-  position: fixed; bottom: 16px; z-index: 50;
+  position: static; width: 100%;
   background: var(--panel2);
   border: 1px solid rgba(56,198,244,0.25);
   border-radius: 10px;
   padding: 12px 14px;
-  width: 340px; max-width: calc(50vw - 24px);
   box-shadow: 0 12px 40px rgba(0,0,0,0.6);
-  max-height: 44vh; overflow: auto;
+  max-height: 38vh; overflow: auto;
 }
-#narration { left: 16px; }
-#detail { right: 16px; display: none; }
+#detail { display: none; }
 .card h3 { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 7px; }
 #narration h3 { color: var(--amber); }
 body.mode-risk #narration h3 { color: var(--rose); }
@@ -296,7 +338,7 @@ body.mode-risk #narration ol li::before { border-color: var(--rose); color: var(
 #narration.collapsed { width: auto; min-width: 150px; }
 
 #zoomctl {
-  position: fixed; right: 10px; top: 50%; transform: translateY(-50%);
+  position: fixed; right: 442px; top: 50%; transform: translateY(-50%);
   z-index: 60; display: flex; flex-direction: column; gap: 6px;
 }
 #zoomctl button {
@@ -312,7 +354,8 @@ body.mode-risk #narration ol li::before { border-color: var(--rose); color: var(
 }
 
 @media (max-width: 900px) {
-  .card { position: static; width: auto; max-width: none; margin: 10px 14px; max-height: none; }
+  #cards-left { position: static; width: auto; max-width: none; margin: 10px 14px; }
+  .card { max-height: none; }
   #detail { display: block; }
   #zoomctl { display: none; }
 }
@@ -349,6 +392,7 @@ body.mode-risk #narration ol li::before { border-color: var(--rose); color: var(
   </div>
 </header>
 
+<div id="split">
 <div id="viewport"><div id="canvas">
   <svg id="edges">
     <defs>
@@ -369,14 +413,23 @@ body.mode-risk #narration ol li::before { border-color: var(--rose); color: var(
   </svg>
 </div></div>
 
-<aside id="narration" class="card">
-  <button class="cbtn" id="narr-toggle" title="접기/펼치기" aria-label="내레이션 접기/펼치기">–</button>
-  <div id="narr-body"></div>
+<aside id="procpanel">
+  <div id="proc-head">관문 내부 절차 — N을 열어보는 창</div>
+  <div id="proc-gate"></div>
+  <div id="proc-body"><div class="proc-empty">왼쪽 지도에서 관문을 클릭하면<br/>그 안의 법정 절차 체인이 여기 열립니다.<br/><br/>왼쪽 = 사업 전체의 큰 그림(관문·의존)<br/>오른쪽 = 선택한 관문 내부의 절차 원형</div></div>
 </aside>
+</div>
+
+<div id="cards-left">
 <aside id="detail" class="card">
   <button class="cbtn" id="detail-close" title="닫기" aria-label="상세 닫기">×</button>
   <div id="detail-body"></div>
 </aside>
+<aside id="narration" class="card">
+  <button class="cbtn" id="narr-toggle" title="접기/펼치기" aria-label="내레이션 접기/펼치기">–</button>
+  <div id="narr-body"></div>
+</aside>
+</div>
 
 <div id="zoomctl">
   <button id="zoom-in" title="확대">+</button>
@@ -640,7 +693,8 @@ function updateProgress() {
 let userScale = 1;
 function zoom(v) { userScale = Math.min(1.8, Math.max(0.5, v)); fit(); }
 function fit() {
-  const base = Math.min(1, Math.max(0.42, (window.innerWidth - 24) / CANVAS_W));
+  const panelW = window.innerWidth > 1100 ? 448 : 0;
+  const base = Math.min(1, Math.max(0.42, (window.innerWidth - 24 - panelW) / CANVAS_W));
   scale = base * userScale;
   const c = $("#canvas");
   c.style.transform = `scale(${scale})`;
@@ -918,8 +972,46 @@ function renderLevelNarration(sc, set) {
   });
 }
 
+// ── 우측 패널: 관문 내부 절차(제도 프로세스 원형) ──
+let PROCS = null;
+async function renderProcPanel(id) {
+  const n = nodeById[id];
+  const gate = $("#proc-gate"), body = $("#proc-body");
+  const sum = SIGNALS?.gateSummary?.[id];
+  gate.innerHTML = `<div class="gname"><span class="mono" style="color:var(--cyan);font-size:10px">${id}</span> ${n.name}</div>
+    <div class="gmeta">${n.stage} · ${STATUS_KO[n.status]} · 절차 ${n.procs ?? 1}개 · 선행 ${(rev[id] || []).length} 후속 ${(fwd[id] || []).length}</div>
+    ${sum ? `<div class="gsum">📡 ${sum}</div>` : ""}`;
+  if (!PROCS) {
+    body.innerHTML = `<div class="proc-empty">절차 데이터 불러오는 중…</div>`;
+    try { PROCS = (await (await fetch("./procedures.json")).json()).byGate; }
+    catch { PROCS = {}; }
+  }
+  const insts = PROCS[id];
+  if (!insts || !insts.length) {
+    body.innerHTML = `<div class="proc-empty">연결된 제도 모델이 없습니다 — 발굴 루프의 다음 후보.<br/>이 관문은 요약 1절차로 계상됩니다.</div>`;
+    return;
+  }
+  body.innerHTML = insts.map((inst) => {
+    let lastStage = null, i = 0;
+    const rows = inst.steps.map((s) => {
+      i++;
+      const stageHead = s.stage && s.stage !== lastStage
+        ? `<div class="pstage">${s.stage}</div>` : "";
+      lastStage = s.stage;
+      return `${stageHead}<div class="pstep t-${s.type}"><span class="pnum">${i}</span><div class="pbody">
+        <div class="pname">${s.name}</div>
+        <div class="pmeta">${s.actor}${s.deadline ? ` · <span class="ddl">⏱ ${s.deadline}</span>` : ""}</div>
+        ${s.basis ? `<div class="pbasis">${s.basis}</div>` : ""}</div></div>`;
+    }).join("");
+    return `<div class="pinst"><div class="pinst-h">
+      <a href="../../model/${inst.slug}/" target="_blank" rel="noopener">${inst.name}</a>
+      <span class="mono">${inst.steps.length}단계${inst.mapping === "candidate" ? " · 후보매핑" : ""}</span></div>${rows}</div>`;
+  }).join("");
+}
+
 function focusNode(id) {
   pinnedId = id;
+  renderProcPanel(id);
   document.querySelectorAll(".chip").forEach((c) => c.classList.remove("sel"));
   document.body.classList.remove("mode-risk", "mode-pm");
   const set = new Set([...ancestors(id), ...descendants(id)]);
