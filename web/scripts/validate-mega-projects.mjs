@@ -10,6 +10,12 @@ const INSTITUTION_DIR = path.join(WEB_DIR, "data", "institutions");
 const ARTIFACT_PATH = path.join(DATA_DIR, "artifacts.json");
 
 const ARTIFACT_CATEGORIES = new Set([
+  // 광주(물리적 개발사업) 어휘 + 5극3특(정책·제도 사업) 어휘.
+  // legal/financial은 개발사업에는 없던 산출물 유형이라 뒤늦게 추가됐다:
+  //   legal     법률의 제·개정이 완료되어야 다음 관문이 열리는 산출물
+  //   financial 회계·계정·보조금 구조가 갖춰져야 열리는 산출물
+  "legal",
+  "financial",
   "policy",
   "governance",
   "designation",

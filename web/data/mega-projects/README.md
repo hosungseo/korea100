@@ -8,7 +8,33 @@ The overlay does not mutate or duplicate the institution source files in `data/i
 
 - `artifacts.json`: canonical cross-process outputs and milestone definitions.
 - `projects/*.json`: project instances with actual status, conditional rules, requirements, outputs, evidence, and Korea100 references.
+- `map-tracks/*.json`: presentation config for the warroom dependency map (`/warroom/map/`) — title, nav links, chip tracks, and either an explicit `layout` or a `columns` assignment for auto-layout. One file per project id.
 - `../../scripts/validate-mega-projects.mjs`: structural, reference, rule, cycle, and readiness validation.
+
+## Warroom dependency map
+
+`npm run generate:warroom-map:all` renders every project into `public/warroom/map/`. The default project (Gwangju) writes to that directory directly so its URL stays stable; any other project writes to `public/warroom/map/<projectId>/` and the page reads it via `/warroom/map/?p=<projectId>`.
+
+The generator emits `data.json`, `procedures.json`, and `config.json`. Everything project-specific in the page — heading, nav, level chips, track chips, canvas layout — comes from `config.json`, so the map HTML itself stays project-neutral. Counts in the "전체" blurb are interpolated from real node and edge counts (`{gates}`, `{deps}`, `{completed}`, `{active}`, `{remaining}`), never hand-written.
+
+Track chips support three selection modes:
+
+- `target`: highlight the full ancestor cone of one gate, optionally trimmed to `stages`. Use where a genuine finish-to-start chain exists.
+- `nodes`: highlight an explicit gate set. Use where a policy field is a bundle of parallel tasks and ancestor tracing would collapse to a single root.
+- computed views: `pmbrief`, `critical`, `bottleneck`, `risk`, `signals`. The signals chip is dropped automatically when the project has no `signals.json`.
+
+### Decision tiers
+
+The "보는 급" lens ranks each gate by its `actorRoles.decision` entries, falling back to `lead` when `decision` is empty. That fallback is a silent accuracy trap: a gate whose decision-maker is unrecorded gets classified by its lead ministry instead, which pushed 14 of the 5극3특 gates into "실무·사업자·기타" until the field was filled. **Fill `actorRoles.decision` for every gate** — an empty one is a validation error, not an optional field.
+
+Two tiers exist beyond the Gwangju set, added for policy projects:
+
+- `legislature` — 국회 / 지방의회. A gate that cannot advance until a statute is enacted or amended. Matched on anchored tokens so committee names ending in 의회 (전력정책심의회) are not caught. Where a gate needs both legislation and ministry execution, list both actors; the tier resolves to the higher one.
+- `presidential_committee` — 대통령 소속 위원회 whose deliberation is a statutory precondition (지방시대위원회 per 균형성장법 §62, whose 심의·의결 is required by §9, §23, §31; 국토정책위원회 per 국토기본법 §12). Ranked below 국회 and above 부처 장관, because a general 심의위원회 tier would understate it.
+
+### Artifact categories
+
+`legal` and `financial` were added to the whitelist for policy projects: a physical development project has no artifact that is "a statute being enacted" or "a budget account being created", so the original vocabulary had no slot for them. Do not reach for them when an existing category fits — 광역철도 확충 and 거점공항 육성 are `infrastructure`, and an 예타면제 의결 that fixes project scope is `plan`.
 
 ## Dependency model
 

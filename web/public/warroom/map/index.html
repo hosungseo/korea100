@@ -438,15 +438,10 @@ body.mode-risk #narration ol li::before { border-color: var(--rose); color: var(
 
 <header>
   <div>
-    <h1>관문 의존 지도 <span style="color:var(--muted);font-weight:400">— 광주 반도체 클러스터</span></h1>
+    <h1><span id="ptitle">관문 의존 지도 </span><span id="psubtitle" style="color:var(--muted);font-weight:400"></span></h1>
     <div class="sub" id="subline">LOADING…</div>
   </div>
-  <nav class="links">
-    <a href="../board/">주체별 상황판</a>
-    <a href="../../mega-projects/gwangju-semiconductor-cluster/">프로젝트 4뷰</a>
-    <a href="../loop/">루프</a>
-    <a href="../">워룸</a>
-  </nav>
+  <nav class="links" id="pnav"></nav>
   <div id="chips"></div>
   <div id="levelchips"><span class="rowlabel">보는 급</span></div>
   <div id="ministrychips" hidden><span class="rowlabel">부처</span></div>
@@ -517,92 +512,26 @@ body.mode-risk #narration ol li::before { border-color: var(--rose); color: var(
 </div>
 
 <script>
-const COL = [40, 380, 720, 1060, 1400];
-const LAYOUT = {
-  G0: { x: COL[0], y: 20 },
-  G1: { x: COL[0], y: 320 },
-  G2: { x: COL[1], y: 20 },
-  G3: { x: COL[2], y: 20 },
-  G4: { x: COL[2], y: 750 },
-  G5: { x: COL[3], y: 20 },
-  G6: { x: COL[3], y: 810 },
-  G7: { x: COL[4], y: 20 },
-};
-const CANVAS_W = 1720, CANVAS_H = 1190;
+// 프로젝트 전환: /warroom/map/?p=<projectId> — 기본(광주)은 이 폴더, 나머지는
+// 하위 폴더에서 data/procedures/config를 읽는다. 생성기는
+// scripts/generate-warroom-map-data.mjs <projectId>.
+const PROJECT = new URLSearchParams(location.search).get("p") || "";
+const BASE = PROJECT && PROJECT !== "gwangju-semiconductor-cluster"
+  ? `./${PROJECT.replace(/[^a-z0-9-]/gi, "")}/`
+  : "./";
+let LAYOUT = {};
+let CANVAS_W = 1720, CANVAS_H = 1190;
 
 const STATUS_KO = { completed: "완료", active: "진행중", planned: "예정", unknown: "미확정" };
-const LEVELS = [
-  { id: "cabinet", label: "총리·국무회의" },
-  { id: "minister", label: "부처 장관" },
-  { id: "local", label: "지자체장" },
-  { id: "committee", label: "위원회·전문기관" },
-  { id: "field", label: "실무·사업자·기타" },
-];
-const LEVEL_KO = Object.fromEntries(LEVELS.map((l) => [l.id, l.label]));
+// 계층 칩은 config.json에서 온다 — 프로젝트마다 실제 존재하는 급만 남는다
+let LEVELS = [];
+let LEVEL_KO = {};
 const CLASS_KO = {
   legal_gate: "법정 관문", protection_gate: "보호 관문", technical_gate: "기술 관문",
   delivery: "이행", plan: "계획", operation: "운영", policy: "정책", governance: "거버넌스",
 };
 
-const SCENARIOS = [
-  { id: "all", label: "전체", html:
-    `<div class="free">8개 스테이지 · 49개 관문 · 94개 의존관계.<br/>
-     상단 칩을 누르면 그 목표까지 거쳐야 하는 관문과 경로만 켜집니다.
-     노드에 올리면 오른쪽에 상세가, 클릭하면 그 관문의 상·하류가 켜집니다.<br/>
-     <span class="mono">정책상 입지 결정(N01)과 예비이전후보지 선정(N04)만 완료 — 나머지 47개 관문이 앞에 있습니다.</span></div>` },
-  { id: "pmbrief", label: "★ 총리 브리핑", pmbrief: true },
-  { id: "site", label: "부지 확보", target: "N17", stages: ["G1", "G4"], steps: [
-    ["군공항 이전건의 → 이전후보지 공고 → 주민투표·최종 선정", "N04,N31,N32"],
-    ["사업시행자·기부 대 양여·재원 확정", "N33"],
-    ["종전 군공항 석면 해체·토양 정화 + 편입 사유지 보상", "N41,N16"],
-    ["국유재산 용도폐지·종전부지 권리이전", "N42"],
-    ["(병렬) 공군 전력 임시 이전·엄체호 — 조기 인도 경로", "N51"],
-    ["보호구역 해제·사용권 확보 — 이후 모든 공사의 전제", "N17"],
-  ]},
-  { id: "plan", label: "산단·인허가", target: "N15", stages: ["G2", "G3"], steps: [
-    ["투자의향·지정요청 → 개발계획 초안", "N06,N07"],
-    ["공고·공람·주민 의견 + 전략환경영향평가", "N08,N09"],
-    ["재해영향·기술검토 → 산단계획 통합심의 → 지정 고시", "N38,N37,N10"],
-    ["환경영향평가 초안·본안 협의 완료", "N11,N12"],
-    ["의제 인허가 실체요건 취합 → 실시계획·승인조건 확정", "N14,N15"],
-  ]},
-  { id: "power", label: "전력", target: "N44", stages: ["G5"], steps: [
-    ["단계별 수요 확정·계통 경로 결정", "N18"],
-    ["정식 계통영향평가 ∥ 면제·특례 — 두 갈래 모두 미확정", "N19,N20"],
-    ["(병렬) 전력수급기본계획에 수요·전원 반영", "N53"],
-    ["송전선로·변전소 실시계획 승인", "N21"],
-    ["공급·이용계약 → 송변전망 공사·계통접속", "N43,N22"],
-    ["사용전검사·계통 병입·가압", "N44"],
-  ]},
-  { id: "water", label: "용수·도로", target: "N25", stages: ["G6"], steps: [
-    ["공업용수·폐수·접근도로 수요·공급계획 확정", "N23"],
-    ["(병렬) 신규 수원 확보 — 동복댐 증축·댐건설기본계획", "N50"],
-    ["용수·재이용·폐수·하수도·도로 승인·비용분담", "N24"],
-    ["공사·준공·공급개시", "N25"],
-  ]},
-  { id: "start", label: "착공", target: "N27", stages: ["G7"], steps: [
-    ["실시계획 확정(산단·인허가 트랙) + 부지 사용권(부지 트랙)이 전제", "N15,N17"],
-    ["관리기본계획·입주계약·공장설립 승인", "N26"],
-    ["건축허가·설비설계 사전확인 → 착공신고", "N27"],
-  ]},
-  { id: "prod", label: "상업생산", target: "N30", stages: ["G7"], steps: [
-    ["착공 후 부지조성·팹 건설", "N28"],
-    ["위험물·고압가스 허가·검사 + 통합환경 등 사전심사", "N46,N45"],
-    ["공장등록·건축물 사용승인", "N47,N48"],
-    ["(병렬) 노동쟁의 기준 지침 — 투자·운영 리스크 기준", "N54"],
-    ["운영 인허가 확인 → 시험가동·수율 검증", "N29,N49"],
-    ["상업생산 개시 — 사실상 전 그래프가 이 관문의 선행조건", "N30"],
-  ]},
-  { id: "risk", label: "미확정 리스크", risk: true, steps: [
-    ["국가유산 영향진단·매장유산 조사 — 경로 자체가 미해소", "N13"],
-    ["편입 사유지 보상·취득 — 대상·규모 미확정", "N16"],
-    ["정식 전력계통영향평가 — 통과 여부·기간 미확정", "N19"],
-    ["계통영향평가 면제·특례 — 법적 근거 확인 필요", "N20"],
-  ]},
-  { id: "critical", label: "최장 사슬", critical: true },
-  { id: "bottleneck", label: "병목 랭킹", bottleneck: true },
-  { id: "signals", label: "📡 신호", signals: true },
-];
+let SCENARIOS = [];
 const KIND_ICON = { progress: "▲", risk: "⚠", decision: "★", context: "·" };
 const KIND_KO = { progress: "진행", risk: "리스크", decision: "결정임박", context: "맥락" };
 
@@ -614,11 +543,36 @@ let wargame = false;
 const eff = (id) => (sim.has(id) ? "completed" : nodeById[id].status);
 const effLabel = (id) => (sim.has(id) ? "가정완료" : STATUS_KO[nodeById[id].status]);
 
-let SIGNALS = null;
+let SIGNALS = null, CONFIG = null;
 Promise.all([
-  fetch("./data.json").then((r) => r.json()),
-  fetch("./signals.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
-]).then(([d, s]) => { DATA = d; SIGNALS = s; build(); });
+  fetch(BASE + "data.json").then((r) => r.json()),
+  fetch(BASE + "signals.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
+  fetch(BASE + "config.json").then((r) => r.json()),
+]).then(([d, s, c]) => {
+  DATA = d; SIGNALS = s; CONFIG = c;
+  applyConfig(c);
+  build();
+});
+
+// 제목·내비·레이아웃·트랙 칩은 전부 config.json(생성기 산출물)에서 온다.
+function applyConfig(c) {
+  document.title = `${c.title} — ${c.subtitle}`;
+  $("#ptitle").textContent = c.title + " ";
+  $("#psubtitle").textContent = "— " + c.subtitle;
+  const nav = $("#pnav");
+  nav.innerHTML = "";
+  for (const link of c.nav ?? []) {
+    const a = document.createElement("a");
+    a.href = link.href; a.textContent = link.label;
+    nav.appendChild(a);
+  }
+  LEVELS = c.levels ?? [];
+  LEVEL_KO = Object.fromEntries(LEVELS.map((l) => [l.id, l.label]));
+  LAYOUT = c.layout;
+  CANVAS_W = c.canvas.w; CANVAS_H = c.canvas.h;
+  // 신호 파이프라인이 없는 프로젝트는 📡 칩을 내린다
+  SCENARIOS = (c.scenarios ?? []).filter((s) => !s.signals || SIGNALS);
+}
 
 function build() {
   nodeById = Object.fromEntries(DATA.nodes.map((n) => [n.id, n]));
@@ -974,6 +928,9 @@ function render() {
       for (const id of set)
         for (const p of rev[id] || []) if (anc.has(p) && !set.has(p)) ext.add(p);
     } else set = anc;
+  } else if (sc.nodes) {
+    // 명시 노드 집합 트랙 — 병렬 과제가 많아 조상 추적이 무의미한 분야에 쓴다
+    set = new Set(sc.nodes.filter((id) => nodeById[id]));
   } else if (sc.risk) {
     set = new Set(DATA.nodes.filter((n) => n.status === "unknown").map((n) => n.id));
   }
@@ -1092,7 +1049,7 @@ async function renderProcPanel(id) {
     ${sum ? `<div class="gsum">📡 ${sum}</div>` : ""}`;
   if (!PROCS) {
     body.innerHTML = `<div class="proc-empty">절차 데이터 불러오는 중…</div>`;
-    try { PROCS = (await (await fetch("./procedures.json")).json()).byGate; }
+    try { PROCS = (await (await fetch(BASE + "procedures.json")).json()).byGate; }
     catch { PROCS = {}; }
   }
   const insts = PROCS[id];
