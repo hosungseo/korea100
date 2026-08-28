@@ -126,6 +126,10 @@ body.mode-pm #narration ol li::before { border-color: var(--gold); color: var(--
   font-family: var(--mono); font-size: 8px; color: var(--green);
 }
 .node.sim .dot { background: var(--green); }
+.node .sigb { float: right; color: var(--cyan); font-size: 8px; letter-spacing: 0; }
+#detail .siga { display: block; font-size: 10px; color: var(--text); text-decoration: none; padding: 2px 0; line-height: 1.35; }
+#detail .siga:hover { color: var(--cyan); }
+#detail .sighead { font-family: var(--mono); font-size: 9px; color: var(--cyan); letter-spacing: 0.1em; margin-bottom: 3px; }
 body.wargame .node { cursor: crosshair; }
 body.wargame .node.on, body.wargame #edges path.e.on, body.wargame #edges path.epulse.on {
   animation-delay: 0s, 0s;
@@ -458,7 +462,11 @@ let wargame = false;
 const eff = (id) => (sim.has(id) ? "completed" : nodeById[id].status);
 const effLabel = (id) => (sim.has(id) ? "가정완료" : STATUS_KO[nodeById[id].status]);
 
-fetch("./data.json").then((r) => r.json()).then((d) => { DATA = d; build(); });
+let SIGNALS = null;
+Promise.all([
+  fetch("./data.json").then((r) => r.json()),
+  fetch("./signals.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
+]).then(([d, s]) => { DATA = d; SIGNALS = s; build(); });
 
 function build() {
   nodeById = Object.fromEntries(DATA.nodes.map((n) => [n.id, n]));
@@ -491,7 +499,8 @@ function build() {
     for (const n of nodes) {
       const el = document.createElement("article");
       el.className = "node st-" + n.status; el.id = "nd-" + n.id;
-      el.innerHTML = `<div class="nid">${n.id} · ${(CLASS_KO[n.classification] || n.classification)}</div>
+      const sig = SIGNALS?.byGate?.[n.id];
+      el.innerHTML = `<div class="nid">${n.id} · ${(CLASS_KO[n.classification] || n.classification)}${sig ? `<span class="sigb">📡${sig.length}</span>` : ""}</div>
         <div class="nname">${n.name}</div>
         <div class="nmeta"><span class="dot"></span><span>${n.authority || "-"}</span><span style="margin-left:auto">${STATUS_KO[n.status]}</span></div>`;
       el.addEventListener("mouseenter", () => { if (!pinnedId) showDetail(n); });
@@ -590,7 +599,8 @@ function updateStats() {
   const simTag = sim.size ? `+가정 ${sim.size}` : "";
   $("#subline").textContent =
     `${DATA.stages.length} STAGES · ${DATA.nodes.length} GATES · ${DATA.edges.length} DEPS · ` +
-    `완료 ${st.completed}${simTag} 진행 ${st.active} 미확정 ${st.unknown} · AS OF ${DATA.meta.asOfDate}`;
+    `완료 ${st.completed}${simTag} 진행 ${st.active} 미확정 ${st.unknown} · AS OF ${DATA.meta.asOfDate}` +
+    (SIGNALS ? ` · 📡 ${SIGNALS.generatedAt}` : "");
 }
 
 function updateProgress() {
@@ -1009,7 +1019,13 @@ function showDetail(n) {
       <dt>상태</dt><dd>${STATUS_KO[n.status]}${n.completedOn ? ` (${n.completedOn})` : ""}</dd>
       <dt>의존</dt><dd>선행 ${up} · 후속 ${down}</dd>
     </dl>
-    ${n.note ? `<div class="note">${n.note}</div>` : ""}`;
+    ${n.note ? `<div class="note">${n.note}</div>` : ""}
+    ${(() => {
+      const sig = SIGNALS?.byGate?.[n.id];
+      if (!sig) return "";
+      return `<div class="note"><div class="sighead">📡 언론 신호 · 최근 ${SIGNALS.windowDays}일 · 상태 확정 근거 아님</div>
+        ${sig.slice(0, 5).map((a) => `<a class="siga" href="${a.link}" target="_blank" rel="noopener">${a.pubDate.slice(5)} · ${a.title}</a>`).join("")}</div>`;
+    })()}`;
 }
 </script>
 </body>
