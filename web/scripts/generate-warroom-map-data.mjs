@@ -186,10 +186,14 @@ for (const n of project.nodes) {
         const want = new Set(ref.nodeIds);
         pnodes = pnodes.filter((p) => want.has(p.id));
       }
+      const stepIds = new Set(pnodes.map((p) => p.id));
       insts.push({
         slug: ref.institution,
         name: inst.name,
         mapping: ref.mappingStatus ?? "linked",
+        edges: (inst.process?.edges ?? [])
+          .filter((e) => stepIds.has(e.source) && stepIds.has(e.target))
+          .map((e) => ({ s: e.source, t: e.target, type: e.type ?? "sequence", label: e.label ?? "" })),
         steps: pnodes.map((p) => ({
           id: p.id,
           name: p.name,
