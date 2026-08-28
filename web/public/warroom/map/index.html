@@ -151,7 +151,7 @@ body.wargame #canvas .node.on, body.wargame #edges path.e.on, body.wargame #edge
 #split { display: flex; align-items: flex-start; }
 #viewport { position: relative; overflow: auto; padding: 8px 0 40px; flex: 1; min-width: 0; }
 #procpanel {
-  width: 430px; flex: none;
+  width: clamp(480px, 44vw, 900px); flex: none;
   position: sticky; top: 0; height: 100vh; overflow-y: auto;
   border-left: 1px solid rgba(56,198,244,0.15);
   background: rgba(6,11,18,0.6);
@@ -200,30 +200,28 @@ body.wargame #canvas .node.on, body.wargame #edges path.e.on, body.wargame #edge
 .pedges path.p-sequence { stroke: rgba(56,198,244,0.5); stroke-width: 1.2; }
 .pedges path.p-message { stroke: rgba(56,198,244,0.4); stroke-width: 1.1; stroke-dasharray: 4 4; }
 .pedges path.p-loop { stroke: rgba(255,107,138,0.7); stroke-width: 1.2; stroke-dasharray: 5 4; }
-/* 전체 화면 절차 지도 — 본 지도와 같은 문법의 오버레이 */
-#procfull { position: fixed; inset: 0; z-index: 70; background: rgba(4,7,12,0.985); display: flex; flex-direction: column; }
-#procfull[hidden] { display: none; }
-#pf-head { display: flex; align-items: center; gap: 14px; padding: 11px 20px; border-bottom: 1px solid rgba(56,198,244,0.15); }
-#pf-back { font-family: var(--mono); font-size: 10px; cursor: pointer; color: var(--muted); background: transparent; border: 1px solid rgba(95,123,144,0.4); border-radius: 999px; padding: 4px 12px; }
-#pf-back:hover { color: var(--cyan); border-color: var(--cyan); }
-#pf-title { font-size: 14px; font-weight: 700; }
-#pf-title .mono { color: var(--muted); font-size: 10px; font-weight: 400; }
-#pf-viewport { flex: 1; overflow: auto; padding: 10px 0 40px; }
-#pf-canvas { position: relative; transform-origin: 0 0; }
-#pf-edges { position: absolute; inset: 0; overflow: visible; z-index: 1; }
-#pf-edges path { fill: none; }
-#pf-edges path.p-sequence { stroke: rgba(56,198,244,0.55); stroke-width: 1.3; }
-#pf-edges path.p-message { stroke: rgba(56,198,244,0.45); stroke-width: 1.2; stroke-dasharray: 4 4; }
-#pf-edges path.p-loop { stroke: rgba(255,107,138,0.75); stroke-width: 1.3; stroke-dasharray: 5 4; }
-#pf-canvas .node.t-gateway { border-color: rgba(255,176,32,0.55); }
-#pf-canvas .node.t-gateway .nid { color: var(--amber); }
-#pf-canvas .node.t-system { border-style: dotted; }
-#proc-expand {
-  font-family: var(--mono); font-size: 9px; cursor: pointer; letter-spacing: 0.04em;
-  color: var(--gold); background: transparent;
-  border: 1px solid rgba(255,215,106,0.5); border-radius: 4px; padding: 2px 8px;
-}
-#proc-expand:hover { color: #1a1204; background: var(--gold); }
+/* 패널 내 열 배치 절차 지도 */
+#proc-canvas { position: relative; transform-origin: 0 0; margin-top: 10px; }
+#proc-canvas svg.pedges2 { position: absolute; inset: 0; overflow: visible; z-index: 1; }
+#proc-canvas svg.pedges2 path { fill: none; }
+#proc-canvas svg.pedges2 path.p-sequence { stroke: rgba(56,198,244,0.55); stroke-width: 1.3; }
+#proc-canvas svg.pedges2 path.p-message { stroke: rgba(56,198,244,0.45); stroke-width: 1.2; stroke-dasharray: 4 4; }
+#proc-canvas svg.pedges2 path.p-loop { stroke: rgba(255,107,138,0.75); stroke-width: 1.3; stroke-dasharray: 5 4; }
+#proc-canvas .node { cursor: pointer; }
+#proc-canvas .node.t-gateway { border-color: rgba(255,176,32,0.55); }
+#proc-canvas .node.t-gateway .nid { color: var(--amber); }
+#proc-canvas .node.t-system { border-style: dotted; }
+#proc-canvas .node.psel { border-color: var(--cyan); box-shadow: 0 0 0 1px rgba(56,198,244,0.45); }
+#proc-insts { font-family: var(--mono); font-size: 9px; color: var(--muted); margin-top: 8px; }
+#proc-insts a { color: var(--green); text-decoration: none; border-bottom: 1px dotted rgba(46,230,168,0.5); }
+#stepcard { position: fixed; right: 16px; bottom: 16px; z-index: 55; width: 340px; max-width: calc(44vw - 40px); }
+#stepcard[hidden] { display: none; }
+#stepcard h3 { color: var(--cyan); }
+#stepcard dl { display: grid; grid-template-columns: 56px 1fr; gap: 2px 8px; font-size: 10.5px; }
+#stepcard dt { font-family: var(--mono); font-size: 9px; color: var(--muted); padding-top: 1px; }
+#stepcard dd { color: var(--text); }
+#stepcard .sname { font-size: 12.5px; font-weight: 700; margin-bottom: 4px; }
+
 #proc-gate { margin-top: 10px; }
 #proc-gate .gname { font-size: 14px; font-weight: 700; line-height: 1.35; }
 #proc-gate .gmeta { font-family: var(--mono); font-size: 9.5px; color: var(--muted); margin-top: 3px; }
@@ -480,27 +478,16 @@ body.mode-risk #narration ol li::before { border-color: var(--rose); color: var(
 </div></div>
 
 <aside id="procpanel">
-  <div id="proc-head"><span>관문 내부 절차 — N을 열어보는 창</span>
-    <span id="proc-view"><button id="proc-expand" title="본 지도와 같은 배치로 전체 화면">⤢ 펼치기</button><button data-v="graph">지도형</button><button data-v="list">목록</button></span></div>
+  <div id="proc-head"><span>관문 내부 절차 — N을 열어보는 창</span><span class="mono" style="letter-spacing:0.04em">칸 클릭 = 상세</span></div>
   <div id="proc-gate"></div>
   <div id="proc-body"><div class="proc-empty">왼쪽 지도에서 관문을 클릭하면<br/>그 안의 법정 절차 체인이 여기 열립니다.<br/><br/>왼쪽 = 사업 전체의 큰 그림(관문·의존)<br/>오른쪽 = 선택한 관문 내부의 절차 원형</div></div>
 </aside>
 </div>
 
-<div id="procfull" hidden>
-  <div id="pf-head">
-    <button id="pf-back">← 관문 지도</button>
-    <div id="pf-title"></div>
-  </div>
-  <div id="pf-viewport"><div id="pf-canvas">
-    <svg id="pf-edges"><defs>
-      <marker id="pfa-seq" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-        <path d="M0 0.5 L7.5 4 L0 7.5 Z" fill="rgba(56,198,244,0.75)"/></marker>
-      <marker id="pfa-loop" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-        <path d="M0 0.5 L7.5 4 L0 7.5 Z" fill="rgba(255,107,138,0.85)"/></marker>
-    </defs><g id="pf-epaths"></g></svg>
-  </div></div>
-</div>
+<aside id="stepcard" class="card" hidden>
+  <button class="cbtn" id="step-close" title="닫기">×</button>
+  <div id="step-body"></div>
+</aside>
 
 <div id="cards-left">
 <aside id="detail" class="card">
@@ -707,7 +694,7 @@ function build() {
   if (currentLevel === "minister" && MIN_BY_ID[h.get("min")]) currentMinistry = MIN_BY_ID[h.get("min")];
   render();
   $("#viewport").addEventListener("click", () => { pinnedId = null; selectScenario(current); });
-  window.addEventListener("resize", () => { fit(); drawEdges(); });
+  window.addEventListener("resize", () => { fit(); drawEdges(); renderProcBody(); });
   $("#narr-toggle").addEventListener("click", function () {
     const c = $("#narration").classList.toggle("collapsed");
     this.textContent = c ? "+" : "–";
@@ -717,16 +704,7 @@ function build() {
   $("#zoom-out").addEventListener("click", () => zoom(userScale - 0.15));
   $("#zoom-fit").addEventListener("click", () => zoom(1));
   $("#wargame-btn").addEventListener("click", toggleWargame);
-  document.querySelectorAll("#proc-view button[data-v]").forEach((b) => {
-    b.classList.toggle("on", b.dataset.v === procView);
-    b.addEventListener("click", () => {
-      procView = b.dataset.v;
-      document.querySelectorAll("#proc-view button[data-v]").forEach((x) => x.classList.toggle("on", x.dataset.v === procView));
-      renderProcBody();
-    });
-  });
-  $("#proc-expand").addEventListener("click", openProcFull);
-  $("#pf-back").addEventListener("click", () => { $("#procfull").hidden = true; });
+  $("#step-close").addEventListener("click", () => { $("#stepcard").hidden = true; });
   $("#wg-reset").addEventListener("click", () => {
     sim.clear();
     document.querySelectorAll(".node.sim").forEach((el) => el.classList.remove("sim"));
@@ -734,7 +712,7 @@ function build() {
   });
   document.addEventListener("keydown", (e) => {
     if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
-    if (e.key === "Escape" && !$("#procfull").hidden) { $("#procfull").hidden = true; return; }
+    if (e.key === "Escape" && !$("#stepcard").hidden) { $("#stepcard").hidden = true; return; }
     if (e.key === "Escape") { pinnedId = null; $("#detail").style.display = "none"; selectScenario(current); return; }
     if (e.key === "w" || e.key === "W") { toggleWargame(); return; }
     const idx = "123456789".indexOf(e.key);
@@ -786,7 +764,8 @@ function updateProgress() {
 let userScale = 1;
 function zoom(v) { userScale = Math.min(1.8, Math.max(0.5, v)); fit(); }
 function fit() {
-  const panelW = window.innerWidth > 1100 ? 448 : 0;
+  const pp = document.getElementById("procpanel");
+  const panelW = window.innerWidth > 1100 && pp ? pp.offsetWidth + 18 : 0;
   const base = Math.min(1, Math.max(0.42, (window.innerWidth - 24 - panelW) / CANVAS_W));
   scale = base * userScale;
   const c = $("#canvas");
@@ -1089,185 +1068,131 @@ async function renderProcPanel(id) {
   renderProcBody();
 }
 
-let procView = "graph", lastProcInsts = null;
-const instHead = (inst) => `<div class="pinst-h">
-  <a href="../../model/${inst.slug}/" target="_blank" rel="noopener">${inst.name}</a>
-  <span class="mono">${inst.steps.length}단계${inst.mapping === "candidate" ? " · 후보매핑" : ""}</span></div>`;
+let lastProcInsts = null;
 
-function renderProcBody() {
-  if (!lastProcInsts) return;
-  if (procView === "list") renderProcList(lastProcInsts);
-  else renderProcGraph(lastProcInsts);
-}
-
-function renderProcList(insts) {
-  $("#proc-body").innerHTML = insts.map((inst) => {
-    let lastStage = null, i = 0;
-    const rows = inst.steps.map((s) => {
-      i++;
-      const stageHead = s.stage && s.stage !== lastStage
-        ? `<div class="pstage">${s.stage}</div>` : "";
-      lastStage = s.stage;
-      return `${stageHead}<div class="pstep t-${s.type}"><span class="pnum">${i}</span><div class="pbody">
-        <div class="pname">${s.name}</div>
-        <div class="pmeta">${s.actor}${s.deadline ? ` · <span class="ddl">⏱ ${s.deadline}</span>` : ""}</div>
-        ${s.basis ? `<div class="pbasis">${s.basis}</div>` : ""}</div></div>`;
-    }).join("");
-    return `<div class="pinst">${instHead(inst)}${rows}</div>`;
-  }).join("");
-}
-
-// 지도형 — 왼쪽 지도와 같은 문법: 점선 스테이지 그룹 + 노드 카드 + 연결선
 const PTYPE_KO = { task: "절차", gateway: "게이트웨이", system: "시스템" };
-function renderProcGraph(insts) {
-  $("#proc-body").innerHTML = insts.map((inst, ii) => {
-    let lastStage = null;
-    const parts = [];
-    for (const s of inst.steps) {
-      if (s.stage !== lastStage) {
-        if (lastStage !== null) parts.push("</div>");
-        parts.push(`<div class="pgroup"><span class="pglabel">${s.stage}</span>`);
-        lastStage = s.stage;
-      }
-      parts.push(`<div class="pnode t-${s.type}" data-pp="${s.id}">
-        <div class="ppid">${s.id} · ${PTYPE_KO[s.type] ?? s.type}</div>
-        <div class="ppnm">${s.name}</div>
-        <div class="ppmt">${s.actor}${s.deadline ? ` · <span class="ddl">⏱ ${s.deadline}</span>` : ""}</div>
-        ${s.basis ? `<div class="ppbs">${s.basis}</div>` : ""}</div>`);
-    }
-    if (lastStage !== null) parts.push("</div>");
-    return `<div class="pinst">${instHead(inst)}
-      <div class="pgraph" data-pi="${ii}">
-        <svg class="pedges"><defs>
-          <marker id="ppa-${ii}-seq" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M0 0.5 L7.5 4 L0 7.5 Z" fill="rgba(56,198,244,0.7)"/></marker>
-          <marker id="ppa-${ii}-loop" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M0 0.5 L7.5 4 L0 7.5 Z" fill="rgba(255,107,138,0.8)"/></marker>
-        </defs><g></g></svg>${parts.join("")}</div></div>`;
-  }).join("");
-  requestAnimationFrame(() => insts.forEach((inst, ii) => drawPanelEdges(ii, inst)));
-}
 
-function drawPanelEdges(ii, inst) {
-  const wrap = document.querySelector(`.pgraph[data-pi="${ii}"]`);
-  if (!wrap) return;
-  const g = wrap.querySelector("svg.pedges g");
-  g.innerHTML = "";
-  const wr = wrap.getBoundingClientRect();
-  const pos = {};
-  wrap.querySelectorAll(".pnode").forEach((el) => {
-    const r = el.getBoundingClientRect();
-    pos[el.dataset.pp] = {
-      top: r.top - wr.top, bottom: r.bottom - wr.top,
-      left: r.left - wr.left, cx: r.left + r.width / 2 - wr.left,
-      cy: r.top + r.height / 2 - wr.top,
-    };
-  });
-  for (const e of inst.edges ?? []) {
-    const s = pos[e.s], t = pos[e.t];
-    if (!s || !t) continue;
-    let d;
-    if (t.top >= s.bottom && t.top - s.bottom < 60) {
-      const vh = Math.max(8, (t.top - s.bottom) * 0.6);
-      d = `M ${s.cx} ${s.bottom} C ${s.cx} ${s.bottom + vh}, ${t.cx} ${t.top - vh}, ${t.cx} ${t.top - 3}`;
-    } else {
-      const off = e.type === "loop" ? 26 : 18;
-      d = `M ${s.left} ${s.cy} C ${s.left - off} ${s.cy}, ${t.left - off} ${t.cy}, ${t.left - 3} ${t.cy}`;
-    }
-    const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    p.setAttribute("d", d);
-    p.setAttribute("class", `p-${e.type}`);
-    p.setAttribute("marker-end", `url(#ppa-${ii}-${e.type === "loop" ? "loop" : "seq"})`);
-    if (e.label) { const t2 = document.createElementNS("http://www.w3.org/2000/svg", "title"); t2.textContent = e.label; p.appendChild(t2); }
-    g.appendChild(p);
-  }
-}
+function renderProcBody() { if (lastProcInsts) renderProcMap(lastProcInsts); }
 
-// ── 전체 화면 절차 지도: 본 지도와 같은 문법(열 배치 + 곡선 엣지 + 맞춤 배율) ──
-let pfGateId = null;
-function openProcFull() {
-  if (!lastProcInsts || !pinnedId) return;
-  pfGateId = pinnedId;
-  const n = nodeById[pfGateId];
-  $("#pf-title").innerHTML = `<span class="mono">${pfGateId}</span> ${n.name} — 내부 절차 지도
-    <span class="mono">· ${lastProcInsts.map((i) => `${i.name} ${i.steps.length}단계`).join(" · ")} · ESC 닫기</span>`;
-  const canvas = $("#pf-canvas");
-  canvas.querySelectorAll(".group").forEach((g) => g.remove());
-  canvas.style.transform = "scale(1)";
-  $("#procfull").hidden = false; // 측정 전에 표시 (hidden이면 offsetHeight=0)
-
-  const COLW = 338, X0 = 40, Y0 = 20, HBUDGET = 780, GAP = 16;
-  const multi = lastProcInsts.length > 1;
-  let col = 0, y = Y0, maxBottom = 0;
-  lastProcInsts.forEach((inst, ii) => {
+// 패널 내 열 배치 절차 지도 — 본 지도와 같은 문법(열 패킹·곡선 엣지·맞춤 배율)
+function renderProcMap(insts) {
+  const body = $("#proc-body");
+  body.innerHTML = `<div id="proc-insts">${insts.map((i) =>
+    `<a href="../../model/${i.slug}/" target="_blank" rel="noopener">${i.name}</a> ${i.steps.length}단계${i.mapping === "candidate" ? "·후보매핑" : ""}`).join(" · ")}</div>
+    <div id="proc-canvas"><svg class="pedges2"><defs>
+      <marker id="pca-seq" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0.5 L7.5 4 L0 7.5 Z" fill="rgba(56,198,244,0.75)"/></marker>
+      <marker id="pca-loop" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0.5 L7.5 4 L0 7.5 Z" fill="rgba(255,107,138,0.85)"/></marker>
+    </defs><g></g></svg></div>`;
+  const canvas = $("#proc-canvas");
+  const stepOf = {};
+  const groups = [];
+  const multi = insts.length > 1;
+  insts.forEach((inst, ii) => {
     const stages = [];
-    for (const s of inst.steps) {
-      if (!stages.length || stages[stages.length - 1].stage !== s.stage) stages.push({ stage: s.stage, steps: [] });
-      stages[stages.length - 1].steps.push(s);
+    for (const st of inst.steps) {
+      if (!stages.length || stages[stages.length - 1].stage !== st.stage) stages.push({ stage: st.stage, steps: [] });
+      stages[stages.length - 1].steps.push(st);
+      stepOf[`${ii}:${st.id}`] = { step: st, inst };
     }
     for (const st of stages) {
       const g = document.createElement("section");
       g.className = "group";
       g.innerHTML = `<span class="glabel">${multi ? inst.name.slice(0, 12) + " · " : ""}${st.stage}</span><span class="gcount">${st.steps.length}</span><div class="nodes">` +
-        st.steps.map((s) => `<article class="node t-${s.type}" data-pf="${ii}:${s.id}">
+        st.steps.map((s) => `<article class="node t-${s.type}" data-pp="${ii}:${s.id}">
           <div class="nid">${s.id} · ${PTYPE_KO[s.type] ?? s.type}</div>
           <div class="nname">${s.name}</div>
-          <div class="nmeta"><span class="dot"></span><span>${s.actor}</span><span style="margin-left:auto">${s.deadline ? "⏱" + s.deadline : ""}</span></div>
+          <div class="nmeta"><span class="dot"></span><span>${s.actor}</span><span style="margin-left:auto">${s.deadline ? "⏱" : ""}</span></div>
         </article>`).join("") + `</div>`;
       canvas.appendChild(g);
-      const h = g.offsetHeight;
-      if (y > Y0 && y + h > HBUDGET) { col++; y = Y0; }
-      g.style.left = (X0 + col * COLW) + "px";
-      g.style.top = y + "px";
-      y += h + GAP;
-      maxBottom = Math.max(maxBottom, y);
+      groups.push(g);
     }
   });
-  const cw = X0 + (col + 1) * COLW + 20;
-  const ch = Math.max(maxBottom + 30, 400);
+
+  // 열 패킹: 총 높이 실측 → 열 수 결정 → 좌→우 배치
+  const COLPITCH = 300, X0 = 6, Y0 = 6, GAP = 14;
+  const heights = groups.map((g) => g.offsetHeight);
+  const totalH = heights.reduce((a, b) => a + b + GAP, 0);
+  const cols = totalH > 1500 ? 3 : totalH > 720 ? 2 : 1;
+  const HBUDGET = Math.ceil(totalH / cols) + 90;
+  let col = 0, y = Y0, maxBottom = 0;
+  groups.forEach((g, i) => {
+    const h = heights[i];
+    if (y > Y0 && y + h > HBUDGET) { col++; y = Y0; }
+    g.style.left = (X0 + col * COLPITCH) + "px";
+    g.style.top = y + "px";
+    y += h + GAP;
+    maxBottom = Math.max(maxBottom, y);
+  });
+  const cw = X0 * 2 + col * COLPITCH + 278;
+  const ch = Math.max(maxBottom + 10, 200);
+  const availW = body.clientWidth - 6;
+  const sc = Math.min(1, availW / cw);
   canvas.style.width = cw + "px";
   canvas.style.height = ch + "px";
-  const vp = $("#pf-viewport");
-  const pfScale = Math.min(1, Math.max(0.5, (vp.clientWidth - 28) / cw));
-  canvas.style.transform = `scale(${pfScale})`;
+  canvas.style.transform = `scale(${sc})`;
+  canvas.style.marginBottom = (-(ch * (1 - sc))) + "px";
 
-  // 엣지: 실측 좌표(배율 보정) 기반 — 본 지도와 같은 라우팅
-  const g2 = $("#pf-epaths");
-  g2.innerHTML = "";
+  // 엣지(실측 좌표·배율 보정) — 본 지도와 같은 라우팅
+  const g2 = canvas.querySelector("svg.pedges2 g");
   const cr = canvas.getBoundingClientRect();
   const pos = {};
-  canvas.querySelectorAll(".node[data-pf]").forEach((el) => {
+  canvas.querySelectorAll(".node[data-pp]").forEach((el) => {
     const r = el.getBoundingClientRect();
-    pos[el.dataset.pf] = {
-      left: (r.left - cr.left) / pfScale, right: (r.right - cr.left) / pfScale,
-      top: (r.top - cr.top) / pfScale, bottom: (r.bottom - cr.top) / pfScale,
-      cx: (r.left + r.width / 2 - cr.left) / pfScale, cy: (r.top + r.height / 2 - cr.top) / pfScale,
+    pos[el.dataset.pp] = {
+      left: (r.left - cr.left) / sc, right: (r.right - cr.left) / sc,
+      top: (r.top - cr.top) / sc, bottom: (r.bottom - cr.top) / sc,
+      cx: (r.left + r.width / 2 - cr.left) / sc, cy: (r.top + r.height / 2 - cr.top) / sc,
     };
   });
-  lastProcInsts.forEach((inst, ii) => {
+  insts.forEach((inst, ii) => {
     for (const e of inst.edges ?? []) {
-      const s = pos[`${ii}:${e.s}`], t = pos[`${ii}:${e.t}`];
-      if (!s || !t) continue;
+      const a = pos[`${ii}:${e.s}`], b = pos[`${ii}:${e.t}`];
+      if (!a || !b) continue;
       let d;
-      const dx = t.left - s.right;
-      if (dx > 20) {
-        const h = Math.min(100, Math.max(30, dx * 0.5));
-        d = `M ${s.right} ${s.cy} C ${s.right + h} ${s.cy}, ${t.left - h} ${t.cy}, ${t.left - 4} ${t.cy}`;
-      } else if (t.top >= s.bottom && t.top - s.bottom < 60) {
-        const vh = Math.max(10, (t.top - s.bottom) * 0.6);
-        d = `M ${s.cx} ${s.bottom} C ${s.cx} ${s.bottom + vh}, ${t.cx} ${t.top - vh}, ${t.cx} ${t.top - 4}`;
+      const dx = b.left - a.right;
+      if (dx > 16) {
+        const h = Math.min(90, Math.max(26, dx * 0.5));
+        d = `M ${a.right} ${a.cy} C ${a.right + h} ${a.cy}, ${b.left - h} ${b.cy}, ${b.left - 4} ${b.cy}`;
+      } else if (b.top >= a.bottom && b.top - a.bottom < 60) {
+        const vh = Math.max(9, (b.top - a.bottom) * 0.6);
+        d = `M ${a.cx} ${a.bottom} C ${a.cx} ${a.bottom + vh}, ${b.cx} ${b.top - vh}, ${b.cx} ${b.top - 4}`;
       } else {
-        const off = e.type === "loop" ? 30 : 24;
-        d = `M ${s.left} ${s.cy} C ${s.left - off} ${s.cy}, ${t.left - off} ${t.cy}, ${t.left - 4} ${t.cy}`;
+        const off = e.type === "loop" ? 26 : 20;
+        d = `M ${a.left} ${a.cy} C ${a.left - off} ${a.cy}, ${b.left - off} ${b.cy}, ${b.left - 4} ${b.cy}`;
       }
-      const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
-      p.setAttribute("d", d);
-      p.setAttribute("class", `p-${e.type}`);
-      p.setAttribute("marker-end", `url(#pfa-${e.type === "loop" ? "loop" : "seq"})`);
-      if (e.label) { const tt = document.createElementNS("http://www.w3.org/2000/svg", "title"); tt.textContent = e.label; p.appendChild(tt); }
-      g2.appendChild(p);
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", d);
+      path.setAttribute("class", `p-${e.type}`);
+      path.setAttribute("marker-end", `url(#pca-${e.type === "loop" ? "loop" : "seq"})`);
+      if (e.label) { const tt = document.createElementNS("http://www.w3.org/2000/svg", "title"); tt.textContent = e.label; path.appendChild(tt); }
+      g2.appendChild(path);
     }
   });
+
+  // 칸 클릭 → 우하단 스텝 상세
+  canvas.querySelectorAll(".node[data-pp]").forEach((el) => {
+    el.addEventListener("click", (ev) => {
+      ev.stopPropagation();
+      canvas.querySelectorAll(".node.psel").forEach((x) => x.classList.remove("psel"));
+      el.classList.add("psel");
+      const { step, inst } = stepOf[el.dataset.pp];
+      showStepCard(step, inst);
+    });
+  });
+}
+
+function showStepCard(step, inst) {
+  $("#stepcard").hidden = false;
+  const gate = pinnedId ? nodeById[pinnedId] : null;
+  $("#step-body").innerHTML = `<h3>${step.id} · ${PTYPE_KO[step.type] ?? step.type} · ${step.stage}</h3>
+    <div class="sname">${step.name}</div>
+    <dl>
+      <dt>주체</dt><dd>${step.actor || "-"}</dd>
+      <dt>근거</dt><dd>${step.basis || "-"}</dd>
+      <dt>기한</dt><dd>${step.deadline || "조문상 명시 없음"}</dd>
+      <dt>제도</dt><dd><a class="tmpl" href="../../model/${inst.slug}/" target="_blank" rel="noopener">${inst.name}</a></dd>
+      ${gate ? `<dt>관문</dt><dd>${gate.id ?? pinnedId} ${gate.name}</dd>` : ""}
+    </dl>`;
 }
 
 function focusNode(id) {
