@@ -127,6 +127,16 @@ body.mode-pm #narration ol li::before { border-color: var(--gold); color: var(--
 }
 .node.sim .dot { background: var(--green); }
 .node .sigb { float: right; color: var(--cyan); font-size: 8px; letter-spacing: 0; }
+.node .sigb.k-r { color: var(--rose); }
+.node .sigb.k-d { color: var(--gold); }
+.chip.chip-sig.sel { color: #04121c; background: var(--cyan); border-color: var(--cyan); }
+#detail .sigsum { font-size: 10.5px; color: var(--gold); margin: 2px 0 4px; }
+#detail .siga .ktag { font-family: var(--mono); font-size: 9px; margin-right: 3px; }
+#detail .siga .ktag.k-progress { color: var(--green); }
+#detail .siga .ktag.k-risk { color: var(--rose); }
+#detail .siga .ktag.k-decision { color: var(--gold); }
+#detail .siga .ktag.k-context { color: var(--muted); }
+#detail .siga .src { font-family: var(--mono); font-size: 8px; color: var(--cyan); border: 1px solid rgba(56,198,244,0.4); border-radius: 3px; padding: 0 3px; margin-left: 3px; }
 #detail .siga { display: block; font-size: 10px; color: var(--text); text-decoration: none; padding: 2px 0; line-height: 1.35; }
 #detail .siga:hover { color: var(--cyan); }
 #detail .sighead { font-family: var(--mono); font-size: 9px; color: var(--cyan); letter-spacing: 0.1em; margin-bottom: 3px; }
@@ -452,7 +462,10 @@ const SCENARIOS = [
   ]},
   { id: "critical", label: "최장 사슬", critical: true },
   { id: "bottleneck", label: "병목 랭킹", bottleneck: true },
+  { id: "signals", label: "📡 신호", signals: true },
 ];
+const KIND_ICON = { progress: "▲", risk: "⚠", decision: "★", context: "·" };
+const KIND_KO = { progress: "진행", risk: "리스크", decision: "결정임박", context: "맥락" };
 
 const $ = (s) => document.querySelector(s);
 let DATA, nodeById = {}, fwd = {}, rev = {}, revHard = {}, fwdHard = {}, edgeEls = [], scale = 1;
@@ -500,7 +513,8 @@ function build() {
       const el = document.createElement("article");
       el.className = "node st-" + n.status; el.id = "nd-" + n.id;
       const sig = SIGNALS?.byGate?.[n.id];
-      el.innerHTML = `<div class="nid">${n.id} · ${(CLASS_KO[n.classification] || n.classification)}${sig ? `<span class="sigb">📡${sig.length}</span>` : ""}</div>
+      const sigCls = !sig ? "" : sig.some((a) => a.kind === "risk") ? " k-r" : sig.some((a) => a.kind === "decision") ? " k-d" : "";
+      el.innerHTML = `<div class="nid">${n.id} · ${(CLASS_KO[n.classification] || n.classification)}${sig ? `<span class="sigb${sigCls}">📡${sig.length}</span>` : ""}</div>
         <div class="nname">${n.name}</div>
         <div class="nmeta"><span class="dot"></span><span>${n.authority || "-"}</span><span style="margin-left:auto">${STATUS_KO[n.status]}</span></div>`;
       el.addEventListener("mouseenter", () => { if (!pinnedId) showDetail(n); });
@@ -517,7 +531,7 @@ function build() {
   const chips = $("#chips");
   for (const sc of SCENARIOS) {
     const b = document.createElement("button");
-    b.className = "chip" + (sc.risk ? " chip-risk" : "") + (sc.pmbrief ? " chip-pm" : "");
+    b.className = "chip" + (sc.risk ? " chip-risk" : "") + (sc.pmbrief ? " chip-pm" : "") + (sc.signals ? " chip-sig" : "");
     b.textContent = sc.label; b.dataset.id = sc.id;
     b.addEventListener("click", () => selectScenario(sc.id));
     chips.appendChild(b);
@@ -756,6 +770,24 @@ function render() {
     renderChainNarration(path, set);
     return;
   }
+  if (sc.signals) {
+    const byGate = SIGNALS?.byGate || {};
+    const cut = SIGNALS
+      ? new Date(Date.parse(SIGNALS.generatedAt) - 7 * 86400_000).toISOString().slice(0, 10)
+      : "";
+    const rows = Object.entries(byGate)
+      .map(([g, arr]) => ({
+        g, arr, latest: arr[0]?.pubDate ?? "",
+        recent: arr.filter((a) => a.pubDate >= cut).length,
+      }))
+      .filter((x) => x.recent > 0)
+      .sort((a, b) => b.latest.localeCompare(a.latest) || b.recent - a.recent);
+    set = new Set(rows.map((x) => x.g));
+    if (currentLevel) set = tierFilter(set);
+    applyHighlight(set, null, false, ext);
+    renderSignalNarration(rows.filter((x) => set.has(x.g)));
+    return;
+  }
   if (sc.bottleneck) {
     const top = blockers().filter((b) => b.blocked > 0).slice(0, 8);
     set = new Set(top.map((b) => b.id));
@@ -933,6 +965,26 @@ function renderChainNarration(path, set) {
   bindFlash(n);
 }
 
+function renderSignalNarration(rows) {
+  const n = $("#narr-body");
+  if (!SIGNALS) {
+    n.innerHTML = `<h3>📡 신호</h3><div class="free">신호 데이터가 없습니다 — <span class="mono">npm run collect:warroom-signals</span>로 수집하세요.</div>`;
+    return;
+  }
+  const items = rows.map((x) => {
+    const name = nodeById[x.g].name;
+    const sum = SIGNALS.gateSummary?.[x.g];
+    const kinds = [...new Set(x.arr.map((a) => a.kind))].map((k) => `<span style="color:var(--${k === "risk" ? "rose" : k === "decision" ? "gold" : k === "progress" ? "green" : "muted"})">${KIND_ICON[k]}</span>`).join("");
+    return `<li data-nodes="${x.g}">${name}${sum ? ` — <span style="color:var(--gold)">${sum}</span>` : ""}
+      <span class="mono" style="color:var(--muted);font-size:9px">${x.g} · ${x.latest.slice(5)} · ${x.arr.length}건 ${kinds}</span></li>`;
+  }).join("");
+  n.innerHTML = `<h3>📡 신호 — 최근 7일 움직임 ${rows.length}관문</h3>
+    <div class="free" style="margin-bottom:6px">언론·정책브리핑 신호 순 정렬(수집 ${SIGNALS.generatedAt}).
+    <span class="mono" style="font-size:9px">▲진행 ⚠리스크 ★결정임박 ·맥락 — 상태 확정 근거 아님</span></div>
+    <ol>${items}</ol>`;
+  bindFlash(n);
+}
+
 function renderBlockerNarration(top, set) {
   const n = $("#narr-body");
   const items = top.map((b) => {
@@ -1023,8 +1075,11 @@ function showDetail(n) {
     ${(() => {
       const sig = SIGNALS?.byGate?.[n.id];
       if (!sig) return "";
-      return `<div class="note"><div class="sighead">📡 언론 신호 · 최근 ${SIGNALS.windowDays}일 · 상태 확정 근거 아님</div>
-        ${sig.slice(0, 5).map((a) => `<a class="siga" href="${a.link}" target="_blank" rel="noopener">${a.pubDate.slice(5)} · ${a.title}</a>`).join("")}</div>`;
+      const sum = SIGNALS.gateSummary?.[n.id];
+      return `<div class="note"><div class="sighead">📡 언론·정부 신호 · 최근 ${SIGNALS.windowDays}일 · 상태 확정 근거 아님</div>
+        ${sum ? `<div class="sigsum">${sum}</div>` : ""}
+        ${sig.slice(0, 5).map((a) =>
+          `<a class="siga" href="${a.link}" target="_blank" rel="noopener" title="${KIND_KO[a.kind] || ""}"><span class="ktag k-${a.kind}">${KIND_ICON[a.kind] || "·"}</span>${a.pubDate.slice(5)} · ${a.title}${a.source ? `<span class="src">브리핑</span>` : ""}</a>`).join("")}</div>`;
     })()}`;
 }
 </script>

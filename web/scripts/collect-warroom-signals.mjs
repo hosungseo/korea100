@@ -1,20 +1,26 @@
 #!/usr/bin/env node
-// Collect news signals for warroom map gates via Naver News API.
+// Collect news signals for warroom map gates.
+// Sources: Naver News API (언론) + 정책브리핑 policyNewsList (정부 공식 보도).
+// Pipeline: per-gate queries -> mechanical filters -> claude -p judge
+// (relevance + kind classification + per-gate one-line summary).
 // Signals are hints only — gate status stays official-evidence-based
 // (워룸 정직성 규칙: 기사는 신호, 상태 확정은 공식 문서로).
-// Env: NAVER_CLIENT_ID / NAVER_CLIENT_SECRET (web/.env.local)
+// Env: NAVER_CLIENT_ID / NAVER_CLIENT_SECRET / POLICY_BRIEFING_SERVICE_KEY
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
+import { parsePolicyBriefingXml } from "./lib/news-candidates.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const outPath = join(root, "public/warroom/map/signals.json");
 
-for (const line of readFileSync(join(root, ".env.local"), "utf8").split("\n")) {
-  const m = line.match(/^(NAVER_CLIENT_ID|NAVER_CLIENT_SECRET)=(.*)$/);
-  if (m) process.env[m[1]] ??= m[2].trim();
-}
+try {
+  for (const line of readFileSync(join(root, ".env.local"), "utf8").split("\n")) {
+    const m = line.match(/^(NAVER_CLIENT_ID|NAVER_CLIENT_SECRET|POLICY_BRIEFING_SERVICE_KEY)=(.*)$/);
+    if (m) process.env[m[1]] ??= m[2].trim();
+  }
+} catch { /* env may come from the caller (launchd runner) */ }
 const clientId = process.env.NAVER_CLIENT_ID;
 const clientSecret = process.env.NAVER_CLIENT_SECRET;
 if (!clientId || !clientSecret) throw new Error("NAVER_CLIENT_ID / NAVER_CLIENT_SECRET required");
@@ -45,10 +51,11 @@ const MAX_AGE_DAYS = 30;
 const JUNK_TITLE = /주요\s*일정|라인업|오늘의\s*일정|일정\]|단체장.*일정|부고|인사\]/;
 const OTHER_REGION = /용인|평택|이천시|청주|오송|구미|천안|아산|새만금/;
 const OUR_REGION = /광주|호남|전남|무안|서남권/;
+
 const strip = (s) => s.replace(/<[^>]+>/g, "").replace(/&quot;/g, '"').replace(/&amp;/g, "&")
   .replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&#39;/g, "'");
 
-async function search(query) {
+async function searchNaver(query) {
   const url = `https://openapi.naver.com/v1/search/news.json?query=${encodeURIComponent(query)}&display=20&sort=date`;
   const res = await fetch(url, {
     headers: { "X-Naver-Client-Id": clientId, "X-Naver-Client-Secret": clientSecret },
@@ -57,12 +64,36 @@ async function search(query) {
   return (await res.json()).items ?? [];
 }
 
+// 정책브리핑(korea.kr) 보도자료 — 정부 공식 발표라 언론 기사보다 강한 신호
+async function fetchBriefings() {
+  const key = process.env.POLICY_BRIEFING_SERVICE_KEY;
+  if (!key) { console.warn("POLICY_BRIEFING_SERVICE_KEY 없음 — 정책브리핑 생략"); return []; }
+  const fmt = (d) => d.toISOString().slice(0, 10).replaceAll("-", "");
+  const out = [];
+  for (let off = 0; off < 15; off += 3) {
+    const end = new Date(Date.now() - off * 86400_000);
+    const start = new Date(end.getTime() - 2 * 86400_000);
+    const url = new URL("https://apis.data.go.kr/1371000/policyNewsService/policyNewsList");
+    url.search = new URLSearchParams({
+      serviceKey: key, startDate: fmt(start), endDate: fmt(end), numOfRows: "100", pageNo: "1",
+    }).toString();
+    try {
+      const xml = await (await fetch(url)).text();
+      out.push(...parsePolicyBriefingXml(xml, "정책브리핑"));
+    } catch (e) {
+      console.warn(`정책브리핑 ${fmt(start)}~${fmt(end)} 실패: ${e.message}`);
+    }
+    await new Promise((r) => setTimeout(r, 150));
+  }
+  return out;
+}
+
 const candidates = [];
 const seen = new Set();
 const cutoff = Date.now() - MAX_AGE_DAYS * 86400_000;
 
 for (const q of QUERIES) {
-  const items = await search(q.query);
+  const items = await searchNaver(q.query);
   for (const it of items) {
     const title = strip(it.title);
     const desc = strip(it.description ?? "");
@@ -76,33 +107,60 @@ for (const q of QUERIES) {
     if (seen.has(key)) continue;
     seen.add(key);
     candidates.push({
-      title, desc, gates: q.gates, query: q.query,
+      title, desc, gates: q.gates, query: q.query, source: "언론",
       link: it.originallink || it.link,
       pubDate: new Date(ts).toISOString().slice(0, 10),
     });
   }
   await new Promise((r) => setTimeout(r, 120));
 }
+const naverCount = candidates.length;
 
-// LLM relevance judge (claude -p) — drops other-project, politics-only and
-// human-interest items the keyword filters cannot. --no-judge to skip;
-// on any failure we keep the mechanical result rather than losing the run.
-let judged = candidates;
+for (const b of await fetchBriefings()) {
+  const blob = `${b.title} ${b.body}`;
+  if (!/광주|호남|전남|무안|군공항|서남권/.test(blob)) continue;
+  const gates = [...new Set(QUERIES.filter((q) => q.must.every((t) => blob.includes(t))).flatMap((q) => q.gates))];
+  if (!gates.length) continue;
+  const ts = Date.parse(b.publishedAt ?? "");
+  if (Number.isNaN(ts) || ts < cutoff) continue;
+  const key = b.title.slice(0, 40);
+  if (seen.has(key)) continue;
+  seen.add(key);
+  candidates.push({
+    title: b.title, desc: (b.body ?? "").slice(0, 160), gates, query: "정책브리핑",
+    source: "정책브리핑", link: b.url,
+    pubDate: new Date(ts).toISOString().slice(0, 10),
+  });
+}
+console.log(`후보: 언론 ${naverCount} + 정책브리핑 ${candidates.length - naverCount}`);
+
+// LLM judge: relevance filter + kind classification + per-gate summary.
+// --no-judge to skip; on failure we keep the mechanical result (kind=context).
+const KIND = { p: "progress", r: "risk", d: "decision", c: "context" };
+let judged = candidates.map((c) => ({ ...c, kind: "context" }));
+let gateSummary = {};
 if (!process.argv.includes("--no-judge") && candidates.length) {
   try {
-    const payload = candidates.map((c, i) => ({ i, q: c.query, t: c.title, d: c.desc.slice(0, 110) }));
+    const payload = candidates.map((c, i) => ({
+      i, g: c.gates.join(","), s: c.source, t: c.title, d: c.desc.slice(0, 110),
+    }));
     const prompt =
-      "광주 군공항 이전(전남 무안)·광주 반도체 클러스터 사업 상황판의 기사 필터다. " +
-      "각 항목의 q는 그 기사가 매칭된 관문 질의다. 이 사업의 해당 절차 진행·결정·지연·쟁점을 " +
-      "실질적으로 다루는 기사만 남겨라. 타지역 사업(용인 등), 단순 동정·행사·주식 시황, " +
-      "사업과 무관한 정치 공방은 버려라. 남길 항목의 i만 JSON 배열로 출력하라. 다른 텍스트 금지.\n" +
+      "광주 군공항 이전(전남 무안)·광주 반도체 클러스터 사업 상황판의 기사 판별기다. " +
+      "각 항목: i=번호, g=매칭된 관문 ID, s=출처(언론/정책브리핑), t=제목, d=요약. " +
+      "이 사업의 해당 절차 진행·결정·지연·쟁점을 실질적으로 다루는 항목만 남기고, " +
+      "타지역 사업(용인 등)·단순 동정·행사·주식 시황·무관한 정치 공방은 버려라. " +
+      "남긴 항목마다 종류를 붙여라: p=절차 진행·완료 신호, r=지연·갈등·반대 신호, " +
+      "d=결정·심의 임박 신호, c=맥락 참고. " +
+      "그리고 기사가 남은 관문마다 그 관문의 현재 상황을 25자 내외 한국어 한 줄로 요약하라. " +
+      'JSON 하나만 출력: {"keep":[[i,"p|r|d|c"],...],"sum":{"관문ID":"한 줄",...}}\n' +
       JSON.stringify(payload);
-    const out = execFileSync("claude", ["-p", prompt], { encoding: "utf8", timeout: 180_000 });
-    const m = out.match(/\[[\d,\s]*\]/);
-    if (!m) throw new Error("no JSON array in judge output");
-    const keep = new Set(JSON.parse(m[0]));
-    judged = candidates.filter((_, i) => keep.has(i));
-    console.log(`judge: ${candidates.length} -> ${judged.length}`);
+    const out = execFileSync("claude", ["-p", prompt], { encoding: "utf8", timeout: 240_000 });
+    const jsonText = out.slice(out.indexOf("{"), out.lastIndexOf("}") + 1);
+    const parsed = JSON.parse(jsonText);
+    const kindOf = new Map(parsed.keep.map(([i, k]) => [i, KIND[k] ?? "context"]));
+    judged = candidates.map((c, i) => (kindOf.has(i) ? { ...c, kind: kindOf.get(i) } : null)).filter(Boolean);
+    gateSummary = parsed.sum ?? {};
+    console.log(`judge: ${candidates.length} -> ${judged.length}, 요약 ${Object.keys(gateSummary).length}관문`);
   } catch (e) {
     console.warn(`judge skipped (${e.message}) — keeping mechanical result`);
   }
@@ -111,24 +169,29 @@ if (!process.argv.includes("--no-judge") && candidates.length) {
 const byGate = {};
 for (const c of judged) {
   for (const g of c.gates) {
-    (byGate[g] ||= []).push({ title: c.title, link: c.link, pubDate: c.pubDate });
+    (byGate[g] ||= []).push({
+      title: c.title, link: c.link, pubDate: c.pubDate, kind: c.kind,
+      ...(c.source === "정책브리핑" ? { source: c.source } : {}),
+    });
   }
 }
-const kept = judged.length;
-
+const KIND_RANK = { risk: 3, decision: 2, progress: 1, context: 0 };
 for (const g of Object.keys(byGate)) {
-  byGate[g].sort((a, b) => b.pubDate.localeCompare(a.pubDate));
+  byGate[g].sort((a, b) => b.pubDate.localeCompare(a.pubDate) || KIND_RANK[b.kind] - KIND_RANK[a.kind]);
   byGate[g] = byGate[g].slice(0, 8);
 }
 
 const data = {
   generatedAt: new Date().toISOString().slice(0, 10),
   windowDays: MAX_AGE_DAYS,
-  note: "네이버 뉴스 신호 — 관문 상태 확정 근거 아님(공식 문서로 확인 후 데이터 갱신)",
+  note: "언론·정책브리핑 신호 — 관문 상태 확정 근거 아님(공식 문서로 확인 후 데이터 갱신)",
+  gateSummary,
   byGate,
 };
 writeFileSync(outPath, `${JSON.stringify(data, null, 1)}\n`);
+const kindCount = {};
+for (const c of judged) kindCount[c.kind] = (kindCount[c.kind] ?? 0) + 1;
 console.log(
-  `warroom signals: ${kept} articles -> ${Object.keys(byGate).length} gates (${outPath})`,
+  `warroom signals: ${judged.length} articles -> ${Object.keys(byGate).length} gates`,
+  JSON.stringify(kindCount),
 );
-for (const [g, arr] of Object.entries(byGate)) console.log(` ${g}: ${arr.length}`);
