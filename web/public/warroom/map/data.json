@@ -1074,6 +1074,46 @@
    "confidence": "modeled",
    "note": "기사 신호로 발굴·등재(2026-08-28, 이슈 #139). 가동 차단 관문은 아니나 입주 경제성 좌우 — 전기의 공급약관 인가(전기사업법 §16)·전기위원회 심의 경로",
    "completedOn": ""
+  },
+  {
+   "id": "N53",
+   "name": "전력수급기본계획에 산단 수요·공급 전원 반영",
+   "stage": "G5",
+   "authority": "기후에너지환경부·전력정책심의회",
+   "lead": [
+    "기후에너지환경부"
+   ],
+   "decision": [
+    "전력정책심의회"
+   ],
+   "level": "committee",
+   "ministries": [],
+   "classification": "plan",
+   "status": "planned",
+   "confidence": "modeled",
+   "note": "기사 신호로 발굴·등재(2026-08-28, 이슈 #139 2차). 전력수급기본계획 수립(전기사업법 §25) — 수요전망·공청회·심의 경로. 반영 차수(11차 이후)와 전원 구성(LNG·SMR)은 확인 필요",
+   "completedOn": ""
+  },
+  {
+   "id": "N54",
+   "name": "노동쟁의 기준 시행지침 제정 — 투자 결정 쟁의 대상 여부",
+   "stage": "G7",
+   "authority": "고용노동부·청와대",
+   "lead": [
+    "고용노동부"
+   ],
+   "decision": [
+    "고용노동부"
+   ],
+   "level": "minister",
+   "ministries": [
+    "고용노동부"
+   ],
+   "classification": "policy",
+   "status": "planned",
+   "confidence": "modeled",
+   "note": "기사 신호로 발굴·등재(2026-08-28, 이슈 #139 2차). 노동조합법 개정 후속 행정지침 — 반도체 클러스터 투자 결정의 쟁의 대상 여부를 규정(청와대 2026-08-28 발표). 팹 투자·운영 리스크 직결, 입법예고·시행 시점 확인 필요",
+   "completedOn": ""
   }
  ],
  "edges": [
@@ -1477,6 +1517,13 @@
    "relation": "finish_to_start"
   },
   {
+   "from": "N53",
+   "to": "N21",
+   "kind": "policy",
+   "strength": "soft",
+   "relation": "finish_to_start"
+  },
+  {
    "from": "N19",
    "to": "N43",
    "kind": "technical",
@@ -1757,6 +1804,13 @@
    "relation": "finish_to_start"
   },
   {
+   "from": "N54",
+   "to": "N30",
+   "kind": "policy",
+   "strength": "soft",
+   "relation": "finish_to_start"
+  },
+  {
    "from": "N23",
    "to": "N50",
    "kind": "legal",
@@ -1774,6 +1828,13 @@
    "from": "N01",
    "to": "N52",
    "kind": "policy",
+   "strength": "soft",
+   "relation": "finish_to_start"
+  },
+  {
+   "from": "N18",
+   "to": "N53",
+   "kind": "technical",
    "strength": "soft",
    "relation": "finish_to_start"
   }

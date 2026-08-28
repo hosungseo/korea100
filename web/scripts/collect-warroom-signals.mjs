@@ -48,6 +48,8 @@ const QUERIES = [
   { query: "동복댐 증축", must: ["댐"], gates: ["N50"] },
   { query: "광주 군공항 임시 격납고", must: ["군공항"], gates: ["N51"] },
   { query: "지역별 차등 전기요금", must: ["전기"], gates: ["N52"] },
+  { query: "전력수급기본계획 반도체", must: ["전력수급"], gates: ["N53"] },
+  { query: "노란봉투법 시행지침 반도체", must: ["노란봉투"], gates: ["N54"] },
   { query: "광주 반도체 예비타당성 특례", must: ["반도체"], gates: ["N02", "N20"] },
 ];
 
