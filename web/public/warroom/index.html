@@ -498,6 +498,7 @@ body.daily-open #daily { display: block; }
       <a href="../mega-projects/gwangju-semiconductor-cluster/table/">전체표 TABLE</a>
       <a href="../halo/">헤일로 HALO</a>
       <a href="./board/">주체별 ACTORS</a>
+      <a id="map-link" href="./map/">관문 지도 MAP</a>
       <button id="daily-btn">▦ 오늘 DAILY</button>
       <button id="tour-btn">▸ 투어 TOUR</button>
     </div>
@@ -584,6 +585,10 @@ async function fetchJson(urls) {
 document.querySelector("#brand h1").innerHTML = `${PROJECT.short}<br /><em>종합상황판</em>`;
 document.getElementById("asof").textContent =
   `${PROJECT.name} · SITUATION BOARD · 기준일 ${AS_OF}`;
+{
+  const ml = document.getElementById("map-link");
+  if (ml && PID && PID !== "gwangju-semiconductor-cluster") ml.href = `./map/?p=${PID}`;
+}
 fetchJson(["./p/index.json"]).then((idx) => {
   if (!idx?.projects || idx.projects.length < 2) return;
   const sw = document.getElementById("proj-switch");

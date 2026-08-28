@@ -9,6 +9,7 @@
     "generate:process-images:all": "node scripts/generate-process-article-image.mjs --all",
     "generate:verification-queue": "node scripts/generate-field-verification-queue.mjs",
     "generate:warroom-map": "node scripts/generate-warroom-map-data.mjs",
+    "generate:warroom-map:all": "node scripts/generate-warroom-map-data.mjs && node scripts/generate-warroom-map-data.mjs five-poles-three-special",
     "generate:article-texts": "node scripts/generate-article-text-registry.mjs --write",
     "discover:candidates": "node scripts/discover-news-candidates.mjs",
     "check:freshness": "node scripts/sync-verification.mjs --check",
