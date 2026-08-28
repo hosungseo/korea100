@@ -118,7 +118,28 @@ function nodeMinistries(n) {
   return out;
 }
 
-const nodes = project.nodes.map((n) => ({
+// 역연결: 관문 templateRefs → 본판 제도(이름·절차 수)를 지도에 노출
+function templateInfo(refs) {
+  const out = [];
+  for (const ref of refs ?? []) {
+    try {
+      const inst = JSON.parse(
+        readFileSync(join(root, `data/institutions/${ref.institution}.json`), "utf8"),
+      );
+      const procs = Array.isArray(ref.nodeIds)
+        ? ref.nodeIds.length
+        : inst.process?.nodes?.length ?? 0;
+      out.push({ slug: ref.institution, name: inst.name, procs, mapping: ref.mappingStatus ?? "linked" });
+    } catch {
+      out.push({ slug: ref.institution, name: ref.institution, procs: 0, mapping: "missing" });
+    }
+  }
+  return out;
+}
+
+const nodes = project.nodes.map((n) => {
+  const templates = templateInfo(n.templateRefs);
+  return {
   id: n.id,
   name: n.name,
   stage: n.stage,
@@ -127,12 +148,15 @@ const nodes = project.nodes.map((n) => ({
   decision: n.actorRoles?.decision ?? [],
   level: nodeLevel(n),
   ministries: nodeMinistries(n),
+  templates,
+  procs: Math.max(1, templates.reduce((s, t) => s + t.procs, 0)),
   classification: n.classification ?? "",
   status: n.status ?? "planned",
   confidence: n.confidence ?? "",
   note: n.note ?? "",
   completedOn: n.actual?.completedOn ?? "",
-}));
+  };
+});
 
 const data = {
   meta: {
