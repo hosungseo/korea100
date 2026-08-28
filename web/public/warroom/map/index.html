@@ -707,7 +707,7 @@ function build() {
     if (!dragging) return;
     const w = Math.min(window.innerWidth - 560, Math.max(340, window.innerWidth - e.clientX - 4));
     panelEl.style.width = w + "px";
-    if (!dragRaf) dragRaf = requestAnimationFrame(() => { dragRaf = null; fit(); drawEdges(); });
+    if (!dragRaf) dragRaf = requestAnimationFrame(() => { dragRaf = null; fit(); drawEdges(); rescaleProcCanvas(); });
   });
   window.addEventListener("mouseup", () => {
     if (!dragging) return;
@@ -1163,7 +1163,7 @@ function renderProcMap(insts) {
   const cw = X0 * 2 + col * COLPITCH + 278;
   const ch = Math.max(maxBottom + 10, 200);
   const availW = body.clientWidth - 6;
-  const sc = Math.min(1, availW / cw);
+  const sc = Math.min(1.6, availW / cw);
   canvas.style.width = cw + "px";
   canvas.style.height = ch + "px";
   canvas.style.transform = `scale(${sc})`;
@@ -1216,6 +1216,18 @@ function renderProcMap(insts) {
       showStepCard(step, inst);
     });
   });
+}
+
+// 드래그 중 실시간: 재배치 없이 현재 캔버스를 패널 폭에 맞춰 배율만 추종
+function rescaleProcCanvas() {
+  const canvas = document.getElementById("proc-canvas");
+  if (!canvas) return;
+  const cw = parseFloat(canvas.style.width) || 0;
+  const ch = parseFloat(canvas.style.height) || 0;
+  if (!cw) return;
+  const sc = Math.min(1.6, ($("#proc-body").clientWidth - 6) / cw);
+  canvas.style.transform = `scale(${sc})`;
+  canvas.style.marginBottom = (-(ch * (1 - sc))) + "px";
 }
 
 function showStepCard(step, inst) {
