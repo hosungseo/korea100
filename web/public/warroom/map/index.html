@@ -157,7 +157,49 @@ body.wargame .node.on, body.wargame #edges path.e.on, body.wargame #edges path.e
   background: rgba(6,11,18,0.6);
   padding: 14px 16px 40px;
 }
-#proc-head { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; color: var(--cyan); padding-bottom: 8px; border-bottom: 1px solid rgba(56,198,244,0.15); }
+#proc-head {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; color: var(--cyan);
+  padding-bottom: 8px; border-bottom: 1px solid rgba(56,198,244,0.15);
+  display: flex; justify-content: space-between; align-items: center; gap: 8px;
+}
+#proc-view { display: flex; gap: 4px; }
+#proc-view button {
+  font-family: var(--mono); font-size: 9px; cursor: pointer; letter-spacing: 0.04em;
+  color: var(--muted); background: transparent;
+  border: 1px solid rgba(95,123,144,0.4); border-radius: 4px; padding: 2px 8px;
+}
+#proc-view button.on { color: #04121c; background: var(--cyan); border-color: var(--cyan); font-weight: 700; }
+/* 지도형(왼쪽과 같은 문법): 점선 스테이지 컨테이너 + 노드 카드 + 연결선 */
+.pgraph { position: relative; }
+.pgraph svg.pedges { position: absolute; inset: 0; overflow: visible; pointer-events: none; z-index: 1; }
+.pgroup {
+  position: relative; z-index: 2;
+  border: 1px dashed rgba(95,123,144,0.45); border-radius: 9px;
+  padding: 24px 10px 10px; margin-top: 12px;
+}
+.pgroup .pglabel {
+  position: absolute; top: 7px; left: 11px;
+  font-family: var(--mono); font-size: 8.5px; font-weight: 600;
+  letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase;
+}
+.pnode {
+  position: relative; z-index: 2;
+  background: var(--panel); border: 1px solid rgba(95,123,144,0.5);
+  border-radius: 7px; padding: 6px 9px 5px; margin-bottom: 9px;
+}
+.pnode:last-child { margin-bottom: 0; }
+.pnode .ppid { font-family: var(--mono); font-size: 8px; color: var(--muted); letter-spacing: 0.06em; }
+.pnode .ppnm { font-size: 11px; font-weight: 600; line-height: 1.3; margin: 1px 0; }
+.pnode .ppmt { font-family: var(--mono); font-size: 8px; color: var(--muted); }
+.pnode .ppmt .ddl { color: var(--amber); }
+.pnode .ppbs { font-family: var(--mono); font-size: 7.5px; color: rgba(95,123,144,0.85); margin-top: 1px; }
+.pnode.t-gateway { border-color: rgba(255,176,32,0.55); }
+.pnode.t-gateway .ppid { color: var(--amber); }
+.pnode.t-system { border-style: dotted; }
+.pedges path { fill: none; }
+.pedges path.p-sequence { stroke: rgba(56,198,244,0.5); stroke-width: 1.2; }
+.pedges path.p-message { stroke: rgba(56,198,244,0.4); stroke-width: 1.1; stroke-dasharray: 4 4; }
+.pedges path.p-loop { stroke: rgba(255,107,138,0.7); stroke-width: 1.2; stroke-dasharray: 5 4; }
 #proc-gate { margin-top: 10px; }
 #proc-gate .gname { font-size: 14px; font-weight: 700; line-height: 1.35; }
 #proc-gate .gmeta { font-family: var(--mono); font-size: 9.5px; color: var(--muted); margin-top: 3px; }
@@ -414,7 +456,8 @@ body.mode-risk #narration ol li::before { border-color: var(--rose); color: var(
 </div></div>
 
 <aside id="procpanel">
-  <div id="proc-head">관문 내부 절차 — N을 열어보는 창</div>
+  <div id="proc-head"><span>관문 내부 절차 — N을 열어보는 창</span>
+    <span id="proc-view"><button data-v="graph">지도형</button><button data-v="list">목록</button></span></div>
   <div id="proc-gate"></div>
   <div id="proc-body"><div class="proc-empty">왼쪽 지도에서 관문을 클릭하면<br/>그 안의 법정 절차 체인이 여기 열립니다.<br/><br/>왼쪽 = 사업 전체의 큰 그림(관문·의존)<br/>오른쪽 = 선택한 관문 내부의 절차 원형</div></div>
 </aside>
@@ -635,6 +678,14 @@ function build() {
   $("#zoom-out").addEventListener("click", () => zoom(userScale - 0.15));
   $("#zoom-fit").addEventListener("click", () => zoom(1));
   $("#wargame-btn").addEventListener("click", toggleWargame);
+  document.querySelectorAll("#proc-view button").forEach((b) => {
+    b.classList.toggle("on", b.dataset.v === procView);
+    b.addEventListener("click", () => {
+      procView = b.dataset.v;
+      document.querySelectorAll("#proc-view button").forEach((x) => x.classList.toggle("on", x.dataset.v === procView));
+      renderProcBody();
+    });
+  });
   $("#wg-reset").addEventListener("click", () => {
     sim.clear();
     document.querySelectorAll(".node.sim").forEach((el) => el.classList.remove("sim"));
@@ -988,10 +1039,27 @@ async function renderProcPanel(id) {
   }
   const insts = PROCS[id];
   if (!insts || !insts.length) {
+    lastProcInsts = null;
     body.innerHTML = `<div class="proc-empty">연결된 제도 모델이 없습니다 — 발굴 루프의 다음 후보.<br/>이 관문은 요약 1절차로 계상됩니다.</div>`;
     return;
   }
-  body.innerHTML = insts.map((inst) => {
+  lastProcInsts = insts;
+  renderProcBody();
+}
+
+let procView = "graph", lastProcInsts = null;
+const instHead = (inst) => `<div class="pinst-h">
+  <a href="../../model/${inst.slug}/" target="_blank" rel="noopener">${inst.name}</a>
+  <span class="mono">${inst.steps.length}단계${inst.mapping === "candidate" ? " · 후보매핑" : ""}</span></div>`;
+
+function renderProcBody() {
+  if (!lastProcInsts) return;
+  if (procView === "list") renderProcList(lastProcInsts);
+  else renderProcGraph(lastProcInsts);
+}
+
+function renderProcList(insts) {
+  $("#proc-body").innerHTML = insts.map((inst) => {
     let lastStage = null, i = 0;
     const rows = inst.steps.map((s) => {
       i++;
@@ -1003,10 +1071,74 @@ async function renderProcPanel(id) {
         <div class="pmeta">${s.actor}${s.deadline ? ` · <span class="ddl">⏱ ${s.deadline}</span>` : ""}</div>
         ${s.basis ? `<div class="pbasis">${s.basis}</div>` : ""}</div></div>`;
     }).join("");
-    return `<div class="pinst"><div class="pinst-h">
-      <a href="../../model/${inst.slug}/" target="_blank" rel="noopener">${inst.name}</a>
-      <span class="mono">${inst.steps.length}단계${inst.mapping === "candidate" ? " · 후보매핑" : ""}</span></div>${rows}</div>`;
+    return `<div class="pinst">${instHead(inst)}${rows}</div>`;
   }).join("");
+}
+
+// 지도형 — 왼쪽 지도와 같은 문법: 점선 스테이지 그룹 + 노드 카드 + 연결선
+const PTYPE_KO = { task: "절차", gateway: "게이트웨이", system: "시스템" };
+function renderProcGraph(insts) {
+  $("#proc-body").innerHTML = insts.map((inst, ii) => {
+    let lastStage = null;
+    const parts = [];
+    for (const s of inst.steps) {
+      if (s.stage !== lastStage) {
+        if (lastStage !== null) parts.push("</div>");
+        parts.push(`<div class="pgroup"><span class="pglabel">${s.stage}</span>`);
+        lastStage = s.stage;
+      }
+      parts.push(`<div class="pnode t-${s.type}" data-pp="${s.id}">
+        <div class="ppid">${s.id} · ${PTYPE_KO[s.type] ?? s.type}</div>
+        <div class="ppnm">${s.name}</div>
+        <div class="ppmt">${s.actor}${s.deadline ? ` · <span class="ddl">⏱ ${s.deadline}</span>` : ""}</div>
+        ${s.basis ? `<div class="ppbs">${s.basis}</div>` : ""}</div>`);
+    }
+    if (lastStage !== null) parts.push("</div>");
+    return `<div class="pinst">${instHead(inst)}
+      <div class="pgraph" data-pi="${ii}">
+        <svg class="pedges"><defs>
+          <marker id="ppa-${ii}-seq" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0 0.5 L7.5 4 L0 7.5 Z" fill="rgba(56,198,244,0.7)"/></marker>
+          <marker id="ppa-${ii}-loop" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0 0.5 L7.5 4 L0 7.5 Z" fill="rgba(255,107,138,0.8)"/></marker>
+        </defs><g></g></svg>${parts.join("")}</div></div>`;
+  }).join("");
+  requestAnimationFrame(() => insts.forEach((inst, ii) => drawPanelEdges(ii, inst)));
+}
+
+function drawPanelEdges(ii, inst) {
+  const wrap = document.querySelector(`.pgraph[data-pi="${ii}"]`);
+  if (!wrap) return;
+  const g = wrap.querySelector("svg.pedges g");
+  g.innerHTML = "";
+  const wr = wrap.getBoundingClientRect();
+  const pos = {};
+  wrap.querySelectorAll(".pnode").forEach((el) => {
+    const r = el.getBoundingClientRect();
+    pos[el.dataset.pp] = {
+      top: r.top - wr.top, bottom: r.bottom - wr.top,
+      left: r.left - wr.left, cx: r.left + r.width / 2 - wr.left,
+      cy: r.top + r.height / 2 - wr.top,
+    };
+  });
+  for (const e of inst.edges ?? []) {
+    const s = pos[e.s], t = pos[e.t];
+    if (!s || !t) continue;
+    let d;
+    if (t.top >= s.bottom && t.top - s.bottom < 60) {
+      const vh = Math.max(8, (t.top - s.bottom) * 0.6);
+      d = `M ${s.cx} ${s.bottom} C ${s.cx} ${s.bottom + vh}, ${t.cx} ${t.top - vh}, ${t.cx} ${t.top - 3}`;
+    } else {
+      const off = e.type === "loop" ? 26 : 18;
+      d = `M ${s.left} ${s.cy} C ${s.left - off} ${s.cy}, ${t.left - off} ${t.cy}, ${t.left - 3} ${t.cy}`;
+    }
+    const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    p.setAttribute("d", d);
+    p.setAttribute("class", `p-${e.type}`);
+    p.setAttribute("marker-end", `url(#ppa-${ii}-${e.type === "loop" ? "loop" : "seq"})`);
+    if (e.label) { const t2 = document.createElementNS("http://www.w3.org/2000/svg", "title"); t2.textContent = e.label; p.appendChild(t2); }
+    g.appendChild(p);
+  }
 }
 
 function focusNode(id) {
