@@ -286,11 +286,43 @@ for (const g of Object.keys(byGate)) {
   byGate[g] = byGate[g].slice(0, 8);
 }
 
+// 상태 변경 제안 — 최근 7일 신호 구성이 임계치를 넘으면 사람에게 상태
+// 재검토를 제안한다(자동 변경 아님 — 확정은 공식 문서로, 정직성 규칙)
+const gateStatus = Object.fromEntries(
+  JSON.parse(readFileSync(dataPath, "utf8")).nodes.map((n) => [n.id, { status: n.status, name: n.name }]),
+);
+const cut7 = new Date(Date.now() - 7 * 86400_000).toISOString().slice(0, 10);
+const statusSuggestions = [];
+for (const [g, arr] of Object.entries(byGate)) {
+  const info = gateStatus[g];
+  if (!info || info.status === "completed") continue;
+  const recent = arr.filter((a) => a.pubDate >= cut7);
+  const k = (kind) => recent.filter((a) => a.kind === kind).length;
+  let suggest = null, basis = "";
+  if ((info.status === "planned" || info.status === "unknown") &&
+      (k("progress") >= 2 || (k("decision") >= 1 && k("progress") >= 1))) {
+    suggest = "진행중(active) 전환 검토";
+    basis = `7일 내 진행 ${k("progress")} · 결정임박 ${k("decision")}`;
+  } else if (k("risk") >= 3) {
+    suggest = "리스크 점검";
+    basis = `7일 내 리스크 신호 ${k("risk")}건`;
+  }
+  if (suggest) {
+    statusSuggestions.push({
+      gate: g, name: info.name, current: info.status, suggest, basis,
+      latest: recent[0]?.pubDate ?? "", summary: gateSummary[g] ?? "",
+    });
+  }
+}
+statusSuggestions.sort((a, b) => b.latest.localeCompare(a.latest));
+console.log(`status-suggestions: ${statusSuggestions.length}`);
+
 const data = {
   generatedAt: new Date().toISOString().slice(0, 10),
   windowDays: MAX_AGE_DAYS,
   note: "언론·정책브리핑 신호 — 관문 상태 확정 근거 아님(공식 문서로 확인 후 데이터 갱신)",
   gateSummary,
+  statusSuggestions,
   byGate,
 };
 writeFileSync(outPath, `${JSON.stringify(data, null, 1)}\n`);

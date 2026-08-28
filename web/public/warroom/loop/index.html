@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>루프 상태판 — 기사→관문→제도 순환</title>
+<meta name="description" content="기사·정책브리핑에서 시작해 워룸 관문과 korea100 제도를 키우고 지도로 되돌아오는 자동 루프의 상태판." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg:#04070c; --panel:rgba(9,18,28,0.86); --line:rgba(56,198,244,0.22);
+  --text:#d7e6f2; --muted:#5f7b90; --amber:#ffb020; --gold:#ffd76a;
+  --cyan:#38c6f4; --green:#2ee6a8; --rose:#ff6b8a; --violet:#9d86f5;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --sans:"Apple SD Gothic Neo","Pretendard",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100%;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:13px;line-height:1.5}
+.mono{font-family:var(--mono)}
+a{color:inherit}
+#wrap{max-width:1240px;margin:0 auto;padding:20px 22px 60px}
+h1{font-size:22px;font-weight:800;letter-spacing:-0.02em}
+h1 em{font-style:normal;color:var(--cyan)}
+.sub{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.08em;margin-top:5px}
+#views{display:flex;gap:6px;margin-top:10px}
+#views a{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-decoration:none;padding:4px 10px;border:1px solid var(--line);color:var(--muted)}
+#views a.on{color:var(--gold);border-color:var(--gold)}
+#views a:hover{color:var(--cyan)}
+
+/* pipeline */
+#pipe{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-top:22px}
+.stage{border:1px solid var(--line);background:var(--panel);padding:13px 14px;position:relative}
+.stage .k{font-family:var(--mono);font-size:9px;letter-spacing:0.18em;color:var(--cyan)}
+.stage .v{font-family:var(--mono);font-size:26px;font-weight:700;margin-top:5px}
+.stage .v small{font-size:11px;color:var(--muted);font-weight:400}
+.stage .d{font-size:11px;color:var(--muted);margin-top:4px}
+.stage::after{content:"→";position:absolute;right:-13px;top:46%;color:var(--muted);font-size:14px;z-index:2}
+.stage:last-child::after{content:""}
+.stage.loopback{border-color:rgba(46,230,168,0.4)}
+.stage.loopback .k{color:var(--green)}
+
+.sec{margin-top:26px}
+.sec h2{font-family:var(--mono);font-size:10.5px;letter-spacing:0.2em;color:var(--cyan);padding-bottom:7px;border-bottom:1px solid var(--line)}
+.sec h2 span{color:var(--muted);letter-spacing:0.05em}
+
+/* suggestions */
+#sugs{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:9px;margin-top:12px}
+.sug{border:1px solid rgba(255,176,32,0.4);background:var(--panel);padding:11px 13px}
+.sug.risk{border-color:rgba(255,107,138,0.45)}
+.sug .g{font-family:var(--mono);font-size:10px;color:var(--muted)}
+.sug .n{font-weight:700;font-size:13px;margin-top:2px}
+.sug .s{margin-top:5px;font-size:12px;color:var(--gold)}
+.sug.risk .s{color:var(--rose)}
+.sug .b{font-family:var(--mono);font-size:9.5px;color:var(--muted);margin-top:3px}
+.sug .sum{font-size:11px;color:var(--text);margin-top:4px;opacity:0.85}
+.empty{color:var(--muted);font-size:12px;margin-top:12px}
+
+/* queues */
+#queues{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;margin-top:12px}
+.q{border:1px solid var(--line);background:var(--panel);padding:12px 14px}
+.q .t{font-weight:700}
+.q .row{display:flex;gap:14px;margin-top:7px;font-family:var(--mono);font-size:11px}
+.q .row b{font-size:18px}
+.q .p b{color:var(--amber)} .q .a b{color:var(--green)} .q .d b{color:var(--muted)}
+.q ul{margin:8px 0 0 0;list-style:none;font-size:11px;color:var(--muted)}
+.q ul li{padding:1px 0}
+.q a.iss{font-family:var(--mono);font-size:10px;color:var(--cyan);text-decoration:none}
+
+/* totals strip */
+#totals{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:12px}
+.tot{border:1px solid var(--line);background:var(--panel);padding:9px 11px}
+.tot .l{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;color:var(--muted)}
+.tot .v{font-family:var(--mono);font-size:21px;font-weight:700;margin-top:3px}
+.tot .v small{font-size:11px;color:var(--muted);font-weight:400}
+
+#how{margin-top:12px;border:1px dashed rgba(95,123,144,0.4);padding:12px 14px;font-size:11.5px;color:var(--muted)}
+#how b{color:var(--text)}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <h1>루프 상태판 <em>— 기사→관문→제도 순환</em></h1>
+  <div class="sub" id="asof">LOADING…</div>
+  <nav id="views">
+    <a href="../">워룸</a>
+    <a href="../map/">의존 지도</a>
+    <a href="../board/">주체별 상황판</a>
+    <a class="on" href="./">루프</a>
+  </nav>
+
+  <div id="pipe"></div>
+
+  <div class="sec">
+    <h2>상태 변경 제안 <span id="sug-count"></span> — 신호가 임계치를 넘은 관문 · 확정은 공식 문서로</h2>
+    <div id="sugs"></div>
+  </div>
+
+  <div class="sec">
+    <h2>검토 큐</h2>
+    <div id="queues"></div>
+  </div>
+
+  <div class="sec">
+    <h2>누계</h2>
+    <div id="totals"></div>
+    <div id="how">
+      <b>루프 한 사이클</b>: 매일 08:00 네이버·정책브리핑 수집 → claude 판별(신호 유형·요약·상태 제안) →
+      워룸 관문 후보·korea100 제도 후보 발굴 → 검토 이슈 갱신 → 사람이 근거 법령 확인 후 등재 →
+      templateRefs로 관문에 재주입(절차·CPM·주체 부하 재계산). 자동으로 바뀌는 것은 신호·후보·제안뿐,
+      <b>상태와 등재는 언제나 사람이 확정</b>합니다.
+    </div>
+  </div>
+</div>
+
+<script>
+const REPO = "https://github.com/hosungseo/korea100";
+fetch("./data.json").then((r) => r.json()).then((d) => {
+  const $ = (s) => document.querySelector(s);
+  $("#asof").textContent = `수집 ${d.generatedAt} · 매일 08:00 자동 갱신(launchd) · 상태·등재 확정은 사람`;
+
+  const p = d.pipeline;
+  const kindLine = ["progress","risk","decision","context"]
+    .filter((k) => p.signals.kinds[k])
+    .map((k) => `${{progress:"▲",risk:"⚠",decision:"★",context:"·"}[k]}${p.signals.kinds[k]}`).join(" ");
+  $("#pipe").innerHTML = [
+    ["수집·판별", `${p.signals.articles}<small>건</small>`, `${p.signals.gates}개 관문에 신호 · ${kindLine}`],
+    ["상태 제안", `${p.suggestions.length}<small>건</small>`, "신호 임계치 초과 관문"],
+    ["관문 후보", `${p.gateQueue.proposed}<small>대기</small>`, `등재 ${p.gateQueue.accepted} · 보류 ${p.gateQueue.deferred}`],
+    ["제도 후보", `${p.instQueue.proposed}<small>대기</small>`, `등재 ${p.instQueue.accepted} · 보류 ${p.instQueue.deferred}`],
+    ["재주입", `${d.totals.linkedGates}<small>/${d.totals.gates}</small>`, "제도 연결 관문 — 절차·CPM 반영", true],
+  ].map(([k, v, s, loop]) =>
+    `<div class="stage${loop ? " loopback" : ""}"><div class="k">${k}</div><div class="v">${v}</div><div class="d">${s}</div></div>`).join("");
+
+  const sugs = p.suggestions;
+  document.querySelector("#sug-count").textContent = `${sugs.length}건`;
+  $("#sugs").innerHTML = sugs.length ? sugs.map((s) =>
+    `<div class="sug${s.suggest.includes("리스크") ? " risk" : ""}">
+      <div class="g">${s.gate} · 현재 ${s.current} · 최신 ${s.latest}</div>
+      <div class="n">${s.name}</div>
+      <div class="s">→ ${s.suggest}</div>
+      <div class="b">${s.basis}</div>
+      ${s.summary ? `<div class="sum">${s.summary}</div>` : ""}
+    </div>`).join("")
+    : `<div class="empty">임계치를 넘은 관문이 없습니다.</div>`;
+
+  const ql = (arr) => arr.length
+    ? `<ul>${arr.slice(0, 5).map((x) => `<li>· ${x}</li>`).join("")}${arr.length > 5 ? `<li>외 ${arr.length - 5}건</li>` : ""}</ul>`
+    : `<ul><li>대기 없음</li></ul>`;
+  $("#queues").innerHTML = `
+    <div class="q"><div class="t">워룸 관문 후보 <a class="iss" href="${REPO}/issues/${d.issues.gate}" target="_blank" rel="noopener">이슈 #${d.issues.gate}</a></div>
+      <div class="row"><span class="p">대기 <b>${p.gateQueue.proposed}</b></span><span class="a">등재 <b>${p.gateQueue.accepted}</b></span><span class="d">보류 <b>${p.gateQueue.deferred}</b></span></div>
+      ${ql(d.pendingGates)}</div>
+    <div class="q"><div class="t">korea100 제도 후보 <a class="iss" href="${REPO}/issues/${d.issues.institution}" target="_blank" rel="noopener">이슈 #${d.issues.institution}</a></div>
+      <div class="row"><span class="p">대기 <b>${p.instQueue.proposed}</b></span><span class="a">등재 <b>${p.instQueue.accepted}</b></span><span class="d">보류 <b>${p.instQueue.deferred}</b></span></div>
+      ${ql(d.pendingInsts)}</div>`;
+
+  $("#totals").innerHTML = [
+    ["워룸 관문", d.totals.gates, "개"],
+    ["의존", d.totals.deps, "개"],
+    ["워룸 절차", d.totals.procs.toLocaleString(), ""],
+    ["제도(본판)", d.totals.institutions, "종"],
+    ["제도 연결 관문", `${d.totals.linkedGates}/${d.totals.gates}`, ""],
+  ].map(([l, v, u]) => `<div class="tot"><div class="l">${l}</div><div class="v">${v}<small>${u}</small></div></div>`).join("");
+});
+</script>
+</body>
+</html>
