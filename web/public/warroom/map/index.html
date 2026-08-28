@@ -140,6 +140,8 @@ body.mode-pm #narration ol li::before { border-color: var(--gold); color: var(--
 #detail .siga { display: block; font-size: 10px; color: var(--text); text-decoration: none; padding: 2px 0; line-height: 1.35; }
 #detail .siga:hover { color: var(--cyan); }
 #detail .sighead { font-family: var(--mono); font-size: 9px; color: var(--cyan); letter-spacing: 0.1em; margin-bottom: 3px; }
+#detail a.tmpl { color: var(--green); text-decoration: none; border-bottom: 1px dotted rgba(46,230,168,0.5); }
+#detail a.tmpl:hover { color: #7df0c4; }
 body.wargame .node { cursor: crosshair; }
 body.wargame .node.on, body.wargame #edges path.e.on, body.wargame #edges path.epulse.on {
   animation-delay: 0s, 0s;
@@ -1074,6 +1076,11 @@ function showDetail(n) {
       <dt>결정 급</dt><dd>${LEVEL_KO[n.level] || "-"}${(n.decision || []).length ? ` — ${n.decision.join(", ")}` : ""}</dd>
       <dt>상태</dt><dd>${STATUS_KO[n.status]}${n.completedOn ? ` (${n.completedOn})` : ""}</dd>
       <dt>의존</dt><dd>선행 ${up} · 후속 ${down}</dd>
+      <dt>절차</dt><dd>${n.procs ?? 1}개${(n.templates || []).length
+        ? ` — ` + n.templates.map((t) =>
+            `<a class="tmpl" href="../../model/${t.slug}/" target="_blank" rel="noopener" title="korea100 제도 모델로 이동">${t.name}</a><span class="mono" style="color:var(--muted);font-size:9px"> ${t.procs}</span>`
+          ).join(" · ")
+        : ` <span class="mono" style="color:var(--muted);font-size:9px">(제도 미연결)</span>`}</dd>
     </dl>
     ${n.note ? `<div class="note">${n.note}</div>` : ""}
     ${(() => {
