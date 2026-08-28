@@ -88,7 +88,7 @@ header .links a:hover { color: var(--cyan); border-color: var(--cyan); }
   0%, 100% { box-shadow: 0 0 5px rgba(255,215,106,0.15); }
   50% { box-shadow: 0 0 15px rgba(255,215,106,0.5); }
 }
-body.mode-pm .node.on {
+body.mode-pm #canvas .node.on {
   border-color: rgba(255,215,106,0.7);
   box-shadow: 0 0 0 1px rgba(255,215,106,0.45), 0 0 16px rgba(255,215,106,0.15);
 }
@@ -142,8 +142,8 @@ body.mode-pm #narration ol li::before { border-color: var(--gold); color: var(--
 #detail .sighead { font-family: var(--mono); font-size: 9px; color: var(--cyan); letter-spacing: 0.1em; margin-bottom: 3px; }
 #detail a.tmpl { color: var(--green); text-decoration: none; border-bottom: 1px dotted rgba(46,230,168,0.5); }
 #detail a.tmpl:hover { color: #7df0c4; }
-body.wargame .node { cursor: crosshair; }
-body.wargame .node.on, body.wargame #edges path.e.on, body.wargame #edges path.epulse.on {
+body.wargame #canvas .node { cursor: crosshair; }
+body.wargame #canvas .node.on, body.wargame #edges path.e.on, body.wargame #edges path.epulse.on {
   animation-delay: 0s, 0s;
 }
 
@@ -200,6 +200,30 @@ body.wargame .node.on, body.wargame #edges path.e.on, body.wargame #edges path.e
 .pedges path.p-sequence { stroke: rgba(56,198,244,0.5); stroke-width: 1.2; }
 .pedges path.p-message { stroke: rgba(56,198,244,0.4); stroke-width: 1.1; stroke-dasharray: 4 4; }
 .pedges path.p-loop { stroke: rgba(255,107,138,0.7); stroke-width: 1.2; stroke-dasharray: 5 4; }
+/* 전체 화면 절차 지도 — 본 지도와 같은 문법의 오버레이 */
+#procfull { position: fixed; inset: 0; z-index: 70; background: rgba(4,7,12,0.985); display: flex; flex-direction: column; }
+#procfull[hidden] { display: none; }
+#pf-head { display: flex; align-items: center; gap: 14px; padding: 11px 20px; border-bottom: 1px solid rgba(56,198,244,0.15); }
+#pf-back { font-family: var(--mono); font-size: 10px; cursor: pointer; color: var(--muted); background: transparent; border: 1px solid rgba(95,123,144,0.4); border-radius: 999px; padding: 4px 12px; }
+#pf-back:hover { color: var(--cyan); border-color: var(--cyan); }
+#pf-title { font-size: 14px; font-weight: 700; }
+#pf-title .mono { color: var(--muted); font-size: 10px; font-weight: 400; }
+#pf-viewport { flex: 1; overflow: auto; padding: 10px 0 40px; }
+#pf-canvas { position: relative; transform-origin: 0 0; }
+#pf-edges { position: absolute; inset: 0; overflow: visible; z-index: 1; }
+#pf-edges path { fill: none; }
+#pf-edges path.p-sequence { stroke: rgba(56,198,244,0.55); stroke-width: 1.3; }
+#pf-edges path.p-message { stroke: rgba(56,198,244,0.45); stroke-width: 1.2; stroke-dasharray: 4 4; }
+#pf-edges path.p-loop { stroke: rgba(255,107,138,0.75); stroke-width: 1.3; stroke-dasharray: 5 4; }
+#pf-canvas .node.t-gateway { border-color: rgba(255,176,32,0.55); }
+#pf-canvas .node.t-gateway .nid { color: var(--amber); }
+#pf-canvas .node.t-system { border-style: dotted; }
+#proc-expand {
+  font-family: var(--mono); font-size: 9px; cursor: pointer; letter-spacing: 0.04em;
+  color: var(--gold); background: transparent;
+  border: 1px solid rgba(255,215,106,0.5); border-radius: 4px; padding: 2px 8px;
+}
+#proc-expand:hover { color: #1a1204; background: var(--gold); }
 #proc-gate { margin-top: 10px; }
 #proc-gate .gname { font-size: 14px; font-weight: 700; line-height: 1.35; }
 #proc-gate .gmeta { font-family: var(--mono); font-size: 9.5px; color: var(--muted); margin-top: 3px; }
@@ -289,8 +313,8 @@ body.mode-pm #edges path.epulse.on { stroke: #fff3cf; }
   background: rgba(95,123,144,0.22); border-radius: 1px; overflow: hidden; display: flex;
 }
 .group .gprog i { display: block; height: 100%; }
-body.dimmed .group.on { border-color: rgba(255,176,32,0.4); }
-body.dimmed .group.on .glabel { color: var(--gold); }
+body.dimmed #canvas .group.on { border-color: rgba(255,176,32,0.4); }
+body.dimmed #canvas .group.on .glabel { color: var(--gold); }
 .nodes { display: flex; flex-direction: column; gap: 8px; }
 
 .node {
@@ -318,10 +342,10 @@ body.dimmed .group.on .glabel { color: var(--gold); }
 .node.st-unknown .dot { background: var(--rose); }
 @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,176,32,0.5); } 50% { box-shadow: 0 0 0 5px rgba(255,176,32,0); } }
 
-body.dimmed .node:not(.on):not(.ext) { opacity: 0.15; }
-body.dimmed .group:not(.on) { opacity: 0.35; }
+body.dimmed #canvas .node:not(.on):not(.ext) { opacity: 0.15; }
+body.dimmed #canvas .group:not(.on) { opacity: 0.35; }
 .node.on { box-shadow: 0 0 0 1px rgba(255,176,32,0.35), 0 0 14px rgba(255,176,32,0.12); }
-body.dimmed .node.ext { opacity: 0.62; border-style: dashed; border-color: rgba(255,176,32,0.55); }
+body.dimmed #canvas .node.ext { opacity: 0.62; border-style: dashed; border-color: rgba(255,176,32,0.55); }
 .node.on.target { border-color: var(--amber); box-shadow: 0 0 0 2px var(--amber), 0 0 20px rgba(255,176,32,0.35); }
 body.mode-risk .node.on { box-shadow: 0 0 0 2px var(--rose), 0 0 16px rgba(255,107,138,0.3); }
 .node.flash { border-color: var(--gold) !important; box-shadow: 0 0 0 2px var(--gold) !important; }
@@ -457,10 +481,25 @@ body.mode-risk #narration ol li::before { border-color: var(--rose); color: var(
 
 <aside id="procpanel">
   <div id="proc-head"><span>관문 내부 절차 — N을 열어보는 창</span>
-    <span id="proc-view"><button data-v="graph">지도형</button><button data-v="list">목록</button></span></div>
+    <span id="proc-view"><button id="proc-expand" title="본 지도와 같은 배치로 전체 화면">⤢ 펼치기</button><button data-v="graph">지도형</button><button data-v="list">목록</button></span></div>
   <div id="proc-gate"></div>
   <div id="proc-body"><div class="proc-empty">왼쪽 지도에서 관문을 클릭하면<br/>그 안의 법정 절차 체인이 여기 열립니다.<br/><br/>왼쪽 = 사업 전체의 큰 그림(관문·의존)<br/>오른쪽 = 선택한 관문 내부의 절차 원형</div></div>
 </aside>
+</div>
+
+<div id="procfull" hidden>
+  <div id="pf-head">
+    <button id="pf-back">← 관문 지도</button>
+    <div id="pf-title"></div>
+  </div>
+  <div id="pf-viewport"><div id="pf-canvas">
+    <svg id="pf-edges"><defs>
+      <marker id="pfa-seq" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M0 0.5 L7.5 4 L0 7.5 Z" fill="rgba(56,198,244,0.75)"/></marker>
+      <marker id="pfa-loop" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M0 0.5 L7.5 4 L0 7.5 Z" fill="rgba(255,107,138,0.85)"/></marker>
+    </defs><g id="pf-epaths"></g></svg>
+  </div></div>
 </div>
 
 <div id="cards-left">
@@ -678,14 +717,16 @@ function build() {
   $("#zoom-out").addEventListener("click", () => zoom(userScale - 0.15));
   $("#zoom-fit").addEventListener("click", () => zoom(1));
   $("#wargame-btn").addEventListener("click", toggleWargame);
-  document.querySelectorAll("#proc-view button").forEach((b) => {
+  document.querySelectorAll("#proc-view button[data-v]").forEach((b) => {
     b.classList.toggle("on", b.dataset.v === procView);
     b.addEventListener("click", () => {
       procView = b.dataset.v;
-      document.querySelectorAll("#proc-view button").forEach((x) => x.classList.toggle("on", x.dataset.v === procView));
+      document.querySelectorAll("#proc-view button[data-v]").forEach((x) => x.classList.toggle("on", x.dataset.v === procView));
       renderProcBody();
     });
   });
+  $("#proc-expand").addEventListener("click", openProcFull);
+  $("#pf-back").addEventListener("click", () => { $("#procfull").hidden = true; });
   $("#wg-reset").addEventListener("click", () => {
     sim.clear();
     document.querySelectorAll(".node.sim").forEach((el) => el.classList.remove("sim"));
@@ -693,6 +734,7 @@ function build() {
   });
   document.addEventListener("keydown", (e) => {
     if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+    if (e.key === "Escape" && !$("#procfull").hidden) { $("#procfull").hidden = true; return; }
     if (e.key === "Escape") { pinnedId = null; $("#detail").style.display = "none"; selectScenario(current); return; }
     if (e.key === "w" || e.key === "W") { toggleWargame(); return; }
     const idx = "123456789".indexOf(e.key);
@@ -1141,6 +1183,93 @@ function drawPanelEdges(ii, inst) {
   }
 }
 
+// ── 전체 화면 절차 지도: 본 지도와 같은 문법(열 배치 + 곡선 엣지 + 맞춤 배율) ──
+let pfGateId = null;
+function openProcFull() {
+  if (!lastProcInsts || !pinnedId) return;
+  pfGateId = pinnedId;
+  const n = nodeById[pfGateId];
+  $("#pf-title").innerHTML = `<span class="mono">${pfGateId}</span> ${n.name} — 내부 절차 지도
+    <span class="mono">· ${lastProcInsts.map((i) => `${i.name} ${i.steps.length}단계`).join(" · ")} · ESC 닫기</span>`;
+  const canvas = $("#pf-canvas");
+  canvas.querySelectorAll(".group").forEach((g) => g.remove());
+  canvas.style.transform = "scale(1)";
+  $("#procfull").hidden = false; // 측정 전에 표시 (hidden이면 offsetHeight=0)
+
+  const COLW = 338, X0 = 40, Y0 = 20, HBUDGET = 780, GAP = 16;
+  const multi = lastProcInsts.length > 1;
+  let col = 0, y = Y0, maxBottom = 0;
+  lastProcInsts.forEach((inst, ii) => {
+    const stages = [];
+    for (const s of inst.steps) {
+      if (!stages.length || stages[stages.length - 1].stage !== s.stage) stages.push({ stage: s.stage, steps: [] });
+      stages[stages.length - 1].steps.push(s);
+    }
+    for (const st of stages) {
+      const g = document.createElement("section");
+      g.className = "group";
+      g.innerHTML = `<span class="glabel">${multi ? inst.name.slice(0, 12) + " · " : ""}${st.stage}</span><span class="gcount">${st.steps.length}</span><div class="nodes">` +
+        st.steps.map((s) => `<article class="node t-${s.type}" data-pf="${ii}:${s.id}">
+          <div class="nid">${s.id} · ${PTYPE_KO[s.type] ?? s.type}</div>
+          <div class="nname">${s.name}</div>
+          <div class="nmeta"><span class="dot"></span><span>${s.actor}</span><span style="margin-left:auto">${s.deadline ? "⏱" + s.deadline : ""}</span></div>
+        </article>`).join("") + `</div>`;
+      canvas.appendChild(g);
+      const h = g.offsetHeight;
+      if (y > Y0 && y + h > HBUDGET) { col++; y = Y0; }
+      g.style.left = (X0 + col * COLW) + "px";
+      g.style.top = y + "px";
+      y += h + GAP;
+      maxBottom = Math.max(maxBottom, y);
+    }
+  });
+  const cw = X0 + (col + 1) * COLW + 20;
+  const ch = Math.max(maxBottom + 30, 400);
+  canvas.style.width = cw + "px";
+  canvas.style.height = ch + "px";
+  const vp = $("#pf-viewport");
+  const pfScale = Math.min(1, Math.max(0.5, (vp.clientWidth - 28) / cw));
+  canvas.style.transform = `scale(${pfScale})`;
+
+  // 엣지: 실측 좌표(배율 보정) 기반 — 본 지도와 같은 라우팅
+  const g2 = $("#pf-epaths");
+  g2.innerHTML = "";
+  const cr = canvas.getBoundingClientRect();
+  const pos = {};
+  canvas.querySelectorAll(".node[data-pf]").forEach((el) => {
+    const r = el.getBoundingClientRect();
+    pos[el.dataset.pf] = {
+      left: (r.left - cr.left) / pfScale, right: (r.right - cr.left) / pfScale,
+      top: (r.top - cr.top) / pfScale, bottom: (r.bottom - cr.top) / pfScale,
+      cx: (r.left + r.width / 2 - cr.left) / pfScale, cy: (r.top + r.height / 2 - cr.top) / pfScale,
+    };
+  });
+  lastProcInsts.forEach((inst, ii) => {
+    for (const e of inst.edges ?? []) {
+      const s = pos[`${ii}:${e.s}`], t = pos[`${ii}:${e.t}`];
+      if (!s || !t) continue;
+      let d;
+      const dx = t.left - s.right;
+      if (dx > 20) {
+        const h = Math.min(100, Math.max(30, dx * 0.5));
+        d = `M ${s.right} ${s.cy} C ${s.right + h} ${s.cy}, ${t.left - h} ${t.cy}, ${t.left - 4} ${t.cy}`;
+      } else if (t.top >= s.bottom && t.top - s.bottom < 60) {
+        const vh = Math.max(10, (t.top - s.bottom) * 0.6);
+        d = `M ${s.cx} ${s.bottom} C ${s.cx} ${s.bottom + vh}, ${t.cx} ${t.top - vh}, ${t.cx} ${t.top - 4}`;
+      } else {
+        const off = e.type === "loop" ? 30 : 24;
+        d = `M ${s.left} ${s.cy} C ${s.left - off} ${s.cy}, ${t.left - off} ${t.cy}, ${t.left - 4} ${t.cy}`;
+      }
+      const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      p.setAttribute("d", d);
+      p.setAttribute("class", `p-${e.type}`);
+      p.setAttribute("marker-end", `url(#pfa-${e.type === "loop" ? "loop" : "seq"})`);
+      if (e.label) { const tt = document.createElementNS("http://www.w3.org/2000/svg", "title"); tt.textContent = e.label; p.appendChild(tt); }
+      g2.appendChild(p);
+    }
+  });
+}
+
 function focusNode(id) {
   pinnedId = id;
   renderProcPanel(id);
@@ -1234,11 +1363,11 @@ function applyHighlight(set, target, risk, ext, pathEdges) {
   const members = dim ? new Set([...set, ...ext]) : new Set();
   const depth = dim ? cascadeDepths(members) : {};
   // strip then force reflow so the cascade replays on every selection
-  document.querySelectorAll(".node.on").forEach((el) => el.classList.remove("on"));
+  document.querySelectorAll("#canvas .node.on").forEach((el) => el.classList.remove("on"));
   for (const p of edgeEls) { p.classList.remove("on"); p._pulse.classList.remove("on"); }
   void document.body.offsetWidth;
   document.body.classList.toggle("dimmed", dim);
-  document.querySelectorAll(".node").forEach((el) => {
+  document.querySelectorAll("#canvas .node").forEach((el) => {
     const id = el.id.slice(3);
     el.classList.toggle("on", !!(dim && set.has(id)));
     el.classList.toggle("ext", !!(dim && ext.has(id)));
@@ -1246,7 +1375,7 @@ function applyHighlight(set, target, risk, ext, pathEdges) {
     if (dim && members.has(id)) el.style.setProperty("--d", depth[id] || 0);
     else el.style.removeProperty("--d");
   });
-  document.querySelectorAll(".group").forEach((el) => {
+  document.querySelectorAll("#canvas .group").forEach((el) => {
     const sid = el.id.slice(4);
     const has = dim && DATA.nodes.some((n) => n.stage === sid && set.has(n.id));
     el.classList.toggle("on", !!has);
