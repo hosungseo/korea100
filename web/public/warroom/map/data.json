@@ -1013,6 +1013,67 @@
    "confidence": "modeled",
    "note": "법정 가동 전 검사·등록을 마친 뒤 사업자가 품질·수율·고객승인 조건을 충족해 상업생산을 시작하는 프로젝트 내부 의사결정 단계 · 외국인투자·국가핵심기술·전략물자·주요정보통신기반시설 경로는 투자자·기술지정·수출품목·시설지정 사실이 확인될 때 확정",
    "completedOn": ""
+  },
+  {
+   "id": "N50",
+   "name": "신규 수원 확보 — 동복댐 증축·댐건설기본계획",
+   "stage": "G6",
+   "authority": "기후에너지환경부·한국수자원공사·전남광주시",
+   "lead": [
+    "기후에너지환경부"
+   ],
+   "decision": [
+    "기후에너지환경부"
+   ],
+   "level": "minister",
+   "ministries": [
+    "기후에너지환경부"
+   ],
+   "classification": "legal_gate",
+   "status": "planned",
+   "confidence": "modeled",
+   "note": "기사 신호로 발굴·등재(2026-08-28, 이슈 #139). 증설분(일 30만~65만t) 수원 확보 경로 — 댐건설기본계획 수립·고시(§11) 등 세부 절차와 대상 댐 확정은 확인 필요",
+   "completedOn": ""
+  },
+  {
+   "id": "N51",
+   "name": "공군 전력 임시 이전·대체 시설 확보(엄체호 등)",
+   "stage": "G1",
+   "authority": "국방부·공군",
+   "lead": [
+    "국방부"
+   ],
+   "decision": [
+    "국방부"
+   ],
+   "level": "minister",
+   "ministries": [
+    "국방부"
+   ],
+   "classification": "legal_gate",
+   "status": "planned",
+   "confidence": "modeled",
+   "note": "기사 신호로 발굴·등재(2026-08-28, 이슈 #139). 대체 군공항 준공 전 부지 조기 인도를 위한 기존 전력 임시 이전 — 국방·군사시설사업계획 승인(§4) 경로. 방호 수준·이전 기지 논쟁 진행 중",
+   "completedOn": ""
+  },
+  {
+   "id": "N52",
+   "name": "지역별 차등 전기요금 — 공급약관 변경 인가",
+   "stage": "G5",
+   "authority": "기후에너지환경부·한국전력·전기위원회",
+   "lead": [
+    "기후에너지환경부"
+   ],
+   "decision": [
+    "전기위원회"
+   ],
+   "level": "committee",
+   "ministries": [],
+   "classification": "policy",
+   "status": "planned",
+   "confidence": "modeled",
+   "note": "기사 신호로 발굴·등재(2026-08-28, 이슈 #139). 가동 차단 관문은 아니나 입주 경제성 좌우 — 전기의 공급약관 인가(전기사업법 §16)·전기위원회 심의 경로",
+   "completedOn": ""
   }
  ],
  "edges": [
@@ -1367,6 +1428,13 @@
    "relation": "finish_to_start"
   },
   {
+   "from": "N51",
+   "to": "N17",
+   "kind": "technical",
+   "strength": "soft",
+   "relation": "finish_to_start"
+  },
+  {
    "from": "N01",
    "to": "N18",
    "kind": "technical",
@@ -1427,6 +1495,13 @@
    "to": "N43",
    "kind": "legal",
    "strength": "hard",
+   "relation": "finish_to_start"
+  },
+  {
+   "from": "N52",
+   "to": "N43",
+   "kind": "financial",
+   "strength": "soft",
    "relation": "finish_to_start"
   },
   {
@@ -1497,6 +1572,13 @@
    "to": "N25",
    "kind": "legal",
    "strength": "hard",
+   "relation": "finish_to_start"
+  },
+  {
+   "from": "N50",
+   "to": "N25",
+   "kind": "technical",
+   "strength": "soft",
    "relation": "finish_to_start"
   },
   {
@@ -1672,6 +1754,27 @@
    "to": "N30",
    "kind": "technical",
    "strength": "hard",
+   "relation": "finish_to_start"
+  },
+  {
+   "from": "N23",
+   "to": "N50",
+   "kind": "legal",
+   "strength": "hard",
+   "relation": "finish_to_start"
+  },
+  {
+   "from": "N01",
+   "to": "N51",
+   "kind": "policy",
+   "strength": "hard",
+   "relation": "finish_to_start"
+  },
+  {
+   "from": "N01",
+   "to": "N52",
+   "kind": "policy",
+   "strength": "soft",
    "relation": "finish_to_start"
   }
  ]
