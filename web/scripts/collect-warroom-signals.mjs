@@ -45,6 +45,9 @@ const QUERIES = [
   { query: "광주 반도체 용수 공업용수", must: ["용수"], gates: ["N23", "N24"] },
   { query: "광주 반도체 팹 착공", must: ["반도체"], gates: ["N27", "N28"] },
   { query: "3대 메가프로젝트 반도체 추진", must: ["메가프로젝트"], gates: ["N02"] },
+  { query: "동복댐 증축", must: ["댐"], gates: ["N50"] },
+  { query: "광주 군공항 임시 격납고", must: ["군공항"], gates: ["N51"] },
+  { query: "지역별 차등 전기요금", must: ["전기"], gates: ["N52"] },
   { query: "광주 반도체 예비타당성 특례", must: ["반도체"], gates: ["N02", "N20"] },
 ];
 
