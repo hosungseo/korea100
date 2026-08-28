@@ -153,7 +153,6 @@ body.wargame #canvas .node.on, body.wargame #edges path.e.on, body.wargame #edge
 #procpanel {
   width: clamp(480px, 44vw, 900px); flex: none;
   position: sticky; top: 0; height: 100vh; overflow-y: auto;
-  border-left: 1px solid rgba(56,198,244,0.15);
   background: rgba(6,11,18,0.6);
   padding: 14px 16px 40px;
 }
@@ -249,7 +248,16 @@ body.wargame #canvas .node.on, body.wargame #edges path.e.on, body.wargame #edge
 .pmeta { font-family: var(--mono); font-size: 8.5px; color: var(--muted); margin-top: 1px; }
 .pmeta .ddl { color: var(--amber); }
 .pbasis { font-family: var(--mono); font-size: 8px; color: rgba(95,123,144,0.85); margin-top: 1px; }
-@media (max-width: 1100px) { #procpanel { display: none; } #zoomctl { right: 10px; } }
+#splitbar { flex: none; width: 7px; cursor: col-resize; position: relative; z-index: 6; }
+#splitbar::after {
+  content: ""; position: absolute; top: 0; bottom: 0; left: 3px; width: 1px;
+  background: rgba(56,198,244,0.25); transition: background 0.15s, width 0.15s;
+}
+#splitbar:hover::after, body.dragging #splitbar::after {
+  left: 2px; width: 3px; background: var(--cyan); box-shadow: 0 0 8px rgba(56,198,244,0.5);
+}
+body.dragging { cursor: col-resize; user-select: none; }
+@media (max-width: 1100px) { #procpanel, #splitbar { display: none; } #zoomctl { right: 10px; } }
 
 /* ── canvas ── */
 #canvas { position: relative; transform-origin: 0 0; }
@@ -477,6 +485,8 @@ body.mode-risk #narration ol li::before { border-color: var(--rose); color: var(
   </svg>
 </div></div>
 
+<div id="splitbar" title="드래그: 좌우 비율 조절 · 더블클릭: 초기화"></div>
+
 <aside id="procpanel">
   <div id="proc-head"><span>관문 내부 절차 — N을 열어보는 창</span><span class="mono" style="letter-spacing:0.04em">칸 클릭 = 상세</span></div>
   <div id="proc-gate"></div>
@@ -685,6 +695,31 @@ function build() {
     mchips.appendChild(b);
   }
 
+  // 좌우 스플리터 — 드래그 비율 조절(localStorage 유지), 더블클릭 초기화
+  const splitbar = $("#splitbar"), panelEl = $("#procpanel");
+  const savedW = localStorage.getItem("wr-panel-w");
+  if (savedW) panelEl.style.width = savedW + "px";
+  let dragging = false, dragRaf = null;
+  splitbar.addEventListener("mousedown", (e) => {
+    dragging = true; document.body.classList.add("dragging"); e.preventDefault();
+  });
+  window.addEventListener("mousemove", (e) => {
+    if (!dragging) return;
+    const w = Math.min(window.innerWidth - 560, Math.max(340, window.innerWidth - e.clientX - 4));
+    panelEl.style.width = w + "px";
+    if (!dragRaf) dragRaf = requestAnimationFrame(() => { dragRaf = null; fit(); drawEdges(); });
+  });
+  window.addEventListener("mouseup", () => {
+    if (!dragging) return;
+    dragging = false; document.body.classList.remove("dragging");
+    localStorage.setItem("wr-panel-w", panelEl.offsetWidth);
+    fit(); drawEdges(); renderProcBody();
+  });
+  splitbar.addEventListener("dblclick", () => {
+    localStorage.removeItem("wr-panel-w"); panelEl.style.width = "";
+    fit(); drawEdges(); renderProcBody();
+  });
+
   fit();
   drawEdges();
   // deep link: #view=<scenario>&level=<tier> restores a shared screen
@@ -766,6 +801,8 @@ function zoom(v) { userScale = Math.min(1.8, Math.max(0.5, v)); fit(); }
 function fit() {
   const pp = document.getElementById("procpanel");
   const panelW = window.innerWidth > 1100 && pp ? pp.offsetWidth + 18 : 0;
+  const zc = document.getElementById("zoomctl");
+  if (zc) zc.style.right = (panelW > 0 ? panelW - 4 : 10) + "px";
   const base = Math.min(1, Math.max(0.42, (window.innerWidth - 24 - panelW) / CANVAS_W));
   scale = base * userScale;
   const c = $("#canvas");
