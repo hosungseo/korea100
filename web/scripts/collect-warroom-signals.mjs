@@ -14,6 +14,9 @@ import { parsePolicyBriefingXml } from "./lib/news-candidates.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const outPath = join(root, "public/warroom/map/signals.json");
+const dataPath = join(root, "public/warroom/map/data.json");
+const candPath = join(root, "public/warroom/map/gate-candidates.json");
+const candMdPath = join(root, "public/warroom/map/gate-candidates.md");
 
 try {
   for (const line of readFileSync(join(root, ".env.local"), "utf8").split("\n")) {
@@ -175,6 +178,103 @@ for (const c of judged) {
     });
   }
 }
+// ── 신규 절차 후보 발굴 ──────────────────────────────────────────────
+// 관문 쿼리에 안 걸린 광역 기사에서 "지도에 없는 행정 절차"를 찾아
+// 후보 큐(gate-candidates.json)에 쌓는다. 후보는 지도에 반영되지 않으며
+// 사람이 근거 법령을 확인해 정식 관문으로 등재해야 한다(정직성 규칙).
+const DISCOVERY_QUERIES = [
+  "광주 반도체 클러스터", "광주 군공항 이전", "호남 반도체 산업단지", "광주 반도체 지원",
+];
+
+async function discoverCandidates() {
+  if (process.argv.includes("--no-judge")) return { added: 0 };
+  const gateList = JSON.parse(readFileSync(dataPath, "utf8")).nodes
+    .map((n) => `${n.id} ${n.name}`);
+  let prev = { candidates: [] };
+  try { prev = JSON.parse(readFileSync(candPath, "utf8")); } catch { /* first run */ }
+
+  const pool = [];
+  for (const q of DISCOVERY_QUERIES) {
+    for (const it of await searchNaver(q)) {
+      const title = strip(it.title);
+      const desc = strip(it.description ?? "");
+      const blob = title + " " + desc;
+      if (JUNK_TITLE.test(title)) continue;
+      if (!OUR_REGION.test(blob)) continue;
+      if (OTHER_REGION.test(blob) && !OUR_REGION.test(blob)) continue;
+      const ts = Date.parse(it.pubDate);
+      if (Number.isNaN(ts) || ts < cutoff) continue;
+      const key = title.slice(0, 40);
+      if (seen.has(key)) continue;
+      seen.add(key);
+      pool.push({
+        title, desc: desc.slice(0, 140),
+        link: it.originallink || it.link,
+        pubDate: new Date(ts).toISOString().slice(0, 10),
+      });
+    }
+    await new Promise((r) => setTimeout(r, 120));
+  }
+  if (!pool.length) return { added: 0 };
+
+  let added = 0;
+  try {
+    const prompt =
+      "광주 군공항 이전(전남 무안)·광주 반도체 클러스터 사업의 관문 지도 관리자다.\n" +
+      "기존 관문:\n" + gateList.join("\n") + "\n" +
+      "기존 후보: " + (prev.candidates.map((c) => c.proc).join(", ") || "없음") + "\n" +
+      "아래 기사들이 구체적으로 언급하는 행정 절차(인허가·심의·협약·계획 승인·지정 등) 중 " +
+      "기존 관문·기존 후보 어디에도 없는 것만 신규 후보로 제안하라. " +
+      "정치 공방·전망·일반 동정은 절차가 아니다. 확신 없으면 제안하지 마라.\n" +
+      'JSON만 출력: {"candidates":[{"proc":"절차명","stage":"G0~G7 추정","actors":"주체 추정",' +
+      '"basis":"근거 법령·제도 단서(모르면 확인 필요)","why":"한 줄 근거","refs":[기사 i 배열]}]}\n' +
+      JSON.stringify(pool.map((p, i) => ({ i, t: p.title, d: p.desc })));
+    const out = execFileSync("claude", ["-p", prompt], { encoding: "utf8", timeout: 240_000 });
+    const parsed = JSON.parse(out.slice(out.indexOf("{"), out.lastIndexOf("}") + 1));
+    const today = new Date().toISOString().slice(0, 10);
+    for (const c of parsed.candidates ?? []) {
+      if (!c.proc || prev.candidates.some((p) => p.proc === c.proc)) continue;
+      prev.candidates.push({
+        proc: c.proc, stage: c.stage ?? "?", actors: c.actors ?? "?",
+        basis: c.basis ?? "확인 필요", why: c.why ?? "", status: "proposed",
+        firstSeen: today,
+        articles: (c.refs ?? []).map((i) => pool[i]).filter(Boolean)
+          .map((p) => ({ title: p.title, link: p.link, pubDate: p.pubDate })),
+      });
+      added++;
+    }
+  } catch (e) {
+    console.warn(`discovery judge skipped (${e.message})`);
+    return { added: 0 };
+  }
+
+  prev.updatedAt = new Date().toISOString().slice(0, 10);
+  prev.note = "기사에서 발굴한 신규 절차 후보 — 근거 법령 확인 후 정식 관문으로 등재(지도 미반영)";
+  writeFileSync(candPath, `${JSON.stringify(prev, null, 1)}\n`);
+
+  const open = prev.candidates.filter((c) => c.status === "proposed");
+  const md = [
+    `# 워룸 관문 후보 검토 큐 (${prev.updatedAt})`,
+    "",
+    "기사에서 발굴한 **미검증 절차 후보**입니다. 근거 법령을 확인해 정식 관문으로",
+    "등재하거나 기각하세요(gate-candidates.json의 status를 accepted/rejected로).",
+    "",
+    ...open.map((c) => [
+      `## ${c.proc}`,
+      `- 추정 단계: ${c.stage} · 주체: ${c.actors}`,
+      `- 근거 단서: ${c.basis}`,
+      `- 제안 근거: ${c.why} (최초 ${c.firstSeen})`,
+      ...c.articles.slice(0, 3).map((a) => `- ${a.pubDate} [${a.title}](${a.link})`),
+      "",
+    ].join("\n")),
+  ].join("\n");
+  writeFileSync(candMdPath, md + "\n");
+  return { added, open: open.length };
+}
+
+const disc = await discoverCandidates();
+console.log(`new-candidates: ${disc.added}${disc.open != null ? ` (미처리 ${disc.open})` : ""}`);
+
 const KIND_RANK = { risk: 3, decision: 2, progress: 1, context: 0 };
 for (const g of Object.keys(byGate)) {
   byGate[g].sort((a, b) => b.pubDate.localeCompare(a.pubDate) || KIND_RANK[b.kind] - KIND_RANK[a.kind]);
