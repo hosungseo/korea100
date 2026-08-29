@@ -99,10 +99,28 @@
   .shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
   .caption{font-size:1.7vh;color:var(--faint);margin-top:1.2vh;font-weight:600}
 
-  /* video slide */
-  .vidwrap{margin-top:3vh;border-radius:14px;overflow:hidden;border:1px solid var(--border);
-    box-shadow:0 3vh 7vh -4vh rgba(11,20,16,.5);background:#000}
-  .vidwrap video{display:block;width:100%;max-height:74vh}
+  /* full-bleed video cut — no player chrome, no inset frame */
+  .slide.bleed{padding:0;background:#000;justify-content:center}
+  .slide.bleed video{
+    display:block;width:100%;height:100%;
+    object-fit:contain;background:#000;
+  }
+
+  /* two-column shot (허가/신고) — typography, not cards */
+  .pair-row{
+    display:grid;grid-template-columns:1fr 1fr;gap:8vw;margin-top:5.5vh;max-width:92vw;
+  }
+  .pair-col .k{font-size:1.8vh;font-weight:800;letter-spacing:.05em;color:var(--accent-dark)}
+  .pair-col.blue .k{color:var(--blue)}
+  .pair-col h3{font-size:4.4vh;font-weight:820;margin:.35em 0 .5em;letter-spacing:-.02em}
+  .pair-col p{font-size:2.2vh;color:var(--muted);line-height:1.5;word-break:keep-all}
+  .interrupt{
+    margin-top:6vh;padding-top:3.2vh;
+    border-top:.35vh solid var(--amber);
+    max-width:72ch;
+  }
+  .interrupt .k{font-size:1.8vh;font-weight:800;letter-spacing:.05em;color:var(--amber)}
+  .interrupt p{font-size:2.8vh;font-weight:650;margin-top:.55em;line-height:1.4}
 
   /* strike contrast (A5) */
   .contrast{margin-top:4.5vh;display:grid;gap:2.6vh}
@@ -139,10 +157,9 @@
   }
 
   /* chrome */
-  .progress{position:fixed;left:0;top:0;height:.6vh;background:var(--accent);z-index:9;transition:width .25s ease}
-  .counter{position:fixed;right:2.2vh;bottom:2vh;font-size:1.8vh;color:var(--faint);font-weight:700;z-index:9;font-variant-numeric:tabular-nums}
-  .brandtag{position:fixed;left:2.2vh;bottom:2vh;font-size:1.8vh;color:var(--faint);font-weight:700;z-index:9}
-  .hint{position:fixed;left:50%;transform:translateX(-50%);bottom:2vh;font-size:1.6vh;color:#87938d66;font-weight:600;z-index:9}
+  .progress{position:fixed;left:0;top:0;height:.4vh;background:var(--accent);z-index:9;transition:width .25s ease}
+  .progress.is-bleed{opacity:0}
+  .counter,.brandtag,.hint{display:none}
 </style>
 </head>
 <body>
@@ -152,9 +169,9 @@
   <section class="slide dark">
     <div class="eyebrow">국무총리 보고</div>
     <h1>법령을, 국민이 볼 수 있는<br><span class="accent">구조도</span>로 만들었습니다.</h1>
-    <p class="lead">제도100 — AI로 그린 대한민국 제도 지도 586개.<br>그리고 그 지도로 세어 본, 반도체 클러스터 행정절차 <b>1,281개</b>.</p>
+    <p class="lead">제도100 — AI로 그린 대한민국 제도 지도.</p>
     <div class="title-foot">
-      <span><b>서호성</b> · 행정안전부 혁신기획과</span>
+      <span><b>서호성</b> · 참여혁신조직실 참여혁신국 혁신기획과</span>
       <span>2026. 9. 2.</span>
     </div>
   </section>
@@ -163,10 +180,21 @@
   <section class="slide">
     <div class="eyebrow">행정은 어렵습니다</div>
     <h2>허가와 신고의 차이를,<br>아는 사람이 얼마나 될까요.</h2>
-    <div class="cards">
-      <div class="card green"><div class="cn">허가</div><h3>풀어주는 것</h3><p>원래 하면 <b>안 되는</b> 일을, 행정청이 "해도 된다"고 풀어주는 것.</p></div>
-      <div class="card blue"><div class="cn">신고</div><h3>알리는 것</h3><p>원래 해도 <b>되는</b> 일을, "한다"고 알리는 것.</p></div>
-      <div class="card amber"><div class="cn">그런데</div><h3>수리를 요하는 신고</h3><p>어떤 신고는 행정청이 <b>'수리'</b>해야 효력이 생깁니다. 행정법을 공부하기 전까지는 알기 어렵습니다.</p></div>
+    <div class="pair-row">
+      <div class="pair-col">
+        <div class="k">허가</div>
+        <h3>풀어주는 것</h3>
+        <p>원래 하면 <b>안 되는</b> 일을, 행정청이 "해도 된다"고 풀어주는 것.</p>
+      </div>
+      <div class="pair-col blue">
+        <div class="k">신고</div>
+        <h3>알리는 것</h3>
+        <p>원래 해도 <b>되는</b> 일을, "한다"고 알리는 것.</p>
+      </div>
+    </div>
+    <div class="interrupt">
+      <div class="k">수리를 요하는 신고</div>
+      <p>어떤 신고는 행정청이 <b>'수리'</b>해야 효력이 생깁니다.</p>
     </div>
   </section>
 
@@ -195,13 +223,9 @@
     </p>
   </section>
 
-  <!-- 5 · A4 그래서 만들어봤습니다 + 영상 -->
-  <section class="slide">
-    <div class="eyebrow">그래서 만들어봤습니다</div>
-    <div class="vidwrap">
-      <video src="assets/lawmorph.mp4" controls playsinline preload="auto"></video>
-    </div>
-    <p class="caption">행정 리터러시 → 법령→구조도 → 제도 586 → 반도체 1,281 → AX 실사례 3건 → 우수사례 심층분석 (실데이터 · 3분 10초 · 해설 음성 + 배경음악)</p>
+  <!-- 5 · A4 lawmorph 풀블리드 컷 -->
+  <section class="slide bleed">
+    <video src="assets/lawmorph.mp4" playsinline preload="auto"></video>
   </section>
 
   <!-- 6 · A5 AI로 행정 리터러시 -->
@@ -255,10 +279,10 @@
     </div>
   </section>
 
-  <!-- 10 · S6 결과 -->
+  <!-- 10 · S6 결과 숫자 -->
   <section class="slide">
     <div class="eyebrow">결과</div>
-    <div class="stats" style="margin-top:1vh">
+    <div class="stats" style="margin-top:2vh">
       <div class="stat"><div class="n">8</div><div class="l">게이트</div></div>
       <div class="stat"><div class="n">49</div><div class="l">마일스톤</div></div>
       <div class="stat"><div class="n">103</div><div class="l">법정 제도</div></div>
@@ -266,10 +290,11 @@
       <div class="stat"><div class="n">23</div><div class="l">주체</div></div>
       <div class="stat"><div class="n">72</div><div class="l">주체 간 인계</div></div>
     </div>
-    <div class="vidwrap" style="margin-top:3vh">
-      <video src="assets/s6-live.mp4" poster="assets/shot-table.png" controls muted playsinline preload="auto" style="max-height:56vh"></video>
-    </div>
-    <p class="caption">실물 화면 — 전경 포스터 → 전체표 1,281행 → 주체별 종합상황판 (공개 웹 녹화 · 45초 · 무음)</p>
+  </section>
+
+  <!-- 11 · S6 실물 화면 풀블리드 컷 -->
+  <section class="slide bleed">
+    <video src="assets/s6-live.mp4" poster="assets/shot-table.png" muted playsinline preload="auto"></video>
   </section>
 
   <!-- 11 · S7 시간 축 -->
@@ -316,7 +341,7 @@
       행정을 국민의 언어로 — <b>AI로 행정 리터러시</b>를 높이는 일, 계속하겠습니다.
     </p>
     <div class="title-foot">
-      <span><b>감사합니다.</b> · 서호성 · 행정안전부 혁신기획과</span>
+      <span><b>감사합니다.</b> · 서호성 · 참여혁신조직실 참여혁신국 혁신기획과</span>
       <span>제도100 · 대한민국 제도 지도</span>
     </div>
   </section>
@@ -324,28 +349,35 @@
 </div>
 
 <div class="progress" id="progress"></div>
-<div class="counter" id="counter">1 / 14</div>
-<div class="brandtag">제도100 · 국무총리 보고</div>
-<div class="hint">← → 또는 Space 로 이동 · F 전체화면</div>
 
 <script>
   const slides = Array.from(document.querySelectorAll('.slide'));
   const progress = document.getElementById('progress');
-  const counter = document.getElementById('counter');
   let i = 0;
   function show(n){
     i = Math.max(0, Math.min(slides.length-1, n));
     slides.forEach((s,k)=>s.classList.toggle('active', k===i));
     progress.style.width = ((i+1)/slides.length*100) + '%';
-    counter.textContent = (i+1) + ' / ' + slides.length;
-    const dark = slides[i].classList.contains('dark');
-    counter.style.color = dark ? '#7d928a' : '';
-    // pause the video when leaving its slide
-    document.querySelectorAll('video').forEach(v=>{ if(!slides[i].contains(v)) v.pause(); });
+    progress.classList.toggle('is-bleed', slides[i].classList.contains('bleed'));
+    document.querySelectorAll('video').forEach(v=>{
+      if (slides[i].contains(v)) {
+        const play = () => v.play().catch(()=>{});
+        if (v.readyState >= 2) play();
+        else v.addEventListener('canplay', play, {once:true});
+      } else {
+        v.pause();
+      }
+    });
   }
   function next(){ show(i+1) }
   function prev(){ show(i-1) }
   document.addEventListener('keydown', e=>{
+    if(e.key===' ' && slides[i].classList.contains('bleed')){
+      e.preventDefault();
+      const v = slides[i].querySelector('video');
+      if(v){ v.paused ? v.play().catch(()=>{}) : v.pause(); }
+      return;
+    }
     if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){ e.preventDefault(); next(); }
     else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){ e.preventDefault(); prev(); }
     else if(e.key==='Home'){ show(0); }
@@ -353,7 +385,6 @@
     else if(e.key==='f'||e.key==='F'){ if(!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen(); }
   });
   document.getElementById('deck').addEventListener('click', e=>{
-    if(e.target.closest('video')) return; // don't navigate when using video controls
     if(e.clientX < window.innerWidth*0.25) prev(); else next();
   });
   show(0);

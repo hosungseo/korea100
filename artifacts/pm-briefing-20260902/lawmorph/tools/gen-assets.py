@@ -85,6 +85,31 @@ cases = [
             '전보 후임자의 업무 파악', '전임자 머릿속에 있던 그림을 복원'),
 ]
 
+# ---------- 1.5 data.js : EIA swimlane + institution registry ----------
+def build_k100():
+    d = jload(f'{W}/institutions/environmental-impact-assessment.json')
+    p = d['process']
+    lanes = [l.replace('/', '·') for l in p['lanes']]
+    stages = [s.split(' ', 1) for s in p['stages']]
+    nodes = []
+    for n in p['nodes']:
+        lb = n.get('legal_basis') or []
+        nodes.append({'id': n['id'], 'lane': p['lanes'].index(n['lane']),
+                      'stage': p['stages'].index(n['stage']), 'name': n['name'],
+                      'basis': lb[0]['article'] if lb else ''})
+    edges = [{'s': e['source'], 't': e['target'], 'type': e['type']}
+             for e in p['edges']]
+    files = sorted(glob.glob(f'{W}/institutions/*.json'))
+    names = []
+    for fp in files:
+        names.append(jload(fp)['name'])
+    # 타일은 장식용 배경 — 길면 옆 타일을 침범하므로 표시용으로 자른다
+    tile_names = [n if len(n) <= 13 else n[:12] + '…' for n in names[:60]]
+    return {'lanes': lanes, 'stages': stages, 'nodes': nodes, 'edges': edges,
+            'instNames': tile_names, 'instCount': len(files)}
+
+k100 = build_k100()
+
 # ---------- 2. montage : two more institutions, same method ----------
 def mini(slug):
     d = jload(f'{W}/institutions/{slug}.json'); p = d['process']
@@ -99,7 +124,34 @@ def mini(slug):
             'gates': [s.split(' ', 1)[1] if ' ' in s else s for s in stages],
             'nodes': nodes, 'count': len(p['nodes'])}
 
-montage = [mini('basic-livelihood-security'), mini('building-permit')]
+# 샘플2·3: 소상공인 정책자금(중기부) · 공장설립승인(반도체 클러스터 조성 관련).
+# 각 샘플은 환경영향평가처럼 '법령 원문 → 구조도' 2비트로 보여주므로 조문 원문을 붙인다.
+# 원문은 tools/fetch-laws.py 가 law.go.kr DRF 에서 받아 둔 캐시(assets/laws.json)만 읽는다.
+LAWS = jload(f'{OUT}/laws.json')
+
+
+def strip_rev(t):
+    return re.sub(r'\s*<개정[^>]*>\s*', ' ', t).strip()
+
+
+def law_block(law_name, art_no, markers):
+    """markers: 'main'=조문 첫 문장, 그 외에는 문단 접두어(①, 2. 등) 일치."""
+    law = next(l for l in LAWS if l['name'] == law_name)
+    art = next(a for a in law['articles'] if a['article'] == art_no)
+    paras = []
+    for mk in markers:
+        if mk == 'main':
+            paras.append(strip_rev(art['paragraphs'][0]))
+        else:
+            paras.append(strip_rev(next(
+                p for p in art['paragraphs'] if p.startswith(mk))))
+    return {'law': law_name, 'article': art['article'], 'title': art['title'],
+            'effective': law['effective'], 'paras': paras}
+
+
+montage = [mini('small-business-policy-fund'), mini('factory-establishment')]
+montage[0]['law'] = law_block('소상공인 보호 및 지원에 관한 법률', '제9조', ['main', '2.', '6.'])
+montage[1]['law'] = law_block('산업집적활성화 및 공장설립에 관한 법률', '제13조', ['①', '④'])
 
 # ---------- 3. mega detail : how 1,281 was counted ----------
 mp = jload(f'{W}/mega-projects/projects/gwangju-semiconductor-cluster.json')
@@ -116,16 +168,51 @@ mega_detail = {'milestone': node['name'], 'authority': node['authority'],
                'stage': next(s['label'] for s in mp['stages'] if s['id'] == node['stage']),
                'procs': detail[:12], 'instCount': len(node['templateRefs'])}
 
+# ---------- 3.5 mega stats : 한 판 전체 수치 (전부 소스에서 계산) ----------
+mega_insts, mega_procs = set(), 0
+for n in mp['nodes']:
+    for ref in n.get('templateRefs') or []:
+        mega_insts.add(ref['institution'])
+        inst = jload(f"{W}/institutions/{ref['institution']}.json")
+        want = set(ref.get('nodeIds') or [])
+        mega_procs += sum(1 for pn in inst['process']['nodes']
+                          if not want or pn['id'] in want)
+wm = jload(os.path.expanduser('~/korea100/web/public/warroom/map/data.json'))
+rev_hard = collections.defaultdict(list)
+for e in wm['edges']:
+    if e.get('strength') == 'hard':
+        rev_hard[e['to']].append(e['from'])
+wst = {n['id']: n['status'] for n in wm['nodes']}
+n_done = sum(1 for n in wm['nodes'] if n['status'] == 'completed')
+n_live = sum(1 for n in wm['nodes'] if n['status'] == 'active')
+n_unk = sum(1 for n in wm['nodes'] if n['status'] == 'unknown')
+frontier = sum(1 for n in wm['nodes'] if n['status'] == 'planned'
+               and all(wst.get(u) == 'completed' for u in rev_hard[n['id']]))
+n_wait = sum(1 for n in wm['nodes'] if n['status'] == 'planned') - frontier
+mega_stats = {
+    'gates': len(mp['stages']), 'milestones': len(mp['nodes']),
+    'institutions': len(mega_insts), 'procs': mega_procs,
+    'done': n_done, 'live': n_live, 'frontier': frontier, 'unknown': n_unk,
+    'waiting': n_wait,
+    # 루프 성장 전/후 (2026-08-26 영상 초판 시점 값은 당시 소스 스냅샷 실측)
+    'loopBefore': {'milestones': 49, 'institutions': 586, 'procs': 1281},
+}
+
 # ---------- write ----------
 os.makedirs(OUT, exist_ok=True)
+with open(f'{OUT}/data.js', 'w') as f:
+    f.write('window.K100 = ' + json.dumps(k100, ensure_ascii=False) + ';\n')
 with open(f'{OUT}/cases.js', 'w') as f:
     f.write('window.CASES = ' + json.dumps(cases, ensure_ascii=False) + ';\n')
 with open(f'{OUT}/montage.js', 'w') as f:
     f.write('window.MONTAGE = ' + json.dumps(montage, ensure_ascii=False) + ';\n')
 with open(f'{OUT}/megadetail.js', 'w') as f:
     f.write('window.MEGADETAIL = ' + json.dumps(mega_detail, ensure_ascii=False) + ';\n')
+with open(f'{OUT}/megastats.js', 'w') as f:
+    f.write('window.MEGASTATS = ' + json.dumps(mega_stats, ensure_ascii=False) + ';\n')
 
 for c in cases:
     print(f"{c['slug']}: lanes {len(c['lanes'])} gates {len(c['gates'])} asis {len(c['asis'])} autos {len(c['autos'])} calls {len(c['calls'])} | {c['result']}")
-for m in montage: print(f"montage {m['name']}: {m['count']} nodes, {len(m['lanes'])} lanes x {len(m['gates'])} gates")
+print(f"k100: {len(k100['nodes'])} EIA nodes, {len(k100['edges'])} edges, instCount {k100['instCount']}, instNames {len(k100['instNames'])}")
+for m in montage: print(f"montage {m['name']}: {m['count']} nodes, {len(m['lanes'])} lanes x {len(m['gates'])} gates | {m['law']['law']} {m['law']['article']}({m['law']['title']}) paras {len(m['law']['paras'])}")
 print('megadetail:', mega_detail['milestone'], '|', len(mega_detail['procs']), 'procs |', mega_detail['stage'])

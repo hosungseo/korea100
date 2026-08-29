@@ -16,20 +16,26 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'index.html')
 OUTDIR = os.environ.get('HF_CHAPTER_DIR', '/private/tmp/lawmorph-chapters')
 
-# (챕터키, 길이, 이 챕터에 속한 클립 id들)  — 순서가 곧 이어붙일 순서
+# (챕터키, 길이, 이 챕터에 속한 클립 id들, 자막 번호)  — 순서가 곧 이어붙일 순서
 CHAPTERS = [
-    ('intro', 32.2, ['stage-intro', 'c1-terms'], [1, 2, 3, 4, 5]),
-    ('doc',   14.2, ['stage-doc']      ,    [6, 7]),
-    ('map',   16.0, ['stage-map'],               [8]),
-    ('mont',   8.4, ['stage-mont'],              [9]),
-    ('reg',    9.0, ['stage-reg'],               [10]),
-    ('track',  9.0, ['stage-track'],             [11]),
-    ('mega',  16.0, ['stage-mega'],              [12, 13]),
-    ('zoom',  11.0, ['stage-zoom'],              [14]),
-    ('ax1',   22.6, ['stage-ax1'],              [15, 16, 17]),
-    ('ax2',   25.0, ['stage-ax2'],              [18, 19]),
-    ('ax3',   14.0, ['stage-ax3'],              [20]),
-    ('close', 12.6, ['stage-close'],             [21]),
+    ('open',   4.6, ['stage-open'],                               []),
+    ('intro', 35.6, ['stage-intro', 'c1-terms'],                  [1, 2, 3, 4]),
+    ('doc',   14.2, ['stage-doc'],                                [5, 6]),
+    ('map',   16.0, ['stage-map'],                                [7]),
+    ('mont',  19.0, ['stage-mont'],                               [8, 9]),
+    ('reg',    9.0, ['stage-reg'],                                [10]),
+    ('auto',   8.6, ['stage-auto'],                               [11]),
+    ('part2',  9.6, ['stage-part2'],                              [12]),
+    ('moon',  10.4, ['stage-moon'],                               [13]),
+    ('mega',  16.0, ['stage-mega'],                               [14, 15]),
+    ('demo',  25.0, ['stage-demo', 'demovid', 'demotagclip'],     [16, 17, 18]),
+    ('loop',  17.0, ['stage-loop', 'subclip19b'],                 [19]),
+    ('brief', 13.0, ['stage-brief', 'subclip19c'],                []),
+    ('part3', 12.0, ['stage-part3'],                              [20]),
+    ('ax1',   22.6, ['stage-ax1'],                                [21, 22, 23]),
+    ('ax2',   25.0, ['stage-ax2'],                                [24, 25]),
+    ('ax3',   15.4, ['stage-ax3'],                                [26]),
+    ('close', 12.6, ['stage-close'],                              [27]),
 ]
 
 def read_starts(html):
@@ -48,17 +54,18 @@ def set_start(html, elid, val):
 def main():
     src = open(SRC).read()
     starts = read_starts(src)
-    tbase = json.loads(re.search(r'const T = (\{.*?\});', src, re.S).group(1)
-                       .replace('intro:', '"intro":').replace('doc:', '"doc":')
-                       .replace('map:', '"map":').replace('mont:', '"mont":')
-                       .replace('reg:', '"reg":').replace('track:', '"track":')
-                       .replace('mega:', '"mega":').replace('zoom:', '"zoom":')
-                       .replace('ax1:', '"ax1":').replace('ax2:', '"ax2":').replace('ax3:', '"ax3":').replace('close:', '"close":'))
+    tsrc = re.search(r'const T = (\{.*?\});', src, re.S).group(1)
+    tbase = json.loads(re.sub(r'([A-Za-z_][A-Za-z0-9_]*)\s*:', r'"\1":', tsrc))
     os.makedirs(OUTDIR, exist_ok=True)
     made = []
     for key, dur, clips, subs in CHAPTERS:
         s = src
         base = tbase[key]
+        # 렌더러가 파킹(900초)된 비디오도 프레임 추출을 시도해 커버리지 게이트로
+        # 렌더를 중단시키므로, 비디오가 없는 챕터에서는 태그 자체를 제거한다.
+        if 'demovid' not in clips:
+            s, n = re.subn(r'\s*<video[^>]*(?<![-\w])id="demovid"[^>]*></video>', '', s)
+            assert n == 1, f'{key}: demovid tag removal matched {n}'
         # 1) 챕터 상수 : 대상만 0, 나머지는 타임라인 밖으로
         newT = {k: (0 if k == key else 900) for k in tbase}
         s = re.sub(r'const T = \{.*?\};',
@@ -67,7 +74,10 @@ def main():
         for elid, st in starts.items():
             if elid == 'root':
                 continue
-            if elid in clips or (elid.startswith('subclip') and int(elid[7:]) in subs):
+            if elid == 'demovid' and 'demovid' not in clips:
+                continue  # 태그를 제거했으므로 건너뜀
+            m2 = re.fullmatch(r'subclip(\d+)', elid)
+            if elid in clips or (m2 and int(m2.group(1)) in subs):
                 s = set_start(s, elid, st - base)
             else:
                 s = set_start(s, elid, 900)

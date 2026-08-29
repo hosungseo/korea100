@@ -1,0 +1,1 @@
+window.MEGASTATS = {"gates": 8, "milestones": 54, "institutions": 106, "procs": 1361, "done": 2, "live": 1, "frontier": 10, "unknown": 4, "waiting": 37, "loopBefore": {"milestones": 49, "institutions": 586, "procs": 1281}};
