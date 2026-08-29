@@ -62,7 +62,6 @@ const MINISTRY_CANON = [
   ["국무조정실", "총리·국무회의", "pm-office"],
   ["국무총리", "총리·국무회의", "pm-office"],
   ["국무회의", "총리·국무회의", "pm-office"],
-  ["대통령", "대통령실", "president"],
   ["국회", "국회", "assembly"],
   ["지방시대위원회", "지방시대위원회", "balance-committee"],
   ["국가자치분권균형성장회의", "국가자치분권균형성장회의", "decentral-council"],

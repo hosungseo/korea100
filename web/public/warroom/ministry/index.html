@@ -128,8 +128,55 @@ main { padding: 16px 20px 60px; max-width: 1760px; }
 .projbar button.on { color: var(--text); background: rgba(56,198,244,0.08); }
 .card.off { opacity: 0.26; }
 
+/* 분류 머리 — 급한 것과 아닌 것을 눈으로 가른다 */
+.tri { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 9px; margin: 4px 0 -2px; }
+.tri:not(:first-child) { margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(95,123,144,0.18); }
+.tri h2 { margin: 0; font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: var(--amber); }
+.tri.calm h2 { color: var(--muted); }
+.tri .c { font-family: var(--mono); font-size: 10px; color: var(--muted); }
+.tri .d { font-size: 11px; color: var(--muted); }
+.tri { flex-wrap: wrap; }
+
+/* 검색 */
+.searchwrap { position: relative; display: flex; align-items: center; }
+#search {
+  font-family: var(--mono); font-size: 10.5px; color: var(--text);
+  background: rgba(9,18,28,0.8); border: 1px solid rgba(95,123,144,0.35);
+  border-radius: 4px; padding: 4px 26px 4px 10px; width: 210px; outline: none;
+}
+#search:focus { border-color: var(--cyan); }
+#search::placeholder { color: rgba(95,123,144,0.75); }
+.searchwrap .clr {
+  position: absolute; right: 6px; cursor: pointer; background: none; border: none;
+  color: var(--muted); font-family: var(--mono); font-size: 12px; padding: 0 2px; line-height: 1;
+}
+.searchwrap .clr:hover { color: var(--rose); }
+.kbd {
+  font-family: var(--mono); font-size: 9px; color: var(--muted);
+  border: 1px solid rgba(95,123,144,0.4); border-radius: 3px; padding: 0 4px;
+}
+
+/* 상태 표시 */
+.state { padding: 40px 14px; text-align: center; color: var(--muted); font-family: var(--mono); font-size: 11.5px; }
+.state.err { color: var(--rose); }
+.state .rt {
+  display: inline-block; margin-top: 10px; cursor: pointer; font-family: var(--mono); font-size: 10px;
+  color: var(--cyan); background: none; border: 1px solid var(--cyan); border-radius: 4px; padding: 3px 12px;
+}
+
 #grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
 @media (max-width: 1280px) { #grid { grid-template-columns: repeat(auto-fill, minmax(285px, 1fr)); } }
+@media (max-width: 720px) {
+  header.hud { gap: 6px 12px; padding: 9px 13px 8px; }
+  #hudstats { width: 100%; justify-content: space-between; }
+  .hstat { min-width: 0; padding: 1px 6px; }
+  header .links { margin-left: 0; width: 100%; }
+  main { padding: 13px 13px 48px; }
+  #grid { grid-template-columns: 1fr; }
+  #search { width: 100%; }
+  .searchwrap { width: 100%; }
+  .row .rn { min-width: 140px; }
+}
 
 /* ── 각료 카드: 내각 화면 문법 ── */
 .card {
@@ -328,6 +375,13 @@ footer { max-width: 1200px; margin-top: 26px; padding-top: 12px; border-top: 1px
     <button data-sort="leverage">레버리지</button>
     <button data-sort="own">관문 수</button>
     <button data-sort="name">가나다</button>
+    <span style="margin-left:14px" class="searchwrap">
+      <input id="search" type="search" placeholder="부처·관문 검색" autocomplete="off"
+             aria-label="부처 또는 관문 이름 검색" />
+      <button class="clr" id="searchclr" hidden aria-label="검색어 지우기">×</button>
+    </span>
+    <span class="kbd" style="margin-left:8px" title="검색창으로 이동">/</span>
+    <span class="kbd" style="margin-left:4px" title="상세에서 목록으로">Esc</span>
   </div>
 
   <div id="grid"></div>
@@ -341,9 +395,11 @@ footer { max-width: 1200px; margin-top: 26px; padding-top: 12px; border-top: 1px
 const $ = (s, r = document) => r.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const MAP = (pid) => `../map/${pid === "gwangju-semiconductor-cluster" ? "" : `?p=${pid}`}`;
+// 관문 하나를 지도에서 바로 열어준다 — 지도가 #gate=<id>를 받아 핀·상하류 강조까지 한다
+const MAPGATE = (pid, gate) => `${MAP(pid)}#gate=${encodeURIComponent(gate)}`;
 // 부처가 아닌 결정주체 — 카드에 성격을 밝힌다
 const NOT_MINISTRY = {
-  assembly: "의정 협조 대상", "pm-office": "총리·국무회의", president: "대통령실",
+  assembly: "의정 협조 대상", "pm-office": "총리·국무회의",
   "balance-committee": "대통령 소속 위원회", "decentral-council": "대통령 소속 회의",
   "land-policy-committee": "법정 위원회",
 };
@@ -365,9 +421,24 @@ function pcolor(pid) {
   return FALLBACK[(i < 0 ? 0 : i) % FALLBACK.length];
 }
 
-let B = null, SORT = "holding", FILTER = null, tickerTimer = null;
+let B = null, SORT = "holding", FILTER = null, QUERY = "", tickerTimer = null;
 
-fetch("../map/ministry-board.json").then((r) => r.json()).then((b) => {
+$("#grid").innerHTML = `<div class="state">집계를 불러오는 중…</div>`;
+loadBoard();
+
+function loadBoard() {
+  fetch("../map/ministry-board.json")
+    .then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
+    .then(boot)
+    .catch((err) => {
+      $("#grid").innerHTML = `<div class="state err">집계 파일을 불러오지 못했습니다 — ${esc(err.message)}<br>`
+        + `<button class="rt">다시 시도</button></div>`;
+      $("#ticker").textContent = "집계를 불러오지 못했습니다.";
+      $(".rt")?.addEventListener("click", () => { $("#grid").innerHTML = `<div class="state">다시 불러오는 중…</div>`; loadBoard(); });
+    });
+}
+
+function boot(b) {
   B = b;
   renderHud();
   const pn = b.projects.length;
@@ -388,11 +459,14 @@ fetch("../map/ministry-board.json").then((r) => r.json()).then((b) => {
     + `“기다린 일수”는 집계를 시작한 ${esc(b.sinceBaseline ?? b.generatedAt)}부터 누적하므로, 초기에는 실제보다 짧게 보입니다.<br>`
     + `데이터: <a href="../map/">관문 의존 지도</a> · 생성 <span class="mono">npm run generate:warroom-map:all</span>`;
   renderProjBar();
+  restoreUrl();
   bindSort();
   bindTip();
+  bindSearch();
+  bindKeys();
   startTicker();
   route();
-});
+}
 
 window.addEventListener("hashchange", route);
 
@@ -470,9 +544,57 @@ function renderProjBar() {
     btn.addEventListener("click", () => {
       FILTER = btn.dataset.p || null;
       for (const b of bar.querySelectorAll("button")) b.classList.toggle("on", b === btn);
-      renderGrid();
+      renderGrid(); syncUrl();
     });
   }
+}
+
+function bindSearch() {
+  const box = $("#search"), clr = $("#searchclr");
+  box.addEventListener("input", () => {
+    QUERY = box.value.trim();
+    clr.hidden = !QUERY;
+    if (location.hash.startsWith("#m=")) location.hash = "";
+    else renderGrid();
+    syncUrl();
+  });
+  clr.addEventListener("click", () => { box.value = ""; QUERY = ""; clr.hidden = true; renderGrid(); syncUrl(); });
+}
+
+function bindKeys() {
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      if (location.hash.startsWith("#m=")) { location.hash = ""; return; }
+      if (document.activeElement === $("#search")) { $("#search").blur(); }
+    }
+    // '/'로 검색창 — 입력 중이 아닐 때만
+    if (e.key === "/" && !/^(INPUT|TEXTAREA)$/.test(document.activeElement?.tagName ?? "")) {
+      e.preventDefault(); $("#search").focus();
+    }
+  });
+}
+
+// 정렬·필터·검색을 URL에 남긴다 — 같은 화면을 그대로 공유할 수 있게
+function syncUrl() {
+  if (location.hash.startsWith("#m=")) return;
+  const q = new URLSearchParams();
+  if (SORT !== "holding") q.set("sort", SORT);
+  if (FILTER) q.set("p", FILTER);
+  if (QUERY) q.set("q", QUERY);
+  const s = q.toString();
+  history.replaceState(null, "", s ? `?${s}` : location.pathname);
+}
+
+function restoreUrl() {
+  const q = new URLSearchParams(location.search);
+  const s = q.get("sort");
+  if (["holding", "leverage", "own", "name"].includes(s)) SORT = s;
+  const p = q.get("p");
+  if (p && B.projects.some((x) => x.id === p)) FILTER = p;
+  QUERY = q.get("q") ?? "";
+  if (QUERY) { $("#search").value = QUERY; $("#searchclr").hidden = false; }
+  for (const b of document.querySelectorAll("#sortbar button")) b.classList.toggle("on", b.dataset.sort === SORT);
+  for (const b of document.querySelectorAll("#projbar button")) b.classList.toggle("on", (b.dataset.p || null) === FILTER);
 }
 
 function bindSort() {
@@ -480,7 +602,7 @@ function bindSort() {
     btn.addEventListener("click", () => {
       SORT = btn.dataset.sort;
       for (const b of document.querySelectorAll("#sortbar button")) b.classList.toggle("on", b === btn);
-      renderGrid();
+      renderGrid(); syncUrl();
     });
   }
 }
@@ -528,46 +650,86 @@ function pipLines(m) {
   return `<div class="plines">${lines.join("")}</div>`;
 }
 
+function matches(m) {
+  if (FILTER && !m.projects.includes(FILTER)) return false;
+  if (!QUERY) return true;
+  const q = QUERY.toLowerCase();
+  if (m.label.toLowerCase().includes(q)) return true;
+  // 관문 이름·ID로도 찾는다 — "N03"이나 "시행령"으로 담당 부처를 역추적할 수 있게
+  const pool = [...m.holding, ...m.active, ...m.legislative];
+  return pool.some((x) => `${x.gate} ${x.name}`.toLowerCase().includes(q));
+}
+
+function cardHtml(m) {
+  const c = m.counts, lv = m.maxLeverage;
+  const oldest = m.holding.length ? m.holding.map((h) => h.since).sort()[0] : null;
+  const days = oldest ? daysSince(oldest) : 0;
+  return `<button class="card${c.frontier ? "" : " dim"}" data-m="${esc(m.id)}">
+    ${c.frontier ? `<span class="alert" data-tt="착수 가능" data-tip="선행 관문이 모두 끝나 지금 시작할 수 있는 관문이 ${c.frontier}건 있습니다">!</span>` : ""}
+    <div class="top">
+      <span class="crest${NOT_MINISTRY[m.id] ? " gray" : c.frontier ? " warn" : ""}">${esc(crestOf(m.label))}</span>
+      <span>
+        <span class="nm">${esc(m.label)}</span>
+        ${NOT_MINISTRY[m.id] ? ` <span class="tag">${esc(NOT_MINISTRY[m.id])}</span>` : ""}
+      </span>
+      <span class="scope">${m.projects.length}개 사업 기준</span>
+    </div>
+    ${pipLines(m)}
+    <div class="counts num">담당 <b>${c.own}</b> · 완료 <b>${c.completed}</b> · 진행 <b>${c.active}</b> · 예정 <b>${c.planned + c.unknown}</b></div>
+    <div class="hold${c.frontier ? "" : " none"}">
+      <span class="n num">${c.frontier || "—"}</span>
+      <span class="t">${c.frontier ? "지금 쥐고 있는 것" : "지금 대기 중인 관문 없음"}</span>
+    </div>
+    ${lv && lv.blocked > 0
+      ? `<div class="lev num" data-tt="레버리지" data-tip="이 관문이 지연되면 필수 의존을 따라 하류 ${lv.blocked}개 관문이 멈춥니다">⚡ 지연 시 하류 <b>${lv.blocked}개</b> 정지 — ${esc(lv.gate)} ${esc(clip(lv.name, 22))}</div>` : ""}
+    ${days > 0 ? `<div class="waited num">최장 ${days}일째 대기</div>` : ""}
+  </button>`;
+}
+
 function renderGrid() {
   $("#detail").className = "";
   $("#grid").className = "";
   $("#sortbar").hidden = false;
   const pb = $("#projbar"); if (pb) pb.hidden = false;
-  const cards = sorted().map((m) => {
-    const c = m.counts, lv = m.maxLeverage;
-    const oldest = m.holding.length ? m.holding.map((h) => h.since).sort()[0] : null;
-    const days = oldest ? daysSince(oldest) : 0;
-    const off = FILTER && !m.projects.includes(FILTER);
-    return `<button class="card${c.frontier ? "" : " dim"}${off ? " off" : ""}" data-m="${esc(m.id)}">
-      ${c.frontier ? `<span class="alert" data-tt="착수 가능" data-tip="선행 관문이 모두 끝나 지금 시작할 수 있는 관문이 ${c.frontier}건 있습니다">!</span>` : ""}
-      <div class="top">
-        <span class="crest${NOT_MINISTRY[m.id] ? " gray" : c.frontier ? " warn" : ""}">${esc(crestOf(m.label))}</span>
-        <span>
-          <span class="nm">${esc(m.label)}</span>
-          ${NOT_MINISTRY[m.id] ? ` <span class="tag">${esc(NOT_MINISTRY[m.id])}</span>` : ""}
-        </span>
-        <span class="scope">${m.projects.length}개 사업 기준</span>
-      </div>
-      ${pipLines(m)}
-      <div class="counts num">담당 <b>${c.own}</b> · 완료 <b>${c.completed}</b> · 진행 <b>${c.active}</b> · 예정 <b>${c.planned + c.unknown}</b></div>
-      <div class="hold${c.frontier ? "" : " none"}">
-        <span class="n num">${c.frontier || "—"}</span>
-        <span class="t">${c.frontier ? "지금 쥐고 있는 것" : "지금 대기 중인 관문 없음"}</span>
-      </div>
-      ${lv && lv.blocked > 0
-        ? `<div class="lev num" data-tt="레버리지" data-tip="이 관문이 지연되면 필수 의존을 따라 하류 ${lv.blocked}개 관문이 멈춥니다">⚡ 지연 시 하류 <b>${lv.blocked}개</b> 정지 — ${esc(lv.gate)} ${esc(clip(lv.name, 22))}</div>` : ""}
-      ${days > 0 ? `<div class="waited num">최장 ${days}일째 대기</div>` : ""}
-    </button>`;
-  });
-  const ua = B.unassigned, uaGates = B.totals.unassignedGates;
-  cards.push(`<button class="card dim" data-m="unassigned">
-    <div class="top"><span class="crest gray">?</span>
-      <span><span class="nm">결정주체 미특정</span> <span class="tag">확정 필요</span></span>
-      <span class="scope">${ua.length}개 역할명</span></div>
-    <div class="counts">법령이 “산업단지 지정권자”처럼 역할로만 정한 관문입니다. 부처로 추정 배정하지 않습니다.</div>
-    <div class="hold"><span class="n num">${uaGates}</span><span class="t">결정주체를 정해야 할 관문</span></div>
-  </button>`);
-  $("#grid").innerHTML = cards.join("");
+
+  const shown = sorted().filter(matches);
+  // 급한 것과 아닌 것을 눈으로 가른다 — 정렬만으로는 경계가 보이지 않는다
+  const hot = shown.filter((m) => m.counts.frontier > 0);
+  const calm = shown.filter((m) => m.counts.frontier === 0);
+  // 사업 필터가 걸리면 그 사업의 미특정 관문만 추린다 — 통째로 감추면 "그 사업엔 미특정이 없다"로 읽힌다
+  const uaRoles = B.unassigned
+    .map((u) => ({ role: u.role, gates: FILTER ? u.gates.filter((g) => g.project === FILTER) : u.gates }))
+    .filter((u) => u.gates.length);
+  const uaGates = uaRoles.reduce((a, u) => a + u.gates.length, 0);
+  const uaHit = uaGates > 0 && (!QUERY || "결정주체 미특정".includes(QUERY) || "미특정".includes(QUERY));
+
+  let html = "";
+  if (!shown.length && !uaHit) {
+    html = `<div class="state">조건에 맞는 주체가 없습니다${QUERY ? ` — “${esc(QUERY)}”` : ""}.</div>`;
+  } else {
+    if (hot.length) {
+      html += `<div class="tri"><h2>결정 대기</h2><span class="c num">${hot.length}곳</span>
+        <span class="d">선행이 끝나 지금 착수할 수 있는 관문을 쥔 주체</span></div>`
+        + hot.map(cardHtml).join("");
+    }
+    if (calm.length) {
+      html += `<div class="tri calm"><h2>대기 없음</h2><span class="c num">${calm.length}곳</span>
+        <span class="d">지금 이 주체 앞에 열린 관문이 없음(선행 대기 또는 완료)</span></div>`
+        + calm.map(cardHtml).join("");
+    }
+    if (uaHit) {
+      html += `<div class="tri calm"><h2>결정주체 확정 필요</h2><span class="c num">${uaRoles.length}개 역할명</span>
+        <span class="d">누가 결정하는지부터 정해야 하는 관문</span></div>`
+        + `<button class="card dim" data-m="unassigned">
+          <div class="top"><span class="crest gray">?</span>
+            <span><span class="nm">결정주체 미특정</span> <span class="tag">확정 필요</span></span>
+            <span class="scope">${FILTER ? `${esc(pshort(FILTER))} 기준` : `${uaRoles.length}개 역할명`}</span></div>
+          <div class="counts">법령이 “산업단지 지정권자”처럼 역할로만 정한 관문입니다. 부처로 추정 배정하지 않습니다.</div>
+          <div class="hold"><span class="n num">${uaGates}</span><span class="t">결정주체를 정해야 할 관문</span></div>
+        </button>`;
+    }
+  }
+  $("#grid").innerHTML = html;
   for (const el of document.querySelectorAll(".card")) {
     el.addEventListener("click", () => { location.hash = `#m=${el.dataset.m}`; });
   }
@@ -586,8 +748,8 @@ function pname(pid) { return B.projects.find((p) => p.id === pid)?.name ?? pid; 
 function pshort(pid) { const p = B.projects.find((x) => x.id === pid); return p?.short ?? p?.name ?? pid; }
 
 function gateRow(o, aside, extra = "", stcls = "st-wait") {
-  return `<a class="row ${stcls}" href="${MAP(o.project)}" target="_blank" rel="noopener"
-      title="${esc(pname(o.project))} 관문 지도에서 보기">
+  return `<a class="row ${stcls}" href="${MAPGATE(o.project, o.gate)}" target="_blank" rel="noopener"
+      title="${esc(pname(o.project))} 지도에서 ${esc(o.gate)} 관문 열기 — 상·하류가 함께 강조됩니다">
     <span class="proj" style="color:${pcolor(o.project)}">${esc(pshort(o.project))}</span>
     <span class="gid">${esc(o.gate)}</span>
     <span class="rn">${esc(o.name)}${extra}</span>
@@ -615,12 +777,13 @@ function renderDetail(id) {
     : `<div class="empty">지금 이 부처 앞에 대기 중인 관문이 없습니다. 선행 관문이 풀리면 여기에 나타납니다.</div>`;
 
   const awaited = m.awaited.length
-    ? m.awaited.map((a) => `<div class="row st-wait">
+    ? m.awaited.map((a) => `<a class="row st-wait" href="${MAPGATE(a.project, a.downGate)}" target="_blank" rel="noopener"
+        title="${esc(pname(a.project))} 지도에서 ${esc(a.downGate)} 관문 열기">
         <span class="proj" style="color:${pcolor(a.project)}">${esc(pshort(a.project))}</span>
         <span class="gid">${esc(a.upGate)} → ${esc(a.downGate)}</span>
         <span class="rn">${esc(a.downName)}</span>
         <span class="aside">${a.downMinistries.length ? esc(a.downMinistries.join("·")) : "미특정"}</span>
-      </div>`).join("")
+      </a>`).join("")
     : `<div class="empty">이 부처의 미완료 관문에 걸린 하류 관문이 없습니다.</div>`;
 
   const active = m.active.length
@@ -659,16 +822,20 @@ function renderDetail(id) {
 }
 
 function renderUnassigned() {
-  const items = B.unassigned.map((u) => `<div class="uarole">
+  const roles = B.unassigned
+    .map((u) => ({ role: u.role, gates: FILTER ? u.gates.filter((g) => g.project === FILTER) : u.gates }))
+    .filter((u) => u.gates.length);
+  const total = roles.reduce((a, u) => a + u.gates.length, 0);
+  const items = roles.map((u) => `<div class="uarole">
     <div class="rl">${esc(u.role)}<span>${u.gates.length}개 관문</span></div>
-    ${u.gates.map((g) => `<a class="g" href="${MAP(g.project)}" target="_blank" rel="noopener">${esc(pshort(g.project))} · ${esc(g.gate)} ${esc(g.name)}</a>`).join("")}
+    ${u.gates.map((g) => `<a class="g" href="${MAPGATE(g.project, g.gate)}" target="_blank" rel="noopener">${esc(pshort(g.project))} · ${esc(g.gate)} ${esc(g.name)}</a>`).join("")}
   </div>`).join("");
   return `<button class="back">← 부처 전체</button>
     <div class="dhead">
       <span class="crest gray">?</span>
       <div>
         <h2>결정주체 미특정 <span class="tag">확정 필요</span></h2>
-        <div class="meta num">${B.unassigned.length}개 역할명 · <b>${B.totals.unassignedGates}</b>개 관문</div>
+        <div class="meta num">${roles.length}개 역할명 · <b>${total}</b>개 관문${FILTER ? ` · ${esc(pshort(FILTER))} 기준` : ""}</div>
       </div>
     </div>
     <section class="blk">
