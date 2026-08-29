@@ -469,6 +469,7 @@ function buildMinistryBoard(ids) {
       byMinistry.set(label, {
         id: slugFor(label), label,
         projects: [], counts: { own: 0, completed: 0, active: 0, frontier: 0, planned: 0, unknown: 0 },
+        byProject: {},
         maxLeverage: null, holding: [], awaited: [], active: [], legislative: [],
       });
     }
@@ -524,15 +525,16 @@ function buildMinistryBoard(ids) {
       for (const label of labels) {
         const m = bucket(label);
         if (!m.projects.includes(id)) m.projects.push(id);
-        m.counts.own += 1;
-        if (n.status === "completed") m.counts.completed += 1;
-        else if (n.status === "active") m.counts.active += 1;
-        else if (n.status === "unknown") m.counts.unknown += 1;
-        else m.counts.planned += 1;
+        const bp = (m.byProject[id] ??= { own: 0, completed: 0, active: 0, frontier: 0, planned: 0, unknown: 0 });
+        m.counts.own += 1; bp.own += 1;
+        if (n.status === "completed") { m.counts.completed += 1; bp.completed += 1; }
+        else if (n.status === "active") { m.counts.active += 1; bp.active += 1; }
+        else if (n.status === "unknown") { m.counts.unknown += 1; bp.unknown += 1; }
+        else { m.counts.planned += 1; bp.planned += 1; }
 
         const co = labels.filter((x) => x !== label);
         if (isFrontier) {
-          m.counts.frontier += 1;
+          m.counts.frontier += 1; bp.frontier += 1;
           const key = `${id}/${n.id}`;
           m.holding.push({
             project: id, projectName: pname, gate: n.id, name: n.name,
