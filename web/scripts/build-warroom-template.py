@@ -87,6 +87,7 @@ def para_pr(pid, left=0, align=None):
                       f'<hc:left value="{left}" unit="HWPUNIT"/>')
     return x
 
+# 양식의 6단계: □(0) ㅇ(1) –(2) ▲(3) ※·*(3)
 PA_CENTER, PA_L0, PA_L1, PA_L2, PA_L3 = 20, 0, 21, 22, 23
 add_paras = (para_pr(20, align="CENTER") + para_pr(21, 1500)
              + para_pr(22, 3000) + para_pr(23, 4500))
@@ -185,6 +186,7 @@ body.append(para("", "gap5", PA_L0))
 
 body.append(para("□ 분야별 절차 진행상황", "head", PA_L0))
 body.append(tbl_para)
+body.append(para("{{TDETAIL}}", "body", PA_L3))        # ▲ 상세 내용 기술
 body.append(para("", "gap5", PA_L0))
 
 body.append(para("□ 리스크·갈등", "head", PA_L0))
@@ -196,7 +198,8 @@ body.append(para("□ 조치 필요사항", "head", PA_L0))
 for i in (1, 2, 3):
     body.append(para(f"{{{{AC{i}}}}}", "body", PA_L2))
 body.append(para("", "gap3", PA_L0))
-body.append(para("{{PIPE}}", "small", PA_L3))
+body.append(para("{{PIPE}}", "small", PA_L3))          # ※ 사례·수치 보완
+body.append(para("{{NOTE}}", "small", PA_L3))          # * 관문 ID 등 용어 풀이
 
 sec_xml = prolog + "".join(body) + "</hs:sec>"
 
