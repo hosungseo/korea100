@@ -714,6 +714,13 @@ function build() {
   if (LEVELS.some((l) => l.id === h.get("level"))) currentLevel = h.get("level");
   if (currentLevel === "minister" && MIN_BY_ID[h.get("min")]) currentMinistry = MIN_BY_ID[h.get("min")];
   render();
+  // #gate=<id> — 부처 상황판 등 외부 화면에서 관문 하나를 바로 열어준다
+  const gate = h.get("gate");
+  if (gate && nodeById[gate]) {
+    focusNode(gate);
+    const el = document.getElementById(`nd-${gate}`);
+    if (el) el.scrollIntoView({ block: "center", inline: "center" });
+  }
   $("#viewport").addEventListener("click", () => { pinnedId = null; selectScenario(current); });
   window.addEventListener("resize", () => { fit(); drawEdges(); renderProcBody(); });
   $("#narr-toggle").addEventListener("click", function () {
