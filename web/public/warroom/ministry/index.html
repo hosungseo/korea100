@@ -255,6 +255,21 @@ main { padding: 16px 20px 60px; max-width: 1760px; }
 .hold .t { font-size: 11.5px; color: var(--gold); }
 .hold.none .n { color: var(--muted); font-size: 15px; text-shadow: none; }
 .hold.none .t { color: var(--muted); }
+/* 카드 안에서 "무엇을" 쥐고 있는지 바로 보여준다 — 클릭해야 알 수 있으면 훑을 수가 없다 */
+.hlist { margin: 2px 0 8px; }
+.hitem {
+  display: flex; align-items: baseline; gap: 7px; text-decoration: none; color: inherit;
+  padding: 3px 6px; border-radius: 3px; border-left: 2px solid var(--amber);
+  background: rgba(255,176,32,0.05);
+}
+.hitem + .hitem { margin-top: 3px; }
+.hitem:hover, .hitem:focus-visible { background: rgba(255,176,32,0.13); outline: none; }
+.hitem .hg { font-family: var(--mono); font-size: 9.5px; color: var(--amber); flex: none; }
+.hitem .hn { font-size: 11.5px; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hitem .hl { font-family: var(--mono); font-size: 9px; color: var(--cyan); flex: none; }
+.hitem .hp { width: 3px; height: 3px; border-radius: 50%; flex: none; }
+.hmore { font-family: var(--mono); font-size: 9.5px; color: var(--muted); padding: 3px 6px; display: block; }
+
 .lev { font-family: var(--mono); font-size: 10px; color: var(--muted); }
 .lev b { color: var(--cyan); }
 .waited { font-family: var(--mono); font-size: 9.5px; color: var(--muted); margin-top: 3px; }
@@ -660,11 +675,30 @@ function matches(m) {
   return pool.some((x) => `${x.gate} ${x.name}`.toLowerCase().includes(q));
 }
 
+// 카드에 무엇을 쥐고 있는지 최대 3건까지 적는다. 레버리지 순이라 위가 급한 것이다.
+const CARD_HOLD_MAX = 3;
+function holdList(m) {
+  if (!m.holding.length) return "";
+  const top = m.holding.slice(0, CARD_HOLD_MAX);
+  const rest = m.holding.length - top.length;
+  return `<div class="hlist">`
+    + top.map((h) => `<a class="hitem" href="${MAPGATE(h.project, h.gate)}" target="_blank" rel="noopener"
+        data-tt="${esc(pshort(h.project))} ${esc(h.gate)}"
+        data-tip="${esc(h.name)} — ${h.leverage ? `지금 풀면 하류 ${h.leverage}개가 움직입니다` : "하류에 걸린 관문은 없습니다"}. 지도에서 열려면 클릭하세요.">
+        <span class="hp" style="background:${pcolor(h.project)}"></span>
+        <span class="hg">${esc(h.gate)}</span>
+        <span class="hn">${esc(h.name)}</span>
+        ${h.leverage ? `<span class="hl">▶${h.leverage}</span>` : ""}
+      </a>`).join("")
+    + (rest > 0 ? `<span class="hmore">외 ${rest}건 — 카드를 눌러 전체 보기</span>` : "")
+    + `</div>`;
+}
+
 function cardHtml(m) {
   const c = m.counts, lv = m.maxLeverage;
   const oldest = m.holding.length ? m.holding.map((h) => h.since).sort()[0] : null;
   const days = oldest ? daysSince(oldest) : 0;
-  return `<button class="card${c.frontier ? "" : " dim"}" data-m="${esc(m.id)}">
+  return `<div class="card${c.frontier ? "" : " dim"}" data-m="${esc(m.id)}" role="button" tabindex="0">
     ${c.frontier ? `<span class="alert" data-tt="착수 가능" data-tip="선행 관문이 모두 끝나 지금 시작할 수 있는 관문이 ${c.frontier}건 있습니다">!</span>` : ""}
     <div class="top">
       <span class="crest${NOT_MINISTRY[m.id] ? " gray" : c.frontier ? " warn" : ""}">${esc(crestOf(m.label))}</span>
@@ -680,10 +714,11 @@ function cardHtml(m) {
       <span class="n num">${c.frontier || "—"}</span>
       <span class="t">${c.frontier ? "지금 쥐고 있는 것" : "지금 대기 중인 관문 없음"}</span>
     </div>
-    ${lv && lv.blocked > 0
+    ${holdList(m)}
+    ${lv && lv.blocked > 0 && !m.holding.some((x) => x.gate === lv.gate && x.project === lv.project)
       ? `<div class="lev num" data-tt="레버리지" data-tip="이 관문이 지연되면 필수 의존을 따라 하류 ${lv.blocked}개 관문이 멈춥니다">⚡ 지연 시 하류 <b>${lv.blocked}개</b> 정지 — ${esc(lv.gate)} ${esc(clip(lv.name, 22))}</div>` : ""}
     ${days > 0 ? `<div class="waited num">최장 ${days}일째 대기</div>` : ""}
-  </button>`;
+  </div>`;
 }
 
 function renderGrid() {
@@ -720,18 +755,27 @@ function renderGrid() {
     if (uaHit) {
       html += `<div class="tri calm"><h2>결정주체 확정 필요</h2><span class="c num">${uaRoles.length}개 역할명</span>
         <span class="d">누가 결정하는지부터 정해야 하는 관문</span></div>`
-        + `<button class="card dim" data-m="unassigned">
+        + `<div class="card dim" data-m="unassigned" role="button" tabindex="0">
           <div class="top"><span class="crest gray">?</span>
             <span><span class="nm">결정주체 미특정</span> <span class="tag">확정 필요</span></span>
             <span class="scope">${FILTER ? `${esc(pshort(FILTER))} 기준` : `${uaRoles.length}개 역할명`}</span></div>
           <div class="counts">법령이 “산업단지 지정권자”처럼 역할로만 정한 관문입니다. 부처로 추정 배정하지 않습니다.</div>
           <div class="hold"><span class="n num">${uaGates}</span><span class="t">결정주체를 정해야 할 관문</span></div>
-        </button>`;
+        </div>`;
     }
   }
   $("#grid").innerHTML = html;
   for (const el of document.querySelectorAll(".card")) {
-    el.addEventListener("click", () => { location.hash = `#m=${el.dataset.m}`; });
+    const open = () => { location.hash = `#m=${el.dataset.m}`; };
+    el.addEventListener("click", (ev) => {
+      // 목록 안의 관문 링크는 지도로 보낸다 — 카드 열기를 가로채지 않는다
+      if (ev.target.closest("a")) return;
+      open();
+    });
+    el.addEventListener("keydown", (ev) => {
+      if (ev.target !== el) return;
+      if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); open(); }
+    });
   }
   window.scrollTo(0, 0);
 }
