@@ -66,6 +66,11 @@ const MINISTRY_CANON = [
   ["지방시대위원회", "지방시대위원회", "balance-committee"],
   ["국가자치분권균형성장회의", "국가자치분권균형성장회의", "decentral-council"],
   ["국토정책위원회", "국토정책위원회", "land-policy-committee"],
+  // 지방자치단체 — 원문에 실명이 적힌 것만. 역할명(종전부지 지방자치단체의 장,
+  // 지방자치단체의 장 …)은 어느 지자체인지 확정 전이므로 미특정에 남긴다.
+  ["전남광주시", "전남광주시", "gwangju-jeonnam"],
+  ["전남도", "전남도", "jeonnam"],
+  ["무안군", "무안군", "muan"],
 ];
 const MINISTRY_SLUG = new Map(MINISTRY_CANON.map(([, label, slug]) => [label, slug]));
 // --all: map-tracks/ 에 트랙 파일이 있는 프로젝트를 전부 순회한다(새 프로젝트 추가 시 스크립트 수정 불필요)
@@ -463,6 +468,20 @@ function buildMinistryBoard(ids) {
     usedSlug.set(slug, label);
     return slug;
   };
+  // "국방부·전남광주시"처럼 ·로 묶인 복합 표기는 나눠서 각각 찾는다.
+  // 나누지 않으면 앞의 하나만 잡히고 뒤 주체가 통째로 사라진다.
+  const labelsOf = (actors) => {
+    const out = [];
+    for (const a of actors) {
+      for (const part of a.split("·")) {
+        for (const [token, label] of MINISTRY_CANON) {
+          if (part.includes(token)) { if (!out.includes(label)) out.push(label); break; }
+        }
+      }
+    }
+    return out;
+  };
+
   const bucket = (label) => {
     if (!byMinistry.has(label)) {
       byMinistry.set(label, {
@@ -504,12 +523,7 @@ function buildMinistryBoard(ids) {
     for (const n of d.nodes) {
       // 결정주체 우선, 없으면 주도 — 지도와 같은 폴백
       const actors = (n.decision?.length ? n.decision : n.lead) ?? [];
-      const labels = [];
-      for (const a of actors) {
-        for (const [token, label] of MINISTRY_CANON) {
-          if (a.includes(token)) { if (!labels.includes(label)) labels.push(label); break; }
-        }
-      }
+      const labels = labelsOf(actors);
       if (!labels.length) {
         // 역할명은 부처로 추정 배정하지 않는다(HR-2) — 확정 필요 목록으로 보낸다
         const role = actors[0] ?? "(주체 미기재)";
@@ -550,13 +564,7 @@ function buildMinistryBoard(ids) {
           for (const v of hardDown[n.id] ?? []) {
             const dn = nodeById[v];
             if (!dn) continue;
-            const dActors = (dn.decision?.length ? dn.decision : dn.lead) ?? [];
-            const dLabels = [];
-            for (const a of dActors) {
-              for (const [token, label2] of MINISTRY_CANON) {
-                if (a.includes(token)) { if (!dLabels.includes(label2)) dLabels.push(label2); break; }
-              }
-            }
+            const dLabels = labelsOf((dn.decision?.length ? dn.decision : dn.lead) ?? []);
             m.awaited.push({
               project: id, projectName: pname, upGate: n.id, upName: n.name,
               downGate: v, downName: dn.name, downMinistries: dLabels, downStatus: dn.status,
