@@ -27,26 +27,69 @@ html, body { margin: 0; padding: 0; }
 body {
   min-height: 100%; background: var(--bg); color: var(--text);
   font-family: var(--sans); font-size: 13px; line-height: 1.5;
+  /* 전략 지도 밑그림 — 은은한 격자 */
+  background-image:
+    radial-gradient(1100px 500px at 50% -10%, rgba(56,198,244,0.06), transparent 70%),
+    linear-gradient(rgba(56,198,244,0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56,198,244,0.028) 1px, transparent 1px);
+  background-size: auto, 44px 44px, 44px 44px;
+}
+/* 관제실 스캔라인 — 아주 옅게 */
+body::after {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 90;
+  background: repeating-linear-gradient(180deg, rgba(255,255,255,0.014) 0 1px, transparent 1px 3px);
 }
 a { color: inherit; }
 .mono { font-family: var(--mono); }
 .num { font-variant-numeric: tabular-nums; }
 
-header {
+/* ── HUD 상단바: 시뮬레이션 게임의 자원바 문법 ── */
+header.hud {
   position: sticky; top: 0; z-index: 40;
-  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px;
-  padding: 12px 20px 10px;
-  background: linear-gradient(180deg, rgba(4,7,12,0.98) 70%, rgba(4,7,12,0));
-  border-bottom: 1px solid rgba(56,198,244,0.12);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px;
+  padding: 10px 20px 9px;
+  background: linear-gradient(180deg, rgba(4,7,12,0.99) 78%, rgba(4,7,12,0));
+  border-bottom: 1px solid rgba(56,198,244,0.18);
 }
-header h1 { font-size: 16px; font-weight: 700; letter-spacing: -0.2px; white-space: nowrap; }
-header .sub { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.08em; }
+.brand { display: flex; align-items: center; gap: 9px; }
+.lamp {
+  width: 8px; height: 8px; border-radius: 2px; background: var(--green);
+  box-shadow: 0 0 8px rgba(46,230,168,0.8); animation: lampblink 3.2s infinite;
+}
+@keyframes lampblink { 0%,92%,100% { opacity: 1; } 96% { opacity: 0.35; } }
+.brand h1 { margin: 0; font-size: 15px; font-weight: 700; letter-spacing: -0.2px; white-space: nowrap; }
+.brand .sub { font-family: var(--mono); font-size: 9px; color: var(--muted); letter-spacing: 0.14em; }
+#hudstats { display: flex; gap: 0; flex-wrap: wrap; }
+.hstat {
+  display: flex; flex-direction: column; align-items: center; min-width: 78px;
+  padding: 1px 14px; border-left: 1px solid rgba(95,123,144,0.25);
+}
+.hstat:first-child { border-left: none; }
+.hstat .v { font-family: var(--mono); font-size: 16px; font-weight: 700; line-height: 1.15; color: var(--text); }
+.hstat .v.warn { color: var(--amber); }
+.hstat .v.dimc { color: var(--muted); }
+.hstat .k { font-family: var(--mono); font-size: 8.5px; color: var(--muted); letter-spacing: 0.1em; }
 header .links { margin-left: auto; display: flex; flex-wrap: wrap; gap: 8px; font-family: var(--mono); font-size: 10px; }
 header .links a {
   color: var(--muted); text-decoration: none;
   border: 1px solid rgba(95,123,144,0.35); border-radius: 4px; padding: 3px 8px;
 }
 header .links a:hover, header .links a:focus-visible { color: var(--cyan); border-color: var(--cyan); }
+
+/* ── 보고 티커: 게임의 참모 보고 줄 ── */
+.tickerbar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 5px 20px; border-bottom: 1px solid rgba(56,198,244,0.1);
+  background: rgba(6,11,18,0.7); overflow: hidden;
+}
+.tickerbar .tlabel {
+  font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.16em; color: var(--amber);
+  border: 1px solid rgba(255,176,32,0.4); border-radius: 3px; padding: 0 5px; white-space: nowrap;
+}
+#ticker { font-family: var(--mono); font-size: 10.5px; color: var(--muted); white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis; transition: opacity 0.35s; }
+#ticker b { color: var(--gold); font-weight: 600; }
+#ticker .gid { color: var(--cyan); }
 
 main { padding: 16px 20px 60px; max-width: 1760px; }
 
@@ -59,46 +102,93 @@ main { padding: 16px 20px 60px; max-width: 1760px; }
 .notice b { color: var(--gold); font-weight: 600; }
 
 .sortbar[hidden] { display: none; }
-.sortbar { display: flex; align-items: center; gap: 7px; margin-bottom: 12px; flex-wrap: wrap; }
-.sortbar .lbl { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.08em; }
+.sortbar { display: flex; align-items: center; gap: 0; margin-bottom: 14px; flex-wrap: wrap; }
+.sortbar .lbl { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.08em; margin-right: 10px; }
 .sortbar button {
   font-family: var(--mono); font-size: 10px; cursor: pointer;
-  background: none; color: var(--muted);
-  border: 1px solid rgba(95,123,144,0.35); border-radius: 999px; padding: 3px 11px;
+  background: rgba(9,18,28,0.7); color: var(--muted);
+  border: 1px solid rgba(95,123,144,0.35); padding: 4px 13px; margin-left: -1px;
 }
-.sortbar button:hover { color: var(--text); border-color: var(--cyan); }
-.sortbar button.on { color: var(--amber); border-color: var(--amber); background: rgba(255,176,32,0.08); }
+.sortbar button:first-of-type { border-radius: 4px 0 0 4px; margin-left: 0; }
+.sortbar button:last-of-type { border-radius: 0 4px 4px 0; }
+.sortbar button:hover { color: var(--text); border-color: var(--cyan); z-index: 1; position: relative; }
+.sortbar button.on { color: var(--amber); border-color: var(--amber); background: rgba(255,176,32,0.1); z-index: 1; position: relative; }
 
-#grid { display: grid; gap: 11px; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); }
-@media (max-width: 1280px) { #grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); } }
+#grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+@media (max-width: 1280px) { #grid { grid-template-columns: repeat(auto-fill, minmax(285px, 1fr)); } }
 
+/* ── 각료 카드: 내각 화면 문법 ── */
 .card {
-  border: 1px solid var(--line); border-radius: 6px; background: var(--panel);
-  padding: 12px 13px 11px; cursor: pointer; text-align: left; width: 100%;
+  position: relative;
+  border: 1px solid var(--line); border-radius: 4px; background: var(--panel);
+  padding: 13px 14px 12px; cursor: pointer; text-align: left; width: 100%;
   color: inherit; font: inherit; display: block;
-  transition: border-color 0.15s, background 0.15s;
+  transition: border-color 0.15s, background 0.15s, transform 0.12s, box-shadow 0.15s;
 }
-.card:hover, .card:focus-visible { border-color: var(--cyan); background: var(--panel2); outline: none; }
+/* 모서리 브래킷 — 타깃 프레임 */
+.card::before, .card::after {
+  content: ""; position: absolute; width: 9px; height: 9px; pointer-events: none;
+  border-color: rgba(56,198,244,0.55); border-style: solid; transition: border-color 0.15s;
+}
+.card::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+.card::after { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+.card:hover, .card:focus-visible {
+  border-color: var(--cyan); background: var(--panel2); outline: none;
+  transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,0,0,0.45), 0 0 0 1px rgba(56,198,244,0.15);
+}
+.card:hover::before, .card:hover::after, .card:focus-visible::before, .card:focus-visible::after { border-color: var(--cyan); }
 .card.dim { border-color: rgba(95,123,144,0.25); }
-.card .top { display: flex; align-items: baseline; gap: 8px; margin-bottom: 7px; }
+.card.dim::before, .card.dim::after { border-color: rgba(95,123,144,0.35); }
+
+/* 경보 배지 — 착수 가능 관문이 있는 부처 */
+.alert {
+  position: absolute; top: -7px; right: -6px; z-index: 2;
+  width: 17px; height: 17px; border-radius: 50%;
+  background: var(--amber); color: #1a1103;
+  font-family: var(--mono); font-size: 11px; font-weight: 700; line-height: 17px; text-align: center;
+  box-shadow: 0 0 0 2px rgba(4,7,12,0.9), 0 0 10px rgba(255,176,32,0.55);
+  animation: alertpulse 2.1s infinite;
+}
+@keyframes alertpulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.16); } }
+
+.card .top { display: flex; align-items: center; gap: 9px; margin-bottom: 8px; }
+.crest {
+  flex: none; width: 34px; height: 34px; border-radius: 4px;
+  border: 1px solid rgba(56,198,244,0.4); background: rgba(56,198,244,0.06);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--cyan);
+  letter-spacing: -0.5px;
+}
+.crest.warn { border-color: rgba(255,176,32,0.5); background: rgba(255,176,32,0.07); color: var(--amber); }
+.crest.gray { border-color: rgba(95,123,144,0.4); background: rgba(95,123,144,0.08); color: var(--muted); }
 .card .nm { font-size: 14px; font-weight: 700; letter-spacing: -0.2px; }
-.card .scope { margin-left: auto; font-family: var(--mono); font-size: 9px; color: var(--muted); white-space: nowrap; }
 .card .tag {
   font-family: var(--mono); font-size: 8.5px; color: var(--violet);
-  border: 1px solid rgba(157,134,245,0.45); border-radius: 3px; padding: 0 4px;
+  border: 1px solid rgba(157,134,245,0.45); border-radius: 3px; padding: 0 4px; white-space: nowrap;
 }
-.counts { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-bottom: 9px; }
+.card .scope { margin-left: auto; font-family: var(--mono); font-size: 9px; color: var(--muted); white-space: nowrap; align-self: flex-start; }
+
+/* 관문 핍 — 점 1개 = 관문 1개. 비율 막대가 아니라 낱개 표시라 표본 크기가 그대로 보인다 */
+.pips { display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 9px; min-height: 7px; }
+.pips i { width: 7px; height: 7px; border-radius: 1.5px; display: block; }
+.pips i.done { background: var(--green); }
+.pips i.act { background: var(--cyan); box-shadow: 0 0 5px rgba(56,198,244,0.6); }
+.pips i.front { background: var(--amber); box-shadow: 0 0 5px rgba(255,176,32,0.55); }
+.pips i.wait { background: rgba(95,123,144,0.45); }
+
+.counts { font-family: var(--mono); font-size: 9.5px; color: var(--muted); margin-bottom: 9px; }
 .counts b { color: var(--text); font-weight: 600; }
-.hold { display: flex; align-items: baseline; gap: 7px; margin-bottom: 6px; }
-.hold .n { font-family: var(--mono); font-size: 26px; font-weight: 700; color: var(--amber); line-height: 1; }
+.hold { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+.hold .n { font-family: var(--mono); font-size: 27px; font-weight: 700; color: var(--amber); line-height: 1;
+  text-shadow: 0 0 14px rgba(255,176,32,0.35); }
 .hold .t { font-size: 11.5px; color: var(--gold); }
-.hold.none .n { color: var(--muted); font-size: 15px; }
+.hold.none .n { color: var(--muted); font-size: 15px; text-shadow: none; }
 .hold.none .t { color: var(--muted); }
 .lev { font-family: var(--mono); font-size: 10px; color: var(--muted); }
 .lev b { color: var(--cyan); }
 .waited { font-family: var(--mono); font-size: 9.5px; color: var(--muted); margin-top: 3px; }
 
-/* 상세 */
+/* ── 상세: 각료 화면 ── */
 #detail { display: none; }
 #detail.on { display: block; }
 #grid.hide { display: none; }
@@ -108,10 +198,22 @@ main { padding: 16px 20px 60px; max-width: 1760px; }
   margin-bottom: 14px;
 }
 .back:hover { color: var(--cyan); border-color: var(--cyan); }
-.dhead { border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 16px; }
-.dhead h2 { margin: 0 0 6px; font-size: 21px; letter-spacing: -0.4px; }
+.dhead {
+  position: relative; display: flex; gap: 14px; align-items: flex-start;
+  border: 1px solid var(--line); border-radius: 4px; background: var(--panel);
+  padding: 14px 16px; margin-bottom: 18px; max-width: 1200px;
+}
+.dhead::before, .dhead::after {
+  content: ""; position: absolute; width: 11px; height: 11px; pointer-events: none;
+  border-color: rgba(56,198,244,0.55); border-style: solid;
+}
+.dhead::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+.dhead::after { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+.dhead .crest { width: 52px; height: 52px; font-size: 17px; }
+.dhead h2 { margin: 0 0 5px; font-size: 20px; letter-spacing: -0.4px; display: flex; align-items: center; gap: 8px; }
 .dhead .meta { font-family: var(--mono); font-size: 10.5px; color: var(--muted); }
 .dhead .meta b { color: var(--text); }
+.dhead .pips { margin: 7px 0 0; }
 .pchips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
 .pchips a {
   font-family: var(--mono); font-size: 10px; text-decoration: none; color: var(--muted);
@@ -122,17 +224,23 @@ main { padding: 16px 20px 60px; max-width: 1760px; }
 section.blk { margin-bottom: 22px; max-width: 1200px; }
 section.blk h3 {
   font-size: 12px; font-family: var(--mono); letter-spacing: 0.1em; color: var(--cyan);
-  margin: 0 0 4px; text-transform: uppercase;
+  margin: 0 0 4px; text-transform: uppercase; display: flex; align-items: center; gap: 7px;
 }
+section.blk h3::before { content: "▮"; font-size: 9px; color: rgba(56,198,244,0.6); }
 section.blk .hint { font-size: 11px; color: var(--muted); margin: 0 0 9px; }
 .empty { font-size: 12px; color: var(--muted); border: 1px dashed rgba(95,123,144,0.3); border-radius: 4px; padding: 11px 13px; }
 
 .row {
   display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
-  border: 1px solid var(--line); border-radius: 5px; background: var(--panel);
+  border: 1px solid var(--line); border-left-width: 3px; border-radius: 4px; background: var(--panel);
   padding: 9px 12px; margin-bottom: 6px; text-decoration: none; color: inherit;
+  transition: border-color 0.13s, background 0.13s;
 }
+.row.st-front { border-left-color: var(--amber); }
+.row.st-act { border-left-color: var(--green); }
+.row.st-wait { border-left-color: rgba(95,123,144,0.5); }
 a.row:hover, a.row:focus-visible { border-color: var(--cyan); background: var(--panel2); outline: none; }
+a.row:hover { border-left-width: 3px; }
 .row .proj { font-family: var(--mono); font-size: 9px; color: var(--violet); white-space: nowrap; }
 .row .gid { font-family: var(--mono); font-size: 10px; color: var(--cyan); }
 .row .rn { font-size: 12.5px; flex: 1; min-width: 220px; }
@@ -146,7 +254,7 @@ a.row:hover, a.row:focus-visible { border-color: var(--cyan); background: var(--
 .badge.co { color: var(--muted); }
 .badge.act { color: var(--green); }
 
-.uarole { border: 1px solid var(--line); border-radius: 5px; background: var(--panel); padding: 10px 12px; margin-bottom: 7px; }
+.uarole { border: 1px solid var(--line); border-radius: 4px; background: var(--panel); padding: 10px 12px; margin-bottom: 7px; }
 .uarole .rl { font-size: 12.5px; font-weight: 600; margin-bottom: 5px; }
 .uarole .rl span { font-family: var(--mono); font-size: 10px; color: var(--muted); font-weight: 400; margin-left: 6px; }
 .uarole .g { font-family: var(--mono); font-size: 10px; color: var(--muted); display: block; padding: 1px 0; text-decoration: none; }
@@ -154,12 +262,27 @@ a.row:hover, a.row:focus-visible { border-color: var(--cyan); background: var(--
 
 footer { max-width: 1200px; margin-top: 26px; padding-top: 12px; border-top: 1px solid rgba(95,123,144,0.2);
   font-size: 11px; color: var(--muted); line-height: 1.7; }
+.legend { display: inline-flex; align-items: center; gap: 4px; margin-right: 12px; font-family: var(--mono); font-size: 10px; }
+.legend i { width: 7px; height: 7px; border-radius: 1.5px; display: inline-block; }
+
+/* ── 툴팁: 파라독스식 호버 설명 ── */
+#tip {
+  position: fixed; z-index: 100; display: none; max-width: 300px;
+  background: rgba(7,13,21,0.97); border: 1px solid rgba(56,198,244,0.4); border-radius: 4px;
+  padding: 7px 10px; font-size: 11px; line-height: 1.55; color: var(--text);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.6); pointer-events: none;
+}
+#tip .tt { font-family: var(--mono); font-size: 9px; color: var(--cyan); letter-spacing: 0.08em; display: block; margin-bottom: 2px; }
 </style>
 </head>
 <body>
-<header>
-  <h1>부처 상황판</h1>
-  <span class="sub" id="hsub"></span>
+<header class="hud">
+  <div class="brand">
+    <span class="lamp" aria-hidden="true"></span>
+    <h1>부처 상황판</h1>
+    <span class="sub">WARROOM · MINISTRY</span>
+  </div>
+  <div id="hudstats"></div>
   <nav class="links">
     <a href="../map/">관문 지도</a>
     <a href="../board/">주체별 상황판</a>
@@ -167,6 +290,10 @@ footer { max-width: 1200px; margin-top: 26px; padding-top: 12px; border-top: 1px
     <a href="../">워룸</a>
   </nav>
 </header>
+<div class="tickerbar">
+  <span class="tlabel">보고</span>
+  <div id="ticker">집계를 불러오는 중…</div>
+</div>
 
 <main>
   <div class="notice" id="notice"></div>
@@ -184,42 +311,108 @@ footer { max-width: 1200px; margin-top: 26px; padding-top: 12px; border-top: 1px
 
   <footer id="foot"></footer>
 </main>
+<div id="tip" role="tooltip"></div>
 
 <script>
 const $ = (s, r = document) => r.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const MAP = (pid) => `../map/${pid === "gwangju-semiconductor-cluster" ? "" : `?p=${pid}`}`;
-const LEVEL_KO = {
-  cabinet: "총리·국무회의", legislature: "국회·입법", presidential_committee: "대통령 소속 위원회",
-  minister: "부처 장관", local: "지자체장", committee: "위원회·전문기관", field: "실무·사업자",
-};
 // 부처가 아닌 결정주체 — 카드에 성격을 밝힌다
 const NOT_MINISTRY = {
   assembly: "의정 협조 대상", "pm-office": "총리·국무회의", president: "대통령실",
   "balance-committee": "대통령 소속 위원회", "decentral-council": "대통령 소속 회의",
   "land-policy-committee": "법정 위원회",
 };
+// 문장(각료) 표기 — 라벨 앞 두 글자. 시뮬레이션 게임의 초상 자리
+const crestOf = (label) => label.replace(/[·\s]/g, "").slice(0, 2);
 
-let B = null, SORT = "holding";
+let B = null, SORT = "holding", tickerTimer = null;
 
 fetch("../map/ministry-board.json").then((r) => r.json()).then((b) => {
   B = b;
+  renderHud();
   const pn = b.projects.length;
-  $("#hsub").textContent = `${pn} PROJECTS · ${b.totals.gates + b.totals.unassignedGates} GATES · AS OF ${b.generatedAt}`;
   $("#notice").innerHTML =
     `<b>이 화면이 보여주는 것은 부처의 전체 업무가 아니라, 등재된 국가 핵심사업 ${pn}개에 걸린 관문뿐입니다.</b> `
     + `지금 공이 어느 부처에 있는지를 보는 판이며, 부처의 업무량·성과를 비교하는 자료가 아닙니다. `
     + `공개 자료(법령·관보·언론)를 근거로 한 추정이고, 상태 확정은 사람이 합니다.`;
   $("#sortbar").hidden = false;
   $("#foot").innerHTML =
-    `한 관문에 결정주체가 여럿이면 각 주체에 모두 계상하므로, 카드의 담당 관문 수를 모두 더하면 실제 관문 수보다 큽니다.<br>`
+    `<span class="legend"><i style="background:var(--green)"></i> 완료</span>`
+    + `<span class="legend"><i style="background:var(--cyan)"></i> 진행</span>`
+    + `<span class="legend"><i style="background:var(--amber)"></i> 착수 가능</span>`
+    + `<span class="legend"><i style="background:rgba(95,123,144,0.45)"></i> 대기</span>`
+    + ` — 점 1개가 관문 1개입니다(비율 막대가 아닙니다).<br>`
+    + `한 관문에 결정주체가 여럿이면 각 주체에 모두 계상하므로, 카드의 담당 관문 수를 모두 더하면 실제 관문 수보다 큽니다.<br>`
     + `“기다린 일수”는 집계를 시작한 ${esc(b.sinceBaseline ?? b.generatedAt)}부터 누적하므로, 초기에는 실제보다 짧게 보입니다.<br>`
     + `데이터: <a href="../map/">관문 의존 지도</a> · 생성 <span class="mono">npm run generate:warroom-map:all</span>`;
   bindSort();
+  bindTip();
+  startTicker();
   route();
 });
 
 window.addEventListener("hashchange", route);
+
+// HUD 수치는 전부 집계 파일에서 계산 — 공동 담당 이중 계상을 피하려고 (사업,관문) 키로 중복 제거
+function renderHud() {
+  const uniq = new Set();
+  for (const m of B.ministries) for (const h of m.holding) uniq.add(`${h.project}/${h.gate}`);
+  const stats = [
+    { k: "PROJECTS", v: B.projects.length },
+    { k: "GATES", v: B.totals.gates ? B.totals.gates - 0 + B.totals.unassignedGates : 0, tip: "부처 계상 합이 아니라 실제 관문 수 기준" },
+    { k: "착수 가능", v: uniq.size, cls: "warn", tip: "선행 관문이 모두 끝나 지금 시작할 수 있는 관문(전 사업, 중복 제거)" },
+    { k: "주체 미특정", v: B.totals.unassignedGates, cls: "dimc", tip: "결정주체가 역할명으로만 정해져 있어 부처로 접히지 않는 관문" },
+    { k: "AS OF", v: B.generatedAt, small: true },
+  ];
+  $("#hudstats").innerHTML = stats.map((s) =>
+    `<div class="hstat" ${s.tip ? `data-tip="${esc(s.tip)}" data-tt="${esc(s.k)}"` : ""}>
+      <span class="v num ${s.cls ?? ""}" ${s.small ? 'style="font-size:11px;padding-top:4px"' : ""}>${esc(s.v)}</span>
+      <span class="k">${esc(s.k)}</span></div>`).join("");
+}
+
+// 보고 티커 — 레버리지 큰 착수 가능 관문부터 참모 보고처럼 순환
+function startTicker() {
+  const items = [];
+  for (const m of B.ministries) {
+    for (const h of m.holding) {
+      items.push({ lev: h.leverage, html:
+        `<b>${esc(m.label)}</b> — <span class="gid">${esc(h.gate)}</span> ${esc(h.name)} 착수 가능`
+        + (h.leverage ? ` · 풀리면 하류 <b>${h.leverage}개</b> 이동` : "") });
+    }
+  }
+  items.sort((a, b) => b.lev - a.lev);
+  const msgs = items.slice(0, 10).map((x) => x.html);
+  if (B.totals.unassignedGates) {
+    msgs.push(`결정주체 미특정 관문 <b>${B.totals.unassignedGates}개</b> — 누가 결정하는지부터 정해야 합니다`);
+  }
+  if (!msgs.length) { $("#ticker").textContent = "보고할 착수 가능 관문이 없습니다."; return; }
+  let i = 0;
+  const show = () => {
+    const t = $("#ticker");
+    t.style.opacity = 0;
+    setTimeout(() => { t.innerHTML = msgs[i % msgs.length]; t.style.opacity = 1; i += 1; }, 350);
+  };
+  show();
+  tickerTimer = setInterval(show, 5000);
+}
+
+// 툴팁 — data-tip 요소 어디서나
+function bindTip() {
+  const tip = $("#tip");
+  document.addEventListener("mouseover", (e) => {
+    const el = e.target.closest("[data-tip]");
+    if (!el) { tip.style.display = "none"; return; }
+    tip.innerHTML = (el.dataset.tt ? `<span class="tt">${esc(el.dataset.tt)}</span>` : "") + esc(el.dataset.tip);
+    tip.style.display = "block";
+  });
+  document.addEventListener("mousemove", (e) => {
+    if (tip.style.display !== "block") return;
+    const x = Math.min(e.clientX + 14, window.innerWidth - tip.offsetWidth - 10);
+    const y = Math.min(e.clientY + 16, window.innerHeight - tip.offsetHeight - 10);
+    tip.style.left = `${x}px`; tip.style.top = `${y}px`;
+  });
+}
 
 function bindSort() {
   for (const btn of document.querySelectorAll("#sortbar button")) {
@@ -246,6 +439,15 @@ function sorted() {
   return ms;
 }
 
+// 점 1개 = 관문 1개. 비율로 뭉개지 않고 낱개를 그대로 그린다
+function pipRow(c) {
+  const rest = Math.max(0, c.own - c.completed - c.active - c.frontier);
+  const seg = (n, cls) => Array.from({ length: n }, () => `<i class="${cls}"></i>`).join("");
+  return `<div class="pips" data-tt="관문 ${c.own}개"
+      data-tip="완료 ${c.completed} · 진행 ${c.active} · 착수 가능 ${c.frontier} · 대기 ${rest} — 점 1개가 관문 1개입니다">
+    ${seg(c.completed, "done")}${seg(c.active, "act")}${seg(c.frontier, "front")}${seg(rest, "wait")}</div>`;
+}
+
 function renderGrid() {
   $("#detail").className = "";
   $("#grid").className = "";
@@ -255,25 +457,30 @@ function renderGrid() {
     const oldest = m.holding.length ? m.holding.map((h) => h.since).sort()[0] : null;
     const days = oldest ? daysSince(oldest) : 0;
     return `<button class="card${c.frontier ? "" : " dim"}" data-m="${esc(m.id)}">
+      ${c.frontier ? `<span class="alert" data-tt="착수 가능" data-tip="선행 관문이 모두 끝나 지금 시작할 수 있는 관문이 ${c.frontier}건 있습니다">!</span>` : ""}
       <div class="top">
-        <span class="nm">${esc(m.label)}</span>
-        ${NOT_MINISTRY[m.id] ? `<span class="tag">${esc(NOT_MINISTRY[m.id])}</span>` : ""}
+        <span class="crest${NOT_MINISTRY[m.id] ? " gray" : c.frontier ? " warn" : ""}">${esc(crestOf(m.label))}</span>
+        <span>
+          <span class="nm">${esc(m.label)}</span>
+          ${NOT_MINISTRY[m.id] ? ` <span class="tag">${esc(NOT_MINISTRY[m.id])}</span>` : ""}
+        </span>
         <span class="scope">${m.projects.length}개 사업 기준</span>
       </div>
+      ${pipRow(c)}
       <div class="counts num">담당 <b>${c.own}</b> · 완료 <b>${c.completed}</b> · 진행 <b>${c.active}</b> · 예정 <b>${c.planned + c.unknown}</b></div>
       <div class="hold${c.frontier ? "" : " none"}">
         <span class="n num">${c.frontier || "—"}</span>
         <span class="t">${c.frontier ? "지금 쥐고 있는 것" : "지금 대기 중인 관문 없음"}</span>
       </div>
       ${lv && lv.blocked > 0
-        ? `<div class="lev num">⚡ 지연 시 하류 <b>${lv.blocked}개</b> 정지 — ${esc(lv.gate)} ${esc(clip(lv.name, 22))}</div>` : ""}
+        ? `<div class="lev num" data-tt="레버리지" data-tip="이 관문이 지연되면 필수 의존을 따라 하류 ${lv.blocked}개 관문이 멈춥니다">⚡ 지연 시 하류 <b>${lv.blocked}개</b> 정지 — ${esc(lv.gate)} ${esc(clip(lv.name, 22))}</div>` : ""}
       ${days > 0 ? `<div class="waited num">최장 ${days}일째 대기</div>` : ""}
     </button>`;
   });
   const ua = B.unassigned, uaGates = B.totals.unassignedGates;
   cards.push(`<button class="card dim" data-m="unassigned">
-    <div class="top"><span class="nm">결정주체 미특정</span>
-      <span class="tag">확정 필요</span>
+    <div class="top"><span class="crest gray">?</span>
+      <span><span class="nm">결정주체 미특정</span> <span class="tag">확정 필요</span></span>
       <span class="scope">${ua.length}개 역할명</span></div>
     <div class="counts">법령이 “산업단지 지정권자”처럼 역할로만 정한 관문입니다. 부처로 추정 배정하지 않습니다.</div>
     <div class="hold"><span class="n num">${uaGates}</span><span class="t">결정주체를 정해야 할 관문</span></div>
@@ -296,8 +503,8 @@ function pname(pid) { return B.projects.find((p) => p.id === pid)?.name ?? pid; 
 // 행·칩에는 약칭을 쓴다 — 정식명은 title 속성에만 남긴다
 function pshort(pid) { const p = B.projects.find((x) => x.id === pid); return p?.short ?? p?.name ?? pid; }
 
-function gateRow(o, aside, extra = "") {
-  return `<a class="row" href="${MAP(o.project)}" target="_blank" rel="noopener"
+function gateRow(o, aside, extra = "", stcls = "st-wait") {
+  return `<a class="row ${stcls}" href="${MAP(o.project)}" target="_blank" rel="noopener"
       title="${esc(pname(o.project))} 관문 지도에서 보기">
     <span class="proj">${esc(pshort(o.project))}</span>
     <span class="gid">${esc(o.gate)}</span>
@@ -320,11 +527,12 @@ function renderDetail(id) {
     ? m.holding.map((h) => gateRow(h,
         `${daysSince(h.since) > 0 ? `${daysSince(h.since)}일째 · ` : ""}풀리면 <b>▶${h.leverage}개</b>`,
         `${h.status === "unknown" ? ' <span class="badge unk">미확정</span>' : ""}`
-        + `${h.co?.length ? ` <span class="badge co">공동 ${esc(h.co.join("·"))}</span>` : ""}`)).join("")
+        + `${h.co?.length ? ` <span class="badge co">공동 ${esc(h.co.join("·"))}</span>` : ""}`,
+        "st-front")).join("")
     : `<div class="empty">지금 이 부처 앞에 대기 중인 관문이 없습니다. 선행 관문이 풀리면 여기에 나타납니다.</div>`;
 
   const awaited = m.awaited.length
-    ? m.awaited.map((a) => `<div class="row">
+    ? m.awaited.map((a) => `<div class="row st-wait">
         <span class="proj">${esc(pshort(a.project))}</span>
         <span class="gid">${esc(a.upGate)} → ${esc(a.downGate)}</span>
         <span class="rn">${esc(a.downName)}</span>
@@ -333,7 +541,7 @@ function renderDetail(id) {
     : `<div class="empty">이 부처의 미완료 관문에 걸린 하류 관문이 없습니다.</div>`;
 
   const active = m.active.length
-    ? m.active.map((a) => gateRow(a, '<span class="badge act">진행 중</span>')).join("")
+    ? m.active.map((a) => gateRow(a, '<span class="badge act">진행 중</span>', "", "st-act")).join("")
     : `<div class="empty">진행 중으로 확인된 관문이 없습니다.</div>`;
 
   const legis = m.legislative.length
@@ -342,12 +550,16 @@ function renderDetail(id) {
 
   d.innerHTML = `<button class="back">← 부처 전체</button>
     <div class="dhead">
-      <h2>${esc(m.label)}${NOT_MINISTRY[m.id] ? ` <span class="tag">${esc(NOT_MINISTRY[m.id])}</span>` : ""}</h2>
-      <div class="meta num">담당 <b>${c.own}</b> · 완료 <b>${c.completed}</b> · 진행 <b>${c.active}</b>
-        · 예정 <b>${c.planned + c.unknown}</b> · 쥐고 있는 것 <b>${c.frontier}</b>
-        &nbsp;|&nbsp; ${m.projects.length}개 사업 기준 · 집계 ${esc(B.generatedAt)}</div>
-      <div class="pchips">${m.projects.map((p) =>
-        `<a href="${MAP(p)}" target="_blank" rel="noopener" title="${esc(pname(p))}">${esc(pshort(p))} 지도</a>`).join("")}</div>
+      <span class="crest${NOT_MINISTRY[m.id] ? " gray" : c.frontier ? " warn" : ""}">${esc(crestOf(m.label))}</span>
+      <div>
+        <h2>${esc(m.label)}${NOT_MINISTRY[m.id] ? ` <span class="tag">${esc(NOT_MINISTRY[m.id])}</span>` : ""}</h2>
+        <div class="meta num">담당 <b>${c.own}</b> · 완료 <b>${c.completed}</b> · 진행 <b>${c.active}</b>
+          · 예정 <b>${c.planned + c.unknown}</b> · 쥐고 있는 것 <b>${c.frontier}</b>
+          &nbsp;|&nbsp; ${m.projects.length}개 사업 기준 · 집계 ${esc(B.generatedAt)}</div>
+        ${pipRow(c)}
+        <div class="pchips">${m.projects.map((p) =>
+          `<a href="${MAP(p)}" target="_blank" rel="noopener" title="${esc(pname(p))}">${esc(pshort(p))} 지도</a>`).join("")}</div>
+      </div>
     </div>
     <section class="blk"><h3>쥐고 있는 것</h3>
       <p class="hint">선행 관문이 모두 끝나 지금 착수할 수 있는데 아직 시작되지 않은 관문입니다. 하류를 많이 세우는 순서로 정렬했습니다.</p>
@@ -369,8 +581,11 @@ function renderUnassigned() {
   </div>`).join("");
   return `<button class="back">← 부처 전체</button>
     <div class="dhead">
-      <h2>결정주체 미특정 <span class="tag">확정 필요</span></h2>
-      <div class="meta num">${B.unassigned.length}개 역할명 · <b>${B.totals.unassignedGates}</b>개 관문</div>
+      <span class="crest gray">?</span>
+      <div>
+        <h2>결정주체 미특정 <span class="tag">확정 필요</span></h2>
+        <div class="meta num">${B.unassigned.length}개 역할명 · <b>${B.totals.unassignedGates}</b>개 관문</div>
+      </div>
     </div>
     <section class="blk">
       <p class="hint">법령이 결정주체를 “산업단지 지정권자”처럼 역할로만 정해 둔 관문입니다.
