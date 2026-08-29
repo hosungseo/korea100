@@ -1,0 +1,246 @@
+{
+ "slug": "health-medical-development-plan",
+ "name": "보건의료발전계획·지역보건의료계획",
+ "oneLiner": "보건의료발전계획 → 주요 시책 추진방안 → 지역보건의료계획 → 계획 수립 협조 → 보건의료 통계·정보 관리로 이어지는 보건의료 계획 절차.",
+ "type": "계획수립형",
+ "priority": 641,
+ "category": "복지와 사회보험",
+ "whyFirst": "5극3특 권역별 거점병원·공공의료체계 관문이 실제로 타는 상위 계획. 공공보건의료법과 짝을 이룬다.",
+ "asOfDate": "2026-08-29",
+ "status": "full",
+ "canvas": {
+  "purpose": "보건의료 정책을 국가·지역 계획으로 관리한다.",
+  "stakeholders": "보건복지부, 시·도지사, 시장·군수·구청장, 의료기관",
+  "legalBasis": [
+   {
+    "law": "보건의료기본법",
+    "articles": "제15조·제16조·제17조·제18조·제53조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "보건복지부장관",
+    "role": "보건의료발전계획 수립"
+   },
+   {
+    "name": "시·도지사",
+    "role": "지역보건의료계획 수립"
+   }
+  ],
+  "procedure": [
+   "보건의료발전계획 수립",
+   "주요 시책 추진방안 수립·시행",
+   "지역보건의료계획 수립·시행",
+   "계획 수립의 협조 요청",
+   "보건의료 통계·정보 관리시책"
+  ],
+  "moneyFlow": "관련 지원·사업비는 개별 예산 절차에 따른다.",
+  "docsFlow": "보건의료발전계획 → 주요 시책 추진방안 → 지역보건의료계획 → 협조 요청 → 통계·정보",
+  "bottlenecks": [
+   "국가계획과 지역계획의 시차"
+  ],
+  "reformPoints": [
+   "계획·처분 결과의 공개 확대"
+  ]
+ },
+ "related": [],
+ "fieldVerification": [
+  "권역별 거점병원 구상의 계획 반영 여부"
+ ],
+ "process": {
+  "institution_name": "보건의료발전계획·지역보건의료계획",
+  "law_name": "보건의료기본법",
+  "lanes": [
+   "보건복지부",
+   "시·도",
+   "의료기관"
+  ],
+  "stages": [
+   "G0 국가계획",
+   "G1 시책",
+   "G2 지역계획",
+   "G3 정보"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "보건의료발전계획 수립",
+    "lane": "보건복지부",
+    "stage": "G0 국가계획",
+    "type": "gateway",
+    "status": "current",
+    "progress": 40,
+    "actor": "보건복지부장관",
+    "action": "보건의료발전계획을 수립한다.",
+    "output_documents": [
+     "보건의료발전계획"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "보건의료기본법",
+      "article": "제15조",
+      "text": "제15조(보건의료발전계획의 수립 등) ① 보건복지부장관은 관계 중앙행정기관의 장과의 협의와 제20조에 따른 보건의료정책심의위원회의 심의를 거쳐 보건의료발전계획을 5년마다 수립하여야 한다. ② 보건의료발전계획에 포함되어야 할 사항은 다음 각 호와 같다. <개정 2016.5.29> ③ 보건의료발전계획은 국무회의의 심의를 거쳐 확정한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "주요 시책 추진방안 수립·시행",
+    "lane": "보건복지부",
+    "stage": "G1 시책",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보건복지부장관",
+    "action": "주요 시책 추진방안을 수립·시행한다.",
+    "output_documents": [
+     "추진방안"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "보건의료기본법",
+      "article": "제16조",
+      "text": "제16조(주요 시책 추진방안의 수립ㆍ시행) 보건복지부장관과 관계 중앙행정기관의 장은 보건의료발전계획이 확정되면 이를 기초로 하여 보건의료와 관련된 소관 주요 시책의 추진방안을 매년 수립ㆍ시행하여야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "지역보건의료계획 수립·시행",
+    "lane": "시·도",
+    "stage": "G2 지역계획",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "시·도지사",
+    "action": "지역보건의료계획을 수립·시행한다.",
+    "output_documents": [
+     "지역보건의료계획"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "보건의료기본법",
+      "article": "제17조",
+      "text": "제17조(지역보건의료계획의 수립ㆍ시행) 특별시장ㆍ광역시장ㆍ도지사ㆍ특별자치도지사(이하 \"시ㆍ도지사\"라 한다) 및 시장ㆍ군수ㆍ구청장(자치구의 구청장을 말한다. 이하 같다)은 보건의료발전계획이 확정되면 관계 법령에서 정하는 바에 따라 지방자치단체의 실정을 감안하여 지역보건의료계획을 수립ㆍ시행하여야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "계획 수립의 협조 요청",
+    "lane": "의료기관",
+    "stage": "G2 지역계획",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보건복지부장관",
+    "action": "계획 수립에 필요한 협조를 요청한다.",
+    "output_documents": [
+     "협조 요청서"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "보건의료기본법",
+      "article": "제18조",
+      "text": "제18조(계획 수립의 협조) ① 보건복지부장관, 관계 중앙행정기관의 장, 시ㆍ도지사 및 시장ㆍ군수ㆍ구청장은 보건의료발전계획과 소관 주요 시책 추진방안 및 지역보건의료계획의 수립ㆍ시행을 위하여 필요하면 관계 기관ㆍ단체 등에 대하여 자료 제공 등의 협조를 요청할 수 있다. ② 제1항에 따른 협조 요청을 받은 관계 기관ㆍ단체 등은 특별한 사유가 없으면 협조 요청에 따라야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "보건의료 통계·정보 관리시책",
+    "lane": "보건복지부",
+    "stage": "G3 정보",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "보건복지부장관",
+    "action": "보건의료 통계·정보 관리시책을 수립한다.",
+    "output_documents": [
+     "통계·정보 시책"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "보건의료기본법",
+      "article": "제53조",
+      "text": "제53조(보건의료 통계ㆍ정보 관리시책) 국가와 지방자치단체는 보건의료에 관한 통계와 정보를 수집ㆍ관리하여 이를 보건의료정책에 활용할 수 있도록 필요한 시책을 수립ㆍ시행하여야 한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건·기한은 시행령과 사실관계에 따라 달라질 수 있다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-08-29",
+  "method": "국가법령정보센터 DRF Open API(lawService.do) 조문 원문 대조",
+  "scope": "법적 근거 1건을 공식 원문(MST 고정판)과 연결했다. 절차 노드의 명시 조문 5건은 본 세션에서 DRF 원문으로 조 단위 실재를 확인했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "보건의료기본법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "보건의료기본법",
+    "lawId": "002029",
+    "mst": "279701",
+    "promulgatedOn": "2025-11-11",
+    "effectiveOn": "2026-05-12",
+    "officialUrl": "https://law.go.kr/법령/보건의료기본법",
+    "pinnedVersion": true
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-08-29",
+   "method": "국가법령정보센터 DRF Open API 조문 원문 전건 대조(본 세션, 조 단위)",
+   "citationEntries": 5,
+   "explicitCitationEntries": 5,
+   "articleReferences": 5,
+   "verifiedReferences": 5,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

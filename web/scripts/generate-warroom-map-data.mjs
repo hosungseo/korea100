@@ -2,7 +2,8 @@
 // Build trimmed graph data for the warroom dependency map (/warroom/map/).
 // Reads the gwangju semiconductor project JSON and emits nodes, stages and
 // typed edges resolved from requires[].artifact -> produces[] tokens.
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, readdirSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -10,6 +11,15 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 // 기본 프로젝트는 광주 — 이 프로젝트만 /warroom/map/ 루트에 쓴다(기존 URL 유지).
 // 다른 프로젝트는 /warroom/map/<id>/ 하위에 쓰고 지도 페이지가 ?p=<id>로 읽는다.
 const DEFAULT_PROJECT = "gwangju-semiconductor-cluster";
+// --all: map-tracks/ 에 트랙 파일이 있는 프로젝트를 전부 순회한다(새 프로젝트 추가 시 스크립트 수정 불필요)
+if (process.argv[2] === "--all") {
+  const dir = join(root, "data/mega-projects/map-tracks");
+  const ids = readdirSync(dir).filter((f) => f.endsWith(".json")).map((f) => f.slice(0, -5)).sort();
+  for (const id of ids) {
+    execFileSync(process.execPath, [fileURLToPath(import.meta.url), id], { stdio: "inherit" });
+  }
+  process.exit(0);
+}
 const projectId = process.argv[2] ?? DEFAULT_PROJECT;
 const srcPath = join(root, `data/mega-projects/projects/${projectId}.json`);
 const outDir =
