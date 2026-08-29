@@ -17,6 +17,7 @@ WEB = Path(__file__).resolve().parent.parent
 RHWP = os.environ.get("RHWP", str(Path.home() / ".local/bin/rhwp"))
 TEMPLATE = WEB / "templates/warroom-daily-template.hwpx"
 BRIEFING = WEB / "public/warroom/loop/briefing.txt"
+BRIEF_JSON = WEB / "public/warroom/loop/briefing.json"
 MAPDATA = WEB / "public/warroom/map/data.json"
 LOOP_URL = "hosungseo.github.io/korea100/warroom/loop/"
 FIELDS = ["군공항", "산단·인허가", "전력", "용수", "건축·가동"]
@@ -64,16 +65,88 @@ def pick(sec, *names):
     return []
 
 
-def gate_names():
-    """관문 ID → 이름. * 용어 풀이 줄에 쓴다."""
+def shorten(nm, limit):
+    """말끝이 잘려 뜻이 끊기지 않도록 구분자(·, 공백) 경계에서 자른다."""
+    if len(nm) <= limit:
+        return nm
+    cut = nm[:limit]
+    for sep in ("·", " "):
+        i = cut.rfind(sep)
+        if i >= limit // 2:
+            return cut[:i] + "…"
+    return cut.rstrip(" ·-") + "…"
+
+
+def gate_names(limit=13):
+    """관문 ID → 이름. 표 칸과 리스크 * 줄이 한 줄에 들어가야 하므로 줄여서 준다."""
     try:
         nodes = json.loads(MAPDATA.read_text())["nodes"]
-        return {n["id"]: n["name"] for n in nodes}
     except Exception:
         return {}
+    return {n["id"]: shorten(n["name"], limit) for n in nodes}
+
+
+PIPE_MAX = 44   # ※ 줄(맑은고딕 12pt, 들여쓰기 4500)이 한 줄에 담기는 글자 수
+
+
+def fit_pipe(text):
+    """※ 수치 줄을 한 줄에 맞춘다. 모델이 길이를 지키지 않아도 뒤 항목부터 떨궈 맞춘다."""
+    if not text:
+        return ""
+    parts = [x.strip() for x in re.split(r"[,;]\s*", text) if x.strip()]
+    while parts and len("※ " + ", ".join(parts)) > PIPE_MAX:
+        parts.pop()
+    return "※ " + ", ".join(parts) if parts else ""
 
 
 def build_tokens():
+    """briefing.json(구조) 우선. 없으면 briefing.txt 파싱으로 물러난다.
+
+    평문 파싱은 모델 출력 형식이 매번 달라 일곱 번 깨졌다(마크다운·영어 서두·
+    불릿 붙은 ※·원문자 번호·관문 ID 위치). 그래서 생성기가 JSON 을 내도록 바꾸고
+    여기서는 그것을 읽는다 — 평문 경로는 폴백으로만 남긴다.
+    """
+    if BRIEF_JSON.exists():
+        return tokens_from_json(json.loads(BRIEF_JSON.read_text()))
+    return tokens_from_text()
+
+
+def tokens_from_json(b):
+    gmap = gate_names()
+    tok = {"TITLE": b["title"]}
+    y, mo, d = b["date"].split("-")
+    tok["SUBTITLE"] = f"{y}. {int(mo)}. {int(d)}. · 언론·정책브리핑 신호 자동집계 기반"
+
+    for i in range(3):
+        r = b["reports"][i] if i < len(b["reports"]) else {}
+        press = f"({r['press']}) " if r.get("press") else ""
+        tok[f"R{i+1}H"] = f"○ {press}{r['title']}" if r.get("title") else ""
+        tok[f"R{i+1}B"] = f"- {r['body']}" if r.get("body") else ""
+
+    by = {f["name"]: f for f in b.get("fields", [])}
+    for i, name in enumerate(FIELDS, start=1):
+        f = by.get(name, {})
+        tok[f"S{i}"] = f.get("status") or "변동 없음"
+        gs = f.get("gates") or []
+        tok[f"G{i}"] = (f"{gs[0]} {gmap.get(gs[0], '')}".strip()
+                        + (f" 외 {len(gs)-1}" if len(gs) > 1 else "")) if gs else "-"
+
+    for i in range(3):
+        r = b["risks"][i] if i < len(b.get("risks", [])) else {}
+        tok[f"RK{i+1}"] = f"- {r['text']}" if r.get("text") else ""
+        gs = r.get("gates") or []
+        tok[f"RK{i+1}N"] = (f"* ({gs[0]}) {gmap.get(gs[0], '')}".strip()
+                            + (f" 외 {len(gs)-1}" if len(gs) > 1 else "")) if gs else ""
+
+    for i in range(2):
+        acts = b.get("actions", [])
+        tok[f"AC{i+1}"] = f"- {acts[i]}" if i < len(acts) else ""
+
+    tok["PIPE"] = fit_pipe(b.get("pipeline") or "")
+    return tok, b["date"]
+
+
+def tokens_from_text():
     head, sec = parse(BRIEFING.read_text())
     tok = {}
 
@@ -98,8 +171,8 @@ def build_tokens():
         reports.append(cur)
     for i in range(3):
         h, b = reports[i] if i < len(reports) else ("", "")
-        tok[f"R{i+1}H"] = f"ㅇ {h}" if h else ""
-        tok[f"R{i+1}B"] = f"– {b}" if b else ""
+        tok[f"R{i+1}H"] = f"○ {h}" if h else ""
+        tok[f"R{i+1}B"] = f"- {b}" if b else ""
 
     # 분야별 절차 진행상황 — "분야: 내용" 을 표 5행에 맞춘다. 관문 ID 는 별도 열로 뺀다
     # 관문 ID 는 "군공항(N31·N32): …" 처럼 분야명 쪽에 붙기도 하고 서술 쪽에 붙기도 한다.
@@ -118,7 +191,13 @@ def build_tokens():
             if g not in seen:
                 seen.add(g)
                 uniq.append(g)
-        tok[f"G{i}"] = ("·".join(uniq[:4]) + ("…" if len(uniq) > 4 else "")) if uniq else "–"
+        names_map = gate_names()
+        if uniq:
+            g0 = uniq[0]
+            tok[f"G{i}"] = f"{g0} {names_map.get(g0, '')}".strip() \
+                           + (f" 외 {len(uniq)-1}" if len(uniq) > 1 else "")
+        else:
+            tok[f"G{i}"] = "-"
         # 관문 ID 는 옆 칸으로 옮겼으므로 본문에서는 지운다
         txt = re.sub(r"\(?\s*N\d{2,}(?:\s*[·,]\s*N\d{2,})*\s*\)?", "", body)
         tok[f"S{i}"] = re.sub(r"\s{2,}", " ", txt).strip(" ,·") or "특이사항 없음"
@@ -134,10 +213,23 @@ def build_tokens():
                 out.append(body)
         return out
 
-    for key, names in (("RK", ("리스크",)), ("AC", ("조치",))):
-        lines = bullets(*names)
-        for i in range(3):
-            tok[f"{key}{i+1}"] = f"– {lines[i]}" if i < len(lines) else ""
+    gmap = gate_names()
+    risks = bullets("리스크")
+    for i in range(3):
+        raw = risks[i] if i < len(risks) else ""
+        gs, seen2 = [], set()
+        for g in re.findall(r"N\d{2,}", raw):
+            if g not in seen2:
+                seen2.add(g)
+                gs.append(g)
+        body = re.sub(r"[(（]?\s*N\d{2,}(?:\s*[·,]\s*N\d{2,})*\s*[)）]?", "", raw)
+        body = re.sub(r"\s{2,}", " ", body).strip(" :,·")
+        tok[f"RK{i+1}"] = f"- {body}" if body else ""
+        tok[f"RK{i+1}N"] = (f"* ({gs[0]}) {gmap.get(gs[0], '')}".strip()
+                            + (f" 외 {len(gs)-1}" if len(gs) > 1 else "")) if gs else ""
+    acts = bullets("조치")
+    for i in range(2):
+        tok[f"AC{i+1}"] = f"- {acts[i]}" if i < len(acts) else ""
 
     # ※ 줄은 어느 섹션에 있든, 앞에 불릿이 붙어 있든 찾는다
     pipe = ""
@@ -152,15 +244,6 @@ def build_tokens():
     tok["PIPE"] = pipe
 
     # ▲ 상세 · * 용어 풀이
-    tok["TDETAIL"] = "▲ 근거 기사·절차 체인은 워룸 루프 상황판 참조"
-    names = gate_names()
-    used, seen = [], set()
-    for g in re.findall(r"N\d{2,}", BRIEFING.read_text()):
-        if g not in seen and g in names:
-            seen.add(g)
-            used.append(f"{g} {names[g]}")
-    tok["NOTE"] = ("* 관문: " + ", ".join(used[:2]) + (" 등" if len(used) > 2 else "")
-                   ) if used else ""
     return tok, date
 
 
@@ -181,7 +264,7 @@ def main():
     tok, date = build_tokens()
     # 파싱이 어긋나면(마크다운 혼입·소제목 변경 등) 빈 보고서가 조용히 나간다.
     # 매일 도는 자동화에서 가장 나쁜 실패라, 핵심 토큰이 비면 여기서 멈춘다.
-    must = ["TITLE", "R1H", "R1B", "S1", "RK1", "AC1", "PIPE"]
+    must = ["TITLE", "R1H", "R1B", "S1", "G1", "RK1", "AC1", "PIPE"]
     empty = [k for k in must if not tok.get(k)]
     if empty:
         sys.exit(f"브리핑 파싱 실패 — 빈 항목 {empty}. briefing.txt 형식을 확인하라.")

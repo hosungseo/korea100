@@ -7,7 +7,9 @@ rhwp 에는 빈 문서에 글을 넣는 명령이 없다(replace-text/set-cell/f
 
 서식 근거: 사용자 제공 보고서 표준 양식
   제목 HY헤드라인M 20pt / 소제목 □ HY헤드라인M 16pt
-  ㅇ 함초롬바탕 15pt 진하게 / – 함초롬바탕 15pt / ※ 맑은 고딕 12pt
+  ○ 함초롬바탕 15pt 진하게 / - 함초롬바탕 15pt / ▲·※·* 맑은 고딕 12pt
+기호는 「행정업무의 운영 및 혁신에 관한 규정 시행규칙」 제2조제1항 단서가 든
+□, ○, -, ㆍ 를 따른다(한글 자모 ㅇ 나 en dash – 가 아니다)
   표 맑은 고딕 12pt(머리 진하게) · 배치 글자처럼취급
   줄 띄우기 함초롬바탕 5pt(3pt) · 양쪽 정렬 · 장평 100 고정
 """
@@ -132,10 +134,10 @@ def para(text, char, parapr, prefix=""):
 
 # 표: 3열 × 6행(머리 1 + 분야 5). 셀에 토큰을 넣어 set-cell·replace-text 둘 다 되게 한다
 # 본문 폭 = 쪽폭 59528 - 좌우 여백 8504*2 = 42520. 표 문단 들여쓰기 1500 을 뺀다
-COLW = [7000, 8000, 26020]
+COLW = [7200, 14000, 21320]
 ROWH = 1600
 TBL_W, TBL_H = sum(COLW), ROWH * 6
-HEADERS = ["분야", "관문", "진행상황"]
+HEADERS = ["분야", "진행상황", "관문"]
 FIELDS = ["군공항", "산단·인허가", "전력", "용수", "건축·가동"]
 
 def cell(text, r, c, char):
@@ -155,8 +157,8 @@ def cell(text, r, c, char):
 rows = ["<hp:tr>" + "".join(cell(h, 0, c, "smallb") for c, h in enumerate(HEADERS)) + "</hp:tr>"]
 for i, f in enumerate(FIELDS, start=1):
     rows.append("<hp:tr>" + cell(f, i, 0, "small")
-                + cell(f"{{{{G{i}}}}}", i, 1, "small")
-                + cell(f"{{{{S{i}}}}}", i, 2, "small") + "</hp:tr>")
+                + cell(f"{{{{S{i}}}}}", i, 1, "small")
+                + cell(f"{{{{G{i}}}}}", i, 2, "small") + "</hp:tr>")
 
 tbl = (f'<hp:tbl id="1" zOrder="0" numberingType="NONE" textWrap="TOP_AND_BOTTOM" '
        f'textFlow="BOTH_SIDES" lock="0" dropcapstyle="None" pageBreak="CELL" repeatHeader="1" '
@@ -186,20 +188,21 @@ body.append(para("", "gap5", PA_L0))
 
 body.append(para("□ 분야별 절차 진행상황", "head", PA_L0))
 body.append(tbl_para)
-body.append(para("{{TDETAIL}}", "body", PA_L3))        # ▲ 상세 내용 기술
+# ▲(상세 내용 기술) 단계는 양식에 있으나 일일 보고에서는 상용문구뿐이라 쓰지 않는다.
+# 필요해지면 여기에 para("{{TDETAIL}}", "body", PA_L3) 한 줄을 되살리면 된다.
 body.append(para("", "gap5", PA_L0))
 
 body.append(para("□ 리스크·갈등", "head", PA_L0))
 for i in (1, 2, 3):
     body.append(para(f"{{{{RK{i}}}}}", "body", PA_L2))
+    body.append(para(f"{{{{RK{i}N}}}}", "small", PA_L3))   # * (N50) 관문 이름
 body.append(para("", "gap5", PA_L0))
 
 body.append(para("□ 조치 필요사항", "head", PA_L0))
-for i in (1, 2, 3):
+for i in (1, 2):
     body.append(para(f"{{{{AC{i}}}}}", "body", PA_L2))
 body.append(para("", "gap3", PA_L0))
-body.append(para("{{PIPE}}", "small", PA_L3))          # ※ 사례·수치 보완
-body.append(para("{{NOTE}}", "small", PA_L3))          # * 관문 ID 등 용어 풀이
+body.append(para("{{PIPE}}", "small", PA_L3))          # ※ 판 수치
 
 sec_xml = prolog + "".join(body) + "</hs:sec>"
 
