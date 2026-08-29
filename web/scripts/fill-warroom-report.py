@@ -76,11 +76,11 @@ def shorten(nm, limit):
     for sep in ("·", " "):
         i = cut.rfind(sep)
         if i >= limit // 2:
-            return cut[:i].rstrip(" ·-—") + "…"
-    return cut.rstrip(" ·-—") + "…"
+            return cut[:i].rstrip(" ·-—")
+    return cut.rstrip(" ·-—")
 
 
-def gate_names(limit=12):
+def gate_names(limit=22):
     """관문 ID → 이름. 표 칸과 리스크 * 줄이 한 줄에 들어가야 하므로 줄여서 준다."""
     try:
         nodes = json.loads(MAPDATA.read_text())["nodes"]
@@ -133,6 +133,12 @@ def money_hangul(text: str) -> str:
     return _MONEY.sub(sub, text)
 
 
+def tidy(t):
+    """보고서 문장은 마침표를 찍지 않고 말줄임표도 쓰지 않는다."""
+    t = (t or "").replace("…", "").replace("...", "").strip()
+    return t.rstrip(" .·")
+
+
 PIPE_MAX = 44   # ※ 줄(맑은고딕 12pt, 들여쓰기 4500)이 한 줄에 담기는 글자 수
 
 
@@ -173,6 +179,20 @@ def _downstream(ho, g):
     return len(seen)
 
 
+SIGNALS = WEB / "public/warroom/map/signals.json"
+LOOPDATA = WEB / "public/warroom/loop/data.json"
+
+
+def reported_today():
+    """오늘 기사가 붙은 관문 — 지시는 여기서 출발한다."""
+    try:
+        S = json.loads(SIGNALS.read_text())["byGate"]
+        since = json.loads(LOOPDATA.read_text())["generatedAt"]
+    except Exception:
+        return set()
+    return {g for g, arr in S.items() if any(a["pubDate"] >= since for a in arr)}
+
+
 def directives(advances):
     """지시 후보를 뽑는다.
 
@@ -190,6 +210,7 @@ def directives(advances):
     done = {(a.get("gate"), a.get("step")) for a in (advances or [])
             if a.get("verdict") == "일어남"}
     out, seen = [], set()
+    hot = reported_today()
 
     # ① 진척이 확인된 절차의 '다음 절차'
     for gate, step in done:
@@ -205,7 +226,23 @@ def directives(advances):
     ready = [g for g, n in N.items()
              if n["status"] in ("planned", "unknown")
              and all(N[p]["status"] == "completed" for p in hi.get(g, []))]
-    # 뒤에 걸린 관문이 많을수록 먼저 — 지시는 파급 순으로 낸다
+    # ② 오늘 보도된 관문의 '다음 관문'. 고위직은 기사를 보고 지시하므로
+    #    "뭔일인지 알아보라"보다 한 겹 깊게, 다음에 무엇이 오는지를 짚어 준다.
+    nxt = []
+    for g in hot:
+        for v in ho.get(g, []):
+            if N.get(v, {}).get("status") in ("planned", "unknown") and v not in seen:
+                nxt.append((v, g))
+    for v, src in sorted(set(nxt), key=lambda x: -_downstream(ho, x[0])):
+        if v in seen:
+            continue
+        for inst in (byGate.get(v) or [])[:1]:
+            steps = inst.get("steps") or []
+            if steps:
+                out.append((v, inst["name"], steps[0], f"{src} 보도의 다음 관문"))
+                seen.add(v)
+
+    # ③ 그래도 모자라면 착수 가능한데 미착수인 관문 — 파급 순
     for g in sorted(ready, key=lambda x: -_downstream(ho, x)):
         if g in seen:
             continue
@@ -232,20 +269,14 @@ def to_dsl(b):
          "네모: 주요 보도내용"]
     for r in b.get("reports", []):
         press = f"({r['press']}) " if r.get("press") else ""
-        L.append(f"원: {press}{money_hangul(r['title'])}")
+        L.append(f"원: {press}{tidy(money_hangul(r['title']))}")
         if r.get("body"):
-            L.append(f"바: {money_hangul(r['body'])}")
+            L.append(f"주석: {tidy(money_hangul(r['body']))}")
 
-    L += ["엔터:", "네모: 분야별 절차 진행상황", "표: 분야: 진행상황: 관문"]
-    for f in b.get("fields", []):
-        gs = f.get("gates") or []
-        gate = (f"{gs[0]} {gmap.get(gs[0], '')}".strip()
-                + (f" 외 {len(gs)-1}" if len(gs) > 1 else "")) if gs else "-"
-        L.append(f"표: {f['name']}: {f.get('status', '')}: {gate}")
-
+    L.append("엔터:")
     L += ["네모: 리스크·갈등"]
-    for r in b.get("risks", [])[:2]:
-        L.append(f"바: {money_hangul(r['text'])}")
+    for r in b.get("risks", [])[:3]:
+        L.append(f"원: {tidy(money_hangul(r['text']))}")
         gs = r.get("gates") or []
         if gs:
             L.append(f"주석: ({gs[0]}) {gmap.get(gs[0], '')}".rstrip()
@@ -254,12 +285,15 @@ def to_dsl(b):
     L += ["엔터:", "네모: 지시 필요사항"]
     for gate, inst, st, why in directives(b.get("advances"))[:2]:
         # 주체가 "제안자(지자체·민간)" 처럼 괄호를 물고 있어 · 로 자르면 "제안자(지자체" 가 된다
-        actor = re.sub(r"\s*\([^)]*\)", "", st.get("actor") or "").split("·")[0].strip() or "소관"
+        actor = re.sub(r"\s*\([^)]*\)", "", st.get("actor") or "").split("·")[0].strip()
+        # 주민·신청인·사업자는 지시 대상이 아니다 — 관리·감독하는 쪽으로 돌린다
+        if not actor or re.search(r"주민|신청인|제안자|사업자|기업|이용자|소유주|발주자", actor):
+            actor = "소관기관"
         # 절차명이 긴 것은 문장이 아니라 목록이라, 첫 마디만 쓰고 줄인다
         name = st["name"]
         if len(name) > 26:
             name = re.split(r"부터|까지", name)[0].strip().rstrip("·") + " 등"
-        L.append(f"바: {actor}: {name}({gate})")
+        L.append(f"원: {actor}: {tidy(name)}({gate})")
         # 불릿(*)은 DSL 이 붙인다 — 여기서 붙이면 키워드가 없어 '바'로 폴백한다
         # 조문은 "군 공항 이전 및 지원에 관한 특별법 제6조·제7조·제11조" 처럼 길어
         # 한 줄을 넘긴다. 법령명을 줄이고 조문은 첫 것만 남긴다.
