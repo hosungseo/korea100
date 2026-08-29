@@ -147,6 +147,77 @@ def fit_pipe(text):
     return "※ " + ", ".join(parts) if parts else ""
 
 
+PROCS = WEB / "public/warroom/map/procedures.json"
+
+
+def _graph():
+    d = json.loads(MAPDATA.read_text())
+    N = {n["id"]: n for n in d["nodes"]}
+    hi, ho = {}, {}
+    for e in d["edges"]:
+        if e.get("strength") == "hard":
+            hi.setdefault(e["to"], []).append(e["from"])
+            ho.setdefault(e["from"], []).append(e["to"])
+    return N, hi, ho
+
+
+def _downstream(ho, g):
+    """이 관문 뒤에 경성 의존으로 걸린 관문 수 — 지시 우선순위의 근거."""
+    seen, st = set(), list(ho.get(g, []))
+    while st:
+        v = st.pop()
+        if v in seen:
+            continue
+        seen.add(v)
+        st += ho.get(v, [])
+    return len(seen)
+
+
+def directives(advances):
+    """지시 후보를 뽑는다.
+
+    고위공무원은 '어느 단계인지'까지만 알고 그 단계 '안'은 실무자 보고 없이는
+    모른다. 그 격차를 메우는 게 목적이라, 관문이 아니라 **절차** 단위로 낸다.
+      ① 오늘 기사가 끝났다고 말한 절차 → 그 제도의 다음 절차가 곧 지시 대상
+      ② 선행이 모두 끝나 착수 가능한데 아직 시작 안 한 관문 → 첫 절차
+    """
+    try:
+        byGate = json.loads(PROCS.read_text())["byGate"]
+        N, hi, ho = _graph()
+    except Exception:
+        return []
+
+    done = {(a.get("gate"), a.get("step")) for a in (advances or [])
+            if a.get("verdict") == "일어남"}
+    out, seen = [], set()
+
+    # ① 진척이 확인된 절차의 '다음 절차'
+    for gate, step in done:
+        for inst in byGate.get(gate, []):
+            steps = inst.get("steps") or []
+            for i, st in enumerate(steps):
+                if st["name"] == step and i + 1 < len(steps):
+                    nxt = steps[i + 1]
+                    out.append((gate, inst["name"], nxt, "직전 절차 완료 보도"))
+                    seen.add(gate)
+
+    # ② 착수 가능하나 미착수인 관문의 첫 절차
+    ready = [g for g, n in N.items()
+             if n["status"] in ("planned", "unknown")
+             and all(N[p]["status"] == "completed" for p in hi.get(g, []))]
+    # 뒤에 걸린 관문이 많을수록 먼저 — 지시는 파급 순으로 낸다
+    for g in sorted(ready, key=lambda x: -_downstream(ho, x)):
+        if g in seen:
+            continue
+        for inst in (byGate.get(g) or [])[:1]:
+            steps = inst.get("steps") or []
+            if steps:
+                n = _downstream(ho, g)
+                why = "착수 가능" + (f"·뒤 {n}개" if n else "")
+                out.append((g, inst["name"], steps[0], why))
+    return out
+
+
 def to_dsl(b):
     """구조(JSON) → 한글 라인 DSL. 슬롯이 없으므로 항목 수 제한이 없다.
 
@@ -172,17 +243,39 @@ def to_dsl(b):
                 + (f" 외 {len(gs)-1}" if len(gs) > 1 else "")) if gs else "-"
         L.append(f"표: {f['name']}: {f.get('status', '')}: {gate}")
 
-    L += ["엔터:", "네모: 리스크·갈등"]
-    for r in b.get("risks", []):
+    L += ["네모: 리스크·갈등"]
+    for r in b.get("risks", [])[:2]:
         L.append(f"바: {money_hangul(r['text'])}")
         gs = r.get("gates") or []
         if gs:
             L.append(f"주석: ({gs[0]}) {gmap.get(gs[0], '')}".rstrip()
                      + (f" 외 {len(gs)-1}" if len(gs) > 1 else ""))
 
-    L += ["엔터:", "네모: 조치 필요사항"]
-    for a in b.get("actions", []):
-        L.append(f"바: {money_hangul(a)}")
+    L += ["엔터:", "네모: 지시 필요사항"]
+    for gate, inst, st, why in directives(b.get("advances"))[:2]:
+        # 주체가 "제안자(지자체·민간)" 처럼 괄호를 물고 있어 · 로 자르면 "제안자(지자체" 가 된다
+        actor = re.sub(r"\s*\([^)]*\)", "", st.get("actor") or "").split("·")[0].strip() or "소관"
+        # 절차명이 긴 것은 문장이 아니라 목록이라, 첫 마디만 쓰고 줄인다
+        name = st["name"]
+        if len(name) > 26:
+            name = re.split(r"부터|까지", name)[0].strip().rstrip("·") + " 등"
+        L.append(f"바: {actor}: {name}({gate})")
+        # 불릿(*)은 DSL 이 붙인다 — 여기서 붙이면 키워드가 없어 '바'로 폴백한다
+        # 조문은 "군 공항 이전 및 지원에 관한 특별법 제6조·제7조·제11조" 처럼 길어
+        # 한 줄을 넘긴다. 법령명을 줄이고 조문은 첫 것만 남긴다.
+        basis = re.sub(r"\s*\([^)]*\)", "", st.get("basis") or "").strip()
+        basis = re.sub(r"\s*및 .*?에 관한", "", basis)
+        basis = re.sub(r"에 관한 (법률|특별법|특별조치법)", r" \1", basis)
+        m = re.match(r"(.+?)\s*(제\d+조(?:의\d+)?(?:제\d+항)?)", basis)
+        if m:
+            basis = f"{m.group(1).strip()} {m.group(2)}"
+        bits = [why]
+        if basis:
+            bits.append(basis)
+        if st.get("deadline"):
+            bits.append(f"기한 {st['deadline']}")
+        L.append("주석: " + " · ".join(bits)[:52])
+
     if b.get("pipeline"):
         # ※ 줄은 길이를 모델에 맡기지 않고 뒤 항목부터 떨궈 한 줄에 맞춘다
         pipe = fit_pipe(b["pipeline"]).removeprefix("※ ")

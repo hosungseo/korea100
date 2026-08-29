@@ -209,7 +209,7 @@ def build(lines, out_path, skeleton=SKELETON):
     def table(rows):
         cols = max(len(r) for r in rows)
         widths = _col_widths(rows)
-        rowh, cells = 1600, []
+        rowh, cells = 1300, []
         for r, row in enumerate(rows):
             row = row + [""] * (cols - len(row))
             tcs = []

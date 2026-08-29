@@ -14,6 +14,7 @@ import { execFileSync } from "node:child_process";
 const WEB = join(dirname(fileURLToPath(import.meta.url)), "..");
 const loop = JSON.parse(readFileSync(join(WEB, "public/warroom/loop/data.json"), "utf8"));
 const signals = JSON.parse(readFileSync(join(WEB, "public/warroom/map/signals.json"), "utf8"));
+const procs = JSON.parse(readFileSync(join(WEB, "public/warroom/map/procedures.json"), "utf8")).byGate;
 const outPath = join(WEB, "public/warroom/loop/briefing.txt");
 const jsonPath = join(WEB, "public/warroom/loop/briefing.json");
 const LOOP_URL = "https://hosungseo.github.io/korea100/warroom/loop/";
@@ -53,6 +54,21 @@ for (const [g, arr] of Object.entries(signals.byGate)) {
   }
 }
 const HEADLINES = headlines.slice(0, 40).map((h, i) => ({ i, ...h }));
+
+// 오늘 신호가 붙은 관문의 절차 목록 — "이 기사가 어느 절차가 끝났다는 말인가"를
+// 판별시키기 위한 것. 고위공무원이 모르는 건 단계가 아니라 단계 '안'이다.
+const GATE_STEPS = {};
+for (const [g, arr] of Object.entries(signals.byGate)) {
+  if (!arr.some((a) => a.pubDate >= loop.generatedAt)) continue;
+  const steps = [];
+  for (const inst of procs[g] ?? []) {
+    for (const s of inst.steps ?? []) {
+      steps.push({ inst: inst.name, step: s.name, actor: s.actor,
+                   basis: s.basis, deadline: s.deadline || undefined });
+    }
+  }
+  if (steps.length) GATE_STEPS[g] = steps.slice(0, 24);
+}
 const HEADLINE_N = HEADLINES.length;
 
 const payload = {
@@ -66,6 +82,7 @@ const payload = {
   gateSummary: signals.gateSummary,
   riskHeadlines: riskHeads.slice(0, 12),
   headlines: HEADLINES,
+  gateSteps: GATE_STEPS,
   pendingGates: loop.pendingGates,
   pendingInsts: loop.pendingInsts,
 };
@@ -109,6 +126,11 @@ function validate(b) {
   if (!Array.isArray(b.risks) || b.risks.length < 1) bad.push("risks 없음");
   if (!Array.isArray(b.actions) || b.actions.length < 1) bad.push("actions 없음");
   if (!b.pipeline) bad.push("pipeline");
+  for (const a of b.advances ?? []) {
+    const steps = GATE_STEPS[a.gate];
+    if (!steps) bad.push(`advances 관문 '${a.gate}' 없음`);
+    else if (!steps.some((s) => s.step === a.step)) bad.push(`advances 절차 '${a.step}' 없음`);
+  }
   return bad;
 }
 
@@ -138,15 +160,21 @@ if (!process.argv.includes("--no-judge")) {
       "출력은 **JSON 객체 하나만**. 코드블록·설명·인사말 금지. 스키마:\n" +
       `{"title":"광주 반도체·군공항 일일 동향","date":"${loop.generatedAt}",\n` +
       ' "reports":[{"headlineIndex":숫자,"title":"보도 제목 26자 이내",' +
-      '"body":"보도 내용 1문장 38자 이내, 전언체"}]  // 정확히 3건,\n' +
+      '"body":"보도 내용 1~2문장 58자 이내, 전언체"}]  // 정확히 3건,\n' +
       ` "fields":[{"name":${JSON.stringify(FIELDS)} 중 하나,"status":${JSON.stringify(STATUSES)} 중 하나,` +
       '"gates":["N31","N32"]}]  // 5개 분야 전부, 순서 그대로,\n' +
       ' "risks":[{"text":"리스크 1줄 34자 이내","gates":["N50"]}]  // 3건,\n' +
       ' "actions":["결정·확인이 필요한 것 1줄 34자 이내"]  // 2건,\n' +
-      ' "pipeline":"관문·절차·기관·전환 검토·신규 후보 수치 1줄"}\n' +
+      ' "pipeline":"관문·절차·기관·전환 검토·신규 후보 수치 1줄",\n' +
+      ' "advances":[{"gate":"N32","step":"gateSteps 의 step 문자열 그대로","verdict":"일어남",' +
+      '"evidence":"근거가 된 기사 제목"}]  // 0~3건}\n' +
       "headlineIndex 는 그 항목의 근거가 된 데이터 headlines 배열의 i 값이다. 반드시 하나를 " +
       "지목하라 — 언론사 이름은 그 번호로 코드가 붙이므로 직접 쓰지 않는다.\n" +
-      "status 는 그 분야에서 우리가 판에 취할 조치다(정책 상황 서술이 아니다).\n\n데이터:\n" +
+      "status 는 그 분야에서 우리가 판에 취할 조치다(정책 상황 서술이 아니다).\n" +
+      "advances: gateSteps 에 든 절차 중, 오늘 기사가 '실제로 일어났다'고 말하는 것만 고른다.\n" +
+      "  '필요하다·요구했다·전망이다·검토 중이다'는 일어난 게 아니다 — 넣지 말 것.\n" +
+      "  '확정·의결·선정·고시·체결·접수'처럼 그 절차가 끝났음이 분명할 때만 verdict 를 '일어남'으로 한다.\n" +
+      "  해당 없으면 빈 배열. 지어내지 말 것 — step 은 gateSteps 의 문자열을 그대로 복사한다.\n\n데이터:\n" +
       JSON.stringify(payload);
     const out = execFileSync("claude", ["-p", prompt], { encoding: "utf8", timeout: 240_000 });
     const m = out.match(/\{[\s\S]*\}/);          // 앞뒤 잡담이 붙어도 객체만 집는다
