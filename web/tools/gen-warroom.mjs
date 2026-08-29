@@ -96,7 +96,7 @@ function inst(slug) {
 
 /* ══ actor axis (prime-minister situation board) ══
    The source graph names who leads each milestone in actorRoles.lead, but the
-   strings mix real institutions ("국방부", "전남광주시") with statutory role
+   strings mix real institutions ("국방부", "광주특별시") with statutory role
    names whose holder is not yet fixed ("산업단지 지정권자", "환경 협의기관").
    We normalise and classify, but we never guess a ministry behind a role name:
    "산업단지 지정권자" is the 시·도지사 or 국토부 depending on the case, and
@@ -120,7 +120,7 @@ const ACTOR_CLASS = [
   [/^(국방부|산업통상부|기후에너지환경부|환경부|국토교통부|행정안전부|기획재정부|과학기술정보통신부|문화체육관광부|농림축산식품부|해양수산부|고용노동부)$/, "ministry"],
   [/^(국가유산청|산림청|소방청|경찰청|병무청|조달청)$/, "ministry"],
   [/위원회$|전담조직$|^정부·청와대$|^정부$/, "committee"],
-  [/^(전남광주시|광주광역시|전라남도|전남도|무안군|함평군|이전지역 지방자치단체|지방자치단체)$/, "local"],
+  [/^(광주특별시|전남광주통합특별시|광주광역시|전라남도|전남도|무안군|함평군|이전지역 지방자치단체|지방자치단체)$/, "local"],
   [/^(한국전력|한전|한국수자원공사|한국도로공사|한국가스공사|한국환경공단|국가철도공단)$/, "public"],
   [/^(사업시행자|개발사업시행자|산업단지 사업시행자|사업자|입주기업|건축주|감리자|정화책임자|신청인|신청인\(당사자\))$/, "private"],
 ];
@@ -130,7 +130,7 @@ const ACTOR_CLASS = [
 const ACTOR_ALIAS = { "한전": "한국전력" };
 // Compound lead strings that name two actors at once. Listed explicitly because
 // many single actor names legitimately contain "·" (e.g. "정부·청와대").
-const ACTOR_COMPOUND = { "전남광주시·산업단지 지정권자": ["전남광주시", "산업단지 지정권자"] };
+const ACTOR_COMPOUND = { "광주특별시·산업단지 지정권자": ["광주특별시", "산업단지 지정권자"] };
 const actorSlug = (name) => "a" + [...name].reduce((h, c) => (h * 31 + c.codePointAt(0)) % 0xfffffff, 7).toString(36);
 const actorsOfRegistry = (reg) => [...reg.values()];
 const classifyActor = (name) => (ACTOR_CLASS.find(([re]) => re.test(name)) ?? [null, "role"])[1];
@@ -421,7 +421,7 @@ function build(cfg) {
       if (st === "active" || st === "ready") a.now.push(n.id);
     });
   });
-  // A compound lead ("전남광주시·산업단지 지정권자") is the only evidence in the
+  // A compound lead ("광주특별시·산업단지 지정권자") is the only evidence in the
   // graph about who a role name might be. Surface it as a hint, never as fact.
   Object.entries(ACTOR_COMPOUND).forEach(([, parts]) => {
     const named = parts.find((p) => ACTOR_TYPES[classifyActor(p)].named);
@@ -619,5 +619,15 @@ for (const cfg of PROJECTS) {
     } catch { /* no halo data */ }
   }
 }
-write("public/warroom/p/index.json", { projects: index });
-console.log("wrote p/index.json:", index.map((p) => p.id).join(", "));
+// 이 생성기가 모르는 사업(워룸 지도만 있는 메가프로젝트)을 지우지 않는다.
+// 예전에는 자기가 아는 목록으로 통째로 덮어써서 사업 전환기에서 사라졌다.
+let merged = index;
+try {
+  const prev = read("public/warroom/p/index.json").projects ?? [];
+  const known = new Set(index.map((p) => p.id));
+  const kept = prev.filter((p) => !known.has(p.id));
+  merged = [...index, ...kept];
+  if (kept.length) console.log(`  보존: ${kept.map((p) => p.id).join(", ")}`);
+} catch { /* 최초 생성 */ }
+write("public/warroom/p/index.json", { projects: merged });
+console.log("wrote p/index.json:", merged.map((p) => p.id).join(", "));
