@@ -20,30 +20,28 @@ OUTDIR = os.environ.get('HF_CHAPTER_DIR', '/private/tmp/lawmorph-chapters')
 CHAPTERS = [
     # --- 1부 : 제도를 읽다 ---
     ('open',   4.6, ['stage-open'],                               []),
-    ('intro', 35.6, ['stage-intro', 'c1-terms'],                  [1, 2, 3, 4]),
+    ('intro', 28.4, ['stage-intro', 'c1-terms'],                  [1, 2, 3]),
     ('doc',   14.2, ['stage-doc'],                                [5, 6]),
     ('map',   16.0, ['stage-map'],                                [7]),
-    ('mont',  10.0, ['stage-mont'],                               [8]),
     ('reg',    9.0, ['stage-reg'],                                [10]),
     ('auto',   8.6, ['stage-auto'],                               [11]),
-    ('part2',  9.6, ['stage-part2'],                              [12]),
+    ('part2',  8.0, ['stage-part2'],                              [12]),
     # --- 2부 : 미시로, 실증으로 (사례는 여비몬 한 건) ---
     ('part3', 12.0, ['stage-part3'],                              [20]),
     ('ax1',   22.6, ['stage-ax1'],                                [21, 22, 23]),
     ('ax3',   15.4, ['stage-ax3'],                                [26]),
-    ('close', 12.6, ['stage-close'],                              [27]),
+    ('close', 10.0, ['stage-close'],                              [27]),
     # --- 3부 : 거시로, 문샷으로 ---
-    ('p3',    10.0, ['stage-p3'],                                 [28]),
     ('moon',  19.0, ['stage-moon'],                               [13, 29]),
     ('mega',  16.0, ['stage-mega'],                               [14, 15]),
     ('demo',  25.0, ['stage-demo', 'demovid', 'demotagclip'],     [16, 17, 18]),
     ('loop',  17.0, ['stage-loop', 'subclip19b'],                 [19]),
     ('brief', 13.0, ['stage-brief', 'subclip19c'],                []),
     ('multi', 16.0, ['stage-multi'],                              [30, 31]),
-    ('mdemo', 13.0, ['stage-mdemo', 'mdemovid', 'mdemotagclip'],  [34, 37]),
+    ('mdemo',  9.0, ['stage-mdemo', 'mdemovid', 'mdemotagclip'],  [34, 37]),
     ('board', 12.0, ['stage-board'],                              [32]),
-    ('bdemo', 21.0, ['stage-bdemo', 'bdemovid', 'bdemotagclip'],  [35, 36]),
-    ('fin',   13.0, ['stage-fin'],                                [33]),
+    ('bdemo', 13.0, ['stage-bdemo', 'bdemovid', 'bdemotagclip'],  [35, 36]),
+    ('fin',   11.0, ['stage-fin'],                                [33]),
 ]
 
 def read_starts(html):

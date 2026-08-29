@@ -15,23 +15,16 @@ await record({
   out: path.join(ROOT, 'assets', 'fivepoles-demo.mp4'),
   tmp: '/private/tmp/lawmorph-fivepoles',
   waitFor: '#canvas .node',
-  settle: 2800,
-  // mdemo 챕터가 13.0s — 진입 홀드를 조금 잘라내고 관문 클릭까지만 쓴다
-  trim: { start: 1.2, duration: 12.2 },
-  steps: async ({ click, cursorTo, page, sleep }) => {
-    // 1) 총리 브리핑 시나리오 — 이 판에서 총리께 보고할 관문만 남긴다
-    await click('#chips button[data-id="pmbrief"]', 3200);
-
-    // 2) 전체로 되돌린 뒤, 진행 중인 관문 하나를 열어 상·하류와 절차 체인을 본다
-    await click('#chips button[data-id="all"]', 1200);
-    await click('#nd-N11', 3400, 900);   // 권역별 초광역특별협약 체결(active)
-    await page.keyboard.press('Escape');
-    await sleep(700);
-
-    // 3) 법제 정비 축만 남겨 본다 — 축을 바꿔 가며 같은 판을 읽는다
-    await click('#chips button[data-id="law"]', 3000);
-
-    await cursorTo(960, 460, 900);
-    await sleep(1400);
+  settle: 2000,
+  // mdemo 챕터가 9.0s — 지도 인상 → 관문 클릭 → 절차 패널, 두 비트만 쓴다.
+  // (광주 demo 가 워게임·시나리오까지 다 보여주므로, 여기서는 "같은 화면이 프로젝트만
+  //  바꿔 열린다"만 증명하면 된다. 상단 프로젝트 전환 칩이 화면에 함께 잡힌다)
+  trim: { start: 0.8, duration: 8.2 },
+  steps: async ({ click, cursorTo, sleep }) => {
+    // 시나리오 칩(pmbrief 등)을 켠 상태에서 관문을 누르면 절차 패널이 열리지 않는다 —
+    // 필터 없는 기본 화면에서 바로 관문을 연다.
+    await click('#nd-N12', 4000, 900);   // 4대 권역 AX 거점 예타면제(절차 4건)
+    await cursorTo(960, 460, 800);
+    await sleep(900);
   },
 });

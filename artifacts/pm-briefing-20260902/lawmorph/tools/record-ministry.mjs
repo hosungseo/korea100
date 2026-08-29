@@ -16,6 +16,8 @@ await record({
   tmp: '/private/tmp/lawmorph-ministry',
   waitFor: '#grid .card',
   settle: 3000,
+  // bdemo 챕터가 13.0s — 그리드 → 레버리지 정렬 → 부처 상세까지. 사업 필터 비트는 잘라낸다
+  trim: { start: 1.0, duration: 12.2 },
   steps: async ({ click, cursorTo, page, sleep }) => {
     // 1) 레버리지 순 정렬 — 뒤를 가장 많이 막고 있는 부처가 위로 온다
     await click('#sortbar button[data-sort="leverage"]', 3000);
