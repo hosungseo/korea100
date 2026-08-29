@@ -10,6 +10,7 @@
     <script src="assets/montage.js"></script>
     <script src="assets/megadetail.js"></script>
     <script src="assets/megastats.js"></script>
+    <script src="assets/multistats.js"></script>
     <style>
       @font-face {
         font-family: "Pretendard";
@@ -91,32 +92,7 @@
         position: absolute; font-size: 25px; font-weight: 740; color: #4b5e53;
         background: #ffffff; border: 1.5px solid #d5ded8; border-radius: 999px;
         padding: 8px 24px; box-shadow: 0 6px 18px rgba(28,42,35,0.07);
-      }
-      #c1-manual { position: absolute; inset: 0; display: grid; place-items: center; }
-      #c1-manual .inner { display: flex; align-items: center; gap: 60px; padding-bottom: 30px; }
-      .bookstack { position: relative; width: 320px; height: 260px; }
-      .bookstack .bk {
-        position: absolute; left: 0; width: 320px; border-radius: 5px;
-        border: 2px solid #b9c7bf; background: #ffffff;
-      }
-      .bookstack .bk1 { top: 180px; height: 44px; background: #edf1ef; }
-      .bookstack .bk2 { top: 132px; height: 44px; }
-      .bookstack .bk3 { top: 84px; height: 44px; background: #f7faf8; }
-      .bookstack .lbl {
-        position: absolute; left: 0; top: 26px; width: 320px; text-align: center;
-        font-size: 20px; font-weight: 780; color: #55685d;
-      }
-      #c1-manual .say { width: 780px; }
-      #c1-manual .say .q {
-        font-size: 54px; font-weight: 860; letter-spacing: -0.02em; color: #17251d;
-        word-break: keep-all; line-height: 1.24;
-      }
-      #c1-manual .say .a {
-        margin-top: 26px; font-size: 27px; font-weight: 600; color: #3c4c43;
-        line-height: 1.5; word-break: keep-all;
-      }
-      #c1-manual .say .a em { font-style: normal; font-weight: 830; color: #0b7a58; }
-      #intro-reveal { position: absolute; inset: 0; display: grid; place-items: center; }
+      }      #intro-reveal { position: absolute; inset: 0; display: grid; place-items: center; }
       #intro-reveal .inner { text-align: center; padding-bottom: 30px; }
       #intro-reveal .kick { font-size: 27px; font-weight: 640; color: #55685d; }
       #intro-reveal h1 {
@@ -398,7 +374,7 @@
         margin-top: 30px; display: inline-flex; align-items: center; gap: 12px;
         font-size: 18px; font-weight: 750; color: #9db8ab; letter-spacing: 0.08em;
       }
-      #closecard .bmini .sq {
+      #closecard .bmini .sq, #fincard .fmini .sq {
         background: #eaf3ee; color: #1c2a23; border-radius: 5px; font-size: 17px;
         font-weight: 830; padding: 5px 12px; letter-spacing: -0.01em;
       }
@@ -480,23 +456,52 @@
         display: inline-block; border: 1.5px dashed #4a6659; border-radius: 999px; padding: 9px 24px;
         font-size: 20px; font-weight: 780; color: #9db8ab; letter-spacing: 0.06em;
       }
-      #moonrows { margin-top: 42px; display: flex; flex-direction: column; gap: 14px; align-items: center; }
+      /* 규모 비유와 토큰 가격 그래프는 같은 자리에서 교대한다 (세로 공간 고정) */
+      #moonstage { position: relative; margin-top: 22px; height: 430px; }
+      #moonrows { position: absolute; inset: 0; display: flex; flex-direction: column;
+                  gap: 12px; align-items: center; justify-content: center; }
       .mrow { display: flex; align-items: center; gap: 18px; font-size: 28px; font-weight: 640; color: #c2d3c9; }
       .mrow b { min-width: 220px; text-align: right; font-weight: 830; color: #ffffff; font-variant-numeric: tabular-nums; }
       .mrow .to { color: #5fdcae; font-weight: 800; }
-      #moonq { margin-top: 42px; font-size: 64px; font-weight: 870; letter-spacing: -0.02em; color: #ffffff; word-break: keep-all; line-height: 1.24; }
+      .mnote { margin-top: 10px; font-size: 22px; font-weight: 720; color: #7fa08f; letter-spacing: 0.02em; }
+      #moontok { position: absolute; inset: 0; display: flex; flex-direction: column;
+                 gap: 8px; align-items: center; justify-content: flex-start; }
+      #moontok .tk {
+        display: inline-flex; align-items: center; gap: 12px;
+        border: 1.5px dashed #4a6659; border-radius: 999px; padding: 7px 12px 7px 22px;
+        font-size: 20px; font-weight: 780; color: #9db8ab; letter-spacing: 0.05em;
+      }
+      #moontok .tk .cn {
+        background: #3a5145; color: #cfe3d8; border-radius: 999px; padding: 3px 12px;
+        font-size: 15px; font-weight: 820; letter-spacing: 0.06em;
+      }
+      /* --- 토큰 단가 ↓ · 감당 가능한 업무량 ↑ 개념도 (눈금 없음) --- */
+      #moongraph { display: block; overflow: visible; }
+      #moongraph .ax { stroke: #46614f; stroke-width: 2; }
+      #moongraph .axl { fill: #7fa08f; font-size: 19px; font-weight: 760; letter-spacing: 0.04em; }
+      #moongraph .gline { fill: none; stroke-width: 5; stroke-linecap: round; }
+      #moongraph .gline.price { stroke: #f0b94a; }
+      #moongraph .gline.work { stroke: #5fdcae; }
+      #moongraph #mg-band { fill: rgba(95,220,174,0.16); stroke: none; }
+      #moongraph .glabel { font-size: 23px; font-weight: 830; }
+      #moongraph .glabel.price { fill: #f0b94a; }
+      #moongraph .glabel.work { fill: #5fdcae; }
+      #moongraph .bandl { fill: #eaf3ee; font-size: 27px; font-weight: 850; letter-spacing: -0.01em; }
+      #moonq { margin-top: 22px; font-size: 54px; font-weight: 870; letter-spacing: -0.02em; color: #ffffff; word-break: keep-all; line-height: 1.22; }
       #moonq em { font-style: normal; color: #5fdcae; }
-      #moontag { margin-top: 26px; font-size: 24px; font-weight: 660; color: #9db8ab; word-break: keep-all; }
+      #moonwhy { margin-top: 16px; font-size: 25px; font-weight: 790; color: #5fdcae; word-break: keep-all; }
 
       /* ---------- CH4c : 실사이트 시연 ---------- */
-      #stage-demo { background: #0b1410; }
-      #demovid { position: absolute; inset: 0; width: 1920px; height: 1080px; object-fit: cover; }
-      #demotag {
+      #stage-demo, #stage-mdemo, #stage-bdemo { background: #0b1410; }
+      #demovid, #mdemovid, #bdemovid {
+        position: absolute; inset: 0; width: 1920px; height: 1080px; object-fit: cover;
+      }
+      #demotag, .demotag {
         position: absolute; right: 40px; top: 112px; background: rgba(10,18,14,0.8); color: #eaf3ee;
         border: 1px solid rgba(95,220,174,0.45); border-radius: 8px; padding: 12px 20px;
         font-size: 19px; font-weight: 720; letter-spacing: 0.02em;
       }
-      #demotag b { color: #5fdcae; }
+      #demotag b, .demotag b { color: #5fdcae; }
 
       /* ---------- CH4d : 워룸 루프 ---------- */
       #loopwrap { position: absolute; inset: 0; display: grid; place-items: center; }
@@ -575,6 +580,103 @@
       #p3sub em { font-style: normal; font-weight: 820; color: #3c4c43; }
       #p3box .pk .pw { font-size: 17px; font-weight: 760; color: #55685d; letter-spacing: 0.04em; margin-left: 8px; }
 
+      /* ---------- CH3a : 3부 시작 ---------- */
+      #pgwrap { position: absolute; inset: 0; display: grid; place-items: center; }
+      #pgbox { width: 1560px; text-align: center; padding-bottom: 30px; }
+      #pgbox .pk { font-size: 22px; font-weight: 800; color: #0a7350; letter-spacing: 0.1em; }
+      #pgq1 { margin-top: 48px; font-size: 46px; font-weight: 800; color: #3c4c43; word-break: keep-all; }
+      #pgq1 em { font-style: normal; font-weight: 870; color: #26352d; }
+      #pgq2 { margin-top: 44px; font-size: 60px; font-weight: 870; color: #17251d; letter-spacing: -0.02em; word-break: keep-all; line-height: 1.3; }
+      #pgq2 em { font-style: normal; color: #0b7a58; }
+      #pgnote {
+        margin-top: 34px; display: inline-block; border: 1.5px solid #cdd8d1; background: #ffffff;
+        border-radius: 999px; padding: 12px 30px; font-size: 23px; font-weight: 680; color: #4d6459;
+      }
+
+      /* ---------- CH3f : 다중 프로젝트 ---------- */
+      #mtwrap { position: absolute; inset: 0; display: grid; place-items: center; padding-bottom: 108px; }
+      #mtbox { width: 1720px; text-align: center; }
+      #mtbox .mtk { font-size: 24px; font-weight: 760; color: #55685d; letter-spacing: 0.02em; }
+      #mtbox .mtk b { color: #a04708; font-weight: 870; }
+      #mth2 { margin-top: 10px; font-size: 52px; font-weight: 870; letter-spacing: -0.02em; word-break: keep-all; }
+      #mth2 em { font-style: normal; color: #0b7a58; }
+      #mtgrid { margin-top: 32px; display: flex; gap: 16px; justify-content: center; }
+      .mtc {
+        width: 412px; border: 1.5px solid #cdd8d1; border-radius: 12px; background: #ffffff;
+        padding: 22px 24px 20px; text-align: left;
+      }
+      .mtc.seen { border-color: #0b7a58; background: #eaf6f0; }
+      .mtc .cs { font-size: 15px; font-weight: 820; color: #55685d; letter-spacing: 0.06em; }
+      .mtc.seen .cs { color: #0a7350; }
+      .mtc .cn { margin-top: 8px; font-size: 27px; font-weight: 860; color: #17251d; word-break: keep-all; line-height: 1.24; }
+      .mtc .cf { margin-top: 6px; font-size: 15px; font-weight: 600; color: #6b7f74; word-break: keep-all; }
+      .mtc .cm { margin-top: 14px; display: flex; gap: 16px; }
+      .mtc .cm div { display: flex; flex-direction: column; }
+      .mtc .cm b { font-size: 27px; font-weight: 870; color: #0b7a58; font-variant-numeric: tabular-nums; line-height: 1.1; }
+      .mtc .cm span { font-size: 13px; font-weight: 720; color: #6b7f74; letter-spacing: 0.04em; }
+      #mtsum {
+        margin-top: 24px; display: inline-flex; align-items: baseline; gap: 12px;
+        border: 1.5px solid #cdd8d1; border-radius: 999px; padding: 10px 28px; background: #ffffff;
+      }
+      #mtsum .mtv { font-size: 23px; font-weight: 720; color: #4d6459; }
+      #mtsum .mtv b { font-size: 30px; font-weight: 880; color: #17251d; font-variant-numeric: tabular-nums; }
+      #mtsum .mtd { color: #a9b8b0; }
+      #mtsum .mtn { font-size: 14px; font-weight: 640; color: #8a9a92; margin-left: 6px; }
+      #mtshare { margin-top: 22px; }
+      #mtshare .msq { font-size: 27px; font-weight: 720; color: #3c4c43; word-break: keep-all; }
+      #mtshare .msq b { color: #0b7a58; font-weight: 880; font-variant-numeric: tabular-nums; }
+      #mtshare .msn { margin-top: 8px; font-size: 21px; font-weight: 640; color: #55685d; }
+      #mtshare .msn b { color: #a04708; font-weight: 830; }
+      #mturl { margin-top: 22px; font-size: 19px; font-weight: 620; color: #6b7f74; letter-spacing: -0.01em; }
+
+      /* ---------- CH3g : 부처 상황판 (설명 — 실제 화면은 bdemo 챕터에서 보여준다) ---------- */
+      #bdwrap { position: absolute; inset: 0; display: grid; place-items: center; padding-bottom: 108px; }
+      #bdbox { width: 1660px; text-align: center; }
+      #bdbox .bdk { font-size: 21px; font-weight: 800; color: #0a7350; letter-spacing: 0.09em; }
+      #bdbox h2 {
+        margin-top: 12px; font-size: 52px; font-weight: 870; letter-spacing: -0.025em;
+        line-height: 1.22; word-break: keep-all;
+      }
+      #bdbox h2 em { font-style: normal; color: #0b7a58; }
+      #bdstats { margin-top: 28px; display: inline-flex; gap: 46px; }
+      #bdstats .bs { display: flex; align-items: baseline; gap: 9px; }
+      #bdstats .bs b { font-size: 46px; font-weight: 880; color: #0b7a58; font-variant-numeric: tabular-nums; }
+      #bdstats .bs span { font-size: 19px; font-weight: 730; color: #55685d; }
+      #bdpoints { margin-top: 34px; display: flex; gap: 18px; justify-content: center; }
+      .bdp {
+        width: 528px; border-left: 4px solid #7cc3a6; background: #ffffff; border-radius: 0 10px 10px 0;
+        padding: 20px 24px; text-align: left; box-shadow: 0 8px 26px rgba(28,42,35,0.07);
+      }
+      .bdp .bn { font-size: 25px; font-weight: 840; color: #17251d; word-break: keep-all; }
+      .bdp .bd { margin-top: 8px; font-size: 18px; font-weight: 620; color: #4d6459; word-break: keep-all; line-height: 1.45; }
+      .bdp .bd b { color: #a04708; font-weight: 840; }
+      .bdp .bd .mono { color: #0b7a58; font-weight: 780; }
+
+      /* ---------- CH3h : 최종 클로징 ---------- */
+      #finwrap { position: absolute; inset: 0; display: grid; place-items: center; }
+      #fincard {
+        width: 1280px; text-align: center; background: #1c2a23; color: #eaf3ee; border-radius: 16px;
+        padding: 54px 64px 48px; box-shadow: 0 30px 80px rgba(11,20,16,0.35);
+      }
+      #fincard .fk { font-size: 24px; font-weight: 700; color: #9db8ab; }
+      #fincard h2 {
+        font-size: 60px; font-weight: 870; letter-spacing: -0.02em; margin-top: 14px; color: #ffffff;
+        word-break: keep-all; line-height: 1.22;
+      }
+      #fincard h2 span { color: #5fdcae; }
+      #finrow { margin-top: 34px; display: flex; justify-content: center; gap: 22px; }
+      .fi {
+        width: 250px; border: 1.5px solid #3a5145; border-radius: 12px; padding: 18px 10px 16px;
+        display: flex; flex-direction: column; gap: 4px;
+      }
+      .fi b { font-size: 46px; font-weight: 880; color: #5fdcae; font-variant-numeric: tabular-nums; line-height: 1.06; }
+      .fi span { font-size: 17px; font-weight: 720; color: #9db8ab; letter-spacing: 0.03em; }
+      #fincard .fs { margin-top: 28px; font-size: 25px; font-weight: 660; color: #c2d3c9; }
+      #fincard .fmini {
+        margin-top: 26px; display: inline-flex; align-items: center; gap: 12px;
+        font-size: 18px; font-weight: 750; color: #9db8ab; letter-spacing: 0.08em;
+      }
+
       /* ---------- CH5c : 드러커 인용 ---------- */
       #drucker {
         margin-top: 22px; display: inline-block; border-left: 5px solid #0b7a58; background: #ffffff;
@@ -603,7 +705,7 @@
     </style>
   </head>
   <body>
-    <div data-hf-id="hf-k9ts" id="root" data-composition-id="main" data-start="0" data-width="1920" data-height="1080" data-duration="285.6">
+    <div data-hf-id="hf-k9ts" id="root" data-composition-id="main" data-start="0" data-width="1920" data-height="1080" data-duration="299.8">
       <div data-hf-id="hf-2xc0" id="bg">
         <div data-hf-id="hf-zx1w" class="dots"></div>
         <div data-hf-id="hf-35j2" class="glow" id="glow"></div>
@@ -613,7 +715,7 @@
       </div>
 
       <!-- CH0 : 표지 (덱 표지와 동일 세계관) -->
-      <section id="stage-open" class="clip" data-start="0" data-duration="4.6">
+      <section id="stage-open" class="clip" data-start="0.0" data-duration="4.6">
         <div id="openwrap">
           <div id="opencard">
             <p class="eyebrow">국무총리 보고</p>
@@ -628,7 +730,7 @@
       </section>
 
       <!-- CH1 : 취지 -->
-      <section data-hf-id="hf-thq8" id="stage-intro" class="clip" data-start="4.6" data-duration="35.6">
+      <section data-hf-id="hf-thq8" id="stage-intro" class="clip" data-start="4.6" data-duration="28.4">
         <div id="hard-slide">
           <div class="inner">
             <h1>행정은, <em>일반 국민에게</em> 어렵습니다.</h1>
@@ -652,7 +754,7 @@
             </div>
           </div>
         </div>
-        <div data-hf-id="hf-dws7" id="c1-terms" class="clip" data-start="4.6" data-duration="35.6" style="position:absolute;inset:0;display:grid;place-items:center;">
+        <div data-hf-id="hf-dws7" id="c1-terms" class="clip" data-start="4.6" data-duration="28.4" style="position:absolute;inset:0;display:grid;place-items:center;">
           <div data-hf-id="hf-7m0u" class="intro-lines" id="intro-lines">
             <p data-hf-id="hf-yc3q" class="il" id="intro-l1">"직제 개정 협의 결과를 시달받았다."</p>
             <p data-hf-id="hf-6lvd" class="il" id="intro-l2">"처분 기준을 고시했다."</p>
@@ -666,18 +768,6 @@
           <span data-hf-id="hf-orcq" class="intro-chip" style="left:33%;top:11%">통보</span>
           <span data-hf-id="hf-uxja" class="intro-chip" style="left:59%;top:74%">시달</span>
         </div>
-        <div data-hf-id="hf-5p5s" id="c1-manual">
-          <div data-hf-id="hf-lm34" class="inner">
-            <div data-hf-id="hf-qloq" class="bookstack" id="c1-books">
-              <p data-hf-id="hf-2i3m" class="lbl">업무편람</p>
-              <div data-hf-id="hf-llfl" class="bk bk3"></div><div data-hf-id="hf-ktrs" class="bk bk2"></div><div data-hf-id="hf-thnn" class="bk bk1"></div>
-            </div>
-            <div data-hf-id="hf-ow3l" class="say">
-              <p data-hf-id="hf-scf2" class="q" id="c1-q">"이 제도, 이제 네 거야."</p>
-              <p data-hf-id="hf-xwhl" class="a" id="c1-a">편람을 다 읽어도 — 어디서 시작해서, 어느 기관을 거치고,<br data-hf-id="hf-sldv">마지막에 국민한테 무엇이 도착하는지 <em data-hf-id="hf-519d">전체 그림</em>은 안 그려집니다.<br data-hf-id="hf-qluq">그 그림은 보통 <em data-hf-id="hf-r29l">전임자 머릿속</em>에 있습니다.</p>
-            </div>
-          </div>
-        </div>
         <div data-hf-id="hf-cgcl" id="intro-reveal">
           <div data-hf-id="hf-bug8" class="inner">
             <p data-hf-id="hf-cckm" class="kick">AI를 배우는 AI 리터러시처럼,</p>
@@ -689,7 +779,7 @@
       </section>
 
       <!-- CH2 : 조문 → 구조도 -->
-      <section data-hf-id="hf-82kb" id="stage-doc" class="clip" data-start="40.2" data-duration="14.2">
+      <section data-hf-id="hf-82kb" id="stage-doc" class="clip" data-start="33.0" data-duration="14.2">
         <div data-hf-id="hf-8py6" id="docwrap" style="position:absolute;inset:0;">
           <article data-hf-id="hf-bkdf" class="doc" id="doc">
             <div data-hf-id="hf-2tn9" class="doc-head">
@@ -712,7 +802,7 @@
         </div>
       </section>
 
-      <section data-hf-id="hf-30wm" id="stage-map" class="clip" data-start="54.4" data-duration="16.0">
+      <section data-hf-id="hf-30wm" id="stage-map" class="clip" data-start="47.2" data-duration="16.0">
         <div data-hf-id="hf-cic2" id="mapwrap" style="position:absolute;inset:0;">
           <div data-hf-id="hf-e1ia" id="panel" class="panel">
             <div data-hf-id="hf-45m6" class="phead">
@@ -724,13 +814,8 @@
         </div>
       </section>
 
-      <section data-hf-id="hf-x7w9" id="stage-mont" class="clip" data-start="70.4" data-duration="19.0">
-        <p data-hf-id="hf-l3n4" id="mont-title">같은 방법으로, 제도마다 <em data-hf-id="hf-uu0x">한 장씩</em> — 법령 원문에서, 구조도로</p>
-        <div data-hf-id="hf-24fm" id="mont-host"></div>
-      </section>
-
       <!-- CH3 : 등록부 -->
-      <section data-hf-id="hf-m19v" id="stage-reg" class="clip" data-start="89.4" data-duration="9.0">
+      <section data-hf-id="hf-m19v" id="stage-reg" class="clip" data-start="63.2" data-duration="9.0">
         <div data-hf-id="hf-7w61" id="gridwrap"></div>
         <div data-hf-id="hf-pbog" id="countzone">
           <p data-hf-id="hf-fryb" class="lab">같은 방법으로 그린 제도 지도</p>
@@ -744,7 +829,7 @@
       </section>
 
       <!-- CH3b : 자동화된 증가 -->
-      <section id="stage-auto" class="clip" data-start="98.4" data-duration="8.6">
+      <section id="stage-auto" class="clip" data-start="72.2" data-duration="8.6">
         <div id="autowrap">
           <div id="autobox">
             <p class="at">이 숫자는, <em>자동으로</em> 늘어납니다</p>
@@ -779,11 +864,11 @@
       </section>
 
       <!-- CH4a : 2부 시작 — 전체 구성 -->
-      <section id="stage-part2" class="clip" data-start="107.0" data-duration="9.6">
+      <section id="stage-part2" class="clip" data-start="80.8" data-duration="8.0">
         <div id="p2wrap">
           <div id="p2box">
             <p class="pk">전체 구성</p>
-            <h2>여기까지가 1부 — 이제, 판을 키웁니다</h2>
+            <h2>여기까지가 1부 — 이제, 이 지도로 무엇을 하는지 말씀드립니다</h2>
             <div id="p2parts">
               <div class="p2c was" id="p2c0">
                 <p class="pi">1부 · 여기까지</p>
@@ -792,13 +877,13 @@
               </div>
               <div class="p2c now" id="p2c1">
                 <p class="pi">2부 · 지금부터</p>
-                <p class="pn">거시로 — 판을 모아 본다</p>
-                <p class="pd">지도를 수십 장 모아, 국가 대형 프로젝트 전체를 한 판에서 봅니다.</p>
+                <p class="pn">미시로 — 실증을 뜯어본다</p>
+                <p class="pd">이미 AI에게 맡긴 업무를, 전후 업무체계도로 정확히 짚습니다.</p>
               </div>
               <div class="p2c" id="p2c2">
                 <p class="pi">3부</p>
-                <p class="pn">미시로 — 실증을 뜯어본다</p>
-                <p class="pd">실제 AX 사례에서, 어떤 업무를 AI에게 맡겼는지 찾아냅니다.</p>
+                <p class="pn">거시로 — 판을 키운다</p>
+                <p class="pd">지도를 수백 장 모아, 국가 대형 프로젝트 전체를 한 판에서 봅니다.</p>
               </div>
             </div>
           </div>
@@ -806,22 +891,42 @@
       </section>
 
       <!-- CH4b : 가칭 행정 Moonshot -->
-      <section id="stage-moon" class="clip" data-start="116.6" data-duration="10.4">
+      <section id="stage-moon" class="clip" data-start="148.8" data-duration="19.0">
         <div id="moonwrap">
           <div id="moonbox">
             <p class="mk">(가칭) 행정 MOONSHOT — 상상 기반 기획</p>
-            <div id="moonrows">
-              <p class="mrow" id="mr0"><b>10개</b>를 팔려면 <span class="to">→</span> 친구에게 갑니다</p>
-              <p class="mrow" id="mr1"><b>10,000개</b>를 팔려면 <span class="to">→</span> 스마트스토어를 엽니다</p>
-              <p class="mrow" id="mr2"><b>1억 개</b>를 팔려면 <span class="to">→</span> 아마존에 갑니다</p>
+            <div id="moonstage">
+              <div id="moonrows">
+                <p class="mrow" id="mr0"><b>10개</b>를 팔려면 <span class="to">→</span> 친구에게 갑니다</p>
+                <p class="mrow" id="mr1"><b>10,000개</b>를 팔려면 <span class="to">→</span> 스마트스토어를 엽니다</p>
+                <p class="mrow" id="mr2"><b>1억 개</b>를 팔려면 <span class="to">→</span> 아마존에 갑니다</p>
+                <p class="mnote" id="mr3">규모가 달라지면, 방법이 달라집니다</p>
+              </div>
+              <!-- 눈금 없는 개념도 — 실제 가격 데이터가 아니라 방향만 말한다 -->
+              <div id="moontok">
+                <p class="tk" id="tk0">그런데 최근, 전제 하나가 달라졌습니다<span class="cn">개념도</span></p>
+                <svg id="moongraph" viewBox="0 0 1180 360" width="1180" height="360" aria-hidden="true">
+                  <g id="mg-axis">
+                    <line class="ax" x1="92" y1="20" x2="92" y2="316"></line>
+                    <line class="ax" x1="92" y1="316" x2="1130" y2="316"></line>
+                    <text class="axl" id="mg-xl" x="1128" y="344" text-anchor="end">시간 →</text>
+                  </g>
+                  <path id="mg-band" d="M100,150 Q820,150 1112,46 L1112,292 Q392,300 100,150 Z"></path>
+                  <path id="mg-price" class="gline price" d="M100,150 Q392,300 1112,292"></path>
+                  <path id="mg-work"  class="gline work"  d="M100,150 Q820,150 1112,46"></path>
+                  <text class="glabel price" id="mg-plabel" x="1104" y="272" text-anchor="end">토큰 단가</text>
+                  <text class="glabel work"  id="mg-wlabel" x="1104" y="30"  text-anchor="end">같은 예산으로 감당할 수 있는 업무량</text>
+                  <text class="bandl" id="mg-bandl" x="700" y="196" text-anchor="middle">지금까지 접어둔 일</text>
+                </svg>
+              </div>
             </div>
             <h2 id="moonq">수천 명의 <em>AI 공무원</em>이<br>이미 내 팀에 있다면?</h2>
-            <p id="moontag">그 규모를 가정하고, 어떤 행정이 가능한지 상상하는 작업입니다</p>
+            <p id="moonwhy">그 전제로, 지금까지 접어둔 일을 다시 기획합니다</p>
           </div>
         </div>
       </section>
 
-      <section data-hf-id="hf-6vgw" id="stage-mega" class="clip" data-start="127.0" data-duration="16.0">
+      <section data-hf-id="hf-6vgw" id="stage-mega" class="clip" data-start="167.8" data-duration="16.0">
         <div data-hf-id="hf-0atv" id="megawrap">
           <div data-hf-id="hf-xr18" id="megapanel" class="panel">
             <p data-hf-id="hf-dpgc" class="mh">제도끼리 모아보면? — 광주 군공항 부지 반도체 클러스터</p>
@@ -866,14 +971,14 @@
       </section>
 
       <!-- CH4c : 관문 의존 지도 실사이트 시연 (빌드 전 녹화 클립) -->
-      <section id="stage-demo" class="clip" data-start="143.0" data-duration="25.0"></section>
-      <video id="demovid" class="clip" muted preload="auto" src="assets/warroom-demo.mp4" data-start="143.3" data-duration="23.9"></video>
-      <section id="demotagclip" class="clip" data-start="143.0" data-duration="25.0">
+      <section id="stage-demo" class="clip" data-start="183.8" data-duration="25.0"></section>
+      <video id="demovid" class="clip" muted preload="auto" src="assets/warroom-demo.mp4" data-start="184.1" data-duration="23.9"></video>
+      <section id="demotagclip" class="clip" data-start="183.8" data-duration="25.0">
         <div id="demotag">실제 작동 화면 — <b>관문 의존 지도</b> · korea100/warroom/map · 공개 웹</div>
       </section>
 
       <!-- CH4d : 스스로 자라는 지도 (워룸 루프) -->
-      <section id="stage-loop" class="clip" data-start="168.0" data-duration="17.0">
+      <section id="stage-loop" class="clip" data-start="208.8" data-duration="17.0">
         <div id="loopwrap">
           <div id="loopbox">
             <p class="lk">그리고 이 판은</p>
@@ -926,7 +1031,7 @@
       </section>
 
       <!-- CH4d-2 : 텔레그램 브리핑 실물 예시 (2026-08-28 실제 발송분 발췌) -->
-      <section id="stage-brief" class="clip" data-start="185.0" data-duration="13.0">
+      <section id="stage-brief" class="clip" data-start="225.8" data-duration="13.0">
         <div id="briefwrap">
           <div id="briefleft">
             <p class="bk">매일 아침 08:00 · 텔레그램</p>
@@ -964,21 +1069,104 @@
         </div>
       </section>
 
-      <!-- CH4e : 3부 시작 — 질문의 전환 -->
-      <section id="stage-part3" class="clip" data-start="198.0" data-duration="12.0">
+      <!-- CH3f : 여기서 끝이 아닙니다 — 워룸 다중 프로젝트화 -->
+      <section id="stage-multi" class="clip" data-start="238.8" data-duration="16.0">
+        <div id="mtwrap">
+          <div id="mtbox">
+            <p class="mtk">그런데 — 여기까지가 프로젝트 <b>하나</b>입니다</p>
+            <h2 id="mth2">같은 방법으로, <em>판을 계속 붙입니다</em></h2>
+            <div id="mtgrid"></div>
+            <div id="mtsum">
+              <span class="mtv"><b id="mtv-gates">0</b> 관문</span>
+              <span class="mtd">·</span>
+              <span class="mtv"><b id="mtv-procs">0</b> 행정절차</span>
+              <span class="mtn">프로젝트별 합계 — 공유 제도는 중복 계상</span>
+            </div>
+            <div id="mtshare">
+              <p class="msq">판끼리 만나기도 합니다 — <b id="mts-n">0</b>개 제도가 둘 이상의 프로젝트에 동시에 걸립니다</p>
+              <p class="msn"><b id="mts-top">—</b> 하나는, 네 프로젝트 전부에</p>
+            </div>
+            <p id="mturl" class="mono">warroom/map/?p=&lt;프로젝트&gt; — 주소 하나만 바꾸면 같은 화면이 열립니다</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CH3g-1 : 5극3특 지도 실사이트 시연 (빌드 전 녹화 클립) -->
+      <section id="stage-mdemo" class="clip" data-start="254.8" data-duration="9.0"></section>
+      <video id="mdemovid" class="clip" muted preload="auto" src="assets/fivepoles-demo.mp4" data-start="255.1" data-duration="8.2"></video>
+      <section id="mdemotagclip" class="clip" data-start="254.8" data-duration="9.0">
+        <div class="demotag" id="mdemotag">실제 작동 화면 — <b>5극3특 관문 의존 지도</b> · warroom/map/?p=five-poles-three-special</div>
+      </section>
+
+      <!-- CH3g-2 : 축을 뒤집으면 — 부처 상황판 (설명) -->
+      <section id="stage-board" class="clip" data-start="263.8" data-duration="12.0">
+        <div id="bdwrap">
+          <div id="bdbox">
+            <p class="bdk">마지막으로, 축을 뒤집으면</p>
+            <h2>프로젝트 축을 <em>주체 축</em>으로 — 부처 상황판</h2>
+            <div id="bdstats">
+              <div class="bs" id="bs0"><b id="bd-min">0</b><span>부처</span></div>
+              <div class="bs" id="bs1"><b id="bd-gate">0</b><span>관문 · 4개 사업</span></div>
+              <div class="bs" id="bs2"><b id="bd-un">0</b><span>소관 미특정</span></div>
+            </div>
+            <div id="bdpoints">
+              <div class="bdp" id="bdp0">
+                <p class="bn">우리 부처가 쥐고 있는 것</p>
+                <p class="bd">네 사업을 가로질러, 부처별 소관 관문을 한자리에 모읍니다.</p>
+              </div>
+              <div class="bdp" id="bdp1">
+                <p class="bn">레버리지 순으로</p>
+                <p class="bd">가장 큰 지렛대는 <b id="bdlev-min">—</b> <span class="mono" id="bdlev-gate">—</span> — 뒤로 <b id="bdlev-n">0</b>개 관문이 걸려 있습니다.</p>
+              </div>
+              <div class="bdp" id="bdp2">
+                <p class="bn">주인 없는 관문도 함께</p>
+                <p class="bd">소관이 역할명으로만 정해진 관문 <b id="bd-un2">0</b>개를 따로 세워 둡니다.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CH3g-3 : 부처 상황판 실사이트 시연 (빌드 전 녹화 클립) -->
+      <section id="stage-bdemo" class="clip" data-start="275.8" data-duration="13.0"></section>
+      <video id="bdemovid" class="clip" muted preload="auto" src="assets/ministry-demo.mp4" data-start="276.1" data-duration="12.2"></video>
+      <section id="bdemotagclip" class="clip" data-start="275.8" data-duration="13.0">
+        <div class="demotag" id="bdemotag">실제 작동 화면 — <b>부처 상황판</b> · korea100/warroom/ministry · 공개 웹</div>
+      </section>
+
+      <!-- CH3h : 최종 클로징 -->
+      <section id="stage-fin" class="clip" data-start="288.8" data-duration="11.0">
+        <div id="finwrap">
+          <div id="fincard">
+            <p class="fk">글로만 존재하던 법령이</p>
+            <h2>구조도가 되고, <span>판</span>이 되고,<br><span>상황판</span>이 됩니다</h2>
+            <div id="finrow">
+              <div class="fi" id="fi0"><b id="fin-inst">0</b><span>제도 지도</span></div>
+              <div class="fi" id="fi1"><b id="fin-proj">0</b><span>대형 프로젝트</span></div>
+              <div class="fi" id="fi2"><b id="fin-gate">0</b><span>관문</span></div>
+              <div class="fi" id="fi3"><b id="fin-min">0</b><span>부처 상황판</span></div>
+            </div>
+            <p class="fs">그리고 매일 아침, 스스로 자랍니다.</p>
+            <p class="fmini"><span class="sq">제도100</span> 대한민국 제도 지도</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CH2a : 2부 시작 — 질문의 전환 -->
+      <section id="stage-part3" class="clip" data-start="88.8" data-duration="12.0">
         <div id="p3wrap">
           <div id="p3box">
-            <p class="pk">3부 — 미시로, 실증으로 <span class="pw">with 한국행정연구원</span></p>
+            <p class="pk">2부 — 미시로, 실증으로 <span class="pw">with 한국행정연구원</span></p>
             <p id="p3q1">"어떤 업무를 AI에게 맡겨야 하는가?"</p>
             <p id="p3no">— 아직 아무도 답을 찾지 못한 질문입니다</p>
             <p id="p3q2">질문을 바꿨습니다 —<br>"지금, <em>어떤 업무를 맡기고 있는가?</em>"</p>
-            <p id="p3sub">2부가 달에 사람을 보내는 <em>문샷</em>이라면, 3부는 이미 사람이 살고 있는 동네를 뜯어 고치는 <em>대형 재개발</em>입니다</p>
+            <p id="p3sub">2부는 이미 사람이 살고 있는 동네를 뜯어 고치는 <em>대형 재개발</em>입니다 — 뒤이을 3부는, 달에 사람을 보내는 <em>문샷</em>입니다</p>
           </div>
         </div>
       </section>
 
       <!-- CH5 : 손에 잡히는 AX -->
-      <section data-hf-id="hf-l3aa" id="stage-ax1" class="clip" data-start="210.0" data-duration="22.6">
+      <section data-hf-id="hf-l3aa" id="stage-ax1" class="clip" data-start="100.8" data-duration="22.6">
         <div data-hf-id="hf-aqnz" class="axhead" id="axhead1">
           <p data-hf-id="hf-5ude" class="k">지금 맡기고 있는 업무들 —</p>
           <h2 data-hf-id="hf-nq3n">실제 사례를 <em data-hf-id="hf-acni">전후 업무체계도</em>로 뜯어봅니다</h2>
@@ -986,16 +1174,7 @@
         <div data-hf-id="hf-zblv" id="case0" class="panel cboard"></div>
       </section>
 
-      <section data-hf-id="hf-ylb5" id="stage-ax2" class="clip" data-start="232.6" data-duration="25.0">
-        <div data-hf-id="hf-zv6c" class="axhead" id="axhead2">
-          <p data-hf-id="hf-c67a" class="k">지금 맡기고 있는 업무들 —</p>
-          <h2 data-hf-id="hf-uu3n">실제 사례를 <em data-hf-id="hf-44gi">전후 업무체계도</em>로 뜯어봅니다</h2>
-        </div>
-        <div data-hf-id="hf-vdhu" id="case1" class="panel cboard"></div>
-        <div data-hf-id="hf-rfdt" id="case2" class="panel cboard"></div>
-      </section>
-
-      <section data-hf-id="hf-kpz0" id="stage-ax3" class="clip" data-start="257.6" data-duration="15.4">
+      <section data-hf-id="hf-kpz0" id="stage-ax3" class="clip" data-start="123.4" data-duration="15.4">
         <div data-hf-id="hf-2xhd" id="whywrap">
           <div data-hf-id="hf-oyz8" id="whybox">
             <p data-hf-id="hf-0wcb" class="w1" id="w1">우수사례 6건 — 올 하반기, 심층분석</p>
@@ -1026,15 +1205,15 @@
         </div>
       </section>
 
-      <!-- CH6 : 클로징 -->
-      <section data-hf-id="hf-5jjv" id="stage-close" class="clip" data-start="273.0" data-duration="12.6">
+      <!-- CH2e : 2부 마무리 — 실전 AX 가이드라인 -->
+      <section data-hf-id="hf-5jjv" id="stage-close" class="clip" data-start="138.8" data-duration="10.0">
         <div data-hf-id="hf-eq7b" id="closewrap">
           <div data-hf-id="hf-i24l" id="closecard">
             <p data-hf-id="hf-p4ha" class="bk">우수사례 심층분석에서 출발해</p>
             <h2 data-hf-id="hf-4hwt">실전 <span data-hf-id="hf-2z6k">AX 가이드라인</span>으로</h2>
             <p data-hf-id="hf-0k62" class="bs2">무엇이 사라지고, 무엇이 남는지 — 전후 업무체계도가 증거입니다.<br data-hf-id="hf-regs">기관마다 자기 업무에서 시작점을 찾을 수 있도록.</p>
             <p data-hf-id="hf-nv6d" class="stat">가이드라인 제작 — 현재 연구 중</p>
-            <p data-hf-id="hf-jf2p" class="bmini"><span data-hf-id="hf-ijuc" class="sq">제도100</span> 대한민국 제도 지도</p>
+            <p data-hf-id="hf-jf2p" class="bmini"><span data-hf-id="hf-ijuc" class="sq">여기까지가 2부</span> 이제 3부 — 판을 키웁니다</p>
           </div>
         </div>
       </section>
@@ -1049,83 +1228,95 @@
       <section id="subclip3" class="clip sub-clip" data-start="19.6" data-duration="6.0">
         <div class="subline" id="sub3"><span class="tx">하나하나는 한국어인데, 조합되는 순간 <span class="em">외국어</span>가 됩니다</span><span class="bar"></span></div>
       </section>
-      <section id="subclip4" class="clip sub-clip" data-start="26.4" data-duration="6.4">
-        <div class="subline" id="sub4"><span class="tx">국민만 어려운 게 아닙니다 — <span class="em">공무원에게도</span> 어렵습니다</span><span class="bar"></span></div>
-      </section>
-      <section id="subclip5" class="clip sub-clip" data-start="41.0" data-duration="5.0">
+      <section id="subclip5" class="clip sub-clip" data-start="33.8" data-duration="5.0">
         <div class="subline" id="sub5"><span class="tx">법령은, 글로 존재합니다</span><span class="bar"></span></div>
       </section>
-      <section id="subclip6" class="clip sub-clip" data-start="46.6" data-duration="7.2">
+      <section id="subclip6" class="clip sub-clip" data-start="39.4" data-duration="7.2">
         <div class="subline" id="sub6"><span class="tx"><span class="em">누가</span> · <span class="em">무엇을</span> · <span class="em">언제</span> — 절차는 문장 속에 숨어 있습니다</span><span class="bar"></span></div>
       </section>
-      <section id="subclip7" class="clip sub-clip" data-start="54.8" data-duration="15.0">
+      <section id="subclip7" class="clip sub-clip" data-start="47.6" data-duration="15.0">
         <div class="subline" id="sub7"><span class="tx">제도100은 이것을 <span class="em">구조도</span>로 만듭니다</span><span class="bar"></span></div>
       </section>
-      <section id="subclip8" class="clip sub-clip" data-start="71.0" data-duration="8.4">
-        <div class="subline" id="sub8"><span class="tx">같은 방법으로 — <span class="em">소상공인 정책자금</span> (소상공인법 제9조)</span><span class="bar"></span></div>
-      </section>
-      <section id="subclip9" class="clip sub-clip" data-start="79.8" data-duration="8.8">
-        <div class="subline" id="sub9"><span class="tx"><span class="em">공장설립승인</span> — 법정 처리기한 <span class="em">20일</span>까지 구조도에</span><span class="bar"></span></div>
-      </section>
-      <section id="subclip10" class="clip sub-clip" data-start="89.8" data-duration="8.2">
+      <section id="subclip10" class="clip sub-clip" data-start="63.6" data-duration="8.2">
         <div class="subline" id="sub10"><span class="tx">이렇게 만든 제도 지도, <span class="em"><span id="subinst">601</span>개</span></span><span class="bar"></span></div>
       </section>
-      <section id="subclip11" class="clip sub-clip" data-start="99.0" data-duration="7.6">
+      <section id="subclip11" class="clip sub-clip" data-start="72.8" data-duration="7.6">
         <div class="subline" id="sub11"><span class="tx">요청이 오면 <span class="em">AI 에이전트</span>가 그리고 — 사람이 검증해 더해집니다</span><span class="bar"></span></div>
       </section>
-      <section id="subclip12" class="clip sub-clip" data-start="107.4" data-duration="8.8">
-        <div class="subline" id="sub12"><span class="tx">2부 — <span class="em">거시</span>로: 지도를 모아, 판을 봅니다</span><span class="bar"></span></div>
+      <section id="subclip12" class="clip sub-clip" data-start="81.2" data-duration="7.2">
+        <div class="subline" id="sub12"><span class="tx">2부 — <span class="em">미시</span>로: 이미 맡기고 있는 일부터 봅니다</span><span class="bar"></span></div>
       </section>
-      <section id="subclip13" class="clip sub-clip sub-dark" data-start="117.0" data-duration="9.6">
+      <section id="subclip13" class="clip sub-clip sub-dark" data-start="149.2" data-duration="6.0">
         <div class="subline" id="sub13"><span class="tx">규모가 다르면, 방법이 다릅니다 — <span class="em">(가칭) 행정 Moonshot</span></span><span class="bar"></span></div>
       </section>
-      <section id="subclip14" class="clip sub-clip" data-start="127.4" data-duration="7.4">
+      <section id="subclip14" class="clip sub-clip" data-start="168.2" data-duration="7.4">
         <div class="subline" id="sub14"><span class="tx">제도가 쌓이니, <span class="em">모아볼 수</span> 있습니다</span><span class="bar"></span></div>
       </section>
-      <section id="subclip15" class="clip sub-clip" data-start="135.4" data-duration="7.2">
+      <section id="subclip15" class="clip sub-clip" data-start="176.2" data-duration="7.2">
         <div class="subline" id="sub15"><span class="tx">모아 놓으면 보입니다 — <span class="em">어디까지 왔고</span>, 무엇을 시작할 수 있는지</span><span class="bar"></span></div>
       </section>
-      <section id="subclip16" class="clip sub-clip sub-dark" data-start="143.6" data-duration="6.4">
+      <section id="subclip16" class="clip sub-clip sub-dark" data-start="184.4" data-duration="6.4">
         <div class="subline" id="sub16"><span class="tx">실제 작동 화면 — <span class="em">관문 의존 지도</span> (공개 웹)</span><span class="bar"></span></div>
       </section>
-      <section id="subclip17" class="clip sub-clip sub-dark" data-start="150.4" data-duration="8.0">
+      <section id="subclip17" class="clip sub-clip sub-dark" data-start="191.2" data-duration="8.0">
         <div class="subline" id="sub17"><span class="tx">관문을 클릭하면 — 상·하류와 <span class="em">내부 절차 체인</span>이 열립니다</span><span class="bar"></span></div>
       </section>
-      <section id="subclip18" class="clip sub-clip sub-dark" data-start="158.8" data-duration="8.6">
+      <section id="subclip18" class="clip sub-clip sub-dark" data-start="199.6" data-duration="8.6">
         <div class="subline" id="sub18"><span class="tx"><span class="em">워게임</span> — '풀렸다고 가정'하면, 전선이 다시 계산됩니다</span><span class="bar"></span></div>
       </section>
-      <section id="subclip19" class="clip sub-clip" data-start="168.4" data-duration="9.4">
+      <section id="subclip19" class="clip sub-clip" data-start="209.2" data-duration="9.4">
         <div class="subline" id="sub19"><span class="tx">매일 아침 스스로 자라는 지도 — 관문 <span class="em">49→<span id="submiles">54</span></span> · 절차 <span class="em">1,281→<span id="subprocs">1,361</span></span></span><span class="bar"></span></div>
       </section>
-      <section id="subclip19b" class="clip sub-clip" data-start="178.4" data-duration="6.0">
+      <section id="subclip19b" class="clip sub-clip" data-start="219.2" data-duration="6.0">
         <div class="subline" id="sub19b"><span class="tx">그리고 매일 아침, <span class="em">텔레그램 브리핑</span> — 기사 요약이 아니라 <span class="em">절차 진행상황</span>까지</span><span class="bar"></span></div>
       </section>
-      <section id="subclip19c" class="clip sub-clip" data-start="185.4" data-duration="12.0">
+      <section id="subclip19c" class="clip sub-clip" data-start="226.2" data-duration="12.0">
         <div class="subline" id="sub19c"><span class="tx">관문 ID로 말하고, <span class="em">상태 전환</span>을 제안합니다 — 실제 발송된 보고입니다</span><span class="bar"></span></div>
       </section>
-      <section id="subclip20" class="clip sub-clip" data-start="198.4" data-duration="11.2">
-        <div class="subline" id="sub20"><span class="tx">2부가 문샷이라면, 3부는 대형 재개발 — <span class="em">with 한국행정연구원</span></span><span class="bar"></span></div>
+      <section id="subclip20" class="clip sub-clip" data-start="89.2" data-duration="11.2">
+        <div class="subline" id="sub20"><span class="tx">2부는 대형 재개발, 3부는 문샷입니다 — <span class="em">with 한국행정연구원</span></span><span class="bar"></span></div>
       </section>
-      <section id="subclip21" class="clip sub-clip" data-start="210.6" data-duration="5.0">
+      <section id="subclip21" class="clip sub-clip" data-start="101.4" data-duration="5.0">
         <div class="subline" id="sub21"><span class="tx">실사례 1호, <span class="em">AI 여비몬</span> — 관외출장 여비 정산 스무 단계</span><span class="bar"></span></div>
       </section>
-      <section id="subclip22" class="clip sub-clip" data-start="216.2" data-duration="7.0">
+      <section id="subclip22" class="clip sub-clip" data-start="107.0" data-duration="7.0">
         <div class="subline" id="sub22"><span class="tx">다섯 블록이 하나씩, <span class="em">이유와 함께</span> AI 레인으로 내려앉습니다</span><span class="bar"></span></div>
       </section>
-      <section id="subclip23" class="clip sub-clip" data-start="223.8" data-duration="7.8">
+      <section id="subclip23" class="clip sub-clip" data-start="114.6" data-duration="7.8">
         <div class="subline" id="sub23"><span class="tx">반려 루프는 <span class="em">소멸</span>, 결재·검토는 가벼워집니다 — <span class="em">20 → 14</span></span><span class="bar"></span></div>
       </section>
-      <section id="subclip24" class="clip sub-clip" data-start="232.8" data-duration="10.8">
-        <div class="subline" id="sub24"><span class="tx">두 번째, <span class="em">세종사이렌</span> — 재난 판단과 전파를 초 단위로</span><span class="bar"></span></div>
-      </section>
-      <section id="subclip25" class="clip sub-clip" data-start="244.8" data-duration="11.8">
-        <div class="subline" id="sub25"><span class="tx">세 번째 — 도입부의 그 문제, <span class="em">'전임자 머릿속'</span></span><span class="bar"></span></div>
-      </section>
-      <section id="subclip26" class="clip sub-clip" data-start="257.8" data-duration="13.4">
+      <section id="subclip26" class="clip sub-clip" data-start="123.6" data-duration="13.4">
         <div class="subline" id="sub26"><span class="tx">그렇게 측정해야 — <span class="em">다른 기관이 따라 할 수</span> 있습니다</span><span class="bar"></span></div>
       </section>
-      <section id="subclip27" class="clip sub-clip" data-start="274.0" data-duration="11.0">
+      <section id="subclip27" class="clip sub-clip" data-start="139.8" data-duration="8.6">
         <div class="subline" id="sub27"><span class="tx">가이드라인은, <span class="em">지금 연구 중</span>입니다</span><span class="bar"></span></div>
+      </section>
+      <section id="subclip29" class="clip sub-clip sub-dark" data-start="155.4" data-duration="8.4">
+        <div class="subline" id="sub29"><span class="tx">상상의 전제가 바뀌었습니다 — <span class="em">값이 내려간 만큼</span>, 규모를 크게 잡을 수 있습니다</span><span class="bar"></span></div>
+      </section>
+      <section id="subclip30" class="clip sub-clip" data-start="239.2" data-duration="7.6">
+        <div class="subline" id="sub30"><span class="tx">북극항로 · 5극3특 · 대구경북신공항 — <span class="em">같은 방법으로 붙였습니다</span></span><span class="bar"></span></div>
+      </section>
+      <section id="subclip31" class="clip sub-clip" data-start="247.6" data-duration="6.6">
+        <div class="subline" id="sub31"><span class="tx">프로젝트가 늘어도 방법은 같습니다 — <span class="em">주소 하나만</span> 바꾸면 됩니다</span><span class="bar"></span></div>
+      </section>
+      <section id="subclip32" class="clip sub-clip" data-start="264.2" data-duration="11.0">
+        <div class="subline" id="sub32"><span class="tx">축을 뒤집으면 — <span class="em">어느 부처가 무엇을 쥐고 있는지</span>가 보입니다</span><span class="bar"></span></div>
+      </section>
+      <section id="subclip34" class="clip sub-clip sub-dark" data-start="255.2" data-duration="3.8">
+        <div class="subline" id="sub34"><span class="tx">광주에서 보신 것과 <span class="em">같은 화면</span>입니다 — 프로젝트만 바꿨습니다</span><span class="bar"></span></div>
+      </section>
+      <section id="subclip37" class="clip sub-clip sub-dark" data-start="259.4" data-duration="4.0">
+        <div class="subline" id="sub37"><span class="tx">관문 하나를 열면 — 그 안의 <span class="em">법정 절차 체인</span>이 그대로</span><span class="bar"></span></div>
+      </section>
+      <section id="subclip35" class="clip sub-clip sub-dark" data-start="276.2" data-duration="5.6">
+        <div class="subline" id="sub35"><span class="tx">이것도 실제 화면입니다 — <span class="em">레버리지 순</span>으로 부처를 세웁니다</span><span class="bar"></span></div>
+      </section>
+      <section id="subclip36" class="clip sub-clip sub-dark" data-start="282.2" data-duration="6.0">
+        <div class="subline" id="sub36"><span class="tx">부처 하나를 열면 — <span class="em">쥐고 있는 관문</span>과 <span class="em">기다리는 곳</span>이 함께</span><span class="bar"></span></div>
+      </section>
+      <section id="subclip33" class="clip sub-clip" data-start="289.8" data-duration="9.4">
+        <div class="subline" id="sub33"><span class="tx">제도 지도 한 장에서 시작해, <span class="em">여기까지 왔습니다</span></span><span class="bar"></span></div>
       </section>
     </div>
     <script>
@@ -1203,9 +1394,11 @@
       });
 
       /* --- CH2b : 몽타주 두 판 --- */
+      // 자리(#mont-host)가 없으면 만들지 않는다 — mont 챕터를 뺐지만
+      // assets/montage.js 는 되돌릴 때를 위해 남겨 둔다.
       const montHost = document.getElementById("mont-host");
       const montNodes = [];
-      MONT.forEach((m, mi) => {
+      (montHost ? MONT : []).forEach((m, mi) => {
         const box = document.createElement("div");
         box.className = "panel mpanel m" + mi;
         box.id = "mont" + mi;
@@ -1254,7 +1447,7 @@
           t: ["서류를 송부받은 날부터 20일"] },
       ];
       const escHtml = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-      MONT.forEach((m, mi) => {
+      (montHost ? MONT : []).forEach((m, mi) => {
         const card = document.createElement("article");
         card.className = "mdoc"; card.id = "mdoc" + mi;
         const eff = String(m.law.effective || "");
@@ -1330,8 +1523,11 @@
       });
       /* --- CH5 : AX 사례 보드(3건 공통 빌더) --- */
       const CB_W = 1720, CB_H = 640, CB_HEAD = 46, CB_GATE = 34, CB_LANEX = 168;
+      // 보드는 화면에 자리(#case<i>)가 있는 사례만 만든다 —
+      // 2026-08-29 4차에서 ax2(사례 2·3)를 뺐고, cases.js 는 3건을 그대로 둔다.
       const boards = CASES.map((c, ci) => {
         const host = document.getElementById("case" + ci);
+        if (!host) return null;
         const gates = c.gates.length, lanes = c.lanes.length;
         const cw = (CB_W - CB_LANEX) / gates, rh = (CB_H - CB_HEAD - CB_GATE) / lanes;
         const bw = Math.min(150, cw - 14), bh = 38;
@@ -1395,16 +1591,61 @@
         return { c, ci, pos, calls, moves: c.asis.filter((b) => b.st === "replaced") };
       });
 
+      /* --- CH3f : 다중 프로젝트 카드 (assets/multistats.js) --- */
+      const XS = window.MULTISTATS, BS = window.BOARDSTATS;
+      const nf = (n) => n.toLocaleString();
+      const mtgrid = document.getElementById("mtgrid");
+      const mtCards = XS.projects.map((p, i) => {
+        const el = document.createElement("div");
+        el.className = "mtc" + (i === 0 ? " seen" : "");
+        el.id = "mtc" + i;
+        el.innerHTML =
+          `<p class="cs">${i === 0 ? "방금 보신 판" : "PROJECT " + String(i + 1).padStart(2, "0")}</p>` +
+          `<p class="cn">${p.short}</p><p class="cf">${p.name}</p>` +
+          `<div class="cm"><div><b>${nf(p.gates)}</b><span>관문</span></div>` +
+          `<div><b>${nf(p.institutions)}</b><span>법정 제도</span></div>` +
+          `<div><b>${nf(p.procs)}</b><span>행정절차</span></div></div>`;
+        mtgrid.appendChild(el);
+        return el;
+      });
+      document.getElementById("mts-n").textContent = XS.sharedInstitutions;
+      document.getElementById("mts-top").textContent = XS.topShared.name;
+      document.getElementById("mturl").textContent =
+        `warroom/map/?p=<프로젝트> — 주소 하나만 바꾸면 같은 화면이 열립니다`;
+
+      /* --- CH3g : 부처 상황판 수치 ---
+         관문 수는 BOARDSTATS.gates(=부처별 소관 수의 합, 공동소관 중복)가 아니라
+         MULTISTATS.totalGates(서로 다른 관문 135)를 쓴다 — multi 챕터와 어긋나지 않게. */
+      document.getElementById("bd-min").textContent = BS.ministries;
+      document.getElementById("bd-gate").textContent = XS.totalGates;
+      document.getElementById("bd-un").textContent = BS.unassignedGates;
+      document.getElementById("bd-un2").textContent = BS.unassignedGates;
+      document.getElementById("bdlev-min").textContent = BS.leverage.label;
+      document.getElementById("bdlev-gate").textContent = BS.leverage.gate;
+      document.getElementById("bdlev-n").textContent = BS.leverage.blocked;
+
+      /* --- CH3h : 최종 클로징 수치 --- */
+      document.getElementById("fin-proj").textContent = XS.projects.length;
+      document.getElementById("fin-min").textContent = BS.ministries;
+
       /* ============ timeline ============ */
       /* 챕터 기준 시각 — 분할 렌더 시 tools/split-chapters.py 가 이 객체만 다시 씁니다 */
-      const T = { open: 0, intro: 4.6, doc: 40.2, map: 54.4, mont: 70.4, reg: 89.4,
-                  auto: 98.4, part2: 107.0, moon: 116.6, mega: 127.0, demo: 143.0,
-                  loop: 168.0, brief: 185.0, part3: 198.0, ax1: 210.0, ax2: 232.6,
-                  ax3: 257.6, close: 273.0 };
+      /* 재생 순서 = 이 객체의 값 순서.
+         1부(open~auto) → 로드맵(part2) → 2부 미시·실증(part3~close)
+         → 3부 거시·문샷(p3~fin). 2026-08-29 2부↔3부 교체. */
+      const T = { open: 0.0, intro: 4.6, doc: 33.0, map: 47.2, reg: 63.2, auto: 72.2, part2: 80.8, part3: 88.8, ax1: 100.8, ax3: 123.4, close: 138.8, moon: 148.8, mega: 167.8, demo: 183.8, loop: 208.8, brief: 225.8, multi: 238.8, mdemo: 254.8, board: 263.8, bdemo: 275.8, fin: 288.8 };
 
       document.fonts.ready.then(() => {
         const tl = gsap.timeline({ paused: true });
         const A = (arr) => gsap.utils.toArray(arr);
+
+        /* 어두운 챕터(전면 다크 배경·영상)에서는 페이지 헤더 문구를 명시적으로 내린다.
+           이미 불투명 배경에 가려 보이지 않지만, 상태를 명시해야 seek 이 안전하고
+           대비 검사도 실제 화면과 같은 판정을 낸다. */
+        [["moon", 19.0], ["demo", 25.0], ["mdemo", 9.0], ["bdemo", 13.0]].forEach(([k, dur]) => {
+          tl.set("#bg .meta, #bg .toprule", { autoAlpha: 0 }, T[k]);
+          tl.set("#bg .meta, #bg .toprule", { autoAlpha: 1 }, T[k] + dur);
+        });
 
         /* ambient */
         tl.fromTo("#glow", { scale: 1, opacity: 1 },
@@ -1455,26 +1696,15 @@
         });
         tl.to("#intro-lines", { y: -30, autoAlpha: 0, duration: 0.6, ease: "power2.in" }, I + 16.9);
 
-        A("#c1-books .bk").forEach((el, i) => {
-          tl.fromTo(el, { y: 24, autoAlpha: 0 },
-            { y: 0, autoAlpha: 1, duration: 0.45, ease: "power2.out" }, I + 18.0 + i * 0.14);
-        });
-        tl.fromTo("#c1-books .lbl", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4 }, I + 18.5);
-        tl.fromTo("#c1-q", { scale: 0.92, autoAlpha: 0 },
-          { scale: 1, autoAlpha: 1, duration: 0.6, ease: "back.out(1.4)" }, I + 18.8);
-        tl.fromTo("#c1-a", { y: 20, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power2.out" }, I + 19.8);
-        tl.to("#c1-manual", { autoAlpha: 0, y: -24, duration: 0.6, ease: "power2.in" }, I + 24.6);
-
         tl.fromTo("#intro-reveal .kick", { y: 20, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, I + 25.5);
+          { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, I + 17.9);
         tl.fromTo("#intro-reveal h1", { scale: 0.88, autoAlpha: 0 },
-          { scale: 1, autoAlpha: 1, duration: 0.7, ease: "back.out(1.4)" }, I + 25.8);
+          { scale: 1, autoAlpha: 1, duration: 0.7, ease: "back.out(1.4)" }, I + 18.2);
         tl.fromTo("#intro-reveal .rsub", { y: 22, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.55, ease: "power2.out" }, I + 26.3);
+          { y: 0, autoAlpha: 1, duration: 0.55, ease: "power2.out" }, I + 18.7);
         tl.fromTo("#intro-rbar", { scaleX: 0 },
-          { scaleX: 1, duration: 0.5, ease: "power2.inOut" }, I + 26.6);
-        tl.to("#intro-reveal", { autoAlpha: 0, y: -24, duration: 0.7, ease: "power2.in" }, I + 31.4);
+          { scaleX: 1, duration: 0.5, ease: "power2.inOut" }, I + 19.0);
+        tl.to("#intro-reveal", { autoAlpha: 0, y: -24, duration: 0.7, ease: "power2.in" }, I + 23.8);
 
         /* ---------- CH2 : 조문 → 구조도 ---------- */
         const D = T.doc;
@@ -1525,37 +1755,6 @@
           tl.to(p, { strokeDashoffset: 0, duration: 0.42, ease: "power2.out" }, M + 4.2 + i * 0.14);
         });
         tl.to("#mapwrap", { autoAlpha: 0, y: -24, duration: 0.6, ease: "power2.in" }, M + 15.3);
-
-        /* 샘플 2·3 : 법령 원문 카드 → 구조도 (환경영향평가와 같은 2비트, 병렬 반복) */
-        const MO = T.mont;
-        tl.fromTo("#mont-title", { y: 20, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power3.out" }, MO + 0.3);
-        [0, 1].forEach((mi) => {
-          const S = MO + 0.8 + mi * 9.2;
-          tl.fromTo(`#mdoc${mi}`, { y: 40, autoAlpha: 0 },
-            { y: 0, autoAlpha: 1, duration: 0.7, ease: "power3.out" }, S);
-          A(`#mdoc${mi} .dl`).forEach((el, i) => {
-            tl.fromTo(el, { y: 14, autoAlpha: 0 },
-              { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, S + 0.25 + i * 0.12);
-          });
-          A(`#mdoc${mi} .hl`).forEach((el, i) => {
-            const k = el.classList.contains("hl-a") ? "hl-a" : el.classList.contains("hl-b") ? "hl-b" : "hl-t";
-            tl.fromTo(el,
-              { backgroundColor: "rgba(255,255,255,0)", boxShadow: "inset 0 0 0 rgba(0,0,0,0)" },
-              { backgroundColor: HL[k].bg, color: HL[k].fg, boxShadow: HL[k].sh,
-                duration: 0.35, ease: "power1.out" }, S + 1.4 + i * 0.1);
-          });
-          tl.fromTo(`#mont${mi}`, { x: 60, autoAlpha: 0 },
-            { x: 0, autoAlpha: 1, duration: 0.7, ease: "power3.out" }, S + 2.9);
-          A(`#mont${mi} .mnode`).forEach((el, i) => {
-            tl.fromTo(el, { scale: 0.7, autoAlpha: 0 },
-              { scale: 1, autoAlpha: 1, duration: 0.35, ease: "back.out(1.4)" }, S + 3.4 + i * 0.06);
-          });
-          tl.to(`#mdoc${mi}`, { autoAlpha: 0, y: -18, duration: 0.55, ease: "power2.in" }, S + 8.4);
-          tl.to(`#mont${mi}`, { autoAlpha: 0, y: -18, duration: 0.55, ease: "power2.in" }, S + 8.4);
-        });
-        tl.to("#stage-mont", { autoAlpha: 0, duration: 0.5, ease: "power2.in" }, MO + 18.4);
-
         /* ---------- CH3 : 등록부 ---------- */
         const R = T.reg;
         tiles.forEach((el, i) => {
@@ -1601,11 +1800,11 @@
           { y: 0, autoAlpha: 1, duration: 0.65, ease: "power3.out" }, P2 + 0.55);
         ["#p2c0", "#p2c1", "#p2c2"].forEach((id, i) => {
           tl.fromTo(id, { y: 26, autoAlpha: 0 },
-            { y: 0, autoAlpha: 1, duration: 0.55, ease: "power3.out" }, P2 + 1.2 + i * 0.5);
+            { y: 0, autoAlpha: 1, duration: 0.55, ease: "power3.out" }, P2 + 1.1 + i * 0.35);
         });
         tl.fromTo("#p2c1", { scale: 1 }, { scale: 1.04, duration: 0.4, ease: "power1.inOut",
-          yoyo: true, repeat: 1 }, P2 + 3.4);
-        tl.to("#stage-part2", { autoAlpha: 0, y: -20, duration: 0.6, ease: "power2.in" }, P2 + 8.8);
+          yoyo: true, repeat: 1 }, P2 + 2.9);
+        tl.to("#stage-part2", { autoAlpha: 0, y: -20, duration: 0.6, ease: "power2.in" }, P2 + 7.2);
 
         /* ---------- CH4b : 행정 Moonshot ---------- */
         const MN = T.moon;
@@ -1614,13 +1813,35 @@
           { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, MN + 0.5);
         ["#mr0", "#mr1", "#mr2"].forEach((id, i) => {
           tl.fromTo(id, { x: -26, autoAlpha: 0 },
-            { x: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, MN + 1.1 + i * 0.9);
+            { x: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, MN + 1.1 + i * 0.85);
         });
+        tl.fromTo("#mr3", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 }, MN + 3.6);
+        /* 규모 비유 → 토큰 단가/업무량 개념도로 교대. 비트는 내레이션 n16b~n16d 에 맞춘다 */
+        tl.set("#moontok", { autoAlpha: 0 }, MN);
+        tl.to("#moonrows", { autoAlpha: 0, y: -18, duration: 0.5, ease: "power2.in" }, MN + 5.8);
+        tl.fromTo("#moontok", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4 }, MN + 6.2);
+        tl.fromTo("#tk0", { y: 16, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, MN + 6.3);
+        tl.fromTo("#mg-axis", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, MN + 7.0);
+        // 곡선은 dash 로 그려 넣는다(길이는 빌드 시 실측 — seek 해도 같은 그림)
+        [["#mg-price", MN + 9.7, 1.6], ["#mg-work", MN + 12.9, 1.6]].forEach(([sel, at, dur]) => {
+          const el = document.querySelector(sel);
+          const len = Math.ceil(el.getTotalLength());
+          el.style.strokeDasharray = len;
+          tl.fromTo(el, { strokeDashoffset: len }, { strokeDashoffset: 0, duration: dur, ease: "power1.inOut" }, at);
+        });
+        tl.fromTo("#mg-plabel", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 }, MN + 11.1);
+        tl.fromTo("#mg-wlabel", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 }, MN + 14.3);
+        tl.fromTo("#mg-band", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.8 }, MN + 14.8);
+        tl.fromTo("#mg-bandl", { y: 14, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power2.out" }, MN + 15.2);
+        tl.to("#moonstage", { autoAlpha: 0.3, duration: 0.5 }, MN + 16.4);
         tl.fromTo("#moonq", { scale: 0.9, autoAlpha: 0 },
-          { scale: 1, autoAlpha: 1, duration: 0.8, ease: "back.out(1.3)" }, MN + 4.4);
-        tl.fromTo("#moontag", { y: 16, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.55, ease: "power2.out" }, MN + 5.6);
-        tl.to("#stage-moon", { autoAlpha: 0, duration: 0.7, ease: "power2.in" }, MN + 9.6);
+          { scale: 1, autoAlpha: 1, duration: 0.7, ease: "back.out(1.3)" }, MN + 16.5);
+        tl.fromTo("#moonwhy", { y: 16, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.55, ease: "power2.out" }, MN + 17.6);
+        tl.to("#stage-moon", { autoAlpha: 0, duration: 0.6, ease: "power2.in" }, MN + 18.4);
+        tl.set("#stage-moon", { autoAlpha: 0 }, MN + 19.0);
 
         const MG2 = T.mega;
         tl.fromTo("#megapanel", { y: 36, autoAlpha: 0 },
@@ -1726,11 +1947,10 @@
         tl.to("#stage-part3", { autoAlpha: 0, y: -20, duration: 0.6, ease: "power2.in" }, P3 + 11.2);
 
         /* ---------- CH5 : AX 사례 3건 ---------- */
-        const X1 = T.ax1, X2 = T.ax2, X3 = T.ax3;
-        [[1, X1], [2, X2]].forEach(([n, at]) => {
-          tl.fromTo(`#axhead${n}`, { y: 24, autoAlpha: 0 },
-            { y: 0, autoAlpha: 1, duration: 0.7, ease: "power3.out" }, at + 0.3);
-        });
+        /* 2026-08-29 4차: 2부 사례는 여비몬 한 건만 남겼다(ax2 삭제) */
+        const X1 = T.ax1, X3 = T.ax3;
+        tl.fromTo("#axhead1", { y: 24, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.7, ease: "power3.out" }, X1 + 0.3);
 
         const runBoard = (b, base, opt) => {
           const { ci, pos, calls, moves } = b;
@@ -1789,10 +2009,6 @@
 
         runBoard(boards[0], X1 + 0.6, { blockStagger: 0.05, aiAt: 3.4, moveAt: 4.6, moveGap: 1.5,
           moveDur: 0.85, pulse: true, calls: true, tailAt: 12.2, statAt: 13.6, outAt: 20.6 });
-        runBoard(boards[1], X2 + 0.4, { blockStagger: 0.04, aiAt: 2.2, moveAt: 3.2, moveGap: 0.7,
-          moveDur: 0.6, pulse: false, calls: true, tailAt: 7.0, statAt: 7.6, outAt: 10.6 });
-        runBoard(boards[2], X2 + 12.4, { blockStagger: 0.04, aiAt: 2.0, moveAt: 2.8, moveGap: 0.55,
-          moveDur: 0.5, pulse: false, calls: true, tailAt: 7.2, statAt: 7.8, outAt: 11.0 });
 
         const WHY = X3 + 0.2;
         tl.fromTo("#w1", { y: 20, autoAlpha: 0 },
@@ -1822,14 +2038,94 @@
         tl.fromTo("#closecard .stat", { y: 14, autoAlpha: 0 },
           { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, C + 2.2);
         tl.fromTo("#closecard .bmini", { y: 14, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, C + 2.7);
+          { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, C + 2.5);
+        /* ---------- CH3f : 여기서 끝이 아닙니다 — 다중 프로젝트 ---------- */
+        const MT = T.multi;
+        tl.fromTo("#mtbox .mtk", { y: 14, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, MT + 0.3);
+        tl.fromTo("#mth2", { y: 22, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.65, ease: "power3.out" }, MT + 0.7);
+        mtCards.forEach((el, i) => {
+          tl.fromTo(el, { y: 30, scale: 0.94, autoAlpha: 0 },
+            { y: 0, scale: 1, autoAlpha: 1, duration: 0.55, ease: "power3.out" },
+            MT + 1.6 + i * 0.55);
+        });
+        const mtc = { g: 0, p: 0 };
+        const mtgEl = document.getElementById("mtv-gates");
+        const mtpEl = document.getElementById("mtv-procs");
+        tl.fromTo("#mtsum", { y: 16, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, MT + 4.2);
+        tl.to(mtc, { g: XS.totalGates, p: XS.totalProcs, duration: 1.8, ease: "power2.out",
+          onUpdate: () => {
+            mtgEl.textContent = Math.round(mtc.g).toLocaleString();
+            mtpEl.textContent = Math.round(mtc.p).toLocaleString();
+          } }, MT + 4.4);
+        tl.fromTo("#mtshare .msq", { y: 16, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.55, ease: "power2.out" }, MT + 7.2);
+        tl.fromTo("#mtshare .msn", { y: 14, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, MT + 8.6);
+        tl.fromTo("#mturl", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, MT + 10.4);
+        tl.to("#stage-multi", { autoAlpha: 0, y: -18, duration: 0.6, ease: "power2.in" }, MT + 15.2);
+
+        /* ---------- CH3g-1 : 5극3특 실사이트 시연 (녹화 클립은 data-start 로 재생) ---------- */
+        const MD = T.mdemo;
+        tl.fromTo("#mdemotag", { y: -14, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power2.out" }, MD + 0.7);
+        tl.to("#mdemotag", { autoAlpha: 0, duration: 0.5 }, MD + 7.9);
+        tl.set("#mdemotag", { autoAlpha: 0 }, MD + 9.0);
+
+        /* ---------- CH3g-2 : 부처 상황판 (설명) ---------- */
+        const BD = T.board;
+        tl.fromTo("#bdbox .bdk", { y: 14, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, BD + 0.3);
+        tl.fromTo("#bdbox h2", { y: 22, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.65, ease: "power3.out" }, BD + 0.6);
+        A("#bdstats .bs").forEach((el, i) => {
+          tl.fromTo(el, { y: 16, autoAlpha: 0 },
+            { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, BD + 1.4 + i * 0.28);
+        });
+        ["#bdp0", "#bdp1", "#bdp2"].forEach((id, i) => {
+          tl.fromTo(id, { y: 24, autoAlpha: 0 },
+            { y: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, BD + 2.6 + i * 0.55);
+        });
+        tl.to("#stage-board", { autoAlpha: 0, duration: 0.6, ease: "power2.in" }, BD + 11.2);
+
+        /* ---------- CH3g-3 : 부처 상황판 실사이트 시연 ---------- */
+        const BM = T.bdemo;
+        tl.fromTo("#bdemotag", { y: -14, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power2.out" }, BM + 0.7);
+        tl.to("#bdemotag", { autoAlpha: 0, duration: 0.5 }, BM + 11.9);
+        tl.set("#bdemotag", { autoAlpha: 0 }, BM + 13.0);
+
+        /* ---------- CH3h : 최종 클로징 ---------- */
+        const FN = T.fin;
+        tl.fromTo("#fincard", { y: 34, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.7, ease: "power3.out" }, FN + 0.4);
+        tl.fromTo("#fincard .fk", { y: 14, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.45, ease: "power2.out" }, FN + 0.7);
+        tl.fromTo("#fincard h2", { scale: 0.93, autoAlpha: 0 },
+          { scale: 1, autoAlpha: 1, duration: 0.65, ease: "back.out(1.4)" }, FN + 1.0);
+        const fnc = { i: 0, g: 0 };
+        const fniEl = document.getElementById("fin-inst");
+        const fngEl = document.getElementById("fin-gate");
+        ["#fi0", "#fi1", "#fi2", "#fi3"].forEach((id, i) => {
+          tl.fromTo(id, { y: 20, autoAlpha: 0 },
+            { y: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, FN + 1.9 + i * 0.22);
+        });
+        tl.to(fnc, { i: K.instCount, g: XS.totalGates, duration: 1.4, ease: "power2.out",
+          onUpdate: () => {
+            fniEl.textContent = Math.round(fnc.i).toLocaleString();
+            fngEl.textContent = Math.round(fnc.g).toLocaleString();
+          } }, FN + 2.2);
+        tl.fromTo("#fincard .fs", { y: 14, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, FN + 4.0);
+        tl.fromTo("#fincard .fmini", { y: 14, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, FN + 4.8);
 
         /* ---------- subtitles ---------- */
-        const SUBS = [[1, 8.9], [2, 14.2], [3, 19.6], [4, 26.4], [5, 41.0], [6, 46.6],
-          [7, 54.8], [8, 71.0], [9, 79.8], [10, 89.8], [11, 99.0], [12, 107.4], [13, 117.0],
-          [14, 127.4], [15, 135.4], [16, 143.6], [17, 150.4], [18, 158.8], [19, 168.4],
-          [20, 198.4], [21, 210.6], [22, 216.2], [23, 223.8], [24, 232.8], [25, 244.8],
-          [26, 257.8], [27, 274.0]];
+        /* 자막 번호는 초판 순서를 유지하고 시각만 새 챕터 순서에 맞춘다
+           (1~12 = 1부, 20~27 = 2부 미시, 13~19·28~33 = 3부 거시) */
+        const SUBS = [[1, 8.9], [2, 14.2], [3, 19.6], [5, 33.8], [6, 39.4], [7, 47.6], [10, 63.6], [11, 72.8], [12, 81.2], [20, 89.2], [21, 101.4], [22, 107.0], [23, 114.6], [26, 123.6], [27, 139.8], [13, 149.2], [29, 155.4], [14, 168.2], [15, 176.2], [16, 184.4], [17, 191.2], [18, 199.6], [19, 209.2], [30, 239.2], [31, 247.6], [34, 255.2], [37, 259.4], [32, 264.2], [35, 276.2], [36, 282.2], [33, 289.8]];
         SUBS.forEach(([n, at]) => {
           tl.fromTo(`#sub${n} .tx`, { y: 22, autoAlpha: 0 },
             { y: 0, autoAlpha: 1, duration: 0.55, ease: "power3.out" }, at + 0.05);

@@ -149,9 +149,10 @@ def law_block(law_name, art_no, markers):
             'effective': law['effective'], 'paras': paras}
 
 
-montage = [mini('small-business-policy-fund'), mini('factory-establishment')]
-montage[0]['law'] = law_block('소상공인 보호 및 지원에 관한 법률', '제9조', ['main', '2.', '6.'])
-montage[1]['law'] = law_block('산업집적활성화 및 공장설립에 관한 법률', '제13조', ['①', '④'])
+# 2026-08-29 4차: 소상공인 정책자금을 빼고 공장설립승인 한 건만 — 환경영향평가(doc·map)에
+# 바로 이어 붙여 "같은 방법"을 두 번째 사례로 설명한다.
+montage = [mini('factory-establishment')]
+montage[0]['law'] = law_block('산업집적활성화 및 공장설립에 관한 법률', '제13조', ['①', '④'])
 
 # ---------- 3. mega detail : how 1,281 was counted ----------
 mp = jload(f'{W}/mega-projects/projects/gwangju-semiconductor-cluster.json')
@@ -198,6 +199,73 @@ mega_stats = {
     'loopBefore': {'milestones': 49, 'institutions': 586, 'procs': 1281},
 }
 
+# ---------- 3.6 multi : 워룸 다중 프로젝트화 (4개 메가프로젝트) ----------
+WR = os.path.expanduser('~/korea100/web/public/warroom/map')
+pidx = jload(os.path.expanduser('~/korea100/web/public/warroom/p/index.json'))['projects']
+# 광주는 map 루트, 나머지는 map/<id>/ 아래에 있다
+def wr_dir(pid):
+    return WR if pid == 'gwangju-semiconductor-cluster' else f'{WR}/{pid}'
+
+# 절차·제도 수는 mega 챕터와 같은 방식(제도 원본의 process 노드)으로 세어
+# 광주 수치가 두 챕터에서 어긋나지 않게 한다.
+def count_project(pid):
+    src = jload(f'{W}/mega-projects/projects/{pid}.json')
+    insts, procs = set(), 0
+    for n in src['nodes']:
+        for ref in n.get('templateRefs') or []:
+            insts.add(ref['institution'])
+            inst = jload(f"{W}/institutions/{ref['institution']}.json")
+            want = set(ref.get('nodeIds') or [])
+            procs += sum(1 for pn in inst['process']['nodes']
+                         if not want or pn['id'] in want)
+    return src, insts, procs
+
+inst_names = {}   # slug -> 제도명 (공유 제도 표기용)
+multi_projects = []
+for p in pidx:
+    src, p_insts, n_proc = count_project(p['id'])
+    for slug in p_insts:
+        inst_names.setdefault(slug, jload(f'{W}/institutions/{slug}.json')['name'])
+    dat = jload(f'{wr_dir(p["id"])}/data.json')
+    multi_projects.append({
+        'id': p['id'], 'name': p['name'], 'short': p['short'],
+        'stages': len(src['stages']), 'gates': len(src['nodes']),
+        'edges': len(dat['edges']), 'procs': n_proc, 'institutions': len(p_insts),
+        'done': sum(1 for n in dat['nodes'] if n['status'] == 'completed'),
+        'live': sum(1 for n in dat['nodes'] if n['status'] == 'active'),
+    })
+
+shared = jload(f'{WR}/shared-institutions.json')
+share_counts = [len(v) for v in shared['byInstitution'].values()]
+top_slug, top_v = max(shared['byInstitution'].items(), key=lambda kv: len(kv[1]))
+top_name = inst_names.get(top_slug, top_slug)
+multi_stats = {
+    'projects': multi_projects,
+    'totalGates': sum(p['gates'] for p in multi_projects),
+    'totalProcs': sum(p['procs'] for p in multi_projects),
+    'sharedInstitutions': len(share_counts),
+    'sharedIn3plus': sum(1 for c in share_counts if c >= 3),
+    'topShared': {'name': top_name, 'projects': len(top_v)},
+}
+
+# ---------- 3.7 board : 부처 상황판 (주체 축) ----------
+mb = jload(f'{WR}/ministry-board.json')
+tops = sorted(mb['ministries'], key=lambda m: -m['counts']['own'])[:6]
+lev = max(mb['ministries'], key=lambda m: (m.get('maxLeverage') or {}).get('blocked', -1))
+board_stats = {
+    'ministries': mb['totals']['ministries'],
+    'gates': mb['totals']['gates'],
+    'unassignedGates': mb['totals']['unassignedGates'],
+    'projects': len(mb['projects']),
+    'top': [{'label': m['label'], 'own': m['counts']['own'],
+             'active': m['counts']['active'], 'frontier': m['counts']['frontier']}
+            for m in tops],
+    'leverage': {'label': lev['label'], 'gate': lev['maxLeverage']['gate'],
+                 'name': lev['maxLeverage']['name'],
+                 'blocked': lev['maxLeverage']['blocked'],
+                 'project': lev['maxLeverage']['projectName']},
+}
+
 # ---------- write ----------
 os.makedirs(OUT, exist_ok=True)
 with open(f'{OUT}/data.js', 'w') as f:
@@ -210,9 +278,19 @@ with open(f'{OUT}/megadetail.js', 'w') as f:
     f.write('window.MEGADETAIL = ' + json.dumps(mega_detail, ensure_ascii=False) + ';\n')
 with open(f'{OUT}/megastats.js', 'w') as f:
     f.write('window.MEGASTATS = ' + json.dumps(mega_stats, ensure_ascii=False) + ';\n')
+with open(f'{OUT}/multistats.js', 'w') as f:
+    f.write('window.MULTISTATS = ' + json.dumps(multi_stats, ensure_ascii=False) + ';\n')
+    f.write('window.BOARDSTATS = ' + json.dumps(board_stats, ensure_ascii=False) + ';\n')
 
 for c in cases:
     print(f"{c['slug']}: lanes {len(c['lanes'])} gates {len(c['gates'])} asis {len(c['asis'])} autos {len(c['autos'])} calls {len(c['calls'])} | {c['result']}")
 print(f"k100: {len(k100['nodes'])} EIA nodes, {len(k100['edges'])} edges, instCount {k100['instCount']}, instNames {len(k100['instNames'])}")
 for m in montage: print(f"montage {m['name']}: {m['count']} nodes, {len(m['lanes'])} lanes x {len(m['gates'])} gates | {m['law']['law']} {m['law']['article']}({m['law']['title']}) paras {len(m['law']['paras'])}")
 print('megadetail:', mega_detail['milestone'], '|', len(mega_detail['procs']), 'procs |', mega_detail['stage'])
+for p in multi_stats['projects']:
+    print(f"multi {p['short']}: gates {p['gates']} procs {p['procs']} insts {p['institutions']} done {p['done']} live {p['live']}")
+print(f"multi totals: gates {multi_stats['totalGates']} procs {multi_stats['totalProcs']} "
+      f"shared {multi_stats['sharedInstitutions']} (3+ {multi_stats['sharedIn3plus']}, "
+      f"top {multi_stats['topShared']['name']} x{multi_stats['topShared']['projects']})")
+print(f"board: {board_stats['ministries']} ministries / {board_stats['gates']} gates / "
+      f"{board_stats['unassignedGates']} unassigned | leverage {board_stats['leverage']}")
