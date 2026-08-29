@@ -18,6 +18,30 @@ if (process.argv[2] === "--all") {
   for (const id of ids) {
     execFileSync(process.execPath, [fileURLToPath(import.meta.url), id], { stdio: "inherit" });
   }
+  // 교차 프로젝트 제도 재사용 인덱스 — 같은 제도가 몇 개 사업에 걸려 있는지.
+  // 프로젝트가 3개 이상일 때만 의미가 있어 지도에서 배지로 노출한다.
+  const shared = {};
+  for (const id of ids) {
+    const proj = JSON.parse(
+      readFileSync(join(root, `data/mega-projects/projects/${id}.json`), "utf8"));
+    for (const n of proj.nodes ?? []) {
+      for (const ref of n.templateRefs ?? []) {
+        (shared[ref.institution] ??= []).push({ project: id, name: proj.name, gate: n.id });
+      }
+    }
+  }
+  const index = {};
+  for (const [slug, uses] of Object.entries(shared)) {
+    const byProject = new Map();
+    for (const u of uses) {
+      if (!byProject.has(u.project)) byProject.set(u.project, { project: u.project, name: u.name, gates: [] });
+      byProject.get(u.project).gates.push(u.gate);
+    }
+    if (byProject.size > 1) index[slug] = [...byProject.values()];
+  }
+  writeFileSync(join(root, "public/warroom/map/shared-institutions.json"),
+    `${JSON.stringify({ generatedAt: null, projects: ids, byInstitution: index }, null, 0)}\n`);
+  console.log(`shared institutions: ${Object.keys(index).length}종이 2개 이상 사업에 걸림`);
   process.exit(0);
 }
 const projectId = process.argv[2] ?? DEFAULT_PROJECT;
@@ -305,7 +329,12 @@ const config = {
   levels,
   title: tracks.title ?? "관문 의존 지도",
   subtitle: tracks.subtitle ?? project.name,
-  nav: tracks.nav ?? [],
+  nav: (() => {
+    const nav = [...(tracks.nav ?? [])];
+    const four = `../../mega-projects/${projectId}/`;
+    if (!nav.some((l) => l.href === four)) nav.unshift({ label: "프로젝트 4뷰", href: four });
+    return nav;
+  })(),
   layout: tracks.layout ?? auto.layout,
   canvas: tracks.canvas ?? auto.canvas,
   scenarios: [
