@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>부처 상황판 — 국가 핵심사업에서 각 부처가 맡은 관문</title>
+<meta name="description" content="korea100 워룸 — 등재된 국가 핵심사업의 관문을 부처 축으로 접어 지금 공이 어디 있는지 보여준다." />
+<style>
+:root {
+  --bg: #04070c;
+  --panel: rgba(9, 18, 28, 0.86);
+  --panel2: rgba(12, 23, 34, 0.94);
+  --line: rgba(56, 198, 244, 0.22);
+  --text: #d7e6f2;
+  --muted: #5f7b90;
+  --amber: #ffb020;
+  --gold: #ffd76a;
+  --cyan: #38c6f4;
+  --green: #2ee6a8;
+  --violet: #9d86f5;
+  --rose: #ff6b8a;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --sans: "Apple SD Gothic Neo", "Pretendard", sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  min-height: 100%; background: var(--bg); color: var(--text);
+  font-family: var(--sans); font-size: 13px; line-height: 1.5;
+}
+a { color: inherit; }
+.mono { font-family: var(--mono); }
+.num { font-variant-numeric: tabular-nums; }
+
+header {
+  position: sticky; top: 0; z-index: 40;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px;
+  padding: 12px 20px 10px;
+  background: linear-gradient(180deg, rgba(4,7,12,0.98) 70%, rgba(4,7,12,0));
+  border-bottom: 1px solid rgba(56,198,244,0.12);
+}
+header h1 { font-size: 16px; font-weight: 700; letter-spacing: -0.2px; white-space: nowrap; }
+header .sub { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.08em; }
+header .links { margin-left: auto; display: flex; flex-wrap: wrap; gap: 8px; font-family: var(--mono); font-size: 10px; }
+header .links a {
+  color: var(--muted); text-decoration: none;
+  border: 1px solid rgba(95,123,144,0.35); border-radius: 4px; padding: 3px 8px;
+}
+header .links a:hover, header .links a:focus-visible { color: var(--cyan); border-color: var(--cyan); }
+
+main { padding: 16px 20px 60px; max-width: 1760px; }
+
+.notice {
+  border: 1px solid rgba(255,176,32,0.3); border-left-width: 3px;
+  background: rgba(255,176,32,0.05); border-radius: 4px;
+  padding: 9px 13px; margin-bottom: 16px; font-size: 12px; color: #cbb894;
+  max-width: 1080px;
+}
+.notice b { color: var(--gold); font-weight: 600; }
+
+.sortbar[hidden] { display: none; }
+.sortbar { display: flex; align-items: center; gap: 7px; margin-bottom: 12px; flex-wrap: wrap; }
+.sortbar .lbl { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.08em; }
+.sortbar button {
+  font-family: var(--mono); font-size: 10px; cursor: pointer;
+  background: none; color: var(--muted);
+  border: 1px solid rgba(95,123,144,0.35); border-radius: 999px; padding: 3px 11px;
+}
+.sortbar button:hover { color: var(--text); border-color: var(--cyan); }
+.sortbar button.on { color: var(--amber); border-color: var(--amber); background: rgba(255,176,32,0.08); }
+
+#grid { display: grid; gap: 11px; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); }
+@media (max-width: 1280px) { #grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); } }
+
+.card {
+  border: 1px solid var(--line); border-radius: 6px; background: var(--panel);
+  padding: 12px 13px 11px; cursor: pointer; text-align: left; width: 100%;
+  color: inherit; font: inherit; display: block;
+  transition: border-color 0.15s, background 0.15s;
+}
+.card:hover, .card:focus-visible { border-color: var(--cyan); background: var(--panel2); outline: none; }
+.card.dim { border-color: rgba(95,123,144,0.25); }
+.card .top { display: flex; align-items: baseline; gap: 8px; margin-bottom: 7px; }
+.card .nm { font-size: 14px; font-weight: 700; letter-spacing: -0.2px; }
+.card .scope { margin-left: auto; font-family: var(--mono); font-size: 9px; color: var(--muted); white-space: nowrap; }
+.card .tag {
+  font-family: var(--mono); font-size: 8.5px; color: var(--violet);
+  border: 1px solid rgba(157,134,245,0.45); border-radius: 3px; padding: 0 4px;
+}
+.counts { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-bottom: 9px; }
+.counts b { color: var(--text); font-weight: 600; }
+.hold { display: flex; align-items: baseline; gap: 7px; margin-bottom: 6px; }
+.hold .n { font-family: var(--mono); font-size: 26px; font-weight: 700; color: var(--amber); line-height: 1; }
+.hold .t { font-size: 11.5px; color: var(--gold); }
+.hold.none .n { color: var(--muted); font-size: 15px; }
+.hold.none .t { color: var(--muted); }
+.lev { font-family: var(--mono); font-size: 10px; color: var(--muted); }
+.lev b { color: var(--cyan); }
+.waited { font-family: var(--mono); font-size: 9.5px; color: var(--muted); margin-top: 3px; }
+
+/* 상세 */
+#detail { display: none; }
+#detail.on { display: block; }
+#grid.hide { display: none; }
+.back {
+  font-family: var(--mono); font-size: 10px; color: var(--muted); cursor: pointer;
+  background: none; border: 1px solid rgba(95,123,144,0.35); border-radius: 4px; padding: 3px 10px;
+  margin-bottom: 14px;
+}
+.back:hover { color: var(--cyan); border-color: var(--cyan); }
+.dhead { border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 16px; }
+.dhead h2 { margin: 0 0 6px; font-size: 21px; letter-spacing: -0.4px; }
+.dhead .meta { font-family: var(--mono); font-size: 10.5px; color: var(--muted); }
+.dhead .meta b { color: var(--text); }
+.pchips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+.pchips a {
+  font-family: var(--mono); font-size: 10px; text-decoration: none; color: var(--muted);
+  border: 1px solid rgba(95,123,144,0.4); border-radius: 999px; padding: 2px 10px;
+}
+.pchips a:hover, .pchips a:focus-visible { color: var(--cyan); border-color: var(--cyan); }
+
+section.blk { margin-bottom: 22px; max-width: 1200px; }
+section.blk h3 {
+  font-size: 12px; font-family: var(--mono); letter-spacing: 0.1em; color: var(--cyan);
+  margin: 0 0 4px; text-transform: uppercase;
+}
+section.blk .hint { font-size: 11px; color: var(--muted); margin: 0 0 9px; }
+.empty { font-size: 12px; color: var(--muted); border: 1px dashed rgba(95,123,144,0.3); border-radius: 4px; padding: 11px 13px; }
+
+.row {
+  display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+  border: 1px solid var(--line); border-radius: 5px; background: var(--panel);
+  padding: 9px 12px; margin-bottom: 6px; text-decoration: none; color: inherit;
+}
+a.row:hover, a.row:focus-visible { border-color: var(--cyan); background: var(--panel2); outline: none; }
+.row .proj { font-family: var(--mono); font-size: 9px; color: var(--violet); white-space: nowrap; }
+.row .gid { font-family: var(--mono); font-size: 10px; color: var(--cyan); }
+.row .rn { font-size: 12.5px; flex: 1; min-width: 220px; }
+.row .aside { font-family: var(--mono); font-size: 9.5px; color: var(--muted); white-space: nowrap; }
+.row .aside b { color: var(--amber); }
+.badge {
+  font-family: var(--mono); font-size: 8.5px; border-radius: 3px; padding: 0 4px;
+  border: 1px solid currentColor;
+}
+.badge.unk { color: var(--rose); }
+.badge.co { color: var(--muted); }
+.badge.act { color: var(--green); }
+
+.uarole { border: 1px solid var(--line); border-radius: 5px; background: var(--panel); padding: 10px 12px; margin-bottom: 7px; }
+.uarole .rl { font-size: 12.5px; font-weight: 600; margin-bottom: 5px; }
+.uarole .rl span { font-family: var(--mono); font-size: 10px; color: var(--muted); font-weight: 400; margin-left: 6px; }
+.uarole .g { font-family: var(--mono); font-size: 10px; color: var(--muted); display: block; padding: 1px 0; text-decoration: none; }
+.uarole a.g:hover { color: var(--cyan); }
+
+footer { max-width: 1200px; margin-top: 26px; padding-top: 12px; border-top: 1px solid rgba(95,123,144,0.2);
+  font-size: 11px; color: var(--muted); line-height: 1.7; }
+</style>
+</head>
+<body>
+<header>
+  <h1>부처 상황판</h1>
+  <span class="sub" id="hsub"></span>
+  <nav class="links">
+    <a href="../map/">관문 지도</a>
+    <a href="../board/">주체별 상황판</a>
+    <a href="../loop/">루프</a>
+    <a href="../">워룸</a>
+  </nav>
+</header>
+
+<main>
+  <div class="notice" id="notice"></div>
+
+  <div class="sortbar" id="sortbar" hidden>
+    <span class="lbl">정렬</span>
+    <button data-sort="holding" class="on">쥐고 있는 것</button>
+    <button data-sort="leverage">레버리지</button>
+    <button data-sort="own">관문 수</button>
+    <button data-sort="name">가나다</button>
+  </div>
+
+  <div id="grid"></div>
+  <div id="detail"></div>
+
+  <footer id="foot"></footer>
+</main>
+
+<script>
+const $ = (s, r = document) => r.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const MAP = (pid) => `../map/${pid === "gwangju-semiconductor-cluster" ? "" : `?p=${pid}`}`;
+const LEVEL_KO = {
+  cabinet: "총리·국무회의", legislature: "국회·입법", presidential_committee: "대통령 소속 위원회",
+  minister: "부처 장관", local: "지자체장", committee: "위원회·전문기관", field: "실무·사업자",
+};
+// 부처가 아닌 결정주체 — 카드에 성격을 밝힌다
+const NOT_MINISTRY = {
+  assembly: "의정 협조 대상", "pm-office": "총리·국무회의", president: "대통령실",
+  "balance-committee": "대통령 소속 위원회", "decentral-council": "대통령 소속 회의",
+  "land-policy-committee": "법정 위원회",
+};
+
+let B = null, SORT = "holding";
+
+fetch("../map/ministry-board.json").then((r) => r.json()).then((b) => {
+  B = b;
+  const pn = b.projects.length;
+  $("#hsub").textContent = `${pn} PROJECTS · ${b.totals.gates + b.totals.unassignedGates} GATES · AS OF ${b.generatedAt}`;
+  $("#notice").innerHTML =
+    `<b>이 화면이 보여주는 것은 부처의 전체 업무가 아니라, 등재된 국가 핵심사업 ${pn}개에 걸린 관문뿐입니다.</b> `
+    + `지금 공이 어느 부처에 있는지를 보는 판이며, 부처의 업무량·성과를 비교하는 자료가 아닙니다. `
+    + `공개 자료(법령·관보·언론)를 근거로 한 추정이고, 상태 확정은 사람이 합니다.`;
+  $("#sortbar").hidden = false;
+  $("#foot").innerHTML =
+    `한 관문에 결정주체가 여럿이면 각 주체에 모두 계상하므로, 카드의 담당 관문 수를 모두 더하면 실제 관문 수보다 큽니다.<br>`
+    + `“기다린 일수”는 집계를 시작한 ${esc(b.sinceBaseline ?? b.generatedAt)}부터 누적하므로, 초기에는 실제보다 짧게 보입니다.<br>`
+    + `데이터: <a href="../map/">관문 의존 지도</a> · 생성 <span class="mono">npm run generate:warroom-map:all</span>`;
+  bindSort();
+  route();
+});
+
+window.addEventListener("hashchange", route);
+
+function bindSort() {
+  for (const btn of document.querySelectorAll("#sortbar button")) {
+    btn.addEventListener("click", () => {
+      SORT = btn.dataset.sort;
+      for (const b of document.querySelectorAll("#sortbar button")) b.classList.toggle("on", b === btn);
+      renderGrid();
+    });
+  }
+}
+
+function route() {
+  const m = (location.hash.match(/^#m=([\w-]+)$/) || [])[1];
+  if (m) renderDetail(m); else renderGrid();
+}
+
+function sorted() {
+  const ms = [...B.ministries];
+  if (SORT === "holding") ms.sort((a, b) => b.counts.frontier - a.counts.frontier
+    || (b.maxLeverage?.blocked ?? 0) - (a.maxLeverage?.blocked ?? 0));
+  else if (SORT === "leverage") ms.sort((a, b) => (b.maxLeverage?.blocked ?? 0) - (a.maxLeverage?.blocked ?? 0));
+  else if (SORT === "own") ms.sort((a, b) => b.counts.own - a.counts.own);
+  else ms.sort((a, b) => a.label.localeCompare(b.label, "ko"));
+  return ms;
+}
+
+function renderGrid() {
+  $("#detail").className = "";
+  $("#grid").className = "";
+  $("#sortbar").hidden = false;
+  const cards = sorted().map((m) => {
+    const c = m.counts, lv = m.maxLeverage;
+    const oldest = m.holding.length ? m.holding.map((h) => h.since).sort()[0] : null;
+    const days = oldest ? daysSince(oldest) : 0;
+    return `<button class="card${c.frontier ? "" : " dim"}" data-m="${esc(m.id)}">
+      <div class="top">
+        <span class="nm">${esc(m.label)}</span>
+        ${NOT_MINISTRY[m.id] ? `<span class="tag">${esc(NOT_MINISTRY[m.id])}</span>` : ""}
+        <span class="scope">${m.projects.length}개 사업 기준</span>
+      </div>
+      <div class="counts num">담당 <b>${c.own}</b> · 완료 <b>${c.completed}</b> · 진행 <b>${c.active}</b> · 예정 <b>${c.planned + c.unknown}</b></div>
+      <div class="hold${c.frontier ? "" : " none"}">
+        <span class="n num">${c.frontier || "—"}</span>
+        <span class="t">${c.frontier ? "지금 쥐고 있는 것" : "지금 대기 중인 관문 없음"}</span>
+      </div>
+      ${lv && lv.blocked > 0
+        ? `<div class="lev num">⚡ 지연 시 하류 <b>${lv.blocked}개</b> 정지 — ${esc(lv.gate)} ${esc(clip(lv.name, 22))}</div>` : ""}
+      ${days > 0 ? `<div class="waited num">최장 ${days}일째 대기</div>` : ""}
+    </button>`;
+  });
+  const ua = B.unassigned, uaGates = B.totals.unassignedGates;
+  cards.push(`<button class="card dim" data-m="unassigned">
+    <div class="top"><span class="nm">결정주체 미특정</span>
+      <span class="tag">확정 필요</span>
+      <span class="scope">${ua.length}개 역할명</span></div>
+    <div class="counts">법령이 “산업단지 지정권자”처럼 역할로만 정한 관문입니다. 부처로 추정 배정하지 않습니다.</div>
+    <div class="hold"><span class="n num">${uaGates}</span><span class="t">결정주체를 정해야 할 관문</span></div>
+  </button>`);
+  $("#grid").innerHTML = cards.join("");
+  for (const el of document.querySelectorAll(".card")) {
+    el.addEventListener("click", () => { location.hash = `#m=${el.dataset.m}`; });
+  }
+  window.scrollTo(0, 0);
+}
+
+function clip(s, n) { return s && s.length > n ? `${s.slice(0, n)}…` : s; }
+function daysSince(iso) {
+  const t = Date.parse(`${iso}T00:00:00Z`);
+  if (Number.isNaN(t)) return 0;
+  const base = Date.parse(`${B.generatedAt}T00:00:00Z`);
+  return Math.max(0, Math.round((base - t) / 86400000));
+}
+function pname(pid) { return B.projects.find((p) => p.id === pid)?.name ?? pid; }
+// 행·칩에는 약칭을 쓴다 — 정식명은 title 속성에만 남긴다
+function pshort(pid) { const p = B.projects.find((x) => x.id === pid); return p?.short ?? p?.name ?? pid; }
+
+function gateRow(o, aside, extra = "") {
+  return `<a class="row" href="${MAP(o.project)}" target="_blank" rel="noopener"
+      title="${esc(pname(o.project))} 관문 지도에서 보기">
+    <span class="proj">${esc(pshort(o.project))}</span>
+    <span class="gid">${esc(o.gate)}</span>
+    <span class="rn">${esc(o.name)}${extra}</span>
+    <span class="aside">${aside}</span>
+  </a>`;
+}
+
+function renderDetail(id) {
+  $("#grid").className = "hide";
+  $("#sortbar").hidden = true;
+  const d = $("#detail");
+  d.className = "on";
+  if (id === "unassigned") { d.innerHTML = renderUnassigned(); bindBack(); return; }
+  const m = B.ministries.find((x) => x.id === id);
+  if (!m) { location.hash = ""; return; }
+  const c = m.counts;
+
+  const holding = m.holding.length
+    ? m.holding.map((h) => gateRow(h,
+        `${daysSince(h.since) > 0 ? `${daysSince(h.since)}일째 · ` : ""}풀리면 <b>▶${h.leverage}개</b>`,
+        `${h.status === "unknown" ? ' <span class="badge unk">미확정</span>' : ""}`
+        + `${h.co?.length ? ` <span class="badge co">공동 ${esc(h.co.join("·"))}</span>` : ""}`)).join("")
+    : `<div class="empty">지금 이 부처 앞에 대기 중인 관문이 없습니다. 선행 관문이 풀리면 여기에 나타납니다.</div>`;
+
+  const awaited = m.awaited.length
+    ? m.awaited.map((a) => `<div class="row">
+        <span class="proj">${esc(pshort(a.project))}</span>
+        <span class="gid">${esc(a.upGate)} → ${esc(a.downGate)}</span>
+        <span class="rn">${esc(a.downName)}</span>
+        <span class="aside">${a.downMinistries.length ? esc(a.downMinistries.join("·")) : "미특정"}</span>
+      </div>`).join("")
+    : `<div class="empty">이 부처의 미완료 관문에 걸린 하류 관문이 없습니다.</div>`;
+
+  const active = m.active.length
+    ? m.active.map((a) => gateRow(a, '<span class="badge act">진행 중</span>')).join("")
+    : `<div class="empty">진행 중으로 확인된 관문이 없습니다.</div>`;
+
+  const legis = m.legislative.length
+    ? m.legislative.map((l) => gateRow(l, `${esc(l.blockedByGate)} 대기`)).join("")
+    : "";
+
+  d.innerHTML = `<button class="back">← 부처 전체</button>
+    <div class="dhead">
+      <h2>${esc(m.label)}${NOT_MINISTRY[m.id] ? ` <span class="tag">${esc(NOT_MINISTRY[m.id])}</span>` : ""}</h2>
+      <div class="meta num">담당 <b>${c.own}</b> · 완료 <b>${c.completed}</b> · 진행 <b>${c.active}</b>
+        · 예정 <b>${c.planned + c.unknown}</b> · 쥐고 있는 것 <b>${c.frontier}</b>
+        &nbsp;|&nbsp; ${m.projects.length}개 사업 기준 · 집계 ${esc(B.generatedAt)}</div>
+      <div class="pchips">${m.projects.map((p) =>
+        `<a href="${MAP(p)}" target="_blank" rel="noopener" title="${esc(pname(p))}">${esc(pshort(p))} 지도</a>`).join("")}</div>
+    </div>
+    <section class="blk"><h3>쥐고 있는 것</h3>
+      <p class="hint">선행 관문이 모두 끝나 지금 착수할 수 있는데 아직 시작되지 않은 관문입니다. 하류를 많이 세우는 순서로 정렬했습니다.</p>
+      ${holding}</section>
+    <section class="blk"><h3>이 부처를 기다리는 곳</h3>
+      <p class="hint">이 부처의 미완료 관문이 끝나야 움직이는 하류 관문과, 그것을 맡은 주체입니다.</p>
+      ${awaited}</section>
+    <section class="blk"><h3>진행 중</h3>${active}</section>
+    ${legis ? `<section class="blk"><h3>입법 대기</h3>
+      <p class="hint">국회 단계 관문이 끝나야 진행되는 이 부처의 관문입니다.</p>${legis}</section>` : ""}`;
+  bindBack();
+  window.scrollTo(0, 0);
+}
+
+function renderUnassigned() {
+  const items = B.unassigned.map((u) => `<div class="uarole">
+    <div class="rl">${esc(u.role)}<span>${u.gates.length}개 관문</span></div>
+    ${u.gates.map((g) => `<a class="g" href="${MAP(g.project)}" target="_blank" rel="noopener">${esc(pshort(g.project))} · ${esc(g.gate)} ${esc(g.name)}</a>`).join("")}
+  </div>`).join("");
+  return `<button class="back">← 부처 전체</button>
+    <div class="dhead">
+      <h2>결정주체 미특정 <span class="tag">확정 필요</span></h2>
+      <div class="meta num">${B.unassigned.length}개 역할명 · <b>${B.totals.unassignedGates}</b>개 관문</div>
+    </div>
+    <section class="blk">
+      <p class="hint">법령이 결정주체를 “산업단지 지정권자”처럼 역할로만 정해 둔 관문입니다.
+        지정 경로가 확정되기 전에 특정 부처로 적으면 사실과 달라지므로, 추정해서 배정하지 않고 여기 모읍니다.
+        이 목록 자체가 “누가 결정하는지부터 정해야 하는 관문”의 업무 큐입니다.</p>
+      ${items}</section>`;
+}
+
+function bindBack() {
+  const b = $(".back");
+  if (b) b.addEventListener("click", () => { location.hash = ""; });
+}
+</script>
+</body>
+</html>
