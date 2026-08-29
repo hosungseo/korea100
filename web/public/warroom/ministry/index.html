@@ -101,7 +101,7 @@ main { padding: 16px 20px 60px; max-width: 1760px; }
 }
 .notice b { color: var(--gold); font-weight: 600; }
 
-.sortbar[hidden] { display: none; }
+.sortbar[hidden], .projbar[hidden] { display: none; }
 .sortbar { display: flex; align-items: center; gap: 0; margin-bottom: 14px; flex-wrap: wrap; }
 .sortbar .lbl { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.08em; margin-right: 10px; }
 .sortbar button {
@@ -113,6 +113,20 @@ main { padding: 16px 20px 60px; max-width: 1760px; }
 .sortbar button:last-of-type { border-radius: 0 4px 4px 0; }
 .sortbar button:hover { color: var(--text); border-color: var(--cyan); z-index: 1; position: relative; }
 .sortbar button.on { color: var(--amber); border-color: var(--amber); background: rgba(255,176,32,0.1); z-index: 1; position: relative; }
+
+/* 사업 필터 — 전장 선택 */
+.projbar { display: flex; align-items: center; gap: 7px; margin-bottom: 14px; flex-wrap: wrap; }
+.projbar .lbl { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.08em; }
+.projbar button {
+  font-family: var(--mono); font-size: 10px; cursor: pointer;
+  background: rgba(9,18,28,0.7); color: var(--muted);
+  border: 1px solid rgba(95,123,144,0.35); border-radius: 999px; padding: 3px 12px;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.projbar button i { width: 7px; height: 7px; border-radius: 1.5px; display: inline-block; }
+.projbar button:hover { color: var(--text); }
+.projbar button.on { color: var(--text); background: rgba(56,198,244,0.08); }
+.card.off { opacity: 0.26; }
 
 #grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
 @media (max-width: 1280px) { #grid { grid-template-columns: repeat(auto-fill, minmax(285px, 1fr)); } }
@@ -170,6 +184,16 @@ main { padding: 16px 20px 60px; max-width: 1760px; }
 
 /* 관문 핍 — 점 1개 = 관문 1개. 비율 막대가 아니라 낱개 표시라 표본 크기가 그대로 보인다 */
 .pips { display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 9px; min-height: 7px; }
+/* 사업별 분단 — 한 부처가 여러 메가프로젝트에 걸리므로 칸 안에서 사업을 나눈다 */
+.plines { margin-bottom: 9px; }
+.pline { display: flex; align-items: center; gap: 7px; padding: 2px 0 2px 7px; border-left: 2px solid; }
+.pline + .pline { margin-top: 3px; }
+.pline .pl {
+  font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.03em;
+  width: 64px; flex: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.pline .pips { margin: 0; }
+.pline .pn { font-family: var(--mono); font-size: 8.5px; color: var(--muted); margin-left: auto; }
 .pips i { width: 7px; height: 7px; border-radius: 1.5px; display: block; }
 .pips i.done { background: var(--green); }
 .pips i.act { background: var(--cyan); box-shadow: 0 0 5px rgba(56,198,244,0.6); }
@@ -326,7 +350,22 @@ const NOT_MINISTRY = {
 // 문장(각료) 표기 — 라벨 앞 두 글자. 시뮬레이션 게임의 초상 자리
 const crestOf = (label) => label.replace(/[·\s]/g, "").slice(0, 2);
 
-let B = null, SORT = "holding", tickerTimer = null;
+// 사업 식별색 — 상태색(완료·진행·착수가능·대기)과 채널을 분리한다.
+// 핍은 상태를 칠하고, 사업은 라벨과 왼쪽 세로줄로만 구분한다.
+const PROJ_COLOR = {
+  "gwangju-semiconductor-cluster": "#9d86f5",
+  "five-poles-three-special": "#ff6b8a",
+  "arctic-route": "#5ad1c8",
+  "daegu-gyeongbuk-airport": "#e8a75c",
+};
+const FALLBACK = ["#9d86f5", "#ff6b8a", "#5ad1c8", "#e8a75c", "#c9d36a", "#f58fd0"];
+function pcolor(pid) {
+  if (PROJ_COLOR[pid]) return PROJ_COLOR[pid];
+  const i = B.projects.findIndex((x) => x.id === pid);
+  return FALLBACK[(i < 0 ? 0 : i) % FALLBACK.length];
+}
+
+let B = null, SORT = "holding", FILTER = null, tickerTimer = null;
 
 fetch("../map/ministry-board.json").then((r) => r.json()).then((b) => {
   B = b;
@@ -342,10 +381,13 @@ fetch("../map/ministry-board.json").then((r) => r.json()).then((b) => {
     + `<span class="legend"><i style="background:var(--cyan)"></i> 진행</span>`
     + `<span class="legend"><i style="background:var(--amber)"></i> 착수 가능</span>`
     + `<span class="legend"><i style="background:rgba(95,123,144,0.45)"></i> 대기</span>`
-    + ` — 점 1개가 관문 1개입니다(비율 막대가 아닙니다).<br>`
+    + ` — 점 1개가 관문 1개입니다(비율 막대가 아닙니다). 색은 상태를 뜻하고, 사업은 줄 왼쪽 세로선과 약칭으로 구분합니다.<br>`
+    + b.projects.map((p) => `<span class="legend"><i style="background:${pcolor(p.id)}"></i> ${esc(p.short ?? p.name)}</span>`).join("")
+    + `<br>`
     + `한 관문에 결정주체가 여럿이면 각 주체에 모두 계상하므로, 카드의 담당 관문 수를 모두 더하면 실제 관문 수보다 큽니다.<br>`
     + `“기다린 일수”는 집계를 시작한 ${esc(b.sinceBaseline ?? b.generatedAt)}부터 누적하므로, 초기에는 실제보다 짧게 보입니다.<br>`
     + `데이터: <a href="../map/">관문 의존 지도</a> · 생성 <span class="mono">npm run generate:warroom-map:all</span>`;
+  renderProjBar();
   bindSort();
   bindTip();
   startTicker();
@@ -414,6 +456,25 @@ function bindTip() {
   });
 }
 
+// 사업 필터 — 어느 사업에 걸린 부처인지 골라 본다
+function renderProjBar() {
+  const bar = document.createElement("div");
+  bar.className = "projbar";
+  bar.id = "projbar";
+  bar.innerHTML = `<span class="lbl">사업</span>`
+    + `<button data-p="" class="on">전체 ${B.projects.length}개</button>`
+    + B.projects.map((p) =>
+        `<button data-p="${esc(p.id)}"><i style="background:${pcolor(p.id)}"></i>${esc(p.short ?? p.name)}</button>`).join("");
+  $("#sortbar").after(bar);
+  for (const btn of bar.querySelectorAll("button")) {
+    btn.addEventListener("click", () => {
+      FILTER = btn.dataset.p || null;
+      for (const b of bar.querySelectorAll("button")) b.classList.toggle("on", b === btn);
+      renderGrid();
+    });
+  }
+}
+
 function bindSort() {
   for (const btn of document.querySelectorAll("#sortbar button")) {
     btn.addEventListener("click", () => {
@@ -448,15 +509,36 @@ function pipRow(c) {
     ${seg(c.completed, "done")}${seg(c.active, "act")}${seg(c.frontier, "front")}${seg(rest, "wait")}</div>`;
 }
 
+// 사업별로 나눈 핍 — 한 줄이 한 사업이다. 사업이 하나뿐이어도 어느 사업인지 밝힌다.
+function pipLines(m) {
+  const ids = [...m.projects].sort((a, b) => (m.byProject[b]?.own ?? 0) - (m.byProject[a]?.own ?? 0));
+  const lines = ids.map((pid) => {
+    const c = m.byProject[pid];
+    if (!c) return "";
+    const rest = Math.max(0, c.own - c.completed - c.active - c.frontier);
+    const seg = (n, cls) => Array.from({ length: n }, () => `<i class="${cls}"></i>`).join("");
+    return `<div class="pline" style="border-left-color:${pcolor(pid)}"
+        data-tt="${esc(pshort(pid))}"
+        data-tip="${esc(pname(pid))} — 관문 ${c.own}개 · 완료 ${c.completed} · 진행 ${c.active} · 착수 가능 ${c.frontier} · 대기 ${rest}">
+      <span class="pl" style="color:${pcolor(pid)}">${esc(pshort(pid))}</span>
+      <span class="pips">${seg(c.completed, "done")}${seg(c.active, "act")}${seg(c.frontier, "front")}${seg(rest, "wait")}</span>
+      <span class="pn num">${c.own}</span>
+    </div>`;
+  });
+  return `<div class="plines">${lines.join("")}</div>`;
+}
+
 function renderGrid() {
   $("#detail").className = "";
   $("#grid").className = "";
   $("#sortbar").hidden = false;
+  const pb = $("#projbar"); if (pb) pb.hidden = false;
   const cards = sorted().map((m) => {
     const c = m.counts, lv = m.maxLeverage;
     const oldest = m.holding.length ? m.holding.map((h) => h.since).sort()[0] : null;
     const days = oldest ? daysSince(oldest) : 0;
-    return `<button class="card${c.frontier ? "" : " dim"}" data-m="${esc(m.id)}">
+    const off = FILTER && !m.projects.includes(FILTER);
+    return `<button class="card${c.frontier ? "" : " dim"}${off ? " off" : ""}" data-m="${esc(m.id)}">
       ${c.frontier ? `<span class="alert" data-tt="착수 가능" data-tip="선행 관문이 모두 끝나 지금 시작할 수 있는 관문이 ${c.frontier}건 있습니다">!</span>` : ""}
       <div class="top">
         <span class="crest${NOT_MINISTRY[m.id] ? " gray" : c.frontier ? " warn" : ""}">${esc(crestOf(m.label))}</span>
@@ -466,7 +548,7 @@ function renderGrid() {
         </span>
         <span class="scope">${m.projects.length}개 사업 기준</span>
       </div>
-      ${pipRow(c)}
+      ${pipLines(m)}
       <div class="counts num">담당 <b>${c.own}</b> · 완료 <b>${c.completed}</b> · 진행 <b>${c.active}</b> · 예정 <b>${c.planned + c.unknown}</b></div>
       <div class="hold${c.frontier ? "" : " none"}">
         <span class="n num">${c.frontier || "—"}</span>
@@ -506,7 +588,7 @@ function pshort(pid) { const p = B.projects.find((x) => x.id === pid); return p?
 function gateRow(o, aside, extra = "", stcls = "st-wait") {
   return `<a class="row ${stcls}" href="${MAP(o.project)}" target="_blank" rel="noopener"
       title="${esc(pname(o.project))} 관문 지도에서 보기">
-    <span class="proj">${esc(pshort(o.project))}</span>
+    <span class="proj" style="color:${pcolor(o.project)}">${esc(pshort(o.project))}</span>
     <span class="gid">${esc(o.gate)}</span>
     <span class="rn">${esc(o.name)}${extra}</span>
     <span class="aside">${aside}</span>
@@ -516,6 +598,7 @@ function gateRow(o, aside, extra = "", stcls = "st-wait") {
 function renderDetail(id) {
   $("#grid").className = "hide";
   $("#sortbar").hidden = true;
+  const pbar = $("#projbar"); if (pbar) pbar.hidden = true;
   const d = $("#detail");
   d.className = "on";
   if (id === "unassigned") { d.innerHTML = renderUnassigned(); bindBack(); return; }
@@ -533,7 +616,7 @@ function renderDetail(id) {
 
   const awaited = m.awaited.length
     ? m.awaited.map((a) => `<div class="row st-wait">
-        <span class="proj">${esc(pshort(a.project))}</span>
+        <span class="proj" style="color:${pcolor(a.project)}">${esc(pshort(a.project))}</span>
         <span class="gid">${esc(a.upGate)} → ${esc(a.downGate)}</span>
         <span class="rn">${esc(a.downName)}</span>
         <span class="aside">${a.downMinistries.length ? esc(a.downMinistries.join("·")) : "미특정"}</span>
@@ -556,9 +639,10 @@ function renderDetail(id) {
         <div class="meta num">담당 <b>${c.own}</b> · 완료 <b>${c.completed}</b> · 진행 <b>${c.active}</b>
           · 예정 <b>${c.planned + c.unknown}</b> · 쥐고 있는 것 <b>${c.frontier}</b>
           &nbsp;|&nbsp; ${m.projects.length}개 사업 기준 · 집계 ${esc(B.generatedAt)}</div>
-        ${pipRow(c)}
+        ${pipLines(m)}
         <div class="pchips">${m.projects.map((p) =>
-          `<a href="${MAP(p)}" target="_blank" rel="noopener" title="${esc(pname(p))}">${esc(pshort(p))} 지도</a>`).join("")}</div>
+          `<a href="${MAP(p)}" target="_blank" rel="noopener" title="${esc(pname(p))}"
+             style="border-color:${pcolor(p)}55;color:${pcolor(p)}">${esc(pshort(p))} 지도</a>`).join("")}</div>
       </div>
     </div>
     <section class="blk"><h3>쥐고 있는 것</h3>
