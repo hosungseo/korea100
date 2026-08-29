@@ -1,0 +1,178 @@
+{
+ "slug": "science-technology-master-plan",
+ "name": "과학기술기본계획·R&D 예산 배분조정",
+ "oneLiner": "과학기술기본계획 수립 → 국가연구개발사업 예산의 배분·조정으로 이어지는 국가 과학기술 정책의 최상위 절차.",
+ "type": "계획·예산조정형",
+ "priority": 639,
+ "category": "연구개발·행정",
+ "whyFirst": "R&D 관련 제도들이 모두 이 계획과 예산 배분 아래 놓이는데 정작 최상위 절차가 없었다.",
+ "asOfDate": "2026-08-29",
+ "status": "full",
+ "canvas": {
+  "purpose": "국가 과학기술 정책을 기본계획으로 정하고 R&D 예산을 배분·조정한다.",
+  "stakeholders": "과학기술정보통신부, 국가과학기술자문회의, 관계 중앙행정기관, 연구기관",
+  "legalBasis": [
+   {
+    "law": "과학기술기본법",
+    "articles": "제7조·제12조의2",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "과학기술정보통신부장관",
+    "role": "기본계획 수립·R&D 예산 배분·조정"
+   }
+  ],
+  "procedure": [
+   "과학기술기본계획 수립",
+   "국가연구개발사업 예산 배분·조정",
+   "연구기관 사업 반영"
+  ],
+  "moneyFlow": "관련 지원·사업비는 개별 예산 절차에 따른다.",
+  "docsFlow": "과학기술기본계획 → 부처별 R&D 요구 → 예산 배분·조정 결과",
+  "bottlenecks": [
+   "부처별 R&D 예산 요구와 배분의 조정"
+  ],
+  "reformPoints": [
+   "처분·계획 결과의 공개 확대"
+  ]
+ },
+ "related": [],
+ "fieldVerification": [
+  "북극항로·해양 R&D의 배분 반영 여부"
+ ],
+ "process": {
+  "institution_name": "과학기술기본계획·R&D 예산 배분조정",
+  "law_name": "과학기술기본법",
+  "lanes": [
+   "과학기술정보통신부",
+   "관계부처",
+   "연구기관"
+  ],
+  "stages": [
+   "G0 계획",
+   "G1 예산"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "과학기술기본계획 수립",
+    "lane": "과학기술정보통신부",
+    "stage": "G0 계획",
+    "type": "gateway",
+    "status": "current",
+    "progress": 40,
+    "actor": "과학기술정보통신부장관",
+    "action": "과학기술기본계획을 수립한다.",
+    "output_documents": [
+     "과학기술기본계획"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "과학기술기본법",
+      "article": "제7조",
+      "text": "제7조(과학기술기본계획) ① 정부는 이 법의 목적을 효율적으로 달성하기 위하여 과학기술발전에 관한 중ㆍ장기 정책목표와 방향을 설정하고 「국가과학기술자문회의법」에 따른 국가과학기술자문회의(이하 \"과학기술자문회의\"라 한다)의 심의를 거쳐 확정하여야 한다. <개정 2014.5.28, 2018.1.16> ② 과학기술정보통신부장관은 5년마다 제1항에 따른 과학기술발전에 관한 중ㆍ장기 정책목표와 방향을 반영하고 관계 중앙행정기관의 과학기술 관련 계획과 시책 등을 종합하여 과학기술기본계획(이하 \"기본계획\"이라 한다)을 세우고 과학기술자문회의의 "
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "국가연구개발사업 예산 배분·조정",
+    "lane": "관계부처",
+    "stage": "G1 예산",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "과학기술정보통신부장관",
+    "action": "국가연구개발사업 예산을 배분·조정한다.",
+    "output_documents": [
+     "배분·조정 결과"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "과학기술기본법",
+      "article": "제12조의2",
+      "text": "제12조의2(국가연구개발사업 예산의 배분ㆍ조정 등) ① 국가연구개발사업과 관련된 중앙행정기관의 장은 해당 기관의 다음다음 연도 국가연구개발사업의 투자우선순위에 대한 의견 및 총사업비가 1천억원 이상이고 국가의 재정지원 규모가 500억원 이상인 신규 국가연구개발사업의 사업계획서(제12조의3제1항에 따른 구축형 연구개발사업에 대한 것은 제외한다. 이하 이 조에서 같다)를 매년 10월 31일까지 과학기술정보통신부장관과 기획예산처장관에게 제출하여야 한다. <개정 2010.12.27, 2013.3.23, 2017.7.26, 2020.6.9,"
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "연구기관 사업 반영",
+    "lane": "연구기관",
+    "stage": "G1 예산",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "연구기관",
+    "action": "배분·조정 결과를 사업에 반영한다.",
+    "output_documents": [
+     "사업계획 반영"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "과학기술기본법",
+      "article": "제12조의2",
+      "text": "제12조의2(국가연구개발사업 예산의 배분ㆍ조정 등) ① 국가연구개발사업과 관련된 중앙행정기관의 장은 해당 기관의 다음다음 연도 국가연구개발사업의 투자우선순위에 대한 의견 및 총사업비가 1천억원 이상이고 국가의 재정지원 규모가 500억원 이상인 신규 국가연구개발사업의 사업계획서(제12조의3제1항에 따른 구축형 연구개발사업에 대한 것은 제외한다. 이하 이 조에서 같다)를 매년 10월 31일까지 과학기술정보통신부장관과 기획예산처장관에게 제출하여야 한다. <개정 2010.12.27, 2013.3.23, 2017.7.26, 2020.6.9,"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건·기한은 시행령과 사실관계에 따라 달라질 수 있다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-08-29",
+  "method": "국가법령정보센터 DRF Open API(lawService.do) 조문 원문 대조",
+  "scope": "법적 근거 1건을 공식 원문(MST 고정판)과 연결했다. 절차 노드의 명시 조문 3건은 본 세션에서 DRF 원문으로 조 단위 실재를 확인했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "과학기술기본법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "과학기술기본법",
+    "lawId": "009177",
+    "mst": "285191",
+    "promulgatedOn": "2026-03-31",
+    "effectiveOn": "2026-07-01",
+    "officialUrl": "https://law.go.kr/법령/과학기술기본법",
+    "pinnedVersion": true
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-08-29",
+   "method": "국가법령정보센터 DRF Open API 조문 원문 전건 대조(본 세션, 조 단위)",
+   "citationEntries": 3,
+   "explicitCitationEntries": 3,
+   "articleReferences": 3,
+   "verifiedReferences": 3,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

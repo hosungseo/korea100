@@ -1,0 +1,340 @@
+{
+ "slug": "marine-accident-inquiry",
+ "name": "해양사고 조사·심판",
+ "oneLiner": "심판원 설치·조직 → 사고 조사 → 심판 개시 → 심판정 심리 → 재결 → 공소 제기 전 의견청취로 이어지는 해양사고 처리 절차.",
+ "type": "조사·심판형",
+ "priority": 615,
+ "category": "민원·권리구제·참여",
+ "whyFirst": "북극항로 등 신항로 운항의 사고 리스크를 다루는 유일한 준사법 절차. 운항 제도의 사후 축을 이룬다.",
+ "asOfDate": "2026-08-29",
+ "status": "full",
+ "canvas": {
+  "purpose": "해양사고의 원인을 규명하고 재결로 책임과 개선사항을 밝힌다.",
+  "stakeholders": "중앙·지방해양안전심판원, 조사관, 해양사고관련자, 검찰",
+  "legalBasis": [
+   {
+    "law": "해양사고의 조사 및 심판에 관한 법률",
+    "articles": "제3조·제5조·제7조의2·제7조의3·제8조·제9조·제9조의2·제11조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "해양안전심판원",
+    "role": "조사·심판·재결"
+   },
+   {
+    "name": "심판관",
+    "role": "심리·재결 작성"
+   }
+  ],
+  "procedure": [
+   "심판원 설치·조직",
+   "심판원 조직 구성",
+   "심판원장·심판관 임명",
+   "심판원장·심판관 직무 수행",
+   "해양사고 조사",
+   "심판정 심리",
+   "공소 제기 전 의견청취",
+   "재결"
+  ],
+  "moneyFlow": "심판 비용은 법에 정한 바에 따른다.",
+  "docsFlow": "사고 발생 → 조사 → 심판 청구 → 심판정 심리 → 재결서 → 의견 회신",
+  "bottlenecks": [
+   "조사와 형사절차의 관계",
+   "재결의 이행 확보"
+  ],
+  "reformPoints": [
+   "재결 결과의 안전정책 환류"
+  ]
+ },
+ "related": [],
+ "fieldVerification": [
+  "극지 해역 사고의 관할 처리"
+ ],
+ "process": {
+  "institution_name": "해양사고 조사·심판",
+  "law_name": "해양사고의 조사 및 심판에 관한 법률",
+  "lanes": [
+   "심판원",
+   "조사관",
+   "해양사고관련자"
+  ],
+  "stages": [
+   "G0 조직",
+   "G1 조사",
+   "G2 심판",
+   "G3 재결"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "심판원 설치·조직",
+    "lane": "심판원",
+    "stage": "G0 조직",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "정부",
+    "action": "해양안전심판원을 설치한다.",
+    "output_documents": [
+     "설치 근거"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "해양사고의 조사 및 심판에 관한 법률",
+      "article": "제3조",
+      "text": "제3조(심판원의 설치) 해양사고사건을 심판하기 위하여 해양수산부장관 소속으로 해양안전심판원(이하 \"심판원\"이라 한다)을 둔다. <개정 2013.3.23>"
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "심판원 조직 구성",
+    "lane": "심판원",
+    "stage": "G0 조직",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "정부",
+    "action": "심판원의 조직을 구성한다.",
+    "output_documents": [
+     "조직 구성"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "해양사고의 조사 및 심판에 관한 법률",
+      "article": "제8조",
+      "text": "제8조(심판원의 조직) ① 심판원은 중앙해양안전심판원(이하 \"중앙심판원\"이라 한다)과 지방해양안전심판원(이하 \"지방심판원\"이라 한다)의 2종으로 한다. ② 각급 심판원에 원장 1명과 대통령령으로 정하는 수의 심판관을 둔다. ③ 중앙심판원의 조직과 지방심판원의 명칭ㆍ조직 및 관할구역은 대통령령으로 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "심판원장·심판관 임명",
+    "lane": "심판원",
+    "stage": "G0 조직",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "정부",
+    "action": "심판관을 임명한다.",
+    "output_documents": [
+     "임명장"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "해양사고의 조사 및 심판에 관한 법률",
+      "article": "제9조의2",
+      "text": "제9조의2(심판관의 임명 및 자격) ① 중앙심판원의 심판관은 해양수산부장관의 제청에 따라 대통령이 임명하고, 지방심판원의 심판관은 중앙심판원장의 추천을 받아 해양수산부장관이 임명한다. <개정 2013.3.23> ② 중앙심판원의 심판관이 될 수 있는 사람은 다음 각 호의 어느 하나에 해당하는 사람이어야 한다. ③ 지방심판원의 심판관이 될 수 있는 사람은 다음 각 호의 어느 하나에 해당하는 사람이어야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "심판원장·심판관 직무 수행",
+    "lane": "심판원",
+    "stage": "G1 조사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "심판원장·심판관",
+    "action": "직무를 수행한다.",
+    "output_documents": [
+     "직무 기록"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "해양사고의 조사 및 심판에 관한 법률",
+      "article": "제11조",
+      "text": "제11조(심판원장 및 심판관의 직무) ① 중앙심판원장의 직무는 다음과 같다. <개정 2020.2.18> ② 지방심판원장의 직무는 다음과 같다. ③ 심판관은 심판직무에 종사한다. ④ 심판원장이 부득이한 사유로 직무를 수행할 수 없을 때에는 그 심판원의 심판관 중 선임자가 그 직무를 대행한다. 다만, 심판업무 외의 업무는 제16조제1항에 따른 수석조사관이 그 직무를 대행한다."
+     }
+    ]
+   },
+   {
+    "id": "P05",
+    "name": "해양사고 조사",
+    "lane": "조사관",
+    "stage": "G1 조사",
+    "type": "gateway",
+    "status": "current",
+    "progress": 40,
+    "actor": "조사관",
+    "action": "해양사고를 조사한다.",
+    "output_documents": [
+     "조사보고서"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "해양사고의 조사 및 심판에 관한 법률",
+      "article": "제9조",
+      "text": "제9조(중앙심판원장 및 지방심판원장) ① 중앙심판원에 중앙해양안전심판원장(이하 \"중앙심판원장\"이라 한다)을, 지방심판원에 지방해양안전심판원장(이하 \"지방심판원장\"이라 한다)을 둔다. ② 중앙심판원장은 제9조의2제2항 각 호의 어느 하나에 해당하는 자격이 있는 사람 중에서 해양수산부장관의 제청에 따라 대통령이 임명한다. <개정 2013.3.23> ③ 지방심판원장은 제9조의2제2항 각 호의 어느 하나에 해당하는 자격이 있는 사람 또는 지방심판원의 심판관 중에서 해양수산부장관의 제청으로 대통령이 임명한다. <개정 2011.6.15, 20"
+     }
+    ]
+   },
+   {
+    "id": "P06",
+    "name": "심판정 심리",
+    "lane": "심판원",
+    "stage": "G2 심판",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "심판원",
+    "action": "심판정에서 심리한다.",
+    "output_documents": [
+     "심리조서"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "해양사고의 조사 및 심판에 관한 법률",
+      "article": "제7조의3",
+      "text": "제7조의3(심판정에서의 용어) ① 심판정에서는 국어를 사용한다. ② 국어가 통하지 아니하는 사람의 진술은 통역인으로 하여금 통역하게 하여야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P07",
+    "name": "공소 제기 전 의견청취",
+    "lane": "심판원",
+    "stage": "G2 심판",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "검찰·심판원",
+    "action": "공소 제기 전 심판원의 의견을 청취한다.",
+    "output_documents": [
+     "의견서"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "해양사고의 조사 및 심판에 관한 법률",
+      "article": "제7조의2",
+      "text": "제7조의2(공소 제기 전 심판원의 의견청취) 검사는 해양사고가 발생하여 해양사고관련자에 대하여 공소를 제기하는 경우에는 관할 지방해양안전심판원의 의견을 들을 수 있다."
+     }
+    ]
+   },
+   {
+    "id": "P08",
+    "name": "재결",
+    "lane": "심판원",
+    "stage": "G3 재결",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "심판원",
+    "action": "재결한다.",
+    "output_documents": [
+     "재결서"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "해양사고의 조사 및 심판에 관한 법률",
+      "article": "제5조",
+      "text": "제5조(재결) ① 심판원은 해양사고의 원인을 밝히고 재결(裁決)로써 그 결과를 명백하게 하여야 한다. ② 심판원은 해양사고가 해기사나 도선사의 직무상 고의 또는 과실로 발생한 것으로 인정할 때에는 재결로써 해당자를 징계하여야 한다. ③ 심판원은 필요하면 제2항에 규정된 사람 외에 해양사고관련자에게 시정 또는 개선을 권고하거나 명하는 재결을 할 수 있다. 다만, 행정기관에 대하여는 시정 또는 개선을 명하는 재결을 할 수 없다. <개정 2011.6.15>"
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건·기한은 시행령과 사실관계에 따라 달라질 수 있다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-08-29",
+  "method": "국가법령정보센터 DRF Open API(lawService.do) 조문 원문 대조",
+  "scope": "법적 근거 1건을 공식 원문(MST 고정판)과 연결했다. 절차 노드의 명시 조문 8건은 본 세션에서 DRF 원문으로 조 단위 실재를 확인했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "해양사고의 조사 및 심판에 관한 법률",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "해양사고의 조사 및 심판에 관한 법률",
+    "lawId": "000047",
+    "mst": "252943",
+    "promulgatedOn": "2023-07-25",
+    "effectiveOn": "2024-01-26",
+    "officialUrl": "https://law.go.kr/법령/해양사고의조사및심판에관한법률",
+    "pinnedVersion": true
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-08-29",
+   "method": "국가법령정보센터 DRF Open API 조문 원문 전건 대조(본 세션, 조 단위)",
+   "citationEntries": 8,
+   "explicitCitationEntries": 8,
+   "articleReferences": 8,
+   "verifiedReferences": 8,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}

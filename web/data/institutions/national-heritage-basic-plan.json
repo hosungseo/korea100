@@ -1,0 +1,211 @@
+{
+ "slug": "national-heritage-basic-plan",
+ "name": "국가유산 기본계획·조사연구",
+ "oneLiner": "국가유산 보호 정책의 기본원칙 → 기본계획 수립 → 조사·연구 → 고도 및 역사문화권 보존·육성으로 이어지는 국가유산 정책 절차.",
+ "type": "계획수립형",
+ "priority": 644,
+ "category": "문화·체육·관광",
+ "whyFirst": "광주 반도체 클러스터의 매장유산 관문이 기대는 상위 정책 축. 대형 개발마다 반복 등장한다.",
+ "asOfDate": "2026-08-29",
+ "status": "full",
+ "canvas": {
+  "purpose": "국가유산 보호 정책을 기본계획으로 정하고 조사·연구로 뒷받침한다.",
+  "stakeholders": "국가유산청, 지방자치단체, 연구기관, 개발사업자",
+  "legalBasis": [
+   {
+    "law": "국가유산기본법",
+    "articles": "제7조·제8조·제10조·제16조",
+    "kind": "법률"
+   }
+  ],
+  "authorities": [
+   {
+    "name": "국가유산청장",
+    "role": "기본계획 수립·조사연구·보존 육성"
+   }
+  ],
+  "procedure": [
+   "국가유산 보호 정책의 기본원칙 적용",
+   "국가유산 기본계획 수립",
+   "국가유산 조사·연구",
+   "고도 및 역사문화권 보존·육성"
+  ],
+  "moneyFlow": "관련 지원·사업비는 개별 예산 절차에 따른다.",
+  "docsFlow": "기본원칙 → 기본계획 → 조사·연구 → 고도·역사문화권 보존 계획",
+  "bottlenecks": [
+   "개발사업 일정과 조사·보존 요구의 충돌"
+  ],
+  "reformPoints": [
+   "계획·처분 결과의 공개 확대"
+  ]
+ },
+ "related": [],
+ "fieldVerification": [
+  "대형 개발사업 구역의 역사문화권 지정 여부"
+ ],
+ "process": {
+  "institution_name": "국가유산 기본계획·조사연구",
+  "law_name": "국가유산기본법",
+  "lanes": [
+   "국가유산청",
+   "지자체",
+   "연구기관"
+  ],
+  "stages": [
+   "G0 원칙",
+   "G1 계획",
+   "G2 조사",
+   "G3 보존"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "국가유산 보호 정책의 기본원칙 적용",
+    "lane": "국가유산청",
+    "stage": "G0 원칙",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국가유산청장",
+    "action": "국가유산 보호 정책의 기본원칙을 적용한다.",
+    "output_documents": [
+     "기본원칙"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국가유산기본법",
+      "article": "제7조",
+      "text": "제7조(국가유산 보호 정책의 기본원칙) 국가와 지방자치단체는 국가유산에 관한 보호 정책을 수립ㆍ시행함에 있어 다음 각 호의 사항이 실현되도록 하여야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P02",
+    "name": "국가유산 기본계획 수립",
+    "lane": "국가유산청",
+    "stage": "G1 계획",
+    "type": "gateway",
+    "status": "current",
+    "progress": 40,
+    "actor": "국가유산청장",
+    "action": "기본계획을 수립한다.",
+    "output_documents": [
+     "기본계획"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국가유산기본법",
+      "article": "제8조",
+      "text": "제8조(기본계획의 수립) ① 국가는 국가유산의 체계적이고 종합적인 보존ㆍ관리 및 활용을 위하여 국가유산의 유형에 따른 기본계획을 수립ㆍ시행하여야 한다. ② 제1항에 따른 유형별 기본계획의 수립ㆍ시행에 필요한 사항은 따로 법률로 정한다."
+     }
+    ]
+   },
+   {
+    "id": "P03",
+    "name": "국가유산 조사·연구",
+    "lane": "연구기관",
+    "stage": "G2 조사",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국가유산청장",
+    "action": "국가유산을 조사·연구한다.",
+    "output_documents": [
+     "조사·연구 결과"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국가유산기본법",
+      "article": "제10조",
+      "text": "제10조(조사ㆍ연구) ① 국가와 지방자치단체는 조사를 통하여 국가유산의 현황을 파악하고, 확인되지 아니한 국가유산을 발견ㆍ발굴하기 위하여 노력하여야 한다. ② 국가와 지방자치단체는 국가유산의 가치와 성격을 규명하고, 이를 보존ㆍ관리할 수 있는 방안을 연구하여야 한다."
+     }
+    ]
+   },
+   {
+    "id": "P04",
+    "name": "고도 및 역사문화권 보존·육성",
+    "lane": "지자체",
+    "stage": "G3 보존",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국가유산청장",
+    "action": "고도 및 역사문화권을 보존·육성한다.",
+    "output_documents": [
+     "보존·육성 계획"
+    ],
+    "deadline": null,
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "국가유산기본법",
+      "article": "제16조",
+      "text": "제16조(고도 및 역사문화권의 보존ㆍ육성) ① 국가와 지방자치단체는 과거 우리 민족의 정치적ㆍ문화적 중심지로서 역사상 중요한 의미를 지닌 고도(古都)를 보존ㆍ육성함으로써 지역의 정체성을 회복하고, 지역 발전에 기여할 수 있도록 하여야 한다. ② 국가와 지방자치단체는 역사적으로 중요한 유형ㆍ무형 유산의 생산 및 축적을 통하여 고유한 정체성을 형성ㆍ발전시켜 온 권역을 보존ㆍ육성함으로써 지역의 역사적 가치를 조명하고, 이를 체계적으로 정비할 수 있도록 하여야 한다."
+     }
+    ]
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null
+   }
+  ],
+  "warnings": [
+   "개별 사건의 요건·기한은 시행령과 사실관계에 따라 달라질 수 있다."
+  ]
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-08-29",
+  "method": "국가법령정보센터 DRF Open API(lawService.do) 조문 원문 대조",
+  "scope": "법적 근거 1건을 공식 원문(MST 고정판)과 연결했다. 절차 노드의 명시 조문 4건은 본 세션에서 DRF 원문으로 조 단위 실재를 확인했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
+  "sources": [
+   {
+    "law": "국가유산기본법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "국가유산기본법",
+    "lawId": "014443",
+    "mst": "285655",
+    "promulgatedOn": "2026-04-28",
+    "effectiveOn": "2026-05-17",
+    "officialUrl": "https://law.go.kr/법령/국가유산기본법",
+    "pinnedVersion": true
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-08-29",
+   "method": "국가법령정보센터 DRF Open API 조문 원문 전건 대조(본 세션, 조 단위)",
+   "citationEntries": 4,
+   "explicitCitationEntries": 4,
+   "articleReferences": 4,
+   "verifiedReferences": 4,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
+}
