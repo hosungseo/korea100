@@ -106,6 +106,13 @@ body.mode-pm #narration ol li::before { border-color: var(--gold); color: var(--
   color: var(--gold); margin: 9px 0 3px; text-transform: uppercase;
 }
 #narration .pmsec:first-of-type { margin-top: 2px; }
+header .links a.proj { border-radius: 999px; }
+header .links a.proj.on { border-color: var(--amber); color: var(--amber); background: rgba(255,176,32,0.08); }
+header .links .navsep { color: rgba(95,123,144,0.4); align-self: center; }
+.tmpl-shared {
+  font-family: var(--mono); font-size: 8.5px; color: var(--amber);
+  border: 1px solid rgba(255,176,32,0.45); border-radius: 3px; padding: 0 3px; margin-left: 3px;
+}
 #levelchips { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; align-items: center; }
 #levelchips .rowlabel { font-family: var(--mono); font-size: 9px; color: var(--muted); letter-spacing: 0.14em; margin-right: 2px; }
 .chip.lvl.sel { color: #04121c; background: var(--cyan); border-color: var(--cyan); }
@@ -543,16 +550,41 @@ let wargame = false;
 const eff = (id) => (sim.has(id) ? "completed" : nodeById[id].status);
 const effLabel = (id) => (sim.has(id) ? "가정완료" : STATUS_KO[nodeById[id].status]);
 
-let SIGNALS = null, CONFIG = null;
+let SIGNALS = null, CONFIG = null, SHARED = null;
 Promise.all([
   fetch(BASE + "data.json").then((r) => r.json()),
   fetch(BASE + "signals.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
   fetch(BASE + "config.json").then((r) => r.json()),
-]).then(([d, s, c]) => {
-  DATA = d; SIGNALS = s; CONFIG = c;
+  fetch("./shared-institutions.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
+  fetch("../p/index.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
+]).then(([d, s, c, sh, idx]) => {
+  DATA = d; SIGNALS = s; CONFIG = c; SHARED = sh;
   applyConfig(c);
+  renderProjectSwitch(idx);
   build();
 });
+
+// 사업 전환기 — /warroom/p/index.json 이 원본(워룸 인덱스와 같은 목록)
+function renderProjectSwitch(idx) {
+  const list = idx?.projects ?? [];
+  if (list.length < 2) return;
+  const nav = $("#pnav");
+  const frag = document.createDocumentFragment();
+  const here = CONFIG?.projectId;
+  for (const p of list) {
+    const a = document.createElement("a");
+    a.className = "proj";
+    a.href = p.id === "gwangju-semiconductor-cluster" ? "./" : `./?p=${p.id}`;
+    a.textContent = p.short ?? p.name;
+    a.title = `${p.name} 관문 지도로 전환`;
+    if (p.id === here) a.classList.add("on");
+    frag.appendChild(a);
+  }
+  const sep = document.createElement("span");
+  sep.className = "navsep"; sep.textContent = "│";
+  frag.appendChild(sep);
+  nav.prepend(frag);
+}
 
 // 제목·내비·레이아웃·트랙 칩은 전부 config.json(생성기 산출물)에서 온다.
 function applyConfig(c) {
@@ -1351,6 +1383,16 @@ function renderNarration(sc) {
   });
 }
 
+// 같은 제도가 다른 사업에도 걸려 있으면 배지로 알린다 — 프로젝트가 3개 이상일 때 나오는 정보
+function sharedBadge(slug) {
+  const uses = SHARED?.byInstitution?.[slug];
+  if (!uses) return "";
+  const others = uses.filter((u) => u.project !== CONFIG?.projectId);
+  if (!others.length) return "";
+  const names = others.map((o) => `${o.name} (${o.gates.join(",")})`).join(" · ");
+  return `<span class="tmpl-shared" title="다른 사업에도 걸린 제도 — ${names}">공유 ${others.length}</span>`;
+}
+
 function showDetail(n) {
   $("#detail").style.display = "block";
   const d = $("#detail-body");
@@ -1367,7 +1409,7 @@ function showDetail(n) {
       <dt>의존</dt><dd>선행 ${up} · 후속 ${down}</dd>
       <dt>절차</dt><dd>${n.procs ?? 1}개${(n.templates || []).length
         ? ` — ` + n.templates.map((t) =>
-            `<a class="tmpl" href="../../model/${t.slug}/" target="_blank" rel="noopener" title="korea100 제도 모델로 이동">${t.name}</a><span class="mono" style="color:var(--muted);font-size:9px"> ${t.procs}</span>`
+            `<a class="tmpl" href="../../model/${t.slug}/" target="_blank" rel="noopener" title="korea100 제도 모델로 이동">${t.name}</a><span class="mono" style="color:var(--muted);font-size:9px"> ${t.procs}</span>${sharedBadge(t.slug)}`
           ).join(" · ")
         : ` <span class="mono" style="color:var(--muted);font-size:9px">(제도 미연결)</span>`}</dd>
     </dl>
