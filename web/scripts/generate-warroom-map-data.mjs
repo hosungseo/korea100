@@ -11,6 +11,64 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 // 기본 프로젝트는 광주 — 이 프로젝트만 /warroom/map/ 루트에 쓴다(기존 URL 유지).
 // 다른 프로젝트는 /warroom/map/<id>/ 하위에 쓰고 지도 페이지가 ?p=<id>로 읽는다.
 const DEFAULT_PROJECT = "gwangju-semiconductor-cluster";
+
+// [매칭 토큰, 표기명, 슬러그]. 일반어(정부·부서·시장·위원회 단독)는 절대 넣지 않는다 —
+// "재정부서"가 '정부'로, "전력시장"이 '시장'으로 잡히는 오매칭 전례가 있다.
+const MINISTRY_CANON = [
+  ["기후에너지환경부", "기후에너지환경부", "me"],
+  ["산업통상자원부", "산업통상부", "motie"],
+  ["산업통상부", "산업통상부", "motie"],
+  ["과학기술정보통신부", "과기정통부", "msit"],
+  ["과기정통부", "과기정통부", "msit"],
+  ["농림축산식품부", "농식품부", "mafra"],
+  ["농식품부", "농식품부", "mafra"],
+  ["중소벤처기업부", "중기부", "mss"],
+  ["문화체육관광부", "문체부", "mcst"],
+  ["국토교통부", "국토교통부", "molit"],
+  ["해양수산부", "해양수산부", "mof"],
+  ["행정안전부", "행정안전부", "mois"],
+  ["고용노동부", "고용노동부", "moel"],
+  ["보건복지부", "보건복지부", "mohw"],
+  ["기획예산처", "기획예산처", "mpb"],
+  ["기획재정부", "기획재정부", "moef"],
+  ["국가보훈부", "국가보훈부", "mpva"],
+  ["여성가족부", "여성가족부", "mogef"],
+  ["법무부", "법무부", "moj"],
+  ["외교부", "외교부", "mofa"],
+  ["통일부", "통일부", "unikorea"],
+  ["국방부", "국방부", "mnd"],
+  ["교육부", "교육부", "moe"],
+  ["환경부", "환경부", "me"],
+  ["금융위원회", "금융위", "fsc"],
+  ["공정거래위원회", "공정위", "ftc"],
+  ["원자력안전위원회", "원안위", "nssc"],
+  ["개인정보보호위원회", "개인정보위", "pipc"],
+  ["방송통신위원회", "방통위", "kcc"],
+  ["국가유산청", "국가유산청", "kha"],
+  ["해양경찰청", "해양경찰청", "kcg"],
+  ["산림청", "산림청", "forest"],
+  ["소방청", "소방청", "nfa"],
+  ["경찰청", "경찰청", "npa"],
+  ["조달청", "조달청", "pps"],
+  ["관세청", "관세청", "customs"],
+  ["국세청", "국세청", "nts"],
+  ["통계청", "통계청", "kostat"],
+  ["기상청", "기상청", "kma"],
+  ["특허청", "특허청", "kipo"],
+  ["질병관리청", "질병관리청", "kdca"],
+  ["새만금개발청", "새만금개발청", "sda"],
+  ["행정중심복합도시건설청", "행복청", "naacc"],
+  // 부처가 아닌 결정주체 — 총리가 협조를 요청할 대상이라 같은 그리드에 둔다
+  ["국무조정실", "총리·국무회의", "pm-office"],
+  ["국무총리", "총리·국무회의", "pm-office"],
+  ["국무회의", "총리·국무회의", "pm-office"],
+  ["대통령", "대통령실", "president"],
+  ["국회", "국회", "assembly"],
+  ["지방시대위원회", "지방시대위원회", "balance-committee"],
+  ["국가자치분권균형성장회의", "국가자치분권균형성장회의", "decentral-council"],
+  ["국토정책위원회", "국토정책위원회", "land-policy-committee"],
+];
+const MINISTRY_SLUG = new Map(MINISTRY_CANON.map(([, label, slug]) => [label, slug]));
 // --all: map-tracks/ 에 트랙 파일이 있는 프로젝트를 전부 순회한다(새 프로젝트 추가 시 스크립트 수정 불필요)
 if (process.argv[2] === "--all") {
   const dir = join(root, "data/mega-projects/map-tracks");
@@ -39,6 +97,7 @@ if (process.argv[2] === "--all") {
     }
     if (byProject.size > 1) index[slug] = [...byProject.values()];
   }
+  buildMinistryBoard(ids);
   writeFileSync(join(root, "public/warroom/map/shared-institutions.json"),
     `${JSON.stringify({ generatedAt: null, projects: ids, byInstitution: index }, null, 0)}\n`);
   console.log(`shared institutions: ${Object.keys(index).length}종이 2개 이상 사업에 걸림`);
@@ -142,18 +201,7 @@ function nodeLevel(n) {
   return best;
 }
 
-// 결정주체 문자열에서 소관 부처를 뽑는다 — "기후에너지환경부"가 "환경부"보다
-// 먼저 오도록 부분 문자열 포함 순서를 지킨다
-const MINISTRY_CANON = [
-  ["기후에너지환경부", "기후에너지환경부"],
-  ["국방부", "국방부"],
-  ["행정안전부", "행정안전부"],
-  ["산업통상자원부", "산업통상부"],
-  ["산업통상부", "산업통상부"],
-  ["고용노동부", "고용노동부"],
-  ["환경부", "환경부"],
-  ["국가유산청", "국가유산청"],
-];
+// 결정주체 문자열에서 소관 부처를 뽑는다(지도 노드용) — 사전은 파일 상단 MINISTRY_CANON
 function nodeMinistries(n) {
   const decision = n.actorRoles?.decision ?? [];
   const actors = decision.length ? decision : n.actorRoles?.lead ?? [];
@@ -367,3 +415,187 @@ console.log("levels:", JSON.stringify(levelCount));
 console.log(
   `config: ${config.scenarios.length} chips, layout ${tracks.layout ? "explicit" : "auto"}, canvas ${config.canvas.w}x${config.canvas.h}`,
 );
+
+
+// ── 부처 상황판 집계 (PRD docs/ministry-board-prd.md §6) ─────────────────────
+// 사업 축으로 만든 지도 데이터를 부처 축으로 접는다. 자식 프로세스가 방금 쓴
+// data.json을 다시 읽으므로 의존 해석을 되풀이하지 않는다.
+function buildMinistryBoard(ids) {
+  const outPath = join(root, "public/warroom/map/ministry-board.json");
+  // frontierSince 승계: 직전 산출물이 유일한 상태 저장소다(별도 히스토리 파일 없음)
+  let prevSince = new Map();
+  try {
+    const prev = JSON.parse(readFileSync(outPath, "utf8"));
+    for (const m of prev.ministries ?? []) {
+      for (const h of m.holding ?? []) prevSince.set(`${h.project}/${h.gate}`, h.since);
+    }
+  } catch {
+    /* 최초 실행 */
+  }
+
+  const dataPath = (id) =>
+    id === DEFAULT_PROJECT
+      ? join(root, "public/warroom/map/data.json")
+      : join(root, "public/warroom/map", id, "data.json");
+
+  // 사업 약칭은 워룸 인덱스(p/index.json)가 원본 — 행마다 긴 정식명을 자르지 않는다
+  let shortById = new Map();
+  try {
+    const idx = JSON.parse(readFileSync(join(root, "public/warroom/p/index.json"), "utf8"));
+    shortById = new Map((idx.projects ?? []).map((x) => [x.id, x.short ?? x.name]));
+  } catch { /* 인덱스가 없으면 정식명을 쓴다 */ }
+
+  const projects = [];
+  const byMinistry = new Map();
+  const unassigned = new Map();
+  let asOf = "";
+
+  // 라벨이 다른데 슬러그가 겹치면 #m= 해시가 한쪽만 열어 다른 카드가 죽는다.
+  // 사전 실수를 화면까지 옮기지 않도록 여기서 막고 경고한다.
+  const usedSlug = new Map();
+  const slugFor = (label) => {
+    let slug = MINISTRY_SLUG.get(label) ?? label;
+    const owner = usedSlug.get(slug);
+    if (owner && owner !== label) {
+      const alt = `${slug}-${usedSlug.size}`;
+      console.warn(`  ! 슬러그 충돌: "${label}"과 "${owner}"가 '${slug}' 공유 → "${label}"에 '${alt}' 배정`);
+      slug = alt;
+    }
+    usedSlug.set(slug, label);
+    return slug;
+  };
+  const bucket = (label) => {
+    if (!byMinistry.has(label)) {
+      byMinistry.set(label, {
+        id: slugFor(label), label,
+        projects: [], counts: { own: 0, completed: 0, active: 0, frontier: 0, planned: 0, unknown: 0 },
+        maxLeverage: null, holding: [], awaited: [], active: [], legislative: [],
+      });
+    }
+    return byMinistry.get(label);
+  };
+
+  for (const id of ids) {
+    const d = JSON.parse(readFileSync(dataPath(id), "utf8"));
+    const pname = d.meta.projectName;
+    projects.push({ id, name: pname, short: shortById.get(id) ?? pname, asOfDate: d.meta.asOfDate });
+    if (d.meta.asOfDate > asOf) asOf = d.meta.asOfDate;
+
+    const nodeById = Object.fromEntries(d.nodes.map((n) => [n.id, n]));
+    const hardUp = {}, hardDown = {};
+    for (const e of d.edges) {
+      if (e.strength !== "hard") continue;
+      (hardUp[e.to] ??= []).push(e.from);
+      (hardDown[e.from] ??= []).push(e.to);
+    }
+    // 하류 도달 집합 — 사이클이 있어도 방문 체크로 멈춘다
+    const leverage = (start) => {
+      const seen = new Set(); const stack = [...(hardDown[start] ?? [])];
+      while (stack.length) {
+        const v = stack.pop();
+        if (seen.has(v)) continue;
+        seen.add(v);
+        for (const w of hardDown[v] ?? []) if (!seen.has(w)) stack.push(w);
+      }
+      return seen.size;
+    };
+    const done = (gid) => nodeById[gid]?.status === "completed";
+
+    for (const n of d.nodes) {
+      // 결정주체 우선, 없으면 주도 — 지도와 같은 폴백
+      const actors = (n.decision?.length ? n.decision : n.lead) ?? [];
+      const labels = [];
+      for (const a of actors) {
+        for (const [token, label] of MINISTRY_CANON) {
+          if (a.includes(token)) { if (!labels.includes(label)) labels.push(label); break; }
+        }
+      }
+      if (!labels.length) {
+        // 역할명은 부처로 추정 배정하지 않는다(HR-2) — 확정 필요 목록으로 보낸다
+        const role = actors[0] ?? "(주체 미기재)";
+        if (!unassigned.has(role)) unassigned.set(role, { role, gates: [] });
+        unassigned.get(role).gates.push({ project: id, projectName: pname, gate: n.id, name: n.name, status: n.status });
+        continue;
+      }
+      const isFrontier = !["completed", "active"].includes(n.status)
+        && (hardUp[n.id] ?? []).every(done);
+      const lev = n.status === "completed" ? 0 : leverage(n.id);
+
+      for (const label of labels) {
+        const m = bucket(label);
+        if (!m.projects.includes(id)) m.projects.push(id);
+        m.counts.own += 1;
+        if (n.status === "completed") m.counts.completed += 1;
+        else if (n.status === "active") m.counts.active += 1;
+        else if (n.status === "unknown") m.counts.unknown += 1;
+        else m.counts.planned += 1;
+
+        const co = labels.filter((x) => x !== label);
+        if (isFrontier) {
+          m.counts.frontier += 1;
+          const key = `${id}/${n.id}`;
+          m.holding.push({
+            project: id, projectName: pname, gate: n.id, name: n.name,
+            since: prevSince.get(key) ?? asOf, leverage: lev,
+            level: n.level, status: n.status, co,
+          });
+        }
+        if (n.status === "active") m.active.push({ project: id, projectName: pname, gate: n.id, name: n.name, co });
+        if (n.status !== "completed" && (!m.maxLeverage || lev > m.maxLeverage.blocked)) {
+          m.maxLeverage = { gate: n.id, project: id, projectName: pname, name: n.name, blocked: lev };
+        }
+        // 이 부처를 기다리는 곳 — 미완료 관문의 hard 하류
+        if (n.status !== "completed") {
+          for (const v of hardDown[n.id] ?? []) {
+            const dn = nodeById[v];
+            if (!dn) continue;
+            const dActors = (dn.decision?.length ? dn.decision : dn.lead) ?? [];
+            const dLabels = [];
+            for (const a of dActors) {
+              for (const [token, label2] of MINISTRY_CANON) {
+                if (a.includes(token)) { if (!dLabels.includes(label2)) dLabels.push(label2); break; }
+              }
+            }
+            m.awaited.push({
+              project: id, projectName: pname, upGate: n.id, upName: n.name,
+              downGate: v, downName: dn.name, downMinistries: dLabels, downStatus: dn.status,
+            });
+          }
+          // 입법 의존 — hard 상류에 미완료 국회급 관문이 있는가
+          for (const u of hardUp[n.id] ?? []) {
+            const un = nodeById[u];
+            if (un && un.level === "legislature" && un.status !== "completed") {
+              m.legislative.push({ project: id, projectName: pname, gate: n.id, name: n.name, blockedByGate: u, blockedByName: un.name });
+            }
+          }
+        }
+      }
+    }
+  }
+
+  const ministries = [...byMinistry.values()];
+  for (const m of ministries) {
+    m.holding.sort((a, b) => b.leverage - a.leverage);
+    m.awaited.sort((a, b) => (a.upGate < b.upGate ? -1 : 1));
+  }
+  ministries.sort((a, b) => b.counts.frontier - a.counts.frontier
+    || (b.maxLeverage?.blocked ?? 0) - (a.maxLeverage?.blocked ?? 0)
+    || b.counts.own - a.counts.own);
+  const unassignedList = [...unassigned.values()].sort((a, b) => b.gates.length - a.gates.length);
+
+  const board = {
+    generatedAt: asOf,
+    sinceBaseline: prevSince.size ? undefined : asOf, // 집계 시작일 — 첫 실행에만 기록
+    projects, ministries, unassigned: unassignedList,
+    totals: {
+      gates: projects.length ? ministries.reduce((a, m) => a + m.counts.own, 0) : 0,
+      unassignedGates: unassignedList.reduce((a, u) => a + u.gates.length, 0),
+      ministries: ministries.length,
+    },
+  };
+  if (board.sinceBaseline === undefined) {
+    try { board.sinceBaseline = JSON.parse(readFileSync(outPath, "utf8")).sinceBaseline; } catch { /* noop */ }
+  }
+  writeFileSync(outPath, `${JSON.stringify(board, null, 1)}\n`);
+  console.log(`ministry board: 부처·주체 ${ministries.length}곳 · 미특정 ${unassignedList.length}역할 ${board.totals.unassignedGates}관문`);
+}
