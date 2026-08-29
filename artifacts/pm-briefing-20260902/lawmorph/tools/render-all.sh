@@ -5,7 +5,7 @@ set -e
 cd "$(dirname "$0")/.."
 CH="${HF_CHAPTER_DIR:-/private/tmp/lawmorph-chapters}"
 python3 tools/split-chapters.py
-ORDER=(intro doc map mont reg track mega zoom ax1 ax2 ax3 close)
+ORDER=(open intro doc map mont reg auto part2 moon mega demo loop brief part3 ax1 ax2 ax3 close)
 mkdir -p renders/parts
 cp index.html .index.master.html
 restore() { cp .index.master.html index.html; rm -f .index.master.html; }

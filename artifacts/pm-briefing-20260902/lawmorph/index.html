@@ -9,6 +9,7 @@
     <script src="assets/cases.js"></script>
     <script src="assets/montage.js"></script>
     <script src="assets/megadetail.js"></script>
+    <script src="assets/megastats.js"></script>
     <style>
       @font-face {
         font-family: "Pretendard";
@@ -402,6 +403,187 @@
         font-weight: 830; padding: 5px 12px; letter-spacing: -0.01em;
       }
 
+      /* ---------- CH0 : 표지 ---------- */
+      #openwrap { position: absolute; inset: 0; background: #16241d; display: grid; place-items: center; }
+      #opencard { width: 1340px; color: #eaf3ee; }
+      #opencard .eyebrow {
+        display: inline-block; border: 1.5px solid #4a6659; border-radius: 999px; padding: 8px 22px;
+        font-size: 20px; font-weight: 760; color: #9db8ab; letter-spacing: 0.1em;
+      }
+      #opencard h1 {
+        margin-top: 36px; font-size: 82px; font-weight: 870; letter-spacing: -0.03em;
+        line-height: 1.24; color: #ffffff; word-break: keep-all;
+      }
+      #opencard h1 .accent { color: #5fdcae; }
+      #opencard .lead { margin-top: 26px; font-size: 30px; font-weight: 600; color: #c2d3c9; }
+      #opencard .foot {
+        margin-top: 60px; padding-top: 24px; border-top: 1px solid #35493f;
+        display: flex; justify-content: space-between; font-size: 21px; color: #9db8ab; font-weight: 640;
+      }
+      #opencard .foot b { color: #eaf3ee; font-weight: 820; }
+
+      /* ---------- CH1 도입 : 행정은 어렵습니다 ---------- */
+      #hard-slide { position: absolute; inset: 0; display: grid; place-items: center; }
+      #hard-slide .inner { text-align: center; padding-bottom: 36px; }
+      #hard-slide h1 { font-size: 86px; font-weight: 870; letter-spacing: -0.03em; color: #17251d; word-break: keep-all; }
+      #hard-slide h1 em { font-style: normal; color: #0b7a58; }
+      #hard-slide .hs { margin-top: 24px; font-size: 30px; font-weight: 620; color: #55685d; }
+      #intro-reveal h1 { font-size: 76px; line-height: 1.22; }
+
+      /* ---------- CH2b 개편 : 원문 카드 + 구조도 ---------- */
+      .msample { position: absolute; inset: 0; }
+      .mdoc {
+        position: absolute; left: 96px; top: 226px; width: 800px; background: #ffffff;
+        border: 1px solid #d5ded8; border-radius: 6px; box-shadow: 0 18px 60px rgba(28,42,35,0.10);
+        padding: 36px 42px 32px;
+      }
+      .mdoc .dt { font-size: 31px; font-weight: 830; letter-spacing: -0.02em; }
+      .mdoc .dm { font-size: 15px; color: #5d6f65; font-weight: 600; margin-top: 5px; }
+      .mdoc .drule { height: 3px; background: #1c2a23; margin: 13px 0 20px; }
+      .mdoc .dl { font-size: 22px; line-height: 1.6; font-weight: 470; color: #26352d; word-break: keep-all; }
+      .mdoc .dl + .dl { margin-top: 12px; }
+      .mdoc .dl .art { font-weight: 800; color: #101a14; }
+      .mpanel.m0, .mpanel.m1 { left: 960px; width: 830px; top: 210px; }
+
+      /* ---------- CH3b : 자동화된 증가 ---------- */
+      #autowrap { position: absolute; inset: 0; display: grid; place-items: center; }
+      #autobox { width: 1620px; text-align: center; padding-bottom: 30px; }
+      #autobox .at { font-size: 46px; font-weight: 860; letter-spacing: -0.02em; word-break: keep-all; }
+      #autobox .at em { font-style: normal; color: #0b7a58; }
+      #autoflow { margin-top: 46px; display: flex; align-items: stretch; justify-content: center; gap: 14px; }
+      .astep { width: 348px; background: #ffffff; border: 1.5px solid #cdd8d1; border-radius: 10px; padding: 24px 24px 20px; text-align: left; }
+      .astep .ai { font-size: 14px; font-weight: 820; color: #0a7350; letter-spacing: 0.06em; }
+      .astep .an { margin-top: 8px; font-size: 23px; font-weight: 800; color: #17251d; word-break: keep-all; line-height: 1.3; }
+      .astep .ad { margin-top: 8px; font-size: 16.5px; font-weight: 600; color: #4d6459; word-break: keep-all; line-height: 1.4; }
+      .astep.hot { border-color: #0b7a58; background: #eaf6f0; }
+      .aarr { align-self: center; color: #7fb59e; font-size: 26px; font-weight: 800; }
+      #autonote { margin-top: 38px; font-size: 25px; font-weight: 640; color: #3c4c43; word-break: keep-all; }
+      #autonote b { color: #0b7a58; font-weight: 830; }
+
+      /* ---------- CH4a : 2부 시작 ---------- */
+      #p2wrap { position: absolute; inset: 0; display: grid; place-items: center; }
+      #p2box { width: 1620px; text-align: center; padding-bottom: 30px; }
+      #p2box .pk, #p3box .pk { font-size: 22px; font-weight: 800; color: #0a7350; letter-spacing: 0.1em; }
+      #p2box h2 { margin-top: 12px; font-size: 52px; font-weight: 870; letter-spacing: -0.02em; word-break: keep-all; }
+      #p2parts { margin-top: 48px; display: flex; gap: 18px; justify-content: center; }
+      .p2c { width: 500px; border: 1.5px solid #cdd8d1; border-radius: 12px; background: #ffffff; padding: 30px 30px 26px; text-align: left; }
+      .p2c .pi { font-size: 15px; font-weight: 820; color: #55685d; letter-spacing: 0.08em; }
+      .p2c .pn { margin-top: 10px; font-size: 30px; font-weight: 850; color: #17251d; word-break: keep-all; line-height: 1.28; }
+      .p2c .pd { margin-top: 10px; font-size: 18px; font-weight: 600; color: #4d6459; word-break: keep-all; line-height: 1.45; }
+      .p2c.now { border-color: #0b7a58; background: #eaf6f0; box-shadow: 0 18px 50px rgba(11,122,88,0.16); }
+      .p2c.now .pi { color: #0a7350; }
+
+      /* ---------- CH4b : 행정 Moonshot ---------- */
+      #moonwrap { position: absolute; inset: 0; background: #16241d; display: grid; place-items: center; }
+      #moonbox { width: 1500px; text-align: center; color: #eaf3ee; padding-bottom: 24px; }
+      #moonbox .mk {
+        display: inline-block; border: 1.5px dashed #4a6659; border-radius: 999px; padding: 9px 24px;
+        font-size: 20px; font-weight: 780; color: #9db8ab; letter-spacing: 0.06em;
+      }
+      #moonrows { margin-top: 42px; display: flex; flex-direction: column; gap: 14px; align-items: center; }
+      .mrow { display: flex; align-items: center; gap: 18px; font-size: 28px; font-weight: 640; color: #c2d3c9; }
+      .mrow b { min-width: 220px; text-align: right; font-weight: 830; color: #ffffff; font-variant-numeric: tabular-nums; }
+      .mrow .to { color: #5fdcae; font-weight: 800; }
+      #moonq { margin-top: 42px; font-size: 64px; font-weight: 870; letter-spacing: -0.02em; color: #ffffff; word-break: keep-all; line-height: 1.24; }
+      #moonq em { font-style: normal; color: #5fdcae; }
+      #moontag { margin-top: 26px; font-size: 24px; font-weight: 660; color: #9db8ab; word-break: keep-all; }
+
+      /* ---------- CH4c : 실사이트 시연 ---------- */
+      #stage-demo { background: #0b1410; }
+      #demovid { position: absolute; inset: 0; width: 1920px; height: 1080px; object-fit: cover; }
+      #demotag {
+        position: absolute; right: 40px; top: 112px; background: rgba(10,18,14,0.8); color: #eaf3ee;
+        border: 1px solid rgba(95,220,174,0.45); border-radius: 8px; padding: 12px 20px;
+        font-size: 19px; font-weight: 720; letter-spacing: 0.02em;
+      }
+      #demotag b { color: #5fdcae; }
+
+      /* ---------- CH4d : 워룸 루프 ---------- */
+      #loopwrap { position: absolute; inset: 0; display: grid; place-items: center; }
+      #loopbox { width: 1680px; text-align: center; padding-bottom: 26px; }
+      #loopbox .lk { font-size: 22px; font-weight: 800; color: #0a7350; letter-spacing: 0.08em; }
+      #loopbox h2 { margin-top: 10px; font-size: 50px; font-weight: 870; letter-spacing: -0.02em; word-break: keep-all; }
+      #loopbox h2 em { font-style: normal; color: #0b7a58; }
+      #loopflow { margin-top: 44px; display: flex; align-items: stretch; justify-content: center; gap: 10px; }
+      .lstep { width: 244px; background: #ffffff; border: 1.5px solid #cdd8d1; border-radius: 10px; padding: 18px 17px 15px; text-align: left; }
+      .lstep .li { font-size: 12.5px; font-weight: 820; color: #0a7350; letter-spacing: 0.06em; }
+      .lstep .ln { margin-top: 6px; font-size: 18.5px; font-weight: 800; color: #17251d; line-height: 1.28; word-break: keep-all; }
+      .lstep .ld { margin-top: 6px; font-size: 13.5px; font-weight: 600; color: #4d6459; line-height: 1.35; word-break: keep-all; }
+      .lstep.hot { border-color: #0b7a58; background: #eaf6f0; }
+      .lstep.hot .li { color: #085a41; }
+      .larr { align-self: center; color: #7fb59e; font-size: 22px; font-weight: 800; }
+      #loopback { margin: 30px auto 0; width: 1240px; border-top: 2px dashed #7cc3a6; position: relative; height: 34px; }
+      #loopback .lbt {
+        position: absolute; left: 50%; top: -16px; transform: translateX(-50%);
+        font-size: 18px; font-weight: 760; color: #0a7350; background: #f3f6f4; padding: 0 16px;
+      }
+      #loopstats { margin-top: 18px; display: flex; justify-content: center; gap: 60px; }
+      .lstat { text-align: center; }
+      .lstat .v { font-size: 42px; font-weight: 850; color: #0b7a58; font-variant-numeric: tabular-nums; }
+      .lstat .v .from { color: #8aa295; font-size: 29px; font-weight: 700; }
+      .lstat .k { margin-top: 4px; font-size: 16px; font-weight: 700; color: #55685d; }
+
+      /* ---------- CH4d-2 : 텔레그램 브리핑 예시 ---------- */
+      #briefwrap {
+        position: absolute; inset: 0; display: flex; align-items: center;
+        justify-content: center; gap: 76px; padding: 92px 96px 176px;
+      }
+      #briefleft { width: 700px; flex: none; }
+      #briefleft .bk { font-size: 20px; font-weight: 800; color: #0a7350; letter-spacing: 0.08em; }
+      #briefleft h2 {
+        margin-top: 12px; font-size: 52px; font-weight: 870; letter-spacing: -0.025em;
+        line-height: 1.24; word-break: keep-all;
+      }
+      #briefleft h2 em { font-style: normal; color: #0b7a58; }
+      #briefpoints { margin-top: 36px; display: flex; flex-direction: column; gap: 14px; }
+      .bp { border-left: 4px solid #7cc3a6; background: #ffffff; border-radius: 0 10px 10px 0;
+            padding: 16px 22px; box-shadow: 0 8px 26px rgba(28,42,35,0.07); }
+      .bp .bn { font-size: 23px; font-weight: 830; color: #17251d; word-break: keep-all; }
+      .bp .bd { margin-top: 6px; font-size: 17px; font-weight: 600; color: #4d6459; word-break: keep-all; line-height: 1.4; }
+      #briefphone {
+        width: 860px; height: 690px; flex: none; background: #17212b; border-radius: 20px;
+        box-shadow: 0 30px 80px rgba(11,20,16,0.34); overflow: hidden;
+        display: flex; flex-direction: column;
+      }
+      #briefphone .ph-head {
+        height: 62px; flex: none; display: flex; align-items: center; gap: 12px; padding: 0 24px;
+        background: #202b36; color: #e9f0f5; font-size: 19px; font-weight: 780;
+      }
+      #briefphone .ph-dot { width: 12px; height: 12px; border-radius: 50%; background: #5fdcae; }
+      #briefphone .ph-time { margin-left: auto; font-size: 15px; font-weight: 640; color: #8fa6b6; }
+      #briefphone .ph-body { padding: 24px 30px 26px; overflow: hidden; }
+      #briefphone .ph-title { font-size: 25px; font-weight: 830; color: #ffffff; margin-bottom: 14px; }
+      #briefphone .ph-sec {
+        margin: 18px 0 10px; font-size: 21px; font-weight: 820; color: #5fdcae; letter-spacing: 0.01em;
+      }
+      #briefphone .ph-l {
+        font-size: 19px; font-weight: 520; color: #c8d6e0; line-height: 1.52;
+        word-break: keep-all; margin-top: 8px;
+      }
+      #briefphone .ph-l b { color: #ffffff; font-weight: 820; }
+      #briefphone .ph-id { color: #f0b94a; font-weight: 760; margin-left: 6px; font-size: 17px; }
+      #briefphone .ph-link { margin-top: 16px; color: #6fb6e8; font-size: 17px; font-weight: 620; }
+
+      /* ---------- CH4e : 질문의 전환 ---------- */
+      #p3wrap { position: absolute; inset: 0; display: grid; place-items: center; }
+      #p3box { width: 1560px; text-align: center; padding-bottom: 30px; }
+      #p3q1 { margin-top: 44px; font-size: 50px; font-weight: 840; color: #26352d; word-break: keep-all; }
+      #p3no { margin-top: 16px; font-size: 25px; color: #a04708; font-weight: 750; }
+      #p3q2 { margin-top: 46px; font-size: 58px; font-weight: 870; color: #17251d; letter-spacing: -0.02em; word-break: keep-all; line-height: 1.3; }
+      #p3q2 em { font-style: normal; color: #0b7a58; }
+      #p3sub { margin-top: 26px; font-size: 23px; font-weight: 620; color: #55685d; word-break: keep-all; }
+      #p3sub em { font-style: normal; font-weight: 820; color: #3c4c43; }
+      #p3box .pk .pw { font-size: 17px; font-weight: 760; color: #55685d; letter-spacing: 0.04em; margin-left: 8px; }
+
+      /* ---------- CH5c : 드러커 인용 ---------- */
+      #drucker {
+        margin-top: 22px; display: inline-block; border-left: 5px solid #0b7a58; background: #ffffff;
+        border-radius: 0 10px 10px 0; padding: 16px 28px; text-align: left;
+        box-shadow: 0 10px 30px rgba(28,42,35,0.08);
+      }
+      #drucker .dq { font-size: 29px; font-weight: 830; color: #17251d; }
+      #drucker .da { margin-top: 6px; font-size: 16px; font-weight: 700; color: #55685d; letter-spacing: 0.04em; }
+
       /* ---------- subtitles ---------- */
       .sub-clip { display: flex; align-items: flex-end; justify-content: center; padding-bottom: 48px; }
       .subline { text-align: center; }
@@ -414,10 +596,14 @@
         margin-top: 12px; transform-origin: center;
       }
       .subline .tx .em { color: #0b7a58; }
+      .sub-dark .subline .tx {
+        color: #f2f7f4; background: rgba(10,18,14,0.66); padding: 10px 26px; border-radius: 12px;
+      }
+      .sub-dark .subline .tx .em { color: #5fdcae; }
     </style>
   </head>
   <body>
-    <div data-hf-id="hf-k9ts" id="root" data-composition-id="main" data-start="0" data-width="1920" data-height="1080" data-duration="190">
+    <div data-hf-id="hf-k9ts" id="root" data-composition-id="main" data-start="0" data-width="1920" data-height="1080" data-duration="285.6">
       <div data-hf-id="hf-2xc0" id="bg">
         <div data-hf-id="hf-zx1w" class="dots"></div>
         <div data-hf-id="hf-35j2" class="glow" id="glow"></div>
@@ -426,8 +612,29 @@
         <p data-hf-id="hf-16ko" class="meta mono right" id="bgmeta">행정안전부 서호성 사무관</p>
       </div>
 
+      <!-- CH0 : 표지 (덱 표지와 동일 세계관) -->
+      <section id="stage-open" class="clip" data-start="0" data-duration="4.6">
+        <div id="openwrap">
+          <div id="opencard">
+            <p class="eyebrow">국무총리 보고</p>
+            <h1>법령을, 국민이 볼 수 있는<br><span class="accent">구조도</span>로 만들었습니다.</h1>
+            <p class="lead">제도100 — AI로 그린 대한민국 제도 지도.</p>
+            <div class="foot">
+              <span><b>서호성</b> · 참여혁신조직실 참여혁신국 혁신기획과</span>
+              <span>2026. 9. 2.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- CH1 : 취지 -->
-      <section data-hf-id="hf-thq8" id="stage-intro" class="clip" data-start="0" data-duration="32.2">
+      <section data-hf-id="hf-thq8" id="stage-intro" class="clip" data-start="4.6" data-duration="35.6">
+        <div id="hard-slide">
+          <div class="inner">
+            <h1>행정은, <em>일반 국민에게</em> 어렵습니다.</h1>
+            <p class="hs">쉬운 예 하나 — 허가와 신고, 무엇이 다를까요?</p>
+          </div>
+        </div>
         <div data-hf-id="hf-z27j" id="c1-cards">
           <p data-hf-id="hf-lp82" id="c1-ask">허가와 신고, 무엇이 다를까요?</p>
           <div data-hf-id="hf-tl10" class="c1row">
@@ -445,7 +652,7 @@
             </div>
           </div>
         </div>
-        <div data-hf-id="hf-dws7" id="c1-terms" class="clip" data-start="0" data-duration="32.2" style="position:absolute;inset:0;display:grid;place-items:center;">
+        <div data-hf-id="hf-dws7" id="c1-terms" class="clip" data-start="4.6" data-duration="35.6" style="position:absolute;inset:0;display:grid;place-items:center;">
           <div data-hf-id="hf-7m0u" class="intro-lines" id="intro-lines">
             <p data-hf-id="hf-yc3q" class="il" id="intro-l1">"직제 개정 협의 결과를 시달받았다."</p>
             <p data-hf-id="hf-6lvd" class="il" id="intro-l2">"처분 기준을 고시했다."</p>
@@ -473,8 +680,8 @@
         </div>
         <div data-hf-id="hf-cgcl" id="intro-reveal">
           <div data-hf-id="hf-bug8" class="inner">
-            <p data-hf-id="hf-cckm" class="kick">국민이 AI를 배우는 게 아니라,</p>
-            <h1 data-hf-id="hf-64hm">AI로, 행정 리터러시</h1>
+            <p data-hf-id="hf-cckm" class="kick">AI를 배우는 AI 리터러시처럼,</p>
+            <h1 data-hf-id="hf-64hm">행정을 보다 쉽게 이해하는<br>행정 리터러시가 필요합니다</h1>
             <p data-hf-id="hf-doks" class="rsub">AI가 행정을 국민의 언어로 번역합니다</p>
             <div data-hf-id="hf-szo1" class="rbar" id="intro-rbar"></div>
           </div>
@@ -482,7 +689,7 @@
       </section>
 
       <!-- CH2 : 조문 → 구조도 -->
-      <section data-hf-id="hf-82kb" id="stage-doc" class="clip" data-start="32.2" data-duration="14.2">
+      <section data-hf-id="hf-82kb" id="stage-doc" class="clip" data-start="40.2" data-duration="14.2">
         <div data-hf-id="hf-8py6" id="docwrap" style="position:absolute;inset:0;">
           <article data-hf-id="hf-bkdf" class="doc" id="doc">
             <div data-hf-id="hf-2tn9" class="doc-head">
@@ -505,7 +712,7 @@
         </div>
       </section>
 
-      <section data-hf-id="hf-30wm" id="stage-map" class="clip" data-start="46.4" data-duration="16.0">
+      <section data-hf-id="hf-30wm" id="stage-map" class="clip" data-start="54.4" data-duration="16.0">
         <div data-hf-id="hf-cic2" id="mapwrap" style="position:absolute;inset:0;">
           <div data-hf-id="hf-e1ia" id="panel" class="panel">
             <div data-hf-id="hf-45m6" class="phead">
@@ -517,13 +724,13 @@
         </div>
       </section>
 
-      <section data-hf-id="hf-x7w9" id="stage-mont" class="clip" data-start="62.4" data-duration="8.4">
-        <p data-hf-id="hf-l3n4" id="mont-title">같은 방법으로, 제도마다 <em data-hf-id="hf-uu0x">한 장씩</em></p>
+      <section data-hf-id="hf-x7w9" id="stage-mont" class="clip" data-start="70.4" data-duration="19.0">
+        <p data-hf-id="hf-l3n4" id="mont-title">같은 방법으로, 제도마다 <em data-hf-id="hf-uu0x">한 장씩</em> — 법령 원문에서, 구조도로</p>
         <div data-hf-id="hf-24fm" id="mont-host"></div>
       </section>
 
       <!-- CH3 : 등록부 -->
-      <section data-hf-id="hf-m19v" id="stage-reg" class="clip" data-start="70.8" data-duration="9.0">
+      <section data-hf-id="hf-m19v" id="stage-reg" class="clip" data-start="89.4" data-duration="9.0">
         <div data-hf-id="hf-7w61" id="gridwrap"></div>
         <div data-hf-id="hf-pbog" id="countzone">
           <p data-hf-id="hf-fryb" class="lab">같은 방법으로 그린 제도 지도</p>
@@ -536,33 +743,85 @@
         </div>
       </section>
 
-      <!-- CH4 : 반도체 클러스터 -->
-      <section data-hf-id="hf-y8rz" id="stage-track" class="clip" data-start="79.8" data-duration="9.0">
-        <div data-hf-id="hf-kcpa" id="trackwrap">
-          <div data-hf-id="hf-5g2h" id="trackbox">
-            <p data-hf-id="hf-njff" class="tt">왜 이 판이 복잡한가</p>
-            <p data-hf-id="hf-d1jx" class="ts">광주 반도체 클러스터는 <b data-hf-id="hf-94wq">두 개의 사업이 맞물린</b> 프로젝트입니다 — 개요</p>
-            <div data-hf-id="hf-zjpx" class="trk a" id="trk-a">
-              <p data-hf-id="hf-y104" class="tlab"><i data-hf-id="hf-9aag">TRACK A</i>군 공항 이전</p>
-              <div data-hf-id="hf-kyq0" class="tstep">이전건의·예비이전후보지 선정</div><span data-hf-id="hf-8p5u" class="tarr">→</span>
-              <div data-hf-id="hf-uumr" class="tstep">주민투표·최종 이전부지 선정</div><span data-hf-id="hf-y0cm" class="tarr">→</span>
-              <div data-hf-id="hf-ooss" class="tstep">기부 대 양여·재원·지원사업 확정</div>
+      <!-- CH3b : 자동화된 증가 -->
+      <section id="stage-auto" class="clip" data-start="98.4" data-duration="8.6">
+        <div id="autowrap">
+          <div id="autobox">
+            <p class="at">이 숫자는, <em>자동으로</em> 늘어납니다</p>
+            <div id="autoflow">
+              <div class="astep" id="as0">
+                <p class="ai">STEP 1</p>
+                <p class="an">이용자 요청</p>
+                <p class="ad">"이 제도도 그려주세요" — 요청 메일이 도착합니다.</p>
+              </div>
+              <span class="aarr" id="aa0">→</span>
+              <div class="astep" id="as1">
+                <p class="ai">STEP 2</p>
+                <p class="an">AI 에이전트가 읽고, 그리고</p>
+                <p class="ad">법령 원문을 확인해 구조도 초안을 만듭니다.</p>
+              </div>
+              <span class="aarr" id="aa1">→</span>
+              <div class="astep" id="as2">
+                <p class="ai">STEP 3</p>
+                <p class="an">사람이 검증</p>
+                <p class="ad">조문 대조 검증을 거쳐야 등재됩니다.</p>
+              </div>
+              <span class="aarr" id="aa2">→</span>
+              <div class="astep hot" id="as3">
+                <p class="ai">STEP 4</p>
+                <p class="an">지도에 추가</p>
+                <p class="ad">제도 지도가 한 장 늘어납니다.</p>
+              </div>
             </div>
-            <div data-hf-id="hf-94ir" class="trk b" id="trk-b">
-              <p data-hf-id="hf-fumi" class="tlab"><i data-hf-id="hf-83dd">TRACK B</i>반도체 클러스터</p>
-              <div data-hf-id="hf-bjx2" class="tstep">호남 반도체 입지 결정(2026-07-06)</div><span data-hf-id="hf-yenn" class="tarr">→</span>
-              <div data-hf-id="hf-3ve1" class="tstep">반도체클러스터 지정 신청·심의</div><span data-hf-id="hf-ysyo" class="tarr">→</span>
-              <div data-hf-id="hf-y6ah" class="tstep">산업단지 지정요청·입지조사</div>
-            </div>
-            <div data-hf-id="hf-1tz3" id="trk-join">
-              <span data-hf-id="hf-5xi8" class="jn">종전부지 개발</span>
-              <span data-hf-id="hf-083m" class="jt">군 공항이 떠나야 부지가 열리고, 부지가 열려야 산업단지 지정이 갑니다</span>
+            <p id="autonote">제가 일일이 넣는 것이 아니라 — <b>요청을 읽고 스스로 자라는 시스템</b>을 만들었습니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CH4a : 2부 시작 — 전체 구성 -->
+      <section id="stage-part2" class="clip" data-start="107.0" data-duration="9.6">
+        <div id="p2wrap">
+          <div id="p2box">
+            <p class="pk">전체 구성</p>
+            <h2>여기까지가 1부 — 이제, 판을 키웁니다</h2>
+            <div id="p2parts">
+              <div class="p2c was" id="p2c0">
+                <p class="pi">1부 · 여기까지</p>
+                <p class="pn">제도를 읽다</p>
+                <p class="pd">법령 원문을 누가·무엇을·언제의 구조도로 — 한 장의 제도 지도.</p>
+              </div>
+              <div class="p2c now" id="p2c1">
+                <p class="pi">2부 · 지금부터</p>
+                <p class="pn">거시로 — 판을 모아 본다</p>
+                <p class="pd">지도를 수십 장 모아, 국가 대형 프로젝트 전체를 한 판에서 봅니다.</p>
+              </div>
+              <div class="p2c" id="p2c2">
+                <p class="pi">3부</p>
+                <p class="pn">미시로 — 실증을 뜯어본다</p>
+                <p class="pd">실제 AX 사례에서, 어떤 업무를 AI에게 맡겼는지 찾아냅니다.</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section data-hf-id="hf-6vgw" id="stage-mega" class="clip" data-start="88.8" data-duration="16.0">
+      <!-- CH4b : 가칭 행정 Moonshot -->
+      <section id="stage-moon" class="clip" data-start="116.6" data-duration="10.4">
+        <div id="moonwrap">
+          <div id="moonbox">
+            <p class="mk">(가칭) 행정 MOONSHOT — 상상 기반 기획</p>
+            <div id="moonrows">
+              <p class="mrow" id="mr0"><b>10개</b>를 팔려면 <span class="to">→</span> 친구에게 갑니다</p>
+              <p class="mrow" id="mr1"><b>10,000개</b>를 팔려면 <span class="to">→</span> 스마트스토어를 엽니다</p>
+              <p class="mrow" id="mr2"><b>1억 개</b>를 팔려면 <span class="to">→</span> 아마존에 갑니다</p>
+            </div>
+            <h2 id="moonq">수천 명의 <em>AI 공무원</em>이<br>이미 내 팀에 있다면?</h2>
+            <p id="moontag">그 규모를 가정하고, 어떤 행정이 가능한지 상상하는 작업입니다</p>
+          </div>
+        </div>
+      </section>
+
+      <section data-hf-id="hf-6vgw" id="stage-mega" class="clip" data-start="127.0" data-duration="16.0">
         <div data-hf-id="hf-0atv" id="megawrap">
           <div data-hf-id="hf-xr18" id="megapanel" class="panel">
             <p data-hf-id="hf-dpgc" class="mh">제도끼리 모아보면? — 광주 군공항 부지 반도체 클러스터</p>
@@ -581,7 +840,7 @@
               <span data-hf-id="hf-jd7s" class="mchip">배출권거래제</span>
               <span data-hf-id="hf-32t2" class="mchip">건축허가·사용승인</span>
             </div>
-            <p data-hf-id="hf-kh07" class="plus">… 외 91개 제도</p>
+            <p data-hf-id="hf-kh07" class="plus" id="megaplus">… 외 제도</p>
             <div data-hf-id="hf-zwux" id="mega-count">
               <span data-hf-id="hf-cgoq" class="mc" id="megacounter">1</span>
               <p data-hf-id="hf-ekyb" class="mcl">행정절차</p>
@@ -590,86 +849,185 @@
               <p data-hf-id="hf-0ziu" class="mgl">한 판에 모이면, 순서가 보입니다 — 8개 게이트</p>
               <div data-hf-id="hf-bfyy" class="mgrow" id="mgrow"></div>
               <div data-hf-id="hf-5vgq" id="mega-status">
-                <span data-hf-id="hf-vvrj" class="mst done">완료 2</span>
-                <span data-hf-id="hf-64qs" class="mst live">진행 중 1</span>
-                <span data-hf-id="hf-hsg7" class="mst open">지금 착수 가능 6</span>
-                <span data-hf-id="hf-08ym" class="mst amber">조건 미정 5</span>
-                <span data-hf-id="hf-pncs" class="mst">선행 대기 35</span>
+                <span data-hf-id="hf-vvrj" class="mst done" id="mst-done">완료</span>
+                <span data-hf-id="hf-64qs" class="mst live" id="mst-live">진행 중</span>
+                <span data-hf-id="hf-hsg7" class="mst open" id="mst-open">지금 착수 가능</span>
+                <span data-hf-id="hf-08ym" class="mst amber" id="mst-amber">조건 미정</span>
+                <span data-hf-id="hf-pncs" class="mst" id="mst-wait">선행 대기</span>
               </div>
             </div>
             <div data-hf-id="hf-pa13" id="mega-substats">
-              <div data-hf-id="hf-nm9v" class="msit"><div data-hf-id="hf-getm" class="v">8</div><div data-hf-id="hf-8u29" class="k">게이트</div></div>
-              <div data-hf-id="hf-ao03" class="msit"><div data-hf-id="hf-r7bh" class="v">49</div><div data-hf-id="hf-moen" class="k">마일스톤</div></div>
-              <div data-hf-id="hf-a9p2" class="msit"><div data-hf-id="hf-v1lg" class="v">103</div><div data-hf-id="hf-u30v" class="k">법정 제도</div></div>
+              <div data-hf-id="hf-nm9v" class="msit"><div data-hf-id="hf-getm" class="v" id="msv-gates">8</div><div data-hf-id="hf-8u29" class="k">게이트</div></div>
+              <div data-hf-id="hf-ao03" class="msit"><div data-hf-id="hf-r7bh" class="v" id="msv-miles">49</div><div data-hf-id="hf-moen" class="k">마일스톤</div></div>
+              <div data-hf-id="hf-a9p2" class="msit"><div data-hf-id="hf-v1lg" class="v" id="msv-insts">103</div><div data-hf-id="hf-u30v" class="k">법정 제도</div></div>
             </div>
           </div>
         </div>
       </section>
 
-      <section data-hf-id="hf-g6ed" id="stage-zoom" class="clip" data-start="104.8" data-duration="11.0">
-        <div data-hf-id="hf-0wwc" id="zoomwrap">
-          <div data-hf-id="hf-y0kb" id="zoombox">
-            <p data-hf-id="hf-816y" class="zk" id="zk">1,281은 이렇게 세어진 숫자입니다 — 마일스톤 하나를 열면</p>
-            <p data-hf-id="hf-4on1" class="zt" id="zt"></p>
-            <p data-hf-id="hf-zzjp" class="za" id="za"></p>
-            <div data-hf-id="hf-p70g" id="zoomgrid"></div>
-            <p data-hf-id="hf-jkzm" id="zoomfoot">마일스톤 <b data-hf-id="hf-er6e">49개</b>를 이렇게 펼치면 — 하위절차 <b data-hf-id="hf-ct6f">1,281개</b></p>
+      <!-- CH4c : 관문 의존 지도 실사이트 시연 (빌드 전 녹화 클립) -->
+      <section id="stage-demo" class="clip" data-start="143.0" data-duration="25.0"></section>
+      <video id="demovid" class="clip" muted preload="auto" src="assets/warroom-demo.mp4" data-start="143.3" data-duration="23.9"></video>
+      <section id="demotagclip" class="clip" data-start="143.0" data-duration="25.0">
+        <div id="demotag">실제 작동 화면 — <b>관문 의존 지도</b> · korea100/warroom/map · 공개 웹</div>
+      </section>
+
+      <!-- CH4d : 스스로 자라는 지도 (워룸 루프) -->
+      <section id="stage-loop" class="clip" data-start="168.0" data-duration="17.0">
+        <div id="loopwrap">
+          <div id="loopbox">
+            <p class="lk">그리고 이 판은</p>
+            <h2>매일 아침, <em>스스로 자랍니다</em></h2>
+            <div id="loopflow">
+              <div class="lstep" id="ls0">
+                <p class="li">08:00 매일</p>
+                <p class="ln">기사를 읽고</p>
+                <p class="ld">그날의 관련 보도를 자동 수집합니다.</p>
+              </div>
+              <span class="larr" id="la0">→</span>
+              <div class="lstep" id="ls1">
+                <p class="li">AI 판별</p>
+                <p class="ln">신호를 가려내고</p>
+                <p class="ld">진행·리스크·결정임박을 분류합니다.</p>
+              </div>
+              <span class="larr" id="la1">→</span>
+              <div class="lstep" id="ls2">
+                <p class="li">후보 발굴</p>
+                <p class="ln">빠진 관문·제도를 찾고</p>
+                <p class="ld">지도에 없는 절차가 후보로 올라옵니다.</p>
+              </div>
+              <span class="larr" id="la2">→</span>
+              <div class="lstep" id="ls3">
+                <p class="li">사람 검증</p>
+                <p class="ln">법령 원문 대조 후 등재</p>
+                <p class="ld">등재는 항상 사람이 확정합니다.</p>
+              </div>
+              <span class="larr" id="la3">→</span>
+              <div class="lstep" id="ls4">
+                <p class="li">재계산</p>
+                <p class="ln">판 전체가 다시 계산</p>
+                <p class="ld">절차·전선·병목이 갱신됩니다.</p>
+              </div>
+              <span class="larr" id="la4">→</span>
+              <div class="lstep hot" id="ls5">
+                <p class="li">매일 아침</p>
+                <p class="ln">텔레그램 브리핑</p>
+                <p class="ld">기사 요약이 아니라 — 절차 진행상황까지 읽어 보고드립니다.</p>
+              </div>
+            </div>
+            <div id="loopback"><span class="lbt">다음 날 아침, 다시 처음으로 ⟲</span></div>
+            <div id="loopstats">
+              <div class="lstat" id="lst0"><div class="v"><span class="from">49</span> → <span id="lsv-miles">54</span></div><div class="k">관문</div></div>
+              <div class="lstat" id="lst1"><div class="v"><span class="from">586</span> → <span id="lsv-insts">601</span></div><div class="k">제도 지도</div></div>
+              <div class="lstat" id="lst2"><div class="v"><span class="from">1,281</span> → <span id="lsv-procs">1,361</span></div><div class="k">행정절차</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CH4d-2 : 텔레그램 브리핑 실물 예시 (2026-08-28 실제 발송분 발췌) -->
+      <section id="stage-brief" class="clip" data-start="185.0" data-duration="13.0">
+        <div id="briefwrap">
+          <div id="briefleft">
+            <p class="bk">매일 아침 08:00 · 텔레그램</p>
+            <h2>기사 요약이 아니라,<br><em>절차 진행상황</em> 보고서</h2>
+            <div id="briefpoints">
+              <div class="bp" id="bp0">
+                <p class="bn">관문 ID로 말합니다</p>
+                <p class="bd">모든 문장에 어느 관문 얘기인지(N31·N53) 병기됩니다.</p>
+              </div>
+              <div class="bp" id="bp1">
+                <p class="bn">상태 전환을 제안합니다</p>
+                <p class="bd">"이 관문, 계획→진행으로 바꿔야 하지 않나" 판단거리를 올립니다.</p>
+              </div>
+              <div class="bp" id="bp2">
+                <p class="bn">확정과 신호를 구분합니다</p>
+                <p class="bd">언론 신호는 '보도됨·주시 필요'로만 — 단정하지 않습니다.</p>
+              </div>
+            </div>
+          </div>
+          <article id="briefphone">
+            <div class="ph-head"><span class="ph-dot"></span>제도100 워룸<span class="ph-time">08:00</span></div>
+            <div class="ph-body">
+              <p class="ph-title">📡 광주 반도체·군공항 일일 동향 (2026-08-28)</p>
+              <p class="ph-sec">■ 오늘의 판단 포인트</p>
+              <p class="ph-l"><b>1) 군공항 이전 트랙 6개 관문 동시 가동 신호</b><span class="ph-id">(N31·N32·N33·N42·N34·N35)</span></p>
+              <p class="ph-l">– 이전후보지 확정 이후 기부 대 양여·재원 진행 신호가 7일 내 8건씩 집중 포착됨.</p>
+              <p class="ph-l">– 6건 모두 <b>계획 상태이나 실질 진행이 앞선 상태</b>로, 상태 전환 여부 일괄 판단 필요함.</p>
+              <p class="ph-l"><b>2) 용수·공군전력 두 축에서 리스크 신호 집중</b><span class="ph-id">(N50·N51)</span></p>
+              <p class="ph-l">– 동복댐 증축 수몰 보상 갈등으로 주민설명회 연기됨(리스크 7건).</p>
+              <p class="ph-sec">■ 파이프라인</p>
+              <p class="ph-l">– 기사 207건·관문 30개 신호(리스크 30·결정 13·진행 71), <b>상태 전환 검토 15건</b>·리스크 점검 2건, 미등재 관문 1건.</p>
+              <p class="ph-l ph-link">상세: hosungseo.github.io/korea100/warroom/loop/</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- CH4e : 3부 시작 — 질문의 전환 -->
+      <section id="stage-part3" class="clip" data-start="198.0" data-duration="12.0">
+        <div id="p3wrap">
+          <div id="p3box">
+            <p class="pk">3부 — 미시로, 실증으로 <span class="pw">with 한국행정연구원</span></p>
+            <p id="p3q1">"어떤 업무를 AI에게 맡겨야 하는가?"</p>
+            <p id="p3no">— 아직 아무도 답을 찾지 못한 질문입니다</p>
+            <p id="p3q2">질문을 바꿨습니다 —<br>"지금, <em>어떤 업무를 맡기고 있는가?</em>"</p>
+            <p id="p3sub">2부가 달에 사람을 보내는 <em>문샷</em>이라면, 3부는 이미 사람이 살고 있는 동네를 뜯어 고치는 <em>대형 재개발</em>입니다</p>
           </div>
         </div>
       </section>
 
       <!-- CH5 : 손에 잡히는 AX -->
-      <section data-hf-id="hf-l3aa" id="stage-ax1" class="clip" data-start="115.8" data-duration="22.6">
+      <section data-hf-id="hf-l3aa" id="stage-ax1" class="clip" data-start="210.0" data-duration="22.6">
         <div data-hf-id="hf-aqnz" class="axhead" id="axhead1">
-          <p data-hf-id="hf-5ude" class="k">그리고 지금은 —</p>
-          <h2 data-hf-id="hf-nq3n">손에 잡히는 <em data-hf-id="hf-acni">AX</em> : 실제 사례를 전후 업무체계도로</h2>
+          <p data-hf-id="hf-5ude" class="k">지금 맡기고 있는 업무들 —</p>
+          <h2 data-hf-id="hf-nq3n">실제 사례를 <em data-hf-id="hf-acni">전후 업무체계도</em>로 뜯어봅니다</h2>
         </div>
         <div data-hf-id="hf-zblv" id="case0" class="panel cboard"></div>
       </section>
 
-      <section data-hf-id="hf-ylb5" id="stage-ax2" class="clip" data-start="138.4" data-duration="25.0">
+      <section data-hf-id="hf-ylb5" id="stage-ax2" class="clip" data-start="232.6" data-duration="25.0">
         <div data-hf-id="hf-zv6c" class="axhead" id="axhead2">
-          <p data-hf-id="hf-c67a" class="k">그리고 지금은 —</p>
-          <h2 data-hf-id="hf-uu3n">손에 잡히는 <em data-hf-id="hf-44gi">AX</em> : 실제 사례를 전후 업무체계도로</h2>
+          <p data-hf-id="hf-c67a" class="k">지금 맡기고 있는 업무들 —</p>
+          <h2 data-hf-id="hf-uu3n">실제 사례를 <em data-hf-id="hf-44gi">전후 업무체계도</em>로 뜯어봅니다</h2>
         </div>
         <div data-hf-id="hf-vdhu" id="case1" class="panel cboard"></div>
         <div data-hf-id="hf-rfdt" id="case2" class="panel cboard"></div>
       </section>
 
-      <section data-hf-id="hf-kpz0" id="stage-ax3" class="clip" data-start="163.4" data-duration="14.0">
-        <div data-hf-id="hf-0mu5" class="axhead" id="axhead3">
-          <p data-hf-id="hf-ckib" class="k">그리고 지금은 —</p>
-          <h2 data-hf-id="hf-ufsm">손에 잡히는 <em data-hf-id="hf-4irj">AX</em> : 실제 사례를 전후 업무체계도로</h2>
-        </div>
+      <section data-hf-id="hf-kpz0" id="stage-ax3" class="clip" data-start="257.6" data-duration="15.4">
         <div data-hf-id="hf-2xhd" id="whywrap">
           <div data-hf-id="hf-oyz8" id="whybox">
-            <p data-hf-id="hf-0wcb" class="w1" id="w1">모든 기관이 AX를 하고 싶어 합니다.</p>
-            <p data-hf-id="hf-usii" class="w2" id="w2">그런데 어디서부터? 무엇부터?</p>
-            <p data-hf-id="hf-tvef" class="w3" id="w3">단초는 — 지금 <em data-hf-id="hf-i393">잘 된 사례</em>를 톺아보는 것입니다</p>
+            <p data-hf-id="hf-0wcb" class="w1" id="w1">우수사례 6건 — 올 하반기, 심층분석</p>
+            <div id="drucker">
+              <p class="dq">"측정하지 않으면, 관리할 수 없다"</p>
+              <p class="da">— 피터 드러커</p>
+            </div>
+            <p data-hf-id="hf-tvef" class="w3" id="w3">'업무 시간을 절감했다'는 한 문장을,<br>프로세스 속 <em data-hf-id="hf-i393">정확히 어떤 업무</em>인지로 바꿔 적습니다</p>
             <div data-hf-id="hf-wdbm" id="whysteps">
               <div data-hf-id="hf-at1z" class="wstep" id="ws0">
-                <p data-hf-id="hf-qjem" class="si">STEP 1</p>
-                <p data-hf-id="hf-ly2w" class="sn">어떤 일을 바꿨나</p>
-                <p data-hf-id="hf-8mrd" class="sd">공무원의 수많은 업무 중 정확히 무엇을 건드렸는지 특정합니다.</p>
+                <p data-hf-id="hf-qjem" class="si">STEP 1 · 특정</p>
+                <p data-hf-id="hf-ly2w" class="sn">어떤 업무를 맡겼나</p>
+                <p data-hf-id="hf-8mrd" class="sd">일련의 업무 프로세스 안에서, AI에게 맡긴 업무를 정확히 짚습니다.</p>
               </div>
               <div data-hf-id="hf-4nc6" class="wstep" id="ws1">
-                <p data-hf-id="hf-qxpn" class="si">STEP 2</p>
-                <p data-hf-id="hf-xdln" class="sn">어떻게 바꿨나</p>
-                <p data-hf-id="hf-ohtd" class="sd">전후 업무체계도로 어떤 블록이 대체·소멸·간소화됐는지 봅니다.</p>
+                <p data-hf-id="hf-qxpn" class="si">STEP 2 · 측정</p>
+                <p data-hf-id="hf-xdln" class="sn">얼마나 달라졌나</p>
+                <p data-hf-id="hf-ohtd" class="sd">전후 업무체계도로 어떤 블록이 대체·소멸·간소화됐는지 셉니다.</p>
               </div>
               <div data-hf-id="hf-0p85" class="wstep" id="ws2">
-                <p data-hf-id="hf-rc0o" class="si">STEP 3</p>
-                <p data-hf-id="hf-oojv" class="sn">내 업무의 실마리</p>
+                <p data-hf-id="hf-rc0o" class="si">STEP 3 · 이식</p>
+                <p data-hf-id="hf-oojv" class="sn">타 기관의 벤치마킹</p>
                 <p data-hf-id="hf-xpwd" class="sd">다른 기관이 소관 업무에서 같은 구조를 찾아 시작점을 잡습니다.</p>
               </div>
             </div>
-            <p data-hf-id="hf-z891" class="w4" id="w4">잘 된 사례를 깊이 들여다봐야, 다음 기관이 어디서 시작할지 압니다.</p>
+            <p data-hf-id="hf-z891" class="w4" id="w4">그래야 다른 기관도 따라 할 수 있습니다 — 시간이 갈수록, 더 많은 실증사례가 쌓입니다.</p>
           </div>
         </div>
       </section>
 
       <!-- CH6 : 클로징 -->
-      <section data-hf-id="hf-5jjv" id="stage-close" class="clip" data-start="177.4" data-duration="12.6">
+      <section data-hf-id="hf-5jjv" id="stage-close" class="clip" data-start="273.0" data-duration="12.6">
         <div data-hf-id="hf-eq7b" id="closewrap">
           <div data-hf-id="hf-i24l" id="closecard">
             <p data-hf-id="hf-p4ha" class="bk">우수사례 심층분석에서 출발해</p>
@@ -682,68 +1040,92 @@
       </section>
 
       <!-- subtitles -->
-      <section data-hf-id="hf-xhy2" id="subclip1" class="clip sub-clip" data-start="0.9" data-duration="4.7">
-        <div data-hf-id="hf-gvyh" class="subline" id="sub1"><span data-hf-id="hf-o6nx" class="tx">허가와 신고 — 이름은 비슷해도, <span data-hf-id="hf-sk3h" class="em">완전히 다른 얘기</span>입니다</span><span data-hf-id="hf-flu0" class="bar"></span></div>
+      <section id="subclip1" class="clip sub-clip" data-start="8.9" data-duration="4.8">
+        <div class="subline" id="sub1"><span class="tx">허가와 신고 — 이름은 비슷해도, <span class="em">완전히 다른 얘기</span>입니다</span><span class="bar"></span></div>
       </section>
-      <section data-hf-id="hf-ucy7" id="subclip2" class="clip sub-clip" data-start="6.2" data-duration="4.6">
-        <div data-hf-id="hf-ku2i" class="subline" id="sub2"><span data-hf-id="hf-yw5p" class="tx">어떤 신고는 행정청이 <span data-hf-id="hf-cfpp" class="em">'수리'</span>해야 비로소 효력이 생깁니다</span><span data-hf-id="hf-78ow" class="bar"></span></div>
+      <section id="subclip2" class="clip sub-clip" data-start="14.2" data-duration="4.6">
+        <div class="subline" id="sub2"><span class="tx">어떤 신고는 행정청이 <span class="em">'수리'</span>해야 비로소 효력이 생깁니다</span><span class="bar"></span></div>
       </section>
-      <section data-hf-id="hf-6fko" id="subclip3" class="clip sub-clip" data-start="11.6" data-duration="6.0">
-        <div data-hf-id="hf-os6j" class="subline" id="sub3"><span data-hf-id="hf-9i1c" class="tx">하나하나는 한국어인데, 조합되는 순간 <span data-hf-id="hf-5jco" class="em">외국어</span>가 됩니다</span><span data-hf-id="hf-61rt" class="bar"></span></div>
+      <section id="subclip3" class="clip sub-clip" data-start="19.6" data-duration="6.0">
+        <div class="subline" id="sub3"><span class="tx">하나하나는 한국어인데, 조합되는 순간 <span class="em">외국어</span>가 됩니다</span><span class="bar"></span></div>
       </section>
-      <section data-hf-id="hf-k48k" id="subclip4" class="clip sub-clip" data-start="18.4" data-duration="6.4">
-        <div data-hf-id="hf-1ap0" class="subline" id="sub4"><span data-hf-id="hf-3n2b" class="tx">국민만 어려운 게 아닙니다 — <span data-hf-id="hf-exhe" class="em">공무원에게도</span> 어렵습니다</span><span data-hf-id="hf-6g2u" class="bar"></span></div>
+      <section id="subclip4" class="clip sub-clip" data-start="26.4" data-duration="6.4">
+        <div class="subline" id="sub4"><span class="tx">국민만 어려운 게 아닙니다 — <span class="em">공무원에게도</span> 어렵습니다</span><span class="bar"></span></div>
       </section>
-      <section data-hf-id="hf-sypt" id="subclip5" class="clip sub-clip" data-start="25.6" data-duration="6.2">
-        <div data-hf-id="hf-49yl" class="subline" id="sub5"><span data-hf-id="hf-ovb1" class="tx">AI가 행정을 <span data-hf-id="hf-eszi" class="em">국민의 언어</span>로 번역합니다</span><span data-hf-id="hf-595r" class="bar"></span></div>
+      <section id="subclip5" class="clip sub-clip" data-start="41.0" data-duration="5.0">
+        <div class="subline" id="sub5"><span class="tx">법령은, 글로 존재합니다</span><span class="bar"></span></div>
       </section>
-      <section data-hf-id="hf-5mhg" id="subclip6" class="clip sub-clip" data-start="33.0" data-duration="5.0">
-        <div data-hf-id="hf-882m" class="subline" id="sub6"><span data-hf-id="hf-0kzy" class="tx">법령은, 글로 존재합니다</span><span data-hf-id="hf-5ngs" class="bar"></span></div>
+      <section id="subclip6" class="clip sub-clip" data-start="46.6" data-duration="7.2">
+        <div class="subline" id="sub6"><span class="tx"><span class="em">누가</span> · <span class="em">무엇을</span> · <span class="em">언제</span> — 절차는 문장 속에 숨어 있습니다</span><span class="bar"></span></div>
       </section>
-      <section data-hf-id="hf-zqjo" id="subclip7" class="clip sub-clip" data-start="38.6" data-duration="7.2">
-        <div data-hf-id="hf-c66n" class="subline" id="sub7"><span data-hf-id="hf-599i" class="tx"><span data-hf-id="hf-ynjr" class="em">누가</span> · <span data-hf-id="hf-uugu" class="em">무엇을</span> · <span data-hf-id="hf-dkrj" class="em">언제</span> — 절차는 문장 속에 숨어 있습니다</span><span data-hf-id="hf-4gjp" class="bar"></span></div>
+      <section id="subclip7" class="clip sub-clip" data-start="54.8" data-duration="15.0">
+        <div class="subline" id="sub7"><span class="tx">제도100은 이것을 <span class="em">구조도</span>로 만듭니다</span><span class="bar"></span></div>
       </section>
-      <section data-hf-id="hf-jhdf" id="subclip8" class="clip sub-clip" data-start="46.8" data-duration="15.0">
-        <div data-hf-id="hf-7jw8" class="subline" id="sub8"><span data-hf-id="hf-fq8e" class="tx">제도100은 이것을 <span data-hf-id="hf-1r8h" class="em">구조도</span>로 만듭니다</span><span data-hf-id="hf-4uuq" class="bar"></span></div>
+      <section id="subclip8" class="clip sub-clip" data-start="71.0" data-duration="8.4">
+        <div class="subline" id="sub8"><span class="tx">같은 방법으로 — <span class="em">소상공인 정책자금</span> (소상공인법 제9조)</span><span class="bar"></span></div>
       </section>
-      <section data-hf-id="hf-nlob" id="subclip9" class="clip sub-clip" data-start="62.8" data-duration="7.4">
-        <div data-hf-id="hf-8bk1" class="subline" id="sub9"><span data-hf-id="hf-cx9w" class="tx">환경영향평가만이 아닙니다 — 제도마다 <span data-hf-id="hf-02h4" class="em">같은 방법</span>으로</span><span data-hf-id="hf-3nxn" class="bar"></span></div>
+      <section id="subclip9" class="clip sub-clip" data-start="79.8" data-duration="8.8">
+        <div class="subline" id="sub9"><span class="tx"><span class="em">공장설립승인</span> — 법정 처리기한 <span class="em">20일</span>까지 구조도에</span><span class="bar"></span></div>
       </section>
-      <section data-hf-id="hf-c8qo" id="subclip10" class="clip sub-clip" data-start="71.2" data-duration="8.2">
-        <div data-hf-id="hf-3fsz" class="subline" id="sub10"><span data-hf-id="hf-ckb4" class="tx">이렇게 만든 제도 지도, <span data-hf-id="hf-fayc" class="em">586개</span></span><span data-hf-id="hf-428o" class="bar"></span></div>
+      <section id="subclip10" class="clip sub-clip" data-start="89.8" data-duration="8.2">
+        <div class="subline" id="sub10"><span class="tx">이렇게 만든 제도 지도, <span class="em"><span id="subinst">601</span>개</span></span><span class="bar"></span></div>
       </section>
-      <section data-hf-id="hf-t1pl" id="subclip11" class="clip sub-clip" data-start="80.2" data-duration="8.2">
-        <div data-hf-id="hf-zhoy" class="subline" id="sub11"><span data-hf-id="hf-bx9x" class="tx">두 사업이 <span data-hf-id="hf-joqv" class="em">맞물려</span> 있습니다 — 그래서 절차가 얽힙니다</span><span data-hf-id="hf-nyz4" class="bar"></span></div>
+      <section id="subclip11" class="clip sub-clip" data-start="99.0" data-duration="7.6">
+        <div class="subline" id="sub11"><span class="tx">요청이 오면 <span class="em">AI 에이전트</span>가 그리고 — 사람이 검증해 더해집니다</span><span class="bar"></span></div>
       </section>
-      <section data-hf-id="hf-ly3y" id="subclip12" class="clip sub-clip" data-start="89.2" data-duration="7.4">
-        <div data-hf-id="hf-vjkx" class="subline" id="sub12"><span data-hf-id="hf-gjhh" class="tx">제도가 쌓이니, <span data-hf-id="hf-sk69" class="em">모아볼 수</span> 있습니다</span><span data-hf-id="hf-nko3" class="bar"></span></div>
+      <section id="subclip12" class="clip sub-clip" data-start="107.4" data-duration="8.8">
+        <div class="subline" id="sub12"><span class="tx">2부 — <span class="em">거시</span>로: 지도를 모아, 판을 봅니다</span><span class="bar"></span></div>
       </section>
-      <section data-hf-id="hf-ziim" id="subclip13" class="clip sub-clip" data-start="97.2" data-duration="7.2">
-        <div data-hf-id="hf-urx4" class="subline" id="sub13"><span data-hf-id="hf-32j1" class="tx">모아 놓으면 보입니다 — <span data-hf-id="hf-2i9t" class="em">어디까지 왔고</span>, 무엇을 시작할 수 있는지</span><span data-hf-id="hf-n6d2" class="bar"></span></div>
+      <section id="subclip13" class="clip sub-clip sub-dark" data-start="117.0" data-duration="9.6">
+        <div class="subline" id="sub13"><span class="tx">규모가 다르면, 방법이 다릅니다 — <span class="em">(가칭) 행정 Moonshot</span></span><span class="bar"></span></div>
       </section>
-      <section data-hf-id="hf-4whv" id="subclip14" class="clip sub-clip" data-start="105.4" data-duration="10.0">
-        <div data-hf-id="hf-qtt3" class="subline" id="sub14"><span data-hf-id="hf-vtta" class="tx"><span data-hf-id="hf-jlqv" class="em">1,281</span>은 마일스톤을 하나씩 펼쳐 센 숫자입니다</span><span data-hf-id="hf-ms21" class="bar"></span></div>
+      <section id="subclip14" class="clip sub-clip" data-start="127.4" data-duration="7.4">
+        <div class="subline" id="sub14"><span class="tx">제도가 쌓이니, <span class="em">모아볼 수</span> 있습니다</span><span class="bar"></span></div>
       </section>
-      <section data-hf-id="hf-ma4a" id="subclip15" class="clip sub-clip" data-start="116.4" data-duration="5.0">
-        <div data-hf-id="hf-mvp2" class="subline" id="sub15"><span data-hf-id="hf-jw5u" class="tx">실사례 1호, <span data-hf-id="hf-0jsx" class="em">AI 여비몬</span> — 관외출장 여비 정산 스무 단계</span><span data-hf-id="hf-mdr0" class="bar"></span></div>
+      <section id="subclip15" class="clip sub-clip" data-start="135.4" data-duration="7.2">
+        <div class="subline" id="sub15"><span class="tx">모아 놓으면 보입니다 — <span class="em">어디까지 왔고</span>, 무엇을 시작할 수 있는지</span><span class="bar"></span></div>
       </section>
-      <section data-hf-id="hf-v9lw" id="subclip16" class="clip sub-clip" data-start="122.0" data-duration="7.0">
-        <div data-hf-id="hf-gpz9" class="subline" id="sub16"><span data-hf-id="hf-gc7i" class="tx">다섯 블록이 하나씩, <span data-hf-id="hf-au9j" class="em">이유와 함께</span> AI 레인으로 내려앉습니다</span><span data-hf-id="hf-lzfz" class="bar"></span></div>
+      <section id="subclip16" class="clip sub-clip sub-dark" data-start="143.6" data-duration="6.4">
+        <div class="subline" id="sub16"><span class="tx">실제 작동 화면 — <span class="em">관문 의존 지도</span> (공개 웹)</span><span class="bar"></span></div>
       </section>
-      <section data-hf-id="hf-5gui" id="subclip17" class="clip sub-clip" data-start="129.6" data-duration="7.8">
-        <div data-hf-id="hf-fybg" class="subline" id="sub17"><span data-hf-id="hf-bi5z" class="tx">반려 루프는 <span data-hf-id="hf-i0fr" class="em">소멸</span>, 결재·검토는 가벼워집니다 — <span data-hf-id="hf-otjo" class="em">20 → 14</span></span><span data-hf-id="hf-ll4y" class="bar"></span></div>
+      <section id="subclip17" class="clip sub-clip sub-dark" data-start="150.4" data-duration="8.0">
+        <div class="subline" id="sub17"><span class="tx">관문을 클릭하면 — 상·하류와 <span class="em">내부 절차 체인</span>이 열립니다</span><span class="bar"></span></div>
       </section>
-      <section data-hf-id="hf-e0xt" id="subclip18" class="clip sub-clip" data-start="138.6" data-duration="10.8">
-        <div data-hf-id="hf-c07f" class="subline" id="sub18"><span data-hf-id="hf-f1q3" class="tx">두 번째, <span data-hf-id="hf-ecy0" class="em">세종사이렌</span> — 재난 판단과 전파를 초 단위로</span><span data-hf-id="hf-l6tx" class="bar"></span></div>
+      <section id="subclip18" class="clip sub-clip sub-dark" data-start="158.8" data-duration="8.6">
+        <div class="subline" id="sub18"><span class="tx"><span class="em">워게임</span> — '풀렸다고 가정'하면, 전선이 다시 계산됩니다</span><span class="bar"></span></div>
       </section>
-      <section data-hf-id="hf-4iov" id="subclip19" class="clip sub-clip" data-start="150.6" data-duration="11.8">
-        <div data-hf-id="hf-823e" class="subline" id="sub19"><span data-hf-id="hf-lgws" class="tx">세 번째 — 도입부의 그 문제, <span data-hf-id="hf-okgx" class="em">'전임자 머릿속'</span></span><span data-hf-id="hf-ksiw" class="bar"></span></div>
+      <section id="subclip19" class="clip sub-clip" data-start="168.4" data-duration="9.4">
+        <div class="subline" id="sub19"><span class="tx">매일 아침 스스로 자라는 지도 — 관문 <span class="em">49→<span id="submiles">54</span></span> · 절차 <span class="em">1,281→<span id="subprocs">1,361</span></span></span><span class="bar"></span></div>
       </section>
-      <section data-hf-id="hf-ne6h" id="subclip20" class="clip sub-clip" data-start="163.6" data-duration="13.2">
-        <div data-hf-id="hf-pkgu" class="subline" id="sub20"><span data-hf-id="hf-2dc7" class="tx">잘 된 사례를 톺아봐야, <span data-hf-id="hf-40n5" class="em">다음 기관</span>이 어디서 시작할지 압니다</span><span data-hf-id="hf-ke7v" class="bar"></span></div>
+      <section id="subclip19b" class="clip sub-clip" data-start="178.4" data-duration="6.0">
+        <div class="subline" id="sub19b"><span class="tx">그리고 매일 아침, <span class="em">텔레그램 브리핑</span> — 기사 요약이 아니라 <span class="em">절차 진행상황</span>까지</span><span class="bar"></span></div>
       </section>
-      <section data-hf-id="hf-hs2a" id="subclip21" class="clip sub-clip" data-start="178.4" data-duration="11.0">
-        <div data-hf-id="hf-tikv" class="subline" id="sub21"><span data-hf-id="hf-e61c" class="tx">가이드라인은, <span data-hf-id="hf-ct2q" class="em">지금 연구 중</span>입니다</span><span data-hf-id="hf-q9yj" class="bar"></span></div>
+      <section id="subclip19c" class="clip sub-clip" data-start="185.4" data-duration="12.0">
+        <div class="subline" id="sub19c"><span class="tx">관문 ID로 말하고, <span class="em">상태 전환</span>을 제안합니다 — 실제 발송된 보고입니다</span><span class="bar"></span></div>
+      </section>
+      <section id="subclip20" class="clip sub-clip" data-start="198.4" data-duration="11.2">
+        <div class="subline" id="sub20"><span class="tx">2부가 문샷이라면, 3부는 대형 재개발 — <span class="em">with 한국행정연구원</span></span><span class="bar"></span></div>
+      </section>
+      <section id="subclip21" class="clip sub-clip" data-start="210.6" data-duration="5.0">
+        <div class="subline" id="sub21"><span class="tx">실사례 1호, <span class="em">AI 여비몬</span> — 관외출장 여비 정산 스무 단계</span><span class="bar"></span></div>
+      </section>
+      <section id="subclip22" class="clip sub-clip" data-start="216.2" data-duration="7.0">
+        <div class="subline" id="sub22"><span class="tx">다섯 블록이 하나씩, <span class="em">이유와 함께</span> AI 레인으로 내려앉습니다</span><span class="bar"></span></div>
+      </section>
+      <section id="subclip23" class="clip sub-clip" data-start="223.8" data-duration="7.8">
+        <div class="subline" id="sub23"><span class="tx">반려 루프는 <span class="em">소멸</span>, 결재·검토는 가벼워집니다 — <span class="em">20 → 14</span></span><span class="bar"></span></div>
+      </section>
+      <section id="subclip24" class="clip sub-clip" data-start="232.8" data-duration="10.8">
+        <div class="subline" id="sub24"><span class="tx">두 번째, <span class="em">세종사이렌</span> — 재난 판단과 전파를 초 단위로</span><span class="bar"></span></div>
+      </section>
+      <section id="subclip25" class="clip sub-clip" data-start="244.8" data-duration="11.8">
+        <div class="subline" id="sub25"><span class="tx">세 번째 — 도입부의 그 문제, <span class="em">'전임자 머릿속'</span></span><span class="bar"></span></div>
+      </section>
+      <section id="subclip26" class="clip sub-clip" data-start="257.8" data-duration="13.4">
+        <div class="subline" id="sub26"><span class="tx">그렇게 측정해야 — <span class="em">다른 기관이 따라 할 수</span> 있습니다</span><span class="bar"></span></div>
+      </section>
+      <section id="subclip27" class="clip sub-clip" data-start="274.0" data-duration="11.0">
+        <div class="subline" id="sub27"><span class="tx">가이드라인은, <span class="em">지금 연구 중</span>입니다</span><span class="bar"></span></div>
       </section>
     </div>
     <script>
@@ -862,6 +1244,57 @@
         });
       });
 
+      /* --- CH2b-2 : 몽타주 법령 원문 카드 (조문 텍스트는 laws.json 캐시 → montage.js) --- */
+      const MHL = [
+        { a: ["중소벤처기업부장관", "소상공인"],
+          b: ["경영안정과 성장을 지원", "자금ㆍ인력ㆍ판매ㆍ수출 등의 지원", "인공지능 기술 활용 지원"],
+          t: [] },
+        { a: ["시장ㆍ군수 또는 구청장", "하려는 자"],
+          b: ["승인을 받아야", "승인 여부", "통보하여야 한다"],
+          t: ["서류를 송부받은 날부터 20일"] },
+      ];
+      const escHtml = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      MONT.forEach((m, mi) => {
+        const card = document.createElement("article");
+        card.className = "mdoc"; card.id = "mdoc" + mi;
+        const eff = String(m.law.effective || "");
+        const effTxt = eff.length === 8 ? `${eff.slice(0, 4)}-${eff.slice(4, 6)}-${eff.slice(6, 8)}` : eff;
+        let html = `<div class="dt">${m.law.law}</div>` +
+          `<div class="dm">[시행 ${effTxt}] · 현행 · ${m.law.article}(${m.law.title}) 발췌</div>` +
+          `<div class="drule"></div>`;
+        m.law.paras.forEach((p, pi) => {
+          let t = escHtml(p);
+          const hl = MHL[mi];
+          hl.a.forEach((k) => { t = t.split(escHtml(k)).join(`<span class="hl hl-a">${escHtml(k)}</span>`); });
+          hl.b.forEach((k) => { t = t.split(escHtml(k)).join(`<span class="hl hl-b">${escHtml(k)}</span>`); });
+          hl.t.forEach((k) => { t = t.split(escHtml(k)).join(`<span class="hl hl-t">${escHtml(k)}</span>`); });
+          html += `<p class="dl" id="mdl-${mi}-${pi}">${pi === 0 ? `<span class="art">${m.law.article}(${m.law.title})</span> ` : ""}${t}</p>`;
+        });
+        card.innerHTML = html;
+        montHost.appendChild(card);
+      });
+
+      /* --- 수치 채움 : 전부 데이터 자산에서 (수기 금지) --- */
+      const MS = window.MEGASTATS;
+      document.getElementById("megaplus").textContent = `… 외 ${MS.institutions - 12}개 제도`;
+      document.getElementById("mst-done").textContent = `완료 ${MS.done}`;
+      document.getElementById("mst-live").textContent = `진행 중 ${MS.live}`;
+      document.getElementById("mst-open").textContent = `지금 착수 가능 ${MS.frontier}`;
+      document.getElementById("mst-amber").textContent = `조건 미정 ${MS.unknown}`;
+      document.getElementById("mst-wait").textContent = `선행 대기 ${MS.waiting}`;
+      document.getElementById("msv-gates").textContent = MS.gates;
+      document.getElementById("msv-miles").textContent = MS.milestones;
+      document.getElementById("msv-insts").textContent = MS.institutions;
+      document.getElementById("subinst").textContent = K.instCount.toLocaleString();
+      document.getElementById("submiles").textContent = MS.milestones;
+      document.getElementById("subprocs").textContent = MS.procs.toLocaleString();
+      document.getElementById("lsv-miles").textContent = MS.milestones;
+      document.getElementById("lsv-insts").textContent = K.instCount.toLocaleString();
+      document.getElementById("lsv-procs").textContent = MS.procs.toLocaleString();
+      document.querySelector("#lst0 .from").textContent = MS.loopBefore.milestones;
+      document.querySelector("#lst1 .from").textContent = MS.loopBefore.institutions.toLocaleString();
+      document.querySelector("#lst2 .from").textContent = MS.loopBefore.procs.toLocaleString();
+
       /* --- CH3 : 제도 타일 그리드 --- */
       const G_X = 90, G_Y = 130, T_W = 176, T_H = 62, T_GAP = 8;
       const gridwrap = document.getElementById("gridwrap");
@@ -895,16 +1328,6 @@
           mgrow.appendChild(a);
         }
       });
-      document.getElementById("zt").textContent = MD.milestone;
-      document.getElementById("za").textContent = `${MD.stage} 게이트 · 담당 ${MD.authority}`;
-      const zgrid = document.getElementById("zoomgrid");
-      MD.procs.forEach((p, i) => {
-        const el = document.createElement("div");
-        el.className = "zp"; el.id = "zp-" + i;
-        el.innerHTML = `<div class="n">${p.name}</div><div class="a">${p.actor}</div>`;
-        zgrid.appendChild(el);
-      });
-
       /* --- CH5 : AX 사례 보드(3건 공통 빌더) --- */
       const CB_W = 1720, CB_H = 640, CB_HEAD = 46, CB_GATE = 34, CB_LANEX = 168;
       const boards = CASES.map((c, ci) => {
@@ -974,8 +1397,10 @@
 
       /* ============ timeline ============ */
       /* 챕터 기준 시각 — 분할 렌더 시 tools/split-chapters.py 가 이 객체만 다시 씁니다 */
-      const T = { intro: 0, doc: 32.2, map: 46.4, mont: 62.4, reg: 70.8,
-                  track: 79.8, mega: 88.8, zoom: 104.8, ax1: 115.8, ax2: 138.4, ax3: 163.4, close: 177.4 };
+      const T = { open: 0, intro: 4.6, doc: 40.2, map: 54.4, mont: 70.4, reg: 89.4,
+                  auto: 98.4, part2: 107.0, moon: 116.6, mega: 127.0, demo: 143.0,
+                  loop: 168.0, brief: 185.0, part3: 198.0, ax1: 210.0, ax2: 232.6,
+                  ax3: 257.6, close: 273.0 };
 
       document.fonts.ready.then(() => {
         const tl = gsap.timeline({ paused: true });
@@ -984,10 +1409,30 @@
         /* ambient */
         tl.fromTo("#glow", { scale: 1, opacity: 1 },
           { scale: 1.12, opacity: 0.75, duration: 1.5, ease: "sine.inOut",
-            yoyo: true, repeat: 125 }, 0);
+            yoyo: true, repeat: 190 }, 0);
+
+        /* ---------- CH0 : 표지 ---------- */
+        const O = T.open;
+        tl.fromTo("#opencard .eyebrow", { y: 16, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, O + 0.3);
+        tl.fromTo("#opencard h1", { y: 26, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.7, ease: "power3.out" }, O + 0.55);
+        tl.fromTo("#opencard .lead", { y: 20, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power2.out" }, O + 1.0);
+        tl.fromTo("#opencard .foot", { autoAlpha: 0 },
+          { autoAlpha: 1, duration: 0.6 }, O + 1.5);
+        tl.to("#openwrap", { autoAlpha: 0, duration: 0.55, ease: "power2.in" }, O + 4.0);
+        tl.set("#openwrap", { autoAlpha: 0 }, O + 4.6);
+
+        /* ---------- CH1 도입 : 행정은 어렵습니다 ---------- */
+        tl.fromTo("#hard-slide h1", { scale: 1.1, autoAlpha: 0 },
+          { scale: 1, autoAlpha: 1, duration: 0.6, ease: "power3.out" }, T.intro + 0.3);
+        tl.fromTo("#hard-slide .hs", { y: 18, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, T.intro + 1.2);
+        tl.to("#hard-slide", { autoAlpha: 0, y: -24, duration: 0.55, ease: "power2.in" }, T.intro + 2.9);
 
         /* ---------- CH1 : 취지 ---------- */
-        const I = T.intro;
+        const I = T.intro + 3.4;
         tl.fromTo("#c1-ask", { y: 18, autoAlpha: 0 },
           { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, I + 0.5);
         tl.fromTo("#c1-permit", { y: 30, autoAlpha: 0 },
@@ -1081,18 +1526,35 @@
         });
         tl.to("#mapwrap", { autoAlpha: 0, y: -24, duration: 0.6, ease: "power2.in" }, M + 15.3);
 
+        /* 샘플 2·3 : 법령 원문 카드 → 구조도 (환경영향평가와 같은 2비트, 병렬 반복) */
         const MO = T.mont;
         tl.fromTo("#mont-title", { y: 20, autoAlpha: 0 },
           { y: 0, autoAlpha: 1, duration: 0.6, ease: "power3.out" }, MO + 0.3);
-        tl.fromTo("#mont0", { x: -40, autoAlpha: 0 },
-          { x: 0, autoAlpha: 1, duration: 0.7, ease: "power3.out" }, MO + 0.6);
-        tl.fromTo("#mont1", { x: 40, autoAlpha: 0 },
-          { x: 0, autoAlpha: 1, duration: 0.7, ease: "power3.out" }, MO + 1.0);
-        montNodes.forEach((el, i) => {
-          tl.fromTo(el, { scale: 0.7, autoAlpha: 0 },
-            { scale: 1, autoAlpha: 1, duration: 0.35, ease: "back.out(1.4)" }, MO + 1.3 + i * 0.035);
+        [0, 1].forEach((mi) => {
+          const S = MO + 0.8 + mi * 9.2;
+          tl.fromTo(`#mdoc${mi}`, { y: 40, autoAlpha: 0 },
+            { y: 0, autoAlpha: 1, duration: 0.7, ease: "power3.out" }, S);
+          A(`#mdoc${mi} .dl`).forEach((el, i) => {
+            tl.fromTo(el, { y: 14, autoAlpha: 0 },
+              { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, S + 0.25 + i * 0.12);
+          });
+          A(`#mdoc${mi} .hl`).forEach((el, i) => {
+            const k = el.classList.contains("hl-a") ? "hl-a" : el.classList.contains("hl-b") ? "hl-b" : "hl-t";
+            tl.fromTo(el,
+              { backgroundColor: "rgba(255,255,255,0)", boxShadow: "inset 0 0 0 rgba(0,0,0,0)" },
+              { backgroundColor: HL[k].bg, color: HL[k].fg, boxShadow: HL[k].sh,
+                duration: 0.35, ease: "power1.out" }, S + 1.4 + i * 0.1);
+          });
+          tl.fromTo(`#mont${mi}`, { x: 60, autoAlpha: 0 },
+            { x: 0, autoAlpha: 1, duration: 0.7, ease: "power3.out" }, S + 2.9);
+          A(`#mont${mi} .mnode`).forEach((el, i) => {
+            tl.fromTo(el, { scale: 0.7, autoAlpha: 0 },
+              { scale: 1, autoAlpha: 1, duration: 0.35, ease: "back.out(1.4)" }, S + 3.4 + i * 0.06);
+          });
+          tl.to(`#mdoc${mi}`, { autoAlpha: 0, y: -18, duration: 0.55, ease: "power2.in" }, S + 8.4);
+          tl.to(`#mont${mi}`, { autoAlpha: 0, y: -18, duration: 0.55, ease: "power2.in" }, S + 8.4);
         });
-        tl.to("#stage-mont", { autoAlpha: 0, duration: 0.6, ease: "power2.in" }, MO + 7.6);
+        tl.to("#stage-mont", { autoAlpha: 0, duration: 0.5, ease: "power2.in" }, MO + 18.4);
 
         /* ---------- CH3 : 등록부 ---------- */
         const R = T.reg;
@@ -1116,25 +1578,49 @@
           { y: 0, autoAlpha: 1, duration: 0.6, ease: "power3.out" }, R + 4.1);
         tl.to("#stage-reg", { autoAlpha: 0, duration: 0.6, ease: "power2.in" }, R + 8.2);
 
-        /* ---------- CH4 : 반도체 ---------- */
-        const TR = T.track;
-        tl.fromTo("#trackbox .tt", { y: 20, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power3.out" }, TR + 0.3);
-        tl.fromTo("#trackbox .ts", { y: 16, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, TR + 0.6);
-        A("#trk-a .tstep, #trk-a .tarr, #trk-a .tlab").forEach((el, i) => {
-          tl.fromTo(el, { x: -24, autoAlpha: 0 },
-            { x: 0, autoAlpha: 1, duration: 0.45, ease: "power2.out" }, TR + 1.0 + i * 0.16);
+        /* ---------- CH3b : 자동화된 증가 ---------- */
+        const AU = T.auto;
+        tl.fromTo("#autobox .at", { y: 20, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power3.out" }, AU + 0.3);
+        ["#as0", "#as1", "#as2", "#as3"].forEach((id, i) => {
+          tl.fromTo(id, { y: 22, autoAlpha: 0 },
+            { y: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, AU + 1.0 + i * 0.7);
         });
-        A("#trk-b .tstep, #trk-b .tarr, #trk-b .tlab").forEach((el, i) => {
-          tl.fromTo(el, { x: -24, autoAlpha: 0 },
-            { x: 0, autoAlpha: 1, duration: 0.45, ease: "power2.out" }, TR + 2.4 + i * 0.16);
+        ["#aa0", "#aa1", "#aa2"].forEach((id, i) => {
+          tl.fromTo(id, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3 }, AU + 1.5 + i * 0.7);
         });
-        tl.fromTo("#trk-join .jn", { scale: 0.8, autoAlpha: 0 },
-          { scale: 1, autoAlpha: 1, duration: 0.6, ease: "back.out(1.6)" }, TR + 4.0);
-        tl.fromTo("#trk-join .jt", { x: 20, autoAlpha: 0 },
-          { x: 0, autoAlpha: 1, duration: 0.55, ease: "power2.out" }, TR + 4.4);
-        tl.to("#stage-track", { autoAlpha: 0, y: -20, duration: 0.6, ease: "power2.in" }, TR + 8.2);
+        tl.fromTo("#autonote", { y: 16, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power2.out" }, AU + 4.4);
+        tl.to("#stage-auto", { autoAlpha: 0, y: -20, duration: 0.6, ease: "power2.in" }, AU + 7.8);
+
+        /* ---------- CH4a : 2부 시작 ---------- */
+        const P2 = T.part2;
+        tl.fromTo("#p2box .pk", { y: 14, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, P2 + 0.3);
+        tl.fromTo("#p2box h2", { y: 22, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.65, ease: "power3.out" }, P2 + 0.55);
+        ["#p2c0", "#p2c1", "#p2c2"].forEach((id, i) => {
+          tl.fromTo(id, { y: 26, autoAlpha: 0 },
+            { y: 0, autoAlpha: 1, duration: 0.55, ease: "power3.out" }, P2 + 1.2 + i * 0.5);
+        });
+        tl.fromTo("#p2c1", { scale: 1 }, { scale: 1.04, duration: 0.4, ease: "power1.inOut",
+          yoyo: true, repeat: 1 }, P2 + 3.4);
+        tl.to("#stage-part2", { autoAlpha: 0, y: -20, duration: 0.6, ease: "power2.in" }, P2 + 8.8);
+
+        /* ---------- CH4b : 행정 Moonshot ---------- */
+        const MN = T.moon;
+        tl.fromTo("#moonwrap", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, MN);
+        tl.fromTo("#moonbox .mk", { y: 14, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, MN + 0.5);
+        ["#mr0", "#mr1", "#mr2"].forEach((id, i) => {
+          tl.fromTo(id, { x: -26, autoAlpha: 0 },
+            { x: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, MN + 1.1 + i * 0.9);
+        });
+        tl.fromTo("#moonq", { scale: 0.9, autoAlpha: 0 },
+          { scale: 1, autoAlpha: 1, duration: 0.8, ease: "back.out(1.3)" }, MN + 4.4);
+        tl.fromTo("#moontag", { y: 16, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.55, ease: "power2.out" }, MN + 5.6);
+        tl.to("#stage-moon", { autoAlpha: 0, duration: 0.7, ease: "power2.in" }, MN + 9.6);
 
         const MG2 = T.mega;
         tl.fromTo("#megapanel", { y: 36, autoAlpha: 0 },
@@ -1147,7 +1633,7 @@
         tl.fromTo("#megapanel .plus", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 }, MG2 + 2.5);
         const mstate = { v: 1 };
         const megaEl = document.getElementById("megacounter");
-        tl.to(mstate, { v: 1281, duration: 2.2, ease: "power2.out",
+        tl.to(mstate, { v: MS.procs, duration: 2.2, ease: "power2.out",
           onUpdate: () => { megaEl.textContent = Math.round(mstate.v).toLocaleString(); } }, MG2 + 2.2);
         tl.fromTo("#megacounter", { scale: 0.7, autoAlpha: 0 },
           { scale: 1, autoAlpha: 1, duration: 2.2, ease: "power2.out" }, MG2 + 2.2);
@@ -1174,24 +1660,74 @@
         });
         tl.to("#megawrap", { autoAlpha: 0, y: -24, duration: 0.7, ease: "power2.in" }, MG2 + 15.2);
 
-        const Z = T.zoom;
-        tl.fromTo("#zk", { y: 16, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, Z + 0.3);
-        tl.fromTo("#zt", { y: 20, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power3.out" }, Z + 0.6);
-        tl.fromTo("#za", { y: 14, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, Z + 1.0);
-        A("#zoomgrid .zp").forEach((el, i) => {
-          tl.fromTo(el, { y: 16, autoAlpha: 0, scale: 0.94 },
-            { y: 0, autoAlpha: 1, scale: 1, duration: 0.45, ease: "back.out(1.4)" }, Z + 1.4 + i * 0.09);
+        /* ---------- CH4c : 실사이트 시연 (녹화 클립은 data-start 로 프레임워크가 재생) ---------- */
+        const DM = T.demo;
+        tl.fromTo("#demotag", { y: -14, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power2.out" }, DM + 0.8);
+        tl.to("#demotag", { autoAlpha: 0, duration: 0.5 }, DM + 23.6);
+
+        /* ---------- CH4d : 워룸 루프 ---------- */
+        const LP = T.loop;
+        tl.fromTo("#loopbox .lk", { y: 14, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, LP + 0.3);
+        tl.fromTo("#loopbox h2", { y: 22, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.65, ease: "power3.out" }, LP + 0.55);
+        ["#ls0", "#ls1", "#ls2", "#ls3", "#ls4", "#ls5"].forEach((id, i) => {
+          tl.fromTo(id, { y: 22, autoAlpha: 0 },
+            { y: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, LP + 1.2 + i * 0.55);
         });
-        tl.fromTo("#zoomfoot", { y: 16, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power2.out" }, Z + 3.4);
-        tl.to("#zoomwrap", { autoAlpha: 0, y: -22, duration: 0.6, ease: "power2.in" }, Z + 10.2);
+        ["#la0", "#la1", "#la2", "#la3", "#la4"].forEach((id, i) => {
+          tl.fromTo(id, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3 }, LP + 1.6 + i * 0.55);
+        });
+        tl.to("#ls5", { scale: 1.045, duration: 0.35, ease: "power1.inOut",
+          yoyo: true, repeat: 1 }, LP + 4.0);
+        tl.fromTo("#loopback", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, LP + 5.0);
+        ["#lst0", "#lst1", "#lst2"].forEach((id, i) => {
+          tl.fromTo(id, { y: 18, autoAlpha: 0, scale: 0.94 },
+            { y: 0, autoAlpha: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, LP + 5.8 + i * 0.35);
+        });
+        tl.to("#stage-loop", { autoAlpha: 0, y: -20, duration: 0.6, ease: "power2.in" }, LP + 16.0);
+
+        /* ---------- CH4d-2 : 텔레그램 브리핑 예시 ---------- */
+        const BR = T.brief;
+        tl.fromTo("#briefleft .bk", { y: 14, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, BR + 0.3);
+        tl.fromTo("#briefleft h2", { y: 22, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.65, ease: "power3.out" }, BR + 0.55);
+        tl.fromTo("#briefphone", { y: 40, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.8, ease: "power3.out" }, BR + 1.0);
+        A("#briefphone .ph-title, #briefphone .ph-sec, #briefphone .ph-l").forEach((el, i) => {
+          tl.fromTo(el, { y: 12, autoAlpha: 0 },
+            { y: 0, autoAlpha: 1, duration: 0.4, ease: "power2.out" }, BR + 1.6 + i * 0.42);
+        });
+        ["#bp0", "#bp1", "#bp2"].forEach((id, i) => {
+          tl.fromTo(id, { x: -22, autoAlpha: 0 },
+            { x: 0, autoAlpha: 1, duration: 0.55, ease: "power3.out" }, BR + 3.0 + i * 1.5);
+        });
+        tl.to("#stage-brief", { autoAlpha: 0, y: -20, duration: 0.6, ease: "power2.in" }, BR + 12.0);
+        tl.fromTo("#sub19c .tx", { y: 22, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.55, ease: "power3.out" }, BR + 0.45);
+        tl.fromTo("#sub19c .bar", { scaleX: 0 },
+          { scaleX: 1, duration: 0.5, ease: "power2.inOut" }, BR + 0.65);
+
+        /* ---------- CH4e : 질문의 전환 ---------- */
+        const P3 = T.part3;
+        tl.fromTo("#p3box .pk", { y: 14, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, P3 + 0.3);
+        tl.fromTo("#p3q1", { y: 20, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power3.out" }, P3 + 1.0);
+        tl.fromTo("#p3no", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 }, P3 + 2.4);
+        tl.to("#p3q1", { autoAlpha: 0.35, duration: 0.5 }, P3 + 4.6);
+        tl.to("#p3no", { autoAlpha: 0.35, duration: 0.5 }, P3 + 4.6);
+        tl.fromTo("#p3q2", { y: 24, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.7, ease: "back.out(1.3)" }, P3 + 4.9);
+        tl.fromTo("#p3sub", { y: 16, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.55, ease: "power2.out" }, P3 + 6.4);
+        tl.to("#stage-part3", { autoAlpha: 0, y: -20, duration: 0.6, ease: "power2.in" }, P3 + 11.2);
 
         /* ---------- CH5 : AX 사례 3건 ---------- */
         const X1 = T.ax1, X2 = T.ax2, X3 = T.ax3;
-        [[1, X1], [2, X2], [3, X3]].forEach(([n, at]) => {
+        [[1, X1], [2, X2]].forEach(([n, at]) => {
           tl.fromTo(`#axhead${n}`, { y: 24, autoAlpha: 0 },
             { y: 0, autoAlpha: 1, duration: 0.7, ease: "power3.out" }, at + 0.3);
         });
@@ -1261,17 +1797,17 @@
         const WHY = X3 + 0.2;
         tl.fromTo("#w1", { y: 20, autoAlpha: 0 },
           { y: 0, autoAlpha: 1, duration: 0.6, ease: "power3.out" }, WHY + 0.2);
-        tl.fromTo("#w2", { y: 22, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.6, ease: "back.out(1.3)" }, WHY + 1.4);
+        tl.fromTo("#drucker", { y: 20, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.6, ease: "back.out(1.3)" }, WHY + 1.3);
         tl.fromTo("#w3", { y: 24, autoAlpha: 0 },
           { y: 0, autoAlpha: 1, duration: 0.7, ease: "power3.out" }, WHY + 3.2);
         A("#whysteps .wstep").forEach((el, i) => {
           tl.fromTo(el, { y: 22, autoAlpha: 0 },
-            { y: 0, autoAlpha: 1, duration: 0.55, ease: "power3.out" }, WHY + 5.0 + i * 0.6);
+            { y: 0, autoAlpha: 1, duration: 0.55, ease: "power3.out" }, WHY + 5.4 + i * 0.6);
         });
         tl.fromTo("#w4", { y: 18, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power2.out" }, WHY + 7.4);
-        tl.to("#stage-ax3", { autoAlpha: 0, duration: 0.7, ease: "power2.in" }, WHY + 13.0);
+          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power2.out" }, WHY + 8.4);
+        tl.to("#stage-ax3", { autoAlpha: 0, duration: 0.7, ease: "power2.in" }, WHY + 14.4);
 
         /* ---------- CH6 : 클로징 ---------- */
         const C = T.close;
@@ -1289,15 +1825,21 @@
           { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, C + 2.7);
 
         /* ---------- subtitles ---------- */
-        const SUBS = [[1, 0.9], [2, 6.2], [3, 11.6], [4, 18.4], [5, 25.6], [6, 33.0], [7, 38.6],
-          [8, 46.8], [9, 62.8], [10, 71.2], [11, 80.2], [12, 89.2], [13, 97.2], [14, 105.4],
-          [15, 116.4], [16, 122.0], [17, 129.6], [18, 138.6], [19, 150.6], [20, 163.6], [21, 178.4]];
+        const SUBS = [[1, 8.9], [2, 14.2], [3, 19.6], [4, 26.4], [5, 41.0], [6, 46.6],
+          [7, 54.8], [8, 71.0], [9, 79.8], [10, 89.8], [11, 99.0], [12, 107.4], [13, 117.0],
+          [14, 127.4], [15, 135.4], [16, 143.6], [17, 150.4], [18, 158.8], [19, 168.4],
+          [20, 198.4], [21, 210.6], [22, 216.2], [23, 223.8], [24, 232.8], [25, 244.8],
+          [26, 257.8], [27, 274.0]];
         SUBS.forEach(([n, at]) => {
           tl.fromTo(`#sub${n} .tx`, { y: 22, autoAlpha: 0 },
             { y: 0, autoAlpha: 1, duration: 0.55, ease: "power3.out" }, at + 0.05);
           tl.fromTo(`#sub${n} .bar`, { scaleX: 0 },
             { scaleX: 1, duration: 0.5, ease: "power2.inOut" }, at + 0.25);
         });
+        tl.fromTo("#sub19b .tx", { y: 22, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.55, ease: "power3.out" }, LP + 10.45);
+        tl.fromTo("#sub19b .bar", { scaleX: 0 },
+          { scaleX: 1, duration: 0.5, ease: "power2.inOut" }, LP + 10.65);
 
         window.__timelines["main"] = tl;
         if (window.__hfForceTimelineRebind) window.__hfForceTimelineRebind();
