@@ -1,0 +1,1514 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "arctic-route",
+  "name": "북극항로 활용 촉진·연관산업 육성",
+  "projectFamily": "national-strategy",
+  "asOfDate": "2026-08-29",
+  "status": "planning",
+  "summary": "북극 해빙으로 열리는 신항로를 국가 전략으로 다루기 위한 절차 지도. 2026-06-16 공포·2026-12-17 시행 특별법이 국무총리를 위원장으로 하는 북극항로위원회를 두고 기본계획 심의를 법정 요건으로 삼는다. 법제·거버넌스·계획에서 거점항만·배후단지·연관산업·데이터플랫폼·시범운항까지의 관문을 잇는다.",
+  "scope": {
+    "coverage": "전국 — 부산·울산·경남 등 거점항만 배후권",
+    "vision": "북극항로 상업운항 대응 체계와 연관산업 기반 구축",
+    "planHorizon": "2026~2031(기본계획 5년 단위)",
+    "legalStatus": "특별법 공포(2026-06-16)·시행 예정(2026-12-17), 시행령 입법예고 중(2026-08-11~09-21)"
+  },
+  "parameters": {
+    "decreeEnacted": {
+      "value": null,
+      "status": "unknown",
+      "reason": "시행령이 입법예고 단계(2026-08-11~09-21)로 제정·공포 시점과 세부 기준이 미확정"
+    },
+    "supportCenterOperator": {
+      "value": null,
+      "status": "unknown",
+      "reason": "북극항로종합지원센터 지정 대상 법인·단체가 미정(지정기준이 시행령 위임 사항)"
+    }
+  },
+  "rules": [
+    {
+      "id": "RULE_ARCTIC_DECREE",
+      "type": "boolean",
+      "parameter": "decreeEnacted",
+      "default": null,
+      "description": "시행령이 제정되면 위원회 구성·센터 지정 경로가 활성화된다."
+    },
+    {
+      "id": "RULE_ARCTIC_CENTER",
+      "type": "boolean",
+      "parameter": "supportCenterOperator",
+      "default": null,
+      "description": "종합지원센터 지정 주체가 정해지면 데이터플랫폼 구축 경로가 특정된다."
+    }
+  ],
+  "sources": [
+    {
+      "id": "SRC_ARCTIC_ACT",
+      "type": "statute",
+      "title": "북극항로 활용 촉진 및 연관산업 육성에 관한 특별법",
+      "note": "공포 2026-06-16, 시행 2026-12-17, 법령ID 015151 · 국회 통과 2026-05-08. 소관 해양수산부",
+      "url": "https://law.go.kr/법령/북극항로활용촉진및연관산업육성에관한특별법"
+    },
+    {
+      "id": "SRC_ARCTIC_DECREE_NOTICE",
+      "type": "official-policy",
+      "title": "북극항로 특별법 시행령 제정령안 입법예고(해양수산부)",
+      "publishedOn": "2026-08-11",
+      "note": "입법예고 2026-08-11~09-21. 위원회·실무위 운영, 기본계획·실행계획 절차, 실태조사 범위, 종합지원센터 지정기준·운영, 연관산업 범위, 전문인력 양성 세부내용",
+      "url": "https://opinion.lawmaking.go.kr/"
+    },
+    {
+      "id": "SRC_ARCTIC_NEWS",
+      "type": "news",
+      "title": "북극항로특별법 시행령 입법예고…12월 시행 앞두고 세부기준 마련(파이낸셜뉴스)",
+      "publishedOn": "2026-08-10",
+      "url": "https://www.fnnews.com/news/202608101107583920"
+    }
+  ],
+  "stages": [
+    {
+      "id": "G0",
+      "label": "법제 기반"
+    },
+    {
+      "id": "G1",
+      "label": "거버넌스"
+    },
+    {
+      "id": "G2",
+      "label": "계획 수립"
+    },
+    {
+      "id": "G3",
+      "label": "지역 전략"
+    },
+    {
+      "id": "G4",
+      "label": "거점 인프라"
+    },
+    {
+      "id": "G5",
+      "label": "산업·기술"
+    },
+    {
+      "id": "G6",
+      "label": "운항 실증"
+    },
+    {
+      "id": "G7",
+      "label": "국제협력·안전"
+    }
+  ],
+  "actors": [
+    {
+      "id": "mof",
+      "code": "A01",
+      "label": "해양수산부",
+      "shortLabel": "해수부",
+      "mandate": "특별법 주관·기본계획 수립·센터 지정·간사위원"
+    },
+    {
+      "id": "arctic-committee",
+      "code": "A02",
+      "label": "북극항로위원회",
+      "shortLabel": "북극위",
+      "mandate": "국무총리 소속, 기본계획·국가전략 심의·의결"
+    },
+    {
+      "id": "arctic-working",
+      "code": "A03",
+      "label": "북극항로실무위원회",
+      "shortLabel": "실무위",
+      "mandate": "해수부차관 위원장, 위임사항 심의·의결"
+    },
+    {
+      "id": "central-ministries",
+      "code": "A04",
+      "label": "관계 중앙행정기관",
+      "shortLabel": "관계부처",
+      "mandate": "의견 제출·소관 시책 추진"
+    },
+    {
+      "id": "local-gov",
+      "code": "A05",
+      "label": "지방자치단체",
+      "shortLabel": "지자체",
+      "mandate": "육성전략 시행 시책 추진"
+    },
+    {
+      "id": "assembly",
+      "code": "A06",
+      "label": "국회",
+      "shortLabel": "국회",
+      "mandate": "특별법 제·개정, 기본계획 제출 접수"
+    },
+    {
+      "id": "support-center",
+      "code": "A07",
+      "label": "북극항로종합지원센터",
+      "shortLabel": "지원센터",
+      "mandate": "조사·연구, 데이터·정보플랫폼, 항해안전 지원"
+    },
+    {
+      "id": "port-authority",
+      "code": "A08",
+      "label": "항만관리청·항만공사",
+      "shortLabel": "항만",
+      "mandate": "항만 개발·재개발, 배후단지 조성"
+    },
+    {
+      "id": "operators",
+      "code": "A09",
+      "label": "북극항로사업자",
+      "shortLabel": "사업자",
+      "mandate": "시범·상업 운항, 재정·금융 지원 대상"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "N01",
+      "name": "북극항로 특별법 공포",
+      "stage": "G0",
+      "authority": "국회·정부",
+      "leadActor": "assembly",
+      "actorRoles": {
+        "lead": [
+          "국회"
+        ],
+        "consult": [],
+        "decision": [
+          "국회"
+        ]
+      },
+      "classification": "legal_gate",
+      "status": "completed",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [],
+      "produces": [
+        "arctic.special_act_promulgated"
+      ],
+      "templateRefs": [
+        {
+          "institution": "arctic-route-promotion"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_ACT",
+        "SRC_ARCTIC_NEWS"
+      ],
+      "actual": {
+        "completedOn": "2026-06-16"
+      },
+      "note": "국회 통과 2026-05-08, 공포 2026-06-16, 시행 2026-12-17"
+    },
+    {
+      "id": "N02",
+      "name": "시행령 제정 — 대통령령 위임사항 확정",
+      "stage": "G0",
+      "authority": "해양수산부·법제처·국무회의",
+      "leadActor": "mof",
+      "actorRoles": {
+        "lead": [
+          "해양수산부"
+        ],
+        "consult": [
+          "법제처",
+          "관계 중앙행정기관"
+        ],
+        "decision": [
+          "국무회의",
+          "해양수산부장관"
+        ]
+      },
+      "classification": "legal_gate",
+      "status": "active",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "arctic.special_act_promulgated",
+          "kind": "legal",
+          "strength": "hard",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "북극항로 활용 촉진 및 연관산업 육성에 관한 특별법 제8조제10항·제9조제3항·제5조제7항·제6조제3항·제10조제2항·제14조제4항 — 위원회 구성·운영, 기본계획 절차, 실태조사 범위, 추진본부, 센터 지정이 모두 대통령령 위임 사항"
+        }
+      ],
+      "produces": [
+        "arctic.decree_enacted"
+      ],
+      "templateRefs": [
+        {
+          "institution": "arctic-route-promotion"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_ACT",
+        "SRC_ARCTIC_DECREE_NOTICE"
+      ],
+      "note": "2026-08-11~09-21 입법예고 중. 위원회·실무위 운영방식, 기본계획·실행계획 절차, 실태조사 범위, 종합지원센터 지정기준·운영, 연관산업 범위, 전문인력 양성 세부내용을 정한다"
+    },
+    {
+      "id": "N03",
+      "name": "특별법 시행",
+      "stage": "G0",
+      "authority": "해양수산부",
+      "leadActor": "mof",
+      "actorRoles": {
+        "lead": [
+          "해양수산부"
+        ],
+        "consult": [],
+        "decision": [
+          "해양수산부장관"
+        ]
+      },
+      "classification": "legal_gate",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "arctic.special_act_promulgated",
+          "kind": "legal",
+          "strength": "hard",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "부칙 — 공포 후 6개월이 경과한 날부터 시행"
+        }
+      ],
+      "produces": [
+        "arctic.act_in_force"
+      ],
+      "templateRefs": [
+        {
+          "institution": "arctic-route-promotion"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_ACT"
+      ],
+      "note": "시행일 2026-12-17"
+    },
+    {
+      "id": "N04",
+      "name": "북극항로위원회 구성",
+      "stage": "G1",
+      "authority": "국무총리 소속",
+      "leadActor": "arctic-committee",
+      "actorRoles": {
+        "lead": [
+          "국무총리"
+        ],
+        "consult": [
+          "관계 중앙행정기관",
+          "지방시대위원회"
+        ],
+        "decision": [
+          "국무총리"
+        ]
+      },
+      "classification": "governance",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "arctic.act_in_force",
+          "kind": "legal",
+          "strength": "hard",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "북극항로 활용 촉진 및 연관산업 육성에 관한 특별법 제8조제1항·제3항 — 국무총리 소속으로 위원회를 두고 위원장은 국무총리가 된다"
+        },
+        {
+          "artifact": "arctic.decree_enacted",
+          "kind": "legal",
+          "strength": "hard",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "북극항로 활용 촉진 및 연관산업 육성에 관한 특별법 제8조제10항 — 구성·운영은 대통령령"
+        }
+      ],
+      "produces": [
+        "arctic.committee_constituted"
+      ],
+      "templateRefs": [
+        {
+          "institution": "arctic-route-promotion"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_ACT"
+      ],
+      "note": "위원장 국무총리, 간사위원 해양수산부장관. 위원은 18개 부처 장관·기관장(지방시대위원장 포함)과 위촉위원. 법 시행일부터 5년 존속(제8조제7항)"
+    },
+    {
+      "id": "N05",
+      "name": "북극항로실무위원회 구성",
+      "stage": "G1",
+      "authority": "해양수산부차관",
+      "leadActor": "arctic-working",
+      "actorRoles": {
+        "lead": [
+          "해양수산부차관"
+        ],
+        "consult": [],
+        "decision": [
+          "북극항로위원회"
+        ]
+      },
+      "classification": "governance",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "arctic.committee_constituted",
+          "kind": "legal",
+          "strength": "hard",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "북극항로 활용 촉진 및 연관산업 육성에 관한 특별법 제9조제1항 — 위원회에 해양수산부차관을 위원장으로 하는 실무위원회를 둔다"
+        }
+      ],
+      "produces": [
+        "arctic.working_committee_ready"
+      ],
+      "templateRefs": [
+        {
+          "institution": "arctic-route-promotion"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_ACT"
+      ],
+      "note": "실무위원회 심의·의결 사항은 위원회가 심의·의결한 것으로 본다(제9조제2항)"
+    },
+    {
+      "id": "N06",
+      "name": "북극항로추진본부 설치",
+      "stage": "G1",
+      "authority": "해양수산부",
+      "leadActor": "mof",
+      "actorRoles": {
+        "lead": [
+          "해양수산부"
+        ],
+        "consult": [],
+        "decision": [
+          "해양수산부장관"
+        ]
+      },
+      "classification": "governance",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "arctic.act_in_force",
+          "kind": "legal",
+          "strength": "hard",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "북극항로 활용 촉진 및 연관산업 육성에 관한 특별법 제10조제1항 — 위원회 사무 지원과 관련 사무를 담당하기 위하여 해양수산부에 추진본부를 둔다"
+        }
+      ],
+      "produces": [
+        "arctic.task_force_ready"
+      ],
+      "templateRefs": [
+        {
+          "institution": "arctic-route-promotion"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_ACT"
+      ]
+    },
+    {
+      "id": "N07",
+      "name": "연관산업 실태조사",
+      "stage": "G2",
+      "authority": "해양수산부",
+      "leadActor": "mof",
+      "actorRoles": {
+        "lead": [
+          "해양수산부"
+        ],
+        "consult": [
+          "관계 중앙행정기관",
+          "지방자치단체",
+          "공공기관"
+        ],
+        "decision": [
+          "해양수산부장관"
+        ]
+      },
+      "classification": "plan",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "arctic.act_in_force",
+          "kind": "legal",
+          "strength": "hard",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "북극항로 활용 촉진 및 연관산업 육성에 관한 특별법 제6조제1항 — 기본계획·실행계획의 효율적 수립·시행을 위해 실태조사를 실시할 수 있다"
+        }
+      ],
+      "produces": [
+        "arctic.survey_done"
+      ],
+      "templateRefs": [
+        {
+          "institution": "arctic-route-promotion"
+        },
+        {
+          "institution": "marine-survey-information",
+          "mappingStatus": "candidate"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_ACT"
+      ],
+      "note": "자료제출 요청을 받은 자는 정당한 사유가 없으면 따라야 한다(제6조제2항)"
+    },
+    {
+      "id": "N08",
+      "name": "북극항로 기본계획 수립 — 의견청취·위원회 심의",
+      "stage": "G2",
+      "authority": "해양수산부·북극항로위원회",
+      "leadActor": "mof",
+      "actorRoles": {
+        "lead": [
+          "해양수산부"
+        ],
+        "consult": [
+          "관계 중앙행정기관",
+          "지방자치단체"
+        ],
+        "decision": [
+          "북극항로위원회"
+        ]
+      },
+      "classification": "plan",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "arctic.committee_constituted",
+          "kind": "legal",
+          "strength": "hard",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "북극항로 활용 촉진 및 연관산업 육성에 관한 특별법 제5조제2항 — 관계 중앙행정기관의 장 및 지방자치단체의 장의 의견을 들은 후 북극항로위원회의 심의를 거쳐야 한다"
+        },
+        {
+          "artifact": "arctic.survey_done",
+          "kind": "technical",
+          "strength": "soft",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "북극항로 활용 촉진 및 연관산업 육성에 관한 특별법 제6조제1항 — 실태조사는 기본계획 수립을 위한 것이나 법정 선행요건으로 규정되지는 않음"
+        }
+      ],
+      "produces": [
+        "arctic.master_plan_adopted"
+      ],
+      "templateRefs": [
+        {
+          "institution": "arctic-route-promotion"
+        },
+        {
+          "institution": "polar-activity-promotion",
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "maritime-safety-master-plan",
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "ocean-fisheries-master-plan",
+          "mappingStatus": "candidate"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_ACT"
+      ],
+      "note": "5년마다 수립. 13개 필수 포함사항(항로 현황·연관산업·도시개발·교통망·항만배후단지·인력·R&D·국제협력·재원·친환경 운항체제·수색구조 인프라 등, 제5조제4항)"
+    },
+    {
+      "id": "N09",
+      "name": "기본계획 국회 소관 상임위원회 제출",
+      "stage": "G2",
+      "authority": "국회",
+      "leadActor": "assembly",
+      "actorRoles": {
+        "lead": [
+          "해양수산부"
+        ],
+        "consult": [],
+        "decision": [
+          "국회 소관 상임위원회"
+        ]
+      },
+      "classification": "policy",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "arctic.master_plan_adopted",
+          "kind": "legal",
+          "strength": "hard",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "북극항로 활용 촉진 및 연관산업 육성에 관한 특별법 제5조제3항 — 수립·변경한 때에는 지체 없이 국회 소관 상임위원회에 제출하여야 한다"
+        }
+      ],
+      "produces": [
+        "arctic.plan_reported"
+      ],
+      "templateRefs": [
+        {
+          "institution": "arctic-route-promotion"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_ACT"
+      ]
+    },
+    {
+      "id": "N10",
+      "name": "연도별 실행계획 수립·시행",
+      "stage": "G2",
+      "authority": "해양수산부",
+      "leadActor": "mof",
+      "actorRoles": {
+        "lead": [
+          "해양수산부"
+        ],
+        "consult": [],
+        "decision": [
+          "해양수산부장관"
+        ]
+      },
+      "classification": "plan",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "arctic.master_plan_adopted",
+          "kind": "legal",
+          "strength": "hard",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "북극항로 활용 촉진 및 연관산업 육성에 관한 특별법 제5조제5항 — 기본계획에 따른 연도별 실행계획을 수립·시행하여야 한다"
+        }
+      ],
+      "produces": [
+        "arctic.action_plan_ready"
+      ],
+      "templateRefs": [
+        {
+          "institution": "arctic-route-promotion"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_ACT"
+      ]
+    },
+    {
+      "id": "N11",
+      "name": "지역별 북극항로 육성전략 수립",
+      "stage": "G3",
+      "authority": "해양수산부·관할 지자체",
+      "leadActor": "mof",
+      "actorRoles": {
+        "lead": [
+          "해양수산부"
+        ],
+        "consult": [
+          "관계 중앙행정기관",
+          "관할 지방자치단체"
+        ],
+        "decision": [
+          "해양수산부장관"
+        ]
+      },
+      "classification": "plan",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "arctic.master_plan_adopted",
+          "kind": "legal",
+          "strength": "hard",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "북극항로 활용 촉진 및 연관산업 육성에 관한 특별법 제7조제1항 — 기본계획에 따라 지역별 육성전략을 수립할 수 있으며, 미리 관계 중앙행정기관의 장 및 관할 지자체의 장과 협의하여야 한다"
+        }
+      ],
+      "produces": [
+        "arctic.regional_strategy_ready"
+      ],
+      "templateRefs": [
+        {
+          "institution": "arctic-route-promotion"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_ACT"
+      ]
+    },
+    {
+      "id": "N12",
+      "name": "지자체 시책 추진·국비 지원",
+      "stage": "G3",
+      "authority": "지방자치단체",
+      "leadActor": "local-gov",
+      "actorRoles": {
+        "lead": [
+          "지방자치단체"
+        ],
+        "consult": [
+          "해양수산부"
+        ],
+        "decision": [
+          "지방자치단체의 장"
+        ]
+      },
+      "classification": "delivery",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "arctic.regional_strategy_ready",
+          "kind": "policy",
+          "strength": "hard",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "북극항로 활용 촉진 및 연관산업 육성에 관한 특별법 제7조제3항 — 지방자치단체의 장은 육성전략의 시행에 필요한 시책을 추진할 수 있고 국가는 비용의 일부를 지원할 수 있다"
+        }
+      ],
+      "produces": [
+        "arctic.local_measures_running"
+      ],
+      "templateRefs": [
+        {
+          "institution": "arctic-route-promotion"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_ACT"
+      ]
+    },
+    {
+      "id": "N13",
+      "name": "거점항만 개발·재개발",
+      "stage": "G4",
+      "authority": "항만관리청·항만공사",
+      "leadActor": "port-authority",
+      "actorRoles": {
+        "lead": [
+          "해양수산부"
+        ],
+        "consult": [
+          "항만공사",
+          "관할 지방자치단체"
+        ],
+        "decision": [
+          "해양수산부장관"
+        ]
+      },
+      "classification": "legal_gate",
+      "status": "planned",
+      "confidence": "modeled",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "arctic.regional_strategy_ready",
+          "kind": "policy",
+          "strength": "soft",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "기본계획 제5조제4항제6호가 항만배후단지·물류단지·산업단지 조성을 포함사항으로 정하나, 항만 개발 자체는 항만법 절차를 탄다"
+        }
+      ],
+      "produces": [
+        "arctic.port_capacity_ready"
+      ],
+      "templateRefs": [
+        {
+          "institution": "port-development-redevelopment"
+        },
+        {
+          "institution": "port-transport-business-registration",
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "ship-entry-departure-report",
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "pilotage-license-service",
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "marine-spatial-planning",
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "navigation-aids-management",
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "fishery-license-permit",
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "aquaculture-license",
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "fishery-resource-management",
+          "mappingStatus": "candidate"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_ACT"
+      ],
+      "note": "항만 개발·재개발은 항만법 체계의 독립 절차 — 이 특별법은 계획에 포함시킬 뿐 인허가를 대체하지 않는다"
+    },
+    {
+      "id": "N14",
+      "name": "항만배후단지·복합물류단지 조성",
+      "stage": "G4",
+      "authority": "해양수산부·국토교통부",
+      "leadActor": "port-authority",
+      "actorRoles": {
+        "lead": [
+          "해양수산부",
+          "국토교통부"
+        ],
+        "consult": [],
+        "decision": [
+          "해양수산부장관",
+          "국토교통부장관"
+        ]
+      },
+      "classification": "legal_gate",
+      "status": "planned",
+      "confidence": "modeled",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "arctic.port_capacity_ready",
+          "kind": "technical",
+          "strength": "hard",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "항만 시설이 확보돼야 배후단지가 기능한다 — 물류시설법·항만법 절차"
+        }
+      ],
+      "produces": [
+        "arctic.logistics_hub_ready"
+      ],
+      "templateRefs": [
+        {
+          "institution": "complex-logistics-hub-development"
+        },
+        {
+          "institution": "free-trade-zone-designation",
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "national-logistics-plan-certification",
+          "mappingStatus": "candidate"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_ACT"
+      ]
+    },
+    {
+      "id": "N15",
+      "name": "연관산업 단지 지정·조성",
+      "stage": "G4",
+      "authority": "산업통상부·관할 지자체",
+      "leadActor": "local-gov",
+      "actorRoles": {
+        "lead": [
+          "산업통상부",
+          "지방자치단체"
+        ],
+        "consult": [],
+        "decision": [
+          "산업단지 지정권자"
+        ]
+      },
+      "classification": "legal_gate",
+      "status": "planned",
+      "confidence": "modeled",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "arctic.regional_strategy_ready",
+          "kind": "policy",
+          "strength": "soft",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "육성전략이 입지를 제시하나 산업단지 지정은 산업입지법 절차"
+        }
+      ],
+      "produces": [
+        "arctic.industrial_site_ready"
+      ],
+      "templateRefs": [
+        {
+          "institution": "industrial-complex-development"
+        },
+        {
+          "institution": "engineering-industry-promotion",
+          "mappingStatus": "candidate"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_ACT"
+      ],
+      "note": "지정권자는 지정 경로 확정 전까지 특정하지 않는다"
+    },
+    {
+      "id": "N16",
+      "name": "배후 교통망 확충",
+      "stage": "G4",
+      "authority": "국토교통부",
+      "leadActor": "central-ministries",
+      "actorRoles": {
+        "lead": [
+          "국토교통부"
+        ],
+        "consult": [],
+        "decision": [
+          "국토교통부장관"
+        ]
+      },
+      "classification": "delivery",
+      "status": "planned",
+      "confidence": "modeled",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "arctic.logistics_hub_ready",
+          "kind": "technical",
+          "strength": "soft",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "기본계획 제5조제4항제5호가 교통망 확충을 포함사항으로 정함"
+        }
+      ],
+      "produces": [
+        "arctic.hinterland_transport_ready"
+      ],
+      "templateRefs": [
+        {
+          "institution": "national-road-rail-soc"
+        },
+        {
+          "institution": "freight-trucking-business",
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "railway-business-license",
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "integrated-transport-investment-plan",
+          "mappingStatus": "candidate"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_ACT"
+      ]
+    },
+    {
+      "id": "N17",
+      "name": "북극항로종합지원센터 지정",
+      "stage": "G5",
+      "authority": "해양수산부",
+      "leadActor": "mof",
+      "actorRoles": {
+        "lead": [
+          "해양수산부"
+        ],
+        "consult": [],
+        "decision": [
+          "해양수산부장관"
+        ]
+      },
+      "classification": "legal_gate",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "arctic.decree_enacted",
+          "kind": "legal",
+          "strength": "hard",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "북극항로 활용 촉진 및 연관산업 육성에 관한 특별법 제14조제4항 — 센터의 지정·운영에 필요한 사항은 대통령령으로 정한다"
+        },
+        {
+          "artifact": "arctic.act_in_force",
+          "kind": "legal",
+          "strength": "hard",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "북극항로 활용 촉진 및 연관산업 육성에 관한 특별법 제14조제1항 — 전문인력과 시설을 갖춘 법인 또는 단체를 센터로 지정할 수 있다"
+        }
+      ],
+      "produces": [
+        "arctic.support_center_designated"
+      ],
+      "templateRefs": [
+        {
+          "institution": "arctic-route-promotion"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_ACT"
+      ]
+    },
+    {
+      "id": "N18",
+      "name": "운항·물류 데이터플랫폼 구축·가동",
+      "stage": "G5",
+      "authority": "북극항로종합지원센터",
+      "leadActor": "support-center",
+      "actorRoles": {
+        "lead": [
+          "북극항로종합지원센터"
+        ],
+        "consult": [],
+        "decision": [
+          "해양수산부장관"
+        ]
+      },
+      "classification": "operation",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "arctic.support_center_designated",
+          "kind": "legal",
+          "strength": "hard",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "북극항로 활용 촉진 및 연관산업 육성에 관한 특별법 제14조제2항 — 센터는 운항·물류 데이터 구축·제공, 정보플랫폼 구축, 안전운항·최적항로 정보 제공을 수행한다"
+        }
+      ],
+      "produces": [
+        "arctic.data_platform_live"
+      ],
+      "templateRefs": [
+        {
+          "institution": "arctic-route-promotion"
+        },
+        {
+          "institution": "marine-survey-information",
+          "mappingStatus": "candidate"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_ACT"
+      ]
+    },
+    {
+      "id": "N19",
+      "name": "연관산업 연구·개발 추진",
+      "stage": "G5",
+      "authority": "정부·공공기관·대학·기업",
+      "leadActor": "central-ministries",
+      "actorRoles": {
+        "lead": [
+          "해양수산부",
+          "과학기술정보통신부"
+        ],
+        "consult": [],
+        "decision": [
+          "관계 중앙행정기관의 장"
+        ]
+      },
+      "classification": "policy",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "arctic.master_plan_adopted",
+          "kind": "policy",
+          "strength": "soft",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "북극항로 활용 촉진 및 연관산업 육성에 관한 특별법 제12조 — 정부는 단독 또는 공동으로 연구·개발을 실시할 수 있다(재량)"
+        }
+      ],
+      "produces": [
+        "arctic.rnd_program_running"
+      ],
+      "templateRefs": [
+        {
+          "institution": "national-rd-call-selection"
+        },
+        {
+          "institution": "national-rd-agreement"
+        },
+        {
+          "institution": "polar-activity-promotion",
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "science-technology-master-plan",
+          "mappingStatus": "candidate"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_ACT"
+      ]
+    },
+    {
+      "id": "N20",
+      "name": "전문인력 양성사업 추진",
+      "stage": "G5",
+      "authority": "정부",
+      "leadActor": "central-ministries",
+      "actorRoles": {
+        "lead": [
+          "해양수산부",
+          "고용노동부",
+          "교육부"
+        ],
+        "consult": [],
+        "decision": [
+          "관계 중앙행정기관의 장"
+        ]
+      },
+      "classification": "policy",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "arctic.master_plan_adopted",
+          "kind": "policy",
+          "strength": "soft",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "북극항로 활용 촉진 및 연관산업 육성에 관한 특별법 제13조제1항·제2항 — 전문인력 양성사업을 추진하고 비용을 지원할 수 있다(재량)"
+        }
+      ],
+      "produces": [
+        "arctic.workforce_program_running"
+      ],
+      "templateRefs": [
+        {
+          "institution": "vocational-training"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_ACT"
+      ]
+    },
+    {
+      "id": "N21",
+      "name": "북극항로사업자 재정·금융 지원",
+      "stage": "G5",
+      "authority": "국가·지방자치단체",
+      "leadActor": "mof",
+      "actorRoles": {
+        "lead": [
+          "해양수산부",
+          "금융위원회"
+        ],
+        "consult": [
+          "지방자치단체"
+        ],
+        "decision": [
+          "해양수산부장관"
+        ]
+      },
+      "classification": "delivery",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "arctic.action_plan_ready",
+          "kind": "financial",
+          "strength": "soft",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "북극항로 활용 촉진 및 연관산업 육성에 관한 특별법 제11조 — 국가 및 지방자치단체는 북극항로사업자에게 재정 및 금융 지원을 할 수 있다(재량)"
+        }
+      ],
+      "produces": [
+        "arctic.finance_support_ready"
+      ],
+      "templateRefs": [
+        {
+          "institution": "arctic-route-promotion"
+        },
+        {
+          "institution": "international-ship-registration",
+          "mappingStatus": "candidate"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_ACT"
+      ]
+    },
+    {
+      "id": "N22",
+      "name": "북극항로 시범운항",
+      "stage": "G6",
+      "authority": "북극항로사업자·해양수산부",
+      "leadActor": "operators",
+      "actorRoles": {
+        "lead": [
+          "북극항로사업자"
+        ],
+        "consult": [],
+        "decision": [
+          "해양수산부장관"
+        ]
+      },
+      "classification": "operation",
+      "status": "planned",
+      "confidence": "modeled",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "arctic.data_platform_live",
+          "kind": "technical",
+          "strength": "soft",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_NEWS"
+          ],
+          "note": "안전운항·최적항로 정보가 시범운항을 뒷받침한다 — 법정 선행요건은 아님"
+        }
+      ],
+      "produces": [
+        "arctic.trial_voyage_done"
+      ],
+      "templateRefs": [
+        {
+          "institution": "ship-safety-inspection",
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "ship-registration-nationality",
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "ship-officer-license",
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "seafarer-labor-management",
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "navigation-aids-management",
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "maritime-safety-master-plan",
+          "mappingStatus": "candidate"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_NEWS"
+      ],
+      "note": "시범운항 일정은 정부 발표 기준이며 이 특별법이 절차로 규율하는 사항은 아니다"
+    },
+    {
+      "id": "N23",
+      "name": "상업운항 개시",
+      "stage": "G6",
+      "authority": "북극항로사업자",
+      "leadActor": "operators",
+      "actorRoles": {
+        "lead": [
+          "북극항로사업자"
+        ],
+        "consult": [
+          "해양수산부"
+        ],
+        "decision": [
+          "북극항로사업자"
+        ]
+      },
+      "classification": "operation",
+      "status": "planned",
+      "confidence": "modeled",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "arctic.trial_voyage_done",
+          "kind": "technical",
+          "strength": "hard",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_NEWS"
+          ],
+          "note": "시범운항으로 항로·선박 적합성이 확인돼야 상업운항이 가능하다"
+        },
+        {
+          "artifact": "arctic.port_capacity_ready",
+          "kind": "technical",
+          "strength": "hard",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "거점항만 처리능력이 상업운항의 물리적 전제"
+        }
+      ],
+      "produces": [
+        "arctic.commercial_service_open"
+      ],
+      "templateRefs": [
+        {
+          "institution": "marine-cargo-shipping-registration",
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "international-ship-registration",
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "intl-ship-port-security",
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "ship-entry-departure-report",
+          "mappingStatus": "candidate"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_NEWS"
+      ],
+      "note": "상대국 항행 허가·국제규범(IMO Polar Code 등)은 이 지도의 범위 밖 — 국내 절차만 표시"
+    },
+    {
+      "id": "N24",
+      "name": "국제협력·기술 국제표준화",
+      "stage": "G7",
+      "authority": "정부",
+      "leadActor": "central-ministries",
+      "actorRoles": {
+        "lead": [
+          "해양수산부",
+          "외교부"
+        ],
+        "consult": [],
+        "decision": [
+          "관계 중앙행정기관의 장"
+        ]
+      },
+      "classification": "policy",
+      "status": "planned",
+      "confidence": "statutory",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "arctic.master_plan_adopted",
+          "kind": "policy",
+          "strength": "soft",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "북극항로 활용 촉진 및 연관산업 육성에 관한 특별법 제15조 — 국제교류·국제행사 참가·국제공동연구개발·기술 국제표준화 사업을 추진할 수 있다(재량)"
+        }
+      ],
+      "produces": [
+        "arctic.intl_cooperation_active"
+      ],
+      "templateRefs": [
+        {
+          "institution": "arctic-route-promotion"
+        },
+        {
+          "institution": "science-technology-master-plan",
+          "mappingStatus": "candidate"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_ACT"
+      ]
+    },
+    {
+      "id": "N25",
+      "name": "해양오염 방제체계 확보",
+      "stage": "G7",
+      "authority": "해양경찰청·해양수산부",
+      "leadActor": "central-ministries",
+      "actorRoles": {
+        "lead": [
+          "해양수산부",
+          "해양경찰청"
+        ],
+        "consult": [],
+        "decision": [
+          "해양수산부장관"
+        ]
+      },
+      "classification": "protection_gate",
+      "status": "planned",
+      "confidence": "modeled",
+      "activation": {
+        "mode": "always"
+      },
+      "requires": [
+        {
+          "artifact": "arctic.commercial_service_open",
+          "kind": "protection",
+          "strength": "soft",
+          "relation": "finish_to_start",
+          "basis": [
+            "SRC_ARCTIC_ACT"
+          ],
+          "note": "기본계획 제5조제4항제11호·제12호가 친환경 운항체제와 수색구조 인프라를 포함사항으로 정한다"
+        }
+      ],
+      "produces": [
+        "arctic.spill_response_ready"
+      ],
+      "templateRefs": [
+        {
+          "institution": "marine-pollution-response-plan"
+        },
+        {
+          "institution": "marine-accident-inquiry",
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "maritime-safety-master-plan",
+          "mappingStatus": "candidate"
+        },
+        {
+          "institution": "fishery-resource-management",
+          "mappingStatus": "candidate"
+        }
+      ],
+      "evidence": [
+        "SRC_ARCTIC_ACT"
+      ]
+    }
+  ]
+}
