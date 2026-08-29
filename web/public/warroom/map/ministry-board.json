@@ -758,7 +758,9 @@
      "upName": "사업시행자·기부 대 양여·재원·지원사업 확정",
      "downGate": "N34",
      "downName": "종전부지 개발사업시행자·개발계획·도시계획 입안",
-     "downMinistries": [],
+     "downMinistries": [
+      "전남광주시"
+     ],
      "downStatus": "planned"
     },
     {
@@ -780,6 +782,112 @@
      "upName": "국유재산 용도폐지·기부 대 양여·종전부지 권리이전",
      "downGate": "N17",
      "downName": "보호구역 해제·종전부지 및 편입토지 사용권 확보",
+     "downMinistries": [
+      "국방부",
+      "전남광주시"
+     ],
+     "downStatus": "planned"
+    }
+   ],
+   "active": [],
+   "legislative": []
+  },
+  {
+   "id": "gwangju-jeonnam",
+   "label": "전남광주시",
+   "projects": [
+    "gwangju-semiconductor-cluster"
+   ],
+   "counts": {
+    "own": 4,
+    "completed": 0,
+    "active": 0,
+    "frontier": 1,
+    "planned": 4,
+    "unknown": 0
+   },
+   "byProject": {
+    "gwangju-semiconductor-cluster": {
+     "own": 4,
+     "completed": 0,
+     "active": 0,
+     "frontier": 1,
+     "planned": 4,
+     "unknown": 0
+    }
+   },
+   "maxLeverage": {
+    "gate": "N34",
+    "project": "gwangju-semiconductor-cluster",
+    "projectName": "광주 군공항 부지 반도체 클러스터",
+    "name": "종전부지 개발사업시행자·개발계획·도시계획 입안",
+    "blocked": 11
+   },
+   "holding": [
+    {
+     "project": "gwangju-semiconductor-cluster",
+     "projectName": "광주 군공항 부지 반도체 클러스터",
+     "gate": "N23",
+     "name": "공업용수·공공폐수·접근도로 수요·공급계획 확정",
+     "since": "2026-08-29",
+     "leverage": 5,
+     "level": "local",
+     "status": "planned",
+     "co": []
+    }
+   ],
+   "awaited": [
+    {
+     "project": "gwangju-semiconductor-cluster",
+     "projectName": "광주 군공항 부지 반도체 클러스터",
+     "upGate": "N17",
+     "upName": "보호구역 해제·종전부지 및 편입토지 사용권 확보",
+     "downGate": "N28",
+     "downName": "부지조성·팹·부대시설 건설·공정환경 관리",
+     "downMinistries": [],
+     "downStatus": "planned"
+    },
+    {
+     "project": "gwangju-semiconductor-cluster",
+     "projectName": "광주 군공항 부지 반도체 클러스터",
+     "upGate": "N23",
+     "upName": "공업용수·공공폐수·접근도로 수요·공급계획 확정",
+     "downGate": "N24",
+     "downName": "용수·재이용·전용수도·폐수·하수도·접근도로 승인·비용분담",
+     "downMinistries": [],
+     "downStatus": "planned"
+    },
+    {
+     "project": "gwangju-semiconductor-cluster",
+     "projectName": "광주 군공항 부지 반도체 클러스터",
+     "upGate": "N23",
+     "upName": "공업용수·공공폐수·접근도로 수요·공급계획 확정",
+     "downGate": "N50",
+     "downName": "신규 수원 확보 — 동복댐 증축·댐건설기본계획",
+     "downMinistries": [
+      "기후에너지환경부"
+     ],
+     "downStatus": "planned"
+    },
+    {
+     "project": "gwangju-semiconductor-cluster",
+     "projectName": "광주 군공항 부지 반도체 클러스터",
+     "upGate": "N34",
+     "upName": "종전부지 개발사업시행자·개발계획·도시계획 입안",
+     "downGate": "N35",
+     "downName": "종전부지 실시계획·도시계획 결정·인허가 의제",
+     "downMinistries": [
+      "전남광주시"
+     ],
+     "downStatus": "planned"
+    },
+    {
+     "project": "gwangju-semiconductor-cluster",
+     "projectName": "광주 군공항 부지 반도체 클러스터",
+     "upGate": "N35",
+     "upName": "종전부지 실시계획·도시계획 결정·인허가 의제",
+     "downGate": "N42",
+     "downName": "국유재산 용도폐지·기부 대 양여·종전부지 권리이전",
      "downMinistries": [
       "국방부"
      ],
@@ -1839,25 +1947,6 @@
    ]
   },
   {
-   "role": "전남광주시",
-   "gates": [
-    {
-     "project": "gwangju-semiconductor-cluster",
-     "projectName": "광주 군공항 부지 반도체 클러스터",
-     "gate": "N34",
-     "name": "종전부지 개발사업시행자·개발계획·도시계획 입안",
-     "status": "planned"
-    },
-    {
-     "project": "gwangju-semiconductor-cluster",
-     "projectName": "광주 군공항 부지 반도체 클러스터",
-     "gate": "N35",
-     "name": "종전부지 실시계획·도시계획 결정·인허가 의제",
-     "status": "planned"
-    }
-   ]
-  },
-  {
    "role": "환경 협의기관",
    "gates": [
     {
@@ -2181,18 +2270,6 @@
    ]
   },
   {
-   "role": "전남광주시·관계 관리청",
-   "gates": [
-    {
-     "project": "gwangju-semiconductor-cluster",
-     "projectName": "광주 군공항 부지 반도체 클러스터",
-     "gate": "N23",
-     "name": "공업용수·공공폐수·접근도로 수요·공급계획 확정",
-     "status": "planned"
-    }
-   ]
-  },
-  {
    "role": "산업단지 관리기관",
    "gates": [
     {
@@ -2254,8 +2331,8 @@
   }
  ],
  "totals": {
-  "gates": 87,
-  "unassignedGates": 61,
-  "ministries": 17
+  "gates": 91,
+  "unassignedGates": 58,
+  "ministries": 18
  }
 }

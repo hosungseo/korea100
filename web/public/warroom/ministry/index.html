@@ -417,6 +417,7 @@ const NOT_MINISTRY = {
   assembly: "의정 협조 대상", "pm-office": "총리·국무회의",
   "balance-committee": "대통령 소속 위원회", "decentral-council": "대통령 소속 회의",
   "land-policy-committee": "법정 위원회",
+  "gwangju-jeonnam": "지방자치단체", jeonnam: "지방자치단체", muan: "지방자치단체",
 };
 // 문장(각료) 표기 — 라벨 앞 두 글자. 시뮬레이션 게임의 초상 자리
 const crestOf = (label) => label.replace(/[·\s]/g, "").slice(0, 2);
@@ -459,7 +460,7 @@ function boot(b) {
   const pn = b.projects.length;
   $("#notice").innerHTML =
     `<b>이 화면이 보여주는 것은 부처의 전체 업무가 아니라, 등재된 국가 핵심사업 ${pn}개에 걸린 관문뿐입니다.</b> `
-    + `지금 공이 어느 부처에 있는지를 보는 판이며, 부처의 업무량·성과를 비교하는 자료가 아닙니다. `
+    + `부처·국회·위원회·지방자치단체를 한 판에 놓고 지금 공이 어디 있는지를 봅니다. 업무량·성과를 비교하는 자료가 아닙니다. `
     + `공개 자료(법령·관보·언론)를 근거로 한 추정이고, 상태 확정은 사람이 합니다.`;
   $("#sortbar").hidden = false;
   $("#foot").innerHTML =
@@ -818,7 +819,7 @@ function renderDetail(id) {
         `${h.status === "unknown" ? ' <span class="badge unk">미확정</span>' : ""}`
         + `${h.co?.length ? ` <span class="badge co">공동 ${esc(h.co.join("·"))}</span>` : ""}`,
         "st-front")).join("")
-    : `<div class="empty">지금 이 부처 앞에 대기 중인 관문이 없습니다. 선행 관문이 풀리면 여기에 나타납니다.</div>`;
+    : `<div class="empty">지금 이 주체 앞에 대기 중인 관문이 없습니다. 선행 관문이 풀리면 여기에 나타납니다.</div>`;
 
   const awaited = m.awaited.length
     ? m.awaited.map((a) => `<a class="row st-wait" href="${MAPGATE(a.project, a.downGate)}" target="_blank" rel="noopener"
@@ -828,7 +829,7 @@ function renderDetail(id) {
         <span class="rn">${esc(a.downName)}</span>
         <span class="aside">${a.downMinistries.length ? esc(a.downMinistries.join("·")) : "미특정"}</span>
       </a>`).join("")
-    : `<div class="empty">이 부처의 미완료 관문에 걸린 하류 관문이 없습니다.</div>`;
+    : `<div class="empty">이 주체의 미완료 관문에 걸린 하류 관문이 없습니다.</div>`;
 
   const active = m.active.length
     ? m.active.map((a) => gateRow(a, '<span class="badge act">진행 중</span>', "", "st-act")).join("")
@@ -838,7 +839,7 @@ function renderDetail(id) {
     ? m.legislative.map((l) => gateRow(l, `${esc(l.blockedByGate)} 대기`)).join("")
     : "";
 
-  d.innerHTML = `<button class="back">← 부처 전체</button>
+  d.innerHTML = `<button class="back">← 전체 주체</button>
     <div class="dhead">
       <span class="crest${NOT_MINISTRY[m.id] ? " gray" : c.frontier ? " warn" : ""}">${esc(crestOf(m.label))}</span>
       <div>
@@ -855,12 +856,12 @@ function renderDetail(id) {
     <section class="blk"><h3>쥐고 있는 것</h3>
       <p class="hint">선행 관문이 모두 끝나 지금 착수할 수 있는데 아직 시작되지 않은 관문입니다. 하류를 많이 세우는 순서로 정렬했습니다.</p>
       ${holding}</section>
-    <section class="blk"><h3>이 부처를 기다리는 곳</h3>
-      <p class="hint">이 부처의 미완료 관문이 끝나야 움직이는 하류 관문과, 그것을 맡은 주체입니다.</p>
+    <section class="blk"><h3>이 주체를 기다리는 곳</h3>
+      <p class="hint">이 주체의 미완료 관문이 끝나야 움직이는 하류 관문과, 그것을 맡은 곳입니다.</p>
       ${awaited}</section>
     <section class="blk"><h3>진행 중</h3>${active}</section>
     ${legis ? `<section class="blk"><h3>입법 대기</h3>
-      <p class="hint">국회 단계 관문이 끝나야 진행되는 이 부처의 관문입니다.</p>${legis}</section>` : ""}`;
+      <p class="hint">국회 단계 관문이 끝나야 진행되는 이 주체의 관문입니다.</p>${legis}</section>` : ""}`;
   bindBack();
   window.scrollTo(0, 0);
 }
@@ -874,7 +875,7 @@ function renderUnassigned() {
     <div class="rl">${esc(u.role)}<span>${u.gates.length}개 관문</span></div>
     ${u.gates.map((g) => `<a class="g" href="${MAPGATE(g.project, g.gate)}" target="_blank" rel="noopener">${esc(pshort(g.project))} · ${esc(g.gate)} ${esc(g.name)}</a>`).join("")}
   </div>`).join("");
-  return `<button class="back">← 부처 전체</button>
+  return `<button class="back">← 전체 주체</button>
     <div class="dhead">
       <span class="crest gray">?</span>
       <div>
