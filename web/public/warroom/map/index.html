@@ -1337,7 +1337,11 @@ function applyHighlight(set, target, risk, ext, pathEdges) {
 function renderNarration(sc) {
   const n = $("#narr-body");
   if (sc.html) { n.innerHTML = `<h3>${sc.label}</h3>${sc.html}`; return; }
-  const items = sc.steps.map(([txt, ids]) =>
+  // steps는 선택 사항 — 없으면 지금 켜진 관문에서 목록을 만든다(risk·nodes 트랙 등)
+  const steps = sc.steps ?? [...document.querySelectorAll("#canvas .node.on")]
+    .map((el) => el.id.replace(/^nd-/, ""))
+    .map((id) => [nodeById[id]?.name ?? id, id]);
+  const items = steps.map(([txt, ids]) =>
     `<li data-nodes="${ids}">${txt} <span class="mono" style="color:var(--muted);font-size:9px">${ids.replaceAll(",", " ")}</span></li>`).join("");
   n.innerHTML = `<h3>${sc.risk ? "" : "트랙 — "}${sc.label}</h3><ol>${items}</ol>`;
   n.querySelectorAll("li").forEach((li) => {
