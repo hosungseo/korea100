@@ -24,6 +24,7 @@ BRIEF_JSON = WEB / "public/warroom/loop/briefing.json"
 MAPDATA = WEB / "public/warroom/map/data.json"
 LOOP_URL = "hosungseo.github.io/korea100/warroom/loop/"
 FIELDS = ["군공항", "산단·인허가", "전력", "용수", "건축·가동"]
+NO_REFINE = False    # --no-refine: 실무 지시 다듬기(claude -p)를 건너뛴다
 
 
 MD = re.compile(r"\*\*|__|`|^#+\s*")
@@ -448,6 +449,95 @@ def how_to(steps, ministries, follow):
     return f"{a}{josa(a)} 조기 착수해 {goal}"
 
 
+# 실무 지시(-)를 굳이 모델에 맡기는 이유: how_to 의 기계 조립은 안전하지만
+# 세 건이 같은 틀("…을 병행 추진해 … 준비를 갖출 것")로 나와 지시가 아니라
+# 절차 안내처럼 읽힌다. ○ 과의 층위 차이는 문형이 아니라 구체성에서 나온다 —
+# 사안마다 '무엇을 어떻게'가 달라야 한다. 지어내기는 기계 검증으로 막는다.
+REFINE_TIMEOUT = 240
+
+
+def refine_directives(items, brief, gmap):
+    """- 줄을 모델이 사안별로 쓰게 한다. 항목별 결과, 실패 항목은 None.
+
+    검증 세 가지 — 하나라도 어긋나면 그 항목만 how_to 폴백:
+      ① 후속절차(follow.task)가 문장에 그대로 있어야 한다(관문 표시를 코드가 단다)
+      ② 절차 데이터에 있는 부처명이 이 항목 맥락에 없는데 등장하면 지어낸 것
+      ③ 두 줄 폭을 넘으면 지시문 꼬리가 잘린다
+    """
+    data = []
+    for it in items:
+        d = {"circle": f"{it['actor']}: {it['name']} {it['aspect']}",
+             "why": it["why"],
+             "gate": it["gate"], "gateName": gmap.get(it["gate"], ""),
+             "steps": [{"name": n, "actor": a, **({"deadline": dl} if dl else {})}
+                       for n, a, dl in it["nxt"]]
+                      or [{"name": it["name"], "actor": it["actor"]}],
+             "ministries": it["ms"]}
+        if it["follow"]:
+            d["follow"] = {"task": it["follow"][0], "gate": it["follow"][1],
+                           "gateName": gmap.get(it["follow"][1], "")}
+        data.append(d)
+    ctx = {"items": data,
+           "reports": [r.get("title") for r in brief.get("reports", [])],
+           "risks": [{"text": r.get("text"), "detail": r.get("detail"),
+                      "gates": r.get("gates")} for r in brief.get("risks", [])]}
+    prompt = (
+        "너는 광주 군공항 이전·반도체 클러스터 상황실의 수석 보좌관이다.\n"
+        "일일 동향 보고 '조치 필요사항'의 각 항목은 두 단이다:\n"
+        "  ○ (데이터의 circle) — 총리가 부처에 무엇을 챙기게 할 것인가\n"
+        "  - — 그 부처 실무진에 내려갈 구체 지시. 네가 쓸 것은 이 - 줄이다.\n"
+        "○ 이 '무엇을 볼 것인가'라면 - 는 '그러려면 지금 무슨 일을 어떻게 하라'다.\n"
+        "항목마다 steps(그 관문에서 다음에 올 절차)·follow(그 뒤 관문의 첫 절차)와 "
+        "오늘 보도(reports)·리스크(risks)만 근거로 쓴다.\n"
+        "지시에 반드시 담을 것:\n"
+        "  ① 무엇을 — steps 중 지금 밟아야 할 절차를 특정한다(뭉뚱그리지 말 것)\n"
+        "  ② 어떻게 — 오늘 상황에 맞는 추진 방식. 무엇과 병행할지, 누구와 함께할지, "
+        "무엇부터 먼저 할지, 기한이 있으면 언제까지인지 중 사안에 맞는 것\n"
+        "  ③ follow.task 가 있으면 그 문자열을 한 글자도 바꾸지 말고 문장에 넣는다 "
+        "— 다음 관문 준비까지 잇는 지시임을 보이는 자리다\n"
+        "금지: ①데이터에 없는 기관·수치·날짜·절차 지어내기 ②'검토·노력·만전' 같은 "
+        "빈말 ③'보고할 것'(부처가 총리에게 보고하는 게 아니라 부처가 할 일을 쓴다) "
+        "④세 항목을 같은 문형·같은 종결로 쓰는 것 — '준비를 갖출 것' 반복이 대표 실패다.\n"
+        "종결은 '~할 것'. 길이는 공백 포함 36~48자.\n"
+        '출력은 JSON 하나만, 코드블록·설명 금지: {"lines":["항목 순서대로 - 줄", ...]}\n'
+        "데이터:\n" + json.dumps(ctx, ensure_ascii=False))
+    try:
+        r = subprocess.run(["claude", "-p", prompt], capture_output=True,
+                           text=True, timeout=REFINE_TIMEOUT)
+        m = re.search(r"\{[\s\S]*\}", r.stdout)
+        lines = json.loads(m.group(0))["lines"]
+        if not isinstance(lines, list):
+            raise ValueError("lines 가 배열이 아님")
+    except Exception as e:
+        print(f"  지시문 다듬기 생략({type(e).__name__}: {e}) — 기계 조립 사용",
+              file=sys.stderr)
+        return [None] * len(items)
+
+    universe = {m for ms in gate_ministries().values() for m in ms}
+    out = []
+    for i, it in enumerate(items):
+        line = tidy(lines[i]) if i < len(lines) and isinstance(lines[i], str) else ""
+        ok = bool(line) and line.endswith("것") and not line.endswith("보고할 것")
+        if it["follow"]:
+            task, tg = it["follow"]
+            if task in line:
+                line = line.replace(task, f"{task}^({tg})^", 1)
+            else:
+                ok = False
+        # 이 항목 맥락(주체·부처·다음 절차 주체·후속절차)에 없는 부처가 나오면 창작이다
+        allowed = " ".join([it["actor"], *it["ms"],
+                            *(a for _n, a, _d in it["nxt"]),
+                            it["follow"][0] if it["follow"] else ""])
+        if ok and any(u in line and u not in allowed for u in universe):
+            ok = False
+        if ok and not lines_ok(line, BODY_W, 2):
+            ok = False
+        if not ok and line:
+            print(f"  지시문 검증 탈락 → 폴백: {line}", file=sys.stderr)
+        out.append(line if ok else None)
+    return out
+
+
 def next_step_pairs(gate, step_name):
     """다음 단계와 그 주체를 함께 돌려준다."""
     try:
@@ -465,7 +555,8 @@ def next_step_pairs(gate, step_name):
         if len(head) < 8:
             head = ""
         i = names.index(step_name)
-        return [(s["name"][len(head):].strip(), s.get("actor") or "")
+        return [(s["name"][len(head):].strip(), s.get("actor") or "",
+                 s.get("deadline") or "")
                 for s in steps[i + 1:i + 3]]
     return []
 
@@ -640,6 +731,7 @@ def to_dsl(b):
         if len(picked) == 3:
             break
 
+    items = []
     for actor, gate, inst, st, why in picked:
         # 절차명이 긴 것은 문장이 아니라 목록이라, 첫 마디만 쓰고 줄인다
         name = st["name"]
@@ -664,27 +756,38 @@ def to_dsl(b):
         room = DIRECTIVE_W - disp_w(f"{actor}: {aspect}") - 0.5   # 절차명 뒤 공백
         while name and disp_w(name) > room:
             name = shorten(name, len(name) - 1)
-        L.append(f"원: {actor}: {name} {aspect}")
+        items.append({"actor": actor, "gate": gate, "st": st, "why": why,
+                      "name": name, "aspect": aspect, "ms": ms,
+                      "nxt": next_step_pairs(gate, st["name"]),
+                      "follow": follow_task(ho, gate)})
+
+    # - 실무 지시는 모델이 사안별로 쓴다(검증 탈락·실패 항목은 기계 조립)
+    refined = ([None] * len(items) if NO_REFINE
+               else refine_directives(items, b, gmap))
+
+    for it, better in zip(items, refined):
+        gate, st, ms = it["gate"], it["st"], it["ms"]
+        L.append(f"원: {it['actor']}: {it['name']} {it['aspect']}")
 
         # - 한 단 아래 실무에 내릴 지시. ○ 이 '무엇을 볼 것인가'라면
-        #   여기는 '그러려면 무슨 일을 시켜야 하는가'다. 그 절차 다음에
-        #   실제로 오는 단계를 짚어 준다.
+        #   여기는 '그러려면 구체적으로 무슨 일을 어떻게 하라'다.
         # 총리에게 보고하라는 말이 아니라 그 부처가 실제로 할 일을 적는다.
-        # next_steps 는 아직 오지 않은 단계이므로 '착수' 가 맞는 말이다.
-        nxt = next_step_pairs(gate, st["name"])
-        follow = follow_task(ho, gate)
-        if nxt:
-            # 지시문은 꼬리가 잘리면 뜻이 무너지므로 뒤를 자르는 대신
-            # 단계를 하나로 줄여 문장을 통째로 남긴다.
-            line = how_to(nxt, ms, follow)
-            if len(nxt) > 1 and not lines_ok(line, BODY_W, 2):
-                line = how_to(nxt[:1], ms, follow)
+        if better:
+            line = better
         else:
-            # 그 절차가 제도의 마지막이라 다음 단계가 없다 — 그 절차 자체를
-            # 어떻게 밀어붙일지를 적는다
-            line = how_to([(shorten(name, 14), "")], ms, follow)
+            nxt, follow = it["nxt"], it["follow"]
+            if nxt:
+                # 지시문은 꼬리가 잘리면 뜻이 무너지므로 뒤를 자르는 대신
+                # 단계를 하나로 줄여 문장을 통째로 남긴다.
+                line = how_to(nxt, ms, follow)
+                if len(nxt) > 1 and not lines_ok(line, BODY_W, 2):
+                    line = how_to(nxt[:1], ms, follow)
+            else:
+                # 그 절차가 제도의 마지막이라 다음 단계가 없다 — 그 절차 자체를
+                # 어떻게 밀어붙일지를 적는다
+                line = how_to([(shorten(it["name"], 14), "")], ms, follow)
         # 여기서 fit_lines 를 다시 걸지 않는다 — 지시문은 끝이 잘리면
-        # 지시가 아니게 된다. 길이는 위에서 단계 수로 맞췄다.
+        # 지시가 아니게 된다. 길이는 위에서 검증했거나 단계 수로 맞췄다.
         L.append(f"바: {line}")
 
         # * 부연 — 관문·근거 조문·부처 협의·기한
@@ -866,7 +969,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out-dir", default=str(WEB / "public/warroom/loop"))
     ap.add_argument("--from-dsl", help="DSL 파일을 직접 굽는다(손으로 고친 뒤 재생성용)")
+    ap.add_argument("--no-refine", action="store_true",
+                    help="실무 지시(-)를 모델로 다듬지 않고 기계 조립만 쓴다")
     a = ap.parse_args()
+    global NO_REFINE
+    NO_REFINE = a.no_refine
     out = Path(a.out_dir)
     out.mkdir(parents=True, exist_ok=True)
 
