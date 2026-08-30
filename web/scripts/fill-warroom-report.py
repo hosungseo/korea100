@@ -403,19 +403,46 @@ def josa(word, pair=("을", "를")):
     return pair[0] if (ord(ch) - 0xAC00) % 28 else pair[1]
 
 
-def how_to(steps, ministries, n_after):
+def follow_task(ho, gate, limit=13):
+    """바로 뒤에 걸린 관문의 첫 절차 — 지금 준비해 둬야 할 구체 후속조치.
+
+    '후속 관문 15개' 는 규모일 뿐 무엇을 준비하라는 말이 아니다.
+    다음에 실제로 벌어질 일의 이름을 대야 지시가 된다.
+    """
+    outs = ho.get(gate) or []
+    if not outs:
+        return None
+    try:
+        byGate = json.loads(PROCS.read_text())["byGate"]
+    except Exception:
+        return None
+    # 여럿이면 파급이 큰 쪽 — 거기가 막히면 뒤가 다 밀린다
+    for t in sorted(outs, key=lambda x: -_downstream(ho, x)):
+        for inst in byGate.get(t, [])[:1]:
+            steps = inst.get("steps") or []
+            if steps:
+                # "A부터 B까지 …" 형태는 첫 마디만 쓴다
+                nm = re.split(r"부터|까지", steps[0]["name"])[0].strip()
+                return shorten(nm, limit), t
+    return None
+
+
+def how_to(steps, ministries, follow):
     """총리가 부처에 시키는 '추진 방식'을 만든다.
 
     절차를 안내하는 자리가 아니다. 실무는 부처가 안다. 총리가 더하는
     것은 '어떤 식으로 밀어붙이라'는 것 — 병행할지, 다른 부처와 함께
-    할지, 앞당길지, 그리고 무엇을 얻기 위해서인지.
+    할지, 앞당길지, 그리고 무엇을 준비해 두라는 것인지.
     """
-    goal = (f"후속 관문 {n_after}개 일정을 확보할 것" if n_after
-            else "지체 없이 마무리할 것")
+    if follow:
+        task, tgate = follow
+        goal = f"{task}^({tgate})^ 준비를 갖출 것"
+    else:
+        goal = "지체 없이 마무리할 것"
     a = shorten(steps[0][0], 12)
     if len(steps) > 1:
         b = shorten(steps[1][0], 12)
-        return f"{a}와 {b}{josa(b)} 병행 추진해 {goal}"
+        return f"{a}{josa(a, ('과', '와'))} {b}{josa(b)} 병행 추진해 {goal}"
     if len(ministries) > 1:
         return f"{a}{josa(a)} {ministries[1]}와 공동으로 추진해 {goal}"
     return f"{a}{josa(a)} 조기 착수해 {goal}"
@@ -645,17 +672,17 @@ def to_dsl(b):
         # 총리에게 보고하라는 말이 아니라 그 부처가 실제로 할 일을 적는다.
         # next_steps 는 아직 오지 않은 단계이므로 '착수' 가 맞는 말이다.
         nxt = next_step_pairs(gate, st["name"])
-        n_after = _downstream(ho, gate)
+        follow = follow_task(ho, gate)
         if nxt:
             # 지시문은 꼬리가 잘리면 뜻이 무너지므로 뒤를 자르는 대신
             # 단계를 하나로 줄여 문장을 통째로 남긴다.
-            line = how_to(nxt, ms, n_after)
+            line = how_to(nxt, ms, follow)
             if len(nxt) > 1 and not lines_ok(line, BODY_W, 2):
-                line = how_to(nxt[:1], ms, n_after)
+                line = how_to(nxt[:1], ms, follow)
         else:
             # 그 절차가 제도의 마지막이라 다음 단계가 없다 — 그 절차 자체를
             # 어떻게 밀어붙일지를 적는다
-            line = how_to([(shorten(name, 14), "")], ms, n_after)
+            line = how_to([(shorten(name, 14), "")], ms, follow)
         # 여기서 fit_lines 를 다시 걸지 않는다 — 지시문은 끝이 잘리면
         # 지시가 아니게 된다. 길이는 위에서 단계 수로 맞췄다.
         L.append(f"바: {line}")
