@@ -393,6 +393,16 @@ def gate_ministries():
     return out
 
 
+def josa(word, pair=("을", "를")):
+    """받침에 따라 조사를 고른다. '공고를' / '등록을'."""
+    if not word:
+        return pair[1]
+    ch = word[-1]
+    if not ("가" <= ch <= "힣"):
+        return pair[1]
+    return pair[0] if (ord(ch) - 0xAC00) % 28 else pair[1]
+
+
 def next_steps(gate, step_name, limit=2):
     """그 절차 다음에 오는 실무 단계들. 지시를 한 단 더 내리는 재료다.
 
@@ -596,8 +606,8 @@ def to_dsl(b):
             name = re.split(r"부터|까지", name)[0].strip().rstrip("·") + " 등"
         ms = gmin.get(gate, [])
 
-        # 명령문이 아니라 '무엇을 챙겨야 하는지'를 적는다. 총리가 부처에
-        # 물을 거리이지 지시문 자체는 아니므로 동사로 끝맺지 않는다.
+        # ○ 은 총리가 부처에 '무엇을 하게 할 것인가'다. 명시적 지시문은
+        # 아니지만 무엇을 하라는 것인지는 남아야 하므로 동사형으로 맺는다.
         if len(ms) > 1:
             aspect = "부처 협의 상황 점검"
         elif "완료" in why:
@@ -620,19 +630,25 @@ def to_dsl(b):
         #   실제로 오는 단계를 짚어 준다.
         nxt = next_steps(gate, st["name"])
         if nxt:
-            todo = " · ".join(nxt)
-            verb = "일정 확정·통보" if len(nxt) > 1 else "일정 확정"
-            line = f"{todo} {verb}"
+            # 명사구로 끝내면 '무엇을 하라'가 안 남는다 — 지시문으로 맺는다.
+            # 지시문은 꼬리가 잘리면 뜻이 무너지므로 뒤를 자르는 대신
+            # 단계를 하나로 줄여 문장을 통째로 남긴다.
+            one = f"{nxt[0]} 일정을 확정해 보고할 것"
+            line = one
+            if len(nxt) > 1:
+                two = f"{nxt[0]}{josa(nxt[0])} 마치고 {nxt[1]} 일정까지 확정해 보고할 것"
+                # 두 줄을 넉넉히 채우거나 한 줄에 들어갈 때만 두 단계를 쓴다
+                if lines_ok(two, BODY_W, 2):
+                    line = two
         else:
-            # 마지막 단계라 뒤가 없으면 어디서 이어지는 건인지라도 밝힌다
-            line = re.sub(r"\bN\d+\b",
-                          lambda m: f"{shorten(gmap.get(m.group(0), ''), 12)}"
-                                    f"^({m.group(0)})^",
-                          why).replace("보도의 다음 관문", "보도 다음")
+            # 그 절차가 제도의 마지막이라 다음 단계가 없다. 그래도 지시는
+            # 남아야 하므로 뒤에 걸린 관문으로 착수 시점을 묻게 한다.
             n_after = _downstream(ho, gate)
-            if n_after and "뒤" not in line:
-                line += f", 뒤 관문 {n_after}개"
-        L.append(f"바: {fit_lines(line, BODY_W, 2)}")
+            tail = f", 후속 관문 {n_after}개 영향" if n_after else ""
+            line = f"{shorten(name, 16)} 착수 시점을 확인해 보고할 것{tail}"
+        # 여기서 fit_lines 를 다시 걸지 않는다 — 지시문은 '…보고할 것' 이
+        # 잘리면 지시가 아니게 된다. 길이는 위에서 단계 수로 맞췄다.
+        L.append(f"바: {line}")
 
         # * 부연 — 관문·근거 조문·부처 협의·기한
         # 부처 이름은 위 ○ 에 이미 나왔다 — 세 곳 이상 걸린 경우만 나머지를 덧붙인다
