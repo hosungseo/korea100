@@ -105,8 +105,17 @@ function groundMinistries(names, gate) {
   return out;
 }
 
+// 어제 보도 3건 — 같은 사안을 또 리드로 세울 때 '달라진 것'을 요구하기 위해
+// 덮어쓰기 전의 briefing.json 에서 읽는다(없으면 빈 배열).
+let prevReports = [];
+try {
+  prevReports = JSON.parse(readFileSync(jsonPath, "utf8")).reports
+    .map((r) => r.title).filter(Boolean);
+} catch { /* 첫 실행·백테스트 초일 */ }
+
 const payload = {
   date: loop.generatedAt,
+  prevReports,
   totals: loop.totals,
   signals: p.signals,
   suggestions: p.suggestions.map((s) => ({
@@ -151,6 +160,9 @@ function validate(b) {
     else if (r.headlineIndex < 0 || r.headlineIndex >= HEADLINE_N) {
       bad.push(`headlineIndex ${r.headlineIndex} 범위 밖(0~${HEADLINE_N - 1})`);
     }
+    for (const x of r.extraIndexes ?? []) {
+      if (!Number.isInteger(x) || x < 0 || x >= HEADLINE_N) bad.push(`extraIndexes ${x}`);
+    }
   }
   if (!Array.isArray(b.fields) || b.fields.length !== 5) bad.push("fields 5건 아님");
   for (const f of b.fields ?? []) {
@@ -191,7 +203,8 @@ if (!process.argv.includes("--no-judge")) {
       "원칙: ①데이터에 없는 사실·수치·언론사 지어내기 절대 금지 ②모든 내용은 '신호'이며 확정 " +
       "사실이 아니다 — 다만 '보도됨·전해짐' 같은 전언 종결어미는 쓰지 말 것(출처를 이미 밝히므로 " +
       "군더더기다) ③보도된 것과 우리 판정을 섞지 말 것 " +
-      "④영문 상태값(planned/active 등)을 쓰지 말고 한국어로 옮긴다.\n" +
+      "④영문 상태값(planned/active 등)을 쓰지 말고 한국어로 옮긴다 " +
+      "⑤'관문·신호로 분류' 같은 시스템 내부 용어를 본문에 쓰지 않는다.\n" +
       // 서술방법은 행안부 자치행정과 「지방행정 여론·동향」 보고를 따른다.
       "서술방법(정부 동향 보고 문체):\n" +
       "  ㄱ. 개조식 명사형 종결 — '~선정', '~집계', '~예정', '~전망', '~우려', '~추진', '~방침'. " +
@@ -204,7 +217,8 @@ if (!process.argv.includes("--no-judge")) {
       "동향 보고의 핵심은 '다음에 무엇이 오는가'다.\n" +
       "출력은 **JSON 객체 하나만**. 코드블록·설명·인사말 금지. 스키마:\n" +
       `{"title":"광주 반도체·군공항 일일 동향","date":"${loop.generatedAt}",\n` +
-      ' "reports":[{"headlineIndex":숫자,"title":"보도 제목 26자 이내",' +
+      ' "reports":[{"headlineIndex":숫자,"extraIndexes":[숫자]  // 사실을 보탠 다른 기사 번호(없으면 생략),' +
+      '"title":"보도 제목 26자 이내",' +
       '"body":"제목에 없는 정보만 40자 내외(최대 58자)"}]  // 정확히 3건,\n' +
       ` "fields":[{"name":${JSON.stringify(FIELDS)} 중 하나,"status":${JSON.stringify(STATUSES)} 중 하나,` +
       '"gates":["N31","N32"]}]  // 5개 분야 전부, 순서 그대로,\n' +
@@ -218,8 +232,20 @@ if (!process.argv.includes("--no-judge")) {
       '"evidence":"근거가 된 기사 제목"}]  // 0~3건}\n' +
       "headlineIndex 는 그 항목의 근거가 된 데이터 headlines 배열의 i 값이다. 반드시 하나를 " +
       "지목하라 — 언론사 이름은 그 번호로 코드가 붙이므로 직접 쓰지 않는다.\n" +
+      "보도 3건 고르는 법:\n" +
+      "  · 우선순위 — ①시한이 박힌 정부 공식 발표 ②[단독]·최초 확인 보도 ③부처 업무보고·" +
+      "국무회의 의결 ④사업지 현장 사건(파업·집단 반발) ⑤일반 진행 보도. " +
+      "정치 공방·지자체 홍보성·타지역 사업 기사는 뽑지 않는다.\n" +
+      "  · 같은 사건은 몸통 기사(회의·발표 자체)를 고른다 — 파편·반응 기사를 대표로 세우지 말 것.\n" +
+      "  · 3건이 같은 주제로 겹치면 실패 — 진행·리스크·결정을 섞는다.\n" +
+      "  · prevReports(어제 보도)와 같은 사안이면 어제와 달라진 것이 title 에 드러나야 한다. " +
+      "달라진 게 없으면 다른 기사를 고른다.\n" +
       "body 는 title 을 되풀이하지 않는다. title 에 없는 것만 담는다 — 배경·수치·일정·쟁점·" +
       "이해관계자 반응 중 하나. title 을 풀어 쓴 문장이면 실패다.\n" +
+      "body 의 모든 사실은 headlineIndex·extraIndexes 로 지목한 기사 안에 있어야 한다. " +
+      "다른 기사의 수치·사실을 보탰으면 그 번호를 extraIndexes 에 전부 적는다. " +
+      "법정 처리기한·절차 상식(공람 20일, 주민투표 잔존 등)을 기사 사실처럼 쓰지 말 것 — " +
+      "근거 조문·기한은 코드가 주석으로 붙인다.\n" +
       "status 는 그 분야에서 우리가 판에 취할 조치다(정책 상황 서술이 아니다).\n" +
       // 부처 하나로 닫히는 일은 그 부처가 알아서 한다. 국무조정실이 봐야 하는 것은
       // 부처 사이에 걸쳐 아무도 끝까지 책임지지 않는 구간이다.
@@ -233,9 +259,23 @@ if (!process.argv.includes("--no-judge")) {
       "  · 부처 이름은 기사·데이터에 나온 것만 쓴다. 소관을 추측해 지어내지 말 것.\n" +
       "  · 협의·합의·이견·부처 간·범정부·조정 같은 말이 기사에 있으면 다부처 신호다.\n" +
       "  · risks 를 고를 때 여러 부처가 걸린 건을 한 부처짜리보다 앞에 둔다.\n" +
+      "risks 는 오늘 기사에 문면 근거가 있어야 한다 — 관문 지식으로 리스크를 만들지 말 것" +
+      "(기사에 없는 '규정 미제정' 류 금지):\n" +
+      "  · 칼럼·사설만 근거면 text 앞에 '(칼럼) ' 을 붙여 근거 성격을 밝힌다.\n" +
+      "  · interlock 은 기사 문면이나 관문 의존관계로 입증되는 연쇄만 — 병렬 절차를 " +
+      "인과로 잇지 말 것(전력계획 지연→용수계획 불가 같은 창작이 대표 실패).\n" +
+      "  · 장관·전문가의 조건부 발언·전망은 '발언 제기 + 파급' 구조로 쓴다 — 가정문을 " +
+      "벌어진 일처럼 쓰면 실패다.\n" +
+      "  · 사업지 현장의 노동·쟁의 기사(파업·교섭 결렬)가 오늘 있으면 반드시 리스크 " +
+      "후보로 검토한다 — 현장 파업은 민간 갈등이 아니라 공정 리스크다.\n" +
       "advances: gateSteps 에 든 절차 중, 오늘 기사가 '실제로 일어났다'고 말하는 것만 고른다.\n" +
       "  '필요하다·요구했다·전망이다·검토 중이다'는 일어난 게 아니다 — 넣지 말 것.\n" +
       "  '확정·의결·선정·고시·체결·접수'처럼 그 절차가 끝났음이 분명할 때만 verdict 를 '일어남'으로 한다.\n" +
+      "  제목에 통과·의결·확정·선정·고시·접수·체결이 있는 기사는 하나하나 advances 후보로 " +
+      "검토하라 — 완료 사건을 놓치는 것도 실패다.\n" +
+      "  3중 일치 — ①절차 명칭 ②행위 주체 ③대상 사업이 gateSteps 정의와 맞을 때만 넣는다. " +
+      "'유치 신청'≠'승인 신청', '로드맵 발표'≠법정 계획 확정.\n" +
+      "  '심의 및 공고' 같은 복합 절차는 전 단계가 기사로 확인될 때만 — 앞부분만 확인되면 넣지 않는다.\n" +
       "  해당 없으면 빈 배열. 지어내지 말 것 — step 은 gateSteps 의 문자열을 그대로 복사한다.\n\n데이터:\n" +
       JSON.stringify(payload);
     const out = execFileSync("claude", ["-p", prompt], { encoding: "utf8", timeout: 240_000 });
@@ -258,7 +298,9 @@ if (!process.argv.includes("--no-judge")) {
       const h = HEADLINES[r.headlineIndex];
       r.press = h ? h.press : null;
       r.sourceTitle = h ? h.title : null;
-
+      // 사실을 보탠 기사도 제목으로 남긴다 — 검수 때 출처 추적이 끊기지 않게
+      r.extraTitles = (r.extraIndexes ?? [])
+        .map((i) => HEADLINES[i]?.title).filter(Boolean);
     }
     brief = parsed;
     text = render(parsed);

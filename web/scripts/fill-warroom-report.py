@@ -10,7 +10,7 @@ rhwp 는 빈 문서에 글을 넣지 못하므로(replace-text/set-cell/fill-fie
 산출물: <out-dir>/warroom-<날짜>.hwpx · .pdf · .png
 환경변수 RHWP 로 실행 파일 경로를 바꿀 수 있다(기본 ~/.local/bin/rhwp).
 """
-import argparse, json, os, re, subprocess, sys
+import argparse, datetime as _dt, json, os, re, subprocess, sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -216,8 +216,10 @@ def han_num(n: int) -> str:
 # 숫자만("113560원")과 한글 단위 혼용("22억원")을 모두 잡는다. 동향 보고에서는
 # 22억원을 금2,200,000,000원으로 펴 쓰면 오히려 읽기 나쁘므로, 아라비아 숫자와
 # 단위는 그대로 두고 괄호 안 한글만 붙인다.
+# 백테스트(2026-08): "13~18원"·"최대 18원"까지 갖은자로 바꿔 1면 제목을
+# 훼손했다 — 범위 표기(~· 뒤)와 소액은 계약 금액이 아니라 제외한다.
 _UNIT = {"조": 10**12, "억": 10**8, "만": 10**4}
-_MONEY = re.compile(r"(?<![\d,금])(\d{1,3}(?:,\d{3})+|\d+)\s*([조억만])?\s*원(?![\w])")
+_MONEY = re.compile(r"(?<![\d,금~\-–—])(\d{1,3}(?:,\d{3})+|\d+)\s*([조억만])?\s*원(?![\w])")
 
 
 def money_hangul(text: str) -> str:
@@ -225,9 +227,30 @@ def money_hangul(text: str) -> str:
     def sub(m):
         num, unit = m.group(1).replace(",", ""), m.group(2)
         n = int(num) * _UNIT.get(unit or "", 1)
+        if n < 10000:                  # 요금·단가류 소액은 병기 대상이 아니다
+            return m.group(0)
         shown = f"{int(num):,}{unit or ''}"
         return f"금{shown}원(금{han_num(n)}원)"
     return _MONEY.sub(sub, text)
+
+
+# ── 부처명 정규화 ────────────────────────────────────────────────────────
+# 절차 데이터는 개편 전 직제(산업통상자원부·기획재정부·환경부)로 남아 있고
+# 기사 세계는 개편 후(산업통상부·기획예산처·기후에너지환경부)다. 한 문서에
+# 두 이름이 섞이거나(산업통상부/산업통상자원부) 같은 부처가 협의 상대로
+# 병렬되는 사고(기후에너지환경부·환경부 협의)가 백테스트에서 반복됐다.
+_MIN_RENAME = [("산업통상자원부", "산업통상부"),
+               ("기획재정부", "기획예산처"), ("기재부", "기획예산처")]
+
+
+def normalize_ministries(s):
+    for old, new in _MIN_RENAME:
+        s = s.replace(old, new)
+    # '기후에너지환경부' 안의 '환경부'를 다시 바꾸지 않도록 앞말을 본다
+    s = re.sub(r"(?<!에너지)환경부", "기후에너지환경부", s)
+    # 정규화로 같아진 이름이 ·로 병렬되면 하나로 줄인다
+    s = re.sub(r"([가-힣]{2,10}(?:부|처|청))·\1", r"\1", s)
+    return s
 
 
 def tidy(t):
@@ -285,6 +308,47 @@ def _downstream(ho, g):
 
 SIGNALS = WEB / "public/warroom/map/signals.json"
 LOOPDATA = WEB / "public/warroom/loop/data.json"
+
+# ── 지시 이력 ────────────────────────────────────────────────────────────
+# 백테스트 20일에서 같은 ○줄이 18일 나갔다. 지시 선별이 결정론이라 관문
+# 상태가 안 변하면 순위가 고정되기 때문 — 어제 나간 지시를 기억해 뒤로
+# 미루고, 그래도 나가면 '이행 점검'으로 관점을 올린다.
+HISTORY = WEB / "public/warroom/loop/directive-history.json"
+_PICKED_GATES = []
+
+
+def _load_history():
+    try:
+        return json.loads(HISTORY.read_text())
+    except Exception:
+        return {}
+
+
+def _streak(hist, gate, today):
+    """직전 보고에도 나간 지시인가. 주말을 낀 하루(4일 이내)면 연속으로 본다."""
+    h = hist.get(gate)
+    if not h:
+        return 0
+    try:
+        gap = (_dt.date.fromisoformat(today) - _dt.date.fromisoformat(h["last"])).days
+    except Exception:
+        return 0
+    return h.get("streak", 0) if 0 < gap <= 4 else 0
+
+
+def update_history(day):
+    """보고가 실제로 구워진 뒤에만 부른다 — 실패한 시도를 이력으로 치지 않는다."""
+    hist = _load_history()
+    for g in _PICKED_GATES:
+        hist[g] = {"streak": _streak(hist, g, day) + 1, "last": day}
+    keep = {}
+    for g, h in hist.items():
+        try:
+            if (_dt.date.fromisoformat(day) - _dt.date.fromisoformat(h["last"])).days <= 14:
+                keep[g] = h
+        except Exception:
+            pass
+    HISTORY.write_text(json.dumps(keep, ensure_ascii=False, indent=1) + "\n")
 
 
 def reported_today():
@@ -456,6 +520,7 @@ def how_to(steps, ministries, follow):
 # 절차 안내처럼 읽힌다. ○ 과의 층위 차이는 문형이 아니라 구체성에서 나온다 —
 # 사안마다 '무엇을 어떻게'가 달라야 한다. 지어내기는 기계 검증으로 막는다.
 REFINE_TIMEOUT = 240
+_REFINE_CACHE = {}       # 압축 재생성 때 같은 claude 호출을 반복하지 않는다
 
 
 def refine_directives(items, brief, gmap):
@@ -483,6 +548,9 @@ def refine_directives(items, brief, gmap):
            "reports": [r.get("title") for r in brief.get("reports", [])],
            "risks": [{"text": r.get("text"), "detail": r.get("detail"),
                       "gates": r.get("gates")} for r in brief.get("risks", [])]}
+    cache_key = tuple(d["circle"] for d in data)
+    if cache_key in _REFINE_CACHE:
+        return _REFINE_CACHE[cache_key]
     prompt = (
         "너는 광주 군공항 이전·반도체 클러스터 상황실의 수석 보좌관이다.\n"
         "일일 동향 보고 '조치 필요사항'의 각 항목은 두 단이다:\n"
@@ -497,6 +565,14 @@ def refine_directives(items, brief, gmap):
         "무엇부터 먼저 할지, 기한이 있으면 언제까지인지 중 사안에 맞는 것\n"
         "  ③ follow.task 가 있으면 그 문자열을 한 글자도 바꾸지 말고 문장에 넣는다 "
         "— 다음 관문 준비까지 잇는 지시임을 보이는 자리다\n"
+        "지시의 주어는 수신자(○의 부처)다:\n"
+        "  · 수신자 자신의 이름을 문장에 다시 쓰지 말 것 — '국방부와 합동으로' 같은 "
+        "자기협의 지시가 대표 실패다\n"
+        "  · 신청·공사의 주체가 기업·사업시행자인 절차는 부처가 대신 하는 게 아니라 "
+        "부처가 할 일(접수·기한 관리·협의 회신·목록 확정)로 바꿔 쓴다\n"
+        "  · 한 항목은 한 절차 사슬만 — 인과를 말할 수 없는 두 행동을 '~해 ~할 것'으로 "
+        "묶지 말고, 그날 기사 소재는 실제 연결이 있을 때만 넣는다(억지 접합 금지)\n"
+        "  · 위 risks 의 판단과 모순되는 지시 금지(예: 용수 지연 리스크인데 공사를 앞당기라)\n"
         "금지: ①데이터에 없는 기관·수치·날짜·절차 지어내기 ②'검토·노력·만전' 같은 "
         "빈말 ③'보고할 것'(부처가 총리에게 보고하는 게 아니라 부처가 할 일을 쓴다) "
         "④세 항목을 같은 문형·같은 종결로 쓰는 것 — '준비를 갖출 것' 반복이 대표 실패다.\n"
@@ -513,13 +589,22 @@ def refine_directives(items, brief, gmap):
     except Exception as e:
         print(f"  지시문 다듬기 생략({type(e).__name__}: {e}) — 기계 조립 사용",
               file=sys.stderr)
-        return [None] * len(items)
+        _REFINE_CACHE[cache_key] = [None] * len(items)
+        return _REFINE_CACHE[cache_key]
 
+    # 뜻이 결정되지 않는 술어 — 형식은 맞아도 지시로 기능하지 못한다(백테스트)
+    VAGUE = ("걸 것", "같이 잡고", "나란히 붙")
     universe = {m for ms in gate_ministries().values() for m in ms}
     out = []
     for i, it in enumerate(items):
         line = tidy(lines[i]) if i < len(lines) and isinstance(lines[i], str) else ""
         ok = bool(line) and line.endswith("것") and not line.endswith("보고할 것")
+        if ok and any(v in line for v in VAGUE):
+            ok = False
+        # 수신자가 자기 이름을 다시 부르면 자기협의 지시다("국방부와 합동으로")
+        if ok and any(tok and len(tok) >= 3 and tok in line
+                      for tok in it["actor"].split("·")):
+            ok = False
         if it["follow"]:
             task, tg = it["follow"]
             if task in line:
@@ -537,6 +622,7 @@ def refine_directives(items, brief, gmap):
         if not ok and line:
             print(f"  지시문 검증 탈락 → 폴백: {line}", file=sys.stderr)
         out.append(line if ok else None)
+    _REFINE_CACHE[cache_key] = out
     return out
 
 
@@ -629,24 +715,29 @@ def directives(advances):
     return out
 
 
-def to_dsl(b):
+def to_dsl(b, compact=False):
     """구조(JSON) → 한글 라인 DSL. 슬롯이 없으므로 항목 수 제한이 없다.
 
     LLM 에게 DSL 을 직접 시키지 않는 이유: 자유 텍스트는 형식이 계속 어긋난다
     (마크다운 혼입·서두·불릿 변형을 일곱 번 겪었다). 검증 가능한 JSON 을 받고
     DSL 은 코드가 만든다. 그러면 사람이 DSL 을 손으로 고쳐 다시 굽는 것도 된다.
+
+    compact: 1쪽을 넘긴 경우의 재생성 모드 — 부연을 한 줄로 조인다.
     """
+    wide = 1 if compact else 2      # 부연·상술 줄 수 상한
     gmap = gate_names()
     y, mo, d = b["date"].split("-")
     L = [f"제목: {b['title']}",
          f"부제: {y}. {int(mo)}. {int(d)}. · 언론·정책브리핑 신호 자동집계 기반",
          "네모: 주요 보도내용"]
+    # 보도 제목·부연은 기사 원문 전언이라 금액 갖은자 병기를 걸지 않는다
+    # ("금54조원(금오십사조원)"이 제목을 훼손한 백테스트 사고)
     for r in b.get("reports", []):
         press = f"({r['press']}) " if r.get("press") else ""
-        L.append(f"원: {press}{tidy(money_hangul(r['title']))}")
+        L.append(f"원: {press}{tidy(r['title'])}")
         if r.get("body"):
             # * 는 한 줄 부연이다 — 넘치면 절 경계에서 끊는다
-            L.append(f"주석: {fit_lines(tidy(money_hangul(r['body'])), SMALL_W, 2)}")
+            L.append(f"주석: {fit_lines(tidy(r['body']), SMALL_W, wide)}")
 
     L.append("엔터:")
     L += ["네모: 리스크·갈등"]
@@ -684,36 +775,43 @@ def to_dsl(b):
             il = tidy(r["interlock"])
             detail = f"{il}, {detail}" if detail else il
         if detail:
-            L.append(f"바: {fit_lines(detail, BODY_W, 2)}")
+            L.append(f"바: {fit_lines(detail, BODY_W, wide)}")
 
         # * 부연 — 관문·소관·근거 조문. 수치는 이미 위 두 줄에 들어간다.
+        # 소관 표기는 대표 관문 것만 — 병기 관문의 기관까지 합치면 전기본
+        # 협의에 소방본부가 끼는 사고가 난다(백테스트 8-13).
         g = gs[0] if gs else None
+        ms_show = []
+        for m2 in list(r.get("ministries") or []) + (gmin.get(g, []) if g else []):
+            if m2 not in ms_show:
+                ms_show.append(m2)
         bits = []
         if g:
             more = f" 외 {len(gs)-1}" if len(gs) > 1 else ""
             bits.append(f"{gmap.get(g, '')}^({g}){more}^")
-        if len(ms) > 1:
-            bits.append("·".join(ms[:3]) + " 협의")
-        elif ms:
-            bits.append(ms[0])
+        if len(ms_show) > 1:
+            bits.append("·".join(ms_show[:3]) + " 협의")
+        elif ms_show:
+            bits.append(ms_show[0])
         elif g and leads.get(g):
             bits.append(leads[g])
         if g and gbasis.get(g):
             bits.append(gbasis[g])
         if bits:
-            L.append("주석: " + fit_bits(bits, SMALL_W, 2))
+            L.append("주석: " + fit_bits(bits, SMALL_W, wide))
 
     L += ["엔터:", "네모: 조치 필요사항"]
 
     def resolve_actor(gate, st, ms):
-        """총리가 이름을 불러 챙기게 할 상대를 정한다.
+        """총리가 이름을 불러 챙기게 할 '주무' 하나를 정한다.
 
         주체가 "제안자(지자체·민간)" 처럼 괄호를 물고 있어 · 로 자르면
         "제안자(지자체" 가 된다. 주체 이름 자체에도 · 가 들어가므로
         ('선정·지원위원회') 여럿이 나열된 경우만 쉼표·슬래시로 끊는다.
+
+        협의기관을 병렬 승격하면(산림청·해양수산부가 개발행위허가 주체로)
+        수신자가 어긋난다 — 백테스트 최다 사고. 협의기관은 * 로 내린다.
         """
-        if len(ms) > 1:              # 맞물린 부처를 함께 적어야 물림이 드러난다
-            return "·".join(ms[:2])
         a = re.sub(r"\s*\([^)]*\)", "", st.get("actor") or "")
         a = re.split(r"[,/]|\s+및\s+", a)[0].strip()
         if actionable(a):
@@ -723,8 +821,14 @@ def to_dsl(b):
 
     # 같은 부처가 연달아 나오면 총리 보고로서 읽을 값이 떨어진다.
     # 후보를 넉넉히 받아 한 기관당 하나씩만 올린다.
+    # 순서: 오늘 진척이 확인된 절차(왜=완료)가 반복 여부와 무관하게 먼저,
+    # 나머지는 최근 보고에 안 나간 관문부터(같은 지시 18/20일 반복의 처방).
+    hist = _load_history()
+    cands = sorted(enumerate(directives(b.get("advances"))[:12]),
+                   key=lambda x: (0 if "완료" in x[1][3] else 1,
+                                  _streak(hist, x[1][0], b["date"]), x[0]))
     picked, used = [], set()
-    for cand in directives(b.get("advances"))[:12]:
+    for _i, cand in cands:
         actor = resolve_actor(cand[0], cand[2], gmin.get(cand[0], []))
         if actor in used:
             continue
@@ -732,6 +836,23 @@ def to_dsl(b):
         picked.append((actor, *cand))
         if len(picked) == 3:
             break
+
+    # 관점어 후보 — 한 문서 안에서 세 항목이 같은 관점어를 달면 층위가
+    # 무너진다(백테스트: '부처 협의 상황 점검' 일색). 범주별로 돌려 쓴다.
+    ASPECTS = {
+        "done": ["착수 일정 확정", "후속 절차 준비 점검"],
+        "next": ["준비상황 점검", "사전 준비 착수 확인"],
+        "multi": ["부처 협의 상황 점검", "협의 쟁점·기한 확인", "합동 추진체계 점검"],
+        "ready": ["착수 여부 확인", "미착수 사유 확인"],
+    }
+    used_aspects = set()
+
+    def pick_aspect(kind):
+        for a2 in ASPECTS[kind]:
+            if a2 not in used_aspects:
+                used_aspects.add(a2)
+                return a2
+        return ASPECTS[kind][0]
 
     items = []
     for actor, gate, inst, st, why in picked:
@@ -743,14 +864,19 @@ def to_dsl(b):
 
         # ○ 은 총리가 부처에 '무엇을 하게 할 것인가'다. 명시적 지시문은
         # 아니지만 무엇을 하라는 것인지는 남아야 하므로 동사형으로 맺는다.
-        if len(ms) > 1:
-            aspect = "부처 협의 상황 점검"
+        # 그래도 또 나간 지시는 새 지시가 아니라 이행 점검이다.
+        n_rep = _streak(hist, gate, b["date"])
+        if n_rep >= 1:
+            aspect = "전일 지시 이행 점검" if n_rep == 1 \
+                else f"지시 {n_rep + 1}회째 이행 점검"
         elif "완료" in why:
-            aspect = "착수 일정 확정"      # 직전 절차가 끝났다는 보도가 있었다
+            aspect = pick_aspect("done")   # 직전 절차가 끝났다는 보도가 있었다
         elif "다음 관문" in why:
-            aspect = "준비상황 점검"       # 아직 이 관문 차례가 오지 않았다
+            aspect = pick_aspect("next")   # 아직 이 관문 차례가 오지 않았다
+        elif len(ms) > 1:
+            aspect = pick_aspect("multi")
         else:
-            aspect = "착수 여부 확인"      # 선행이 끝나 시작할 수 있는데 소식이 없다
+            aspect = pick_aspect("ready")  # 선행이 끝나 시작할 수 있는데 소식이 없다
 
         # ○ 는 한 줄이어야 한다. 주체와 관점어는 못 줄이므로 절차명을 깎는다.
         # 관문 표시는 아래 * 로 내렸다 — ○ 는 '누가 무엇을' 만 담는다
@@ -792,20 +918,25 @@ def to_dsl(b):
         # 지시가 아니게 된다. 길이는 위에서 검증했거나 단계 수로 맞췄다.
         L.append(f"바: {line}")
 
-        # * 부연 — 관문·근거 조문·부처 협의·기한
-        # 부처 이름은 위 ○ 에 이미 나왔다 — 세 곳 이상 걸린 경우만 나머지를 덧붙인다
+        # * 부연 — 관문·협의기관·근거 조문·기한
+        # ○ 는 주무 하나만 부르므로, 얽힌 부처는 여기서 '협의:'로 밝힌다
         bits = [f"{gmap.get(gate, '')}^({gate})^"]
-        if len(ms) > 2:
-            bits.append("·".join(ms[2:4]) + " 포함")
+        others = [m for m in ms if m != it["actor"]][:2]
+        if others:
+            bits.append("협의: " + "·".join(others))
         if short_basis(st.get("basis")):
             bits.append(short_basis(st.get("basis")))
         if st.get("deadline"):
             bits.append(f"기한 {st['deadline']}")
-        L.append("주석: " + fit_bits(bits, SMALL_W, 2))
+        L.append("주석: " + fit_bits(bits, SMALL_W, wide))
 
     # ※ 수치 꼬리말은 뺐다(2026-08-30) — 규모 자랑이지 보고가 아니다.
     # 수치는 briefing.json 의 pipeline 에 계속 남으므로 필요하면 되살릴 수 있다.
-    return L
+    global _PICKED_GATES
+    _PICKED_GATES = [it["gate"] for it in items]
+    # 마지막에 부처명을 한 번에 정규화 — 절차 데이터의 개편 전 직제와
+    # 기사 세계의 현행 직제가 한 문서에 섞이지 않게 한다
+    return [normalize_ministries(x) for x in L]
 
 
 def build_tokens():
@@ -997,9 +1128,19 @@ def main():
     build(lines, doc)
 
     pages = json.loads(run("export-text", str(doc), "--json"))["pages"]
+    # 한 장 규격 가드 — 백테스트 20일 중 3일이 조용히 2쪽으로 넘쳤다.
+    # 부연 줄 수를 한 줄로 조여 다시 굽는다(지시 다듬기는 캐시라 재호출 없음).
+    if len(pages) > 1 and not a.from_dsl:
+        print("1쪽 초과 — 압축 모드 재생성", file=sys.stderr)
+        lines = to_dsl(b, compact=True)
+        dsl_path.write_text("\n".join(lines) + "\n")
+        build(lines, doc)
+        pages = json.loads(run("export-text", str(doc), "--json"))["pages"]
     text = "\n".join(p["text"] for p in pages)
     if len(text.strip()) < 100:
         sys.exit("생성된 문서가 비어 있다 — 중단한다.")
+    if not a.from_dsl:
+        update_history(date)     # 보고서가 실제로 구워진 지시만 이력에 남긴다
 
     run("export-pdf", str(doc), "-o", str(out / f"{stem}.pdf"))
     subprocess.run(["pdftoppm", "-png", "-r", "150", "-f", "1", "-l", "1",
