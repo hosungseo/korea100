@@ -68,6 +68,16 @@ def pick(sec, *names):
     return []
 
 
+# ○ 줄(HY헤드라인M 15pt, 들여쓰기 1500)이 한 줄에 담기는 폭.
+# 실측: 폭 24 는 담기고 28.5 는 "(N3 / 1)" 로 쪼개졌다 — 여유를 두고 25.
+DIRECTIVE_W = 25
+
+
+def disp_w(s):
+    """한글은 1, 영숫자·괄호는 0.5 로 세는 표시 폭. 글자 수로만 재면 어긋난다."""
+    return sum(0.5 if ord(c) < 0x1100 else 1 for c in s)
+
+
 def shorten(nm, limit):
     """말끝이 잘려 뜻이 끊기지 않도록 구분자(·, 공백) 경계에서 자른다."""
     if len(nm) <= limit:
@@ -198,6 +208,30 @@ def reported_today():
     return {g for g, arr in S.items() if any(a["pubDate"] >= since for a in arr)}
 
 
+# 절차의 '주체'가 이들이면 행정기관이 아니라 민간이다 — 지시 대상이 될 수 없다
+NON_ACTOR = re.compile(r"주민|신청인|제안자|사업자|기업|이용자|소유주|발주자|입주|당사자")
+
+
+def gate_leads():
+    """관문 → 감독기관. 절차 주체가 민간이면 지시를 이쪽으로 돌린다.
+
+    ministries 가 비어 있는 관문이 많아 lead, decision 까지 훑는다.
+    decision 에는 '이전부지선정위원회'처럼 위원회 이름이 들어가므로 순위를 뒤에 둔다.
+    """
+    try:
+        nodes = json.loads(MAPDATA.read_text())["nodes"]
+    except Exception:
+        return {}
+    out = {}
+    for n in nodes:
+        cands = (n.get("ministries") or []) + (n.get("lead") or []) + (n.get("decision") or [])
+        for c in cands:
+            if c and not NON_ACTOR.search(c):
+                out[n["id"]] = c
+                break
+    return out
+
+
 def directives(advances):
     """지시 후보를 뽑는다.
 
@@ -288,20 +322,29 @@ def to_dsl(b):
                      + (f" 외 {len(gs)-1}" if len(gs) > 1 else ""))
 
     L += ["엔터:", "네모: 지시 필요사항"]
+    leads = gate_leads()
     for gate, inst, st, why in directives(b.get("advances"))[:2]:
         # 주체가 "제안자(지자체·민간)" 처럼 괄호를 물고 있어 · 로 자르면 "제안자(지자체" 가 된다
         # 주체 이름 자체에 · 가 들어간다('선정·지원위원회'). · 로 자르면 '선정'만 남는다.
         # 여럿이 나열된 경우만 쉼표·슬래시로 끊고, · 는 이름의 일부로 본다.
         actor = re.sub(r"\s*\([^)]*\)", "", st.get("actor") or "")
         actor = re.split(r"[,/]|\s+및\s+", actor)[0].strip()
-        # 주민·신청인·사업자는 지시 대상이 아니다 — 관리·감독하는 쪽으로 돌린다
-        if not actor or re.search(r"주민|신청인|제안자|사업자|기업|이용자|소유주|발주자", actor):
-            actor = "소관기관"
         # 절차명이 긴 것은 문장이 아니라 목록이라, 첫 마디만 쓰고 줄인다
         name = st["name"]
         if len(name) > 26:
             name = re.split(r"부터|까지", name)[0].strip().rstrip("·") + " 등"
-        L.append(f"원: {actor}: {tidy(name)}({gate})")
+        # 주체가 민간이면 그 절차 자체는 지시할 수 없다. 대신 감독기관에게
+        # '준비상황 점검'을 지시한다 — 주민투표는 못 시켜도 준비는 챙기게 한다.
+        if not actor or NON_ACTOR.search(actor):
+            actor = leads.get(gate) or "소관기관"
+            name = shorten(name, 20) + " 준비상황 점검"
+        # ○ 줄은 한 줄이어야 한다. 넘치면 관문 표시가 "(N3 / 1)" 로 쪼개진다.
+        # 주체는 지시 대상이라 못 줄이므로 절차명 쪽을 깎는다.
+        name = tidy(name)
+        room = DIRECTIVE_W - disp_w(f"{actor}: ({gate})")
+        while name and disp_w(name) > room:
+            name = shorten(name, len(name) - 1)
+        L.append(f"원: {actor}: {name}({gate})")
         # 불릿(*)은 DSL 이 붙인다 — 여기서 붙이면 키워드가 없어 '바'로 폴백한다
         # 조문은 "군 공항 이전 및 지원에 관한 특별법 제6조·제7조·제11조" 처럼 길어
         # 한 줄을 넘긴다. 법령명을 줄이고 조문은 첫 것만 남긴다.
@@ -322,7 +365,8 @@ def to_dsl(b):
         # ※ 줄은 길이를 모델에 맡기지 않고 뒤 항목부터 떨궈 한 줄에 맞춘다
         pipe = fit_pipe(b["pipeline"]).removeprefix("※ ")
         if pipe:
-            L.append(f"당구: {pipe}")
+            # 꼬리말은 들여쓰기 없이 왼쪽 끝에 — 앞 지시사항의 주석으로 안 읽히게
+            L += ["엔터:", f"꼬리: {pipe}"]
     return L
 
 
