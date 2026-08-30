@@ -165,6 +165,30 @@ def fit_lines(text, width, max_lines=2):
     return fit(text, width)
 
 
+# 잘린 문장이 이런 어절로 끝나면 말이 끊긴 것이다("…맞물린 구간으로",
+# "…확정이 남은"). 명사로 끝나는 어절까지 물러서서 개조식으로 맺는다.
+_DANGLING = re.compile(
+    r"(으로|에서|부터|까지|하고|하며|이며|라는|하는|되는|있는|없는"
+    r"|위한|대한|통한|따른|남은)$")
+
+
+def finish_noun(cut, full):
+    """절단된 문장의 꼬리를 명사형으로 맺는다. 안 잘린 문장은 안 건드린다."""
+    if cut == full:
+        return cut
+    words = cut.split(" ")
+    for _ in range(2):
+        if len(words) > 1 and _DANGLING.search(words[-1]):
+            words.pop()
+        else:
+            break
+    # 남은 꼬리가 '확정이'처럼 조사 한 글자면 떼어 명사로 맺는다.
+    # '결과·진입로'류 명사를 다치지 않게 주격·목적격 등만, 세 글자부터.
+    if words and len(words[-1]) >= 3 and words[-1][-1] in "이가을를은는와":
+        words[-1] = words[-1][:-1]
+    return " ".join(words).rstrip(" ,·")
+
+
 def shorten(nm, limit):
     """말끝이 잘려 뜻이 끊기지 않도록 구분자(·, 공백) 경계에서 자른다."""
     if len(nm) <= limit:
@@ -600,36 +624,73 @@ def refine_directives(items, brief, gmap):
         _REFINE_CACHE[cache_key] = [None] * len(items)
         return _REFINE_CACHE[cache_key]
 
-    # 뜻이 결정되지 않는 술어 — 형식은 맞아도 지시로 기능하지 못한다(백테스트)
+    # ── 기계 검증 — 어긋나면 '사유'와 함께 탈락시킨다 ──
     VAGUE = ("걸 것", "같이 잡고", "나란히 붙")
     universe = {m for ms in gate_ministries().values() for m in ms}
-    out = []
-    for i, it in enumerate(items):
-        line = tidy(lines[i]) if i < len(lines) and isinstance(lines[i], str) else ""
-        ok = bool(line) and line.endswith("것") and not line.endswith("보고할 것")
-        if ok and any(v in line for v in VAGUE):
-            ok = False
+
+    def check(it, raw):
+        """지시문 한 줄 검증. (정제된 줄, None) 또는 (None, 탈락 사유)."""
+        line = tidy(raw) if isinstance(raw, str) else ""
+        if not line:
+            return None, "빈 문장"
+        if not line.endswith("것") or line.endswith("보고할 것"):
+            return None, "종결은 '~할 것', '보고할 것'은 금지"
+        if any(v in line for v in VAGUE):
+            return None, "뜻이 결정되지 않는 술어('걸 것'·'같이 잡고' 류)"
         # 수신자가 자기 이름을 다시 부르면 자기협의 지시다("국방부와 합동으로")
-        if ok and any(tok and len(tok) >= 3 and tok in line
-                      for tok in it["actor"].split("·")):
-            ok = False
+        if any(tok and len(tok) >= 3 and tok in line
+               for tok in it["actor"].split("·")):
+            return None, "수신자 자기 호명 — 수신자를 주어로 두고 이름을 빼라"
         if it["follow"]:
             task, tg = it["follow"]
-            if task in line:
-                line = line.replace(task, f"{task}^({tg})^", 1)
-            else:
-                ok = False
+            if task not in line:
+                return None, f"후속절차 '{task}' 문자열이 그대로 들어가야 함"
+            line = line.replace(task, f"{task}^({tg})^", 1)
         # 이 항목 맥락(주체·부처·다음 절차 주체·후속절차)에 없는 부처가 나오면 창작이다
         allowed = " ".join([it["actor"], *it["ms"],
                             *(a for _n, a, _d in it["nxt"]),
                             it["follow"][0] if it["follow"] else ""])
-        if ok and any(u in line and u not in allowed for u in universe):
-            ok = False
-        if ok and not lines_ok(line, BODY_W, 2):
-            ok = False
-        if not ok and line:
-            print(f"  지시문 검증 탈락 → 폴백: {line}", file=sys.stderr)
-        out.append(line if ok else None)
+        wrong = [u for u in universe if u in line and u not in allowed]
+        if wrong:
+            return None, f"데이터에 없는 부처명({wrong[0]})"
+        if not lines_ok(line, BODY_W, 2):
+            return None, "두 줄 폭 초과 — 더 짧게"
+        return line, None
+
+    out, fails = [], []
+    for i, it in enumerate(items):
+        raw = lines[i] if i < len(lines) else ""
+        line, why = check(it, raw)
+        if why and isinstance(raw, str) and raw:
+            print(f"  지시문 검증 탈락({why}) → 재작성 시도: {raw}", file=sys.stderr)
+            fails.append({"i": i, "line": raw, "why": why})
+        out.append(line)
+
+    # 탈락분은 사유를 알려주고 한 번만 다시 쓰게 한다 — 그냥 기계 조립으로
+    # 떨어뜨리면 '준비를 갖출 것' 반복 문형이 돌아온다(백테스트).
+    if fails:
+        retry = ("방금 쓴 실무 지시문 중 아래 항목이 기계 검증에서 탈락했다. "
+                 "규칙(수신자 기준 행동·자기 호명 금지·follow.task 원문 포함·"
+                 "36~48자·'~할 것' 종결·데이터에 없는 기관 금지)을 지키면서 "
+                 "탈락 사유를 해소해 각 항목을 다시 써라.\n"
+                 '출력은 JSON 하나만: {"lines":["아래 항목 순서대로 - 줄", ...]}\n'
+                 "항목:\n" + json.dumps(
+                     [{"item": data[f["i"]], "탈락문장": f["line"], "사유": f["why"]}
+                      for f in fails], ensure_ascii=False))
+        try:
+            r2 = subprocess.run(["claude", "-p", retry], capture_output=True,
+                                text=True, timeout=REFINE_TIMEOUT)
+            m2 = re.search(r"\{[\s\S]*\}", r2.stdout)
+            for f, raw2 in zip(fails, json.loads(m2.group(0))["lines"]):
+                line2, why2 = check(items[f["i"]], raw2)
+                if line2:
+                    out[f["i"]] = line2
+                else:
+                    print(f"  재작성도 탈락({why2}) → 기계 조립: {raw2}",
+                          file=sys.stderr)
+        except Exception as e:
+            print(f"  지시문 재작성 실패({type(e).__name__}) — 기계 조립 폴백",
+                  file=sys.stderr)
     _REFINE_CACHE[cache_key] = out
     return out
 
@@ -745,7 +806,8 @@ def to_dsl(b, compact=False):
         L.append(f"원: {press}{tidy(r['title'])}")
         if r.get("body"):
             # * 는 한 줄 부연이다 — 넘치면 절 경계에서 끊는다
-            L.append(f"주석: {fit_lines(tidy(r['body']), SMALL_W, wide)}")
+            body = tidy(r["body"])
+            L.append(f"주석: {finish_noun(fit_lines(body, SMALL_W, wide), body)}")
 
     L.append("엔터:")
     L += ["네모: 리스크·갈등"]
@@ -783,7 +845,7 @@ def to_dsl(b, compact=False):
             il = tidy(r["interlock"])
             detail = f"{il}, {detail}" if detail else il
         if detail:
-            L.append(f"바: {fit_lines(detail, BODY_W, wide)}")
+            L.append(f"바: {finish_noun(fit_lines(detail, BODY_W, wide), detail)}")
 
         # * 부연 — 관문·소관·근거 조문. 수치는 이미 위 두 줄에 들어간다.
         # 소관 표기는 대표 관문 것만 — 병기 관문의 기관까지 합치면 전기본
