@@ -488,7 +488,13 @@
       #moongraph .gline { fill: none; stroke-width: 5; stroke-linecap: round; }
       #moongraph .gline.price { stroke: #f0b94a; }
       #moongraph .gline.work { stroke: #5fdcae; }
-      #moongraph .ahead { fill: #5fdcae; stroke: none; }
+      #moongraph .ax.thin { stroke: #354b3d; stroke-width: 1.5; }
+      #moongraph .cause { fill: #9fb8a9; font-size: 21px; font-weight: 800; letter-spacing: 0.02em; }
+      /* 사람 인건비 기준선 — 이 선을 넘는 순간이 이 장면의 요점이다 */
+      #moongraph .baseline { stroke: #cfe0d6; stroke-width: 2.5; stroke-dasharray: 10 8; opacity: 0.8; }
+      #moongraph .basel { fill: #cfe0d6; font-size: 21px; font-weight: 800; }
+      #moongraph .xdot { fill: #ffffff; stroke: #10201a; stroke-width: 3; }
+      #moongraph .xlab { fill: #eaf3ee; font-size: 20px; font-weight: 800; }
       /* 위로 갈수록 옅어지게 — 네모난 패널이 아니라 '열리는 공간'으로 읽히게 한다 */
       #moongraph #mg-band { fill: url(#mg-fade); stroke: none; }
       #moongraph .glabel { font-size: 23px; font-weight: 830; }
@@ -911,26 +917,47 @@
               <div id="moontok">
                 <p class="tk" id="tk0">그런데 최근, 전제 하나가 달라졌습니다<span class="cn">개념도</span></p>
                 <svg id="moongraph" viewBox="0 0 1180 360" width="1180" height="360" aria-hidden="true">
+                  <!-- 두 칸으로 나눈다. 단가와 업무량은 단위가 달라 같은 축에 겹치면
+                       서로 어긋난다 — 각자 자기 축에 그리고 '그래서'로 잇는다 -->
                   <g id="mg-axis">
-                    <line class="ax" x1="92" y1="20" x2="92" y2="316"></line>
+                    <line class="ax" x1="92" y1="18" x2="92" y2="112"></line>
+                    <line class="ax thin" x1="92" y1="112" x2="1130" y2="112"></line>
+                    <line class="ax" x1="92" y1="162" x2="92" y2="316"></line>
                     <line class="ax" x1="92" y1="316" x2="1130" y2="316"></line>
                     <text class="axl" id="mg-xl" x="1128" y="344" text-anchor="end">시간 →</text>
                   </g>
                   <!-- 단서는 축 그룹 밖에 둔다 — 축이 켜질 때 같이 보이면 안 된다 -->
-                  <text class="axl note" id="mg-note" x="100" y="344">성능 수준을 고정했을 때</text>
+                  <text class="axl note" id="mg-note" x="100" y="344">성능 수준을 고정했을 때 · 글로 하는 일 기준</text>
                   <defs>
                     <linearGradient id="mg-fade" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0" stop-color="#5fdcae" stop-opacity="0"></stop>
-                      <stop offset="1" stop-color="#5fdcae" stop-opacity="0.22"></stop>
+                      <stop offset="0" stop-color="#5fdcae" stop-opacity="0.30"></stop>
+                      <stop offset="1" stop-color="#5fdcae" stop-opacity="0.05"></stop>
                     </linearGradient>
+                    <!-- 기준선 위쪽만 칠한다 — 아래는 '아직 못 하던 구간'이라 비워 둔다 -->
+                    <clipPath id="mg-above">
+                      <rect x="92" y="18" width="1040" height="204"></rect>
+                    </clipPath>
                   </defs>
-                  <path id="mg-band" d="M100,60 C300,215 560,272 1112,292 L1112,28 L100,28 Z"></path>
-                  <path id="mg-price" class="gline price" d="M100,60 C300,215 560,272 1112,292"></path>
-                  <path id="mg-arrow" class="gline work" d="M940,268 L940,96"></path>
-                  <path id="mg-head" class="ahead" d="M940,72 L925,102 L955,102 Z"></path>
-                  <text class="glabel price" id="mg-plabel" x="1104" y="272" text-anchor="end">토큰 단가</text>
-                  <text class="glabel work"  id="mg-wlabel" x="940" y="56" text-anchor="middle">같은 예산으로 할 수 있는 일</text>
-                  <text class="bandl" id="mg-bandl" x="470" y="150" text-anchor="middle">지금까지 접어둔 일</text>
+                  <!-- 윗칸 : 원인 — 토큰 단가가 내려간다 -->
+                  <g id="mg-mini">
+                    <path class="gline price" d="M112,32 C280,88 430,104 700,108 C860,110 990,111 1108,111"></path>
+                    <text class="glabel price" x="1104" y="90" text-anchor="end">토큰 단가</text>
+                  </g>
+                  <text id="mg-cause" class="cause" x="600" y="142" text-anchor="middle">↓ 그래서</text>
+                  <!-- 아랫칸 : 결과 — 같은 예산으로 할 수 있는 일이 인건비 선을 넘는다 -->
+                  <g id="mg-base">
+                    <line class="baseline" x1="100" y1="250" x2="1120" y2="250"></line>
+                    <text class="basel" x="108" y="236">사람 인건비로 하던 만큼</text>
+                  </g>
+                  <path id="mg-band" d="M640,250 C760,214 940,186 1112,172 L1112,250 Z"></path>
+                  <path id="mg-work" class="gline work"
+                        d="M100,302 C380,298 520,286 640,250 C760,214 940,186 1112,172"></path>
+                  <g id="mg-cross">
+                    <circle class="xdot" cx="640" cy="250" r="8"></circle>
+                    <text class="xlab" x="770" y="292" text-anchor="middle">여기서 넘어섭니다</text>
+                  </g>
+                  <text class="glabel work" id="mg-wlabel" x="1104" y="156" text-anchor="end">같은 예산으로 할 수 있는 일</text>
+                  <text class="bandl" id="mg-bandl" x="980" y="230" text-anchor="middle">지금까지 접어둔 일</text>
                 </svg>
               </div>
             </div>
@@ -1833,19 +1860,23 @@
           { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, MN + 6.3);
         tl.fromTo("#mg-axis", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, MN + 7.0);
         // 곡선은 dash 로 그려 넣는다(길이는 빌드 시 실측 — seek 해도 같은 그림)
-        [["#mg-price", MN + 9.7, 1.6], ["#mg-arrow", MN + 12.9, 1.0]].forEach(([sel, at, dur]) => {
+        [["#mg-mini path", MN + 9.7, 1.2], ["#mg-work", MN + 12.9, 1.5]].forEach(([sel, at, dur]) => {
           const el = document.querySelector(sel);
           const len = Math.ceil(el.getTotalLength());
           el.style.strokeDasharray = len;
           tl.fromTo(el, { strokeDashoffset: len }, { strokeDashoffset: 0, duration: dur, ease: "power1.inOut" }, at);
         });
-        tl.fromTo("#mg-plabel", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 }, MN + 11.1);
-        tl.fromTo("#mg-head", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.35 }, MN + 13.8);
-        tl.fromTo("#mg-wlabel", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 }, MN + 14.3);
-        tl.fromTo("#mg-band", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.8 }, MN + 14.8);
-        tl.fromTo("#mg-note", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 }, MN + 15.8);
+        tl.fromTo("#mg-mini text", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4 }, MN + 10.6);
+        // 기준선을 곡선보다 먼저 깔아야 '넘어서는' 장면이 읽힌다
+        tl.fromTo("#mg-base", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 }, MN + 11.4);
+        tl.fromTo("#mg-cause", { y: -8, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.45, ease: "power2.out" }, MN + 12.3);
+        tl.fromTo("#mg-cross", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.45 }, MN + 14.5);
+        tl.fromTo("#mg-wlabel", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 }, MN + 14.6);
+        tl.fromTo("#mg-band", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.7 }, MN + 15.2);
+        tl.fromTo("#mg-note", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 }, MN + 15.9);
         tl.fromTo("#mg-bandl", { y: 14, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power2.out" }, MN + 15.2);
+          { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, MN + 15.5);
         tl.to("#moonstage", { autoAlpha: 0.3, duration: 0.5 }, MN + 16.4);
         tl.fromTo("#moonq", { scale: 0.9, autoAlpha: 0 },
           { scale: 1, autoAlpha: 1, duration: 0.7, ease: "back.out(1.3)" }, MN + 16.5);
