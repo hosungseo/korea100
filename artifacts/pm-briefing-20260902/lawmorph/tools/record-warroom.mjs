@@ -75,48 +75,48 @@ await page.addInitScript(() => {
 console.log('goto', URL);
 await page.goto(URL, { waitUntil: 'networkidle', timeout: 60000 });
 await page.waitForSelector('#canvas .node', { state: 'visible', timeout: 30000 });
-await sleep(2600); // 진입 애니메이션 + 첫 인상 홀드
+await sleep(2400); // 진입 애니메이션 + 첫 인상 홀드
 
-// 1) 관문 N37 클릭 → 상·하류 고정 + 오른쪽 절차 패널
-const n37 = await center(page, '#nd-N37');
-await cursorTo(page, n37.x, n37.y, 900);
-await clickAt(page, n37.x, n37.y);
-await sleep(3200);
+// 관문 세 개를 차례로 열어 '그 안의 법정 절차 체인'을 세 번 보여준다.
+// (2026-08-30) 워게임 시연을 뺀 자리다 — 3부의 핵심은 가정 시뮬레이션이 아니라
+// 관문을 열면 그 안의 절차가 순서대로 이어져 나온다는 사실이다.
+// 축을 바꿔 가며 고른다: 산단 인허가 → 군공항 → 용수.
+const GATES = [
+  { id: '#nd-N37', hold: 5000, scroll: false },  // 산단계획 통합심의
+  { id: '#nd-N31', hold: 5000, scroll: false },  // 군공항 이전후보지·지원계획
+  { id: '#nd-N24', hold: 3200, scroll: true },   // 용수·하수도 (패널을 굴려 체인이 이어짐을 보인다)
+];
 
-// 2) 패널 안 절차 칸 클릭 → 단계 상세 카드
-try {
-  const proc = await center(page, '#proc-canvas .node');
-  await cursorTo(page, proc.x, proc.y, 800);
-  await clickAt(page, proc.x, proc.y);
-  await sleep(3000);
-  await page.keyboard.press('Escape');
-  await sleep(500);
-} catch (e) {
-  console.log('proc panel step skipped:', e.message);
-}
-
-// 고정 해제
-await page.keyboard.press('Escape');
-await sleep(700);
-
-// 3) 워게임: 관문 2개를 '풀렸다고 가정' → 전선·진행률 실시간 재계산
-const wg = await center(page, '#wargame-btn');
-await cursorTo(page, wg.x, wg.y, 700);
-await clickAt(page, wg.x, wg.y);
-await sleep(900);
-for (const id of ['#nd-N37', '#nd-N02']) {
+for (const [i, g] of GATES.entries()) {
+  if (i > 0) {                       // 앞 관문 고정 해제
+    await page.keyboard.press('Escape');
+    await sleep(500);
+  }
+  let p;
   try {
-    const p = await center(page, id);
-    await cursorTo(page, p.x, p.y, 700);
-    await clickAt(page, p.x, p.y);
-    await sleep(1600);
-  } catch (e) { console.log('wargame click skipped', id, e.message); }
+    p = await center(page, g.id);
+  } catch (e) {
+    console.log('gate skipped', g.id, e.message);
+    continue;
+  }
+  await cursorTo(page, p.x, p.y, 900);
+  await clickAt(page, p.x, p.y);
+  await sleep(g.hold);
+
+  if (g.scroll) {
+    // 오른쪽 절차 패널 위에서 천천히 굴린다 — 뒤에 더 남아 있음을 보이는 자리
+    await cursorTo(page, W * 0.82, H * 0.55, 700);
+    for (let k = 0; k < 6; k++) {
+      await page.mouse.wheel(0, 130);
+      await sleep(240);
+    }
+    await sleep(1400);
+  }
 }
-await sleep(2200);
 
 // 마무리 홀드
 await cursorTo(page, W * 0.5, H * 0.42, 900);
-await sleep(1500);
+await sleep(1600);
 
 await ctx.close(); // 비디오 flush
 await browser.close();
