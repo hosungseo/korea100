@@ -538,9 +538,11 @@ def how_to(steps, ministries, follow):
         goal = f"{task}^({tgate})^ 준비를 갖출 것"
     else:
         goal = "지체 없이 마무리할 것"
-    a = shorten(steps[0][0], 12)
+    # 12자로 자르면 '지자체·사업자 사전 협의'가 '사전'에서 끊겨 '사전과'가 된다.
+    # 길이는 아래 lines_ok 검증이 단계 수로 조절하므로 여기서는 넉넉히 남긴다.
+    a = shorten(steps[0][0], 16)
     if len(steps) > 1:
-        b = shorten(steps[1][0], 12)
+        b = shorten(steps[1][0], 16)
         return f"{a}{josa(a, ('과', '와'))} {b}{josa(b)} 병행 추진해 {goal}"
     if len(ministries) > 1:
         return f"{a}{josa(a)} {ministries[1]}와 공동으로 추진해 {goal}"
@@ -551,7 +553,10 @@ def how_to(steps, ministries, follow):
 # 세 건이 같은 틀("…을 병행 추진해 … 준비를 갖출 것")로 나와 지시가 아니라
 # 절차 안내처럼 읽힌다. ○ 과의 층위 차이는 문형이 아니라 구체성에서 나온다 —
 # 사안마다 '무엇을 어떻게'가 달라야 한다. 지어내기는 기계 검증으로 막는다.
-REFINE_TIMEOUT = 240
+# 240초는 짧았다 — 2026-08-31 정기 실행에서 타임아웃으로 지시문 다듬기가 통째
+# 생략되고 기계 템플릿('준비를 갖출 것' 3연발)이 그대로 나갔다. 아침 배치는
+# 수집·판별과 겹쳐 돌아 응답이 느려진다.
+REFINE_TIMEOUT = 420
 _REFINE_CACHE = {}       # 압축 재생성 때 같은 claude 호출을 반복하지 않는다
 
 
