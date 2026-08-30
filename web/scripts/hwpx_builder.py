@@ -118,20 +118,35 @@ def _patch_header(hdr):
     base_para = re.search(r'<hh:paraPr id="0".*?</hh:paraPr>', hdr, re.S).group(0)
     assert 'type="NONE"' in re.search(r'<hh:heading[^>]*/>', base_para).group(0)
 
-    def para_pr(pid, left=0, align=None):
+    def para_pr(pid, left=0, align=None, hang=0):
+        """hang: 불릿 폭만큼 내어쓴다 — 두 줄째가 불릿 아래가 아니라
+        첫 줄 글자에 맞아야 계층이 눈으로 읽힌다. HWPX 의 첫줄 들여쓰기
+        태그 이름은 indent 가 아니라 intent(원 규격의 오타)다."""
         x = base_para.replace('<hh:paraPr id="0"', f'<hh:paraPr id="{pid}"', 1)
-        if align:
-            x = x.replace('horizontal="JUSTIFY"', f'horizontal="{align}"', 1)
-        if left:
+        # 뼈대는 160% — 한 장에 담기는 줄 수가 크게 준다. 공문서에서 흔히 쓰는
+        # 130% 로 낮춘다(내용을 깎기 전에 먼저 손댈 곳이다)
+        x = re.sub(r'(<hh:lineSpacing type="PERCENT" value=")\d+', r"\g<1>130", x, count=1)
+        # 뼈대는 양쪽정렬이라 두 줄짜리 항목의 첫 줄에서 자간이 크게 벌어진다.
+        # 항목이 짧은 개조식 문서에서는 왼쪽정렬이 읽기 좋다.
+        x = x.replace('horizontal="JUSTIFY"', f'horizontal="{align or "LEFT"}"', 1)
+        if left or hang:
             x = x.replace('<hc:left value="0" unit="HWPUNIT"/>',
-                          f'<hc:left value="{left}" unit="HWPUNIT"/>')
+                          f'<hc:left value="{left + hang}" unit="HWPUNIT"/>')
+        if hang:
+            x = x.replace('<hc:intent value="0" unit="HWPUNIT"/>',
+                          f'<hc:intent value="-{hang}" unit="HWPUNIT"/>')
         return x
 
-    PA = {"center": 20, "L0": 0, "L1": 21, "L2": 22, "L3": 23}
+    # 불릿 폭(HWPUNIT) — 글자 크기에 비례한다. "○ "는 전각+반각, "- "·"* "는 반각 둘
+    PA = {"center": 20, "L0": 0, "L1": 21, "L2": 22, "L3": 23, "L0□": 24}
     hdr = hdr.replace("</hh:paraProperties>",
-                      para_pr(20, align="CENTER") + para_pr(21, 1500)
-                      + para_pr(22, 3000) + para_pr(23, 4500) + "</hh:paraProperties>", 1)
-    hdr = re.sub(r'(<hh:paraProperties itemCnt=")\d+(")', r'\g<1>24\g<2>', hdr, count=1)
+                      para_pr(20, align="CENTER")
+                      + para_pr(21, 1500, hang=2250)     # ○ 15pt
+                      + para_pr(22, 3000, hang=1500)     # - 15pt
+                      + para_pr(23, 4500, hang=1200)     # * 12pt
+                      + para_pr(24, 0, hang=2400)        # □ 16pt
+                      + "</hh:paraProperties>", 1)
+    hdr = re.sub(r'(<hh:paraProperties itemCnt=")\d+(")', r'\g<1>25\g<2>', hdr, count=1)
 
     # 원본 borderFill(id=1)은 사방 NONE 이라 표 선이 안 그려진다
     def border_fill(bid, face="none"):
@@ -155,8 +170,8 @@ def _patch_header(hdr):
 RULES = {
     "제목":    ("",        "title",  "center"),
     "부제":    ("",        "sub",    "center"),
-    "네모":    ("□ ",      "head",   "L0"),
-    "사각형":  ("□ ",      "head",   "L0"),
+    "네모":    ("□ ",      "head",   "L0□"),
+    "사각형":  ("□ ",      "head",   "L0□"),
     "원":      ("○ ",      "bullet", "L1"),
     "동그라미": ("○ ",      "bullet", "L1"),
     "바":      ("- ",      "body",   "L2"),
@@ -167,7 +182,8 @@ RULES = {
     "주석2":   ("** ",     "small",  "L3"),
     # 문서 맨 아래 출처·집계 꼬리말. 들여쓰기가 없어야 앞 항목에 딸린 것으로 안 읽힌다
     "꼬리":    ("※ ",      "small",  "L0"),
-    "엔터":    ("",        "gap5",   "L0"),
+    # 섹션 사이 숨통. 한 장을 넘길 것 같으면 여기부터 줄인다 — 내용을 깎기 전에
+    "엔터":    ("",        "gap3",   "L0"),
 }
 
 

@@ -68,10 +68,18 @@ def pick(sec, *names):
     return []
 
 
-# ○ 줄(HY헤드라인M 15pt, 들여쓰기 1500)이 한 줄에 담기는 폭.
-# 본문 폭 42,520 에서 실측: 24 는 담기고 28.5 는 "(N3 / 1)" 로 쪼개졌다.
-# 여백을 고치면 본문 폭이 바뀌므로 상수로 박지 않고 비례로 환산한다.
-DIRECTIVE_W = 25 * TEXT_WIDTH / 42520
+# 한 줄에 담기는 폭 = (본문 폭 − 글이 시작하는 위치) ÷ 글자 한 칸.
+# 여백·들여쓰기·내어쓰기를 고칠 때마다 상수를 다시 재는 대신 계산한다.
+#   15pt 한 칸: 본문 폭 48,190·글 시작 3,750 에서 27 칸이 담긴 실측에서 역산
+#   12pt 한 칸: 15pt 칸에 크기 비율을 곱한다. 12pt 를 따로 실측해 썼더니
+#              폭 36 으로 잡혀 * 줄이 줄곧 두 줄로 흘렀다(실제 한계는 32 미만)
+_U15 = (48190 - 3750) / 27
+_U12 = _U15 * 12 / 15
+# 내어쓰기를 넣은 뒤 글이 시작하는 위치(불릿 끝) — hwpx_builder 의 paraPr 과 같다
+DIRECTIVE_W = (TEXT_WIDTH - 3750) / _U15    # ○
+BODY_W = (TEXT_WIDTH - 4500) / _U15         # -
+# 한 칸 여유 — 딱 맞추면 양쪽정렬이 자간을 벌리며 다음 줄로 흘린다
+SMALL_W = (TEXT_WIDTH - 5700) / _U12 - 1    # *
 
 
 def disp_w(s):
@@ -89,9 +97,27 @@ def disp_w(s):
     return w
 
 
-# * 줄(맑은고딕 12pt, 들여쓰기 4500)이 한 줄에 담기는 폭.
-# 본문 폭 48,190 에서 실측: 35.5 는 담기고 38.5 는 다음 줄로 넘어갔다.
-SMALL_W = 36 * TEXT_WIDTH / 48190
+
+def fit(text, limit):
+    """문장을 폭 안에 넣는다. 말줄임표는 쓰지 않는다.
+
+    어절 경계에서 자르면 '…아직', '…남아' 처럼 말이 끊긴 채 끝난다.
+    절(쉼표) 경계에서 먼저 끊고, 그래도 넘치면 어절로 물러선다.
+    """
+    if disp_w(text) <= limit:
+        return text
+    parts = text.split(", ")
+    while len(parts) > 1:
+        parts.pop()
+        cut = ", ".join(parts)
+        if disp_w(cut) <= limit:
+            return cut
+    out = ""
+    for w in text.split(" "):
+        if disp_w(out + " " + w) > limit:
+            break
+        out = f"{out} {w}" if out else w
+    return out.rstrip(" ,·")
 
 
 def shorten(nm, limit):
@@ -256,6 +282,34 @@ _ROLE = re.compile(r"관할|관리청|발주|승인|소관|지적|총괄|시공|
 _CENTRAL = re.compile(r"^(.{2,6}(?:부|청))$")
 
 
+def short_basis(basis):
+    """근거 조문을 한 줄에 맞게 줄인다. 법령명이 길고 조문이 여럿 붙는다."""
+    b = re.sub(r"\s*\([^)]*\)", "", basis or "").strip()
+    b = re.sub(r"\s*및 .*?에 관한", "", b)
+    b = re.sub(r"에 관한 (법률|특별법|특별조치법)", r" \1", b)
+    m = re.match(r"(.+?)\s*(제\d+조(?:의\d+)?(?:제\d+항)?)", b)
+    return f"{m.group(1).strip()} {m.group(2)}" if m else b
+
+
+def gate_basis():
+    """관문 → 대표 근거 조문. 첫 절차의 basis 를 쓴다."""
+    try:
+        byGate = json.loads(PROCS.read_text())["byGate"]
+    except Exception:
+        return {}
+    out = {}
+    for g, insts in byGate.items():
+        for inst in insts:
+            for st in (inst.get("steps") or []):
+                b = short_basis(st.get("basis"))
+                if b:
+                    out[g] = b
+                    break
+            if g in out:
+                break
+    return out
+
+
 def gate_ministries():
     """관문 → 그 안 절차에 걸린 중앙부처 집합.
 
@@ -362,7 +416,8 @@ def to_dsl(b):
         press = f"({r['press']}) " if r.get("press") else ""
         L.append(f"원: {press}{tidy(money_hangul(r['title']))}")
         if r.get("body"):
-            L.append(f"주석: {tidy(money_hangul(r['body']))}")
+            # * 는 한 줄 부연이다 — 넘치면 절 경계에서 끊는다
+            L.append(f"주석: {fit(tidy(money_hangul(r['body'])), SMALL_W * 2)}")
 
     L.append("엔터:")
     L += ["네모: 리스크·갈등"]
@@ -382,48 +437,46 @@ def to_dsl(b):
     # 부처 하나로 닫히는 일은 그 부처가 처리한다. 여럿이 걸린 건은 사이에서
     # 멈추므로 국무조정실이 봐야 한다 — 그런 건을 위로 올린다.
     risks = sorted(b.get("risks", []), key=lambda r: -len(mins_of(r)))[:3]
+    gbasis = gate_basis()
     for r in risks:
-        # ○ 무슨 일이 났나 / - 판의 어디인가 / * 그래서 무엇이 걸리나.
-        # 계층마다 다른 정보를 둔다 — 같은 말을 들여쓰기만 바꿔 반복하지 않는다.
+        # ○ 무슨 일이 났나(한 줄) / - 그 내용을 한 겹 더(두 줄까지)
+        # / * 수치·관문·법령 같은 부연. 계층마다 성격이 다르다 —
+        # 같은 말을 들여쓰기만 바꿔 반복하지 않는다.
         L.append(f"원: {tidy(money_hangul(r['text']))}")
         gs = r.get("gates") or []
-        if not gs:
-            continue
-        g = gs[0]
-        # 관문 번호는 참조 표시라 문장 흐름에서 빼고 위첨자로 올린다
-        more = f" 외 {len(gs)-1}" if len(gs) > 1 else ""
-        L.append(f"바: {gmap.get(g, '')}^({g}){more}^")
         ms = mins_of(r)
-        bits = []
-        if len(ms) > 1:
-            bits.append("·".join(ms[:3]) + " 협의 사항")
-        elif ms:
-            bits.append(f"소관 {ms[0]}")
-        elif leads.get(g):
-            bits.append(f"소관 {leads[g]}")
-        # 부처 간 물림은 모델이 기사에서 읽어낸 것이 우선 — 판 그래프에 없는
-        # 조합이 기사에 먼저 나타난다. 없으면 그래프의 다음 관문으로 갈음한다.
+
+        # - 구체 내용. 부처 간 물림이 있으면 그게 가장 구체적인 내용이다.
+        detail = tidy(money_hangul(r.get("detail") or ""))
         if len(ms) > 1 and r.get("interlock"):
-            # 부처명이 셋이면 앞머리만으로도 줄이 차 물림 설명이 밀려난다.
-            # 부처를 줄여서라도 '무엇이 무엇을 막는지'는 지면에 남긴다.
+            # 물림은 이 보고서의 존재 이유라 잘려선 안 된다 — 앞에 두고
+            # 뒤에 오는 배경 서술이 대신 깎이게 한다
             il = tidy(r["interlock"])
-            while len(ms) > 2 and disp_w(f"{'·'.join(ms)} 협의 · {il}") > SMALL_W:
-                ms = ms[:-1]
-            bits = [f"{'·'.join(ms)} 협의", il]
-        else:
-            # 리스크는 연성(soft) 의존으로도 번진다 — 경성만 세면 대개 0 이 나온다
-            nxt = [e["to"] for e in edges if e["from"] == g]
-            if nxt:
-                room = SMALL_W - disp_w(" · ".join(bits)) - disp_w("지연 시 ()") - 3
-                nm = gmap.get(nxt[0], "")
-                while nm and disp_w(nm) > room:
-                    nm = shorten(nm, len(nm) - 1)
-                bits.append(f"지연 시 {nm}^({nxt[0]})^")
+            detail = f"{il}, {detail}" if detail else il
+        if detail:
+            L.append(f"바: {fit(detail, BODY_W * 2)}")
+
+        # * 부연 — 관문·소관·근거 조문. 수치는 이미 위 두 줄에 들어간다.
+        g = gs[0] if gs else None
+        bits = []
+        if g:
+            more = f" 외 {len(gs)-1}" if len(gs) > 1 else ""
+            bits.append(f"{gmap.get(g, '')}^({g}){more}^")
+        if len(ms) > 1:
+            bits.append("·".join(ms[:3]) + " 협의")
+        elif ms:
+            bits.append(ms[0])
+        elif g and leads.get(g):
+            bits.append(leads[g])
+        if g and gbasis.get(g):
+            bits.append(gbasis[g])
+        while len(bits) > 1 and disp_w(" · ".join(bits)) > SMALL_W * 2:
+            bits.pop()
         if bits:
             L.append("주석: " + " · ".join(bits))
 
     L += ["엔터:", "네모: 조치 필요사항"]
-    for gate, inst, st, why in directives(b.get("advances"))[:4]:
+    for gate, inst, st, why in directives(b.get("advances"))[:3]:
         # 주체가 "제안자(지자체·민간)" 처럼 괄호를 물고 있어 · 로 자르면 "제안자(지자체" 가 된다
         # 주체 이름 자체에 · 가 들어간다('선정·지원위원회'). · 로 자르면 '선정'만 남는다.
         # 여럿이 나열된 경우만 쉼표·슬래시로 끊고, · 는 이름의 일부로 본다.
@@ -465,7 +518,7 @@ def to_dsl(b):
         if st.get("deadline"):
             bits.append(f"기한 {st['deadline']}")
         line = " · ".join(bits)
-        while bits and disp_w(line) > SMALL_W:
+        while bits and disp_w(line) > SMALL_W * 2:
             bits.pop()
             line = " · ".join(bits)
         L.append("주석: " + line)
