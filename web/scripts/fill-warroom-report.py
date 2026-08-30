@@ -10,7 +10,7 @@ rhwp 는 빈 문서에 글을 넣지 못하므로(replace-text/set-cell/fill-fie
 산출물: <out-dir>/warroom-<날짜>.hwpx · .pdf · .png
 환경변수 RHWP 로 실행 파일 경로를 바꿀 수 있다(기본 ~/.local/bin/rhwp).
 """
-import argparse, json, os, re, subprocess, sys
+import argparse, datetime as dt, json, os, re, subprocess, sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -306,9 +306,14 @@ def to_dsl(b):
     """
     gmap = gate_names()
     y, mo, d = b["date"].split("-")
-    L = [f"제목: {b['title']}",
-         f"부제: {y}. {int(mo)}. {int(d)}. · 언론·정책브리핑 신호 자동집계 기반",
-         "네모: 주요 보도내용"]
+    # 행안부 「지방행정 여론·동향」 양식: 제호(제목+우측 출처 블록) → 남색 날짜바
+    # → 파란 번호박스 섹션. 요일은 날짜에서 계산한다.
+    wd = "월화수목금토일"[dt.date(int(y), int(mo), int(d)).weekday()]
+    # 날짜바 오른쪽은 12pt 진하게로 반 칸에 들어가야 한다 — 전체 URL 은 두 줄로
+    # 꺾이므로 짧은 표기를 쓴다
+    L = [f"제호: {b['title']} | korea100 ; 워룸 루프",
+         f"날짜바: {y}. {int(mo)}. {int(d)}.({wd}) | hosungseo.github.io/korea100",
+         "장: 주요 보도내용"]
     for r in b.get("reports", []):
         press = f"({r['press']}) " if r.get("press") else ""
         L.append(f"원: {press}{tidy(money_hangul(r['title']))}")
@@ -316,7 +321,7 @@ def to_dsl(b):
             L.append(f"주석: {tidy(money_hangul(r['body']))}")
 
     L.append("엔터:")
-    L += ["네모: 리스크·갈등"]
+    L += ["장: 리스크·갈등"]
     for r in b.get("risks", [])[:3]:
         L.append(f"원: {tidy(money_hangul(r['text']))}")
         gs = r.get("gates") or []
@@ -324,7 +329,7 @@ def to_dsl(b):
             L.append(f"주석: ({gs[0]}) {gmap.get(gs[0], '')}".rstrip()
                      + (f" 외 {len(gs)-1}" if len(gs) > 1 else ""))
 
-    L += ["엔터:", "네모: 지시 필요사항"]
+    L += ["엔터:", "장: 지시 필요사항"]
     leads = gate_leads()
     for gate, inst, st, why in directives(b.get("advances"))[:2]:
         # 주체가 "제안자(지자체·민간)" 처럼 괄호를 물고 있어 · 로 자르면 "제안자(지자체" 가 된다
