@@ -118,14 +118,19 @@ def _patch_header(hdr):
     base_para = re.search(r'<hh:paraPr id="0".*?</hh:paraPr>', hdr, re.S).group(0)
     assert 'type="NONE"' in re.search(r'<hh:heading[^>]*/>', base_para).group(0)
 
-    def para_pr(pid, left=0, align=None, hang=0):
+    def para_pr(pid, left=0, align=None, hang=0, prev=0):
         """hang: 불릿 폭만큼 내어쓴다 — 두 줄째가 불릿 아래가 아니라
         첫 줄 글자에 맞아야 계층이 눈으로 읽힌다. HWPX 의 첫줄 들여쓰기
-        태그 이름은 indent 가 아니라 intent(원 규격의 오타)다."""
+        태그 이름은 indent 가 아니라 intent(원 규격의 오타)다.
+        prev: 문단 위 여백. 항목 사이를 띄워 덩어리로 읽히게 한다.
+
+        주의 — margin·lineSpacing 은 <hp:case> 와 <hp:default> 두 갈래에
+        똑같이 들어 있다. 한쪽만 고치면 렌더러마다 다르게 보인다.
+        """
         x = base_para.replace('<hh:paraPr id="0"', f'<hh:paraPr id="{pid}"', 1)
         # 뼈대는 160% — 한 장에 담기는 줄 수가 크게 준다. 공문서에서 흔히 쓰는
         # 130% 로 낮춘다(내용을 깎기 전에 먼저 손댈 곳이다)
-        x = re.sub(r'(<hh:lineSpacing type="PERCENT" value=")\d+', r"\g<1>130", x, count=1)
+        x = re.sub(r'(<hh:lineSpacing type="PERCENT" value=")\d+', r"\g<1>130", x)
         # 뼈대는 양쪽정렬이라 두 줄짜리 항목의 첫 줄에서 자간이 크게 벌어진다.
         # 항목이 짧은 개조식 문서에서는 왼쪽정렬이 읽기 좋다.
         x = x.replace('horizontal="JUSTIFY"', f'horizontal="{align or "LEFT"}"', 1)
@@ -135,16 +140,21 @@ def _patch_header(hdr):
         if hang:
             x = x.replace('<hc:intent value="0" unit="HWPUNIT"/>',
                           f'<hc:intent value="-{hang}" unit="HWPUNIT"/>')
+        if prev:
+            x = x.replace('<hc:prev value="0" unit="HWPUNIT"/>',
+                          f'<hc:prev value="{prev}" unit="HWPUNIT"/>')
         return x
 
     # 불릿 폭(HWPUNIT) — 글자 크기에 비례한다. "○ "는 전각+반각, "- "·"* "는 반각 둘
     PA = {"center": 20, "L0": 0, "L1": 21, "L2": 22, "L3": 23, "L0□": 24}
     hdr = hdr.replace("</hh:paraProperties>",
                       para_pr(20, align="CENTER")
-                      + para_pr(21, 1500, hang=2250)     # ○ 15pt
-                      + para_pr(22, 3000, hang=1500)     # - 15pt
-                      + para_pr(23, 4500, hang=1200)     # * 12pt
-                      + para_pr(24, 0, hang=2400)        # □ 16pt
+                      # 위 여백은 항목 사이에만 준다. ○ 아래 딸린 -·* 은
+                      # 같은 덩어리라 붙어 있어야 계층이 눈에 들어온다.
+                      + para_pr(21, 1500, hang=2250, prev=300)   # ○ 15pt
+                      + para_pr(22, 3000, hang=1500, prev=60)    # - 15pt
+                      + para_pr(23, 4500, hang=1200, prev=40)    # * 12pt
+                      + para_pr(24, 0, hang=2400, prev=500)      # □ 16pt
                       + "</hh:paraProperties>", 1)
     hdr = re.sub(r'(<hh:paraProperties itemCnt=")\d+(")', r'\g<1>25\g<2>', hdr, count=1)
 

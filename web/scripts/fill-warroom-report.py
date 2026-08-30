@@ -120,6 +120,50 @@ def fit(text, limit):
     return out.rstrip(" ,·")
 
 
+# 마지막 줄이 이 비율보다 짧으면 '어설프게 넘긴' 것으로 본다
+STUB = 0.35
+
+
+def lines_ok(text, width, max_lines):
+    """줄 수 안에 들어가면서 마지막 줄이 토막이 아니면 True."""
+    w = disp_w(text)
+    if w > width * max_lines:
+        return False
+    n = -(-int(w * 100) // int(width * 100))
+    return n <= 1 or w - width * (n - 1) >= width * STUB
+
+
+def fit_bits(bits, width, max_lines=2):
+    """' · ' 로 이어 붙인 부연 줄을 꼬리 없이 맞춘다.
+
+    글자로 자르면 항목 중간이 끊기므로 뒤 항목째로 떨군다.
+    """
+    while len(bits) > 1 and not lines_ok(" · ".join(bits), width, max_lines):
+        bits.pop()
+    return " · ".join(bits)
+
+
+def fit_lines(text, width, max_lines=2):
+    """줄 수를 정해 놓고 꼬리가 어설프게 넘어가지 않게 맞춘다.
+
+    한 줄에 두세 글자만 흘러넘긴 꼬리('…최종 부 / 지 확정 남음')는
+    지면도 버리고 보기도 나쁘다. 그런 꼬리가 생기면 앞 줄까지로 줄인다.
+    """
+    w = disp_w(text)
+    if w <= width:
+        return text
+    lines = min(max_lines, -(-int(w * 100) // int(width * 100)) or 1)
+    for n in (lines, lines - 1):
+        if n < 1:
+            break
+        cut = fit(text, width * n)
+        rest = disp_w(cut) - width * (n - 1)
+        # 마지막 줄이 토막이면 한 줄 줄여 다시 맞춘다
+        if n == 1 or rest >= width * STUB:
+            return cut
+    return fit(text, width)
+
+
 def shorten(nm, limit):
     """말끝이 잘려 뜻이 끊기지 않도록 구분자(·, 공백) 경계에서 자른다."""
     if len(nm) <= limit:
@@ -417,13 +461,14 @@ def to_dsl(b):
         L.append(f"원: {press}{tidy(money_hangul(r['title']))}")
         if r.get("body"):
             # * 는 한 줄 부연이다 — 넘치면 절 경계에서 끊는다
-            L.append(f"주석: {fit(tidy(money_hangul(r['body'])), SMALL_W * 2)}")
+            L.append(f"주석: {fit_lines(tidy(money_hangul(r['body'])), SMALL_W, 2)}")
 
     L.append("엔터:")
     L += ["네모: 리스크·갈등"]
     leads = gate_leads()
     gmin = gate_ministries()
     edges = json.loads(MAPDATA.read_text())["edges"]
+    _, _, ho = _graph()          # 조치 필요사항의 '뒤에 걸린 관문 수'에 쓴다
 
     def mins_of(r):
         """이 리스크에 걸린 중앙부처. 기사에서 모델이 뽑은 것 + 절차 데이터."""
@@ -454,7 +499,7 @@ def to_dsl(b):
             il = tidy(r["interlock"])
             detail = f"{il}, {detail}" if detail else il
         if detail:
-            L.append(f"바: {fit(detail, BODY_W * 2)}")
+            L.append(f"바: {fit_lines(detail, BODY_W, 2)}")
 
         # * 부연 — 관문·소관·근거 조문. 수치는 이미 위 두 줄에 들어간다.
         g = gs[0] if gs else None
@@ -470,10 +515,8 @@ def to_dsl(b):
             bits.append(leads[g])
         if g and gbasis.get(g):
             bits.append(gbasis[g])
-        while len(bits) > 1 and disp_w(" · ".join(bits)) > SMALL_W * 2:
-            bits.pop()
         if bits:
-            L.append("주석: " + " · ".join(bits))
+            L.append("주석: " + fit_bits(bits, SMALL_W, 2))
 
     L += ["엔터:", "네모: 조치 필요사항"]
     for gate, inst, st, why in directives(b.get("advances"))[:3]:
@@ -493,35 +536,36 @@ def to_dsl(b):
             name = shorten(name, 20) + " 준비상황 점검"
         # ○ 줄은 한 줄이어야 한다. 넘치면 관문 표시가 "(N3 / 1)" 로 쪼개진다.
         # 주체는 지시 대상이라 못 줄이므로 절차명 쪽을 깎는다.
+        # 관문 표시는 아래 * 로 내렸다 — ○ 는 '누가 무엇을' 만 담는다
         name = tidy(name)
-        room = DIRECTIVE_W - disp_w(f"{actor}: ^({gate})^")
+        room = DIRECTIVE_W - disp_w(f"{actor}: ")
         while name and disp_w(name) > room:
             name = shorten(name, len(name) - 1)
-        L.append(f"원: {actor}: {name}^({gate})^")
-        # 불릿(*)은 DSL 이 붙인다 — 여기서 붙이면 키워드가 없어 '바'로 폴백한다
-        # 조문은 "군 공항 이전 및 지원에 관한 특별법 제6조·제7조·제11조" 처럼 길어
-        # 한 줄을 넘긴다. 법령명을 줄이고 조문은 첫 것만 남긴다.
-        basis = re.sub(r"\s*\([^)]*\)", "", st.get("basis") or "").strip()
-        basis = re.sub(r"\s*및 .*?에 관한", "", basis)
-        basis = re.sub(r"에 관한 (법률|특별법|특별조치법)", r" \1", basis)
-        m = re.match(r"(.+?)\s*(제\d+조(?:의\d+)?(?:제\d+항)?)", basis)
-        if m:
-            basis = f"{m.group(1).strip()} {m.group(2)}"
-        bits = [why]
-        # 여러 부처가 걸린 관문이면 그걸 먼저 밝힌다 — 이 줄이 국무조정실
-        # 소관인지 소관 부처 혼자 할 일인지를 가르는 정보다
+        L.append(f"원: {actor}: {name}")
+
+        # - 왜 지금 이 절차인가. 관문 ID 만 적으면 무엇인지 알 수 없으므로
+        #   이름을 붙여 편다("N04 보도의" → "예비이전후보지 선정·공표(N04) 보도의")
+        # 여기 관문 이름은 '어느 관문 다음인지'만 알면 되므로 짧게 — 전체
+        # 이름을 넣으면 이 줄만 두 줄이 되어 한 장을 넘긴다
+        reason = re.sub(r"\bN\d+\b",
+                        lambda m: f"{shorten(gmap.get(m.group(0), ''), 12)}"
+                                  f"^({m.group(0)})^",
+                        why).replace("보도의 다음 관문", "보도 다음")
+        n_after = _downstream(ho, gate)
+        if n_after and "뒤" not in reason:
+            reason += f", 뒤 관문 {n_after}개"
+        L.append(f"바: {fit_lines(reason, BODY_W, 1)}")
+
+        # * 부연 — 관문·근거 조문·부처 협의·기한
+        bits = [f"{gmap.get(gate, '')}^({gate})^"]
         ms = gmin.get(gate, [])
         if len(ms) > 1:
-            bits.insert(0, "·".join(ms[:3]) + " 협의")
-        if basis:
-            bits.append(basis)
+            bits.append("·".join(ms[:3]) + " 협의")
+        if short_basis(st.get("basis")):
+            bits.append(short_basis(st.get("basis")))
         if st.get("deadline"):
             bits.append(f"기한 {st['deadline']}")
-        line = " · ".join(bits)
-        while bits and disp_w(line) > SMALL_W * 2:
-            bits.pop()
-            line = " · ".join(bits)
-        L.append("주석: " + line)
+        L.append("주석: " + fit_bits(bits, SMALL_W, 2))
 
     if b.get("pipeline"):
         # ※ 줄은 길이를 모델에 맡기지 않고 뒤 항목부터 떨궈 한 줄에 맞춘다
