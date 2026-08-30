@@ -575,8 +575,6 @@
       #p3no { margin-top: 16px; font-size: 25px; color: #a04708; font-weight: 750; }
       #p3q2 { margin-top: 46px; font-size: 58px; font-weight: 870; color: #17251d; letter-spacing: -0.02em; word-break: keep-all; line-height: 1.3; }
       #p3q2 em { font-style: normal; color: #0b7a58; }
-      #p3sub { margin-top: 26px; font-size: 23px; font-weight: 620; color: #55685d; word-break: keep-all; }
-      #p3sub em { font-style: normal; font-weight: 820; color: #3c4c43; }
       #p3box .pk .pw { font-size: 17px; font-weight: 760; color: #55685d; letter-spacing: 0.04em; margin-left: 8px; }
 
       /* ---------- CH3a : 3부 시작 ---------- */
@@ -1158,7 +1156,6 @@
             <p id="p3q1">"어떤 업무를 AI에게 맡겨야 하는가?"</p>
             <p id="p3no">— 아직 아무도 답을 찾지 못한 질문입니다</p>
             <p id="p3q2">질문을 바꿨습니다 —<br>"지금, <em>어떤 업무를 맡기고 있는가?</em>"</p>
-            <p id="p3sub">2부는 이미 사람이 살고 있는 동네를 뜯어 고치는 <em>대형 재개발</em>입니다 — 뒤이을 3부는, 달에 사람을 보내는 <em>문샷</em>입니다</p>
           </div>
         </div>
       </section>
@@ -1270,9 +1267,6 @@
       </section>
       <section id="subclip19c" class="clip sub-clip" data-start="226.2" data-duration="12.0">
         <div class="subline" id="sub19c"><span class="tx">이슈가 <span class="em">어느 절차</span>에 걸렸는지 짚고, 부처별 <span class="em">조치</span>까지 — 한 장 보고서</span><span class="bar"></span></div>
-      </section>
-      <section id="subclip20" class="clip sub-clip" data-start="89.2" data-duration="11.2">
-        <div class="subline" id="sub20"><span class="tx">2부는 대형 재개발, 3부는 문샷입니다 — <span class="em">with 한국행정연구원</span></span><span class="bar"></span></div>
       </section>
       <section id="subclip21" class="clip sub-clip" data-start="101.4" data-duration="5.0">
         <div class="subline" id="sub21"><span class="tx">실사례 1호, <span class="em">AI 여비몬</span> — 관외출장 여비 정산 스무 단계</span><span class="bar"></span></div>
@@ -1941,8 +1935,6 @@
         tl.to("#p3no", { autoAlpha: 0.35, duration: 0.5 }, P3 + 4.6);
         tl.fromTo("#p3q2", { y: 24, autoAlpha: 0 },
           { y: 0, autoAlpha: 1, duration: 0.7, ease: "back.out(1.3)" }, P3 + 4.9);
-        tl.fromTo("#p3sub", { y: 16, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.55, ease: "power2.out" }, P3 + 6.4);
         tl.to("#stage-part3", { autoAlpha: 0, y: -20, duration: 0.6, ease: "power2.in" }, P3 + 11.2);
 
         /* ---------- CH5 : AX 사례 3건 ---------- */
@@ -2124,7 +2116,7 @@
         /* ---------- subtitles ---------- */
         /* 자막 번호는 초판 순서를 유지하고 시각만 새 챕터 순서에 맞춘다
            (1~12 = 1부, 20~27 = 2부 미시, 13~19·28~33 = 3부 거시) */
-        const SUBS = [[1, 8.9], [2, 14.2], [3, 19.6], [5, 33.8], [6, 39.4], [7, 47.6], [10, 63.6], [11, 72.8], [12, 81.2], [20, 89.2], [21, 101.4], [22, 107.0], [23, 114.6], [26, 123.6], [27, 139.8], [13, 149.2], [29, 155.4], [14, 168.2], [15, 176.2], [16, 184.4], [17, 191.2], [18, 199.6], [19, 209.2], [30, 239.2], [31, 247.6], [34, 255.2], [37, 259.4], [32, 264.2], [35, 276.2], [36, 282.2], [33, 289.8]];
+        const SUBS = [[1, 8.9], [2, 14.2], [3, 19.6], [5, 33.8], [6, 39.4], [7, 47.6], [10, 63.6], [11, 72.8], [12, 81.2], [21, 101.4], [22, 107.0], [23, 114.6], [26, 123.6], [27, 139.8], [13, 149.2], [29, 155.4], [14, 168.2], [15, 176.2], [16, 184.4], [17, 191.2], [18, 199.6], [19, 209.2], [30, 239.2], [31, 247.6], [34, 255.2], [37, 259.4], [32, 264.2], [35, 276.2], [36, 282.2], [33, 289.8]];
         SUBS.forEach(([n, at]) => {
           tl.fromTo(`#sub${n} .tx`, { y: 22, autoAlpha: 0 },
             { y: 0, autoAlpha: 1, duration: 0.55, ease: "power3.out" }, at + 0.05);
