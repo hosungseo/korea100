@@ -631,6 +631,7 @@ def refine_directives(items, brief, gmap):
     def check(it, raw):
         """지시문 한 줄 검증. (정제된 줄, None) 또는 (None, 탈락 사유)."""
         line = tidy(raw) if isinstance(raw, str) else ""
+        line = re.sub(r"^[-–·•]\s*", "", line)   # 재작성 때 불릿을 붙여 오기도 한다
         if not line:
             return None, "빈 문장"
         if not line.endswith("것") or line.endswith("보고할 것"):
@@ -791,9 +792,12 @@ def to_dsl(b, compact=False):
     (마크다운 혼입·서두·불릿 변형을 일곱 번 겪었다). 검증 가능한 JSON 을 받고
     DSL 은 코드가 만든다. 그러면 사람이 DSL 을 손으로 고쳐 다시 굽는 것도 된다.
 
-    compact: 1쪽을 넘긴 경우의 재생성 모드 — 부연을 한 줄로 조인다.
+    compact: 1쪽을 넘긴 경우의 재생성 단계. 1이면 * 부연만 한 줄로,
+    그래도 넘치면 2에서 리스크 상술(-)까지 조인다 — 상술을 먼저 자르면
+    "…추진을 노동조건" 같은 반토막 문장이 남는다(백테스트).
     """
-    wide = 1 if compact else 2      # 부연·상술 줄 수 상한
+    wide = 1 if compact >= 1 else 2       # * 부연 줄 수 상한
+    wide_body = 1 if compact >= 2 else 2  # 리스크 - 상술 줄 수 상한
     gmap = gate_names()
     y, mo, d = b["date"].split("-")
     L = [f"제목: {b['title']}",
@@ -845,7 +849,7 @@ def to_dsl(b, compact=False):
             il = tidy(r["interlock"])
             detail = f"{il}, {detail}" if detail else il
         if detail:
-            L.append(f"바: {finish_noun(fit_lines(detail, BODY_W, wide), detail)}")
+            L.append(f"바: {finish_noun(fit_lines(detail, BODY_W, wide_body), detail)}")
 
         # * 부연 — 관문·소관·근거 조문. 수치는 이미 위 두 줄에 들어간다.
         # 소관 표기는 대표 관문 것만 — 병기 관문의 기관까지 합치면 전기본
@@ -1211,10 +1215,13 @@ def main():
 
     pages = json.loads(run("export-text", str(doc), "--json"))["pages"]
     # 한 장 규격 가드 — 백테스트 20일 중 3일이 조용히 2쪽으로 넘쳤다.
-    # 부연 줄 수를 한 줄로 조여 다시 굽는다(지시 다듬기는 캐시라 재호출 없음).
-    if len(pages) > 1 and not a.from_dsl:
-        print("1쪽 초과 — 압축 모드 재생성", file=sys.stderr)
-        lines = to_dsl(b, compact=True)
+    # 1단계는 * 부연만, 그래도 넘치면 2단계에서 리스크 상술까지 조인다
+    # (지시 다듬기는 캐시라 재호출 없음).
+    for level in (1, 2):
+        if len(pages) <= 1 or a.from_dsl:
+            break
+        print(f"1쪽 초과 — 압축 {level}단계 재생성", file=sys.stderr)
+        lines = to_dsl(b, compact=level)
         dsl_path.write_text("\n".join(lines) + "\n")
         build(lines, doc)
         pages = json.loads(run("export-text", str(doc), "--json"))["pages"]
