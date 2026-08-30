@@ -935,29 +935,32 @@
                     </linearGradient>
                     <!-- 기준선 위쪽만 칠한다 — 아래는 '아직 못 하던 구간'이라 비워 둔다 -->
                     <clipPath id="mg-above">
-                      <rect x="92" y="18" width="1040" height="204"></rect>
+                      <rect x="92" y="158" width="1044" height="114"></rect>
                     </clipPath>
                   </defs>
                   <!-- 윗칸 : 원인 — 토큰 단가가 내려간다 -->
                   <g id="mg-mini">
-                    <path class="gline price" d="M112,32 C280,88 430,104 700,108 C860,110 990,111 1108,111"></path>
-                    <text class="glabel price" x="1104" y="90" text-anchor="end">토큰 단가</text>
+                    <path class="gline price" d="M112,30 C320,80 620,98 1108,108"></path>
+                    <text class="glabel price" x="1104" y="86" text-anchor="end">토큰 단가</text>
                   </g>
                   <text id="mg-cause" class="cause" x="600" y="142" text-anchor="middle">↓ 그래서</text>
-                  <!-- 아랫칸 : 결과 — 같은 예산으로 할 수 있는 일이 인건비 선을 넘는다 -->
+                  <!-- 아랫칸 : 결과 — 같은 예산으로 할 수 있는 일이 인건비 선을 넘는다.
+                       곡선은 끝에서 눕히지 않는다 — 업무량 = 예산 ÷ 단가라, 단가가 계속
+                       내려가는 한 이 선은 계속 올라가야 한다. 평평해지면 '성장이 멈췄다'로
+                       읽혀 이 장면의 뜻과 반대가 된다. -->
                   <g id="mg-base">
-                    <line class="baseline" x1="100" y1="250" x2="1120" y2="250"></line>
-                    <text class="basel" x="108" y="236">사람 인건비로 하던 만큼</text>
+                    <line class="baseline" x1="100" y1="272" x2="1120" y2="272"></line>
+                    <text class="basel" x="108" y="258">사람 인건비로 하던 만큼</text>
                   </g>
-                  <path id="mg-band" d="M640,250 C760,214 940,186 1112,172 L1112,250 Z"></path>
-                  <path id="mg-work" class="gline work"
-                        d="M100,302 C380,298 520,286 640,250 C760,214 940,186 1112,172"></path>
+                  <path id="mg-band" clip-path="url(#mg-above)"
+                        d="M100,306 C480,304 720,268 1104,168 L1104,272 L100,272 Z"></path>
+                  <path id="mg-work" class="gline work" d="M100,306 C480,304 720,268 1104,168"></path>
                   <g id="mg-cross">
-                    <circle class="xdot" cx="640" cy="250" r="8"></circle>
-                    <text class="xlab" x="770" y="292" text-anchor="middle">여기서 넘어섭니다</text>
+                    <circle class="xdot" cx="610" cy="272" r="8"></circle>
+                    <text class="xlab" x="742" y="304" text-anchor="middle">여기서 넘어섭니다</text>
                   </g>
-                  <text class="glabel work" id="mg-wlabel" x="1104" y="156" text-anchor="end">같은 예산으로 할 수 있는 일</text>
-                  <text class="bandl" id="mg-bandl" x="980" y="230" text-anchor="middle">지금까지 접어둔 일</text>
+                  <text class="glabel work" id="mg-wlabel" x="1104" y="150" text-anchor="end">같은 예산으로 할 수 있는 일</text>
+                  <text class="bandl" id="mg-bandl" x="1000" y="248" text-anchor="middle">지금까지 접어둔 일</text>
                 </svg>
               </div>
             </div>
