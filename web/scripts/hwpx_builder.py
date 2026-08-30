@@ -43,12 +43,6 @@ NARROW = ("순번", "번호", "구분", "분야", "연번", "비고")
 MEDIUM = ("진행상황", "상태", "판정", "일자", "담당")
 WIDE = ("주소", "내용", "사항", "세부", "관문", "현황", "조치")
 
-# 행안부 「지방행정 여론·동향」 양식에서 가져온 색 — 날짜바 남색, 섹션 번호박스
-# 청색, 섹션 제목·□ 소제목 글자는 진한 파랑
-BAR_NAVY = "#4C6690"
-BOX_BLUE = "#3E64A8"
-TXT_BLUE = "#0000CC"
-
 
 # ---------------------------------------------------------------- header.xml
 def _patch_header(hdr):
@@ -72,7 +66,7 @@ def _patch_header(hdr):
 
     base_char = re.search(r'<hh:charPr id="0".*?</hh:charPr>', hdr, re.S).group(0)
 
-    def char_pr(cid, pt, font, bold=False, color=None):
+    def char_pr(cid, pt, font, bold=False):
         x = base_char.replace('<hh:charPr id="0"', f'<hh:charPr id="{cid}"', 1)
         x = re.sub(r'height="\d+"', f'height="{int(pt*100)}"', x, count=1)
         x = re.sub(r'<hh:fontRef [^/]*/>',
@@ -80,13 +74,11 @@ def _patch_header(hdr):
                    f'japanese="{font}" other="{font}" symbol="{font}" user="{font}"/>', x, count=1)
         if bold:
             x = x.replace("<hh:underline", "<hh:bold/><hh:underline", 1)
-        if color:
-            x = re.sub(r'textColor="[^"]*"', f'textColor="{color}"', x, count=1)
         return x
 
-    CH = {                      # 이름 -> (id, pt, 글꼴, 진하게[, 글자색])
+    CH = {                      # 이름 -> (id, pt, 글꼴, 진하게)
         "title":  (8, 20, F_HY, True),
-        "head":   (9, 16, F_HY, True, TXT_BLUE),
+        "head":   (9, 16, F_HY, True),
         "bullet": (10, 15, F_BATANG, True),
         "body":   (11, 15, F_BATANG, False),
         "sub":    (12, 13, F_BATANG, False),
@@ -94,13 +86,9 @@ def _patch_header(hdr):
         "smallb": (14, 12, F_MALGUN, True),
         "gap5":   (15, 5, F_BATANG, False),
         "gap3":   (16, 3, F_BATANG, False),
-        "dept":   (17, 11, F_HY, True),               # 제호 우측 부서 블록
-        "bar":    (18, 12, F_MALGUN, True, "#FFFFFF"),  # 날짜바 흰 글씨
-        "secno":  (19, 15, F_HY, True, "#FFFFFF"),      # 섹션 번호(파란 박스 안)
-        "sect":   (20, 15, F_HY, True, TXT_BLUE),       # 섹션 제목
     }
     hdr = hdr.replace("</hh:charProperties>",
-                      "".join(char_pr(*v) for v in CH.values())
+                      "".join(char_pr(i, p, f, b) for i, p, f, b in CH.values())
                       + "</hh:charProperties>", 1)
     hdr = re.sub(r'(<hh:charProperties itemCnt=")\d+(")', rf'\g<1>{8+len(CH)}\g<2>', hdr, count=1)
 
@@ -118,37 +106,27 @@ def _patch_header(hdr):
                           f'<hc:left value="{left}" unit="HWPUNIT"/>')
         return x
 
-    PA = {"center": 20, "L0": 0, "L1": 21, "L2": 22, "L3": 23, "right": 24}
+    PA = {"center": 20, "L0": 0, "L1": 21, "L2": 22, "L3": 23}
     hdr = hdr.replace("</hh:paraProperties>",
                       para_pr(20, align="CENTER") + para_pr(21, 1500)
-                      + para_pr(22, 3000) + para_pr(23, 4500)
-                      + para_pr(24, align="RIGHT") + "</hh:paraProperties>", 1)
-    hdr = re.sub(r'(<hh:paraProperties itemCnt=")\d+(")', r'\g<1>25\g<2>', hdr, count=1)
+                      + para_pr(22, 3000) + para_pr(23, 4500) + "</hh:paraProperties>", 1)
+    hdr = re.sub(r'(<hh:paraProperties itemCnt=")\d+(")', r'\g<1>24\g<2>', hdr, count=1)
 
     # 원본 borderFill(id=1)은 사방 NONE 이라 표 선이 안 그려진다
-    def border_fill(bid, face="none", line="#000000", sides="lrtb", width="0.12 mm"):
-        names = {"l": "left", "r": "right", "t": "top", "b": "bottom"}
-        edges = "".join(
-            f'<hh:{d}Border type="SOLID" width="{width}" color="{line}"/>'
-            if k in sides else
-            f'<hh:{d}Border type="NONE" width="0.1 mm" color="#000000"/>'
-            for k, d in names.items())
+    def border_fill(bid, face="none"):
+        sides = "".join(f'<hh:{d}Border type="SOLID" width="0.12 mm" color="#000000"/>'
+                        for d in ("left", "right", "top", "bottom"))
         return (f'<hh:borderFill id="{bid}" threeD="0" shadow="0" centerLine="NONE" '
                 f'breakCellSeparateLine="0"><hh:slash type="NONE" Crooked="0" isCounter="0"/>'
-                f'<hh:backSlash type="NONE" Crooked="0" isCounter="0"/>{edges}'
+                f'<hh:backSlash type="NONE" Crooked="0" isCounter="0"/>{sides}'
                 f'<hh:diagonal type="SOLID" width="0.1 mm" color="#000000"/><hc:fillBrush>'
                 f'<hc:winBrush faceColor="{face}" hatchColor="#999999" alpha="0"/>'
                 f'</hc:fillBrush></hh:borderFill>')
 
     hdr = hdr.replace("</hh:borderFills>",
-                      border_fill(2) + border_fill(3, "#EEEEEE")
-                      + border_fill(4, BAR_NAVY, sides="")     # 날짜바: 남색 채움, 선 없음
-                      + border_fill(5, BOX_BLUE, sides="")     # 섹션 번호박스: 청색 채움
-                      + border_fill(6, sides="")               # 투명(제호 표)
-                      + border_fill(7, line=TXT_BLUE, sides="b", width="0.3 mm")  # 밑줄만
-                      + "</hh:borderFills>", 1)
-    hdr = re.sub(r'(<hh:borderFills itemCnt=")\d+(")', r'\g<1>7\g<2>', hdr, count=1)
-    return hdr, CH, PA, {"body": 2, "head": 3, "navy": 4, "blue": 5, "plain": 6, "uline": 7}
+                      border_fill(2) + border_fill(3, "#EEEEEE") + "</hh:borderFills>", 1)
+    hdr = re.sub(r'(<hh:borderFills itemCnt=")\d+(")', r'\g<1>3\g<2>', hdr, count=1)
+    return hdr, CH, PA, {"body": 2, "head": 3}
 
 
 # ------------------------------------------------------------------ DSL 규칙
@@ -171,12 +149,6 @@ RULES = {
     "엔터":    ("",        "gap5",   "L0"),
 }
 
-# 표로 그리는 특수 줄(행안부 여론·동향 양식). `왼쪽 | 오른쪽` 으로 두 칸을 나눈다.
-#   제호:   큰 제목 | 우측 부서 블록(; 로 줄 나눔)
-#   날짜바: 남색 바 — 날짜 | 연락처·출처
-#   장:     파란 번호박스 + 파란 밑줄 제목(번호는 빌더가 1부터 센다)
-SPECIAL = ("제호", "날짜바", "장")
-
 
 def _esc(s):
     return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
@@ -196,7 +168,7 @@ def parse(lines):
             continue
         if tbl:
             out.append(("table", tbl)); tbl = []
-        if kw in RULES or kw in SPECIAL:
+        if kw in RULES:
             out.append(("para", kw, rest.strip()))
         else:                      # 키워드가 없으면 본문(바)으로 본다
             out.append(("para", "바", line.strip()))
@@ -287,73 +259,17 @@ def build(lines, out_path, skeleton=SKELETON):
                 f'columnBreak="0" merged="0"><hp:run charPrIDRef="{CH["small"][0]}">'
                 f'{tbl}</hp:run></hp:p>')
 
-    def row_table(cells, rowh):
-        """한 행짜리 장식 표. cells = [(문단들[(글, 글자모양, 정렬)], 너비, 테두리id)]"""
-        tcs = []
-        for c, (paras, width, bf) in enumerate(cells):
-            ps = "".join(
-                f'<hp:p id="0" paraPrIDRef="{PA[al]}" styleIDRef="0" pageBreak="0" '
-                f'columnBreak="0" merged="0"><hp:run charPrIDRef="{CH[ch][0]}">'
-                f'<hp:t>{_esc(t)}</hp:t></hp:run></hp:p>' for t, ch, al in paras)
-            tcs.append(
-                f'<hp:tc name="" header="0" hasMargin="0" protect="0" editable="0" dirty="0" '
-                f'borderFillIDRef="{bf}"><hp:subList id="" textDirection="HORIZONTAL" '
-                f'lineWrap="BREAK" vertAlign="CENTER" linkListIDRef="0" linkListNextIDRef="0" '
-                f'textWidth="0" textHeight="0" hasTextRef="0" hasNumRef="0">{ps}</hp:subList>'
-                f'<hp:cellAddr colAddr="{c}" rowAddr="0"/>'
-                f'<hp:cellSpan colSpan="1" rowSpan="1"/>'
-                f'<hp:cellSz width="{width}" height="{rowh}"/>'
-                f'<hp:cellMargin left="240" right="240" top="100" bottom="100"/></hp:tc>')
-        w = sum(c[1] for c in cells)
-        tbl = (f'<hp:tbl id="1" zOrder="0" numberingType="NONE" textWrap="TOP_AND_BOTTOM" '
-               f'textFlow="BOTH_SIDES" lock="0" dropcapstyle="None" pageBreak="CELL" '
-               f'repeatHeader="0" rowCnt="1" colCnt="{len(cells)}" cellSpacing="0" '
-               f'borderFillIDRef="1" noAdjust="0">'
-               f'<hp:sz width="{w}" widthRelTo="ABSOLUTE" height="{rowh}" '
-               f'heightRelTo="ABSOLUTE" protect="0"/>'
-               f'<hp:pos treatAsChar="1" affectLSpacing="0" flowWithText="1" allowOverlap="0" '
-               f'holdAnchorAndSO="0" vertRelTo="PARA" horzRelTo="PARA" vertAlign="TOP" '
-               f'horzAlign="LEFT" vertOffset="0" horzOffset="0"/>'
-               f'<hp:outMargin left="0" right="0" top="100" bottom="100"/>'
-               f'<hp:inMargin left="240" right="240" top="100" bottom="100"/>'
-               + "<hp:tr>" + "".join(tcs) + "</hp:tr></hp:tbl>")
-        return (f'<hp:p id="{next(pid)}" paraPrIDRef="{PA["L0"]}" styleIDRef="0" pageBreak="0" '
-                f'columnBreak="0" merged="0"><hp:run charPrIDRef="{CH["small"][0]}">'
-                f'{tbl}</hp:run></hp:p>')
-
-    # 쪽 설정(secPr)은 표가 첫 요소일 수 있어 전용 문단에 싣는다(3pt, 눈에 안 띈다)
-    body = [para("", "gap3", "L0",
-                 prefix=f'<hp:run charPrIDRef="{CH["gap3"][0]}">{secpr}{colpr}</hp:run>')]
-    sect_no = 0
+    body, first = [], True
     for item in parse(lines):
         if item[0] == "table":
             body.append(table(item[1]))
             continue
         _, kw, text = item
-        if kw in SPECIAL:
-            left, _, right = (x.strip() for x in text.partition("|"))
-            if kw == "제호":
-                # 우측 부서 블록이 두 줄이라 행 높이를 넉넉히 주지 않으면
-                # 아래 날짜바에 깔린다(rhwp 는 넘친 셀을 늘리지 않고 자른다)
-                dept = [(t.strip(), "dept", "center") for t in right.split(";") if t.strip()]
-                body.append(row_table(
-                    [([(left, "title", "center")], TEXT_WIDTH - 7600, 6),
-                     (dept, 7600, 6)], 3400))
-            elif kw == "날짜바":
-                half = TEXT_WIDTH // 2
-                body.append(row_table(
-                    [([(left, "bar", "L0")], half, 4),
-                     ([(right, "bar", "right")], TEXT_WIDTH - half, 4)], 800))
-            else:                       # 장
-                sect_no += 1
-                # 제목 셀은 L1(들여쓰기 1500)로 — 번호박스에 글이 붙지 않게
-                body.append(row_table(
-                    [([(str(sect_no), "secno", "center")], 1600, 5),
-                     ([(left, "sect", "L1")], TEXT_WIDTH - 1600, 7)], 1400))
-                body.append(para("", "gap3", "L0"))   # 밑줄과 첫 ○ 사이 숨통
-            continue
         bullet, char, level = RULES[kw]
-        body.append(para(bullet + text if text else "", char, level))
+        # 첫 문단에 쪽 설정(secPr)을 실어야 여백·용지가 산다
+        prefix = f'<hp:run charPrIDRef="{CH[char][0]}">{secpr}{colpr}</hp:run>' if first else ""
+        first = False
+        body.append(para(bullet + text if text else "", char, level, prefix))
 
     sec_xml = prolog + "".join(body) + "</hs:sec>"
     patched = {"Contents/header.xml": hdr, "Contents/section0.xml": sec_xml}
