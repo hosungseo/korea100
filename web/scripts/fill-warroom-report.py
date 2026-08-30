@@ -79,6 +79,11 @@ def disp_w(s):
     return sum(0.5 if ord(c) < 0x1100 else 1 for c in s)
 
 
+# * 줄(맑은고딕 12pt, 들여쓰기 4500)이 한 줄에 담기는 폭.
+# 본문 폭 48,190 에서 실측: 35.5 는 담기고 38.5 는 다음 줄로 넘어갔다.
+SMALL_W = 36 * TEXT_WIDTH / 48190
+
+
 def shorten(nm, limit):
     """말끝이 잘려 뜻이 끊기지 않도록 구분자(·, 공백) 경계에서 자른다."""
     if len(nm) <= limit:
@@ -317,15 +322,35 @@ def to_dsl(b):
 
     L.append("엔터:")
     L += ["네모: 리스크·갈등"]
+    leads = gate_leads()
+    edges = json.loads(MAPDATA.read_text())["edges"]
     for r in b.get("risks", [])[:3]:
+        # ○ 무슨 일이 났나 / - 판의 어디인가 / * 그래서 무엇이 걸리나.
+        # 계층마다 다른 정보를 둔다 — 같은 말을 들여쓰기만 바꿔 반복하지 않는다.
         L.append(f"원: {tidy(money_hangul(r['text']))}")
         gs = r.get("gates") or []
-        if gs:
-            L.append(f"주석: ({gs[0]}) {gmap.get(gs[0], '')}".rstrip()
-                     + (f" 외 {len(gs)-1}" if len(gs) > 1 else ""))
+        if not gs:
+            continue
+        g = gs[0]
+        L.append(f"바: ({g}) {gmap.get(g, '')}".rstrip()
+                 + (f" 외 {len(gs)-1}" if len(gs) > 1 else ""))
+        bits = []
+        if leads.get(g):
+            bits.append(f"소관 {leads[g]}")
+        # 리스크는 연성(soft) 의존으로도 번진다 — 경성만 세면 대개 0 이 나온다
+        nxt = [e["to"] for e in edges if e["from"] == g]
+        if nxt:
+            # * 줄은 한 줄이어야 한다. 소관 기관명이 길면 관문명 쪽을 깎는다.
+            room = SMALL_W - disp_w(" · ".join(bits)) - disp_w(f"지연 시 ({nxt[0]}) ")
+            more = f" 외 {len(nxt)-1}" if len(nxt) > 1 else ""
+            nm = gmap.get(nxt[0], "")
+            while nm and disp_w(nm + more) > room:
+                nm = shorten(nm, len(nm) - 1)
+            bits.append(f"지연 시 ({nxt[0]}) {nm}{more}".rstrip())
+        if bits:
+            L.append("주석: " + " · ".join(bits))
 
-    L += ["엔터:", "네모: 지시 필요사항"]
-    leads = gate_leads()
+    L += ["엔터:", "네모: 조치 필요사항"]
     for gate, inst, st, why in directives(b.get("advances"))[:2]:
         # 주체가 "제안자(지자체·민간)" 처럼 괄호를 물고 있어 · 로 자르면 "제안자(지자체" 가 된다
         # 주체 이름 자체에 · 가 들어간다('선정·지원위원회'). · 로 자르면 '선정'만 남는다.
