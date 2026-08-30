@@ -21,6 +21,10 @@ const LOOP_URL = "https://hosungseo.github.io/korea100/warroom/loop/";
 
 const p = loop.pipeline;
 
+// '오늘 기사'의 기준일. 평소엔 수집일이지만, 월요일에 주말 기사를 묶거나
+// 백테스트에서 과거 날짜를 재현할 때 밖에서 준다.
+const SINCE = process.env.BRIEF_SINCE || loop.generatedAt;
+
 // 판별 입력: 제안(요약 포함) + 관문 요약 + 리스크 헤드라인 + 후보
 // 언론사 약칭 — 보도 항목에 "(동아)" 처럼 출처를 밝힌다. 도메인에서 기계적으로 뽑고
 // 표에 없으면 생략한다(모델이 언론사를 지어내지 않도록 값을 직접 준다).
@@ -49,8 +53,8 @@ const headlines = [];
 for (const [g, arr] of Object.entries(signals.byGate)) {
   for (const a of arr) {
     const p = pressOf(a.link);
-    if (a.kind === "risk" && a.pubDate >= loop.generatedAt) riskHeads.push(`${g}: ${a.title}`);
-    if (a.pubDate >= loop.generatedAt && p) headlines.push({ gate: g, press: p, title: a.title });
+    if (a.kind === "risk" && a.pubDate >= SINCE) riskHeads.push(`${g}: ${a.title}`);
+    if (a.pubDate >= SINCE && p) headlines.push({ gate: g, press: p, title: a.title });
   }
 }
 const HEADLINES = headlines.slice(0, 40).map((h, i) => ({ i, ...h }));
@@ -59,7 +63,7 @@ const HEADLINES = headlines.slice(0, 40).map((h, i) => ({ i, ...h }));
 // 판별시키기 위한 것. 고위공무원이 모르는 건 단계가 아니라 단계 '안'이다.
 const GATE_STEPS = {};
 for (const [g, arr] of Object.entries(signals.byGate)) {
-  if (!arr.some((a) => a.pubDate >= loop.generatedAt)) continue;
+  if (!arr.some((a) => a.pubDate >= SINCE)) continue;
   const steps = [];
   for (const inst of procs[g] ?? []) {
     for (const s of inst.steps ?? []) {

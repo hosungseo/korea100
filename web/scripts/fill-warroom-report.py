@@ -291,7 +291,9 @@ def reported_today():
     """오늘 기사가 붙은 관문 — 지시는 여기서 출발한다."""
     try:
         S = json.loads(SIGNALS.read_text())["byGate"]
-        since = json.loads(LOOPDATA.read_text())["generatedAt"]
+        # 기준일 — 브리핑 생성기(BRIEF_SINCE)와 같은 규칙으로 맞춘다
+        since = os.environ.get("BRIEF_SINCE") \
+            or json.loads(LOOPDATA.read_text())["generatedAt"]
     except Exception:
         return set()
     return {g for g, arr in S.items() if any(a["pubDate"] >= since for a in arr)}
@@ -801,12 +803,8 @@ def to_dsl(b):
             bits.append(f"기한 {st['deadline']}")
         L.append("주석: " + fit_bits(bits, SMALL_W, 2))
 
-    if b.get("pipeline"):
-        # ※ 줄은 길이를 모델에 맡기지 않고 뒤 항목부터 떨궈 한 줄에 맞춘다
-        pipe = fit_pipe(b["pipeline"]).removeprefix("※ ")
-        if pipe:
-            # 꼬리말은 들여쓰기 없이 왼쪽 끝에 — 앞 지시사항의 주석으로 안 읽히게
-            L += ["엔터:", f"꼬리: {pipe}"]
+    # ※ 수치 꼬리말은 뺐다(2026-08-30) — 규모 자랑이지 보고가 아니다.
+    # 수치는 briefing.json 의 pipeline 에 계속 남으므로 필요하면 되살릴 수 있다.
     return L
 
 
