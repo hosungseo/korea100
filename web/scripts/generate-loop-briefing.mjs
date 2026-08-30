@@ -71,6 +71,36 @@ for (const [g, arr] of Object.entries(signals.byGate)) {
 }
 const HEADLINE_N = HEADLINES.length;
 
+// 부처명은 모델이 가장 잘 지어내는 항목이다(동복댐 용수 건에 '국방부·국토부'를
+// 붙인 적이 있다 — 환경부 소관인데). 기사 제목이나 그 관문 절차의 주체에
+// 실제로 나온 부처만 남긴다. 약칭도 정식 명칭으로 되돌린다.
+const MINISTRY_ALIAS = {
+  국토부: "국토교통부", 산업부: "산업통상부", 환경부: "환경부",
+  기재부: "기획재정부", 행안부: "행정안전부", 고용부: "고용노동부",
+  해수부: "해양수산부", 과기부: "과학기술정보통신부", 복지부: "보건복지부",
+  기후부: "기후에너지환경부", 국조실: "국무조정실",
+};
+const CORPUS = [
+  ...HEADLINES.map((h) => h.title),
+  ...riskHeads,                                   // "N50: 제목" 형태의 문자열이다
+  ...Object.values(GATE_STEPS).flat().map((s) => `${s.actor ?? ""} ${s.basis ?? ""}`),
+].join(" ");
+
+/** 근거 없는 부처명을 떨어낸다. 반환: 정식 명칭 배열(중복 제거). */
+function groundMinistries(names, gate) {
+  const pool = CORPUS + " " + (GATE_STEPS[gate] ?? []).map((s) => s.actor ?? "").join(" ");
+  const out = [];
+  for (const raw of names ?? []) {
+    const nm = MINISTRY_ALIAS[raw] ?? raw;
+    // 약칭이 본문에 있으면 그것도 근거로 친다("국토부"만 나오는 기사가 흔하다)
+    const alias = Object.keys(MINISTRY_ALIAS).find((k) => MINISTRY_ALIAS[k] === nm);
+    if ((pool.includes(nm) || (alias && pool.includes(alias))) && !out.includes(nm)) {
+      out.push(nm);
+    }
+  }
+  return out;
+}
+
 const payload = {
   date: loop.generatedAt,
   totals: loop.totals,
@@ -174,7 +204,9 @@ if (!process.argv.includes("--no-judge")) {
       '"body":"제목에 없는 정보만 40자 내외(최대 58자)"}]  // 정확히 3건,\n' +
       ` "fields":[{"name":${JSON.stringify(FIELDS)} 중 하나,"status":${JSON.stringify(STATUSES)} 중 하나,` +
       '"gates":["N31","N32"]}]  // 5개 분야 전부, 순서 그대로,\n' +
-      ' "risks":[{"text":"리스크 1줄 34자 이내","gates":["N50"]}]  // 3건,\n' +
+      ' "risks":[{"text":"리스크 1줄 34자 이내","gates":["N50"],' +
+      '"ministries":["기사에서 이 건에 걸린 것으로 보이는 중앙부처"],' +
+      '"interlock":"부처가 둘 이상일 때만, 어느 부처의 무엇이 늦으면 어느 부처가 막히는지 1줄 30자 이내"}]  // 3건,\n' +
       ' "actions":["결정·확인이 필요한 것 1줄 34자 이내"]  // 2건,\n' +
       ' "pipeline":"관문·절차·기관·전환 검토·신규 후보 수치 1줄",\n' +
       ' "advances":[{"gate":"N32","step":"gateSteps 의 step 문자열 그대로","verdict":"일어남",' +
@@ -184,6 +216,15 @@ if (!process.argv.includes("--no-judge")) {
       "body 는 title 을 되풀이하지 않는다. title 에 없는 것만 담는다 — 배경·수치·일정·쟁점·" +
       "이해관계자 반응 중 하나. title 을 풀어 쓴 문장이면 실패다.\n" +
       "status 는 그 분야에서 우리가 판에 취할 조치다(정책 상황 서술이 아니다).\n" +
+      // 부처 하나로 닫히는 일은 그 부처가 알아서 한다. 국무조정실이 봐야 하는 것은
+      // 부처 사이에 걸쳐 아무도 끝까지 책임지지 않는 구간이다.
+      "risks 의 ministries·interlock — 기사에 여러 부처가 얽혀 보이면 반드시 잡아낸다:\n" +
+      "  · 한 부처 소관 사안이면 ministries 는 1개, interlock 은 빈 문자열.\n" +
+      "  · 둘 이상이면 전부 적고, interlock 에 '무엇이 늦으면 무엇이 막히는지'를 쓴다.\n" +
+      "    예: '환경영향평가 지연 시 국방부 부지 확정 불가', '전력 계통 미확정 시 착공 지연'.\n" +
+      "  · 부처 이름은 기사·데이터에 나온 것만 쓴다. 소관을 추측해 지어내지 말 것.\n" +
+      "  · 협의·합의·이견·부처 간·범정부·조정 같은 말이 기사에 있으면 다부처 신호다.\n" +
+      "  · risks 를 고를 때 여러 부처가 걸린 건을 한 부처짜리보다 앞에 둔다.\n" +
       "advances: gateSteps 에 든 절차 중, 오늘 기사가 '실제로 일어났다'고 말하는 것만 고른다.\n" +
       "  '필요하다·요구했다·전망이다·검토 중이다'는 일어난 게 아니다 — 넣지 말 것.\n" +
       "  '확정·의결·선정·고시·체결·접수'처럼 그 절차가 끝났음이 분명할 때만 verdict 를 '일어남'으로 한다.\n" +
@@ -195,6 +236,15 @@ if (!process.argv.includes("--no-judge")) {
     const parsed = JSON.parse(m[0]);
     const bad = validate(parsed);
     if (bad.length) throw new Error(`형식 위반: ${bad.join(", ")}`);
+    // 부처명은 근거가 있는 것만 남긴다. 걸러낸 뒤 하나 이하로 줄면
+    // '부처 간 물림'이라는 전제가 무너지므로 interlock 도 함께 버린다.
+    for (const r of parsed.risks ?? []) {
+      const kept = groundMinistries(r.ministries, (r.gates ?? [])[0]);
+      const dropped = (r.ministries ?? []).length - kept.length;
+      if (dropped > 0) console.warn(`  근거 없는 부처명 ${dropped}개 제거: ${r.text}`);
+      r.ministries = kept;
+      if (kept.length < 2) r.interlock = "";
+    }
     // 언론사는 모델이 쓰지 않고, 지목한 번호로 코드가 붙인다(창작 차단)
     for (const r of parsed.reports) {
       const h = HEADLINES[r.headlineIndex];

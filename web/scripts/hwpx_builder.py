@@ -18,6 +18,9 @@ DSL (한 줄 = 한 문단, `키워드: 내용`)
     표: a: b: c  콜론 구분 표 행(연속 줄이 한 표, 첫 줄이 머리행)
     엔터:        빈 줄(간격)
 
+본문 안에서 ^…^ 로 감싸면 위첨자가 된다 — 관문 번호처럼 참조용 표시를
+문장 흐름에서 빼는 데 쓴다.  예)  바: 신규 수원 확보^(N50)^
+
 기호는 「행정업무의 운영 및 혁신에 관한 규정 시행규칙」 제2조제1항 단서의
 □ ○ - ㆍ 를 따른다(한글 자모 ㅇ 나 en dash – 가 아니다).
 
@@ -66,7 +69,11 @@ def _patch_header(hdr):
 
     base_char = re.search(r'<hh:charPr id="0".*?</hh:charPr>', hdr, re.S).group(0)
 
-    def char_pr(cid, pt, font, bold=False):
+    def _all_langs(tag, val):
+        return (f'<hh:{tag} hangul="{val}" latin="{val}" hanja="{val}" japanese="{val}" '
+                f'other="{val}" symbol="{val}" user="{val}"/>')
+
+    def char_pr(cid, pt, font, bold=False, sup=False):
         x = base_char.replace('<hh:charPr id="0"', f'<hh:charPr id="{cid}"', 1)
         x = re.sub(r'height="\d+"', f'height="{int(pt*100)}"', x, count=1)
         x = re.sub(r'<hh:fontRef [^/]*/>',
@@ -74,21 +81,35 @@ def _patch_header(hdr):
                    f'japanese="{font}" other="{font}" symbol="{font}" user="{font}"/>', x, count=1)
         if bold:
             x = x.replace("<hh:underline", "<hh:bold/><hh:underline", 1)
+        if sup:
+            # HWPX 에 위첨자 전용 태그는 없다 — 작게 만들고 기준선에서 위로
+            # 올리는 것이 한/글의 위첨자다.
+            # 크기는 relSz 가 아니라 height 로 준다: rhwp 렌더러가 relSz 를
+            # 무시해 PNG 에서는 축소가 전혀 보이지 않았다. height 는 두 곳
+            # 모두 지키므로 relSz 는 100 으로 두고 offset 만 얹는다.
+            x = re.sub(r'height="\d+"', f'height="{int(pt*65)}"', x, count=1)
+            x = re.sub(r'<hh:offset [^/]*/>', _all_langs("offset", 30), x, count=1)
         return x
 
-    CH = {                      # 이름 -> (id, pt, 글꼴, 진하게)
-        "title":  (8, 20, F_HY, True),
-        "head":   (9, 16, F_HY, True),
-        "bullet": (10, 15, F_BATANG, True),
-        "body":   (11, 15, F_BATANG, False),
-        "sub":    (12, 13, F_BATANG, False),
-        "small":  (13, 12, F_MALGUN, False),
-        "smallb": (14, 12, F_MALGUN, True),
-        "gap5":   (15, 5, F_BATANG, False),
-        "gap3":   (16, 3, F_BATANG, False),
+    CH = {                      # 이름 -> (id, pt, 글꼴, 진하게, 위첨자)
+        "title":  (8, 20, F_HY, True, False),
+        "head":   (9, 16, F_HY, True, False),
+        "bullet": (10, 15, F_BATANG, True, False),
+        "body":   (11, 15, F_BATANG, False, False),
+        "sub":    (12, 13, F_BATANG, False, False),
+        "small":  (13, 12, F_MALGUN, False, False),
+        "smallb": (14, 12, F_MALGUN, True, False),
+        "gap5":   (15, 5, F_BATANG, False, False),
+        "gap3":   (16, 3, F_BATANG, False, False),
+        # 관문 번호를 본문 흐름에서 빼는 용도 — 각 단의 글자모양마다 하나씩.
+        # 짝이 없는 단은 para() 에서 본문 글자모양으로 떨어지므로 위첨자를
+        # 쓰는 단은 여기에 반드시 등록해야 한다.
+        "body^":   (17, 15, F_BATANG, False, True),
+        "small^":  (18, 12, F_MALGUN, False, True),
+        "bullet^": (19, 15, F_BATANG, True, True),
     }
     hdr = hdr.replace("</hh:charProperties>",
-                      "".join(char_pr(i, p, f, b) for i, p, f, b in CH.values())
+                      "".join(char_pr(*v) for v in CH.values())
                       + "</hh:charProperties>", 1)
     hdr = re.sub(r'(<hh:charProperties itemCnt=")\d+(")', rf'\g<1>{8+len(CH)}\g<2>', hdr, count=1)
 
@@ -214,10 +235,15 @@ def build(lines, out_path, skeleton=SKELETON):
     pid = iter(range(10000))
 
     def para(text, char, level, prefix=""):
-        cid = CH[char][0]
-        run = f'<hp:run charPrIDRef="{cid}"><hp:t>{_esc(text)}</hp:t></hp:run>'
+        # ^…^ 로 감싼 조각은 위첨자 글자모양으로 따로 run 을 낸다.
+        # 위첨자용 글자모양이 없는 단(제목 등)은 그냥 본문으로 떨어뜨린다.
+        sup = CH.get(char + "^", CH[char])[0]
+        runs = "".join(
+            f'<hp:run charPrIDRef="{sup if i % 2 else CH[char][0]}">'
+            f'<hp:t>{_esc(part)}</hp:t></hp:run>'
+            for i, part in enumerate(text.split("^")) if part)
         return (f'<hp:p id="{next(pid)}" paraPrIDRef="{PA[level]}" styleIDRef="0" '
-                f'pageBreak="0" columnBreak="0" merged="0">{prefix}{run}</hp:p>')
+                f'pageBreak="0" columnBreak="0" merged="0">{prefix}{runs}</hp:p>')
 
     def table(rows):
         cols = max(len(r) for r in rows)

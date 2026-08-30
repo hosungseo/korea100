@@ -75,8 +75,18 @@ DIRECTIVE_W = 25 * TEXT_WIDTH / 42520
 
 
 def disp_w(s):
-    """한글은 1, 영숫자·괄호는 0.5 로 세는 표시 폭. 글자 수로만 재면 어긋난다."""
-    return sum(0.5 if ord(c) < 0x1100 else 1 for c in s)
+    """한글은 1, 영숫자·괄호는 0.5 로 세는 표시 폭. 글자 수로만 재면 어긋난다.
+
+    ^ 는 위첨자 표시용 마크업이라 지면을 차지하지 않는다. 위첨자 자체는
+    작게 그려지므로 절반으로 친다.
+    """
+    w, sup = 0.0, False
+    for c in s:
+        if c == "^":
+            sup = not sup
+            continue
+        w += (0.5 if ord(c) < 0x1100 else 1) * (0.6 if sup else 1)
+    return w
 
 
 # * 줄(맑은고딕 12pt, 들여쓰기 4500)이 한 줄에 담기는 폭.
@@ -240,6 +250,36 @@ def gate_leads():
     return out
 
 
+# 중앙행정기관 이름. '관할 구청·도로관리청·발주청·총괄청'처럼 역할을 가리키는
+# 총칭은 부처가 아니므로 뺀다 — 이걸 안 걸러내면 거의 모든 관문이 다부처가 된다
+_ROLE = re.compile(r"관할|관리청|발주|승인|소관|지적|총괄|시공|감리")
+_CENTRAL = re.compile(r"^(.{2,6}(?:부|청))$")
+
+
+def gate_ministries():
+    """관문 → 그 안 절차에 걸린 중앙부처 집합.
+
+    관문 노드의 ministries 는 대부분 비어 있거나 '정부'·'관계 관리청' 같은
+    총칭이라 쓸 수 없다. 절차 1,374개의 주체를 훑는 쪽이 실제에 가깝다.
+    """
+    try:
+        byGate = json.loads(PROCS.read_text())["byGate"]
+    except Exception:
+        return {}
+    out = {}
+    for g, insts in byGate.items():
+        s = []
+        for inst in insts:
+            for st in (inst.get("steps") or []):
+                for part in re.split(r"[·,/]|\s+및\s+", st.get("actor") or ""):
+                    part = re.sub(r"\(.*?\)", "", part).strip()
+                    if _CENTRAL.match(part) and not _ROLE.search(part) and part not in s:
+                        s.append(part)
+        if s:
+            out[g] = s
+    return out
+
+
 def directives(advances):
     """지시 후보를 뽑는다.
 
@@ -280,7 +320,11 @@ def directives(advances):
         for v in ho.get(g, []):
             if N.get(v, {}).get("status") in ("planned", "unknown") and v not in seen:
                 nxt.append((v, g))
-    for v, src in sorted(set(nxt), key=lambda x: -_downstream(ho, x[0])):
+    # 여러 부처가 걸린 관문을 먼저 — 부처 하나로 닫히는 일은 그 부처가 하지만
+    # 사이에 걸친 일은 아무도 끝까지 안 챙겨 거기서 멈춘다
+    gmin = gate_ministries()
+    for v, src in sorted(set(nxt),
+                         key=lambda x: (-len(gmin.get(x[0], [])), -_downstream(ho, x[0]))):
         if v in seen:
             continue
         for inst in (byGate.get(v) or [])[:1]:
@@ -290,7 +334,7 @@ def directives(advances):
                 seen.add(v)
 
     # ③ 그래도 모자라면 착수 가능한데 미착수인 관문 — 파급 순
-    for g in sorted(ready, key=lambda x: -_downstream(ho, x)):
+    for g in sorted(ready, key=lambda x: (-len(gmin.get(x, [])), -_downstream(ho, x))):
         if g in seen:
             continue
         for inst in (byGate.get(g) or [])[:1]:
@@ -323,8 +367,22 @@ def to_dsl(b):
     L.append("엔터:")
     L += ["네모: 리스크·갈등"]
     leads = gate_leads()
+    gmin = gate_ministries()
     edges = json.loads(MAPDATA.read_text())["edges"]
-    for r in b.get("risks", [])[:3]:
+
+    def mins_of(r):
+        """이 리스크에 걸린 중앙부처. 기사에서 모델이 뽑은 것 + 절차 데이터."""
+        out = list(r.get("ministries") or [])
+        for g in (r.get("gates") or []):
+            for m in gmin.get(g, []):
+                if m not in out:
+                    out.append(m)
+        return out
+
+    # 부처 하나로 닫히는 일은 그 부처가 처리한다. 여럿이 걸린 건은 사이에서
+    # 멈추므로 국무조정실이 봐야 한다 — 그런 건을 위로 올린다.
+    risks = sorted(b.get("risks", []), key=lambda r: -len(mins_of(r)))[:3]
+    for r in risks:
         # ○ 무슨 일이 났나 / - 판의 어디인가 / * 그래서 무엇이 걸리나.
         # 계층마다 다른 정보를 둔다 — 같은 말을 들여쓰기만 바꿔 반복하지 않는다.
         L.append(f"원: {tidy(money_hangul(r['text']))}")
@@ -332,26 +390,40 @@ def to_dsl(b):
         if not gs:
             continue
         g = gs[0]
-        L.append(f"바: ({g}) {gmap.get(g, '')}".rstrip()
-                 + (f" 외 {len(gs)-1}" if len(gs) > 1 else ""))
+        # 관문 번호는 참조 표시라 문장 흐름에서 빼고 위첨자로 올린다
+        more = f" 외 {len(gs)-1}" if len(gs) > 1 else ""
+        L.append(f"바: {gmap.get(g, '')}^({g}){more}^")
+        ms = mins_of(r)
         bits = []
-        if leads.get(g):
+        if len(ms) > 1:
+            bits.append("·".join(ms[:3]) + " 협의 사항")
+        elif ms:
+            bits.append(f"소관 {ms[0]}")
+        elif leads.get(g):
             bits.append(f"소관 {leads[g]}")
-        # 리스크는 연성(soft) 의존으로도 번진다 — 경성만 세면 대개 0 이 나온다
-        nxt = [e["to"] for e in edges if e["from"] == g]
-        if nxt:
-            # * 줄은 한 줄이어야 한다. 소관 기관명이 길면 관문명 쪽을 깎는다.
-            room = SMALL_W - disp_w(" · ".join(bits)) - disp_w(f"지연 시 ({nxt[0]}) ")
-            more = f" 외 {len(nxt)-1}" if len(nxt) > 1 else ""
-            nm = gmap.get(nxt[0], "")
-            while nm and disp_w(nm + more) > room:
-                nm = shorten(nm, len(nm) - 1)
-            bits.append(f"지연 시 ({nxt[0]}) {nm}{more}".rstrip())
+        # 부처 간 물림은 모델이 기사에서 읽어낸 것이 우선 — 판 그래프에 없는
+        # 조합이 기사에 먼저 나타난다. 없으면 그래프의 다음 관문으로 갈음한다.
+        if len(ms) > 1 and r.get("interlock"):
+            # 부처명이 셋이면 앞머리만으로도 줄이 차 물림 설명이 밀려난다.
+            # 부처를 줄여서라도 '무엇이 무엇을 막는지'는 지면에 남긴다.
+            il = tidy(r["interlock"])
+            while len(ms) > 2 and disp_w(f"{'·'.join(ms)} 협의 · {il}") > SMALL_W:
+                ms = ms[:-1]
+            bits = [f"{'·'.join(ms)} 협의", il]
+        else:
+            # 리스크는 연성(soft) 의존으로도 번진다 — 경성만 세면 대개 0 이 나온다
+            nxt = [e["to"] for e in edges if e["from"] == g]
+            if nxt:
+                room = SMALL_W - disp_w(" · ".join(bits)) - disp_w("지연 시 ()") - 3
+                nm = gmap.get(nxt[0], "")
+                while nm and disp_w(nm) > room:
+                    nm = shorten(nm, len(nm) - 1)
+                bits.append(f"지연 시 {nm}^({nxt[0]})^")
         if bits:
             L.append("주석: " + " · ".join(bits))
 
     L += ["엔터:", "네모: 조치 필요사항"]
-    for gate, inst, st, why in directives(b.get("advances"))[:2]:
+    for gate, inst, st, why in directives(b.get("advances"))[:4]:
         # 주체가 "제안자(지자체·민간)" 처럼 괄호를 물고 있어 · 로 자르면 "제안자(지자체" 가 된다
         # 주체 이름 자체에 · 가 들어간다('선정·지원위원회'). · 로 자르면 '선정'만 남는다.
         # 여럿이 나열된 경우만 쉼표·슬래시로 끊고, · 는 이름의 일부로 본다.
@@ -369,10 +441,10 @@ def to_dsl(b):
         # ○ 줄은 한 줄이어야 한다. 넘치면 관문 표시가 "(N3 / 1)" 로 쪼개진다.
         # 주체는 지시 대상이라 못 줄이므로 절차명 쪽을 깎는다.
         name = tidy(name)
-        room = DIRECTIVE_W - disp_w(f"{actor}: ({gate})")
+        room = DIRECTIVE_W - disp_w(f"{actor}: ^({gate})^")
         while name and disp_w(name) > room:
             name = shorten(name, len(name) - 1)
-        L.append(f"원: {actor}: {name}({gate})")
+        L.append(f"원: {actor}: {name}^({gate})^")
         # 불릿(*)은 DSL 이 붙인다 — 여기서 붙이면 키워드가 없어 '바'로 폴백한다
         # 조문은 "군 공항 이전 및 지원에 관한 특별법 제6조·제7조·제11조" 처럼 길어
         # 한 줄을 넘긴다. 법령명을 줄이고 조문은 첫 것만 남긴다.
@@ -383,11 +455,20 @@ def to_dsl(b):
         if m:
             basis = f"{m.group(1).strip()} {m.group(2)}"
         bits = [why]
+        # 여러 부처가 걸린 관문이면 그걸 먼저 밝힌다 — 이 줄이 국무조정실
+        # 소관인지 소관 부처 혼자 할 일인지를 가르는 정보다
+        ms = gmin.get(gate, [])
+        if len(ms) > 1:
+            bits.insert(0, "·".join(ms[:3]) + " 협의")
         if basis:
             bits.append(basis)
         if st.get("deadline"):
             bits.append(f"기한 {st['deadline']}")
-        L.append("주석: " + " · ".join(bits)[:52])
+        line = " · ".join(bits)
+        while bits and disp_w(line) > SMALL_W:
+            bits.pop()
+            line = " · ".join(bits)
+        L.append("주석: " + line)
 
     if b.get("pipeline"):
         # ※ 줄은 길이를 모델에 맡기지 않고 뒤 항목부터 떨궈 한 줄에 맞춘다
