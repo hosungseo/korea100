@@ -369,9 +369,9 @@ def reported_today():
 #            '사업자'만 걸러서는 '사업시행자'가 통과한다)
 #   총칭   — 누구인지 특정되지 않아 지시가 성립하지 않는다
 NON_ACTOR = re.compile(
-    r"주민|신청인|제안자|사업자|시행자|기업|이용자|소유주|발주자|입주|당사자"
+    r"주민|신청인|제안자|사업자|시행자|기업|이용자|소유주|건축주|발주자|입주|당사자"
     r"|영업자|취급자|투자가|인수자|시공")
-GENERIC_ACTOR = re.compile(r"^(전문|심사|허가|조달|승인|운영|감독|담당|관계|소관|관할|해당|각급|주된|관련)")
+GENERIC_ACTOR = re.compile(r"^(전문|심사|허가|조달|승인|운영|감독|담당|관계|소관|관할|해당|각급|주된|관련|주무)")
 NAMED_ADMIN = re.compile(r"(부|청|처|위원회|의회|특별시|광역시|자치시|자치도|도|시|군|구청|본부)$")
 
 
@@ -490,7 +490,15 @@ def follow_task(ho, gate, limit=13):
             if steps:
                 # "A부터 B까지 …" 형태는 첫 마디만 쓴다
                 nm = re.split(r"부터|까지", steps[0]["name"])[0].strip()
-                return shorten(nm, limit), t
+                # 어절 중간 절단('기부 대 양여'→'기부 대')을 막는다 —
+                # · 목록은 담기는 데까지 통째로, 아니면 기존 절단
+                acc = ""
+                for seg in nm.split("·"):
+                    cand = f"{acc}·{seg}" if acc else seg
+                    if len(cand) > limit:
+                        break
+                    acc = cand
+                return (acc or shorten(nm, limit)), t
     return None
 
 
@@ -802,22 +810,34 @@ def to_dsl(b, compact=False):
 
     L += ["엔터:", "네모: 조치 필요사항"]
 
+    def _named(cand):
+        """지시 가능한 이름 하나를 뽑는다. 전체가 행정기관이면 그대로
+        ('선정·지원위원회'), 아니면 · 조각 중 첫 행정기관('광주특별시·산단
+        지정권자' → '광주특별시'). 없으면 None."""
+        if not cand:
+            return None
+        cand = re.sub(r"\s*\([^)]*\)", "", cand)
+        cand = re.split(r"[,/]|\s+및\s+", cand)[0].strip()
+        if actionable(cand):
+            return cand
+        for seg in cand.split("·"):
+            if actionable(seg.strip()):
+                return seg.strip()
+        return None
+
     def resolve_actor(gate, st, ms):
         """총리가 이름을 불러 챙기게 할 '주무' 하나를 정한다.
 
-        주체가 "제안자(지자체·민간)" 처럼 괄호를 물고 있어 · 로 자르면
-        "제안자(지자체" 가 된다. 주체 이름 자체에도 · 가 들어가므로
-        ('선정·지원위원회') 여럿이 나열된 경우만 쉼표·슬래시로 끊는다.
-
         협의기관을 병렬 승격하면(산림청·해양수산부가 개발행위허가 주체로)
         수신자가 어긋난다 — 백테스트 최다 사고. 협의기관은 * 로 내린다.
+        '건축주'(민간)·'주무부처'(총칭)까지 훑어도 이름이 안 나오는 관문은
+        None 을 돌려 후보에서 빼게 한다 — 수신자 없는 지시는 지시가 아니다.
         """
-        a = re.sub(r"\s*\([^)]*\)", "", st.get("actor") or "")
-        a = re.split(r"[,/]|\s+및\s+", a)[0].strip()
-        if actionable(a):
-            return a
-        # 민간·총칭에는 총리의 지시가 닿지 않는다 — 관장 기관으로 돌린다
-        return leads.get(gate) or (ms[0] if ms else "소관기관")
+        for cand in [st.get("actor"), leads.get(gate), *(ms or [])]:
+            got = _named(cand)
+            if got:
+                return got
+        return None
 
     # 같은 부처가 연달아 나오면 총리 보고로서 읽을 값이 떨어진다.
     # 후보를 넉넉히 받아 한 기관당 하나씩만 올린다.
@@ -830,7 +850,7 @@ def to_dsl(b, compact=False):
     picked, used = [], set()
     for _i, cand in cands:
         actor = resolve_actor(cand[0], cand[2], gmin.get(cand[0], []))
-        if actor in used:
+        if not actor or actor in used:
             continue
         used.add(actor)
         picked.append((actor, *cand))
