@@ -134,8 +134,13 @@ def money_hangul(text: str) -> str:
 
 
 def tidy(t):
-    """보고서 문장은 마침표를 찍지 않고 말줄임표도 쓰지 않는다."""
-    t = (t or "").replace("…", "").replace("...", "").strip()
+    """보고서 문장은 마침표를 찍지 않고 말줄임표도 쓰지 않는다.
+
+    말줄임표를 빈 문자열로 지우면 '개회…100일' 이 '개회100일' 로 붙는다.
+    문장 중간이면 공백으로, 끝이면 그냥 떼어낸다.
+    """
+    t = re.sub(r"(…|\.\.\.)", " ", t or "")
+    t = re.sub(r"\s{2,}", " ", t).strip()
     return t.rstrip(" .·")
 
 
@@ -285,7 +290,10 @@ def to_dsl(b):
     L += ["엔터:", "네모: 지시 필요사항"]
     for gate, inst, st, why in directives(b.get("advances"))[:2]:
         # 주체가 "제안자(지자체·민간)" 처럼 괄호를 물고 있어 · 로 자르면 "제안자(지자체" 가 된다
-        actor = re.sub(r"\s*\([^)]*\)", "", st.get("actor") or "").split("·")[0].strip()
+        # 주체 이름 자체에 · 가 들어간다('선정·지원위원회'). · 로 자르면 '선정'만 남는다.
+        # 여럿이 나열된 경우만 쉼표·슬래시로 끊고, · 는 이름의 일부로 본다.
+        actor = re.sub(r"\s*\([^)]*\)", "", st.get("actor") or "")
+        actor = re.split(r"[,/]|\s+및\s+", actor)[0].strip()
         # 주민·신청인·사업자는 지시 대상이 아니다 — 관리·감독하는 쪽으로 돌린다
         if not actor or re.search(r"주민|신청인|제안자|사업자|기업|이용자|소유주|발주자", actor):
             actor = "소관기관"
