@@ -403,31 +403,22 @@ def josa(word, pair=("을", "를")):
     return pair[0] if (ord(ch) - 0xAC00) % 28 else pair[1]
 
 
-def how_to(actor, step, more):
-    """'무엇을' 에 '어떻게' 를 붙인다.
+def how_to(steps, ministries, n_after):
+    """총리가 부처에 시키는 '추진 방식'을 만든다.
 
-    다음 단계를 그냥 하라고 하면 지시가 아니라 목록 읽기다. 그 단계를
-    실제로 움직이는 방법은 '누구를 어떻게 동원하는가'에 있고, 그건
-    단계의 주체에서 나온다. 기한은 데이터에 거의 없어 쓰지 못한다.
+    절차를 안내하는 자리가 아니다. 실무는 부처가 안다. 총리가 더하는
+    것은 '어떤 식으로 밀어붙이라'는 것 — 병행할지, 다른 부처와 함께
+    할지, 앞당길지, 그리고 무엇을 얻기 위해서인지.
     """
-    a = re.sub(r"\s*\([^)]*\)", "", actor or "").strip()
-    a = re.split(r"[,/]|\s+및\s+", a)[0].strip()
-    # 단계 이름이 주체로 시작하면 되풀이하지 않는다
-    # ("선정·지원위원회 심의 및 계획 공고" → "심의 및 계획 공고")
-    s = step[len(a):].strip() if a and step.startswith(a) else step
-
-    if a and NON_ACTOR.search(a):
-        # 민간은 시킬 수 없다 — 절차를 안내하고 이행을 확인하는 것이 할 일
-        head, verb = f"{a}의 {s}{josa(s)}", ("안내·확인하고", "안내·확인할 것")
-    elif a and re.search(r"(위원회|심의회|협의회)$", a):
-        head, verb = f"{a}{josa(a)} 소집해 {s}{josa(s)}", ("마치고", "마칠 것")
-    elif a:
-        # 이름 규칙에 딱 맞지 않아도('공급기관', '지자체·인허가부서')
-        # 실무를 쥔 상대이므로 협의 대상으로 세운다
-        head, verb = f"{a}{josa(a, ('과', '와'))} {s}{josa(s)}", ("마치고", "마칠 것")
-    else:
-        head, verb = f"{s}에", ("착수하고", "착수할 것")
-    return f"{head} {verb[0] if more else verb[1]}"
+    goal = (f"후속 관문 {n_after}개 일정을 확보할 것" if n_after
+            else "지체 없이 마무리할 것")
+    a = shorten(steps[0][0], 12)
+    if len(steps) > 1:
+        b = shorten(steps[1][0], 12)
+        return f"{a}와 {b}{josa(b)} 병행 추진해 {goal}"
+    if len(ministries) > 1:
+        return f"{a}{josa(a)} {ministries[1]}와 공동으로 추진해 {goal}"
+    return f"{a}{josa(a)} 조기 착수해 {goal}"
 
 
 def next_step_pairs(gate, step_name):
@@ -449,32 +440,6 @@ def next_step_pairs(gate, step_name):
         i = names.index(step_name)
         return [(s["name"][len(head):].strip(), s.get("actor") or "")
                 for s in steps[i + 1:i + 3]]
-    return []
-
-
-def next_steps(gate, step_name, limit=2):
-    """그 절차 다음에 오는 실무 단계들. 지시를 한 단 더 내리는 재료다.
-
-    한 제도 안의 단계 이름이 "…검증까지 대상·요건 확인", "…검증까지
-    접수·등록" 처럼 긴 머리말을 공유하는 데가 있다(N41). 머리말을 떼야
-    무엇이 다른 단계인지 보인다.
-    """
-    try:
-        byGate = json.loads(PROCS.read_text())["byGate"]
-    except Exception:
-        return []
-    for inst in byGate.get(gate, []):
-        steps = [s["name"] for s in (inst.get("steps") or [])]
-        if step_name not in steps:
-            continue
-        # 공통 머리말 찾기 — 어절 경계까지만 잘라낸다
-        head = os.path.commonprefix(steps)
-        if " " in head:
-            head = head[:head.rindex(" ") + 1]
-        if len(head) < 8:
-            head = ""
-        i = steps.index(step_name)
-        return [s[len(head):].strip() for s in steps[i + 1:i + 1 + limit]]
     return []
 
 
@@ -680,25 +645,19 @@ def to_dsl(b):
         # 총리에게 보고하라는 말이 아니라 그 부처가 실제로 할 일을 적는다.
         # next_steps 는 아직 오지 않은 단계이므로 '착수' 가 맞는 말이다.
         nxt = next_step_pairs(gate, st["name"])
+        n_after = _downstream(ho, gate)
         if nxt:
             # 지시문은 꼬리가 잘리면 뜻이 무너지므로 뒤를 자르는 대신
             # 단계를 하나로 줄여 문장을 통째로 남긴다.
-            line = how_to(nxt[0][1], nxt[0][0], more=False)
-            if len(nxt) > 1:
-                two = (how_to(nxt[0][1], nxt[0][0], more=True)
-                       + f" {nxt[1][0]}까지 이어갈 것")
-                # 두 줄을 넉넉히 채우거나 한 줄에 들어갈 때만 두 단계를 쓴다
-                if lines_ok(two, BODY_W, 2):
-                    line = two
+            line = how_to(nxt, ms, n_after)
+            if len(nxt) > 1 and not lines_ok(line, BODY_W, 2):
+                line = how_to(nxt[:1], ms, n_after)
         else:
             # 그 절차가 제도의 마지막이라 다음 단계가 없다 — 그 절차 자체를
-            # 마무리하는 것이 할 일이다
-            n_after = _downstream(ho, gate)
-            tail = f", 후속 관문 {n_after}개 연계" if n_after else ""
-            nm = shorten(name, 16)
-            line = f"{nm}{josa(nm)} 마무리할 것{tail}"
-        # 여기서 fit_lines 를 다시 걸지 않는다 — 지시문은 '…보고할 것' 이
-        # 잘리면 지시가 아니게 된다. 길이는 위에서 단계 수로 맞췄다.
+            # 어떻게 밀어붙일지를 적는다
+            line = how_to([(shorten(name, 14), "")], ms, n_after)
+        # 여기서 fit_lines 를 다시 걸지 않는다 — 지시문은 끝이 잘리면
+        # 지시가 아니게 된다. 길이는 위에서 단계 수로 맞췄다.
         L.append(f"바: {line}")
 
         # * 부연 — 관문·근거 조문·부처 협의·기한
