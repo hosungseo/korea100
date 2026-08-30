@@ -393,6 +393,32 @@ def gate_ministries():
     return out
 
 
+def next_steps(gate, step_name, limit=2):
+    """그 절차 다음에 오는 실무 단계들. 지시를 한 단 더 내리는 재료다.
+
+    한 제도 안의 단계 이름이 "…검증까지 대상·요건 확인", "…검증까지
+    접수·등록" 처럼 긴 머리말을 공유하는 데가 있다(N41). 머리말을 떼야
+    무엇이 다른 단계인지 보인다.
+    """
+    try:
+        byGate = json.loads(PROCS.read_text())["byGate"]
+    except Exception:
+        return []
+    for inst in byGate.get(gate, []):
+        steps = [s["name"] for s in (inst.get("steps") or [])]
+        if step_name not in steps:
+            continue
+        # 공통 머리말 찾기 — 어절 경계까지만 잘라낸다
+        head = os.path.commonprefix(steps)
+        if " " in head:
+            head = head[:head.rindex(" ") + 1]
+        if len(head) < 8:
+            head = ""
+        i = steps.index(step_name)
+        return [s[len(head):].strip() for s in steps[i + 1:i + 1 + limit]]
+    return []
+
+
 def directives(advances):
     """지시 후보를 뽑는다.
 
@@ -573,13 +599,13 @@ def to_dsl(b):
         # 명령문이 아니라 '무엇을 챙겨야 하는지'를 적는다. 총리가 부처에
         # 물을 거리이지 지시문 자체는 아니므로 동사로 끝맺지 않는다.
         if len(ms) > 1:
-            aspect = "부처 협의 상황"
+            aspect = "부처 협의 상황 점검"
         elif "완료" in why:
-            aspect = "착수 일정"          # 직전 절차가 끝났다는 보도가 있었다
+            aspect = "착수 일정 확정"      # 직전 절차가 끝났다는 보도가 있었다
         elif "다음 관문" in why:
-            aspect = "준비상황"           # 아직 이 관문 차례가 오지 않았다
+            aspect = "준비상황 점검"       # 아직 이 관문 차례가 오지 않았다
         else:
-            aspect = "착수 여부"          # 선행이 끝나 시작할 수 있는데 소식이 없다
+            aspect = "착수 여부 확인"      # 선행이 끝나 시작할 수 있는데 소식이 없다
 
         # ○ 는 한 줄이어야 한다. 주체와 관점어는 못 줄이므로 절차명을 깎는다.
         # 관문 표시는 아래 * 로 내렸다 — ○ 는 '누가 무엇을' 만 담는다
@@ -589,18 +615,24 @@ def to_dsl(b):
             name = shorten(name, len(name) - 1)
         L.append(f"원: {actor}: {name} {aspect}")
 
-        # - 왜 지금 이 절차인가. 관문 ID 만 적으면 무엇인지 알 수 없으므로
-        #   이름을 붙여 편다("N04 보도의" → "예비이전후보지 선정·공표(N04) 보도의")
-        # 여기 관문 이름은 '어느 관문 다음인지'만 알면 되므로 짧게 — 전체
-        # 이름을 넣으면 이 줄만 두 줄이 되어 한 장을 넘긴다
-        reason = re.sub(r"\bN\d+\b",
-                        lambda m: f"{shorten(gmap.get(m.group(0), ''), 12)}"
-                                  f"^({m.group(0)})^",
-                        why).replace("보도의 다음 관문", "보도 다음")
-        n_after = _downstream(ho, gate)
-        if n_after and "뒤" not in reason:
-            reason += f", 뒤 관문 {n_after}개"
-        L.append(f"바: {fit_lines(reason, BODY_W, 1)}")
+        # - 한 단 아래 실무에 내릴 지시. ○ 이 '무엇을 볼 것인가'라면
+        #   여기는 '그러려면 무슨 일을 시켜야 하는가'다. 그 절차 다음에
+        #   실제로 오는 단계를 짚어 준다.
+        nxt = next_steps(gate, st["name"])
+        if nxt:
+            todo = " · ".join(nxt)
+            verb = "일정 확정·통보" if len(nxt) > 1 else "일정 확정"
+            line = f"{todo} {verb}"
+        else:
+            # 마지막 단계라 뒤가 없으면 어디서 이어지는 건인지라도 밝힌다
+            line = re.sub(r"\bN\d+\b",
+                          lambda m: f"{shorten(gmap.get(m.group(0), ''), 12)}"
+                                    f"^({m.group(0)})^",
+                          why).replace("보도의 다음 관문", "보도 다음")
+            n_after = _downstream(ho, gate)
+            if n_after and "뒤" not in line:
+                line += f", 뒤 관문 {n_after}개"
+        L.append(f"바: {fit_lines(line, BODY_W, 2)}")
 
         # * 부연 — 관문·근거 조문·부처 협의·기한
         # 부처 이름은 위 ○ 에 이미 나왔다 — 세 곳 이상 걸린 경우만 나머지를 덧붙인다
