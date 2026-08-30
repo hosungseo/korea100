@@ -628,24 +628,25 @@ def to_dsl(b):
         # - 한 단 아래 실무에 내릴 지시. ○ 이 '무엇을 볼 것인가'라면
         #   여기는 '그러려면 무슨 일을 시켜야 하는가'다. 그 절차 다음에
         #   실제로 오는 단계를 짚어 준다.
+        # 총리에게 보고하라는 말이 아니라 그 부처가 실제로 할 일을 적는다.
+        # next_steps 는 아직 오지 않은 단계이므로 '착수' 가 맞는 말이다.
         nxt = next_steps(gate, st["name"])
         if nxt:
-            # 명사구로 끝내면 '무엇을 하라'가 안 남는다 — 지시문으로 맺는다.
             # 지시문은 꼬리가 잘리면 뜻이 무너지므로 뒤를 자르는 대신
             # 단계를 하나로 줄여 문장을 통째로 남긴다.
-            one = f"{nxt[0]} 일정을 확정해 보고할 것"
-            line = one
+            line = f"{nxt[0]}에 착수할 것"
             if len(nxt) > 1:
-                two = f"{nxt[0]}{josa(nxt[0])} 마치고 {nxt[1]} 일정까지 확정해 보고할 것"
+                two = f"{nxt[0]}{josa(nxt[0])} 마치고 {nxt[1]}에 착수할 것"
                 # 두 줄을 넉넉히 채우거나 한 줄에 들어갈 때만 두 단계를 쓴다
                 if lines_ok(two, BODY_W, 2):
                     line = two
         else:
-            # 그 절차가 제도의 마지막이라 다음 단계가 없다. 그래도 지시는
-            # 남아야 하므로 뒤에 걸린 관문으로 착수 시점을 묻게 한다.
+            # 그 절차가 제도의 마지막이라 다음 단계가 없다 — 그 절차 자체를
+            # 마무리하는 것이 할 일이다
             n_after = _downstream(ho, gate)
-            tail = f", 후속 관문 {n_after}개 영향" if n_after else ""
-            line = f"{shorten(name, 16)} 착수 시점을 확인해 보고할 것{tail}"
+            tail = f", 후속 관문 {n_after}개 연계" if n_after else ""
+            nm = shorten(name, 16)
+            line = f"{nm}{josa(nm)} 마무리할 것{tail}"
         # 여기서 fit_lines 를 다시 걸지 않는다 — 지시문은 '…보고할 것' 이
         # 잘리면 지시가 아니게 된다. 길이는 위에서 단계 수로 맞췄다.
         L.append(f"바: {line}")
