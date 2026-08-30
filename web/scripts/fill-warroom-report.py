@@ -403,6 +403,55 @@ def josa(word, pair=("을", "를")):
     return pair[0] if (ord(ch) - 0xAC00) % 28 else pair[1]
 
 
+def how_to(actor, step, more):
+    """'무엇을' 에 '어떻게' 를 붙인다.
+
+    다음 단계를 그냥 하라고 하면 지시가 아니라 목록 읽기다. 그 단계를
+    실제로 움직이는 방법은 '누구를 어떻게 동원하는가'에 있고, 그건
+    단계의 주체에서 나온다. 기한은 데이터에 거의 없어 쓰지 못한다.
+    """
+    a = re.sub(r"\s*\([^)]*\)", "", actor or "").strip()
+    a = re.split(r"[,/]|\s+및\s+", a)[0].strip()
+    # 단계 이름이 주체로 시작하면 되풀이하지 않는다
+    # ("선정·지원위원회 심의 및 계획 공고" → "심의 및 계획 공고")
+    s = step[len(a):].strip() if a and step.startswith(a) else step
+
+    if a and NON_ACTOR.search(a):
+        # 민간은 시킬 수 없다 — 절차를 안내하고 이행을 확인하는 것이 할 일
+        head, verb = f"{a}의 {s}{josa(s)}", ("안내·확인하고", "안내·확인할 것")
+    elif a and re.search(r"(위원회|심의회|협의회)$", a):
+        head, verb = f"{a}{josa(a)} 소집해 {s}{josa(s)}", ("마치고", "마칠 것")
+    elif a:
+        # 이름 규칙에 딱 맞지 않아도('공급기관', '지자체·인허가부서')
+        # 실무를 쥔 상대이므로 협의 대상으로 세운다
+        head, verb = f"{a}{josa(a, ('과', '와'))} {s}{josa(s)}", ("마치고", "마칠 것")
+    else:
+        head, verb = f"{s}에", ("착수하고", "착수할 것")
+    return f"{head} {verb[0] if more else verb[1]}"
+
+
+def next_step_pairs(gate, step_name):
+    """다음 단계와 그 주체를 함께 돌려준다."""
+    try:
+        byGate = json.loads(PROCS.read_text())["byGate"]
+    except Exception:
+        return []
+    for inst in byGate.get(gate, []):
+        steps = inst.get("steps") or []
+        names = [s["name"] for s in steps]
+        if step_name not in names:
+            continue
+        head = os.path.commonprefix(names)
+        if " " in head:
+            head = head[:head.rindex(" ") + 1]
+        if len(head) < 8:
+            head = ""
+        i = names.index(step_name)
+        return [(s["name"][len(head):].strip(), s.get("actor") or "")
+                for s in steps[i + 1:i + 3]]
+    return []
+
+
 def next_steps(gate, step_name, limit=2):
     """그 절차 다음에 오는 실무 단계들. 지시를 한 단 더 내리는 재료다.
 
@@ -630,13 +679,14 @@ def to_dsl(b):
         #   실제로 오는 단계를 짚어 준다.
         # 총리에게 보고하라는 말이 아니라 그 부처가 실제로 할 일을 적는다.
         # next_steps 는 아직 오지 않은 단계이므로 '착수' 가 맞는 말이다.
-        nxt = next_steps(gate, st["name"])
+        nxt = next_step_pairs(gate, st["name"])
         if nxt:
             # 지시문은 꼬리가 잘리면 뜻이 무너지므로 뒤를 자르는 대신
             # 단계를 하나로 줄여 문장을 통째로 남긴다.
-            line = f"{nxt[0]}에 착수할 것"
+            line = how_to(nxt[0][1], nxt[0][0], more=False)
             if len(nxt) > 1:
-                two = f"{nxt[0]}{josa(nxt[0])} 마치고 {nxt[1]}에 착수할 것"
+                two = (how_to(nxt[0][1], nxt[0][0], more=True)
+                       + f" {nxt[1][0]}까지 이어갈 것")
                 # 두 줄을 넉넉히 채우거나 한 줄에 들어갈 때만 두 단계를 쓴다
                 if lines_ok(two, BODY_W, 2):
                     line = two
