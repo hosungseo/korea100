@@ -31,8 +31,12 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 SKELETON = HERE.parent / "templates/_skeleton-blank.hwpx"
 
-# 쪽 설정에서 온 값 — 본문 폭 = 59528 − 좌우 여백 8504×2
-TEXT_WIDTH = 42520
+# 여백 — 위아래좌우 20mm. 1mm = 7200/25.4 = 283.46 HWPUNIT
+MM = 7200 / 25.4
+MARGIN = round(20 * MM)          # 5669
+PAGE_W = 59528                   # A4 가로
+# 본문 폭 = 용지 폭 − 좌우 여백. 표 열 너비를 이 값으로 나눈다
+TEXT_WIDTH = PAGE_W - MARGIN * 2
 
 # 표 열 너비 배분 힌트(범피스에서 차용): 좁게 둘 머리말 / 넓게 둘 머리말
 NARROW = ("순번", "번호", "구분", "분야", "연번", "비고")
@@ -198,6 +202,13 @@ def build(lines, out_path, skeleton=SKELETON):
     sec = zin.read("Contents/section0.xml").decode()
     prolog = sec[:sec.index("<hp:p ")]
     secpr = re.search(r"<hp:secPr\b.*?</hp:secPr>", sec, re.S).group(0)
+    # 뼈대는 좌우 30mm·위 20mm 인 데다 머리말 15mm 를 더 잡아 한 장에 담기는
+    # 양이 준다. 머리말·꼬리말은 쓰지 않으므로 0 으로 두고 사방을 20mm 로 맞춘다.
+    secpr = re.sub(
+        r'<hp:margin\b[^/]*/>',
+        f'<hp:margin header="0" footer="0" gutter="0" left="{MARGIN}" '
+        f'right="{MARGIN}" top="{MARGIN}" bottom="{MARGIN}"/>',
+        secpr)
     colpr = re.search(r"<hp:ctrl><hp:colPr\b.*?</hp:ctrl>", sec, re.S).group(0)
 
     pid = iter(range(10000))

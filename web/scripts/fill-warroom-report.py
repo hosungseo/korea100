@@ -14,7 +14,7 @@ import argparse, json, os, re, subprocess, sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from hwpx_builder import build   # noqa: E402  (DSL → HWPX)
+from hwpx_builder import build, TEXT_WIDTH   # noqa: E402  (DSL → HWPX)
 
 WEB = Path(__file__).resolve().parent.parent
 RHWP = os.environ.get("RHWP", str(Path.home() / ".local/bin/rhwp"))
@@ -69,8 +69,9 @@ def pick(sec, *names):
 
 
 # ○ 줄(HY헤드라인M 15pt, 들여쓰기 1500)이 한 줄에 담기는 폭.
-# 실측: 폭 24 는 담기고 28.5 는 "(N3 / 1)" 로 쪼개졌다 — 여유를 두고 25.
-DIRECTIVE_W = 25
+# 본문 폭 42,520 에서 실측: 24 는 담기고 28.5 는 "(N3 / 1)" 로 쪼개졌다.
+# 여백을 고치면 본문 폭이 바뀌므로 상수로 박지 않고 비례로 환산한다.
+DIRECTIVE_W = 25 * TEXT_WIDTH / 42520
 
 
 def disp_w(s):
@@ -154,7 +155,9 @@ def tidy(t):
     return t.rstrip(" .·")
 
 
-PIPE_MAX = 44   # ※ 줄(맑은고딕 12pt, 들여쓰기 4500)이 한 줄에 담기는 글자 수
+# ※ 꼬리말(맑은고딕 12pt)이 한 줄에 담기는 글자 수. 본문 폭 42,520 기준 44 였고
+# 지금은 들여쓰기 없이 왼쪽 끝에서 시작하므로 폭 변화만 반영해도 넉넉하다
+PIPE_MAX = round(44 * TEXT_WIDTH / 42520)
 
 
 def fit_pipe(text):
