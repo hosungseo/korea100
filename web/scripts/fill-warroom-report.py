@@ -296,8 +296,23 @@ def reported_today():
     return {g for g, arr in S.items() if any(a["pubDate"] >= since for a in arr)}
 
 
-# 절차의 '주체'가 이들이면 행정기관이 아니라 민간이다 — 지시 대상이 될 수 없다
-NON_ACTOR = re.compile(r"주민|신청인|제안자|사업자|기업|이용자|소유주|발주자|입주|당사자")
+# 조치 필요사항은 총리가 각 부처에 무엇을 챙기게 할지를 적는 자리다.
+# 그러므로 주체는 반드시 이름이 붙은 행정기관이어야 한다.
+#   민간   — 총리의 지시가 닿지 않는다('사업시행자'가 40건으로 가장 많다.
+#            '사업자'만 걸러서는 '사업시행자'가 통과한다)
+#   총칭   — 누구인지 특정되지 않아 지시가 성립하지 않는다
+NON_ACTOR = re.compile(
+    r"주민|신청인|제안자|사업자|시행자|기업|이용자|소유주|발주자|입주|당사자"
+    r"|영업자|취급자|투자가|인수자|시공")
+GENERIC_ACTOR = re.compile(r"^(전문|심사|허가|조달|승인|운영|감독|담당|관계|소관|관할|해당|각급|주된|관련)")
+NAMED_ADMIN = re.compile(r"(부|청|처|위원회|의회|특별시|광역시|자치시|자치도|도|시|군|구청|본부)$")
+
+
+def actionable(actor):
+    """총리가 이름을 불러 지시할 수 있는 상대인가."""
+    return bool(actor) and not NON_ACTOR.search(actor) \
+        and not GENERIC_ACTOR.match(actor) and not actor.endswith("행정청") \
+        and bool(NAMED_ADMIN.search(actor))
 
 
 def gate_leads():
@@ -519,29 +534,60 @@ def to_dsl(b):
             L.append("주석: " + fit_bits(bits, SMALL_W, 2))
 
     L += ["엔터:", "네모: 조치 필요사항"]
-    for gate, inst, st, why in directives(b.get("advances"))[:3]:
-        # 주체가 "제안자(지자체·민간)" 처럼 괄호를 물고 있어 · 로 자르면 "제안자(지자체" 가 된다
-        # 주체 이름 자체에 · 가 들어간다('선정·지원위원회'). · 로 자르면 '선정'만 남는다.
-        # 여럿이 나열된 경우만 쉼표·슬래시로 끊고, · 는 이름의 일부로 본다.
-        actor = re.sub(r"\s*\([^)]*\)", "", st.get("actor") or "")
-        actor = re.split(r"[,/]|\s+및\s+", actor)[0].strip()
+
+    def resolve_actor(gate, st, ms):
+        """총리가 이름을 불러 챙기게 할 상대를 정한다.
+
+        주체가 "제안자(지자체·민간)" 처럼 괄호를 물고 있어 · 로 자르면
+        "제안자(지자체" 가 된다. 주체 이름 자체에도 · 가 들어가므로
+        ('선정·지원위원회') 여럿이 나열된 경우만 쉼표·슬래시로 끊는다.
+        """
+        if len(ms) > 1:              # 맞물린 부처를 함께 적어야 물림이 드러난다
+            return "·".join(ms[:2])
+        a = re.sub(r"\s*\([^)]*\)", "", st.get("actor") or "")
+        a = re.split(r"[,/]|\s+및\s+", a)[0].strip()
+        if actionable(a):
+            return a
+        # 민간·총칭에는 총리의 지시가 닿지 않는다 — 관장 기관으로 돌린다
+        return leads.get(gate) or (ms[0] if ms else "소관기관")
+
+    # 같은 부처가 연달아 나오면 총리 보고로서 읽을 값이 떨어진다.
+    # 후보를 넉넉히 받아 한 기관당 하나씩만 올린다.
+    picked, used = [], set()
+    for cand in directives(b.get("advances"))[:12]:
+        actor = resolve_actor(cand[0], cand[2], gmin.get(cand[0], []))
+        if actor in used:
+            continue
+        used.add(actor)
+        picked.append((actor, *cand))
+        if len(picked) == 3:
+            break
+
+    for actor, gate, inst, st, why in picked:
         # 절차명이 긴 것은 문장이 아니라 목록이라, 첫 마디만 쓰고 줄인다
         name = st["name"]
         if len(name) > 26:
             name = re.split(r"부터|까지", name)[0].strip().rstrip("·") + " 등"
-        # 주체가 민간이면 그 절차 자체는 지시할 수 없다. 대신 감독기관에게
-        # '준비상황 점검'을 지시한다 — 주민투표는 못 시켜도 준비는 챙기게 한다.
-        if not actor or NON_ACTOR.search(actor):
-            actor = leads.get(gate) or "소관기관"
-            name = shorten(name, 20) + " 준비상황 점검"
-        # ○ 줄은 한 줄이어야 한다. 넘치면 관문 표시가 "(N3 / 1)" 로 쪼개진다.
-        # 주체는 지시 대상이라 못 줄이므로 절차명 쪽을 깎는다.
+        ms = gmin.get(gate, [])
+
+        # 명령문이 아니라 '무엇을 챙겨야 하는지'를 적는다. 총리가 부처에
+        # 물을 거리이지 지시문 자체는 아니므로 동사로 끝맺지 않는다.
+        if len(ms) > 1:
+            aspect = "부처 협의 상황"
+        elif "완료" in why:
+            aspect = "착수 일정"          # 직전 절차가 끝났다는 보도가 있었다
+        elif "다음 관문" in why:
+            aspect = "준비상황"           # 아직 이 관문 차례가 오지 않았다
+        else:
+            aspect = "착수 여부"          # 선행이 끝나 시작할 수 있는데 소식이 없다
+
+        # ○ 는 한 줄이어야 한다. 주체와 관점어는 못 줄이므로 절차명을 깎는다.
         # 관문 표시는 아래 * 로 내렸다 — ○ 는 '누가 무엇을' 만 담는다
         name = tidy(name)
-        room = DIRECTIVE_W - disp_w(f"{actor}: ")
+        room = DIRECTIVE_W - disp_w(f"{actor}: {aspect}") - 0.5   # 절차명 뒤 공백
         while name and disp_w(name) > room:
             name = shorten(name, len(name) - 1)
-        L.append(f"원: {actor}: {name}")
+        L.append(f"원: {actor}: {name} {aspect}")
 
         # - 왜 지금 이 절차인가. 관문 ID 만 적으면 무엇인지 알 수 없으므로
         #   이름을 붙여 편다("N04 보도의" → "예비이전후보지 선정·공표(N04) 보도의")
@@ -557,10 +603,10 @@ def to_dsl(b):
         L.append(f"바: {fit_lines(reason, BODY_W, 1)}")
 
         # * 부연 — 관문·근거 조문·부처 협의·기한
+        # 부처 이름은 위 ○ 에 이미 나왔다 — 세 곳 이상 걸린 경우만 나머지를 덧붙인다
         bits = [f"{gmap.get(gate, '')}^({gate})^"]
-        ms = gmin.get(gate, [])
-        if len(ms) > 1:
-            bits.append("·".join(ms[:3]) + " 협의")
+        if len(ms) > 2:
+            bits.append("·".join(ms[2:4]) + " 포함")
         if short_basis(st.get("basis")):
             bits.append(short_basis(st.get("basis")))
         if st.get("deadline"):
