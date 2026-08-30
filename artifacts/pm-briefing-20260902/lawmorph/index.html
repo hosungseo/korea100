@@ -475,14 +475,22 @@
         background: #3a5145; color: #cfe3d8; border-radius: 999px; padding: 3px 12px;
         font-size: 15px; font-weight: 820; letter-spacing: 0.06em;
       }
-      /* --- 토큰 단가 ↓ · 감당 가능한 업무량 ↑ 개념도 (눈금 없음) --- */
+      /* --- 토큰 단가 ↓ 개념도 (눈금 없음) ---
+         곡선은 '단가' 하나만 그린다. 업무량을 두 번째 곡선으로 그리면 두 곡선이
+         서로 어긋난다 — 업무량 = 예산 ÷ 단가 라서, 단가가 1/N 로 떨어지면 업무량은
+         N 배가 되어야 하는데 거울상으로 그리면 그 배율이 맞지 않는다(실측 4배 어긋남).
+         선형 축에서는 정직하게 같이 그릴 수 없어(실제 하락폭이면 차트 밖으로 나간다)
+         업무량은 곡선 대신 화살표와 문구로 남긴다. */
       #moongraph { display: block; overflow: visible; }
       #moongraph .ax { stroke: #46614f; stroke-width: 2; }
       #moongraph .axl { fill: #7fa08f; font-size: 19px; font-weight: 760; letter-spacing: 0.04em; }
+      #moongraph .axl.note { fill: #6f8f7e; font-size: 18px; font-weight: 700; letter-spacing: 0; }
       #moongraph .gline { fill: none; stroke-width: 5; stroke-linecap: round; }
       #moongraph .gline.price { stroke: #f0b94a; }
       #moongraph .gline.work { stroke: #5fdcae; }
-      #moongraph #mg-band { fill: rgba(95,220,174,0.16); stroke: none; }
+      #moongraph .ahead { fill: #5fdcae; stroke: none; }
+      /* 위로 갈수록 옅어지게 — 네모난 패널이 아니라 '열리는 공간'으로 읽히게 한다 */
+      #moongraph #mg-band { fill: url(#mg-fade); stroke: none; }
       #moongraph .glabel { font-size: 23px; font-weight: 830; }
       #moongraph .glabel.price { fill: #f0b94a; }
       #moongraph .glabel.work { fill: #5fdcae; }
@@ -908,12 +916,21 @@
                     <line class="ax" x1="92" y1="316" x2="1130" y2="316"></line>
                     <text class="axl" id="mg-xl" x="1128" y="344" text-anchor="end">시간 →</text>
                   </g>
-                  <path id="mg-band" d="M100,150 Q820,150 1112,46 L1112,292 Q392,300 100,150 Z"></path>
-                  <path id="mg-price" class="gline price" d="M100,150 Q392,300 1112,292"></path>
-                  <path id="mg-work"  class="gline work"  d="M100,150 Q820,150 1112,46"></path>
+                  <!-- 단서는 축 그룹 밖에 둔다 — 축이 켜질 때 같이 보이면 안 된다 -->
+                  <text class="axl note" id="mg-note" x="100" y="344">성능 수준을 고정했을 때</text>
+                  <defs>
+                    <linearGradient id="mg-fade" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0" stop-color="#5fdcae" stop-opacity="0"></stop>
+                      <stop offset="1" stop-color="#5fdcae" stop-opacity="0.22"></stop>
+                    </linearGradient>
+                  </defs>
+                  <path id="mg-band" d="M100,60 C300,215 560,272 1112,292 L1112,28 L100,28 Z"></path>
+                  <path id="mg-price" class="gline price" d="M100,60 C300,215 560,272 1112,292"></path>
+                  <path id="mg-arrow" class="gline work" d="M940,268 L940,96"></path>
+                  <path id="mg-head" class="ahead" d="M940,72 L925,102 L955,102 Z"></path>
                   <text class="glabel price" id="mg-plabel" x="1104" y="272" text-anchor="end">토큰 단가</text>
-                  <text class="glabel work"  id="mg-wlabel" x="1104" y="30"  text-anchor="end">같은 예산으로 감당할 수 있는 업무량</text>
-                  <text class="bandl" id="mg-bandl" x="700" y="196" text-anchor="middle">지금까지 접어둔 일</text>
+                  <text class="glabel work"  id="mg-wlabel" x="940" y="56" text-anchor="middle">같은 예산으로 할 수 있는 일</text>
+                  <text class="bandl" id="mg-bandl" x="470" y="150" text-anchor="middle">지금까지 접어둔 일</text>
                 </svg>
               </div>
             </div>
@@ -1816,15 +1833,17 @@
           { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, MN + 6.3);
         tl.fromTo("#mg-axis", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, MN + 7.0);
         // 곡선은 dash 로 그려 넣는다(길이는 빌드 시 실측 — seek 해도 같은 그림)
-        [["#mg-price", MN + 9.7, 1.6], ["#mg-work", MN + 12.9, 1.6]].forEach(([sel, at, dur]) => {
+        [["#mg-price", MN + 9.7, 1.6], ["#mg-arrow", MN + 12.9, 1.0]].forEach(([sel, at, dur]) => {
           const el = document.querySelector(sel);
           const len = Math.ceil(el.getTotalLength());
           el.style.strokeDasharray = len;
           tl.fromTo(el, { strokeDashoffset: len }, { strokeDashoffset: 0, duration: dur, ease: "power1.inOut" }, at);
         });
         tl.fromTo("#mg-plabel", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 }, MN + 11.1);
+        tl.fromTo("#mg-head", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.35 }, MN + 13.8);
         tl.fromTo("#mg-wlabel", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 }, MN + 14.3);
         tl.fromTo("#mg-band", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.8 }, MN + 14.8);
+        tl.fromTo("#mg-note", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 }, MN + 15.8);
         tl.fromTo("#mg-bandl", { y: 14, autoAlpha: 0 },
           { y: 0, autoAlpha: 1, duration: 0.6, ease: "power2.out" }, MN + 15.2);
         tl.to("#moonstage", { autoAlpha: 0.3, duration: 0.5 }, MN + 16.4);
