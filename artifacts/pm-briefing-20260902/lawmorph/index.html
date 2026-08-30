@@ -531,43 +531,42 @@
       /* ---------- CH4d-2 : 텔레그램 브리핑 예시 ---------- */
       #briefwrap {
         position: absolute; inset: 0; display: flex; align-items: center;
-        justify-content: center; gap: 76px; padding: 92px 96px 176px;
+        justify-content: center; gap: 64px; padding: 92px 88px 176px;
       }
-      #briefleft { width: 700px; flex: none; }
+      #briefleft { width: 660px; flex: none; }
       #briefleft .bk { font-size: 20px; font-weight: 800; color: #0a7350; letter-spacing: 0.08em; }
       #briefleft h2 {
         margin-top: 12px; font-size: 52px; font-weight: 870; letter-spacing: -0.025em;
         line-height: 1.24; word-break: keep-all;
       }
       #briefleft h2 em { font-style: normal; color: #0b7a58; }
-      #briefpoints { margin-top: 36px; display: flex; flex-direction: column; gap: 14px; }
+      #briefpoints { margin-top: 34px; display: flex; flex-direction: column; gap: 13px; }
       .bp { border-left: 4px solid #7cc3a6; background: #ffffff; border-radius: 0 10px 10px 0;
-            padding: 16px 22px; box-shadow: 0 8px 26px rgba(28,42,35,0.07); }
+            padding: 15px 22px; box-shadow: 0 8px 26px rgba(28,42,35,0.07); }
       .bp .bn { font-size: 23px; font-weight: 830; color: #17251d; word-break: keep-all; }
       .bp .bd { margin-top: 6px; font-size: 17px; font-weight: 600; color: #4d6459; word-break: keep-all; line-height: 1.4; }
-      #briefphone {
-        width: 860px; height: 690px; flex: none; background: #17212b; border-radius: 20px;
-        box-shadow: 0 30px 80px rgba(11,20,16,0.34); overflow: hidden;
-        display: flex; flex-direction: column;
+      /* 실제 발송된 한 장 보고서 3부가 겹쳐 쌓인다(8/26·27·28 실물 렌더).
+         회전은 바깥 슬롯이 CSS 로 갖고, 등장 트윈은 안쪽 .rpage 가 받는다 —
+         한 요소에 CSS transform 과 GSAP transform 을 같이 걸면 안 된다. */
+      #briefstack { position: relative; width: 1010px; height: 812px; flex: none; }
+      .rslot { position: absolute; width: 540px; height: 763px; }
+      #rs2 { left: 84px;  top: 0;    transform: rotate(-5deg); }
+      #rs1 { left: 232px; top: 20px; transform: rotate(-2.4deg); }
+      #rs0 { left: 380px; top: 40px; }
+      .rpage {
+        position: absolute; inset: 0; background: #ffffff; border: 1px solid #d3ded7;
+        border-radius: 3px; overflow: hidden;
+        box-shadow: 0 22px 52px rgba(20,32,26,0.16), 0 2px 8px rgba(20,32,26,0.10);
       }
-      #briefphone .ph-head {
-        height: 62px; flex: none; display: flex; align-items: center; gap: 12px; padding: 0 24px;
-        background: #202b36; color: #e9f0f5; font-size: 19px; font-weight: 780;
+      #rs2 .rpage { filter: saturate(0.92) brightness(0.99); }
+      #rs0 .rpage { box-shadow: 0 34px 74px rgba(20,32,26,0.26), 0 4px 12px rgba(20,32,26,0.12); }
+      .rpage img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+      .rtag {
+        position: absolute; left: 16px; top: 20px; font-size: 15px; font-weight: 800;
+        color: #55685d; background: rgba(255,255,255,0.95); border: 1px solid #d3ded7;
+        border-radius: 999px; padding: 5px 13px; letter-spacing: 0.01em; white-space: nowrap;
       }
-      #briefphone .ph-dot { width: 12px; height: 12px; border-radius: 50%; background: #5fdcae; }
-      #briefphone .ph-time { margin-left: auto; font-size: 15px; font-weight: 640; color: #8fa6b6; }
-      #briefphone .ph-body { padding: 24px 30px 26px; overflow: hidden; }
-      #briefphone .ph-title { font-size: 25px; font-weight: 830; color: #ffffff; margin-bottom: 14px; }
-      #briefphone .ph-sec {
-        margin: 18px 0 10px; font-size: 21px; font-weight: 820; color: #5fdcae; letter-spacing: 0.01em;
-      }
-      #briefphone .ph-l {
-        font-size: 19px; font-weight: 520; color: #c8d6e0; line-height: 1.52;
-        word-break: keep-all; margin-top: 8px;
-      }
-      #briefphone .ph-l b { color: #ffffff; font-weight: 820; }
-      #briefphone .ph-id { color: #f0b94a; font-weight: 760; margin-left: 6px; font-size: 17px; }
-      #briefphone .ph-link { margin-top: 16px; color: #6fb6e8; font-size: 17px; font-weight: 620; }
+      #rs0 .rtag { top: 18px; color: #0a7350; border-color: #9fd0bb; background: #ffffff; font-weight: 850; }
 
       /* ---------- CH4e : 질문의 전환 ---------- */
       #p3wrap { position: absolute; inset: 0; display: grid; place-items: center; }
@@ -1030,20 +1029,20 @@
         </div>
       </section>
 
-      <!-- CH4d-2 : 텔레그램 브리핑 실물 예시 (2026-08-28 실제 발송분 발췌) -->
+      <!-- CH4d-2 : 한 장 보고서 실물 3부 (2026-08-26·27·28 실제 생성분) -->
       <section id="stage-brief" class="clip" data-start="225.8" data-duration="13.0">
         <div id="briefwrap">
           <div id="briefleft">
-            <p class="bk">매일 아침 08:00 · 텔레그램</p>
-            <h2>기사 요약이 아니라,<br><em>절차 진행상황</em> 보고서</h2>
+            <p class="bk">매일 아침 08:00 · 텔레그램으로 발송</p>
+            <h2>기사 요약이 아니라,<br><em>한 장짜리 보고서</em></h2>
             <div id="briefpoints">
               <div class="bp" id="bp0">
                 <p class="bn">관문 ID로 말합니다</p>
                 <p class="bd">모든 문장에 어느 관문 얘기인지(N31·N53) 병기됩니다.</p>
               </div>
               <div class="bp" id="bp1">
-                <p class="bn">상태 전환을 제안합니다</p>
-                <p class="bd">"이 관문, 계획→진행으로 바꿔야 하지 않나" 판단거리를 올립니다.</p>
+                <p class="bn">조치까지 적습니다</p>
+                <p class="bd">부처별로 무엇을 점검하고 무엇을 할 것인지 한 단 아래에 붙습니다.</p>
               </div>
               <div class="bp" id="bp2">
                 <p class="bn">확정과 신호를 구분합니다</p>
@@ -1051,21 +1050,20 @@
               </div>
             </div>
           </div>
-          <article id="briefphone">
-            <div class="ph-head"><span class="ph-dot"></span>제도100 워룸<span class="ph-time">08:00</span></div>
-            <div class="ph-body">
-              <p class="ph-title">📡 광주 반도체·군공항 일일 동향 (2026-08-28)</p>
-              <p class="ph-sec">■ 오늘의 판단 포인트</p>
-              <p class="ph-l"><b>1) 군공항 이전 트랙 6개 관문 동시 가동 신호</b><span class="ph-id">(N31·N32·N33·N42·N34·N35)</span></p>
-              <p class="ph-l">– 이전후보지 확정 이후 기부 대 양여·재원 진행 신호가 7일 내 8건씩 집중 포착됨.</p>
-              <p class="ph-l">– 6건 모두 <b>계획 상태이나 실질 진행이 앞선 상태</b>로, 상태 전환 여부 일괄 판단 필요함.</p>
-              <p class="ph-l"><b>2) 용수·공군전력 두 축에서 리스크 신호 집중</b><span class="ph-id">(N50·N51)</span></p>
-              <p class="ph-l">– 동복댐 증축 수몰 보상 갈등으로 주민설명회 연기됨(리스크 7건).</p>
-              <p class="ph-sec">■ 파이프라인</p>
-              <p class="ph-l">– 기사 207건·관문 30개 신호(리스크 30·결정 13·진행 71), <b>상태 전환 검토 15건</b>·리스크 점검 2건, 미등재 관문 1건.</p>
-              <p class="ph-l ph-link">상세: hosungseo.github.io/korea100/warroom/loop/</p>
+          <div id="briefstack">
+            <div class="rslot" id="rs2">
+              <div class="rpage"><img src="assets/report-2026-08-26.png" alt=""></div>
+              <span class="rtag">8. 26.</span>
             </div>
-          </article>
+            <div class="rslot" id="rs1">
+              <div class="rpage"><img src="assets/report-2026-08-27.png" alt=""></div>
+              <span class="rtag">8. 27.</span>
+            </div>
+            <div class="rslot" id="rs0">
+              <div class="rpage"><img src="assets/report-2026-08-28.png" alt=""></div>
+              <span class="rtag">2026. 8. 28.</span>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -1271,7 +1269,7 @@
         <div class="subline" id="sub19b"><span class="tx">그리고 매일 아침, <span class="em">텔레그램 브리핑</span> — 기사 요약이 아니라 <span class="em">절차 진행상황</span>까지</span><span class="bar"></span></div>
       </section>
       <section id="subclip19c" class="clip sub-clip" data-start="226.2" data-duration="12.0">
-        <div class="subline" id="sub19c"><span class="tx">관문 ID로 말하고, <span class="em">상태 전환</span>을 제안합니다 — 실제 발송된 보고입니다</span><span class="bar"></span></div>
+        <div class="subline" id="sub19c"><span class="tx">이슈가 <span class="em">어느 절차</span>에 걸렸는지 짚고, 부처별 <span class="em">조치</span>까지 — 한 장 보고서</span><span class="bar"></span></div>
       </section>
       <section id="subclip20" class="clip sub-clip" data-start="89.2" data-duration="11.2">
         <div class="subline" id="sub20"><span class="tx">2부는 대형 재개발, 3부는 문샷입니다 — <span class="em">with 한국행정연구원</span></span><span class="bar"></span></div>
@@ -1915,11 +1913,12 @@
           { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, BR + 0.3);
         tl.fromTo("#briefleft h2", { y: 22, autoAlpha: 0 },
           { y: 0, autoAlpha: 1, duration: 0.65, ease: "power3.out" }, BR + 0.55);
-        tl.fromTo("#briefphone", { y: 40, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.8, ease: "power3.out" }, BR + 1.0);
-        A("#briefphone .ph-title, #briefphone .ph-sec, #briefphone .ph-l").forEach((el, i) => {
-          tl.fromTo(el, { y: 12, autoAlpha: 0 },
-            { y: 0, autoAlpha: 1, duration: 0.4, ease: "power2.out" }, BR + 1.6 + i * 0.42);
+        /* 오래된 보고서부터 한 장씩 내려앉고, 마지막에 오늘 것이 맨 위로 */
+        ["#rs2", "#rs1", "#rs0"].forEach((id, i) => {
+          tl.fromTo(`${id} .rpage`, { y: 52, autoAlpha: 0 },
+            { y: 0, autoAlpha: 1, duration: 0.75, ease: "power3.out" }, BR + 1.0 + i * 0.5);
+          tl.fromTo(`${id} .rtag`, { autoAlpha: 0 },
+            { autoAlpha: 1, duration: 0.4 }, BR + 1.65 + i * 0.5);
         });
         ["#bp0", "#bp1", "#bp2"].forEach((id, i) => {
           tl.fromTo(id, { x: -22, autoAlpha: 0 },
