@@ -52,7 +52,7 @@ test("stdio MCP가 도구·리소스를 공개하고 다음 행동을 구조화�
   assert.ok(tools.tools.every((tool) => tool.annotations?.readOnlyHint === true));
 
   const resources = await client.listResources();
-  assert.equal(resources.resources.length, 10);
+  assert.equal(resources.resources.length, 12);
   assert.ok(resources.resources.some((resource) => resource.uri === "korea100://procedures"));
   assert.ok(resources.resources.some((resource) => resource.uri === "korea100://status"));
 
@@ -126,7 +126,7 @@ test("stdio MCP가 도구·리소스를 공개하고 다음 행동을 구조화�
 
   const statusResource = await client.readResource({ uri: "korea100://status" });
   const status = JSON.parse(statusResource.contents[0].text);
-  assert.equal(status.procedure_count, 8);
+  assert.equal(status.procedure_count, 10);
   assert.equal(status.legal_check_policy.max_age_days, 36500);
   assert.ok(status.procedures.every((item) => item.legal_check.freshness.status === "current"));
 

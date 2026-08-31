@@ -23,6 +23,11 @@ export const SHOWCASE_INSTITUTIONS = [
   { slug: "semiconductor-infrastructure-support-fast-track", transitionReviewed: true },
   { slug: "national-strategic-industry-complex", transitionReviewed: true },
   { slug: "one-stop-permit-consultation", transitionReviewed: true },
+  // N02(통합 추진체계·재정심사·예타)가 끌어 쓰는 예타 계열.
+  // 2026-09-01 연결선 55개를 국가재정법·예비타당성조사 운용지침·지방재정법 현행 원문에 수동 대조했다.
+  { slug: "preliminary-feasibility-study", transitionReviewed: true },
+  { slug: "pfs-exemption-fast-track", transitionReviewed: true },
+  { slug: "local-finance-investment-review-feasibility", transitionReviewed: true },
 ];
 
 const SELECTION_REASONS = {
@@ -34,6 +39,9 @@ const SELECTION_REASONS = {
   "semiconductor-infrastructure-support-fast-track": "전력·용수·도로 기반시설과 예타·인허가 신속처리 특례",
   "national-strategic-industry-complex": "특화단지 지정과 인허가 신속처리. 반도체클러스터와 중복 지정 가능",
   "one-stop-permit-consultation": "행정기본법 인허가의제 일반 절차. 여러 마일스톤이 공통으로 끌어 쓴다",
+  "preliminary-feasibility-study": "N02 재정심사 경로. 지자체 건의 노드가 법정 절차가 아니어서 R2에 못 미친다",
+  "pfs-exemption-fast-track": "예타 면제·신속인허가 특례. N02와 N20 양쪽에 걸린다",
+  "local-finance-investment-review-feasibility": "지방재정 투자심사. 지방비 분담이 확정되면 이 경로가 열린다",
 };
 
 function institutionCount() {

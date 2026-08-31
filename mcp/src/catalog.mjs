@@ -12,6 +12,10 @@ export const AGENT_READY_SLUGS = Object.freeze([
   "semiconductor-infrastructure-support-fast-track",
   "national-strategic-industry-complex",
   "one-stop-permit-consultation",
+  // N02 재정심사 경로 (2026-09-01 승격). 예비타당성조사 본체는 지자체 건의 노드가
+  // 법정 절차가 아니어서 R1로 남았다.
+  "pfs-exemption-fast-track",
+  "local-finance-investment-review-feasibility",
 ]);
 
 export const DEFAULT_INSTITUTION_DIR = fileURLToPath(

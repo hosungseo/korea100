@@ -120,7 +120,28 @@
       "article": "제2조",
       "text": "지방재정투자사업 심사규칙 제2조에 따라 필요성, 총사업비, 재원, 수요와 운영비를 포함한 계획을 작성한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "procedure.started",
+     "trigger_condition": "해당 절차가 개시되고 '투자사업 계획·자료 작성' 수행 요건이 확인될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 투자사업 계획·자료 작성 기록",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [],
+     "completion_evidence": [
+      "투자사업 계획·자료 작성 기록"
+     ],
+     "handoff_recipients": [
+      "지방자치단체 재정부서"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P02",
@@ -148,7 +169,28 @@
       "article": "제2조",
       "text": "지방재정투자사업 심사규칙 제2조에 따라 투자사업이 중기지방재정계획과 상위계획에 반영됐는지 확인한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "투자사업 계획·자료 작성 완료 결과가 '중기지방재정계획 연계 확인' 단계로 인계될 때",
+     "completion_condition": "'중기지방재정계획 연계 확인' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "투자사업 계획·자료 작성 기록"
+     ],
+     "completion_evidence": [
+      "중기지방재정계획 연계 확인 기록"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P03",
@@ -181,7 +223,28 @@
       "article": "제3조",
       "text": "지방재정투자사업 심사규칙 제3조에 따라 규모와 재원에 따라 자체·시도·중앙심사 및 제외 여부를 판정한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "중기지방재정계획 연계 확인 완료 결과가 '심사유형·제외 여부 판정' 단계로 인계될 때",
+     "completion_condition": "'심사유형·제외 여부 판정' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "중기지방재정계획 연계 확인 기록"
+     ],
+     "completion_evidence": [
+      "심사유형·제외 여부 판정 기록"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P04",
@@ -214,7 +277,30 @@
       "article": "제10조",
       "text": "지방재정투자사업 심사규칙 제10조에 따라 총사업비와 사업유형을 기준으로 전문기관 타당성조사 대상인지 판정한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "심사유형·제외 여부 판정 완료 결과가 '타당성조사 대상 판정' 단계로 인계될 때",
+     "completion_condition": "'타당성조사 대상 판정' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "심사유형·제외 여부 판정 기록"
+     ],
+     "completion_evidence": [
+      "타당성조사 대상 판정 기록"
+     ],
+     "handoff_recipients": [
+      "행정안전부·타당성조사 전문기관"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P05",
@@ -242,7 +328,28 @@
       "article": "제11조",
       "text": "지방재정투자사업 심사규칙 제11조에 따라 법정 대상 사업의 조사자료와 비용을 갖춰 지정 전문기관에 조사를 의뢰한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "타당성조사 대상 판정 완료 결과가 '타당성조사 전문기관 의뢰' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 타당성조사 전문기관 의뢰 기록",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "타당성조사 대상 판정 기록"
+     ],
+     "completion_evidence": [
+      "타당성조사 전문기관 의뢰 기록"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P06",
@@ -270,7 +377,30 @@
       "article": "제12조",
       "text": "지방재정투자사업 심사규칙 제12조에 따라 수요, 비용편익, 재정지속성, 대안과 위험을 독립적으로 분석한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "타당성조사 전문기관 의뢰 완료 결과가 '수요·비용편익·재정 분석' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 수요·비용편익·재정 분석 기록",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "타당성조사 전문기관 의뢰 기록"
+     ],
+     "completion_evidence": [
+      "수요·비용편익·재정 분석 기록"
+     ],
+     "handoff_recipients": [
+      "지방자치단체 재정부서"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P07",
@@ -298,7 +428,28 @@
       "article": "제12조의2",
       "text": "지방재정투자사업 심사규칙 제12조의2에 따라 조사결과를 제출받아 사업계획과 투자심사 의뢰자료에 반영한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "수요·비용편익·재정 분석 완료 결과가 '타당성조사 결과 제출·반영' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 타당성조사 결과 제출·반영 기록",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "수요·비용편익·재정 분석 기록"
+     ],
+     "completion_evidence": [
+      "타당성조사 결과 제출·반영 기록"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P08",
@@ -321,7 +472,33 @@
       "article": "제4조",
       "text": "지방재정투자사업 심사규칙 제4조에 따라 사업계획, 중기계획, 재원조달과 타당성조사 결과를 첨부해 심사를 의뢰한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "supplement.requested",
+     "trigger_condition": "보완·재수행이 결정되어 '투자심사 의뢰서 제출' 단계로 회귀할 때",
+     "completion_condition": "'투자심사 의뢰서 제출' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "심사유형·제외 여부 판정 기록",
+      "타당성조사 결과 제출·반영 기록",
+      "의뢰자료 사전검토·반려 기록",
+      "보완계획 재심사 의뢰 기록"
+     ],
+     "completion_evidence": [
+      "투자심사 의뢰서 제출 기록"
+     ],
+     "handoff_recipients": [
+      "행정안전부·타당성조사 전문기관"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P09",
@@ -344,7 +521,31 @@
       "article": "제4조·제5조",
       "text": "지방재정투자사업 심사규칙 제4조·제5조에 따라 자료 누락·왜곡, 타당성 결여 또는 미보완 재의뢰 여부를 검토해 보완 요구나 반려를 결정한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "투자심사 의뢰서 제출 완료 결과가 '의뢰자료 사전검토·반려' 단계로 인계될 때",
+     "completion_condition": "'의뢰자료 사전검토·반려' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "투자심사 의뢰서 제출 기록"
+     ],
+     "completion_evidence": [
+      "의뢰자료 사전검토·반려 기록"
+     ],
+     "handoff_recipients": [
+      "투자심사위원회",
+      "지방자치단체 재정부서"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P10",
@@ -372,7 +573,28 @@
       "article": "제2조·제4조의2",
       "text": "지방재정투자사업 심사규칙 제2조·제4조의2에 따라 필요성, 정책·계획 연계, 재원조달, 경제성·일자리 효과를 심사한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "의뢰자료 사전검토·반려 완료 결과가 '투자심사위원회 본심사' 단계로 인계될 때",
+     "completion_condition": "'투자심사위원회 본심사' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "의뢰자료 사전검토·반려 기록"
+     ],
+     "completion_evidence": [
+      "투자심사위원회 본심사 기록"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P11",
@@ -395,7 +617,30 @@
       "article": "제5조",
       "text": "지방재정투자사업 심사규칙 제5조에 따라 사업을 적정·조건부추진·재검토·부적정으로 구분하고 조건·보완사항을 확정한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "투자심사위원회 본심사 완료 결과가 '심사결과 유형 결정' 단계로 인계될 때",
+     "completion_condition": "'심사결과 유형 결정' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "투자심사위원회 본심사 기록"
+     ],
+     "completion_evidence": [
+      "심사결과 유형 결정 기록"
+     ],
+     "handoff_recipients": [
+      "행정안전부·타당성조사 전문기관"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P12",
@@ -418,7 +663,30 @@
       "article": "제5조",
       "text": "지방재정투자사업 심사규칙 제5조에 따라 심사결과와 조건·보완사항을 지방자치단체와 관계 중앙행정기관에 통보한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "심사결과 유형 결정 완료 결과가 '심사결과·조건 통보' 단계로 인계될 때",
+     "completion_condition": "'심사결과·조건 통보' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "심사결과 유형 결정 기록"
+     ],
+     "completion_evidence": [
+      "심사결과·조건 통보 기록"
+     ],
+     "handoff_recipients": [
+      "지방자치단체 재정부서"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P13",
@@ -446,7 +714,30 @@
       "article": "제8조",
       "text": "지방재정투자사업 심사규칙 제8조에 따라 조건을 이행한 뒤 중기계획과 예산에 반영하고 사업을 추진한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "심사결과·조건 통보 완료 결과가 '심사조건 이행·예산 편성' 단계로 인계될 때",
+     "completion_condition": "'심사조건 이행·예산 편성' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "심사결과·조건 통보 기록"
+     ],
+     "completion_evidence": [
+      "심사조건 이행·예산 편성 기록"
+     ],
+     "handoff_recipients": [
+      "투자심사위원회"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P14",
@@ -469,7 +760,30 @@
       "article": "제6조",
       "text": "지방재정투자사업 심사규칙 제6조에 따라 사업비·재원·규모·기간 변경 등 재심사 사유 발생 여부를 확인한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "심사조건 이행·예산 편성 완료 결과가 '계획변경·재심사 사유 확인' 단계로 인계될 때",
+     "completion_condition": "'계획변경·재심사 사유 확인' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "심사조건 이행·예산 편성 기록"
+     ],
+     "completion_evidence": [
+      "계획변경·재심사 사유 확인 기록"
+     ],
+     "handoff_recipients": [
+      "투자심사위원회"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P15",
@@ -492,7 +806,29 @@
       "article": "제4조·제6조",
       "text": "지방재정투자사업 심사규칙 제4조·제6조에 따라 재검토 의견이나 변경내용을 보완해 다시 투자심사를 의뢰한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "심사결과·조건 통보·계획변경·재심사 사유 확인 완료 결과가 '보완계획 재심사 의뢰' 단계로 인계될 때",
+     "completion_condition": "'보완계획 재심사 의뢰' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "심사결과·조건 통보 기록",
+      "계획변경·재심사 사유 확인 기록"
+     ],
+     "completion_evidence": [
+      "보완계획 재심사 의뢰 기록"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P16",
@@ -520,7 +856,29 @@
       "article": "제9조의2·제13조",
       "text": "지방재정투자사업 심사규칙 제9조의2·제13조에 따라 심사결과와 사업 추진상황을 공개하고 완료·진행 사업을 사후평가한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "계획변경·재심사 사유 확인·심사조건 이행·예산 편성 완료 결과가 '추진상황 공개·사후평가' 단계로 인계될 때",
+     "completion_condition": "'추진상황 공개·사후평가' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "계획변경·재심사 사유 확인 기록",
+      "심사조건 이행·예산 편성 기록"
+     ],
+     "completion_evidence": [
+      "추진상황 공개·사후평가 기록"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    }
   ],
   "edges": [
@@ -529,146 +887,545 @@
     "source": "P01",
     "target": "P02",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'투자사업 계획·자료 작성' 완료 결과가 '중기지방재정계획 연계 확인' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "사업부서·지방공기업",
+      "to_actor": "지방자치단체 재정부서",
+      "documents": [
+       "투자사업 계획·자료 작성 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E02",
     "source": "P02",
     "target": "P03",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'중기지방재정계획 연계 확인' 완료 결과가 '심사유형·제외 여부 판정' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "지방자치단체 재정부서",
+      "to_actor": "지방자치단체 재정부서",
+      "documents": [
+       "중기지방재정계획 연계 확인 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E03",
     "source": "P03",
     "target": "P04",
     "type": "sequence",
-    "label": "조사 대상"
+    "label": "조사 대상",
+    "agent_transition": {
+     "condition": "조사 대상",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "지방자치단체 재정부서",
+      "to_actor": "지방자치단체 재정부서",
+      "documents": [
+       "심사유형·제외 여부 판정 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E04",
     "source": "P03",
     "target": "P08",
     "type": "sequence",
-    "label": "조사 비대상"
+    "label": "조사 비대상",
+    "agent_transition": {
+     "condition": "조사 비대상",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "지방자치단체 재정부서",
+      "to_actor": "지방자치단체 재정부서",
+      "documents": [
+       "심사유형·제외 여부 판정 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E05",
     "source": "P04",
     "target": "P05",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'타당성조사 대상 판정' 완료 결과가 '타당성조사 전문기관 의뢰' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "지방자치단체 재정부서",
+      "to_actor": "행정안전부·타당성조사 전문기관",
+      "documents": [
+       "타당성조사 대상 판정 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E06",
     "source": "P05",
     "target": "P06",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'타당성조사 전문기관 의뢰' 완료 결과가 '수요·비용편익·재정 분석' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "행정안전부·타당성조사 전문기관",
+      "to_actor": "행정안전부·타당성조사 전문기관",
+      "documents": [
+       "타당성조사 전문기관 의뢰 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E07",
     "source": "P06",
     "target": "P07",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'수요·비용편익·재정 분석' 완료 결과가 '타당성조사 결과 제출·반영' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "행정안전부·타당성조사 전문기관",
+      "to_actor": "지방자치단체 재정부서",
+      "documents": [
+       "수요·비용편익·재정 분석 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E08",
     "source": "P07",
     "target": "P08",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'타당성조사 결과 제출·반영' 완료 결과가 '투자심사 의뢰서 제출' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "지방자치단체 재정부서",
+      "to_actor": "지방자치단체 재정부서",
+      "documents": [
+       "타당성조사 결과 제출·반영 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E09",
     "source": "P08",
     "target": "P09",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'투자심사 의뢰서 제출' 완료 결과가 '의뢰자료 사전검토·반려' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "지방자치단체 재정부서",
+      "to_actor": "행정안전부·타당성조사 전문기관",
+      "documents": [
+       "투자심사 의뢰서 제출 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E10",
     "source": "P09",
     "target": "P10",
     "type": "sequence",
-    "label": "심사 진행"
+    "label": "심사 진행",
+    "agent_transition": {
+     "condition": "심사 진행",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "행정안전부·타당성조사 전문기관",
+      "to_actor": "투자심사위원회",
+      "documents": [
+       "의뢰자료 사전검토·반려 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "L11",
     "source": "P09",
     "target": "P08",
     "type": "loop",
-    "label": "자료 보완"
+    "label": "자료 보완",
+    "agent_transition": {
+     "condition": "자료 보완",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "행정안전부·타당성조사 전문기관",
+      "to_actor": "지방자치단체 재정부서",
+      "documents": [
+       "의뢰자료 사전검토·반려 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E12",
     "source": "P10",
     "target": "P11",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'투자심사위원회 본심사' 완료 결과가 '심사결과 유형 결정' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "투자심사위원회",
+      "to_actor": "투자심사위원회",
+      "documents": [
+       "투자심사위원회 본심사 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E13",
     "source": "P11",
     "target": "P12",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'심사결과 유형 결정' 완료 결과가 '심사결과·조건 통보' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "투자심사위원회",
+      "to_actor": "행정안전부·타당성조사 전문기관",
+      "documents": [
+       "심사결과 유형 결정 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E14",
     "source": "P12",
     "target": "P13",
     "type": "sequence",
-    "label": "적정·조건부"
+    "label": "적정·조건부",
+    "agent_transition": {
+     "condition": "적정·조건부",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "행정안전부·타당성조사 전문기관",
+      "to_actor": "지방자치단체 재정부서",
+      "documents": [
+       "심사결과·조건 통보 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E15",
     "source": "P12",
     "target": "P15",
     "type": "sequence",
-    "label": "재검토"
+    "label": "재검토",
+    "agent_transition": {
+     "condition": "재검토",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "행정안전부·타당성조사 전문기관",
+      "to_actor": "지방자치단체 재정부서",
+      "documents": [
+       "심사결과·조건 통보 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E16",
     "source": "P13",
     "target": "P14",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'심사조건 이행·예산 편성' 완료 결과가 '계획변경·재심사 사유 확인' 단계로 인계될 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "지방자치단체 재정부서",
+      "to_actor": "지방자치단체 재정부서",
+      "documents": [
+       "심사조건 이행·예산 편성 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E17",
     "source": "P14",
     "target": "P15",
     "type": "sequence",
-    "label": "재심사 필요"
+    "label": "재심사 필요",
+    "agent_transition": {
+     "condition": "재심사 필요",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "지방자치단체 재정부서",
+      "to_actor": "지방자치단체 재정부서",
+      "documents": [
+       "계획변경·재심사 사유 확인 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E18",
     "source": "P14",
     "target": "P16",
     "type": "sequence",
-    "label": "변경 없음"
+    "label": "변경 없음",
+    "agent_transition": {
+     "condition": "변경 없음",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "지방자치단체 재정부서",
+      "to_actor": "투자심사위원회",
+      "documents": [
+       "계획변경·재심사 사유 확인 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "L19",
     "source": "P15",
     "target": "P08",
     "type": "loop",
-    "label": "재심사"
+    "label": "재심사",
+    "agent_transition": {
+     "condition": "재심사",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "지방자치단체 재정부서",
+      "to_actor": "지방자치단체 재정부서",
+      "documents": [
+       "보완계획 재심사 의뢰 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E20",
     "source": "P13",
     "target": "P16",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'심사조건 이행·예산 편성' 완료 결과가 '추진상황 공개·사후평가' 단계로 인계될 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "지방자치단체 재정부서",
+      "to_actor": "투자심사위원회",
+      "documents": [
+       "심사조건 이행·예산 편성 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    }
   ],
   "warnings": [
    "개별 사건의 요건·기한·지원 범위는 하위규정, 공고와 사실관계에 따라 달라질 수 있다.",
    "2026-07-13 321~330 확장: 정책명이 아니라 법령·행정규칙의 반복 가능한 지정·심사·승인·관리 절차를 기준으로 작성했다."
-  ]
+  ],
+  "agent_readiness": {
+   "contract_version": "1.1.0",
+   "level": "R2",
+   "mode": "next-action",
+   "assessed_at": "2026-09-01",
+   "assessment_method": "스키마 검증·그래프 파생·전이 수동 대조·법제처 DRF API 직접 대조",
+   "live_legal_check": "required-before-use",
+   "last_live_check": {
+    "checked_at": "2026-09-01",
+    "method": "law.go.kr-DRF-direct",
+    "status": "passed",
+    "citation_fingerprint": "sha256:1a74930e0615cb0edc7bdfa374ab4fc4c488c92bf14e3dd7a7d2b97195e393d6",
+    "sources_checked": 3,
+    "source_failures": 0,
+    "article_references": 33,
+    "verified_references": 33,
+    "missing_references": [],
+    "uncheckable_references": [],
+    "verified_node_ids": [
+     "P01",
+     "P02",
+     "P03",
+     "P04",
+     "P05",
+     "P06",
+     "P07",
+     "P08",
+     "P09",
+     "P10",
+     "P11",
+     "P12",
+     "P13",
+     "P14",
+     "P15",
+     "P16"
+    ],
+    "unverified_node_ids": [],
+    "source_results": [
+     {
+      "law": "지방재정법",
+      "source_type": "statute",
+      "source_id": "001652",
+      "official_url": "https://law.go.kr/법령/지방재정법",
+      "requested_articles": [
+       "제37조",
+       "제37조의2",
+       "제37조의3",
+       "제37조의4"
+      ],
+      "verified_articles": [
+       "제37조",
+       "제37조의2",
+       "제37조의3",
+       "제37조의4"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "지방재정법",
+      "version_key": "0016522026020521328",
+      "promulgated_on": "2026-02-05",
+      "effective_on": "2026-07-01"
+     },
+     {
+      "law": "지방재정투자사업 심사규칙",
+      "source_type": "statute",
+      "source_id": "008346",
+      "official_url": "https://law.go.kr/법령/지방재정투자사업심사규칙",
+      "requested_articles": [
+       "제10조",
+       "제11조",
+       "제12조",
+       "제12조의2",
+       "제13조",
+       "제2조",
+       "제3조",
+       "제4조",
+       "제4조의2",
+       "제5조",
+       "제6조",
+       "제8조",
+       "제9조의2"
+      ],
+      "verified_articles": [
+       "제10조",
+       "제11조",
+       "제12조",
+       "제12조의2",
+       "제13조",
+       "제2조",
+       "제3조",
+       "제4조",
+       "제4조의2",
+       "제5조",
+       "제6조",
+       "제8조",
+       "제9조의2"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "지방재정투자사업 심사규칙",
+      "version_key": "0083462024031100464",
+      "promulgated_on": "2024-03-11",
+      "effective_on": "2024-03-11"
+     },
+     {
+      "law": "지방재정법 시행령",
+      "source_type": "statute",
+      "source_id": "005098",
+      "official_url": "https://law.go.kr/법령/지방재정법시행령",
+      "requested_articles": [
+       "제41조",
+       "제41조의2"
+      ],
+      "verified_articles": [
+       "제41조",
+       "제41조의2"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "지방재정법 시행령",
+      "version_key": "0050982025123035948",
+      "promulgated_on": "2025-12-30",
+      "effective_on": "2026-01-02"
+     }
+    ]
+   },
+   "actionable_node_ids": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P08",
+    "P09",
+    "P10",
+    "P11",
+    "P12",
+    "P13",
+    "P14",
+    "P15",
+    "P16"
+   ],
+   "reference_only_node_ids": [],
+   "blockers": [],
+   "metrics": {
+    "nodes": 16,
+    "edges": 20,
+    "node_contract_coverage": 1,
+    "transition_contract_coverage": 1,
+    "explicit_basis_coverage": 1,
+    "output_document_coverage": 1,
+    "low_confidence_nodes": 0,
+    "template_like_nodes": 0,
+    "deadline_review_nodes": 0,
+    "field_verification_items": 2
+   }
+  }
  },
  "verification": {
   "status": "article-verified",

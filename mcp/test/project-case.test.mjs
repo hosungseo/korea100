@@ -53,10 +53,29 @@ test("참조 제도가 전부 R2인 마일스톤만 다음 행동 계산 대상�
   assert.deepEqual(rollup.next_action_computable_milestones, ["N03"]);
   assert.equal(institutionReadinessFor(caseData, "N03").next_action_computable, true);
 
-  // N02는 R2 제도(one-stop-permit-consultation)를 쓰지만 예타 계열이 미평가라 아직 아니다.
+  // N02는 참조 제도 4개 중 3개가 R2다. 남은 하나가 예비타당성조사이고,
+  // 그것이 R2에 못 가는 이유는 지자체 건의 노드가 법정 절차가 아니기 때문이다.
   const n02 = institutionReadinessFor(caseData, "N02");
   assert.equal(n02.next_action_computable, false);
-  assert.ok(n02.not_ready_slugs.includes("preliminary-feasibility-study"));
+  assert.deepEqual(n02.not_ready_slugs, ["preliminary-feasibility-study"]);
+});
+
+test("사업 전체가 아니라 어느 제도 하나가 막는지까지 짚어 준다", async () => {
+  const caseData = await projectCase();
+
+  // 막힌 마일스톤마다 '남은 제도'가 몇 개인지 세면 다음에 무엇을 올려야 할지가 나온다.
+  const nearlyReady = ["N02", "N20"].map((nodeId) => ({
+    nodeId,
+    remaining: institutionReadinessFor(caseData, nodeId).not_ready_slugs,
+  }));
+
+  for (const entry of nearlyReady) {
+    assert.equal(entry.remaining.length, 1, `${entry.nodeId}은 제도 하나만 남아 있어야 한다`);
+  }
+  assert.deepEqual(
+    nearlyReady.find((entry) => entry.nodeId === "N20").remaining,
+    ["distributed-energy-special"],
+  );
 });
 
 test("케이스에 박아 둔 준비도가 제도 파일과 갈라지면 어긋남으로 잡는다", async () => {

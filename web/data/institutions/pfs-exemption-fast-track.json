@@ -118,7 +118,26 @@
       "article": "제28조(중기사업계획서의 제출)",
       "text": "중기사업계획서의 제출"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "procedure.started",
+     "trigger_condition": "해당 절차가 개시되고 '중기사업계획 반영' 수행 요건이 확인될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 중기계획",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [],
+     "completion_evidence": [
+      "중기계획"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P02",
@@ -145,7 +164,28 @@
       "article": "제50조(총사업비의 관리)",
       "text": "총사업비의 관리"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "중기사업계획 반영 완료 결과가 '대규모 사업 해당성 검토' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 검토",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "중기계획"
+     ],
+     "completion_evidence": [
+      "검토"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P03",
@@ -172,7 +212,31 @@
       "article": "제13조의2(예비타당성조사의 면제 절차)",
       "text": "예비타당성조사의 면제 절차"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "대규모 사업 해당성 검토 완료 결과가 '예타 vs 면제 경로 선택' 단계로 인계될 때",
+     "completion_condition": "'예타 vs 면제 경로 선택' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "검토"
+     ],
+     "completion_evidence": [
+      "경로"
+     ],
+     "handoff_recipients": [
+      "전문기관",
+      "기획예산처"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P04",
@@ -199,7 +263,30 @@
       "article": "제13조(예비타당성조사)",
       "text": "예비타당성조사"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "예타 vs 면제 경로 선택 완료 결과가 '예타 수행' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 예타 보고서",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "경로"
+     ],
+     "completion_evidence": [
+      "예타 보고서"
+     ],
+     "handoff_recipients": [
+      "국회·국민(공개)"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P05",
@@ -226,7 +313,30 @@
       "article": "제13조의2(예비타당성조사의 면제 절차)",
       "text": "예비타당성조사의 면제 절차"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "예타 vs 면제 경로 선택 완료 결과가 '예타 면제 절차' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 면제 결정",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "경로"
+     ],
+     "completion_evidence": [
+      "면제 결정"
+     ],
+     "handoff_recipients": [
+      "국회·국민(공개)"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P06",
@@ -248,7 +358,31 @@
       "article": "제38조의2(예비타당성조사 결과 관련 자료의 공개)",
       "text": "예비타당성조사 결과 관련 자료의 공개"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "예타 수행·예타 면제 절차 완료 결과가 '예타 결과 자료 공개' 단계로 인계될 때",
+     "completion_condition": "'예타 결과 자료 공개' 통지와 송달·수령 기록이 남을 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "예타 보고서",
+      "면제 결정"
+     ],
+     "completion_evidence": [
+      "공개 자료"
+     ],
+     "handoff_recipients": [
+      "기획예산처"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P07",
@@ -275,7 +409,28 @@
       "article": "제32조(예산안의 편성)",
       "text": "예산안의 편성"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "예타 결과 자료 공개 완료 결과가 '예산요구·예산안 편성' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 예산안",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "공개 자료"
+     ],
+     "completion_evidence": [
+      "예산안"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P08",
@@ -297,7 +452,30 @@
       "article": "제50조(총사업비의 관리)",
       "text": "총사업비의 관리"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "예산요구·예산안 편성 완료 결과가 '총사업비 관리' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 총사업비",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "예산안"
+     ],
+     "completion_evidence": [
+      "총사업비"
+     ],
+     "handoff_recipients": [
+      "사업시행자"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P09",
@@ -319,7 +497,31 @@
       "article": "제19조(다른 법률에 따른 인ㆍ허가등의 신속처리 특례)",
       "text": "다른 법률에 따른 인ㆍ허가등의 신속처리 특례"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "supplement.requested",
+     "trigger_condition": "보완·재수행이 결정되어 '인허가 신속처리 신청' 단계로 회귀할 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 신청",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "총사업비",
+      "인허가"
+     ],
+     "completion_evidence": [
+      "신청"
+     ],
+     "handoff_recipients": [
+      "인허가 기관·지자체"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P11",
@@ -341,7 +543,30 @@
       "article": "제19조(다른 법률에 따른 인ㆍ허가등의 신속처리 특례)",
       "text": "다른 법률에 따른 인ㆍ허가등의 신속처리 특례"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "인허가 신속처리 신청 완료 결과가 '인허가·지자체 처리(보완 요청 가능)' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 인허가",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "신청"
+     ],
+     "completion_evidence": [
+      "인허가"
+     ],
+     "handoff_recipients": [
+      "사업시행자"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P10",
@@ -364,7 +589,28 @@
       "text": "다른 법률에 따른 인ㆍ허가등의 신속처리 특례"
      }
     ],
-    "deadline": "§19: 계획 15일·결과 15일·60일 의제"
+    "deadline": "처리 계획 회신은 요청을 받은 날부터 15일 이내(자료 보완 기간 제외, 최대 30일), 처리 결과 통보는 계획 제출일부터 15일 이내(1회 15일 연장), 기한 도과 시 요청일부터 60일이 지난 날 처리 완료 의제",
+    "agent": {
+     "trigger_event": "notice.received",
+     "trigger_condition": "인허가·지자체 처리(보완 요청 가능) 완료 결과가 '처리계획·결과 수령' 단계로 인계될 때",
+     "completion_condition": "'처리계획·결과 수령' 통지와 송달·수령 기록이 남을 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "인허가"
+     ],
+     "completion_evidence": [
+      "통보"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "처리 계획 회신은 요청을 받은 날부터 15일 이내(자료 보완 기간 제외, 최대 30일), 처리 결과 통보는 계획 제출일부터 15일 이내(1회 15일 연장), 기한 도과 시 요청일부터 60일이 지난 날 처리 완료 의제"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P13",
@@ -386,7 +632,30 @@
       "article": "제50조(총사업비의 관리)",
       "text": "총사업비의 관리"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "처리계획·결과 수령 완료 결과가 '사업 집행' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 집행",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "통보"
+     ],
+     "completion_evidence": [
+      "집행"
+     ],
+     "handoff_recipients": [
+      "사업 주관부처"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P14",
@@ -408,7 +677,31 @@
       "article": "제85조의8(재정사업 성과평가)",
       "text": "재정사업 성과평가"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "사업 집행 완료 결과가 '성과평가' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 성과",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "집행"
+     ],
+     "completion_evidence": [
+      "성과"
+     ],
+     "handoff_recipients": [
+      "국회·국민(공개)",
+      "기획예산처"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P15",
@@ -435,7 +728,28 @@
       "article": "제83조(국정감사)",
       "text": "국정감사"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "성과평가 완료 결과가 '국회·감사 통제' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 감사",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "성과"
+     ],
+     "completion_evidence": [
+      "감사"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P16",
@@ -462,7 +776,28 @@
       "article": "제22조(타당성재조사)",
       "text": "타당성재조사"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "성과평가 완료 결과가 '타당성재조사' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 재조사",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "성과"
+     ],
+     "completion_evidence": [
+      "재조사"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    }
   ],
   "edges": [
@@ -471,112 +806,304 @@
     "source": "P01",
     "target": "P02",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'중기사업계획 반영' 완료 결과가 '대규모 사업 해당성 검토' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "사업 주관부처",
+      "to_actor": "사업 주관부처",
+      "documents": [
+       "중기계획"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E02",
     "source": "P02",
     "target": "P03",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'대규모 사업 해당성 검토' 완료 결과가 '예타 vs 면제 경로 선택' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "사업 주관부처",
+      "to_actor": "사업 주관부처",
+      "documents": [
+       "검토"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E03",
     "source": "P03",
     "target": "P04",
     "type": "sequence",
-    "label": "예타"
+    "label": "예타",
+    "agent_transition": {
+     "condition": "예타",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "사업 주관부처",
+      "to_actor": "전문기관",
+      "documents": [
+       "경로"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E04",
     "source": "P03",
     "target": "P05",
     "type": "sequence",
-    "label": "면제"
+    "label": "면제",
+    "agent_transition": {
+     "condition": "면제",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "사업 주관부처",
+      "to_actor": "기획예산처",
+      "documents": [
+       "경로"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E05",
     "source": "P04",
     "target": "P06",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'예타 수행' 완료 결과가 '예타 결과 자료 공개' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "전문기관",
+      "to_actor": "국회·국민(공개)",
+      "documents": [
+       "예타 보고서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E06",
     "source": "P05",
     "target": "P06",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'예타 면제 절차' 완료 결과가 '예타 결과 자료 공개' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "기획예산처",
+      "to_actor": "국회·국민(공개)",
+      "documents": [
+       "면제 결정"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E07",
     "source": "P06",
     "target": "P07",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'예타 결과 자료 공개' 완료 결과가 '예산요구·예산안 편성' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "국회·국민(공개)",
+      "to_actor": "기획예산처",
+      "documents": [
+       "공개 자료"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E08",
     "source": "P07",
     "target": "P08",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'예산요구·예산안 편성' 완료 결과가 '총사업비 관리' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "기획예산처",
+      "to_actor": "기획예산처",
+      "documents": [
+       "예산안"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E09",
     "source": "P08",
     "target": "P09",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'총사업비 관리' 완료 결과가 '인허가 신속처리 신청' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "기획예산처",
+      "to_actor": "사업시행자",
+      "documents": [
+       "총사업비"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E10",
     "source": "P09",
     "target": "P11",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'인허가 신속처리 신청' 완료 결과가 '인허가·지자체 처리(보완 요청 가능)' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "사업시행자",
+      "to_actor": "인허가 기관·지자체",
+      "documents": [
+       "신청"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E11",
     "source": "P11",
     "target": "P09",
     "type": "loop",
-    "label": "보완·재신청"
+    "label": "보완·재신청",
+    "agent_transition": {
+     "condition": "보완·재신청",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "인허가 기관·지자체",
+      "to_actor": "사업시행자",
+      "documents": [
+       "인허가"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E12",
     "source": "P11",
     "target": "P10",
     "type": "sequence",
-    "label": "처리 완료"
+    "label": "처리 완료",
+    "agent_transition": {
+     "condition": "처리 완료",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "인허가 기관·지자체",
+      "to_actor": "사업시행자",
+      "documents": [
+       "인허가"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E13",
     "source": "P10",
     "target": "P13",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'처리계획·결과 수령' 완료 결과가 '사업 집행' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "사업시행자",
+      "to_actor": "사업시행자",
+      "documents": [
+       "통보"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E14",
     "source": "P13",
     "target": "P14",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'사업 집행' 완료 결과가 '성과평가' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "사업시행자",
+      "to_actor": "사업 주관부처",
+      "documents": [
+       "집행"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E15",
     "source": "P14",
     "target": "P15",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'성과평가' 완료 결과가 '국회·감사 통제' 단계로 인계될 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "사업 주관부처",
+      "to_actor": "국회·국민(공개)",
+      "documents": [
+       "성과"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E16",
     "source": "P14",
     "target": "P16",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'성과평가' 완료 결과가 '타당성재조사' 단계로 인계될 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "사업 주관부처",
+      "to_actor": "기획예산처",
+      "documents": [
+       "성과"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    }
   ],
   "warnings": [
@@ -591,7 +1118,152 @@
      "286519"
     ]
    }
-  ]
+  ],
+  "agent_readiness": {
+   "contract_version": "1.1.0",
+   "level": "R2",
+   "mode": "next-action",
+   "assessed_at": "2026-09-01",
+   "assessment_method": "스키마 검증·그래프 파생·전이 수동 대조·법제처 DRF API 직접 대조",
+   "live_legal_check": "required-before-use",
+   "last_live_check": {
+    "checked_at": "2026-09-01",
+    "method": "law.go.kr-DRF-direct",
+    "status": "passed",
+    "citation_fingerprint": "sha256:c06ce54661d608274f5747f9b89ec53c727439ad733a0d97a34b7a08eadeeffb",
+    "sources_checked": 3,
+    "source_failures": 0,
+    "article_references": 22,
+    "verified_references": 22,
+    "missing_references": [],
+    "uncheckable_references": [],
+    "verified_node_ids": [
+     "P01",
+     "P02",
+     "P03",
+     "P04",
+     "P05",
+     "P06",
+     "P07",
+     "P08",
+     "P09",
+     "P11",
+     "P10",
+     "P13",
+     "P14",
+     "P15",
+     "P16"
+    ],
+    "unverified_node_ids": [],
+    "source_results": [
+     {
+      "law": "국가재정법",
+      "source_type": "statute",
+      "source_id": "010301",
+      "official_url": "https://law.go.kr/법령/국가재정법",
+      "requested_articles": [
+       "제100조",
+       "제28조",
+       "제31조",
+       "제32조",
+       "제38조",
+       "제38조의2",
+       "제50조",
+       "제83조",
+       "제85조의8"
+      ],
+      "verified_articles": [
+       "제100조",
+       "제28조",
+       "제31조",
+       "제32조",
+       "제38조",
+       "제38조의2",
+       "제50조",
+       "제83조",
+       "제85조의8"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "국가재정법",
+      "version_key": "0103012026081121859",
+      "promulgated_on": "2026-08-11",
+      "effective_on": "2026-08-11"
+     },
+     {
+      "law": "국가재정법 시행령",
+      "source_type": "statute",
+      "source_id": "010374",
+      "official_url": "https://law.go.kr/법령/국가재정법시행령",
+      "requested_articles": [
+       "제13조",
+       "제13조의2",
+       "제22조"
+      ],
+      "verified_articles": [
+       "제13조",
+       "제13조의2",
+       "제22조"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "국가재정법 시행령",
+      "version_key": "0103742026073036546",
+      "promulgated_on": "2026-07-30",
+      "effective_on": "2026-07-31"
+     },
+     {
+      "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+      "source_type": "statute",
+      "source_id": "014238",
+      "official_url": "https://law.go.kr/법령/국가첨단전략산업경쟁력강화및보호에관한특별조치법",
+      "requested_articles": [
+       "제19조"
+      ],
+      "verified_articles": [
+       "제19조"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+      "version_key": "0142382026060221738",
+      "promulgated_on": "2026-06-02",
+      "effective_on": "2026-06-02"
+     }
+    ]
+   },
+   "actionable_node_ids": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P08",
+    "P09",
+    "P11",
+    "P10",
+    "P13",
+    "P14",
+    "P15",
+    "P16"
+   ],
+   "reference_only_node_ids": [],
+   "blockers": [],
+   "metrics": {
+    "nodes": 15,
+    "edges": 16,
+    "node_contract_coverage": 1,
+    "transition_contract_coverage": 1,
+    "explicit_basis_coverage": 1,
+    "output_document_coverage": 1,
+    "low_confidence_nodes": 0,
+    "template_like_nodes": 0,
+    "deadline_review_nodes": 0,
+    "field_verification_items": 3
+   }
+  }
  },
  "verification": {
   "status": "article-verified",
@@ -600,7 +1272,8 @@
   "scope": "법적 근거 3건 중 공식 원문 3건을 연결했다. 캔버스와 절차 노드의 명시 조문 34건 가운데 34건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
    "L3 예타·신속: 공개·수령 권리",
-   "MSTs: 286517,285795,286519"
+   "MSTs: 286517,285795,286519",
+   "2026-09-01 재대조: 국가첨단전략산업법 제19조제3항~제5항의 회신 15일(최대 30일)·통보 15일(1회 15일 연장)·60일 의제를 기한 표기에 반영했다."
   ],
   "sources": [
    {

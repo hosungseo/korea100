@@ -67,7 +67,8 @@ python3 ontology/scripts/demo_query.py "부분공개 통지 왔는데 뭐 하면
 ```
 
 ## 다음
-- N02를 열려면 예타 계열 3종(preliminary-feasibility-study, pfs-exemption-fast-track, local-finance-investment-review-feasibility) R2 승격 필요
+- N20 전력 경로는 `distributed-energy-special` 하나만 남았다
+- N02는 `preliminary-feasibility-study` 하나만 남았고, 그 하나를 막는 것은 노드 하나(P16 지자체 건의)다
 - N23 용수·도로는 5종이 미평가라 가장 멀다
 - 남은 R2 제도 2종에 케이스 추가 (과태료 이의제기·법원재판, 국가연구개발비 정산)
 - 제도·오버레이 변경 시 케이스 재파생을 CI로 강제 (지금은 `--remerge` 수동 실행)
@@ -79,7 +80,7 @@ python3 ontology/scripts/demo_query.py "부분공개 통지 왔는데 뭐 하면
 - MCP 도구: `load_ontology_case`, `get_case_state`, `query_case`, `check_case_linkage`, `get_project_status`, `explain_blocked_milestone`
 - 패킷 계약: `mcp/src/packet-contract.mjs` — R2 경로(`create_action_packet`)와 온톨로지 경로가 같은 ActionPacket 계약을 통과해야 한다
 - 케이스 대조: `mcp/src/case-link.mjs` — 케이스 그래프가 제도 업무구조도와 어긋나면 드러낸다
-- 테스트: `cd mcp && npm test` (59건)
+- 테스트: `cd mcp && npm test` (60건)
 - 데모: `node mcp/scripts/ontology-query-once.mjs [--case samples/<파일>] "<질문>"`
 
 ## 제도 층과의 관계
@@ -95,8 +96,9 @@ python3 ontology/scripts/demo_query.py "부분공개 통지 왔는데 뭐 하면
 | 정보공개청구 | R2 (next-action) | 1호 | true |
 | 과태료 사전통지·의견제출 | R2 (next-action) | 2호 | true |
 | 과태료 이의제기·법원재판, 국가연구개발비 정산 | R2 (next-action) | 없음 | — |
-| 반도체클러스터 지정·조정, 반도체 기반시설 신속처리, 국가첨단전략산업 특화단지, 인허가 일괄협의 | R2 (2026-09-01 승격) | 3호가 참조 | 마일스톤 N03만 true |
-| 광주 반도체 클러스터 참조 나머지 104종 | 미평가 | 3호(프로젝트) | false |
+| 반도체 클러스터 임계경로 6종 (지정·조정, 기반시설 신속처리, 특화단지, 인허가 일괄협의, 예타 특례, 지방재정 투자심사) | R2 (2026-09-01 승격) | 3호가 참조 | 마일스톤 N03만 true |
+| 예비타당성조사 | R1 | 3호가 참조 | false — 지자체 건의(P16)가 법정 절차가 아님 |
+| 광주 반도체 클러스터 참조 나머지 101종 | 미평가 | 3호(프로젝트) | false |
 
 정보공개청구는 2026-09-01에 R1에서 승격했다. 조문이 틀렸던 것이 아니라
 기한의 성격과 전이가 대조되지 않았던 것이다. 자세한 내용은
