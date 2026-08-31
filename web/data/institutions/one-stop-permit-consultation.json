@@ -93,7 +93,6 @@
      "주된 인허가 신청서",
      "관련 인허가 서류"
     ],
-    "deadline": "주된 인허가 신청 시(불가피 시 별도 기한)",
     "confidence": 0.9,
     "legal_basis": [
      {
@@ -101,7 +100,29 @@
       "article": "제24조(인허가의제의 기준)",
       "text": "② 인허가의제를 받으려면 주된 인허가를 신청할 때 관련 인허가에 필요한 서류를 함께 제출하여야 한다. 다만, 불가피한 사유로 함께 제출할 수 없는 경우에는 주된 인허가 행정청이 별도로 정하는 기한까지 제출할 수 있다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "procedure.started",
+     "trigger_condition": "해당 절차가 개시되고 '주된 인허가 신청·관련 인허가 서류 병합 제출' 수행 요건이 확인될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 주된 인허가 신청서, 관련 인허가 서류",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [],
+     "completion_evidence": [
+      "주된 인허가 신청서",
+      "관련 인허가 서류"
+     ],
+     "handoff_recipients": [
+      "주된 인허가 행정청"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P02",
@@ -124,7 +145,32 @@
       "article": "제24조(인허가의제의 기준)",
       "text": "③ 주된 인허가 행정청은 주된 인허가를 하기 전에 관련 인허가에 관하여 미리 관련 인허가 행정청과 협의하여야 한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "supplement.requested",
+     "trigger_condition": "보완·재수행이 결정되어 '관련 인허가 사전 협의 요청' 단계로 회귀할 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 협의 요청 공문",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "주된 인허가 신청서",
+      "관련 인허가 서류",
+      "변경 처분서"
+     ],
+     "completion_evidence": [
+      "협의 요청 공문"
+     ],
+     "handoff_recipients": [
+      "관련 인허가 행정청"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P03",
@@ -147,7 +193,30 @@
       "article": "제24조(인허가의제의 기준)",
       "text": "④ 관련 인허가 행정청은 협의를 요청받으면 요청받은 날부터 20일 이내에 의견을 제출하여야 한다. 기간 내에 협의 여부에 관하여 의견을 제출하지 아니하면 협의가 된 것으로 본다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "관련 인허가 사전 협의 요청 완료 결과가 '관련 인허가 행정청 의견 제출(20일)' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 협의 의견서",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "협의 요청 공문"
+     ],
+     "completion_evidence": [
+      "협의 의견서"
+     ],
+     "handoff_recipients": [
+      "주된 인허가 행정청"
+     ],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "요청받은 날부터 20일 이내(미제출 시 협의 간주)"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P04",
@@ -170,7 +239,30 @@
       "article": "제24조(인허가의제의 기준)",
       "text": "⑤ 협의를 요청받은 관련 인허가 행정청은 해당 법령을 위반하여 협의에 응해서는 아니 된다. 다만, 관련 인허가에 필요한 심의, 의견 청취 등 절차는 법률에 인허가의제 시에도 해당 절차를 거친다는 명시적인 규정이 있는 경우에만 이를 거친다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "관련 인허가 행정청 의견 제출(20일) 완료 결과가 '명시 규정 있는 심의·의견청취 절차' 단계로 인계될 때",
+     "completion_condition": "'명시 규정 있는 심의·의견청취 절차' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "협의 의견서"
+     ],
+     "completion_evidence": [
+      "심의·의견청취 결과"
+     ],
+     "handoff_recipients": [
+      "주된 인허가 행정청"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P05",
@@ -193,7 +285,31 @@
       "article": "제25조(인허가의제의 효과)",
       "text": "① 제24조제3항ㆍ제4항에 따라 협의가 된 사항에 대해서는 주된 인허가를 받았을 때 관련 인허가를 받은 것으로 본다. ② 인허가의제의 효과는 주된 인허가의 해당 법률에 규정된 관련 인허가에 한정된다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "관련 인허가 행정청 의견 제출(20일)·명시 규정 있는 심의·의견청취 절차 완료 결과가 '주된 인허가 처분·관련 인허가 의제' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 주된 인허가 처분서",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "협의 의견서",
+      "심의·의견청취 결과"
+     ],
+     "completion_evidence": [
+      "주된 인허가 처분서"
+     ],
+     "handoff_recipients": [
+      "신청인"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P06",
@@ -216,7 +332,30 @@
       "article": "제26조(인허가의제의 사후관리 등)",
       "text": "① 인허가의제의 경우 관련 인허가 행정청은 관련 인허가를 직접 한 것으로 보아 관계 법령에 따른 관리ㆍ감독 등 필요한 조치를 하여야 한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "주된 인허가·의제 결과 확인 완료 결과가 '관련 인허가 행정청 사후관리' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 관리·감독 조치",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "주된 인허가 처분서"
+     ],
+     "completion_evidence": [
+      "관리·감독 조치"
+     ],
+     "handoff_recipients": [
+      "주된 인허가 행정청"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P07",
@@ -239,7 +378,28 @@
       "article": "제26조(인허가의제의 사후관리 등)",
       "text": "② 주된 인허가가 있은 후 이를 변경하는 경우에는 제24조ㆍ제25조 및 이 조 제1항을 준용한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "관련 인허가 행정청 사후관리 완료 결과가 '주된 인허가 변경 시 준용(loop)' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 변경 처분서",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "관리·감독 조치"
+     ],
+     "completion_evidence": [
+      "변경 처분서"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P08",
@@ -262,7 +422,30 @@
       "article": "제25조(인허가의제의 효과)",
       "text": "주된 인허가가 있으면 협의된 관련 인허가도 함께 받은 것으로 본다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "주된 인허가 처분·관련 인허가 의제 완료 결과가 '주된 인허가·의제 결과 확인' 단계로 인계될 때",
+     "completion_condition": "'주된 인허가·의제 결과 확인' 통지와 송달·수령 기록이 남을 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "주된 인허가 처분서"
+     ],
+     "completion_evidence": [
+      "주된 인허가 처분서"
+     ],
+     "handoff_recipients": [
+      "관련 인허가 행정청"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    }
   ],
   "edges": [
@@ -271,70 +454,258 @@
     "source": "P01",
     "target": "P02",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'주된 인허가 신청·관련 인허가 서류 병합 제출' 완료 결과가 '관련 인허가 사전 협의 요청' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "신청인(당사자)",
+      "to_actor": "주된 인허가 행정청",
+      "documents": [
+       "주된 인허가 신청서",
+       "관련 인허가 서류"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E03",
     "source": "P02",
     "target": "P03",
     "type": "message",
-    "label": "협의 요청"
+    "label": "협의 요청",
+    "agent_transition": {
+     "condition": "협의 요청",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "주된 인허가 행정청",
+      "to_actor": "관련 인허가 행정청",
+      "documents": [
+       "협의 요청 공문"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E04",
     "source": "P03",
     "target": "P04",
     "type": "sequence",
-    "label": "명시 규정 有"
+    "label": "명시 규정 有",
+    "agent_transition": {
+     "condition": "명시 규정 有",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "관련 인허가 행정청",
+      "to_actor": "관련 인허가 행정청",
+      "documents": [
+       "협의 의견서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E05",
     "source": "P03",
     "target": "P05",
     "type": "sequence",
-    "label": "협의 완료"
+    "label": "협의 완료",
+    "agent_transition": {
+     "condition": "협의 완료",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "관련 인허가 행정청",
+      "to_actor": "주된 인허가 행정청",
+      "documents": [
+       "협의 의견서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E06",
     "source": "P04",
     "target": "P05",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'명시 규정 있는 심의·의견청취 절차' 완료 결과가 '주된 인허가 처분·관련 인허가 의제' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "관련 인허가 행정청",
+      "to_actor": "주된 인허가 행정청",
+      "documents": [
+       "심의·의견청취 결과"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E07",
     "source": "P05",
     "target": "P08",
     "type": "sequence",
-    "label": "처분 결과 확인"
+    "label": "처분 결과 확인",
+    "agent_transition": {
+     "condition": "처분 결과 확인",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "주된 인허가 행정청",
+      "to_actor": "신청인",
+      "documents": [
+       "주된 인허가 처분서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E08",
     "source": "P06",
     "target": "P07",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'관련 인허가 행정청 사후관리' 완료 결과가 '주된 인허가 변경 시 준용(loop)' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "관련 인허가 행정청",
+      "to_actor": "주된 인허가 행정청",
+      "documents": [
+       "관리·감독 조치"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "L01",
     "source": "P07",
     "target": "P02",
     "type": "loop",
-    "label": "변경 시 재협의"
+    "label": "변경 시 재협의",
+    "agent_transition": {
+     "condition": "변경 시 재협의",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "주된 인허가 행정청",
+      "to_actor": "주된 인허가 행정청",
+      "documents": [
+       "변경 처분서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E09",
     "source": "P08",
     "target": "P06",
     "type": "sequence",
-    "label": "의제 후 사후관리"
+    "label": "의제 후 사후관리",
+    "agent_transition": {
+     "condition": "의제 후 사후관리",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "신청인",
+      "to_actor": "관련 인허가 행정청",
+      "documents": [
+       "주된 인허가 처분서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    }
   ],
   "warnings": [
    "개별 사건의 요건·기한·금액은 하위규정과 사실관계에 따라 달라질 수 있다.",
    "2026-07-13 L2 템플릿 셸 재구축: 일반 템플릿 노드를 행정기본법 인허가의제 실제 절차로 전면 교체. 근거법을 행정절차법(오인용)에서 행정기본법 제24~26조로 교정하고, 레인을 신청인·주된 인허가 행정청·관련 인허가 행정청으로 재배치했다. 제24조의 서류 병합·사전협의·20일 의견제출·심의·의견청취, 제25조의 처분·의제 효과, 제26조의 사후관리·변경 준용을 반영했다. 참조 MST 269955(행정기본법).",
    "2026-07-13 후속 보완: 명문 근거가 없는 원스톱 통합 접수창구 노드와 연결을 제거했다. 실제 접수 시스템은 개별법·기관 운영규정 확인 사항으로 fieldVerification에만 남긴다."
-  ]
+  ],
+  "agent_readiness": {
+   "contract_version": "1.1.0",
+   "level": "R2",
+   "mode": "next-action",
+   "assessed_at": "2026-09-01",
+   "assessment_method": "스키마 검증·그래프 파생·전이 수동 대조·법제처 DRF API 직접 대조",
+   "live_legal_check": "required-before-use",
+   "last_live_check": {
+    "checked_at": "2026-09-01",
+    "method": "law.go.kr-DRF-direct",
+    "status": "passed",
+    "citation_fingerprint": "sha256:7139bffba0c5b7b5787ae0d664769dd52c8c1848887b74e98cd7e63bf22ad311",
+    "sources_checked": 1,
+    "source_failures": 0,
+    "article_references": 8,
+    "verified_references": 8,
+    "missing_references": [],
+    "uncheckable_references": [],
+    "verified_node_ids": [
+     "P01",
+     "P02",
+     "P03",
+     "P04",
+     "P05",
+     "P06",
+     "P07",
+     "P08"
+    ],
+    "unverified_node_ids": [],
+    "source_results": [
+     {
+      "law": "행정기본법",
+      "source_type": "statute",
+      "source_id": "014041",
+      "official_url": "https://law.go.kr/법령/행정기본법",
+      "requested_articles": [
+       "제24조",
+       "제25조",
+       "제26조"
+      ],
+      "verified_articles": [
+       "제24조",
+       "제25조",
+       "제26조"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "행정기본법",
+      "version_key": "0140412025031820824",
+      "promulgated_on": "2025-03-18",
+      "effective_on": "2025-03-18"
+     }
+    ]
+   },
+   "actionable_node_ids": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P08"
+   ],
+   "reference_only_node_ids": [],
+   "blockers": [],
+   "metrics": {
+    "nodes": 8,
+    "edges": 9,
+    "node_contract_coverage": 1,
+    "transition_contract_coverage": 1,
+    "explicit_basis_coverage": 1,
+    "output_document_coverage": 1,
+    "low_confidence_nodes": 0,
+    "template_like_nodes": 0,
+    "deadline_review_nodes": 0,
+    "field_verification_items": 3
+   }
+  }
  },
  "verification": {
   "status": "article-verified",
@@ -342,7 +713,8 @@
   "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
   "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 11건 가운데 11건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
-   "행정기본법 공포·시행 2025-03-18 기준. 인허가의제 일반 절차는 제24~26조."
+   "행정기본법 공포·시행 2025-03-18 기준. 인허가의제 일반 절차는 제24~26조.",
+   "2026-09-01 재대조: 제24조제2항은 주된 인허가 신청 시 관련 인허가 서류를 함께 제출하도록 한 동시성 원칙이고 별도 기간을 정하지 않는다. 기한 표기를 제거했다. 협의 회신 20일 의제는 제24조제4항이다."
   ],
   "sources": [
    {

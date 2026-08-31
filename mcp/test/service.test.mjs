@@ -21,8 +21,8 @@ const service = new AdministrativeProcedureService(institutions, {
   now: () => new Date(FIXED_NOW),
 });
 
-test("R2 검증을 통과한 대표 제도 4개만 로드한다", () => {
-  assert.equal(institutions.length, 4);
+test("R2 검증을 통과한 대표 제도 8개만 로드한다", () => {
+  assert.equal(institutions.length, 8);
   assert.deepEqual(institutions.map((institution) => institution.slug), AGENT_READY_SLUGS);
   assert.ok(institutions.every((institution) => institution.process.agent_readiness.level === "R2"));
 });

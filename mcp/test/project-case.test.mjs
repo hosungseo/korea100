@@ -34,17 +34,29 @@ test("3호는 프로젝트 케이스이고 오버레이와 어긋남 없이 맞�
   assert.deepEqual(linkage.dependencies.unknown_requires, []);
 });
 
-test("참조 제도 108개가 모두 미평가라 다음 행동을 계산하지 않는다", async () => {
+test("참조 제도 일부만 R2라 사업 전체의 다음 행동은 허용하지 않는다", async () => {
   const caseData = await projectCase();
   const linkage = await checkCaseLinkageFor(caseData);
 
   assert.equal(linkage.institutions.referenced_count, 108);
-  assert.equal(linkage.institutions.r2_count, 0);
+  assert.ok(linkage.institutions.r2_count > 0, "임계경로 제도가 R2로 올라와 있어야 한다");
+  assert.ok(linkage.institutions.r2_count < linkage.institutions.referenced_count);
+  // 사업은 가장 준비 안 된 제도만큼만 계산된다. 하나라도 미평가면 전체는 허용하지 않는다.
   assert.equal(linkage.next_action_allowed, false);
-  assert.ok(linkage.notes.some((note) => note.includes("R2가 없습니다")));
+});
 
+test("참조 제도가 전부 R2인 마일스톤만 다음 행동 계산 대상이 된다", async () => {
+  const caseData = await projectCase();
   const rollup = projectStatus(caseData).readiness;
-  assert.deepEqual(rollup.next_action_computable_milestones, []);
+
+  // N03 반도체클러스터 지정. 이 마일스톤이 열려야 N20 신속처리 경로가 열린다.
+  assert.deepEqual(rollup.next_action_computable_milestones, ["N03"]);
+  assert.equal(institutionReadinessFor(caseData, "N03").next_action_computable, true);
+
+  // N02는 R2 제도(one-stop-permit-consultation)를 쓰지만 예타 계열이 미평가라 아직 아니다.
+  const n02 = institutionReadinessFor(caseData, "N02");
+  assert.equal(n02.next_action_computable, false);
+  assert.ok(n02.not_ready_slugs.includes("preliminary-feasibility-study"));
 });
 
 test("케이스에 박아 둔 준비도가 제도 파일과 갈라지면 어긋남으로 잡는다", async () => {

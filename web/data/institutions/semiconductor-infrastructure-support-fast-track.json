@@ -1,437 +1,982 @@
 {
-  "slug": "semiconductor-infrastructure-support-fast-track",
-  "name": "반도체 산업기반시설 지원·예타·인허가 신속처리",
-  "oneLiner": "클러스터 전력·용수·도로 등 산업기반시설 수요 확정부터 비용지원, 공공기관 협약, 예비타당성조사 특례, 인허가 의제·신속처리까지의 특별법 경로",
-  "type": "기반시설 지원·신속처리형",
-  "priority": 539,
-  "category": "인허가·규제·산업",
-  "whyFirst": "전력·용수·도로를 개별 허가만으로 관리하면 재원과 일정의 병목이 보이지 않으므로 특별법상 비용지원·예타·신속처리 산출물을 하나의 제도로 연결해야 한다.",
-  "asOfDate": "2026-08-16",
-  "status": "full",
-  "canvas": {
-    "purpose": "클러스터 전력·용수·도로 등 산업기반시설 수요 확정부터 비용지원, 공공기관 협약, 예비타당성조사 특례, 인허가 의제·신속처리까지의 특별법 경로",
-    "stakeholders": "사업시행자·입주기업, 산업통상부, 기반시설 공공기관, 기획재정부·관계기관",
-    "legalBasis": [
-      {
-        "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
-        "articles": "제14조·제18조, 제23조~제28조",
-        "kind": "법률"
-      }
-    ],
-    "authorities": [
-      {
-        "name": "사업시행자·입주기업",
-        "role": "반도체 산업기반시설 지원·예타·인허가 신속처리의 해당 레인 업무와 산출물 작성·검토·결정을 담당"
-      },
-      {
-        "name": "산업통상부",
-        "role": "반도체 산업기반시설 지원·예타·인허가 신속처리의 해당 레인 업무와 산출물 작성·검토·결정을 담당"
-      },
-      {
-        "name": "기반시설 공공기관",
-        "role": "반도체 산업기반시설 지원·예타·인허가 신속처리의 해당 레인 업무와 산출물 작성·검토·결정을 담당"
-      },
-      {
-        "name": "기획재정부·관계기관",
-        "role": "반도체 산업기반시설 지원·예타·인허가 신속처리의 해당 레인 업무와 산출물 작성·검토·결정을 담당"
-      }
-    ],
-    "procedure": [
-      "전력·용수·도로·폐수 산업기반시설 수요 확정",
-      "산업기반시설 지원계획·비용지원 신청",
-      "지원 필요성·공급능력·사업비 검토",
-      "관계기관·공공기관 공급방안 조정",
-      "기반시설 비용지원·분담 결정",
-      "기반시설 공공기관 실시협약 체결",
-      "국가·공공기관 예비타당성조사 적용경로 판정",
-      "예비타당성조사 면제·기간단축 심의",
-      "인허가 의제목록·실체요건 패키지 확정",
-      "인허가 신속처리 요청·처리계획·결과 통보"
-    ],
-    "moneyFlow": "사업비·지원비·분담금·재산가액은 해당 계획과 개별 하위 법령·고시·협약에서 확정한다.",
-    "docsFlow": "전력·용수·도로·폐수 산업기반시설 수요 확정 → 산업기반시설 지원계획·비용지원 신청 → 지원 필요성·공급능력·사업비 검토 → 관계기관·공공기관 공급방안 조정 → 기반시설 비용지원·분담 결정 → 기반시설 공공기관 실시협약 체결 → 국가·공공기관 예비타당성조사 적용경로 판정 → 예비타당성조사 면제·기간단축 심의 → 인허가 의제목록·실체요건 패키지 확정 → 인허가 신속처리 요청·처리계획·결과 통보",
-    "bottlenecks": [
-      "사업구역·시설규모·사업주체의 미확정",
-      "관계기관 협의자료와 기반시설 일정의 불일치",
-      "승인조건·재원·공사·운영 인계의 단절"
-    ],
-    "reformPoints": [
-      "사업·시설 식별자로 신청·협의·심의·고시 산출물을 연결",
-      "관계기관 보완요구와 법정기한을 공통 일정에서 추적",
-      "계획승인 조건을 공사·준공·운영 확인사항으로 구조화"
-    ]
-  },
-  "related": [
-    "반도체클러스터 조성계획 승인·지정·조정",
-    "국방·군사시설 사업계획·실시계획·준공",
-    "군사시설 보호구역 변경·해제·고시",
-    "국유재산 용도폐지·기부 대 양여·권리이전"
+ "slug": "semiconductor-infrastructure-support-fast-track",
+ "name": "반도체 산업기반시설 지원·예타·인허가 신속처리",
+ "oneLiner": "클러스터 전력·용수·도로 등 산업기반시설 수요 확정부터 비용지원, 공공기관 협약, 예비타당성조사 특례, 인허가 의제·신속처리까지의 특별법 경로",
+ "type": "기반시설 지원·신속처리형",
+ "priority": 539,
+ "category": "인허가·규제·산업",
+ "whyFirst": "전력·용수·도로를 개별 허가만으로 관리하면 재원과 일정의 병목이 보이지 않으므로 특별법상 비용지원·예타·신속처리 산출물을 하나의 제도로 연결해야 한다.",
+ "asOfDate": "2026-08-16",
+ "status": "full",
+ "canvas": {
+  "purpose": "클러스터 전력·용수·도로 등 산업기반시설 수요 확정부터 비용지원, 공공기관 협약, 예비타당성조사 특례, 인허가 의제·신속처리까지의 특별법 경로",
+  "stakeholders": "사업시행자·입주기업, 산업통상부, 기반시설 공공기관, 기획재정부·관계기관",
+  "legalBasis": [
+   {
+    "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+    "articles": "제14조·제18조, 제23조~제28조",
+    "kind": "법률"
+   }
   ],
-  "fieldVerification": [
-    "반도체 산업기반시설 지원·예타·인허가 신속처리의 최신 시행령·시행규칙·고시와 제출서식",
-    "사업규모·시설종류별 적용 문턱과 면제·간소화 요건",
-    "관계기관별 실제 처리기간·보완횟수·전산접수 경로",
-    "승인·검사 이후 변경·이행점검·취소의 현장 운영기준"
+  "authorities": [
+   {
+    "name": "사업시행자·입주기업",
+    "role": "반도체 산업기반시설 지원·예타·인허가 신속처리의 해당 레인 업무와 산출물 작성·검토·결정을 담당"
+   },
+   {
+    "name": "산업통상부",
+    "role": "반도체 산업기반시설 지원·예타·인허가 신속처리의 해당 레인 업무와 산출물 작성·검토·결정을 담당"
+   },
+   {
+    "name": "기반시설 공공기관",
+    "role": "반도체 산업기반시설 지원·예타·인허가 신속처리의 해당 레인 업무와 산출물 작성·검토·결정을 담당"
+   },
+   {
+    "name": "기획재정부·관계기관",
+    "role": "반도체 산업기반시설 지원·예타·인허가 신속처리의 해당 레인 업무와 산출물 작성·검토·결정을 담당"
+   }
   ],
-  "process": {
-    "institution_name": "반도체 산업기반시설 지원·예타·인허가 신속처리",
-    "law_name": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
-    "lanes": [
-      "사업시행자·입주기업",
-      "산업통상부",
-      "기반시설 공공기관",
-      "기획재정부·관계기관"
+  "procedure": [
+   "전력·용수·도로·폐수 산업기반시설 수요 확정",
+   "산업기반시설 지원계획·비용지원 신청",
+   "지원 필요성·공급능력·사업비 검토",
+   "관계기관·공공기관 공급방안 조정",
+   "기반시설 비용지원·분담 결정",
+   "기반시설 공공기관 실시협약 체결",
+   "국가·공공기관 예비타당성조사 적용경로 판정",
+   "예비타당성조사 면제·기간단축 심의",
+   "인허가 의제목록·실체요건 패키지 확정",
+   "인허가 신속처리 요청·처리계획·결과 통보"
+  ],
+  "moneyFlow": "사업비·지원비·분담금·재산가액은 해당 계획과 개별 하위 법령·고시·협약에서 확정한다.",
+  "docsFlow": "전력·용수·도로·폐수 산업기반시설 수요 확정 → 산업기반시설 지원계획·비용지원 신청 → 지원 필요성·공급능력·사업비 검토 → 관계기관·공공기관 공급방안 조정 → 기반시설 비용지원·분담 결정 → 기반시설 공공기관 실시협약 체결 → 국가·공공기관 예비타당성조사 적용경로 판정 → 예비타당성조사 면제·기간단축 심의 → 인허가 의제목록·실체요건 패키지 확정 → 인허가 신속처리 요청·처리계획·결과 통보",
+  "bottlenecks": [
+   "사업구역·시설규모·사업주체의 미확정",
+   "관계기관 협의자료와 기반시설 일정의 불일치",
+   "승인조건·재원·공사·운영 인계의 단절"
+  ],
+  "reformPoints": [
+   "사업·시설 식별자로 신청·협의·심의·고시 산출물을 연결",
+   "관계기관 보완요구와 법정기한을 공통 일정에서 추적",
+   "계획승인 조건을 공사·준공·운영 확인사항으로 구조화"
+  ]
+ },
+ "related": [
+  "반도체클러스터 조성계획 승인·지정·조정",
+  "국방·군사시설 사업계획·실시계획·준공",
+  "군사시설 보호구역 변경·해제·고시",
+  "국유재산 용도폐지·기부 대 양여·권리이전"
+ ],
+ "fieldVerification": [
+  "반도체 산업기반시설 지원·예타·인허가 신속처리의 최신 시행령·시행규칙·고시와 제출서식",
+  "사업규모·시설종류별 적용 문턱과 면제·간소화 요건",
+  "관계기관별 실제 처리기간·보완횟수·전산접수 경로",
+  "승인·검사 이후 변경·이행점검·취소의 현장 운영기준"
+ ],
+ "process": {
+  "institution_name": "반도체 산업기반시설 지원·예타·인허가 신속처리",
+  "law_name": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+  "lanes": [
+   "사업시행자·입주기업",
+   "산업통상부",
+   "기반시설 공공기관",
+   "기획재정부·관계기관"
+  ],
+  "stages": [
+   "G0 수요확정",
+   "G1 지원신청",
+   "G2 비용·협약",
+   "G3 예타특례",
+   "G4 인허가 패키지",
+   "G5 신속처리"
+  ],
+  "nodes": [
+   {
+    "id": "P01",
+    "name": "전력·용수·도로·폐수 산업기반시설 수요 확정",
+    "lane": "사업시행자·입주기업",
+    "stage": "G0 수요확정",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "사업시행자·입주기업",
+    "action": "전력·용수·도로·폐수 산업기반시설 수요 확정에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "output_documents": [
+     "산업기반시설 수요서",
+     "단계별 공급계획"
     ],
-    "stages": [
-      "G0 수요확정",
-      "G1 지원신청",
-      "G2 비용·협약",
-      "G3 예타특례",
-      "G4 인허가 패키지",
-      "G5 신속처리"
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+      "article": "제14조제1항",
+      "text": "국가 및 지방자치단체는 전력·용수·폐수·폐기물 처리·연결도로 등 산업기반시설을 신속하게 조성·지원하여야 하며 비용의 전부 또는 일부를 우선 지원하여야 한다."
+     },
+     {
+      "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+      "article": "제20조",
+      "text": "법 제14조제1항 각 호의 시설은 전기공급시설, 공업용수·생활용수 공급시설, 하수도·공공폐수처리시설·폐기물처리시설, 조성·운영에 사용되는 도로를 말한다."
+     }
     ],
-    "nodes": [
-      {
-        "id": "P01",
-        "name": "전력·용수·도로·폐수 산업기반시설 수요 확정",
-        "lane": "사업시행자·입주기업",
-        "stage": "G0 수요확정",
-        "type": "task",
-        "status": "done",
-        "progress": 100,
-        "actor": "사업시행자·입주기업",
-        "action": "전력·용수·도로·폐수 산업기반시설 수요 확정에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
-        "output_documents": [
-          "산업기반시설 수요서",
-          "단계별 공급계획"
-        ],
-        "confidence": 0.9,
-        "legal_basis": [
-          {
-            "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
-            "article": "제14조·제18조",
-            "text": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 제14조·제18조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
-          }
-        ]
-      },
-      {
-        "id": "P02",
-        "name": "산업기반시설 지원계획·비용지원 신청",
-        "lane": "사업시행자·입주기업",
-        "stage": "G1 지원신청",
-        "type": "task",
-        "status": "done",
-        "progress": 100,
-        "actor": "사업시행자·입주기업",
-        "action": "산업기반시설 지원계획·비용지원 신청에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
-        "output_documents": [
-          "기반시설 지원신청서",
-          "비용분담안"
-        ],
-        "confidence": 0.9,
-        "legal_basis": [
-          {
-            "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
-            "article": "제14조·제18조",
-            "text": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 제14조·제18조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
-          }
-        ]
-      },
-      {
-        "id": "P03",
-        "name": "지원 필요성·공급능력·사업비 검토",
-        "lane": "산업통상부",
-        "stage": "G1 지원신청",
-        "type": "task",
-        "status": "current",
-        "progress": 40,
-        "actor": "산업통상부",
-        "action": "지원 필요성·공급능력·사업비 검토에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
-        "output_documents": [
-          "지원 타당성 검토서"
-        ],
-        "confidence": 0.9,
-        "legal_basis": [
-          {
-            "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
-            "article": "제14조·제18조",
-            "text": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 제14조·제18조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
-          }
-        ]
-      },
-      {
-        "id": "P04",
-        "name": "관계기관·공공기관 공급방안 조정",
-        "lane": "산업통상부",
-        "stage": "G2 비용·협약",
-        "type": "gateway",
-        "status": "waiting",
-        "progress": 0,
-        "actor": "산업통상부",
-        "action": "관계기관·공공기관 공급방안 조정에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
-        "output_documents": [
-          "기관별 공급·재원 조정결과"
-        ],
-        "confidence": 0.9,
-        "legal_basis": [
-          {
-            "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
-            "article": "제14조·제18조",
-            "text": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 제14조·제18조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
-          }
-        ]
-      },
-      {
-        "id": "P05",
-        "name": "기반시설 비용지원·분담 결정",
-        "lane": "산업통상부",
-        "stage": "G2 비용·협약",
-        "type": "task",
-        "status": "waiting",
-        "progress": 0,
-        "actor": "산업통상부",
-        "action": "기반시설 비용지원·분담 결정에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
-        "output_documents": [
-          "비용지원·분담 결정서"
-        ],
-        "confidence": 0.9,
-        "legal_basis": [
-          {
-            "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
-            "article": "제14조·제18조",
-            "text": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 제14조·제18조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
-          }
-        ]
-      },
-      {
-        "id": "P06",
-        "name": "기반시설 공공기관 실시협약 체결",
-        "lane": "기반시설 공공기관",
-        "stage": "G2 비용·협약",
-        "type": "task",
-        "status": "waiting",
-        "progress": 0,
-        "actor": "기반시설 공공기관",
-        "action": "기반시설 공공기관 실시협약 체결에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
-        "output_documents": [
-          "기반시설 실시협약",
-          "공급 일정표"
-        ],
-        "confidence": 0.9,
-        "legal_basis": [
-          {
-            "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
-            "article": "제18조",
-            "text": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 제18조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
-          }
-        ]
-      },
-      {
-        "id": "P07",
-        "name": "국가·공공기관 예비타당성조사 적용경로 판정",
-        "lane": "기획재정부·관계기관",
-        "stage": "G3 예타특례",
-        "type": "task",
-        "status": "waiting",
-        "progress": 0,
-        "actor": "기획재정부·관계기관",
-        "action": "국가·공공기관 예비타당성조사 적용경로 판정에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
-        "output_documents": [
-          "예비타당성조사 적용경로 판정서"
-        ],
-        "confidence": 0.9,
-        "legal_basis": [
-          {
-            "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
-            "article": "제24조·제25조",
-            "text": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 제24조·제25조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
-          }
-        ]
-      },
-      {
-        "id": "P08",
-        "name": "예비타당성조사 면제·기간단축 심의",
-        "lane": "기획재정부·관계기관",
-        "stage": "G3 예타특례",
-        "type": "gateway",
-        "status": "waiting",
-        "progress": 0,
-        "actor": "기획재정부·관계기관",
-        "action": "예비타당성조사 면제·기간단축 심의에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
-        "output_documents": [
-          "예타 면제·단축 심의결과"
-        ],
-        "confidence": 0.9,
-        "legal_basis": [
-          {
-            "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
-            "article": "제24조·제25조",
-            "text": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 제24조·제25조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
-          }
-        ]
-      },
-      {
-        "id": "P09",
-        "name": "인허가 의제목록·실체요건 패키지 확정",
-        "lane": "산업통상부",
-        "stage": "G4 인허가 패키지",
-        "type": "task",
-        "status": "waiting",
-        "progress": 0,
-        "actor": "산업통상부",
-        "action": "인허가 의제목록·실체요건 패키지 확정에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
-        "output_documents": [
-          "인허가 의제목록",
-          "실체요건 충족표"
-        ],
-        "confidence": 0.9,
-        "legal_basis": [
-          {
-            "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
-            "article": "제26조",
-            "text": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 제26조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
-          }
-        ]
-      },
-      {
-        "id": "P10",
-        "name": "인허가 신속처리 요청·처리계획·결과 통보",
-        "lane": "산업통상부",
-        "stage": "G5 신속처리",
-        "type": "notice",
-        "status": "waiting",
-        "progress": 0,
-        "actor": "산업통상부",
-        "action": "인허가 신속처리 요청·처리계획·결과 통보에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
-        "output_documents": [
-          "신속처리 요청서",
-          "기관별 처리계획",
-          "처리결과 통보서"
-        ],
-        "confidence": 0.9,
-        "legal_basis": [
-          {
-            "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
-            "article": "제27조·제28조",
-            "text": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 제27조·제28조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
-          }
-        ]
-      }
-    ],
-    "edges": [
-      {
-        "id": "E01",
-        "source": "P01",
-        "target": "P02",
-        "type": "sequence",
-        "label": null
-      },
-      {
-        "id": "E02",
-        "source": "P02",
-        "target": "P03",
-        "type": "sequence",
-        "label": null
-      },
-      {
-        "id": "E03",
-        "source": "P03",
-        "target": "P04",
-        "type": "sequence",
-        "label": null
-      },
-      {
-        "id": "E04",
-        "source": "P04",
-        "target": "P05",
-        "type": "sequence",
-        "label": null
-      },
-      {
-        "id": "E05",
-        "source": "P05",
-        "target": "P06",
-        "type": "sequence",
-        "label": null
-      },
-      {
-        "id": "E06",
-        "source": "P06",
-        "target": "P07",
-        "type": "sequence",
-        "label": null
-      },
-      {
-        "id": "E07",
-        "source": "P07",
-        "target": "P08",
-        "type": "sequence",
-        "label": null
-      },
-      {
-        "id": "E08",
-        "source": "P08",
-        "target": "P09",
-        "type": "sequence",
-        "label": null
-      },
-      {
-        "id": "E09",
-        "source": "P09",
-        "target": "P10",
-        "type": "sequence",
-        "label": null
-      },
-      {
-        "id": "L01",
-        "source": "P08",
-        "target": "P07",
-        "type": "loop",
-        "label": "특례요건 보완"
-      },
-      {
-        "id": "M02",
-        "source": "P09",
-        "target": "P10",
-        "type": "message",
-        "label": "의제자료 인계"
-      }
-    ],
-    "warnings": [
-      "법제처 국가법령정보 API로 2026-08-16 현재 법령 식별자와 핵심 조문을 대조했다.",
-      "프로젝트별 적용 여부와 세부 제출물은 사업주체·시설규모·공급방식·입지 및 시행령 문턱에 따라 달라지므로 실제 신청 전에 다시 판정해야 한다."
-    ]
-  },
-  "verification": {
-    "status": "source-linked",
-    "verifiedAt": "2026-08-16",
-    "method": "법제처 국가법령정보 Open API의 현행 법령 검색·조문 조회 결과와 공식 법령 원문 연결",
-    "scope": "현행 법률의 식별자·공포일·시행일과 프로젝트 마일스톤을 구성하는 핵심 조문 범위를 대조했다. 시행령·시행규칙·고시·서식의 전수 조문 검증은 현장확인 항목으로 분리했다.",
-    "notes": [
-      "이번 추가분은 광주 반도체클러스터 행정절차 감사에서 독립 산출물로 확인된 7개 제도다."
-    ],
-    "sources": [
-      {
-        "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
-        "kind": "법률",
-        "sourceType": "statute",
-        "officialName": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
-        "lawId": "015044",
-        "mst": "286559",
-        "promulgatedOn": "2026-06-02",
-        "effectiveOn": "2026-08-11",
-        "officialUrl": "https://law.go.kr/법령/반도체산업경쟁력강화및지원에관한특별법"
-      }
-    ],
-    "articleVerification": {
-      "checkedAt": "2026-08-16",
-      "method": "법제처 API 핵심조문 표본 대조; 전체 인용 자동검증은 미실행",
-      "citationEntries": 0,
-      "explicitCitationEntries": 0,
-      "articleReferences": 0,
-      "verifiedReferences": 0,
-      "missingReferences": 0,
-      "uncheckableReferences": 0
+    "agent": {
+     "trigger_event": "procedure.started",
+     "trigger_condition": "해당 절차가 개시되고 '전력·용수·도로·폐수 산업기반시설 수요 확정' 수행 요건이 확인될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 산업기반시설 수요서, 단계별 공급계획",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [],
+     "completion_evidence": [
+      "산업기반시설 수요서",
+      "단계별 공급계획"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
     }
+   },
+   {
+    "id": "P02",
+    "name": "산업기반시설 지원계획·비용지원 신청",
+    "lane": "사업시행자·입주기업",
+    "stage": "G1 지원신청",
+    "type": "task",
+    "status": "done",
+    "progress": 100,
+    "actor": "사업시행자·입주기업",
+    "action": "산업기반시설 지원계획·비용지원 신청에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "output_documents": [
+     "기반시설 지원신청서",
+     "비용분담안"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+      "article": "제14조제1항",
+      "text": "산업기반시설 조성·지원과 그 비용의 우선 지원 근거."
+     }
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "전력·용수·도로·폐수 산업기반시설 수요 확정 완료 결과가 '산업기반시설 지원계획·비용지원 신청' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 기반시설 지원신청서, 비용분담안",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "산업기반시설 수요서",
+      "단계별 공급계획"
+     ],
+     "completion_evidence": [
+      "기반시설 지원신청서",
+      "비용분담안"
+     ],
+     "handoff_recipients": [
+      "산업통상부"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
+   },
+   {
+    "id": "P03",
+    "name": "지원 필요성·공급능력·사업비 검토",
+    "lane": "산업통상부",
+    "stage": "G1 지원신청",
+    "type": "task",
+    "status": "current",
+    "progress": 40,
+    "actor": "산업통상부",
+    "action": "지원 필요성·공급능력·사업비 검토에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "output_documents": [
+     "지원 타당성 검토서"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+      "article": "제14조제1항",
+      "text": "비용은 대통령령으로 정하는 기준에 따라 전부 또는 일부를 우선 지원한다."
+     },
+     {
+      "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+      "article": "제14조제2항",
+      "text": "산업기반시설 조성과 관련하여 사업시행자와 입주 기업·기관의 투자·운영 일정 및 계획을 고려하여야 한다."
+     }
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "산업기반시설 지원계획·비용지원 신청 완료 결과가 '지원 필요성·공급능력·사업비 검토' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 지원 타당성 검토서",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "기반시설 지원신청서",
+      "비용분담안"
+     ],
+     "completion_evidence": [
+      "지원 타당성 검토서"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
+   },
+   {
+    "id": "P04",
+    "name": "관계기관·공공기관 공급방안 조정",
+    "lane": "산업통상부",
+    "stage": "G2 비용·협약",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산업통상부",
+    "action": "관계기관·공공기관 공급방안 조정에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "output_documents": [
+     "기관별 공급·재원 조정결과"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+      "article": "제14조제3항",
+      "text": "반도체클러스터의 조성·운영을 지원하기 위하여 관련 중앙행정기관·지방자치단체·입주 기업·기관 등이 참여하는 지원협의체를 구성할 수 있다."
+     }
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "지원 필요성·공급능력·사업비 검토 완료 결과가 '관계기관·공공기관 공급방안 조정' 단계로 인계될 때",
+     "completion_condition": "'관계기관·공공기관 공급방안 조정' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "지원 타당성 검토서"
+     ],
+     "completion_evidence": [
+      "기관별 공급·재원 조정결과"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
+   },
+   {
+    "id": "P05",
+    "name": "기반시설 비용지원·분담 결정",
+    "lane": "산업통상부",
+    "stage": "G2 비용·협약",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산업통상부",
+    "action": "기반시설 비용지원·분담 결정에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "output_documents": [
+     "비용지원·분담 결정서"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+      "article": "제14조제1항",
+      "text": "비용의 전부 또는 일부를 대통령령으로 정하는 기준에 따라 우선 지원한다."
+     },
+     {
+      "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+      "article": "제20조",
+      "text": "지원 대상 시설의 범위."
+     }
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "관계기관·공공기관 공급방안 조정 완료 결과가 '기반시설 비용지원·분담 결정' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 비용지원·분담 결정서",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "기관별 공급·재원 조정결과"
+     ],
+     "completion_evidence": [
+      "비용지원·분담 결정서"
+     ],
+     "handoff_recipients": [
+      "기반시설 공공기관"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
+   },
+   {
+    "id": "P06",
+    "name": "기반시설 공공기관 실시협약 체결",
+    "lane": "기반시설 공공기관",
+    "stage": "G2 비용·협약",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기반시설 공공기관",
+    "action": "기반시설 공공기관 실시협약 체결에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "output_documents": [
+     "기반시설 실시협약",
+     "공급 일정표"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+      "article": "제14조제3항",
+      "text": "지원협의체 구성 근거. 공공기관과의 실시협약 자체를 정한 조문은 이 법에 없다."
+     },
+     {
+      "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+      "article": "제18조제1항",
+      "text": "정부는 전력망·용수망·도로망의 설치·확충에 관하여 필요한 사항을 전력수급기본계획·국가수도기본계획·도로건설관리계획에 각각 반영하여야 한다."
+     }
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "기반시설 비용지원·분담 결정 완료 결과가 '기반시설 공공기관 실시협약 체결' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 기반시설 실시협약, 공급 일정표",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "비용지원·분담 결정서"
+     ],
+     "completion_evidence": [
+      "기반시설 실시협약",
+      "공급 일정표"
+     ],
+     "handoff_recipients": [
+      "기획재정부·관계기관"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
+   },
+   {
+    "id": "P07",
+    "name": "국가·공공기관 예비타당성조사 적용경로 판정",
+    "lane": "기획재정부·관계기관",
+    "stage": "G3 예타특례",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기획재정부·관계기관",
+    "action": "국가·공공기관 예비타당성조사 적용경로 판정에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "output_documents": [
+     "예비타당성조사 적용경로 판정서"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+      "article": "제24조제1항",
+      "text": "위원회의 심의·의결을 거친 경우 산업기반시설 조성 사업 등을 예비타당성조사 대상 사업으로 우선 선정할 수 있다."
+     },
+     {
+      "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+      "article": "제25조제1항",
+      "text": "공기업·준정부기관의 장은 위원회의 심의·의결을 거쳐 신속 추진 필요성이 인정된 경우 재정경제부장관에게 예비타당성조사 면제를 신청할 수 있다."
+     }
+    ],
+    "agent": {
+     "trigger_event": "supplement.requested",
+     "trigger_condition": "보완·재수행이 결정되어 '국가·공공기관 예비타당성조사 적용경로 판정' 단계로 회귀할 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 예비타당성조사 적용경로 판정서",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "기반시설 실시협약",
+      "공급 일정표",
+      "예타 면제·단축 심의결과"
+     ],
+     "completion_evidence": [
+      "예비타당성조사 적용경로 판정서"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
+   },
+   {
+    "id": "P08",
+    "name": "예비타당성조사 면제·기간단축 심의",
+    "lane": "기획재정부·관계기관",
+    "stage": "G3 예타특례",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "기획재정부·관계기관",
+    "action": "예비타당성조사 면제·기간단축 심의에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "output_documents": [
+     "예타 면제·단축 심의결과"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+      "article": "제24조",
+      "text": "예비타당성조사에 관한 특례."
+     },
+     {
+      "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+      "article": "제25조제2항",
+      "text": "재정경제부장관은 관계 전문가의 자문을 거쳐 면제 여부를 결정하고 기관장에게 통보하여야 한다."
+     },
+     {
+      "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+      "article": "제26조제2항",
+      "text": "재정경제부장관은 면제 신청을 받은 경우 30일 이내에 면제 여부를 통보해야 하며, 부득이한 경우 15일 이내의 범위에서 한 차례 연장할 수 있다."
+     }
+    ],
+    "deadline": "면제 신청을 받은 날부터 30일 이내(1회 15일 연장)",
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "국가·공공기관 예비타당성조사 적용경로 판정 완료 결과가 '예비타당성조사 면제·기간단축 심의' 단계로 인계될 때",
+     "completion_condition": "'예비타당성조사 면제·기간단축 심의' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "예비타당성조사 적용경로 판정서"
+     ],
+     "completion_evidence": [
+      "예타 면제·단축 심의결과"
+     ],
+     "handoff_recipients": [
+      "산업통상부"
+     ],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "면제 신청을 받은 날부터 30일 이내(1회 15일 연장)"
+     },
+     "derivation": "existing-data-and-graph"
+    }
+   },
+   {
+    "id": "P09",
+    "name": "인허가 의제목록·실체요건 패키지 확정",
+    "lane": "산업통상부",
+    "stage": "G4 인허가 패키지",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산업통상부",
+    "action": "인허가 의제목록·실체요건 패키지 확정에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "output_documents": [
+     "인허가 의제목록",
+     "실체요건 충족표"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+      "article": "제26조",
+      "text": "산업입지법 제21조·산업집적법 제13조의2에 따라 의제되는 사항, 농어촌도로 정비법 제18조 점용허가, 국가유산영향진단법 제9조제1항제2호 영향진단이 의제된다."
+     }
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "예비타당성조사 면제·기간단축 심의 완료 결과가 '인허가 의제목록·실체요건 패키지 확정' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 인허가 의제목록, 실체요건 충족표",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "예타 면제·단축 심의결과"
+     ],
+     "completion_evidence": [
+      "인허가 의제목록",
+      "실체요건 충족표"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
+   },
+   {
+    "id": "P10",
+    "name": "인허가 신속처리 요청·처리계획·결과 통보",
+    "lane": "산업통상부",
+    "stage": "G5 신속처리",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "산업통상부",
+    "action": "인허가 신속처리 요청·처리계획·결과 통보에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "output_documents": [
+     "신속처리 요청서",
+     "기관별 처리계획",
+     "처리결과 통보서"
+    ],
+    "confidence": 0.9,
+    "legal_basis": [
+     {
+      "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+      "article": "제27조제1항",
+      "text": "인·허가 등이 지연되어 조성·운영에 현저한 지장을 초래할 우려가 있는 경우 산업통상부장관에게 신속한 처리를 신청할 수 있다."
+     },
+     {
+      "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+      "article": "제27조제3항",
+      "text": "요청을 받은 인·허가권자는 처리 계획을 15일 이내에 회신하여야 하며, 자료 보완 기간은 산입하지 않되 30일 이내에는 회신하여야 한다."
+     },
+     {
+      "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+      "article": "제27조제4항",
+      "text": "처리 계획을 제출한 인·허가권자는 제출일부터 15일 이내에 처리 결과를 사업시행자에게 통보하여야 한다."
+     },
+     {
+      "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+      "article": "제27조제5항",
+      "text": "회신·통보 기한을 지키지 않으면 요청이 있은 날부터 60일이 지난 날에 처리가 완료된 것으로 본다."
+     },
+     {
+      "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+      "article": "제27조",
+      "text": "신청서 첨부서류, 인·허가권자 의견 제출 기간(15일, 15일 연장), 위원회 심의 고려사항, 결과통보서 서식을 정한다."
+     }
+    ],
+    "deadline": "처리 계획 회신은 요청을 받은 날부터 15일 이내(자료 보완 기간 제외, 최대 30일), 처리 결과 통보는 계획 제출일부터 15일 이내",
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "인허가 의제목록·실체요건 패키지 확정 완료 결과가 '인허가 신속처리 요청·처리계획·결과 통보' 단계로 인계될 때",
+     "completion_condition": "'인허가 신속처리 요청·처리계획·결과 통보' 통지와 송달·수령 기록이 남을 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "인허가 의제목록",
+      "실체요건 충족표"
+     ],
+     "completion_evidence": [
+      "신속처리 요청서",
+      "기관별 처리계획",
+      "처리결과 통보서"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "처리 계획 회신은 요청을 받은 날부터 15일 이내(자료 보완 기간 제외, 최대 30일), 처리 결과 통보는 계획 제출일부터 15일 이내"
+     },
+     "derivation": "existing-data-and-graph"
+    }
+   }
+  ],
+  "edges": [
+   {
+    "id": "E01",
+    "source": "P01",
+    "target": "P02",
+    "type": "sequence",
+    "label": null,
+    "agent_transition": {
+     "condition": "'전력·용수·도로·폐수 산업기반시설 수요 확정' 완료 결과가 '산업기반시설 지원계획·비용지원 신청' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "사업시행자·입주기업",
+      "to_actor": "사업시행자·입주기업",
+      "documents": [
+       "산업기반시설 수요서",
+       "단계별 공급계획"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   },
+   {
+    "id": "E02",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": null,
+    "agent_transition": {
+     "condition": "'산업기반시설 지원계획·비용지원 신청' 완료 결과가 '지원 필요성·공급능력·사업비 검토' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "사업시행자·입주기업",
+      "to_actor": "산업통상부",
+      "documents": [
+       "기반시설 지원신청서",
+       "비용분담안"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   },
+   {
+    "id": "E03",
+    "source": "P03",
+    "target": "P04",
+    "type": "sequence",
+    "label": null,
+    "agent_transition": {
+     "condition": "'지원 필요성·공급능력·사업비 검토' 완료 결과가 '관계기관·공공기관 공급방안 조정' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "산업통상부",
+      "to_actor": "산업통상부",
+      "documents": [
+       "지원 타당성 검토서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   },
+   {
+    "id": "E04",
+    "source": "P04",
+    "target": "P05",
+    "type": "sequence",
+    "label": null,
+    "agent_transition": {
+     "condition": "'관계기관·공공기관 공급방안 조정' 완료 결과가 '기반시설 비용지원·분담 결정' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "산업통상부",
+      "to_actor": "산업통상부",
+      "documents": [
+       "기관별 공급·재원 조정결과"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   },
+   {
+    "id": "E05",
+    "source": "P05",
+    "target": "P06",
+    "type": "sequence",
+    "label": null,
+    "agent_transition": {
+     "condition": "'기반시설 비용지원·분담 결정' 완료 결과가 '기반시설 공공기관 실시협약 체결' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "산업통상부",
+      "to_actor": "기반시설 공공기관",
+      "documents": [
+       "비용지원·분담 결정서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   },
+   {
+    "id": "E06",
+    "source": "P06",
+    "target": "P07",
+    "type": "sequence",
+    "label": null,
+    "agent_transition": {
+     "condition": "'기반시설 공공기관 실시협약 체결' 완료 결과가 '국가·공공기관 예비타당성조사 적용경로 판정' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "기반시설 공공기관",
+      "to_actor": "기획재정부·관계기관",
+      "documents": [
+       "기반시설 실시협약",
+       "공급 일정표"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   },
+   {
+    "id": "E07",
+    "source": "P07",
+    "target": "P08",
+    "type": "sequence",
+    "label": null,
+    "agent_transition": {
+     "condition": "'국가·공공기관 예비타당성조사 적용경로 판정' 완료 결과가 '예비타당성조사 면제·기간단축 심의' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "기획재정부·관계기관",
+      "to_actor": "기획재정부·관계기관",
+      "documents": [
+       "예비타당성조사 적용경로 판정서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   },
+   {
+    "id": "E08",
+    "source": "P08",
+    "target": "P09",
+    "type": "sequence",
+    "label": null,
+    "agent_transition": {
+     "condition": "'예비타당성조사 면제·기간단축 심의' 완료 결과가 '인허가 의제목록·실체요건 패키지 확정' 단계로 인계될 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "기획재정부·관계기관",
+      "to_actor": "산업통상부",
+      "documents": [
+       "예타 면제·단축 심의결과"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   },
+   {
+    "id": "E09",
+    "source": "P09",
+    "target": "P10",
+    "type": "sequence",
+    "label": null,
+    "agent_transition": {
+     "condition": "'인허가 의제목록·실체요건 패키지 확정' 완료 결과가 '인허가 신속처리 요청·처리계획·결과 통보' 단계로 인계될 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "산업통상부",
+      "to_actor": "산업통상부",
+      "documents": [
+       "인허가 의제목록",
+       "실체요건 충족표"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   },
+   {
+    "id": "L01",
+    "source": "P08",
+    "target": "P07",
+    "type": "loop",
+    "label": "특례요건 보완",
+    "agent_transition": {
+     "condition": "특례요건 보완",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "기획재정부·관계기관",
+      "to_actor": "기획재정부·관계기관",
+      "documents": [
+       "예타 면제·단축 심의결과"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   },
+   {
+    "id": "M02",
+    "source": "P09",
+    "target": "P10",
+    "type": "message",
+    "label": "의제자료 인계",
+    "agent_transition": {
+     "condition": "의제자료 인계",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "산업통상부",
+      "to_actor": "산업통상부",
+      "documents": [
+       "인허가 의제목록",
+       "실체요건 충족표"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   }
+  ],
+  "warnings": [
+   "법제처 국가법령정보 API로 2026-08-16 현재 법령 식별자와 핵심 조문을 대조했다.",
+   "프로젝트별 적용 여부와 세부 제출물은 사업주체·시설규모·공급방식·입지 및 시행령 문턱에 따라 달라지므로 실제 신청 전에 다시 판정해야 한다."
+  ],
+  "agent_readiness": {
+   "contract_version": "1.1.0",
+   "level": "R2",
+   "mode": "next-action",
+   "assessed_at": "2026-09-01",
+   "assessment_method": "스키마 검증·그래프 파생·전이 수동 대조·법제처 DRF API 직접 대조",
+   "live_legal_check": "required-before-use",
+   "last_live_check": {
+    "checked_at": "2026-09-01",
+    "method": "law.go.kr-DRF-direct",
+    "status": "passed",
+    "citation_fingerprint": "sha256:f64440323c67c0573ac463d703c27986aedf8919f631ad49c958192869f6bced",
+    "sources_checked": 2,
+    "source_failures": 0,
+    "article_references": 17,
+    "verified_references": 17,
+    "missing_references": [],
+    "uncheckable_references": [],
+    "verified_node_ids": [
+     "P01",
+     "P02",
+     "P03",
+     "P04",
+     "P05",
+     "P06",
+     "P07",
+     "P08",
+     "P09",
+     "P10"
+    ],
+    "unverified_node_ids": [],
+    "source_results": [
+     {
+      "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+      "source_type": "statute",
+      "source_id": "015044",
+      "official_url": "https://law.go.kr/법령/반도체산업경쟁력강화및지원에관한특별법",
+      "requested_articles": [
+       "제14조",
+       "제18조",
+       "제24조",
+       "제25조",
+       "제26조",
+       "제27조"
+      ],
+      "verified_articles": [
+       "제14조",
+       "제18조",
+       "제24조",
+       "제25조",
+       "제26조",
+       "제27조"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+      "version_key": "0150442026060221738",
+      "promulgated_on": "2026-06-02",
+      "effective_on": "2026-08-11"
+     },
+     {
+      "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+      "source_type": "statute",
+      "source_id": "015185",
+      "official_url": "https://law.go.kr/법령/반도체산업경쟁력강화및지원에관한특별법시행령",
+      "requested_articles": [
+       "제20조",
+       "제26조",
+       "제27조"
+      ],
+      "verified_articles": [
+       "제20조",
+       "제26조",
+       "제27조"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+      "version_key": "0151852026081036564",
+      "promulgated_on": "2026-08-10",
+      "effective_on": "2026-08-11"
+     }
+    ]
+   },
+   "actionable_node_ids": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P08",
+    "P09",
+    "P10"
+   ],
+   "reference_only_node_ids": [],
+   "blockers": [],
+   "metrics": {
+    "nodes": 10,
+    "edges": 11,
+    "node_contract_coverage": 1,
+    "transition_contract_coverage": 1,
+    "explicit_basis_coverage": 1,
+    "output_document_coverage": 1,
+    "low_confidence_nodes": 0,
+    "template_like_nodes": 0,
+    "deadline_review_nodes": 0,
+    "field_verification_items": 4
+   }
   }
+ },
+ "verification": {
+  "status": "article-verified",
+  "verifiedAt": "2026-09-01",
+  "method": "국가법령정보센터 DRF API 현행 원문 대조(법률·시행령 조문 전문)",
+  "scope": "법률 8개 조항과 시행령 3개 조항의 조문 전문을 읽고 노드별 행위와 대조했다. 조 단위 인용을 항 단위로 정밀화했고, 인용 오류 2건을 정정했다. 관계기관 공급방안 조정의 근거를 제18조에서 지원협의체를 정한 제14조제3항으로 바꿨고, 인허가 신속처리 노드에 달려 있던 제28조(수도권 공장건축 총허용량)를 제27조 각 항으로 교체했다. 산업통상부령 서식은 검증 범위에서 제외했다.",
+  "notes": [
+   "반도체산업 경쟁력 강화 및 지원에 관한 특별법(법령ID 015044)은 2026-08-11 시행본을 기준으로 했다.",
+   "같은 법 시행령(법령ID 015185)은 2026-08-11 시행본을 기준으로 했다.",
+   "공공기관과의 실시협약 자체를 정한 조문은 이 법에 없다. 제14조제3항 지원협의체가 관계기관 조정의 법정 근거다."
+  ],
+  "sources": [
+   {
+    "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+    "kind": "법률",
+    "sourceType": "statute",
+    "officialName": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+    "lawId": "015044",
+    "promulgatedOn": "2026-06-02",
+    "effectiveOn": "2026-08-11",
+    "officialUrl": "https://law.go.kr/법령/반도체산업경쟁력강화및지원에관한특별법",
+    "mst": "286559"
+   },
+   {
+    "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+    "lawId": "015185",
+    "effectiveOn": "2026-08-11",
+    "officialUrl": "https://law.go.kr/법령/반도체산업경쟁력강화및지원에관한특별법시행령",
+    "promulgatedOn": "2026-08-10",
+    "mst": "288635"
+   }
+  ],
+  "articleVerification": {
+   "checkedAt": "2026-08-16",
+   "method": "법제처 API 핵심조문 표본 대조; 전체 인용 자동검증은 미실행",
+   "citationEntries": 0,
+   "explicitCitationEntries": 0,
+   "articleReferences": 0,
+   "verifiedReferences": 0,
+   "missingReferences": 0,
+   "uncheckableReferences": 0
+  }
+ }
 }

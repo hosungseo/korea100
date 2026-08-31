@@ -7,6 +7,11 @@ export const AGENT_READY_SLUGS = Object.freeze([
   "administrative-fine-objection-court",
   "national-rd-fund-use-settlement",
   "information-disclosure",
+  // 광주 반도체 클러스터의 열린 전선이 끌어 쓰는 제도 (2026-09-01 승격)
+  "semiconductor-cluster-designation-coordination",
+  "semiconductor-infrastructure-support-fast-track",
+  "national-strategic-industry-complex",
+  "one-stop-permit-consultation",
 ]);
 
 export const DEFAULT_INSTITUTION_DIR = fileURLToPath(

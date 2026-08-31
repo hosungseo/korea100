@@ -130,7 +130,28 @@
       "article": "제26조(특화단지의 지정 요건 및 절차)",
       "text": "특화단지의 지정 요건 및 절차"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "procedure.started",
+     "trigger_condition": "해당 절차가 개시되고 '특화단지 육성계획 작성' 수행 요건이 확인될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 육성계획",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [],
+     "completion_evidence": [
+      "육성계획"
+     ],
+     "handoff_recipients": [
+      "시·도·관계기관"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P02",
@@ -152,7 +173,30 @@
       "article": "제26조(특화단지의 지정 요건 및 절차)",
       "text": "특화단지의 지정 요건 및 절차"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "특화단지 육성계획 작성 완료 결과가 '지자체·사업자 사전 협의' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 사전협의",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "육성계획"
+     ],
+     "completion_evidence": [
+      "사전협의"
+     ],
+     "handoff_recipients": [
+      "신청인(기업·시·도·부처)"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P03",
@@ -179,7 +223,30 @@
       "article": "제26조(특화단지의 지정 요건 및 절차)",
       "text": "특화단지의 지정 요건 및 절차"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "지자체·사업자 사전 협의 완료 결과가 '지정 신청' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 신청서",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "사전협의"
+     ],
+     "completion_evidence": [
+      "신청서"
+     ],
+     "handoff_recipients": [
+      "산업통상부"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P04",
@@ -201,7 +268,30 @@
       "article": "제26조(특화단지의 지정 요건 및 절차)",
       "text": "특화단지의 지정 요건 및 절차"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "application.received",
+     "trigger_condition": "지정 신청 완료 결과가 '접수·요건 검토' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 접수",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "신청서"
+     ],
+     "completion_evidence": [
+      "접수"
+     ],
+     "handoff_recipients": [
+      "시·도·관계기관"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P05",
@@ -223,7 +313,32 @@
       "article": "제16조(전략산업 특화단지의 지정)",
       "text": "전략산업 특화단지의 지정"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "supplement.requested",
+     "trigger_condition": "보완·재수행이 결정되어 '관계부처·지자체 협의' 단계로 회귀할 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 협의",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "접수",
+      "보완"
+     ],
+     "completion_evidence": [
+      "협의"
+     ],
+     "handoff_recipients": [
+      "신청인(기업·시·도·부처)",
+      "산업통상부"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P06",
@@ -245,7 +360,30 @@
       "article": "제26조(특화단지의 지정 요건 및 절차)",
       "text": "특화단지의 지정 요건 및 절차"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "supplement.requested",
+     "trigger_condition": "보완·재수행이 결정되어 '보완 통지 수령·재제출' 단계로 회귀할 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 보완",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "협의"
+     ],
+     "completion_evidence": [
+      "보완"
+     ],
+     "handoff_recipients": [
+      "시·도·관계기관"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P07",
@@ -267,7 +405,30 @@
       "article": "제16조(전략산업 특화단지의 지정)",
       "text": "전략산업 특화단지의 지정"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "관계부처·지자체 협의 완료 결과가 '위원회 심의 상정' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 안건",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "협의"
+     ],
+     "completion_evidence": [
+      "안건"
+     ],
+     "handoff_recipients": [
+      "국가전략산업위원회"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P08",
@@ -289,7 +450,30 @@
       "article": "제16조(전략산업 특화단지의 지정)",
       "text": "전략산업 특화단지의 지정"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "위원회 심의 상정 완료 결과가 '위원회 심의·의결' 단계로 인계될 때",
+     "completion_condition": "'위원회 심의·의결' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "안건"
+     ],
+     "completion_evidence": [
+      "의결"
+     ],
+     "handoff_recipients": [
+      "신청인(기업·시·도·부처)"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P09",
@@ -316,7 +500,31 @@
       "article": "제26조(특화단지의 지정 요건 및 절차)",
       "text": "산업통상부장관은 신청을 받으면 위원회 심의를 거쳐 지정 여부를 결정하고 그 결과를 통보하며(제6항), 지정에 필요한 사항을 고시한다(제7항)."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "notice.received",
+     "trigger_condition": "위원회 심의·의결 완료 결과가 '지정 고시·결과 통지 수령' 단계로 인계될 때",
+     "completion_condition": "'지정 고시·결과 통지 수령' 통지와 송달·수령 기록이 남을 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "의결"
+     ],
+     "completion_evidence": [
+      "지정 고시"
+     ],
+     "handoff_recipients": [
+      "사업시행자·입주기관",
+      "시·도·관계기관"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P10",
@@ -343,7 +551,28 @@
       "article": "제6조(국가산업단지의 지정)",
       "text": "국가산업단지의 지정"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "지정 고시·결과 통지 수령 완료 결과가 '산단법 경로 조성' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 조성",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "지정 고시"
+     ],
+     "completion_evidence": [
+      "조성"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P11",
@@ -370,7 +599,30 @@
       "article": "제30조(다른 법률에 따른 인가ㆍ허가 등의 신속처리 특례)",
       "text": "다른 법률에 따른 인가ㆍ허가 등의 신속처리 특례"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "산단법 경로 조성 완료 결과가 '인허가 신속처리 신청' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 신속처리 신청",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "조성"
+     ],
+     "completion_evidence": [
+      "신속처리 신청"
+     ],
+     "handoff_recipients": [
+      "산업통상부"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P12",
@@ -392,7 +644,30 @@
       "article": "제19조(다른 법률에 따른 인ㆍ허가등의 신속처리 특례)",
       "text": "다른 법률에 따른 인ㆍ허가등의 신속처리 특례"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "인허가 신속처리 신청 완료 결과가 '위원회 심의 후 신속처리 요청' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 요청",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "신속처리 신청"
+     ],
+     "completion_evidence": [
+      "요청"
+     ],
+     "handoff_recipients": [
+      "인·허가권자"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P13",
@@ -415,7 +690,30 @@
       "text": "다른 법률에 따른 인ㆍ허가등의 신속처리 특례"
      }
     ],
-    "deadline": "15일(최대 30일) §19③"
+    "deadline": "요청을 받은 날부터 15일 이내 회신(자료 보완 기간 제외, 최대 30일)",
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "위원회 심의 후 신속처리 요청 완료 결과가 '처리계획 회신' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 처리계획",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "요청"
+     ],
+     "completion_evidence": [
+      "처리계획"
+     ],
+     "handoff_recipients": [
+      "사업시행자·입주기관"
+     ],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "요청을 받은 날부터 15일 이내 회신(자료 보완 기간 제외, 최대 30일)"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P14",
@@ -443,7 +741,30 @@
       "text": "다른 법률에 따른 인가ㆍ허가 등의 신속처리 특례"
      }
     ],
-    "deadline": "15일·60일 의제 §19④⑤"
+    "deadline": "처리 계획 제출일부터 15일 이내 통보(1회 15일 연장), 기한 도과 시 요청일부터 60일이 지난 날 처리 완료 의제",
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "처리계획 회신 완료 결과가 '처리 결과 통보 수령' 단계로 인계될 때",
+     "completion_condition": "'처리 결과 통보 수령' 통지와 송달·수령 기록이 남을 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "처리계획"
+     ],
+     "completion_evidence": [
+      "결과통보"
+     ],
+     "handoff_recipients": [
+      "산업통상부"
+     ],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "처리 계획 제출일부터 15일 이내 통보(1회 15일 연장), 기한 도과 시 요청일부터 60일이 지난 날 처리 완료 의제"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P15",
@@ -470,7 +791,30 @@
       "article": "제31조(특화단지 조성ㆍ운영 지원)",
       "text": "특화단지 조성ㆍ운영 지원"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "처리 결과 통보 수령 완료 결과가 '조성·운영 지원' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 지원",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "결과통보"
+     ],
+     "completion_evidence": [
+      "지원"
+     ],
+     "handoff_recipients": [
+      "사업시행자·입주기관"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P16",
@@ -497,7 +841,30 @@
       "article": "제33조(특화단지 입주기업 지원)",
       "text": "특화단지 입주기업 지원"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "notice.received",
+     "trigger_condition": "조성·운영 지원 완료 결과가 '입주 지원 신청·결과 수령' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 지원 신청·결정",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "지원"
+     ],
+     "completion_evidence": [
+      "지원 신청·결정"
+     ],
+     "handoff_recipients": [
+      "신청인(기업·시·도·부처)"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P17",
@@ -524,7 +891,28 @@
       "article": "제34조(민원의 신속처리 특례)",
       "text": "민원의 신속처리 특례"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "입주 지원 신청·결과 수령 완료 결과가 '전략기술 민원 제기·처리' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 민원",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "지원 신청·결정"
+     ],
+     "completion_evidence": [
+      "민원"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P18",
@@ -551,7 +939,30 @@
       "article": "제28조(특화단지의 지정 해제)",
       "text": "특화단지의 지정 해제"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "지정 고시·결과 통지 수령 완료 결과가 '지정 해제 전 지자체 의견' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 의견",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "지정 고시"
+     ],
+     "completion_evidence": [
+      "의견"
+     ],
+     "handoff_recipients": [
+      "국가전략산업위원회"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P19",
@@ -578,7 +989,28 @@
       "article": "제28조(특화단지의 지정 해제)",
       "text": "특화단지의 지정 해제"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "위원회 해제 심의 완료 결과가 '해제 심의·공고·통보 수령' 단계로 인계될 때",
+     "completion_condition": "'해제 심의·공고·통보 수령' 통지와 송달·수령 기록이 남을 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "해제 의결"
+     ],
+     "completion_evidence": [
+      "해제 공고"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P20",
@@ -605,7 +1037,30 @@
       "article": "제28조(특화단지의 지정 해제)",
       "text": "특화단지의 지정 해제"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "지정 해제 전 지자체 의견 완료 결과가 '위원회 해제 심의' 단계로 인계될 때",
+     "completion_condition": "'위원회 해제 심의' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "의견"
+     ],
+     "completion_evidence": [
+      "해제 의결"
+     ],
+     "handoff_recipients": [
+      "신청인(기업·시·도·부처)"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    }
   ],
   "edges": [
@@ -614,140 +1069,380 @@
     "source": "P01",
     "target": "P02",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'특화단지 육성계획 작성' 완료 결과가 '지자체·사업자 사전 협의' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "신청인(기업·시·도·부처)",
+      "to_actor": "시·도·관계기관",
+      "documents": [
+       "육성계획"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E02",
     "source": "P02",
     "target": "P03",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'지자체·사업자 사전 협의' 완료 결과가 '지정 신청' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "시·도·관계기관",
+      "to_actor": "신청인(기업·시·도·부처)",
+      "documents": [
+       "사전협의"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E03",
     "source": "P03",
     "target": "P04",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'지정 신청' 완료 결과가 '접수·요건 검토' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "신청인(기업·시·도·부처)",
+      "to_actor": "산업통상부",
+      "documents": [
+       "신청서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E04",
     "source": "P04",
     "target": "P05",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'접수·요건 검토' 완료 결과가 '관계부처·지자체 협의' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "산업통상부",
+      "to_actor": "시·도·관계기관",
+      "documents": [
+       "접수"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E05",
     "source": "P05",
     "target": "P06",
     "type": "loop",
-    "label": "보완"
+    "label": "보완",
+    "agent_transition": {
+     "condition": "보완",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "시·도·관계기관",
+      "to_actor": "신청인(기업·시·도·부처)",
+      "documents": [
+       "협의"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E06",
     "source": "P06",
     "target": "P05",
     "type": "loop",
-    "label": "재협의"
+    "label": "재협의",
+    "agent_transition": {
+     "condition": "재협의",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "신청인(기업·시·도·부처)",
+      "to_actor": "시·도·관계기관",
+      "documents": [
+       "보완"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E07",
     "source": "P05",
     "target": "P07",
     "type": "sequence",
-    "label": "적합"
+    "label": "적합",
+    "agent_transition": {
+     "condition": "적합",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "시·도·관계기관",
+      "to_actor": "산업통상부",
+      "documents": [
+       "협의"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E08",
     "source": "P07",
     "target": "P08",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'위원회 심의 상정' 완료 결과가 '위원회 심의·의결' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "산업통상부",
+      "to_actor": "국가전략산업위원회",
+      "documents": [
+       "안건"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E09",
     "source": "P08",
     "target": "P09",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'위원회 심의·의결' 완료 결과가 '지정 고시·결과 통지 수령' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "국가전략산업위원회",
+      "to_actor": "신청인(기업·시·도·부처)",
+      "documents": [
+       "의결"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E10",
     "source": "P09",
     "target": "P10",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'지정 고시·결과 통지 수령' 완료 결과가 '산단법 경로 조성' 단계로 인계될 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "신청인(기업·시·도·부처)",
+      "to_actor": "사업시행자·입주기관",
+      "documents": [
+       "지정 고시"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E11",
     "source": "P10",
     "target": "P11",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'산단법 경로 조성' 완료 결과가 '인허가 신속처리 신청' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "사업시행자·입주기관",
+      "to_actor": "사업시행자·입주기관",
+      "documents": [
+       "조성"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E12",
     "source": "P11",
     "target": "P12",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'인허가 신속처리 신청' 완료 결과가 '위원회 심의 후 신속처리 요청' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "사업시행자·입주기관",
+      "to_actor": "산업통상부",
+      "documents": [
+       "신속처리 신청"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E13",
     "source": "P12",
     "target": "P13",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'위원회 심의 후 신속처리 요청' 완료 결과가 '처리계획 회신' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "산업통상부",
+      "to_actor": "인·허가권자",
+      "documents": [
+       "요청"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E14",
     "source": "P13",
     "target": "P14",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'처리계획 회신' 완료 결과가 '처리 결과 통보 수령' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "인·허가권자",
+      "to_actor": "사업시행자·입주기관",
+      "documents": [
+       "처리계획"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E15",
     "source": "P14",
     "target": "P15",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'처리 결과 통보 수령' 완료 결과가 '조성·운영 지원' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "사업시행자·입주기관",
+      "to_actor": "산업통상부",
+      "documents": [
+       "결과통보"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E16",
     "source": "P15",
     "target": "P16",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'조성·운영 지원' 완료 결과가 '입주 지원 신청·결과 수령' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "산업통상부",
+      "to_actor": "사업시행자·입주기관",
+      "documents": [
+       "지원"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E17",
     "source": "P16",
     "target": "P17",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'입주 지원 신청·결과 수령' 완료 결과가 '전략기술 민원 제기·처리' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "사업시행자·입주기관",
+      "to_actor": "신청인(기업·시·도·부처)",
+      "documents": [
+       "지원 신청·결정"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E18",
     "source": "P09",
     "target": "P18",
     "type": "sequence",
-    "label": "해제 사유"
+    "label": "해제 사유",
+    "agent_transition": {
+     "condition": "해제 사유",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "신청인(기업·시·도·부처)",
+      "to_actor": "시·도·관계기관",
+      "documents": [
+       "지정 고시"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E19",
     "source": "P18",
     "target": "P20",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'지정 해제 전 지자체 의견' 완료 결과가 '위원회 해제 심의' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "시·도·관계기관",
+      "to_actor": "국가전략산업위원회",
+      "documents": [
+       "의견"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E20",
     "source": "P20",
     "target": "P19",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'위원회 해제 심의' 완료 결과가 '해제 심의·공고·통보 수령' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "국가전략산업위원회",
+      "to_actor": "신청인(기업·시·도·부처)",
+      "documents": [
+       "해제 의결"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    }
   ],
   "warnings": [
@@ -762,7 +1457,162 @@
      "282935"
     ]
    }
-  ]
+  ],
+  "agent_readiness": {
+   "contract_version": "1.1.0",
+   "level": "R2",
+   "mode": "next-action",
+   "assessed_at": "2026-09-01",
+   "assessment_method": "스키마 검증·그래프 파생·전이 수동 대조·법제처 DRF API 직접 대조",
+   "live_legal_check": "required-before-use",
+   "last_live_check": {
+    "checked_at": "2026-09-01",
+    "method": "law.go.kr-DRF-direct",
+    "status": "passed",
+    "citation_fingerprint": "sha256:ad99f11411d4b604c79c7a4b11806545bad3a63a4adaf0dffb7fa41b40fc3c07",
+    "sources_checked": 3,
+    "source_failures": 0,
+    "article_references": 31,
+    "verified_references": 31,
+    "missing_references": [],
+    "uncheckable_references": [],
+    "verified_node_ids": [
+     "P01",
+     "P02",
+     "P03",
+     "P04",
+     "P05",
+     "P06",
+     "P07",
+     "P08",
+     "P09",
+     "P10",
+     "P11",
+     "P12",
+     "P13",
+     "P14",
+     "P15",
+     "P16",
+     "P17",
+     "P18",
+     "P19",
+     "P20"
+    ],
+    "unverified_node_ids": [],
+    "source_results": [
+     {
+      "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법 시행령",
+      "source_type": "statute",
+      "source_id": "014320",
+      "official_url": "https://law.go.kr/법령/국가첨단전략산업경쟁력강화및보호에관한특별조치법시행령",
+      "requested_articles": [
+       "제26조",
+       "제28조",
+       "제30조",
+       "제31조",
+       "제33조",
+       "제34조"
+      ],
+      "verified_articles": [
+       "제26조",
+       "제28조",
+       "제30조",
+       "제31조",
+       "제33조",
+       "제34조"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법 시행령",
+      "version_key": "0143202026012736055",
+      "promulgated_on": "2026-01-27",
+      "effective_on": "2026-02-01"
+     },
+     {
+      "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+      "source_type": "statute",
+      "source_id": "014238",
+      "official_url": "https://law.go.kr/법령/국가첨단전략산업경쟁력강화및보호에관한특별조치법",
+      "requested_articles": [
+       "제16조",
+       "제17조",
+       "제19조",
+       "제20조",
+       "제21조",
+       "제23조"
+      ],
+      "verified_articles": [
+       "제16조",
+       "제17조",
+       "제19조",
+       "제20조",
+       "제21조",
+       "제23조"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+      "version_key": "0142382026060221738",
+      "promulgated_on": "2026-06-02",
+      "effective_on": "2026-06-02"
+     },
+     {
+      "law": "산업입지 및 개발에 관한 법률",
+      "source_type": "statute",
+      "source_id": "001839",
+      "official_url": "https://law.go.kr/법령/산업입지및개발에관한법률",
+      "requested_articles": [
+       "제6조"
+      ],
+      "verified_articles": [
+       "제6조"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "산업입지 및 개발에 관한 법률",
+      "version_key": "0018392025100121065",
+      "promulgated_on": "2025-10-01",
+      "effective_on": "2025-10-01"
+     }
+    ]
+   },
+   "actionable_node_ids": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P08",
+    "P09",
+    "P10",
+    "P11",
+    "P12",
+    "P13",
+    "P14",
+    "P15",
+    "P16",
+    "P17",
+    "P18",
+    "P19",
+    "P20"
+   ],
+   "reference_only_node_ids": [],
+   "blockers": [],
+   "metrics": {
+    "nodes": 20,
+    "edges": 20,
+    "node_contract_coverage": 1,
+    "transition_contract_coverage": 1,
+    "explicit_basis_coverage": 1,
+    "output_document_coverage": 1,
+    "low_confidence_nodes": 0,
+    "template_like_nodes": 0,
+    "deadline_review_nodes": 0,
+    "field_verification_items": 6
+   }
+  }
  },
  "verification": {
   "status": "article-verified",
@@ -771,7 +1621,8 @@
   "scope": "법적 근거 3건 중 공식 원문 3건을 연결했다. 캔버스와 절차 노드의 명시 조문 50건 가운데 50건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
    "L3 특화단지: 수령·해제 의견",
-   "MSTs: 286519,282935"
+   "MSTs: 286519,282935",
+   "2026-09-01 재대조: 제19조제3항~제5항의 회신 15일(최대 30일)·통보 15일(1회 15일 연장)·60일 의제를 기한 표기에 반영했다."
   ],
   "sources": [
    {

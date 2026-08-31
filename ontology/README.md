@@ -43,7 +43,7 @@ node ontology/scripts/derive-case.mjs --slug <제도 slug> --case-id <ID> --as-o
 
 **3호** 광주 군공항 부지 반도체 클러스터 (`gwangju-semiconductor-cluster`) — 케이스 `GSC-2026-0901-001`.
 마일스톤 54·아티팩트 53·참조 제도 108·관계 462. 완료 2 / 진행 1 / 착수가능 10 / 차단 36 / 경로미확정 5.
-참조 제도가 전부 미평가라 마일스톤 내부 절차는 답하지 않는다 → [DEMO](samples/gwangju-semiconductor-cluster.DEMO.md)
+2026-09-01 임계경로 제도 4종을 R2로 올려 **N03 반도체클러스터 지정**이 처음으로 다음 행동 계산 대상이 됐다 → [DEMO](samples/gwangju-semiconductor-cluster.DEMO.md)
 
 ```bash
 node ontology/scripts/derive-project-case.mjs --project gwangju-semiconductor-cluster \
@@ -67,7 +67,8 @@ python3 ontology/scripts/demo_query.py "부분공개 통지 왔는데 뭐 하면
 ```
 
 ## 다음
-- 반도체 클러스터 임계경로 제도부터 R2 승격 (N02·N03·N18이 끌어 쓰는 제도가 우선)
+- N02를 열려면 예타 계열 3종(preliminary-feasibility-study, pfs-exemption-fast-track, local-finance-investment-review-feasibility) R2 승격 필요
+- N23 용수·도로는 5종이 미평가라 가장 멀다
 - 남은 R2 제도 2종에 케이스 추가 (과태료 이의제기·법원재판, 국가연구개발비 정산)
 - 제도·오버레이 변경 시 케이스 재파생을 CI로 강제 (지금은 `--remerge` 수동 실행)
 
@@ -78,7 +79,7 @@ python3 ontology/scripts/demo_query.py "부분공개 통지 왔는데 뭐 하면
 - MCP 도구: `load_ontology_case`, `get_case_state`, `query_case`, `check_case_linkage`, `get_project_status`, `explain_blocked_milestone`
 - 패킷 계약: `mcp/src/packet-contract.mjs` — R2 경로(`create_action_packet`)와 온톨로지 경로가 같은 ActionPacket 계약을 통과해야 한다
 - 케이스 대조: `mcp/src/case-link.mjs` — 케이스 그래프가 제도 업무구조도와 어긋나면 드러낸다
-- 테스트: `cd mcp && npm test` (58건)
+- 테스트: `cd mcp && npm test` (59건)
 - 데모: `node mcp/scripts/ontology-query-once.mjs [--case samples/<파일>] "<질문>"`
 
 ## 제도 층과의 관계
@@ -94,7 +95,8 @@ python3 ontology/scripts/demo_query.py "부분공개 통지 왔는데 뭐 하면
 | 정보공개청구 | R2 (next-action) | 1호 | true |
 | 과태료 사전통지·의견제출 | R2 (next-action) | 2호 | true |
 | 과태료 이의제기·법원재판, 국가연구개발비 정산 | R2 (next-action) | 없음 | — |
-| 광주 반도체 클러스터 참조 108종 | 미평가 | 3호(프로젝트) | false |
+| 반도체클러스터 지정·조정, 반도체 기반시설 신속처리, 국가첨단전략산업 특화단지, 인허가 일괄협의 | R2 (2026-09-01 승격) | 3호가 참조 | 마일스톤 N03만 true |
+| 광주 반도체 클러스터 참조 나머지 104종 | 미평가 | 3호(프로젝트) | false |
 
 정보공개청구는 2026-09-01에 R1에서 승격했다. 조문이 틀렸던 것이 아니라
 기한의 성격과 전이가 대조되지 않았던 것이다. 자세한 내용은

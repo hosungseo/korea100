@@ -17,6 +17,12 @@ export const SHOWCASE_INSTITUTIONS = [
   // 온톨로지 케이스(IDC-2026-0901-001)가 참조하는 제도.
   // 2026-09-01 연결선 26개 전이 조건·인계를 법제처 현행 원문에 수동 대조했다.
   { slug: "information-disclosure", transitionReviewed: true },
+  // 광주 반도체 클러스터(GSC-2026-0901-001)의 열린 전선이 끌어 쓰는 제도.
+  // 2026-09-01 연결선 48개를 반도체특별법·국가첨단전략산업법·행정기본법 현행 원문에 수동 대조했다.
+  { slug: "semiconductor-cluster-designation-coordination", transitionReviewed: true },
+  { slug: "semiconductor-infrastructure-support-fast-track", transitionReviewed: true },
+  { slug: "national-strategic-industry-complex", transitionReviewed: true },
+  { slug: "one-stop-permit-consultation", transitionReviewed: true },
 ];
 
 const SELECTION_REASONS = {
@@ -24,6 +30,10 @@ const SELECTION_REASONS = {
   "administrative-fine-objection-court": "행정청에서 법원으로 넘어가는 기관 간 인계 사례",
   "national-rd-fund-use-settlement": "법률·시행령·행정규칙을 함께 사용하는 복합 사례",
   "information-disclosure": "온톨로지 케이스 계층과 맞물리는 사례. 기한 성격과 전이를 재대조해 R2로 승격",
+  "semiconductor-cluster-designation-coordination": "광주 반도체 클러스터의 지정 게이트. 열려야 신속처리 경로가 열린다",
+  "semiconductor-infrastructure-support-fast-track": "전력·용수·도로 기반시설과 예타·인허가 신속처리 특례",
+  "national-strategic-industry-complex": "특화단지 지정과 인허가 신속처리. 반도체클러스터와 중복 지정 가능",
+  "one-stop-permit-consultation": "행정기본법 인허가의제 일반 절차. 여러 마일스톤이 공통으로 끌어 쓴다",
 };
 
 function institutionCount() {
