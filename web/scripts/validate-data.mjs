@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildProcessLaneGroups } from "../src/lib/process-layout.mjs";
+import { validateAgentInstitution } from "./lib/agent-readiness.mjs";
 
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const WEB_DIR = path.dirname(SCRIPT_DIR);
@@ -307,6 +308,10 @@ for (const { file, data: institution } of institutions) {
       const disconnected = [...nodeIds].filter((nodeId) => !visited.has(nodeId));
       fail(scope, `업무구조도에 고립된 노드가 있습니다 (${disconnected.join(", ")})`);
     }
+  }
+
+  for (const agentError of validateAgentInstitution(institution)) {
+    fail(`${scope}#agent`, agentError);
   }
 }
 

@@ -1,0 +1,1238 @@
+{
+  "ontology_version": "korea100.ontology.core.v0",
+  "institution_slug": "information-disclosure",
+  "institution_name": "정보공개청구",
+  "case_id": "IDC-2026-0901-001",
+  "as_of": "2026-09-01",
+  "source_institution_json": "web/data/institutions/information-disclosure.json",
+  "entities": [
+    {
+      "id": "case:IDC-2026-0901-001",
+      "type": "Case",
+      "label": "샘플 정보공개청구 건",
+      "status": "verified",
+      "attrs": {
+        "scenario": "부분공개 결정 후 청구인이 보완·이의를 고민하는 상태",
+        "claim_date": "2026-08-20"
+      }
+    },
+    {
+      "id": "inst:public-body-A",
+      "type": "Institution",
+      "label": "A공공기관(샘플)",
+      "status": "verified",
+      "attrs": {
+        "note": "데모용 가상 기관. 실제 기관명 아님."
+      }
+    },
+    {
+      "id": "role:claimant",
+      "type": "Role",
+      "label": "청구인",
+      "status": "verified"
+    },
+    {
+      "id": "role:processing-desk",
+      "type": "Role",
+      "label": "공공기관 처리부서",
+      "status": "verified"
+    },
+    {
+      "id": "role:disclosure-officer",
+      "type": "Role",
+      "label": "정보공개책임관",
+      "status": "verified"
+    },
+    {
+      "id": "role:disclosure-council",
+      "type": "Role",
+      "label": "정보공개심의회",
+      "status": "verified"
+    },
+    {
+      "id": "role:third-party",
+      "type": "Role",
+      "label": "제3자",
+      "status": "verified"
+    },
+    {
+      "id": "sys:open-go-kr",
+      "type": "System",
+      "label": "정보공개포털(open.go.kr)",
+      "status": "verified"
+    },
+    {
+      "id": "doc:claim-form",
+      "type": "Document",
+      "label": "정보공개 청구서",
+      "status": "verified",
+      "legal_basis": [
+        {
+          "law": "공공기관의 정보공개에 관한 법률",
+          "article": "제10조"
+        }
+      ]
+    },
+    {
+      "id": "doc:decision-notice",
+      "type": "Document",
+      "label": "공개여부 결정 통지서(부분공개)",
+      "status": "verified"
+    },
+    {
+      "id": "doc:supplement-request",
+      "type": "Document",
+      "label": "정보 특정 보완 요청 통지",
+      "status": "verified",
+      "attrs": {
+        "note": "실무상 특정 부족 시 보정 요구. 법령상 청구 요건 관련."
+      }
+    },
+    {
+      "id": "info:target-records",
+      "type": "InformationItem",
+      "label": "2025년 OO사업 내부 검토 회의자료",
+      "status": "verified"
+    },
+    {
+      "id": "dec:partial-disclosure",
+      "type": "Decision",
+      "label": "부분공개 결정",
+      "status": "verified",
+      "attrs": {
+        "outcome": "partial_disclosure",
+        "non_disclosure_grounds": [
+          "법 제9조제1항제5호(의사결정 과정 등) 일부 적용 주장"
+        ]
+      }
+    },
+    {
+      "id": "statute:info-disclosure-act",
+      "type": "Statute",
+      "label": "공공기관의 정보공개에 관한 법률",
+      "status": "verified",
+      "attrs": {
+        "lawId": "001357",
+        "url": "https://law.go.kr/법령/공공기관의정보공개에관한법률"
+      }
+    },
+    {
+      "id": "step:P01",
+      "type": "Step",
+      "label": "정보공개 청구서 작성·제출",
+      "status": "verified",
+      "legal_basis": [
+        {
+          "law": "공공기관의 정보공개에 관한 법률",
+          "article": "제10조",
+          "text": "청구인은 정보의 내용을 특정하여 방문·우편·팩스 또는 정보통신망으로 청구서를 제출한다."
+        },
+        {
+          "law": "공공기관의 정보공개에 관한 법률 시행령",
+          "article": "제6조제1항",
+          "text": "법 제10조의 위임에 따라 청구서는 직접 출석·우편·팩스·정보통신망으로 제출한다."
+        },
+        {
+          "law": "공공기관의 정보공개에 관한 법률 시행규칙",
+          "article": "제2조",
+          "text": "법 제10조제1항·영 제6조제1항에 따른 정보공개 청구서는 별지 제1호의2서식에 따른다(말로 하는 청구는 별지 제2호서식)."
+        }
+      ],
+      "attrs": {
+        "process_id": "P01",
+        "lane": "청구인",
+        "stage": "G0 청구",
+        "node_type": "task",
+        "deadline": "상시(청구권에 기한 없음)",
+        "actor": "청구인",
+        "output_documents": [
+          "정보공개 청구서"
+        ]
+      }
+    },
+    {
+      "id": "step:P02",
+      "type": "Step",
+      "label": "청구 접수·처리부서 지정",
+      "status": "verified",
+      "legal_basis": [
+        {
+          "law": "공공기관의 정보공개에 관한 법률",
+          "article": "제11조제1항",
+          "text": "공공기관은 청구를 받으면 청구서를 접수하고 처리 부서를 정한다."
+        },
+        {
+          "law": "공공기관의 정보공개에 관한 법률 시행령",
+          "article": "제6조제2항",
+          "text": "공공기관은 청구서를 접수하면 정보공개 처리대장에 기록하고 청구인에게 접수증을 발급한다(정보통신망 접수 등은 예외)."
+        }
+      ],
+      "attrs": {
+        "process_id": "P02",
+        "lane": "공공기관(처리부서)",
+        "stage": "G1 접수·이송",
+        "node_type": "task",
+        "deadline": "청구 당일 접수",
+        "actor": "공공기관 민원·주무부서",
+        "output_documents": [
+          "접수증",
+          "처리부서 지정"
+        ]
+      }
+    },
+    {
+      "id": "step:P03",
+      "type": "Gate",
+      "label": "대상정보 특정·소관 확인·이송 판단",
+      "status": "verified",
+      "legal_basis": [
+        {
+          "law": "공공기관의 정보공개에 관한 법률",
+          "article": "제11조제4항",
+          "text": "다른 공공기관이 보유·관리하는 정보인 경우 소관 기관으로 이송하고 청구인에게 통지한다."
+        }
+      ],
+      "attrs": {
+        "process_id": "P03",
+        "lane": "공공기관(처리부서)",
+        "stage": "G1 접수·이송",
+        "node_type": "gateway",
+        "deadline": "소관 아닐 때 지체 없이 이송",
+        "actor": "처리부서",
+        "output_documents": [
+          "정보 검색결과",
+          "이송 통지(해당 시)"
+        ]
+      }
+    },
+    {
+      "id": "step:P04",
+      "type": "Gate",
+      "label": "비공개 사유 판단(제9조)",
+      "status": "verified",
+      "legal_basis": [
+        {
+          "law": "공공기관의 정보공개에 관한 법률",
+          "article": "제9조",
+          "text": "공개가 원칙이며, 각 호의 비공개 대상정보에 해당하는 경우에 한하여 비공개할 수 있다."
+        }
+      ],
+      "attrs": {
+        "process_id": "P04",
+        "lane": "정보공개책임관",
+        "stage": "G2 공개여부결정",
+        "node_type": "gateway",
+        "deadline": "결정기한(10일) 내 판단",
+        "actor": "정보공개책임관",
+        "output_documents": [
+          "공개 여부 검토의견"
+        ]
+      }
+    },
+    {
+      "id": "step:P05",
+      "type": "Step",
+      "label": "정보공개심의회 심의",
+      "status": "unverified",
+      "legal_basis": [
+        {
+          "law": "공공기관의 정보공개에 관한 법률",
+          "article": "제12조",
+          "text": "정보공개심의회는 공개 여부 등을 심의하기 위해 설치·운영하며, 개별 청구의 심의 필요성은 기관 절차에 따라 구분한다."
+        },
+        {
+          "law": "공공기관의 정보공개에 관한 법률 시행령",
+          "article": "제11조",
+          "text": "법 제12조의 위임에 따라 정보공개심의회의 구성·운영에 관한 사항을 정한다."
+        }
+      ],
+      "attrs": {
+        "process_id": "P05",
+        "lane": "정보공개심의회",
+        "stage": "G2 공개여부결정",
+        "node_type": "task",
+        "deadline": "결정기한 내 개최",
+        "actor": "정보공개심의회",
+        "output_documents": [
+          "심의결과"
+        ]
+      }
+    },
+    {
+      "id": "step:P06",
+      "type": "Step",
+      "label": "공개 여부 결정기한 관리(10일+연장 10일)",
+      "status": "verified",
+      "legal_basis": [
+        {
+          "law": "공공기관의 정보공개에 관한 법률",
+          "article": "제11조제1항·제2항",
+          "text": "청구를 받은 날부터 10일 이내에 결정하되, 부득이한 사유가 있으면 10일 범위에서 연장할 수 있다."
+        },
+        {
+          "law": "공공기관의 정보공개에 관한 법률 시행령",
+          "article": "제7조",
+          "text": "법 제11조제2항의 '부득이한 사유'(대량·복잡 청구, 제3자 의견청취·심의회 개최, 부분공개 판단 곤란, 천재지변 등)를 구체화한다."
+        }
+      ],
+      "attrs": {
+        "process_id": "P06",
+        "lane": "공공기관(처리부서)",
+        "stage": "G2 공개여부결정",
+        "node_type": "task",
+        "deadline": "청구일부터 10일(부득이 시 10일 연장)",
+        "actor": "처리부서",
+        "output_documents": [
+          "결정기한 연장 통지(해당 시)"
+        ]
+      }
+    },
+    {
+      "id": "step:P07",
+      "type": "Step",
+      "label": "제3자 통지",
+      "status": "verified",
+      "legal_basis": [
+        {
+          "law": "공공기관의 정보공개에 관한 법률",
+          "article": "제21조제1항",
+          "text": "제3자와 관련된 정보는 지체 없이 그 사실을 제3자에게 통지하고 의견을 들을 수 있다."
+        },
+        {
+          "law": "공공기관의 정보공개에 관한 법률 시행령",
+          "article": "제8조",
+          "text": "법 제11조제3항의 위임에 따라 제3자 의견청취의 방법을 정한다."
+        },
+        {
+          "law": "공공기관의 정보공개에 관한 법률 시행규칙",
+          "article": "제4조",
+          "text": "제3자 통지·비공개 요청은 별지 제4호의3·제5호서식, 말로 하는 의견청취는 별지 제6호서식에 따른다."
+        }
+      ],
+      "attrs": {
+        "process_id": "P07",
+        "lane": "공공기관(처리부서)",
+        "stage": "G3 제3자 의견청취",
+        "node_type": "notice",
+        "deadline": "지체 없이",
+        "actor": "처리부서",
+        "output_documents": [
+          "제3자 통지서"
+        ]
+      }
+    },
+    {
+      "id": "step:P08",
+      "type": "Step",
+      "label": "제3자 의견·비공개 요청 제출",
+      "status": "verified",
+      "legal_basis": [
+        {
+          "law": "공공기관의 정보공개에 관한 법률",
+          "article": "제21조제2항",
+          "text": "통지받은 제3자는 통지받은 날부터 3일 이내에 비공개를 요청할 수 있다."
+        }
+      ],
+      "attrs": {
+        "process_id": "P08",
+        "lane": "제3자",
+        "stage": "G3 제3자 의견청취",
+        "node_type": "task",
+        "deadline": "통지받은 날부터 3일 이내 비공개 요청",
+        "actor": "제3자",
+        "output_documents": [
+          "제3자 의견서",
+          "비공개 요청서"
+        ]
+      }
+    },
+    {
+      "id": "step:P09",
+      "type": "Step",
+      "label": "공개·부분공개·비공개 결정 통지",
+      "status": "verified",
+      "legal_basis": [
+        {
+          "law": "공공기관의 정보공개에 관한 법률",
+          "article": "제13조",
+          "text": "공개 여부를 결정하면 청구인에게 지체 없이 문서로 통지하고, 비공개 시 사유와 불복방법을 함께 알린다."
+        }
+      ],
+      "attrs": {
+        "process_id": "P09",
+        "lane": "공공기관(처리부서)",
+        "stage": "G4 통지·공개실시",
+        "node_type": "notice",
+        "deadline": "결정 후 지체 없이",
+        "actor": "처리부서",
+        "output_documents": [
+          "정보공개 여부 결정 통지서",
+          "비공개 사유·불복방법 안내"
+        ]
+      }
+    },
+    {
+      "id": "step:P10",
+      "type": "Step",
+      "label": "열람·사본 교부, 수수료 납부",
+      "status": "verified",
+      "legal_basis": [
+        {
+          "law": "공공기관의 정보공개에 관한 법률",
+          "article": "제13조·제17조",
+          "text": "공개는 열람·사본·전자파일 교부로 실시하고, 공개 실비는 청구인이 수수료로 부담한다."
+        },
+        {
+          "law": "공공기관의 정보공개에 관한 법률 시행령",
+          "article": "제17조",
+          "text": "법 제17조의 위임에 따라 공개·우송 비용은 수수료와 우편요금으로 구분하며 수수료 금액은 행정안전부령(지자체는 조례)으로 정하고, 학술·공익·행정감시 목적 등은 감면할 수 있다."
+        },
+        {
+          "law": "공공기관의 정보공개에 관한 법률 시행규칙",
+          "article": "제7조",
+          "text": "영 제17조제1항의 위임에 따라 수수료 금액을 별표로 정한다."
+        }
+      ],
+      "attrs": {
+        "process_id": "P10",
+        "lane": "청구인",
+        "stage": "G4 통지·공개실시",
+        "node_type": "task",
+        "deadline": "공개 결정일 이후",
+        "actor": "청구인",
+        "output_documents": [
+          "공개 정보(사본·전자파일)",
+          "수수료 납부"
+        ]
+      }
+    },
+    {
+      "id": "step:S01",
+      "type": "System",
+      "label": "정보공개포털 등록·공개",
+      "status": "unverified",
+      "legal_basis": [
+        {
+          "law": "공공기관의 정보공개에 관한 법률",
+          "article": "제8조의2",
+          "text": "공공기관은 원문정보 등을 정보통신망을 통하여 사전 공개하고 처리 이력을 관리한다."
+        }
+      ],
+      "attrs": {
+        "process_id": "S01",
+        "lane": "정보시스템",
+        "stage": "G4 통지·공개실시",
+        "node_type": "system",
+        "deadline": null,
+        "actor": "정보공개포털(open.go.kr)",
+        "output_documents": [
+          "포털 처리이력",
+          "원문 사전공개 자료"
+        ]
+      }
+    },
+    {
+      "id": "step:P11",
+      "type": "Step",
+      "label": "이의신청",
+      "status": "verified",
+      "legal_basis": [
+        {
+          "law": "공공기관의 정보공개에 관한 법률",
+          "article": "제18조",
+          "text": "청구인은 비공개·부분공개 등 결정에 불복하면 30일 이내에 해당 기관에 이의신청할 수 있다."
+        },
+        {
+          "law": "공공기관의 정보공개에 관한 법률 시행령",
+          "article": "제18조제1항",
+          "text": "법 제18조제1항의 위임에 따라 이의신청은 신청인 인적사항·대상 결정·취지·이유·통지받은 날을 적은 서면으로 한다."
+        },
+        {
+          "law": "공공기관의 정보공개에 관한 법률 시행규칙",
+          "article": "제8조",
+          "text": "이의신청은 별지 제9호서식, 결정 통지는 별지 제9호의2서식에 따른다."
+        }
+      ],
+      "attrs": {
+        "process_id": "P11",
+        "lane": "청구인",
+        "stage": "G5 불복",
+        "node_type": "task",
+        "deadline": "결정 통지받은 날부터 30일 이내",
+        "actor": "청구인",
+        "output_documents": [
+          "이의신청서"
+        ]
+      }
+    },
+    {
+      "id": "step:P12",
+      "type": "Gate",
+      "label": "이의신청 심의·재결정",
+      "status": "verified",
+      "legal_basis": [
+        {
+          "law": "공공기관의 정보공개에 관한 법률",
+          "article": "제18조제2항~제4항",
+          "text": "국가기관 등은 원칙적으로 심의회를 개최하고, 7일 이내 결정·통지한다. 각하·기각 때에는 행정심판·행정소송 가능성을 함께 알린다."
+        },
+        {
+          "law": "공공기관의 정보공개에 관한 법률 시행령",
+          "article": "제18조제2항",
+          "text": "법 제18조제3항 단서의 위임에 따라 이의신청 결정기간 연장 시 연장 사유·기간을 구체적으로 밝힌다."
+        }
+      ],
+      "attrs": {
+        "process_id": "P12",
+        "lane": "공공기관(처리부서)",
+        "stage": "G5 불복",
+        "node_type": "gateway",
+        "deadline": "이의신청 받은 날부터 7일(부득이 시 7일 연장)",
+        "actor": "공공기관·정보공개심의회",
+        "output_documents": [
+          "이의신청 결정 통지서"
+        ]
+      }
+    },
+    {
+      "id": "step:P13",
+      "type": "Step",
+      "label": "행정심판 청구·재결",
+      "status": "verified",
+      "legal_basis": [
+        {
+          "law": "공공기관의 정보공개에 관한 법률",
+          "article": "제19조",
+          "text": "청구인은 이의신청을 거치지 않고도 행정심판법에 따라 행정심판을 청구할 수 있다."
+        }
+      ],
+      "attrs": {
+        "process_id": "P13",
+        "lane": "행정심판위·법원",
+        "stage": "G5 불복",
+        "node_type": "task",
+        "deadline": "처분 안 날부터 90일 이내",
+        "actor": "청구인·행정심판위원회",
+        "output_documents": [
+          "행정심판 청구서",
+          "재결서"
+        ]
+      }
+    },
+    {
+      "id": "step:P14",
+      "type": "Step",
+      "label": "행정소송 제기",
+      "status": "verified",
+      "legal_basis": [
+        {
+          "law": "공공기관의 정보공개에 관한 법률",
+          "article": "제20조",
+          "text": "청구인은 행정소송법에 따라 공개 여부 결정에 대해 행정소송을 제기할 수 있다."
+        }
+      ],
+      "attrs": {
+        "process_id": "P14",
+        "lane": "행정심판위·법원",
+        "stage": "G5 불복",
+        "node_type": "task",
+        "deadline": "처분 안 날부터 90일 이내",
+        "actor": "청구인·법원",
+        "output_documents": [
+          "소장",
+          "판결"
+        ]
+      }
+    },
+    {
+      "id": "step:P15",
+      "type": "Step",
+      "label": "정보공개 비용 감면 신청·결정",
+      "status": "unverified",
+      "legal_basis": [
+        {
+          "law": "공공기관의 정보공개에 관한 법률 시행령",
+          "article": "제17조제3항~제5항",
+          "text": "비영리 학술·공익단체, 교수·교사·학생의 연구·교육 목적 등은 수수료를 감면할 수 있으며, 신청 시 소명자료를 첨부하고 공공기관의 장은 감면비율을 정하여 공개한다."
+        }
+      ],
+      "attrs": {
+        "process_id": "P15",
+        "lane": "청구인",
+        "stage": "G4 통지·공개실시",
+        "node_type": "task",
+        "deadline": "공개 실시 전후(감면 신청 시)",
+        "actor": "청구인·공공기관의 장",
+        "output_documents": [
+          "비용 감면 결정",
+          "감면비율 공개"
+        ]
+      }
+    },
+    {
+      "id": "step:P16",
+      "type": "Step",
+      "label": "소관기관 이송·청구인 통지",
+      "status": "verified",
+      "legal_basis": [
+        {
+          "law": "공공기관의 정보공개에 관한 법률",
+          "article": "제11조제4항",
+          "text": "다른 공공기관이 보유·관리하는 정보이면 소관 공공기관으로 이송하고 청구인에게 통지한다."
+        }
+      ],
+      "attrs": {
+        "process_id": "P16",
+        "lane": "공공기관(처리부서)",
+        "stage": "G1 접수·이송",
+        "node_type": "task",
+        "deadline": "소관이 아닌 경우 지체 없이",
+        "actor": "접수 공공기관",
+        "output_documents": [
+          "이송 통지서",
+          "이송된 청구서"
+        ]
+      }
+    }
+  ],
+  "relations": [
+    {
+      "id": "R-case-about",
+      "type": "about",
+      "from": "case:IDC-2026-0901-001",
+      "to": "info:target-records",
+      "label": "청구 대상"
+    },
+    {
+      "id": "R-case-at",
+      "type": "owns",
+      "from": "inst:public-body-A",
+      "to": "case:IDC-2026-0901-001",
+      "label": "처리 기관"
+    },
+    {
+      "id": "R-claim-doc",
+      "type": "requires",
+      "from": "step:P01",
+      "to": "doc:claim-form",
+      "label": "청구서 필요"
+    },
+    {
+      "id": "R-decides",
+      "type": "decides",
+      "from": "role:processing-desk",
+      "to": "dec:partial-disclosure",
+      "label": "부분공개 결정"
+    },
+    {
+      "id": "R-notice",
+      "type": "notifies",
+      "from": "dec:partial-disclosure",
+      "to": "role:claimant",
+      "label": "결정 통지"
+    },
+    {
+      "id": "R-cites",
+      "type": "cites",
+      "from": "dec:partial-disclosure",
+      "to": "statute:info-disclosure-act",
+      "label": "법 제9조 등"
+    },
+    {
+      "id": "R-recorded",
+      "type": "recorded_in",
+      "from": "case:IDC-2026-0901-001",
+      "to": "sys:open-go-kr",
+      "label": "포털 이력"
+    },
+    {
+      "id": "R-E01",
+      "type": "sequence",
+      "from": "step:P01",
+      "to": "step:P02",
+      "label": null,
+      "condition": null
+    },
+    {
+      "id": "R-E02",
+      "type": "sequence",
+      "from": "step:P02",
+      "to": "step:P03",
+      "label": null,
+      "condition": null
+    },
+    {
+      "id": "R-E03",
+      "type": "sequence",
+      "from": "step:P03",
+      "to": "step:P04",
+      "label": "보유·관리 정보",
+      "condition": "보유·관리 정보"
+    },
+    {
+      "id": "R-E04",
+      "type": "sequence",
+      "from": "step:P04",
+      "to": "step:P05",
+      "label": "심의 필요",
+      "condition": "심의 필요"
+    },
+    {
+      "id": "R-E05",
+      "type": "sequence",
+      "from": "step:P05",
+      "to": "step:P06",
+      "label": null,
+      "condition": null
+    },
+    {
+      "id": "R-E06",
+      "type": "sequence",
+      "from": "step:P06",
+      "to": "step:P09",
+      "label": null,
+      "condition": null
+    },
+    {
+      "id": "R-E07",
+      "type": "sequence",
+      "from": "step:P09",
+      "to": "step:P10",
+      "label": "공개 결정",
+      "condition": "공개 결정"
+    },
+    {
+      "id": "R-E08",
+      "type": "loop",
+      "from": "step:P12",
+      "to": "step:P10",
+      "label": "인용·공개 결정",
+      "condition": "인용·공개 결정"
+    },
+    {
+      "id": "R-E09",
+      "type": "sequence",
+      "from": "step:P13",
+      "to": "step:P14",
+      "label": "재결 불복 시 소송",
+      "condition": "재결 불복 시 소송"
+    },
+    {
+      "id": "R-M01",
+      "type": "message",
+      "from": "step:P04",
+      "to": "step:P07",
+      "label": "제3자 관련 정보",
+      "condition": "제3자 관련 정보"
+    },
+    {
+      "id": "R-M02",
+      "type": "message",
+      "from": "step:P07",
+      "to": "step:P08",
+      "label": "의견청취 통지",
+      "condition": "의견청취 통지"
+    },
+    {
+      "id": "R-M03",
+      "type": "message",
+      "from": "step:P08",
+      "to": "step:P05",
+      "label": "제3자 의견 반영",
+      "condition": "제3자 의견 반영"
+    },
+    {
+      "id": "R-M04",
+      "type": "message",
+      "from": "step:P09",
+      "to": "step:S01",
+      "label": "처리내역 공개",
+      "condition": "처리내역 공개"
+    },
+    {
+      "id": "R-L01",
+      "type": "loop",
+      "from": "step:P09",
+      "to": "step:P11",
+      "label": "비공개·부분공개 불복",
+      "condition": "비공개·부분공개 불복"
+    },
+    {
+      "id": "R-L02",
+      "type": "sequence",
+      "from": "step:P11",
+      "to": "step:P12",
+      "label": "이의신청 심의·결정",
+      "condition": "이의신청 심의·결정"
+    },
+    {
+      "id": "R-M05",
+      "type": "message",
+      "from": "step:P09",
+      "to": "step:P15",
+      "label": "공익·학술 목적 감면 안내",
+      "condition": "공익·학술 목적 감면 안내"
+    },
+    {
+      "id": "R-M06",
+      "type": "message",
+      "from": "step:P15",
+      "to": "step:P10",
+      "label": "감면 적용",
+      "condition": "감면 적용"
+    },
+    {
+      "id": "R-E10",
+      "type": "sequence",
+      "from": "step:P12",
+      "to": "step:P13",
+      "label": "각하·기각 후 행정심판",
+      "condition": "각하·기각 후 행정심판"
+    },
+    {
+      "id": "R-E11",
+      "type": "sequence",
+      "from": "step:P12",
+      "to": "step:P14",
+      "label": "각하·기각 후 행정소송",
+      "condition": "각하·기각 후 행정소송"
+    },
+    {
+      "id": "R-E12",
+      "type": "sequence",
+      "from": "step:P09",
+      "to": "step:P13",
+      "label": "이의신청 생략·직접 행정심판",
+      "condition": "이의신청 생략·직접 행정심판"
+    },
+    {
+      "id": "R-E13",
+      "type": "sequence",
+      "from": "step:P09",
+      "to": "step:P14",
+      "label": "이의신청 생략·직접 행정소송",
+      "condition": "이의신청 생략·직접 행정소송"
+    },
+    {
+      "id": "R-E14",
+      "type": "sequence",
+      "from": "step:P06",
+      "to": "step:P13",
+      "label": "20일 경과·미결정",
+      "condition": "20일 경과·미결정"
+    },
+    {
+      "id": "R-E15",
+      "type": "sequence",
+      "from": "step:P06",
+      "to": "step:P14",
+      "label": "20일 경과·미결정",
+      "condition": "20일 경과·미결정"
+    },
+    {
+      "id": "R-E16",
+      "type": "sequence",
+      "from": "step:P03",
+      "to": "step:P16",
+      "label": "다른 기관 소관",
+      "condition": "다른 기관 소관"
+    },
+    {
+      "id": "R-E17",
+      "type": "sequence",
+      "from": "step:P16",
+      "to": "step:P04",
+      "label": "이송기관 결정절차",
+      "condition": "이송기관 결정절차"
+    },
+    {
+      "id": "R-E18",
+      "type": "sequence",
+      "from": "step:P04",
+      "to": "step:P06",
+      "label": "심의 생략·불필요",
+      "condition": "심의 생략·불필요"
+    }
+  ],
+  "states": [
+    {
+      "id": "S-case",
+      "entity_id": "case:IDC-2026-0901-001",
+      "state": "decision_notified_partial",
+      "as_of": "2026-08-28",
+      "evidence": {
+        "kind": "user_asserted",
+        "source": "sample scenario",
+        "note": "부분공개 통지 도달. 이의신청 전."
+      }
+    },
+    {
+      "id": "S-claim",
+      "entity_id": "doc:claim-form",
+      "state": "submitted",
+      "as_of": "2026-08-20",
+      "evidence": {
+        "kind": "user_asserted",
+        "source": "sample",
+        "note": "포털 접수"
+      }
+    },
+    {
+      "id": "S-p01",
+      "entity_id": "step:P01",
+      "state": "done",
+      "as_of": "2026-08-20",
+      "evidence": {
+        "kind": "user_asserted",
+        "source": "sample"
+      }
+    },
+    {
+      "id": "S-p02",
+      "entity_id": "step:P02",
+      "state": "done",
+      "as_of": "2026-08-20",
+      "evidence": {
+        "kind": "user_asserted",
+        "source": "sample"
+      }
+    },
+    {
+      "id": "S-p03",
+      "entity_id": "step:P03",
+      "state": "done",
+      "as_of": "2026-08-21",
+      "evidence": {
+        "kind": "user_asserted",
+        "source": "sample"
+      }
+    },
+    {
+      "id": "S-p04",
+      "entity_id": "step:P04",
+      "state": "done",
+      "as_of": "2026-08-25",
+      "evidence": {
+        "kind": "user_asserted",
+        "source": "sample",
+        "note": "일부 비공개 사유 적용 판단"
+      }
+    },
+    {
+      "id": "S-p06",
+      "entity_id": "step:P06",
+      "state": "done",
+      "as_of": "2026-08-28",
+      "evidence": {
+        "kind": "statutory_deadline",
+        "source": "법 제11조",
+        "note": "10일 내 결정 가정"
+      }
+    },
+    {
+      "id": "S-p09",
+      "entity_id": "step:P09",
+      "state": "done",
+      "as_of": "2026-08-28",
+      "evidence": {
+        "kind": "user_asserted",
+        "source": "sample",
+        "note": "부분공개 통지 발송"
+      }
+    },
+    {
+      "id": "S-p10",
+      "entity_id": "step:P10",
+      "state": "ready",
+      "as_of": "2026-08-28",
+      "evidence": {
+        "kind": "user_asserted",
+        "source": "sample",
+        "note": "공개 부분 수령 가능"
+      }
+    },
+    {
+      "id": "S-p11",
+      "entity_id": "step:P11",
+      "state": "available",
+      "as_of": "2026-08-28",
+      "evidence": {
+        "kind": "statutory_deadline",
+        "source": "법 제18조",
+        "note": "불복 창구 열림"
+      }
+    },
+    {
+      "id": "S-dec",
+      "entity_id": "dec:partial-disclosure",
+      "state": "issued",
+      "as_of": "2026-08-28",
+      "evidence": {
+        "kind": "user_asserted",
+        "source": "sample"
+      }
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule:decision-deadline",
+      "name": "공개여부 결정기한",
+      "applies_to": [
+        "step:P06",
+        "case:IDC-2026-0901-001"
+      ],
+      "inputs": [
+        "claim_received_date",
+        "extension_notice"
+      ],
+      "predicate": "if days_since(claim_received_date) <= 10 or (extended and days_since(claim_received_date) <= 20) then on_time else overdue_open_to_appeal",
+      "output": {
+        "pass": "on_time_or_extended",
+        "fail": "treat_as_non_disclosure_for_appeal_path"
+      },
+      "statute_ref": [
+        {
+          "law": "공공기관의 정보공개에 관한 법률",
+          "article": "제11조제1항·제2항"
+        }
+      ],
+      "stop_if_unverified": true
+    },
+    {
+      "id": "rule:partial-opens-appeal",
+      "name": "부분공개·비공개 시 불복 가능",
+      "applies_to": [
+        "dec:partial-disclosure",
+        "step:P11"
+      ],
+      "inputs": [
+        "decision_outcome"
+      ],
+      "predicate": "if decision_outcome in ['non_disclosure','partial_disclosure'] then appeal_available else appeal_not_primary",
+      "output": {
+        "next_steps": [
+          "step:P11",
+          "step:P13",
+          "step:P14"
+        ]
+      },
+      "statute_ref": [
+        {
+          "law": "공공기관의 정보공개에 관한 법률",
+          "article": "제18조·제19조·제20조"
+        }
+      ],
+      "stop_if_unverified": true
+    },
+    {
+      "id": "rule:receive-disclosed-part-first",
+      "name": "부분공개 시 공개분 수령과 이의는 병행 가능",
+      "applies_to": [
+        "step:P10",
+        "step:P11"
+      ],
+      "inputs": [
+        "decision_outcome"
+      ],
+      "predicate": "if decision_outcome == 'partial_disclosure' then can_receive_open_part_and_file_objection",
+      "output": {
+        "parallel": [
+          "step:P10",
+          "step:P11"
+        ]
+      },
+      "statute_ref": [
+        {
+          "law": "공공기관의 정보공개에 관한 법률",
+          "article": "제13조·제18조"
+        }
+      ],
+      "stop_if_unverified": true
+    },
+    {
+      "id": "rule:objection-before-or-skip-to-trial",
+      "name": "이의신청 또는 바로 행정심판·소송",
+      "applies_to": [
+        "step:P11",
+        "step:P13",
+        "step:P14"
+      ],
+      "inputs": [
+        "decision_notified"
+      ],
+      "predicate": "claimant_may_file_objection_or_skip_to_admin_appeal_or_litigation",
+      "output": {
+        "options": [
+          "objection",
+          "admin_appeal",
+          "lawsuit"
+        ]
+      },
+      "statute_ref": [
+        {
+          "law": "공공기관의 정보공개에 관한 법률",
+          "article": "제18조·제19조·제20조"
+        }
+      ],
+      "stop_if_unverified": true
+    },
+    {
+      "id": "rule:third-party-window",
+      "name": "제3자 비공개 요청 기한",
+      "applies_to": [
+        "step:P08"
+      ],
+      "inputs": [
+        "third_party_notified_date"
+      ],
+      "predicate": "if third_party_notified then objection_within_3_days",
+      "output": {
+        "deadline_days": 3
+      },
+      "statute_ref": [
+        {
+          "law": "공공기관의 정보공개에 관한 법률",
+          "article": "제21조제2항"
+        }
+      ],
+      "stop_if_unverified": true
+    },
+    {
+      "id": "rule:no-auto-execute",
+      "name": "공공 액션 자동집행 금지",
+      "applies_to": [
+        "action_packets"
+      ],
+      "inputs": [],
+      "predicate": "always",
+      "output": {
+        "auto_execute": false,
+        "requires_human_signoff": true
+      },
+      "statute_ref": [],
+      "stop_if_unverified": false
+    }
+  ],
+  "action_packets": [
+    {
+      "id": "ap:claimant-after-partial",
+      "title": "부분공개 통지 후 청구인 다음 행동",
+      "for_query": "부분공개(또는 보완/비공개) 통지 왔는데 뭐 하면 됨?",
+      "actor": "role:claimant",
+      "why": "현재 케이스 상태가 decision_notified_partial 이고, rule:partial-opens-appeal / rule:receive-disclosed-part-first 가 다음 선택지를 연다.",
+      "based_on": [
+        "case:IDC-2026-0901-001",
+        "dec:partial-disclosure",
+        "S-case",
+        "rule:partial-opens-appeal",
+        "rule:receive-disclosed-part-first",
+        "step:P10",
+        "step:P11"
+      ],
+      "checklist": [
+        "통지서에서 공개분·비공개분·비공개 사유(조문)를 구분해서 읽는다",
+        "공개분은 열람/사본/파일로 수령하고 수수료·감면 여부를 확인한다 (P10/P15)",
+        "비공개·부분공개에 불복할지 정한다",
+        "불복 시: ① 기관 이의신청(P11) ② 행정심판(P13) ③ 행정소송(P14) 경로 중 선택",
+        "이의신청 시 결정 통지를 첨부하고, 왜 제9조 사유가 안 맞는지 구체적으로 적는다",
+        "자동 제출/대리 결재는 하지 않는다 — 청구인 확인 후 진행"
+      ],
+      "evidence_needed": [
+        "공개여부 결정 통지서",
+        "원 청구서·접수번호",
+        "비공개 사유에 대응할 반박 논거(가능하면 조문 단위)",
+        "공개분 수령 내역(선택)"
+      ],
+      "system_touchpoints": [
+        "정보공개포털(open.go.kr) 청구·이의 메뉴",
+        "기관 안내 전화/담당자 (통지서 기재)"
+      ],
+      "human_signoff": "청구인 본인(또는 적법 대리인) 확인 후에만 이의/심판 제출",
+      "auto_execute": false,
+      "risks": [
+        "기한 도과 시 불복 실익 감소 가능 — 통지일 기준으로 일정 확인 필요",
+        "사유 없는 재청구 반복은 처리 지연·각하 리스크",
+        "제3자 정보가 섞인 경우 추가 절차 가능"
+      ]
+    },
+    {
+      "id": "ap:officer-explain-partial",
+      "title": "담당자용: 부분공개 결정 설명 패키지",
+      "for_query": "민원인에게 부분공개 이유를 어떻게 설명?",
+      "actor": "role:processing-desk",
+      "why": "결정 객체와 법령 근거를 고정 ID로 묶어 설명 가능성을 남긴다.",
+      "based_on": [
+        "dec:partial-disclosure",
+        "statute:info-disclosure-act",
+        "step:P04",
+        "step:P09",
+        "rule:decision-deadline"
+      ],
+      "checklist": [
+        "공개/비공개 범위를 문서 단위로 특정",
+        "비공개 조문·해당 부분만 최소 제한인지 재확인",
+        "결정기한(10+10) 준수 여부 기록",
+        "포털 처리내역 공개(S01) 반영",
+        "이의신청 안내 문구 포함"
+      ],
+      "evidence_needed": [
+        "심의 필요 시 심의회 자료",
+        "제3자 의견 청취 기록(해당 시)",
+        "통지 사본"
+      ],
+      "system_touchpoints": [
+        "open.go.kr 처리대장",
+        "기관 문서시스템"
+      ],
+      "human_signoff": "정보공개 담당/책임관 결재 후 통지",
+      "auto_execute": false,
+      "risks": [
+        "포괄적 제9조 남용 지적",
+        "부분공개가 형식적일 경우 인용 리스크"
+      ]
+    }
+  ],
+  "demo_queries": [
+    {
+      "q": "부분공개 통지 왔는데 뭐 하면 됨?",
+      "resolve": {
+        "identify": [
+          "case:IDC-2026-0901-001",
+          "dec:partial-disclosure"
+        ],
+        "state": "decision_notified_partial",
+        "rules_fired": [
+          "rule:partial-opens-appeal",
+          "rule:receive-disclosed-part-first"
+        ],
+        "action_packet": "ap:claimant-after-partial"
+      }
+    },
+    {
+      "q": "지금 이 건 어디 단계야?",
+      "resolve": {
+        "done": [
+          "step:P01",
+          "step:P02",
+          "step:P03",
+          "step:P04",
+          "step:P06",
+          "step:P09"
+        ],
+        "ready": [
+          "step:P10"
+        ],
+        "available": [
+          "step:P11",
+          "step:P13",
+          "step:P14"
+        ]
+      }
+    }
+  ],
+  "notes": [
+    "샘플 기관·사안은 가상이다. 조문 구조는 Korea100 information-disclosure 검증 데이터를 재사용.",
+    "auto_execute는 항상 false. 공공 온톨로지 액션 = 승인 패킷.",
+    "Tier A 샘플 1호. 스키마 고정 후 다른 제도에 복제."
+  ]
+}

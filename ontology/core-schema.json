@@ -1,0 +1,321 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "korea100.ontology.core.v0",
+  "title": "Korea100 Public Context Ontology Core v0",
+  "description": "최소 5타입: Entity, Relation, State, Rule, ActionPacket. 공공 액션은 시스템 write가 아니라 사람 승인 패킷.",
+  "type": "object",
+  "required": [
+    "ontology_version",
+    "institution_slug",
+    "entities",
+    "relations",
+    "states",
+    "rules",
+    "action_packets"
+  ],
+  "properties": {
+    "ontology_version": {
+      "type": "string"
+    },
+    "institution_slug": {
+      "type": "string"
+    },
+    "institution_name": {
+      "type": "string"
+    },
+    "case_id": {
+      "type": "string"
+    },
+    "as_of": {
+      "type": "string"
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Entity"
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Relation"
+      }
+    },
+    "states": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/State"
+      }
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Rule"
+      }
+    },
+    "action_packets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ActionPacket"
+      }
+    },
+    "demo_queries": {
+      "type": "array"
+    }
+  },
+  "$defs": {
+    "Entity": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "label"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "Institution",
+            "Role",
+            "PersonOrOrg",
+            "Document",
+            "InformationItem",
+            "Gate",
+            "Step",
+            "System",
+            "Statute",
+            "Case",
+            "Decision"
+          ]
+        },
+        "label": {
+          "type": "string"
+        },
+        "legal_basis": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "status": {
+          "enum": [
+            "verified",
+            "unverified",
+            "inferred"
+          ],
+          "default": "verified"
+        },
+        "attrs": {
+          "type": "object"
+        }
+      }
+    },
+    "Relation": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "from",
+        "to"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "owns",
+            "acts_as",
+            "hands_off_to",
+            "reviews",
+            "blocks",
+            "requires",
+            "decides",
+            "notifies",
+            "appeals_to",
+            "about",
+            "cites",
+            "recorded_in",
+            "sequence",
+            "message",
+            "loop"
+          ]
+        },
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "condition": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "State": {
+      "type": "object",
+      "required": [
+        "id",
+        "entity_id",
+        "state"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "entity_id": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "as_of": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "enum": [
+                "measured",
+                "official_plan",
+                "statutory_deadline",
+                "proxy",
+                "none",
+                "user_asserted"
+              ]
+            },
+            "source": {
+              "type": "string"
+            },
+            "note": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "Rule": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "applies_to",
+        "predicate",
+        "output"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "applies_to": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "predicate": {
+          "type": "string"
+        },
+        "output": {
+          "type": "object"
+        },
+        "statute_ref": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "stop_if_unverified": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "ActionPacket": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "actor",
+        "why",
+        "checklist",
+        "human_signoff"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "for_query": {
+          "type": "string"
+        },
+        "actor": {
+          "type": "string"
+        },
+        "why": {
+          "type": "string"
+        },
+        "based_on": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "checklist": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidence_needed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "system_touchpoints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "human_signoff": {
+          "type": "string"
+        },
+        "auto_execute": {
+          "type": "boolean",
+          "const": false
+        },
+        "risks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

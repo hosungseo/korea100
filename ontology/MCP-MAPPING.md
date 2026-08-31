@@ -1,0 +1,91 @@
+# Korea100 MCP ↔ Ontology Mapping
+
+## 원칙
+- MCP = 창구(tool surface)
+- Ontology = 장부 문법(Entity/Relation/State/Rule/ActionPacket)
+- 연계 후 MCP 케이스 모드는 ontology case JSON을 읽고, 패킷은 ontology ActionPacket 계약을 만족해야 한다.
+- `execution_allowed` / `auto_execute` 는 항상 false.
+
+## Tool → Ontology
+
+| MCP tool | Ontology 역할 | 비고 |
+|---|---|---|
+| `search_procedures` | Institution Entity 검색 | R2 템플릿 경로 |
+| `get_procedure_map` | Step/Gate Entity + sequence Relation | 제도 템플릿 |
+| `get_step_requirements` | Step attrs + Statute cites | |
+| `get_next_actions` | Rule 평가 + sequence/message edges | condition 임의추정 금지 |
+| `resolve_work_event` | State 후보 매핑 (보수적) | |
+| `create_action_packet` | **ActionPacket** 생성 | 사람 검토 전용 |
+| `load_ontology_case` *(신규)* | Case graph 로드 | samples/*.case.json |
+| `get_case_state` *(신규)* | State[] 조회 | 케이스 인스턴스 |
+| `query_case` *(신규)* | Rule fire + ActionPacket 선택 | 데모 질문 해소 |
+| `check_case_linkage` *(신규)* | Case ↔ Institution 그래프 대조 | 준비도 등급으로 다음 행동 허용 판정 |
+
+## 두 층의 대조 (case-link)
+
+케이스는 제도 업무구조도의 투영이다. `mcp/src/case-link.mjs`가 매 질의마다 둘을 대조한다.
+
+| 검사 | 어긋남 판정 |
+|---|---|
+| `step:Pxx` 엔티티·상태가 제도 노드에 존재 | `unknown_step_ids` |
+| 단계 라벨 == 제도 노드명 | `label_mismatches` |
+| step→step 관계가 제도 엣지에 존재 | `unknown_edges` |
+| 제도 노드 중 케이스가 안 다루는 것 | `uncovered_node_ids` (경고, 어긋남 아님) |
+
+`next_action_allowed = (status === "aligned") && readiness.level === "R2"`.
+거짓이면 그 사유가 `query_case` 패킷의 `risks`로 들어간다. 등급이 모자란 제도의
+케이스가 다음 행동을 확정한 것처럼 보이지 않게 하려는 것이다.
+
+현재 정보공개청구는 **R1(reference-only)** — 조문 30/30 현행 대조는 통과했지만
+신뢰도 0.8 미만 3개·기한 성격 재확인 10개·전이 수동 대조 미완료가 남아 있다.
+
+## 계약 강제 지점
+
+문서로만 두지 않는다. `mcp/src/packet-contract.mjs`가 두 경로의 봉투를 같은
+ActionPacket 모양으로 정규화하고, 계약 위반이면 응답 대신 오류를 던진다.
+
+| 경로 | 봉투 | 정규화 결과 |
+|---|---|---|
+| R2 `create_action_packet` | `packet_id`/`checklist[].instruction`/`official_sources` | `ontology_packet` (`source_path: r2-procedure`) |
+| 온톨로지 `query_case` | `packet.*` | `ontology_packet` (`source_path: ontology-case`) |
+
+강제 항목: `execution_allowed === false`, `human_confirmation_required === true`,
+`auto_execute === false`, 필수 6항목(`id/title/actor/why/checklist/human_signoff`) 비어 있지 않음.
+
+## create_action_packet (MCP) ↔ ActionPacket (Ontology)
+
+| MCP field | Ontology field | 변환 |
+|---|---|---|
+| `packet_id` | `id` | 그대로 또는 `ap:…` 우선 |
+| `status` | (derived) | ready/blocked → why에 반영 |
+| `execution_allowed: false` | `auto_execute: false` | **필수 동치** |
+| `human_confirmation_required: true` | `human_signoff` | 문구로 승격 |
+| `procedure.slug` | based_on institution / case | |
+| `current_step.id` | `based_on` step:Pxx | `step:{id}` |
+| `checklist[].instruction` | `checklist[]` | 문자열 배열로 평탄화 |
+| `checklist[].evidence` | `evidence_needed` | merge unique |
+| `handoff_packages` | checklist + system_touchpoints | |
+| `blocking_questions` | checklist 선행 질문 / risks | |
+| `official_sources` | based_on statute refs | |
+| `audit.*` | based_on + why | 감사 추적용 유지 |
+
+## State 모드
+| 조건 | 모드 |
+|---|---|
+| case_id 없음 | 제도 설명 모드 (기존 MCP) |
+| case_id 있음 + case JSON 존재 | 케이스 판단 모드 (ontology bridge) |
+| unverified entity/rule | needs_human, 단정 금지 |
+
+## 계약 테스트
+질문: `부분공개 통지 왔는데 뭐 하면 됨?`
+- case: `IDC-2026-0901-001`
+- packet id 포함: `ap:claimant-after-partial` 또는 동등 checklist
+- `auto_execute` / `execution_allowed` == false
+
+```bash
+cd mcp && npm test   # 36건: 서비스·프로토콜·온톨로지·패킷 계약·케이스 대조
+```
+
+- `test/packet-contract.test.mjs` — 두 경로가 같은 계약·같은 키 집합을 내는지
+- `test/case-link.test.mjs` — 샘플 케이스 17단계·26관계가 제도와 1:1인지, 어긋남 3종을 잡는지
+- `test/protocol.test.mjs` — stdio로 도구 10개 공개, `query_case`·`check_case_linkage` 실물 호출

@@ -70,19 +70,36 @@ export function parseLawArticleHeaders(payload) {
   return new Set(parseLawArticles(payload).keys());
 }
 
-async function fetchLawPayload(mst, { oc, signal } = {}) {
-  if (!mst || !oc) throw new Error("법령 MST와 법제처 API 인증값이 필요합니다.");
+async function fetchLawPayloadBy(identifier, value, { oc, signal } = {}) {
+  if (!value || !oc) throw new Error("법령 식별자와 법제처 API 인증값이 필요합니다.");
 
   const url = new URL("https://www.law.go.kr/DRF/lawService.do");
   url.searchParams.set("OC", oc);
   url.searchParams.set("target", "law");
-  url.searchParams.set("MST", mst);
+  url.searchParams.set(identifier, value);
   url.searchParams.set("type", "JSON");
 
   const response = await fetch(url, { signal });
   if (!response.ok) throw new Error(`법령 본문 API 응답 오류: ${response.status}`);
 
   return response.json();
+}
+
+async function fetchLawPayload(mst, options = {}) {
+  if (!mst) throw new Error("법령 MST와 법제처 API 인증값이 필요합니다.");
+  return fetchLawPayloadBy("MST", mst, options);
+}
+
+function lawSnapshotMetadata(payload) {
+  const law = payload?.["법령"];
+  const info = law?.["기본정보"] ?? {};
+  return {
+    officialName: info["법령명_한글"] ?? null,
+    lawId: info["법령ID"] ?? null,
+    versionKey: law?.["법령키"] ?? null,
+    promulgatedOn: normalizeDate(info["공포일자"]),
+    effectiveOn: normalizeDate(info["시행일자"]),
+  };
 }
 
 export async function fetchLawArticles(mst, options = {}) {
@@ -97,4 +114,12 @@ export async function fetchLawArticleHeaders(mst, options = {}) {
   const found = parseLawArticleHeaders(payload);
   if (found.size === 0) throw new Error("법령 JSON 본문에 조문 내용이 없습니다.");
   return found;
+}
+
+export async function fetchCurrentLawArticleSnapshot(lawId, options = {}) {
+  if (!lawId) throw new Error("법령 ID와 법제처 API 인증값이 필요합니다.");
+  const payload = await fetchLawPayloadBy("ID", lawId, options);
+  const headers = parseLawArticleHeaders(payload);
+  if (headers.size === 0) throw new Error("현행 법령 JSON 본문에 조문 내용이 없습니다.");
+  return { headers, ...lawSnapshotMetadata(payload) };
 }
