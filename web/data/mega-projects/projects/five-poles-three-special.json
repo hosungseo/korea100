@@ -1,2132 +1,2135 @@
 {
-  "schemaVersion": "1.0.0",
-  "id": "five-poles-three-special",
-  "name": "5극3특 국가균형성장 전략",
-  "projectFamily": "balanced-growth",
-  "asOfDate": "2026-08-19",
-  "status": "planning",
-  "summary": "5개 초광역권(수도권·충청권·호남권·대구경북권·동남권)과 3개 특별자치도(강원·전북·제주)를 중심으로 국가를 재편하는 균형성장 전략의 절차 지도. 지방시대위원회 추진전략 설계도(3대 분야 11개 전략과제 144개 세부과제)를 골격으로 법제·협약·재정·권한이양의 관문을 잇는다.",
-  "scope": {
-    "coverage": "전국 — 5개 초광역권 + 3개 특별자치도",
-    "vision": "자치분권 기반의 5극3특 중심 국가균형성장",
-    "targets": "잠재성장률 3%+, 비수도권 GRDP 50%+",
-    "planHorizon": "2025~2030(국정운영 5개년)",
-    "legalStatus": "지방분권균형발전법 개정 국회 통과, 지방자치법 개정·권한이양 특별법은 진행 중"
+ "schemaVersion": "1.0.0",
+ "id": "five-poles-three-special",
+ "name": "5극3특 국가균형성장 전략",
+ "projectFamily": "balanced-growth",
+ "asOfDate": "2026-08-19",
+ "status": "planning",
+ "summary": "5개 초광역권(수도권·충청권·호남권·대구경북권·동남권)과 3개 특별자치도(강원·전북·제주)를 중심으로 국가를 재편하는 균형성장 전략의 절차 지도. 지방시대위원회 추진전략 설계도(3대 분야 11개 전략과제 144개 세부과제)를 골격으로 법제·협약·재정·권한이양의 관문을 잇는다.",
+ "scope": {
+  "coverage": "전국 — 5개 초광역권 + 3개 특별자치도",
+  "vision": "자치분권 기반의 5극3특 중심 국가균형성장",
+  "targets": "잠재성장률 3%+, 비수도권 GRDP 50%+",
+  "planHorizon": "2025~2030(국정운영 5개년)",
+  "legalStatus": "지방분권균형발전법 개정 국회 통과, 지방자치법 개정·권한이양 특별법은 진행 중"
+ },
+ "parameters": {
+  "investCorpActPassed": {
+   "value": null,
+   "status": "unknown",
+   "reason": "동남권·충청권 지역투자공사 법안이 상정·소위 단계로 통과 여부 미확정"
   },
-  "parameters": {
-    "investCorpActPassed": {
-      "value": null,
-      "status": "unknown",
-      "reason": "동남권·충청권 지역투자공사 법안이 상정·소위 단계로 통과 여부 미확정"
-    },
-    "regionalSlgEstablished": {
-      "value": null,
-      "status": "unknown",
-      "reason": "부울경 특별연합 해산 전례가 있어 권역별 특자체 설립 여부는 권역마다 다름"
-    },
-    "growthSupportActEnacted": {
-      "value": null,
-      "status": "unknown",
-      "reason": "광역권 성장지원 특별법은 제정 추진 단계"
-    }
+  "regionalSlgEstablished": {
+   "value": null,
+   "status": "unknown",
+   "reason": "부울경 특별연합 해산 전례가 있어 권역별 특자체 설립 여부는 권역마다 다름"
   },
-  "rules": [
+  "growthSupportActEnacted": {
+   "value": null,
+   "status": "unknown",
+   "reason": "광역권 성장지원 특별법은 제정 추진 단계"
+  }
+ },
+ "rules": [
+  {
+   "id": "RULE_INVEST_CORP_ACT",
+   "type": "boolean",
+   "parameter": "investCorpActPassed",
+   "default": null,
+   "description": "권역별 지역투자공사법(동남권·충청권 발의, 정무위·산자위 계류)이 통과되면 설립 경로가 활성화된다."
+  },
+  {
+   "id": "RULE_SLG_ESTABLISHED",
+   "type": "boolean",
+   "parameter": "regionalSlgEstablished",
+   "default": null,
+   "description": "권역별 특별지방자치단체가 설립되면 협약추진체를 특자체 직속기구로 두고, 미설립 권역은 기존 지자체 연합체(협의회)에 사업단을 구성한다."
+  },
+  {
+   "id": "RULE_GROWTH_SUPPORT_ACT",
+   "type": "boolean",
+   "parameter": "growthSupportActEnacted",
+   "default": null,
+   "description": "광역권 성장지원 특별법이 제정되면 메가특구 등 광범위한 규제특례 경로가 열린다."
+  }
+ ],
+ "sources": [
+  {
+   "id": "SRC_STRATEGY",
+   "type": "official-policy",
+   "title": "5극3특 국가균형성장 추진전략 설계도(요약+전체본)",
+   "publishedOn": "2025-09-30",
+   "url": "https://balance.go.kr/download/BASIC_ATTACH?storageNo=18177"
+  },
+  {
+   "id": "SRC_BALANCE_PAGE",
+   "type": "official-policy",
+   "title": "지방시대위원회 — 5극3특 국가균형성장 추진전략",
+   "url": "https://www.balance.go.kr/base/menu/baseView?menuLevel=1&menuNo=18"
+  },
+  {
+   "id": "SRC_LAW_PASSED",
+   "type": "news",
+   "title": "'5극 3특' 균형성장 본격화…초광역 협력 기반 담은 특별법 국회 통과(정책브리핑)",
+   "publishedOn": "2026-05-08",
+   "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148964072",
+   "note": "기사 등록일 원문 확인(기존 데이터의 2026-07-01은 오기). 국회 통과 2026-05-07 · 공포 2026-06-02. 균형성장영향평가·초광역특별협약은 공포 6개월 후(2026-12-03) 시행, 초광역특별계정은 2027-01-01 적용"
+  },
+  {
+   "id": "SRC_DECENT_LAW",
+   "type": "statute",
+   "title": "지방자치분권 및 균형성장에 관한 특별법",
+   "url": "https://law.go.kr/법령/지방자치분권및균형성장에관한특별법",
+   "note": "2026-03-05 공포·2026-07-01 시행 개정으로 법명이 '지역균형발전'에서 '균형성장'으로 변경됨(N03 개정의 결과)"
+  },
+  {
+   "id": "SRC_LOCAL_AUTONOMY_LAW",
+   "type": "statute",
+   "title": "지방자치법(특별지방자치단체)",
+   "url": "https://law.go.kr/법령/지방자치법"
+  },
+  {
+   "id": "SRC_ENGINE_NEWS",
+   "type": "news",
+   "title": "'권역별 성장엔진' 발굴 본격화…5극3특 국가균형성장 이끈다(정책브리핑)",
+   "publishedOn": "2025-12-08",
+   "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148956047",
+   "note": "기사 등록일 원문 확인(기존 데이터의 2025-11-01은 오기)"
+  },
+  {
+   "id": "SRC_LAND_FRAMEWORK_ACT",
+   "type": "statute",
+   "title": "국토기본법",
+   "note": "제7조제1항 국토계획 상호 관계, 제12조의2 초광역권계획의 수립",
+   "url": "https://law.go.kr/법령/국토기본법"
+  },
+  {
+   "id": "SRC_LOCAL_PUBLIC_ENTERPRISE_ACT",
+   "type": "statute",
+   "title": "지방공기업법",
+   "note": "제49조 지방공사 설립 — 행정안전부장관 협의·조례 제정·전문기관 타당성 검토",
+   "url": "https://law.go.kr/법령/지방공기업법"
+  },
+  {
+   "id": "SRC_RAILWAY_ACT",
+   "type": "statute",
+   "title": "철도의 건설 및 철도시설 유지관리에 관한 법률",
+   "note": "제4조제2항제1호 국가철도망구축계획은 지방시대 종합계획과 조화를 이루어야 함",
+   "url": "https://law.go.kr/법령/철도의건설및철도시설유지관리에관한법률"
+  },
+  {
+   "id": "SRC_BG_ACT_2026_AMEND",
+   "type": "statute",
+   "title": "지방자치분권 및 균형성장에 관한 특별법 일부개정법률(공포 2026-06-02)",
+   "note": "제11조의3 균형성장영향평가 신설 · 제31조의2 범부처 초광역추진협의체 신설 · 제31조의3 권역별 초광역공동사업단 신설 · 제76조 초광역특별계정 신설. 시행일 단계적(2026-12-03 / 2027-01-01)이라 2026-07-01 시행 현행 조문에는 아직 반영 전",
+   "url": "https://law.go.kr/법령/지방자치분권및균형성장에관한특별법"
+  },
+  {
+   "id": "SRC_BUDGET_2026",
+   "type": "official-policy",
+   "title": "2026년 예산 국회 확정(정책브리핑)",
+   "publishedOn": "2025-12-02",
+   "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148956215"
+  }
+ ],
+ "stages": [
+  {
+   "id": "G0",
+   "label": "정책·거버넌스"
+  },
+  {
+   "id": "G1",
+   "label": "법제 정비"
+  },
+  {
+   "id": "G2",
+   "label": "성장엔진·초광역특별협약"
+  },
+  {
+   "id": "G3",
+   "label": "산업·투자·인재"
+  },
+  {
+   "id": "G4",
+   "label": "국토·교통"
+  },
+  {
+   "id": "G5",
+   "label": "의료·복지·교육·농산어촌"
+  },
+  {
+   "id": "G6",
+   "label": "재정기반"
+  },
+  {
+   "id": "G7",
+   "label": "권한이양·특별지방자치단체"
+  }
+ ],
+ "actors": [
+  {
+   "id": "balance-committee",
+   "code": "A01",
+   "label": "지방시대위원회",
+   "shortLabel": "지방위",
+   "mandate": "5극3특 전략 총괄·의결·예산 사전조정"
+  },
+  {
+   "id": "whole-government",
+   "code": "A02",
+   "label": "범정부·국무회의",
+   "shortLabel": "범정부",
+   "mandate": "국정과제 조정·범부처 협의체"
+  },
+  {
+   "id": "assembly",
+   "code": "A03",
+   "label": "국회",
+   "shortLabel": "국회",
+   "mandate": "법률 제·개정 심의·의결"
+  },
+  {
+   "id": "mois",
+   "code": "A04",
+   "label": "행정안전부",
+   "shortLabel": "행안부",
+   "mandate": "특별지자체·권한이양·차등지원"
+  },
+  {
+   "id": "fiscal",
+   "code": "A05",
+   "label": "기획예산처·재정경제부",
+   "shortLabel": "재정당국",
+   "mandate": "예산·계정·포괄보조·세제"
+  },
+  {
+   "id": "motie",
+   "code": "A06",
+   "label": "산업통상부",
+   "shortLabel": "산업부",
+   "mandate": "성장엔진·특구·산업정책"
+  },
+  {
+   "id": "msit",
+   "code": "A07",
+   "label": "과기정통부",
+   "shortLabel": "과기부",
+   "mandate": "AX 거점·R&D·예타"
+  },
+  {
+   "id": "molit",
+   "code": "A08",
+   "label": "국토교통부",
+   "shortLabel": "국토부",
+   "mandate": "국토계획·교통망·공항"
+  },
+  {
+   "id": "moe",
+   "code": "A09",
+   "label": "교육부",
+   "shortLabel": "교육부",
+   "mandate": "거점국립대·RISE·교육특구"
+  },
+  {
+   "id": "mohw",
+   "code": "A10",
+   "label": "보건복지부",
+   "shortLabel": "복지부",
+   "mandate": "공공의료·통합돌봄"
+  },
+  {
+   "id": "mafra",
+   "code": "A11",
+   "label": "농식품부·해수부",
+   "shortLabel": "농해수",
+   "mandate": "K-농산어촌·기본소득"
+  },
+  {
+   "id": "region",
+   "code": "A12",
+   "label": "초광역권·특별지방자치단체",
+   "shortLabel": "초광역권",
+   "mandate": "권역 전략 수립·협약 이행"
+  },
+  {
+   "id": "sido",
+   "code": "A13",
+   "label": "시·도 지방자치단체",
+   "shortLabel": "시·도",
+   "mandate": "권역 구성·사업 시행"
+  },
+  {
+   "id": "private",
+   "code": "A14",
+   "label": "기업·대학·민간",
+   "shortLabel": "민간",
+   "mandate": "앵커기업 투자·인재양성 참여"
+  }
+ ],
+ "nodes": [
+  {
+   "id": "N01",
+   "name": "5극3특 추진전략 설계도 수립·지방시대위 의결",
+   "stage": "G0",
+   "authority": "지방시대위원회",
+   "leadActor": "balance-committee",
+   "actorRoles": {
+    "lead": [
+     "지방시대위원회"
+    ],
+    "consult": [
+     "국정기획위원회",
+     "관계부처"
+    ],
+    "decision": [
+     "지방시대위원회"
+    ]
+   },
+   "classification": "policy",
+   "status": "completed",
+   "confidence": "official",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [],
+   "produces": [
+    "fpts.strategy_adopted"
+   ],
+   "templateRefs": [
     {
-      "id": "RULE_INVEST_CORP_ACT",
-      "type": "boolean",
-      "parameter": "investCorpActPassed",
-      "default": null,
-      "description": "권역별 지역투자공사법(동남권·충청권 발의, 정무위·산자위 계류)이 통과되면 설립 경로가 활성화된다."
-    },
-    {
-      "id": "RULE_SLG_ESTABLISHED",
-      "type": "boolean",
-      "parameter": "regionalSlgEstablished",
-      "default": null,
-      "description": "권역별 특별지방자치단체가 설립되면 협약추진체를 특자체 직속기구로 두고, 미설립 권역은 기존 지자체 연합체(협의회)에 사업단을 구성한다."
-    },
-    {
-      "id": "RULE_GROWTH_SUPPORT_ACT",
-      "type": "boolean",
-      "parameter": "growthSupportActEnacted",
-      "default": null,
-      "description": "광역권 성장지원 특별법이 제정되면 메가특구 등 광범위한 규제특례 경로가 열린다."
+     "institution": "regional-balanced-growth-project"
     }
-  ],
-  "sources": [
+   ],
+   "evidence": [
+    "SRC_STRATEGY",
+    "SRC_BALANCE_PAGE"
+   ],
+   "actual": {
+    "completedOn": "2025-09-30"
+   },
+   "note": "완료일 근거: 5극3특 국가균형성장 추진전략 설계도 발행·지방시대위 의결(SRC_STRATEGY)"
+  },
+  {
+   "id": "N02",
+   "name": "거버넌스 구축 — 국가자치분권균형성장회의·범정부 초광역추진협의체·권역별 협약추진체",
+   "stage": "G0",
+   "authority": "지방시대위원회·행정안전부",
+   "leadActor": "balance-committee",
+   "actorRoles": {
+    "lead": [
+     "지방시대위원회"
+    ],
+    "consult": [
+     "행정안전부",
+     "시·도"
+    ],
+    "decision": [
+     "국회",
+     "행정안전부장관"
+    ]
+   },
+   "classification": "governance",
+   "status": "active",
+   "confidence": "official",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
     {
-      "id": "SRC_STRATEGY",
-      "type": "official-policy",
-      "title": "5극3특 국가균형성장 추진전략 설계도(요약+전체본)",
-      "publishedOn": "2025-09-30",
-      "url": "https://balance.go.kr/download/BASIC_ATTACH?storageNo=18177"
-    },
-    {
-      "id": "SRC_BALANCE_PAGE",
-      "type": "official-policy",
-      "title": "지방시대위원회 — 5극3특 국가균형성장 추진전략",
-      "url": "https://www.balance.go.kr/base/menu/baseView?menuLevel=1&menuNo=18"
-    },
-    {
-      "id": "SRC_LAW_PASSED",
-      "type": "news",
-      "title": "'5극 3특' 균형성장 본격화…초광역 협력 기반 담은 특별법 국회 통과(정책브리핑)",
-      "publishedOn": "2026-05-08",
-      "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148964072",
-      "note": "기사 등록일 원문 확인(기존 데이터의 2026-07-01은 오기). 국회 통과 2026-05-07 · 공포 2026-06-02. 균형성장영향평가·초광역특별협약은 공포 6개월 후(2026-12-03) 시행, 초광역특별계정은 2027-01-01 적용"
-    },
-    {
-      "id": "SRC_DECENT_LAW",
-      "type": "statute",
-      "title": "지방자치분권 및 균형성장에 관한 특별법",
-      "url": "https://law.go.kr/법령/지방자치분권및균형성장에관한특별법",
-      "note": "2026-03-05 공포·2026-07-01 시행 개정으로 법명이 '지역균형발전'에서 '균형성장'으로 변경됨(N03 개정의 결과)"
-    },
-    {
-      "id": "SRC_LOCAL_AUTONOMY_LAW",
-      "type": "statute",
-      "title": "지방자치법(특별지방자치단체)",
-      "url": "https://law.go.kr/법령/지방자치법"
-    },
-    {
-      "id": "SRC_ENGINE_NEWS",
-      "type": "news",
-      "title": "'권역별 성장엔진' 발굴 본격화…5극3특 국가균형성장 이끈다(정책브리핑)",
-      "publishedOn": "2025-12-08",
-      "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148956047",
-      "note": "기사 등록일 원문 확인(기존 데이터의 2025-11-01은 오기)"
-    },
-    {
-      "id": "SRC_LAND_FRAMEWORK_ACT",
-      "type": "statute",
-      "title": "국토기본법",
-      "note": "제7조제1항 국토계획 상호 관계, 제12조의2 초광역권계획의 수립",
-      "url": "https://law.go.kr/법령/국토기본법"
-    },
-    {
-      "id": "SRC_LOCAL_PUBLIC_ENTERPRISE_ACT",
-      "type": "statute",
-      "title": "지방공기업법",
-      "note": "제49조 지방공사 설립 — 행정안전부장관 협의·조례 제정·전문기관 타당성 검토",
-      "url": "https://law.go.kr/법령/지방공기업법"
-    },
-    {
-      "id": "SRC_RAILWAY_ACT",
-      "type": "statute",
-      "title": "철도의 건설 및 철도시설 유지관리에 관한 법률",
-      "note": "제4조제2항제1호 국가철도망구축계획은 지방시대 종합계획과 조화를 이루어야 함",
-      "url": "https://law.go.kr/법령/철도의건설및철도시설유지관리에관한법률"
-    },
-    {
-      "id": "SRC_BG_ACT_2026_AMEND",
-      "type": "statute",
-      "title": "지방자치분권 및 균형성장에 관한 특별법 일부개정법률(공포 2026-06-02)",
-      "note": "제11조의3 균형성장영향평가 신설 · 제31조의2 범부처 초광역추진협의체 신설 · 제31조의3 권역별 초광역공동사업단 신설 · 제76조 초광역특별계정 신설. 시행일 단계적(2026-12-03 / 2027-01-01)이라 2026-07-01 시행 현행 조문에는 아직 반영 전",
-      "url": "https://law.go.kr/법령/지방자치분권및균형성장에관한특별법"
-    },
-    {
-      "id": "SRC_BUDGET_2026",
-      "type": "official-policy",
-      "title": "2026년 예산 국회 확정(정책브리핑)",
-      "publishedOn": "2025-12-02",
-      "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148956215"
+     "artifact": "fpts.strategy_adopted",
+     "relation": "finish_to_start",
+     "strength": "hard",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
     }
-  ],
-  "stages": [
+   ],
+   "produces": [
+    "fpts.governance_ready"
+   ],
+   "templateRefs": [
     {
-      "id": "G0",
-      "label": "정책·거버넌스"
-    },
-    {
-      "id": "G1",
-      "label": "법제 정비"
-    },
-    {
-      "id": "G2",
-      "label": "성장엔진·초광역특별협약"
-    },
-    {
-      "id": "G3",
-      "label": "산업·투자·인재"
-    },
-    {
-      "id": "G4",
-      "label": "국토·교통"
-    },
-    {
-      "id": "G5",
-      "label": "의료·복지·교육·농산어촌"
-    },
-    {
-      "id": "G6",
-      "label": "재정기반"
-    },
-    {
-      "id": "G7",
-      "label": "권한이양·특별지방자치단체"
+     "institution": "regional-balanced-growth-project",
+     "mappingStatus": "candidate"
     }
-  ],
-  "actors": [
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ],
+   "note": "범부처 초광역추진협의체는 2026-06-02 공포 개정법 제31조의2로 신설되어 지방시대위원회에 둔다. 「국가자치분권균형성장회의」로의 회의체 개편은 현행·개정 조문 모두에서 확인되지 않음(제62조는 대통령 소속 「지방시대위원회」). / 결정주체: 근거 같은 법 제31조의2(신설)"
+  },
+  {
+   "id": "N03",
+   "name": "지방분권균형발전법 개정 — 사전조정권·초광역특별계정·통합공모",
+   "stage": "G1",
+   "authority": "국회·지방시대위원회",
+   "leadActor": "assembly",
+   "actorRoles": {
+    "lead": [
+     "국회"
+    ],
+    "consult": [],
+    "decision": [
+     "국회"
+    ]
+   },
+   "classification": "legal_gate",
+   "status": "completed",
+   "confidence": "statutory",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
     {
-      "id": "balance-committee",
-      "code": "A01",
-      "label": "지방시대위원회",
-      "shortLabel": "지방위",
-      "mandate": "5극3특 전략 총괄·의결·예산 사전조정"
-    },
-    {
-      "id": "whole-government",
-      "code": "A02",
-      "label": "범정부·국무회의",
-      "shortLabel": "범정부",
-      "mandate": "국정과제 조정·범부처 협의체"
-    },
-    {
-      "id": "assembly",
-      "code": "A03",
-      "label": "국회",
-      "shortLabel": "국회",
-      "mandate": "법률 제·개정 심의·의결"
-    },
-    {
-      "id": "mois",
-      "code": "A04",
-      "label": "행정안전부",
-      "shortLabel": "행안부",
-      "mandate": "특별지자체·권한이양·차등지원"
-    },
-    {
-      "id": "fiscal",
-      "code": "A05",
-      "label": "기획예산처·재정경제부",
-      "shortLabel": "재정당국",
-      "mandate": "예산·계정·포괄보조·세제"
-    },
-    {
-      "id": "motie",
-      "code": "A06",
-      "label": "산업통상부",
-      "shortLabel": "산업부",
-      "mandate": "성장엔진·특구·산업정책"
-    },
-    {
-      "id": "msit",
-      "code": "A07",
-      "label": "과기정통부",
-      "shortLabel": "과기부",
-      "mandate": "AX 거점·R&D·예타"
-    },
-    {
-      "id": "molit",
-      "code": "A08",
-      "label": "국토교통부",
-      "shortLabel": "국토부",
-      "mandate": "국토계획·교통망·공항"
-    },
-    {
-      "id": "moe",
-      "code": "A09",
-      "label": "교육부",
-      "shortLabel": "교육부",
-      "mandate": "거점국립대·RISE·교육특구"
-    },
-    {
-      "id": "mohw",
-      "code": "A10",
-      "label": "보건복지부",
-      "shortLabel": "복지부",
-      "mandate": "공공의료·통합돌봄"
-    },
-    {
-      "id": "mafra",
-      "code": "A11",
-      "label": "농식품부·해수부",
-      "shortLabel": "농해수",
-      "mandate": "K-농산어촌·기본소득"
-    },
-    {
-      "id": "region",
-      "code": "A12",
-      "label": "초광역권·특별지방자치단체",
-      "shortLabel": "초광역권",
-      "mandate": "권역 전략 수립·협약 이행"
-    },
-    {
-      "id": "sido",
-      "code": "A13",
-      "label": "시·도 지방자치단체",
-      "shortLabel": "시·도",
-      "mandate": "권역 구성·사업 시행"
-    },
-    {
-      "id": "private",
-      "code": "A14",
-      "label": "기업·대학·민간",
-      "shortLabel": "민간",
-      "mandate": "앵커기업 투자·인재양성 참여"
+     "artifact": "fpts.strategy_adopted",
+     "relation": "finish_to_start",
+     "strength": "hard",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
     }
-  ],
-  "nodes": [
+   ],
+   "produces": [
+    "fpts.law_decentralization_amended"
+   ],
+   "templateRefs": [
     {
-      "id": "N01",
-      "name": "5극3특 추진전략 설계도 수립·지방시대위 의결",
-      "stage": "G0",
-      "authority": "지방시대위원회",
-      "leadActor": "balance-committee",
-      "actorRoles": {
-        "lead": [
-          "지방시대위원회"
-        ],
-        "consult": [
-          "국정기획위원회",
-          "관계부처"
-        ],
-        "decision": [
-          "지방시대위원회"
-        ]
-      },
-      "classification": "policy",
-      "status": "completed",
-      "confidence": "official",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [],
-      "produces": [
-        "fpts.strategy_adopted"
-      ],
-      "templateRefs": [
-        {
-          "institution": "regional-balanced-growth-project"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY",
-        "SRC_BALANCE_PAGE"
-      ],
-      "actual": {
-        "completedOn": "2025-09-30"
-      },
-      "note": "완료일 근거: 5극3특 국가균형성장 추진전략 설계도 발행·지방시대위 의결(SRC_STRATEGY)"
+     "institution": "legislative-notice"
     },
     {
-      "id": "N02",
-      "name": "거버넌스 구축 — 국가자치분권균형성장회의·범정부 초광역추진협의체·권역별 협약추진체",
-      "stage": "G0",
-      "authority": "지방시대위원회·행정안전부",
-      "leadActor": "balance-committee",
-      "actorRoles": {
-        "lead": [
-          "지방시대위원회"
-        ],
-        "consult": [
-          "행정안전부",
-          "시·도"
-        ],
-        "decision": [
-          "국회",
-          "행정안전부장관"
-        ]
-      },
-      "classification": "governance",
-      "status": "active",
-      "confidence": "official",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.strategy_adopted",
-          "relation": "finish_to_start",
-          "strength": "hard",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.governance_ready"
-      ],
-      "templateRefs": [
-        {
-          "institution": "regional-balanced-growth-project",
-          "mappingStatus": "candidate"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ],
-      "note": "범부처 초광역추진협의체는 2026-06-02 공포 개정법 제31조의2로 신설되어 지방시대위원회에 둔다. 「국가자치분권균형성장회의」로의 회의체 개편은 현행·개정 조문 모두에서 확인되지 않음(제62조는 대통령 소속 「지방시대위원회」). / 결정주체: 근거 같은 법 제31조의2(신설)"
-    },
-    {
-      "id": "N03",
-      "name": "지방분권균형발전법 개정 — 사전조정권·초광역특별계정·통합공모",
-      "stage": "G1",
-      "authority": "국회·지방시대위원회",
-      "leadActor": "assembly",
-      "actorRoles": {
-        "lead": [
-          "국회"
-        ],
-        "consult": [],
-        "decision": [
-          "국회"
-        ]
-      },
-      "classification": "legal_gate",
-      "status": "completed",
-      "confidence": "statutory",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.strategy_adopted",
-          "relation": "finish_to_start",
-          "strength": "hard",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.law_decentralization_amended"
-      ],
-      "templateRefs": [
-        {
-          "institution": "legislative-notice"
-        },
-        {
-          "institution": "assembly-lawmaking"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY",
-        "SRC_LAW_PASSED",
-        "SRC_DECENT_LAW"
-      ],
-      "actual": {
-        "completedOn": "2026-06-02"
-      },
-      "note": "완료일 근거: 지방자치분권 및 균형성장에 관한 특별법 일부개정법률 공포"
-    },
-    {
-      "id": "N04",
-      "name": "지방자치법 개정 — 특별지방자치단체 권한 확대",
-      "stage": "G1",
-      "authority": "국회·행정안전부",
-      "leadActor": "assembly",
-      "actorRoles": {
-        "lead": [
-          "국회"
-        ],
-        "consult": [],
-        "decision": [
-          "국회"
-        ]
-      },
-      "classification": "legal_gate",
-      "status": "active",
-      "confidence": "statutory",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.strategy_adopted",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.law_localautonomy_amended"
-      ],
-      "templateRefs": [
-        {
-          "institution": "legislative-notice"
-        },
-        {
-          "institution": "assembly-lawmaking"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY",
-        "SRC_LOCAL_AUTONOMY_LAW"
-      ]
-    },
-    {
-      "id": "N05",
-      "name": "3차 지방일괄이양법·맞춤형 권한이양 특별법 제정",
-      "stage": "G1",
-      "authority": "국회·행정안전부",
-      "leadActor": "assembly",
-      "actorRoles": {
-        "lead": [
-          "국회"
-        ],
-        "consult": [],
-        "decision": [
-          "국회"
-        ]
-      },
-      "classification": "legal_gate",
-      "status": "active",
-      "confidence": "statutory",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.strategy_adopted",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.law_devolution_enacted"
-      ],
-      "templateRefs": [
-        {
-          "institution": "assembly-lawmaking"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ]
-    },
-    {
-      "id": "N06",
-      "name": "광역권 성장지원 특별법·조특법 등 관련 법령 정비",
-      "stage": "G1",
-      "authority": "국회·관계부처",
-      "leadActor": "assembly",
-      "actorRoles": {
-        "lead": [
-          "국회"
-        ],
-        "consult": [],
-        "decision": [
-          "국회"
-        ]
-      },
-      "classification": "legal_gate",
-      "status": "planned",
-      "confidence": "modeled",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.strategy_adopted",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.law_growth_support_enacted"
-      ],
-      "templateRefs": [
-        {
-          "institution": "assembly-lawmaking",
-          "mappingStatus": "candidate"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ]
-    },
-    {
-      "id": "N07",
-      "name": "성장엔진 추진가이드라인 수립",
-      "stage": "G2",
-      "authority": "산업통상부",
-      "leadActor": "motie",
-      "actorRoles": {
-        "lead": [
-          "산업통상부"
-        ],
-        "consult": [],
-        "decision": [
-          "산업통상부장관"
-        ]
-      },
-      "classification": "policy",
-      "status": "completed",
-      "confidence": "official",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.strategy_adopted",
-          "relation": "finish_to_start",
-          "strength": "hard",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.engine_guideline"
-      ],
-      "templateRefs": [
-        {
-          "institution": "legislative-notice",
-          "mappingStatus": "candidate"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY",
-        "SRC_ENGINE_NEWS"
-      ],
-      "note": "결정주체: 법정 의결주체 조항 미발견 — 법정 의결 주체 조항 없음 — 소관 부처 행정지침"
-    },
-    {
-      "id": "N08",
-      "name": "민관합동 성장엔진 투자계획 수립·투자협의체계 마련",
-      "stage": "G2",
-      "authority": "범부처·지방시대위원회·지자체",
-      "leadActor": "whole-government",
-      "actorRoles": {
-        "lead": [
-          "범부처"
-        ],
-        "consult": [
-          "기업",
-          "시·도"
-        ],
-        "decision": [
-          "산업통상부장관"
-        ]
-      },
-      "classification": "plan",
-      "status": "active",
-      "confidence": "official",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.engine_guideline",
-          "relation": "finish_to_start",
-          "strength": "hard",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.engine_investment_plan"
-      ],
-      "templateRefs": [
-        {
-          "institution": "regional-balanced-growth-project",
-          "mappingStatus": "candidate"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY",
-        "SRC_ENGINE_NEWS"
-      ],
-      "note": "결정주체: 법정 의결주체 조항 미발견 — 법정 의결 주체 조항 없음 — 범부처 협의로 확정"
-    },
-    {
-      "id": "N09",
-      "name": "5극3특 성장엔진 선정 — 지방시대위 의결",
-      "stage": "G2",
-      "authority": "지방시대위원회",
-      "leadActor": "balance-committee",
-      "actorRoles": {
-        "lead": [
-          "지방시대위원회"
-        ],
-        "consult": [],
-        "decision": [
-          "지방시대위원회"
-        ]
-      },
-      "classification": "legal_gate",
-      "status": "unknown",
-      "confidence": "official",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.engine_investment_plan",
-          "relation": "finish_to_start",
-          "strength": "hard",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.engine_selected"
-      ],
-      "templateRefs": [
-        {
-          "institution": "regional-balanced-growth-project",
-          "mappingStatus": "candidate"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ],
-      "note": "설계도상 '26.3 의결 일정 — 실제 의결 여부는 공개자료 확인 필요"
-    },
-    {
-      "id": "N10",
-      "name": "초광역권 성장엔진 시범 프로젝트 발굴·체결",
-      "stage": "G2",
-      "authority": "범부처·산업통상부·지자체",
-      "leadActor": "motie",
-      "actorRoles": {
-        "lead": [
-          "범부처"
-        ],
-        "consult": [
-          "SK·AWS 등 앵커기업"
-        ],
-        "decision": [
-          "산업통상부장관"
-        ]
-      },
-      "classification": "delivery",
-      "status": "active",
-      "confidence": "official",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.engine_guideline",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.pilot_projects_signed"
-      ],
-      "templateRefs": [
-        {
-          "institution": "mega-regional-special-agreement-account",
-          "mappingStatus": "candidate"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ],
-      "note": "결정주체: 근거 지방자치분권 및 균형성장에 관한 특별법 제30조 — 제30조는 '국가와 지방자치단체는 … 추진할 수 있다'는 재량 조항 — 특정 의결주체를 정하지 않음"
-    },
-    {
-      "id": "N11",
-      "name": "권역별 초광역특별협약 체결",
-      "stage": "G2",
-      "authority": "범부처·지방시대위원회·초광역권",
-      "leadActor": "balance-committee",
-      "actorRoles": {
-        "lead": [
-          "범부처"
-        ],
-        "consult": [
-          "기업",
-          "대학"
-        ],
-        "decision": [
-          "지방시대위원회"
-        ]
-      },
-      "classification": "legal_gate",
-      "status": "active",
-      "confidence": "statutory",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.engine_selected",
-          "relation": "finish_to_start",
-          "strength": "hard",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY",
-            "SRC_DECENT_LAW",
-            "SRC_BG_ACT_2026_AMEND"
-          ],
-          "note": "초광역특별협약은 2026-06-02 공포 개정법에서 신설된 제도(제31조의2·제31조의3이 이를 전제로 범부처 초광역추진협의체와 권역별 초광역공동사업단을 규정). 기존 제31조 지역발전투자협약과는 별개 제도이며, 지역발전투자협약의 경우 제31조제1항이 \"미리 지방시대위원회의 심의·의결을 거쳐야 한다\"고 정한다."
-        },
-        {
-          "artifact": "fpts.governance_ready",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        },
-        {
-          "artifact": "fpts.law_decentralization_amended",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "legal",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        },
-        {
-          "artifact": "fpts.mega_account_created",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "financial",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.special_agreement_signed"
-      ],
-      "templateRefs": [
-        {
-          "institution": "mega-regional-special-agreement-account"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY",
-        "SRC_LAW_PASSED"
-      ]
-    },
-    {
-      "id": "N12",
-      "name": "4대 권역 AX 거점 예타면제·사업규모 확정",
-      "stage": "G3",
-      "authority": "과기정통부·산업통상부",
-      "leadActor": "msit",
-      "actorRoles": {
-        "lead": [
-          "과기정통부"
-        ],
-        "consult": [],
-        "decision": [
-          "기획예산처장관"
-        ]
-      },
-      "classification": "technical_gate",
-      "status": "active",
-      "confidence": "statutory",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.strategy_adopted",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.ax_hub_confirmed"
-      ],
-      "templateRefs": [
-        {
-          "institution": "pfs-exemption-fast-track"
-        },
-        {
-          "institution": "preliminary-feasibility-study"
-        },
-        {
-          "institution": "intelligent-informatization-lead-project",
-          "mappingStatus": "candidate"
-        },
-        {
-          "institution": "science-technology-master-plan",
-          "mappingStatus": "candidate"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ],
-      "note": "결정주체: 근거 국가재정법 제38조제1항"
-    },
-    {
-      "id": "N13",
-      "name": "메가특구 등 규제특례 제도기반 정비",
-      "stage": "G3",
-      "authority": "국무조정실·산업통상부",
-      "leadActor": "motie",
-      "actorRoles": {
-        "lead": [
-          "국무조정실"
-        ],
-        "consult": [],
-        "decision": [
-          "산업통상부장관",
-          "지방시대위원회"
-        ]
-      },
-      "classification": "legal_gate",
-      "status": "planned",
-      "confidence": "modeled",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.special_agreement_signed",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        },
-        {
-          "artifact": "fpts.law_growth_support_enacted",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "legal",
-          "basis": [
-            "SRC_STRATEGY"
-          ],
-          "whenRule": {
-            "rule": "RULE_GROWTH_SUPPORT_ACT",
-            "equals": true
-          }
-        }
-      ],
-      "produces": [
-        "fpts.regulatory_special_ready"
-      ],
-      "templateRefs": [
-        {
-          "institution": "regulatory-sandbox"
-        },
-        {
-          "institution": "opportunity-development-zone-designation"
-        },
-        {
-          "institution": "border-area-development",
-          "mappingStatus": "candidate"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ],
-      "note": "결정주체: 근거 지방자치분권 및 균형성장에 관한 특별법 제23조제2항 — 기회발전특구는 산업통상부장관이 지방시대위원회 심의·의결을 거쳐 지정 — '메가특구'는 신설 개념이라 법령 정비 필요"
-    },
-    {
-      "id": "N14",
-      "name": "국민성장펀드·지역성장펀드 조성 — 비수도권 40%",
-      "stage": "G3",
-      "authority": "금융위원회·중소벤처기업부",
-      "leadActor": "fiscal",
-      "actorRoles": {
-        "lead": [
-          "금융위원회"
-        ],
-        "consult": [],
-        "decision": [
-          "금융위원회",
-          "기획예산처장관"
-        ]
-      },
-      "classification": "delivery",
-      "status": "active",
-      "confidence": "official",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.strategy_adopted",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.regional_funds_ready"
-      ],
-      "templateRefs": [
-        {
-          "institution": "fund-management",
-          "mappingStatus": "candidate"
-        },
-        {
-          "institution": "startup-support-plan",
-          "mappingStatus": "candidate"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ],
-      "note": "결정주체: 법정 의결주체 조항 미발견 — 법정 의결 주체 조항 미발견 — 펀드 조성 근거법 확인 필요"
-    },
-    {
-      "id": "N15",
-      "name": "권역별 지역투자공사 설립",
-      "stage": "G3",
-      "authority": "금융위원회·산업통상부",
-      "leadActor": "fiscal",
-      "actorRoles": {
-        "lead": [
-          "금융위원회"
-        ],
-        "consult": [],
-        "decision": [
-          "국회"
-        ]
-      },
-      "classification": "legal_gate",
-      "status": "planned",
-      "confidence": "modeled",
-      "activation": {
-        "mode": "rule",
-        "rule": "RULE_INVEST_CORP_ACT",
-        "equals": true
-      },
-      "requires": [
-        {
-          "artifact": "fpts.regional_funds_ready",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "financial",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.invest_corp_established"
-      ],
-      "templateRefs": [
-        {
-          "institution": "assembly-lawmaking",
-          "mappingStatus": "candidate"
-        },
-        {
-          "institution": "local-public-enterprise-establishment",
-          "mappingStatus": "candidate"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY",
-        "SRC_LOCAL_PUBLIC_ENTERPRISE_ACT"
-      ],
-      "note": "설립 형태 미확정 — 지방공사 형태라면 지방공기업법 제49조(행안부장관 협의·조례 제정·전문기관 타당성 검토)로 가능하며 국회 입법이 필요 없다. 별도 특별법 법인이라면 입법 경로. 두 경로를 모두 후보로 병기함(authority가 금융위·산업통상부로 기재돼 있어 지방공사 여부가 불분명)."
-    },
-    {
-      "id": "N16",
-      "name": "서울대 10개 만들기·RISE 체계 재구조화",
-      "stage": "G3",
-      "authority": "교육부",
-      "leadActor": "moe",
-      "actorRoles": {
-        "lead": [
-          "교육부"
-        ],
-        "consult": [
-          "거점국립대"
-        ],
-        "decision": [
-          "교육부장관"
-        ]
-      },
-      "classification": "policy",
-      "status": "active",
-      "confidence": "official",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.strategy_adopted",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.talent_system_reformed"
-      ],
-      "templateRefs": [
-        {
-          "institution": "university-funding"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ],
-      "note": "결정주체: 근거 지방대학 및 지역균형인재 육성에 관한 법률 제6조의2"
-    },
-    {
-      "id": "N17",
-      "name": "계약학과·협약형 특성화고 등 투트랙 인재양성",
-      "stage": "G3",
-      "authority": "교육부·산업통상부",
-      "leadActor": "moe",
-      "actorRoles": {
-        "lead": [
-          "교육부"
-        ],
-        "consult": [
-          "기업",
-          "대학"
-        ],
-        "decision": [
-          "교육부장관"
-        ]
-      },
-      "classification": "delivery",
-      "status": "active",
-      "confidence": "statutory",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.talent_system_reformed",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.talent_twotrack_ready"
-      ],
-      "templateRefs": [
-        {
-          "institution": "advanced-industry-contract-department-governance"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ],
-      "note": "결정주체: 근거 산업교육진흥 및 산학연협력촉진에 관한 법률 제8조제2항 — 계약학과 설치·운영계획은 산업교육기관의 장이 교육부장관에게 신고"
-    },
-    {
-      "id": "N18",
-      "name": "산·학·연 혁신성장거점도시 선도사업 선정",
-      "stage": "G3",
-      "authority": "국토교통부·산업통상부·중소벤처기업부",
-      "leadActor": "molit",
-      "actorRoles": {
-        "lead": [
-          "국토교통부"
-        ],
-        "consult": [],
-        "decision": [
-          "국토교통부장관"
-        ]
-      },
-      "classification": "policy",
-      "status": "active",
-      "confidence": "official",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.special_agreement_signed",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.innovation_city_selected"
-      ],
-      "templateRefs": [
-        {
-          "institution": "national-rd-call-selection",
-          "mappingStatus": "candidate"
-        },
-        {
-          "institution": "industrial-complex-development",
-          "mappingStatus": "candidate"
-        },
-        {
-          "institution": "science-technology-master-plan",
-          "mappingStatus": "candidate"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ],
-      "note": "결정주체: 법정 의결주체 조항 미발견 — 법정 의결 주체 조항 없음 — 공모·선정 방식"
-    },
-    {
-      "id": "N19",
-      "name": "제5차 국토종합계획 수정계획('26~'40) 마련",
-      "stage": "G4",
-      "authority": "국토교통부",
-      "leadActor": "molit",
-      "actorRoles": {
-        "lead": [
-          "국토교통부"
-        ],
-        "consult": [],
-        "decision": [
-          "대통령",
-          "국무회의",
-          "국토정책위원회"
-        ]
-      },
-      "classification": "plan",
-      "status": "unknown",
-      "confidence": "statutory",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.strategy_adopted",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.national_land_plan_revised"
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ],
-      "templateRefs": [
-        {
-          "institution": "national-comprehensive-plan"
-        }
-      ],
-      "note": "결정주체: 근거 국토기본법 제12조제1항 — 국토교통부장관이 국토정책위원회와 국무회의 심의를 거쳐 대통령의 승인을 받음"
-    },
-    {
-      "id": "N20",
-      "name": "초광역권계획·초광역권발전계획 수립",
-      "stage": "G4",
-      "authority": "국토교통부·지방시대위원회·초광역권",
-      "leadActor": "region",
-      "actorRoles": {
-        "lead": [
-          "국토교통부"
-        ],
-        "consult": [],
-        "decision": [
-          "지방시대위원회",
-          "국토교통부장관"
-        ]
-      },
-      "classification": "plan",
-      "status": "planned",
-      "confidence": "statutory",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.national_land_plan_revised",
-          "relation": "finish_to_start",
-          "strength": "hard",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY",
-            "SRC_LAND_FRAMEWORK_ACT"
-          ],
-          "note": "국토기본법 제7조제1항 — \"국토종합계획은 초광역권계획, 도종합계획 및 시·군종합계획의 기본이 되며\""
-        },
-        {
-          "artifact": "fpts.special_agreement_signed",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.mega_region_plan"
-      ],
-      "templateRefs": [
-        {
-          "institution": "mega-region-plan"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ],
-      "note": "결정주체: 근거 지방자치분권 및 균형성장에 관한 특별법 제9조제1항 · 국토기본법 제12조의2제3항 — 초광역권발전계획은 지방시대위원회 심의·의결, 초광역권계획은 국토교통부장관 승인(제15조 준용)"
-    },
-    {
-      "id": "N21",
-      "name": "권역별 60분 대중교통망계획 수립",
-      "stage": "G4",
-      "authority": "국토교통부·지방시대위원회",
-      "leadActor": "molit",
-      "actorRoles": {
-        "lead": [
-          "국토교통부"
-        ],
-        "consult": [],
-        "decision": [
-          "국토교통부장관"
-        ]
-      },
-      "classification": "plan",
-      "status": "planned",
-      "confidence": "official",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.mega_region_plan",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.transport_plan"
-      ],
-      "templateRefs": [
-        {
-          "institution": "metropolitan-transport-improvement-measures",
-          "mappingStatus": "candidate"
-        },
-        {
-          "institution": "integrated-transport-investment-plan",
-          "mappingStatus": "candidate"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ],
-      "note": "결정주체: 근거 대중교통의 육성 및 이용촉진에 관한 법률 제5조제1항"
-    },
-    {
-      "id": "N22",
-      "name": "광역철도·도시철도·간선도로망 확충",
-      "stage": "G4",
-      "authority": "국토교통부",
-      "leadActor": "molit",
-      "actorRoles": {
-        "lead": [
-          "국토교통부"
-        ],
-        "consult": [],
-        "decision": [
-          "국토교통부장관"
-        ]
-      },
-      "classification": "delivery",
-      "status": "active",
-      "confidence": "statutory",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.transport_plan",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "technical",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.transport_network_built"
-      ],
-      "templateRefs": [
-        {
-          "institution": "national-road-rail-soc"
-        },
-        {
-          "institution": "railway-business-license",
-          "mappingStatus": "candidate"
-        },
-        {
-          "institution": "integrated-transport-investment-plan",
-          "mappingStatus": "candidate"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ],
-      "note": "철도의 건설 및 철도시설 유지관리에 관한 법률 제4조제2항제1호 — 국가철도망구축계획은 「지방자치분권 및 균형성장에 관한 특별법」 제6조 지방시대 종합계획과 조화를 이루어야 한다. 법정 선행은 N21(권역별 60분 대중교통망계획)이 아니라 이 종합계획이며, 해당 법정계획은 현재 이 프로젝트에 관문으로 등재돼 있지 않다. / 결정주체: 근거 철도의 건설 및 철도시설 유지관리에 관한 법률 제4조제1항 — 국가철도망구축계획은 제4조제2항제1호에 따라 지방시대 종합계획과 조화를 이루어야 함"
-    },
-    {
-      "id": "N23",
-      "name": "가덕도·TK·청주·무안 등 거점공항 육성",
-      "stage": "G4",
-      "authority": "국토교통부",
-      "leadActor": "molit",
-      "actorRoles": {
-        "lead": [
-          "국토교통부"
-        ],
-        "consult": [],
-        "decision": [
-          "국토교통부장관"
-        ]
-      },
-      "classification": "delivery",
-      "status": "active",
-      "confidence": "statutory",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.transport_plan",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "technical",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.hub_airports_ready"
-      ],
-      "templateRefs": [
-        {
-          "institution": "airport-development-operation-permit"
-        },
-        {
-          "institution": "air-transport-business-license",
-          "mappingStatus": "candidate"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ],
-      "note": "결정주체: 근거 공항시설법 제3조제1항"
-    },
-    {
-      "id": "N24",
-      "name": "행정수도 완성·새만금 물류거점·공공기관 2차 이전",
-      "stage": "G4",
-      "authority": "범정부·국토교통부",
-      "leadActor": "whole-government",
-      "actorRoles": {
-        "lead": [
-          "범정부"
-        ],
-        "consult": [],
-        "decision": [
-          "정부",
-          "국토교통부장관"
-        ]
-      },
-      "classification": "policy",
-      "status": "active",
-      "confidence": "official",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.national_land_plan_revised",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.balance_anchor_ready"
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ],
-      "note": "공공기관 2차 이전은 '26년 이전계획 확정, '27년 선도이전 일정 — 행정수도·새만금 트랙은 별도 제도 매핑 필요 / 결정주체: 근거 지방자치분권 및 균형성장에 관한 특별법 제25조제1항 — '정부는 … 혁신도시시책을 추진하여야 한다'",
-      "templateRefs": [
-        {
-          "institution": "public-institution-relocation"
-        }
-      ]
-    },
-    {
-      "id": "N25",
-      "name": "권역별 거점병원·공공의료체계 구축",
-      "stage": "G5",
-      "authority": "보건복지부",
-      "leadActor": "mohw",
-      "actorRoles": {
-        "lead": [
-          "보건복지부"
-        ],
-        "consult": [],
-        "decision": [
-          "보건복지부장관",
-          "공공보건의료정책심의위원회"
-        ]
-      },
-      "classification": "delivery",
-      "status": "active",
-      "confidence": "statutory",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.strategy_adopted",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.health_network_ready"
-      ],
-      "templateRefs": [
-        {
-          "institution": "public-essential-medical"
-        },
-        {
-          "institution": "public-health-medical-service-plan"
-        },
-        {
-          "institution": "health-medical-development-plan",
-          "mappingStatus": "candidate"
-        },
-        {
-          "institution": "local-health-plan-center",
-          "mappingStatus": "candidate"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ],
-      "note": "결정주체: 근거 공공보건의료에 관한 법률 제4조제1항"
-    },
-    {
-      "id": "N26",
-      "name": "지역사회 통합돌봄 전국 시행",
-      "stage": "G5",
-      "authority": "보건복지부·지방자치단체",
-      "leadActor": "mohw",
-      "actorRoles": {
-        "lead": [
-          "보건복지부"
-        ],
-        "consult": [],
-        "decision": [
-          "보건복지부장관"
-        ]
-      },
-      "classification": "legal_gate",
-      "status": "completed",
-      "confidence": "statutory",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.strategy_adopted",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.integrated_care_live"
-      ],
-      "templateRefs": [
-        {
-          "institution": "community-integrated-care"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ],
-      "note": "돌봄통합지원법 '26.3 전국 시행 / 결정주체: 근거 의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률 제5조 / 완료일 근거: 의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률 시행",
-      "actual": {
-        "completedOn": "2026-03-27"
-      }
-    },
-    {
-      "id": "N27",
-      "name": "교육특구 지정·운영",
-      "stage": "G5",
-      "authority": "교육부",
-      "leadActor": "moe",
-      "actorRoles": {
-        "lead": [
-          "교육부"
-        ],
-        "consult": [],
-        "decision": [
-          "교육부장관",
-          "교육국제화특구위원회"
-        ]
-      },
-      "classification": "policy",
-      "status": "planned",
-      "confidence": "official",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.strategy_adopted",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.edu_zone_designated"
-      ],
-      "templateRefs": [
-        {
-          "institution": "foreign-education-institution-special-zone",
-          "mappingStatus": "candidate"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ],
-      "note": "결정주체: 근거 교육국제화특구의 지정ㆍ운영 및 육성에 관한 특별법 제4조제1항 — 시·도지사와 교육감의 공동 요청 + 교육국제화특구위원회 심의를 거쳐 교육부장관이 지정"
-    },
-    {
-      "id": "N28",
-      "name": "햇빛연금·농어촌기본소득법 제정·시범사업",
-      "stage": "G5",
-      "authority": "농식품부·해양수산부",
-      "leadActor": "mafra",
-      "actorRoles": {
-        "lead": [
-          "농식품부"
-        ],
-        "consult": [],
-        "decision": [
-          "국회"
-        ]
-      },
-      "classification": "legal_gate",
-      "status": "active",
-      "confidence": "official",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.strategy_adopted",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.rural_income_ready"
-      ],
-      "templateRefs": [
-        {
-          "institution": "assembly-lawmaking",
-          "mappingStatus": "candidate"
-        },
-        {
-          "institution": "local-extinction-response-fund",
-          "mappingStatus": "candidate"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ],
-      "note": "인구감소지역 시범('26, 24만명·0.2조) 및 (가칭)농어촌기본소득법 제정 ~'26"
-    },
-    {
-      "id": "N29",
-      "name": "농촌공간계획·빈집특별법 등 재생 프로젝트",
-      "stage": "G5",
-      "authority": "농식품부",
-      "leadActor": "mafra",
-      "actorRoles": {
-        "lead": [
-          "농식품부"
-        ],
-        "consult": [],
-        "decision": [
-          "농림축산식품부장관"
-        ]
-      },
-      "classification": "plan",
-      "status": "active",
-      "confidence": "statutory",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.strategy_adopted",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.rural_regen_ready"
-      ],
-      "templateRefs": [
-        {
-          "institution": "legislative-notice",
-          "mappingStatus": "candidate"
-        },
-        {
-          "institution": "housing-site-development",
-          "mappingStatus": "candidate"
-        },
-        {
-          "institution": "forest-management-plan",
-          "mappingStatus": "candidate"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ],
-      "note": "결정주체: 근거 농촌공간 재구조화 및 재생지원에 관한 법률 제6조"
-    },
-    {
-      "id": "N30",
-      "name": "초광역특별계정 신설 — 지특회계 3계정 개편",
-      "stage": "G6",
-      "authority": "기획예산처·지방시대위원회",
-      "leadActor": "fiscal",
-      "actorRoles": {
-        "lead": [
-          "기획예산처"
-        ],
-        "consult": [],
-        "decision": [
-          "국회",
-          "기획예산처장관"
-        ]
-      },
-      "classification": "legal_gate",
-      "status": "completed",
-      "confidence": "statutory",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.law_decentralization_amended",
-          "relation": "finish_to_start",
-          "strength": "hard",
-          "kind": "legal",
-          "basis": [
-            "SRC_STRATEGY",
-            "SRC_DECENT_LAW"
-          ],
-          "note": "같은 법 제74조(특별회계 설치)·제76조(계정의 구분) — 계정 신설·개편은 법률사항"
-        }
-      ],
-      "produces": [
-        "fpts.mega_account_created"
-      ],
-      "templateRefs": [
-        {
-          "institution": "mega-regional-special-agreement-account"
-        },
-        {
-          "institution": "national-budget"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY",
-        "SRC_LAW_PASSED",
-        "SRC_BG_ACT_2026_AMEND"
-      ],
-      "note": "초광역특별계정은 2026-06-02 공포 개정법 제76조로 신설됨(\"제주특별자치도계정 및 세종특별자치시계정\"을 \"…및 초광역특별계정\"으로 개정). 시행일이 단계적이라(초광역특별계정 2027-01-01 적용) 2026-07-01 시행 현행 조문에는 아직 4계정만 표시된다 — 입법은 완료, 시행 대기. / 결정주체: 근거 지방자치분권 및 균형성장에 관한 특별법 제76조(개정) / 완료일 근거: 같은 개정법 제76조 초광역특별계정 신설 공포(시행 대기)",
-      "actual": {
-        "completedOn": "2026-06-02"
-      }
-    },
-    {
-      "id": "N31",
-      "name": "포괄보조 대폭 확대 — 3.8조→10.6조, 사업수 47→121개",
-      "stage": "G6",
-      "authority": "기획예산처",
-      "leadActor": "fiscal",
-      "actorRoles": {
-        "lead": [
-          "기획예산처"
-        ],
-        "consult": [],
-        "decision": [
-          "국회",
-          "기획예산처장관"
-        ]
-      },
-      "classification": "delivery",
-      "status": "completed",
-      "confidence": "official",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.mega_account_created",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "financial",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.block_grant_expanded"
-      ],
-      "templateRefs": [
-        {
-          "institution": "national-budget"
-        },
-        {
-          "institution": "national-subsidy",
-          "mappingStatus": "candidate"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY",
-        "SRC_BUDGET_2026"
-      ],
-      "note": "결정주체: 근거 국가재정법 제32조·제33조 — 예산 편성은 정부, 확정은 국회 의결 / 완료일 근거: 2026년도 예산안 국회 본회의 의결(2025-12-02). 다만 국회예산정책처 분석은 2026년 포괄보조를 사업 120개·약 10.1조원으로 집계해 이 관문의 표기(10.6조·121개)와 차이가 있어 수치 재확인이 필요하다.",
-      "actual": {
-        "completedOn": "2025-12-02"
-      }
-    },
-    {
-      "id": "N32",
-      "name": "균형성장영향평가 도입",
-      "stage": "G6",
-      "authority": "지방시대위원회·기획예산처",
-      "leadActor": "balance-committee",
-      "actorRoles": {
-        "lead": [
-          "지방시대위원회"
-        ],
-        "consult": [],
-        "decision": [
-          "지방시대위원회",
-          "중앙행정기관의 장"
-        ]
-      },
-      "classification": "legal_gate",
-      "status": "active",
-      "confidence": "statutory",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.law_decentralization_amended",
-          "relation": "finish_to_start",
-          "strength": "hard",
-          "kind": "legal",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.impact_assessment_live"
-      ],
-      "templateRefs": [
-        {
-          "institution": "balanced-growth-impact-assessment"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY",
-        "SRC_LAW_PASSED",
-        "SRC_BG_ACT_2026_AMEND"
-      ],
-      "note": "균형성장영향평가는 2026-06-02 공포 개정법 제11조의3으로 신설됨 — 중앙행정기관의 장이 지방시대위원회가 선정한 정책·사업에 대해 평가를 실시하고 결과를 지방시대위원회에 제출. 시행 대기(공포 6개월 후인 2026-12-03 시행). / 결정주체: 근거 같은 법 제11조의3(신설)"
-    },
-    {
-      "id": "N33",
-      "name": "차등지원 제도화 — 7개 사업 3단계·新균형성장지수",
-      "stage": "G6",
-      "authority": "행정안전부·산업통상부·기획예산처",
-      "leadActor": "mois",
-      "actorRoles": {
-        "lead": [
-          "행정안전부"
-        ],
-        "consult": [],
-        "decision": [
-          "행정안전부장관",
-          "기획예산처장관"
-        ]
-      },
-      "classification": "policy",
-      "status": "active",
-      "confidence": "official",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.impact_assessment_live",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.differential_support_live"
-      ],
-      "templateRefs": [
-        {
-          "institution": "local-share-tax",
-          "mappingStatus": "candidate"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ],
-      "note": "결정주체: 법정 의결주체 조항 미발견 — 차등지원 제도화의 법정 근거 조항 미발견"
-    },
-    {
-      "id": "N34",
-      "name": "권역별 특별지방자치단체 출범 — 규약 표준안·컨설팅",
-      "stage": "G7",
-      "authority": "행정안전부·시·도",
-      "leadActor": "mois",
-      "actorRoles": {
-        "lead": [
-          "행정안전부"
-        ],
-        "consult": [],
-        "decision": [
-          "시·도의회"
-        ]
-      },
-      "classification": "legal_gate",
-      "status": "active",
-      "confidence": "statutory",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.law_localautonomy_amended",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "legal",
-          "basis": [
-            "SRC_STRATEGY",
-            "SRC_LOCAL_AUTONOMY_LAW"
-          ],
-          "note": "지방자치법 제199조~제211조로 현행법상 설치 가능(규약→구성 지자체 지방의회 의결→행안부장관 승인→고시). N04 개정은 권한 확대를 위한 정책적 전제이지 설치의 법정 선행조건은 아님"
-        },
-        {
-          "artifact": "fpts.governance_ready",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "policy",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.slg_launched"
-      ],
-      "templateRefs": [
-        {
-          "institution": "special-local-government"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY",
-        "SRC_LOCAL_AUTONOMY_LAW"
-      ],
-      "note": "부울경 특별연합 해산 전례 — 미설립 권역은 연합체에 사업단 구성"
-    },
-    {
-      "id": "N35",
-      "name": "3차 일괄이양·맞춤형 권한이양 시행",
-      "stage": "G7",
-      "authority": "행정안전부",
-      "leadActor": "mois",
-      "actorRoles": {
-        "lead": [
-          "행정안전부"
-        ],
-        "consult": [],
-        "decision": [
-          "국회",
-          "행정안전부장관"
-        ]
-      },
-      "classification": "delivery",
-      "status": "planned",
-      "confidence": "statutory",
-      "activation": {
-        "mode": "always"
-      },
-      "requires": [
-        {
-          "artifact": "fpts.law_devolution_enacted",
-          "relation": "finish_to_start",
-          "strength": "hard",
-          "kind": "legal",
-          "basis": [
-            "SRC_STRATEGY",
-            "SRC_DECENT_LAW"
-          ],
-          "note": "같은 법 제33조제2항 — \"포괄적·일괄적으로 이양하기 위하여 필요한 법적 조치를 마련하여야 한다\""
-        },
-        {
-          "artifact": "fpts.slg_launched",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "legal",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.devolution_effective"
-      ],
-      "templateRefs": [
-        {
-          "institution": "local-government-special-status",
-          "mappingStatus": "candidate"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ],
-      "note": "결정주체: 근거 지방자치분권 및 균형성장에 관한 특별법 제33조제2항 — '포괄적·일괄적으로 이양하기 위하여 필요한 법적 조치를 마련하여야 한다'"
-    },
-    {
-      "id": "N36",
-      "name": "특자체장 규제특례 투트랙 운영",
-      "stage": "G7",
-      "authority": "행정안전부·특별지방자치단체",
-      "leadActor": "region",
-      "actorRoles": {
-        "lead": [
-          "행정안전부"
-        ],
-        "consult": [],
-        "decision": [
-          "행정안전부장관"
-        ]
-      },
-      "classification": "operation",
-      "status": "planned",
-      "confidence": "modeled",
-      "activation": {
-        "mode": "rule",
-        "rule": "RULE_SLG_ESTABLISHED",
-        "equals": true
-      },
-      "requires": [
-        {
-          "artifact": "fpts.slg_launched",
-          "relation": "finish_to_start",
-          "strength": "hard",
-          "kind": "legal",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        },
-        {
-          "artifact": "fpts.law_devolution_enacted",
-          "relation": "finish_to_start",
-          "strength": "soft",
-          "kind": "legal",
-          "basis": [
-            "SRC_STRATEGY"
-          ]
-        }
-      ],
-      "produces": [
-        "fpts.regulatory_twotrack_live"
-      ],
-      "templateRefs": [
-        {
-          "institution": "regulatory-sandbox",
-          "mappingStatus": "candidate"
-        }
-      ],
-      "evidence": [
-        "SRC_STRATEGY"
-      ],
-      "note": "결정주체: 법정 의결주체 조항 미발견 — 특별지방자치단체의 장에게 규제특례 권한을 부여하는 조항을 지방자치법 제199~211조에서 발견하지 못함"
+     "institution": "assembly-lawmaking"
     }
-  ]
+   ],
+   "evidence": [
+    "SRC_STRATEGY",
+    "SRC_LAW_PASSED",
+    "SRC_DECENT_LAW"
+   ],
+   "actual": {
+    "completedOn": "2026-06-02"
+   },
+   "note": "완료일 근거: 지방자치분권 및 균형성장에 관한 특별법 일부개정법률 공포"
+  },
+  {
+   "id": "N04",
+   "name": "지방자치법 개정 — 특별지방자치단체 권한 확대",
+   "stage": "G1",
+   "authority": "국회·행정안전부",
+   "leadActor": "assembly",
+   "actorRoles": {
+    "lead": [
+     "국회"
+    ],
+    "consult": [],
+    "decision": [
+     "국회"
+    ]
+   },
+   "classification": "legal_gate",
+   "status": "active",
+   "confidence": "statutory",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.strategy_adopted",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.law_localautonomy_amended"
+   ],
+   "templateRefs": [
+    {
+     "institution": "legislative-notice"
+    },
+    {
+     "institution": "assembly-lawmaking"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY",
+    "SRC_LOCAL_AUTONOMY_LAW"
+   ]
+  },
+  {
+   "id": "N05",
+   "name": "3차 지방일괄이양법·맞춤형 권한이양 특별법 제정",
+   "stage": "G1",
+   "authority": "국회·행정안전부",
+   "leadActor": "assembly",
+   "actorRoles": {
+    "lead": [
+     "국회"
+    ],
+    "consult": [],
+    "decision": [
+     "국회"
+    ]
+   },
+   "classification": "legal_gate",
+   "status": "active",
+   "confidence": "statutory",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.strategy_adopted",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.law_devolution_enacted"
+   ],
+   "templateRefs": [
+    {
+     "institution": "assembly-lawmaking"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ]
+  },
+  {
+   "id": "N06",
+   "name": "광역권 성장지원 특별법·조특법 등 관련 법령 정비",
+   "stage": "G1",
+   "authority": "국회·관계부처",
+   "leadActor": "assembly",
+   "actorRoles": {
+    "lead": [
+     "국회"
+    ],
+    "consult": [],
+    "decision": [
+     "국회"
+    ]
+   },
+   "classification": "legal_gate",
+   "status": "planned",
+   "confidence": "modeled",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.strategy_adopted",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.law_growth_support_enacted"
+   ],
+   "templateRefs": [
+    {
+     "institution": "assembly-lawmaking",
+     "mappingStatus": "candidate"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ]
+  },
+  {
+   "id": "N07",
+   "name": "성장엔진 추진가이드라인 수립",
+   "stage": "G2",
+   "authority": "산업통상부",
+   "leadActor": "motie",
+   "actorRoles": {
+    "lead": [
+     "산업통상부"
+    ],
+    "consult": [],
+    "decision": [
+     "산업통상부장관"
+    ]
+   },
+   "classification": "policy",
+   "status": "completed",
+   "confidence": "official",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.strategy_adopted",
+     "relation": "finish_to_start",
+     "strength": "hard",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.engine_guideline"
+   ],
+   "templateRefs": [
+    {
+     "institution": "legislative-notice",
+     "mappingStatus": "candidate"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY",
+    "SRC_ENGINE_NEWS"
+   ],
+   "note": "결정주체: 법정 의결주체 조항 미발견 — 법정 의결 주체 조항 없음 — 소관 부처 행정지침 · 완료일은 근거 정책브리핑(SRC_ENGINE_NEWS, 2025-12-08) 등록일 기준이며 가이드라인 수립일을 밝힌 원문은 확인되지 않았다",
+   "actual": {
+    "completedOn": "2025-12-08"
+   }
+  },
+  {
+   "id": "N08",
+   "name": "민관합동 성장엔진 투자계획 수립·투자협의체계 마련",
+   "stage": "G2",
+   "authority": "범부처·지방시대위원회·지자체",
+   "leadActor": "whole-government",
+   "actorRoles": {
+    "lead": [
+     "범부처"
+    ],
+    "consult": [
+     "기업",
+     "시·도"
+    ],
+    "decision": [
+     "산업통상부장관"
+    ]
+   },
+   "classification": "plan",
+   "status": "active",
+   "confidence": "official",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.engine_guideline",
+     "relation": "finish_to_start",
+     "strength": "hard",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.engine_investment_plan"
+   ],
+   "templateRefs": [
+    {
+     "institution": "regional-balanced-growth-project",
+     "mappingStatus": "candidate"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY",
+    "SRC_ENGINE_NEWS"
+   ],
+   "note": "결정주체: 법정 의결주체 조항 미발견 — 법정 의결 주체 조항 없음 — 범부처 협의로 확정"
+  },
+  {
+   "id": "N09",
+   "name": "5극3특 성장엔진 선정 — 지방시대위 의결",
+   "stage": "G2",
+   "authority": "지방시대위원회",
+   "leadActor": "balance-committee",
+   "actorRoles": {
+    "lead": [
+     "지방시대위원회"
+    ],
+    "consult": [],
+    "decision": [
+     "지방시대위원회"
+    ]
+   },
+   "classification": "legal_gate",
+   "status": "unknown",
+   "confidence": "official",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.engine_investment_plan",
+     "relation": "finish_to_start",
+     "strength": "hard",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.engine_selected"
+   ],
+   "templateRefs": [
+    {
+     "institution": "regional-balanced-growth-project",
+     "mappingStatus": "candidate"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ],
+   "note": "설계도상 '26.3 의결 일정 — 실제 의결 여부는 공개자료 확인 필요"
+  },
+  {
+   "id": "N10",
+   "name": "초광역권 성장엔진 시범 프로젝트 발굴·체결",
+   "stage": "G2",
+   "authority": "범부처·산업통상부·지자체",
+   "leadActor": "motie",
+   "actorRoles": {
+    "lead": [
+     "범부처"
+    ],
+    "consult": [
+     "SK·AWS 등 앵커기업"
+    ],
+    "decision": [
+     "산업통상부장관"
+    ]
+   },
+   "classification": "delivery",
+   "status": "active",
+   "confidence": "official",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.engine_guideline",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.pilot_projects_signed"
+   ],
+   "templateRefs": [
+    {
+     "institution": "mega-regional-special-agreement-account",
+     "mappingStatus": "candidate"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ],
+   "note": "결정주체: 근거 지방자치분권 및 균형성장에 관한 특별법 제30조 — 제30조는 '국가와 지방자치단체는 … 추진할 수 있다'는 재량 조항 — 특정 의결주체를 정하지 않음"
+  },
+  {
+   "id": "N11",
+   "name": "권역별 초광역특별협약 체결",
+   "stage": "G2",
+   "authority": "범부처·지방시대위원회·초광역권",
+   "leadActor": "balance-committee",
+   "actorRoles": {
+    "lead": [
+     "범부처"
+    ],
+    "consult": [
+     "기업",
+     "대학"
+    ],
+    "decision": [
+     "지방시대위원회"
+    ]
+   },
+   "classification": "legal_gate",
+   "status": "active",
+   "confidence": "statutory",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.engine_selected",
+     "relation": "finish_to_start",
+     "strength": "hard",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY",
+      "SRC_DECENT_LAW",
+      "SRC_BG_ACT_2026_AMEND"
+     ],
+     "note": "초광역특별협약은 2026-06-02 공포 개정법에서 신설된 제도(제31조의2·제31조의3이 이를 전제로 범부처 초광역추진협의체와 권역별 초광역공동사업단을 규정). 기존 제31조 지역발전투자협약과는 별개 제도이며, 지역발전투자협약의 경우 제31조제1항이 \"미리 지방시대위원회의 심의·의결을 거쳐야 한다\"고 정한다."
+    },
+    {
+     "artifact": "fpts.governance_ready",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    },
+    {
+     "artifact": "fpts.law_decentralization_amended",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "legal",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    },
+    {
+     "artifact": "fpts.mega_account_created",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "financial",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.special_agreement_signed"
+   ],
+   "templateRefs": [
+    {
+     "institution": "mega-regional-special-agreement-account"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY",
+    "SRC_LAW_PASSED"
+   ]
+  },
+  {
+   "id": "N12",
+   "name": "4대 권역 AX 거점 예타면제·사업규모 확정",
+   "stage": "G3",
+   "authority": "과기정통부·산업통상부",
+   "leadActor": "msit",
+   "actorRoles": {
+    "lead": [
+     "과기정통부"
+    ],
+    "consult": [],
+    "decision": [
+     "기획예산처장관"
+    ]
+   },
+   "classification": "technical_gate",
+   "status": "active",
+   "confidence": "statutory",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.strategy_adopted",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.ax_hub_confirmed"
+   ],
+   "templateRefs": [
+    {
+     "institution": "pfs-exemption-fast-track"
+    },
+    {
+     "institution": "preliminary-feasibility-study"
+    },
+    {
+     "institution": "intelligent-informatization-lead-project",
+     "mappingStatus": "candidate"
+    },
+    {
+     "institution": "science-technology-master-plan",
+     "mappingStatus": "candidate"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ],
+   "note": "결정주체: 근거 국가재정법 제38조제1항"
+  },
+  {
+   "id": "N13",
+   "name": "메가특구 등 규제특례 제도기반 정비",
+   "stage": "G3",
+   "authority": "국무조정실·산업통상부",
+   "leadActor": "motie",
+   "actorRoles": {
+    "lead": [
+     "국무조정실"
+    ],
+    "consult": [],
+    "decision": [
+     "산업통상부장관",
+     "지방시대위원회"
+    ]
+   },
+   "classification": "legal_gate",
+   "status": "planned",
+   "confidence": "modeled",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.special_agreement_signed",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    },
+    {
+     "artifact": "fpts.law_growth_support_enacted",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "legal",
+     "basis": [
+      "SRC_STRATEGY"
+     ],
+     "whenRule": {
+      "rule": "RULE_GROWTH_SUPPORT_ACT",
+      "equals": true
+     }
+    }
+   ],
+   "produces": [
+    "fpts.regulatory_special_ready"
+   ],
+   "templateRefs": [
+    {
+     "institution": "regulatory-sandbox"
+    },
+    {
+     "institution": "opportunity-development-zone-designation"
+    },
+    {
+     "institution": "border-area-development",
+     "mappingStatus": "candidate"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ],
+   "note": "결정주체: 근거 지방자치분권 및 균형성장에 관한 특별법 제23조제2항 — 기회발전특구는 산업통상부장관이 지방시대위원회 심의·의결을 거쳐 지정 — '메가특구'는 신설 개념이라 법령 정비 필요"
+  },
+  {
+   "id": "N14",
+   "name": "국민성장펀드·지역성장펀드 조성 — 비수도권 40%",
+   "stage": "G3",
+   "authority": "금융위원회·중소벤처기업부",
+   "leadActor": "fiscal",
+   "actorRoles": {
+    "lead": [
+     "금융위원회"
+    ],
+    "consult": [],
+    "decision": [
+     "금융위원회",
+     "기획예산처장관"
+    ]
+   },
+   "classification": "delivery",
+   "status": "active",
+   "confidence": "official",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.strategy_adopted",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.regional_funds_ready"
+   ],
+   "templateRefs": [
+    {
+     "institution": "fund-management",
+     "mappingStatus": "candidate"
+    },
+    {
+     "institution": "startup-support-plan",
+     "mappingStatus": "candidate"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ],
+   "note": "결정주체: 법정 의결주체 조항 미발견 — 법정 의결 주체 조항 미발견 — 펀드 조성 근거법 확인 필요"
+  },
+  {
+   "id": "N15",
+   "name": "권역별 지역투자공사 설립",
+   "stage": "G3",
+   "authority": "금융위원회·산업통상부",
+   "leadActor": "fiscal",
+   "actorRoles": {
+    "lead": [
+     "금융위원회"
+    ],
+    "consult": [],
+    "decision": [
+     "국회"
+    ]
+   },
+   "classification": "legal_gate",
+   "status": "planned",
+   "confidence": "modeled",
+   "activation": {
+    "mode": "rule",
+    "rule": "RULE_INVEST_CORP_ACT",
+    "equals": true
+   },
+   "requires": [
+    {
+     "artifact": "fpts.regional_funds_ready",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "financial",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.invest_corp_established"
+   ],
+   "templateRefs": [
+    {
+     "institution": "assembly-lawmaking",
+     "mappingStatus": "candidate"
+    },
+    {
+     "institution": "local-public-enterprise-establishment",
+     "mappingStatus": "candidate"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY",
+    "SRC_LOCAL_PUBLIC_ENTERPRISE_ACT"
+   ],
+   "note": "설립 형태 미확정 — 지방공사 형태라면 지방공기업법 제49조(행안부장관 협의·조례 제정·전문기관 타당성 검토)로 가능하며 국회 입법이 필요 없다. 별도 특별법 법인이라면 입법 경로. 두 경로를 모두 후보로 병기함(authority가 금융위·산업통상부로 기재돼 있어 지방공사 여부가 불분명)."
+  },
+  {
+   "id": "N16",
+   "name": "서울대 10개 만들기·RISE 체계 재구조화",
+   "stage": "G3",
+   "authority": "교육부",
+   "leadActor": "moe",
+   "actorRoles": {
+    "lead": [
+     "교육부"
+    ],
+    "consult": [
+     "거점국립대"
+    ],
+    "decision": [
+     "교육부장관"
+    ]
+   },
+   "classification": "policy",
+   "status": "active",
+   "confidence": "official",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.strategy_adopted",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.talent_system_reformed"
+   ],
+   "templateRefs": [
+    {
+     "institution": "university-funding"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ],
+   "note": "결정주체: 근거 지방대학 및 지역균형인재 육성에 관한 법률 제6조의2"
+  },
+  {
+   "id": "N17",
+   "name": "계약학과·협약형 특성화고 등 투트랙 인재양성",
+   "stage": "G3",
+   "authority": "교육부·산업통상부",
+   "leadActor": "moe",
+   "actorRoles": {
+    "lead": [
+     "교육부"
+    ],
+    "consult": [
+     "기업",
+     "대학"
+    ],
+    "decision": [
+     "교육부장관"
+    ]
+   },
+   "classification": "delivery",
+   "status": "active",
+   "confidence": "statutory",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.talent_system_reformed",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.talent_twotrack_ready"
+   ],
+   "templateRefs": [
+    {
+     "institution": "advanced-industry-contract-department-governance"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ],
+   "note": "결정주체: 근거 산업교육진흥 및 산학연협력촉진에 관한 법률 제8조제2항 — 계약학과 설치·운영계획은 산업교육기관의 장이 교육부장관에게 신고"
+  },
+  {
+   "id": "N18",
+   "name": "산·학·연 혁신성장거점도시 선도사업 선정",
+   "stage": "G3",
+   "authority": "국토교통부·산업통상부·중소벤처기업부",
+   "leadActor": "molit",
+   "actorRoles": {
+    "lead": [
+     "국토교통부"
+    ],
+    "consult": [],
+    "decision": [
+     "국토교통부장관"
+    ]
+   },
+   "classification": "policy",
+   "status": "active",
+   "confidence": "official",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.special_agreement_signed",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.innovation_city_selected"
+   ],
+   "templateRefs": [
+    {
+     "institution": "national-rd-call-selection",
+     "mappingStatus": "candidate"
+    },
+    {
+     "institution": "industrial-complex-development",
+     "mappingStatus": "candidate"
+    },
+    {
+     "institution": "science-technology-master-plan",
+     "mappingStatus": "candidate"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ],
+   "note": "결정주체: 법정 의결주체 조항 미발견 — 법정 의결 주체 조항 없음 — 공모·선정 방식"
+  },
+  {
+   "id": "N19",
+   "name": "제5차 국토종합계획 수정계획('26~'40) 마련",
+   "stage": "G4",
+   "authority": "국토교통부",
+   "leadActor": "molit",
+   "actorRoles": {
+    "lead": [
+     "국토교통부"
+    ],
+    "consult": [],
+    "decision": [
+     "대통령",
+     "국무회의",
+     "국토정책위원회"
+    ]
+   },
+   "classification": "plan",
+   "status": "unknown",
+   "confidence": "statutory",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.strategy_adopted",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.national_land_plan_revised"
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ],
+   "templateRefs": [
+    {
+     "institution": "national-comprehensive-plan"
+    }
+   ],
+   "note": "결정주체: 근거 국토기본법 제12조제1항 — 국토교통부장관이 국토정책위원회와 국무회의 심의를 거쳐 대통령의 승인을 받음"
+  },
+  {
+   "id": "N20",
+   "name": "초광역권계획·초광역권발전계획 수립",
+   "stage": "G4",
+   "authority": "국토교통부·지방시대위원회·초광역권",
+   "leadActor": "region",
+   "actorRoles": {
+    "lead": [
+     "국토교통부"
+    ],
+    "consult": [],
+    "decision": [
+     "지방시대위원회",
+     "국토교통부장관"
+    ]
+   },
+   "classification": "plan",
+   "status": "planned",
+   "confidence": "statutory",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.national_land_plan_revised",
+     "relation": "finish_to_start",
+     "strength": "hard",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY",
+      "SRC_LAND_FRAMEWORK_ACT"
+     ],
+     "note": "국토기본법 제7조제1항 — \"국토종합계획은 초광역권계획, 도종합계획 및 시·군종합계획의 기본이 되며\""
+    },
+    {
+     "artifact": "fpts.special_agreement_signed",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.mega_region_plan"
+   ],
+   "templateRefs": [
+    {
+     "institution": "mega-region-plan"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ],
+   "note": "결정주체: 근거 지방자치분권 및 균형성장에 관한 특별법 제9조제1항 · 국토기본법 제12조의2제3항 — 초광역권발전계획은 지방시대위원회 심의·의결, 초광역권계획은 국토교통부장관 승인(제15조 준용)"
+  },
+  {
+   "id": "N21",
+   "name": "권역별 60분 대중교통망계획 수립",
+   "stage": "G4",
+   "authority": "국토교통부·지방시대위원회",
+   "leadActor": "molit",
+   "actorRoles": {
+    "lead": [
+     "국토교통부"
+    ],
+    "consult": [],
+    "decision": [
+     "국토교통부장관"
+    ]
+   },
+   "classification": "plan",
+   "status": "planned",
+   "confidence": "official",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.mega_region_plan",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.transport_plan"
+   ],
+   "templateRefs": [
+    {
+     "institution": "metropolitan-transport-improvement-measures",
+     "mappingStatus": "candidate"
+    },
+    {
+     "institution": "integrated-transport-investment-plan",
+     "mappingStatus": "candidate"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ],
+   "note": "결정주체: 근거 대중교통의 육성 및 이용촉진에 관한 법률 제5조제1항"
+  },
+  {
+   "id": "N22",
+   "name": "광역철도·도시철도·간선도로망 확충",
+   "stage": "G4",
+   "authority": "국토교통부",
+   "leadActor": "molit",
+   "actorRoles": {
+    "lead": [
+     "국토교통부"
+    ],
+    "consult": [],
+    "decision": [
+     "국토교통부장관"
+    ]
+   },
+   "classification": "delivery",
+   "status": "active",
+   "confidence": "statutory",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.transport_plan",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "technical",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.transport_network_built"
+   ],
+   "templateRefs": [
+    {
+     "institution": "national-road-rail-soc"
+    },
+    {
+     "institution": "railway-business-license",
+     "mappingStatus": "candidate"
+    },
+    {
+     "institution": "integrated-transport-investment-plan",
+     "mappingStatus": "candidate"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ],
+   "note": "철도의 건설 및 철도시설 유지관리에 관한 법률 제4조제2항제1호 — 국가철도망구축계획은 「지방자치분권 및 균형성장에 관한 특별법」 제6조 지방시대 종합계획과 조화를 이루어야 한다. 법정 선행은 N21(권역별 60분 대중교통망계획)이 아니라 이 종합계획이며, 해당 법정계획은 현재 이 프로젝트에 관문으로 등재돼 있지 않다. / 결정주체: 근거 철도의 건설 및 철도시설 유지관리에 관한 법률 제4조제1항 — 국가철도망구축계획은 제4조제2항제1호에 따라 지방시대 종합계획과 조화를 이루어야 함"
+  },
+  {
+   "id": "N23",
+   "name": "가덕도·TK·청주·무안 등 거점공항 육성",
+   "stage": "G4",
+   "authority": "국토교통부",
+   "leadActor": "molit",
+   "actorRoles": {
+    "lead": [
+     "국토교통부"
+    ],
+    "consult": [],
+    "decision": [
+     "국토교통부장관"
+    ]
+   },
+   "classification": "delivery",
+   "status": "active",
+   "confidence": "statutory",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.transport_plan",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "technical",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.hub_airports_ready"
+   ],
+   "templateRefs": [
+    {
+     "institution": "airport-development-operation-permit"
+    },
+    {
+     "institution": "air-transport-business-license",
+     "mappingStatus": "candidate"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ],
+   "note": "결정주체: 근거 공항시설법 제3조제1항"
+  },
+  {
+   "id": "N24",
+   "name": "행정수도 완성·새만금 물류거점·공공기관 2차 이전",
+   "stage": "G4",
+   "authority": "범정부·국토교통부",
+   "leadActor": "whole-government",
+   "actorRoles": {
+    "lead": [
+     "범정부"
+    ],
+    "consult": [],
+    "decision": [
+     "정부",
+     "국토교통부장관"
+    ]
+   },
+   "classification": "policy",
+   "status": "active",
+   "confidence": "official",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.national_land_plan_revised",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.balance_anchor_ready"
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ],
+   "note": "공공기관 2차 이전은 '26년 이전계획 확정, '27년 선도이전 일정 — 행정수도·새만금 트랙은 별도 제도 매핑 필요 / 결정주체: 근거 지방자치분권 및 균형성장에 관한 특별법 제25조제1항 — '정부는 … 혁신도시시책을 추진하여야 한다'",
+   "templateRefs": [
+    {
+     "institution": "public-institution-relocation"
+    }
+   ]
+  },
+  {
+   "id": "N25",
+   "name": "권역별 거점병원·공공의료체계 구축",
+   "stage": "G5",
+   "authority": "보건복지부",
+   "leadActor": "mohw",
+   "actorRoles": {
+    "lead": [
+     "보건복지부"
+    ],
+    "consult": [],
+    "decision": [
+     "보건복지부장관",
+     "공공보건의료정책심의위원회"
+    ]
+   },
+   "classification": "delivery",
+   "status": "active",
+   "confidence": "statutory",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.strategy_adopted",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.health_network_ready"
+   ],
+   "templateRefs": [
+    {
+     "institution": "public-essential-medical"
+    },
+    {
+     "institution": "public-health-medical-service-plan"
+    },
+    {
+     "institution": "health-medical-development-plan",
+     "mappingStatus": "candidate"
+    },
+    {
+     "institution": "local-health-plan-center",
+     "mappingStatus": "candidate"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ],
+   "note": "결정주체: 근거 공공보건의료에 관한 법률 제4조제1항"
+  },
+  {
+   "id": "N26",
+   "name": "지역사회 통합돌봄 전국 시행",
+   "stage": "G5",
+   "authority": "보건복지부·지방자치단체",
+   "leadActor": "mohw",
+   "actorRoles": {
+    "lead": [
+     "보건복지부"
+    ],
+    "consult": [],
+    "decision": [
+     "보건복지부장관"
+    ]
+   },
+   "classification": "legal_gate",
+   "status": "completed",
+   "confidence": "statutory",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.strategy_adopted",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.integrated_care_live"
+   ],
+   "templateRefs": [
+    {
+     "institution": "community-integrated-care"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ],
+   "note": "돌봄통합지원법 '26.3 전국 시행 / 결정주체: 근거 의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률 제5조 / 완료일 근거: 의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률 시행",
+   "actual": {
+    "completedOn": "2026-03-27"
+   }
+  },
+  {
+   "id": "N27",
+   "name": "교육특구 지정·운영",
+   "stage": "G5",
+   "authority": "교육부",
+   "leadActor": "moe",
+   "actorRoles": {
+    "lead": [
+     "교육부"
+    ],
+    "consult": [],
+    "decision": [
+     "교육부장관",
+     "교육국제화특구위원회"
+    ]
+   },
+   "classification": "policy",
+   "status": "planned",
+   "confidence": "official",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.strategy_adopted",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.edu_zone_designated"
+   ],
+   "templateRefs": [
+    {
+     "institution": "foreign-education-institution-special-zone",
+     "mappingStatus": "candidate"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ],
+   "note": "결정주체: 근거 교육국제화특구의 지정ㆍ운영 및 육성에 관한 특별법 제4조제1항 — 시·도지사와 교육감의 공동 요청 + 교육국제화특구위원회 심의를 거쳐 교육부장관이 지정"
+  },
+  {
+   "id": "N28",
+   "name": "햇빛연금·농어촌기본소득법 제정·시범사업",
+   "stage": "G5",
+   "authority": "농식품부·해양수산부",
+   "leadActor": "mafra",
+   "actorRoles": {
+    "lead": [
+     "농식품부"
+    ],
+    "consult": [],
+    "decision": [
+     "국회"
+    ]
+   },
+   "classification": "legal_gate",
+   "status": "active",
+   "confidence": "official",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.strategy_adopted",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.rural_income_ready"
+   ],
+   "templateRefs": [
+    {
+     "institution": "assembly-lawmaking",
+     "mappingStatus": "candidate"
+    },
+    {
+     "institution": "local-extinction-response-fund",
+     "mappingStatus": "candidate"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ],
+   "note": "인구감소지역 시범('26, 24만명·0.2조) 및 (가칭)농어촌기본소득법 제정 ~'26"
+  },
+  {
+   "id": "N29",
+   "name": "농촌공간계획·빈집특별법 등 재생 프로젝트",
+   "stage": "G5",
+   "authority": "농식품부",
+   "leadActor": "mafra",
+   "actorRoles": {
+    "lead": [
+     "농식품부"
+    ],
+    "consult": [],
+    "decision": [
+     "농림축산식품부장관"
+    ]
+   },
+   "classification": "plan",
+   "status": "active",
+   "confidence": "statutory",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.strategy_adopted",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.rural_regen_ready"
+   ],
+   "templateRefs": [
+    {
+     "institution": "legislative-notice",
+     "mappingStatus": "candidate"
+    },
+    {
+     "institution": "housing-site-development",
+     "mappingStatus": "candidate"
+    },
+    {
+     "institution": "forest-management-plan",
+     "mappingStatus": "candidate"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ],
+   "note": "결정주체: 근거 농촌공간 재구조화 및 재생지원에 관한 법률 제6조"
+  },
+  {
+   "id": "N30",
+   "name": "초광역특별계정 신설 — 지특회계 3계정 개편",
+   "stage": "G6",
+   "authority": "기획예산처·지방시대위원회",
+   "leadActor": "fiscal",
+   "actorRoles": {
+    "lead": [
+     "기획예산처"
+    ],
+    "consult": [],
+    "decision": [
+     "국회",
+     "기획예산처장관"
+    ]
+   },
+   "classification": "legal_gate",
+   "status": "completed",
+   "confidence": "statutory",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.law_decentralization_amended",
+     "relation": "finish_to_start",
+     "strength": "hard",
+     "kind": "legal",
+     "basis": [
+      "SRC_STRATEGY",
+      "SRC_DECENT_LAW"
+     ],
+     "note": "같은 법 제74조(특별회계 설치)·제76조(계정의 구분) — 계정 신설·개편은 법률사항"
+    }
+   ],
+   "produces": [
+    "fpts.mega_account_created"
+   ],
+   "templateRefs": [
+    {
+     "institution": "mega-regional-special-agreement-account"
+    },
+    {
+     "institution": "national-budget"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY",
+    "SRC_LAW_PASSED",
+    "SRC_BG_ACT_2026_AMEND"
+   ],
+   "note": "초광역특별계정은 2026-06-02 공포 개정법 제76조로 신설됨(\"제주특별자치도계정 및 세종특별자치시계정\"을 \"…및 초광역특별계정\"으로 개정). 시행일이 단계적이라(초광역특별계정 2027-01-01 적용) 2026-07-01 시행 현행 조문에는 아직 4계정만 표시된다 — 입법은 완료, 시행 대기. / 결정주체: 근거 지방자치분권 및 균형성장에 관한 특별법 제76조(개정) / 완료일 근거: 같은 개정법 제76조 초광역특별계정 신설 공포(시행 대기)",
+   "actual": {
+    "completedOn": "2026-06-02"
+   }
+  },
+  {
+   "id": "N31",
+   "name": "포괄보조 대폭 확대 — 3.8조→10.6조, 사업수 47→121개",
+   "stage": "G6",
+   "authority": "기획예산처",
+   "leadActor": "fiscal",
+   "actorRoles": {
+    "lead": [
+     "기획예산처"
+    ],
+    "consult": [],
+    "decision": [
+     "국회",
+     "기획예산처장관"
+    ]
+   },
+   "classification": "delivery",
+   "status": "completed",
+   "confidence": "official",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.mega_account_created",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "financial",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.block_grant_expanded"
+   ],
+   "templateRefs": [
+    {
+     "institution": "national-budget"
+    },
+    {
+     "institution": "national-subsidy",
+     "mappingStatus": "candidate"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY",
+    "SRC_BUDGET_2026"
+   ],
+   "note": "결정주체: 근거 국가재정법 제32조·제33조 — 예산 편성은 정부, 확정은 국회 의결 / 완료일 근거: 2026년도 예산안 국회 본회의 의결(2025-12-02). 다만 국회예산정책처 분석은 2026년 포괄보조를 사업 120개·약 10.1조원으로 집계해 이 관문의 표기(10.6조·121개)와 차이가 있어 수치 재확인이 필요하다.",
+   "actual": {
+    "completedOn": "2025-12-02"
+   }
+  },
+  {
+   "id": "N32",
+   "name": "균형성장영향평가 도입",
+   "stage": "G6",
+   "authority": "지방시대위원회·기획예산처",
+   "leadActor": "balance-committee",
+   "actorRoles": {
+    "lead": [
+     "지방시대위원회"
+    ],
+    "consult": [],
+    "decision": [
+     "지방시대위원회",
+     "중앙행정기관의 장"
+    ]
+   },
+   "classification": "legal_gate",
+   "status": "active",
+   "confidence": "statutory",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.law_decentralization_amended",
+     "relation": "finish_to_start",
+     "strength": "hard",
+     "kind": "legal",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.impact_assessment_live"
+   ],
+   "templateRefs": [
+    {
+     "institution": "balanced-growth-impact-assessment"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY",
+    "SRC_LAW_PASSED",
+    "SRC_BG_ACT_2026_AMEND"
+   ],
+   "note": "균형성장영향평가는 2026-06-02 공포 개정법 제11조의3으로 신설됨 — 중앙행정기관의 장이 지방시대위원회가 선정한 정책·사업에 대해 평가를 실시하고 결과를 지방시대위원회에 제출. 시행 대기(공포 6개월 후인 2026-12-03 시행). / 결정주체: 근거 같은 법 제11조의3(신설)"
+  },
+  {
+   "id": "N33",
+   "name": "차등지원 제도화 — 7개 사업 3단계·新균형성장지수",
+   "stage": "G6",
+   "authority": "행정안전부·산업통상부·기획예산처",
+   "leadActor": "mois",
+   "actorRoles": {
+    "lead": [
+     "행정안전부"
+    ],
+    "consult": [],
+    "decision": [
+     "행정안전부장관",
+     "기획예산처장관"
+    ]
+   },
+   "classification": "policy",
+   "status": "active",
+   "confidence": "official",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.impact_assessment_live",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.differential_support_live"
+   ],
+   "templateRefs": [
+    {
+     "institution": "local-share-tax",
+     "mappingStatus": "candidate"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ],
+   "note": "결정주체: 법정 의결주체 조항 미발견 — 차등지원 제도화의 법정 근거 조항 미발견"
+  },
+  {
+   "id": "N34",
+   "name": "권역별 특별지방자치단체 출범 — 규약 표준안·컨설팅",
+   "stage": "G7",
+   "authority": "행정안전부·시·도",
+   "leadActor": "mois",
+   "actorRoles": {
+    "lead": [
+     "행정안전부"
+    ],
+    "consult": [],
+    "decision": [
+     "시·도의회"
+    ]
+   },
+   "classification": "legal_gate",
+   "status": "active",
+   "confidence": "statutory",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.law_localautonomy_amended",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "legal",
+     "basis": [
+      "SRC_STRATEGY",
+      "SRC_LOCAL_AUTONOMY_LAW"
+     ],
+     "note": "지방자치법 제199조~제211조로 현행법상 설치 가능(규약→구성 지자체 지방의회 의결→행안부장관 승인→고시). N04 개정은 권한 확대를 위한 정책적 전제이지 설치의 법정 선행조건은 아님"
+    },
+    {
+     "artifact": "fpts.governance_ready",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "policy",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.slg_launched"
+   ],
+   "templateRefs": [
+    {
+     "institution": "special-local-government"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY",
+    "SRC_LOCAL_AUTONOMY_LAW"
+   ],
+   "note": "부울경 특별연합 해산 전례 — 미설립 권역은 연합체에 사업단 구성"
+  },
+  {
+   "id": "N35",
+   "name": "3차 일괄이양·맞춤형 권한이양 시행",
+   "stage": "G7",
+   "authority": "행정안전부",
+   "leadActor": "mois",
+   "actorRoles": {
+    "lead": [
+     "행정안전부"
+    ],
+    "consult": [],
+    "decision": [
+     "국회",
+     "행정안전부장관"
+    ]
+   },
+   "classification": "delivery",
+   "status": "planned",
+   "confidence": "statutory",
+   "activation": {
+    "mode": "always"
+   },
+   "requires": [
+    {
+     "artifact": "fpts.law_devolution_enacted",
+     "relation": "finish_to_start",
+     "strength": "hard",
+     "kind": "legal",
+     "basis": [
+      "SRC_STRATEGY",
+      "SRC_DECENT_LAW"
+     ],
+     "note": "같은 법 제33조제2항 — \"포괄적·일괄적으로 이양하기 위하여 필요한 법적 조치를 마련하여야 한다\""
+    },
+    {
+     "artifact": "fpts.slg_launched",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "legal",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.devolution_effective"
+   ],
+   "templateRefs": [
+    {
+     "institution": "local-government-special-status",
+     "mappingStatus": "candidate"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ],
+   "note": "결정주체: 근거 지방자치분권 및 균형성장에 관한 특별법 제33조제2항 — '포괄적·일괄적으로 이양하기 위하여 필요한 법적 조치를 마련하여야 한다'"
+  },
+  {
+   "id": "N36",
+   "name": "특자체장 규제특례 투트랙 운영",
+   "stage": "G7",
+   "authority": "행정안전부·특별지방자치단체",
+   "leadActor": "region",
+   "actorRoles": {
+    "lead": [
+     "행정안전부"
+    ],
+    "consult": [],
+    "decision": [
+     "행정안전부장관"
+    ]
+   },
+   "classification": "operation",
+   "status": "planned",
+   "confidence": "modeled",
+   "activation": {
+    "mode": "rule",
+    "rule": "RULE_SLG_ESTABLISHED",
+    "equals": true
+   },
+   "requires": [
+    {
+     "artifact": "fpts.slg_launched",
+     "relation": "finish_to_start",
+     "strength": "hard",
+     "kind": "legal",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    },
+    {
+     "artifact": "fpts.law_devolution_enacted",
+     "relation": "finish_to_start",
+     "strength": "soft",
+     "kind": "legal",
+     "basis": [
+      "SRC_STRATEGY"
+     ]
+    }
+   ],
+   "produces": [
+    "fpts.regulatory_twotrack_live"
+   ],
+   "templateRefs": [
+    {
+     "institution": "regulatory-sandbox",
+     "mappingStatus": "candidate"
+    }
+   ],
+   "evidence": [
+    "SRC_STRATEGY"
+   ],
+   "note": "결정주체: 법정 의결주체 조항 미발견 — 특별지방자치단체의 장에게 규제특례 권한을 부여하는 조항을 지방자치법 제199~211조에서 발견하지 못함"
+  }
+ ]
 }
