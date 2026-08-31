@@ -52,6 +52,8 @@
 | 단계 라벨 == 제도 노드명 | `label_mismatches` |
 | step→step 관계가 제도 엣지에 존재 | `unknown_edges` |
 | 제도 노드 중 케이스가 안 다루는 것 | `uncovered_node_ids` (경고, 어긋남 아님) |
+| `project_context`가 가리키는 마일스톤이 오버레이에 존재 | `milestone_not_found` |
+| 그 마일스톤이 이 제도를 `templateRefs`로 참조 | `drifted` |
 
 `next_action_allowed = (status === "aligned") && readiness.level === "R2"`.
 거짓이면 그 사유가 `query_case` 패킷의 `risks`로 들어간다. 등급이 모자란 제도의

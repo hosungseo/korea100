@@ -281,6 +281,58 @@ async function readInstitutionReadiness(caseData, options) {
   return new Map(entries.filter(Boolean));
 }
 
+/**
+ * 제도 케이스가 "프로젝트의 어느 마일스톤을 안쪽에서 채운다"고 주장할 때 그 주장을 검사한다.
+ * 주장만 적어 두면 오버레이가 바뀌어도 아무도 모른다.
+ */
+export function checkProjectContext(caseData, project) {
+  const context = caseData.project_context;
+  if (!context) return null;
+
+  if (!project) {
+    return {
+      claimed: context,
+      status: "project_not_found",
+      notes: ["케이스가 가리키는 메가프로젝트 파일을 찾지 못했습니다."],
+    };
+  }
+
+  const milestone = project.nodes.find((node) => node.id === context.milestone_node_id);
+  if (!milestone) {
+    return {
+      claimed: context,
+      status: "milestone_not_found",
+      notes: [`오버레이에 ${context.milestone_node_id} 마일스톤이 없습니다.`],
+    };
+  }
+
+  const referenced = (milestone.templateRefs ?? []).map((ref) => ref.institution);
+  const slug = caseData.institution_slug;
+  const notes = [];
+  let status = "aligned";
+
+  if (!referenced.includes(slug)) {
+    status = "drifted";
+    notes.push(
+      `${context.milestone_node_id}은 ${slug}을 참조하지 않습니다. 참조 제도: ${referenced.join(", ") || "없음"}`,
+    );
+  }
+  if (context.milestone_label && context.milestone_label !== milestone.name) {
+    status = "drifted";
+    notes.push(`마일스톤 이름이 갈라졌습니다: 케이스="${context.milestone_label}" 오버레이="${milestone.name}"`);
+  }
+
+  return {
+    claimed: context,
+    status,
+    milestone_name: milestone.name,
+    milestone_stage: milestone.stage ?? null,
+    milestone_status: milestone.status ?? null,
+    referenced_institutions: referenced,
+    notes,
+  };
+}
+
 export async function checkCaseLinkageFor(caseData, options = {}) {
   if (caseData?.case_kind === "project") {
     const project = await loadProjectForLinkage(caseData.project_id, options);
@@ -288,5 +340,18 @@ export async function checkCaseLinkageFor(caseData, options = {}) {
     return checkProjectLinkage(caseData, project, readiness);
   }
   const institution = await loadInstitutionForLinkage(caseData.institution_slug, options);
-  return checkCaseLinkage(caseData, institution);
+  const linkage = checkCaseLinkage(caseData, institution);
+
+  if (caseData.project_context) {
+    const project = await loadProjectForLinkage(caseData.project_context.project_id, options);
+    const projectContext = checkProjectContext(caseData, project);
+    linkage.project_context = projectContext;
+    if (projectContext.status !== "aligned") {
+      linkage.status = "drifted";
+      linkage.next_action_allowed = false;
+      linkage.notes.push(...projectContext.notes);
+    }
+  }
+
+  return linkage;
 }

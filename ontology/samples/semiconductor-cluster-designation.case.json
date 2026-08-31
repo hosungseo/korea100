@@ -1,0 +1,980 @@
+{
+ "ontology_version": "korea100.ontology.core.v0",
+ "institution_slug": "semiconductor-cluster-designation-coordination",
+ "institution_name": "반도체클러스터 조성계획 승인·지정·조정",
+ "case_id": "GSC-N03-2026-0901",
+ "as_of": "2026-09-01",
+ "source_institution_json": "web/data/institutions/semiconductor-cluster-designation-coordination.json",
+ "derivation": {
+  "generator": "ontology/scripts/derive-case.mjs",
+  "derived_layers": [
+   "Step/Gate/System 엔티티",
+   "sequence/message/loop 관계",
+   "Role·Statute 자리표시"
+  ],
+  "authored_layers": [
+   "Case",
+   "Decision",
+   "Document",
+   "State",
+   "Rule",
+   "ActionPacket",
+   "demo_queries"
+  ],
+  "institution_readiness": {
+   "level": "R2",
+   "mode": "next-action",
+   "assessed_at": "2026-09-01"
+  },
+  "node_count": 8,
+  "edge_count": 8
+ },
+ "entities": [
+  {
+   "id": "case:GSC-N03-2026-0901",
+   "type": "Case",
+   "label": "광주 반도체클러스터 지정 건",
+   "status": "verified",
+   "attrs": {
+    "project_id": "gwangju-semiconductor-cluster",
+    "milestone_node_id": "N03",
+    "scenario": "정책상 입지 결정 후 지정 신청을 준비하는 단계. 사업구역 경계와 사업시행자가 아직 확정되지 않았다.",
+    "site_decision_on": "2026-07-06",
+    "boundary_status": "공식 사업구역 경계 미확인",
+    "implementation_entity_status": "공개자료로 최종 확인 필요"
+   }
+  },
+  {
+   "id": "role:gwangju",
+   "type": "Role",
+   "label": "광주특별시",
+   "status": "verified",
+   "attrs": {
+    "note": "지정 신청 주체이자 조성계획 작성 주체(법 제11조제3항)"
+   }
+  },
+  {
+   "id": "role:motie",
+   "type": "Role",
+   "label": "산업통상부장관",
+   "status": "verified",
+   "attrs": {
+    "note": "승인·지정권자(법 제11조제1항·제5항)"
+   }
+  },
+  {
+   "id": "role:committee",
+   "type": "Role",
+   "label": "반도체산업경쟁력강화특별위원회",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제9조",
+     "text": "반도체산업 경쟁력 강화에 관한 사항을 심의·의결하기 위하여 위원회를 둔다."
+    }
+   ]
+  },
+  {
+   "id": "role:developer",
+   "type": "Role",
+   "label": "사업시행자(미지정)",
+   "status": "unverified",
+   "attrs": {
+    "note": "법 제11조제4항에 따라 지정 신청 가능. 광주 사업은 아직 확정 전"
+   }
+  },
+  {
+   "id": "doc:development-plan",
+   "type": "Document",
+   "label": "반도체클러스터 조성 계획",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제11조제3항",
+     "text": "조성 계획을 첨부하여 산업통상부장관에게 지정을 신청할 수 있다."
+    },
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+     "article": "제17조제1항",
+     "text": "기본목표·중장기 발전방향, 명칭·위치 및 면적, 사업시행자 및 시행 방식, 토지이용계획, 집적계획, 재원 확보, 환경 보전 등 10개 사항을 담는다."
+    }
+   ]
+  },
+  {
+   "id": "doc:designation-notice",
+   "type": "Document",
+   "label": "승인·지정 공고",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+     "article": "제17조제6항",
+     "text": "조성 계획을 승인하고 반도체클러스터를 지정한 경우 그 내용을 산업통상부의 인터넷 홈페이지에 공고해야 한다."
+    }
+   ]
+  },
+  {
+   "id": "item:project-boundary",
+   "type": "InformationItem",
+   "label": "공식 사업구역 경계",
+   "status": "unverified",
+   "attrs": {
+    "note": "영 제17조제1항제2호가 명칭·위치·면적을 요구한다. 경계가 없으면 조성계획을 완성할 수 없다."
+   }
+  },
+  {
+   "id": "statute:statute-015044",
+   "type": "Statute",
+   "label": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+   "status": "verified",
+   "attrs": {
+    "lawId": "015044",
+    "adminRuleId": null,
+    "kind": "법률",
+    "url": "https://law.go.kr/법령/반도체산업경쟁력강화및지원에관한특별법",
+    "effectiveOn": "2026-08-11",
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "statute:statute-015185",
+   "type": "Statute",
+   "label": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+   "status": "verified",
+   "attrs": {
+    "lawId": "015185",
+    "adminRuleId": null,
+    "kind": "대통령령",
+    "url": "https://law.go.kr/법령/반도체산업경쟁력강화및지원에관한특별법시행령",
+    "effectiveOn": "2026-08-11",
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "role:lane-1",
+   "type": "Role",
+   "label": "광주특별시·사업시행자",
+   "status": "verified",
+   "attrs": {
+    "lane": "광주특별시·사업시행자",
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "role:lane-2",
+   "type": "Role",
+   "label": "산업통상부",
+   "status": "verified",
+   "attrs": {
+    "lane": "산업통상부",
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "role:lane-3",
+   "type": "Role",
+   "label": "관계 중앙행정기관",
+   "status": "verified",
+   "attrs": {
+    "lane": "관계 중앙행정기관",
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "role:lane-4",
+   "type": "Role",
+   "label": "반도체산업경쟁력강화특별위원회",
+   "status": "verified",
+   "attrs": {
+    "lane": "반도체산업경쟁력강화특별위원회",
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "step:P01",
+   "type": "Step",
+   "label": "반도체클러스터 조성계획안 작성",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제11조제3항",
+     "text": "관계 중앙행정기관의 장·시·도지사·사업시행자 등은 부지 조성, 발전방향 등 대통령령으로 정하는 사항이 포함된 조성 계획을 첨부하여 지정을 신청할 수 있다."
+    },
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+     "article": "제17조제1항",
+     "text": "조성 계획에는 기본목표·중장기 발전방향, 명칭·위치·면적, 사업시행자 및 시행 방식, 토지이용계획, 집적계획, 재원 확보, 환경 보전 등 10개 사항을 담는다."
+    },
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+     "article": "제17조제2항",
+     "text": "지정을 신청하려는 자는 조성 계획을 작성할 때 관련 지방자치단체의 장·사업자·기관 등과 미리 협의해야 한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P01",
+    "lane": "광주특별시·사업시행자",
+    "stage": "G0 계획작성",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "광주특별시·사업시행자",
+    "output_documents": [
+     "반도체클러스터 조성계획안"
+    ]
+   }
+  },
+  {
+   "id": "step:P02",
+   "type": "Step",
+   "label": "조성계획 승인·클러스터 지정 신청",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제11조제3항",
+     "text": "조성 계획을 첨부하여 산업통상부장관에게 반도체클러스터의 지정을 신청할 수 있다."
+    },
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제11조제4항",
+     "text": "반도체산업을 영위하는 사업자가 사업시행자로 지정받으려는 경우 대통령령으로 정하는 기준에 따라 신청할 수 있다."
+    },
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+     "article": "제17조제3항",
+     "text": "사업자가 조성 계획을 첨부하여 지정을 신청하면 사업시행자 지정을 신청한 것으로 본다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P02",
+    "lane": "광주특별시·사업시행자",
+    "stage": "G1 제출",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "광주특별시·사업시행자",
+    "output_documents": [
+     "조성계획 승인·지정 신청서"
+    ]
+   }
+  },
+  {
+   "id": "step:P03",
+   "type": "Step",
+   "label": "조성계획 요건·사업시행자 적격성 검토",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제11조제5항",
+     "text": "입주수요 확보 가능성, 부지·정보통신망·용수·전력 등 기반시설 확보 가능성, 소요 재원 조달방안의 실현 가능성 등 요건을 모두 갖춘 지역이어야 한다."
+    },
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+     "article": "제17조제4항",
+     "text": "법 제11조제5항제4호의 요건은 국토의 균형 있는 발전 및 지역 간 산업 격차 해소에 기여할 수 있을 것을 말한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P03",
+    "lane": "산업통상부",
+    "stage": "G1 제출",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "산업통상부",
+    "output_documents": [
+     "요건검토서",
+     "사업시행자 적격성 검토서"
+    ]
+   }
+  },
+  {
+   "id": "step:P04",
+   "type": "Gate",
+   "label": "관계 중앙행정기관·지방자치단체 협의",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제11조제1항",
+     "text": "반도체클러스터를 지정할 때에는 관계 중앙행정기관 및 지방자치단체의 장과 협의를 거쳐야 한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P04",
+    "lane": "관계 중앙행정기관",
+    "stage": "G2 협의",
+    "node_type": "gateway",
+    "deadline": null,
+    "actor": "관계 중앙행정기관",
+    "output_documents": [
+     "관계기관 협의의견"
+    ]
+   }
+  },
+  {
+   "id": "step:P05",
+   "type": "Gate",
+   "label": "반도체산업경쟁력강화특별위원회 심의",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제9조",
+     "text": "반도체산업 경쟁력 강화에 관한 사항을 심의·의결하기 위하여 반도체산업경쟁력강화특별위원회를 둔다."
+    },
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제11조제5항",
+     "text": "산업통상부장관은 위원회의 심의·의결을 거쳐 조성 계획을 승인하고 반도체클러스터를 지정할 수 있다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P05",
+    "lane": "반도체산업경쟁력강화특별위원회",
+    "stage": "G3 심의",
+    "node_type": "gateway",
+    "deadline": null,
+    "actor": "반도체산업경쟁력강화특별위원회",
+    "output_documents": [
+     "특별위원회 심의결과"
+    ]
+   }
+  },
+  {
+   "id": "step:P06",
+   "type": "Step",
+   "label": "조성계획 승인·클러스터 및 사업시행자 지정",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제11조제5항",
+     "text": "위원회의 심의·의결을 거쳐 조성 계획을 승인(변경 포함)하고 반도체클러스터를 지정할 수 있다. 국가첨단전략산업 특화단지·기회발전특구·연구개발특구와 중복 지정할 수 있다."
+    },
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제11조제7항",
+     "text": "조성 계획의 승인, 반도체클러스터 및 사업시행자의 지정에 필요한 사항은 대통령령으로 정한다."
+    },
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+     "article": "제17조제5항",
+     "text": "반도체클러스터를 지정하는 경우 수도권 외의 지역을 우선적으로 고려해야 한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P06",
+    "lane": "산업통상부",
+    "stage": "G4 승인·지정",
+    "node_type": "notice",
+    "deadline": null,
+    "actor": "산업통상부",
+    "output_documents": [
+     "조성계획 승인서",
+     "클러스터·사업시행자 지정서"
+    ]
+   }
+  },
+  {
+   "id": "step:P07",
+   "type": "Step",
+   "label": "승인·지정 내용 고시와 관계기관 통보",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+     "article": "제17조제6항",
+     "text": "조성 계획을 승인하고 반도체클러스터를 지정한 경우에는 그 내용을 산업통상부의 인터넷 홈페이지에 공고해야 한다."
+    },
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+     "article": "제17조제7항",
+     "text": "그 밖에 반도체클러스터의 지정에 필요한 사항은 산업통상부장관이 정하여 고시한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P07",
+    "lane": "산업통상부",
+    "stage": "G4 승인·지정",
+    "node_type": "notice",
+    "deadline": null,
+    "actor": "산업통상부",
+    "output_documents": [
+     "클러스터 지정고시",
+     "관계기관 통보서"
+    ]
+   }
+  },
+  {
+   "id": "step:P08",
+   "type": "Step",
+   "label": "조성계획 변경·지정해제 및 후속 육성정책 연계",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제12조",
+     "text": "재정적 지원을 목적 외로 사용하거나 지정 목적 달성이 불가능한 경우 위원회의 심의·의결을 거쳐 지정을 변경 또는 해제할 수 있다."
+    },
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제13조",
+     "text": "정부는 반도체클러스터 육성시책을 수립·추진하여야 하며, 관계 중앙행정기관의 장 및 관련 시·도지사와 협의하여야 한다."
+    },
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+     "article": "제18조",
+     "text": "명칭 변경, 면적 10퍼센트 범위 변경, 사업시행자 명칭·주소 변경 등은 위원회 심의를 거치지 않는 경미한 사항이다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P08",
+    "lane": "산업통상부",
+    "stage": "G5 고시·변경",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "산업통상부",
+    "output_documents": [
+     "변경승인·지정해제 결정",
+     "클러스터 육성정책 연계표"
+    ]
+   }
+  }
+ ],
+ "relations": [
+  {
+   "id": "R-E01",
+   "type": "sequence",
+   "from": "step:P01",
+   "to": "step:P02",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E02",
+   "type": "sequence",
+   "from": "step:P02",
+   "to": "step:P03",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E03",
+   "type": "sequence",
+   "from": "step:P03",
+   "to": "step:P04",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E04",
+   "type": "sequence",
+   "from": "step:P04",
+   "to": "step:P05",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E05",
+   "type": "sequence",
+   "from": "step:P05",
+   "to": "step:P06",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E06",
+   "type": "sequence",
+   "from": "step:P06",
+   "to": "step:P07",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E07",
+   "type": "sequence",
+   "from": "step:P07",
+   "to": "step:P08",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-L01",
+   "type": "loop",
+   "from": "step:P05",
+   "to": "step:P03",
+   "label": "심의 보완",
+   "condition": "심의 보완"
+  },
+  {
+   "id": "R-about",
+   "type": "about",
+   "from": "case:GSC-N03-2026-0901",
+   "to": "item:project-boundary",
+   "label": "이 건의 선결 정보",
+   "condition": null
+  },
+  {
+   "id": "R-owns",
+   "type": "owns",
+   "from": "role:gwangju",
+   "to": "doc:development-plan",
+   "label": "작성 주체",
+   "condition": null
+  },
+  {
+   "id": "R-requires",
+   "type": "requires",
+   "from": "step:P01",
+   "to": "item:project-boundary",
+   "label": "명칭·위치·면적 기재",
+   "condition": "hard"
+  },
+  {
+   "id": "R-decides",
+   "type": "decides",
+   "from": "role:committee",
+   "to": "step:P06",
+   "label": "심의·의결",
+   "condition": null
+  },
+  {
+   "id": "R-notifies",
+   "type": "notifies",
+   "from": "role:motie",
+   "to": "doc:designation-notice",
+   "label": "홈페이지 공고",
+   "condition": null
+  },
+  {
+   "id": "R-cites",
+   "type": "cites",
+   "from": "doc:development-plan",
+   "to": "statute:statute-015044",
+   "label": "법 제11조제3항",
+   "condition": null
+  }
+ ],
+ "states": [
+  {
+   "id": "S-case",
+   "entity_id": "case:GSC-N03-2026-0901",
+   "state": "ready_to_prepare_application",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03",
+    "note": "정책상 입지 결정(2026-07-06)으로 선행 아티팩트는 충족. 신청 준비 단계."
+   }
+  },
+  {
+   "id": "S-boundary",
+   "entity_id": "item:project-boundary",
+   "state": "undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "오버레이 scope.boundaryStatus",
+    "note": "공식 사업구역 경계 미확인"
+   }
+  },
+  {
+   "id": "S-plan",
+   "entity_id": "doc:development-plan",
+   "state": "not_started",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p01",
+   "entity_id": "step:P01",
+   "state": "ready",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03",
+    "note": "착수 가능하나 경계 미확정이라 완성 불가"
+   }
+  },
+  {
+   "id": "S-p02",
+   "entity_id": "step:P02",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p03",
+   "entity_id": "step:P03",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p04",
+   "entity_id": "step:P04",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p05",
+   "entity_id": "step:P05",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p06",
+   "entity_id": "step:P06",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p07",
+   "entity_id": "step:P07",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p08",
+   "entity_id": "step:P08",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  }
+ ],
+ "rules": [
+  {
+   "id": "rule:plan-needs-fixed-boundary",
+   "name": "조성계획은 확정된 면적을 요구한다",
+   "applies_to": [
+    "step:P01",
+    "doc:development-plan",
+    "item:project-boundary"
+   ],
+   "inputs": [
+    "project_boundary_status"
+   ],
+   "predicate": "if boundary_status == 'undetermined' then plan_cannot_be_completed else plan_can_be_completed",
+   "output": {
+    "blocked": "조성계획의 명칭·위치·면적을 채울 수 없다",
+    "note": "3호 프로젝트 케이스의 미확정 파라미터 넷이 모두 경계 확정을 선행 조건으로 삼는 것과 같은 매듭이다."
+   },
+   "statute_ref": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+     "article": "제17조제1항제2호"
+    }
+   ],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:developer-application-implied",
+   "name": "사업자가 지정을 신청하면 사업시행자 지정을 신청한 것으로 본다",
+   "applies_to": [
+    "step:P02",
+    "role:developer"
+   ],
+   "inputs": [
+    "applicant_type"
+   ],
+   "predicate": "if applicant is 반도체산업 사업자 then developer_designation_requested else separate_track",
+   "output": {
+    "implied": "사업시행자 지정 신청 의제"
+   },
+   "statute_ref": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+     "article": "제17조제3항"
+    },
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제11조제4항"
+    }
+   ],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:committee-resolution-required",
+   "name": "승인·지정은 위원회 심의·의결을 거쳐야 한다",
+   "applies_to": [
+    "step:P05",
+    "step:P06"
+   ],
+   "inputs": [
+    "committee_resolution"
+   ],
+   "predicate": "if committee_resolved then may_approve_and_designate else cannot_designate",
+   "output": {
+    "required": [
+     "step:P05"
+    ],
+    "gate": "step:P06"
+   },
+   "statute_ref": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제11조제5항"
+    },
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제9조"
+    }
+   ],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:four-requirements",
+   "name": "지정 요건 네 가지를 모두 갖춘 지역이어야 한다",
+   "applies_to": [
+    "step:P03"
+   ],
+   "inputs": [
+    "tenant_demand",
+    "infrastructure",
+    "funding_plan",
+    "balanced_development"
+   ],
+   "predicate": "if all(입주수요, 기반시설, 재원조달, 균형발전 기여) then eligible else not_eligible",
+   "output": {
+    "requirements": [
+     "입주수요 확보 가능",
+     "부지·정보통신망·용수·전력 확보 가능",
+     "소요 재원 조달방안 실현 가능",
+     "국토 균형발전·지역 간 격차 해소 기여"
+    ]
+   },
+   "statute_ref": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제11조제5항"
+    },
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+     "article": "제17조제4항"
+    }
+   ],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:overlap-designation-allowed",
+   "name": "특화단지·기회발전특구·연구개발특구와 중복 지정할 수 있다",
+   "applies_to": [
+    "step:P06"
+   ],
+   "inputs": [
+    "existing_designations"
+   ],
+   "predicate": "overlap_with(국가첨단전략산업 특화단지, 기회발전특구, 연구개발특구) is allowed",
+   "output": {
+    "note": "N03이 특화단지 제도를 함께 참조하는 근거다. 배타 관계가 아니다."
+   },
+   "statute_ref": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제11조제5항"
+    }
+   ],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:notice-basis-is-decree",
+   "name": "승인·지정 공고 의무는 법률이 아니라 시행령에 있다",
+   "applies_to": [
+    "step:P07",
+    "doc:designation-notice"
+   ],
+   "inputs": [],
+   "predicate": "notice_obligation is defined in 시행령 제17조제6항, not 법 제11조",
+   "output": {
+    "note": "법 제11조만 인용하면 공고 의무의 근거를 놓친다."
+   },
+   "statute_ref": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+     "article": "제17조제6항"
+    },
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+     "article": "제17조제7항"
+    }
+   ],
+   "stop_if_unverified": true
+  }
+ ],
+ "action_packets": [
+  {
+   "id": "ap:prepare-designation-application",
+   "title": "반도체클러스터 지정 신청 준비",
+   "for_query": "반도체클러스터 지정 신청하려면 뭐부터 해야 해?",
+   "actor": "role:gwangju",
+   "why": "선행 아티팩트(정책상 입지 결정)는 충족되어 P01 조성계획안 작성에 착수할 수 있다. 다만 rule:plan-needs-fixed-boundary 에 따라 공식 사업구역 경계가 확정되지 않으면 영 제17조제1항제2호의 명칭·위치·면적을 채울 수 없어 계획을 완성할 수 없다.",
+   "based_on": [
+    "case:GSC-N03-2026-0901",
+    "S-case",
+    "S-boundary",
+    "S-p01",
+    "rule:plan-needs-fixed-boundary",
+    "rule:developer-application-implied",
+    "rule:four-requirements",
+    "step:P01",
+    "step:P02",
+    "doc:development-plan",
+    "item:project-boundary"
+   ],
+   "checklist": [
+    "공식 사업구역 경계를 확정한다 — 조성계획의 명칭·위치·면적이 여기서 나온다 (영 제17조제1항제2호)",
+    "영 제17조제1항 각 호 10개 기재사항을 항목별로 채운다 (기본목표·중장기 발전방향, 토지이용계획, 집적계획, 재원 확보, 환경 보전 등)",
+    "작성 단계에서 관련 지방자치단체의 장·사업자·기관과 미리 협의한다 (영 제17조제2항)",
+    "지정 요건 네 가지 충족 근거를 정리한다: 입주수요, 기반시설(부지·정보통신망·용수·전력), 재원 조달방안, 국토 균형발전 기여 (법 제11조제5항·영 제17조제4항)",
+    "사업시행자를 확정한다. 반도체산업 사업자가 신청하면 사업시행자 지정을 신청한 것으로 본다 (영 제17조제3항)",
+    "국가첨단전략산업 특화단지·기회발전특구와 중복 지정이 가능하므로 기존 지정과의 관계를 정리한다 (법 제11조제5항 후단)",
+    "신속 조성이 필요하면 국가산업단지 지정 요청 경로를 함께 검토한다 (법 제11조제2항)"
+   ],
+   "evidence_needed": [
+    "공식 사업구역 경계 고시 또는 확정 도면",
+    "입주 의향 기업 현황",
+    "전력·용수·도로 기반시설 확보 가능성 자료",
+    "총사업비와 재원 조달방안",
+    "사업시행자 지정 신청 서류"
+   ],
+   "system_touchpoints": [
+    "산업통상부 반도체클러스터 지정 신청 창구"
+   ],
+   "human_signoff": "광주특별시장 또는 사업시행자의 결재를 거쳐야 신청할 수 있다",
+   "auto_execute": false,
+   "risks": [
+    "경계 미확정 상태에서 계획을 제출하면 요건 검토 단계에서 되돌아온다",
+    "사업시행자가 확정되지 않으면 영 제17조제3항의 지정 신청 의제가 작동하지 않는다",
+    "이 패킷은 지정 절차만 다룬다. 산업단지 지정·환경·전력은 각 제도의 몫이다"
+   ]
+  },
+  {
+   "id": "ap:ministry-designation-review",
+   "title": "지정 신청 접수 후 산업통상부 검토",
+   "for_query": "지정 신청이 들어오면 뭘 검토하지?",
+   "actor": "role:motie",
+   "why": "신청을 받으면 요건·적격성 검토(P03), 관계기관 협의(P04), 위원회 심의(P05)를 거쳐야 승인·지정(P06)에 이른다. rule:committee-resolution-required 에 따라 위원회 의결 없이는 지정할 수 없다.",
+   "based_on": [
+    "case:GSC-N03-2026-0901",
+    "rule:four-requirements",
+    "rule:committee-resolution-required",
+    "rule:notice-basis-is-decree",
+    "step:P03",
+    "step:P04",
+    "step:P05",
+    "step:P06",
+    "step:P07"
+   ],
+   "checklist": [
+    "법 제11조제5항 각 호 네 요건과 영 제17조제4항의 균형발전 요건 충족 여부를 검토한다",
+    "관계 중앙행정기관 및 지방자치단체의 장과 협의한다 (법 제11조제1항 후단)",
+    "반도체산업경쟁력강화특별위원회의 심의·의결을 거친다 (법 제11조제5항·제9조)",
+    "지정 시 수도권 외의 지역을 우선적으로 고려한다 (영 제17조제5항)",
+    "승인·지정 후 그 내용을 산업통상부 인터넷 홈페이지에 공고한다 (영 제17조제6항) — 이 의무는 법률이 아니라 시행령에 있다",
+    "중복 지정 가능성을 확인한다. 특화단지·기회발전특구·연구개발특구와 겹칠 수 있다 (법 제11조제5항 후단)"
+   ],
+   "evidence_needed": [
+    "조성 계획과 첨부 서류",
+    "관계기관 협의 결과",
+    "위원회 심의·의결서"
+   ],
+   "system_touchpoints": [
+    "산업통상부 인터넷 홈페이지(공고)"
+   ],
+   "human_signoff": "산업통상부장관의 승인·지정 처분으로만 확정된다",
+   "auto_execute": false,
+   "risks": [
+    "위원회 의결 없이 지정하면 법 제11조제5항 위반",
+    "공고 의무의 근거를 법 제11조에서 찾으면 없다. 영 제17조제6항·제7항이다"
+   ]
+  }
+ ],
+ "demo_queries": [
+  {
+   "q": "반도체클러스터 지정 신청하려면 뭐부터 해야 해?",
+   "resolve": {
+    "identify": [
+     "case:GSC-N03-2026-0901",
+     "doc:development-plan",
+     "item:project-boundary"
+    ],
+    "state": "ready_to_prepare_application",
+    "rules_fired": [
+     "rule:plan-needs-fixed-boundary",
+     "rule:four-requirements"
+    ],
+    "action_packet": "ap:prepare-designation-application"
+   }
+  },
+  {
+   "q": "지정 신청이 들어오면 뭘 검토하지?",
+   "resolve": {
+    "identify": [
+     "case:GSC-N03-2026-0901",
+     "step:P03",
+     "step:P05"
+    ],
+    "rules_fired": [
+     "rule:committee-resolution-required",
+     "rule:four-requirements"
+    ],
+    "action_packet": "ap:ministry-designation-review"
+   }
+  },
+  {
+   "q": "이 지정 건 지금 어디까지 왔어?",
+   "resolve": {
+    "done": [],
+    "ready": [
+     "step:P01"
+    ],
+    "available": [
+     "step:P02"
+    ]
+   }
+  }
+ ],
+ "notes": [
+  "구조 층은 ontology/scripts/derive-case.mjs 가 제도 JSON에서 파생했다.",
+  "조문은 2026-09-01 법제처 DRF 현행 원문(반도체특별법 015044·시행령 015185, 2026-08-11 시행)에 대조했다.",
+  "3호 프로젝트 케이스(GSC-2026-0901-001)의 마일스톤 N03을 안쪽에서 채우는 케이스다. 3호는 '어느 마일스톤이 열렸나'를, 4호는 '그 마일스톤 안에서 어느 단계인가'를 답한다.",
+  "auto_execute는 항상 false. 공공 온톨로지 액션 = 승인 패킷."
+ ],
+ "project_context": {
+  "project_id": "gwangju-semiconductor-cluster",
+  "milestone_node_id": "N03",
+  "milestone_label": "반도체클러스터 지정 신청·심의·지정",
+  "note": "3호 프로젝트 케이스의 N03을 이 제도 케이스가 안쪽에서 채운다."
+ }
+}

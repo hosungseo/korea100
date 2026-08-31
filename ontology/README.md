@@ -9,6 +9,7 @@
 - `samples/information-disclosure.case.json` — **정보공개청구** 샘플 1호 (제도 R2)
 - `samples/administrative-fine-pre-notice.case.json` — **과태료 사전통지·의견제출** 샘플 2호 (제도 R2)
 - `samples/gwangju-semiconductor-cluster.case.json` — **광주 반도체 클러스터** 샘플 3호 (프로젝트, 제도 108개)
+- `samples/semiconductor-cluster-designation.case.json` — **반도체클러스터 지정** 샘플 4호 (3호의 N03을 안쪽에서 채운다)
 - `scripts/derive-case.mjs` — 제도 업무구조도 → 케이스 구조 층 파생
 - `scripts/derive-project-case.mjs` — 메가프로젝트 오버레이 → 프로젝트 케이스 구조 층 파생
 - `scripts/demo_query.py` — 샘플 질의 데모
@@ -16,6 +17,10 @@
 ## 두 가지 케이스 종류
 
 `case_kind: "institution"` — 제도 하나, 사건 하나. 단계는 `step:Pxx`, 연결은 업무구조도 엣지.
+
+제도 케이스는 `project_context`로 프로젝트의 특정 마일스톤을 채운다고 선언할 수 있다.
+그 주장은 검사된다. 오버레이에 그 마일스톤이 있는지, 그 마일스톤이 실제로 이 제도를
+참조하는지, 이름이 갈라지지 않았는지를 매 질의마다 대조한다.
 
 `case_kind: "project"` — 사업 하나, 제도 여럿. 단계는 `milestone:Nxx`, 연결은
 **아티팩트 인계**(`hands_off_to`)다. 어긋나는 지점이 제도 안이 아니라 제도 사이에 있다.
@@ -40,6 +45,11 @@ node ontology/scripts/derive-case.mjs --slug <제도 slug> --case-id <ID> --as-o
 **2호** 과태료 사전통지·의견제출 (`administrative-fine-pre-notice-opinion`) — 케이스 `AFN-2026-0901-001`.
 2026-08-27 사전통지 수령, 의견 제출 기한 2026-09-08까지 열려 있음. as_of 2026-09-01.
 당사자용·행정청용 패킷을 각각 낸다 → [DEMO](samples/administrative-fine-pre-notice.DEMO.md)
+
+**4호** 반도체클러스터 지정 (`semiconductor-cluster-designation-coordination`) — 케이스 `GSC-N03-2026-0901`.
+3호의 마일스톤 N03을 안쪽에서 채운다. 사업 층에서 N03은 열려 있는데 제도 층으로 들어가면
+P01에서 사업구역 경계가 막고 있다. 층을 오르내려도 같은 매듭이 나온다
+→ [DEMO](samples/semiconductor-cluster-designation.DEMO.md)
 
 **3호** 광주 군공항 부지 반도체 클러스터 (`gwangju-semiconductor-cluster`) — 케이스 `GSC-2026-0901-001`.
 마일스톤 54·아티팩트 53·참조 제도 108·관계 462. 완료 2 / 진행 1 / 착수가능 10 / 차단 36 / 경로미확정 5.
@@ -79,7 +89,7 @@ python3 ontology/scripts/demo_query.py "부분공개 통지 왔는데 뭐 하면
 - MCP 도구: `load_ontology_case`, `get_case_state`, `query_case`, `check_case_linkage`, `get_project_status`, `explain_blocked_milestone`
 - 패킷 계약: `mcp/src/packet-contract.mjs` — R2 경로(`create_action_packet`)와 온톨로지 경로가 같은 ActionPacket 계약을 통과해야 한다
 - 케이스 대조: `mcp/src/case-link.mjs` — 케이스 그래프가 제도 업무구조도와 어긋나면 드러낸다
-- 테스트: `cd mcp && npm test` (64건)
+- 테스트: `cd mcp && npm test` (70건)
 - 데모: `node mcp/scripts/ontology-query-once.mjs [--case samples/<파일>] "<질문>"`
 
 ## 제도 층과의 관계
