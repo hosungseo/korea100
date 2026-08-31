@@ -29,17 +29,38 @@ test("샘플 케이스는 정보공개 제도 업무구조도와 정확히 대�
   assert.equal(linkage.sequence.case_relation_count, linkage.sequence.institution_edge_count);
 });
 
-test("정보공개는 R2가 아니므로 다음 행동 계산을 허용하지 않는다", async () => {
+test("정보공개는 R2 승격 후 다음 행동 계산이 허용된다", async () => {
   const caseData = await sampleCase();
   const linkage = await checkCaseLinkageFor(caseData);
 
-  assert.equal(linkage.readiness.level, "R1");
-  assert.equal(linkage.readiness.mode, "reference-only");
-  assert.equal(linkage.next_action_allowed, false);
-  assert.ok(linkage.readiness.blockers.length >= 1);
-  assert.ok(linkage.notes.some((note) => note.includes("R1")));
-  // 조문 대조 자체는 통과했다. 등급을 막은 것은 조문이 아니라 계약 완결성이다.
+  assert.equal(linkage.readiness.level, "R2");
+  assert.equal(linkage.readiness.mode, "next-action");
+  assert.equal(linkage.next_action_allowed, true);
+  assert.deepEqual(linkage.readiness.blockers, [], "차단 사유가 남아 있으면 R2가 아니다");
   assert.equal(linkage.readiness.last_live_check.status, "passed");
+  assert.equal(linkage.readiness.last_live_check.verified_references, 36);
+});
+
+test("준비도가 R2 미만이면 다음 행동 계산을 막는다", async () => {
+  const caseData = await sampleCase();
+  const institution = await loadInstitutionForLinkage("information-disclosure");
+  const downgraded = {
+    ...institution,
+    process: {
+      ...institution.process,
+      agent_readiness: {
+        ...institution.process.agent_readiness,
+        level: "R1",
+        mode: "reference-only",
+        blockers: ["전이 조건·인계 수동 대조 미완료"],
+      },
+    },
+  };
+
+  const linkage = checkCaseLinkage(caseData, downgraded);
+  assert.equal(linkage.status, "aligned", "대조 자체는 여전히 맞는다");
+  assert.equal(linkage.next_action_allowed, false, "등급이 모자라면 아무리 맞아도 막는다");
+  assert.ok(linkage.notes.some((note) => note.includes("R1")));
 });
 
 test("케이스가 없는 단계를 가리키면 어긋남으로 잡는다", async () => {

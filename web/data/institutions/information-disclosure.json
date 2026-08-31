@@ -87,7 +87,8 @@
   "이의신청 인용률과 평균 처리기간",
   "부분공개·부존재 처리 관행의 실제 분포",
   "정보공개심의회 심의 지연·개최 주기의 실제 운영(운영 추정)",
-  "제3자 비공개 요청이 실제 공개 지연·제한으로 이어지는 비율(운영 추정)"
+  "제3자 비공개 요청이 실제 공개 지연·제한으로 이어지는 비율(운영 추정)",
+  "정보공개포털(open.go.kr)은 법령상 명칭이 아니라 운영 시스템이다. 기관별 시스템 차이 확인 필요"
  ],
  "verification": {
   "status": "article-verified",
@@ -175,7 +176,6 @@
     "output_documents": [
      "정보공개 청구서"
     ],
-    "deadline": "상시(청구권에 기한 없음)",
     "confidence": 0.9,
     "legal_basis": [
      {
@@ -211,8 +211,8 @@
       "공공기관 민원·주무부서"
      ],
      "deadline_rule": {
-      "type": "needs-verification",
-      "expression": "상시(청구권에 기한 없음)"
+      "type": "not-specified",
+      "expression": null
      },
      "derivation": "existing-data-and-graph"
     }
@@ -234,7 +234,6 @@
      "접수증",
      "처리부서 지정"
     ],
-    "deadline": "청구 당일 접수",
     "confidence": 0.88,
     "legal_basis": [
      {
@@ -267,8 +266,8 @@
       "처리부서"
      ],
      "deadline_rule": {
-      "type": "needs-verification",
-      "expression": "청구 당일 접수"
+      "type": "not-specified",
+      "expression": null
      },
      "derivation": "existing-data-and-graph"
     }
@@ -288,7 +287,7 @@
      "정보 검색결과",
      "이송 통지(해당 시)"
     ],
-    "deadline": "소관 아닐 때 지체 없이 이송",
+    "deadline": "소관 기관이 아니면 지체 없이 이송",
     "confidence": 0.83,
     "legal_basis": [
      {
@@ -318,8 +317,8 @@
       "접수 공공기관"
      ],
      "deadline_rule": {
-      "type": "needs-verification",
-      "expression": "소관 아닐 때 지체 없이 이송"
+      "type": "statutory-immediate",
+      "expression": "소관 기관이 아니면 지체 없이 이송"
      },
      "derivation": "existing-data-and-graph"
     }
@@ -342,7 +341,7 @@
     "output_documents": [
      "공개 여부 검토의견"
     ],
-    "deadline": "결정기한(10일) 내 판단",
+    "deadline": "청구를 받은 날부터 10일 이내",
     "blocker": "제9조제1항제5호(의사결정 과정) 해당 여부 검토 중",
     "confidence": 0.85,
     "legal_basis": [
@@ -372,8 +371,8 @@
       "처리부서"
      ],
      "deadline_rule": {
-      "type": "needs-verification",
-      "expression": "결정기한(10일) 내 판단"
+      "type": "statutory",
+      "expression": "청구를 받은 날부터 10일 이내"
      },
      "derivation": "existing-data-and-graph"
     }
@@ -395,19 +394,23 @@
     "output_documents": [
      "심의결과"
     ],
-    "deadline": "결정기한 내 개최",
     "blocker": "심의회 미개최·개최 지연으로 결정이 늦어지는 경우가 있다(운영 추정)",
-    "confidence": 0.78,
+    "confidence": 0.88,
     "legal_basis": [
      {
       "law": "공공기관의 정보공개에 관한 법률",
       "article": "제12조",
-      "text": "정보공개심의회는 공개 여부 등을 심의하기 위해 설치·운영하며, 개별 청구의 심의 필요성은 기관 절차에 따라 구분한다."
+      "text": "국가기관등은 정보공개 여부 등을 심의하기 위하여 정보공개심의회를 설치·운영한다."
      },
      {
       "law": "공공기관의 정보공개에 관한 법률 시행령",
-      "article": "제11조",
-      "text": "법 제12조의 위임에 따라 정보공개심의회의 구성·운영에 관한 사항을 정한다."
+      "article": "제11조제2항",
+      "text": "심의회는 공개 청구된 정보의 공개 여부를 결정하기 곤란한 사항과 법 제18조·제21조제2항에 따른 이의신청 등을 심의한다."
+     },
+     {
+      "law": "공공기관의 정보공개에 관한 법률 시행령",
+      "article": "제7조",
+      "text": "제3자의 의견청취나 정보공개심의회 개최 등의 사유로 정해진 기간 내에 공개 여부를 결정하기 곤란한 경우 결정기간을 연장할 수 있다."
      }
     ],
     "agent": {
@@ -416,7 +419,7 @@
      "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 심의결과",
      "obligation": "required",
      "basis_status": "citation-verified",
-     "automation_level": "inform-only",
+     "automation_level": "draft-with-review",
      "human_confirmation_required": true,
      "resolved_input_documents": [
       "공개 여부 검토의견",
@@ -429,8 +432,8 @@
       "처리부서"
      ],
      "deadline_rule": {
-      "type": "needs-verification",
-      "expression": "결정기한 내 개최"
+      "type": "not-specified",
+      "expression": null
      },
      "derivation": "existing-data-and-graph"
     }
@@ -502,23 +505,23 @@
     "output_documents": [
      "제3자 통지서"
     ],
-    "deadline": "지체 없이",
+    "deadline": "제3자에게 지체 없이 통지",
     "confidence": 0.86,
     "legal_basis": [
      {
       "law": "공공기관의 정보공개에 관한 법률",
-      "article": "제21조제1항",
-      "text": "제3자와 관련된 정보는 지체 없이 그 사실을 제3자에게 통지하고 의견을 들을 수 있다."
+      "article": "제11조제3항",
+      "text": "공개 청구된 정보의 전부 또는 일부가 제3자와 관련이 있다고 인정할 때에는 그 사실을 제3자에게 지체 없이 통지하여야 하며, 필요한 경우에는 그의 의견을 들을 수 있다."
      },
      {
       "law": "공공기관의 정보공개에 관한 법률 시행령",
       "article": "제8조",
-      "text": "법 제11조제3항의 위임에 따라 제3자 의견청취의 방법을 정한다."
+      "text": "법 제11조제3항에 따라 제3자의 의견을 들을 때에는 문서로 하여야 한다. 다만 공공기관이 필요하다고 인정하거나 제3자가 원하는 경우에는 말로 들을 수 있다."
      },
      {
       "law": "공공기관의 정보공개에 관한 법률 시행규칙",
       "article": "제4조",
-      "text": "제3자 통지·비공개 요청은 별지 제4호의3·제5호서식, 말로 하는 의견청취는 별지 제6호서식에 따른다."
+      "text": "법 제11조제3항에 따라 제3자에게 통지하는 정보공개 청구사실 통지는 별지 제4호의3서식에 따른다."
      }
     ],
     "agent": {
@@ -539,8 +542,8 @@
       "제3자"
      ],
      "deadline_rule": {
-      "type": "needs-verification",
-      "expression": "지체 없이"
+      "type": "statutory-immediate",
+      "expression": "제3자에게 지체 없이 통지"
      },
      "derivation": "existing-data-and-graph"
     }
@@ -566,8 +569,18 @@
     "legal_basis": [
      {
       "law": "공공기관의 정보공개에 관한 법률",
+      "article": "제21조제1항",
+      "text": "제11조제3항에 따라 공개 청구된 사실을 통지받은 제3자는 그 통지를 받은 날부터 3일 이내에 자신과 관련된 정보를 공개하지 아니할 것을 요청할 수 있다."
+     },
+     {
+      "law": "공공기관의 정보공개에 관한 법률",
       "article": "제21조제2항",
-      "text": "통지받은 제3자는 통지받은 날부터 3일 이내에 비공개를 요청할 수 있다."
+      "text": "비공개 요청에도 불구하고 공개 결정을 할 때에는 공개 결정 이유와 공개 실시일을 밝혀 지체 없이 문서로 통지하여야 하며, 제3자의 이의신청은 통지를 받은 날부터 7일 이내에 하여야 한다."
+     },
+     {
+      "law": "공공기관의 정보공개에 관한 법률 시행규칙",
+      "article": "제4조",
+      "text": "통지받은 제3자의 의견 제출 또는 법 제21조제1항에 따른 비공개 요청은 별지 제5호서식에 따른다."
      }
     ],
     "agent": {
@@ -611,7 +624,7 @@
      "정보공개 여부 결정 통지서",
      "비공개 사유·불복방법 안내"
     ],
-    "deadline": "결정 후 지체 없이",
+    "deadline": "비공개 결정은 지체 없이 문서로 통지",
     "confidence": 0.88,
     "legal_basis": [
      {
@@ -643,8 +656,8 @@
       "청구인·법원"
      ],
      "deadline_rule": {
-      "type": "needs-verification",
-      "expression": "결정 후 지체 없이"
+      "type": "statutory-immediate",
+      "expression": "비공개 결정은 지체 없이 문서로 통지"
      },
      "derivation": "existing-data-and-graph"
     }
@@ -666,23 +679,33 @@
      "공개 정보(사본·전자파일)",
      "수수료 납부"
     ],
-    "deadline": "공개 결정일 이후",
+    "deadline": "공개를 결정한 날부터 10일 이내의 범위에서 정한 공개 일시",
     "confidence": 0.85,
     "legal_basis": [
      {
       "law": "공공기관의 정보공개에 관한 법률",
-      "article": "제13조·제17조",
-      "text": "공개는 열람·사본·전자파일 교부로 실시하고, 공개 실비는 청구인이 수수료로 부담한다."
+      "article": "제13조",
+      "text": "정보의 공개를 결정한 경우에는 공개의 일시 및 장소 등을 분명히 밝혀 청구인에게 통지하여야 하며, 사본 또는 복제물의 교부를 원하는 경우 이를 교부하여야 한다."
+     },
+     {
+      "law": "공공기관의 정보공개에 관한 법률",
+      "article": "제17조",
+      "text": "정보의 공개 및 우송 등에 드는 비용은 실비의 범위에서 청구인이 부담한다."
      },
      {
       "law": "공공기관의 정보공개에 관한 법률 시행령",
-      "article": "제17조",
-      "text": "법 제17조의 위임에 따라 공개·우송 비용은 수수료와 우편요금으로 구분하며 수수료 금액은 행정안전부령(지자체는 조례)으로 정하고, 학술·공익·행정감시 목적 등은 감면할 수 있다."
+      "article": "제12조",
+      "text": "공개를 결정하였을 때에는 공개를 결정한 날부터 10일 이내의 범위에서 공개 일시를 정하여 통지하여야 하며, 비용 미납의 경우 전부 납부한 날부터 5일 이내에 공개하여야 한다."
+     },
+     {
+      "law": "공공기관의 정보공개에 관한 법률 시행령",
+      "article": "제14조",
+      "text": "정보는 문서·도면 등은 열람 또는 사본 제공, 전자적 형태 정보는 정보공개시스템 송부·매체 저장·열람 등의 방법으로 공개한다."
      },
      {
       "law": "공공기관의 정보공개에 관한 법률 시행규칙",
       "article": "제7조",
-      "text": "영 제17조제1항의 위임에 따라 수수료 금액을 별표로 정한다."
+      "text": "정보공개 수수료의 금액은 별표에 따른다."
      }
     ],
     "agent": {
@@ -702,8 +725,8 @@
      ],
      "handoff_recipients": [],
      "deadline_rule": {
-      "type": "needs-verification",
-      "expression": "공개 결정일 이후"
+      "type": "statutory",
+      "expression": "공개를 결정한 날부터 10일 이내의 범위에서 정한 공개 일시"
      },
      "derivation": "existing-data-and-graph"
     }
@@ -725,12 +748,22 @@
      "포털 처리이력",
      "원문 사전공개 자료"
     ],
-    "confidence": 0.74,
+    "confidence": 0.86,
     "legal_basis": [
      {
       "law": "공공기관의 정보공개에 관한 법률",
       "article": "제8조의2",
-      "text": "공공기관은 원문정보 등을 정보통신망을 통하여 사전 공개하고 처리 이력을 관리한다."
+      "text": "중앙행정기관 및 대통령령으로 정하는 기관은 전자적 형태로 보유·관리하는 정보 중 공개대상으로 분류된 정보를 청구가 없더라도 정보공개시스템 등을 통하여 공개하여야 한다."
+     },
+     {
+      "law": "공공기관의 정보공개에 관한 법률 시행령",
+      "article": "제5조의2",
+      "text": "법 제8조의2의 원문공개 대상기관은 중앙행정기관의 소속 기관, 위원회, 지방자치단체, 각급 학교, 공기업 및 준정부기관으로 한다."
+     },
+     {
+      "law": "공공기관의 정보공개에 관한 법률 시행령",
+      "article": "제16조",
+      "text": "공공기관은 정보공개청구에 대한 처리상황을 정보공개처리대장에 기록·유지하여야 한다."
      }
     ],
     "agent": {
@@ -739,7 +772,7 @@
      "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 포털 처리이력, 원문 사전공개 자료",
      "obligation": "required",
      "basis_status": "citation-verified",
-     "automation_level": "inform-only",
+     "automation_level": "draft-with-review",
      "human_confirmation_required": true,
      "resolved_input_documents": [
       "정보공개 여부 결정 통지서"
@@ -994,13 +1027,17 @@
      "비용 감면 결정",
      "감면비율 공개"
     ],
-    "deadline": "공개 실시 전후(감면 신청 시)",
-    "confidence": 0.75,
+    "confidence": 0.86,
     "legal_basis": [
      {
+      "law": "공공기관의 정보공개에 관한 법률",
+      "article": "제17조제2항",
+      "text": "공개를 청구하는 정보의 사용 목적이 공공복리의 유지·증진을 위하여 필요하다고 인정되는 경우에는 비용을 감면할 수 있다."
+     },
+     {
       "law": "공공기관의 정보공개에 관한 법률 시행령",
-      "article": "제17조제3항~제5항",
-      "text": "비영리 학술·공익단체, 교수·교사·학생의 연구·교육 목적 등은 수수료를 감면할 수 있으며, 신청 시 소명자료를 첨부하고 공공기관의 장은 감면비율을 정하여 공개한다."
+      "article": "제17조",
+      "text": "비영리 학술·공익단체의 학술·연구·행정감시 목적 청구 등에는 수수료를 감면할 수 있으며, 감면 신청 시 소명자료를 첨부하고 공공기관의 장은 감면비율을 정하여 공개한다."
      }
     ],
     "agent": {
@@ -1009,7 +1046,7 @@
      "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 비용 감면 결정, 감면비율 공개",
      "obligation": "required",
      "basis_status": "citation-verified",
-     "automation_level": "inform-only",
+     "automation_level": "draft-with-review",
      "human_confirmation_required": true,
      "resolved_input_documents": [
       "감면사유 소명자료"
@@ -1022,8 +1059,8 @@
       "청구인"
      ],
      "deadline_rule": {
-      "type": "needs-verification",
-      "expression": "공개 실시 전후(감면 신청 시)"
+      "type": "not-specified",
+      "expression": null
      },
      "derivation": "existing-data-and-graph"
     }
@@ -1046,7 +1083,7 @@
      "이송 통지서",
      "이송된 청구서"
     ],
-    "deadline": "소관이 아닌 경우 지체 없이",
+    "deadline": "이송 후 지체 없이 청구인에게 문서로 통지",
     "confidence": 0.9,
     "legal_basis": [
      {
@@ -1075,8 +1112,8 @@
       "정보공개책임관"
      ],
      "deadline_rule": {
-      "type": "needs-verification",
-      "expression": "소관이 아닌 경우 지체 없이"
+      "type": "statutory-immediate",
+      "expression": "이송 후 지체 없이 청구인에게 문서로 통지"
      },
      "derivation": "existing-data-and-graph"
     }
@@ -1592,24 +1629,25 @@
    }
   ],
   "warnings": [
-   "2026-07-12 감사 정정: 이의신청 인용 시 공개 실시로 회귀하는 E08을 sequence→loop로 정정 (재작업 경로)."
+   "2026-07-12 감사 정정: 이의신청 인용 시 공개 실시로 회귀하는 E08을 sequence→loop로 정정 (재작업 경로).",
+   "2026-09-01 R2 승격 검증: 노드 17개 기한 성격과 연결선 26개 전이 조건을 법제처 현행 원문에 수동 대조했다. 제3자 통지(P07)의 근거를 제21조제1항에서 제11조제3항으로, 제3자 비공개 요청(P08)의 근거를 제21조제2항에서 제21조제1항으로 정정했다. 청구 기한(P01), 접수 시한(P02), 심의회 개최 시기(P05), 감면 신청 기한(P15)은 법령에 규정이 없어 기한 표기를 제거했다(법의 침묵)."
   ],
   "agent_readiness": {
    "contract_version": "1.1.0",
-   "level": "R1",
-   "mode": "reference-only",
+   "level": "R2",
+   "mode": "next-action",
    "assessed_at": "2026-09-01",
-   "assessment_method": "스키마 검증·그래프 파생·전이 수동 대조 필요·법제처 DRF API 직접 대조",
+   "assessment_method": "스키마 검증·그래프 파생·전이 수동 대조·법제처 DRF API 직접 대조",
    "live_legal_check": "required-before-use",
    "last_live_check": {
     "checked_at": "2026-09-01",
     "method": "law.go.kr-DRF-direct",
     "status": "passed",
-    "citation_fingerprint": "sha256:138eead4d4278b97d0fe73239210c3b272ba3971d619ac1c71c5579953f43cba",
+    "citation_fingerprint": "sha256:84930043f5b250b84fc54e92c669c6a5cb022ef7d3edea28b4c1e24613bf3bfe",
     "sources_checked": 3,
     "source_failures": 0,
-    "article_references": 30,
-    "verified_references": 30,
+    "article_references": 36,
+    "verified_references": 36,
     "missing_references": [],
     "uncheckable_references": [],
     "verified_node_ids": [
@@ -1678,16 +1716,24 @@
       "official_url": "https://law.go.kr/법령/공공기관의정보공개에관한법률시행령",
       "requested_articles": [
        "제11조",
+       "제12조",
+       "제14조",
+       "제16조",
        "제17조",
        "제18조",
+       "제5조의2",
        "제6조",
        "제7조",
        "제8조"
       ],
       "verified_articles": [
        "제11조",
+       "제12조",
+       "제14조",
+       "제16조",
        "제17조",
        "제18조",
+       "제5조의2",
        "제6조",
        "제7조",
        "제8조"
@@ -1725,8 +1771,7 @@
      }
     ]
    },
-   "actionable_node_ids": [],
-   "reference_only_node_ids": [
+   "actionable_node_ids": [
     "P01",
     "P02",
     "P03",
@@ -1745,11 +1790,8 @@
     "P15",
     "P16"
    ],
-   "blockers": [
-    "신뢰도 0.8 미만 노드 3개",
-    "기한 성격 재확인 노드 10개",
-    "전이 조건·인계 수동 대조 미완료"
-   ],
+   "reference_only_node_ids": [],
+   "blockers": [],
    "metrics": {
     "nodes": 17,
     "edges": 26,
@@ -1757,10 +1799,10 @@
     "transition_contract_coverage": 1,
     "explicit_basis_coverage": 1,
     "output_document_coverage": 1,
-    "low_confidence_nodes": 3,
+    "low_confidence_nodes": 0,
     "template_like_nodes": 0,
-    "deadline_review_nodes": 10,
-    "field_verification_items": 5
+    "deadline_review_nodes": 0,
+    "field_verification_items": 6
    }
   }
  }

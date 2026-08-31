@@ -14,15 +14,16 @@ export const SHOWCASE_INSTITUTIONS = [
   { slug: "administrative-fine-pre-notice-opinion", transitionReviewed: true },
   { slug: "administrative-fine-objection-court", transitionReviewed: true },
   { slug: "national-rd-fund-use-settlement", transitionReviewed: true },
-  // 온톨로지 케이스(IDC-2026-0901-001)가 참조하는 제도. 전이 수동 대조 미완료이므로 R2를 주장하지 않는다.
-  { slug: "information-disclosure", transitionReviewed: false },
+  // 온톨로지 케이스(IDC-2026-0901-001)가 참조하는 제도.
+  // 2026-09-01 연결선 26개 전이 조건·인계를 법제처 현행 원문에 수동 대조했다.
+  { slug: "information-disclosure", transitionReviewed: true },
 ];
 
 const SELECTION_REASONS = {
   "administrative-fine-pre-notice-opinion": "짧은 기본 절차와 조건 분기를 보여주는 사례",
   "administrative-fine-objection-court": "행정청에서 법원으로 넘어가는 기관 간 인계 사례",
   "national-rd-fund-use-settlement": "법률·시행령·행정규칙을 함께 사용하는 복합 사례",
-  "information-disclosure": "온톨로지 케이스 계층과 맞물리는 사례. R2 미달 사유를 그대로 남긴다",
+  "information-disclosure": "온톨로지 케이스 계층과 맞물리는 사례. 기한 성격과 전이를 재대조해 R2로 승격",
 };
 
 function institutionCount() {

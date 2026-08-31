@@ -137,6 +137,43 @@ export async function loadInstitution(slug, { institutionDir = INSTITUTION_DIR }
   return JSON.parse(raw);
 }
 
+/**
+ * 이미 사람이 쓴 케이스에 구조 층만 다시 입힌다.
+ * 제도 데이터를 고치면 케이스가 조용히 어긋나므로, 손작성 층은 지키고
+ * 파생 층만 갈아끼울 길이 있어야 한다.
+ */
+export function remergeCase(existingCase, institution) {
+  const derivedSteps = deriveStepEntities(institution);
+  const derivedIds = new Set(derivedSteps.map((entity) => entity.id));
+  const authoredEntities = (existingCase.entities ?? []).filter((entity) => !entity.id.startsWith("step:"));
+  const dropped = (existingCase.entities ?? [])
+    .filter((entity) => entity.id.startsWith("step:") && !derivedIds.has(entity.id))
+    .map((entity) => entity.id);
+
+  const derivedRelations = deriveStepRelations(institution);
+  const derivedRelationIds = new Set(derivedRelations.map((relation) => relation.id));
+  const authoredRelations = (existingCase.relations ?? []).filter((relation) => (
+    !(String(relation.from).startsWith("step:") && String(relation.to).startsWith("step:"))
+  ));
+  const droppedRelations = (existingCase.relations ?? [])
+    .filter((relation) => (
+      String(relation.from).startsWith("step:")
+      && String(relation.to).startsWith("step:")
+      && !derivedRelationIds.has(relation.id)
+    ))
+    .map((relation) => relation.id);
+
+  return {
+    merged: {
+      ...existingCase,
+      entities: [...authoredEntities, ...derivedSteps],
+      relations: [...derivedRelations, ...authoredRelations],
+    },
+    dropped_step_ids: dropped,
+    dropped_relation_ids: droppedRelations,
+  };
+}
+
 function parseArgs(argv) {
   const args = {};
   for (let index = 0; index < argv.length; index += 2) {
@@ -147,10 +184,28 @@ function parseArgs(argv) {
   return args;
 }
 
+async function remergeMain(caseRelativePath) {
+  const casePath = path.join(REPO_DIR, "ontology", caseRelativePath);
+  const existingCase = JSON.parse(await readFile(casePath, "utf8"));
+  const institution = await loadInstitution(existingCase.institution_slug);
+  const { merged, dropped_step_ids: droppedSteps, dropped_relation_ids: droppedRelations } =
+    remergeCase(existingCase, institution);
+  await writeFile(casePath, `${JSON.stringify(merged, null, 1)}\n`);
+  console.log(
+    `${existingCase.case_id}: 구조 층 재파생 (단계 ${merged.entities.filter((e) => e.id.startsWith("step:")).length}, 관계 ${institution.process.edges.length})`,
+  );
+  if (droppedSteps.length > 0) console.log(`  제도에서 사라진 단계: ${droppedSteps.join(", ")}`);
+  if (droppedRelations.length > 0) console.log(`  제도에서 사라진 관계: ${droppedRelations.join(", ")}`);
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
+  if (args.remerge) return remergeMain(args.remerge);
   if (!args.slug || !args["case-id"] || !args["as-of"]) {
-    throw new Error("사용: --slug <slug> --case-id <id> --as-of <YYYY-MM-DD> [--out <path>]");
+    throw new Error(
+      "사용: --slug <slug> --case-id <id> --as-of <YYYY-MM-DD> [--out <path>]\n"
+      + "      또는 --remerge samples/<파일>.case.json (구조 층만 재파생)",
+    );
   }
   const institution = await loadInstitution(args.slug);
   const skeleton = deriveCaseSkeleton(institution, { caseId: args["case-id"], asOf: args["as-of"] });

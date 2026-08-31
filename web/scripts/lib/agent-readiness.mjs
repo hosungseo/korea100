@@ -37,11 +37,17 @@ export const LIVE_LEGAL_CHECK_STATUSES = new Set(["passed", "partial", "failed"]
 export const OFFICIAL_LAW_API_METHOD = "law.go.kr-DRF-direct";
 export const DEADLINE_RULE_TYPES = new Set([
   "statutory",
+  // 법령이 "지체 없이"처럼 즉시성만 정하고 날짜 계산은 주지 않는 경우.
+  // statutory로 묶으면 계산 가능한 기한이 있는 것처럼 보이고,
+  // needs-verification으로 묶으면 근거를 모르는 것처럼 보인다. 둘 다 사실이 아니다.
+  "statutory-immediate",
   "internal-target",
   "document-defined",
   "not-specified",
   "needs-verification",
 ]);
+
+const IMMEDIATE_DEADLINE = /(지체\s*없이|즉시)/u;
 
 function unique(values) {
   return [...new Set(values.filter((value) => typeof value === "string" && value.trim()).map((value) => value.trim()))];
@@ -96,6 +102,10 @@ function deriveDeadlineRule(node, basisStatus) {
     && /(부터|일부터|후|까지|수령일|통보일|종료)/u.test(expression)
   ) {
     return { type: "statutory", expression };
+  }
+  // 근거 조문이 확인된 "지체 없이"는 법정 의무다. 다만 날짜로 환산되지 않는다.
+  if (basisStatus === "citation-verified" && IMMEDIATE_DEADLINE.test(expression)) {
+    return { type: "statutory-immediate", expression };
   }
   return { type: "needs-verification", expression };
 }

@@ -93,6 +93,23 @@ test("법정 최소 의견제출 기간과 문서 기재 기한을 구분한다"
   assert.equal(contractFor({ deadline: "부과서에 기재된 납부기한" }).deadline_rule.type, "document-defined");
 });
 
+test("'지체 없이'는 법정 의무이되 날짜로 환산되지 않는다고 구분한다", () => {
+  assert.equal(
+    contractFor({ deadline: "제3자에게 지체 없이 통지" }).deadline_rule.type,
+    "statutory-immediate",
+  );
+  // 즉시성과 일수가 함께 있으면 계산 가능한 쪽을 택한다.
+  assert.equal(
+    contractFor({ deadline: "이송 후 10일 이내에 지체 없이 통지" }).deadline_rule.type,
+    "statutory",
+  );
+  // 근거 조문이 확인되지 않으면 즉시성만으로 법정이라고 하지 않는다.
+  assert.equal(
+    contractFor({ deadline: "지체 없이 처리", legal_basis: [{ law: "임의", article: "미상" }] }).deadline_rule.type,
+    "needs-verification",
+  );
+});
+
 test("회귀 연결선은 조건부 전이로 반환한다", () => {
   const institution = fixture();
   const nodeById = new Map(institution.process.nodes.map((node) => [node.id, node]));

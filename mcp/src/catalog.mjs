@@ -6,6 +6,7 @@ export const AGENT_READY_SLUGS = Object.freeze([
   "administrative-fine-pre-notice-opinion",
   "administrative-fine-objection-court",
   "national-rd-fund-use-settlement",
+  "information-disclosure",
 ]);
 
 export const DEFAULT_INSTITUTION_DIR = fileURLToPath(

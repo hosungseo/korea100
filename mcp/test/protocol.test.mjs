@@ -50,7 +50,7 @@ test("stdio MCP가 도구·리소스를 공개하고 다음 행동을 구조화�
   assert.ok(tools.tools.every((tool) => tool.annotations?.readOnlyHint === true));
 
   const resources = await client.listResources();
-  assert.equal(resources.resources.length, 5);
+  assert.equal(resources.resources.length, 6);
   assert.ok(resources.resources.some((resource) => resource.uri === "korea100://procedures"));
   assert.ok(resources.resources.some((resource) => resource.uri === "korea100://status"));
 
@@ -124,7 +124,7 @@ test("stdio MCP가 도구·리소스를 공개하고 다음 행동을 구조화�
 
   const statusResource = await client.readResource({ uri: "korea100://status" });
   const status = JSON.parse(statusResource.contents[0].text);
-  assert.equal(status.procedure_count, 3);
+  assert.equal(status.procedure_count, 4);
   assert.equal(status.legal_check_policy.max_age_days, 36500);
   assert.ok(status.procedures.every((item) => item.legal_check.freshness.status === "current"));
 
@@ -140,16 +140,16 @@ test("stdio MCP가 도구·리소스를 공개하고 다음 행동을 구조화�
   assert.equal(caseQuery.structuredContent.packet.execution_allowed, false);
   assert.equal(caseQuery.structuredContent.packet.human_confirmation_required, true);
   assert.equal(caseQuery.structuredContent.linkage.status, "aligned");
-  assert.equal(caseQuery.structuredContent.linkage.next_action_allowed, false);
+  assert.equal(caseQuery.structuredContent.linkage.next_action_allowed, true);
   assert.ok(
-    caseQuery.structuredContent.packet.risks.some((risk) => risk.includes("R1")),
-    "제도 준비도가 R2가 아니면 패킷 위험에 남아야 한다",
+    !caseQuery.structuredContent.packet.risks.some((risk) => risk.includes("reference-only")),
+    "R2 제도라면 준비도 미달 경고가 붙지 않아야 한다",
   );
 
   const linkage = await client.callTool({ name: "check_case_linkage", arguments: {} });
   assert.equal(linkage.isError, undefined);
   assert.equal(linkage.structuredContent.institution_slug, "information-disclosure");
   assert.equal(linkage.structuredContent.status, "aligned");
-  assert.equal(linkage.structuredContent.readiness.level, "R1");
+  assert.equal(linkage.structuredContent.readiness.level, "R2");
   assert.equal(linkage.structuredContent.execution_allowed, false);
 });
