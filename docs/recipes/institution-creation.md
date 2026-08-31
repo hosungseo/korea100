@@ -19,13 +19,13 @@ Read the actual article text for every step. **지어내기 절대 금지** — 
 - process: lanes 4~7개(**당사자(공무원·응시자 등) 레인 필수 — 신청·진술·불복 등 당사자 행위 노드 최소 2개**), stages "G0 ..." 형식 6~8개, nodes 14~20개(id P01.., name, lane, stage, type: task|gateway|system, status: done|current|waiting|risk|loop 중 — **current 정확히 1개**, progress, actor, action, output_documents, deadline(조문 명시분만, 없으면 null), confidence 0.7~0.95, legal_basis[{law, article:"제N조(제목)", text:"원문 확인한 요지"}]), edges(sequence/message/loop — id E../M../L..)
 - **불복·이의·소청 노드는 반드시 심사·결정 노드를 거쳐 원처분으로 회귀** (validator 규칙: appeal node가 심사 없이 원처분으로 직접 loop 불가)
 - loop 엣지 최소 1개(보완·재심사 등 실제 회귀 경로)
-- verification 블록: exemplar 형태로 — status:"article-verified", verifiedAt:"2026-07-12", method:"국가법령정보센터 DRF API 현행 원문 대조", scope 문장(검증 건수 정직하게), notes(확인한 법령의 [시행/공포] 버전 명기), sources([{law, kind, sourceType:"statute", officialName, lawId, mst, promulgatedOn, effectiveOn, officialUrl:"https://law.go.kr/법령/<법령명 공백제거>"}]), articleVerification{checkedAt, method, citationEntries, explicitCitationEntries, articleReferences, verifiedReferences, missingReferences:0, uncheckableReferences:<unverified 수>} — 숫자는 실제 세어서.
+- verification 블록: exemplar 형태로 — status:"article-verified", verifiedAt:"2026-07-12", method:"국가법령정보센터 DRF API 현행 원문 대조", scope 문장(검증 건수 정직하게), **notes: 문자열 배열**(문자열 하나여도 `["..."]`. 확인한 법령의 [시행/공포] 버전 명기 — 2026-09-01 배치에서 6건 전부 문자열로 써서 데이터 검증이 깨졌다), sources([{law, kind, sourceType:"statute", officialName, lawId, mst, promulgatedOn, effectiveOn, officialUrl:"https://law.go.kr/법령/<법령명 공백제거>"}]), articleVerification{checkedAt, method, citationEntries, explicitCitationEntries, articleReferences, verifiedReferences, missingReferences:0, uncheckableReferences:<unverified 수>} — 숫자는 실제 세어서.
 - related: 관련 제도 이름 3~5개 (기존 제도명 참고: 공무원 채용, 교원 임용, 행정심판 등)
 - fieldVerification: 법령으로 확인 불가한 운영 사항 3~6개
 
 ## Do NOT
 - docs/institutions-100-manifest.json 수정 금지 (컨트롤러가 일괄 처리)
-- validate-data.mjs 전체 실행은 manifest 불일치로 실패하니 하지 말 것. 대신 self-check: python3 -c "import json; d=json.load(open('<file>')); assert d['status']=='full'; p=d['process']; assert sum(1 for n in p['nodes'] if n['status']=='current')==1; ids={n['id'] for n in p['nodes']}; assert all(e['source'] in ids and e['target'] in ids for e in p['edges']); lanes=set(p['lanes']); assert all(n['lane'] in lanes for n in p['nodes']); stages=set(p['stages']); assert all(n['stage'] in stages for n in p['nodes']); print('ok', len(p['nodes']), len(p['edges']))"
+- validate-data.mjs 전체 실행은 manifest 불일치로 실패하니 하지 말 것. 대신 self-check: python3 -c "import json; d=json.load(open('<file>')); assert d['status']=='full'; assert d.get('category'), 'category 필수'; v=d['verification']; assert isinstance(v.get('notes'), list), 'notes는 배열'; assert isinstance(v.get('sources'), list) and v['sources'], 'sources는 비어있지 않은 배열'; p=d['process']; assert sum(1 for n in p['nodes'] if n['status']=='current')==1; ids={n['id'] for n in p['nodes']}; assert all(e['source'] in ids and e['target'] in ids for e in p['edges']); lanes=set(p['lanes']); assert all(n['lane'] in lanes for n in p['nodes']); stages=set(p['stages']); assert all(n['stage'] in stages for n in p['nodes']); print('ok', len(p['nodes']), len(p['edges']))"
 - 다른 제도 파일 수정 금지
 
 ## Commit
@@ -34,6 +34,22 @@ index.lock 충돌 시 2초 대기 후 재시도(최대 3회). Push 금지.
 Commit 메시지 끝에:
 Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>
 Claude-Session: https://claude.ai/code/session_013WXa2uVeD6vUjpK4hHNLZU
+
+## 컨트롤러 마감 (배치가 끝나면 반드시 — 작업 에이전트가 아니라 컨트롤러가 실행)
+작업 에이전트는 매니페스트를 건드리지 않는다(동시 편집 충돌). 그 등재를 컨트롤러가 몰아서 한다.
+2026-09-01 배치에서 이 단계를 건너뛰어 제도 6건이 미등재로 커밋됐고 데이터 검증이 8건 깨졌다.
+
+```bash
+cd web
+node scripts/register-institutions.mjs --check   # 미등재·불일치 확인 (종료코드 1이면 밀린 것)
+node scripts/register-institutions.mjs           # 매니페스트 등재 + notes 배열화
+node scripts/generate-field-verification-queue.mjs
+node scripts/validate-data.mjs                   # 전체 통과까지 확인
+```
+
+고아 항목·priority 중복·매니페스트↔파일 필드 불일치는 자동 처리하지 않는다. 사람이 판단한다.
+카테고리가 어긋나면 화면은 파일 값을 보여주는데 필터 칩은 매니페스트로 만들어져서
+그 제도가 어느 칩으로도 안 잡힌다.
 
 ## Report (FINAL message = report only)
 Per institution: slug | 노드/엣지 수 | 검증 조문 수(unverified 수) | 확인 법령·MST | 법의 침묵/특이점 1-2건 | commit SHA
