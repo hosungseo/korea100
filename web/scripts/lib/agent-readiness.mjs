@@ -230,7 +230,11 @@ export function agentCitationFingerprint(institution) {
 }
 
 function hasPassedLiveLegalCheck(check, institution) {
-  const nodeIds = (institution.process?.nodes ?? []).map((node) => node.id);
+  // 대조 대상은 실행 대상 노드다. 참고용으로 격리된 노드는 다음 행동 계산에
+  // 쓰이지 않으므로 그 노드가 검증되지 않았다고 해서 대조가 실패한 것은 아니다.
+  const nodeIds = (institution.process?.nodes ?? [])
+    .filter((node) => referenceOnlyReasons(node).length === 0)
+    .map((node) => node.id);
   const verifiedNodeIds = new Set(check?.verified_node_ids ?? []);
   return check?.status === "passed"
     && check.method === OFFICIAL_LAW_API_METHOD
@@ -259,6 +263,51 @@ function liveLegalCheckBlocker(check, institution) {
   return `법제처 API 현행 조문 직접 대조 ${check.status ?? "failed"}(누락 ${check.missing_references?.length ?? 0}건, 확인불가 ${check.uncheckable_references?.length ?? 0}건)`;
 }
 
+/**
+ * 노드 하나를 '참고용'으로 떼어 낼 사유.
+ *
+ * 근거의 품질 문제만 여기 들어온다. 모델 자체가 미완인 것(계약 누락, 증빙 문서 없음,
+ * 템플릿성 문장, 명시 조문 없음)은 제도 전체를 막는 사유로 남긴다. 근거가 약한 노드는
+ * 격리하면 되지만 모델이 비어 있으면 격리할 대상 자체가 불분명하기 때문이다.
+ */
+export function referenceOnlyReasons(node) {
+  const reasons = [];
+  if ((node.confidence ?? 1) < 0.8) reasons.push("신뢰도 0.8 미만");
+  if (node.agent?.basis_status === "unverified") reasons.push("근거가 미검증으로 표시됨");
+  if (node.agent?.obligation === "unclassified") reasons.push("의무 성격 미분류");
+  if (node.agent?.deadline_rule?.type === "needs-verification") reasons.push("기한 성격 재확인 필요");
+  return reasons;
+}
+
+/**
+ * 참고용 노드를 빼고 나면 절차를 끝까지 걸을 수 있는가.
+ *
+ * 잎에 달린 노드 하나를 떼는 것과 중간 노드를 떼서 앞뒤가 끊기는 것은 다르다.
+ * 후자는 남은 노드가 다 검증됐어도 다음 행동을 계산할 수 없다.
+ * 방향을 무시한 연결성으로 본다. 회귀·메시지 엣지도 경로를 잇기 때문이다.
+ */
+export function severedActionablePath(actionableNodes, edges) {
+  if (actionableNodes.length <= 1) return false;
+  const ids = new Set(actionableNodes.map((node) => node.id));
+  const neighbors = new Map([...ids].map((id) => [id, []]));
+  for (const edge of edges) {
+    if (!ids.has(edge.source) || !ids.has(edge.target)) continue;
+    neighbors.get(edge.source).push(edge.target);
+    neighbors.get(edge.target).push(edge.source);
+  }
+
+  const seen = new Set([actionableNodes[0].id]);
+  const queue = [actionableNodes[0].id];
+  while (queue.length > 0) {
+    for (const next of neighbors.get(queue.pop()) ?? []) {
+      if (seen.has(next)) continue;
+      seen.add(next);
+      queue.push(next);
+    }
+  }
+  return seen.size !== ids.size;
+}
+
 export function assessAgentReadiness(
   institution,
   { transitionReviewed = false, assessedAt = "2026-07-16", liveLegalCheck = null } = {},
@@ -272,13 +321,9 @@ export function assessAgentReadiness(
   const deadlineReviewNodes = nodes.filter((node) => node.agent?.deadline_rule?.type === "needs-verification");
   const contractedNodes = nodes.filter((node) => node.agent);
   const contractedEdges = edges.filter((edge) => edge.agent_transition);
-  const referenceOnlyNodes = nodes.filter((node) => (
-    node.agent?.basis_status !== "citation-verified"
-    || (node.confidence ?? 1) < 0.8
-    || isTemplateNode(node)
-    || node.agent?.obligation === "unclassified"
-    || node.agent?.deadline_rule?.type === "needs-verification"
-  ));
+  const referenceOnlyNodes = nodes.filter((node) => referenceOnlyReasons(node).length > 0);
+  const actionableNodes = nodes.filter((node) => !referenceOnlyNodes.includes(node));
+  const severed = severedActionablePath(actionableNodes, edges);
   const metrics = {
     nodes: nodes.length,
     edges: edges.length,
@@ -289,6 +334,8 @@ export function assessAgentReadiness(
     low_confidence_nodes: lowConfidenceNodes.length,
     template_like_nodes: templateNodes.length,
     deadline_review_nodes: deadlineReviewNodes.length,
+    reference_only_nodes: referenceOnlyNodes.length,
+    actionable_coverage: ratio(actionableNodes.length, nodes.length),
     field_verification_items: institution.fieldVerification?.length ?? 0,
   };
   const blockers = [];
@@ -296,9 +343,12 @@ export function assessAgentReadiness(
   if (metrics.transition_contract_coverage < 1) blockers.push("연결선 전이 조건이 완전하지 않음");
   if (metrics.explicit_basis_coverage < 1) blockers.push(`명시 조문이 없는 노드 ${nodes.length - explicitBasisNodes.length}개`);
   if (metrics.output_document_coverage < 1) blockers.push(`완료 증빙 문서가 없는 노드 ${nodes.length - outputNodes.length}개`);
-  if (lowConfidenceNodes.length > 0) blockers.push(`신뢰도 0.8 미만 노드 ${lowConfidenceNodes.length}개`);
   if (templateNodes.length > 0) blockers.push(`템플릿성 행위 문장 노드 ${templateNodes.length}개`);
-  if (deadlineReviewNodes.length > 0) blockers.push(`기한 성격 재확인 노드 ${deadlineReviewNodes.length}개`);
+  // 근거가 약한 노드는 제도 전체를 막지 않는다. 참고용으로 떼어 격리하고
+  // 서비스가 그 노드를 지나는 다음 행동 계산을 거부한다.
+  // 다만 떼어 낸 뒤 절차가 끊기면 계산 자체가 불가능하므로 그때는 막는다.
+  if (actionableNodes.length === 0) blockers.push("실행 대상 노드가 없음");
+  else if (severed) blockers.push(`참고용 노드 ${referenceOnlyNodes.length}개를 제외하면 실행 경로가 끊어짐`);
   if (!transitionReviewed) blockers.push("전이 조건·인계 수동 대조 미완료");
   const liveCheckBlocker = liveLegalCheckBlocker(liveLegalCheck, institution);
   if (liveCheckBlocker) blockers.push(liveCheckBlocker);
@@ -321,10 +371,12 @@ export function assessAgentReadiness(
     ].join("·"),
     live_legal_check: "required-before-use",
     ...(liveLegalCheck ? { last_live_check: liveLegalCheck } : {}),
-    actionable_node_ids: level === "R2"
-      ? nodes.filter((node) => !referenceOnlyNodes.includes(node)).map((node) => node.id)
-      : [],
+    actionable_node_ids: level === "R2" ? actionableNodes.map((node) => node.id) : [],
     reference_only_node_ids: level === "R2" ? referenceOnlyNodes.map((node) => node.id) : nodes.map((node) => node.id),
+    // 왜 참고용인지를 남긴다. 이유 없는 격리는 다음 사람이 되돌릴 수 없다.
+    reference_only_reasons: level === "R2"
+      ? Object.fromEntries(referenceOnlyNodes.map((node) => [node.id, referenceOnlyReasons(node)]))
+      : {},
     blockers,
     metrics,
   };

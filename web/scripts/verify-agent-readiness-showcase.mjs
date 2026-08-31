@@ -7,6 +7,7 @@ import {
   agentCitationFingerprint,
   assessAgentReadiness,
   OFFICIAL_LAW_API_METHOD,
+  referenceOnlyReasons,
 } from "./lib/agent-readiness.mjs";
 import { fetchCurrentLawArticleSnapshot } from "./lib/law-service.mjs";
 import {
@@ -211,14 +212,31 @@ async function verifyInstitution(institution) {
       continue;
     }
     verifiedOccurrenceKeys.add(occurrenceKey);
+    occurrence.verified = true;
   }
 
   const occurrencesByNode = new Map(institution.process.nodes.map((node) => [node.id, []]));
   for (const occurrence of occurrences) occurrencesByNode.get(occurrence.nodeId)?.push(occurrence);
+  // 참고용으로 격리된 노드는 다음 행동 계산에 쓰이지 않는다. 그 노드의 인용을
+  // 대조 실패로 세면 "근거가 약하다"는 정직한 표시가 등급을 깎는 벌점이 된다.
+  // 별도로 보고하되 통과 여부에는 넣지 않는다.
+  const referenceOnlyNodeIds = new Set(
+    institution.process.nodes
+      .filter((node) => referenceOnlyReasons(node).length > 0)
+      .map((node) => node.id),
+  );
+
   const verifiedNodeIds = [];
   const unverifiedNodeIds = [];
+  const referenceOnlyReferences = [];
   for (const node of institution.process.nodes) {
     const nodeOccurrences = occurrencesByNode.get(node.id) ?? [];
+    if (referenceOnlyNodeIds.has(node.id)) {
+      for (const occurrence of nodeOccurrences) {
+        referenceOnlyReferences.push(issue(occurrence, referenceOnlyReasons(node).join(", ")));
+      }
+      continue;
+    }
     const verified = nodeOccurrences.length > 0 && nodeOccurrences.every((occurrence) => (
       verifiedOccurrenceKeys.has(`${occurrence.nodeId}\u0000${occurrence.law}\u0000${occurrence.article}`)
     ));
@@ -237,13 +255,20 @@ async function verifyInstitution(institution) {
     }
   }
 
+  const inScope = (item) => !referenceOnlyNodeIds.has(item.node_id);
+  const scopedMissing = missingReferences.filter(inScope);
+  const scopedUncheckable = uncheckableReferences.filter(inScope);
+  const scopedOccurrences = occurrences.filter((occurrence) => !referenceOnlyNodeIds.has(occurrence.nodeId));
+
   const sourceResults = fetched.map((entry) => entry.result);
   const sourceFailures = sourceResults.filter((entry) => entry.status === "failed").length;
-  const articleReferences = occurrences.length;
-  const verifiedReferences = verifiedOccurrenceKeys.size;
+  const articleReferences = scopedOccurrences.length;
+  const verifiedReferences = scopedOccurrences.filter((occurrence) => occurrence.verified === true).length;
   const passed = articleReferences > 0
     && verifiedReferences === articleReferences
     && unverifiedNodeIds.length === 0
+    && scopedMissing.length === 0
+    && scopedUncheckable.length === 0
     && sourceFailures === 0;
   return {
     checked_at: CHECKED_AT,
@@ -254,8 +279,9 @@ async function verifyInstitution(institution) {
     source_failures: sourceFailures,
     article_references: articleReferences,
     verified_references: verifiedReferences,
-    missing_references: missingReferences,
-    uncheckable_references: uncheckableReferences,
+    missing_references: scopedMissing,
+    uncheckable_references: scopedUncheckable,
+    reference_only_references: referenceOnlyReferences,
     verified_node_ids: verifiedNodeIds,
     unverified_node_ids: unverifiedNodeIds,
     source_results: sourceResults,

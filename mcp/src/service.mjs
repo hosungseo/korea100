@@ -580,6 +580,27 @@ export class AdministrativeProcedureService {
       selectedEdges = [];
     }
 
+    // 참고용 노드는 근거가 약해 격리된 단계다. 그 단계에서 출발하거나
+    // 그 단계로 들어가는 다음 행동은 계산하지 않는다. R2 등급이 참고용 노드를
+    // 허용하는 대신 이 거부가 성립해야 한다.
+    const referenceOnly = new Set(institution.process.agent_readiness?.reference_only_node_ids ?? []);
+    const referenceOnlyReasons = institution.process.agent_readiness?.reference_only_reasons ?? {};
+    if (referenceOnly.has(current.id)) {
+      status = "reference-only-step";
+      selectedEdges = [];
+    }
+    const referenceOnlyActions = outgoing
+      .filter((edge) => referenceOnly.has(edge.target))
+      .map((edge) => ({
+        transition_id: edge.id,
+        next_step_id: edge.target,
+        next_step_name: nodesById.get(edge.target)?.name ?? null,
+        reasons: referenceOnlyReasons[edge.target] ?? [],
+      }));
+    if (referenceOnlyActions.length > 0) {
+      selectedEdges = selectedEdges.filter((edge) => !referenceOnly.has(edge.target));
+    }
+
     const formatAction = (edge) => {
       const target = nodesById.get(edge.target);
       return {
@@ -616,9 +637,16 @@ export class AdministrativeProcedureService {
         matched_transition_id: selectedEdges[0]?.id ?? null,
         guidance: status === "verification-required"
           ? "법제처 원문 대조 유효기간이 지나 다음 행동 선택을 중단했습니다. 원문을 다시 대조한 뒤 사용하세요."
-          : selectedEdges.length === 0
-            ? "분기 조건을 담당자가 확인한 뒤 조건 문구를 다시 지정해야 합니다. 임의로 경로를 선택하지 마세요."
-            : "선택된 경로도 실제 결재·접수·발송 전에 담당자 확인이 필요합니다.",
+          : status === "reference-only-step"
+            ? "이 단계는 근거가 확인되지 않아 참고용으로 격리된 단계입니다. 다음 행동을 계산하지 않습니다."
+            : selectedEdges.length === 0
+              ? "분기 조건을 담당자가 확인한 뒤 조건 문구를 다시 지정해야 합니다. 임의로 경로를 선택하지 마세요."
+              : "선택된 경로도 실제 결재·접수·발송 전에 담당자 확인이 필요합니다.",
+      },
+      reference_only: {
+        current_step: referenceOnly.has(current.id),
+        current_step_reasons: referenceOnlyReasons[current.id] ?? [],
+        excluded_actions: referenceOnlyActions,
       },
       decision_trace: {
         decision_id: decisionId,
@@ -734,12 +762,25 @@ export class AdministrativeProcedureService {
     let status;
     if (next.terminal) status = "terminal";
     else if (next.selection.status === "verification-required") status = "blocked-verification-required";
+    else if (next.selection.status === "reference-only-step") status = "blocked-reference-only";
     else if (next.selection.decision_required) status = "blocked-decision-required";
     else status = "ready-for-human-review";
 
     const blockingQuestions = [];
     if (status === "blocked-verification-required") {
       blockingQuestions.push("법제처 현행 원문을 다시 대조해 R2 신선도를 갱신했는가?");
+    }
+    if (status === "blocked-reference-only") {
+      blockingQuestions.push(
+        `이 단계는 참고용으로 격리되어 있다(${(next.reference_only?.current_step_reasons ?? []).join(", ") || "사유 미기재"}). `
+        + "근거를 확인해 격리를 풀기 전에는 다음 행동을 계산하지 않는다.",
+      );
+    }
+    for (const excluded of next.reference_only?.excluded_actions ?? []) {
+      blockingQuestions.push(
+        `${excluded.next_step_id} ${excluded.next_step_name}은 참고용으로 격리되어 후보에서 제외했다`
+        + `(${excluded.reasons.join(", ") || "사유 미기재"}).`,
+      );
     }
     if (status === "blocked-decision-required") {
       blockingQuestions.push(

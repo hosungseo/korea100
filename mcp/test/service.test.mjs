@@ -21,8 +21,8 @@ const service = new AdministrativeProcedureService(institutions, {
   now: () => new Date(FIXED_NOW),
 });
 
-test("R2 검증을 통과한 대표 제도 11개만 로드한다", () => {
-  assert.equal(institutions.length, 11);
+test("R2 검증을 통과한 대표 제도 12개만 로드한다", () => {
+  assert.equal(institutions.length, 12);
   assert.deepEqual(institutions.map((institution) => institution.slug), AGENT_READY_SLUGS);
   assert.ok(institutions.every((institution) => institution.process.agent_readiness.level === "R2"));
 });
@@ -253,4 +253,56 @@ test("MCP 공개 대상이 아닌 slug는 명시적인 오류를 반환한다", 
     () => service.getProcedureMap("workplace-harassment-response"),
     (error) => error instanceof ProcedureQueryError && error.code === "procedure_not_found",
   );
+});
+
+// ── 참고용 노드 격리 ──────────────────────────────────────────────
+// R2가 참고용 노드를 허용하는 대신 이 거부들이 성립해야 한다.
+// 거부가 없으면 등급 완화가 그대로 안전성 약화가 된다.
+
+const pfs = institutions.find((item) => item.slug === "preliminary-feasibility-study");
+
+test("참고용으로 격리된 단계에서는 다음 행동을 계산하지 않는다", () => {
+  assert.deepEqual(pfs.process.agent_readiness.reference_only_node_ids, ["P16"]);
+
+  const result = service.getNextActions("preliminary-feasibility-study", "P16");
+  assert.equal(result.selection.status, "reference-only-step");
+  assert.deepEqual(result.selected_actions, []);
+  assert.equal(result.selection.decision_required, true);
+  assert.equal(result.reference_only.current_step, true);
+  assert.ok(result.reference_only.current_step_reasons.length > 0);
+});
+
+test("격리된 단계의 실행 패킷은 인계 없이 차단된다", () => {
+  const packet = service.createActionPacket("preliminary-feasibility-study", "P16");
+  assert.equal(packet.status, "blocked-reference-only");
+  assert.deepEqual(packet.handoff_packages, []);
+  assert.equal(packet.execution_allowed, false);
+  assert.ok(packet.blocking_questions.some((question) => question.includes("격리")));
+});
+
+test("격리되지 않은 단계는 평소대로 계산한다", () => {
+  const result = service.getNextActions("preliminary-feasibility-study", "P07");
+  assert.equal(result.selection.status, "single-path");
+  assert.equal(result.selected_actions[0].next_step.id, "P08");
+  assert.equal(result.reference_only.current_step, false);
+});
+
+test("격리된 단계로 가는 전이는 후보에서 빼고 사유를 남긴다", () => {
+  // 예타에는 격리 노드로 들어가는 엣지가 없어 합성 제도로 확인한다.
+  const synthetic = JSON.parse(JSON.stringify(pfs));
+  synthetic.slug = "synthetic-reference-only";
+  // P02는 P01의 유일한 후속 단계다. 그것을 격리하면 P01에서 고를 것이 없어야 한다.
+  synthetic.process.agent_readiness.reference_only_node_ids = ["P02"];
+  synthetic.process.agent_readiness.reference_only_reasons = { P02: ["합성 사유"] };
+
+  const scoped = new AdministrativeProcedureService([synthetic], { now: () => new Date(FIXED_NOW) });
+  const result = scoped.getNextActions("synthetic-reference-only", "P01");
+
+  assert.deepEqual(result.selected_actions, []);
+  assert.equal(result.reference_only.excluded_actions.length, 1);
+  assert.equal(result.reference_only.excluded_actions[0].next_step_id, "P02");
+  assert.deepEqual(result.reference_only.excluded_actions[0].reasons, ["합성 사유"]);
+
+  const packet = scoped.createActionPacket("synthetic-reference-only", "P01");
+  assert.ok(packet.blocking_questions.some((question) => question.includes("P02")));
 });

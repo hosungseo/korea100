@@ -49,15 +49,15 @@ test("참조 제도가 전부 R2인 마일스톤만 다음 행동 계산 대상�
   const caseData = await projectCase();
   const rollup = projectStatus(caseData).readiness;
 
-  // N03 지정 게이트와 N19·N20 전력계통 두 경로.
-  assert.deepEqual(rollup.next_action_computable_milestones, ["N03", "N19", "N20"]);
+  // N02 재정심사, N03 지정 게이트, N19·N20 전력계통 두 경로.
+  assert.deepEqual(rollup.next_action_computable_milestones, ["N02", "N03", "N19", "N20"]);
   assert.equal(institutionReadinessFor(caseData, "N03").next_action_computable, true);
 
-  // N02는 참조 제도 4개 중 3개가 R2다. 남은 하나가 예비타당성조사이고,
-  // 그것이 R2에 못 가는 이유는 지자체 건의 노드가 법정 절차가 아니기 때문이다.
+  // N02도 열렸다. 예비타당성조사가 지자체 건의 노드 하나만 참고용으로 격리한 채
+  // R2가 됐기 때문이다.
   const n02 = institutionReadinessFor(caseData, "N02");
-  assert.equal(n02.next_action_computable, false);
-  assert.deepEqual(n02.not_ready_slugs, ["preliminary-feasibility-study"]);
+  assert.equal(n02.next_action_computable, true);
+  assert.deepEqual(n02.not_ready_slugs, []);
 });
 
 test("제도 준비도와 사업 파라미터는 별개 축이다", async () => {
@@ -73,9 +73,12 @@ test("제도 준비도와 사업 파라미터는 별개 축이다", async () => 
     assert.equal(statuses[nodeId].openness, "path_undetermined");
   }
 
-  // 두 축이 같이 열린 것은 N03 하나뿐이다.
+  // 두 축이 함께 열린 것은 N02(진행 중)와 N03(착수 가능) 둘이다.
+  assert.equal(statuses.N02.openness, "in_progress");
   assert.equal(statuses.N03.openness, "ready");
-  assert.equal(institutionReadinessFor(caseData, "N03").next_action_computable, true);
+  for (const nodeId of ["N02", "N03"]) {
+    assert.equal(institutionReadinessFor(caseData, nodeId).next_action_computable, true);
+  }
 });
 
 test("케이스에 박아 둔 준비도가 제도 파일과 갈라지면 어긋남으로 잡는다", async () => {

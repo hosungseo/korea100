@@ -1441,27 +1441,28 @@
   ],
   "agent_readiness": {
    "contract_version": "1.1.0",
-   "level": "R1",
-   "mode": "reference-only",
+   "level": "R2",
+   "mode": "next-action",
    "assessed_at": "2026-09-01",
-   "assessment_method": "스키마 검증·그래프 파생·전이 수동 대조·법제처 DRF API 직접 대조 필요",
+   "assessment_method": "스키마 검증·그래프 파생·전이 수동 대조·법제처 DRF API 직접 대조",
    "live_legal_check": "required-before-use",
    "last_live_check": {
     "checked_at": "2026-09-01",
     "method": "law.go.kr-DRF-direct",
-    "status": "partial",
+    "status": "passed",
     "citation_fingerprint": "sha256:29c911816963d4c5ea1bb467eba48fc0f5628d318fb07f171bd282bcd03b832a",
     "sources_checked": 3,
     "source_failures": 0,
-    "article_references": 30,
+    "article_references": 29,
     "verified_references": 29,
     "missing_references": [],
-    "uncheckable_references": [
+    "uncheckable_references": [],
+    "reference_only_references": [
      {
       "node_id": "P16",
       "law": "국가재정법",
       "article": "제38조",
-      "reason": "데이터에 미검증 근거로 표시됨"
+      "reason": "신뢰도 0.8 미만, 근거가 미검증으로 표시됨, 의무 성격 미분류"
      }
     ],
     "verified_node_ids": [
@@ -1482,9 +1483,7 @@
      "P15",
      "S01"
     ],
-    "unverified_node_ids": [
-     "P16"
-    ],
+    "unverified_node_ids": [],
     "source_results": [
      {
       "law": "국가재정법",
@@ -1562,9 +1561,7 @@
      }
     ]
    },
-   "actionable_node_ids": [],
-   "reference_only_node_ids": [
-    "P16",
+   "actionable_node_ids": [
     "P01",
     "P02",
     "P03",
@@ -1582,10 +1579,17 @@
     "P15",
     "S01"
    ],
-   "blockers": [
-    "신뢰도 0.8 미만 노드 1개",
-    "법제처 API 현행 조문 직접 대조 partial(누락 0건, 확인불가 1건)"
+   "reference_only_node_ids": [
+    "P16"
    ],
+   "reference_only_reasons": {
+    "P16": [
+     "신뢰도 0.8 미만",
+     "근거가 미검증으로 표시됨",
+     "의무 성격 미분류"
+    ]
+   },
+   "blockers": [],
    "metrics": {
     "nodes": 17,
     "edges": 19,
@@ -1596,6 +1600,8 @@
     "low_confidence_nodes": 1,
     "template_like_nodes": 0,
     "deadline_review_nodes": 0,
+    "reference_only_nodes": 1,
+    "actionable_coverage": 0.9412,
     "field_verification_items": 9
    }
   }

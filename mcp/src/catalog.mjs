@@ -18,6 +18,8 @@ export const AGENT_READY_SLUGS = Object.freeze([
   "local-finance-investment-review-feasibility",
   // N20 전력계통 경로 (2026-09-01 승격)
   "distributed-energy-special",
+  // P16(지자체 건의)은 법정 절차가 아니라 참고용으로 격리했다. 나머지 16개 단계는 실행 대상이다.
+  "preliminary-feasibility-study",
 ]);
 
 export const DEFAULT_INSTITUTION_DIR = fileURLToPath(

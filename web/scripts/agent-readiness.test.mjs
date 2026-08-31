@@ -4,6 +4,8 @@ import {
   agentCitationFingerprint,
   assessAgentReadiness,
   deriveEdgeAgentTransition,
+  referenceOnlyReasons,
+  severedActionablePath,
   deriveNodeAgentContract,
   enrichInstitutionForAgent,
   validateAgentInstitution,
@@ -157,4 +159,37 @@ test("템플릿성 행위 문장은 R2를 차단한다", () => {
   });
   assert.equal(institution.process.agent_readiness.level, "R1");
   assert.equal(institution.process.agent_readiness.metrics.template_like_nodes, 1);
+});
+
+test("근거 품질 문제만 참고용 격리 사유가 된다", () => {
+  const node = (extra) => ({ id: "P01", name: "x", action: "y", confidence: 0.9, agent: {}, ...extra });
+
+  assert.deepEqual(referenceOnlyReasons(node()), []);
+  assert.deepEqual(referenceOnlyReasons(node({ confidence: 0.7 })), ["신뢰도 0.8 미만"]);
+  assert.deepEqual(
+    referenceOnlyReasons(node({ agent: { basis_status: "unverified" } })),
+    ["근거가 미검증으로 표시됨"],
+  );
+  assert.deepEqual(
+    referenceOnlyReasons(node({ agent: { deadline_rule: { type: "needs-verification" } } })),
+    ["기한 성격 재확인 필요"],
+  );
+  // 사유는 겹칠 수 있고 전부 남긴다.
+  assert.equal(referenceOnlyReasons(node({ confidence: 0.7, agent: { obligation: "unclassified" } })).length, 2);
+});
+
+test("참고용 노드를 빼서 절차가 끊기면 R2를 주지 않는다", () => {
+  const chain = [{ id: "P01" }, { id: "P02" }, { id: "P03" }];
+  const edges = [
+    { source: "P01", target: "P02" },
+    { source: "P02", target: "P03" },
+  ];
+
+  // 가운데 P02를 빼면 P01과 P03이 끊긴다.
+  assert.equal(severedActionablePath([chain[0], chain[2]], edges), true);
+  // 끝의 P03을 빼는 것은 끊는 것이 아니다.
+  assert.equal(severedActionablePath([chain[0], chain[1]], edges), false);
+  assert.equal(severedActionablePath(chain, edges), false);
+  // 한 개 이하는 끊을 것이 없다.
+  assert.equal(severedActionablePath([chain[0]], edges), false);
 });
