@@ -16,6 +16,8 @@ export const AGENT_READY_SLUGS = Object.freeze([
   // 법정 절차가 아니어서 R1로 남았다.
   "pfs-exemption-fast-track",
   "local-finance-investment-review-feasibility",
+  // N20 전력계통 경로 (2026-09-01 승격)
+  "distributed-energy-special",
 ]);
 
 export const DEFAULT_INSTITUTION_DIR = fileURLToPath(

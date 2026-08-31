@@ -49,8 +49,8 @@ test("참조 제도가 전부 R2인 마일스톤만 다음 행동 계산 대상�
   const caseData = await projectCase();
   const rollup = projectStatus(caseData).readiness;
 
-  // N03 반도체클러스터 지정. 이 마일스톤이 열려야 N20 신속처리 경로가 열린다.
-  assert.deepEqual(rollup.next_action_computable_milestones, ["N03"]);
+  // N03 지정 게이트와 N19·N20 전력계통 두 경로.
+  assert.deepEqual(rollup.next_action_computable_milestones, ["N03", "N19", "N20"]);
   assert.equal(institutionReadinessFor(caseData, "N03").next_action_computable, true);
 
   // N02는 참조 제도 4개 중 3개가 R2다. 남은 하나가 예비타당성조사이고,
@@ -60,22 +60,22 @@ test("참조 제도가 전부 R2인 마일스톤만 다음 행동 계산 대상�
   assert.deepEqual(n02.not_ready_slugs, ["preliminary-feasibility-study"]);
 });
 
-test("사업 전체가 아니라 어느 제도 하나가 막는지까지 짚어 준다", async () => {
+test("제도 준비도와 사업 파라미터는 별개 축이다", async () => {
   const caseData = await projectCase();
-
-  // 막힌 마일스톤마다 '남은 제도'가 몇 개인지 세면 다음에 무엇을 올려야 할지가 나온다.
-  const nearlyReady = ["N02", "N20"].map((nodeId) => ({
-    nodeId,
-    remaining: institutionReadinessFor(caseData, nodeId).not_ready_slugs,
-  }));
-
-  for (const entry of nearlyReady) {
-    assert.equal(entry.remaining.length, 1, `${entry.nodeId}은 제도 하나만 남아 있어야 한다`);
-  }
-  assert.deepEqual(
-    nearlyReady.find((entry) => entry.nodeId === "N20").remaining,
-    ["distributed-energy-special"],
+  const statuses = Object.fromEntries(
+    allMilestoneStatuses(caseData).map((status) => [status.node_id, status]),
   );
+
+  // 전력계통 두 경로는 참조 제도가 전부 R2라 '제도는 답할 준비가 됐다'.
+  for (const nodeId of ["N19", "N20"]) {
+    assert.equal(institutionReadinessFor(caseData, nodeId).next_action_computable, true);
+    // 그런데 gridPath 파라미터가 미확정이라 어느 경로인지는 사업이 아직 안 정했다.
+    assert.equal(statuses[nodeId].openness, "path_undetermined");
+  }
+
+  // 두 축이 같이 열린 것은 N03 하나뿐이다.
+  assert.equal(statuses.N03.openness, "ready");
+  assert.equal(institutionReadinessFor(caseData, "N03").next_action_computable, true);
 });
 
 test("케이스에 박아 둔 준비도가 제도 파일과 갈라지면 어긋남으로 잡는다", async () => {
@@ -159,7 +159,10 @@ test("전력 경로 질의는 배타 분기 패킷으로 간다", async () => {
   const result = queryCase(caseData, "전력 쪽은 어떻게 돼 있어?");
 
   assert.equal(result.packet.packet_id, "ap:grid-path-decision");
+  // 전력계통 경로는 참조 제도가 전부 R2로 올라와 제도 쪽 병목은 풀렸다.
+  // 남은 것은 gridPath 파라미터를 사업이 정하는 일이다.
   const readiness = institutionReadinessFor(caseData, "N20");
   assert.ok(readiness.referenced.length > 0);
-  assert.equal(readiness.next_action_computable, false);
+  assert.equal(readiness.next_action_computable, true);
+  assert.deepEqual(readiness.not_ready_slugs, []);
 });

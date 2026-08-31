@@ -28,6 +28,9 @@ export const SHOWCASE_INSTITUTIONS = [
   { slug: "preliminary-feasibility-study", transitionReviewed: true },
   { slug: "pfs-exemption-fast-track", transitionReviewed: true },
   { slug: "local-finance-investment-review-feasibility", transitionReviewed: true },
+  // N20 전력계통 경로(면제·신속처리)의 마지막 미평가 제도.
+  // 2026-09-01 연결선 21개를 분산에너지 활성화 특별법·시행령 현행 원문에 수동 대조했다.
+  { slug: "distributed-energy-special", transitionReviewed: true },
 ];
 
 const SELECTION_REASONS = {
@@ -42,6 +45,7 @@ const SELECTION_REASONS = {
   "preliminary-feasibility-study": "N02 재정심사 경로. 지자체 건의 노드가 법정 절차가 아니어서 R2에 못 미친다",
   "pfs-exemption-fast-track": "예타 면제·신속인허가 특례. N02와 N20 양쪽에 걸린다",
   "local-finance-investment-review-feasibility": "지방재정 투자심사. 지방비 분담이 확정되면 이 경로가 열린다",
+  "distributed-energy-special": "전력계통영향평가와 특화지역. N20 전력 경로의 마지막 조각",
 };
 
 function institutionCount() {

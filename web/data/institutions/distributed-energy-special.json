@@ -114,7 +114,26 @@
       "article": "제5조(분산에너지 활성화 기본계획 등)",
       "text": "분산에너지 활성화 기본계획 등"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "procedure.started",
+     "trigger_condition": "해당 절차가 개시되고 '분산에너지 해당성 검토' 수행 요건이 확인될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 해당성",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [],
+     "completion_evidence": [
+      "해당성"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P02",
@@ -141,7 +160,31 @@
       "article": "제11조(결격사유)",
       "text": "결격사유"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "supplement.requested",
+     "trigger_condition": "보완·재수행이 결정되어 '사업 등록 신청' 단계로 회귀할 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 신청",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "지원",
+      "보완"
+     ],
+     "completion_evidence": [
+      "신청"
+     ],
+     "handoff_recipients": [
+      "기후에너지환경부"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P03",
@@ -163,7 +206,30 @@
       "article": "제8조(분산에너지사업의 등록)",
       "text": "분산에너지사업의 등록"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "사업 등록 신청 완료 결과가 '등록 심사·수리' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 등록",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "신청"
+     ],
+     "completion_evidence": [
+      "등록"
+     ],
+     "handoff_recipients": [
+      "분산에너지사업자"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P04",
@@ -185,7 +251,28 @@
       "article": "제8조(분산에너지사업의 등록)",
       "text": "분산에너지사업의 등록"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "등록 심사·수리 완료 결과가 '보완·재신청' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 보완",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "등록"
+     ],
+     "completion_evidence": [
+      "보완"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P05",
@@ -207,7 +294,31 @@
       "article": "제8조(분산에너지사업의 등록)",
       "text": "분산에너지사업의 등록"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "notice.received",
+     "trigger_condition": "등록 심사·수리 완료 결과가 '등록 결과 수령' 단계로 인계될 때",
+     "completion_condition": "'등록 결과 수령' 통지와 송달·수령 기록이 남을 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "등록"
+     ],
+     "completion_evidence": [
+      "등록증"
+     ],
+     "handoff_recipients": [
+      "지자체·특화지역",
+      "배전사업자"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P06",
@@ -239,7 +350,30 @@
       "article": "제35조(분산에너지특화지역계획의 수립)",
       "text": "분산에너지특화지역계획의 수립"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "등록 결과 수령 완료 결과가 '특화지역 지정신청·계획' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 지정",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "등록증"
+     ],
+     "completion_evidence": [
+      "지정"
+     ],
+     "handoff_recipients": [
+      "기후에너지환경부"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P07",
@@ -266,7 +400,30 @@
       "article": "제38조(분산에너지특화지역 지정의 효과 등)",
       "text": "분산에너지특화지역 지정의 효과 등"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "특화지역 지정신청·계획 완료 결과가 '특화지역 지정' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 고시",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "지정"
+     ],
+     "completion_evidence": [
+      "고시"
+     ],
+     "handoff_recipients": [
+      "배전사업자"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P08",
@@ -288,7 +445,31 @@
       "article": "제16조(배전사업자의 적정설비 설치ㆍ관리 의무 등)",
       "text": "배전사업자의 적정설비 설치ㆍ관리 의무 등"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "등록 결과 수령·특화지역 지정 완료 결과가 '배전·설비 연계' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 연계",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "등록증",
+      "고시"
+     ],
+     "completion_evidence": [
+      "연계"
+     ],
+     "handoff_recipients": [
+      "수요기업·DC"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P09",
@@ -310,7 +491,31 @@
       "article": "제13조(분산에너지 사용량의 할당 등)",
       "text": "분산에너지 사용량의 할당 등"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "배전·설비 연계 완료 결과가 '수요·사용 협의' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 수요",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "연계"
+     ],
+     "completion_evidence": [
+      "수요"
+     ],
+     "handoff_recipients": [
+      "분산에너지사업자",
+      "기후에너지환경부"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P10",
@@ -332,7 +537,32 @@
       "article": "제43조(분산에너지사업자의 전력거래)",
       "text": "분산에너지사업자의 전력거래"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "수요·사용 협의·전력계통영향평가서 제출·검토 완료 결과가 '전력거래 계약·이행' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 거래",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "수요",
+      "전력계통영향평가 검토결과"
+     ],
+     "completion_evidence": [
+      "거래"
+     ],
+     "handoff_recipients": [
+      "수요기업·DC",
+      "기후에너지환경부"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P11",
@@ -354,7 +584,30 @@
       "article": "제43조(분산에너지사업자의 전력거래)",
       "text": "분산에너지사업자의 전력거래"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "전력거래 계약·이행 완료 결과가 '거래 상대 확인' 단계로 인계될 때",
+     "completion_condition": "'거래 상대 확인' 통지와 송달·수령 기록이 남을 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "거래"
+     ],
+     "completion_evidence": [
+      "계약"
+     ],
+     "handoff_recipients": [
+      "분산에너지사업자"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P12",
@@ -376,7 +629,30 @@
       "article": "제57조(금지행위)",
       "text": "금지행위"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "거래 상대 확인 완료 결과가 '금지행위 준수' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 준수",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "계약"
+     ],
+     "completion_evidence": [
+      "준수"
+     ],
+     "handoff_recipients": [
+      "감독"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P13",
@@ -403,7 +679,30 @@
       "article": "제10조(등록의 취소 등)",
       "text": "등록의 취소 등"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "금지행위 준수 완료 결과가 '개선명령·등록취소' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 처분",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "준수"
+     ],
+     "completion_evidence": [
+      "처분"
+     ],
+     "handoff_recipients": [
+      "분산에너지사업자"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P14",
@@ -425,7 +724,29 @@
       "article": "제10조(등록의 취소 등)",
       "text": "등록의 취소 등"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "notice.received",
+     "trigger_condition": "개선명령·등록취소·이행의무사항 이행확인·이행조치명령 완료 결과가 '처분 통지 수령' 단계로 인계될 때",
+     "completion_condition": "'처분 통지 수령' 통지와 송달·수령 기록이 남을 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "처분",
+      "이행조치명령서"
+     ],
+     "completion_evidence": [
+      "통지"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P15",
@@ -452,7 +773,28 @@
       "article": "제40조(분산에너지특화지역의 지정해제 등)",
       "text": "분산에너지특화지역의 지정해제 등"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "특화지역 지정 완료 결과가 '지정 변경·해제(해당 시)' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 변경",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "고시"
+     ],
+     "completion_evidence": [
+      "변경"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P16",
@@ -479,7 +821,28 @@
       "article": "제55조(분산에너지지원센터의 설치)",
       "text": "분산에너지지원센터의 설치"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "분산에너지 해당성 검토 완료 결과가 '지원센터·진흥 연계' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 지원",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "해당성"
+     ],
+     "completion_evidence": [
+      "지원"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P17",
@@ -495,15 +858,54 @@
     "output_documents": [
      "전력계통영향평가 검토결과"
     ],
-    "deadline": "승인등 신청 전 대통령령이 정하는 시기까지 평가서 제출(제24조제1항)",
+    "deadline": "승인등을 신청하기 3개월 전까지 평가서 제출, 검토 결과 통보는 접수한 날부터 3개월 이내",
     "confidence": 0.85,
     "legal_basis": [
      {
       "law": "분산에너지 활성화 특별법",
-      "article": "제24조(전력계통영향평가서의 제출ㆍ검토 등)",
-      "text": "계통영향평가 대상 지역·규모의 계통영향사업자는 사업계획등 승인등 신청 전에 전력계통영향평가서를 제출하여야 하고(제1항, 제23조), 장관은 세부기준 미달 시 보완하게 하며(제2항), 전력정책심의회 심의를 거쳐(제4항) 개선필요사항을 통보한다(제5항)."
+      "article": "제24조제1항",
+      "text": "계통영향사업자는 사업계획등에 대한 승인등을 신청하기 전에 미리 대통령령으로 정하는 시기까지 전력계통영향평가서를 제출하여야 한다."
+     },
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제24조제4항",
+      "text": "전력계통영향평가서를 검토하는 경우 전기사업법 제47조의2에 따른 전력정책심의회의 심의를 거쳐야 한다."
+     },
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제24조제6항",
+      "text": "개선필요사항등의 통보는 전력계통영향평가서를 접수한 날부터 3개월 이내에 하여야 한다."
+     },
+     {
+      "law": "분산에너지 활성화 특별법 시행령",
+      "article": "제28조제1항",
+      "text": "승인등을 받아야 하는 계통영향사업자는 그 승인등을 신청하기 3개월 전까지 전력계통영향평가서를 작성하여 제출해야 한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "external.reply.received",
+     "trigger_condition": "수요·사용 협의 완료 결과가 '전력계통영향평가서 제출·검토' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 전력계통영향평가 검토결과",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "수요"
+     ],
+     "completion_evidence": [
+      "전력계통영향평가 검토결과"
+     ],
+     "handoff_recipients": [
+      "수요기업·DC",
+      "분산에너지사업자"
+     ],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "승인등을 신청하기 3개월 전까지 평가서 제출, 검토 결과 통보는 접수한 날부터 3개월 이내"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P18",
@@ -519,15 +921,49 @@
     "output_documents": [
      "이행조치명령서"
     ],
-    "deadline": "현장조사 7일 전 조사계획 통지(제29조제3항)",
+    "deadline": "조사 7일 전까지 조사계획 통지",
     "confidence": 0.85,
     "legal_basis": [
      {
       "law": "분산에너지 활성화 특별법",
-      "article": "제30조(이행조치명령 등)",
-      "text": "장관은 이행의무사항 이행 여부를 확인하고(제29조, 조사 7일 전 통지), 미이행 시 이행조치명령을 하며(제30조제1항), 명령 미이행으로 전력계통에 중대한 영향을 미치면 이행완료까지 중지를 명할 수 있다(제30조제2항)."
+      "article": "제29조제2항",
+      "text": "이행의무사항 이행 확인을 위하여 자료를 제출하게 하거나 소속 공무원으로 하여금 사업장에 출입하여 조사·확인하게 할 수 있다."
+     },
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제29조제3항",
+      "text": "조사·확인을 하는 경우에는 조사 7일 전까지 조사일시·조사목적 및 조사내용 등을 적은 조사계획을 조사대상자에게 알려야 한다."
+     },
+     {
+      "law": "분산에너지 활성화 특별법",
+      "article": "제30조",
+      "text": "이행조치명령 등."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "external.reply.received",
+     "trigger_condition": "전력거래 계약·이행 완료 결과가 '이행의무사항 이행확인·이행조치명령' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 이행조치명령서",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "거래"
+     ],
+     "completion_evidence": [
+      "이행조치명령서"
+     ],
+     "handoff_recipients": [
+      "수요기업·DC",
+      "분산에너지사업자"
+     ],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "조사 7일 전까지 조사계획 통지"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    }
   ],
   "edges": [
@@ -536,161 +972,569 @@
     "source": "P01",
     "target": "P16",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'분산에너지 해당성 검토' 완료 결과가 '지원센터·진흥 연계' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "분산에너지사업자",
+      "to_actor": "분산에너지사업자",
+      "documents": [
+       "해당성"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E02",
     "source": "P16",
     "target": "P02",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'지원센터·진흥 연계' 완료 결과가 '사업 등록 신청' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "분산에너지사업자",
+      "to_actor": "분산에너지사업자",
+      "documents": [
+       "지원"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E03",
     "source": "P02",
     "target": "P03",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'사업 등록 신청' 완료 결과가 '등록 심사·수리' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "분산에너지사업자",
+      "to_actor": "기후에너지환경부",
+      "documents": [
+       "신청"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E04",
     "source": "P03",
     "target": "P04",
     "type": "sequence",
-    "label": "보완"
+    "label": "보완",
+    "agent_transition": {
+     "condition": "보완",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "기후에너지환경부",
+      "to_actor": "분산에너지사업자",
+      "documents": [
+       "등록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E05",
     "source": "P04",
     "target": "P02",
     "type": "loop",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'사업 등록 신청' 보완·재수행이 필요할 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "분산에너지사업자",
+      "to_actor": "분산에너지사업자",
+      "documents": [
+       "보완"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E06",
     "source": "P03",
     "target": "P05",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'등록 심사·수리' 완료 결과가 '등록 결과 수령' 단계로 인계될 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "기후에너지환경부",
+      "to_actor": "분산에너지사업자",
+      "documents": [
+       "등록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E07",
     "source": "P05",
     "target": "P06",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'등록 결과 수령' 완료 결과가 '특화지역 지정신청·계획' 단계로 인계될 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "분산에너지사업자",
+      "to_actor": "지자체·특화지역",
+      "documents": [
+       "등록증"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E08",
     "source": "P06",
     "target": "P07",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'특화지역 지정신청·계획' 완료 결과가 '특화지역 지정' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "지자체·특화지역",
+      "to_actor": "기후에너지환경부",
+      "documents": [
+       "지정"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E09",
     "source": "P05",
     "target": "P08",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'등록 결과 수령' 완료 결과가 '배전·설비 연계' 단계로 인계될 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "분산에너지사업자",
+      "to_actor": "배전사업자",
+      "documents": [
+       "등록증"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E10",
     "source": "P07",
     "target": "P08",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'특화지역 지정' 완료 결과가 '배전·설비 연계' 단계로 인계될 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "기후에너지환경부",
+      "to_actor": "배전사업자",
+      "documents": [
+       "고시"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E11",
     "source": "P08",
     "target": "P09",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'배전·설비 연계' 완료 결과가 '수요·사용 협의' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "배전사업자",
+      "to_actor": "수요기업·DC",
+      "documents": [
+       "연계"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E12",
     "source": "P09",
     "target": "P10",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'수요·사용 협의' 완료 결과가 '전력거래 계약·이행' 단계로 인계될 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "수요기업·DC",
+      "to_actor": "분산에너지사업자",
+      "documents": [
+       "수요"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E13",
     "source": "P10",
     "target": "P11",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'전력거래 계약·이행' 완료 결과가 '거래 상대 확인' 단계로 인계될 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "분산에너지사업자",
+      "to_actor": "수요기업·DC",
+      "documents": [
+       "거래"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E14",
     "source": "P11",
     "target": "P12",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'거래 상대 확인' 완료 결과가 '금지행위 준수' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "수요기업·DC",
+      "to_actor": "분산에너지사업자",
+      "documents": [
+       "계약"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E15",
     "source": "P12",
     "target": "P13",
     "type": "sequence",
-    "label": "위반"
+    "label": "위반",
+    "agent_transition": {
+     "condition": "위반",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "분산에너지사업자",
+      "to_actor": "감독",
+      "documents": [
+       "준수"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E16",
     "source": "P13",
     "target": "P14",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'개선명령·등록취소' 완료 결과가 '처분 통지 수령' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "감독",
+      "to_actor": "분산에너지사업자",
+      "documents": [
+       "처분"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E17",
     "source": "P07",
     "target": "P15",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'특화지역 지정' 완료 결과가 '지정 변경·해제(해당 시)' 단계로 인계될 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "기후에너지환경부",
+      "to_actor": "기후에너지환경부",
+      "documents": [
+       "고시"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "M01",
     "source": "P09",
     "target": "P17",
     "type": "message",
-    "label": "대규모 전기사용 시 계통영향평가"
+    "label": "대규모 전기사용 시 계통영향평가",
+    "agent_transition": {
+     "condition": "대규모 전기사용 시 계통영향평가",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "수요기업·DC",
+      "to_actor": "기후에너지환경부",
+      "documents": [
+       "수요"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E18",
     "source": "P17",
     "target": "P10",
     "type": "sequence",
-    "label": "평가 검토 완료"
+    "label": "평가 검토 완료",
+    "agent_transition": {
+     "condition": "평가 검토 완료",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "기후에너지환경부",
+      "to_actor": "분산에너지사업자",
+      "documents": [
+       "전력계통영향평가 검토결과"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "M02",
     "source": "P10",
     "target": "P18",
     "type": "message",
-    "label": "이행의무사항 확인"
+    "label": "이행의무사항 확인",
+    "agent_transition": {
+     "condition": "이행의무사항 확인",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "분산에너지사업자",
+      "to_actor": "기후에너지환경부",
+      "documents": [
+       "거래"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E19",
     "source": "P18",
     "target": "P14",
     "type": "message",
-    "label": "이행조치·중지명령"
+    "label": "이행조치·중지명령",
+    "agent_transition": {
+     "condition": "이행조치·중지명령",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "기후에너지환경부",
+      "to_actor": "분산에너지사업자",
+      "documents": [
+       "이행조치명령서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    }
   ],
   "warnings": [
    "MST 280059. 패키지 ζ. 직접전력거래 세부는 고시 fieldVerification.",
    "2026-07-13 L2 블라인드 재구성 대조 정정: (E) 법정 필수단계 누락 보완 — 전력계통영향평가서 제출·검토 노드(P17, 법 제23·24조: 대상지역·규모 계통영향사업자는 승인등 신청 전 평가서 제출·전력정책심의회 심의) 및 이행의무사항 이행확인·이행조치명령 노드(P18, 법 제29·30조) 추가. 기존 도표는 배전연계·전력거래만 담고 대규모 전기사용 사업자의 전력계통영향평가(이 법의 핵심 절차)가 누락되어 있었음. (D) 법정기한 명시 — P17 승인등 신청 전 평가서 제출(제24조제1항), P18 현장조사 7일 전 통지(제29조제3항). L0 발견사항 없음. 대조 MST: 분산에너지 활성화 특별법 280059, 시행령 286299, 시행규칙 283831. 법의 침묵: 분산에너지사업 등록(제8조) 처리기한은 법에 없고 시행규칙 위임. 법의 침묵: 특화지역 지정(제36조) 결정기한은 조문에 명시 없음."
-  ]
+  ],
+  "agent_readiness": {
+   "contract_version": "1.1.0",
+   "level": "R2",
+   "mode": "next-action",
+   "assessed_at": "2026-09-01",
+   "assessment_method": "스키마 검증·그래프 파생·전이 수동 대조·법제처 DRF API 직접 대조",
+   "live_legal_check": "required-before-use",
+   "last_live_check": {
+    "checked_at": "2026-09-01",
+    "method": "law.go.kr-DRF-direct",
+    "status": "passed",
+    "citation_fingerprint": "sha256:e0c9df388bf13686a04713257a46f11224b44e80f5ed98a3d576abaf9396122e",
+    "sources_checked": 2,
+    "source_failures": 0,
+    "article_references": 28,
+    "verified_references": 28,
+    "missing_references": [],
+    "uncheckable_references": [],
+    "verified_node_ids": [
+     "P01",
+     "P02",
+     "P03",
+     "P04",
+     "P05",
+     "P06",
+     "P07",
+     "P08",
+     "P09",
+     "P10",
+     "P11",
+     "P12",
+     "P13",
+     "P14",
+     "P15",
+     "P16",
+     "P17",
+     "P18"
+    ],
+    "unverified_node_ids": [],
+    "source_results": [
+     {
+      "law": "분산에너지 활성화 특별법",
+      "source_type": "statute",
+      "source_id": "014457",
+      "official_url": "https://law.go.kr/법령/분산에너지활성화특별법",
+      "requested_articles": [
+       "제10조",
+       "제11조",
+       "제12조",
+       "제13조",
+       "제16조",
+       "제1조",
+       "제24조",
+       "제29조",
+       "제30조",
+       "제33조",
+       "제34조",
+       "제35조",
+       "제36조",
+       "제38조",
+       "제39조",
+       "제40조",
+       "제43조",
+       "제54조",
+       "제55조",
+       "제57조",
+       "제5조",
+       "제8조"
+      ],
+      "verified_articles": [
+       "제10조",
+       "제11조",
+       "제12조",
+       "제13조",
+       "제16조",
+       "제1조",
+       "제24조",
+       "제29조",
+       "제30조",
+       "제33조",
+       "제34조",
+       "제35조",
+       "제36조",
+       "제38조",
+       "제39조",
+       "제40조",
+       "제43조",
+       "제54조",
+       "제55조",
+       "제57조",
+       "제5조",
+       "제8조"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "분산에너지 활성화 특별법",
+      "version_key": "0144572025120221161",
+      "promulgated_on": "2025-12-02",
+      "effective_on": "2026-03-03"
+     },
+     {
+      "law": "분산에너지 활성화 특별법 시행령",
+      "source_type": "statute",
+      "source_id": "014661",
+      "official_url": "https://law.go.kr/법령/분산에너지활성화특별법시행령",
+      "requested_articles": [
+       "제28조"
+      ],
+      "verified_articles": [
+       "제28조"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "분산에너지 활성화 특별법 시행령",
+      "version_key": "0146612026052636348",
+      "promulgated_on": "2026-05-26",
+      "effective_on": "2026-06-03"
+     }
+    ]
+   },
+   "actionable_node_ids": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P08",
+    "P09",
+    "P10",
+    "P11",
+    "P12",
+    "P13",
+    "P14",
+    "P15",
+    "P16",
+    "P17",
+    "P18"
+   ],
+   "reference_only_node_ids": [],
+   "blockers": [],
+   "metrics": {
+    "nodes": 18,
+    "edges": 21,
+    "node_contract_coverage": 1,
+    "transition_contract_coverage": 1,
+    "explicit_basis_coverage": 1,
+    "output_document_coverage": 1,
+    "low_confidence_nodes": 0,
+    "template_like_nodes": 0,
+    "deadline_review_nodes": 0,
+    "field_verification_items": 3
+   }
+  }
  },
  "verification": {
   "status": "article-verified",
-  "verifiedAt": "2026-07-15",
-  "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
+  "verifiedAt": "2026-09-01",
+  "method": "국가법령정보센터 DRF API 현행 원문 대조(법률·시행령 조문 전문)",
   "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 40건 가운데 40건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
-   "분산에너지 활성화 특별법 MST 280059"
+   "분산에너지 활성화 특별법 MST 280059",
+   "2026-09-01 재대조: 전력계통영향평가서 제출 시기가 법률의 '대통령령으로 정하는 시기'를 시행령 제28조제1항이 '승인등을 신청하기 3개월 전까지'로 구체화하고 있어 시행령을 근거에 추가했다. 이행확인 노드의 기한이 제29조제3항을 가리키면서 근거에는 제30조만 달려 있어 제29조를 보강했다."
   ],
   "sources": [
    {
@@ -701,8 +1545,19 @@
     "lawId": "014457",
     "mst": "280059",
     "promulgatedOn": "2025-12-02",
-    "effectiveOn": "2026-06-03",
+    "effectiveOn": "2026-03-03",
     "officialUrl": "https://law.go.kr/법령/분산에너지활성화특별법"
+   },
+   {
+    "law": "분산에너지 활성화 특별법 시행령",
+    "kind": "대통령령",
+    "sourceType": "statute",
+    "officialName": "분산에너지 활성화 특별법 시행령",
+    "lawId": "014661",
+    "mst": "286299",
+    "promulgatedOn": "2026-05-26",
+    "effectiveOn": "2026-06-03",
+    "officialUrl": "https://law.go.kr/법령/분산에너지활성화특별법시행령"
    }
   ],
   "articleVerification": {
