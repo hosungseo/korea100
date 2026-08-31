@@ -19,7 +19,28 @@
 | `load_ontology_case` *(신규)* | Case graph 로드 | samples/*.case.json |
 | `get_case_state` *(신규)* | State[] 조회 | 케이스 인스턴스 |
 | `query_case` *(신규)* | Rule fire + ActionPacket 선택 | 데모 질문 해소 |
-| `check_case_linkage` *(신규)* | Case ↔ Institution 그래프 대조 | 준비도 등급으로 다음 행동 허용 판정 |
+| `check_case_linkage` *(신규)* | Case ↔ Institution/Project 그래프 대조 | 준비도 등급으로 다음 행동 허용 판정 |
+| `get_project_status` *(신규)* | 프로젝트 케이스 마일스톤 개폐 계산 | 아티팩트 의존 그래프에서 결정적 계산 |
+| `explain_blocked_milestone` *(신규)* | 차단 아티팩트 → 상류 마일스톤 추적 | 추정 금지, 그래프만 따라간다 |
+
+## 프로젝트 케이스 (case_kind: project)
+
+제도 하나가 아니라 사업 하나를 다룬다. 대조 대상도 업무구조도가 아니라
+메가프로젝트 오버레이(`web/data/mega-projects/projects/*.json`)다.
+
+| 검사 | 어긋남 판정 |
+|---|---|
+| `milestone:Nxx` 가 오버레이 노드에 존재 | `unknown_milestone_ids` |
+| 마일스톤 라벨 == 오버레이 노드명 | `label_mismatches` |
+| `requires` 관계가 오버레이 의존에 존재 | `unknown_requires` |
+| 케이스에 박은 준비도 == 현재 제도 파일 준비도 | `stale_readiness` |
+
+`next_action_allowed = aligned && 참조 제도가 **전부** R2`. 제도 케이스보다 엄격하다.
+사업은 가장 준비 안 된 제도만큼만 계산 가능하기 때문이다.
+
+마일스톤 개폐는 아티팩트 의존에서 결정적으로 나온다. hard `finish_to_start`만 차단으로
+보고 soft는 경고로 남긴다. 활성화 규칙이 걸린 마일스톤은 그 파라미터가 확정되기
+전까지 `path_undetermined`로 두며, 오버레이 진행 상태보다 이 판정이 우선한다.
 
 ## 두 층의 대조 (case-link)
 
@@ -40,6 +61,7 @@
 |---|---|---|---|
 | 1호 `IDC-2026-0901-001` | 정보공개청구 | R2 (2026-09-01 승격) | true |
 | 2호 `AFN-2026-0901-001` | 과태료 사전통지·의견제출 | R2 | true |
+| 3호 `GSC-2026-0901-001` | 광주 반도체 클러스터 (제도 108종) | 전부 미평가 | false |
 
 정보공개청구는 인용 오류 2건 정정·기한 성격 10건 재확인·전이 26건 수동 대조를 거쳐
 R1에서 올라왔다: [승격 기록](../docs/information-disclosure-r2-2026-09-01.md).
@@ -88,14 +110,15 @@ ActionPacket 모양으로 정규화하고, 계약 위반이면 응답 대신 오
 - `auto_execute` / `execution_allowed` == false
 
 ```bash
-cd mcp && npm test   # 47건
+cd mcp && npm test   # 58건
 ```
 
 - `test/packet-contract.test.mjs` — 두 경로가 같은 계약·같은 키 집합을 내는지
 - `test/case-link.test.mjs` — 1호 케이스 17단계·26관계가 제도와 1:1인지, 어긋남 3종을 잡는지
 - `test/derive-case.test.mjs` — 파생기가 1호의 구조 층을 그대로 재현하는지
 - `test/case-fine-pre-notice.test.mjs` — 2호(R2)에서 `next_action_allowed`가 참인지, 확신 없으면 되묻는지
-- `test/protocol.test.mjs` — stdio로 도구 10개 공개, `query_case`·`check_case_linkage` 실물 호출
+- `test/project-case.test.mjs` — 3호(프로젝트)가 오버레이와 1:1인지, 마일스톤 개폐·차단 추적이 맞는지
+- `test/protocol.test.mjs` — stdio로 도구 12개 공개, `query_case`·`check_case_linkage`·`get_project_status` 실물 호출
 
 ## 질의 매칭
 

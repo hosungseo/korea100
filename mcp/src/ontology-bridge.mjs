@@ -56,14 +56,18 @@ export async function loadOntologyCase({
   return data;
 }
 
+// 제도 케이스는 step:, 프로젝트 케이스는 milestone: 을 쓴다. 둘 다 "단계"다.
+const STEP_PREFIXES = ["step:", "milestone:"];
+const isStepEntity = (entityId) => STEP_PREFIXES.some((prefix) => String(entityId).startsWith(prefix));
+
 export function getCaseState(caseData) {
   const states = caseData.states ?? [];
   const caseEntity = states.find((s) => s.entity_id.startsWith("case:"));
   const openSteps = states
-    .filter((s) => s.entity_id.startsWith("step:") && ["ready", "available", "open", "in_progress"].includes(s.state))
+    .filter((s) => isStepEntity(s.entity_id) && ["ready", "available", "open", "in_progress"].includes(s.state))
     .map((s) => ({ entity_id: s.entity_id, state: s.state }));
   const doneSteps = states
-    .filter((s) => s.entity_id.startsWith("step:") && s.state === "done")
+    .filter((s) => isStepEntity(s.entity_id) && s.state === "done")
     .map((s) => s.entity_id);
   return {
     case_id: caseData.case_id,

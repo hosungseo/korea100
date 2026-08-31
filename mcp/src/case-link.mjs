@@ -140,7 +140,153 @@ export function checkCaseLinkage(caseData, institution) {
   };
 }
 
+export const DEFAULT_PROJECT_DIR = fileURLToPath(
+  new URL("../../web/data/mega-projects/projects/", import.meta.url),
+);
+
+export async function loadProjectForLinkage(projectId, { projectDir = DEFAULT_PROJECT_DIR } = {}) {
+  if (!projectId || /[^a-z0-9-]/u.test(projectId)) return null;
+  try {
+    return JSON.parse(await readFile(path.join(projectDir, `${projectId}.json`), "utf8"));
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * 프로젝트 케이스는 제도 하나가 아니라 오버레이 그래프와 대조한다.
+ * 마일스톤·아티팩트·참조 제도 세 층이 모두 원본과 맞아야 한다.
+ */
+export function checkProjectLinkage(caseData, project, institutionReadiness = new Map()) {
+  if (!project) {
+    return {
+      case_kind: "project",
+      project_id: caseData.project_id ?? null,
+      project_found: false,
+      status: "project_not_found",
+      next_action_allowed: false,
+      notes: ["케이스가 가리키는 메가프로젝트 파일을 찾지 못했습니다."],
+      execution_allowed: false,
+    };
+  }
+
+  const overlayNodeIds = new Set(project.nodes.map((node) => node.id));
+  const caseMilestones = (caseData.entities ?? []).filter((entity) => entity.id.startsWith("milestone:"));
+  const unknownMilestoneIds = caseMilestones
+    .map((entity) => entity.attrs?.node_id)
+    .filter((nodeId) => !overlayNodeIds.has(nodeId));
+  const uncoveredNodeIds = [...overlayNodeIds].filter((nodeId) => (
+    !caseMilestones.some((entity) => entity.attrs?.node_id === nodeId)
+  ));
+
+  const overlayNameById = new Map(project.nodes.map((node) => [node.id, node.name]));
+  const labelMismatches = caseMilestones
+    .filter((entity) => overlayNameById.get(entity.attrs?.node_id) !== entity.label)
+    .map((entity) => ({
+      node_id: entity.attrs?.node_id,
+      case_label: entity.label,
+      overlay_name: overlayNameById.get(entity.attrs?.node_id) ?? null,
+    }));
+
+  const overlayEdges = new Set();
+  for (const node of project.nodes) {
+    for (const requirement of node.requires ?? []) {
+      overlayEdges.add(`${node.id}>${requirement.artifact}`);
+    }
+  }
+  const caseRequires = (caseData.relations ?? []).filter((relation) => relation.type === "requires");
+  const unknownRequires = caseRequires
+    .filter((relation) => {
+      const nodeId = String(relation.from).replace("milestone:", "");
+      const artifactId = String(relation.to).replace("artifact:", "");
+      return !overlayEdges.has(`${nodeId}>${artifactId}`);
+    })
+    .map((relation) => ({ relation_id: relation.id, from: relation.from, to: relation.to }));
+
+  // 참조 제도 준비도를 케이스에 박아 둔 값과 현재 제도 파일을 다시 대조한다.
+  const caseInstitutions = (caseData.entities ?? []).filter((entity) => entity.id.startsWith("institution:"));
+  const staleReadiness = caseInstitutions
+    .filter((entity) => {
+      const current = institutionReadiness.get(entity.attrs?.slug);
+      const recorded = entity.attrs?.readiness_level ?? "unassessed";
+      return current !== undefined && current !== recorded;
+    })
+    .map((entity) => ({
+      slug: entity.attrs?.slug,
+      recorded: entity.attrs?.readiness_level,
+      current: institutionReadiness.get(entity.attrs?.slug),
+    }));
+
+  const r2Count = caseInstitutions
+    .filter((entity) => entity.attrs?.readiness_level === "R2").length;
+
+  const drifted = unknownMilestoneIds.length > 0
+    || labelMismatches.length > 0
+    || unknownRequires.length > 0
+    || staleReadiness.length > 0;
+
+  const notes = [];
+  if (drifted) {
+    notes.push("케이스와 메가프로젝트 오버레이가 어긋났습니다. --remerge로 구조 층을 다시 파생하세요.");
+  }
+  if (r2Count === 0) {
+    notes.push(
+      `참조 제도 ${caseInstitutions.length}개 중 R2가 없습니다. 마일스톤 내부 절차는 이 케이스로 답하지 않습니다.`,
+    );
+  }
+  if (uncoveredNodeIds.length > 0) {
+    notes.push(`케이스가 다루지 않는 오버레이 마일스톤 ${uncoveredNodeIds.length}개가 있습니다.`);
+  }
+
+  return {
+    case_kind: "project",
+    project_id: caseData.project_id,
+    project_name: project.name,
+    project_found: true,
+    status: drifted ? "drifted" : "aligned",
+    milestones: {
+      case_milestone_count: caseMilestones.length,
+      overlay_node_count: overlayNodeIds.size,
+      unknown_milestone_ids: unknownMilestoneIds,
+      uncovered_node_ids: uncoveredNodeIds,
+      label_mismatches: labelMismatches,
+    },
+    dependencies: {
+      case_requires_count: caseRequires.length,
+      overlay_requires_count: overlayEdges.size,
+      unknown_requires: unknownRequires,
+    },
+    institutions: {
+      referenced_count: caseInstitutions.length,
+      r2_count: r2Count,
+      stale_readiness: staleReadiness,
+    },
+    // 프로젝트는 참조 제도가 전부 R2여야 마일스톤 내부 절차까지 답할 수 있다.
+    next_action_allowed: !drifted && caseInstitutions.length > 0 && r2Count === caseInstitutions.length,
+    notes,
+    execution_allowed: false,
+  };
+}
+
+async function readInstitutionReadiness(caseData, options) {
+  const slugs = (caseData.entities ?? [])
+    .filter((entity) => entity.id.startsWith("institution:"))
+    .map((entity) => entity.attrs?.slug)
+    .filter(Boolean);
+  const entries = await Promise.all(slugs.map(async (slug) => {
+    const institution = await loadInstitutionForLinkage(slug, options);
+    if (!institution) return null;
+    return [slug, institution.process?.agent_readiness?.level ?? "unassessed"];
+  }));
+  return new Map(entries.filter(Boolean));
+}
+
 export async function checkCaseLinkageFor(caseData, options = {}) {
+  if (caseData?.case_kind === "project") {
+    const project = await loadProjectForLinkage(caseData.project_id, options);
+    const readiness = await readInstitutionReadiness(caseData, options);
+    return checkProjectLinkage(caseData, project, readiness);
+  }
   const institution = await loadInstitutionForLinkage(caseData.institution_slug, options);
   return checkCaseLinkage(caseData, institution);
 }

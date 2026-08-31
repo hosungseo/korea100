@@ -5,11 +5,21 @@
 공공 액션 층 = 시스템 자동 write가 아니라 **사람 승인 패킷**.
 
 ## 파일
-- `core-schema.json` — 5타입 코어 스키마
-- `samples/information-disclosure.case.json` — **정보공개청구** 샘플 1호 (제도 R1)
+- `core-schema.json` — 5타입 코어 스키마 (`case_kind`: institution | project)
+- `samples/information-disclosure.case.json` — **정보공개청구** 샘플 1호 (제도 R2)
 - `samples/administrative-fine-pre-notice.case.json` — **과태료 사전통지·의견제출** 샘플 2호 (제도 R2)
+- `samples/gwangju-semiconductor-cluster.case.json` — **광주 반도체 클러스터** 샘플 3호 (프로젝트, 제도 108개)
 - `scripts/derive-case.mjs` — 제도 업무구조도 → 케이스 구조 층 파생
+- `scripts/derive-project-case.mjs` — 메가프로젝트 오버레이 → 프로젝트 케이스 구조 층 파생
 - `scripts/demo_query.py` — 샘플 질의 데모
+
+## 두 가지 케이스 종류
+
+`case_kind: "institution"` — 제도 하나, 사건 하나. 단계는 `step:Pxx`, 연결은 업무구조도 엣지.
+
+`case_kind: "project"` — 사업 하나, 제도 여럿. 단계는 `milestone:Nxx`, 연결은
+**아티팩트 인계**(`hands_off_to`)다. 어긋나는 지점이 제도 안이 아니라 제도 사이에 있다.
+다음 행동 계산은 참조 제도가 **전부** R2일 때만 허용한다.
 
 ## 구조 층은 파생물이다
 케이스의 Step/Gate/System 엔티티와 sequence·message·loop 관계는 제도 그래프의 투영이다.
@@ -31,6 +41,16 @@ node ontology/scripts/derive-case.mjs --slug <제도 slug> --case-id <ID> --as-o
 2026-08-27 사전통지 수령, 의견 제출 기한 2026-09-08까지 열려 있음. as_of 2026-09-01.
 당사자용·행정청용 패킷을 각각 낸다 → [DEMO](samples/administrative-fine-pre-notice.DEMO.md)
 
+**3호** 광주 군공항 부지 반도체 클러스터 (`gwangju-semiconductor-cluster`) — 케이스 `GSC-2026-0901-001`.
+마일스톤 54·아티팩트 53·참조 제도 108·관계 462. 완료 2 / 진행 1 / 착수가능 10 / 차단 36 / 경로미확정 5.
+참조 제도가 전부 미평가라 마일스톤 내부 절차는 답하지 않는다 → [DEMO](samples/gwangju-semiconductor-cluster.DEMO.md)
+
+```bash
+node ontology/scripts/derive-project-case.mjs --project gwangju-semiconductor-cluster \
+  --case-id GSC-2026-0901-001 --as-of 2026-09-01
+node ontology/scripts/derive-project-case.mjs --remerge samples/gwangju-semiconductor-cluster.case.json
+```
+
 ## Before → After
 **Before (맵만):** "정보공개는 청구→결정→불복 구조입니다…" (장문 설명)
 
@@ -47,17 +67,18 @@ python3 ontology/scripts/demo_query.py "부분공개 통지 왔는데 뭐 하면
 ```
 
 ## 다음
+- 반도체 클러스터 임계경로 제도부터 R2 승격 (N02·N03·N18이 끌어 쓰는 제도가 우선)
 - 남은 R2 제도 2종에 케이스 추가 (과태료 이의제기·법원재판, 국가연구개발비 정산)
-- 제도 데이터 변경 시 케이스 재파생을 CI로 강제 (지금은 `--remerge` 수동 실행)
+- 제도·오버레이 변경 시 케이스 재파생을 CI로 강제 (지금은 `--remerge` 수동 실행)
 
 
 ## MCP 연계
 - 매핑표: [MCP-MAPPING.md](MCP-MAPPING.md)
 - 브리지: `mcp/src/ontology-bridge.mjs`
-- MCP 도구: `load_ontology_case`, `get_case_state`, `query_case`, `check_case_linkage`
+- MCP 도구: `load_ontology_case`, `get_case_state`, `query_case`, `check_case_linkage`, `get_project_status`, `explain_blocked_milestone`
 - 패킷 계약: `mcp/src/packet-contract.mjs` — R2 경로(`create_action_packet`)와 온톨로지 경로가 같은 ActionPacket 계약을 통과해야 한다
 - 케이스 대조: `mcp/src/case-link.mjs` — 케이스 그래프가 제도 업무구조도와 어긋나면 드러낸다
-- 테스트: `cd mcp && npm test` (47건)
+- 테스트: `cd mcp && npm test` (58건)
 - 데모: `node mcp/scripts/ontology-query-once.mjs [--case samples/<파일>] "<질문>"`
 
 ## 제도 층과의 관계
@@ -73,6 +94,7 @@ python3 ontology/scripts/demo_query.py "부분공개 통지 왔는데 뭐 하면
 | 정보공개청구 | R2 (next-action) | 1호 | true |
 | 과태료 사전통지·의견제출 | R2 (next-action) | 2호 | true |
 | 과태료 이의제기·법원재판, 국가연구개발비 정산 | R2 (next-action) | 없음 | — |
+| 광주 반도체 클러스터 참조 108종 | 미평가 | 3호(프로젝트) | false |
 
 정보공개청구는 2026-09-01에 R1에서 승격했다. 조문이 틀렸던 것이 아니라
 기한의 성격과 전이가 대조되지 않았던 것이다. 자세한 내용은

@@ -6,18 +6,45 @@
   "type": "object",
   "required": [
     "ontology_version",
-    "institution_slug",
     "entities",
     "relations",
     "states",
     "rules",
     "action_packets"
   ],
+  "allOf": [
+    {
+      "if": {
+        "properties": { "case_kind": { "const": "project" } },
+        "required": ["case_kind"]
+      },
+      "then": { "required": ["project_id"] },
+      "else": { "required": ["institution_slug"] }
+    }
+  ],
   "properties": {
     "ontology_version": {
       "type": "string"
     },
+    "case_kind": {
+      "description": "institution: 제도 하나에 사건 하나. project: 여러 제도를 가로지르는 사업. 생략하면 institution.",
+      "enum": [
+        "institution",
+        "project"
+      ],
+      "default": "institution"
+    },
     "institution_slug": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "project_id": {
+      "description": "case_kind가 project일 때 web/data/mega-projects/projects/{id}.json 을 가리킨다.",
+      "type": "string"
+    },
+    "project_name": {
       "type": "string"
     },
     "institution_name": {

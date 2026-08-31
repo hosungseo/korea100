@@ -37,9 +37,11 @@ test("stdio MCP가 도구·리소스를 공개하고 다음 행동을 구조화�
     [
       "check_case_linkage",
       "create_action_packet",
+      "explain_blocked_milestone",
       "get_case_state",
       "get_next_actions",
       "get_procedure_map",
+      "get_project_status",
       "get_step_requirements",
       "load_ontology_case",
       "query_case",
@@ -152,4 +154,32 @@ test("stdio MCP가 도구·리소스를 공개하고 다음 행동을 구조화�
   assert.equal(linkage.structuredContent.status, "aligned");
   assert.equal(linkage.structuredContent.readiness.level, "R2");
   assert.equal(linkage.structuredContent.execution_allowed, false);
+
+  const projectFile = "samples/gwangju-semiconductor-cluster.case.json";
+  const project = await client.callTool({
+    name: "get_project_status",
+    arguments: { case_file: projectFile },
+  });
+  assert.equal(project.isError, undefined);
+  assert.equal(project.structuredContent.project_id, "gwangju-semiconductor-cluster");
+  assert.equal(project.structuredContent.execution_allowed, false);
+  assert.equal(project.structuredContent.readiness.next_action_computable_milestones.length, 0);
+  assert.ok(project.structuredContent.counts.ready > 0);
+
+  const blocked = await client.callTool({
+    name: "explain_blocked_milestone",
+    arguments: { case_file: projectFile, node_id: "N49" },
+  });
+  assert.equal(blocked.isError, undefined);
+  assert.equal(blocked.structuredContent.milestone.openness, "blocked");
+  assert.ok(blocked.structuredContent.blocked_by.length > 0);
+  assert.ok(blocked.structuredContent.upstream_chain.length > 0);
+  assert.equal(blocked.structuredContent.institution_readiness.next_action_computable, false);
+
+  const wrongKind = await client.callTool({
+    name: "get_project_status",
+    arguments: { case_file: "samples/information-disclosure.case.json" },
+  });
+  assert.equal(wrongKind.isError, true);
+  assert.match(wrongKind.content[0].text, /not_a_project_case/u);
 });

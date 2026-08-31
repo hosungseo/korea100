@@ -28,7 +28,9 @@ Korea100의 업무구조도를 AI 에이전트가 질의할 수 있는 **읽기 
 | `load_ontology_case` | 온톨로지 케이스 JSON 로드(케이스 메타·패킷 목록) |
 | `get_case_state` | 케이스의 State 목록과 열린 단계 조회 |
 | `query_case` | 케이스 상태·규칙으로 사람 검토용 ActionPacket 선택 |
-| `check_case_linkage` | 케이스 그래프를 제도 업무구조도와 대조하고 준비도 등급으로 다음 행동 허용 여부 판정 |
+| `check_case_linkage` | 케이스 그래프를 제도 업무구조도(또는 메가프로젝트 오버레이)와 대조하고 준비도 등급으로 다음 행동 허용 여부 판정 |
+| `get_project_status` | 프로젝트 케이스의 마일스톤을 완료·진행·착수가능·차단·경로미확정으로 분류 |
+| `explain_blocked_milestone` | 마일스톤을 막는 아티팩트와 상류 선행 마일스톤 추적 |
 
 `create_action_packet`과 `query_case`는 서로 다른 경로지만 같은 ActionPacket 계약을 통과한다.
 두 응답 모두 정규화된 `ontology_packet`을 함께 반환하고, `execution_allowed=false`·
@@ -37,12 +39,13 @@ Korea100의 업무구조도를 AI 에이전트가 질의할 수 있는 **읽기 
 
 `query_case`는 매번 케이스를 제도 업무구조도와 대조한다(`src/case-link.mjs`). 케이스가
 제도에 없는 단계·연결선을 가리키거나 제도 준비도가 R2에 못 미치면 그 사유가 패킷의
-`risks`로 들어간다. 샘플 케이스는 2건이다.
+`risks`로 들어간다. 샘플 케이스는 3건이다.
 
 | 케이스 파일 | 제도 | 준비도 | 다음 행동 계산 |
 |---|---|---|---|
 | `samples/information-disclosure.case.json` (기본) | 정보공개청구 | R2 | 가능 |
 | `samples/administrative-fine-pre-notice.case.json` | 과태료 사전통지·의견제출 | R2 | 가능 |
+| `samples/gwangju-semiconductor-cluster.case.json` | 광주 반도체 클러스터 (제도 108종) | 전부 미평가 | 불가 |
 
 질의가 케이스의 데모 질문과 충분히 가깝지 않으면 패킷을 만들지 않고
 `case_needs_disambiguation`으로 후보를 되묻는다.
@@ -152,15 +155,11 @@ MCP 클라이언트 설정에는 [mcp-config.example.json](mcp-config.example.js
 
 ## 온톨로지 연계 (2026-09-01)
 
-R2 카탈로그와 별도로 **ontology case** 경로를 제공한다.
+R2 카탈로그와 별도로 **ontology case** 경로를 제공한다. 케이스는 두 종류다.
 
-| 도구 | 용도 |
-|---|---|
-| `load_ontology_case` | `ontology/samples/*.case.json` 로드 |
-| `get_case_state` | 케이스 State / 열린 단계 |
-| `query_case` | 질문 → ontology ActionPacket (`execution_allowed=false`) |
+- `case_kind: institution` — 제도 하나, 사건 하나 (1·2호)
+- `case_kind: project` — 사업 하나, 제도 여럿 (3호 광주 반도체 클러스터, 제도 108종)
 
-매핑: `../ontology/MCP-MAPPING.md`  
-테스트: `node --test test/ontology-bridge.test.mjs`
+매핑표: [../ontology/MCP-MAPPING.md](../ontology/MCP-MAPPING.md)
 
-R2 제도 JSON에 `agent_readiness`가 없으면 기존 6도구 카탈로그는 비고, 온톨로지 3도구는 동작한다.
+R2 제도 JSON에 `agent_readiness`가 없으면 R2 도구 카탈로그는 비고 온톨로지 도구는 계속 동작한다.

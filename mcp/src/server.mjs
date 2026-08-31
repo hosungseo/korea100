@@ -14,6 +14,7 @@ import {
 } from "./ontology-bridge.mjs";
 import { certifyPacketEnvelope, PacketContractError } from "./packet-contract.mjs";
 import { checkCaseLinkageFor } from "./case-link.mjs";
+import { projectStatus, explainBlocked, isProjectCase, ProjectCaseError } from "./project-case.mjs";
 
 const SERVER_NAME = "korea100-administrative-procedure";
 const SERVER_VERSION = "0.2.0";
@@ -40,6 +41,7 @@ function errorResult(error) {
   const known = error instanceof ProcedureQueryError
     || error instanceof OntologyBridgeError
     || error instanceof PacketContractError
+    || error instanceof ProjectCaseError
     || error?.code === "catalog_invariant_failed";
   const payload = {
     error: {
@@ -307,9 +309,64 @@ export function createAdministrativeProcedureMcpServer(service, { ontologyEnable
         const data = await loadOntologyCase({ caseFile: case_file, caseId: case_id || null });
         return checkCaseLinkageFor(data);
       },
-      (data) => data.institution_found
-        ? `${data.institution_slug}: 대조 ${data.status}, 준비도 ${data.readiness?.level ?? "미평가"}, 다음행동 허용 ${data.next_action_allowed}`
-        : `${data.institution_slug}: 제도 파일을 찾지 못했습니다.`,
+      (data) => {
+        if (data.case_kind === "project") {
+          return data.project_found
+            ? `${data.project_id}: 대조 ${data.status}, 참조 제도 ${data.institutions.referenced_count}개 중 R2 ${data.institutions.r2_count}개, 다음행동 허용 ${data.next_action_allowed}`
+            : `${data.project_id}: 메가프로젝트 파일을 찾지 못했습니다.`;
+        }
+        return data.institution_found
+          ? `${data.institution_slug}: 대조 ${data.status}, 준비도 ${data.readiness?.level ?? "미평가"}, 다음행동 허용 ${data.next_action_allowed}`
+          : `${data.institution_slug}: 제도 파일을 찾지 못했습니다.`;
+      },
+    );
+
+    registerReadOnlyTool(
+      server,
+      "get_project_status",
+      {
+        title: "메가프로젝트 진행 상태",
+        description: "프로젝트 케이스의 마일스톤을 완료·진행·착수가능·차단·경로미확정으로 갈라 반환하고, 참조 제도 준비도를 집계합니다. 아티팩트 의존 그래프에서 결정적으로 계산하며 추정하지 않습니다.",
+        inputSchema: {
+          case_file: z.string().trim().max(200).describe("ontology/ 기준 상대경로. 프로젝트 케이스여야 합니다"),
+          case_id: z.string().trim().max(120).optional(),
+        },
+      },
+      async ({ case_file, case_id = null }) => {
+        const data = await loadOntologyCase({ caseFile: case_file, caseId: case_id || null });
+        if (!isProjectCase(data)) {
+          throw new ProjectCaseError("not_a_project_case", "프로젝트 케이스가 아닙니다.", {
+            case_file,
+            case_kind: data.case_kind ?? "institution",
+          });
+        }
+        return projectStatus(data);
+      },
+      (data) => `${data.project_name}: 완료 ${data.counts.done} / 진행 ${data.counts.in_progress} / 착수가능 ${data.counts.ready} / 차단 ${data.counts.blocked} / 경로미확정 ${data.counts.path_undetermined}`,
+    );
+
+    registerReadOnlyTool(
+      server,
+      "explain_blocked_milestone",
+      {
+        title: "마일스톤이 막힌 이유",
+        description: "특정 마일스톤을 막고 있는 아티팩트와 그것을 만들어야 하는 선행 마일스톤을 상류로 거슬러 반환합니다. 참조 제도 준비도도 함께 판정합니다.",
+        inputSchema: {
+          case_file: z.string().trim().max(200).describe("ontology/ 기준 상대경로. 프로젝트 케이스여야 합니다"),
+          node_id: z.string().trim().min(1).max(20).describe("마일스톤 ID(N02 등)"),
+          max_depth: z.number().int().min(1).max(12).default(6).describe("상류 추적 최대 깊이"),
+        },
+      },
+      async ({ case_file, node_id, max_depth = 6 }) => {
+        const data = await loadOntologyCase({ caseFile: case_file });
+        if (!isProjectCase(data)) {
+          throw new ProjectCaseError("not_a_project_case", "프로젝트 케이스가 아닙니다.", { case_file });
+        }
+        return explainBlocked(data, node_id, { maxDepth: max_depth });
+      },
+      (data) => data.milestone.openness === "blocked"
+        ? `${data.milestone.node_id}: 아티팩트 ${data.blocked_by.length}개가 막고 있고 상류 ${data.upstream_chain.length}개 마일스톤이 걸려 있습니다.`
+        : `${data.milestone.node_id}: 상태 ${data.milestone.openness}, 차단 아티팩트 ${data.blocked_by.length}개`,
     );
   }
 
