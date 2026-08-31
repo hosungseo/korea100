@@ -86,21 +86,56 @@ export function listActionPackets(caseData) {
   }));
 }
 
-function matchQuery(caseData, query) {
+/** 질의 유사도용 문자 바이그램. 한국어 조사 변형을 어느 정도 흡수한다. */
+function bigrams(text) {
+  const normalized = String(text ?? "").replace(/\s+/gu, "");
+  const grams = new Set();
+  for (let index = 0; index < normalized.length - 1; index += 1) {
+    grams.add(normalized.slice(index, index + 2));
+  }
+  return grams;
+}
+
+function similarity(a, b) {
+  const left = bigrams(a);
+  const right = bigrams(b);
+  if (left.size === 0 || right.size === 0) return 0;
+  let shared = 0;
+  for (const gram of left) if (right.has(gram)) shared += 1;
+  return shared / Math.min(left.size, right.size);
+}
+
+const STAGE_QUESTION = /어디|단계|상태|지금|진행/u;
+const MIN_SIMILARITY = 0.3;
+
+/**
+ * 케이스가 선언한 demo_queries 중 가장 가까운 것을 고른다.
+ * 제도별 어휘를 코드에 박지 않는다 — 케이스가 늘 때마다 이 함수를 고치게 되기 때문이다.
+ * 확신이 없으면 고르지 않는다. 엉뚱한 패킷을 주는 것이 아무것도 안 주는 것보다 나쁘다.
+ */
+export function matchQuery(caseData, query) {
   const q = String(query ?? "").trim();
-  if (!q) return caseData.demo_queries?.[0] ?? null;
-  const demos = caseData.demo_queries ?? [];
-  for (const d of demos) {
-    if (!d?.q) continue;
-    if (q.includes(d.q) || d.q.includes(q)) return d;
+  const demos = (caseData.demo_queries ?? []).filter((demo) => demo?.q);
+  if (demos.length === 0) return null;
+  if (!q) return { demo: demos[0], reason: "default" };
+
+  for (const demo of demos) {
+    if (q.includes(demo.q) || demo.q.includes(q)) return { demo, reason: "exact" };
   }
-  if (/부분공개|비공개|보완|이의|통지|뭐 하면/.test(q)) {
-    return demos.find((d) => /부분공개|뭐 하면/.test(d.q ?? "")) ?? demos[0] ?? null;
+
+  const scored = demos
+    .map((demo) => ({ demo, score: similarity(q, demo.q) }))
+    .sort((a, b) => b.score - a.score);
+  if (scored[0].score >= MIN_SIMILARITY) {
+    return { demo: scored[0].demo, reason: "similar", score: scored[0].score };
   }
-  if (/어디|단계|상태|지금/.test(q)) {
-    return demos.find((d) => /단계|어디/.test(d.q ?? "")) ?? null;
+
+  // 단계·상태를 묻는 질문은 상태 응답을 가진 데모로 보낸다.
+  if (STAGE_QUESTION.test(q)) {
+    const stageDemo = demos.find((demo) => demo.resolve?.done || demo.resolve?.ready);
+    if (stageDemo) return { demo: stageDemo, reason: "stage-question" };
   }
-  return demos[0] ?? null;
+  return null;
 }
 
 export function getActionPacket(caseData, packetId) {
@@ -171,14 +206,33 @@ export function ontologyPacketToMcpEnvelope(caseData, packet, { query = null } =
 }
 
 export function queryCase(caseData, query) {
-  const matched = matchQuery(caseData, query);
+  const match = matchQuery(caseData, query);
   const state = getCaseState(caseData);
+
+  if (!match) {
+    // 어느 상황을 묻는지 확신할 수 없으면 패킷을 만들지 않고 되묻는다.
+    return {
+      mode: "case_needs_disambiguation",
+      query,
+      matched_demo: null,
+      state,
+      candidates: (caseData.demo_queries ?? []).map((demo) => ({
+        q: demo.q,
+        action_packet: demo.resolve?.action_packet ?? null,
+      })),
+      note: "이 케이스가 답할 수 있는 상황과 질문이 충분히 가깝지 않습니다. 후보 중 하나를 골라 다시 물어보세요.",
+      execution_allowed: false,
+    };
+  }
+
+  const matched = match.demo;
 
   if (matched?.resolve && !matched.resolve.action_packet && (matched.resolve.done || matched.resolve.ready)) {
     return {
       mode: "case_state",
       query,
       matched_demo: matched?.q ?? null,
+      match_reason: match.reason,
       state,
       resolve: matched.resolve,
       execution_allowed: false,
@@ -199,6 +253,7 @@ export function queryCase(caseData, query) {
     mode: "case_action_packet",
     query,
     matched_demo: matched?.q ?? null,
+    match_reason: match.reason,
     state,
     rules_fired: matched?.resolve?.rules_fired ?? envelope.ontology.rules_referenced,
     packet: envelope,

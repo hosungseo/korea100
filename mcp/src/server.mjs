@@ -281,9 +281,15 @@ export function createAdministrativeProcedureMcpServer(service, { ontologyEnable
         }
         return { ...result, linkage };
       },
-      (data) => data.mode === "case_action_packet"
-        ? `케이스 패킷 ${data.packet.packet_id} (제도 대조 ${data.linkage.status}, execution_allowed=false)`
-        : `케이스 상태 조회 (${data.state?.case_state ?? "unknown"})`,
+      (data) => {
+        if (data.mode === "case_action_packet") {
+          return `케이스 패킷 ${data.packet.packet_id} (제도 대조 ${data.linkage.status}, execution_allowed=false)`;
+        }
+        if (data.mode === "case_needs_disambiguation") {
+          return `어떤 상황인지 확정하지 못했습니다. 후보 ${data.candidates.length}개를 되묻습니다.`;
+        }
+        return `케이스 상태 조회 (${data.state?.case_state ?? "unknown"})`;
+      },
     );
 
     registerReadOnlyTool(

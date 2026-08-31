@@ -36,8 +36,20 @@ Korea100의 업무구조도를 AI 에이전트가 질의할 수 있는 **읽기 
 
 `query_case`는 매번 케이스를 제도 업무구조도와 대조한다(`src/case-link.mjs`). 케이스가
 제도에 없는 단계·연결선을 가리키거나 제도 준비도가 R2에 못 미치면 그 사유가 패킷의
-`risks`로 들어간다. 지금 샘플 케이스의 제도(정보공개청구)는 R1이므로 다음 행동 자동
-계산 대상이 아니다.
+`risks`로 들어간다. 샘플 케이스는 2건이다.
+
+| 케이스 파일 | 제도 | 준비도 | 다음 행동 계산 |
+|---|---|---|---|
+| `samples/information-disclosure.case.json` (기본) | 정보공개청구 | R1 | 불가 |
+| `samples/administrative-fine-pre-notice.case.json` | 과태료 사전통지·의견제출 | R2 | 가능 |
+
+질의가 케이스의 데모 질문과 충분히 가깝지 않으면 패킷을 만들지 않고
+`case_needs_disambiguation`으로 후보를 되묻는다.
+
+```bash
+node scripts/ontology-query-once.mjs --case samples/administrative-fine-pre-notice.case.json \
+  "과태료 사전통지 받았는데 뭐 해야 해?"
+```
 
 `get_next_actions`는 복수 분기에서 조건을 임의로 선택하지 않는다. 조건이 없거나 `승인`처럼 여러 경로에 걸치는 표현이면 `decision_required: true`와 모든 후보를 반환한다.
 

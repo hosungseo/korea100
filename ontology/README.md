@@ -6,14 +6,30 @@
 
 ## 파일
 - `core-schema.json` — 5타입 코어 스키마
-- `samples/information-disclosure.case.json` — **정보공개청구** 샘플 1건
+- `samples/information-disclosure.case.json` — **정보공개청구** 샘플 1호 (제도 R1)
+- `samples/administrative-fine-pre-notice.case.json` — **과태료 사전통지·의견제출** 샘플 2호 (제도 R2)
+- `scripts/derive-case.mjs` — 제도 업무구조도 → 케이스 구조 층 파생
 - `scripts/demo_query.py` — 샘플 질의 데모
 
+## 구조 층은 파생물이다
+케이스의 Step/Gate/System 엔티티와 sequence·message·loop 관계는 제도 그래프의 투영이다.
+손으로 옮겨 적으면 옮겨 적는 순간부터 어긋난다.
+
+```bash
+node ontology/scripts/derive-case.mjs --slug <제도 slug> --case-id <ID> --as-of <YYYY-MM-DD>
+```
+
+파생 규칙(노드 유형 → 엔티티 유형, 신뢰도 0.8 미만 → `unverified`)은 1호 손작성 케이스에서
+역으로 읽어낸 것이고, `mcp/test/derive-case.test.mjs`가 파생 결과와 1호의 구조 층이
+같은지 검사한다. 사람이 쓰는 것은 사건 고유 층(Case/Decision/Document/State/Rule/ActionPacket)뿐이다.
+
 ## 샘플 사안
-- 제도: 정보공개청구 (`information-disclosure`)
-- 케이스: `IDC-2026-0901-001`
-- 상태: 2026-08-28 부분공개 통지 후, 이의신청 전
-- as_of: 2026-09-01
+**1호** 정보공개청구 (`information-disclosure`) — 케이스 `IDC-2026-0901-001`.
+2026-08-28 부분공개 통지 후, 이의신청 전. as_of 2026-09-01.
+
+**2호** 과태료 사전통지·의견제출 (`administrative-fine-pre-notice-opinion`) — 케이스 `AFN-2026-0901-001`.
+2026-08-27 사전통지 수령, 의견 제출 기한 2026-09-08까지 열려 있음. as_of 2026-09-01.
+당사자용·행정청용 패킷을 각각 낸다 → [DEMO](samples/administrative-fine-pre-notice.DEMO.md)
 
 ## Before → After
 **Before (맵만):** "정보공개는 청구→결정→불복 구조입니다…" (장문 설명)
@@ -31,8 +47,8 @@ python3 ontology/scripts/demo_query.py "부분공개 통지 왔는데 뭐 하면
 ```
 
 ## 다음
-- 같은 스키마로 환평/예타 중 1개 추가
-- MCP `create_action_packet` 출력을 이 JSON 형태로 고정
+- 정보공개청구 R2 승격(전이 수동 대조 26건 + 기한 성격 정밀화 10건 + 신뢰도 3건)
+- 남은 R2 제도 2종에 케이스 추가 (과태료 이의제기·법원재판, 국가연구개발비 정산)
 
 
 ## MCP 연계
@@ -41,21 +57,22 @@ python3 ontology/scripts/demo_query.py "부분공개 통지 왔는데 뭐 하면
 - MCP 도구: `load_ontology_case`, `get_case_state`, `query_case`, `check_case_linkage`
 - 패킷 계약: `mcp/src/packet-contract.mjs` — R2 경로(`create_action_packet`)와 온톨로지 경로가 같은 ActionPacket 계약을 통과해야 한다
 - 케이스 대조: `mcp/src/case-link.mjs` — 케이스 그래프가 제도 업무구조도와 어긋나면 드러낸다
-- 테스트: `cd mcp && npm test` (36건)
-- 데모: `node mcp/scripts/ontology-query-once.mjs`
+- 테스트: `cd mcp && npm test` (47건)
+- 데모: `node mcp/scripts/ontology-query-once.mjs [--case samples/<파일>] "<질문>"`
 
 ## 제도 층과의 관계
-케이스는 제도 업무구조도의 투영이다. 샘플 케이스는 `information-disclosure`의
-17개 노드·26개 엣지와 1:1로 대응하고, 매 질의마다 그 대응이 검사된다.
+케이스는 제도 업무구조도의 투영이다. 1호는 17개 노드·26개 엣지, 2호는 10개 노드·11개 엣지와
+1:1로 대응하고, 매 질의마다 그 대응이 검사된다.
 
 준비도는 `web/data/institutions/*.json`의 `process.agent_readiness`에 있다
 (생성 `web/scripts/generate-agent-readiness-showcase.mjs`, 법제처 대조
 `LAW_OC=... AGENT_VERIFY_DATE=... node web/scripts/verify-agent-readiness-showcase.mjs`).
 
-| 제도 | 등급 | 뜻 |
-|---|---|---|
-| 과태료 사전통지·의견제출 외 2종 | R2 (next-action) | 다음 행동 후보 계산 허용 |
-| 정보공개청구 | R1 (reference-only) | 케이스 패킷은 참고용, 다음 행동 자동 계산 금지 |
+| 제도 | 등급 | 케이스 | `next_action_allowed` |
+|---|---|---|---|
+| 과태료 사전통지·의견제출 | R2 (next-action) | 2호 | true |
+| 과태료 이의제기·법원재판, 국가연구개발비 정산 | R2 (next-action) | 없음 | — |
+| 정보공개청구 | R1 (reference-only) | 1호 | false |
 
 R1인 이유는 조문이 틀려서가 아니다(30/30 현행 대조 통과). 신뢰도 0.8 미만 노드 3개,
 기한 성격 재확인 10개, 전이 수동 대조 미완료가 남아서다. 그 사유는 데이터에

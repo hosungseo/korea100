@@ -36,8 +36,13 @@
 거짓이면 그 사유가 `query_case` 패킷의 `risks`로 들어간다. 등급이 모자란 제도의
 케이스가 다음 행동을 확정한 것처럼 보이지 않게 하려는 것이다.
 
-현재 정보공개청구는 **R1(reference-only)** — 조문 30/30 현행 대조는 통과했지만
-신뢰도 0.8 미만 3개·기한 성격 재확인 10개·전이 수동 대조 미완료가 남아 있다.
+| 케이스 | 제도 | 준비도 | `next_action_allowed` |
+|---|---|---|---|
+| 1호 `IDC-2026-0901-001` | 정보공개청구 | R1 | false |
+| 2호 `AFN-2026-0901-001` | 과태료 사전통지·의견제출 | R2 | true |
+
+정보공개청구가 R1인 것은 조문 때문이 아니다(30/30 현행 대조 통과). 신뢰도 0.8 미만 3개·
+기한 성격 재확인 10개·전이 수동 대조 미완료가 남아서다.
 
 ## 계약 강제 지점
 
@@ -83,9 +88,25 @@ ActionPacket 모양으로 정규화하고, 계약 위반이면 응답 대신 오
 - `auto_execute` / `execution_allowed` == false
 
 ```bash
-cd mcp && npm test   # 36건: 서비스·프로토콜·온톨로지·패킷 계약·케이스 대조
+cd mcp && npm test   # 47건
 ```
 
 - `test/packet-contract.test.mjs` — 두 경로가 같은 계약·같은 키 집합을 내는지
-- `test/case-link.test.mjs` — 샘플 케이스 17단계·26관계가 제도와 1:1인지, 어긋남 3종을 잡는지
+- `test/case-link.test.mjs` — 1호 케이스 17단계·26관계가 제도와 1:1인지, 어긋남 3종을 잡는지
+- `test/derive-case.test.mjs` — 파생기가 1호의 구조 층을 그대로 재현하는지
+- `test/case-fine-pre-notice.test.mjs` — 2호(R2)에서 `next_action_allowed`가 참인지, 확신 없으면 되묻는지
 - `test/protocol.test.mjs` — stdio로 도구 10개 공개, `query_case`·`check_case_linkage` 실물 호출
+
+## 질의 매칭
+
+`query_case`는 케이스가 선언한 `demo_queries` 중 가장 가까운 것을 고른다. 제도별 어휘를
+코드에 두지 않는다 — 케이스가 늘 때마다 매처를 고치게 되기 때문이다.
+
+| 단계 | 판정 | `match_reason` |
+|---|---|---|
+| 부분 문자열 일치 | 채택 | `exact` |
+| 문자 바이그램 유사도 ≥ 0.3 | 채택 | `similar` |
+| "어디/단계/상태/지금/진행" 질문 | 상태 데모로 | `stage-question` |
+| 그 외 | **고르지 않는다** | `case_needs_disambiguation` + 후보 목록 |
+
+마지막 줄이 핵심이다. 엉뚱한 패킷을 주는 것이 아무것도 안 주는 것보다 나쁘다.

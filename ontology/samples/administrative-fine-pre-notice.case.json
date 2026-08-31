@@ -1,0 +1,892 @@
+{
+ "ontology_version": "korea100.ontology.core.v0",
+ "institution_slug": "administrative-fine-pre-notice-opinion",
+ "institution_name": "과태료 사전통지·의견제출",
+ "case_id": "AFN-2026-0901-001",
+ "as_of": "2026-09-01",
+ "source_institution_json": "web/data/institutions/administrative-fine-pre-notice-opinion.json",
+ "derivation": {
+  "generator": "ontology/scripts/derive-case.mjs",
+  "derived_layers": [
+   "Step/Gate/System 엔티티",
+   "sequence/message/loop 관계",
+   "Role·Statute 자리표시"
+  ],
+  "authored_layers": [
+   "Case",
+   "Decision",
+   "Document",
+   "State",
+   "Rule",
+   "ActionPacket",
+   "demo_queries"
+  ],
+  "institution_readiness": {
+   "level": "R2",
+   "mode": "next-action",
+   "assessed_at": "2026-09-01"
+  },
+  "node_count": 10,
+  "edge_count": 11
+ },
+ "entities": [
+  {
+   "id": "case:AFN-2026-0901-001",
+   "type": "Case",
+   "label": "샘플 과태료 사전통지 건",
+   "status": "verified",
+   "attrs": {
+    "scenario": "사전통지서를 받고 의견 제출 기한이 남아 있는 상태",
+    "violation_ended_on": "2026-07-10",
+    "pre_notice_sent_on": "2026-08-25",
+    "pre_notice_received_on": "2026-08-27",
+    "opinion_due_on": "2026-09-08"
+   }
+  },
+  {
+   "id": "inst:levying-agency-B",
+   "type": "Institution",
+   "label": "B부과 행정청(샘플)",
+   "status": "verified",
+   "attrs": {
+    "note": "데모용 가상 기관. 실제 기관명 아님."
+   }
+  },
+  {
+   "id": "doc:pre-notice",
+   "type": "Document",
+   "label": "과태료 사전통지서",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "질서위반행위규제법",
+     "article": "제16조제1항",
+     "text": "행정청은 미리 당사자에게 대통령령으로 정하는 사항을 통지하고, 10일 이상의 기간을 정하여 의견을 제출할 기회를 주어야 한다."
+    }
+   ]
+  },
+  {
+   "id": "doc:opinion-submission",
+   "type": "Document",
+   "label": "의견서·증빙자료",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "질서위반행위규제법",
+     "article": "제16조제2항",
+     "text": "당사자는 의견 제출 기한 이내에 대통령령으로 정하는 방법에 따라 행정청에 의견을 진술하거나 필요한 자료를 제출할 수 있다."
+    }
+   ]
+  },
+  {
+   "id": "doc:fine-notice",
+   "type": "Document",
+   "label": "과태료 부과서",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "질서위반행위규제법",
+     "article": "제17조",
+     "text": "행정청은 제16조의 의견 제출 절차를 마친 후에 서면으로 과태료를 부과하여야 하며, 서면에는 질서위반행위와 과태료 금액 등을 명시하여야 한다."
+    }
+   ]
+  },
+  {
+   "id": "item:alleged-violation",
+   "type": "InformationItem",
+   "label": "사전통지서에 적힌 질서위반행위 사실·적용 법조",
+   "status": "verified",
+   "attrs": {
+    "note": "당사자가 다툴 대상. 사실관계와 적용 조문을 나눠 확인한다."
+   }
+  },
+  {
+   "id": "statute:order-violation-act",
+   "type": "Statute",
+   "label": "질서위반행위규제법",
+   "status": "verified",
+   "attrs": {
+    "lawId": "010592",
+    "adminRuleId": null,
+    "kind": "법률",
+    "url": "https://law.go.kr/법령/질서위반행위규제법",
+    "effectiveOn": "2021-01-01"
+   }
+  },
+  {
+   "id": "role:party",
+   "type": "Role",
+   "label": "당사자·고용주등",
+   "status": "verified",
+   "attrs": {
+    "lane": "당사자·고용주등"
+   }
+  },
+  {
+   "id": "role:levying-agency",
+   "type": "Role",
+   "label": "부과 행정청",
+   "status": "verified",
+   "attrs": {
+    "lane": "부과 행정청"
+   }
+  },
+  {
+   "id": "step:P01",
+   "type": "Step",
+   "label": "질서위반행위·종료일 확인",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "질서위반행위규제법",
+     "article": "제6조",
+     "text": "질서위반행위규제법 제6조에 따른 질서위반행위·종료일 확인"
+    },
+    {
+     "law": "질서위반행위규제법",
+     "article": "제7조",
+     "text": "질서위반행위규제법 제7조에 따른 질서위반행위·종료일 확인"
+    }
+   ],
+   "attrs": {
+    "process_id": "P01",
+    "lane": "부과 행정청",
+    "stage": "G0 위반·기간",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "부과 행정청",
+    "output_documents": [
+     "조사·부과 전제 기록"
+    ]
+   }
+  },
+  {
+   "id": "step:P02",
+   "type": "Step",
+   "label": "과태료 산정·시효·제척기간 검토",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "질서위반행위규제법",
+     "article": "제14조",
+     "text": "질서위반행위규제법 제14조에 따른 과태료 산정·시효·제척기간 검토"
+    },
+    {
+     "law": "질서위반행위규제법",
+     "article": "제15조",
+     "text": "질서위반행위규제법 제15조에 따른 과태료 산정·시효·제척기간 검토"
+    },
+    {
+     "law": "질서위반행위규제법",
+     "article": "제19조",
+     "text": "질서위반행위규제법 제19조에 따른 과태료 산정·시효·제척기간 검토"
+    }
+   ],
+   "attrs": {
+    "process_id": "P02",
+    "lane": "부과 행정청",
+    "stage": "G0 위반·기간",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "부과 행정청",
+    "output_documents": [
+     "기간·산정 검토표"
+    ]
+   }
+  },
+  {
+   "id": "step:P03",
+   "type": "Step",
+   "label": "사전통지 작성·발송",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "질서위반행위규제법",
+     "article": "제16조",
+     "text": "질서위반행위규제법 제16조에 따른 사전통지 작성·발송"
+    }
+   ],
+   "attrs": {
+    "process_id": "P03",
+    "lane": "부과 행정청",
+    "stage": "G1 사전통지",
+    "node_type": "task",
+    "deadline": "의견 제출 기간은 10일 이상",
+    "actor": "부과 행정청",
+    "output_documents": [
+     "사전통지서"
+    ]
+   }
+  },
+  {
+   "id": "step:P04",
+   "type": "Step",
+   "label": "사전통지 수령·제출기간 확인",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "질서위반행위규제법",
+     "article": "제16조",
+     "text": "질서위반행위규제법 제16조에 따른 사전통지 수령·제출기간 확인"
+    }
+   ],
+   "attrs": {
+    "process_id": "P04",
+    "lane": "당사자·고용주등",
+    "stage": "G1 사전통지",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "당사자·고용주등",
+    "output_documents": [
+     "송달·수령 기록"
+    ]
+   }
+  },
+  {
+   "id": "step:P05",
+   "type": "Step",
+   "label": "의견·자료 제출",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "질서위반행위규제법",
+     "article": "제16조",
+     "text": "질서위반행위규제법 제16조에 따른 의견·자료 제출"
+    }
+   ],
+   "attrs": {
+    "process_id": "P05",
+    "lane": "당사자·고용주등",
+    "stage": "G2 의견·자료",
+    "node_type": "task",
+    "deadline": "사전통지서가 정한 기간(10일 이상)",
+    "actor": "당사자·고용주등",
+    "output_documents": [
+     "의견서·증빙자료"
+    ]
+   }
+  },
+  {
+   "id": "step:P06",
+   "type": "Step",
+   "label": "제출 의견·자료 검토",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "질서위반행위규제법",
+     "article": "제16조",
+     "text": "질서위반행위규제법 제16조에 따른 제출 의견·자료 검토"
+    }
+   ],
+   "attrs": {
+    "process_id": "P06",
+    "lane": "부과 행정청",
+    "stage": "G2 의견·자료",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "부과 행정청",
+    "output_documents": [
+     "의견 검토기록"
+    ]
+   }
+  },
+  {
+   "id": "step:P07",
+   "type": "Gate",
+   "label": "제출 의견의 상당한 이유 판단",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "질서위반행위규제법",
+     "article": "제16조",
+     "text": "질서위반행위규제법 제16조에 따른 제출 의견의 상당한 이유 판단"
+    }
+   ],
+   "attrs": {
+    "process_id": "P07",
+    "lane": "부과 행정청",
+    "stage": "G2 의견·자료",
+    "node_type": "gateway",
+    "deadline": null,
+    "actor": "부과 행정청",
+    "output_documents": [
+     "부과 판단 기록"
+    ]
+   }
+  },
+  {
+   "id": "step:P08",
+   "type": "Step",
+   "label": "미부과 또는 통지 내용 변경 통지",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "질서위반행위규제법",
+     "article": "제16조",
+     "text": "질서위반행위규제법 제16조에 따른 미부과 또는 통지 내용 변경 통지"
+    }
+   ],
+   "attrs": {
+    "process_id": "P08",
+    "lane": "부과 행정청",
+    "stage": "G3 부과·통지",
+    "node_type": "notice",
+    "deadline": null,
+    "actor": "부과 행정청",
+    "output_documents": [
+     "미부과·변경 결과통지"
+    ]
+   }
+  },
+  {
+   "id": "step:P09",
+   "type": "Step",
+   "label": "과태료 부과서 작성·통지",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "질서위반행위규제법",
+     "article": "제17조",
+     "text": "질서위반행위규제법 제17조에 따른 과태료 부과서 작성·통지"
+    }
+   ],
+   "attrs": {
+    "process_id": "P09",
+    "lane": "부과 행정청",
+    "stage": "G3 부과·통지",
+    "node_type": "notice",
+    "deadline": "부과서에 기재된 납부기한",
+    "actor": "부과 행정청",
+    "output_documents": [
+     "과태료 부과서"
+    ]
+   }
+  },
+  {
+   "id": "step:P10",
+   "type": "Step",
+   "label": "결과 수령·납부 또는 이의제기 선택",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "질서위반행위규제법",
+     "article": "제17조",
+     "text": "질서위반행위규제법 제17조에 따른 결과 수령·납부 또는 이의제기 선택"
+    },
+    {
+     "law": "질서위반행위규제법",
+     "article": "제20조",
+     "text": "질서위반행위규제법 제20조에 따른 결과 수령·납부 또는 이의제기 선택"
+    }
+   ],
+   "attrs": {
+    "process_id": "P10",
+    "lane": "당사자·고용주등",
+    "stage": "G4 종료·불복",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "당사자·고용주등",
+    "output_documents": [
+     "수령 확인·납부 또는 이의제기 자료"
+    ]
+   }
+  }
+ ],
+ "relations": [
+  {
+   "id": "R-E01",
+   "type": "sequence",
+   "from": "step:P01",
+   "to": "step:P02",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E02",
+   "type": "sequence",
+   "from": "step:P02",
+   "to": "step:P03",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-M01",
+   "type": "message",
+   "from": "step:P03",
+   "to": "step:P04",
+   "label": "사전통지서",
+   "condition": "사전통지서"
+  },
+  {
+   "id": "R-E03",
+   "type": "sequence",
+   "from": "step:P04",
+   "to": "step:P05",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-M02",
+   "type": "message",
+   "from": "step:P05",
+   "to": "step:P06",
+   "label": "의견서·증빙자료",
+   "condition": "의견서·증빙자료"
+  },
+  {
+   "id": "R-E04",
+   "type": "sequence",
+   "from": "step:P06",
+   "to": "step:P07",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E05",
+   "type": "sequence",
+   "from": "step:P07",
+   "to": "step:P08",
+   "label": "상당한 이유 있음",
+   "condition": "상당한 이유 있음"
+  },
+  {
+   "id": "R-E06",
+   "type": "sequence",
+   "from": "step:P07",
+   "to": "step:P09",
+   "label": "상당한 이유 없음",
+   "condition": "상당한 이유 없음"
+  },
+  {
+   "id": "R-E07",
+   "type": "sequence",
+   "from": "step:P04",
+   "to": "step:P09",
+   "label": "기한 내 의견 없음",
+   "condition": "기한 내 의견 없음"
+  },
+  {
+   "id": "R-M03",
+   "type": "message",
+   "from": "step:P08",
+   "to": "step:P10",
+   "label": "변경·미부과 통지",
+   "condition": "변경·미부과 통지"
+  },
+  {
+   "id": "R-M04",
+   "type": "message",
+   "from": "step:P09",
+   "to": "step:P10",
+   "label": "과태료 부과서",
+   "condition": "과태료 부과서"
+  },
+  {
+   "id": "R-about",
+   "type": "about",
+   "from": "case:AFN-2026-0901-001",
+   "to": "item:alleged-violation",
+   "label": "이 건이 다투는 대상",
+   "condition": null
+  },
+  {
+   "id": "R-owns",
+   "type": "owns",
+   "from": "inst:levying-agency-B",
+   "to": "doc:pre-notice",
+   "label": "발송 주체",
+   "condition": null
+  },
+  {
+   "id": "R-notifies",
+   "type": "notifies",
+   "from": "inst:levying-agency-B",
+   "to": "role:party",
+   "label": "사전통지 송달",
+   "condition": null
+  },
+  {
+   "id": "R-requires",
+   "type": "requires",
+   "from": "step:P05",
+   "to": "doc:opinion-submission",
+   "label": "의견 제출에 필요한 문서",
+   "condition": null
+  },
+  {
+   "id": "R-decides",
+   "type": "decides",
+   "from": "role:levying-agency",
+   "to": "doc:fine-notice",
+   "label": "의견 절차 종료 후 부과",
+   "condition": null
+  },
+  {
+   "id": "R-cites",
+   "type": "cites",
+   "from": "doc:pre-notice",
+   "to": "statute:order-violation-act",
+   "label": "법 제16조",
+   "condition": null
+  }
+ ],
+ "states": [
+  {
+   "id": "S-case",
+   "entity_id": "case:AFN-2026-0901-001",
+   "state": "pre_notice_received_opinion_open",
+   "as_of": "2026-08-27",
+   "evidence": {
+    "kind": "user_asserted",
+    "source": "sample scenario",
+    "note": "사전통지 도달. 의견 제출 기한(2026-09-08) 이내."
+   }
+  },
+  {
+   "id": "S-pre-notice",
+   "entity_id": "doc:pre-notice",
+   "state": "served",
+   "as_of": "2026-08-27",
+   "evidence": {
+    "kind": "user_asserted",
+    "source": "sample scenario",
+    "note": "등기 수령"
+   }
+  },
+  {
+   "id": "S-opinion",
+   "entity_id": "doc:opinion-submission",
+   "state": "not_submitted",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "user_asserted",
+    "source": "sample scenario",
+    "note": "아직 제출 전"
+   }
+  },
+  {
+   "id": "S-p01",
+   "entity_id": "step:P01",
+   "state": "done",
+   "as_of": "2026-08-20",
+   "evidence": {
+    "kind": "user_asserted",
+    "source": "sample scenario"
+   }
+  },
+  {
+   "id": "S-p02",
+   "entity_id": "step:P02",
+   "state": "done",
+   "as_of": "2026-08-22",
+   "evidence": {
+    "kind": "user_asserted",
+    "source": "sample scenario"
+   }
+  },
+  {
+   "id": "S-p03",
+   "entity_id": "step:P03",
+   "state": "done",
+   "as_of": "2026-08-25",
+   "evidence": {
+    "kind": "user_asserted",
+    "source": "sample scenario",
+    "note": "사전통지서 발송"
+   }
+  },
+  {
+   "id": "S-p04",
+   "entity_id": "step:P04",
+   "state": "done",
+   "as_of": "2026-08-27",
+   "evidence": {
+    "kind": "user_asserted",
+    "source": "sample scenario",
+    "note": "수령·제출기간 확인"
+   }
+  },
+  {
+   "id": "S-p05",
+   "entity_id": "step:P05",
+   "state": "ready",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "user_asserted",
+    "source": "sample scenario",
+    "note": "의견 제출 기한 2026-09-08까지 열려 있음"
+   }
+  },
+  {
+   "id": "S-p09",
+   "entity_id": "step:P09",
+   "state": "available",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "user_asserted",
+    "source": "sample scenario",
+    "note": "기한 내 의견이 없으면 의견 없는 것으로 보고 부과로 진행(법 제16조제1항 후단)"
+   }
+  }
+ ],
+ "rules": [
+  {
+   "id": "rule:opinion-period-minimum",
+   "name": "의견 제출 기간 10일 이상",
+   "applies_to": [
+    "step:P03",
+    "doc:pre-notice"
+   ],
+   "inputs": [
+    "opinion_period_days"
+   ],
+   "predicate": "if opinion_period_days >= 10 then valid_pre_notice else defective_pre_notice",
+   "output": {
+    "pass": "valid_pre_notice",
+    "fail": "raise_defect_in_opinion"
+   },
+   "statute_ref": [
+    {
+     "law": "질서위반행위규제법",
+     "article": "제16조제1항"
+    }
+   ],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:silence-treated-as-no-opinion",
+   "name": "기한 내 의견 없으면 의견 없는 것으로 봄",
+   "applies_to": [
+    "step:P04",
+    "step:P05",
+    "case:AFN-2026-0901-001"
+   ],
+   "inputs": [
+    "opinion_due_on",
+    "opinion_submitted"
+   ],
+   "predicate": "if not opinion_submitted and today > opinion_due_on then treated_as_no_opinion else opinion_window_open",
+   "output": {
+    "next_steps": [
+     "step:P09"
+    ],
+    "lost": [
+     "step:P05",
+     "step:P07"
+    ]
+   },
+   "statute_ref": [
+    {
+     "law": "질서위반행위규제법",
+     "article": "제16조제1항"
+    }
+   ],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:substantial-reason-changes-outcome",
+   "name": "상당한 이유가 있으면 미부과 또는 통지 내용 변경",
+   "applies_to": [
+    "step:P06",
+    "step:P07"
+   ],
+   "inputs": [
+    "submitted_opinion",
+    "substantial_reason"
+   ],
+   "predicate": "if substantial_reason then no_fine_or_amended_notice else proceed_to_fine",
+   "output": {
+    "pass": [
+     "step:P08"
+    ],
+    "fail": [
+     "step:P09"
+    ]
+   },
+   "statute_ref": [
+    {
+     "law": "질서위반행위규제법",
+     "article": "제16조제3항"
+    }
+   ],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:limitation-five-years",
+   "name": "질서위반행위 종료일부터 5년 제척기간",
+   "applies_to": [
+    "step:P02"
+   ],
+   "inputs": [
+    "violation_ended_on"
+   ],
+   "predicate": "if years_since(violation_ended_on) >= 5 then cannot_impose else can_impose",
+   "output": {
+    "fail": "cannot_impose_fine"
+   },
+   "statute_ref": [
+    {
+     "law": "질서위반행위규제법",
+     "article": "제19조제1항"
+    }
+   ],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:objection-within-60days",
+   "name": "부과 통지를 받은 날부터 60일 이내 서면 이의제기",
+   "applies_to": [
+    "step:P10"
+   ],
+   "inputs": [
+    "fine_notice_received_on"
+   ],
+   "predicate": "if days_since(fine_notice_received_on) <= 60 then objection_available else objection_period_closed",
+   "output": {
+    "effect": "이의제기 시 부과처분의 효력 상실(법 제20조제2항)"
+   },
+   "statute_ref": [
+    {
+     "law": "질서위반행위규제법",
+     "article": "제20조제1항·제2항"
+    }
+   ],
+   "stop_if_unverified": true
+  }
+ ],
+ "action_packets": [
+  {
+   "id": "ap:party-after-pre-notice",
+   "title": "사전통지 수령 후 당사자 다음 행동",
+   "for_query": "과태료 사전통지 받았는데 뭐 해야 해?",
+   "actor": "role:party",
+   "why": "케이스 상태가 pre_notice_received_opinion_open 이고 의견 제출 기한이 남아 있다. rule:silence-treated-as-no-opinion 에 따라 기한을 넘기면 의견이 없는 것으로 보고 부과로 넘어간다.",
+   "based_on": [
+    "case:AFN-2026-0901-001",
+    "doc:pre-notice",
+    "S-case",
+    "S-p05",
+    "rule:opinion-period-minimum",
+    "rule:silence-treated-as-no-opinion",
+    "rule:limitation-five-years",
+    "step:P05"
+   ],
+   "checklist": [
+    "사전통지서에서 의견 제출 기한과 제출 방법을 먼저 확인한다 (기한이 10일 미만이면 그 자체를 의견서에 적는다)",
+    "통지서에 적힌 질서위반행위 사실과 적용 법조를 사실관계와 나눠 확인한다",
+    "다툴 쟁점을 정한다: 행위 자체 부인 / 고의·과실 없음 / 금액 산정 오류 / 제척기간 경과",
+    "질서위반행위 종료일부터 5년이 지났는지 계산한다 (법 제19조제1항)",
+    "의견서와 증빙자료를 기한 내에 제출한다 (법 제16조제2항)",
+    "제출 기한을 넘기면 의견이 없는 것으로 보고 부과로 진행된다는 점을 감안해 일정을 잡는다",
+    "부과서를 받은 뒤에도 60일 이내 서면 이의제기가 가능하다는 점을 함께 확인한다 (법 제20조제1항)"
+   ],
+   "evidence_needed": [
+    "과태료 사전통지서(수령일 확인 가능한 형태)",
+    "질서위반행위 종료일을 알 수 있는 자료",
+    "다투는 쟁점을 뒷받침할 증빙"
+   ],
+   "system_touchpoints": [
+    "사전통지서에 기재된 담당 부서·제출처"
+   ],
+   "human_signoff": "당사자 본인(또는 적법 대리인) 확인 후에만 의견서 제출",
+   "auto_execute": false,
+   "risks": [
+    "의견 제출 기한 도과 시 의견 진술 기회 상실 — 부과 단계로 바로 넘어간다",
+    "사실관계를 다투지 않고 금액만 다투면 쟁점이 좁아질 수 있다",
+    "개별 과태료의 부과권자·금액·감경기준은 근거 법령·조례를 따로 확인해야 한다"
+   ]
+  },
+  {
+   "id": "ap:agency-after-opinion",
+   "title": "의견 접수 후 부과 행정청 다음 행동",
+   "for_query": "의견서 들어왔는데 다음에 뭐 하지?",
+   "actor": "role:levying-agency",
+   "why": "의견이 제출되면 검토(step:P06)와 상당한 이유 판단(step:P07)을 거쳐야 부과 또는 미부과·변경으로 갈라진다. rule:substantial-reason-changes-outcome 이 그 분기를 연다.",
+   "based_on": [
+    "case:AFN-2026-0901-001",
+    "doc:opinion-submission",
+    "rule:substantial-reason-changes-outcome",
+    "rule:limitation-five-years",
+    "step:P06",
+    "step:P07",
+    "step:P08",
+    "step:P09"
+   ],
+   "checklist": [
+    "제출된 의견·자료를 기한 내 제출분으로 확인하고 검토기록을 남긴다 (step:P06)",
+    "의견에 상당한 이유가 있는지 판단하고 판단 근거를 기록한다 (법 제16조제3항)",
+    "상당한 이유가 있으면 미부과 또는 통지 내용 변경을 통지한다 (step:P08)",
+    "상당한 이유가 없으면 부과서에 질서위반행위와 금액 등을 명시해 서면으로 부과한다 (법 제17조)",
+    "부과 전 제척기간 5년 경과 여부를 다시 확인한다 (법 제19조제1항)",
+    "부과서에 이의제기 기간(통지받은 날부터 60일)을 안내한다 (법 제20조제1항)"
+   ],
+   "evidence_needed": [
+    "제출된 의견서·증빙자료와 접수일",
+    "상당한 이유 판단 기록",
+    "질서위반행위 종료일 및 제척기간 계산"
+   ],
+   "system_touchpoints": [
+    "기관 과태료 부과 시스템(기관별 상이)"
+   ],
+   "human_signoff": "권한 있는 부과 담당자·결재권자 확인 후에만 부과 또는 미부과 통지",
+   "auto_execute": false,
+   "risks": [
+    "상당한 이유 판단 근거를 남기지 않으면 이후 이의·재판 단계에서 다투기 어렵다",
+    "의견 제출 절차를 마치지 않은 부과는 법 제17조제1항 위반 소지"
+   ]
+  }
+ ],
+ "demo_queries": [
+  {
+   "q": "과태료 사전통지 받았는데 뭐 해야 해?",
+   "resolve": {
+    "identify": [
+     "case:AFN-2026-0901-001",
+     "doc:pre-notice"
+    ],
+    "state": "pre_notice_received_opinion_open",
+    "rules_fired": [
+     "rule:silence-treated-as-no-opinion",
+     "rule:opinion-period-minimum"
+    ],
+    "action_packet": "ap:party-after-pre-notice"
+   }
+  },
+  {
+   "q": "지금 이 건 어디 단계야?",
+   "resolve": {
+    "done": [
+     "step:P01",
+     "step:P02",
+     "step:P03",
+     "step:P04"
+    ],
+    "ready": [
+     "step:P05"
+    ],
+    "available": [
+     "step:P09"
+    ]
+   }
+  },
+  {
+   "q": "의견서 들어왔는데 다음에 뭐 하지?",
+   "resolve": {
+    "identify": [
+     "case:AFN-2026-0901-001",
+     "doc:opinion-submission"
+    ],
+    "rules_fired": [
+     "rule:substantial-reason-changes-outcome"
+    ],
+    "action_packet": "ap:agency-after-opinion"
+   }
+  }
+ ],
+ "notes": [
+  "샘플 기관·사안은 가상이다. 구조 층은 ontology/scripts/derive-case.mjs 가 제도 JSON에서 파생했다.",
+  "조문 인용은 2026-09-01 법제처 DRF 현행 원문(질서위반행위규제법, 2021-01-01 시행)에 대조했다.",
+  "auto_execute는 항상 false. 공공 온톨로지 액션 = 승인 패킷.",
+  "샘플 2호. 1호(정보공개청구)와 달리 제도 준비도가 R2라 다음 행동 계산이 허용된다."
+ ]
+}
