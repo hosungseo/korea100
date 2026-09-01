@@ -6,6 +6,11 @@ import { readFileSync, writeFileSync, mkdirSync, readdirSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  allMilestoneStatuses,
+  institutionReadinessFor,
+  pendingDecisions,
+} from "../../mcp/src/project-case.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 // 기본 프로젝트는 광주 — 이 프로젝트만 /warroom/map/ 루트에 쓴다(기존 URL 유지).
@@ -123,6 +128,33 @@ const tracksPath = join(root, `data/mega-projects/map-tracks/${projectId}.json`)
 const project = JSON.parse(readFileSync(srcPath, "utf8"));
 const tracks = JSON.parse(readFileSync(tracksPath, "utf8"));
 
+// ── 온톨로지 층 연결 ─────────────────────────────────────────────────────
+// 프로젝트 케이스(ontology/samples/*.case.json, case_kind=project)가 있으면
+// 준비도·개폐·미확정 갈림길을 지도에 싣는다. 없으면 조용히 생략한다 —
+// 케이스가 아직 없는 사업(북극항로 등)의 지도는 종전과 같아야 한다.
+function loadOntologyProjectCase(id) {
+  const dir = join(root, "..", "ontology", "samples");
+  try {
+    for (const f of readdirSync(dir)) {
+      if (!f.endsWith(".case.json")) continue;
+      const c = JSON.parse(readFileSync(join(dir, f), "utf8"));
+      if (c.case_kind === "project" && c.project_id === id) return c;
+    }
+  } catch { /* ontology 디렉터리가 없는 체크아웃도 있다 */ }
+  return null;
+}
+
+const ontCase = loadOntologyProjectCase(projectId);
+let ONT = null;
+if (ontCase) {
+  const statuses = allMilestoneStatuses(ontCase);
+  const byId = Object.fromEntries(statuses.map((s) => [s.node_id, s]));
+  const readiness = {};
+  for (const s of statuses) readiness[s.node_id] = institutionReadinessFor(ontCase, s.node_id);
+  ONT = { caseId: ontCase.case_id, asOf: ontCase.as_of, byId, readiness, decisions: pendingDecisions(ontCase) };
+  console.log(`ontology: ${ontCase.case_id} 연결 — 계산가능 관문 ${statuses.filter((s) => readiness[s.node_id]?.next_action_computable).length}개`);
+}
+
 const producers = new Map();
 for (const node of project.nodes) {
   for (const token of node.produces ?? []) {
@@ -234,9 +266,13 @@ function templateInfo(refs) {
       const procs = Array.isArray(ref.nodeIds)
         ? ref.nodeIds.length
         : inst.process?.nodes?.length ?? 0;
-      out.push({ slug: ref.institution, name: inst.name, procs, mapping: ref.mappingStatus ?? "linked" });
+      out.push({
+        slug: ref.institution, name: inst.name, procs,
+        mapping: ref.mappingStatus ?? "linked",
+        readiness: inst.process?.agent_readiness?.level ?? "unassessed",
+      });
     } catch {
-      out.push({ slug: ref.institution, name: ref.institution, procs: 0, mapping: "missing" });
+      out.push({ slug: ref.institution, name: ref.institution, procs: 0, mapping: "missing", readiness: "unassessed" });
     }
   }
   return out;
@@ -260,6 +296,22 @@ const nodes = project.nodes.map((n) => {
   confidence: n.confidence ?? "",
   note: n.note ?? "",
   completedOn: n.actual?.completedOn ?? "",
+  ...(ONT ? (() => {
+    const ont = ONT.byId[n.id];
+    const rd = ONT.readiness[n.id];
+    return {
+      openness: ont?.openness ?? null,
+      computable: rd?.next_action_computable ?? false,
+      r2Count: rd ? rd.referenced.filter((x) => x.readiness_level === "R2").length : 0,
+      refCount: rd ? rd.referenced.length : 0,
+      notReady: rd?.not_ready_slugs ?? [],
+      blockedBy: (ont?.blocked_by ?? []).map((b) => ({
+        artifact: b.artifact_label,
+        by: (b.produced_by ?? []).map((m) => String(m).replace("milestone:", "")),
+      })),
+      conflict: ont?.overlay_status_conflict ?? null,
+    };
+  })() : {}),
   };
 });
 
@@ -273,6 +325,19 @@ const data = {
   stages: project.stages,
   nodes,
   edges,
+  ontology: ONT ? {
+    caseId: ONT.caseId,
+    asOf: ONT.asOf,
+    decisions: ONT.decisions.undetermined_parameters.map((entry) => ({
+      parameter: entry.parameter,
+      reason: entry.reason,
+      gates: entry.gates.map((g) => ({ id: g.node_id, when: g.activates_when, label: g.label })),
+    })),
+    exclusive: ONT.decisions.exclusive_branches.map((b) => ({
+      parameter: b.parameter,
+      options: b.options.map((o) => ({ value: o.value, gate: o.milestone })),
+    })),
+  } : null,
 };
 
 // 관문별 내부 절차 체인 — templateRefs가 가리키는 제도 프로세스 노드를
@@ -394,6 +459,41 @@ const config = {
   scenarios: [
     { id: "all", label: "전체", html: `<div class="free">${allBlurb}</div>` },
     ...tracks.tracks,
+    // 온톨로지 층이 있으면 트랙 칩 두 개를 주입한다. nodes 모드 + html 내레이션.
+    ...(ONT ? (() => {
+      const out = [];
+      const computable = nodes.filter((n) => n.computable).map((n) => n.id);
+      if (computable.length) {
+        out.push({
+          id: "ont-ready",
+          label: "🧭 답 되는 관문",
+          nodes: computable,
+          html: `<p>참조 제도가 전부 <b>R2</b>(법제처 현행 원문 대조·전이 수동 대조 통과)로 검증되어
+온톨로지가 <b>다음 행동을 계산할 수 있는</b> 관문입니다. 여기를 클릭하면 실제 절차 단계·기한·근거 조문이 나옵니다.</p>
+<ol>${computable.map((id) => {
+            const n = nodes.find((x) => x.id === id);
+            return `<li data-nodes="${id}">${n.name} <span class="mono" style="color:var(--muted);font-size:9px">${id} · 제도 ${n.r2Count}/${n.refCount} R2</span></li>`;
+          }).join("")}</ol>
+<p style="color:var(--muted);font-size:10px">계산은 제안까지다 — 결재·접수·발송 권한 없음(execution_allowed=false).</p>`,
+        });
+      }
+      const pendingGates = [...new Set(ONT.decisions.undetermined_parameters.flatMap((e) => e.gates.map((g) => g.node_id)))];
+      if (pendingGates.length) {
+        out.push({
+          id: "ont-pending",
+          label: "⚖ 미확정 갈림길",
+          nodes: pendingGates,
+          html: `<p>사업이 아직 <b>정하지 않은 파라미터</b>가 여닫는 관문입니다. 제도 준비도와 별개의 축이며, 값이 정해지기 전까지 어느 쪽도 활성화되지 않습니다.</p>
+<ol>${ONT.decisions.undetermined_parameters.filter((e) => e.gates.length).map((e) =>
+            `<li data-nodes="${e.gates.map((g) => g.node_id).join(",")}">${e.parameter} — ${e.reason ?? ""} <span class="mono" style="color:var(--muted);font-size:9px">${e.gates.map((g) => `${g.when === true ? "true" : g.when}→${g.node_id}`).join(" · ")}</span></li>`,
+          ).join("")}</ol>
+${ONT.decisions.exclusive_branches.length ? `<p><b>배타 분기:</b> ${ONT.decisions.exclusive_branches.map((b) =>
+            `${b.parameter} → ${b.options.map((o) => `${o.value}:${o.milestone}`).join(" | ")}`).join(" · ")} — 둘 중 하나만 활성화됩니다.</p>` : ""}
+<p style="color:var(--muted);font-size:10px">무엇을 고를지는 말하지 않는다. 고를 것이 무엇인지만 보여준다.</p>`,
+        });
+      }
+      return out;
+    })() : []),
   ],
 };
 

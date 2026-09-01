@@ -310,6 +310,30 @@
    "id": "signals",
    "label": "📡 신호",
    "signals": true
+  },
+  {
+   "id": "ont-ready",
+   "label": "🧭 답 되는 관문",
+   "nodes": [
+    "N02",
+    "N03",
+    "N19",
+    "N20",
+    "N23"
+   ],
+   "html": "<p>참조 제도가 전부 <b>R2</b>(법제처 현행 원문 대조·전이 수동 대조 통과)로 검증되어\n온톨로지가 <b>다음 행동을 계산할 수 있는</b> 관문입니다. 여기를 클릭하면 실제 절차 단계·기한·근거 조문이 나옵니다.</p>\n<ol><li data-nodes=\"N02\">통합 추진체계·재정심사·예타·마스터 일정 수립 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">N02 · 제도 4/4 R2</span></li><li data-nodes=\"N03\">반도체클러스터 지정 신청·심의·지정 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">N03 · 제도 2/2 R2</span></li><li data-nodes=\"N19\">정식 전력계통영향평가·공급가능성 검토 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">N19 · 제도 1/1 R2</span></li><li data-nodes=\"N20\">계통영향평가 면제·예타특례·반도체 신속처리 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">N20 · 제도 4/4 R2</span></li><li data-nodes=\"N23\">공업용수·공공폐수·접근도로 수요·공급계획 확정 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">N23 · 제도 6/6 R2</span></li></ol>\n<p style=\"color:var(--muted);font-size:10px\">계산은 제안까지다 — 결재·접수·발송 권한 없음(execution_allowed=false).</p>"
+  },
+  {
+   "id": "ont-pending",
+   "label": "⚖ 미확정 갈림길",
+   "nodes": [
+    "N13",
+    "N16",
+    "N19",
+    "N20",
+    "N46"
+   ],
+   "html": "<p>사업이 아직 <b>정하지 않은 파라미터</b>가 여닫는 관문입니다. 제도 준비도와 별개의 축이며, 값이 정해지기 전까지 어느 쪽도 활성화되지 않습니다.</p>\n<ol><li data-nodes=\"N13\">heritageImpactDiagnosisRequired — 확정 사업구역과 국가유산·매장유산 현황을 대조해야 함 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">undefined→N13</span></li><li data-nodes=\"N16\">privateLandCompensationRequired — 공식 사업구역 경계와 종전부지 밖 사유지 편입 여부가 공개되지 않음 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">undefined→N16</span></li><li data-nodes=\"N19,N20\">gridPath — 정식 전력계통영향평가, 국가첨단전략산업 면제 의결 또는 별도 신속검토 중 적용 경로 미확정 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">undefined→N19 · undefined→N20</span></li><li data-nodes=\"N46\">hazardousFacilityPermitsRequired — 팹별 위험물 지정수량·고압가스 종류와 저장·처리능력, 시설배치가 공개되지 않아 허가·검사 적용범위를 확정할 수 없음 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">undefined→N46</span></li></ol>\n<p><b>배타 분기:</b> gridPath → formal-assessment:N19 | exempt-or-expedited:N20 — 둘 중 하나만 활성화됩니다.</p>\n<p style=\"color:var(--muted);font-size:10px\">무엇을 고를지는 말하지 않는다. 고를 것이 무엇인지만 보여준다.</p>"
   }
  ]
 }

@@ -428,6 +428,11 @@ body.mode-risk #narration ol li::before { border-color: var(--rose); color: var(
 }
 #zoomctl button:hover { color: var(--cyan); border-color: var(--cyan); }
 
+/* 온톨로지 층 — 다음 행동 계산 가능 관문 */
+.node.ont-ok { box-shadow: inset 0 0 0 1px rgba(56,198,244,0.4); }
+.ontb { margin-left: 4px; font-size: 9px; }
+.r2b { font-family: var(--mono); font-size: 8px; color: #04121c; background: var(--cyan); border-radius: 3px; padding: 0 3px; margin-left: 2px; vertical-align: 1px; }
+.unrb { font-family: var(--mono); font-size: 8px; color: var(--muted); border: 1px solid rgba(95,123,144,0.5); border-radius: 3px; padding: 0 3px; margin-left: 2px; vertical-align: 1px; }
 .chip:focus-visible, .cbtn:focus-visible, #zoomctl button:focus-visible, .links a:focus-visible {
   outline: 2px solid var(--cyan); outline-offset: 2px;
 }
@@ -530,6 +535,8 @@ let LAYOUT = {};
 let CANVAS_W = 1720, CANVAS_H = 1190;
 
 const STATUS_KO = { completed: "완료", active: "진행중", planned: "예정", unknown: "미확정" };
+// 온톨로지 개폐 판정(아티팩트 의존 그래프에서 결정적 계산 — 오버레이 status와 별개 축)
+const OPEN_KO = { done: "완료", in_progress: "진행", ready: "착수 가능", blocked: "차단", path_undetermined: "경로 미확정" };
 // 계층 칩은 config.json에서 온다 — 프로젝트마다 실제 존재하는 급만 남는다
 let LEVELS = [];
 let LEVEL_KO = {};
@@ -636,10 +643,10 @@ function build() {
     const wrap = g.querySelector(".nodes");
     for (const n of nodes) {
       const el = document.createElement("article");
-      el.className = "node st-" + n.status; el.id = "nd-" + n.id;
+      el.className = "node st-" + n.status + (n.computable ? " ont-ok" : ""); el.id = "nd-" + n.id;
       const sig = SIGNALS?.byGate?.[n.id];
       const sigCls = !sig ? "" : sig.some((a) => a.kind === "risk") ? " k-r" : sig.some((a) => a.kind === "decision") ? " k-d" : "";
-      el.innerHTML = `<div class="nid">${n.id} · ${(CLASS_KO[n.classification] || n.classification)}${sig ? `<span class="sigb${sigCls}">📡${sig.length}</span>` : ""}</div>
+      el.innerHTML = `<div class="nid">${n.id} · ${(CLASS_KO[n.classification] || n.classification)}${n.computable ? `<span class="ontb" title="참조 제도 전부 R2 — 온톨로지가 다음 행동을 계산할 수 있는 관문">🧭</span>` : ""}${sig ? `<span class="sigb${sigCls}">📡${sig.length}</span>` : ""}</div>
         <div class="nname">${n.name}</div>
         <div class="nmeta"><span class="dot"></span><span>${n.authority || "-"}</span><span style="margin-left:auto">${STATUS_KO[n.status]}</span></div>`;
       el.addEventListener("mouseenter", () => { if (!pinnedId) showDetail(n); });
@@ -1084,7 +1091,7 @@ async function renderProcPanel(id) {
   const gate = $("#proc-gate"), body = $("#proc-body");
   const sum = SIGNALS?.gateSummary?.[id];
   gate.innerHTML = `<div class="gname"><span class="mono" style="color:var(--cyan);font-size:10px">${id}</span> ${n.name}</div>
-    <div class="gmeta">${n.stage} · ${STATUS_KO[n.status]} · 절차 ${n.procs ?? 1}개 · 선행 ${(rev[id] || []).length} 후속 ${(fwd[id] || []).length}</div>
+    <div class="gmeta">${n.stage} · ${STATUS_KO[n.status]} · 절차 ${n.procs ?? 1}개 · 선행 ${(rev[id] || []).length} 후속 ${(fwd[id] || []).length}${n.refCount ? ` · 제도 ${n.r2Count}/${n.refCount} R2${n.computable ? " 🧭" : ""}` : ""}</div>
     ${sum ? `<div class="gsum">📡 ${sum}</div>` : ""}`;
   if (!PROCS) {
     body.innerHTML = `<div class="proc-empty">절차 데이터 불러오는 중…</div>`;
@@ -1413,10 +1420,16 @@ function showDetail(n) {
       <dt>성격</dt><dd>${CLASS_KO[n.classification] || n.classification}</dd>
       <dt>결정 급</dt><dd>${LEVEL_KO[n.level] || "-"}${(n.decision || []).length ? ` — ${n.decision.join(", ")}` : ""}</dd>
       <dt>상태</dt><dd>${STATUS_KO[n.status]}${n.completedOn ? ` (${n.completedOn})` : ""}</dd>
+      ${n.refCount ? `<dt>제도 준비</dt><dd>${n.r2Count}/${n.refCount} R2${n.computable
+        ? ` · <b style="color:var(--cyan)">다음 행동 계산 가능</b>`
+        : (n.notReady || []).length ? `<br/><span class="mono" style="font-size:9px;color:var(--muted)">미준비: ${n.notReady.join(", ")}</span>` : ""}</dd>` : ""}
+      ${n.openness ? `<dt>온톨로지 판정</dt><dd>${OPEN_KO[n.openness] ?? n.openness}${n.conflict ? `<br/><span style="color:var(--amber)">⚠ ${n.conflict}</span>` : ""}</dd>` : ""}
+      ${(n.blockedBy || []).length ? `<dt>막는 것</dt><dd>${n.blockedBy.map((b) =>
+        `${b.artifact} <span class="mono" style="color:var(--muted);font-size:9px">← ${b.by.join(" ")}</span>`).join("<br/>")}</dd>` : ""}
       <dt>의존</dt><dd>선행 ${up} · 후속 ${down}</dd>
       <dt>절차</dt><dd>${n.procs ?? 1}개${(n.templates || []).length
         ? ` — ` + n.templates.map((t) =>
-            `<a class="tmpl" href="../../model/${t.slug}/" target="_blank" rel="noopener" title="korea100 제도 모델로 이동">${t.name}</a><span class="mono" style="color:var(--muted);font-size:9px"> ${t.procs}</span>${sharedBadge(t.slug)}`
+            `<a class="tmpl" href="../../model/${t.slug}/" target="_blank" rel="noopener" title="korea100 제도 모델로 이동">${t.name}</a><span class="mono" style="color:var(--muted);font-size:9px"> ${t.procs}</span>${t.readiness === "R2" ? `<span class="r2b" title="법제처 현행 원문 대조·전이 수동 대조 통과">R2</span>` : `<span class="unrb" title="에이전트 준비도 미평가 — 참고용">미검증</span>`}${sharedBadge(t.slug)}`
           ).join(" · ")
         : ` <span class="mono" style="color:var(--muted);font-size:9px">(제도 미연결)</span>`}</dd>
     </dl>
