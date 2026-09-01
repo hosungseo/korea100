@@ -110,10 +110,10 @@ python3 ontology/scripts/demo_query.py "부분공개 통지 왔는데 뭐 하면
 ## MCP 연계
 - 매핑표: [MCP-MAPPING.md](MCP-MAPPING.md)
 - 브리지: `mcp/src/ontology-bridge.mjs`
-- MCP 도구: `load_ontology_case`, `get_case_state`, `query_case`, `check_case_linkage`, `get_project_status`, `explain_blocked_milestone`
+- MCP 도구: `load_ontology_case`, `get_case_state`, `query_case`, `check_case_linkage`, `get_project_status`, `explain_blocked_milestone`, `get_pending_decisions`, `propose_case_transition`, `get_attention_view`
 - 패킷 계약: `mcp/src/packet-contract.mjs` — R2 경로(`create_action_packet`)와 온톨로지 경로가 같은 ActionPacket 계약을 통과해야 한다
 - 케이스 대조: `mcp/src/case-link.mjs` — 케이스 그래프가 제도 업무구조도와 어긋나면 드러낸다
-- 테스트: `cd mcp && npm test` (87건)
+- 테스트: `cd mcp && npm test` (118건)
 - 데모: `node mcp/scripts/ontology-query-once.mjs [--case samples/<파일>] "<질문>"`
 
 ## 제도 층과의 관계

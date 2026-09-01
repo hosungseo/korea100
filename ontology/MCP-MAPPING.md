@@ -23,6 +23,8 @@
 | `get_project_status` *(신규)* | 프로젝트 케이스 마일스톤 개폐 계산 | 아티팩트 의존 그래프에서 결정적 계산 |
 | `explain_blocked_milestone` *(신규)* | 차단 아티팩트 → 상류 마일스톤 추적 | 추정 금지, 그래프만 따라간다 |
 | `get_pending_decisions` *(신규)* | 미확정 파라미터와 그것이 여닫는 마일스톤 | 무엇을 고를지는 말하지 않는다 |
+| `propose_case_transition` *(신규)* | State 전이 판정(전이표·sequence·근거 3중 관문) | 판정만, 적용은 `advance-case-state.mjs` |
+| `get_attention_view` *(신규)* | 마일스톤 관심층(cabinet/agency/working) + 사유 | 결정 위상×개폐×의존 그래프에서 매 질의 계산, 손 태그 아님 |
 
 ## 프로젝트 케이스 (case_kind: project)
 
@@ -78,7 +80,7 @@
 |---|---|---|---|
 | 1호 `IDC-2026-0901-001` | 정보공개청구 | R2 (2026-09-01 승격) | true |
 | 2호 `AFN-2026-0901-001` | 과태료 사전통지·의견제출 | R2 | true |
-| 3호 `GSC-2026-0901-001` | 광주 반도체 클러스터 (제도 108종 중 7종 R2·1종 R1) | 부분 | false (N03·N19·N20만 계산 가능) |
+| 3호 `GSC-2026-0901-001` | 광주 반도체 클러스터 (제도 108종 중 13종 R2) | 부분 | false (N02·N03·N19·N20·N23만 계산 가능) |
 
 정보공개청구는 인용 오류 2건 정정·기한 성격 10건 재확인·전이 26건 수동 대조를 거쳐
 R1에서 올라왔다: [승격 기록](../docs/information-disclosure-r2-2026-09-01.md).
@@ -127,7 +129,7 @@ ActionPacket 모양으로 정규화하고, 계약 위반이면 응답 대신 오
 - `auto_execute` / `execution_allowed` == false
 
 ```bash
-cd mcp && npm test   # 60건
+cd mcp && npm test   # 118건
 ```
 
 - `test/packet-contract.test.mjs` — 두 경로가 같은 계약·같은 키 집합을 내는지
@@ -135,7 +137,9 @@ cd mcp && npm test   # 60건
 - `test/derive-case.test.mjs` — 파생기가 1호의 구조 층을 그대로 재현하는지
 - `test/case-fine-pre-notice.test.mjs` — 2호(R2)에서 `next_action_allowed`가 참인지, 확신 없으면 되묻는지
 - `test/project-case.test.mjs` — 3호(프로젝트)가 오버레이와 1:1인지, 마일스톤 개폐·차단 추적이 맞는지
-- `test/protocol.test.mjs` — stdio로 도구 12개 공개, `query_case`·`check_case_linkage`·`get_project_status` 실물 호출
+- `test/protocol.test.mjs` — stdio로 도구 15개 공개, `query_case`·`check_case_linkage`·`get_project_status` 실물 호출
+- `test/case-transitions.test.mjs` — 전이표 밖 이동·선행 미완 착수·근거 없는 전진이 거부되는지
+- `test/project-attention.test.mjs` — 관심층에 사유 없는 승격이 없는지, 다부처 물림·배타 분기·지렛대 사유가 맞는 관문에 붙는지
 
 ## 질의 매칭
 
