@@ -1,0 +1,1355 @@
+{
+ "ontology_version": "korea100.ontology.core.v0",
+ "institution_slug": "national-strategic-industry-complex",
+ "institution_name": "국가첨단전략산업 특화단지 지정·지원",
+ "case_id": "GSC-N03B-2026-0901",
+ "as_of": "2026-09-01",
+ "source_institution_json": "web/data/institutions/national-strategic-industry-complex.json",
+ "derivation": {
+  "generator": "ontology/scripts/derive-case.mjs",
+  "derived_layers": [
+   "Step/Gate/System 엔티티",
+   "sequence/message/loop 관계",
+   "Role·Statute 자리표시"
+  ],
+  "authored_layers": [
+   "Case",
+   "Decision",
+   "Document",
+   "State",
+   "Rule",
+   "ActionPacket",
+   "demo_queries"
+  ],
+  "institution_readiness": {
+   "level": "R2",
+   "mode": "next-action",
+   "assessed_at": "2026-09-01"
+  },
+  "node_count": 20,
+  "edge_count": 20
+ },
+ "entities": [
+  {
+   "id": "case:GSC-N03B-2026-0901",
+   "type": "Case",
+   "label": "광주 국가첨단전략산업 특화단지 지정 건",
+   "status": "verified",
+   "attrs": {
+    "project_id": "gwangju-semiconductor-cluster",
+    "milestone_node_id": "N03",
+    "scenario": "반도체클러스터 지정과 병행 또는 중복 지정을 검토하는 단계",
+    "sibling_case": "GSC-N03-2026-0901",
+    "note": "반도체특별법 제11조제5항 후단이 두 지정의 중복을 허용한다."
+   }
+  },
+  {
+   "id": "role:gwangju",
+   "type": "Role",
+   "label": "광주특별시",
+   "status": "verified"
+  },
+  {
+   "id": "role:motie",
+   "type": "Role",
+   "label": "산업통상부장관",
+   "status": "verified"
+  },
+  {
+   "id": "role:nsic-committee",
+   "type": "Role",
+   "label": "국가첨단전략산업위원회",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+     "article": "제16조제1항",
+     "text": "산업통상부장관은 위원회의 심의·의결을 거쳐 특화단지로 지정할 수 있다."
+    }
+   ]
+  },
+  {
+   "id": "statute:statute-014238",
+   "type": "Statute",
+   "label": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+   "status": "verified",
+   "attrs": {
+    "lawId": "014238",
+    "adminRuleId": null,
+    "kind": "법률",
+    "url": "https://law.go.kr/법령/국가첨단전략산업경쟁력강화및보호에관한특별조치법",
+    "effectiveOn": "2026-06-02",
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "statute:statute-014320",
+   "type": "Statute",
+   "label": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법 시행령",
+   "status": "verified",
+   "attrs": {
+    "lawId": "014320",
+    "adminRuleId": null,
+    "kind": "대통령령",
+    "url": "https://law.go.kr/법령/국가첨단전략산업경쟁력강화및보호에관한특별조치법시행령",
+    "effectiveOn": "2026-02-01",
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "statute:statute-001839",
+   "type": "Statute",
+   "label": "산업입지 및 개발에 관한 법률",
+   "status": "verified",
+   "attrs": {
+    "lawId": "001839",
+    "adminRuleId": null,
+    "kind": "법률",
+    "url": "https://law.go.kr/법령/산업입지및개발에관한법률",
+    "effectiveOn": "2026-01-02",
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "role:lane-1",
+   "type": "Role",
+   "label": "신청인(기업·시·도·부처)",
+   "status": "verified",
+   "attrs": {
+    "lane": "신청인(기업·시·도·부처)",
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "role:lane-2",
+   "type": "Role",
+   "label": "시·도·관계기관",
+   "status": "verified",
+   "attrs": {
+    "lane": "시·도·관계기관",
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "role:lane-3",
+   "type": "Role",
+   "label": "산업통상부",
+   "status": "verified",
+   "attrs": {
+    "lane": "산업통상부",
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "role:lane-4",
+   "type": "Role",
+   "label": "국가전략산업위원회",
+   "status": "verified",
+   "attrs": {
+    "lane": "국가전략산업위원회",
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "role:lane-5",
+   "type": "Role",
+   "label": "인·허가권자",
+   "status": "verified",
+   "attrs": {
+    "lane": "인·허가권자",
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "role:lane-6",
+   "type": "Role",
+   "label": "사업시행자·입주기관",
+   "status": "verified",
+   "attrs": {
+    "lane": "사업시행자·입주기관",
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "step:P01",
+   "type": "Step",
+   "label": "특화단지 육성계획 작성",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법 시행령",
+     "article": "제26조(특화단지의 지정 요건 및 절차)",
+     "text": "특화단지의 지정 요건 및 절차"
+    }
+   ],
+   "attrs": {
+    "process_id": "P01",
+    "lane": "신청인(기업·시·도·부처)",
+    "stage": "G0 계획·협의",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "신청인(기업·시·도·부처)",
+    "output_documents": [
+     "육성계획"
+    ]
+   }
+  },
+  {
+   "id": "step:P02",
+   "type": "Step",
+   "label": "지자체·사업자 사전 협의",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법 시행령",
+     "article": "제26조(특화단지의 지정 요건 및 절차)",
+     "text": "특화단지의 지정 요건 및 절차"
+    }
+   ],
+   "attrs": {
+    "process_id": "P02",
+    "lane": "시·도·관계기관",
+    "stage": "G0 계획·협의",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "시·도·관계기관",
+    "output_documents": [
+     "사전협의"
+    ]
+   }
+  },
+  {
+   "id": "step:P03",
+   "type": "Step",
+   "label": "지정 신청",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+     "article": "제16조(전략산업 특화단지의 지정)",
+     "text": "전략산업 특화단지의 지정"
+    },
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법 시행령",
+     "article": "제26조(특화단지의 지정 요건 및 절차)",
+     "text": "특화단지의 지정 요건 및 절차"
+    }
+   ],
+   "attrs": {
+    "process_id": "P03",
+    "lane": "신청인(기업·시·도·부처)",
+    "stage": "G1 지정 신청",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "신청인(기업·시·도·부처)",
+    "output_documents": [
+     "신청서"
+    ]
+   }
+  },
+  {
+   "id": "step:P04",
+   "type": "Step",
+   "label": "접수·요건 검토",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법 시행령",
+     "article": "제26조(특화단지의 지정 요건 및 절차)",
+     "text": "특화단지의 지정 요건 및 절차"
+    }
+   ],
+   "attrs": {
+    "process_id": "P04",
+    "lane": "산업통상부",
+    "stage": "G1 지정 신청",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "산업통상부",
+    "output_documents": [
+     "접수"
+    ]
+   }
+  },
+  {
+   "id": "step:P05",
+   "type": "Step",
+   "label": "관계부처·지자체 협의",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+     "article": "제16조(전략산업 특화단지의 지정)",
+     "text": "전략산업 특화단지의 지정"
+    }
+   ],
+   "attrs": {
+    "process_id": "P05",
+    "lane": "시·도·관계기관",
+    "stage": "G2 관계 협의",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "시·도·관계기관",
+    "output_documents": [
+     "협의"
+    ]
+   }
+  },
+  {
+   "id": "step:P06",
+   "type": "Step",
+   "label": "보완 통지 수령·재제출",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법 시행령",
+     "article": "제26조(특화단지의 지정 요건 및 절차)",
+     "text": "특화단지의 지정 요건 및 절차"
+    }
+   ],
+   "attrs": {
+    "process_id": "P06",
+    "lane": "신청인(기업·시·도·부처)",
+    "stage": "G2 관계 협의",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "신청인(기업·시·도·부처)",
+    "output_documents": [
+     "보완"
+    ]
+   }
+  },
+  {
+   "id": "step:P07",
+   "type": "Step",
+   "label": "위원회 심의 상정",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+     "article": "제16조(전략산업 특화단지의 지정)",
+     "text": "전략산업 특화단지의 지정"
+    }
+   ],
+   "attrs": {
+    "process_id": "P07",
+    "lane": "산업통상부",
+    "stage": "G3 위원회 심의·지정",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "산업통상부",
+    "output_documents": [
+     "안건"
+    ]
+   }
+  },
+  {
+   "id": "step:P08",
+   "type": "Gate",
+   "label": "위원회 심의·의결",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+     "article": "제16조(전략산업 특화단지의 지정)",
+     "text": "전략산업 특화단지의 지정"
+    }
+   ],
+   "attrs": {
+    "process_id": "P08",
+    "lane": "국가전략산업위원회",
+    "stage": "G3 위원회 심의·지정",
+    "node_type": "gateway",
+    "deadline": null,
+    "actor": "국가전략산업위원회",
+    "output_documents": [
+     "의결"
+    ]
+   }
+  },
+  {
+   "id": "step:P09",
+   "type": "Step",
+   "label": "지정 고시·결과 통지 수령",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+     "article": "제16조(전략산업 특화단지의 지정)",
+     "text": "전략산업 특화단지의 지정"
+    },
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법 시행령",
+     "article": "제26조(특화단지의 지정 요건 및 절차)",
+     "text": "산업통상부장관은 신청을 받으면 위원회 심의를 거쳐 지정 여부를 결정하고 그 결과를 통보하며(제6항), 지정에 필요한 사항을 고시한다(제7항)."
+    }
+   ],
+   "attrs": {
+    "process_id": "P09",
+    "lane": "신청인(기업·시·도·부처)",
+    "stage": "G3 위원회 심의·지정",
+    "node_type": "notice",
+    "deadline": null,
+    "actor": "신청인(기업·시·도·부처)",
+    "output_documents": [
+     "지정 고시"
+    ]
+   }
+  },
+  {
+   "id": "step:P10",
+   "type": "Step",
+   "label": "산단법 경로 조성",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+     "article": "제16조(전략산업 특화단지의 지정)",
+     "text": "전략산업 특화단지의 지정"
+    },
+    {
+     "law": "산업입지 및 개발에 관한 법률",
+     "article": "제6조(국가산업단지의 지정)",
+     "text": "국가산업단지의 지정"
+    }
+   ],
+   "attrs": {
+    "process_id": "P10",
+    "lane": "사업시행자·입주기관",
+    "stage": "G4 조성·신속인허가",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "사업시행자·입주기관",
+    "output_documents": [
+     "조성"
+    ]
+   }
+  },
+  {
+   "id": "step:P11",
+   "type": "Step",
+   "label": "인허가 신속처리 신청",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+     "article": "제19조(다른 법률에 따른 인ㆍ허가등의 신속처리 특례)",
+     "text": "다른 법률에 따른 인ㆍ허가등의 신속처리 특례"
+    },
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법 시행령",
+     "article": "제30조(다른 법률에 따른 인가ㆍ허가 등의 신속처리 특례)",
+     "text": "다른 법률에 따른 인가ㆍ허가 등의 신속처리 특례"
+    }
+   ],
+   "attrs": {
+    "process_id": "P11",
+    "lane": "사업시행자·입주기관",
+    "stage": "G4 조성·신속인허가",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "사업시행자·입주기관",
+    "output_documents": [
+     "신속처리 신청"
+    ]
+   }
+  },
+  {
+   "id": "step:P12",
+   "type": "Step",
+   "label": "위원회 심의 후 신속처리 요청",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+     "article": "제19조(다른 법률에 따른 인ㆍ허가등의 신속처리 특례)",
+     "text": "다른 법률에 따른 인ㆍ허가등의 신속처리 특례"
+    }
+   ],
+   "attrs": {
+    "process_id": "P12",
+    "lane": "산업통상부",
+    "stage": "G4 조성·신속인허가",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "산업통상부",
+    "output_documents": [
+     "요청"
+    ]
+   }
+  },
+  {
+   "id": "step:P13",
+   "type": "Step",
+   "label": "처리계획 회신",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+     "article": "제19조(다른 법률에 따른 인ㆍ허가등의 신속처리 특례)",
+     "text": "다른 법률에 따른 인ㆍ허가등의 신속처리 특례"
+    }
+   ],
+   "attrs": {
+    "process_id": "P13",
+    "lane": "인·허가권자",
+    "stage": "G4 조성·신속인허가",
+    "node_type": "task",
+    "deadline": "요청을 받은 날부터 15일 이내 회신(자료 보완 기간 제외, 최대 30일)",
+    "actor": "인·허가권자",
+    "output_documents": [
+     "처리계획"
+    ]
+   }
+  },
+  {
+   "id": "step:P14",
+   "type": "Step",
+   "label": "처리 결과 통보 수령",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+     "article": "제19조(다른 법률에 따른 인ㆍ허가등의 신속처리 특례)",
+     "text": "다른 법률에 따른 인ㆍ허가등의 신속처리 특례"
+    },
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법 시행령",
+     "article": "제30조(다른 법률에 따른 인가ㆍ허가 등의 신속처리 특례)",
+     "text": "다른 법률에 따른 인가ㆍ허가 등의 신속처리 특례"
+    }
+   ],
+   "attrs": {
+    "process_id": "P14",
+    "lane": "사업시행자·입주기관",
+    "stage": "G4 조성·신속인허가",
+    "node_type": "notice",
+    "deadline": "처리 계획 제출일부터 15일 이내 통보(1회 15일 연장), 기한 도과 시 요청일부터 60일이 지난 날 처리 완료 의제",
+    "actor": "사업시행자·입주기관",
+    "output_documents": [
+     "결과통보"
+    ]
+   }
+  },
+  {
+   "id": "step:P15",
+   "type": "Step",
+   "label": "조성·운영 지원",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+     "article": "제20조(특화단지 조성ㆍ운영 지원)",
+     "text": "특화단지 조성ㆍ운영 지원"
+    },
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법 시행령",
+     "article": "제31조(특화단지 조성ㆍ운영 지원)",
+     "text": "특화단지 조성ㆍ운영 지원"
+    }
+   ],
+   "attrs": {
+    "process_id": "P15",
+    "lane": "산업통상부",
+    "stage": "G5 지원·이행",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "산업통상부",
+    "output_documents": [
+     "지원"
+    ]
+   }
+  },
+  {
+   "id": "step:P16",
+   "type": "Step",
+   "label": "입주 지원 신청·결과 수령",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+     "article": "제21조(특화단지 입주기관 지원)",
+     "text": "특화단지 입주기관 지원"
+    },
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법 시행령",
+     "article": "제33조(특화단지 입주기업 지원)",
+     "text": "특화단지 입주기업 지원"
+    }
+   ],
+   "attrs": {
+    "process_id": "P16",
+    "lane": "사업시행자·입주기관",
+    "stage": "G5 지원·이행",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "사업시행자·입주기관",
+    "output_documents": [
+     "지원 신청·결정"
+    ]
+   }
+  },
+  {
+   "id": "step:P17",
+   "type": "Step",
+   "label": "전략기술 민원 제기·처리",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+     "article": "제23조(민원의 신속처리에 관한 특례)",
+     "text": "민원의 신속처리에 관한 특례"
+    },
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법 시행령",
+     "article": "제34조(민원의 신속처리 특례)",
+     "text": "민원의 신속처리 특례"
+    }
+   ],
+   "attrs": {
+    "process_id": "P17",
+    "lane": "신청인(기업·시·도·부처)",
+    "stage": "G5 지원·이행",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "신청인(기업·시·도·부처)",
+    "output_documents": [
+     "민원"
+    ]
+   }
+  },
+  {
+   "id": "step:P18",
+   "type": "Step",
+   "label": "지정 해제 전 지자체 의견",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+     "article": "제17조(특화단지의 지정 해제)",
+     "text": "특화단지의 지정 해제"
+    },
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법 시행령",
+     "article": "제28조(특화단지의 지정 해제)",
+     "text": "특화단지의 지정 해제"
+    }
+   ],
+   "attrs": {
+    "process_id": "P18",
+    "lane": "시·도·관계기관",
+    "stage": "G6 해제·환류",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "시·도·관계기관",
+    "output_documents": [
+     "의견"
+    ]
+   }
+  },
+  {
+   "id": "step:P19",
+   "type": "Step",
+   "label": "해제 심의·공고·통보 수령",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+     "article": "제17조(특화단지의 지정 해제)",
+     "text": "특화단지의 지정 해제"
+    },
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법 시행령",
+     "article": "제28조(특화단지의 지정 해제)",
+     "text": "특화단지의 지정 해제"
+    }
+   ],
+   "attrs": {
+    "process_id": "P19",
+    "lane": "신청인(기업·시·도·부처)",
+    "stage": "G6 해제·환류",
+    "node_type": "notice",
+    "deadline": null,
+    "actor": "신청인(기업·시·도·부처)",
+    "output_documents": [
+     "해제 공고"
+    ]
+   }
+  },
+  {
+   "id": "step:P20",
+   "type": "Gate",
+   "label": "위원회 해제 심의",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+     "article": "제17조(특화단지의 지정 해제)",
+     "text": "특화단지의 지정 해제"
+    },
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법 시행령",
+     "article": "제28조(특화단지의 지정 해제)",
+     "text": "특화단지의 지정 해제"
+    }
+   ],
+   "attrs": {
+    "process_id": "P20",
+    "lane": "국가전략산업위원회",
+    "stage": "G6 해제·환류",
+    "node_type": "gateway",
+    "deadline": null,
+    "actor": "국가전략산업위원회",
+    "output_documents": [
+     "해제 의결"
+    ]
+   }
+  }
+ ],
+ "relations": [
+  {
+   "id": "R-E01",
+   "type": "sequence",
+   "from": "step:P01",
+   "to": "step:P02",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E02",
+   "type": "sequence",
+   "from": "step:P02",
+   "to": "step:P03",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E03",
+   "type": "sequence",
+   "from": "step:P03",
+   "to": "step:P04",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E04",
+   "type": "sequence",
+   "from": "step:P04",
+   "to": "step:P05",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E05",
+   "type": "loop",
+   "from": "step:P05",
+   "to": "step:P06",
+   "label": "보완",
+   "condition": "보완"
+  },
+  {
+   "id": "R-E06",
+   "type": "loop",
+   "from": "step:P06",
+   "to": "step:P05",
+   "label": "재협의",
+   "condition": "재협의"
+  },
+  {
+   "id": "R-E07",
+   "type": "sequence",
+   "from": "step:P05",
+   "to": "step:P07",
+   "label": "적합",
+   "condition": "적합"
+  },
+  {
+   "id": "R-E08",
+   "type": "sequence",
+   "from": "step:P07",
+   "to": "step:P08",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E09",
+   "type": "sequence",
+   "from": "step:P08",
+   "to": "step:P09",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E10",
+   "type": "sequence",
+   "from": "step:P09",
+   "to": "step:P10",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E11",
+   "type": "sequence",
+   "from": "step:P10",
+   "to": "step:P11",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E12",
+   "type": "sequence",
+   "from": "step:P11",
+   "to": "step:P12",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E13",
+   "type": "sequence",
+   "from": "step:P12",
+   "to": "step:P13",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E14",
+   "type": "sequence",
+   "from": "step:P13",
+   "to": "step:P14",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E15",
+   "type": "sequence",
+   "from": "step:P14",
+   "to": "step:P15",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E16",
+   "type": "sequence",
+   "from": "step:P15",
+   "to": "step:P16",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E17",
+   "type": "sequence",
+   "from": "step:P16",
+   "to": "step:P17",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E18",
+   "type": "sequence",
+   "from": "step:P09",
+   "to": "step:P18",
+   "label": "해제 사유",
+   "condition": "해제 사유"
+  },
+  {
+   "id": "R-E19",
+   "type": "sequence",
+   "from": "step:P18",
+   "to": "step:P20",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E20",
+   "type": "sequence",
+   "from": "step:P20",
+   "to": "step:P19",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-decides",
+   "type": "decides",
+   "from": "role:nsic-committee",
+   "to": "step:P08",
+   "label": "지정 심의·의결",
+   "condition": null
+  },
+  {
+   "id": "R-owns",
+   "type": "owns",
+   "from": "role:gwangju",
+   "to": "step:P03",
+   "label": "지정 신청 주체",
+   "condition": null
+  }
+ ],
+ "states": [
+  {
+   "id": "S-case",
+   "entity_id": "case:GSC-N03B-2026-0901",
+   "state": "route_selection_pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03",
+    "note": "반도체클러스터 지정과의 병행·중복 여부를 정하는 단계"
+   }
+  },
+  {
+   "id": "S-p01",
+   "entity_id": "step:P01",
+   "state": "ready",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03",
+    "note": "N03이 착수 가능 상태다"
+   }
+  },
+  {
+   "id": "S-p02",
+   "entity_id": "step:P02",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p03",
+   "entity_id": "step:P03",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p04",
+   "entity_id": "step:P04",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p05",
+   "entity_id": "step:P05",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p06",
+   "entity_id": "step:P06",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p07",
+   "entity_id": "step:P07",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p08",
+   "entity_id": "step:P08",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p09",
+   "entity_id": "step:P09",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p10",
+   "entity_id": "step:P10",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p11",
+   "entity_id": "step:P11",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p12",
+   "entity_id": "step:P12",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p13",
+   "entity_id": "step:P13",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p14",
+   "entity_id": "step:P14",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p15",
+   "entity_id": "step:P15",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p16",
+   "entity_id": "step:P16",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p17",
+   "entity_id": "step:P17",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p18",
+   "entity_id": "step:P18",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p19",
+   "entity_id": "step:P19",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  },
+  {
+   "id": "S-p20",
+   "entity_id": "step:P20",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N03"
+   }
+  }
+ ],
+ "rules": [
+  {
+   "id": "rule:designation-requires-committee",
+   "name": "특화단지 지정은 위원회 심의·의결과 관계기관 협의를 거쳐야 한다",
+   "applies_to": [
+    "step:P05",
+    "step:P07",
+    "step:P08"
+   ],
+   "inputs": [
+    "committee_resolution",
+    "agency_consultation"
+   ],
+   "predicate": "if committee_resolved and agencies_consulted then may_designate else cannot_designate",
+   "output": {
+    "required": [
+     "관계 중앙행정기관·지방자치단체의 장과 협의",
+     "위원회 심의·의결"
+    ]
+   },
+   "statute_ref": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+     "article": "제16조제1항"
+    }
+   ],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:non-capital-area-priority",
+   "name": "수도권 외의 지역과 집적 지역을 우선 고려한다",
+   "applies_to": [
+    "step:P07",
+    "step:P08"
+   ],
+   "inputs": [
+    "location"
+   ],
+   "predicate": "prioritize(수도권 외 지역, 전략산업 집적 지역)",
+   "output": {
+    "note": "광주는 수도권 외 지역이자 집적을 목표로 하는 지역이다."
+   },
+   "statute_ref": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+     "article": "제16조제3항"
+    }
+   ],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:parallel-to-semiconductor-cluster",
+   "name": "반도체클러스터와 특화단지는 배타 관계가 아니다",
+   "applies_to": [
+    "step:P08"
+   ],
+   "inputs": [
+    "existing_designations"
+   ],
+   "predicate": "반도체클러스터 지정 may overlap 국가첨단전략산업 특화단지",
+   "output": {
+    "note": "반도체특별법 제11조제5항 후단이 중복 지정을 명문으로 허용한다. 두 제도가 같은 마일스톤(N03)에 붙는 이유다.",
+    "sibling_case": "GSC-N03-2026-0901"
+   },
+   "statute_ref": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제11조제5항"
+    }
+   ],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:fasttrack-mirrors-semiconductor-act",
+   "name": "인·허가 신속처리 구조가 반도체특별법과 평행하다",
+   "applies_to": [
+    "step:P11",
+    "step:P12",
+    "step:P13",
+    "step:P14"
+   ],
+   "inputs": [],
+   "predicate": "제19조(회신 15일·최대 30일, 통보 15일·1회 15일 연장, 60일 의제) mirrors 반도체특별법 제27조",
+   "output": {
+    "note": "두 제도 중 어느 쪽으로 지정받아도 신속처리 일정 구조는 같다. 경로 선택 시 신속처리 기한은 변별 요소가 아니다."
+   },
+   "statute_ref": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+     "article": "제19조"
+    },
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제27조"
+    }
+   ],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:dedesignation-grounds",
+   "name": "지정 해제 사유는 네 가지이고 위원회 의결과 협의를 거친다",
+   "applies_to": [
+    "step:P18",
+    "step:P19",
+    "step:P20"
+   ],
+   "inputs": [
+    "ground"
+   ],
+   "predicate": "ground in [지정 요건 미달, 지원금 목적 외 사용, 지정 목적 달성 불가, 시·도지사 요청]",
+   "output": {
+    "process": "관계 중앙행정기관·관할 지방자치단체의 장과 협의 후 위원회 심의·의결"
+   },
+   "statute_ref": [
+    {
+     "law": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법",
+     "article": "제17조제1항"
+    }
+   ],
+   "stop_if_unverified": true
+  }
+ ],
+ "action_packets": [
+  {
+   "id": "ap:choose-designation-route",
+   "title": "지정 경로 선택 — 반도체클러스터와 특화단지",
+   "for_query": "특화단지 지정도 같이 받아야 해?",
+   "actor": "role:motie",
+   "why": "두 지정은 배타 관계가 아니다. 반도체특별법 제11조제5항 후단이 중복 지정을 명문으로 허용한다. rule:parallel-to-semiconductor-cluster 에 따라 한쪽을 고르는 문제가 아니라 무엇을 어느 순서로 받을지의 문제다.",
+   "based_on": [
+    "case:GSC-N03B-2026-0901",
+    "rule:parallel-to-semiconductor-cluster",
+    "rule:fasttrack-mirrors-semiconductor-act",
+    "rule:non-capital-area-priority",
+    "step:P08"
+   ],
+   "checklist": [
+    "두 지정의 효과 차이를 정리한다 — 신속처리 일정 구조는 같으므로(제19조 ≡ 반도체특별법 제27조) 변별 요소가 아니다",
+    "지원 범위를 비교한다: 특화단지는 제20조·제21조, 반도체클러스터는 제14조·제15조",
+    "중복 지정을 전제로 신청 순서와 시점을 정한다 (반도체특별법 제11조제5항 후단)",
+    "수도권 외 지역·집적 지역 우선 고려 요건에 광주가 어떻게 해당하는지 정리한다 (제16조제3항)",
+    "두 제도 모두 산업입지법·산단절차간소화법·산집법을 따라야 하므로 산업단지 트랙과의 관계를 맞춘다 (제16조제2항)",
+    "신속 조성이 필요하면 국가산업단지 지정 요청 경로를 검토한다 (제16조제2항 후단)"
+   ],
+   "evidence_needed": [
+    "두 지정의 지원 항목 비교표",
+    "입주 예정 기업 현황",
+    "사업구역과 산업단지 트랙 일정"
+   ],
+   "system_touchpoints": [
+    "산업통상부 특화단지 지정 신청",
+    "산업통상부 반도체클러스터 지정 신청"
+   ],
+   "human_signoff": "지정 경로는 소관 부처 협의와 위원회 의결로 확정된다",
+   "auto_execute": false,
+   "risks": [
+    "두 지정을 배타 관계로 오해하면 받을 수 있는 지원을 스스로 좁힌다",
+    "지정 요건은 각각 별도로 심사된다. 한쪽 지정이 다른 쪽을 보장하지 않는다"
+   ]
+  },
+  {
+   "id": "ap:apply-specialized-complex",
+   "title": "특화단지 지정 신청 준비",
+   "for_query": "특화단지 지정 신청은 어떻게 해?",
+   "actor": "role:gwangju",
+   "why": "제16조제1항은 대통령령으로 정하는 바에 따라 신청을 받아 지정하도록 하고, 위원회 심의·의결과 관계 중앙행정기관·지방자치단체의 장과의 협의를 요구한다.",
+   "based_on": [
+    "case:GSC-N03B-2026-0901",
+    "rule:designation-requires-committee",
+    "rule:non-capital-area-priority",
+    "step:P01",
+    "step:P02",
+    "step:P03"
+   ],
+   "checklist": [
+    "특화단지 육성계획을 작성한다 (제26조 지정 요건 및 절차)",
+    "지방자치단체·사업자와 사전 협의한다",
+    "제16조제1항 각 호 중 어느 지역 유형에 해당하는지 특정한다 (집적 지역 / 투자·기술개발 기업 소재·이전 희망 지역 / 대통령령이 정하는 지역)",
+    "수도권 외 지역·집적 지역 우선 고려 요건 충족 근거를 정리한다 (제16조제3항)",
+    "지정 신청서를 제출한다. 이후 요건 검토·관계기관 협의·위원회 심의를 거친다",
+    "반도체클러스터 지정과의 중복·순서를 함께 정리한다 (반도체특별법 제11조제5항 후단)"
+   ],
+   "evidence_needed": [
+    "특화단지 육성계획",
+    "입주·이전 희망 기업 현황",
+    "기반시설 확보 계획"
+   ],
+   "system_touchpoints": [
+    "산업통상부 특화단지 지정 신청 창구"
+   ],
+   "human_signoff": "광주특별시장의 결재를 거쳐야 신청할 수 있다",
+   "auto_execute": false,
+   "risks": [
+    "지정 요건 미달은 이후 해제 사유가 된다 (제17조제1항제1호)",
+    "지원금을 목적 외로 사용하면 해제 사유다 (제17조제1항제2호)"
+   ]
+  }
+ ],
+ "demo_queries": [
+  {
+   "q": "특화단지 지정도 같이 받아야 해?",
+   "resolve": {
+    "identify": [
+     "case:GSC-N03B-2026-0901",
+     "step:P08"
+    ],
+    "state": "route_selection_pending",
+    "rules_fired": [
+     "rule:parallel-to-semiconductor-cluster",
+     "rule:fasttrack-mirrors-semiconductor-act"
+    ],
+    "action_packet": "ap:choose-designation-route"
+   }
+  },
+  {
+   "q": "특화단지 지정 신청은 어떻게 해?",
+   "resolve": {
+    "identify": [
+     "case:GSC-N03B-2026-0901",
+     "step:P01",
+     "step:P03"
+    ],
+    "rules_fired": [
+     "rule:designation-requires-committee",
+     "rule:non-capital-area-priority"
+    ],
+    "action_packet": "ap:apply-specialized-complex"
+   }
+  },
+  {
+   "q": "이 특화단지 건 지금 어디까지 왔어?",
+   "resolve": {
+    "done": [],
+    "ready": [
+     "step:P01"
+    ],
+    "available": [
+     "step:P02"
+    ]
+   }
+  }
+ ],
+ "notes": [
+  "구조 층은 derive-case.mjs가 제도 JSON에서 파생했다.",
+  "조문은 2026-09-01 법제처 DRF 현행 원문(국가첨단전략산업법 014238)에 대조했다.",
+  "4호(GSC-N03-2026-0901)와 같은 마일스톤 N03을 채운다. 한 마일스톤에 제도 케이스가 둘 붙는다. 반도체특별법 제11조제5항 후단이 두 지정의 중복을 허용하기 때문이다.",
+  "auto_execute는 항상 false."
+ ],
+ "project_context": {
+  "project_id": "gwangju-semiconductor-cluster",
+  "milestone_node_id": "N03",
+  "milestone_label": "반도체클러스터 지정 신청·심의·지정",
+  "note": "4호와 같은 마일스톤을 채운다. 한 마일스톤에 제도 케이스가 둘 붙는 구조다."
+ }
+}

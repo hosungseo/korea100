@@ -1,0 +1,1365 @@
+{
+ "ontology_version": "korea100.ontology.core.v0",
+ "institution_slug": "preliminary-feasibility-study",
+ "institution_name": "예비타당성조사",
+ "case_id": "GSC-N02-2026-0901",
+ "as_of": "2026-09-01",
+ "source_institution_json": "web/data/institutions/preliminary-feasibility-study.json",
+ "derivation": {
+  "generator": "ontology/scripts/derive-case.mjs",
+  "derived_layers": [
+   "Step/Gate/System 엔티티",
+   "sequence/message/loop 관계",
+   "Role·Statute 자리표시"
+  ],
+  "authored_layers": [
+   "Case",
+   "Decision",
+   "Document",
+   "State",
+   "Rule",
+   "ActionPacket",
+   "demo_queries"
+  ],
+  "institution_readiness": {
+   "level": "R2",
+   "mode": "next-action",
+   "assessed_at": "2026-09-01"
+  },
+  "node_count": 17,
+  "edge_count": 19
+ },
+ "entities": [
+  {
+   "id": "case:GSC-N02-2026-0901",
+   "type": "Case",
+   "label": "광주 반도체 클러스터 예비타당성조사 건",
+   "status": "verified",
+   "attrs": {
+    "project_id": "gwangju-semiconductor-cluster",
+    "milestone_node_id": "N02",
+    "scenario": "총사업비와 재원주체가 확정되지 않아 예타 대상 여부조차 판정 전인 단계",
+    "total_project_cost": "미확정",
+    "funding_entities": "미확정"
+   }
+  },
+  {
+   "id": "role:pmo",
+   "type": "Role",
+   "label": "3대 메가프로젝트 전담조직",
+   "status": "unverified",
+   "attrs": {
+    "note": "오버레이상 N02의 주관. 국가재정법상 신청 주체는 중앙관서의 장이다."
+   }
+  },
+  {
+   "id": "role:central-agency",
+   "type": "Role",
+   "label": "중앙관서의 장",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가재정법",
+     "article": "제38조제3항",
+     "text": "예비타당성조사 대상사업은 기획예산처장관이 중앙관서의 장의 신청에 따라 또는 직권으로 선정할 수 있다."
+    }
+   ]
+  },
+  {
+   "id": "role:budget-minister",
+   "type": "Role",
+   "label": "기획예산처장관",
+   "status": "verified"
+  },
+  {
+   "id": "role:evaluation-committee",
+   "type": "Role",
+   "label": "재정사업평가위원회",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "예비타당성조사 운용지침",
+     "article": "제7조",
+     "text": "위원장은 기획예산처차관이 되고 관계부처 고위공무원과 15명 이내 민간위원으로 구성한다."
+    }
+   ],
+   "attrs": {
+    "note": "국가재정법에는 이 위원회를 정한 조문이 없다. 운용지침이 근거다."
+   }
+  },
+  {
+   "id": "item:total-cost",
+   "type": "InformationItem",
+   "label": "총사업비와 국가 재정지원 규모",
+   "status": "unverified",
+   "attrs": {
+    "note": "법 제38조제1항의 500억·300억 문턱 판정에 필요하다. 광주 사업은 미확정."
+   }
+  },
+  {
+   "id": "statute:statute-010301",
+   "type": "Statute",
+   "label": "국가재정법",
+   "status": "verified",
+   "attrs": {
+    "lawId": "010301",
+    "adminRuleId": null,
+    "kind": "법률",
+    "url": "https://law.go.kr/법령/국가재정법",
+    "effectiveOn": "2026-06-02",
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "statute:statute-010374",
+   "type": "Statute",
+   "label": "국가재정법 시행령",
+   "status": "verified",
+   "attrs": {
+    "lawId": "010374",
+    "adminRuleId": null,
+    "kind": "대통령령",
+    "url": "https://law.go.kr/법령/국가재정법시행령",
+    "effectiveOn": "2026-05-06",
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "statute:statute-009177",
+   "type": "Statute",
+   "label": "과학기술기본법",
+   "status": "verified",
+   "attrs": {
+    "lawId": "009177",
+    "adminRuleId": null,
+    "kind": "법률",
+    "url": "https://law.go.kr/법령/과학기술기본법",
+    "effectiveOn": "2026-07-01",
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "statute:admin-rule-56814",
+   "type": "Statute",
+   "label": "예비타당성조사 운용지침",
+   "status": "verified",
+   "attrs": {
+    "lawId": null,
+    "adminRuleId": "56814",
+    "kind": "행정규칙",
+    "url": "https://law.go.kr/행정규칙/예비타당성조사운용지침",
+    "effectiveOn": null,
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "role:lane-1",
+   "type": "Role",
+   "label": "지자체·사업신청자",
+   "status": "verified",
+   "attrs": {
+    "lane": "지자체·사업신청자",
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "role:lane-2",
+   "type": "Role",
+   "label": "사업주관 중앙관서",
+   "status": "verified",
+   "attrs": {
+    "lane": "사업주관 중앙관서",
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "role:lane-3",
+   "type": "Role",
+   "label": "기획예산처(예산실)",
+   "status": "verified",
+   "attrs": {
+    "lane": "기획예산처(예산실)",
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "role:lane-4",
+   "type": "Role",
+   "label": "조사수행기관(KDI·KISTEP)",
+   "status": "verified",
+   "attrs": {
+    "lane": "조사수행기관(KDI·KISTEP)",
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "role:lane-5",
+   "type": "Role",
+   "label": "재정사업평가위원회·분과",
+   "status": "verified",
+   "attrs": {
+    "lane": "재정사업평가위원회·분과",
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "role:lane-6",
+   "type": "Role",
+   "label": "정보시스템",
+   "status": "verified",
+   "attrs": {
+    "lane": "정보시스템",
+    "id_is_placeholder": true
+   }
+  },
+  {
+   "id": "step:P16",
+   "type": "Step",
+   "label": "지자체 사업 건의·지역 유치 요구",
+   "status": "unverified",
+   "legal_basis": [
+    {
+     "law": "국가재정법",
+     "article": "제38조제3항",
+     "text": "예비타당성조사 대상사업은 기획예산처장관이 중앙관서의 장의 신청에 따라 또는 직권으로 선정한다. 지방자치단체의 사업 건의를 예비타당성조사 절차의 단계로 정한 조문은 없다.",
+     "unverified": true
+    }
+   ],
+   "attrs": {
+    "process_id": "P16",
+    "lane": "지자체·사업신청자",
+    "stage": "G0 대상확인",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "지자체·사업신청자",
+    "output_documents": [
+     "사업 건의서",
+     "지역 수요자료"
+    ]
+   }
+  },
+  {
+   "id": "step:P01",
+   "type": "Step",
+   "label": "대규모 신규사업 기획·투자요구",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가재정법",
+     "article": "제28조, 제38조",
+     "text": "각 중앙관서의 장은 대규모 신규사업을 기획하여 투자를 요구한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P01",
+    "lane": "사업주관 중앙관서",
+    "stage": "G0 대상확인",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "주무부처",
+    "output_documents": [
+     "사업계획서",
+     "중기사업계획서",
+     "예산 투자요구서"
+    ]
+   }
+  },
+  {
+   "id": "step:P02",
+   "type": "Gate",
+   "label": "예타 대상 여부 판정",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가재정법",
+     "article": "제38조제1항",
+     "text": "총사업비 500억원 이상이고 국가재정지원 규모가 300억원 이상인 신규사업이 대상이다."
+    },
+    {
+     "law": "국가재정법 시행령",
+     "article": "제13조제1항",
+     "text": "예비타당성조사 대상사업의 세부 기준을 정한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P02",
+    "lane": "기획예산처(예산실)",
+    "stage": "G0 대상확인",
+    "node_type": "gateway",
+    "deadline": null,
+    "actor": "기획예산처",
+    "output_documents": [
+     "예타 대상 판정 결과"
+    ]
+   }
+  },
+  {
+   "id": "step:P03",
+   "type": "Gate",
+   "label": "예타 면제 판단",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가재정법",
+     "article": "제38조제2항",
+     "text": "국방·재난복구·지역균형발전 등 법정 요건에 해당하는 사업은 예비타당성조사 대상에서 제외(면제)한다."
+    },
+    {
+     "law": "국가재정법",
+     "article": "제38조제2항제10호",
+     "text": "국가 정책적으로 추진이 필요하여 국무회의를 거쳐 확정된 사업 등은 면제할 수 있고, 면제 내역·사유를 국회에 보고한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P03",
+    "lane": "기획예산처(예산실)",
+    "stage": "G0 대상확인",
+    "node_type": "gateway",
+    "deadline": null,
+    "actor": "기획예산처장관",
+    "output_documents": [
+     "면제 여부 결정"
+    ]
+   }
+  },
+  {
+   "id": "step:P04",
+   "type": "Step",
+   "label": "예타 신청·조사요구서 제출",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가재정법",
+     "article": "제38조제1항",
+     "text": "주무부처는 대상 신규사업에 대해 예비타당성조사를 요구한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P04",
+    "lane": "사업주관 중앙관서",
+    "stage": "G1 신청·대상선정",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "주무부처",
+    "output_documents": [
+     "예비타당성조사 요구서",
+     "사업 기초자료"
+    ]
+   }
+  },
+  {
+   "id": "step:P05",
+   "type": "Gate",
+   "label": "예타 대상사업 선정",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가재정법",
+     "article": "제38조제3항",
+     "text": "예비타당성조사 대상사업은 기획예산처장관이 중앙관서의 장의 신청에 따라 또는 직권으로 선정할 수 있다."
+    },
+    {
+     "law": "예비타당성조사 운용지침",
+     "article": "제25조",
+     "text": "대상사업은 기획예산처장관이 중앙관서의 장의 요구에 따라 또는 직권으로 위원회의 심의를 거쳐 선정할 수 있다."
+    },
+    {
+     "law": "예비타당성조사 운용지침",
+     "article": "제33조제1항",
+     "text": "선정 시 중장기 투자계획 부합성, 사업계획 구체성, 추진 시급성, 국고지원 요건, 지역균형성장 요인을 종합 고려한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P05",
+    "lane": "기획예산처(예산실)",
+    "stage": "G1 신청·대상선정",
+    "node_type": "gateway",
+    "deadline": null,
+    "actor": "기획예산처",
+    "output_documents": [
+     "예타 대상사업 선정 통보"
+    ]
+   }
+  },
+  {
+   "id": "step:P06",
+   "type": "Step",
+   "label": "조사수행기관 지정·조사계획 수립",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가재정법",
+     "article": "제8조의2제1항제1호",
+     "text": "기획예산처장관은 한국개발연구원·한국조세재정연구원 등을 전문기관으로 지정하여 예비타당성조사 및 관련 조사·연구를 수행하게 할 수 있다."
+    },
+    {
+     "law": "국가재정법",
+     "article": "제38조제6항",
+     "text": "기획예산처장관은 대상사업의 선정기준, 조사수행기관, 조사 방법 및 절차에 관한 지침을 마련하여 중앙관서의 장에게 통보하여야 한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P06",
+    "lane": "조사수행기관(KDI·KISTEP)",
+    "stage": "G2 조사착수·수행",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "KDI 공공투자관리센터 / KISTEP",
+    "output_documents": [
+     "조사수행계획서",
+     "착수보고"
+    ]
+   }
+  },
+  {
+   "id": "step:P07",
+   "type": "Step",
+   "label": "수요예측·경제성(B/C) 분석",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가재정법",
+     "article": "제38조제6항",
+     "text": "경제성·정책성·지역균형발전 분석 등 조사 방법 및 절차에 관한 지침을 마련하여 통보하여야 한다."
+    },
+    {
+     "law": "예비타당성조사 운용지침",
+     "article": "제11조",
+     "text": "종합평가를 수행하기 위하여 사업 특성을 고려해 사회기반시설·사회문화산업·사회복지소득이전 분과위원회 중 하나를 개최한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P07",
+    "lane": "조사수행기관(KDI·KISTEP)",
+    "stage": "G2 조사착수·수행",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "KDI 공공투자관리센터",
+    "output_documents": [
+     "수요예측 결과",
+     "비용편익(B/C) 분석"
+    ]
+   }
+  },
+  {
+   "id": "step:P08",
+   "type": "Step",
+   "label": "정책성 분석",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가재정법",
+     "article": "제38조제6항",
+     "text": "경제성·정책성·지역균형발전 분석 등 조사 방법 및 절차에 관한 지침을 마련하여 통보하여야 한다."
+    },
+    {
+     "law": "예비타당성조사 운용지침",
+     "article": "제11조",
+     "text": "분과위원회가 종합평가를 수행한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P08",
+    "lane": "조사수행기관(KDI·KISTEP)",
+    "stage": "G2 조사착수·수행",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "KDI 공공투자관리센터",
+    "output_documents": [
+     "정책성 분석표"
+    ]
+   }
+  },
+  {
+   "id": "step:P09",
+   "type": "Step",
+   "label": "지역균형발전 분석",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가재정법",
+     "article": "제38조제6항",
+     "text": "경제성·정책성·지역균형발전 분석 등 조사 방법 및 절차에 관한 지침을 마련하여 통보하여야 한다."
+    },
+    {
+     "law": "예비타당성조사 운용지침",
+     "article": "제33조제1항",
+     "text": "대상사업 선정 시 지역낙후도 수준과 균형성장효과 등 지역균형성장 요인을 고려한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P09",
+    "lane": "조사수행기관(KDI·KISTEP)",
+    "stage": "G2 조사착수·수행",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "KDI 공공투자관리센터",
+    "output_documents": [
+     "지역균형발전 분석표"
+    ]
+   }
+  },
+  {
+   "id": "step:P10",
+   "type": "Gate",
+   "label": "계층화분석(AHP) 종합평가",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가재정법",
+     "article": "제38조제6항",
+     "text": "조사 방법 및 절차에 관한 지침을 마련하여 통보하여야 한다."
+    },
+    {
+     "law": "예비타당성조사 운용지침",
+     "article": "제11조제1항",
+     "text": "예비타당성조사 등의 종합평가를 수행하기 위하여 분과위원회를 개최한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P10",
+    "lane": "재정사업평가위원회·분과",
+    "stage": "G3 종합평가(AHP)",
+    "node_type": "gateway",
+    "deadline": null,
+    "actor": "평가단(조사기관·전문가)",
+    "output_documents": [
+     "AHP 종합평가 결과",
+     "종합평점"
+    ]
+   }
+  },
+  {
+   "id": "step:P11",
+   "type": "Step",
+   "label": "예타 조사보고서 작성",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "예비타당성조사 운용지침",
+     "article": "제11조제10항(종합보고서 작성·제출)",
+     "text": "예비타당성조사 수행기관은 종합평가결과, 분과위 논의사항 등 정책제언을 포함하여 예비타당성조사 종합보고서를 작성한 후 기획예산처장관에게 제출한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P11",
+    "lane": "조사수행기관(KDI·KISTEP)",
+    "stage": "G3 종합평가(AHP)",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "KDI / KISTEP",
+    "output_documents": [
+     "예비타당성조사 보고서"
+    ]
+   }
+  },
+  {
+   "id": "step:P12",
+   "type": "Gate",
+   "label": "재정사업평가위원회 심의·의결",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "예비타당성조사 운용지침",
+     "article": "제7조",
+     "text": "위원회의 위원장은 기획예산처차관이 되고, 관계부처 고위공무원단 소속 공무원과 15명 이내의 민간위원으로 구성한다."
+    },
+    {
+     "law": "예비타당성조사 운용지침",
+     "article": "제9조",
+     "text": "위원회는 분기별 1회 개최를 원칙으로 하며, 재적위원 과반수 출석과 출석위원 과반수 찬성으로 의결한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P12",
+    "lane": "재정사업평가위원회·분과",
+    "stage": "G4 결과확정·통보",
+    "node_type": "gateway",
+    "deadline": null,
+    "actor": "재정사업평가위원회",
+    "output_documents": [
+     "심의·의결 결과"
+    ]
+   }
+  },
+  {
+   "id": "step:P13",
+   "type": "Step",
+   "label": "예타 결과 통보",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가재정법",
+     "article": "제38조",
+     "text": "기획예산처장관은 조사 결과를 주무부처에 통보한다."
+    },
+    {
+     "law": "국가재정법 시행령",
+     "article": "제13조",
+     "text": "결과 통보의 방법과 후속 처리를 정한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P13",
+    "lane": "기획예산처(예산실)",
+    "stage": "G4 결과확정·통보",
+    "node_type": "notice",
+    "deadline": null,
+    "actor": "기획예산처",
+    "output_documents": [
+     "예비타당성조사 결과 통보서"
+    ]
+   }
+  },
+  {
+   "id": "step:P14",
+   "type": "Step",
+   "label": "예산요구 반영(설계비·사업비)",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가재정법",
+     "article": "제28조, 제29조",
+     "text": "예타 통과 사업만 다음 단계 예산(설계비·사업비)을 요구·편성할 수 있다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P14",
+    "lane": "사업주관 중앙관서",
+    "stage": "G5 후속",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "주무부처",
+    "output_documents": [
+     "다음연도 예산요구서"
+    ]
+   }
+  },
+  {
+   "id": "step:P15",
+   "type": "Gate",
+   "label": "타당성재조사 판단·연계",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가재정법",
+     "article": "제50조제2항",
+     "text": "총사업비가 대통령령으로 정하는 규모 이상 증가한 사업 등에 대하여 타당성을 재조사하고 그 결과를 국회에 보고하여야 한다."
+    },
+    {
+     "law": "국가재정법",
+     "article": "제50조제3항",
+     "text": "매몰비용 비중이 큰 경우, 지역 균형발전·긴급 대응 목적 사업 등은 타당성재조사를 실시하지 아니할 수 있다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P15",
+    "lane": "기획예산처(예산실)",
+    "stage": "G5 후속",
+    "node_type": "gateway",
+    "deadline": null,
+    "actor": "기획예산처",
+    "output_documents": [
+     "타당성재조사 대상 통보"
+    ]
+   }
+  },
+  {
+   "id": "step:S01",
+   "type": "System",
+   "label": "예타 결과 공개",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가재정법",
+     "article": "제38조의2",
+     "text": "예비타당성조사를 의뢰받은 전문기관의 장은 수요예측자료 등 조사 결과에 관한 자료를 공공기관의 정보공개에 관한 법률 제7조에 따라 공개하여야 한다."
+    },
+    {
+     "law": "국가재정법",
+     "article": "제9조",
+     "text": "재정정보의 공표."
+    }
+   ],
+   "attrs": {
+    "process_id": "S01",
+    "lane": "정보시스템",
+    "stage": "G4 결과확정·통보",
+    "node_type": "system",
+    "deadline": null,
+    "actor": "기획예산처·조사기관 공개시스템",
+    "output_documents": [
+     "공개 게시자료"
+    ]
+   }
+  }
+ ],
+ "relations": [
+  {
+   "id": "R-E01",
+   "type": "sequence",
+   "from": "step:P01",
+   "to": "step:P02",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E02",
+   "type": "sequence",
+   "from": "step:P02",
+   "to": "step:P03",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E03",
+   "type": "sequence",
+   "from": "step:P03",
+   "to": "step:P04",
+   "label": "면제 미해당",
+   "condition": "면제 미해당"
+  },
+  {
+   "id": "R-E04",
+   "type": "sequence",
+   "from": "step:P04",
+   "to": "step:P05",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E05",
+   "type": "sequence",
+   "from": "step:P05",
+   "to": "step:P06",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E06",
+   "type": "sequence",
+   "from": "step:P06",
+   "to": "step:P07",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E07",
+   "type": "sequence",
+   "from": "step:P07",
+   "to": "step:P08",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E08",
+   "type": "sequence",
+   "from": "step:P08",
+   "to": "step:P09",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E09",
+   "type": "sequence",
+   "from": "step:P09",
+   "to": "step:P10",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E10",
+   "type": "sequence",
+   "from": "step:P10",
+   "to": "step:P11",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E11",
+   "type": "sequence",
+   "from": "step:P11",
+   "to": "step:P12",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-E12",
+   "type": "sequence",
+   "from": "step:P12",
+   "to": "step:P13",
+   "label": "통과",
+   "condition": "통과"
+  },
+  {
+   "id": "R-E13",
+   "type": "sequence",
+   "from": "step:P13",
+   "to": "step:P14",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-M01",
+   "type": "message",
+   "from": "step:P16",
+   "to": "step:P01",
+   "label": "지역 사업 건의",
+   "condition": "지역 사업 건의"
+  },
+  {
+   "id": "R-M02",
+   "type": "message",
+   "from": "step:P05",
+   "to": "step:P06",
+   "label": "조사 의뢰",
+   "condition": "조사 의뢰"
+  },
+  {
+   "id": "R-M03",
+   "type": "message",
+   "from": "step:P11",
+   "to": "step:P12",
+   "label": "조사보고서 상정",
+   "condition": "조사보고서 상정"
+  },
+  {
+   "id": "R-M04",
+   "type": "message",
+   "from": "step:P13",
+   "to": "step:S01",
+   "label": "결과 공개",
+   "condition": "결과 공개"
+  },
+  {
+   "id": "R-L01",
+   "type": "loop",
+   "from": "step:P15",
+   "to": "step:P07",
+   "label": "타당성재조사 회귀",
+   "condition": "타당성재조사 회귀"
+  },
+  {
+   "id": "R-L02",
+   "type": "loop",
+   "from": "step:P12",
+   "to": "step:P01",
+   "label": "부결 시 사업 재설계",
+   "condition": "부결 시 사업 재설계"
+  },
+  {
+   "id": "R-about",
+   "type": "about",
+   "from": "case:GSC-N02-2026-0901",
+   "to": "item:total-cost",
+   "label": "이 건의 선결 정보",
+   "condition": null
+  },
+  {
+   "id": "R-requires",
+   "type": "requires",
+   "from": "step:P02",
+   "to": "item:total-cost",
+   "label": "500억·300억 문턱 판정",
+   "condition": "hard"
+  },
+  {
+   "id": "R-decides",
+   "type": "decides",
+   "from": "role:evaluation-committee",
+   "to": "step:P12",
+   "label": "심의·의결",
+   "condition": null
+  },
+  {
+   "id": "R-acts",
+   "type": "acts_as",
+   "from": "role:pmo",
+   "to": "role:central-agency",
+   "label": "실무 주관(신청 주체는 중앙관서의 장)",
+   "condition": null
+  }
+ ],
+ "states": [
+  {
+   "id": "S-case",
+   "entity_id": "case:GSC-N02-2026-0901",
+   "state": "scope_undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N02",
+    "note": "총사업비·재원주체 미확정으로 예타 대상 여부 판정 전"
+   }
+  },
+  {
+   "id": "S-cost",
+   "entity_id": "item:total-cost",
+   "state": "undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N02",
+    "note": "국가·지방·공공기관별 재원주체와 총사업비가 미확정"
+   }
+  },
+  {
+   "id": "S-p01",
+   "entity_id": "step:P01",
+   "state": "in_progress",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N02",
+    "note": "N02가 진행 중이다"
+   }
+  },
+  {
+   "id": "S-p02",
+   "entity_id": "step:P02",
+   "state": "ready",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N02",
+    "note": "총사업비가 확정되면 즉시 판정 가능"
+   }
+  },
+  {
+   "id": "S-p16",
+   "entity_id": "step:P16",
+   "state": "not_a_statutory_step",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "none",
+    "source": "국가재정법 제38조제3항",
+    "note": "지자체 건의는 법정 절차 단계가 아니다. 실무 관행이라 격리했다."
+   }
+  },
+  {
+   "id": "S-p03",
+   "entity_id": "step:P03",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N02"
+   }
+  },
+  {
+   "id": "S-p04",
+   "entity_id": "step:P04",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N02"
+   }
+  },
+  {
+   "id": "S-p05",
+   "entity_id": "step:P05",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N02"
+   }
+  },
+  {
+   "id": "S-p06",
+   "entity_id": "step:P06",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N02"
+   }
+  },
+  {
+   "id": "S-p07",
+   "entity_id": "step:P07",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N02"
+   }
+  },
+  {
+   "id": "S-p08",
+   "entity_id": "step:P08",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N02"
+   }
+  },
+  {
+   "id": "S-p09",
+   "entity_id": "step:P09",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N02"
+   }
+  },
+  {
+   "id": "S-p10",
+   "entity_id": "step:P10",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N02"
+   }
+  },
+  {
+   "id": "S-p11",
+   "entity_id": "step:P11",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N02"
+   }
+  },
+  {
+   "id": "S-p12",
+   "entity_id": "step:P12",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N02"
+   }
+  },
+  {
+   "id": "S-p13",
+   "entity_id": "step:P13",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N02"
+   }
+  },
+  {
+   "id": "S-p14",
+   "entity_id": "step:P14",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N02"
+   }
+  },
+  {
+   "id": "S-p15",
+   "entity_id": "step:P15",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N02"
+   }
+  },
+  {
+   "id": "S-s01",
+   "entity_id": "step:S01",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N02"
+   }
+  }
+ ],
+ "rules": [
+  {
+   "id": "rule:pfs-threshold",
+   "name": "총사업비 500억 이상이고 국가 재정지원 300억 이상인 신규 사업이 대상이다",
+   "applies_to": [
+    "step:P02",
+    "item:total-cost"
+   ],
+   "inputs": [
+    "total_project_cost",
+    "national_support"
+   ],
+   "predicate": "if total_cost >= 50_000_000_000 and national_support >= 30_000_000_000 then pfs_target else not_target",
+   "output": {
+    "blocked": "총사업비와 국가 재정지원 규모가 확정되어야 판정할 수 있다"
+   },
+   "statute_ref": [
+    {
+     "law": "국가재정법",
+     "article": "제38조제1항"
+    }
+   ],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:exemption-needs-cabinet-decision",
+   "name": "지역균형발전·국가정책 사유 면제는 국무회의를 거쳐 확정된 사업이어야 한다",
+   "applies_to": [
+    "step:P03"
+   ],
+   "inputs": [
+    "exemption_ground",
+    "cabinet_decision",
+    "concrete_plan"
+   ],
+   "predicate": "if ground == 제38조제2항제10호 then require(구체적 사업계획 수립 and 국무회의 확정) else other_grounds",
+   "output": {
+    "required": [
+     "사업목적·규모·추진방안 등 구체적 사업계획",
+     "국무회의를 거친 확정"
+    ],
+    "duty": "면제 사업의 내역 및 사유를 지체 없이 국회 소관 상임위원회에 보고"
+   },
+   "statute_ref": [
+    {
+     "law": "국가재정법",
+     "article": "제38조제2항제10호"
+    }
+   ],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:three-analyses-are-statutory",
+   "name": "경제성·정책성·지역균형발전 분석은 법률이 정한 조사 항목이다",
+   "applies_to": [
+    "step:P07",
+    "step:P08",
+    "step:P09",
+    "step:P10"
+   ],
+   "inputs": [],
+   "predicate": "제38조제6항 lists 경제성·정책성·지역균형발전 분석 as 조사 방법",
+   "output": {
+    "note": "운용지침에만 있는 것이 아니다. 법률 근거를 놓치면 분석 항목이 재량처럼 보인다."
+   },
+   "statute_ref": [
+    {
+     "law": "국가재정법",
+     "article": "제38조제6항"
+    }
+   ],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:local-request-is-not-a-step",
+   "name": "지방자치단체의 사업 건의는 법정 절차 단계가 아니다",
+   "applies_to": [
+    "step:P16"
+   ],
+   "inputs": [],
+   "predicate": "제38조제3항 defines only 중앙관서의 장의 신청 or 기획예산처장관 직권",
+   "output": {
+    "reference_only": "step:P16",
+    "note": "실무·정치 현실이지 절차가 아니다. 이 단계는 참고용으로 격리되어 다음 행동을 계산하지 않는다."
+   },
+   "statute_ref": [
+    {
+     "law": "국가재정법",
+     "article": "제38조제3항"
+    }
+   ],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:request-timing",
+   "name": "예타 요구는 원칙적으로 사업 시행 전전년도까지 한다",
+   "applies_to": [
+    "step:P04"
+   ],
+   "inputs": [
+    "target_fiscal_year"
+   ],
+   "predicate": "request_by(사업 시행 전전년도) unless 시급하고 불가피한 사유",
+   "output": {
+    "cadence": "원칙적으로 매년 4회(분기별 1회) 요구서 제출"
+   },
+   "statute_ref": [
+    {
+     "law": "예비타당성조사 운용지침",
+     "article": "제26조제1항"
+    },
+    {
+     "law": "예비타당성조사 운용지침",
+     "article": "제26조제2항"
+    }
+   ],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:reassessment-on-cost-increase",
+   "name": "총사업비가 일정 규모 이상 증가하면 타당성재조사로 회귀한다",
+   "applies_to": [
+    "step:P15"
+   ],
+   "inputs": [
+    "cost_increase",
+    "demand_decrease"
+   ],
+   "predicate": "if 총사업비 증가 >= 대통령령 기준 or 수요예측치 감소 >= 대통령령 기준 then 타당성재조사 else 유지",
+   "output": {
+    "exceptions": [
+     "매몰비용 비중이 큰 경우",
+     "법정경비 반영 등 실익 없는 경우",
+     "지역 균형발전·긴급 대응 목적 사업",
+     "재해예방·복구 등 시급한 사업"
+    ]
+   },
+   "statute_ref": [
+    {
+     "law": "국가재정법",
+     "article": "제50조제2항"
+    },
+    {
+     "law": "국가재정법",
+     "article": "제50조제3항"
+    }
+   ],
+   "stop_if_unverified": true
+  }
+ ],
+ "action_packets": [
+  {
+   "id": "ap:determine-pfs-applicability",
+   "title": "예타 대상 여부 판정 준비",
+   "for_query": "예타 대상인지 어떻게 확인해?",
+   "actor": "role:central-agency",
+   "why": "법 제38조제1항의 총사업비 500억·국가 재정지원 300억 문턱으로 대상 여부가 갈린다. rule:pfs-threshold 에 따라 두 수치가 확정되지 않으면 판정 자체가 불가능하다. 광주 사업은 재원주체와 총사업비가 모두 미확정이다.",
+   "based_on": [
+    "case:GSC-N02-2026-0901",
+    "S-cost",
+    "S-p02",
+    "rule:pfs-threshold",
+    "rule:request-timing",
+    "step:P02",
+    "step:P03",
+    "step:P04",
+    "item:total-cost"
+   ],
+   "checklist": [
+    "총사업비와 국가 재정지원 규모를 확정한다 — 500억·300억 문턱 판정의 입력이다 (법 제38조제1항)",
+    "사업 유형이 건설공사 포함 사업인지 지능정보화 사업인지 등을 확인한다 (법 제38조제1항 각 호)",
+    "법 제38조제2항 각 호의 면제 사유에 해당하는지 검토한다",
+    "대상이면 중앙관서의 장이 예타를 요구한다. 원칙적으로 사업 시행 전전년도까지, 분기별 1회 (운용지침 제26조)",
+    "요구서는 별표 1 서식으로 작성하고 디지털예산회계시스템(D-Brain)에도 등록한다 (운용지침 제26조제2항·제4항)",
+    "지방비 분담이 있으면 지방재정 투자심사 경로를 병행 검토한다 (지방재정법 제37조·제37조의2)"
+   ],
+   "evidence_needed": [
+    "총사업비 산출 근거",
+    "국가·지방·공공기관별 재원 분담",
+    "중기사업계획서(법 제28조)",
+    "사업 유형 판단 자료"
+   ],
+   "system_touchpoints": [
+    "디지털예산회계시스템(D-Brain)",
+    "기획예산처 예타 요구 창구"
+   ],
+   "human_signoff": "중앙관서의 장의 결재로만 예타를 요구할 수 있다",
+   "auto_execute": false,
+   "risks": [
+    "총사업비 미확정 상태에서는 대상 여부도 면제 여부도 판정할 수 없다",
+    "지방자치단체의 건의는 절차가 아니다. 신청 주체는 중앙관서의 장이다 (법 제38조제3항)",
+    "면제를 전제로 일정을 잡았다가 대상으로 판정되면 조사 기간이 임계경로가 된다"
+   ]
+  },
+  {
+   "id": "ap:pursue-exemption",
+   "title": "예타 면제 경로 검토",
+   "for_query": "예타 면제 받으려면 뭐가 필요해?",
+   "actor": "role:budget-minister",
+   "why": "지역균형발전·국가정책 사유 면제(법 제38조제2항제10호)는 구체적 사업계획 수립과 국무회의 확정을 모두 요구한다. rule:exemption-needs-cabinet-decision 이 그 두 요건을 건다.",
+   "based_on": [
+    "case:GSC-N02-2026-0901",
+    "rule:exemption-needs-cabinet-decision",
+    "step:P03"
+   ],
+   "checklist": [
+    "면제 사유가 법 제38조제2항 각 호 중 어디에 해당하는지 특정한다",
+    "제10호 사유라면 사업목적·규모·추진방안 등 구체적 사업계획이 수립되었는지 확인한다 (가목)",
+    "국무회의를 거쳐 확정된 사업인지 확인한다 (나목)",
+    "종전에 경제성 부족으로 예타를 통과하지 못한 사업이면 여건 변동 또는 재기획 사실을 증명한다",
+    "면제 결정 시 그 내역과 사유를 지체 없이 국회 소관 상임위원회에 보고한다 (법 제38조제2항제10호 후단)",
+    "면제되더라도 사업계획 적정성 검토를 거쳐 예산편성에 반영해야 한다 (법 제38조제5항)"
+   ],
+   "evidence_needed": [
+    "구체적 사업계획",
+    "국무회의 확정 문서",
+    "여건 변동 또는 재기획 근거(해당 시)"
+   ],
+   "system_touchpoints": [
+    "국무회의",
+    "국회 소관 상임위원회 보고"
+   ],
+   "human_signoff": "면제는 법정 요건을 갖춘 경우에만 가능하다. 정책 의지만으로는 성립하지 않는다",
+   "auto_execute": false,
+   "risks": [
+    "면제는 조사 생략이지 검토 생략이 아니다. 제38조제5항의 사업계획 적정성 검토가 따라온다",
+    "국무회의 확정 없이 면제를 전제하면 경로 자체가 성립하지 않는다"
+   ]
+  }
+ ],
+ "demo_queries": [
+  {
+   "q": "예타 대상인지 어떻게 확인해?",
+   "resolve": {
+    "identify": [
+     "case:GSC-N02-2026-0901",
+     "item:total-cost"
+    ],
+    "state": "scope_undetermined",
+    "rules_fired": [
+     "rule:pfs-threshold",
+     "rule:request-timing"
+    ],
+    "action_packet": "ap:determine-pfs-applicability"
+   }
+  },
+  {
+   "q": "예타 면제 받으려면 뭐가 필요해?",
+   "resolve": {
+    "identify": [
+     "case:GSC-N02-2026-0901",
+     "step:P03"
+    ],
+    "rules_fired": [
+     "rule:exemption-needs-cabinet-decision"
+    ],
+    "action_packet": "ap:pursue-exemption"
+   }
+  },
+  {
+   "q": "이 예타 건 지금 어디까지 왔어?",
+   "resolve": {
+    "done": [],
+    "ready": [
+     "step:P02"
+    ],
+    "available": [
+     "step:P03"
+    ]
+   }
+  }
+ ],
+ "notes": [
+  "구조 층은 derive-case.mjs가 제도 JSON에서 파생했다.",
+  "조문은 2026-09-01 법제처 DRF 현행 원문(국가재정법 010301, 예비타당성조사 운용지침 admrul 56814)에 대조했다.",
+  "P16 지자체 사업 건의는 법정 절차 단계가 아니라 참고용으로 격리되어 있다. MCP는 그 단계를 지나는 다음 행동 계산을 거부한다.",
+  "3호의 N02를 안쪽에서 채운다. N02는 3호에서 유일하게 진행 중인 마일스톤이다.",
+  "auto_execute는 항상 false."
+ ],
+ "project_context": {
+  "project_id": "gwangju-semiconductor-cluster",
+  "milestone_node_id": "N02",
+  "milestone_label": "통합 추진체계·재정심사·예타·마스터 일정 수립",
+  "note": "3호에서 유일하게 진행 중인 마일스톤이다."
+ }
+}

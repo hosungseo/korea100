@@ -9,7 +9,10 @@
 - `samples/information-disclosure.case.json` — **정보공개청구** 샘플 1호 (제도 R2)
 - `samples/administrative-fine-pre-notice.case.json` — **과태료 사전통지·의견제출** 샘플 2호 (제도 R2)
 - `samples/gwangju-semiconductor-cluster.case.json` — **광주 반도체 클러스터** 샘플 3호 (프로젝트, 제도 108개)
-- `samples/semiconductor-cluster-designation.case.json` — **반도체클러스터 지정** 샘플 4호 (3호의 N03을 안쪽에서 채운다)
+- `samples/semiconductor-cluster-designation.case.json` — **반도체클러스터 지정** 샘플 4호 (3호의 N03)
+- `samples/semiconductor-infrastructure-fasttrack.case.json` — **기반시설 지원·신속처리** 샘플 5호 (3호의 N20)
+- `samples/preliminary-feasibility-study.case.json` — **예비타당성조사** 샘플 6호 (3호의 N02, 1개 단계 격리)
+- `samples/national-strategic-industry-complex.case.json` — **국가첨단전략산업 특화단지** 샘플 7호 (3호의 N03, 4호와 같은 마일스톤)
 - `scripts/derive-case.mjs` — 제도 업무구조도 → 케이스 구조 층 파생
 - `scripts/derive-project-case.mjs` — 메가프로젝트 오버레이 → 프로젝트 케이스 구조 층 파생
 - `scripts/demo_query.py` — 샘플 질의 데모
@@ -46,10 +49,19 @@ node ontology/scripts/derive-case.mjs --slug <제도 slug> --case-id <ID> --as-o
 2026-08-27 사전통지 수령, 의견 제출 기한 2026-09-08까지 열려 있음. as_of 2026-09-01.
 당사자용·행정청용 패킷을 각각 낸다 → [DEMO](samples/administrative-fine-pre-notice.DEMO.md)
 
-**4호** 반도체클러스터 지정 (`semiconductor-cluster-designation-coordination`) — 케이스 `GSC-N03-2026-0901`.
-3호의 마일스톤 N03을 안쪽에서 채운다. 사업 층에서 N03은 열려 있는데 제도 층으로 들어가면
-P01에서 사업구역 경계가 막고 있다. 층을 오르내려도 같은 매듭이 나온다
-→ [DEMO](samples/semiconductor-cluster-designation.DEMO.md)
+**4~7호** 3호의 마일스톤을 안쪽에서 채우는 제도 케이스 넷. 사업 층은 '어느 마일스톤이 열렸나'를,
+제도 층은 '그 마일스톤 안에서 어느 단계인가'를 답한다.
+
+| 케이스 | 제도 | 마일스톤 | 안쪽에서 막고 있는 것 |
+|---|---|---|---|
+| 4호 `GSC-N03-2026-0901` | 반도체클러스터 지정 | N03 | 사업구역 경계 미확정 (영 제17조제1항제2호) |
+| 5호 `GSC-N20-2026-0901` | 기반시설 지원·신속처리 | N20 | 클러스터 지정 전이라 신청 자격 없음 (법 제27조제1항) |
+| 6호 `GSC-N02-2026-0901` | 예비타당성조사 | N02 | 총사업비 미확정으로 대상 여부 판정 불가 (법 제38조제1항) |
+| 7호 `GSC-N03B-2026-0901` | 국가첨단전략산업 특화단지 | N03 | 반도체클러스터와 중복 지정 가능, 경로 선택 |
+
+N03에는 케이스가 둘 붙는다. 반도체특별법 제11조제5항 후단이 두 지정의 중복을 명문으로
+허용하기 때문이다. 배타 관계가 아니라 순서와 조합의 문제다
+→ [4호 DEMO](samples/semiconductor-cluster-designation.DEMO.md)
 
 **3호** 광주 군공항 부지 반도체 클러스터 (`gwangju-semiconductor-cluster`) — 케이스 `GSC-2026-0901-001`.
 마일스톤 54·아티팩트 53·참조 제도 108·관계 462. 완료 2 / 진행 1 / 착수가능 10 / 차단 36 / 경로미확정 5.
@@ -89,7 +101,7 @@ python3 ontology/scripts/demo_query.py "부분공개 통지 왔는데 뭐 하면
 - MCP 도구: `load_ontology_case`, `get_case_state`, `query_case`, `check_case_linkage`, `get_project_status`, `explain_blocked_milestone`
 - 패킷 계약: `mcp/src/packet-contract.mjs` — R2 경로(`create_action_packet`)와 온톨로지 경로가 같은 ActionPacket 계약을 통과해야 한다
 - 케이스 대조: `mcp/src/case-link.mjs` — 케이스 그래프가 제도 업무구조도와 어긋나면 드러낸다
-- 테스트: `cd mcp && npm test` (70건)
+- 테스트: `cd mcp && npm test` (76건)
 - 데모: `node mcp/scripts/ontology-query-once.mjs [--case samples/<파일>] "<질문>"`
 
 ## 제도 층과의 관계

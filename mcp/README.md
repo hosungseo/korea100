@@ -54,6 +54,10 @@ Korea100의 업무구조도를 AI 에이전트가 질의할 수 있는 **읽기 
 | `samples/information-disclosure.case.json` (기본) | 정보공개청구 | R2 | 가능 |
 | `samples/administrative-fine-pre-notice.case.json` | 과태료 사전통지·의견제출 | R2 | 가능 |
 | `samples/gwangju-semiconductor-cluster.case.json` | 광주 반도체 클러스터 (제도 108종 중 8종 R2) | 부분 | N02·N03·N19·N20 |
+| `samples/semiconductor-cluster-designation.case.json` | 반도체클러스터 지정 (N03) | R2 | 가능 |
+| `samples/semiconductor-infrastructure-fasttrack.case.json` | 기반시설 지원·신속처리 (N20) | R2 | 가능 |
+| `samples/preliminary-feasibility-study.case.json` | 예비타당성조사 (N02) | R2 | 가능 (P16 격리) |
+| `samples/national-strategic-industry-complex.case.json` | 특화단지 (N03) | R2 | 가능 |
 
 질의가 케이스의 데모 질문과 충분히 가깝지 않으면 패킷을 만들지 않고
 `case_needs_disambiguation`으로 후보를 되묻는다.
