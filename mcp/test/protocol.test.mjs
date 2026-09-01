@@ -38,6 +38,7 @@ test("stdio MCP가 도구·리소스를 공개하고 다음 행동을 구조화�
       "check_case_linkage",
       "create_action_packet",
       "explain_blocked_milestone",
+      "get_attention_view",
       "get_case_state",
       "get_next_actions",
       "get_pending_decisions",

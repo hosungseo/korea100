@@ -8,10 +8,12 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 // 골격 판정은 탐지기 하나가 정본이다. 사다리 정의를 여기 다시 쓰지 않는다.
 import { inspect as inspectInstitution } from "./detect-template-skeletons.mjs";
+import { milestoneTier, classifyTier, isDecisionStep, TIER_RANK } from "./lib/mega-tier.mjs";
 import {
   allMilestoneStatuses,
   institutionReadinessFor,
   pendingDecisions,
+  attentionView,
 } from "../../mcp/src/project-case.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -153,7 +155,11 @@ if (ontCase) {
   const byId = Object.fromEntries(statuses.map((s) => [s.node_id, s]));
   const readiness = {};
   for (const s of statuses) readiness[s.node_id] = institutionReadinessFor(ontCase, s.node_id);
-  ONT = { caseId: ontCase.case_id, asOf: ontCase.as_of, byId, readiness, decisions: pendingDecisions(ontCase) };
+  const attention = attentionView(ontCase);
+  const attentionById = Object.fromEntries(
+    [...attention.cabinet, ...attention.agency].map((e) => [e.node_id, { tier: e.attention_tier, reasons: e.reasons, reach: e.downstream_reach }]),
+  );
+  ONT = { caseId: ontCase.case_id, asOf: ontCase.as_of, byId, readiness, decisions: pendingDecisions(ontCase), attention, attentionById };
   console.log(`ontology: ${ontCase.case_id} 연결 — 계산가능 관문 ${statuses.filter((s) => readiness[s.node_id]?.next_action_computable).length}개`);
 }
 
@@ -188,58 +194,8 @@ for (const node of project.nodes) {
   }
 }
 
-// 위상 계층 — src/lib/mega-tier.ts와 같은 어휘·규칙을 쓴다.
-// cabinet 총리·국무회의 / minister 부처 장관 / local 지자체장 /
-// committee 위원회·전문기관 / field 실무·사업자·기타.
-// 워룸 정직성 규칙: "산업단지 지정권자"·"승인기관" 같은 역할명은 지정 경로
-// 확정 전까지 특정 기관·계층으로 치환하지 않는다 → 어느 패턴에도 안 걸려
-// field로 남는다. 예외로 위원장이 국무총리로 법정된 위원회만 cabinet에 둔다.
-const TIER_RANK = { cabinet: 6, legislature: 5, presidential_committee: 4, minister: 3, local: 2, committee: 1, field: 0 };
-// 대통령 소속 위원회 — 그 심의·의결이 법정 요건인 위원회(지방시대위원회:
-// 균형성장법 §62 대통령 소속, §9·§23·§31에서 심의·의결이 법정 절차).
-// 일반 심의위원회와 급이 다르므로 별도 계층으로 둔다.
-const PRESIDENTIAL_COMMITTEE_PATTERN = /^(지방시대위원회|국가자치분권균형성장회의|국토정책위원회)$/;
-// 입법부 — 법률 제·개정이 선행조건인 관문(5극3특 법제 트랙 등). 위원회명에
-// 붙는 "의회"(전력정책심의회)와 섞이지 않도록 토큰을 앵커로 잡는다.
-const LEGISLATURE_PATTERN = /^(국회|국회 본회의|국회 상임위원회|지방의회|시·도의회)$/;
-// 위원장=국무총리 법정 위원회(국가첨단전략산업법 §9, 전력망확충특별법 §6,
-// 반도체특별법 위원회 규정) — 총리 테이블에 올라가는 의결이라 cabinet.
-const PM_CHAIRED_COMMITTEE_PATTERN =
-  /국가첨단전략산업위원회|국가기간전력망확충위원회|반도체산업경쟁력강화특별위원회/;
-const CABINET_PATTERN = /국무회의|국무총리|국무조정실|대통령|청와대|범정부/;
-const APPLICANT_ACTOR_PATTERN =
-  /^(신청인|제안자|사업시행자|사업자|사업주|기업|입주기업|외국인투자가|영업자|할당대상업체|건설사업자|소유자|토지소유자|주민)/;
-const MINISTER_PATTERN =
-  /장관|산업통상부|산업통상자원부|기획재정부|기후에너지환경부|행정안전부|국토교통부|고용노동부|과학기술정보통신부|문화체육관광부|농림축산식품부|해양수산부|중소벤처기업부|보건복지부|기획예산처|환경부|국방부|국가유산청|소방청|산림청|경찰청|조달청|기상청|중앙행정기관|중앙관서|중앙부처|주무부처|주관부처/;
-const LOCAL_PATTERN =
-  /시·도지사|도지사|시장·군수|시장등|군수|구청장|관할 구청|광주시|전라남도|광주특별시|통합특별시|지자체|지방자치단체|시·도|시·군·구|지적소관청|공공하수도관리청/;
-const COMMITTEE_PATTERN = /위원회|심의|전문기관|심사|검토기관|의회|정책심의회/;
-
-function classifyTier(actor) {
-  // 결정주체가 정확히 "정부"인 경우만 — mega-tier가 부분 문자열(재정부서의
-  // '정부')을 피하려고 안 넣은 토큰이라 여기선 완전 일치로만 잡는다.
-  if (actor === "정부") return "cabinet";
-  if (PM_CHAIRED_COMMITTEE_PATTERN.test(actor)) return "cabinet";
-  if (CABINET_PATTERN.test(actor)) return "cabinet";
-  if (LEGISLATURE_PATTERN.test(actor)) return "legislature";
-  if (PRESIDENTIAL_COMMITTEE_PATTERN.test(actor)) return "presidential_committee";
-  if (APPLICANT_ACTOR_PATTERN.test(actor)) return "field";
-  if (MINISTER_PATTERN.test(actor)) return "minister";
-  if (LOCAL_PATTERN.test(actor)) return "local";
-  if (COMMITTEE_PATTERN.test(actor)) return "committee";
-  return "field";
-}
-
-function nodeLevel(n) {
-  const decision = n.actorRoles?.decision ?? [];
-  const actors = decision.length ? decision : n.actorRoles?.lead ?? [];
-  let best = "field";
-  for (const a of actors) {
-    const tier = classifyTier(a);
-    if (TIER_RANK[tier] > TIER_RANK[best]) best = tier;
-  }
-  return best;
-}
+// 위상 계층 — web/scripts/lib/mega-tier.mjs가 정본이다(온톨로지 파생과 같은 어휘).
+const nodeLevel = milestoneTier;
 
 // 결정주체 문자열에서 소관 부처를 뽑는다(지도 노드용) — 사전은 파일 상단 MINISTRY_CANON
 function nodeMinistries(n) {
@@ -315,6 +271,8 @@ const nodes = project.nodes.map((n) => {
         by: (b.produced_by ?? []).map((m) => String(m).replace("milestone:", "")),
       })),
       conflict: ont?.overlay_status_conflict ?? null,
+      // 관심층 — 총리·국무위원(cabinet)/기관장(agency). 없으면 실무·완료.
+      attention: ONT.attentionById[n.id] ?? null,
     };
   })() : {}),
   };
@@ -520,6 +478,52 @@ ${unbound.length ? `<p><b>값이 아직 없는 것:</b> 미확정이지만 어�
 ${redundant.length ? `<p><b>결정거리가 아닌 것:</b> 미확정으로 선언돼 있지만 <b>의존 그래프가 이미 같은 말</b>을 하고 있습니다. 고를 것이 아니라 선행 관문이 끝나면 풀립니다 — 지도에서 그 관문을 보세요.</p>
 <ul>${redundant.map((e) => `<li>${e.parameter} ≡ <b>${e.equivalent_to.produced_by}</b>의 <span class="mono" style="font-size:9px">${e.equivalent_to.artifact}</span>${e.equivalent_to.coupling === "soft" ? " (soft 결합)" : ""}</li>`).join("")}</ul>` : ""}
 <p style="color:var(--muted);font-size:10px">무엇을 고를지는 말하지 않는다. 고를 것이 무엇인지만 보여준다.</p>`,
+        });
+      }
+      // 관심층 칩 — 절차 1,200여 개 중 총리·국무위원 책상에 올라가는 것만.
+      // 마일스톤 층은 온톨로지 계산(attentionView), 단계 수는 그 마일스톤이
+      // 참조하는 제도 단계 중 결정 단계(승인·지정·의결…)이면서 결정주체가
+      // 부처 장관 이상인 것만 센다. 나머지 단계는 장부에 남고 화면에서 접힌다.
+      const A = ONT.attention;
+      if (A.cabinet.length) {
+        const REASON_KO = {
+          policy_or_governance: "정책·거버넌스",
+          central_decision: "중앙 결정선",
+          cross_ministry_wait: "다부처 물림",
+          exclusive_branch_gate: "배타 분기",
+          high_leverage_open: "고지렛대 개방",
+          central_open: "중앙부처 관문",
+          government_open: "지자체 관문",
+          pending_parameter: "미확정 파라미터",
+        };
+        const sigStepsOf = (n) => {
+          let total = 0; let signature = 0;
+          for (const ref of n.templateRefs ?? []) {
+            let inst;
+            try { inst = JSON.parse(readFileSync(join(root, `data/institutions/${ref.institution}.json`), "utf8")); } catch { continue; }
+            const steps = (inst.process?.nodes ?? []).filter((x) => !Array.isArray(ref.nodeIds) || ref.nodeIds.includes(x.id));
+            total += steps.length;
+            signature += steps.filter((x) => isDecisionStep(x.name) && TIER_RANK[classifyTier(x.actor)] >= TIER_RANK.minister).length;
+          }
+          return { total, signature };
+        };
+        const rows = A.cabinet.map((e) => {
+          const src = project.nodes.find((x) => x.id === e.node_id);
+          const steps = sigStepsOf(src ?? {});
+          return { ...e, steps };
+        });
+        const totalSteps = nodes.reduce((s, n) => s + n.procs, 0);
+        const cabinetSteps = rows.reduce((s, r) => s + r.steps.total, 0);
+        const cabinetSig = rows.reduce((s, r) => s + r.steps.signature, 0);
+        out.push({
+          id: "ont-attention",
+          label: "🏛 총리·국무위원 관심",
+          nodes: rows.map((r) => r.node_id),
+          html: `<p>관문 ${nodes.length}개·참조 절차 ${totalSteps.toLocaleString()}단계 전부가 의제일 수는 없습니다. 총리·국무위원 층은 <b>${A.counts.cabinet}개 관문</b>, 그 안의 절차 ${cabinetSteps}단계 중 <b>장관급 이상 결정 단계 ${cabinetSig}개</b>입니다. 기관장 층 ${A.counts.agency}, 실무·완료 ${A.counts.working}.</p>
+<ol>${rows.map((r) =>
+            `<li data-nodes="${r.node_id}">${r.label} <span class="mono" style="color:var(--muted);font-size:9px">${r.node_id} · ${r.openness} · 하류 ${r.downstream_reach} · 결정단계 ${r.steps.signature}/${r.steps.total}</span><br><span style="font-size:10px">${r.reasons.filter((x) => x.tier === "cabinet").map((x) => `${REASON_KO[x.code] ?? x.code}${x.code === "cross_ministry_wait" ? `(${x.evidence.replace("artifact:", "")})` : ""}`).join(" · ")}</span></li>`,
+          ).join("")}</ol>
+<p style="color:var(--muted);font-size:10px">층은 손으로 고른 목록이 아니라 결정 위상×개폐×의존 그래프에서 매번 다시 계산됩니다. 상태가 바뀌면 목록도 바뀝니다. 단계 수 판정(결정 단계·장관급)은 담당 표기 휴리스틱입니다.</p>`,
         });
       }
       return out;

@@ -286,6 +286,18 @@
    "label": "⚖ 미확정 갈림길",
    "nodes": [],
    "html": "<p>미확정 2건 중 <b>사업이 정할 것 0건</b>입니다. 제도 준비도와 별개의 축입니다.</p>\n\n\n\n\n<p><b>결정거리가 아닌 것:</b> 미확정으로 선언돼 있지만 <b>의존 그래프가 이미 같은 말</b>을 하고 있습니다. 고를 것이 아니라 선행 관문이 끝나면 풀립니다 — 지도에서 그 관문을 보세요.</p>\n<ul><li>decreeEnacted ≡ <b>N02</b>의 <span class=\"mono\" style=\"font-size:9px\">arctic.decree_enacted</span></li><li>supportCenterOperator ≡ <b>N17</b>의 <span class=\"mono\" style=\"font-size:9px\">arctic.support_center_designated</span></li></ul>\n<p style=\"color:var(--muted);font-size:10px\">무엇을 고를지는 말하지 않는다. 고를 것이 무엇인지만 보여준다.</p>"
+  },
+  {
+   "id": "ont-attention",
+   "label": "🏛 총리·국무위원 관심",
+   "nodes": [
+    "N02",
+    "N03",
+    "N04",
+    "N05",
+    "N06"
+   ],
+   "html": "<p>관문 25개·참조 절차 708단계 전부가 의제일 수는 없습니다. 총리·국무위원 층은 <b>5개 관문</b>, 그 안의 절차 105단계 중 <b>장관급 이상 결정 단계 15개</b>입니다. 기관장 층 15, 실무·완료 5.</p>\n<ol><li data-nodes=\"N02\">시행령 제정 — 대통령령 위임사항 확정 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">N02 · in_progress · 하류 20 · 결정단계 3/21</span><br><span style=\"font-size:10px\">중앙 결정선 · 고지렛대 개방</span></li><li data-nodes=\"N03\">특별법 시행 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">N03 · ready · 하류 22 · 결정단계 3/21</span><br><span style=\"font-size:10px\">고지렛대 개방</span></li><li data-nodes=\"N04\">북극항로위원회 구성 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">N04 · blocked · 하류 16 · 결정단계 3/21</span><br><span style=\"font-size:10px\">정책·거버넌스 · 중앙 결정선 · 다부처 물림(arctic.act_in_force ← N03(mof, ready)) · 다부처 물림(arctic.decree_enacted ← N02(mof, in_progress))</span></li><li data-nodes=\"N05\">북극항로실무위원회 구성 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">N05 · blocked · 하류 0 · 결정단계 3/21</span><br><span style=\"font-size:10px\">정책·거버넌스</span></li><li data-nodes=\"N06\">북극항로추진본부 설치 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">N06 · blocked · 하류 0 · 결정단계 3/21</span><br><span style=\"font-size:10px\">정책·거버넌스</span></li></ol>\n<p style=\"color:var(--muted);font-size:10px\">층은 손으로 고른 목록이 아니라 결정 위상×개폐×의존 그래프에서 매번 다시 계산됩니다. 상태가 바뀌면 목록도 바뀝니다. 단계 수 판정(결정 단계·장관급)은 담당 표기 휴리스틱입니다.</p>"
   }
  ]
 }

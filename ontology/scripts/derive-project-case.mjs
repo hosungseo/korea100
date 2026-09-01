@@ -18,6 +18,8 @@
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+// 결정 위상은 워룸 지도와 같은 정본에서 계산한다. 여기 다시 쓰지 않는다.
+import { milestoneTier } from "../../web/scripts/lib/mega-tier.mjs";
 
 export const ONTOLOGY_VERSION = "korea100.ontology.core.v0";
 export const REPO_DIR = fileURLToPath(new URL("../../", import.meta.url));
@@ -68,6 +70,8 @@ export function milestoneEntities(project) {
       classification: node.classification ?? null,
       lead_actor: node.leadActor ?? null,
       actor_roles: node.actorRoles ?? null,
+      // 결정 위상 — 결정주체(없으면 주도주체) 중 가장 높은 계층. 관심층 계산의 입력.
+      decision_tier: milestoneTier(node),
       authority: node.authority ?? null,
       activation: node.activation?.mode ?? null,
       activation_rule: node.activation?.rule ?? null,

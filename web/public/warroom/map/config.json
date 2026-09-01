@@ -335,6 +335,21 @@
     "N23"
    ],
    "html": "<p>미확정 8건 중 <b>사업이 정할 것 8건</b>입니다. 제도 준비도와 별개의 축입니다.</p>\n<p><b>관문을 여닫는 것:</b> 값이 정해지기 전까지 어느 쪽도 활성화되지 않습니다.</p>\n<ol><li data-nodes=\"N13\">heritageImpactDiagnosisRequired — 확정 사업구역과 국가유산·매장유산 현황을 대조해야 함 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">undefined→N13</span></li><li data-nodes=\"N16\">privateLandCompensationRequired — 공식 사업구역 경계와 종전부지 밖 사유지 편입 여부가 공개되지 않음 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">undefined→N16</span></li><li data-nodes=\"N19,N20\">gridPath — 정식 전력계통영향평가, 국가첨단전략산업 면제 의결 또는 별도 신속검토 중 적용 경로 미확정 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">undefined→N19 · undefined→N20</span></li><li data-nodes=\"N46\">hazardousFacilityPermitsRequired — 팹별 위험물 지정수량·고압가스 종류와 저장·처리능력, 시설배치가 공개되지 않아 허가·검사 적용범위를 확정할 수 없음 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">undefined→N46</span></li></ol>\n<p><b>관문 안쪽 미확정:</b> 아래는 관문을 여닫지는 않지만 그 안에서 <b>어느 제도가 적용되는지</b>를 정합니다.</p>\n<ol><li data-nodes=\"N23\">waterSupplyEntity — 공업용수 공급주체(광역상수도·전용공업용수도·자체취수)가 확정되지 않아 어느 인허가가 적용되는지 정해지지 않음 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">N23 제도 적용범위</span></li><li data-nodes=\"N23\">dischargeMethod — 폐수 처리방식(공공폐수처리시설 연계·자체처리·재이용)이 확정되지 않아 처리구역과 적용 절차가 정해지지 않음 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">N23 제도 적용범위</span></li><li data-nodes=\"N23\">groundwaterUse — 지하수 개발·이용 여부가 확정되지 않아 지하수법 허가 적용 여부가 정해지지 않음 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">N23 제도 적용범위</span></li></ol>\n<p><b>배타 분기:</b> gridPath → formal-assessment:N19 | exempt-or-expedited:N20 — 둘 중 하나만 활성화됩니다.</p>\n<p><b>값이 아직 없는 것:</b> 미확정이지만 어느 관문에도 걸려 있지 않습니다. 정해지면 어디에 걸리는지를 오버레이에 적어야 지도가 켜집니다.</p>\n<ul><li>powerDemandMw — 팹별 전력수요와 단계별 증설계획이 공개되지 않음</li></ul>\n\n<p style=\"color:var(--muted);font-size:10px\">무엇을 고를지는 말하지 않는다. 고를 것이 무엇인지만 보여준다.</p>"
+  },
+  {
+   "id": "ont-attention",
+   "label": "🏛 총리·국무위원 관심",
+   "nodes": [
+    "N02",
+    "N03",
+    "N31",
+    "N19",
+    "N20",
+    "N21",
+    "N52",
+    "N54"
+   ],
+   "html": "<p>관문 54개·참조 절차 1,318단계 전부가 의제일 수는 없습니다. 총리·국무위원 층은 <b>8개 관문</b>, 그 안의 절차 198단계 중 <b>장관급 이상 결정 단계 22개</b>입니다. 기관장 층 17, 실무·완료 29.</p>\n<ol><li data-nodes=\"N02\">통합 추진체계·재정심사·예타·마스터 일정 수립 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">N02 · in_progress · 하류 43 · 결정단계 3/47</span><br><span style=\"font-size:10px\">정책·거버넌스 · 중앙 결정선 · 고지렛대 개방</span></li><li data-nodes=\"N03\">반도체클러스터 지정 신청·심의·지정 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">N03 · ready · 하류 7 · 결정단계 5/27</span><br><span style=\"font-size:10px\">중앙 결정선</span></li><li data-nodes=\"N31\">이전후보지·종전부지·지원계획 심의·공고 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">N31 · ready · 하류 38 · 결정단계 2/8</span><br><span style=\"font-size:10px\">고지렛대 개방</span></li><li data-nodes=\"N19\">정식 전력계통영향평가·공급가능성 검토 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">N19 · path_undetermined · 하류 6 · 결정단계 2/18</span><br><span style=\"font-size:10px\">배타 분기</span></li><li data-nodes=\"N20\">계통영향평가 면제·예타특례·반도체 신속처리 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">N20 · path_undetermined · 하류 6 · 결정단계 6/45</span><br><span style=\"font-size:10px\">중앙 결정선 · 배타 분기</span></li><li data-nodes=\"N21\">송전선로·변전소 사업계획·실시계획 승인 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">N21 · blocked · 하류 4 · 결정단계 0/19</span><br><span style=\"font-size:10px\">중앙 결정선 · 다부처 물림(power.grid_clearance_obtained ← N20(whole-government, path_undetermined))</span></li><li data-nodes=\"N52\">지역별 차등 전기요금 — 공급약관 변경 인가 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">N52 · ready · 하류 5 · 결정단계 1/16</span><br><span style=\"font-size:10px\">정책·거버넌스</span></li><li data-nodes=\"N54\">노동쟁의 기준 시행지침 제정 — 투자 결정 쟁의 대상 여부 <span class=\"mono\" style=\"color:var(--muted);font-size:9px\">N54 · ready · 하류 1 · 결정단계 3/18</span><br><span style=\"font-size:10px\">정책·거버넌스</span></li></ol>\n<p style=\"color:var(--muted);font-size:10px\">층은 손으로 고른 목록이 아니라 결정 위상×개폐×의존 그래프에서 매번 다시 계산됩니다. 상태가 바뀌면 목록도 바뀝니다. 단계 수 판정(결정 단계·장관급)은 담당 표기 휴리스틱입니다.</p>"
   }
  ]
 }

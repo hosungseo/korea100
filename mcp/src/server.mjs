@@ -25,6 +25,7 @@ import {
   projectStatus,
   explainBlocked,
   pendingDecisions,
+  attentionView,
   isProjectCase,
   ProjectCaseError,
 } from "./project-case.mjs";
@@ -400,6 +401,29 @@ export function createAdministrativeProcedureMcpServer(service, { ontologyEnable
         return pendingDecisions(data);
       },
       (data) => `미확정 파라미터 ${data.undetermined_parameters.length}개, 배타 분기 ${data.exclusive_branches.length}개`,
+    );
+
+    registerReadOnlyTool(
+      server,
+      "get_attention_view",
+      {
+        title: "누구 책상에 올라가는 관문인가",
+        description: "마일스톤을 총리·국무위원(cabinet) / 기관장(agency) / 실무·완료(working) 세 층으로 가릅니다. 층은 결정 위상×개폐×의존 그래프에서 매 질의 계산되며 손으로 고른 목록이 아닙니다. 각 마일스톤에 층에 오른 사유(정책·거버넌스, 중앙 결정선, 다부처 물림, 배타 분기, 고지렛대 개방)가 붙습니다. 참조 제도의 절차 단계 전량은 장부로 남기고 의제만 돌려줍니다.",
+        inputSchema: {
+          case_file: z.string().trim().max(200).describe("ontology/ 기준 상대경로. 프로젝트 케이스여야 합니다"),
+          tier: z.enum(["cabinet", "agency", "working"]).optional().describe("한 층만 보려면 지정"),
+        },
+      },
+      async ({ case_file, tier = null }) => {
+        const data = await loadOntologyCase({ caseFile: case_file });
+        if (!isProjectCase(data)) {
+          throw new ProjectCaseError("not_a_project_case", "프로젝트 케이스가 아닙니다.", { case_file });
+        }
+        const view = attentionView(data);
+        if (!tier) return view;
+        return { ...view, cabinet: tier === "cabinet" ? view.cabinet : [], agency: tier === "agency" ? view.agency : [], working: tier === "working" ? view.working : [] };
+      },
+      (data) => `총리·국무위원 ${data.counts.cabinet} / 기관장 ${data.counts.agency} / 실무·완료 ${data.counts.working} (마일스톤 ${data.inventory.milestone_count}, 참조 제도 ${data.inventory.institution_count})`,
     );
 
     registerReadOnlyTool(

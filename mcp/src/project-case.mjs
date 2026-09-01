@@ -316,6 +316,198 @@ export function pendingDecisions(caseData) {
   };
 }
 
+// ── 관심층(결재선) ──────────────────────────────────────────────────────────
+//
+// 마일스톤 54개가 끌어 쓰는 절차는 1,200개가 넘는다. 그 전부가 총리·국무위원의
+// 의제일 수는 없고, "국무위원이 볼 절차"를 손으로 골라 태그하면 다음 주면 썩는다.
+// 어느 마일스톤이 누구 책상에 올라가는지는 절차의 고정 속성이 아니라
+// 결정 위상 × 개폐 상태 × 의존 그래프의 함수다. 그래서 계산한다.
+//
+// 세 층: cabinet(총리·국무위원) / agency(부처·지자체 기관장) / working(실무·완료).
+// 사유 없이 층에 오르는 마일스톤은 없다 — reasons가 비면 working이다.
+
+const ATTENTION_TIERS = Object.freeze(["cabinet", "agency", "working"]);
+const CENTRAL_TIERS = new Set(["cabinet", "legislature", "presidential_committee", "minister"]);
+const GOVERNMENT_TIERS = new Set([...CENTRAL_TIERS, "local"]);
+const POLICY_CLASSES = new Set(["policy", "governance"]);
+const ACTIVE_OPENNESS = new Set(["ready", "in_progress"]);
+
+/**
+ * 하류 파급 — 이 마일스톤의 산출물에 (전이적으로) 기대는 마일스톤 수.
+ * 지렛대 크기다. 기간 정보가 없으므로 임계경로 대신 이것을 쓴다.
+ */
+function downstreamReach(caseData, graph) {
+  const consumersOf = new Map();
+  for (const relation of caseData.relations ?? []) {
+    if (relation.type !== "hands_off_to") continue;
+    const list = consumersOf.get(relation.from) ?? [];
+    list.push(relation.to);
+    consumersOf.set(relation.from, list);
+  }
+  const reach = new Map();
+  for (const id of graph.milestones.keys()) {
+    const seen = new Set();
+    const stack = [...(consumersOf.get(id) ?? [])];
+    while (stack.length) {
+      const next = stack.pop();
+      if (seen.has(next) || next === id) continue;
+      seen.add(next);
+      stack.push(...(consumersOf.get(next) ?? []));
+    }
+    reach.set(id, seen.size);
+  }
+  return reach;
+}
+
+/** 상위 사분위 경계. 미완료 마일스톤만 놓고 잰다 — 끝난 것은 지렛대가 아니다. */
+function leverageThreshold(values) {
+  const sorted = [...values].sort((a, b) => a - b);
+  if (sorted.length === 0) return Infinity;
+  const index = Math.floor(sorted.length * 0.75);
+  return Math.max(1, sorted[Math.min(index, sorted.length - 1)]);
+}
+
+/**
+ * 총리·국무위원 / 기관장 / 실무 세 층으로 마일스톤을 가른다.
+ *
+ * cabinet에 오르는 사유(하나면 충분):
+ *   policy_or_governance   정책·거버넌스 분류(사업 방향 자체가 결정거리)
+ *   central_decision       결정주체가 총리·국무회의·국회·대통령 소속 위원회
+ *   cross_ministry_wait    막혀 있고, 막는 산출물이 *다른* 중앙부처 손에 지금 있음(다부처 물림)
+ *   exclusive_branch_gate  사업이 정해야 하는 배타 분기가 걸린 관문
+ *   high_leverage_open     지금 열려 있고 하류 파급이 상위 사분위인 정부·위원회 관문
+ * agency에 오르는 사유:
+ *   central_open           중앙부처 결정 관문이 열려 있거나 막혀 있음
+ *   government_open        지자체장 결정 관문이 열려 있거나 막혀 있음
+ *   pending_parameter      관문 안쪽 적용범위·값 미상 파라미터가 걸려 있음
+ *   high_leverage_open     열려 있고 파급이 큰데 사업자·미특정 주체 손에 있음
+ * 나머지(완료 포함)는 working. 절차 단계 목록은 그대로 두고 화면에서만 접는다.
+ */
+export function attentionView(caseData) {
+  const graph = projectGraph(caseData);
+  const statuses = new Map([...graph.milestones.keys()].map((id) => [id, milestoneStatus(graph, id)]));
+  const reach = downstreamReach(caseData, graph);
+  const threshold = leverageThreshold(
+    [...statuses.entries()].filter(([, status]) => status.openness !== "done").map(([id]) => reach.get(id) ?? 0),
+  );
+  const decisions = pendingDecisions(caseData);
+  const exclusiveGates = new Set(
+    decisions.exclusive_branches.flatMap((branch) => branch.options.map((option) => option.milestone)),
+  );
+  const softPending = new Map();
+  for (const entry of decisions.undetermined_parameters) {
+    if (entry.classification === "graph_redundant") continue;
+    const targets = entry.gates.map((gate) => gate.node_id);
+    if (entry.affects?.milestone) targets.push(entry.affects.milestone);
+    for (const nodeId of targets) {
+      if (!nodeId) continue;
+      const list = softPending.get(nodeId) ?? [];
+      list.push(entry.parameter);
+      softPending.set(nodeId, list);
+    }
+  }
+  const tierMissing = [];
+
+  const entries = [];
+  for (const [id, milestone] of graph.milestones) {
+    const status = statuses.get(id);
+    const tier = milestone.attrs?.decision_tier ?? null;
+    if (!tier) tierMissing.push(status.node_id);
+    const reasons = [];
+    const done = status.openness === "done";
+
+    const leverage = reach.get(id) ?? 0;
+    // 정책 항목이라도 하류에 아무것도 안 걸려 있으면 총리 의제가 아니라 부처 사업이다.
+    // 오버레이가 classification=policy를 느슨하게 쓰는 사업(북극항로 R&D·인력양성)이 있다.
+    if (!done && POLICY_CLASSES.has(milestone.attrs?.classification)
+      && (milestone.attrs.classification === "governance" || leverage >= 1)) {
+      reasons.push({ code: "policy_or_governance", tier: "cabinet", evidence: `${milestone.attrs.classification}, 하류 ${leverage}` });
+    }
+    if (!done && tier && CENTRAL_TIERS.has(tier) && tier !== "minister") {
+      reasons.push({ code: "central_decision", tier: "cabinet", evidence: tier });
+    }
+    if (status.openness === "blocked" && tier && GOVERNMENT_TIERS.has(tier)) {
+      for (const blocker of status.blocked_by) {
+        for (const producerId of blocker.produced_by) {
+          const producer = graph.milestones.get(producerId);
+          const producerStatus = statuses.get(producerId);
+          const producerTier = producer?.attrs?.decision_tier;
+          const sameLane = producer?.attrs?.lead_actor === milestone.attrs?.lead_actor;
+          // 상류가 더 막혀 있으면 그쪽이 의제다. 지금 손에 쥔 부처만 잡는다.
+          const inHandNow = producerStatus && (ACTIVE_OPENNESS.has(producerStatus.openness) || producerStatus.openness === "path_undetermined");
+          if (!sameLane && producerTier && CENTRAL_TIERS.has(producerTier) && inHandNow) {
+            reasons.push({
+              code: "cross_ministry_wait",
+              tier: "cabinet",
+              evidence: `${blocker.artifact} ← ${producerStatus.node_id}(${producer.attrs.lead_actor}, ${producerStatus.openness})`,
+            });
+          }
+        }
+      }
+    }
+    if (!done && exclusiveGates.has(status.node_id)) {
+      reasons.push({ code: "exclusive_branch_gate", tier: "cabinet", evidence: "배타 분기" });
+    }
+    // 열려 있는데 하류 파급이 상위 사분위면 지연이 곧 사업 전체 지연이다. 정부 기관이나
+    // 법정 위원회 손에 있으면 총리 의제, 사업자·미특정 주체 손에 있으면 소관 기관이 챙긴다.
+    if (ACTIVE_OPENNESS.has(status.openness) && leverage >= threshold) {
+      reasons.push({
+        code: "high_leverage_open",
+        tier: tier && tier !== "field" ? "cabinet" : "agency",
+        evidence: `하류 ${leverage}개 ≥ 경계 ${threshold}`,
+      });
+    }
+    if (!done && status.openness !== "path_undetermined" && tier && CENTRAL_TIERS.has(tier)) {
+      reasons.push({ code: "central_open", tier: "agency", evidence: status.openness });
+    }
+    if (!done && status.openness !== "path_undetermined" && tier === "local") {
+      reasons.push({ code: "government_open", tier: "agency", evidence: status.openness });
+    }
+    if (!done && softPending.has(status.node_id) && !exclusiveGates.has(status.node_id)) {
+      reasons.push({ code: "pending_parameter", tier: "agency", evidence: softPending.get(status.node_id).join(", ") });
+    }
+
+    const attentionTier = reasons.some((reason) => reason.tier === "cabinet")
+      ? "cabinet"
+      : reasons.some((reason) => reason.tier === "agency") ? "agency" : "working";
+    entries.push({
+      node_id: status.node_id,
+      label: status.label,
+      stage: status.stage,
+      lead_actor: status.lead_actor,
+      decision_tier: tier,
+      openness: status.openness,
+      downstream_reach: leverage,
+      attention_tier: attentionTier,
+      reasons,
+    });
+  }
+
+  const byTier = Object.fromEntries(ATTENTION_TIERS.map((tier) => [tier, entries.filter((entry) => entry.attention_tier === tier)]));
+  const referencedInstitutions = graph.institutions.size;
+  return {
+    case_id: caseData.case_id,
+    project_id: caseData.project_id,
+    project_name: caseData.project_name,
+    as_of: caseData.as_of,
+    leverage_threshold: threshold,
+    counts: Object.fromEntries(ATTENTION_TIERS.map((tier) => [tier, byTier[tier].length])),
+    cabinet: byTier.cabinet,
+    agency: byTier.agency,
+    working: byTier.working.map(({ node_id, label, openness }) => ({ node_id, label, openness })),
+    inventory: {
+      milestone_count: graph.milestones.size,
+      institution_count: referencedInstitutions,
+      note: "참조 제도의 절차 단계 전량은 장부다. 의제는 위 두 층에서만 나온다.",
+    },
+    // 결정 위상이 없는 마일스톤은 계산에서 빠진 것이 아니라 근거 없이 working에 남은 것이다.
+    decision_tier_missing: tierMissing,
+    note: `총리·국무위원 ${byTier.cabinet.length} / 기관장 ${byTier.agency.length} / 실무·완료 ${byTier.working.length}. `
+      + "층은 결정 위상×개폐×의존 그래프에서 매 질의 계산되며 손으로 고른 목록이 아니다.",
+    execution_allowed: false,
+  };
+}
+
 /** 막힌 마일스톤의 원인을 선행 마일스톤까지 거슬러 준다. */
 export function explainBlocked(caseData, nodeId, { maxDepth = 6 } = {}) {
   const graph = projectGraph(caseData);
