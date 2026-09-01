@@ -519,6 +519,18 @@
   ]
  },
  "verification": {
+  "basisInForce": {
+   "checkedAt": "2026-09-01",
+   "checkedBy": "web/scripts/check-basis-in-force.mjs",
+   "verdict": "pending-enforcement",
+   "note": "제11조의3이 2026-12-03 시행예정이다. 다만 이 제도는 시행일과 별개로 절차 모델 자체가 템플릿 골격이다 — 12개 노드의 이름이 모두 같고 행위자가 4종 순환하며, 조문은 사업계획·인구감소지역 정의·시군구 통합이 뒤섞여 있다. 시행일이 와도 재모델링 없이는 R2 대상이 아니다.",
+   "currentVersionEffectiveOn": "2026-07-01",
+   "pending": [
+    { "article": "제11조의3", "effectiveFrom": "2026-12-03", "nodes": ["P01", "P02", "P03", "P04", "P05"] }
+   ],
+   "r2EligibleFrom": null,
+   "blockedBy": "model-is-template-skeleton"
+  },
   "status": "article-verified",
   "verifiedAt": "2026-07-15",
   "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",

@@ -12,6 +12,7 @@
     "generate:warroom-map:all": "node scripts/generate-warroom-map-data.mjs --all",
     "generate:article-texts": "node scripts/generate-article-text-registry.mjs --write",
     "discover:candidates": "node scripts/discover-news-candidates.mjs",
+    "check:basis-in-force": "node scripts/check-basis-in-force.mjs",
     "check:freshness": "node scripts/sync-verification.mjs --check",
     "predev": "npm run generate:catalog && npm run generate:verification-queue && npm run generate:process-images",
     "dev": "next dev",
@@ -33,7 +34,15 @@
     "collect:warroom-signals": "node scripts/collect-warroom-signals.mjs",
     "discover:institutions": "node scripts/discover-institution-candidates.mjs",
     "generate:loop-status": "node scripts/generate-loop-status.mjs",
-    "generate:loop-briefing": "node scripts/generate-loop-briefing.mjs"
+    "generate:loop-briefing": "node scripts/generate-loop-briefing.mjs",
+    "promote:process-drafts": "node scripts/promote-institution-candidate-drafts.mjs",
+    "test:news-process-drafts": "node --test scripts/news-to-process-draft.test.mjs",
+    "render:process-draft-pngs": "node scripts/render-process-draft-pngs.mjs",
+    "promote:process-drafts:png": "node scripts/promote-news-to-process-drafts.mjs && node scripts/render-process-draft-pngs.mjs",
+    "promote:institution-drafts": "node scripts/promote-institution-candidate-drafts.mjs",
+    "test:institution-drafts": "node --test scripts/institution-candidate-to-process-draft.test.mjs",
+    "pipeline:institution-full": "node scripts/pipeline-institution-full.mjs",
+    "pipeline:register": "node scripts/register-clear-basis-from-queue.mjs"
   },
   "dependencies": {
     "fast-xml-parser": "^5.10.0",

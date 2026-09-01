@@ -481,6 +481,20 @@
   ]
  },
  "verification": {
+  "basisInForce": {
+   "checkedAt": "2026-09-01",
+   "checkedBy": "web/scripts/check-basis-in-force.mjs",
+   "verdict": "pending-enforcement",
+   "note": "인용 조문 일부가 아직 시행되지 않았다. 2026-07-15 검증은 조문 번호의 '존재'를 본 것이고 '시행'을 보지 않았다 — 시행예정 조문도 문언은 존재하므로 존재 검증은 통과한다. 이 상태로 R2에 올리면 시행되지 않은 법으로 다음 행동을 계산하게 된다.",
+   "currentVersionEffectiveOn": "2026-07-01",
+   "pending": [
+    { "article": "제31조", "effectiveFrom": "2026-09-10", "nodes": ["P03", "P04", "P05", "P06", "P07", "P08", "P09"], "note": "초광역특별협약 신설 개정. 현행 제31조는 지역발전투자협약이다." },
+    { "article": "제31조의2", "effectiveFrom": "2026-12-03", "nodes": ["P11"] },
+    { "article": "제31조의3", "effectiveFrom": "2026-12-03", "nodes": ["P12", "P13"] },
+    { "article": "제81조의2", "effectiveFrom": "2027-01-01", "nodes": ["P10"], "note": "초광역특별계정. 현행 제76조의 계정 구분에는 없다." }
+   ],
+   "r2EligibleFrom": "2027-01-01"
+  },
   "status": "article-verified",
   "verifiedAt": "2026-07-15",
   "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
