@@ -6,8 +6,8 @@ Repo: /Users/seohoseong/korea100, branch audit/l0-process-audit (already checked
 You must NOT open web/data/institutions/<slug>.json (or any repo data/docs) until Phase 1 is complete and written to disk. Independence is the entire point.
 
 1. Identify the institution's governing laws from its name/topic (given in your dispatch). Fetch them via law.go.kr DRF API (curl):
-   - Search: curl -s "https://www.law.go.kr/DRF/lawSearch.do?OC=test&target=law&query=<법령명>&type=XML" → 현행 MST
-   - Body: curl -s "https://www.law.go.kr/DRF/lawService.do?OC=test&target=law&MST=<MST>&type=XML"
+   - Search: curl -s "https://www.law.go.kr/DRF/lawSearch.do?OC=$LAW_GO_KR_OC&target=law&query=<법령명>&type=XML" → 현행 MST
+   - Body: curl -s "https://www.law.go.kr/DRF/lawService.do?OC=$LAW_GO_KR_OC&target=law&MST=<MST>&type=XML"
 2. Reconstruct the procedure skeleton from the article text: steps with actor / action / legal_basis "법령명 제N조(제목)" / statutory deadline (조문 명시분만) / branches / loops. Include party(당사자) procedural rights and duties — 신청·동의·이의신청·열람·협조 등.
 3. NO article you haven't seen in the XML. Write the skeleton to /tmp/l2-recon-<slug>.json BEFORE opening any repo data file.
 
@@ -46,3 +46,7 @@ Do NOT push. Do NOT touch other institutions' files.
 
 ## Report (FINAL message = report only, nothing after)
 slug | recon steps N | corrections applied (type-tagged C/E/D/F, one line each) | left-as-is judgments (count) | 법의 침묵 (count) | commit SHA
+
+> OC는 공용 `test` 계정이 아니라 실 계정을 쓴다.
+> `export LAW_GO_KR_OC=$(node -e "import('./web/scripts/lib/law-go-kr-oc.mjs').then(m=>console.log(m.resolveLawGoKrOc()))")`
+> 또는 `~/.openclaw/secrets/law-go-kr-oc`. test 계정은 호출 한도가 낮고 일부 target이 막힌다.

@@ -38,11 +38,18 @@ function stripArticleHeading(value) {
 
 function lawArticleText(unit) {
   const lines = [];
+  // 조문내용은 항이 있든 없든 먼저 넣는다. 예전에는 항이 있으면 통째로 버렸는데,
+  // 조문 본문이 조문내용에 있고 항이 그 아래 갈래인 조문에서 본문 한 문장이
+  // 사라졌다(예: 분산에너지법 제11조 "다음 각 호의 어느 하나에 해당하는 자는
+  // 등록을 할 수 없다", 국회법 제59조). 이 텍스트로 인용을 대조하면 실제로는
+  // 원문 그대로인 인용이 "원문에 없다"로 잡힌다.
+  // 항만 있는 조문에서는 조문내용이 제목뿐이라 stripArticleHeading 후 빈 문자열이 되어
+  // 아무것도 더해지지 않는다 — 그래서 조건 없이 넣어도 안전하다.
+  pushLine(lines, stripArticleHeading(unit?.["조문내용"]));
   const paragraphs = asArray(unit?.["항"]);
   if (paragraphs.length > 0) {
     flattenItems(paragraphs, "항내용", "호", lines);
   } else {
-    pushLine(lines, stripArticleHeading(unit?.["조문내용"]));
     flattenItems(unit?.["호"], "호내용", "목", lines);
   }
   return lines.join("\n").trim();
@@ -149,7 +156,14 @@ export async function resolveEffectiveLawVersion(lawId, { oc, signal, asOf, offi
     .sort((a, b) => b.effectiveOn.localeCompare(a.effectiveOn))[0] ?? null;
 }
 
-async function fetchEffectiveLawPayload(mst, effectiveOn, { oc, signal } = {}) {
+/**
+ * 시행일 지정 본문 조회. `target=law`는 공포됐지만 시행일이 안 온 개정본을 주므로
+ * 현행 대조에는 반드시 이 경로를 써야 한다(원칙 5).
+ *
+ * 내보내는 이유: 이 함수가 private이라 호출자들이 같은 URL을 각자 다시 만들고 있었다.
+ * 재구현할 때마다 `target=law`로 잘못 돌아갈 자리가 하나씩 생긴다.
+ */
+export async function fetchEffectiveLawPayload(mst, effectiveOn, { oc, signal } = {}) {
   const url = new URL("https://www.law.go.kr/DRF/lawService.do");
   url.searchParams.set("OC", oc);
   url.searchParams.set("target", "eflaw");

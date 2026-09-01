@@ -2,10 +2,10 @@ You verify 행정규칙(훈령·예규·고시·지침) citations that were prev
 Repo: /Users/seohoseong/korea100, branch fix/admrul-verification (already checked out — do NOT switch).
 
 ## API (curl)
-- 목록 검색: curl -s "http://www.law.go.kr/DRF/lawSearch.do?OC=test&target=admrul&query=<규칙명>&type=XML"
+- 목록 검색: curl -s "http://www.law.go.kr/DRF/lawSearch.do?OC=$LAW_GO_KR_OC&target=admrul&query=<규칙명>&type=XML"
   → 행정규칙일련번호, 행정규칙명, 행정규칙종류(훈령/예규/고시/지침), 발령일자, 발령번호, 소관부처명, 현행연혁구분
   검색 팁: 정확명이 0건이면 핵심 키워드로 재검색(예: "예비타당성조사"), search=2(본문검색)도 가능
-- 본문 조회: curl -s "http://www.law.go.kr/DRF/lawService.do?OC=test&target=admrul&ID=<행정규칙일련번호>&type=XML"
+- 본문 조회: curl -s "http://www.law.go.kr/DRF/lawService.do?OC=$LAW_GO_KR_OC&target=admrul&ID=<행정규칙일련번호>&type=XML"
   → 조문형식여부=Y면 조문 구조, 아니면 별표·본문 텍스트
 
 ## Per unverified ref in your target institutions
@@ -31,3 +31,7 @@ Claude-Session: https://claude.ai/code/session_013WXa2uVeD6vUjpK4hHNLZU
 
 ## Report (FINAL message = report only)
 Per institution: slug | 해소 N건 / 미등재 유지 M건 | 확인 규칙(일련번호·발령번호·소관부처, 소관 변경 여부) | commit SHA
+
+> OC는 공용 `test` 계정이 아니라 실 계정을 쓴다.
+> `export LAW_GO_KR_OC=$(node -e "import('./web/scripts/lib/law-go-kr-oc.mjs').then(m=>console.log(m.resolveLawGoKrOc()))")`
+> 또는 `~/.openclaw/secrets/law-go-kr-oc`. test 계정은 호출 한도가 낮고 일부 target이 막힌다.

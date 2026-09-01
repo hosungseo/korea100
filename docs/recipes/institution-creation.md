@@ -8,8 +8,8 @@ Repo: /Users/seohoseong/korea100, branch feat/hr-institutions (already checked o
 
 ## Law verification (MANDATORY — every article you cite)
 law.go.kr DRF API via curl:
-- Search: curl -s "https://www.law.go.kr/DRF/lawSearch.do?OC=test&target=law&query=<법령명>&type=XML" → 현행 MST·lawId·공포일·시행일
-- Body: curl -s "https://www.law.go.kr/DRF/lawService.do?OC=test&target=law&MST=<MST>&type=XML" → 목차+조문 전문
+- Search: curl -s "https://www.law.go.kr/DRF/lawSearch.do?OC=$LAW_GO_KR_OC&target=law&query=<법령명>&type=XML" → 현행 MST·lawId·공포일·시행일
+- Body: curl -s "https://www.law.go.kr/DRF/lawService.do?OC=$LAW_GO_KR_OC&target=law&MST=<MST>&type=XML" → 목차+조문 전문
 Read the actual article text for every step. **지어내기 절대 금지** — you may only cite 제N조(현행 제목) you have seen in the XML. 행정규칙(훈령·예규·고시·지침)은 target=admrul로 검색·본문 조회하여 검증한다(lawSearch/lawService.do?target=admrul). admrul에도 없는 내부규정만 "unverified": true + fieldVerification.
 부처명은 2026 개편 현행으로: 인사혁신처(존속), 행정안전부(존속), 기획예산처/재정경제부(구 기획재정부 분리). 조문 원문에 나오는 명칭을 그대로 쓴다.
 
@@ -53,3 +53,7 @@ node scripts/validate-data.mjs                   # 전체 통과까지 확인
 
 ## Report (FINAL message = report only)
 Per institution: slug | 노드/엣지 수 | 검증 조문 수(unverified 수) | 확인 법령·MST | 법의 침묵/특이점 1-2건 | commit SHA
+
+> OC는 공용 `test` 계정이 아니라 실 계정을 쓴다.
+> `export LAW_GO_KR_OC=$(node -e "import('./web/scripts/lib/law-go-kr-oc.mjs').then(m=>console.log(m.resolveLawGoKrOc()))")`
+> 또는 `~/.openclaw/secrets/law-go-kr-oc`. test 계정은 호출 한도가 낮고 일부 target이 막힌다.

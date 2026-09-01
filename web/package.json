@@ -46,7 +46,9 @@
     "pipeline:register": "node scripts/register-clear-basis-from-queue.mjs",
     "docs:ontology-stats": "node scripts/ontology-stats.mjs",
     "check:ontology-stats": "node scripts/ontology-stats.mjs --check",
-    "check:basis-text": "node scripts/check-basis-text.mjs"
+    "check:basis-text": "node scripts/check-basis-text.mjs",
+    "restore:basis-text": "node scripts/restore-basis-text.mjs",
+    "verify:basis-text": "node scripts/restore-basis-text.mjs --verify"
   },
   "dependencies": {
     "fast-xml-parser": "^5.10.0",

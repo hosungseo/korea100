@@ -13,12 +13,16 @@
 // 대조하면 걸리지만, 시행예정은 문언이 실제로 존재하므로 조문 존재 검증을 통과한다.
 // 그 상태로 R2에 올리면 시행되지도 않은 법으로 "다음 행동"을 계산하게 된다.
 import { readFile, readdir } from "node:fs/promises";
+import { resolveLawGoKrOc } from "./lib/law-go-kr-oc.mjs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const INSTITUTION_DIR = path.join(ROOT, "data", "institutions");
-const OC = process.env.LAW_API_OC ?? "test";
+// OC 해석은 law-go-kr-oc가 정본이다. 여기서 별도 env 이름과 "test" 폴백을 들면
+// (실제로 LAW_API_OC라는 네 번째 이름을 쓰고 있었다) 실 계정이 등록돼 있어도
+// 공용 test 계정으로 조용히 떨어진다.
+const OC = resolveLawGoKrOc();
 const ASOF = process.env.CHECK_ASOF ?? new Date().toISOString().slice(0, 10);
 
 const norm = (value) => {
