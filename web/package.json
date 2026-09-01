@@ -12,6 +12,7 @@
     "generate:warroom-map:all": "node scripts/generate-warroom-map-data.mjs --all",
     "generate:article-texts": "node scripts/generate-article-text-registry.mjs --write",
     "discover:candidates": "node scripts/discover-news-candidates.mjs",
+    "check:skeletons": "node scripts/detect-template-skeletons.mjs --gate-r2",
     "check:basis-in-force": "node scripts/check-basis-in-force.mjs",
     "check:freshness": "node scripts/sync-verification.mjs --check",
     "predev": "npm run generate:catalog && npm run generate:verification-queue && npm run generate:process-images",

@@ -6,6 +6,8 @@ import { readFileSync, writeFileSync, mkdirSync, readdirSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+// 골격 판정은 탐지기 하나가 정본이다. 사다리 정의를 여기 다시 쓰지 않는다.
+import { inspect as inspectInstitution } from "./detect-template-skeletons.mjs";
 import {
   allMilestoneStatuses,
   institutionReadinessFor,
@@ -270,9 +272,12 @@ function templateInfo(refs) {
         slug: ref.institution, name: inst.name, procs,
         mapping: ref.mappingStatus ?? "linked",
         readiness: inst.process?.agent_readiness?.level ?? "unassessed",
+        // 제네릭 12단 사다리에 제도명만 갈아 끼운 골격. 절차 수를 세면 있는 것처럼
+        // 보이지만 그 절차가 이 제도의 절차라는 보장이 없다.
+        skeleton: inspectInstitution(inst).is_skeleton,
       });
     } catch {
-      out.push({ slug: ref.institution, name: ref.institution, procs: 0, mapping: "missing", readiness: "unassessed" });
+      out.push({ slug: ref.institution, name: ref.institution, procs: 0, mapping: "missing", readiness: "unassessed", skeleton: false });
     }
   }
   return out;

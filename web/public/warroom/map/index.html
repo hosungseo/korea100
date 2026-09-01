@@ -433,6 +433,7 @@ body.mode-risk #narration ol li::before { border-color: var(--rose); color: var(
 .ontb { margin-left: 4px; font-size: 9px; }
 .r2b { font-family: var(--mono); font-size: 8px; color: #04121c; background: var(--cyan); border-radius: 3px; padding: 0 3px; margin-left: 2px; vertical-align: 1px; }
 .unrb { font-family: var(--mono); font-size: 8px; color: var(--muted); border: 1px solid rgba(95,123,144,0.5); border-radius: 3px; padding: 0 3px; margin-left: 2px; vertical-align: 1px; }
+.sklb { font-family: var(--mono); font-size: 8px; color: #1a1204; background: var(--amber); border-radius: 3px; padding: 0 3px; margin-left: 2px; vertical-align: 1px; }
 .chip:focus-visible, .cbtn:focus-visible, #zoomctl button:focus-visible, .links a:focus-visible {
   outline: 2px solid var(--cyan); outline-offset: 2px;
 }
@@ -1420,6 +1421,7 @@ function showDetail(n) {
       <dt>성격</dt><dd>${CLASS_KO[n.classification] || n.classification}</dd>
       <dt>결정 급</dt><dd>${LEVEL_KO[n.level] || "-"}${(n.decision || []).length ? ` — ${n.decision.join(", ")}` : ""}</dd>
       <dt>상태</dt><dd>${STATUS_KO[n.status]}${n.completedOn ? ` (${n.completedOn})` : ""}</dd>
+      ${(n.templates || []).some((tp) => tp.skeleton) ? `<dt>주의</dt><dd style="color:var(--amber)">참조 제도 ${(n.templates || []).filter((tp) => tp.skeleton).length}개가 <b>템플릿 골격</b>입니다 — 절차 수가 실제 절차를 뜻하지 않습니다.</dd>` : ""}
       ${n.refCount ? `<dt>제도 준비</dt><dd>${n.r2Count}/${n.refCount} R2${n.computable
         ? ` · <b style="color:var(--cyan)">다음 행동 계산 가능</b>`
         : (n.notReady || []).length ? `<br/><span class="mono" style="font-size:9px;color:var(--muted)">미준비: ${n.notReady.join(", ")}</span>` : ""}</dd>` : ""}
@@ -1429,7 +1431,7 @@ function showDetail(n) {
       <dt>의존</dt><dd>선행 ${up} · 후속 ${down}</dd>
       <dt>절차</dt><dd>${n.procs ?? 1}개${(n.templates || []).length
         ? ` — ` + n.templates.map((t) =>
-            `<a class="tmpl" href="../../model/${t.slug}/" target="_blank" rel="noopener" title="korea100 제도 모델로 이동">${t.name}</a><span class="mono" style="color:var(--muted);font-size:9px"> ${t.procs}</span>${t.readiness === "R2" ? `<span class="r2b" title="법제처 현행 원문 대조·전이 수동 대조 통과">R2</span>` : `<span class="unrb" title="에이전트 준비도 미평가 — 참고용">미검증</span>`}${sharedBadge(t.slug)}`
+            `<a class="tmpl" href="../../model/${t.slug}/" target="_blank" rel="noopener" title="korea100 제도 모델로 이동">${t.name}</a><span class="mono" style="color:var(--muted);font-size:9px"> ${t.procs}</span>${t.readiness === "R2" ? `<span class="r2b" title="법제처 현행 원문 대조·전이 수동 대조 통과">R2</span>` : `<span class="unrb" title="에이전트 준비도 미평가 — 참고용">미검증</span>`}${t.skeleton ? `<span class="sklb" title="일괄 생성된 제네릭 12단 사다리에 제도명만 붙인 골격입니다. 조문 번호는 실재하지만 이 절차가 그 조문의 절차라는 보장이 없습니다. 재모델링 대상.">골격</span>` : ""}${sharedBadge(t.slug)}`
           ).join(" · ")
         : ` <span class="mono" style="color:var(--muted);font-size:9px">(제도 미연결)</span>`}</dd>
     </dl>
