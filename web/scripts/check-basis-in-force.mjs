@@ -36,6 +36,11 @@ function citedArticles(text) {
   return out;
 }
 
+/** "법령명(약칭)" 표기에서 공식 명칭만. 데이터는 약칭을 붙여 쓰는 관례가 있다. */
+function officialNameOf(law) {
+  return String(law ?? "").replace(/\((?:[^()]*)\)\s*$/u, "").trim();
+}
+
 async function versionsOf(officialName) {
   const url = new URL("https://www.law.go.kr/DRF/lawSearch.do");
   url.searchParams.set("OC", OC);
@@ -118,10 +123,10 @@ async function checkInstitution(slug) {
 
   const findings = [];
   for (const [law, cited] of byLaw) {
-    const versions = await versionsOf(law);
+    const versions = await versionsOf(officialNameOf(law));
     if (!versions.length) {
       // 행정규칙은 조문 단위 시행일 대조 대상이 아니다. 모른다고 하지 말고 무엇인지 말한다.
-      const rule = await isAdministrativeRule(law);
+      const rule = await isAdministrativeRule(officialNameOf(law));
       findings.push(rule
         ? { law, status: "administrative_rule", effectiveOn: rule.effectiveOn, cited: [...cited.keys()] }
         : { law, status: "law_not_found", cited: [...cited.keys()] });
