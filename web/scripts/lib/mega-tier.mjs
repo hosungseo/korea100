@@ -92,6 +92,35 @@ export function milestoneTier(node) {
   return highestTier(actors);
 }
 
+/**
+ * 절차 단계 하나의 결정 위상 — 조문을 읽고 붙인 데이터가 있으면 그것을 쓰고,
+ * 없으면 담당 표기 문자열 추정으로 물러선다. 어느 쪽이었는지를 함께 돌려주는 것이
+ * 요점이다. 화면이 "장관급 결정 단계 22개"라고 쓸 때 그 22개가 데이터인지
+ * 추정인지 말할 수 있어야 한다.
+ */
+export function stepTier(node) {
+  const reviewed = node?.decision;
+  if (reviewed?.source === "article-reviewed" && TIER_RANK[reviewed.tier] !== undefined) {
+    return {
+      tier: reviewed.tier,
+      is_decision: Boolean(reviewed.is_decision),
+      source: "article-reviewed",
+      basis_article: reviewed.basis_article ?? null,
+    };
+  }
+  // 조문이 권한자를 안 정했다고 판정된 단계는 추정으로 되돌아가지 않는다.
+  // 모른다고 판정한 것을 추정으로 덮으면 판정한 의미가 없다.
+  if (reviewed?.source === "unresolved") {
+    return { tier: "unknown", is_decision: Boolean(reviewed.is_decision), source: "unresolved", basis_article: null };
+  }
+  return {
+    tier: classifyTier(node?.actor),
+    is_decision: isDecisionStep(node?.name),
+    source: "heuristic",
+    basis_article: null,
+  };
+}
+
 // 결정성: 절차가 승인·지정·의결·고시류 관문인가. "A부터 B까지 신청·계획 작성" 같은
 // 장문 절차명은 범위 서술에 결정 동사가 섞이므로 '까지' 뒤 꼬리만 판정한다.
 const DECISION_PATTERN = /승인|허가|인가|지정|고시|의결|결정|처분|재가|협약|확정|심의|면제|판단|채택|청문/;

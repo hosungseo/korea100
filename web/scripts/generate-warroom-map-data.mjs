@@ -8,7 +8,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 // 골격 판정은 탐지기 하나가 정본이다. 사다리 정의를 여기 다시 쓰지 않는다.
 import { inspect as inspectInstitution } from "./detect-template-skeletons.mjs";
-import { milestoneTier, classifyTier, isDecisionStep, TIER_RANK } from "./lib/mega-tier.mjs";
+import { milestoneTier, stepTier, TIER_RANK } from "./lib/mega-tier.mjs";
 import {
   allMilestoneStatuses,
   institutionReadinessFor,
@@ -498,16 +498,24 @@ ${redundant.length ? `<p><b>결정거리가 아닌 것:</b> 미확정으로 선�
           government_open: "지자체 관문",
           pending_parameter: "미확정 파라미터",
         };
+        // 결정 단계 수 — 조문을 읽고 붙인 위상(article-reviewed)이 있으면 그것을,
+        // 없으면 담당 표기 추정을 쓴다. 둘을 갈라 세어 화면이 어느 쪽인지 말하게 한다.
         const sigStepsOf = (n) => {
-          let total = 0; let signature = 0;
+          let total = 0; let signature = 0; let reviewed = 0; let reviewedSig = 0;
           for (const ref of n.templateRefs ?? []) {
             let inst;
             try { inst = JSON.parse(readFileSync(join(root, `data/institutions/${ref.institution}.json`), "utf8")); } catch { continue; }
             const steps = (inst.process?.nodes ?? []).filter((x) => !Array.isArray(ref.nodeIds) || ref.nodeIds.includes(x.id));
             total += steps.length;
-            signature += steps.filter((x) => isDecisionStep(x.name) && TIER_RANK[classifyTier(x.actor)] >= TIER_RANK.minister).length;
+            for (const step of steps) {
+              const t = stepTier(step);
+              if (t.source !== "heuristic") reviewed += 1;
+              if (!t.is_decision || !(TIER_RANK[t.tier] >= TIER_RANK.minister)) continue;
+              signature += 1;
+              if (t.source === "article-reviewed") reviewedSig += 1;
+            }
           }
-          return { total, signature };
+          return { total, signature, reviewed, reviewedSig };
         };
         const rows = A.cabinet.map((e) => {
           const src = project.nodes.find((x) => x.id === e.node_id);
@@ -517,6 +525,8 @@ ${redundant.length ? `<p><b>결정거리가 아닌 것:</b> 미확정으로 선�
         const totalSteps = nodes.reduce((s, n) => s + n.procs, 0);
         const cabinetSteps = rows.reduce((s, r) => s + r.steps.total, 0);
         const cabinetSig = rows.reduce((s, r) => s + r.steps.signature, 0);
+        const cabinetReviewed = rows.reduce((s, r) => s + r.steps.reviewed, 0);
+        const cabinetReviewedSig = rows.reduce((s, r) => s + r.steps.reviewedSig, 0);
         out.push({
           id: "ont-attention",
           label: "🏛 총리·국무위원 관심",
@@ -525,7 +535,7 @@ ${redundant.length ? `<p><b>결정거리가 아닌 것:</b> 미확정으로 선�
 <ol>${rows.map((r) =>
             `<li data-nodes="${r.node_id}">${r.label} <span class="mono" style="color:var(--muted);font-size:9px">${r.node_id} · ${r.openness} · 하류 ${r.downstream_reach} · 결정단계 ${r.steps.signature}/${r.steps.total}</span><br><span style="font-size:10px">${r.reasons.filter((x) => x.tier === "cabinet").map((x) => `${REASON_KO[x.code] ?? x.code}${x.code === "cross_ministry_wait" ? `(${x.evidence.replace("artifact:", "")})` : ""}`).join(" · ")}</span></li>`,
           ).join("")}</ol>
-<p style="color:var(--muted);font-size:10px">층은 손으로 고른 목록이 아니라 결정 위상×개폐×의존 그래프에서 매번 다시 계산됩니다. 상태가 바뀌면 목록도 바뀝니다. 단계 수 판정(결정 단계·장관급)은 담당 표기 휴리스틱입니다.</p>`,
+<p style="color:var(--muted);font-size:10px">층은 손으로 고른 목록이 아니라 결정 위상×개폐×의존 그래프에서 매번 다시 계산됩니다. 상태가 바뀌면 목록도 바뀝니다. 단계 위상은 ${cabinetReviewed}/${cabinetSteps}단계가 <b>조문 대조</b>(그중 결정 단계 ${cabinetReviewedSig}개), 나머지는 담당 표기 휴리스틱입니다.</p>`,
         });
       }
       return out;

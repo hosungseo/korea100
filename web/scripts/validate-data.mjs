@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildProcessLaneGroups } from "../src/lib/process-layout.mjs";
 import { validateAgentInstitution } from "./lib/agent-readiness.mjs";
+import { TIER_RANK } from "./lib/mega-tier.mjs";
 
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const WEB_DIR = path.dirname(SCRIPT_DIR);
@@ -13,6 +14,9 @@ const FIELD_QUEUE_PATH = path.join(REPO_DIR, "docs", "field-verification-queue.j
 
 const NODE_STATUSES = new Set(["done", "current", "waiting", "risk", "loop"]);
 const NODE_TYPES = new Set(["task", "gateway", "notice", "system"]);
+// 단계 결정 위상 — 어휘는 mega-tier가 정본이고 여기선 unknown만 더한다.
+const DECISION_TIERS = new Set([...Object.keys(TIER_RANK), "unknown"]);
+const DECISION_SOURCES = new Set(["article-reviewed", "unresolved"]);
 const EDGE_TYPES = new Set(["sequence", "message", "loop"]);
 const LEGAL_KINDS = new Set([
   "법률",
@@ -260,6 +264,27 @@ for (const { file, data: institution } of institutions) {
     }
     if (node.confidence !== undefined && (node.confidence < 0 || node.confidence > 1)) {
       fail(nodeScope, `confidence 범위는 0~1입니다 (${node.confidence})`);
+    }
+    // 단계 결정 위상 — 조문을 읽고 붙인 데이터. 추정으로 채우면 안 되는 자리라
+    // 근거 조문이 그 노드의 legal_basis 안에 있는지까지 검사한다.
+    if (node.decision !== undefined) {
+      const d = node.decision;
+      if (!DECISION_SOURCES.has(d.source)) {
+        fail(nodeScope, `decision.source가 ${[...DECISION_SOURCES].join("|")} 중 하나여야 합니다 (${d.source})`);
+      }
+      if (!DECISION_TIERS.has(d.tier)) {
+        fail(nodeScope, `decision.tier 어휘 밖입니다 (${d.tier})`);
+      }
+      if (typeof d.is_decision !== "boolean") fail(nodeScope, "decision.is_decision은 boolean이어야 합니다");
+      if (d.source === "article-reviewed" && d.tier === "unknown") {
+        fail(nodeScope, "조문 대조로 판정했다면서 tier가 unknown입니다 — unresolved여야 합니다");
+      }
+      if (d.basis_article) {
+        const has = (node.legal_basis ?? []).some((b) => b.article === d.basis_article || String(b.article).startsWith(d.basis_article));
+        if (!has) fail(nodeScope, `decision.basis_article이 legal_basis에 없습니다 (${d.basis_article})`);
+      } else if (d.source === "article-reviewed" && d.tier !== "field") {
+        fail(nodeScope, `decision.basis_article이 없는데 tier가 ${d.tier}입니다 — 권한자를 정한 조문을 대야 합니다`);
+      }
     }
   }
 
