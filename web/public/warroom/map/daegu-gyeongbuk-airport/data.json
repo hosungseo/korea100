@@ -69,7 +69,16 @@
    "status": "completed",
    "confidence": "statutory",
    "note": "공포 2025-10-01, 시행 2026-01-02",
-   "completedOn": "2026-01-02"
+   "completedOn": "2026-01-02",
+   "openness": "done",
+   "computable": false,
+   "r2Count": 0,
+   "refCount": 1,
+   "notReady": [
+    "tk-integrated-airport"
+   ],
+   "blockedBy": [],
+   "conflict": null
   },
   {
    "id": "N02",
@@ -100,7 +109,16 @@
    "status": "completed",
    "confidence": "statutory",
    "note": "",
-   "completedOn": "2026-01-02"
+   "completedOn": "2026-01-02",
+   "openness": "done",
+   "computable": false,
+   "r2Count": 0,
+   "refCount": 1,
+   "notReady": [
+    "tk-integrated-airport"
+   ],
+   "blockedBy": [],
+   "conflict": null
   },
   {
    "id": "N03",
@@ -131,7 +149,16 @@
    "status": "active",
    "confidence": "statutory",
    "note": "",
-   "completedOn": ""
+   "completedOn": "",
+   "openness": "in_progress",
+   "computable": false,
+   "r2Count": 0,
+   "refCount": 1,
+   "notReady": [
+    "tk-integrated-airport"
+   ],
+   "blockedBy": [],
+   "conflict": null
   },
   {
    "id": "N04",
@@ -167,7 +194,17 @@
    "status": "active",
    "confidence": "statutory",
    "note": "",
-   "completedOn": ""
+   "completedOn": "",
+   "openness": "in_progress",
+   "computable": false,
+   "r2Count": 0,
+   "refCount": 2,
+   "notReady": [
+    "military-airport-relocation-site-selection",
+    "tk-integrated-airport"
+   ],
+   "blockedBy": [],
+   "conflict": null
   },
   {
    "id": "N05",
@@ -205,7 +242,17 @@
    "status": "active",
    "confidence": "statutory",
    "note": "",
-   "completedOn": ""
+   "completedOn": "",
+   "openness": "in_progress",
+   "computable": false,
+   "r2Count": 0,
+   "refCount": 2,
+   "notReady": [
+    "airport-development-operation-permit",
+    "tk-integrated-airport"
+   ],
+   "blockedBy": [],
+   "conflict": null
   },
   {
    "id": "N06",
@@ -243,7 +290,24 @@
    "status": "planned",
    "confidence": "statutory",
    "note": "",
-   "completedOn": ""
+   "completedOn": "",
+   "openness": "blocked",
+   "computable": false,
+   "r2Count": 0,
+   "refCount": 2,
+   "notReady": [
+    "defense-facility-project-plan-completion",
+    "tk-integrated-airport"
+   ],
+   "blockedBy": [
+    {
+     "artifact": "군 공항 이전사업 시행자 확정",
+     "by": [
+      "N04"
+     ]
+    }
+   ],
+   "conflict": null
   },
   {
    "id": "N07",
@@ -281,7 +345,24 @@
    "status": "planned",
    "confidence": "statutory",
    "note": "",
-   "completedOn": ""
+   "completedOn": "",
+   "openness": "blocked",
+   "computable": false,
+   "r2Count": 0,
+   "refCount": 2,
+   "notReady": [
+    "airport-facility-development-permit",
+    "tk-integrated-airport"
+   ],
+   "blockedBy": [
+    {
+     "artifact": "공항개발사업 시행자 확정",
+     "by": [
+      "N05"
+     ]
+    }
+   ],
+   "conflict": null
   },
   {
    "id": "N08",
@@ -334,7 +415,32 @@
    "status": "planned",
    "confidence": "statutory",
    "note": "",
-   "completedOn": ""
+   "completedOn": "",
+   "openness": "blocked",
+   "computable": false,
+   "r2Count": 0,
+   "refCount": 4,
+   "notReady": [
+    "environmental-impact-assessment",
+    "forest-management-plan",
+    "river-occupation-permit",
+    "tk-integrated-airport"
+   ],
+   "blockedBy": [
+    {
+     "artifact": "군 공항 이전 실시계획 승인",
+     "by": [
+      "N06"
+     ]
+    },
+    {
+     "artifact": "공항개발 실시계획 승인",
+     "by": [
+      "N07"
+     ]
+    }
+   ],
+   "conflict": null
   },
   {
    "id": "N09",
@@ -370,7 +476,24 @@
    "status": "planned",
    "confidence": "statutory",
    "note": "",
-   "completedOn": ""
+   "completedOn": "",
+   "openness": "blocked",
+   "computable": false,
+   "r2Count": 0,
+   "refCount": 2,
+   "notReady": [
+    "land-compensation",
+    "tk-integrated-airport"
+   ],
+   "blockedBy": [
+    {
+     "artifact": "군 공항 이전 실시계획 승인",
+     "by": [
+      "N06"
+     ]
+    }
+   ],
+   "conflict": null
   },
   {
    "id": "N10",
@@ -449,7 +572,30 @@
    "status": "planned",
    "confidence": "statutory",
    "note": "",
-   "completedOn": ""
+   "completedOn": "",
+   "openness": "blocked",
+   "computable": false,
+   "r2Count": 0,
+   "refCount": 8,
+   "notReady": [
+    "development-permit",
+    "farmland-conversion",
+    "forestland-conversion",
+    "national-heritage-basic-plan",
+    "public-waters-occupation",
+    "river-occupation-permit",
+    "road-occupation-permit",
+    "tk-integrated-airport"
+   ],
+   "blockedBy": [
+    {
+     "artifact": "환경영향평가 협의 완료",
+     "by": [
+      "N08"
+     ]
+    }
+   ],
+   "conflict": null
   },
   {
    "id": "N11",
@@ -480,7 +626,23 @@
    "status": "planned",
    "confidence": "statutory",
    "note": "",
-   "completedOn": ""
+   "completedOn": "",
+   "openness": "blocked",
+   "computable": false,
+   "r2Count": 0,
+   "refCount": 1,
+   "notReady": [
+    "tk-integrated-airport"
+   ],
+   "blockedBy": [
+    {
+     "artifact": "공항개발 실시계획 승인",
+     "by": [
+      "N07"
+     ]
+    }
+   ],
+   "conflict": null
   },
   {
    "id": "N12",
@@ -516,7 +678,17 @@
    "status": "planned",
    "confidence": "statutory",
    "note": "",
-   "completedOn": ""
+   "completedOn": "",
+   "openness": "ready",
+   "computable": false,
+   "r2Count": 0,
+   "refCount": 2,
+   "notReady": [
+    "military-airfield-noise-measures-compensation",
+    "tk-integrated-airport"
+   ],
+   "blockedBy": [],
+   "conflict": null
   },
   {
    "id": "N13",
@@ -573,7 +745,19 @@
    "status": "planned",
    "confidence": "statutory",
    "note": "",
-   "completedOn": ""
+   "completedOn": "",
+   "openness": "ready",
+   "computable": false,
+   "r2Count": 1,
+   "refCount": 5,
+   "notReady": [
+    "integrated-transport-investment-plan",
+    "railway-business-license",
+    "startup-support-plan",
+    "tk-integrated-airport"
+   ],
+   "blockedBy": [],
+   "conflict": null
   },
   {
    "id": "N14",
@@ -642,7 +826,34 @@
    "status": "planned",
    "confidence": "modeled",
    "note": "개항 시점은 정부 발표 기준이며 이 지도는 법정 절차만 표시한다",
-   "completedOn": ""
+   "completedOn": "",
+   "openness": "blocked",
+   "computable": false,
+   "r2Count": 0,
+   "refCount": 6,
+   "notReady": [
+    "air-transport-business-license",
+    "aircraft-airworthiness-certification",
+    "building-permit-use-approval",
+    "fire-facility-construction-completion-inspection",
+    "mechanical-equipment-precheck-use-inspection",
+    "tk-integrated-airport"
+   ],
+   "blockedBy": [
+    {
+     "artifact": "인가·허가 등 의제 확정",
+     "by": [
+      "N10"
+     ]
+    },
+    {
+     "artifact": "사업부지 수용·보상 완료",
+     "by": [
+      "N09"
+     ]
+    }
+   ],
+   "conflict": null
   },
   {
    "id": "N15",
@@ -678,7 +889,24 @@
    "status": "planned",
    "confidence": "statutory",
    "note": "",
-   "completedOn": ""
+   "completedOn": "",
+   "openness": "blocked",
+   "computable": false,
+   "r2Count": 0,
+   "refCount": 2,
+   "notReady": [
+    "local-public-enterprise-establishment",
+    "tk-integrated-airport"
+   ],
+   "blockedBy": [
+    {
+     "artifact": "군 공항 이전 실시계획 승인",
+     "by": [
+      "N06"
+     ]
+    }
+   ],
+   "conflict": null
   },
   {
    "id": "N16",
@@ -728,7 +956,26 @@
    "status": "planned",
    "confidence": "statutory",
    "note": "",
-   "completedOn": ""
+   "completedOn": "",
+   "openness": "blocked",
+   "computable": false,
+   "r2Count": 0,
+   "refCount": 4,
+   "notReady": [
+    "former-airport-site-development-plan",
+    "housing-site-development",
+    "tk-integrated-airport",
+    "urban-management-plan-determination"
+   ],
+   "blockedBy": [
+    {
+     "artifact": "종전부지 개발사업시행자 지정",
+     "by": [
+      "N15"
+     ]
+    }
+   ],
+   "conflict": null
   },
   {
    "id": "N17",
@@ -771,7 +1018,25 @@
    "status": "planned",
    "confidence": "statutory",
    "note": "",
-   "completedOn": ""
+   "completedOn": "",
+   "openness": "blocked",
+   "computable": false,
+   "r2Count": 0,
+   "refCount": 3,
+   "notReady": [
+    "former-airport-site-development-plan",
+    "housing-site-development",
+    "tk-integrated-airport"
+   ],
+   "blockedBy": [
+    {
+     "artifact": "종전부지 개발계획 고시",
+     "by": [
+      "N16"
+     ]
+    }
+   ],
+   "conflict": null
   },
   {
    "id": "N18",
@@ -828,7 +1093,20 @@
    "status": "planned",
    "confidence": "statutory",
    "note": "",
-   "completedOn": ""
+   "completedOn": "",
+   "openness": "ready",
+   "computable": false,
+   "r2Count": 0,
+   "refCount": 5,
+   "notReady": [
+    "marina-port-development",
+    "special-architecture-zone",
+    "tk-integrated-airport",
+    "tourism-special-zone",
+    "urban-management-plan-determination"
+   ],
+   "blockedBy": [],
+   "conflict": null
   },
   {
    "id": "N19",
@@ -858,7 +1136,16 @@
    "status": "planned",
    "confidence": "statutory",
    "note": "",
-   "completedOn": ""
+   "completedOn": "",
+   "openness": "ready",
+   "computable": false,
+   "r2Count": 0,
+   "refCount": 1,
+   "notReady": [
+    "tk-integrated-airport"
+   ],
+   "blockedBy": [],
+   "conflict": null
   },
   {
    "id": "N20",
@@ -887,7 +1174,16 @@
    "status": "planned",
    "confidence": "statutory",
    "note": "",
-   "completedOn": ""
+   "completedOn": "",
+   "openness": "ready",
+   "computable": false,
+   "r2Count": 0,
+   "refCount": 1,
+   "notReady": [
+    "tk-integrated-airport"
+   ],
+   "blockedBy": [],
+   "conflict": null
   }
  ],
  "edges": [
@@ -1046,5 +1342,23 @@
    "relation": "finish_to_start"
   }
  ],
- "ontology": null
+ "ontology": {
+  "caseId": "DGA-2026-0901-001",
+  "asOf": "2026-09-01",
+  "decisions": [
+   {
+    "parameter": "militaryPlanApproved",
+    "reason": "군 공항 이전사업 실시계획의 국방부 승인 시점이 확인되지 않음",
+    "gates": [],
+    "affects": null
+   },
+   {
+    "parameter": "formerSiteOperator",
+    "reason": "종전부지 개발사업시행자(지방공사·공공기관 등) 지정이 확인되지 않음",
+    "gates": [],
+    "affects": null
+   }
+  ],
+  "exclusive": []
+ }
 }

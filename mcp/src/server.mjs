@@ -17,7 +17,9 @@ import { checkCaseLinkageFor } from "./case-link.mjs";
 import {
   legalTransitions,
   movableEntities,
+  proposeTransitionsForEvent,
   validateTransition,
+  WORK_EVENT_TYPES,
 } from "./case-transitions.mjs";
 import {
   projectStatus,
@@ -411,10 +413,29 @@ export function createAdministrativeProcedureMcpServer(service, { ontologyEnable
           case_file: z.string().trim().max(200).describe("ontology/ 기준 상대경로"),
           entity_id: z.string().trim().max(200).optional().describe("step:·milestone:·case: 등 엔티티 ID"),
           to: z.string().trim().max(80).optional().describe("바꾸려는 상태. 주면 그 전이를 검사합니다"),
+          event_type: z.enum([
+            "approval.completed",
+            "approval.rejected",
+            "supplement.requested",
+            "document.received",
+            "manual.confirmed",
+          ]).optional().describe("resolve_work_event가 푼 업무 이벤트. 주면 그 이벤트가 뜻하는 전이 후보를 냅니다"),
         },
       },
-      async ({ case_file, entity_id, to }) => {
+      async ({ case_file, entity_id, to, event_type: eventType }) => {
         const data = await loadOntologyCase({ caseFile: case_file });
+        if (eventType) {
+          if (!entity_id) {
+            return {
+              case_id: data.case_id,
+              status: "entity_required",
+              known_event_types: WORK_EVENT_TYPES,
+              note: "이벤트로 전이를 좁히려면 어느 단계의 일인지(entity_id)가 있어야 합니다. resolve_work_event의 step_id를 step:<id>로 넘기세요.",
+              execution_allowed: false,
+            };
+          }
+          return { case_id: data.case_id, as_of: data.as_of, ...proposeTransitionsForEvent(data, { event_type: eventType, entity_id }) };
+        }
         if (!entity_id) {
           return {
             case_id: data.case_id,
@@ -449,9 +470,15 @@ export function createAdministrativeProcedureMcpServer(service, { ontologyEnable
           apply_with: "ontology/scripts/advance-case-state.mjs",
         };
       },
-      (data) => (data.movable
-        ? `지금 움직일 수 있는 엔티티 ${data.movable.length}개`
-        : `${data.entity_id}: ${data.from ?? "상태 미기재"} → ${(data.transitions ?? []).filter((t) => t.allowed).map((t) => t.to).join("·") || "갈 곳 없음"}`),
+      (data) => {
+        if (data.movable) return `지금 움직일 수 있는 엔티티 ${data.movable.length}개`;
+        if (data.proposals) {
+          return data.proposals.length
+            ? `${data.event_label}: ${data.entity_id} ${data.from} → ${data.proposals.map((p) => p.to).join(" 또는 ")}`
+            : `${data.event_label}: 제안할 전이가 없습니다(${data.status})`;
+        }
+        return `${data.entity_id}: ${data.from ?? "상태 미기재"} → ${(data.transitions ?? []).filter((t) => t.allowed).map((t) => t.to).join("·") || "갈 곳 없음"}`;
+      },
     );
   }
 

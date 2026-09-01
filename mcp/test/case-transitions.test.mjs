@@ -7,6 +7,7 @@ import {
   applyTransition,
   legalTransitions,
   movableEntities,
+  proposeTransitionsForEvent,
   TransitionError,
   validateTransition,
 } from "../src/case-transitions.mjs";
@@ -163,4 +164,75 @@ test("마일스톤은 사업 어휘로 판정한다", async () => {
   assert.ok(targets.includes("in_progress"));
   // 단계 어휘가 새어 들어오면 안 된다.
   assert.ok(!targets.includes("applicability_undetermined"));
+});
+
+// ── 이벤트 → 전이 매핑 ────────────────────────────────────────────────
+// resolve_work_event는 (제도, 단계)까지만 풀고 끊겼다. "그래서 장부에 무엇을
+// 적나"가 사람 머릿속에만 있었다. 이 매핑이 그 자리를 메우되, 단정하지는 않는다.
+
+test("결재 완료는 완료로 읽고 그 다음에 열리는 문까지 알려준다", async () => {
+  const caseData = await disclosure();
+  const result = proposeTransitionsForEvent(caseData, {
+    event_type: "approval.completed",
+    entity_id: "step:P11",
+  });
+
+  assert.equal(result.status, "single_candidate");
+  assert.deepEqual(result.proposals.map((p) => p.to), ["done"]);
+  // 캐스케이드는 가정 위의 계산이라 제안일 뿐이고, 자동으로 적히지 않는다.
+  assert.deepEqual(result.would_open, [{ entity_id: "step:P12", to: "ready" }]);
+  assert.equal(result.execution_allowed, false);
+});
+
+test("반려는 하나로 좁히지 않고 그래프 근거를 붙여 되돌려 준다", async () => {
+  const caseData = await disclosure();
+  const result = proposeTransitionsForEvent(caseData, {
+    event_type: "approval.rejected",
+    entity_id: "step:P10",
+  });
+
+  assert.equal(result.status, "needs_human_choice");
+  const targets = result.proposals.map((p) => p.to).sort();
+  assert.deepEqual(targets, ["blocked", "in_progress"]);
+  // 후보마다 loop 사실이 자기에게 유리한지 불리한지가 달라야 고를 수 있다.
+  const notes = result.proposals.map((p) => p.loop_note);
+  assert.equal(new Set(notes).size, 2, "두 후보에 같은 문장을 붙이면 못 고른다");
+  assert.equal(result.would_open.length, 0);
+});
+
+test("이벤트가 그래프상 불가능한 전이를 뜻하면 그것도 그대로 보인다", async () => {
+  const caseData = await disclosure();
+  // P12는 선행(P11)이 안 끝나 ready가 될 수 없다.
+  const result = proposeTransitionsForEvent(caseData, {
+    event_type: "manual.confirmed",
+    entity_id: "step:P12",
+  });
+
+  const ready = result.proposals.find((p) => p.to === "ready");
+  assert.ok(ready);
+  assert.equal(ready.allowed, false);
+  assert.ok(ready.blockers.some((b) => b.code === "predecessor_not_satisfied"));
+});
+
+test("모르는 이벤트는 추측하지 않는다", async () => {
+  const caseData = await disclosure();
+  const result = proposeTransitionsForEvent(caseData, {
+    event_type: "payment.settled",
+    entity_id: "step:P10",
+  });
+
+  assert.equal(result.status, "unknown_event_type");
+  assert.deepEqual(result.proposals, []);
+  assert.ok(result.known_event_types.includes("approval.completed"));
+});
+
+test("사건 서사 상태는 이벤트로도 좁히지 않는다", async () => {
+  const caseData = await disclosure();
+  const result = proposeTransitionsForEvent(caseData, {
+    event_type: "approval.completed",
+    entity_id: "case:IDC-2026-0901-001",
+  });
+
+  assert.equal(result.status, "open_vocabulary");
+  assert.deepEqual(result.proposals, []);
 });

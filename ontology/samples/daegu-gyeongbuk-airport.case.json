@@ -1,0 +1,2886 @@
+{
+ "ontology_version": "korea100.ontology.core.v0",
+ "case_kind": "project",
+ "project_id": "daegu-gyeongbuk-airport",
+ "project_name": "대구경북통합신공항 건설·종전부지 개발",
+ "institution_slug": null,
+ "case_id": "DGA-2026-0901-001",
+ "as_of": "2026-09-01",
+ "source_project_json": "web/data/mega-projects/projects/daegu-gyeongbuk-airport.json",
+ "source_artifact_registry": "web/data/mega-projects/artifacts.json",
+ "derivation": {
+  "generator": "ontology/scripts/derive-project-case.mjs",
+  "derived_layers": [
+   "Gate(마일스톤)·Document(아티팩트)·Institution(참조 제도)·Statute/Document(근거) 엔티티",
+   "requires·hands_off_to·owns·cites 관계",
+   "마일스톤 진행 상태"
+  ],
+  "authored_layers": [
+   "Rule",
+   "ActionPacket",
+   "demo_queries"
+  ],
+  "milestone_count": 20,
+  "artifact_count": 20,
+  "institution_count": 32,
+  "source_count": 1
+ },
+ "entities": [
+  {
+   "id": "case:DGA-2026-0901-001",
+   "type": "Case",
+   "label": "대구경북통합신공항 건설·종전부지 개발 사업 케이스",
+   "status": "verified",
+   "attrs": {
+    "project_id": "daegu-gyeongbuk-airport",
+    "project_family": "mega-infrastructure",
+    "overlay_status": "planning",
+    "overlay_as_of": "2026-08-29",
+    "scope": {
+     "coverage": "대구·경북 — 이전지 및 종전부지",
+     "vision": "군 공항·민간공항 동시 이전과 종전부지 개발",
+     "planHorizon": "2026~ (특별법 시행 2026-01-02 이후)",
+     "legalStatus": "대구경북통합신공항 건설을 위한 특별법 시행 중(2025-10-01 공포, 2026-01-02 시행)"
+    },
+    "parameters": {
+     "militaryPlanApproved": {
+      "value": null,
+      "status": "unknown",
+      "reason": "군 공항 이전사업 실시계획의 국방부 승인 시점이 확인되지 않음"
+     },
+     "formerSiteOperator": {
+      "value": null,
+      "status": "unknown",
+      "reason": "종전부지 개발사업시행자(지방공사·공공기관 등) 지정이 확인되지 않음"
+     }
+    }
+   }
+  },
+  {
+   "id": "role:molit",
+   "type": "Role",
+   "label": "국토교통부",
+   "status": "verified",
+   "attrs": {
+    "code": "A01",
+    "mandate": "공항개발사업 시행·실시계획 승인, 추진단 운영, 주변개발예정지역 지정"
+   }
+  },
+  {
+   "id": "role:mnd",
+   "type": "Role",
+   "label": "국방부",
+   "status": "verified",
+   "attrs": {
+    "code": "A02",
+    "mandate": "군 공항 이전사업 사업계획·실시계획 승인"
+   }
+  },
+  {
+   "id": "role:former-site-local",
+   "type": "Role",
+   "label": "종전부지 지방자치단체",
+   "status": "verified",
+   "attrs": {
+    "code": "A03",
+    "mandate": "군 공항 이전사업 시행, 개발계획 고시, 시행자 지정"
+   }
+  },
+  {
+   "id": "role:relocation-local",
+   "type": "Role",
+   "label": "이전지 지방자치단체",
+   "status": "verified",
+   "attrs": {
+    "code": "A04",
+    "mandate": "이전주변지역 지원사업, 인허가 협의"
+   }
+  },
+  {
+   "id": "role:dev-operator",
+   "type": "Role",
+   "label": "개발사업시행자",
+   "status": "verified",
+   "attrs": {
+    "code": "A05",
+    "mandate": "종전부지 개발계획·실시계획 수립·시행"
+   }
+  },
+  {
+   "id": "role:related-agencies",
+   "type": "Role",
+   "label": "관계 행정기관",
+   "status": "verified",
+   "attrs": {
+    "code": "A06",
+    "mandate": "의제 협의, 환경영향평가, 특별구역 지정"
+   }
+  },
+  {
+   "id": "role:private",
+   "type": "Role",
+   "label": "민간사업자",
+   "status": "verified",
+   "attrs": {
+    "code": "A07",
+    "mandate": "민간자본 유치·투자"
+   }
+  },
+  {
+   "id": "institution:air-transport-business-license",
+   "type": "Institution",
+   "label": "항공운송사업 면허·운수권 배분",
+   "status": "unverified",
+   "attrs": {
+    "slug": "air-transport-business-license",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N14"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:aircraft-airworthiness-certification",
+   "type": "Institution",
+   "label": "항공기 감항증명·형식증명",
+   "status": "unverified",
+   "attrs": {
+    "slug": "aircraft-airworthiness-certification",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N14"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:airport-development-operation-permit",
+   "type": "Institution",
+   "label": "공항 개발·운영 인허가",
+   "status": "unverified",
+   "attrs": {
+    "slug": "airport-development-operation-permit",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N05"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:airport-facility-development-permit",
+   "type": "Institution",
+   "label": "공항시설 개발·실시계획 승인",
+   "status": "unverified",
+   "attrs": {
+    "slug": "airport-facility-development-permit",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N07"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:building-permit-use-approval",
+   "type": "Institution",
+   "label": "건축허가·착공신고·사용승인",
+   "status": "unverified",
+   "attrs": {
+    "slug": "building-permit-use-approval",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N14"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:defense-facility-project-plan-completion",
+   "type": "Institution",
+   "label": "국방·군사시설 사업계획·실시계획·준공",
+   "status": "unverified",
+   "attrs": {
+    "slug": "defense-facility-project-plan-completion",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N06"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:development-permit",
+   "type": "Institution",
+   "label": "개발행위허가",
+   "status": "unverified",
+   "attrs": {
+    "slug": "development-permit",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N10"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:environmental-impact-assessment",
+   "type": "Institution",
+   "label": "환경영향평가",
+   "status": "unverified",
+   "attrs": {
+    "slug": "environmental-impact-assessment",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N08"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:farmland-conversion",
+   "type": "Institution",
+   "label": "농지전용 허가",
+   "status": "unverified",
+   "attrs": {
+    "slug": "farmland-conversion",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N10"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:fire-facility-construction-completion-inspection",
+   "type": "Institution",
+   "label": "소방시설공사 착공신고·완공검사",
+   "status": "unverified",
+   "attrs": {
+    "slug": "fire-facility-construction-completion-inspection",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N14"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:forest-management-plan",
+   "type": "Institution",
+   "label": "산림경영계획 인가·조림",
+   "status": "unverified",
+   "attrs": {
+    "slug": "forest-management-plan",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N08"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:forestland-conversion",
+   "type": "Institution",
+   "label": "산지전용 허가",
+   "status": "unverified",
+   "attrs": {
+    "slug": "forestland-conversion",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N10"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:former-airport-site-development-plan",
+   "type": "Institution",
+   "label": "광주 군공항 종전부지 개발계획·실시계획",
+   "status": "unverified",
+   "attrs": {
+    "slug": "former-airport-site-development-plan",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N16",
+     "N17"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:housing-site-development",
+   "type": "Institution",
+   "label": "택지개발지구 지정·실시계획 승인",
+   "status": "unverified",
+   "attrs": {
+    "slug": "housing-site-development",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N16",
+     "N17"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:integrated-transport-investment-plan",
+   "type": "Institution",
+   "label": "중기 교통시설투자계획·타당성 평가",
+   "status": "unverified",
+   "attrs": {
+    "slug": "integrated-transport-investment-plan",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N13"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:land-compensation",
+   "type": "Institution",
+   "label": "공익사업 토지보상",
+   "status": "unverified",
+   "attrs": {
+    "slug": "land-compensation",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N09"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:local-public-enterprise-establishment",
+   "type": "Institution",
+   "label": "지방공기업 설립·경영평가",
+   "status": "unverified",
+   "attrs": {
+    "slug": "local-public-enterprise-establishment",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N15"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:marina-port-development",
+   "type": "Institution",
+   "label": "마리나항만 기본계획·마리나업 등록",
+   "status": "unverified",
+   "attrs": {
+    "slug": "marina-port-development",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N18"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:mechanical-equipment-precheck-use-inspection",
+   "type": "Institution",
+   "label": "기계설비 착공 전 확인·사용 전 검사",
+   "status": "unverified",
+   "attrs": {
+    "slug": "mechanical-equipment-precheck-use-inspection",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N14"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:military-airfield-noise-measures-compensation",
+   "type": "Institution",
+   "label": "군용비행장 소음대책지역·저감·보상",
+   "status": "unverified",
+   "attrs": {
+    "slug": "military-airfield-noise-measures-compensation",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N12"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:military-airport-relocation-site-selection",
+   "type": "Institution",
+   "label": "군 공항 이전부지 선정·지원계획·사업이행",
+   "status": "unverified",
+   "attrs": {
+    "slug": "military-airport-relocation-site-selection",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N04"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:national-heritage-basic-plan",
+   "type": "Institution",
+   "label": "국가유산 기본계획·조사연구",
+   "status": "unverified",
+   "attrs": {
+    "slug": "national-heritage-basic-plan",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N10"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:national-road-rail-soc",
+   "type": "Institution",
+   "label": "국가 도로·철도 SOC 추진",
+   "status": "verified",
+   "attrs": {
+    "slug": "national-road-rail-soc",
+    "readiness_level": "R2",
+    "readiness_mode": "next-action",
+    "referenced_by": [
+     "N13"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:public-waters-occupation",
+   "type": "Institution",
+   "label": "공유수면 점·사용 허가",
+   "status": "unverified",
+   "attrs": {
+    "slug": "public-waters-occupation",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N10"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:railway-business-license",
+   "type": "Institution",
+   "label": "철도사업 면허·운임 신고",
+   "status": "unverified",
+   "attrs": {
+    "slug": "railway-business-license",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N13"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:river-occupation-permit",
+   "type": "Institution",
+   "label": "하천 점용허가·하천공사",
+   "status": "unverified",
+   "attrs": {
+    "slug": "river-occupation-permit",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N08",
+     "N10"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:road-occupation-permit",
+   "type": "Institution",
+   "label": "도로점용 허가",
+   "status": "unverified",
+   "attrs": {
+    "slug": "road-occupation-permit",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N10"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:special-architecture-zone",
+   "type": "Institution",
+   "label": "특별건축구역 지정·심의",
+   "status": "unverified",
+   "attrs": {
+    "slug": "special-architecture-zone",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N18"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:startup-support-plan",
+   "type": "Institution",
+   "label": "창업지원종합계획·창업 활성화 지원",
+   "status": "unverified",
+   "attrs": {
+    "slug": "startup-support-plan",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N13"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:tk-integrated-airport",
+   "type": "Institution",
+   "label": "대구경북통합신공항 건설·종전부지 개발",
+   "status": "unverified",
+   "attrs": {
+    "slug": "tk-integrated-airport",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N01",
+     "N02",
+     "N03",
+     "N04",
+     "N05",
+     "N06",
+     "N07",
+     "N08",
+     "N09",
+     "N10",
+     "N11",
+     "N12",
+     "N13",
+     "N14",
+     "N15",
+     "N16",
+     "N17",
+     "N18",
+     "N19",
+     "N20"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:tourism-special-zone",
+   "type": "Institution",
+   "label": "관광특구 지정·진흥계획",
+   "status": "unverified",
+   "attrs": {
+    "slug": "tourism-special-zone",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N18"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:urban-management-plan-determination",
+   "type": "Institution",
+   "label": "도시관리계획 입안·결정·고시",
+   "status": "unverified",
+   "attrs": {
+    "slug": "urban-management-plan-determination",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N16",
+     "N18"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "source:SRC_TK_ACT",
+   "type": "Statute",
+   "label": "대구경북통합신공항 건설을 위한 특별법",
+   "status": "verified",
+   "attrs": {
+    "source_id": "SRC_TK_ACT",
+    "source_type": "statute",
+    "url": "https://law.go.kr/법령/대구경북통합신공항건설을위한특별법",
+    "effective_on": null,
+    "published_on": null
+   }
+  },
+  {
+   "id": "artifact:tk.act_in_force",
+   "type": "Document",
+   "label": "통합신공항 특별법 시행",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "tk.act_in_force",
+    "category": "legal",
+    "definition": "대구경북통합신공항 건설을 위한 특별법이 시행돼 시행자 지정·실시계획 절차가 가능한 상태(2026-01-02).",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:tk.airport_built",
+   "type": "Document",
+   "label": "통합신공항 건설·개항",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "tk.airport_built",
+    "category": "construction",
+    "definition": "통합신공항이 건설되고 기능이 이전돼 개항한 상태.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:tk.airport_operator_fixed",
+   "type": "Document",
+   "label": "공항개발사업 시행자 확정",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "tk.airport_operator_fixed",
+    "category": "designation",
+    "definition": "국토교통부장관이 시행하거나 허가·위탁을 통해 시행 주체가 확정된 상태.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:tk.airport_plan_approved",
+   "type": "Document",
+   "label": "공항개발 실시계획 승인",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "tk.airport_plan_approved",
+    "category": "permit",
+    "definition": "공항시설법 제7조에 따라 공항개발사업 실시계획이 승인·고시된 상태.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:tk.council_ready",
+   "type": "Document",
+   "label": "건설 협의기구 가동",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "tk.council_ready",
+    "category": "governance",
+    "definition": "관계기관 간 협의기구가 구성·운영되는 상태.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:tk.eia_done",
+   "type": "Document",
+   "label": "환경영향평가 협의 완료",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "tk.eia_done",
+    "category": "environment",
+    "definition": "실시계획을 대상으로 한 환경영향평가 협의가 끝난 상태.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:tk.finance_ready",
+   "type": "Document",
+   "label": "재정지원·부담금 감면 확정",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "tk.finance_ready",
+    "category": "financial",
+    "definition": "정부 재정 지원과 부담금 감면이 확정된 상태.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:tk.former_site_impl_approved",
+   "type": "Document",
+   "label": "종전부지 실시계획 승인",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "tk.former_site_impl_approved",
+    "category": "permit",
+    "definition": "종전부지 개발사업 실시계획이 승인되고 인·허가가 의제된 상태.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:tk.former_site_operator_fixed",
+   "type": "Document",
+   "label": "종전부지 개발사업시행자 지정",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "tk.former_site_operator_fixed",
+    "category": "designation",
+    "definition": "국가·지자체·공공기관·지방공사 중에서 개발사업시행자가 지정된 상태.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:tk.former_site_plan_notified",
+   "type": "Document",
+   "label": "종전부지 개발계획 고시",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "tk.former_site_plan_notified",
+    "category": "plan",
+    "definition": "개발계획이 수립돼 종전부지 지방자치단체의 장이 고시·열람하게 한 상태.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:tk.infra_ready",
+   "type": "Document",
+   "label": "기반시설 설치·우선지원",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "tk.infra_ready",
+    "category": "infrastructure",
+    "definition": "통합신공항과 종전부지 개발에 필요한 기반시설이 설치된 상태.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:tk.land_secured",
+   "type": "Document",
+   "label": "사업부지 수용·보상 완료",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "tk.land_secured",
+    "category": "land",
+    "definition": "수용 특례에 따라 사업에 필요한 토지등이 확보된 상태.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:tk.military_operator_fixed",
+   "type": "Document",
+   "label": "군 공항 이전사업 시행자 확정",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "tk.military_operator_fixed",
+    "category": "designation",
+    "definition": "종전부지 지방자치단체의 장이 시행자로 확정되고 필요 시 사업대행자가 지정된 상태.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:tk.military_plan_approved",
+   "type": "Document",
+   "label": "군 공항 이전 실시계획 승인",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "tk.military_plan_approved",
+    "category": "permit",
+    "definition": "국방부장관이 사업계획·실시계획을 승인·고시한 상태.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:tk.permits_deemed",
+   "type": "Document",
+   "label": "인가·허가 등 의제 확정",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "tk.permits_deemed",
+    "category": "permit",
+    "definition": "실시계획 승인으로 관계 법률의 인가·허가가 의제된 상태.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:tk.private_capital_ready",
+   "type": "Document",
+   "label": "민간자본 유치 확정",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "tk.private_capital_ready",
+    "category": "financial",
+    "definition": "종전부지 개발 등에 민간자본 유치가 확정된 상태.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:tk.special_zone_designated",
+   "type": "Document",
+   "label": "종전부지 특별구역 지정",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "tk.special_zone_designated",
+    "category": "designation",
+    "definition": "관광특구·특별건축구역 등 특별구역이 지정된 상태.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:tk.support_project_running",
+   "type": "Document",
+   "label": "이전주변지역 지원사업 시행",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "tk.support_project_running",
+    "category": "policy",
+    "definition": "군 공항 이전주변지역 지원사업이 시행되는 상태.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:tk.surrounding_zone_designated",
+   "type": "Document",
+   "label": "주변개발예정지역 지정",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "tk.surrounding_zone_designated",
+    "category": "designation",
+    "definition": "사업예정지역 경계 10km 범위에서 주변개발예정지역이 지정·고시된 상태.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:tk.taskforce_ready",
+   "type": "Document",
+   "label": "통합신공항건설추진단 설치",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "tk.taskforce_ready",
+    "category": "governance",
+    "definition": "국토교통부에 추진단이 설치돼 사업 추진·관리를 담당하는 상태.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "milestone:N01",
+   "type": "Gate",
+   "label": "통합신공항 특별법 시행",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N01",
+    "stage": "G0",
+    "classification": "legal_gate",
+    "lead_actor": "molit",
+    "actor_roles": {
+     "lead": [
+      "국회"
+     ],
+     "consult": [],
+     "decision": [
+      "국회"
+     ]
+    },
+    "authority": "국회·국토교통부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "tk.act_in_force"
+    ],
+    "overlay_status": "completed",
+    "confidence": "statutory",
+    "note": "공포 2025-10-01, 시행 2026-01-02"
+   }
+  },
+  {
+   "id": "milestone:N02",
+   "type": "Gate",
+   "label": "통합신공항건설추진단 설치",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N02",
+    "stage": "G0",
+    "classification": "governance",
+    "lead_actor": "molit",
+    "actor_roles": {
+     "lead": [
+      "국토교통부"
+     ],
+     "consult": [],
+     "decision": [
+      "국토교통부장관"
+     ]
+    },
+    "authority": "국토교통부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "tk.taskforce_ready"
+    ],
+    "overlay_status": "completed",
+    "confidence": "statutory",
+    "note": null
+   }
+  },
+  {
+   "id": "milestone:N03",
+   "type": "Gate",
+   "label": "건설 협의기구 구성·운영",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N03",
+    "stage": "G0",
+    "classification": "governance",
+    "lead_actor": "molit",
+    "actor_roles": {
+     "lead": [
+      "국토교통부"
+     ],
+     "consult": [
+      "국방부",
+      "지방자치단체"
+     ],
+     "decision": [
+      "국토교통부장관"
+     ]
+    },
+    "authority": "국토교통부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "tk.council_ready"
+    ],
+    "overlay_status": "active",
+    "confidence": "statutory",
+    "note": null
+   }
+  },
+  {
+   "id": "milestone:N04",
+   "type": "Gate",
+   "label": "군 공항 이전사업 시행자·사업대행자 확정",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N04",
+    "stage": "G1",
+    "classification": "legal_gate",
+    "lead_actor": "former-site-local",
+    "actor_roles": {
+     "lead": [
+      "종전부지 지방자치단체"
+     ],
+     "consult": [
+      "국토교통부"
+     ],
+     "decision": [
+      "종전부지 지방자치단체의 장"
+     ]
+    },
+    "authority": "종전부지 지방자치단체",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "tk.military_operator_fixed"
+    ],
+    "overlay_status": "active",
+    "confidence": "statutory",
+    "note": null
+   }
+  },
+  {
+   "id": "milestone:N05",
+   "type": "Gate",
+   "label": "공항개발사업 시행자 확정",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N05",
+    "stage": "G1",
+    "classification": "legal_gate",
+    "lead_actor": "molit",
+    "actor_roles": {
+     "lead": [
+      "국토교통부"
+     ],
+     "consult": [],
+     "decision": [
+      "국토교통부장관"
+     ]
+    },
+    "authority": "국토교통부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "tk.airport_operator_fixed"
+    ],
+    "overlay_status": "active",
+    "confidence": "statutory",
+    "note": null
+   }
+  },
+  {
+   "id": "milestone:N06",
+   "type": "Gate",
+   "label": "군 공항 이전 사업계획·실시계획 승인",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N06",
+    "stage": "G2",
+    "classification": "legal_gate",
+    "lead_actor": "mnd",
+    "actor_roles": {
+     "lead": [
+      "종전부지 지방자치단체"
+     ],
+     "consult": [
+      "국토교통부"
+     ],
+     "decision": [
+      "국방부장관"
+     ]
+    },
+    "authority": "국방부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "tk.military_plan_approved"
+    ],
+    "overlay_status": "planned",
+    "confidence": "statutory",
+    "note": null
+   }
+  },
+  {
+   "id": "milestone:N07",
+   "type": "Gate",
+   "label": "공항개발사업 실시계획 수립·승인",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N07",
+    "stage": "G2",
+    "classification": "legal_gate",
+    "lead_actor": "molit",
+    "actor_roles": {
+     "lead": [
+      "국토교통부"
+     ],
+     "consult": [],
+     "decision": [
+      "국토교통부장관"
+     ]
+    },
+    "authority": "국토교통부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "tk.airport_plan_approved"
+    ],
+    "overlay_status": "planned",
+    "confidence": "statutory",
+    "note": null
+   }
+  },
+  {
+   "id": "milestone:N08",
+   "type": "Gate",
+   "label": "환경영향평가 협의",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N08",
+    "stage": "G3",
+    "classification": "protection_gate",
+    "lead_actor": "related-agencies",
+    "actor_roles": {
+     "lead": [
+      "종전부지 지방자치단체",
+      "국토교통부"
+     ],
+     "consult": [],
+     "decision": [
+      "기후에너지환경부장관"
+     ]
+    },
+    "authority": "기후에너지환경부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "tk.eia_done"
+    ],
+    "overlay_status": "planned",
+    "confidence": "statutory",
+    "note": null
+   }
+  },
+  {
+   "id": "milestone:N09",
+   "type": "Gate",
+   "label": "토지등 수용·보상",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N09",
+    "stage": "G3",
+    "classification": "legal_gate",
+    "lead_actor": "former-site-local",
+    "actor_roles": {
+     "lead": [
+      "종전부지 지방자치단체"
+     ],
+     "consult": [
+      "토지소유자"
+     ],
+     "decision": [
+      "사업시행자"
+     ]
+    },
+    "authority": "종전부지 지방자치단체",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "tk.land_secured"
+    ],
+    "overlay_status": "planned",
+    "confidence": "statutory",
+    "note": null
+   }
+  },
+  {
+   "id": "milestone:N10",
+   "type": "Gate",
+   "label": "인가·허가 등의 의제 확정",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N10",
+    "stage": "G3",
+    "classification": "legal_gate",
+    "lead_actor": "related-agencies",
+    "actor_roles": {
+     "lead": [
+      "국토교통부",
+      "국방부"
+     ],
+     "consult": [],
+     "decision": [
+      "관계 행정기관의 장"
+     ]
+    },
+    "authority": "관계 행정기관",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "tk.permits_deemed"
+    ],
+    "overlay_status": "planned",
+    "confidence": "statutory",
+    "note": null
+   }
+  },
+  {
+   "id": "milestone:N11",
+   "type": "Gate",
+   "label": "주변개발예정지역 지정",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N11",
+    "stage": "G4",
+    "classification": "legal_gate",
+    "lead_actor": "molit",
+    "actor_roles": {
+     "lead": [
+      "국토교통부"
+     ],
+     "consult": [],
+     "decision": [
+      "국토교통부장관"
+     ]
+    },
+    "authority": "국토교통부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "tk.surrounding_zone_designated"
+    ],
+    "overlay_status": "planned",
+    "confidence": "statutory",
+    "note": null
+   }
+  },
+  {
+   "id": "milestone:N12",
+   "type": "Gate",
+   "label": "이전주변지역 지원사업 시행",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N12",
+    "stage": "G4",
+    "classification": "delivery",
+    "lead_actor": "relocation-local",
+    "actor_roles": {
+     "lead": [
+      "이전지 지방자치단체"
+     ],
+     "consult": [
+      "국방부"
+     ],
+     "decision": [
+      "이전주변지역 지방자치단체의 장"
+     ]
+    },
+    "authority": "이전지 지방자치단체",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "tk.support_project_running"
+    ],
+    "overlay_status": "planned",
+    "confidence": "statutory",
+    "note": null
+   }
+  },
+  {
+   "id": "milestone:N13",
+   "type": "Gate",
+   "label": "기반시설 설치·우선지원",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N13",
+    "stage": "G4",
+    "classification": "delivery",
+    "lead_actor": "molit",
+    "actor_roles": {
+     "lead": [
+      "국토교통부"
+     ],
+     "consult": [],
+     "decision": [
+      "국가·지방자치단체"
+     ]
+    },
+    "authority": "국가·지방자치단체",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "tk.infra_ready"
+    ],
+    "overlay_status": "planned",
+    "confidence": "statutory",
+    "note": null
+   }
+  },
+  {
+   "id": "milestone:N14",
+   "type": "Gate",
+   "label": "통합신공항 건설·기능이전·개항",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N14",
+    "stage": "G5",
+    "classification": "delivery",
+    "lead_actor": "molit",
+    "actor_roles": {
+     "lead": [
+      "국토교통부",
+      "국방부"
+     ],
+     "consult": [],
+     "decision": [
+      "국토교통부장관",
+      "국방부장관"
+     ]
+    },
+    "authority": "국토교통부·국방부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "tk.airport_built"
+    ],
+    "overlay_status": "planned",
+    "confidence": "modeled",
+    "note": "개항 시점은 정부 발표 기준이며 이 지도는 법정 절차만 표시한다"
+   }
+  },
+  {
+   "id": "milestone:N15",
+   "type": "Gate",
+   "label": "종전부지 개발사업시행자 지정",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N15",
+    "stage": "G6",
+    "classification": "legal_gate",
+    "lead_actor": "former-site-local",
+    "actor_roles": {
+     "lead": [
+      "종전부지 지방자치단체"
+     ],
+     "consult": [],
+     "decision": [
+      "종전부지 지방자치단체의 장"
+     ]
+    },
+    "authority": "종전부지 지방자치단체",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "tk.former_site_operator_fixed"
+    ],
+    "overlay_status": "planned",
+    "confidence": "statutory",
+    "note": null
+   }
+  },
+  {
+   "id": "milestone:N16",
+   "type": "Gate",
+   "label": "종전부지 개발계획 수립·고시",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N16",
+    "stage": "G6",
+    "classification": "plan",
+    "lead_actor": "dev-operator",
+    "actor_roles": {
+     "lead": [
+      "개발사업시행자"
+     ],
+     "consult": [],
+     "decision": [
+      "종전부지 지방자치단체의 장"
+     ]
+    },
+    "authority": "종전부지 지방자치단체",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "tk.former_site_plan_notified"
+    ],
+    "overlay_status": "planned",
+    "confidence": "statutory",
+    "note": null
+   }
+  },
+  {
+   "id": "milestone:N17",
+   "type": "Gate",
+   "label": "종전부지 실시계획 승인·인허가 의제",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N17",
+    "stage": "G6",
+    "classification": "legal_gate",
+    "lead_actor": "dev-operator",
+    "actor_roles": {
+     "lead": [
+      "개발사업시행자"
+     ],
+     "consult": [
+      "관계 행정기관"
+     ],
+     "decision": [
+      "종전부지 지방자치단체의 장"
+     ]
+    },
+    "authority": "종전부지 지방자치단체",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "tk.former_site_impl_approved"
+    ],
+    "overlay_status": "planned",
+    "confidence": "statutory",
+    "note": null
+   }
+  },
+  {
+   "id": "milestone:N18",
+   "type": "Gate",
+   "label": "종전부지 특별구역 지정",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N18",
+    "stage": "G7",
+    "classification": "legal_gate",
+    "lead_actor": "related-agencies",
+    "actor_roles": {
+     "lead": [
+      "종전부지 지방자치단체"
+     ],
+     "consult": [],
+     "decision": [
+      "중앙행정기관의 장·종전부지 지방자치단체의 장"
+     ]
+    },
+    "authority": "중앙행정기관·종전부지 지방자치단체",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "tk.special_zone_designated"
+    ],
+    "overlay_status": "planned",
+    "confidence": "statutory",
+    "note": null
+   }
+  },
+  {
+   "id": "milestone:N19",
+   "type": "Gate",
+   "label": "정부 재정지원·부담금 감면",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N19",
+    "stage": "G7",
+    "classification": "delivery",
+    "lead_actor": "molit",
+    "actor_roles": {
+     "lead": [
+      "국토교통부",
+      "기획예산처"
+     ],
+     "consult": [],
+     "decision": [
+      "정부"
+     ]
+    },
+    "authority": "정부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "tk.finance_ready"
+    ],
+    "overlay_status": "planned",
+    "confidence": "statutory",
+    "note": null
+   }
+  },
+  {
+   "id": "milestone:N20",
+   "type": "Gate",
+   "label": "민간자본 유치·지원",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N20",
+    "stage": "G7",
+    "classification": "delivery",
+    "lead_actor": "private",
+    "actor_roles": {
+     "lead": [
+      "개발사업시행자"
+     ],
+     "consult": [
+      "민간사업자"
+     ],
+     "decision": [
+      "종전부지 지방자치단체의 장"
+     ]
+    },
+    "authority": "사업시행자·개발사업시행자",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "tk.private_capital_ready"
+    ],
+    "overlay_status": "planned",
+    "confidence": "statutory",
+    "note": null
+   }
+  }
+ ],
+ "relations": [
+  {
+   "id": "R-owns-N01",
+   "type": "owns",
+   "from": "role:molit",
+   "to": "milestone:N01",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-cites-N01-SRC_TK_ACT",
+   "type": "cites",
+   "from": "milestone:N01",
+   "to": "source:SRC_TK_ACT",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N02",
+   "type": "owns",
+   "from": "role:molit",
+   "to": "milestone:N02",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-001",
+   "type": "requires",
+   "from": "milestone:N02",
+   "to": "artifact:tk.act_in_force",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "legal",
+    "basis": [
+     "SRC_TK_ACT"
+    ],
+    "note": "대구경북통합신공항 건설을 위한 특별법 제12조제1항 — 국토교통부에 통합신공항건설추진단을 둔다"
+   }
+  },
+  {
+   "id": "R-handoff-001",
+   "type": "hands_off_to",
+   "from": "milestone:N01",
+   "to": "milestone:N02",
+   "label": "tk.act_in_force",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "tk.act_in_force",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-cites-N02-SRC_TK_ACT",
+   "type": "cites",
+   "from": "milestone:N02",
+   "to": "source:SRC_TK_ACT",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N03",
+   "type": "owns",
+   "from": "role:molit",
+   "to": "milestone:N03",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-002",
+   "type": "requires",
+   "from": "milestone:N03",
+   "to": "artifact:tk.taskforce_ready",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "policy",
+    "basis": [
+     "SRC_TK_ACT"
+    ],
+    "note": "대구경북통합신공항 건설을 위한 특별법 제13조 — 통합신공항 건설을 위한 협의기구"
+   }
+  },
+  {
+   "id": "R-handoff-002",
+   "type": "hands_off_to",
+   "from": "milestone:N02",
+   "to": "milestone:N03",
+   "label": "tk.taskforce_ready",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "tk.taskforce_ready",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-cites-N03-SRC_TK_ACT",
+   "type": "cites",
+   "from": "milestone:N03",
+   "to": "source:SRC_TK_ACT",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N04",
+   "type": "owns",
+   "from": "role:former-site-local",
+   "to": "milestone:N04",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-003",
+   "type": "requires",
+   "from": "milestone:N04",
+   "to": "artifact:tk.act_in_force",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "legal",
+    "basis": [
+     "SRC_TK_ACT"
+    ],
+    "note": "대구경북통합신공항 건설을 위한 특별법 제8조제1항·제4항 — 군 공항 이전사업은 종전부지 지자체장이 시행하고 사업대행자를 지정할 수 있다"
+   }
+  },
+  {
+   "id": "R-handoff-003",
+   "type": "hands_off_to",
+   "from": "milestone:N01",
+   "to": "milestone:N04",
+   "label": "tk.act_in_force",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "tk.act_in_force",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-cites-N04-SRC_TK_ACT",
+   "type": "cites",
+   "from": "milestone:N04",
+   "to": "source:SRC_TK_ACT",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N05",
+   "type": "owns",
+   "from": "role:molit",
+   "to": "milestone:N05",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-004",
+   "type": "requires",
+   "from": "milestone:N05",
+   "to": "artifact:tk.act_in_force",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "legal",
+    "basis": [
+     "SRC_TK_ACT"
+    ],
+    "note": "대구경북통합신공항 건설을 위한 특별법 제8조제1항~제3항 — 공항개발사업은 국토교통부장관이 시행하며 그 밖의 자는 허가를 받아야 하고 일부를 위탁·공동시행할 수 있다"
+   }
+  },
+  {
+   "id": "R-handoff-004",
+   "type": "hands_off_to",
+   "from": "milestone:N01",
+   "to": "milestone:N05",
+   "label": "tk.act_in_force",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "tk.act_in_force",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-cites-N05-SRC_TK_ACT",
+   "type": "cites",
+   "from": "milestone:N05",
+   "to": "source:SRC_TK_ACT",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N06",
+   "type": "owns",
+   "from": "role:mnd",
+   "to": "milestone:N06",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-005",
+   "type": "requires",
+   "from": "milestone:N06",
+   "to": "artifact:tk.military_operator_fixed",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "legal",
+    "basis": [
+     "SRC_TK_ACT"
+    ],
+    "note": "대구경북통합신공항 건설을 위한 특별법 제9조제1항 — 시행자가 사업계획·실시계획을 작성해 국방부장관의 승인을 받아야 하며 절차는 국방·군사시설사업법 제4조·제6조에 따른다"
+   }
+  },
+  {
+   "id": "R-handoff-005",
+   "type": "hands_off_to",
+   "from": "milestone:N04",
+   "to": "milestone:N06",
+   "label": "tk.military_operator_fixed",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "tk.military_operator_fixed",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-cites-N06-SRC_TK_ACT",
+   "type": "cites",
+   "from": "milestone:N06",
+   "to": "source:SRC_TK_ACT",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N07",
+   "type": "owns",
+   "from": "role:molit",
+   "to": "milestone:N07",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-006",
+   "type": "requires",
+   "from": "milestone:N07",
+   "to": "artifact:tk.airport_operator_fixed",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "legal",
+    "basis": [
+     "SRC_TK_ACT"
+    ],
+    "note": "대구경북통합신공항 건설을 위한 특별법 제9조제2항 — 실시계획 수립·승인·고시 절차는 공항시설법 제7조에 따른다"
+   }
+  },
+  {
+   "id": "R-handoff-006",
+   "type": "hands_off_to",
+   "from": "milestone:N05",
+   "to": "milestone:N07",
+   "label": "tk.airport_operator_fixed",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "tk.airport_operator_fixed",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-cites-N07-SRC_TK_ACT",
+   "type": "cites",
+   "from": "milestone:N07",
+   "to": "source:SRC_TK_ACT",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N08",
+   "type": "owns",
+   "from": "role:related-agencies",
+   "to": "milestone:N08",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-007",
+   "type": "requires",
+   "from": "milestone:N08",
+   "to": "artifact:tk.military_plan_approved",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "protection",
+    "basis": [
+     "SRC_TK_ACT"
+    ],
+    "note": "대구경북통합신공항 건설을 위한 특별법 제9조제3항 — 환경영향평가는 제9조의 실시계획을 대상으로 한다"
+   }
+  },
+  {
+   "id": "R-handoff-007",
+   "type": "hands_off_to",
+   "from": "milestone:N06",
+   "to": "milestone:N08",
+   "label": "tk.military_plan_approved",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "tk.military_plan_approved",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-req-008",
+   "type": "requires",
+   "from": "milestone:N08",
+   "to": "artifact:tk.airport_plan_approved",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "protection",
+    "basis": [
+     "SRC_TK_ACT"
+    ],
+    "note": "대구경북통합신공항 건설을 위한 특별법 제9조제3항"
+   }
+  },
+  {
+   "id": "R-handoff-008",
+   "type": "hands_off_to",
+   "from": "milestone:N07",
+   "to": "milestone:N08",
+   "label": "tk.airport_plan_approved",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "tk.airport_plan_approved",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-cites-N08-SRC_TK_ACT",
+   "type": "cites",
+   "from": "milestone:N08",
+   "to": "source:SRC_TK_ACT",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N09",
+   "type": "owns",
+   "from": "role:former-site-local",
+   "to": "milestone:N09",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-009",
+   "type": "requires",
+   "from": "milestone:N09",
+   "to": "artifact:tk.military_plan_approved",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "technical",
+    "basis": [
+     "SRC_TK_ACT"
+    ],
+    "note": "대구경북통합신공항 건설을 위한 특별법 제9조의2 — 토지등의 수용에 관한 특례"
+   }
+  },
+  {
+   "id": "R-handoff-009",
+   "type": "hands_off_to",
+   "from": "milestone:N06",
+   "to": "milestone:N09",
+   "label": "tk.military_plan_approved",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "tk.military_plan_approved",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-cites-N09-SRC_TK_ACT",
+   "type": "cites",
+   "from": "milestone:N09",
+   "to": "source:SRC_TK_ACT",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N10",
+   "type": "owns",
+   "from": "role:related-agencies",
+   "to": "milestone:N10",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-010",
+   "type": "requires",
+   "from": "milestone:N10",
+   "to": "artifact:tk.eia_done",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "legal",
+    "basis": [
+     "SRC_TK_ACT"
+    ],
+    "note": "대구경북통합신공항 건설을 위한 특별법 제10조 — 인가·허가 등의 의제"
+   }
+  },
+  {
+   "id": "R-handoff-010",
+   "type": "hands_off_to",
+   "from": "milestone:N08",
+   "to": "milestone:N10",
+   "label": "tk.eia_done",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "tk.eia_done",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-cites-N10-SRC_TK_ACT",
+   "type": "cites",
+   "from": "milestone:N10",
+   "to": "source:SRC_TK_ACT",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N11",
+   "type": "owns",
+   "from": "role:molit",
+   "to": "milestone:N11",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-011",
+   "type": "requires",
+   "from": "milestone:N11",
+   "to": "artifact:tk.airport_plan_approved",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "policy",
+    "basis": [
+     "SRC_TK_ACT"
+    ],
+    "note": "대구경북통합신공항 건설을 위한 특별법 제11조제1항 — 고시된 사업예정지역·공항개발예정지역 경계로부터 10킬로미터 범위에서 지정할 수 있다"
+   }
+  },
+  {
+   "id": "R-handoff-011",
+   "type": "hands_off_to",
+   "from": "milestone:N07",
+   "to": "milestone:N11",
+   "label": "tk.airport_plan_approved",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "tk.airport_plan_approved",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-cites-N11-SRC_TK_ACT",
+   "type": "cites",
+   "from": "milestone:N11",
+   "to": "source:SRC_TK_ACT",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N12",
+   "type": "owns",
+   "from": "role:relocation-local",
+   "to": "milestone:N12",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-012",
+   "type": "requires",
+   "from": "milestone:N12",
+   "to": "artifact:tk.military_operator_fixed",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "policy",
+    "basis": [
+     "SRC_TK_ACT"
+    ],
+    "note": "대구경북통합신공항 건설을 위한 특별법 제7조 — 군 공항 이전주변지역 지원사업의 시행 등"
+   }
+  },
+  {
+   "id": "R-handoff-012",
+   "type": "hands_off_to",
+   "from": "milestone:N04",
+   "to": "milestone:N12",
+   "label": "tk.military_operator_fixed",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "tk.military_operator_fixed",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N12-SRC_TK_ACT",
+   "type": "cites",
+   "from": "milestone:N12",
+   "to": "source:SRC_TK_ACT",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N13",
+   "type": "owns",
+   "from": "role:molit",
+   "to": "milestone:N13",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-013",
+   "type": "requires",
+   "from": "milestone:N13",
+   "to": "artifact:tk.surrounding_zone_designated",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "technical",
+    "basis": [
+     "SRC_TK_ACT"
+    ],
+    "note": "대구경북통합신공항 건설을 위한 특별법 제19조 — 기반시설의 설치 및 우선지원 등"
+   }
+  },
+  {
+   "id": "R-handoff-013",
+   "type": "hands_off_to",
+   "from": "milestone:N11",
+   "to": "milestone:N13",
+   "label": "tk.surrounding_zone_designated",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "tk.surrounding_zone_designated",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N13-SRC_TK_ACT",
+   "type": "cites",
+   "from": "milestone:N13",
+   "to": "source:SRC_TK_ACT",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N14",
+   "type": "owns",
+   "from": "role:molit",
+   "to": "milestone:N14",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-014",
+   "type": "requires",
+   "from": "milestone:N14",
+   "to": "artifact:tk.permits_deemed",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "legal",
+    "basis": [
+     "SRC_TK_ACT"
+    ],
+    "note": "의제 확정 후 공사 착수가 가능하다"
+   }
+  },
+  {
+   "id": "R-handoff-014",
+   "type": "hands_off_to",
+   "from": "milestone:N10",
+   "to": "milestone:N14",
+   "label": "tk.permits_deemed",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "tk.permits_deemed",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-req-015",
+   "type": "requires",
+   "from": "milestone:N14",
+   "to": "artifact:tk.land_secured",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "technical",
+    "basis": [
+     "SRC_TK_ACT"
+    ],
+    "note": "사업부지 확보가 공사의 물리적 전제"
+   }
+  },
+  {
+   "id": "R-handoff-015",
+   "type": "hands_off_to",
+   "from": "milestone:N09",
+   "to": "milestone:N14",
+   "label": "tk.land_secured",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "tk.land_secured",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-req-016",
+   "type": "requires",
+   "from": "milestone:N14",
+   "to": "artifact:tk.infra_ready",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "technical",
+    "basis": [
+     "SRC_TK_ACT"
+    ],
+    "note": "대구경북통합신공항 건설을 위한 특별법 제19조 — 기반시설 우선지원"
+   }
+  },
+  {
+   "id": "R-handoff-016",
+   "type": "hands_off_to",
+   "from": "milestone:N13",
+   "to": "milestone:N14",
+   "label": "tk.infra_ready",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "tk.infra_ready",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N14-SRC_TK_ACT",
+   "type": "cites",
+   "from": "milestone:N14",
+   "to": "source:SRC_TK_ACT",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N15",
+   "type": "owns",
+   "from": "role:former-site-local",
+   "to": "milestone:N15",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-017",
+   "type": "requires",
+   "from": "milestone:N15",
+   "to": "artifact:tk.military_plan_approved",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "policy",
+    "basis": [
+     "SRC_TK_ACT"
+    ],
+    "note": "대구경북통합신공항 건설을 위한 특별법 제14조 — 개발사업시행자는 국가·지방자치단체, 공공기관, 지방공사 중에서 정한다"
+   }
+  },
+  {
+   "id": "R-handoff-017",
+   "type": "hands_off_to",
+   "from": "milestone:N06",
+   "to": "milestone:N15",
+   "label": "tk.military_plan_approved",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "tk.military_plan_approved",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-cites-N15-SRC_TK_ACT",
+   "type": "cites",
+   "from": "milestone:N15",
+   "to": "source:SRC_TK_ACT",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N16",
+   "type": "owns",
+   "from": "role:dev-operator",
+   "to": "milestone:N16",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-018",
+   "type": "requires",
+   "from": "milestone:N16",
+   "to": "artifact:tk.former_site_operator_fixed",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "legal",
+    "basis": [
+     "SRC_TK_ACT"
+    ],
+    "note": "대구경북통합신공항 건설을 위한 특별법 제15조제1항·제2항 — 개발사업시행자가 개발계획을 수립하고 지자체장이 고시·열람하게 한다"
+   }
+  },
+  {
+   "id": "R-handoff-018",
+   "type": "hands_off_to",
+   "from": "milestone:N15",
+   "to": "milestone:N16",
+   "label": "tk.former_site_operator_fixed",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "tk.former_site_operator_fixed",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-cites-N16-SRC_TK_ACT",
+   "type": "cites",
+   "from": "milestone:N16",
+   "to": "source:SRC_TK_ACT",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N17",
+   "type": "owns",
+   "from": "role:dev-operator",
+   "to": "milestone:N17",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-019",
+   "type": "requires",
+   "from": "milestone:N17",
+   "to": "artifact:tk.former_site_plan_notified",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "legal",
+    "basis": [
+     "SRC_TK_ACT"
+    ],
+    "note": "대구경북통합신공항 건설을 위한 특별법 제16조·제17조 — 실시계획 수립과 인·허가 등의 의제"
+   }
+  },
+  {
+   "id": "R-handoff-019",
+   "type": "hands_off_to",
+   "from": "milestone:N16",
+   "to": "milestone:N17",
+   "label": "tk.former_site_plan_notified",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "tk.former_site_plan_notified",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-cites-N17-SRC_TK_ACT",
+   "type": "cites",
+   "from": "milestone:N17",
+   "to": "source:SRC_TK_ACT",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N18",
+   "type": "owns",
+   "from": "role:related-agencies",
+   "to": "milestone:N18",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-020",
+   "type": "requires",
+   "from": "milestone:N18",
+   "to": "artifact:tk.former_site_impl_approved",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "policy",
+    "basis": [
+     "SRC_TK_ACT"
+    ],
+    "note": "대구경북통합신공항 건설을 위한 특별법 제18조제1항 — 관광진흥법 제70조 관광특구, 건축법 제69조 특별건축구역 등으로 지정할 수 있다"
+   }
+  },
+  {
+   "id": "R-handoff-020",
+   "type": "hands_off_to",
+   "from": "milestone:N17",
+   "to": "milestone:N18",
+   "label": "tk.former_site_impl_approved",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "tk.former_site_impl_approved",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N18-SRC_TK_ACT",
+   "type": "cites",
+   "from": "milestone:N18",
+   "to": "source:SRC_TK_ACT",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N19",
+   "type": "owns",
+   "from": "role:molit",
+   "to": "milestone:N19",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-021",
+   "type": "requires",
+   "from": "milestone:N19",
+   "to": "artifact:tk.military_plan_approved",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "financial",
+    "basis": [
+     "SRC_TK_ACT"
+    ],
+    "note": "대구경북통합신공항 건설을 위한 특별법 제20조·제21조 — 정부의 재정 지원 및 부담금의 감면"
+   }
+  },
+  {
+   "id": "R-handoff-021",
+   "type": "hands_off_to",
+   "from": "milestone:N06",
+   "to": "milestone:N19",
+   "label": "tk.military_plan_approved",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "tk.military_plan_approved",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N19-SRC_TK_ACT",
+   "type": "cites",
+   "from": "milestone:N19",
+   "to": "source:SRC_TK_ACT",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N20",
+   "type": "owns",
+   "from": "role:private",
+   "to": "milestone:N20",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-022",
+   "type": "requires",
+   "from": "milestone:N20",
+   "to": "artifact:tk.former_site_plan_notified",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "financial",
+    "basis": [
+     "SRC_TK_ACT"
+    ],
+    "note": "대구경북통합신공항 건설을 위한 특별법 제22조·제23조 — 민간자본 유치와 유치사업의 지원"
+   }
+  },
+  {
+   "id": "R-handoff-022",
+   "type": "hands_off_to",
+   "from": "milestone:N16",
+   "to": "milestone:N20",
+   "label": "tk.former_site_plan_notified",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "tk.former_site_plan_notified",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N20-SRC_TK_ACT",
+   "type": "cites",
+   "from": "milestone:N20",
+   "to": "source:SRC_TK_ACT",
+   "label": null,
+   "condition": null
+  }
+ ],
+ "states": [
+  {
+   "id": "S-case",
+   "entity_id": "case:DGA-2026-0901-001",
+   "state": "planning",
+   "as_of": "2026-08-29",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "mega-project overlay"
+   }
+  },
+  {
+   "id": "S-N01",
+   "entity_id": "milestone:N01",
+   "state": "done",
+   "as_of": "2026-01-02",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_TK_ACT",
+    "note": "공포 2025-10-01, 시행 2026-01-02"
+   }
+  },
+  {
+   "id": "S-N02",
+   "entity_id": "milestone:N02",
+   "state": "done",
+   "as_of": "2026-01-02",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_TK_ACT"
+   }
+  },
+  {
+   "id": "S-N03",
+   "entity_id": "milestone:N03",
+   "state": "in_progress",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_TK_ACT"
+   }
+  },
+  {
+   "id": "S-N04",
+   "entity_id": "milestone:N04",
+   "state": "in_progress",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_TK_ACT"
+   }
+  },
+  {
+   "id": "S-N05",
+   "entity_id": "milestone:N05",
+   "state": "in_progress",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_TK_ACT"
+   }
+  },
+  {
+   "id": "S-N06",
+   "entity_id": "milestone:N06",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_TK_ACT"
+   }
+  },
+  {
+   "id": "S-N07",
+   "entity_id": "milestone:N07",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_TK_ACT"
+   }
+  },
+  {
+   "id": "S-N08",
+   "entity_id": "milestone:N08",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_TK_ACT"
+   }
+  },
+  {
+   "id": "S-N09",
+   "entity_id": "milestone:N09",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_TK_ACT"
+   }
+  },
+  {
+   "id": "S-N10",
+   "entity_id": "milestone:N10",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_TK_ACT"
+   }
+  },
+  {
+   "id": "S-N11",
+   "entity_id": "milestone:N11",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_TK_ACT"
+   }
+  },
+  {
+   "id": "S-N12",
+   "entity_id": "milestone:N12",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_TK_ACT"
+   }
+  },
+  {
+   "id": "S-N13",
+   "entity_id": "milestone:N13",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_TK_ACT"
+   }
+  },
+  {
+   "id": "S-N14",
+   "entity_id": "milestone:N14",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_TK_ACT",
+    "note": "개항 시점은 정부 발표 기준이며 이 지도는 법정 절차만 표시한다"
+   }
+  },
+  {
+   "id": "S-N15",
+   "entity_id": "milestone:N15",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_TK_ACT"
+   }
+  },
+  {
+   "id": "S-N16",
+   "entity_id": "milestone:N16",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_TK_ACT"
+   }
+  },
+  {
+   "id": "S-N17",
+   "entity_id": "milestone:N17",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_TK_ACT"
+   }
+  },
+  {
+   "id": "S-N18",
+   "entity_id": "milestone:N18",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_TK_ACT"
+   }
+  },
+  {
+   "id": "S-N19",
+   "entity_id": "milestone:N19",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_TK_ACT"
+   }
+  },
+  {
+   "id": "S-N20",
+   "entity_id": "milestone:N20",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_TK_ACT"
+   }
+  }
+ ],
+ "rules": [],
+ "action_packets": [],
+ "demo_queries": [],
+ "notes": [
+  "구조 층은 파생물이다. 오버레이(web/data/mega-projects)를 고치면 이 파일도 다시 파생해야 한다.",
+  "참조 제도의 준비도는 Institution 엔티티의 attrs.readiness_level에 있다. R2가 아니면 다음 행동을 계산하지 않는다.",
+  "mappingStatus가 candidate인 참조는 적용 후보일 뿐 확정된 요건이 아니다."
+ ]
+}

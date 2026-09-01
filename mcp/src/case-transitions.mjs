@@ -175,6 +175,146 @@ export function legalTransitions(caseData, entityId) {
   };
 }
 
+// 전자결재 이벤트가 어느 전이를 뜻하는가. resolve_work_event는 (제도, 단계)까지만
+// 풀고 거기서 끊겼다 — "그래서 케이스 장부에 무엇을 적나"가 사람 머릿속에만 있었다.
+//
+// 이 표는 단정하지 않는다. 반려·보완처럼 그래프를 봐야 뜻이 갈리는 이벤트는
+// 후보를 여럿 내고 왜 그런지를 붙인다. 하나로 좁히는 것은 사람 몫이다.
+const EVENT_INTENT = Object.freeze({
+  "approval.completed": {
+    label: "결재 완료",
+    targets: ["done"],
+    why: "결재가 끝났으므로 그 단계는 완료로 읽는다.",
+    cascade: true,
+  },
+  "document.received": {
+    label: "문서 접수",
+    // 도달했다는 사실이 착수를 뜻하는지 진행을 뜻하는지는 이벤트만으로 못 가른다.
+    targets: ["ready", "in_progress"],
+    why: "문서가 도달했다. 착수 가능해진 것인지 이미 진행 중인지는 이벤트만으로 갈리지 않는다.",
+    cascade: false,
+  },
+  "approval.rejected": {
+    label: "반려",
+    targets: ["blocked", "in_progress"],
+    why: "반려는 되돌아갈 자리가 있으면 재개이고, 없으면 막힘이다. 그래프가 가른다.",
+    cascade: false,
+    prefer_loop: true,
+  },
+  "supplement.requested": {
+    label: "보완 요구",
+    targets: ["in_progress", "blocked"],
+    why: "보완 요구는 그 단계를 다시 손보라는 뜻이거나, 상대 회신을 기다리는 멈춤이다.",
+    cascade: false,
+    prefer_loop: true,
+  },
+  "manual.confirmed": {
+    label: "사람이 직접 확인",
+    targets: null, // 전이표가 허용하는 전부
+    why: "사람이 확인한 사실이라 이벤트가 방향을 정하지 않는다. 전이표가 허용하는 것을 모두 보인다.",
+    cascade: false,
+  },
+});
+
+export const WORK_EVENT_TYPES = Object.freeze(Object.keys(EVENT_INTENT));
+
+/** X가 done이 되면 그 다음으로 열리는 단계들. 가정 위의 계산이라 제안일 뿐이다. */
+function cascadeAfterDone(caseData, entityId) {
+  const asIf = {
+    ...caseData,
+    states: [
+      ...(caseData.states ?? []).filter((state) => state.entity_id !== entityId),
+      { id: "__asif", entity_id: entityId, state: "done", as_of: caseData.as_of, evidence: { kind: "proxy", note: "가정" } },
+    ],
+  };
+  const opened = [];
+  for (const relation of caseData.relations ?? []) {
+    if (relation.type !== "sequence" || relation.from !== entityId) continue;
+    const target = relation.to;
+    if (currentStateValue(caseData, target) !== "pending") continue;
+    const blockers = graphBlockers(asIf, target, "pending", "ready");
+    if (blockers.length === 0) opened.push({ entity_id: target, to: "ready" });
+  }
+  return opened;
+}
+
+/**
+ * 이벤트 하나를 전이 후보로 옮긴다. 적용하지 않고 제안만 한다.
+ * 이벤트가 무엇을 뜻하는지 확실하지 않으면 좁히지 않고 후보를 그대로 둔다.
+ */
+export function proposeTransitionsForEvent(caseData, { event_type: eventType, entity_id: entityId }) {
+  const intent = EVENT_INTENT[eventType];
+  if (!intent) {
+    return {
+      status: "unknown_event_type",
+      event_type: eventType ?? null,
+      known_event_types: WORK_EVENT_TYPES,
+      proposals: [],
+    };
+  }
+
+  const options = legalTransitions(caseData, entityId);
+  if (!options.closed_vocabulary) {
+    return {
+      status: "open_vocabulary",
+      event_type: eventType,
+      entity_id: entityId,
+      from: options.from,
+      note: `${entityId}는 닫힌 상태 어휘가 없어 이벤트로 전이를 좁힐 수 없습니다. 저작자가 직접 정합니다.`,
+      proposals: [],
+    };
+  }
+
+  const allowedNow = new Map(options.transitions.map((transition) => [transition.to, transition]));
+  const wanted = intent.targets ?? [...allowedNow.keys()];
+  const hasLoop = hasLoopBack(caseData, entityId);
+
+  const proposals = wanted
+    .filter((to) => allowedNow.has(to))
+    .map((to) => {
+      const transition = allowedNow.get(to);
+      // 반려·보완은 되돌아갈 자리가 있느냐가 뜻을 가른다. 후보마다 그 사실이
+      // 자기에게 유리한지 불리한지를 적는다 — 같은 문장을 양쪽에 붙이면 못 고른다.
+      let loopNote = null;
+      if (intent.prefer_loop) {
+        if (to === "in_progress") {
+          loopNote = hasLoop
+            ? "이 단계로 돌아오는 loop 관계가 있어 재개로 읽을 근거가 있습니다."
+            : "돌아오는 loop 관계가 없습니다. 재개로 적으려면 그 근거를 사람이 대야 합니다.";
+        } else if (to === "blocked") {
+          loopNote = hasLoop
+            ? "돌아오는 loop 관계가 있으므로 재개가 아니라 막힘이라면 그 사유를 적으세요."
+            : "돌아오는 loop 관계가 없어 막힘으로 읽는 편이 그래프와 맞습니다.";
+        }
+      }
+      return {
+        to,
+        meaning: STEP_STATES[to] ?? null,
+        allowed: transition.allowed,
+        blockers: transition.blockers,
+        evidence_required: transition.evidence_required,
+        ...(loopNote ? { loop_note: loopNote } : {}),
+      };
+    });
+
+  return {
+    status: proposals.length === 0 ? "no_legal_transition" : (proposals.length === 1 ? "single_candidate" : "needs_human_choice"),
+    event_type: eventType,
+    event_label: intent.label,
+    entity_id: entityId,
+    from: options.from,
+    why: intent.why,
+    proposals,
+    // 결재 완료는 그 다음 문을 여는데, 그것도 제안이다. 자동으로 적지 않는다.
+    would_open: intent.cascade && proposals.some((p) => p.to === "done" && p.allowed)
+      ? cascadeAfterDone(caseData, entityId)
+      : [],
+    execution_allowed: false,
+    human_confirmation_required: true,
+    apply_with: "ontology/scripts/advance-case-state.mjs",
+  };
+}
+
 /** 케이스 전체에서 지금 움직일 수 있는 것들. 사람이 뭘 갱신할지 고를 때 쓴다. */
 export function movableEntities(caseData) {
   const ids = new Set([

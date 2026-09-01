@@ -482,11 +482,14 @@ const config = {
       // 관문을 여닫는 파라미터 + 관문 안쪽 제도 적용을 정하는 파라미터. 후자를 빼면
       // 오버레이가 "미확정"이라고 적어 둔 것이 지도에서 사라진다.
       const insideOnly = ONT.decisions.undetermined_parameters.filter((e) => !e.gates.length && e.affects?.milestone);
+      // 관문에도 안 묶이고 affects도 없는 미확정. 배선이 안 된 것뿐이지 사실이 없는 게
+      // 아니다. 여기서 걸러 버리면 "시행령 제정 시점 미확정" 같은 것이 지도에서 사라진다.
+      const unbound = ONT.decisions.undetermined_parameters.filter((e) => !e.gates.length && !e.affects?.milestone);
       const pendingGates = [...new Set([
         ...ONT.decisions.undetermined_parameters.flatMap((e) => e.gates.map((g) => g.node_id)),
         ...insideOnly.map((e) => e.affects.milestone),
       ])].filter((id) => nodes.some((n) => n.id === id));
-      if (pendingGates.length) {
+      if (pendingGates.length || unbound.length) {
         out.push({
           id: "ont-pending",
           label: "⚖ 미확정 갈림길",
@@ -501,6 +504,8 @@ ${insideOnly.length ? `<p><b>관문 안쪽 미확정:</b> 아래는 관문을 �
           ).join("")}</ol>` : ""}
 ${ONT.decisions.exclusive_branches.length ? `<p><b>배타 분기:</b> ${ONT.decisions.exclusive_branches.map((b) =>
             `${b.parameter} → ${b.options.map((o) => `${o.value}:${o.milestone}`).join(" | ")}`).join(" · ")} — 둘 중 하나만 활성화됩니다.</p>` : ""}
+${unbound.length ? `<p><b>아직 관문에 안 묶인 미확정:</b> 사업이 미확정이라고 선언했지만 어느 관문에 걸리는지는 오버레이에 배선되지 않았습니다 — 배선하면 여기서 관문이 켜집니다.</p>
+<ul>${unbound.map((e) => `<li>${e.parameter} — ${e.reason ?? ""}</li>`).join("")}</ul>` : ""}
 <p style="color:var(--muted);font-size:10px">무엇을 고를지는 말하지 않는다. 고를 것이 무엇인지만 보여준다.</p>`,
         });
       }

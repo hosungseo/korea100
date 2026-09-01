@@ -1,0 +1,5226 @@
+{
+ "ontology_version": "korea100.ontology.core.v0",
+ "case_kind": "project",
+ "project_id": "five-poles-three-special",
+ "project_name": "5극3특 국가균형성장 전략",
+ "institution_slug": null,
+ "case_id": "FPTS-2026-0901-001",
+ "as_of": "2026-09-01",
+ "source_project_json": "web/data/mega-projects/projects/five-poles-three-special.json",
+ "source_artifact_registry": "web/data/mega-projects/artifacts.json",
+ "derivation": {
+  "generator": "ontology/scripts/derive-project-case.mjs",
+  "derived_layers": [
+   "Gate(마일스톤)·Document(아티팩트)·Institution(참조 제도)·Statute/Document(근거) 엔티티",
+   "requires·hands_off_to·owns·cites 관계",
+   "마일스톤 진행 상태"
+  ],
+  "authored_layers": [
+   "Rule",
+   "ActionPacket",
+   "demo_queries"
+  ],
+  "milestone_count": 36,
+  "artifact_count": 36,
+  "institution_count": 42,
+  "source_count": 11
+ },
+ "entities": [
+  {
+   "id": "case:FPTS-2026-0901-001",
+   "type": "Case",
+   "label": "5극3특 국가균형성장 전략 사업 케이스",
+   "status": "verified",
+   "attrs": {
+    "project_id": "five-poles-three-special",
+    "project_family": "balanced-growth",
+    "overlay_status": "planning",
+    "overlay_as_of": "2026-08-19",
+    "scope": {
+     "coverage": "전국 — 5개 초광역권 + 3개 특별자치도",
+     "vision": "자치분권 기반의 5극3특 중심 국가균형성장",
+     "targets": "잠재성장률 3%+, 비수도권 GRDP 50%+",
+     "planHorizon": "2025~2030(국정운영 5개년)",
+     "legalStatus": "지방분권균형발전법 개정 국회 통과, 지방자치법 개정·권한이양 특별법은 진행 중"
+    },
+    "parameters": {
+     "investCorpActPassed": {
+      "value": null,
+      "status": "unknown",
+      "reason": "동남권·충청권 지역투자공사 법안이 상정·소위 단계로 통과 여부 미확정"
+     },
+     "regionalSlgEstablished": {
+      "value": null,
+      "status": "unknown",
+      "reason": "부울경 특별연합 해산 전례가 있어 권역별 특자체 설립 여부는 권역마다 다름"
+     },
+     "growthSupportActEnacted": {
+      "value": null,
+      "status": "unknown",
+      "reason": "광역권 성장지원 특별법은 제정 추진 단계"
+     }
+    }
+   }
+  },
+  {
+   "id": "role:balance-committee",
+   "type": "Role",
+   "label": "지방시대위원회",
+   "status": "verified",
+   "attrs": {
+    "code": "A01",
+    "mandate": "5극3특 전략 총괄·의결·예산 사전조정"
+   }
+  },
+  {
+   "id": "role:whole-government",
+   "type": "Role",
+   "label": "범정부·국무회의",
+   "status": "verified",
+   "attrs": {
+    "code": "A02",
+    "mandate": "국정과제 조정·범부처 협의체"
+   }
+  },
+  {
+   "id": "role:assembly",
+   "type": "Role",
+   "label": "국회",
+   "status": "verified",
+   "attrs": {
+    "code": "A03",
+    "mandate": "법률 제·개정 심의·의결"
+   }
+  },
+  {
+   "id": "role:mois",
+   "type": "Role",
+   "label": "행정안전부",
+   "status": "verified",
+   "attrs": {
+    "code": "A04",
+    "mandate": "특별지자체·권한이양·차등지원"
+   }
+  },
+  {
+   "id": "role:fiscal",
+   "type": "Role",
+   "label": "기획예산처·재정경제부",
+   "status": "verified",
+   "attrs": {
+    "code": "A05",
+    "mandate": "예산·계정·포괄보조·세제"
+   }
+  },
+  {
+   "id": "role:motie",
+   "type": "Role",
+   "label": "산업통상부",
+   "status": "verified",
+   "attrs": {
+    "code": "A06",
+    "mandate": "성장엔진·특구·산업정책"
+   }
+  },
+  {
+   "id": "role:msit",
+   "type": "Role",
+   "label": "과기정통부",
+   "status": "verified",
+   "attrs": {
+    "code": "A07",
+    "mandate": "AX 거점·R&D·예타"
+   }
+  },
+  {
+   "id": "role:molit",
+   "type": "Role",
+   "label": "국토교통부",
+   "status": "verified",
+   "attrs": {
+    "code": "A08",
+    "mandate": "국토계획·교통망·공항"
+   }
+  },
+  {
+   "id": "role:moe",
+   "type": "Role",
+   "label": "교육부",
+   "status": "verified",
+   "attrs": {
+    "code": "A09",
+    "mandate": "거점국립대·RISE·교육특구"
+   }
+  },
+  {
+   "id": "role:mohw",
+   "type": "Role",
+   "label": "보건복지부",
+   "status": "verified",
+   "attrs": {
+    "code": "A10",
+    "mandate": "공공의료·통합돌봄"
+   }
+  },
+  {
+   "id": "role:mafra",
+   "type": "Role",
+   "label": "농식품부·해수부",
+   "status": "verified",
+   "attrs": {
+    "code": "A11",
+    "mandate": "K-농산어촌·기본소득"
+   }
+  },
+  {
+   "id": "role:region",
+   "type": "Role",
+   "label": "초광역권·특별지방자치단체",
+   "status": "verified",
+   "attrs": {
+    "code": "A12",
+    "mandate": "권역 전략 수립·협약 이행"
+   }
+  },
+  {
+   "id": "role:sido",
+   "type": "Role",
+   "label": "시·도 지방자치단체",
+   "status": "verified",
+   "attrs": {
+    "code": "A13",
+    "mandate": "권역 구성·사업 시행"
+   }
+  },
+  {
+   "id": "role:private",
+   "type": "Role",
+   "label": "기업·대학·민간",
+   "status": "verified",
+   "attrs": {
+    "code": "A14",
+    "mandate": "앵커기업 투자·인재양성 참여"
+   }
+  },
+  {
+   "id": "institution:advanced-industry-contract-department-governance",
+   "type": "Institution",
+   "label": "반도체 등 첨단산업 계약학과 설치·신고·운영관리",
+   "status": "unverified",
+   "attrs": {
+    "slug": "advanced-industry-contract-department-governance",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N17"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:air-transport-business-license",
+   "type": "Institution",
+   "label": "항공운송사업 면허·운수권 배분",
+   "status": "unverified",
+   "attrs": {
+    "slug": "air-transport-business-license",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N23"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:airport-development-operation-permit",
+   "type": "Institution",
+   "label": "공항 개발·운영 인허가",
+   "status": "unverified",
+   "attrs": {
+    "slug": "airport-development-operation-permit",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N23"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:assembly-lawmaking",
+   "type": "Institution",
+   "label": "국회 입법절차",
+   "status": "unverified",
+   "attrs": {
+    "slug": "assembly-lawmaking",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N03",
+     "N04",
+     "N05",
+     "N06",
+     "N15",
+     "N28"
+    ],
+    "mapping_statuses": [
+     "candidate",
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:balanced-growth-impact-assessment",
+   "type": "Institution",
+   "label": "균형성장영향평가",
+   "status": "unverified",
+   "attrs": {
+    "slug": "balanced-growth-impact-assessment",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N32"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:border-area-development",
+   "type": "Institution",
+   "label": "접경지역 발전종합계획·사업 시행승인",
+   "status": "unverified",
+   "attrs": {
+    "slug": "border-area-development",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N13"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:community-integrated-care",
+   "type": "Institution",
+   "label": "지역 돌봄 통합지원",
+   "status": "unverified",
+   "attrs": {
+    "slug": "community-integrated-care",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N26"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:foreign-education-institution-special-zone",
+   "type": "Institution",
+   "label": "교육국제화특구·외국교육기관",
+   "status": "unverified",
+   "attrs": {
+    "slug": "foreign-education-institution-special-zone",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N27"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:forest-management-plan",
+   "type": "Institution",
+   "label": "산림경영계획 인가·조림",
+   "status": "unverified",
+   "attrs": {
+    "slug": "forest-management-plan",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N29"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:fund-management",
+   "type": "Institution",
+   "label": "기금 운용",
+   "status": "unverified",
+   "attrs": {
+    "slug": "fund-management",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N14"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:health-medical-development-plan",
+   "type": "Institution",
+   "label": "보건의료발전계획·지역보건의료계획",
+   "status": "unverified",
+   "attrs": {
+    "slug": "health-medical-development-plan",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N25"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:housing-site-development",
+   "type": "Institution",
+   "label": "택지개발지구 지정·실시계획 승인",
+   "status": "unverified",
+   "attrs": {
+    "slug": "housing-site-development",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N29"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:industrial-complex-development",
+   "type": "Institution",
+   "label": "산업단지 지정·개발",
+   "status": "unverified",
+   "attrs": {
+    "slug": "industrial-complex-development",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N18"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:integrated-transport-investment-plan",
+   "type": "Institution",
+   "label": "중기 교통시설투자계획·타당성 평가",
+   "status": "unverified",
+   "attrs": {
+    "slug": "integrated-transport-investment-plan",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N21",
+     "N22"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:intelligent-informatization-lead-project",
+   "type": "Institution",
+   "label": "지능정보화 선도사업·사회적 영향평가",
+   "status": "unverified",
+   "attrs": {
+    "slug": "intelligent-informatization-lead-project",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N12"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:legislative-notice",
+   "type": "Institution",
+   "label": "입법예고와 행정예고",
+   "status": "unverified",
+   "attrs": {
+    "slug": "legislative-notice",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N03",
+     "N04",
+     "N07",
+     "N29"
+    ],
+    "mapping_statuses": [
+     "candidate",
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:local-extinction-response-fund",
+   "type": "Institution",
+   "label": "지방소멸대응기금",
+   "status": "unverified",
+   "attrs": {
+    "slug": "local-extinction-response-fund",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N28"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:local-government-special-status",
+   "type": "Institution",
+   "label": "특별시·광역시·특별자치시 특례",
+   "status": "unverified",
+   "attrs": {
+    "slug": "local-government-special-status",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N35"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:local-health-plan-center",
+   "type": "Institution",
+   "label": "지역보건의료계획 수립·보건소 설치",
+   "status": "unverified",
+   "attrs": {
+    "slug": "local-health-plan-center",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N25"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:local-public-enterprise-establishment",
+   "type": "Institution",
+   "label": "지방공기업 설립·경영평가",
+   "status": "unverified",
+   "attrs": {
+    "slug": "local-public-enterprise-establishment",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N15"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:local-share-tax",
+   "type": "Institution",
+   "label": "지방교부세",
+   "status": "unverified",
+   "attrs": {
+    "slug": "local-share-tax",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N33"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:mega-region-plan",
+   "type": "Institution",
+   "label": "초광역권계획·초광역권발전계획",
+   "status": "unverified",
+   "attrs": {
+    "slug": "mega-region-plan",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N20"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:mega-regional-special-agreement-account",
+   "type": "Institution",
+   "label": "초광역특별협약·초광역특별계정",
+   "status": "unverified",
+   "attrs": {
+    "slug": "mega-regional-special-agreement-account",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N10",
+     "N11",
+     "N30"
+    ],
+    "mapping_statuses": [
+     "candidate",
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:metropolitan-transport-improvement-measures",
+   "type": "Institution",
+   "label": "대규모 개발사업 광역교통개선대책",
+   "status": "unverified",
+   "attrs": {
+    "slug": "metropolitan-transport-improvement-measures",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N21"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:national-budget",
+   "type": "Institution",
+   "label": "국가예산 편성",
+   "status": "unverified",
+   "attrs": {
+    "slug": "national-budget",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N30",
+     "N31"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:national-comprehensive-plan",
+   "type": "Institution",
+   "label": "국토종합계획 수립·승인·정비",
+   "status": "unverified",
+   "attrs": {
+    "slug": "national-comprehensive-plan",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N19"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:national-rd-call-selection",
+   "type": "Institution",
+   "label": "국가연구개발사업 공모·과제선정",
+   "status": "unverified",
+   "attrs": {
+    "slug": "national-rd-call-selection",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N18"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:national-road-rail-soc",
+   "type": "Institution",
+   "label": "국가 도로·철도 SOC 추진",
+   "status": "verified",
+   "attrs": {
+    "slug": "national-road-rail-soc",
+    "readiness_level": "R2",
+    "readiness_mode": "next-action",
+    "referenced_by": [
+     "N22"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:national-subsidy",
+   "type": "Institution",
+   "label": "국고보조금",
+   "status": "unverified",
+   "attrs": {
+    "slug": "national-subsidy",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N31"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:opportunity-development-zone-designation",
+   "type": "Institution",
+   "label": "기회발전특구 지정·지원",
+   "status": "unverified",
+   "attrs": {
+    "slug": "opportunity-development-zone-designation",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N13"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:pfs-exemption-fast-track",
+   "type": "Institution",
+   "label": "예타 특례·신속인허가",
+   "status": "verified",
+   "attrs": {
+    "slug": "pfs-exemption-fast-track",
+    "readiness_level": "R2",
+    "readiness_mode": "next-action",
+    "referenced_by": [
+     "N12"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:preliminary-feasibility-study",
+   "type": "Institution",
+   "label": "예비타당성조사",
+   "status": "verified",
+   "attrs": {
+    "slug": "preliminary-feasibility-study",
+    "readiness_level": "R2",
+    "readiness_mode": "next-action",
+    "referenced_by": [
+     "N12"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:public-essential-medical",
+   "type": "Institution",
+   "label": "공공·책임의료기관 지정",
+   "status": "unverified",
+   "attrs": {
+    "slug": "public-essential-medical",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N25"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:public-health-medical-service-plan",
+   "type": "Institution",
+   "label": "공공보건의료기관 지정·운영계획",
+   "status": "unverified",
+   "attrs": {
+    "slug": "public-health-medical-service-plan",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N25"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:public-institution-relocation",
+   "type": "Institution",
+   "label": "공공기관 지방이전·혁신도시 이전",
+   "status": "unverified",
+   "attrs": {
+    "slug": "public-institution-relocation",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N24"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:railway-business-license",
+   "type": "Institution",
+   "label": "철도사업 면허·운임 신고",
+   "status": "unverified",
+   "attrs": {
+    "slug": "railway-business-license",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N22"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:regional-balanced-growth-project",
+   "type": "Institution",
+   "label": "지방분권·지역균형성장 사업계획",
+   "status": "unverified",
+   "attrs": {
+    "slug": "regional-balanced-growth-project",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N01",
+     "N02",
+     "N08",
+     "N09"
+    ],
+    "mapping_statuses": [
+     "candidate",
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:regulatory-sandbox",
+   "type": "Institution",
+   "label": "규제샌드박스",
+   "status": "unverified",
+   "attrs": {
+    "slug": "regulatory-sandbox",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N13",
+     "N36"
+    ],
+    "mapping_statuses": [
+     "candidate",
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:science-technology-master-plan",
+   "type": "Institution",
+   "label": "과학기술기본계획·R&D 예산 배분조정",
+   "status": "unverified",
+   "attrs": {
+    "slug": "science-technology-master-plan",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N12",
+     "N18"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:special-local-government",
+   "type": "Institution",
+   "label": "특별지방자치단체",
+   "status": "unverified",
+   "attrs": {
+    "slug": "special-local-government",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N34"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:startup-support-plan",
+   "type": "Institution",
+   "label": "창업지원종합계획·창업 활성화 지원",
+   "status": "unverified",
+   "attrs": {
+    "slug": "startup-support-plan",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N14"
+    ],
+    "mapping_statuses": [
+     "candidate"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "institution:university-funding",
+   "type": "Institution",
+   "label": "대학재정지원",
+   "status": "unverified",
+   "attrs": {
+    "slug": "university-funding",
+    "readiness_level": "unassessed",
+    "readiness_mode": null,
+    "referenced_by": [
+     "N16"
+    ],
+    "mapping_statuses": [
+     "exact"
+    ],
+    "referenced_step_ids": []
+   }
+  },
+  {
+   "id": "source:SRC_STRATEGY",
+   "type": "Document",
+   "label": "5극3특 국가균형성장 추진전략 설계도(요약+전체본)",
+   "status": "verified",
+   "attrs": {
+    "source_id": "SRC_STRATEGY",
+    "source_type": "official-policy",
+    "url": "https://balance.go.kr/download/BASIC_ATTACH?storageNo=18177",
+    "effective_on": null,
+    "published_on": "2025-09-30"
+   }
+  },
+  {
+   "id": "source:SRC_BALANCE_PAGE",
+   "type": "Document",
+   "label": "지방시대위원회 — 5극3특 국가균형성장 추진전략",
+   "status": "verified",
+   "attrs": {
+    "source_id": "SRC_BALANCE_PAGE",
+    "source_type": "official-policy",
+    "url": "https://www.balance.go.kr/base/menu/baseView?menuLevel=1&menuNo=18",
+    "effective_on": null,
+    "published_on": null
+   }
+  },
+  {
+   "id": "source:SRC_LAW_PASSED",
+   "type": "Document",
+   "label": "'5극 3특' 균형성장 본격화…초광역 협력 기반 담은 특별법 국회 통과(정책브리핑)",
+   "status": "verified",
+   "attrs": {
+    "source_id": "SRC_LAW_PASSED",
+    "source_type": "news",
+    "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148964072",
+    "effective_on": null,
+    "published_on": "2026-05-08"
+   }
+  },
+  {
+   "id": "source:SRC_DECENT_LAW",
+   "type": "Statute",
+   "label": "지방자치분권 및 균형성장에 관한 특별법",
+   "status": "verified",
+   "attrs": {
+    "source_id": "SRC_DECENT_LAW",
+    "source_type": "statute",
+    "url": "https://law.go.kr/법령/지방자치분권및균형성장에관한특별법",
+    "effective_on": null,
+    "published_on": null
+   }
+  },
+  {
+   "id": "source:SRC_LOCAL_AUTONOMY_LAW",
+   "type": "Statute",
+   "label": "지방자치법(특별지방자치단체)",
+   "status": "verified",
+   "attrs": {
+    "source_id": "SRC_LOCAL_AUTONOMY_LAW",
+    "source_type": "statute",
+    "url": "https://law.go.kr/법령/지방자치법",
+    "effective_on": null,
+    "published_on": null
+   }
+  },
+  {
+   "id": "source:SRC_ENGINE_NEWS",
+   "type": "Document",
+   "label": "'권역별 성장엔진' 발굴 본격화…5극3특 국가균형성장 이끈다(정책브리핑)",
+   "status": "verified",
+   "attrs": {
+    "source_id": "SRC_ENGINE_NEWS",
+    "source_type": "news",
+    "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148956047",
+    "effective_on": null,
+    "published_on": "2025-12-08"
+   }
+  },
+  {
+   "id": "source:SRC_LAND_FRAMEWORK_ACT",
+   "type": "Statute",
+   "label": "국토기본법",
+   "status": "verified",
+   "attrs": {
+    "source_id": "SRC_LAND_FRAMEWORK_ACT",
+    "source_type": "statute",
+    "url": "https://law.go.kr/법령/국토기본법",
+    "effective_on": null,
+    "published_on": null
+   }
+  },
+  {
+   "id": "source:SRC_LOCAL_PUBLIC_ENTERPRISE_ACT",
+   "type": "Statute",
+   "label": "지방공기업법",
+   "status": "verified",
+   "attrs": {
+    "source_id": "SRC_LOCAL_PUBLIC_ENTERPRISE_ACT",
+    "source_type": "statute",
+    "url": "https://law.go.kr/법령/지방공기업법",
+    "effective_on": null,
+    "published_on": null
+   }
+  },
+  {
+   "id": "source:SRC_RAILWAY_ACT",
+   "type": "Statute",
+   "label": "철도의 건설 및 철도시설 유지관리에 관한 법률",
+   "status": "verified",
+   "attrs": {
+    "source_id": "SRC_RAILWAY_ACT",
+    "source_type": "statute",
+    "url": "https://law.go.kr/법령/철도의건설및철도시설유지관리에관한법률",
+    "effective_on": null,
+    "published_on": null
+   }
+  },
+  {
+   "id": "source:SRC_BG_ACT_2026_AMEND",
+   "type": "Statute",
+   "label": "지방자치분권 및 균형성장에 관한 특별법 일부개정법률(공포 2026-06-02)",
+   "status": "verified",
+   "attrs": {
+    "source_id": "SRC_BG_ACT_2026_AMEND",
+    "source_type": "statute",
+    "url": "https://law.go.kr/법령/지방자치분권및균형성장에관한특별법",
+    "effective_on": null,
+    "published_on": null
+   }
+  },
+  {
+   "id": "source:SRC_BUDGET_2026",
+   "type": "Document",
+   "label": "2026년 예산 국회 확정(정책브리핑)",
+   "status": "verified",
+   "attrs": {
+    "source_id": "SRC_BUDGET_2026",
+    "source_type": "official-policy",
+    "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148956215",
+    "effective_on": null,
+    "published_on": "2025-12-02"
+   }
+  },
+  {
+   "id": "artifact:fpts.ax_hub_confirmed",
+   "type": "Document",
+   "label": "4대 권역 AX 거점 확정",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.ax_hub_confirmed",
+    "category": "plan",
+    "definition": "광주·대구·전북·경남 AX 연구·실증 거점의 예타면제 의결 및 사업규모 적정성 검토 후 확정.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.balance_anchor_ready",
+   "type": "Document",
+   "label": "행정수도·새만금·공공기관 이전",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.balance_anchor_ready",
+    "category": "policy",
+    "definition": "국가상징구역 마스터플랜, 새만금 서해권 물류거점, 공공기관 2차 이전계획.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.block_grant_expanded",
+   "type": "Document",
+   "label": "포괄보조 확대",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.block_grant_expanded",
+    "category": "financial",
+    "definition": "지특회계 포괄보조 3.8조('25)→10.6조('26), 사업수 47→121개.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.devolution_effective",
+   "type": "Document",
+   "label": "권한이양 시행",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.devolution_effective",
+    "category": "legal",
+    "definition": "3차 일괄이양과 맞춤형 권한·특례 부여의 시행.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.differential_support_live",
+   "type": "Document",
+   "label": "차등지원 제도화",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.differential_support_live",
+    "category": "financial",
+    "definition": "아동수당 등 7개 사업의 지역 3단계 차등지원과 新균형성장지수.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.edu_zone_designated",
+   "type": "Document",
+   "label": "교육특구 지정·운영",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.edu_zone_designated",
+    "category": "policy",
+    "definition": "교육규제 합리화를 위한 교육특구 지정('26.下~).",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.engine_guideline",
+   "type": "Document",
+   "label": "성장엔진 추진가이드라인",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.engine_guideline",
+    "category": "policy",
+    "definition": "산업부가 수립하는 성장엔진 발굴기준·후보산업군·지원패키지 가이드라인.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.engine_investment_plan",
+   "type": "Document",
+   "label": "민관합동 성장엔진 투자계획",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.engine_investment_plan",
+    "category": "policy",
+    "definition": "중앙·지방위·지자체·기업이 함께 마련하는 권역별 성장엔진 투자계획.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.engine_selected",
+   "type": "Document",
+   "label": "5극3특 성장엔진 선정",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.engine_selected",
+    "category": "policy",
+    "definition": "지방시대위원회 의결로 확정된 권역별 성장엔진(권역 간 업종 차별화 원칙).",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.governance_ready",
+   "type": "Document",
+   "label": "5극3특 거버넌스 가동",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.governance_ready",
+    "category": "policy",
+    "definition": "국가자치분권균형성장회의 개편, 범정부 초광역추진협의체·지원전담조직, 권역별 초광역특별협약추진체가 구성된 상태.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.health_network_ready",
+   "type": "Document",
+   "label": "권역 공공의료체계",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.health_network_ready",
+    "category": "policy",
+    "definition": "권역별 거점병원 육성과 국립중앙의료원-국립대병원-지방의료원 진료협력체계.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.hub_airports_ready",
+   "type": "Document",
+   "label": "거점공항 육성",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.hub_airports_ready",
+    "category": "infrastructure",
+    "definition": "가덕도·TK·청주·무안 등 권역별 관문 공항과 연계 교통망.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.impact_assessment_live",
+   "type": "Document",
+   "label": "균형성장영향평가 도입",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.impact_assessment_live",
+    "category": "policy",
+    "definition": "중앙행정기관 정책·재정사업의 균형성장 영향 사전분석 제도.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.innovation_city_selected",
+   "type": "Document",
+   "label": "혁신성장거점도시 선정",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.innovation_city_selected",
+    "category": "policy",
+    "definition": "산·학·연 혁신성장거점도시 선도사업(1~2개) 선정과 통합 조성·운영 체계.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.integrated_care_live",
+   "type": "Document",
+   "label": "통합돌봄 전국 시행",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.integrated_care_live",
+    "category": "policy",
+    "definition": "돌봄통합지원법에 따른 지역사회 통합돌봄 전국 시행('26.3).",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.invest_corp_established",
+   "type": "Document",
+   "label": "지역투자공사 설립",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.invest_corp_established",
+    "category": "financial",
+    "definition": "일부 권역 우선 설립·시범 운영 후 확산되는 권역별 지역투자공사.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.law_decentralization_amended",
+   "type": "Document",
+   "label": "지방분권균형발전법 개정",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.law_decentralization_amended",
+    "category": "legal",
+    "definition": "예산 사전조정권 강화·초광역특별계정·통합공모 근거를 담은 지방자치분권 및 지역균형발전에 관한 특별법 개정.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.law_devolution_enacted",
+   "type": "Document",
+   "label": "권한이양 입법 완료",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.law_devolution_enacted",
+    "category": "legal",
+    "definition": "3차 지방일괄이양법 및 맞춤형 권한이양 특별법 제정.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.law_growth_support_enacted",
+   "type": "Document",
+   "label": "광역권 성장지원 특별법 제정",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.law_growth_support_enacted",
+    "category": "legal",
+    "definition": "광역권 핵심사업 선정·신속 추진과 메가특구 규제특례의 법적 기반.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.law_localautonomy_amended",
+   "type": "Document",
+   "label": "지방자치법 개정(특자체 권한)",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.law_localautonomy_amended",
+    "category": "legal",
+    "definition": "특별지방자치단체 권한(위임→이양) 확대·전속사무·국가공무원 파견 근거를 담은 지방자치법 개정.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.mega_account_created",
+   "type": "Document",
+   "label": "초광역특별계정 신설",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.mega_account_created",
+    "category": "financial",
+    "definition": "지특회계를 자율+지원+초광역특별계정 3계정 체계로 개편.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.mega_region_plan",
+   "type": "Document",
+   "label": "초광역권계획·발전계획 수립",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.mega_region_plan",
+    "category": "policy",
+    "definition": "국토기본법상 초광역권계획과 지방분권균형발전법상 초광역권발전계획.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.national_land_plan_revised",
+   "type": "Document",
+   "label": "제5차 국토종합계획 수정",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.national_land_plan_revised",
+    "category": "policy",
+    "definition": "5극3특 경제·생활권 체계를 담은 국토종합계획 수정계획('26~'40).",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.pilot_projects_signed",
+   "type": "Document",
+   "label": "초광역권 시범 프로젝트 체결",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.pilot_projects_signed",
+    "category": "policy",
+    "definition": "부울경 제조혁신 AIDC, 광주전남 AI 재생에너지, 충청권 바이오 등 기investment 시범 프로젝트 협약.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.regional_funds_ready",
+   "type": "Document",
+   "label": "국민성장펀드·지역성장펀드 조성",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.regional_funds_ready",
+    "category": "financial",
+    "definition": "국민성장펀드 150조 및 벤처투자 40조의 비수도권 40% 배분과 권역별 지역성장펀드(3.5조).",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.regulatory_special_ready",
+   "type": "Document",
+   "label": "규제특례·메가특구 기반",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.regulatory_special_ready",
+    "category": "legal",
+    "definition": "성장엔진 전략산업에 대한 규제특례(메가 샌드박스·특구) 제도기반.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.regulatory_twotrack_live",
+   "type": "Document",
+   "label": "특자체 규제특례 투트랙",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.regulatory_twotrack_live",
+    "category": "legal",
+    "definition": "중앙 규제권한과 별개로 특자체장에게 부여되는 규제특례 권한 운영.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.rural_income_ready",
+   "type": "Document",
+   "label": "햇빛연금·농어촌기본소득",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.rural_income_ready",
+    "category": "financial",
+    "definition": "햇빛연금·햇빛소득마을과 농어촌기본소득법 제정, 인구감소지역 시범사업.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.rural_regen_ready",
+   "type": "Document",
+   "label": "농산어촌 재생 기반",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.rural_regen_ready",
+    "category": "policy",
+    "definition": "농촌공간계획(139개 시·군)·농어촌빈집관리특별법·재생거점마을.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.slg_launched",
+   "type": "Document",
+   "label": "권역별 특별지방자치단체 출범",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.slg_launched",
+    "category": "legal",
+    "definition": "규약 표준안·맞춤형 컨설팅을 거친 지역 주도 특자체 설립.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.special_agreement_signed",
+   "type": "Document",
+   "label": "초광역특별협약 체결",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.special_agreement_signed",
+    "category": "policy",
+    "definition": "성장엔진 선정과 성장 5종세트 패키지에 대해 중앙·지자체·기업이 참여하는 권역별 협약.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.strategy_adopted",
+   "type": "Document",
+   "label": "5극3특 추진전략 확정",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.strategy_adopted",
+    "category": "policy",
+    "definition": "지방시대위원회 제1차 회의에 상정·확정된 추진전략 설계도. 3대 분야 11개 전략과제 144개 세부과제의 정본.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.talent_system_reformed",
+   "type": "Document",
+   "label": "서울대 10개·RISE 재구조화",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.talent_system_reformed",
+    "category": "policy",
+    "definition": "거점국립대 집중 육성 로드맵과 초광역 RISE위원회·센터 체계.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.talent_twotrack_ready",
+   "type": "Document",
+   "label": "투트랙 인재양성 체계",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.talent_twotrack_ready",
+    "category": "policy",
+    "definition": "계약학과·산업학위제(첨단 기술인재)와 협약형 특성화고(실무인재) 이원 체계.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.transport_network_built",
+   "type": "Document",
+   "label": "광역철도·간선망 확충",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.transport_network_built",
+    "category": "infrastructure",
+    "definition": "부산~양산~울산·용문~홍천 광역철도, 도시철도, 간선도로 11개 사업 등.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "artifact:fpts.transport_plan",
+   "type": "Document",
+   "label": "권역별 대중교통망계획",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "fpts.transport_plan",
+    "category": "policy",
+    "definition": "60분 생활권을 위한 권역별 단일생활권 대중교통망계획과 광역교통시행계획 연계.",
+    "in_registry": true
+   }
+  },
+  {
+   "id": "milestone:N01",
+   "type": "Gate",
+   "label": "5극3특 추진전략 설계도 수립·지방시대위 의결",
+   "status": "verified",
+   "attrs": {
+    "node_id": "N01",
+    "stage": "G0",
+    "classification": "policy",
+    "lead_actor": "balance-committee",
+    "actor_roles": {
+     "lead": [
+      "지방시대위원회"
+     ],
+     "consult": [
+      "국정기획위원회",
+      "관계부처"
+     ],
+     "decision": [
+      "지방시대위원회"
+     ]
+    },
+    "authority": "지방시대위원회",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.strategy_adopted"
+    ],
+    "overlay_status": "completed",
+    "confidence": "official",
+    "note": "완료일 근거: 5극3특 국가균형성장 추진전략 설계도 발행·지방시대위 의결(SRC_STRATEGY)"
+   }
+  },
+  {
+   "id": "milestone:N02",
+   "type": "Gate",
+   "label": "거버넌스 구축 — 국가자치분권균형성장회의·범정부 초광역추진협의체·권역별 협약추진체",
+   "status": "verified",
+   "attrs": {
+    "node_id": "N02",
+    "stage": "G0",
+    "classification": "governance",
+    "lead_actor": "balance-committee",
+    "actor_roles": {
+     "lead": [
+      "지방시대위원회"
+     ],
+     "consult": [
+      "행정안전부",
+      "시·도"
+     ],
+     "decision": [
+      "국회",
+      "행정안전부장관"
+     ]
+    },
+    "authority": "지방시대위원회·행정안전부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.governance_ready"
+    ],
+    "overlay_status": "active",
+    "confidence": "official",
+    "note": "범부처 초광역추진협의체는 2026-06-02 공포 개정법 제31조의2로 신설되어 지방시대위원회에 둔다. 「국가자치분권균형성장회의」로의 회의체 개편은 현행·개정 조문 모두에서 확인되지 않음(제62조는 대통령 소속 「지방시대위원회」). / 결정주체: 근거 같은 법 제31조의2(신설)"
+   }
+  },
+  {
+   "id": "milestone:N03",
+   "type": "Gate",
+   "label": "지방분권균형발전법 개정 — 사전조정권·초광역특별계정·통합공모",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N03",
+    "stage": "G1",
+    "classification": "legal_gate",
+    "lead_actor": "assembly",
+    "actor_roles": {
+     "lead": [
+      "국회"
+     ],
+     "consult": [],
+     "decision": [
+      "국회"
+     ]
+    },
+    "authority": "국회·지방시대위원회",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.law_decentralization_amended"
+    ],
+    "overlay_status": "completed",
+    "confidence": "statutory",
+    "note": "완료일 근거: 지방자치분권 및 균형성장에 관한 특별법 일부개정법률 공포"
+   }
+  },
+  {
+   "id": "milestone:N04",
+   "type": "Gate",
+   "label": "지방자치법 개정 — 특별지방자치단체 권한 확대",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N04",
+    "stage": "G1",
+    "classification": "legal_gate",
+    "lead_actor": "assembly",
+    "actor_roles": {
+     "lead": [
+      "국회"
+     ],
+     "consult": [],
+     "decision": [
+      "국회"
+     ]
+    },
+    "authority": "국회·행정안전부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.law_localautonomy_amended"
+    ],
+    "overlay_status": "active",
+    "confidence": "statutory",
+    "note": null
+   }
+  },
+  {
+   "id": "milestone:N05",
+   "type": "Gate",
+   "label": "3차 지방일괄이양법·맞춤형 권한이양 특별법 제정",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N05",
+    "stage": "G1",
+    "classification": "legal_gate",
+    "lead_actor": "assembly",
+    "actor_roles": {
+     "lead": [
+      "국회"
+     ],
+     "consult": [],
+     "decision": [
+      "국회"
+     ]
+    },
+    "authority": "국회·행정안전부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.law_devolution_enacted"
+    ],
+    "overlay_status": "active",
+    "confidence": "statutory",
+    "note": null
+   }
+  },
+  {
+   "id": "milestone:N06",
+   "type": "Gate",
+   "label": "광역권 성장지원 특별법·조특법 등 관련 법령 정비",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N06",
+    "stage": "G1",
+    "classification": "legal_gate",
+    "lead_actor": "assembly",
+    "actor_roles": {
+     "lead": [
+      "국회"
+     ],
+     "consult": [],
+     "decision": [
+      "국회"
+     ]
+    },
+    "authority": "국회·관계부처",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.law_growth_support_enacted"
+    ],
+    "overlay_status": "planned",
+    "confidence": "modeled",
+    "note": null
+   }
+  },
+  {
+   "id": "milestone:N07",
+   "type": "Gate",
+   "label": "성장엔진 추진가이드라인 수립",
+   "status": "verified",
+   "attrs": {
+    "node_id": "N07",
+    "stage": "G2",
+    "classification": "policy",
+    "lead_actor": "motie",
+    "actor_roles": {
+     "lead": [
+      "산업통상부"
+     ],
+     "consult": [],
+     "decision": [
+      "산업통상부장관"
+     ]
+    },
+    "authority": "산업통상부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.engine_guideline"
+    ],
+    "overlay_status": "completed",
+    "confidence": "official",
+    "note": "결정주체: 법정 의결주체 조항 미발견 — 법정 의결 주체 조항 없음 — 소관 부처 행정지침 · 완료일은 근거 정책브리핑(SRC_ENGINE_NEWS, 2025-12-08) 등록일 기준이며 가이드라인 수립일을 밝힌 원문은 확인되지 않았다"
+   }
+  },
+  {
+   "id": "milestone:N08",
+   "type": "Gate",
+   "label": "민관합동 성장엔진 투자계획 수립·투자협의체계 마련",
+   "status": "verified",
+   "attrs": {
+    "node_id": "N08",
+    "stage": "G2",
+    "classification": "plan",
+    "lead_actor": "whole-government",
+    "actor_roles": {
+     "lead": [
+      "범부처"
+     ],
+     "consult": [
+      "기업",
+      "시·도"
+     ],
+     "decision": [
+      "산업통상부장관"
+     ]
+    },
+    "authority": "범부처·지방시대위원회·지자체",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.engine_investment_plan"
+    ],
+    "overlay_status": "active",
+    "confidence": "official",
+    "note": "결정주체: 법정 의결주체 조항 미발견 — 법정 의결 주체 조항 없음 — 범부처 협의로 확정"
+   }
+  },
+  {
+   "id": "milestone:N09",
+   "type": "Gate",
+   "label": "5극3특 성장엔진 선정 — 지방시대위 의결",
+   "status": "verified",
+   "attrs": {
+    "node_id": "N09",
+    "stage": "G2",
+    "classification": "legal_gate",
+    "lead_actor": "balance-committee",
+    "actor_roles": {
+     "lead": [
+      "지방시대위원회"
+     ],
+     "consult": [],
+     "decision": [
+      "지방시대위원회"
+     ]
+    },
+    "authority": "지방시대위원회",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.engine_selected"
+    ],
+    "overlay_status": "unknown",
+    "confidence": "official",
+    "note": "설계도상 '26.3 의결 일정 — 실제 의결 여부는 공개자료 확인 필요"
+   }
+  },
+  {
+   "id": "milestone:N10",
+   "type": "Gate",
+   "label": "초광역권 성장엔진 시범 프로젝트 발굴·체결",
+   "status": "verified",
+   "attrs": {
+    "node_id": "N10",
+    "stage": "G2",
+    "classification": "delivery",
+    "lead_actor": "motie",
+    "actor_roles": {
+     "lead": [
+      "범부처"
+     ],
+     "consult": [
+      "SK·AWS 등 앵커기업"
+     ],
+     "decision": [
+      "산업통상부장관"
+     ]
+    },
+    "authority": "범부처·산업통상부·지자체",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.pilot_projects_signed"
+    ],
+    "overlay_status": "active",
+    "confidence": "official",
+    "note": "결정주체: 근거 지방자치분권 및 균형성장에 관한 특별법 제30조 — 제30조는 '국가와 지방자치단체는 … 추진할 수 있다'는 재량 조항 — 특정 의결주체를 정하지 않음"
+   }
+  },
+  {
+   "id": "milestone:N11",
+   "type": "Gate",
+   "label": "권역별 초광역특별협약 체결",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N11",
+    "stage": "G2",
+    "classification": "legal_gate",
+    "lead_actor": "balance-committee",
+    "actor_roles": {
+     "lead": [
+      "범부처"
+     ],
+     "consult": [
+      "기업",
+      "대학"
+     ],
+     "decision": [
+      "지방시대위원회"
+     ]
+    },
+    "authority": "범부처·지방시대위원회·초광역권",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.special_agreement_signed"
+    ],
+    "overlay_status": "active",
+    "confidence": "statutory",
+    "note": null
+   }
+  },
+  {
+   "id": "milestone:N12",
+   "type": "Gate",
+   "label": "4대 권역 AX 거점 예타면제·사업규모 확정",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N12",
+    "stage": "G3",
+    "classification": "technical_gate",
+    "lead_actor": "msit",
+    "actor_roles": {
+     "lead": [
+      "과기정통부"
+     ],
+     "consult": [],
+     "decision": [
+      "기획예산처장관"
+     ]
+    },
+    "authority": "과기정통부·산업통상부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.ax_hub_confirmed"
+    ],
+    "overlay_status": "active",
+    "confidence": "statutory",
+    "note": "결정주체: 근거 국가재정법 제38조제1항"
+   }
+  },
+  {
+   "id": "milestone:N13",
+   "type": "Gate",
+   "label": "메가특구 등 규제특례 제도기반 정비",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N13",
+    "stage": "G3",
+    "classification": "legal_gate",
+    "lead_actor": "motie",
+    "actor_roles": {
+     "lead": [
+      "국무조정실"
+     ],
+     "consult": [],
+     "decision": [
+      "산업통상부장관",
+      "지방시대위원회"
+     ]
+    },
+    "authority": "국무조정실·산업통상부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.regulatory_special_ready"
+    ],
+    "overlay_status": "planned",
+    "confidence": "modeled",
+    "note": "결정주체: 근거 지방자치분권 및 균형성장에 관한 특별법 제23조제2항 — 기회발전특구는 산업통상부장관이 지방시대위원회 심의·의결을 거쳐 지정 — '메가특구'는 신설 개념이라 법령 정비 필요"
+   }
+  },
+  {
+   "id": "milestone:N14",
+   "type": "Gate",
+   "label": "국민성장펀드·지역성장펀드 조성 — 비수도권 40%",
+   "status": "verified",
+   "attrs": {
+    "node_id": "N14",
+    "stage": "G3",
+    "classification": "delivery",
+    "lead_actor": "fiscal",
+    "actor_roles": {
+     "lead": [
+      "금융위원회"
+     ],
+     "consult": [],
+     "decision": [
+      "금융위원회",
+      "기획예산처장관"
+     ]
+    },
+    "authority": "금융위원회·중소벤처기업부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.regional_funds_ready"
+    ],
+    "overlay_status": "active",
+    "confidence": "official",
+    "note": "결정주체: 법정 의결주체 조항 미발견 — 법정 의결 주체 조항 미발견 — 펀드 조성 근거법 확인 필요"
+   }
+  },
+  {
+   "id": "milestone:N15",
+   "type": "Gate",
+   "label": "권역별 지역투자공사 설립",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N15",
+    "stage": "G3",
+    "classification": "legal_gate",
+    "lead_actor": "fiscal",
+    "actor_roles": {
+     "lead": [
+      "금융위원회"
+     ],
+     "consult": [],
+     "decision": [
+      "국회"
+     ]
+    },
+    "authority": "금융위원회·산업통상부",
+    "activation": "rule",
+    "activation_rule": "RULE_INVEST_CORP_ACT",
+    "activation_resolution": {
+     "mode": "rule",
+     "rule": "RULE_INVEST_CORP_ACT",
+     "equals": true,
+     "parameter": "investCorpActPassed",
+     "parameter_status": "unknown",
+     "parameter_value": null,
+     "parameter_reason": "동남권·충청권 지역투자공사 법안이 상정·소위 단계로 통과 여부 미확정",
+     "determined": false
+    },
+    "produces": [
+     "fpts.invest_corp_established"
+    ],
+    "overlay_status": "planned",
+    "confidence": "modeled",
+    "note": "설립 형태 미확정 — 지방공사 형태라면 지방공기업법 제49조(행안부장관 협의·조례 제정·전문기관 타당성 검토)로 가능하며 국회 입법이 필요 없다. 별도 특별법 법인이라면 입법 경로. 두 경로를 모두 후보로 병기함(authority가 금융위·산업통상부로 기재돼 있어 지방공사 여부가 불분명)."
+   }
+  },
+  {
+   "id": "milestone:N16",
+   "type": "Gate",
+   "label": "서울대 10개 만들기·RISE 체계 재구조화",
+   "status": "verified",
+   "attrs": {
+    "node_id": "N16",
+    "stage": "G3",
+    "classification": "policy",
+    "lead_actor": "moe",
+    "actor_roles": {
+     "lead": [
+      "교육부"
+     ],
+     "consult": [
+      "거점국립대"
+     ],
+     "decision": [
+      "교육부장관"
+     ]
+    },
+    "authority": "교육부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.talent_system_reformed"
+    ],
+    "overlay_status": "active",
+    "confidence": "official",
+    "note": "결정주체: 근거 지방대학 및 지역균형인재 육성에 관한 법률 제6조의2"
+   }
+  },
+  {
+   "id": "milestone:N17",
+   "type": "Gate",
+   "label": "계약학과·협약형 특성화고 등 투트랙 인재양성",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N17",
+    "stage": "G3",
+    "classification": "delivery",
+    "lead_actor": "moe",
+    "actor_roles": {
+     "lead": [
+      "교육부"
+     ],
+     "consult": [
+      "기업",
+      "대학"
+     ],
+     "decision": [
+      "교육부장관"
+     ]
+    },
+    "authority": "교육부·산업통상부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.talent_twotrack_ready"
+    ],
+    "overlay_status": "active",
+    "confidence": "statutory",
+    "note": "결정주체: 근거 산업교육진흥 및 산학연협력촉진에 관한 법률 제8조제2항 — 계약학과 설치·운영계획은 산업교육기관의 장이 교육부장관에게 신고"
+   }
+  },
+  {
+   "id": "milestone:N18",
+   "type": "Gate",
+   "label": "산·학·연 혁신성장거점도시 선도사업 선정",
+   "status": "verified",
+   "attrs": {
+    "node_id": "N18",
+    "stage": "G3",
+    "classification": "policy",
+    "lead_actor": "molit",
+    "actor_roles": {
+     "lead": [
+      "국토교통부"
+     ],
+     "consult": [],
+     "decision": [
+      "국토교통부장관"
+     ]
+    },
+    "authority": "국토교통부·산업통상부·중소벤처기업부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.innovation_city_selected"
+    ],
+    "overlay_status": "active",
+    "confidence": "official",
+    "note": "결정주체: 법정 의결주체 조항 미발견 — 법정 의결 주체 조항 없음 — 공모·선정 방식"
+   }
+  },
+  {
+   "id": "milestone:N19",
+   "type": "Gate",
+   "label": "제5차 국토종합계획 수정계획('26~'40) 마련",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N19",
+    "stage": "G4",
+    "classification": "plan",
+    "lead_actor": "molit",
+    "actor_roles": {
+     "lead": [
+      "국토교통부"
+     ],
+     "consult": [],
+     "decision": [
+      "대통령",
+      "국무회의",
+      "국토정책위원회"
+     ]
+    },
+    "authority": "국토교통부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.national_land_plan_revised"
+    ],
+    "overlay_status": "unknown",
+    "confidence": "statutory",
+    "note": "결정주체: 근거 국토기본법 제12조제1항 — 국토교통부장관이 국토정책위원회와 국무회의 심의를 거쳐 대통령의 승인을 받음"
+   }
+  },
+  {
+   "id": "milestone:N20",
+   "type": "Gate",
+   "label": "초광역권계획·초광역권발전계획 수립",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N20",
+    "stage": "G4",
+    "classification": "plan",
+    "lead_actor": "region",
+    "actor_roles": {
+     "lead": [
+      "국토교통부"
+     ],
+     "consult": [],
+     "decision": [
+      "지방시대위원회",
+      "국토교통부장관"
+     ]
+    },
+    "authority": "국토교통부·지방시대위원회·초광역권",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.mega_region_plan"
+    ],
+    "overlay_status": "planned",
+    "confidence": "statutory",
+    "note": "결정주체: 근거 지방자치분권 및 균형성장에 관한 특별법 제9조제1항 · 국토기본법 제12조의2제3항 — 초광역권발전계획은 지방시대위원회 심의·의결, 초광역권계획은 국토교통부장관 승인(제15조 준용)"
+   }
+  },
+  {
+   "id": "milestone:N21",
+   "type": "Gate",
+   "label": "권역별 60분 대중교통망계획 수립",
+   "status": "verified",
+   "attrs": {
+    "node_id": "N21",
+    "stage": "G4",
+    "classification": "plan",
+    "lead_actor": "molit",
+    "actor_roles": {
+     "lead": [
+      "국토교통부"
+     ],
+     "consult": [],
+     "decision": [
+      "국토교통부장관"
+     ]
+    },
+    "authority": "국토교통부·지방시대위원회",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.transport_plan"
+    ],
+    "overlay_status": "planned",
+    "confidence": "official",
+    "note": "결정주체: 근거 대중교통의 육성 및 이용촉진에 관한 법률 제5조제1항"
+   }
+  },
+  {
+   "id": "milestone:N22",
+   "type": "Gate",
+   "label": "광역철도·도시철도·간선도로망 확충",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N22",
+    "stage": "G4",
+    "classification": "delivery",
+    "lead_actor": "molit",
+    "actor_roles": {
+     "lead": [
+      "국토교통부"
+     ],
+     "consult": [],
+     "decision": [
+      "국토교통부장관"
+     ]
+    },
+    "authority": "국토교통부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.transport_network_built"
+    ],
+    "overlay_status": "active",
+    "confidence": "statutory",
+    "note": "철도의 건설 및 철도시설 유지관리에 관한 법률 제4조제2항제1호 — 국가철도망구축계획은 「지방자치분권 및 균형성장에 관한 특별법」 제6조 지방시대 종합계획과 조화를 이루어야 한다. 법정 선행은 N21(권역별 60분 대중교통망계획)이 아니라 이 종합계획이며, 해당 법정계획은 현재 이 프로젝트에 관문으로 등재돼 있지 않다. / 결정주체: 근거 철도의 건설 및 철도시설 유지관리에 관한 법률 제4조제1항 — 국가철도망구축계획은 제4조제2항제1호에 따라 지방시대 종합계획과 조화를 이루어야 함"
+   }
+  },
+  {
+   "id": "milestone:N23",
+   "type": "Gate",
+   "label": "가덕도·TK·청주·무안 등 거점공항 육성",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N23",
+    "stage": "G4",
+    "classification": "delivery",
+    "lead_actor": "molit",
+    "actor_roles": {
+     "lead": [
+      "국토교통부"
+     ],
+     "consult": [],
+     "decision": [
+      "국토교통부장관"
+     ]
+    },
+    "authority": "국토교통부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.hub_airports_ready"
+    ],
+    "overlay_status": "active",
+    "confidence": "statutory",
+    "note": "결정주체: 근거 공항시설법 제3조제1항"
+   }
+  },
+  {
+   "id": "milestone:N24",
+   "type": "Gate",
+   "label": "행정수도 완성·새만금 물류거점·공공기관 2차 이전",
+   "status": "verified",
+   "attrs": {
+    "node_id": "N24",
+    "stage": "G4",
+    "classification": "policy",
+    "lead_actor": "whole-government",
+    "actor_roles": {
+     "lead": [
+      "범정부"
+     ],
+     "consult": [],
+     "decision": [
+      "정부",
+      "국토교통부장관"
+     ]
+    },
+    "authority": "범정부·국토교통부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.balance_anchor_ready"
+    ],
+    "overlay_status": "active",
+    "confidence": "official",
+    "note": "공공기관 2차 이전은 '26년 이전계획 확정, '27년 선도이전 일정 — 행정수도·새만금 트랙은 별도 제도 매핑 필요 / 결정주체: 근거 지방자치분권 및 균형성장에 관한 특별법 제25조제1항 — '정부는 … 혁신도시시책을 추진하여야 한다'"
+   }
+  },
+  {
+   "id": "milestone:N25",
+   "type": "Gate",
+   "label": "권역별 거점병원·공공의료체계 구축",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N25",
+    "stage": "G5",
+    "classification": "delivery",
+    "lead_actor": "mohw",
+    "actor_roles": {
+     "lead": [
+      "보건복지부"
+     ],
+     "consult": [],
+     "decision": [
+      "보건복지부장관",
+      "공공보건의료정책심의위원회"
+     ]
+    },
+    "authority": "보건복지부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.health_network_ready"
+    ],
+    "overlay_status": "active",
+    "confidence": "statutory",
+    "note": "결정주체: 근거 공공보건의료에 관한 법률 제4조제1항"
+   }
+  },
+  {
+   "id": "milestone:N26",
+   "type": "Gate",
+   "label": "지역사회 통합돌봄 전국 시행",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N26",
+    "stage": "G5",
+    "classification": "legal_gate",
+    "lead_actor": "mohw",
+    "actor_roles": {
+     "lead": [
+      "보건복지부"
+     ],
+     "consult": [],
+     "decision": [
+      "보건복지부장관"
+     ]
+    },
+    "authority": "보건복지부·지방자치단체",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.integrated_care_live"
+    ],
+    "overlay_status": "completed",
+    "confidence": "statutory",
+    "note": "돌봄통합지원법 '26.3 전국 시행 / 결정주체: 근거 의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률 제5조 / 완료일 근거: 의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률 시행"
+   }
+  },
+  {
+   "id": "milestone:N27",
+   "type": "Gate",
+   "label": "교육특구 지정·운영",
+   "status": "verified",
+   "attrs": {
+    "node_id": "N27",
+    "stage": "G5",
+    "classification": "policy",
+    "lead_actor": "moe",
+    "actor_roles": {
+     "lead": [
+      "교육부"
+     ],
+     "consult": [],
+     "decision": [
+      "교육부장관",
+      "교육국제화특구위원회"
+     ]
+    },
+    "authority": "교육부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.edu_zone_designated"
+    ],
+    "overlay_status": "planned",
+    "confidence": "official",
+    "note": "결정주체: 근거 교육국제화특구의 지정ㆍ운영 및 육성에 관한 특별법 제4조제1항 — 시·도지사와 교육감의 공동 요청 + 교육국제화특구위원회 심의를 거쳐 교육부장관이 지정"
+   }
+  },
+  {
+   "id": "milestone:N28",
+   "type": "Gate",
+   "label": "햇빛연금·농어촌기본소득법 제정·시범사업",
+   "status": "verified",
+   "attrs": {
+    "node_id": "N28",
+    "stage": "G5",
+    "classification": "legal_gate",
+    "lead_actor": "mafra",
+    "actor_roles": {
+     "lead": [
+      "농식품부"
+     ],
+     "consult": [],
+     "decision": [
+      "국회"
+     ]
+    },
+    "authority": "농식품부·해양수산부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.rural_income_ready"
+    ],
+    "overlay_status": "active",
+    "confidence": "official",
+    "note": "인구감소지역 시범('26, 24만명·0.2조) 및 (가칭)농어촌기본소득법 제정 ~'26"
+   }
+  },
+  {
+   "id": "milestone:N29",
+   "type": "Gate",
+   "label": "농촌공간계획·빈집특별법 등 재생 프로젝트",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N29",
+    "stage": "G5",
+    "classification": "plan",
+    "lead_actor": "mafra",
+    "actor_roles": {
+     "lead": [
+      "농식품부"
+     ],
+     "consult": [],
+     "decision": [
+      "농림축산식품부장관"
+     ]
+    },
+    "authority": "농식품부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.rural_regen_ready"
+    ],
+    "overlay_status": "active",
+    "confidence": "statutory",
+    "note": "결정주체: 근거 농촌공간 재구조화 및 재생지원에 관한 법률 제6조"
+   }
+  },
+  {
+   "id": "milestone:N30",
+   "type": "Gate",
+   "label": "초광역특별계정 신설 — 지특회계 3계정 개편",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N30",
+    "stage": "G6",
+    "classification": "legal_gate",
+    "lead_actor": "fiscal",
+    "actor_roles": {
+     "lead": [
+      "기획예산처"
+     ],
+     "consult": [],
+     "decision": [
+      "국회",
+      "기획예산처장관"
+     ]
+    },
+    "authority": "기획예산처·지방시대위원회",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.mega_account_created"
+    ],
+    "overlay_status": "completed",
+    "confidence": "statutory",
+    "note": "초광역특별계정은 2026-06-02 공포 개정법 제76조로 신설됨(\"제주특별자치도계정 및 세종특별자치시계정\"을 \"…및 초광역특별계정\"으로 개정). 시행일이 단계적이라(초광역특별계정 2027-01-01 적용) 2026-07-01 시행 현행 조문에는 아직 4계정만 표시된다 — 입법은 완료, 시행 대기. / 결정주체: 근거 지방자치분권 및 균형성장에 관한 특별법 제76조(개정) / 완료일 근거: 같은 개정법 제76조 초광역특별계정 신설 공포(시행 대기)"
+   }
+  },
+  {
+   "id": "milestone:N31",
+   "type": "Gate",
+   "label": "포괄보조 대폭 확대 — 3.8조→10.6조, 사업수 47→121개",
+   "status": "verified",
+   "attrs": {
+    "node_id": "N31",
+    "stage": "G6",
+    "classification": "delivery",
+    "lead_actor": "fiscal",
+    "actor_roles": {
+     "lead": [
+      "기획예산처"
+     ],
+     "consult": [],
+     "decision": [
+      "국회",
+      "기획예산처장관"
+     ]
+    },
+    "authority": "기획예산처",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.block_grant_expanded"
+    ],
+    "overlay_status": "completed",
+    "confidence": "official",
+    "note": "결정주체: 근거 국가재정법 제32조·제33조 — 예산 편성은 정부, 확정은 국회 의결 / 완료일 근거: 2026년도 예산안 국회 본회의 의결(2025-12-02). 다만 국회예산정책처 분석은 2026년 포괄보조를 사업 120개·약 10.1조원으로 집계해 이 관문의 표기(10.6조·121개)와 차이가 있어 수치 재확인이 필요하다."
+   }
+  },
+  {
+   "id": "milestone:N32",
+   "type": "Gate",
+   "label": "균형성장영향평가 도입",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N32",
+    "stage": "G6",
+    "classification": "legal_gate",
+    "lead_actor": "balance-committee",
+    "actor_roles": {
+     "lead": [
+      "지방시대위원회"
+     ],
+     "consult": [],
+     "decision": [
+      "지방시대위원회",
+      "중앙행정기관의 장"
+     ]
+    },
+    "authority": "지방시대위원회·기획예산처",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.impact_assessment_live"
+    ],
+    "overlay_status": "active",
+    "confidence": "statutory",
+    "note": "균형성장영향평가는 2026-06-02 공포 개정법 제11조의3으로 신설됨 — 중앙행정기관의 장이 지방시대위원회가 선정한 정책·사업에 대해 평가를 실시하고 결과를 지방시대위원회에 제출. 시행 대기(공포 6개월 후인 2026-12-03 시행). / 결정주체: 근거 같은 법 제11조의3(신설)"
+   }
+  },
+  {
+   "id": "milestone:N33",
+   "type": "Gate",
+   "label": "차등지원 제도화 — 7개 사업 3단계·新균형성장지수",
+   "status": "verified",
+   "attrs": {
+    "node_id": "N33",
+    "stage": "G6",
+    "classification": "policy",
+    "lead_actor": "mois",
+    "actor_roles": {
+     "lead": [
+      "행정안전부"
+     ],
+     "consult": [],
+     "decision": [
+      "행정안전부장관",
+      "기획예산처장관"
+     ]
+    },
+    "authority": "행정안전부·산업통상부·기획예산처",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.differential_support_live"
+    ],
+    "overlay_status": "active",
+    "confidence": "official",
+    "note": "결정주체: 법정 의결주체 조항 미발견 — 차등지원 제도화의 법정 근거 조항 미발견"
+   }
+  },
+  {
+   "id": "milestone:N34",
+   "type": "Gate",
+   "label": "권역별 특별지방자치단체 출범 — 규약 표준안·컨설팅",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N34",
+    "stage": "G7",
+    "classification": "legal_gate",
+    "lead_actor": "mois",
+    "actor_roles": {
+     "lead": [
+      "행정안전부"
+     ],
+     "consult": [],
+     "decision": [
+      "시·도의회"
+     ]
+    },
+    "authority": "행정안전부·시·도",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.slg_launched"
+    ],
+    "overlay_status": "active",
+    "confidence": "statutory",
+    "note": "부울경 특별연합 해산 전례 — 미설립 권역은 연합체에 사업단 구성"
+   }
+  },
+  {
+   "id": "milestone:N35",
+   "type": "Gate",
+   "label": "3차 일괄이양·맞춤형 권한이양 시행",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N35",
+    "stage": "G7",
+    "classification": "delivery",
+    "lead_actor": "mois",
+    "actor_roles": {
+     "lead": [
+      "행정안전부"
+     ],
+     "consult": [],
+     "decision": [
+      "국회",
+      "행정안전부장관"
+     ]
+    },
+    "authority": "행정안전부",
+    "activation": "always",
+    "activation_rule": null,
+    "activation_resolution": {
+     "mode": "always",
+     "determined": true
+    },
+    "produces": [
+     "fpts.devolution_effective"
+    ],
+    "overlay_status": "planned",
+    "confidence": "statutory",
+    "note": "결정주체: 근거 지방자치분권 및 균형성장에 관한 특별법 제33조제2항 — '포괄적·일괄적으로 이양하기 위하여 필요한 법적 조치를 마련하여야 한다'"
+   }
+  },
+  {
+   "id": "milestone:N36",
+   "type": "Gate",
+   "label": "특자체장 규제특례 투트랙 운영",
+   "status": "inferred",
+   "attrs": {
+    "node_id": "N36",
+    "stage": "G7",
+    "classification": "operation",
+    "lead_actor": "region",
+    "actor_roles": {
+     "lead": [
+      "행정안전부"
+     ],
+     "consult": [],
+     "decision": [
+      "행정안전부장관"
+     ]
+    },
+    "authority": "행정안전부·특별지방자치단체",
+    "activation": "rule",
+    "activation_rule": "RULE_SLG_ESTABLISHED",
+    "activation_resolution": {
+     "mode": "rule",
+     "rule": "RULE_SLG_ESTABLISHED",
+     "equals": true,
+     "parameter": "regionalSlgEstablished",
+     "parameter_status": "unknown",
+     "parameter_value": null,
+     "parameter_reason": "부울경 특별연합 해산 전례가 있어 권역별 특자체 설립 여부는 권역마다 다름",
+     "determined": false
+    },
+    "produces": [
+     "fpts.regulatory_twotrack_live"
+    ],
+    "overlay_status": "planned",
+    "confidence": "modeled",
+    "note": "결정주체: 법정 의결주체 조항 미발견 — 특별지방자치단체의 장에게 규제특례 권한을 부여하는 조항을 지방자치법 제199~211조에서 발견하지 못함"
+   }
+  }
+ ],
+ "relations": [
+  {
+   "id": "R-owns-N01",
+   "type": "owns",
+   "from": "role:balance-committee",
+   "to": "milestone:N01",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-cites-N01-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N01",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-cites-N01-SRC_BALANCE_PAGE",
+   "type": "cites",
+   "from": "milestone:N01",
+   "to": "source:SRC_BALANCE_PAGE",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N02",
+   "type": "owns",
+   "from": "role:balance-committee",
+   "to": "milestone:N02",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-001",
+   "type": "requires",
+   "from": "milestone:N02",
+   "to": "artifact:fpts.strategy_adopted",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-001",
+   "type": "hands_off_to",
+   "from": "milestone:N01",
+   "to": "milestone:N02",
+   "label": "fpts.strategy_adopted",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "fpts.strategy_adopted",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-cites-N02-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N02",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N03",
+   "type": "owns",
+   "from": "role:assembly",
+   "to": "milestone:N03",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-002",
+   "type": "requires",
+   "from": "milestone:N03",
+   "to": "artifact:fpts.strategy_adopted",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-002",
+   "type": "hands_off_to",
+   "from": "milestone:N01",
+   "to": "milestone:N03",
+   "label": "fpts.strategy_adopted",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "fpts.strategy_adopted",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-cites-N03-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N03",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-cites-N03-SRC_LAW_PASSED",
+   "type": "cites",
+   "from": "milestone:N03",
+   "to": "source:SRC_LAW_PASSED",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-cites-N03-SRC_DECENT_LAW",
+   "type": "cites",
+   "from": "milestone:N03",
+   "to": "source:SRC_DECENT_LAW",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N04",
+   "type": "owns",
+   "from": "role:assembly",
+   "to": "milestone:N04",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-003",
+   "type": "requires",
+   "from": "milestone:N04",
+   "to": "artifact:fpts.strategy_adopted",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-003",
+   "type": "hands_off_to",
+   "from": "milestone:N01",
+   "to": "milestone:N04",
+   "label": "fpts.strategy_adopted",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.strategy_adopted",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N04-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N04",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-cites-N04-SRC_LOCAL_AUTONOMY_LAW",
+   "type": "cites",
+   "from": "milestone:N04",
+   "to": "source:SRC_LOCAL_AUTONOMY_LAW",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N05",
+   "type": "owns",
+   "from": "role:assembly",
+   "to": "milestone:N05",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-004",
+   "type": "requires",
+   "from": "milestone:N05",
+   "to": "artifact:fpts.strategy_adopted",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-004",
+   "type": "hands_off_to",
+   "from": "milestone:N01",
+   "to": "milestone:N05",
+   "label": "fpts.strategy_adopted",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.strategy_adopted",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N05-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N05",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N06",
+   "type": "owns",
+   "from": "role:assembly",
+   "to": "milestone:N06",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-005",
+   "type": "requires",
+   "from": "milestone:N06",
+   "to": "artifact:fpts.strategy_adopted",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-005",
+   "type": "hands_off_to",
+   "from": "milestone:N01",
+   "to": "milestone:N06",
+   "label": "fpts.strategy_adopted",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.strategy_adopted",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N06-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N06",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N07",
+   "type": "owns",
+   "from": "role:motie",
+   "to": "milestone:N07",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-006",
+   "type": "requires",
+   "from": "milestone:N07",
+   "to": "artifact:fpts.strategy_adopted",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-006",
+   "type": "hands_off_to",
+   "from": "milestone:N01",
+   "to": "milestone:N07",
+   "label": "fpts.strategy_adopted",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "fpts.strategy_adopted",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-cites-N07-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N07",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-cites-N07-SRC_ENGINE_NEWS",
+   "type": "cites",
+   "from": "milestone:N07",
+   "to": "source:SRC_ENGINE_NEWS",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N08",
+   "type": "owns",
+   "from": "role:whole-government",
+   "to": "milestone:N08",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-007",
+   "type": "requires",
+   "from": "milestone:N08",
+   "to": "artifact:fpts.engine_guideline",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-007",
+   "type": "hands_off_to",
+   "from": "milestone:N07",
+   "to": "milestone:N08",
+   "label": "fpts.engine_guideline",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "fpts.engine_guideline",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-cites-N08-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N08",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-cites-N08-SRC_ENGINE_NEWS",
+   "type": "cites",
+   "from": "milestone:N08",
+   "to": "source:SRC_ENGINE_NEWS",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N09",
+   "type": "owns",
+   "from": "role:balance-committee",
+   "to": "milestone:N09",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-008",
+   "type": "requires",
+   "from": "milestone:N09",
+   "to": "artifact:fpts.engine_investment_plan",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-008",
+   "type": "hands_off_to",
+   "from": "milestone:N08",
+   "to": "milestone:N09",
+   "label": "fpts.engine_investment_plan",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "fpts.engine_investment_plan",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-cites-N09-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N09",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N10",
+   "type": "owns",
+   "from": "role:motie",
+   "to": "milestone:N10",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-009",
+   "type": "requires",
+   "from": "milestone:N10",
+   "to": "artifact:fpts.engine_guideline",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-009",
+   "type": "hands_off_to",
+   "from": "milestone:N07",
+   "to": "milestone:N10",
+   "label": "fpts.engine_guideline",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.engine_guideline",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N10-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N10",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N11",
+   "type": "owns",
+   "from": "role:balance-committee",
+   "to": "milestone:N11",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-010",
+   "type": "requires",
+   "from": "milestone:N11",
+   "to": "artifact:fpts.engine_selected",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY",
+     "SRC_DECENT_LAW",
+     "SRC_BG_ACT_2026_AMEND"
+    ],
+    "note": "초광역특별협약은 2026-06-02 공포 개정법에서 신설된 제도(제31조의2·제31조의3이 이를 전제로 범부처 초광역추진협의체와 권역별 초광역공동사업단을 규정). 기존 제31조 지역발전투자협약과는 별개 제도이며, 지역발전투자협약의 경우 제31조제1항이 \"미리 지방시대위원회의 심의·의결을 거쳐야 한다\"고 정한다."
+   }
+  },
+  {
+   "id": "R-handoff-010",
+   "type": "hands_off_to",
+   "from": "milestone:N09",
+   "to": "milestone:N11",
+   "label": "fpts.engine_selected",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "fpts.engine_selected",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-req-011",
+   "type": "requires",
+   "from": "milestone:N11",
+   "to": "artifact:fpts.governance_ready",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-011",
+   "type": "hands_off_to",
+   "from": "milestone:N02",
+   "to": "milestone:N11",
+   "label": "fpts.governance_ready",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.governance_ready",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-req-012",
+   "type": "requires",
+   "from": "milestone:N11",
+   "to": "artifact:fpts.law_decentralization_amended",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "legal",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-012",
+   "type": "hands_off_to",
+   "from": "milestone:N03",
+   "to": "milestone:N11",
+   "label": "fpts.law_decentralization_amended",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.law_decentralization_amended",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-req-013",
+   "type": "requires",
+   "from": "milestone:N11",
+   "to": "artifact:fpts.mega_account_created",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "financial",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-013",
+   "type": "hands_off_to",
+   "from": "milestone:N30",
+   "to": "milestone:N11",
+   "label": "fpts.mega_account_created",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.mega_account_created",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N11-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N11",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-cites-N11-SRC_LAW_PASSED",
+   "type": "cites",
+   "from": "milestone:N11",
+   "to": "source:SRC_LAW_PASSED",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N12",
+   "type": "owns",
+   "from": "role:msit",
+   "to": "milestone:N12",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-014",
+   "type": "requires",
+   "from": "milestone:N12",
+   "to": "artifact:fpts.strategy_adopted",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-014",
+   "type": "hands_off_to",
+   "from": "milestone:N01",
+   "to": "milestone:N12",
+   "label": "fpts.strategy_adopted",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.strategy_adopted",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N12-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N12",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N13",
+   "type": "owns",
+   "from": "role:motie",
+   "to": "milestone:N13",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-015",
+   "type": "requires",
+   "from": "milestone:N13",
+   "to": "artifact:fpts.special_agreement_signed",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-015",
+   "type": "hands_off_to",
+   "from": "milestone:N11",
+   "to": "milestone:N13",
+   "label": "fpts.special_agreement_signed",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.special_agreement_signed",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-req-016",
+   "type": "requires",
+   "from": "milestone:N13",
+   "to": "artifact:fpts.law_growth_support_enacted",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "legal",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-016",
+   "type": "hands_off_to",
+   "from": "milestone:N06",
+   "to": "milestone:N13",
+   "label": "fpts.law_growth_support_enacted",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.law_growth_support_enacted",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N13-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N13",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N14",
+   "type": "owns",
+   "from": "role:fiscal",
+   "to": "milestone:N14",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-017",
+   "type": "requires",
+   "from": "milestone:N14",
+   "to": "artifact:fpts.strategy_adopted",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-017",
+   "type": "hands_off_to",
+   "from": "milestone:N01",
+   "to": "milestone:N14",
+   "label": "fpts.strategy_adopted",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.strategy_adopted",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N14-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N14",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N15",
+   "type": "owns",
+   "from": "role:fiscal",
+   "to": "milestone:N15",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-018",
+   "type": "requires",
+   "from": "milestone:N15",
+   "to": "artifact:fpts.regional_funds_ready",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "financial",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-018",
+   "type": "hands_off_to",
+   "from": "milestone:N14",
+   "to": "milestone:N15",
+   "label": "fpts.regional_funds_ready",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.regional_funds_ready",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N15-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N15",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-cites-N15-SRC_LOCAL_PUBLIC_ENTERPRISE_ACT",
+   "type": "cites",
+   "from": "milestone:N15",
+   "to": "source:SRC_LOCAL_PUBLIC_ENTERPRISE_ACT",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N16",
+   "type": "owns",
+   "from": "role:moe",
+   "to": "milestone:N16",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-019",
+   "type": "requires",
+   "from": "milestone:N16",
+   "to": "artifact:fpts.strategy_adopted",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-019",
+   "type": "hands_off_to",
+   "from": "milestone:N01",
+   "to": "milestone:N16",
+   "label": "fpts.strategy_adopted",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.strategy_adopted",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N16-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N16",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N17",
+   "type": "owns",
+   "from": "role:moe",
+   "to": "milestone:N17",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-020",
+   "type": "requires",
+   "from": "milestone:N17",
+   "to": "artifact:fpts.talent_system_reformed",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-020",
+   "type": "hands_off_to",
+   "from": "milestone:N16",
+   "to": "milestone:N17",
+   "label": "fpts.talent_system_reformed",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.talent_system_reformed",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N17-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N17",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N18",
+   "type": "owns",
+   "from": "role:molit",
+   "to": "milestone:N18",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-021",
+   "type": "requires",
+   "from": "milestone:N18",
+   "to": "artifact:fpts.special_agreement_signed",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-021",
+   "type": "hands_off_to",
+   "from": "milestone:N11",
+   "to": "milestone:N18",
+   "label": "fpts.special_agreement_signed",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.special_agreement_signed",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N18-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N18",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N19",
+   "type": "owns",
+   "from": "role:molit",
+   "to": "milestone:N19",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-022",
+   "type": "requires",
+   "from": "milestone:N19",
+   "to": "artifact:fpts.strategy_adopted",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-022",
+   "type": "hands_off_to",
+   "from": "milestone:N01",
+   "to": "milestone:N19",
+   "label": "fpts.strategy_adopted",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.strategy_adopted",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N19-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N19",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N20",
+   "type": "owns",
+   "from": "role:region",
+   "to": "milestone:N20",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-023",
+   "type": "requires",
+   "from": "milestone:N20",
+   "to": "artifact:fpts.national_land_plan_revised",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY",
+     "SRC_LAND_FRAMEWORK_ACT"
+    ],
+    "note": "국토기본법 제7조제1항 — \"국토종합계획은 초광역권계획, 도종합계획 및 시·군종합계획의 기본이 되며\""
+   }
+  },
+  {
+   "id": "R-handoff-023",
+   "type": "hands_off_to",
+   "from": "milestone:N19",
+   "to": "milestone:N20",
+   "label": "fpts.national_land_plan_revised",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "fpts.national_land_plan_revised",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-req-024",
+   "type": "requires",
+   "from": "milestone:N20",
+   "to": "artifact:fpts.special_agreement_signed",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-024",
+   "type": "hands_off_to",
+   "from": "milestone:N11",
+   "to": "milestone:N20",
+   "label": "fpts.special_agreement_signed",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.special_agreement_signed",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N20-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N20",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N21",
+   "type": "owns",
+   "from": "role:molit",
+   "to": "milestone:N21",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-025",
+   "type": "requires",
+   "from": "milestone:N21",
+   "to": "artifact:fpts.mega_region_plan",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-025",
+   "type": "hands_off_to",
+   "from": "milestone:N20",
+   "to": "milestone:N21",
+   "label": "fpts.mega_region_plan",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.mega_region_plan",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N21-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N21",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N22",
+   "type": "owns",
+   "from": "role:molit",
+   "to": "milestone:N22",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-026",
+   "type": "requires",
+   "from": "milestone:N22",
+   "to": "artifact:fpts.transport_plan",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "technical",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-026",
+   "type": "hands_off_to",
+   "from": "milestone:N21",
+   "to": "milestone:N22",
+   "label": "fpts.transport_plan",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.transport_plan",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N22-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N22",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N23",
+   "type": "owns",
+   "from": "role:molit",
+   "to": "milestone:N23",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-027",
+   "type": "requires",
+   "from": "milestone:N23",
+   "to": "artifact:fpts.transport_plan",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "technical",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-027",
+   "type": "hands_off_to",
+   "from": "milestone:N21",
+   "to": "milestone:N23",
+   "label": "fpts.transport_plan",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.transport_plan",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N23-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N23",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N24",
+   "type": "owns",
+   "from": "role:whole-government",
+   "to": "milestone:N24",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-028",
+   "type": "requires",
+   "from": "milestone:N24",
+   "to": "artifact:fpts.national_land_plan_revised",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-028",
+   "type": "hands_off_to",
+   "from": "milestone:N19",
+   "to": "milestone:N24",
+   "label": "fpts.national_land_plan_revised",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.national_land_plan_revised",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N24-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N24",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N25",
+   "type": "owns",
+   "from": "role:mohw",
+   "to": "milestone:N25",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-029",
+   "type": "requires",
+   "from": "milestone:N25",
+   "to": "artifact:fpts.strategy_adopted",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-029",
+   "type": "hands_off_to",
+   "from": "milestone:N01",
+   "to": "milestone:N25",
+   "label": "fpts.strategy_adopted",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.strategy_adopted",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N25-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N25",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N26",
+   "type": "owns",
+   "from": "role:mohw",
+   "to": "milestone:N26",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-030",
+   "type": "requires",
+   "from": "milestone:N26",
+   "to": "artifact:fpts.strategy_adopted",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-030",
+   "type": "hands_off_to",
+   "from": "milestone:N01",
+   "to": "milestone:N26",
+   "label": "fpts.strategy_adopted",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.strategy_adopted",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N26-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N26",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N27",
+   "type": "owns",
+   "from": "role:moe",
+   "to": "milestone:N27",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-031",
+   "type": "requires",
+   "from": "milestone:N27",
+   "to": "artifact:fpts.strategy_adopted",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-031",
+   "type": "hands_off_to",
+   "from": "milestone:N01",
+   "to": "milestone:N27",
+   "label": "fpts.strategy_adopted",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.strategy_adopted",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N27-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N27",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N28",
+   "type": "owns",
+   "from": "role:mafra",
+   "to": "milestone:N28",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-032",
+   "type": "requires",
+   "from": "milestone:N28",
+   "to": "artifact:fpts.strategy_adopted",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-032",
+   "type": "hands_off_to",
+   "from": "milestone:N01",
+   "to": "milestone:N28",
+   "label": "fpts.strategy_adopted",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.strategy_adopted",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N28-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N28",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N29",
+   "type": "owns",
+   "from": "role:mafra",
+   "to": "milestone:N29",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-033",
+   "type": "requires",
+   "from": "milestone:N29",
+   "to": "artifact:fpts.strategy_adopted",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-033",
+   "type": "hands_off_to",
+   "from": "milestone:N01",
+   "to": "milestone:N29",
+   "label": "fpts.strategy_adopted",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.strategy_adopted",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N29-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N29",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N30",
+   "type": "owns",
+   "from": "role:fiscal",
+   "to": "milestone:N30",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-034",
+   "type": "requires",
+   "from": "milestone:N30",
+   "to": "artifact:fpts.law_decentralization_amended",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "legal",
+    "basis": [
+     "SRC_STRATEGY",
+     "SRC_DECENT_LAW"
+    ],
+    "note": "같은 법 제74조(특별회계 설치)·제76조(계정의 구분) — 계정 신설·개편은 법률사항"
+   }
+  },
+  {
+   "id": "R-handoff-034",
+   "type": "hands_off_to",
+   "from": "milestone:N03",
+   "to": "milestone:N30",
+   "label": "fpts.law_decentralization_amended",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "fpts.law_decentralization_amended",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-cites-N30-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N30",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-cites-N30-SRC_LAW_PASSED",
+   "type": "cites",
+   "from": "milestone:N30",
+   "to": "source:SRC_LAW_PASSED",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-cites-N30-SRC_BG_ACT_2026_AMEND",
+   "type": "cites",
+   "from": "milestone:N30",
+   "to": "source:SRC_BG_ACT_2026_AMEND",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N31",
+   "type": "owns",
+   "from": "role:fiscal",
+   "to": "milestone:N31",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-035",
+   "type": "requires",
+   "from": "milestone:N31",
+   "to": "artifact:fpts.mega_account_created",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "financial",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-035",
+   "type": "hands_off_to",
+   "from": "milestone:N30",
+   "to": "milestone:N31",
+   "label": "fpts.mega_account_created",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.mega_account_created",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N31-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N31",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-cites-N31-SRC_BUDGET_2026",
+   "type": "cites",
+   "from": "milestone:N31",
+   "to": "source:SRC_BUDGET_2026",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N32",
+   "type": "owns",
+   "from": "role:balance-committee",
+   "to": "milestone:N32",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-036",
+   "type": "requires",
+   "from": "milestone:N32",
+   "to": "artifact:fpts.law_decentralization_amended",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "legal",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-036",
+   "type": "hands_off_to",
+   "from": "milestone:N03",
+   "to": "milestone:N32",
+   "label": "fpts.law_decentralization_amended",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "fpts.law_decentralization_amended",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-cites-N32-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N32",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-cites-N32-SRC_LAW_PASSED",
+   "type": "cites",
+   "from": "milestone:N32",
+   "to": "source:SRC_LAW_PASSED",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-cites-N32-SRC_BG_ACT_2026_AMEND",
+   "type": "cites",
+   "from": "milestone:N32",
+   "to": "source:SRC_BG_ACT_2026_AMEND",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N33",
+   "type": "owns",
+   "from": "role:mois",
+   "to": "milestone:N33",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-037",
+   "type": "requires",
+   "from": "milestone:N33",
+   "to": "artifact:fpts.impact_assessment_live",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-037",
+   "type": "hands_off_to",
+   "from": "milestone:N32",
+   "to": "milestone:N33",
+   "label": "fpts.impact_assessment_live",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.impact_assessment_live",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N33-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N33",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N34",
+   "type": "owns",
+   "from": "role:mois",
+   "to": "milestone:N34",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-038",
+   "type": "requires",
+   "from": "milestone:N34",
+   "to": "artifact:fpts.law_localautonomy_amended",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "legal",
+    "basis": [
+     "SRC_STRATEGY",
+     "SRC_LOCAL_AUTONOMY_LAW"
+    ],
+    "note": "지방자치법 제199조~제211조로 현행법상 설치 가능(규약→구성 지자체 지방의회 의결→행안부장관 승인→고시). N04 개정은 권한 확대를 위한 정책적 전제이지 설치의 법정 선행조건은 아님"
+   }
+  },
+  {
+   "id": "R-handoff-038",
+   "type": "hands_off_to",
+   "from": "milestone:N04",
+   "to": "milestone:N34",
+   "label": "fpts.law_localautonomy_amended",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.law_localautonomy_amended",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-req-039",
+   "type": "requires",
+   "from": "milestone:N34",
+   "to": "artifact:fpts.governance_ready",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "policy",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-039",
+   "type": "hands_off_to",
+   "from": "milestone:N02",
+   "to": "milestone:N34",
+   "label": "fpts.governance_ready",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.governance_ready",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N34-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N34",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-cites-N34-SRC_LOCAL_AUTONOMY_LAW",
+   "type": "cites",
+   "from": "milestone:N34",
+   "to": "source:SRC_LOCAL_AUTONOMY_LAW",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N35",
+   "type": "owns",
+   "from": "role:mois",
+   "to": "milestone:N35",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-040",
+   "type": "requires",
+   "from": "milestone:N35",
+   "to": "artifact:fpts.law_devolution_enacted",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "legal",
+    "basis": [
+     "SRC_STRATEGY",
+     "SRC_DECENT_LAW"
+    ],
+    "note": "같은 법 제33조제2항 — \"포괄적·일괄적으로 이양하기 위하여 필요한 법적 조치를 마련하여야 한다\""
+   }
+  },
+  {
+   "id": "R-handoff-040",
+   "type": "hands_off_to",
+   "from": "milestone:N05",
+   "to": "milestone:N35",
+   "label": "fpts.law_devolution_enacted",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "fpts.law_devolution_enacted",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-req-041",
+   "type": "requires",
+   "from": "milestone:N35",
+   "to": "artifact:fpts.slg_launched",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "legal",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-041",
+   "type": "hands_off_to",
+   "from": "milestone:N34",
+   "to": "milestone:N35",
+   "label": "fpts.slg_launched",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.slg_launched",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N35-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N35",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  },
+  {
+   "id": "R-owns-N36",
+   "type": "owns",
+   "from": "role:region",
+   "to": "milestone:N36",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-req-042",
+   "type": "requires",
+   "from": "milestone:N36",
+   "to": "artifact:fpts.slg_launched",
+   "label": "finish_to_start",
+   "condition": "hard",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "hard",
+    "kind": "legal",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-042",
+   "type": "hands_off_to",
+   "from": "milestone:N34",
+   "to": "milestone:N36",
+   "label": "fpts.slg_launched",
+   "condition": "hard",
+   "attrs": {
+    "artifact": "fpts.slg_launched",
+    "relation": "finish_to_start",
+    "strength": "hard"
+   }
+  },
+  {
+   "id": "R-req-043",
+   "type": "requires",
+   "from": "milestone:N36",
+   "to": "artifact:fpts.law_devolution_enacted",
+   "label": "finish_to_start",
+   "condition": "soft",
+   "attrs": {
+    "relation": "finish_to_start",
+    "strength": "soft",
+    "kind": "legal",
+    "basis": [
+     "SRC_STRATEGY"
+    ],
+    "note": null
+   }
+  },
+  {
+   "id": "R-handoff-043",
+   "type": "hands_off_to",
+   "from": "milestone:N05",
+   "to": "milestone:N36",
+   "label": "fpts.law_devolution_enacted",
+   "condition": "soft",
+   "attrs": {
+    "artifact": "fpts.law_devolution_enacted",
+    "relation": "finish_to_start",
+    "strength": "soft"
+   }
+  },
+  {
+   "id": "R-cites-N36-SRC_STRATEGY",
+   "type": "cites",
+   "from": "milestone:N36",
+   "to": "source:SRC_STRATEGY",
+   "label": null,
+   "condition": null
+  }
+ ],
+ "states": [
+  {
+   "id": "S-case",
+   "entity_id": "case:FPTS-2026-0901-001",
+   "state": "planning",
+   "as_of": "2026-08-19",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "mega-project overlay"
+   }
+  },
+  {
+   "id": "S-N01",
+   "entity_id": "milestone:N01",
+   "state": "done",
+   "as_of": "2025-09-30",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "SRC_STRATEGY, SRC_BALANCE_PAGE",
+    "note": "완료일 근거: 5극3특 국가균형성장 추진전략 설계도 발행·지방시대위 의결(SRC_STRATEGY)"
+   }
+  },
+  {
+   "id": "S-N02",
+   "entity_id": "milestone:N02",
+   "state": "in_progress",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "SRC_STRATEGY",
+    "note": "범부처 초광역추진협의체는 2026-06-02 공포 개정법 제31조의2로 신설되어 지방시대위원회에 둔다. 「국가자치분권균형성장회의」로의 회의체 개편은 현행·개정 조문 모두에서 확인되지 않음(제62조는 대통령 소속 「지방시대위원회」). / 결정주체: 근거 같은 법 제31조의2(신설)"
+   }
+  },
+  {
+   "id": "S-N03",
+   "entity_id": "milestone:N03",
+   "state": "done",
+   "as_of": "2026-06-02",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_STRATEGY, SRC_LAW_PASSED, SRC_DECENT_LAW",
+    "note": "완료일 근거: 지방자치분권 및 균형성장에 관한 특별법 일부개정법률 공포"
+   }
+  },
+  {
+   "id": "S-N04",
+   "entity_id": "milestone:N04",
+   "state": "in_progress",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_STRATEGY, SRC_LOCAL_AUTONOMY_LAW"
+   }
+  },
+  {
+   "id": "S-N05",
+   "entity_id": "milestone:N05",
+   "state": "in_progress",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_STRATEGY"
+   }
+  },
+  {
+   "id": "S-N06",
+   "entity_id": "milestone:N06",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_STRATEGY"
+   }
+  },
+  {
+   "id": "S-N07",
+   "entity_id": "milestone:N07",
+   "state": "done",
+   "as_of": "2025-12-08",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "SRC_STRATEGY, SRC_ENGINE_NEWS",
+    "note": "결정주체: 법정 의결주체 조항 미발견 — 법정 의결 주체 조항 없음 — 소관 부처 행정지침 · 완료일은 근거 정책브리핑(SRC_ENGINE_NEWS, 2025-12-08) 등록일 기준이며 가이드라인 수립일을 밝힌 원문은 확인되지 않았다"
+   }
+  },
+  {
+   "id": "S-N08",
+   "entity_id": "milestone:N08",
+   "state": "in_progress",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "SRC_STRATEGY, SRC_ENGINE_NEWS",
+    "note": "결정주체: 법정 의결주체 조항 미발견 — 법정 의결 주체 조항 없음 — 범부처 협의로 확정"
+   }
+  },
+  {
+   "id": "S-N09",
+   "entity_id": "milestone:N09",
+   "state": "path_undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "SRC_STRATEGY",
+    "note": "설계도상 '26.3 의결 일정 — 실제 의결 여부는 공개자료 확인 필요"
+   }
+  },
+  {
+   "id": "S-N10",
+   "entity_id": "milestone:N10",
+   "state": "in_progress",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "SRC_STRATEGY",
+    "note": "결정주체: 근거 지방자치분권 및 균형성장에 관한 특별법 제30조 — 제30조는 '국가와 지방자치단체는 … 추진할 수 있다'는 재량 조항 — 특정 의결주체를 정하지 않음"
+   }
+  },
+  {
+   "id": "S-N11",
+   "entity_id": "milestone:N11",
+   "state": "in_progress",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_STRATEGY, SRC_LAW_PASSED"
+   }
+  },
+  {
+   "id": "S-N12",
+   "entity_id": "milestone:N12",
+   "state": "in_progress",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_STRATEGY",
+    "note": "결정주체: 근거 국가재정법 제38조제1항"
+   }
+  },
+  {
+   "id": "S-N13",
+   "entity_id": "milestone:N13",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_STRATEGY",
+    "note": "결정주체: 근거 지방자치분권 및 균형성장에 관한 특별법 제23조제2항 — 기회발전특구는 산업통상부장관이 지방시대위원회 심의·의결을 거쳐 지정 — '메가특구'는 신설 개념이라 법령 정비 필요"
+   }
+  },
+  {
+   "id": "S-N14",
+   "entity_id": "milestone:N14",
+   "state": "in_progress",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "SRC_STRATEGY",
+    "note": "결정주체: 법정 의결주체 조항 미발견 — 법정 의결 주체 조항 미발견 — 펀드 조성 근거법 확인 필요"
+   }
+  },
+  {
+   "id": "S-N15",
+   "entity_id": "milestone:N15",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_STRATEGY, SRC_LOCAL_PUBLIC_ENTERPRISE_ACT",
+    "note": "설립 형태 미확정 — 지방공사 형태라면 지방공기업법 제49조(행안부장관 협의·조례 제정·전문기관 타당성 검토)로 가능하며 국회 입법이 필요 없다. 별도 특별법 법인이라면 입법 경로. 두 경로를 모두 후보로 병기함(authority가 금융위·산업통상부로 기재돼 있어 지방공사 여부가 불분명)."
+   }
+  },
+  {
+   "id": "S-N16",
+   "entity_id": "milestone:N16",
+   "state": "in_progress",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "SRC_STRATEGY",
+    "note": "결정주체: 근거 지방대학 및 지역균형인재 육성에 관한 법률 제6조의2"
+   }
+  },
+  {
+   "id": "S-N17",
+   "entity_id": "milestone:N17",
+   "state": "in_progress",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_STRATEGY",
+    "note": "결정주체: 근거 산업교육진흥 및 산학연협력촉진에 관한 법률 제8조제2항 — 계약학과 설치·운영계획은 산업교육기관의 장이 교육부장관에게 신고"
+   }
+  },
+  {
+   "id": "S-N18",
+   "entity_id": "milestone:N18",
+   "state": "in_progress",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "SRC_STRATEGY",
+    "note": "결정주체: 법정 의결주체 조항 미발견 — 법정 의결 주체 조항 없음 — 공모·선정 방식"
+   }
+  },
+  {
+   "id": "S-N19",
+   "entity_id": "milestone:N19",
+   "state": "path_undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_STRATEGY",
+    "note": "결정주체: 근거 국토기본법 제12조제1항 — 국토교통부장관이 국토정책위원회와 국무회의 심의를 거쳐 대통령의 승인을 받음"
+   }
+  },
+  {
+   "id": "S-N20",
+   "entity_id": "milestone:N20",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_STRATEGY",
+    "note": "결정주체: 근거 지방자치분권 및 균형성장에 관한 특별법 제9조제1항 · 국토기본법 제12조의2제3항 — 초광역권발전계획은 지방시대위원회 심의·의결, 초광역권계획은 국토교통부장관 승인(제15조 준용)"
+   }
+  },
+  {
+   "id": "S-N21",
+   "entity_id": "milestone:N21",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "SRC_STRATEGY",
+    "note": "결정주체: 근거 대중교통의 육성 및 이용촉진에 관한 법률 제5조제1항"
+   }
+  },
+  {
+   "id": "S-N22",
+   "entity_id": "milestone:N22",
+   "state": "in_progress",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_STRATEGY",
+    "note": "철도의 건설 및 철도시설 유지관리에 관한 법률 제4조제2항제1호 — 국가철도망구축계획은 「지방자치분권 및 균형성장에 관한 특별법」 제6조 지방시대 종합계획과 조화를 이루어야 한다. 법정 선행은 N21(권역별 60분 대중교통망계획)이 아니라 이 종합계획이며, 해당 법정계획은 현재 이 프로젝트에 관문으로 등재돼 있지 않다. / 결정주체: 근거 철도의 건설 및 철도시설 유지관리에 관한 법률 제4조제1항 — 국가철도망구축계획은 제4조제2항제1호에 따라 지방시대 종합계획과 조화를 이루어야 함"
+   }
+  },
+  {
+   "id": "S-N23",
+   "entity_id": "milestone:N23",
+   "state": "in_progress",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_STRATEGY",
+    "note": "결정주체: 근거 공항시설법 제3조제1항"
+   }
+  },
+  {
+   "id": "S-N24",
+   "entity_id": "milestone:N24",
+   "state": "in_progress",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "SRC_STRATEGY",
+    "note": "공공기관 2차 이전은 '26년 이전계획 확정, '27년 선도이전 일정 — 행정수도·새만금 트랙은 별도 제도 매핑 필요 / 결정주체: 근거 지방자치분권 및 균형성장에 관한 특별법 제25조제1항 — '정부는 … 혁신도시시책을 추진하여야 한다'"
+   }
+  },
+  {
+   "id": "S-N25",
+   "entity_id": "milestone:N25",
+   "state": "in_progress",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_STRATEGY",
+    "note": "결정주체: 근거 공공보건의료에 관한 법률 제4조제1항"
+   }
+  },
+  {
+   "id": "S-N26",
+   "entity_id": "milestone:N26",
+   "state": "done",
+   "as_of": "2026-03-27",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_STRATEGY",
+    "note": "돌봄통합지원법 '26.3 전국 시행 / 결정주체: 근거 의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률 제5조 / 완료일 근거: 의료ㆍ요양 등 지역 돌봄의 통합지원에 관한 법률 시행"
+   }
+  },
+  {
+   "id": "S-N27",
+   "entity_id": "milestone:N27",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "SRC_STRATEGY",
+    "note": "결정주체: 근거 교육국제화특구의 지정ㆍ운영 및 육성에 관한 특별법 제4조제1항 — 시·도지사와 교육감의 공동 요청 + 교육국제화특구위원회 심의를 거쳐 교육부장관이 지정"
+   }
+  },
+  {
+   "id": "S-N28",
+   "entity_id": "milestone:N28",
+   "state": "in_progress",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "SRC_STRATEGY",
+    "note": "인구감소지역 시범('26, 24만명·0.2조) 및 (가칭)농어촌기본소득법 제정 ~'26"
+   }
+  },
+  {
+   "id": "S-N29",
+   "entity_id": "milestone:N29",
+   "state": "in_progress",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_STRATEGY",
+    "note": "결정주체: 근거 농촌공간 재구조화 및 재생지원에 관한 법률 제6조"
+   }
+  },
+  {
+   "id": "S-N30",
+   "entity_id": "milestone:N30",
+   "state": "done",
+   "as_of": "2026-06-02",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_STRATEGY, SRC_LAW_PASSED, SRC_BG_ACT_2026_AMEND",
+    "note": "초광역특별계정은 2026-06-02 공포 개정법 제76조로 신설됨(\"제주특별자치도계정 및 세종특별자치시계정\"을 \"…및 초광역특별계정\"으로 개정). 시행일이 단계적이라(초광역특별계정 2027-01-01 적용) 2026-07-01 시행 현행 조문에는 아직 4계정만 표시된다 — 입법은 완료, 시행 대기. / 결정주체: 근거 지방자치분권 및 균형성장에 관한 특별법 제76조(개정) / 완료일 근거: 같은 개정법 제76조 초광역특별계정 신설 공포(시행 대기)"
+   }
+  },
+  {
+   "id": "S-N31",
+   "entity_id": "milestone:N31",
+   "state": "done",
+   "as_of": "2025-12-02",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "SRC_STRATEGY, SRC_BUDGET_2026",
+    "note": "결정주체: 근거 국가재정법 제32조·제33조 — 예산 편성은 정부, 확정은 국회 의결 / 완료일 근거: 2026년도 예산안 국회 본회의 의결(2025-12-02). 다만 국회예산정책처 분석은 2026년 포괄보조를 사업 120개·약 10.1조원으로 집계해 이 관문의 표기(10.6조·121개)와 차이가 있어 수치 재확인이 필요하다."
+   }
+  },
+  {
+   "id": "S-N32",
+   "entity_id": "milestone:N32",
+   "state": "in_progress",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_STRATEGY, SRC_LAW_PASSED, SRC_BG_ACT_2026_AMEND",
+    "note": "균형성장영향평가는 2026-06-02 공포 개정법 제11조의3으로 신설됨 — 중앙행정기관의 장이 지방시대위원회가 선정한 정책·사업에 대해 평가를 실시하고 결과를 지방시대위원회에 제출. 시행 대기(공포 6개월 후인 2026-12-03 시행). / 결정주체: 근거 같은 법 제11조의3(신설)"
+   }
+  },
+  {
+   "id": "S-N33",
+   "entity_id": "milestone:N33",
+   "state": "in_progress",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "SRC_STRATEGY",
+    "note": "결정주체: 법정 의결주체 조항 미발견 — 차등지원 제도화의 법정 근거 조항 미발견"
+   }
+  },
+  {
+   "id": "S-N34",
+   "entity_id": "milestone:N34",
+   "state": "in_progress",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_STRATEGY, SRC_LOCAL_AUTONOMY_LAW",
+    "note": "부울경 특별연합 해산 전례 — 미설립 권역은 연합체에 사업단 구성"
+   }
+  },
+  {
+   "id": "S-N35",
+   "entity_id": "milestone:N35",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_STRATEGY",
+    "note": "결정주체: 근거 지방자치분권 및 균형성장에 관한 특별법 제33조제2항 — '포괄적·일괄적으로 이양하기 위하여 필요한 법적 조치를 마련하여야 한다'"
+   }
+  },
+  {
+   "id": "S-N36",
+   "entity_id": "milestone:N36",
+   "state": "pending",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "proxy",
+    "source": "SRC_STRATEGY",
+    "note": "결정주체: 법정 의결주체 조항 미발견 — 특별지방자치단체의 장에게 규제특례 권한을 부여하는 조항을 지방자치법 제199~211조에서 발견하지 못함"
+   }
+  }
+ ],
+ "rules": [],
+ "action_packets": [],
+ "demo_queries": [],
+ "notes": [
+  "구조 층은 파생물이다. 오버레이(web/data/mega-projects)를 고치면 이 파일도 다시 파생해야 한다.",
+  "참조 제도의 준비도는 Institution 엔티티의 attrs.readiness_level에 있다. R2가 아니면 다음 행동을 계산하지 않는다.",
+  "mappingStatus가 candidate인 참조는 적용 후보일 뿐 확정된 요건이 아니다."
+ ]
+}
