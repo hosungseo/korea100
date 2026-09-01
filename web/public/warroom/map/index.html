@@ -269,6 +269,12 @@ body.dragging { cursor: col-resize; user-select: none; }
 /* ── canvas ── */
 #canvas { position: relative; transform-origin: 0 0; }
 #edges { position: absolute; inset: 0; overflow: visible; z-index: 1; }
+#edges-top { position: absolute; inset: 0; overflow: visible; z-index: 4; pointer-events: none; }
+#edges-top path.wait {
+  fill: none; stroke: var(--rose); stroke-width: 2.4;
+  stroke-dasharray: 7 5; animation: waitflow 0.9s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(255,107,138,0.75));
+}
 #edges path { fill: none; transition: opacity 0.25s, stroke 0.25s; }
 #edges path.e { stroke: rgba(56,198,244,0.16); stroke-width: 1.1; }
 #edges path.e.soft { stroke-dasharray: 4 4; }
@@ -430,6 +436,51 @@ body.mode-risk #narration ol li::before { border-color: var(--rose); color: var(
 
 /* 온톨로지 층 — 다음 행동 계산 가능 관문 */
 .node.ont-ok { box-shadow: inset 0 0 0 1px rgba(56,198,244,0.4); }
+
+/* ── 관심층(결재선) — 온톨로지 attentionView가 계산한 층과 사유 ──
+   총리·국무위원 층 카드는 금색 왼쪽 레일 + 사유 배지. 층은 손으로 고른 것이
+   아니라 결정 위상×개폐×의존 그래프에서 매번 계산되므로, 상태가 바뀌면 레일도
+   옮겨간다. 평시엔 은은하게, 총리 브리핑 모드에선 그 카드만 남기고 나머지를 접는다. */
+.node.att-cabinet { border-left: 3px solid rgba(255,215,106,0.55); }
+.node .att { display: flex; flex-wrap: wrap; gap: 3px; margin: 3px 0 1px; }
+.node .att span {
+  font-family: var(--mono); font-size: 7.5px; letter-spacing: 0.04em; line-height: 1;
+  padding: 2px 4px; border-radius: 3px; border: 1px solid;
+}
+.node .att .a-dec { color: var(--gold); border-color: rgba(255,215,106,0.5); }
+.node .att .a-pol { color: var(--gold); border-color: rgba(255,215,106,0.35); }
+.node .att .a-wait { color: #ffb3c2; border-color: rgba(255,107,138,0.7); background: rgba(255,107,138,0.10); }
+.node .att .a-gate { color: var(--amber); border-color: rgba(255,176,32,0.55); }
+.node .att .a-lev { color: var(--cyan); border-color: rgba(56,198,244,0.45); }
+/* 물림의 반대편 — 다른 부처가 기다리는 산출물을 지금 쥐고 있는 카드 */
+.node.att-holds { border-color: rgba(255,107,138,0.75) !important; }
+.node .att.hold .a-hold { color: #ffb3c2; border-color: rgba(255,107,138,0.7); background: rgba(255,107,138,0.14); }
+/* 브리핑 모드: 총리 층 = 금색 레일 강조, 기관장 층 = 점선 반투명(ext), 실무 = 접힘 */
+body.mode-pm #canvas .node.on.att-cabinet {
+  border-left-color: var(--gold);
+  box-shadow: -4px 0 14px -6px rgba(255,215,106,0.55), 0 0 0 1px rgba(255,215,106,0.45), 0 0 16px rgba(255,215,106,0.15);
+}
+body.mode-pm #canvas .node.on.att-wait { border-color: rgba(255,107,138,0.7); }
+body.mode-pm #canvas .node.on .att span { font-size: 8px; }
+/* 다부처 물림 엣지 — 다른 부처 손에 있는 산출물을 기다리는 선. 붉은 점선이 흐른다. */
+#edges path.e.wait {
+  stroke: var(--rose); stroke-width: 2.2; opacity: 1;
+  stroke-dasharray: 7 5; animation: waitflow 0.9s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(255,107,138,0.7));
+}
+@keyframes waitflow { to { stroke-dashoffset: -12; } }
+.group .gcab {
+  position: absolute; top: 9px; right: 44px; font-family: var(--mono); font-size: 9px;
+  color: var(--gold); letter-spacing: 0.04em;
+}
+#narration .attrow { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 2px; }
+#narration .attrow span { font-family: var(--mono); font-size: 8px; padding: 1px 4px; border-radius: 3px; border: 1px solid; }
+#narration .funnel {
+  font-family: var(--mono); font-size: 9.5px; color: var(--muted); letter-spacing: 0.04em;
+  margin: 2px 0 8px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap;
+}
+#narration .funnel b { color: var(--gold); font-size: 12px; }
+#narration .funnel .arr { color: rgba(95,123,144,0.6); }
 .ontb { margin-left: 4px; font-size: 9px; }
 .r2b { font-family: var(--mono); font-size: 8px; color: #04121c; background: var(--cyan); border-radius: 3px; padding: 0 3px; margin-left: 2px; vertical-align: 1px; }
 .unrb { font-family: var(--mono); font-size: 8px; color: var(--muted); border: 1px solid rgba(95,123,144,0.5); border-radius: 3px; padding: 0 3px; margin-left: 2px; vertical-align: 1px; }
@@ -465,6 +516,8 @@ body.mode-risk #narration ol li::before { border-color: var(--rose); color: var(
     <span><span class="sw" style="background:var(--rose)"></span>미확정</span>
     <span><span class="ln"></span>필수 의존</span>
     <span><span class="ln soft"></span>참조 의존</span>
+    <span title="온톨로지가 계산한 총리·국무위원 층 — 정책·거버넌스 / 중앙 결정선 / 다부처 물림 / 배타 분기 / 고지렛대"><span class="sw" style="background:transparent;border-left:3px solid var(--gold);width:6px;border-radius:0"></span>총리 층</span>
+    <span title="막혀 있고, 막는 산출물이 다른 중앙부처 손에 지금 있음"><span class="ln" style="border-top:2px dashed var(--rose)"></span>다부처 물림</span>
     <span id="hint" style="opacity:.7">노드 클릭 = 상·하류 고정 · ESC/배경 = 해제 · 숫자키 1~9 = 칩 전환 · W = 워게임</span>
     <button id="wargame-btn" class="chip" title="관문을 클릭해 '풀렸다고 가정'을 켜고 끄면 전선·진행률·브리핑이 실시간 재계산됩니다">⚔ 워게임</button>
     <span id="wg-status" class="mono" hidden>가정 완료 <b id="wg-count" style="color:var(--green)">0</b>건
@@ -491,6 +544,8 @@ body.mode-risk #narration ol li::before { border-color: var(--rose); color: var(
     </defs>
     <g id="epaths"></g>
   </svg>
+  <!-- 카드 위에 얹는 층 — 다부처 물림 선은 인접 카드 사이에 묻히므로 위로 올린다 -->
+  <svg id="edges-top"><g id="etop"></g></svg>
 </div></div>
 
 <div id="splitbar" title="드래그: 좌우 비율 조절 · 더블클릭: 초기화"></div>
@@ -638,17 +693,18 @@ function build() {
     const nodes = DATA.nodes.filter((n) => n.stage === s.id);
     const done = nodes.filter((n) => n.status === "completed").length;
     const act = nodes.filter((n) => n.status === "active").length;
-    g.innerHTML = `<span class="glabel">${s.id} ${s.label}</span><span class="gcount">${done}/${nodes.length}</span>
+    const cabN = nodes.filter((n) => n.attention?.tier === "cabinet").length;
+    g.innerHTML = `<span class="glabel">${s.id} ${s.label}</span>${cabN ? `<span class="gcab" title="총리·국무위원 층 관문">🏛 ${cabN}</span>` : ""}<span class="gcount">${done}/${nodes.length}</span>
       <span class="gprog"><i style="width:${(done / nodes.length) * 100}%;background:var(--green)"></i><i style="width:${(act / nodes.length) * 100}%;background:var(--amber)"></i></span>
       <div class="nodes"></div>`;
     const wrap = g.querySelector(".nodes");
     for (const n of nodes) {
       const el = document.createElement("article");
-      el.className = "node st-" + n.status + (n.computable ? " ont-ok" : ""); el.id = "nd-" + n.id;
+      el.className = "node st-" + n.status + (n.computable ? " ont-ok" : "") + attClasses(n); el.id = "nd-" + n.id;
       const sig = SIGNALS?.byGate?.[n.id];
       const sigCls = !sig ? "" : sig.some((a) => a.kind === "risk") ? " k-r" : sig.some((a) => a.kind === "decision") ? " k-d" : "";
       el.innerHTML = `<div class="nid">${n.id} · ${(CLASS_KO[n.classification] || n.classification)}${n.computable ? `<span class="ontb" title="참조 제도 전부 R2 — 온톨로지가 다음 행동을 계산할 수 있는 관문">🧭</span>` : ""}${sig ? `<span class="sigb${sigCls}">📡${sig.length}</span>` : ""}</div>
-        <div class="nname">${n.name}</div>
+        <div class="nname">${n.name}</div>${attBadges(n)}
         <div class="nmeta"><span class="dot"></span><span>${n.authority || "-"}</span><span style="margin-left:auto">${STATUS_KO[n.status]}</span></div>`;
       el.addEventListener("mouseenter", () => { if (!pinnedId) showDetail(n); });
       el.addEventListener("click", (ev) => {
@@ -921,6 +977,24 @@ function render() {
   document.body.classList.toggle("mode-risk", !!sc.risk && !currentLevel);
   document.body.classList.toggle("mode-pm", !!sc.pmbrief);
   let set = null, ext = new Set();
+  if (sc.pmbrief && hasAttention()) {
+    // 온톨로지가 계산한 관심층. 정적 위상(level)이 아니라 상태의 함수다.
+    const cab = DATA.nodes.filter((n) => n.attention?.tier === "cabinet").map((n) => n.id);
+    const agency = DATA.nodes.filter((n) => n.attention?.tier === "agency").map((n) => n.id);
+    set = new Set(cab);
+    if (currentLevel) set = tierFilter(set);
+    const waitEdges = new Map();
+    for (const id of set) {
+      for (const r of cabinetReasons(nodeById[id]).filter((x) => x.code === "cross_ministry_wait")) {
+        const w = (r.evidence.match(/← (N\d+)/) || [])[1];
+        if (w && nodeById[w]) waitEdges.set(w + ">" + id, r.evidence.replace(/^artifact:/, "").split(" ←")[0]);
+      }
+    }
+    ext = new Set(agency.filter((id) => !set.has(id)));
+    applyHighlight(set, null, false, ext, null, waitEdges);
+    renderAttentionNarration(cab, set);
+    return;
+  }
   if (sc.pmbrief) {
     const cab = DATA.nodes.filter((n) => n.level === "cabinet").map((n) => n.id);
     const front = frontier();
@@ -1041,6 +1115,88 @@ function blockers() {
       return { id: n.id, blocked };
     })
     .sort((a, b) => b.blocked - a.blocked);
+}
+
+// ── 관심층 — 온톨로지 attentionView 결과(data.json nodes[].attention) ──
+const ATT_REASON = {
+  policy_or_governance: { ko: "정책·거버넌스", cls: "a-pol" },
+  central_decision: { ko: "총리 테이블", cls: "a-dec" },
+  cross_ministry_wait: { ko: "다부처 물림", cls: "a-wait" },
+  exclusive_branch_gate: { ko: "갈림길", cls: "a-gate" },
+  high_leverage_open: { ko: "지렛대", cls: "a-lev" },
+};
+function cabinetReasons(n) {
+  return (n.attention?.reasons ?? []).filter((r) => r.tier === "cabinet");
+}
+function attClasses(n) {
+  if (!n.attention) return "";
+  let c = " att-" + n.attention.tier;
+  if (cabinetReasons(n).some((r) => r.code === "cross_ministry_wait")) c += " att-wait";
+  return c;
+}
+function attBadges(n) {
+  if (n.attention?.tier !== "cabinet") return "";
+  const seen = new Set();
+  const tags = [];
+  for (const r of cabinetReasons(n)) {
+    if (seen.has(r.code)) continue; seen.add(r.code);
+    const m = ATT_REASON[r.code]; if (!m) continue;
+    const txt = r.code === "high_leverage_open" ? `▼${n.attention.reach} ${m.ko}` : m.ko;
+    tags.push(`<span class="${m.cls}" title="${(r.evidence || "").replace(/"/g, "&quot;")}">${txt}</span>`);
+  }
+  return tags.length ? `<div class="att">${tags.join("")}</div>` : "";
+}
+// "artifact:x ← N20(whole-government, path_undetermined)" → 기다리는 상류 관문 ID
+function waitSources(n) {
+  return cabinetReasons(n)
+    .filter((r) => r.code === "cross_ministry_wait")
+    .map((r) => (r.evidence.match(/← (N\d+)/) || [])[1])
+    .filter((id) => id && nodeById[id]);
+}
+function hasAttention() { return DATA.nodes.some((n) => n.attention); }
+
+// 브리핑 순서: 다른 부처를 기다리는 것 → 사업이 정할 갈림길 → 총리 테이블 결정 →
+// 정책·거버넌스 → 지렛대. 급한 순이 아니라 "총리가 풀 수 있는 것" 순이다.
+const ATT_ORDER = ["cross_ministry_wait", "exclusive_branch_gate", "central_decision", "policy_or_governance", "high_leverage_open"];
+function renderAttentionNarration(cab, set) {
+  const n = $("#narr-body");
+  const A = DATA.meta?.attention ?? null;
+  const procs = DATA.nodes.reduce((s, x) => s + (x.procs || 0), 0);
+  const rows = cab.map((id) => nodeById[id]);
+  const groups = ATT_ORDER.map((code) => ({
+    code,
+    ids: rows.filter((x) => cabinetReasons(x).some((r) => r.code === code)
+      && !ATT_ORDER.slice(0, ATT_ORDER.indexOf(code)).some((prev) => cabinetReasons(x).some((r) => r.code === prev)))
+      .sort((a, b) => (b.attention.reach ?? 0) - (a.attention.reach ?? 0)).map((x) => x.id),
+  })).filter((g) => g.ids.length);
+  const TITLE = {
+    cross_ministry_wait: "다른 부처 손에 있는 것 — 총리가 풀어야 도는 선",
+    exclusive_branch_gate: "사업이 정해야 열리는 갈림길",
+    central_decision: "총리 테이블 결정 — 위원장·국무회의·국회",
+    policy_or_governance: "정책·거버넌스",
+    high_leverage_open: "지금 열려 있고 하류가 긴 관문",
+  };
+  const li = (id) => {
+    const x = nodeById[id];
+    const waits = waitSources(x);
+    return `<li data-nodes="${[id, ...waits].join(",")}">${x.name}
+      <span class="mono" style="color:var(--muted);font-size:9px">${id} · ${effLabel(id)} · 하류 ${x.attention.reach}</span>
+      <div class="attrow">${cabinetReasons(x).map((r) => {
+        const m = ATT_REASON[r.code]; if (!m) return "";
+        const ev = r.code === "cross_ministry_wait" ? ` ← ${waits.map((w) => `${w} ${nodeById[w].name}`).join(", ")}` : "";
+        return `<span class="${m.cls}" style="border-color:currentColor">${m.ko}${ev}</span>`;
+      }).join("")}</div></li>`;
+  };
+  const f = (ids) => ids.filter((id) => set.has(id));
+  n.innerHTML = `<h3 style="color:var(--gold)">총리 브리핑 — 관심층</h3>
+    <div class="funnel">관문 ${DATA.nodes.length} <span class="arr">→</span> 절차 ${procs.toLocaleString()}단계 <span class="arr">→</span> 총리 책상 <b>${cab.length}</b>${A ? ` <span class="arr">·</span> 기관장 ${A.agency} · 실무·완료 ${A.working}` : ""}</div>
+    ${groups.map((g) => f(g.ids).length ? `<div class="pmsec">${TITLE[g.code]} · ${f(g.ids).length}건</div><ol>${f(g.ids).map(li).join("")}</ol>` : "").join("")}
+    <p style="color:var(--muted);font-size:10px;margin-top:8px">층은 손으로 고른 목록이 아니라 결정 위상×개폐×의존 그래프에서 매번 다시 계산됩니다. 점선 카드는 기관장 층, 접힌 카드는 실무·완료입니다.</p>`;
+  n.querySelectorAll("li").forEach((el) => {
+    const ids = el.dataset.nodes.split(",");
+    el.addEventListener("mouseenter", () => ids.forEach((i) => document.getElementById("nd-" + i)?.classList.add("flash")));
+    el.addEventListener("mouseleave", () => ids.forEach((i) => document.getElementById("nd-" + i)?.classList.remove("flash")));
+  });
 }
 
 function renderPmNarration(cab, front, risky, set) {
@@ -1335,14 +1491,17 @@ function renderBlockerNarration(top, set) {
   bindFlash(n);
 }
 
-function applyHighlight(set, target, risk, ext, pathEdges) {
+function applyHighlight(set, target, risk, ext, pathEdges, waitEdges) {
   ext = ext || new Set();
+  waitEdges = waitEdges || new Map();
+  const etop = $("#etop"); etop.innerHTML = "";
+  document.querySelectorAll("#canvas .node.att-holds").forEach((el) => { el.classList.remove("att-holds"); el.querySelector(".att.hold")?.remove(); });
   const dim = !!set;
   const members = dim ? new Set([...set, ...ext]) : new Set();
   const depth = dim ? cascadeDepths(members) : {};
   // strip then force reflow so the cascade replays on every selection
   document.querySelectorAll("#canvas .node.on").forEach((el) => el.classList.remove("on"));
-  for (const p of edgeEls) { p.classList.remove("on"); p._pulse.classList.remove("on"); }
+  for (const p of edgeEls) { p.classList.remove("on", "wait"); p._pulse.classList.remove("on"); }
   void document.body.offsetWidth;
   document.body.classList.toggle("dimmed", dim);
   document.querySelectorAll("#canvas .node").forEach((el) => {
@@ -1364,6 +1523,24 @@ function applyHighlight(set, target, risk, ext, pathEdges) {
       ? pathEdges.has(from + ">" + to)
       : !!(dim && !risk && set.has(to) && (set.has(from) || ext.has(from)));
     const riskOn = !!(dim && risk && (set.has(from) || set.has(to)));
+    const waitOn = waitEdges.has(from + ">" + to);
+    p.classList.toggle("wait", waitOn);
+    if (waitOn) {
+      // 카드 위 층에 복제 — 인접 카드 사이의 짧은 선도 보이게. 중간점에 산출물 이름.
+      const c = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      c.setAttribute("d", p.getAttribute("d")); c.setAttribute("class", "wait");
+      c.setAttribute("marker-end", "url(#arr-risk)");
+      etop.appendChild(c);
+      // 산출물 이름은 선 위에 쓰지 않는다 — 인접 카드 사이 선이 짧아 카드 본문과 겹친다.
+      // 쥐고 있는 카드의 배지가 그 말을 한다.
+      const holder = document.getElementById("nd-" + from);
+      if (holder) {
+        holder.classList.add("att-holds");
+        const b = document.createElement("div"); b.className = "att hold";
+        b.innerHTML = `<span class="a-hold" title="${(waitEdges.get(from + ">" + to) || "").replace(/"/g, "&quot;")}">쥐고 있음 → ${to} 기다림 · ${waitEdges.get(from + ">" + to) || ""}</span>`;
+        holder.querySelector(".nmeta")?.before(b);
+      }
+    }
     p.classList.toggle("on", on);
     p.classList.toggle("risk-on", riskOn);
     p._pulse.classList.toggle("on", on);
@@ -1377,7 +1554,7 @@ function applyHighlight(set, target, risk, ext, pathEdges) {
       p._pulse.style.removeProperty("--d");
     }
     const hot = document.body.classList.contains("mode-pm") ? "url(#arr-gold)" : "url(#arr-hot)";
-    p.setAttribute("marker-end", on ? hot : riskOn ? "url(#arr-risk)" : "url(#arr-dim)");
+    p.setAttribute("marker-end", waitOn ? "url(#arr-risk)" : on ? hot : riskOn ? "url(#arr-risk)" : "url(#arr-dim)");
   }
 }
 
@@ -1426,6 +1603,7 @@ function showDetail(n) {
         ? ` · <b style="color:var(--cyan)">다음 행동 계산 가능</b>`
         : (n.notReady || []).length ? `<br/><span class="mono" style="font-size:9px;color:var(--muted)">미준비: ${n.notReady.join(", ")}</span>` : ""}</dd>` : ""}
       ${n.openness ? `<dt>온톨로지 판정</dt><dd>${OPEN_KO[n.openness] ?? n.openness}${n.conflict ? `<br/><span style="color:var(--amber)">⚠ ${n.conflict}</span>` : ""}</dd>` : ""}
+      ${n.attention ? `<dt>관심층</dt><dd><span style="color:${n.attention.tier === "cabinet" ? "var(--gold)" : "var(--text)"}">${n.attention.tier === "cabinet" ? "총리·국무위원" : "기관장"}</span> <span class="mono" style="color:var(--muted);font-size:9px">하류 ${n.attention.reach}</span><br/>${n.attention.reasons.map((r) => `<span class="mono" style="font-size:9px;color:${r.tier === "cabinet" ? "var(--gold)" : "var(--muted)"}">${ATT_REASON[r.code]?.ko ?? r.code}${r.evidence ? ` — ${String(r.evidence).replace("artifact:", "")}` : ""}</span>`).join("<br/>")}</dd>` : ""}
       ${(n.blockedBy || []).length ? `<dt>막는 것</dt><dd>${n.blockedBy.map((b) =>
         `${b.artifact} <span class="mono" style="color:var(--muted);font-size:9px">← ${b.by.join(" ")}</span>`).join("<br/>")}</dd>` : ""}
       <dt>의존</dt><dd>선행 ${up} · 후속 ${down}</dd>

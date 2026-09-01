@@ -284,6 +284,8 @@ const data = {
     projectName: project.name,
     asOfDate: project.asOfDate,
     generatedFrom: `data/mega-projects/projects/${projectId}.json`,
+    // 관심층 집계 — 지도 브리핑 헤더의 깔때기(관문→절차→총리 책상)에 쓴다.
+    ...(ONT ? { attention: { ...ONT.attention.counts, threshold: ONT.attention.leverage_threshold } } : {}),
   },
   stages: project.stages,
   nodes,
