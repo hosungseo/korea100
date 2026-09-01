@@ -1350,13 +1350,27 @@
     "parameter": "militaryPlanApproved",
     "reason": "군 공항 이전사업 실시계획의 국방부 승인 시점이 확인되지 않음",
     "gates": [],
-    "affects": null
+    "affects": null,
+    "classification": "graph_redundant",
+    "equivalent_to": {
+     "artifact": "tk.military_plan_approved",
+     "produced_by": "N06",
+     "rule": "RULE_TK_MILITARY_PLAN",
+     "note": "이 파라미터는 사업이 골라야 할 갈림길이 아니라 N06 완료 여부와 같은 말이다. 의존 그래프가 이미 hard로 표현하고 있으므로 활성화 규칙으로 관문에 붙이면 blocked와 path_undetermined가 이중계상된다."
+    }
    },
    {
     "parameter": "formerSiteOperator",
     "reason": "종전부지 개발사업시행자(지방공사·공공기관 등) 지정이 확인되지 않음",
     "gates": [],
-    "affects": null
+    "affects": null,
+    "classification": "graph_redundant",
+    "equivalent_to": {
+     "artifact": "tk.former_site_operator_fixed",
+     "produced_by": "N15",
+     "rule": "RULE_TK_FORMER_SITE_OPERATOR",
+     "note": "이 파라미터는 사업이 골라야 할 갈림길이 아니라 N15 완료 여부와 같은 말이다. 의존 그래프가 이미 hard로 표현하고 있으므로 활성화 규칙으로 관문에 붙이면 blocked와 path_undetermined가 이중계상된다."
+    }
    }
   ],
   "exclusive": []

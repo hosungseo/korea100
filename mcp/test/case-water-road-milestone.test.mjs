@@ -152,3 +152,45 @@ test("용수 경로도 파라미터로 선언돼 사업 층에서 미확정으�
   assert.deepEqual(rule.output.adopted_parameters, ["waterSupplyEntity", "dischargeMethod", "groundwaterUse"]);
   assert.equal(rule.output.resolved_on, "2026-09-01");
 });
+
+// 미확정이라고 다 결정거리가 아니다. 북극항로·대구경북의 파라미터 넷은 의존
+// 그래프가 이미 hard로 표현하고 있던 것을 규칙으로 한 번 더 적어 둔 것이었다.
+// 활성화 규칙으로 관문에 붙였다면 blocked와 path_undetermined가 이중계상됐다.
+test("그래프가 이미 말하는 미확정은 결정으로 세지 않는다", async () => {
+  const load = async (id) => (await import("../src/ontology-bridge.mjs"))
+    .loadOntologyCase({ ontologyDir: fileURLToPath(new URL("../../ontology/", import.meta.url)), caseFile: `samples/${id}.case.json` });
+
+  const arctic = pendingDecisions(await load("arctic-route"));
+  assert.equal(arctic.decision_count, 0, "북극항로가 지금 골라야 할 것은 없다");
+  assert.equal(arctic.graph_redundant_parameters.length, 2);
+  for (const entry of arctic.graph_redundant_parameters) {
+    assert.equal(entry.classification, "graph_redundant");
+    // 어느 관문이 끝나면 풀리는지를 말해 줘야 "그럼 뭘 보라는 거냐"에 답이 된다.
+    assert.ok(entry.equivalent_to.produced_by, "생산 관문이 있어야 한다");
+    assert.ok(entry.equivalent_to.artifact);
+  }
+
+  const daegu = pendingDecisions(await load("daegu-gyeongbuk-airport"));
+  assert.equal(daegu.decision_count, 0);
+  assert.deepEqual(
+    daegu.graph_redundant_parameters.map((entry) => entry.equivalent_to.produced_by).sort(),
+    ["N06", "N15"],
+  );
+});
+
+test("성격이 다른 미확정을 섞지 않는다", async () => {
+  const decisions = pendingDecisions(await projectCase());
+  const byKind = decisions.undetermined_parameters.reduce(
+    (acc, entry) => ({ ...acc, [entry.classification]: (acc[entry.classification] ?? 0) + 1 }), {},
+  );
+
+  // 광주: 관문 4(gridPath 등) · 안쪽 3(용수) · 값 미상 1(powerDemandMw).
+  assert.deepEqual(byKind, { gate: 4, inside_gate: 3, information_gap: 1 });
+  assert.equal(decisions.decision_count, 8);
+  assert.equal(decisions.graph_redundant_parameters.length, 0);
+
+  // powerDemandMw는 규칙도 아티팩트도 없는 순수 정보 공백이다. 배선 과제가 아니다.
+  const gap = decisions.undetermined_parameters.find((e) => e.classification === "information_gap");
+  assert.equal(gap.parameter, "powerDemandMw");
+  assert.equal(gap.equivalent_to, null);
+});

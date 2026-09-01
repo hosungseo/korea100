@@ -274,23 +274,44 @@ export function pendingDecisions(caseData) {
       // 마일스톤을 여닫지는 않지만 그 안쪽 제도 적용 여부를 정하는 파라미터.
       // gates가 비었다고 영향이 없는 것이 아니다.
       affects: meta?.affects ?? null,
+      // 의존 그래프가 이미 같은 말을 하고 있는 파라미터. 결정할 것이 아니라
+      // 선행 마일스톤이 안 끝났다는 사실의 다른 표기다.
+      equivalent_to: meta?.equivalent_to ?? null,
     }));
+
+  // 미확정 파라미터라고 전부 "사업이 골라야 할 것"이 아니다. 세 가지가 섞여 있다.
+  // 골라야 하는 것, 마일스톤 안쪽 적용범위를 정하는 것, 그리고 의존 그래프가 이미
+  // 말하고 있어 결정거리가 아닌 것. 섞어서 내면 PMO가 없는 결정을 찾게 된다.
+  const classify = (entry) => {
+    if (entry.equivalent_to) return "graph_redundant";
+    if (entry.gates.length) return "gate";
+    if (entry.affects?.milestone) return "inside_gate";
+    return "information_gap";
+  };
+  const all = [...undetermined, ...declaredOnly].map((entry) => ({ ...entry, classification: classify(entry) }));
+  const decisions = all.filter((entry) => entry.classification !== "graph_redundant");
 
   return {
     case_id: caseData.case_id,
     project_id: caseData.project_id,
     as_of: caseData.as_of,
-    undetermined_parameters: [...undetermined, ...declaredOnly],
+    undetermined_parameters: all,
+    decision_count: decisions.length,
+    graph_redundant_parameters: all.filter((entry) => entry.classification === "graph_redundant"),
     exclusive_branches: undetermined
       .filter((entry) => new Set(entry.gates.map((gate) => gate.activates_when)).size > 1)
       .map((entry) => ({
         parameter: entry.parameter,
         options: entry.gates.map((gate) => ({ value: gate.activates_when, milestone: gate.node_id, label: gate.label })),
       })),
-    note: undetermined.length === 0
+    note: all.length === 0
       ? "선언된 파라미터 중 미확정은 없습니다."
-      : `파라미터 ${undetermined.length}개가 마일스톤 ${undetermined.reduce((sum, entry) => sum + entry.gates.length, 0)}개를 여닫고, `
-        + `${declaredOnly.length}개는 관문을 여닫지 않고 마일스톤 안쪽 제도 적용 여부만 정합니다. 어느 값을 택할지는 사업이 정합니다.`,
+      : `사업이 정할 것 ${decisions.length}개`
+        + `(관문 여닫음 ${all.filter((e) => e.classification === "gate").length}, `
+        + `관문 안쪽 적용범위 ${all.filter((e) => e.classification === "inside_gate").length}, `
+        + `값 미상 ${all.filter((e) => e.classification === "information_gap").length}). `
+        + `${all.length - decisions.length}개는 의존 그래프가 이미 말하고 있어 결정거리가 아닙니다. `
+        + `어느 값을 택할지는 사업이 정합니다.`,
     execution_allowed: false,
   };
 }

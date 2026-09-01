@@ -334,6 +334,8 @@ const data = {
       gates: entry.gates.map((g) => ({ id: g.node_id, when: g.activates_when, label: g.label })),
       // 관문을 여닫지 않고 마일스톤 안쪽 제도 적용 여부만 정하는 파라미터.
       affects: entry.affects ?? null,
+      classification: entry.classification ?? null,
+      equivalent_to: entry.equivalent_to ?? null,
     })),
     exclusive: ONT.decisions.exclusive_branches.map((b) => ({
       parameter: b.parameter,
@@ -481,31 +483,37 @@ const config = {
       }
       // 관문을 여닫는 파라미터 + 관문 안쪽 제도 적용을 정하는 파라미터. 후자를 빼면
       // 오버레이가 "미확정"이라고 적어 둔 것이 지도에서 사라진다.
-      const insideOnly = ONT.decisions.undetermined_parameters.filter((e) => !e.gates.length && e.affects?.milestone);
-      // 관문에도 안 묶이고 affects도 없는 미확정. 배선이 안 된 것뿐이지 사실이 없는 게
-      // 아니다. 여기서 걸러 버리면 "시행령 제정 시점 미확정" 같은 것이 지도에서 사라진다.
-      const unbound = ONT.decisions.undetermined_parameters.filter((e) => !e.gates.length && !e.affects?.milestone);
+      const byKind = (kind) => ONT.decisions.undetermined_parameters.filter((e) => e.classification === kind);
+      const insideOnly = byKind("inside_gate");
+      // 값을 모를 뿐 결정거리인 것. 배선이 안 된 게 아니라 값이 아직 없는 것이다.
+      const unbound = byKind("information_gap");
+      // 의존 그래프가 이미 같은 말을 하는 것. 결정으로 내밀면 없는 결정을 찾게 된다.
+      const redundant = byKind("graph_redundant");
+      const gated = byKind("gate");
       const pendingGates = [...new Set([
         ...ONT.decisions.undetermined_parameters.flatMap((e) => e.gates.map((g) => g.node_id)),
         ...insideOnly.map((e) => e.affects.milestone),
       ])].filter((id) => nodes.some((n) => n.id === id));
-      if (pendingGates.length || unbound.length) {
+      if (pendingGates.length || unbound.length || redundant.length) {
         out.push({
           id: "ont-pending",
           label: "⚖ 미확정 갈림길",
           nodes: pendingGates,
-          html: `<p>사업이 아직 <b>정하지 않은 파라미터</b>가 여닫는 관문입니다. 제도 준비도와 별개의 축이며, 값이 정해지기 전까지 어느 쪽도 활성화되지 않습니다.</p>
-<ol>${ONT.decisions.undetermined_parameters.filter((e) => e.gates.length).map((e) =>
+          html: `<p>미확정 ${ONT.decisions.undetermined_parameters.length}건 중 <b>사업이 정할 것 ${ONT.decisions.undetermined_parameters.length - redundant.length}건</b>입니다. 제도 준비도와 별개의 축입니다.</p>
+${gated.length ? `<p><b>관문을 여닫는 것:</b> 값이 정해지기 전까지 어느 쪽도 활성화되지 않습니다.</p>
+<ol>${gated.map((e) =>
             `<li data-nodes="${e.gates.map((g) => g.node_id).join(",")}">${e.parameter} — ${e.reason ?? ""} <span class="mono" style="color:var(--muted);font-size:9px">${e.gates.map((g) => `${g.when === true ? "true" : g.when}→${g.node_id}`).join(" · ")}</span></li>`,
-          ).join("")}</ol>
+          ).join("")}</ol>` : ""}
 ${insideOnly.length ? `<p><b>관문 안쪽 미확정:</b> 아래는 관문을 여닫지는 않지만 그 안에서 <b>어느 제도가 적용되는지</b>를 정합니다.</p>
 <ol>${insideOnly.map((e) =>
             `<li data-nodes="${e.affects.milestone}">${e.parameter} — ${e.reason ?? ""} <span class="mono" style="color:var(--muted);font-size:9px">${e.affects.milestone} 제도 적용범위</span></li>`,
           ).join("")}</ol>` : ""}
 ${ONT.decisions.exclusive_branches.length ? `<p><b>배타 분기:</b> ${ONT.decisions.exclusive_branches.map((b) =>
             `${b.parameter} → ${b.options.map((o) => `${o.value}:${o.milestone}`).join(" | ")}`).join(" · ")} — 둘 중 하나만 활성화됩니다.</p>` : ""}
-${unbound.length ? `<p><b>아직 관문에 안 묶인 미확정:</b> 사업이 미확정이라고 선언했지만 어느 관문에 걸리는지는 오버레이에 배선되지 않았습니다 — 배선하면 여기서 관문이 켜집니다.</p>
+${unbound.length ? `<p><b>값이 아직 없는 것:</b> 미확정이지만 어느 관문에도 걸려 있지 않습니다. 정해지면 어디에 걸리는지를 오버레이에 적어야 지도가 켜집니다.</p>
 <ul>${unbound.map((e) => `<li>${e.parameter} — ${e.reason ?? ""}</li>`).join("")}</ul>` : ""}
+${redundant.length ? `<p><b>결정거리가 아닌 것:</b> 미확정으로 선언돼 있지만 <b>의존 그래프가 이미 같은 말</b>을 하고 있습니다. 고를 것이 아니라 선행 관문이 끝나면 풀립니다 — 지도에서 그 관문을 보세요.</p>
+<ul>${redundant.map((e) => `<li>${e.parameter} ≡ <b>${e.equivalent_to.produced_by}</b>의 <span class="mono" style="font-size:9px">${e.equivalent_to.artifact}</span>${e.equivalent_to.coupling === "soft" ? " (soft 결합)" : ""}</li>`).join("")}</ul>` : ""}
 <p style="color:var(--muted);font-size:10px">무엇을 고를지는 말하지 않는다. 고를 것이 무엇인지만 보여준다.</p>`,
         });
       }

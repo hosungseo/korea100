@@ -57,7 +57,14 @@
      "growthSupportActEnacted": {
       "value": null,
       "status": "unknown",
-      "reason": "광역권 성장지원 특별법은 제정 추진 단계"
+      "reason": "광역권 성장지원 특별법은 제정 추진 단계",
+      "equivalent_to": {
+       "artifact": "fpts.law_growth_support_enacted",
+       "produced_by": "N06",
+       "rule": "RULE_GROWTH_SUPPORT_ACT",
+       "coupling": "soft",
+       "note": "법 제정 여부는 N06 완료 여부와 같은 말이고 의존 그래프가 이미 담고 있다. 다만 소비자 N13이 soft로 걸어 두어 하드 차단은 아니다 — 규칙으로 관문에 붙이면 soft 결합을 hard 미확정으로 바꿔 버린다."
+      }
      }
     }
    }

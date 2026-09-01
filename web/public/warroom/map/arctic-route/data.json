@@ -1631,13 +1631,27 @@
     "parameter": "decreeEnacted",
     "reason": "시행령이 입법예고 단계(2026-08-11~09-21)로 제정·공포 시점과 세부 기준이 미확정",
     "gates": [],
-    "affects": null
+    "affects": null,
+    "classification": "graph_redundant",
+    "equivalent_to": {
+     "artifact": "arctic.decree_enacted",
+     "produced_by": "N02",
+     "rule": "RULE_ARCTIC_DECREE",
+     "note": "이 파라미터는 사업이 골라야 할 갈림길이 아니라 N02 완료 여부와 같은 말이다. 의존 그래프가 이미 hard로 표현하고 있으므로 활성화 규칙으로 관문에 붙이면 blocked와 path_undetermined가 이중계상된다."
+    }
    },
    {
     "parameter": "supportCenterOperator",
     "reason": "북극항로종합지원센터 지정 대상 법인·단체가 미정(지정기준이 시행령 위임 사항)",
     "gates": [],
-    "affects": null
+    "affects": null,
+    "classification": "graph_redundant",
+    "equivalent_to": {
+     "artifact": "arctic.support_center_designated",
+     "produced_by": "N17",
+     "rule": "RULE_ARCTIC_CENTER",
+     "note": "이 파라미터는 사업이 골라야 할 갈림길이 아니라 N17 완료 여부와 같은 말이다. 의존 그래프가 이미 hard로 표현하고 있으므로 활성화 규칙으로 관문에 붙이면 blocked와 path_undetermined가 이중계상된다."
+    }
    }
   ],
   "exclusive": []
