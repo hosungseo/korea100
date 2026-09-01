@@ -21,8 +21,8 @@ const service = new AdministrativeProcedureService(institutions, {
   now: () => new Date(FIXED_NOW),
 });
 
-test("R2 검증을 통과한 대표 제도 12개만 로드한다", () => {
-  assert.equal(institutions.length, 12);
+test("R2 검증을 통과한 대표 제도 14개만 로드한다", () => {
+  assert.equal(institutions.length, 14);
   assert.deepEqual(institutions.map((institution) => institution.slug), AGENT_READY_SLUGS);
   assert.ok(institutions.every((institution) => institution.process.agent_readiness.level === "R2"));
 });
@@ -305,4 +305,19 @@ test("격리된 단계로 가는 전이는 후보에서 빼고 사유를 남긴�
 
   const packet = scoped.createActionPacket("synthetic-reference-only", "P01");
   assert.ok(packet.blocking_questions.some((question) => question.includes("P02")));
+});
+
+test("시행 전 판을 현행 대조 결과로 기록하지 않는다", () => {
+  // 법제처 ID 조회는 공포됐지만 시행일이 남은 개정본을 돌려줄 수 있다.
+  // 그것을 '현행 조문 대조'라고 부르면 대조 결과 전체가 사실과 달라진다.
+  for (const institution of institutions) {
+    const check = institution.process.agent_readiness.last_live_check;
+    for (const source of check.source_results ?? []) {
+      if (!source.effective_on) continue;
+      assert.ok(
+        source.effective_on <= check.checked_at,
+        `${institution.slug}: ${source.law}의 시행일(${source.effective_on})이 대조일(${check.checked_at})보다 뒤다`,
+      );
+    }
+  }
 });

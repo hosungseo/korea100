@@ -128,3 +128,41 @@ test("여섯 케이스 모두 같은 ActionPacket 계약을 통과한다", async
   }
   assert.ok(checked >= 10, `패킷 질의를 충분히 검사해야 한다 (검사 ${checked}건)`);
 });
+
+test("전력계통 두 경로는 케이스 층에서도 배타 관계다", async () => {
+  const formal = await load("distributed-energy-grid-assessment.case.json");
+  const exempt = await load("semiconductor-infrastructure-fasttrack.case.json");
+
+  assert.equal(formal.project_context.milestone_node_id, "N19");
+  assert.equal(exempt.project_context.milestone_node_id, "N20");
+
+  // 8호가 5호를 배타 상대로 지목한다.
+  const rule = formal.rules.find((item) => item.id === "rule:exclusive-with-exemption-route");
+  assert.equal(rule.output.exclusive_with, exempt.case_id);
+
+  // 사업 층에서도 두 마일스톤은 같은 파라미터로 갈린다.
+  const project = await projectCase();
+  const gridRule = project.rules.find((item) => item.id === "rule:grid-path-exclusive");
+  assert.deepEqual(gridRule.output.exclusive, ["milestone:N19", "milestone:N20"]);
+
+  // 둘 다 파라미터 미확정이라 어느 쪽도 활성화되지 않았다.
+  const statuses = Object.fromEntries(
+    allMilestoneStatuses(project).map((status) => [status.node_id, status]),
+  );
+  for (const nodeId of ["N19", "N20"]) {
+    assert.equal(statuses[nodeId].openness, "path_undetermined");
+  }
+});
+
+test("N23은 아직 제도 셋이 남아 열리지 않는다", async () => {
+  const project = await projectCase();
+  const readiness = institutionReadinessFor(project, "N23");
+
+  assert.equal(readiness.referenced.length, 6, "용수·도로 마일스톤이 가장 많은 제도를 끌어 쓴다");
+  assert.equal(readiness.next_action_computable, false);
+  assert.deepEqual(readiness.not_ready_slugs.sort(), [
+    "industrial-water-intake-permit",
+    "national-road-rail-soc",
+    "public-wastewater-treatment-facility-plan",
+  ]);
+});

@@ -13,6 +13,7 @@
 - `samples/semiconductor-infrastructure-fasttrack.case.json` — **기반시설 지원·신속처리** 샘플 5호 (3호의 N20)
 - `samples/preliminary-feasibility-study.case.json` — **예비타당성조사** 샘플 6호 (3호의 N02, 1개 단계 격리)
 - `samples/national-strategic-industry-complex.case.json` — **국가첨단전략산업 특화단지** 샘플 7호 (3호의 N03, 4호와 같은 마일스톤)
+- `samples/distributed-energy-grid-assessment.case.json` — **정식 전력계통영향평가** 샘플 8호 (3호의 N19, 5호와 배타)
 - `scripts/derive-case.mjs` — 제도 업무구조도 → 케이스 구조 층 파생
 - `scripts/derive-project-case.mjs` — 메가프로젝트 오버레이 → 프로젝트 케이스 구조 층 파생
 - `scripts/demo_query.py` — 샘플 질의 데모
@@ -58,6 +59,7 @@ node ontology/scripts/derive-case.mjs --slug <제도 slug> --case-id <ID> --as-o
 | 5호 `GSC-N20-2026-0901` | 기반시설 지원·신속처리 | N20 | 클러스터 지정 전이라 신청 자격 없음 (법 제27조제1항) |
 | 6호 `GSC-N02-2026-0901` | 예비타당성조사 | N02 | 총사업비 미확정으로 대상 여부 판정 불가 (법 제38조제1항) |
 | 7호 `GSC-N03B-2026-0901` | 국가첨단전략산업 특화단지 | N03 | 반도체클러스터와 중복 지정 가능, 경로 선택 |
+| 8호 `GSC-N19-2026-0901` | 정식 전력계통영향평가 | N19 | 전력수요 미확정, 5호(N20)와 배타 |
 
 N03에는 케이스가 둘 붙는다. 반도체특별법 제11조제5항 후단이 두 지정의 중복을 명문으로
 허용하기 때문이다. 배타 관계가 아니라 순서와 조합의 문제다
@@ -89,7 +91,7 @@ python3 ontology/scripts/demo_query.py "부분공개 통지 왔는데 뭐 하면
 ```
 
 ## 다음
-- N19·N20 전력 경로는 제도 병목이 풀렸다. 남은 것은 사업이 `gridPath` 파라미터를 정하는 일이다
+- N23 용수·도로는 제도 여섯 중 셋이 남았다 (하천수 취수허가·도로철도 SOC는 전이 대조만, 공공폐수처리시설은 법제처가 시행 전 판만 돌려줘 대조 불가)
 - N23 용수·도로는 5종이 미평가라 가장 멀다
 - 남은 R2 제도 2종에 케이스 추가 (과태료 이의제기·법원재판, 국가연구개발비 정산)
 - 제도·오버레이 변경 시 케이스 재파생을 CI로 강제 (지금은 `--remerge` 수동 실행)
@@ -101,7 +103,7 @@ python3 ontology/scripts/demo_query.py "부분공개 통지 왔는데 뭐 하면
 - MCP 도구: `load_ontology_case`, `get_case_state`, `query_case`, `check_case_linkage`, `get_project_status`, `explain_blocked_milestone`
 - 패킷 계약: `mcp/src/packet-contract.mjs` — R2 경로(`create_action_packet`)와 온톨로지 경로가 같은 ActionPacket 계약을 통과해야 한다
 - 케이스 대조: `mcp/src/case-link.mjs` — 케이스 그래프가 제도 업무구조도와 어긋나면 드러낸다
-- 테스트: `cd mcp && npm test` (76건)
+- 테스트: `cd mcp && npm test` (79건)
 - 데모: `node mcp/scripts/ontology-query-once.mjs [--case samples/<파일>] "<질문>"`
 
 ## 제도 층과의 관계

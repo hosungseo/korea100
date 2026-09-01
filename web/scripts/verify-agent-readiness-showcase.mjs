@@ -120,6 +120,15 @@ async function fetchSourceResult(group) {
     if (compactLawName(snapshot.officialName) !== compactLawName(source.officialName ?? source.law)) {
       throw new Error(`공식 원문명이 일치하지 않습니다: ${snapshot.officialName ?? "이름 없음"}`);
     }
+    // 법제처가 돌려준 판이 아직 시행 전이면 '현행 조문 대조'가 아니다.
+    // ID로 조회하면 최신 공포본이 오는데, 공포는 됐지만 시행일이 남은 개정본일 수 있다.
+    // 그것을 현행이라고 부르면 대조 결과 전체가 사실과 달라진다.
+    if (snapshot.effectiveOn && snapshot.effectiveOn > CHECKED_AT) {
+      throw new Error(
+        `법제처가 돌려준 판이 아직 시행 전입니다(시행 ${snapshot.effectiveOn}, 대조일 ${CHECKED_AT}). `
+        + "현행 시행본을 지정해 조회해야 합니다.",
+      );
+    }
     const verifiedArticles = requestedArticles.filter((article) => snapshot.headers.has(article));
     const missingArticles = requestedArticles.filter((article) => !snapshot.headers.has(article));
     return {

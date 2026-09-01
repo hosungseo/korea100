@@ -31,6 +31,9 @@ export const SHOWCASE_INSTITUTIONS = [
   // N20 전력계통 경로(면제·신속처리)의 마지막 미평가 제도.
   // 2026-09-01 연결선 21개를 분산에너지 활성화 특별법·시행령 현행 원문에 수동 대조했다.
   { slug: "distributed-energy-special", transitionReviewed: true },
+  // N23 용수 계열. 2026-09-01 연결선 18개를 수도법·지하수법 현행 원문에 수동 대조했다.
+  { slug: "industrial-waterworks-business-authorization", transitionReviewed: true },
+  { slug: "groundwater-development-use-permit", transitionReviewed: true },
 ];
 
 const SELECTION_REASONS = {
@@ -46,6 +49,8 @@ const SELECTION_REASONS = {
   "pfs-exemption-fast-track": "예타 면제·신속인허가 특례. N02와 N20 양쪽에 걸린다",
   "local-finance-investment-review-feasibility": "지방재정 투자심사. 지방비 분담이 확정되면 이 경로가 열린다",
   "distributed-energy-special": "전력계통영향평가와 특화지역. N20 전력 경로의 마지막 조각",
+  "industrial-waterworks-business-authorization": "N23 용수 계열. 준용 사슬(제50조→제46조)을 명시해 승격",
+  "groundwater-development-use-permit": "N23 용수 계열. 허가·신고 두 경로를 항 단위로 분리",
 };
 
 function institutionCount() {
