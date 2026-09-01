@@ -122,7 +122,28 @@
       "article": "제48조(국가 등이 설치하는 공업용수도)",
       "text": "국가 등이 설치하는 공업용수도"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "procedure.started",
+     "trigger_condition": "해당 절차가 개시되고 '용수 수지·원수 검토' 수행 요건이 확인될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 수요계획",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [],
+     "completion_evidence": [
+      "수요계획"
+     ],
+     "handoff_recipients": [
+      "공급기관(수공·지자체)"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P02",
@@ -149,7 +170,30 @@
       "article": "제49조(공업용수도사업의 인가)",
       "text": "공업용수도사업의 인가"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "용수 수지·원수 검토 완료 결과가 '공급 가능성 협의' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 공급 의견",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "수요계획"
+     ],
+     "completion_evidence": [
+      "공급 의견"
+     ],
+     "handoff_recipients": [
+      "수요 기업"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P03",
@@ -171,7 +215,30 @@
       "article": "제50조(하천수의 사용허가 등)",
       "text": "하천수의 사용허가 등"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "공급 가능성 협의 완료 결과가 '하천수 사용허가 신청' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 허가신청서",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "공급 의견"
+     ],
+     "completion_evidence": [
+      "허가신청서"
+     ],
+     "handoff_recipients": [
+      "하천관리청·환경부"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P04",
@@ -194,7 +261,28 @@
       "text": "일시적 하천수의 사용신고 등"
      }
     ],
-    "deadline": "일시 사용 신고 관련 §50조의2"
+    "deadline": "일시 사용 신고 관련 §50조의2",
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "공급 가능성 협의 완료 결과가 '일시 사용 신고(해당 시)' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 사용신고",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "공급 의견"
+     ],
+     "completion_evidence": [
+      "사용신고"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "needs-verification",
+      "expression": "일시 사용 신고 관련 §50조의2"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P05",
@@ -221,7 +309,32 @@
       "article": "제52조(하천수의 사용 및 관리)",
       "text": "하천수의 사용 및 관리"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "supplement.requested",
+     "trigger_condition": "보완·재수행이 결정되어 '허가 요건 심사' 단계로 회귀할 때",
+     "completion_condition": "'허가 요건 심사' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "허가신청서",
+      "보완"
+     ],
+     "completion_evidence": [
+      "심사서"
+     ],
+     "handoff_recipients": [
+      "기득 사용자·하류",
+      "수요 기업"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P06",
@@ -249,7 +362,30 @@
       "text": "하천수 사용의 조정"
      }
     ],
-    "blocker": "물 배분 갈등"
+    "blocker": "물 배분 갈등",
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "허가 요건 심사 완료 결과가 '기득 사용자 보호·의견' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 의견",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "심사서"
+     ],
+     "completion_evidence": [
+      "의견"
+     ],
+     "handoff_recipients": [
+      "하천관리청·환경부"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P07",
@@ -271,7 +407,30 @@
       "article": "제53조(하천수 사용의 조정)",
       "text": "하천수 사용의 조정"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "기득 사용자 보호·의견 완료 결과가 '하천수 사용 조정' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 조정",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "의견"
+     ],
+     "completion_evidence": [
+      "조정"
+     ],
+     "handoff_recipients": [
+      "기득 사용자·하류"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P08",
@@ -294,7 +453,28 @@
       "text": "하천수 분쟁조정의 신청 등"
      }
     ],
-    "deadline": "분쟁조정 관련 §54(90일·60일 등 확인)"
+    "deadline": "분쟁조정 관련 §54(90일·60일 등 확인)",
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "하천수 사용 조정 완료 결과가 '분쟁조정 신청' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 분쟁조정 신청",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "조정"
+     ],
+     "completion_evidence": [
+      "분쟁조정 신청"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "needs-verification",
+      "expression": "분쟁조정 관련 §54(90일·60일 등 확인)"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P09",
@@ -316,7 +496,30 @@
       "article": "제50조(하천수의 사용허가 등)",
       "text": "하천수의 사용허가 등"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "supplement.requested",
+     "trigger_condition": "보완·재수행이 결정되어 '보완 요구·재제출' 단계로 회귀할 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 보완",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "심사서"
+     ],
+     "completion_evidence": [
+      "보완"
+     ],
+     "handoff_recipients": [
+      "하천관리청·환경부"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P10",
@@ -338,7 +541,31 @@
       "article": "제50조(하천수의 사용허가 등)",
       "text": "하천수의 사용허가 등"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "기득 사용자 보호·의견 완료 결과가 '사용허가 처분 통지' 단계로 인계될 때",
+     "completion_condition": "'사용허가 처분 통지' 통지와 송달·수령 기록이 남을 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "의견"
+     ],
+     "completion_evidence": [
+      "허가서·불허가"
+     ],
+     "handoff_recipients": [
+      "공급기관(수공·지자체)",
+      "관할 시·도지사"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P11",
@@ -370,7 +597,28 @@
       "article": "제54조(전용공업용수도에 관한 준용 규정)",
       "text": "전용공업용수도에 관한 준용 규정"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "사용허가 처분 통지 완료 결과가 '공업용수도·전용수도 인가' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 인가·계약",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "허가서·불허가"
+     ],
+     "completion_evidence": [
+      "인가·계약"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P12",
@@ -392,7 +640,30 @@
       "article": "제38조(공급규정)",
       "text": "공급규정"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "공업용수도·전용수도 인가 완료 결과가 '공급규정·요금 안내' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 공급규정",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "인가·계약"
+     ],
+     "completion_evidence": [
+      "공급규정"
+     ],
+     "handoff_recipients": [
+      "수요 기업"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P13",
@@ -414,7 +685,30 @@
       "article": "제33조(하천의 점용허가 등)",
       "text": "하천의 점용허가 등"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "공급규정·요금 안내 완료 결과가 '점용허가·시설 설치' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 점용·준공",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "공급규정"
+     ],
+     "completion_evidence": [
+      "점용·준공"
+     ],
+     "handoff_recipients": [
+      "기득 사용자·하류"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P14",
@@ -436,7 +730,30 @@
       "article": "제35조(하천점용에 대한 손실보상의 협의 등)",
       "text": "하천점용에 대한 손실보상의 협의 등"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "점용허가·시설 설치 완료 결과가 '점용 손실보상 협의' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 보상 협의",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "점용·준공"
+     ],
+     "completion_evidence": [
+      "보상 협의"
+     ],
+     "handoff_recipients": [
+      "수요 기업"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P15",
@@ -458,7 +775,30 @@
       "article": "제52조(하천수의 사용 및 관리)",
       "text": "하천수의 사용 및 관리"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "점용 손실보상 협의 완료 결과가 '사용 관리·계측 보고' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 사용량 보고",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "보상 협의"
+     ],
+     "completion_evidence": [
+      "사용량 보고"
+     ],
+     "handoff_recipients": [
+      "환경 감시"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P16",
@@ -485,7 +825,30 @@
       "article": "제38조(배출시설 및 방지시설의 운영)",
       "text": "배출시설 및 방지시설의 운영"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "사용 관리·계측 보고 완료 결과가 '폐수 배출시설 허가' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 배출시설 허가",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "사용량 보고"
+     ],
+     "completion_evidence": [
+      "배출시설 허가"
+     ],
+     "handoff_recipients": [
+      "하천관리청·환경부"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P17",
@@ -507,7 +870,30 @@
       "article": "제69조(법령위반자 등에 대한 처분 등)",
       "text": "법령위반자 등에 대한 처분 등"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "폐수 배출시설 허가 완료 결과가 '지도·점검·허가 취소 등' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 점검·처분",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "배출시설 허가"
+     ],
+     "completion_evidence": [
+      "점검·처분"
+     ],
+     "handoff_recipients": [
+      "수요 기업"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P18",
@@ -529,7 +915,28 @@
       "article": "제91조(청문)",
       "text": "청문"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "지도·점검·허가 취소 등 완료 결과가 '허가 취소 등 청문' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 청문 통지·진술",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "점검·처분"
+     ],
+     "completion_evidence": [
+      "청문 통지·진술"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P19",
@@ -551,7 +958,28 @@
       "article": "제50조(하천수의 사용허가 등)",
       "text": "기후에너지환경부장관은 허가를 한 때에는 그 내용을 관할 시ㆍ도지사에게 통보하여야 한다(제2항)."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "사용허가 처분 통지 완료 결과가 '하천수 사용허가 통보 수령' 단계로 인계될 때",
+     "completion_condition": "'하천수 사용허가 통보 수령' 통지와 송달·수령 기록이 남을 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "허가서·불허가"
+     ],
+     "completion_evidence": [
+      "허가 통보"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P20",
@@ -573,7 +1001,28 @@
       "article": "제50조(하천수의 사용허가 등)",
       "text": "시ㆍ도지사는 하천수 사용허가를 받은 자에게 사용료를 징수할 수 있다(제7항)."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "하천수 사용허가 통보 수령 완료 결과가 '하천수 사용료 징수' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 사용료 부과",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "허가 통보"
+     ],
+     "completion_evidence": [
+      "사용료 부과"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    }
   ],
   "edges": [
@@ -582,140 +1031,380 @@
     "source": "P01",
     "target": "P02",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'용수 수지·원수 검토' 완료 결과가 '공급 가능성 협의' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "수요 기업",
+      "to_actor": "공급기관(수공·지자체)",
+      "documents": [
+       "수요계획"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E02",
     "source": "P02",
     "target": "P03",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'공급 가능성 협의' 완료 결과가 '하천수 사용허가 신청' 단계로 인계될 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "공급기관(수공·지자체)",
+      "to_actor": "수요 기업",
+      "documents": [
+       "공급 의견"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E03",
     "source": "P02",
     "target": "P04",
     "type": "sequence",
-    "label": "일시"
+    "label": "일시",
+    "agent_transition": {
+     "condition": "일시",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "공급기관(수공·지자체)",
+      "to_actor": "수요 기업",
+      "documents": [
+       "공급 의견"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E04",
     "source": "P03",
     "target": "P05",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'하천수 사용허가 신청' 완료 결과가 '허가 요건 심사' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "수요 기업",
+      "to_actor": "하천관리청·환경부",
+      "documents": [
+       "허가신청서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E05",
     "source": "P05",
     "target": "P06",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'허가 요건 심사' 완료 결과가 '기득 사용자 보호·의견' 단계로 인계될 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "하천관리청·환경부",
+      "to_actor": "기득 사용자·하류",
+      "documents": [
+       "심사서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E06",
     "source": "P06",
     "target": "P07",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'기득 사용자 보호·의견' 완료 결과가 '하천수 사용 조정' 단계로 인계될 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "기득 사용자·하류",
+      "to_actor": "하천관리청·환경부",
+      "documents": [
+       "의견"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E07",
     "source": "P07",
     "target": "P08",
     "type": "sequence",
-    "label": "분쟁 시"
+    "label": "분쟁 시",
+    "agent_transition": {
+     "condition": "분쟁 시",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "하천관리청·환경부",
+      "to_actor": "기득 사용자·하류",
+      "documents": [
+       "조정"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E08",
     "source": "P05",
     "target": "P09",
     "type": "loop",
-    "label": "보완"
+    "label": "보완",
+    "agent_transition": {
+     "condition": "보완",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "하천관리청·환경부",
+      "to_actor": "수요 기업",
+      "documents": [
+       "심사서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E09",
     "source": "P09",
     "target": "P05",
     "type": "loop",
-    "label": "재심사"
+    "label": "재심사",
+    "agent_transition": {
+     "condition": "재심사",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "수요 기업",
+      "to_actor": "하천관리청·환경부",
+      "documents": [
+       "보완"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E10",
     "source": "P06",
     "target": "P10",
     "type": "sequence",
-    "label": "적합"
+    "label": "적합",
+    "agent_transition": {
+     "condition": "적합",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "기득 사용자·하류",
+      "to_actor": "하천관리청·환경부",
+      "documents": [
+       "의견"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E11",
     "source": "P10",
     "target": "P11",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'사용허가 처분 통지' 완료 결과가 '공업용수도·전용수도 인가' 단계로 인계될 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "하천관리청·환경부",
+      "to_actor": "공급기관(수공·지자체)",
+      "documents": [
+       "허가서·불허가"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E12",
     "source": "P11",
     "target": "P12",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'공업용수도·전용수도 인가' 완료 결과가 '공급규정·요금 안내' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "공급기관(수공·지자체)",
+      "to_actor": "공급기관(수공·지자체)",
+      "documents": [
+       "인가·계약"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E13",
     "source": "P12",
     "target": "P13",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'공급규정·요금 안내' 완료 결과가 '점용허가·시설 설치' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "공급기관(수공·지자체)",
+      "to_actor": "수요 기업",
+      "documents": [
+       "공급규정"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E14",
     "source": "P13",
     "target": "P14",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'점용허가·시설 설치' 완료 결과가 '점용 손실보상 협의' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "수요 기업",
+      "to_actor": "기득 사용자·하류",
+      "documents": [
+       "점용·준공"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E15",
     "source": "P14",
     "target": "P15",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'점용 손실보상 협의' 완료 결과가 '사용 관리·계측 보고' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "기득 사용자·하류",
+      "to_actor": "수요 기업",
+      "documents": [
+       "보상 협의"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E16",
     "source": "P15",
     "target": "P16",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'사용 관리·계측 보고' 완료 결과가 '폐수 배출시설 허가' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "수요 기업",
+      "to_actor": "환경 감시",
+      "documents": [
+       "사용량 보고"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E17",
     "source": "P16",
     "target": "P17",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'폐수 배출시설 허가' 완료 결과가 '지도·점검·허가 취소 등' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "환경 감시",
+      "to_actor": "하천관리청·환경부",
+      "documents": [
+       "배출시설 허가"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E18",
     "source": "P17",
     "target": "P18",
     "type": "sequence",
-    "label": "취소 등 불이익 시"
+    "label": "취소 등 불이익 시",
+    "agent_transition": {
+     "condition": "취소 등 불이익 시",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "하천관리청·환경부",
+      "to_actor": "수요 기업",
+      "documents": [
+       "점검·처분"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E19",
     "source": "P10",
     "target": "P19",
     "type": "message",
-    "label": "관할 시·도지사 통보"
+    "label": "관할 시·도지사 통보",
+    "agent_transition": {
+     "condition": "관할 시·도지사 통보",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "하천관리청·환경부",
+      "to_actor": "관할 시·도지사",
+      "documents": [
+       "허가서·불허가"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E20",
     "source": "P19",
     "target": "P20",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'하천수 사용허가 통보 수령' 완료 결과가 '하천수 사용료 징수' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "관할 시·도지사",
+      "to_actor": "관할 시·도지사",
+      "documents": [
+       "허가 통보"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    }
   ],
   "warnings": [
@@ -730,7 +1419,195 @@
      "276805"
     ]
    }
-  ]
+  ],
+  "agent_readiness": {
+   "contract_version": "1.1.0",
+   "level": "R2",
+   "mode": "next-action",
+   "assessed_at": "2026-09-01",
+   "assessment_method": "스키마 검증·그래프 파생·전이 수동 대조·법제처 DRF API 직접 대조",
+   "live_legal_check": "required-before-use",
+   "last_live_check": {
+    "checked_at": "2026-09-01",
+    "method": "law.go.kr-DRF-direct",
+    "status": "passed",
+    "citation_fingerprint": "sha256:b15e49f615db89e042faadf40582d899eedc2b748f2381dbec72e3dcd0de0b65",
+    "sources_checked": 3,
+    "source_failures": 0,
+    "article_references": 25,
+    "verified_references": 25,
+    "missing_references": [],
+    "uncheckable_references": [],
+    "reference_only_references": [
+     {
+      "node_id": "P04",
+      "law": "하천법",
+      "article": "제50조의2",
+      "reason": "기한 성격 재확인 필요"
+     },
+     {
+      "node_id": "P08",
+      "law": "하천법",
+      "article": "제54조",
+      "reason": "기한 성격 재확인 필요"
+     }
+    ],
+    "verified_node_ids": [
+     "P01",
+     "P02",
+     "P03",
+     "P05",
+     "P06",
+     "P07",
+     "P09",
+     "P10",
+     "P11",
+     "P12",
+     "P13",
+     "P14",
+     "P15",
+     "P16",
+     "P17",
+     "P18",
+     "P19",
+     "P20"
+    ],
+    "unverified_node_ids": [],
+    "source_results": [
+     {
+      "law": "하천법",
+      "source_type": "statute",
+      "source_id": "001836",
+      "official_url": "https://law.go.kr/법령/하천법",
+      "requested_articles": [
+       "제33조",
+       "제34조",
+       "제35조",
+       "제49조",
+       "제50조",
+       "제50조의2",
+       "제52조",
+       "제53조",
+       "제54조",
+       "제69조",
+       "제91조"
+      ],
+      "verified_articles": [
+       "제33조",
+       "제34조",
+       "제35조",
+       "제49조",
+       "제50조",
+       "제50조의2",
+       "제52조",
+       "제53조",
+       "제54조",
+       "제69조",
+       "제91조"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "하천법",
+      "version_key": "0018362025100121065",
+      "promulgated_on": "2025-10-01",
+      "effective_on": "2025-10-01"
+     },
+     {
+      "law": "수도법",
+      "source_type": "statute",
+      "source_id": "001818",
+      "official_url": "https://law.go.kr/법령/수도법",
+      "requested_articles": [
+       "제38조",
+       "제48조",
+       "제49조",
+       "제52조",
+       "제54조"
+      ],
+      "verified_articles": [
+       "제38조",
+       "제48조",
+       "제49조",
+       "제52조",
+       "제54조"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "수도법",
+      "version_key": "0018182025100121065",
+      "promulgated_on": "2025-10-01",
+      "effective_on": "2025-10-01"
+     },
+     {
+      "law": "물환경보전법",
+      "source_type": "statute",
+      "source_id": "000166",
+      "official_url": "https://law.go.kr/법령/물환경보전법",
+      "requested_articles": [
+       "제33조",
+       "제38조"
+      ],
+      "verified_articles": [
+       "제33조",
+       "제38조"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "물환경보전법",
+      "version_key": "0001662026021921368",
+      "promulgated_on": "2026-02-19",
+      "effective_on": "2026-02-19"
+     }
+    ]
+   },
+   "actionable_node_ids": [
+    "P01",
+    "P02",
+    "P03",
+    "P05",
+    "P06",
+    "P07",
+    "P09",
+    "P10",
+    "P11",
+    "P12",
+    "P13",
+    "P14",
+    "P15",
+    "P16",
+    "P17",
+    "P18",
+    "P19",
+    "P20"
+   ],
+   "reference_only_node_ids": [
+    "P04",
+    "P08"
+   ],
+   "reference_only_reasons": {
+    "P04": [
+     "기한 성격 재확인 필요"
+    ],
+    "P08": [
+     "기한 성격 재확인 필요"
+    ]
+   },
+   "blockers": [],
+   "metrics": {
+    "nodes": 20,
+    "edges": 20,
+    "node_contract_coverage": 1,
+    "transition_contract_coverage": 1,
+    "explicit_basis_coverage": 1,
+    "output_document_coverage": 1,
+    "low_confidence_nodes": 0,
+    "template_like_nodes": 0,
+    "deadline_review_nodes": 2,
+    "reference_only_nodes": 2,
+    "actionable_coverage": 0.9,
+    "field_verification_items": 3
+   }
+  }
  },
  "verification": {
   "status": "article-verified",

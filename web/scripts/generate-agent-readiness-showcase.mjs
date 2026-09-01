@@ -34,6 +34,10 @@ export const SHOWCASE_INSTITUTIONS = [
   // N23 용수 계열. 2026-09-01 연결선 18개를 수도법·지하수법 현행 원문에 수동 대조했다.
   { slug: "industrial-waterworks-business-authorization", transitionReviewed: true },
   { slug: "groundwater-development-use-permit", transitionReviewed: true },
+  // 2026-09-01 연결선 42개를 물환경보전법·하천법·철도건설법·도로법 현행 시행본에 수동 대조했다.
+  { slug: "public-wastewater-treatment-facility-plan", transitionReviewed: true },
+  { slug: "industrial-water-intake-permit", transitionReviewed: true },
+  { slug: "national-road-rail-soc", transitionReviewed: true },
 ];
 
 const SELECTION_REASONS = {
@@ -51,6 +55,9 @@ const SELECTION_REASONS = {
   "distributed-energy-special": "전력계통영향평가와 특화지역. N20 전력 경로의 마지막 조각",
   "industrial-waterworks-business-authorization": "N23 용수 계열. 준용 사슬(제50조→제46조)을 명시해 승격",
   "groundwater-development-use-permit": "N23 용수 계열. 허가·신고 두 경로를 항 단위로 분리",
+  "public-wastewater-treatment-facility-plan": "N23 용수 계열. 시행일 지정 조회로 현행본에 도달해 승격",
+  "industrial-water-intake-permit": "N23 용수 계열. 하천수 사용허가와 분쟁조정·청문 경로",
+  "national-road-rail-soc": "N23 도로·철도 트랙. 의제 협의 30일과 5년 미착공 실효",
 };
 
 function institutionCount() {

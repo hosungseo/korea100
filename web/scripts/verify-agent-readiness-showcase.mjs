@@ -107,6 +107,10 @@ async function fetchSourceResult(group) {
       snapshot = await fetchCurrentLawArticleSnapshot(source.lawId, {
         oc: process.env.LAW_OC,
         signal: AbortSignal.timeout(60_000),
+        // 대조일에 시행 중이던 판을 집는다. 없으면 ID 조회로 떨어지고,
+        // 그때 돌아온 판이 시행 전이면 아래 검사가 잡는다.
+        asOf: CHECKED_AT,
+        officialName: source.officialName ?? source.law,
       });
     } else if (sourceType === "admin-rule") {
       snapshot = await fetchCurrentAdminRuleArticleSnapshot(source.adminRuleId, {

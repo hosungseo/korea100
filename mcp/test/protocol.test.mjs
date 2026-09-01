@@ -52,7 +52,7 @@ test("stdio MCP가 도구·리소스를 공개하고 다음 행동을 구조화�
   assert.ok(tools.tools.every((tool) => tool.annotations?.readOnlyHint === true));
 
   const resources = await client.listResources();
-  assert.equal(resources.resources.length, 16);
+  assert.equal(resources.resources.length, 19);
   assert.ok(resources.resources.some((resource) => resource.uri === "korea100://procedures"));
   assert.ok(resources.resources.some((resource) => resource.uri === "korea100://status"));
 
@@ -126,7 +126,7 @@ test("stdio MCP가 도구·리소스를 공개하고 다음 행동을 구조화�
 
   const statusResource = await client.readResource({ uri: "korea100://status" });
   const status = JSON.parse(statusResource.contents[0].text);
-  assert.equal(status.procedure_count, 14);
+  assert.equal(status.procedure_count, 17);
   assert.equal(status.legal_check_policy.max_age_days, 36500);
   assert.ok(status.procedures.every((item) => item.legal_check.freshness.status === "current"));
 
@@ -165,7 +165,7 @@ test("stdio MCP가 도구·리소스를 공개하고 다음 행동을 구조화�
   assert.equal(project.structuredContent.execution_allowed, false);
   assert.deepEqual(
     project.structuredContent.readiness.next_action_computable_milestones,
-    ["N02", "N03", "N19", "N20"],
+    ["N02", "N03", "N19", "N20", "N23"],
     "참조 제도가 전부 R2인 마일스톤만 다음 행동 계산 대상이다",
   );
   assert.ok(project.structuredContent.counts.ready > 0);

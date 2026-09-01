@@ -20,9 +20,12 @@ export const AGENT_READY_SLUGS = Object.freeze([
   "distributed-energy-special",
   // P16(지자체 건의)은 법정 절차가 아니라 참고용으로 격리했다. 나머지 16개 단계는 실행 대상이다.
   "preliminary-feasibility-study",
-  // N23 용수 계열 (2026-09-01 승격). 하천수·도로철도·공공폐수는 아직 미평가다.
+  // N23 용수·도로 계열 (2026-09-01 승격)
   "industrial-waterworks-business-authorization",
   "groundwater-development-use-permit",
+  "public-wastewater-treatment-facility-plan",
+  "industrial-water-intake-permit",
+  "national-road-rail-soc",
 ]);
 
 export const DEFAULT_INSTITUTION_DIR = fileURLToPath(

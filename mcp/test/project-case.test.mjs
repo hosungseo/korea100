@@ -50,7 +50,7 @@ test("참조 제도가 전부 R2인 마일스톤만 다음 행동 계산 대상�
   const rollup = projectStatus(caseData).readiness;
 
   // N02 재정심사, N03 지정 게이트, N19·N20 전력계통 두 경로.
-  assert.deepEqual(rollup.next_action_computable_milestones, ["N02", "N03", "N19", "N20"]);
+  assert.deepEqual(rollup.next_action_computable_milestones, ["N02", "N03", "N19", "N20", "N23"]);
   assert.equal(institutionReadinessFor(caseData, "N03").next_action_computable, true);
 
   // N02도 열렸다. 예비타당성조사가 지자체 건의 노드 하나만 참고용으로 격리한 채

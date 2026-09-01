@@ -110,7 +110,28 @@
       "article": "제4조(국가철도망구축계획의 수립 및 변경)",
       "text": "① 국토교통부장관은 10년 단위로 국가철도망구축계획을 수립ㆍ시행하여야 한다. ③ 관계 중앙행정기관ㆍ시ㆍ도지사와 협의 후 철도산업위원회 심의를 거쳐야 한다. ④ 수립일부터 5년마다 타당성을 검토한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "procedure.started",
+     "trigger_condition": "해당 절차가 개시되고 '국가철도망구축계획 수립·고시' 수행 요건이 확인될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 국가철도망구축계획(고시)",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [],
+     "completion_evidence": [
+      "국가철도망구축계획(고시)"
+     ],
+     "handoff_recipients": [
+      "기획재정부장관"
+     ],
+     "deadline_rule": {
+      "type": "needs-verification",
+      "expression": "10년 단위(5년마다 타당성 검토)"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P02",
@@ -133,7 +154,30 @@
       "article": "제38조(예비타당성조사)",
       "text": "① 기획재정부장관은 총사업비가 500억원 이상이고 국가의 재정지원 규모가 300억원 이상인 신규 사업(건설공사 포함 사업 등)에 대한 예산 편성을 위하여 미리 예비타당성조사를 실시하고 결과를 요약하여 국회 소관 상임위원회와 예산결산특별위원회에 제출하여야 한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "국가철도망구축계획 수립·고시 완료 결과가 '예비타당성조사' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 예비타당성조사 결과",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "국가철도망구축계획(고시)"
+     ],
+     "completion_evidence": [
+      "예비타당성조사 결과"
+     ],
+     "handoff_recipients": [
+      "국토교통부장관"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P03",
@@ -156,7 +200,30 @@
       "article": "제7조(철도건설사업별 기본계획의 수립)",
       "text": "① 국토교통부장관은 사업별 철도건설기본계획을 수립하여야 한다. ③ 관계 중앙행정기관ㆍ시ㆍ도지사와 미리 협의하여야 하며 고속철도건설기본계획은 협의 후 위원회 심의를 거쳐야 한다. ④ 수립하면 고시하여야 한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "예비타당성조사 완료 결과가 '철도건설사업별 기본계획 수립·고시' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 철도건설기본계획(고시)",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "예비타당성조사 결과"
+     ],
+     "completion_evidence": [
+      "철도건설기본계획(고시)"
+     ],
+     "handoff_recipients": [
+      "사업시행자(국가·지자체·국가철도공단)"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P04",
@@ -184,7 +251,32 @@
       "article": "제9조(철도건설사업별 실시계획의 승인)",
       "text": "① 사업시행자는 사업의 규모와 내용, 사업 구역, 사업 기간 등을 포함한 실시계획을 작성하여 국토교통부장관의 승인을 받아야 한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "supplement.requested",
+     "trigger_condition": "보완·재수행이 결정되어 '실시계획 작성·승인 신청' 단계로 회귀할 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 실시계획서",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "철도건설기본계획(고시)",
+      "변경 승인 / 실효"
+     ],
+     "completion_evidence": [
+      "실시계획서"
+     ],
+     "handoff_recipients": [
+      "관계 행정기관",
+      "도로관리청"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P05",
@@ -207,7 +299,30 @@
       "article": "제11조(다른 법률에 따른 인가ㆍ허가 등의 의제)",
       "text": "② 국토교통부장관은 관계 행정기관의 장과 미리 협의하여야 한다. ③ 협의요청을 받은 관계 행정기관의 장은 요청받은 날부터 30일 이내에 의견을 제출하여야 한다. ④ 인ㆍ허가등 의제 기준·효과는 「행정기본법」 제24조부터 제26조까지를 준용하되 제24조제4항의 '20일'은 '30일'로 본다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "실시계획 작성·승인 신청 완료 결과가 '인허가의제 관계기관 협의(30일)' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 협의 의견",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "실시계획서"
+     ],
+     "completion_evidence": [
+      "협의 의견"
+     ],
+     "handoff_recipients": [
+      "국토교통부장관"
+     ],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "협의 요청받은 날부터 30일 이내"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P06",
@@ -230,7 +345,30 @@
       "article": "제9조(철도건설사업별 실시계획의 승인)",
       "text": "④ 국토교통부장관은 실시계획을 승인하면 고시하고 관계 서류 사본을 관계 지방자치단체의 장에게 송부하여야 한다. ⑤ 토지등의 수용ㆍ사용이 필요한 실시계획을 승인한 경우 토지등의 소유자 및 권리자에게 알려야 한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "인허가의제 관계기관 협의(30일) 완료 결과가 '실시계획 승인·고시·수용 통지' 단계로 인계될 때",
+     "completion_condition": "'실시계획 승인·고시·수용 통지' 통지와 송달·수령 기록이 남을 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "협의 의견"
+     ],
+     "completion_evidence": [
+      "실시계획 승인·고시"
+     ],
+     "handoff_recipients": [
+      "사업시행자·이해관계인(당사자)"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P07",
@@ -253,7 +391,30 @@
       "article": "제9조(철도건설사업별 실시계획의 승인)",
       "text": "⑥ 사업시행자는 실시계획이 고시된 경우 실시계획 및 관계 도면을 이해관계인이 볼 수 있게 하여야 한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "실시계획 승인·고시·수용 통지 완료 결과가 '실시계획·도면 열람(이해관계인)' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 열람 도면",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "실시계획 승인·고시"
+     ],
+     "completion_evidence": [
+      "열람 도면"
+     ],
+     "handoff_recipients": [
+      "사업시행자·도로관리청"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P08",
@@ -276,7 +437,31 @@
       "article": "제25조(도로구역의 결정)",
       "text": "① 도로관리청은 도로 노선의 지정ㆍ변경 또는 폐지의 고시가 있으면 지체 없이 해당 도로의 도로구역을 결정ㆍ변경 또는 폐지하여야 한다. ③ 결정하면 사유ㆍ위치ㆍ면적 등을 고시하고 도면을 일반인이 열람할 수 있도록 하여야 한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "실시계획 작성·승인 신청·주민 의견청취(도로 트랙) 완료 결과가 '도로구역 결정·고시(도로 트랙)' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 도로구역 결정·고시",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "실시계획서",
+      "의견청취 결과"
+     ],
+     "completion_evidence": [
+      "도로구역 결정·고시"
+     ],
+     "handoff_recipients": [
+      "사업시행자·도로관리청"
+     ],
+     "deadline_rule": {
+      "type": "statutory-immediate",
+      "expression": "지체 없이"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P09",
@@ -299,7 +484,28 @@
       "article": "제26조(주민 등의 의견청취)",
       "text": "① 도로관리청은 도로구역을 결정ㆍ변경 또는 폐지하려는 경우 미리 주소ㆍ도면ㆍ면적 등을 공고하여 주민 및 관계 전문가 등의 의견을 들어야 한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "procedure.started",
+     "trigger_condition": "해당 절차가 개시되고 '주민 의견청취(도로 트랙)' 수행 요건이 확인될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 의견청취 결과",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [],
+     "completion_evidence": [
+      "의견청취 결과"
+     ],
+     "handoff_recipients": [
+      "도로관리청"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P10",
@@ -322,7 +528,31 @@
       "article": "제31조(도로공사와 도로의 유지ㆍ관리 등)",
       "text": "① 도로공사와 도로의 유지ㆍ관리는 이 법이나 다른 법률에 특별한 규정이 있는 경우를 제외하고는 해당 도로의 도로관리청이 수행한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "실시계획·도면 열람(이해관계인)·도로구역 결정·고시(도로 트랙) 완료 결과가 '도로공사·철도건설공사 시행·유지관리' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 공사·유지관리 기록",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "열람 도면",
+      "도로구역 결정·고시"
+     ],
+     "completion_evidence": [
+      "공사·유지관리 기록"
+     ],
+     "handoff_recipients": [
+      "국토교통부장관"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P11",
@@ -345,7 +575,30 @@
       "article": "제9조(철도건설사업별 실시계획의 승인)",
       "text": "⑧ 승인받은 실시계획 중 대통령령으로 정하는 사항을 변경하려는 경우 국토교통부장관의 승인을 받아야 하며 제1항부터 제7항까지를 준용한다. ⑨ 고시된 날부터 5년 이내에 착공하지 아니한 경우 실시계획 승인은 효력을 잃는다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "도로공사·철도건설공사 시행·유지관리 완료 결과가 '실시계획 변경 승인·5년 실효' 단계로 인계될 때",
+     "completion_condition": "'실시계획 변경 승인·5년 실효' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "공사·유지관리 기록"
+     ],
+     "completion_evidence": [
+      "변경 승인 / 실효"
+     ],
+     "handoff_recipients": [
+      "사업시행자(국가·지자체·국가철도공단)"
+     ],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "고시일부터 5년 내 착공(미착공 시 실효)"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    }
   ],
   "edges": [
@@ -354,91 +607,379 @@
     "source": "P01",
     "target": "P02",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'국가철도망구축계획 수립·고시' 완료 결과가 '예비타당성조사' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "국토교통부장관",
+      "to_actor": "기획재정부장관",
+      "documents": [
+       "국가철도망구축계획(고시)"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E02",
     "source": "P02",
     "target": "P03",
     "type": "sequence",
-    "label": "예타 통과"
+    "label": "예타 통과",
+    "agent_transition": {
+     "condition": "예타 통과",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "기획재정부장관",
+      "to_actor": "국토교통부장관",
+      "documents": [
+       "예비타당성조사 결과"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E03",
     "source": "P03",
     "target": "P04",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'철도건설사업별 기본계획 수립·고시' 완료 결과가 '실시계획 작성·승인 신청' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "국토교통부장관",
+      "to_actor": "사업시행자(국가·지자체·국가철도공단)",
+      "documents": [
+       "철도건설기본계획(고시)"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E04",
     "source": "P04",
     "target": "P05",
     "type": "message",
-    "label": "의제 협의"
+    "label": "의제 협의",
+    "agent_transition": {
+     "condition": "의제 협의",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "사업시행자(국가·지자체·국가철도공단)",
+      "to_actor": "관계 행정기관",
+      "documents": [
+       "실시계획서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E05",
     "source": "P05",
     "target": "P06",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'인허가의제 관계기관 협의(30일)' 완료 결과가 '실시계획 승인·고시·수용 통지' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "관계 행정기관",
+      "to_actor": "국토교통부장관",
+      "documents": [
+       "협의 의견"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E06",
     "source": "P06",
     "target": "P07",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'실시계획 승인·고시·수용 통지' 완료 결과가 '실시계획·도면 열람(이해관계인)' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "국토교통부장관",
+      "to_actor": "사업시행자·이해관계인(당사자)",
+      "documents": [
+       "실시계획 승인·고시"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E07",
     "source": "P04",
     "target": "P08",
     "type": "sequence",
-    "label": "도로 트랙"
+    "label": "도로 트랙",
+    "agent_transition": {
+     "condition": "도로 트랙",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "사업시행자(국가·지자체·국가철도공단)",
+      "to_actor": "도로관리청",
+      "documents": [
+       "실시계획서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E08",
     "source": "P09",
     "target": "P08",
     "type": "sequence",
-    "label": "의견청취 후"
+    "label": "의견청취 후",
+    "agent_transition": {
+     "condition": "의견청취 후",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "주민·관계 전문가(당사자)",
+      "to_actor": "도로관리청",
+      "documents": [
+       "의견청취 결과"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E09",
     "source": "P07",
     "target": "P10",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'실시계획·도면 열람(이해관계인)' 완료 결과가 '도로공사·철도건설공사 시행·유지관리' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "사업시행자·이해관계인(당사자)",
+      "to_actor": "사업시행자·도로관리청",
+      "documents": [
+       "열람 도면"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E10",
     "source": "P08",
     "target": "P10",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'도로구역 결정·고시(도로 트랙)' 완료 결과가 '도로공사·철도건설공사 시행·유지관리' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "도로관리청",
+      "to_actor": "사업시행자·도로관리청",
+      "documents": [
+       "도로구역 결정·고시"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E11",
     "source": "P10",
     "target": "P11",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'도로공사·철도건설공사 시행·유지관리' 완료 결과가 '실시계획 변경 승인·5년 실효' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "사업시행자·도로관리청",
+      "to_actor": "국토교통부장관",
+      "documents": [
+       "공사·유지관리 기록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "L01",
     "source": "P11",
     "target": "P04",
     "type": "loop",
-    "label": "변경 시 재승인"
+    "label": "변경 시 재승인",
+    "agent_transition": {
+     "condition": "변경 시 재승인",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "국토교통부장관",
+      "to_actor": "사업시행자(국가·지자체·국가철도공단)",
+      "documents": [
+       "변경 승인 / 실효"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    }
   ],
   "warnings": [
    "개별 사건의 요건·기한·금액은 하위규정과 사실관계에 따라 달라질 수 있다.",
    "2026-07-13 L2 템플릿 셸 재구축: 일반 템플릿 노드(요건확인/신청·제안서 제출/접수·형식 검토/검토·협의/결정 통지/이행·사후관리, P08 보완·재검토 루프)를 국도·철도 SOC 실제 절차로 전면 교체. 근거를 국가재정법 단일 오인용(제50·7·9·10조)에서 철도건설법·도로법·국가재정법 3법으로 재구성. 레인을 실제 주체(사업시행자/국토교통부장관/관계 행정기관·도로관리청/기재부·주민)로 재배치. 노드 11개: 철도건설법 제4조 망계획, 제7조 기본계획, 제8조 시행자, 제9조 실시계획 승인·수용통지·열람·변경·5년실효, 제11조 의제협의(30일), 국가재정법 제38조 예타(500억·300억), 도로법 제25조 도로구역 결정·제26조 주민 의견청취·제31조 도로공사. 모든 인용을 DRF 원문(철도 286613·도로 280119·국가재정 286517) 조문으로 교체(국가재정법 플레이스홀더 4건 대체). (D) 제11조③ 30일·제9조⑨ 5년·제4조④ 5년 법정기한 보강. (E) 도로법 제26조 주민 의견청취·제9조⑤⑥ 수용 통지·이해관계인 열람 등 당사자 권리 신설. 도로/철도 병렬 트랙 분기 반영. 참조 MST 286613(철도건설법), 280119(도로법), 286517(국가재정법). 법의 침묵: 국가재정법 제38조② 예타 면제 대상·조사방법은 대통령령·지침 위임. 법의 침묵: 철도건설법 제9조① 실시계획 세부사항은 대통령령 위임. 법의 침묵: 도로법 제26조② 의견청취 세부는 대통령령 위임.",
    "canvas 섹션도 템플릿 보일러플레이트(purpose/procedure/authorities 일반문구, legalBasis 국가재정법 오인용)로 남아 있음 — 본 작업 범위(process)에서 제외."
-  ]
+  ],
+  "agent_readiness": {
+   "contract_version": "1.1.0",
+   "level": "R2",
+   "mode": "next-action",
+   "assessed_at": "2026-09-01",
+   "assessment_method": "스키마 검증·그래프 파생·전이 수동 대조·법제처 DRF API 직접 대조",
+   "live_legal_check": "required-before-use",
+   "last_live_check": {
+    "checked_at": "2026-09-01",
+    "method": "law.go.kr-DRF-direct",
+    "status": "passed",
+    "citation_fingerprint": "sha256:f93e50e2443211f2602452f00cd7cb69d326fdc9925dbee7a7fe053330e0f855",
+    "sources_checked": 3,
+    "source_failures": 0,
+    "article_references": 11,
+    "verified_references": 11,
+    "missing_references": [],
+    "uncheckable_references": [],
+    "reference_only_references": [
+     {
+      "node_id": "P01",
+      "law": "철도의 건설 및 철도시설 유지관리에 관한 법률",
+      "article": "제4조",
+      "reason": "기한 성격 재확인 필요"
+     }
+    ],
+    "verified_node_ids": [
+     "P02",
+     "P03",
+     "P04",
+     "P05",
+     "P06",
+     "P07",
+     "P08",
+     "P09",
+     "P10",
+     "P11"
+    ],
+    "unverified_node_ids": [],
+    "source_results": [
+     {
+      "law": "철도의 건설 및 철도시설 유지관리에 관한 법률",
+      "source_type": "statute",
+      "source_id": "009847",
+      "official_url": "https://law.go.kr/법령/철도의건설및철도시설유지관리에관한법률",
+      "requested_articles": [
+       "제11조",
+       "제4조",
+       "제7조",
+       "제8조",
+       "제9조"
+      ],
+      "verified_articles": [
+       "제11조",
+       "제4조",
+       "제7조",
+       "제8조",
+       "제9조"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "철도의 건설 및 철도시설 유지관리에 관한 법률",
+      "version_key": "0098472026060221738",
+      "promulgated_on": "2026-06-02",
+      "effective_on": "2026-06-02"
+     },
+     {
+      "law": "국가재정법",
+      "source_type": "statute",
+      "source_id": "010301",
+      "official_url": "https://law.go.kr/법령/국가재정법",
+      "requested_articles": [
+       "제38조"
+      ],
+      "verified_articles": [
+       "제38조"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "국가재정법",
+      "version_key": "0103012026081121859",
+      "promulgated_on": "2026-08-11",
+      "effective_on": "2026-08-11"
+     },
+     {
+      "law": "도로법",
+      "source_type": "statute",
+      "source_id": "001821",
+      "official_url": "https://law.go.kr/법령/도로법",
+      "requested_articles": [
+       "제25조",
+       "제26조",
+       "제31조"
+      ],
+      "verified_articles": [
+       "제25조",
+       "제26조",
+       "제31조"
+      ],
+      "missing_articles": [],
+      "status": "passed",
+      "official_name": "도로법",
+      "version_key": "0018212025120221172",
+      "promulgated_on": "2025-12-02",
+      "effective_on": "2026-06-03"
+     }
+    ]
+   },
+   "actionable_node_ids": [
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P08",
+    "P09",
+    "P10",
+    "P11"
+   ],
+   "reference_only_node_ids": [
+    "P01"
+   ],
+   "reference_only_reasons": {
+    "P01": [
+     "기한 성격 재확인 필요"
+    ]
+   },
+   "blockers": [],
+   "metrics": {
+    "nodes": 11,
+    "edges": 12,
+    "node_contract_coverage": 1,
+    "transition_contract_coverage": 1,
+    "explicit_basis_coverage": 1,
+    "output_document_coverage": 1,
+    "low_confidence_nodes": 0,
+    "template_like_nodes": 0,
+    "deadline_review_nodes": 1,
+    "reference_only_nodes": 1,
+    "actionable_coverage": 0.9091,
+    "field_verification_items": 3
+   }
+  }
  },
  "verification": {
   "status": "article-verified",
@@ -446,7 +987,8 @@
   "method": "국가법령정보센터 Open API (Korean Law MCP CLI) 출처·조문 대조",
   "scope": "법적 근거 1건 중 공식 원문 1건을 연결했다. 캔버스와 절차 노드의 명시 조문 13건 가운데 13건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 인용 문구의 해석·적용 타당성은 검증 범위에 포함하지 않는다.",
   "notes": [
-   "철도의 건설 및 철도시설 유지관리에 관한 법률 공포·시행 2026-06-02, 도로법 공포 2025-12-02·시행 2026-06-03, 국가재정법 공포·시행 2026-06-02 기준."
+   "철도의 건설 및 철도시설 유지관리에 관한 법률 공포·시행 2026-06-02, 도로법 공포 2025-12-02·시행 2026-06-03, 국가재정법 공포·시행 2026-06-02 기준.",
+   "2026-09-01 재대조: 제11조제3항은 관계 행정기관의 장이 협의요청을 받은 날부터 30일 이내에 의견을 제출하도록 하고, 같은 항 후단이 행정기본법 제24조제4항의 '20일'을 '30일'로 본다는 특례를 둔다. 제9조제9항은 고시된 날부터 5년 이내에 착공하지 아니하면 실시계획 승인의 효력을 잃도록 한다."
   ],
   "sources": [
    {

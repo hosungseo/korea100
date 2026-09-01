@@ -154,15 +154,16 @@ test("전력계통 두 경로는 케이스 층에서도 배타 관계다", async
   }
 });
 
-test("N23은 아직 제도 셋이 남아 열리지 않는다", async () => {
+test("제도 여섯을 끌어 쓰는 마일스톤도 전부 R2가 되면 열린다", async () => {
   const project = await projectCase();
   const readiness = institutionReadinessFor(project, "N23");
 
-  assert.equal(readiness.referenced.length, 6, "용수·도로 마일스톤이 가장 많은 제도를 끌어 쓴다");
-  assert.equal(readiness.next_action_computable, false);
-  assert.deepEqual(readiness.not_ready_slugs.sort(), [
-    "industrial-water-intake-permit",
-    "national-road-rail-soc",
-    "public-wastewater-treatment-facility-plan",
-  ]);
+  // 용수·도로는 이 사업에서 가장 많은 제도가 걸린 자리다.
+  assert.equal(readiness.referenced.length, 6);
+  assert.equal(readiness.next_action_computable, true);
+  assert.deepEqual(readiness.not_ready_slugs, []);
+
+  // 선행 아티팩트도 풀려 있어 두 축이 함께 열렸다.
+  const status = allMilestoneStatuses(project).find((item) => item.node_id === "N23");
+  assert.equal(status.openness, "ready");
 });
