@@ -43,7 +43,9 @@
     "promote:institution-drafts": "node scripts/promote-institution-candidate-drafts.mjs",
     "test:institution-drafts": "node --test scripts/institution-candidate-to-process-draft.test.mjs",
     "pipeline:institution-full": "node scripts/pipeline-institution-full.mjs",
-    "pipeline:register": "node scripts/register-clear-basis-from-queue.mjs"
+    "pipeline:register": "node scripts/register-clear-basis-from-queue.mjs",
+    "docs:ontology-stats": "node scripts/ontology-stats.mjs",
+    "check:ontology-stats": "node scripts/ontology-stats.mjs --check"
   },
   "dependencies": {
     "fast-xml-parser": "^5.10.0",

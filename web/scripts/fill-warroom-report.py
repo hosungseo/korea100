@@ -330,6 +330,57 @@ def _downstream(ho, g):
     return len(seen)
 
 
+def _attention():
+    """관문 → 관심층(온톨로지 attentionView 계산). 없으면 빈 dict.
+
+    지도가 data.json 에 실어 둔 것을 읽기만 한다. 여기서 다시 계산하지 않는다 —
+    보고서와 지도가 다른 숫자를 말하는 길을 만들지 않으려는 것이다.
+    """
+    try:
+        d = json.loads(MAPDATA.read_text())
+    except Exception:
+        return {}
+    # openness 는 노드의 최상위 필드고 attention 은 그 위에 얹힌 층이다. 여기서 합쳐 준다.
+    return {n["id"]: {**n["attention"], "openness": n.get("openness")}
+            for n in d["nodes"] if n.get("attention")}
+
+
+# 총리가 풀 수 있는 것부터. 지도 브리핑과 같은 순서를 쓴다.
+ATT_RANK = {
+    "cross_ministry_wait": 0,     # 다른 부처 손에 있어 총리가 풀어야 도는 선
+    "exclusive_branch_gate": 1,   # 사업이 정해야 열리는 갈림길
+    "central_decision": 2,        # 총리 테이블 결정
+    "policy_or_governance": 3,
+    "high_leverage_open": 4,
+}
+ATT_KO = {
+    "cross_ministry_wait": "다부처 물림",
+    "exclusive_branch_gate": "미확정 갈림길",
+    "central_decision": "총리 테이블",
+    "policy_or_governance": "정책·거버넌스",
+    "high_leverage_open": "고지렛대",
+}
+
+
+def att_priority(att):
+    """관심층 → (층, 최상위 사유 순위). 낮을수록 먼저."""
+    if not att:
+        return (2, 9)
+    tier = 0 if att.get("tier") == "cabinet" else 1
+    codes = [r["code"] for r in att.get("reasons", []) if r.get("tier") == att.get("tier")]
+    best = min((ATT_RANK.get(c, 8) for c in codes), default=8)
+    return (tier, best)
+
+
+def att_why(att):
+    """지시의 '왜'에 온톨로지가 준 사유를 적는다. 없으면 None."""
+    if not att or att.get("tier") != "cabinet":
+        return None
+    codes = [r["code"] for r in att.get("reasons", []) if r.get("tier") == "cabinet"]
+    codes.sort(key=lambda c: ATT_RANK.get(c, 8))
+    return ATT_KO.get(codes[0]) if codes else None
+
+
 SIGNALS = WEB / "public/warroom/map/signals.json"
 LOOPDATA = WEB / "public/warroom/loop/data.json"
 
@@ -753,10 +804,17 @@ def directives(advances):
                     out.append((gate, inst["name"], nxt, "직전 절차 완료 보도"))
                     seen.add(gate)
 
-    # ② 착수 가능하나 미착수인 관문의 첫 절차
-    ready = [g for g, n in N.items()
-             if n["status"] in ("planned", "unknown")
-             and all(N[p]["status"] == "completed" for p in hi.get(g, []))]
+    # ② 착수 가능하나 미착수인 관문의 첫 절차.
+    #    온톨로지가 개폐를 계산해 두었으면 그것을 쓴다 — 여기서 다시 판정하면
+    #    hard/soft 구분과 경로 미확정(path_undetermined)을 이 파일이 또 알아야 한다.
+    att = _attention()
+    if att:
+        ready = [g for g, a in att.items()
+                 if a.get("openness") in ("ready", "in_progress") and g in N]
+    else:
+        ready = [g for g, n in N.items()
+                 if n["status"] in ("planned", "unknown")
+                 and all(N[p]["status"] == "completed" for p in hi.get(g, []))]
     # ② 오늘 보도된 관문의 '다음 관문'. 고위직은 기사를 보고 지시하므로
     #    "뭔일인지 알아보라"보다 한 겹 깊게, 다음에 무엇이 오는지를 짚어 준다.
     nxt = []
@@ -768,24 +826,33 @@ def directives(advances):
     # 사이에 걸친 일은 아무도 끝까지 안 챙겨 거기서 멈춘다
     gmin = gate_ministries()
     for v, src in sorted(set(nxt),
-                         key=lambda x: (-len(gmin.get(x[0], [])), -_downstream(ho, x[0]))):
+                         key=lambda x: (att_priority(att.get(x[0])),
+                                        -len(gmin.get(x[0], [])), -_downstream(ho, x[0]))):
         if v in seen:
             continue
         for inst in (byGate.get(v) or [])[:1]:
             steps = inst.get("steps") or []
             if steps:
-                out.append((v, inst["name"], steps[0], f"{src} 보도의 다음 관문"))
+                # 보도가 이유지만, 총리가 왜 챙겨야 하는지는 온톨로지가 안다.
+                tag = att_why(att.get(v))
+                why = f"{src} 보도의 다음 관문" + (f"·{tag}" if tag else "")
+                out.append((v, inst["name"], steps[0], why))
                 seen.add(v)
 
-    # ③ 그래도 모자라면 착수 가능한데 미착수인 관문 — 파급 순
-    for g in sorted(ready, key=lambda x: (-len(gmin.get(x, [])), -_downstream(ho, x))):
+    # ③ 그래도 모자라면 착수 가능한데 미착수인 관문.
+    #    순서는 관심층 우선 — 총리 층이면서 '다른 부처 손에 있는 것'이 먼저다.
+    #    파급 수는 온톨로지가 센 하류(reach)를 쓰고, 없으면 종전 계산으로 물러선다.
+    for g in sorted(ready, key=lambda x: (att_priority(att.get(x)),
+                                          -len(gmin.get(x, [])), -_downstream(ho, x))):
         if g in seen:
             continue
         for inst in (byGate.get(g) or [])[:1]:
             steps = inst.get("steps") or []
             if steps:
-                n = _downstream(ho, g)
-                why = "착수 가능" + (f"·뒤 {n}개" if n else "")
+                a = att.get(g) or {}
+                n = a.get("reach", _downstream(ho, g))
+                tag = att_why(a)
+                why = (tag or "착수 가능") + (f"·뒤 {n}개" if n else "")
                 out.append((g, inst["name"], steps[0], why))
     return out
 
@@ -797,12 +864,17 @@ def to_dsl(b, compact=False):
     (마크다운 혼입·서두·불릿 변형을 일곱 번 겪었다). 검증 가능한 JSON 을 받고
     DSL 은 코드가 만든다. 그러면 사람이 DSL 을 손으로 고쳐 다시 굽는 것도 된다.
 
-    compact: 1쪽을 넘긴 경우의 재생성 단계. 1이면 * 부연만 한 줄로,
-    그래도 넘치면 2에서 리스크 상술(-)까지 조인다 — 상술을 먼저 자르면
-    "…추진을 노동조건" 같은 반토막 문장이 남는다(백테스트).
+    compact: 1쪽을 넘긴 경우의 재생성 단계.
+      1 — * 부연을 한 줄로 조인다
+      2 — 리스크의 * 주석(관문·법령)을 통째 뺀다
+    상술(-)은 어느 단계에서도 자르지 않는다. 상술은 '무엇이 왜 문제인가'를
+    지고 있고 주석은 참고 표시라, 상술을 자르면 "…무안 민심"처럼 뜻이 끊긴
+    문장이 남는다(2026-08-31 발송분에서 실제로 났다). 줄 수로도 주석을 빼는
+    쪽이 더 많이 줄어든다 — 리스크 3건이면 3줄.
     """
     wide = 1 if compact >= 1 else 2       # * 부연 줄 수 상한
-    wide_body = 1 if compact >= 2 else 2  # 리스크 - 상술 줄 수 상한
+    wide_body = 2                          # 리스크 - 상술은 항상 두 줄까지
+    drop_risk_note = compact >= 2          # 리스크의 * 주석 생략
     gmap = gate_names()
     y, mo, d = b["date"].split("-")
     L = [f"제목: {b['title']}",
@@ -876,7 +948,7 @@ def to_dsl(b, compact=False):
             bits.append(leads[g])
         if g and gbasis.get(g):
             bits.append(gbasis[g])
-        if bits:
+        if bits and not drop_risk_note:
             L.append("주석: " + fit_bits(bits, SMALL_W, wide))
 
     L += ["엔터:", "네모: 조치 필요사항"]
@@ -935,6 +1007,9 @@ def to_dsl(b, compact=False):
         "next": ["준비상황 점검", "사전 준비 착수 확인"],
         "multi": ["부처 협의 상황 점검", "협의 쟁점·기한 확인", "합동 추진체계 점검"],
         "ready": ["착수 여부 확인", "미착수 사유 확인"],
+        # 온톨로지가 "다른 부처 손에 있다"고 판정한 관문 — 총리가 직접 풀 자리다.
+        "wait": ["소관 부처 간 조정", "선행 산출물 인계 시점 확정"],
+        "branch": ["적용 경로 결정", "경로 확정 시점 제시"],
     }
     used_aspects = set()
 
@@ -962,6 +1037,10 @@ def to_dsl(b, compact=False):
                 else f"지시 {n_rep + 1}회째 이행 점검"
         elif "완료" in why:
             aspect = pick_aspect("done")   # 직전 절차가 끝났다는 보도가 있었다
+        elif "다부처 물림" in why:
+            aspect = pick_aspect("wait")   # 막는 산출물이 다른 부처 손에 지금 있다
+        elif "미확정 갈림길" in why:
+            aspect = pick_aspect("branch")  # 사업이 값을 정해야 관문이 열린다
         elif "다음 관문" in why:
             aspect = pick_aspect("next")   # 아직 이 관문 차례가 오지 않았다
         elif len(ms) > 1:
