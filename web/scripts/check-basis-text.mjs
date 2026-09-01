@@ -28,12 +28,17 @@ const INSTITUTIONS = join(WEB, "data", "institutions");
 
 // "국가연구개발혁신법 제13조제1항에 따른 절차" — 조문을 가리키기만 하고 문언이 없다.
 const STUB = /에 따른 (절차|사항|규정|기준|조치)\s*$/;
+// 조문 원문 자리에 사람이 쓴 편집자 주가 들어간 것 — "(각 호는 고시 원문 참조)",
+// "(계산식은 시행령 원문의 그림 참조)". 스텁보다 나쁘다: 원문인 척하면서 원문이 아니고,
+// 읽는 쪽은 조문에 그렇게 적혀 있다고 믿는다. 인용문 복구 작업에서 실제로 4건 나왔다.
+const EDITORIAL = /\([^)]*(원문|각 호|계산식|그림|별표)[^)]*(참조|생략|같음)[^)]*\)/;
 // 조문 문언이면 서술어로 끝난다. 제목은 명사구다.
 const PREDICATE = /(한다|하여야|할 수 있다|해야|된다|이다|없다|같다|따른다)/;
 
 export function classifyBasis(basis) {
   const text = String(basis?.text ?? "").trim();
   if (!text) return "empty";
+  if (EDITORIAL.test(text)) return "editorial";
   if (STUB.test(text)) return "stub";
   // article "제8조(분산에너지사업의 등록)" 의 괄호 안과 text가 같으면 제목을 복사한 것이다.
   const caption = String(basis?.article ?? "").match(/\(([^)]+)\)/);
@@ -43,7 +48,7 @@ export function classifyBasis(basis) {
 }
 
 export function inspectInstitution(institution) {
-  const counts = { text: 0, stub: 0, "title-only": 0, "title-like": 0, empty: 0 };
+  const counts = { text: 0, stub: 0, "title-only": 0, "title-like": 0, empty: 0, editorial: 0 };
   const weakNodes = [];
   for (const node of institution.process?.nodes ?? []) {
     const bases = node.legal_basis ?? [];
@@ -111,7 +116,13 @@ function main() {
   }
 
   console.log(`인용 ${grand}건 중 조문 원문 ${quoted}건 (${Math.round((quoted / grand) * 100)}%)`);
-  console.log(`  스텁 ${totals.stub ?? 0} · 제목만 ${totals["title-only"] ?? 0} · 제목형 ${totals["title-like"] ?? 0} · 빈값 ${totals.empty ?? 0}`);
+  console.log(`  스텁 ${totals.stub ?? 0} · 제목만 ${totals["title-only"] ?? 0} · 제목형 ${totals["title-like"] ?? 0} · 빈값 ${totals.empty ?? 0} · 편집자주 ${totals.editorial ?? 0}`);
+  if (totals.editorial) {
+    // 이건 세어 두고 넘어갈 종류가 아니다. 원문인 척하는 창작이라 종료코드로 막는다.
+    console.error(`\n✖ 조문 원문 자리에 편집자 주가 ${totals.editorial}건 있습니다 — 원문인 척하는 창작입니다.`);
+    for (const row of only.filter((r) => r.counts.editorial > 0)) console.error(`  · ${row.slug} ${row.counts.editorial}건`);
+    process.exitCode = 1;
+  }
   const weak = only.filter((r) => r.coverage < 0.5);
   console.log(`원문 비율 50% 미만 제도 ${weak.length} / ${only.length}`);
   const r2weak = weak.filter((r) => r.level === "R2");
