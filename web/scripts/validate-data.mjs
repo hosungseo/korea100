@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { buildProcessLaneGroups } from "../src/lib/process-layout.mjs";
 import { validateAgentInstitution } from "./lib/agent-readiness.mjs";
 import { TIER_RANK } from "./lib/mega-tier.mjs";
+import { articleInBasis } from "./apply-step-decision-tier.mjs";
 
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const WEB_DIR = path.dirname(SCRIPT_DIR);
@@ -280,8 +281,9 @@ for (const { file, data: institution } of institutions) {
         fail(nodeScope, "조문 대조로 판정했다면서 tier가 unknown입니다 — unresolved여야 합니다");
       }
       if (d.basis_article) {
-        const has = (node.legal_basis ?? []).some((b) => b.article === d.basis_article || String(b.article).startsWith(d.basis_article));
-        if (!has) fail(nodeScope, `decision.basis_article이 legal_basis에 없습니다 (${d.basis_article})`);
+        if (!articleInBasis(d.basis_article, node.legal_basis)) {
+          fail(nodeScope, `decision.basis_article이 legal_basis에 없습니다 (${d.basis_article})`);
+        }
       } else if (d.source === "article-reviewed" && d.tier !== "field") {
         fail(nodeScope, `decision.basis_article이 없는데 tier가 ${d.tier}입니다 — 권한자를 정한 조문을 대야 합니다`);
       }

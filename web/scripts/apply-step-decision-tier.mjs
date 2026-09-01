@@ -34,6 +34,22 @@ function detectIndent(text) {
   return match ? match[1].length : 2;
 }
 
+/**
+ * 근거 조문이 그 노드의 legal_basis에 있는가.
+ *
+ * 판정은 "물환경보전법 제49조제2항"처럼 법령명을 붙여 오기도 하고, 노드는 "제49조제2항"만
+ * 들고 있기도 하다. 조문 부분만 떼어 비교한다 — 느슨하게 풀면 제1조와 제11조가 붙는다.
+ * 적용기와 검증기가 각자 규칙을 들면 한쪽이 통과시킨 것을 다른 쪽이 막는다. 정의는 여기 하나다.
+ */
+export function articleInBasis(basisArticle, legalBasis) {
+  const part = (value) => (String(value ?? "").match(/제\d+조(의\d+)?(제\d+항)?(제\d+호)?/) ?? [""])[0];
+  const want = part(basisArticle);
+  return (legalBasis ?? []).some((basis) => {
+    const own = part(basis.article);
+    return basis.article === basisArticle || (own && want && own === want) || String(basis.article).startsWith(basisArticle);
+  });
+}
+
 /** 판정 하나를 노드와 대조한다. 통과하면 적용 값을, 아니면 강등 사유를 돌려준다. */
 export function validateStep(step, node) {
   const problems = [];
@@ -45,8 +61,7 @@ export function validateStep(step, node) {
   }
   const articles = (node.legal_basis ?? []).map((basis) => basis.article);
   const basis = (step.basis_article ?? "").trim();
-
-  if (basis && !articles.some((article) => article === basis || article.startsWith(basis))) {
+  if (basis && !articleInBasis(basis, node.legal_basis)) {
     // 노드가 안 들고 있는 조문을 끌어온 판정. 조문이 틀렸을 수도, 노드가 근거를
     // 빠뜨렸을 수도 있다. 어느 쪽이든 이 자리에서 정할 일이 아니므로 강등한다.
     problems.push(`근거 조문이 노드 legal_basis에 없음: ${basis} (노드: ${articles.join(", ") || "없음"})`);

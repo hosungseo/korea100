@@ -15,8 +15,56 @@ const REPO_DIR = path.dirname(WEB_DIR);
 const CONFIG_PATH = path.join(WEB_DIR, "config", "news-candidate-queries.json");
 const MANIFEST_PATH = path.join(REPO_DIR, "docs", "institutions-100-manifest.json");
 const OUT_DIR = path.join(REPO_DIR, "docs", "news-candidates");
+const ARCHIVE_DIR = path.join(OUT_DIR, "archive");
 const JSON_PATH = path.join(OUT_DIR, "latest.json");
 const MD_PATH = path.join(OUT_DIR, "latest.md");
+
+
+function stampKst(date = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Seoul",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(date);
+  const v = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return {
+    date: `${v.year}-${v.month}-${v.day}`,
+    time: `${v.hour}${v.minute}${v.second}`,
+    isoLocal: `${v.year}-${v.month}-${v.day}T${v.hour}:${v.minute}:${v.second}+09:00`,
+  };
+}
+
+function writeArchiveIndex(archiveRoot) {
+  if (!fs.existsSync(archiveRoot)) return;
+  const days = fs.readdirSync(archiveRoot, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory() && /^\d{4}-\d{2}-\d{2}$/.test(entry.name))
+    .map((entry) => entry.name)
+    .sort()
+    .reverse();
+  const lines = [
+    "# Korea100 news-candidates archive",
+    "",
+    `updatedAt: ${new Date().toISOString()}`,
+    "",
+    `| date | runs | day-latest |`,
+    `|---|---:|---|`,
+  ];
+  for (const day of days) {
+    const dayDir = path.join(archiveRoot, day);
+    const runs = fs.readdirSync(dayDir)
+      .filter((name) => /^\d{6}\.json$/.test(name))
+      .sort();
+    const hasDayLatest = fs.existsSync(path.join(dayDir, "day-latest.json"));
+    lines.push(`| ${day} | ${runs.length} | ${hasDayLatest ? "yes" : "no"} |`);
+  }
+  lines.push("");
+  fs.writeFileSync(path.join(archiveRoot, "INDEX.md"), `${lines.join("\n")}\n`);
+}
 
 function localDate(timeZone, date = new Date()) {
   const parts = new Intl.DateTimeFormat("en-US", {
@@ -153,11 +201,37 @@ async function run() {
     fs.mkdirSync(OUT_DIR, { recursive: true });
     fs.writeFileSync(JSON_PATH, `${JSON.stringify(result, null, 2)}\n`);
     fs.writeFileSync(MD_PATH, markdownReport(result));
+
+    // Date-based archive (KST): every run under archive/YYYY-MM-DD/HHMMSS.*
+    // plus archive/YYYY-MM-DD/day-latest.* for that calendar day.
+    const stamp = stampKst(new Date(result.generatedAt ?? Date.now()));
+    const day = result.runDate || stamp.date;
+    const dayDir = path.join(ARCHIVE_DIR, day);
+    fs.mkdirSync(dayDir, { recursive: true });
+    const runBase = path.join(dayDir, stamp.time);
+    const archivePayload = {
+      ...result,
+      archive: {
+        day,
+        runStamp: stamp.time,
+        runAtKst: stamp.isoLocal,
+      },
+    };
+    fs.writeFileSync(`${runBase}.json`, `${JSON.stringify(archivePayload, null, 2)}\n`);
+    fs.writeFileSync(`${runBase}.md`, markdownReport(archivePayload));
+    fs.writeFileSync(path.join(dayDir, "day-latest.json"), `${JSON.stringify(archivePayload, null, 2)}\n`);
+    fs.writeFileSync(path.join(dayDir, "day-latest.md"), markdownReport(archivePayload));
+    writeArchiveIndex(ARCHIVE_DIR);
   }
   if (!process.argv.includes("--quiet")) {
     console.log(`candidates ${candidates.length} naver=${sourceCounts.naver_news ?? 0} policy=${sourceCounts.policy_briefing ?? 0}`);
     if (sourceErrors.length) console.log(`source_errors ${sourceErrors.map((entry) => entry.source).join(",")}`);
     console.log(path.relative(REPO_DIR, JSON_PATH));
+    if (!process.argv.includes("--dry-run")) {
+      const stamp = stampKst(new Date(result.generatedAt ?? Date.now()));
+      const day = result.runDate || stamp.date;
+      console.log(path.relative(REPO_DIR, path.join(ARCHIVE_DIR, day, `${stamp.time}.json`)));
+    }
   }
 }
 

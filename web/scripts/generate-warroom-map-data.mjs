@@ -501,7 +501,7 @@ ${redundant.length ? `<p><b>결정거리가 아닌 것:</b> 미확정으로 선�
         // 결정 단계 수 — 조문을 읽고 붙인 위상(article-reviewed)이 있으면 그것을,
         // 없으면 담당 표기 추정을 쓴다. 둘을 갈라 세어 화면이 어느 쪽인지 말하게 한다.
         const sigStepsOf = (n) => {
-          let total = 0; let signature = 0; let reviewed = 0; let reviewedSig = 0;
+          let total = 0; let signature = 0; let reviewed = 0; let reviewedSig = 0; let unresolved = 0;
           for (const ref of n.templateRefs ?? []) {
             let inst;
             try { inst = JSON.parse(readFileSync(join(root, `data/institutions/${ref.institution}.json`), "utf8")); } catch { continue; }
@@ -509,13 +509,16 @@ ${redundant.length ? `<p><b>결정거리가 아닌 것:</b> 미확정으로 선�
             total += steps.length;
             for (const step of steps) {
               const t = stepTier(step);
+              // 판정을 거친 단계와, 그 결과 위상이 확정된 단계는 다른 수다.
+              // "조문이 권한자를 안 정했다"도 판정 결과이므로 뭉뚱그리면 안 된다.
               if (t.source !== "heuristic") reviewed += 1;
+              if (t.source === "unresolved") unresolved += 1;
               if (!t.is_decision || !(TIER_RANK[t.tier] >= TIER_RANK.minister)) continue;
               signature += 1;
               if (t.source === "article-reviewed") reviewedSig += 1;
             }
           }
-          return { total, signature, reviewed, reviewedSig };
+          return { total, signature, reviewed, reviewedSig, unresolved };
         };
         const rows = A.cabinet.map((e) => {
           const src = project.nodes.find((x) => x.id === e.node_id);
@@ -527,6 +530,7 @@ ${redundant.length ? `<p><b>결정거리가 아닌 것:</b> 미확정으로 선�
         const cabinetSig = rows.reduce((s, r) => s + r.steps.signature, 0);
         const cabinetReviewed = rows.reduce((s, r) => s + r.steps.reviewed, 0);
         const cabinetReviewedSig = rows.reduce((s, r) => s + r.steps.reviewedSig, 0);
+        const cabinetUnresolved = rows.reduce((s, r) => s + r.steps.unresolved, 0);
         out.push({
           id: "ont-attention",
           label: "🏛 총리·국무위원 관심",
@@ -535,7 +539,7 @@ ${redundant.length ? `<p><b>결정거리가 아닌 것:</b> 미확정으로 선�
 <ol>${rows.map((r) =>
             `<li data-nodes="${r.node_id}">${r.label} <span class="mono" style="color:var(--muted);font-size:9px">${r.node_id} · ${r.openness} · 하류 ${r.downstream_reach} · 결정단계 ${r.steps.signature}/${r.steps.total}</span><br><span style="font-size:10px">${r.reasons.filter((x) => x.tier === "cabinet").map((x) => `${REASON_KO[x.code] ?? x.code}${x.code === "cross_ministry_wait" ? `(${x.evidence.replace("artifact:", "")})` : ""}`).join(" · ")}</span></li>`,
           ).join("")}</ol>
-<p style="color:var(--muted);font-size:10px">층은 손으로 고른 목록이 아니라 결정 위상×개폐×의존 그래프에서 매번 다시 계산됩니다. 상태가 바뀌면 목록도 바뀝니다. 단계 위상은 ${cabinetReviewed}/${cabinetSteps}단계가 <b>조문 대조</b>(그중 결정 단계 ${cabinetReviewedSig}개), 나머지는 담당 표기 휴리스틱입니다.</p>`,
+<p style="color:var(--muted);font-size:10px">층은 손으로 고른 목록이 아니라 결정 위상×개폐×의존 그래프에서 매번 다시 계산됩니다. 상태가 바뀌면 목록도 바뀝니다. 단계 위상은 ${cabinetReviewed}/${cabinetSteps}단계를 조문으로 판정했고, 그중 <b>${cabinetReviewed - cabinetUnresolved}개만 권한자가 조문에 있습니다</b>(결정 단계 ${cabinetReviewedSig}개). ${cabinetUnresolved}개는 인용문이 조문 원문이 아니라 제목·스텁이어서 권한자를 읽을 수 없었고, 판정 안 한 ${cabinetSteps - cabinetReviewed}개는 담당 표기 휴리스틱입니다.</p>`,
         });
       }
       return out;
