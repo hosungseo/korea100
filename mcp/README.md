@@ -44,6 +44,7 @@ Korea100의 업무구조도를 AI 에이전트가 질의할 수 있는 **읽기 
 | `check_case_linkage` | 케이스 그래프를 제도 업무구조도(또는 메가프로젝트 오버레이)와 대조하고 준비도 등급으로 다음 행동 허용 여부 판정 |
 | `get_project_status` | 프로젝트 케이스의 마일스톤을 완료·진행·착수가능·차단·경로미확정으로 분류 |
 | `explain_blocked_milestone` | 마일스톤을 막는 아티팩트와 상류 선행 마일스톤 추적 |
+| `get_pending_decisions` | 사업이 아직 정하지 않은 파라미터와 그것이 여닫는 마일스톤 |
 
 `create_action_packet`과 `query_case`는 서로 다른 경로지만 같은 ActionPacket 계약을 통과한다.
 두 응답 모두 정규화된 `ontology_packet`을 함께 반환하고, `execution_allowed=false`·
@@ -64,6 +65,7 @@ Korea100의 업무구조도를 AI 에이전트가 질의할 수 있는 **읽기 
 | `samples/preliminary-feasibility-study.case.json` | 예비타당성조사 (N02) | R2 | 가능 (P16 격리) |
 | `samples/national-strategic-industry-complex.case.json` | 특화단지 (N03) | R2 | 가능 |
 | `samples/distributed-energy-grid-assessment.case.json` | 정식 전력계통영향평가 (N19) | R2 | 가능 |
+| `samples/water-road-supply-plan.case.json` | 용수·도로 (마일스톤 케이스, 제도 6종) | 전부 R2 | 가능 |
 
 질의가 케이스의 데모 질문과 충분히 가깝지 않으면 패킷을 만들지 않고
 `case_needs_disambiguation`으로 후보를 되묻는다.

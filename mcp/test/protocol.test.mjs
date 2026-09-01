@@ -40,6 +40,7 @@ test("stdio MCP가 도구·리소스를 공개하고 다음 행동을 구조화�
       "explain_blocked_milestone",
       "get_case_state",
       "get_next_actions",
+      "get_pending_decisions",
       "get_procedure_map",
       "get_project_status",
       "get_step_requirements",
@@ -179,6 +180,20 @@ test("stdio MCP가 도구·리소스를 공개하고 다음 행동을 구조화�
   assert.ok(blocked.structuredContent.blocked_by.length > 0);
   assert.ok(blocked.structuredContent.upstream_chain.length > 0);
   assert.equal(blocked.structuredContent.institution_readiness.next_action_computable, false);
+
+  const decisions = await client.callTool({
+    name: "get_pending_decisions",
+    arguments: { case_file: projectFile },
+  });
+  assert.equal(decisions.isError, undefined);
+  assert.equal(decisions.structuredContent.execution_allowed, false);
+  // gridPath만 값이 둘인 배타 분기다. 나머지는 참·거짓 게이트다.
+  assert.equal(decisions.structuredContent.exclusive_branches.length, 1);
+  assert.equal(decisions.structuredContent.exclusive_branches[0].parameter, "gridPath");
+  assert.deepEqual(
+    decisions.structuredContent.exclusive_branches[0].options.map((option) => option.milestone).sort(),
+    ["N19", "N20"],
+  );
 
   const wrongKind = await client.callTool({
     name: "get_project_status",

@@ -14,7 +14,13 @@ import {
 } from "./ontology-bridge.mjs";
 import { certifyPacketEnvelope, PacketContractError } from "./packet-contract.mjs";
 import { checkCaseLinkageFor } from "./case-link.mjs";
-import { projectStatus, explainBlocked, isProjectCase, ProjectCaseError } from "./project-case.mjs";
+import {
+  projectStatus,
+  explainBlocked,
+  pendingDecisions,
+  isProjectCase,
+  ProjectCaseError,
+} from "./project-case.mjs";
 
 const SERVER_NAME = "korea100-administrative-procedure";
 const SERVER_VERSION = "0.2.0";
@@ -367,6 +373,26 @@ export function createAdministrativeProcedureMcpServer(service, { ontologyEnable
       (data) => data.milestone.openness === "blocked"
         ? `${data.milestone.node_id}: 아티팩트 ${data.blocked_by.length}개가 막고 있고 상류 ${data.upstream_chain.length}개 마일스톤이 걸려 있습니다.`
         : `${data.milestone.node_id}: 상태 ${data.milestone.openness}, 차단 아티팩트 ${data.blocked_by.length}개`,
+    );
+
+    registerReadOnlyTool(
+      server,
+      "get_pending_decisions",
+      {
+        title: "아직 정하지 않은 갈림길",
+        description: "사업이 아직 정하지 않은 파라미터와 그것이 여닫는 마일스톤을 모읍니다. 배타 분기는 따로 표시합니다. 무엇을 고를지는 말하지 않고 고를 것이 무엇인지만 반환합니다.",
+        inputSchema: {
+          case_file: z.string().trim().max(200).describe("ontology/ 기준 상대경로. 프로젝트 케이스여야 합니다"),
+        },
+      },
+      async ({ case_file }) => {
+        const data = await loadOntologyCase({ caseFile: case_file });
+        if (!isProjectCase(data)) {
+          throw new ProjectCaseError("not_a_project_case", "프로젝트 케이스가 아닙니다.", { case_file });
+        }
+        return pendingDecisions(data);
+      },
+      (data) => `미확정 파라미터 ${data.undetermined_parameters.length}개, 배타 분기 ${data.exclusive_branches.length}개`,
     );
   }
 

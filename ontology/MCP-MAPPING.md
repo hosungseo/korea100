@@ -22,6 +22,7 @@
 | `check_case_linkage` *(신규)* | Case ↔ Institution/Project 그래프 대조 | 준비도 등급으로 다음 행동 허용 판정 |
 | `get_project_status` *(신규)* | 프로젝트 케이스 마일스톤 개폐 계산 | 아티팩트 의존 그래프에서 결정적 계산 |
 | `explain_blocked_milestone` *(신규)* | 차단 아티팩트 → 상류 마일스톤 추적 | 추정 금지, 그래프만 따라간다 |
+| `get_pending_decisions` *(신규)* | 미확정 파라미터와 그것이 여닫는 마일스톤 | 무엇을 고를지는 말하지 않는다 |
 
 ## 프로젝트 케이스 (case_kind: project)
 
@@ -41,6 +42,20 @@
 마일스톤 개폐는 아티팩트 의존에서 결정적으로 나온다. hard `finish_to_start`만 차단으로
 보고 soft는 경고로 남긴다. 활성화 규칙이 걸린 마일스톤은 그 파라미터가 확정되기
 전까지 `path_undetermined`로 두며, 오버레이 진행 상태보다 이 판정이 우선한다.
+
+## 마일스톤 케이스 (case_kind: milestone)
+
+마일스톤 하나가 제도 여럿을 끌어 쓸 때, 각 제도의 내부가 아니라 조합 선택을 담는다.
+
+| 검사 | 어긋남 판정 |
+|---|---|
+| 케이스 제도 목록 == 오버레이 `templateRefs` | `missing_from_case` / `unknown_in_case` |
+| `mappingStatus`(exact/candidate) 일치 | `mapping_mismatches` |
+| `step:<slug>:<nodeId>`가 그 제도의 노드 | `unknown_step_ids` |
+| 케이스에 박은 준비도 == 현재 제도 파일 | `stale_readiness` |
+
+응답은 확정 적용(exact)과 적용 후보(candidate)를 갈라 보고하고, 후보를 요건으로
+보고하지 않는다는 사실을 `notes`에 남긴다.
 
 ## 두 층의 대조 (case-link)
 

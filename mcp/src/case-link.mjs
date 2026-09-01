@@ -333,7 +333,146 @@ export function checkProjectContext(caseData, project) {
   };
 }
 
+/**
+ * 마일스톤 케이스는 제도 하나가 아니라 그 마일스톤이 끌어 쓰는 제도 전부와 대조한다.
+ * 단계 ID가 step:<slug>:<nodeId>로 이름 붙어 있으므로 제도별로 나눠 확인한다.
+ */
+export function checkMilestoneLinkage(caseData, project, institutions) {
+  if (!project) {
+    return {
+      case_kind: "milestone",
+      project_id: caseData.project_id ?? null,
+      milestone_node_id: caseData.milestone_node_id ?? null,
+      status: "project_not_found",
+      next_action_allowed: false,
+      notes: ["케이스가 가리키는 메가프로젝트 파일을 찾지 못했습니다."],
+      execution_allowed: false,
+    };
+  }
+
+  const milestone = project.nodes.find((node) => node.id === caseData.milestone_node_id);
+  if (!milestone) {
+    return {
+      case_kind: "milestone",
+      project_id: caseData.project_id,
+      milestone_node_id: caseData.milestone_node_id,
+      status: "milestone_not_found",
+      next_action_allowed: false,
+      notes: [`오버레이에 ${caseData.milestone_node_id} 마일스톤이 없습니다.`],
+      execution_allowed: false,
+    };
+  }
+
+  const overlayRefs = new Map(
+    (milestone.templateRefs ?? []).map((ref) => [ref.institution, {
+      mappingStatus: ref.mappingStatus ?? "exact",
+      nodeIds: ref.nodeIds ?? null,
+    }]),
+  );
+
+  const caseInstitutions = (caseData.entities ?? []).filter((entity) => entity.id.startsWith("institution:"));
+  const caseSlugs = caseInstitutions.map((entity) => entity.attrs?.slug);
+  const missingFromCase = [...overlayRefs.keys()].filter((slug) => !caseSlugs.includes(slug));
+  const unknownInCase = caseSlugs.filter((slug) => !overlayRefs.has(slug));
+
+  const mappingMismatches = caseInstitutions
+    .filter((entity) => {
+      const overlay = overlayRefs.get(entity.attrs?.slug);
+      return overlay && overlay.mappingStatus !== entity.attrs?.mapping_status;
+    })
+    .map((entity) => ({
+      slug: entity.attrs?.slug,
+      case_mapping: entity.attrs?.mapping_status,
+      overlay_mapping: overlayRefs.get(entity.attrs?.slug)?.mappingStatus,
+    }));
+
+  // step:<slug>:<nodeId>가 그 제도의 실제 노드인지 확인한다.
+  const unknownStepIds = [];
+  for (const entity of caseData.entities ?? []) {
+    if (!entity.id.startsWith("step:")) continue;
+    const slug = entity.attrs?.institution_slug;
+    const nodeId = entity.attrs?.process_id;
+    const institution = institutions.get(slug);
+    if (!institution || !institution.process?.nodes?.some((node) => node.id === nodeId)) {
+      unknownStepIds.push(entity.id);
+    }
+  }
+
+  const readiness = caseInstitutions.map((entity) => ({
+    slug: entity.attrs?.slug,
+    mapping_status: entity.attrs?.mapping_status,
+    recorded_level: entity.attrs?.readiness_level,
+    current_level: institutions.get(entity.attrs?.slug)?.process?.agent_readiness?.level ?? "unassessed",
+  }));
+  const staleReadiness = readiness.filter((item) => item.recorded_level !== item.current_level);
+  const notReady = readiness.filter((item) => item.current_level !== "R2");
+
+  const drifted = missingFromCase.length > 0
+    || unknownInCase.length > 0
+    || mappingMismatches.length > 0
+    || unknownStepIds.length > 0
+    || staleReadiness.length > 0;
+
+  const notes = [];
+  if (drifted) notes.push("케이스와 오버레이가 어긋났습니다. --remerge로 구조 층을 다시 파생하세요.");
+  if (notReady.length > 0) {
+    notes.push(`참조 제도 ${notReady.length}개가 R2가 아닙니다: ${notReady.map((item) => item.slug).join(", ")}`);
+  }
+  const candidates = readiness.filter((item) => item.mapping_status === "candidate");
+  if (candidates.length > 0) {
+    notes.push(
+      `적용 후보 제도 ${candidates.length}개는 확정 요건이 아닙니다: ${candidates.map((item) => item.slug).join(", ")}`,
+    );
+  }
+
+  return {
+    case_kind: "milestone",
+    project_id: caseData.project_id,
+    project_name: project.name,
+    milestone_node_id: milestone.id,
+    milestone_name: milestone.name,
+    status: drifted ? "drifted" : "aligned",
+    institutions: {
+      case_count: caseInstitutions.length,
+      overlay_count: overlayRefs.size,
+      exact: readiness.filter((item) => item.mapping_status !== "candidate").map((item) => item.slug),
+      candidate: candidates.map((item) => item.slug),
+      missing_from_case: missingFromCase,
+      unknown_in_case: unknownInCase,
+      mapping_mismatches: mappingMismatches,
+      stale_readiness: staleReadiness,
+      not_ready: notReady.map((item) => item.slug),
+    },
+    steps: {
+      case_step_count: (caseData.entities ?? []).filter((entity) => entity.id.startsWith("step:")).length,
+      unknown_step_ids: unknownStepIds,
+    },
+    next_action_allowed: !drifted && caseInstitutions.length > 0 && notReady.length === 0,
+    notes,
+    execution_allowed: false,
+  };
+}
+
+async function readInstitutions(slugs, options) {
+  const entries = await Promise.all(slugs.map(async (slug) => {
+    const institution = await loadInstitutionForLinkage(slug, options);
+    return institution ? [slug, institution] : null;
+  }));
+  return new Map(entries.filter(Boolean));
+}
+
 export async function checkCaseLinkageFor(caseData, options = {}) {
+  if (caseData?.case_kind === "milestone") {
+    const project = await loadProjectForLinkage(caseData.project_id, options);
+    const slugs = new Set([
+      ...(caseData.institution_slugs ?? []),
+      ...(project?.nodes ?? [])
+        .filter((node) => node.id === caseData.milestone_node_id)
+        .flatMap((node) => (node.templateRefs ?? []).map((ref) => ref.institution)),
+    ]);
+    return checkMilestoneLinkage(caseData, project, await readInstitutions([...slugs], options));
+  }
+
   if (caseData?.case_kind === "project") {
     const project = await loadProjectForLinkage(caseData.project_id, options);
     const readiness = await readInstitutionReadiness(caseData, options);

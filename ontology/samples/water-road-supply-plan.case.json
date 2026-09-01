@@ -1,0 +1,2074 @@
+{
+ "ontology_version": "korea100.ontology.core.v0",
+ "case_kind": "milestone",
+ "project_id": "gwangju-semiconductor-cluster",
+ "project_name": "광주 군공항 부지 반도체 클러스터",
+ "milestone_node_id": "N23",
+ "milestone_label": "공업용수·공공폐수·접근도로 수요·공급계획 확정",
+ "institution_slug": null,
+ "institution_slugs": [
+  "industrial-water-intake-permit",
+  "national-road-rail-soc",
+  "semiconductor-infrastructure-support-fast-track",
+  "industrial-waterworks-business-authorization",
+  "public-wastewater-treatment-facility-plan",
+  "groundwater-development-use-permit"
+ ],
+ "case_id": "GSC-N23-2026-0901",
+ "as_of": "2026-09-01",
+ "source_project_json": "web/data/mega-projects/projects/gwangju-semiconductor-cluster.json",
+ "derivation": {
+  "generator": "ontology/scripts/derive-milestone-case.mjs",
+  "derived_layers": [
+   "Institution 엔티티(참조 제도와 mappingStatus·준비도)",
+   "제도 슬러그로 이름 붙인 Step 엔티티",
+   "owns 관계(제도 → 그 제도의 단계)"
+  ],
+  "authored_layers": [
+   "Case",
+   "InformationItem",
+   "Role",
+   "State",
+   "Rule",
+   "ActionPacket",
+   "demo_queries"
+  ],
+  "institution_count": 6,
+  "step_count": 28,
+  "exact_refs": [
+   "industrial-water-intake-permit",
+   "national-road-rail-soc"
+  ],
+  "candidate_refs": [
+   "semiconductor-infrastructure-support-fast-track",
+   "industrial-waterworks-business-authorization",
+   "public-wastewater-treatment-facility-plan",
+   "groundwater-development-use-permit"
+  ]
+ },
+ "entities": [
+  {
+   "id": "case:GSC-N23-2026-0901",
+   "type": "Case",
+   "label": "광주 반도체 클러스터 용수·도로 수요·공급계획 건",
+   "status": "verified",
+   "attrs": {
+    "project_id": "gwangju-semiconductor-cluster",
+    "milestone_node_id": "N23",
+    "scenario": "제도 여섯이 걸린 자리. 여섯을 다 밟는 것이 아니라 어느 조합을 밟을지 정하는 단계다.",
+    "overlay_note": "용수 공급주체·처리구역·폐수처리 방식이 미확정이므로 기반시설별 후보 절차로 표시",
+    "downstream": [
+     "N24 용수·재이용·전용수도·폐수·하수도·접근도로 승인·비용분담",
+     "N50 신규 수원 확보 — 동복댐 증축·댐건설기본계획"
+    ]
+   }
+  },
+  {
+   "id": "role:gwangju",
+   "type": "Role",
+   "label": "광주특별시",
+   "status": "verified",
+   "attrs": {
+    "note": "오버레이상 이 마일스톤의 lead"
+   }
+  },
+  {
+   "id": "role:developer",
+   "type": "Role",
+   "label": "사업자",
+   "status": "unverified"
+  },
+  {
+   "id": "role:water-agency",
+   "type": "Role",
+   "label": "수자원 관계기관",
+   "status": "verified"
+  },
+  {
+   "id": "role:road-authority",
+   "type": "Role",
+   "label": "도로관리청",
+   "status": "verified"
+  },
+  {
+   "id": "item:water-supply-entity",
+   "type": "InformationItem",
+   "label": "용수 공급주체",
+   "status": "unverified",
+   "legal_basis": [
+    {
+     "law": "수도법",
+     "article": "제48조제1항",
+     "text": "국가는 산업단지에 공업용수도시설을 설치해 공급하거나 다른 수도사업자에게 공급하게 하여야 한다."
+    }
+   ],
+   "attrs": {
+    "decides": "industrial-waterworks-business-authorization 적용 여부"
+   }
+  },
+  {
+   "id": "item:discharge-method",
+   "type": "InformationItem",
+   "label": "폐수처리 방식과 처리구역",
+   "status": "unverified",
+   "legal_basis": [
+    {
+     "law": "물환경보전법",
+     "article": "제49조제3항",
+     "text": "기본계획을 수립하거나 승인하였을 때에는 공공폐수처리구역을 지정하고 그 내용을 고시하여야 한다."
+    }
+   ],
+   "attrs": {
+    "decides": "public-wastewater-treatment-facility-plan 적용 여부"
+   }
+  },
+  {
+   "id": "item:groundwater-use",
+   "type": "InformationItem",
+   "label": "지하수 보조 수원 사용 여부",
+   "status": "unverified",
+   "legal_basis": [
+    {
+     "law": "지하수법",
+     "article": "제7조제1항",
+     "text": "지하수를 개발·이용하려는 자는 미리 시장·군수·구청장의 허가를 받아야 한다."
+    }
+   ],
+   "attrs": {
+    "decides": "groundwater-development-use-permit 적용 여부"
+   }
+  },
+  {
+   "id": "item:fasttrack-application",
+   "type": "InformationItem",
+   "label": "반도체 기반시설 신속처리 특례 적용 여부",
+   "status": "unverified",
+   "legal_basis": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제14조제1항",
+     "text": "국가 및 지방자치단체는 전력·용수·폐수·도로 등 산업기반시설을 신속하게 조성·지원하여야 한다."
+    }
+   ],
+   "attrs": {
+    "decides": "semiconductor-infrastructure-support-fast-track 적용 여부",
+    "note": "이 특례는 반도체클러스터 지정(N03)을 전제한다."
+   }
+  },
+  {
+   "id": "institution:industrial-water-intake-permit",
+   "type": "Institution",
+   "label": "공업용수·취수 허가",
+   "status": "verified",
+   "attrs": {
+    "slug": "industrial-water-intake-permit",
+    "mapping_status": "exact",
+    "referenced_step_ids": [
+     "P01",
+     "P02"
+    ],
+    "applies_whole_template": false,
+    "readiness_level": "R2",
+    "readiness_mode": "next-action",
+    "node_count": 20
+   }
+  },
+  {
+   "id": "institution:national-road-rail-soc",
+   "type": "Institution",
+   "label": "국가 도로·철도 SOC 추진",
+   "status": "verified",
+   "attrs": {
+    "slug": "national-road-rail-soc",
+    "mapping_status": "exact",
+    "referenced_step_ids": null,
+    "applies_whole_template": true,
+    "readiness_level": "R2",
+    "readiness_mode": "next-action",
+    "node_count": 11
+   }
+  },
+  {
+   "id": "institution:semiconductor-infrastructure-support-fast-track",
+   "type": "Institution",
+   "label": "반도체 산업기반시설 지원·예타·인허가 신속처리",
+   "status": "inferred",
+   "attrs": {
+    "slug": "semiconductor-infrastructure-support-fast-track",
+    "mapping_status": "candidate",
+    "referenced_step_ids": [
+     "P01",
+     "P02",
+     "P03",
+     "P04",
+     "P05",
+     "P06"
+    ],
+    "applies_whole_template": false,
+    "readiness_level": "R2",
+    "readiness_mode": "next-action",
+    "node_count": 10
+   }
+  },
+  {
+   "id": "institution:industrial-waterworks-business-authorization",
+   "type": "Institution",
+   "label": "공업용수도 사업인가·실시계획·준공",
+   "status": "inferred",
+   "attrs": {
+    "slug": "industrial-waterworks-business-authorization",
+    "mapping_status": "candidate",
+    "referenced_step_ids": [
+     "P01",
+     "P02",
+     "P03"
+    ],
+    "applies_whole_template": false,
+    "readiness_level": "R2",
+    "readiness_mode": "next-action",
+    "node_count": 9
+   }
+  },
+  {
+   "id": "institution:public-wastewater-treatment-facility-plan",
+   "type": "Institution",
+   "label": "공공폐수처리시설 기본계획·설계·준공·운영",
+   "status": "inferred",
+   "attrs": {
+    "slug": "public-wastewater-treatment-facility-plan",
+    "mapping_status": "candidate",
+    "referenced_step_ids": [
+     "P01",
+     "P02",
+     "P03",
+     "P04"
+    ],
+    "applies_whole_template": false,
+    "readiness_level": "R2",
+    "readiness_mode": "next-action",
+    "node_count": 10
+   }
+  },
+  {
+   "id": "institution:groundwater-development-use-permit",
+   "type": "Institution",
+   "label": "지하수 개발·이용허가·영향조사·준공",
+   "status": "inferred",
+   "attrs": {
+    "slug": "groundwater-development-use-permit",
+    "mapping_status": "candidate",
+    "referenced_step_ids": [
+     "P01",
+     "P02"
+    ],
+    "applies_whole_template": false,
+    "readiness_level": "R2",
+    "readiness_mode": "next-action",
+    "node_count": 8
+   }
+  },
+  {
+   "id": "artifact:water_road.demand_and_source_plan_confirmed",
+   "type": "Document",
+   "label": "water_road.demand_and_source_plan_confirmed",
+   "status": "verified",
+   "attrs": {
+    "artifact_id": "water_road.demand_and_source_plan_confirmed",
+    "produced_by_milestone": "N23"
+   }
+  },
+  {
+   "id": "step:industrial-water-intake-permit:P01",
+   "type": "Step",
+   "label": "용수 수지·원수 검토",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "하천법",
+     "article": "제49조(하천수 사용 및 배분의 원칙)",
+     "text": "하천수 사용 및 배분의 원칙"
+    },
+    {
+     "law": "수도법",
+     "article": "제48조(국가 등이 설치하는 공업용수도)",
+     "text": "국가 등이 설치하는 공업용수도"
+    }
+   ],
+   "attrs": {
+    "process_id": "P01",
+    "lane": "수요 기업",
+    "stage": "G0 수요",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "수요 기업",
+    "output_documents": [
+     "수요계획"
+    ],
+    "institution_slug": "industrial-water-intake-permit",
+    "mapping_status": "exact"
+   }
+  },
+  {
+   "id": "step:industrial-water-intake-permit:P02",
+   "type": "Step",
+   "label": "공급 가능성 협의",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "수도법",
+     "article": "제48조(국가 등이 설치하는 공업용수도)",
+     "text": "국가 등이 설치하는 공업용수도"
+    },
+    {
+     "law": "수도법",
+     "article": "제49조(공업용수도사업의 인가)",
+     "text": "공업용수도사업의 인가"
+    }
+   ],
+   "attrs": {
+    "process_id": "P02",
+    "lane": "공급기관(수공·지자체)",
+    "stage": "G0 수요",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "공급기관(수공·지자체)",
+    "output_documents": [
+     "공급 의견"
+    ],
+    "institution_slug": "industrial-water-intake-permit",
+    "mapping_status": "exact"
+   }
+  },
+  {
+   "id": "step:national-road-rail-soc:P01",
+   "type": "Step",
+   "label": "국가철도망구축계획 수립·고시",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "철도의 건설 및 철도시설 유지관리에 관한 법률",
+     "article": "제4조(국가철도망구축계획의 수립 및 변경)",
+     "text": "① 국토교통부장관은 10년 단위로 국가철도망구축계획을 수립ㆍ시행하여야 한다. ③ 관계 중앙행정기관ㆍ시ㆍ도지사와 협의 후 철도산업위원회 심의를 거쳐야 한다. ④ 수립일부터 5년마다 타당성을 검토한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P01",
+    "lane": "국토교통부장관",
+    "stage": "G0 계획·예타",
+    "node_type": "task",
+    "deadline": "10년 단위(5년마다 타당성 검토)",
+    "actor": "국토교통부장관",
+    "output_documents": [
+     "국가철도망구축계획(고시)"
+    ],
+    "institution_slug": "national-road-rail-soc",
+    "mapping_status": "exact"
+   }
+  },
+  {
+   "id": "step:national-road-rail-soc:P02",
+   "type": "Step",
+   "label": "예비타당성조사",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "국가재정법",
+     "article": "제38조(예비타당성조사)",
+     "text": "① 기획재정부장관은 총사업비가 500억원 이상이고 국가의 재정지원 규모가 300억원 이상인 신규 사업(건설공사 포함 사업 등)에 대한 예산 편성을 위하여 미리 예비타당성조사를 실시하고 결과를 요약하여 국회 소관 상임위원회와 예산결산특별위원회에 제출하여야 한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P02",
+    "lane": "기획재정부·주민",
+    "stage": "G0 계획·예타",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "기획재정부장관",
+    "output_documents": [
+     "예비타당성조사 결과"
+    ],
+    "institution_slug": "national-road-rail-soc",
+    "mapping_status": "exact"
+   }
+  },
+  {
+   "id": "step:national-road-rail-soc:P03",
+   "type": "Step",
+   "label": "철도건설사업별 기본계획 수립·고시",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "철도의 건설 및 철도시설 유지관리에 관한 법률",
+     "article": "제7조(철도건설사업별 기본계획의 수립)",
+     "text": "① 국토교통부장관은 사업별 철도건설기본계획을 수립하여야 한다. ③ 관계 중앙행정기관ㆍ시ㆍ도지사와 미리 협의하여야 하며 고속철도건설기본계획은 협의 후 위원회 심의를 거쳐야 한다. ④ 수립하면 고시하여야 한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P03",
+    "lane": "국토교통부장관",
+    "stage": "G1 기본계획",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "국토교통부장관",
+    "output_documents": [
+     "철도건설기본계획(고시)"
+    ],
+    "institution_slug": "national-road-rail-soc",
+    "mapping_status": "exact"
+   }
+  },
+  {
+   "id": "step:national-road-rail-soc:P04",
+   "type": "Step",
+   "label": "실시계획 작성·승인 신청",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "철도의 건설 및 철도시설 유지관리에 관한 법률",
+     "article": "제8조(철도건설사업의 시행자)",
+     "text": "① 철도건설사업은 국가, 지방자치단체 또는 국가철도공단이 시행한다."
+    },
+    {
+     "law": "철도의 건설 및 철도시설 유지관리에 관한 법률",
+     "article": "제9조(철도건설사업별 실시계획의 승인)",
+     "text": "① 사업시행자는 사업의 규모와 내용, 사업 구역, 사업 기간 등을 포함한 실시계획을 작성하여 국토교통부장관의 승인을 받아야 한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P04",
+    "lane": "사업시행자",
+    "stage": "G2 실시계획·협의",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "사업시행자(국가·지자체·국가철도공단)",
+    "output_documents": [
+     "실시계획서"
+    ],
+    "institution_slug": "national-road-rail-soc",
+    "mapping_status": "exact"
+   }
+  },
+  {
+   "id": "step:national-road-rail-soc:P05",
+   "type": "Step",
+   "label": "인허가의제 관계기관 협의(30일)",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "철도의 건설 및 철도시설 유지관리에 관한 법률",
+     "article": "제11조(다른 법률에 따른 인가ㆍ허가 등의 의제)",
+     "text": "② 국토교통부장관은 관계 행정기관의 장과 미리 협의하여야 한다. ③ 협의요청을 받은 관계 행정기관의 장은 요청받은 날부터 30일 이내에 의견을 제출하여야 한다. ④ 인ㆍ허가등 의제 기준·효과는 「행정기본법」 제24조부터 제26조까지를 준용하되 제24조제4항의 '20일'은 '30일'로 본다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P05",
+    "lane": "관계 행정기관·도로관리청",
+    "stage": "G2 실시계획·협의",
+    "node_type": "task",
+    "deadline": "협의 요청받은 날부터 30일 이내",
+    "actor": "관계 행정기관",
+    "output_documents": [
+     "협의 의견"
+    ],
+    "institution_slug": "national-road-rail-soc",
+    "mapping_status": "exact"
+   }
+  },
+  {
+   "id": "step:national-road-rail-soc:P06",
+   "type": "Step",
+   "label": "실시계획 승인·고시·수용 통지",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "철도의 건설 및 철도시설 유지관리에 관한 법률",
+     "article": "제9조(철도건설사업별 실시계획의 승인)",
+     "text": "④ 국토교통부장관은 실시계획을 승인하면 고시하고 관계 서류 사본을 관계 지방자치단체의 장에게 송부하여야 한다. ⑤ 토지등의 수용ㆍ사용이 필요한 실시계획을 승인한 경우 토지등의 소유자 및 권리자에게 알려야 한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P06",
+    "lane": "국토교통부장관",
+    "stage": "G3 승인·고시",
+    "node_type": "notice",
+    "deadline": null,
+    "actor": "국토교통부장관",
+    "output_documents": [
+     "실시계획 승인·고시"
+    ],
+    "institution_slug": "national-road-rail-soc",
+    "mapping_status": "exact"
+   }
+  },
+  {
+   "id": "step:national-road-rail-soc:P07",
+   "type": "Step",
+   "label": "실시계획·도면 열람(이해관계인)",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "철도의 건설 및 철도시설 유지관리에 관한 법률",
+     "article": "제9조(철도건설사업별 실시계획의 승인)",
+     "text": "⑥ 사업시행자는 실시계획이 고시된 경우 실시계획 및 관계 도면을 이해관계인이 볼 수 있게 하여야 한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P07",
+    "lane": "사업시행자",
+    "stage": "G3 승인·고시",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "사업시행자·이해관계인(당사자)",
+    "output_documents": [
+     "열람 도면"
+    ],
+    "institution_slug": "national-road-rail-soc",
+    "mapping_status": "exact"
+   }
+  },
+  {
+   "id": "step:national-road-rail-soc:P08",
+   "type": "Step",
+   "label": "도로구역 결정·고시(도로 트랙)",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "도로법",
+     "article": "제25조(도로구역의 결정)",
+     "text": "① 도로관리청은 도로 노선의 지정ㆍ변경 또는 폐지의 고시가 있으면 지체 없이 해당 도로의 도로구역을 결정ㆍ변경 또는 폐지하여야 한다. ③ 결정하면 사유ㆍ위치ㆍ면적 등을 고시하고 도면을 일반인이 열람할 수 있도록 하여야 한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P08",
+    "lane": "관계 행정기관·도로관리청",
+    "stage": "G2 실시계획·협의",
+    "node_type": "task",
+    "deadline": "지체 없이",
+    "actor": "도로관리청",
+    "output_documents": [
+     "도로구역 결정·고시"
+    ],
+    "institution_slug": "national-road-rail-soc",
+    "mapping_status": "exact"
+   }
+  },
+  {
+   "id": "step:national-road-rail-soc:P09",
+   "type": "Step",
+   "label": "주민 의견청취(도로 트랙)",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "도로법",
+     "article": "제26조(주민 등의 의견청취)",
+     "text": "① 도로관리청은 도로구역을 결정ㆍ변경 또는 폐지하려는 경우 미리 주소ㆍ도면ㆍ면적 등을 공고하여 주민 및 관계 전문가 등의 의견을 들어야 한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P09",
+    "lane": "기획재정부·주민",
+    "stage": "G2 실시계획·협의",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "주민·관계 전문가(당사자)",
+    "output_documents": [
+     "의견청취 결과"
+    ],
+    "institution_slug": "national-road-rail-soc",
+    "mapping_status": "exact"
+   }
+  },
+  {
+   "id": "step:national-road-rail-soc:P10",
+   "type": "Step",
+   "label": "도로공사·철도건설공사 시행·유지관리",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "도로법",
+     "article": "제31조(도로공사와 도로의 유지ㆍ관리 등)",
+     "text": "① 도로공사와 도로의 유지ㆍ관리는 이 법이나 다른 법률에 특별한 규정이 있는 경우를 제외하고는 해당 도로의 도로관리청이 수행한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P10",
+    "lane": "사업시행자",
+    "stage": "G4 공사·변경",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "사업시행자·도로관리청",
+    "output_documents": [
+     "공사·유지관리 기록"
+    ],
+    "institution_slug": "national-road-rail-soc",
+    "mapping_status": "exact"
+   }
+  },
+  {
+   "id": "step:national-road-rail-soc:P11",
+   "type": "Gate",
+   "label": "실시계획 변경 승인·5년 실효",
+   "status": "verified",
+   "legal_basis": [
+    {
+     "law": "철도의 건설 및 철도시설 유지관리에 관한 법률",
+     "article": "제9조(철도건설사업별 실시계획의 승인)",
+     "text": "⑧ 승인받은 실시계획 중 대통령령으로 정하는 사항을 변경하려는 경우 국토교통부장관의 승인을 받아야 하며 제1항부터 제7항까지를 준용한다. ⑨ 고시된 날부터 5년 이내에 착공하지 아니한 경우 실시계획 승인은 효력을 잃는다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P11",
+    "lane": "국토교통부장관",
+    "stage": "G4 공사·변경",
+    "node_type": "gateway",
+    "deadline": "고시일부터 5년 내 착공(미착공 시 실효)",
+    "actor": "국토교통부장관",
+    "output_documents": [
+     "변경 승인 / 실효"
+    ],
+    "institution_slug": "national-road-rail-soc",
+    "mapping_status": "exact"
+   }
+  },
+  {
+   "id": "step:semiconductor-infrastructure-support-fast-track:P01",
+   "type": "Step",
+   "label": "전력·용수·도로·폐수 산업기반시설 수요 확정",
+   "status": "inferred",
+   "legal_basis": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제14조제1항",
+     "text": "국가 및 지방자치단체는 전력·용수·폐수·폐기물 처리·연결도로 등 산업기반시설을 신속하게 조성·지원하여야 하며 비용의 전부 또는 일부를 우선 지원하여야 한다."
+    },
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+     "article": "제20조",
+     "text": "법 제14조제1항 각 호의 시설은 전기공급시설, 공업용수·생활용수 공급시설, 하수도·공공폐수처리시설·폐기물처리시설, 조성·운영에 사용되는 도로를 말한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P01",
+    "lane": "사업시행자·입주기업",
+    "stage": "G0 수요확정",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "사업시행자·입주기업",
+    "output_documents": [
+     "산업기반시설 수요서",
+     "단계별 공급계획"
+    ],
+    "institution_slug": "semiconductor-infrastructure-support-fast-track",
+    "mapping_status": "candidate"
+   }
+  },
+  {
+   "id": "step:semiconductor-infrastructure-support-fast-track:P02",
+   "type": "Step",
+   "label": "산업기반시설 지원계획·비용지원 신청",
+   "status": "inferred",
+   "legal_basis": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제14조제1항",
+     "text": "산업기반시설 조성·지원과 그 비용의 우선 지원 근거."
+    }
+   ],
+   "attrs": {
+    "process_id": "P02",
+    "lane": "사업시행자·입주기업",
+    "stage": "G1 지원신청",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "사업시행자·입주기업",
+    "output_documents": [
+     "기반시설 지원신청서",
+     "비용분담안"
+    ],
+    "institution_slug": "semiconductor-infrastructure-support-fast-track",
+    "mapping_status": "candidate"
+   }
+  },
+  {
+   "id": "step:semiconductor-infrastructure-support-fast-track:P03",
+   "type": "Step",
+   "label": "지원 필요성·공급능력·사업비 검토",
+   "status": "inferred",
+   "legal_basis": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제14조제1항",
+     "text": "비용은 대통령령으로 정하는 기준에 따라 전부 또는 일부를 우선 지원한다."
+    },
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제14조제2항",
+     "text": "산업기반시설 조성과 관련하여 사업시행자와 입주 기업·기관의 투자·운영 일정 및 계획을 고려하여야 한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P03",
+    "lane": "산업통상부",
+    "stage": "G1 지원신청",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "산업통상부",
+    "output_documents": [
+     "지원 타당성 검토서"
+    ],
+    "institution_slug": "semiconductor-infrastructure-support-fast-track",
+    "mapping_status": "candidate"
+   }
+  },
+  {
+   "id": "step:semiconductor-infrastructure-support-fast-track:P04",
+   "type": "Gate",
+   "label": "관계기관·공공기관 공급방안 조정",
+   "status": "inferred",
+   "legal_basis": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제14조제3항",
+     "text": "반도체클러스터의 조성·운영을 지원하기 위하여 관련 중앙행정기관·지방자치단체·입주 기업·기관 등이 참여하는 지원협의체를 구성할 수 있다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P04",
+    "lane": "산업통상부",
+    "stage": "G2 비용·협약",
+    "node_type": "gateway",
+    "deadline": null,
+    "actor": "산업통상부",
+    "output_documents": [
+     "기관별 공급·재원 조정결과"
+    ],
+    "institution_slug": "semiconductor-infrastructure-support-fast-track",
+    "mapping_status": "candidate"
+   }
+  },
+  {
+   "id": "step:semiconductor-infrastructure-support-fast-track:P05",
+   "type": "Step",
+   "label": "기반시설 비용지원·분담 결정",
+   "status": "inferred",
+   "legal_basis": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제14조제1항",
+     "text": "비용의 전부 또는 일부를 대통령령으로 정하는 기준에 따라 우선 지원한다."
+    },
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령",
+     "article": "제20조",
+     "text": "지원 대상 시설의 범위."
+    }
+   ],
+   "attrs": {
+    "process_id": "P05",
+    "lane": "산업통상부",
+    "stage": "G2 비용·협약",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "산업통상부",
+    "output_documents": [
+     "비용지원·분담 결정서"
+    ],
+    "institution_slug": "semiconductor-infrastructure-support-fast-track",
+    "mapping_status": "candidate"
+   }
+  },
+  {
+   "id": "step:semiconductor-infrastructure-support-fast-track:P06",
+   "type": "Step",
+   "label": "기반시설 공공기관 실시협약 체결",
+   "status": "inferred",
+   "legal_basis": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제14조제3항",
+     "text": "지원협의체 구성 근거. 공공기관과의 실시협약 자체를 정한 조문은 이 법에 없다."
+    },
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제18조제1항",
+     "text": "정부는 전력망·용수망·도로망의 설치·확충에 관하여 필요한 사항을 전력수급기본계획·국가수도기본계획·도로건설관리계획에 각각 반영하여야 한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P06",
+    "lane": "기반시설 공공기관",
+    "stage": "G2 비용·협약",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "기반시설 공공기관",
+    "output_documents": [
+     "기반시설 실시협약",
+     "공급 일정표"
+    ],
+    "institution_slug": "semiconductor-infrastructure-support-fast-track",
+    "mapping_status": "candidate"
+   }
+  },
+  {
+   "id": "step:industrial-waterworks-business-authorization:P01",
+   "type": "Step",
+   "label": "단계별 공업용수 수요·수질·공급신뢰도 확정",
+   "status": "inferred",
+   "legal_basis": [
+    {
+     "law": "수도법",
+     "article": "제48조제1항",
+     "text": "국가는 산업입지법에 따른 산업단지에 대하여 공업용수도시설을 설치해 공업용수를 공급하거나 다른 수도사업자에게 공급하게 하여야 한다."
+    },
+    {
+     "law": "수도법",
+     "article": "제48조제2항",
+     "text": "부지면적 30만제곱미터 이상 공장에 대해서도 공업용수도시설을 설치해 공급하게 할 수 있다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P01",
+    "lane": "광주특별시·사업시행자",
+    "stage": "G0 수요·경로",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "광주특별시·사업시행자",
+    "output_documents": [
+     "공업용수 수요·수질 요구서"
+    ],
+    "institution_slug": "industrial-waterworks-business-authorization",
+    "mapping_status": "candidate"
+   }
+  },
+  {
+   "id": "step:industrial-waterworks-business-authorization:P02",
+   "type": "Step",
+   "label": "국가·지방·일반수도 공급경로와 사업주체 결정",
+   "status": "inferred",
+   "legal_basis": [
+    {
+     "law": "수도법",
+     "article": "제48조제1항",
+     "text": "공급 주체는 국가 또는 국가가 정하는 다른 수도사업자다."
+    },
+    {
+     "law": "수도법",
+     "article": "제49조제1항",
+     "text": "시설용량이 1일 1만톤을 초과하면 기후에너지환경부장관, 1만톤 이하면 시·도지사의 인가를 받아야 한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P02",
+    "lane": "환경부·수도사업 인가권자",
+    "stage": "G0 수요·경로",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "환경부·수도사업 인가권자",
+    "output_documents": [
+     "공업용수 공급경로 결정서",
+     "사업주체 확인서"
+    ],
+    "institution_slug": "industrial-waterworks-business-authorization",
+    "mapping_status": "candidate"
+   }
+  },
+  {
+   "id": "step:industrial-waterworks-business-authorization:P03",
+   "type": "Step",
+   "label": "공업용수도 사업계획·재원·관로계획 작성",
+   "status": "inferred",
+   "legal_basis": [
+    {
+     "law": "수도법",
+     "article": "제49조제1항",
+     "text": "공업용수도사업을 하려는 자는 대통령령으로 정하는 바에 따라 인가를 받아야 한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P03",
+    "lane": "수자원공사·수도사업자",
+    "stage": "G1 사업계획",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "수자원공사·수도사업자",
+    "output_documents": [
+     "공업용수도 사업계획",
+     "재원·관로계획"
+    ],
+    "institution_slug": "industrial-waterworks-business-authorization",
+    "mapping_status": "candidate"
+   }
+  },
+  {
+   "id": "step:public-wastewater-treatment-facility-plan:P01",
+   "type": "Step",
+   "label": "폐수발생량·수질·처리구역·방류수역 영향 예측",
+   "status": "inferred",
+   "legal_basis": [
+    {
+     "law": "물환경보전법",
+     "article": "제48조제1항",
+     "text": "수질오염이 악화되어 환경기준을 유지하기 곤란하거나 물환경 보전에 필요하다고 인정되는 지역의 각 사업장 수질오염물질을 공동 처리하기 위하여 공공폐수처리시설을 설치·운영할 수 있다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P01",
+    "lane": "광주특별시·산단 지정권자",
+    "stage": "G0 부하예측",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "광주특별시·산단 지정권자",
+    "output_documents": [
+     "폐수 부하예측서",
+     "처리구역·방류영향 검토서"
+    ],
+    "institution_slug": "public-wastewater-treatment-facility-plan",
+    "mapping_status": "candidate"
+   }
+  },
+  {
+   "id": "step:public-wastewater-treatment-facility-plan:P02",
+   "type": "Step",
+   "label": "공공폐수처리시설 기본계획 작성",
+   "status": "inferred",
+   "legal_basis": [
+    {
+     "law": "물환경보전법",
+     "article": "제49조제2항",
+     "text": "시행자는 공공폐수처리시설 기본계획을 수립하여 기후에너지환경부장관의 승인을 받아야 한다."
+    },
+    {
+     "law": "물환경보전법",
+     "article": "제49조제1항",
+     "text": "기후에너지환경부장관이 직접 설치할 때에는 기본계획을 수립하여야 한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P02",
+    "lane": "광주특별시·산단 지정권자",
+    "stage": "G1 기본계획",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "광주특별시·산단 지정권자",
+    "output_documents": [
+     "공공폐수처리시설 기본계획안"
+    ],
+    "institution_slug": "public-wastewater-treatment-facility-plan",
+    "mapping_status": "candidate"
+   }
+  },
+  {
+   "id": "step:public-wastewater-treatment-facility-plan:P03",
+   "type": "Gate",
+   "label": "기본계획 승인 협의·환경부 승인",
+   "status": "inferred",
+   "legal_basis": [
+    {
+     "law": "물환경보전법",
+     "article": "제49조제2항",
+     "text": "기본계획 수립 후 기후에너지환경부장관의 승인을 받아야 하며, 변경할 때에도 같다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P03",
+    "lane": "환경부",
+    "stage": "G2 승인·고시",
+    "node_type": "gateway",
+    "deadline": null,
+    "actor": "환경부",
+    "output_documents": [
+     "기본계획 승인서",
+     "협의조건"
+    ],
+    "institution_slug": "public-wastewater-treatment-facility-plan",
+    "mapping_status": "candidate"
+   }
+  },
+  {
+   "id": "step:public-wastewater-treatment-facility-plan:P04",
+   "type": "Step",
+   "label": "기본계획 고시·처리구역·시행자 확정",
+   "status": "inferred",
+   "legal_basis": [
+    {
+     "law": "물환경보전법",
+     "article": "제49조제3항",
+     "text": "기본계획을 수립하거나 승인하였을 때에는 공공폐수처리구역을 지정하고 그 지정 내용을 포함한 수립 또는 승인 내용을 고시하여야 한다."
+    },
+    {
+     "law": "물환경보전법",
+     "article": "제48조제1항",
+     "text": "설치·운영 주체와 원인자의 비용 부담."
+    }
+   ],
+   "attrs": {
+    "process_id": "P04",
+    "lane": "광주특별시·산단 지정권자",
+    "stage": "G2 승인·고시",
+    "node_type": "notice",
+    "deadline": null,
+    "actor": "광주특별시·산단 지정권자",
+    "output_documents": [
+     "기본계획 고시",
+     "처리구역·시행자 확정서"
+    ],
+    "institution_slug": "public-wastewater-treatment-facility-plan",
+    "mapping_status": "candidate"
+   }
+  },
+  {
+   "id": "step:groundwater-development-use-permit:P01",
+   "type": "Step",
+   "label": "취수량·용도·시설규모별 허가·신고 경로 판정",
+   "status": "inferred",
+   "legal_basis": [
+    {
+     "law": "지하수법",
+     "article": "제7조제1항",
+     "text": "지하수를 개발·이용하려는 자는 미리 시장·군수·구청장의 허가를 받아야 한다. 자연 유출수·부수 발생 지하수, 동력장치 없는 가정용·공동우물 등은 제외한다."
+    },
+    {
+     "law": "지하수법",
+     "article": "제8조제1항",
+     "text": "국방·군사시설, 농어업 소규모 이용, 재해 등 긴급한 경우에는 허가 대신 신고로 개발·이용할 수 있다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P01",
+    "lane": "사업시행자·이용자",
+    "stage": "G0 적용판정",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "사업시행자·이용자",
+    "output_documents": [
+     "지하수 개발·이용 적용판정서"
+    ],
+    "institution_slug": "groundwater-development-use-permit",
+    "mapping_status": "candidate"
+   }
+  },
+  {
+   "id": "step:groundwater-development-use-permit:P02",
+   "type": "Step",
+   "label": "지하수영향조사·보전대책 작성",
+   "status": "inferred",
+   "legal_basis": [
+    {
+     "law": "지하수법",
+     "article": "제7조제2항",
+     "text": "허가를 신청하려는 자는 제27조에 따른 지하수영향조사기관이 실시하는 지하수영향조사를 받은 후 지하수영향조사서를 첨부하여야 한다."
+    }
+   ],
+   "attrs": {
+    "process_id": "P02",
+    "lane": "지하수영향조사기관",
+    "stage": "G1 영향조사",
+    "node_type": "task",
+    "deadline": null,
+    "actor": "지하수영향조사기관",
+    "output_documents": [
+     "지하수영향조사서",
+     "지하수 보전대책"
+    ],
+    "institution_slug": "groundwater-development-use-permit",
+    "mapping_status": "candidate"
+   }
+  }
+ ],
+ "relations": [
+  {
+   "id": "R-owns-industrial-water-intake-permit-P01",
+   "type": "owns",
+   "from": "institution:industrial-water-intake-permit",
+   "to": "step:industrial-water-intake-permit:P01",
+   "label": "적용 단계",
+   "condition": "exact"
+  },
+  {
+   "id": "R-owns-industrial-water-intake-permit-P02",
+   "type": "owns",
+   "from": "institution:industrial-water-intake-permit",
+   "to": "step:industrial-water-intake-permit:P02",
+   "label": "적용 단계",
+   "condition": "exact"
+  },
+  {
+   "id": "R-owns-national-road-rail-soc-P01",
+   "type": "owns",
+   "from": "institution:national-road-rail-soc",
+   "to": "step:national-road-rail-soc:P01",
+   "label": "적용 단계",
+   "condition": "exact"
+  },
+  {
+   "id": "R-owns-national-road-rail-soc-P02",
+   "type": "owns",
+   "from": "institution:national-road-rail-soc",
+   "to": "step:national-road-rail-soc:P02",
+   "label": "적용 단계",
+   "condition": "exact"
+  },
+  {
+   "id": "R-owns-national-road-rail-soc-P03",
+   "type": "owns",
+   "from": "institution:national-road-rail-soc",
+   "to": "step:national-road-rail-soc:P03",
+   "label": "적용 단계",
+   "condition": "exact"
+  },
+  {
+   "id": "R-owns-national-road-rail-soc-P04",
+   "type": "owns",
+   "from": "institution:national-road-rail-soc",
+   "to": "step:national-road-rail-soc:P04",
+   "label": "적용 단계",
+   "condition": "exact"
+  },
+  {
+   "id": "R-owns-national-road-rail-soc-P05",
+   "type": "owns",
+   "from": "institution:national-road-rail-soc",
+   "to": "step:national-road-rail-soc:P05",
+   "label": "적용 단계",
+   "condition": "exact"
+  },
+  {
+   "id": "R-owns-national-road-rail-soc-P06",
+   "type": "owns",
+   "from": "institution:national-road-rail-soc",
+   "to": "step:national-road-rail-soc:P06",
+   "label": "적용 단계",
+   "condition": "exact"
+  },
+  {
+   "id": "R-owns-national-road-rail-soc-P07",
+   "type": "owns",
+   "from": "institution:national-road-rail-soc",
+   "to": "step:national-road-rail-soc:P07",
+   "label": "적용 단계",
+   "condition": "exact"
+  },
+  {
+   "id": "R-owns-national-road-rail-soc-P08",
+   "type": "owns",
+   "from": "institution:national-road-rail-soc",
+   "to": "step:national-road-rail-soc:P08",
+   "label": "적용 단계",
+   "condition": "exact"
+  },
+  {
+   "id": "R-owns-national-road-rail-soc-P09",
+   "type": "owns",
+   "from": "institution:national-road-rail-soc",
+   "to": "step:national-road-rail-soc:P09",
+   "label": "적용 단계",
+   "condition": "exact"
+  },
+  {
+   "id": "R-owns-national-road-rail-soc-P10",
+   "type": "owns",
+   "from": "institution:national-road-rail-soc",
+   "to": "step:national-road-rail-soc:P10",
+   "label": "적용 단계",
+   "condition": "exact"
+  },
+  {
+   "id": "R-owns-national-road-rail-soc-P11",
+   "type": "owns",
+   "from": "institution:national-road-rail-soc",
+   "to": "step:national-road-rail-soc:P11",
+   "label": "적용 단계",
+   "condition": "exact"
+  },
+  {
+   "id": "R-owns-semiconductor-infrastructure-support-fast-track-P01",
+   "type": "owns",
+   "from": "institution:semiconductor-infrastructure-support-fast-track",
+   "to": "step:semiconductor-infrastructure-support-fast-track:P01",
+   "label": "적용 후보 단계",
+   "condition": "candidate"
+  },
+  {
+   "id": "R-owns-semiconductor-infrastructure-support-fast-track-P02",
+   "type": "owns",
+   "from": "institution:semiconductor-infrastructure-support-fast-track",
+   "to": "step:semiconductor-infrastructure-support-fast-track:P02",
+   "label": "적용 후보 단계",
+   "condition": "candidate"
+  },
+  {
+   "id": "R-owns-semiconductor-infrastructure-support-fast-track-P03",
+   "type": "owns",
+   "from": "institution:semiconductor-infrastructure-support-fast-track",
+   "to": "step:semiconductor-infrastructure-support-fast-track:P03",
+   "label": "적용 후보 단계",
+   "condition": "candidate"
+  },
+  {
+   "id": "R-owns-semiconductor-infrastructure-support-fast-track-P04",
+   "type": "owns",
+   "from": "institution:semiconductor-infrastructure-support-fast-track",
+   "to": "step:semiconductor-infrastructure-support-fast-track:P04",
+   "label": "적용 후보 단계",
+   "condition": "candidate"
+  },
+  {
+   "id": "R-owns-semiconductor-infrastructure-support-fast-track-P05",
+   "type": "owns",
+   "from": "institution:semiconductor-infrastructure-support-fast-track",
+   "to": "step:semiconductor-infrastructure-support-fast-track:P05",
+   "label": "적용 후보 단계",
+   "condition": "candidate"
+  },
+  {
+   "id": "R-owns-semiconductor-infrastructure-support-fast-track-P06",
+   "type": "owns",
+   "from": "institution:semiconductor-infrastructure-support-fast-track",
+   "to": "step:semiconductor-infrastructure-support-fast-track:P06",
+   "label": "적용 후보 단계",
+   "condition": "candidate"
+  },
+  {
+   "id": "R-owns-industrial-waterworks-business-authorization-P01",
+   "type": "owns",
+   "from": "institution:industrial-waterworks-business-authorization",
+   "to": "step:industrial-waterworks-business-authorization:P01",
+   "label": "적용 후보 단계",
+   "condition": "candidate"
+  },
+  {
+   "id": "R-owns-industrial-waterworks-business-authorization-P02",
+   "type": "owns",
+   "from": "institution:industrial-waterworks-business-authorization",
+   "to": "step:industrial-waterworks-business-authorization:P02",
+   "label": "적용 후보 단계",
+   "condition": "candidate"
+  },
+  {
+   "id": "R-owns-industrial-waterworks-business-authorization-P03",
+   "type": "owns",
+   "from": "institution:industrial-waterworks-business-authorization",
+   "to": "step:industrial-waterworks-business-authorization:P03",
+   "label": "적용 후보 단계",
+   "condition": "candidate"
+  },
+  {
+   "id": "R-owns-public-wastewater-treatment-facility-plan-P01",
+   "type": "owns",
+   "from": "institution:public-wastewater-treatment-facility-plan",
+   "to": "step:public-wastewater-treatment-facility-plan:P01",
+   "label": "적용 후보 단계",
+   "condition": "candidate"
+  },
+  {
+   "id": "R-owns-public-wastewater-treatment-facility-plan-P02",
+   "type": "owns",
+   "from": "institution:public-wastewater-treatment-facility-plan",
+   "to": "step:public-wastewater-treatment-facility-plan:P02",
+   "label": "적용 후보 단계",
+   "condition": "candidate"
+  },
+  {
+   "id": "R-owns-public-wastewater-treatment-facility-plan-P03",
+   "type": "owns",
+   "from": "institution:public-wastewater-treatment-facility-plan",
+   "to": "step:public-wastewater-treatment-facility-plan:P03",
+   "label": "적용 후보 단계",
+   "condition": "candidate"
+  },
+  {
+   "id": "R-owns-public-wastewater-treatment-facility-plan-P04",
+   "type": "owns",
+   "from": "institution:public-wastewater-treatment-facility-plan",
+   "to": "step:public-wastewater-treatment-facility-plan:P04",
+   "label": "적용 후보 단계",
+   "condition": "candidate"
+  },
+  {
+   "id": "R-owns-groundwater-development-use-permit-P01",
+   "type": "owns",
+   "from": "institution:groundwater-development-use-permit",
+   "to": "step:groundwater-development-use-permit:P01",
+   "label": "적용 후보 단계",
+   "condition": "candidate"
+  },
+  {
+   "id": "R-owns-groundwater-development-use-permit-P02",
+   "type": "owns",
+   "from": "institution:groundwater-development-use-permit",
+   "to": "step:groundwater-development-use-permit:P02",
+   "label": "적용 후보 단계",
+   "condition": "candidate"
+  },
+  {
+   "id": "R-about",
+   "type": "about",
+   "from": "case:GSC-N23-2026-0901",
+   "to": "item:water-supply-entity",
+   "label": "선결 정보",
+   "condition": null
+  },
+  {
+   "id": "R-req-entity",
+   "type": "requires",
+   "from": "institution:industrial-waterworks-business-authorization",
+   "to": "item:water-supply-entity",
+   "label": "적용 여부를 정하는 정보",
+   "condition": "hard"
+  },
+  {
+   "id": "R-req-discharge",
+   "type": "requires",
+   "from": "institution:public-wastewater-treatment-facility-plan",
+   "to": "item:discharge-method",
+   "label": "적용 여부를 정하는 정보",
+   "condition": "hard"
+  },
+  {
+   "id": "R-req-gw",
+   "type": "requires",
+   "from": "institution:groundwater-development-use-permit",
+   "to": "item:groundwater-use",
+   "label": "적용 여부를 정하는 정보",
+   "condition": "hard"
+  },
+  {
+   "id": "R-req-ft",
+   "type": "requires",
+   "from": "institution:semiconductor-infrastructure-support-fast-track",
+   "to": "item:fasttrack-application",
+   "label": "적용 여부를 정하는 정보",
+   "condition": "hard"
+  },
+  {
+   "id": "R-owns-milestone",
+   "type": "owns",
+   "from": "role:gwangju",
+   "to": "case:GSC-N23-2026-0901",
+   "label": "책임 레인",
+   "condition": null
+  },
+  {
+   "id": "R-reviews-road",
+   "type": "reviews",
+   "from": "role:road-authority",
+   "to": "institution:national-road-rail-soc",
+   "label": "접근도로 트랙",
+   "condition": null
+  },
+  {
+   "id": "R-reviews-water",
+   "type": "reviews",
+   "from": "role:water-agency",
+   "to": "institution:industrial-water-intake-permit",
+   "label": "원수 확보 트랙",
+   "condition": null
+  }
+ ],
+ "states": [
+  {
+   "id": "S-case",
+   "entity_id": "case:GSC-N23-2026-0901",
+   "state": "routes_undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N23",
+    "note": "선행 아티팩트(정책상 입지 결정)는 충족되어 착수 가능하나 조합이 미확정"
+   }
+  },
+  {
+   "id": "S-entity",
+   "entity_id": "item:water-supply-entity",
+   "state": "undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N23",
+    "note": "오버레이 note: 용수 공급주체 미확정"
+   }
+  },
+  {
+   "id": "S-discharge",
+   "entity_id": "item:discharge-method",
+   "state": "undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N23",
+    "note": "오버레이 note: 처리구역·폐수처리 방식 미확정"
+   }
+  },
+  {
+   "id": "S-gw",
+   "entity_id": "item:groundwater-use",
+   "state": "undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N23",
+    "note": "보조 수원 사용 여부가 공개자료에 없다"
+   }
+  },
+  {
+   "id": "S-ft",
+   "entity_id": "item:fasttrack-application",
+   "state": "undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N23",
+    "note": "N03 반도체클러스터 지정 전이라 특례 적용 자체가 미정"
+   }
+  },
+  {
+   "id": "S-step-industrial-water-intake-permit-P01",
+   "entity_id": "step:industrial-water-intake-permit:P01",
+   "state": "ready",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N23",
+    "note": "조합과 무관하게 적용되는 확정 트랙"
+   }
+  },
+  {
+   "id": "S-step-industrial-water-intake-permit-P02",
+   "entity_id": "step:industrial-water-intake-permit:P02",
+   "state": "ready",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N23",
+    "note": "조합과 무관하게 적용되는 확정 트랙"
+   }
+  },
+  {
+   "id": "S-step-national-road-rail-soc-P01",
+   "entity_id": "step:national-road-rail-soc:P01",
+   "state": "ready",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N23",
+    "note": "조합과 무관하게 적용되는 확정 트랙"
+   }
+  },
+  {
+   "id": "S-step-national-road-rail-soc-P02",
+   "entity_id": "step:national-road-rail-soc:P02",
+   "state": "ready",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N23",
+    "note": "조합과 무관하게 적용되는 확정 트랙"
+   }
+  },
+  {
+   "id": "S-step-national-road-rail-soc-P03",
+   "entity_id": "step:national-road-rail-soc:P03",
+   "state": "ready",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N23",
+    "note": "조합과 무관하게 적용되는 확정 트랙"
+   }
+  },
+  {
+   "id": "S-step-national-road-rail-soc-P04",
+   "entity_id": "step:national-road-rail-soc:P04",
+   "state": "ready",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N23",
+    "note": "조합과 무관하게 적용되는 확정 트랙"
+   }
+  },
+  {
+   "id": "S-step-national-road-rail-soc-P05",
+   "entity_id": "step:national-road-rail-soc:P05",
+   "state": "ready",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N23",
+    "note": "조합과 무관하게 적용되는 확정 트랙"
+   }
+  },
+  {
+   "id": "S-step-national-road-rail-soc-P06",
+   "entity_id": "step:national-road-rail-soc:P06",
+   "state": "ready",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N23",
+    "note": "조합과 무관하게 적용되는 확정 트랙"
+   }
+  },
+  {
+   "id": "S-step-national-road-rail-soc-P07",
+   "entity_id": "step:national-road-rail-soc:P07",
+   "state": "ready",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N23",
+    "note": "조합과 무관하게 적용되는 확정 트랙"
+   }
+  },
+  {
+   "id": "S-step-national-road-rail-soc-P08",
+   "entity_id": "step:national-road-rail-soc:P08",
+   "state": "ready",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N23",
+    "note": "조합과 무관하게 적용되는 확정 트랙"
+   }
+  },
+  {
+   "id": "S-step-national-road-rail-soc-P09",
+   "entity_id": "step:national-road-rail-soc:P09",
+   "state": "ready",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N23",
+    "note": "조합과 무관하게 적용되는 확정 트랙"
+   }
+  },
+  {
+   "id": "S-step-national-road-rail-soc-P10",
+   "entity_id": "step:national-road-rail-soc:P10",
+   "state": "ready",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N23",
+    "note": "조합과 무관하게 적용되는 확정 트랙"
+   }
+  },
+  {
+   "id": "S-step-national-road-rail-soc-P11",
+   "entity_id": "step:national-road-rail-soc:P11",
+   "state": "ready",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "official_plan",
+    "source": "gwangju-semiconductor-cluster 오버레이 N23",
+    "note": "조합과 무관하게 적용되는 확정 트랙"
+   }
+  },
+  {
+   "id": "S-step-semiconductor-infrastructure-support-fast-track-P01",
+   "entity_id": "step:semiconductor-infrastructure-support-fast-track:P01",
+   "state": "applicability_undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "none",
+    "source": "오버레이 templateRefs mappingStatus=candidate",
+    "note": "적용 후보일 뿐 확정된 요건이 아니다"
+   }
+  },
+  {
+   "id": "S-step-semiconductor-infrastructure-support-fast-track-P02",
+   "entity_id": "step:semiconductor-infrastructure-support-fast-track:P02",
+   "state": "applicability_undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "none",
+    "source": "오버레이 templateRefs mappingStatus=candidate",
+    "note": "적용 후보일 뿐 확정된 요건이 아니다"
+   }
+  },
+  {
+   "id": "S-step-semiconductor-infrastructure-support-fast-track-P03",
+   "entity_id": "step:semiconductor-infrastructure-support-fast-track:P03",
+   "state": "applicability_undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "none",
+    "source": "오버레이 templateRefs mappingStatus=candidate",
+    "note": "적용 후보일 뿐 확정된 요건이 아니다"
+   }
+  },
+  {
+   "id": "S-step-semiconductor-infrastructure-support-fast-track-P04",
+   "entity_id": "step:semiconductor-infrastructure-support-fast-track:P04",
+   "state": "applicability_undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "none",
+    "source": "오버레이 templateRefs mappingStatus=candidate",
+    "note": "적용 후보일 뿐 확정된 요건이 아니다"
+   }
+  },
+  {
+   "id": "S-step-semiconductor-infrastructure-support-fast-track-P05",
+   "entity_id": "step:semiconductor-infrastructure-support-fast-track:P05",
+   "state": "applicability_undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "none",
+    "source": "오버레이 templateRefs mappingStatus=candidate",
+    "note": "적용 후보일 뿐 확정된 요건이 아니다"
+   }
+  },
+  {
+   "id": "S-step-semiconductor-infrastructure-support-fast-track-P06",
+   "entity_id": "step:semiconductor-infrastructure-support-fast-track:P06",
+   "state": "applicability_undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "none",
+    "source": "오버레이 templateRefs mappingStatus=candidate",
+    "note": "적용 후보일 뿐 확정된 요건이 아니다"
+   }
+  },
+  {
+   "id": "S-step-industrial-waterworks-business-authorization-P01",
+   "entity_id": "step:industrial-waterworks-business-authorization:P01",
+   "state": "applicability_undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "none",
+    "source": "오버레이 templateRefs mappingStatus=candidate",
+    "note": "적용 후보일 뿐 확정된 요건이 아니다"
+   }
+  },
+  {
+   "id": "S-step-industrial-waterworks-business-authorization-P02",
+   "entity_id": "step:industrial-waterworks-business-authorization:P02",
+   "state": "applicability_undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "none",
+    "source": "오버레이 templateRefs mappingStatus=candidate",
+    "note": "적용 후보일 뿐 확정된 요건이 아니다"
+   }
+  },
+  {
+   "id": "S-step-industrial-waterworks-business-authorization-P03",
+   "entity_id": "step:industrial-waterworks-business-authorization:P03",
+   "state": "applicability_undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "none",
+    "source": "오버레이 templateRefs mappingStatus=candidate",
+    "note": "적용 후보일 뿐 확정된 요건이 아니다"
+   }
+  },
+  {
+   "id": "S-step-public-wastewater-treatment-facility-plan-P01",
+   "entity_id": "step:public-wastewater-treatment-facility-plan:P01",
+   "state": "applicability_undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "none",
+    "source": "오버레이 templateRefs mappingStatus=candidate",
+    "note": "적용 후보일 뿐 확정된 요건이 아니다"
+   }
+  },
+  {
+   "id": "S-step-public-wastewater-treatment-facility-plan-P02",
+   "entity_id": "step:public-wastewater-treatment-facility-plan:P02",
+   "state": "applicability_undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "none",
+    "source": "오버레이 templateRefs mappingStatus=candidate",
+    "note": "적용 후보일 뿐 확정된 요건이 아니다"
+   }
+  },
+  {
+   "id": "S-step-public-wastewater-treatment-facility-plan-P03",
+   "entity_id": "step:public-wastewater-treatment-facility-plan:P03",
+   "state": "applicability_undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "none",
+    "source": "오버레이 templateRefs mappingStatus=candidate",
+    "note": "적용 후보일 뿐 확정된 요건이 아니다"
+   }
+  },
+  {
+   "id": "S-step-public-wastewater-treatment-facility-plan-P04",
+   "entity_id": "step:public-wastewater-treatment-facility-plan:P04",
+   "state": "applicability_undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "none",
+    "source": "오버레이 templateRefs mappingStatus=candidate",
+    "note": "적용 후보일 뿐 확정된 요건이 아니다"
+   }
+  },
+  {
+   "id": "S-step-groundwater-development-use-permit-P01",
+   "entity_id": "step:groundwater-development-use-permit:P01",
+   "state": "applicability_undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "none",
+    "source": "오버레이 templateRefs mappingStatus=candidate",
+    "note": "적용 후보일 뿐 확정된 요건이 아니다"
+   }
+  },
+  {
+   "id": "S-step-groundwater-development-use-permit-P02",
+   "entity_id": "step:groundwater-development-use-permit:P02",
+   "state": "applicability_undetermined",
+   "as_of": "2026-09-01",
+   "evidence": {
+    "kind": "none",
+    "source": "오버레이 templateRefs mappingStatus=candidate",
+    "note": "적용 후보일 뿐 확정된 요건이 아니다"
+   }
+  }
+ ],
+ "rules": [
+  {
+   "id": "rule:candidates-are-not-requirements",
+   "name": "mappingStatus가 candidate인 제도는 확정 요건이 아니다",
+   "applies_to": [
+    "institution:semiconductor-infrastructure-support-fast-track",
+    "institution:industrial-waterworks-business-authorization",
+    "institution:public-wastewater-treatment-facility-plan",
+    "institution:groundwater-development-use-permit"
+   ],
+   "inputs": [
+    "mapping_status"
+   ],
+   "predicate": "if mapping_status == 'candidate' then applicability_undetermined else applies",
+   "output": {
+    "applicability_undetermined": "적용 후보로만 제시하고 요건으로 보고하지 않는다",
+    "count": 4
+   },
+   "statute_ref": [],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:raw-water-and-road-apply-now",
+   "name": "원수 확보와 접근도로는 조합과 무관하게 적용된다",
+   "applies_to": [
+    "institution:industrial-water-intake-permit",
+    "institution:national-road-rail-soc"
+   ],
+   "inputs": [],
+   "predicate": "raw_water_intake and access_road apply regardless of supply route",
+   "output": {
+    "ready_now": [
+     "industrial-water-intake-permit",
+     "national-road-rail-soc"
+    ],
+    "note": "어느 공급 조합을 택하든 원수는 확보해야 하고 접근도로는 필요하다."
+   },
+   "statute_ref": [
+    {
+     "law": "하천법",
+     "article": "제50조제1항"
+    }
+   ],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:supply-entity-decides-waterworks-track",
+   "name": "용수 공급주체가 공업용수도 사업인가 적용 여부를 정한다",
+   "applies_to": [
+    "institution:industrial-waterworks-business-authorization",
+    "item:water-supply-entity"
+   ],
+   "inputs": [
+    "water_supply_entity",
+    "facility_capacity"
+   ],
+   "predicate": "if 별도 공업용수도를 설치·운영한다 then 제49조 인가 경로 else 기존 수도사업자 공급",
+   "output": {
+    "authority": "시설용량 1일 1만톤 초과는 기후에너지환경부장관, 이하는 시·도지사",
+    "note": "국가가 산업단지에 설치·공급할 의무는 수도법 제48조제1항에 있다."
+   },
+   "statute_ref": [
+    {
+     "law": "수도법",
+     "article": "제48조제1항"
+    },
+    {
+     "law": "수도법",
+     "article": "제49조제1항"
+    }
+   ],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:discharge-method-decides-wastewater-track",
+   "name": "폐수처리 방식이 공공폐수처리시설 적용 여부를 정한다",
+   "applies_to": [
+    "institution:public-wastewater-treatment-facility-plan",
+    "item:discharge-method"
+   ],
+   "inputs": [
+    "discharge_method"
+   ],
+   "predicate": "if 공동처리(공공폐수처리시설) then 제48조·제49조 기본계획 경로 else 사업장별 자체 처리",
+   "output": {
+    "consequence": "공공폐수처리구역이 지정되면 구역 내 배출시설은 폐수관로로 유입시켜야 한다",
+    "note": "구역 지정·고시는 물환경보전법 제49조제3항이다."
+   },
+   "statute_ref": [
+    {
+     "law": "물환경보전법",
+     "article": "제48조제1항"
+    },
+    {
+     "law": "물환경보전법",
+     "article": "제49조제3항"
+    },
+    {
+     "law": "물환경보전법",
+     "article": "제51조제2항"
+    }
+   ],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:groundwater-is-supplementary",
+   "name": "지하수는 보조 수원이고 규모·용도에 따라 허가와 신고가 갈린다",
+   "applies_to": [
+    "institution:groundwater-development-use-permit",
+    "item:groundwater-use"
+   ],
+   "inputs": [
+    "groundwater_use",
+    "withdrawal_scale",
+    "purpose"
+   ],
+   "predicate": "if 지하수 사용 then (제7조제1항 허가 or 제8조제1항 신고) else 경로 비활성",
+   "output": {
+    "note": "허가 경로는 지하수영향조사가 선행한다(제7조제2항)."
+   },
+   "statute_ref": [
+    {
+     "law": "지하수법",
+     "article": "제7조제1항"
+    },
+    {
+     "law": "지하수법",
+     "article": "제7조제2항"
+    },
+    {
+     "law": "지하수법",
+     "article": "제8조제1항"
+    }
+   ],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:fasttrack-needs-cluster-designation",
+   "name": "기반시설 신속처리 특례는 반도체클러스터 지정을 전제한다",
+   "applies_to": [
+    "institution:semiconductor-infrastructure-support-fast-track",
+    "item:fasttrack-application"
+   ],
+   "inputs": [
+    "cluster_designated"
+   ],
+   "predicate": "if cluster_designated then 특례 적용 가능 else 일반 경로",
+   "output": {
+    "depends_on_milestone": "N03",
+    "note": "N23의 조합 선택이 N03 진행에 물려 있다."
+   },
+   "statute_ref": [
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제14조제1항"
+    },
+    {
+     "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법",
+     "article": "제27조제1항"
+    }
+   ],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:downstream-hard-dependency",
+   "name": "이 계획이 확정되어야 후속 두 마일스톤이 열린다",
+   "applies_to": [
+    "case:GSC-N23-2026-0901"
+   ],
+   "inputs": [],
+   "predicate": "N24 and N50 require water_road.demand_and_source_plan_confirmed as hard finish_to_start",
+   "output": {
+    "blocked_milestones": [
+     "N24",
+     "N50"
+    ],
+    "note": "조합 선택이 늦어지면 승인·비용분담과 신규 수원 확보가 함께 밀린다."
+   },
+   "statute_ref": [],
+   "stop_if_unverified": true
+  },
+  {
+   "id": "rule:water-route-is-not-parameterised",
+   "name": "전력 경로는 파라미터인데 용수 경로는 노트로만 있다",
+   "applies_to": [
+    "case:GSC-N23-2026-0901",
+    "item:water-supply-entity",
+    "item:discharge-method"
+   ],
+   "inputs": [],
+   "predicate": "gridPath is a declared overlay parameter; water/discharge route is only a free-text note",
+   "output": {
+    "consequence": "전력은 N19·N20이 path_undetermined로 판정되는데 용수는 N23이 ready로 보인다",
+    "asymmetry": "같은 성격의 미확정인데 한쪽만 기계가 읽을 수 있다",
+    "suggested_parameters": [
+     "waterSupplyEntity",
+     "dischargeMethod",
+     "groundwaterUse"
+    ],
+    "note": "오버레이는 고치지 않았다. 사업 데이터 소유자의 판단이 필요하다."
+   },
+   "statute_ref": [],
+   "stop_if_unverified": true
+  }
+ ],
+ "action_packets": [
+  {
+   "id": "ap:decide-supply-routes",
+   "title": "용수·폐수·도로 조합 결정",
+   "for_query": "제도 여섯 중 어느 걸 밟아야 해?",
+   "actor": "role:gwangju",
+   "why": "이 마일스톤은 여섯 제도를 다 밟는 자리가 아니라 어느 조합을 밟을지 정하는 자리다. 확정 적용은 원수 확보와 접근도로 둘이고, 나머지 넷은 세 가지 정보가 정해져야 적용 여부가 갈린다. rule:candidates-are-not-requirements 에 따라 후보를 요건으로 보고하지 않는다.",
+   "based_on": [
+    "case:GSC-N23-2026-0901",
+    "S-case",
+    "S-entity",
+    "S-discharge",
+    "S-gw",
+    "S-ft",
+    "rule:candidates-are-not-requirements",
+    "rule:raw-water-and-road-apply-now",
+    "rule:supply-entity-decides-waterworks-track",
+    "rule:discharge-method-decides-wastewater-track",
+    "rule:groundwater-is-supplementary",
+    "rule:fasttrack-needs-cluster-designation",
+    "rule:downstream-hard-dependency"
+   ],
+   "checklist": [
+    "단계별 공업용수 수요와 수질·공급신뢰도를 확정한다 — 아래 세 결정의 공통 입력이다",
+    "용수 공급주체를 정한다: 국가·지자체가 공업용수도를 설치·공급할지, 기존 수도사업자가 공급할지 (수도법 제48조제1항). 별도 설치라면 시설용량에 따라 인가권자가 갈린다 (제49조제1항)",
+    "폐수처리 방식을 정한다: 공공폐수처리시설로 공동 처리할지 사업장별로 자체 처리할지 (물환경보전법 제48조제1항). 공동 처리라면 처리구역 지정·고시가 따라온다 (제49조제3항)",
+    "지하수를 보조 수원으로 쓸지 정한다. 쓴다면 취수량·용도로 허가(제7조제1항)와 신고(제8조제1항)가 갈리고, 허가 경로는 지하수영향조사가 선행한다 (제7조제2항)",
+    "반도체 기반시설 신속처리 특례를 쓸지 정한다. 이 특례는 반도체클러스터 지정(N03)을 전제한다",
+    "확정된 조합만 계획에 넣는다. 후보 제도를 요건처럼 적으면 이후 인허가 일정이 부풀려진다",
+    "이 계획이 확정되어야 N24 승인·비용분담과 N50 신규 수원 확보가 열린다는 점을 일정에 반영한다"
+   ],
+   "evidence_needed": [
+    "단계별 공업용수 수요와 수질 요구",
+    "가용 수원과 공급 가능량",
+    "폐수 발생량·수질과 방류수역 여건",
+    "접근도로 노선과 관리청",
+    "반도체클러스터 지정 일정"
+   ],
+   "system_touchpoints": [
+    "광주특별시 기반시설 계획",
+    "수자원 관계기관 협의",
+    "도로관리청 협의"
+   ],
+   "human_signoff": "공급주체와 처리방식은 관계기관 협의를 거쳐 지정권자·관리청이 확정한다",
+   "auto_execute": false,
+   "risks": [
+    "후보 넷을 모두 요건으로 잡으면 일정과 비용이 실제보다 크게 잡힌다",
+    "조합 확정이 늦어지면 N24와 N50이 함께 밀린다",
+    "전력 경로와 달리 용수 경로는 오버레이 파라미터가 아니라 자유 문구로만 적혀 있어, 사업 층에서는 이 마일스톤이 '착수 가능'으로 보인다"
+   ]
+  },
+  {
+   "id": "ap:start-confirmed-tracks",
+   "title": "지금 착수 가능한 확정 트랙",
+   "for_query": "용수·도로는 뭐부터 해야 해?",
+   "actor": "role:developer",
+   "why": "조합이 미확정이어도 원수 확보와 접근도로는 어느 조합에서든 필요하다. rule:raw-water-and-road-apply-now 에 따라 두 트랙은 지금 착수할 수 있다.",
+   "based_on": [
+    "case:GSC-N23-2026-0901",
+    "rule:raw-water-and-road-apply-now",
+    "institution:industrial-water-intake-permit",
+    "institution:national-road-rail-soc"
+   ],
+   "checklist": [
+    "용수 수지와 원수를 검토한다 (하천수 사용허가 P01)",
+    "관계기관과 공급 가능성을 협의한다 (하천수 사용허가 P02)",
+    "하천수를 쓸 경우 사용허가는 기후에너지환경부장관 소관이고 허가 시 관할 시·도지사에게 통보된다 (하천법 제50조제1항·제2항)",
+    "접근도로 트랙을 도로관리청과 시작한다. 도로구역 결정 전에 주민·전문가 의견청취가 선행한다 (도로법 제26조제1항)",
+    "두 트랙의 산출물을 조합 결정의 입력으로 되돌린다"
+   ],
+   "evidence_needed": [
+    "용수 수지 검토표",
+    "원수 가용량 협의 결과",
+    "접근도로 노선 검토"
+   ],
+   "system_touchpoints": [
+    "하천수 사용허가 창구",
+    "도로관리청"
+   ],
+   "human_signoff": "각 허가·협의는 소관 관리청의 처분으로만 확정된다",
+   "auto_execute": false,
+   "risks": [
+    "원수 확보량이 조합 선택을 되돌릴 수 있다. 두 작업은 순차가 아니라 왕복이다"
+   ]
+  }
+ ],
+ "demo_queries": [
+  {
+   "q": "제도 여섯 중 어느 걸 밟아야 해?",
+   "resolve": {
+    "identify": [
+     "case:GSC-N23-2026-0901",
+     "item:water-supply-entity",
+     "item:discharge-method"
+    ],
+    "state": "routes_undetermined",
+    "rules_fired": [
+     "rule:candidates-are-not-requirements",
+     "rule:supply-entity-decides-waterworks-track"
+    ],
+    "action_packet": "ap:decide-supply-routes"
+   }
+  },
+  {
+   "q": "용수·도로는 뭐부터 해야 해?",
+   "resolve": {
+    "identify": [
+     "case:GSC-N23-2026-0901",
+     "institution:industrial-water-intake-permit"
+    ],
+    "rules_fired": [
+     "rule:raw-water-and-road-apply-now"
+    ],
+    "action_packet": "ap:start-confirmed-tracks"
+   }
+  },
+  {
+   "q": "이 용수 건 지금 어디까지 왔어?",
+   "resolve": {
+    "done": [],
+    "ready": [
+     "step:industrial-water-intake-permit:P01",
+     "step:industrial-water-intake-permit:P02"
+    ],
+    "available": []
+   }
+  }
+ ],
+ "notes": [
+  "구조 층은 derive-milestone-case.mjs가 오버레이와 제도 JSON에서 파생했다.",
+  "제도가 여섯이라 단계 ID에 제도 슬러그를 붙였다(step:<slug>:<nodeId>).",
+  "조문은 2026-09-01 법제처 현행 시행본에 대조했다(수도법·물환경보전법·지하수법·하천법·반도체특별법).",
+  "이 마일스톤은 여섯 제도를 다 밟는 자리가 아니라 어느 조합을 밟을지 정하는 자리다. 확정 적용은 둘, 후보는 넷이다.",
+  "전력 경로는 오버레이 파라미터(gridPath)로 선언되어 있어 N19·N20이 path_undetermined로 판정되는데, 용수 경로는 자유 문구 note로만 있어 N23이 ready로 보인다. 오버레이는 고치지 않고 rule로 남겼다.",
+  "auto_execute는 항상 false."
+ ]
+}

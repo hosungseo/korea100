@@ -228,6 +228,63 @@ export function projectStatus(caseData) {
   };
 }
 
+/**
+ * 아직 사업이 정하지 않은 갈림길을 모은다.
+ *
+ * 제도 준비도 축은 R2 승격으로 풀리지만, 사업 파라미터 축은 사업이 정해야만 풀린다.
+ * 어느 파라미터가 어느 마일스톤을 여닫는지, 각 값이 무엇을 활성화하는지 모아 준다.
+ * 무엇을 고를지는 말하지 않는다. 고를 것이 무엇인지만 말한다.
+ */
+export function pendingDecisions(caseData) {
+  const graph = projectGraph(caseData);
+  const caseEntity = [...(caseData.entities ?? [])].find((entity) => entity.id.startsWith("case:"));
+  const parameters = caseEntity?.attrs?.parameters ?? {};
+
+  const byParameter = new Map();
+  for (const milestone of graph.milestones.values()) {
+    const activation = milestone.attrs?.activation_resolution;
+    if (activation?.mode !== "rule" || !activation.parameter) continue;
+    const entry = byParameter.get(activation.parameter) ?? {
+      parameter: activation.parameter,
+      status: activation.parameter_status,
+      value: activation.parameter_value,
+      reason: activation.parameter_reason ?? parameters[activation.parameter]?.reason ?? null,
+      gates: [],
+    };
+    entry.gates.push({
+      node_id: milestone.attrs?.node_id,
+      label: milestone.label,
+      stage: milestone.attrs?.stage ?? null,
+      activates_when: activation.equals,
+      openness: milestoneStatus(graph, milestone.id).openness,
+    });
+    byParameter.set(activation.parameter, entry);
+  }
+
+  const undetermined = [...byParameter.values()].filter((entry) => entry.status === "unknown");
+  // 파라미터로 선언되지 않았지만 케이스가 미확정이라고 말하는 것도 있다.
+  const declaredOnly = Object.entries(parameters)
+    .filter(([name, meta]) => meta?.status === "unknown" && !byParameter.has(name))
+    .map(([name, meta]) => ({ parameter: name, status: "unknown", value: meta?.value ?? null, reason: meta?.reason ?? null, gates: [] }));
+
+  return {
+    case_id: caseData.case_id,
+    project_id: caseData.project_id,
+    as_of: caseData.as_of,
+    undetermined_parameters: [...undetermined, ...declaredOnly],
+    exclusive_branches: undetermined
+      .filter((entry) => new Set(entry.gates.map((gate) => gate.activates_when)).size > 1)
+      .map((entry) => ({
+        parameter: entry.parameter,
+        options: entry.gates.map((gate) => ({ value: gate.activates_when, milestone: gate.node_id, label: gate.label })),
+      })),
+    note: undetermined.length === 0
+      ? "선언된 파라미터 중 미확정은 없습니다."
+      : `파라미터 ${undetermined.length}개가 마일스톤 ${undetermined.reduce((sum, entry) => sum + entry.gates.length, 0)}개를 여닫습니다. 어느 값을 택할지는 사업이 정합니다.`,
+    execution_allowed: false,
+  };
+}
+
 /** 막힌 마일스톤의 원인을 선행 마일스톤까지 거슬러 준다. */
 export function explainBlocked(caseData, nodeId, { maxDepth = 6 } = {}) {
   const graph = projectGraph(caseData);
