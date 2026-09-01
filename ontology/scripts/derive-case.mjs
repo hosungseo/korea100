@@ -184,15 +184,23 @@ function parseArgs(argv) {
   return args;
 }
 
+/**
+ * 기존 케이스를 원본 제도로 다시 파생해 합친다. 디스크에 쓰지 않는다 —
+ * 재파생 진입점이 main() 안에만 있으면 검증기가 같은 일을 다시 구현하게 된다.
+ */
+export async function remergeFromSource(existingCase) {
+  const institution = await loadInstitution(existingCase.institution_slug);
+  return remergeCase(existingCase, institution);
+}
+
 async function remergeMain(caseRelativePath) {
   const casePath = path.join(REPO_DIR, "ontology", caseRelativePath);
   const existingCase = JSON.parse(await readFile(casePath, "utf8"));
-  const institution = await loadInstitution(existingCase.institution_slug);
   const { merged, dropped_step_ids: droppedSteps, dropped_relation_ids: droppedRelations } =
-    remergeCase(existingCase, institution);
+    await remergeFromSource(existingCase);
   await writeFile(casePath, `${JSON.stringify(merged, null, 1)}\n`);
   console.log(
-    `${existingCase.case_id}: 구조 층 재파생 (단계 ${merged.entities.filter((e) => e.id.startsWith("step:")).length}, 관계 ${institution.process.edges.length})`,
+    `${existingCase.case_id}: 구조 층 재파생 (단계 ${merged.entities.filter((e) => e.id.startsWith("step:")).length}, 관계 ${merged.relations.length})`,
   );
   if (droppedSteps.length > 0) console.log(`  제도에서 사라진 단계: ${droppedSteps.join(", ")}`);
   if (droppedRelations.length > 0) console.log(`  제도에서 사라진 관계: ${droppedRelations.join(", ")}`);

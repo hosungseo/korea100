@@ -45,6 +45,7 @@ test("stdio MCP가 도구·리소스를 공개하고 다음 행동을 구조화�
       "get_project_status",
       "get_step_requirements",
       "load_ontology_case",
+    "propose_case_transition",
       "query_case",
       "resolve_work_event",
       "search_procedures",

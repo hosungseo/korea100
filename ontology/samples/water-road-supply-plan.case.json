@@ -1913,23 +1913,24 @@
   },
   {
    "id": "rule:water-route-is-not-parameterised",
-   "name": "전력 경로는 파라미터인데 용수 경로는 노트로만 있다",
+   "name": "용수 경로도 파라미터로 선언됐다(비대칭 해소)",
    "applies_to": [
     "case:GSC-N23-2026-0901",
     "item:water-supply-entity",
     "item:discharge-method"
    ],
    "inputs": [],
-   "predicate": "gridPath is a declared overlay parameter; water/discharge route is only a free-text note",
+   "predicate": "gridPath and water/discharge/groundwater are both declared overlay parameters; gridPath gates milestones (N19|N20), water parameters gate institution applicability inside N23",
    "output": {
-    "consequence": "전력은 N19·N20이 path_undetermined로 판정되는데 용수는 N23이 ready로 보인다",
-    "asymmetry": "같은 성격의 미확정인데 한쪽만 기계가 읽을 수 있다",
-    "suggested_parameters": [
+    "resolved_on": "2026-09-01",
+    "adopted_parameters": [
      "waterSupplyEntity",
      "dischargeMethod",
      "groundwaterUse"
     ],
-    "note": "오버레이는 고치지 않았다. 사업 데이터 소유자의 판단이 필요하다."
+    "shape_difference": "gridPath는 마일스톤 둘 중 하나를 고르는 배타 분기이고, 용수 셋은 N23 안쪽 제도 여섯 중 무엇이 적용되는지를 정한다. 그래서 activation 규칙으로 묶지 않고 선언만 했다.",
+    "consequence": "N23의 개폐 판정은 그대로 ready다(무조건 일어나는 마일스톤이라 바뀌면 안 된다). 달라진 것은 get_pending_decisions가 이 셋을 gates 빈 항목으로 함께 돌려준다는 점이다.",
+    "prior_state": "오버레이 note에 산문으로만 있었고 기계는 읽지 못했다"
    },
    "statute_ref": [],
    "stop_if_unverified": true

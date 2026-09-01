@@ -182,7 +182,7 @@ async function loadInstitutionsFor(milestone) {
   return new Map(entries.filter(Boolean));
 }
 
-async function build(projectId, milestoneId, { caseId, asOf }) {
+export async function build(projectId, milestoneId, { caseId, asOf }) {
   const project = await loadProject(projectId, { projectDir: PROJECT_DIR });
   const milestone = project.nodes.find((node) => node.id === milestoneId);
   if (!milestone) throw new Error(`${projectId}에 ${milestoneId} 마일스톤이 없습니다.`);
@@ -199,17 +199,22 @@ function parseArgs(argv) {
   return args;
 }
 
+/** 기존 케이스를 오버레이로 다시 파생해 합친다. 디스크에 쓰지 않는다. */
+export async function remergeFromSource(existingCase) {
+  const derived = await build(existingCase.project_id, existingCase.milestone_node_id, {
+    caseId: existingCase.case_id,
+    asOf: existingCase.as_of,
+  });
+  return remergeMilestoneCase(existingCase, derived);
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
 
   if (args.remerge) {
     const casePath = path.join(REPO_DIR, "ontology", args.remerge);
     const existingCase = JSON.parse(await readFile(casePath, "utf8"));
-    const derived = await build(existingCase.project_id, existingCase.milestone_node_id, {
-      caseId: existingCase.case_id,
-      asOf: existingCase.as_of,
-    });
-    const { merged, dropped_entity_ids: dropped } = remergeMilestoneCase(existingCase, derived);
+    const { merged, dropped_entity_ids: dropped } = await remergeFromSource(existingCase);
     await writeFile(casePath, `${JSON.stringify(merged, null, 1)}\n`);
     console.log(
       `${existingCase.case_id}: 구조 층 재파생 (제도 ${merged.derivation.institution_count}, 단계 ${merged.derivation.step_count})`,

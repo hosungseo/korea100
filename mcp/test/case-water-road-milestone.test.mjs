@@ -104,11 +104,14 @@ test("사업이 정해야 할 갈림길을 모아 준다", async () => {
   assert.equal(decisions.execution_allowed, false);
   const names = decisions.undetermined_parameters.map((entry) => entry.parameter).sort();
   assert.deepEqual(names, [
+    "dischargeMethod",
     "gridPath",
+    "groundwaterUse",
     "hazardousFacilityPermitsRequired",
     "heritageImpactDiagnosisRequired",
     "powerDemandMw",
     "privateLandCompensationRequired",
+    "waterSupplyEntity",
   ]);
 
   // gridPath만 값이 둘인 배타 분기다.
@@ -118,21 +121,34 @@ test("사업이 정해야 할 갈림길을 모아 준다", async () => {
   assert.deepEqual(grid.options.map((option) => option.value).sort(), ["exempt-or-expedited", "formal-assessment"]);
 });
 
-test("용수 경로는 파라미터가 아니라서 사업 층에서 미확정으로 안 보인다", async () => {
+test("용수 경로도 파라미터로 선언돼 사업 층에서 미확정으로 보인다", async () => {
   const project = await projectCase();
   const water = await waterCase();
 
-  // 사업 층: N23은 착수 가능으로 보인다.
+  // N23의 개폐 판정은 그대로다. 조건부 마일스톤이 아니라 무조건 일어나는 자리라
+  // 파라미터를 선언했다고 ready가 흔들리면 오히려 틀린 것이다.
   const status = allMilestoneStatuses(project).find((item) => item.node_id === "N23");
   assert.equal(status.openness, "ready");
 
-  // 그런데 미확정 파라미터 목록에 용수 관련 항목이 없다.
+  // 달라진 것: 오버레이 note에 산문으로만 있던 미확정 셋이 이제 기계에 잡힌다.
   const decisions = pendingDecisions(project);
-  const names = decisions.undetermined_parameters.map((entry) => entry.parameter);
-  assert.ok(!names.some((name) => /water|discharge|groundwater/iu.test(name)));
+  const water3 = decisions.undetermined_parameters.filter(
+    (entry) => /water|discharge|groundwater/iu.test(entry.parameter),
+  );
+  assert.equal(water3.length, 3);
+  for (const entry of water3) {
+    // 관문을 여닫지는 않는다 — gridPath와 모양이 다르다는 사실이 데이터에 남아야 한다.
+    assert.deepEqual(entry.gates, []);
+    assert.deepEqual(entry.affects, { milestone: "N23", scope: "institution_applicability" });
+    assert.ok(entry.reason, "왜 미확정인지가 있어야 한다");
+  }
 
-  // 케이스 층이 그 비대칭을 규칙으로 남겼다.
+  // 배타 분기는 여전히 gridPath 하나뿐이다. 용수 셋이 분기로 새어 들어가면 안 된다.
+  assert.equal(decisions.exclusive_branches.length, 1);
+
+  // 케이스 층이 비대칭 해소를 기록으로 남겼다.
   const rule = water.rules.find((item) => item.id === "rule:water-route-is-not-parameterised");
   assert.ok(rule);
-  assert.deepEqual(rule.output.suggested_parameters, ["waterSupplyEntity", "dischargeMethod", "groundwaterUse"]);
+  assert.deepEqual(rule.output.adopted_parameters, ["waterSupplyEntity", "dischargeMethod", "groundwaterUse"]);
+  assert.equal(rule.output.resolved_on, "2026-09-01");
 });

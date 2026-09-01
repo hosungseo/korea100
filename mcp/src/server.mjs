@@ -15,6 +15,11 @@ import {
 import { certifyPacketEnvelope, PacketContractError } from "./packet-contract.mjs";
 import { checkCaseLinkageFor } from "./case-link.mjs";
 import {
+  legalTransitions,
+  movableEntities,
+  validateTransition,
+} from "./case-transitions.mjs";
+import {
   projectStatus,
   explainBlocked,
   pendingDecisions,
@@ -393,6 +398,60 @@ export function createAdministrativeProcedureMcpServer(service, { ontologyEnable
         return pendingDecisions(data);
       },
       (data) => `미확정 파라미터 ${data.undetermined_parameters.length}개, 배타 분기 ${data.exclusive_branches.length}개`,
+    );
+
+    registerReadOnlyTool(
+      server,
+      "propose_case_transition",
+      {
+        title: "케이스 상태 갱신 제안",
+        description:
+          "사건이 진행됐을 때 케이스 상태를 어떻게 바꿀 수 있는지 판정합니다. entity_id를 주면 그 엔티티가 갈 수 있는 곳과 막는 사유를, 안 주면 지금 움직일 수 있는 것 전부를 돌려줍니다. to까지 주면 그 전이 하나를 검사합니다. 판정만 하고 파일은 고치지 않습니다 — 적용은 사람이 ontology/scripts/advance-case-state.mjs로 합니다.",
+        inputSchema: {
+          case_file: z.string().trim().max(200).describe("ontology/ 기준 상대경로"),
+          entity_id: z.string().trim().max(200).optional().describe("step:·milestone:·case: 등 엔티티 ID"),
+          to: z.string().trim().max(80).optional().describe("바꾸려는 상태. 주면 그 전이를 검사합니다"),
+        },
+      },
+      async ({ case_file, entity_id, to }) => {
+        const data = await loadOntologyCase({ caseFile: case_file });
+        if (!entity_id) {
+          return {
+            case_id: data.case_id,
+            as_of: data.as_of,
+            movable: movableEntities(data),
+            execution_allowed: false,
+            human_confirmation_required: true,
+            apply_with: "ontology/scripts/advance-case-state.mjs",
+            note: "이 도구는 판정만 합니다. 상태를 실제로 바꾸는 것은 사람이 스크립트로 합니다.",
+          };
+        }
+        const options = legalTransitions(data, entity_id);
+        const checked = to
+          ? validateTransition(data, { entity_id, to, evidence: { kind: "user_asserted", note: "가검사" } })
+          : null;
+        return {
+          case_id: data.case_id,
+          as_of: data.as_of,
+          ...options,
+          ...(checked
+            ? {
+                requested: {
+                  to,
+                  // 근거는 사람이 대야 한다. 여기서는 근거 외의 관문만 미리 본다.
+                  passes_except_evidence: checked.reasons.every((reason) => reason.code.startsWith("evidence_")),
+                  reasons: checked.reasons,
+                },
+              }
+            : {}),
+          execution_allowed: false,
+          human_confirmation_required: true,
+          apply_with: "ontology/scripts/advance-case-state.mjs",
+        };
+      },
+      (data) => (data.movable
+        ? `지금 움직일 수 있는 엔티티 ${data.movable.length}개`
+        : `${data.entity_id}: ${data.from ?? "상태 미기재"} → ${(data.transitions ?? []).filter((t) => t.allowed).map((t) => t.to).join("·") || "갈 곳 없음"}`),
     );
   }
 

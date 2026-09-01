@@ -407,11 +407,20 @@ function parseArgs(argv) {
   return args;
 }
 
-async function build(projectId, { caseId, asOf }) {
+export async function build(projectId, { caseId, asOf }) {
   const project = await loadProject(projectId);
   const registry = await loadArtifactRegistry();
   const readinessBySlug = await loadReadiness({}, referencedSlugs(project));
   return deriveProjectSkeleton(project, registry, { caseId, asOf, readinessBySlug });
+}
+
+/** 기존 케이스를 오버레이로 다시 파생해 합친다. 디스크에 쓰지 않는다. */
+export async function remergeFromSource(existingCase) {
+  const derived = await build(existingCase.project_id, {
+    caseId: existingCase.case_id,
+    asOf: existingCase.as_of,
+  });
+  return remergeProjectCase(existingCase, derived);
 }
 
 async function main() {
@@ -420,11 +429,7 @@ async function main() {
   if (args.remerge) {
     const casePath = path.join(REPO_DIR, "ontology", args.remerge);
     const existingCase = JSON.parse(await readFile(casePath, "utf8"));
-    const derived = await build(existingCase.project_id, {
-      caseId: existingCase.case_id,
-      asOf: existingCase.as_of,
-    });
-    const { merged, dropped_entity_ids: droppedIds } = remergeProjectCase(existingCase, derived);
+    const { merged, dropped_entity_ids: droppedIds } = await remergeFromSource(existingCase);
     await writeFile(casePath, `${JSON.stringify(merged, null, 1)}\n`);
     console.log(`${existingCase.case_id}: 구조 층 재파생 (마일스톤 ${merged.derivation.milestone_count}, 관계 ${merged.relations.length})`);
     if (droppedIds.length > 0) console.log(`  오버레이에서 사라진 엔티티: ${droppedIds.join(", ")}`);

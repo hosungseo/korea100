@@ -265,7 +265,16 @@ export function pendingDecisions(caseData) {
   // 파라미터로 선언되지 않았지만 케이스가 미확정이라고 말하는 것도 있다.
   const declaredOnly = Object.entries(parameters)
     .filter(([name, meta]) => meta?.status === "unknown" && !byParameter.has(name))
-    .map(([name, meta]) => ({ parameter: name, status: "unknown", value: meta?.value ?? null, reason: meta?.reason ?? null, gates: [] }));
+    .map(([name, meta]) => ({
+      parameter: name,
+      status: "unknown",
+      value: meta?.value ?? null,
+      reason: meta?.reason ?? null,
+      gates: [],
+      // 마일스톤을 여닫지는 않지만 그 안쪽 제도 적용 여부를 정하는 파라미터.
+      // gates가 비었다고 영향이 없는 것이 아니다.
+      affects: meta?.affects ?? null,
+    }));
 
   return {
     case_id: caseData.case_id,
@@ -280,7 +289,8 @@ export function pendingDecisions(caseData) {
       })),
     note: undetermined.length === 0
       ? "선언된 파라미터 중 미확정은 없습니다."
-      : `파라미터 ${undetermined.length}개가 마일스톤 ${undetermined.reduce((sum, entry) => sum + entry.gates.length, 0)}개를 여닫습니다. 어느 값을 택할지는 사업이 정합니다.`,
+      : `파라미터 ${undetermined.length}개가 마일스톤 ${undetermined.reduce((sum, entry) => sum + entry.gates.length, 0)}개를 여닫고, `
+        + `${declaredOnly.length}개는 관문을 여닫지 않고 마일스톤 안쪽 제도 적용 여부만 정합니다. 어느 값을 택할지는 사업이 정합니다.`,
     execution_allowed: false,
   };
 }

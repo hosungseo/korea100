@@ -4524,7 +4524,8 @@
       "when": true,
       "label": "국가유산 영향진단·매장유산 조사 경로 해소"
      }
-    ]
+    ],
+    "affects": null
    },
    {
     "parameter": "privateLandCompensationRequired",
@@ -4535,7 +4536,8 @@
       "when": true,
       "label": "편입 사유지 보상·취득"
      }
-    ]
+    ],
+    "affects": null
    },
    {
     "parameter": "gridPath",
@@ -4551,7 +4553,8 @@
       "when": "exempt-or-expedited",
       "label": "계통영향평가 면제·예타특례·반도체 신속처리"
      }
-    ]
+    ],
+    "affects": null
    },
    {
     "parameter": "hazardousFacilityPermitsRequired",
@@ -4562,12 +4565,41 @@
       "when": true,
       "label": "위험물·고압가스 설치허가·중간·완공검사"
      }
-    ]
+    ],
+    "affects": null
    },
    {
     "parameter": "powerDemandMw",
     "reason": "팹별 전력수요와 단계별 증설계획이 공개되지 않음",
-    "gates": []
+    "gates": [],
+    "affects": null
+   },
+   {
+    "parameter": "waterSupplyEntity",
+    "reason": "공업용수 공급주체(광역상수도·전용공업용수도·자체취수)가 확정되지 않아 어느 인허가가 적용되는지 정해지지 않음",
+    "gates": [],
+    "affects": {
+     "milestone": "N23",
+     "scope": "institution_applicability"
+    }
+   },
+   {
+    "parameter": "dischargeMethod",
+    "reason": "폐수 처리방식(공공폐수처리시설 연계·자체처리·재이용)이 확정되지 않아 처리구역과 적용 절차가 정해지지 않음",
+    "gates": [],
+    "affects": {
+     "milestone": "N23",
+     "scope": "institution_applicability"
+    }
+   },
+   {
+    "parameter": "groundwaterUse",
+    "reason": "지하수 개발·이용 여부가 확정되지 않아 지하수법 허가 적용 여부가 정해지지 않음",
+    "gates": [],
+    "affects": {
+     "milestone": "N23",
+     "scope": "institution_applicability"
+    }
    }
   ],
   "exclusive": [

@@ -332,6 +332,8 @@ const data = {
       parameter: entry.parameter,
       reason: entry.reason,
       gates: entry.gates.map((g) => ({ id: g.node_id, when: g.activates_when, label: g.label })),
+      // 관문을 여닫지 않고 마일스톤 안쪽 제도 적용 여부만 정하는 파라미터.
+      affects: entry.affects ?? null,
     })),
     exclusive: ONT.decisions.exclusive_branches.map((b) => ({
       parameter: b.parameter,
@@ -477,7 +479,13 @@ const config = {
 <p style="color:var(--muted);font-size:10px">계산은 제안까지다 — 결재·접수·발송 권한 없음(execution_allowed=false).</p>`,
         });
       }
-      const pendingGates = [...new Set(ONT.decisions.undetermined_parameters.flatMap((e) => e.gates.map((g) => g.node_id)))];
+      // 관문을 여닫는 파라미터 + 관문 안쪽 제도 적용을 정하는 파라미터. 후자를 빼면
+      // 오버레이가 "미확정"이라고 적어 둔 것이 지도에서 사라진다.
+      const insideOnly = ONT.decisions.undetermined_parameters.filter((e) => !e.gates.length && e.affects?.milestone);
+      const pendingGates = [...new Set([
+        ...ONT.decisions.undetermined_parameters.flatMap((e) => e.gates.map((g) => g.node_id)),
+        ...insideOnly.map((e) => e.affects.milestone),
+      ])].filter((id) => nodes.some((n) => n.id === id));
       if (pendingGates.length) {
         out.push({
           id: "ont-pending",
@@ -487,6 +495,10 @@ const config = {
 <ol>${ONT.decisions.undetermined_parameters.filter((e) => e.gates.length).map((e) =>
             `<li data-nodes="${e.gates.map((g) => g.node_id).join(",")}">${e.parameter} — ${e.reason ?? ""} <span class="mono" style="color:var(--muted);font-size:9px">${e.gates.map((g) => `${g.when === true ? "true" : g.when}→${g.node_id}`).join(" · ")}</span></li>`,
           ).join("")}</ol>
+${insideOnly.length ? `<p><b>관문 안쪽 미확정:</b> 아래는 관문을 여닫지는 않지만 그 안에서 <b>어느 제도가 적용되는지</b>를 정합니다.</p>
+<ol>${insideOnly.map((e) =>
+            `<li data-nodes="${e.affects.milestone}">${e.parameter} — ${e.reason ?? ""} <span class="mono" style="color:var(--muted);font-size:9px">${e.affects.milestone} 제도 적용범위</span></li>`,
+          ).join("")}</ol>` : ""}
 ${ONT.decisions.exclusive_branches.length ? `<p><b>배타 분기:</b> ${ONT.decisions.exclusive_branches.map((b) =>
             `${b.parameter} → ${b.options.map((o) => `${o.value}:${o.milestone}`).join(" | ")}`).join(" · ")} — 둘 중 하나만 활성화됩니다.</p>` : ""}
 <p style="color:var(--muted);font-size:10px">무엇을 고를지는 말하지 않는다. 고를 것이 무엇인지만 보여준다.</p>`,
