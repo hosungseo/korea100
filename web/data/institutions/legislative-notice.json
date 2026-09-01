@@ -136,7 +136,27 @@
       "article": "제14조제1항",
       "text": "① 법령안 주관기관의 장은 법령을 제정ㆍ개정 또는 폐지하려면 입법예고를 하여야 하며, 부처에 소속된 기관의 장은 그 소속 부처의 장의 승인을 받아 입법예고를 하여야 한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "procedure.started",
+     "trigger_condition": "해당 절차가 개시되고 '법령안·정책안 마련' 수행 요건이 확인될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 법령안, 정책안 초안",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "inform-only",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [],
+     "completion_evidence": [
+      "법령안",
+      "정책안 초안"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P02",
@@ -166,7 +186,30 @@
       "article": "제46조제3항",
       "text": "③ 행정예고기간은 예고 내용의 성격 등을 고려하여 정하되, 20일 이상으로 한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "법령안·정책안 마련 완료 결과가 '예고 여부·기간 결정' 단계로 인계될 때",
+     "completion_condition": "'예고 여부·기간 결정' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "법령안",
+      "정책안 초안"
+     ],
+     "completion_evidence": [
+      "예고 결정",
+      "예고기간 산정"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "입법예고 40일 / 행정예고 20일 이상"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P03",
@@ -201,7 +244,31 @@
       "article": "제14조제2항",
       "text": "② 법령안 주관기관의 장은 「행정절차법」 제41조제1항 각 호 외의 부분 단서 및 같은 조 제4항 단서에 따라 입법예고를 생략하려고 하거나 특별한 사정이 있어 입법예고기간을 같은 법 제43조에서 정한 법령의 최단 입법예고기간 미만으로 줄이려는 경우에는 법제처장과 협의하여야 한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "예고 여부·기간 결정 완료 결과가 '예고 생략·긴급처리 판단' 단계로 인계될 때",
+     "completion_condition": "'예고 생략·긴급처리 판단' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "inform-only",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "예고 결정",
+      "예고기간 산정"
+     ],
+     "completion_evidence": [
+      "생략·단축 사유서"
+     ],
+     "handoff_recipients": [
+      "법령안 주관기관의 장"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": "예고 개시 전(법정 기한 없음)"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P04",
@@ -244,7 +311,35 @@
       "article": "제15조제3항",
       "text": "③ 법령안 주관기관의 장은 입법예고를 할 때 다음 각 호의 사항을 게재하여야 한다. 다만, 법제정보시스템을 통한 입법예고가 아닌 경우에는 제5호부터 제8호까지의 사항을 생략할 수 있다.\n1. 법령안의 주요 내용\n2. 제출의견 접수기관\n3. 의견제출 기간\n4. 의견제출 방법\n5. 「행정규제기본법」 제7조제1항에 따른 규제영향분석서\n6. 법령안 전문(신ㆍ구조문대비표를 포함한다)\n7. 조문별 법령 제정ㆍ개정이유서 등 입법 배경에 대한 참고ㆍ설명자료\n8. 그 밖에 입법예고의 목적을 달성하기 위하여 필요한 사항"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "supplement.requested",
+     "trigger_condition": "보완·재수행이 결정되어 '예고문 관보·홈페이지 게시' 단계로 회귀할 때",
+     "completion_condition": "'예고문 관보·홈페이지 게시' 통지와 송달·수령 기록이 남을 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "생략·단축 사유서",
+      "수정 법령안",
+      "재예고문",
+      "법제처장 협의 결과",
+      "입법예고 권고",
+      "법제처장 직접 예고문"
+     ],
+     "completion_evidence": [
+      "입법·정책 예고문"
+     ],
+     "handoff_recipients": [
+      "법제처장"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": "예고기간 개시일(법정 기한 없음)"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P05",
@@ -276,7 +371,31 @@
       "article": "제15조제5항",
       "text": "⑤ 법제처장은 법령안의 내용이 국가의 중요 정책사항이나 국민생활에 중대한 영향을 미치는 사항을 포함하고 있어 국민에게 널리 예고할 필요가 있는 경우에는 예산의 범위에서 인터넷, 일간신문 등에 유료광고를 게재하거나 그 밖의 방법으로 예고할 수 있다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "예고문 관보·홈페이지 게시 완료 결과가 '법제정보시스템 구축·제공(통합입법예고시스템 운영)' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 법제정보시스템 예고 게시면",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "입법·정책 예고문"
+     ],
+     "completion_evidence": [
+      "법제정보시스템 예고 게시면"
+     ],
+     "handoff_recipients": [
+      "국민·이해관계자",
+      "통합입법예고시스템"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": "예고 개시 시(법정 기한 없음)"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "S01",
@@ -311,7 +430,28 @@
       "article": "제44조제1항",
       "text": "① 누구든지 예고된 입법안에 대하여 의견을 제출할 수 있다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "external.reply.received",
+     "trigger_condition": "법제정보시스템 구축·제공(통합입법예고시스템 운영) 완료 결과가 '국민참여입법센터 공개' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 공개 게시자료",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "inform-only",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "법제정보시스템 예고 게시면"
+     ],
+     "completion_evidence": [
+      "공개 게시자료"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P06",
@@ -343,7 +483,30 @@
       "article": "제47조제2항",
       "text": "② 행정예고의 방법, 의견제출 및 처리, 공청회 및 온라인공청회에 관하여는 제38조, 제38조의2, 제38조의3, 제39조, 제39조의2, 제39조의3, 제42조(제1항ㆍ제2항 및 제4항은 제외한다), 제44조제1항부터 제3항까지 및 제45조제1항을 준용한다. 이 경우 \"입법안\"은 \"정책등안\"으로, \"입법예고\"는 \"행정예고\"로, \"처분을 할 때\"는 \"정책등을 수립ㆍ시행하거나 변경할 때\"로 본다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "법제정보시스템 구축·제공(통합입법예고시스템 운영) 완료 결과가 '국민·이해관계자 의견 제출' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 제출 의견서",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "입법·정책 예고문"
+     ],
+     "completion_evidence": [
+      "제출 의견서"
+     ],
+     "handoff_recipients": [
+      "입안 행정청"
+     ],
+     "deadline_rule": {
+      "type": "needs-verification",
+      "expression": "예고기간 내"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P07",
@@ -381,7 +544,29 @@
       "article": "제20조의3제1항",
       "text": "① 온라인공청회를 개최하는 행정청은 온라인공청회를 실시하는 기간 동안 해당 온라인공청회주소에 제20조의2 각 호의 사항을 게시해야 한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "external.reply.received",
+     "trigger_condition": "국민·이해관계자 의견 제출 완료 결과가 '공청회·전자공청회 개최' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 공청회 자료, 회의록",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "inform-only",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "제출 의견서"
+     ],
+     "completion_evidence": [
+      "공청회 자료",
+      "회의록"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": "의견수렴 기간 중(법정 기한 없음)"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P08",
@@ -409,7 +594,29 @@
       "article": "제44조제3항",
       "text": "③ 행정청은 해당 입법안에 대한 의견이 제출된 경우 특별한 사유가 없으면 이를 존중하여 처리하여야 한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "external.reply.received",
+     "trigger_condition": "국민·이해관계자 의견 제출·공청회·전자공청회 개최 완료 결과가 '제출 의견 검토·반영 여부 결정' 단계로 인계될 때",
+     "completion_condition": "'제출 의견 검토·반영 여부 결정' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "제출 의견서",
+      "공청회 자료"
+     ],
+     "completion_evidence": [
+      "의견 검토표"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": "예고기간 종료 후(법정 기한 없음)"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P09",
@@ -441,7 +648,29 @@
       "article": "제14조제3항",
       "text": "③ 「행정절차법」 제41조제4항 본문에서 \"대통령령으로 정하는 중요한 변경이 발생하는 경우\"란 다음 각 호의 어느 하나에 해당하는 경우를 말한다.\n1. 국민의 권리ㆍ의무 또는 국민생활과 직접 관련되는 내용이 추가되는 경우\n2. 그 밖에 법령안의 취지 또는 주요 내용 등이 변경되어 다시 의견을 수렴할 필요가 있는 경우"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "supplement.requested",
+     "trigger_condition": "보완·재수행이 결정되어 '예고안 수정·재예고' 단계로 회귀할 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 수정 법령안, 재예고문",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "의견 검토표"
+     ],
+     "completion_evidence": [
+      "수정 법령안",
+      "재예고문"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P10",
@@ -479,7 +708,32 @@
       "article": "제24조의4제1항",
       "text": "①행정청은 행정예고 결과 제출된 의견을 검토하여 정책ㆍ제도 및 계획에의 반영여부를 결정하고, 그 처리결과 및 처리이유 등을 지체없이 의견제출자에게 통지하거나 공표하여야 한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "제출 의견 검토·반영 여부 결정 완료 결과가 '처리 결과 정리·공개' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 의견 반영결과, 처리결과서",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "의견 검토표"
+     ],
+     "completion_evidence": [
+      "의견 반영결과",
+      "처리결과서"
+     ],
+     "handoff_recipients": [
+      "법제처·소관기관",
+      "통합입법예고시스템"
+     ],
+     "deadline_rule": {
+      "type": "statutory-immediate",
+      "expression": "지체 없이(반영 여부 결정 후 의견제출자 통지)"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "S02",
@@ -510,7 +764,28 @@
       "article": "제22조제1항",
       "text": "① 행정청은 공청회에서 제출된 의견의 반영결과를 발표자와 의견제출자 등에게 통지하거나 인터넷 홈페이지에 게시하는 등의 방법으로 널리 알려야 한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "external.reply.received",
+     "trigger_condition": "처리 결과 정리·공개 완료 결과가 '반영결과 시스템 공개' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 공개 반영결과",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "inform-only",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "의견 반영결과"
+     ],
+     "completion_evidence": [
+      "공개 반영결과"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P11",
@@ -537,7 +812,32 @@
       "article": "제21조제1항",
       "text": "① 각부 장관 및 대통령 또는 국무총리 소속의 법령안 주관기관의 장은 법령안에 관하여 다음 각 호에 따른 입법절차를 거친 후 법제처장에게 그 법령안의 심사를 요청하여야 한다.\n1. 제11조제1항 및 제2항에 따른 관계 기관의 장과의 협의\n2. 「행정절차법」 제41조에 따른 입법예고\n3. 「행정규제기본법」 제10조제1항에 따른 규제심사"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "처리 결과 정리·공개·예고 생략·기간 단축 법제처장 협의 완료 결과가 '법제처 심사 등 후속 진행' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 심사 회부, 정책 시행 준비",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "수정 법령안",
+      "처리결과서"
+     ],
+     "completion_evidence": [
+      "심사 회부",
+      "정책 시행 준비"
+     ],
+     "handoff_recipients": [
+      "법제처장"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P12",
@@ -564,7 +864,30 @@
       "article": "제42조제2항",
       "text": "② 행정청은 대통령령을 입법예고하는 경우 국회 소관 상임위원회에 이를 제출하여야 한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "external.reply.received",
+     "trigger_condition": "예고문 관보·홈페이지 게시 완료 결과가 '대통령령안 국회 소관 상임위 제출' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 국회 상임위 제출본",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "입법·정책 예고문"
+     ],
+     "completion_evidence": [
+      "국회 상임위 제출본"
+     ],
+     "handoff_recipients": [
+      "국회 소관 상임위원회"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": "대통령령 입법예고 시"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P13",
@@ -591,7 +914,32 @@
       "article": "제14조제2항",
       "text": "② 법령안 주관기관의 장은 「행정절차법」 제41조제1항 각 호 외의 부분 단서 및 같은 조 제4항 단서에 따라 입법예고를 생략하려고 하거나 특별한 사정이 있어 입법예고기간을 같은 법 제43조에서 정한 법령의 최단 입법예고기간 미만으로 줄이려는 경우에는 법제처장과 협의하여야 한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "예고 생략·긴급처리 판단 완료 결과가 '예고 생략·기간 단축 법제처장 협의' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 법제처장 협의 결과",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "생략·단축 사유서"
+     ],
+     "completion_evidence": [
+      "법제처장 협의 결과"
+     ],
+     "handoff_recipients": [
+      "법제처장",
+      "입안 행정청",
+      "법제처·소관기관"
+     ],
+     "deadline_rule": {
+      "type": "needs-verification",
+      "expression": "입법예고 생략·최단기간 미만 단축 전"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P14",
@@ -619,7 +967,31 @@
       "article": "제41조제3항",
       "text": "③ 법제처장은 입법예고를 하지 아니한 법령안의 심사 요청을 받은 경우에 입법예고를 하는 것이 적당하다고 판단할 때에는 해당 행정청에 입법예고를 권고하거나 직접 예고할 수 있다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "external.reply.received",
+     "trigger_condition": "법제처 심사 등 후속 진행 완료 결과가 '법제처장 입법예고 권고·직접 예고' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 입법예고 권고, 법제처장 직접 예고문",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "심사 회부"
+     ],
+     "completion_evidence": [
+      "입법예고 권고",
+      "법제처장 직접 예고문"
+     ],
+     "handoff_recipients": [
+      "입안 행정청"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": "입법예고를 하지 아니한 법령안의 심사 요청을 받은 때"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    }
   ],
   "edges": [
@@ -628,140 +1000,388 @@
     "source": "P01",
     "target": "P02",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'법령안·정책안 마련' 완료 결과가 '예고 여부·기간 결정' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "입안 행정청",
+      "to_actor": "입안 행정청",
+      "documents": [
+       "법령안",
+       "정책안 초안"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E02",
     "source": "P02",
     "target": "P03",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'예고 여부·기간 결정' 완료 결과가 '예고 생략·긴급처리 판단' 단계로 인계될 때",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "입안 행정청",
+      "to_actor": "입안 행정청",
+      "documents": [
+       "예고 결정",
+       "예고기간 산정"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E03",
     "source": "P03",
     "target": "P04",
     "type": "sequence",
-    "label": "예고 실시"
+    "label": "예고 실시",
+    "agent_transition": {
+     "condition": "예고 실시",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "입안 행정청",
+      "to_actor": "입안 행정청",
+      "documents": [
+       "생략·단축 사유서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E04",
     "source": "P04",
     "target": "P05",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'예고문 관보·홈페이지 게시' 완료 결과가 '법제정보시스템 구축·제공(통합입법예고시스템 운영)' 단계로 인계될 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "입안 행정청",
+      "to_actor": "법제처장",
+      "documents": [
+       "입법·정책 예고문"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E05",
     "source": "P05",
     "target": "P06",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'법제정보시스템 구축·제공(통합입법예고시스템 운영)' 완료 결과가 '국민·이해관계자 의견 제출' 단계로 인계될 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "법제처장",
+      "to_actor": "국민·이해관계자",
+      "documents": [
+       "법제정보시스템 예고 게시면"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E06",
     "source": "P06",
     "target": "P08",
     "type": "sequence",
-    "label": "의견수렴 종료"
+    "label": "의견수렴 종료",
+    "agent_transition": {
+     "condition": "의견수렴 종료",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "국민·이해관계자",
+      "to_actor": "입안 행정청",
+      "documents": [
+       "제출 의견서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E07",
     "source": "P08",
     "target": "P10",
     "type": "sequence",
-    "label": "반영 결정"
+    "label": "반영 결정",
+    "agent_transition": {
+     "condition": "반영 결정",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "입안 행정청",
+      "to_actor": "입안 행정청",
+      "documents": [
+       "의견 검토표"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E08",
     "source": "P10",
     "target": "P11",
     "type": "sequence",
-    "label": null
+    "label": null,
+    "agent_transition": {
+     "condition": "'처리 결과 정리·공개' 완료 결과가 '법제처 심사 등 후속 진행' 단계로 인계될 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "입안 행정청",
+      "to_actor": "법제처·소관기관",
+      "documents": [
+       "의견 반영결과",
+       "처리결과서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "M01",
     "source": "P05",
     "target": "S01",
     "type": "message",
-    "label": "예고문 공개"
+    "label": "예고문 공개",
+    "agent_transition": {
+     "condition": "예고문 공개",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "법제처장",
+      "to_actor": "통합입법예고시스템",
+      "documents": [
+       "법제정보시스템 예고 게시면"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "M02",
     "source": "P06",
     "target": "P07",
     "type": "message",
-    "label": "공청회 병행"
+    "label": "공청회 병행",
+    "agent_transition": {
+     "condition": "공청회 병행",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "국민·이해관계자",
+      "to_actor": "입안 행정청",
+      "documents": [
+       "제출 의견서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "M03",
     "source": "P07",
     "target": "P08",
     "type": "message",
-    "label": "공청회 결과"
+    "label": "공청회 결과",
+    "agent_transition": {
+     "condition": "공청회 결과",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "입안 행정청",
+      "to_actor": "입안 행정청",
+      "documents": [
+       "공청회 자료",
+       "회의록"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "M04",
     "source": "P10",
     "target": "S02",
     "type": "message",
-    "label": "반영결과 공개"
+    "label": "반영결과 공개",
+    "agent_transition": {
+     "condition": "반영결과 공개",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "입안 행정청",
+      "to_actor": "통합입법예고시스템",
+      "documents": [
+       "의견 반영결과",
+       "처리결과서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "L01",
     "source": "P08",
     "target": "P09",
     "type": "loop",
-    "label": "수정·보완"
+    "label": "수정·보완",
+    "agent_transition": {
+     "condition": "수정·보완",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "입안 행정청",
+      "to_actor": "입안 행정청",
+      "documents": [
+       "의견 검토표"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "L02",
     "source": "P09",
     "target": "P04",
     "type": "loop",
-    "label": "재예고"
+    "label": "재예고",
+    "agent_transition": {
+     "condition": "재예고",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "입안 행정청",
+      "to_actor": "입안 행정청",
+      "documents": [
+       "수정 법령안",
+       "재예고문"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "M05",
     "source": "P04",
     "target": "P12",
     "type": "message",
-    "label": "대통령령안 국회 제출"
+    "label": "대통령령안 국회 제출",
+    "agent_transition": {
+     "condition": "대통령령안 국회 제출",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "입안 행정청",
+      "to_actor": "입안 행정청",
+      "documents": [
+       "입법·정책 예고문"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E09",
     "source": "P03",
     "target": "P13",
     "type": "sequence",
-    "label": "생략·최단기간 미만 단축 검토"
+    "label": "생략·최단기간 미만 단축 검토",
+    "agent_transition": {
+     "condition": "생략·최단기간 미만 단축 검토",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "입안 행정청",
+      "to_actor": "법령안 주관기관의 장",
+      "documents": [
+       "생략·단축 사유서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E10",
     "source": "P13",
     "target": "P04",
     "type": "sequence",
-    "label": "단축 예고 실시"
+    "label": "단축 예고 실시",
+    "agent_transition": {
+     "condition": "단축 예고 실시",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "법령안 주관기관의 장",
+      "to_actor": "입안 행정청",
+      "documents": [
+       "법제처장 협의 결과"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E11",
     "source": "P13",
     "target": "P11",
     "type": "sequence",
-    "label": "예고 생략 확정"
+    "label": "예고 생략 확정",
+    "agent_transition": {
+     "condition": "예고 생략 확정",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "법령안 주관기관의 장",
+      "to_actor": "법제처·소관기관",
+      "documents": [
+       "법제처장 협의 결과"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "M06",
     "source": "P11",
     "target": "P14",
     "type": "message",
-    "label": "입법예고 없는 법령안 심사 요청"
+    "label": "입법예고 없는 법령안 심사 요청",
+    "agent_transition": {
+     "condition": "입법예고 없는 법령안 심사 요청",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "법제처·소관기관",
+      "to_actor": "법제처장",
+      "documents": [
+       "심사 회부",
+       "정책 시행 준비"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "L03",
     "source": "P14",
     "target": "P04",
     "type": "loop",
-    "label": "입법예고 권고·직접 예고"
+    "label": "입법예고 권고·직접 예고",
+    "agent_transition": {
+     "condition": "입법예고 권고·직접 예고",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "법제처장",
+      "to_actor": "입안 행정청",
+      "documents": [
+       "입법예고 권고",
+       "법제처장 직접 예고문"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    }
   ],
   "warnings": [
@@ -772,7 +1392,124 @@
      "285173"
     ]
    }
-  ]
+  ],
+  "agent_readiness": {
+   "contract_version": "1.1.0",
+   "level": "R1",
+   "mode": "reference-only",
+   "assessed_at": "2026-09-02",
+   "assessment_method": "스키마 검증·그래프 파생·전이 수동 대조 필요·법제처 DRF API 직접 대조",
+   "live_legal_check": "required-before-use",
+   "last_live_check": {
+    "checked_at": "2026-09-02",
+    "method": "law.go.kr-DRF-direct",
+    "status": "passed",
+    "citation_fingerprint": "sha256:b453dfd5ab52fa28781cd12f2533e365ce0cfd55b8fa1df44f9889f450d56299",
+    "sources_checked": 5,
+    "source_failures": 0,
+    "article_references": 33,
+    "verified_references": 33,
+    "missing_references": [],
+    "uncheckable_references": [],
+    "source_results": [
+     {
+      "law": "행정절차법",
+      "source_type": "statute",
+      "effective_on": "2023-03-24",
+      "articles": 70,
+      "status": "passed"
+     },
+     {
+      "law": "행정절차법 시행령",
+      "source_type": "statute",
+      "effective_on": "2023-08-01",
+      "articles": 42,
+      "status": "passed"
+     },
+     {
+      "law": "행정절차법 시행규칙",
+      "source_type": "statute",
+      "effective_on": "2022-07-12",
+      "articles": 18,
+      "status": "passed"
+     },
+     {
+      "law": "법제업무 운영규정",
+      "source_type": "statute",
+      "effective_on": "2026-03-31",
+      "articles": 57,
+      "status": "passed"
+     },
+     {
+      "law": "국회법",
+      "source_type": "statute",
+      "effective_on": "2026-02-10",
+      "articles": 218,
+      "status": "passed"
+     }
+    ],
+    "reference_only_references": [
+     "P01",
+     "P03",
+     "S01",
+     "P06",
+     "P07",
+     "S02",
+     "P13"
+    ],
+    "verified_node_ids": [
+     "P02",
+     "P04",
+     "P05",
+     "P08",
+     "P09",
+     "P10",
+     "P11",
+     "P12",
+     "P14"
+    ],
+    "unverified_node_ids": [],
+    "note": "인용문이 법제처 현행 시행본 조문 문언 안에 그대로 있는지 대조(scripts/restore-basis-text.mjs --verify)."
+   },
+   "actionable_node_ids": [],
+   "reference_only_node_ids": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "S01",
+    "P06",
+    "P07",
+    "P08",
+    "P09",
+    "P10",
+    "S02",
+    "P11",
+    "P12",
+    "P13",
+    "P14"
+   ],
+   "reference_only_reasons": {},
+   "blockers": [
+    "참고용 노드 7개를 제외하면 실행 경로가 끊어짐",
+    "전이 조건·인계 수동 대조 미완료"
+   ],
+   "metrics": {
+    "nodes": 16,
+    "edges": 20,
+    "node_contract_coverage": 1,
+    "transition_contract_coverage": 1,
+    "explicit_basis_coverage": 1,
+    "output_document_coverage": 1,
+    "low_confidence_nodes": 5,
+    "template_like_nodes": 0,
+    "deadline_review_nodes": 2,
+    "reference_only_nodes": 7,
+    "actionable_coverage": 0.5625,
+    "field_verification_items": 3
+   }
+  }
  },
  "verification": {
   "status": "article-verified",

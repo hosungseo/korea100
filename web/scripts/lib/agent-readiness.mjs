@@ -41,6 +41,9 @@ export const DEADLINE_RULE_TYPES = new Set([
   // statutory로 묶으면 계산 가능한 기한이 있는 것처럼 보이고,
   // needs-verification으로 묶으면 근거를 모르는 것처럼 보인다. 둘 다 사실이 아니다.
   "statutory-immediate",
+  // 법령이 "5년을 단위로", "매년"처럼 **주기**만 정하는 경우. 법정 의무이지만
+  // 사건 시점에서 날짜를 계산할 수 없다 — statutory-immediate와 같은 이유로 따로 둔다.
+  "statutory-cycle",
   "internal-target",
   "document-defined",
   "not-specified",
@@ -83,9 +86,20 @@ function deriveObligation(node, basisStatus) {
   return "unclassified";
 }
 
+// "상시", "발의 시", "심사 종료 시" — 언제 시작하는지를 말할 뿐 언제까지 해야 하는지가 없다.
+// 기한이 아니라 계기다. 법이 기한을 안 정했다는 사실이므로 not-specified가 맞다
+// (needs-verification으로 두면 "근거를 모른다"는 뜻이 되어 사실과 다르다).
+// 앞에 공백이 있는 "시"만 잡는다 — "공개 일시"의 끝 글자에 걸려 계산 가능한 기한을
+// 계기로 내린 적이 있다.
+const TRIGGER_ONLY_DEADLINE = /^(상시|수시|즉시)$|(때|\s시|시점)$/u;
+// "5년을 단위로", "매년", "연 1회" — 법정 주기.
+const CYCLE_DEADLINE = /(\d+\s*년을?\s*단위|매\s*(년|분기|월)|연\s*\d+\s*회|주기적)/u;
+
 function deriveDeadlineRule(node, basisStatus) {
   const expression = typeof node.deadline === "string" && node.deadline.trim() ? node.deadline.trim() : null;
   if (!expression) return { type: "not-specified", expression: null };
+  // 조문에 기한이 없다고 데이터가 스스로 밝힌 경우. 표현은 남기고 성격만 바로잡는다.
+  if (/기한\s*(규정\s*)?없음/u.test(expression)) return { type: "not-specified", expression };
   if (/(내부|목표|예상|권고)/u.test(expression)) return { type: "internal-target", expression };
   if (
     /(개별 법령|공고|통지서|부과서|지정된 기한|기관별|협의)/u.test(expression)
@@ -107,6 +121,12 @@ function deriveDeadlineRule(node, basisStatus) {
   if (basisStatus === "citation-verified" && IMMEDIATE_DEADLINE.test(expression)) {
     return { type: "statutory-immediate", expression };
   }
+  // 주기 판정은 계산 가능한 기한을 다 본 뒤에 한다. "매년 1월 31일까지"는 주기이면서
+  // 날짜가 계산되므로 statutory가 맞고, 여기까지 온 것만 순수 주기다.
+  if (basisStatus === "citation-verified" && CYCLE_DEADLINE.test(expression)) {
+    return { type: "statutory-cycle", expression };
+  }
+  if (TRIGGER_ONLY_DEADLINE.test(expression)) return { type: "not-specified", expression };
   return { type: "needs-verification", expression };
 }
 

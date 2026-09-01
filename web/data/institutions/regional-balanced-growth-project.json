@@ -99,7 +99,29 @@
       "article": "제7조제1항·제2항",
       "text": "① 특별시장·광역시장·특별자치시장·도지사·특별자치도지사(이하 \"시·도지사\"라 한다)는 해당 시·도의 지방자치분권 및 균형성장의 추진을 위하여 관계 중앙행정기관의 장과 협의하고 관할 시장·군수·구청장의 의견을 수렴하여 제67조에 따른 시·도 지방시대위원회의 심의·의결을 거쳐 5년을 단위로 하는 시·도 지방시대 계획(이하 \"시·도 계획\"이라 한다)을 수립한다. ② 시·도 계획에는 다음 각 호의 사항이 포함되어야 한다. 1. 시·도별 지방자치분권 및 균형성장의 기본방향 및 추진목표 2. 시·도별 현황과 여건분석에 관한 사항 3. 제3장에 따른 균형성장시책 및 지방자치분권 과제의 추진 등에 관한 사항 4. 그 밖에 시·도의 지방자치분권 및 균형성장을 위하여 필요한 사항"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "procedure.started",
+     "trigger_condition": "해당 절차가 개시되고 '시·도 지방시대 계획 수립' 수행 요건이 확인될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 시·도 지방시대 계획",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [],
+     "completion_evidence": [
+      "시·도 지방시대 계획"
+     ],
+     "handoff_recipients": [
+      "지방시대위원회",
+      "시·도지사·초광역권설정 지자체의 장"
+     ],
+     "deadline_rule": {
+      "type": "statutory-cycle",
+      "expression": "5년을 단위로 수립"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P02",
@@ -124,7 +146,29 @@
       "article": "제9조제1항·제2항",
       "text": "① 초광역권을 설정한 2개 이상의 지방자치단체 또는 「지방자치법」 제199조에 따른 특별지방자치단체(이하 \"초광역권설정 지방자치단체\"라 한다)의 장은 초광역권설정 지방자치단체를 구성하는 지방자치단체의 장 및 관계 중앙행정기관의 장과 협의하고 지방시대위원회의 심의·의결을 거쳐 5년을 단위로 하는 초광역권발전계획(이하 \"초광역권발전계획\"이라 한다)을 수립할 수 있다. 이 경우 관광자원의 개발에 관한 사항은 「관광진흥법」 제49조에 따른 관광개발기본계획 및 권역별 관광개발계획과 연계하여 수립하여야 한다. ② 초광역권발전계획에는 다음 각 호의 사항이 포함되어야 한다. 1. 초광역권의 범위 및 발전목표에 관한 사항 2. 초광역권의 현황과 여건분석에 관한 사항 3. 제14조에 따른 초광역권산업의 육성 또는 제30조에 따른 초광역협력사업의 추진에 관한 사항 4. 투자재원의 조달에 관한 사항 5. 그 밖에 초광역권 발전을 위하여 필요한 사항"
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "procedure.started",
+     "trigger_condition": "해당 절차가 개시되고 '초광역권발전계획 수립' 수행 요건이 확인될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 초광역권발전계획",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [],
+     "completion_evidence": [
+      "초광역권발전계획"
+     ],
+     "handoff_recipients": [
+      "지방시대위원회",
+      "시·도지사·초광역권설정 지자체의 장"
+     ],
+     "deadline_rule": {
+      "type": "statutory-cycle",
+      "expression": "5년을 단위로 수립"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P03",
@@ -149,7 +193,28 @@
       "article": "제8조제1항·제2항",
       "text": "① 중앙행정기관의 장은 해당 기관의 지방자치분권 및 균형성장의 추진을 위하여 관계 중앙행정기관의 장 및 시·도지사와 협의하여 5년을 단위로 하는 부문별 계획(이하 \"부문별 계획\"이라 한다)을 수립한다. ② 중앙행정기관의 장은 부문별 계획을 수립할 때에는 시·도 계획 및 제9조제1항에 따른 초광역권발전계획(해당 계획이 수립된 경우로 한정한다)을 고려하여야 한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "procedure.started",
+     "trigger_condition": "해당 절차가 개시되고 '부문별 계획 수립' 수행 요건이 확인될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 부문별 계획",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [],
+     "completion_evidence": [
+      "부문별 계획"
+     ],
+     "handoff_recipients": [
+      "지방시대위원회"
+     ],
+     "deadline_rule": {
+      "type": "statutory-cycle",
+      "expression": "5년을 단위로 수립"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P04",
@@ -174,7 +239,32 @@
       "article": "제6조제1항·제2항·제4항",
       "text": "① 제62조에 따른 지방시대위원회(이하 \"지방시대위원회\"라 한다)는 지방자치분권 및 균형성장을 효과적으로 추진하기 위하여 관계 중앙행정기관의 장과 협의하고 지방자치단체의 의견을 수렴한 후 5년을 단위로 하는 지방시대 종합계획(이하 \"지방시대 종합계획\"이라 한다)을 수립한다. ② 지방시대위원회는 지방시대 종합계획을 수립할 때에는 제7조제1항에 따른 시·도 지방시대 계획과 제8조제1항에 따른 부문별 계획 및 제9조제1항에 따른 초광역권발전계획(해당 계획이 수립된 경우로 한정한다)을 반영하여야 한다. ④ 지방시대 종합계획은 「국가재정법」 제7조에 따른 국가재정운용계획, 「국토기본법」 제6조에 따른 국토계획, 「저출산·고령사회기본법」 제20조에 따른 저출산·고령사회기본계획 및 「기후위기 대응을 위한 탄소중립·녹색성장 기본법」 제10조에 따른 국가 탄소중립 녹색성장 기본계획과 연계되어야 한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "external.reply.received",
+     "trigger_condition": "시·도 지방시대 계획 수립·초광역권발전계획 수립·부문별 계획 수립 완료 결과가 '지방시대 종합계획 수립' 단계로 인계될 때",
+     "completion_condition": "'지방시대 종합계획 수립' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "시·도 지방시대 계획",
+      "초광역권발전계획",
+      "부문별 계획"
+     ],
+     "completion_evidence": [
+      "지방시대 종합계획"
+     ],
+     "handoff_recipients": [
+      "국무회의·대통령"
+     ],
+     "deadline_rule": {
+      "type": "statutory-cycle",
+      "expression": "5년을 단위로 수립"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P05",
@@ -199,7 +289,30 @@
       "article": "제6조제5항",
       "text": "지방시대 종합계획은 국무회의의 심의를 거쳐 대통령의 승인을 받아야 한다. 수립된 지방시대 종합계획을 변경(대통령령으로 정하는 경미한 사항을 변경하는 경우는 제외한다)할 때에도 또한 같다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "지방시대 종합계획 수립 완료 결과가 '국무회의 심의·대통령 승인' 단계로 인계될 때",
+     "completion_condition": "'국무회의 심의·대통령 승인' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "지방시대 종합계획"
+     ],
+     "completion_evidence": [
+      "대통령 승인"
+     ],
+     "handoff_recipients": [
+      "지방시대위원회"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P06",
@@ -224,7 +337,28 @@
       "article": "제6조제6항",
       "text": "지방시대위원회는 수립된 지방시대 종합계획을 국회에 보고하여야 한다. 수립된 지방시대 종합계획을 변경(대통령령으로 정하는 경미한 사항을 변경하는 경우는 제외한다)할 때에도 또한 같다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "approval.completed",
+     "trigger_condition": "국무회의 심의·대통령 승인 완료 결과가 '국회 보고' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 국회 보고",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "대통령 승인"
+     ],
+     "completion_evidence": [
+      "국회 보고"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P07",
@@ -255,7 +389,34 @@
       "article": "제9조제3항·제4항",
       "text": "③ 초광역권설정 지방자치단체의 장은 초광역권발전계획을 수립한 경우 이를 효율적으로 추진하기 위하여 매년 초광역권발전시행계획(이하 \"초광역권발전시행계획\"이라 한다)을 수립하여야 한다. ④ 초광역권설정 지방자치단체의 장은 초광역권발전계획 및 초광역권발전시행계획 수립 시 초광역권발전계획, 전년도 초광역권발전시행계획의 추진실적과 해당 연도 초광역권발전시행계획을 지방시대위원회와 관계 중앙행정기관의 장에게 제출하여야 한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "supplement.requested",
+     "trigger_condition": "보완·재수행이 결정되어 '연도별 시행계획 수립·제출' 단계로 회귀할 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 연도별 시행계획, 전년도 추진실적",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "시·도 지방시대 계획",
+      "초광역권발전계획",
+      "추진실적 평가 결과"
+     ],
+     "completion_evidence": [
+      "연도별 시행계획",
+      "전년도 추진실적"
+     ],
+     "handoff_recipients": [
+      "중앙행정기관의 장·초광역권설정 지자체의 장·시·도지사",
+      "지방시대위원회"
+     ],
+     "deadline_rule": {
+      "type": "statutory-cycle",
+      "expression": "매년 수립·제출"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P08",
@@ -280,7 +441,31 @@
       "article": "제10조",
       "text": "중앙행정기관의 장, 초광역권설정 지방자치단체의 장 또는 시·도지사는 다른 중앙행정기관의 부문별 시행계획, 다른 초광역권설정 지방자치단체의 초광역권발전시행계획 또는 다른 시·도의 시·도 시행계획의 시행이 그 중앙행정기관의 부문별 시행계획, 초광역권설정 지방자치단체의 초광역권발전시행계획 또는 시·도의 시·도 시행계획을 시행하는 데 지장을 주거나 줄 우려가 있다고 인정할 때에는 대통령령으로 정하는 바에 따라 상호 협의·조정하여야 한다. 이 경우 지방시대위원회는 해당 중앙행정기관의 장, 초광역권설정 지방자치단체의 장 또는 시·도지사에게 관련 의견을 제시할 수 있다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "external.reply.received",
+     "trigger_condition": "부문별 시행계획 수립·제출·연도별 시행계획 수립·제출 완료 결과가 '시행계획 상호 협의·조정' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 협의·조정 결과",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "부문별 시행계획",
+      "전년도 부문별 시행계획 추진실적",
+      "연도별 시행계획",
+      "전년도 추진실적"
+     ],
+     "completion_evidence": [
+      "협의·조정 결과"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P09",
@@ -305,7 +490,33 @@
       "article": "제11조제1항·제2항",
       "text": "① 지방시대위원회는 매년 시·도 시행계획, 부문별 시행계획 및 초광역권발전시행계획의 추진실적을 평가하여야 한다. ② 지방시대위원회는 제1항에 따른 평가업무를 수행하기 위하여 평가자문단을 둘 수 있으며, 평가업무를 지원하기 위하여 전문평가기관을 지정하여 운영할 수 있다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "부문별 시행계획 수립·제출·연도별 시행계획 수립·제출 완료 결과가 '추진실적 평가' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 추진실적 평가 결과",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "부문별 시행계획",
+      "전년도 부문별 시행계획 추진실적",
+      "연도별 시행계획",
+      "전년도 추진실적"
+     ],
+     "completion_evidence": [
+      "추진실적 평가 결과"
+     ],
+     "handoff_recipients": [
+      "시·도지사·초광역권설정 지자체의 장"
+     ],
+     "deadline_rule": {
+      "type": "statutory-cycle",
+      "expression": "매년 평가"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    },
    {
     "id": "P10",
@@ -331,7 +542,32 @@
       "article": "제8조제3항·제4항",
       "text": "③ 중앙행정기관의 장은 부문별 계획을 시행하기 위하여 매년 부문별 시행계획(이하 \"부문별 시행계획\"이라 한다)을 수립·시행하여야 한다. ④ 중앙행정기관의 장은 대통령령으로 정하는 바에 따라 부문별 계획, 전년도의 부문별 시행계획의 추진실적과 해당 연도의 부문별 시행계획을 지방시대위원회에 제출하여야 한다."
      }
-    ]
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "부문별 계획 수립 완료 결과가 '부문별 시행계획 수립·제출' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 부문별 시행계획, 전년도 부문별 시행계획 추진실적",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "부문별 계획"
+     ],
+     "completion_evidence": [
+      "부문별 시행계획",
+      "전년도 부문별 시행계획 추진실적"
+     ],
+     "handoff_recipients": [
+      "지방시대위원회",
+      "중앙행정기관의 장·초광역권설정 지자체의 장·시·도지사"
+     ],
+     "deadline_rule": {
+      "type": "statutory-cycle",
+      "expression": "매년 수립·시행·제출"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    }
   ],
   "edges": [
@@ -340,91 +576,251 @@
     "source": "P01",
     "target": "P04",
     "type": "sequence",
-    "label": "시·도 계획 반영(§6②)"
+    "label": "시·도 계획 반영(§6②)",
+    "agent_transition": {
+     "condition": "시·도 계획 반영(§6②)",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "시·도지사",
+      "to_actor": "지방시대위원회",
+      "documents": [
+       "시·도 지방시대 계획"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E02",
     "source": "P02",
     "target": "P04",
     "type": "message",
-    "label": "초광역권발전계획이 수립된 경우에만 반영(§6②)"
+    "label": "초광역권발전계획이 수립된 경우에만 반영(§6②)",
+    "agent_transition": {
+     "condition": "초광역권발전계획이 수립된 경우에만 반영(§6②)",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "초광역권설정 지방자치단체의 장",
+      "to_actor": "지방시대위원회",
+      "documents": [
+       "초광역권발전계획"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E03",
     "source": "P03",
     "target": "P04",
     "type": "sequence",
-    "label": "부문별 계획 반영(§6②)"
+    "label": "부문별 계획 반영(§6②)",
+    "agent_transition": {
+     "condition": "부문별 계획 반영(§6②)",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "중앙행정기관의 장",
+      "to_actor": "지방시대위원회",
+      "documents": [
+       "부문별 계획"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E04",
     "source": "P04",
     "target": "P05",
     "type": "sequence",
-    "label": "국무회의 심의·대통령 승인(§6⑤)"
+    "label": "국무회의 심의·대통령 승인(§6⑤)",
+    "agent_transition": {
+     "condition": "국무회의 심의·대통령 승인(§6⑤)",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "지방시대위원회",
+      "to_actor": "국무회의·대통령",
+      "documents": [
+       "지방시대 종합계획"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E05",
     "source": "P05",
     "target": "P06",
     "type": "sequence",
-    "label": "승인 후 국회 보고(§6⑥)"
+    "label": "승인 후 국회 보고(§6⑥)",
+    "agent_transition": {
+     "condition": "승인 후 국회 보고(§6⑥)",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "국무회의·대통령",
+      "to_actor": "지방시대위원회",
+      "documents": [
+       "대통령 승인"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E06",
     "source": "P01",
     "target": "P07",
     "type": "sequence",
-    "label": "시·도 계획 추진 위해 매년 시행계획(§7③)"
+    "label": "시·도 계획 추진 위해 매년 시행계획(§7③)",
+    "agent_transition": {
+     "condition": "시·도 계획 추진 위해 매년 시행계획(§7③)",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "시·도지사",
+      "to_actor": "시·도지사·초광역권설정 지자체의 장",
+      "documents": [
+       "시·도 지방시대 계획"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E12",
     "source": "P02",
     "target": "P07",
     "type": "message",
-    "label": "초광역권발전계획을 수립한 경우 매년 시행계획(§9③)"
+    "label": "초광역권발전계획을 수립한 경우 매년 시행계획(§9③)",
+    "agent_transition": {
+     "condition": "초광역권발전계획을 수립한 경우 매년 시행계획(§9③)",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "초광역권설정 지방자치단체의 장",
+      "to_actor": "시·도지사·초광역권설정 지자체의 장",
+      "documents": [
+       "초광역권발전계획"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E10",
     "source": "P03",
     "target": "P10",
     "type": "sequence",
-    "label": "부문별 계획 시행 위해 매년 시행계획(§8③)"
+    "label": "부문별 계획 시행 위해 매년 시행계획(§8③)",
+    "agent_transition": {
+     "condition": "부문별 계획 시행 위해 매년 시행계획(§8③)",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "중앙행정기관의 장",
+      "to_actor": "중앙행정기관의 장",
+      "documents": [
+       "부문별 계획"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E11",
     "source": "P10",
     "target": "P09",
     "type": "sequence",
-    "label": "부문별 시행계획 추진실적 제출·평가(§8④·§11①)"
+    "label": "부문별 시행계획 추진실적 제출·평가(§8④·§11①)",
+    "agent_transition": {
+     "condition": "부문별 시행계획 추진실적 제출·평가(§8④·§11①)",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "중앙행정기관의 장",
+      "to_actor": "지방시대위원회",
+      "documents": [
+       "부문별 시행계획",
+       "전년도 부문별 시행계획 추진실적"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E13",
     "source": "P10",
     "target": "P08",
     "type": "message",
-    "label": "다른 시행계획과 지장 우려 시(§10)"
+    "label": "다른 시행계획과 지장 우려 시(§10)",
+    "agent_transition": {
+     "condition": "다른 시행계획과 지장 우려 시(§10)",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "중앙행정기관의 장",
+      "to_actor": "중앙행정기관의 장·초광역권설정 지자체의 장·시·도지사",
+      "documents": [
+       "부문별 시행계획",
+       "전년도 부문별 시행계획 추진실적"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E07",
     "source": "P07",
     "target": "P08",
     "type": "message",
-    "label": "다른 시행계획과 지장 우려 시(§10)"
+    "label": "다른 시행계획과 지장 우려 시(§10)",
+    "agent_transition": {
+     "condition": "다른 시행계획과 지장 우려 시(§10)",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "시·도지사·초광역권설정 지자체의 장",
+      "to_actor": "중앙행정기관의 장·초광역권설정 지자체의 장·시·도지사",
+      "documents": [
+       "연도별 시행계획",
+       "전년도 추진실적"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E08",
     "source": "P07",
     "target": "P09",
     "type": "sequence",
-    "label": "추진실적 평가(§11①)"
+    "label": "추진실적 평가(§11①)",
+    "agent_transition": {
+     "condition": "추진실적 평가(§11①)",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "시·도지사·초광역권설정 지자체의 장",
+      "to_actor": "지방시대위원회",
+      "documents": [
+       "연도별 시행계획",
+       "전년도 추진실적"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    },
    {
     "id": "E09",
     "source": "P09",
     "target": "P07",
     "type": "loop",
-    "label": "매년 반복(§7③·§9③) — 평가 결과 반영 절차는 §11③ 대통령령 위임"
+    "label": "매년 반복(§7③·§9③) — 평가 결과 반영 절차는 §11③ 대통령령 위임",
+    "agent_transition": {
+     "condition": "매년 반복(§7③·§9③) — 평가 결과 반영 절차는 §11③ 대통령령 위임",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "지방시대위원회",
+      "to_actor": "시·도지사·초광역권설정 지자체의 장",
+      "documents": [
+       "추진실적 평가 결과"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    }
   ],
   "warnings": [
@@ -433,7 +829,82 @@
    "초광역권발전계획은 제9조제1항상 '수립할 수 있다'는 임의 계획이다. 종합계획 반영 의무(제6조제2항)와 초광역권발전시행계획 수립 의무(제9조제3항)는 모두 해당 계획이 수립된 경우에만 발생한다.",
    "제11조는 매년 추진실적 평가만 정하고, 평가 결과를 차년도 시행계획에 반영할 의무는 조문에 없다. 평가의 기준·절차·방법은 제11조제3항이 대통령령에 위임했으므로 시행령을 별도로 확인해야 한다.",
    "각 계획의 구체적 수립절차·제출시기는 제6조제7항·제7조제5항·제8조제5항·제9조제5항이 모두 대통령령에 위임했다. 조문에는 월·일 단위 처리기한이 없다."
-  ]
+  ],
+  "agent_readiness": {
+   "contract_version": "1.1.0",
+   "level": "R1",
+   "mode": "reference-only",
+   "assessed_at": "2026-09-02",
+   "assessment_method": "스키마 검증·그래프 파생·전이 수동 대조 필요·법제처 DRF API 직접 대조",
+   "live_legal_check": "required-before-use",
+   "last_live_check": {
+    "checked_at": "2026-09-02",
+    "method": "law.go.kr-DRF-direct",
+    "status": "passed",
+    "citation_fingerprint": "sha256:2fc074d060358f87904d31eb30d3617f57da2bddf14b4fe11a80eefcace0ae35",
+    "sources_checked": 1,
+    "source_failures": 0,
+    "article_references": 11,
+    "verified_references": 11,
+    "missing_references": [],
+    "uncheckable_references": [],
+    "source_results": [
+     {
+      "law": "지방자치분권 및 균형성장에 관한 특별법",
+      "source_type": "statute",
+      "effective_on": "2026-07-01",
+      "articles": 96,
+      "status": "passed"
+     }
+    ],
+    "reference_only_references": [],
+    "verified_node_ids": [
+     "P01",
+     "P02",
+     "P03",
+     "P04",
+     "P05",
+     "P06",
+     "P07",
+     "P08",
+     "P09",
+     "P10"
+    ],
+    "unverified_node_ids": [],
+    "note": "인용문이 법제처 현행 시행본 조문 문언 안에 그대로 있는지 대조(scripts/restore-basis-text.mjs --verify)."
+   },
+   "actionable_node_ids": [],
+   "reference_only_node_ids": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P08",
+    "P09",
+    "P10"
+   ],
+   "reference_only_reasons": {},
+   "blockers": [
+    "전이 조건·인계 수동 대조 미완료"
+   ],
+   "metrics": {
+    "nodes": 10,
+    "edges": 13,
+    "node_contract_coverage": 1,
+    "transition_contract_coverage": 1,
+    "explicit_basis_coverage": 1,
+    "output_document_coverage": 1,
+    "low_confidence_nodes": 0,
+    "template_like_nodes": 0,
+    "deadline_review_nodes": 0,
+    "reference_only_nodes": 0,
+    "actionable_coverage": 1,
+    "field_verification_items": 4
+   }
+  }
  },
  "verification": {
   "basisInForce": {

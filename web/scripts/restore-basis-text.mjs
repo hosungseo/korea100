@@ -152,7 +152,7 @@ export async function verify(institution) {
         }
       }
       if (missing) {
-        errors.push({ node: node.id, article: basis.article, reason: `${missing}을 시행본에서 못 찾음` });
+        errors.push({ node: node.id, law: basis.law, article: basis.article, reason: `${missing}을 시행본에서 못 찾음` });
         continue;
       }
       checked += 1;
@@ -164,7 +164,7 @@ export async function verify(institution) {
       // 요약·의역·편집자 주는 여기서 걸린다. 부분 인용은 통과한다(그건 별개 문제다).
       if (!haystack.includes(stored)) {
         errors.push({
-          node: node.id, article: basis.article,
+          node: node.id, law: basis.law, article: basis.article,
           reason: "원문에 없는 문장 — 요약·의역·창작 의심",
           stored: stored.slice(0, 130),
           source: haystack.slice(0, 130),
@@ -181,7 +181,17 @@ export async function verify(institution) {
       }
     }
   }
-  return { checked, errors, warnings, problems };
+  return {
+    checked, errors, warnings, problems,
+    // 준비도의 last_live_check.source_results가 요구하는 출처별 결과.
+    sources: [...byLaw.entries()].map(([law, source]) => ({
+      law,
+      source_type: source.kind === "admrul" ? "admin-rule" : "statute",
+      effective_on: source.effectiveOn,
+      articles: source.articles.length,
+      status: errors.some((error) => error.law === law) ? "failed" : "passed",
+    })),
+  };
 }
 
 export async function restore(institution, { dryRun = false } = {}) {
