@@ -5,6 +5,7 @@
 공공 액션 층 = 시스템 자동 write가 아니라 **사람 승인 패킷**.
 
 ## 파일
+- `PRD.md` — 제품 정의·원칙·로드맵 (정본)
 - `core-schema.json` — 5타입 코어 스키마 (`case_kind`: institution | project)
 - `samples/information-disclosure.case.json` — **정보공개청구** 샘플 1호 (제도 R2)
 - `samples/administrative-fine-pre-notice.case.json` — **과태료 사전통지·의견제출** 샘플 2호 (제도 R2)
