@@ -207,10 +207,19 @@ export function deriveNodeAgentContract(node, context) {
 export function deriveEdgeAgentTransition(edge, nodeById, { sourceOutgoingCount = 1 } = {}) {
   const source = nodeById.get(edge.source);
   const target = nodeById.get(edge.target);
-  const documents = unique([
-    ...(source?.output_documents ?? []),
-    ...(target?.input_documents ?? []).filter((item) => (source?.output_documents ?? []).includes(item)),
-  ]);
+  // 이 인계가 실제로 옮기는 문서.
+  //
+  // 종전 식은 `source.outputs ∪ (target.inputs ∩ source.outputs)` 였는데 둘째 항이
+  // 첫째 항의 부분집합이라 아무 일도 하지 않았다 — 좁히려던 의도가 무효였고,
+  // 결과적으로 한 노드에서 갈라지는 모든 엣지가 같은 문서 목록을 복사해 달고 있었다
+  // (전이 대조에서 "분기별로 갈리지 않은 채 복사된 handoff.documents"로 지적됨).
+  //
+  // 뒤 단계가 입력을 선언했고 그것이 앞 단계 산출물과 겹치면 그 교집합이 이 분기가
+  // 옮기는 문서다. 겹치는 것이 없으면 좁히지 않는다 — 저장소 전체에서 교집합이
+  // 비는 엣지가 909개인데, 그때 문서를 지우면 인계가 아무것도 안 옮기는 것처럼 보인다.
+  const outputs = unique(source?.output_documents ?? []);
+  const shared = outputs.filter((item) => (target?.input_documents ?? []).includes(item));
+  const documents = shared.length > 0 ? shared : outputs;
   return {
     condition: edge.label?.trim()
       || (edge.type === "loop"
