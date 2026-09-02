@@ -152,7 +152,7 @@
      "trigger_event": "procedure.started",
      "trigger_condition": "해당 절차가 개시되고 '초광역권발전계획 수립' 수행 요건이 확인될 때",
      "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 초광역권발전계획",
-     "obligation": "required",
+     "obligation": "optional",
      "basis_status": "citation-verified",
      "automation_level": "draft-with-review",
      "human_confirmation_required": true,
@@ -347,6 +347,7 @@
       "text": "지방시대위원회는 수립된 지방시대 종합계획을 국회에 보고하여야 한다. 수립된 지방시대 종합계획을 변경(대통령령으로 정하는 경미한 사항을 변경하는 경우는 제외한다)할 때에도 또한 같다."
      }
     ],
+    "receiver": "국회",
     "agent": {
      "trigger_event": "approval.completed",
      "trigger_condition": "국무회의 심의·대통령 승인 완료 결과가 '국회 보고' 단계로 인계될 때",
@@ -361,7 +362,9 @@
      "completion_evidence": [
       "국회 보고"
      ],
-     "handoff_recipients": [],
+     "handoff_recipients": [
+      "국회"
+     ],
      "deadline_rule": {
       "type": "not-specified",
       "expression": null
@@ -711,6 +714,7 @@
       "text": "④ 초광역권설정 지방자치단체의 장은 초광역권발전계획 및 초광역권발전시행계획 수립 시 초광역권발전계획, 전년도 초광역권발전시행계획의 추진실적과 해당 연도 초광역권발전시행계획을 지방시대위원회와 관계 중앙행정기관의 장에게 제출하여야 한다."
      }
     ],
+    "receiver": "관계 중앙행정기관의 장",
     "agent": {
      "trigger_event": "predecessor.completed",
      "trigger_condition": "연도별 시행계획 수립·제출 완료 결과가 '관계 중앙행정기관의 장에게 시행계획 제출' 단계로 인계될 때",
@@ -728,7 +732,9 @@
      "completion_evidence": [
       "관계 중앙행정기관의 장 제출"
      ],
-     "handoff_recipients": [],
+     "handoff_recipients": [
+      "관계 중앙행정기관의 장"
+     ],
      "deadline_rule": {
       "type": "statutory-cycle",
       "expression": "매년 제출"
@@ -1178,7 +1184,8 @@
    "2026-09-01 재모델링: 제네릭 12단 골격을 지방자치분권 및 균형성장에 관한 특별법의 계획 수립 체계 9단계로 교체(법제처 DRF MST 284105, 시행 2026-07-01 현행본 대조). 골격은 제11조의3(균형성장영향평가·시행예정)·제2조제12호(인구감소지역 정의)·제21·22조(지원)·제45·46조(시군구 통합)를 한 제도에 뒤섞고 있었다. 제도명을 실체에 맞춰 '지방시대 종합계획·초광역권발전계획 수립'으로 정정했다. 템플릿 골격 전수 조사의 후속 조치.",
    "2026-09-02 조문 재대조(eflaw+efYd, MST 284105 / 시행 2026-07-01) 후 정정: (1) P03의 근거를 제8조제1항·제2항으로 바로잡고 인용문을 원문으로 교체했다. 종전 인용문 '관계 중앙행정기관의 장은 소관 분야의 부문별 계획 및 시행계획을 수립한다'는 조문에 없는 요약이었고, 제1항의 '관계 중앙행정기관의 장 및 시·도지사와 협의'·'5년을 단위로' 요건을 지웠다. (2) 제8조제3항·제4항(매년 부문별 시행계획 수립·시행 및 지방시대위원회 제출)을 P10 노드로 분리 신설하고 P09(제11조제1항 평가)로 연결했다 — 평가 대상 3종 중 부문별 시행계획의 입력 경로가 끊겨 있었다. (3) P04 제6조제2항 인용문에서 빠져 있던 법정 한정구 '(해당 계획이 수립된 경우로 한정한다)'를 복원했다. (4) 근거 없는 전이 정정: E06은 국회 보고(제6조제6항)를 연도별 시행계획의 선행요건으로 만들고 있었으나 제7조제3항은 시·도 계획을 근거로 하므로 P01→P07로 옮겼고, E02는 임의계획(제9조제1항 '수립할 수 있다')의 조건부 반영을 무조건 sequence로 평탄화하고 있어 message로 바꿨으며, E09는 제11조에 반영 의무가 없어(제3항이 대통령령 위임) 라벨을 매년 반복으로 정정했다. (5) verification.sources가 시행예정본(MST 286503, 2026-12-03 시행)을 pinnedVersion으로 고정하고 있어 대조본(MST 284105, 2026-07-01)으로 교체했다. (6) 모든 노드의 legal_basis[].text를 요약 없이 조문 원문으로 교체했다.",
    "2026-09-02 전이 대조 차단사유 해소(MST 284105 / 시행 2026-07-01 원문 재조회): 근거 없는 평가→시행계획 loop(E09) 삭제, 제6조제5항·제6항 후단의 종합계획 변경·경미한 사항 예외 갈래 신설(P11·P12·E14·E15), 제7조제4항·제9조제4항의 관계 중앙행정기관의 장 제출 경로 신설(P13·E16), 제출 문서에 시·도 계획·초광역권발전계획 추가. 자세한 내용은 verification.transitionReview.resolution.",
-   "2026-09-02 §8② 선행관계 신설 후 정정: E17(P02→P03)을 sequence에서 message로 바꿨다. 임의계획(§9① '수립할 수 있다')을 출발점으로 하는 이 파일의 갈래는 E02·E12처럼 message이고, sequence로 두면 deriveTriggerEvent가 P03.trigger_event를 predecessor.completed로 파생해 §8①의 조건 없는 부문별 계획 수립 의무가 영영 수립되지 않을 수 있는 초광역권발전계획의 완료를 기다리는 기속 조인이 된다. 대조에서 기계로 확인했다."
+   "2026-09-02 §8② 선행관계 신설 후 정정: E17(P02→P03)을 sequence에서 message로 바꿨다. 임의계획(§9① '수립할 수 있다')을 출발점으로 하는 이 파일의 갈래는 E02·E12처럼 message이고, sequence로 두면 deriveTriggerEvent가 P03.trigger_event를 predecessor.completed로 파생해 §8①의 조건 없는 부문별 계획 수립 의무가 영영 수립되지 않을 수 있는 초광역권발전계획의 완료를 기다리는 기속 조인이 된다. 대조에서 기계로 확인했다.",
+   "2026-09-02 5라운드 대조 반영: (1) P02는 §9① '수립할 수 있다'인데 obligation이 required로 파생돼 파일 자신의 process.warnings·canvas가 '임의계획'이라 적은 것과 어긋났다 — deriveObligation이 action 첫 문장의 재량 술어를 읽도록 고쳐 optional로 바로잡았다(저장소 전체에서 이 규칙이 새로 잡는 노드는 P02 하나다). (2) §6⑥의 국회, §7④·§9④의 관계 중앙행정기관의 장이 어느 기계 필드에도 없어 법정 보고·제출 상대를 계산할 수 없었다 — receiver 필드(저장소 602곳 관행)로 남겼다."
   ],
   "sources": [
    {
@@ -1207,20 +1214,75 @@
   },
   "transitionReview": {
    "reviewedAt": "2026-09-02",
-   "round": 2,
-   "reviewedBy": "workflow fix-transition-blockers (수정 1 + 독립 재대조 1) + 사람 회귀 검증",
-   "edgesReviewed": 15,
-   "verdict": "not-reviewable",
-   "round1Blockers": 4,
-   "round1Resolved": 6,
-   "blockerCount": 0,
-   "blockers": [],
-   "humanFixed": "P07.output_documents에서 상류(P01·P02)가 만든 시·도 계획·초광역권발전계획을 빼고 input_documents로 옮김(§7④는 함께 제출하라는 것이지 이 단계가 만든다는 뜻이 아니다). 사람이 직접 수정.",
+   "round": 5,
+   "reviewedBy": "workflow certify-rbgp-round5 (독립 대조 2, 관점 분리: delta·whole) + 사람 검증",
+   "edgesReviewed": 17,
+   "verdict": "blockers-fixed-pending-recert",
+   "roundHistory": [
+    {
+     "round": 1,
+     "blockers": 4,
+     "source": "기존 결함"
+    },
+    {
+     "round": 2,
+     "blockers": 1,
+     "source": "수정이 만든 회귀 — 사람이 수정"
+    },
+    {
+     "round": 3,
+     "blockers": 1,
+     "source": "기존 결함(1·2라운드가 놓침) — §8② 기속 선행관계"
+    },
+    {
+     "round": 4,
+     "blockers": 1,
+     "source": "수정이 만든 회귀 — E17.type, 사람이 수정"
+    },
+    {
+     "round": 5,
+     "blockers": 3,
+     "source": "기존 결함(1~4라운드가 놓침) — obligation·receiver"
+    }
+   ],
+   "round5Findings": [
+    {
+     "edge": "E16 (P07→P13) / P13",
+     "kind": "wrong-handoff",
+     "detail": "P13 '관계 중앙행정기관의 장에게 시행계획 제출'의 handoff_recipients가 []다. §7④·§9④는 제출 상대방을 '지방시대위원회와 관계 중앙행정기관의 장'으로 명시한 조건 없는 의무('제출하여야 한다')인데, 그 상대방이 이 파일 어느 노드의 handoff_recipients에도 독립 항목으로 없다. deriveRecipients는 outgoing edge의 target.actor를 쓰는데 E16의 to_actor=P13.actor='시·도지사·초광역권설정 지자체의 장'은 수신자가 아니라 발신자이고, node.actor와 같아 필터로 제거된다(P13은 out-degree 0이라 애초에 인계 대상도 없다). P07의 recips에 있는 '중앙행정기관의 장·초광역권설정 지자체의 장·시·도지사'는"
+    },
+    {
+     "edge": "E05 (P05→P06) / P06",
+     "kind": "wrong-handoff",
+     "detail": "P06 '국회 보고'의 handoff_recipients가 []다. §6⑥은 지방시대위원회에게 '국회에 보고하여야 한다'는 조건 없는 의무를 지우고 수신자를 국회로 명시하지만, P06은 out-degree 0인 종단이고 receiver도 없어 파생 계약에 국회가 수신자로 남지 않는다. lane 이름('국무회의·대통령·국회')에만 국회가 있을 뿐 기계가 읽는 계약 필드에는 없다. P13과 동일한 결함 유형이며 P06.receiver='국회' 한 줄로 표현 가능하다. 시뮬레이션 결과 handoff_recipients 한 칸만 채워지고 다른 파생 필드는 전혀 바뀌지 않는다."
+    },
+    {
+     "edge": "P02 (E02·E12·E17의 출발 노드)",
+     "kind": "condition-not-in-law",
+     "detail": "P02.agent.obligation 이 \"required\", deadline_rule 이 {type: statutory-cycle, expression: \"5년을 단위로 수립\"} 이다. 그러나 §9①은 초광역권설정 지방자치단체의 장이 초광역권발전계획을 '수립할 수 있다'고 정한 순수 허용규정이고, 이 파일 자신이 세 곳에서 그렇게 적어 두었다 — process.warnings[2] \"제9조제1항상 '수립할 수 있다'는 임의 계획이다\", canvas.procedure \"초광역권발전계획(지방시대위 심의·의결, 임의 §9①)\", canvas.bottlenecks[1] \"초광역권발전계획이 임의계획(§9①)이어서\". 즉 서술 필드는 임의라고 말하는데 에이전트가 실제로 읽는 계약 필드는 5년마다 반드시 수립하라는 기"
+    },
+    {
+     "edge": "E16 (P07→P13)",
+     "kind": "wrong-handoff",
+     "detail": "§7④·§9④가 제출 상대로 못박은 '관계 중앙행정기관의 장'이 이 인계의 어느 기계 필드에도 없다. E16.agent_transition.handoff 는 from_actor=\"시·도지사·초광역권설정 지자체의 장\", to_actor=\"시·도지사·초광역권설정 지자체의 장\" 으로 발신자와 수신자가 같은 자기 인계이고(to_actor 는 target.actor 파생인데 P13.actor 가 제출 행위자로 적혀 있다), P13 은 종단이라 handoff_recipients 가 빈 배열이며, P07.handoff_recipients 는 [\"중앙행정기관의 장·초광역권설정 지자체의 장·시·도지사\"(=§10 P08 의 합성 주체), \"지방시대위원회\"] 로 §7④의 제출 상대를 담지 않는다. 1라운드 blocker 넷째("
+    },
+    {
+     "edge": "E05 (P05→P06) 도착 노드 P06",
+     "kind": "wrong-handoff",
+     "detail": "E16/P13 과 같은 기전이 §6⑥에도 있다. P06 은 이름이 '국회 보고', action 이 '수립된 지방시대 종합계획을 국회에 보고한다', output_documents 가 [\"국회 보고\"] 인데, 보고 상대인 '국회'가 어느 기계 필드에도 없다 — P06.agent.handoff_recipients 는 빈 배열이고, P06.recipients/receiver 는 authored 되지 않았으며, 유일한 인입 E05 의 to_actor 는 보고자인 \"지방시대위원회\"다(§6⑥의 보고 주체는 지방시대위원회가 맞으므로 actor 자체는 옳다). '국회'가 등장하는 곳은 lane 문자열 \"국무회의·대통령·국회\" 뿐인데, lane 은 스윔레인 표시축이고 P01·P03·P07 등에서는 행위자 그룹을 가리켜 의미가"
+    }
+   ],
+   "round5Fixed": [
+    "P02.obligation: §9①이 \"수립할 수 있다\"인 재량인데 required로 파생됐다. deriveObligation이 action 첫 문장의 재량 술어를 읽도록 고쳐 optional로 바로잡음(저장소 전체 영향 1건 = 이 노드).",
+    "P06.receiver=\"국회\": §6⑥ 보고 상대가 어느 기계 필드에도 없어 계산 불가였다.",
+    "P13.receiver=\"관계 중앙행정기관의 장\": §7④·§9④ 제출 상대가 마찬가지였다."
+   ],
+   "e17Confirmed": "5라운드 delta 관점이 E17.type(sequence→message) 수정을 기계로 재검증했다 — 파급은 P03.trigger_event 한 필드뿐이고 회귀 없음. P03 진입 구조가 P07(E06 sequence + E12 message)과 동일해져 §8①②의 의무 구조와 대응한다.",
    "record": [
     "docs/transition-review-2026-09-02.md",
     "docs/transition-review-round2-2026-09-02.md"
    ],
-   "note": "blocker가 남아 전이 수동 대조는 미완료. 해소 후 generate-agent-readiness.mjs --transition-reviewed 로 재판정한다."
+   "note": "5라운드 차단 3건은 모두 수정했으나 그 이후 상태를 대조한 사람은 없다. 재인증 전에는 전이 수동 대조를 완료로 보지 않는다."
   }
  }
 }

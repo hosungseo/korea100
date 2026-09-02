@@ -77,9 +77,20 @@ function deriveBasisStatus(node, institution) {
   return institution.verification?.status === "article-verified" ? "citation-verified" : "source-linked";
 }
 
+// action 첫 문장의 주된 술어가 "…할 수 있다"면 조문이 준 재량이다. 뒤 문장이나
+// 종속절의 "할 수 있다"(기한을 연장할 수 있다 등)는 그 단계 전체를 재량으로 만들지
+// 않으므로 첫 문장의 끝만 본다. 저장소 전체에서 이 규칙이 새로 잡는 노드는
+// regional-balanced-growth-project P02 하나다(§9① "수립할 수 있다"인데 required였다).
+const DISCRETIONARY_PREDICATE = /할 수 있다[.。]?\s*$/u;
+function mainClauseIsDiscretionary(action) {
+  const first = String(action ?? "").trim().split(/(?<=다)\.\s+/u)[0];
+  return DISCRETIONARY_PREDICATE.test(first);
+}
+
 function deriveObligation(node, basisStatus) {
   const text = `${node.name ?? ""} ${node.action ?? ""}`;
   if (/\(선택\)|임의/u.test(text)) return "optional";
+  if (mainClauseIsDiscretionary(node.action)) return "optional";
   if (CONDITIONAL_TEXT.test(text)) return "conditional";
   if (basisStatus === "citation-verified") return "required";
   if (basisStatus === "none") return "operational";
