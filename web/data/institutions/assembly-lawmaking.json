@@ -132,6 +132,11 @@
       "law": "대한민국헌법",
       "article": "제52조",
       "text": "국회의원과 정부는 법률안을 제출할 수 있다."
+     },
+     {
+      "law": "국회법",
+      "article": "제79조의2제1항·제4항",
+      "text": "① 의원이 예산상 또는 기금상의 조치를 수반하는 의안을 발의하는 경우에는 그 의안의 시행에 수반될 것으로 예상되는 비용에 관한 국회예산정책처의 추계서 또는 국회예산정책처에 대한 추계요구서를 함께 제출하여야 한다. ④ 정부가 예산상 또는 기금상의 조치를 수반하는 의안을 제출하는 경우에는 그 의안의 시행에 수반될 것으로 예상되는 비용에 관한 추계서와 이에 상응하는 재원조달방안에 관한 자료를 의안에 첨부하여야 한다."
      }
     ],
     "agent": {
@@ -167,7 +172,8 @@
     "status": "done",
     "progress": 100,
     "actor": "발의자",
-    "action": "비용추계 첨부",
+    "action": "예산상 또는 기금상의 조치를 수반하는 의안에 해당하는 경우 비용추계서·추계요구서 제출",
+    "condition": "의원이 예산상 또는 기금상의 조치를 수반하는 의안을 발의하거나 정부가 그러한 의안을 제출하는 경우에만 비용추계서 첨부 의무가 발생한다",
     "output_documents": [
      "비용추계서"
     ],
@@ -184,7 +190,7 @@
      "trigger_event": "predecessor.completed",
      "trigger_condition": "법률안 발의·제출 완료 결과가 '비용추계서 첨부' 단계로 인계될 때",
      "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 비용추계서",
-     "obligation": "required",
+     "obligation": "conditional",
      "basis_status": "citation-verified",
      "automation_level": "draft-with-review",
      "human_confirmation_required": true,
@@ -233,7 +239,7 @@
     ],
     "agent": {
      "trigger_event": "predecessor.completed",
-     "trigger_condition": "비용추계서 첨부 완료 결과가 '본회의 보고·소관위 회부' 단계로 인계될 때",
+     "trigger_condition": "비용추계서 첨부·법률안 발의·제출 완료 결과가 '본회의 보고·소관위 회부' 단계로 인계될 때",
      "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 회부서",
      "obligation": "required",
      "basis_status": "citation-verified",
@@ -333,8 +339,8 @@
      }
     ],
     "agent": {
-     "trigger_event": "supplement.requested",
-     "trigger_condition": "보완·재수행이 결정되어 '대체토론·소위 심사' 단계로 회귀할 때",
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "위원회 상정(숙려기간 경과) 완료 결과가 '대체토론·소위 심사' 단계로 인계될 때",
      "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 소위 심사자료, 축조심사 결과",
      "obligation": "required",
      "basis_status": "citation-verified",
@@ -411,7 +417,6 @@
      "handoff_recipients": [
       "법제사법위원회",
       "국회의장(국회사무처)",
-      "소관 상임위원회·소위원회",
       "소관 상임위원회·의원 30명 이상"
      ],
      "deadline_rule": {
@@ -454,7 +459,7 @@
     ],
     "agent": {
      "trigger_event": "predecessor.completed",
-     "trigger_condition": "위원회 의결(수정·대안) 완료 결과가 '법사위 체계·자구 심사' 단계로 인계될 때",
+     "trigger_condition": "위원회 의결(수정·대안)·신속처리안건 지정 완료 결과가 '법사위 체계·자구 심사' 단계로 인계될 때",
      "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 체계·자구 심사보고",
      "obligation": "required",
      "basis_status": "citation-verified",
@@ -467,7 +472,9 @@
       "체계·자구 심사보고"
      ],
      "handoff_recipients": [
-      "본회의(국회의장)"
+      "본회의(국회의장)",
+      "소관 위원회 위원장·소관 위원회",
+      "국회의장"
      ],
      "deadline_rule": {
       "type": "statutory",
@@ -509,7 +516,7 @@
     ],
     "agent": {
      "trigger_event": "approval.completed",
-     "trigger_condition": "법사위 체계·자구 심사·위원회 본회의 부의 불요 결정·폐기 완료 결과가 '본회의 상정·질의·토론' 단계로 인계될 때",
+     "trigger_condition": "법사위 체계·자구 심사·위원회 본회의 부의 불요 결정·폐기·의장의 본회의 부의 결정 완료 결과가 '본회의 상정·질의·토론' 단계로 인계될 때",
      "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 본회의 심의자료",
      "obligation": "required",
      "basis_status": "citation-verified",
@@ -710,7 +717,8 @@
      "재의요구서"
     ],
     "output_documents": [
-     "재의결 결과"
+     "재의결 결과",
+     "확정 법률"
     ],
     "blocker": "재의요구에 따른 회귀 심의 단계",
     "confidence": 0.8,
@@ -724,7 +732,7 @@
     "agent": {
      "trigger_event": "supplement.requested",
      "trigger_condition": "보완·재수행이 결정되어 '재의요구 시 본회의 재의결' 단계로 회귀할 때",
-     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 재의결 결과",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 재의결 결과, 확정 법률",
      "obligation": "required",
      "basis_status": "citation-verified",
      "automation_level": "draft-with-review",
@@ -733,10 +741,12 @@
       "재의요구서"
      ],
      "completion_evidence": [
-      "재의결 결과"
+      "재의결 결과",
+      "확정 법률"
      ],
      "handoff_recipients": [
-      "대통령"
+      "대통령",
+      "국회의장"
      ],
      "deadline_rule": {
       "type": "not-specified",
@@ -794,8 +804,7 @@
       "관보 게재"
      ],
      "handoff_recipients": [
-      "소관 부처",
-      "국회의장"
+      "소관 부처"
      ],
      "deadline_rule": {
       "type": "statutory",
@@ -934,6 +943,11 @@
      },
      {
       "law": "국회법",
+      "article": "제85조의2제4항",
+      "text": "④ 위원회(법제사법위원회는 제외한다)가 신속처리대상안건에 대하여 제3항 본문에 따른 기간 내에 심사를 마치지 아니하였을 때에는 그 기간이 끝난 다음 날에 소관 위원회에서 심사를 마치고 체계ㆍ자구 심사를 위하여 법제사법위원회로 회부된 것으로 본다. 다만, 법률안 및 국회규칙안이 아닌 안건은 바로 본회의에 부의된 것으로 본다."
+     },
+     {
+      "law": "국회법",
       "article": "제85조의2제3항·제6항",
       "text": "③ 위원회는 신속처리대상안건에 대한 심사를 그 지정일부터 180일 이내에 마쳐야 한다. 다만, 법제사법위원회는 신속처리대상안건에 대한 체계ㆍ자구 심사를 그 지정일, 제4항에 따라 회부된 것으로 보는 날 또는 제86조제1항에 따라 회부된 날부터 90일 이내에 마쳐야 한다. ⑥ 제4항 단서 또는 제5항에 따른 신속처리대상안건은 본회의에 부의된 것으로 보는 날부터 60일 이내에 본회의에 상정되어야 한다."
      }
@@ -952,7 +966,9 @@
      "completion_evidence": [
       "신속처리안건 지정동의 의결"
      ],
-     "handoff_recipients": [],
+     "handoff_recipients": [
+      "법제사법위원회"
+     ],
      "deadline_rule": {
       "type": "statutory",
       "expression": "지정일부터 위원회 180일·법사위 90일(제85조의2제3항), 본회의 부의된 것으로 보는 날부터 60일(제85조의2제6항)"
@@ -1152,7 +1168,8 @@
       "확정 법률"
      ],
      "handoff_recipients": [
-      "대통령"
+      "대통령",
+      "국회의장"
      ],
      "deadline_rule": {
       "type": "statutory",
@@ -1196,7 +1213,7 @@
     ],
     "agent": {
      "trigger_event": "approval.completed",
-     "trigger_condition": "공포·확정 완료 결과가 '국회의장 대체 공포' 단계로 인계될 때",
+     "trigger_condition": "15일 경과 법률 확정·재의요구 시 본회의 재의결 완료 결과가 '국회의장 대체 공포' 단계로 인계될 때",
      "completion_condition": "'국회의장 대체 공포' 통지와 송달·수령 기록이 남을 때",
      "obligation": "required",
      "basis_status": "citation-verified",
@@ -1219,6 +1236,157 @@
      },
      "derivation": "existing-data-and-graph"
     }
+   },
+   {
+    "id": "P21",
+    "name": "법사위 60일 경과 시 소관위의 본회의 부의 요구",
+    "lane": "소관 상임위원회",
+    "stage": "G3 체계·자구",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "소관 위원회 위원장·소관 위원회",
+    "action": "간사와 협의하여 이의 유무에 따라 본회의 부의 요구 여부 결정",
+    "condition": "이의가 없는 경우에는 위원장이 의장에게 서면으로 본회의 부의를 요구하고, 이의가 있는 경우에는 무기명투표로 표결하여 해당 위원회 재적위원 5분의 3 이상의 찬성으로 의결한다",
+    "input_documents": [
+     "위원회 심사보고서"
+    ],
+    "output_documents": [
+     "본회의 부의 요구서"
+    ],
+    "deadline": "법제사법위원회에 회부된 날부터 60일이 지난 때",
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "국회법",
+      "article": "제86조제3항",
+      "text": "③ 법제사법위원회가 제1항에 따라 회부된 법률안에 대하여 이유 없이 회부된 날부터 60일 이내에 심사를 마치지 아니하였을 때에는 심사대상 법률안의 소관 위원회 위원장은 간사와 협의하여 이의가 없는 경우에는 의장에게 그 법률안의 본회의 부의를 서면으로 요구한다. 다만, 이의가 있는 경우에는 그 법률안에 대한 본회의 부의 요구 여부를 무기명투표로 표결하되, 해당 위원회 재적위원 5분의 3 이상의 찬성으로 의결한다."
+     }
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "법사위 체계·자구 심사 완료 결과가 '법사위 60일 경과 시 소관위의 본회의 부의 요구' 단계로 인계될 때",
+     "completion_condition": "'법사위 60일 경과 시 소관위의 본회의 부의 요구' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "conditional",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "위원회 심사보고서"
+     ],
+     "completion_evidence": [
+      "본회의 부의 요구서"
+     ],
+     "handoff_recipients": [
+      "국회의장"
+     ],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "법제사법위원회에 회부된 날부터 60일이 지난 때"
+     },
+     "derivation": "existing-data-and-graph"
+    }
+   },
+   {
+    "id": "P22",
+    "name": "의장의 본회의 부의 결정",
+    "lane": "국회의장·의사국",
+    "stage": "G3 체계·자구",
+    "type": "gateway",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국회의장",
+    "action": "각 교섭단체 대표의원과 합의하여 본회의 부의",
+    "condition": "제86조제3항에 따른 본회의 부의 요구가 있으면 각 교섭단체 대표의원과 합의하여 바로 본회의에 부의하고, 부의 요구가 있었던 날부터 30일 이내에 합의가 이루어지지 아니하면 그 기간이 지난 후 처음으로 개의되는 본회의에서 부의 여부를 무기명투표로 표결한다",
+    "input_documents": [
+     "본회의 부의 요구서"
+    ],
+    "output_documents": [
+     "본회의 부의 결정"
+    ],
+    "deadline": "본회의 부의 요구가 있었던 날부터 30일 이내(교섭단체 합의 기간)",
+    "blocker": "제86조제4항 단서의 무기명투표에서 본회의 부의가 가결되지 아니한 경우의 처리를 조문이 정하지 않아 후속 갈래를 그래프로 계산할 수 없다",
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "국회법",
+      "article": "제86조제4항",
+      "text": "④ 의장은 제3항에 따른 본회의 부의 요구가 있을 때에는 해당 법률안을 각 교섭단체 대표의원과 합의하여 바로 본회의에 부의한다. 다만, 제3항에 따른 본회의 부의 요구가 있었던 날부터 30일 이내에 합의가 이루어지지 아니하였을 때에는 그 기간이 지난 후 처음으로 개의되는 본회의에서 해당 법률안에 대한 본회의 부의 여부를 무기명투표로 표결한다."
+     }
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "법사위 60일 경과 시 소관위의 본회의 부의 요구 완료 결과가 '의장의 본회의 부의 결정' 단계로 인계될 때",
+     "completion_condition": "'의장의 본회의 부의 결정' 판단 결과와 후속 분기가 기록될 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "본회의 부의 요구서"
+     ],
+     "completion_evidence": [
+      "본회의 부의 결정"
+     ],
+     "handoff_recipients": [
+      "본회의(국회의장)"
+     ],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "본회의 부의 요구가 있었던 날부터 30일 이내(교섭단체 합의 기간)"
+     },
+     "derivation": "existing-data-and-graph"
+    }
+   },
+   {
+    "id": "P23",
+    "name": "신속처리대상안건 본회의 부의 간주·상정",
+    "lane": "국회의장·의사국",
+    "stage": "G4 본회의",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "국회의장",
+    "action": "기간 경과에 따른 본회의 부의 간주 확인과 본회의 상정",
+    "condition": "법제사법위원회가 제85조의2제3항 단서의 기간 내에 체계·자구 심사를 마치지 아니하면 그 기간이 끝난 다음 날에 바로 본회의에 부의된 것으로 보고, 본회의에 부의된 것으로 보는 날부터 60일 이내에 본회의에 상정한다",
+    "input_documents": [
+     "신속처리안건 지정동의 의결"
+    ],
+    "output_documents": [
+     "본회의 부의 간주 안건"
+    ],
+    "deadline": "본회의에 부의된 것으로 보는 날부터 60일 이내",
+    "confidence": 0.82,
+    "legal_basis": [
+     {
+      "law": "국회법",
+      "article": "제85조의2제5항·제6항·제7항",
+      "text": "⑤ 법제사법위원회가 신속처리대상안건(체계ㆍ자구 심사를 위하여 법제사법위원회에 회부되었거나 제4항 본문에 따라 회부된 것으로 보는 신속처리대상안건을 포함한다)에 대하여 제3항 단서에 따른 기간 내에 심사를 마치지 아니하였을 때에는 그 기간이 끝난 다음 날에 법제사법위원회에서 심사를 마치고 바로 본회의에 부의된 것으로 본다. ⑥ 제4항 단서 또는 제5항에 따른 신속처리대상안건은 본회의에 부의된 것으로 보는 날부터 60일 이내에 본회의에 상정되어야 한다. ⑦ 제6항에 따라 신속처리대상안건이 60일 이내에 본회의에 상정되지 아니하였을 때에는 그 기간이 지난 후 처음으로 개의되는 본회의에 상정된다."
+     }
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "법사위 체계·자구 심사 완료 결과가 '신속처리대상안건 본회의 부의 간주·상정' 단계로 인계될 때",
+     "completion_condition": "'신속처리대상안건 본회의 부의 간주·상정' 통지와 송달·수령 기록이 남을 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "신속처리안건 지정동의 의결"
+     ],
+     "completion_evidence": [
+      "본회의 부의 간주 안건"
+     ],
+     "handoff_recipients": [
+      "본회의(국회의장)"
+     ],
+     "deadline_rule": {
+      "type": "statutory",
+      "expression": "본회의에 부의된 것으로 보는 날부터 60일 이내"
+     },
+     "derivation": "existing-data-and-graph"
+    }
    }
   ],
   "edges": [
@@ -1227,10 +1395,10 @@
     "source": "P01",
     "target": "P02",
     "type": "sequence",
-    "label": null,
+    "label": "예산상 또는 기금상의 조치를 수반하는 의안",
     "agent_transition": {
-     "condition": "'법률안 발의·제출' 완료 결과가 '비용추계서 첨부' 단계로 인계될 때",
-     "transition_type": "required",
+     "condition": "예산상 또는 기금상의 조치를 수반하는 의안",
+     "transition_type": "conditional",
      "handoff": {
       "from_actor": "국회의원(10인 이상)·정부",
       "to_actor": "발의자",
@@ -1312,8 +1480,7 @@
       "from_actor": "소관 상임위원회·소위원회",
       "to_actor": "소관 상임위원회",
       "documents": [
-       "소위 심사자료",
-       "축조심사 결과"
+       "소위 심사자료"
       ]
      },
      "human_confirmation_required": true
@@ -1343,10 +1510,10 @@
     "source": "P07",
     "target": "P08",
     "type": "sequence",
-    "label": null,
+    "label": "체계·자구 심사 완료",
     "agent_transition": {
-     "condition": "'법사위 체계·자구 심사' 완료 결과가 '본회의 상정·질의·토론' 단계로 인계될 때",
-     "transition_type": "required",
+     "condition": "체계·자구 심사 완료",
+     "transition_type": "conditional",
      "handoff": {
       "from_actor": "법제사법위원회",
       "to_actor": "본회의(국회의장)",
@@ -1427,8 +1594,7 @@
       "from_actor": "대통령",
       "to_actor": "대통령",
       "documents": [
-       "공포안",
-       "재의요구서"
+       "공포안"
       ]
      },
      "human_confirmation_required": true
@@ -1461,13 +1627,12 @@
     "label": null,
     "agent_transition": {
      "condition": "'공포·확정' 완료 결과가 '시행일 도래·시행' 단계로 인계될 때",
-     "transition_type": "conditional",
+     "transition_type": "required",
      "handoff": {
       "from_actor": "대통령",
       "to_actor": "소관 부처",
       "documents": [
-       "공포문",
-       "관보 게재"
+       "공포문"
       ]
      },
      "human_confirmation_required": true
@@ -1524,27 +1689,7 @@
       "from_actor": "대통령",
       "to_actor": "본회의",
       "documents": [
-       "공포안",
        "재의요구서"
-      ]
-     },
-     "human_confirmation_required": true
-    }
-   },
-   {
-    "id": "L02",
-    "source": "P06",
-    "target": "P05",
-    "type": "loop",
-    "label": "소위 재심사",
-    "agent_transition": {
-     "condition": "소위 재심사",
-     "transition_type": "conditional",
-     "handoff": {
-      "from_actor": "소관 상임위원회",
-      "to_actor": "소관 상임위원회·소위원회",
-      "documents": [
-       "위원회 심사보고서"
       ]
      },
      "human_confirmation_required": true
@@ -1675,7 +1820,7 @@
     "label": "확정 법률 지체 없이 공포",
     "agent_transition": {
      "condition": "확정 법률 지체 없이 공포",
-     "transition_type": "required",
+     "transition_type": "conditional",
      "handoff": {
       "from_actor": "대통령(공포·재의요구 미실시)",
       "to_actor": "대통령",
@@ -1688,19 +1833,18 @@
    },
    {
     "id": "E20",
-    "source": "P13",
+    "source": "P19",
     "target": "P20",
     "type": "sequence",
-    "label": "확정 후 5일 내 대통령 미공포",
+    "label": "제53조제5항에 따라 법률이 확정된 후 5일 이내에 대통령이 공포하지 아니한 때",
     "agent_transition": {
-     "condition": "확정 후 5일 내 대통령 미공포",
+     "condition": "제53조제5항에 따라 법률이 확정된 후 5일 이내에 대통령이 공포하지 아니한 때",
      "transition_type": "conditional",
      "handoff": {
-      "from_actor": "대통령",
+      "from_actor": "대통령(공포·재의요구 미실시)",
       "to_actor": "국회의장",
       "documents": [
-       "공포문",
-       "관보 게재"
+       "확정 법률"
       ]
      },
      "human_confirmation_required": true
@@ -1719,9 +1863,197 @@
       "from_actor": "국회의장",
       "to_actor": "소관 부처",
       "documents": [
-       "공포문",
-       "관보 게재",
-       "대통령 통지"
+       "공포문"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   },
+   {
+    "id": "E22",
+    "source": "P01",
+    "target": "P03",
+    "type": "sequence",
+    "label": "예산상 또는 기금상의 조치를 수반하지 아니하는 의안(비용추계서 첨부 대상 아님)",
+    "agent_transition": {
+     "condition": "예산상 또는 기금상의 조치를 수반하지 아니하는 의안(비용추계서 첨부 대상 아님)",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "국회의원(10인 이상)·정부",
+      "to_actor": "국회의장",
+      "documents": [
+       "법률안"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   },
+   {
+    "id": "E23",
+    "source": "P07",
+    "target": "P21",
+    "type": "sequence",
+    "label": "이유 없이 회부된 날부터 60일 이내에 체계·자구 심사를 마치지 아니한 때",
+    "agent_transition": {
+     "condition": "이유 없이 회부된 날부터 60일 이내에 체계·자구 심사를 마치지 아니한 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "법제사법위원회",
+      "to_actor": "소관 위원회 위원장·소관 위원회",
+      "documents": [
+       "체계·자구 심사보고"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   },
+   {
+    "id": "E24",
+    "source": "P21",
+    "target": "P22",
+    "type": "sequence",
+    "label": "이의가 없는 경우: 위원장이 의장에게 본회의 부의를 서면으로 요구",
+    "agent_transition": {
+     "condition": "이의가 없는 경우: 위원장이 의장에게 본회의 부의를 서면으로 요구",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "소관 위원회 위원장·소관 위원회",
+      "to_actor": "국회의장",
+      "documents": [
+       "본회의 부의 요구서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   },
+   {
+    "id": "E25",
+    "source": "P21",
+    "target": "P22",
+    "type": "sequence",
+    "label": "이의가 있는 경우: 무기명투표로 해당 위원회 재적위원 5분의 3 이상 찬성 의결",
+    "agent_transition": {
+     "condition": "이의가 있는 경우: 무기명투표로 해당 위원회 재적위원 5분의 3 이상 찬성 의결",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "소관 위원회 위원장·소관 위원회",
+      "to_actor": "국회의장",
+      "documents": [
+       "본회의 부의 요구서"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   },
+   {
+    "id": "E26",
+    "source": "P22",
+    "target": "P08",
+    "type": "sequence",
+    "label": "각 교섭단체 대표의원과 합의: 해당 법률안을 바로 본회의에 부의",
+    "agent_transition": {
+     "condition": "각 교섭단체 대표의원과 합의: 해당 법률안을 바로 본회의에 부의",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "국회의장",
+      "to_actor": "본회의(국회의장)",
+      "documents": [
+       "본회의 부의 결정"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   },
+   {
+    "id": "E27",
+    "source": "P22",
+    "target": "P08",
+    "type": "sequence",
+    "label": "부의 요구가 있었던 날부터 30일 이내 미합의: 그 후 처음으로 개의되는 본회의에서 부의 여부를 무기명투표로 표결하여 가결",
+    "agent_transition": {
+     "condition": "부의 요구가 있었던 날부터 30일 이내 미합의: 그 후 처음으로 개의되는 본회의에서 부의 여부를 무기명투표로 표결하여 가결",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "국회의장",
+      "to_actor": "본회의(국회의장)",
+      "documents": [
+       "본회의 부의 결정"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   },
+   {
+    "id": "E28",
+    "source": "P15",
+    "target": "P07",
+    "type": "sequence",
+    "label": "위원회가 지정일부터 180일 이내에 심사를 마치지 아니한 때: 기간이 끝난 다음 날 법제사법위원회로 회부된 것으로 봄",
+    "agent_transition": {
+     "condition": "위원회가 지정일부터 180일 이내에 심사를 마치지 아니한 때: 기간이 끝난 다음 날 법제사법위원회로 회부된 것으로 봄",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "지정동의 제출: 재적의원 과반수 서명(의장에게)·소관 위원회 재적위원 과반수 서명(위원장에게) / 의결: 본회의 또는 소관 위원회 무기명투표",
+      "to_actor": "법제사법위원회",
+      "documents": [
+       "신속처리안건 지정동의 의결"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   },
+   {
+    "id": "E29",
+    "source": "P07",
+    "target": "P23",
+    "type": "sequence",
+    "label": "법제사법위원회가 90일 이내에 체계·자구 심사를 마치지 아니한 때: 기간이 끝난 다음 날 바로 본회의에 부의된 것으로 봄",
+    "agent_transition": {
+     "condition": "법제사법위원회가 90일 이내에 체계·자구 심사를 마치지 아니한 때: 기간이 끝난 다음 날 바로 본회의에 부의된 것으로 봄",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "법제사법위원회",
+      "to_actor": "국회의장",
+      "documents": [
+       "체계·자구 심사보고"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   },
+   {
+    "id": "E30",
+    "source": "P23",
+    "target": "P08",
+    "type": "sequence",
+    "label": "본회의에 부의된 것으로 보는 날부터 60일 이내 본회의 상정",
+    "agent_transition": {
+     "condition": "본회의에 부의된 것으로 보는 날부터 60일 이내 본회의 상정",
+     "transition_type": "required",
+     "handoff": {
+      "from_actor": "국회의장",
+      "to_actor": "본회의(국회의장)",
+      "documents": [
+       "본회의 부의 간주 안건"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   },
+   {
+    "id": "E31",
+    "source": "P12",
+    "target": "P20",
+    "type": "sequence",
+    "label": "제53조제4항에 따른 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니한 때",
+    "agent_transition": {
+     "condition": "제53조제4항에 따른 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니한 때",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "본회의",
+      "to_actor": "국회의장",
+      "documents": [
+       "확정 법률"
       ]
      },
      "human_confirmation_required": true
@@ -1740,11 +2072,11 @@
     "checked_at": "2026-09-02",
     "method": "law.go.kr-DRF-direct",
     "status": "passed",
-    "citation_fingerprint": "sha256:9a4b2f09c7c2586c48fc5af9214de69dfe172087e23a71b9589fa8d0f4295083",
+    "citation_fingerprint": "sha256:56736850d90008bc9fe5a53b488884c07036d9a7cd04ba5511eb57370dcbbef3",
     "sources_checked": 2,
     "source_failures": 0,
-    "article_references": 33,
-    "verified_references": 33,
+    "article_references": 38,
+    "verified_references": 38,
     "missing_references": [],
     "uncheckable_references": [],
     "source_results": [
@@ -1786,7 +2118,10 @@
      "P16",
      "P17",
      "P19",
-     "P20"
+     "P20",
+     "P21",
+     "P22",
+     "P23"
     ],
     "unverified_node_ids": [],
     "note": "인용문이 법제처 현행 시행본 조문 문언 안에 그대로 있는지 대조(scripts/restore-basis-text.mjs --verify)."
@@ -1813,15 +2148,18 @@
     "P17",
     "P18",
     "P19",
-    "P20"
+    "P20",
+    "P21",
+    "P22",
+    "P23"
    ],
    "reference_only_reasons": {},
    "blockers": [
     "전이 조건·인계 수동 대조 미완료"
    ],
    "metrics": {
-    "nodes": 21,
-    "edges": 26,
+    "nodes": 24,
+    "edges": 35,
     "node_contract_coverage": 1,
     "transition_contract_coverage": 1,
     "explicit_basis_coverage": 1,
@@ -1830,7 +2168,7 @@
     "template_like_nodes": 0,
     "deadline_review_nodes": 0,
     "reference_only_nodes": 4,
-    "actionable_coverage": 0.8095,
+    "actionable_coverage": 0.8333,
     "field_verification_items": 3
    }
   }
@@ -1876,40 +2214,26 @@
   },
   "transitionReview": {
    "reviewedAt": "2026-09-02",
-   "reviewedBy": "workflow transition-review (에이전트 대조 + 사람 표본 재확인 3건)",
-   "edgesReviewed": 26,
+   "round": 2,
+   "reviewedBy": "workflow fix-transition-blockers (수정 1 + 독립 재대조 1) + 사람 회귀 검증",
+   "edgesReviewed": 35,
    "verdict": "not-reviewable",
-   "blockerCount": 5,
-   "warningCount": 13,
+   "round1Blockers": 5,
+   "round1Resolved": 5,
+   "blockerCount": 1,
    "blockers": [
     {
-     "edge": "E20 (P13→P20)",
-     "kind": "condition-not-in-law",
-     "detail": "전건이 조문과 정면으로 어긋난다. 헌법 제53조제6항 후단의 국회의장 공포 요건은 '제5항으로 확정된 후' 또는 '제4항 확정법률이 정부에 이송된 후' 5일 내 대통령이 공포하지 아니한 때다. 그런데 E20의 출발 노드 P13은 이름·action이 '공포'이고 output이 공포문·관보 게재인, 이미 대통령 공포가 완료된 노드다. 공포가 끝난 상태에서 '확정 후 5일 내 대통령 미공포' 갈래가 나가므로, E11(공포) 경로로 P13에 들어온 사안에서도 이 갈림길이 발화한다. 조문상 이 분기의 출발점은 P19(§53⑤ 확정) 또는 P12(§53④ 재의결 확정)여야 하며 P19→P20 직결 엣지가 없다. 게다가 handoff.documents가 '공포문·관보 게재'인데, 대통령이 공포하지 않은 상황에서는 존재할 수 없는 문서이고 P20의 input_documents는 '확정 법률'이다."
-    },
-    {
-     "edge": "E07 (P07→P08)",
+     "edge": "E15 (P16→P08)",
      "kind": "missing-branch",
-     "detail": "P07의 legal_basis에 제86조제3항이 명시 인용되어 있고 deadline에도 '60일 내 미완 시 소관위 본회의 부의 요구 가능'이라 적혀 있는데, 그 갈래에 해당하는 엣지가 없다. P07에서 나가는 엣지는 '심사 완료' 하나(E07)뿐이라, 법사위가 60일간 심사를 마치지 않은 경우 에이전트는 다음 행동을 계산할 수 없다. 조문은 이의 없을 때(위원장 서면 요구)와 이의 있을 때(무기명투표·재적위원 3/5)로 다시 갈라지므로 최소 두 갈래가 통째로 빠져 있다. 이는 앞 라운드에서 문제가 된 헌법 §53⑤ 누락과 동종의 결손이다."
-    },
-    {
-     "edge": "L02 (P06→P05)",
-     "kind": "condition-not-in-law",
-     "detail": "loop 엣지 '소위 재심사'의 조문 근거가 없다. P06의 legal_basis 3건(제58조제1항, 제51조, 제87조) 어디에도 위원회 의결 단계에서 소위원회로 되돌리는 규정이 없고, 제58조제3항은 '대체토론이 끝난 후에만 소위원회에 회부할 수 있다'는 회부 시점 제한일 뿐 의결 후 재회부 근거가 아니다. P06 노드의 condition도 '원안·수정안·대안·폐기 여부 의결'로 '소위 재심사'를 갈래로 열거하지 않는다. handoff.documents도 '위원회 심사보고서'인데 P05의 input_documents는 '상정 안건'이라 맞지 않는다. 실무 관행일 수는 있으나 조문상 보완·재신청 근거가 확인되지 않으므로 blocker로 기울인다."
-    },
-    {
-     "edge": "P15→(나가는 엣지 없음)",
-     "kind": "unreachable",
-     "detail": "P15(신속처리안건 지정)는 M03으로 들어오기만 하고 나가는 엣지가 하나도 없는데, 종단 노드가 아니다. 노드 자신의 legal_basis(제85조의2제3항·제6항)와 deadline이 '위원회 180일·법사위 90일', '본회의 부의된 것으로 보는 날부터 60일 내 상정'이라는 후속 기한을 명시하므로, 조문상 기간 경과 시 법사위 회부 간주·본회의 부의 간주·본회의 상정으로 이어지는 갈래가 존재한다. 그 갈래가 통째로 없어 신속처리 지정이 되면 절차가 그래프에서 끊긴다."
-    },
-    {
-     "edge": "E01 (P01→P02)",
-     "kind": "missing-branch",
-     "detail": "E01은 transition_type이 'required'이고 조건이 무조건('발의·제출 완료 결과가 비용추계서 첨부 단계로 인계될 때')인데, 제79조의2는 '예산상 또는 기금상의 조치를 수반하는' 의안에만 첨부 의무를 지운다. 조문에 있는 전건(비용 수반 여부)이 그래프에서 소거되어, 비용을 수반하지 않는 법률안도 반드시 P02를 거쳐야 하는 구조가 됐다. P02를 우회해 P03(회부)로 가는 갈래가 없으므로 예산 무관 법률안은 절차가 진행되지 않고, 에이전트는 존재하지 않는 의무를 모든 발의자에게 부과한다. P02 노드의 obligation도 'required'로 굳어 있다."
+     "detail": "국회법 제87조는 '위원회에서 본회의에 부의할 필요가 없다고 결정된 의안은 본회의에 부의하지 아니한다(제1항 본문)'를 원칙으로 하고, 7일 내 의원 30명 이상의 요구가 있을 때만 예외로 부의하며(제1항 단서), '요구가 없을 때에는 그 의안은 폐기된다(제2항)'고 정한다. 그런데 P16(gateway)의 출구는 E15 하나뿐이고 그 transition_type이 'required'다. 전이 유형은 scripts/lib/agent-readiness.mjs:228에서 출구 개수로 자동 파생되므로(출구 1개 ⇒ required), 그래프상 P16에 들어온 안건은 label의 '7일 내 의원 30명 이상 부의 요구' 전건과 무관하게 언제나 P08(본회의 상정)로 넘어간다. 즉 조문의 원칙(폐기)과 예외(부의)가 뒤집혀, 부의 요구가 없는 통상의 경우에도 에이전트는 본회의 상정을 다음 행동으로 산출한다. 게다가 handoff.documents가 ['본회의 부의 불요 결정','폐기 의안']이어서 '폐기된 의안'을 본회의에 인계하는 자기모순이 있고, P08의 input_documents('체계·자구 심사보고')와도 맞지 않는다. 앞 라운드가 blocker로 판정한 E01(조문의 전건을 지운 required)과 같은 형태이며, 본회의 부결(P17)·재의결 부결(P18)은 종단 notice 노드로 신설하면서 §87②의 폐기 종단만 만들지 않은 비대칭이다. 직전 수정에서 손대지 않은 채 남은 결함이다."
     }
    ],
-   "record": "docs/transition-review-2026-09-02.md",
-   "note": "blocker가 남아 있어 agent_readiness의 전이 수동 대조는 미완료로 둔다. 해소 후 generate-agent-readiness.mjs --transition-reviewed 로 다시 판정한다."
+   "humanFixed": "E29 출발점을 P15→P07로 이동(§85조의2⑤의 전건 \"법사위가 심사를 마치지 아니한 때\"는 소관위 단계 지정 노드에서 성립할 수 없다). 사람이 그래프 유입을 확인해 직접 수정.",
+   "record": [
+    "docs/transition-review-2026-09-02.md",
+    "docs/transition-review-round2-2026-09-02.md"
+   ],
+   "note": "blocker가 남아 전이 수동 대조는 미완료. 해소 후 generate-agent-readiness.mjs --transition-reviewed 로 재판정한다."
   }
  }
 }

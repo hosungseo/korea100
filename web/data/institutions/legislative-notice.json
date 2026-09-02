@@ -629,7 +629,8 @@
     "actor": "입안 행정청",
     "action": "수정·재예고",
     "input_documents": [
-     "의견 검토표"
+     "의견 검토표",
+     "의견 반영결과"
     ],
     "output_documents": [
      "수정 법령안",
@@ -658,13 +659,16 @@
      "automation_level": "draft-with-review",
      "human_confirmation_required": true,
      "resolved_input_documents": [
-      "의견 검토표"
+      "의견 검토표",
+      "의견 반영결과"
      ],
      "completion_evidence": [
       "수정 법령안",
       "재예고문"
      ],
-     "handoff_recipients": [],
+     "handoff_recipients": [
+      "법제처·소관기관"
+     ],
      "deadline_rule": {
       "type": "not-specified",
       "expression": null
@@ -815,7 +819,7 @@
     ],
     "agent": {
      "trigger_event": "predecessor.completed",
-     "trigger_condition": "처리 결과 정리·공개·예고 생략·기간 단축 법제처장 협의 완료 결과가 '법제처 심사 등 후속 진행' 단계로 인계될 때",
+     "trigger_condition": "처리 결과 정리·공개·예고 생략·기간 단축 법제처장 협의·예고안 수정·재예고 완료 결과가 '법제처 심사 등 후속 진행' 단계로 인계될 때",
      "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 심사 회부, 정책 시행 준비",
      "obligation": "required",
      "basis_status": "citation-verified",
@@ -992,6 +996,113 @@
      },
      "derivation": "existing-data-and-graph"
     }
+   },
+   {
+    "id": "P15",
+    "name": "관계 기관·단체 예고사항 통지",
+    "lane": "입안 행정청",
+    "stage": "G2 예고공고",
+    "type": "notice",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "입안 행정청",
+    "receiver": "관계 중앙행정기관·지방자치단체·이해관계 단체",
+    "action": "예고사항 통지",
+    "input_documents": [
+     "입법·정책 예고문"
+    ],
+    "output_documents": [
+     "관계 기관·단체 통지문"
+    ],
+    "deadline": "입법예고를 할 때",
+    "confidence": 0.85,
+    "legal_basis": [
+     {
+      "law": "행정절차법",
+      "article": "제42조제3항",
+      "text": "③ 행정청은 입법예고를 할 때에 입법안과 관련이 있다고 인정되는 중앙행정기관, 지방자치단체, 그 밖의 단체 등이 예고사항을 알 수 있도록 예고사항을 통지하거나 그 밖의 방법으로 알려야 한다."
+     },
+     {
+      "law": "법제업무 운영규정",
+      "article": "제15조제2항",
+      "text": "② 법령안 주관기관의 장은 해당 법령안의 내용에 관하여 관계 지방자치단체 또는 직접적인 이해관계가 있다고 인정되는 단체에 예고사항을 알려야 한다."
+     }
+    ],
+    "agent": {
+     "trigger_event": "external.reply.received",
+     "trigger_condition": "예고문 관보·홈페이지 게시 완료 결과가 '관계 기관·단체 예고사항 통지' 단계로 인계될 때",
+     "completion_condition": "'관계 기관·단체 예고사항 통지' 통지와 송달·수령 기록이 남을 때",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "입법·정책 예고문"
+     ],
+     "completion_evidence": [
+      "관계 기관·단체 통지문"
+     ],
+     "handoff_recipients": [
+      "관계 중앙행정기관·지방자치단체·이해관계 단체"
+     ],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": "입법예고를 할 때"
+     },
+     "derivation": "existing-data-and-graph"
+    }
+   },
+   {
+    "id": "P16",
+    "name": "법령안 심사 진행(입법예고 절차 종결)",
+    "lane": "후속 심사기관",
+    "stage": "G6 결과·후속",
+    "type": "task",
+    "status": "waiting",
+    "progress": 0,
+    "actor": "법제처장",
+    "action": "심사 진행",
+    "input_documents": [
+     "심사 회부"
+    ],
+    "output_documents": [
+     "법령안 심사 진행 기록"
+    ],
+    "note": "입법예고 절차의 종단이다. 입법예고를 마친 법령안이거나, 법제처장이 제41조제3항의 권고·직접 예고를 하는 것이 적당하지 아니하다고 판단한 경우 예고 절차는 여기서 끝나고 법령안 심사로 넘어간다. 심사 자체의 세부 절차는 이 제도의 범위 밖이다.",
+    "confidence": 0.8,
+    "legal_basis": [
+     {
+      "law": "행정절차법",
+      "article": "제41조제3항",
+      "text": "③ 법제처장은 입법예고를 하지 아니한 법령안의 심사 요청을 받은 경우에 입법예고를 하는 것이 적당하다고 판단할 때에는 해당 행정청에 입법예고를 권고하거나 직접 예고할 수 있다."
+     },
+     {
+      "law": "법제업무 운영규정",
+      "article": "제21조제1항",
+      "text": "① 각부 장관 및 대통령 또는 국무총리 소속의 법령안 주관기관의 장은 법령안에 관하여 다음 각 호에 따른 입법절차를 거친 후 법제처장에게 그 법령안의 심사를 요청하여야 한다.\n1. 제11조제1항 및 제2항에 따른 관계 기관의 장과의 협의\n2. 「행정절차법」 제41조에 따른 입법예고\n3. 「행정규제기본법」 제10조제1항에 따른 규제심사"
+     }
+    ],
+    "agent": {
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "법제처 심사 등 후속 진행 완료 결과가 '법령안 심사 진행(입법예고 절차 종결)' 단계로 인계될 때",
+     "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 법령안 심사 진행 기록",
+     "obligation": "required",
+     "basis_status": "citation-verified",
+     "automation_level": "draft-with-review",
+     "human_confirmation_required": true,
+     "resolved_input_documents": [
+      "심사 회부"
+     ],
+     "completion_evidence": [
+      "법령안 심사 진행 기록"
+     ],
+     "handoff_recipients": [],
+     "deadline_rule": {
+      "type": "not-specified",
+      "expression": null
+     },
+     "derivation": "existing-data-and-graph"
+    }
    }
   ],
   "edges": [
@@ -1116,10 +1227,10 @@
     "source": "P08",
     "target": "P10",
     "type": "sequence",
-    "label": "반영 결정",
+    "label": "반영 여부 결정(반영·미반영) 완료",
     "agent_transition": {
-     "condition": "반영 결정",
-     "transition_type": "conditional",
+     "condition": "반영 여부 결정(반영·미반영) 완료",
+     "transition_type": "required",
      "handoff": {
       "from_actor": "입안 행정청",
       "to_actor": "입안 행정청",
@@ -1143,7 +1254,6 @@
       "from_actor": "입안 행정청",
       "to_actor": "법제처·소관기관",
       "documents": [
-       "의견 반영결과",
        "처리결과서"
       ]
      },
@@ -1201,8 +1311,7 @@
       "from_actor": "입안 행정청",
       "to_actor": "입안 행정청",
       "documents": [
-       "공청회 자료",
-       "회의록"
+       "공청회 자료"
       ]
      },
      "human_confirmation_required": true
@@ -1221,8 +1330,7 @@
       "from_actor": "입안 행정청",
       "to_actor": "통합입법예고시스템",
       "documents": [
-       "의견 반영결과",
-       "처리결과서"
+       "의견 반영결과"
       ]
      },
      "human_confirmation_required": true
@@ -1230,18 +1338,18 @@
    },
    {
     "id": "L01",
-    "source": "P08",
+    "source": "P10",
     "target": "P09",
     "type": "loop",
-    "label": "수정·보완",
+    "label": "예고내용에 중요한 변경 발생",
     "agent_transition": {
-     "condition": "수정·보완",
+     "condition": "예고내용에 중요한 변경 발생",
      "transition_type": "conditional",
      "handoff": {
       "from_actor": "입안 행정청",
       "to_actor": "입안 행정청",
       "documents": [
-       "의견 검토표"
+       "의견 반영결과"
       ]
      },
      "human_confirmation_required": true
@@ -1348,16 +1456,15 @@
     "source": "P11",
     "target": "P14",
     "type": "message",
-    "label": "입법예고 없는 법령안 심사 요청",
+    "label": "입법예고를 하지 아니한 법령안의 심사 요청 + 입법예고가 적당하다고 판단",
     "agent_transition": {
-     "condition": "입법예고 없는 법령안 심사 요청",
-     "transition_type": "required",
+     "condition": "입법예고를 하지 아니한 법령안의 심사 요청 + 입법예고가 적당하다고 판단",
+     "transition_type": "conditional",
      "handoff": {
       "from_actor": "법제처·소관기관",
       "to_actor": "법제처장",
       "documents": [
-       "심사 회부",
-       "정책 시행 준비"
+       "심사 회부"
       ]
      },
      "human_confirmation_required": true
@@ -1378,6 +1485,63 @@
       "documents": [
        "입법예고 권고",
        "법제처장 직접 예고문"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   },
+   {
+    "id": "M07",
+    "source": "P04",
+    "target": "P15",
+    "type": "message",
+    "label": "관계 중앙행정기관·지자체·이해관계 단체 예고사항 통지",
+    "agent_transition": {
+     "condition": "관계 중앙행정기관·지자체·이해관계 단체 예고사항 통지",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "입안 행정청",
+      "to_actor": "입안 행정청",
+      "documents": [
+       "입법·정책 예고문"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   },
+   {
+    "id": "E12",
+    "source": "P09",
+    "target": "P11",
+    "type": "sequence",
+    "label": "제41조제1항 각 호에 해당하여 재예고 생략",
+    "agent_transition": {
+     "condition": "제41조제1항 각 호에 해당하여 재예고 생략",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "입안 행정청",
+      "to_actor": "법제처·소관기관",
+      "documents": [
+       "수정 법령안"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   },
+   {
+    "id": "E13",
+    "source": "P11",
+    "target": "P16",
+    "type": "sequence",
+    "label": "입법예고를 마쳤거나 법제처장이 입법예고 권고가 적당하지 아니하다고 판단",
+    "agent_transition": {
+     "condition": "입법예고를 마쳤거나 법제처장이 입법예고 권고가 적당하지 아니하다고 판단",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "법제처·소관기관",
+      "to_actor": "법제처장",
+      "documents": [
+       "심사 회부"
       ]
      },
      "human_confirmation_required": true
@@ -1404,11 +1568,11 @@
     "checked_at": "2026-09-02",
     "method": "law.go.kr-DRF-direct",
     "status": "passed",
-    "citation_fingerprint": "sha256:b453dfd5ab52fa28781cd12f2533e365ce0cfd55b8fa1df44f9889f450d56299",
+    "citation_fingerprint": "sha256:1accbc05b7efeaeccea5c2073f9bfaef6e0f54a86d991a4dc828322aeea8ce63",
     "sources_checked": 5,
     "source_failures": 0,
-    "article_references": 33,
-    "verified_references": 33,
+    "article_references": 37,
+    "verified_references": 37,
     "missing_references": [],
     "uncheckable_references": [],
     "source_results": [
@@ -1466,7 +1630,9 @@
      "P10",
      "P11",
      "P12",
-     "P14"
+     "P14",
+     "P15",
+     "P16"
     ],
     "unverified_node_ids": [],
     "note": "인용문이 법제처 현행 시행본 조문 문언 안에 그대로 있는지 대조(scripts/restore-basis-text.mjs --verify)."
@@ -1488,7 +1654,9 @@
     "P11",
     "P12",
     "P13",
-    "P14"
+    "P14",
+    "P15",
+    "P16"
    ],
    "reference_only_reasons": {},
    "blockers": [
@@ -1496,8 +1664,8 @@
     "전이 조건·인계 수동 대조 미완료"
    ],
    "metrics": {
-    "nodes": 16,
-    "edges": 20,
+    "nodes": 18,
+    "edges": 23,
     "node_contract_coverage": 1,
     "transition_contract_coverage": 1,
     "explicit_basis_coverage": 1,
@@ -1506,7 +1674,7 @@
     "template_like_nodes": 0,
     "deadline_review_nodes": 2,
     "reference_only_nodes": 7,
-    "actionable_coverage": 0.5625,
+    "actionable_coverage": 0.6111,
     "field_verification_items": 3
    }
   }
@@ -1515,7 +1683,7 @@
   "status": "article-verified",
   "verifiedAt": "2026-09-02",
   "method": "국가법령정보센터 DRF Open API 시행일 기준(eflaw+efYd) 본문 직접 대조",
-  "scope": "법적 근거 5건 중 공식 원문 5건을 연결했다. 캔버스와 절차 노드의 명시 조문 53건 가운데 53건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 2026-09-02 시행본(행정절차법 2023-03-24, 시행령 2023-08-01, 시행규칙 2022-07-12, 법제업무 운영규정 2026-03-31, 국회법 2026-02-10)으로 노드 legal_basis의 인용문을 조문 원문과 축자 대조했다.",
+  "scope": "법적 근거 5건 중 공식 원문 5건을 연결했다. 캔버스와 절차 노드의 명시 조문 57건 가운데 57건의 조문 번호 존재를 확인했고, 0건은 불일치, 0건은 자동 검증 불가로 분류했다. 2026-09-02 시행본(행정절차법 2023-03-24, 시행령 2023-08-01, 시행규칙 2022-07-12, 법제업무 운영규정 2026-03-31, 국회법 2026-02-10)으로 노드 legal_basis의 인용문을 조문 원문과 축자 대조했다.",
   "sources": [
    {
     "law": "행정절차법",
@@ -1576,49 +1744,45 @@
   "articleVerification": {
    "checkedAt": "2026-09-02",
    "method": "시행일 기준(eflaw+efYd) 법령 본문 일괄조회 및 인용문 축자 대조",
-   "citationEntries": 38,
-   "explicitCitationEntries": 38,
-   "articleReferences": 53,
-   "verifiedReferences": 53,
+   "citationEntries": 42,
+   "explicitCitationEntries": 42,
+   "articleReferences": 57,
+   "verifiedReferences": 57,
    "missingReferences": 0,
    "uncheckableReferences": 0
   },
   "transitionReview": {
    "reviewedAt": "2026-09-02",
-   "reviewedBy": "workflow transition-review (에이전트 대조 + 사람 표본 재확인 3건)",
-   "edgesReviewed": 20,
+   "round": 2,
+   "reviewedBy": "workflow fix-transition-blockers (수정 1 + 독립 재대조 1) + 사람 회귀 검증",
+   "edgesReviewed": 23,
    "verdict": "not-reviewable",
-   "blockerCount": 5,
-   "warningCount": 10,
+   "round1Blockers": 5,
+   "round1Resolved": 7,
+   "blockerCount": 3,
    "blockers": [
     {
-     "edge": "E07 (P08→P10)",
+     "edge": "E09 (P03→P13) / E11 (P13→P11)",
      "kind": "condition-not-in-law",
-     "detail": "E07의 label·condition이 '반영 결정'이어서 처리결과 통지 단계(P10) 진입이 '의견을 반영하기로 한 경우'에만 열린다. 그러나 §44④와 법제업무 운영규정 §18①은 반영 여부를 결정한 뒤 그 처리 결과와 처리 이유를 '지체 없이' 의견제출자에게 통지하도록 하며, 미반영 결정도 통지 대상이다. P08의 나머지 출구는 L01(수정·보완→P09→P04 재예고)뿐이므로, 미반영으로 결정한 경우 그래프상 P10에 도달할 경로가 없고 에이전트는 법정 통지 의무를 건너뛴다. 전건을 '반영 여부 결정 완료'로 두고 반영/미반영을 P10 이후에서 갈라야 조문과 맞는다."
+     "detail": "P03(예고 생략·긴급처리 판단)의 출구는 E03(예고 실시)과 E09 둘뿐이므로, 행정예고 축의 '생략·기간 단축' 사안은 전부 E09를 타고 P13(예고 생략·기간 단축 법제처장 협의, obligation=required)으로 간다. 그런데 P13의 유일한 근거인 법제업무 운영규정 §14②는 '법령안 주관기관의 장'이 「행정절차법」 §41①단서·§41④단서로 입법예고를 생략하거나 §43의 최단 입법예고기간 미만으로 줄이려는 경우에만 법제처장 협의를 요구한다. 행정예고 기간 단축(§46④)과 행정예고 생략(§46①단서)에는 법제처장 협의 의무가 조문상 존재하지 않는다. P03의 condition 필드는 '기간 단축은 행정예고의 경우 긴급한 필요가 있으면 10일 이상으로 단축(제46조제4항)'이라고 행정예고 갈래를 명시해 두었고 legal_basis에도 §46④를 인용하므로, 이 갈래가 그래프 밖에 있는 것도 아니다. 결과적으로 에이전트는 행정예고를 10일로 단축하려는 행정청에게 조문에 없는 법제처장 협의를 필수로 부과한다. 이어지는 E10(P13→P04)은 P04의 입력으로 '법제처장 협의 결과'를 요구하고, E11(P13→P11)은 생략 확정 사안을 법제처 심사(법제업무 §21①, 법령안 전용)로 보내므로 정책·제도·계획의 행정예고 생략까지 법령안 심사 경로로 끌고 간다. 앞 라운드가 assembly-lawmaking E01에서 '조문에 있는 전건을 소거해 존재하지 않는 의무를 부과'한 것을 blocker로 판정한 것과 동일한 형태다."
     },
     {
-     "edge": "M06 (P11→P14)",
-     "kind": "condition-not-in-law",
-     "detail": "M06은 transition_type이 \"required\"라서 P11(법제처 심사 등 후속 진행)을 마치면 언제나 P14(법제처장 입법예고 권고·직접 예고)로 넘어간다. 그러나 §41③은 ⑴ '입법예고를 하지 아니한 법령안'의 심사 요청을 받은 경우에만, ⑵ '적당하다고 판단할 때에는' ⑶ '권고하거나 직접 예고할 수 있다'는 재량 규정이다. P11은 E08(정상 예고를 모두 마친 경로)과 E11(예고 생략 확정 경로) 양쪽에서 들어오는데, 정상 예고 경로에서도 required로 P14를 강제하므로 조문에 없는 필수 단계를 만든다. 최소한 transition_type은 conditional이어야 하고 조건은 '입법예고를 하지 아니한 법령안일 것'으로 한정돼야 한다. 덧붙여 handoff.documents의 '정책 시행 준비'는 P14의 입력(심사 회부)이 아니다."
+     "edge": "L03 (P14→P04)",
+     "kind": "wrong-handoff",
+     "detail": "§41③은 법제처장에게 '해당 행정청에 입법예고를 권고'하는 갈래와 '직접 예고'하는 갈래 두 가지를 준다. 주체와 후속 행위가 서로 다른 두 갈래인데 L03 하나로 병합돼 있고, handoff는 from_actor 법제처장 → to_actor 입안 행정청, documents는 ['입법예고 권고','법제처장 직접 예고문'] 두 갈래 문서를 한꺼번에 넘긴다. 도착지 P04(예고문 관보·홈페이지 게시)의 actor는 입안 행정청이고 resolved_input_documents에 '법제처장 직접 예고문'이 들어가 있다. 즉 법제처장이 직접 예고하는 경우에도 그래프는 입안 행정청이 그 예고문을 받아 게시하도록 계산한다. 조문상 직접 예고의 행위주체는 법제처장이고 이때 입안 행정청의 게시 행위는 존재하지 않으므로, 에이전트는 법이 법제처장에게 지운 행위를 다른 주체에게 지시하고 존재하지 않는 중복 게시를 만들어 낸다. 직접 예고 갈래의 올바른 도착 노드는 그래프에 없다(P05는 정보시스템 구축·제공, 법제업무 §15⑤는 별개의 유료광고 예고다). 이번 수정 라운드에서 P14의 진입(M06)과 우회로(E13·P16)는 고쳤으나 P14에서 나가는 두 갈래의 분리는 손대지 않았다."
     },
     {
-     "edge": "L03 (P14→P04) / P14 출구",
+     "edge": "E03 (P03→P04) 행정예고 축 / 시행령 §24조의2 갈래 부재",
      "kind": "missing-branch",
-     "detail": "P14의 출구는 L03(→P04 재예고) 하나뿐이다. §41③은 법제처장이 '적당하다고 판단할 때에만' 권고·직접 예고를 할 수 있다고 정하므로, 적당하지 않다고 판단해 권고·예고 없이 심사를 계속하는 갈래가 반드시 존재한다. 그 갈래가 없어 M06(required)와 결합하면 P10→P11→P14→P04(예고 게시)로 되돌아가는 경로만 남고, 절차 전체에 정상 종결 노드가 존재하지 않는다. 나가는 엣지가 없는 노드는 S01·S02·P12(통지·공개 leaf)뿐이며, 본류인 심사 요청 완료 상태의 종단이 그래프에 없다."
-    },
-    {
-     "edge": "L02 (P09→P04) / P09 출구",
-     "kind": "missing-branch",
-     "detail": "P09(예고안 수정·재예고)의 출구는 L02(→P04 재예고) 하나뿐이라 수정이 발생하면 재예고가 항상 강제된다. 그러나 §41④ 단서는 '제1항 각 호의 어느 하나에 해당하는 경우에는 예고를 하지 아니할 수 있다'고 하여 재예고 면제 갈래를 명시하고, P09의 blocker 필드 자체가 '제41조제1항 각 호에 해당하면 재예고를 하지 아니할 수 있어 기속 의무가 해제된다'고 적어 두었다. 그 갈래(재예고 생략 → P10 처리결과 정리 또는 P11 후속 심사)가 엣지로 존재하지 않아, 노드가 인정한 분기를 그래프가 제시하지 못한다."
-    },
-    {
-     "edge": "P04 출구 (E04·M05 외 누락)",
-     "kind": "missing-branch",
-     "detail": "P04(예고문 게시)의 출구는 E04(→법제처 정보시스템)와 M05(→국회 소관 상임위, §42②)뿐이다. §42②와 나란히 놓인 §42③은 '입법안과 관련이 있다고 인정되는 중앙행정기관, 지방자치단체, 그 밖의 단체 등'에 예고사항을 통지하도록 하는 기속 의무이고, 법제업무 운영규정 §15②도 '관계 지방자치단체 또는 직접적인 이해관계가 있다고 인정되는 단체에 예고사항을 알려야 한다'고 같은 의무를 반복한다. 인계 상대방이 국회 상임위와 명백히 다른 별개의 필수 통지 갈래인데 노드·엣지가 통째로 없다. §42②만 모델링하고 §42③을 빠뜨린 비대칭이며, 에이전트는 예고 게시 후 법정 통지 상대 하나를 누락한다. (인용문은 legal_basis에 없어 law.go.kr 현행본 §42③에서 직접 확인했다.)"
+     "detail": "행정절차법 시행령 §24의2①은 행정예고를 하려면 '이에 앞서' 정책·제도·계획의 내용을 관계기관의 장에게 송부해 의견을 들어야 한다는 기속 의무이고, 단서에 '의견을 듣기에 곤란한 특별한 사유가 있는 때에는 의견을 듣지 않고 행정예고할 수 있다'는 예외 갈래를 명시한다. §24의2②은 회신기간 10일 이상(긴급 시 10일 미만 단축)이라는 또 하나의 분기를 둔다. 그래프에는 이 단계의 노드도, 본문/단서를 가르는 엣지도 전혀 없어, P03에서 E03으로 곧장 P04(예고문 게시)로 간다. 이 제도 파일의 canvas.legalBasis는 '행정절차법 시행령 … 제24조의2(관계기관 의견청취)'를 스스로 법적 근거로 열거하고 있으므로 범위 밖이라고 볼 수도 없다. 결과적으로 행정예고 사안에서 에이전트는 법정 선행 절차를 건너뛴 채 예고 게시를 다음 행동으로 산출한다. 앞 라운드가 blocker로 잡아 이번에 P15로 보완된 §42③ 누락과 동일한 형태의 결손이 행정예고 축에 그대로 남아 있다."
     }
    ],
-   "record": "docs/transition-review-2026-09-02.md",
-   "note": "blocker가 남아 있어 agent_readiness의 전이 수동 대조는 미완료로 둔다. 해소 후 generate-agent-readiness.mjs --transition-reviewed 로 다시 판정한다."
+   "humanFixed": null,
+   "record": [
+    "docs/transition-review-2026-09-02.md",
+    "docs/transition-review-round2-2026-09-02.md"
+   ],
+   "note": "blocker가 남아 전이 수동 대조는 미완료. 해소 후 generate-agent-readiness.mjs --transition-reviewed 로 재판정한다."
   }
  }
 }
