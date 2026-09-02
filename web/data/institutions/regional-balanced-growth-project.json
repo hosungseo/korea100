@@ -114,7 +114,8 @@
      ],
      "handoff_recipients": [
       "지방시대위원회",
-      "시·도지사·초광역권설정 지자체의 장"
+      "시·도지사·초광역권설정 지자체의 장",
+      "중앙행정기관의 장"
      ],
      "deadline_rule": {
       "type": "statutory-cycle",
@@ -161,7 +162,8 @@
      ],
      "handoff_recipients": [
       "지방시대위원회",
-      "시·도지사·초광역권설정 지자체의 장"
+      "시·도지사·초광역권설정 지자체의 장",
+      "중앙행정기관의 장"
      ],
      "deadline_rule": {
       "type": "statutory-cycle",
@@ -180,7 +182,10 @@
     "progress": 0,
     "actor": "중앙행정기관의 장",
     "action": "중앙행정기관의 장은 관계 중앙행정기관의 장 및 시·도지사와 협의하여 5년을 단위로 하는 부문별 계획을 수립한다. 수립할 때에는 시·도 계획 및 초광역권발전계획(해당 계획이 수립된 경우로 한정한다)을 고려하여야 한다.",
-    "input_documents": [],
+    "input_documents": [
+     "시·도 지방시대 계획",
+     "초광역권발전계획"
+    ],
     "output_documents": [
      "부문별 계획"
     ],
@@ -195,14 +200,17 @@
      }
     ],
     "agent": {
-     "trigger_event": "procedure.started",
-     "trigger_condition": "해당 절차가 개시되고 '부문별 계획 수립' 수행 요건이 확인될 때",
+     "trigger_event": "predecessor.completed",
+     "trigger_condition": "시·도 지방시대 계획 수립·초광역권발전계획 수립 완료 결과가 '부문별 계획 수립' 단계로 인계될 때",
      "completion_condition": "다음 산출물이 생성·기록되어 후속 단계에서 확인될 때: 부문별 계획",
      "obligation": "required",
      "basis_status": "citation-verified",
      "automation_level": "draft-with-review",
      "human_confirmation_required": true,
-     "resolved_input_documents": [],
+     "resolved_input_documents": [
+      "시·도 지방시대 계획",
+      "초광역권발전계획"
+     ],
      "completion_evidence": [
       "부문별 계획"
      ],
@@ -1019,6 +1027,44 @@
      },
      "human_confirmation_required": true
     }
+   },
+   {
+    "id": "E09",
+    "source": "P01",
+    "target": "P03",
+    "type": "sequence",
+    "label": "시·도 계획 고려(§8②)",
+    "agent_transition": {
+     "condition": "시·도 계획 고려(§8②)",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "시·도지사",
+      "to_actor": "중앙행정기관의 장",
+      "documents": [
+       "시·도 지방시대 계획"
+      ]
+     },
+     "human_confirmation_required": true
+    }
+   },
+   {
+    "id": "E17",
+    "source": "P02",
+    "target": "P03",
+    "type": "sequence",
+    "label": "초광역권발전계획이 수립된 경우에만 고려(§8②)",
+    "agent_transition": {
+     "condition": "초광역권발전계획이 수립된 경우에만 고려(§8②)",
+     "transition_type": "conditional",
+     "handoff": {
+      "from_actor": "초광역권설정 지방자치단체의 장",
+      "to_actor": "중앙행정기관의 장",
+      "documents": [
+       "초광역권발전계획"
+      ]
+     },
+     "human_confirmation_required": true
+    }
    }
   ],
   "warnings": [
@@ -1098,7 +1144,7 @@
    ],
    "metrics": {
     "nodes": 13,
-    "edges": 15,
+    "edges": 17,
     "node_contract_coverage": 1,
     "transition_contract_coverage": 1,
     "explicit_basis_coverage": 1,
