@@ -1,0 +1,37 @@
+{
+  "slug": "airport-mini",
+  "name": "군공항 이전부지 선정(미니)",
+  "process": {
+    "nodes": [
+      {
+        "id": "P01",
+        "name": "주민투표",
+        "actor": "이전부지 지자체",
+        "type": "task",
+        "deadline": null,
+        "action": "이전 후보지 주민투표를 실시한다.",
+        "input_documents": [],
+        "output_documents": ["투표 결과"],
+        "legal_basis": [
+          { "law": "군공항 이전 및 지원에 관한 특별법", "article": "제8조제3항", "text": "주민투표를 실시한다." }
+        ]
+      },
+      {
+        "id": "P02",
+        "name": "이전부지 선정",
+        "actor": "국방부장관",
+        "type": "task",
+        "deadline": null,
+        "action": "선정위원회 심의를 거쳐 이전부지를 선정한다.",
+        "input_documents": [],
+        "output_documents": ["선정 고시"],
+        "legal_basis": [
+          { "law": "군공항 이전 및 지원에 관한 특별법", "article": "제8조제4항", "text": "이전부지를 선정한다." }
+        ]
+      }
+    ],
+    "edges": [
+      { "id": "E01", "source": "P01", "target": "P02", "type": "sequence", "label": "" }
+    ]
+  }
+}

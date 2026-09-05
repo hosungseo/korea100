@@ -1,0 +1,51 @@
+{
+  "slug": "eia-mini",
+  "name": "환경영향평가 협의(미니)",
+  "process": {
+    "nodes": [
+      {
+        "id": "P01",
+        "name": "평가서 작성·협의 요청",
+        "actor": "사업자",
+        "type": "task",
+        "deadline": null,
+        "action": "사업자는 환경영향평가서를 작성해 승인기관을 거쳐 협의를 요청한다. 교통량·대기·수질 항목을 포함한다.",
+        "input_documents": [],
+        "output_documents": ["환경영향평가서"],
+        "legal_basis": [
+          { "law": "환경영향평가법", "article": "제27조제1항", "text": "승인기관장등은 협의를 요청하여야 한다." }
+        ]
+      },
+      {
+        "id": "P02",
+        "name": "협의 검토·의견 통보",
+        "actor": "기후에너지환경부장관",
+        "type": "task",
+        "deadline": "45일",
+        "action": "환경부장관은 평가서를 검토해 협의 의견을 통보한다. 교통량 증가에 따른 대기질 영향을 심사한다.",
+        "input_documents": [],
+        "output_documents": ["협의 의견"],
+        "legal_basis": [
+          { "law": "환경영향평가법", "article": "제29조제1항", "text": "협의 의견을 통보하여야 한다." }
+        ]
+      },
+      {
+        "id": "P03",
+        "name": "보완 요구·재협의",
+        "actor": "기후에너지환경부",
+        "type": "task",
+        "deadline": null,
+        "action": "미비하면 보완을 요구하고 다시 협의한다.",
+        "input_documents": [],
+        "output_documents": ["보완 요구서"],
+        "legal_basis": [
+          { "law": "환경영향평가법", "article": "제30조", "text": "보완을 요구할 수 있다." }
+        ]
+      }
+    ],
+    "edges": [
+      { "id": "E01", "source": "P01", "target": "P02", "type": "sequence", "label": "" },
+      { "id": "E02", "source": "P02", "target": "P03", "type": "conditional", "label": "미비" }
+    ]
+  }
+}

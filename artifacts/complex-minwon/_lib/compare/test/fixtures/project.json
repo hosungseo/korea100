@@ -1,0 +1,38 @@
+{
+  "id": "fixture-project",
+  "name": "픽스처 사업",
+  "stages": [
+    { "id": "G0", "label": "계획" },
+    { "id": "G1", "label": "협의" },
+    { "id": "G2", "label": "이전" }
+  ],
+  "nodes": [
+    {
+      "id": "M1",
+      "name": "환경영향평가 협의",
+      "stage": "G1",
+      "authority": "기후에너지환경부",
+      "requires": [],
+      "produces": ["eia.done"],
+      "templateRefs": [{ "institution": "eia-mini" }]
+    },
+    {
+      "id": "M2",
+      "name": "교통영향평가 심의",
+      "stage": "G1",
+      "authority": "광주특별시",
+      "requires": [{ "artifact": "eia.done", "relation": "finish_to_start", "strength": "hard" }],
+      "produces": ["traffic.done"],
+      "templateRefs": [{ "institution": "traffic-mini", "nodeIds": ["P01", "P02", "P03"] }]
+    },
+    {
+      "id": "M9",
+      "name": "군공항 이전부지 선정",
+      "stage": "G2",
+      "authority": "국방부",
+      "requires": [],
+      "produces": ["airport.site"],
+      "templateRefs": [{ "institution": "airport-mini" }]
+    }
+  ]
+}

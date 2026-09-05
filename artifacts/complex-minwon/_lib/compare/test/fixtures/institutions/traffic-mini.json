@@ -1,0 +1,65 @@
+{
+  "slug": "traffic-mini",
+  "name": "교통영향평가 심의(미니)",
+  "process": {
+    "nodes": [
+      {
+        "id": "P01",
+        "name": "교통영향평가서 제출",
+        "actor": "사업시행자",
+        "type": "task",
+        "deadline": null,
+        "action": "사업시행자는 교통영향평가서를 작성해 승인관청에 제출한다. 발생 교통량과 주변 도로 용량을 산정한다.",
+        "input_documents": [],
+        "output_documents": ["교통영향평가서"],
+        "legal_basis": [
+          { "law": "도시교통정비 촉진법", "article": "제16조제1항", "text": "교통영향평가를 실시하여야 한다." }
+        ]
+      },
+      {
+        "id": "P02",
+        "name": "교통영향평가 심의",
+        "actor": "교통영향평가심의위원회",
+        "type": "task",
+        "deadline": "30일",
+        "action": "위원회가 교통량 산정과 개선대책을 심의한다.",
+        "input_documents": [],
+        "output_documents": ["심의 결과"],
+        "legal_basis": [
+          { "law": "도시교통정비 촉진법", "article": "제17조제1항", "text": "심의를 거쳐야 한다." }
+        ]
+      },
+      {
+        "id": "P03",
+        "name": "환경부 대기 항목 재협의",
+        "actor": "기후에너지환경부장관",
+        "type": "task",
+        "deadline": null,
+        "action": "교통 개선대책이 대기질에 미치는 영향을 환경부와 다시 협의한다.",
+        "input_documents": [],
+        "output_documents": ["협의 회신"],
+        "legal_basis": [
+          { "law": "도시교통정비 촉진법", "article": "제18조", "text": "관계 기관과 협의한다." }
+        ]
+      },
+      {
+        "id": "P04",
+        "name": "미편입 노드",
+        "actor": "사업시행자",
+        "type": "notice",
+        "deadline": null,
+        "action": "이 노드는 nodeIds에 없어 편입되지 않아야 한다.",
+        "input_documents": [],
+        "output_documents": ["없음"],
+        "legal_basis": [
+          { "law": "도시교통정비 촉진법", "article": "제19조", "text": "…" }
+        ]
+      }
+    ],
+    "edges": [
+      { "id": "E01", "source": "P01", "target": "P02", "type": "sequence", "label": "" },
+      { "id": "E02", "source": "P02", "target": "P03", "type": "sequence", "label": "" },
+      { "id": "E03", "source": "P03", "target": "P04", "type": "sequence", "label": "" }
+    ]
+  }
+}
