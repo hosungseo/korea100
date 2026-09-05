@@ -6,7 +6,7 @@ import { ROOT, OUT, OUT_COMPARE } from './lib/paths.mjs';
 import { loadOrgs, normalizeOrg } from './lib/normalize.mjs';
 
 const EDGE_KIND = { sequence: 'seq', conditional: 'opt', optional: 'opt' };
-const laneWidth = (n) => (n <= 8 ? 320 : n <= 20 ? 400 : 480);
+const laneWidth = (n) => (n <= 8 ? 480 : n <= 20 ? 560 : 640);
 
 export function buildCaseData({ procs, cards, improvements, project, orgs, meta, institutionsDir = path.join(ROOT, 'web/data/institutions') }) {
   const instIndex = new Map(); for (const p of procs) if (!instIndex.has(p.institution)) instIndex.set(p.institution, instIndex.size);

@@ -1,0 +1,1868 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><title>복합민원 체계도 4호 — 산단 지정 의제 덩어리 (N36→N15) 전체 체계도</title><style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { width:12390px; background:#f4f7f5; color:#12241c; font-family:"Apple SD Gothic Neo","Pretendard",sans-serif; }
+header { background:#0b1a13; color:#f4faf7; padding:28px 48px 22px; }
+.kick { display:flex; justify-content:space-between; color:#65d7ad; font-family:ui-monospace,monospace; font-size:14px; font-weight:700; letter-spacing:.1em; margin-bottom:10px; }
+.kick small { color:#7d948a; }
+h1 { font-size:36px; font-weight:800; letter-spacing:-0.02em; }
+h1 b { color:#65d7ad; }
+.sub { margin-top:8px; color:#a8bcb2; font-size:15px; line-height:1.5; word-break:keep-all; max-width:1500px; }
+.src { margin-top:6px; color:#7d948a; font-size:12.5px; }
+.counts { display:flex; flex-wrap:wrap; gap:22px; margin-top:14px; font-size:13.5px; color:#cfe0d8; }
+.counts span { display:inline-flex; align-items:center; gap:6px; }
+.counts i { width:11px; height:11px; border-radius:3px; display:inline-block; }
+.counts b { font-family:ui-monospace,monospace; font-weight:800; }
+.legend { display:flex; flex-wrap:wrap; gap:18px; align-items:center; padding:10px 48px; background:#fff; border-bottom:1px solid #e2e8e4; font-size:12.5px; color:#45564d; }
+.legend span { display:inline-flex; gap:6px; align-items:center; }
+.legend i { width:13px; height:13px; border-radius:3px; border:1.6px solid; display:inline-block; }
+.legend .ln { width:26px; height:0; border-top:2px solid #4a6157; }
+.lanehead { display:grid; grid-template-columns:150px 640px 640px 560px 480px 480px 480px 480px 640px 560px 560px 480px 480px 480px 480px 480px 480px 480px 480px 480px 480px 480px 480px 480px 480px; background:#fff; border-bottom:2px solid #17573f; }
+.lanehead div { padding:11px 12px 9px; border-left:1px solid #e2e8e4; }
+.lanehead div b { display:block; font-size:14.5px; font-weight:800; color:#17573f; }
+.lanehead div small { display:block; margin-top:2px; font-size:11px; color:#6d7f76; line-height:1.35; word-break:keep-all; }
+.lanehead div:first-child { color:#8a9990; font-family:ui-monospace,monospace; font-size:11px; font-weight:700; border-left:0; }
+.grid { position:relative; }
+.gate { display:grid; grid-template-columns:150px 640px 640px 560px 480px 480px 480px 480px 640px 560px 560px 480px 480px 480px 480px 480px 480px 480px 480px 480px 480px 480px 480px 480px 480px; border-bottom:2px solid #17573f; background:#fbfcfb; }
+.gate:nth-child(even) { background:#f6f9f7; }
+.glabel { padding:14px 12px 54px; border-right:1px solid #e2e8e4; }
+.glabel b { display:block; color:#17573f; font-family:ui-monospace,monospace; font-size:13px; font-weight:800; }
+.glabel span { display:block; color:#45635a; font-size:12.5px; font-weight:800; word-break:keep-all; line-height:1.35; }
+.glabel small { display:block; margin-top:4px; color:#8a9990; font-size:10.5px; line-height:1.35; word-break:keep-all; }
+.cell { min-height:64px; padding:14px 24px 54px; border-left:1px dotted #d5ddd8; display:grid; grid-template-columns:repeat(auto-fill, minmax(172px, 1fr)); gap:20px 32px; align-content:start; }
+.card { position:relative; z-index:2; border:1.6px solid; border-radius:8px; padding:8px 10px 8px; box-shadow:0 1px 3px rgba(17,38,27,.07); background:#fff; }
+.card .chead { display:flex; align-items:center; gap:5px; margin-bottom:3px; }
+.card .chead .badges { flex:1; display:flex; gap:3px; }
+.card b { font-family:ui-monospace,monospace; font-size:10.5px; font-weight:800; opacity:.75; }
+.card em { color:#fff; font-style:normal; font-size:9px; font-weight:800; padding:1px 7px 2px; border-radius:8px; }
+.card .org { display:inline-block; margin:1px 0 4px; font-size:9.5px; font-weight:800; color:#fff; background:#2f3f39; border-radius:4px; padding:1px 6px 2px; letter-spacing:-0.01em; }
+.card p { font-size:12.5px; font-weight:750; line-height:1.35; word-break:keep-all; }
+.card small { display:block; margin-top:3px; font-size:10px; line-height:1.4; color:inherit; opacity:.78; word-break:keep-all; }
+.cites { margin-top:4px; display:flex; flex-wrap:wrap; gap:3px; }
+.cite { font-family:ui-monospace,monospace; font-size:9px; font-weight:700; padding:1px 5px; border-radius:4px; background:rgba(23,87,63,.09); color:inherit; opacity:.85; }
+.cite.inf { background:rgba(36,86,214,.10); }
+.card.k-inferred { box-shadow:0 1px 3px rgba(36,86,214,.14); }
+.ib { display:inline-block; color:#fff; font-style:normal; font-family:ui-monospace,monospace; font-size:9px; font-weight:800; padding:1px 5px; border-radius:4px; }
+.group { position:relative; z-index:2; grid-column:1 / -1; border:1.5px dashed #6f8c80; border-radius:10px; padding:8px 14px 16px; background:rgba(31,137,98,.04); }
+.group .gtitle { font-size:11px; font-weight:800; color:#17573f; margin-bottom:6px; }
+.group .gbody { display:grid; grid-template-columns:repeat(2, 1fr); gap:20px 32px; }
+svg.edges { position:absolute; inset:0; z-index:1; pointer-events:none; overflow:visible; }
+.note { padding:14px 48px 18px; background:#fbfcfb; color:#7a887f; font-size:11.5px; line-height:1.65; word-break:keep-all; border-top:2px solid #17573f; }
+.note b { color:#45635a; }
+.note div { margin-top:3px; }
+footer { display:flex; justify-content:space-between; align-items:center; background:#0b1a13; color:#a8bcb2; padding:13px 48px; font-size:13px; }
+footer b { color:#f4faf7; font-weight:800; font-size:14px; }
+footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
+.imp { padding:22px 48px 26px; background:#fff; border-top:2px solid #17573f; }
+.imp h2 { font-size:20px; font-weight:800; color:#17573f; letter-spacing:-0.01em; }
+.imphead { margin-top:6px; color:#45635a; font-size:12.5px; line-height:1.5; word-break:keep-all; max-width:1500px; }
+.impgrid { margin-top:14px; display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; }
+.impcard { border:1.8px solid; border-radius:10px; padding:10px 12px; }
+.imptop { display:flex; align-items:center; gap:8px; }
+.impkind { font-size:11px; font-weight:800; }
+.impnodes { margin-left:auto; font-family:ui-monospace,monospace; font-size:10px; color:#6d7f76; }
+.impcard h3 { margin-top:5px; font-size:14px; font-weight:800; color:#12241c; word-break:keep-all; }
+.impcard p { margin-top:5px; font-size:11.5px; line-height:1.5; color:#2e4038; word-break:keep-all; }
+.lever { margin-top:6px; font-size:11px; line-height:1.45; color:#17573f; background:rgba(255,255,255,.7); border-radius:6px; padding:5px 8px; word-break:keep-all; }
+.lever b { margin-right:4px; }
+.targets { margin-top:6px; display:flex; flex-wrap:wrap; gap:4px; }
+.tg { font-size:10.5px; font-weight:800; color:#fff; background:#2f3f39; border-radius:4px; padding:2px 7px 3px; }
+.orgtab { margin-top:22px; }
+.orgtab h2 { font-size:18px; font-weight:800; color:#17573f; }
+.orgtab table { margin-top:10px; width:100%; border-collapse:collapse; font-size:12px; }
+.orgtab th { text-align:left; background:#eef8f2; color:#17573f; padding:7px 10px; border-bottom:2px solid #17573f; }
+.orgtab td { padding:7px 10px; border-bottom:1px solid #e2e8e4; vertical-align:top; word-break:keep-all; line-height:1.45; }
+.orgtab td.org { font-weight:800; white-space:nowrap; }
+.orgtab td.ids { font-family:ui-monospace,monospace; font-weight:800; white-space:nowrap; }
+</style></head><body>
+<header>
+  <div class="kick"><span>대한민국 제도 지도 / 복합민원 체계도 4호 전체 체계도</span><small>기준일 2026-09-05 · 법제처 현행본 대조</small></div>
+  <h1>산단 지정 의제 덩어리 — <b>마일스톤 12 · 절차 222</b></h1>
+  <p class="sub">워룸 gwangju-semiconductor-cluster의 KIPA 덩어리 합격 구간. 규정 222 · 추론 0. 개선 카드는 _lib/compare 엔진 산출(추출→대조→판정→카드).</p>
+  <p class="src">Korea100 워룸 gwangju-semiconductor-cluster · web/data/institutions 제도 템플릿 · 법제처 DRF 현행본</p>
+  <p class="counts">
+    <span><i style="background:#1f8962"></i>규정 근거 <b>222</b></span>
+    <span><i style="background:#2456d6"></i>추론(암묵지) <b>0</b></span>
+    <span>마일스톤 <b>12</b>개</span><span>절차 <b>222</b>개</span><span>기관 레인 <b>24</b>개</span><span>개선 카드 <b>16</b>건</span>
+    
+    <span style="color:#65d7ad">전 단계 222 = 규정 222 + 추론 0</span>
+  </p>
+</header>
+<div class="legend">
+  <span><i style="background:#eef8f2;border-color:#1f8962"></i>규정 근거(조문 표기 · 항·호까지)</span>
+  <span><i style="background:#e9f0ff;border-color:#2456d6"></i>추론 — 규정에 없는 실무 관행</span>
+  
+  <span><i style="background:#2f3f39;border-color:#2f3f39"></i> 딱지 = 그 단계를 실제로 수행하는 기관·부서</span>
+  <span><i class="ln"></i> 절차 순서</span>
+  <span><i class="ln" style="border-top:1.4px solid #8aa39a"></i> 병렬 협의</span>
+  <span><i class="ln" style="border-top:1.6px dashed #2456d6"></i> 보완·부동의·재심의 루프</span>
+  <span><i class="ln" style="border-top:1.6px dashed #9aa8a1"></i> 선택·대상 한정 경로</span>
+  
+</div>
+<div class="lanehead"><div>관문 ↓ · 기관 →</div><div><b>신청인·사업시행자</b><small>민원인 · 절차 97</small></div><div><b>산업단지 지정권자</b><small>역할 · 절차 30</small></div><div><b>관계 행정기관</b><small>역할 · 절차 17</small></div><div><b>감독·청문</b><small>역할 · 절차 1</small></div><div><b>발견·보상</b><small>역할 · 절차 1</small></div><div><b>시스템</b><small>역할 · 절차 1</small></div><div><b>조성비·복구</b><small>역할 · 절차 1</small></div><div><b>광주특별시</b><small>기관 · 절차 21</small></div><div><b>기후에너지환경부</b><small>기관 · 절차 11</small></div><div><b>국가유산청</b><small>기관 · 절차 9</small></div><div><b>조사기관</b><small>기관 · 절차 6</small></div><div><b>행정안전부</b><small>기관 · 절차 5</small></div><div><b>해양수산부</b><small>기관 · 절차 4</small></div><div><b>국토교통부</b><small>기관 · 절차 3</small></div><div><b>산업통상부</b><small>기관 · 절차 3</small></div><div><b>국무총리</b><small>기관 · 절차 2</small></div><div><b>농림축산식품부</b><small>기관 · 절차 2</small></div><div><b>산림청</b><small>기관 · 절차 2</small></div><div><b>에너지전문기관</b><small>기관 · 절차 1</small></div><div><b>광주특별시 경관위원회</b><small>기관 · 절차 1</small></div><div><b>교통영향평가심의위원회</b><small>기관 · 절차 1</small></div><div><b>대도시권광역교통위원회</b><small>기관 · 절차 1</small></div><div><b>산업단지계획심의위원회</b><small>기관 · 절차 1</small></div><div><b>지방도시계획위원회</b><small>기관 · 절차 1</small></div></div>
+<div id="pool" style="display:none"><div class="card k-rule" id="N36_0_P03" data-gate="N36" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N36_0_P03</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 민간기업·개발사업자</div>
+      <p>산업단지계획 승인 신청</p>
+      <small>산업단지계획 승인 신청에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제8조</span></div>
+    </div><div class="card k-rule" id="N09_1_P01" data-gate="N09" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N09_1_P01</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>환경영향평가 대상사업 판정</p>
+      <small>도시개발·산업단지 조성·에너지 개발·도로·철도 등 대상사업에 해당하는지 판정한다. 구체적 종류·범위는 대통령령이 정한다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제22조제1항·제2항</span></div>
+    </div><div class="card k-rule" id="N09_1_P02" data-gate="N09" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N09_1_P02</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>평가준비서 작성·평가항목등 결정 요청</p>
+      <small>평가 실시 전에 평가준비서를 작성한다. 승인등을 받아야 하는 사업자는 승인기관의 장에게 환경영향평가항목등을 정하여 줄 것을 요청한다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제24조제1항·제2항</span></div>
+    </div><div class="card k-rule" id="N09_1_P03" data-gate="N09" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N09_1_P03</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 승인기관의 장</div>
+      <p>환경영향평가항목등 결정·공개</p>
+      <small>요청을 받으면 대통령령으로 정하는 기간 내에 환경영향평가협의회 심의를 거쳐 평가항목등을 결정해 사업자에게 통보하고, 공개하여 주민 등의 의견을 듣는다. 전략환경영향평가에서 이미 결정·협의된 경우 절…</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제24조제4항·제6항·제7항</span></div>
+    </div><div class="card k-rule" id="N09_1_P04" data-gate="N09" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N09_1_P04</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>평가서 초안 작성·주민 의견수렴</p>
+      <small>결정된 평가항목등에 따라 평가서 초안을 작성해 주민 등의 의견을 수렴한다. 공고·공람은 사업지역 관할 시장·군수·구청장이 한다. 다른 법령으로 20일 이상 준하여 수렴한 경우 의제되고, 전략환경영향…</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제25조제1항·제2항·제3항·제5항</span></div>
+    </div><div class="card k-rule" id="N09_1_P05" data-gate="N09" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N09_1_P05</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>의견수렴 결과·반영 여부 공개</p>
+      <small>주민 등의 의견 수렴 결과와 반영 여부를 대통령령으로 정하는 방법에 따라 공개한다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제25조제4항</span></div>
+    </div><div class="card k-rule" id="N09_1_P06" data-gate="N09" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N09_1_P06</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>환경영향평가서 작성·제출</p>
+      <small>승인등을 받아야 하는 사업자는 평가서를 작성해 승인기관의 장에게 제출한다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제27조제2항</span></div>
+    </div><div class="card k-rule" id="N09_1_P07" data-gate="N09" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N09_1_P07</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 승인기관의 장</div>
+      <p>협의 요청</p>
+      <small>대상사업에 대한 승인등을 하거나 사업을 확정하기 전에 기후에너지환경부장관에게 협의를 요청한다. 평가서에 대한 의견을 첨부할 수 있다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제27조제1항</span></div>
+    </div><div class="card k-rule" id="N09_1_P08" data-gate="N09" data-lane="L9" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N09_1_P08</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 기후에너지환경부장관</div>
+      <p>평가서 검토·보완 요청</p>
+      <small>의견수렴 절차 이행 여부와 평가서 내용을 검토한다. 한국환경연구원의 의견을 들어야 하며, 보완·조정 요청은 두 차례만 할 수 있고, 거짓 작성 등의 경우 반려할 수 있다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제28조제1항·제2항·제3항·제4항</span></div>
+    </div><div class="card k-rule" id="N09_1_P09" data-gate="N09" data-lane="L9" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N09_1_P09</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 기후에너지환경부장관</div>
+      <p>협의 내용 통보</p>
+      <small>협의를 요청받은 날부터 대통령령으로 정하는 기간 이내에 협의 내용을 통보한다. 연장 시 협의기간 만료 전에 사유·기간을 통보한다. 승인기관의 장은 지체 없이 사업자에게 통보한다. 경미한 보완 사항은…</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제29조제1항·제2항·제3항·제4항</span></div>
+    </div><div class="card k-rule" id="N09_1_P10" data-gate="N09" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N09_1_P10</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 승인기관의 장</div>
+      <p>협의 내용 반영·확인</p>
+      <small>협의 내용을 사업계획에 반영하고, 승인등을 하려면 반영 여부를 확인한다. 반영 결과를 기후에너지환경부장관에게 통보하고, 미반영 시 반영 요청에 특별한 사유가 없으면 따라야 한다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제30조제1항·제2항·제3항·제4항</span></div>
+    </div><div class="card k-rule" id="N09_1_P11" data-gate="N09" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N09_1_P11</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>협의 내용 이행·관리대장 비치</p>
+      <small>사업 시행 시 반영된 협의 내용을 이행하고, 관리대장에 이행 상황을 기록해 공사현장에 갖추어 두며, 관리책임자를 지정해 통보한다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제35조제1항·제2항·제3항</span></div>
+    </div><div class="card k-rule" id="N09_1_P12" data-gate="N09" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N09_1_P12</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>사후환경영향조사</p>
+      <small>착공 후 주변 환경에 미치는 영향을 조사해 통보하고, 피해 방지 조치가 필요하면 지체 없이 통보하고 조치한다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제36조제1항·제2항</span></div>
+    </div><div class="card k-rule" id="N11_2_P06" data-gate="N11" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N11_2_P06</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 토지소유자·주민</div>
+      <p>환경영향평가서 초안·주민 의견</p>
+      <small>환경영향평가서 초안·주민 의견</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제25조(주민 등의 의견 수렴)</span></div>
+    </div><div class="card k-rule" id="N11_1_P01" data-gate="N11" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N11_1_P01</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>환경영향평가 대상사업 판정</p>
+      <small>도시개발·산업단지 조성·에너지 개발·도로·철도 등 대상사업에 해당하는지 판정한다. 구체적 종류·범위는 대통령령이 정한다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제22조제1항·제2항</span></div>
+    </div><div class="card k-rule" id="N11_1_P02" data-gate="N11" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N11_1_P02</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>평가준비서 작성·평가항목등 결정 요청</p>
+      <small>평가 실시 전에 평가준비서를 작성한다. 승인등을 받아야 하는 사업자는 승인기관의 장에게 환경영향평가항목등을 정하여 줄 것을 요청한다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제24조제1항·제2항</span></div>
+    </div><div class="card k-rule" id="N11_1_P03" data-gate="N11" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N11_1_P03</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 승인기관의 장</div>
+      <p>환경영향평가항목등 결정·공개</p>
+      <small>요청을 받으면 대통령령으로 정하는 기간 내에 환경영향평가협의회 심의를 거쳐 평가항목등을 결정해 사업자에게 통보하고, 공개하여 주민 등의 의견을 듣는다. 전략환경영향평가에서 이미 결정·협의된 경우 절…</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제24조제4항·제6항·제7항</span></div>
+    </div><div class="card k-rule" id="N11_1_P04" data-gate="N11" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N11_1_P04</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>평가서 초안 작성·주민 의견수렴</p>
+      <small>결정된 평가항목등에 따라 평가서 초안을 작성해 주민 등의 의견을 수렴한다. 공고·공람은 사업지역 관할 시장·군수·구청장이 한다. 다른 법령으로 20일 이상 준하여 수렴한 경우 의제되고, 전략환경영향…</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제25조제1항·제2항·제3항·제5항</span></div>
+    </div><div class="card k-rule" id="N11_1_P05" data-gate="N11" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N11_1_P05</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>의견수렴 결과·반영 여부 공개</p>
+      <small>주민 등의 의견 수렴 결과와 반영 여부를 대통령령으로 정하는 방법에 따라 공개한다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제25조제4항</span></div>
+    </div><div class="card k-rule" id="N11_1_P06" data-gate="N11" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N11_1_P06</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>환경영향평가서 작성·제출</p>
+      <small>승인등을 받아야 하는 사업자는 평가서를 작성해 승인기관의 장에게 제출한다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제27조제2항</span></div>
+    </div><div class="card k-rule" id="N11_1_P07" data-gate="N11" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N11_1_P07</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 승인기관의 장</div>
+      <p>협의 요청</p>
+      <small>대상사업에 대한 승인등을 하거나 사업을 확정하기 전에 기후에너지환경부장관에게 협의를 요청한다. 평가서에 대한 의견을 첨부할 수 있다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제27조제1항</span></div>
+    </div><div class="card k-rule" id="N11_1_P08" data-gate="N11" data-lane="L9" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N11_1_P08</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 기후에너지환경부장관</div>
+      <p>평가서 검토·보완 요청</p>
+      <small>의견수렴 절차 이행 여부와 평가서 내용을 검토한다. 한국환경연구원의 의견을 들어야 하며, 보완·조정 요청은 두 차례만 할 수 있고, 거짓 작성 등의 경우 반려할 수 있다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제28조제1항·제2항·제3항·제4항</span></div>
+    </div><div class="card k-rule" id="N11_1_P09" data-gate="N11" data-lane="L9" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N11_1_P09</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 기후에너지환경부장관</div>
+      <p>협의 내용 통보</p>
+      <small>협의를 요청받은 날부터 대통령령으로 정하는 기간 이내에 협의 내용을 통보한다. 연장 시 협의기간 만료 전에 사유·기간을 통보한다. 승인기관의 장은 지체 없이 사업자에게 통보한다. 경미한 보완 사항은…</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제29조제1항·제2항·제3항·제4항</span></div>
+    </div><div class="card k-rule" id="N11_1_P10" data-gate="N11" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N11_1_P10</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 승인기관의 장</div>
+      <p>협의 내용 반영·확인</p>
+      <small>협의 내용을 사업계획에 반영하고, 승인등을 하려면 반영 여부를 확인한다. 반영 결과를 기후에너지환경부장관에게 통보하고, 미반영 시 반영 요청에 특별한 사유가 없으면 따라야 한다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제30조제1항·제2항·제3항·제4항</span></div>
+    </div><div class="card k-rule" id="N11_1_P11" data-gate="N11" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N11_1_P11</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>협의 내용 이행·관리대장 비치</p>
+      <small>사업 시행 시 반영된 협의 내용을 이행하고, 관리대장에 이행 상황을 기록해 공사현장에 갖추어 두며, 관리책임자를 지정해 통보한다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제35조제1항·제2항·제3항</span></div>
+    </div><div class="card k-rule" id="N11_1_P12" data-gate="N11" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N11_1_P12</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>사후환경영향조사</p>
+      <small>착공 후 주변 환경에 미치는 영향을 조사해 통보하고, 피해 방지 조치가 필요하면 지체 없이 통보하고 조치한다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제36조제1항·제2항</span></div>
+    </div><div class="card k-rule" id="N13_3_P01" data-gate="N13" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_3_P01</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>사업지 유존 가능성 검토</p>
+      <small>사업지 유존 가능성 검토</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제4조(매장유산 유존지역의 보호)</span></div>
+    </div><div class="card k-rule" id="N13_3_P02" data-gate="N13" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_3_P02</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>조사기관 선정·계약</p>
+      <small>조사기관 선정·계약</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제24조(매장유산 조사기관의 등록)</span><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제27조(매장유산 조사 용역 대가의 기준)</span></div>
+    </div><div class="card k-rule" id="N13_3_P03" data-gate="N13" data-lane="L11" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_3_P03</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 조사기관</div>
+      <p>지표조사 실시</p>
+      <small>지표조사 실시</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제6조의2(국가 등에 의한 매장유산 지표조사)</span></div>
+    </div><div class="card k-rule" id="N13_3_P04" data-gate="N13" data-lane="L11" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_3_P04</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 조사기관</div>
+      <p>지표조사 보고서 제출</p>
+      <small>지표조사 보고서 제출</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제7조(지표조사 보고서 제출)</span></div>
+    </div><div class="card k-rule" id="N13_3_P05" data-gate="N13" data-lane="L10" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_3_P05</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 국가유산청</div>
+      <p>유존지역 보호 조치</p>
+      <small>유존지역 보호 조치</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제9조(지표조사에 따른 매장유산 유존지역의 보호)</span></div>
+    </div><div class="card k-rule" id="N13_3_P06" data-gate="N13" data-lane="L10" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_3_P06</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 국가유산청</div>
+      <p>발굴 필요성 판단</p>
+      <small>발굴 필요성 판단</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제11조(매장유산의 발굴허가 등)</span></div>
+    </div><div class="card k-rule" id="N13_3_P07" data-gate="N13" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_3_P07</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>발굴허가 신청</p>
+      <small>발굴허가 신청</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제12조(발굴허가의 신청)</span><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제11조(매장유산의 발굴허가 등)</span></div>
+    </div><div class="card k-rule" id="N13_3_P08" data-gate="N13" data-lane="L10" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_3_P08</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 국가유산청</div>
+      <p>발굴허가 심사·처분</p>
+      <small>발굴허가 심사·처분</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제11조(매장유산의 발굴허가 등)</span></div>
+    </div><div class="card k-rule" id="N13_3_P09" data-gate="N13" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_3_P09</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>보완·재신청</p>
+      <small>보완·재신청</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제12조(발굴허가의 신청)</span></div>
+    </div><div class="card k-rule" id="N13_3_P10" data-gate="N13" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_3_P10</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>허가 결과 수령</p>
+      <small>허가 결과 수령</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제11조(매장유산의 발굴허가 등)</span></div>
+    </div><div class="card k-rule" id="N13_3_P11" data-gate="N13" data-lane="L11" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_3_P11</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 조사기관</div>
+      <p>착수·완료 신고·안전관리</p>
+      <small>착수·완료 신고·안전관리</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제12조의2(매장유산 발굴의 착수ㆍ완료 신고 등)</span><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제12조의3(발굴현장 안전관리 등)</span></div>
+    </div><div class="card k-rule" id="N13_3_P12" data-gate="N13" data-lane="L11" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_3_P12</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 조사기관</div>
+      <p>보존조치·발굴보고서</p>
+      <small>보존조치·발굴보고서</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제14조(발굴된 매장유산의 보존조치)</span><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제15조(발굴조사 보고서)</span></div>
+    </div><div class="card k-rule" id="N13_3_P13" data-gate="N13" data-lane="L5" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_3_P13</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 발견·보상</div>
+      <p>발견신고·보상(해당 시)</p>
+      <small>발견신고·보상(해당 시)</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제17조(발견신고 등)</span><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제21조(발견신고된 국가유산의 보상금과 포상금)</span></div>
+    </div><div class="card k-rule" id="N13_3_P14" data-gate="N13" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_3_P14</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 토지소유자·주민</div>
+      <p>주민·소유자 통지·협의</p>
+      <small>주민·소유자 통지·협의</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제4조(매장유산 유존지역의 보호)</span></div>
+    </div><div class="card k-rule" id="N13_3_P15" data-gate="N13" data-lane="L4" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_3_P15</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 감독·청문</div>
+      <p>등록취소·청문</p>
+      <small>등록취소·청문</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제25조(조사기관의 등록취소 등)</span><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제28조의2(청문)</span></div>
+    </div><div class="card k-rule" id="N13_3_P16" data-gate="N13" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_3_P16</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>처분 통지 수령</p>
+      <small>처분 통지 수령</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제25조(조사기관의 등록취소 등)</span></div>
+    </div><div class="card k-rule" id="N13_4_P01" data-gate="N13" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_4_P01</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>발굴 필요 판정</p>
+      <small>매장유산 유존지역은 원칙적으로 발굴할 수 없다. 연구 목적, 유적 정비사업, 건설공사로 부득이한 경우, 멸실·훼손 우려 긴급 발굴의 경우에만 국가유산청장의 허가를 받아 발굴할 수 있다. 건설공사 발…</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제11조제1항·제3항</span></div>
+    </div><div class="card k-rule" id="N13_4_P02" data-gate="N13" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_4_P02</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>발굴허가 신청</p>
+      <small>직접 발굴할 조사기관과 대표자·조사단장·책임조사원을 적은 신청서와 구비서류를 관할 지방자치단체의 장과 국가유산청장에게 제출한다.</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제12조제1항</span></div>
+    </div><div class="card k-rule" id="N13_4_P03" data-gate="N13" data-lane="L10" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_4_P03</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 국가유산청장</div>
+      <p>허가 심사·위원회 심의·통지</p>
+      <small>신청받은 날부터 10일 이내에 허가 여부 또는 지연 사유를 통지한다. 대통령령으로 정하는 사업은 국가유산위원회 심의를 거치며, 이 경우 심의를 마친 날부터 7일 이내에 통지한다. 허가 시 내용을 정…</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제12조제2항·제3항·제11조제2항</span></div>
+    </div><div class="card k-rule" id="N13_4_P04" data-gate="N13" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_4_P04</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>발굴 착수신고</p>
+      <small>발굴에 착수하면 착수신고서를 제출한다. 허가일부터 1년 이내에 착수해야 하며, 미착수 시 허가가 취소될 수 있고 정당한 사유가 있으면 1년 범위에서 연장할 수 있다.</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제12조의2제1항·제2항</span></div>
+    </div><div class="card k-rule" id="N13_4_P05" data-gate="N13" data-lane="L11" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_4_P05</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 조사기관</div>
+      <p>발굴 수행·정지·중지 명령</p>
+      <small>조사기관이 고시된 방법·절차에 따라 발굴한다. 국가유산청장은 허가를 한 경우에도 발굴의 정지 또는 중지를 명하거나 허가를 취소할 수 있다.</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제11조제2항·제5항</span></div>
+    </div><div class="card k-rule" id="N13_4_P06" data-gate="N13" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_4_P06</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>발굴 완료신고</p>
+      <small>발굴이 끝난 날부터 20일 이내에 완료신고서를 제출한다.</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제12조의2제3항</span></div>
+    </div><div class="card k-rule" id="N13_4_P07" data-gate="N13" data-lane="L10" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_4_P07</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 국가유산청장</div>
+      <p>보존조치 지시</p>
+      <small>발굴된 매장유산이 역사적·예술적·학술적 가치가 큰 경우 국가유산위원회 심의를 거쳐 현지보존·이전보존·기록보존 등의 보존조치를 지시할 수 있다. 지시받은 자와 관할 지자체장은 보존 방법에 관한 의견을…</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제14조제1항·제2항</span></div>
+    </div><div class="card k-rule" id="N13_4_P08" data-gate="N13" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_4_P08</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>보존조치 결과 제출</p>
+      <small>보존조치를 한 후 관할 지방자치단체의 장과 국가유산청장에게 그 결과를 각각 제출한다.</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제14조제3항</span></div>
+    </div><div class="card k-rule" id="N13_4_P09" data-gate="N13" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_4_P09</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>변경허가</p>
+      <small>허가 사항 중 대통령령으로 정하는 중요한 사항을 변경하려면 변경허가를 받아야 한다.</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제11조제4항</span></div>
+    </div><div class="card k-rule" id="N13_4_P10" data-gate="N13" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_4_P10</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 발견자·소유자·점유자</div>
+      <p>매장유산 발견신고</p>
+      <small>공사 중 등에 매장유산을 발견하면 현상을 변경하지 말고 발견 사실을 국가유산청장에게 신고한다.</small>
+      <div class="cites"><span class="cite">§ 매장유산 보호 및 조사에 관한 법률 제17조</span></div>
+    </div><div class="card k-rule" id="N13_5_P01" data-gate="N13" data-lane="L10" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_5_P01</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 국가유산청장</div>
+      <p>국가유산 보호 정책의 기본원칙 적용</p>
+      <small>국가유산 보호 정책의 기본원칙을 적용한다.</small>
+      <div class="cites"><span class="cite">§ 국가유산기본법 제7조</span></div>
+    </div><div class="card k-rule" id="N13_5_P02" data-gate="N13" data-lane="L10" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_5_P02</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 국가유산청장</div>
+      <p>국가유산 기본계획 수립</p>
+      <small>기본계획을 수립한다.</small>
+      <div class="cites"><span class="cite">§ 국가유산기본법 제8조</span></div>
+    </div><div class="card k-rule" id="N13_5_P03" data-gate="N13" data-lane="L10" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_5_P03</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 국가유산청장</div>
+      <p>국가유산 조사·연구</p>
+      <small>국가유산을 조사·연구한다.</small>
+      <div class="cites"><span class="cite">§ 국가유산기본법 제10조</span></div>
+    </div><div class="card k-rule" id="N13_5_P04" data-gate="N13" data-lane="L10" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N13_5_P04</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 국가유산청장</div>
+      <p>고도 및 역사문화권 보존·육성</p>
+      <small>고도 및 역사문화권을 보존·육성한다.</small>
+      <div class="cites"><span class="cite">§ 국가유산기본법 제16조</span></div>
+    </div><div class="card k-rule" id="N38_6_P01" data-gate="N38" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N38_6_P01</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 승인기관</div>
+      <p>재해영향평가등 대상·유형 판정</p>
+      <small>재해영향평가등 대상·유형 판정에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 자연재해대책법 제4조·제5조</span></div>
+    </div><div class="card k-rule" id="N38_6_P02" data-gate="N38" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N38_6_P02</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자·계획수립기관</div>
+      <p>재해위험·저감대책 조사</p>
+      <small>재해위험·저감대책 조사에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 자연재해대책법 제4조</span></div>
+    </div><div class="card k-rule" id="N38_6_P03" data-gate="N38" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N38_6_P03</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 승인기관</div>
+      <p>재해영향평가등 협의서 제출</p>
+      <small>재해영향평가등 협의서 제출에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 자연재해대책법 제4조</span></div>
+    </div><div class="card k-rule" id="N38_6_P04" data-gate="N38" data-lane="L12" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N38_6_P04</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 행정안전부·전문검토기관</div>
+      <p>전문기관 사전검토</p>
+      <small>전문기관 사전검토에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 자연재해대책법 제4조</span></div>
+    </div><div class="card k-rule" id="N38_6_P05" data-gate="N38" data-lane="L12" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N38_6_P05</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 행정안전부·전문검토기관</div>
+      <p>재해영향평가심의위원회 심의</p>
+      <small>재해영향평가심의위원회 심의에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 자연재해대책법 제4조</span></div>
+    </div><div class="card k-rule" id="N38_6_P06" data-gate="N38" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N38_6_P06</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자·계획수립기관</div>
+      <p>보완·재협의</p>
+      <small>보완·재협의에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 자연재해대책법 제4조</span></div>
+    </div><div class="card k-rule" id="N38_6_P07" data-gate="N38" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N38_6_P07</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 승인기관</div>
+      <p>협의결과 통보·계획 반영</p>
+      <small>협의결과 통보·계획 반영에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 자연재해대책법 제6조</span></div>
+    </div><div class="card k-rule" id="N38_6_P08" data-gate="N38" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N38_6_P08</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 승인기관</div>
+      <p>사업착수 전 협의완료 확인</p>
+      <small>사업착수 전 협의완료 확인에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 자연재해대책법 제7조</span></div>
+    </div><div class="card k-rule" id="N38_7_P01" data-gate="N38" data-lane="L12" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N38_7_P01</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 행정안전부장관</div>
+      <p>국가기본계획 수립지침 작성·통보</p>
+      <small>국무총리의 지시로 국가안전관리기본계획 수립지침을 작성해 관계 중앙행정기관의 장에게 통보한다.</small>
+      <div class="cites"><span class="cite">§ 재난 및 안전관리 기본법 제22조제1항·제2항</span></div>
+    </div><div class="card k-rule" id="N38_7_P02" data-gate="N38" data-lane="L3" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N38_7_P02</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 관계 중앙행정기관의 장</div>
+      <p>부처별 기본계획 작성·제출</p>
+      <small>수립지침에 따라 5년마다 소관 재난·안전관리업무 기본계획을 작성해 행정안전부장관에게 제출한다.</small>
+      <div class="cites"><span class="cite">§ 재난 및 안전관리 기본법 제22조제3항</span></div>
+    </div><div class="card k-rule" id="N38_7_P03" data-gate="N38" data-lane="L16" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N38_7_P03</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 국무총리</div>
+      <p>종합·중앙위원회 심의·확정</p>
+      <small>행정안전부장관이 부처별 계획을 종합해 국가안전관리기본계획안을 작성·제출하고, 국무총리가 중앙안전관리위원회 심의를 거쳐 확정한다.</small>
+      <div class="cites"><span class="cite">§ 재난 및 안전관리 기본법 제22조제4항</span></div>
+    </div><div class="card k-rule" id="N38_7_P04" data-gate="N38" data-lane="L12" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N38_7_P04</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 행정안전부장관</div>
+      <p>확정 계획 통보</p>
+      <small>확정된 기본계획을 지체 없이 관계 중앙행정기관에 통보하고, 각 부처는 소관 사항을 재난관리책임기관에 통보한다.</small>
+      <div class="cites"><span class="cite">§ 재난 및 안전관리 기본법 제22조제5항·제6항</span></div>
+    </div><div class="card k-rule" id="N38_7_P05" data-gate="N38" data-lane="L12" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N38_7_P05</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 행정안전부장관</div>
+      <p>시·도 수립지침 통보</p>
+      <small>국가기본계획과 집행계획에 따라 매년 시·도안전관리계획 수립지침을 작성해 시·도지사에게 통보한다.</small>
+      <div class="cites"><span class="cite">§ 재난 및 안전관리 기본법 제24조제2항</span></div>
+    </div><div class="card k-rule" id="N38_7_P06" data-gate="N38" data-lane="L8" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N38_7_P06</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 시·도지사</div>
+      <p>시·도안전관리계획 작성·심의·확정</p>
+      <small>관할 재난관리책임기관이 제출한 소관 계획과 수립지침을 종합해 매년 시·도안전관리계획을 작성하고 시·도안전관리위원회 심의를 거쳐 확정한다. 확정하면 행정안전부장관에게 보고하고 책임기관에 통보한다.</small>
+      <div class="cites"><span class="cite">§ 재난 및 안전관리 기본법 제24조제1항·제3항·제4항·제5항</span></div>
+    </div><div class="card k-rule" id="N38_7_P07" data-gate="N38" data-lane="L8" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N38_7_P07</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 시·도지사</div>
+      <p>시·군·구 수립지침 통보</p>
+      <small>시·도안전관리계획에 따라 매년 시·군·구안전관리계획 수립지침을 작성해 시장·군수·구청장에게 통보한다.</small>
+      <div class="cites"><span class="cite">§ 재난 및 안전관리 기본법 제25조제2항</span></div>
+    </div><div class="card k-rule" id="N38_7_P08" data-gate="N38" data-lane="L8" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N38_7_P08</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 시장·군수·구청장</div>
+      <p>시·군·구안전관리계획 작성·심의·확정</p>
+      <small>관할 재난관리책임기관의 소관 계획과 수립지침을 종합해 매년 시·군·구안전관리계획을 작성하고 시·군·구위원회 심의를 거쳐 확정한다. 확정하면 시·도지사에게 보고하고 책임기관에 통보한다.</small>
+      <div class="cites"><span class="cite">§ 재난 및 안전관리 기본법 제25조제1항·제3항·제4항·제5항</span></div>
+    </div><div class="card k-rule" id="N38_7_P09" data-gate="N38" data-lane="L16" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N38_7_P09</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 국무총리</div>
+      <p>국가기본계획 변경</p>
+      <small>여건 변화로 필요하거나 부처가 요청하면 변경할 수 있다. 변경에는 확정 절차를 준용하되, 경미한 사항은 중앙위원회 심의를 생략한다.</small>
+      <div class="cites"><span class="cite">§ 재난 및 안전관리 기본법 제22조제7항·제8항</span></div>
+    </div><div class="card k-rule" id="N39_8_P01" data-gate="N39" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N39_8_P01</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 승인기관</div>
+      <p>교통영향평가 대상 판정</p>
+      <small>교통영향평가 대상 판정에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 도시교통정비 촉진법 제15조</span></div>
+    </div><div class="card k-rule" id="N39_8_P02" data-gate="N39" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N39_8_P02</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>교통영향평가서·개선대책 작성</p>
+      <small>교통영향평가서·개선대책 작성에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 도시교통정비 촉진법 제16조</span></div>
+    </div><div class="card k-rule" id="N39_8_P03" data-gate="N39" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N39_8_P03</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 승인기관</div>
+      <p>평가서 제출·요건검토</p>
+      <small>평가서 제출·요건검토에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 도시교통정비 촉진법 제16조</span></div>
+    </div><div class="card k-rule" id="N39_8_P04" data-gate="N39" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N39_8_P04</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 승인기관</div>
+      <p>전문검토·관계기관 의견수렴</p>
+      <small>전문검토·관계기관 의견수렴에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 도시교통정비 촉진법 제16조</span></div>
+    </div><div class="card k-rule" id="N39_8_P05" data-gate="N39" data-lane="L21" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N39_8_P05</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 교통영향평가심의위원회</div>
+      <p>교통영향평가심의위원회 심의</p>
+      <small>교통영향평가심의위원회 심의에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 도시교통정비 촉진법 제17조</span></div>
+    </div><div class="card k-rule" id="N39_8_P06" data-gate="N39" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N39_8_P06</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 승인기관</div>
+      <p>개선필요사항등 확정·통보</p>
+      <small>개선필요사항등 확정·통보에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 도시교통정비 촉진법 제16조</span></div>
+    </div><div class="card k-rule" id="N39_8_P07" data-gate="N39" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N39_8_P07</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>승인계획·실시설계 반영</p>
+      <small>승인계획·실시설계 반영에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 도시교통정비 촉진법 제20조</span></div>
+    </div><div class="card k-rule" id="N39_9_P01" data-gate="N39" data-lane="L14" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N39_9_P01</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 국토교통부</div>
+      <p>대도시권 범위·사업유형·면적별 수립대상 판정</p>
+      <small>대도시권 범위·사업유형·면적별 수립대상 판정에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 대도시권 광역교통 관리에 관한 특별법 제7조의2</span></div>
+    </div><div class="card k-rule" id="N39_9_P02" data-gate="N39" data-lane="L8" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N39_9_P02</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 광주특별시·사업시행자</div>
+      <p>광역 통행수요·간선망·대중교통 수용능력 분석</p>
+      <small>광역 통행수요·간선망·대중교통 수용능력 분석에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 대도시권 광역교통 관리에 관한 특별법 제7조의2</span></div>
+    </div><div class="card k-rule" id="N39_9_P03" data-gate="N39" data-lane="L8" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N39_9_P03</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 광주특별시·사업시행자</div>
+      <p>도로·철도·환승·대중교통 개선대책과 단계별 사업 작성</p>
+      <small>도로·철도·환승·대중교통 개선대책과 단계별 사업 작성에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 대도시권 광역교통 관리에 관한 특별법 제7조의2</span></div>
+    </div><div class="card k-rule" id="N39_9_P04" data-gate="N39" data-lane="L3" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N39_9_P04</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 관계 지방자치단체·교통기관</div>
+      <p>관계 지자체·도로·철도·교통기관 협의</p>
+      <small>관계 지자체·도로·철도·교통기관 협의에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 대도시권 광역교통 관리에 관한 특별법 제7조의2</span></div>
+    </div><div class="card k-rule" id="N39_9_P05" data-gate="N39" data-lane="L22" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N39_9_P05</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 대도시권광역교통위원회</div>
+      <p>대도시권광역교통위원회 심의·조정</p>
+      <small>대도시권광역교통위원회 심의·조정에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 대도시권 광역교통 관리에 관한 특별법 제7조의2</span></div>
+    </div><div class="card k-rule" id="N39_9_P06" data-gate="N39" data-lane="L14" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N39_9_P06</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 국토교통부</div>
+      <p>광역교통개선대책 확정·사업승인 조건 반영</p>
+      <small>광역교통개선대책 확정·사업승인 조건 반영에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 대도시권 광역교통 관리에 관한 특별법 제7조의2</span></div>
+    </div><div class="card k-rule" id="N39_9_P07" data-gate="N39" data-lane="L8" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N39_9_P07</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 광주특별시·사업시행자</div>
+      <p>시설별 시행주체·재원분담·연차계획 확정</p>
+      <small>시설별 시행주체·재원분담·연차계획 확정에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 대도시권 광역교통 관리에 관한 특별법 제7조의2</span></div>
+    </div><div class="card k-rule" id="N39_9_P08" data-gate="N39" data-lane="L14" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N39_9_P08</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 국토교통부</div>
+      <p>개선대책 이행상황 점검·변경·시정</p>
+      <small>개선대책 이행상황 점검·변경·시정에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 대도시권 광역교통 관리에 관한 특별법 제7조의2</span></div>
+    </div><div class="card k-rule" id="N40_10_P01" data-gate="N40" data-lane="L15" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N40_10_P01</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 산업통상부</div>
+      <p>에너지사용계획 협의대상 판정</p>
+      <small>에너지사용계획 협의대상 판정에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 에너지이용 합리화법 제10조</span></div>
+    </div><div class="card k-rule" id="N40_10_P02" data-gate="N40" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N40_10_P02</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업주관자·사업시행자</div>
+      <p>에너지 수요·공급·효율화 계획 작성</p>
+      <small>에너지 수요·공급·효율화 계획 작성에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 에너지이용 합리화법 제10조</span></div>
+    </div><div class="card k-rule" id="N40_10_P03" data-gate="N40" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N40_10_P03</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업주관자·사업시행자</div>
+      <p>에너지사용계획 협의 요청</p>
+      <small>에너지사용계획 협의 요청에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 에너지이용 합리화법 제10조</span></div>
+    </div><div class="card k-rule" id="N40_10_P04" data-gate="N40" data-lane="L19" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N40_10_P04</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 에너지전문기관</div>
+      <p>에너지전문기관 기술검토</p>
+      <small>에너지전문기관 기술검토에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 에너지이용 합리화법 제11조</span></div>
+    </div><div class="card k-rule" id="N40_10_P05" data-gate="N40" data-lane="L15" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N40_10_P05</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 산업통상부</div>
+      <p>협의의견·보완사항 통보</p>
+      <small>협의의견·보완사항 통보에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 에너지이용 합리화법 제11조</span></div>
+    </div><div class="card k-rule" id="N40_10_P06" data-gate="N40" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N40_10_P06</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업주관자·사업시행자</div>
+      <p>사업계획·설계에 협의결과 반영</p>
+      <small>사업계획·설계에 협의결과 반영에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 에너지이용 합리화법 제12조</span></div>
+    </div><div class="card k-rule" id="N40_10_P07" data-gate="N40" data-lane="L15" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N40_10_P07</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 산업통상부</div>
+      <p>계획 이행실적 제출·사후관리</p>
+      <small>계획 이행실적 제출·사후관리에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 에너지이용 합리화법 제12조</span></div>
+    </div><div class="card k-rule" id="N40_11_P01" data-gate="N40" data-lane="L3" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N40_11_P01</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 중앙행정기관·지자체·공기업의 장</div>
+      <p>개발사업 집단에너지 공급 협의</p>
+      <small>주택건설·택지개발·산업단지개발 등 개발사업 계획을 수립하려면 기후에너지환경부장관과 집단에너지 공급 타당성을 협의한다. 계획 변경 시에도 같다.</small>
+      <div class="cites"><span class="cite">§ 집단에너지사업법 제4조</span></div>
+    </div><div class="card k-rule" id="N40_11_P02" data-gate="N40" data-lane="L9" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N40_11_P02</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 기후에너지환경부장관</div>
+      <p>공급대상지역 지정·공고</p>
+      <small>협의 결과 타당성이 있으면 공급대상지역을 지정·공고한다. 지정 전에 주요 내용을 30일 이상 공고하고 주민 등 이해관계인·개발사업 시행자의 의견을 들으며 관계 중앙행정기관·시·도지사와 협의한다. 특…</small>
+      <div class="cites"><span class="cite">§ 집단에너지사업법 제5조제1항·제2항·제3항</span></div>
+    </div><div class="card k-rule" id="N40_11_P03" data-gate="N40" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N40_11_P03</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>사업허가 신청</p>
+      <small>공급구역별로 기후에너지환경부장관의 허가를 신청한다. 피성년후견인·파산자, 취소 후 2년 미경과자 등 결격사유가 있으면 허가받을 수 없다.</small>
+      <div class="cites"><span class="cite">§ 집단에너지사업법 제9조제1항·제10조</span></div>
+    </div><div class="card k-rule" id="N40_11_P04" data-gate="N40" data-lane="L9" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N40_11_P04</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 기후에너지환경부장관</div>
+      <p>허가 기준 심사</p>
+      <small>공공의 이익 기여, 공급용량의 수요 적합성, 재원·기술능력, 공급구역 비중복(예외적 중복 허용)의 네 기준으로 심사해 허가한다.</small>
+      <div class="cites"><span class="cite">§ 집단에너지사업법 제9조제2항</span></div>
+    </div><div class="card k-rule" id="N40_11_P05" data-gate="N40" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N40_11_P05</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>공사계획 승인·신고</p>
+      <small>환경부령으로 정하는 설치·변경공사는 장관이 정하는 기간 내에 공사계획 승인을 받는다. 승인 기준은 허가 내용 부합과 기술기준 적합이다. 경미한 공사·재해복구공사·긴급공사는 신고한다.</small>
+      <div class="cites"><span class="cite">§ 집단에너지사업법 제22조제1항·제2항·제3항</span></div>
+    </div><div class="card k-rule" id="N40_11_P06" data-gate="N40" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N40_11_P06</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>공급시설 설치·사업 개시</p>
+      <small>장관이 정하는 기간 내에 공급시설을 설치하고 사업을 개시한다. 정당한 사유가 있으면 기간 연장을 신청할 수 있다.</small>
+      <div class="cites"><span class="cite">§ 집단에너지사업법 제11조제1항·제2항</span></div>
+    </div><div class="card k-rule" id="N40_11_P07" data-gate="N40" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N40_11_P07</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>변경허가</p>
+      <small>허가받은 사항 중 환경부령으로 정하는 사항을 변경하려면 변경허가를 받는다.</small>
+      <div class="cites"><span class="cite">§ 집단에너지사업법 제9조제1항 후단</span></div>
+    </div><div class="card k-rule" id="N40_11_P08" data-gate="N40" data-lane="L9" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N40_11_P08</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 기후에너지환경부장관</div>
+      <p>허가취소·사업정지·과징금</p>
+      <small>부정한 방법의 허가, 결격사유 발생, 기간 내 미설치·미개시, 정당한 사유 없는 공급 거부, 개선명령 불이행 등의 경우 허가를 취소하거나 6개월 이내 사업정지를 명할 수 있다. 정지가 공익을 해칠 …</small>
+      <div class="cites"><span class="cite">§ 집단에너지사업법 제15조제1항·제3항</span></div>
+    </div><div class="card k-rule" id="N12_2_P08" data-gate="N12" data-lane="L3" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N12_2_P08</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 환경·관계기관</div>
+      <p>환경영향평가 협의</p>
+      <small>환경영향평가 협의</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제27조(환경영향평가서의 작성 및 협의 요청 등)</span><span class="cite">§ 환경영향평가법 제28조(환경영향평가서의 검토 등)</span></div>
+    </div><div class="card k-rule" id="N12_2_P09" data-gate="N12" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N12_2_P09</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>보완</p>
+      <small>보완</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제32조(재협의)</span></div>
+    </div><div class="card k-rule" id="N12_1_P01" data-gate="N12" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N12_1_P01</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>환경영향평가 대상사업 판정</p>
+      <small>도시개발·산업단지 조성·에너지 개발·도로·철도 등 대상사업에 해당하는지 판정한다. 구체적 종류·범위는 대통령령이 정한다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제22조제1항·제2항</span></div>
+    </div><div class="card k-rule" id="N12_1_P02" data-gate="N12" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N12_1_P02</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>평가준비서 작성·평가항목등 결정 요청</p>
+      <small>평가 실시 전에 평가준비서를 작성한다. 승인등을 받아야 하는 사업자는 승인기관의 장에게 환경영향평가항목등을 정하여 줄 것을 요청한다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제24조제1항·제2항</span></div>
+    </div><div class="card k-rule" id="N12_1_P03" data-gate="N12" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N12_1_P03</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 승인기관의 장</div>
+      <p>환경영향평가항목등 결정·공개</p>
+      <small>요청을 받으면 대통령령으로 정하는 기간 내에 환경영향평가협의회 심의를 거쳐 평가항목등을 결정해 사업자에게 통보하고, 공개하여 주민 등의 의견을 듣는다. 전략환경영향평가에서 이미 결정·협의된 경우 절…</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제24조제4항·제6항·제7항</span></div>
+    </div><div class="card k-rule" id="N12_1_P04" data-gate="N12" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N12_1_P04</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>평가서 초안 작성·주민 의견수렴</p>
+      <small>결정된 평가항목등에 따라 평가서 초안을 작성해 주민 등의 의견을 수렴한다. 공고·공람은 사업지역 관할 시장·군수·구청장이 한다. 다른 법령으로 20일 이상 준하여 수렴한 경우 의제되고, 전략환경영향…</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제25조제1항·제2항·제3항·제5항</span></div>
+    </div><div class="card k-rule" id="N12_1_P05" data-gate="N12" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N12_1_P05</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>의견수렴 결과·반영 여부 공개</p>
+      <small>주민 등의 의견 수렴 결과와 반영 여부를 대통령령으로 정하는 방법에 따라 공개한다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제25조제4항</span></div>
+    </div><div class="card k-rule" id="N12_1_P06" data-gate="N12" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N12_1_P06</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>환경영향평가서 작성·제출</p>
+      <small>승인등을 받아야 하는 사업자는 평가서를 작성해 승인기관의 장에게 제출한다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제27조제2항</span></div>
+    </div><div class="card k-rule" id="N12_1_P07" data-gate="N12" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N12_1_P07</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 승인기관의 장</div>
+      <p>협의 요청</p>
+      <small>대상사업에 대한 승인등을 하거나 사업을 확정하기 전에 기후에너지환경부장관에게 협의를 요청한다. 평가서에 대한 의견을 첨부할 수 있다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제27조제1항</span></div>
+    </div><div class="card k-rule" id="N12_1_P08" data-gate="N12" data-lane="L9" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N12_1_P08</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 기후에너지환경부장관</div>
+      <p>평가서 검토·보완 요청</p>
+      <small>의견수렴 절차 이행 여부와 평가서 내용을 검토한다. 한국환경연구원의 의견을 들어야 하며, 보완·조정 요청은 두 차례만 할 수 있고, 거짓 작성 등의 경우 반려할 수 있다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제28조제1항·제2항·제3항·제4항</span></div>
+    </div><div class="card k-rule" id="N12_1_P09" data-gate="N12" data-lane="L9" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N12_1_P09</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 기후에너지환경부장관</div>
+      <p>협의 내용 통보</p>
+      <small>협의를 요청받은 날부터 대통령령으로 정하는 기간 이내에 협의 내용을 통보한다. 연장 시 협의기간 만료 전에 사유·기간을 통보한다. 승인기관의 장은 지체 없이 사업자에게 통보한다. 경미한 보완 사항은…</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제29조제1항·제2항·제3항·제4항</span></div>
+    </div><div class="card k-rule" id="N12_1_P10" data-gate="N12" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N12_1_P10</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 승인기관의 장</div>
+      <p>협의 내용 반영·확인</p>
+      <small>협의 내용을 사업계획에 반영하고, 승인등을 하려면 반영 여부를 확인한다. 반영 결과를 기후에너지환경부장관에게 통보하고, 미반영 시 반영 요청에 특별한 사유가 없으면 따라야 한다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제30조제1항·제2항·제3항·제4항</span></div>
+    </div><div class="card k-rule" id="N12_1_P11" data-gate="N12" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N12_1_P11</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>협의 내용 이행·관리대장 비치</p>
+      <small>사업 시행 시 반영된 협의 내용을 이행하고, 관리대장에 이행 상황을 기록해 공사현장에 갖추어 두며, 관리책임자를 지정해 통보한다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제35조제1항·제2항·제3항</span></div>
+    </div><div class="card k-rule" id="N12_1_P12" data-gate="N12" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N12_1_P12</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>사후환경영향조사</p>
+      <small>착공 후 주변 환경에 미치는 영향을 조사해 통보하고, 피해 방지 조치가 필요하면 지체 없이 통보하고 조치한다.</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제36조제1항·제2항</span></div>
+    </div><div class="card k-rule" id="N14_12_D01" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_12_D01</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 토지소유자·개발사업자</div>
+      <p>개발행위 대상 여부 확인</p>
+      <small>대상 확인</small>
+      <div class="cites"><span class="cite">§ 국토의 계획 및 이용에 관한 법률 제56조(개발행위의 허가)</span></div>
+    </div><div class="card k-rule" id="N14_12_D02" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_12_D02</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 신청인</div>
+      <p>개발행위허가 신청</p>
+      <small>신청</small>
+      <div class="cites"><span class="cite">§ 국토의 계획 및 이용에 관한 법률 제57조(개발행위허가의 절차)</span><span class="cite">§ 국토의 계획 및 이용에 관한 법률 시행규칙 제9조(개발행위허가신청서)</span></div>
+    </div><div class="card k-rule" id="N14_12_D03" data-gate="N14" data-lane="L8" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_12_D03</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 시장·군수·구청장</div>
+      <p>신청서 접수·형식 검토</p>
+      <small>접수·형식검토</small>
+      <div class="cites"><span class="cite">§ 국토의 계획 및 이용에 관한 법률 제57조(개발행위허가의 절차)</span></div>
+    </div><div class="card k-rule" id="N14_12_D03B" data-gate="N14" data-lane="L8" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_12_D03B</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 시장·군수·구청장</div>
+      <p>개발행위복합민원 일괄협의회 개최</p>
+      <small>일괄협의회 개최</small>
+      <div class="cites"><span class="cite">§ 국토의 계획 및 이용에 관한 법률 제61조의2(개발행위복합민원 일괄협의회)</span><span class="cite">§ 국토의 계획 및 이용에 관한 법률 시행령 제59조의2제1항(개발행위복합민원 일괄협의회)</span></div>
+    </div><div class="card k-rule" id="N14_12_D04" data-gate="N14" data-lane="L8" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_12_D04</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 시장·군수·구청장</div>
+      <p>인허가의제 관계기관 협의 요청</p>
+      <small>협의 요청</small>
+      <div class="cites"><span class="cite">§ 국토의 계획 및 이용에 관한 법률 제61조(관련 인·허가등의 의제)</span></div>
+    </div><div class="card k-rule" id="N14_12_D05" data-gate="N14" data-lane="L3" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_12_D05</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 관계 행정기관</div>
+      <p>관계기관 의제 협의·회신</p>
+      <small>협의 회신</small>
+      <div class="cites"><span class="cite">§ 국토의 계획 및 이용에 관한 법률 제61조제4항(관련 인·허가등의 의제)</span></div>
+    </div><div class="card k-rule" id="N14_12_D06" data-gate="N14" data-lane="L8" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_12_D06</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 시장·군수·구청장</div>
+      <p>허가기준 검토(입지·경관·기반시설·재해)</p>
+      <small>허가기준 검토</small>
+      <div class="cites"><span class="cite">§ 국토의 계획 및 이용에 관한 법률 제58조(개발행위허가의 기준)</span><span class="cite">§ 국토의 계획 및 이용에 관한 법률 시행령 제55조(개발행위허가의 규모)</span><span class="cite">§ 국토의 계획 및 이용에 관한 법률 시행령 제56조(개발행위허가의 기준)</span></div>
+    </div><div class="card k-rule" id="N14_12_D07" data-gate="N14" data-lane="L8" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_12_D07</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 시장·군수·구청장</div>
+      <p>도시계획위원회 심의 대상 여부</p>
+      <small>심의대상 판정</small>
+      <div class="cites"><span class="cite">§ 국토의 계획 및 이용에 관한 법률 제59조(개발행위에 대한 도시계획위원회의 심의)</span><span class="cite">§ 국토의 계획 및 이용에 관한 법률 시행령 제57조(개발행위에 대한 도시계획위원회의 심의 등)</span></div>
+    </div><div class="card k-rule" id="N14_12_D08" data-gate="N14" data-lane="L24" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_12_D08</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 지방도시계획위원회</div>
+      <p>지방도시계획위원회 심의</p>
+      <small>심의</small>
+      <div class="cites"><span class="cite">§ 국토의 계획 및 이용에 관한 법률 제59조(개발행위에 대한 도시계획위원회의 심의)</span></div>
+    </div><div class="card k-rule" id="N14_12_D09" data-gate="N14" data-lane="L8" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_12_D09</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 시장·군수·구청장</div>
+      <p>보완 요구</p>
+      <small>보완 요구</small>
+      <div class="cites"><span class="cite">§ 국토의 계획 및 이용에 관한 법률 제57조(개발행위허가의 절차)</span></div>
+    </div><div class="card k-rule" id="N14_12_D10" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_12_D10</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 신청인</div>
+      <p>보완서 제출</p>
+      <small>보완 제출</small>
+      <div class="cites"><span class="cite">§ 국토의 계획 및 이용에 관한 법률 제57조(개발행위허가의 절차)</span></div>
+    </div><div class="card k-rule" id="N14_12_D11" data-gate="N14" data-lane="L8" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_12_D11</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 시장·군수·구청장</div>
+      <p>허가·조건 부과 (조건부 시 신청인 의견청취)</p>
+      <small>허가·조건 부과</small>
+      <div class="cites"><span class="cite">§ 국토의 계획 및 이용에 관한 법률 제57조제2항(개발행위허가의 절차)</span><span class="cite">§ 국토의 계획 및 이용에 관한 법률 시행령 제54조제1항(개발행위허가의 절차 등)</span><span class="cite">§ 국토의 계획 및 이용에 관한 법률 제57조제4항(개발행위허가의 절차)</span><span class="cite">§ 국토의 계획 및 이용에 관한 법률 시행령 제54조제2항(개발행위허가의 절차 등)</span><span class="cite">§ 국토의 계획 및 이용에 관한 법률 제58조(개발행위허가의 기준)</span></div>
+    </div><div class="card k-rule" id="N14_12_D12" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_12_D12</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 신청인</div>
+      <p>이행보증금 예치</p>
+      <small>이행보증금 예치</small>
+      <div class="cites"><span class="cite">§ 국토의 계획 및 이용에 관한 법률 제60조(개발행위허가의 이행 보증 등)</span><span class="cite">§ 국토의 계획 및 이용에 관한 법률 시행령 제59조(개발행위허가의 이행담보 등)</span></div>
+    </div><div class="card k-rule" id="N14_12_D13" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_12_D13</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 신청인</div>
+      <p>공사 시행</p>
+      <small>공사 시행</small>
+      <div class="cites"><span class="cite">§ 국토의 계획 및 이용에 관한 법률 제56조(개발행위의 허가)</span></div>
+    </div><div class="card k-rule" id="N14_12_D14" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_12_D14</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 신청인</div>
+      <p>준공검사 신청</p>
+      <small>준공검사 신청</small>
+      <div class="cites"><span class="cite">§ 국토의 계획 및 이용에 관한 법률 제62조(준공검사)</span></div>
+    </div><div class="card k-rule" id="N14_12_D15" data-gate="N14" data-lane="L8" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_12_D15</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 시장·군수·구청장</div>
+      <p>준공검사·준공검사필증 교부</p>
+      <small>준공검사</small>
+      <div class="cites"><span class="cite">§ 국토의 계획 및 이용에 관한 법률 제62조(준공검사)</span></div>
+    </div><div class="card k-rule" id="N14_12_D16" data-gate="N14" data-lane="L3" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_12_D16</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 공공시설 관리청</div>
+      <p>공공시설 귀속 처리</p>
+      <small>귀속 처리</small>
+      <div class="cites"><span class="cite">§ 국토의 계획 및 이용에 관한 법률 제65조(개발행위에 따른 공공시설 등의 귀속)</span></div>
+    </div><div class="card k-rule" id="N14_12_D17" data-gate="N14" data-lane="L6" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_12_D17</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 지자체 인허가시스템·토지이음</div>
+      <p>인허가시스템 기록·공개</p>
+      <small>기록·공개</small>
+      <div class="cites"><span class="cite">§ 국토의 계획 및 이용에 관한 법률 제57조(개발행위허가의 절차)</span></div>
+    </div><div class="card k-rule" id="N14_13_P01" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_13_P01</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 신청인(당사자)</div>
+      <p>주된 인허가 신청·관련 인허가 서류 병합 제출</p>
+      <small>주된 인허가를 신청하면서 관련 인허가에 필요한 서류를 함께 제출(불가피 시 행정청이 정하는 별도 기한까지)</small>
+      <div class="cites"><span class="cite">§ 행정기본법 제24조(인허가의제의 기준)</span></div>
+    </div><div class="card k-rule" id="N14_13_P02" data-gate="N14" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_13_P02</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 주된 인허가 행정청</div>
+      <p>관련 인허가 사전 협의 요청</p>
+      <small>주된 인허가를 하기 전에 관련 인허가에 관하여 관련 인허가 행정청에 미리 협의 요청</small>
+      <div class="cites"><span class="cite">§ 행정기본법 제24조(인허가의제의 기준)</span></div>
+    </div><div class="card k-rule" id="N14_13_P03" data-gate="N14" data-lane="L3" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_13_P03</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 관련 인허가 행정청</div>
+      <p>관련 인허가 행정청 의견 제출(20일)</p>
+      <small>협의 요청받은 날부터 20일 이내 의견 제출, 기간 내 미제출 시 협의가 된 것으로 간주</small>
+      <div class="cites"><span class="cite">§ 행정기본법 제24조(인허가의제의 기준)</span></div>
+    </div><div class="card k-rule" id="N14_13_P04" data-gate="N14" data-lane="L3" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_13_P04</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 관련 인허가 행정청</div>
+      <p>명시 규정 있는 심의·의견청취 절차</p>
+      <small>관련 인허가에 필요한 심의·의견청취 등 절차는 법률에 인허가의제 시에도 거친다는 명시 규정이 있는 경우에만 진행(분기)</small>
+      <div class="cites"><span class="cite">§ 행정기본법 제24조(인허가의제의 기준)</span></div>
+    </div><div class="card k-rule" id="N14_13_P05" data-gate="N14" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_13_P05</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 주된 인허가 행정청</div>
+      <p>주된 인허가 처분·관련 인허가 의제</p>
+      <small>협의된 사항에 대해 주된 인허가 처분, 협의된 관련 인허가를 받은 것으로 의제(효과는 해당 법률에 규정된 관련 인허가에 한정)</small>
+      <div class="cites"><span class="cite">§ 행정기본법 제25조(인허가의제의 효과)</span></div>
+    </div><div class="card k-rule" id="N14_13_P06" data-gate="N14" data-lane="L3" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_13_P06</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 관련 인허가 행정청</div>
+      <p>관련 인허가 행정청 사후관리</p>
+      <small>의제된 관련 인허가를 직접 한 것으로 보아 관계 법령에 따른 관리·감독 등 필요한 조치</small>
+      <div class="cites"><span class="cite">§ 행정기본법 제26조(인허가의제의 사후관리 등)</span></div>
+    </div><div class="card k-rule" id="N14_13_P07" data-gate="N14" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_13_P07</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 주된 인허가 행정청</div>
+      <p>주된 인허가 변경 시 준용(loop)</p>
+      <small>주된 인허가를 변경하는 경우 제24조·제25조 및 사후관리 규정을 준용하여 재협의·재의제(변경 loop)</small>
+      <div class="cites"><span class="cite">§ 행정기본법 제26조(인허가의제의 사후관리 등)</span></div>
+    </div><div class="card k-rule" id="N14_13_P08" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_13_P08</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 신청인</div>
+      <p>주된 인허가·의제 결과 확인</p>
+      <small>주된 인허가 처분과 함께 의제된 관련 인허가의 범위와 조건을 확인한다.</small>
+      <div class="cites"><span class="cite">§ 행정기본법 제25조(인허가의제의 효과)</span></div>
+    </div><div class="card k-rule" id="N14_2_P01" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_2_P01</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 제안자(지자체·민간)</div>
+      <p>지정 요청·입지 조사</p>
+      <small>지정 요청·입지 조사</small>
+      <div class="cites"><span class="cite">§ 산업입지 및 개발에 관한 법률 시행령 제13조(민간기업등의 산업단지지정요청등)</span><span class="cite">§ 산업입지 및 개발에 관한 법률 제6조(국가산업단지의 지정)</span></div>
+    </div><div class="card k-rule" id="N14_2_P02" data-gate="N14" data-lane="L3" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_2_P02</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 환경·관계기관</div>
+      <p>지정 협의</p>
+      <small>지정 협의</small>
+      <div class="cites"><span class="cite">§ 산업입지 및 개발에 관한 법률 시행령 제8조의2(산업단지의 지정에 관한 협의)</span></div>
+    </div><div class="card k-rule" id="N14_2_P03" data-gate="N14" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_2_P03</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 지정권자</div>
+      <p>산업단지 지정</p>
+      <small>산업단지 지정</small>
+      <div class="cites"><span class="cite">§ 산업입지 및 개발에 관한 법률 제6조(국가산업단지의 지정)</span><span class="cite">§ 산업입지 및 개발에 관한 법률 제7조(일반산업단지의 지정)</span></div>
+    </div><div class="card k-rule" id="N14_2_P04" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_2_P04</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 토지소유자·주민</div>
+      <p>지정·개발계획 고시 열람</p>
+      <small>지정·개발계획 고시 열람</small>
+      <div class="cites"><span class="cite">§ 산업입지 및 개발에 관한 법률 제7조의4(산업단지 지정의 고시 등)</span><span class="cite">§ 산업입지 및 개발에 관한 법률 시행령 제9조(산업단지지정 또는 개발계획의 고시등)</span></div>
+    </div><div class="card k-rule" id="N14_2_P05" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_2_P05</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>개발계획 수립</p>
+      <small>개발계획 수립</small>
+      <div class="cites"><span class="cite">§ 산업입지 및 개발에 관한 법률 시행령 제7조(산업단지개발계획 등)</span><span class="cite">§ 산업입지 및 개발에 관한 법률 제16조(산업단지개발사업의 시행자)</span></div>
+    </div><div class="card k-rule" id="N14_2_P06" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_2_P06</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 토지소유자·주민</div>
+      <p>환경영향평가서 초안·주민 의견</p>
+      <small>환경영향평가서 초안·주민 의견</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제25조(주민 등의 의견 수렴)</span></div>
+    </div><div class="card k-rule" id="N14_2_P07" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_2_P07</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 토지소유자·주민</div>
+      <p>주민 의견 재수렴 신청</p>
+      <small>주민 의견 재수렴 신청</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제26조(주민 등의 의견 재수렴)</span></div>
+    </div><div class="card k-rule" id="N14_2_P08" data-gate="N14" data-lane="L3" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_2_P08</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 환경·관계기관</div>
+      <p>환경영향평가 협의</p>
+      <small>환경영향평가 협의</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제27조(환경영향평가서의 작성 및 협의 요청 등)</span><span class="cite">§ 환경영향평가법 제28조(환경영향평가서의 검토 등)</span></div>
+    </div><div class="card k-rule" id="N14_2_P09" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_2_P09</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>보완</p>
+      <small>보완</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제32조(재협의)</span></div>
+    </div><div class="card k-rule" id="N14_2_P10" data-gate="N14" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_2_P10</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 지정권자</div>
+      <p>실시계획 승인·고시</p>
+      <small>실시계획 승인·고시</small>
+      <div class="cites"><span class="cite">§ 산업입지 및 개발에 관한 법률 제17조(국가산업단지개발실시계획의 승인)</span><span class="cite">§ 산업입지 및 개발에 관한 법률 제18조(일반산업단지개발실시계획의 승인)</span></div>
+    </div><div class="card k-rule" id="N14_2_P11" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_2_P11</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 토지소유자·주민</div>
+      <p>토지 수용·보상 협의</p>
+      <small>토지 수용·보상 협의</small>
+      <div class="cites"><span class="cite">§ 산업입지 및 개발에 관한 법률 제22조(토지수용)</span></div>
+    </div><div class="card k-rule" id="N14_2_P12" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_2_P12</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 토지소유자·주민</div>
+      <p>환지·동의</p>
+      <small>환지·동의</small>
+      <div class="cites"><span class="cite">§ 산업입지 및 개발에 관한 법률 제24조(토지소유자에 대한 환지)</span><span class="cite">§ 산업입지 및 개발에 관한 법률 제39조의8(토지소유자 등의 동의)</span></div>
+    </div><div class="card k-rule" id="N14_2_P13" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_2_P13</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>사전공사 금지 준수</p>
+      <small>사전공사 금지 준수</small>
+      <div class="cites"><span class="cite">§ 환경영향평가법 제34조(사전공사의 금지 등)</span></div>
+    </div><div class="card k-rule" id="N14_2_P14" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_2_P14</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>공사 시행</p>
+      <small>공사 시행</small>
+      <div class="cites"><span class="cite">§ 산업입지 및 개발에 관한 법률 제16조(산업단지개발사업의 시행자)</span></div>
+    </div><div class="card k-rule" id="N14_2_P15" data-gate="N14" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_2_P15</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 지정권자</div>
+      <p>준공인가</p>
+      <small>준공인가</small>
+      <div class="cites"><span class="cite">§ 산업입지 및 개발에 관한 법률 제37조(개발사업의 준공인가)</span><span class="cite">§ 산업입지 및 개발에 관한 법률 시행령 제36조(준공인가)</span></div>
+    </div><div class="card k-rule" id="N14_2_P16" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_2_P16</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>분양·처분</p>
+      <small>분양·처분</small>
+      <div class="cites"><span class="cite">§ 산업입지 및 개발에 관한 법률 제38조(개발한 토지ㆍ시설 등의 처분)</span></div>
+    </div><div class="card k-rule" id="N14_2_P17" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_2_P17</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 입주기업</div>
+      <p>입주·지원 신청</p>
+      <small>입주·지원 신청</small>
+      <div class="cites"><span class="cite">§ 산업입지 및 개발에 관한 법률 제39조의14(입주기업 지원대책)</span></div>
+    </div><div class="card k-rule" id="N14_2_P18" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_2_P18</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 입주기업</div>
+      <p>입주 지원 결과 수령</p>
+      <small>입주 지원 결과 수령</small>
+      <div class="cites"><span class="cite">§ 산업입지 및 개발에 관한 법률 제39조의14(입주기업 지원대책)</span></div>
+    </div><div class="card k-rule" id="N14_2_P19" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_2_P19</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 토지소유자·주민</div>
+      <p>지정 공고·주민 의견청취</p>
+      <small>지정 공고에 대한 주민·관계전문가 의견 제출</small>
+      <div class="cites"><span class="cite">§ 산업입지 및 개발에 관한 법률 제10조(주민 등의 의견청취)</span></div>
+    </div><div class="card k-rule" id="N14_14_P01" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_14_P01</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 전용하려는 자</div>
+      <p>전용 경로 판정(허가/협의/신고)</p>
+      <small>농지 전용은 농림축산식품부장관의 허가가 원칙이다. 도시지역·계획관리지역에서 협의를 거친 농지, 신고 대상 시설(농업인 주택·농축산업용 시설 등)은 예외 경로를 탄다.</small>
+      <div class="cites"><span class="cite">§ 농지법 제34조제1항</span></div>
+    </div><div class="card k-rule" id="N14_14_P02" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_14_P02</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 전용하려는 자</div>
+      <p>농지전용허가 신청</p>
+      <small>대통령령으로 정하는 바에 따라 허가(다른 법률에 따라 의제되는 협의 포함)를 신청한다.</small>
+      <div class="cites"><span class="cite">§ 농지법 제34조제1항</span></div>
+    </div><div class="card k-rule" id="N14_14_P03" data-gate="N14" data-lane="L3" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_14_P03</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 주무부장관·지방자치단체의 장</div>
+      <p>농지전용협의(지역·시설 지정 시)</p>
+      <small>도시지역에 주거·상업·공업지역을 지정하거나 도시·군계획시설을 결정할 때, 계획관리지역에 지구단위계획구역을 지정할 때 예정지에 농지가 포함되면 농림축산식품부장관과 미리 협의한다. 산업단지 지정 등 의…</small>
+      <div class="cites"><span class="cite">§ 농지법 제34조제2항</span></div>
+    </div><div class="card k-rule" id="N14_14_P04" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_14_P04</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 전용하려는 자</div>
+      <p>농지전용신고(소규모 시설)</p>
+      <small>농업인 주택, 농축산업용 시설, 공동생활 편의시설, 어업용 시설 부지로 전용하려면 시장·군수·자치구구청장에게 신고하고, 적합하면 수리해야 한다.</small>
+      <div class="cites"><span class="cite">§ 농지법 제35조제1항·제2항</span></div>
+    </div><div class="card k-rule" id="N14_14_P05" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_14_P05</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 전용하려는 자</div>
+      <p>농지보전부담금 납부</p>
+      <small>허가·협의·신고 경로 모두 농지보전부담금을 허가·신고 전까지 납부해야 한다. 공공기관의 산업단지 시설용지 전용 등은 분할납부가 가능하며 납입보증보험증서 예치가 필요하다. 국가·지자체의 공용 목적 전…</small>
+      <div class="cites"><span class="cite">§ 농지법 제38조제1항·제2항·제4항·제6항</span></div>
+    </div><div class="card k-rule" id="N14_14_P06" data-gate="N14" data-lane="L17" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_14_P06</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 농림축산식품부장관</div>
+      <p>허가·전용 실행</p>
+      <small>부담금 납부를 확인하고 허가한다. 부담금을 낸 뒤 허가를 받지 못하면 환급된다.</small>
+      <div class="cites"><span class="cite">§ 농지법 제38조제5항</span></div>
+    </div><div class="card k-rule" id="N14_14_P07" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_14_P07</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 전용한 자</div>
+      <p>용도변경 승인</p>
+      <small>전용 목적사업에 사용된 토지를 대통령령으로 정하는 기간 이내에 다른 목적으로 사용하려면 시장·군수·자치구구청장의 승인을 받아야 한다. 부담금 감면 비율이 다른 시설로 바꾸면 차액 부담금을 낸다.</small>
+      <div class="cites"><span class="cite">§ 농지법 제40조제1항·제2항</span></div>
+    </div><div class="card k-rule" id="N14_14_P08" data-gate="N14" data-lane="L17" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_14_P08</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 농림축산식품부장관·시장 등</div>
+      <p>허가취소·조치명령</p>
+      <small>부정한 방법의 허가, 허가 목적·조건 위반, 2년 이상 미착수·1년 이상 중단, 부담금 미납 등의 경우 허가취소·공사중지·사업계획 변경 등을 명할 수 있다. 조치명령 위반은 필요적 취소다. 협의 전…</small>
+      <div class="cites"><span class="cite">§ 농지법 제39조제1항·제2항</span></div>
+    </div><div class="card k-rule" id="N14_15_P01" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_15_P01</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>산지·제한지역 확인</p>
+      <small>산지·제한지역 확인</small>
+      <div class="cites"><span class="cite">§ 산지관리법 제3조(산지관리의 기본원칙)</span><span class="cite">§ 산지관리법 제9조(산지전용ㆍ일시사용제한지역의 지정)</span><span class="cite">§ 산지관리법 제10조(산지전용ㆍ일시사용제한지역에서의 행위제한)</span></div>
+    </div><div class="card k-rule" id="N14_15_P02" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_15_P02</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>허가·신고·일시사용 경로</p>
+      <small>허가·신고·일시사용 경로</small>
+      <div class="cites"><span class="cite">§ 산지관리법 제14조(산지전용허가)</span><span class="cite">§ 산지관리법 제15조(산지전용신고)</span><span class="cite">§ 산지관리법 제15조의2(산지일시사용허가ㆍ신고)</span></div>
+    </div><div class="card k-rule" id="N14_15_P03" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_15_P03</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>산지전용허가 등 신청</p>
+      <small>산지전용허가 등 신청</small>
+      <div class="cites"><span class="cite">§ 산지관리법 제14조(산지전용허가)</span><span class="cite">§ 산지관리법 제15조(산지전용신고)</span><span class="cite">§ 산지관리법 제15조의2(산지일시사용허가ㆍ신고)</span></div>
+    </div><div class="card k-rule" id="N14_15_P04" data-gate="N14" data-lane="L18" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_15_P04</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 산림청·지자체</div>
+      <p>허가기준·기간 심사</p>
+      <small>허가기준·기간 심사</small>
+      <div class="cites"><span class="cite">§ 산지관리법 제17조(산지전용허가 등의 기간)</span><span class="cite">§ 산지관리법 제18조(산지전용허가기준 등)</span></div>
+    </div><div class="card k-rule" id="N14_15_P05" data-gate="N14" data-lane="L11" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_15_P05</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 타당성조사</div>
+      <p>산지전용타당성조사</p>
+      <small>산지전용타당성조사</small>
+      <div class="cites"><span class="cite">§ 산지관리법 제18조의2(산지전용타당성조사 등)</span><span class="cite">§ 산지관리법 제18조의3(산지전용타당성조사 결과 등의 공개)</span></div>
+    </div><div class="card k-rule" id="N14_15_P06" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_15_P06</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 산주·주민</div>
+      <p>산주·주민 의견(해당 시)</p>
+      <small>산주·주민 의견(해당 시)</small>
+      <div class="cites"><span class="cite">§ 산지관리법 제18조의2(산지전용타당성조사 등)</span></div>
+    </div><div class="card k-rule" id="N14_15_P07" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_15_P07</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>보완·재신청</p>
+      <small>보완·재신청</small>
+      <div class="cites"><span class="cite">§ 산지관리법 제18조의4(산지전용허가기준 등의 충족 여부 확인)</span></div>
+    </div><div class="card k-rule" id="N14_15_P08" data-gate="N14" data-lane="L18" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_15_P08</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 산림청·지자체</div>
+      <p>허가·신고 수리 처분</p>
+      <small>허가·신고 수리 처분</small>
+      <div class="cites"><span class="cite">§ 산지관리법 제14조(산지전용허가)</span><span class="cite">§ 산지관리법 제16조(산지전용허가 등의 효력)</span></div>
+    </div><div class="card k-rule" id="N14_15_P09" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_15_P09</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>허가 결과 수령</p>
+      <small>허가 결과 수령</small>
+      <div class="cites"><span class="cite">§ 산지관리법 제16조(산지전용허가 등의 효력)</span></div>
+    </div><div class="card k-rule" id="N14_15_P10" data-gate="N14" data-lane="L7" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_15_P10</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 조성비·복구</div>
+      <p>대체산림자원조성비 납부</p>
+      <small>대체산림자원조성비 납부</small>
+      <div class="cites"><span class="cite">§ 산지관리법 제19조(대체산림자원조성비)</span></div>
+    </div><div class="card k-rule" id="N14_16_P01" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_16_P01</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>점용·사용 필요성 검토</p>
+      <small>점용·사용 필요성 검토</small>
+      <div class="cites"><span class="cite">§ 공유수면 관리 및 매립에 관한 법률 제2조(정의)</span><span class="cite">§ 공유수면 관리 및 매립에 관한 법률 제5조(금지행위)</span></div>
+    </div><div class="card k-rule" id="N14_16_P02" data-gate="N14" data-lane="L13" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_16_P02</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 해양수산부·관리청</div>
+      <p>관리청·금지행위 확인</p>
+      <small>관리청·금지행위 확인</small>
+      <div class="cites"><span class="cite">§ 공유수면 관리 및 매립에 관한 법률 제4조(공유수면의 관리)</span></div>
+    </div><div class="card k-rule" id="N14_16_P03" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_16_P03</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>허가 vs 협의·승인 경로</p>
+      <small>허가 vs 협의·승인 경로</small>
+      <div class="cites"><span class="cite">§ 공유수면 관리 및 매립에 관한 법률 제8조(공유수면의 점용ㆍ사용허가)</span><span class="cite">§ 공유수면 관리 및 매립에 관한 법률 제10조(공유수면의 점용ㆍ사용 협의 또는 승인)</span></div>
+    </div><div class="card k-rule" id="N14_16_P04" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_16_P04</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>점용·사용허가 또는 매립 신청</p>
+      <small>점용·사용허가 또는 매립 신청</small>
+      <div class="cites"><span class="cite">§ 공유수면 관리 및 매립에 관한 법률 제8조(공유수면의 점용ㆍ사용허가)</span><span class="cite">§ 공유수면 관리 및 매립에 관한 법률 제28조(매립면허)</span></div>
+    </div><div class="card k-rule" id="N14_16_P05" data-gate="N14" data-lane="L13" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_16_P05</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 해양수산부·관리청</div>
+      <p>기간·기준 심사</p>
+      <small>기간·기준 심사</small>
+      <div class="cites"><span class="cite">§ 공유수면 관리 및 매립에 관한 법률 제11조(점용ㆍ사용허가의 기간 등)</span><span class="cite">§ 공유수면 관리 및 매립에 관한 법률 제12조(점용ㆍ사용허가 등의 기준)</span></div>
+    </div><div class="card k-rule" id="N14_16_P06" data-gate="N14" data-lane="L3" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_16_P06</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 관계기관</div>
+      <p>관계기관 협의</p>
+      <small>관계기관 협의</small>
+      <div class="cites"><span class="cite">§ 공유수면 관리 및 매립에 관한 법률 제10조(공유수면의 점용ㆍ사용 협의 또는 승인)</span></div>
+    </div><div class="card k-rule" id="N14_16_P07" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_16_P07</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 어민·권리자</div>
+      <p>권리자·어민 의견·보상 협의</p>
+      <small>권리자·어민 의견·보상 협의</small>
+      <div class="cites"><span class="cite">§ 공유수면 관리 및 매립에 관한 법률 제31조(공유수면매립 관련 권리자의 범위)</span><span class="cite">§ 공유수면 관리 및 매립에 관한 법률 제32조(매립으로 인한 손실방지와 보상 등)</span></div>
+    </div><div class="card k-rule" id="N14_16_P08" data-gate="N14" data-lane="L13" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_16_P08</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 해양수산부·관리청</div>
+      <p>허가 처분</p>
+      <small>허가 처분</small>
+      <div class="cites"><span class="cite">§ 공유수면 관리 및 매립에 관한 법률 제8조(공유수면의 점용ㆍ사용허가)</span></div>
+    </div><div class="card k-rule" id="N14_16_P09" data-gate="N14" data-lane="L13" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_16_P09</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 해양수산부·관리청</div>
+      <p>실시계획 승인</p>
+      <small>실시계획 승인</small>
+      <div class="cites"><span class="cite">§ 공유수면 관리 및 매립에 관한 법률 제17조(점용ㆍ사용 실시계획의 승인 등)</span></div>
+    </div><div class="card k-rule" id="N14_16_P10" data-gate="N14" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N14_16_P10</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업자</div>
+      <p>매립실시계획·의제 협의</p>
+      <small>매립면허(해당 시)</small>
+      <div class="cites"><span class="cite">§ 공유수면 관리 및 매립에 관한 법률 제28조(매립면허)</span><span class="cite">§ 공유수면 관리 및 매립에 관한 법률 제38조(공유수면매립실시계획의 승인)</span></div>
+    </div><div class="card k-rule" id="N37_0_P05" data-gate="N37" data-lane="L3" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N37_0_P05</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 관계 행정기관</div>
+      <p>관계 행정기관 동시협의</p>
+      <small>관계 행정기관 동시협의에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제10조</span></div>
+    </div><div class="card k-rule" id="N37_0_P06" data-gate="N37" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N37_0_P06</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 민간기업·개발사업자</div>
+      <p>1회 보완요구·보완자료 제출</p>
+      <small>1회 보완요구·보완자료 제출에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제10조</span></div>
+    </div><div class="card k-rule" id="N37_0_P07" data-gate="N37" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N37_0_P07</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 산업단지 지정권자</div>
+      <p>통합조정회의 개최</p>
+      <small>통합조정회의 개최에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제11조</span></div>
+    </div><div class="card k-rule" id="N37_0_P08" data-gate="N37" data-lane="L3" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N37_0_P08</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 관계 행정기관</div>
+      <p>국무조정실·중앙 차원 이견조정</p>
+      <small>국무조정실·중앙 차원 이견조정에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제12조</span></div>
+    </div><div class="card k-rule" id="N37_0_P09" data-gate="N37" data-lane="L3" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N37_0_P09</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 관계 행정기관</div>
+      <p>분야별 기술검토서 작성</p>
+      <small>분야별 기술검토서 작성에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제13조</span></div>
+    </div><div class="card k-rule" id="N37_0_P10" data-gate="N37" data-lane="L23" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N37_0_P10</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 산업단지계획심의위원회</div>
+      <p>산업단지계획심의위원회 통합심의</p>
+      <small>산업단지계획심의위원회 통합심의에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조</span></div>
+    </div><div class="card k-rule" id="N37_17_P01" data-gate="N37" data-lane="L8" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N37_17_P01</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 광주특별시 경관부서</div>
+      <p>개발사업·SOC·건축물별 법령·조례 심의대상 판정</p>
+      <small>개발사업·SOC·건축물별 법령·조례 심의대상 판정에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 경관법 제26조~제28조</span></div>
+    </div><div class="card k-rule" id="N37_17_P02" data-gate="N37" data-lane="L8" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N37_17_P02</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 광주특별시 경관부서</div>
+      <p>경관목표·스카이라인·조망·가로·녹지 사전협의</p>
+      <small>경관목표·스카이라인·조망·가로·녹지 사전협의에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 경관법 제26조</span><span class="cite">§ 경관법 제27조</span></div>
+    </div><div class="card k-rule" id="N37_17_P03" data-gate="N37" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N37_17_P03</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 경관·건축 설계자</div>
+      <p>경관계획·배치도·조감도·시뮬레이션 작성</p>
+      <small>경관계획·배치도·조감도·시뮬레이션 작성에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 경관법 제27조</span><span class="cite">§ 경관법 제28조</span></div>
+    </div><div class="card k-rule" id="N37_17_P04" data-gate="N37" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N37_17_P04</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자·건축주</div>
+      <p>개발사업 또는 건축물 경관심의 신청</p>
+      <small>개발사업 또는 건축물 경관심의 신청에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 경관법 제27조</span><span class="cite">§ 경관법 제28조</span></div>
+    </div><div class="card k-rule" id="N37_17_P05" data-gate="N37" data-lane="L20" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N37_17_P05</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 광주특별시 경관위원회</div>
+      <p>경관위원회 심의·조건부 의결·재심의</p>
+      <small>경관위원회 심의·조건부 의결·재심의에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 경관법 제27조</span><span class="cite">§ 경관법 제28조</span></div>
+    </div><div class="card k-rule" id="N37_17_P06" data-gate="N37" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N37_17_P06</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자·건축주</div>
+      <p>산단계획·실시설계·건축허가 도서에 조건 반영</p>
+      <small>산단계획·실시설계·건축허가 도서에 조건 반영에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 경관법 제26조~제28조</span></div>
+    </div><div class="card k-rule" id="N10_2_P03" data-gate="N10" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N10_2_P03</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 지정권자</div>
+      <p>산업단지 지정</p>
+      <small>산업단지 지정</small>
+      <div class="cites"><span class="cite">§ 산업입지 및 개발에 관한 법률 제6조(국가산업단지의 지정)</span><span class="cite">§ 산업입지 및 개발에 관한 법률 제7조(일반산업단지의 지정)</span></div>
+    </div><div class="card k-rule" id="N10_2_P04" data-gate="N10" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N10_2_P04</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 토지소유자·주민</div>
+      <p>지정·개발계획 고시 열람</p>
+      <small>지정·개발계획 고시 열람</small>
+      <div class="cites"><span class="cite">§ 산업입지 및 개발에 관한 법률 제7조의4(산업단지 지정의 고시 등)</span><span class="cite">§ 산업입지 및 개발에 관한 법률 시행령 제9조(산업단지지정 또는 개발계획의 고시등)</span></div>
+    </div><div class="card k-rule" id="N10_0_P11" data-gate="N10" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N10_0_P11</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 산업단지 지정권자</div>
+      <p>산업단지계획 승인·고시</p>
+      <small>산업단지계획 승인·고시에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제15조</span></div>
+    </div><div class="card k-rule" id="N10_0_P12" data-gate="N10" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N10_0_P12</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 산업단지 지정권자</div>
+      <p>6개월 처리기한·평가협의 일정 관리</p>
+      <small>6개월 처리기한·평가협의 일정 관리에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제16조·제23조</span></div>
+    </div><div class="card k-rule" id="N15_2_P10" data-gate="N15" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N15_2_P10</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 지정권자</div>
+      <p>실시계획 승인·고시</p>
+      <small>실시계획 승인·고시</small>
+      <div class="cites"><span class="cite">§ 산업입지 및 개발에 관한 법률 제17조(국가산업단지개발실시계획의 승인)</span><span class="cite">§ 산업입지 및 개발에 관한 법률 제18조(일반산업단지개발실시계획의 승인)</span></div>
+    </div><div class="card k-rule" id="N15_13_P05" data-gate="N15" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N15_13_P05</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 주된 인허가 행정청</div>
+      <p>주된 인허가 처분·관련 인허가 의제</p>
+      <small>협의된 사항에 대해 주된 인허가 처분, 협의된 관련 인허가를 받은 것으로 의제(효과는 해당 법률에 규정된 관련 인허가에 한정)</small>
+      <div class="cites"><span class="cite">§ 행정기본법 제25조(인허가의제의 효과)</span></div>
+    </div><div class="card k-rule" id="N15_13_P06" data-gate="N15" data-lane="L3" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N15_13_P06</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 관련 인허가 행정청</div>
+      <p>관련 인허가 행정청 사후관리</p>
+      <small>의제된 관련 인허가를 직접 한 것으로 보아 관계 법령에 따른 관리·감독 등 필요한 조치</small>
+      <div class="cites"><span class="cite">§ 행정기본법 제26조(인허가의제의 사후관리 등)</span></div>
+    </div><div class="card k-rule" id="N15_13_P08" data-gate="N15" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N15_13_P08</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 신청인</div>
+      <p>주된 인허가·의제 결과 확인</p>
+      <small>주된 인허가 처분과 함께 의제된 관련 인허가의 범위와 조건을 확인한다.</small>
+      <div class="cites"><span class="cite">§ 행정기본법 제25조(인허가의제의 효과)</span></div>
+    </div><div class="card k-rule" id="N15_18_P01" data-gate="N15" data-lane="L8" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N15_18_P01</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 광주특별시·부과징수기관</div>
+      <p>대상사업·면적·시행자·감면 적용판정</p>
+      <small>대상사업·면적·시행자·감면 적용판정에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 개발이익 환수에 관한 법률 제5조</span></div>
+    </div><div class="card k-rule" id="N15_18_P02" data-gate="N15" data-lane="L8" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N15_18_P02</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 광주특별시·부과징수기관</div>
+      <p>개발사업 착수시점·종료시점 확정</p>
+      <small>개발사업 착수시점·종료시점 확정에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 개발이익 환수에 관한 법률 제9조</span></div>
+    </div><div class="card k-rule" id="N15_18_P03" data-gate="N15" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N15_18_P03</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자·납부의무자</div>
+      <p>개발비용 증빙·토지비·부대비용 관리</p>
+      <small>개발비용 증빙·토지비·부대비용 관리에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 개발이익 환수에 관한 법률 제11조</span></div>
+    </div><div class="card k-rule" id="N15_19_P01" data-gate="N15" data-lane="L9" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N15_19_P01</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 영산강유역환경청</div>
+      <p>사업유형·면적·환경영향평가 여부별 비점오염원 대상 판정</p>
+      <small>사업유형·면적·환경영향평가 여부별 비점오염원 대상 판정에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 물환경보전법 제53조</span></div>
+    </div><div class="card k-rule" id="N15_19_P02" data-gate="N15" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N15_19_P02</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>강우유출·오염부하 산정과 비점오염 저감계획 작성</p>
+      <small>강우유출·오염부하 산정과 비점오염 저감계획 작성에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 물환경보전법 제53조</span></div>
+    </div><div class="card k-rule" id="N15_19_P03" data-gate="N15" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N15_19_P03</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자</div>
+      <p>승인 후 법정기한 내 비점오염원 설치신고</p>
+      <small>승인 후 법정기한 내 비점오염원 설치신고에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 물환경보전법 제53조</span></div>
+    </div><div class="card k-rule" id="N15_19_P04" data-gate="N15" data-lane="L9" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N15_19_P04</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 영산강유역환경청</div>
+      <p>신고 검토·보완·신고증명서 발급</p>
+      <small>신고 검토·보완·신고증명서 발급에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 물환경보전법 제53조</span></div>
+    </div><div class="card k-rule" id="N15_20_P01" data-gate="N15" data-lane="L8" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N15_20_P01</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 기후에너지환경부·광주특별시</div>
+      <p>사업유형·환경영향평가·훼손면적별 부과대상 판정</p>
+      <small>사업유형·환경영향평가·훼손면적별 부과대상 판정에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 자연환경보전법 제46조</span></div>
+    </div><div class="card k-rule" id="N15_20_P02" data-gate="N15" data-lane="L1" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N15_20_P02</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">👤 사업시행자·납부의무자</div>
+      <p>토지피복·생태자연도·용도지역별 훼손면적 산정</p>
+      <small>토지피복·생태자연도·용도지역별 훼손면적 산정에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 자연환경보전법 제46조</span></div>
+    </div><div class="card k-rule" id="N15_20_P03" data-gate="N15" data-lane="L2" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N15_20_P03</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 사업 인허가기관</div>
+      <p>개발사업 인허가 내용·사업자·면적 통보</p>
+      <small>개발사업 인허가 내용·사업자·면적 통보에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 자연환경보전법 제47조</span></div>
+    </div><div class="card k-rule" id="N15_20_P04" data-gate="N15" data-lane="L8" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N15_20_P04</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 기후에너지환경부·광주특별시</div>
+      <p>단위면적금액·지역계수 적용 부담금 산정</p>
+      <small>단위면적금액·지역계수 적용 부담금 산정에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 자연환경보전법 제46조</span></div>
+    </div><div class="card k-rule" id="N15_20_P05" data-gate="N15" data-lane="L8" data-group=""
+      style="background:#eef8f2;border-color:#1f8962;color:#17573f;">
+      <div class="chead"><b>N15_20_P05</b><span class="badges"></span><em style="background:#1f8962">규정</em></div>
+      <div class="org">🏛 기후에너지환경부·광주특별시</div>
+      <p>부담금 부과·분할납부 결정</p>
+      <small>부담금 부과·분할납부 결정에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.</small>
+      <div class="cites"><span class="cite">§ 자연환경보전법 제46조</span><span class="cite">§ 자연환경보전법 제48조</span></div>
+    </div></div>
+<div class="grid" id="grid">
+  <svg class="edges" id="edgeLayer"></svg>
+  
+      <div class="gate" data-g="0">
+        <div class="glabel"><b>N36</b><span>산업단지계획 승인신청·평가 첨부자…</span><small>절차 1 · 크리티컬</small></div>
+        <div class="cell" data-g="0" data-l="0"></div><div class="cell" data-g="0" data-l="1"></div><div class="cell" data-g="0" data-l="2"></div><div class="cell" data-g="0" data-l="3"></div><div class="cell" data-g="0" data-l="4"></div><div class="cell" data-g="0" data-l="5"></div><div class="cell" data-g="0" data-l="6"></div><div class="cell" data-g="0" data-l="7"></div><div class="cell" data-g="0" data-l="8"></div><div class="cell" data-g="0" data-l="9"></div><div class="cell" data-g="0" data-l="10"></div><div class="cell" data-g="0" data-l="11"></div><div class="cell" data-g="0" data-l="12"></div><div class="cell" data-g="0" data-l="13"></div><div class="cell" data-g="0" data-l="14"></div><div class="cell" data-g="0" data-l="15"></div><div class="cell" data-g="0" data-l="16"></div><div class="cell" data-g="0" data-l="17"></div><div class="cell" data-g="0" data-l="18"></div><div class="cell" data-g="0" data-l="19"></div><div class="cell" data-g="0" data-l="20"></div><div class="cell" data-g="0" data-l="21"></div><div class="cell" data-g="0" data-l="22"></div><div class="cell" data-g="0" data-l="23"></div>
+      </div>
+      <div class="gate" data-g="1">
+        <div class="glabel"><b>N09</b><span>전략환경영향평가·입지대안 협의</span><small>절차 12</small></div>
+        <div class="cell" data-g="1" data-l="0"></div><div class="cell" data-g="1" data-l="1"></div><div class="cell" data-g="1" data-l="2"></div><div class="cell" data-g="1" data-l="3"></div><div class="cell" data-g="1" data-l="4"></div><div class="cell" data-g="1" data-l="5"></div><div class="cell" data-g="1" data-l="6"></div><div class="cell" data-g="1" data-l="7"></div><div class="cell" data-g="1" data-l="8"></div><div class="cell" data-g="1" data-l="9"></div><div class="cell" data-g="1" data-l="10"></div><div class="cell" data-g="1" data-l="11"></div><div class="cell" data-g="1" data-l="12"></div><div class="cell" data-g="1" data-l="13"></div><div class="cell" data-g="1" data-l="14"></div><div class="cell" data-g="1" data-l="15"></div><div class="cell" data-g="1" data-l="16"></div><div class="cell" data-g="1" data-l="17"></div><div class="cell" data-g="1" data-l="18"></div><div class="cell" data-g="1" data-l="19"></div><div class="cell" data-g="1" data-l="20"></div><div class="cell" data-g="1" data-l="21"></div><div class="cell" data-g="1" data-l="22"></div><div class="cell" data-g="1" data-l="23"></div>
+      </div>
+      <div class="gate" data-g="2">
+        <div class="glabel"><b>N11</b><span>환경영향평가서 초안·공람·주민의견</span><small>절차 13 · 크리티컬</small></div>
+        <div class="cell" data-g="2" data-l="0"></div><div class="cell" data-g="2" data-l="1"></div><div class="cell" data-g="2" data-l="2"></div><div class="cell" data-g="2" data-l="3"></div><div class="cell" data-g="2" data-l="4"></div><div class="cell" data-g="2" data-l="5"></div><div class="cell" data-g="2" data-l="6"></div><div class="cell" data-g="2" data-l="7"></div><div class="cell" data-g="2" data-l="8"></div><div class="cell" data-g="2" data-l="9"></div><div class="cell" data-g="2" data-l="10"></div><div class="cell" data-g="2" data-l="11"></div><div class="cell" data-g="2" data-l="12"></div><div class="cell" data-g="2" data-l="13"></div><div class="cell" data-g="2" data-l="14"></div><div class="cell" data-g="2" data-l="15"></div><div class="cell" data-g="2" data-l="16"></div><div class="cell" data-g="2" data-l="17"></div><div class="cell" data-g="2" data-l="18"></div><div class="cell" data-g="2" data-l="19"></div><div class="cell" data-g="2" data-l="20"></div><div class="cell" data-g="2" data-l="21"></div><div class="cell" data-g="2" data-l="22"></div><div class="cell" data-g="2" data-l="23"></div>
+      </div>
+      <div class="gate" data-g="3">
+        <div class="glabel"><b>N13</b><span>국가유산 영향진단·매장유산 조사 …</span><small>절차 30</small></div>
+        <div class="cell" data-g="3" data-l="0"></div><div class="cell" data-g="3" data-l="1"></div><div class="cell" data-g="3" data-l="2"></div><div class="cell" data-g="3" data-l="3"></div><div class="cell" data-g="3" data-l="4"></div><div class="cell" data-g="3" data-l="5"></div><div class="cell" data-g="3" data-l="6"></div><div class="cell" data-g="3" data-l="7"></div><div class="cell" data-g="3" data-l="8"></div><div class="cell" data-g="3" data-l="9"></div><div class="cell" data-g="3" data-l="10"></div><div class="cell" data-g="3" data-l="11"></div><div class="cell" data-g="3" data-l="12"></div><div class="cell" data-g="3" data-l="13"></div><div class="cell" data-g="3" data-l="14"></div><div class="cell" data-g="3" data-l="15"></div><div class="cell" data-g="3" data-l="16"></div><div class="cell" data-g="3" data-l="17"></div><div class="cell" data-g="3" data-l="18"></div><div class="cell" data-g="3" data-l="19"></div><div class="cell" data-g="3" data-l="20"></div><div class="cell" data-g="3" data-l="21"></div><div class="cell" data-g="3" data-l="22"></div><div class="cell" data-g="3" data-l="23"></div>
+      </div>
+      <div class="gate" data-g="4">
+        <div class="glabel"><b>N38</b><span>재해영향평가등 협의·계획반영</span><small>절차 17</small></div>
+        <div class="cell" data-g="4" data-l="0"></div><div class="cell" data-g="4" data-l="1"></div><div class="cell" data-g="4" data-l="2"></div><div class="cell" data-g="4" data-l="3"></div><div class="cell" data-g="4" data-l="4"></div><div class="cell" data-g="4" data-l="5"></div><div class="cell" data-g="4" data-l="6"></div><div class="cell" data-g="4" data-l="7"></div><div class="cell" data-g="4" data-l="8"></div><div class="cell" data-g="4" data-l="9"></div><div class="cell" data-g="4" data-l="10"></div><div class="cell" data-g="4" data-l="11"></div><div class="cell" data-g="4" data-l="12"></div><div class="cell" data-g="4" data-l="13"></div><div class="cell" data-g="4" data-l="14"></div><div class="cell" data-g="4" data-l="15"></div><div class="cell" data-g="4" data-l="16"></div><div class="cell" data-g="4" data-l="17"></div><div class="cell" data-g="4" data-l="18"></div><div class="cell" data-g="4" data-l="19"></div><div class="cell" data-g="4" data-l="20"></div><div class="cell" data-g="4" data-l="21"></div><div class="cell" data-g="4" data-l="22"></div><div class="cell" data-g="4" data-l="23"></div>
+      </div>
+      <div class="gate" data-g="5">
+        <div class="glabel"><b>N39</b><span>교통영향평가·광역교통개선대책 심의…</span><small>절차 15</small></div>
+        <div class="cell" data-g="5" data-l="0"></div><div class="cell" data-g="5" data-l="1"></div><div class="cell" data-g="5" data-l="2"></div><div class="cell" data-g="5" data-l="3"></div><div class="cell" data-g="5" data-l="4"></div><div class="cell" data-g="5" data-l="5"></div><div class="cell" data-g="5" data-l="6"></div><div class="cell" data-g="5" data-l="7"></div><div class="cell" data-g="5" data-l="8"></div><div class="cell" data-g="5" data-l="9"></div><div class="cell" data-g="5" data-l="10"></div><div class="cell" data-g="5" data-l="11"></div><div class="cell" data-g="5" data-l="12"></div><div class="cell" data-g="5" data-l="13"></div><div class="cell" data-g="5" data-l="14"></div><div class="cell" data-g="5" data-l="15"></div><div class="cell" data-g="5" data-l="16"></div><div class="cell" data-g="5" data-l="17"></div><div class="cell" data-g="5" data-l="18"></div><div class="cell" data-g="5" data-l="19"></div><div class="cell" data-g="5" data-l="20"></div><div class="cell" data-g="5" data-l="21"></div><div class="cell" data-g="5" data-l="22"></div><div class="cell" data-g="5" data-l="23"></div>
+      </div>
+      <div class="gate" data-g="6">
+        <div class="glabel"><b>N40</b><span>에너지사용계획 협의·설계 반영</span><small>절차 15</small></div>
+        <div class="cell" data-g="6" data-l="0"></div><div class="cell" data-g="6" data-l="1"></div><div class="cell" data-g="6" data-l="2"></div><div class="cell" data-g="6" data-l="3"></div><div class="cell" data-g="6" data-l="4"></div><div class="cell" data-g="6" data-l="5"></div><div class="cell" data-g="6" data-l="6"></div><div class="cell" data-g="6" data-l="7"></div><div class="cell" data-g="6" data-l="8"></div><div class="cell" data-g="6" data-l="9"></div><div class="cell" data-g="6" data-l="10"></div><div class="cell" data-g="6" data-l="11"></div><div class="cell" data-g="6" data-l="12"></div><div class="cell" data-g="6" data-l="13"></div><div class="cell" data-g="6" data-l="14"></div><div class="cell" data-g="6" data-l="15"></div><div class="cell" data-g="6" data-l="16"></div><div class="cell" data-g="6" data-l="17"></div><div class="cell" data-g="6" data-l="18"></div><div class="cell" data-g="6" data-l="19"></div><div class="cell" data-g="6" data-l="20"></div><div class="cell" data-g="6" data-l="21"></div><div class="cell" data-g="6" data-l="22"></div><div class="cell" data-g="6" data-l="23"></div>
+      </div>
+      <div class="gate" data-g="7">
+        <div class="glabel"><b>N12</b><span>환경영향평가 본안 검토·협의 완료</span><small>절차 14 · 크리티컬</small></div>
+        <div class="cell" data-g="7" data-l="0"></div><div class="cell" data-g="7" data-l="1"></div><div class="cell" data-g="7" data-l="2"></div><div class="cell" data-g="7" data-l="3"></div><div class="cell" data-g="7" data-l="4"></div><div class="cell" data-g="7" data-l="5"></div><div class="cell" data-g="7" data-l="6"></div><div class="cell" data-g="7" data-l="7"></div><div class="cell" data-g="7" data-l="8"></div><div class="cell" data-g="7" data-l="9"></div><div class="cell" data-g="7" data-l="10"></div><div class="cell" data-g="7" data-l="11"></div><div class="cell" data-g="7" data-l="12"></div><div class="cell" data-g="7" data-l="13"></div><div class="cell" data-g="7" data-l="14"></div><div class="cell" data-g="7" data-l="15"></div><div class="cell" data-g="7" data-l="16"></div><div class="cell" data-g="7" data-l="17"></div><div class="cell" data-g="7" data-l="18"></div><div class="cell" data-g="7" data-l="19"></div><div class="cell" data-g="7" data-l="20"></div><div class="cell" data-g="7" data-l="21"></div><div class="cell" data-g="7" data-l="22"></div><div class="cell" data-g="7" data-l="23"></div>
+      </div>
+      <div class="gate" data-g="8">
+        <div class="glabel"><b>N14</b><span>의제 인허가 실체요건·농지·산지·…</span><small>절차 73 · 크리티컬</small></div>
+        <div class="cell" data-g="8" data-l="0"></div><div class="cell" data-g="8" data-l="1"></div><div class="cell" data-g="8" data-l="2"></div><div class="cell" data-g="8" data-l="3"></div><div class="cell" data-g="8" data-l="4"></div><div class="cell" data-g="8" data-l="5"></div><div class="cell" data-g="8" data-l="6"></div><div class="cell" data-g="8" data-l="7"></div><div class="cell" data-g="8" data-l="8"></div><div class="cell" data-g="8" data-l="9"></div><div class="cell" data-g="8" data-l="10"></div><div class="cell" data-g="8" data-l="11"></div><div class="cell" data-g="8" data-l="12"></div><div class="cell" data-g="8" data-l="13"></div><div class="cell" data-g="8" data-l="14"></div><div class="cell" data-g="8" data-l="15"></div><div class="cell" data-g="8" data-l="16"></div><div class="cell" data-g="8" data-l="17"></div><div class="cell" data-g="8" data-l="18"></div><div class="cell" data-g="8" data-l="19"></div><div class="cell" data-g="8" data-l="20"></div><div class="cell" data-g="8" data-l="21"></div><div class="cell" data-g="8" data-l="22"></div><div class="cell" data-g="8" data-l="23"></div>
+      </div>
+      <div class="gate" data-g="9">
+        <div class="glabel"><b>N37</b><span>동시협의·통합조정·기술검토·산단계…</span><small>절차 12</small></div>
+        <div class="cell" data-g="9" data-l="0"></div><div class="cell" data-g="9" data-l="1"></div><div class="cell" data-g="9" data-l="2"></div><div class="cell" data-g="9" data-l="3"></div><div class="cell" data-g="9" data-l="4"></div><div class="cell" data-g="9" data-l="5"></div><div class="cell" data-g="9" data-l="6"></div><div class="cell" data-g="9" data-l="7"></div><div class="cell" data-g="9" data-l="8"></div><div class="cell" data-g="9" data-l="9"></div><div class="cell" data-g="9" data-l="10"></div><div class="cell" data-g="9" data-l="11"></div><div class="cell" data-g="9" data-l="12"></div><div class="cell" data-g="9" data-l="13"></div><div class="cell" data-g="9" data-l="14"></div><div class="cell" data-g="9" data-l="15"></div><div class="cell" data-g="9" data-l="16"></div><div class="cell" data-g="9" data-l="17"></div><div class="cell" data-g="9" data-l="18"></div><div class="cell" data-g="9" data-l="19"></div><div class="cell" data-g="9" data-l="20"></div><div class="cell" data-g="9" data-l="21"></div><div class="cell" data-g="9" data-l="22"></div><div class="cell" data-g="9" data-l="23"></div>
+      </div>
+      <div class="gate" data-g="10">
+        <div class="glabel"><b>N10</b><span>산업단지계획 승인·지정 고시</span><small>절차 4</small></div>
+        <div class="cell" data-g="10" data-l="0"></div><div class="cell" data-g="10" data-l="1"></div><div class="cell" data-g="10" data-l="2"></div><div class="cell" data-g="10" data-l="3"></div><div class="cell" data-g="10" data-l="4"></div><div class="cell" data-g="10" data-l="5"></div><div class="cell" data-g="10" data-l="6"></div><div class="cell" data-g="10" data-l="7"></div><div class="cell" data-g="10" data-l="8"></div><div class="cell" data-g="10" data-l="9"></div><div class="cell" data-g="10" data-l="10"></div><div class="cell" data-g="10" data-l="11"></div><div class="cell" data-g="10" data-l="12"></div><div class="cell" data-g="10" data-l="13"></div><div class="cell" data-g="10" data-l="14"></div><div class="cell" data-g="10" data-l="15"></div><div class="cell" data-g="10" data-l="16"></div><div class="cell" data-g="10" data-l="17"></div><div class="cell" data-g="10" data-l="18"></div><div class="cell" data-g="10" data-l="19"></div><div class="cell" data-g="10" data-l="20"></div><div class="cell" data-g="10" data-l="21"></div><div class="cell" data-g="10" data-l="22"></div><div class="cell" data-g="10" data-l="23"></div>
+      </div>
+      <div class="gate" data-g="11">
+        <div class="glabel"><b>N15</b><span>산단 실시계획·의제 인허가 승인조…</span><small>절차 16</small></div>
+        <div class="cell" data-g="11" data-l="0"></div><div class="cell" data-g="11" data-l="1"></div><div class="cell" data-g="11" data-l="2"></div><div class="cell" data-g="11" data-l="3"></div><div class="cell" data-g="11" data-l="4"></div><div class="cell" data-g="11" data-l="5"></div><div class="cell" data-g="11" data-l="6"></div><div class="cell" data-g="11" data-l="7"></div><div class="cell" data-g="11" data-l="8"></div><div class="cell" data-g="11" data-l="9"></div><div class="cell" data-g="11" data-l="10"></div><div class="cell" data-g="11" data-l="11"></div><div class="cell" data-g="11" data-l="12"></div><div class="cell" data-g="11" data-l="13"></div><div class="cell" data-g="11" data-l="14"></div><div class="cell" data-g="11" data-l="15"></div><div class="cell" data-g="11" data-l="16"></div><div class="cell" data-g="11" data-l="17"></div><div class="cell" data-g="11" data-l="18"></div><div class="cell" data-g="11" data-l="19"></div><div class="cell" data-g="11" data-l="20"></div><div class="cell" data-g="11" data-l="21"></div><div class="cell" data-g="11" data-l="22"></div><div class="cell" data-g="11" data-l="23"></div>
+      </div>
+</div>
+
+<div class="note"><div><b>근거 대조.</b> 초록 칸의 조문 435건을 법제처 DRF 현행본(eflaw, 시행일 지정) 원문과 항·호·목 단위로 기계 대조 — 435/435 일치, 조작 인용 5건 주입 시 전부 적발(검사기 정상). 대조일 2026-09-05.</div><div><b>현행본:</b> 개발이익 환수에 관한 법률 286507(시행 2026-06-02) · 경관법 276931(시행 2025-10-01) · 공유수면 관리 및 매립에 관한 법률 259903(시행 2025-08-07) · 국가유산기본법 285655(시행 2026-05-17) · 국토의 계획 및 이용에 관한 법률 시행규칙 284531(시행 2026-03-12) · 국토의 계획 및 이용에 관한 법률 시행령 287269(시행 2026-07-01) · 국토의 계획 및 이용에 관한 법률 284013(시행 2026-07-01) · 농지법 286901(시행 2026-08-28) · 대도시권 광역교통 관리에 관한 특별법 280117(시행 2026-06-03) · 도시교통정비 촉진법 284063(시행 2026-07-01) · 매장유산 보호 및 조사에 관한 법률 285661(시행 2026-05-17) · 물환경보전법 283441(시행 2026-02-19) · 산업단지 인ㆍ허가 절차 간소화를 위한 특례법 276999(시행 2025-10-01) · 산업입지 및 개발에 관한 법률 시행령 281279(시행 2026-01-02) · 산업입지 및 개발에 관한 법률 277001(시행 2026-01-02) · 산지관리법 283757(시행 2026-05-28) · 에너지이용 합리화법 276559(시행 2026-05-28) · 자연재해대책법 276321(시행 2026-01-02) · 자연환경보전법 284091(시행 2026-07-01) · 재난 및 안전관리 기본법 282883(시행 2026-07-22) · 집단에너지사업법 283985(시행 2026-03-10) · 행정기본법 269955(시행 2026-03-19) · 환경영향평가법 276833(시행 2025-10-23).</div><div><b>생성 파일.</b> 엔진(artifacts/complex-minwon/_lib/compare)이 만든다. 손으로 고치지 말고 코드표·판정을 고친 뒤 다시 생성.</div><div><b>추론(파랑) 0칸</b>은 규정에 없는 실무 관행으로, 지자체·규모·용도에 따라 다르며 담당자 확인으로만 교정된다.</div></div>
+<footer><span><b>대한민국 제도 지도</b> · 복합민원 체계도 4호 산단 지정 의제 덩어리 — 전체 체계도</span><span class="url">hosungseo.github.io/korea100</span></footer>
+<script>
+const gateIdx = {"N36":0,"N09":1,"N11":2,"N13":3,"N38":4,"N39":5,"N40":6,"N12":7,"N14":8,"N37":9,"N10":10,"N15":11};
+const laneIdx = {"L1":0,"L2":1,"L3":2,"L4":3,"L5":4,"L6":5,"L7":6,"L8":7,"L9":8,"L10":9,"L11":10,"L12":11,"L13":12,"L14":13,"L15":14,"L16":15,"L17":16,"L18":17,"L19":18,"L20":19,"L21":20,"L22":21,"L23":22,"L24":23};
+// place cards in data order; a group box is inserted into its cell when its first member appears
+["N36_0_P03","N09_1_P01","N09_1_P02","N09_1_P03","N09_1_P04","N09_1_P05","N09_1_P06","N09_1_P07","N09_1_P08","N09_1_P09","N09_1_P10","N09_1_P11","N09_1_P12","N11_2_P06","N11_1_P01","N11_1_P02","N11_1_P03","N11_1_P04","N11_1_P05","N11_1_P06","N11_1_P07","N11_1_P08","N11_1_P09","N11_1_P10","N11_1_P11","N11_1_P12","N13_3_P01","N13_3_P02","N13_3_P03","N13_3_P04","N13_3_P05","N13_3_P06","N13_3_P07","N13_3_P08","N13_3_P09","N13_3_P10","N13_3_P11","N13_3_P12","N13_3_P13","N13_3_P14","N13_3_P15","N13_3_P16","N13_4_P01","N13_4_P02","N13_4_P03","N13_4_P04","N13_4_P05","N13_4_P06","N13_4_P07","N13_4_P08","N13_4_P09","N13_4_P10","N13_5_P01","N13_5_P02","N13_5_P03","N13_5_P04","N38_6_P01","N38_6_P02","N38_6_P03","N38_6_P04","N38_6_P05","N38_6_P06","N38_6_P07","N38_6_P08","N38_7_P01","N38_7_P02","N38_7_P03","N38_7_P04","N38_7_P05","N38_7_P06","N38_7_P07","N38_7_P08","N38_7_P09","N39_8_P01","N39_8_P02","N39_8_P03","N39_8_P04","N39_8_P05","N39_8_P06","N39_8_P07","N39_9_P01","N39_9_P02","N39_9_P03","N39_9_P04","N39_9_P05","N39_9_P06","N39_9_P07","N39_9_P08","N40_10_P01","N40_10_P02","N40_10_P03","N40_10_P04","N40_10_P05","N40_10_P06","N40_10_P07","N40_11_P01","N40_11_P02","N40_11_P03","N40_11_P04","N40_11_P05","N40_11_P06","N40_11_P07","N40_11_P08","N12_2_P08","N12_2_P09","N12_1_P01","N12_1_P02","N12_1_P03","N12_1_P04","N12_1_P05","N12_1_P06","N12_1_P07","N12_1_P08","N12_1_P09","N12_1_P10","N12_1_P11","N12_1_P12","N14_12_D01","N14_12_D02","N14_12_D03","N14_12_D03B","N14_12_D04","N14_12_D05","N14_12_D06","N14_12_D07","N14_12_D08","N14_12_D09","N14_12_D10","N14_12_D11","N14_12_D12","N14_12_D13","N14_12_D14","N14_12_D15","N14_12_D16","N14_12_D17","N14_13_P01","N14_13_P02","N14_13_P03","N14_13_P04","N14_13_P05","N14_13_P06","N14_13_P07","N14_13_P08","N14_2_P01","N14_2_P02","N14_2_P03","N14_2_P04","N14_2_P05","N14_2_P06","N14_2_P07","N14_2_P08","N14_2_P09","N14_2_P10","N14_2_P11","N14_2_P12","N14_2_P13","N14_2_P14","N14_2_P15","N14_2_P16","N14_2_P17","N14_2_P18","N14_2_P19","N14_14_P01","N14_14_P02","N14_14_P03","N14_14_P04","N14_14_P05","N14_14_P06","N14_14_P07","N14_14_P08","N14_15_P01","N14_15_P02","N14_15_P03","N14_15_P04","N14_15_P05","N14_15_P06","N14_15_P07","N14_15_P08","N14_15_P09","N14_15_P10","N14_16_P01","N14_16_P02","N14_16_P03","N14_16_P04","N14_16_P05","N14_16_P06","N14_16_P07","N14_16_P08","N14_16_P09","N14_16_P10","N37_0_P05","N37_0_P06","N37_0_P07","N37_0_P08","N37_0_P09","N37_0_P10","N37_17_P01","N37_17_P02","N37_17_P03","N37_17_P04","N37_17_P05","N37_17_P06","N10_2_P03","N10_2_P04","N10_0_P11","N10_0_P12","N15_2_P10","N15_13_P05","N15_13_P06","N15_13_P08","N15_18_P01","N15_18_P02","N15_18_P03","N15_19_P01","N15_19_P02","N15_19_P03","N15_19_P04","N15_20_P01","N15_20_P02","N15_20_P03","N15_20_P04","N15_20_P05"].forEach((id) => {
+  const el = document.getElementById(id);
+  if (el.dataset.group) {
+    const grp = document.getElementById('grp-' + el.dataset.group);
+    if (grp.parentElement.id === 'pool') {
+      const gcell = document.querySelector('.cell[data-g="' + gateIdx[grp.dataset.gate] + '"][data-l="' + laneIdx[grp.dataset.lane] + '"]');
+      gcell.appendChild(grp);
+    }
+    grp.querySelector('.gbody').appendChild(el); return;
+  }
+  const cell = document.querySelector('.cell[data-g="' + gateIdx[el.dataset.gate] + '"][data-l="' + laneIdx[el.dataset.lane] + '"]');
+  cell.appendChild(el);
+});
+const edges = [["N37_0_P05","N37_0_P06","seq"],["N37_0_P06","N37_0_P07","seq"],["N37_0_P07","N37_0_P08","seq"],["N37_0_P08","N37_0_P09","seq"],["N37_0_P09","N37_0_P10","seq"],["N10_0_P11","N10_0_P12","seq"],["N37_0_P06","N37_0_P05","par"],["N09_1_P01","N09_1_P02","seq"],["N11_1_P01","N11_1_P02","seq"],["N12_1_P01","N12_1_P02","seq"],["N09_1_P02","N09_1_P03","seq"],["N11_1_P02","N11_1_P03","seq"],["N12_1_P02","N12_1_P03","seq"],["N09_1_P03","N09_1_P04","seq"],["N11_1_P03","N11_1_P04","seq"],["N12_1_P03","N12_1_P04","seq"],["N09_1_P04","N09_1_P05","seq"],["N11_1_P04","N11_1_P05","seq"],["N12_1_P04","N12_1_P05","seq"],["N09_1_P05","N09_1_P06","seq"],["N11_1_P05","N11_1_P06","seq"],["N12_1_P05","N12_1_P06","seq"],["N09_1_P06","N09_1_P07","seq"],["N11_1_P06","N11_1_P07","seq"],["N12_1_P06","N12_1_P07","seq"],["N09_1_P07","N09_1_P08","seq"],["N11_1_P07","N11_1_P08","seq"],["N12_1_P07","N12_1_P08","seq"],["N09_1_P08","N09_1_P06","par"],["N11_1_P08","N11_1_P06","par"],["N12_1_P08","N12_1_P06","par"],["N09_1_P08","N09_1_P09","seq"],["N11_1_P08","N11_1_P09","seq"],["N12_1_P08","N12_1_P09","seq"],["N09_1_P09","N09_1_P10","seq"],["N11_1_P09","N11_1_P10","seq"],["N12_1_P09","N12_1_P10","seq"],["N09_1_P10","N09_1_P11","seq"],["N11_1_P10","N11_1_P11","seq"],["N12_1_P10","N12_1_P11","seq"],["N09_1_P11","N09_1_P12","seq"],["N11_1_P11","N11_1_P12","seq"],["N12_1_P11","N12_1_P12","seq"],["N14_2_P01","N14_2_P02","seq"],["N14_2_P02","N14_2_P19","seq"],["N14_2_P19","N14_2_P03","seq"],["N14_2_P03","N14_2_P04","seq"],["N10_2_P03","N10_2_P04","seq"],["N14_2_P04","N14_2_P05","seq"],["N14_2_P05","N14_2_P06","seq"],["N14_2_P06","N14_2_P07","seq"],["N14_2_P07","N14_2_P06","par"],["N14_2_P06","N14_2_P08","seq"],["N12_2_P08","N12_2_P09","par"],["N14_2_P08","N14_2_P09","par"],["N12_2_P09","N12_2_P08","par"],["N14_2_P09","N14_2_P08","par"],["N14_2_P08","N14_2_P10","seq"],["N14_2_P10","N14_2_P13","seq"],["N14_2_P13","N14_2_P11","seq"],["N14_2_P11","N14_2_P12","seq"],["N14_2_P12","N14_2_P14","seq"],["N14_2_P14","N14_2_P15","seq"],["N14_2_P15","N14_2_P16","seq"],["N14_2_P16","N14_2_P17","seq"],["N14_2_P17","N14_2_P18","seq"],["N13_3_P01","N13_3_P02","seq"],["N13_3_P02","N13_3_P03","seq"],["N13_3_P03","N13_3_P04","seq"],["N13_3_P04","N13_3_P05","seq"],["N13_3_P05","N13_3_P06","seq"],["N13_3_P06","N13_3_P07","seq"],["N13_3_P07","N13_3_P08","seq"],["N13_3_P08","N13_3_P09","seq"],["N13_3_P09","N13_3_P07","par"],["N13_3_P08","N13_3_P10","seq"],["N13_3_P10","N13_3_P11","seq"],["N13_3_P11","N13_3_P12","seq"],["N13_3_P11","N13_3_P14","seq"],["N13_3_P12","N13_3_P13","seq"],["N13_3_P06","N13_3_P16","seq"],["N13_3_P15","N13_3_P16","seq"],["N13_4_P01","N13_4_P02","seq"],["N13_4_P02","N13_4_P03","seq"],["N13_4_P03","N13_4_P04","seq"],["N13_4_P04","N13_4_P05","seq"],["N13_4_P05","N13_4_P06","seq"],["N13_4_P06","N13_4_P07","par"],["N13_4_P07","N13_4_P08","seq"],["N13_4_P03","N13_4_P09","par"],["N13_4_P09","N13_4_P03","par"],["N13_4_P10","N13_4_P01","par"],["N13_5_P01","N13_5_P02","seq"],["N13_5_P02","N13_5_P03","seq"],["N13_5_P03","N13_5_P04","seq"],["N38_6_P01","N38_6_P02","seq"],["N38_6_P02","N38_6_P03","seq"],["N38_6_P03","N38_6_P04","seq"],["N38_6_P04","N38_6_P05","seq"],["N38_6_P05","N38_6_P06","seq"],["N38_6_P06","N38_6_P07","seq"],["N38_6_P07","N38_6_P08","seq"],["N38_6_P06","N38_6_P04","par"],["N38_7_P01","N38_7_P02","seq"],["N38_7_P02","N38_7_P03","seq"],["N38_7_P03","N38_7_P04","seq"],["N38_7_P04","N38_7_P05","seq"],["N38_7_P05","N38_7_P06","seq"],["N38_7_P06","N38_7_P07","seq"],["N38_7_P07","N38_7_P08","seq"],["N38_7_P03","N38_7_P09","par"],["N38_7_P09","N38_7_P04","par"],["N39_8_P01","N39_8_P02","seq"],["N39_8_P02","N39_8_P03","seq"],["N39_8_P03","N39_8_P04","seq"],["N39_8_P04","N39_8_P05","seq"],["N39_8_P05","N39_8_P06","seq"],["N39_8_P06","N39_8_P07","seq"],["N39_8_P05","N39_8_P02","par"],["N39_9_P01","N39_9_P02","seq"],["N39_9_P02","N39_9_P03","seq"],["N39_9_P03","N39_9_P04","seq"],["N39_9_P04","N39_9_P05","seq"],["N39_9_P05","N39_9_P06","seq"],["N39_9_P06","N39_9_P07","seq"],["N39_9_P07","N39_9_P08","seq"],["N39_9_P05","N39_9_P03","par"],["N40_10_P01","N40_10_P02","seq"],["N40_10_P02","N40_10_P03","seq"],["N40_10_P03","N40_10_P04","seq"],["N40_10_P04","N40_10_P05","seq"],["N40_10_P05","N40_10_P06","seq"],["N40_10_P06","N40_10_P07","seq"],["N40_10_P05","N40_10_P02","par"],["N40_11_P01","N40_11_P02","seq"],["N40_11_P02","N40_11_P03","seq"],["N40_11_P03","N40_11_P04","seq"],["N40_11_P04","N40_11_P05","seq"],["N40_11_P05","N40_11_P06","seq"],["N40_11_P06","N40_11_P08","par"],["N40_11_P04","N40_11_P07","par"],["N40_11_P07","N40_11_P04","par"],["N14_12_D01","N14_12_D02","seq"],["N14_12_D02","N14_12_D03","seq"],["N14_12_D03","N14_12_D03B","seq"],["N14_12_D03B","N14_12_D04","seq"],["N14_12_D04","N14_12_D05","seq"],["N14_12_D05","N14_12_D06","seq"],["N14_12_D06","N14_12_D07","seq"],["N14_12_D07","N14_12_D08","seq"],["N14_12_D08","N14_12_D11","seq"],["N14_12_D11","N14_12_D12","seq"],["N14_12_D12","N14_12_D13","seq"],["N14_12_D13","N14_12_D14","seq"],["N14_12_D14","N14_12_D15","seq"],["N14_12_D15","N14_12_D16","seq"],["N14_12_D11","N14_12_D17","par"],["N14_12_D09","N14_12_D10","par"],["N14_12_D06","N14_12_D09","par"],["N14_12_D10","N14_12_D06","par"],["N14_13_P01","N14_13_P02","seq"],["N14_13_P02","N14_13_P03","par"],["N14_13_P03","N14_13_P04","seq"],["N14_13_P03","N14_13_P05","seq"],["N14_13_P04","N14_13_P05","seq"],["N14_13_P05","N14_13_P08","seq"],["N15_13_P05","N15_13_P08","seq"],["N14_13_P06","N14_13_P07","seq"],["N14_13_P07","N14_13_P02","par"],["N14_13_P08","N14_13_P06","seq"],["N15_13_P08","N15_13_P06","seq"],["N14_14_P01","N14_14_P02","seq"],["N14_14_P01","N14_14_P03","seq"],["N14_14_P01","N14_14_P04","seq"],["N14_14_P02","N14_14_P05","seq"],["N14_14_P03","N14_14_P05","seq"],["N14_14_P04","N14_14_P05","seq"],["N14_14_P05","N14_14_P06","seq"],["N14_14_P06","N14_14_P07","par"],["N14_14_P06","N14_14_P08","par"],["N14_15_P01","N14_15_P02","seq"],["N14_15_P02","N14_15_P03","seq"],["N14_15_P03","N14_15_P04","seq"],["N14_15_P04","N14_15_P05","seq"],["N14_15_P05","N14_15_P06","seq"],["N14_15_P04","N14_15_P07","par"],["N14_15_P07","N14_15_P03","par"],["N14_15_P08","N14_15_P09","seq"],["N14_15_P09","N14_15_P10","seq"],["N14_16_P01","N14_16_P02","seq"],["N14_16_P02","N14_16_P03","seq"],["N14_16_P03","N14_16_P04","seq"],["N14_16_P04","N14_16_P05","seq"],["N14_16_P05","N14_16_P06","seq"],["N14_16_P06","N14_16_P07","seq"],["N14_16_P07","N14_16_P08","seq"],["N14_16_P08","N14_16_P09","seq"],["N14_16_P09","N14_16_P10","seq"],["N37_17_P01","N37_17_P02","seq"],["N37_17_P02","N37_17_P03","seq"],["N37_17_P03","N37_17_P04","seq"],["N37_17_P04","N37_17_P05","seq"],["N37_17_P05","N37_17_P06","seq"],["N37_17_P05","N37_17_P03","par"],["N15_18_P01","N15_18_P02","seq"],["N15_18_P02","N15_18_P03","seq"],["N15_19_P01","N15_19_P02","seq"],["N15_19_P02","N15_19_P03","seq"],["N15_19_P03","N15_19_P04","seq"],["N15_20_P01","N15_20_P02","seq"],["N15_20_P02","N15_20_P03","seq"],["N15_20_P03","N15_20_P04","seq"],["N15_20_P04","N15_20_P05","seq"],["N15_20_P04","N15_20_P02","par"],["N36_0_P03","N09_1_P01","seq"],["N36_0_P03","N38_6_P01","seq"],["N14_16_P10","N37_0_P05","seq"],["N09_1_P12","N37_0_P05","seq"],["N37_17_P06","N10_2_P03","seq"],["N36_0_P03","N11_2_P06","seq"],["N11_1_P12","N12_2_P08","seq"],["N36_0_P03","N13_3_P01","seq"],["N36_0_P03","N39_8_P01","seq"],["N36_0_P03","N40_10_P01","seq"],["N36_0_P03","N14_12_D01","seq"],["N12_1_P12","N14_12_D01","seq"],["N38_7_P09","N14_12_D01","seq"],["N39_9_P08","N14_12_D01","seq"],["N40_11_P08","N14_12_D01","seq"],["N13_5_P04","N14_12_D01","seq"],["N14_16_P10","N15_2_P10","seq"],["N37_17_P06","N15_2_P10","seq"],["N10_0_P12","N15_2_P10","seq"]];
+const grid = document.getElementById('grid');
+const svg = document.getElementById('edgeLayer');
+const g = grid.getBoundingClientRect();
+svg.setAttribute('width', g.width); svg.setAttribute('height', grid.scrollHeight);
+const mk = (id, c) => '<marker id="' + id + '" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="' + c + '"/></marker>';
+svg.innerHTML = '<defs>' + mk('a-seq', '#4a6157') + mk('a-loop', '#2456d6') + mk('a-par', '#8aa39a') + mk('a-opt', '#9aa8a1') + '</defs>';
+const R = (el) => { const r = el.getBoundingClientRect(); return { l:r.left-g.left, r:r.right-g.left, t:r.top-g.top, b:r.bottom-g.top, cx:r.left-g.left+r.width/2, cy:r.top-g.top+r.height/2 }; };
+const STYLE = { seq: ['#4a6157', 1.6, ''], loop: ['#2456d6', 1.5, '5 4'], par: ['#8aa39a', 1.2, ''], opt: ['#9aa8a1', 1.4, '4 4'] };
+// ── 배선 원칙 ──────────────────────────────────────────────────────────
+// 선은 카드가 없는 곳(관문 행 하단의 빈 띠 · 카드 좌우 여백 · 같은 칸 카드 사이 틈)만 지난다.
+// 한 선마다 후보 경로를 여러 개 만들어 ①카드 관통 ②이미 놓인 선과 나란히 겹침이 없는 것을 고른다.
+// 고른 경로의 모든 구간을 등록해 다음 선이 그 자리를 피한다. 카드에 붙는 선이 여럿이면 변을 나눠 쓴다.
+const GUT = 52, LANE = 6, TOL = 3;
+const rowRects = [...grid.querySelectorAll('.gate')].map((el) => { const r = el.getBoundingClientRect(); return { t: r.top - g.top, b: r.bottom - g.top }; });
+const rowIdx = (y) => { const i = rowRects.findIndex((r) => y >= r.t - 1 && y <= r.b + 1); return i < 0 ? (y < rowRects[0].t ? 0 : rowRects.length - 1) : i; };
+const boxes = [...grid.querySelectorAll('.card, .group')].map((el) => ({ el, r: R(el) }));
+const hSegs = [], vSegs = [];
+const iv = (a1, a2, b1, b2) => Math.min(a2, b2) - Math.max(a1, b1);
+// 카드 관통 검사 (선분 하나). 끝점 카드도 예외로 두지 않는다 — 변에 닿는 것은 내부 겹침 0 이라 통과하고,
+// 카드 속을 지나 들어가는 경로는 여기서 걸린다. 예외는 끝점을 감싸고 있는 묶음 상자뿐.
+const crosses = (x1, y1, x2, y2, skip) => boxes.some(({ el, r }) => {
+  if (skip.includes(el)) return false;
+  const ix = iv(Math.min(x1, x2), Math.max(x1, x2), r.l, r.r), iy = iv(Math.min(y1, y2), Math.max(y1, y2), r.t, r.b);
+  const vert = Math.abs(x1 - x2) < 0.5, horz = Math.abs(y1 - y2) < 0.5;
+  return (vert ? ix > -TOL : ix > TOL) && (horz ? iy > -TOL : iy > TOL);
+});
+const dupH = (y, x1, x2) => hSegs.some((s2) => Math.abs(s2.y - y) < LANE - 1 && iv(s2.a, s2.b, Math.min(x1, x2), Math.max(x1, x2)) > 4);
+const dupV = (x, y1, y2) => vSegs.some((s2) => Math.abs(s2.x - x) < LANE - 1 && iv(s2.a, s2.b, Math.min(y1, y2), Math.max(y1, y2)) > 4);
+// 경로(점 목록) 하나를 평가: [카드 관통 수, 겹침 수, 길이]
+const score = (pts, skip) => {
+  let cross = 0, dup = 0, len = 0;
+  for (let i = 0; i + 1 < pts.length; i++) {
+    const [x1, y1] = pts[i], [x2, y2] = pts[i + 1];
+    if (Math.abs(x1 - x2) < 0.5 && Math.abs(y1 - y2) < 0.5) continue;
+    len += Math.abs(x1 - x2) + Math.abs(y1 - y2);
+    if (crosses(x1, y1, x2, y2, skip)) cross++;
+    if (Math.abs(y1 - y2) < 0.5 ? dupH(y1, x1, x2) : dupV(x1, y1, y2)) dup++;
+  }
+  return [cross, dup, len];
+};
+const register = (pts) => {
+  for (let i = 0; i + 1 < pts.length; i++) {
+    const [x1, y1] = pts[i], [x2, y2] = pts[i + 1];
+    if (Math.abs(y1 - y2) < 0.5) hSegs.push({ y: y1, a: Math.min(x1, x2), b: Math.max(x1, x2) });
+    else vSegs.push({ x: x1, a: Math.min(y1, y2), b: Math.max(y1, y2) });
+  }
+};
+// 카드에 붙는 선이 여럿이면 변을 나눠 쓴다 — 기본 방향으로 먼저 배분한다
+const port = {};
+const baseSide = (S, T) => (T.t >= S.b - 4 ? ['b', 't'] : (S.t >= T.b - 4 ? ['t', 'b'] : (S.cx < T.cx ? ['r', 'l'] : ['l', 'r'])));
+edges.forEach(([s, t]) => {
+  const Se = document.getElementById(s), Te = document.getElementById(t);
+  if (!Se || !Te) return;
+  const [a, b] = baseSide(R(Se), R(Te)), key = s + '>' + t;
+  (port[s + a] = port[s + a] || []).push(key); (port[t + b] = port[t + b] || []).push(key);
+  (port[s + '*'] = port[s + '*'] || []).push(key); (port[t + '*'] = port[t + '*'] || []).push(key);
+});
+const anchor = (rect, id, sd, key) => {
+  const list = port[id + sd] || port[id + '*'] || [], i = Math.max(0, list.indexOf(key)), n = Math.max(1, list.length);
+  if (sd === 'b' || sd === 't') {
+    const w = rect.r - rect.l, m = Math.min(24, w / 3), span = w - 2 * m;
+    return { x: n <= 1 ? rect.l + w / 2 : rect.l + m + (span * (i + 0.5)) / n, y: sd === 'b' ? rect.b : rect.t };
+  }
+  const h = rect.b - rect.t, m = Math.min(12, h / 3), span = h - 2 * m;
+  return { x: sd === 'r' ? rect.r : rect.l, y: n <= 1 ? rect.t + h / 2 : rect.t + m + (span * (i + 0.5)) / n };
+};
+// 가로 통로(행 하단 빈 띠) 후보 · 세로 통로(카드 옆 여백) 후보
+const bands = (S, T) => {
+  const i0 = Math.min(rowIdx(S.cy), rowIdx(T.cy)), i1 = Math.max(rowIdx(S.cy), rowIdx(T.cy));
+  const out = [];
+  for (let i = i0; i <= i1; i++) for (let k = 0; k < 7; k++) out.push(rowRects[i].b - GUT + 6 + k * LANE);
+  const gap = (rect, up) => (up ? rect.t - 9 : rect.b + 9);
+  out.push(gap(T, true), gap(T, false), gap(S, true), gap(S, false));
+  for (let k = 1; k <= 4; k++) { out.push(T.t - 9 - k * LANE, T.b + 9 + k * LANE, S.b + 9 + k * LANE, S.t - 9 - k * LANE); }
+  return out;
+};
+const chans = (rect, sd) => { const b = sd === 'l' ? rect.l - 11 : rect.r + 11, out = []; for (let k = 0; k < 26; k++) out.push(sd === 'l' ? b - k * LANE : b + k * LANE); return out; };
+// 마지막 수단 통로: 관문 이름 칸(맨 왼쪽)과 판 오른쪽 끝은 카드가 없다
+const EDGE_CH = [128, 134, 140, 146, g.width - 10, g.width - 16, g.width - 22];
+edges.forEach(([s, t, kind]) => {
+  const Se = document.getElementById(s), Te = document.getElementById(t);
+  if (!Se || !Te) { console.warn('missing', s, t); return; }
+  const S = R(Se), T = R(Te), key = s + '>' + t;
+  const skip = [Se, Te].map((el) => el.parentElement && el.parentElement.closest('.group')).filter(Boolean);
+  const A = {}; for (const sd of ['b', 't', 'l', 'r']) A[sd] = { S: anchor(S, s, sd, key), T: anchor(T, t, sd, key) };
+  const cand = [];
+  const push = (pts) => { if (pts.every((p2) => Number.isFinite(p2[0]) && Number.isFinite(p2[1]))) cand.push(pts); };
+  const [bs, bt] = baseSide(S, T);
+  // ① 곧장 세로 (같은 열 위아래)
+  if (bs === 'b' || bs === 't') {
+    const P = A[bs].S, Q = A[bt].T;
+    if (Math.abs(P.x - Q.x) < 16) push([[P.x, P.y], [P.x, Q.y]]);
+    for (const y of bands(S, T)) push([[P.x, P.y], [P.x, y], [Q.x, y], [Q.x, Q.y]]);   // ② 거터 경유
+  }
+  // ③ 같은 행 좌우 직선
+  if (bs === 'r' || bs === 'l') {
+    const P = A[bs].S, Q = A[bt].T;
+    for (const x of chans(S, bs).slice(0, 12)) push([[P.x, P.y], [x, P.y], [x, Q.y], [Q.x, Q.y]]);
+  }
+  // ④ 통로 우회: 옆으로 나가 통로·거터를 거쳐 옆으로 들어간다
+  for (const sd of ['r', 'l']) for (const td of ['l', 'r']) {
+    const P = A[sd].S, Q = A[td].T;
+    for (const y of bands(S, T)) for (const cs of chans(S, sd).slice(0, 12)) for (const ct of chans(T, td).slice(0, 12))
+      push([[P.x, P.y], [cs, P.y], [cs, y], [ct, y], [ct, Q.y], [Q.x, Q.y]]);
+  }
+  // ⑤ 아래로 나가 아래 띠를 거쳐 밑으로 들어간다 / 위로 나가 위 띠를 거쳐 위로 들어간다
+  for (const [sdx, tdx] of [['b', 'b'], ['t', 't'], ['b', 't'], ['t', 'b']]) {
+    const P = A[sdx].S, Q = A[tdx].T;
+    for (const y of bands(S, T)) push([[P.x, P.y], [P.x, y], [Q.x, y], [Q.x, Q.y]]);
+  }
+  // ⑥ 판 가장자리 통로로 크게 우회
+  for (const sd of ['r', 'l']) for (const td of ['l', 'r']) {
+    const P = A[sd].S, Q = A[td].T;
+    for (const y of bands(S, T)) for (const cs of EDGE_CH) for (const ct of chans(T, td).slice(0, 6)) push([[P.x, P.y], [cs, P.y], [cs, y], [ct, y], [ct, Q.y], [Q.x, Q.y]]);
+  }
+  // ⑦ 아래로 나가 통로로 들어간다 / 옆으로 나가 위로 들어간다
+  for (const td of ['l', 'r']) { const P = A['b'].S, Q = A[td].T;
+    for (const y of bands(S, T)) for (const ct of chans(T, td).slice(0, 12)) push([[P.x, P.y], [P.x, y], [ct, y], [ct, Q.y], [Q.x, Q.y]]); }
+  for (const sd of ['r', 'l']) { const P = A[sd].S, Q = A['t'].T;
+    for (const y of bands(S, T)) for (const cs of chans(S, sd).slice(0, 12)) push([[P.x, P.y], [cs, P.y], [cs, y], [Q.x, y], [Q.x, Q.y]]); }
+  let best = null, bestScore = null;
+  for (const pts of cand) {
+    const sc = score(pts, skip);
+    if (!bestScore || sc[0] < bestScore[0] || (sc[0] === bestScore[0] && (sc[1] < bestScore[1] || (sc[1] === bestScore[1] && sc[2] < bestScore[2])))) { best = pts; bestScore = sc; }
+    if (bestScore[0] === 0 && bestScore[1] === 0) break;
+  }
+  register(best);
+  if (bestScore[0] || bestScore[1]) console.warn('route', key, '관통', bestScore[0], '겹침', bestScore[1]);
+  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path.setAttribute('d', 'M ' + best.map((p2) => p2[0] + ' ' + p2[1]).join(' L '));
+  const [c, w, dash] = STYLE[kind] || STYLE.seq;
+  path.setAttribute('fill', 'none'); path.setAttribute('stroke', c); path.setAttribute('stroke-width', w);
+  if (dash) path.setAttribute('stroke-dasharray', dash);
+  path.setAttribute('data-edge', key);
+  path.setAttribute('marker-end', 'url(#a-' + (STYLE[kind] ? kind : 'seq') + ')');
+  svg.appendChild(path);
+});
+</script>
+</body></html>

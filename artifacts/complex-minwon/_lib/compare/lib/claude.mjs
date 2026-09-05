@@ -14,7 +14,7 @@ function extractJson(raw) {
 }
 
 function invoke(prompt) {
-  return execFileSync(BIN(), ['-p', prompt], { encoding: 'utf8', timeout: 240_000, maxBuffer: 16 * 1024 * 1024 });
+  return execFileSync(BIN(), ['-p', prompt], { encoding: 'utf8', timeout: 600_000, maxBuffer: 16 * 1024 * 1024 });
 }
 
 export function callJson(prompt, { stage, cacheDir = null, fresh = false } = {}) {
