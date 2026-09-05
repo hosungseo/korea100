@@ -64,7 +64,7 @@ export const improvements = [
   },
   {
     "id": "I2",
-    "cid": "A-ecosystem-01",
+    "cid": "A-air-ecosystem-noise-water-01",
     "kind": "merge",
     "nodes": [
       "N09_1_P01",
@@ -87,7 +87,10 @@ export const improvements = [
       "N15_20_P01",
       "N15_20_P02",
       "N15_20_P04",
-      "N15_20_P05"
+      "N15_20_P05",
+      "N15_19_P01",
+      "N15_19_P02",
+      "N15_19_P04"
     ],
     "pids": [
       "N09:environmental-impact-assessment-consultation:P01",
@@ -110,15 +113,18 @@ export const improvements = [
       "N15:ecosystem-conservation-charge-assessment:P01",
       "N15:ecosystem-conservation-charge-assessment:P02",
       "N15:ecosystem-conservation-charge-assessment:P04",
-      "N15:ecosystem-conservation-charge-assessment:P05"
+      "N15:ecosystem-conservation-charge-assessment:P05",
+      "N15:nonpoint-pollution-source-installation-management:P01",
+      "N15:nonpoint-pollution-source-installation-management:P02",
+      "N15:nonpoint-pollution-source-installation-management:P04"
     ],
-    "title": "환경평가 협의 한 시계 통합",
-    "why": "환경영향평가법 제25조 의견수렴과 제27·28조 협의는 사업 단위 1회 사건인데 N09·N11·N12·N14 묶음에 각각 등재돼 네 번 돌고, 제28조 검토와 산업입지법 시행령 제8조의2 지정 협의가 같은 지정 사건 앞에서 별도 시계로 진행된다.",
-    "lever": "환경영향평가법 제28조제1항에 산업단지 지정 협의와 동일 사건으로 병행 검토하고 회신 기한을 하나로 두는 문구를 추가한다.",
+    "title": "환경영향평가 협의 한 시계 통합",
+    "why": "환경영향평가법 제25조는 초안 작성·의견수렴을 사업자가 하고 공고·공람은 시장·군수·구청장이 하도록 주체를 나눠, 같은 의견수렴이 사업자 절차와 주민 절차로 두 번 기재된다. 제28조 검토·보완은 제27조 협의 요청의 하위 단계인데 별건으로 잡혀 협의가 두 번 세어지고, 이 묶음이 산단 지정·개발계획 등 사건마다 반복돼 사업 1건에 판정·수렴·검토가 4회씩 중복된다.",
+    "lever": "환경영향평가법 제25조제1항에 '사업자의 초안 작성·의견수렴과 관할 시장·군수·구청장의 공고·공람은 사업 단위 1회의 절차로 하며, 그 결과는 제27조 협의 요청 및 제28조 검토에 그대로 인용한다'는 문장을 추가한다.",
     "targets": [
-      "기후에너지환경부 — 환경영향평가법 제28조제1항",
       "기후에너지환경부 — 환경영향평가법 제25조제1항",
-      "국토교통부 — 산업입지 및 개발에 관한 법률 시행령 제8조의2"
+      "기후에너지환경부 — 환경영향평가법 제28조제1항",
+      "기후에너지환경부 — 환경영향평가법 제22조제1항"
     ],
     "droppedTargets": []
   },
@@ -175,134 +181,6 @@ export const improvements = [
   },
   {
     "id": "I4",
-    "cid": "A-water-01",
-    "kind": "merge",
-    "nodes": [
-      "N09_1_P04",
-      "N09_1_P08",
-      "N11_2_P06",
-      "N11_1_P04",
-      "N11_1_P08",
-      "N12_2_P08",
-      "N12_1_P04",
-      "N12_1_P08",
-      "N14_2_P02",
-      "N14_2_P06",
-      "N14_2_P08",
-      "N37_0_P10",
-      "N15_19_P01",
-      "N15_19_P02",
-      "N15_19_P04"
-    ],
-    "pids": [
-      "N09:environmental-impact-assessment-consultation:P04",
-      "N09:environmental-impact-assessment-consultation:P08",
-      "N11:industrial-complex-development:P06",
-      "N11:environmental-impact-assessment-consultation:P04",
-      "N11:environmental-impact-assessment-consultation:P08",
-      "N12:industrial-complex-development:P08",
-      "N12:environmental-impact-assessment-consultation:P04",
-      "N12:environmental-impact-assessment-consultation:P08",
-      "N14:industrial-complex-development:P02",
-      "N14:industrial-complex-development:P06",
-      "N14:industrial-complex-development:P08",
-      "N37:industrial-complex-fast-track-plan-approval:P10",
-      "N15:nonpoint-pollution-source-installation-management:P01",
-      "N15:nonpoint-pollution-source-installation-management:P02",
-      "N15:nonpoint-pollution-source-installation-management:P04"
-    ],
-    "title": "환경영향평가 협의 한 사건 1회",
-    "why": "산업단지 지정(N11·N14)·개발(N12)과 환경영향평가 협의(N09)가 같은 사업지에서 환경영향평가법 제25조 초안 공람·주민 의견수렴과 제28조 장관 검토를 각각 별건으로 등재해, 동일 평가서의 의견수렴·검토·협의가 인허가 수만큼 반복된다.",
-    "lever": "환경영향평가법 제28조제1항에 동일 사업지·동일 사업자의 복수 인허가는 하나의 평가서로 한 시계에서 1회 검토·협의하고 그 결과를 각 인허가에 공통 적용한다는 규정을 신설한다.",
-    "targets": [
-      "기후에너지환경부 — 환경영향평가법 제28조제1항",
-      "기후에너지환경부 — 환경영향평가법 제25조제1항",
-      "기후에너지환경부 — 환경영향평가법 제27조"
-    ],
-    "droppedTargets": []
-  },
-  {
-    "id": "I5",
-    "cid": "A-air-01",
-    "kind": "merge",
-    "nodes": [
-      "N09_1_P04",
-      "N09_1_P08",
-      "N11_2_P06",
-      "N11_1_P04",
-      "N11_1_P08",
-      "N12_2_P08",
-      "N12_1_P04",
-      "N12_1_P08",
-      "N14_2_P02",
-      "N14_2_P06",
-      "N14_2_P08",
-      "N37_0_P10"
-    ],
-    "pids": [
-      "N09:environmental-impact-assessment-consultation:P04",
-      "N09:environmental-impact-assessment-consultation:P08",
-      "N11:industrial-complex-development:P06",
-      "N11:environmental-impact-assessment-consultation:P04",
-      "N11:environmental-impact-assessment-consultation:P08",
-      "N12:industrial-complex-development:P08",
-      "N12:environmental-impact-assessment-consultation:P04",
-      "N12:environmental-impact-assessment-consultation:P08",
-      "N14:industrial-complex-development:P02",
-      "N14:industrial-complex-development:P06",
-      "N14:industrial-complex-development:P08",
-      "N37:industrial-complex-fast-track-plan-approval:P10"
-    ],
-    "title": "환경영향평가 의견수렴·검토 한 사건화",
-    "why": "같은 사업인데 N09·N11·N12·N14 각 판이 환경영향평가법 제25조 주민 의견수렴과 제28조 평가서 검토를 별건으로 다시 돈다. 제25조제5항의 의제·생략은 '다른 법령' 기준이라 같은 법 안에서 승인절차마다 반복되는 수렴은 걸러내지 못하고, 제28조제1항 검토도 절차별로 각각 개시되어 보완 요청 2회 한도가 판마다 따로 센다.",
-    "lever": "환경영향평가법 제25조제5항에 '동일 사업·동일 평가대상은 1회 의견수렴으로 모든 승인절차에 충족되며 제28조 검토도 그 한 사건으로 병합한다'는 항을 추가.",
-    "targets": [
-      "기후에너지환경부 — 환경영향평가법 제25조제5항",
-      "기후에너지환경부 — 환경영향평가법 제28조제1항"
-    ],
-    "droppedTargets": []
-  },
-  {
-    "id": "I6",
-    "cid": "A-noise-01",
-    "kind": "merge",
-    "nodes": [
-      "N09_1_P04",
-      "N09_1_P08",
-      "N11_2_P06",
-      "N11_1_P04",
-      "N11_1_P08",
-      "N12_2_P08",
-      "N12_1_P04",
-      "N12_1_P08",
-      "N14_2_P06",
-      "N14_2_P08",
-      "N37_0_P10"
-    ],
-    "pids": [
-      "N09:environmental-impact-assessment-consultation:P04",
-      "N09:environmental-impact-assessment-consultation:P08",
-      "N11:industrial-complex-development:P06",
-      "N11:environmental-impact-assessment-consultation:P04",
-      "N11:environmental-impact-assessment-consultation:P08",
-      "N12:industrial-complex-development:P08",
-      "N12:environmental-impact-assessment-consultation:P04",
-      "N12:environmental-impact-assessment-consultation:P08",
-      "N14:industrial-complex-development:P06",
-      "N14:industrial-complex-development:P08",
-      "N37:industrial-complex-fast-track-plan-approval:P10"
-    ],
-    "title": "환경평가 의견수렴·검토 한 시계",
-    "why": "산업단지 개발계획 흐름(N11·N12·N14)과 환경영향평가 협의 흐름(N09·N11·N12)이 같은 제25조 주민 의견수렴과 제28조 장관 검토를 각각 별개 사건으로 기재해, 한 사업에서 공고·공람과 보완 요청(최대 두 차례)이 흐름마다 다시 돈다. 제25조제5항 의제는 '다른 법령'에 따른 수렴만 인정하므로 같은 법 안에서 되풀이되는 수렴·검토는 걸러 주지 못한다.",
-    "lever": "환경영향평가법 제25조제5항 — 산업단지 개발계획 단계에서 20일 이상 거친 의견수렴을 실시계획·협의 단계의 의견수렴으로 보며 제28조 검토는 그 한 건에 대해 한 차례로 갈음한다는 문장을 추가.",
-    "targets": [
-      "기후에너지환경부 — 환경영향평가법 제25조제5항",
-      "기후에너지환경부 — 환경영향평가법 제28조제1항"
-    ],
-    "droppedTargets": []
-  },
-  {
-    "id": "I7",
     "cid": "A-landform-01",
     "kind": "merge",
     "nodes": [
@@ -334,7 +212,7 @@ export const improvements = [
     "droppedTargets": []
   },
   {
-    "id": "I8",
+    "id": "I5",
     "cid": "A-farmland-01",
     "kind": "merge",
     "nodes": [
@@ -368,7 +246,7 @@ export const improvements = [
     "droppedTargets": []
   },
   {
-    "id": "I9",
+    "id": "I6",
     "cid": "A-forest-01",
     "kind": "merge",
     "nodes": [
@@ -402,7 +280,7 @@ export const improvements = [
     "droppedTargets": []
   },
   {
-    "id": "I10",
+    "id": "I7",
     "cid": "A-drainage-01",
     "kind": "merge",
     "nodes": [
@@ -448,7 +326,7 @@ export const improvements = [
     "droppedTargets": []
   },
   {
-    "id": "I11",
+    "id": "I8",
     "cid": "A-compensation-01",
     "kind": "merge",
     "nodes": [
@@ -477,7 +355,7 @@ export const improvements = [
     "droppedTargets": []
   },
   {
-    "id": "I12",
+    "id": "I9",
     "cid": "A-safety-01",
     "kind": "shorten",
     "nodes": [
@@ -515,7 +393,7 @@ export const improvements = [
     "droppedTargets": []
   },
   {
-    "id": "I13",
+    "id": "I10",
     "cid": "A-traffic-01",
     "kind": "merge",
     "nodes": [
@@ -568,7 +446,7 @@ export const improvements = [
     "droppedTargets": []
   },
   {
-    "id": "I14",
+    "id": "I11",
     "cid": "C-gwangju-N14-01",
     "kind": "merge",
     "nodes": [
@@ -592,7 +470,7 @@ export const improvements = [
     "droppedTargets": []
   },
   {
-    "id": "I15",
+    "id": "I12",
     "cid": "A-energy-01",
     "kind": "merge",
     "nodes": [
@@ -633,7 +511,7 @@ export const improvements = [
     "droppedTargets": []
   },
   {
-    "id": "I16",
+    "id": "I13",
     "cid": "A-heritage-01",
     "kind": "merge",
     "nodes": [

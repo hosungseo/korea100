@@ -23,3 +23,12 @@ test('article match is prefix-based on the same law', () => {
   assert.equal(rediscovered({ ...target, must: [{ law: 'X법', article: '제26조' }], minMatch: 1 }, [{ cid: 'k', pids: ['a'] }], procs).found, 'k');
   assert.equal(rediscovered({ ...target, must: [{ law: 'Z법', article: '제26조' }], minMatch: 1 }, [{ cid: 'k', pids: ['a'] }], procs).found, null);
 });
+
+test('isolated with verdicts flags only clusters where a mergeable pair crosses the isolated milestone', () => {
+  const cl = [{ cid: 'k', pids: ['N32:a:P01', 'N14:b:P02', 'N14:b:P03'] }];
+  const vNo = [{ cid: 'k', pairs: [{ a: 'N32:a:P01', b: 'N14:b:P02', mergeable: false }, { a: 'N14:b:P02', b: 'N14:b:P03', mergeable: true }] }];
+  const vYes = [{ cid: 'k', pairs: [{ a: 'N32:a:P01', b: 'N14:b:P02', mergeable: true }] }];
+  assert.equal(isolated('N32', cl, vNo), null);
+  assert.equal(isolated('N32', cl, vYes), 'k');
+  assert.equal(isolated('N32', cl, []), null, 'cluster without a verdict record is not a violation');
+});

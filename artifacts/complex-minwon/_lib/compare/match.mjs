@@ -57,8 +57,34 @@ export function matchOrgRoundtrip(cards, procs) {
   return out;
 }
 
+
+// 같은 절차를 절반 이상 공유하는 A축 묶음은 하나로 합친다. 환평 절차 하나가 대기·수질·소음·생태 지표를
+// 모두 갖고 있어 지표마다 같은 카드가 반복되는 것을 막는다. 임계 0.5는 실데이터(4호)에서
+// 환평 계열(0.50~0.92)은 합쳐지고 경관·소음(0.40)은 분리되는 값.
+export function mergeOverlapping(clusters, threshold = 0.5) {
+  const A = clusters.filter((c) => c.axis === 'same-subject');
+  const rest = clusters.filter((c) => c.axis !== 'same-subject');
+  const sets = A.map((c) => new Set(c.pids));
+  const parent = A.map((_, i) => i);
+  const find = (i) => (parent[i] === i ? i : (parent[i] = find(parent[i])));
+  for (let i = 0; i < A.length; i++) for (let j = i + 1; j < A.length; j++) {
+    let inter = 0; for (const p of sets[i]) if (sets[j].has(p)) inter++;
+    const union = sets[i].size + sets[j].size - inter;
+    if (union && inter / union >= threshold) parent[find(i)] = find(j);
+  }
+  const groups = new Map();
+  A.forEach((c, i) => { const r = find(i); if (!groups.has(r)) groups.set(r, []); groups.get(r).push(c); });
+  const merged = [...groups.values()].map((g) => {
+    if (g.length === 1) return g[0];
+    const keys = g.map((c) => c.key).sort();
+    const pids = [...new Set(g.flatMap((c) => c.pids))];
+    return { axis: 'same-subject', key: keys.join('+'), pids, mergedFrom: keys };
+  });
+  return [...merged, ...rest];
+}
+
 export function matchAll(cards, procs) {
-  const raw = [...matchSameSubject(cards, procs), ...matchOrgRoundtrip(cards, procs)];
+  const raw = mergeOverlapping([...matchSameSubject(cards, procs), ...matchOrgRoundtrip(cards, procs)]);
   const counters = new Map();
   const out = raw.map((c) => {
     const base = `${c.axis === 'same-subject' ? 'A' : 'C'}-${c.key.replace(/[^\w가-힣]+/g, '-')}`;

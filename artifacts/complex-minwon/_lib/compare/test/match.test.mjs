@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { matchSameSubject, matchOrgRoundtrip, scoreCluster, matchAll } from '../match.mjs';
+import { matchSameSubject, matchOrgRoundtrip, scoreCluster, matchAll, mergeOverlapping } from '../match.mjs';
 
 const P = (pid, ms, msOrder, law, onCritical = false, name = pid) => ({ pid, ms, msOrder, name, onCritical, legal: [{ law, article: '제1조' }] });
 const C = (pid, subjects, org, act, orgKind = 'org', extractStatus = 'ok') => ({ pid, subjects, org, act, orgKind, extractStatus });
@@ -49,4 +49,31 @@ test('matchAll assigns cids, sorts by critical/laws/procs and keeps the airport 
   assert.ok(all.every((c) => !c.pids.some((p) => p.startsWith('M9:'))));
   assert.match(all[0].cid, /^[AC]-/);
   for (let i = 1; i < all.length; i++) assert.ok(all[i - 1].score.critical >= all[i].score.critical);
+});
+
+test('mergeOverlapping unions same-subject clusters sharing >= half their procedures, transitively, and leaves C-axis alone', () => {
+  const cl = [
+    { axis: 'same-subject', key: 'air', pids: ['a', 'b', 'c', 'd'] },
+    { axis: 'same-subject', key: 'noise', pids: ['a', 'b', 'c', 'e'] },      // J(air,noise)=3/5=0.6
+    { axis: 'same-subject', key: 'water', pids: ['a', 'b', 'e', 'f'] },      // J(noise,water)=3/5=0.6, J(air,water)=2/6
+    { axis: 'same-subject', key: 'traffic', pids: ['a', 'x', 'y', 'z'] },    // J with any <= 1/7
+    { axis: 'org-roundtrip', key: 'moef@M1', pids: ['a', 'b', 'c', 'd'] },  // identical pids but C axis → untouched
+  ];
+  const out = mergeOverlapping(cl);
+  const m = out.find((c) => c.key === 'air+noise+water');
+  assert.ok(m, 'transitive merge');
+  assert.deepEqual([...m.pids].sort(), ['a', 'b', 'c', 'd', 'e', 'f']);
+  assert.deepEqual(m.mergedFrom, ['air', 'noise', 'water']);
+  assert.ok(out.find((c) => c.key === 'traffic'));
+  assert.ok(out.find((c) => c.axis === 'org-roundtrip'));
+  assert.equal(out.length, 3);
+});
+
+test('matchAll cids for merged clusters carry the joined key', () => {
+  const procs2 = ['a', 'b', 'c', 'd', 'e'].map((id, i) => ({ pid: id, ms: 'M', msOrder: 0, name: id, onCritical: false, legal: [{ law: i % 2 ? 'X법' : 'Y법', article: '제1조' }] }));
+  const cards2 = Object.fromEntries(procs2.map((p) => [p.pid, { pid: p.pid, subjects: ['air', 'noise'], org: 'applicant', act: 'apply', orgKind: 'applicant', extractStatus: 'ok' }]));
+  const all = matchAll(cards2, procs2);
+  assert.equal(all.length, 1);
+  assert.equal(all[0].cid, 'A-air-noise-01');
+  assert.equal(all[0].pids.length, 5);
 });

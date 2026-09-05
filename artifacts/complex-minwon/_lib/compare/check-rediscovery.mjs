@@ -6,6 +6,8 @@ import { COMPARE, OUT_COMPARE } from './lib/paths.mjs';
 import { loadProcedures } from './load.mjs';
 import { extractAll } from './extract.mjs';
 import { matchAll } from './match.mjs';
+import { judgeAll } from './judge.mjs';
+import { loadPreserve } from './lib/normalize.mjs';
 import { loadOrgs, loadSubjects } from './lib/normalize.mjs';
 
 export function articleHit(have, must) {
@@ -17,11 +19,15 @@ export function articleHit(have, must) {
   return !m[2] || h.includes(m[2]);
 }
 
-export function isolated(ms, clusters) {
-  // ms의 절차가 다른 마일스톤 절차와 한 묶음에 있으면 그 cid를 돌려준다(위반). 없으면 null.
+export function isolated(ms, clusters, verdicts = null) {
+  // 위반 = ms의 절차와 다른 마일스톤 절차가 한 묶음에 있고, 판정이 그 둘을 "묶을 수 있다"고 한 쌍이 있을 때.
+  // verdicts가 없으면(판정 전) 묶음 공유만으로 위반으로 본다 — 지표가 같으면 군공항도 묶이므로 판정을 넣어야 의미가 있다.
+  const mine = (p) => p.startsWith(ms + ':');
   for (const c of clusters) {
-    const mine = c.pids.filter((p) => p.startsWith(ms + ':')), others = c.pids.filter((p) => !p.startsWith(ms + ':'));
-    if (mine.length && others.length) return c.cid;
+    if (!c.pids.some(mine) || !c.pids.some((p) => !mine(p))) continue;
+    if (!verdicts) return c.cid;
+    const v = verdicts.find((x) => x.cid === c.cid);
+    if (v && v.pairs.some((p) => p.mergeable && mine(p.a) !== mine(p.b))) return c.cid;
   }
   return null;
 }
@@ -47,7 +53,14 @@ if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(new URL(im
     const clusters = matchAll(cards, procs);
     writeJson(path.join(dir, 'procedures.json'), procs); writeJson(path.join(dir, 'cards.json'), cards); writeJson(path.join(dir, 'candidates.json'), clusters);
     for (const t of spec.targets.filter((x) => x.run === name)) results.push({ name: t.name, ...rediscovered(t, clusters, procs) });
-    for (const t of (spec.negatives ?? []).filter((x) => x.run === name)) { const bad = isolated(t.isolate, clusters); results.push({ name: t.name, found: bad ? null : 'isolated', matched: 0, violation: bad }); }
+    for (const t of (spec.negatives ?? []).filter((x) => x.run === name)) {
+      const mine = (p) => p.startsWith(t.isolate + ':');
+      const mixed = clusters.filter((c) => c.pids.some(mine) && c.pids.some((p) => !mine(p)));
+      const verdicts = judgeAll(mixed, procs, loadPreserve(), { log: (m) => process.stderr.write(m + '\n') });
+      writeJson(path.join(dir, 'verdicts-mixed.json'), verdicts);
+      const bad = isolated(t.isolate, clusters, verdicts);
+      results.push({ name: t.name, found: bad ? null : 'isolated', matched: 0, violation: bad, mixedClusters: mixed.map((c) => c.cid) });
+    }
   }
   writeJson(path.join(OUT_COMPARE, 'rediscovery-report.json'), results);
   for (const r of results) console.log(r.found ? 'FOUND' : 'MISS ', r.name, r.found ? `→ ${r.found}` : `(matched ${r.matched})`);

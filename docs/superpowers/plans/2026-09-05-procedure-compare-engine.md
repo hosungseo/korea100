@@ -2453,13 +2453,13 @@ git commit -m "feat(warroom): N11·N12·N14·N37에 bundleId — 복합민원 4�
 
 ---
 
-## 완료 기준 (스펙 6절) — 2026-09-05 최종 검증
+## 완료 기준 (스펙 6절) — 2026-09-05 최종 검증 (2차: 묶음 병합·배선 0 반영)
 
-- [x] `node --test test/` 전부 통과 (48/48)
+- [x] `node --test 'test/*.test.mjs'` 전부 통과 (53/53). node 24는 디렉터리 인자를 안 받으므로 glob 사용
 - [x] `04-deemed-bundle/compare/procedures.json` 222건, `cards.json` ok 222/222
-- [x] `candidates.json` 16, `verdicts.json` 통과 16/16, `cards-out.json` 카드 16개 전부 `targets` ≥ 1 · kind ∈ merge(14)|automate(1)|shorten(1)
-- [x] `review.html`·`.png`, `deemed-bundle-full/improve.html`·`.png` 존재. `check-overlap` 관통 0. 선 겹침은 laneWidth 3회 증대(480/560/640) 후에도 21–23 잔여 — 계획이 명시한 이탈 조건(세 번 안에 0이 안 되면 기록 후 멈춤)에 따라 README에 기록하고 받아들임
+- [x] `candidates.json` 13(절차 절반 이상 공유하는 A 묶음은 병합), `verdicts.json` 통과 13/13, `cards-out.json` 카드 13개 전부 `targets` ≥ 1 · kind ∈ merge(11)|automate(1)|shorten(1)
+- [x] `review.html`·`.png`, `deemed-bundle-full/improve.html`·`.png` 존재. `check-overlap` 관통 0 · 선 겹침 0 (같은 칸 인접 seq 선 생략 + 절차 24개 초과 마일스톤 제도별 행 분리, 관문 19). PNG는 `meta.pngScale=1.5`
 - [x] `verify-basis` 음성 대조군 OK, citations 435/435 failed 0
-- [x] `check-rediscovery` FOUND 3/3(법제처 원문 대조 후 2차 재실행으로 3호 I5·1호 I2 FOUND) + 음성 대조군 isolated. 3호 I2는 절차 단위 구조적 한계로 MISS 유지(README 기록). `compare-golden` org 100%·act 100%·subjects 84% — 세 지표 ≥ 80% 충족
+- [x] `check-rediscovery` FOUND 3/3(법제처 원문 대조 후 2차 재실행으로 3호 I5·1호 I2 FOUND) + 음성 대조군 isolated(판정 기준: 혼합 묶음 632쌍 중 교차 mergeable 0). 3호 I2는 절차 단위 구조적 한계로 MISS 유지(README 기록). `compare-golden` org 100%·act 100%·subjects 84% — 세 지표 ≥ 80% 충족
 - [x] 워룸 `data.json`에 bundleId 4곳(N11·N12·N14·N37), `path.json` 일수 불변 확인
 - [x] 소요일 단축 주장 없음 — README·판 문구에 소요일·단축·단축률 언급 없음, 카드는 kind/targets/why/lever만 담당

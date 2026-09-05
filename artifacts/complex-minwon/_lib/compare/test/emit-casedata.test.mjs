@@ -47,3 +47,29 @@ test('improvements pass through and reference existing nodes; module renders and
   const mod = await import('file://' + f);
   assert.equal(mod.nodes.length, cd.nodes.length); assert.equal(mod.meta.slug, 'fx'); assert.deepEqual(mod.groups, {});
 });
+
+test('a seq edge to the very next card in the same lane×gate cell is dropped (implied by stacking); skips and cross-cell edges stay', () => {
+  // in fixture eia-mini: P02(환경부장관)→P03(환경부) are both moef lane, M1 gate, adjacent → conditional(opt) edge kept (only seq is dropped)
+  assert.ok(cd.edges.some(([a, b, k]) => a === 'M1_0_P02' && b === 'M1_0_P03' && k === 'opt'), 'opt edge in same cell is kept');
+  // synthesize: two applicant cards in one cell with a seq edge → dropped
+  const procs2 = procs.filter((p) => p.ms === 'M2');
+  const cards2 = Object.fromEntries(procs2.map((p) => [p.pid, card(p.pid, 'applicant', '신청인·사업시행자', 'applicant')]));
+  const cd2 = buildCaseData({ procs: procs2, cards: cards2, improvements: [], project: JSON.parse(fs.readFileSync(path.join(FX, 'project.json'), 'utf8')), orgs: loadOrgs(), meta: { slug: 'fx2', checkedAt: '2026-09-05' }, institutionsDir: path.join(FX, 'institutions') });
+  // traffic-mini P01→P02→P03 all forced into the applicant lane, M2 gate: both seq edges are adjacent-in-cell → dropped
+  assert.ok(!cd2.edges.some(([a, b]) => a === 'M2_0_P01' && b === 'M2_0_P02'));
+  assert.ok(!cd2.edges.some(([a, b]) => a === 'M2_0_P02' && b === 'M2_0_P03'));
+  assert.equal(cd2.skippedStack, 2);
+});
+
+test('milestones with more procedures than splitAbove become one gate per institution; nodes follow', () => {
+  const procsAll = loadProcedures({ ...opts, milestones: ['M1', 'M2'] });
+  // give M2 a second institution by relabelling one record's institution (still resolvable in fixtures dir? no — edges skip missing files, fine)
+  const cardsAll = Object.fromEntries(procsAll.map((p) => [p.pid, card(p.pid, 'applicant', '신청인·사업시행자', 'applicant')]));
+  const cd3 = buildCaseData({ procs: procsAll, cards: cardsAll, improvements: [], project: JSON.parse(fs.readFileSync(path.join(FX, 'project.json'), 'utf8')), orgs: loadOrgs(), meta: { slug: 'fx3', checkedAt: '2026-09-05' }, institutionsDir: path.join(FX, 'institutions'), splitAbove: 2 });
+  // M1 (3 procs, eia-mini) and M2 (3 procs, traffic-mini) both exceed 2 → split by institution → still one gate each but with split ids
+  assert.deepEqual(cd3.gates.map((g) => g.id), ['M1_0', 'M2_1']);
+  assert.ok(cd3.gates[0].name.startsWith('M1 1/1'));
+  for (const n of cd3.nodes) assert.ok(cd3.gates.find((g) => g.id === n.gate), n.id);
+  // default threshold keeps milestone gates
+  assert.deepEqual(cd.gates.map((g) => g.id), ['M1', 'M2']);
+});

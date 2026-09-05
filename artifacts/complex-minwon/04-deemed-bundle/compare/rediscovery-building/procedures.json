@@ -1,0 +1,346 @@
+[
+  {
+    "pid": "INST:building-permit-use-approval:building-permit-use-approval:P01",
+    "ms": "INST:building-permit-use-approval",
+    "msName": "건축허가·착공신고·사용승인",
+    "stage": null,
+    "gateIndex": 0,
+    "msOrder": 0,
+    "institution": "building-permit-use-approval",
+    "institutionName": "건축허가·착공신고·사용승인",
+    "nodeId": "P01",
+    "name": "입지·규모 사전결정 신청(선택)",
+    "action": "건축허가 신청 전에 해당 대지에 건축이 허용되는지, 건축 가능한 규모가 어떤지 사전결정을 신청할 수 있다. 건축위원회 심의·교통영향평가 검토를 동시에 신청할 수 있다.",
+    "actorRaw": "건축주",
+    "type": "task",
+    "outputs": [
+      "사전결정 신청서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "건축법",
+        "article": "제10조제1항·제2항",
+        "text": "① 건축허가 대상 건축물을 건축하려는 자는 건축허가를 신청하기 전에 허가권자에게 입지 허용 여부·건축 가능 규모 등의 사전결정을 신청할 수 있다. ② 사전결정신청자는 건축위원회 심의와 교통영향평가서의 검토를 동시에 신청할 수 있다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "INST:building-permit-use-approval:building-permit-use-approval:P02",
+    "ms": "INST:building-permit-use-approval",
+    "msName": "건축허가·착공신고·사용승인",
+    "stage": null,
+    "gateIndex": 0,
+    "msOrder": 0,
+    "institution": "building-permit-use-approval",
+    "institutionName": "건축허가·착공신고·사용승인",
+    "nodeId": "P02",
+    "name": "사전결정 통지·의제 협의",
+    "action": "입지·규모·용도를 사전결정해 통지한다. 개발행위허가·산지전용·농지전용·하천점용 의제 사항이 있으면 관계 행정기관과 미리 협의한다.",
+    "actorRaw": "허가권자",
+    "type": "task",
+    "outputs": [
+      "사전결정 통지서"
+    ],
+    "inputs": [],
+    "deadlineRaw": "관계 행정기관은 협의 요청을 받은 날부터 15일 이내 의견 제출(기간 내 미제출 시 협의 간주)",
+    "legal": [
+      {
+        "law": "건축법",
+        "article": "제10조제4항·제6항·제7항·제8항",
+        "text": "④ 신청을 받으면 입지, 건축물의 규모, 용도 등을 사전결정한 후 신청자에게 알려야 한다. ⑥ 사전결정 통지를 받은 경우 개발행위허가·산지전용허가·신고, 농지전용허가·신고·협의, 하천점용허가를 받거나 한 것으로 본다. ⑦ 관계 행정기관의 장은 협의를 요청받은 날부터 15일 이내에 의견을 제출하여야 한다. ⑧ 기간 내에 의견을 제출하지 아니하면 협의가 이루어진 것으로 본다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "INST:building-permit-use-approval:building-permit-use-approval:P03",
+    "ms": "INST:building-permit-use-approval",
+    "msName": "건축허가·착공신고·사용승인",
+    "stage": null,
+    "gateIndex": 0,
+    "msOrder": 0,
+    "institution": "building-permit-use-approval",
+    "institutionName": "건축허가·착공신고·사용승인",
+    "nodeId": "P03",
+    "name": "사전결정 효력 기한 관리",
+    "action": "사전결정을 통지받으면 2년 이내에 건축허가를 신청해야 하며, 기간 내 신청하지 않으면 사전결정의 효력이 상실된다.",
+    "actorRaw": "건축주",
+    "type": "gateway",
+    "outputs": [
+      "기한 관리 기록"
+    ],
+    "inputs": [],
+    "deadlineRaw": "사전결정 통지받은 날부터 2년 이내 건축허가 신청(미신청 시 효력 상실)",
+    "legal": [
+      {
+        "law": "건축법",
+        "article": "제10조제9항",
+        "text": "사전결정신청자는 사전결정을 통지받은 날부터 2년 이내에 제11조에 따른 건축허가를 신청하여야 하며, 이 기간에 건축허가를 신청하지 아니하면 사전결정의 효력이 상실된다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "INST:building-permit-use-approval:building-permit-use-approval:P04",
+    "ms": "INST:building-permit-use-approval",
+    "msName": "건축허가·착공신고·사용승인",
+    "stage": null,
+    "gateIndex": 0,
+    "msOrder": 0,
+    "institution": "building-permit-use-approval",
+    "institutionName": "건축허가·착공신고·사용승인",
+    "nodeId": "P04",
+    "name": "건축허가 신청",
+    "action": "허가신청서에 설계도서와 의제 관련 신청서·구비서류를 첨부해 제출한다. 국토교통부령으로 정하는 서류는 착공신고 전까지 사후 제출할 수 있다. 대지 소유권을 확보해야 한다.",
+    "actorRaw": "건축주",
+    "type": "task",
+    "outputs": [
+      "건축허가 신청서",
+      "설계도서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "건축법",
+        "article": "제11조제1항·제3항·제11항",
+        "text": "① 건축물을 건축하거나 대수선하려는 자는 특별자치시장·특별자치도지사 또는 시장·군수·구청장의 허가를 받아야 한다. 21층 이상 등 대통령령으로 정하는 건축물을 특별시나 광역시에 건축하려면 특별시장이나 광역시장의 허가를 받아야 한다. ③ 허가신청서에 설계도서와 의제 관련 신청서·구비서류를 첨부하여 제출하여야 한다. ⑪ 건축허가를 받으려는 자는 해당 대지의 소유권을 확보하여야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "INST:building-permit-use-approval:building-permit-use-approval:P05",
+    "ms": "INST:building-permit-use-approval",
+    "msName": "건축허가·착공신고·사용승인",
+    "stage": null,
+    "gateIndex": 0,
+    "msOrder": 0,
+    "institution": "building-permit-use-approval",
+    "institutionName": "건축허가·착공신고·사용승인",
+    "nodeId": "P05",
+    "name": "의제 협의·도지사 사전승인",
+    "action": "의제 사항이 다른 기관 권한이면 미리 협의한다. 시장·군수는 21층 이상 등 일정 건축물의 허가에 도지사의 사전 승인을 받아야 한다.",
+    "actorRaw": "허가권자",
+    "type": "task",
+    "outputs": [
+      "관계기관 협의 결과"
+    ],
+    "inputs": [],
+    "deadlineRaw": "관계 행정기관은 협의 요청을 받은 날부터 15일 이내 의견 제출(미제출 시 협의 간주)",
+    "legal": [
+      {
+        "law": "건축법",
+        "article": "제11조제2항·제6항",
+        "text": "② 시장·군수는 일정 건축물의 건축을 허가하려면 미리 도지사의 승인을 받아야 한다. ⑥ 의제 사항이 다른 행정기관의 권한에 속하면 미리 협의하여야 하며, 협의 요청을 받은 관계 행정기관의 장은 15일 이내에 의견을 제출하여야 하고, 제출하지 아니하면 협의가 이루어진 것으로 본다."
+      },
+      {
+        "law": "소방시설 설치 및 관리에 관한 법률",
+        "article": "제6조",
+        "text": "건축허가등의 권한이 있는 행정기관은 건축허가등을 할 때 미리 관할 소방본부장이나 소방서장의 동의를 받아야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "INST:building-permit-use-approval:building-permit-use-approval:P06",
+    "ms": "INST:building-permit-use-approval",
+    "msName": "건축허가·착공신고·사용승인",
+    "stage": null,
+    "gateIndex": 0,
+    "msOrder": 0,
+    "institution": "building-permit-use-approval",
+    "institutionName": "건축허가·착공신고·사용승인",
+    "nodeId": "P06",
+    "name": "건축허가(허가등 의제)",
+    "action": "한국건축규정 준수를 확인하고 허가한다. 허가를 받으면 개발행위허가·산지·농지전용·도로점용·배수설비 신고 등이 의제되며, 공장건축물은 산집법 제13조의2·제14조의 인·허가등이 의제된다.",
+    "actorRaw": "허가권자",
+    "type": "gateway",
+    "outputs": [
+      "건축허가서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "건축법",
+        "article": "제11조제4항·제5항",
+        "text": "④ 건축허가를 하고자 하는 때에 한국건축규정의 준수 여부를 확인하여야 한다. ⑤ 건축허가를 받으면 개발행위허가, 산지전용허가·신고, 사도개설허가, 농지전용허가·신고·협의, 도로점용허가, 하천점용허가, 배수설비 설치신고 등을 받거나 한 것으로 보며, 공장건축물의 경우에는 산업집적활성화 및 공장설립에 관한 법률 제13조의2와 제14조에 따라 관련 법률의 인·허가등을 받은 것으로 본다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "INST:building-permit-use-approval:building-permit-use-approval:P07",
+    "ms": "INST:building-permit-use-approval",
+    "msName": "건축허가·착공신고·사용승인",
+    "stage": null,
+    "gateIndex": 0,
+    "msOrder": 0,
+    "institution": "building-permit-use-approval",
+    "institutionName": "건축허가·착공신고·사용승인",
+    "nodeId": "P07",
+    "name": "건축신고(소규모 대체)",
+    "action": "85㎡ 이내 증축·개축, 관리지역 등 소규모 건축, 연면적 200㎡ 미만·3층 미만 대수선 등은 신고로 건축허가를 갈음한다. 신고일부터 1년 이내 미착공 시 효력이 없어진다.",
+    "actorRaw": "건축주",
+    "type": "task",
+    "outputs": [
+      "건축신고서"
+    ],
+    "inputs": [],
+    "deadlineRaw": "신고를 받은 날부터 5일 이내 수리 여부 통지(심의·동의·협의 등이 필요한 경우 20일 이내)",
+    "legal": [
+      {
+        "law": "건축법",
+        "article": "제14조제1항·제3항·제5항",
+        "text": "① 허가 대상 건축물이라 하더라도 바닥면적 합계 85제곱미터 이내의 증축·개축·재축 등은 신고를 하면 건축허가를 받은 것으로 본다. ③ 신고를 받은 날부터 5일 이내에 수리 여부를 통지하여야 하며, 심의·동의·협의·확인이 필요한 경우에는 20일 이내에 통지하여야 한다. ⑤ 신고일부터 1년 이내에 공사에 착수하지 아니하면 신고의 효력은 없어진다(1년 범위 연장 가능)."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "INST:building-permit-use-approval:building-permit-use-approval:P08",
+    "ms": "INST:building-permit-use-approval",
+    "msName": "건축허가·착공신고·사용승인",
+    "stage": null,
+    "gateIndex": 0,
+    "msOrder": 0,
+    "institution": "building-permit-use-approval",
+    "institutionName": "건축허가·착공신고·사용승인",
+    "nodeId": "P08",
+    "name": "착공신고",
+    "action": "공사 착수 전에 공사계획을 신고한다. 감리자를 지정한 경우 감리자·시공자가 신고서에 함께 서명한다.",
+    "actorRaw": "건축주",
+    "type": "task",
+    "outputs": [
+      "착공신고서"
+    ],
+    "inputs": [],
+    "deadlineRaw": "허가권자는 신고를 받은 날부터 3일 이내 수리 여부 통지(기간 내 미통지 시 끝난 날의 다음 날 수리 의제)",
+    "legal": [
+      {
+        "law": "건축법",
+        "article": "제21조제1항·제2항·제3항·제4항",
+        "text": "① 허가를 받거나 신고를 한 건축물의 공사를 착수하려는 건축주는 허가권자에게 공사계획을 신고하여야 한다. ② 공사감리자와 공사시공자가 신고서에 함께 서명하여야 한다. ③ 신고를 받은 날부터 3일 이내에 수리 여부를 통지하여야 한다. ④ 기간 내 통지하지 아니하면 그 기간이 끝난 날의 다음 날에 신고를 수리한 것으로 본다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "INST:building-permit-use-approval:building-permit-use-approval:P09",
+    "ms": "INST:building-permit-use-approval",
+    "msName": "건축허가·착공신고·사용승인",
+    "stage": null,
+    "gateIndex": 0,
+    "msOrder": 0,
+    "institution": "building-permit-use-approval",
+    "institutionName": "건축허가·착공신고·사용승인",
+    "nodeId": "P09",
+    "name": "허가취소 검토",
+    "action": "허가받은 날부터 2년(산집법 승인 공장은 3년) 이내 미착공 등의 경우 허가를 취소해야 한다. 정당한 사유가 있으면 1년 범위에서 착수기간을 연장할 수 있다.",
+    "actorRaw": "허가권자",
+    "type": "gateway",
+    "outputs": [
+      "허가취소 처분(해당 시)"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "건축법",
+        "article": "제11조제7항",
+        "text": "허가를 받은 날부터 2년(산업집적활성화 및 공장설립에 관한 법률 제13조에 따라 공장의 신설·증설 또는 업종변경의 승인을 받은 공장은 3년) 이내에 공사에 착수하지 아니한 경우 등에는 허가를 취소하여야 한다. 다만 정당한 사유가 있다고 인정되면 1년의 범위에서 착수기간을 연장할 수 있다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "INST:building-permit-use-approval:building-permit-use-approval:P10",
+    "ms": "INST:building-permit-use-approval",
+    "msName": "건축허가·착공신고·사용승인",
+    "stage": null,
+    "gateIndex": 0,
+    "msOrder": 0,
+    "institution": "building-permit-use-approval",
+    "institutionName": "건축허가·착공신고·사용승인",
+    "nodeId": "P10",
+    "name": "사용승인 신청",
+    "action": "건축공사를 완료하면 감리완료보고서와 공사완료도서 등을 첨부해 사용승인을 신청한다.",
+    "actorRaw": "건축주",
+    "type": "task",
+    "outputs": [
+      "사용승인 신청서",
+      "감리완료보고서",
+      "공사완료도서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "건축법",
+        "article": "제22조제1항",
+        "text": "건축주가 허가를 받았거나 신고를 한 건축물의 건축공사를 완료한 후 그 건축물을 사용하려면 공사감리자가 작성한 감리완료보고서와 공사완료도서 등을 첨부하여 허가권자에게 사용승인을 신청하여야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "INST:building-permit-use-approval:building-permit-use-approval:P11",
+    "ms": "INST:building-permit-use-approval",
+    "msName": "건축허가·착공신고·사용승인",
+    "stage": null,
+    "gateIndex": 0,
+    "msOrder": 0,
+    "institution": "building-permit-use-approval",
+    "institutionName": "건축허가·착공신고·사용승인",
+    "nodeId": "P11",
+    "name": "사용검사·사용승인서 교부(검사등 의제)",
+    "action": "설계도서대로 시공됐는지 등을 검사해 합격하면 사용승인서를 내준다. 승인 전 사용은 금지되나 기간 내 미교부 시 등은 예외다. 배수설비 준공검사·승강기 설치검사·전기 사용전검사 등이 의제되고, 공장건축물은 산집법 제14조의2의 검사등이 의제된다.",
+    "actorRaw": "허가권자",
+    "type": "gateway",
+    "outputs": [
+      "사용승인서"
+    ],
+    "inputs": [],
+    "deadlineRaw": "국토교통부령으로 정하는 기간에 검사 실시(기간 내 사용승인서 미교부 시 사용 가능)",
+    "legal": [
+      {
+        "law": "건축법",
+        "article": "제22조제2항·제3항·제4항",
+        "text": "② 사용승인신청을 받은 경우 국토교통부령으로 정하는 기간에 설계도서대로 시공되었는지 등을 검사하고, 합격된 건축물에 대하여는 사용승인서를 내주어야 한다. ③ 건축주는 사용승인을 받은 후가 아니면 건축물을 사용할 수 없다. 다만 기간 내에 사용승인서를 교부하지 아니한 경우 등은 그러하지 아니하다. ④ 사용승인을 받은 경우 배수설비 준공검사, 승강기 설치검사, 전기설비 사용전검사 등을 받은 것으로 보며, 공장건축물의 경우에는 산집법 제14조의2에 따라 관련 법률의 검사 등을 받은 것으로 본다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "INST:building-permit-use-approval:building-permit-use-approval:P12",
+    "ms": "INST:building-permit-use-approval",
+    "msName": "건축허가·착공신고·사용승인",
+    "stage": null,
+    "gateIndex": 0,
+    "msOrder": 0,
+    "institution": "building-permit-use-approval",
+    "institutionName": "건축허가·착공신고·사용승인",
+    "nodeId": "P12",
+    "name": "허가·신고사항 변경",
+    "action": "허가·신고한 사항을 변경하려면 변경 전에 허가를 받거나 신고한다. 대통령령으로 정하는 사항의 변경은 사용승인 신청 시 일괄 신고할 수 있다.",
+    "actorRaw": "건축주",
+    "type": "task",
+    "outputs": [
+      "변경허가(신고)"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "건축법",
+        "article": "제16조제1항·제2항",
+        "text": "① 건축주가 허가를 받았거나 신고한 사항을 변경하려면 변경하기 전에 허가권자의 허가를 받거나 신고하여야 한다. 다만 대통령령으로 정하는 경미한 사항의 변경은 그러하지 아니하다. ② 대통령령으로 정하는 사항의 변경은 사용승인을 신청할 때 일괄하여 신고할 수 있다."
+      }
+    ],
+    "onCritical": false
+  }
+]

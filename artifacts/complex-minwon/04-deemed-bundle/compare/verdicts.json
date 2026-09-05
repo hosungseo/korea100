@@ -1889,9 +1889,9 @@
     "judgeStatus": "ok"
   },
   {
-    "cid": "A-ecosystem-01",
+    "cid": "A-air-ecosystem-noise-water-01",
     "axis": "same-subject",
-    "key": "ecosystem",
+    "key": "air+ecosystem+noise+water",
     "pids": [
       "N09:environmental-impact-assessment-consultation:P01",
       "N09:environmental-impact-assessment-consultation:P04",
@@ -1913,7 +1913,10 @@
       "N15:ecosystem-conservation-charge-assessment:P01",
       "N15:ecosystem-conservation-charge-assessment:P02",
       "N15:ecosystem-conservation-charge-assessment:P04",
-      "N15:ecosystem-conservation-charge-assessment:P05"
+      "N15:ecosystem-conservation-charge-assessment:P05",
+      "N15:nonpoint-pollution-source-installation-management:P01",
+      "N15:nonpoint-pollution-source-installation-management:P02",
+      "N15:nonpoint-pollution-source-installation-management:P04"
     ],
     "pairs": [
       {
@@ -1921,31 +1924,31 @@
         "b": "N09:environmental-impact-assessment-consultation:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정 후 평가항목 결정을 거쳐야 초안 작성, 같은 평가의 선후 단계",
-        "blockingArticle": "환경영향평가법 제25조제1항"
+        "reason": "동일 평가 절차의 선후 단계(대상 판정→의견수렴), 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P01",
         "b": "N09:environmental-impact-assessment-consultation:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정과 평가서 검토는 실체·시점 다름",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "동일 평가 절차의 선후 단계(대상 판정→평가서 검토), 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P01",
         "b": "N11:industrial-complex-development:P06",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정과 주민 의견수렴은 선후 단계",
-        "blockingArticle": "환경영향평가법 제25조제1항"
+        "reason": "대상 판정과 주민 의견수렴은 별개 단계",
+        "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P01",
         "b": "N11:environmental-impact-assessment-consultation:P01",
         "verdict": "same",
         "mergeable": true,
-        "reason": "제22조 동일 대상사업 판정, 사업 단위 1회 시행을 묶음별 중복 등재",
+        "reason": "동일 법·조문·주체의 동일 절차가 사건별로 중복 기재됨, 사업 단위 1회로 통합",
         "blockingArticle": null
       },
       {
@@ -1953,31 +1956,31 @@
         "b": "N11:environmental-impact-assessment-consultation:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정 후 평가항목 결정을 거쳐야 초안 작성",
-        "blockingArticle": "환경영향평가법 제25조제1항"
+        "reason": "동일 평가 절차의 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P01",
         "b": "N11:environmental-impact-assessment-consultation:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정과 평가서 검토는 실체·시점 다름",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "동일 평가 절차의 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P01",
         "b": "N12:industrial-complex-development:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정과 협의는 실체·시점 다름",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "대상 판정과 평가서 협의는 별개 단계",
+        "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P01",
         "b": "N12:environmental-impact-assessment-consultation:P01",
         "verdict": "same",
         "mergeable": true,
-        "reason": "제22조 동일 대상사업 판정, 묶음별 중복 등재",
+        "reason": "동일 법·조문·주체의 동일 절차가 사건별로 중복 기재됨, 사업 단위 1회로 통합",
         "blockingArticle": null
       },
       {
@@ -1985,23 +1988,23 @@
         "b": "N12:environmental-impact-assessment-consultation:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정 후 평가항목 결정을 거쳐야 초안 작성",
-        "blockingArticle": "환경영향평가법 제25조제1항"
+        "reason": "동일 평가 절차의 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P01",
         "b": "N12:environmental-impact-assessment-consultation:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정과 평가서 검토는 실체·시점 다름",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "동일 평가 절차의 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P01",
         "b": "N14:development-permit:D05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "개발행위허가 의제 협의와 평가 대상 판정은 법·사건 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2009,7 +2012,7 @@
         "b": "N14:industrial-complex-development:P02",
         "verdict": "different",
         "mergeable": false,
-        "reason": "산단 지정 협의와 평가 대상 판정은 법·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2017,23 +2020,23 @@
         "b": "N14:industrial-complex-development:P06",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정과 주민 의견수렴은 선후 단계",
-        "blockingArticle": "환경영향평가법 제25조제1항"
+        "reason": "대상 판정과 주민 의견수렴은 별개 단계",
+        "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P01",
         "b": "N14:industrial-complex-development:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정과 협의는 실체·시점 다름",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "대상 판정과 평가서 협의는 별개 단계",
+        "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P01",
         "b": "N14:forestland-conversion:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "산지전용 타당성과 환경영향평가 대상 판정은 법·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2041,7 +2044,7 @@
         "b": "N37:industrial-complex-fast-track-plan-approval:P10",
         "verdict": "different",
         "mergeable": false,
-        "reason": "통합심의는 위원회 심의, 대상 판정은 사업자 판정으로 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2049,7 +2052,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P01",
         "verdict": "partial",
         "mergeable": true,
-        "reason": "부담금 부과대상 판정 요건이 평가 대상사업 여부, 판정 결과 자동 연동 가능",
+        "reason": "환경영향평가 대상 판정 결과가 부과대상 판정의 입력, 판정 결과 자동 연계 가능",
         "blockingArticle": null
       },
       {
@@ -2057,7 +2060,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P02",
         "verdict": "different",
         "mergeable": false,
-        "reason": "훼손면적 산정과 대상 판정은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2065,7 +2068,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 산정과 대상 판정은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2073,7 +2076,31 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 부과 결정과 대상 판정은 실체·시점 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N09:environmental-impact-assessment-consultation:P01",
+        "b": "N15:nonpoint-pollution-source-installation-management:P01",
+        "verdict": "partial",
+        "mergeable": true,
+        "reason": "환경영향평가 대상 판정 결과가 비점오염원 대상 판정의 입력, 자동 연계 가능",
+        "blockingArticle": null
+      },
+      {
+        "a": "N09:environmental-impact-assessment-consultation:P01",
+        "b": "N15:nonpoint-pollution-source-installation-management:P02",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N09:environmental-impact-assessment-consultation:P01",
+        "b": "N15:nonpoint-pollution-source-installation-management:P04",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2081,15 +2108,15 @@
         "b": "N09:environmental-impact-assessment-consultation:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴 이행 후 평가서 작성·협의요청이 검토 전제",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 검토는 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P04",
         "b": "N11:industrial-complex-development:P06",
         "verdict": "same",
         "mergeable": true,
-        "reason": "제25조 동일 의견수렴 사건, 주체 표기만 다름",
+        "reason": "환경영향평가법 제25조 동일 의견수렴을 사업자·주민 시점으로 중복 기재, 한 사건",
         "blockingArticle": null
       },
       {
@@ -2097,15 +2124,15 @@
         "b": "N11:environmental-impact-assessment-consultation:P01",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정이 초안 작성의 선행 단계",
-        "blockingArticle": "환경영향평가법 제25조제1항"
+        "reason": "동일 평가 절차의 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P04",
         "b": "N11:environmental-impact-assessment-consultation:P04",
         "verdict": "same",
         "mergeable": true,
-        "reason": "제25조 동일 의견수렴, 묶음별 중복 등재",
+        "reason": "동일 법·조문·주체의 동일 절차가 사건별로 중복 기재됨, 사업 단위 1회로 통합",
         "blockingArticle": null
       },
       {
@@ -2113,31 +2140,31 @@
         "b": "N11:environmental-impact-assessment-consultation:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴 후 협의요청이 검토 전제",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 검토는 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P04",
         "b": "N12:industrial-complex-development:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴 후 평가서 작성·협의, 선후 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 협의는 선후 단계",
+        "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P04",
         "b": "N12:environmental-impact-assessment-consultation:P01",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정이 초안 작성의 선행 단계",
-        "blockingArticle": "환경영향평가법 제25조제1항"
+        "reason": "동일 평가 절차의 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P04",
         "b": "N12:environmental-impact-assessment-consultation:P04",
         "verdict": "same",
         "mergeable": true,
-        "reason": "제25조 동일 의견수렴, 묶음별 중복 등재",
+        "reason": "동일 법·조문·주체의 동일 절차가 사건별로 중복 기재됨, 사업 단위 1회로 통합",
         "blockingArticle": null
       },
       {
@@ -2145,15 +2172,15 @@
         "b": "N12:environmental-impact-assessment-consultation:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴 후 협의요청이 검토 전제",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 검토는 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P04",
         "b": "N14:development-permit:D05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "기관 간 의제 협의와 주민 의견수렴은 주체·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2161,7 +2188,7 @@
         "b": "N14:industrial-complex-development:P02",
         "verdict": "different",
         "mergeable": false,
-        "reason": "지정 협의(기관 간)와 주민 의견수렴은 주체·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2169,7 +2196,7 @@
         "b": "N14:industrial-complex-development:P06",
         "verdict": "same",
         "mergeable": true,
-        "reason": "제25조 동일 의견수렴 사건, 주체 표기만 다름",
+        "reason": "환경영향평가법 제25조 동일 의견수렴을 사업자·주민 시점으로 중복 기재, 한 사건",
         "blockingArticle": null
       },
       {
@@ -2177,15 +2204,15 @@
         "b": "N14:industrial-complex-development:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴 후 평가서 작성·협의, 선후 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 협의는 선후 단계",
+        "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P04",
         "b": "N14:forestland-conversion:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "산지 타당성조사와 주민 의견수렴은 법·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2193,7 +2220,7 @@
         "b": "N37:industrial-complex-fast-track-plan-approval:P10",
         "verdict": "different",
         "mergeable": false,
-        "reason": "위원회 통합심의와 주민 의견수렴은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2201,7 +2228,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P01",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 부과대상 판정과 의견수렴은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2209,7 +2236,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P02",
         "verdict": "different",
         "mergeable": false,
-        "reason": "훼손면적 산정과 의견수렴은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2217,7 +2244,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 산정과 의견수렴은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2225,7 +2252,31 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 부과 결정과 의견수렴은 실체·시점 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N09:environmental-impact-assessment-consultation:P04",
+        "b": "N15:nonpoint-pollution-source-installation-management:P01",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N09:environmental-impact-assessment-consultation:P04",
+        "b": "N15:nonpoint-pollution-source-installation-management:P02",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N09:environmental-impact-assessment-consultation:P04",
+        "b": "N15:nonpoint-pollution-source-installation-management:P04",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2233,39 +2284,39 @@
         "b": "N11:industrial-complex-development:P06",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴이 검토의 선행 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 검토는 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P08",
         "b": "N11:environmental-impact-assessment-consultation:P01",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정과 평가서 검토는 실체·시점 다름",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "동일 평가 절차의 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P08",
         "b": "N11:environmental-impact-assessment-consultation:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴이 검토의 선행 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 검토는 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P08",
         "b": "N11:environmental-impact-assessment-consultation:P08",
         "verdict": "same",
         "mergeable": true,
-        "reason": "제28조 동일 검토, 묶음별 중복 등재",
+        "reason": "동일 법·조문·주체의 동일 절차가 사건별로 중복 기재됨, 사업 단위 1회로 통합",
         "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P08",
         "b": "N12:industrial-complex-development:P08",
-        "verdict": "same",
+        "verdict": "partial",
         "mergeable": true,
-        "reason": "제28조 검토는 제27조 협의요청과 동일 협의 사건",
+        "reason": "제28조 검토는 제27조 협의 요청의 일부 단계, 협의 1건으로 묶고 기한 부여",
         "blockingArticle": null
       },
       {
@@ -2273,23 +2324,23 @@
         "b": "N12:environmental-impact-assessment-consultation:P01",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정과 평가서 검토는 실체·시점 다름",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "동일 평가 절차의 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P08",
         "b": "N12:environmental-impact-assessment-consultation:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴이 검토의 선행 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 검토는 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P08",
         "b": "N12:environmental-impact-assessment-consultation:P08",
         "verdict": "same",
         "mergeable": true,
-        "reason": "제28조 동일 검토, 묶음별 중복 등재",
+        "reason": "동일 법·조문·주체의 동일 절차가 사건별로 중복 기재됨, 사업 단위 1회로 통합",
         "blockingArticle": null
       },
       {
@@ -2297,15 +2348,15 @@
         "b": "N14:development-permit:D05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "개발행위허가 의제 협의와 환경부 별도 협의는 법·사건 다름",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P08",
         "b": "N14:industrial-complex-development:P02",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "동일 지정 사건 전 관계기관 협의, 실체(입지 vs 환경영향) 다르나 한 시계 병행 가능",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2313,15 +2364,15 @@
         "b": "N14:industrial-complex-development:P06",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴이 검토의 선행 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 검토는 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P08",
         "b": "N14:industrial-complex-development:P08",
-        "verdict": "same",
+        "verdict": "partial",
         "mergeable": true,
-        "reason": "제28조 검토는 제27조 협의요청과 동일 협의 사건",
+        "reason": "제28조 검토는 제27조 협의 요청의 일부 단계, 협의 1건으로 묶고 기한 부여",
         "blockingArticle": null
       },
       {
@@ -2329,23 +2380,23 @@
         "b": "N14:forestland-conversion:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "산지 타당성조사와 평가서 검토는 법·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P08",
         "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
+        "verdict": "partial",
         "mergeable": false,
-        "reason": "환경부 협의는 통합심의와 별도 법정 협의",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "통합심의는 심의만 통합하고 환경영향평가 협의는 기후에너지환경부와 별도 진행",
+        "blockingArticle": "환경영향평가법 제27조"
       },
       {
         "a": "N09:environmental-impact-assessment-consultation:P08",
         "b": "N15:ecosystem-conservation-charge-assessment:P01",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 부과대상 판정과 평가서 검토는 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2353,7 +2404,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P02",
         "verdict": "different",
         "mergeable": false,
-        "reason": "훼손면적 산정과 평가서 검토는 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2361,7 +2412,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 산정과 평가서 검토는 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2369,7 +2420,31 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 부과 결정과 평가서 검토는 실체·시점 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N09:environmental-impact-assessment-consultation:P08",
+        "b": "N15:nonpoint-pollution-source-installation-management:P01",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N09:environmental-impact-assessment-consultation:P08",
+        "b": "N15:nonpoint-pollution-source-installation-management:P02",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N09:environmental-impact-assessment-consultation:P08",
+        "b": "N15:nonpoint-pollution-source-installation-management:P04",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2377,15 +2452,15 @@
         "b": "N11:environmental-impact-assessment-consultation:P01",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정이 초안·의견수렴의 선행 단계",
-        "blockingArticle": "환경영향평가법 제25조제1항"
+        "reason": "대상 판정과 주민 의견수렴은 별개 단계",
+        "blockingArticle": null
       },
       {
         "a": "N11:industrial-complex-development:P06",
         "b": "N11:environmental-impact-assessment-consultation:P04",
         "verdict": "same",
         "mergeable": true,
-        "reason": "제25조 동일 의견수렴 사건, 주체 표기만 다름",
+        "reason": "환경영향평가법 제25조 동일 의견수렴을 사업자·주민 시점으로 중복 기재, 한 사건",
         "blockingArticle": null
       },
       {
@@ -2393,31 +2468,31 @@
         "b": "N11:environmental-impact-assessment-consultation:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴이 검토의 선행 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 검토는 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N11:industrial-complex-development:P06",
         "b": "N12:industrial-complex-development:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴 후 평가서 작성·협의, 선후 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 협의는 선후 단계",
+        "blockingArticle": null
       },
       {
         "a": "N11:industrial-complex-development:P06",
         "b": "N12:environmental-impact-assessment-consultation:P01",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정이 초안·의견수렴의 선행 단계",
-        "blockingArticle": "환경영향평가법 제25조제1항"
+        "reason": "대상 판정과 주민 의견수렴은 별개 단계",
+        "blockingArticle": null
       },
       {
         "a": "N11:industrial-complex-development:P06",
         "b": "N12:environmental-impact-assessment-consultation:P04",
         "verdict": "same",
         "mergeable": true,
-        "reason": "제25조 동일 의견수렴 사건, 주체 표기만 다름",
+        "reason": "환경영향평가법 제25조 동일 의견수렴을 사업자·주민 시점으로 중복 기재, 한 사건",
         "blockingArticle": null
       },
       {
@@ -2425,15 +2500,15 @@
         "b": "N12:environmental-impact-assessment-consultation:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴이 검토의 선행 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 검토는 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N11:industrial-complex-development:P06",
         "b": "N14:development-permit:D05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "기관 간 의제 협의와 주민 의견수렴은 주체·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2441,7 +2516,7 @@
         "b": "N14:industrial-complex-development:P02",
         "verdict": "different",
         "mergeable": false,
-        "reason": "지정 협의(기관 간)와 주민 의견수렴은 주체·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2449,7 +2524,7 @@
         "b": "N14:industrial-complex-development:P06",
         "verdict": "same",
         "mergeable": true,
-        "reason": "제25조 동일 의견수렴, 묶음별 중복 등재",
+        "reason": "동일 법·조문·주체의 동일 절차가 사건별로 중복 기재됨, 사업 단위 1회로 통합",
         "blockingArticle": null
       },
       {
@@ -2457,15 +2532,15 @@
         "b": "N14:industrial-complex-development:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴 후 평가서 작성·협의, 선후 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 협의는 선후 단계",
+        "blockingArticle": null
       },
       {
         "a": "N11:industrial-complex-development:P06",
         "b": "N14:forestland-conversion:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "산지 타당성조사와 주민 의견수렴은 법·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2473,7 +2548,7 @@
         "b": "N37:industrial-complex-fast-track-plan-approval:P10",
         "verdict": "different",
         "mergeable": false,
-        "reason": "위원회 통합심의와 주민 의견수렴은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2481,7 +2556,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P01",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 부과대상 판정과 의견수렴은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2489,7 +2564,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P02",
         "verdict": "different",
         "mergeable": false,
-        "reason": "훼손면적 산정과 의견수렴은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2497,7 +2572,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 산정과 의견수렴은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2505,7 +2580,31 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 부과 결정과 의견수렴은 실체·시점 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N11:industrial-complex-development:P06",
+        "b": "N15:nonpoint-pollution-source-installation-management:P01",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N11:industrial-complex-development:P06",
+        "b": "N15:nonpoint-pollution-source-installation-management:P02",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N11:industrial-complex-development:P06",
+        "b": "N15:nonpoint-pollution-source-installation-management:P04",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2513,31 +2612,31 @@
         "b": "N11:environmental-impact-assessment-consultation:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정 후 평가항목 결정을 거쳐야 초안 작성",
-        "blockingArticle": "환경영향평가법 제25조제1항"
+        "reason": "동일 평가 절차의 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N11:environmental-impact-assessment-consultation:P01",
         "b": "N11:environmental-impact-assessment-consultation:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정과 평가서 검토는 실체·시점 다름",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "동일 평가 절차의 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N11:environmental-impact-assessment-consultation:P01",
         "b": "N12:industrial-complex-development:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정과 협의는 실체·시점 다름",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "대상 판정과 평가서 협의는 별개 단계",
+        "blockingArticle": null
       },
       {
         "a": "N11:environmental-impact-assessment-consultation:P01",
         "b": "N12:environmental-impact-assessment-consultation:P01",
         "verdict": "same",
         "mergeable": true,
-        "reason": "제22조 동일 대상사업 판정, 묶음별 중복 등재",
+        "reason": "동일 법·조문·주체의 동일 절차가 사건별로 중복 기재됨, 사업 단위 1회로 통합",
         "blockingArticle": null
       },
       {
@@ -2545,23 +2644,23 @@
         "b": "N12:environmental-impact-assessment-consultation:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정 후 평가항목 결정을 거쳐야 초안 작성",
-        "blockingArticle": "환경영향평가법 제25조제1항"
+        "reason": "동일 평가 절차의 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N11:environmental-impact-assessment-consultation:P01",
         "b": "N12:environmental-impact-assessment-consultation:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정과 평가서 검토는 실체·시점 다름",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "동일 평가 절차의 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N11:environmental-impact-assessment-consultation:P01",
         "b": "N14:development-permit:D05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "개발행위허가 의제 협의와 평가 대상 판정은 법·사건 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2569,7 +2668,7 @@
         "b": "N14:industrial-complex-development:P02",
         "verdict": "different",
         "mergeable": false,
-        "reason": "산단 지정 협의와 평가 대상 판정은 법·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2577,23 +2676,23 @@
         "b": "N14:industrial-complex-development:P06",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정과 주민 의견수렴은 선후 단계",
-        "blockingArticle": "환경영향평가법 제25조제1항"
+        "reason": "대상 판정과 주민 의견수렴은 별개 단계",
+        "blockingArticle": null
       },
       {
         "a": "N11:environmental-impact-assessment-consultation:P01",
         "b": "N14:industrial-complex-development:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정과 협의는 실체·시점 다름",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "대상 판정과 평가서 협의는 별개 단계",
+        "blockingArticle": null
       },
       {
         "a": "N11:environmental-impact-assessment-consultation:P01",
         "b": "N14:forestland-conversion:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "산지전용 타당성과 환경영향평가 대상 판정은 법·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2601,7 +2700,7 @@
         "b": "N37:industrial-complex-fast-track-plan-approval:P10",
         "verdict": "different",
         "mergeable": false,
-        "reason": "통합심의는 위원회 심의, 대상 판정은 사업자 판정으로 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2609,7 +2708,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P01",
         "verdict": "partial",
         "mergeable": true,
-        "reason": "부담금 부과대상 판정 요건이 평가 대상사업 여부, 판정 결과 자동 연동 가능",
+        "reason": "환경영향평가 대상 판정 결과가 부과대상 판정의 입력, 판정 결과 자동 연계 가능",
         "blockingArticle": null
       },
       {
@@ -2617,7 +2716,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P02",
         "verdict": "different",
         "mergeable": false,
-        "reason": "훼손면적 산정과 대상 판정은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2625,7 +2724,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 산정과 대상 판정은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2633,7 +2732,31 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 부과 결정과 대상 판정은 실체·시점 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N11:environmental-impact-assessment-consultation:P01",
+        "b": "N15:nonpoint-pollution-source-installation-management:P01",
+        "verdict": "partial",
+        "mergeable": true,
+        "reason": "환경영향평가 대상 판정 결과가 비점오염원 대상 판정의 입력, 자동 연계 가능",
+        "blockingArticle": null
+      },
+      {
+        "a": "N11:environmental-impact-assessment-consultation:P01",
+        "b": "N15:nonpoint-pollution-source-installation-management:P02",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N11:environmental-impact-assessment-consultation:P01",
+        "b": "N15:nonpoint-pollution-source-installation-management:P04",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2641,31 +2764,31 @@
         "b": "N11:environmental-impact-assessment-consultation:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴 후 협의요청이 검토 전제",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 검토는 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N11:environmental-impact-assessment-consultation:P04",
         "b": "N12:industrial-complex-development:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴 후 평가서 작성·협의, 선후 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 협의는 선후 단계",
+        "blockingArticle": null
       },
       {
         "a": "N11:environmental-impact-assessment-consultation:P04",
         "b": "N12:environmental-impact-assessment-consultation:P01",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정이 초안 작성의 선행 단계",
-        "blockingArticle": "환경영향평가법 제25조제1항"
+        "reason": "동일 평가 절차의 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N11:environmental-impact-assessment-consultation:P04",
         "b": "N12:environmental-impact-assessment-consultation:P04",
         "verdict": "same",
         "mergeable": true,
-        "reason": "제25조 동일 의견수렴, 묶음별 중복 등재",
+        "reason": "동일 법·조문·주체의 동일 절차가 사건별로 중복 기재됨, 사업 단위 1회로 통합",
         "blockingArticle": null
       },
       {
@@ -2673,15 +2796,15 @@
         "b": "N12:environmental-impact-assessment-consultation:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴 후 협의요청이 검토 전제",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 검토는 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N11:environmental-impact-assessment-consultation:P04",
         "b": "N14:development-permit:D05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "기관 간 의제 협의와 주민 의견수렴은 주체·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2689,7 +2812,7 @@
         "b": "N14:industrial-complex-development:P02",
         "verdict": "different",
         "mergeable": false,
-        "reason": "지정 협의(기관 간)와 주민 의견수렴은 주체·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2697,7 +2820,7 @@
         "b": "N14:industrial-complex-development:P06",
         "verdict": "same",
         "mergeable": true,
-        "reason": "제25조 동일 의견수렴 사건, 주체 표기만 다름",
+        "reason": "환경영향평가법 제25조 동일 의견수렴을 사업자·주민 시점으로 중복 기재, 한 사건",
         "blockingArticle": null
       },
       {
@@ -2705,15 +2828,15 @@
         "b": "N14:industrial-complex-development:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴 후 평가서 작성·협의, 선후 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 협의는 선후 단계",
+        "blockingArticle": null
       },
       {
         "a": "N11:environmental-impact-assessment-consultation:P04",
         "b": "N14:forestland-conversion:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "산지 타당성조사와 주민 의견수렴은 법·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2721,7 +2844,7 @@
         "b": "N37:industrial-complex-fast-track-plan-approval:P10",
         "verdict": "different",
         "mergeable": false,
-        "reason": "위원회 통합심의와 주민 의견수렴은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2729,7 +2852,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P01",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 부과대상 판정과 의견수렴은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2737,7 +2860,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P02",
         "verdict": "different",
         "mergeable": false,
-        "reason": "훼손면적 산정과 의견수렴은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2745,7 +2868,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 산정과 의견수렴은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2753,15 +2876,39 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 부과 결정과 의견수렴은 실체·시점 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N11:environmental-impact-assessment-consultation:P04",
+        "b": "N15:nonpoint-pollution-source-installation-management:P01",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N11:environmental-impact-assessment-consultation:P04",
+        "b": "N15:nonpoint-pollution-source-installation-management:P02",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N11:environmental-impact-assessment-consultation:P04",
+        "b": "N15:nonpoint-pollution-source-installation-management:P04",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
         "a": "N11:environmental-impact-assessment-consultation:P08",
         "b": "N12:industrial-complex-development:P08",
-        "verdict": "same",
+        "verdict": "partial",
         "mergeable": true,
-        "reason": "제28조 검토는 제27조 협의요청과 동일 협의 사건",
+        "reason": "제28조 검토는 제27조 협의 요청의 일부 단계, 협의 1건으로 묶고 기한 부여",
         "blockingArticle": null
       },
       {
@@ -2769,23 +2916,23 @@
         "b": "N12:environmental-impact-assessment-consultation:P01",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정과 평가서 검토는 실체·시점 다름",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "동일 평가 절차의 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N11:environmental-impact-assessment-consultation:P08",
         "b": "N12:environmental-impact-assessment-consultation:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴이 검토의 선행 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 검토는 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N11:environmental-impact-assessment-consultation:P08",
         "b": "N12:environmental-impact-assessment-consultation:P08",
         "verdict": "same",
         "mergeable": true,
-        "reason": "제28조 동일 검토, 묶음별 중복 등재",
+        "reason": "동일 법·조문·주체의 동일 절차가 사건별로 중복 기재됨, 사업 단위 1회로 통합",
         "blockingArticle": null
       },
       {
@@ -2793,15 +2940,15 @@
         "b": "N14:development-permit:D05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "개발행위허가 의제 협의와 환경부 별도 협의는 법·사건 다름",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
       },
       {
         "a": "N11:environmental-impact-assessment-consultation:P08",
         "b": "N14:industrial-complex-development:P02",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "동일 지정 사건 전 관계기관 협의, 실체 다르나 한 시계 병행 가능",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2809,15 +2956,15 @@
         "b": "N14:industrial-complex-development:P06",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴이 검토의 선행 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 검토는 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N11:environmental-impact-assessment-consultation:P08",
         "b": "N14:industrial-complex-development:P08",
-        "verdict": "same",
+        "verdict": "partial",
         "mergeable": true,
-        "reason": "제28조 검토는 제27조 협의요청과 동일 협의 사건",
+        "reason": "제28조 검토는 제27조 협의 요청의 일부 단계, 협의 1건으로 묶고 기한 부여",
         "blockingArticle": null
       },
       {
@@ -2825,23 +2972,23 @@
         "b": "N14:forestland-conversion:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "산지 타당성조사와 평가서 검토는 법·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
         "a": "N11:environmental-impact-assessment-consultation:P08",
         "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
+        "verdict": "partial",
         "mergeable": false,
-        "reason": "환경부 협의는 통합심의와 별도 법정 협의",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "통합심의는 심의만 통합하고 환경영향평가 협의는 기후에너지환경부와 별도 진행",
+        "blockingArticle": "환경영향평가법 제27조"
       },
       {
         "a": "N11:environmental-impact-assessment-consultation:P08",
         "b": "N15:ecosystem-conservation-charge-assessment:P01",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 부과대상 판정과 평가서 검토는 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2849,7 +2996,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P02",
         "verdict": "different",
         "mergeable": false,
-        "reason": "훼손면적 산정과 평가서 검토는 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2857,7 +3004,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 산정과 평가서 검토는 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2865,7 +3012,31 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 부과 결정과 평가서 검토는 실체·시점 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N11:environmental-impact-assessment-consultation:P08",
+        "b": "N15:nonpoint-pollution-source-installation-management:P01",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N11:environmental-impact-assessment-consultation:P08",
+        "b": "N15:nonpoint-pollution-source-installation-management:P02",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N11:environmental-impact-assessment-consultation:P08",
+        "b": "N15:nonpoint-pollution-source-installation-management:P04",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2873,23 +3044,23 @@
         "b": "N12:environmental-impact-assessment-consultation:P01",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정과 협의는 실체·시점 다름",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "대상 판정과 평가서 협의는 별개 단계",
+        "blockingArticle": null
       },
       {
         "a": "N12:industrial-complex-development:P08",
         "b": "N12:environmental-impact-assessment-consultation:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴 후 평가서 작성·협의, 선후 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 협의는 선후 단계",
+        "blockingArticle": null
       },
       {
         "a": "N12:industrial-complex-development:P08",
         "b": "N12:environmental-impact-assessment-consultation:P08",
-        "verdict": "same",
+        "verdict": "partial",
         "mergeable": true,
-        "reason": "제28조 검토는 제27조 협의요청과 동일 협의 사건",
+        "reason": "제28조 검토는 제27조 협의 요청의 일부 단계, 협의 1건으로 묶고 기한 부여",
         "blockingArticle": null
       },
       {
@@ -2897,15 +3068,15 @@
         "b": "N14:development-permit:D05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "개발행위허가 의제 협의와 환경부 별도 협의는 법·사건 다름",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "환경영향평가 협의와 개발행위허가 의제 협의는 근거법·협의기관이 다름",
+        "blockingArticle": null
       },
       {
         "a": "N12:industrial-complex-development:P08",
         "b": "N14:industrial-complex-development:P02",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "동일 지정 사건 전 관계기관 협의, 실체 다르나 한 시계 병행 가능",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "산단 지정 협의와 환경영향평가 협의는 병행하되 근거법·실체요건이 다름",
         "blockingArticle": null
       },
       {
@@ -2913,15 +3084,15 @@
         "b": "N14:industrial-complex-development:P06",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴 후 평가서 작성·협의, 선후 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 협의는 선후 단계",
+        "blockingArticle": null
       },
       {
         "a": "N12:industrial-complex-development:P08",
         "b": "N14:industrial-complex-development:P08",
         "verdict": "same",
         "mergeable": true,
-        "reason": "제27·28조 동일 협의, 묶음별 중복 등재",
+        "reason": "동일 법·조문·주체의 동일 절차가 사건별로 중복 기재됨, 사업 단위 1회로 통합",
         "blockingArticle": null
       },
       {
@@ -2929,23 +3100,23 @@
         "b": "N14:forestland-conversion:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "산지 타당성조사와 환경영향평가 협의는 법·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
         "a": "N12:industrial-complex-development:P08",
         "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
+        "verdict": "partial",
         "mergeable": false,
-        "reason": "환경부 협의는 통합심의와 별도 법정 협의",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "통합심의는 심의만 통합하고 환경영향평가 협의는 기후에너지환경부와 별도 진행",
+        "blockingArticle": "환경영향평가법 제27조"
       },
       {
         "a": "N12:industrial-complex-development:P08",
         "b": "N15:ecosystem-conservation-charge-assessment:P01",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 부과대상 판정과 협의는 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2953,7 +3124,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P02",
         "verdict": "different",
         "mergeable": false,
-        "reason": "훼손면적 산정과 협의는 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2961,7 +3132,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 산정과 협의는 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2969,7 +3140,31 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 부과 결정과 협의는 실체·시점 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N12:industrial-complex-development:P08",
+        "b": "N15:nonpoint-pollution-source-installation-management:P01",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N12:industrial-complex-development:P08",
+        "b": "N15:nonpoint-pollution-source-installation-management:P02",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N12:industrial-complex-development:P08",
+        "b": "N15:nonpoint-pollution-source-installation-management:P04",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -2977,23 +3172,23 @@
         "b": "N12:environmental-impact-assessment-consultation:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정 후 평가항목 결정을 거쳐야 초안 작성",
-        "blockingArticle": "환경영향평가법 제25조제1항"
+        "reason": "동일 평가 절차의 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N12:environmental-impact-assessment-consultation:P01",
         "b": "N12:environmental-impact-assessment-consultation:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정과 평가서 검토는 실체·시점 다름",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "동일 평가 절차의 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N12:environmental-impact-assessment-consultation:P01",
         "b": "N14:development-permit:D05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "개발행위허가 의제 협의와 평가 대상 판정은 법·사건 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3001,7 +3196,7 @@
         "b": "N14:industrial-complex-development:P02",
         "verdict": "different",
         "mergeable": false,
-        "reason": "산단 지정 협의와 평가 대상 판정은 법·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3009,23 +3204,23 @@
         "b": "N14:industrial-complex-development:P06",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정과 주민 의견수렴은 선후 단계",
-        "blockingArticle": "환경영향평가법 제25조제1항"
+        "reason": "대상 판정과 주민 의견수렴은 별개 단계",
+        "blockingArticle": null
       },
       {
         "a": "N12:environmental-impact-assessment-consultation:P01",
         "b": "N14:industrial-complex-development:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "대상 판정과 협의는 실체·시점 다름",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "대상 판정과 평가서 협의는 별개 단계",
+        "blockingArticle": null
       },
       {
         "a": "N12:environmental-impact-assessment-consultation:P01",
         "b": "N14:forestland-conversion:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "산지전용 타당성과 환경영향평가 대상 판정은 법·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3033,7 +3228,7 @@
         "b": "N37:industrial-complex-fast-track-plan-approval:P10",
         "verdict": "different",
         "mergeable": false,
-        "reason": "통합심의는 위원회 심의, 대상 판정은 사업자 판정으로 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3041,7 +3236,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P01",
         "verdict": "partial",
         "mergeable": true,
-        "reason": "부담금 부과대상 판정 요건이 평가 대상사업 여부, 판정 결과 자동 연동 가능",
+        "reason": "환경영향평가 대상 판정 결과가 부과대상 판정의 입력, 판정 결과 자동 연계 가능",
         "blockingArticle": null
       },
       {
@@ -3049,7 +3244,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P02",
         "verdict": "different",
         "mergeable": false,
-        "reason": "훼손면적 산정과 대상 판정은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3057,7 +3252,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 산정과 대상 판정은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3065,7 +3260,31 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 부과 결정과 대상 판정은 실체·시점 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N12:environmental-impact-assessment-consultation:P01",
+        "b": "N15:nonpoint-pollution-source-installation-management:P01",
+        "verdict": "partial",
+        "mergeable": true,
+        "reason": "환경영향평가 대상 판정 결과가 비점오염원 대상 판정의 입력, 자동 연계 가능",
+        "blockingArticle": null
+      },
+      {
+        "a": "N12:environmental-impact-assessment-consultation:P01",
+        "b": "N15:nonpoint-pollution-source-installation-management:P02",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N12:environmental-impact-assessment-consultation:P01",
+        "b": "N15:nonpoint-pollution-source-installation-management:P04",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3073,15 +3292,15 @@
         "b": "N12:environmental-impact-assessment-consultation:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴 후 협의요청이 검토 전제",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 검토는 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N12:environmental-impact-assessment-consultation:P04",
         "b": "N14:development-permit:D05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "기관 간 의제 협의와 주민 의견수렴은 주체·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3089,7 +3308,7 @@
         "b": "N14:industrial-complex-development:P02",
         "verdict": "different",
         "mergeable": false,
-        "reason": "지정 협의(기관 간)와 주민 의견수렴은 주체·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3097,7 +3316,7 @@
         "b": "N14:industrial-complex-development:P06",
         "verdict": "same",
         "mergeable": true,
-        "reason": "제25조 동일 의견수렴 사건, 주체 표기만 다름",
+        "reason": "환경영향평가법 제25조 동일 의견수렴을 사업자·주민 시점으로 중복 기재, 한 사건",
         "blockingArticle": null
       },
       {
@@ -3105,15 +3324,15 @@
         "b": "N14:industrial-complex-development:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴 후 평가서 작성·협의, 선후 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 협의는 선후 단계",
+        "blockingArticle": null
       },
       {
         "a": "N12:environmental-impact-assessment-consultation:P04",
         "b": "N14:forestland-conversion:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "산지 타당성조사와 주민 의견수렴은 법·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3121,7 +3340,7 @@
         "b": "N37:industrial-complex-fast-track-plan-approval:P10",
         "verdict": "different",
         "mergeable": false,
-        "reason": "위원회 통합심의와 주민 의견수렴은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3129,7 +3348,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P01",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 부과대상 판정과 의견수렴은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3137,7 +3356,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P02",
         "verdict": "different",
         "mergeable": false,
-        "reason": "훼손면적 산정과 의견수렴은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3145,7 +3364,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 산정과 의견수렴은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3153,7 +3372,31 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 부과 결정과 의견수렴은 실체·시점 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N12:environmental-impact-assessment-consultation:P04",
+        "b": "N15:nonpoint-pollution-source-installation-management:P01",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N12:environmental-impact-assessment-consultation:P04",
+        "b": "N15:nonpoint-pollution-source-installation-management:P02",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N12:environmental-impact-assessment-consultation:P04",
+        "b": "N15:nonpoint-pollution-source-installation-management:P04",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3161,15 +3404,15 @@
         "b": "N14:development-permit:D05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "개발행위허가 의제 협의와 환경부 별도 협의는 법·사건 다름",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
       },
       {
         "a": "N12:environmental-impact-assessment-consultation:P08",
         "b": "N14:industrial-complex-development:P02",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "동일 지정 사건 전 관계기관 협의, 실체 다르나 한 시계 병행 가능",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3177,15 +3420,15 @@
         "b": "N14:industrial-complex-development:P06",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴이 검토의 선행 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 검토는 선후 단계, 실체요건 다름",
+        "blockingArticle": null
       },
       {
         "a": "N12:environmental-impact-assessment-consultation:P08",
         "b": "N14:industrial-complex-development:P08",
-        "verdict": "same",
+        "verdict": "partial",
         "mergeable": true,
-        "reason": "제28조 검토는 제27조 협의요청과 동일 협의 사건",
+        "reason": "제28조 검토는 제27조 협의 요청의 일부 단계, 협의 1건으로 묶고 기한 부여",
         "blockingArticle": null
       },
       {
@@ -3193,23 +3436,23 @@
         "b": "N14:forestland-conversion:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "산지 타당성조사와 평가서 검토는 법·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
         "a": "N12:environmental-impact-assessment-consultation:P08",
         "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
+        "verdict": "partial",
         "mergeable": false,
-        "reason": "환경부 협의는 통합심의와 별도 법정 협의",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "통합심의는 심의만 통합하고 환경영향평가 협의는 기후에너지환경부와 별도 진행",
+        "blockingArticle": "환경영향평가법 제27조"
       },
       {
         "a": "N12:environmental-impact-assessment-consultation:P08",
         "b": "N15:ecosystem-conservation-charge-assessment:P01",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 부과대상 판정과 평가서 검토는 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3217,7 +3460,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P02",
         "verdict": "different",
         "mergeable": false,
-        "reason": "훼손면적 산정과 평가서 검토는 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3225,7 +3468,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 산정과 평가서 검토는 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3233,15 +3476,39 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 부과 결정과 평가서 검토는 실체·시점 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N12:environmental-impact-assessment-consultation:P08",
+        "b": "N15:nonpoint-pollution-source-installation-management:P01",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N12:environmental-impact-assessment-consultation:P08",
+        "b": "N15:nonpoint-pollution-source-installation-management:P02",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N12:environmental-impact-assessment-consultation:P08",
+        "b": "N15:nonpoint-pollution-source-installation-management:P04",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
         "a": "N14:development-permit:D05",
         "b": "N14:industrial-complex-development:P02",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "개발행위허가 의제 협의와 산단 지정 협의는 사건 다름",
+        "verdict": "partial",
+        "mergeable": true,
+        "reason": "산단 지정 시 개발행위허가 의제 협의와 지정 협의를 같은 관계기관 회신 시계로 묶어 기한 통합 가능",
         "blockingArticle": null
       },
       {
@@ -3249,7 +3516,7 @@
         "b": "N14:industrial-complex-development:P06",
         "verdict": "different",
         "mergeable": false,
-        "reason": "기관 간 의제 협의와 주민 의견수렴은 주체·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3257,15 +3524,15 @@
         "b": "N14:industrial-complex-development:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "개발행위허가 의제 협의와 환경부 별도 협의는 법·사건 다름",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "환경영향평가 협의와 개발행위허가 의제 협의는 근거법·협의기관이 다름",
+        "blockingArticle": null
       },
       {
         "a": "N14:development-permit:D05",
         "b": "N14:forestland-conversion:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의제 협의 회신과 산지 타당성조사는 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3273,7 +3540,7 @@
         "b": "N37:industrial-complex-fast-track-plan-approval:P10",
         "verdict": "different",
         "mergeable": false,
-        "reason": "협의 회신과 위원회 통합심의는 실체 다름, 특례법 적용 여부 불확실",
+        "reason": "통합심의는 위원회 심의를 통합하는 것이고 관계기관 협의 회신과는 실체요건이 다름",
         "blockingArticle": null
       },
       {
@@ -3281,7 +3548,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P01",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의제 협의와 부담금 부과대상 판정은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3289,7 +3556,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P02",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의제 협의와 훼손면적 산정은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3297,7 +3564,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의제 협의와 부담금 산정은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3305,7 +3572,31 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의제 협의와 부담금 부과 결정은 실체·시점 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N14:development-permit:D05",
+        "b": "N15:nonpoint-pollution-source-installation-management:P01",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N14:development-permit:D05",
+        "b": "N15:nonpoint-pollution-source-installation-management:P02",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N14:development-permit:D05",
+        "b": "N15:nonpoint-pollution-source-installation-management:P04",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3313,15 +3604,15 @@
         "b": "N14:industrial-complex-development:P06",
         "verdict": "different",
         "mergeable": false,
-        "reason": "지정 협의(기관 간)와 주민 의견수렴은 주체·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
         "a": "N14:industrial-complex-development:P02",
         "b": "N14:industrial-complex-development:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "동일 지정 사건 전 관계기관 협의, 실체(입지 vs 환경영향) 다르나 한 시계 병행 가능",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "산단 지정 협의와 환경영향평가 협의는 병행하되 근거법·실체요건이 다름",
         "blockingArticle": null
       },
       {
@@ -3329,7 +3620,7 @@
         "b": "N14:forestland-conversion:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "지정 협의와 산지 타당성조사는 법·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3337,7 +3628,7 @@
         "b": "N37:industrial-complex-fast-track-plan-approval:P10",
         "verdict": "different",
         "mergeable": false,
-        "reason": "기관 협의와 위원회 통합심의는 실체 다름",
+        "reason": "지정 협의는 관계기관 협의, 통합심의는 위원회 심의로 단계·실체요건이 다름",
         "blockingArticle": null
       },
       {
@@ -3345,7 +3636,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P01",
         "verdict": "different",
         "mergeable": false,
-        "reason": "지정 협의와 부담금 부과대상 판정은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3353,7 +3644,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P02",
         "verdict": "different",
         "mergeable": false,
-        "reason": "지정 협의와 훼손면적 산정은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3361,7 +3652,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "지정 협의와 부담금 산정은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3369,7 +3660,31 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "지정 협의와 부담금 부과 결정은 실체·시점 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N14:industrial-complex-development:P02",
+        "b": "N15:nonpoint-pollution-source-installation-management:P01",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N14:industrial-complex-development:P02",
+        "b": "N15:nonpoint-pollution-source-installation-management:P02",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N14:industrial-complex-development:P02",
+        "b": "N15:nonpoint-pollution-source-installation-management:P04",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3377,15 +3692,15 @@
         "b": "N14:industrial-complex-development:P08",
         "verdict": "different",
         "mergeable": false,
-        "reason": "의견수렴 후 평가서 작성·협의, 선후 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "의견수렴과 평가서 협의는 선후 단계",
+        "blockingArticle": null
       },
       {
         "a": "N14:industrial-complex-development:P06",
         "b": "N14:forestland-conversion:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "산지 타당성조사와 주민 의견수렴은 법·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3393,7 +3708,7 @@
         "b": "N37:industrial-complex-fast-track-plan-approval:P10",
         "verdict": "different",
         "mergeable": false,
-        "reason": "위원회 통합심의와 주민 의견수렴은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3401,7 +3716,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P01",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 부과대상 판정과 의견수렴은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3409,7 +3724,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P02",
         "verdict": "different",
         "mergeable": false,
-        "reason": "훼손면적 산정과 의견수렴은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3417,7 +3732,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 산정과 의견수렴은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3425,7 +3740,31 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 부과 결정과 의견수렴은 실체·시점 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N14:industrial-complex-development:P06",
+        "b": "N15:nonpoint-pollution-source-installation-management:P01",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N14:industrial-complex-development:P06",
+        "b": "N15:nonpoint-pollution-source-installation-management:P02",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N14:industrial-complex-development:P06",
+        "b": "N15:nonpoint-pollution-source-installation-management:P04",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3433,23 +3772,23 @@
         "b": "N14:forestland-conversion:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "산지 타당성조사와 환경영향평가 협의는 법·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
         "a": "N14:industrial-complex-development:P08",
         "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
+        "verdict": "partial",
         "mergeable": false,
-        "reason": "환경부 협의는 통합심의와 별도 법정 협의",
-        "blockingArticle": "환경영향평가법 제27조제1항"
+        "reason": "통합심의는 심의만 통합하고 환경영향평가 협의는 기후에너지환경부와 별도 진행",
+        "blockingArticle": "환경영향평가법 제27조"
       },
       {
         "a": "N14:industrial-complex-development:P08",
         "b": "N15:ecosystem-conservation-charge-assessment:P01",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 부과대상 판정과 협의는 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3457,7 +3796,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P02",
         "verdict": "different",
         "mergeable": false,
-        "reason": "훼손면적 산정과 협의는 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3465,7 +3804,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 산정과 협의는 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3473,7 +3812,31 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "부담금 부과 결정과 협의는 실체·시점 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N14:industrial-complex-development:P08",
+        "b": "N15:nonpoint-pollution-source-installation-management:P01",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N14:industrial-complex-development:P08",
+        "b": "N15:nonpoint-pollution-source-installation-management:P02",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N14:industrial-complex-development:P08",
+        "b": "N15:nonpoint-pollution-source-installation-management:P04",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3481,7 +3844,7 @@
         "b": "N37:industrial-complex-fast-track-plan-approval:P10",
         "verdict": "different",
         "mergeable": false,
-        "reason": "타당성조사(조사기관)와 위원회 통합심의는 실체 다름",
+        "reason": "타당성조사는 조사이고 통합심의는 위원회 심의로 실체요건이 다름",
         "blockingArticle": null
       },
       {
@@ -3489,7 +3852,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P01",
         "verdict": "different",
         "mergeable": false,
-        "reason": "산지 타당성조사와 부담금 부과대상 판정은 법·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3497,7 +3860,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P02",
         "verdict": "different",
         "mergeable": false,
-        "reason": "산지 타당성조사와 훼손면적 산정은 법·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3505,7 +3868,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "산지 타당성조사와 부담금 산정은 법·실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3513,7 +3876,31 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "산지 타당성조사와 부담금 부과 결정은 법·실체·시점 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N14:forestland-conversion:P05",
+        "b": "N15:nonpoint-pollution-source-installation-management:P01",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N14:forestland-conversion:P05",
+        "b": "N15:nonpoint-pollution-source-installation-management:P02",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N14:forestland-conversion:P05",
+        "b": "N15:nonpoint-pollution-source-installation-management:P04",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3521,7 +3908,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P01",
         "verdict": "different",
         "mergeable": false,
-        "reason": "통합심의와 부담금 부과대상 판정은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3529,7 +3916,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P02",
         "verdict": "different",
         "mergeable": false,
-        "reason": "통합심의와 훼손면적 산정은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3537,7 +3924,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P04",
         "verdict": "different",
         "mergeable": false,
-        "reason": "통합심의와 부담금 산정은 실체 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3545,7 +3932,31 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P05",
         "verdict": "different",
         "mergeable": false,
-        "reason": "통합심의와 부담금 부과 결정은 실체·시점 다름",
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N37:industrial-complex-fast-track-plan-approval:P10",
+        "b": "N15:nonpoint-pollution-source-installation-management:P01",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N37:industrial-complex-fast-track-plan-approval:P10",
+        "b": "N15:nonpoint-pollution-source-installation-management:P02",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N37:industrial-complex-fast-track-plan-approval:P10",
+        "b": "N15:nonpoint-pollution-source-installation-management:P04",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3553,7 +3964,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P02",
         "verdict": "partial",
         "mergeable": true,
-        "reason": "제46조 단일 부과 사건의 단계, 판정 결과로 면적 산정 자동 개시 가능",
+        "reason": "자연환경보전법 제46조 단일 부과처분의 계산 연쇄, 판정 자료를 면적 산정에 자동 인계 가능",
         "blockingArticle": null
       },
       {
@@ -3561,7 +3972,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P04",
         "verdict": "partial",
         "mergeable": true,
-        "reason": "동일 기관·제46조 단일 부과 사건, 판정과 산정을 한 시계로 자동화 가능",
+        "reason": "동일 기관의 제46조 단일 부과처분 계산 연쇄, 한 사건으로 처리 가능",
         "blockingArticle": null
       },
       {
@@ -3569,7 +3980,31 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P05",
         "verdict": "partial",
         "mergeable": true,
-        "reason": "동일 기관·제46조 단일 부과 처분 사건, 판정과 부과를 한 시계로 묶을 수 있음",
+        "reason": "동일 기관의 제46조 단일 부과처분 계산 연쇄, 한 사건으로 처리 가능",
+        "blockingArticle": null
+      },
+      {
+        "a": "N15:ecosystem-conservation-charge-assessment:P01",
+        "b": "N15:nonpoint-pollution-source-installation-management:P01",
+        "verdict": "partial",
+        "mergeable": true,
+        "reason": "사업유형·면적·환경영향평가 여부라는 동일 입력으로 하는 대상 판정, 한 시점 판정 가능",
+        "blockingArticle": null
+      },
+      {
+        "a": "N15:ecosystem-conservation-charge-assessment:P01",
+        "b": "N15:nonpoint-pollution-source-installation-management:P02",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N15:ecosystem-conservation-charge-assessment:P01",
+        "b": "N15:nonpoint-pollution-source-installation-management:P04",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3577,7 +4012,7 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P04",
         "verdict": "partial",
         "mergeable": true,
-        "reason": "제46조 동일 산식의 입력(면적)과 산출(금액), 자동 연산 가능",
+        "reason": "제46조 훼손면적 산정값이 금액 산정의 입력, 계산 연쇄 자동화 가능",
         "blockingArticle": null
       },
       {
@@ -3585,7 +4020,31 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P05",
         "verdict": "partial",
         "mergeable": true,
-        "reason": "제46조 단일 부과 사건의 산정과 처분, 한 시계 부여 가능",
+        "reason": "제46조 단일 부과처분의 계산 연쇄, 자료 자동 인계 가능",
+        "blockingArticle": null
+      },
+      {
+        "a": "N15:ecosystem-conservation-charge-assessment:P02",
+        "b": "N15:nonpoint-pollution-source-installation-management:P01",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N15:ecosystem-conservation-charge-assessment:P02",
+        "b": "N15:nonpoint-pollution-source-installation-management:P02",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "훼손면적 산정과 오염부하 산정은 같은 부지 자료를 쓰나 실체요건·근거법이 다름",
+        "blockingArticle": null
+      },
+      {
+        "a": "N15:ecosystem-conservation-charge-assessment:P02",
+        "b": "N15:nonpoint-pollution-source-installation-management:P04",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
         "blockingArticle": null
       },
       {
@@ -3593,7 +4052,79 @@
         "b": "N15:ecosystem-conservation-charge-assessment:P05",
         "verdict": "partial",
         "mergeable": true,
-        "reason": "동일 기관의 금액 산정과 부과 결정, 한 처분 사건으로 자동화 가능",
+        "reason": "동일 기관의 금액 산정과 부과 결정, 한 처분으로 묶고 기한 부여 가능",
+        "blockingArticle": null
+      },
+      {
+        "a": "N15:ecosystem-conservation-charge-assessment:P04",
+        "b": "N15:nonpoint-pollution-source-installation-management:P01",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N15:ecosystem-conservation-charge-assessment:P04",
+        "b": "N15:nonpoint-pollution-source-installation-management:P02",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N15:ecosystem-conservation-charge-assessment:P04",
+        "b": "N15:nonpoint-pollution-source-installation-management:P04",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N15:ecosystem-conservation-charge-assessment:P05",
+        "b": "N15:nonpoint-pollution-source-installation-management:P01",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N15:ecosystem-conservation-charge-assessment:P05",
+        "b": "N15:nonpoint-pollution-source-installation-management:P02",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "심사 대상·근거법·주체가 다른 별개 절차",
+        "blockingArticle": null
+      },
+      {
+        "a": "N15:ecosystem-conservation-charge-assessment:P05",
+        "b": "N15:nonpoint-pollution-source-installation-management:P04",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "부담금 부과와 신고증명서 발급은 기관·근거법·실체요건이 다름",
+        "blockingArticle": null
+      },
+      {
+        "a": "N15:nonpoint-pollution-source-installation-management:P01",
+        "b": "N15:nonpoint-pollution-source-installation-management:P02",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "대상 판정과 저감계획 작성은 주체·실체요건이 다른 선후 단계",
+        "blockingArticle": null
+      },
+      {
+        "a": "N15:nonpoint-pollution-source-installation-management:P01",
+        "b": "N15:nonpoint-pollution-source-installation-management:P04",
+        "verdict": "partial",
+        "mergeable": true,
+        "reason": "영산강유역환경청의 대상 판정과 신고 검토를 한 심사로 묶고 기한 부여 가능",
+        "blockingArticle": null
+      },
+      {
+        "a": "N15:nonpoint-pollution-source-installation-management:P02",
+        "b": "N15:nonpoint-pollution-source-installation-management:P04",
+        "verdict": "different",
+        "mergeable": false,
+        "reason": "사업자 작성과 행정청 검토는 주체·실체요건이 다른 선후 단계",
         "blockingArticle": null
       }
     ],
@@ -4719,1909 +5250,6 @@
         "mergeable": true,
         "reason": "조건부 의결→조건 반영→재심의가 한 사건의 순환 단계, 한 시계로 기한 관리 가능",
         "blockingArticle": null
-      }
-    ],
-    "passed": true,
-    "reason": null,
-    "allowedKinds": [
-      "merge",
-      "automate",
-      "shorten"
-    ],
-    "preserveHits": [],
-    "ignored": [],
-    "judgeStatus": "ok"
-  },
-  {
-    "cid": "A-water-01",
-    "axis": "same-subject",
-    "key": "water",
-    "pids": [
-      "N09:environmental-impact-assessment-consultation:P04",
-      "N09:environmental-impact-assessment-consultation:P08",
-      "N11:industrial-complex-development:P06",
-      "N11:environmental-impact-assessment-consultation:P04",
-      "N11:environmental-impact-assessment-consultation:P08",
-      "N12:industrial-complex-development:P08",
-      "N12:environmental-impact-assessment-consultation:P04",
-      "N12:environmental-impact-assessment-consultation:P08",
-      "N14:industrial-complex-development:P02",
-      "N14:industrial-complex-development:P06",
-      "N14:industrial-complex-development:P08",
-      "N37:industrial-complex-fast-track-plan-approval:P10",
-      "N15:nonpoint-pollution-source-installation-management:P01",
-      "N15:nonpoint-pollution-source-installation-management:P02",
-      "N15:nonpoint-pollution-source-installation-management:P04"
-    ],
-    "pairs": [
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N09:environmental-impact-assessment-consultation:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "동일 평가서의 선후 단계(초안 의견수렴→본안 검토), 실체요건 다르나 한 시계로 기한 부여 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N11:industrial-complex-development:P06",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "환경영향평가법 제25조 동일 조문·동일 실체요건(초안 공람·주민 의견수렴), 한 사건이면 1회 수렴",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N11:environmental-impact-assessment-consultation:P04",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "환경영향평가법 제25조 동일 조문·동일 실체요건, 한 사건이면 1회 수렴",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N11:environmental-impact-assessment-consultation:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "초안 의견수렴→본안 검토의 선후 단계, 실체요건 다르나 한 시계로 기한 부여 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N12:industrial-complex-development:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "초안 의견수렴 결과를 반영한 본안이 제27조 협의 요청 대상, 한 시계 내 선후 단계",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N12:environmental-impact-assessment-consultation:P04",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "환경영향평가법 제25조 동일 조문·동일 실체요건, 한 사건이면 1회 수렴",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N12:environmental-impact-assessment-consultation:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "초안 의견수렴→본안 검토의 선후 단계, 실체요건 다르나 한 시계로 기한 부여 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N14:industrial-complex-development:P02",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "산입법 시행령 제8조의2 지정 협의는 입지·지정 요건 심사, 환경영향 심사와 실체 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "환경영향평가법 제25조 동일 조문·동일 실체요건, 한 사건이면 1회 수렴",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "초안 의견수렴 결과를 반영한 본안이 제27조 협의 요청 대상, 한 시계 내 선후 단계",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "특례법 제14조 통합심의 대상에 환경영향평가 의견수렴·협의 미포함, 별도 트랙",
-        "blockingArticle": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조"
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N15:nonpoint-pollution-source-installation-management:P01",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴과 비점오염원 대상 판정은 실체요건·주체 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N15:nonpoint-pollution-source-installation-management:P02",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴과 비점오염 저감계획 작성은 실체요건 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N15:nonpoint-pollution-source-installation-management:P04",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴과 비점오염원 신고 검토는 실체요건·주체 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N11:industrial-complex-development:P06",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "초안 의견수렴→본안 검토의 선후 단계, 실체요건 다르나 한 시계로 기한 부여 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N11:environmental-impact-assessment-consultation:P04",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "초안 의견수렴→본안 검토의 선후 단계, 실체요건 다르나 한 시계로 기한 부여 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N11:environmental-impact-assessment-consultation:P08",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "환경영향평가법 제28조 동일 조문·동일 검토 주체(장관), 한 사건이면 1회 검토",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N12:industrial-complex-development:P08",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "제28조 검토가 곧 협의 절차의 본체, 조문·주체·실체요건 동일",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N12:environmental-impact-assessment-consultation:P04",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "초안 의견수렴→본안 검토의 선후 단계, 실체요건 다르나 한 시계로 기한 부여 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N12:environmental-impact-assessment-consultation:P08",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "환경영향평가법 제28조 동일 조문·동일 검토 주체, 한 사건이면 1회 검토",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N14:industrial-complex-development:P02",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "산입법 시행령 제8조의2 지정 협의는 입지·지정 요건 심사, 평가서 검토와 실체 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "초안 의견수렴→본안 검토의 선후 단계, 실체요건 다르나 한 시계로 기한 부여 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "제28조 검토가 곧 협의 절차의 본체, 조문·주체·실체요건 동일",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "특례법 제14조 통합심의 대상에 환경영향평가 협의 미포함, 별도 트랙",
-        "blockingArticle": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조"
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N15:nonpoint-pollution-source-installation-management:P01",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "비점 대상 판정은 환경영향평가 대상 여부를 입력으로 삼음, 협의 확정 시 자동 판정·통지 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N15:nonpoint-pollution-source-installation-management:P02",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "평가서 내 비점오염 저감방안과 신고용 저감계획이 같은 산정 실체, 협의 내용 자동 인계 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N15:nonpoint-pollution-source-installation-management:P04",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "협의 위임기관(유역환경청)이 비점 신고도 검토, 한 사건 순차 검토로 기한 통합 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N11:environmental-impact-assessment-consultation:P04",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "환경영향평가법 제25조 동일 조문·동일 실체요건, 같은 묶음 내 중복 등재로 1회 수렴",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N11:environmental-impact-assessment-consultation:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "초안 의견수렴→본안 검토의 선후 단계, 실체요건 다르나 한 시계로 기한 부여 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N12:industrial-complex-development:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "초안 의견수렴 결과를 반영한 본안이 제27조 협의 요청 대상, 한 시계 내 선후 단계",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N12:environmental-impact-assessment-consultation:P04",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "환경영향평가법 제25조 동일 조문·동일 실체요건, 한 사건이면 1회 수렴",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N12:environmental-impact-assessment-consultation:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "초안 의견수렴→본안 검토의 선후 단계, 실체요건 다르나 한 시계로 기한 부여 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N14:industrial-complex-development:P02",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "산입법 시행령 제8조의2 지정 협의는 입지·지정 요건 심사, 주민 의견수렴과 실체 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "환경영향평가법 제25조 동일 조문·동일 실체요건, 한 사건이면 1회 수렴",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "초안 의견수렴 결과를 반영한 본안이 제27조 협의 요청 대상, 한 시계 내 선후 단계",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "특례법 제14조 통합심의 대상에 환경영향평가 의견수렴 미포함, 별도 트랙",
-        "blockingArticle": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조"
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N15:nonpoint-pollution-source-installation-management:P01",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴과 비점오염원 대상 판정은 실체요건·주체 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N15:nonpoint-pollution-source-installation-management:P02",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴과 비점오염 저감계획 작성은 실체요건 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N15:nonpoint-pollution-source-installation-management:P04",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴과 비점오염원 신고 검토는 실체요건·주체 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N11:environmental-impact-assessment-consultation:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "동일 평가서의 선후 단계(초안 의견수렴→본안 검토), 한 시계로 기한 부여 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N12:industrial-complex-development:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "초안 의견수렴 결과를 반영한 본안이 제27조 협의 요청 대상, 한 시계 내 선후 단계",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N12:environmental-impact-assessment-consultation:P04",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "환경영향평가법 제25조 동일 조문·동일 실체요건, 한 사건이면 1회 수렴",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N12:environmental-impact-assessment-consultation:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "초안 의견수렴→본안 검토의 선후 단계, 실체요건 다르나 한 시계로 기한 부여 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N14:industrial-complex-development:P02",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "산입법 시행령 제8조의2 지정 협의는 입지·지정 요건 심사, 주민 의견수렴과 실체 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "환경영향평가법 제25조 동일 조문·동일 실체요건, 한 사건이면 1회 수렴",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "초안 의견수렴 결과를 반영한 본안이 제27조 협의 요청 대상, 한 시계 내 선후 단계",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "특례법 제14조 통합심의 대상에 환경영향평가 의견수렴 미포함, 별도 트랙",
-        "blockingArticle": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조"
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N15:nonpoint-pollution-source-installation-management:P01",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴과 비점오염원 대상 판정은 실체요건·주체 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N15:nonpoint-pollution-source-installation-management:P02",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴과 비점오염 저감계획 작성은 실체요건 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N15:nonpoint-pollution-source-installation-management:P04",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴과 비점오염원 신고 검토는 실체요건·주체 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P08",
-        "b": "N12:industrial-complex-development:P08",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "제28조 검토가 곧 협의 절차의 본체, 조문·주체·실체요건 동일",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P08",
-        "b": "N12:environmental-impact-assessment-consultation:P04",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "초안 의견수렴→본안 검토의 선후 단계, 실체요건 다르나 한 시계로 기한 부여 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P08",
-        "b": "N12:environmental-impact-assessment-consultation:P08",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "환경영향평가법 제28조 동일 조문·동일 검토 주체, 한 사건이면 1회 검토",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P08",
-        "b": "N14:industrial-complex-development:P02",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "산입법 시행령 제8조의2 지정 협의는 입지·지정 요건 심사, 평가서 검토와 실체 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P08",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "초안 의견수렴→본안 검토의 선후 단계, 실체요건 다르나 한 시계로 기한 부여 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P08",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "제28조 검토가 곧 협의 절차의 본체, 조문·주체·실체요건 동일",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P08",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "특례법 제14조 통합심의 대상에 환경영향평가 협의 미포함, 별도 트랙",
-        "blockingArticle": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조"
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P08",
-        "b": "N15:nonpoint-pollution-source-installation-management:P01",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "비점 대상 판정은 환경영향평가 대상 여부를 입력으로 삼음, 협의 확정 시 자동 판정·통지 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P08",
-        "b": "N15:nonpoint-pollution-source-installation-management:P02",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "평가서 내 비점오염 저감방안과 신고용 저감계획이 같은 산정 실체, 협의 내용 자동 인계 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P08",
-        "b": "N15:nonpoint-pollution-source-installation-management:P04",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "협의 위임기관(유역환경청)이 비점 신고도 검토, 한 사건 순차 검토로 기한 통합 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:industrial-complex-development:P08",
-        "b": "N12:environmental-impact-assessment-consultation:P04",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "초안 의견수렴 결과를 반영한 본안이 제27조 협의 요청 대상, 한 시계 내 선후 단계",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:industrial-complex-development:P08",
-        "b": "N12:environmental-impact-assessment-consultation:P08",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "제28조 검토가 곧 협의 절차의 본체, 같은 묶음 내 중복 등재로 1회 검토",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:industrial-complex-development:P08",
-        "b": "N14:industrial-complex-development:P02",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "산입법 시행령 제8조의2 지정 협의는 입지·지정 요건 심사, 환경영향평가 협의와 실체 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:industrial-complex-development:P08",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "초안 의견수렴 결과를 반영한 본안이 제27조 협의 요청 대상, 한 시계 내 선후 단계",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:industrial-complex-development:P08",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "환경영향평가법 제27·28조 동일 협의 절차, 한 사건이면 1회 협의",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:industrial-complex-development:P08",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "특례법 제14조 통합심의 대상에 환경영향평가 협의 미포함, 별도 트랙",
-        "blockingArticle": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조"
-      },
-      {
-        "a": "N12:industrial-complex-development:P08",
-        "b": "N15:nonpoint-pollution-source-installation-management:P01",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "비점 대상 판정은 환경영향평가 대상 여부를 입력으로 삼음, 협의 확정 시 자동 판정·통지 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:industrial-complex-development:P08",
-        "b": "N15:nonpoint-pollution-source-installation-management:P02",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "평가서 내 비점오염 저감방안과 신고용 저감계획이 같은 산정 실체, 협의 내용 자동 인계 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:industrial-complex-development:P08",
-        "b": "N15:nonpoint-pollution-source-installation-management:P04",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "협의 위임기관(유역환경청)이 비점 신고도 검토, 한 사건 순차 검토로 기한 통합 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P04",
-        "b": "N12:environmental-impact-assessment-consultation:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "동일 평가서의 선후 단계(초안 의견수렴→본안 검토), 한 시계로 기한 부여 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P04",
-        "b": "N14:industrial-complex-development:P02",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "산입법 시행령 제8조의2 지정 협의는 입지·지정 요건 심사, 주민 의견수렴과 실체 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P04",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "환경영향평가법 제25조 동일 조문·동일 실체요건, 한 사건이면 1회 수렴",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P04",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "초안 의견수렴 결과를 반영한 본안이 제27조 협의 요청 대상, 한 시계 내 선후 단계",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P04",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "특례법 제14조 통합심의 대상에 환경영향평가 의견수렴 미포함, 별도 트랙",
-        "blockingArticle": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조"
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P04",
-        "b": "N15:nonpoint-pollution-source-installation-management:P01",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴과 비점오염원 대상 판정은 실체요건·주체 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P04",
-        "b": "N15:nonpoint-pollution-source-installation-management:P02",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴과 비점오염 저감계획 작성은 실체요건 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P04",
-        "b": "N15:nonpoint-pollution-source-installation-management:P04",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴과 비점오염원 신고 검토는 실체요건·주체 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P08",
-        "b": "N14:industrial-complex-development:P02",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "산입법 시행령 제8조의2 지정 협의는 입지·지정 요건 심사, 평가서 검토와 실체 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P08",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "초안 의견수렴→본안 검토의 선후 단계, 실체요건 다르나 한 시계로 기한 부여 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P08",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "제28조 검토가 곧 협의 절차의 본체, 조문·주체·실체요건 동일",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P08",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "특례법 제14조 통합심의 대상에 환경영향평가 협의 미포함, 별도 트랙",
-        "blockingArticle": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조"
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P08",
-        "b": "N15:nonpoint-pollution-source-installation-management:P01",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "비점 대상 판정은 환경영향평가 대상 여부를 입력으로 삼음, 협의 확정 시 자동 판정·통지 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P08",
-        "b": "N15:nonpoint-pollution-source-installation-management:P02",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "평가서 내 비점오염 저감방안과 신고용 저감계획이 같은 산정 실체, 협의 내용 자동 인계 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P08",
-        "b": "N15:nonpoint-pollution-source-installation-management:P04",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "협의 위임기관(유역환경청)이 비점 신고도 검토, 한 사건 순차 검토로 기한 통합 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N14:industrial-complex-development:P02",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "지정 협의(입지·지정 요건)와 주민 의견수렴(환경영향)은 실체요건·주체 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N14:industrial-complex-development:P02",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "산입법 시행령 제8조의2 지정 협의는 입지·지정 요건 심사, 환경영향평가 협의와 실체 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N14:industrial-complex-development:P02",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "일반 산입법 지정 협의와 특례법 통합심의는 별개 트랙, 동일 사건으로 확신 불가",
-        "blockingArticle": null
-      },
-      {
-        "a": "N14:industrial-complex-development:P02",
-        "b": "N15:nonpoint-pollution-source-installation-management:P01",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "지정 협의와 비점오염원 대상 판정은 심사 대상 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N14:industrial-complex-development:P02",
-        "b": "N15:nonpoint-pollution-source-installation-management:P02",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "지정 협의와 비점오염 저감계획 작성은 심사 대상 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N14:industrial-complex-development:P02",
-        "b": "N15:nonpoint-pollution-source-installation-management:P04",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "지정 협의와 비점오염원 신고 검토는 심사 대상·주체 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N14:industrial-complex-development:P06",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "초안 의견수렴 결과를 반영한 본안이 제27조 협의 요청 대상, 한 시계 내 선후 단계",
-        "blockingArticle": null
-      },
-      {
-        "a": "N14:industrial-complex-development:P06",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "특례법 제14조 통합심의 대상에 환경영향평가 의견수렴 미포함, 별도 트랙",
-        "blockingArticle": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조"
-      },
-      {
-        "a": "N14:industrial-complex-development:P06",
-        "b": "N15:nonpoint-pollution-source-installation-management:P01",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴과 비점오염원 대상 판정은 실체요건·주체 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N14:industrial-complex-development:P06",
-        "b": "N15:nonpoint-pollution-source-installation-management:P02",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴과 비점오염 저감계획 작성은 실체요건 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N14:industrial-complex-development:P06",
-        "b": "N15:nonpoint-pollution-source-installation-management:P04",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴과 비점오염원 신고 검토는 실체요건·주체 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N14:industrial-complex-development:P08",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "특례법 제14조 통합심의 대상에 환경영향평가 협의 미포함, 별도 트랙",
-        "blockingArticle": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조"
-      },
-      {
-        "a": "N14:industrial-complex-development:P08",
-        "b": "N15:nonpoint-pollution-source-installation-management:P01",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "비점 대상 판정은 환경영향평가 대상 여부를 입력으로 삼음, 협의 확정 시 자동 판정·통지 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N14:industrial-complex-development:P08",
-        "b": "N15:nonpoint-pollution-source-installation-management:P02",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "평가서 내 비점오염 저감방안과 신고용 저감계획이 같은 산정 실체, 협의 내용 자동 인계 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N14:industrial-complex-development:P08",
-        "b": "N15:nonpoint-pollution-source-installation-management:P04",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "협의 위임기관(유역환경청)이 비점 신고도 검토, 한 사건 순차 검토로 기한 통합 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "b": "N15:nonpoint-pollution-source-installation-management:P01",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "통합심의는 계획 승인 심의, 비점오염원 대상 판정과 심사 대상 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "b": "N15:nonpoint-pollution-source-installation-management:P02",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "통합심의는 계획 승인 심의, 비점오염 저감계획 작성과 심사 대상 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "b": "N15:nonpoint-pollution-source-installation-management:P04",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "통합심의는 계획 승인 심의, 비점오염원 신고 검토와 심사 대상·주체 상이",
-        "blockingArticle": null
-      },
-      {
-        "a": "N15:nonpoint-pollution-source-installation-management:P01",
-        "b": "N15:nonpoint-pollution-source-installation-management:P02",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "한 신고 사건의 선후 단계(대상 판정→저감계획 작성), 한 시계로 기한 부여 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N15:nonpoint-pollution-source-installation-management:P01",
-        "b": "N15:nonpoint-pollution-source-installation-management:P04",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "동일 기관(영산강유역환경청)의 판정·검토, 한 사건 한 시계로 묶어 기한 부여 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N15:nonpoint-pollution-source-installation-management:P02",
-        "b": "N15:nonpoint-pollution-source-installation-management:P04",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "저감계획 작성→신고 검토·증명서 발급의 선후 단계, 한 시계로 기한 부여 가능",
-        "blockingArticle": null
-      }
-    ],
-    "passed": true,
-    "reason": null,
-    "allowedKinds": [
-      "merge",
-      "automate",
-      "shorten"
-    ],
-    "preserveHits": [],
-    "ignored": [],
-    "judgeStatus": "ok"
-  },
-  {
-    "cid": "A-air-01",
-    "axis": "same-subject",
-    "key": "air",
-    "pids": [
-      "N09:environmental-impact-assessment-consultation:P04",
-      "N09:environmental-impact-assessment-consultation:P08",
-      "N11:industrial-complex-development:P06",
-      "N11:environmental-impact-assessment-consultation:P04",
-      "N11:environmental-impact-assessment-consultation:P08",
-      "N12:industrial-complex-development:P08",
-      "N12:environmental-impact-assessment-consultation:P04",
-      "N12:environmental-impact-assessment-consultation:P08",
-      "N14:industrial-complex-development:P02",
-      "N14:industrial-complex-development:P06",
-      "N14:industrial-complex-development:P08",
-      "N37:industrial-complex-fast-track-plan-approval:P10"
-    ],
-    "pairs": [
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N09:environmental-impact-assessment-consultation:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "제25조 의견수렴과 제28조 검토는 선후 단계로 검토가 의견수렴 이행 여부를 심사 대상으로 삼음",
-        "blockingArticle": "환경영향평가법 제28조제1항"
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N11:industrial-complex-development:P06",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "동일 조문(제25조) 동일 실체요건, 같은 사업이면 1회 의견수렴으로 충족",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N11:environmental-impact-assessment-consultation:P04",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "동일 조문 동일 절차, 한 사건으로 묶음 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N11:environmental-impact-assessment-consultation:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "의견수렴과 평가서 검토는 실체요건이 다르고 선후 관계",
-        "blockingArticle": "환경영향평가법 제28조제1항"
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N12:industrial-complex-development:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "초안 의견수렴 결과를 반영한 평가서로 협의 요청하므로 선후 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N12:environmental-impact-assessment-consultation:P04",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "동일 조문 동일 절차, 한 사건으로 묶음 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N12:environmental-impact-assessment-consultation:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "의견수렴과 평가서 검토는 실체요건이 다르고 선후 관계",
-        "blockingArticle": "환경영향평가법 제28조제1항"
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N14:industrial-complex-development:P02",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "산단 지정 관계기관 협의와 환경영향 주민 의견수렴은 심사 대상·주체가 다름",
-        "blockingArticle": "산업입지 및 개발에 관한 법률 시행령 제8조의2"
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "동일 조문(제25조) 동일 실체요건, 같은 사업이면 1회 수렴으로 충족",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "초안 의견수렴 후 협의 요청이 이어지는 선후 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "특례법 통합심의 대상에 제25조 주민 의견수렴이 포함된다고 확신할 수 없음",
-        "blockingArticle": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조"
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N11:industrial-complex-development:P06",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "평가서 검토와 초안 의견수렴은 실체요건이 다르고 선후 관계",
-        "blockingArticle": "환경영향평가법 제28조제1항"
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N11:environmental-impact-assessment-consultation:P04",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "평가서 검토와 초안 의견수렴은 실체요건이 다르고 선후 관계",
-        "blockingArticle": "환경영향평가법 제28조제1항"
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N11:environmental-impact-assessment-consultation:P08",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "동일 조문(제28조) 동일 검토 절차, 한 사건으로 묶음 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N12:industrial-complex-development:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "제28조 검토는 동일 심사이나 후자는 제27조 협의 요청까지 포함",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N12:environmental-impact-assessment-consultation:P04",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "평가서 검토와 초안 의견수렴은 실체요건이 다르고 선후 관계",
-        "blockingArticle": "환경영향평가법 제28조제1항"
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N12:environmental-impact-assessment-consultation:P08",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "동일 조문(제28조) 동일 검토 절차, 한 사건으로 묶음 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N14:industrial-complex-development:P02",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "산단 지정 협의와 환경영향평가서 검토는 심사 대상이 다름",
-        "blockingArticle": "산업입지 및 개발에 관한 법률 시행령 제8조의2"
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "평가서 검토와 초안 의견수렴은 실체요건이 다르고 선후 관계",
-        "blockingArticle": "환경영향평가법 제28조제1항"
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "제28조 검토는 동일 심사이나 후자는 제27조 협의 요청까지 포함",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "기후에너지환경부장관의 평가서 검토를 특례법 통합심의가 갈음한다고 확신할 수 없음",
-        "blockingArticle": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조"
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N11:environmental-impact-assessment-consultation:P04",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "같은 묶음 내 동일 조문(제25조) 중복 표기, 한 사건",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N11:environmental-impact-assessment-consultation:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "초안 의견수렴과 평가서 검토는 실체요건이 다르고 선후 관계",
-        "blockingArticle": "환경영향평가법 제28조제1항"
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N12:industrial-complex-development:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "초안 의견수렴 후 협의 요청이 이어지는 선후 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N12:environmental-impact-assessment-consultation:P04",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "동일 조문(제25조) 동일 실체요건",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N12:environmental-impact-assessment-consultation:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "초안 의견수렴과 평가서 검토는 실체요건이 다르고 선후 관계",
-        "blockingArticle": "환경영향평가법 제28조제1항"
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N14:industrial-complex-development:P02",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "산단 지정 협의와 환경영향 주민 의견수렴은 심사 대상·주체가 다름",
-        "blockingArticle": "산업입지 및 개발에 관한 법률 시행령 제8조의2"
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "동일 조문(제25조) 동일 실체요건",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "초안 의견수렴 후 협의 요청이 이어지는 선후 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "특례법 통합심의 대상에 제25조 주민 의견수렴이 포함된다고 확신할 수 없음",
-        "blockingArticle": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조"
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N11:environmental-impact-assessment-consultation:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "제25조 의견수렴과 제28조 검토는 선후 단계",
-        "blockingArticle": "환경영향평가법 제28조제1항"
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N12:industrial-complex-development:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "초안 의견수렴 후 협의 요청이 이어지는 선후 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N12:environmental-impact-assessment-consultation:P04",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "동일 조문 동일 절차",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N12:environmental-impact-assessment-consultation:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "의견수렴과 평가서 검토는 실체요건이 다르고 선후 관계",
-        "blockingArticle": "환경영향평가법 제28조제1항"
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N14:industrial-complex-development:P02",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "산단 지정 협의와 환경영향 주민 의견수렴은 심사 대상·주체가 다름",
-        "blockingArticle": "산업입지 및 개발에 관한 법률 시행령 제8조의2"
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "동일 조문(제25조) 동일 실체요건",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "초안 의견수렴 후 협의 요청이 이어지는 선후 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "특례법 통합심의 대상에 제25조 주민 의견수렴이 포함된다고 확신할 수 없음",
-        "blockingArticle": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조"
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P08",
-        "b": "N12:industrial-complex-development:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "제28조 검토는 동일 심사이나 후자는 제27조 협의 요청까지 포함",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P08",
-        "b": "N12:environmental-impact-assessment-consultation:P04",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "평가서 검토와 초안 의견수렴은 실체요건이 다르고 선후 관계",
-        "blockingArticle": "환경영향평가법 제28조제1항"
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P08",
-        "b": "N12:environmental-impact-assessment-consultation:P08",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "동일 조문(제28조) 동일 검토 절차",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P08",
-        "b": "N14:industrial-complex-development:P02",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "산단 지정 협의와 환경영향평가서 검토는 심사 대상이 다름",
-        "blockingArticle": "산업입지 및 개발에 관한 법률 시행령 제8조의2"
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P08",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "평가서 검토와 초안 의견수렴은 실체요건이 다르고 선후 관계",
-        "blockingArticle": "환경영향평가법 제28조제1항"
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P08",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "제28조 검토는 동일 심사이나 후자는 제27조 협의 요청까지 포함",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P08",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "평가서 검토를 특례법 통합심의가 갈음한다고 확신할 수 없음",
-        "blockingArticle": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조"
-      },
-      {
-        "a": "N12:industrial-complex-development:P08",
-        "b": "N12:environmental-impact-assessment-consultation:P04",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "협의 요청은 초안 의견수렴 결과 반영 후 이루어지는 선후 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
-      },
-      {
-        "a": "N12:industrial-complex-development:P08",
-        "b": "N12:environmental-impact-assessment-consultation:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "같은 묶음 내 제28조 검토 중복, 전자는 제27조 협의 요청 포함",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:industrial-complex-development:P08",
-        "b": "N14:industrial-complex-development:P02",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "환경영향평가 협의와 산단 지정 관계기관 협의는 근거법·심사 대상이 다름",
-        "blockingArticle": "산업입지 및 개발에 관한 법률 시행령 제8조의2"
-      },
-      {
-        "a": "N12:industrial-complex-development:P08",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "협의는 초안 의견수렴 후 이루어지는 선후 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
-      },
-      {
-        "a": "N12:industrial-complex-development:P08",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "동일 조문(제27조·제28조) 동일 협의 절차",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:industrial-complex-development:P08",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "환경영향평가 협의를 특례법 통합심의가 갈음한다고 확신할 수 없음",
-        "blockingArticle": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조"
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P04",
-        "b": "N12:environmental-impact-assessment-consultation:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "제25조 의견수렴과 제28조 검토는 선후 단계",
-        "blockingArticle": "환경영향평가법 제28조제1항"
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P04",
-        "b": "N14:industrial-complex-development:P02",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "산단 지정 협의와 환경영향 주민 의견수렴은 심사 대상·주체가 다름",
-        "blockingArticle": "산업입지 및 개발에 관한 법률 시행령 제8조의2"
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P04",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "동일 조문(제25조) 동일 실체요건",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P04",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "초안 의견수렴 후 협의 요청이 이어지는 선후 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P04",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "특례법 통합심의 대상에 제25조 주민 의견수렴이 포함된다고 확신할 수 없음",
-        "blockingArticle": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조"
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P08",
-        "b": "N14:industrial-complex-development:P02",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "산단 지정 협의와 환경영향평가서 검토는 심사 대상이 다름",
-        "blockingArticle": "산업입지 및 개발에 관한 법률 시행령 제8조의2"
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P08",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "평가서 검토와 초안 의견수렴은 실체요건이 다르고 선후 관계",
-        "blockingArticle": "환경영향평가법 제28조제1항"
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P08",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "제28조 검토는 동일 심사이나 후자는 제27조 협의 요청까지 포함",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P08",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "평가서 검토를 특례법 통합심의가 갈음한다고 확신할 수 없음",
-        "blockingArticle": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조"
-      },
-      {
-        "a": "N14:industrial-complex-development:P02",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "산단 지정 협의와 환경영향 주민 의견수렴은 근거법·주체·심사 대상이 다름",
-        "blockingArticle": "산업입지 및 개발에 관한 법률 시행령 제8조의2"
-      },
-      {
-        "a": "N14:industrial-complex-development:P02",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "지정 협의는 산단 지정 적정성, 환경영향평가 협의는 환경영향 심사로 실체요건이 다름",
-        "blockingArticle": "산업입지 및 개발에 관한 법률 시행령 제8조의2"
-      },
-      {
-        "a": "N14:industrial-complex-development:P02",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "관계기관 협의와 심의위원회 통합심의는 성격이 다르고 특례법 적용 여부도 사업별로 다름",
-        "blockingArticle": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조"
-      },
-      {
-        "a": "N14:industrial-complex-development:P06",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "초안 의견수렴 후 협의 요청이 이어지는 선후 단계",
-        "blockingArticle": "환경영향평가법 제27조제1항"
-      },
-      {
-        "a": "N14:industrial-complex-development:P06",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "특례법 통합심의 대상에 제25조 주민 의견수렴이 포함된다고 확신할 수 없음",
-        "blockingArticle": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조"
-      },
-      {
-        "a": "N14:industrial-complex-development:P08",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "환경영향평가 협의를 특례법 통합심의가 갈음한다고 확신할 수 없음",
-        "blockingArticle": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조"
-      }
-    ],
-    "passed": true,
-    "reason": null,
-    "allowedKinds": [
-      "merge",
-      "automate",
-      "shorten"
-    ],
-    "preserveHits": [],
-    "ignored": [],
-    "judgeStatus": "ok"
-  },
-  {
-    "cid": "A-noise-01",
-    "axis": "same-subject",
-    "key": "noise",
-    "pids": [
-      "N09:environmental-impact-assessment-consultation:P04",
-      "N09:environmental-impact-assessment-consultation:P08",
-      "N11:industrial-complex-development:P06",
-      "N11:environmental-impact-assessment-consultation:P04",
-      "N11:environmental-impact-assessment-consultation:P08",
-      "N12:industrial-complex-development:P08",
-      "N12:environmental-impact-assessment-consultation:P04",
-      "N12:environmental-impact-assessment-consultation:P08",
-      "N14:industrial-complex-development:P06",
-      "N14:industrial-complex-development:P08",
-      "N37:industrial-complex-fast-track-plan-approval:P10"
-    ],
-    "pairs": [
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N09:environmental-impact-assessment-consultation:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴(사업자·지자체 공람)과 장관 검토·보완은 주체·단계가 다른 선후 절차",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N11:industrial-complex-development:P06",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "동일 조문(제25조) 주민 의견수렴, 20일 이상 준하는 수렴 시 의제 규정으로 한 사건 처리 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N11:environmental-impact-assessment-consultation:P04",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "조문·주체·실체요건 완전 동일한 제25조 의견수렴",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N11:environmental-impact-assessment-consultation:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "의견수렴과 장관 검토는 단계·주체가 다름",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N12:industrial-complex-development:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "초안 의견수렴(제25조)과 본안 협의(제27·28조)는 선후 단계, 심사 대상이 다름",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N12:environmental-impact-assessment-consultation:P04",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "조문·주체·실체요건 완전 동일한 제25조 의견수렴",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N12:environmental-impact-assessment-consultation:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "의견수렴과 장관 검토는 단계·주체가 다름",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "동일 조문(제25조) 주민 의견수렴, 의제 규정으로 한 사건 처리 가능",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "초안 의견수렴과 본안 협의는 선후 단계",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P04",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴은 특례법 통합심의 대상 아님, 심사 대상·주체 상이",
-        "blockingArticle": "환경영향평가법 제25조"
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N11:industrial-complex-development:P06",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "장관 검토와 주민 의견수렴은 단계·주체가 다름",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N11:environmental-impact-assessment-consultation:P04",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "장관 검토와 주민 의견수렴은 단계·주체가 다름",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N11:environmental-impact-assessment-consultation:P08",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "조문·주체·실체요건 완전 동일한 제28조 검토",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N12:industrial-complex-development:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "협의(제27·28조)는 장관 검토(제28조)를 포함하는 상위 사건, 한 시계로 묶을 수 있음",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N12:environmental-impact-assessment-consultation:P04",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "장관 검토와 주민 의견수렴은 단계·주체가 다름",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N12:environmental-impact-assessment-consultation:P08",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "조문·주체·실체요건 완전 동일한 제28조 검토",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "장관 검토와 주민 의견수렴은 단계·주체가 다름",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "협의(제27·28조)는 장관 검토(제28조)를 포함하는 상위 사건, 한 시계로 묶을 수 있음",
-        "blockingArticle": null
-      },
-      {
-        "a": "N09:environmental-impact-assessment-consultation:P08",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "환경영향평가 검토 주체는 환경부장관이며 통합심의가 이를 갈음하는지 확신 없음",
-        "blockingArticle": "환경영향평가법 제28조"
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N11:environmental-impact-assessment-consultation:P04",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "같은 묶음 내 동일 제25조 의견수렴을 두 법 흐름이 각각 기재한 중복",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N11:environmental-impact-assessment-consultation:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴과 장관 검토는 단계·주체가 다름",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N12:industrial-complex-development:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "초안 의견수렴과 본안 협의는 선후 단계",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N12:environmental-impact-assessment-consultation:P04",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "동일 조문(제25조) 주민 의견수렴",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N12:environmental-impact-assessment-consultation:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴과 장관 검토는 단계·주체가 다름",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "조문·주체·실체요건 완전 동일한 제25조 의견수렴",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "초안 의견수렴과 본안 협의는 선후 단계",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:industrial-complex-development:P06",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴은 통합심의 대상 아님",
-        "blockingArticle": "환경영향평가법 제25조"
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N11:environmental-impact-assessment-consultation:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴과 장관 검토는 주체·단계가 다른 선후 절차",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N12:industrial-complex-development:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "초안 의견수렴과 본안 협의는 선후 단계",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N12:environmental-impact-assessment-consultation:P04",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "조문·주체·실체요건 완전 동일한 제25조 의견수렴",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N12:environmental-impact-assessment-consultation:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴과 장관 검토는 단계·주체가 다름",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "동일 조문(제25조) 주민 의견수렴",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "초안 의견수렴과 본안 협의는 선후 단계",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P04",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴은 통합심의 대상 아님",
-        "blockingArticle": "환경영향평가법 제25조"
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P08",
-        "b": "N12:industrial-complex-development:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "협의(제27·28조)는 장관 검토(제28조)를 포함하는 상위 사건",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P08",
-        "b": "N12:environmental-impact-assessment-consultation:P04",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "장관 검토와 주민 의견수렴은 단계·주체가 다름",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P08",
-        "b": "N12:environmental-impact-assessment-consultation:P08",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "조문·주체·실체요건 완전 동일한 제28조 검토",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P08",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "장관 검토와 주민 의견수렴은 단계·주체가 다름",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P08",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "협의(제27·28조)는 장관 검토(제28조)를 포함하는 상위 사건",
-        "blockingArticle": null
-      },
-      {
-        "a": "N11:environmental-impact-assessment-consultation:P08",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "환경부장관 검토를 통합심의가 갈음하는지 확신 없음",
-        "blockingArticle": "환경영향평가법 제28조"
-      },
-      {
-        "a": "N12:industrial-complex-development:P08",
-        "b": "N12:environmental-impact-assessment-consultation:P04",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "본안 협의와 초안 의견수렴은 선후 단계",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:industrial-complex-development:P08",
-        "b": "N12:environmental-impact-assessment-consultation:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "같은 묶음 내 협의(제27·28조)와 장관 검토(제28조)를 두 법 흐름이 각각 기재, 한 시계로 묶을 수 있음",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:industrial-complex-development:P08",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "본안 협의와 초안 의견수렴은 선후 단계",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:industrial-complex-development:P08",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "조문·주체·실체요건 완전 동일한 제27·28조 협의",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:industrial-complex-development:P08",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "환경영향평가 협의 주체는 환경부장관, 통합심의가 이를 갈음하는지 확신 없음",
-        "blockingArticle": "환경영향평가법 제27조"
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P04",
-        "b": "N12:environmental-impact-assessment-consultation:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴과 장관 검토는 주체·단계가 다른 선후 절차",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P04",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "same",
-        "mergeable": true,
-        "reason": "동일 조문(제25조) 주민 의견수렴",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P04",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "초안 의견수렴과 본안 협의는 선후 단계",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P04",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴은 통합심의 대상 아님",
-        "blockingArticle": "환경영향평가법 제25조"
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P08",
-        "b": "N14:industrial-complex-development:P06",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "장관 검토와 주민 의견수렴은 단계·주체가 다름",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P08",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "partial",
-        "mergeable": true,
-        "reason": "협의(제27·28조)는 장관 검토(제28조)를 포함하는 상위 사건",
-        "blockingArticle": null
-      },
-      {
-        "a": "N12:environmental-impact-assessment-consultation:P08",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "환경부장관 검토를 통합심의가 갈음하는지 확신 없음",
-        "blockingArticle": "환경영향평가법 제28조"
-      },
-      {
-        "a": "N14:industrial-complex-development:P06",
-        "b": "N14:industrial-complex-development:P08",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "초안 의견수렴과 본안 협의는 선후 단계",
-        "blockingArticle": null
-      },
-      {
-        "a": "N14:industrial-complex-development:P06",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "주민 의견수렴은 통합심의 대상 아님",
-        "blockingArticle": "환경영향평가법 제25조"
-      },
-      {
-        "a": "N14:industrial-complex-development:P08",
-        "b": "N37:industrial-complex-fast-track-plan-approval:P10",
-        "verdict": "different",
-        "mergeable": false,
-        "reason": "환경영향평가 협의 주체는 환경부장관, 통합심의가 이를 갈음하는지 확신 없음",
-        "blockingArticle": "환경영향평가법 제27조"
       }
     ],
     "passed": true,

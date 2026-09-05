@@ -8,7 +8,7 @@ import { loadOrgs, normalizeOrg } from './lib/normalize.mjs';
 const EDGE_KIND = { sequence: 'seq', conditional: 'opt', optional: 'opt' };
 const laneWidth = (n) => (n <= 8 ? 480 : n <= 20 ? 560 : 640);
 
-export function buildCaseData({ procs, cards, improvements, project, orgs, meta, institutionsDir = path.join(ROOT, 'web/data/institutions') }) {
+export function buildCaseData({ procs, cards, improvements, project, orgs, meta, institutionsDir = path.join(ROOT, 'web/data/institutions'), splitAbove = 24 }) {
   const instIndex = new Map(); for (const p of procs) if (!instIndex.has(p.institution)) instIndex.set(p.institution, instIndex.size);
   const nodeIdOf = (p) => `${p.ms}_${instIndex.get(p.institution)}_${p.nodeId}`;
 
@@ -21,15 +21,34 @@ export function buildCaseData({ procs, cards, improvements, project, orgs, meta,
   const laneId = new Map(laneList.map((l, i) => [l.key, `L${i + 1}`]));
   const lanes = laneList.map((l) => ({ id: laneId.get(l.key), name: l.label, sub: `${l.kind === 'applicant' ? '민원인' : l.kind === 'role' ? '역할' : l.kind === 'unknown' ? '미분류' : '기관'} · 절차 ${l.n}`, width: laneWidth(l.n) }));
 
+  // 관문 = 마일스톤. 단, 절차가 splitAbove를 넘는 마일스톤은 제도별 행으로 나눈다(N14 의제 73건 같은 행은
+  // 가로선이 행 하단 통로 7개를 넘겨 겹침만 만든다. 의제 제도들은 실제로 병렬 트랙이라 행 분리가 표현으로도 맞다).
   const msList = [...new Map(procs.map((p) => [p.ms, p])).values()].sort((a, b) => a.msOrder - b.msOrder);
-  const gates = msList.map((p) => ({ id: p.ms, name: p.msName.length > 18 ? p.msName.slice(0, 18) + '…' : p.msName, sub: `절차 ${procs.filter((q) => q.ms === p.ms).length}${p.onCritical ? ' · 크리티컬' : ''}` }));
+  const countOf = (ms) => procs.filter((q) => q.ms === ms).length;
+  const isSplit = (ms) => countOf(ms) > splitAbove;
+  const gateOf = (p) => (isSplit(p.ms) ? `${p.ms}_${instIndex.get(p.institution)}` : p.ms);
+  const short = (t, n = 18) => (t.length > n ? t.slice(0, n) + '…' : t);
+  const gates = [];
+  for (const p of msList) {
+    if (!isSplit(p.ms)) { gates.push({ id: p.ms, name: short(p.msName), sub: `절차 ${countOf(p.ms)}${p.onCritical ? ' · 크리티컬' : ''}` }); continue; }
+    const insts = [...new Set(procs.filter((q) => q.ms === p.ms).map((q) => q.institution))];
+    insts.forEach((slug, k) => {
+      const n = procs.filter((q) => q.ms === p.ms && q.institution === slug).length;
+      gates.push({ id: `${p.ms}_${instIndex.get(slug)}`, name: `${p.ms} ${k + 1}/${insts.length} · ${short(procs.find((q) => q.institution === slug).institutionName, 14)}`, sub: `${short(p.msName, 14)} · 절차 ${n}${p.onCritical ? ' · 크리티컬' : ''}` });
+    });
+  }
 
-  const nodes = procs.map((p) => ({ id: nodeIdOf(p), lane: laneId.get(laneKeyOf(p).key), gate: p.ms, kind: p.legal.length ? 'rule' : 'inferred', org: p.actorRaw || '미상',
+  const nodes = procs.map((p) => ({ id: nodeIdOf(p), lane: laneId.get(laneKeyOf(p).key), gate: gateOf(p), kind: p.legal.length ? 'rule' : 'inferred', org: p.actorRaw || '미상',
     title: p.name, desc: p.action.length > 110 ? p.action.slice(0, 110) + '…' : p.action, basis: p.legal.length ? p.legal.map((l) => `${l.law} ${l.article}`) : undefined }));
   const ids = new Set(nodes.map((n) => n.id));
 
-  const edges = [];
-  const seen = new Set(); const push = (a, b, k) => { const key = `${a}>${b}`; if (ids.has(a) && ids.has(b) && a !== b && !seen.has(key)) { seen.add(key); edges.push([a, b, k]); } };
+  // 같은 칸(레인×관문) 안에서 바로 아래 카드로 이어지는 seq 선은 그리지 않는다. 카드가 칸 안에
+  // 데이터 순서대로 쌓이므로 그 선은 정보가 없고, 한 칸에 절차 10개면 통로 7개를 넘겨 겹침만 만든다.
+  // 건너뛰는 선·되돌아가는 선·opt/par·칸 밖으로 나가는 선은 그대로 둔다.
+  const cellPos = new Map(); { const counters = new Map(); for (const n of nodes) { const c = `${n.lane}|${n.gate}`; const k = counters.get(c) ?? 0; counters.set(c, k + 1); cellPos.set(n.id, { cell: c, idx: k }); } }
+  const impliedByStack = (a, b, k) => { const pa = cellPos.get(a), pb = cellPos.get(b); return k === 'seq' && pa && pb && pa.cell === pb.cell && pb.idx === pa.idx + 1; };
+  const edges = []; let skippedStack = 0;
+  const seen = new Set(); const push = (a, b, k) => { const key = `${a}>${b}`; if (!ids.has(a) || !ids.has(b) || a === b || seen.has(key)) return; seen.add(key); if (impliedByStack(a, b, k)) { skippedStack++; return; } edges.push([a, b, k]); };
   for (const [slug, i] of instIndex) {
     const f = path.join(institutionsDir, `${slug}.json`); if (!fs.existsSync(f)) continue;
     const t = readJson(f);
@@ -51,11 +70,12 @@ export function buildCaseData({ procs, cards, improvements, project, orgs, meta,
     titleImprove: meta.titleImprove ?? '산단 지정 의제 덩어리 — 비교대조 엔진이 찾은 후보',
     subtitle: meta.subtitle ?? `워룸 gwangju-semiconductor-cluster의 KIPA 덩어리 합격 구간. 규정 ${rule} · 추론 ${nodes.length - rule}. 개선 카드는 _lib/compare 엔진 산출(추출→대조→판정→카드).`,
     source: meta.source ?? 'Korea100 워룸 gwangju-semiconductor-cluster · web/data/institutions 제도 템플릿 · 법제처 DRF 현행본',
+    pngScale: meta.pngScale ?? 1.5,
     volume: null, stats: meta.stats ?? [{ label: '마일스톤', value: gates.length, unit: '개' }, { label: '절차', value: nodes.length, unit: '개' }, { label: '기관 레인', value: lanes.length, unit: '개' }, { label: '개선 카드', value: improvements.length, unit: '건' }],
     leverNote: meta.leverNote ?? '카드의 소관은 조문 소관이지 수행 기관이 아니다(1호 문법). 삭제·갈음 카드는 엔진이 내지 않는다.',
     notes: meta.notes ?? ['<b>생성 파일.</b> 엔진(artifacts/complex-minwon/_lib/compare)이 만든다. 손으로 고치지 말고 코드표·판정을 고친 뒤 다시 생성.'],
   };
-  return { meta: fullMeta, lanes, gates, nodes, edges, groups: {}, orgOrder, improvements };
+  return { meta: fullMeta, lanes, gates, nodes, edges, groups: {}, orgOrder, improvements, skippedStack };
 }
 
 export const renderCaseDataModule = (cd) => [
@@ -78,5 +98,5 @@ if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(new URL(im
   const project = readJson(path.join(ROOT, 'web/data/mega-projects/projects/gwangju-semiconductor-cluster.json'));
   const cd = buildCaseData({ procs, cards, improvements, project, orgs: loadOrgs(), meta: { slug: 'deemed-bundle', checkedAt: new Date().toISOString().slice(0, 10) } });
   fs.writeFileSync(path.join(OUT, 'case-data.mjs'), renderCaseDataModule(cd));
-  console.log(`case-data: lanes ${cd.lanes.length} · gates ${cd.gates.length} · nodes ${cd.nodes.length} · edges ${cd.edges.length} · improvements ${cd.improvements.length}`);
+  console.log(`case-data: lanes ${cd.lanes.length} · gates ${cd.gates.length} · nodes ${cd.nodes.length} · edges ${cd.edges.length} (같은 칸 순차 생략 ${cd.skippedStack}) · improvements ${cd.improvements.length}`);
 }
