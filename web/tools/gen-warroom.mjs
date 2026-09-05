@@ -268,6 +268,7 @@ function build(cfg) {
         id: n.id, name: n.name,
         procs: procs.filter((p) => p.ms === n.id).length,
         st: stOf.get(n.id),
+        ...(n.bundleId ? { bundleId: n.bundleId } : {}),
       })),
   }));
   const anchorDate = cfg.anchorKey ? project.scope?.[cfg.anchorKey] ?? null : null;
