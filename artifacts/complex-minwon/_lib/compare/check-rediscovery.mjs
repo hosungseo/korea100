@@ -8,6 +8,15 @@ import { extractAll } from './extract.mjs';
 import { matchAll } from './match.mjs';
 import { loadOrgs, loadSubjects } from './lib/normalize.mjs';
 
+export function articleHit(have, must) {
+  const h = String(have ?? '').replace(/（.*?）|\([^)]*\)/g, '');
+  if (h.startsWith(must) || h.includes(must)) return true;
+  const m = String(must ?? '').match(/^제(\d+)조(.*)$/);
+  if (!m) return h.includes(must);
+  if (!h.includes(`제${m[1]}조`)) return false;
+  return !m[2] || h.includes(m[2]);
+}
+
 export function isolated(ms, clusters) {
   // ms의 절차가 다른 마일스톤 절차와 한 묶음에 있으면 그 cid를 돌려준다(위반). 없으면 null.
   for (const c of clusters) {
@@ -19,7 +28,7 @@ export function isolated(ms, clusters) {
 
 export function rediscovered(target, clusters, procs) {
   const m = new Map(procs.map((p) => [p.pid, p]));
-  const hit = (pid, must) => (m.get(pid)?.legal ?? []).some((l) => l.law === must.law && l.article.startsWith(must.article));
+  const hit = (pid, must) => (m.get(pid)?.legal ?? []).some((l) => l.law === must.law && articleHit(l.article, must.article));
   for (const c of clusters) {
     const matched = target.must.filter((must) => c.pids.some((pid) => hit(pid, must))).length;
     if (matched >= target.minMatch) return { found: c.cid, matched };
