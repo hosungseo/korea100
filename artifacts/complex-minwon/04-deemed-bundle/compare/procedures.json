@@ -1,0 +1,6526 @@
+[
+  {
+    "pid": "N36:industrial-complex-fast-track-plan-approval:P03",
+    "ms": "N36",
+    "msName": "산업단지계획 승인신청·평가 첨부자료 접수",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 0,
+    "institution": "industrial-complex-fast-track-plan-approval",
+    "institutionName": "산업단지계획 신속승인·통합조정",
+    "nodeId": "P03",
+    "name": "산업단지계획 승인 신청",
+    "action": "산업단지계획 승인 신청에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "민간기업·개발사업자",
+    "type": "task",
+    "outputs": [
+      "산업단지계획 승인신청서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법",
+        "article": "제8조",
+        "text": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제8조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N09:environmental-impact-assessment-consultation:P01",
+    "ms": "N09",
+    "msName": "전략환경영향평가·입지대안 협의",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 1,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P01",
+    "name": "환경영향평가 대상사업 판정",
+    "action": "도시개발·산업단지 조성·에너지 개발·도로·철도 등 대상사업에 해당하는지 판정한다. 구체적 종류·범위는 대통령령이 정한다.",
+    "actorRaw": "사업자",
+    "type": "gateway",
+    "outputs": [
+      "대상 판정 결과"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제22조제1항·제2항",
+        "text": "① 도시의 개발사업, 산업입지 및 산업단지의 조성사업, 에너지 개발사업, 도로의 건설사업 등 어느 하나에 해당하는 사업을 하려는 자는 환경영향평가를 실시하여야 한다. ② 대상사업의 구체적인 종류, 범위 등은 대통령령으로 정한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N09:environmental-impact-assessment-consultation:P02",
+    "ms": "N09",
+    "msName": "전략환경영향평가·입지대안 협의",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 1,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P02",
+    "name": "평가준비서 작성·평가항목등 결정 요청",
+    "action": "평가 실시 전에 평가준비서를 작성한다. 승인등을 받아야 하는 사업자는 승인기관의 장에게 환경영향평가항목등을 정하여 줄 것을 요청한다.",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "평가준비서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제24조제1항·제2항",
+        "text": "① 승인등을 받지 아니하여도 되는 사업자는 평가준비서를 작성하여 환경영향평가협의회의 심의를 거쳐 평가 대상지역·환경보전방안 대안·평가 항목·범위·방법 등을 결정하여야 한다. ② 승인등을 받아야 하는 사업자는 평가준비서를 작성하여 승인기관의 장에게 환경영향평가항목등을 정하여 줄 것을 요청하여야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N09:environmental-impact-assessment-consultation:P03",
+    "ms": "N09",
+    "msName": "전략환경영향평가·입지대안 협의",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 1,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P03",
+    "name": "환경영향평가항목등 결정·공개",
+    "action": "요청을 받으면 대통령령으로 정하는 기간 내에 환경영향평가협의회 심의를 거쳐 평가항목등을 결정해 사업자에게 통보하고, 공개하여 주민 등의 의견을 듣는다. 전략환경영향평가에서 이미 결정·협의된 경우 절차를 생략할 수 있다.",
+    "actorRaw": "승인기관의 장",
+    "type": "task",
+    "outputs": [
+      "환경영향평가항목등 결정 통보"
+    ],
+    "inputs": [],
+    "deadlineRaw": "요청을 받은 날부터 대통령령으로 정하는 기간 내 협의회 심의를 거쳐 결정·통보",
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제24조제4항·제6항·제7항",
+        "text": "④ 요청을 받은 승인기관의 장이나 기후에너지환경부장관은 대통령령으로 정하는 기간 내에 환경영향평가협의회의 심의를 거쳐 환경영향평가항목등을 결정하여 사업자에게 통보하여야 한다. ⑥ 전략환경영향평가항목등에 포함되어 결정·협의된 경우 결정 절차를 거치지 아니할 수 있다. ⑦ 결정된 환경영향평가항목등을 공개하고 주민 등의 의견을 들어야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N09:environmental-impact-assessment-consultation:P04",
+    "ms": "N09",
+    "msName": "전략환경영향평가·입지대안 협의",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 1,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P04",
+    "name": "평가서 초안 작성·주민 의견수렴",
+    "action": "결정된 평가항목등에 따라 평가서 초안을 작성해 주민 등의 의견을 수렴한다. 공고·공람은 사업지역 관할 시장·군수·구청장이 한다. 다른 법령으로 20일 이상 준하여 수렴한 경우 의제되고, 전략환경영향평가 의견수렴을 거친 경우 요건 충족 시 생략할 수 있다.",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "환경영향평가서 초안",
+      "주민 의견수렴 결과"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제25조제1항·제2항·제3항·제5항",
+        "text": "① 사업자는 결정된 환경영향평가항목등에 따라 환경영향평가서 초안을 작성하여 주민 등의 의견을 수렴하여야 한다. ② 공고 및 공람은 사업지역 관할 시장·군수·구청장이 하여야 한다. ③ 다른 법령에 따라 주민 등의 의견을 20일 이상 수렴하는 등 준하여 수렴한 경우에는 의견을 수렴한 것으로 본다. ⑤ 전략환경영향평가서 초안 의견수렴을 거친 경우 요건에 모두 해당하면 협의를 거쳐 절차를 생략할 수 있다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N09:environmental-impact-assessment-consultation:P05",
+    "ms": "N09",
+    "msName": "전략환경영향평가·입지대안 협의",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 1,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P05",
+    "name": "의견수렴 결과·반영 여부 공개",
+    "action": "주민 등의 의견 수렴 결과와 반영 여부를 대통령령으로 정하는 방법에 따라 공개한다.",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "의견 반영 여부 공개"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제25조제4항",
+        "text": "사업자는 주민 등의 의견 수렴 결과와 반영 여부를 대통령령으로 정하는 방법에 따라 공개하여야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N09:environmental-impact-assessment-consultation:P06",
+    "ms": "N09",
+    "msName": "전략환경영향평가·입지대안 협의",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 1,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P06",
+    "name": "환경영향평가서 작성·제출",
+    "action": "승인등을 받아야 하는 사업자는 평가서를 작성해 승인기관의 장에게 제출한다.",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "환경영향평가서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제27조제2항",
+        "text": "승인등을 받지 아니하여도 되는 사업자는 협의를 요청할 경우 환경영향평가서를 작성하여야 하며, 승인등을 받아야 하는 사업자는 환경영향평가서를 작성하여 승인기관의 장에게 제출하여야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N09:environmental-impact-assessment-consultation:P07",
+    "ms": "N09",
+    "msName": "전략환경영향평가·입지대안 협의",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 1,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P07",
+    "name": "협의 요청",
+    "action": "대상사업에 대한 승인등을 하거나 사업을 확정하기 전에 기후에너지환경부장관에게 협의를 요청한다. 평가서에 대한 의견을 첨부할 수 있다.",
+    "actorRaw": "승인기관의 장",
+    "type": "task",
+    "outputs": [
+      "협의 요청서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제27조제1항",
+        "text": "승인기관장등은 환경영향평가 대상사업에 대한 승인등을 하거나 환경영향평가 대상사업을 확정하기 전에 기후에너지환경부장관에게 협의를 요청하여야 한다. 이 경우 승인기관의 장은 환경영향평가서에 대한 의견을 첨부할 수 있다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N09:environmental-impact-assessment-consultation:P08",
+    "ms": "N09",
+    "msName": "전략환경영향평가·입지대안 협의",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 1,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P08",
+    "name": "평가서 검토·보완 요청",
+    "action": "의견수렴 절차 이행 여부와 평가서 내용을 검토한다. 한국환경연구원의 의견을 들어야 하며, 보완·조정 요청은 두 차례만 할 수 있고, 거짓 작성 등의 경우 반려할 수 있다.",
+    "actorRaw": "기후에너지환경부장관",
+    "type": "task",
+    "outputs": [
+      "검토 의견",
+      "보완·조정 요청(해당 시)"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제28조제1항·제2항·제3항·제4항",
+        "text": "① 협의를 요청받은 경우 주민의견 수렴 절차 등의 이행 여부 및 환경영향평가서의 내용 등을 검토하여야 한다. ② 검토할 때 한국환경연구원 등의 의견을 들어야 한다. ③ 보완·조정할 필요가 있는 경우 보완·조정을 요청할 수 있으며, 보완·조정의 요청은 두 차례만 할 수 있다. ④ 일정 사유에 해당하는 경우 환경영향평가서를 반려할 수 있다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N09:environmental-impact-assessment-consultation:P09",
+    "ms": "N09",
+    "msName": "전략환경영향평가·입지대안 협의",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 1,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P09",
+    "name": "협의 내용 통보",
+    "action": "협의를 요청받은 날부터 대통령령으로 정하는 기간 이내에 협의 내용을 통보한다. 연장 시 협의기간 만료 전에 사유·기간을 통보한다. 승인기관의 장은 지체 없이 사업자에게 통보한다. 경미한 보완 사항은 반영 조건부로 통보할 수 있다.",
+    "actorRaw": "기후에너지환경부장관",
+    "type": "gateway",
+    "outputs": [
+      "협의 내용 통보서"
+    ],
+    "inputs": [],
+    "deadlineRaw": "협의를 요청받은 날부터 대통령령으로 정하는 기간 이내 통보(연장 시 협의기간 만료 전 사유·연장기간 통보)",
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제29조제1항·제2항·제3항·제4항",
+        "text": "① 기후에너지환경부장관은 협의를 요청받은 날부터 대통령령으로 정하는 기간 이내에 승인기관장등에게 협의 내용을 통보하여야 한다. ② 통보기간을 연장할 때에는 협의기간이 끝나기 전까지 사유와 연장한 기간을 통보하여야 한다. ③ 협의 내용을 통보받은 승인기관의 장은 지체 없이 사업자에게 통보하여야 한다. ④ 보완·조정 사항이 경미한 경우 등은 반영 조건부로 통보할 수 있다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N09:environmental-impact-assessment-consultation:P10",
+    "ms": "N09",
+    "msName": "전략환경영향평가·입지대안 협의",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 1,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P10",
+    "name": "협의 내용 반영·확인",
+    "action": "협의 내용을 사업계획에 반영하고, 승인등을 하려면 반영 여부를 확인한다. 반영 결과를 기후에너지환경부장관에게 통보하고, 미반영 시 반영 요청에 특별한 사유가 없으면 따라야 한다.",
+    "actorRaw": "승인기관의 장",
+    "type": "task",
+    "outputs": [
+      "협의 내용 반영 결과 통보"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제30조제1항·제2항·제3항·제4항",
+        "text": "① 사업자나 승인기관의 장은 협의 내용을 통보받았을 때에는 사업계획 등에 반영하기 위하여 필요한 조치를 하여야 한다. ② 승인기관의 장은 승인등을 하려면 협의 내용이 반영되었는지를 확인하여야 한다. ③ 승인등을 하거나 확정하였을 때에는 반영 결과를 통보하여야 한다. ④ 반영되지 아니한 경우 반영하도록 요청할 수 있으며, 특별한 사유가 없으면 이에 따라야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N09:environmental-impact-assessment-consultation:P11",
+    "ms": "N09",
+    "msName": "전략환경영향평가·입지대안 협의",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 1,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P11",
+    "name": "협의 내용 이행·관리대장 비치",
+    "action": "사업 시행 시 반영된 협의 내용을 이행하고, 관리대장에 이행 상황을 기록해 공사현장에 갖추어 두며, 관리책임자를 지정해 통보한다.",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "협의 내용 관리대장",
+      "관리책임자 지정 통보"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제35조제1항·제2항·제3항",
+        "text": "① 사업자는 사업계획 등을 시행할 때에 반영된 협의 내용을 이행하여야 한다. ② 협의 내용을 적은 관리대장에 이행 상황을 기록하여 공사현장에 갖추어 두어야 한다. ③ 협의 내용 관리책임자를 지정하여 기후에너지환경부장관과 승인기관의 장에게 통보하여야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N09:environmental-impact-assessment-consultation:P12",
+    "ms": "N09",
+    "msName": "전략환경영향평가·입지대안 협의",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 1,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P12",
+    "name": "사후환경영향조사",
+    "action": "착공 후 주변 환경에 미치는 영향을 조사해 통보하고, 피해 방지 조치가 필요하면 지체 없이 통보하고 조치한다.",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "사후환경영향조사 결과"
+    ],
+    "inputs": [],
+    "deadlineRaw": "피해 방지 조치가 필요한 경우 지체 없이 통보·조치",
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제36조제1항·제2항",
+        "text": "① 사업자는 해당 사업을 착공한 후에 그 사업이 주변 환경에 미치는 영향을 조사하고, 그 결과를 기후에너지환경부장관과 승인기관의 장에게 통보하여야 한다. ② 조사 결과 주변 환경의 피해를 방지하기 위하여 조치가 필요한 경우에는 지체 없이 그 사실을 통보하고 필요한 조치를 하여야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N11:industrial-complex-development:P06",
+    "ms": "N11",
+    "msName": "환경영향평가서 초안·공람·주민의견",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 2,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P06",
+    "name": "환경영향평가서 초안·주민 의견",
+    "action": "환경영향평가서 초안·주민 의견",
+    "actorRaw": "토지소유자·주민",
+    "type": "notice",
+    "outputs": [
+      "공람",
+      "의견"
+    ],
+    "inputs": [],
+    "deadlineRaw": "§25 20일 이상 갈음 가능",
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제25조(주민 등의 의견 수렴)",
+        "text": "주민 등의 의견 수렴"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N11:environmental-impact-assessment-consultation:P01",
+    "ms": "N11",
+    "msName": "환경영향평가서 초안·공람·주민의견",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 2,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P01",
+    "name": "환경영향평가 대상사업 판정",
+    "action": "도시개발·산업단지 조성·에너지 개발·도로·철도 등 대상사업에 해당하는지 판정한다. 구체적 종류·범위는 대통령령이 정한다.",
+    "actorRaw": "사업자",
+    "type": "gateway",
+    "outputs": [
+      "대상 판정 결과"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제22조제1항·제2항",
+        "text": "① 도시의 개발사업, 산업입지 및 산업단지의 조성사업, 에너지 개발사업, 도로의 건설사업 등 어느 하나에 해당하는 사업을 하려는 자는 환경영향평가를 실시하여야 한다. ② 대상사업의 구체적인 종류, 범위 등은 대통령령으로 정한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N11:environmental-impact-assessment-consultation:P02",
+    "ms": "N11",
+    "msName": "환경영향평가서 초안·공람·주민의견",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 2,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P02",
+    "name": "평가준비서 작성·평가항목등 결정 요청",
+    "action": "평가 실시 전에 평가준비서를 작성한다. 승인등을 받아야 하는 사업자는 승인기관의 장에게 환경영향평가항목등을 정하여 줄 것을 요청한다.",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "평가준비서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제24조제1항·제2항",
+        "text": "① 승인등을 받지 아니하여도 되는 사업자는 평가준비서를 작성하여 환경영향평가협의회의 심의를 거쳐 평가 대상지역·환경보전방안 대안·평가 항목·범위·방법 등을 결정하여야 한다. ② 승인등을 받아야 하는 사업자는 평가준비서를 작성하여 승인기관의 장에게 환경영향평가항목등을 정하여 줄 것을 요청하여야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N11:environmental-impact-assessment-consultation:P03",
+    "ms": "N11",
+    "msName": "환경영향평가서 초안·공람·주민의견",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 2,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P03",
+    "name": "환경영향평가항목등 결정·공개",
+    "action": "요청을 받으면 대통령령으로 정하는 기간 내에 환경영향평가협의회 심의를 거쳐 평가항목등을 결정해 사업자에게 통보하고, 공개하여 주민 등의 의견을 듣는다. 전략환경영향평가에서 이미 결정·협의된 경우 절차를 생략할 수 있다.",
+    "actorRaw": "승인기관의 장",
+    "type": "task",
+    "outputs": [
+      "환경영향평가항목등 결정 통보"
+    ],
+    "inputs": [],
+    "deadlineRaw": "요청을 받은 날부터 대통령령으로 정하는 기간 내 협의회 심의를 거쳐 결정·통보",
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제24조제4항·제6항·제7항",
+        "text": "④ 요청을 받은 승인기관의 장이나 기후에너지환경부장관은 대통령령으로 정하는 기간 내에 환경영향평가협의회의 심의를 거쳐 환경영향평가항목등을 결정하여 사업자에게 통보하여야 한다. ⑥ 전략환경영향평가항목등에 포함되어 결정·협의된 경우 결정 절차를 거치지 아니할 수 있다. ⑦ 결정된 환경영향평가항목등을 공개하고 주민 등의 의견을 들어야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N11:environmental-impact-assessment-consultation:P04",
+    "ms": "N11",
+    "msName": "환경영향평가서 초안·공람·주민의견",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 2,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P04",
+    "name": "평가서 초안 작성·주민 의견수렴",
+    "action": "결정된 평가항목등에 따라 평가서 초안을 작성해 주민 등의 의견을 수렴한다. 공고·공람은 사업지역 관할 시장·군수·구청장이 한다. 다른 법령으로 20일 이상 준하여 수렴한 경우 의제되고, 전략환경영향평가 의견수렴을 거친 경우 요건 충족 시 생략할 수 있다.",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "환경영향평가서 초안",
+      "주민 의견수렴 결과"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제25조제1항·제2항·제3항·제5항",
+        "text": "① 사업자는 결정된 환경영향평가항목등에 따라 환경영향평가서 초안을 작성하여 주민 등의 의견을 수렴하여야 한다. ② 공고 및 공람은 사업지역 관할 시장·군수·구청장이 하여야 한다. ③ 다른 법령에 따라 주민 등의 의견을 20일 이상 수렴하는 등 준하여 수렴한 경우에는 의견을 수렴한 것으로 본다. ⑤ 전략환경영향평가서 초안 의견수렴을 거친 경우 요건에 모두 해당하면 협의를 거쳐 절차를 생략할 수 있다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N11:environmental-impact-assessment-consultation:P05",
+    "ms": "N11",
+    "msName": "환경영향평가서 초안·공람·주민의견",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 2,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P05",
+    "name": "의견수렴 결과·반영 여부 공개",
+    "action": "주민 등의 의견 수렴 결과와 반영 여부를 대통령령으로 정하는 방법에 따라 공개한다.",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "의견 반영 여부 공개"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제25조제4항",
+        "text": "사업자는 주민 등의 의견 수렴 결과와 반영 여부를 대통령령으로 정하는 방법에 따라 공개하여야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N11:environmental-impact-assessment-consultation:P06",
+    "ms": "N11",
+    "msName": "환경영향평가서 초안·공람·주민의견",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 2,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P06",
+    "name": "환경영향평가서 작성·제출",
+    "action": "승인등을 받아야 하는 사업자는 평가서를 작성해 승인기관의 장에게 제출한다.",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "환경영향평가서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제27조제2항",
+        "text": "승인등을 받지 아니하여도 되는 사업자는 협의를 요청할 경우 환경영향평가서를 작성하여야 하며, 승인등을 받아야 하는 사업자는 환경영향평가서를 작성하여 승인기관의 장에게 제출하여야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N11:environmental-impact-assessment-consultation:P07",
+    "ms": "N11",
+    "msName": "환경영향평가서 초안·공람·주민의견",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 2,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P07",
+    "name": "협의 요청",
+    "action": "대상사업에 대한 승인등을 하거나 사업을 확정하기 전에 기후에너지환경부장관에게 협의를 요청한다. 평가서에 대한 의견을 첨부할 수 있다.",
+    "actorRaw": "승인기관의 장",
+    "type": "task",
+    "outputs": [
+      "협의 요청서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제27조제1항",
+        "text": "승인기관장등은 환경영향평가 대상사업에 대한 승인등을 하거나 환경영향평가 대상사업을 확정하기 전에 기후에너지환경부장관에게 협의를 요청하여야 한다. 이 경우 승인기관의 장은 환경영향평가서에 대한 의견을 첨부할 수 있다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N11:environmental-impact-assessment-consultation:P08",
+    "ms": "N11",
+    "msName": "환경영향평가서 초안·공람·주민의견",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 2,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P08",
+    "name": "평가서 검토·보완 요청",
+    "action": "의견수렴 절차 이행 여부와 평가서 내용을 검토한다. 한국환경연구원의 의견을 들어야 하며, 보완·조정 요청은 두 차례만 할 수 있고, 거짓 작성 등의 경우 반려할 수 있다.",
+    "actorRaw": "기후에너지환경부장관",
+    "type": "task",
+    "outputs": [
+      "검토 의견",
+      "보완·조정 요청(해당 시)"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제28조제1항·제2항·제3항·제4항",
+        "text": "① 협의를 요청받은 경우 주민의견 수렴 절차 등의 이행 여부 및 환경영향평가서의 내용 등을 검토하여야 한다. ② 검토할 때 한국환경연구원 등의 의견을 들어야 한다. ③ 보완·조정할 필요가 있는 경우 보완·조정을 요청할 수 있으며, 보완·조정의 요청은 두 차례만 할 수 있다. ④ 일정 사유에 해당하는 경우 환경영향평가서를 반려할 수 있다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N11:environmental-impact-assessment-consultation:P09",
+    "ms": "N11",
+    "msName": "환경영향평가서 초안·공람·주민의견",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 2,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P09",
+    "name": "협의 내용 통보",
+    "action": "협의를 요청받은 날부터 대통령령으로 정하는 기간 이내에 협의 내용을 통보한다. 연장 시 협의기간 만료 전에 사유·기간을 통보한다. 승인기관의 장은 지체 없이 사업자에게 통보한다. 경미한 보완 사항은 반영 조건부로 통보할 수 있다.",
+    "actorRaw": "기후에너지환경부장관",
+    "type": "gateway",
+    "outputs": [
+      "협의 내용 통보서"
+    ],
+    "inputs": [],
+    "deadlineRaw": "협의를 요청받은 날부터 대통령령으로 정하는 기간 이내 통보(연장 시 협의기간 만료 전 사유·연장기간 통보)",
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제29조제1항·제2항·제3항·제4항",
+        "text": "① 기후에너지환경부장관은 협의를 요청받은 날부터 대통령령으로 정하는 기간 이내에 승인기관장등에게 협의 내용을 통보하여야 한다. ② 통보기간을 연장할 때에는 협의기간이 끝나기 전까지 사유와 연장한 기간을 통보하여야 한다. ③ 협의 내용을 통보받은 승인기관의 장은 지체 없이 사업자에게 통보하여야 한다. ④ 보완·조정 사항이 경미한 경우 등은 반영 조건부로 통보할 수 있다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N11:environmental-impact-assessment-consultation:P10",
+    "ms": "N11",
+    "msName": "환경영향평가서 초안·공람·주민의견",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 2,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P10",
+    "name": "협의 내용 반영·확인",
+    "action": "협의 내용을 사업계획에 반영하고, 승인등을 하려면 반영 여부를 확인한다. 반영 결과를 기후에너지환경부장관에게 통보하고, 미반영 시 반영 요청에 특별한 사유가 없으면 따라야 한다.",
+    "actorRaw": "승인기관의 장",
+    "type": "task",
+    "outputs": [
+      "협의 내용 반영 결과 통보"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제30조제1항·제2항·제3항·제4항",
+        "text": "① 사업자나 승인기관의 장은 협의 내용을 통보받았을 때에는 사업계획 등에 반영하기 위하여 필요한 조치를 하여야 한다. ② 승인기관의 장은 승인등을 하려면 협의 내용이 반영되었는지를 확인하여야 한다. ③ 승인등을 하거나 확정하였을 때에는 반영 결과를 통보하여야 한다. ④ 반영되지 아니한 경우 반영하도록 요청할 수 있으며, 특별한 사유가 없으면 이에 따라야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N11:environmental-impact-assessment-consultation:P11",
+    "ms": "N11",
+    "msName": "환경영향평가서 초안·공람·주민의견",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 2,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P11",
+    "name": "협의 내용 이행·관리대장 비치",
+    "action": "사업 시행 시 반영된 협의 내용을 이행하고, 관리대장에 이행 상황을 기록해 공사현장에 갖추어 두며, 관리책임자를 지정해 통보한다.",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "협의 내용 관리대장",
+      "관리책임자 지정 통보"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제35조제1항·제2항·제3항",
+        "text": "① 사업자는 사업계획 등을 시행할 때에 반영된 협의 내용을 이행하여야 한다. ② 협의 내용을 적은 관리대장에 이행 상황을 기록하여 공사현장에 갖추어 두어야 한다. ③ 협의 내용 관리책임자를 지정하여 기후에너지환경부장관과 승인기관의 장에게 통보하여야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N11:environmental-impact-assessment-consultation:P12",
+    "ms": "N11",
+    "msName": "환경영향평가서 초안·공람·주민의견",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 2,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P12",
+    "name": "사후환경영향조사",
+    "action": "착공 후 주변 환경에 미치는 영향을 조사해 통보하고, 피해 방지 조치가 필요하면 지체 없이 통보하고 조치한다.",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "사후환경영향조사 결과"
+    ],
+    "inputs": [],
+    "deadlineRaw": "피해 방지 조치가 필요한 경우 지체 없이 통보·조치",
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제36조제1항·제2항",
+        "text": "① 사업자는 해당 사업을 착공한 후에 그 사업이 주변 환경에 미치는 영향을 조사하고, 그 결과를 기후에너지환경부장관과 승인기관의 장에게 통보하여야 한다. ② 조사 결과 주변 환경의 피해를 방지하기 위하여 조치가 필요한 경우에는 지체 없이 그 사실을 통보하고 필요한 조치를 하여야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N13:cultural-heritage-survey:P01",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "cultural-heritage-survey",
+    "institutionName": "매장유산 지표·발굴 조사",
+    "nodeId": "P01",
+    "name": "사업지 유존 가능성 검토",
+    "action": "사업지 유존 가능성 검토",
+    "actorRaw": "사업시행자",
+    "type": "task",
+    "outputs": [
+      "검토"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제4조(매장유산 유존지역의 보호)",
+        "text": "매장유산 유존지역의 보호"
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:cultural-heritage-survey:P02",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "cultural-heritage-survey",
+    "institutionName": "매장유산 지표·발굴 조사",
+    "nodeId": "P02",
+    "name": "조사기관 선정·계약",
+    "action": "조사기관 선정·계약",
+    "actorRaw": "사업시행자",
+    "type": "task",
+    "outputs": [
+      "계약"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제24조(매장유산 조사기관의 등록)",
+        "text": "매장유산 조사기관의 등록"
+      },
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제27조(매장유산 조사 용역 대가의 기준)",
+        "text": "매장유산 조사 용역 대가의 기준"
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:cultural-heritage-survey:P03",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "cultural-heritage-survey",
+    "institutionName": "매장유산 지표·발굴 조사",
+    "nodeId": "P03",
+    "name": "지표조사 실시",
+    "action": "지표조사 실시",
+    "actorRaw": "조사기관",
+    "type": "task",
+    "outputs": [
+      "지표조사"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제6조의2(국가 등에 의한 매장유산 지표조사)",
+        "text": "국가 등에 의한 매장유산 지표조사"
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:cultural-heritage-survey:P04",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "cultural-heritage-survey",
+    "institutionName": "매장유산 지표·발굴 조사",
+    "nodeId": "P04",
+    "name": "지표조사 보고서 제출",
+    "action": "지표조사 보고서 제출",
+    "actorRaw": "조사기관",
+    "type": "task",
+    "outputs": [
+      "보고서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제7조(지표조사 보고서 제출)",
+        "text": "지표조사 보고서 제출"
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:cultural-heritage-survey:P05",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "cultural-heritage-survey",
+    "institutionName": "매장유산 지표·발굴 조사",
+    "nodeId": "P05",
+    "name": "유존지역 보호 조치",
+    "action": "유존지역 보호 조치",
+    "actorRaw": "국가유산청",
+    "type": "task",
+    "outputs": [
+      "보호"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제9조(지표조사에 따른 매장유산 유존지역의 보호)",
+        "text": "지표조사에 따른 매장유산 유존지역의 보호"
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:cultural-heritage-survey:P06",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "cultural-heritage-survey",
+    "institutionName": "매장유산 지표·발굴 조사",
+    "nodeId": "P06",
+    "name": "발굴 필요성 판단",
+    "action": "발굴 필요성 판단",
+    "actorRaw": "국가유산청",
+    "type": "gateway",
+    "outputs": [
+      "판단"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제11조(매장유산의 발굴허가 등)",
+        "text": "매장유산의 발굴허가 등"
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:cultural-heritage-survey:P07",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "cultural-heritage-survey",
+    "institutionName": "매장유산 지표·발굴 조사",
+    "nodeId": "P07",
+    "name": "발굴허가 신청",
+    "action": "발굴허가 신청",
+    "actorRaw": "사업시행자",
+    "type": "task",
+    "outputs": [
+      "신청"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제12조(발굴허가의 신청)",
+        "text": "발굴허가의 신청"
+      },
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제11조(매장유산의 발굴허가 등)",
+        "text": "매장유산의 발굴허가 등"
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:cultural-heritage-survey:P08",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "cultural-heritage-survey",
+    "institutionName": "매장유산 지표·발굴 조사",
+    "nodeId": "P08",
+    "name": "발굴허가 심사·처분",
+    "action": "발굴허가 심사·처분",
+    "actorRaw": "국가유산청",
+    "type": "task",
+    "outputs": [
+      "허가"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제11조(매장유산의 발굴허가 등)",
+        "text": "매장유산의 발굴허가 등"
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:cultural-heritage-survey:P09",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "cultural-heritage-survey",
+    "institutionName": "매장유산 지표·발굴 조사",
+    "nodeId": "P09",
+    "name": "보완·재신청",
+    "action": "보완·재신청",
+    "actorRaw": "사업시행자",
+    "type": "task",
+    "outputs": [
+      "보완"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제12조(발굴허가의 신청)",
+        "text": "발굴허가의 신청"
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:cultural-heritage-survey:P10",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "cultural-heritage-survey",
+    "institutionName": "매장유산 지표·발굴 조사",
+    "nodeId": "P10",
+    "name": "허가 결과 수령",
+    "action": "허가 결과 수령",
+    "actorRaw": "사업시행자",
+    "type": "notice",
+    "outputs": [
+      "허가서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제11조(매장유산의 발굴허가 등)",
+        "text": "매장유산의 발굴허가 등"
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:cultural-heritage-survey:P11",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "cultural-heritage-survey",
+    "institutionName": "매장유산 지표·발굴 조사",
+    "nodeId": "P11",
+    "name": "착수·완료 신고·안전관리",
+    "action": "착수·완료 신고·안전관리",
+    "actorRaw": "조사기관",
+    "type": "task",
+    "outputs": [
+      "신고"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제12조의2(매장유산 발굴의 착수ㆍ완료 신고 등)",
+        "text": "매장유산 발굴의 착수ㆍ완료 신고 등"
+      },
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제12조의3(발굴현장 안전관리 등)",
+        "text": "발굴현장 안전관리 등"
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:cultural-heritage-survey:P12",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "cultural-heritage-survey",
+    "institutionName": "매장유산 지표·발굴 조사",
+    "nodeId": "P12",
+    "name": "보존조치·발굴보고서",
+    "action": "보존조치·발굴보고서",
+    "actorRaw": "조사기관",
+    "type": "task",
+    "outputs": [
+      "보존·보고"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제14조(발굴된 매장유산의 보존조치)",
+        "text": "발굴된 매장유산의 보존조치"
+      },
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제15조(발굴조사 보고서)",
+        "text": "발굴조사 보고서"
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:cultural-heritage-survey:P13",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "cultural-heritage-survey",
+    "institutionName": "매장유산 지표·발굴 조사",
+    "nodeId": "P13",
+    "name": "발견신고·보상(해당 시)",
+    "action": "발견신고·보상(해당 시)",
+    "actorRaw": "발견·보상",
+    "type": "task",
+    "outputs": [
+      "발견"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제17조(발견신고 등)",
+        "text": "발견신고 등"
+      },
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제21조(발견신고된 국가유산의 보상금과 포상금)",
+        "text": "발견신고된 국가유산의 보상금과 포상금"
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:cultural-heritage-survey:P14",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "cultural-heritage-survey",
+    "institutionName": "매장유산 지표·발굴 조사",
+    "nodeId": "P14",
+    "name": "주민·소유자 통지·협의",
+    "action": "주민·소유자 통지·협의",
+    "actorRaw": "토지소유자·주민",
+    "type": "notice",
+    "outputs": [
+      "협의"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제4조(매장유산 유존지역의 보호)",
+        "text": "매장유산 유존지역의 보호"
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:cultural-heritage-survey:P15",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "cultural-heritage-survey",
+    "institutionName": "매장유산 지표·발굴 조사",
+    "nodeId": "P15",
+    "name": "등록취소·청문",
+    "action": "등록취소·청문",
+    "actorRaw": "감독·청문",
+    "type": "task",
+    "outputs": [
+      "청문"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제25조(조사기관의 등록취소 등)",
+        "text": "조사기관의 등록취소 등"
+      },
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제28조의2(청문)",
+        "text": "청문"
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:cultural-heritage-survey:P16",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "cultural-heritage-survey",
+    "institutionName": "매장유산 지표·발굴 조사",
+    "nodeId": "P16",
+    "name": "처분 통지 수령",
+    "action": "처분 통지 수령",
+    "actorRaw": "사업시행자",
+    "type": "notice",
+    "outputs": [
+      "통지"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제25조(조사기관의 등록취소 등)",
+        "text": "조사기관의 등록취소 등"
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:buried-cultural-heritage-excavation-permit:P01",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "buried-cultural-heritage-excavation-permit",
+    "institutionName": "매장유산 발굴조사 허가·보존조치",
+    "nodeId": "P01",
+    "name": "발굴 필요 판정",
+    "action": "매장유산 유존지역은 원칙적으로 발굴할 수 없다. 연구 목적, 유적 정비사업, 건설공사로 부득이한 경우, 멸실·훼손 우려 긴급 발굴의 경우에만 국가유산청장의 허가를 받아 발굴할 수 있다. 건설공사 발굴 경비는 공사 시행자가 부담한다.",
+    "actorRaw": "사업시행자",
+    "type": "gateway",
+    "outputs": [
+      "발굴 필요 판정"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제11조제1항·제3항",
+        "text": "① 매장유산 유존지역은 발굴할 수 없다. 다만 연구 목적, 유적의 정비사업 목적, 건설공사를 위하여 부득이 발굴할 필요가 있는 경우, 멸실·훼손 등의 우려가 있는 유적을 긴급하게 발굴할 필요가 있는 경우로서 국가유산청장의 허가를 받은 때에는 발굴할 수 있다. ③ 건설공사로 인한 발굴 경비는 해당 공사의 시행자가 부담한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:buried-cultural-heritage-excavation-permit:P02",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "buried-cultural-heritage-excavation-permit",
+    "institutionName": "매장유산 발굴조사 허가·보존조치",
+    "nodeId": "P02",
+    "name": "발굴허가 신청",
+    "action": "직접 발굴할 조사기관과 대표자·조사단장·책임조사원을 적은 신청서와 구비서류를 관할 지방자치단체의 장과 국가유산청장에게 제출한다.",
+    "actorRaw": "사업시행자",
+    "type": "task",
+    "outputs": [
+      "발굴허가 신청서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제12조제1항",
+        "text": "발굴허가를 받으려는 자는 매장유산 조사기관으로서 직접 발굴할 기관과 그 대표자, 조사단장 및 책임조사원 등을 적은 발굴허가 신청서와 구비서류를 해당 사업지역을 관할하는 지방자치단체의 장과 국가유산청장에게 제출하여야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:buried-cultural-heritage-excavation-permit:P03",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "buried-cultural-heritage-excavation-permit",
+    "institutionName": "매장유산 발굴조사 허가·보존조치",
+    "nodeId": "P03",
+    "name": "허가 심사·위원회 심의·통지",
+    "action": "신청받은 날부터 10일 이내에 허가 여부 또는 지연 사유를 통지한다. 대통령령으로 정하는 사업은 국가유산위원회 심의를 거치며, 이 경우 심의를 마친 날부터 7일 이내에 통지한다. 허가 시 내용을 정하거나 필요한 사항을 지시할 수 있고, 등록취소·업무정지된 조사기관이 포함되면 허가를 제한할 수 있다.",
+    "actorRaw": "국가유산청장",
+    "type": "gateway",
+    "outputs": [
+      "발굴허가서"
+    ],
+    "inputs": [],
+    "deadlineRaw": "신청을 받은 날부터 10일 이내 허가 여부 통지(국가유산위원회 심의를 거치는 경우 심의를 마친 날부터 7일 이내)",
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제12조제2항·제3항·제11조제2항",
+        "text": "국가유산청장은 발굴허가의 신청을 받은 날부터 10일 이내에 허가 여부 또는 처리 지연 사유를 신청인에게 통지하여야 한다. 다만 국가유산위원회의 심의를 거치는 경우에는 그 심의를 마친 날부터 7일 이내에 통지하여야 한다. 발굴허가를 하는 경우 그 허가의 내용을 정하거나 필요한 사항을 지시할 수 있다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:buried-cultural-heritage-excavation-permit:P04",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "buried-cultural-heritage-excavation-permit",
+    "institutionName": "매장유산 발굴조사 허가·보존조치",
+    "nodeId": "P04",
+    "name": "발굴 착수신고",
+    "action": "발굴에 착수하면 착수신고서를 제출한다. 허가일부터 1년 이내에 착수해야 하며, 미착수 시 허가가 취소될 수 있고 정당한 사유가 있으면 1년 범위에서 연장할 수 있다.",
+    "actorRaw": "사업시행자",
+    "type": "task",
+    "outputs": [
+      "착수신고서"
+    ],
+    "inputs": [],
+    "deadlineRaw": "허가일부터 1년 이내 발굴 착수(미착수 시 허가 취소 가능, 정당한 사유 시 1년 범위 연장)",
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제12조의2제1항·제2항",
+        "text": "발굴허가를 받은 자가 발굴에 착수하는 경우에는 국가유산청장에게 착수신고서를 제출하여야 한다. 발굴허가를 받은 자는 허가일부터 1년 이내에 발굴에 착수하여야 하며, 그러하지 아니한 경우 발굴허가를 취소할 수 있다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:buried-cultural-heritage-excavation-permit:P05",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "buried-cultural-heritage-excavation-permit",
+    "institutionName": "매장유산 발굴조사 허가·보존조치",
+    "nodeId": "P05",
+    "name": "발굴 수행·정지·중지 명령",
+    "action": "조사기관이 고시된 방법·절차에 따라 발굴한다. 국가유산청장은 허가를 한 경우에도 발굴의 정지 또는 중지를 명하거나 허가를 취소할 수 있다.",
+    "actorRaw": "조사기관",
+    "type": "gateway",
+    "outputs": [
+      "발굴조사"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제11조제2항·제5항",
+        "text": "국가유산청장은 허가를 한 경우에도 대통령령으로 정하는 바에 따라 발굴의 정지 또는 중지를 명하거나 그 허가를 취소할 수 있다. 발굴조사의 방법 및 절차 등에 관하여 필요한 사항은 국가유산청장이 정하여 고시한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:buried-cultural-heritage-excavation-permit:P06",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "buried-cultural-heritage-excavation-permit",
+    "institutionName": "매장유산 발굴조사 허가·보존조치",
+    "nodeId": "P06",
+    "name": "발굴 완료신고",
+    "action": "발굴이 끝난 날부터 20일 이내에 완료신고서를 제출한다.",
+    "actorRaw": "사업시행자",
+    "type": "task",
+    "outputs": [
+      "완료신고서"
+    ],
+    "inputs": [],
+    "deadlineRaw": "발굴이 끝난 날부터 20일 이내 완료신고",
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제12조의2제3항",
+        "text": "발굴허가를 받은 자는 매장유산의 발굴이 끝난 날부터 20일 이내에 문화체육관광부령으로 정하는 바에 따라 국가유산청장에게 완료신고서를 제출하여야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:buried-cultural-heritage-excavation-permit:P07",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "buried-cultural-heritage-excavation-permit",
+    "institutionName": "매장유산 발굴조사 허가·보존조치",
+    "nodeId": "P07",
+    "name": "보존조치 지시",
+    "action": "발굴된 매장유산이 역사적·예술적·학술적 가치가 큰 경우 국가유산위원회 심의를 거쳐 현지보존·이전보존·기록보존 등의 보존조치를 지시할 수 있다. 지시받은 자와 관할 지자체장은 보존 방법에 관한 의견을 제출할 수 있다.",
+    "actorRaw": "국가유산청장",
+    "type": "task",
+    "outputs": [
+      "보존조치 지시서(해당 시)"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제14조제1항·제2항",
+        "text": "발굴된 매장유산이 역사적·예술적 또는 학술적으로 가치가 큰 경우 국가유산위원회의 심의를 거쳐 발굴허가를 받은 자에게 현지보존, 이전보존, 기록보존 등의 보존조치를 지시할 수 있다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:buried-cultural-heritage-excavation-permit:P08",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "buried-cultural-heritage-excavation-permit",
+    "institutionName": "매장유산 발굴조사 허가·보존조치",
+    "nodeId": "P08",
+    "name": "보존조치 결과 제출",
+    "action": "보존조치를 한 후 관할 지방자치단체의 장과 국가유산청장에게 그 결과를 각각 제출한다.",
+    "actorRaw": "사업시행자",
+    "type": "task",
+    "outputs": [
+      "보존조치 결과 보고"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제14조제3항",
+        "text": "보존조치를 지시받은 자는 그 조치를 한 후 해당 사업지역을 관할하는 지방자치단체의 장과 국가유산청장에게 그 보존조치의 결과를 각각 제출하여야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:buried-cultural-heritage-excavation-permit:P09",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "buried-cultural-heritage-excavation-permit",
+    "institutionName": "매장유산 발굴조사 허가·보존조치",
+    "nodeId": "P09",
+    "name": "변경허가",
+    "action": "허가 사항 중 대통령령으로 정하는 중요한 사항을 변경하려면 변경허가를 받아야 한다.",
+    "actorRaw": "사업시행자",
+    "type": "task",
+    "outputs": [
+      "변경허가서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제11조제4항",
+        "text": "발굴허가를 받은 자는 허가 사항 중 대통령령으로 정하는 중요한 사항을 변경하려는 때에는 국가유산청장에게 변경허가를 받아야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:buried-cultural-heritage-excavation-permit:P10",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "buried-cultural-heritage-excavation-permit",
+    "institutionName": "매장유산 발굴조사 허가·보존조치",
+    "nodeId": "P10",
+    "name": "매장유산 발견신고",
+    "action": "공사 중 등에 매장유산을 발견하면 현상을 변경하지 말고 발견 사실을 국가유산청장에게 신고한다.",
+    "actorRaw": "발견자·소유자·점유자",
+    "type": "task",
+    "outputs": [
+      "발견신고서"
+    ],
+    "inputs": [],
+    "deadlineRaw": "현상을 변경하지 말고 신고",
+    "legal": [
+      {
+        "law": "매장유산 보호 및 조사에 관한 법률",
+        "article": "제17조",
+        "text": "매장유산을 발견한 때에는 그 발견자나 매장유산 유존지역의 소유자·점유자 또는 관리자는 그 현상을 변경하지 말고 대통령령으로 정하는 바에 따라 그 발견된 사실을 국가유산청장에게 신고하여야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:national-heritage-basic-plan:P01",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "national-heritage-basic-plan",
+    "institutionName": "국가유산 기본계획·조사연구",
+    "nodeId": "P01",
+    "name": "국가유산 보호 정책의 기본원칙 적용",
+    "action": "국가유산 보호 정책의 기본원칙을 적용한다.",
+    "actorRaw": "국가유산청장",
+    "type": "task",
+    "outputs": [
+      "기본원칙"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "국가유산기본법",
+        "article": "제7조",
+        "text": "제7조(국가유산 보호 정책의 기본원칙) 국가와 지방자치단체는 국가유산에 관한 보호 정책을 수립ㆍ시행함에 있어 다음 각 호의 사항이 실현되도록 하여야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:national-heritage-basic-plan:P02",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "national-heritage-basic-plan",
+    "institutionName": "국가유산 기본계획·조사연구",
+    "nodeId": "P02",
+    "name": "국가유산 기본계획 수립",
+    "action": "기본계획을 수립한다.",
+    "actorRaw": "국가유산청장",
+    "type": "gateway",
+    "outputs": [
+      "기본계획"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "국가유산기본법",
+        "article": "제8조",
+        "text": "제8조(기본계획의 수립) ① 국가는 국가유산의 체계적이고 종합적인 보존ㆍ관리 및 활용을 위하여 국가유산의 유형에 따른 기본계획을 수립ㆍ시행하여야 한다. ② 제1항에 따른 유형별 기본계획의 수립ㆍ시행에 필요한 사항은 따로 법률로 정한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:national-heritage-basic-plan:P03",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "national-heritage-basic-plan",
+    "institutionName": "국가유산 기본계획·조사연구",
+    "nodeId": "P03",
+    "name": "국가유산 조사·연구",
+    "action": "국가유산을 조사·연구한다.",
+    "actorRaw": "국가유산청장",
+    "type": "task",
+    "outputs": [
+      "조사·연구 결과"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "국가유산기본법",
+        "article": "제10조",
+        "text": "제10조(조사ㆍ연구) ① 국가와 지방자치단체는 조사를 통하여 국가유산의 현황을 파악하고, 확인되지 아니한 국가유산을 발견ㆍ발굴하기 위하여 노력하여야 한다. ② 국가와 지방자치단체는 국가유산의 가치와 성격을 규명하고, 이를 보존ㆍ관리할 수 있는 방안을 연구하여야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N13:national-heritage-basic-plan:P04",
+    "ms": "N13",
+    "msName": "국가유산 영향진단·매장유산 조사 경로 해소",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 3,
+    "institution": "national-heritage-basic-plan",
+    "institutionName": "국가유산 기본계획·조사연구",
+    "nodeId": "P04",
+    "name": "고도 및 역사문화권 보존·육성",
+    "action": "고도 및 역사문화권을 보존·육성한다.",
+    "actorRaw": "국가유산청장",
+    "type": "gateway",
+    "outputs": [
+      "보존·육성 계획"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "국가유산기본법",
+        "article": "제16조",
+        "text": "제16조(고도 및 역사문화권의 보존ㆍ육성) ① 국가와 지방자치단체는 과거 우리 민족의 정치적ㆍ문화적 중심지로서 역사상 중요한 의미를 지닌 고도(古都)를 보존ㆍ육성함으로써 지역의 정체성을 회복하고, 지역 발전에 기여할 수 있도록 하여야 한다. ② 국가와 지방자치단체는 역사적으로 중요한 유형ㆍ무형 유산의 생산 및 축적을 통하여 고유한 정체성을 형성ㆍ발전시켜 온 권역을 보존ㆍ육성함으로써 지역의 역사적 가치를 조명하고, 이를 체계적으로 정비할 수 있도록 하여야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N38:disaster-impact-assessment-consultation:P01",
+    "ms": "N38",
+    "msName": "재해영향평가등 협의·계획반영",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 4,
+    "institution": "disaster-impact-assessment-consultation",
+    "institutionName": "재해영향평가등 협의·이행관리",
+    "nodeId": "P01",
+    "name": "재해영향평가등 대상·유형 판정",
+    "action": "재해영향평가등 대상·유형 판정에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "승인기관",
+    "type": "task",
+    "outputs": [
+      "대상·유형 판정표"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "자연재해대책법",
+        "article": "제4조·제5조",
+        "text": "자연재해대책법 제4조·제5조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N38:disaster-impact-assessment-consultation:P02",
+    "ms": "N38",
+    "msName": "재해영향평가등 협의·계획반영",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 4,
+    "institution": "disaster-impact-assessment-consultation",
+    "institutionName": "재해영향평가등 협의·이행관리",
+    "nodeId": "P02",
+    "name": "재해위험·저감대책 조사",
+    "action": "재해위험·저감대책 조사에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "사업시행자·계획수립기관",
+    "type": "task",
+    "outputs": [
+      "재해위험 조사자료",
+      "저감대책"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "자연재해대책법",
+        "article": "제4조",
+        "text": "자연재해대책법 제4조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N38:disaster-impact-assessment-consultation:P03",
+    "ms": "N38",
+    "msName": "재해영향평가등 협의·계획반영",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 4,
+    "institution": "disaster-impact-assessment-consultation",
+    "institutionName": "재해영향평가등 협의·이행관리",
+    "nodeId": "P03",
+    "name": "재해영향평가등 협의서 제출",
+    "action": "재해영향평가등 협의서 제출에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "승인기관",
+    "type": "task",
+    "outputs": [
+      "재해영향평가등 협의요청서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "자연재해대책법",
+        "article": "제4조",
+        "text": "자연재해대책법 제4조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N38:disaster-impact-assessment-consultation:P04",
+    "ms": "N38",
+    "msName": "재해영향평가등 협의·계획반영",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 4,
+    "institution": "disaster-impact-assessment-consultation",
+    "institutionName": "재해영향평가등 협의·이행관리",
+    "nodeId": "P04",
+    "name": "전문기관 사전검토",
+    "action": "전문기관 사전검토에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "행정안전부·전문검토기관",
+    "type": "task",
+    "outputs": [
+      "전문검토 의견"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "자연재해대책법",
+        "article": "제4조",
+        "text": "자연재해대책법 제4조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N38:disaster-impact-assessment-consultation:P05",
+    "ms": "N38",
+    "msName": "재해영향평가등 협의·계획반영",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 4,
+    "institution": "disaster-impact-assessment-consultation",
+    "institutionName": "재해영향평가등 협의·이행관리",
+    "nodeId": "P05",
+    "name": "재해영향평가심의위원회 심의",
+    "action": "재해영향평가심의위원회 심의에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "행정안전부·전문검토기관",
+    "type": "gateway",
+    "outputs": [
+      "위원회 심의결과"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "자연재해대책법",
+        "article": "제4조",
+        "text": "자연재해대책법 제4조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N38:disaster-impact-assessment-consultation:P06",
+    "ms": "N38",
+    "msName": "재해영향평가등 협의·계획반영",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 4,
+    "institution": "disaster-impact-assessment-consultation",
+    "institutionName": "재해영향평가등 협의·이행관리",
+    "nodeId": "P06",
+    "name": "보완·재협의",
+    "action": "보완·재협의에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "사업시행자·계획수립기관",
+    "type": "task",
+    "outputs": [
+      "보완서",
+      "재협의 기록"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "자연재해대책법",
+        "article": "제4조",
+        "text": "자연재해대책법 제4조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N38:disaster-impact-assessment-consultation:P07",
+    "ms": "N38",
+    "msName": "재해영향평가등 협의·계획반영",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 4,
+    "institution": "disaster-impact-assessment-consultation",
+    "institutionName": "재해영향평가등 협의·이행관리",
+    "nodeId": "P07",
+    "name": "협의결과 통보·계획 반영",
+    "action": "협의결과 통보·계획 반영에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "승인기관",
+    "type": "notice",
+    "outputs": [
+      "협의결과 통보",
+      "계획 반영확인서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "자연재해대책법",
+        "article": "제6조",
+        "text": "자연재해대책법 제6조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N38:disaster-impact-assessment-consultation:P08",
+    "ms": "N38",
+    "msName": "재해영향평가등 협의·계획반영",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 4,
+    "institution": "disaster-impact-assessment-consultation",
+    "institutionName": "재해영향평가등 협의·이행관리",
+    "nodeId": "P08",
+    "name": "사업착수 전 협의완료 확인",
+    "action": "사업착수 전 협의완료 확인에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "승인기관",
+    "type": "task",
+    "outputs": [
+      "착수 전 협의완료 확인"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "자연재해대책법",
+        "article": "제7조",
+        "text": "자연재해대책법 제7조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N38:national-disaster-safety-management-plan:P01",
+    "ms": "N38",
+    "msName": "재해영향평가등 협의·계획반영",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 4,
+    "institution": "national-disaster-safety-management-plan",
+    "institutionName": "재난안전관리계획 수립·점검",
+    "nodeId": "P01",
+    "name": "국가기본계획 수립지침 작성·통보",
+    "action": "국무총리의 지시로 국가안전관리기본계획 수립지침을 작성해 관계 중앙행정기관의 장에게 통보한다.",
+    "actorRaw": "행정안전부장관",
+    "type": "task",
+    "outputs": [
+      "수립지침"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "재난 및 안전관리 기본법",
+        "article": "제22조제1항·제2항",
+        "text": "국무총리는 재난 및 사고로부터 국민의 생명·신체 및 재산을 보호하기 위하여 5년마다 국가안전관리기본계획을 수립하여야 하며, 행정안전부장관으로 하여금 수립지침을 작성하여 관계 중앙행정기관의 장에게 통보하도록 하여야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N38:national-disaster-safety-management-plan:P02",
+    "ms": "N38",
+    "msName": "재해영향평가등 협의·계획반영",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 4,
+    "institution": "national-disaster-safety-management-plan",
+    "institutionName": "재난안전관리계획 수립·점검",
+    "nodeId": "P02",
+    "name": "부처별 기본계획 작성·제출",
+    "action": "수립지침에 따라 5년마다 소관 재난·안전관리업무 기본계획을 작성해 행정안전부장관에게 제출한다.",
+    "actorRaw": "관계 중앙행정기관의 장",
+    "type": "task",
+    "outputs": [
+      "부처별 기본계획"
+    ],
+    "inputs": [],
+    "deadlineRaw": "5년마다 작성·제출",
+    "legal": [
+      {
+        "law": "재난 및 안전관리 기본법",
+        "article": "제22조제3항",
+        "text": "관계 중앙행정기관의 장은 수립지침에 따라 5년마다 그 소관에 속하는 재난 및 안전관리업무에 관한 기본계획을 작성한 후 행정안전부장관에게 제출하여야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N38:national-disaster-safety-management-plan:P03",
+    "ms": "N38",
+    "msName": "재해영향평가등 협의·계획반영",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 4,
+    "institution": "national-disaster-safety-management-plan",
+    "institutionName": "재난안전관리계획 수립·점검",
+    "nodeId": "P03",
+    "name": "종합·중앙위원회 심의·확정",
+    "action": "행정안전부장관이 부처별 계획을 종합해 국가안전관리기본계획안을 작성·제출하고, 국무총리가 중앙안전관리위원회 심의를 거쳐 확정한다.",
+    "actorRaw": "국무총리",
+    "type": "gateway",
+    "outputs": [
+      "국가안전관리기본계획"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "재난 및 안전관리 기본법",
+        "article": "제22조제4항",
+        "text": "행정안전부장관은 관계 중앙행정기관의 장이 제출한 기본계획을 종합하여 국가안전관리기본계획안을 작성한 후 국무총리에게 제출하고, 국무총리는 중앙위원회의 심의를 거쳐 국가안전관리기본계획을 확정한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N38:national-disaster-safety-management-plan:P04",
+    "ms": "N38",
+    "msName": "재해영향평가등 협의·계획반영",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 4,
+    "institution": "national-disaster-safety-management-plan",
+    "institutionName": "재난안전관리계획 수립·점검",
+    "nodeId": "P04",
+    "name": "확정 계획 통보",
+    "action": "확정된 기본계획을 지체 없이 관계 중앙행정기관에 통보하고, 각 부처는 소관 사항을 재난관리책임기관에 통보한다.",
+    "actorRaw": "행정안전부장관",
+    "type": "task",
+    "outputs": [
+      "확정 계획 통보"
+    ],
+    "inputs": [],
+    "deadlineRaw": "확정 시 지체 없이 통보",
+    "legal": [
+      {
+        "law": "재난 및 안전관리 기본법",
+        "article": "제22조제5항·제6항",
+        "text": "행정안전부장관은 확정된 국가안전관리기본계획을 지체 없이 관계 중앙행정기관의 장에게 통보하여야 하며, 관계 중앙행정기관의 장은 그 소관 사항을 관계 재난관리책임기관의 장에게 통보하여야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N38:national-disaster-safety-management-plan:P05",
+    "ms": "N38",
+    "msName": "재해영향평가등 협의·계획반영",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 4,
+    "institution": "national-disaster-safety-management-plan",
+    "institutionName": "재난안전관리계획 수립·점검",
+    "nodeId": "P05",
+    "name": "시·도 수립지침 통보",
+    "action": "국가기본계획과 집행계획에 따라 매년 시·도안전관리계획 수립지침을 작성해 시·도지사에게 통보한다.",
+    "actorRaw": "행정안전부장관",
+    "type": "task",
+    "outputs": [
+      "시·도 수립지침"
+    ],
+    "inputs": [],
+    "deadlineRaw": "매년 작성·통보",
+    "legal": [
+      {
+        "law": "재난 및 안전관리 기본법",
+        "article": "제24조제2항",
+        "text": "행정안전부장관은 국가안전관리기본계획과 집행계획에 따라 매년 시·도안전관리계획의 수립지침을 작성하여 시·도지사에게 통보하여야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N38:national-disaster-safety-management-plan:P06",
+    "ms": "N38",
+    "msName": "재해영향평가등 협의·계획반영",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 4,
+    "institution": "national-disaster-safety-management-plan",
+    "institutionName": "재난안전관리계획 수립·점검",
+    "nodeId": "P06",
+    "name": "시·도안전관리계획 작성·심의·확정",
+    "action": "관할 재난관리책임기관이 제출한 소관 계획과 수립지침을 종합해 매년 시·도안전관리계획을 작성하고 시·도안전관리위원회 심의를 거쳐 확정한다. 확정하면 행정안전부장관에게 보고하고 책임기관에 통보한다.",
+    "actorRaw": "시·도지사",
+    "type": "task",
+    "outputs": [
+      "시·도안전관리계획"
+    ],
+    "inputs": [],
+    "deadlineRaw": "매년 수립",
+    "legal": [
+      {
+        "law": "재난 및 안전관리 기본법",
+        "article": "제24조제1항·제3항·제4항·제5항",
+        "text": "시·도지사는 국가안전관리기본계획에 따라 지역 여건을 고려하여 매년 시·도안전관리계획을 수립하여야 한다. 재난관리책임기관의 장이 제출한 계획과 수립지침을 종합하여 작성하고 시·도위원회의 심의를 거쳐 확정하며, 확정된 계획을 행정안전부장관에게 보고하고 재난관리책임기관의 장에게 통보하여야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N38:national-disaster-safety-management-plan:P07",
+    "ms": "N38",
+    "msName": "재해영향평가등 협의·계획반영",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 4,
+    "institution": "national-disaster-safety-management-plan",
+    "institutionName": "재난안전관리계획 수립·점검",
+    "nodeId": "P07",
+    "name": "시·군·구 수립지침 통보",
+    "action": "시·도안전관리계획에 따라 매년 시·군·구안전관리계획 수립지침을 작성해 시장·군수·구청장에게 통보한다.",
+    "actorRaw": "시·도지사",
+    "type": "task",
+    "outputs": [
+      "시·군·구 수립지침"
+    ],
+    "inputs": [],
+    "deadlineRaw": "매년 작성·통보",
+    "legal": [
+      {
+        "law": "재난 및 안전관리 기본법",
+        "article": "제25조제2항",
+        "text": "시·도지사는 시·도안전관리계획에 따라 매년 시·군·구안전관리계획의 수립지침을 작성하여 시장·군수·구청장에게 통보하여야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N38:national-disaster-safety-management-plan:P08",
+    "ms": "N38",
+    "msName": "재해영향평가등 협의·계획반영",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 4,
+    "institution": "national-disaster-safety-management-plan",
+    "institutionName": "재난안전관리계획 수립·점검",
+    "nodeId": "P08",
+    "name": "시·군·구안전관리계획 작성·심의·확정",
+    "action": "관할 재난관리책임기관의 소관 계획과 수립지침을 종합해 매년 시·군·구안전관리계획을 작성하고 시·군·구위원회 심의를 거쳐 확정한다. 확정하면 시·도지사에게 보고하고 책임기관에 통보한다.",
+    "actorRaw": "시장·군수·구청장",
+    "type": "task",
+    "outputs": [
+      "시·군·구안전관리계획"
+    ],
+    "inputs": [],
+    "deadlineRaw": "매년 수립",
+    "legal": [
+      {
+        "law": "재난 및 안전관리 기본법",
+        "article": "제25조제1항·제3항·제4항·제5항",
+        "text": "시장·군수·구청장은 시·도안전관리계획에 따라 지역 여건을 고려하여 매년 시·군·구안전관리계획을 수립하여야 한다. 수립지침과 제출받은 계획을 종합하여 작성하고 시·군·구위원회의 심의를 거쳐 확정하며, 시·도지사에게 보고하고 재난관리책임기관의 장에게 통보하여야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N38:national-disaster-safety-management-plan:P09",
+    "ms": "N38",
+    "msName": "재해영향평가등 협의·계획반영",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 4,
+    "institution": "national-disaster-safety-management-plan",
+    "institutionName": "재난안전관리계획 수립·점검",
+    "nodeId": "P09",
+    "name": "국가기본계획 변경",
+    "action": "여건 변화로 필요하거나 부처가 요청하면 변경할 수 있다. 변경에는 확정 절차를 준용하되, 경미한 사항은 중앙위원회 심의를 생략한다.",
+    "actorRaw": "국무총리",
+    "type": "task",
+    "outputs": [
+      "변경 계획"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "재난 및 안전관리 기본법",
+        "article": "제22조제7항·제8항",
+        "text": "국무총리는 사회적·경제적 여건의 변화 등으로 변경할 필요가 있다고 인정하거나 관계 중앙행정기관의 장이 변경을 요청하는 경우에는 이를 변경할 수 있다. 변경에 관하여는 확정 절차를 준용하되, 대통령령으로 정하는 경미한 사항을 변경하는 경우에는 중앙위원회의 심의를 거치지 아니한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N39:traffic-impact-assessment-review:P01",
+    "ms": "N39",
+    "msName": "교통영향평가·광역교통개선대책 심의·반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 5,
+    "institution": "traffic-impact-assessment-review",
+    "institutionName": "교통영향평가 검토·개선사항 이행",
+    "nodeId": "P01",
+    "name": "교통영향평가 대상 판정",
+    "action": "교통영향평가 대상 판정에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "승인기관",
+    "type": "task",
+    "outputs": [
+      "교통영향평가 대상 판정표"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "도시교통정비 촉진법",
+        "article": "제15조",
+        "text": "도시교통정비 촉진법 제15조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N39:traffic-impact-assessment-review:P02",
+    "ms": "N39",
+    "msName": "교통영향평가·광역교통개선대책 심의·반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 5,
+    "institution": "traffic-impact-assessment-review",
+    "institutionName": "교통영향평가 검토·개선사항 이행",
+    "nodeId": "P02",
+    "name": "교통영향평가서·개선대책 작성",
+    "action": "교통영향평가서·개선대책 작성에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "사업시행자",
+    "type": "task",
+    "outputs": [
+      "교통영향평가서",
+      "교통개선대책"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "도시교통정비 촉진법",
+        "article": "제16조",
+        "text": "도시교통정비 촉진법 제16조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N39:traffic-impact-assessment-review:P03",
+    "ms": "N39",
+    "msName": "교통영향평가·광역교통개선대책 심의·반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 5,
+    "institution": "traffic-impact-assessment-review",
+    "institutionName": "교통영향평가 검토·개선사항 이행",
+    "nodeId": "P03",
+    "name": "평가서 제출·요건검토",
+    "action": "평가서 제출·요건검토에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "승인기관",
+    "type": "task",
+    "outputs": [
+      "평가서 접수·요건검토 결과"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "도시교통정비 촉진법",
+        "article": "제16조",
+        "text": "도시교통정비 촉진법 제16조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N39:traffic-impact-assessment-review:P04",
+    "ms": "N39",
+    "msName": "교통영향평가·광역교통개선대책 심의·반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 5,
+    "institution": "traffic-impact-assessment-review",
+    "institutionName": "교통영향평가 검토·개선사항 이행",
+    "nodeId": "P04",
+    "name": "전문검토·관계기관 의견수렴",
+    "action": "전문검토·관계기관 의견수렴에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "승인기관",
+    "type": "task",
+    "outputs": [
+      "전문검토서",
+      "관계기관 의견"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "도시교통정비 촉진법",
+        "article": "제16조",
+        "text": "도시교통정비 촉진법 제16조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N39:traffic-impact-assessment-review:P05",
+    "ms": "N39",
+    "msName": "교통영향평가·광역교통개선대책 심의·반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 5,
+    "institution": "traffic-impact-assessment-review",
+    "institutionName": "교통영향평가 검토·개선사항 이행",
+    "nodeId": "P05",
+    "name": "교통영향평가심의위원회 심의",
+    "action": "교통영향평가심의위원회 심의에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "교통영향평가심의위원회",
+    "type": "gateway",
+    "outputs": [
+      "심의결과"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "도시교통정비 촉진법",
+        "article": "제17조",
+        "text": "도시교통정비 촉진법 제17조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N39:traffic-impact-assessment-review:P06",
+    "ms": "N39",
+    "msName": "교통영향평가·광역교통개선대책 심의·반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 5,
+    "institution": "traffic-impact-assessment-review",
+    "institutionName": "교통영향평가 검토·개선사항 이행",
+    "nodeId": "P06",
+    "name": "개선필요사항등 확정·통보",
+    "action": "개선필요사항등 확정·통보에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "승인기관",
+    "type": "notice",
+    "outputs": [
+      "개선필요사항 통보서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "도시교통정비 촉진법",
+        "article": "제16조",
+        "text": "도시교통정비 촉진법 제16조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N39:traffic-impact-assessment-review:P07",
+    "ms": "N39",
+    "msName": "교통영향평가·광역교통개선대책 심의·반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 5,
+    "institution": "traffic-impact-assessment-review",
+    "institutionName": "교통영향평가 검토·개선사항 이행",
+    "nodeId": "P07",
+    "name": "승인계획·실시설계 반영",
+    "action": "승인계획·실시설계 반영에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "사업시행자",
+    "type": "task",
+    "outputs": [
+      "교통개선사항 반영표"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "도시교통정비 촉진법",
+        "article": "제20조",
+        "text": "도시교통정비 촉진법 제20조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N39:metropolitan-transport-improvement-measures:P01",
+    "ms": "N39",
+    "msName": "교통영향평가·광역교통개선대책 심의·반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 5,
+    "institution": "metropolitan-transport-improvement-measures",
+    "institutionName": "대규모 개발사업 광역교통개선대책",
+    "nodeId": "P01",
+    "name": "대도시권 범위·사업유형·면적별 수립대상 판정",
+    "action": "대도시권 범위·사업유형·면적별 수립대상 판정에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "국토교통부",
+    "type": "task",
+    "outputs": [
+      "광역교통개선대책 적용판정서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "대도시권 광역교통 관리에 관한 특별법",
+        "article": "제7조의2",
+        "text": "대도시권 광역교통 관리에 관한 특별법 제7조의2에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N39:metropolitan-transport-improvement-measures:P02",
+    "ms": "N39",
+    "msName": "교통영향평가·광역교통개선대책 심의·반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 5,
+    "institution": "metropolitan-transport-improvement-measures",
+    "institutionName": "대규모 개발사업 광역교통개선대책",
+    "nodeId": "P02",
+    "name": "광역 통행수요·간선망·대중교통 수용능력 분석",
+    "action": "광역 통행수요·간선망·대중교통 수용능력 분석에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "광주특별시·사업시행자",
+    "type": "task",
+    "outputs": [
+      "광역교통 수요예측서",
+      "교통망 용량분석"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "대도시권 광역교통 관리에 관한 특별법",
+        "article": "제7조의2",
+        "text": "대도시권 광역교통 관리에 관한 특별법 제7조의2에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N39:metropolitan-transport-improvement-measures:P03",
+    "ms": "N39",
+    "msName": "교통영향평가·광역교통개선대책 심의·반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 5,
+    "institution": "metropolitan-transport-improvement-measures",
+    "institutionName": "대규모 개발사업 광역교통개선대책",
+    "nodeId": "P03",
+    "name": "도로·철도·환승·대중교통 개선대책과 단계별 사업 작성",
+    "action": "도로·철도·환승·대중교통 개선대책과 단계별 사업 작성에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "광주특별시·사업시행자",
+    "type": "task",
+    "outputs": [
+      "광역교통개선대책안"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "대도시권 광역교통 관리에 관한 특별법",
+        "article": "제7조의2",
+        "text": "대도시권 광역교통 관리에 관한 특별법 제7조의2에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N39:metropolitan-transport-improvement-measures:P04",
+    "ms": "N39",
+    "msName": "교통영향평가·광역교통개선대책 심의·반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 5,
+    "institution": "metropolitan-transport-improvement-measures",
+    "institutionName": "대규모 개발사업 광역교통개선대책",
+    "nodeId": "P04",
+    "name": "관계 지자체·도로·철도·교통기관 협의",
+    "action": "관계 지자체·도로·철도·교통기관 협의에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "관계 지방자치단체·교통기관",
+    "type": "task",
+    "outputs": [
+      "관계기관 협의의견",
+      "조정안"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "대도시권 광역교통 관리에 관한 특별법",
+        "article": "제7조의2",
+        "text": "대도시권 광역교통 관리에 관한 특별법 제7조의2에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N39:metropolitan-transport-improvement-measures:P05",
+    "ms": "N39",
+    "msName": "교통영향평가·광역교통개선대책 심의·반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 5,
+    "institution": "metropolitan-transport-improvement-measures",
+    "institutionName": "대규모 개발사업 광역교통개선대책",
+    "nodeId": "P05",
+    "name": "대도시권광역교통위원회 심의·조정",
+    "action": "대도시권광역교통위원회 심의·조정에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "대도시권광역교통위원회",
+    "type": "gateway",
+    "outputs": [
+      "위원회 심의결과",
+      "조정결과"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "대도시권 광역교통 관리에 관한 특별법",
+        "article": "제7조의2",
+        "text": "대도시권 광역교통 관리에 관한 특별법 제7조의2에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N39:metropolitan-transport-improvement-measures:P06",
+    "ms": "N39",
+    "msName": "교통영향평가·광역교통개선대책 심의·반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 5,
+    "institution": "metropolitan-transport-improvement-measures",
+    "institutionName": "대규모 개발사업 광역교통개선대책",
+    "nodeId": "P06",
+    "name": "광역교통개선대책 확정·사업승인 조건 반영",
+    "action": "광역교통개선대책 확정·사업승인 조건 반영에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "국토교통부",
+    "type": "task",
+    "outputs": [
+      "광역교통개선대책 확정통보",
+      "사업승인 반영표"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "대도시권 광역교통 관리에 관한 특별법",
+        "article": "제7조의2",
+        "text": "대도시권 광역교통 관리에 관한 특별법 제7조의2에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N39:metropolitan-transport-improvement-measures:P07",
+    "ms": "N39",
+    "msName": "교통영향평가·광역교통개선대책 심의·반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 5,
+    "institution": "metropolitan-transport-improvement-measures",
+    "institutionName": "대규모 개발사업 광역교통개선대책",
+    "nodeId": "P07",
+    "name": "시설별 시행주체·재원분담·연차계획 확정",
+    "action": "시설별 시행주체·재원분담·연차계획 확정에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "광주특별시·사업시행자",
+    "type": "task",
+    "outputs": [
+      "재원분담 협약",
+      "연차별 투자계획"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "대도시권 광역교통 관리에 관한 특별법",
+        "article": "제7조의2",
+        "text": "대도시권 광역교통 관리에 관한 특별법 제7조의2에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N39:metropolitan-transport-improvement-measures:P08",
+    "ms": "N39",
+    "msName": "교통영향평가·광역교통개선대책 심의·반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 5,
+    "institution": "metropolitan-transport-improvement-measures",
+    "institutionName": "대규모 개발사업 광역교통개선대책",
+    "nodeId": "P08",
+    "name": "개선대책 이행상황 점검·변경·시정",
+    "action": "개선대책 이행상황 점검·변경·시정에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "국토교통부",
+    "type": "task",
+    "outputs": [
+      "이행점검 결과",
+      "변경·시정조치서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "대도시권 광역교통 관리에 관한 특별법",
+        "article": "제7조의2",
+        "text": "대도시권 광역교통 관리에 관한 특별법 제7조의2에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N40:energy-use-plan-consultation:P01",
+    "ms": "N40",
+    "msName": "에너지사용계획 협의·설계 반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 6,
+    "institution": "energy-use-plan-consultation",
+    "institutionName": "에너지사용계획 협의·사후관리",
+    "nodeId": "P01",
+    "name": "에너지사용계획 협의대상 판정",
+    "action": "에너지사용계획 협의대상 판정에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "산업통상부",
+    "type": "task",
+    "outputs": [
+      "협의대상 판정표"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "에너지이용 합리화법",
+        "article": "제10조",
+        "text": "에너지이용 합리화법 제10조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N40:energy-use-plan-consultation:P02",
+    "ms": "N40",
+    "msName": "에너지사용계획 협의·설계 반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 6,
+    "institution": "energy-use-plan-consultation",
+    "institutionName": "에너지사용계획 협의·사후관리",
+    "nodeId": "P02",
+    "name": "에너지 수요·공급·효율화 계획 작성",
+    "action": "에너지 수요·공급·효율화 계획 작성에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "사업주관자·사업시행자",
+    "type": "task",
+    "outputs": [
+      "에너지사용계획서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "에너지이용 합리화법",
+        "article": "제10조",
+        "text": "에너지이용 합리화법 제10조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N40:energy-use-plan-consultation:P03",
+    "ms": "N40",
+    "msName": "에너지사용계획 협의·설계 반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 6,
+    "institution": "energy-use-plan-consultation",
+    "institutionName": "에너지사용계획 협의·사후관리",
+    "nodeId": "P03",
+    "name": "에너지사용계획 협의 요청",
+    "action": "에너지사용계획 협의 요청에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "사업주관자·사업시행자",
+    "type": "task",
+    "outputs": [
+      "에너지사용계획 협의요청서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "에너지이용 합리화법",
+        "article": "제10조",
+        "text": "에너지이용 합리화법 제10조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N40:energy-use-plan-consultation:P04",
+    "ms": "N40",
+    "msName": "에너지사용계획 협의·설계 반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 6,
+    "institution": "energy-use-plan-consultation",
+    "institutionName": "에너지사용계획 협의·사후관리",
+    "nodeId": "P04",
+    "name": "에너지전문기관 기술검토",
+    "action": "에너지전문기관 기술검토에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "에너지전문기관",
+    "type": "task",
+    "outputs": [
+      "기술검토 의견"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "에너지이용 합리화법",
+        "article": "제11조",
+        "text": "에너지이용 합리화법 제11조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N40:energy-use-plan-consultation:P05",
+    "ms": "N40",
+    "msName": "에너지사용계획 협의·설계 반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 6,
+    "institution": "energy-use-plan-consultation",
+    "institutionName": "에너지사용계획 협의·사후관리",
+    "nodeId": "P05",
+    "name": "협의의견·보완사항 통보",
+    "action": "협의의견·보완사항 통보에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "산업통상부",
+    "type": "notice",
+    "outputs": [
+      "에너지사용계획 협의의견"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "에너지이용 합리화법",
+        "article": "제11조",
+        "text": "에너지이용 합리화법 제11조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N40:energy-use-plan-consultation:P06",
+    "ms": "N40",
+    "msName": "에너지사용계획 협의·설계 반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 6,
+    "institution": "energy-use-plan-consultation",
+    "institutionName": "에너지사용계획 협의·사후관리",
+    "nodeId": "P06",
+    "name": "사업계획·설계에 협의결과 반영",
+    "action": "사업계획·설계에 협의결과 반영에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "사업주관자·사업시행자",
+    "type": "task",
+    "outputs": [
+      "협의결과 반영표"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "에너지이용 합리화법",
+        "article": "제12조",
+        "text": "에너지이용 합리화법 제12조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N40:energy-use-plan-consultation:P07",
+    "ms": "N40",
+    "msName": "에너지사용계획 협의·설계 반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 6,
+    "institution": "energy-use-plan-consultation",
+    "institutionName": "에너지사용계획 협의·사후관리",
+    "nodeId": "P07",
+    "name": "계획 이행실적 제출·사후관리",
+    "action": "계획 이행실적 제출·사후관리에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "산업통상부",
+    "type": "task",
+    "outputs": [
+      "이행실적 보고",
+      "사후관리 기록"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "에너지이용 합리화법",
+        "article": "제12조",
+        "text": "에너지이용 합리화법 제12조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N40:district-energy-business-permit:P01",
+    "ms": "N40",
+    "msName": "에너지사용계획 협의·설계 반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 6,
+    "institution": "district-energy-business-permit",
+    "institutionName": "집단에너지 사업허가·공급계획",
+    "nodeId": "P01",
+    "name": "개발사업 집단에너지 공급 협의",
+    "action": "주택건설·택지개발·산업단지개발 등 개발사업 계획을 수립하려면 기후에너지환경부장관과 집단에너지 공급 타당성을 협의한다. 계획 변경 시에도 같다.",
+    "actorRaw": "중앙행정기관·지자체·공기업의 장",
+    "type": "task",
+    "outputs": [
+      "공급 타당성 협의 결과"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "집단에너지사업법",
+        "article": "제4조",
+        "text": "중앙행정기관, 지방자치단체, 공기업 또는 공공단체의 장은 주택건설사업, 택지개발사업, 산업단지개발사업, 그 밖에 대통령령으로 정하는 개발사업에 관한 계획을 수립하려면 기후에너지환경부장관과 집단에너지의 공급 타당성에 관한 협의를 하여야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N40:district-energy-business-permit:P02",
+    "ms": "N40",
+    "msName": "에너지사용계획 협의·설계 반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 6,
+    "institution": "district-energy-business-permit",
+    "institutionName": "집단에너지 사업허가·공급계획",
+    "nodeId": "P02",
+    "name": "공급대상지역 지정·공고",
+    "action": "협의 결과 타당성이 있으면 공급대상지역을 지정·공고한다. 지정 전에 주요 내용을 30일 이상 공고하고 주민 등 이해관계인·개발사업 시행자의 의견을 들으며 관계 중앙행정기관·시·도지사와 협의한다. 특정지역 공급 희망자는 지정을 신청할 수 있고, 환경부령 기간 내 검토 결과를 통지받는다.",
+    "actorRaw": "기후에너지환경부장관",
+    "type": "task",
+    "outputs": [
+      "공급대상지역 지정 공고"
+    ],
+    "inputs": [],
+    "deadlineRaw": "지정 전 주요 내용을 30일 이상 공고(지정 신청 시 기후에너지환경부령으로 정하는 기간 이내 결과 통지)",
+    "legal": [
+      {
+        "law": "집단에너지사업법",
+        "article": "제5조제1항·제2항·제3항",
+        "text": "① 협의 결과 집단에너지의 공급 타당성이 있을 때 등에는 공급대상지역을 지정하고 공고하여야 한다. ② 지정하려면 미리 주요 내용을 30일 이상 공고하여야 하며, 주민 등 이해관계인과 개발사업을 시행하는 자의 의견을 듣고 관계 중앙행정기관의 장과 시·도지사와 협의하여야 한다. ③ 특정지역에 공급하려는 자는 지정을 신청할 수 있다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N40:district-energy-business-permit:P03",
+    "ms": "N40",
+    "msName": "에너지사용계획 협의·설계 반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 6,
+    "institution": "district-energy-business-permit",
+    "institutionName": "집단에너지 사업허가·공급계획",
+    "nodeId": "P03",
+    "name": "사업허가 신청",
+    "action": "공급구역별로 기후에너지환경부장관의 허가를 신청한다. 피성년후견인·파산자, 취소 후 2년 미경과자 등 결격사유가 있으면 허가받을 수 없다.",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "사업허가 신청서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "집단에너지사업법",
+        "article": "제9조제1항·제10조",
+        "text": "사업을 하려는 자는 공급구역별로 기후에너지환경부장관의 허가를 받아야 한다. 피성년후견인, 파산선고를 받고 복권되지 아니한 자, 허가가 취소된 후 2년이 지나지 아니한 자 등은 결격사유에 해당한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N40:district-energy-business-permit:P04",
+    "ms": "N40",
+    "msName": "에너지사용계획 협의·설계 반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 6,
+    "institution": "district-energy-business-permit",
+    "institutionName": "집단에너지 사업허가·공급계획",
+    "nodeId": "P04",
+    "name": "허가 기준 심사",
+    "action": "공공의 이익 기여, 공급용량의 수요 적합성, 재원·기술능력, 공급구역 비중복(예외적 중복 허용)의 네 기준으로 심사해 허가한다.",
+    "actorRaw": "기후에너지환경부장관",
+    "type": "gateway",
+    "outputs": [
+      "사업허가서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "집단에너지사업법",
+        "article": "제9조제2항",
+        "text": "허가의 기준: 사업의 개시가 일반인의 수요에 적합하고 에너지 절감, 환경개선 등 공공의 이익에 이바지할 수 있을 것, 공급용량이 공급구역의 수요에 적합할 것, 사업을 수행하는 데에 필요한 재원과 기술능력이 있을 것, 공급구역이 다른 사업자의 공급구역과 중복되지 아니할 것."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N40:district-energy-business-permit:P05",
+    "ms": "N40",
+    "msName": "에너지사용계획 협의·설계 반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 6,
+    "institution": "district-energy-business-permit",
+    "institutionName": "집단에너지 사업허가·공급계획",
+    "nodeId": "P05",
+    "name": "공사계획 승인·신고",
+    "action": "환경부령으로 정하는 설치·변경공사는 장관이 정하는 기간 내에 공사계획 승인을 받는다. 승인 기준은 허가 내용 부합과 기술기준 적합이다. 경미한 공사·재해복구공사·긴급공사는 신고한다.",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "공사계획 승인서(신고)"
+    ],
+    "inputs": [],
+    "deadlineRaw": "기후에너지환경부장관이 정하는 기간 내 승인(연장 가능)",
+    "legal": [
+      {
+        "law": "집단에너지사업법",
+        "article": "제22조제1항·제2항·제3항",
+        "text": "사업자는 공급시설의 설치공사 또는 변경공사로서 기후에너지환경부령으로 정하는 공사를 할 때에는 그 공사계획에 대하여 기후에너지환경부장관이 정하는 기간 내에 승인을 받아야 한다. 승인의 기준은 공사계획이 허가받은 내용에 부합할 것, 공급시설이 기술기준에 맞을 것이다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N40:district-energy-business-permit:P06",
+    "ms": "N40",
+    "msName": "에너지사용계획 협의·설계 반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 6,
+    "institution": "district-energy-business-permit",
+    "institutionName": "집단에너지 사업허가·공급계획",
+    "nodeId": "P06",
+    "name": "공급시설 설치·사업 개시",
+    "action": "장관이 정하는 기간 내에 공급시설을 설치하고 사업을 개시한다. 정당한 사유가 있으면 기간 연장을 신청할 수 있다.",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "사업 개시"
+    ],
+    "inputs": [],
+    "deadlineRaw": "기후에너지환경부장관이 정하는 기간 내 공급시설 설치·사업 개시(정당한 사유 시 연장 가능)",
+    "legal": [
+      {
+        "law": "집단에너지사업법",
+        "article": "제11조제1항·제2항",
+        "text": "사업자는 기후에너지환경부장관이 정하는 기간 내에 공급시설을 설치하고 사업을 개시하여야 한다. 기간의 연장 신청을 받은 경우 정당한 사유가 있다고 인정할 때에는 그 기간을 연장할 수 있다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N40:district-energy-business-permit:P07",
+    "ms": "N40",
+    "msName": "에너지사용계획 협의·설계 반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 6,
+    "institution": "district-energy-business-permit",
+    "institutionName": "집단에너지 사업허가·공급계획",
+    "nodeId": "P07",
+    "name": "변경허가",
+    "action": "허가받은 사항 중 환경부령으로 정하는 사항을 변경하려면 변경허가를 받는다.",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "변경허가서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "집단에너지사업법",
+        "article": "제9조제1항 후단",
+        "text": "그 허가받은 사항 중 기후에너지환경부령으로 정하는 사항을 변경할 때에도 또한 같다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N40:district-energy-business-permit:P08",
+    "ms": "N40",
+    "msName": "에너지사용계획 협의·설계 반영",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 6,
+    "institution": "district-energy-business-permit",
+    "institutionName": "집단에너지 사업허가·공급계획",
+    "nodeId": "P08",
+    "name": "허가취소·사업정지·과징금",
+    "action": "부정한 방법의 허가, 결격사유 발생, 기간 내 미설치·미개시, 정당한 사유 없는 공급 거부, 개선명령 불이행 등의 경우 허가를 취소하거나 6개월 이내 사업정지를 명할 수 있다. 정지가 공익을 해칠 우려가 있으면 2천만원 이하 과징금으로 갈음할 수 있다.",
+    "actorRaw": "기후에너지환경부장관",
+    "type": "gateway",
+    "outputs": [
+      "허가취소·사업정지·과징금 처분(해당 시)"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "집단에너지사업법",
+        "article": "제15조제1항·제3항",
+        "text": "속임수나 부정한 방법으로 허가를 받은 경우, 결격사유에 해당하게 된 경우, 기간 내에 공급시설의 설치 또는 사업의 개시를 하지 아니한 경우, 정당한 사유 없이 공급을 거부한 경우 등에는 허가를 취소하거나 6개월 이내의 사업정지를 명할 수 있다. 사업정지가 사용자에게 심한 불편을 주는 경우 2천만원 이하의 과징금으로 갈음할 수 있다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N12:industrial-complex-development:P08",
+    "ms": "N12",
+    "msName": "환경영향평가 본안 검토·협의 완료",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 7,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P08",
+    "name": "환경영향평가 협의",
+    "action": "환경영향평가 협의",
+    "actorRaw": "환경·관계기관",
+    "type": "gateway",
+    "outputs": [
+      "협의"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제27조(환경영향평가서의 작성 및 협의 요청 등)",
+        "text": "환경영향평가서의 작성 및 협의 요청 등"
+      },
+      {
+        "law": "환경영향평가법",
+        "article": "제28조(환경영향평가서의 검토 등)",
+        "text": "환경영향평가서의 검토 등"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N12:industrial-complex-development:P09",
+    "ms": "N12",
+    "msName": "환경영향평가 본안 검토·협의 완료",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 7,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P09",
+    "name": "보완",
+    "action": "보완",
+    "actorRaw": "사업시행자",
+    "type": "task",
+    "outputs": [
+      "보완"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제32조(재협의)",
+        "text": "재협의"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N12:environmental-impact-assessment-consultation:P01",
+    "ms": "N12",
+    "msName": "환경영향평가 본안 검토·협의 완료",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 7,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P01",
+    "name": "환경영향평가 대상사업 판정",
+    "action": "도시개발·산업단지 조성·에너지 개발·도로·철도 등 대상사업에 해당하는지 판정한다. 구체적 종류·범위는 대통령령이 정한다.",
+    "actorRaw": "사업자",
+    "type": "gateway",
+    "outputs": [
+      "대상 판정 결과"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제22조제1항·제2항",
+        "text": "① 도시의 개발사업, 산업입지 및 산업단지의 조성사업, 에너지 개발사업, 도로의 건설사업 등 어느 하나에 해당하는 사업을 하려는 자는 환경영향평가를 실시하여야 한다. ② 대상사업의 구체적인 종류, 범위 등은 대통령령으로 정한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N12:environmental-impact-assessment-consultation:P02",
+    "ms": "N12",
+    "msName": "환경영향평가 본안 검토·협의 완료",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 7,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P02",
+    "name": "평가준비서 작성·평가항목등 결정 요청",
+    "action": "평가 실시 전에 평가준비서를 작성한다. 승인등을 받아야 하는 사업자는 승인기관의 장에게 환경영향평가항목등을 정하여 줄 것을 요청한다.",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "평가준비서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제24조제1항·제2항",
+        "text": "① 승인등을 받지 아니하여도 되는 사업자는 평가준비서를 작성하여 환경영향평가협의회의 심의를 거쳐 평가 대상지역·환경보전방안 대안·평가 항목·범위·방법 등을 결정하여야 한다. ② 승인등을 받아야 하는 사업자는 평가준비서를 작성하여 승인기관의 장에게 환경영향평가항목등을 정하여 줄 것을 요청하여야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N12:environmental-impact-assessment-consultation:P03",
+    "ms": "N12",
+    "msName": "환경영향평가 본안 검토·협의 완료",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 7,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P03",
+    "name": "환경영향평가항목등 결정·공개",
+    "action": "요청을 받으면 대통령령으로 정하는 기간 내에 환경영향평가협의회 심의를 거쳐 평가항목등을 결정해 사업자에게 통보하고, 공개하여 주민 등의 의견을 듣는다. 전략환경영향평가에서 이미 결정·협의된 경우 절차를 생략할 수 있다.",
+    "actorRaw": "승인기관의 장",
+    "type": "task",
+    "outputs": [
+      "환경영향평가항목등 결정 통보"
+    ],
+    "inputs": [],
+    "deadlineRaw": "요청을 받은 날부터 대통령령으로 정하는 기간 내 협의회 심의를 거쳐 결정·통보",
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제24조제4항·제6항·제7항",
+        "text": "④ 요청을 받은 승인기관의 장이나 기후에너지환경부장관은 대통령령으로 정하는 기간 내에 환경영향평가협의회의 심의를 거쳐 환경영향평가항목등을 결정하여 사업자에게 통보하여야 한다. ⑥ 전략환경영향평가항목등에 포함되어 결정·협의된 경우 결정 절차를 거치지 아니할 수 있다. ⑦ 결정된 환경영향평가항목등을 공개하고 주민 등의 의견을 들어야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N12:environmental-impact-assessment-consultation:P04",
+    "ms": "N12",
+    "msName": "환경영향평가 본안 검토·협의 완료",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 7,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P04",
+    "name": "평가서 초안 작성·주민 의견수렴",
+    "action": "결정된 평가항목등에 따라 평가서 초안을 작성해 주민 등의 의견을 수렴한다. 공고·공람은 사업지역 관할 시장·군수·구청장이 한다. 다른 법령으로 20일 이상 준하여 수렴한 경우 의제되고, 전략환경영향평가 의견수렴을 거친 경우 요건 충족 시 생략할 수 있다.",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "환경영향평가서 초안",
+      "주민 의견수렴 결과"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제25조제1항·제2항·제3항·제5항",
+        "text": "① 사업자는 결정된 환경영향평가항목등에 따라 환경영향평가서 초안을 작성하여 주민 등의 의견을 수렴하여야 한다. ② 공고 및 공람은 사업지역 관할 시장·군수·구청장이 하여야 한다. ③ 다른 법령에 따라 주민 등의 의견을 20일 이상 수렴하는 등 준하여 수렴한 경우에는 의견을 수렴한 것으로 본다. ⑤ 전략환경영향평가서 초안 의견수렴을 거친 경우 요건에 모두 해당하면 협의를 거쳐 절차를 생략할 수 있다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N12:environmental-impact-assessment-consultation:P05",
+    "ms": "N12",
+    "msName": "환경영향평가 본안 검토·협의 완료",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 7,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P05",
+    "name": "의견수렴 결과·반영 여부 공개",
+    "action": "주민 등의 의견 수렴 결과와 반영 여부를 대통령령으로 정하는 방법에 따라 공개한다.",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "의견 반영 여부 공개"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제25조제4항",
+        "text": "사업자는 주민 등의 의견 수렴 결과와 반영 여부를 대통령령으로 정하는 방법에 따라 공개하여야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N12:environmental-impact-assessment-consultation:P06",
+    "ms": "N12",
+    "msName": "환경영향평가 본안 검토·협의 완료",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 7,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P06",
+    "name": "환경영향평가서 작성·제출",
+    "action": "승인등을 받아야 하는 사업자는 평가서를 작성해 승인기관의 장에게 제출한다.",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "환경영향평가서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제27조제2항",
+        "text": "승인등을 받지 아니하여도 되는 사업자는 협의를 요청할 경우 환경영향평가서를 작성하여야 하며, 승인등을 받아야 하는 사업자는 환경영향평가서를 작성하여 승인기관의 장에게 제출하여야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N12:environmental-impact-assessment-consultation:P07",
+    "ms": "N12",
+    "msName": "환경영향평가 본안 검토·협의 완료",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 7,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P07",
+    "name": "협의 요청",
+    "action": "대상사업에 대한 승인등을 하거나 사업을 확정하기 전에 기후에너지환경부장관에게 협의를 요청한다. 평가서에 대한 의견을 첨부할 수 있다.",
+    "actorRaw": "승인기관의 장",
+    "type": "task",
+    "outputs": [
+      "협의 요청서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제27조제1항",
+        "text": "승인기관장등은 환경영향평가 대상사업에 대한 승인등을 하거나 환경영향평가 대상사업을 확정하기 전에 기후에너지환경부장관에게 협의를 요청하여야 한다. 이 경우 승인기관의 장은 환경영향평가서에 대한 의견을 첨부할 수 있다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N12:environmental-impact-assessment-consultation:P08",
+    "ms": "N12",
+    "msName": "환경영향평가 본안 검토·협의 완료",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 7,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P08",
+    "name": "평가서 검토·보완 요청",
+    "action": "의견수렴 절차 이행 여부와 평가서 내용을 검토한다. 한국환경연구원의 의견을 들어야 하며, 보완·조정 요청은 두 차례만 할 수 있고, 거짓 작성 등의 경우 반려할 수 있다.",
+    "actorRaw": "기후에너지환경부장관",
+    "type": "task",
+    "outputs": [
+      "검토 의견",
+      "보완·조정 요청(해당 시)"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제28조제1항·제2항·제3항·제4항",
+        "text": "① 협의를 요청받은 경우 주민의견 수렴 절차 등의 이행 여부 및 환경영향평가서의 내용 등을 검토하여야 한다. ② 검토할 때 한국환경연구원 등의 의견을 들어야 한다. ③ 보완·조정할 필요가 있는 경우 보완·조정을 요청할 수 있으며, 보완·조정의 요청은 두 차례만 할 수 있다. ④ 일정 사유에 해당하는 경우 환경영향평가서를 반려할 수 있다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N12:environmental-impact-assessment-consultation:P09",
+    "ms": "N12",
+    "msName": "환경영향평가 본안 검토·협의 완료",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 7,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P09",
+    "name": "협의 내용 통보",
+    "action": "협의를 요청받은 날부터 대통령령으로 정하는 기간 이내에 협의 내용을 통보한다. 연장 시 협의기간 만료 전에 사유·기간을 통보한다. 승인기관의 장은 지체 없이 사업자에게 통보한다. 경미한 보완 사항은 반영 조건부로 통보할 수 있다.",
+    "actorRaw": "기후에너지환경부장관",
+    "type": "gateway",
+    "outputs": [
+      "협의 내용 통보서"
+    ],
+    "inputs": [],
+    "deadlineRaw": "협의를 요청받은 날부터 대통령령으로 정하는 기간 이내 통보(연장 시 협의기간 만료 전 사유·연장기간 통보)",
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제29조제1항·제2항·제3항·제4항",
+        "text": "① 기후에너지환경부장관은 협의를 요청받은 날부터 대통령령으로 정하는 기간 이내에 승인기관장등에게 협의 내용을 통보하여야 한다. ② 통보기간을 연장할 때에는 협의기간이 끝나기 전까지 사유와 연장한 기간을 통보하여야 한다. ③ 협의 내용을 통보받은 승인기관의 장은 지체 없이 사업자에게 통보하여야 한다. ④ 보완·조정 사항이 경미한 경우 등은 반영 조건부로 통보할 수 있다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N12:environmental-impact-assessment-consultation:P10",
+    "ms": "N12",
+    "msName": "환경영향평가 본안 검토·협의 완료",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 7,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P10",
+    "name": "협의 내용 반영·확인",
+    "action": "협의 내용을 사업계획에 반영하고, 승인등을 하려면 반영 여부를 확인한다. 반영 결과를 기후에너지환경부장관에게 통보하고, 미반영 시 반영 요청에 특별한 사유가 없으면 따라야 한다.",
+    "actorRaw": "승인기관의 장",
+    "type": "task",
+    "outputs": [
+      "협의 내용 반영 결과 통보"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제30조제1항·제2항·제3항·제4항",
+        "text": "① 사업자나 승인기관의 장은 협의 내용을 통보받았을 때에는 사업계획 등에 반영하기 위하여 필요한 조치를 하여야 한다. ② 승인기관의 장은 승인등을 하려면 협의 내용이 반영되었는지를 확인하여야 한다. ③ 승인등을 하거나 확정하였을 때에는 반영 결과를 통보하여야 한다. ④ 반영되지 아니한 경우 반영하도록 요청할 수 있으며, 특별한 사유가 없으면 이에 따라야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N12:environmental-impact-assessment-consultation:P11",
+    "ms": "N12",
+    "msName": "환경영향평가 본안 검토·협의 완료",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 7,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P11",
+    "name": "협의 내용 이행·관리대장 비치",
+    "action": "사업 시행 시 반영된 협의 내용을 이행하고, 관리대장에 이행 상황을 기록해 공사현장에 갖추어 두며, 관리책임자를 지정해 통보한다.",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "협의 내용 관리대장",
+      "관리책임자 지정 통보"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제35조제1항·제2항·제3항",
+        "text": "① 사업자는 사업계획 등을 시행할 때에 반영된 협의 내용을 이행하여야 한다. ② 협의 내용을 적은 관리대장에 이행 상황을 기록하여 공사현장에 갖추어 두어야 한다. ③ 협의 내용 관리책임자를 지정하여 기후에너지환경부장관과 승인기관의 장에게 통보하여야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N12:environmental-impact-assessment-consultation:P12",
+    "ms": "N12",
+    "msName": "환경영향평가 본안 검토·협의 완료",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 7,
+    "institution": "environmental-impact-assessment-consultation",
+    "institutionName": "환경영향평가 협의·협의내용 관리",
+    "nodeId": "P12",
+    "name": "사후환경영향조사",
+    "action": "착공 후 주변 환경에 미치는 영향을 조사해 통보하고, 피해 방지 조치가 필요하면 지체 없이 통보하고 조치한다.",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "사후환경영향조사 결과"
+    ],
+    "inputs": [],
+    "deadlineRaw": "피해 방지 조치가 필요한 경우 지체 없이 통보·조치",
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제36조제1항·제2항",
+        "text": "① 사업자는 해당 사업을 착공한 후에 그 사업이 주변 환경에 미치는 영향을 조사하고, 그 결과를 기후에너지환경부장관과 승인기관의 장에게 통보하여야 한다. ② 조사 결과 주변 환경의 피해를 방지하기 위하여 조치가 필요한 경우에는 지체 없이 그 사실을 통보하고 필요한 조치를 하여야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:development-permit:D01",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "development-permit",
+    "institutionName": "개발행위허가",
+    "nodeId": "D01",
+    "name": "개발행위 대상 여부 확인",
+    "action": "대상 확인",
+    "actorRaw": "토지소유자·개발사업자",
+    "type": "gateway",
+    "outputs": [
+      "대상 검토표"
+    ],
+    "inputs": [],
+    "deadlineRaw": "내부 목표 7일",
+    "legal": [
+      {
+        "law": "국토의 계획 및 이용에 관한 법률",
+        "article": "제56조(개발행위의 허가)",
+        "text": "건축물 건축, 토지 형질변경 등 개발행위는 허가를 받아야 함을 확인한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:development-permit:D02",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "development-permit",
+    "institutionName": "개발행위허가",
+    "nodeId": "D02",
+    "name": "개발행위허가 신청",
+    "action": "신청",
+    "actorRaw": "신청인",
+    "type": "task",
+    "outputs": [
+      "개발행위허가 신청서",
+      "설계도서",
+      "피해방지계획"
+    ],
+    "inputs": [],
+    "deadlineRaw": "내부 목표 14일",
+    "legal": [
+      {
+        "law": "국토의 계획 및 이용에 관한 법률",
+        "article": "제57조(개발행위허가의 절차)",
+        "text": "개발행위를 하려는 자는 설계도서 등을 갖추어 허가를 신청한다."
+      },
+      {
+        "law": "국토의 계획 및 이용에 관한 법률 시행규칙",
+        "article": "제9조(개발행위허가신청서)",
+        "text": "별지 제5호서식 신청서에 토지 사용권원, 배치도·설계도서, 공공시설 조서, 위해방지·환경오염방지 설계도서 등을 첨부하여 제출한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:development-permit:D03",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "development-permit",
+    "institutionName": "개발행위허가",
+    "nodeId": "D03",
+    "name": "신청서 접수·형식 검토",
+    "action": "접수·형식검토",
+    "actorRaw": "시장·군수·구청장",
+    "type": "task",
+    "outputs": [
+      "접수증",
+      "형식검토 결과"
+    ],
+    "inputs": [
+      "개발행위허가 신청서",
+      "설계도서"
+    ],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "국토의 계획 및 이용에 관한 법률",
+        "article": "제57조(개발행위허가의 절차)",
+        "text": "허가권자는 신청 내용의 적정성을 검토한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:development-permit:D03B",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "development-permit",
+    "institutionName": "개발행위허가",
+    "nodeId": "D03B",
+    "name": "개발행위복합민원 일괄협의회 개최",
+    "action": "일괄협의회 개최",
+    "actorRaw": "시장·군수·구청장",
+    "type": "task",
+    "outputs": [
+      "일괄협의회 개최 통보"
+    ],
+    "inputs": [],
+    "deadlineRaw": "개발행위허가 신청일부터 10일 이내 개최 (개최 3일 전까지 관계기관 통보)",
+    "legal": [
+      {
+        "law": "국토의 계획 및 이용에 관한 법률",
+        "article": "제61조의2(개발행위복합민원 일괄협의회)",
+        "text": "특별시장·광역시장·특별자치시장·특별자치도지사·시장 또는 군수는 제61조제3항에 따라 관계 행정기관의 장과 협의하기 위하여 개발행위복합민원 일괄협의회를 개최하여야 한다."
+      },
+      {
+        "law": "국토의 계획 및 이용에 관한 법률 시행령",
+        "article": "제59조의2제1항(개발행위복합민원 일괄협의회)",
+        "text": "개발행위허가 신청일부터 10일 이내에 개최하여야 하며, 개최 3일 전까지 관계 행정기관의 장에게 알려야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:development-permit:D04",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "development-permit",
+    "institutionName": "개발행위허가",
+    "nodeId": "D04",
+    "name": "인허가의제 관계기관 협의 요청",
+    "action": "협의 요청",
+    "actorRaw": "시장·군수·구청장",
+    "type": "task",
+    "outputs": [
+      "의제 협의 요청 공문"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "국토의 계획 및 이용에 관한 법률",
+        "article": "제61조(관련 인·허가등의 의제)",
+        "text": "허가에 관하여 관계 행정기관의 장과 협의한 사항은 관련 인허가를 받은 것으로 본다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:development-permit:D05",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "development-permit",
+    "institutionName": "개발행위허가",
+    "nodeId": "D05",
+    "name": "관계기관 의제 협의·회신",
+    "action": "협의 회신",
+    "actorRaw": "관계 행정기관",
+    "type": "task",
+    "outputs": [
+      "농지·산지 전용 협의 회신",
+      "환경·도로 협의 회신"
+    ],
+    "inputs": [
+      "의제 협의 요청 공문",
+      "설계도서"
+    ],
+    "deadlineRaw": "협의 요청일로부터 20일 이내 (기간 내 미제출 시 협의 완료 간주, 연장 불인정)",
+    "legal": [
+      {
+        "law": "국토의 계획 및 이용에 관한 법률",
+        "article": "제61조제4항(관련 인·허가등의 의제)",
+        "text": "협의 요청을 받은 관계 행정기관의 장은 요청받은 날부터 20일 이내에 의견을 제출하여야 하며, 그 기간 내에 의견을 제출하지 아니하면 협의가 이루어진 것으로 본다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:development-permit:D06",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "development-permit",
+    "institutionName": "개발행위허가",
+    "nodeId": "D06",
+    "name": "허가기준 검토(입지·경관·기반시설·재해)",
+    "action": "허가기준 검토",
+    "actorRaw": "시장·군수·구청장",
+    "type": "task",
+    "outputs": [
+      "허가기준 검토서"
+    ],
+    "inputs": [
+      "설계도서",
+      "협의 회신"
+    ],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "국토의 계획 및 이용에 관한 법률",
+        "article": "제58조(개발행위허가의 기준)",
+        "text": "용도지역별 특성, 주변 환경·경관과의 조화, 기반시설 등을 기준으로 검토한다."
+      },
+      {
+        "law": "국토의 계획 및 이용에 관한 법률 시행령",
+        "article": "제55조(개발행위허가의 규모)",
+        "text": "형질변경 면적 상한(주거·상업·자연녹지 1만㎡ 미만, 공업 3만㎡ 미만, 보전녹지 5천㎡ 미만, 관리·농림 3만㎡ 미만 등)을 용도지역별로 정한다."
+      },
+      {
+        "law": "국토의 계획 및 이용에 관한 법률 시행령",
+        "article": "제56조(개발행위허가의 기준)",
+        "text": "허가기준은 별표 1의2와 같으며, 국토교통부장관은 세부 검토기준을 정할 수 있다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:development-permit:D07",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "development-permit",
+    "institutionName": "개발행위허가",
+    "nodeId": "D07",
+    "name": "도시계획위원회 심의 대상 여부",
+    "action": "심의대상 판정",
+    "actorRaw": "시장·군수·구청장",
+    "type": "gateway",
+    "outputs": [
+      "심의대상 판정서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "국토의 계획 및 이용에 관한 법률",
+        "article": "제59조(개발행위에 대한 도시계획위원회의 심의)",
+        "text": "대통령령으로 정하는 개발행위는 도시계획위원회의 심의를 거친다."
+      },
+      {
+        "law": "국토의 계획 및 이용에 관한 법률 시행령",
+        "article": "제57조(개발행위에 대한 도시계획위원회의 심의 등)",
+        "text": "심의 대상은 규모별로 나뉘어 면적 30만㎡ 미만은 시·군·구, 30만㎡ 이상 1㎢ 미만은 시·도, 1㎢ 이상은 중앙도시계획위원회 심의를 거친다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:development-permit:D08",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "development-permit",
+    "institutionName": "개발행위허가",
+    "nodeId": "D08",
+    "name": "지방도시계획위원회 심의",
+    "action": "심의",
+    "actorRaw": "지방도시계획위원회",
+    "type": "gateway",
+    "outputs": [
+      "심의 결과"
+    ],
+    "inputs": [
+      "허가기준 검토서",
+      "심의자료"
+    ],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "국토의 계획 및 이용에 관한 법률",
+        "article": "제59조(개발행위에 대한 도시계획위원회의 심의)",
+        "text": "심의 대상 개발행위는 위원회 심의를 거쳐 허가 여부를 결정한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:development-permit:D09",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "development-permit",
+    "institutionName": "개발행위허가",
+    "nodeId": "D09",
+    "name": "보완 요구",
+    "action": "보완 요구",
+    "actorRaw": "시장·군수·구청장",
+    "type": "task",
+    "outputs": [
+      "보완 요구서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "국토의 계획 및 이용에 관한 법률",
+        "article": "제57조(개발행위허가의 절차)",
+        "text": "보완 요구 권한이 §57에 명시되지 않음 — 실제 근거는 행정절차법 또는 개발행위허가운영지침(행정규칙) 수준으로 추정되며, 국토계획법 §57 직접 근거 확인 불가."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:development-permit:D10",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "development-permit",
+    "institutionName": "개발행위허가",
+    "nodeId": "D10",
+    "name": "보완서 제출",
+    "action": "보완 제출",
+    "actorRaw": "신청인",
+    "type": "task",
+    "outputs": [
+      "보완서",
+      "보완 설계도서"
+    ],
+    "inputs": [
+      "보완 요구서"
+    ],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "국토의 계획 및 이용에 관한 법률",
+        "article": "제57조(개발행위허가의 절차)",
+        "text": "신청인은 보완 요구에 따라 자료를 보완하여 재제출한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:development-permit:D11",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "development-permit",
+    "institutionName": "개발행위허가",
+    "nodeId": "D11",
+    "name": "허가·조건 부과 (조건부 시 신청인 의견청취)",
+    "action": "허가·조건 부과",
+    "actorRaw": "시장·군수·구청장",
+    "type": "task",
+    "outputs": [
+      "개발행위허가서(조건부)"
+    ],
+    "inputs": [
+      "심의 결과",
+      "허가기준 검토서"
+    ],
+    "deadlineRaw": "신청 접수 후 15일 이내 (도시계획위원회 심의 및 관계기관 협의 기간 제외)",
+    "legal": [
+      {
+        "law": "국토의 계획 및 이용에 관한 법률",
+        "article": "제57조제2항(개발행위허가의 절차)",
+        "text": "특별시장·광역시장 등은 개발행위허가의 신청에 대하여 특별한 사유가 없으면 대통령령으로 정하는 기간 이내에 허가 또는 불허가의 처분을 하여야 한다."
+      },
+      {
+        "law": "국토의 계획 및 이용에 관한 법률 시행령",
+        "article": "제54조제1항(개발행위허가의 절차 등)",
+        "text": "법 제57조제2항에서 '대통령령으로 정하는 기간'이란 15일(도시계획위원회의 심의를 거쳐야 하거나 관계 행정기관의 장과 협의를 하여야 하는 경우에는 심의 또는 협의기간을 제외한다)을 말한다."
+      },
+      {
+        "law": "국토의 계획 및 이용에 관한 법률",
+        "article": "제57조제4항(개발행위허가의 절차)",
+        "text": "조건을 붙여 개발행위허가를 할 수 있다."
+      },
+      {
+        "law": "국토의 계획 및 이용에 관한 법률 시행령",
+        "article": "제54조제2항(개발행위허가의 절차 등)",
+        "text": "조건을 붙이려는 때에는 미리 개발행위허가를 신청한 자의 의견을 들어야 한다."
+      },
+      {
+        "law": "국토의 계획 및 이용에 관한 법률",
+        "article": "제58조(개발행위허가의 기준)",
+        "text": "허가기준 충족 여부에 따라 허가한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:development-permit:D12",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "development-permit",
+    "institutionName": "개발행위허가",
+    "nodeId": "D12",
+    "name": "이행보증금 예치",
+    "action": "이행보증금 예치",
+    "actorRaw": "신청인",
+    "type": "task",
+    "outputs": [
+      "이행보증금 예치증서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "국토의 계획 및 이용에 관한 법률",
+        "article": "제60조(개발행위허가의 이행 보증 등)",
+        "text": "기반시설 훼손 방지 등을 위해 이행보증금을 예치하게 할 수 있다."
+      },
+      {
+        "law": "국토의 계획 및 이용에 관한 법률 시행령",
+        "article": "제59조(개발행위허가의 이행담보 등)",
+        "text": "이행보증금은 총공사비의 20% 이내로 산정해 현금·보증서로 예치하며, 준공검사를 받으면 즉시 반환한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:development-permit:D13",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "development-permit",
+    "institutionName": "개발행위허가",
+    "nodeId": "D13",
+    "name": "공사 시행",
+    "action": "공사 시행",
+    "actorRaw": "신청인",
+    "type": "task",
+    "outputs": [
+      "공사 착수·시행"
+    ],
+    "inputs": [
+      "개발행위허가서(조건부)"
+    ],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "국토의 계획 및 이용에 관한 법률",
+        "article": "제56조(개발행위의 허가)",
+        "text": "허가받은 내용에 따라 개발행위를 시행한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:development-permit:D14",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "development-permit",
+    "institutionName": "개발행위허가",
+    "nodeId": "D14",
+    "name": "준공검사 신청",
+    "action": "준공검사 신청",
+    "actorRaw": "신청인",
+    "type": "task",
+    "outputs": [
+      "준공검사 신청서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "국토의 계획 및 이용에 관한 법률",
+        "article": "제62조(준공검사)",
+        "text": "개발행위를 완료하면 준공검사를 받아야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:development-permit:D15",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "development-permit",
+    "institutionName": "개발행위허가",
+    "nodeId": "D15",
+    "name": "준공검사·준공검사필증 교부",
+    "action": "준공검사",
+    "actorRaw": "시장·군수·구청장",
+    "type": "gateway",
+    "outputs": [
+      "준공검사조서",
+      "준공검사필증"
+    ],
+    "inputs": [
+      "준공검사 신청서"
+    ],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "국토의 계획 및 이용에 관한 법률",
+        "article": "제62조(준공검사)",
+        "text": "허가권자는 준공검사를 실시하고 적합하면 준공검사필증을 교부한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:development-permit:D16",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "development-permit",
+    "institutionName": "개발행위허가",
+    "nodeId": "D16",
+    "name": "공공시설 귀속 처리",
+    "action": "귀속 처리",
+    "actorRaw": "공공시설 관리청",
+    "type": "task",
+    "outputs": [
+      "공공시설 귀속조서"
+    ],
+    "inputs": [
+      "준공검사조서"
+    ],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "국토의 계획 및 이용에 관한 법률",
+        "article": "제65조(개발행위에 따른 공공시설 등의 귀속)",
+        "text": "개발행위로 설치된 공공시설은 그 시설을 관리할 관리청에 무상 귀속된다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:development-permit:D17",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "development-permit",
+    "institutionName": "개발행위허가",
+    "nodeId": "D17",
+    "name": "인허가시스템 기록·공개",
+    "action": "기록·공개",
+    "actorRaw": "지자체 인허가시스템·토지이음",
+    "type": "system",
+    "outputs": [
+      "허가 기록",
+      "토지이음 공개자료"
+    ],
+    "inputs": [
+      "개발행위허가서(조건부)"
+    ],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "국토의 계획 및 이용에 관한 법률",
+        "article": "제57조(개발행위허가의 절차)",
+        "text": "허가 내용을 인허가시스템 및 국토이용정보체계에 기록·공개한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:one-stop-permit-consultation:P01",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "one-stop-permit-consultation",
+    "institutionName": "인허가 일괄협의·의제 처리",
+    "nodeId": "P01",
+    "name": "주된 인허가 신청·관련 인허가 서류 병합 제출",
+    "action": "주된 인허가를 신청하면서 관련 인허가에 필요한 서류를 함께 제출(불가피 시 행정청이 정하는 별도 기한까지)",
+    "actorRaw": "신청인(당사자)",
+    "type": "task",
+    "outputs": [
+      "주된 인허가 신청서",
+      "관련 인허가 서류"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "행정기본법",
+        "article": "제24조(인허가의제의 기준)",
+        "text": "② 인허가의제를 받으려면 주된 인허가를 신청할 때 관련 인허가에 필요한 서류를 함께 제출하여야 한다. 다만, 불가피한 사유로 함께 제출할 수 없는 경우에는 주된 인허가 행정청이 별도로 정하는 기한까지 제출할 수 있다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:one-stop-permit-consultation:P02",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "one-stop-permit-consultation",
+    "institutionName": "인허가 일괄협의·의제 처리",
+    "nodeId": "P02",
+    "name": "관련 인허가 사전 협의 요청",
+    "action": "주된 인허가를 하기 전에 관련 인허가에 관하여 관련 인허가 행정청에 미리 협의 요청",
+    "actorRaw": "주된 인허가 행정청",
+    "type": "task",
+    "outputs": [
+      "협의 요청 공문"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "행정기본법",
+        "article": "제24조(인허가의제의 기준)",
+        "text": "③ 주된 인허가 행정청은 주된 인허가를 하기 전에 관련 인허가에 관하여 미리 관련 인허가 행정청과 협의하여야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:one-stop-permit-consultation:P03",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "one-stop-permit-consultation",
+    "institutionName": "인허가 일괄협의·의제 처리",
+    "nodeId": "P03",
+    "name": "관련 인허가 행정청 의견 제출(20일)",
+    "action": "협의 요청받은 날부터 20일 이내 의견 제출, 기간 내 미제출 시 협의가 된 것으로 간주",
+    "actorRaw": "관련 인허가 행정청",
+    "type": "task",
+    "outputs": [
+      "협의 의견서"
+    ],
+    "inputs": [],
+    "deadlineRaw": "요청받은 날부터 20일 이내(미제출 시 협의 간주)",
+    "legal": [
+      {
+        "law": "행정기본법",
+        "article": "제24조(인허가의제의 기준)",
+        "text": "④ 관련 인허가 행정청은 협의를 요청받으면 요청받은 날부터 20일 이내에 의견을 제출하여야 한다. 기간 내에 협의 여부에 관하여 의견을 제출하지 아니하면 협의가 된 것으로 본다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:one-stop-permit-consultation:P04",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "one-stop-permit-consultation",
+    "institutionName": "인허가 일괄협의·의제 처리",
+    "nodeId": "P04",
+    "name": "명시 규정 있는 심의·의견청취 절차",
+    "action": "관련 인허가에 필요한 심의·의견청취 등 절차는 법률에 인허가의제 시에도 거친다는 명시 규정이 있는 경우에만 진행(분기)",
+    "actorRaw": "관련 인허가 행정청",
+    "type": "gateway",
+    "outputs": [
+      "심의·의견청취 결과"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "행정기본법",
+        "article": "제24조(인허가의제의 기준)",
+        "text": "⑤ 협의를 요청받은 관련 인허가 행정청은 해당 법령을 위반하여 협의에 응해서는 아니 된다. 다만, 관련 인허가에 필요한 심의, 의견 청취 등 절차는 법률에 인허가의제 시에도 해당 절차를 거친다는 명시적인 규정이 있는 경우에만 이를 거친다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:one-stop-permit-consultation:P05",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "one-stop-permit-consultation",
+    "institutionName": "인허가 일괄협의·의제 처리",
+    "nodeId": "P05",
+    "name": "주된 인허가 처분·관련 인허가 의제",
+    "action": "협의된 사항에 대해 주된 인허가 처분, 협의된 관련 인허가를 받은 것으로 의제(효과는 해당 법률에 규정된 관련 인허가에 한정)",
+    "actorRaw": "주된 인허가 행정청",
+    "type": "task",
+    "outputs": [
+      "주된 인허가 처분서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "행정기본법",
+        "article": "제25조(인허가의제의 효과)",
+        "text": "① 제24조제3항ㆍ제4항에 따라 협의가 된 사항에 대해서는 주된 인허가를 받았을 때 관련 인허가를 받은 것으로 본다. ② 인허가의제의 효과는 주된 인허가의 해당 법률에 규정된 관련 인허가에 한정된다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:one-stop-permit-consultation:P06",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "one-stop-permit-consultation",
+    "institutionName": "인허가 일괄협의·의제 처리",
+    "nodeId": "P06",
+    "name": "관련 인허가 행정청 사후관리",
+    "action": "의제된 관련 인허가를 직접 한 것으로 보아 관계 법령에 따른 관리·감독 등 필요한 조치",
+    "actorRaw": "관련 인허가 행정청",
+    "type": "task",
+    "outputs": [
+      "관리·감독 조치"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "행정기본법",
+        "article": "제26조(인허가의제의 사후관리 등)",
+        "text": "① 인허가의제의 경우 관련 인허가 행정청은 관련 인허가를 직접 한 것으로 보아 관계 법령에 따른 관리ㆍ감독 등 필요한 조치를 하여야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:one-stop-permit-consultation:P07",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "one-stop-permit-consultation",
+    "institutionName": "인허가 일괄협의·의제 처리",
+    "nodeId": "P07",
+    "name": "주된 인허가 변경 시 준용(loop)",
+    "action": "주된 인허가를 변경하는 경우 제24조·제25조 및 사후관리 규정을 준용하여 재협의·재의제(변경 loop)",
+    "actorRaw": "주된 인허가 행정청",
+    "type": "task",
+    "outputs": [
+      "변경 처분서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "행정기본법",
+        "article": "제26조(인허가의제의 사후관리 등)",
+        "text": "② 주된 인허가가 있은 후 이를 변경하는 경우에는 제24조ㆍ제25조 및 이 조 제1항을 준용한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:one-stop-permit-consultation:P08",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "one-stop-permit-consultation",
+    "institutionName": "인허가 일괄협의·의제 처리",
+    "nodeId": "P08",
+    "name": "주된 인허가·의제 결과 확인",
+    "action": "주된 인허가 처분과 함께 의제된 관련 인허가의 범위와 조건을 확인한다.",
+    "actorRaw": "신청인",
+    "type": "notice",
+    "outputs": [
+      "주된 인허가 처분서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "행정기본법",
+        "article": "제25조(인허가의제의 효과)",
+        "text": "주된 인허가가 있으면 협의된 관련 인허가도 함께 받은 것으로 본다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:industrial-complex-development:P01",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P01",
+    "name": "지정 요청·입지 조사",
+    "action": "지정 요청·입지 조사",
+    "actorRaw": "제안자(지자체·민간)",
+    "type": "task",
+    "outputs": [
+      "요청"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업입지 및 개발에 관한 법률 시행령",
+        "article": "제13조(민간기업등의 산업단지지정요청등)",
+        "text": "민간기업등의 산업단지지정요청등"
+      },
+      {
+        "law": "산업입지 및 개발에 관한 법률",
+        "article": "제6조(국가산업단지의 지정)",
+        "text": "국가산업단지의 지정"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:industrial-complex-development:P02",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P02",
+    "name": "지정 협의",
+    "action": "지정 협의",
+    "actorRaw": "환경·관계기관",
+    "type": "task",
+    "outputs": [
+      "협의"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업입지 및 개발에 관한 법률 시행령",
+        "article": "제8조의2(산업단지의 지정에 관한 협의)",
+        "text": "산업단지의 지정에 관한 협의"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:industrial-complex-development:P03",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P03",
+    "name": "산업단지 지정",
+    "action": "산업단지 지정",
+    "actorRaw": "지정권자",
+    "type": "gateway",
+    "outputs": [
+      "지정"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업입지 및 개발에 관한 법률",
+        "article": "제6조(국가산업단지의 지정)",
+        "text": "국가산업단지의 지정"
+      },
+      {
+        "law": "산업입지 및 개발에 관한 법률",
+        "article": "제7조(일반산업단지의 지정)",
+        "text": "일반산업단지의 지정"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:industrial-complex-development:P04",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P04",
+    "name": "지정·개발계획 고시 열람",
+    "action": "지정·개발계획 고시 열람",
+    "actorRaw": "토지소유자·주민",
+    "type": "notice",
+    "outputs": [
+      "고시 열람"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업입지 및 개발에 관한 법률",
+        "article": "제7조의4(산업단지 지정의 고시 등)",
+        "text": "산업단지 지정의 고시 등"
+      },
+      {
+        "law": "산업입지 및 개발에 관한 법률 시행령",
+        "article": "제9조(산업단지지정 또는 개발계획의 고시등)",
+        "text": "산업단지지정 또는 개발계획의 고시등"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:industrial-complex-development:P05",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P05",
+    "name": "개발계획 수립",
+    "action": "개발계획 수립",
+    "actorRaw": "사업시행자",
+    "type": "task",
+    "outputs": [
+      "개발계획"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업입지 및 개발에 관한 법률 시행령",
+        "article": "제7조(산업단지개발계획 등)",
+        "text": "산업단지개발계획 등"
+      },
+      {
+        "law": "산업입지 및 개발에 관한 법률",
+        "article": "제16조(산업단지개발사업의 시행자)",
+        "text": "산업단지개발사업의 시행자"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:industrial-complex-development:P06",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P06",
+    "name": "환경영향평가서 초안·주민 의견",
+    "action": "환경영향평가서 초안·주민 의견",
+    "actorRaw": "토지소유자·주민",
+    "type": "notice",
+    "outputs": [
+      "공람",
+      "의견"
+    ],
+    "inputs": [],
+    "deadlineRaw": "§25 20일 이상 갈음 가능",
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제25조(주민 등의 의견 수렴)",
+        "text": "주민 등의 의견 수렴"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:industrial-complex-development:P07",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P07",
+    "name": "주민 의견 재수렴 신청",
+    "action": "주민 의견 재수렴 신청",
+    "actorRaw": "토지소유자·주민",
+    "type": "task",
+    "outputs": [
+      "재수렴"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제26조(주민 등의 의견 재수렴)",
+        "text": "주민 등의 의견 재수렴"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:industrial-complex-development:P08",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P08",
+    "name": "환경영향평가 협의",
+    "action": "환경영향평가 협의",
+    "actorRaw": "환경·관계기관",
+    "type": "gateway",
+    "outputs": [
+      "협의"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제27조(환경영향평가서의 작성 및 협의 요청 등)",
+        "text": "환경영향평가서의 작성 및 협의 요청 등"
+      },
+      {
+        "law": "환경영향평가법",
+        "article": "제28조(환경영향평가서의 검토 등)",
+        "text": "환경영향평가서의 검토 등"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:industrial-complex-development:P09",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P09",
+    "name": "보완",
+    "action": "보완",
+    "actorRaw": "사업시행자",
+    "type": "task",
+    "outputs": [
+      "보완"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제32조(재협의)",
+        "text": "재협의"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:industrial-complex-development:P10",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P10",
+    "name": "실시계획 승인·고시",
+    "action": "실시계획 승인·고시",
+    "actorRaw": "지정권자",
+    "type": "task",
+    "outputs": [
+      "실시계획"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업입지 및 개발에 관한 법률",
+        "article": "제17조(국가산업단지개발실시계획의 승인)",
+        "text": "국가산업단지개발실시계획의 승인"
+      },
+      {
+        "law": "산업입지 및 개발에 관한 법률",
+        "article": "제18조(일반산업단지개발실시계획의 승인)",
+        "text": "일반산업단지개발실시계획의 승인"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:industrial-complex-development:P11",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P11",
+    "name": "토지 수용·보상 협의",
+    "action": "토지 수용·보상 협의",
+    "actorRaw": "토지소유자·주민",
+    "type": "task",
+    "outputs": [
+      "보상 협의"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업입지 및 개발에 관한 법률",
+        "article": "제22조(토지수용)",
+        "text": "토지수용"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:industrial-complex-development:P12",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P12",
+    "name": "환지·동의",
+    "action": "환지·동의",
+    "actorRaw": "토지소유자·주민",
+    "type": "task",
+    "outputs": [
+      "환지",
+      "동의"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업입지 및 개발에 관한 법률",
+        "article": "제24조(토지소유자에 대한 환지)",
+        "text": "토지소유자에 대한 환지"
+      },
+      {
+        "law": "산업입지 및 개발에 관한 법률",
+        "article": "제39조의8(토지소유자 등의 동의)",
+        "text": "토지소유자 등의 동의"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:industrial-complex-development:P13",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P13",
+    "name": "사전공사 금지 준수",
+    "action": "사전공사 금지 준수",
+    "actorRaw": "사업시행자",
+    "type": "task",
+    "outputs": [
+      "착수 전 확인"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "환경영향평가법",
+        "article": "제34조(사전공사의 금지 등)",
+        "text": "사전공사의 금지 등"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:industrial-complex-development:P14",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P14",
+    "name": "공사 시행",
+    "action": "공사 시행",
+    "actorRaw": "사업시행자",
+    "type": "task",
+    "outputs": [
+      "공사"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업입지 및 개발에 관한 법률",
+        "article": "제16조(산업단지개발사업의 시행자)",
+        "text": "산업단지개발사업의 시행자"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:industrial-complex-development:P15",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P15",
+    "name": "준공인가",
+    "action": "준공인가",
+    "actorRaw": "지정권자",
+    "type": "gateway",
+    "outputs": [
+      "준공"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업입지 및 개발에 관한 법률",
+        "article": "제37조(개발사업의 준공인가)",
+        "text": "개발사업의 준공인가"
+      },
+      {
+        "law": "산업입지 및 개발에 관한 법률 시행령",
+        "article": "제36조(준공인가)",
+        "text": "준공인가"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:industrial-complex-development:P16",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P16",
+    "name": "분양·처분",
+    "action": "분양·처분",
+    "actorRaw": "사업시행자",
+    "type": "task",
+    "outputs": [
+      "분양"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업입지 및 개발에 관한 법률",
+        "article": "제38조(개발한 토지ㆍ시설 등의 처분)",
+        "text": "개발한 토지ㆍ시설 등의 처분"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:industrial-complex-development:P17",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P17",
+    "name": "입주·지원 신청",
+    "action": "입주·지원 신청",
+    "actorRaw": "입주기업",
+    "type": "task",
+    "outputs": [
+      "입주"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업입지 및 개발에 관한 법률",
+        "article": "제39조의14(입주기업 지원대책)",
+        "text": "입주기업 지원대책"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:industrial-complex-development:P18",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P18",
+    "name": "입주 지원 결과 수령",
+    "action": "입주 지원 결과 수령",
+    "actorRaw": "입주기업",
+    "type": "notice",
+    "outputs": [
+      "지원 결정"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업입지 및 개발에 관한 법률",
+        "article": "제39조의14(입주기업 지원대책)",
+        "text": "입주기업 지원대책"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:industrial-complex-development:P19",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P19",
+    "name": "지정 공고·주민 의견청취",
+    "action": "지정 공고에 대한 주민·관계전문가 의견 제출",
+    "actorRaw": "토지소유자·주민",
+    "type": "task",
+    "outputs": [
+      "주민 의견"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업입지 및 개발에 관한 법률",
+        "article": "제10조(주민 등의 의견청취)",
+        "text": "산업단지지정권자는 산업단지를 지정하려는 경우 이를 공고하여 주민 및 관계 전문가 등의 의견을 들어야 하고, 그 의견이 타당하다고 인정할 때에는 이를 반영하여야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:farmland-use-permission-conversion:P01",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "farmland-use-permission-conversion",
+    "institutionName": "농지전용 허가·협의·복구",
+    "nodeId": "P01",
+    "name": "전용 경로 판정(허가/협의/신고)",
+    "action": "농지 전용은 농림축산식품부장관의 허가가 원칙이다. 도시지역·계획관리지역에서 협의를 거친 농지, 신고 대상 시설(농업인 주택·농축산업용 시설 등)은 예외 경로를 탄다.",
+    "actorRaw": "전용하려는 자",
+    "type": "gateway",
+    "outputs": [
+      "경로 판정"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "농지법",
+        "article": "제34조제1항",
+        "text": "농지를 전용하려는 자는 도시지역 또는 계획관리지역에 있는 농지로서 협의를 거친 농지를 전용하는 경우, 농지전용신고를 하고 전용하는 경우 등 외에는 대통령령으로 정하는 바에 따라 농림축산식품부장관의 허가를 받아야 한다. 허가받은 농지의 면적 또는 경계 등 중요 사항을 변경하려는 경우에도 또한 같다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:farmland-use-permission-conversion:P02",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "farmland-use-permission-conversion",
+    "institutionName": "농지전용 허가·협의·복구",
+    "nodeId": "P02",
+    "name": "농지전용허가 신청",
+    "action": "대통령령으로 정하는 바에 따라 허가(다른 법률에 따라 의제되는 협의 포함)를 신청한다.",
+    "actorRaw": "전용하려는 자",
+    "type": "task",
+    "outputs": [
+      "농지전용허가 신청서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "농지법",
+        "article": "제34조제1항",
+        "text": "농지를 전용하려는 자는 대통령령으로 정하는 바에 따라 농림축산식품부장관의 허가(다른 법률에 따라 농지전용허가가 의제되는 협의를 포함한다)를 받아야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:farmland-use-permission-conversion:P03",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "farmland-use-permission-conversion",
+    "institutionName": "농지전용 허가·협의·복구",
+    "nodeId": "P03",
+    "name": "농지전용협의(지역·시설 지정 시)",
+    "action": "도시지역에 주거·상업·공업지역을 지정하거나 도시·군계획시설을 결정할 때, 계획관리지역에 지구단위계획구역을 지정할 때 예정지에 농지가 포함되면 농림축산식품부장관과 미리 협의한다. 산업단지 지정 등 의제 협의가 이 경로를 탄다.",
+    "actorRaw": "주무부장관·지방자치단체의 장",
+    "type": "task",
+    "outputs": [
+      "농지전용 협의"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "농지법",
+        "article": "제34조제2항",
+        "text": "주무부장관이나 지방자치단체의 장은 도시지역에 주거지역·상업지역·공업지역을 지정하거나 도시·군계획시설을 결정할 때 예정지에 농지가 포함되어 있는 경우, 계획관리지역에 지구단위계획구역을 지정할 때 예정지에 농지가 포함되어 있는 경우 등에는 농림축산식품부장관과 미리 농지전용에 관한 협의를 하여야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:farmland-use-permission-conversion:P04",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "farmland-use-permission-conversion",
+    "institutionName": "농지전용 허가·협의·복구",
+    "nodeId": "P04",
+    "name": "농지전용신고(소규모 시설)",
+    "action": "농업인 주택, 농축산업용 시설, 공동생활 편의시설, 어업용 시설 부지로 전용하려면 시장·군수·자치구구청장에게 신고하고, 적합하면 수리해야 한다.",
+    "actorRaw": "전용하려는 자",
+    "type": "task",
+    "outputs": [
+      "농지전용신고(수리)"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "농지법",
+        "article": "제35조제1항·제2항",
+        "text": "농업인 주택·농축산업용 시설, 어린이놀이터·마을회관 등 공동생활 편의 시설, 연구 시설·어업용 시설 부지로 전용하려는 자는 시장·군수 또는 자치구구청장에게 신고하여야 하며, 신고를 받은 경우 내용을 검토하여 이 법에 적합하면 신고를 수리하여야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:farmland-use-permission-conversion:P05",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "farmland-use-permission-conversion",
+    "institutionName": "농지전용 허가·협의·복구",
+    "nodeId": "P05",
+    "name": "농지보전부담금 납부",
+    "action": "허가·협의·신고 경로 모두 농지보전부담금을 허가·신고 전까지 납부해야 한다. 공공기관의 산업단지 시설용지 전용 등은 분할납부가 가능하며 납입보증보험증서 예치가 필요하다. 국가·지자체의 공용 목적 전용 등은 감면된다.",
+    "actorRaw": "전용하려는 자",
+    "type": "task",
+    "outputs": [
+      "농지보전부담금 납부 확인"
+    ],
+    "inputs": [],
+    "deadlineRaw": "농지전용허가·농지전용신고(의제되는 인가·허가·승인 포함) 전까지 전부 또는 일부 납부",
+    "legal": [
+      {
+        "law": "농지법",
+        "article": "제38조제1항·제2항·제4항·제6항",
+        "text": "농지전용허가를 받는 자, 협의를 거친 농지를 전용하려는 자, 신고를 하고 전용하려는 자는 농지보전부담금을 내야 한다. 전용하려는 자는 부담금의 전부 또는 일부를 허가·신고 전까지 납부하여야 한다. 공공기관·지방공기업이 산업단지의 시설용지로 전용하는 경우 등에는 나누어 내게 할 수 있다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:farmland-use-permission-conversion:P06",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "farmland-use-permission-conversion",
+    "institutionName": "농지전용 허가·협의·복구",
+    "nodeId": "P06",
+    "name": "허가·전용 실행",
+    "action": "부담금 납부를 확인하고 허가한다. 부담금을 낸 뒤 허가를 받지 못하면 환급된다.",
+    "actorRaw": "농림축산식품부장관",
+    "type": "gateway",
+    "outputs": [
+      "농지전용허가서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "농지법",
+        "article": "제38조제5항",
+        "text": "농지보전부담금을 낸 자의 허가가 취소된 경우, 사업계획이 변경된 경우, 부담금을 납부하고 허가를 받지 못한 경우, 전용 면적이 줄어든 경우에는 그에 해당하는 농지보전부담금을 환급하여야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:farmland-use-permission-conversion:P07",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "farmland-use-permission-conversion",
+    "institutionName": "농지전용 허가·협의·복구",
+    "nodeId": "P07",
+    "name": "용도변경 승인",
+    "action": "전용 목적사업에 사용된 토지를 대통령령으로 정하는 기간 이내에 다른 목적으로 사용하려면 시장·군수·자치구구청장의 승인을 받아야 한다. 부담금 감면 비율이 다른 시설로 바꾸면 차액 부담금을 낸다.",
+    "actorRaw": "전용한 자",
+    "type": "task",
+    "outputs": [
+      "용도변경 승인서"
+    ],
+    "inputs": [],
+    "deadlineRaw": "전용 후 대통령령으로 정하는 기간 이내에 다른 목적으로 사용하려면 승인 필요",
+    "legal": [
+      {
+        "law": "농지법",
+        "article": "제40조제1항·제2항",
+        "text": "농지전용허가·협의·신고 절차를 거쳐 전용 목적사업에 사용되고 있거나 사용된 토지를 대통령령으로 정하는 기간 이내에 다른 목적으로 사용하려는 경우에는 시장·군수 또는 자치구구청장의 승인을 받아야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:farmland-use-permission-conversion:P08",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "farmland-use-permission-conversion",
+    "institutionName": "농지전용 허가·협의·복구",
+    "nodeId": "P08",
+    "name": "허가취소·조치명령",
+    "action": "부정한 방법의 허가, 허가 목적·조건 위반, 2년 이상 미착수·1년 이상 중단, 부담금 미납 등의 경우 허가취소·공사중지·사업계획 변경 등을 명할 수 있다. 조치명령 위반은 필요적 취소다. 협의 전용의 경우 2년 내 미착수 시 관계 기관에 승인 취소를 요청할 수 있다.",
+    "actorRaw": "농림축산식품부장관·시장 등",
+    "type": "gateway",
+    "outputs": [
+      "허가취소·조치명령(해당 시)"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "농지법",
+        "article": "제39조제1항·제2항",
+        "text": "거짓이나 부정한 방법으로 허가를 받은 경우, 허가 목적이나 조건을 위반한 경우, 정당한 사유 없이 최초 허가일부터 2년 이상 목적사업에 착수하지 아니한 경우, 농지보전부담금을 내지 아니한 경우 등에는 허가를 취소하거나 공사의 중지, 사업규모의 축소 등 조치를 명할 수 있다. 조치명령을 위반한 경우에는 허가를 취소하여야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:forestland-conversion:P01",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "forestland-conversion",
+    "institutionName": "산지전용 허가",
+    "nodeId": "P01",
+    "name": "산지·제한지역 확인",
+    "action": "산지·제한지역 확인",
+    "actorRaw": "사업시행자",
+    "type": "task",
+    "outputs": [
+      "해당성"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산지관리법",
+        "article": "제3조(산지관리의 기본원칙)",
+        "text": "산지관리의 기본원칙"
+      },
+      {
+        "law": "산지관리법",
+        "article": "제9조(산지전용ㆍ일시사용제한지역의 지정)",
+        "text": "산지전용ㆍ일시사용제한지역의 지정"
+      },
+      {
+        "law": "산지관리법",
+        "article": "제10조(산지전용ㆍ일시사용제한지역에서의 행위제한)",
+        "text": "산지전용ㆍ일시사용제한지역에서의 행위제한"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:forestland-conversion:P02",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "forestland-conversion",
+    "institutionName": "산지전용 허가",
+    "nodeId": "P02",
+    "name": "허가·신고·일시사용 경로",
+    "action": "허가·신고·일시사용 경로",
+    "actorRaw": "사업시행자",
+    "type": "gateway",
+    "outputs": [
+      "경로"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산지관리법",
+        "article": "제14조(산지전용허가)",
+        "text": "산지전용허가"
+      },
+      {
+        "law": "산지관리법",
+        "article": "제15조(산지전용신고)",
+        "text": "산지전용신고"
+      },
+      {
+        "law": "산지관리법",
+        "article": "제15조의2(산지일시사용허가ㆍ신고)",
+        "text": "산지일시사용허가ㆍ신고"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:forestland-conversion:P03",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "forestland-conversion",
+    "institutionName": "산지전용 허가",
+    "nodeId": "P03",
+    "name": "산지전용허가 등 신청",
+    "action": "산지전용허가 등 신청",
+    "actorRaw": "사업시행자",
+    "type": "task",
+    "outputs": [
+      "신청"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산지관리법",
+        "article": "제14조(산지전용허가)",
+        "text": "산지전용허가"
+      },
+      {
+        "law": "산지관리법",
+        "article": "제15조(산지전용신고)",
+        "text": "산지전용신고"
+      },
+      {
+        "law": "산지관리법",
+        "article": "제15조의2(산지일시사용허가ㆍ신고)",
+        "text": "산지일시사용허가ㆍ신고"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:forestland-conversion:P04",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "forestland-conversion",
+    "institutionName": "산지전용 허가",
+    "nodeId": "P04",
+    "name": "허가기준·기간 심사",
+    "action": "허가기준·기간 심사",
+    "actorRaw": "산림청·지자체",
+    "type": "task",
+    "outputs": [
+      "심사"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산지관리법",
+        "article": "제17조(산지전용허가 등의 기간)",
+        "text": "산지전용허가 등의 기간"
+      },
+      {
+        "law": "산지관리법",
+        "article": "제18조(산지전용허가기준 등)",
+        "text": "산지전용허가기준 등"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:forestland-conversion:P05",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "forestland-conversion",
+    "institutionName": "산지전용 허가",
+    "nodeId": "P05",
+    "name": "산지전용타당성조사",
+    "action": "산지전용타당성조사",
+    "actorRaw": "타당성조사",
+    "type": "task",
+    "outputs": [
+      "타당성"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산지관리법",
+        "article": "제18조의2(산지전용타당성조사 등)",
+        "text": "산지전용타당성조사 등"
+      },
+      {
+        "law": "산지관리법",
+        "article": "제18조의3(산지전용타당성조사 결과 등의 공개)",
+        "text": "산지전용타당성조사 결과 등의 공개"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:forestland-conversion:P06",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "forestland-conversion",
+    "institutionName": "산지전용 허가",
+    "nodeId": "P06",
+    "name": "산주·주민 의견(해당 시)",
+    "action": "산주·주민 의견(해당 시)",
+    "actorRaw": "산주·주민",
+    "type": "notice",
+    "outputs": [
+      "의견"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산지관리법",
+        "article": "제18조의2(산지전용타당성조사 등)",
+        "text": "산지전용타당성조사 등"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:forestland-conversion:P07",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "forestland-conversion",
+    "institutionName": "산지전용 허가",
+    "nodeId": "P07",
+    "name": "보완·재신청",
+    "action": "보완·재신청",
+    "actorRaw": "사업시행자",
+    "type": "task",
+    "outputs": [
+      "보완"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산지관리법",
+        "article": "제18조의4(산지전용허가기준 등의 충족 여부 확인)",
+        "text": "산지전용허가기준 등의 충족 여부 확인"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:forestland-conversion:P08",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "forestland-conversion",
+    "institutionName": "산지전용 허가",
+    "nodeId": "P08",
+    "name": "허가·신고 수리 처분",
+    "action": "허가·신고 수리 처분",
+    "actorRaw": "산림청·지자체",
+    "type": "task",
+    "outputs": [
+      "허가서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산지관리법",
+        "article": "제14조(산지전용허가)",
+        "text": "산지전용허가"
+      },
+      {
+        "law": "산지관리법",
+        "article": "제16조(산지전용허가 등의 효력)",
+        "text": "산지전용허가 등의 효력"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:forestland-conversion:P09",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "forestland-conversion",
+    "institutionName": "산지전용 허가",
+    "nodeId": "P09",
+    "name": "허가 결과 수령",
+    "action": "허가 결과 수령",
+    "actorRaw": "사업시행자",
+    "type": "notice",
+    "outputs": [
+      "수령"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산지관리법",
+        "article": "제16조(산지전용허가 등의 효력)",
+        "text": "산지전용허가 등의 효력"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:forestland-conversion:P10",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "forestland-conversion",
+    "institutionName": "산지전용 허가",
+    "nodeId": "P10",
+    "name": "대체산림자원조성비 납부",
+    "action": "대체산림자원조성비 납부",
+    "actorRaw": "조성비·복구",
+    "type": "task",
+    "outputs": [
+      "납부"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산지관리법",
+        "article": "제19조(대체산림자원조성비)",
+        "text": "대체산림자원조성비"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:public-waters-occupation:P01",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "public-waters-occupation",
+    "institutionName": "공유수면 점·사용 허가",
+    "nodeId": "P01",
+    "name": "점용·사용 필요성 검토",
+    "action": "점용·사용 필요성 검토",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "계획"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "공유수면 관리 및 매립에 관한 법률",
+        "article": "제2조(정의)",
+        "text": "정의"
+      },
+      {
+        "law": "공유수면 관리 및 매립에 관한 법률",
+        "article": "제5조(금지행위)",
+        "text": "금지행위"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:public-waters-occupation:P02",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "public-waters-occupation",
+    "institutionName": "공유수면 점·사용 허가",
+    "nodeId": "P02",
+    "name": "관리청·금지행위 확인",
+    "action": "관리청·금지행위 확인",
+    "actorRaw": "해양수산부·관리청",
+    "type": "task",
+    "outputs": [
+      "관할"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "공유수면 관리 및 매립에 관한 법률",
+        "article": "제4조(공유수면의 관리)",
+        "text": "공유수면의 관리"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:public-waters-occupation:P03",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "public-waters-occupation",
+    "institutionName": "공유수면 점·사용 허가",
+    "nodeId": "P03",
+    "name": "허가 vs 협의·승인 경로",
+    "action": "허가 vs 협의·승인 경로",
+    "actorRaw": "사업자",
+    "type": "gateway",
+    "outputs": [
+      "경로"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "공유수면 관리 및 매립에 관한 법률",
+        "article": "제8조(공유수면의 점용ㆍ사용허가)",
+        "text": "공유수면의 점용ㆍ사용허가"
+      },
+      {
+        "law": "공유수면 관리 및 매립에 관한 법률",
+        "article": "제10조(공유수면의 점용ㆍ사용 협의 또는 승인)",
+        "text": "공유수면의 점용ㆍ사용 협의 또는 승인"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:public-waters-occupation:P04",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "public-waters-occupation",
+    "institutionName": "공유수면 점·사용 허가",
+    "nodeId": "P04",
+    "name": "점용·사용허가 또는 매립 신청",
+    "action": "점용·사용허가 또는 매립 신청",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "신청"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "공유수면 관리 및 매립에 관한 법률",
+        "article": "제8조(공유수면의 점용ㆍ사용허가)",
+        "text": "점용ㆍ사용허가"
+      },
+      {
+        "law": "공유수면 관리 및 매립에 관한 법률",
+        "article": "제28조(매립면허)",
+        "text": "매립면허"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:public-waters-occupation:P05",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "public-waters-occupation",
+    "institutionName": "공유수면 점·사용 허가",
+    "nodeId": "P05",
+    "name": "기간·기준 심사",
+    "action": "기간·기준 심사",
+    "actorRaw": "해양수산부·관리청",
+    "type": "task",
+    "outputs": [
+      "심사"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "공유수면 관리 및 매립에 관한 법률",
+        "article": "제11조(점용ㆍ사용허가의 기간 등)",
+        "text": "점용ㆍ사용허가의 기간 등"
+      },
+      {
+        "law": "공유수면 관리 및 매립에 관한 법률",
+        "article": "제12조(점용ㆍ사용허가 등의 기준)",
+        "text": "점용ㆍ사용허가 등의 기준"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:public-waters-occupation:P06",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "public-waters-occupation",
+    "institutionName": "공유수면 점·사용 허가",
+    "nodeId": "P06",
+    "name": "관계기관 협의",
+    "action": "관계기관 협의",
+    "actorRaw": "관계기관",
+    "type": "task",
+    "outputs": [
+      "협의"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "공유수면 관리 및 매립에 관한 법률",
+        "article": "제10조(공유수면의 점용ㆍ사용 협의 또는 승인)",
+        "text": "공유수면의 점용ㆍ사용 협의 또는 승인"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:public-waters-occupation:P07",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "public-waters-occupation",
+    "institutionName": "공유수면 점·사용 허가",
+    "nodeId": "P07",
+    "name": "권리자·어민 의견·보상 협의",
+    "action": "권리자·어민 의견·보상 협의",
+    "actorRaw": "어민·권리자",
+    "type": "notice",
+    "outputs": [
+      "의견"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "공유수면 관리 및 매립에 관한 법률",
+        "article": "제31조(공유수면매립 관련 권리자의 범위)",
+        "text": "공유수면매립 관련 권리자의 범위"
+      },
+      {
+        "law": "공유수면 관리 및 매립에 관한 법률",
+        "article": "제32조(매립으로 인한 손실방지와 보상 등)",
+        "text": "매립으로 인한 손실방지와 보상 등"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:public-waters-occupation:P08",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "public-waters-occupation",
+    "institutionName": "공유수면 점·사용 허가",
+    "nodeId": "P08",
+    "name": "허가 처분",
+    "action": "허가 처분",
+    "actorRaw": "해양수산부·관리청",
+    "type": "task",
+    "outputs": [
+      "허가서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "공유수면 관리 및 매립에 관한 법률",
+        "article": "제8조(공유수면의 점용ㆍ사용허가)",
+        "text": "공유수면의 점용ㆍ사용허가"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:public-waters-occupation:P09",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "public-waters-occupation",
+    "institutionName": "공유수면 점·사용 허가",
+    "nodeId": "P09",
+    "name": "실시계획 승인",
+    "action": "실시계획 승인",
+    "actorRaw": "해양수산부·관리청",
+    "type": "task",
+    "outputs": [
+      "실시계획"
+    ],
+    "inputs": [],
+    "deadlineRaw": "관련 공사에 착수하기 전에 미리 승인(§17①), 경미한 경우 신고(§17②)",
+    "legal": [
+      {
+        "law": "공유수면 관리 및 매립에 관한 법률",
+        "article": "제17조(점용ㆍ사용 실시계획의 승인 등)",
+        "text": "인공구조물 규모·총공사비 등 요건에 해당하는 행위로 점용·사용허가를 받은 자는 관련 공사에 착수하기 전에 미리 공유수면관리청으로부터 점용·사용 실시계획의 승인을 받아야 한다."
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N14:public-waters-occupation:P10",
+    "ms": "N14",
+    "msName": "의제 인허가 실체요건·농지·산지·공유수면 자료 취합",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 8,
+    "institution": "public-waters-occupation",
+    "institutionName": "공유수면 점·사용 허가",
+    "nodeId": "P10",
+    "name": "매립실시계획·의제 협의",
+    "action": "매립면허(해당 시)",
+    "actorRaw": "사업자",
+    "type": "task",
+    "outputs": [
+      "면허"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "공유수면 관리 및 매립에 관한 법률",
+        "article": "제28조(매립면허)",
+        "text": "매립면허"
+      },
+      {
+        "law": "공유수면 관리 및 매립에 관한 법률",
+        "article": "제38조(공유수면매립실시계획의 승인)",
+        "text": "공유수면매립실시계획의 승인"
+      }
+    ],
+    "onCritical": true
+  },
+  {
+    "pid": "N37:industrial-complex-fast-track-plan-approval:P05",
+    "ms": "N37",
+    "msName": "동시협의·통합조정·기술검토·산단계획 통합심의",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 9,
+    "institution": "industrial-complex-fast-track-plan-approval",
+    "institutionName": "산업단지계획 신속승인·통합조정",
+    "nodeId": "P05",
+    "name": "관계 행정기관 동시협의",
+    "action": "관계 행정기관 동시협의에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "관계 행정기관",
+    "type": "gateway",
+    "outputs": [
+      "관계기관 협의의견"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법",
+        "article": "제10조",
+        "text": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제10조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N37:industrial-complex-fast-track-plan-approval:P06",
+    "ms": "N37",
+    "msName": "동시협의·통합조정·기술검토·산단계획 통합심의",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 9,
+    "institution": "industrial-complex-fast-track-plan-approval",
+    "institutionName": "산업단지계획 신속승인·통합조정",
+    "nodeId": "P06",
+    "name": "1회 보완요구·보완자료 제출",
+    "action": "1회 보완요구·보완자료 제출에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "민간기업·개발사업자",
+    "type": "task",
+    "outputs": [
+      "보완요구서",
+      "보완자료"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법",
+        "article": "제10조",
+        "text": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제10조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N37:industrial-complex-fast-track-plan-approval:P07",
+    "ms": "N37",
+    "msName": "동시협의·통합조정·기술검토·산단계획 통합심의",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 9,
+    "institution": "industrial-complex-fast-track-plan-approval",
+    "institutionName": "산업단지계획 신속승인·통합조정",
+    "nodeId": "P07",
+    "name": "통합조정회의 개최",
+    "action": "통합조정회의 개최에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "산업단지 지정권자",
+    "type": "task",
+    "outputs": [
+      "통합조정회의 결과"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법",
+        "article": "제11조",
+        "text": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제11조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N37:industrial-complex-fast-track-plan-approval:P08",
+    "ms": "N37",
+    "msName": "동시협의·통합조정·기술검토·산단계획 통합심의",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 9,
+    "institution": "industrial-complex-fast-track-plan-approval",
+    "institutionName": "산업단지계획 신속승인·통합조정",
+    "nodeId": "P08",
+    "name": "국무조정실·중앙 차원 이견조정",
+    "action": "국무조정실·중앙 차원 이견조정에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "관계 행정기관",
+    "type": "task",
+    "outputs": [
+      "중앙 조정결과"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법",
+        "article": "제12조",
+        "text": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제12조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N37:industrial-complex-fast-track-plan-approval:P09",
+    "ms": "N37",
+    "msName": "동시협의·통합조정·기술검토·산단계획 통합심의",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 9,
+    "institution": "industrial-complex-fast-track-plan-approval",
+    "institutionName": "산업단지계획 신속승인·통합조정",
+    "nodeId": "P09",
+    "name": "분야별 기술검토서 작성",
+    "action": "분야별 기술검토서 작성에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "관계 행정기관",
+    "type": "task",
+    "outputs": [
+      "분야별 기술검토서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법",
+        "article": "제13조",
+        "text": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제13조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N37:industrial-complex-fast-track-plan-approval:P10",
+    "ms": "N37",
+    "msName": "동시협의·통합조정·기술검토·산단계획 통합심의",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 9,
+    "institution": "industrial-complex-fast-track-plan-approval",
+    "institutionName": "산업단지계획 신속승인·통합조정",
+    "nodeId": "P10",
+    "name": "산업단지계획심의위원회 통합심의",
+    "action": "산업단지계획심의위원회 통합심의에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "산업단지계획심의위원회",
+    "type": "gateway",
+    "outputs": [
+      "산업단지계획 통합심의 결과"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법",
+        "article": "제14조",
+        "text": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N37:development-building-landscape-review:P01",
+    "ms": "N37",
+    "msName": "동시협의·통합조정·기술검토·산단계획 통합심의",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 9,
+    "institution": "development-building-landscape-review",
+    "institutionName": "개발사업·건축물 경관심의·협의",
+    "nodeId": "P01",
+    "name": "개발사업·SOC·건축물별 법령·조례 심의대상 판정",
+    "action": "개발사업·SOC·건축물별 법령·조례 심의대상 판정에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "광주특별시 경관부서",
+    "type": "task",
+    "outputs": [
+      "경관심의 적용판정서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "경관법",
+        "article": "제26조~제28조",
+        "text": "경관법 제26조~제28조에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N37:development-building-landscape-review:P02",
+    "ms": "N37",
+    "msName": "동시협의·통합조정·기술검토·산단계획 통합심의",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 9,
+    "institution": "development-building-landscape-review",
+    "institutionName": "개발사업·건축물 경관심의·협의",
+    "nodeId": "P02",
+    "name": "경관목표·스카이라인·조망·가로·녹지 사전협의",
+    "action": "경관목표·스카이라인·조망·가로·녹지 사전협의에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "광주특별시 경관부서",
+    "type": "task",
+    "outputs": [
+      "경관 사전협의서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "경관법",
+        "article": "제26조",
+        "text": "경관법 제26조에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      },
+      {
+        "law": "경관법",
+        "article": "제27조",
+        "text": "경관법 제27조에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N37:development-building-landscape-review:P03",
+    "ms": "N37",
+    "msName": "동시협의·통합조정·기술검토·산단계획 통합심의",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 9,
+    "institution": "development-building-landscape-review",
+    "institutionName": "개발사업·건축물 경관심의·협의",
+    "nodeId": "P03",
+    "name": "경관계획·배치도·조감도·시뮬레이션 작성",
+    "action": "경관계획·배치도·조감도·시뮬레이션 작성에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "경관·건축 설계자",
+    "type": "task",
+    "outputs": [
+      "경관계획서",
+      "경관 시뮬레이션"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "경관법",
+        "article": "제27조",
+        "text": "경관법 제27조에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      },
+      {
+        "law": "경관법",
+        "article": "제28조",
+        "text": "경관법 제28조에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N37:development-building-landscape-review:P04",
+    "ms": "N37",
+    "msName": "동시협의·통합조정·기술검토·산단계획 통합심의",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 9,
+    "institution": "development-building-landscape-review",
+    "institutionName": "개발사업·건축물 경관심의·협의",
+    "nodeId": "P04",
+    "name": "개발사업 또는 건축물 경관심의 신청",
+    "action": "개발사업 또는 건축물 경관심의 신청에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "사업시행자·건축주",
+    "type": "task",
+    "outputs": [
+      "경관심의 신청서",
+      "심의도서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "경관법",
+        "article": "제27조",
+        "text": "경관법 제27조에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      },
+      {
+        "law": "경관법",
+        "article": "제28조",
+        "text": "경관법 제28조에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N37:development-building-landscape-review:P05",
+    "ms": "N37",
+    "msName": "동시협의·통합조정·기술검토·산단계획 통합심의",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 9,
+    "institution": "development-building-landscape-review",
+    "institutionName": "개발사업·건축물 경관심의·협의",
+    "nodeId": "P05",
+    "name": "경관위원회 심의·조건부 의결·재심의",
+    "action": "경관위원회 심의·조건부 의결·재심의에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "광주특별시 경관위원회",
+    "type": "gateway",
+    "outputs": [
+      "경관위원회 심의결과",
+      "조건부 의결사항"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "경관법",
+        "article": "제27조",
+        "text": "경관법 제27조에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      },
+      {
+        "law": "경관법",
+        "article": "제28조",
+        "text": "경관법 제28조에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N37:development-building-landscape-review:P06",
+    "ms": "N37",
+    "msName": "동시협의·통합조정·기술검토·산단계획 통합심의",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 9,
+    "institution": "development-building-landscape-review",
+    "institutionName": "개발사업·건축물 경관심의·협의",
+    "nodeId": "P06",
+    "name": "산단계획·실시설계·건축허가 도서에 조건 반영",
+    "action": "산단계획·실시설계·건축허가 도서에 조건 반영에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "사업시행자·건축주",
+    "type": "task",
+    "outputs": [
+      "경관심의 조건 반영표"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "경관법",
+        "article": "제26조~제28조",
+        "text": "경관법 제26조~제28조에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N10:industrial-complex-development:P03",
+    "ms": "N10",
+    "msName": "산업단지계획 승인·지정 고시",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 10,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P03",
+    "name": "산업단지 지정",
+    "action": "산업단지 지정",
+    "actorRaw": "지정권자",
+    "type": "gateway",
+    "outputs": [
+      "지정"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업입지 및 개발에 관한 법률",
+        "article": "제6조(국가산업단지의 지정)",
+        "text": "국가산업단지의 지정"
+      },
+      {
+        "law": "산업입지 및 개발에 관한 법률",
+        "article": "제7조(일반산업단지의 지정)",
+        "text": "일반산업단지의 지정"
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N10:industrial-complex-development:P04",
+    "ms": "N10",
+    "msName": "산업단지계획 승인·지정 고시",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 10,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P04",
+    "name": "지정·개발계획 고시 열람",
+    "action": "지정·개발계획 고시 열람",
+    "actorRaw": "토지소유자·주민",
+    "type": "notice",
+    "outputs": [
+      "고시 열람"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업입지 및 개발에 관한 법률",
+        "article": "제7조의4(산업단지 지정의 고시 등)",
+        "text": "산업단지 지정의 고시 등"
+      },
+      {
+        "law": "산업입지 및 개발에 관한 법률 시행령",
+        "article": "제9조(산업단지지정 또는 개발계획의 고시등)",
+        "text": "산업단지지정 또는 개발계획의 고시등"
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N10:industrial-complex-fast-track-plan-approval:P11",
+    "ms": "N10",
+    "msName": "산업단지계획 승인·지정 고시",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 10,
+    "institution": "industrial-complex-fast-track-plan-approval",
+    "institutionName": "산업단지계획 신속승인·통합조정",
+    "nodeId": "P11",
+    "name": "산업단지계획 승인·고시",
+    "action": "산업단지계획 승인·고시에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "산업단지 지정권자",
+    "type": "notice",
+    "outputs": [
+      "산업단지계획 승인서",
+      "승인고시"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법",
+        "article": "제15조",
+        "text": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제15조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N10:industrial-complex-fast-track-plan-approval:P12",
+    "ms": "N10",
+    "msName": "산업단지계획 승인·지정 고시",
+    "stage": "G2",
+    "gateIndex": 2,
+    "msOrder": 10,
+    "institution": "industrial-complex-fast-track-plan-approval",
+    "institutionName": "산업단지계획 신속승인·통합조정",
+    "nodeId": "P12",
+    "name": "6개월 처리기한·평가협의 일정 관리",
+    "action": "6개월 처리기한·평가협의 일정 관리에 필요한 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "산업단지 지정권자",
+    "type": "task",
+    "outputs": [
+      "법정 일정관리표",
+      "평가협의 이력"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법",
+        "article": "제16조·제23조",
+        "text": "산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제16조·제23조에 따른 절차와 산출물. 적용 범위와 세부 서식은 현행 하위 법령ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N15:industrial-complex-development:P10",
+    "ms": "N15",
+    "msName": "산단 실시계획·의제 인허가 승인조건 확정",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 11,
+    "institution": "industrial-complex-development",
+    "institutionName": "산업단지 지정·개발",
+    "nodeId": "P10",
+    "name": "실시계획 승인·고시",
+    "action": "실시계획 승인·고시",
+    "actorRaw": "지정권자",
+    "type": "task",
+    "outputs": [
+      "실시계획"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "산업입지 및 개발에 관한 법률",
+        "article": "제17조(국가산업단지개발실시계획의 승인)",
+        "text": "국가산업단지개발실시계획의 승인"
+      },
+      {
+        "law": "산업입지 및 개발에 관한 법률",
+        "article": "제18조(일반산업단지개발실시계획의 승인)",
+        "text": "일반산업단지개발실시계획의 승인"
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N15:one-stop-permit-consultation:P05",
+    "ms": "N15",
+    "msName": "산단 실시계획·의제 인허가 승인조건 확정",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 11,
+    "institution": "one-stop-permit-consultation",
+    "institutionName": "인허가 일괄협의·의제 처리",
+    "nodeId": "P05",
+    "name": "주된 인허가 처분·관련 인허가 의제",
+    "action": "협의된 사항에 대해 주된 인허가 처분, 협의된 관련 인허가를 받은 것으로 의제(효과는 해당 법률에 규정된 관련 인허가에 한정)",
+    "actorRaw": "주된 인허가 행정청",
+    "type": "task",
+    "outputs": [
+      "주된 인허가 처분서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "행정기본법",
+        "article": "제25조(인허가의제의 효과)",
+        "text": "① 제24조제3항ㆍ제4항에 따라 협의가 된 사항에 대해서는 주된 인허가를 받았을 때 관련 인허가를 받은 것으로 본다. ② 인허가의제의 효과는 주된 인허가의 해당 법률에 규정된 관련 인허가에 한정된다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N15:one-stop-permit-consultation:P06",
+    "ms": "N15",
+    "msName": "산단 실시계획·의제 인허가 승인조건 확정",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 11,
+    "institution": "one-stop-permit-consultation",
+    "institutionName": "인허가 일괄협의·의제 처리",
+    "nodeId": "P06",
+    "name": "관련 인허가 행정청 사후관리",
+    "action": "의제된 관련 인허가를 직접 한 것으로 보아 관계 법령에 따른 관리·감독 등 필요한 조치",
+    "actorRaw": "관련 인허가 행정청",
+    "type": "task",
+    "outputs": [
+      "관리·감독 조치"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "행정기본법",
+        "article": "제26조(인허가의제의 사후관리 등)",
+        "text": "① 인허가의제의 경우 관련 인허가 행정청은 관련 인허가를 직접 한 것으로 보아 관계 법령에 따른 관리ㆍ감독 등 필요한 조치를 하여야 한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N15:one-stop-permit-consultation:P08",
+    "ms": "N15",
+    "msName": "산단 실시계획·의제 인허가 승인조건 확정",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 11,
+    "institution": "one-stop-permit-consultation",
+    "institutionName": "인허가 일괄협의·의제 처리",
+    "nodeId": "P08",
+    "name": "주된 인허가·의제 결과 확인",
+    "action": "주된 인허가 처분과 함께 의제된 관련 인허가의 범위와 조건을 확인한다.",
+    "actorRaw": "신청인",
+    "type": "notice",
+    "outputs": [
+      "주된 인허가 처분서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "행정기본법",
+        "article": "제25조(인허가의제의 효과)",
+        "text": "주된 인허가가 있으면 협의된 관련 인허가도 함께 받은 것으로 본다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N15:development-charge-assessment:P01",
+    "ms": "N15",
+    "msName": "산단 실시계획·의제 인허가 승인조건 확정",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 11,
+    "institution": "development-charge-assessment",
+    "institutionName": "개발부담금 산정·부과·납부",
+    "nodeId": "P01",
+    "name": "대상사업·면적·시행자·감면 적용판정",
+    "action": "대상사업·면적·시행자·감면 적용판정에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "광주특별시·부과징수기관",
+    "type": "task",
+    "outputs": [
+      "개발부담금 적용판정서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "개발이익 환수에 관한 법률",
+        "article": "제5조",
+        "text": "개발이익 환수에 관한 법률 제5조에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령과 고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N15:development-charge-assessment:P02",
+    "ms": "N15",
+    "msName": "산단 실시계획·의제 인허가 승인조건 확정",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 11,
+    "institution": "development-charge-assessment",
+    "institutionName": "개발부담금 산정·부과·납부",
+    "nodeId": "P02",
+    "name": "개발사업 착수시점·종료시점 확정",
+    "action": "개발사업 착수시점·종료시점 확정에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "광주특별시·부과징수기관",
+    "type": "task",
+    "outputs": [
+      "부과개시·종료시점 확인서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "개발이익 환수에 관한 법률",
+        "article": "제9조",
+        "text": "개발이익 환수에 관한 법률 제9조에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령과 고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N15:development-charge-assessment:P03",
+    "ms": "N15",
+    "msName": "산단 실시계획·의제 인허가 승인조건 확정",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 11,
+    "institution": "development-charge-assessment",
+    "institutionName": "개발부담금 산정·부과·납부",
+    "nodeId": "P03",
+    "name": "개발비용 증빙·토지비·부대비용 관리",
+    "action": "개발비용 증빙·토지비·부대비용 관리에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "사업시행자·납부의무자",
+    "type": "task",
+    "outputs": [
+      "개발비용 산출명세",
+      "비용 증빙철"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "개발이익 환수에 관한 법률",
+        "article": "제11조",
+        "text": "개발이익 환수에 관한 법률 제11조에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령과 고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N15:nonpoint-pollution-source-installation-management:P01",
+    "ms": "N15",
+    "msName": "산단 실시계획·의제 인허가 승인조건 확정",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 11,
+    "institution": "nonpoint-pollution-source-installation-management",
+    "institutionName": "비점오염원 설치신고·저감시설 이행관리",
+    "nodeId": "P01",
+    "name": "사업유형·면적·환경영향평가 여부별 비점오염원 대상 판정",
+    "action": "사업유형·면적·환경영향평가 여부별 비점오염원 대상 판정에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "영산강유역환경청",
+    "type": "task",
+    "outputs": [
+      "비점오염원 설치신고 적용판정서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "물환경보전법",
+        "article": "제53조",
+        "text": "물환경보전법 제53조에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N15:nonpoint-pollution-source-installation-management:P02",
+    "ms": "N15",
+    "msName": "산단 실시계획·의제 인허가 승인조건 확정",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 11,
+    "institution": "nonpoint-pollution-source-installation-management",
+    "institutionName": "비점오염원 설치신고·저감시설 이행관리",
+    "nodeId": "P02",
+    "name": "강우유출·오염부하 산정과 비점오염 저감계획 작성",
+    "action": "강우유출·오염부하 산정과 비점오염 저감계획 작성에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "사업시행자",
+    "type": "task",
+    "outputs": [
+      "강우유출·오염부하 산정서",
+      "비점오염 저감계획"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "물환경보전법",
+        "article": "제53조",
+        "text": "물환경보전법 제53조에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N15:nonpoint-pollution-source-installation-management:P03",
+    "ms": "N15",
+    "msName": "산단 실시계획·의제 인허가 승인조건 확정",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 11,
+    "institution": "nonpoint-pollution-source-installation-management",
+    "institutionName": "비점오염원 설치신고·저감시설 이행관리",
+    "nodeId": "P03",
+    "name": "승인 후 법정기한 내 비점오염원 설치신고",
+    "action": "승인 후 법정기한 내 비점오염원 설치신고에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "사업시행자",
+    "type": "task",
+    "outputs": [
+      "비점오염원 설치신고서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "물환경보전법",
+        "article": "제53조",
+        "text": "물환경보전법 제53조에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N15:nonpoint-pollution-source-installation-management:P04",
+    "ms": "N15",
+    "msName": "산단 실시계획·의제 인허가 승인조건 확정",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 11,
+    "institution": "nonpoint-pollution-source-installation-management",
+    "institutionName": "비점오염원 설치신고·저감시설 이행관리",
+    "nodeId": "P04",
+    "name": "신고 검토·보완·신고증명서 발급",
+    "action": "신고 검토·보완·신고증명서 발급에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "영산강유역환경청",
+    "type": "gateway",
+    "outputs": [
+      "보완요구서",
+      "비점오염원 설치신고증명서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "물환경보전법",
+        "article": "제53조",
+        "text": "물환경보전법 제53조에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N15:ecosystem-conservation-charge-assessment:P01",
+    "ms": "N15",
+    "msName": "산단 실시계획·의제 인허가 승인조건 확정",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 11,
+    "institution": "ecosystem-conservation-charge-assessment",
+    "institutionName": "생태계보전부담금 산정·부과·납부·반환",
+    "nodeId": "P01",
+    "name": "사업유형·환경영향평가·훼손면적별 부과대상 판정",
+    "action": "사업유형·환경영향평가·훼손면적별 부과대상 판정에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "기후에너지환경부·광주특별시",
+    "type": "task",
+    "outputs": [
+      "생태계보전부담금 적용판정서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "자연환경보전법",
+        "article": "제46조",
+        "text": "자연환경보전법 제46조에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N15:ecosystem-conservation-charge-assessment:P02",
+    "ms": "N15",
+    "msName": "산단 실시계획·의제 인허가 승인조건 확정",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 11,
+    "institution": "ecosystem-conservation-charge-assessment",
+    "institutionName": "생태계보전부담금 산정·부과·납부·반환",
+    "nodeId": "P02",
+    "name": "토지피복·생태자연도·용도지역별 훼손면적 산정",
+    "action": "토지피복·생태자연도·용도지역별 훼손면적 산정에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "사업시행자·납부의무자",
+    "type": "task",
+    "outputs": [
+      "생태계 훼손면적 산정도",
+      "부과기초자료"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "자연환경보전법",
+        "article": "제46조",
+        "text": "자연환경보전법 제46조에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N15:ecosystem-conservation-charge-assessment:P03",
+    "ms": "N15",
+    "msName": "산단 실시계획·의제 인허가 승인조건 확정",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 11,
+    "institution": "ecosystem-conservation-charge-assessment",
+    "institutionName": "생태계보전부담금 산정·부과·납부·반환",
+    "nodeId": "P03",
+    "name": "개발사업 인허가 내용·사업자·면적 통보",
+    "action": "개발사업 인허가 내용·사업자·면적 통보에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "사업 인허가기관",
+    "type": "task",
+    "outputs": [
+      "개발사업 인허가 통보서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "자연환경보전법",
+        "article": "제47조",
+        "text": "자연환경보전법 제47조에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N15:ecosystem-conservation-charge-assessment:P04",
+    "ms": "N15",
+    "msName": "산단 실시계획·의제 인허가 승인조건 확정",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 11,
+    "institution": "ecosystem-conservation-charge-assessment",
+    "institutionName": "생태계보전부담금 산정·부과·납부·반환",
+    "nodeId": "P04",
+    "name": "단위면적금액·지역계수 적용 부담금 산정",
+    "action": "단위면적금액·지역계수 적용 부담금 산정에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "기후에너지환경부·광주특별시",
+    "type": "task",
+    "outputs": [
+      "생태계보전부담금 산정서"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "자연환경보전법",
+        "article": "제46조",
+        "text": "자연환경보전법 제46조에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  },
+  {
+    "pid": "N15:ecosystem-conservation-charge-assessment:P05",
+    "ms": "N15",
+    "msName": "산단 실시계획·의제 인허가 승인조건 확정",
+    "stage": "G3",
+    "gateIndex": 3,
+    "msOrder": 11,
+    "institution": "ecosystem-conservation-charge-assessment",
+    "institutionName": "생태계보전부담금 산정·부과·납부·반환",
+    "nodeId": "P05",
+    "name": "부담금 부과·분할납부 결정",
+    "action": "부담금 부과·분할납부 결정에 필요한 적용요건과 자료를 확인하고 법정 산출물을 다음 담당기관에 인계한다.",
+    "actorRaw": "기후에너지환경부·광주특별시",
+    "type": "notice",
+    "outputs": [
+      "부과통지서",
+      "분할납부 결정"
+    ],
+    "inputs": [],
+    "deadlineRaw": null,
+    "legal": [
+      {
+        "law": "자연환경보전법",
+        "article": "제46조",
+        "text": "자연환경보전법 제46조에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      },
+      {
+        "law": "자연환경보전법",
+        "article": "제48조",
+        "text": "자연환경보전법 제48조에 따른 절차와 산출물. 세부 문턱ㆍ서식ㆍ기한은 현행 하위법령ㆍ조례ㆍ고시를 함께 확인한다."
+      }
+    ],
+    "onCritical": false
+  }
+]
