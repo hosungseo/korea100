@@ -151,4 +151,4 @@ AI 호출은 저장소 관례대로 `claude -p`(`web/scripts/discover-institutio
 
 ## 7. 예상 규모
 
-AI 호출 약 222(추출) + 묶음 수십(판정) + 카드 수십. 코드는 `_lib/compare/` 5파일 + 코드표 3파일 + 테스트. 기존 `gen.mjs`·`verify-basis.mjs`·`check-overlap.mjs`·`fetch-laws.py`는 수정 없이 재사용.
+AI 호출 약 222(추출) + 묶음 수십(판정) + 카드 수십. 코드는 `_lib/compare/` 5파일 + 코드표 3파일 + 테스트. 기존 `gen.mjs`·`check-overlap.mjs`·`fetch-laws.py`는 수정 없이 재사용. `verify-basis.mjs`는 내부 `checkCitation`·법령 로딩을 export하도록만 손대고(동작 불변, 1~3호 대조 결과로 회귀 확인) 카드 조문 검증에 재사용한다.
