@@ -59,6 +59,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 .impcard { border:1.8px solid; border-radius:10px; padding:10px 12px; }
 .imptop { display:flex; align-items:center; gap:8px; }
 .impkind { font-size:11px; font-weight:800; }
+.tier { font-size:10px; font-weight:800; padding:1.5px 6px; border-radius:9px; }
+.tier.t-act { background:#f6e2e2; color:#8f3d3d; }
+.tier.t-sub { background:#e2eef6; color:#1f5f89; }
+.tiernote { margin-top:6px; font-size:11px; line-height:1.5; color:#4a6157; word-break:keep-all; }
 .impnodes { margin-left:auto; font-family:ui-monospace,monospace; font-size:10px; color:#6d7f76; }
 .impcard h3 { margin-top:5px; font-size:14px; font-weight:800; color:#12241c; word-break:keep-all; }
 .impcard p { margin-top:5px; font-size:11.5px; line-height:1.5; color:#2e4038; word-break:keep-all; }
@@ -1740,83 +1744,96 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
       <p class="imphead">색은 개선 유형, 번호는 위 체계도의 배지와 같다. 근거 조문은 전부 현행본 원문 대조. 카드의 소관은 조문 소관이지 수행 기관이 아니다(1호 문법). 삭제·갈음 카드는 엔진이 내지 않는다.</p>
       <div class="impgrid">
         <div class="impcard" style="border-color:#7c56c9;background:#f3eefc">
-          <div class="imptop"><i class="ib" style="background:#7c56c9">I1</i><span class="impkind" style="color:#7c56c9">자동화</span><span class="impnodes">N09_1_P01 · N11_1_P01 · N13_5_P04 · N39_9_P01 · N40_11_P02 · N12_1_P01 · N14_12_D01 · N14_12_D06 · N14_12_D07 · N14_12_D08 · N14_12_D11 · N14_2_P02 · N14_2_P03 · N14_2_P10 · N14_2_P19 · N14_14_P01 · N14_14_P03 · N14_15_P01 · N37_0_P10 · N10_2_P03 · N10_0_P11 · N15_2_P10</span></div>
+          <div class="imptop"><i class="ib" style="background:#7c56c9">I1</i><span class="impkind" style="color:#7c56c9">자동화</span><span class="tier t-act">법률 개정</span><span class="impnodes">N09_1_P01 · N11_1_P01 · N13_5_P04 · N39_9_P01 · N40_11_P02 · N12_1_P01 · N14_12_D01 · N14_12_D06 · N14_12_D07 · N14_12_D08 · N14_12_D11 · N14_2_P02 · N14_2_P03 · N14_2_P10 · N14_2_P19 · N14_14_P01 · N14_14_P03 · N14_15_P01 · N37_0_P10 · N10_2_P03 · N10_0_P11 · N15_2_P10</span></div>
           <h3>대상사업 판정 일괄 자동화</h3>
           <p>환경영향평가법 제22조제1항·제2항(N09·N11·N12 중복 등재), 국토계획법 제56조, 농지법 제34조제1항, 산지관리법 제9조, 광역교통법 제7조의2가 각각 사업자에게 지번·규모·사업유형 기준의 대상 여부 판정을 요구해 같은 입력으로 5개 법의 판정을 따로 반복하며, 판정 기준은 모두 대통령령·조문이 종류·범위를 이미 정해 두어 재량이 없다.</p>
           <div class="lever"><b>고칠 곳</b> 환경영향평가법 제22조제2항 — 대통령령이 정한 종류·범위의 대상사업 판정을 지번·면적·사업유형 입력 기반 전산 자동판정으로 갈음하고, 그 판정 결과를 개발행위·농지전용·산지·광역교통 대상 판정에 공유·재사용하도록 항을 신설한다.</div>
           <div class="targets"><span class="tg">→ 기후에너지환경부 — 환경영향평가법 제22조제2항</span><span class="tg">→ 국토교통부 — 국토의 계획 및 이용에 관한 법률 제56조</span><span class="tg">→ 농림축산식품부 — 농지법 제34조제1항</span></div>
+          <div class="tiernote">전 대상이 법률 사항 — 위임 문구가 없거나 위임 범위 밖</div>
         </div><div class="impcard" style="border-color:#d9a821;background:#fdf8e3">
-          <div class="imptop"><i class="ib" style="background:#d9a821">I2</i><span class="impkind" style="color:#d9a821">통합</span><span class="impnodes">N09_1_P01 · N09_1_P04 · N09_1_P08 · N11_2_P06 · N11_1_P01 · N11_1_P04 · N11_1_P08 · N12_2_P08 · N12_1_P01 · N12_1_P04 · N12_1_P08 · N14_12_D05 · N14_2_P02 · N14_2_P06 · N14_2_P08 · N14_15_P05 · N37_0_P10 · N15_20_P01 · N15_20_P02 · N15_20_P04 · N15_20_P05 · N15_19_P01 · N15_19_P02 · N15_19_P04</span></div>
+          <div class="imptop"><i class="ib" style="background:#d9a821">I2</i><span class="impkind" style="color:#d9a821">통합</span><span class="tier t-act">법률 개정</span><span class="impnodes">N09_1_P01 · N09_1_P04 · N09_1_P08 · N11_2_P06 · N11_1_P01 · N11_1_P04 · N11_1_P08 · N12_2_P08 · N12_1_P01 · N12_1_P04 · N12_1_P08 · N14_12_D05 · N14_2_P02 · N14_2_P06 · N14_2_P08 · N14_15_P05 · N37_0_P10 · N15_20_P01 · N15_20_P02 · N15_20_P04 · N15_20_P05 · N15_19_P01 · N15_19_P02 · N15_19_P04</span></div>
           <h3>환경영향평가 협의 한 시계 통합</h3>
           <p>환경영향평가법 제25조는 초안 작성·의견수렴을 사업자가 하고 공고·공람은 시장·군수·구청장이 하도록 주체를 나눠, 같은 의견수렴이 사업자 절차와 주민 절차로 두 번 기재된다. 제28조 검토·보완은 제27조 협의 요청의 하위 단계인데 별건으로 잡혀 협의가 두 번 세어지고, 이 묶음이 산단 지정·개발계획 등 사건마다 반복돼 사업 1건에 판정·수렴·검토가 4회씩 중복된다.</p>
           <div class="lever"><b>고칠 곳</b> 환경영향평가법 제25조제1항에 '사업자의 초안 작성·의견수렴과 관할 시장·군수·구청장의 공고·공람은 사업 단위 1회의 절차로 하며, 그 결과는 제27조 협의 요청 및 제28조 검토에 그대로 인용한다'는 문장을 추가한다.</div>
           <div class="targets"><span class="tg">→ 기후에너지환경부 — 환경영향평가법 제25조제1항</span><span class="tg">→ 기후에너지환경부 — 환경영향평가법 제28조제1항</span><span class="tg">→ 기후에너지환경부 — 환경영향평가법 제22조제1항</span></div>
+          <div class="tiernote">전 대상이 법률 사항 — 위임 문구가 없거나 위임 범위 밖</div>
         </div><div class="impcard" style="border-color:#d9a821;background:#fdf8e3">
-          <div class="imptop"><i class="ib" style="background:#d9a821">I3</i><span class="impkind" style="color:#d9a821">통합</span><span class="impnodes">N09_1_P04 · N11_2_P06 · N11_1_P04 · N12_2_P08 · N12_1_P04 · N14_12_D06 · N14_12_D08 · N14_12_D11 · N14_2_P06 · N14_2_P08 · N14_15_P05 · N37_0_P10 · N37_17_P01 · N37_17_P02 · N37_17_P03 · N37_17_P05 · N37_17_P06</span></div>
+          <div class="imptop"><i class="ib" style="background:#d9a821">I3</i><span class="impkind" style="color:#d9a821">통합</span><span class="tier t-act">법률 개정</span><span class="impnodes">N09_1_P04 · N11_2_P06 · N11_1_P04 · N12_2_P08 · N12_1_P04 · N14_12_D06 · N14_12_D08 · N14_12_D11 · N14_2_P06 · N14_2_P08 · N14_15_P05 · N37_0_P10 · N37_17_P01 · N37_17_P02 · N37_17_P03 · N37_17_P05 · N37_17_P06</span></div>
           <h3>환경영향평가 한 공람·한 시계</h3>
           <p>산업단지 개발 판(N11·N14 P06)과 환경영향평가 협의 판(N09·N11·N12 P04)이 환경영향평가법 제25조의 초안 공고·공람·주민 의견수렴을 각각 별도 절차로 등재해 같은 평가서 한 건에 공람이 두 번 잡히고, 제25조제5항의 의제 요건(다른 법령으로 20일 이상 준하여 수렴)이 있음에도 판 간 연결이 없어 제27조·제28조 협의가 의견수렴과 다른 시계로 돌아 종료와 협의 요청 사이 기한이 비어 있다.</p>
           <div class="lever"><b>고칠 곳</b> 환경영향평가법 제25조제5항 — 동일 사업지의 동일 평가서는 관할 시장·군수·구청장의 한 공고·한 공람으로 처리함을 명문화하고, 그 공람 종료일을 제27조 협의 요청 시계의 기산점으로 삼는다.</div>
           <div class="targets"><span class="tg">→ 환경부 — 환경영향평가법 제25조제5항</span><span class="tg">→ 환경부 — 환경영향평가법 제27조</span></div>
+          <div class="tiernote">하위법령 가능: 환경영향평가법 시행령 제47조</div>
         </div><div class="impcard" style="border-color:#d9a821;background:#fdf8e3">
-          <div class="imptop"><i class="ib" style="background:#d9a821">I4</i><span class="impkind" style="color:#d9a821">통합</span><span class="impnodes">N14_12_D01 · N14_12_D06 · N14_12_D07 · N14_12_D08 · N14_12_D11 · N14_12_D15 · N14_2_P15</span></div>
+          <div class="imptop"><i class="ib" style="background:#d9a821">I4</i><span class="impkind" style="color:#d9a821">통합</span><span class="tier t-act">법률 개정</span><span class="impnodes">N14_12_D01 · N14_12_D06 · N14_12_D07 · N14_12_D08 · N14_12_D11 · N14_12_D15 · N14_2_P15</span></div>
           <h3>개발행위허가 검토·판정·처분 한 시계</h3>
           <p>같은 허가권자가 같은 신청건에서 §58 허가기준 검토(D06), §59·영§57 심의대상 판정(D07), §57② 허가·조건 처분(D11)을 세 단계로 따로 수행한다. §57②의 15일 처리기간은 처분에만 걸리고 심의대상 판정은 규모·지역 요건만으로 정해지는데도 별도 판정 단계로 남아 같은 서류를 두 번 검토한다.</p>
           <div class="lever"><b>고칠 곳</b> 국토의 계획 및 이용에 관한 법률 시행령 제57조 — 심의대상 여부를 접수 시 규모·지역 요건으로 자동 확정하고, §58 기준 검토와 §57② 처분을 같은 15일 처리기간 안에서 한 사건으로 일괄 처리하도록 명시.</div>
           <div class="targets"><span class="tg">→ 국토교통부 — 국토의 계획 및 이용에 관한 법률 시행령 제57조</span><span class="tg">→ 국토교통부 — 국토의 계획 및 이용에 관한 법률 제57조제2항</span><span class="tg">→ 국토교통부 — 국토의 계획 및 이용에 관한 법률 제58조</span></div>
+          <div class="tiernote">하위법령 가능: 국토의 계획 및 이용에 관한 법률 시행령 제54조</div>
         </div><div class="impcard" style="border-color:#d9a821;background:#fdf8e3">
-          <div class="imptop"><i class="ib" style="background:#d9a821">I5</i><span class="impkind" style="color:#d9a821">통합</span><span class="impnodes">N14_12_D05 · N14_14_P01 · N14_14_P03 · N14_14_P04 · N14_14_P06 · N14_14_P07 · N14_14_P08 · N37_0_P10</span></div>
+          <div class="imptop"><i class="ib" style="background:#d9a821">I5</i><span class="impkind" style="color:#d9a821">통합</span><span class="tier t-act">법률 개정</span><span class="impnodes">N14_12_D05 · N14_14_P01 · N14_14_P03 · N14_14_P04 · N14_14_P06 · N14_14_P07 · N14_14_P08 · N37_0_P10</span></div>
           <h3>농지전용 의제협의 한 시계</h3>
           <p>국토계획법 제61조제4항은 개발행위허가 시 의제되는 농지전용에 대해 관계기관 협의를 별도로 돌리고, 농지법 제34조제1항·제35조제1항은 같은 전용을 허가·신고 경로로 나눠 각각 접수·심사하게 하여, 동일한 농지법 제37조 실체요건이 협의 회신과 허가·신고 수리에서 두 시계로 두 번 심사된다.</p>
           <div class="lever"><b>고칠 곳</b> 농지법 제34조제1항에 '다른 법률에 따라 농지전용허가·신고가 의제되는 경우 국토계획법 제61조제4항 협의 회신을 허가·신고 수리로 보고, 회신은 개발행위허가 처리기간 내에 한다'는 단서를 추가한다.</div>
           <div class="targets"><span class="tg">→ 농림축산식품부 — 농지법 제34조제1항</span><span class="tg">→ 농림축산식품부 — 농지법 제35조제1항</span><span class="tg">→ 국토교통부 — 국토의 계획 및 이용에 관한 법률 제61조제4항</span></div>
+          <div class="tiernote">전 대상이 법률 사항 — 위임 문구가 없거나 위임 범위 밖</div>
         </div><div class="impcard" style="border-color:#d9a821;background:#fdf8e3">
-          <div class="imptop"><i class="ib" style="background:#d9a821">I6</i><span class="impkind" style="color:#d9a821">통합</span><span class="impnodes">N14_12_D05 · N14_15_P01 · N14_15_P02 · N14_15_P04 · N14_15_P05 · N14_15_P06 · N14_15_P08 · N37_0_P10</span></div>
+          <div class="imptop"><i class="ib" style="background:#d9a821">I6</i><span class="impkind" style="color:#d9a821">통합</span><span class="tier t-act">법률 개정</span><span class="impnodes">N14_12_D05 · N14_15_P01 · N14_15_P02 · N14_15_P04 · N14_15_P05 · N14_15_P06 · N14_15_P08 · N37_0_P10</span></div>
           <h3>타당성조사·허가심사 한 시계</h3>
           <p>산지관리법 제18조의2는 타당성조사기관이 제18조 허가기준 적합성을 먼저 조사하게 하고, 같은 법 제18조는 산림청·지자체가 동일 기준으로 다시 심사하게 하여 같은 산지의 같은 기준을 두 기관이 두 번 본다. 제17조 허가기간 산정도 조사와 심사에 따로 걸려 시계가 둘이다.</p>
           <div class="lever"><b>고칠 곳</b> 산지관리법 제18조의2에 타당성조사 결과를 제18조 허가기준 심사 자료로 갈음·자동 인계하고 조사 착수부터 처분까지 한 처리기간을 두는 조항을 신설한다.</div>
           <div class="targets"><span class="tg">→ 산림청 — 산지관리법 제18조의2</span><span class="tg">→ 산림청 — 산지관리법 제18조</span><span class="tg">→ 산림청 — 산지관리법 제17조</span></div>
+          <div class="tiernote">전 대상이 법률 사항 — 위임 문구가 없거나 위임 범위 밖</div>
         </div><div class="impcard" style="border-color:#d9a821;background:#fdf8e3">
-          <div class="imptop"><i class="ib" style="background:#d9a821">I7</i><span class="impkind" style="color:#d9a821">통합</span><span class="impnodes">N38_6_P01 · N38_6_P02 · N38_6_P03 · N38_6_P04 · N38_6_P05 · N38_6_P06 · N38_6_P08 · N14_12_D06 · N14_12_D08 · N14_2_P02 · N14_2_P15 · N14_15_P05 · N37_0_P10 · N15_19_P02</span></div>
+          <div class="imptop"><i class="ib" style="background:#d9a821">I7</i><span class="impkind" style="color:#d9a821">통합</span><span class="tier t-act">법률 개정</span><span class="impnodes">N38_6_P01 · N38_6_P02 · N38_6_P03 · N38_6_P04 · N38_6_P05 · N38_6_P06 · N38_6_P08 · N14_12_D06 · N14_12_D08 · N14_2_P02 · N14_2_P15 · N14_15_P05 · N37_0_P10 · N15_19_P02</span></div>
           <h3>재해영향평가심의 통합심의 편입</h3>
           <p>산업단지 특례법 제14조는 산업단지계획 관련 심의를 통합심의위원회 한 곳에서 하도록 하지만, 자연재해대책법 제4조는 같은 사업의 재해영향평가 협의를 행정안전부 심의위원회 심의로 따로 거치게 해 동일 사업이 통합심의와 재해영향평가심의를 각각 받고, 국토계획법 제59조 도시계획위원회 심의까지 세 시계가 돈다.</p>
           <div class="lever"><b>고칠 곳</b> 자연재해대책법 제4조에 '산업단지 특례법 제14조 통합심의를 거친 경우 재해영향평가심의위원회 심의를 거친 것으로 본다'는 항을 신설해 한 심의·한 협의기간 시계로 묶는다.</div>
           <div class="targets"><span class="tg">→ 행정안전부 — 자연재해대책법 제4조</span><span class="tg">→ 국토교통부 — 산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조</span><span class="tg">→ 국토교통부 — 국토의 계획 및 이용에 관한 법률 제59조</span></div>
+          <div class="tiernote">전 대상이 법률 사항 — 위임 문구가 없거나 위임 범위 밖</div>
         </div><div class="impcard" style="border-color:#d9a821;background:#fdf8e3">
-          <div class="imptop"><i class="ib" style="background:#d9a821">I8</i><span class="impkind" style="color:#d9a821">통합</span><span class="impnodes">N13_3_P13 · N14_12_D16 · N14_2_P11 · N14_2_P12 · N14_2_P19 · N14_16_P07</span></div>
+          <div class="imptop"><i class="ib" style="background:#d9a821">I8</i><span class="impkind" style="color:#d9a821">통합</span><span class="tier t-act">법률 개정</span><span class="impnodes">N13_3_P13 · N14_12_D16 · N14_2_P11 · N14_2_P12 · N14_2_P19 · N14_16_P07</span></div>
           <h3>산단 토지·공유수면 보상 협의 통합</h3>
           <p>산업입지법 제22조는 산단 토지 수용·보상을, 공유수면법 제32조는 매립으로 인한 어업권 등 권리 손실보상을 각각 별도 조문으로 두어, 매립면허가 산단 지정에 의제되어도 같은 시행자가 같은 시기에 토지보상법 준용 손실보상 협의를 두 번 따로 연다</p>
           <div class="lever"><b>고칠 곳</b> 산업입지 및 개발에 관한 법률 제22조에 '매립면허 의제 시 공유수면법 제32조 권리자 손실보상 협의를 토지 수용·보상 협의와 같은 절차·기간에 함께 실시한다'는 항을 신설</div>
           <div class="targets"><span class="tg">→ 국토교통부 — 산업입지 및 개발에 관한 법률 제22조</span><span class="tg">→ 해양수산부 — 공유수면 관리 및 매립에 관한 법률 제32조</span></div>
+          <div class="tiernote">전 대상이 법률 사항 — 위임 문구가 없거나 위임 범위 밖</div>
         </div><div class="impcard" style="border-color:#d99a5e;background:#fdf6ee">
-          <div class="imptop"><i class="ib" style="background:#d99a5e">I9</i><span class="impkind" style="color:#d99a5e">축소·후제출</span><span class="impnodes">N38_6_P02 · N38_6_P04 · N38_6_P05 · N38_7_P03 · N38_7_P06 · N38_7_P08 · N38_7_P09 · N40_11_P05 · N14_12_D15 · N14_2_P15 · N14_16_P09</span></div>
+          <div class="imptop"><i class="ib" style="background:#d99a5e">I9</i><span class="impkind" style="color:#d99a5e">축소·후제출</span><span class="tier t-sub">대통령령 개정</span><span class="impnodes">N38_6_P02 · N38_6_P04 · N38_6_P05 · N38_7_P03 · N38_7_P06 · N38_7_P08 · N38_7_P09 · N40_11_P05 · N14_12_D15 · N14_2_P15 · N14_16_P09</span></div>
           <h3>재해영향협의 검토·심의 한 시계</h3>
           <p>자연재해대책법 제4조는 협의 요청과 결과 통보만 정하고 전문기관 사전검토(P04)와 심의위원회 심의(P05)의 개별 기한을 두지 않아, 사업자가 조사자료(P02)를 낸 뒤 검토 보완요구와 심의 상정을 각각 따로 기다리며 같은 협의 사건의 시계가 두 번 멈춘다.</p>
           <div class="lever"><b>고칠 곳</b> 자연재해대책법 제4조에 협의 총기한을 명시하고 전문검토·심의위 심의 일정을 그 총기한 안에 편입하며, 검토 기한 초과 시 심의 상정으로 간주하고 보완자료는 후제출을 허용한다.</div>
           <div class="targets"><span class="tg">→ 행정안전부 — 자연재해대책법 제4조</span></div>
+          <div class="tiernote">하위법령 가능: 자연재해대책법 시행령 제4조</div>
         </div><div class="impcard" style="border-color:#d9a821;background:#fdf8e3">
-          <div class="imptop"><i class="ib" style="background:#d9a821">I10</i><span class="impkind" style="color:#d9a821">통합</span><span class="impnodes">N39_8_P01 · N39_8_P02 · N39_8_P03 · N39_8_P04 · N39_8_P05 · N39_8_P06 · N39_9_P01 · N39_9_P02 · N39_9_P03 · N39_9_P04 · N39_9_P05 · N39_9_P06 · N39_9_P07 · N39_9_P08 · N14_12_D05 · N14_12_D08 · N14_2_P02 · N37_0_P10</span></div>
+          <div class="imptop"><i class="ib" style="background:#d9a821">I10</i><span class="impkind" style="color:#d9a821">통합</span><span class="tier t-act">법률 개정</span><span class="impnodes">N39_8_P01 · N39_8_P02 · N39_8_P03 · N39_8_P04 · N39_8_P05 · N39_8_P06 · N39_9_P01 · N39_9_P02 · N39_9_P03 · N39_9_P04 · N39_9_P05 · N39_9_P06 · N39_9_P07 · N39_9_P08 · N14_12_D05 · N14_12_D08 · N14_2_P02 · N37_0_P10</span></div>
           <h3>교통평가·광역대책 한 시계 작성</h3>
           <p>도시교통정비 촉진법 제16조는 사업시행자에게 교통영향평가서·개선대책 작성과 관계기관 의견수렴을, 대도시권 광역교통 관리에 관한 특별법 제7조의2는 같은 사업에 광역 통행수요 분석·광역교통개선대책 수립과 관계기관 협의를 각각 요구해, 동일 사업의 교통현황 조사·개선대책·기관협의가 국지/광역 범위만 다른 채 두 법·두 시계로 두 번 작성·협의된다.</p>
           <div class="lever"><b>고칠 곳</b> 도시교통정비 촉진법 제16조에 '광역교통개선대책 수립대상 사업은 교통영향평가서에 광역교통개선대책을 병합 작성·제출하고, 승인기관이 두 법의 관계기관 협의를 동시 발송·공통 회신기한으로 처리한다'는 항을 신설한다.</div>
           <div class="targets"><span class="tg">→ 국토교통부 — 도시교통정비 촉진법 제16조</span><span class="tg">→ 국토교통부 — 대도시권 광역교통 관리에 관한 특별법 제7조의2</span></div>
+          <div class="tiernote">전 대상이 법률 사항 — 위임 문구가 없거나 위임 범위 밖</div>
         </div><div class="impcard" style="border-color:#d9a821;background:#fdf8e3">
-          <div class="imptop"><i class="ib" style="background:#d9a821">I11</i><span class="impkind" style="color:#d9a821">통합</span><span class="impnodes">N14_12_D03B · N14_12_D04 · N37_17_P02</span></div>
+          <div class="imptop"><i class="ib" style="background:#d9a821">I11</i><span class="impkind" style="color:#d9a821">통합</span><span class="tier t-act">법률 개정</span><span class="impnodes">N14_12_D03B · N14_12_D04 · N37_17_P02</span></div>
           <h3>의제협의 요청·일괄협의회 한 시계</h3>
           <p>국토계획법 제61조제3항은 의제 협의를 관계기관별 협의 요청으로, 제61조의2와 시행령 제59조의2제1항은 같은 협의를 요청일부터 10일 내 일괄협의회로 여는 절차로 따로 두어, 실체요건이 같은 하나의 협의가 요청과 개최의 두 절차·두 시계로 진행된다.</p>
           <div class="lever"><b>고칠 곳</b> 국토의 계획 및 이용에 관한 법률 제61조의2를 '제61조제3항 협의 요청은 일괄협의회 개최 통지로 갈음하고, 요청일부터 10일 내 개최한 협의회에서 의견 제출까지 마친다'로 개정하여 요청·개최를 한 시계로 통합.</div>
           <div class="targets"><span class="tg">→ 국토교통부 — 국토의 계획 및 이용에 관한 법률 제61조의2</span><span class="tg">→ 국토교통부 — 국토의 계획 및 이용에 관한 법률 제61조제3항</span><span class="tg">→ 국토교통부 — 국토의 계획 및 이용에 관한 법률 시행령 제59조의2제1항</span></div>
+          <div class="tiernote">전 대상이 법률 사항 — 위임 문구가 없거나 위임 범위 밖</div>
         </div><div class="impcard" style="border-color:#d9a821;background:#fdf8e3">
-          <div class="imptop"><i class="ib" style="background:#d9a821">I12</i><span class="impkind" style="color:#d9a821">통합</span><span class="impnodes">N40_10_P01 · N40_10_P02 · N40_10_P04 · N40_10_P05 · N40_10_P06 · N40_10_P07 · N40_11_P01 · N40_11_P02 · N40_11_P04 · N40_11_P05 · N40_11_P08 · N37_0_P10</span></div>
+          <div class="imptop"><i class="ib" style="background:#d9a821">I12</i><span class="impkind" style="color:#d9a821">통합</span><span class="tier t-act">법률 개정</span><span class="impnodes">N40_10_P01 · N40_10_P02 · N40_10_P04 · N40_10_P05 · N40_10_P06 · N40_10_P07 · N40_11_P01 · N40_11_P02 · N40_11_P04 · N40_11_P05 · N40_11_P08 · N37_0_P10</span></div>
           <h3>개발사업 에너지 협의 한 창구</h3>
           <p>같은 개발사업 계획 수립 단계에서 에너지이용 합리화법 제10조는 산업통상부와 에너지사용계획 협의를, 집단에너지사업법 제4조는 기후에너지환경부와 집단에너지 공급 타당성 협의를 각각 요구해 사업주관자가 같은 수요·공급 자료를 두 부처에 따로 내고 두 회신을 따로 기다린다.</p>
           <div class="lever"><b>고칠 곳</b> 집단에너지사업법 제4조에 에너지이용 합리화법 제10조 협의와 동일 사업은 한 번의 제출로 갈음하고 두 부처가 한 기한 안에 공동 회신하도록 하는 항을 신설한다.</div>
           <div class="targets"><span class="tg">→ 기후에너지환경부 — 집단에너지사업법 제4조</span><span class="tg">→ 산업통상부 — 에너지이용 합리화법 제10조</span></div>
+          <div class="tiernote">전 대상이 법률 사항 — 위임 문구가 없거나 위임 범위 밖</div>
         </div><div class="impcard" style="border-color:#d9a821;background:#fdf8e3">
-          <div class="imptop"><i class="ib" style="background:#d9a821">I13</i><span class="impkind" style="color:#d9a821">통합</span><span class="impnodes">N13_3_P01 · N13_3_P03 · N13_3_P04 · N13_3_P05 · N13_3_P06 · N13_3_P08 · N13_3_P12 · N13_3_P13 · N13_3_P14 · N13_3_P15 · N13_4_P01 · N13_4_P03 · N13_4_P05 · N13_4_P07 · N13_4_P09 · N13_5_P01 · N13_5_P02 · N13_5_P03 · N13_5_P04</span></div>
+          <div class="imptop"><i class="ib" style="background:#d9a821">I13</i><span class="impkind" style="color:#d9a821">통합</span><span class="tier t-act">법률 개정</span><span class="impnodes">N13_3_P01 · N13_3_P03 · N13_3_P04 · N13_3_P05 · N13_3_P06 · N13_3_P08 · N13_3_P12 · N13_3_P13 · N13_3_P14 · N13_3_P15 · N13_4_P01 · N13_4_P03 · N13_4_P05 · N13_4_P07 · N13_4_P09 · N13_5_P01 · N13_5_P02 · N13_5_P03 · N13_5_P04</span></div>
           <h3>발굴 필요판단·허가 한 시계</h3>
           <p>발굴 필요성 판단(P06)과 발굴허가 심사·처분(P08)이 같은 매장유산법 제11조 위에서 별 단계로 갈리고, 사업시행자의 발굴 필요 판정(제11조제1항)과 청의 심사·통지(제12조제2항)까지 겹쳐 한 허가 사건이 네 번 세어진다. 제12조제2항의 10일(심의 시 7일) 통지 시계는 심사 단계에만 붙어 있어 앞선 필요성 판단 구간은 기한 없이 떠 있다.</p>
           <div class="lever"><b>고칠 곳</b> 매장유산 보호 및 조사에 관한 법률 제12조제2항 — 발굴 허용 사유(제11조제1항) 해당 여부 판단을 허가 심사에 포함시켜 신청일부터 10일(심의 시 심의 종료 후 7일) 단일 통지 시계로 규정한다.</div>
           <div class="targets"><span class="tg">→ 국가유산청 — 매장유산 보호 및 조사에 관한 법률 제12조제2항</span><span class="tg">→ 국가유산청 — 매장유산 보호 및 조사에 관한 법률 제11조제1항</span></div>
+          <div class="tiernote">전 대상이 법률 사항 — 위임 문구가 없거나 위임 범위 밖</div>
         </div>
       </div>
       <div class="orgtab">

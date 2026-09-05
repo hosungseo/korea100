@@ -88,11 +88,12 @@ export async function build(caseUrl, { png = false } = {}) {
       <p class="imphead">색은 개선 유형, 번호는 위 체계도의 배지와 같다. 근거 조문은 전부 현행본 원문 대조. ${meta.leverNote || ''}</p>
       <div class="impgrid">
         ${improvements.map((i) => `<div class="impcard" style="border-color:${IMP[i.kind].color};background:${IMP[i.kind].bg}">
-          <div class="imptop"><i class="ib" style="background:${IMP[i.kind].color}">${i.id}</i><span class="impkind" style="color:${IMP[i.kind].color}">${IMP[i.kind].label}</span><span class="impnodes">${i.nodes.join(' · ')}</span></div>
+          <div class="imptop"><i class="ib" style="background:${IMP[i.kind].color}">${i.id}</i><span class="impkind" style="color:${IMP[i.kind].color}">${IMP[i.kind].label}</span>${i.tier ? `<span class="tier t-${i.tier === '법률' ? 'act' : 'sub'}">${i.tier} 개정</span>` : ''}<span class="impnodes">${i.nodes.join(' · ')}</span></div>
           <h3>${i.title}</h3>
           <p>${i.why}</p>
           <div class="lever"><b>고칠 곳</b> ${i.lever}</div>
           <div class="targets">${i.targets.map((t) => `<span class="tg">→ ${t}</span>`).join('')}</div>
+          ${i.tierNote ? `<div class="tiernote">${i.tierNote}</div>` : ''}
         </div>`).join('')}
       </div>
       <div class="orgtab">
@@ -172,6 +173,10 @@ footer .url { font-family:ui-monospace,monospace; color:#65d7ad; }
 .impcard { border:1.8px solid; border-radius:10px; padding:10px 12px; }
 .imptop { display:flex; align-items:center; gap:8px; }
 .impkind { font-size:11px; font-weight:800; }
+.tier { font-size:10px; font-weight:800; padding:1.5px 6px; border-radius:9px; }
+.tier.t-act { background:#f6e2e2; color:#8f3d3d; }
+.tier.t-sub { background:#e2eef6; color:#1f5f89; }
+.tiernote { margin-top:6px; font-size:11px; line-height:1.5; color:#4a6157; word-break:keep-all; }
 .impnodes { margin-left:auto; font-family:ui-monospace,monospace; font-size:10px; color:#6d7f76; }
 .impcard h3 { margin-top:5px; font-size:14px; font-weight:800; color:#12241c; word-break:keep-all; }
 .impcard p { margin-top:5px; font-size:11.5px; line-height:1.5; color:#2e4038; word-break:keep-all; }

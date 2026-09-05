@@ -94,7 +94,20 @@ if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(new URL(im
   const procs = readJson(path.join(OUT_COMPARE, 'procedures.json'));
   const cards = readJson(path.join(OUT_COMPARE, 'cards.json'));
   const impFile = path.join(OUT_COMPARE, 'cards-out.json');
-  const improvements = fs.existsSync(impFile) ? readJson(impFile) : [];
+  let improvements = fs.existsSync(impFile) ? readJson(impFile) : [];
+  // 층위 판정(narrow-tier)이 있으면 카드에 붙인다. 없으면 그대로 둔다.
+  const tierFile = path.join(OUT_COMPARE, 'tiers.json');
+  if (fs.existsSync(tierFile)) {
+    const byId = new Map(readJson(tierFile).map((t) => [t.id, t]));
+    improvements = improvements.map((i) => {
+      const t = byId.get(i.id); if (!t) return i;
+      const inScope = (t.targets ?? []).filter((x) => x.inScope);
+      const note = inScope.length
+        ? `하위법령 가능: ${inScope.map((x) => x.article).join(', ')}`
+        : '전 대상이 법률 사항 — 위임 문구가 없거나 위임 범위 밖';
+      return { ...i, tier: t.requiredTier, tierNote: note };
+    });
+  }
   const project = readJson(path.join(ROOT, 'web/data/mega-projects/projects/gwangju-semiconductor-cluster.json'));
   const cd = buildCaseData({ procs, cards, improvements, project, orgs: loadOrgs(), meta: { slug: 'deemed-bundle', checkedAt: new Date().toISOString().slice(0, 10) } });
   fs.writeFileSync(path.join(OUT, 'case-data.mjs'), renderCaseDataModule(cd));

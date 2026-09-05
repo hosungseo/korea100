@@ -3060,7 +3060,9 @@ export const improvements = [
       "국토교통부 — 국토의 계획 및 이용에 관한 법률 제56조",
       "농림축산식품부 — 농지법 제34조제1항"
     ],
-    "droppedTargets": []
+    "droppedTargets": [],
+    "tier": "법률",
+    "tierNote": "전 대상이 법률 사항 — 위임 문구가 없거나 위임 범위 밖"
   },
   {
     "id": "I2",
@@ -3126,7 +3128,9 @@ export const improvements = [
       "기후에너지환경부 — 환경영향평가법 제28조제1항",
       "기후에너지환경부 — 환경영향평가법 제22조제1항"
     ],
-    "droppedTargets": []
+    "droppedTargets": [],
+    "tier": "법률",
+    "tierNote": "전 대상이 법률 사항 — 위임 문구가 없거나 위임 범위 밖"
   },
   {
     "id": "I3",
@@ -3177,7 +3181,9 @@ export const improvements = [
       "환경부 — 환경영향평가법 제25조제5항",
       "환경부 — 환경영향평가법 제27조"
     ],
-    "droppedTargets": []
+    "droppedTargets": [],
+    "tier": "법률",
+    "tierNote": "하위법령 가능: 환경영향평가법 시행령 제47조"
   },
   {
     "id": "I4",
@@ -3209,7 +3215,9 @@ export const improvements = [
       "국토교통부 — 국토의 계획 및 이용에 관한 법률 제57조제2항",
       "국토교통부 — 국토의 계획 및 이용에 관한 법률 제58조"
     ],
-    "droppedTargets": []
+    "droppedTargets": [],
+    "tier": "법률",
+    "tierNote": "하위법령 가능: 국토의 계획 및 이용에 관한 법률 시행령 제54조"
   },
   {
     "id": "I5",
@@ -3243,7 +3251,9 @@ export const improvements = [
       "농림축산식품부 — 농지법 제35조제1항",
       "국토교통부 — 국토의 계획 및 이용에 관한 법률 제61조제4항"
     ],
-    "droppedTargets": []
+    "droppedTargets": [],
+    "tier": "법률",
+    "tierNote": "전 대상이 법률 사항 — 위임 문구가 없거나 위임 범위 밖"
   },
   {
     "id": "I6",
@@ -3277,7 +3287,9 @@ export const improvements = [
       "산림청 — 산지관리법 제18조",
       "산림청 — 산지관리법 제17조"
     ],
-    "droppedTargets": []
+    "droppedTargets": [],
+    "tier": "법률",
+    "tierNote": "전 대상이 법률 사항 — 위임 문구가 없거나 위임 범위 밖"
   },
   {
     "id": "I7",
@@ -3323,7 +3335,9 @@ export const improvements = [
       "국토교통부 — 산업단지 인ㆍ허가 절차 간소화를 위한 특례법 제14조",
       "국토교통부 — 국토의 계획 및 이용에 관한 법률 제59조"
     ],
-    "droppedTargets": []
+    "droppedTargets": [],
+    "tier": "법률",
+    "tierNote": "전 대상이 법률 사항 — 위임 문구가 없거나 위임 범위 밖"
   },
   {
     "id": "I8",
@@ -3352,7 +3366,9 @@ export const improvements = [
       "국토교통부 — 산업입지 및 개발에 관한 법률 제22조",
       "해양수산부 — 공유수면 관리 및 매립에 관한 법률 제32조"
     ],
-    "droppedTargets": []
+    "droppedTargets": [],
+    "tier": "법률",
+    "tierNote": "전 대상이 법률 사항 — 위임 문구가 없거나 위임 범위 밖"
   },
   {
     "id": "I9",
@@ -3390,7 +3406,9 @@ export const improvements = [
     "targets": [
       "행정안전부 — 자연재해대책법 제4조"
     ],
-    "droppedTargets": []
+    "droppedTargets": [],
+    "tier": "대통령령",
+    "tierNote": "하위법령 가능: 자연재해대책법 시행령 제4조"
   },
   {
     "id": "I10",
@@ -3443,7 +3461,9 @@ export const improvements = [
       "국토교통부 — 도시교통정비 촉진법 제16조",
       "국토교통부 — 대도시권 광역교통 관리에 관한 특별법 제7조의2"
     ],
-    "droppedTargets": []
+    "droppedTargets": [],
+    "tier": "법률",
+    "tierNote": "전 대상이 법률 사항 — 위임 문구가 없거나 위임 범위 밖"
   },
   {
     "id": "I11",
@@ -3467,7 +3487,9 @@ export const improvements = [
       "국토교통부 — 국토의 계획 및 이용에 관한 법률 제61조제3항",
       "국토교통부 — 국토의 계획 및 이용에 관한 법률 시행령 제59조의2제1항"
     ],
-    "droppedTargets": []
+    "droppedTargets": [],
+    "tier": "법률",
+    "tierNote": "전 대상이 법률 사항 — 위임 문구가 없거나 위임 범위 밖"
   },
   {
     "id": "I12",
@@ -3508,7 +3530,9 @@ export const improvements = [
       "기후에너지환경부 — 집단에너지사업법 제4조",
       "산업통상부 — 에너지이용 합리화법 제10조"
     ],
-    "droppedTargets": []
+    "droppedTargets": [],
+    "tier": "법률",
+    "tierNote": "전 대상이 법률 사항 — 위임 문구가 없거나 위임 범위 밖"
   },
   {
     "id": "I13",
@@ -3563,6 +3587,8 @@ export const improvements = [
       "국가유산청 — 매장유산 보호 및 조사에 관한 법률 제12조제2항",
       "국가유산청 — 매장유산 보호 및 조사에 관한 법률 제11조제1항"
     ],
-    "droppedTargets": []
+    "droppedTargets": [],
+    "tier": "법률",
+    "tierNote": "전 대상이 법률 사항 — 위임 문구가 없거나 위임 범위 밖"
   }
 ];
