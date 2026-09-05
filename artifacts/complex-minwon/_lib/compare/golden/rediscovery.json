@@ -1,0 +1,16 @@
+{
+  "targets": [
+    { "name": "3호 I5 — 특별법 §26 의제 협의를 지정 심의와 한 사건으로", "run": "n03",
+      "must": [{ "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법", "article": "제26조" }, { "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법", "article": "제11조" }], "minMatch": 2 },
+    { "name": "3호 I2 — 작성 단계 사전협의 + 지정 전 협의 시계 2회", "run": "n03",
+      "must": [{ "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법 시행령", "article": "제17조제2항" }, { "law": "반도체산업 경쟁력 강화 및 지원에 관한 특별법", "article": "제11조제1항" }], "minMatch": 2 },
+    { "name": "1호 I2 — 건축허가 협의 기한 4종을 하나로", "run": "building",
+      "must": [{ "law": "건축법", "article": "제11조제6항" }, { "law": "국토의 계획 및 이용에 관한 법률", "article": "제61조" }, { "law": "소방시설 설치 및 관리에 관한 법률", "article": "제6조" }], "minMatch": 2 }
+  ],
+  "negatives": [ { "name": "군공항 N32는 덩어리와 묶이지 않는다", "run": "neg", "isolate": "N32" } ],
+  "runs": {
+    "n03": { "milestones": ["N03"] },
+    "building": { "institutions": ["building-permit-use-approval"] },
+    "neg": { "milestones": ["N36","N09","N11","N12","N38","N39","N40","N13","N14","N37","N10","N15","N32"] }
+  }
+}
