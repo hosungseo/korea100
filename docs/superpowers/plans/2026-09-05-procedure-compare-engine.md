@@ -2453,13 +2453,13 @@ git commit -m "feat(warroom): N11·N12·N14·N37에 bundleId — 복합민원 4�
 
 ---
 
-## 완료 기준 (스펙 6절)
+## 완료 기준 (스펙 6절) — 2026-09-05 최종 검증
 
-- [ ] `node --test test/` 전부 통과
-- [ ] `04-deemed-bundle/compare/procedures.json` 222건, `cards.json` ok ≥ 200
-- [ ] `candidates.json` ≥ 1, `verdicts.json` 통과 ≥ 1, `cards-out.json`의 모든 카드가 `targets` ≥ 1 · kind ∈ merge|automate|shorten
-- [ ] `review.html`·`.png`, `deemed-bundle-full/improve.html`·`.png` 존재, `check-overlap` 관통 0 · 겹침 0
-- [ ] `verify-basis` 음성 대조군 OK (failed는 README에 기록)
-- [ ] `check-rediscovery` FOUND 3/3 + 음성 대조군 isolated (MISS는 README에 기록), `compare-golden` 세 지표 ≥ 80%
-- [ ] 워룸 `data.json`에 bundleId 4곳, `path.json` 일수 불변
-- [ ] 소요일 단축 주장 없음(README·판 문구 확인)
+- [x] `node --test test/` 전부 통과 (48/48)
+- [x] `04-deemed-bundle/compare/procedures.json` 222건, `cards.json` ok 222/222
+- [x] `candidates.json` 16, `verdicts.json` 통과 16/16, `cards-out.json` 카드 16개 전부 `targets` ≥ 1 · kind ∈ merge(14)|automate(1)|shorten(1)
+- [x] `review.html`·`.png`, `deemed-bundle-full/improve.html`·`.png` 존재. `check-overlap` 관통 0. 선 겹침은 laneWidth 3회 증대(480/560/640) 후에도 21–23 잔여 — 계획이 명시한 이탈 조건(세 번 안에 0이 안 되면 기록 후 멈춤)에 따라 README에 기록하고 받아들임
+- [x] `verify-basis` 음성 대조군 OK, citations 435/435 failed 0
+- [x] `check-rediscovery` FOUND 3/3(법제처 원문 대조 후 2차 재실행으로 3호 I5·1호 I2 FOUND) + 음성 대조군 isolated. 3호 I2는 절차 단위 구조적 한계로 MISS 유지(README 기록). `compare-golden` org 100%·act 100%·subjects 84% — 세 지표 ≥ 80% 충족
+- [x] 워룸 `data.json`에 bundleId 4곳(N11·N12·N14·N37), `path.json` 일수 불변 확인
+- [x] 소요일 단축 주장 없음 — README·판 문구에 소요일·단축·단축률 언급 없음, 카드는 kind/targets/why/lever만 담당
