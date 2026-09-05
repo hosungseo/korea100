@@ -27,7 +27,7 @@ export function callJson(prompt, { stage, cacheDir = null, fresh = false } = {})
   let raw = '', data = null, attempts = 0;
   while (attempts < 2 && data === null) {
     attempts++;
-    try { raw = invoke(prompt); } catch (e) { raw = `<<exec error: ${e.message}>>`; }
+    try { raw = invoke(prompt); } catch (e) { raw = `<<exec error: ${e.message}>>`; data = null; continue; }
     data = extractJson(raw);
   }
   const rec = { stage, promptSha1, at: new Date().toISOString(), attempts, failed: data === null, raw, data };

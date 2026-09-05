@@ -40,9 +40,13 @@ export function validateCard(raw, proc, subjects, orgs) {
     if (s.startsWith('other:')) { if (s.length > 6) otherSubjects.push(s.slice(6)); else errors.push('empty other'); }
     else if (!subjects[s]) errors.push(`subject ${s}`);
   }
-  const legalKeys = new Set(proc.legal.map((l) => `${l.law}|${l.article}`));
+  const strip = (a) => String(a ?? '').replace(/（.*?）|\([^)]*\)/g, '').trim();
+  const legalKeys = new Set(proc.legal.flatMap((l) => [`${l.law}|${l.article}`, `${l.law}|${strip(l.article)}`]));
   const evidence = Array.isArray(raw.evidence) ? raw.evidence : [];
-  for (const e of evidence) if (!legalKeys.has(`${e?.law}|${e?.article}`)) errors.push(`evidence not in procedure: ${e?.law} ${e?.article}`);
+  for (const e of evidence) {
+    const key = `${e?.law}|${e?.article}`, key2 = `${e?.law}|${strip(e?.article)}`;
+    if (!legalKeys.has(key) && !legalKeys.has(key2)) errors.push(`evidence not in procedure: ${e?.law} ${e?.article}`);
+  }
   const n = normalizeOrg(proc.actorRaw, orgs);
   const card = {
     pid: proc.pid, org: n.org, orgLabel: n.label, orgKind: n.kind, orgAlso: n.also, orgUnknown: n.unknown,
