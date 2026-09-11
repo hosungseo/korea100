@@ -1,4 +1,4 @@
-# korea100 신규 제도 후보 검토 큐 (2026-09-10)
+# korea100 신규 제도 후보 검토 큐 (2026-09-11)
 
 기사·정책브리핑에서 발굴한 **미검증 제도 후보**입니다. `docs/recipes/institution-creation`
 레시피로 법령 검증·모델링 후 등재하거나 기각하세요(queue.json의 status를 accepted/rejected로).
