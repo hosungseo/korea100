@@ -139,6 +139,7 @@ function ProcessNodeInspector({
         </div>
         <h3>{node.name}</h3>
         <p>{node.stage} · {node.lane} · {node.actor}</p>
+        {node.action && <p>{node.action}</p>}
         {documents.length > 0 && (
           <div className="process-node-documents">
             {[...new Set(documents)].map((document) => (
