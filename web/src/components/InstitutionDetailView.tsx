@@ -5,6 +5,7 @@ import { formatProcessWarnings } from "@/lib/process-warnings.mjs";
 import type { Institution, InstitutionSummary } from "@/lib/types";
 import InstitutionSwitcher from "./InstitutionSwitcher";
 import ProcessExplorer from "./ProcessExplorer";
+import JointHomeTaxGuide from "./JointHomeTaxGuide";
 import styles from "./InstitutionDetail.module.css";
 
 export default function InstitutionDetailView({
@@ -79,6 +80,8 @@ export default function InstitutionDetailView({
           ))}
         </div>
       </section>
+
+      {institution.slug === "joint-owner-single-home-tax-special" && <JointHomeTaxGuide />}
 
       <section id="process" className={styles.processSection}>
         <header className={styles.sectionHeading}>

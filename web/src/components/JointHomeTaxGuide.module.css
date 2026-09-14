@@ -1,0 +1,31 @@
+.guide { padding: 28px 32px; border-bottom: 1px solid #dde5df; background: #fff; color: #17231d; }
+.heading { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 20px; }
+.heading h2 { margin: 4px 0 10px; font-size: clamp(23px, 3vw, 32px); letter-spacing: -.04em; line-height: 1.3; }
+.heading p { margin: 0; line-height: 1.7; font-size: 14px; }
+.heading .eyebrow { color: #236449; font-size: 12px; font-weight: 700; }
+.period { display: grid; gap: 4px; border-left: 3px solid #087452; padding-left: 14px; font-size: 12px; color: #475b50; }
+.period strong { color: #123d2e; font-size: 26px; font-variant-numeric: tabular-nums; }
+.comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 22px; border: 1px solid #bdcbc4; }
+.comparison article { min-width: 0; padding: 22px; }
+.comparison h3 { margin: 0; font-size: 14px; font-weight: 700; }
+.comparison .special { background: #eff7f2; border-left: 1px solid #bdcbc4; }
+.amount { margin: 12px 0 16px; color: #475b50; font-size: 14px; }
+.amount strong { color: #123d2e; font-size: clamp(25px, 3vw, 36px); letter-spacing: -.04em; }
+.comparison ul, .checklist ul { padding-left: 19px; margin: 0; font-size: 14px; line-height: 1.8; }
+.comparison li + li, .checklist li + li { margin-top: 4px; }
+.change { padding: 14px 16px; background: #f5f7f6; line-height: 1.8; font-size: 14px; }
+.change strong { color: #155b40; margin-right: 8px; }
+.checklist { border-block: 1px solid #dde5df; padding: 14px 0; }
+.checklist summary { cursor: pointer; font-size: 14px; font-weight: 650; line-height: 1.7; }
+.checklist[open] ul { margin-top: 12px; }
+.links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.links a { display: inline-flex; align-items: center; min-height: 44px; padding: 9px 12px; border: 1px solid #bdcbc4; color: #17563e; font-size: 13px; font-weight: 650; text-decoration: none; }
+.links a:hover { background: #eff7f2; }
+.links a:focus-visible, .checklist summary:focus-visible { outline: 3px solid #236449; outline-offset: 3px; }
+.source { max-width: 1050px; font-size: 12px; color: #59665e; line-height: 1.8; margin: 16px 0 0; }
+@media (max-width: 600px) {
+  .guide { padding: 24px 16px; }
+  .comparison { grid-template-columns: 1fr; }
+  .comparison article { padding: 18px; }
+  .comparison .special { border-left: 0; border-top: 1px solid #bdcbc4; }
+}
