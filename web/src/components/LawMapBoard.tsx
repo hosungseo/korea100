@@ -1,19 +1,22 @@
 "use client";
 
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import type { Article, Edge, EdgeKind, LawMap, LawMapTexts, LawMapView } from "@/lib/law-map-types";
+import type { Article, Edge, EdgeKind, LawMap, LawMapClass, LawMapTexts, LawMapView } from "@/lib/law-map-types";
 import { findRoute, indexEdgesByNode } from "@/lib/law-map-route.mjs";
 import type { LawMapRoute } from "@/lib/law-map-route.mjs";
 import { formatLawMapHash, parseLawMapHash } from "@/lib/law-map-hash.mjs";
 import LawMapColumn from "./LawMapColumn";
 import LawMapOverview from "./LawMapOverview";
 import LawMapPanel from "./LawMapPanel";
+import LawMapRuleGrid from "./LawMapRuleGrid";
 import LawMapToolbar from "./LawMapToolbar";
 import { EDGE_COLORS, EDGE_ORDER, TIER_ORDER, describeNode } from "./law-map-constants";
 import styles from "./LawMapBoard.module.css";
 
 interface Props {
   map: LawMap;
+  /** 조문 분류(규칙 기반 추론). 없으면 규율 보기를 열 수 없다. */
+  classMap?: LawMapClass | null;
   textUrl: string;
 }
 
@@ -34,8 +37,9 @@ const OVERVIEW_THRESHOLD = 150;
 /** 이보다 좁은 창은 기본 보기를 자세히로 둔다(큰 그림 토글은 그대로 쓸 수 있다). */
 const NARROW_WIDTH = 700;
 
-export default function LawMapBoard({ map, textUrl }: Props) {
+export default function LawMapBoard({ map, classMap = null, textUrl }: Props) {
   const byCountDefault: LawMapView = map.articles.length > OVERVIEW_THRESHOLD ? "overview" : "detail";
+  const ruleAvailable = classMap !== null;
   // 좁은 화면(모바일)은 큰 그림이 읽히지 않으므로 자세히가 기본. 서버에서는 폭을 모르니 마운트 뒤 효과에서 정한다.
   const [narrow, setNarrow] = useState(false);
   const defaultView: LawMapView = narrow ? "detail" : byCountDefault;
@@ -127,6 +131,8 @@ export default function LawMapBoard({ map, textUrl }: Props) {
   // 보기(v=)는 바로 반영한다. a=·route=만 있는 옛 링크는 자세히 보기로 연다.
   useEffect(() => {
     const state = parseLawMapHash(window.location.hash);
+    // 분류 데이터가 없는 법령의 v=r 링크는 보기 지정이 없는 것으로 본다.
+    if (state.view === "rule" && !ruleAvailable) delete state.view;
     const isNarrow = window.innerWidth < NARROW_WIDTH;
     if (!isNarrow && !state.view && !state.route && !state.article) return;
     const frame = requestAnimationFrame(() => {
@@ -146,7 +152,7 @@ export default function LawMapBoard({ map, textUrl }: Props) {
       }
     });
     return () => cancelAnimationFrame(frame);
-  }, [map.edges, isNode, scrollTo, byCountDefault]);
+  }, [map.edges, isNode, scrollTo, byCountDefault, ruleAvailable]);
 
   // 해시 기록. 경로는 BFS가 실제로 찾은 양 끝점으로 기록한다(selected와 무관).
   // 보기는 선택·경로가 있거나 기본 보기와 다를 때만 적어, 처음 연 페이지의 주소는 그대로 둔다.
@@ -246,11 +252,16 @@ export default function LawMapBoard({ map, textUrl }: Props) {
     if (selected === null) pendingScrollRef.current = null;
   }, [selected]);
 
-  // 큰 그림에서 장(또는 행정규칙·자치법규 상자)을 누르면 자세히 보기로 넘어가 그 장의 첫 조문(레인)을 연다.
+  // 큰 그림에서 장(또는 행정규칙·자치법규 상자)을, 규율 보기에서 조문 칩을 누르면 자세히 보기로 넘어가 그 조문(레인)을 연다.
   const pickFromOverview = useCallback((id: string) => {
     setView("detail");
     focusNode(id);
   }, [focusNode]);
+
+  const changeView = useCallback((next: LawMapView) => {
+    if (next === "rule" && !ruleAvailable) return;
+    setView(next);
+  }, [ruleAvailable]);
 
   // Esc: 선택 해제(입력란 안에서는 건드리지 않는다).
   useEffect(() => {
@@ -273,15 +284,16 @@ export default function LawMapBoard({ map, textUrl }: Props) {
   };
 
   const routeNodes = useMemo(() => new Set(route?.nodes ?? []), [route]);
-  // 큰 그림에서 고른 조문이 없으면 패널은 안내문뿐이므로 숨기고 그림이 폭을 다 쓴다.
-  const panelHidden = view === "overview" && selected === null;
+  // 큰 그림·규율 보기에서 고른 조문이 없으면 패널은 안내문뿐이므로 숨기고 그림이 폭을 다 쓴다.
+  const panelHidden = view !== "detail" && selected === null;
 
   return (
     <div className={styles.layout} data-panel={panelHidden ? "hidden" : undefined}>
       <div className={styles.main}>
         <LawMapToolbar
           view={view}
-          onChangeView={setView}
+          onChangeView={changeView}
+          ruleDisabled={!ruleAvailable}
           kinds={kinds}
           onToggleKind={(kind) => setKinds((prev) => { const next = new Set(prev); if (next.has(kind)) next.delete(kind); else next.add(kind); return next; })}
           query={query}
@@ -301,6 +313,14 @@ export default function LawMapBoard({ map, textUrl }: Props) {
               kinds={kinds}
               selected={selected}
               routeNodes={routeNodes}
+              onPick={pickFromOverview}
+            />
+          ) : view === "rule" && classMap ? (
+            <LawMapRuleGrid
+              map={map}
+              classMap={classMap}
+              kinds={kinds}
+              selected={selected}
               onPick={pickFromOverview}
             />
           ) : (

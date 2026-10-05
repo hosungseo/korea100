@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getLawMap, getLawMapIds } from "@/lib/law-map-data";
+import { getLawMap, getLawMapClass, getLawMapIds } from "@/lib/law-map-data";
 import { EDGE_LABELS, EDGE_ORDER, TIER_LABELS } from "@/components/law-map-constants";
 import LawMapBoard from "@/components/LawMapBoard";
 import styles from "./page.module.css";
@@ -34,6 +34,7 @@ export default async function LawMapPage({ params }: { params: Promise<{ lawId: 
   const map = getLawMap(lawId);
   if (!map) notFound();
   const t = map.stats.articlesByTier;
+  const classMap = getLawMapClass(lawId);
 
   return (
     <main className={styles.page}>
@@ -59,7 +60,7 @@ export default async function LawMapPage({ params }: { params: Promise<{ lawId: 
           <div><dt>미해결 위임</dt><dd>{map.stats.unresolved}</dd></div>
         </dl>
       </header>
-      <LawMapBoard map={map} textUrl={`${BASE_PATH}/law-map/${lawId}.text.json`} />
+      <LawMapBoard map={map} classMap={classMap} textUrl={`${BASE_PATH}/law-map/${lawId}.text.json`} />
     </main>
   );
 }

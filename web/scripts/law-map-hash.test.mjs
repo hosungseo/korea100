@@ -32,6 +32,14 @@ test("view round-trips alone and alongside article or route", () => {
   assert.deepEqual(parseLawMapHash(withRoute), { route: ["L1:제11조", "R1:제6조"], view: "overview" });
 });
 
+test("rule view is v=r and composes with an article", () => {
+  assert.equal(formatLawMapHash({ view: "rule" }), "#v=r");
+  assert.deepEqual(parseLawMapHash("#v=r"), { view: "rule" });
+  const withArticle = formatLawMapHash({ article: "L1:제11조", view: "rule" });
+  assert.equal(withArticle, "#a=L1%3A%EC%A0%9C11%EC%A1%B0&v=r");
+  assert.deepEqual(parseLawMapHash(withArticle), { article: "L1:제11조", view: "rule" });
+});
+
 test("hashes without v carry no view, and unknown v is ignored", () => {
   assert.deepEqual(parseLawMapHash("#a=L1%3A%EC%A0%9C11%EC%A1%B0"), { article: "L1:제11조" });
   assert.deepEqual(parseLawMapHash("#v=x"), {});

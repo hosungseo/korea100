@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import type { LawMap, LawMapIndex } from "./law-map-types";
+import type { LawMap, LawMapClass, LawMapIndex } from "./law-map-types";
 
 const LAW_MAP_DIR = path.join(process.cwd(), "data", "law-map");
 
@@ -22,6 +22,14 @@ export function getLawMap(lawId: string): LawMap | null {
   const file = path.join(LAW_MAP_DIR, `${lawId}.json`);
   if (!fs.existsSync(file)) return null;
   return JSON.parse(fs.readFileSync(file, "utf8")) as LawMap;
+}
+
+/** 조문 분류(<lawId>.class.json). 없으면 null — 규율 보기 단추가 비활성화된다. */
+export function getLawMapClass(lawId: string): LawMapClass | null {
+  if (!/^\d+$/.test(lawId)) return null;
+  const file = path.join(LAW_MAP_DIR, `${lawId}.class.json`);
+  if (!fs.existsSync(file)) return null;
+  return JSON.parse(fs.readFileSync(file, "utf8")) as LawMapClass;
 }
 
 /**
