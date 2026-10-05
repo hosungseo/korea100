@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {
   classifyArticle, classifyStage, classifyActor, firstSentence, findSubject, findNominativeSubject,
-  STAGES, ACTORS, STAGE_TITLE_CUES, ACTOR_CUES,
+  STAGES, ACTORS, STAGE_TITLE_CUES, ACTOR_CUES, CLASSIFIER_VERSION,
 } from "./lib/law-map-classify.mjs";
 
 function check(result, { stage, actor, minConfidence = 0, method }) {
@@ -42,6 +42,17 @@ test("procedure: 건축허가 → procedure, 주어 '…하려는 자는' → ci
   check(r, { stage: "procedure", actor: "citizen", minConfidence: 0.8, method: "rule:title" });
   assert.ok(r.evidence.some((e) => e.startsWith("actor/also:local")));
   assert.ok(!r.evidence.some((e) => e.startsWith("actor/also:central")), "'구청장'이 '청장'(중앙) 단서에 걸리면 안 된다");
+});
+
+test("operation: 건축물대장·통계·기본계획은 행정 운영 단계", () => {
+  const r = classifyArticle({ title: "건축물대장", chapter: "제3장 건축물의 유지와 관리", text: "① 특별자치시장ㆍ특별자치도지사 또는 시장ㆍ군수ㆍ구청장은 건축물의 소유ㆍ이용 상태를 확인하기 위하여 건축물대장에 건축물과 그 대지의 현황을 적어서 보관하여야 한다." });
+  check(r, { stage: "operation", actor: "local", minConfidence: 0.8, method: "rule:title" });
+  assert.equal(classifyStage({ title: "건축통계 등", text: "허가권자는 건축통계를 국토교통부장관에게 보고하여야 한다." }).stage, "operation");
+  const plan = classifyStage({ title: "기본계획의 수립", chapter: "제1장 총칙", text: "① 국토교통부장관은 5년마다 건축정책기본계획을 수립하여야 한다." });
+  assert.equal(plan.stage, "operation", "기본계획은 purpose가 아니라 operation");
+  // 제목 단서가 없어도 본문 '계획을 수립'으로 operation
+  const txt = classifyStage({ title: "건축행정의 효율화", text: "① 국토교통부장관은 건축행정 업무를 전산처리하기 위하여 종합적인 계획을 수립ㆍ시행할 수 있다." });
+  assert.deepEqual([txt.stage, txt.method], ["operation", "rule:text"]);
 });
 
 test("organization: 위원회 설치 조문 → organization; 주어가 위원회면 committee", () => {
@@ -85,11 +96,29 @@ test("court: 법원이 주어면 court", () => {
   assert.ok(r.confidence >= 0.8);
 });
 
-test("local: 공동 주어(장관, 시ㆍ도지사 및 시장ㆍ군수ㆍ구청장은)는 먼저 적힌 쪽을 고르고 나머지를 joint로 남긴다(0.5)", () => {
+test("joint: 공동 주어(장관, 시ㆍ도지사 및 시장ㆍ군수ㆍ구청장은)는 먼저 적힌 쪽이 primary, 나머지는 actors[]에 secondary로(0.5)", () => {
   const r = classifyActor({ title: "건축위원회", text: "① 국토교통부장관, 시ㆍ도지사 및 시장ㆍ군수ㆍ구청장은 다음 각 호의 사항을 조사ㆍ심의하기 위하여 각각 건축위원회를 두어야 한다." });
   assert.equal(r.actor, "central");
   assert.equal(r.confidence, 0.5);
   assert.ok(r.evidence.includes("joint:local(시ㆍ도지사)"));
+  assert.deepEqual(r.actors.map((a) => [a.actor, a.role]), [["central", "primary"], ["local", "secondary"]]);
+  assert.deepEqual(r.actors[1].evidence, ["joint:시ㆍ도지사"]);
+});
+
+test("actors: 수범자가 주 주체이고 허가·신고 상대 기관이 나오면 그 기관이 secondary", () => {
+  const r = classifyArticle({ title: "건축허가", text: "① 건축물을 건축하려는 자는 시장ㆍ군수ㆍ구청장의 허가를 받아야 한다." });
+  assert.equal(r.actor, "citizen");
+  assert.deepEqual(r.actors.map((a) => [a.actor, a.role]), [["citizen", "primary"], ["local", "secondary"]]);
+  assert.deepEqual(r.actors[1].evidence, ["cue:시장ㆍ군수ㆍ구청장"]);
+  assert.deepEqual(r.actors[0].evidence, r.evidence.filter((e) => e.startsWith("actor/")).map((e) => e.slice("actor/".length)));
+});
+
+test("actors: 행정기관이 주 주체이고 수범자가 나오면 수범자가 secondary; 같은 편 기관은 secondary가 아니다", () => {
+  const r = classifyArticle({ title: "감독", text: "① 국토교통부장관은 시ㆍ도지사가 한 처분이 위법하면 그 처분의 취소를 명할 수 있고, 건축주에게 공사의 중지를 명할 수 있다." });
+  assert.equal(r.actor, "central");
+  assert.deepEqual(r.actors.map((a) => a.actor), ["central", "citizen"], "시ㆍ도지사(같은 행정기관 편)는 보조 주체로 넣지 않는다");
+  const solo = classifyArticle({ title: "건축선의 지정", text: "① 허가권자는 건축선을 따로 지정할 수 있다." });
+  assert.deepEqual(solo.actors.map((a) => a.role), ["primary"]);
 });
 
 test("actor: '…이/가' 주어도 토큰 자체가 주체 명사일 때만 읽는다(건축주가 ○, 허가가 ×)", () => {
@@ -98,12 +127,41 @@ test("actor: '…이/가' 주어도 토큰 자체가 주체 명사일 때만 읽
   const r = classifyActor({ title: "건축물의 사용승인", text: "① 건축주가 제11조에 따라 허가를 받은 건축물의 건축공사를 완료한 후 그 건축물을 사용하려면 허가권자에게 사용승인을 신청하여야 한다." });
   assert.equal(r.actor, "citizen");
   assert.equal(r.confidence, 0.7);
+  assert.deepEqual(r.actors.map((a) => a.actor), ["citizen", "local"]);
+});
+
+test("implicit subject: 주어 없는 '…에게 신고를 하면' 문형 → citizen 0.6, 기관은 secondary", () => {
+  const r = classifyArticle({ title: "건축신고", chapter: "제2장 건축물의 건축", text: "① 제11조에 해당하는 허가 대상 건축물이라 하더라도 다음 각 호의 어느 하나에 해당하는 경우에는 미리 특별자치시장ㆍ특별자치도지사 또는 시장ㆍ군수ㆍ구청장에게 국토교통부령으로 정하는 바에 따라 신고를 하면 건축허가를 받은 것으로 본다.\n1. 바닥면적의 합계가 85제곱미터 이내의 증축" });
+  check(r, { stage: "procedure", actor: "citizen" });
+  assert.equal(r.actorConfidence, 0.6);
+  assert.ok(r.evidence.includes("actor/implicit-subject:신고"));
+  assert.deepEqual(r.actors.map((a) => [a.actor, a.role]), [["citizen", "primary"], ["local", "secondary"]]);
+  const apply = classifyActor({ title: "사전결정", text: "허가권자에게 국토교통부령으로 정하는 서류를 제출하여야 한다." });
+  assert.deepEqual([apply.actor, apply.confidence, apply.evidence.at(-1)], ["citizen", 0.6, "implicit-subject:제출"]);
+});
+
+test("thing-subject: 시행령·부령 기술기준의 사물 주어는 none 0.6 — 수범자를 지어내지 않는다", () => {
+  const r = classifyArticle({ tier: "rule", title: "콘크리트의 배합", text: "① 콘크리트의 압축강도는 설계기준강도 이상이어야 한다.\n② 물ㆍ시멘트비는 60퍼센트 이하로 하여야 한다." });
+  check(r, { stage: "standard", actor: "none" });
+  assert.equal(r.actorConfidence, 0.6);
+  assert.ok(r.evidence.includes("actor/thing-subject:압축강도는"));
+  const decree = classifyArticle({ tier: "decree", title: "거실의 반자높이", text: "거실의 반자높이는 2.1미터 이상이어야 한다." });
+  assert.deepEqual([decree.stage, decree.actor], ["standard", "none"]);
+});
+
+test("thing-subject: 법률의 사물 주어 기준 조문은 그대로 수범자 추정(citizen 0.4), 하위법령이라도 주어가 기관이면 그 기관", () => {
+  const statute = classifyArticle({ tier: "statute", title: "대지와 도로의 관계", text: "① 건축물의 대지는 2미터 이상이 도로에 접하여야 한다." });
+  assert.deepEqual([statute.stage, statute.actor, statute.actorConfidence], ["standard", "citizen", 0.4]);
+  assert.ok(statute.evidence.includes("actor/stage:standard→citizen(수범자 추정)"));
+  const rule = classifyArticle({ tier: "rule", title: "구조안전의 확인", text: "① 허가권자는 구조 안전 확인 서류를 제출받아 확인하여야 한다." });
+  assert.equal(rule.actor, "local");
 });
 
 test("none: 위임 조문('…은 대통령령으로 정한다')은 주체 없음", () => {
   const r = classifyArticle({ title: "건축설비기준 등", chapter: "제7장 건축설비", text: "건축설비의 설치 및 구조에 관한 기준과 설계 및 공사감리에 관하여 필요한 사항은 대통령령으로 정한다." });
   check(r, { stage: "standard", actor: "none", minConfidence: 0.6 });
   assert.ok(r.evidence.includes("actor/text:…으로 정한다(위임 조문)"));
+  assert.deepEqual(r.actors.map((a) => a.role), ["primary"]);
 });
 
 // ── 충돌·장 폴백·unknown ──────────────────────────────────────────
@@ -113,7 +171,7 @@ test("conflict: 제목이 두 단계에 걸리면 머리말을 1순위로 삼고
   const r = classifyStage({ title: "건축허가 제한 등", chapter: "제2장 건축물의 건축", text: "① 국토교통부장관은 국토관리를 위하여 특히 필요하다고 인정하면 허가권자의 건축허가를 제한할 수 있다.\n② 제한하려면 주민의견을 청취한 후 건축위원회의 심의를 거쳐야 한다.\n③ 제한한 경우 즉시 공고하여야 하며, 허가권자에게 통보하여야 한다." });
   assert.equal(r.stage, "procedure");
   assert.equal(r.confidence, 0.4);
-  assert.ok(r.evidence.includes("stage:title:제한(머리말)".replace("stage:", "")));
+  assert.ok(r.evidence.includes("title:제한(머리말)"));
   // 수수료(misc, 머리말) vs 허가 — 본문이 수수료를 지지 → misc 0.5
   const fee = classifyStage({ title: "건축허가 등의 수수료", text: "① 허가를 신청하거나 신고를 하는 자는 허가권자나 신고수리자에게 수수료를 납부하여야 한다. ② 수수료는 국토교통부령으로 정하는 범위에서 조례로 정한다." });
   assert.equal(fee.stage, "misc");
@@ -121,26 +179,26 @@ test("conflict: 제목이 두 단계에 걸리면 머리말을 1순위로 삼고
 });
 
 test("chapter fallback: 제목·본문 단서가 없으면 장 제목으로 0.5, method rule:chapter", () => {
-  const r = classifyStage({ title: "통일성을 유지하기 위한 도의 조례", chapter: "제1장 총칙", text: "도 단위로 통일성을 유지할 필요가 있으면 도의 조례로 정하는 바에 따른다." });
-  // '조례'는 약한 제목 단서(misc)이므로 먼저 걸린다 → 약한 단서 없는 제목으로 다시 확인
-  const r2 = classifyStage({ title: "리모델링에 대비한 지원 등", chapter: "제1장 총칙", text: "리모델링이 쉬운 구조의 공동주택의 건축을 촉진한다." });
-  assert.equal(r.method, "rule:title");
-  assert.deepEqual([r2.stage, r2.confidence, r2.method], ["purpose", 0.5, "rule:chapter"]);
-  assert.deepEqual(r2.evidence, ["chapter:제1장 총칙"]);
+  const r = classifyStage({ title: "리모델링에 대비한 지원 등", chapter: "제1장 총칙", text: "리모델링이 쉬운 구조의 공동주택의 건축을 촉진한다." });
+  assert.deepEqual([r.stage, r.confidence, r.method], ["purpose", 0.5, "rule:chapter"]);
+  assert.deepEqual(r.evidence, ["chapter:제1장 총칙"]);
+  const weak = classifyStage({ title: "통일성을 유지하기 위한 도의 조례", chapter: "제1장 총칙", text: "도 단위로 통일성을 유지할 필요가 있으면 도의 조례로 정하는 바에 따른다." });
+  assert.deepEqual([weak.stage, weak.confidence], ["misc", 0.6], "'조례'는 약한 제목 단서라 장 폴백보다 먼저");
 });
 
-test("unknown: 단서가 전혀 없으면 unknown, 근거 비움, 신뢰도 0", () => {
+test("unknown: 단서가 전혀 없으면 unknown, 근거 비움, 신뢰도 0, actors 비움", () => {
   const r = classifyArticle({ title: "특별건축구역의 건축물", chapter: "제8장 특별건축구역 등", text: "특별건축구역에서 건축하는 건축물의 범위는 다음 각 호와 같다." });
   assert.equal(r.stage, "unknown");
   assert.equal(r.stageConfidence, 0);
   assert.equal(r.stageMethod, "unknown");
   const empty = classifyArticle({ title: "", chapter: null, text: "" });
-  assert.deepEqual([empty.stage, empty.actor, empty.confidence, empty.method], ["unknown", "unknown", 0, "unknown"]);
+  assert.deepEqual([empty.stage, empty.actor, empty.confidence, empty.method, empty.actors], ["unknown", "unknown", 0, "unknown", []]);
 });
 
 test("deleted: 삭제 조문은 단계 unknown × 주체 none, deleted 표시, 신뢰도 1", () => {
   const r = classifyArticle({ title: "삭제", chapter: "제3장 건축물의 유지와 관리", text: "삭제 <2019.4.30>" });
   assert.deepEqual([r.stage, r.actor, r.confidence, r.deleted], ["unknown", "none", 1, true]);
+  assert.deepEqual(r.actors, [{ actor: "none", role: "primary", evidence: ["title:삭제"] }]);
 });
 
 test("floor: 축별 신뢰도가 0.4 미만이면 그 축은 unknown이 된다", () => {
@@ -149,7 +207,7 @@ test("floor: 축별 신뢰도가 0.4 미만이면 그 축은 unknown이 된다",
   assert.ok(r.actor === "unknown" ? r.actorConfidence < 0.4 : r.actorConfidence >= 0.4);
 });
 
-// ── 보조 함수 ────────────────────────────────────────────────────
+// ── 보조 함수·상수 ───────────────────────────────────────────────
 
 test("firstSentence/findSubject: 첫 항 첫 문장만 보고, 접속사·관형사형·조사 결합은 주어로 삼지 않는다", () => {
   const s = firstSentence("① 제11조에 해당하는 허가 대상 건축물이라 하더라도 다음 각 호의 어느 하나에 해당하는 경우에는 미리 신고를 하면 건축허가를 받은 것으로 본다. <개정 2014.1.14>\n1. 바닥면적의 합계가 85제곱미터 이내의 증축\n② 제1항에 따른 신고를 한 자는 착공하여야 한다.");
@@ -159,7 +217,12 @@ test("firstSentence/findSubject: 첫 항 첫 문장만 보고, 접속사·관형
   assert.equal(findSubject("건축주, 설계자, 공사시공자 또는 공사감리자(이하 \"건축관계자\"라 한다)는 업무를 수행할 때 적용의 완화를 요청할 수 있다.")?.token, "한다)는");
 });
 
-test("단서표는 데이터로 노출되어 튜닝할 수 있다", () => {
+test("상수: 단계 순서에 operation이 들어 있고 단서표는 데이터로 노출된다", () => {
+  assert.deepEqual(STAGES, ["purpose", "standard", "procedure", "operation", "organization", "supervision", "penalty", "misc", "unknown"]);
+  assert.deepEqual(ACTORS, ["citizen", "central", "local", "committee", "court", "none", "unknown"]);
+  assert.equal(CLASSIFIER_VERSION, "rule-based v0.1");
   assert.ok(STAGE_TITLE_CUES.some((r) => r.stage === "penalty" && r.cues.includes("과태료")));
+  assert.ok(STAGE_TITLE_CUES.some((r) => r.stage === "operation" && r.cues.includes("대장")));
+  assert.ok(!STAGE_TITLE_CUES.some((r) => r.stage === "purpose" && r.cues.includes("기본계획")), "기본계획은 purpose에서 빠졌다");
   assert.ok(ACTOR_CUES.some((r) => r.actor === "local"));
 });

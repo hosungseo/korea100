@@ -1,10 +1,11 @@
-// 조문 분류 v0 — 규율 단계(stage) × 주체 레인(actor)을 규칙으로 추론하는 순수 함수.
+// 조문 분류 v0.1 — 규율 단계(stage) × 주체 레인(actor)을 규칙으로 추론하는 순수 함수.
 // 네트워크·파일 입출력 없음. 모든 판정은 추론이며 근거(evidence)·신뢰도(confidence)·방법(method)을 함께 돌려준다.
 // 근거 없는 판정은 하지 않는다: 단서가 하나도 안 걸리면 "unknown".
 //
 // 단서표는 데이터로 파일 맨 위에 둔다. 튜닝은 여기서만. 단서는 문자열(포함 검사) 또는 RegExp.
 
-export const STAGES = ["purpose", "standard", "procedure", "organization", "supervision", "penalty", "misc", "unknown"];
+export const STAGES = ["purpose", "standard", "procedure", "operation", "organization", "supervision", "penalty", "misc", "unknown"];
+export const CLASSIFIER_VERSION = "rule-based v0.1";
 export const ACTORS = ["citizen", "central", "local", "committee", "court", "none", "unknown"];
 
 /**
@@ -16,10 +17,11 @@ export const STAGE_TITLE_CUES = [
   { stage: "penalty", cues: ["벌칙", "과태료", "양벌규정", "징역", "벌금", "몰수"] },
   { stage: "misc", cues: ["권한의 위임", "위임", "위탁", "수수료", "청문", "공무원 의제", "공무원으로 의제", "보칙", "시행일", "준용", "다른 법령", "다른 법률과의 관계", "관계 법령", "과의 관계", "시효", "비용부담", "비용 부담", "대리인", "대행", "효력", "승계"] },
   { stage: "supervision", cues: ["검사", "감독", "보고", "자료 제출", "자료제출", "시정명령", "시정", "취소", "정지", "점검", "이행강제금", "위반", "업무제한", "지도", "조사", "모니터링", "공사중지", "대집행", "자료요청", "자료 요청"] },
+  { stage: "operation", cues: ["대장", "통계", "전산", "정보체계", "정보시스템", "계획의 수립", "계획 수립", "기본계획", "종합계획", "시행계획", "실태조사", "기록ㆍ관리", "기록 및 관리", "고시"] },
   { stage: "organization", cues: ["위원회", "설치", "구성", "운영", "센터", "사무국", "특별회계", "설립", "기구", "운영회", "전문기관", "민원실"] },
   { stage: "procedure", cues: ["허가", "신고", "등록", "승인", "인가", "인정", "인증", "지정", "신청", "심의", "협의", "통보", "통지", "변경", "갱신", "절차", "사전결정", "공고", "공개", "폐지", "체결", "조정", "재정", "청구", "청취", "촉탁", "회부", "제시", "평가"] },
   { stage: "standard", cues: ["기준", "의무", "금지", "제한", "구조", "높이", "조경", "건폐율", "용적률", "확보", "설비", "재료", "방화", "피난", "지하층", "공지", "오차", "산정", "예치금", "계약"] },
-  { stage: "purpose", cues: ["목적", /(^|[\sㆍ])정의($|[\sㆍ])/, "책무", "기본계획", "기본원칙", "기본이념", "적용 범위", "적용범위", "적용 제외", "적용제외"] },
+  { stage: "purpose", cues: ["목적", /(^|[\sㆍ])정의($|[\sㆍ])/, "책무", "기본원칙", "기본이념", "적용 범위", "적용범위", "적용 제외", "적용제외"] },
 ];
 
 /** 약한 제목 단서. 다른 제목 단서가 하나도 없을 때만 쓴다(0.6). 특례·배제는 보칙 성격, 범위·종류·구분·대상은 정의 성격으로 본다. */
@@ -44,10 +46,11 @@ export const STAGE_TEXT_CUES = [
   { stage: "penalty", cues: ["징역", "벌금", "과태료", "처한다", "몰수"] },
   { stage: "supervision", cues: ["시정명령", "취소할 수 있다", "취소하여야", "정지를 명", "검사하게", "보고하게", "자료의 제출", "자료를 제출", "점검", "이행강제금", "출입하여", "감독", "시정을 명"] },
   { stage: "misc", cues: ["위임할 수 있다", "위탁할 수 있다", "수수료", "청문을", "공무원으로 본다", "준용한다", "다른 법률에 특별한 규정"] },
+  { stage: "operation", cues: ["계획을 수립", "실태조사", "대장에 기재", "대장을 작성", "대장에 적", "통계를", "전산처리", "정보체계를", "고시하여야", "기록ㆍ관리", "기록하고"] },
   { stage: "organization", cues: ["위원회를 둔다", "위원회를 두어야", "위원으로 구성", "위원장", "사무국을", "센터를 설치", "회계를 설치", "설립할 수 있다", "운영할 수 있다"] },
   { stage: "procedure", cues: ["허가를 받아야", "신고하여야", "신고를 하여야", "신청하여야", "신청할 수 있다", "신청서를", "승인을 받아", "인가를 받아", "통보하여야", "협의하여야", "심의를 거쳐", "지정할 수 있다", "공고하여야", "공고하고", "통지하여야", "변경하려면", "등록하여야", "청구할 수 있다"] },
   { stage: "standard", cues: [{ cue: "하여야 한다", weight: 0.5 }, { cue: "아니 된다", weight: 0.5 }, "할 수 없다", "기준에 맞게", "기준에 따라", "이상이어야", "이하이어야", "접하여야"] },
-  { stage: "purpose", cues: ["목적으로 한다", "용어의 뜻", "책무", "노력하여야", "계획을 수립"] },
+  { stage: "purpose", cues: ["목적으로 한다", "용어의 뜻", "책무", "노력하여야"] },
 ];
 
 /**
@@ -76,6 +79,8 @@ export const CONFIDENCE = {
   titleAgree: 0.9, // 제목 단서 + 장/제목 주체가 같은 쪽
   text: 0.6, // 본문 단서만
   weakTitle: 0.6, // 약한 제목 단서(특례·배제)만
+  implicit: 0.6, // 주어 생략형("…에게 신고를 하면"): 신고·신청하는 쪽을 수범자로 본다
+  thing: 0.6, // 하위법령 기술기준의 사물 주어("압축강도는") → 주체 없음
   nominative: 0.7, // 주어가 "…이/가"로 표시된 경우(토큰 자체가 주체 명사일 때만)
   chapterOnly: 0.5, // 장 제목만
   conflictResolved: 0.5, // 단서 충돌을 머리말/본문으로 풀었음
@@ -92,6 +97,8 @@ const NOT_SUBJECT_NEUN = /(하|있|없|되|받|려|않|르|치|쓰|짓|같|보|�
 const NOT_SUBJECT_EUN = /(받|얻|넣|많|같|작|높|낮|좋|않|적|깊|좁|넓|붙|믿|잡|남|담|밟|맡|닫|묶|섞|씻|찾|쌓|앉|걸|끊|입|읽|굳|묻|뽑|좇|쫓|꺾|겪|얹|심|씹|빚)은$/;
 const CONNECTIVE = /^(또는|그러나|다만|혹은|및|또한|즉|하지만|이는|그는|이에는)$/;
 const DATIVE_SUBJECT = /에게는$/;
+/** 주어 생략형: "…에게 (신고|신청|제출|보고)를 하(면|여야)". 신고·신청하는 쪽(수범자)이 숨은 주어. */
+const IMPLICIT_FILING = /에게[^.]{0,60}?(신고|신청|제출|보고|통보)[를을]?\s*(?:하면|하여야|하고|하는|하려면|해야)/;
 /** 위임 조문("…에 관하여 필요한 사항은 대통령령으로 정한다"). */
 const DELEGATION_ONLY = /(대통령령|[가-힣]+부령|총리령|조례|규칙)(?:으|이)?로 정한다\.?$/;
 /** 주체 탐색 때 지우는 위임 문구("국토교통부령으로 정하는 바에 따라"): 부처명이 주체처럼 잡히는 것을 막는다. */
@@ -314,8 +321,14 @@ function countActors(found) {
   return counts;
 }
 
-export function classifyActor({ title, text, stage, deleted }) {
-  if (deleted) return { actor: "none", confidence: CONFIDENCE.deleted, evidence: ["title:삭제"], method: "rule:title" };
+const AUTHORITY = new Set(["central", "local", "committee", "court"]);
+
+/**
+ * 주 주체(primary) 하나와 보조 주체(secondary)들을 함께 돌려준다.
+ * 보조 주체: 공동 주어의 나머지, 그리고 첫 문장에서 반대편(수범자↔행정기관)으로 등장한 주체.
+ */
+export function classifyActor({ title, text, stage, deleted, tier }) {
+  if (deleted) return done("none", CONFIDENCE.deleted, ["title:삭제"], "rule:title", []);
 
   const t = normalizeTitle(title);
   const body = normalizeText(text).replace(DELEGATION_PHRASE, " ");
@@ -323,6 +336,11 @@ export function classifyActor({ title, text, stage, deleted }) {
   const subject = findSubject(sentence);
   const titleActors = distinctActors(matchActors(t, ACTOR_TITLE_CUES, { generic: false }));
   const evidence = [];
+  const inSentence = distinctActors(matchActors(sentence));
+  /** 주 주체의 반대편(수범자 ↔ 행정기관) 중 첫 문장에 나온 것을 보조 주체로. */
+  const counterparts = (primary) => inSentence
+    .filter((o) => o.actor !== primary && (AUTHORITY.has(primary) ? o.actor === "citizen" : AUTHORITY.has(o.actor)))
+    .map((o) => ({ actor: o.actor, role: "secondary", evidence: [`cue:${o.cue}`] }));
 
   // 1. 주어 구간의 주체 단서.
   if (subject) {
@@ -333,17 +351,19 @@ export function classifyActor({ title, text, stage, deleted }) {
     const inSubject = distinctActors(hits);
     if (inSubject.length >= 1) {
       const [first, ...rest] = inSubject;
-      const others = distinctActors(matchActors(sentence)).filter((o) => !inSubject.some((s) => s.actor === o.actor));
       evidence.push(`cue:${first.cue}`);
       if (rest.length === 0) {
+        const others = inSentence.filter((o) => o.actor !== first.actor);
         for (const o of others) evidence.push(`also:${o.actor}(${o.cue})`);
         let confidence = CONFIDENCE.title;
         if (titleActors.length === 1 && titleActors[0].actor === first.actor) { confidence = CONFIDENCE.titleAgree; evidence.push(`title:${titleActors[0].cue}`); }
-        return { actor: first.actor, confidence, evidence, method: "rule:text" };
+        return done(first.actor, confidence, evidence, "rule:text", counterparts(first.actor));
       }
-      // 공동 주어("국토교통부장관, 시ㆍ도지사 및 시장ㆍ군수ㆍ구청장은") → 먼저 적힌 쪽, 나머지는 근거에.
+      // 공동 주어("국토교통부장관, 시ㆍ도지사 및 시장ㆍ군수ㆍ구청장은") → 먼저 적힌 쪽이 주, 나머지는 보조.
       for (const r of rest) evidence.push(`joint:${r.actor}(${r.cue})`);
-      return { actor: first.actor, confidence: CONFIDENCE.conflictResolved, evidence, method: "rule:text" };
+      const joint = rest.map((r) => ({ actor: r.actor, role: "secondary", evidence: [`joint:${r.cue}`] }));
+      const extra = counterparts(first.actor).filter((c) => !joint.some((j) => j.actor === c.actor) && !inSubject.some((s) => s.actor === c.actor));
+      return done(first.actor, CONFIDENCE.conflictResolved, evidence, "rule:text", [...joint, ...extra]);
     }
     evidence.push("subject:주체 단서 없음");
   }
@@ -352,65 +372,88 @@ export function classifyActor({ title, text, stage, deleted }) {
     const nom = findNominativeSubject(sentence);
     if (nom) {
       evidence.push(`subject:${nom.token}`, `cue:${nom.cue}`);
-      const others = distinctActors(matchActors(sentence)).filter((o) => o.actor !== nom.actor);
-      for (const o of others) evidence.push(`also:${o.actor}(${o.cue})`);
-      return { actor: nom.actor, confidence: CONFIDENCE.nominative, evidence, method: "rule:text" };
+      for (const o of inSentence.filter((o) => o.actor !== nom.actor)) evidence.push(`also:${o.actor}(${o.cue})`);
+      return done(nom.actor, CONFIDENCE.nominative, evidence, "rule:text", counterparts(nom.actor));
+    }
+    // 1c. 주어 생략형("…에게 신고를 하면 … 본다") → 신고·신청하는 쪽(수범자).
+    const filing = sentence.match(IMPLICIT_FILING);
+    if (filing) {
+      evidence.push(`implicit-subject:${filing[1]}`);
+      return done("citizen", CONFIDENCE.implicit, evidence, "rule:text", counterparts("citizen"));
     }
   }
 
   // 2. 제목에 적힌 주체.
   if (titleActors.length === 1) {
     evidence.push(`title:${titleActors[0].cue}`);
-    return { actor: titleActors[0].actor, confidence: subject ? CONFIDENCE.text : CONFIDENCE.title, evidence, method: "rule:title" };
+    return done(titleActors[0].actor, subject ? CONFIDENCE.text : CONFIDENCE.title, evidence, "rule:title", counterparts(titleActors[0].actor));
   }
   // 3. 목적·정의 조문 → 주체 없음.
   if (stage === "purpose") {
-    return { actor: "none", confidence: subject ? CONFIDENCE.title : CONFIDENCE.text, evidence: [...evidence, "stage:purpose→none"], method: "rule:text" };
+    return done("none", subject ? CONFIDENCE.title : CONFIDENCE.text, [...evidence, "stage:purpose→none"], "rule:text", []);
   }
   // 4. 위임 조문("…은 대통령령으로 정한다") → 주체 없음.
   if (DELEGATION_ONLY.test(sentence)) {
-    return { actor: "none", confidence: CONFIDENCE.text, evidence: [...evidence, "text:…으로 정한다(위임 조문)"], method: "rule:text" };
+    return done("none", CONFIDENCE.text, [...evidence, "text:…으로 정한다(위임 조문)"], "rule:text", []);
   }
   // 5. 벌칙 → 수범자.
   if (stage === "penalty") {
-    return { actor: "citizen", confidence: CONFIDENCE.fallback, evidence: [...evidence, "stage:penalty→citizen(수범자 추정)"], method: "rule:text" };
+    return done("citizen", CONFIDENCE.fallback, [...evidence, "stage:penalty→citizen(수범자 추정)"], "rule:text", []);
   }
-  // 6. 본문 전체의 주체 단서(가장 많이 나온 쪽).
+  // 6. 하위법령 기술기준의 사물 주어("압축강도는 … 이상이어야 한다") → 주체 없음. 수범자를 지어내지 않는다.
+  if (subject && stage === "standard" && (tier === "decree" || tier === "rule")) {
+    return done("none", CONFIDENCE.thing, [...evidence, `thing-subject:${subject.token}`], "rule:text", []);
+  }
+  // 7. 본문 전체의 주체 단서(가장 많이 나온 쪽).
   const bodyHits = matchActors(body);
   if (bodyHits.length > 0) {
     const distinct = distinctActors(bodyHits);
     for (const f of distinct) evidence.push(`body:${f.actor}(${f.cue})`);
     const top = best(countActors(bodyHits));
-    if (top && !top.tie) return { actor: top.key, confidence: subject ? CONFIDENCE.fallback : CONFIDENCE.conflict, evidence, method: "rule:text" };
-    return { actor: distinct[0].actor, confidence: CONFIDENCE.conflict, evidence, method: "rule:text" };
+    const primary = top && !top.tie ? top.key : distinct[0].actor;
+    const confidence = top && !top.tie && subject ? CONFIDENCE.fallback : CONFIDENCE.conflict;
+    return done(primary, confidence, evidence, "rule:text", []);
   }
-  // 7. 기준 조문인데 주체가 안 보임 → 수범자(건축주 등) 추정.
+  // 8. 법률의 기준 조문인데 주체가 안 보임 → 수범자(건축주 등) 추정.
   if (stage === "standard") {
-    return { actor: "citizen", confidence: CONFIDENCE.conflict, evidence: [...evidence, "stage:standard→citizen(수범자 추정)"], method: "rule:text" };
+    return done("citizen", CONFIDENCE.conflict, [...evidence, "stage:standard→citizen(수범자 추정)"], "rule:text", []);
   }
-  // 8. 본문 어디에도 주체 단서가 없음 → 주체 없음.
+  // 9. 본문 어디에도 주체 단서가 없음 → 주체 없음.
   if (body.length > 0) {
-    return { actor: "none", confidence: CONFIDENCE.fallback, evidence: [...evidence, "text:본문에 주체 단서 없음→none"], method: "rule:text" };
+    return done("none", CONFIDENCE.fallback, [...evidence, "text:본문에 주체 단서 없음→none"], "rule:text", []);
   }
-  return { actor: "unknown", confidence: 0, evidence, method: "unknown" };
+  return done("unknown", 0, evidence, "unknown", []);
+}
+
+function done(actor, confidence, evidence, method, secondaries) {
+  const seen = new Set([actor]);
+  const actors = [{ actor, role: "primary", evidence: [...evidence] }];
+  for (const s of secondaries) {
+    if (seen.has(s.actor)) continue;
+    seen.add(s.actor);
+    actors.push(s);
+  }
+  return { actor, confidence, evidence, method, actors };
 }
 
 /**
- * 조문 하나를 분류한다.
- * @param {{label?: string, title?: string, chapter?: string|null, text?: string}} article
- * @returns {{stage: string, actor: string, confidence: number, evidence: string[], method: string, stageMethod: string, actorMethod: string, stageConfidence: number, actorConfidence: number, deleted?: boolean}}
+ * 조문 하나를 분류한다. tier(statute|decree|rule)는 하위법령 기술기준의 사물 주어 규칙에만 쓴다.
+ * @param {{label?: string, title?: string, chapter?: string|null, text?: string, tier?: string}} article
+ * @returns {{stage: string, actor: string, actors: Array<{actor: string, role: "primary"|"secondary", evidence: string[]}>, confidence: number, evidence: string[], method: string, stageMethod: string, actorMethod: string, stageConfidence: number, actorConfidence: number, deleted?: boolean}}
  */
-export function classifyArticle({ label, title, chapter, text } = {}) {
+export function classifyArticle({ label, title, chapter, text, tier } = {}) {
   const s = classifyStage({ title, chapter, text });
-  const a = classifyActor({ title, text, stage: s.stage, deleted: s.deleted });
+  const a = classifyActor({ title, text, stage: s.stage, deleted: s.deleted, tier });
   const stage = s.confidence < CONFIDENCE.floor ? "unknown" : s.stage;
   const actor = a.confidence < CONFIDENCE.floor ? "unknown" : a.actor;
+  const actors = actor === "unknown" ? [] : a.actors.map((x, i) => (i === 0 ? { ...x, actor } : x));
   const evidence = [...s.evidence.map((e) => `stage/${e}`), ...a.evidence.map((e) => `actor/${e}`)];
   // method는 단계 판정의 방법(단계가 unknown이면 주체 판정의 방법). 축별 방법은 stageMethod/actorMethod에.
   const method = s.method !== "unknown" ? s.method : a.method;
   const out = {
     stage,
     actor,
+    actors,
     confidence: Math.round(Math.min(s.confidence, a.confidence) * 100) / 100,
     stageConfidence: s.confidence,
     actorConfidence: a.confidence,
