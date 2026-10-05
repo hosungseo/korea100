@@ -1,11 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import type { Article, Edge, EdgeKind, LawMap, LawMapTexts } from "@/lib/law-map-types";
+import type { Article, Edge, EdgeKind, LawMap, LawMapTexts, LawMapView } from "@/lib/law-map-types";
 import { findRoute, indexEdgesByNode } from "@/lib/law-map-route.mjs";
 import type { LawMapRoute } from "@/lib/law-map-route.mjs";
 import { formatLawMapHash, parseLawMapHash } from "@/lib/law-map-hash.mjs";
 import LawMapColumn from "./LawMapColumn";
+import LawMapOverview from "./LawMapOverview";
 import LawMapPanel from "./LawMapPanel";
 import LawMapToolbar from "./LawMapToolbar";
 import { EDGE_COLORS, EDGE_ORDER, TIER_ORDER, describeNode } from "./law-map-constants";
@@ -28,7 +29,12 @@ interface Wire {
   onRoute: boolean;
 }
 
+/** 조문이 이 수를 넘는 법은 큰 그림으로 연다. 그 아래는 카드 목록이 한눈에 들어오므로 자세히 보기. */
+const OVERVIEW_THRESHOLD = 150;
+
 export default function LawMapBoard({ map, textUrl }: Props) {
+  const defaultView: LawMapView = map.articles.length > OVERVIEW_THRESHOLD ? "overview" : "detail";
+  const [view, setView] = useState<LawMapView>(defaultView);
   const [selected, setSelected] = useState<string | null>(null);
   const [hover, setHover] = useState<string | null>(null);
   const [routeMode, setRouteMode] = useState(false);
@@ -42,6 +48,8 @@ export default function LawMapBoard({ map, textUrl }: Props) {
   const [canvasSize, setCanvasSize] = useState({ w: 0, h: 0 });
   const canvasRef = useRef<HTMLDivElement>(null);
   const boardRef = useRef<HTMLDivElement>(null);
+  // 큰 그림에서 자세히로 넘어갈 때 카드가 아직 없으므로, 스크롤할 조문을 적어 두고 카드가 생기면 이동한다.
+  const pendingScrollRef = useRef<string | null>(null);
 
   const edgesByNode = useMemo(() => indexEdgesByNode(map.edges), [map.edges]);
   const edgeById = useMemo(() => new Map(map.edges.map((e) => [e.id, e])), [map.edges]);
@@ -85,7 +93,9 @@ export default function LawMapBoard({ map, textUrl }: Props) {
   // 보드 안에서만 스크롤한다. scrollIntoView는 창까지 밀어 툴바가 사이트 헤더 밑으로 들어가므로 쓰지 않는다.
   const scrollTo = useCallback((id: string) => {
     const board = boardRef.current;
-    const el = canvasRef.current?.querySelector<HTMLElement>(`[data-node-id="${CSS.escape(id)}"]`);
+    const canvas = canvasRef.current;
+    if (!canvas) { pendingScrollRef.current = id; return; }
+    const el = canvas.querySelector<HTMLElement>(`[data-node-id="${CSS.escape(id)}"]`);
     if (!board || !el) return;
     const b = board.getBoundingClientRect();
     const r = el.getBoundingClientRect();
@@ -99,11 +109,22 @@ export default function LawMapBoard({ map, textUrl }: Props) {
     if (mainTop > headerH) window.scrollBy({ top: mainTop - headerH, behavior: "smooth" });
   }, []);
 
+  // 카드 열이 생긴 뒤 밀린 스크롤을 처리한다.
+  useLayoutEffect(() => {
+    if (view !== "detail") return;
+    const id = pendingScrollRef.current;
+    if (!id) return;
+    pendingScrollRef.current = null;
+    scrollTo(id);
+  }, [view, scrollTo]);
+
   // 해시 복원 (최초 1회). 해시는 동기로 읽고(아래 기록 효과가 먼저 지우므로) 상태 반영은 다음 프레임에.
+  // 보기(v=)는 바로 반영한다. a=·route=만 있는 옛 링크는 자세히 보기로 연다.
   useEffect(() => {
     const state = parseLawMapHash(window.location.hash);
-    if (!state.route && !state.article) return;
+    if (!state.view && !state.route && !state.article) return;
     const frame = requestAnimationFrame(() => {
+      setView(state.view ?? "detail");
       if (state.route && isNode(state.route[0]) && isNode(state.route[1])) {
         const found = findRoute(map.edges, state.route[0], state.route[1]);
         setRouteMode(true);
@@ -121,14 +142,16 @@ export default function LawMapBoard({ map, textUrl }: Props) {
   }, [map.edges, isNode, scrollTo]);
 
   // 해시 기록. 경로는 BFS가 실제로 찾은 양 끝점으로 기록한다(selected와 무관).
+  // 보기는 선택·경로가 있거나 기본 보기와 다를 때만 적어, 처음 연 페이지의 주소는 그대로 둔다.
   useEffect(() => {
     const hash = formatLawMapHash({
       article: selected ?? undefined,
       route: route ? [route.nodes[0], route.nodes[route.nodes.length - 1]] : undefined,
+      view: selected || route || view !== defaultView ? view : undefined,
     });
     if (window.location.hash === hash) return;
     window.history.replaceState(null, "", hash || `${window.location.pathname}${window.location.search}`);
-  }, [selected, route]);
+  }, [selected, route, view, defaultView]);
 
   const active = hover ?? selected;
   const visibleEdges = useMemo(() => {
@@ -167,14 +190,15 @@ export default function LawMapBoard({ map, textUrl }: Props) {
     setWires(next);
   }, [visibleEdges, route]);
 
-  useLayoutEffect(() => { measure(); }, [measure]);
+  // view가 바뀌면 카드 캔버스가 새로 붙으므로 다시 잰다.
+  useLayoutEffect(() => { measure(); }, [measure, view]);
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const observer = new ResizeObserver(() => measure());
     observer.observe(canvas);
     return () => observer.disconnect();
-  }, [measure]);
+  }, [measure, view]);
 
   // 패널 버튼·검색에서 온 이동. 경로 밖 노드로 가면 경로를 지운다(출발점·경로 모드는 유지해 이어 갈 수 있게).
   const focusNode = useCallback((id: string) => {
@@ -205,9 +229,28 @@ export default function LawMapBoard({ map, textUrl }: Props) {
     setRouteFrom(null); setRoute(null); setRouteMiss(false);
   };
 
-  const clearSelection = () => {
+  const clearSelection = useCallback(() => {
     setSelected(null); setRouteFrom(null); setRoute(null); setRouteMiss(false);
-  };
+  }, []);
+
+  // 큰 그림에서 조문(또는 행정규칙·자치법규 상자)을 누르면 자세히 보기로 넘어가 그 노드를 연다.
+  const pickFromOverview = useCallback((id: string) => {
+    setView("detail");
+    focusNode(id);
+  }, [focusNode]);
+
+  // Esc: 자세히 보기에서는 선택 해제(큰 그림에서는 LawMapOverview가 펼친 장을 접는다).
+  useEffect(() => {
+    if (view !== "detail") return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      const target = event.target as HTMLElement | null;
+      if (target && ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName)) return;
+      clearSelection();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [view, clearSelection]);
 
   const onSearchSubmit = () => {
     const q = query.replace(/\s+/g, "");
@@ -223,6 +266,8 @@ export default function LawMapBoard({ map, textUrl }: Props) {
     <div className={styles.layout}>
       <div className={styles.main}>
         <LawMapToolbar
+          view={view}
+          onChangeView={setView}
           kinds={kinds}
           onToggleKind={(kind) => setKinds((prev) => { const next = new Set(prev); if (next.has(kind)) next.delete(kind); else next.add(kind); return next; })}
           query={query}
@@ -233,7 +278,21 @@ export default function LawMapBoard({ map, textUrl }: Props) {
           routeFromLabel={routeFrom ? describeNode(routeFrom, articleById, laneById) : null}
           onClear={clearSelection}
         />
-        <div className={styles.board} ref={boardRef}>
+        <div className={styles.board} ref={boardRef} data-view={view}>
+          {view === "overview" ? (
+            <LawMapOverview
+              map={map}
+              lanesByTier={lanesByTier}
+              articlesByLane={articlesByLane}
+              articleById={articleById}
+              laneById={laneById}
+              edgesByNode={edgesByNode}
+              kinds={kinds}
+              selected={selected}
+              routeNodes={routeNodes}
+              onPick={pickFromOverview}
+            />
+          ) : (
           <div className={styles.canvas} ref={canvasRef}>
             {lanesByTier.map(({ tier, lanes }) => (
               <LawMapColumn
@@ -264,6 +323,7 @@ export default function LawMapBoard({ map, textUrl }: Props) {
               ))}
             </svg>
           </div>
+          )}
         </div>
       </div>
       <LawMapPanel

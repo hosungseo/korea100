@@ -1,5 +1,6 @@
 export type Tier = "statute" | "decree" | "rule" | "adminRule" | "ordinance";
 export type EdgeKind = "decree" | "rule" | "adminRule" | "ordinance" | "cites";
+export type LawMapView = "overview" | "detail";  // 큰 그림 | 자세히
 
 export interface Lane {
   id: string;                 // "L1" | "D1".."Dn" | "R1".."Rn" | "A1".."An" | "O1"

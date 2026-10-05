@@ -1,11 +1,18 @@
 "use client";
 
 import type { CSSProperties } from "react";
-import type { EdgeKind } from "@/lib/law-map-types";
+import type { EdgeKind, LawMapView } from "@/lib/law-map-types";
 import { EDGE_COLORS, EDGE_LABELS, EDGE_ORDER } from "./law-map-constants";
 import styles from "./LawMapBoard.module.css";
 
+const VIEWS: { id: LawMapView; label: string }[] = [
+  { id: "overview", label: "큰 그림" },
+  { id: "detail", label: "자세히" },
+];
+
 interface Props {
+  view: LawMapView;
+  onChangeView: (view: LawMapView) => void;
   kinds: Set<EdgeKind>;
   onToggleKind: (kind: EdgeKind) => void;
   query: string;
@@ -18,10 +25,17 @@ interface Props {
 }
 
 export default function LawMapToolbar({
-  kinds, onToggleKind, query, onQuery, onSearchSubmit, routeMode, onToggleRoute, routeFromLabel, onClear,
+  view, onChangeView, kinds, onToggleKind, query, onQuery, onSearchSubmit, routeMode, onToggleRoute, routeFromLabel, onClear,
 }: Props) {
   return (
     <div className={styles.toolbar} role="toolbar" aria-label="법령 지도 도구">
+      <div className={styles.segmented} role="group" aria-label="보기">
+        {VIEWS.map((item) => (
+          <button key={item.id} type="button" aria-pressed={view === item.id} onClick={() => onChangeView(item.id)}>
+            {item.label}
+          </button>
+        ))}
+      </div>
       <div className={styles.kinds}>
         {EDGE_ORDER.map((kind) => (
           <label key={kind} className={styles.kind} data-off={!kinds.has(kind)} style={{ "--kind-color": EDGE_COLORS[kind] } as CSSProperties}>
