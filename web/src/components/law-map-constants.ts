@@ -1,5 +1,8 @@
 import type { Article, EdgeKind, Lane, Tier } from "@/lib/law-map-types";
 
+// 규율 보기(주체 레인 × 규율 단계)의 축 순서·이름. 순수 레이아웃(.mjs)이 머리말 문장에도 쓰므로 그쪽이 원본이다.
+export { STAGE_ORDER, STAGE_LABELS, ACTOR_ORDER, ACTOR_LABELS, UNCLASSIFIED_LABEL } from "@/lib/law-map-rule-layout.mjs";
+
 export const TIER_ORDER: Tier[] = ["statute", "decree", "rule", "adminRule", "ordinance"];
 
 export const TIER_LABELS: Record<Tier, string> = {

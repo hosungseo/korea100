@@ -1,6 +1,34 @@
 export type Tier = "statute" | "decree" | "rule" | "adminRule" | "ordinance";
 export type EdgeKind = "decree" | "rule" | "adminRule" | "ordinance" | "cites";
-export type LawMapView = "overview" | "detail";  // 큰 그림 | 자세히
+export type LawMapView = "overview" | "rule" | "detail";  // 구조도 | 규율 | 자세히
+
+// ── 조문 분류(규칙 기반 추론, scripts/classify-law-articles.mjs → <lawId>.class.json) ──
+export type LawMapStage = "purpose" | "standard" | "procedure" | "operation" | "organization" | "supervision" | "penalty" | "misc" | "unknown";
+export type LawMapActor = "citizen" | "central" | "local" | "committee" | "court" | "constitutional" | "none" | "unknown";
+
+export interface LawMapClassActor {
+  actor: LawMapActor;
+  role: "primary" | "secondary";
+  evidence?: string[];             // 보조 주체의 단서. 주 주체의 근거는 LawMapClassEntry.evidence에 한 번만
+}
+
+export interface LawMapClassEntry {
+  stage: LawMapStage;
+  actor: LawMapActor;              // 주 주체(actors[0])
+  actors?: LawMapClassActor[];     // 주 주체 + 보조 주체(공동 주어, 허가·신고 상대 기관)
+  confidence: number;              // 0~1, 두 축 중 낮은 쪽
+  evidence: string[];              // "stage/title:허가", "actor/subject:건축주는" …
+  method: string;                  // rule:title | rule:text | rule:chapter | unknown
+  deleted?: true;
+}
+
+export interface LawMapClass {
+  lawId: string;
+  generatedAt: string;
+  method: string;                  // "rule-based v0.1"
+  articles: Record<string, LawMapClassEntry>;
+  stats: Record<string, unknown>;
+}
 
 export interface Lane {
   id: string;                 // "L1" | "D1".."Dn" | "R1".."Rn" | "A1".."An" | "O1"

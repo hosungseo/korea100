@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getLawMap, getLawMapIds } from "@/lib/law-map-data";
+import { getLawMap, getLawMapClass, getLawMapIds, projectLawMapClassForClient } from "@/lib/law-map-data";
 import { EDGE_LABELS, EDGE_ORDER, TIER_LABELS } from "@/components/law-map-constants";
 import LawMapBoard from "@/components/LawMapBoard";
 import styles from "./page.module.css";
@@ -34,6 +34,8 @@ export default async function LawMapPage({ params }: { params: Promise<{ lawId: 
   const map = getLawMap(lawId);
   if (!map) notFound();
   const t = map.stats.articlesByTier;
+  // 클라이언트에는 법률 조문의 분류만(필드도 최소로) 보낸다. 전체 파일은 감사 시트 쪽에서 쓴다.
+  const classMap = projectLawMapClassForClient(getLawMapClass(lawId), map);
 
   return (
     <main className={styles.page}>
@@ -59,7 +61,7 @@ export default async function LawMapPage({ params }: { params: Promise<{ lawId: 
           <div><dt>미해결 위임</dt><dd>{map.stats.unresolved}</dd></div>
         </dl>
       </header>
-      <LawMapBoard map={map} textUrl={`${BASE_PATH}/law-map/${lawId}.text.json`} />
+      <LawMapBoard map={map} classMap={classMap} textUrl={`${BASE_PATH}/law-map/${lawId}.text.json`} />
     </main>
   );
 }
