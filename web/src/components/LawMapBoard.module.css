@@ -1,0 +1,450 @@
+.layout {
+  /* Site header height — mirrors .site-header-inner in globals.css (56px, 52px ≤760px).
+     The Board reads the live value from the DOM for scrolling; CSS uses this token. */
+  --law-map-header-h: 56px;
+  /* Board padding. .columnHead's sticky top is -1× this so the head sits flush with the
+     scroll container edge; keep the two coupled through this token. */
+  --law-map-board-pad: 16px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  align-items: start;
+}
+
+/* The board scrolls inside .main (not the page) so column heads can stick
+   inside the horizontal scroll container. */
+.main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: calc(100vh - var(--law-map-header-h));
+  height: calc(100dvh - var(--law-map-header-h));
+}
+
+/* ── 툴바 ─────────────────────────────────────────── */
+.toolbar {
+  flex: none;
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  align-items: center;
+  padding: 10px 24px;
+  border-bottom: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+  backdrop-filter: blur(6px);
+}
+
+.kinds {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+}
+
+.kind {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.kind input {
+  accent-color: var(--kind-color);
+}
+
+.swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--kind-color);
+}
+
+.kind[data-off="true"] {
+  opacity: 0.45;
+}
+
+.search {
+  display: flex;
+  min-width: 220px;
+  height: 32px;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface);
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  padding: 0 10px;
+  font-size: 13px;
+  background: transparent;
+}
+
+.search button,
+.routeBtn,
+.clearBtn {
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.routeBtn[data-on="true"] {
+  border-color: var(--color-accent-dark);
+  background: var(--color-accent-soft);
+  color: var(--color-accent-dark);
+  font-weight: 650;
+}
+
+.hint {
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+/* ── 보드 ─────────────────────────────────────────── */
+.board {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--law-map-board-pad) 24px 48px;
+}
+
+.canvas {
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(236px, 1fr);
+  gap: 56px;
+  min-width: max-content;
+  align-items: start;
+}
+
+.wires {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.column {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+
+.columnHead {
+  position: sticky;
+  top: calc(-1 * var(--law-map-board-pad));
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 6px 8px;
+  border-bottom: 2px solid var(--color-ink);
+  background: var(--color-canvas);
+  font-size: 13px;
+}
+
+.columnHead span {
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.lane {
+  display: grid;
+  gap: 4px;
+}
+
+.laneHead {
+  display: grid;
+  gap: 2px;
+  margin-top: 10px;
+  padding: 6px 8px;
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-surface-tint);
+}
+
+.laneHead span {
+  color: var(--color-muted);
+  font-size: 10px;
+}
+
+.laneHead strong {
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.laneHead a {
+  justify-self: start;
+  color: var(--color-accent-dark);
+  font-size: 10px;
+  text-decoration: none;
+}
+
+.chapter {
+  margin-top: 8px;
+  padding: 2px 8px;
+  color: var(--color-muted);
+  font-size: 10px;
+  letter-spacing: 0.02em;
+}
+
+/* ── 카드 ─────────────────────────────────────────── */
+.card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 8px;
+  width: 100%;
+  min-height: 40px;
+  padding: 6px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--duration-state), box-shadow var(--duration-state), opacity var(--duration-state);
+}
+
+.card:hover {
+  border-color: var(--color-border-strong);
+}
+
+.card[data-selected="true"] {
+  border-color: var(--color-ink);
+  box-shadow: 0 0 0 2px var(--color-ink);
+}
+
+.card[data-route="true"] {
+  border-color: var(--color-accent-dark);
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+
+.card[data-from="true"] {
+  background: var(--color-accent-soft);
+}
+
+.card[data-match="true"] {
+  background: var(--color-warning-soft);
+  border-color: var(--color-warning);
+}
+
+.card[data-dim="true"] {
+  opacity: 0.38;
+}
+
+.cardLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 650;
+  color: var(--color-ink);
+}
+
+.cardTitle {
+  grid-column: 1 / -1;
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--color-text);
+}
+
+.dots {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.dot {
+  display: inline-flex;
+  min-width: 14px;
+  height: 14px;
+  padding: 0 3px;
+  border-radius: 7px;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-surface);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1;
+}
+
+/* ── 패널 ─────────────────────────────────────────── */
+.panel {
+  position: sticky;
+  top: var(--law-map-header-h);
+  min-height: calc(100vh - var(--law-map-header-h));
+  min-height: calc(100dvh - var(--law-map-header-h));
+  max-height: calc(100vh - var(--law-map-header-h));
+  max-height: calc(100dvh - var(--law-map-header-h));
+  overflow: auto;
+  padding: 16px 18px 32px;
+  border-left: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.panelEmpty {
+  color: var(--color-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.panelKicker {
+  color: var(--color-muted);
+  font-size: 11px;
+}
+
+.panel h2 {
+  margin: 4px 0 2px;
+  font-size: 17px;
+  line-height: 1.3;
+}
+
+.panelLink {
+  color: var(--color-accent-dark);
+  font-size: 12px;
+}
+
+.panelText {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  border-left: 3px solid var(--color-border-strong);
+  background: var(--color-surface-muted);
+  font-size: 13px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+
+.panelSection {
+  margin-top: 16px;
+}
+
+.panelSection h3 {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin: 0 0 6px;
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.edgeList {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.edgeItem {
+  display: grid;
+  gap: 2px;
+  padding: 6px 8px;
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--kind-color);
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.edgeItem button {
+  justify-self: start;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-accent-dark);
+  font-size: 12px;
+  font-weight: 650;
+  text-align: left;
+  cursor: pointer;
+}
+
+.edgeItem small {
+  color: var(--color-muted);
+  font-size: 11px;
+}
+
+.unresolved {
+  color: var(--color-warning);
+  font-size: 11px;
+}
+
+.instList {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.instList a {
+  display: block;
+  padding: 6px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  color: var(--color-text);
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.routeSteps {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0 0 0 18px;
+  font-size: 12px;
+}
+
+.routeSteps button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-accent-dark);
+  font-weight: 650;
+  cursor: pointer;
+}
+
+/* ── 모바일 ───────────────────────────────────────── */
+/* Header shrinks at the site header's own breakpoint (globals.css: 760px). */
+@media (max-width: 760px) {
+  .layout {
+    --law-map-header-h: 52px;
+  }
+}
+
+@media (max-width: 960px) {
+  .layout {
+    --law-map-board-pad: 12px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .toolbar {
+    padding: 8px 16px;
+  }
+
+  .board {
+    padding: var(--law-map-board-pad) 16px 56vh;
+  }
+
+  .canvas {
+    grid-auto-columns: minmax(200px, 1fr);
+    gap: 36px;
+  }
+
+  .panel {
+    position: fixed;
+    inset: auto 0 0 0;
+    min-height: 0;
+    max-height: 50vh;
+    max-height: 50dvh;
+    border-left: 0;
+    border-top: 1px solid var(--color-border-strong);
+    /* No shadow token in globals.css; derive from the ink token like the inline shadows there. */
+    box-shadow: 0 -8px 24px color-mix(in srgb, var(--color-ink) 8%, transparent);
+  }
+
+  .panel[data-empty="true"] {
+    display: none;
+  }
+}

@@ -6,6 +6,7 @@ import {
   getInstitutionSummaries,
 } from "@/lib/data";
 import InstitutionDetailView from "@/components/InstitutionDetailView";
+import { getLawMapHrefsByName } from "@/lib/law-map-data";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://hosungseo.github.io/korea100";
@@ -92,6 +93,7 @@ export default async function ModelPage({
         institution={institution}
         institutions={institutions}
         relatedSlugs={relatedSlugs}
+        lawMapHrefs={getLawMapHrefsByName()}
       />
     </>
   );
