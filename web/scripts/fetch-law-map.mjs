@@ -20,19 +20,25 @@ const INSTITUTIONS_DIR = path.join(WEB, "data", "institutions");
 const REGISTRY = path.join(WEB, "data", "legal-source-registry.json");
 const AUDIT_DIR = path.join(path.dirname(WEB), "docs", "audits");
 
+const USAGE = "사용법: node scripts/fetch-law-map.mjs --lawId 001823 | --all [--limit N] [--force]";
+
 function parseArgs(argv) {
   const args = { lawIds: [], all: false, limit: Infinity, force: false };
   for (let i = 0; i < argv.length; i++) {
     const v = argv[i];
     if (v === "--lawId") args.lawIds.push(argv[++i]);
     else if (v === "--all") args.all = true;
-    else if (v === "--limit") args.limit = Number(argv[++i]);
-    else if (v === "--force") args.force = true;
+    else if (v === "--limit") {
+      const n = Number(argv[++i]);
+      if (!Number.isInteger(n) || n < 1) { console.error(USAGE); process.exit(2); }
+      args.limit = n;
+    } else if (v === "--force") args.force = true;
   }
   return args;
 }
 
 const today = () => new Date().toISOString().slice(0, 10);
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function registryLawIds() {
   const registry = JSON.parse(fs.readFileSync(REGISTRY, "utf8"));
@@ -45,7 +51,10 @@ function loadInstitutionCitations() {
     const j = JSON.parse(fs.readFileSync(path.join(INSTITUTIONS_DIR, f), "utf8"));
     const citations = [];
     for (const b of j.canvas?.legalBasis ?? []) if (b.articles) citations.push({ law: b.law, article: b.articles });
-    for (const n of j.process?.nodes ?? []) for (const lb of n.legal_basis ?? []) citations.push({ law: lb.law, article: lb.article });
+    // 검증에서 근거 오인용으로 판정된 항목(wrong_basis)은 역참조에서 뺀다. 미검증(unverified)은 그대로 둔다.
+    for (const n of j.process?.nodes ?? []) {
+      for (const lb of n.legal_basis ?? []) if (!lb.wrong_basis) citations.push({ law: lb.law, article: lb.article });
+    }
     return { slug: j.slug, name: j.name, citations };
   });
 }
@@ -55,7 +64,11 @@ async function resolveLane(drf, oc, tier, info, asOf, warnings) {
   // lsStmd는 시행 전 개정본을 줄 수 있다. 오늘 기준 시행 중인 판을 고른다.
   if (!effectiveOn || effectiveOn > asOf) {
     const version = await resolveEffectiveLawVersion(info.lawId, { oc, asOf, officialName: info.name });
+    await sleep(300); // law-service는 DRF 클라이언트의 호출 간격을 거치지 않으므로 여기서 띄운다
     if (version) ({ mst, effectiveOn } = version);
+    else if (tier === "statute") throw new Error(`${info.name}: 현행 시행판 미확인`);
+    // 하위 레인은 lsStmd가 준(시행 전) 판으로 진행하되 보고서에 남긴다
+    else if (effectiveOn) warnings.futureVersions.push({ lawId: info.lawId, mst, name: info.name, tier, effectiveOn });
   }
   if (!effectiveOn) throw new Error(`${info.name}: 시행일을 확인하지 못했습니다`);
   const payload = await drf.getJson({ target: "eflaw", MST: mst, efYd: effectiveOn.replace(/-/g, "") }, `eflaw-${mst}-${effectiveOn}.json`);
@@ -63,12 +76,14 @@ async function resolveLane(drf, oc, tier, info, asOf, warnings) {
   if (articles.length === 0) throw new Error(`${info.name}(MST ${mst}): 조문이 비어 있습니다`);
   let delegated = null;
   try {
-    delegated = parseLsDelegated(await drf.getText({ target: "lsDelegated", MST: mst }, `lsDelegated-${mst}.xml`));
+    // 일부 시행령·시행규칙은 lsDelegated가 체계적으로 HTTP 500을 준다 → 하위 레인은 한 번만 재시도해 백오프 시간을 줄인다
+    const retries = tier === "statute" ? undefined : 1;
+    delegated = parseLsDelegated(await drf.getText({ target: "lsDelegated", MST: mst }, `lsDelegated-${mst}.xml`, { retries }));
   } catch (err) {
-    // 일부 시행규칙은 lsDelegated가 HTTP 500을 돌려준다(위임 정보 없음). 법률 레인은 위임선의 뿌리이므로 실패를 그대로 올리고,
+    // 법률 레인은 위임선의 뿌리이므로 실패를 그대로 올리고,
     // 하위 레인은 조문만 싣고 위임선 없이 진행한다(빌더는 delegated가 null이면 그 레인의 위임선을 건너뛴다).
     if (tier === "statute") throw err;
-    warnings.push({ lawId: info.lawId, mst, name: info.name, tier, reason: drf.redact(err?.message ?? String(err)) });
+    warnings.delegationUnavailable.push({ lawId: info.lawId, mst, name: info.name, tier, reason: drf.redact(err?.message ?? String(err)) });
   }
   return { tier, info: { ...info, mst, effectiveOn }, articles, delegated };
 }
@@ -86,7 +101,7 @@ async function main() {
   const args = parseArgs(process.argv.slice(2));
   const lawIds = args.all ? registryLawIds().slice(0, args.limit) : args.lawIds;
   if (lawIds.length === 0) {
-    console.error("사용법: node scripts/fetch-law-map.mjs --lawId 001823 | --all [--limit N] [--force]");
+    console.error(USAGE);
     process.exit(2);
   }
   const oc = resolveLawGoKrOc();
@@ -97,11 +112,11 @@ async function main() {
 
   const report = {
     generatedAt: asOf, built: [], skipped: [], unresolved: [], institutionMisses: [], addedAdminRules: [], delegationUnavailable: [],
-    selfReferences: 0, ambiguousSources: [],
+    futureVersions: [], selfReferences: 0, ambiguousSources: [],
   };
   for (const lawId of lawIds) {
     try {
-      const { map, texts, report: r } = await buildOne(drf, oc, lawId, institutions, asOf, report.delegationUnavailable);
+      const { map, texts, report: r } = await buildOne(drf, oc, lawId, institutions, asOf, report);
       fs.writeFileSync(path.join(DATA_DIR, `${lawId}.json`), `${JSON.stringify(map, null, 1)}\n`);
       fs.writeFileSync(path.join(TEXT_DIR, `${lawId}.text.json`), JSON.stringify(texts));
       report.built.push({
@@ -112,7 +127,7 @@ async function main() {
       report.institutionMisses.push(...r.institutionMisses);
       report.addedAdminRules.push(...r.addedAdminRules.map((name) => ({ lawId, name })));
       report.selfReferences += r.selfReferences;
-      report.ambiguousSources.push(...r.ambiguousSources.map((entry) => ({ lawId, ...entry })));
+      report.ambiguousSources.push(...r.ambiguousSources);
       console.log(`✓ ${lawId} ${map.name}: 조문 ${map.articles.length}, 위임선 ${map.edges.length}, 미해결 ${map.stats.unresolved}, 제외 참조 ${r.droppedReferences}, 자기인용 ${r.selfReferences}, 제도 ${map.institutions.length}`);
     } catch (err) {
       const reason = drf.redact(err?.message ?? String(err));

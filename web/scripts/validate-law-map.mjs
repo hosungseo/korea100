@@ -106,11 +106,20 @@ const indexPath = path.join(DATA_DIR, "index.json");
 if (files.length > 0) {
   if (!fs.existsSync(indexPath)) fail("law-map/index.json", "없음");
   else {
-    const index = JSON.parse(fs.readFileSync(indexPath, "utf8"));
+    const indexRaw = fs.readFileSync(indexPath, "utf8");
+    if (/OC=[A-Za-z0-9]/.test(indexRaw)) fail("law-map/index.json", "OC 값이 들어 있습니다");
+    const index = JSON.parse(indexRaw);
     const indexed = new Set(index.laws.map((l) => l.lawId));
     for (const m of maps) if (!indexed.has(m.lawId)) fail("law-map/index.json", `${m.lawId} 누락`);
     for (const id of indexed) if (!maps.some((m) => m.lawId === id)) fail("law-map/index.json", `${id} 파일 없음`);
   }
+}
+
+// 빌드 보고서(가장 최근 것)에도 OC가 새지 않았는지 본다. 보고서에는 오류 메시지·URL이 그대로 실리기 때문이다.
+const AUDIT_DIR = path.join(path.dirname(WEB), "docs", "audits");
+if (fs.existsSync(AUDIT_DIR)) {
+  const latest = fs.readdirSync(AUDIT_DIR).filter((f) => /^law-map-build-\d{4}-\d{2}-\d{2}\.json$/.test(f)).sort().at(-1);
+  if (latest && /OC=[A-Za-z0-9]/.test(fs.readFileSync(path.join(AUDIT_DIR, latest), "utf8"))) fail(`audits/${latest}`, "OC 값이 들어 있습니다");
 }
 
 if (errors.length > 0) {

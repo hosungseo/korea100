@@ -53,6 +53,15 @@ test("request retries on HTML error pages and redacts the OC in the final error"
   assert.ok(!fs.existsSync(path.join(dir, "s-9.xml")));
 });
 
+test("getText honors a per-call retries override", async () => {
+  const dir = tmpDir();
+  const { calls, fetchImpl } = responder([{ text: "", status: 500 }, { text: "", status: 500 }, { text: "<ok/>" }]);
+  const drf = createDrfClient({ oc: "x", cacheDir: dir, delayMs: 0, retries: 3, backoffMs: 0, fetchImpl });
+  await assert.rejects(() => drf.getText({ target: "lsDelegated", MST: "5" }, "d-5.xml", { retries: 1 }), /HTTP 500/);
+  assert.equal(calls.length, 2); // 기본 3회가 아니라 1회만 재시도
+  assert.ok(!fs.existsSync(path.join(dir, "d-5.xml")));
+});
+
 test("getJson parses cached JSON", async () => {
   const dir = tmpDir();
   const drf = createDrfClient({ oc: "x", cacheDir: dir, delayMs: 0, fetchImpl: responder([{ text: '{"법령":{"법령ID":"1"}}' }]).fetchImpl });
