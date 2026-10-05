@@ -117,7 +117,8 @@ async function main() {
   for (const lawId of lawIds) {
     try {
       const { map, texts, report: r } = await buildOne(drf, oc, lawId, institutions, asOf, report);
-      fs.writeFileSync(path.join(DATA_DIR, `${lawId}.json`), `${JSON.stringify(map, null, 1)}\n`);
+      // 구조 파일은 손으로 diff하지 않는 생성물 → 들여쓰기 없이 저장(건축법 기준 용량 ~17% 절감). index.json은 index 모듈이 보기 좋게 쓴다.
+      fs.writeFileSync(path.join(DATA_DIR, `${lawId}.json`), `${JSON.stringify(map)}\n`);
       fs.writeFileSync(path.join(TEXT_DIR, `${lawId}.text.json`), JSON.stringify(texts));
       report.built.push({
         lawId, name: map.name, articles: map.articles.length, edges: map.edges.length,
