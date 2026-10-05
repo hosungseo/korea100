@@ -209,7 +209,10 @@ export function buildLawMap({ stmd, laws, institutions = [], generatedAt }) {
         };
         const to = lane && rec.targetLabel ? `${lane.id}:${rec.targetLabel}` : null;
         if (to && articleIds.has(to)) {
-          pushEdge({ ...base, targetName, to, ...titled });
+          // 도착 레인이 확정되면 위임선 kind는 그 레인의 층위를 따른다(검증기 KIND_TO_TIER 계약).
+          // lsStmd는 대법원규칙·헌법재판소규칙·중앙선관위규칙·감사원규칙을 시행령 자리(decree)에 두는데,
+          // 위임 레코드는 "…규칙으로 정하는"을 rule로 분류해 23개 법률·627개 위임선이 어긋났다.
+          pushEdge({ ...base, kind: lane.tier, targetName, to, ...titled });
         } else if (pushEdge({ ...base, targetName, to: null, ...titled, unresolved: true })) {
           reportUnresolved({
             lawId: law.info.lawId, reason: lane ? "article-missing" : "lane-missing",
