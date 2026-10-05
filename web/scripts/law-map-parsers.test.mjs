@@ -1,17 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { parseClause, parseLsStmd, stripOc } from "./lib/law-map-parsers.mjs";
+import fs from "node:fs";
+import { parseArticleList, parseClause, parseLsDelegated, parseLsStmd, stripOc } from "./lib/law-map-parsers.mjs";
+import { DELEGATED_XML, STMD_XML } from "./law-map-fixtures.mjs";
 
-export const STMD_XML = `<?xml version="1.0" encoding="UTF-8"?><법령체계도><기본정보><법령ID>001823</법령ID><법령일련번호>273437</법령일련번호><공포일자>20250826</공포일자><공포번호>21035</공포번호><법종구분 법종구분코드="A0002">법률</법종구분>
-<법령명><![CDATA[건축법]]></법령명><시행일자>20260227</시행일자><제개정구분 제개정구분코드="110402">일부개정</제개정구분></기본정보><상하위법><법률>
-<기본정보><법령ID>001823</법령ID><법령일련번호>273437</법령일련번호><공포일자>20250826</공포일자><법종구분 법종구분코드="A0002">법률</법종구분><법령명><![CDATA[건축법]]></법령명><시행일자>20260227</시행일자><본문상세링크>/DRF/lawService.do?OC=secret123&amp;target=law&amp;MST=273437&amp;type=XML&amp;mobileYn=</본문상세링크></기본정보><시행령>
-<기본정보><법령ID>002118</법령ID><법령일련번호>288849</법령일련번호><공포일자>20260818</공포일자><법종구분 법종구분코드="A0007">대통령령</법종구분><법령명><![CDATA[건축법 시행령]]></법령명><시행일자>20260918</시행일자><본문상세링크>/DRF/lawService.do?OC=secret123&amp;target=law&amp;MST=288849&amp;type=XML</본문상세링크></기본정보></시행령><시행규칙>
-<기본정보><법령ID>006186</법령ID><법령일련번호>273103</법령일련번호><공포일자>20250731</공포일자><법종구분 법종구분코드="A0103">국토교통부령</법종구분><법령명><![CDATA[건축물대장의 기재 및 관리 등에 관한 규칙]]></법령명><시행일자>20250731</시행일자></기본정보></시행규칙><시행규칙>
-<기본정보><법령ID>006191</법령ID><법령일련번호>283727</법령일련번호><공포일자>20260301</공포일자><법종구분 법종구분코드="A0103">국토교통부령</법종구분><법령명><![CDATA[건축법 시행규칙]]></법령명><시행일자>20260301</시행일자></기본정보></시행규칙><행정규칙><고시>
-<기본정보><행정규칙ID>37055</행정규칙ID><행정규칙일련번호>2100000251146</행정규칙일련번호><발령일자>20241224</발령일자><발령번호>2024-846</발령번호><법종구분 법종구분코드="B0003">고시</법종구분><행정규칙명><![CDATA[건축구조기준]]></행정규칙명><시행일자>20241224</시행일자></기본정보></고시><훈령>
-<기본정보><행정규칙ID>40001</행정규칙ID><행정규칙일련번호>2100000300000</행정규칙일련번호><발령일자>20250101</발령일자><법종구분 법종구분코드="B0001">훈령</법종구분><행정규칙명><![CDATA[건축행정 업무처리 지침]]></행정규칙명><시행일자>20250101</시행일자></기본정보></훈령></행정규칙><자치법규><조례>
-<기본정보><자치법규ID>2019668</자치법규ID><자치법규일련번호>2124585</자치법규일련번호><공포일자>20260420</공포일자><법종구분 법종구분코드="C0001">조례</법종구분><자치법규명><![CDATA[가평군 군계획 조례]]></자치법규명><시행일자>20260420</시행일자></기본정보></조례><조례>
-<기본정보><자치법규ID>2019669</자치법규ID><자치법규일련번호>2124586</자치법규일련번호><공포일자>20260420</공포일자><법종구분 법종구분코드="C0001">조례</법종구분><자치법규명><![CDATA[영광군 건축 조례]]></자치법규명><시행일자>20260420</시행일자></기본정보></조례></자치법규></상하위법></법령체계도>`;
+// 건축법 lsStmd 실응답 전체(OC 제거본). 있을 때만 모양 회귀를 잡는다.
+const REAL_STMD_PATH = "/private/tmp/claude-501/-Users-seohoseong/c2fd4fa8-4482-418c-a752-3c4c562faf80/scratchpad/stmd-001823.xml";
 
 test("stripOc removes the OC query parameter but keeps the rest of the URL", () => {
   assert.equal(
@@ -19,6 +13,7 @@ test("stripOc removes the OC query parameter but keeps the rest of the URL", () 
     "/DRF/lawService.do?target=law&amp;MST=1",
   );
   assert.equal(stripOc("https://x/y?target=law&OC=secret123"), "https://x/y?target=law");
+  assert.equal(stripOc("https://x/y?oc=secret123&target=law"), "https://x/y?target=law");
   assert.equal(stripOc("plain text"), "plain text");
 });
 
@@ -30,7 +25,7 @@ test("parseClause reads article number, branch and the remaining clause", () => 
   assert.equal(parseClause("별표 1"), null);
 });
 
-test("parseLsStmd extracts root, decrees, rules, admin rules and ordinances without OC", () => {
+test("parseLsStmd walks the nested tree and classifies each 기본정보 by its enclosing tag", () => {
   const stmd = parseLsStmd(STMD_XML);
   assert.deepEqual(stmd.root, {
     lawId: "001823", mst: "273437", name: "건축법", kind: "법률",
@@ -39,45 +34,52 @@ test("parseLsStmd extracts root, decrees, rules, admin rules and ordinances with
   assert.equal(stmd.decrees.length, 1);
   assert.equal(stmd.decrees[0].name, "건축법 시행령");
   assert.equal(stmd.decrees[0].mst, "288849");
-  assert.deepEqual(stmd.rules.map((r) => r.name), ["건축물대장의 기재 및 관리 등에 관한 규칙", "건축법 시행규칙"]);
-  assert.deepEqual(stmd.adminRules.map((r) => [r.serial, r.name, r.kind]), [
-    ["2100000251146", "건축구조기준", "고시"],
-    ["2100000300000", "건축행정 업무처리 지침", "훈령"],
+  assert.deepEqual(stmd.rules.map((r) => [r.mst, r.name, r.kind]), [
+    ["273103", "건축물대장의 기재 및 관리 등에 관한 규칙", "국토교통부령"],
+    ["283727", "건축법 시행규칙", "국토교통부령"],
   ]);
-  assert.deepEqual(stmd.ordinances.map((o) => o.name), ["가평군 군계획 조례", "영광군 건축 조례"]);
+  assert.deepEqual(stmd.adminRules.map((r) => [r.serial, r.name, r.kind, r.effectiveOn]), [
+    ["2100000198238", "건축행정시스템 운영규정", "훈령", "2021-02-18"],
+    ["2100000244148", "건축공사 감리세부기준", "고시", "2024-07-10"],
+    ["2100000272946", "실내건축의 구조·시공방법 등에 관한 기준", "고시", "2026-01-22"],
+  ]);
+  assert.deepEqual(stmd.ordinances.map((o) => [o.serial, o.name, o.kind]), [
+    ["2124585", "가평군 군계획 조례", "조례"],
+    ["1850983", "가평군 제증명 등 수수료 징수 조례", "조례"],
+    ["2049613", "경산시 건축 조례 시행규칙", "규칙"],
+  ]);
   assert.ok(!JSON.stringify(stmd).includes("secret123"));
+});
+
+test("parseLsStmd on the full 건축법 response (local scratch file only)", (t) => {
+  if (!fs.existsSync(REAL_STMD_PATH)) return t.skip("real lsStmd file not present");
+  const xml = fs.readFileSync(REAL_STMD_PATH, "utf8");
+  const count = (re) => (xml.match(re) ?? []).length;
+  const distinct = (re) => new Set([...xml.matchAll(re)].map((m) => m[1])).size;
+  // 원본 나열: 1 시행령, 7 시행규칙, 45 행정규칙(44 고시 + 1 훈령), 1,100 자치법규(1,094 조례 + 6 규칙).
+  // 같은 고시·조례가 여러 시행규칙 아래 되풀이 나열되므로 일련번호로 중복을 걷으면 35·580이 된다.
+  assert.deepEqual([count(/<고시>/g), count(/<훈령>/g), count(/<조례>/g), count(/<규칙>/g)], [44, 1, 1094, 6]);
+  const stmd = parseLsStmd(xml);
+  assert.equal(stmd.decrees.length, 1);
+  assert.equal(stmd.rules.length, 7);
+  assert.equal(stmd.adminRules.length, 35);
+  assert.equal(stmd.adminRules.length, distinct(/<행정규칙일련번호>([^<]*)</g));
+  assert.equal(stmd.adminRules.filter((r) => r.kind === "훈령").length, 1);
+  assert.equal(stmd.ordinances.length, 580);
+  assert.equal(stmd.ordinances.length, distinct(/<자치법규일련번호>([^<]*)</g));
+  assert.equal(stmd.ordinances.filter((o) => o.kind === "규칙").length, 6);
+  assert.ok(!/OC=/i.test(JSON.stringify(stmd)));
 });
 
 test("parseLsStmd rejects non-lsStmd responses", () => {
   assert.throws(() => parseLsStmd("<html>오류</html>"), /lsStmd/);
 });
 
-import { parseArticleList, parseLsDelegated } from "./lib/law-map-parsers.mjs";
-
-export const DELEGATED_XML = `<?xml version="1.0" encoding="UTF-8"?>
-<lsDelegated><법령><법령정보><법령일련번호>273437</법령일련번호><법령명><![CDATA[건축법]]></법령명><법령ID>001823</법령ID><소관부처 소관부처코드="1613000">국토교통부</소관부처><시행일자>20260227</시행일자></법령정보>
-<위임조문정보><조정보><조문번호>2</조문번호><조문제목><![CDATA[정의]]></조문제목></조정보>
-<위임정보><위임구분>시행령</위임구분><위임법령일련번호>288849</위임법령일련번호><위임법령제목><![CDATA[건축법 시행령]]></위임법령제목>
-<위임법령조문정보><위임법령조문번호>3</위임법령조문번호><위임법령조문가지번호>3</위임법령조문가지번호><위임법령조문제목><![CDATA[지형적 조건 등에 따른 도로의 구조와 너비]]></위임법령조문제목><링크텍스트>대통령령</링크텍스트><라인텍스트><![CDATA[대통령령으로 정하는]]></라인텍스트><조항호목>제2조제1항제11호</조항호목></위임법령조문정보></위임정보>
-<위임정보><위임구분>시행규칙</위임구분><위임법령일련번호>283727</위임법령일련번호><위임법령제목><![CDATA[건축법 시행규칙]]></위임법령제목>
-<위임법령조문정보><위임법령조문번호>1</위임법령조문번호><위임법령조문가지번호>2</위임법령조문가지번호><위임법령조문제목><![CDATA[설계도서의 범위]]></위임법령조문제목><링크텍스트>국토교통부령</링크텍스트><라인텍스트><![CDATA[국토교통부령으로 정하는]]></라인텍스트><조항호목>제2조제1항제14호</조항호목></위임법령조문정보></위임정보>
-<위임정보><위임구분>인용법령</위임구분><위임법령일련번호>246675</위임법령일련번호><위임법령제목><![CDATA[국토의 계획 및 이용에 관한 법률]]></위임법령제목>
-<위임법령조문정보><위임법령조문번호>0</위임법령조문번호><위임법령조문제목><![CDATA[]]></위임법령조문제목><링크텍스트>「국토의 계획 및 이용에 관한 법률」</링크텍스트><라인텍스트><![CDATA[「국토의 계획 및 이용에 관한 법률」]]></라인텍스트><조항호목>제2조제1항제11호가목</조항호목></위임법령조문정보>
-<위임구분>인용법령</위임구분><위임법령일련번호>253515</위임법령일련번호><위임법령제목><![CDATA[건설산업기본법]]></위임법령제목>
-<위임법령조문정보><위임법령조문번호>2</위임법령조문번호><위임법령조문제목><![CDATA[정의]]></위임법령조문제목><링크텍스트>「건설산업기본법」</링크텍스트><라인텍스트><![CDATA[「건설산업기본법」 제2조제4호]]></라인텍스트><조항호목>제2조제1항제16호</조항호목></위임법령조문정보></위임정보></위임조문정보>
-<위임조문정보><조정보><조문번호>4</조문번호><조문제목><![CDATA[건축위원회]]></조문제목></조정보>
-<위임정보><위임구분>위임자치법규</위임구분>
-<위임자치법규조문정보><위임자치법규일련번호>2160161</위임자치법규일련번호><위임자치법규제목><![CDATA[영광군 건축 조례]]></위임자치법규제목><링크텍스트>지방자치단체의 조례</링크텍스트><라인텍스트><![CDATA[⑤ 각 건축위원회의 조직·운영은 조례로 정한다.]]></라인텍스트><조항호목></조항호목></위임자치법규조문정보>
-<위임자치법규조문정보><위임자치법규일련번호>2159003</위임자치법규일련번호><위임자치법규제목><![CDATA[영주시 건축 조례]]></위임자치법규제목><링크텍스트>지방자치단체의 조례</링크텍스트><라인텍스트><![CDATA[⑤ 각 건축위원회의 조직·운영은 조례로 정한다.]]></라인텍스트><조항호목></조항호목></위임자치법규조문정보></위임정보></위임조문정보>
-<위임조문정보><조정보><조문번호>13의2</조문번호><조문제목><![CDATA[건축물 안전영향평가]]></조문제목></조정보>
-<위임정보><위임구분>위임행정규칙</위임구분>
-<위임행정규칙조문정보><위임행정규칙일련번호>2100000110729</위임행정규칙일련번호><위임행정규칙제목><![CDATA[건축물 안전영향평가 세부기준]]></위임행정규칙제목><링크텍스트>고시한다</링크텍스트><라인텍스트><![CDATA[건축 관련 업무를 수행하는 기관 중에서 지정하여 고시한다.]]></라인텍스트><조항호목>제13조의2제2항</조항호목></위임행정규칙조문정보></위임정보></위임조문정보>
-</법령></lsDelegated>`;
-
 test("parseLsDelegated flattens delegation records by kind", () => {
-  const { law, records } = parseLsDelegated(DELEGATED_XML);
+  const { law, records, dropped } = parseLsDelegated(DELEGATED_XML);
   assert.deepEqual(law, { mst: "273437", lawId: "001823", name: "건축법", ministry: "국토교통부" });
-  assert.equal(records.length, 7);
+  assert.equal(records.length, 11);
+  assert.equal(dropped, 1);
 
   const decree = records.find((r) => r.kind === "시행령");
   assert.deepEqual(decree, {
@@ -88,9 +90,10 @@ test("parseLsDelegated flattens delegation records by kind", () => {
   });
 
   const cites = records.filter((r) => r.kind === "인용법령");
-  assert.deepEqual(cites.map((r) => [r.targetName, r.targetLabel]), [
-    ["국토의 계획 및 이용에 관한 법률", null],
-    ["건설산업기본법", "제2조"],
+  assert.deepEqual(cites.map((r) => [r.targetName, r.targetSerial, r.targetLabel]), [
+    ["국토의 계획 및 이용에 관한 법률", "246675", null],
+    ["건설산업기본법", "253515", "제2조"],
+    ["녹색건축물 조성 지원법", null, null],
   ]);
 
   const ordinances = records.filter((r) => r.kind === "위임자치법규");
@@ -104,6 +107,25 @@ test("parseLsDelegated flattens delegation records by kind", () => {
   assert.equal(admin.from.branch, 2);
   assert.equal(admin.targetSerial, "2100000110729");
   assert.equal(admin.fromClause, "제13조의2제2항");
+});
+
+test("parseLsDelegated keeps header-less 위임정보 blocks, inferring the kind from 링크텍스트", () => {
+  const { records } = parseLsDelegated(DELEGATED_XML);
+  const head = records.filter((r) => r.from.label === "제4조" && r.kind !== "위임자치법규");
+  assert.deepEqual(head.map((r) => [r.kind, r.targetSerial, r.targetName, r.targetLabel, r.linkText]), [
+    ["시행령", null, null, "제5조", "대통령령"],
+    ["시행령", null, null, "제5조의2", "대통령령"],
+    ["시행규칙", null, null, "제2조", "국토교통부령"], // 가지번호 0 → 가지 없음
+    ["인용법령", null, "녹색건축물 조성 지원법", null, "「녹색건축물 조성 지원법」"],
+  ]);
+  assert.deepEqual(head[0], {
+    from: { no: 4, branch: null, label: "제4조", title: "건축위원회" },
+    kind: "시행령", targetSerial: null, targetName: null,
+    targetLabel: "제5조", targetTitle: "중앙건축위원회의 설치 등",
+    fromClause: "제4조제5항", linkText: "대통령령", phrase: "대통령령으로 정하는",
+  });
+  // 조문 내부 참조("제1항")는 레코드가 되지 않는다
+  assert.ok(!records.some((r) => r.linkText === "제1항"));
 });
 
 test("parseLsDelegated rejects non-lsDelegated responses", () => {
@@ -120,7 +142,9 @@ test("parseArticleList keeps document order, chapters, titles and text", () => {
           { 조문여부: "조문", 조문번호: "2", 조문제목: "정의", 조문내용: "제2조(정의)", 항: [{ 항내용: "① 용어의 뜻은 다음과 같다.", 호: [{ 호내용: "1. 대지란 토지를 말한다." }] }] },
           { 조문여부: "전문", 조문번호: "2", 조문내용: "                        제2장 건축물의 건축 <개정 2014.1.14>" },
           { 조문여부: "조문", 조문번호: "4", 조문가지번호: "2", 조문제목: "건축위원회의 건축 심의 등", 조문내용: "제4조의2(건축위원회의 건축 심의 등) ① 심의를 받아야 한다." },
-          { 조문여부: "조문", 조문번호: "5", 조문내용: "제5조 삭제 <2008.3.21>" },
+          { 조문여부: "조문", 조문번호: "5", 조문내용: "  제5조 삭제 <2008.3.21>" },
+          { 조문여부: "조문", 조문번호: "6", 조문가지번호: "0", 조문제목: "적용의 완화", 조문내용: "제6조(적용의 완화) 완화하여 적용할 수 있다." },
+          { 조문여부: "조문", 조문번호: "7", 조문내용: "제7조 허가 사항을 삭제하려는 자는 신고한다." },
           { 조문여부: "조문", 조문번호: "", 조문내용: "깨진 단위" },
         ],
       },
@@ -131,9 +155,12 @@ test("parseArticleList keeps document order, chapters, titles and text", () => {
     ["제2조", "정의", "제1장 총칙"],
     ["제4조의2", "건축위원회의 건축 심의 등", "제2장 건축물의 건축"],
     ["제5조", "삭제", "제2장 건축물의 건축"],
+    ["제6조", "적용의 완화", "제2장 건축물의 건축"], // 가지번호 "0"은 가지 없음
+    ["제7조", "", "제2장 건축물의 건축"], // 본문에 "삭제"가 있어도 삭제 조문이 아니다
   ]);
   assert.equal(list[1].no, 2);
   assert.equal(list[2].branch, 2);
+  assert.equal(list[4].branch, null);
   assert.match(list[0].text, /건축물의 안전/);
   assert.match(list[1].text, /대지란 토지/);
 });

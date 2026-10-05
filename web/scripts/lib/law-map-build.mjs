@@ -43,7 +43,7 @@ export function buildLawMap({ stmd, laws, institutions = [], generatedAt }) {
   const lanes = [];
   const articles = [];
   const texts = {};
-  const report = { unresolved: [], institutionMisses: [], addedAdminRules: [] };
+  const report = { unresolved: [], institutionMisses: [], addedAdminRules: [], droppedReferences: 0 };
   const counters = { decree: 0, rule: 0, adminRule: 0 };
   const laneByMst = new Map();
   const laneByName = new Map();
@@ -102,6 +102,7 @@ export function buildLawMap({ stmd, laws, institutions = [], generatedAt }) {
 
   for (const law of laws) {
     if (!law.delegated) continue;
+    report.droppedReferences += law.delegated.dropped ?? 0;
     const laneId = lanes.find((l) => l.tier === law.tier && l.mst === law.info.mst).id;
     for (const rec of law.delegated.records) {
       const fromLabel = (rec.fromClause && parseClause(rec.fromClause)?.label) || rec.from.label;
@@ -114,15 +115,24 @@ export function buildLawMap({ stmd, laws, institutions = [], generatedAt }) {
       }
       const base = { from, fromClause: rec.fromClause, kind, phrase: rec.phrase, targetName: rec.targetName };
       if (kind === "decree" || kind === "rule") {
-        const lane = laneByMst.get(rec.targetSerial) ?? laneByName.get(compact(rec.targetName));
+        let lane = (rec.targetSerial && laneByMst.get(rec.targetSerial))
+          || (rec.targetName && laneByName.get(compact(rec.targetName)))
+          || null;
+        if (!lane && rec.targetSerial == null && rec.targetName == null) {
+          // 머리글 없는 위임 블록(도착 법령 미표기): 그 층위의 레인이 하나뿐이면 그 레인으로 본다
+          const tierLanes = lanes.filter((l) => l.tier === kind);
+          if (tierLanes.length === 1) lane = tierLanes[0];
+        }
+        // Edge.targetName은 문자열이어야 한다 → 레인 이름, 그것도 없으면 링크텍스트("국토교통부령")
+        const targetName = rec.targetName ?? lane?.name ?? rec.linkText ?? "";
         const to = lane && rec.targetLabel ? `${lane.id}:${rec.targetLabel}` : null;
         if (to && articleIds.has(to)) {
-          pushEdge({ ...base, to, targetLabel: rec.targetLabel });
+          pushEdge({ ...base, targetName, to, targetLabel: rec.targetLabel });
         } else {
-          pushEdge({ ...base, to: null, ...(rec.targetLabel ? { targetLabel: rec.targetLabel } : {}), unresolved: true });
+          pushEdge({ ...base, targetName, to: null, ...(rec.targetLabel ? { targetLabel: rec.targetLabel } : {}), unresolved: true });
           report.unresolved.push({
             lawId: law.info.lawId, reason: lane ? "article-missing" : "lane-missing",
-            from, kind, targetName: rec.targetName, targetLabel: rec.targetLabel,
+            from, kind, targetName, targetLabel: rec.targetLabel,
           });
         }
       } else if (kind === "adminRule") {
