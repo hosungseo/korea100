@@ -35,6 +35,7 @@ export interface Edge {
   phrase: string;
   targetName: string;
   targetLabel?: string;
+  targetTitle?: string;       // 도착 조문 제목 (시행령·시행규칙 위임, 미해결이어도 있으면 둔다)
   unresolved?: true;
 }
 

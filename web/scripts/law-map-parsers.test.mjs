@@ -1,11 +1,14 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { parseArticleList, parseClause, parseLsDelegated, parseLsStmd, stripOc } from "./lib/law-map-parsers.mjs";
 import { DELEGATED_XML, STMD_XML } from "./law-map-fixtures.mjs";
 
-// 건축법 lsStmd 실응답 전체(OC 제거본). 있을 때만 모양 회귀를 잡는다.
-const REAL_STMD_PATH = "/private/tmp/claude-501/-Users-seohoseong/c2fd4fa8-4482-418c-a752-3c4c562faf80/scratchpad/stmd-001823.xml";
+// 건축법 lsStmd 실응답 전체(OC 제거본, fetch-law-map이 남긴 캐시). 있을 때만 모양 회귀를 잡는다.
+const WEB_DIR = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+const REAL_STMD_PATH = process.env.LAW_MAP_REAL_STMD ?? path.join(WEB_DIR, "data/law-map/raw/lsStmd-001823.xml");
 
 test("stripOc removes the OC query parameter but keeps the rest of the URL", () => {
   assert.equal(
@@ -51,8 +54,8 @@ test("parseLsStmd walks the nested tree and classifies each 기본정보 by its 
   assert.ok(!JSON.stringify(stmd).includes("secret123"));
 });
 
-test("parseLsStmd on the full 건축법 response (local scratch file only)", (t) => {
-  if (!fs.existsSync(REAL_STMD_PATH)) return t.skip("real lsStmd file not present");
+test("parseLsStmd on the full 건축법 response (local cache file only)", (t) => {
+  if (!fs.existsSync(REAL_STMD_PATH)) return t.skip(`real lsStmd file not present: ${REAL_STMD_PATH}`);
   const xml = fs.readFileSync(REAL_STMD_PATH, "utf8");
   const count = (re) => (xml.match(re) ?? []).length;
   const distinct = (re) => new Set([...xml.matchAll(re)].map((m) => m[1])).size;
@@ -69,6 +72,27 @@ test("parseLsStmd on the full 건축법 response (local scratch file only)", (t)
   assert.equal(stmd.ordinances.length, distinct(/<자치법규일련번호>([^<]*)</g));
   assert.equal(stmd.ordinances.filter((o) => o.kind === "규칙").length, 6);
   assert.ok(!/OC=/i.test(JSON.stringify(stmd)));
+});
+
+test("parseLsStmd classifies 기본정보 under unknown tags (공고·지침 등) by its own id field", () => {
+  const xml = `<법령체계도><기본정보><법령ID>000001</법령ID><법령일련번호>1</법령일련번호><법종구분>법률</법종구분><법령명><![CDATA[시험법]]></법령명></기본정보><상하위법><법률>
+<기본정보><법령ID>000001</법령ID><법령일련번호>1</법령일련번호><법종구분>법률</법종구분><법령명><![CDATA[시험법]]></법령명></기본정보>
+<특별령><기본정보><법령ID>000002</법령ID><법령일련번호>2</법령일련번호><법종구분>대통령령</법종구분><법령명><![CDATA[시험법 시행령]]></법령명></기본정보></특별령>
+<특별령><기본정보><법령ID>000003</법령ID><법령일련번호>3</법령일련번호><법종구분>총리령</법종구분><법령명><![CDATA[시험법 시행규칙]]></법령명></기본정보></특별령>
+<행정규칙>
+<공고><기본정보><행정규칙ID>10</행정규칙ID><행정규칙일련번호>2100000000010</행정규칙일련번호><법종구분>공고</법종구분><행정규칙명><![CDATA[시험 공고]]></행정규칙명><시행일자>20250101</시행일자></기본정보></공고>
+<지침><기본정보><행정규칙ID>11</행정규칙ID><행정규칙일련번호>2100000000011</행정규칙일련번호><법종구분>지침</법종구분><행정규칙명><![CDATA[시험 지침]]></행정규칙명></기본정보></지침>
+</행정규칙>
+<자치법규><규정><기본정보><자치법규ID>20</자치법규ID><자치법규일련번호>3000020</자치법규일련번호><법종구분>규정</법종구분><자치법규명><![CDATA[시험군 규정]]></자치법규명></기본정보></규정></자치법규>
+</법률></상하위법></법령체계도>`;
+  const stmd = parseLsStmd(xml);
+  assert.deepEqual(stmd.decrees.map((d) => [d.mst, d.kind]), [["2", "대통령령"]]);
+  assert.deepEqual(stmd.rules.map((r) => [r.mst, r.kind]), [["3", "총리령"]]);
+  assert.deepEqual(stmd.adminRules.map((r) => [r.serial, r.name, r.kind, r.effectiveOn]), [
+    ["2100000000010", "시험 공고", "공고", "2025-01-01"],
+    ["2100000000011", "시험 지침", "지침", null],
+  ]);
+  assert.deepEqual(stmd.ordinances.map((o) => [o.serial, o.name, o.kind]), [["3000020", "시험군 규정", "규정"]]);
 });
 
 test("parseLsStmd rejects non-lsStmd responses", () => {
@@ -126,6 +150,30 @@ test("parseLsDelegated keeps header-less 위임정보 blocks, inferring the kind
   });
   // 조문 내부 참조("제1항")는 레코드가 되지 않는다
   assert.ok(!records.some((r) => r.linkText === "제1항"));
+});
+
+test("parseLsDelegated infers header-less kinds only from 시행령·총리령·부령·「법령」 link texts", () => {
+  const item = (no, link, line) => `<위임법령조문정보><위임법령조문번호>${no}</위임법령조문번호><위임법령조문제목><![CDATA[제목]]></위임법령조문제목><링크텍스트>${link}</링크텍스트><라인텍스트><![CDATA[${line}]]></라인텍스트><조항호목>제7조제1항</조항호목></위임법령조문정보>`;
+  const xml = `<lsDelegated><법령><법령정보><법령일련번호>1</법령일련번호><법령명><![CDATA[시험법]]></법령명><법령ID>000001</법령ID></법령정보>
+<위임조문정보><조정보><조문번호>7</조문번호><조문제목><![CDATA[시험]]></조문제목></조정보><위임정보>
+${item(1, "대통령령", "대통령령으로 정하는")}
+${item(2, "「시험법 시행령」", "「시험법 시행령」 제2조")}
+${item(3, "시험법 시행령", "시험법 시행령에 따라")}
+${item(4, "총리령", "총리령으로 정하는")}
+${item(5, "행정안전부령", "행정안전부령으로 정하는")}
+${item(6, "명령", "명령으로 정하는")}
+${item(7, "법령", "법령에 따라")}
+${item(8, "제3항", "제7조제3항")}
+</위임정보></위임조문정보></법령></lsDelegated>`;
+  const { records, dropped } = parseLsDelegated(xml);
+  assert.deepEqual(records.map((r) => [r.kind, r.targetName, r.targetLabel]), [
+    ["시행령", null, "제1조"],
+    ["인용법령", "시험법 시행령", "제2조"],
+    ["시행령", null, "제3조"],
+    ["시행규칙", null, "제4조"],
+    ["시행규칙", null, "제5조"],
+  ]);
+  assert.equal(dropped, 3); // 명령·법령·제3항
 });
 
 test("parseLsDelegated rejects non-lsDelegated responses", () => {

@@ -11,6 +11,7 @@ export function createDrfClient({
 }) {
   if (!oc) throw new Error("OC가 필요합니다");
   fs.mkdirSync(cacheDir, { recursive: true });
+  // stripOc은 "OC=…" 쿼리 꼴만 지우므로, 다른 자리(오류 본문·경로 등)에 박힌 OC 값은 리터럴로 한 번 더 지운다.
   const redact = (s) => stripOc(String(s ?? "")).split(oc).join("[OC]");
 
   async function request(params, type) {
@@ -39,7 +40,10 @@ export function createDrfClient({
     const file = path.join(cacheDir, cacheName);
     if (!force && fs.existsSync(file)) return fs.readFileSync(file, "utf8");
     const safe = redact(await loader());
-    fs.writeFileSync(file, safe);
+    // 임시 파일에 쓰고 이름을 바꿔 중단돼도 반쪽 캐시가 남지 않게 한다
+    const tmp = `${file}.tmp`;
+    fs.writeFileSync(tmp, safe);
+    fs.renameSync(tmp, file);
     return safe;
   }
 

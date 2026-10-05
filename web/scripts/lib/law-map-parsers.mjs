@@ -81,8 +81,9 @@ function uniqueBy(list, keyOf) {
   });
 }
 
-// <기본정보> 바로 앞에 오는 태그 → 층위. 법률은 root 자신이므로 건너뛴다.
+// <기본정보> 바로 앞에 오는 태그 → 층위. 법률은 root 자신이므로 건너뛴다(null).
 const STMD_TAG_TIER = {
+  법률: null,
   시행령: "decrees",
   시행규칙: "rules",
   고시: "adminRules",
@@ -91,6 +92,15 @@ const STMD_TAG_TIER = {
   조례: "ordinances",
   규칙: "ordinances",
 };
+
+/** 앞 태그가 목록에 없으면(공고·지침 등) <기본정보>의 ID 필드 종류로 층위를 가른다. */
+function stmdTierOf(tag, block) {
+  if (tag in STMD_TAG_TIER) return STMD_TAG_TIER[tag];
+  if (/<행정규칙ID>/.test(block)) return "adminRules";
+  if (/<자치법규ID>/.test(block)) return "ordinances";
+  if (/<법령ID>/.test(block)) return field(block, "법종구분") === "대통령령" ? "decrees" : "rules";
+  return null;
+}
 
 /**
  * lsStmd(법령체계도) XML → { root, decrees, rules, adminRules, ordinances }.
@@ -103,12 +113,12 @@ export function parseLsStmd(xml) {
   const root = lawInfo(blocks(text, "기본정보")[0] ?? "");
   const body = text.match(/<상하위법>([\s\S]*?)<\/상하위법>/)?.[1] ?? "";
   const out = { root, decrees: [], rules: [], adminRules: [], ordinances: [] };
-  const re = /<(법률|시행령|시행규칙|고시|훈령|예규|조례|규칙)(?:\s[^>]*)?>\s*(<기본정보>[\s\S]*?<\/기본정보>)/g;
+  const re = /<([가-힣A-Za-z]+)(?:\s[^>]*)?>\s*(<기본정보>[\s\S]*?<\/기본정보>)/g;
   let m;
   while ((m = re.exec(body))) {
-    const tier = STMD_TAG_TIER[m[1]];
-    if (!tier) continue;
     const block = m[2];
+    const tier = stmdTierOf(m[1], block);
+    if (!tier) continue;
     if (tier === "adminRules") out.adminRules.push(adminRuleInfo(block));
     else if (tier === "ordinances") out.ordinances.push(ordinanceInfo(block));
     else out[tier].push(lawInfo(block));
@@ -152,15 +162,15 @@ function targetArticleFields(t) {
 
 /**
  * <위임구분> 머리글이 없는 <위임법령조문정보>의 종류를 링크텍스트로 추정한다.
- * "대통령령" → 시행령, "…령"(국토교통부령·총리령) → 시행규칙, 「법령명」 → 인용법령.
- * 그 밖("제6항"·"제10조" 같은 조문 내부 참조)은 위임이 아니므로 null.
+ * "대통령령"·"…시행령" → 시행령, "…부령"·"총리령" → 시행규칙, 「법령명」 → 인용법령.
+ * 그 밖("제6항"·"제10조" 같은 조문 내부 참조, "명령"·"법령" 같은 일반 명사)은 위임이 아니므로 null.
  */
 function inferHeadDelegation(linkText) {
   const t = String(linkText ?? "").trim();
   const cited = t.match(/^「(.+)」$/);
   if (cited) return { kind: "인용법령", targetName: cited[1].trim() };
-  if (t === "대통령령") return { kind: "시행령", targetName: null };
-  if (/령$/.test(t)) return { kind: "시행규칙", targetName: null };
+  if (t === "대통령령" || /시행령$/.test(t)) return { kind: "시행령", targetName: null };
+  if (/(총리령|부령)$/.test(t)) return { kind: "시행규칙", targetName: null };
   return null;
 }
 
