@@ -117,3 +117,110 @@ export function parseLsStmd(xml) {
   out.ordinances = uniqueBy(out.ordinances, (x) => x.serial);
   return out;
 }
+
+function fromArticle(block) {
+  const raw = field(block, "조문번호").replace(/\s+/g, "");
+  const m = raw.match(/^(\d+)(?:의(\d+))?$/);
+  if (!m) return null;
+  return {
+    no: Number(m[1]),
+    branch: m[2] ? Number(m[2]) : null,
+    label: articleLabel(m[1], m[2] ?? null),
+    title: field(block, "조문제목"),
+  };
+}
+
+function targetArticleLabel(noText, branchText) {
+  const no = Number(noText || 0);
+  if (!no) return null;
+  return articleLabel(String(no), /^\d+$/.test(branchText) ? branchText : null);
+}
+
+/**
+ * lsDelegated(위임법령) XML → { law, records }.
+ * records는 (출발 조문 × 도착 하나)로 평탄화한다. 한 <위임정보> 안에 <위임구분>이 여러 번 나올 수 있어
+ * 위임구분 단위로 쪼개 읽는다(인용법령이 그렇다).
+ */
+export function parseLsDelegated(xml) {
+  const text = stripOc(xml);
+  if (!/<lsDelegated>/.test(text)) throw new Error("lsDelegated 응답이 아닙니다");
+  const info = blocks(text, "법령정보")[0] ?? "";
+  const law = {
+    mst: field(info, "법령일련번호"),
+    lawId: field(info, "법령ID"),
+    name: field(info, "법령명"),
+    ministry: field(info, "소관부처") || null,
+  };
+  const records = [];
+  for (const block of blocks(text, "위임조문정보")) {
+    const from = fromArticle(blocks(block, "조정보")[0] ?? "");
+    if (!from) continue;
+    for (const wi of blocks(block, "위임정보")) {
+      const segments = wi.split(/(?=<위임구분>)/).filter((s) => /<위임구분>/.test(s));
+      for (const seg of segments) {
+        const kind = field(seg, "위임구분");
+        if (kind === "시행령" || kind === "시행규칙" || kind === "인용법령") {
+          const targetSerial = field(seg, "위임법령일련번호");
+          const targetName = field(seg, "위임법령제목");
+          for (const t of blocks(seg, "위임법령조문정보")) {
+            records.push({
+              from, kind, targetSerial, targetName,
+              targetLabel: targetArticleLabel(field(t, "위임법령조문번호"), field(t, "위임법령조문가지번호")),
+              targetTitle: field(t, "위임법령조문제목") || null,
+              fromClause: field(t, "조항호목") || null,
+              linkText: field(t, "링크텍스트"),
+              phrase: field(t, "라인텍스트"),
+            });
+          }
+        } else if (kind === "위임행정규칙" || kind === "위임자치법규") {
+          const tag = kind === "위임행정규칙" ? "위임행정규칙" : "위임자치법규";
+          for (const t of blocks(seg, `${tag}조문정보`)) {
+            records.push({
+              from, kind,
+              targetSerial: field(t, `${tag}일련번호`),
+              targetName: field(t, `${tag}제목`),
+              targetLabel: null, targetTitle: null,
+              fromClause: field(t, "조항호목") || null,
+              linkText: field(t, "링크텍스트"),
+              phrase: field(t, "라인텍스트"),
+            });
+          }
+        }
+      }
+    }
+  }
+  return { law, records };
+}
+
+/** eflaw JSON → 문서 순서의 조문 목록 [{ no, branch, label, title, chapter, text }] */
+export function parseArticleList(payload) {
+  const units = payload?.["법령"]?.["조문"]?.["조문단위"];
+  const texts = parseLawArticles(payload);
+  const list = [];
+  const seen = new Set();
+  let chapter = null;
+  for (const unit of Array.isArray(units) ? units : []) {
+    if (unit?.["조문여부"] === "전문") {
+      const heading = String(unit["조문내용"] ?? "").replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
+      if (/^제\d+장/.test(heading)) chapter = heading;
+      continue;
+    }
+    if (unit?.["조문여부"] !== "조문") continue;
+    const no = unit["조문번호"];
+    const branch = unit["조문가지번호"];
+    if (!/^\d+$/.test(no ?? "")) continue;
+    const hasBranch = /^\d+$/.test(branch ?? "");
+    const label = articleLabel(no, hasBranch ? branch : null);
+    if (seen.has(label)) continue;
+    seen.add(label);
+    const rawTitle = typeof unit["조문제목"] === "string" ? unit["조문제목"].trim() : "";
+    const title = rawTitle || (/삭제/.test(String(unit["조문내용"] ?? "")) ? "삭제" : "");
+    list.push({
+      no: Number(no),
+      branch: hasBranch ? Number(branch) : null,
+      label, title, chapter,
+      text: texts.get(label)?.text ?? "",
+    });
+  }
+  return list;
+}
