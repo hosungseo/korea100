@@ -20,3 +20,21 @@ test("ignores empty or malformed hashes", () => {
   assert.deepEqual(parseLawMapHash("#foo=bar"), {});
   assert.equal(formatLawMapHash({}), "");
 });
+
+test("view round-trips alone and alongside article or route", () => {
+  assert.equal(formatLawMapHash({ view: "overview" }), "#v=o");
+  assert.deepEqual(parseLawMapHash("#v=o"), { view: "overview" });
+  assert.deepEqual(parseLawMapHash("#v=d"), { view: "detail" });
+  const withArticle = formatLawMapHash({ article: "L1:제11조", view: "detail" });
+  assert.equal(withArticle, "#a=L1%3A%EC%A0%9C11%EC%A1%B0&v=d");
+  assert.deepEqual(parseLawMapHash(withArticle), { article: "L1:제11조", view: "detail" });
+  const withRoute = formatLawMapHash({ route: ["L1:제11조", "R1:제6조"], view: "overview" });
+  assert.deepEqual(parseLawMapHash(withRoute), { route: ["L1:제11조", "R1:제6조"], view: "overview" });
+});
+
+test("hashes without v carry no view, and unknown v is ignored", () => {
+  assert.deepEqual(parseLawMapHash("#a=L1%3A%EC%A0%9C11%EC%A1%B0"), { article: "L1:제11조" });
+  assert.deepEqual(parseLawMapHash("#v=x"), {});
+  assert.deepEqual(parseLawMapHash("#v=x&a=L1"), { article: "L1" });
+  assert.equal(formatLawMapHash({ view: undefined }), "");
+});

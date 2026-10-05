@@ -10,6 +10,11 @@
   align-items: start;
 }
 
+/* 큰 그림 + 선택 없음: 패널을 빼고 한 열로. 그림은 ResizeObserver로 폭을 다시 맞춘다. */
+.layout[data-panel="hidden"] {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 /* The board scrolls inside .main (not the page) so column heads can stick
    inside the horizontal scroll container. */
 .main {
@@ -104,12 +109,260 @@
   color: var(--color-muted);
 }
 
+/* 보기 전환: 큰 그림 | 자세히 */
+.segmented {
+  display: inline-flex;
+  height: 32px;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface);
+}
+
+.segmented button {
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.segmented button + button {
+  border-left: 1px solid var(--color-border-strong);
+}
+
+.segmented button[aria-pressed="true"] {
+  background: var(--color-ink);
+  color: var(--color-surface);
+  font-weight: 650;
+}
+
 /* ── 보드 ─────────────────────────────────────────── */
 .board {
   flex: 1;
   min-height: 0;
   overflow: auto;
   padding: var(--law-map-board-pad) 24px 48px;
+}
+
+/* 큰 그림은 보드 높이에 맞춰 그리므로 아래 여백을 줄인다. 펼친 장이 넘치면 세로로만 스크롤. */
+.board[data-view="overview"] {
+  padding: 12px 24px 12px;
+  overflow: hidden auto;
+}
+
+/* ── 큰 그림 ──────────────────────────────────────── */
+.overviewWrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 480px;
+}
+
+.ovHead {
+  flex: none;
+  padding: 0 0 10px;
+}
+
+.ovTitle {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+}
+
+.ovSub {
+  margin: 4px 0 0;
+  font-size: 11.5px;
+  color: var(--color-muted);
+}
+
+.ovHost {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+.overviewSvg {
+  display: block;
+  overflow: visible;
+  user-select: none;
+}
+
+.ovWires path {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* 첫 그리기: 열이 왼쪽부터 차례로 나타나고, 그다음 선이 들어온다. 그 뒤로는 어떤 상태 변화에도 움직이지 않는다. */
+.overviewSvg[data-animate] .ovCol {
+  opacity: 0;
+}
+
+.overviewSvg[data-animate][data-ready] .ovCol {
+  opacity: 1;
+  transition: opacity 320ms ease calc(var(--col-i, 0) * 60ms);
+}
+
+.overviewSvg[data-animate] .ovWires {
+  opacity: 0;
+}
+
+.overviewSvg[data-animate][data-ready] .ovWires {
+  opacity: 1;
+  transition: opacity 300ms ease 380ms;
+}
+
+.ovTier {
+  font-size: 12px;
+  font-weight: 700;
+  fill: var(--color-ink);
+}
+
+.ovTierCount {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--color-muted);
+}
+
+.ovTierRule {
+  stroke: var(--color-ink);
+  stroke-width: 2;
+}
+
+.ovLaneHead text {
+  font-size: 9.5px;
+  font-weight: 650;
+  letter-spacing: 0.03em;
+  fill: var(--color-muted);
+}
+
+.ovLaneHead[data-node-id] {
+  cursor: pointer;
+}
+
+.ovBlock rect,
+.ovBox rect {
+  fill: var(--color-surface);
+  stroke: var(--color-border);
+  stroke-width: 1;
+  transition: stroke var(--duration-state), fill var(--duration-state);
+}
+
+.ovBlock text,
+.ovBox text {
+  fill: var(--color-text);
+}
+
+.ovBlock[data-open] rect {
+  fill: var(--color-accent-soft);
+  stroke: var(--color-accent-dark);
+}
+
+.ovBlock[data-open] text {
+  fill: var(--color-accent-dark);
+  font-weight: 650;
+}
+
+.ovRow rect {
+  fill: var(--color-surface);
+  stroke: var(--color-border);
+  stroke-width: 0.5;
+}
+
+.ovRow text {
+  fill: var(--color-text);
+}
+
+.ovRow:hover rect {
+  fill: var(--color-surface-tint);
+}
+
+.ovCount {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  fill: var(--color-muted) !important;
+  font-weight: 400 !important;
+}
+
+.ovBlock[data-clickable],
+.ovBox[data-clickable],
+.ovRow[data-clickable] {
+  cursor: pointer;
+}
+
+.ovBlock[data-selected] > rect,
+.ovBox[data-selected] > rect,
+.ovRow[data-selected] > rect {
+  stroke: var(--color-ink);
+  stroke-width: 2;
+}
+
+.ovBlock[data-route] > rect,
+.ovBox[data-route] > rect,
+.ovRow[data-route] > rect {
+  stroke: var(--color-accent-dark);
+  stroke-width: 2;
+}
+
+/* 툴팁: 어두운 카드. 마우스 위치는 컴포넌트가 직접 style로 넣는다. */
+.tooltip {
+  position: absolute;
+  z-index: 4;
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 260px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--color-ink);
+  color: var(--color-surface);
+  font-size: 12px;
+  line-height: 1.4;
+  pointer-events: none;
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--color-ink) 25%, transparent);
+}
+
+.tooltip[data-show="true"] {
+  display: flex;
+}
+
+.tooltip strong {
+  font-weight: 700;
+}
+
+.tooltipSub {
+  color: color-mix(in srgb, var(--color-surface) 70%, transparent);
+  font-size: 11px;
+}
+
+.tooltipKinds {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 10px;
+  font-size: 11px;
+}
+
+.tooltipKinds i {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 5px;
+  border-radius: 50%;
+  vertical-align: 0;
+}
+
+.tooltipHint {
+  color: color-mix(in srgb, var(--color-surface) 55%, transparent);
+  font-size: 11px;
+}
+
+@media (hover: none) {
+  .tooltip {
+    display: none !important;
+  }
 }
 
 .canvas {
@@ -425,6 +678,14 @@
 
   .board {
     padding: var(--law-map-board-pad) 16px 56vh;
+  }
+
+  .board[data-view="overview"] {
+    padding: 10px 16px 12px;
+  }
+
+  .ovTitle {
+    font-size: 13.5px;
   }
 
   .canvas {
