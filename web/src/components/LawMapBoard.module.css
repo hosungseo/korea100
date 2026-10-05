@@ -1,4 +1,10 @@
 .layout {
+  /* Site header height — mirrors .site-header-inner in globals.css (56px, 52px ≤760px).
+     The Board reads the live value from the DOM for scrolling; CSS uses this token. */
+  --law-map-header-h: 56px;
+  /* Board padding. .columnHead's sticky top is -1× this so the head sits flush with the
+     scroll container edge; keep the two coupled through this token. */
+  --law-map-board-pad: 16px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 380px;
   align-items: start;
@@ -10,7 +16,8 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
-  height: calc(100vh - 56px);
+  height: calc(100vh - var(--law-map-header-h));
+  height: calc(100dvh - var(--law-map-header-h));
 }
 
 /* ── 툴바 ─────────────────────────────────────────── */
@@ -102,7 +109,7 @@
   flex: 1;
   min-height: 0;
   overflow: auto;
-  padding: 16px 24px 48px;
+  padding: var(--law-map-board-pad) 24px 48px;
 }
 
 .canvas {
@@ -131,7 +138,7 @@
 
 .columnHead {
   position: sticky;
-  top: -16px;
+  top: calc(-1 * var(--law-map-board-pad));
   z-index: 2;
   display: flex;
   justify-content: space-between;
@@ -258,7 +265,7 @@
   border-radius: 7px;
   justify-content: center;
   align-items: center;
-  color: #fff;
+  color: var(--color-surface);
   font-family: var(--font-mono);
   font-size: 9px;
   line-height: 1;
@@ -267,9 +274,11 @@
 /* ── 패널 ─────────────────────────────────────────── */
 .panel {
   position: sticky;
-  top: 56px;
-  min-height: calc(100vh - 56px);
-  max-height: calc(100vh - 56px);
+  top: var(--law-map-header-h);
+  min-height: calc(100vh - var(--law-map-header-h));
+  min-height: calc(100dvh - var(--law-map-header-h));
+  max-height: calc(100vh - var(--law-map-header-h));
+  max-height: calc(100dvh - var(--law-map-header-h));
   overflow: auto;
   padding: 16px 18px 32px;
   border-left: 1px solid var(--color-border);
@@ -397,13 +406,17 @@
 }
 
 /* ── 모바일 ───────────────────────────────────────── */
+/* Header shrinks at the site header's own breakpoint (globals.css: 760px). */
+@media (max-width: 760px) {
+  .layout {
+    --law-map-header-h: 52px;
+  }
+}
+
 @media (max-width: 960px) {
   .layout {
+    --law-map-board-pad: 12px;
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .main {
-    height: calc(100vh - 52px);
   }
 
   .toolbar {
@@ -411,7 +424,7 @@
   }
 
   .board {
-    padding: 12px 16px 56vh;
+    padding: var(--law-map-board-pad) 16px 56vh;
   }
 
   .canvas {
@@ -419,18 +432,16 @@
     gap: 36px;
   }
 
-  .columnHead {
-    top: -12px;
-  }
-
   .panel {
     position: fixed;
     inset: auto 0 0 0;
     min-height: 0;
     max-height: 50vh;
+    max-height: 50dvh;
     border-left: 0;
     border-top: 1px solid var(--color-border-strong);
-    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.08);
+    /* No shadow token in globals.css; derive from the ink token like the inline shadows there. */
+    box-shadow: 0 -8px 24px color-mix(in srgb, var(--color-ink) 8%, transparent);
   }
 
   .panel[data-empty="true"] {

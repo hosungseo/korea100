@@ -8,7 +8,7 @@ import { formatLawMapHash, parseLawMapHash } from "@/lib/law-map-hash.mjs";
 import LawMapColumn from "./LawMapColumn";
 import LawMapPanel from "./LawMapPanel";
 import LawMapToolbar from "./LawMapToolbar";
-import { EDGE_COLORS, EDGE_ORDER, TIER_ORDER } from "./law-map-constants";
+import { EDGE_COLORS, EDGE_ORDER, TIER_ORDER, describeNode } from "./law-map-constants";
 import styles from "./LawMapBoard.module.css";
 
 interface Props {
@@ -16,8 +16,10 @@ interface Props {
   textUrl: string;
 }
 
-/** 사이트 헤더 높이(px). globals.css의 .site-header와 맞춘다. */
-const HEADER_HEIGHT = 56;
+/** Live site header height; falls back to the desktop value from globals.css when the header is absent. */
+function headerHeight(): number {
+  return document.querySelector(".site-header")?.getBoundingClientRect().height ?? 56;
+}
 
 interface Wire {
   id: string;
@@ -92,8 +94,9 @@ export default function LawMapBoard({ map, textUrl }: Props) {
       left: board.scrollLeft + (r.left - b.left) - (b.width - r.width) / 2,
       behavior: "smooth",
     });
-    const mainTop = board.parentElement?.getBoundingClientRect().top ?? HEADER_HEIGHT;
-    if (mainTop > HEADER_HEIGHT) window.scrollBy({ top: mainTop - HEADER_HEIGHT, behavior: "smooth" });
+    const headerH = headerHeight();
+    const mainTop = board.parentElement?.getBoundingClientRect().top ?? headerH;
+    if (mainTop > headerH) window.scrollBy({ top: mainTop - headerH, behavior: "smooth" });
   }, []);
 
   // 해시 복원 (최초 1회). 해시는 동기로 읽고(아래 기록 효과가 먼저 지우므로) 상태 반영은 다음 프레임에.
@@ -117,15 +120,15 @@ export default function LawMapBoard({ map, textUrl }: Props) {
     return () => cancelAnimationFrame(frame);
   }, [map.edges, isNode, scrollTo]);
 
-  // 해시 기록
+  // 해시 기록. 경로는 BFS가 실제로 찾은 양 끝점으로 기록한다(selected와 무관).
   useEffect(() => {
     const hash = formatLawMapHash({
       article: selected ?? undefined,
-      route: route && routeFrom && selected ? [routeFrom, selected] : undefined,
+      route: route ? [route.nodes[0], route.nodes[route.nodes.length - 1]] : undefined,
     });
     if (window.location.hash === hash) return;
     window.history.replaceState(null, "", hash || `${window.location.pathname}${window.location.search}`);
-  }, [selected, route, routeFrom]);
+  }, [selected, route]);
 
   const active = hover ?? selected;
   const visibleEdges = useMemo(() => {
@@ -173,11 +176,14 @@ export default function LawMapBoard({ map, textUrl }: Props) {
     return () => observer.disconnect();
   }, [measure]);
 
+  // 패널 버튼·검색에서 온 이동. 경로 밖 노드로 가면 경로를 지운다(출발점·경로 모드는 유지해 이어 갈 수 있게).
   const focusNode = useCallback((id: string) => {
+    if (route && !route.nodes.includes(id)) setRoute(null);
+    if (routeMiss) setRouteMiss(false);
     setSelected(id);
     setHover(null);
     scrollTo(id);
-  }, [scrollTo]);
+  }, [route, routeMiss, scrollTo]);
 
   const onNodeClick = useCallback((id: string) => {
     if (routeMode) {
@@ -185,6 +191,8 @@ export default function LawMapBoard({ map, textUrl }: Props) {
         setRouteFrom(id); setRoute(null); setRouteMiss(false); setSelected(id);
         return;
       }
+      // 출발 카드를 다시 누른 경우: 0단계 경로를 만들지 않고 선택만 유지한다.
+      if (routeFrom === id) { setSelected(id); return; }
       const found = findRoute(map.edges, routeFrom, id);
       setRoute(found); setRouteMiss(!found); setSelected(id);
       return;
@@ -210,11 +218,6 @@ export default function LawMapBoard({ map, textUrl }: Props) {
   };
 
   const routeNodes = useMemo(() => new Set(route?.nodes ?? []), [route]);
-  const nodeLabel = (id: string) => {
-    const article = articleById.get(id);
-    if (article) return `${laneById.get(article.laneId)?.name ?? ""} ${article.label}`.trim();
-    return laneById.get(id)?.name ?? id;
-  };
 
   return (
     <div className={styles.layout}>
@@ -227,7 +230,7 @@ export default function LawMapBoard({ map, textUrl }: Props) {
           onSearchSubmit={onSearchSubmit}
           routeMode={routeMode}
           onToggleRoute={toggleRouteMode}
-          routeFromLabel={routeFrom ? nodeLabel(routeFrom) : null}
+          routeFromLabel={routeFrom ? describeNode(routeFrom, articleById, laneById) : null}
           onClear={clearSelection}
         />
         <div className={styles.board} ref={boardRef}>

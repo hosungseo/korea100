@@ -30,17 +30,21 @@ function LawMapColumn({
     ? `${lanes[0]?.collapsed?.count ?? 0}건`
     : tier === "adminRule" ? `${lanes.length}건` : `${lanes.length}건 · 조문 ${total}`;
 
-  const cardProps = (id: string, dotEdges: Edge[], matchText: string) => ({
-    id,
-    dotEdges,
-    selected: selected === id,
-    onRoute: routeNodes.has(id),
-    isFrom: routeFrom === id,
-    match: compactQuery.length > 0 && matchText.replace(/\s+/g, "").includes(compactQuery),
-    dim: hasRoute && !routeNodes.has(id),
-    onClick,
-    onHover,
-  });
+  const cardProps = (id: string, dotEdges: Edge[], matchText: string) => {
+    const match = compactQuery.length > 0 && matchText.replace(/\s+/g, "").includes(compactQuery);
+    return {
+      id,
+      dotEdges,
+      selected: selected === id,
+      onRoute: routeNodes.has(id),
+      isFrom: routeFrom === id,
+      match,
+      // A search match must stay readable during a route: match wins over dim.
+      dim: hasRoute && !match && !routeNodes.has(id),
+      onClick,
+      onHover,
+    };
+  };
 
   return (
     <section className={styles.column} data-tier={tier}>
@@ -120,7 +124,7 @@ function NodeCard({ id, label, title, dotEdges, selected, onRoute, isFrom, match
       onBlur={() => onHover(null)}
     >
       <span className={styles.cardLabel}>{label}</span>
-      <span className={styles.dots} aria-label={dotLabel(counts)}>
+      <span className={styles.dots} role="img" aria-label={dotLabel(counts)}>
         {EDGE_ORDER.filter((kind) => counts[kind] > 0).map((kind) => (
           <i key={kind} className={styles.dot} style={{ background: EDGE_COLORS[kind] }}>{counts[kind]}</i>
         ))}
