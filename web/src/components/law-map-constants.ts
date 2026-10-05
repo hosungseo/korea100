@@ -1,4 +1,4 @@
-import type { EdgeKind, Tier } from "@/lib/law-map-types";
+import type { Article, EdgeKind, Lane, Tier } from "@/lib/law-map-types";
 
 export const TIER_ORDER: Tier[] = ["statute", "decree", "rule", "adminRule", "ordinance"];
 
@@ -27,3 +27,10 @@ export const EDGE_COLORS: Record<EdgeKind, string> = {
   ordinance: "#c78116",
   cites: "#8a949e",
 };
+
+/** Human-readable label for a node id: "<lane name> <article label>" for articles, lane name for lane boxes. */
+export function describeNode(id: string, articleById: Map<string, Article>, laneById: Map<string, Lane>): string {
+  const article = articleById.get(id);
+  if (article) return `${laneById.get(article.laneId)?.name ?? ""} ${article.label}`.trim();
+  return laneById.get(id)?.name ?? id;
+}

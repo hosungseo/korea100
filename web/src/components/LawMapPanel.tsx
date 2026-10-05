@@ -4,7 +4,7 @@ import type { CSSProperties } from "react";
 import Link from "next/link";
 import type { Article, Edge, EdgeKind, Lane, LawMapTexts } from "@/lib/law-map-types";
 import type { LawMapRoute } from "@/lib/law-map-route.mjs";
-import { EDGE_COLORS, EDGE_LABELS, EDGE_ORDER, TIER_LABELS } from "./law-map-constants";
+import { EDGE_COLORS, EDGE_LABELS, EDGE_ORDER, TIER_LABELS, describeNode } from "./law-map-constants";
 import styles from "./LawMapBoard.module.css";
 
 interface Props {
@@ -23,11 +23,7 @@ interface Props {
 export default function LawMapPanel({
   selected, articleById, laneById, edgesByNode, institutionsByArticle, texts, route, routeMiss, routeFrom, onFocus,
 }: Props) {
-  const nodeLabel = (id: string) => {
-    const article = articleById.get(id);
-    if (article) return `${laneById.get(article.laneId)?.name ?? ""} ${article.label}`.trim();
-    return laneById.get(id)?.name ?? id;
-  };
+  const nodeLabel = (id: string) => describeNode(id, articleById, laneById);
 
   if (!selected) {
     return (
@@ -47,6 +43,8 @@ export default function LawMapPanel({
   const incoming = touching.filter((e) => e.to === selected);
   const institutions = institutionsByArticle.get(selected) ?? [];
   const text = article ? texts?.[article.id] : undefined;
+  // Show route steps only while the selection is on the route; the board clears off-route routes, this is the guard.
+  const showRoute = route !== null && routeFrom !== null && route.nodes.includes(selected);
 
   return (
     <aside className={styles.panel} data-empty="false" aria-label="선택 조문">
@@ -64,7 +62,7 @@ export default function LawMapPanel({
             : <p className={styles.panelText}>미리보기가 없습니다. 원문은 법제처에서 확인하세요.</p>
       )}
 
-      {route && routeFrom && (
+      {showRoute && (
         <section className={styles.panelSection}>
           <h3>경로 {route.edges.length}단계</h3>
           <ol className={styles.routeSteps}>
