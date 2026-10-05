@@ -216,11 +216,60 @@ test("buildLawMap picks the branch article for ordinance delegations by matching
   // 픽스처의 조례 2건은 "·"(U+00B7) 문장이 제4조의2 원문("ㆍ")에만 있어 가지 조문으로 간다
   assert.deepEqual(ordinances.map((e) => [e.from, e.to]), [["L1:제4조의2", "O1"], ["L1:제4조", "O1"]]);
   assert.deepEqual(report.ambiguousSources, [{
-    from: "L1:제4조", kind: "ordinance", phrase: "⑥ 수수료는 조례로 정한다.",
+    rootLawId: "001823", lawId: "001823", from: "L1:제4조", kind: "ordinance", phrase: "⑥ 수수료는 조례로 정한다.",
     candidates: ["L1:제4조", "L1:제4조의2", "L1:제4조의3"],
   }]);
   // 가지 조문이 없는 레인에서는 대조하지 않는다
   assert.equal(buildLawMap(fixture()).report.ambiguousSources.length, 0);
+});
+
+test("buildLawMap matches ordinance phrases across curly and straight quotes", () => {
+  const input = fixture();
+  // 라인텍스트는 둥근 따옴표(“시ㆍ도지사”), 조문 원문은 곧은 따옴표("시ㆍ도지사") → 가지 조문 제5조의5로 간다
+  input.laws[1].articles.push(
+    { no: 5, branch: 5, label: "제5조의5", title: "지방건축위원회", chapter: null, text: '제5조의5(지방건축위원회) ① 8. 도지사(이하 "시ㆍ도지사"라 한다) 및 시장이 지정ㆍ공고한 지역에서 건축조례로 정하는 건축물' },
+  );
+  input.laws[1].articles[1].text = "제5조(중앙건축위원회의 설치 등) ① 국토교통부에 둔다.";
+  input.laws[1].delegated.records.push({
+    from: { no: 5, branch: null, label: "제5조", title: "중앙건축위원회의 설치 등" }, kind: "위임자치법규", targetSerial: "1", targetName: "서울특별시 건축 조례",
+    targetLabel: null, targetTitle: null, fromClause: null, linkText: "건축조례", phrase: "8. 도지사(이하 “시·도지사”라 한다) 및 시장이 지정·공고한 지역에서 건축조례로 정하는 건축물",
+  });
+  const { map, report } = buildLawMap(input);
+  const ordinance = map.edges.find((e) => e.kind === "ordinance" && e.from.startsWith("D1:"));
+  assert.equal(ordinance.from, "D1:제5조의5");
+  assert.deepEqual(report.ambiguousSources, []);
+});
+
+test("buildLawMap reports unresolved edges per clause so the report count equals stats.unresolved", () => {
+  const input = fixture();
+  const dup = input.laws[0].delegated.records.find((r) => r.kind === "시행규칙" && r.targetLabel === "제1조의2");
+  // 같은 조문 → 같은 없는 도착 조문이지만 조항호목이 다른 두 선
+  input.laws[0].delegated.records.push({ ...dup, fromClause: "제2조제2항" });
+  const { map, report } = buildLawMap(input);
+  const hits = report.unresolved.filter((u) => u.from === "L1:제2조" && u.targetLabel === "제1조의2");
+  assert.deepEqual(hits.map((u) => u.fromClause), ["제2조제1항제14호", "제2조제2항"]);
+  assert.ok(hits.every((u) => u.rootLawId === "001823" && u.lawId === "001823"));
+  assert.equal(map.stats.unresolved, 4);
+  assert.equal(report.unresolved.length, 4);
+});
+
+test("buildLawMap resolves header-less delegations to the only lane that has the target article (label + title)", () => {
+  const input = fixture();
+  // 국토교통부령 레인이 둘(R1·R2)이고 제18조(가설건축물의 건축허가)는 R2에만 있다
+  input.laws[3].articles.push(article(18, "가설건축물의 건축허가"));
+  input.laws[2].articles.push(article(18, "다른 제목의 제18조"));
+  const headless = {
+    from: { no: 2, branch: null, label: "제2조", title: "정의" }, kind: "시행규칙", targetSerial: null, targetName: null,
+    targetLabel: "제18조", targetTitle: "가설건축물의 건축허가", fromClause: "제2조제4항", linkText: "국토교통부령", phrase: "국토교통부령으로 정하는",
+  };
+  // 제목이 없으면 조문번호만으로는 두 레인 모두 맞아 여전히 lane-missing
+  input.laws[0].delegated.records.push(headless, { ...headless, targetTitle: null, fromClause: "제2조제5항" });
+  const { map, report } = buildLawMap(input);
+  const titled = map.edges.find((e) => e.fromClause === "제2조제4항");
+  assert.deepEqual([titled.to, titled.targetName, titled.unresolved ?? false], ["R2:제18조", "건축법 시행규칙", false]);
+  const untitled = map.edges.find((e) => e.fromClause === "제2조제5항");
+  assert.deepEqual([untitled.to, untitled.targetName, untitled.unresolved], [null, "국토교통부령", true]);
+  assert.deepEqual(report.unresolved.filter((u) => u.fromClause === "제2조제5항").map((u) => u.reason), ["lane-missing"]);
 });
 
 test("buildLawMap maps institution citations to article ids and reports misses", () => {

@@ -14,13 +14,13 @@ export function createDrfClient({
   // stripOc은 "OC=…" 쿼리 꼴만 지우므로, 다른 자리(오류 본문·경로 등)에 박힌 OC 값은 리터럴로 한 번 더 지운다.
   const redact = (s) => stripOc(String(s ?? "")).split(oc).join("[OC]");
 
-  async function request(params, type) {
+  async function request(params, type, { retries: maxRetries = retries } = {}) {
     const url = new URL(BASE);
     url.searchParams.set("OC", oc);
     for (const [k, v] of Object.entries(params)) url.searchParams.set(k, String(v));
     url.searchParams.set("type", type);
     let lastErr;
-    for (let attempt = 0; attempt <= retries; attempt++) {
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
       if (attempt > 0) await sleep(backoffMs * 3 ** (attempt - 1));
       try {
         const res = await fetchImpl(url, { headers: { "User-Agent": "Mozilla/5.0 Korea100LawMap/1.0" } });
@@ -47,9 +47,10 @@ export function createDrfClient({
     return safe;
   }
 
+  // 세 번째 인자 { retries }로 호출별 재시도 횟수를 덮어쓸 수 있다(체계적으로 500을 주는 lsDelegated 등).
   return {
     redact,
-    getText: (params, cacheName) => cached(cacheName, () => request(params, "XML")),
-    getJson: async (params, cacheName) => JSON.parse(await cached(cacheName, () => request(params, "JSON"))),
+    getText: (params, cacheName, options) => cached(cacheName, () => request(params, "XML", options)),
+    getJson: async (params, cacheName, options) => JSON.parse(await cached(cacheName, () => request(params, "JSON", options))),
   };
 }

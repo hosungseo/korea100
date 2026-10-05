@@ -11,8 +11,8 @@ const ALL_TIERS = ["statute", "decree", "rule", "adminRule", "ordinance"];
 const ALL_EDGE_KINDS = ["decree", "rule", "adminRule", "ordinance", "cites"];
 
 const compact = (s) => String(s ?? "").replace(/\s+/g, "");
-// 라인텍스트는 "·"(U+00B7), 조문 원문은 "ㆍ"(U+318D)를 쓰므로 가운뎃점을 하나로 맞춘 뒤 비교한다.
-const normText = (s) => compact(s).replace(/[·ㆍ•∙]/g, "·");
+// 라인텍스트는 "·"(U+00B7)·둥근 따옴표(“”), 조문 원문은 "ㆍ"(U+318D)·곧은 따옴표(")를 쓰므로 둘 다 하나로 맞춘 뒤 비교한다.
+const normText = (s) => compact(s).replace(/[·ㆍ•∙]/g, "·").replace(/[“”"]/g, '"').replace(/[‘’']/g, "'");
 
 export function lawUrl(name, label) {
   const base = `https://www.law.go.kr/법령/${compact(name)}`;
@@ -127,12 +127,13 @@ export function buildLawMap({ stmd, laws, institutions = [], generatedAt }) {
     edges.push({ id: `e${edges.length + 1}`, ...e });
     return true;
   };
+  // 보고 항목은 선의 중복 제거 키(from·kind·fromClause·targetName·targetLabel)를 모두 담아 stats.unresolved와 개수가 맞는다.
   const seenUnresolved = new Set();
   const reportUnresolved = (entry) => {
     const key = JSON.stringify(entry);
     if (seenUnresolved.has(key)) return;
     seenUnresolved.add(key);
-    report.unresolved.push(entry);
+    report.unresolved.push({ rootLawId: stmd.root.lawId, ...entry });
   };
 
   /**
@@ -154,7 +155,7 @@ export function buildLawMap({ stmd, laws, institutions = [], generatedAt }) {
     if (!seenAmbiguous.has(key)) {
       seenAmbiguous.add(key);
       report.ambiguousSources.push({
-        from: `${laneId}:${base}`, kind: "ordinance", phrase: rec.phrase,
+        rootLawId: stmd.root.lawId, lawId: law.info.lawId, from: `${laneId}:${base}`, kind: "ordinance", phrase: rec.phrase,
         candidates: (hits.length ? hits : candidates).map((a) => `${laneId}:${a.label}`),
       });
     }
@@ -170,7 +171,8 @@ export function buildLawMap({ stmd, laws, institutions = [], generatedAt }) {
       const kind = EDGE_KIND[rec.kind];
       if (!kind) continue;
       if (kind === "cites") {
-        // 같은 법 자기 인용("이 법"·법률이 자기 시행령을 가리키는 「건축법」)은 인용 법령이 아니다
+        // 자기 인용은 인용 법령이 아니다: 시행령·시행규칙 레인이 뿌리 법률을 거꾸로 가리키는 「건축법」, 각 레인이 자기 자신을 가리키는 "이 법"·"이 영".
+        // 형제 인용(시행규칙 → 「건축법 시행령」)은 그대로 박스 없는 cites 선으로 둔다. 법률 레인이 자기 시행령을 가리키는 경우는 cites가 아닌 decree 위임으로 온다.
         const target = compact(rec.targetName);
         if (target && (target === rootName || target === ownName)) { report.selfReferences += 1; continue; }
       }
@@ -178,7 +180,7 @@ export function buildLawMap({ stmd, laws, institutions = [], generatedAt }) {
       if (kind === "ordinance" && !rec.fromClause) fromLabel = resolveOrdinanceSource(law, laneId, rec);
       const from = `${laneId}:${fromLabel}`;
       if (!articleIds.has(from)) {
-        reportUnresolved({ lawId: law.info.lawId, reason: "from-missing", from, kind, targetName: rec.targetName });
+        reportUnresolved({ lawId: law.info.lawId, reason: "from-missing", from, fromClause: rec.fromClause, kind, targetName: rec.targetName });
         continue;
       }
       const base = { from, fromClause: rec.fromClause, kind, phrase: rec.phrase, targetName: rec.targetName };
@@ -188,10 +190,15 @@ export function buildLawMap({ stmd, laws, institutions = [], generatedAt }) {
           || null;
         if (!lane && rec.targetSerial == null && rec.targetName == null) {
           // 머리글 없는 위임 블록(도착 법령 미표기): (a) 법종구분이 링크텍스트("행정안전부령")와 같은 레인이 하나면 그 레인,
+          // (c) 도착 조문번호(+제목)가 같은 조문을 가진 그 층위의 레인이 하나면 그 레인,
           // (b) 그 층위의 레인이 하나뿐이면 그 레인으로 본다
           const tierLanes = lanes.filter((l) => l.tier === kind);
           const byKind = tierLanes.filter((l) => compact(l.kind) === compact(rec.linkText));
+          const hasTargetArticle = (l) => laws.find((w) => laneOfLaw.get(w) === l)?.articles.some((a) =>
+            a.label === rec.targetLabel && (!rec.targetTitle || compact(a.title) === compact(rec.targetTitle)));
+          const byArticle = rec.targetLabel ? tierLanes.filter(hasTargetArticle) : [];
           if (byKind.length === 1) lane = byKind[0];
+          else if (byArticle.length === 1) lane = byArticle[0];
           else if (tierLanes.length === 1) lane = tierLanes[0];
         }
         // Edge.targetName은 문자열이어야 한다 → 레인 이름, 그것도 없으면 링크텍스트("국토교통부령")
@@ -206,7 +213,7 @@ export function buildLawMap({ stmd, laws, institutions = [], generatedAt }) {
         } else if (pushEdge({ ...base, targetName, to: null, ...titled, unresolved: true })) {
           reportUnresolved({
             lawId: law.info.lawId, reason: lane ? "article-missing" : "lane-missing",
-            from, kind, targetName, targetLabel: rec.targetLabel,
+            from, fromClause: rec.fromClause, kind, targetName, targetLabel: rec.targetLabel,
           });
         }
       } else if (kind === "adminRule") {
