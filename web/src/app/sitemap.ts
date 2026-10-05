@@ -49,9 +49,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   });
 
   const lawMapIndex = getLawMapIndex();
+  const lawMapLastModified = lawMapIndex?.generatedAt ? new Date(lawMapIndex.generatedAt) : new Date();
   const lawPages: MetadataRoute.Sitemap = (lawMapIndex?.laws ?? []).map((law) => ({
     url: `${SITE_URL}/law/${law.lawId}/`,
-    lastModified: lawMapIndex?.generatedAt ? new Date(lawMapIndex.generatedAt) : new Date(),
+    lastModified: lawMapLastModified,
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }));
@@ -83,7 +84,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/law/`,
-      lastModified: lawMapIndex?.generatedAt ? new Date(lawMapIndex.generatedAt) : new Date(),
+      lastModified: lawMapLastModified,
       changeFrequency: "monthly",
       priority: 0.8,
     },
