@@ -103,6 +103,24 @@ LAW_OC=... npm run check:freshness
 cd web && node scripts/generate-field-verification-queue.mjs
 ```
 
+### 법령 지도 (law-map)
+
+법률 한 건의 법률·시행령·시행규칙 조문과 조문 단위 위임 관계를 `/law/<법령ID>/`에서 보여 준다.
+설계: [docs/superpowers/specs/2026-10-05-law-map-design.md](superpowers/specs/2026-10-05-law-map-design.md)
+
+```bash
+cd web
+npm run law-map:fetch -- --lawId 001823   # 한 건 (건축법)
+npm run law-map:fetch -- --all            # 레지스트리의 법률 전체 (캐시 우선, 끊기면 재실행)
+npm run validate:law-map
+npm run test:law-map
+```
+
+- 출처: 법제처 DRF `lsStmd`(상하위법 트리), `lsDelegated`(조문 단위 위임, 법률·시행령·시행규칙 각각), `eflaw`(현행 조문).
+- 산출: `web/data/law-map/<lawId>.json`(구조), `web/public/law-map/<lawId>.text.json`(조문 미리보기 300자, 패널에서 지연 로드), `web/data/law-map/index.json`(목록), 보고서 `docs/audits/law-map-build-<날짜>.json`(건너뜀·미해결·제도 매칭 실패·자기 인용·출발 조문 모호·하위 레인 위임 조회 실패).
+- 원본 응답 캐시 `web/data/law-map/raw/`는 gitignore. 응답에 든 OC는 캐시에 쓰기 전에 제거하며 `validate:law-map`이 산출물·index·보고서에 `OC=`가 없는지 검사한다.
+- 현행 조문에 없는 위임 도착 조문은 `unresolved`로 남긴다(지어내지 않기). 같은 법 안의 상호참조는 인용 선을 만들지 않고 집계만 한다. 세부 판정 규칙은 스펙 §3.
+
 ## 저장소 구조
 
 - `web/src/app/`: 홈, 상세, 검증 현황, 제작 요청 페이지
