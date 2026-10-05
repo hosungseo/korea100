@@ -1,22 +1,17 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { CSSProperties, MouseEvent as ReactMouseEvent } from "react";
-import type { Article, Edge, EdgeKind, Lane, LawMap, Tier } from "@/lib/law-map-types";
+import type { Edge, EdgeKind, Lane, LawMap } from "@/lib/law-map-types";
 import { countEdgeKinds } from "@/lib/law-map-route.mjs";
-import {
-  ADMIN_RULE_ALL, ADMIN_RULE_BOX_LIMIT, aggregateEdges, buildNodeMap, buildOverviewHeadline, distributeHeights, fitLabel,
-  groupLaneArticles, measureText, strokeWidthFor,
-} from "@/lib/law-map-overview-layout.mjs";
-import type { ChapterGroup } from "@/lib/law-map-overview-layout.mjs";
-import { EDGE_COLORS, EDGE_LABELS, EDGE_ORDER, TIER_LABELS } from "./law-map-constants";
+import { fitLabel, measureText } from "@/lib/law-map-overview-layout.mjs";
+import { buildTreeLayout } from "@/lib/law-map-tree-layout.mjs";
+import type { TreeLayout, TreeNode } from "@/lib/law-map-tree-layout.mjs";
+import { EDGE_COLORS, EDGE_LABELS, EDGE_ORDER } from "./law-map-constants";
 import styles from "./LawMapBoard.module.css";
 
 interface Props {
   map: LawMap;
-  lanesByTier: { tier: Tier; lanes: Lane[] }[];
-  articlesByLane: Map<string, Article[]>;
-  articleById: Map<string, Article>;
   laneById: Map<string, Lane>;
   edgesByNode: Map<string, Edge[]>;
   kinds: Set<EdgeKind>;
@@ -25,68 +20,29 @@ interface Props {
   onPick: (id: string) => void;
 }
 
-// 레이아웃 상수(px). 뷰포트 높이에 맞춰 블록 높이만 변하고 나머지는 고정이다.
-const PAD_X = 8;
-const PAD_TOP = 4;
-const PAD_BOTTOM = 8;
-const HEAD_H = 30;
-const LANE_HEAD_H = 15;
-const LANE_GAP = 10;
-const BLOCK_GAP = 3;
-const BLOCK_MIN = 22;
-const MAX_UNIT = 8;       // 조문 1개당 최대 높이. 작은 법이 화면을 다 차지하지 않게 한다.
-const ROW_H = 14;
-const BOX_MAX = 40;
-const SINGLE_BOX_H = 44;
+// 화면 맞춤 상수. 레이아웃은 참조 축척(px)으로 계산되고 viewBox로 보드에 맞춘다.
+const PAD = 8;               // 그림 둘레 여백(화면 px)
+const TITLE_FONT = 10.5;     // 참조 축척에서 장 제목 글자 크기
+const MIN_TEXT_PX = 9;       // 제목이 이보다 작아지면 축소를 멈추고 가로 스크롤
+const MIN_SCALE = MIN_TEXT_PX / TITLE_FONT;
+const MAX_SCALE = 1.25;      // 작은 법이 그림판을 다 채우며 커지지 않게
+const BADGE_H = 12;
+const RAIL = 10;             // 잎 더미 왼쪽 세로 레일이 쓰는 폭
 
-interface Rect { x: number; y: number; w: number; h: number }
-
-interface Node {
-  id: string;
-  type: "group" | "row" | "box";
-  rect: Rect;
-  title: string;
-  count: number | null;       // 조문 수(묶음) · 건수(상자). 행은 null
-  open?: boolean;             // 펼친 장의 머리 블록
-  clickable: boolean;
-}
-
-interface LaneHead { id: string; rect: Rect; name: string; collapsible: boolean }
-
-interface Column {
-  tier: Tier;
-  index: number;
-  x: number;
-  w: number;
-  headCount: string;
-  nodes: Node[];
-  laneHeads: LaneHead[];
-}
-
-interface Layout {
-  columns: Column[];
-  rectById: Map<string, Rect>;
-  nodeMap: Map<string, string>;
-  groupById: Map<string, ChapterGroup>;
-  contentH: number;
-}
-
-interface Wire { id: string; from: string; to: string; kind: EdgeKind; d: string; width: number }
-
-const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 /** 이 페이지 세션에서 큰 그림이 한 번 나타난 법령. 보기 전환으로 다시 붙어도 등장 동작을 반복하지 않는다. */
 const animatedOnce = new Set<string>();
 const r1 = (v: number) => Math.round(v * 10) / 10;
+const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 
-export default function LawMapOverview({
-  map, lanesByTier, articlesByLane, articleById, laneById, edgesByNode, kinds, selected, routeNodes, onPick,
-}: Props) {
+interface ConnectorPath { parentId: string; childId: string; d: string; badge: { x: number; y: number; text: string; w: number } | null }
+interface CrossPath { id: string; from: string; to: string; kind: EdgeKind; d: string; width: number }
+
+export default function LawMapOverview({ map, laneById, edgesByNode, kinds, selected, routeNodes, onPick }: Props) {
   const hostRef = useRef<HTMLDivElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ w: 0, h: 0 });
-  const [expanded, setExpanded] = useState<Set<string>>(() => new Set());
   const [hoverId, setHoverId] = useState<string | null>(null);
-  // 첫 그리기에서만 열별로 차례로 나타난다. 축소 동작 선호(reduced motion)면 건너뛰고,
+  // 첫 그리기에서만 줄이 위에서부터 차례로 나타난다. 축소 동작 선호(reduced motion)면 건너뛰고,
   // 자세히 보기에 다녀와 다시 붙을 때(같은 페이지 세션)도 되풀이하지 않는다.
   const [animate, setAnimate] = useState(() =>
     typeof window !== "undefined" && !window.matchMedia("(prefers-reduced-motion: reduce)").matches && !animatedOnce.has(map.lawId));
@@ -94,18 +50,10 @@ export default function LawMapOverview({
   // 포인터가 호버를 지원할 때만 선 강조를 건다(터치에서는 탭이 호버로 남아 전체가 흐려지는 일을 막는다).
   const [canHover] = useState(() => typeof window !== "undefined" && window.matchMedia("(hover: hover)").matches);
 
-  const headline = useMemo(() => buildOverviewHeadline(map), [map]);
-  const chapterGroupsByLane = useMemo(() => {
-    const out = new Map<string, ChapterGroup[]>();
-    for (const lane of map.lanes) {
-      if (lane.tier === "adminRule" || lane.tier === "ordinance") continue;
-      out.set(lane.id, groupLaneArticles(lane, articlesByLane.get(lane.id) ?? []));
-    }
-    return out;
-  }, [map.lanes, articlesByLane]);
-  const delegationCount = useMemo(() => map.edges.filter((e) => e.to !== null).length, [map.edges]);
+  const layout = useMemo<TreeLayout>(() => buildTreeLayout(map), [map]);
+  const nodeById = useMemo(() => new Map(layout.nodes.map((n) => [n.id, n])), [layout]);
 
-  // 보드 영역 크기. 호스트(svg를 담는 상자)만 재서, svg가 넘쳐도 되먹임이 생기지 않게 한다.
+  // 그림판 크기. 스크롤 상자만 재서, svg가 넘쳐도 되먹임이 생기지 않게 한다.
   useEffect(() => {
     const host = hostRef.current;
     if (!host) return;
@@ -125,183 +73,77 @@ export default function LawMapOverview({
     let inner = 0;
     const outer = requestAnimationFrame(() => { inner = requestAnimationFrame(() => setReady(true)); });
     // 끝까지 보여 준 뒤에만 '한 번 했다'로 친다. 옛 #a= 링크처럼 한 프레임 만에 자세히 보기로 넘어가면 다음에 다시 보여 준다.
-    const done = window.setTimeout(() => { animatedOnce.add(map.lawId); setAnimate(false); }, 900);
+    const done = window.setTimeout(() => { animatedOnce.add(map.lawId); setAnimate(false); }, 1000);
     return () => { cancelAnimationFrame(outer); cancelAnimationFrame(inner); window.clearTimeout(done); };
   }, [size.w, animate, map.lawId]);
 
-  // Esc: 펼친 장을 모두 접는다(입력란 안에서는 건드리지 않는다).
-  useEffect(() => {
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key !== "Escape") return;
-      const target = event.target as HTMLElement | null;
-      if (target && ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName)) return;
-      setExpanded((prev) => (prev.size ? new Set() : prev));
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  // 축척: 폭과 높이에 맞춘다. 폭에 맞추면 제목이 9px 아래로 내려가는 넓은 그림은 어차피 가로로 스크롤하므로,
+  // 그때는 높이에 맞추되 참조 축척(1)을 넘지 않게 해 글자가 읽히는 크기로 둔다.
+  const railW = size.w < 700 ? 44 : 64;
+  const scale = useMemo(() => {
+    if (!size.w || !layout.width || !layout.height) return 1;
+    const fitW = (size.w - railW - PAD * 2) / layout.width;
+    const fitH = (size.h - PAD * 2) / layout.height;
+    if (fitW < MIN_SCALE) return clamp(fitH, MIN_SCALE, 1);
+    return clamp(Math.min(fitW, fitH), MIN_SCALE, MAX_SCALE);
+  }, [size, layout.width, layout.height, railW]);
+  const svgW = layout.width * scale + PAD * 2;
+  const svgH = layout.height * scale + PAD * 2;
+  const pad = PAD / scale;
 
-  const layout = useMemo<Layout | null>(() => {
-    if (!size.w) return null;
-    const W = size.w;
-    const colGap = W < 700 ? 12 : 28;
-    const colW = (W - PAD_X * 2 - colGap * 4) / 5;
-    const top = PAD_TOP + HEAD_H + 6;
-    // 접힌 상태의 내용은 호스트 높이 안에 들어가야 한다(넘치면 보드에 스크롤바가 생긴다).
-    const avail = size.h - top - PAD_BOTTOM;
-    const rectById = new Map<string, Rect>();
-    const groupById = new Map<string, ChapterGroup>();
-    const effectiveGroups: ChapterGroup[] = [];
-    let contentH = top;
-
-    const columns = lanesByTier.map(({ tier, lanes }, index): Column => {
-      const x = PAD_X + index * (colW + colGap);
-      const nodes: Node[] = [];
-      const laneHeads: LaneHead[] = [];
-      const total = lanes.reduce((sum, lane) => sum + lane.articleCount, 0);
-      let headCount = `${lanes.length}건 · 조문 ${total}`;
-      let y = top;
-
-      if (tier === "ordinance") {
-        const lane = lanes[0];
-        const count = lane?.collapsed?.count ?? 0;
-        headCount = `${count}건`;
-        if (lane) {
-          const rect = { x, y, w: colW, h: SINGLE_BOX_H };
-          nodes.push({ id: lane.id, type: "box", rect, title: "조례·규칙", count, clickable: true });
-          rectById.set(lane.id, rect);
-          y += SINGLE_BOX_H;
-        }
-      } else if (tier === "adminRule") {
-        headCount = `${lanes.length}건`;
-        if (lanes.length > ADMIN_RULE_BOX_LIMIT) {
-          const rect = { x, y, w: colW, h: SINGLE_BOX_H };
-          nodes.push({ id: ADMIN_RULE_ALL, type: "box", rect, title: "행정규칙", count: lanes.length, clickable: false });
-          rectById.set(ADMIN_RULE_ALL, rect);
-          y += SINGLE_BOX_H;
-        } else if (lanes.length) {
-          const h = clamp((avail - (lanes.length - 1) * BLOCK_GAP) / lanes.length, BLOCK_MIN, BOX_MAX);
-          for (const lane of lanes) {
-            const rect = { x, y, w: colW, h };
-            nodes.push({ id: lane.id, type: "box", rect, title: lane.name, count: null, clickable: true });
-            rectById.set(lane.id, rect);
-            y += h + BLOCK_GAP;
-          }
-          y -= BLOCK_GAP;
-        }
-      } else {
-        // 장 단위가 다 안 들어가는 열(국가공무원법 시행령 55개 등)은 레인 단위로 접고, 레인을 누르면 장이 나온다.
-        const perLane = lanes.map((lane) => chapterGroupsByLane.get(lane.id) ?? []);
-        const chapterModeH = perLane.reduce((sum, groups) => {
-          const head = groups.length === 1 && groups[0].isLane ? 0 : LANE_HEAD_H;
-          return sum + head + groups.length * BLOCK_MIN + Math.max(0, groups.length - 1) * BLOCK_GAP;
-        }, 0) + Math.max(0, lanes.length - 1) * LANE_GAP;
-        const overflow = chapterModeH > avail;
-        const laneMode = overflow && lanes.length > 1;
-        const laneGap = laneMode ? 2 : LANE_GAP;
-        // 안 들어가면 최소 높이를 줄인다. 레인 여러 개면 레인 블록 기준, 한 개(상법·민법처럼 장이 많은 법률)면 장 블록 기준.
-        let blockMin = BLOCK_MIN;
-        if (laneMode) {
-          blockMin = clamp(Math.floor((avail - (lanes.length - 1) * laneGap) / lanes.length), 10, BLOCK_MIN);
-        } else if (overflow) {
-          const groupCount = perLane.reduce((sum, groups) => sum + groups.length, 0);
-          const headH = perLane.reduce((sum, groups) => sum + (groups.length === 1 && groups[0].isLane ? 0 : LANE_HEAD_H), 0);
-          blockMin = clamp(Math.floor((avail - headH - (groupCount - 1) * BLOCK_GAP) / groupCount), 10, BLOCK_MIN);
-        }
-
-        const items = lanes.map((lane, i) => {
-          const chapterGroups = perLane[i];
-          if (laneMode) {
-            const laneGroupId = `${lane.id}#lane`;
-            const open = expanded.has(laneGroupId);
-            const groups = open
-              ? chapterGroups
-              : [{ id: laneGroupId, laneId: lane.id, title: lane.name, isLane: true, articleIds: (articlesByLane.get(lane.id) ?? []).map((a) => a.id) }];
-            // 장이 없는 레인은 펼쳐도 레인 블록(#lane) 하나가 그대로 머리 노릇을 하므로 머리글을 따로 두지 않는다.
-            const soleLaneBlock = chapterGroups.length === 1 && chapterGroups[0].isLane;
-            return { lane, groups, showHead: open && !soleLaneBlock, headId: laneGroupId, headCollapsible: true };
-          }
-          const showHead = !(chapterGroups.length === 1 && chapterGroups[0].isLane);
-          return { lane, groups: chapterGroups, showHead, headId: `${lane.id}#lane`, headCollapsible: false };
-        });
-
-        let fixed = Math.max(0, lanes.length - 1) * laneGap;
-        const collapsedCounts: number[] = [];
-        for (const item of items) {
-          if (item.showHead) fixed += LANE_HEAD_H;
-          fixed += Math.max(0, item.groups.length - 1) * BLOCK_GAP;
-          for (const g of item.groups) {
-            if (expanded.has(g.id)) fixed += BLOCK_MIN + g.articleIds.length * ROW_H;
-            else collapsedCounts.push(g.articleIds.length);
-          }
-        }
-        const heights = distributeHeights(collapsedCounts, avail - fixed, { min: blockMin, maxUnit: MAX_UNIT });
-        let k = 0;
-        for (const item of items) {
-          if (item.showHead) {
-            laneHeads.push({ id: item.headId, rect: { x, y, w: colW, h: LANE_HEAD_H }, name: item.lane.name, collapsible: item.headCollapsible });
-            y += LANE_HEAD_H;
-          }
-          item.groups.forEach((g, gi) => {
-            effectiveGroups.push(g);
-            groupById.set(g.id, g);
-            if (expanded.has(g.id)) {
-              const rect = { x, y, w: colW, h: BLOCK_MIN };
-              nodes.push({ id: g.id, type: "group", rect, title: g.title, count: g.articleIds.length, open: true, clickable: true });
-              rectById.set(g.id, rect);
-              y += BLOCK_MIN;
-              for (const id of g.articleIds) {
-                const a = articleById.get(id);
-                const row = { x, y, w: colW, h: ROW_H };
-                nodes.push({ id, type: "row", rect: row, title: a ? `${a.label} ${a.title}`.trim() : id, count: null, clickable: true });
-                rectById.set(id, row);
-                y += ROW_H;
-              }
-            } else {
-              const h = heights[k++];
-              const rect = { x, y, w: colW, h };
-              nodes.push({ id: g.id, type: "group", rect, title: g.title, count: g.articleIds.length, clickable: true });
-              rectById.set(g.id, rect);
-              y += h;
-            }
-            if (gi < item.groups.length - 1) y += BLOCK_GAP;
-          });
-          y += laneGap;
-        }
-        y -= laneGap;
+  const connectors = useMemo<ConnectorPath[]>(() => {
+    const out: ConnectorPath[] = [];
+    const nextRowY = (row: number) => layout.rows.find((r) => r.row > row)?.y ?? null;
+    for (const c of layout.connectors) {
+      const p = nodeById.get(c.parentId);
+      const k = nodeById.get(c.childId);
+      if (!p || !k) continue;
+      const px = r1(p.x + p.w / 2);
+      const pb = p.y + p.h;
+      const below = nextRowY(p.row);
+      const busY = r1(below === null ? pb + 20 : (pb + below) / 2);
+      const visible = EDGE_ORDER.reduce((s, kind) => s + (kind !== "cites" && kinds.has(kind) ? c.byKind[kind] : 0), 0);
+      if (k.row === 3) {
+        // 잎 더미: 왼쪽 레일을 타고 내려와 상자 옆구리로 들어간다(쌓인 상자마다 제자리 가지).
+        const railX = r1(k.x - RAIL + 2);
+        const cy = r1(k.y + k.h / 2);
+        out.push({ parentId: c.parentId, childId: c.childId, d: `M ${px} ${r1(pb)} V ${busY} H ${railX} V ${cy} H ${r1(k.x)}`, badge: null });
+        continue;
       }
-      contentH = Math.max(contentH, y);
-      return { tier, index, x, w: colW, headCount, nodes, laneHeads };
-    });
-
-    const nodeMap = buildNodeMap(effectiveGroups, map.lanes, expanded);
-    return { columns, rectById, nodeMap, groupById, contentH: contentH + PAD_BOTTOM };
-  }, [size, lanesByTier, chapterGroupsByLane, articlesByLane, articleById, expanded, map.lanes]);
-
-  const wires = useMemo<Wire[]>(() => {
-    if (!layout) return [];
-    const out: Wire[] = [];
-    for (const agg of aggregateEdges(map.edges, layout.nodeMap, kinds)) {
-      const a = layout.rectById.get(agg.from);
-      const b = layout.rectById.get(agg.to);
-      if (!a || !b) continue;
-      const forward = b.x >= a.x + a.w;
-      const x1 = forward ? a.x + a.w : a.x;
-      const x2 = forward ? b.x : b.x + b.w;
-      const y1 = a.y + a.h / 2;
-      const y2 = b.y + b.h / 2;
-      const dx = Math.max(16, Math.abs(x2 - x1) / 2) * (forward ? 1 : -1);
+      const cx = r1(k.x + k.w / 2);
+      const text = visible ? String(visible) : "";
+      const w = text ? Math.ceil(measureText(text, 8.5)) + 8 : 0;
       out.push({
-        id: agg.id, from: agg.from, to: agg.to, kind: agg.kind, width: strokeWidthFor(agg.count),
-        d: `M ${r1(x1)} ${r1(y1)} C ${r1(x1 + dx)} ${r1(y1)}, ${r1(x2 - dx)} ${r1(y2)}, ${r1(x2)} ${r1(y2)}`,
+        parentId: c.parentId, childId: c.childId,
+        d: `M ${px} ${r1(pb)} V ${busY} H ${cx} V ${r1(k.y)}`,
+        badge: text ? { x: cx, y: r1(k.y - BADGE_H - 3), text, w } : null,
       });
     }
     return out;
-  }, [layout, map.edges, kinds]);
+  }, [layout, nodeById, kinds]);
 
-  const toggleGroup = useCallback((id: string) => {
-    setExpanded((prev) => { const next = new Set(prev); if (next.has(id)) next.delete(id); else next.add(id); return next; });
-  }, []);
+  const crossPaths = useMemo<CrossPath[]>(() => {
+    const out: CrossPath[] = [];
+    for (const e of layout.crossEdges) {
+      if (!kinds.has(e.kind)) continue;
+      const a = nodeById.get(e.from);
+      const b = nodeById.get(e.to);
+      if (!a || !b) continue;
+      const down = b.y >= a.y + a.h;
+      const dir = b.x + b.w / 2 >= a.x + a.w / 2 ? 1 : -1;
+      // 출발점은 연결선 줄기와 겹치지 않게 도착 방향으로 조금 비킨다.
+      const x1 = r1(a.x + a.w / 2 + dir * a.w * 0.22);
+      const y1 = r1(down ? a.y + a.h : a.y);
+      const x2 = r1(b.x + b.w / 2 - dir * b.w * 0.18);
+      const y2 = r1(down ? b.y : b.y + b.h);
+      const dy = Math.max(26, Math.abs(y2 - y1) * 0.55) * (down ? 1 : -1);
+      out.push({
+        id: e.id, from: e.from, to: e.to, kind: e.kind, width: crossWidthFor(e.count),
+        d: `M ${x1} ${y1} C ${x1} ${r1(y1 + dy)}, ${x2} ${r1(y2 - dy)}, ${x2} ${y2}`,
+      });
+    }
+    return out;
+  }, [layout, nodeById, kinds]);
 
   const nodeIdAt = (target: EventTarget | null): string | null =>
     (target as Element | null)?.closest?.("[data-node-id]")?.getAttribute("data-node-id") ?? null;
@@ -309,10 +151,10 @@ export default function LawMapOverview({
   const onClick = (event: ReactMouseEvent<SVGSVGElement>) => {
     const id = nodeIdAt(event.target);
     setHoverId(null); // 터치에서는 mouseleave가 오지 않으므로 탭할 때 호버 상태를 지운다.
-    if (!id || !layout) return;
-    if (layout.groupById.has(id) || id.endsWith("#lane")) { toggleGroup(id); return; }
-    if (id === ADMIN_RULE_ALL) return;
-    if (articleById.has(id) || laneById.has(id)) onPick(id);
+    const node = id ? nodeById.get(id) : null;
+    if (!node) return;
+    const target = pickTarget(node);
+    if (target) onPick(target);
   };
 
   const onMouseOver = (event: ReactMouseEvent<SVGSVGElement>) => {
@@ -327,99 +169,127 @@ export default function LawMapOverview({
     const px = event.clientX - base.left;
     const py = event.clientY - base.top;
     const flip = px + 260 > base.width;
-    tip.style.left = `${flip ? px - 12 : px + 14}px`;
-    tip.style.top = `${py + 14}px`;
+    tip.style.left = `${(flip ? px - 12 : px + 14) + host.scrollLeft}px`;
+    tip.style.top = `${py + 14 + host.scrollTop}px`;
     tip.style.transform = flip ? "translateX(-100%)" : "";
   };
   const onMouseLeave = () => setHoverId(null);
 
   // 호버 강조는 React 밖에서: 선 하나하나를 다시 그리지 않고 <style> 한 장만 바꾼다.
   const hoverCss = useMemo(() => {
-    if (!hoverId || !canHover) return "";
-    // 펼친 레인의 머리글(#lane, 묶음이 아님)은 선이 닿지 않으므로 전체를 흐리게만 만들지 않는다.
-    if (hoverId.endsWith("#lane") && !layout?.groupById.has(hoverId)) return "";
+    if (!hoverId || !canHover || !nodeById.has(hoverId)) return "";
     const sel = JSON.stringify(hoverId);
+    const conn = `[data-parent=${sel}],[data-child=${sel}]`;
+    const cross = `[data-src=${sel}],[data-dst=${sel}]`;
     return [
-      `[data-ov-root] path[data-src=${sel}],[data-ov-root] path[data-dst=${sel}]{opacity:1}`,
-      `[data-ov-root] path:not([data-src=${sel}]):not([data-dst=${sel}]){opacity:.1}`,
+      `[data-ov-root] .${styles.trConn}:is(${conn}){opacity:1}`,
+      `[data-ov-root] .${styles.trConn}:is(${conn}) path{stroke:var(--color-ink);stroke-width:1.75}`,
+      `[data-ov-root] .${styles.trConn}:not(${conn}){opacity:.14}`,
+      `[data-ov-root] .${styles.trCross}:is(${cross}){opacity:.95}`,
+      `[data-ov-root] .${styles.trCross}:not(${cross}){opacity:.06}`,
       `[data-ov-root] [data-node-id=${sel}]>rect{stroke:var(--color-ink);stroke-width:1.5}`,
     ].join("");
-  }, [hoverId, canHover, layout]);
+  }, [hoverId, canHover, nodeById]);
 
   const tooltip = useMemo(
-    () => (hoverId && layout ? describeHover(hoverId, layout, expanded, chapterGroupsByLane, articleById, laneById, edgesByNode, map.lanes) : null),
-    [hoverId, layout, expanded, chapterGroupsByLane, articleById, laneById, edgesByNode, map.lanes],
+    () => (hoverId ? describeHover(nodeById.get(hoverId) ?? null, layout, laneById, edgesByNode) : null),
+    [hoverId, nodeById, layout, laneById, edgesByNode],
   );
 
-  const selectedNode = selected ? layout?.nodeMap.get(selected) ?? selected : null;
+  const selectedNode = selected ? layout.nodeOf.get(selected) ?? selected : null;
   const routeTargets = useMemo(() => {
     const out = new Set<string>();
-    if (!layout) return out;
-    for (const id of routeNodes) out.add(layout.nodeMap.get(id) ?? id);
+    for (const id of routeNodes) out.add(layout.nodeOf.get(id) ?? id);
     return out;
   }, [routeNodes, layout]);
 
-  const wireEls = useMemo(() => wires.map((w) => (
-    <path key={w.id} d={w.d} data-src={w.from} data-dst={w.to} fill="none" stroke={EDGE_COLORS[w.kind]} strokeWidth={w.width} strokeLinecap="round" />
-  )), [wires]);
+  const counts = useMemo(() => {
+    const n = (pred: (node: TreeNode) => boolean) => layout.nodes.filter(pred).length;
+    const adminLanes = map.lanes.filter((l) => l.tier === "adminRule").length;
+    const ordinanceEdges = layout.nodes.filter((x) => x.kind === "ordinances").reduce((s, x) => s + (x.meta.count ?? 0), 0);
+    return { statute: n((x) => x.row === 0), decree: n((x) => x.row === 1), rule: n((x) => x.row === 2), adminLanes, ordinanceEdges, cross: layout.crossEdges.length };
+  }, [layout, map.lanes]);
+  const ariaLabel = `${map.name} 법령 체계 구조도 — 위에서 아래로 법률 ${counts.statute}장, 시행령 ${counts.decree}, 시행규칙 ${counts.rule}, `
+    + `행정규칙 ${counts.adminLanes}건, 조례 위임 ${counts.ordinanceEdges}건. 자리가 받치는 장을 뜻하고, 다른 기둥으로 건너가는 위임 ${counts.cross}갈래는 색 선.`;
 
-  const columnEls = useMemo(() => layout?.columns.map((col) => (
-    <g key={col.tier} className={styles.ovCol} style={{ "--col-i": col.index } as CSSProperties}>
-      <text className={styles.ovTier} x={col.x} y={PAD_TOP + 14}>{TIER_LABELS[col.tier]}</text>
-      {col.w >= 120 && <text className={styles.ovTierCount} x={col.x + col.w} y={PAD_TOP + 14} textAnchor="end">{col.headCount}</text>}
-      <line className={styles.ovTierRule} x1={col.x} x2={col.x + col.w} y1={PAD_TOP + HEAD_H - 4} y2={PAD_TOP + HEAD_H - 4} />
-      {col.laneHeads.map((head) => (
-        <g key={`head:${head.id}`} className={styles.ovLaneHead} data-node-id={head.collapsible ? head.id : undefined}>
-          <rect x={head.rect.x} y={head.rect.y} width={head.rect.w} height={head.rect.h} fill="transparent" />
-          <text x={head.rect.x + 1} y={head.rect.y + 11}>{fitLabel(`${head.collapsible ? "▾ " : ""}${head.name}`, head.rect.w - 2, 9.5)}</text>
-        </g>
-      ))}
-      {col.nodes.map((node) => (
-        <NodeView
-          key={node.id}
-          node={node}
-          selected={selectedNode === node.id}
-          onRoute={routeTargets.has(node.id)}
-        />
+  const rowEls = useMemo(() => layout.rows.map((row) => (
+    <g key={row.row} className={styles.trRow} style={{ "--row-i": layout.rows.indexOf(row) } as CSSProperties}>
+      {layout.nodes.filter((n) => n.row === row.row).map((node) => (
+        <NodeView key={node.id} node={node} selected={selectedNode === node.id} onRoute={routeTargets.has(node.id)} />
       ))}
     </g>
   )), [layout, selectedNode, routeTargets]);
 
-  const svgH = layout ? Math.max(size.h, layout.contentH) : size.h;
+  const connectorEls = useMemo(() => connectors.map((c) => (
+    <g key={`${c.parentId}>${c.childId}`} className={styles.trConn} data-parent={c.parentId} data-child={c.childId}>
+      <path d={c.d} />
+      {c.badge && (
+        <g className={styles.trBadge}>
+          <rect x={r1(c.badge.x - c.badge.w / 2)} y={c.badge.y} width={c.badge.w} height={BADGE_H} rx={3} />
+          <text x={c.badge.x} y={c.badge.y + BADGE_H - 3} textAnchor="middle">{c.badge.text}</text>
+        </g>
+      )}
+    </g>
+  )), [connectors]);
+
+  const crossEls = useMemo(() => crossPaths.map((e) => (
+    <path
+      key={e.id} className={styles.trCross} d={e.d} data-src={e.from} data-dst={e.to}
+      fill="none" stroke={EDGE_COLORS[e.kind]} strokeWidth={e.width} strokeLinecap="round"
+    />
+  )), [crossPaths]);
 
   return (
     <div className={styles.overviewWrap}>
       <div className={styles.ovHead}>
-        <p className={styles.ovTitle}>{headline.title}</p>
-        <p className={styles.ovSub}>{headline.subtitle}</p>
+        <p className={styles.ovTitle}>{layout.headline.title}</p>
+        <p className={styles.ovSub}>{layout.headline.subtitle}</p>
       </div>
       <div className={styles.ovHost} ref={hostRef}>
-        {layout && (
-          <svg
-            className={styles.overviewSvg}
-            data-ov-root
-            data-animate={animate || undefined}
-            data-ready={ready || !animate || undefined}
-            width={size.w}
-            height={svgH}
-            viewBox={`0 0 ${size.w} ${svgH}`}
-            role="img"
-            aria-label={`${map.name} 법령 지도 개요 — 조문 ${map.articles.length}개, 위임선 ${delegationCount}개`}
-            onClick={onClick}
-            onMouseOver={onMouseOver}
-            onMouseMove={onMouseMove}
-            onMouseLeave={onMouseLeave}
-          >
-            {hoverCss && <style>{hoverCss}</style>}
-            <g className={styles.ovWires}>{wireEls}</g>
-            {columnEls}
-          </svg>
+        {size.w > 0 && layout.nodes.length > 0 && (
+          <>
+            <div className={styles.trRail} style={{ width: railW, height: svgH }} aria-hidden>
+              {layout.rows.map((row) => (
+                <span key={row.row} style={{ top: PAD + (row.y + row.h / 2) * scale }}>{row.label}</span>
+              ))}
+            </div>
+            <svg
+              className={styles.overviewSvg}
+              data-ov-root
+              data-animate={animate || undefined}
+              data-ready={ready || !animate || undefined}
+              width={r1(svgW)}
+              height={r1(svgH)}
+              viewBox={`0 0 ${r1(svgW / scale)} ${r1(svgH / scale)}`}
+              role="img"
+              aria-label={ariaLabel}
+              onClick={onClick}
+              onMouseOver={onMouseOver}
+              onMouseMove={onMouseMove}
+              onMouseLeave={onMouseLeave}
+            >
+              {hoverCss && <style>{hoverCss}</style>}
+              <g transform={`translate(${r1(pad)} ${r1(pad)})`}>
+                <g className={styles.trLines}>
+                  {connectorEls}
+                  {crossEls}
+                </g>
+                {rowEls}
+              </g>
+            </svg>
+          </>
         )}
         <div ref={tooltipRef} className={styles.tooltip} data-show={tooltip !== null} role="presentation">
           {tooltip && (
             <>
               <strong>{tooltip.title}</strong>
               {tooltip.sub && <span className={styles.tooltipSub}>{tooltip.sub}</span>}
+              {tooltip.items && (
+                <span className={styles.tooltipList}>
+                  {tooltip.items.map((item, i) => <span key={i}>{item}</span>)}
+                  {tooltip.more > 0 && <span>외 {tooltip.more}</span>}
+                </span>
+              )}
               {tooltip.kinds.length > 0 && (
                 <span className={styles.tooltipKinds}>
                   {tooltip.kinds.map(([kind, n]) => (
@@ -436,80 +306,105 @@ export default function LawMapOverview({
   );
 }
 
-function NodeView({ node, selected, onRoute }: { node: Node; selected: boolean; onRoute: boolean }) {
-  const { x, y, w, h } = node.rect;
-  const isRow = node.type === "row";
-  const fontSize = isRow ? 9.5 : h < 14 ? 8.5 : 10.5;
-  const showText = h >= 10 && w >= 24;
-  const countLabel = node.count === null ? "" : node.type === "box" ? `${node.count}건` : `조문 ${node.count}`;
-  const showCount = showText && countLabel && w >= 90;
-  const countW = showCount ? measureText(countLabel, 9) + 6 : 0;
-  const title = showText ? fitLabel(`${node.open ? "▾ " : ""}${node.title}`, w - 12 - countW, fontSize) : "";
+/** 건너가는 선 굵기: 1건 1.2px, 제곱근으로 커져 36건 안팎에서 3.5px. 연결선(1.25px)과 같은 급으로 둬 그림을 덮지 않게 한다. */
+function crossWidthFor(count: number): number {
+  return r1(clamp(0.75 + Math.sqrt(count) * 0.45, 1, 3.5));
+}
+
+/** 노드를 누르면 자세히 보기에서 열 조문·레인. 장은 첫 조문, 요약 상자는 첫 장의 첫 조문, 상자는 첫 행정규칙·자치법규 레인. */
+function pickTarget(node: TreeNode): string | null {
+  switch (node.kind) {
+    case "chapter":
+    case "summary":
+      return node.articleIds[0] ?? null;
+    case "adminRules":
+      return node.meta.laneIds?.[0] ?? null;
+    case "ordinances":
+      return node.laneId;
+  }
+}
+
+function NodeView({ node, selected, onRoute }: { node: TreeNode; selected: boolean; onRoute: boolean }) {
+  const { x, y, w, h } = node;
+  const leaf = node.row === 3;
+  const inner = w - 12;
+  let top: string | null = null;
+  let main: string;
+  let topBold = false;
+  if (node.kind === "chapter" && node.tier === "statute") {
+    top = node.meta.chapterNo ?? null;
+    topBold = true;
+    main = node.meta.chapterNo ? (node.meta.chapterRest ?? "") : node.label;
+  } else if (node.kind === "chapter") {
+    top = node.meta.isLane ? (node.meta.laneKind ?? null) : (node.meta.laneName ?? null);
+    main = node.label;
+  } else if (node.kind === "summary") {
+    top = node.meta.items?.[0] ?? null;
+    main = node.label;
+  } else {
+    main = node.label;
+  }
+  // 윗줄이 없으면 제목을 가운데 높이에 둔다.
+  const mainY = leaf ? y + h / 2 + 3.6 : top ? y + 29 : y + 24;
   return (
     <g
-      className={isRow ? styles.ovRow : node.type === "box" ? styles.ovBox : styles.ovBlock}
+      className={leaf ? styles.trLeaf : styles.trNode}
       data-node-id={node.id}
-      data-open={node.open || undefined}
+      data-kind={node.kind}
+      data-tier={node.tier}
+      data-orphan={node.orphan || undefined}
       data-selected={selected || undefined}
       data-route={onRoute || undefined}
-      data-clickable={node.clickable || undefined}
     >
-      <rect x={r1(x)} y={r1(y)} width={r1(w)} height={r1(h)} rx={isRow ? 0 : 3} />
-      {title && <text x={r1(x + 6)} y={r1(y + h / 2 + fontSize * 0.36)} fontSize={fontSize}>{title}</text>}
-      {showCount && <text className={styles.ovCount} x={r1(x + w - 6)} y={r1(y + h / 2 + 3.2)} textAnchor="end">{countLabel}</text>}
+      <rect x={x} y={y} width={w} height={h} rx={leaf ? 3 : 4} />
+      {!leaf && top && (
+        <text className={topBold ? styles.trTopStrong : styles.trTop} x={x + 6} y={y + 14}>{fitLabel(top, inner, topBold ? 10 : 8.5)}</text>
+      )}
+      <text className={styles.trMain} x={x + 6} y={r1(mainY)} fontSize={leaf ? 9.5 : TITLE_FONT}>{fitLabel(main, inner, leaf ? 9.5 : TITLE_FONT)}</text>
+      {!leaf && node.sub && <text className={styles.trSub} x={x + w - 6} y={y + h - 7} textAnchor="end">{node.sub}</text>}
     </g>
   );
 }
 
-interface Tooltip { title: string; sub: string | null; kinds: [EdgeKind, number][]; hint: string | null }
+interface Tooltip { title: string; sub: string | null; items: string[] | null; more: number; kinds: [EdgeKind, number][]; hint: string | null }
 
-function describeHover(
-  id: string, layout: Layout, expanded: Set<string>, chapterGroupsByLane: Map<string, ChapterGroup[]>,
-  articleById: Map<string, Article>, laneById: Map<string, Lane>, edgesByNode: Map<string, Edge[]>, lanes: Lane[],
-): Tooltip {
-  const kindsOf = (edges: Edge[]): [EdgeKind, number][] => {
-    const counts = countEdgeKinds(edges);
-    return EDGE_ORDER.filter((kind) => kind !== "cites" && counts[kind] > 0).map((kind) => [kind, counts[kind]]);
-  };
-  const unionEdges = (ids: string[]) => {
+function describeHover(node: TreeNode | null, layout: TreeLayout, laneById: Map<string, Lane>, edgesByNode: Map<string, Edge[]>): Tooltip | null {
+  if (!node) return null;
+  const kindsOf = (counts: Record<string, number>): [EdgeKind, number][] =>
+    EDGE_ORDER.filter((kind) => kind !== "cites" && (counts[kind] ?? 0) > 0).map((kind) => [kind, counts[kind]]);
+  const outgoing = (ids: string[]) => {
     const seen = new Map<string, Edge>();
-    for (const nid of ids) for (const e of edgesByNode.get(nid) ?? []) if (e.to) seen.set(e.id, e);
-    return [...seen.values()];
+    for (const id of ids) for (const e of edgesByNode.get(id) ?? []) if (e.from === id && e.to) seen.set(e.id, e);
+    return kindsOf(countEdgeKinds([...seen.values()]));
   };
-  const article = articleById.get(id);
-  if (article) {
-    return {
-      title: article.title ? `${article.label}(${article.title})` : article.label,
-      sub: laneById.get(article.laneId)?.name ?? null,
-      kinds: kindsOf((edgesByNode.get(id) ?? []).filter((e) => e.to)),
-      hint: "클릭하면 자세히 보기로 이동",
-    };
+  // 잎 상자에 닿는 선: 연결선(부모에서) + 건너오는 선
+  const incoming = (id: string) => {
+    const counts: Record<string, number> = {};
+    for (const c of layout.connectors) if (c.childId === id) for (const [k, n] of Object.entries(c.byKind)) counts[k] = (counts[k] ?? 0) + n;
+    for (const e of layout.crossEdges) if (e.to === id) counts[e.kind] = (counts[e.kind] ?? 0) + e.count;
+    return kindsOf(counts);
+  };
+  const orphanNote = node.orphan ? " · 들어오는 위임선 없음(문서 위치로 놓음)" : "";
+  switch (node.kind) {
+    case "chapter": {
+      const lane = node.laneId ? laneById.get(node.laneId) : null;
+      const sub = node.meta.isLane ? (lane?.kind ?? null) : (lane ? `${lane.name} · ${lane.kind}` : null);
+      return { title: `${node.label} · 조문 ${node.articleIds.length}`, sub: sub ? sub + orphanNote : orphanNote || null, items: null, more: 0, kinds: outgoing(node.articleIds), hint: "클릭하면 자세히 보기로 이동" };
+    }
+    case "summary":
+      return {
+        title: `${node.label} · 조문 ${node.articleIds.length}`, sub: `한 자리에 접은 ${node.meta.childIds?.length ?? 0}개 묶음${orphanNote}`,
+        items: node.meta.items ?? null, more: node.meta.more ?? 0, kinds: outgoing(node.articleIds), hint: "클릭하면 자세히 보기로 이동",
+      };
+    case "adminRules":
+      return {
+        title: node.label, sub: node.orphan ? "들어오는 위임선 없음(문서 위치로 놓음)" : null,
+        items: node.meta.items ?? null, more: node.meta.more ?? 0, kinds: incoming(node.id), hint: "클릭하면 자세히 보기로 이동",
+      };
+    case "ordinances":
+      return {
+        title: node.label, sub: `이 장에서 조례·규칙으로 보내는 위임 ${node.meta.count}건 · 전국 조례·규칙 ${node.meta.total ?? 0}건`,
+        items: null, more: 0, kinds: incoming(node.id), hint: "클릭하면 자세히 보기로 이동",
+      };
   }
-  if (id === ADMIN_RULE_ALL) {
-    const adminLanes = lanes.filter((l) => l.tier === "adminRule");
-    return { title: `행정규칙 ${adminLanes.length}건`, sub: null, kinds: kindsOf(unionEdges(adminLanes.map((l) => l.id))), hint: null };
-  }
-  const lane = laneById.get(id);
-  if (lane) {
-    const title = lane.tier === "ordinance" ? `조례·규칙 ${lane.collapsed?.count ?? 0}건` : lane.name;
-    return { title, sub: lane.tier === "ordinance" ? null : lane.kind, kinds: kindsOf(edgesByNode.get(id) ?? []), hint: "클릭하면 자세히 보기로 이동" };
-  }
-  const group = layout.groupById.get(id);
-  if (group) {
-    const open = expanded.has(group.id);
-    const laneName = laneById.get(group.laneId)?.name ?? null;
-    // 레인 단위로 접힌 블록은 누르면 장이 먼저 나온다(그 레인에 장이 있을 때).
-    const chapters = chapterGroupsByLane.get(group.laneId) ?? [];
-    const opensToChapters = group.isLane && !(chapters.length === 1 && chapters[0].isLane);
-    return {
-      title: `${group.title} · 조문 ${group.articleIds.length}`,
-      sub: group.isLane ? null : laneName,
-      kinds: kindsOf(unionEdges(group.articleIds)),
-      hint: open ? "클릭하면 접힙니다" : opensToChapters ? "클릭하면 장이 펼쳐집니다" : "클릭하면 조문이 펼쳐집니다",
-    };
-  }
-  // 레인 단위로 접힌 열에서 펼친 레인의 머리글
-  const laneId = id.replace(/#lane$/, "");
-  const head = laneById.get(laneId);
-  return { title: head?.name ?? id, sub: null, kinds: [], hint: "클릭하면 접힙니다" };
 }

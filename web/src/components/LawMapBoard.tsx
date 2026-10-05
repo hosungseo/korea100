@@ -246,15 +246,14 @@ export default function LawMapBoard({ map, textUrl }: Props) {
     if (selected === null) pendingScrollRef.current = null;
   }, [selected]);
 
-  // 큰 그림에서 조문(또는 행정규칙·자치법규 상자)을 누르면 자세히 보기로 넘어가 그 노드를 연다.
+  // 큰 그림에서 장(또는 행정규칙·자치법규 상자)을 누르면 자세히 보기로 넘어가 그 장의 첫 조문(레인)을 연다.
   const pickFromOverview = useCallback((id: string) => {
     setView("detail");
     focusNode(id);
   }, [focusNode]);
 
-  // Esc: 자세히 보기에서는 선택 해제(큰 그림에서는 LawMapOverview가 펼친 장을 접는다).
+  // Esc: 선택 해제(입력란 안에서는 건드리지 않는다).
   useEffect(() => {
-    if (view !== "detail") return;
     const onKey = (event: KeyboardEvent) => {
       if (event.key !== "Escape") return;
       const target = event.target as HTMLElement | null;
@@ -263,7 +262,7 @@ export default function LawMapBoard({ map, textUrl }: Props) {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [view, clearSelection]);
+  }, [clearSelection]);
 
   const onSearchSubmit = () => {
     const q = query.replace(/\s+/g, "");
@@ -297,9 +296,6 @@ export default function LawMapBoard({ map, textUrl }: Props) {
           {view === "overview" ? (
             <LawMapOverview
               map={map}
-              lanesByTier={lanesByTier}
-              articlesByLane={articlesByLane}
-              articleById={articleById}
               laneById={laneById}
               edgesByNode={edgesByNode}
               kinds={kinds}

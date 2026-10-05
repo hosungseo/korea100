@@ -1,8 +1,6 @@
 import type { Edge, EdgeKind, Lane } from "./law-map-types";
 
 export const MISC_CHAPTER: string;
-export const ADMIN_RULE_ALL: string;
-export const ADMIN_RULE_BOX_LIMIT: number;
 
 export interface ChapterGroup {
   id: string;
@@ -25,16 +23,10 @@ export function groupLaneArticles(
   lane: Pick<Lane, "id" | "name">,
   articles: { id: string; chapter: string | null }[],
 ): ChapterGroup[];
-export function buildNodeMap(
-  groups: Pick<ChapterGroup, "id" | "articleIds">[],
-  lanes: Pick<Lane, "id" | "tier">[],
-  expanded: Set<string>,
-): Map<string, string>;
 export function aggregateEdges(edges: Edge[], nodeMap: Map<string, string>, kinds: Set<EdgeKind>): AggregatedEdge[];
 export function strokeWidthFor(count: number): number;
 export function measureText(text: string, fontSize: number): number;
 export function fitLabel(text: string, maxWidth: number, fontSize: number): string;
-export function distributeHeights(counts: number[], avail: number, opt: { min: number; maxUnit: number }): number[];
 
 export const OVERVIEW_SUBTITLE: string;
 export interface OverviewHeadline {
