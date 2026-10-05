@@ -173,7 +173,7 @@ export function classifyLaw(lawId, { log = console.log, write = true } = {}) {
   };
   if (write) {
     const outPath = path.join(DATA_DIR, `${lawId}.class.json`);
-    fs.writeFileSync(outPath, `${JSON.stringify(out, null, 2)}\n`);
+    fs.writeFileSync(outPath, `${JSON.stringify(out)}\n`); // IR 파일과 같이 압축 JSON
     log(`${lawId} ${ir.name}: ${stats.total}조 → ${path.relative(WEB, outPath)} (unknown 단계 ${stats.unknownStage}, unknown 주체 ${stats.unknownActor}, 저신뢰 ${stats.lowConfidence}, 삭제 ${stats.deleted}${missingRaw.length ? `, 원본 없음 ${missingRaw.length}레인` : ""})`);
   }
   return { ir, out };

@@ -10,6 +10,11 @@ const TEXT_DIR = path.join(WEB, "public", "law-map");
 const TIERS = new Set(["statute", "decree", "rule", "adminRule", "ordinance"]);
 const KINDS = new Set(["decree", "rule", "adminRule", "ordinance", "cites"]);
 const KIND_TO_TIER = { decree: "decree", rule: "rule", adminRule: "adminRule", ordinance: "ordinance" };
+// 조문 분류(class.json) 허용 값. scripts/lib/law-map-classify.mjs의 STAGES/ACTORS와 같아야 한다.
+const CLASS_STAGES = new Set(["purpose", "standard", "procedure", "operation", "organization", "supervision", "penalty", "misc", "unknown"]);
+const CLASS_ACTORS = new Set(["citizen", "central", "local", "committee", "court", "none", "unknown"]);
+let classifiedTotal = 0;
+let classFiles = 0;
 
 const errors = [];
 const fail = (scope, msg) => errors.push(`${scope}: ${msg}`);
@@ -100,6 +105,32 @@ for (const file of files) {
     if (/OC=[A-Za-z0-9]/.test(textRaw)) fail(scope, "text.json에 OC 값이 들어 있습니다");
     for (const id of Object.keys(JSON.parse(textRaw))) if (!articleIds.has(id)) fail(scope, `text.json 키 ${id}가 조문에 없습니다`);
   }
+
+  // 조문 분류(<lawId>.class.json)가 있으면: 키 ⊆ 조문 id, 단계·주체는 허용 값, 신뢰도는 0~1, OC 없음.
+  const classPath = path.join(DATA_DIR, `${map.lawId}.class.json`);
+  if (fs.existsSync(classPath)) {
+    const classScope = `law-map/${map.lawId}.class.json`;
+    const classRaw = fs.readFileSync(classPath, "utf8");
+    if (/OC=[A-Za-z0-9]/.test(classRaw)) fail(classScope, "OC 값이 들어 있습니다");
+    const cls = JSON.parse(classRaw);
+    if (cls.lawId !== map.lawId) fail(classScope, `lawId ${cls.lawId}가 IR과 다릅니다`);
+    if (typeof cls.method !== "string" || !cls.method) fail(classScope, "method 누락");
+    let classified = 0;
+    for (const [id, c] of Object.entries(cls.articles ?? {})) {
+      classified += 1;
+      if (!articleIds.has(id)) fail(classScope, `분류 키 ${id}가 조문에 없습니다`);
+      if (!CLASS_STAGES.has(c.stage)) fail(classScope, `${id} stage ${c.stage}`);
+      if (!CLASS_ACTORS.has(c.actor)) fail(classScope, `${id} actor ${c.actor}`);
+      if (typeof c.confidence !== "number" || c.confidence < 0 || c.confidence > 1) fail(classScope, `${id} confidence ${c.confidence}`);
+      if (!Array.isArray(c.evidence)) fail(classScope, `${id} evidence가 배열이 아닙니다`);
+      if (c.stage !== "unknown" && c.evidence.length === 0 && !c.deleted) fail(classScope, `${id} 단계 ${c.stage}인데 근거가 없습니다`);
+      for (const a of c.actors ?? []) {
+        if (!CLASS_ACTORS.has(a.actor) || !["primary", "secondary"].includes(a.role)) fail(classScope, `${id} actors ${JSON.stringify(a)}`);
+      }
+    }
+    classifiedTotal += classified;
+    classFiles += 1;
+  }
 }
 
 const indexPath = path.join(DATA_DIR, "index.json");
@@ -129,4 +160,4 @@ if (errors.length > 0) {
 }
 const articles = maps.reduce((s, m) => s + m.articles.length, 0);
 const edges = maps.reduce((s, m) => s + m.edges.length, 0);
-console.log(`법령 지도 검증 성공: 법률 ${maps.length}건, 조문 ${articles}개, 위임선 ${edges}개`);
+console.log(`법령 지도 검증 성공: 법률 ${maps.length}건, 조문 ${articles}개, 위임선 ${edges}개${classFiles ? `, 조문 분류 ${classFiles}건 ${classifiedTotal}개` : ""}`);

@@ -9,7 +9,7 @@
 | # | 조문 | 제목 | 단계 | 주체 | 신뢰도 | 근거 |
 |---|---|---|---|---|---|---|
 | 1 | 제1조 | 목적 | purpose | none | 0.8 | S:title:목적, S:chapter:제1장 총칙, A:subject:법은, A:subject:주체 단서 없음, A:stage:purpose→none |
-| 2 | 제4조의2 | 건축위원회의 건축 심의 등 | procedure | citizen ↔ local·committee | 0.5 | S:title:위원회, S:title:심의(머리말), S:text:신청하여야×1, S:text:신청할 수 있다×1, S:text:통보하여야×2, S:text:하여야 한다×3, A:subject:자는, A:cue:하려는 자, A:also:local(시ㆍ도지사), A:also:committee(위원회) |
+| 2 | 제4조의2 | 건축위원회의 건축 심의 등 | procedure | citizen ↔ local·committee | 0.5 | S:title:위원회, S:title:회의, S:title:심의(머리말), S:text:신청하여야×1, S:text:신청할 수 있다×1, S:text:통보하여야×2, S:text:하여야 한다×3, A:subject:자는, A:cue:하려는 자, A:also:local(시ㆍ도지사), A:also:committee(위원회) |
 | 3 | 제4조의6 | 심의를 위한 조사 및 의견 청취 | supervision | committee | 0.4 | S:title:조사, S:title:심의, S:title:청취(머리말), S:text:출입하여×1, S:text:하여야 한다×1, A:subject:건축민원전문위원회는, A:cue:위원회 |
 | 4 | 제6조 | 기존의 건축물 등에 관한 특례 | misc | local | 0.6 | S:title:특례(약한 단서), A:subject:허가권자는, A:cue:허가권자 |
 | 5 | 제8조 | 리모델링에 대비한 특례 등 | misc | none | 0.5 | S:title:특례(약한 단서), A:text:본문에 주체 단서 없음→none |
@@ -43,11 +43,11 @@
 | 33 | 제81조 | 삭제 | unknown (삭제) | none | 1 | S:title:삭제, A:title:삭제 |
 | 34 | 제83조 | 옹벽 등의 공작물에의 준용 | misc | citizen ↔ local | 0.8 | S:title:준용, S:chapter:제9장 보칙, A:subject:자는, A:cue:하려는 자, A:also:local(특별자치시장) |
 | 35 | 제87조 | 보고와 검사 등 | supervision | central ↔ local·committee·citizen | 0.5 | S:title:검사, S:title:보고, A:subject:건축지도원은, A:cue:국토교통부장관, A:joint:local(시ㆍ도지사), A:joint:committee(업무대행자) |
-| 36 | 제89조 | 분쟁위원회의 구성 | organization | committee | 0.8 | S:title:위원회, S:title:구성, A:subject:분쟁위원회는, A:cue:위원회, A:title:위원회 |
+| 36 | 제89조 | 분쟁위원회의 구성 | organization | committee | 0.8 | S:title:위원회, S:title:구성, S:title:회의, A:subject:분쟁위원회는, A:cue:위원회, A:title:위원회 |
 | 37 | 제93조 | 조정등의 신청에 따른 공사중지 | supervision | local | 0.4 | S:title:공사중지(머리말), S:title:신청, S:title:조정, S:text:아니 된다×1, A:body:local(시ㆍ도지사) |
 | 38 | 제97조 | 분쟁의 재정 | procedure | citizen | 0.4 | S:title:재정, A:subject:재정은, A:subject:주체 단서 없음, A:body:citizen(당사자), A:body:committee(위원회) |
 | 39 | 제101조 | 조정 회부 | procedure | committee | 0.8 | S:title:조정, S:title:회부, A:subject:분쟁위원회는, A:cue:위원회 |
-| 40 | 제104조의2 | 건축위원회의 사무의 정보보호 | organization | committee ↔ citizen | 0.8 | S:title:위원회, A:subject:등은, A:cue:위원회, A:also:citizen(신청인), A:title:위원회 |
+| 40 | 제104조의2 | 건축위원회의 사무의 정보보호 | organization | committee ↔ citizen | 0.8 | S:title:위원회, S:title:회의, A:subject:등은, A:cue:위원회, A:also:citizen(신청인), A:title:위원회 |
 
 ## 2. 단계 × 주체 행렬 (삭제 조문 제외, 주 주체 기준)
 
@@ -70,14 +70,14 @@
 
 | 단계 \ 주체 | 국민·사업자<br>`citizen` | 중앙<br>`central` | 지방<br>`local` | 위원회·기관<br>`committee` | 법원<br>`court` | 없음<br>`none` | 미상<br>`unknown` | 계 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| 목적·정의 `purpose` | · | 1 | · | · | · | 7 | · | 8 |
-| 기준·의무 `standard` | 18 | 3 | 6 | 2 | · | 11 | · | 40 |
-| 인허가·절차 `procedure` | 12 | 2 | 11 | 7 | · | 3 | · | 35 |
+| 목적·정의 `purpose` | · | · | · | · | · | 7 | · | 7 |
+| 기준·의무 `standard` | 18 | 2 | 6 | · | · | 11 | · | 37 |
+| 인허가·절차 `procedure` | 12 | 2 | 11 | 8 | · | 3 | · | 36 |
 | 행정 운영 `operation` | 1 | · | 1 | · | · | · | · | 2 |
-| 조직 `organization` | 1 | 5 | 4 | 3 | · | 9 | · | 22 |
-| 감독·시정 `supervision` | 2 | 4 | 2 | 2 | · | 4 | · | 14 |
+| 조직 `organization` | 1 | 6 | 4 | 4 | · | 9 | · | 24 |
+| 감독·시정 `supervision` | 2 | 3 | 2 | 2 | · | 4 | · | 13 |
 | 벌칙 `penalty` | 1 | · | · | · | · | · | · | 1 |
-| 보칙 `misc` | · | 2 | 5 | 1 | · | 1 | · | 9 |
+| 보칙 `misc` | · | 4 | 5 | 1 | · | 1 | · | 11 |
 | 미상 `unknown` | 1 | · | 2 | 1 | · | 4 | · | 8 |
 | **계** | **36** | **17** | **31** | **16** | **0** | **39** | **0** | **139** |
 
@@ -87,13 +87,13 @@
 | 단계 \ 주체 | 국민·사업자<br>`citizen` | 중앙<br>`central` | 지방<br>`local` | 위원회·기관<br>`committee` | 법원<br>`court` | 없음<br>`none` | 미상<br>`unknown` | 계 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | 목적·정의 `purpose` | · | · | · | · | · | 21 | · | 21 |
-| 기준·의무 `standard` | 32 | 15 | 7 | 2 | · | 55 | · | 111 |
-| 인허가·절차 `procedure` | 28 | 10 | 8 | 2 | · | 3 | · | 51 |
-| 행정 운영 `operation` | 8 | 1 | 9 | · | · | 7 | · | 25 |
+| 기준·의무 `standard` | 31 | 13 | 7 | 2 | · | 55 | · | 108 |
+| 인허가·절차 `procedure` | 30 | 11 | 8 | 2 | · | 5 | · | 56 |
+| 행정 운영 `operation` | 6 | 1 | 9 | · | · | 7 | · | 23 |
 | 조직 `organization` | · | 2 | 1 | 2 | · | 4 | · | 9 |
 | 감독·시정 `supervision` | 2 | 5 | 1 | 1 | · | 2 | · | 11 |
-| 보칙 `misc` | 3 | 1 | 2 | · | · | 3 | · | 9 |
-| 미상 `unknown` | 3 | · | 1 | · | · | 10 | 1 | 15 |
+| 보칙 `misc` | 4 | 2 | 2 | · | · | 3 | · | 11 |
+| 미상 `unknown` | 3 | · | 1 | · | · | 8 | 1 | 13 |
 | **계** | **76** | **34** | **29** | **7** | **0** | **105** | **1** | **252** |
 
 ## 3. 미상·저신뢰 비율 (삭제 조문 제외)
@@ -101,9 +101,9 @@
 | 층위 | 분류 대상 | 단계 unknown | 주체 unknown | 신뢰도 < 0.5 | 보조 주체 있음 | 평균 신뢰도 |
 |---|---:|---:|---:|---:|---:|---:|
 | 법률 | 153 | 2 (1%) | 0 (0%) | 33 (22%) | 42 (27%) | 0.60 |
-| 대통령령 | 139 | 8 (6%) | 0 (0%) | 65 (47%) | 21 (15%) | 0.48 |
-| 부령 | 252 | 15 (6%) | 1 (0%) | 69 (27%) | 44 (17%) | 0.55 |
-| **전체** | 544 | 25 (5%) | 1 (0%) | 167 (31%) | 107 (20%) | 0.55 |
+| 대통령령 | 139 | 8 (6%) | 0 (0%) | 64 (46%) | 21 (15%) | 0.49 |
+| 부령 | 252 | 13 (5%) | 1 (0%) | 67 (27%) | 44 (17%) | 0.55 |
+| **전체** | 544 | 23 (4%) | 1 (0%) | 164 (30%) | 107 (20%) | 0.55 |
 
 삭제 조문 114건(법률 13·대통령령 59·부령 42)은 `stage: unknown, actor: none, deleted: true`로 따로 센다. 본문 출처: 원본 658, 미리보기 0, 없음 0.
 
@@ -141,7 +141,7 @@
 - 주체 축은 '첫 항 첫 문장 주어' 하나에 기대고 있다. 항마다 주어가 다른 조문(허가권자가 ①, 건축주가 ②)은 항 단위 분류로 내려가야 정확해진다.
 - 두 단계를 함께 담는 조문(허가+제한, 지정+운영)은 다중 라벨을 허용할지 결정이 필요하다.
 
-## 7. rule-based v0 → rule-based v0.1 달라진 조문 (103건: 단계만 28, 주체만 70, 둘 다 5) — 앞 10건
+## 7. rule-based v0 → rule-based v0.1 달라진 조문 (113건: 단계만 38, 주체만 70, 둘 다 5) — 앞 10건
 
 기준: `001823.class.v0.json` (2026-10-05, rule-based v0)
 
@@ -154,7 +154,7 @@
 | 건축법 제74조 | 통합적용계획의 수립 및 시행 | purpose × none (0.6) | operation × local | 0.4 | S:title:계획의 수립 |
 | 건축법 제77조의8 | 건축협정의 관리 | standard × local (0.6) | operation × local | 0.6 | S:text:대장을 작성×1 |
 | 건축법 제77조의11 | 건축협정에 관한 계획 수립 및 지원 | purpose × local (0.6) | operation × local | 0.8 | S:title:계획 수립 |
+| 건축법 시행령 제5조의2 | 위원의 제척ㆍ기피ㆍ회피 | standard × committee (0.4) | organization × committee | 0.4 | S:title:제척, A:body:committee(위원회), A:body:citizen(당사자) |
+| 건축법 시행령 제5조의3 | 위원의 해임ㆍ해촉 | purpose × central (0.5) | organization × central | 0.8 | S:title:해촉, A:subject:국토교통부장관은, A:cue:국토교통부장관 |
 | 건축법 시행령 제12조 | 허가ㆍ신고사항의 변경 등 | procedure × local (0.4) | procedure × citizen | 0.6 | A:implicit-subject:신고 |
-| 건축법 시행령 제25조 | 건축물대장 | unknown × citizen (0) | operation × citizen | 0.4 | S:title:대장 |
-| 건축법 시행령 제35조 | 피난계단의 설치 | standard × citizen (0.4) | standard × none | 0.4 | A:subject:직통계단은, A:thing-subject:직통계단은 |
 
