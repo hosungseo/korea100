@@ -97,6 +97,7 @@ async function main() {
 
   const report = {
     generatedAt: asOf, built: [], skipped: [], unresolved: [], institutionMisses: [], addedAdminRules: [], delegationUnavailable: [],
+    selfReferences: 0, ambiguousSources: [],
   };
   for (const lawId of lawIds) {
     try {
@@ -105,12 +106,14 @@ async function main() {
       fs.writeFileSync(path.join(TEXT_DIR, `${lawId}.text.json`), JSON.stringify(texts));
       report.built.push({
         lawId, name: map.name, articles: map.articles.length, edges: map.edges.length,
-        unresolved: map.stats.unresolved, droppedReferences: r.droppedReferences,
+        unresolved: map.stats.unresolved, droppedReferences: r.droppedReferences, selfReferences: r.selfReferences,
       });
       report.unresolved.push(...r.unresolved);
       report.institutionMisses.push(...r.institutionMisses);
       report.addedAdminRules.push(...r.addedAdminRules.map((name) => ({ lawId, name })));
-      console.log(`✓ ${lawId} ${map.name}: 조문 ${map.articles.length}, 위임선 ${map.edges.length}, 미해결 ${map.stats.unresolved}, 제외 참조 ${r.droppedReferences}, 제도 ${map.institutions.length}`);
+      report.selfReferences += r.selfReferences;
+      report.ambiguousSources.push(...r.ambiguousSources.map((entry) => ({ lawId, ...entry })));
+      console.log(`✓ ${lawId} ${map.name}: 조문 ${map.articles.length}, 위임선 ${map.edges.length}, 미해결 ${map.stats.unresolved}, 제외 참조 ${r.droppedReferences}, 자기인용 ${r.selfReferences}, 제도 ${map.institutions.length}`);
     } catch (err) {
       const reason = drf.redact(err?.message ?? String(err));
       report.skipped.push({ lawId, reason });
