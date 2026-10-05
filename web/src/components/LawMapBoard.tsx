@@ -261,9 +261,11 @@ export default function LawMapBoard({ map, textUrl }: Props) {
   };
 
   const routeNodes = useMemo(() => new Set(route?.nodes ?? []), [route]);
+  // 큰 그림에서 고른 조문이 없으면 패널은 안내문뿐이므로 숨기고 그림이 폭을 다 쓴다.
+  const panelHidden = view === "overview" && selected === null;
 
   return (
-    <div className={styles.layout}>
+    <div className={styles.layout} data-panel={panelHidden ? "hidden" : undefined}>
       <div className={styles.main}>
         <LawMapToolbar
           view={view}
@@ -326,18 +328,20 @@ export default function LawMapBoard({ map, textUrl }: Props) {
           )}
         </div>
       </div>
-      <LawMapPanel
-        selected={selected}
-        articleById={articleById}
-        laneById={laneById}
-        edgesByNode={edgesByNode}
-        institutionsByArticle={institutionsByArticle}
-        texts={texts}
-        route={route}
-        routeMiss={routeMiss}
-        routeFrom={routeFrom}
-        onFocus={focusNode}
-      />
+      {!panelHidden && (
+        <LawMapPanel
+          selected={selected}
+          articleById={articleById}
+          laneById={laneById}
+          edgesByNode={edgesByNode}
+          institutionsByArticle={institutionsByArticle}
+          texts={texts}
+          route={route}
+          routeMiss={routeMiss}
+          routeFrom={routeFrom}
+          onFocus={focusNode}
+        />
+      )}
     </div>
   );
 }

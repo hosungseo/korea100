@@ -74,6 +74,8 @@ interface Layout {
 interface Wire { id: string; from: string; to: string; kind: EdgeKind; d: string; width: number }
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
+/** 이 페이지 세션에서 큰 그림이 한 번 나타난 법령. 보기 전환으로 다시 붙어도 등장 동작을 반복하지 않는다. */
+const animatedOnce = new Set<string>();
 const r1 = (v: number) => Math.round(v * 10) / 10;
 
 export default function LawMapOverview({
@@ -84,8 +86,10 @@ export default function LawMapOverview({
   const [size, setSize] = useState({ w: 0, h: 0 });
   const [expanded, setExpanded] = useState<Set<string>>(() => new Set());
   const [hoverId, setHoverId] = useState<string | null>(null);
-  // 첫 그리기에서만 열별로 차례로 나타난다. 축소 동작 선호(reduced motion)면 건너뛴다.
-  const [animate, setAnimate] = useState(() => typeof window !== "undefined" && !window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  // 첫 그리기에서만 열별로 차례로 나타난다. 축소 동작 선호(reduced motion)면 건너뛰고,
+  // 자세히 보기에 다녀와 다시 붙을 때(같은 페이지 세션)도 되풀이하지 않는다.
+  const [animate, setAnimate] = useState(() =>
+    typeof window !== "undefined" && !window.matchMedia("(prefers-reduced-motion: reduce)").matches && !animatedOnce.has(map.lawId));
   const [ready, setReady] = useState(false);
 
   const headline = useMemo(() => buildOverviewHeadline(map), [map]);
@@ -118,9 +122,10 @@ export default function LawMapOverview({
     if (!size.w || !animate) return;
     let inner = 0;
     const outer = requestAnimationFrame(() => { inner = requestAnimationFrame(() => setReady(true)); });
+    animatedOnce.add(map.lawId);
     const done = window.setTimeout(() => setAnimate(false), 900);
     return () => { cancelAnimationFrame(outer); cancelAnimationFrame(inner); window.clearTimeout(done); };
-  }, [size.w, animate]);
+  }, [size.w, animate, map.lawId]);
 
   // Esc: 펼친 장을 모두 접는다.
   useEffect(() => {

@@ -10,6 +10,11 @@
   align-items: start;
 }
 
+/* 큰 그림 + 선택 없음: 패널을 빼고 한 열로. 그림은 ResizeObserver로 폭을 다시 맞춘다. */
+.layout[data-panel="hidden"] {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 /* The board scrolls inside .main (not the page) so column heads can stick
    inside the horizontal scroll container. */
 .main {
