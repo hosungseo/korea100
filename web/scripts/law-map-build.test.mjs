@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { buildLawMap, extractArticleLabels, lawUrl } from "./lib/law-map-build.mjs";
+import { buildLawMap, extractArticleLabels, lawUrl, ordinanceSearchUrl } from "./lib/law-map-build.mjs";
 import { parseLsDelegated, parseLsStmd } from "./lib/law-map-parsers.mjs";
 import { DELEGATED_XML, STMD_XML } from "./law-map-fixtures.mjs";
 
@@ -65,6 +65,8 @@ test("buildLawMap lays out lanes in tier order and ids articles by lane", () => 
   assert.equal(map.lanes[4].kind, "훈령");
   assert.equal(map.lanes[7].name, "건축물 안전영향평가 세부기준"); // lsDelegated에만 있는 행정규칙이 추가됨
   assert.equal(map.lanes[8].collapsed.count, 3);
+  assert.equal(map.lanes[8].officialUrl, ordinanceSearchUrl("건축법"));
+  assert.equal(ordinanceSearchUrl("건축법"), "https://www.law.go.kr/LSW/ordinSc.do?menuId=3&query=%EA%B1%B4%EC%B6%95%EB%B2%95");
   assert.equal(map.articles.find((a) => a.id === "D1:제3조의3").officialUrl, "https://www.law.go.kr/법령/건축법시행령/제3조의3");
   assert.equal(map.name, "건축법");
   assert.equal(map.lawId, "001823");
@@ -76,6 +78,9 @@ test("buildLawMap resolves edges, collapses ordinances, keeps cites without boxe
   const byKind = Object.groupBy(map.edges, (e) => e.kind);
   assert.equal(byKind.decree.length, 3);
   assert.deepEqual([byKind.decree[0].from, byKind.decree[0].to, byKind.decree[0].fromClause], ["L1:제2조", "D1:제3조의3", "제2조제1항제11호"]);
+  assert.equal(byKind.decree[0].targetTitle, "지형적 조건 등에 따른 도로의 구조와 너비");
+  assert.equal(byKind.rule[0].targetTitle, "설계도서의 범위"); // 미해결이어도 제목은 둔다
+  assert.ok(!("targetTitle" in byKind.cites[0]));
   // 시행규칙 제1조의2는 조문 목록에 없다 → 미해결
   assert.equal(byKind.rule.length, 2);
   assert.equal(byKind.rule[0].to, null);
@@ -92,9 +97,11 @@ test("buildLawMap resolves edges, collapses ordinances, keeps cites without boxe
   assert.equal(map.stats.unresolved, 3);
   assert.deepEqual(map.stats.edgesByKind, { decree: 3, rule: 2, adminRule: 1, ordinance: 1, cites: 3 });
   assert.deepEqual(map.stats.articlesByTier, { statute: 4, decree: 2, rule: 2, adminRule: 0, ordinance: 0 });
-  assert.equal(report.unresolved.length, 3);
+  assert.equal(report.unresolved.length, map.stats.unresolved);
   assert.deepEqual(report.addedAdminRules, ["건축물 안전영향평가 세부기준"]);
   assert.equal(report.droppedReferences, 1);
+  assert.equal(report.selfReferences, 0);
+  assert.deepEqual(report.ambiguousSources, []);
   assert.ok(map.edges.every((e, i) => e.id === `e${i + 1}`));
   assert.ok(map.edges.every((e) => typeof e.targetName === "string" && e.targetName.length > 0));
 });
@@ -121,6 +128,99 @@ test("buildLawMap falls back to the only lane of a tier for header-less delegati
   const cite = fromArt4.find((e) => e.kind === "cites");
   assert.equal(cite.targetName, "녹색건축물 조성 지원법");
   assert.equal(cite.to, null);
+});
+
+test("buildLawMap reports each unresolved edge once even when the record repeats", () => {
+  const input = fixture();
+  const dup = input.laws[0].delegated.records.find((r) => r.kind === "시행규칙" && r.targetLabel === "제1조의2");
+  input.laws[0].delegated.records.push({ ...dup }, { ...dup });
+  const { map, report } = buildLawMap(input);
+  assert.equal(map.stats.unresolved, 3);
+  assert.equal(report.unresolved.length, 3);
+});
+
+test("buildLawMap merges admin-rule lanes by name when lsStmd and lsDelegated cite different serials", () => {
+  const input = fixture();
+  // lsStmd에 같은 고시가 다른 일련번호로 두 번 → 레인 하나
+  input.stmd.adminRules.push({ id: "x", serial: "2100000999999", name: "건축공사  감리세부기준", kind: "고시", effectiveOn: "2025-01-01" });
+  // lsDelegated가 또 다른 일련번호로 같은 고시를 가리킴 → 기존 레인 재사용, addedAdminRules에 없음
+  const admin = input.laws[0].delegated.records.find((r) => r.kind === "위임행정규칙");
+  input.laws[0].delegated.records.push({ ...admin, targetSerial: "2100000888888", targetName: "건축공사 감리세부기준" });
+  input.laws[0].delegated.records.push({ ...admin, targetSerial: "2100000888888", targetName: "건축공사 감리세부기준", fromClause: "제13조의2제3항" });
+  const { map, report } = buildLawMap(input);
+  const adminLanes = map.lanes.filter((l) => l.tier === "adminRule");
+  assert.deepEqual(adminLanes.map((l) => l.name), [
+    "건축행정시스템 운영규정", "건축공사 감리세부기준", "실내건축의 구조·시공방법 등에 관한 기준", "건축물 안전영향평가 세부기준",
+  ]);
+  const merged = map.edges.filter((e) => e.kind === "adminRule" && e.targetName === "건축공사 감리세부기준");
+  assert.equal(merged.length, 2);
+  assert.ok(merged.every((e) => e.to === "A2"));
+  assert.deepEqual(report.addedAdminRules, ["건축물 안전영향평가 세부기준"]);
+  assert.equal(map.stats.edgesByKind.adminRule, 3);
+});
+
+test("buildLawMap drops self-references (root law or the lane's own law) from cites and counts them", () => {
+  const input = fixture();
+  const cite = input.laws[0].delegated.records.find((r) => r.kind === "인용법령");
+  input.laws[0].delegated.records.push(
+    { ...cite, targetSerial: "273437", targetName: "건축법", targetLabel: "제11조", linkText: "「건축법」" },
+    { ...cite, targetSerial: null, targetName: "건축법", targetLabel: null, linkText: "이 법" },
+  );
+  input.laws[1].delegated.records.push(
+    { ...cite, from: { no: 3, branch: 3, label: "제3조의3", title: "도로" }, fromClause: null, targetName: "건축법 시행령", targetLabel: "제5조" },
+    { ...cite, from: { no: 3, branch: 3, label: "제3조의3", title: "도로" }, fromClause: null, targetName: "건축법", targetLabel: "제2조" },
+    { ...cite, from: { no: 3, branch: 3, label: "제3조의3", title: "도로" }, fromClause: null, targetName: "도로법", targetLabel: "제2조" },
+  );
+  const { map, report } = buildLawMap(input);
+  const cites = map.edges.filter((e) => e.kind === "cites");
+  assert.deepEqual(cites.map((e) => e.targetName), ["국토의 계획 및 이용에 관한 법률", "건설산업기본법", "녹색건축물 조성 지원법", "도로법"]);
+  assert.equal(report.selfReferences, 4);
+  assert.equal(map.stats.edgesByKind.cites, 4);
+});
+
+test("buildLawMap matches header-less rule delegations to the lane whose 법종구분 equals the link text", () => {
+  const input = fixture();
+  input.laws[3].info = { ...input.laws[3].info, kind: "행정안전부령" };
+  const headless = {
+    from: { no: 2, branch: null, label: "제2조", title: "정의" }, kind: "시행규칙", targetSerial: null, targetName: null,
+    targetLabel: "제3조", targetTitle: "건축허가 신청", fromClause: "제2조제3항", linkText: "행정안전부령", phrase: "행정안전부령으로 정하는",
+  };
+  input.laws[0].delegated.records.push(headless, { ...headless, targetLabel: "제9조", targetTitle: "없는 조문" });
+  const { map, report } = buildLawMap(input);
+  const hits = map.edges.filter((e) => e.fromClause === "제2조제3항");
+  assert.deepEqual(hits.map((e) => [e.to, e.targetName, e.targetLabel, e.unresolved ?? false]), [
+    ["R2:제3조", "건축법 시행규칙", "제3조", false],
+    [null, "건축법 시행규칙", "제9조", true],
+  ]);
+  assert.deepEqual(
+    report.unresolved.filter((u) => u.from === "L1:제2조" && u.kind === "rule").map((u) => [u.reason, u.targetLabel]),
+    [["article-missing", "제1조의2"], ["article-missing", "제9조"]],
+  );
+  // 제4조의 머리글 없는 국토교통부령 위임은 여전히 레인이 하나(R1)로 좁혀진다
+  const art4 = map.edges.find((e) => e.from === "L1:제4조" && e.kind === "rule");
+  assert.deepEqual([art4.to, art4.unresolved ?? false], [null, true]); // R1 제2조는 조문 목록에 없음 → article-missing
+  assert.equal(art4.targetName, "건축물대장의 기재 및 관리 등에 관한 규칙");
+});
+
+test("buildLawMap picks the branch article for ordinance delegations by matching the phrase against article text", () => {
+  const input = fixture();
+  input.laws[0].articles.push(
+    { no: 4, branch: 2, label: "제4조의2", title: "건축위원회의 건축 심의 등", chapter: "제1장 총칙", text: "제4조의2(건축위원회의 건축 심의 등) ① 심의를 받아야 한다. ⑤ 각 건축위원회의 조직ㆍ운영은 조례로 정한다." },
+    { no: 4, branch: 3, label: "제4조의3", title: "건축위원회 회의록의 공개", chapter: "제1장 총칙", text: "제4조의3(건축위원회 회의록의 공개) 공개한다." },
+  );
+  const ordinance = input.laws[0].delegated.records.find((r) => r.kind === "위임자치법규");
+  // 어느 조문 원문에도 없는 문장 → 기본 조문 유지 + ambiguousSources
+  input.laws[0].delegated.records.push({ ...ordinance, targetSerial: "1", targetName: "가평군 건축 조례", phrase: "⑥ 수수료는 조례로 정한다." });
+  const { map, report } = buildLawMap(input);
+  const ordinances = map.edges.filter((e) => e.kind === "ordinance");
+  // 픽스처의 조례 2건은 "·"(U+00B7) 문장이 제4조의2 원문("ㆍ")에만 있어 가지 조문으로 간다
+  assert.deepEqual(ordinances.map((e) => [e.from, e.to]), [["L1:제4조의2", "O1"], ["L1:제4조", "O1"]]);
+  assert.deepEqual(report.ambiguousSources, [{
+    from: "L1:제4조", kind: "ordinance", phrase: "⑥ 수수료는 조례로 정한다.",
+    candidates: ["L1:제4조", "L1:제4조의2", "L1:제4조의3"],
+  }]);
+  // 가지 조문이 없는 레인에서는 대조하지 않는다
+  assert.equal(buildLawMap(fixture()).report.ambiguousSources.length, 0);
 });
 
 test("buildLawMap maps institution citations to article ids and reports misses", () => {
