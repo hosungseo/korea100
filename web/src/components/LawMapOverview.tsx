@@ -91,6 +91,8 @@ export default function LawMapOverview({
   const [animate, setAnimate] = useState(() =>
     typeof window !== "undefined" && !window.matchMedia("(prefers-reduced-motion: reduce)").matches && !animatedOnce.has(map.lawId));
   const [ready, setReady] = useState(false);
+  // 포인터가 호버를 지원할 때만 선 강조를 건다(터치에서는 탭이 호버로 남아 전체가 흐려지는 일을 막는다).
+  const [canHover] = useState(() => typeof window !== "undefined" && window.matchMedia("(hover: hover)").matches);
 
   const headline = useMemo(() => buildOverviewHeadline(map), [map]);
   const chapterGroupsByLane = useMemo(() => {
@@ -122,14 +124,19 @@ export default function LawMapOverview({
     if (!size.w || !animate) return;
     let inner = 0;
     const outer = requestAnimationFrame(() => { inner = requestAnimationFrame(() => setReady(true)); });
-    animatedOnce.add(map.lawId);
-    const done = window.setTimeout(() => setAnimate(false), 900);
+    // 끝까지 보여 준 뒤에만 '한 번 했다'로 친다. 옛 #a= 링크처럼 한 프레임 만에 자세히 보기로 넘어가면 다음에 다시 보여 준다.
+    const done = window.setTimeout(() => { animatedOnce.add(map.lawId); setAnimate(false); }, 900);
     return () => { cancelAnimationFrame(outer); cancelAnimationFrame(inner); window.clearTimeout(done); };
   }, [size.w, animate, map.lawId]);
 
-  // Esc: 펼친 장을 모두 접는다.
+  // Esc: 펼친 장을 모두 접는다(입력란 안에서는 건드리지 않는다).
   useEffect(() => {
-    const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") setExpanded((prev) => (prev.size ? new Set() : prev)); };
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      const target = event.target as HTMLElement | null;
+      if (target && ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName)) return;
+      setExpanded((prev) => (prev.size ? new Set() : prev));
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
@@ -139,8 +146,9 @@ export default function LawMapOverview({
     const W = size.w;
     const colGap = W < 700 ? 12 : 28;
     const colW = (W - PAD_X * 2 - colGap * 4) / 5;
-    const avail = size.h - PAD_TOP - HEAD_H - PAD_BOTTOM;
     const top = PAD_TOP + HEAD_H + 6;
+    // 접힌 상태의 내용은 호스트 높이 안에 들어가야 한다(넘치면 보드에 스크롤바가 생긴다).
+    const avail = size.h - top - PAD_BOTTOM;
     const rectById = new Map<string, Rect>();
     const groupById = new Map<string, ChapterGroup>();
     const effectiveGroups: ChapterGroup[] = [];
@@ -188,9 +196,18 @@ export default function LawMapOverview({
           const head = groups.length === 1 && groups[0].isLane ? 0 : LANE_HEAD_H;
           return sum + head + groups.length * BLOCK_MIN + Math.max(0, groups.length - 1) * BLOCK_GAP;
         }, 0) + Math.max(0, lanes.length - 1) * LANE_GAP;
-        const laneMode = chapterModeH > avail && lanes.length > 1;
+        const overflow = chapterModeH > avail;
+        const laneMode = overflow && lanes.length > 1;
         const laneGap = laneMode ? 2 : LANE_GAP;
-        const blockMin = laneMode ? clamp(Math.floor((avail - (lanes.length - 1) * laneGap) / lanes.length), 10, BLOCK_MIN) : BLOCK_MIN;
+        // 안 들어가면 최소 높이를 줄인다. 레인 여러 개면 레인 블록 기준, 한 개(상법·민법처럼 장이 많은 법률)면 장 블록 기준.
+        let blockMin = BLOCK_MIN;
+        if (laneMode) {
+          blockMin = clamp(Math.floor((avail - (lanes.length - 1) * laneGap) / lanes.length), 10, BLOCK_MIN);
+        } else if (overflow) {
+          const groupCount = perLane.reduce((sum, groups) => sum + groups.length, 0);
+          const headH = perLane.reduce((sum, groups) => sum + (groups.length === 1 && groups[0].isLane ? 0 : LANE_HEAD_H), 0);
+          blockMin = clamp(Math.floor((avail - headH - (groupCount - 1) * BLOCK_GAP) / groupCount), 10, BLOCK_MIN);
+        }
 
         const items = lanes.map((lane, i) => {
           const chapterGroups = perLane[i];
@@ -200,7 +217,9 @@ export default function LawMapOverview({
             const groups = open
               ? chapterGroups
               : [{ id: laneGroupId, laneId: lane.id, title: lane.name, isLane: true, articleIds: (articlesByLane.get(lane.id) ?? []).map((a) => a.id) }];
-            return { lane, groups, showHead: open, headId: laneGroupId, headCollapsible: true };
+            // 장이 없는 레인은 펼쳐도 레인 블록(#lane) 하나가 그대로 머리 노릇을 하므로 머리글을 따로 두지 않는다.
+            const soleLaneBlock = chapterGroups.length === 1 && chapterGroups[0].isLane;
+            return { lane, groups, showHead: open && !soleLaneBlock, headId: laneGroupId, headCollapsible: true };
           }
           const showHead = !(chapterGroups.length === 1 && chapterGroups[0].isLane);
           return { lane, groups: chapterGroups, showHead, headId: `${lane.id}#lane`, headCollapsible: false };
@@ -289,6 +308,7 @@ export default function LawMapOverview({
 
   const onClick = (event: ReactMouseEvent<SVGSVGElement>) => {
     const id = nodeIdAt(event.target);
+    setHoverId(null); // 터치에서는 mouseleave가 오지 않으므로 탭할 때 호버 상태를 지운다.
     if (!id || !layout) return;
     if (layout.groupById.has(id) || id.endsWith("#lane")) { toggleGroup(id); return; }
     if (id === ADMIN_RULE_ALL) return;
@@ -315,14 +335,16 @@ export default function LawMapOverview({
 
   // 호버 강조는 React 밖에서: 선 하나하나를 다시 그리지 않고 <style> 한 장만 바꾼다.
   const hoverCss = useMemo(() => {
-    if (!hoverId) return "";
+    if (!hoverId || !canHover) return "";
+    // 펼친 레인의 머리글(#lane, 묶음이 아님)은 선이 닿지 않으므로 전체를 흐리게만 만들지 않는다.
+    if (hoverId.endsWith("#lane") && !layout?.groupById.has(hoverId)) return "";
     const sel = JSON.stringify(hoverId);
     return [
       `[data-ov-root] path[data-src=${sel}],[data-ov-root] path[data-dst=${sel}]{opacity:1}`,
       `[data-ov-root] path:not([data-src=${sel}]):not([data-dst=${sel}]){opacity:.1}`,
       `[data-ov-root] [data-node-id=${sel}]>rect{stroke:var(--color-ink);stroke-width:1.5}`,
     ].join("");
-  }, [hoverId]);
+  }, [hoverId, canHover, layout]);
 
   const tooltip = useMemo(
     () => (hoverId && layout ? describeHover(hoverId, layout, expanded, chapterGroupsByLane, articleById, laneById, edgesByNode, map.lanes) : null),

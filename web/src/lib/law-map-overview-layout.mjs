@@ -6,8 +6,10 @@ export const ADMIN_RULE_ALL = "adminRule:all";
 export const ADMIN_RULE_BOX_LIMIT = 12;
 
 /**
- * 한 레인의 조문을 장(章) 단위 묶음으로 나눈다. 문서 순서를 지키고, chapter가 null인 조문은
- * 레인당 하나의 "총칙·기타" 묶음에 모은다. 장이 하나도 없으면 레인 이름을 단 묶음 하나가 된다.
+ * 한 레인의 조문을 장(章) 단위 묶음으로 나눈다. 문서 순서대로 **이어지는 구간**마다 묶음 하나다.
+ * 민법·상법처럼 편(編)마다 "제1장 총칙"이 되풀이되면 각각 따로 묶여 제자리에 놓인다.
+ * chapter가 null인 조문도 이어지는 구간끼리만 "총칙·기타" 묶음으로 모은다.
+ * 장이 하나도 없으면 레인 이름을 단 묶음 하나가 된다.
  * @param {{ id: string, name: string }} lane
  * @param {{ id: string, chapter: string | null }[]} articles  이 레인의 조문(문서 순서)
  */
@@ -17,18 +19,16 @@ export function groupLaneArticles(lane, articles) {
     return [{ id: `${lane.id}#lane`, laneId: lane.id, title: lane.name, isLane: true, articleIds: articles.map((a) => a.id) }];
   }
   const groups = [];
-  const byKey = new Map();
   let chapterIndex = 0;
+  let miscIndex = 0;
+  let prevChapter;
   for (const a of articles) {
-    const key = a.chapter ?? MISC_CHAPTER;
-    let group = byKey.get(key);
-    if (!group) {
-      const id = a.chapter === null ? `${lane.id}#misc` : `${lane.id}#ch${chapterIndex++}`;
-      group = { id, laneId: lane.id, title: key, isLane: false, articleIds: [] };
-      byKey.set(key, group);
-      groups.push(group);
+    if (groups.length === 0 || a.chapter !== prevChapter) {
+      const id = a.chapter === null ? `${lane.id}#misc${miscIndex++}` : `${lane.id}#ch${chapterIndex++}`;
+      groups.push({ id, laneId: lane.id, title: a.chapter ?? MISC_CHAPTER, isLane: false, articleIds: [] });
     }
-    group.articleIds.push(a.id);
+    groups[groups.length - 1].articleIds.push(a.id);
+    prevChapter = a.chapter;
   }
   return groups;
 }
@@ -134,26 +134,35 @@ export const OVERVIEW_SUBTITLE = "법률 → 시행령 → 시행규칙 → 행�
 
 /**
  * 큰 그림 위에 놓는 한 문장. 사실(조문 수·위임 조문 수) + 판단(가장 많이 맡기는 장).
- * M = 시행령·시행규칙 위임선이 한 건이라도 있는 법률 조문 수(미해결 포함). 장이 없으면 마지막 절을 뺀다.
- * @param {{ name: string, lanes: { id: string, tier: string }[], articles: { id: string, laneId: string, chapter: string | null }[], edges: { from: string, kind: string }[] }} map
+ * M = 시행령·시행규칙 위임선이 한 건이라도 있는 법률 조문 수(미해결 포함).
+ * 장은 그림과 같은 묶음(이어지는 구간) 단위로 센다. 장이 없으면 마지막 절을 뺀다.
+ * @param {{ name: string, lanes: { id: string, name: string, tier: string }[], articles: { id: string, laneId: string, chapter: string | null }[], edges: { from: string, kind: string }[] }} map
  */
 export function buildOverviewHeadline(map) {
-  const statuteLanes = new Set(map.lanes.filter((l) => l.tier === "statute").map((l) => l.id));
-  const statuteArticles = map.articles.filter((a) => statuteLanes.has(a.laneId));
-  const chapterOf = new Map(statuteArticles.map((a) => [a.id, a.chapter]));
+  const statuteLanes = map.lanes.filter((l) => l.tier === "statute");
+  const statuteLaneIds = new Set(statuteLanes.map((l) => l.id));
+  const statuteArticles = map.articles.filter((a) => statuteLaneIds.has(a.laneId));
+  const groupOf = new Map();
+  for (const lane of statuteLanes) {
+    for (const g of groupLaneArticles(lane, statuteArticles.filter((a) => a.laneId === lane.id))) {
+      if (g.isLane) continue;
+      for (const id of g.articleIds) groupOf.set(id, g);
+    }
+  }
+  const statuteIds = new Set(statuteArticles.map((a) => a.id));
   const delegating = new Set();
-  const perChapter = new Map();
+  const perGroup = new Map();
   for (const e of map.edges) {
     if (e.kind !== "decree" && e.kind !== "rule") continue;
-    if (!chapterOf.has(e.from)) continue;
+    if (!statuteIds.has(e.from)) continue;
     delegating.add(e.from);
-    const chapter = chapterOf.get(e.from);
-    if (chapter !== null) perChapter.set(chapter, (perChapter.get(chapter) ?? 0) + 1);
+    const group = groupOf.get(e.from);
+    if (group && group.title !== MISC_CHAPTER) perGroup.set(group, (perGroup.get(group) ?? 0) + 1);
   }
   let topChapter = null;
   let topCount = 0;
-  for (const [chapter, count] of perChapter) {
-    if (count > topCount) { topChapter = chapter; topCount = count; }
+  for (const [group, count] of perGroup) {
+    if (count > topCount) { topChapter = group.title; topCount = count; }
   }
   const head = `「${map.name}」 조문 ${statuteArticles.length}개 중 ${delegating.size}개가 시행령·시행규칙에 세부를 맡기고`;
   const title = topChapter ? `${head}, 가장 많이 맡기는 장은 「${topChapter}」입니다.` : `${head} 있습니다.`;

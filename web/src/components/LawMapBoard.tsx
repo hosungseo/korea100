@@ -31,10 +31,15 @@ interface Wire {
 
 /** 조문이 이 수를 넘는 법은 큰 그림으로 연다. 그 아래는 카드 목록이 한눈에 들어오므로 자세히 보기. */
 const OVERVIEW_THRESHOLD = 150;
+/** 이보다 좁은 창은 기본 보기를 자세히로 둔다(큰 그림 토글은 그대로 쓸 수 있다). */
+const NARROW_WIDTH = 700;
 
 export default function LawMapBoard({ map, textUrl }: Props) {
-  const defaultView: LawMapView = map.articles.length > OVERVIEW_THRESHOLD ? "overview" : "detail";
-  const [view, setView] = useState<LawMapView>(defaultView);
+  const byCountDefault: LawMapView = map.articles.length > OVERVIEW_THRESHOLD ? "overview" : "detail";
+  // 좁은 화면(모바일)은 큰 그림이 읽히지 않으므로 자세히가 기본. 서버에서는 폭을 모르니 마운트 뒤 효과에서 정한다.
+  const [narrow, setNarrow] = useState(false);
+  const defaultView: LawMapView = narrow ? "detail" : byCountDefault;
+  const [view, setView] = useState<LawMapView>(byCountDefault);
   const [selected, setSelected] = useState<string | null>(null);
   const [hover, setHover] = useState<string | null>(null);
   const [routeMode, setRouteMode] = useState(false);
@@ -122,9 +127,11 @@ export default function LawMapBoard({ map, textUrl }: Props) {
   // 보기(v=)는 바로 반영한다. a=·route=만 있는 옛 링크는 자세히 보기로 연다.
   useEffect(() => {
     const state = parseLawMapHash(window.location.hash);
-    if (!state.view && !state.route && !state.article) return;
+    const isNarrow = window.innerWidth < NARROW_WIDTH;
+    if (!isNarrow && !state.view && !state.route && !state.article) return;
     const frame = requestAnimationFrame(() => {
-      setView(state.view ?? "detail");
+      if (isNarrow) setNarrow(true);
+      setView(state.view ?? (state.route || state.article || isNarrow ? "detail" : byCountDefault));
       if (state.route && isNode(state.route[0]) && isNode(state.route[1])) {
         const found = findRoute(map.edges, state.route[0], state.route[1]);
         setRouteMode(true);
@@ -139,7 +146,7 @@ export default function LawMapBoard({ map, textUrl }: Props) {
       }
     });
     return () => cancelAnimationFrame(frame);
-  }, [map.edges, isNode, scrollTo]);
+  }, [map.edges, isNode, scrollTo, byCountDefault]);
 
   // 해시 기록. 경로는 BFS가 실제로 찾은 양 끝점으로 기록한다(selected와 무관).
   // 보기는 선택·경로가 있거나 기본 보기와 다를 때만 적어, 처음 연 페이지의 주소는 그대로 둔다.
@@ -230,8 +237,14 @@ export default function LawMapBoard({ map, textUrl }: Props) {
   };
 
   const clearSelection = useCallback(() => {
+    pendingScrollRef.current = null;
     setSelected(null); setRouteFrom(null); setRoute(null); setRouteMiss(false);
   }, []);
+
+  // 선택이 사라지면 밀려 있던 스크롤도 버린다(나중에 자세히로 넘어갈 때 엉뚱한 곳으로 가지 않게).
+  useEffect(() => {
+    if (selected === null) pendingScrollRef.current = null;
+  }, [selected]);
 
   // 큰 그림에서 조문(또는 행정규칙·자치법규 상자)을 누르면 자세히 보기로 넘어가 그 노드를 연다.
   const pickFromOverview = useCallback((id: string) => {

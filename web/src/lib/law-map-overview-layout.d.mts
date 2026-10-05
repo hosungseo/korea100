@@ -44,5 +44,5 @@ export interface OverviewHeadline {
   topChapter: string | null;
 }
 export function buildOverviewHeadline(
-  map: { name: string; lanes: Pick<Lane, "id" | "tier">[]; articles: { id: string; laneId: string; chapter: string | null }[]; edges: Pick<Edge, "from" | "kind">[] },
+  map: { name: string; lanes: Pick<Lane, "id" | "name" | "tier">[]; articles: { id: string; laneId: string; chapter: string | null }[]; edges: Pick<Edge, "from" | "kind">[] },
 ): OverviewHeadline;

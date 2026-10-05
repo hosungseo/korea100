@@ -13,15 +13,29 @@ const articles = [
   { id: "L1:제5조", chapter: null },
 ];
 
-test("groups articles by chapter in document order, null chapters into one misc group", () => {
+test("groups articles by contiguous chapter runs; null-chapter runs become separate misc groups", () => {
   const groups = groupLaneArticles(lane, articles);
-  assert.deepEqual(groups.map((g) => [g.id, g.title, g.articleIds.length]), [
-    ["L1#misc", MISC_CHAPTER, 2],
-    ["L1#ch0", "제1장 총칙", 2],
-    ["L1#ch1", "제2장 건축", 1],
+  assert.deepEqual(groups.map((g) => [g.id, g.title, g.articleIds]), [
+    ["L1#misc0", MISC_CHAPTER, ["L1:제1조"]],
+    ["L1#ch0", "제1장 총칙", ["L1:제2조", "L1:제3조"]],
+    ["L1#ch1", "제2장 건축", ["L1:제4조"]],
+    ["L1#misc1", MISC_CHAPTER, ["L1:제5조"]],
   ]);
-  assert.deepEqual(groups[0].articleIds, ["L1:제1조", "L1:제5조"]);
-  assert.equal(groups[0].isLane, false);
+  assert.ok(groups.every((g) => g.isLane === false));
+});
+
+test("a repeated chapter title under another 편 is a separate group kept in document order (민법·상법)", () => {
+  const groups = groupLaneArticles({ id: "L1", name: "민법" }, [
+    { id: "L1:제1조", chapter: "제1장 총칙" },
+    { id: "L1:제2조", chapter: "제2장 인" },
+    { id: "L1:제3조", chapter: "제1장 총칙" },
+    { id: "L1:제4조", chapter: "제1장 총칙" },
+  ]);
+  assert.deepEqual(groups.map((g) => [g.id, g.title, g.articleIds.length]), [
+    ["L1#ch0", "제1장 총칙", 1],
+    ["L1#ch1", "제2장 인", 1],
+    ["L1#ch2", "제1장 총칙", 2],
+  ]);
 });
 
 test("a lane without chapters becomes one lane-named group", () => {
@@ -108,7 +122,7 @@ test("distributeHeights falls back to minimums when nothing fits and respects ma
 test("buildOverviewHeadline counts delegating statute articles and names the busiest chapter", () => {
   const map = {
     name: "건축법",
-    lanes: [{ id: "L1", tier: "statute" }, { id: "D1", tier: "decree" }],
+    lanes: [{ id: "L1", name: "건축법", tier: "statute" }, { id: "D1", name: "건축법 시행령", tier: "decree" }],
     articles: [
       { id: "L1:제1조", laneId: "L1", chapter: "제1장 총칙" },
       { id: "L1:제2조", laneId: "L1", chapter: "제1장 총칙" },
@@ -130,10 +144,30 @@ test("buildOverviewHeadline counts delegating statute articles and names the bus
   assert.ok(h.subtitle.includes("선 굵기 = 위임 건수"));
 });
 
+test("buildOverviewHeadline counts the busiest chapter per contiguous run, not per repeated title", () => {
+  const map = {
+    name: "민법",
+    lanes: [{ id: "L1", name: "민법", tier: "statute" }],
+    articles: [
+      { id: "L1:제1조", laneId: "L1", chapter: "제1장 총칙" },
+      { id: "L1:제2조", laneId: "L1", chapter: "제2장 인" },
+      { id: "L1:제3조", laneId: "L1", chapter: "제1장 총칙" },
+    ],
+    // 두 "제1장 총칙"은 합치면 2건이지만 따로 세면 각 1건 → 제2장 인(2건)이 가장 많다.
+    edges: [
+      { from: "L1:제1조", kind: "decree" },
+      { from: "L1:제3조", kind: "decree" },
+      { from: "L1:제2조", kind: "decree" },
+      { from: "L1:제2조", kind: "rule" },
+    ],
+  };
+  assert.equal(buildOverviewHeadline(map).topChapter, "제2장 인");
+});
+
 test("buildOverviewHeadline drops the chapter clause when the statute has no chapters", () => {
   const map = {
     name: "짧은 법",
-    lanes: [{ id: "L1", tier: "statute" }],
+    lanes: [{ id: "L1", name: "짧은 법", tier: "statute" }],
     articles: [{ id: "L1:제1조", laneId: "L1", chapter: null }],
     edges: [{ from: "L1:제1조", kind: "decree" }],
   };
