@@ -22,12 +22,10 @@ interface Props {
 
 // 화면 맞춤 상수. 레이아웃은 참조 축척(px)으로 계산되고 viewBox로 보드에 맞춘다.
 const PAD = 8;               // 그림 둘레 여백(화면 px)
-const TITLE_FONT = 10.5;     // 참조 축척에서 장 제목 글자 크기
-const MIN_TEXT_PX = 9;       // 제목이 이보다 작아지면 축소를 멈추고 가로 스크롤
-const MIN_SCALE = MIN_TEXT_PX / TITLE_FONT;
+const TITLE_FONT = 11.2;     // 참조 축척에서 장 제목 글자 크기(축척 바닥 0.85에서 9.5px)
+const MIN_SCALE = 0.85;      // 이보다 줄이지 않는다. 폭이 모자라면 가로, 높이가 모자라면 세로로 스크롤
 const MAX_SCALE = 1.25;      // 작은 법이 그림판을 다 채우며 커지지 않게
 const BADGE_H = 12;
-const RAIL = 10;             // 잎 더미 왼쪽 세로 레일이 쓰는 폭
 
 /** 이 페이지 세션에서 큰 그림이 한 번 나타난 법령. 보기 전환으로 다시 붙어도 등장 동작을 반복하지 않는다. */
 const animatedOnce = new Set<string>();
@@ -35,6 +33,7 @@ const r1 = (v: number) => Math.round(v * 10) / 10;
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 
 interface ConnectorPath { parentId: string; childId: string; d: string; badge: { x: number; y: number; text: string; w: number } | null }
+interface SpinePath { id: string; d: string }
 interface CrossPath { id: string; from: string; to: string; kind: EdgeKind; d: string; width: number }
 
 export default function LawMapOverview({ map, laneById, edgesByNode, kinds, selected, routeNodes, onPick }: Props) {
@@ -77,46 +76,39 @@ export default function LawMapOverview({ map, laneById, edgesByNode, kinds, sele
     return () => { cancelAnimationFrame(outer); cancelAnimationFrame(inner); window.clearTimeout(done); };
   }, [size.w, animate, map.lawId]);
 
-  // 축척: 폭과 높이에 맞춘다. 폭에 맞추면 제목이 9px 아래로 내려가는 넓은 그림은 어차피 가로로 스크롤하므로,
-  // 그때는 높이에 맞추되 참조 축척(1)을 넘지 않게 해 글자가 읽히는 크기로 둔다.
+  // 축척: 폭과 높이 둘 다에 맞추되 바닥(0.85) 아래로는 줄이지 않는다. 바닥에 걸리면 모자란 쪽으로 스크롤한다
+  // (기둥 폭이 고정이라 기둥 32개짜리 민법 같은 법만 가로로 넘친다).
   const railW = size.w < 700 ? 44 : 64;
   const scale = useMemo(() => {
     if (!size.w || !layout.width || !layout.height) return 1;
     const fitW = (size.w - railW - PAD * 2) / layout.width;
     const fitH = (size.h - PAD * 2) / layout.height;
-    if (fitW < MIN_SCALE) return clamp(fitH, MIN_SCALE, 1);
-    return clamp(Math.min(fitW, fitH), MIN_SCALE, MAX_SCALE);
+    return Math.max(MIN_SCALE, Math.min(fitW, fitH, MAX_SCALE));
   }, [size, layout.width, layout.height, railW]);
   const svgW = layout.width * scale + PAD * 2;
   const svgH = layout.height * scale + PAD * 2;
   const pad = PAD / scale;
 
+  // 기둥 척추선: 법률 노드 아래에서 선이 닿는 마지막 자손까지 한 줄.
+  const spines = useMemo<SpinePath[]>(() => layout.pillars
+    .filter((p) => p.spineY2 !== null)
+    .map((p) => ({ id: p.id, d: `M ${p.spineX} ${r1(p.spineY1)} V ${p.spineY2}` })), [layout]);
+
+  // 가지: 척추선에서 자식 노드 왼쪽 가장자리까지 짧은 가로선. 건수 배지는 가지 위에 얹는다.
   const connectors = useMemo<ConnectorPath[]>(() => {
     const out: ConnectorPath[] = [];
-    const nextRowY = (row: number) => layout.rows.find((r) => r.row > row)?.y ?? null;
     for (const c of layout.connectors) {
-      const p = nodeById.get(c.parentId);
       const k = nodeById.get(c.childId);
-      if (!p || !k) continue;
-      const px = r1(p.x + p.w / 2);
-      const pb = p.y + p.h;
-      const below = nextRowY(p.row);
-      const busY = r1(below === null ? pb + 20 : (pb + below) / 2);
+      const pillar = layout.pillars[k?.pillar ?? -1];
+      if (!k || !pillar) continue;
+      const cy = r1(k.y + k.h / 2);
       const visible = EDGE_ORDER.reduce((s, kind) => s + (kind !== "cites" && kinds.has(kind) ? c.byKind[kind] : 0), 0);
-      if (k.row === 3) {
-        // 잎 더미: 왼쪽 레일을 타고 내려와 상자 옆구리로 들어간다(쌓인 상자마다 제자리 가지).
-        const railX = r1(k.x - RAIL + 2);
-        const cy = r1(k.y + k.h / 2);
-        out.push({ parentId: c.parentId, childId: c.childId, d: `M ${px} ${r1(pb)} V ${busY} H ${railX} V ${cy} H ${r1(k.x)}`, badge: null });
-        continue;
-      }
-      const cx = r1(k.x + k.w / 2);
-      const text = visible ? String(visible) : "";
-      const w = text ? Math.ceil(measureText(text, 8.5)) + 8 : 0;
+      const text = visible && k.row < 3 ? String(visible) : "";
+      const w = text ? Math.ceil(measureText(text, 8)) + 6 : 0;
       out.push({
         parentId: c.parentId, childId: c.childId,
-        d: `M ${px} ${r1(pb)} V ${busY} H ${cx} V ${r1(k.y)}`,
-        badge: text ? { x: cx, y: r1(k.y - BADGE_H - 3), text, w } : null,
+        d: `M ${pillar.spineX} ${cy} H ${k.x}`,
+        badge: text ? { x: r1((pillar.spineX + k.x) / 2), y: r1(cy - BADGE_H / 2), text, w } : null,
       });
     }
     return out;
@@ -129,17 +121,16 @@ export default function LawMapOverview({ map, laneById, edgesByNode, kinds, sele
       const a = nodeById.get(e.from);
       const b = nodeById.get(e.to);
       if (!a || !b) continue;
-      const down = b.y >= a.y + a.h;
-      const dir = b.x + b.w / 2 >= a.x + a.w / 2 ? 1 : -1;
-      // 출발점은 연결선 줄기와 겹치지 않게 도착 방향으로 조금 비킨다.
-      const x1 = r1(a.x + a.w / 2 + dir * a.w * 0.22);
-      const y1 = r1(down ? a.y + a.h : a.y);
-      const x2 = r1(b.x + b.w / 2 - dir * b.w * 0.18);
-      const y2 = r1(down ? b.y : b.y + b.h);
-      const dy = Math.max(26, Math.abs(y2 - y1) * 0.55) * (down ? 1 : -1);
+      // 출발 노드의 오른쪽 가장자리에서 도착 노드의 왼쪽 가장자리로(도착이 왼쪽 기둥이면 반대로).
+      const forward = b.pillar > a.pillar || (b.pillar === a.pillar && b.x >= a.x);
+      const x1 = r1(forward ? a.x + a.w : a.x);
+      const y1 = r1(a.y + a.h / 2);
+      const x2 = r1(forward ? b.x : b.x + b.w);
+      const y2 = r1(b.y + b.h / 2);
+      const dx = Math.max(18, Math.abs(x2 - x1) * 0.4) * (forward ? 1 : -1);
       out.push({
         id: e.id, from: e.from, to: e.to, kind: e.kind, width: crossWidthFor(e.count),
-        d: `M ${x1} ${y1} C ${x1} ${r1(y1 + dy)}, ${x2} ${r1(y2 - dy)}, ${x2} ${y2}`,
+        d: `M ${x1} ${y1} C ${r1(x1 + dx)} ${y1}, ${r1(x2 - dx)} ${y2}, ${x2} ${y2}`,
       });
     }
     return out;
@@ -209,8 +200,8 @@ export default function LawMapOverview({ map, laneById, edgesByNode, kinds, sele
     const ordinanceEdges = layout.nodes.filter((x) => x.kind === "ordinances").reduce((s, x) => s + (x.meta.count ?? 0), 0);
     return { statute: n((x) => x.row === 0), decree: n((x) => x.row === 1), rule: n((x) => x.row === 2), adminLanes, ordinanceEdges, cross: layout.crossEdges.length };
   }, [layout, map.lanes]);
-  const ariaLabel = `${map.name} 법령 체계 구조도 — 위에서 아래로 법률 ${counts.statute}장, 시행령 ${counts.decree}, 시행규칙 ${counts.rule}, `
-    + `행정규칙 ${counts.adminLanes}건, 조례 위임 ${counts.ordinanceEdges}건. 자리가 받치는 장을 뜻하고, 다른 기둥으로 건너가는 위임 ${counts.cross}갈래는 색 선.`;
+  const ariaLabel = `${map.name} 법령 체계 구조도 — 법률 ${counts.statute}장이 기둥, 그 아래로 시행령 ${counts.decree}, 시행규칙 ${counts.rule}, `
+    + `행정규칙 ${counts.adminLanes}건, 조례 위임 ${counts.ordinanceEdges}건이 줄마다 쌓임. 기둥이 받치는 장을 뜻하고, 다른 기둥으로 건너가는 위임 ${counts.cross}갈래는 색 선.`;
 
   const rowEls = useMemo(() => layout.rows.map((row) => (
     <g key={row.row} className={styles.trRow} style={{ "--row-i": layout.rows.indexOf(row) } as CSSProperties}>
@@ -220,17 +211,22 @@ export default function LawMapOverview({ map, laneById, edgesByNode, kinds, sele
     </g>
   )), [layout, selectedNode, routeTargets]);
 
-  const connectorEls = useMemo(() => connectors.map((c) => (
-    <g key={`${c.parentId}>${c.childId}`} className={styles.trConn} data-parent={c.parentId} data-child={c.childId}>
-      <path d={c.d} />
-      {c.badge && (
-        <g className={styles.trBadge}>
-          <rect x={r1(c.badge.x - c.badge.w / 2)} y={c.badge.y} width={c.badge.w} height={BADGE_H} rx={3} />
-          <text x={c.badge.x} y={c.badge.y + BADGE_H - 3} textAnchor="middle">{c.badge.text}</text>
+  const connectorEls = useMemo(() => (
+    <>
+      {spines.map((sp) => <path key={sp.id} className={styles.trSpine} d={sp.d} />)}
+      {connectors.map((c) => (
+        <g key={`${c.parentId}>${c.childId}`} className={styles.trConn} data-parent={c.parentId} data-child={c.childId}>
+          <path d={c.d} />
+          {c.badge && (
+            <g className={styles.trBadge}>
+              <rect x={r1(c.badge.x - c.badge.w / 2)} y={c.badge.y} width={c.badge.w} height={BADGE_H} rx={3} />
+              <text x={c.badge.x} y={c.badge.y + BADGE_H - 3} textAnchor="middle">{c.badge.text}</text>
+            </g>
+          )}
         </g>
-      )}
-    </g>
-  )), [connectors]);
+      ))}
+    </>
+  ), [spines, connectors]);
 
   const crossEls = useMemo(() => crossPaths.map((e) => (
     <path
@@ -250,7 +246,7 @@ export default function LawMapOverview({ map, laneById, edgesByNode, kinds, sele
           <>
             <div className={styles.trRail} style={{ width: railW, height: svgH }} aria-hidden>
               {layout.rows.map((row) => (
-                <span key={row.row} style={{ top: PAD + (row.y + row.h / 2) * scale }}>{row.label}</span>
+                <span key={row.row} style={{ top: PAD + (row.y + row.h / 2) * scale }}>{row.label.replace("·", "·\n")}</span>
               ))}
             </div>
             <svg
@@ -327,7 +323,8 @@ function pickTarget(node: TreeNode): string | null {
 function NodeView({ node, selected, onRoute }: { node: TreeNode; selected: boolean; onRoute: boolean }) {
   const { x, y, w, h } = node;
   const leaf = node.row === 3;
-  const inner = w - 12;
+  // 윗줄 왼쪽: 법률은 장 번호(굵게), 시행령·시행규칙 장은 레인 이름, 레인 묶음은 법종구분, 요약 상자는 접힌 첫 장 이름.
+  // 윗줄 오른쪽: 조문 N. 아랫줄: 제목(요약 상자는 "시행령 N장").
   let top: string | null = null;
   let main: string;
   let topBold = false;
@@ -344,8 +341,8 @@ function NodeView({ node, selected, onRoute }: { node: TreeNode; selected: boole
   } else {
     main = node.label;
   }
-  // 윗줄이 없으면 제목을 가운데 높이에 둔다.
-  const mainY = leaf ? y + h / 2 + 3.6 : top ? y + 29 : y + 24;
+  const subW = node.sub && !leaf ? measureText(node.sub, 8.5) + 8 : 0;
+  const inner = w - 12;
   return (
     <g
       className={leaf ? styles.trLeaf : styles.trNode}
@@ -357,11 +354,15 @@ function NodeView({ node, selected, onRoute }: { node: TreeNode; selected: boole
       data-route={onRoute || undefined}
     >
       <rect x={x} y={y} width={w} height={h} rx={leaf ? 3 : 4} />
-      {!leaf && top && (
-        <text className={topBold ? styles.trTopStrong : styles.trTop} x={x + 6} y={y + 14}>{fitLabel(top, inner, topBold ? 10 : 8.5)}</text>
+      {leaf ? (
+        <text className={styles.trMain} x={x + 6} y={r1(y + h / 2 + 3.6)} fontSize={9.5}>{fitLabel(main, inner, 9.5)}</text>
+      ) : (
+        <>
+          {top && <text className={topBold ? styles.trTopStrong : styles.trTop} x={x + 6} y={y + 14}>{fitLabel(top, inner - subW, topBold ? 10 : 8.5)}</text>}
+          {node.sub && <text className={styles.trSub} x={x + w - 6} y={y + 14} textAnchor="end">{node.sub}</text>}
+          <text className={styles.trMain} x={x + 6} y={r1(y + h - 12)} fontSize={TITLE_FONT}>{fitLabel(main, inner, TITLE_FONT)}</text>
+        </>
       )}
-      <text className={styles.trMain} x={x + 6} y={r1(mainY)} fontSize={leaf ? 9.5 : TITLE_FONT}>{fitLabel(main, inner, leaf ? 9.5 : TITLE_FONT)}</text>
-      {!leaf && node.sub && <text className={styles.trSub} x={x + w - 6} y={y + h - 7} textAnchor="end">{node.sub}</text>}
     </g>
   );
 }

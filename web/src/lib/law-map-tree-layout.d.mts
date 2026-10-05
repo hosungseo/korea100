@@ -5,17 +5,13 @@ export const TOOLTIP_LIST_MAX: number;
 export const ROW_LABELS: string[];
 
 export interface TreeOptions {
-  rowGap: number;
-  nodeMinW: number;
-  nodeMaxW: number;
-  leafMinW: number;
-  leafMaxW: number;
+  pillarW: number;
+  pillarGap: number;
+  gutter: number;
   nodeH: number;
   leafH: number;
-  leafStackGap: number;
-  siblingGap: number;
-  treeGap: number;
-  widthK: number;
+  stackGap: number;
+  rowGap: number;
   collapseAbove: number;
 }
 export const TREE_DEFAULTS: TreeOptions;
@@ -45,6 +41,8 @@ export interface TreeNodeMeta {
 export interface TreeNode {
   id: string;
   row: number;
+  /** 기둥(법률 장) 번호 */
+  pillar: number;
   x: number;
   y: number;
   w: number;
@@ -83,6 +81,17 @@ export interface TreeRow {
   label: string;
 }
 
+export interface TreePillar {
+  /** 법률 장 노드 id */
+  id: string;
+  index: number;
+  x: number;
+  spineX: number;
+  spineY1: number;
+  /** 선이 닿는 마지막 자손의 가운데 높이. 자손이 없거나 모두 고아면 null */
+  spineY2: number | null;
+}
+
 export interface TreeLayout {
   nodes: TreeNode[];
   connectors: TreeConnector[];
@@ -90,6 +99,7 @@ export interface TreeLayout {
   /** 조문·레인 id → 그려지는 노드 id */
   nodeOf: Map<string, string>;
   rows: TreeRow[];
+  pillars: TreePillar[];
   width: number;
   height: number;
   headline: OverviewHeadline;
@@ -101,19 +111,14 @@ export interface ParentCandidate {
   order: number;
 }
 
-export function nodeWidthFor(count: number, minW: number, maxW: number, k: number): number;
+export function stackHeight(count: number, nodeH: number, gap: number): number;
+export function rowHeights(pillarCounts: Map<number, number>[], nodeHOf: (row: number) => number, gap: number, rowCount?: number): number[];
 export function pickParent(candidates: ParentCandidate[]): string | null;
 export function orphanParentIndex(index: number, total: number, parentCount: number): number;
 export function collapseChildren<T extends { orphan: boolean; order: number }>(
   children: T[],
   collapseAbove: number,
 ): { kept: T[]; connected: T[] | null; orphans: T[] | null };
-export function layoutSubtrees(
-  roots: string[],
-  childrenOf: Map<string, string[]>,
-  widthOf: Map<string, number>,
-  opt: { siblingGap: number; treeGap: number },
-): { xOf: Map<string, number>; subtreeW: Map<string, number>; width: number };
 export function splitChapter(title: string): { no: string | null; rest: string };
 export function listNames(names: string[], max?: number): { items: string[]; more: number };
 export function buildTreeLayout(

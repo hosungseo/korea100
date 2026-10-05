@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
-  buildTreeLayout, collapseChildren, layoutSubtrees, nodeWidthFor, orphanParentIndex, pickParent, splitChapter, listNames,
+  TREE_DEFAULTS, buildTreeLayout, collapseChildren, listNames, orphanParentIndex, pickParent, rowHeights, splitChapter, stackHeight,
 } from "../src/lib/law-map-tree-layout.mjs";
 
 const lane = (id, tier, name, extra = {}) => ({ id, tier, name, kind: tier, ...extra });
@@ -69,30 +69,21 @@ test("collapseChildren keeps up to collapseAbove connected children and folds or
   const big = collapseChildren([...kids(5, false), ...kids(3, true)], 4);
   assert.equal(big.kept.length, 0);
   assert.equal(big.connected.length, 5);
+  // 기본값 6: 여섯 개까지는 그대로 쌓고 일곱 개부터 접는다
+  assert.equal(collapseChildren(kids(6, false), TREE_DEFAULTS.collapseAbove).connected, null);
+  assert.equal(collapseChildren(kids(7, false), TREE_DEFAULTS.collapseAbove).connected.length, 7);
   assert.equal(big.orphans.length, 3);
   const mixed = collapseChildren([...kids(2, false), ...kids(2, true)], 4);
   assert.deepEqual(mixed.kept.map((k) => k.id), ["c0", "c1"]);
   assert.equal(mixed.orphans.length, 2);
 });
 
-test("layoutSubtrees: subtree width is the wider of node and children; parent is centered over children", () => {
-  const childrenOf = new Map([["p", ["a", "b"]], ["q", ["c"]]]);
-  const widthOf = new Map([["p", 50], ["a", 100], ["b", 100], ["q", 120], ["c", 40]]);
-  const { xOf, subtreeW, width } = layoutSubtrees(["p", "q"], childrenOf, widthOf, { siblingGap: 10, treeGap: 20 });
-  assert.equal(subtreeW.get("p"), 210);
-  assert.equal(xOf.get("a"), 0);
-  assert.equal(xOf.get("b"), 110);
-  assert.equal(xOf.get("p"), 80);                   // (210 - 50) / 2
-  assert.equal(subtreeW.get("q"), 120);             // node wider than its child
-  assert.equal(xOf.get("q"), 230);
-  assert.equal(xOf.get("c"), 230 + 40);             // child centered under the parent
-  assert.equal(width, 350);
-});
-
-test("nodeWidthFor grows with the square root and is clamped", () => {
-  assert.equal(nodeWidthFor(0, 96, 200, 28), 96);
-  assert.equal(nodeWidthFor(25, 96, 200, 28), 140);
-  assert.equal(nodeWidthFor(400, 96, 200, 28), 200);
+test("stackHeight and rowHeights: a row is as tall as its tallest pillar stack; empty rows are 0", () => {
+  assert.equal(stackHeight(0, 44, 6), 0);
+  assert.equal(stackHeight(1, 44, 6), 44);
+  assert.equal(stackHeight(3, 44, 6), 144);
+  const counts = [new Map([[0, 1], [1, 1], [2, 3], [3, 0]]), new Map([[0, 1], [1, 2], [2, 0], [3, 4]])];
+  assert.deepEqual(rowHeights(counts, (row) => (row === 3 ? 26 : 44), 6), [44, 94, 144, 122]);
 });
 
 test("splitChapter and listNames", () => {
@@ -139,32 +130,56 @@ test("buildTreeLayout: connectors carry per-kind counts and non-parent delegatio
   assert.deepEqual(cross, ["L1#ch0>D1#ch1>decree×1", "L1#ch1>R1#lane>rule×1", "L1#ch1>adm:R1#lane>adminRule×1"]);
 });
 
-test("buildTreeLayout: geometry — rows top-down, parent centered over children, no overlap among siblings", () => {
+test("buildTreeLayout: geometry — fixed-width pillars, children stacked top-down inside the parent's pillar, shared row heights", () => {
   const L = buildTreeLayout(sampleMap());
   const byId = new Map(L.nodes.map((n) => [n.id, n]));
-  const rowsY = L.rows.map((r) => r.y);
-  assert.deepEqual([...rowsY].sort((a, b) => a - b), rowsY);
-  assert.equal(L.rows.length, 4);
+  const { pillarW, pillarGap, gutter, nodeH, leafH, stackGap, rowGap } = TREE_DEFAULTS;
   for (const n of L.nodes) assert.ok([n.x, n.y, n.w, n.h].every(Number.isFinite), `finite geometry for ${n.id}`);
-  // 법률 제2장의 자식: 시행령 제2장(줄 1) + 고아 행정규칙 상자(줄 3, 상대 위치로 붙음). 부모는 그 전체 폭의 가운데.
-  const p = byId.get("L1#ch1");
-  const kids = L.nodes.filter((n) => n.parentId === "L1#ch1");
-  assert.deepEqual(kids.map((k) => k.id).sort(), ["D1#ch1", "adm:L1#ch1:orphan"]);
-  const left = Math.min(...kids.map((k) => k.x));
-  const right = Math.max(...kids.map((k) => k.x + k.w));
-  assert.ok(Math.abs((p.x + p.w / 2) - (left + right) / 2) < 0.2, "parent centered over all of its children");
-  // 자식이 하나뿐인 기둥은 부모와 자식의 가운데가 같다
-  const q = byId.get("L1#ch2");
-  const qKid = byId.get("D1#ch2");
-  assert.ok(Math.abs((q.x + q.w / 2) - (qKid.x + qKid.w / 2)) < 0.2);
+  // 기둥 = 법률 장. 폭은 고정, 자리는 번호 × (폭 + 간격)
+  assert.equal(L.width, 3 * pillarW + 2 * pillarGap);
   const row0 = L.nodes.filter((n) => n.row === 0).sort((a, b) => a.x - b.x);
-  for (let i = 1; i < row0.length; i++) assert.ok(row0[i].x >= row0[i - 1].x + row0[i - 1].w, "statute pillars do not overlap");
-  assert.ok(L.width >= Math.max(...L.nodes.map((n) => n.x + n.w)) - 0.2);
-  assert.ok(L.height >= Math.max(...L.nodes.map((n) => n.y + n.h)) - 0.2);
-  // 잎 상자는 같은 부모 밑에서 세로로 쌓인다
+  assert.deepEqual(row0.map((n) => [n.id, n.x, n.w]), [["L1#ch0", 0, pillarW], ["L1#ch1", pillarW + pillarGap, pillarW], ["L1#ch2", 2 * (pillarW + pillarGap), pillarW]]);
+  // 자식은 부모의 기둥 안에 들여 쓴다. 시행규칙(부모 = 시행령 제2장)도 그 시행령의 기둥(법률 제2장)에 있다.
+  const d1 = byId.get("D1#ch1");
+  const r1 = byId.get("R1#lane");
+  assert.equal(d1.pillar, 1);
+  assert.equal(r1.pillar, 1);
+  assert.equal(d1.x, pillarW + pillarGap + gutter);
+  assert.equal(d1.w, pillarW - gutter);
+  assert.equal(r1.x, d1.x);
+  // 줄 높이는 모든 기둥에서 같고, 줄은 위에서 아래로. 줄 3(잎)은 기둥 1에 행정규칙(A1→R1) + 고아 행정규칙(A2) 두 개가 쌓인다.
+  assert.deepEqual(L.rows.map((r) => r.row), [0, 1, 2, 3]);
+  assert.equal(L.rows[1].y, nodeH + rowGap);
+  assert.equal(L.rows[1].h, nodeH);
+  assert.equal(L.rows[3].h, stackHeight(2, leafH, stackGap));
   const adm = byId.get("adm:R1#lane");
-  assert.equal(adm.row, 3);
+  const orphanAdm = byId.get("adm:L1#ch1:orphan");
+  assert.equal(adm.pillar, 1);
   assert.equal(adm.y, L.rows[3].y);
+  assert.equal(orphanAdm.y, L.rows[3].y + leafH + stackGap, "leaves stack in document order of their parents");
+  assert.equal(L.height, L.rows[3].y + L.rows[3].h);
+  // 척추선: 법률 노드 아래에서 선이 닿는 마지막 자손(여기선 행정규칙 상자)의 가운데까지. 고아뿐인 기둥 2는 없다.
+  const p1 = L.pillars[1];
+  assert.equal(p1.spineX, pillarW + pillarGap + gutter / 2);
+  assert.equal(p1.spineY1, nodeH);
+  assert.equal(p1.spineY2, adm.y + leafH / 2);
+  assert.equal(L.pillars[2].spineY2, null);
+});
+
+test("buildTreeLayout: a pillar's same-row children stack vertically in document order and widen no pillar", () => {
+  const m = sampleMap();
+  for (let i = 2; i <= 4; i++) {
+    m.lanes.push(lane(`D${i}`, "decree", `규정 ${i}`));
+    m.articles.push(art(`D${i}`, 1, null));
+    m.edges.push(edge(100 + i, "L1:제2조", `D${i}:제1조`, "decree"));
+  }
+  const L = buildTreeLayout(m);
+  const { pillarW, pillarGap, nodeH, stackGap } = TREE_DEFAULTS;
+  const stack = L.nodes.filter((n) => n.pillar === 0 && n.row === 1).sort((a, b) => a.y - b.y);
+  assert.deepEqual(stack.map((n) => n.id), ["D1#ch0", "D2#lane", "D3#lane", "D4#lane"]);
+  stack.forEach((n, i) => assert.equal(n.y, L.rows[1].y + i * (nodeH + stackGap)));
+  assert.equal(L.rows[1].h, stackHeight(4, nodeH, stackGap));
+  assert.equal(L.width, 3 * pillarW + 2 * pillarGap);
 });
 
 test("buildTreeLayout: collapse rule folds more than collapseAbove connected children into one summary that keeps its children", () => {
@@ -179,7 +194,7 @@ test("buildTreeLayout: collapse rule folds more than collapseAbove connected chi
   m.lanes.push(lane("R2", "rule", "규정 3 시행규칙"));
   m.articles.push(art("R2", 1, null));
   m.edges.push(edge(200, "D3:제1조", "R2:제1조", "rule"));
-  const L = buildTreeLayout(m, { collapseAbove: 4 });
+  const L = buildTreeLayout(m); // 기본 collapseAbove 6 → 7개는 접는다
   const byId = new Map(L.nodes.map((n) => [n.id, n]));
   const summary = L.nodes.find((n) => n.kind === "summary" && n.parentId === "L1#ch0");
   assert.ok(summary, "summary box exists under 법률 제1장");
@@ -205,7 +220,7 @@ test("buildTreeLayout: a tier with zero lanes yields no NaN and skips that row",
   for (const n of L.nodes) assert.ok([n.x, n.y, n.w, n.h].every(Number.isFinite), `finite geometry for ${n.id}`);
   assert.ok(Number.isFinite(L.width) && Number.isFinite(L.height));
   assert.deepEqual(L.rows.map((r) => r.row), [0, 1, 3]);
-  assert.equal(L.rows[2].y, L.rows[1].y + L.rows[1].h + 52);
+  assert.equal(L.rows[2].y, L.rows[1].y + L.rows[1].h + TREE_DEFAULTS.rowGap);
 });
 
 test("buildTreeLayout: repeated chapter titles stay separate nodes in document order", () => {

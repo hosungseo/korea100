@@ -208,7 +208,7 @@
   line-height: 1.25;
   letter-spacing: 0.02em;
   color: var(--color-ink);
-  overflow-wrap: anywhere;
+  white-space: pre-line;
 }
 
 .overviewSvg {
@@ -237,7 +237,14 @@
   transition: opacity 320ms ease 520ms;
 }
 
-/* 부모→자식 연결선: 중립 회색 꺾은선. 건너가는 위임선만 색을 쓴다. */
+/* 기둥 척추선과 부모→자식 가지: 중립 회색. 건너가는 위임선만 색을 쓴다. */
+.trSpine {
+  fill: none;
+  stroke: var(--color-border-strong);
+  stroke-width: 1.25;
+  pointer-events: none;
+}
+
 .trConn {
   pointer-events: none;
   transition: opacity var(--duration-state);
@@ -258,7 +265,7 @@
 
 .trBadge text {
   font-family: var(--font-mono);
-  font-size: 8.5px;
+  font-size: 8px;
   fill: var(--color-ink);
 }
 
