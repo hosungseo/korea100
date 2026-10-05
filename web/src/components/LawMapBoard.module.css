@@ -144,13 +144,13 @@
   padding: var(--law-map-board-pad) 24px 48px;
 }
 
-/* 큰 그림은 보드 높이에 맞춰 그리므로 아래 여백을 줄인다. 펼친 장이 넘치면 세로로만 스크롤. */
+/* 큰 그림은 보드 높이에 맞춰 그리므로 아래 여백을 줄인다. 넘치는 폭은 그림 상자(.ovHost)가 스크롤한다. */
 .board[data-view="overview"] {
   padding: 12px 24px 12px;
-  overflow: hidden auto;
+  overflow: hidden;
 }
 
-/* ── 큰 그림 ──────────────────────────────────────── */
+/* ── 큰 그림(법령 체계 구조도) ─────────────────────── */
 .overviewWrap {
   position: relative;
   display: flex;
@@ -179,130 +179,177 @@
   color: var(--color-muted);
 }
 
+/* 그림 상자: 줄 이름 레일 + svg. 그림이 넓으면 가로로 스크롤하고 레일은 왼쪽에 붙어 있다. */
 .ovHost {
   position: relative;
+  display: flex;
   flex: 1;
+  align-items: flex-start;
   min-height: 0;
+  overflow: auto;
+}
+
+.trRail {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  flex: none;
+  background: var(--color-canvas);
+  box-shadow: 6px 0 6px -6px color-mix(in srgb, var(--color-ink) 12%, transparent);
+}
+
+.trRail span {
+  position: absolute;
+  left: 0;
+  right: 6px;
+  transform: translateY(-50%);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+  color: var(--color-ink);
+  white-space: pre-line;
 }
 
 .overviewSvg {
   display: block;
+  flex: none;
   overflow: visible;
   user-select: none;
 }
 
-.ovWires path {
-  opacity: 0.45;
+/* 첫 그리기: 줄이 위에서부터 차례로 나타나고, 그다음 선이 들어온다. 그 뒤로는 어떤 상태 변화에도 움직이지 않는다. */
+.overviewSvg[data-animate] .trRow {
+  opacity: 0;
+}
+
+.overviewSvg[data-animate][data-ready] .trRow {
+  opacity: 1;
+  transition: opacity 320ms ease calc(var(--row-i, 0) * 110ms);
+}
+
+.overviewSvg[data-animate] .trLines {
+  opacity: 0;
+}
+
+.overviewSvg[data-animate][data-ready] .trLines {
+  opacity: 1;
+  transition: opacity 320ms ease 520ms;
+}
+
+/* 기둥 척추선과 부모→자식 가지: 중립 회색. 건너가는 위임선만 색을 쓴다. */
+.trSpine {
+  fill: none;
+  stroke: var(--color-border-strong);
+  stroke-width: 1.25;
   pointer-events: none;
 }
 
-/* 첫 그리기: 열이 왼쪽부터 차례로 나타나고, 그다음 선이 들어온다. 그 뒤로는 어떤 상태 변화에도 움직이지 않는다. */
-.overviewSvg[data-animate] .ovCol {
-  opacity: 0;
+.trConn {
+  pointer-events: none;
+  transition: opacity var(--duration-state);
 }
 
-.overviewSvg[data-animate][data-ready] .ovCol {
-  opacity: 1;
-  transition: opacity 320ms ease calc(var(--col-i, 0) * 60ms);
+.trConn path {
+  fill: none;
+  stroke: var(--color-border-strong);
+  stroke-width: 1.25;
+  stroke-linejoin: round;
 }
 
-.overviewSvg[data-animate] .ovWires {
-  opacity: 0;
+.trBadge rect {
+  fill: var(--color-surface);
+  stroke: var(--color-border-strong);
+  stroke-width: 1;
 }
 
-.overviewSvg[data-animate][data-ready] .ovWires {
-  opacity: 1;
-  transition: opacity 300ms ease 380ms;
-}
-
-.ovTier {
-  font-size: 12px;
-  font-weight: 700;
+.trBadge text {
+  font-family: var(--font-mono);
+  font-size: 8px;
   fill: var(--color-ink);
 }
 
-.ovTierCount {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  fill: var(--color-muted);
+.trCross {
+  opacity: 0.45;
+  pointer-events: none;
+  transition: opacity var(--duration-state);
 }
 
-.ovTierRule {
-  stroke: var(--color-ink);
-  stroke-width: 2;
-}
-
-.ovLaneHead text {
-  font-size: 9.5px;
-  font-weight: 650;
-  letter-spacing: 0.03em;
-  fill: var(--color-muted);
-}
-
-.ovLaneHead[data-node-id] {
-  cursor: pointer;
-}
-
-.ovBlock rect,
-.ovBox rect {
+.trNode rect,
+.trLeaf rect {
   fill: var(--color-surface);
   stroke: var(--color-border);
   stroke-width: 1;
   transition: stroke var(--duration-state), fill var(--duration-state);
 }
 
-.ovBlock text,
-.ovBox text {
-  fill: var(--color-text);
-}
-
-.ovBlock[data-open] rect {
-  fill: var(--color-accent-soft);
-  stroke: var(--color-accent-dark);
-}
-
-.ovBlock[data-open] text {
-  fill: var(--color-accent-dark);
-  font-weight: 650;
-}
-
-.ovRow rect {
-  fill: var(--color-surface);
-  stroke: var(--color-border);
-  stroke-width: 0.5;
-}
-
-.ovRow text {
-  fill: var(--color-text);
-}
-
-.ovRow:hover rect {
-  fill: var(--color-surface-tint);
-}
-
-.ovCount {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  fill: var(--color-muted) !important;
-  font-weight: 400 !important;
-}
-
-.ovBlock[data-clickable],
-.ovBox[data-clickable],
-.ovRow[data-clickable] {
+.trNode,
+.trLeaf {
   cursor: pointer;
 }
 
-.ovBlock[data-selected] > rect,
-.ovBox[data-selected] > rect,
-.ovRow[data-selected] > rect {
+.trNode[data-tier="statute"] rect {
+  fill: var(--color-surface-tint);
+  stroke: var(--color-border-strong);
+}
+
+.trNode[data-kind="summary"] rect {
+  stroke-dasharray: none;
+  fill: var(--color-surface-muted);
+}
+
+/* 고아: 선이 없어 문서 위치로만 놓은 노드 */
+.trNode[data-orphan],
+.trLeaf[data-orphan] {
+  opacity: 0.6;
+}
+
+.trNode[data-orphan] rect,
+.trLeaf[data-orphan] rect {
+  stroke-dasharray: 3 2;
+}
+
+.trTopStrong {
+  font-size: 10px;
+  font-weight: 700;
+  fill: var(--color-ink);
+}
+
+.trTop {
+  font-size: 8.5px;
+  fill: var(--color-muted);
+}
+
+.trMain {
+  fill: var(--color-text);
+}
+
+.trNode[data-tier="statute"] .trMain {
+  font-weight: 600;
+}
+
+.trSub {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  fill: var(--color-muted);
+}
+
+.trLeaf[data-kind="adminRules"] rect {
+  stroke: color-mix(in srgb, #7c56c9 45%, var(--color-border));
+}
+
+.trLeaf[data-kind="ordinances"] rect {
+  stroke: color-mix(in srgb, #c78116 45%, var(--color-border));
+}
+
+.trNode[data-selected] > rect,
+.trLeaf[data-selected] > rect {
   stroke: var(--color-ink);
   stroke-width: 2;
 }
 
-.ovBlock[data-route] > rect,
-.ovBox[data-route] > rect,
-.ovRow[data-route] > rect {
+.trNode[data-route] > rect,
+.trLeaf[data-route] > rect {
   stroke: var(--color-accent-dark);
   stroke-width: 2;
 }
@@ -336,6 +383,14 @@
 .tooltipSub {
   color: color-mix(in srgb, var(--color-surface) 70%, transparent);
   font-size: 11px;
+}
+
+.tooltipList {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  font-size: 11px;
+  color: color-mix(in srgb, var(--color-surface) 85%, transparent);
 }
 
 .tooltipKinds {
@@ -686,6 +741,10 @@
 
   .ovTitle {
     font-size: 13.5px;
+  }
+
+  .trRail span {
+    font-size: 10px;
   }
 
   .canvas {

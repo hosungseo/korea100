@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
-  ADMIN_RULE_ALL, MISC_CHAPTER, aggregateEdges, buildNodeMap, buildOverviewHeadline, distributeHeights, fitLabel, groupLaneArticles, strokeWidthFor,
+  MISC_CHAPTER, aggregateEdges, buildOverviewHeadline, fitLabel, groupLaneArticles, strokeWidthFor,
 } from "../src/lib/law-map-overview-layout.mjs";
 
 const lane = { id: "L1", name: "건축법", tier: "statute" };
@@ -47,31 +47,10 @@ test("a lane without chapters becomes one lane-named group", () => {
   assert.deepEqual(groups[0].articleIds, ["R3:제1조", "R3:제2조"]);
 });
 
-test("node map sends collapsed articles to their group and expanded ones to themselves", () => {
-  const groups = groupLaneArticles(lane, articles);
-  const lanes = [lane, { id: "A1", tier: "adminRule" }, { id: "O1", tier: "ordinance" }];
-  const closed = buildNodeMap(groups, lanes, new Set());
-  assert.equal(closed.get("L1:제2조"), "L1#ch0");
-  assert.equal(closed.get("A1"), "A1");
-  assert.equal(closed.get("O1"), "O1");
-  const open = buildNodeMap(groups, lanes, new Set(["L1#ch0"]));
-  assert.equal(open.get("L1:제2조"), "L1:제2조");
-  assert.equal(open.get("L1:제4조"), "L1#ch1");
-});
-
-test("more than 12 admin-rule lanes collapse into one box", () => {
-  const lanes = Array.from({ length: 13 }, (_, i) => ({ id: `A${i + 1}`, tier: "adminRule" }));
-  const map = buildNodeMap([], lanes, new Set());
-  assert.equal(map.get("A1"), ADMIN_RULE_ALL);
-  assert.equal(map.get("A13"), ADMIN_RULE_ALL);
-  const few = buildNodeMap([], lanes.slice(0, 12), new Set());
-  assert.equal(few.get("A12"), "A12");
-});
-
 test("aggregates edges per (from, to, kind), skipping cites, hidden kinds and self loops", () => {
-  const groups = groupLaneArticles(lane, articles);
-  const lanes = [lane, { id: "A1", tier: "adminRule" }];
-  const nodeMap = buildNodeMap(groups, lanes, new Set());
+  const nodeMap = new Map();
+  for (const g of groupLaneArticles(lane, articles)) for (const id of g.articleIds) nodeMap.set(id, g.id);
+  nodeMap.set("A1", "A1");
   nodeMap.set("D1:제3조", "D1#ch0");
   nodeMap.set("D1:제4조", "D1#ch0");
   const edges = [
@@ -106,19 +85,6 @@ test("fitLabel keeps short text and truncates long text with an ellipsis", () =>
   assert.equal(fitLabel("건축", 5, 10), "");
 });
 
-test("distributeHeights fills the available height proportionally with a minimum", () => {
-  const heights = distributeHeights([10, 1, 30], 200, { min: 20, maxUnit: 100 });
-  assert.equal(heights[1], 20);
-  assert.ok(heights.every((h) => h >= 20));
-  assert.ok(Math.abs(heights.reduce((s, h) => s + h, 0) - 200) < 1e-6);
-  assert.ok(heights[2] > heights[0]);
-});
-
-test("distributeHeights falls back to minimums when nothing fits and respects maxUnit when sparse", () => {
-  assert.deepEqual(distributeHeights([5, 5, 5], 30, { min: 20, maxUnit: 100 }), [20, 20, 20]);
-  assert.deepEqual(distributeHeights([10, 20], 10000, { min: 20, maxUnit: 8 }), [80, 160]);
-});
-
 test("buildOverviewHeadline counts delegating statute articles and names the busiest chapter", () => {
   const map = {
     name: "건축법",
@@ -141,7 +107,7 @@ test("buildOverviewHeadline counts delegating statute articles and names the bus
   assert.equal(h.delegatingCount, 2);
   assert.equal(h.topChapter, "제1장 총칙");
   assert.equal(h.title, "「건축법」 조문 3개 중 2개가 시행령·시행규칙에 세부를 맡기고, 가장 많이 맡기는 장은 「제1장 총칙」입니다.");
-  assert.ok(h.subtitle.includes("선 굵기 = 위임 건수"));
+  assert.ok(h.subtitle.includes("자리 = 어느 장을 받치는가"));
 });
 
 test("buildOverviewHeadline counts the busiest chapter per contiguous run, not per repeated title", () => {

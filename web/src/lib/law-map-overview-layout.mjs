@@ -1,9 +1,7 @@
-// 큰 그림 모드의 순수 계산. 장(章) 묶음 만들기, 묶음 사이 위임선 집계, 선 굵기, 라벨 자르기.
-// 좌표 계산은 컴포넌트가 맡고, 여기는 DOM 없이 돌아가는 함수만 둔다.
+// 큰 그림의 공통 순수 계산. 장(章) 묶음 만들기, 묶음 사이 위임선 집계, 선 굵기, 라벨 자르기, 머리글.
+// 구조도 좌표는 law-map-tree-layout.mjs가 맡고, 여기는 DOM 없이 돌아가는 바탕 함수만 둔다.
 
 export const MISC_CHAPTER = "총칙·기타";
-export const ADMIN_RULE_ALL = "adminRule:all";
-export const ADMIN_RULE_BOX_LIMIT = 12;
 
 /**
  * 한 레인의 조문을 장(章) 단위 묶음으로 나눈다. 문서 순서대로 **이어지는 구간**마다 묶음 하나다.
@@ -34,30 +32,10 @@ export function groupLaneArticles(lane, articles) {
 }
 
 /**
- * 노드 id → 그림에 실제로 그려지는 노드 id. 접힌 장의 조문은 장 묶음으로, 펼친 장의 조문은 자기 자신으로,
- * 행정규칙 레인은 상자 수 상한을 넘으면 묶음 상자 하나로 간다.
- * @param {{ id: string, articleIds: string[] }[]} groups
- * @param {{ id: string, tier: string }[]} lanes
- * @param {Set<string>} expanded  펼친 장 묶음 id
- */
-export function buildNodeMap(groups, lanes, expanded) {
-  const map = new Map();
-  for (const g of groups) {
-    const open = expanded.has(g.id);
-    for (const id of g.articleIds) map.set(id, open ? id : g.id);
-  }
-  const adminLanes = lanes.filter((l) => l.tier === "adminRule");
-  const collapseAdmin = adminLanes.length > ADMIN_RULE_BOX_LIMIT;
-  for (const l of adminLanes) map.set(l.id, collapseAdmin ? ADMIN_RULE_ALL : l.id);
-  for (const l of lanes) if (l.tier === "ordinance") map.set(l.id, l.id);
-  return map;
-}
-
-/**
  * 위임선을 (출발 노드, 도착 노드, 종류) 단위로 합친다. to가 없는 인용선과 꺼진 종류는 뺀다.
  * 같은 묶음 안에서 도는 선(self loop)은 그릴 수 없으므로 뺀다.
  * @param {{ id: string, from: string, to: string | null, kind: string }[]} edges
- * @param {Map<string, string>} nodeMap
+ * @param {Map<string, string>} nodeMap  조문·레인 id → 그려지는 노드 id
  * @param {Set<string>} kinds  보이는 종류
  */
 export function aggregateEdges(edges, nodeMap, kinds) {
@@ -105,32 +83,7 @@ export function fitLabel(text, maxWidth, fontSize) {
   return out ? `${out}…` : "";
 }
 
-/**
- * 묶음 높이 배분. 조문 수에 비례하되 최소 높이를 보장하고, 가능하면 avail 안에 들어가게 단위를 줄인다.
- * 못 들어가면 전부 최소 높이(넘친 만큼은 스크롤).
- * @param {number[]} counts  묶음별 조문 수
- * @param {number} avail  쓸 수 있는 높이(묶음 외 고정 높이는 뺀 값)
- * @param {{ min: number, maxUnit: number }} opt
- */
-export function distributeHeights(counts, avail, { min, maxUnit }) {
-  const fixed = new Set();
-  let unit = maxUnit;
-  for (let pass = 0; pass < counts.length + 1; pass++) {
-    let flexCount = 0;
-    let fixedH = 0;
-    counts.forEach((c, i) => { if (fixed.has(i)) fixedH += min; else flexCount += c; });
-    unit = flexCount > 0 ? Math.min(maxUnit, (avail - fixedH) / flexCount) : maxUnit;
-    let changed = false;
-    counts.forEach((c, i) => {
-      if (!fixed.has(i) && c * unit < min) { fixed.add(i); changed = true; }
-    });
-    if (!changed) break;
-  }
-  if (!(unit > 0)) unit = 0;
-  return counts.map((c, i) => (fixed.has(i) ? min : Math.max(min, c * unit)));
-}
-
-export const OVERVIEW_SUBTITLE = "법률 → 시행령 → 시행규칙 → 행정규칙 → 자치법규 · 선 굵기 = 위임 건수 · 장을 누르면 조문이 펼쳐집니다";
+export const OVERVIEW_SUBTITLE = "위에서 아래로 법률 → 시행령 → 시행규칙 → 행정규칙·조례 · 자리 = 어느 장을 받치는가 · 색 선 = 다른 기둥으로 건너가는 위임";
 
 /**
  * 큰 그림 위에 놓는 한 문장. 사실(조문 수·위임 조문 수) + 판단(가장 많이 맡기는 장).
