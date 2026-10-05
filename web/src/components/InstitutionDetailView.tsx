@@ -11,10 +11,12 @@ export default function InstitutionDetailView({
   institution,
   institutions,
   relatedSlugs,
+  lawMapHrefs = {},
 }: {
   institution: Institution;
   institutions: InstitutionSummary[];
   relatedSlugs: Map<string, string>;
+  lawMapHrefs?: Record<string, string>;
 }) {
   const process = institution.process;
   const processWarnings = formatProcessWarnings(process?.warnings);
@@ -124,6 +126,7 @@ export default function InstitutionDetailView({
       <OnePageCanvas
         institution={institution}
         relatedSlugs={relatedSlugs}
+        lawMapHrefs={lawMapHrefs}
       />
 
       <footer className={styles.disclaimer}>
@@ -139,9 +142,11 @@ export default function InstitutionDetailView({
 function OnePageCanvas({
   institution,
   relatedSlugs,
+  lawMapHrefs,
 }: {
   institution: Institution;
   relatedSlugs: Map<string, string>;
+  lawMapHrefs: Record<string, string>;
 }) {
   const { canvas, verification } = institution;
   const sourceByLaw = new Map(
@@ -167,6 +172,7 @@ function OnePageCanvas({
           <div className={styles.legalRows}>
             {canvas.legalBasis.map((basis) => {
               const source = sourceByLaw.get(basis.law);
+              const lawMapHref = lawMapHrefs[basis.law.replace(/\s+/g, "")];
               return (
                 <div key={`${basis.kind}:${basis.law}`}>
                   {source ? (
@@ -178,6 +184,11 @@ function OnePageCanvas({
                   )}
                   <span>{basis.articles ?? "적용 범위 확인 필요"}</span>
                   <small>{basis.kind}</small>
+                  {lawMapHref ? (
+                    <Link href={lawMapHref} className={styles.lawMapLink}>법령 지도 →</Link>
+                  ) : (
+                    <span aria-hidden />
+                  )}
                 </div>
               );
             })}

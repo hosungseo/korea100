@@ -442,11 +442,19 @@
 
 .legalRows > div {
   display: grid;
-  grid-template-columns: minmax(150px, 200px) minmax(0, 1fr) 72px;
+  grid-template-columns: minmax(150px, 200px) minmax(0, 1fr) 72px auto;
   align-items: baseline;
   gap: 10px;
   padding: 7px 0;
   border-bottom: 1px solid #f0f2f1;
+}
+
+.lawMapLink {
+  color: #087452;
+  font-size: 10px;
+  font-weight: 650;
+  white-space: nowrap;
+  text-decoration: none;
 }
 
 .legalRows strong,
