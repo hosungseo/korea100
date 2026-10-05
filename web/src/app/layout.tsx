@@ -91,6 +91,7 @@ function Header() {
 
         <nav className="site-nav" aria-label="주요 메뉴">
           <NavLink href="/#institutions">제도 대장</NavLink>
+          <NavLink href="/law/">법령 지도</NavLink>
           <NavLink href="/mega-projects/gwangju-semiconductor-cluster/">
             메가프로젝트
           </NavLink>

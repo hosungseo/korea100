@@ -3,6 +3,7 @@ export const dynamic = "force-static";
 import type { MetadataRoute } from "next";
 import { getAllSlugs, getAllInstitutions } from "@/lib/data";
 import { getMegaProject, getMegaProjectIds } from "@/lib/mega-projects";
+import { getLawMapIndex } from "@/lib/law-map-data";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://hosungseo.github.io/korea100";
@@ -47,6 +48,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     };
   });
 
+  const lawMapIndex = getLawMapIndex();
+  const lawPages: MetadataRoute.Sitemap = (lawMapIndex?.laws ?? []).map((law) => ({
+    url: `${SITE_URL}/law/${law.lawId}/`,
+    lastModified: lawMapIndex?.generatedAt ? new Date(lawMapIndex.generatedAt) : new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
   return [
     {
       url: `${SITE_URL}/`,
@@ -72,6 +81,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    {
+      url: `${SITE_URL}/law/`,
+      lastModified: lawMapIndex?.generatedAt ? new Date(lawMapIndex.generatedAt) : new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    ...lawPages,
     ...megaProjectPages,
     ...strategyPages,
     ...modelPages,
