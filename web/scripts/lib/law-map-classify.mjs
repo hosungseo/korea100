@@ -1,33 +1,72 @@
-// 조문 분류 v0.1 — 규율 단계(stage) × 주체 레인(actor)을 규칙으로 추론하는 순수 함수.
+// 조문 분류 v0.2 — 규율 단계(stage) × 주체 레인(actor)을 규칙으로 추론하는 순수 함수.
 // 네트워크·파일 입출력 없음. 모든 판정은 추론이며 근거(evidence)·신뢰도(confidence)·방법(method)을 함께 돌려준다.
 // 근거 없는 판정은 하지 않는다: 단서가 하나도 안 걸리면 "unknown".
 //
 // 단서표는 데이터로 파일 맨 위에 둔다. 튜닝은 여기서만. 단서는 문자열(포함 검사) 또는 RegExp.
+// 한글은 띄어쓰기 없이 붙으므로(건축허가·인공지능·공공단체) 다의어·부분 문자열 오탐은 RegExp의 lookbehind/lookahead로 막는다.
 
 export const STAGES = ["purpose", "standard", "procedure", "operation", "organization", "supervision", "penalty", "misc", "unknown"];
-export const CLASSIFIER_VERSION = "rule-based v0.1";
-export const ACTORS = ["citizen", "central", "local", "committee", "court", "none", "unknown"];
+export const CLASSIFIER_VERSION = "rule-based v0.2";
+/** 주체 레인. constitutional = 헌법기관 사무기구(국회·법원행정처·헌법재판소·선관위) — 공무원법류에서 임용권자로 나온다. */
+export const ACTORS = ["citizen", "central", "local", "committee", "court", "constitutional", "none", "unknown"];
 
 /**
  * 제목 단서. 배열 순서 = 동률일 때의 우선순위(앞이 강함).
  * 한 제목에 여러 단계가 걸리면 가장 뒤에 걸린 단서(한국어 제목의 머리말)를 1순위 후보로 삼고 본문 단서로 확인한다.
- * 긴 단서가 짧은 단서를 품으면(권한의 위임 ⊃ 위임, 업무제한 ⊃ 제한) 긴 쪽만 남긴다.
+ * 긴 단서가 짧은 단서를 품으면(권한의 위임 ⊃ 위임, 업무제한 ⊃ 제한, 통계 보고 ⊃ 보고) 긴 쪽만 남긴다.
  */
 export const STAGE_TITLE_CUES = [
   { stage: "penalty", cues: ["벌칙", "과태료", "양벌규정", "징역", "벌금", "몰수"] },
   { stage: "misc", cues: ["권한의 위임", "위임", "위탁", "수수료", "청문", "공무원 의제", "공무원으로 의제", "보칙", "시행일", "준용", "다른 법령", "다른 법률과의 관계", "관계 법령", "과의 관계", "시효", "비용부담", "비용 부담", "비용의 부담", "대리인", "대행", "효력", "승계", "규제의 재검토", "고유식별정보", "민감정보", "서식", "시행세칙", "경과조치", "관할"] },
-  { stage: "supervision", cues: ["검사", "감독", "보고", "자료 제출", "자료제출", "시정명령", "시정", "취소", "정지", "점검", "이행강제금", "위반", "업무제한", "지도", "조사", "모니터링", "공사중지", "대집행", "자료요청", "자료 요청", "과징금"] },
-  { stage: "operation", cues: ["대장", "통계", "전산", "정보체계", "정보시스템", "계획의 수립", "계획 수립", "기본계획", "종합계획", "시행계획", "실태조사", "기록ㆍ관리", "기록 및 관리", "고시"] },
-  { stage: "organization", cues: ["위원회", "설치", "구성", "운영", "센터", "사무국", "특별회계", "설립", "기구", "운영회", "전문기관", "민원실", "하부조직", "조직", "직무", "간사", "수당", "해촉", "제척", "임기", "신분보장", "회의", "이사회", "임원", "정원", "사무소", "명칭", "대변인", "보좌관", "총회", "지부"] },
-  { stage: "procedure", cues: ["허가", "신고", "등록", "승인", "인가", "인정", "인증", "지정", "신청", "심의", "협의", "통보", "통지", "변경", "갱신", "절차", "사전결정", "공고", "공개", "폐지", "체결", "조정", "재정", "청구", "청취", "촉탁", "회부", "제시", "평가", "임용", "시험", "면제", "제출", "교부", "발급"] },
-  { stage: "standard", cues: ["기준", "의무", "금지", "제한", "구조", "높이", "조경", "건폐율", "용적률", "확보", "설비", "재료", "방화", "피난", "지하층", "공지", "오차", "산정", "예치금", "계약", "결격사유", "세율", "과세표준", "비과세", "요건", "자격", "선수금", "주지"] },
+  {
+    stage: "supervision",
+    cues: [
+      /검사(?![의가는장]|에게)/, // 檢査. 검사의·검사가·검사는·검사에게·검사장은 檢事(법원·검찰 주체)
+      "감독", "보고", "자료 제출", "자료제출", "시정명령", "시정", "취소",
+      /(?<!일시)정지/, // 일시정지(운행·업무의 일시 정지)는 감독 처분이 아님
+      "점검", "이행강제금", "위반", "업무제한",
+      /지도[ㆍ·]?감독|지도원/, // '지도'만으로는 진로 지도·기술 지도도 걸린다
+      "조사", "모니터링", "공사중지", "대집행", "자료요청", "자료 요청", "과징금",
+    ],
+  },
+  { stage: "operation", cues: ["대장", "통계", "통계 보고", "통계보고", "전산", "정보체계", "정보시스템", "계획의 수립", "계획 수립", "기본계획", "종합계획", "시행계획", "실태조사", "기록ㆍ관리", "기록 및 관리", "고시", "직무분석", "인사기록", "인사관리"] },
+  {
+    stage: "organization",
+    cues: [
+      "위원회",
+      /(위원회|센터|기구|사무국|본부|협의회|기관|조직|공단|공사|진흥원|연구원|특별회계|민원실|지원단|위원|회)의?\s*(설치|설립)/, // 조직의 설치·설립만. 시설·승강기 설치는 기준(standard)
+      "구성", "운영", "센터", "사무국", "특별회계", "기구", "운영회", "전문기관", "민원실", "하부조직", "조직", "직무", "간사",
+      "해촉", "제척", "임기", "신분보장", "신분 보장",
+      /(?<![가-힣])회의/, // 협회의·총회의·조합회의(=협회+의)는 회의가 아니다
+      "이사회", "임원", "정원", "사무소", "명칭", "대변인", "보좌관", "총회", "지부",
+    ],
+  },
+  {
+    stage: "procedure",
+    cues: [
+      "허가", "신고", "등록", "승인", "인가", "인정", "인증", "지정", "신청", "심의", "협의", "협조", "통보", "통지", "변경", "갱신", "절차", "사전결정", "공고", "공개", "폐지", "체결", "조정",
+      /재정(?!적|지원| 지원|경제|자립|상태|건전|운용|상황|수요|부담)/, // 분쟁의 재정(裁定). 재정적 지원·재정지원(財政)은 제외
+      "청구", "청취", "촉탁", "회부", "제시", "평가", "임용", "임명", "시험", "면제", "제출", "교부", "발급",
+    ],
+  },
+  {
+    stage: "standard",
+    cues: [
+      "기준", "의무", "금지", "제한",
+      /(?<!인명|법률|긴급|수난|해상|산악|응급|구호)구조(?!대|ㆍ구급|ㆍ구난|조정|활동|요원|기관|본부)/, // 構造. 救助·법률구조 제외
+      "높이", "조경", "건폐율", "용적률", "확보", "설비", "시설", "설치", "재료", "방화", "피난", "지하층",
+      /(?<![가-힣])공지(?![가-힣])/, // 공개 공지(空地). 인공지능의 '공지'가 아니다
+      "오차", "산정", "예치금", "계약", "결격사유", "세율", "과세표준", "비과세", "요건", "자격", "선수금", "주지",
+      "보수", "수당", "변상", "급여", "연금", "휴가", "휴직", "복무",
+    ],
+  },
   { stage: "purpose", cues: ["목적", /(^|[\sㆍ])정의($|[\sㆍ])/, "책무", "기본원칙", "기본이념", "의의", "적용 범위", "적용범위", "적용 제외", "적용제외"] },
 ];
 
-/** 약한 제목 단서. 다른 제목 단서가 하나도 없을 때만 쓴다(0.6). 특례·배제는 보칙 성격, 범위·종류·구분·대상은 정의 성격으로 본다. */
+/** 약한 제목 단서. 다른 제목 단서가 하나도 없을 때만 쓴다(0.6). 특례·배제는 보칙 성격, 범위·종류·구분·대상·확립은 정의 성격으로 본다. */
 export const STAGE_TITLE_WEAK_CUES = [
   { stage: "misc", cues: ["특례", "배제", "조례"] },
-  { stage: "purpose", cues: ["범위", "종류", "구분", "대상", "적용례", "용어"] },
+  { stage: "purpose", cues: ["범위", "종류", "구분", "대상", "적용례", "용어", "확립"] },
   { stage: "organization", cues: ["기관"] },
 ];
 
@@ -46,32 +85,41 @@ export const STAGE_TEXT_CUES = [
   { stage: "penalty", cues: ["징역", "벌금", "과태료", "처한다", "몰수"] },
   { stage: "supervision", cues: ["시정명령", "취소할 수 있다", "취소하여야", "정지를 명", "검사하게", "보고하게", "자료의 제출", "자료를 제출", "점검", "이행강제금", "출입하여", "감독", "시정을 명"] },
   { stage: "misc", cues: ["위임할 수 있다", "위탁할 수 있다", "수수료", "청문을", "공무원으로 본다", "준용한다", "다른 법률에 특별한 규정"] },
-  { stage: "operation", cues: ["계획을 수립", "실태조사", "대장에 기재", "대장을 작성", "대장에 적", "통계를", "전산처리", "정보체계를", "고시하여야", "기록ㆍ관리", "기록하고"] },
+  { stage: "operation", cues: ["계획을 수립", "실태조사", "대장에 기재", "대장을 작성", "대장에 적", "통계를", "통계보고", "통계 보고", "전산처리", "정보체계를", "고시하여야", "기록ㆍ관리", "기록하고"] },
   { stage: "organization", cues: ["위원회를 둔다", "위원회를 두어야", "위원으로 구성", "위원장", "사무국을", "센터를 설치", "회계를 설치", "설립할 수 있다", "운영할 수 있다"] },
-  { stage: "procedure", cues: ["허가를 받아야", "신고하여야", "신고를 하여야", "신청하여야", "신청할 수 있다", "신청서를", "승인을 받아", "인가를 받아", "통보하여야", "협의하여야", "심의를 거쳐", "지정할 수 있다", "공고하여야", "공고하고", "통지하여야", "변경하려면", "등록하여야", "청구할 수 있다"] },
-  { stage: "standard", cues: [{ cue: "하여야 한다", weight: 0.5 }, { cue: "아니 된다", weight: 0.5 }, "할 수 없다", "기준에 맞게", "기준에 따라", "이상이어야", "이하이어야", "접하여야"] },
+  { stage: "procedure", cues: ["허가를 받아야", "신고하여야", "신고를 하여야", "신고할 수 있다", "신청하여야", "신청할 수 있다", "신청서를", "승인을 받아", "인가를 받아", "통보하여야", "협의하여야", "협조를 요청", "심의를 거쳐", "지정할 수 있다", "공고하여야", "공고하고", "통지하여야", "변경하려면", "등록하여야", "청구할 수 있다", "임명하여야", "임명할 수 있다"] },
+  { stage: "standard", cues: [{ cue: "하여야 한다", weight: 0.5 }, { cue: "아니 된다", weight: 0.5 }, "할 수 없다", "기준에 맞게", "기준에 따라", "이상이어야", "이하이어야", "접하여야", "받을 수 있다", "지급한다", "지급할 수 있다"] },
   { stage: "purpose", cues: ["목적으로 한다", "용어의 뜻", "책무", "노력하여야"] },
 ];
 
 /**
  * 주체 단서. 주어 구간(첫 항 첫 문장의 '은/는' 앞)에서 먼저 찾고, 없으면 본문 전체에서 센다.
+ * 겹치는 자리에서는 긴 단서가 이긴다(법원행정처장 ⊃ 법원·처장, 국회사무총장 ⊃ 총장, 중앙선거관리위원회 ⊃ 위원회).
  * generic: 일반형(…하려는 자, …자는). 주어 토큰의 머리가 다른 주체(허가권자·업무대행자·위원회)면 일반형은 무시한다.
  */
 export const ACTOR_CUES = [
-  { actor: "court", patterns: [/법원/, /검찰/, /판사/, /재판/] },
-  { actor: "central", patterns: [/[가-힣]+부장관/, /(?<!구)청장/, /중앙행정기관의 장/, /주무부장관/, /국토교통부(?!령)/, /(?<![가-힣])국가(?=[\s,ㆍ나와및의가는은또]|$)/, /(?<![가-힣])정부(?=[\s,는은의가와])/] },
+  { actor: "constitutional", patterns: [/국회사무총장|국회사무처|국회의장|(?<![가-힣])국회(?![가-힣])/, /법원행정처장|법원행정처|대법원장|대법원/, /헌법재판소사무처장|헌법재판소사무처|헌법재판소장|헌법재판소/, /중앙선거관리위원회사무총장|중앙선거관리위원회|선거관리위원회/] },
+  { actor: "court", patterns: [/(?<!대|행정)법원(?!행정처)/, /검찰총장|검찰/, /검사(?=의|가|는|에게|장)/, /사법경찰관/, /법관/, /판사/, /재판/] },
+  {
+    actor: "central",
+    patterns: [
+      /[가-힣]+부장관/, /(?<![가-힣])장관/, /소속 장관/, /주무부장관/, /국무총리/, /대통령(?!령)/,
+      /(?<!구|사무)청장/, /(?<![가-힣])처장|[가-힣]+처장/, /(?<!연구|진흥|병|학|의|법|보훈|감사)원장/, /교육감/, /서장/, /(?<!사무|검찰)총장/,
+      /중앙행정기관의 장/, /중앙인사관장기관의 장/, /국토교통부(?!령)/, /(?<![가-힣])국가(?=[\s,ㆍ나와및의가는은또]|$)/, /(?<![가-힣])정부(?=[\s,는은의가와])/,
+    ],
+  },
   { actor: "local", patterns: [/시[ㆍ·]도지사/, /시장[ㆍ·]군수[ㆍ·]구청장/, /특별시장|광역시장|특별자치시장/, /도지사/, /군수/, /구청장/, /허가권자/, /인가권자/, /신고수리권자/, /지방자치단체/] },
-  { actor: "committee", patterns: [/위원회/, /(?<!농)공단(?!지)/, /(토지주택|도시|시설|관리|철도|도로|수자원|전력|가스|관광|농어촌|환경|보증)공사/, /진흥원/, /연구원/, /협회/, /전문기관/, /공공기관/, /관리원/, /센터/, /운영회/, /사무국/, /인정기관/, /업무대행자/] },
-  { actor: "citizen", patterns: [/건축주/, /설계자/, /시공자/, /감리자/, /사업자/, /소유자/, /신청인/, /관리자/, /당사자/, /협정체결자/, /제조업자/, /유통업자/, /관계전문기술자/, /건축관계자/, /점유자/, /임차인/, /입주자/, /사용자/, /국민/, /건축사(?!법)/], generic: [/하려는 자/, /받은 자/, /한 자/, /해당하는 자/, /자(?:에게)?는$/] },
+  { actor: "committee", patterns: [/위원회/, /위원장/, /(?<![공농])공단(?!지|체)/, /(토지주택|도시|시설|관리|철도|도로|수자원|전력|가스|관광|농어촌|환경|보증)공사/, /진흥원/, /연구원/, /협회/, /전문기관/, /공공기관/, /관리원/, /센터/, /운영회/, /사무국/, /인정기관/, /업무대행자/] },
+  { actor: "citizen", patterns: [/건축주/, /설계자/, /시공자/, /감리자/, /사업자/, /소유자/, /신청인/, /관리자/, /당사자/, /협정체결자/, /제조업자/, /유통업자/, /관계전문기술자/, /건축관계자/, /점유자/, /임차인/, /입주자/, /사용자/, /국민/, /건축사(?!법)/, /(?<!소속 )공무원(?! 의제|으로 본다)/, /누구든지/], generic: [/하려는 자/, /받은 자/, /한 자/, /해당하는 자/, /자(?:에게)?는$/] },
 ];
 
 /** 제목에 주체가 직접 적힌 경우("건축주 등의 의무", "허가권자 등의 의무"). */
 export const ACTOR_TITLE_CUES = [
   { actor: "citizen", patterns: [/건축주/, /설계자/, /시공자/, /감리자/, /사업자/, /소유자/, /신청인/, /관계자/, /국민/] },
-  { actor: "central", patterns: [/장관/, /(?<!구)청장/, /국가의 책무/, /국가 등의 책무/] },
+  { actor: "central", patterns: [/장관/, /(?<!구|사무)청장/, /[가-힣]+처장/, /국가의 책무/, /국가 등의 책무/] },
   { actor: "local", patterns: [/허가권자/, /지방자치단체/, /시[ㆍ·]도지사/] },
   { actor: "committee", patterns: [/위원회/, /전문기관/, /운영회/] },
-  { actor: "court", patterns: [/법원/, /소송/] },
+  { actor: "court", patterns: [/(?<!대)법원(?!행정처)/, /소송/] },
 ];
 
 export const CONFIDENCE = {
@@ -82,6 +130,7 @@ export const CONFIDENCE = {
   implicit: 0.6, // 주어 생략형("…에게 신고를 하면"): 신고·신청하는 쪽을 수범자로 본다
   thing: 0.6, // 하위법령 기술기준의 사물 주어("압축강도는") → 주체 없음
   nominative: 0.7, // 주어가 "…이/가"로 표시된 경우(토큰 자체가 주체 명사일 때만)
+  anyone: 0.7, // "누구든지 …" → 국민
   chapterOnly: 0.5, // 장 제목만
   conflictResolved: 0.5, // 단서 충돌을 머리말/본문으로 풀었음
   conflict: 0.4, // 단서 충돌, 결정이 약함
@@ -97,12 +146,14 @@ const NOT_SUBJECT_NEUN = /(하|있|없|되|받|려|않|르|치|쓰|짓|같|보|�
 const NOT_SUBJECT_EUN = /(받|얻|넣|많|같|작|높|낮|좋|않|적|깊|좁|넓|붙|믿|잡|남|담|밟|맡|닫|묶|섞|씻|찾|쌓|앉|걸|끊|입|읽|굳|묻|뽑|좇|쫓|꺾|겪|얹|심|씹|빚)은$/;
 const CONNECTIVE = /^(또는|그러나|다만|혹은|및|또한|즉|하지만|이는|그는|이에는)$/;
 const DATIVE_SUBJECT = /에게는$/;
+/** 공동 주어를 잇는 사이 글: 쉼표·중점·나·및·또는·와·과(괄호 설명 허용). 이 사이 글로만 이어진 단서가 joint, 아니면 secondary. */
+const COORDINATION_GAP = /^(?:[\s,ㆍ·]|\([^)]*\)|나|이나|및|또는|와|과|거나)*$/;
 /** 주어 생략형: "…에게 (신고|신청|제출|보고)를 하(면|여야)". 신고·신청하는 쪽(수범자)이 숨은 주어. */
 const IMPLICIT_FILING = /에게[^.]{0,60}?(신고|신청|제출|보고|통보)[를을]?\s*(?:하면|하여야|하고|하는|하려면|해야)/;
 /** 위임 조문("…에 관하여 필요한 사항은 대통령령으로 정한다"). */
-const DELEGATION_ONLY = /(대통령령|[가-힣]+부령|총리령|조례|규칙)(?:으|이)?로 정한다\.?$/;
+const DELEGATION_ONLY = /(대통령령|[가-힣]+부령|총리령|조례|규칙)(?:등)?(?:으|이)?로 정한다\.?$/;
 /** 주체 탐색 때 지우는 위임 문구("국토교통부령으로 정하는 바에 따라"): 부처명이 주체처럼 잡히는 것을 막는다. */
-const DELEGATION_PHRASE = /(대통령령|[가-힣]+부령|총리령|조례|규칙)(?:으|이)?로 정하[가-힣]*/g;
+const DELEGATION_PHRASE = /(대통령령|[가-힣]+부령|총리령|조례|규칙)(?:등)?(?:으|이)?로 정하[가-힣]*/g;
 
 /** 본문을 비교 가능한 모양으로: 중점 통일, <개정 …> 표지 제거, 공백 정리. */
 export function normalizeText(text) {
@@ -158,12 +209,9 @@ export function findNominativeSubject(sentence, table = ACTOR_CUES) {
   let m;
   while ((m = re.exec(s)) !== null) {
     const core = m[1].replace(/[)\]」]+$/, "");
-    for (const row of table) {
-      for (const p of row.patterns) {
-        const hit = core.match(p);
-        if (hit && core.endsWith(hit[0])) return { token: m[0], core, actor: row.actor, cue: hit[0], index: m.index };
-      }
-    }
+    const hits = dropOverlapped(matchActors(core, table, { generic: false }));
+    const head = hits.find((h) => h.index + h.cue.length === core.length);
+    if (head) return { token: m[0], core, actor: head.actor, cue: head.cue, index: m.index };
   }
   return null;
 }
@@ -171,7 +219,7 @@ export function findNominativeSubject(sentence, table = ACTOR_CUES) {
 function cueMatch(text, cue) {
   if (cue instanceof RegExp) {
     const m = text.match(cue);
-    return m ? { index: m.index ?? 0, length: m[0].length, label: cue.source.replace(/[^가-힣ㆍ ]/g, "").trim() || String(cue) } : null;
+    return m ? { index: m.index ?? 0, length: m[0].length, label: m[0].trim() || cue.source } : null;
   }
   const idx = text.indexOf(cue);
   return idx >= 0 ? { index: idx, length: cue.length, label: cue } : null;
@@ -265,7 +313,7 @@ export function classifyStage({ title, chapter, text }) {
     return { stage: top.key, confidence: CONFIDENCE.conflict, evidence, method: "rule:title" };
   }
 
-  // 제목 단서 없음 → 약한 제목 단서(특례·배제) → 본문 단서.
+  // 제목 단서 없음 → 약한 제목 단서(특례·범위 등) → 본문 단서.
   for (const { stage, cues } of STAGE_TITLE_WEAK_CUES) {
     const hit = cues.map((c) => cueMatch(t, c)).find(Boolean);
     if (hit) return { stage, confidence: CONFIDENCE.weakTitle, evidence: [`title:${hit.label}(약한 단서)`, ...textEvidence.slice(0, 3)], method: "rule:title" };
@@ -293,16 +341,28 @@ export function classifyStage({ title, chapter, text }) {
   return { stage: "unknown", confidence: 0, evidence: [], method: "unknown" };
 }
 
+/** 모든 주체 단서의 모든 출현. {actor, cue, index, generic} */
 function matchActors(span, table = ACTOR_CUES, { generic = true } = {}) {
   const found = [];
-  for (const row of table) {
+  table.forEach((row, rank) => {
     const patterns = generic ? [...row.patterns, ...(row.generic ?? [])] : row.patterns;
     for (const p of patterns) {
-      const m = span.match(p);
-      if (m) found.push({ actor: row.actor, cue: m[0], index: m.index ?? 0, generic: (row.generic ?? []).includes(p) });
+      const re = new RegExp(p.source, p.flags.includes("g") ? p.flags : `${p.flags}g`);
+      let m;
+      while ((m = re.exec(span)) !== null) {
+        if (m[0].length === 0) { re.lastIndex += 1; continue; }
+        found.push({ actor: row.actor, cue: m[0], index: m.index, rank, generic: (row.generic ?? []).includes(p) });
+      }
     }
-  }
+  });
   return found;
+}
+
+/** 겹치는 자리에서는 긴 단서만 남긴다(법원행정처장 ⊃ 법원·처장). 같은 자리·같은 길이면 단서표에서 앞선 레인이 이긴다. */
+function dropOverlapped(found) {
+  return found.filter((h) => !found.some((o) => o !== h && o.actor !== h.actor
+    && o.index <= h.index && o.index + o.cue.length >= h.index + h.cue.length
+    && (o.cue.length > h.cue.length || (o.cue.length === h.cue.length && o.rank < h.rank))));
 }
 
 /** 같은 주체의 중복 단서를 합치고, 등장 순서로 정렬한다. */
@@ -321,11 +381,12 @@ function countActors(found) {
   return counts;
 }
 
-const AUTHORITY = new Set(["central", "local", "committee", "court"]);
+const AUTHORITY = new Set(["central", "local", "committee", "court", "constitutional"]);
 
 /**
  * 주 주체(primary) 하나와 보조 주체(secondary)들을 함께 돌려준다.
- * 보조 주체: 공동 주어의 나머지, 그리고 첫 문장에서 반대편(수범자↔행정기관)으로 등장한 주체.
+ * 주어 구간에서는 주어 토큰의 머리(끝에 붙은 단서)가 primary다. 구간의 다른 단서는 머리와 접속사(나·및·또는·,·ㆍ·와·과)로
+ * 바로 이어졌을 때만 joint(공동 주어, 0.5), 그렇지 않으면 secondary("허가권자에게 신고한 건축주는" → 건축주 primary, 허가권자 secondary).
  */
 export function classifyActor({ title, text, stage, deleted, tier }) {
   if (deleted) return done("none", CONFIDENCE.deleted, ["title:삭제"], "rule:title", []);
@@ -334,9 +395,9 @@ export function classifyActor({ title, text, stage, deleted, tier }) {
   const body = normalizeText(text).replace(DELEGATION_PHRASE, " ");
   const sentence = firstSentence(body);
   const subject = findSubject(sentence);
-  const titleActors = distinctActors(matchActors(t, ACTOR_TITLE_CUES, { generic: false }));
+  const titleActors = distinctActors(dropOverlapped(matchActors(t, ACTOR_TITLE_CUES, { generic: false })));
   const evidence = [];
-  const inSentence = distinctActors(matchActors(sentence));
+  const inSentence = distinctActors(dropOverlapped(matchActors(sentence)));
   /** 주 주체의 반대편(수범자 ↔ 행정기관) 중 첫 문장에 나온 것을 보조 주체로. */
   const counterparts = (primary) => inSentence
     .filter((o) => o.actor !== primary && (AUTHORITY.has(primary) ? o.actor === "citizen" : AUTHORITY.has(o.actor)))
@@ -345,27 +406,60 @@ export function classifyActor({ title, text, stage, deleted, tier }) {
   // 1. 주어 구간의 주체 단서.
   if (subject) {
     evidence.push(`subject:${subject.token}`);
-    let hits = matchActors(subject.span);
-    const headIsOther = hits.some((h) => !h.generic && h.actor !== "citizen" && subject.core.endsWith(h.cue));
-    if (headIsOther) hits = hits.filter((h) => !h.generic);
-    const inSubject = distinctActors(hits);
-    if (inSubject.length >= 1) {
-      const [first, ...rest] = inSubject;
-      evidence.push(`cue:${first.cue}`);
-      if (rest.length === 0) {
-        const others = inSentence.filter((o) => o.actor !== first.actor);
-        for (const o of others) evidence.push(`also:${o.actor}(${o.cue})`);
-        let confidence = CONFIDENCE.title;
-        if (titleActors.length === 1 && titleActors[0].actor === first.actor) { confidence = CONFIDENCE.titleAgree; evidence.push(`title:${titleActors[0].cue}`); }
-        return done(first.actor, confidence, evidence, "rule:text", counterparts(first.actor));
+    const spanOffset = sentence.indexOf(subject.span);
+    let hits = dropOverlapped(matchActors(subject.span)).sort((a, b) => a.index - b.index);
+    const coreEnd = subject.span.length - (subject.token.length - subject.core.length); // 토큰 조사·괄호를 뺀 끝
+    const head = hits.find((h) => !h.generic && h.index + h.cue.length >= coreEnd - 1 && h.index + h.cue.length <= subject.span.length)
+      ?? hits.find((h) => h.generic && h.index + h.cue.length >= coreEnd - 1);
+    if (head && !head.generic) hits = hits.filter((h) => !h.generic);
+    if (head) {
+      evidence.push(`cue:${head.cue}`);
+      // 머리에서 앞으로 거슬러 가며 접속사로만 이어진 단서는 공동 주어.
+      const joint = [];
+      let cursor = head;
+      for (const h of [...hits].filter((h) => h !== head && h.index < head.index).sort((a, b) => b.index - a.index)) {
+        const gap = subject.span.slice(h.index + h.cue.length, cursor.index);
+        if (!COORDINATION_GAP.test(gap)) break;
+        if (h.actor !== head.actor && !joint.some((j) => j.actor === h.actor)) joint.push(h);
+        cursor = h;
       }
-      // 공동 주어("국토교통부장관, 시ㆍ도지사 및 시장ㆍ군수ㆍ구청장은") → 먼저 적힌 쪽이 주, 나머지는 보조.
-      for (const r of rest) evidence.push(`joint:${r.actor}(${r.cue})`);
-      const joint = rest.map((r) => ({ actor: r.actor, role: "secondary", evidence: [`joint:${r.cue}`] }));
-      const extra = counterparts(first.actor).filter((c) => !joint.some((j) => j.actor === c.actor) && !inSubject.some((s) => s.actor === c.actor));
-      return done(first.actor, CONFIDENCE.conflictResolved, evidence, "rule:text", [...joint, ...extra]);
+      const jointActors = new Set([head.actor, ...joint.map((j) => j.actor)]);
+      const others = inSentence.filter((o) => !jointActors.has(o.actor));
+      for (const j of joint) evidence.push(`joint:${j.actor}(${j.cue})`);
+      for (const o of others) evidence.push(`also:${o.actor}(${o.cue})`);
+      const secondary = [
+        ...joint.map((j) => ({ actor: j.actor, role: "secondary", evidence: [`joint:${j.cue}`] })),
+        ...counterparts(head.actor).filter((c) => !jointActors.has(c.actor)),
+      ];
+      // 주어 구간 안에 있지만 접속사로 이어지지 않은 단서("허가권자에게 신고한 건축주는"의 허가권자)도 보조 주체.
+      for (const h of hits) {
+        if (jointActors.has(h.actor) || secondary.some((s) => s.actor === h.actor)) continue;
+        secondary.push({ actor: h.actor, role: "secondary", evidence: [`span:${h.cue}`] });
+      }
+      void spanOffset;
+      if (joint.length === 0) {
+        let confidence = CONFIDENCE.title;
+        if (titleActors.length === 1 && titleActors[0].actor === head.actor) { confidence = CONFIDENCE.titleAgree; evidence.push(`title:${titleActors[0].cue}`); }
+        return done(head.actor, confidence, evidence, "rule:text", secondary);
+      }
+      return done(head.actor, CONFIDENCE.conflictResolved, evidence, "rule:text", secondary);
+    }
+    if (hits.length > 0) {
+      // 주어 토큰 자체는 사물("허가권자의 처분은")이지만 구간에 주체가 있다 → 끝에 가장 가까운 것을 0.5로.
+      const near = hits[hits.length - 1];
+      evidence.push(`span:${near.cue}`);
+      const rest = distinctActors(hits.filter((h) => h.actor !== near.actor)).map((h) => ({ actor: h.actor, role: "secondary", evidence: [`span:${h.cue}`] }));
+      return done(near.actor, CONFIDENCE.fallback, evidence, "rule:text", [...rest, ...counterparts(near.actor).filter((c) => !rest.some((r) => r.actor === c.actor))]);
     }
     evidence.push("subject:주체 단서 없음");
+    // 1a. 사물 주제 + 행위자("시험은 인사혁신처장이 실시한다") → 행위자를 0.5로.
+    if (stage !== "standard") {
+      const agent = findNominativeSubject(sentence.slice(subject.index + subject.token.length));
+      if (agent) {
+        evidence.push(`agent:${agent.token}`);
+        return done(agent.actor, CONFIDENCE.fallback, evidence, "rule:text", counterparts(agent.actor));
+      }
+    }
   }
   // 1b. '…이/가' 주어("건축주가 … 신청하여야 한다").
   if (!subject) {
@@ -375,7 +469,12 @@ export function classifyActor({ title, text, stage, deleted, tier }) {
       for (const o of inSentence.filter((o) => o.actor !== nom.actor)) evidence.push(`also:${o.actor}(${o.cue})`);
       return done(nom.actor, CONFIDENCE.nominative, evidence, "rule:text", counterparts(nom.actor));
     }
-    // 1c. 주어 생략형("…에게 신고를 하면 … 본다") → 신고·신청하는 쪽(수범자).
+    // 1c. "누구든지 …" → 국민.
+    if (/^누구든지/.test(sentence)) {
+      evidence.push("subject:누구든지");
+      return done("citizen", CONFIDENCE.anyone, evidence, "rule:text", counterparts("citizen"));
+    }
+    // 1d. 주어 생략형("…에게 신고를 하면 … 본다") → 신고·신청하는 쪽(수범자).
     const filing = sentence.match(IMPLICIT_FILING);
     if (filing) {
       evidence.push(`implicit-subject:${filing[1]}`);
@@ -400,12 +499,15 @@ export function classifyActor({ title, text, stage, deleted, tier }) {
   if (stage === "penalty") {
     return done("citizen", CONFIDENCE.fallback, [...evidence, "stage:penalty→citizen(수범자 추정)"], "rule:text", []);
   }
-  // 6. 하위법령 기술기준의 사물 주어("압축강도는 … 이상이어야 한다") → 주체 없음. 수범자를 지어내지 않는다.
-  if (subject && stage === "standard" && (tier === "decree" || tier === "rule")) {
-    return done("none", CONFIDENCE.thing, [...evidence, `thing-subject:${subject.token}`], "rule:text", []);
+  // 6. 기준 조문의 사물 주어("압축강도는 … 이상이어야 한다", "마감재료는 … 재료로 하되").
+  //    하위법령은 주체 없음(0.6), 법률은 수범자 추정(0.4). 본문에 나오는 기관은 협의 상대일 뿐이라 주체로 삼지 않는다.
+  if (subject && stage === "standard") {
+    if (tier === "decree" || tier === "rule") return done("none", CONFIDENCE.thing, [...evidence, `thing-subject:${subject.token}`], "rule:text", []);
+    const mentioned = distinctActors(dropOverlapped(matchActors(body))).map((f) => `body:${f.actor}(${f.cue})`);
+    return done("citizen", CONFIDENCE.conflict, [...evidence, `thing-subject:${subject.token}`, ...mentioned, "stage:standard→citizen(수범자 추정)"], "rule:text", []);
   }
   // 7. 본문 전체의 주체 단서(가장 많이 나온 쪽).
-  const bodyHits = matchActors(body);
+  const bodyHits = dropOverlapped(matchActors(body));
   if (bodyHits.length > 0) {
     const distinct = distinctActors(bodyHits);
     for (const f of distinct) evidence.push(`body:${f.actor}(${f.cue})`);
@@ -414,7 +516,7 @@ export function classifyActor({ title, text, stage, deleted, tier }) {
     const confidence = top && !top.tie && subject ? CONFIDENCE.fallback : CONFIDENCE.conflict;
     return done(primary, confidence, evidence, "rule:text", []);
   }
-  // 8. 법률의 기준 조문인데 주체가 안 보임 → 수범자(건축주 등) 추정.
+  // 8. 기준 조문인데 주체가 안 보임 → 수범자 추정.
   if (stage === "standard") {
     return done("citizen", CONFIDENCE.conflict, [...evidence, "stage:standard→citizen(수범자 추정)"], "rule:text", []);
   }
@@ -425,9 +527,10 @@ export function classifyActor({ title, text, stage, deleted, tier }) {
   return done("unknown", 0, evidence, "unknown", []);
 }
 
+/** primary의 근거는 evidence 한 곳에만 둔다(actors[0]에 되풀이하지 않는다). */
 function done(actor, confidence, evidence, method, secondaries) {
   const seen = new Set([actor]);
-  const actors = [{ actor, role: "primary", evidence: [...evidence] }];
+  const actors = [{ actor, role: "primary" }];
   for (const s of secondaries) {
     if (seen.has(s.actor)) continue;
     seen.add(s.actor);
@@ -439,7 +542,7 @@ function done(actor, confidence, evidence, method, secondaries) {
 /**
  * 조문 하나를 분류한다. tier(statute|decree|rule)는 하위법령 기술기준의 사물 주어 규칙에만 쓴다.
  * @param {{label?: string, title?: string, chapter?: string|null, text?: string, tier?: string}} article
- * @returns {{stage: string, actor: string, actors: Array<{actor: string, role: "primary"|"secondary", evidence: string[]}>, confidence: number, evidence: string[], method: string, stageMethod: string, actorMethod: string, stageConfidence: number, actorConfidence: number, deleted?: boolean}}
+ * @returns {{stage: string, actor: string, actors: Array<{actor: string, role: "primary"|"secondary", evidence?: string[]}>, confidence: number, evidence: string[], method: string, stageMethod: string, actorMethod: string, stageConfidence: number, actorConfidence: number, deleted?: boolean}}
  */
 export function classifyArticle({ label, title, chapter, text, tier } = {}) {
   const s = classifyStage({ title, chapter, text });

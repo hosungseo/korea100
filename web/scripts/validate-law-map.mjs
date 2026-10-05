@@ -3,6 +3,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { STAGES, ACTORS } from "./lib/law-map-classify.mjs";
 
 const WEB = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const DATA_DIR = path.join(WEB, "data", "law-map");
@@ -10,9 +11,9 @@ const TEXT_DIR = path.join(WEB, "public", "law-map");
 const TIERS = new Set(["statute", "decree", "rule", "adminRule", "ordinance"]);
 const KINDS = new Set(["decree", "rule", "adminRule", "ordinance", "cites"]);
 const KIND_TO_TIER = { decree: "decree", rule: "rule", adminRule: "adminRule", ordinance: "ordinance" };
-// 조문 분류(class.json) 허용 값. scripts/lib/law-map-classify.mjs의 STAGES/ACTORS와 같아야 한다.
-const CLASS_STAGES = new Set(["purpose", "standard", "procedure", "operation", "organization", "supervision", "penalty", "misc", "unknown"]);
-const CLASS_ACTORS = new Set(["citizen", "central", "local", "committee", "court", "none", "unknown"]);
+// 조문 분류(class.json) 허용 값은 분류기에서 가져온다(복제하지 않는다).
+const CLASS_STAGES = new Set(STAGES);
+const CLASS_ACTORS = new Set(ACTORS);
 let classifiedTotal = 0;
 let classFiles = 0;
 
@@ -131,6 +132,12 @@ for (const file of files) {
     classifiedTotal += classified;
     classFiles += 1;
   }
+}
+
+// 고아 분류 파일: IR이 없는 <lawId>.class.json은 실패.
+for (const f of fs.readdirSync(DATA_DIR).filter((f) => /^\d+\.class\.json$/.test(f))) {
+  const lawId = f.replace(/\.class\.json$/, "");
+  if (!files.includes(`${lawId}.json`)) fail(`law-map/${f}`, "IR(<lawId>.json)이 없는 분류 파일입니다");
 }
 
 const indexPath = path.join(DATA_DIR, "index.json");

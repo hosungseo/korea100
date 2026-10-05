@@ -27,7 +27,7 @@ const MIN_SCALE = 0.85;      // 이보다 줄이지 않는다. 폭이 모자라�
 const MAX_SCALE = 1.25;      // 작은 법이 그림판을 다 채우며 커지지 않게
 const BADGE_H = 12;
 
-/** 이 페이지 세션에서 큰 그림이 한 번 나타난 법령. 보기 전환으로 다시 붙어도 등장 동작을 반복하지 않는다. */
+/** 이 페이지 세션에서 구조도이 한 번 나타난 법령. 보기 전환으로 다시 붙어도 등장 동작을 반복하지 않는다. */
 const animatedOnce = new Set<string>();
 const r1 = (v: number) => Math.round(v * 10) / 10;
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));

@@ -4,12 +4,12 @@ export type LawMapView = "overview" | "rule" | "detail";  // 구조도 | 규율 
 
 // ── 조문 분류(규칙 기반 추론, scripts/classify-law-articles.mjs → <lawId>.class.json) ──
 export type LawMapStage = "purpose" | "standard" | "procedure" | "operation" | "organization" | "supervision" | "penalty" | "misc" | "unknown";
-export type LawMapActor = "citizen" | "central" | "local" | "committee" | "court" | "none" | "unknown";
+export type LawMapActor = "citizen" | "central" | "local" | "committee" | "court" | "constitutional" | "none" | "unknown";
 
 export interface LawMapClassActor {
   actor: LawMapActor;
   role: "primary" | "secondary";
-  evidence: string[];
+  evidence?: string[];             // 보조 주체의 단서. 주 주체의 근거는 LawMapClassEntry.evidence에 한 번만
 }
 
 export interface LawMapClassEntry {

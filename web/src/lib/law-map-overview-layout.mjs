@@ -1,4 +1,4 @@
-// 큰 그림의 공통 순수 계산. 장(章) 묶음 만들기, 묶음 사이 위임선 집계, 선 굵기, 라벨 자르기, 머리글.
+// 구조도의 공통 순수 계산. 장(章) 묶음 만들기, 묶음 사이 위임선 집계, 선 굵기, 라벨 자르기, 머리글.
 // 구조도 좌표는 law-map-tree-layout.mjs가 맡고, 여기는 DOM 없이 돌아가는 바탕 함수만 둔다.
 
 export const MISC_CHAPTER = "총칙·기타";
@@ -86,7 +86,7 @@ export function fitLabel(text, maxWidth, fontSize) {
 export const OVERVIEW_SUBTITLE = "위에서 아래로 법률 → 시행령 → 시행규칙 → 행정규칙·조례 · 자리 = 어느 장을 받치는가 · 색 선 = 다른 기둥으로 건너가는 위임";
 
 /**
- * 큰 그림 위에 놓는 한 문장. 사실(조문 수·위임 조문 수) + 판단(가장 많이 맡기는 장).
+ * 구조도 위에 놓는 한 문장. 사실(조문 수·위임 조문 수) + 판단(가장 많이 맡기는 장).
  * M = 시행령·시행규칙 위임선이 한 건이라도 있는 법률 조문 수(미해결 포함).
  * 장은 그림과 같은 묶음(이어지는 구간) 단위로 센다. 장이 없으면 마지막 절을 뺀다.
  * @param {{ name: string, lanes: { id: string, name: string, tier: string }[], articles: { id: string, laneId: string, chapter: string | null }[], edges: { from: string, kind: string }[] }} map

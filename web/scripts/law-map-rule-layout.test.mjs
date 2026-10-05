@@ -68,7 +68,7 @@ test("법률 조문만 격자에 올리고, 삭제 조문은 빼며, 빈 열·�
 test("열 순서는 STAGE_ORDER, 행 순서는 ACTOR_ORDER를 따르고 셀은 행 → 열 순으로 나온다", () => {
   const grid = buildRuleGrid(MAP, CLASS);
   assert.deepEqual(STAGE_ORDER, ["purpose", "standard", "procedure", "operation", "organization", "supervision", "penalty", "misc"]);
-  assert.deepEqual(ACTOR_ORDER, ["citizen", "local", "central", "committee", "court", "none"]);
+  assert.deepEqual(ACTOR_ORDER, ["citizen", "local", "central", "committee", "court", "constitutional", "none"]);
   assert.deepEqual(grid.cells.map((c) => `${c.actor}/${c.stage}`), [
     "citizen/standard", "citizen/procedure", "local/supervision", "central/supervision", "none/purpose", "unknown/unknown",
   ]);

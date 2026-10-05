@@ -24,12 +24,39 @@ export function getLawMap(lawId: string): LawMap | null {
   return JSON.parse(fs.readFileSync(file, "utf8")) as LawMap;
 }
 
-/** 조문 분류(<lawId>.class.json). 없으면 null — 규율 보기 단추가 비활성화된다. */
+/** 조문 분류(<lawId>.class.json) 전체. 없으면 null — 규율 보기 단추가 비활성화된다. 감사 시트용 원본. */
 export function getLawMapClass(lawId: string): LawMapClass | null {
   if (!/^\d+$/.test(lawId)) return null;
   const file = path.join(LAW_MAP_DIR, `${lawId}.class.json`);
   if (!fs.existsSync(file)) return null;
   return JSON.parse(fs.readFileSync(file, "utf8")) as LawMapClass;
+}
+
+/**
+ * 클라이언트로 보낼 분류: 규율 보기가 쓰는 법률 레인 조문만, 필드도 stage·actor·actors·confidence·evidence·method·deleted만.
+ * 시행령·시행규칙 조문(전체의 3/4)과 집계는 보내지 않는다.
+ */
+export function projectLawMapClassForClient(cls: LawMapClass | null, map: LawMap): LawMapClass | null {
+  if (!cls) return null;
+  const statuteLanes = new Set(map.lanes.filter((l) => l.tier === "statute").map((l) => l.id));
+  const articles: LawMapClass["articles"] = {};
+  for (const a of map.articles) {
+    if (!statuteLanes.has(a.laneId)) continue;
+    const c = cls.articles[a.id];
+    if (!c) continue;
+    const entry: LawMapClass["articles"][string] = {
+      stage: c.stage,
+      actor: c.actor,
+      confidence: c.confidence,
+      evidence: c.evidence ?? [],
+      method: c.method,
+    };
+    const actors = (c.actors ?? []).map((x) => (x.role === "primary" ? { actor: x.actor, role: x.role } : x));
+    if (actors.length > 1) entry.actors = actors;
+    if (c.deleted) entry.deleted = true;
+    articles[a.id] = entry;
+  }
+  return { lawId: cls.lawId, generatedAt: cls.generatedAt, method: cls.method, articles, stats: {} };
 }
 
 /**

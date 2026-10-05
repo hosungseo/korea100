@@ -101,6 +101,7 @@ export default function LawMapRuleGrid({ map, classMap, kinds, selected, onPick 
                       {cell && (
                         <CellView
                           cell={cell}
+                          cellId={`rg-${map.lawId}-${col.stage}-${row.actor}`}
                           expanded={expanded.has(key)}
                           onToggle={() => toggle(key)}
                           kinds={kinds}
@@ -141,7 +142,7 @@ export default function LawMapRuleGrid({ map, classMap, kinds, selected, onPick 
         </div>
       </div>
       <p className={styles.rgNote}>
-        조문의 단계·주체는 규칙 기반 추론({grid.method?.replace(/^rule-based\s*/, "") ?? "v0.1"})입니다. 근거는 각 조문 툴팁에 있고, 원문이 기준입니다.
+        조문의 단계·주체는 규칙 기반 추론({grid.method?.replace(/^rule-based\s*/, "") ?? "v0.2"})입니다. 근거는 각 조문 툴팁에 있고, 원문이 기준입니다. 공무원도 수범자(국민·사업자 레인)로 셉니다.
       </p>
     </div>
   );
@@ -149,6 +150,7 @@ export default function LawMapRuleGrid({ map, classMap, kinds, selected, onPick 
 
 interface CellProps {
   cell: RuleCell;
+  cellId: string;
   expanded: boolean;
   onToggle: () => void;
   kinds: Set<EdgeKind>;
@@ -157,7 +159,7 @@ interface CellProps {
   onHover: (chip: RuleChip | null) => void;
 }
 
-function CellView({ cell, expanded, onToggle, kinds, selected, onPick, onHover }: CellProps) {
+function CellView({ cell, cellId, expanded, onToggle, kinds, selected, onPick, onHover }: CellProps) {
   const shown = expanded ? cell.articles : cell.articles.slice(0, CELL_CHIP_LIMIT);
   const hidden = cell.articles.length - shown.length;
   const badges: [EdgeKind, number][] = (["decree", "rule"] as const)
@@ -165,7 +167,7 @@ function CellView({ cell, expanded, onToggle, kinds, selected, onPick, onHover }
     .map((kind) => [kind, cell.delegations[kind]]);
   return (
     <>
-      <div className={styles.rgChips}>
+      <div className={styles.rgChips} id={cellId}>
         {shown.map((chip) => (
           <button
             key={chip.id}
@@ -186,10 +188,10 @@ function CellView({ cell, expanded, onToggle, kinds, selected, onPick, onHover }
           </button>
         ))}
         {hidden > 0 && (
-          <button type="button" className={styles.rgMore} onClick={onToggle} aria-expanded={false}>+{hidden}</button>
+          <button type="button" className={styles.rgMore} onClick={onToggle} aria-expanded={false} aria-controls={cellId} aria-label={`조문 ${hidden}개 더 보기`}>+{hidden}</button>
         )}
         {expanded && cell.articles.length > CELL_CHIP_LIMIT && (
-          <button type="button" className={styles.rgMore} onClick={onToggle} aria-expanded>접기</button>
+          <button type="button" className={styles.rgMore} onClick={onToggle} aria-expanded aria-controls={cellId}>접기</button>
         )}
       </div>
       {badges.length > 0 && (

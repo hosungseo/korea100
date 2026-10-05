@@ -32,15 +32,15 @@ interface Wire {
   onRoute: boolean;
 }
 
-/** 조문이 이 수를 넘는 법은 큰 그림으로 연다. 그 아래는 카드 목록이 한눈에 들어오므로 자세히 보기. */
+/** 조문이 이 수를 넘는 법은 구조도으로 연다. 그 아래는 카드 목록이 한눈에 들어오므로 자세히 보기. */
 const OVERVIEW_THRESHOLD = 150;
-/** 이보다 좁은 창은 기본 보기를 자세히로 둔다(큰 그림 토글은 그대로 쓸 수 있다). */
+/** 이보다 좁은 창은 기본 보기를 자세히로 둔다(구조도 토글은 그대로 쓸 수 있다). */
 const NARROW_WIDTH = 700;
 
 export default function LawMapBoard({ map, classMap = null, textUrl }: Props) {
   const byCountDefault: LawMapView = map.articles.length > OVERVIEW_THRESHOLD ? "overview" : "detail";
   const ruleAvailable = classMap !== null;
-  // 좁은 화면(모바일)은 큰 그림이 읽히지 않으므로 자세히가 기본. 서버에서는 폭을 모르니 마운트 뒤 효과에서 정한다.
+  // 좁은 화면(모바일)은 구조도이 읽히지 않으므로 자세히가 기본. 서버에서는 폭을 모르니 마운트 뒤 효과에서 정한다.
   const [narrow, setNarrow] = useState(false);
   const defaultView: LawMapView = narrow ? "detail" : byCountDefault;
   const [view, setView] = useState<LawMapView>(byCountDefault);
@@ -57,7 +57,7 @@ export default function LawMapBoard({ map, classMap = null, textUrl }: Props) {
   const [canvasSize, setCanvasSize] = useState({ w: 0, h: 0 });
   const canvasRef = useRef<HTMLDivElement>(null);
   const boardRef = useRef<HTMLDivElement>(null);
-  // 큰 그림에서 자세히로 넘어갈 때 카드가 아직 없으므로, 스크롤할 조문을 적어 두고 카드가 생기면 이동한다.
+  // 구조도에서 자세히로 넘어갈 때 카드가 아직 없으므로, 스크롤할 조문을 적어 두고 카드가 생기면 이동한다.
   const pendingScrollRef = useRef<string | null>(null);
 
   const edgesByNode = useMemo(() => indexEdgesByNode(map.edges), [map.edges]);
@@ -252,7 +252,7 @@ export default function LawMapBoard({ map, classMap = null, textUrl }: Props) {
     if (selected === null) pendingScrollRef.current = null;
   }, [selected]);
 
-  // 큰 그림에서 장(또는 행정규칙·자치법규 상자)을, 규율 보기에서 조문 칩을 누르면 자세히 보기로 넘어가 그 조문(레인)을 연다.
+  // 구조도에서 장(또는 행정규칙·자치법규 상자)을, 규율 보기에서 조문 칩을 누르면 자세히 보기로 넘어가 그 조문(레인)을 연다.
   const pickFromOverview = useCallback((id: string) => {
     setView("detail");
     focusNode(id);
@@ -284,7 +284,7 @@ export default function LawMapBoard({ map, classMap = null, textUrl }: Props) {
   };
 
   const routeNodes = useMemo(() => new Set(route?.nodes ?? []), [route]);
-  // 큰 그림·규율 보기에서 고른 조문이 없으면 패널은 안내문뿐이므로 숨기고 그림이 폭을 다 쓴다.
+  // 구조도·규율 보기에서 고른 조문이 없으면 패널은 안내문뿐이므로 숨기고 그림이 폭을 다 쓴다.
   const panelHidden = view !== "detail" && selected === null;
 
   return (

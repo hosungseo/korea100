@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // 법령 지도 IR의 조문마다 규율 단계 × 주체 레인을 규칙으로 추론해 <lawId>.class.json을 쓴다.
-//   node scripts/classify-law-articles.mjs --lawId 001823 [--sheet [--baseline <이전 class.json>]]
+//   node scripts/classify-law-articles.mjs --lawId 001823 [--sheet [--baseline <이전 class.json>]] [--raw-dir <dir>]
 //   node scripts/classify-law-articles.mjs --all
 // 본문은 DRF 원본 캐시(eflaw-<mst>-<date>.json, 메인 체크아웃·읽기 전용)에서 읽고, 없으면 300자 미리보기로 대신하며 신뢰도를 낮춘다.
 // --sheet: docs/audits/law-map-classify-sample-<lawId>.md 표본 시트를 함께 쓴다(법률 40건 표본·층위별 행렬·저신뢰 10건·한계).
@@ -15,22 +15,25 @@ const ROOT = path.dirname(WEB);
 const DATA_DIR = path.join(WEB, "data", "law-map");
 const TEXT_DIR = path.join(WEB, "public", "law-map");
 const AUDIT_DIR = path.join(ROOT, "docs", "audits");
-const RAW_DIRS = [
-  process.env.LAW_MAP_RAW_DIR,
+/** DRF 원본 캐시 위치 후보. --raw-dir(또는 LAW_MAP_RAW_DIR)가 있으면 그것만 본다. */
+const DEFAULT_RAW_DIRS = [
   path.join(DATA_DIR, "raw"),
   "/Users/seohoseong/korea100/web/data/law-map/raw",
-].filter(Boolean);
+];
+let rawDirs = process.env.LAW_MAP_RAW_DIR ? [process.env.LAW_MAP_RAW_DIR] : DEFAULT_RAW_DIRS;
 
 const PREVIEW_PENALTY = 0.1; // 미리보기(300자)로만 판정했을 때 깎는 신뢰도
 const CLASSIFIED_TIERS = new Set(["statute", "decree", "rule"]);
 
 function parseArgs(argv) {
-  const out = { lawIds: [], all: false, sheet: false, baseline: null };
+  const out = { lawIds: [], all: false, sheet: false, baseline: null, rawDir: null };
   for (let i = 0; i < argv.length; i += 1) {
     const a = argv[i];
     if (a === "--all") out.all = true;
     else if (a === "--sheet") out.sheet = true;
     else if (a === "--baseline") out.baseline = argv[++i];
+    else if (a === "--raw-dir") out.rawDir = argv[++i];
+    else if (a.startsWith("--raw-dir=")) out.rawDir = a.slice("--raw-dir=".length);
     else if (a === "--lawId") out.lawIds.push(argv[++i]);
     else if (a.startsWith("--lawId=")) out.lawIds.push(a.slice("--lawId=".length));
   }
@@ -39,7 +42,7 @@ function parseArgs(argv) {
 
 function findRawFile(mst) {
   if (!mst) return null;
-  for (const dir of RAW_DIRS) {
+  for (const dir of rawDirs) {
     if (!fs.existsSync(dir)) continue;
     const hit = fs.readdirSync(dir).filter((f) => f.startsWith(`eflaw-${mst}-`) && f.endsWith(".json")).sort().at(-1);
     if (hit) return path.join(dir, hit);
@@ -92,10 +95,12 @@ export function classifyLaw(lawId, { log = console.log, write = true } = {}) {
 
   const laneTexts = new Map();
   const missingRaw = [];
+  const lanes = {}; // 레인별 본문 출처(헤더에 기록)
   for (const lane of ir.lanes) {
     if (!CLASSIFIED_TIERS.has(lane.tier)) continue;
     const loaded = loadLaneTexts(lane);
     laneTexts.set(lane.id, loaded);
+    lanes[lane.id] = { tier: lane.tier, mst: lane.mst ?? null, rawFile: loaded.rawFile ? path.basename(loaded.rawFile) : null, source: loaded.rawFile ? "raw" : "preview" };
     if (!loaded.rawFile) missingRaw.push(`${lane.id} ${lane.name}`);
   }
 
@@ -131,34 +136,24 @@ export function classifyLaw(lawId, { log = console.log, write = true } = {}) {
       actorConfidence = Math.max(0, actorConfidence - PREVIEW_PENALTY);
       r.evidence.push("text:미리보기 300자만 사용");
     }
-    const entry = {
-      stage: r.stage,
-      actor: r.actor,
-      actors: r.actors,
-      confidence,
-      evidence: r.evidence,
-      method: r.method,
-      stageMethod: r.stageMethod,
-      actorMethod: r.actorMethod,
-      stageConfidence,
-      actorConfidence,
-      textSource: source,
-    };
+    // 파일에는 축별 방법·신뢰도를 되풀이하지 않는다(근거 문자열에 담겨 있다). 출처는 헤더 lanes에.
+    const entry = { stage: r.stage, actor: r.actor, actors: r.actors, confidence, evidence: r.evidence, method: r.method };
     if (r.deleted) entry.deleted = true;
     articles[a.id] = entry;
 
     stats.total += 1;
+    stats.textSource[source] += 1;
+    stats.byTier[tier] ??= { total: 0, deleted: 0, matrix: {} };
+    stats.byTier[tier].total += 1;
+    if (r.deleted) { stats.deleted += 1; stats.byTier[tier].deleted += 1; continue; } // 아래 집계는 삭제 조문을 뺀다(표본 시트와 같은 기준)
     stats.byStage[r.stage] += 1;
     stats.byActor[r.actor] += 1;
-    stats.textSource[source] += 1;
     if (r.stage === "unknown") stats.unknownStage += 1;
     if (r.actor === "unknown") stats.unknownActor += 1;
-    if (confidence < 0.5 && !r.deleted) stats.lowConfidence += 1;
-    if (r.deleted) stats.deleted += 1;
-    stats.byTier[tier] ??= { total: 0, matrix: {} };
-    stats.byTier[tier].total += 1;
+    if (confidence < 0.5) stats.lowConfidence += 1;
     const cell = `${r.stage}×${r.actor}`;
     stats.byTier[tier].matrix[cell] = (stats.byTier[tier].matrix[cell] ?? 0) + 1;
+    void stageConfidence; void actorConfidence;
   }
 
   const out = {
@@ -166,7 +161,8 @@ export function classifyLaw(lawId, { log = console.log, write = true } = {}) {
     name: ir.name,
     generatedAt: new Date().toISOString().slice(0, 10),
     method: CLASSIFIER_VERSION,
-    note: "모든 값은 규칙 기반 추론이다. evidence가 비어 있거나 confidence가 낮은 조문은 사람이 확인해야 한다.",
+    note: "모든 값은 규칙 기반 추론이다. evidence가 비어 있거나 confidence가 낮은 조문은 사람이 확인해야 한다. stats는 삭제 조문을 뺀 수(deleted는 따로).",
+    lanes,
     missingRaw,
     articles,
     stats,
@@ -222,7 +218,8 @@ const LIMITATIONS = [
   "- **일반 의무 문형의 과대 대표**: 본문 단서 중 \"하여야 한다\"는 거의 모든 조문에 나와 가중치를 0.5로 낮췄는데도 제목 단서가 없는 조문은 `standard`로 쏠린다. 행정기관의 기록·통계 의무는 v0.1에서 `operation`(대장·통계·전산·계획 수립·실태조사·고시) 단계로 분리했지만, 제목에 단서가 없으면 여전히 `standard × local`로 들어간다.",
   "- **시행령·규칙의 조문 제목**: 「건축신고」「건축물대장」처럼 법률과 같은 제목을 쓰는 하위 조문은 법률과 같은 단계로 분류되지만, 실제 내용은 '그 절차의 세부 서식·기한'이다. 층위를 함께 보면 맞지만 단독 라벨로는 법률 조문과 구분되지 않는다.",
   "- **각 호만 있는 조문**: DRF 본문 파서(`lawArticleText`)가 각 호만 있는 조문의 머리 문장(\"다음 각 호의 어느 하나에 해당하는 자는 … 처한다\")을 떨어뜨린다. 이 CLI에서 원본 `조문내용`의 머리 문장을 다시 붙여 벌칙 조문의 주어를 살렸다. 파서 자체는 고치지 않았다(공유 코드).",
-  "- **법원 레인**: 건축법에는 법원이 주어인 조문이 없어 `court`는 0건이다. 단서(법원·검찰·판사·재판)는 들어 있지만 이 법에서는 검증되지 않았다.",
+  "- **법원 레인**: 건축법에는 법원이 주어인 조문이 없어 `court`는 0건이다. 단서(법원·검찰·판사·검사의/검사가·사법경찰관·법관)는 들어 있지만 이 법에서는 검증되지 않았다.",
+  "- **공무원은 수범자로 센다**: 「국가공무원법」류에서 '공무원은 …하여야 한다'의 공무원은 `citizen`(국민·사업자) 레인에 들어간다. 레인 이름이 어색하지만 '규율을 받는 쪽'이라는 뜻은 같다. 국회사무총장·법원행정처장·헌법재판소사무처장·중앙선거관리위원회사무총장 같은 헌법기관 사무기구는 v0.2부터 `constitutional` 레인.",
 ];
 
 export function writeSampleSheet(ir, out, { baselinePath = null, log = console.log } = {}) {
@@ -349,7 +346,8 @@ export function writeSampleSheet(ir, out, { baselinePath = null, log = console.l
 
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
-  const { lawIds, all, sheet, baseline } = parseArgs(process.argv.slice(2));
+  const { lawIds, all, sheet, baseline, rawDir } = parseArgs(process.argv.slice(2));
+  if (rawDir) rawDirs = [path.resolve(rawDir)];
   const targets = all
     ? fs.readdirSync(DATA_DIR).filter((f) => /^\d+\.json$/.test(f)).map((f) => f.replace(/\.json$/, "")).sort()
     : lawIds;

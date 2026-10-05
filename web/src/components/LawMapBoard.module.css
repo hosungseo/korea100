@@ -10,7 +10,7 @@
   align-items: start;
 }
 
-/* 큰 그림 + 선택 없음: 패널을 빼고 한 열로. 그림은 ResizeObserver로 폭을 다시 맞춘다. */
+/* 구조도 + 선택 없음: 패널을 빼고 한 열로. 그림은 ResizeObserver로 폭을 다시 맞춘다. */
 .layout[data-panel="hidden"] {
   grid-template-columns: minmax(0, 1fr);
 }
@@ -109,7 +109,7 @@
   color: var(--color-muted);
 }
 
-/* 보기 전환: 큰 그림 | 자세히 */
+/* 보기 전환: 구조도 | 자세히 */
 .segmented {
   display: inline-flex;
   height: 32px;
@@ -144,14 +144,14 @@
   padding: var(--law-map-board-pad) 24px 48px;
 }
 
-/* 큰 그림·규율 보기는 보드 높이에 맞춰 그리므로 아래 여백을 줄인다. 넘치는 폭은 그림 상자(.ovHost/.rgHost)가 스크롤한다. */
+/* 구조도·규율 보기는 보드 높이에 맞춰 그리므로 아래 여백을 줄인다. 넘치는 폭은 그림 상자(.ovHost/.rgHost)가 스크롤한다. */
 .board[data-view="overview"],
 .board[data-view="rule"] {
   padding: 12px 24px 12px;
   overflow: hidden;
 }
 
-/* ── 큰 그림(법령 체계 구조도) ─────────────────────── */
+/* ── 구조도(법령 체계 구조도) ─────────────────────── */
 .overviewWrap {
   position: relative;
   display: flex;

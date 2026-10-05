@@ -16,14 +16,15 @@ export const STAGE_LABELS = {
   unknown: "미분류",
 };
 
-/** 세로축(주체 레인) 순서. 수범자가 맨 위, 그 아래로 가까운 행정기관부터. */
-export const ACTOR_ORDER = ["citizen", "local", "central", "committee", "court", "none"];
+/** 세로축(주체 레인) 순서. 수범자가 맨 위, 그 아래로 가까운 행정기관부터. 공무원도 수범자(citizen)로 센다. */
+export const ACTOR_ORDER = ["citizen", "local", "central", "committee", "court", "constitutional", "none"];
 export const ACTOR_LABELS = {
   citizen: "국민·사업자",
   local: "지방자치단체",
   central: "중앙행정기관",
   committee: "위원회·전문기관",
   court: "법원·검찰",
+  constitutional: "헌법기관",
   none: "주체 없음",
   unknown: "미분류",
 };
@@ -34,7 +35,7 @@ export const CELL_CHIP_LIMIT = 5;
 /** 점선 테두리 문턱: 이 아래의 추론은 흐리게 표시한다. */
 export const LOW_CONFIDENCE = 0.5;
 
-const AUTHORITY_LANES = ["local", "central", "committee", "court"];
+const AUTHORITY_LANES = ["local", "central", "committee", "court", "constitutional"];
 
 /**
  * 격자를 만든다.
